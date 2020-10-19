@@ -372,16 +372,17 @@ an economy.
 Two key assumptions restrict economy $(A,B)$:
 
 - **Assumption I:** (every good that is consumed is also produced)
-
-$$
-b_{.,j} > \mathbf{0}\hspace{5mm}\forall j=1,2,\dots,n
-$$
-
+  
+  $$
+  b_{.,j} > \mathbf{0}\hspace{5mm}\forall j=1,2,\dots,n
+  $$
+  
 - **Assumption II:** (no free lunch)
-
-$$
-a_{i,.} > \mathbf{0}\hspace{5mm}\forall i=1,2,\dots,m
-$$
+  
+  $$
+  a_{i,.} > \mathbf{0}\hspace{5mm}\forall i=1,2,\dots,m
+  $$
+  
 
 A semi-positive  *intensity* $m$-vector  $x$ denotes  levels at which
 activities are operated.
@@ -550,9 +551,9 @@ and a number $\alpha\in\mathbb{R}$ that satisfy
 
 $$
 \begin{aligned}
-  &\max_{\alpha} \hspace{2mm} \alpha\\
-  &\text{s.t. }\hspace{2mm}x^T B \geq \alpha x^T A
-  \end{aligned}
+    &\max_{\alpha} \hspace{2mm} \alpha\\
+    &\text{s.t. }\hspace{2mm}x^T B \geq \alpha x^T A
+    \end{aligned}
 $$
 
 Theorem 9.3 of David Gale’s book {cite}`gale1989theory` asserts that if Assumptions I and II are
@@ -569,9 +570,9 @@ and a number $\beta\in\mathbb{R}$ that satisfy
 
 $$
 \begin{aligned}
-  &\min_{\beta} \hspace{2mm} \beta\\
-  &\text{s.t. }\hspace{2mm}Bp \leq \beta Ap
-  \end{aligned}
+    &\min_{\beta} \hspace{2mm} \beta\\
+    &\text{s.t. }\hspace{2mm}Bp \leq \beta Ap
+    \end{aligned}
 $$
 
 Assumptions I and II imply existence of a minimum value
@@ -674,8 +675,6 @@ use mixed strategies. Thus,
 * the  row player chooses the $m$-vector $x > \mathbf{0}$ subject to $\iota_m^T x = 1$
 * the column player chooses the $n$-vector $p > \mathbf{0}$ subject to $\iota_n^T p = 1$.
 
-> 
-
 **Definition:** The $m\times n$ matrix game $C$ has the
 *solution* $(x^*, p^*, V(C))$ in mixed strategies if
 
@@ -718,8 +717,6 @@ the following notation
 
 * For a fixed $x$, let $v$ be the value of the minimization problem: $v \equiv \min_p x^T C p = \min_j x^T C e^j$
 * For a fixed $p$, let $u$ be the value of the maximization problem: $u \equiv \max_x x^T C p = \max_i (e^i)^T C p$
-
-> 
 
 Then the *max-min problem* (the game from the maximizing player’s point
 of view) can be written as the *primal* LP
@@ -1005,8 +1002,6 @@ for non-negative matrices.
 * $n=m$
 * Each activity produces exactly one good
 * Each good is produced by one and only one activity.
-
-> 
 
 These assumptions imply that $B=I_n$, i.e., that $B$ can be
 written as an identity matrix (possibly after reshuffling its rows and

@@ -58,8 +58,6 @@ model, how will the state of the system evolve over time?
 
 In particular,
 
-> 
-
 * What happens to the distribution of the state variables?
 * Is there anything we can say about the "average behavior" of these variables?
 * Is there a notion of "steady state" or "long-run equilibrium" that's applicable to the model?
@@ -222,8 +220,6 @@ k_{t+1} = s  A_{t+1} f(k_t) + (1 - \delta) k_t
 ```
 
 Here
-
-> 
 
 * $s$ is the rate of savings
 * $A_{t+1}$ is a production shock

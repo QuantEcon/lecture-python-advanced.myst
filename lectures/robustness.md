@@ -109,8 +109,6 @@ The shaded set is the graph of the correspondence, which maps entropy to a set o
 
 Here
 
-> 
-
 * *Value* refers to a sum of discounted rewards obtained by applying the decision rule $F$ when the state starts at some fixed initial state $x_0$.
 * *Entropy* is a non-negative number that measures the size of a set of models surrounding the decision-maker's approximating model.
     * Entropy is zero when the set includes only the approximating model, indicating that the decision-maker completely trusts the approximating model.
@@ -145,8 +143,6 @@ Here is a hint about the  *secret weapons* we'll use to construct these sets
 
 * We'll use some min problems to construct the lower bounds
 * We'll use some max problems to construct the upper bounds
-
-> 
 
 We will also describe how to choose $F$ to shape the sets of values.
 
@@ -513,8 +509,6 @@ To construct the *lower bound* on the set of values associated with all perturba
 * Compute the lower bound on the value function $R_\theta(x_0, F) - \theta \ {\rm  ent}$ and plot it against ${\rm ent}$.
 * Repeat the preceding three steps  for a range of values of $\theta$ to trace out the lower bound.
 
-> 
-
 ```{note}
 This procedure  sweeps  out a set of separating hyperplanes indexed by different values for  the Lagrange multiplier $\theta$.
 ```
@@ -575,8 +569,6 @@ To construct the *upper bound* on the set of values associated all perturbations
 * Compute the maximizer $V_{\tilde \theta}(x_0, F)$ and the associated entropy using {eq}`rbpdt223`.
 * Compute the upper bound on the value function $V_{\tilde \theta}(x_0, F) + \tilde \theta \ {\rm ent}$ and plot it against ${\rm ent}$.
 * Repeat the preceding three steps  for a range of values of $\tilde \theta$ to trace out the upper bound.
-
-> 
 
 #### Reshaping the Set of Values
 
@@ -843,8 +835,6 @@ The [QuantEcon.py](http://quantecon.org/quantecon-py) package provides a class c
 The code can be found [on GitHub](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/robustlq.py).
 
 Here is a brief description of the methods of the class
-
-> 
 
 * `d_operator()` and `b_operator()` implement $\mathcal D$
   and $\mathcal B$ respectively

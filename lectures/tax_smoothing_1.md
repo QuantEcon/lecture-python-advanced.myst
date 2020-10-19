@@ -57,8 +57,6 @@ This lecture has two sequels that offer further extensions of the Barro model
 1. {doc}`How to Pay for a War: Part 2 <tax_smoothing_2>`
 1. {doc}`How to Pay for a War: Part 3 <tax_smoothing_3>`
 
-> 
-
 The extensions are modified versions of
 his 1979 model later suggested by Barro (1999 {cite}`barro1999determinants`, 2003 {cite}`barro2003religion`).
 
@@ -233,8 +231,6 @@ To begin, we  assume that
 $p_{t,t+1}$ is constant (and equal to $\beta$)
 
 * later  we will  extend the model to allow $p_{t,t+1}$ to vary over time
-
-> 
 
 To map into the LQ framework, we use
 $x_t = \begin{bmatrix} b_{t-1,t} \\ z_t \end{bmatrix}$ as the
