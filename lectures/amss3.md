@@ -63,8 +63,6 @@ We use these techniques
 * an approximation to the mean of an ergodic distribution of government debt
 * an approximation  to the rate of convergence to an ergodic distribution of government debt
 
-> 
-
 We apply tools applicable to  more general incomplete markets economies that are presented on pages 648 - 650 in section III.D
 of {cite}`BEGS1` (BEGS).
 
@@ -74,8 +72,6 @@ We study an  {cite}`aiyagari2002optimal` economy with  three Markov states drivi
   interest rate fluctuations support complete markets allocations and Ramsey outcomes.
 * The presence of three states  prevents the full spanning that eventually prevails in the two-state example featured in
   {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`.
-
-> 
 
 The lack of full spanning means that the ergodic distribution of the par value of government debt is nontrivial, in contrast to the situation
 in {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`  where  the ergodic distribution of the par value is concentrated on one point.
@@ -838,16 +834,12 @@ these early observations
 * early observations are more influenced by the initial value of the par value of government debt than by the ergodic mean of the par value of government debt
 * much later observations are more influenced by the ergodic mean and are independent of the initial value of the par value of government debt
 
-> 
-
 ## Asymptotic Mean and Rate of Convergence
 
 We apply the results of {cite}`BEGS1` to interpret
 
 * the mean of the ergodic distribution of government debt
 * the rate of convergence  to the ergodic distribution from an arbitrary initial government debt
-
-> 
 
 We begin by computing  objects required by the theory of section III.i
 of {cite}`BEGS1`.
@@ -955,8 +947,6 @@ Thus,  formula  {eq}`eq_criterion_fiscal_1` is not useful for estimating  the me
 
 * we need to know the  ergodic distribution to compute the right side of formula {eq}`eq_criterion_fiscal_1`
 
-> 
-
 So the primary use of equation {eq}`eq_criterion_fiscal_1` is how  it  confirms that
 the ergodic distribution solves a fiscal-risk minimization problem.
 
@@ -965,8 +955,6 @@ As an example, notice how we used the formula for the mean of ${\mathcal B}$ in 
 
 * **first** we computed the ergodic distribution using a reverse-engineering construction
 * **then** we verified that ${\mathcal B}$  agrees with the mean of that distribution
-
-> 
 
 ### Approximating the Ergodic Mean
 
@@ -1003,8 +991,6 @@ of {cite}`BEGS1` -- it should be a minus rather than a plus in the middle.
 
 * We have made the appropriate correction in the above equation.
 
-> 
-
 **Step 2:** Knowing $c_\tau(s), s=1, \ldots, S$ for a given
 $\tau$, we want to compute the random variables
 
@@ -1038,8 +1024,6 @@ present value of the mean effective government **surplus**.
 side should be multiplied by $-1$.
 
 * We have made this correction in the above equation.
-
-> 
 
 For a given ${\mathcal B}$, let a $\tau$ that solves the
 above equation be called $\tau(\mathcal B)$.
@@ -1102,18 +1086,12 @@ this formula very accurately describes a **constant** par value of government de
 * supports full fiscal insurance via fluctuating interest parameters, and
 * is the limit of government debt as $t \rightarrow +\infty$
 
-> 
-
 In the three-Markov-state economy of this lecture, the par value of government debt fluctuates in a history-dependent way even asymptotically.
 
 In this economy, $\hat b$ given by the above formula approximates the mean of the ergodic distribution of  the par value of  government debt
 
 * this is the red vertical line plotted in the histogram of the last 100,000 observations of our simulation of the  par value of government debt plotted above
 * the approximation is fairly accurate but not perfect
-* so while the approximation circumvents the chicken and egg problem surrounding
-  the much better approximation associated with the green vertical line, it does so by enlarging the approximation error
-
-> 
 
 ### Execution
 

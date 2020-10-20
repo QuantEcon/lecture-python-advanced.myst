@@ -75,8 +75,6 @@ Nonzero Lagrange multipliers on those constraints make the Ramsey allocation for
 
 This lecture studies a special  AMSS model in which
 
-> 
-
 {cite}`LucasStokey1983`* The exogenous state variable $s_t$ is governed by  a finite-state Markov chain.
 * With an arbitrary budget-feasible initial level of government debt, the measurability  constraints
     - bind for many periods, but $\ldots$.
@@ -1185,13 +1183,11 @@ Expressing formula {eq}`prelim_formula` in terms of  our notation tells us that 
 
 BEGS also derive the following  approximation to the rate of convergence to ${\mathcal B}^{*}$ from an arbitrary initial condition.
 
-> ```{math}
-> :label: rate_of_convergence
-> 
-> \frac{ E_t  ( {\mathcal B}_{t+1} - {\mathcal B}^{*} )} { ( {\mathcal B}_{t} - {\mathcal B}^{*} )} \approx \frac{1}{1 + \beta^2 {\rm var} ({\mathcal R} )}
-> ```
-> 
-> 
+```{math}
+:label: rate_of_convergence
+
+\frac{ E_t  ( {\mathcal B}_{t+1} - {\mathcal B}^{*} )} { ( {\mathcal B}_{t} - {\mathcal B}^{*} )} \approx \frac{1}{1 + \beta^2 {\rm var} ({\mathcal R} )}
+```
 
 (See the equation above equation (47) in {cite}`BEGS1`)
 

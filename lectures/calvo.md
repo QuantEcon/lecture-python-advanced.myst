@@ -334,10 +334,6 @@ decisions.
 
 The models are
 
-> 
-
-> 
-
 - A single Ramsey planner chooses a sequence
   $\{\mu_t\}_{t=0}^\infty$ once and for all at time $0$.
 - A single Ramsey planner chooses a sequence

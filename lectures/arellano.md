@@ -129,8 +129,6 @@ The only credit instrument available to the government is a one-period bond trad
 
 The bond market has the following features
 
-> 
-
 * The bond matures in one period and is not state contingent.
 * A purchase of a bond with face value $B'$ is a claim to $B'$ units of the
   consumption good next period.
@@ -199,8 +197,6 @@ If the government defaults in the current period, then consumption equals curren
 
 But a sovereign default has two consequences:
 
-> 
-
 1. Output immediately falls from $y$ to $h(y)$, where $0 \leq h(y) \leq y$.
     * It returns to $y$ only after the country regains access to international credit
       markets.
@@ -226,8 +222,6 @@ sequence of government default decisions and an implied flow of household consum
    creditors expect on average to earn the constant risk-free international interest rate.
 
 To express these ideas more precisely, consider first the choices of the government, which
-
-> 
 
 1. enters a period with initial assets $B$, or what is the same thing, initial debt to be
    repaid now of $-B$

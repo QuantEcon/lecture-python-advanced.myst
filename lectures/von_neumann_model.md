@@ -612,16 +612,18 @@ x_0^T\left(B-\gamma^{* } A\right)p_0 &= 0
 \end{aligned}
 $$
 
-> *Proof (Sketch):* Assumption I and II imply that there exist $(\alpha_0,
-> x_0)$ and $(\beta_0, p_0)$ that solve the TEP and EEP, respectively. If
-> $\gamma^*>\alpha_0$, then by definition of $\alpha_0$, there cannot
-> exist a semi-positive $x$ that satisfies $x^T B \geq \gamma^{* }
-> x^T A$.  Similarly, if $\gamma^*<\beta_0$, there is no semi-positive
-> $p$ for which $Bp \leq \gamma^{* } Ap$. Let $\gamma^{*
-> }\in[\beta_0, \alpha_0]$, then $x_0^T B \geq \alpha_0 x_0^T A \geq
-> \gamma^{* } x_0^T A$.  Moreover, $Bp_0\leq \beta_0 A p_0\leq \gamma^* A
-> p_0$. These two inequalities imply $x_0\left(B - \gamma^{* } A\right)p_0
-> = 0$.
+```{note}
+*Proof (Sketch):* Assumption I and II imply that there exist $(\alpha_0,
+x_0)$ and $(\beta_0, p_0)$ that solve the TEP and EEP, respectively. If
+$\gamma^*>\alpha_0$, then by definition of $\alpha_0$, there cannot
+exist a semi-positive $x$ that satisfies $x^T B \geq \gamma^{* }
+x^T A$.  Similarly, if $\gamma^*<\beta_0$, there is no semi-positive
+$p$ for which $Bp \leq \gamma^{* } Ap$. Let $\gamma^{*
+}\in[\beta_0, \alpha_0]$, then $x_0^T B \geq \alpha_0 x_0^T A \geq
+\gamma^{* } x_0^T A$.  Moreover, $Bp_0\leq \beta_0 A p_0\leq \gamma^* A
+p_0$. These two inequalities imply $x_0\left(B - \gamma^{* } A\right)p_0
+= 0$.
+```
 
 Here the constant $\gamma^{*}$ is both an expansion factor  and an interest
 factor (not necessarily optimal).
@@ -751,15 +753,17 @@ $$
 V(-A) < 0\quad\quad \text{and}\quad\quad V(B)>0
 $$
 
-> *Proof (Sketch)*: * $\Rightarrow$ $V(B)>0$ implies
-> $x_0^T B \gg \mathbf{0}$, where $x_0$ is a maximizing
-> vector. Since $B$ is non-negative, this requires that each
-> column of $B$ has at least one positive entry, which is
-> Assumption I. * $\Leftarrow$ From Assumption I and the fact
-> that $p>\mathbf{0}$, it follows that $Bp > \mathbf{0}$.
-> This implies that the maximizing player can always choose $x$
-> so that $x^TBp>0$ so that it must be the case
-> that $V(B)>0$.
+```{note}
+*Proof (Sketch)*: * $\Rightarrow$ $V(B)>0$ implies
+$x_0^T B \gg \mathbf{0}$, where $x_0$ is a maximizing
+vector. Since $B$ is non-negative, this requires that each
+column of $B$ has at least one positive entry, which is
+Assumption I. * $\Leftarrow$ From Assumption I and the fact
+that $p>\mathbf{0}$, it follows that $Bp > \mathbf{0}$.
+This implies that the maximizing player can always choose $x$
+so that $x^TBp>0$ so that it must be the case
+that $V(B)>0$.
+```
 
 In order to (re)state Theorem I in terms of a particular two-player
 zero-sum game, we define a matrix for $\gamma\in\mathbb{R}$
