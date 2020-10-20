@@ -789,8 +789,6 @@ Also
 * the covariogram and impulse response look as they should.
 * it is actually challenging to visualize a time series realization of white noise -- a sequence of surprises -- but this too looks pretty good.
 
-> 
-
 To get some more examples, as our laboratory
 we'll replicate quartets of graphs that {cite}`Ljungqvist2012` use to teach "how to read spectral densities".
 
