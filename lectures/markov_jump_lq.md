@@ -943,5 +943,3 @@ of optimal tax-smoothing and government debt in several interesting directions
 1. {doc}`How to Pay for a War: Part 2 <tax_smoothing_2>`
 1. {doc}`How to Pay for a War: Part 3 <tax_smoothing_3>`
 
-> 
-
