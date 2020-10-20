@@ -56,8 +56,6 @@ Subsequent lectures use the DLE class to implement various instances that have a
 1. {doc}`Cattle cycles <cattle_cycles>`
 1. {doc}`Shock Non Invertibility <hs_invertibility_example>`
 
-> 
-
 ### Overview of the Models
 
 In saying that "complete markets are all alike", Robert E. Lucas, Jr. was noting  that all of them have
@@ -1264,16 +1262,14 @@ that satisfy the following conditions:
 * Given the price system and given $h_{-1},\, k_{-1}$, the allocation solves the representative household’s problem and
   the problems of the two types of firms.
 
-> 
-
 Versions of the two classical welfare theorems prevail under our assumptions.
 
 We exploit that fact in our algorithm for computing a competitive equilibrium.
 
 **Step 1:** Solve the planning problem by using dynamic programming.
 
-> The allocation (i.e., **quantities**) that solve the planning problem **are** the
-> competitive equilibrium quantities.
+The allocation (i.e., **quantities**) that solve the planning problem **are** the
+competitive equilibrium quantities.
 
 **Step 2:** use the following formulas to compute the **equilibrium price system**
 
@@ -1436,14 +1432,10 @@ Compare numbers of shocks in the two representations:
 
 * $n_w + n_y$ versus  $n_y$
 
-> 
-
 Compare spaces spanned
 
 * $H(y^t) \subset H(w^t,v^t)$
 * $H(y^t) = H(a^t)$
-
-> 
 
 **Kalman Filter:**.
 
@@ -1607,8 +1599,6 @@ if
 
 - $\color{blue}{\Pi}$ is nonsingular, and
 - the absolute values of the eigenvalues of $\color{blue}{(\Delta_h - \Theta_h \Pi^{-1}\Lambda)}$ are strictly less than $1/\sqrt\beta$.
-
-> 
 
 **Key invertibility property:** A canonical household service
 technology maps a service process $\{s_t\}$ in $L_0^2$
@@ -1790,8 +1780,6 @@ We provide details for a number  of these examples in subsequent lectures
 1. {doc}`Cattle cycles <cattle_cycles>`
 1. {doc}`Shock Non Invertibility <hs_invertibility_example>`
 
-> 
-
 We'll start with an example of a **partial equilibrium** in which we posit demand and supply curves
 
 Suppose that we want to capture the dynamic  demand curve:
@@ -1808,8 +1796,6 @@ $$
 From material described earlier in this lecture, we know how to reverse engineer preferences that generate this demand system
 
 * note how the demand equations are cast in terms of the matrices in our standard preference representation
-
-> 
 
 Now let's turn to supply.
 
@@ -2111,10 +2097,7 @@ We'll describe a class of permanent income models that feature
 
 - Many consumption goods and services
 - A single capital good with $R \beta =1$
-
 - The physical production technology
-
-> 
 
 $$
 \begin{aligned}

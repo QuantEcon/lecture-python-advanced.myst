@@ -72,9 +72,8 @@ backward recursion  on  two sets of equations
 
 * a pair of Bellman equations, one for each agent.
 * a pair of equations that express linear decision rules for each agent as functions of that agent's  continuation value function as well as parameters of
-  preferences and state transition matrices.
 
-> 
+preferences and state transition matrices.
 
 This lecture shows how  a similar equilibrium concept and similar computational  procedures
 apply when we impute concerns about robustness to both decision-makers.
@@ -86,8 +85,6 @@ A Markov perfect equilibrium with robust agents will be characterized by
   preferences and state transition matrices.
 * a pair of equations that express linear decision rules for worst-case shocks for each agent as functions of that agent's  continuation value function as well as parameters of
   preferences and state transition matrices.
-
-> 
 
 Below, we'll construct a robust firms version of the classic duopoly model with
 adjustment costs analyzed in [Markov perfect equilibrium](https://python-intro.quantecon.org/markov_perf.html).
@@ -112,16 +109,12 @@ The agents share a common baseline model for the transition dynamics of the stat
 
 - this is a counterpart of a 'rational expectations' assumption of shared beliefs
 
-> 
-
 But now one or more agents doubt that the baseline model is correctly specified.
 
 The agents express the possibility that their baseline specification is incorrect by adding a contribution $C v_{it}$ to the time $t$ transition law for the state
 
 * $C$ is the usual *volatility matrix* that appears in stochastic versions of optimal linear regulator problems.
 * $v_{it}$ is a possibly history-dependent vector of distortions to the dynamics of the state that agent $i$ uses to  represent misspecification of the original model.
-
-> 
 
 For convenience, we'll start with a finite horizon formulation, where $t_0$ is the initial date and $t_1$ is the common terminal date.
 
@@ -173,8 +166,6 @@ agent $i$'s mind charges for distorting the law of motion in a way that harms ag
 
 * the imaginary loss-maximizing  agent helps the loss-minimizing agent by helping him construct bounds on the behavior of his decision rule over a
   large **set** of alternative models of state transition dynamics.
-
-> 
 
 ### Computing Equilibrium
 
@@ -752,8 +743,6 @@ The parameters of the duopoly model are:
 - $\beta = 0.96$
 - $\gamma = 12$
 
-> 
-
 ```{code-cell} python3
 # Parameters
 a0 = 10.0
@@ -825,8 +814,6 @@ where $F_1$ and $F_2$ are the firms' robust decision rules within the robust mar
 - later we will describe the (erroneous) beliefs of the two firms  that justify their robust decisions as best responses to transition
   laws that are distorted relative to the baseline model.
 
-> 
-
 After simulating $x_t$ under the baseline transition dynamics and robust decision rules $F_i, i = 1, 2$, we
 extract and plot industry output $q_t=q_{1t}+q_{2t}$ and price $p_t = a_0 − a_1 q_t$.
 
@@ -840,8 +827,6 @@ Because we have set $\theta_1 < \theta_2 < + \infty$ we know that
 
 - both firms fear that the baseline specification of the state transition dynamics are incorrect.
 - firm $1$ fears misspecification more than firm $2$.
-
-> 
 
 ```{code-cell} python3
 # Robustness parameters and matrix
@@ -915,22 +900,21 @@ Both industry output and price  are under the transition dynamics associated wit
 equilibrium objects presented.
 
 ```{code-cell} python3
-```
+fig, axes = plt.subplots(2, 1, figsize=(9, 9))
 
-> fig, axes = plt.subplots(2, 1, figsize=(9, 9))
-> 
-> ax = axes[0]
-> ax.plot(q, 'g-', lw=2, alpha=0.75, label='MPE output')
-> ax.plot(qr, 'm-', lw=2, alpha=0.75, label='RMPE output')
-> ax.set(ylabel="output", xlabel="time", ylim=(2, 4))
-> ax.legend(loc='upper left', frameon=0)
-> 
-> ax = axes[1]
-> ax.plot(p, 'g-', lw=2, alpha=0.75, label='MPE price')
-> ax.plot(pr, 'm-', lw=2, alpha=0.75, label='RMPE price')
-> ax.set(ylabel="price", xlabel="time")
-> ax.legend(loc='upper right', frameon=0)
-> plt.show()
+ax = axes[0]
+ax.plot(q, 'g-', lw=2, alpha=0.75, label='MPE output')
+ax.plot(qr, 'm-', lw=2, alpha=0.75, label='RMPE output')
+ax.set(ylabel="output", xlabel="time", ylim=(2, 4))
+ax.legend(loc='upper left', frameon=0)
+
+ax = axes[1]
+ax.plot(p, 'g-', lw=2, alpha=0.75, label='MPE price')
+ax.plot(pr, 'm-', lw=2, alpha=0.75, label='RMPE price')
+ax.set(ylabel="price", xlabel="time")
+ax.legend(loc='upper right', frameon=0)
+plt.show()
+```
 
 Under the dynamics associated with the baseline model, the price path is higher with the Markov perfect equilibrium robust decision rules
 than it is with decision rules for the ordinary Markov perfect equilibrium.
@@ -942,22 +926,21 @@ and $q_{2t}$ in the Markov perfect equilibrium with robust firms and to compare 
 in the Markov perfect equilibrium without robust firms
 
 ```{code-cell} python3
-```
+fig, axes = plt.subplots(2, 1, figsize=(9, 9))
 
-> fig, axes = plt.subplots(2, 1, figsize=(9, 9))
-> 
-> ax = axes[0]
-> ax.plot(q1, 'g-', lw=2, alpha=0.75, label='firm 1 MPE output')
-> ax.plot(qr1, 'b-', lw=2, alpha=0.75, label='firm 1 RMPE output')
-> ax.set(ylabel="output", xlabel="time", ylim=(1, 2))
-> ax.legend(loc='upper left', frameon=0)
-> 
-> ax = axes[1]
-> ax.plot(q2, 'g-', lw=2, alpha=0.75, label='firm 2 MPE output')
-> ax.plot(qr2, 'r-', lw=2, alpha=0.75, label='firm 2 RMPE output')
-> ax.set(ylabel="output", xlabel="time", ylim=(1, 2))
-> ax.legend(loc='upper left', frameon=0)
-> plt.show()
+ax = axes[0]
+ax.plot(q1, 'g-', lw=2, alpha=0.75, label='firm 1 MPE output')
+ax.plot(qr1, 'b-', lw=2, alpha=0.75, label='firm 1 RMPE output')
+ax.set(ylabel="output", xlabel="time", ylim=(1, 2))
+ax.legend(loc='upper left', frameon=0)
+
+ax = axes[1]
+ax.plot(q2, 'g-', lw=2, alpha=0.75, label='firm 2 MPE output')
+ax.plot(qr2, 'r-', lw=2, alpha=0.75, label='firm 2 RMPE output')
+ax.set(ylabel="output", xlabel="time", ylim=(1, 2))
+ax.legend(loc='upper left', frameon=0)
+plt.show()
+```
 
 Evidently, firm 1's output path is substantially lower when firms are  robust firms while
 firm 2's output path is virtually the same as it would be in an ordinary  Markov perfect equilibrium with no robust firms.
@@ -988,8 +971,6 @@ To find these worst-case beliefs, we compute the following three "closed-loop" t
 - $A^o$
 - $A^o + C K\_1$
 - $A^o + C K\_2$
-
-> 
 
 We call the first transition law, namely, $A^o$,  the baseline transition under firms' robust decision rules.
 
@@ -1038,8 +1019,6 @@ even though they share the same baseline model and information
 
 * firm 1 thinks that total output will be higher and price lower than does firm 2
 * this leads firm 1 to produce less than firm 2
-
-> 
 
 These beliefs justify (or **rationalize**) the Markov perfect equilibrium  robust decision rules.
 

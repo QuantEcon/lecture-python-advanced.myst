@@ -68,8 +68,6 @@ import matplotlib.pyplot as plt
 
 Lucas studied a pure exchange economy with a representative consumer (or household), where
 
-> 
-
 * *Pure exchange* means that all endowments are exogenous.
 * *Representative* consumer means that either
     * there is a single consumer (sometimes also referred to as a household), or
@@ -135,8 +133,6 @@ Here
 What is an appropriate price for a claim on the consumption endowment?
 
 We'll price an *ex-dividend* claim, meaning that
-
-> 
 
 * the seller retains this period's dividend
 * the buyer pays $p_t$ today to purchase a claim on
