@@ -488,11 +488,11 @@ two-step procedure to find at least the *value* of the Ramsey
 outcome to the representative household
 
 1. Find the indirect value function $w(\theta)$ defined as
-
-$$
-w(\theta) = \max_{(\vec m, \vec x, \vec h) \in \Gamma(\theta)} \sum_{t=0}^\infty \beta^t \left[ u(f(x_t)) + v(m_t) \right]
-$$
-
+   
+   $$
+   w(\theta) = \max_{(\vec m, \vec x, \vec h) \in \Gamma(\theta)} \sum_{t=0}^\infty \beta^t \left[ u(f(x_t)) + v(m_t) \right]
+   $$
+   
 1. Compute the value of the Ramsey outcome by solving $\max_{\theta \in \Omega} w(\theta)$.
 
 Thus, Chang states the following
@@ -672,47 +672,43 @@ value, $\theta$ pairs.
 
 Define the operator
 
-> $$
-> D(Z) = \Bigl\{ (w,\theta): {\rm there \ is } \ h \in CE_\pi^0
-> $$
-> 
-> $$
-> \text{ and a four-tuple } \ (m(h), x(h), w'(h), \theta'(h)) \in [0,\bar m]\times X \times Z
-> $$
-> 
-> 
+$$
+D(Z) = \Bigl\{ (w,\theta): {\rm there \ is } \ h \in CE_\pi^0
+$$
+
+$$
+\text{ and a four-tuple } \ (m(h), x(h), w'(h), \theta'(h)) \in [0,\bar m]\times X \times Z
+$$
 
 such that
 
-> ```{math}
-> :label: eqn_chang_ramsey120
-> 
-> w = u(f(x( h))) + v(m( h)) + \beta w'( h)
-> ```
-> 
-> ```{math}
-> :label: eqn_chang_ramsey130
-> 
-> \theta = u'(f(x( h))) ( m( h) + x( h))
-> ```
-> 
-> ```{math}
-> :label: eqn_chang_ramsey_150
-> 
-> x(h) = m(h) (h-1)
-> ```
-> 
-> ```{math}
-> :label: eqn_chang_ramsey160
-> 
-> m(h) (u'(f(x(h))) - v'(m(h))) \leq \beta \theta'(h)
-> ```
-> 
-> $$
-> \quad \quad \ \text{ with equality if } m(h) < \bar m \Bigr\}
-> $$
-> 
-> 
+```{math}
+:label: eqn_chang_ramsey120
+
+w = u(f(x( h))) + v(m( h)) + \beta w'( h)
+```
+
+```{math}
+:label: eqn_chang_ramsey130
+
+\theta = u'(f(x( h))) ( m( h) + x( h))
+```
+
+```{math}
+:label: eqn_chang_ramsey_150
+
+x(h) = m(h) (h-1)
+```
+
+```{math}
+:label: eqn_chang_ramsey160
+
+m(h) (u'(f(x(h))) - v'(m(h))) \leq \beta \theta'(h)
+```
+
+$$
+\quad \quad \ \text{ with equality if } m(h) < \bar m \Bigr\}
+$$
 
 It is possible to establish.
 

@@ -44,8 +44,6 @@ Here a *war* means a more  or less temporary surge in an exogenous government ex
 
 The model features
 
-> 
-
 * a government that must finance an exogenous stream of government expenditures with  either
     * a flat rate tax on labor, or
     * purchases and sales from a full array of Arrow state-contingent securities
@@ -578,8 +576,6 @@ components of the $S \times 1$ vectors $\vec x$ and
 $\vec u_c$.
 
 Here is a computational algorithm:
-
-> 
 
 1. Start with a guess for the value for $\Phi$, then use the
    first-order conditions and the feasibility conditions to compute
@@ -1618,8 +1614,6 @@ plt.show()
 
 **Tax smoothing**
 
-> 
-
 * the tax rate is constant for all  $t\geq 1$
     * For $t \geq 1, t \neq 3$, this is a consequence of $g_t$
       being the same at all those dates.
@@ -1671,14 +1665,10 @@ At time  $t=0$ the government evidently *dissaves* since $b_1> b_0$.
 * This is a consequence of it setting a *lower* tax rate at $t=0$,
   implying more consumption at $t=0$.
 
-> 
-
 At time $t=1$, the government evidently *saves* since it has set the tax
 rate sufficiently high to allow it to set $b_2 < b_1$.
 
 * Its motive for doing this is that it anticipates a likely war at $t=3$.
-
-> 
 
 At time $t=2$ the government trades state-contingent Arrow securities
 to hedge against  war at $t=3$.
@@ -1690,8 +1680,6 @@ to hedge against  war at $t=3$.
   $t=4$ with the *same* government debt.
 * The time $t=4$ debt level can be serviced with revenues from the
   constant tax rate set at times $t\geq 1$.
-
-> 
 
 At times $t \geq 4$ the government rolls over its debt, knowing that the
 tax rate is set at a level that raises enough revenue to pay for government purchases and interest payments
@@ -1772,8 +1760,6 @@ The first is $b_{0} = 0$
 
 * Here the government can't use the $t=0$ tax rate  to alter  the
   value of the initial debt.
-
-> 
 
 The second occurs when the government enters with sufficiently large  assets
 that the Ramsey planner can achieve first best and sets $\tau_t = 0$

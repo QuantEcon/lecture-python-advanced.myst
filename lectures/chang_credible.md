@@ -76,8 +76,6 @@ compute a set of values associated with sustainable plans.
 Chang's operator $\tilde D(Z)$ is closely connected with the operator
 $D(Z)$ introduced in lecture {doc}`competitive equilibria in the Chang model <chang_ramsey>`.
 
-> 
-
 * $\tilde D(Z)$ incorporates all of the restrictions imposed in
   constructing the operator $D(Z)$, but $\ldots$.
 * It adds some additional restrictions

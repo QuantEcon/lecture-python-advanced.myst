@@ -161,8 +161,6 @@ Let's now step through these ideas more carefully.
 
 Formally, a discrete dynamic program consists of the following components:
 
-> 
-
 1. A finite set of *states* $S = \{0, \ldots, n-1\}$.
 1. A finite set of *feasible actions* $A(s)$ for each state $s \in S$, and a corresponding set of *feasible state-action pairs*.
    
@@ -403,10 +401,6 @@ The discount factor is $\beta \in [0, 1)$.
 We want to represent this model in the format of a discrete dynamic program.
 
 To this end, we take
-
-> 
-
-> 
 
 * the state variable to be the stock $s$
 * the state space to be $S = \{0, \ldots, M + B\}$
