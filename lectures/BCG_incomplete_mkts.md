@@ -40,19 +40,19 @@ tags: [hide-output]
 This is an extension of an earlier lecture {doc}`BCG_complete_mkts <BCG_complete_mkts>` about a **complete markets**
 model.
 
-In contrast to that lecture, this lecture  describes an instance of a model authored by Bisin, Clementi, and Gottardi {cite}`BCG_2018`
+In contrast to that lecture, this one  describes an instance of a model authored by Bisin, Clementi, and Gottardi {cite}`BCG_2018`
 in which financial markets are **incomplete**.
 
 Instead of being able to trade equities and a full set of one-period
-Arrow securities as they can in the earlier lecture {doc}`BCG_complete_mkts <BCG_complete_mkts>`, now consumers and firms trade only equity and a bond.
+Arrow securities as they can in {doc}`BCG_complete_mkts <BCG_complete_mkts>`, here consumers and firms trade only equity and a bond.
 
-It is useful to watch how outcomes differ  as  consequences of  trading opportunities differing in the two settings.
+It is useful to watch how outcomes differ  in the two settings.
 
 In the complete markets economy in {doc}`BCG_complete_mkts <BCG_complete_mkts>`
 
 {cite}`Modigliani_Miller_1958`- there is a unique  stochastic discount factor that prices all assets
 - consumers’ portfolio choices are indeterminate
-- firms' financial structures are indeterminate, so the model embodies an instance of a Modigliani-Miller theorem 
+- firms' financial structures are indeterminate, so the model embodies an instance of a Modigliani-Miller irrelevance theorem 
 - the aggregate of all firms' financial structures are indeterminate, a consequence of there being redundant assets
 
 In the incomplete markets economy studied here
@@ -60,15 +60,15 @@ In the incomplete markets economy studied here
 {cite}`Modigliani_Miller_1958`- there is a not a unique equilibrium stochastic discount factor
 - different stochastic discount factors price different assets
 - consumers’ portfolio choices are determinate
-- while **individual** firms' financial structures are indeterminate, thus conforming to an aspect of a Modigliani-Miller theorem,
+- while **individual** firms' financial structures are indeterminate, thus conforming to part of a Modigliani-Miller theorem,
   , the **aggregate**  of all firms' financial structures **is** determinate.
 
 A  `Big K, little k` analysis played an important role in the  previous lecture {doc}`BCG_complete_mkts <BCG_complete_mkts>`.
 
-A more subtle version of a `Big K, little k`  will be featured in our  presentation and analysis of  BCG incomplete markets environment.
+A more subtle version of a `Big K, little k`   features in  the   BCG incomplete markets environment here.
 
-We use it to convey the heart of what BCG call a **rational conjectures** equilibrium in which the `rational conjectures` are about
-equilibrium pricing functions in regions of the state space that an average consumer or firm does not choose to inhabit in equilibrium.
+We use it to convey the heart of what BCG call a **rational conjectures** equilibrium in which conjectures are about
+equilibrium pricing functions in regions of the state space that  in equilibrium an average consumer or firm does not visit.
 
 ### Setup
 
@@ -87,6 +87,39 @@ A scalar random variable $\epsilon$ affects both
   $0$.
 - period $1$ endowments $w_1^i(\epsilon)$ of the
   consumption good for agents $i =1$ and $i=2$.
+
+### Ownership
+
+A consumer of type $i$ is endowed with $w_0^i$ units of the
+time $0$ good and $w_1^i(\epsilon)$ of the time $1$
+good when the random variable takes value $\epsilon$.
+
+At the start of period $0$, a consumer of type $i$ also owns
+$\theta^i_0$ shares of a representative firm.
+
+### Aggregate Endowments
+
+Economy-wide endowments in periods $0$ and $1$ are
+
+$$
+\begin{aligned}
+w_0 & = w_0^1 + w_0^2 \cr
+w_1(\epsilon) & =  w_1^1(\epsilon) + w_1^2(\epsilon) \textrm{ in state }\epsilon
+\end{aligned}
+$$
+
+### Feasibility:
+
+Where $\alpha \in (0,1)$ and $A >0$
+
+$$
+\begin{aligned}
+ c_0^1 + c_0^2 & = w_0^1 + w_0^2 - k \cr
+ c_1^1(\epsilon) + c_1^2(\epsilon) & =  w_1^1(\epsilon) + w_1^2(\epsilon) + e^\epsilon f(k), \quad k \geq 0
+\end{aligned}
+$$
+
+where $f(k) = A k^\alpha, A >0, \alpha \in (0,1)$.
 
 ### Shock distribution:
 
@@ -119,61 +152,28 @@ u(c) = \begin{cases}
 \end{cases}
 $$
 
-### Ownership
-
-A consumer of type $i$ is endowed with $w_0^i$ units of the
-time $0$ good and $w_1^i(\epsilon)$ of the time $1$
-consumption good when the random variable takes value $\epsilon$.
-
-At the start of period $0$, a consumer of type $i$ also owns
-$\theta^i_0$ shares of a representative firm.
-
 ### Risk-sharing motives
 
-The two types of agents’ period $1$ endowments are correlated with
-the physical return on capital in different ways.
+The two types of agents’ period $1$ endowments have different correlations with
+the physical return on capital.
 
 Endowment differences give agents incentives to trade risks that in the
 complete market version of the model showed up in their demands for
-equity and their demands and supplies of one-period Arrow securities.
+equity and in their demands and supplies of one-period Arrow securities.
 
 In the incomplete-markets setting under study here, these differences
 show up in differences in the two types of consumers’ demands for a
 typical firm’s bonds and equity, the only two assets that agents can now
 trade.
 
-### Aggregate Endowments
-
-Economy-wide endowments in periods $0$ and $1$ are
-
-$$
-\begin{aligned}
-w_0 & = w_0^1 + w_0^2 \cr
-w_1(\epsilon) & =  w_1^1(\epsilon) + w_1^2(\epsilon) \textrm{ in state }\epsilon
-\end{aligned}
-$$
-
-### Feasibility:
-
-Where $\alpha \in (0,1)$ and $A >0$
-
-$$
-\begin{aligned}
- c_0^1 + c_0^2 & = w_0^1 + w_0^2 - k \cr
- c_1^1(\epsilon) + c_1^2(\epsilon) & =  w_1^1(\epsilon) + w_1^2(\epsilon) + e^\epsilon f(k), \quad k \geq 0
-\end{aligned}
-$$
-
-where $f(k) = A k^\alpha, A >0, \alpha \in (0,1)$.
-
 ### Measures of agents and firms
 
 As in the companion lecture {doc}`BCG_complete_mkts <BCG_complete_mkts>` that studies a complete markets version of
-the model, we follow BCG in assuming that there are equal unit measures of
+the model, we follow BCG in assuming that there are unit measures of
 
 - consumers of type $i=1$
 - consumers of type $i=2$
-- firms with access to the production technology that converts
+- firms with access to a production technology that converts
   $k$ units of time $0$ good into
   $A k^\alpha e^\epsilon$ units of the time $1$ good in
   random state $\epsilon$
@@ -207,7 +207,7 @@ K = \int_0^1 k(\zeta) d \, \zeta, \quad B = \int_0^1 b(\zeta) d \, \zeta
 $$
 
 The assumption that there are equal measures of our three types of
-agents plays an important role making each individual agent into a
+agents justifies our assumption that  each individual agent is a
 powerless **price taker**:
 
 - an individual consumer chooses its own (infinitesimal) part
@@ -220,7 +220,7 @@ powerless **price taker**:
 
 The assumption about measures of agents is a powerful device for making
 a host of competitive agents take as given the equilibrium prices that
-turn out to be determined by the decisions of hosts of agents just like
+turn out to be determined by the decisions of hosts of agents who are just like
 them.
 
 We call an equilibrium **symmetric** if
@@ -236,7 +236,7 @@ equilibria.
 
 ## Asset Markets
 
-Markets are incomplete: only equities and bonds issued by representative
+Markets are incomplete: {em ex cathedra} we the model builders declare that only equities and bonds issued by representative
 firms can be traded.
 
 Let $\theta^i$ and $\xi^i$ be a consumer of type
@@ -246,7 +246,7 @@ The firm issues bonds promising to pay $b$ units of consumption at
 time $t=1$ and purchases $k$ units of physical capital at
 time $t=0$.
 
-When $e^\epsilon A k^\alpha < b$, the firm defaults and output is
+When $e^\epsilon A k^\alpha < b$ at time $1$, the firm defaults and its output is
 divided equally among bondholders.
 
 Evidently, when the productivity shock
@@ -254,7 +254,7 @@ $\epsilon < \epsilon^* = \log \left(\frac{b}{ Ak^\alpha}\right)$,
 the firm defaults on its debt
 
 Payoffs to equity and debt at date 1 as functions of the productivity
-shock $\epsilon$ are
+shock $\epsilon$ are thus
 
 $$
 \begin{aligned}
@@ -266,11 +266,7 @@ $$
 The firm faces a bond price function $p(k,b)$ when it issues
 $b$ bonds and purchases $k$ units of physical capital.
 
-The firm regards the bond price function $p(k,b)$ as exogenous in
-the sense that it is not affected by its own choices of $k$ and
-$b$.
-
-The firm’s equity is worth $q(k,b)$ when it issues $b$ bonds
+A firm’s equity is worth $q(k,b)$ when it issues $b$ bonds
 and purchases $k$ units of physical capital.
 
 A firm regards the equity-pricing function $q(k,b)$ and the bond
@@ -285,18 +281,18 @@ both scalars.
 
 Each consumer of type $i$ is endowed with $w_0^i$ of the
 time $0$ consumption good, $w_1^i(\epsilon)$ of the time
-$1$, state $\epsilon$ consumption good, and owns a fraction
+$1$, state $\epsilon$ consumption good  and also owns a fraction
 $\theta^i_0 \in (0,1)$ of the initial value of a representative
 firm, where $\theta^1_0 + \theta^2_0 = 1$.
 
 The initial value of a representative firm is $V$ (an object to be
 determined in a rational expectations equilibrium).
 
-Household $i$ buys $\theta^i$ shares of equity and bonds
+Household $i$ buys $\theta^i$ shares of equity and buys bonds
 worth $\check p \xi^i$ where $\check p$ is the bond price.
 
 Being a price-taker, the household takes $V$,
-$\check q = q(K,B)$, $\check p = p(K,B)$, and $K, B$
+$\check q$, $\check p $
 as given.
 
 Household $i$’s optimization problem is
@@ -311,8 +307,10 @@ $$
 \end{aligned}
 $$
 
-The last two inequalities impose that the household cannot short sell
+The last two inequalities impose that the household cannot short sell either
 equity or bonds.
+
+In a rational expectations equilibrium, :math:` check q = q(K,B)` and $\check p = p(K,B)$
 
 Form household $i$’s Lagrangian:
 
@@ -346,8 +344,8 @@ $$
 \end{aligned}
 $$
 
-These inequalities imply that equilibrium consumption allocations and
-prices in a symmetric rational expectations equilibrium will satisfy
+These inequalities imply that in a symmetric rational expectations equilibrium  consumption allocations and
+prices  satisfy
 
 $$
 \begin{aligned}
@@ -356,7 +354,7 @@ $$
 \end{aligned}
 $$
 
-### Firm
+### Pricing functions
 
 When individual firms solve their optimization problems, they take big
 $C^i$’s as fixed objects that they don’t influence.
@@ -381,10 +379,14 @@ $K, B$ of capital $k$ and debt $b$, but also for any
 
 The firm is assumed to know both price functions.
 
+This means that the firm understands that its choice of $k,b$ influences how markets prices is equity and debt.
+
 The package of assumptions just described is sometimes called the
-assumption of **rational conjectures** (about the price functions). BCG
-give credit to Makowski for emphasizing and clarifying how this approach
-is an element of rational expectations models.
+assumption of **rational conjectures** (about the price functions).
+
+BCG give credit to Makowski for emphasizing and clarifying how it is a component of   rational expectations equilibria.
+
+### Firm's problem
 
 The firm chooses capital $k$ and debt $b$ to maximize its
 market value:
@@ -393,13 +395,13 @@ $$
 V \equiv \max_{k,b} -k + q(k,b) + p(k,b) b
 $$
 
-**Note:** It will turn out that in equilibrium consumers of both types
-*want* the firm to maximize its value.
+Attributing value maximization to the firm is a good idea because in equilibrium consumers of both types
+*want* a firm to maximize its value.
 
 In the special cases studied here
 
-- consumers of types $i=1,2$ both hold equity
-- only consumers of type $i=2$ hold debt; holds of type
+- consumers of both  types $i=1,2$ hold equity
+- only consumers of type $i=2$ hold debt; consumers of type
   $i=1$ hold none.
 
 These outcomes occur because we follow BCG and set parameters so that a
@@ -407,11 +409,11 @@ type 2 consumer’s stochastic endowment of the consumption good in period
 $1$ is more correlated with the firm’s output than is a type 1
 consumer’s.
 
-This gives consumers of type $2$ a motive to hedge second period
-endowment risk by holding some bonds (these consumers also choose to
+This gives consumers of type $2$ a motive to hedge their second period
+endowment risk by holding bonds (they also choose to
 hold some equity).
 
-These outcomes mean that in our setting the pricing functions end up
+These outcomes mean that the pricing functions end up
 satisfying
 
 $$
@@ -472,15 +474,15 @@ $$
 \frac{\partial p(k,b)}{\partial b} = - \beta \frac{A k^\alpha}{b^2} \int_{-\infty}^{\epsilon^*}  \frac{u'(C_1^2(\epsilon))}{u'(C_0^2)} e^\epsilon  g(\epsilon) d \epsilon
 $$
 
-**Special case:** We confine ourselves to a special case in which both
+**Special case:** We confine ourselves to a special case in which both types of
 agents hold positive equities so that
 $\frac{\partial q(k,b)}{\partial k}$ and
 $\frac{\partial q(k,b)}{\partial b}$ are related to rates of
 intertemporal substitution for both agents.
 
 Substituting these partial derivatives into the above first-order
-conditions for $k$ and $B$, respectively, we obtain the
-following forms of those first order conditions:
+conditions for $k$ and $b$, respectively, we obtain the
+following versions of those first order conditions:
 
 ```{math}
 :label: Eqn1
@@ -511,7 +513,7 @@ the rationality of the conjecture coincides with the agents’ Euler
 equations.*
 
 Here BCG are describing how they go about verifying that when they set
-little $k$, little $\xi$ from the firm’s first-order
+little $k$, little $b$ from the firm’s first-order
 conditions equal to the big $K$, big $B$ at the big
 $C$’s that appear in the pricing functions, then
 
@@ -524,9 +526,8 @@ $C$’s that appear in the pricing functions, then
 
 ## Pseudo Code
 
-Before displaying our Python code for solving a BCG incomplete markets,
-we’ll sketch some pseudo code that displays the logical flow of our
-Python code.
+Before displaying our Python code for computing a BCG incomplete markets equilibrium,
+we’ll sketch some pseudo code that displays its logical flow.
 
 Here goes:
 
@@ -543,85 +544,82 @@ Here goes:
    this step 6 little k, b are frozen at guessed at value of K, B.)
    Fixing the values of $V$, $b$ and $k$, compute
    optimal choices of consumption $c^i$ with households’ FOCs.
-   Assume only agent 2 holds debt: $\xi^2 = b$, and both agents
+   Assume that only agent 2 holds debt: $\xi^2 = b$ and that both agents
    hold equity: $0 <\theta^i < 1$ for $i=1,2$.
-    1. Set high and low bounds for equity holdings for agent 1 as
-       $\theta^1_h$ and $\theta^1_l$. Guess
-       $\theta^1 = \frac{1}{2}(\theta^1_h + \theta^1_l)$, and
-       $\theta^2 = 1 - \theta^1$. While
-       $|\theta^1_h - \theta^1_l|$ is large:
-        1. Compute agent 1’s valuation of the equity claim with a
-           fixed-point iteration:
-           
-           $q_1 = \beta \int \frac{u^\prime(c^1_1(\epsilon))}{u^\prime(c^1_0)} d^e(k,b;\epsilon) g(\epsilon) \ d\epsilon$
-           
-           where
-           
-           $c^1_1(\epsilon) = w^1_1(\epsilon) + \theta^1 d^e(k,b;\epsilon)$
-           
-           and
-           
-           $c^1_0 = w^1_0 + \theta^1_0V - q_1\theta^1$
-        1. Compute agent 2’s valuation of the bond claim with a
-           fixed-point iteration:
-           
-           $p = \beta \int \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)} d^b(k,b;\epsilon) g(\epsilon) \ d\epsilon$
-           
-           where
-           
-           $c^2_1(\epsilon) = w^2_1(\epsilon) + \theta^2 d^e(k,b;\epsilon) + b$
-           
-           and
-           
-           $c^2_0 = w^2_0 + \theta^2_0 V - q_1 \theta^2 - pb$
-        1. Compute agent 2’s valuation of the equity claim with a
-           fixed-point iteration:
-           
-           $q_2 = \beta \int \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)} d^e(k,b;\epsilon) g(\epsilon) \ d\epsilon$
-           
-           where
-           
-           $c^2_1(\epsilon) = w^2_1(\epsilon) + \theta^2 d^e(k,b;\epsilon) + b$
-           
-           and
-           
-           $c^2_0 = w^2_0 + \theta^2_0 V - q_2 \theta^2 - pb$
-        1. If $q_1 > q_2$, Set $\theta_l = \theta^1$;
-           otherwise, set $\theta_h = \theta^1$.
-        1. Repeat steps 6Aa through 6Ad until
-           $|\theta^1_h - \theta^1_l|$ is small.
-    1. Set bond price as $p$ and equity price as
-       $q = \max(q_1,q_2)$.
-    1. Compute optimal choices of consumption with prices:
-
-$$
-\begin{aligned}
-c^1_0 &= w^1_0 + \theta^1_0V - q\theta^1 \\
-c^2_0 &= w^2_0 + \theta^2_0V - q\theta^2 - pb \\
-c^1_1(\epsilon) &= w^1_1(\epsilon) + \theta^1 d^e(k,b;\epsilon) \\
-c^2_1(\epsilon) &= w^2_1(\epsilon) + \theta^2 d^e(k,b;\epsilon) + b
-\end{aligned}
-$$
-
+1. Set high and low bounds for equity holdings for agent 1 as  $\theta^1_h$ and $\theta^1_l$. Guess
+   $\theta^1 = \frac{1}{2}(\theta^1_h + \theta^1_l)$, and
+   $\theta^2 = 1 - \theta^1$. While
+   $|\theta^1_h - \theta^1_l|$ is large:
+    * Compute agent 1’s valuation of the equity claim with a
+      fixed-point iteration:
+      
+      $q_1 = \beta \int \frac{u^\prime(c^1_1(\epsilon))}{u^\prime(c^1_0)} d^e(k,b;\epsilon) g(\epsilon) \ d\epsilon$
+      
+      where
+      
+      $c^1_1(\epsilon) = w^1_1(\epsilon) + \theta^1 d^e(k,b;\epsilon)$
+      
+      and
+      
+      $c^1_0 = w^1_0 + \theta^1_0V - q_1\theta^1$
+    * Compute agent 2’s valuation of the bond claim with a
+      fixed-point iteration:
+      
+      $p = \beta \int \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)} d^b(k,b;\epsilon) g(\epsilon) \ d\epsilon$
+      
+      where
+      
+      $c^2_1(\epsilon) = w^2_1(\epsilon) + \theta^2 d^e(k,b;\epsilon) + b$
+      
+      and
+      
+      $c^2_0 = w^2_0 + \theta^2_0 V - q_1 \theta^2 - pb$
+    * Compute agent 2’s valuation of the equity claim with a
+      fixed-point iteration:
+      
+      $q_2 = \beta \int \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)} d^e(k,b;\epsilon) g(\epsilon) \ d\epsilon$
+      
+      where
+      
+      $c^2_1(\epsilon) = w^2_1(\epsilon) + \theta^2 d^e(k,b;\epsilon) + b$
+      
+      and
+      
+      $c^2_0 = w^2_0 + \theta^2_0 V - q_2 \theta^2 - pb$
+    * If $q_1 > q_2$, Set $\theta_l = \theta^1$;
+      otherwise, set $\theta_h = \theta^1$.
+    * Repeat steps 6Aa through 6Ad until
+      $|\theta^1_h - \theta^1_l|$ is small.
+1. Set bond price as $p$ and equity price as  $q = \max(q_1,q_2)$.
+1. Compute optimal choices of consumption:
+   
+   $$
+   \begin{aligned}
+   c^1_0 &= w^1_0 + \theta^1_0V - q\theta^1 \\
+   c^2_0 &= w^2_0 + \theta^2_0V - q\theta^2 - pb \\
+   c^1_1(\epsilon) &= w^1_1(\epsilon) + \theta^1 d^e(k,b;\epsilon) \\
+   c^2_1(\epsilon) &= w^2_1(\epsilon) + \theta^2 d^e(k,b;\epsilon) + b
+   \end{aligned}
+   $$
+   
 1. (Here we confess to abusing notation again, but now in a different
    way. In step 7, we interpret frozen $c^i$s as Big
    $C^i$. We do this to solve the firm’s problem.) Fixing the
    values of $c^i_0$ and $c^i_1(\epsilon)$, compute optimal
    choices of capital $k$ and debt level $b$ using the
-   firm’s FONCs.
-    1. Compute deviations from the firm’s FONC for capital $k$ as:
-       
-       $kfoc = \beta \alpha A k^{\alpha - 1} \left( \int \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)}  e^\epsilon g(\epsilon) \ d\epsilon \right) - 1$
-        - If $kfoc > 0$, Set $k_l = k$; otherwise, set
-          $k_h = k$.
-        - Repeat steps 4 through 7A until $|k_h-k_l|$ is small.
-    1. Compute deviations from the firm’s FONC for debt level $b$
-       as:
-       
-       $bfoc = \beta \left[ \int_{\epsilon^*}^\infty \left( \frac{u^\prime(c^1_1(\epsilon))}{u^\prime(c^1_0)} \right) g(\epsilon) \ d\epsilon -  \int_{\epsilon^*}^\infty \left( \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)} \right)  g(\epsilon) \ d\epsilon \right]$
-        - If $bfoc > 0$, Set $b_h = b$; otherwise, set
-          $b_l = b$.
-        - Repeat steps 3 through 7B until $|b_h-b_l|$ is small.
+   firm’s first order necessary conditions.
+1. Compute deviations from the firm’s FONC for capital $k$ as:
+   
+   $kfoc = \beta \alpha A k^{\alpha - 1} \left( \int \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)}  e^\epsilon g(\epsilon) \ d\epsilon \right) - 1$
+    - If $kfoc > 0$, Set $k_l = k$; otherwise, set
+      $k_h = k$.
+    - Repeat steps 4 through 7A until $|k_h-k_l|$ is small.
+1. Compute deviations from the firm’s FONC for debt level $b$  as:
+   
+   $bfoc = \beta \left[ \int_{\epsilon^*}^\infty \left( \frac{u^\prime(c^1_1(\epsilon))}{u^\prime(c^1_0)} \right) g(\epsilon) \ d\epsilon -  \int_{\epsilon^*}^\infty \left( \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)} \right)  g(\epsilon) \ d\epsilon \right]$
+    - If $bfoc > 0$, Set $b_h = b$; otherwise, set
+      $b_l = b$.
+    - Repeat steps 3 through 7B until $|b_h-b_l|$ is small.
 1. Given prices $q$ and $p$ from step 6, and the firm
    choices of $k$ and $b$ from step 7, compute the synthetic
    firm value:
@@ -630,7 +628,7 @@ $$
     - If $V_x > V$, then set $V_l = V$; otherwise, set
       $V_h = V$.
     - Repeat steps 1 through 8 until $|V_x - V|$ is small.
-1. At the end, the algorithm returns the equilibrium capital
+1. Ultimately, the algorithm returns  equilibrium capital
    $k^*$, debt $b^*$ and firm value $V^*$, as well as
    the following equilibrium values:
     - Equity holdings $\theta^{1,*} = \theta^1(k^*,b^*)$
@@ -1201,8 +1199,8 @@ Let’s verify some things that have to be true if our algorithm has truly
 found an equilibrium.
 
 Thus, let’s see if the firm is actually maximizing its firm value given
-the equilibrium pricing function $q(k,b)$ forequity and
-$p(k,b)$ for the bond.
+the equilibrium pricing function $q(k,b)$ for equity and
+$p(k,b)$ for  bonds.
 
 ```{code-cell} python3
 kgrid, bgrid, Vgrid, Qgrid, Pgrid = mdl.eq_valuation(c10ss, c11ss, c20ss, c21ss,N=30)
@@ -1266,10 +1264,10 @@ $$
 (b,k) = (B,K)
 $$
 
-But an individual firm named $\xi \in [0,1]$ neither knows nor
+But an individual firm named $\zet \in [0,1]$ neither knows nor
 cares whether it sets $(b(\zeta),k(\zeta)) = (B,K)$.
 
-Indeed the above graph has a ridge of $b(\xi)$’s that also
+Indeed the above graph has a ridge of $b(\zeta)$’s that also
 maximize the firm’s value so long as it sets $k(\zeta) = K$.
 
 Here is is important that the measure of firms that deviate from setting
@@ -1287,16 +1285,17 @@ indeterminate, the **market’s** financial structure is determinant and
 sits at the red dot in the above graph.
 
 This contrasts sharply with the *unqualified* Modigliani-Miller theorem
-descibed in the complete markets model in the lecture {doc}`BCG_complete_mkts <BCG_complete_mkts>` . There
-the **market’s** financial structure was indeterminate.
+descibed in the complete markets model in the lecture {doc}`BCG_complete_mkts <BCG_complete_mkts>`.
+
+There the **market’s** financial structure was indeterminate.
 
 These things bear some more thought and exploration.
 
-So we will do some calculations designed to ferret out a sense in which
+So we will do some calculations  to ferret out a sense in which
 the equilibrium $(k,b) = (K,B)$ outcome at the red dot in the
 above graph is **stable**.
 
-IN particular, we’ll explore the consequences of some choices of
+In particular, we’ll explore the consequences of some choices of
 $b=B$ that deviate from the red dot and ask whether firm
 $\zeta$ would want to remain at that $b$.
 
@@ -1315,7 +1314,7 @@ In more detail, here is what we’ll do:
 1. Repeat the above analyses for $b^{**} = b^* + e$.
 
 To conduct the above procedures, we create a function `off_eq_check`
-thatinputs the BCG model instance parameters, equilibrium capital
+that inputs the BCG model instance parameters, equilibrium capital
 $k^*$ and debt $b^*$, and a perturbation of debt $e$.
 
 The function outputs the fixed point firm values $V^{**}$, prices
@@ -1674,7 +1673,7 @@ its debt issuance to attain a higher valuation.
 That incentive to deviate means that $(k^*,b^*+e)$ is not an
 equilibrium capital structure for the firm.
 
-Interestingly, if consumers were to anticiapte that firms would
+Interestingly, if consumers were to anticipate that firms would
 over-issue debt, i.e. $B > b^*$,then both types of agents would
 want willing to hold corporate debt. Specifically, $\xi^1 > 0$:
 
