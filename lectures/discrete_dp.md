@@ -98,7 +98,12 @@ seamlessly if you are using [Anaconda](https://www.anaconda.com/download/) as [s
 
 For background reading on dynamic programming and additional applications, see, for example,
 
-{cite}`Ljungqvist2012`{cite}`HernandezLermaLasserre1996`{cite}`puterman2005`{cite}`StokeyLucas1989`{cite}`Rust1996`{cite}`MirandaFackler2002`* , section 3.5
+``````* {cite}`Ljungqvist2012
+* {cite}`HernandezLermaLasserre1996, section 3.5
+* {cite}`puterman2005
+* {cite}`StokeyLucas1989
+* {cite}`Rust1996
+* {cite}`MirandaFackler2002
 * [EDTC](http://johnstachurski.net/edtc.html), chapter 5
 
 (discrete_dps)=
@@ -149,7 +154,7 @@ In particular, a stationary Markov policy is a map $\sigma$ from states to actio
 
 It is known that, for any arbitrary policy, there exists a stationary Markov policy that dominates it at least weakly.
 
-{cite}`puterman2005`* See section 5.5 of  for discussion and proofs.
+`* See section 5.5 of {cite}`puterman2005 for discussion and proofs.
 
 In what follows, stationary Markov policies are referred to simply as policies.
 

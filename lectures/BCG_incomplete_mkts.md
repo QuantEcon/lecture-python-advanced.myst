@@ -50,18 +50,18 @@ It is useful to watch how outcomes differ  in the two settings.
 
 In the complete markets economy in {doc}`BCG_complete_mkts <BCG_complete_mkts>`
 
-{cite}`Modigliani_Miller_1958`- there is a unique  stochastic discount factor that prices all assets
+`- there is a unique  stochastic discount factor that prices all assets
 - consumers’ portfolio choices are indeterminate
-- firms' financial structures are indeterminate, so the model embodies an instance of a Modigliani-Miller irrelevance theorem 
+- firms' financial structures are indeterminate, so the model embodies an instance of a Modigliani-Miller irrelevance theorem {cite}`Modigliani_Miller_1958
 - the aggregate of all firms' financial structures are indeterminate, a consequence of there being redundant assets
 
 In the incomplete markets economy studied here
 
-{cite}`Modigliani_Miller_1958`- there is a not a unique equilibrium stochastic discount factor
+`- there is a not a unique equilibrium stochastic discount factor
 - different stochastic discount factors price different assets
 - consumers’ portfolio choices are determinate
 - while **individual** firms' financial structures are indeterminate, thus conforming to part of a Modigliani-Miller theorem,
-  , the **aggregate**  of all firms' financial structures **is** determinate.
+  {cite}`Modigliani_Miller_1958, the **aggregate**  of all firms' financial structures **is** determinate.
 
 A  `Big K, little k` analysis played an important role in the  previous lecture {doc}`BCG_complete_mkts <BCG_complete_mkts>`.
 

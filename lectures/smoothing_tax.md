@@ -40,8 +40,8 @@ tags: [hide-output]
 
 This lecture describes tax-smoothing models that are counterparts to consumption-smoothing models in {doc}`smoothing <smoothing>`.
 
-{cite}`LucasStokey1983`{cite}`Barro1979`* one is in the **complete markets** tradition of Lucas and Stokey .
-* the other is in the **incomplete markets** tradition  of  Barro .
+``* one is in the **complete markets** tradition of Lucas and Stokey {cite}`LucasStokey1983.
+* the other is in the **incomplete markets** tradition  of  Barro {cite}`Barro1979.
 
 *Complete markets* allow a  government to buy or sell claims contingent on all possible Markov states.
 

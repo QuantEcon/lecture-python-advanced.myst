@@ -530,7 +530,7 @@ particular density value.
 The curves defined by equation {eq}`ellipse` can be
 labeled as iso-likelihood ellipses
 
-{cite}`leamer1978specification`> **Remark:** More generally there is a class of density functions
+`> **Remark:** More generally there is a class of density functions
 > that possesses this feature, i.e.
 > 
 > $$
@@ -540,7 +540,7 @@ labeled as iso-likelihood ellipses
 > $$
 > 
 > This property is called **spherical symmetry** (see p 81. in Leamer
-> (1978) ).
+> (1978) {cite}`leamer1978specification).
 
 In our specific example, we can use the pair
 $(\bar d_1, \bar d_2)$ as being two "likelihood" values for which

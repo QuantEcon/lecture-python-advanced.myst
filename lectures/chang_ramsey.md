@@ -40,11 +40,11 @@ analyzed **competitive equilibria** and a best competitive equilibrium called a 
 
 He did this by
 
-{cite}`APS1990`* characterizing a competitive equilibrium recursively in a way also employed
+`* characterizing a competitive equilibrium recursively in a way also employed
   in the {doc}`dynamic Stackelberg problems <dyn_stack>` and {doc}`Calvo model <calvo>` lectures
   to pose Stackelberg problems in linear economies, and then
 * appropriately adapting an argument of Abreu, Pearce, and Stachetti
-   to describe key features of the  set of competitive equilibria
+  {cite}`APS1990 to describe key features of the  set of competitive equilibria
 
 Roberto Chang {cite}`chang1998credible`  chose a model of  Calvo {cite}`Calvo1978`
 as a simple structure that conveys ideas that apply more broadly.

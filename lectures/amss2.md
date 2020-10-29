@@ -75,7 +75,7 @@ Nonzero Lagrange multipliers on those constraints make the Ramsey allocation for
 
 This lecture studies a special  AMSS model in which
 
-{cite}`LucasStokey1983`* The exogenous state variable $s_t$ is governed by  a finite-state Markov chain.
+`* The exogenous state variable $s_t$ is governed by  a finite-state Markov chain.
 * With an arbitrary budget-feasible initial level of government debt, the measurability  constraints
     - bind for many periods, but $\ldots$.
     - eventually, they stop binding evermore, so $\ldots$.
@@ -92,7 +92,7 @@ This lecture studies a special  AMSS model in which
     - the **market value** $\frac{\bar b}{R_t(s_t)}$ of government debt at time $t$  varies as a time-invariant function of the Markov state $s_t$.
     - fluctuations in the interest rate make gross earnings on government debt $\frac{\bar b}{R_t(s_t)}$ fully insure the gross-of-gross-interest-payments government budget against fluctuations in government expenditures.
     - the state variable $x$ in a recursive representation of a Ramsey plan is a time-invariant function of the Markov state for $t \geq 0$.
-* In this special case, the Ramsey allocation in the AMSS model agrees with that in a  model in which
+* In this special case, the Ramsey allocation in the AMSS model agrees with that in a {cite}`LucasStokey1983 model in which
   the same amount of state-contingent debt falls due in all states tomorrow
     - it is a situation in which  the Ramsey planner loses nothing from not being  able to  purchase state-contingent debt and being restricted to exchange only risk-free debt  debt.
 * This outcome emerges only when we initialize government debt at a particular $b_0 < 0$.

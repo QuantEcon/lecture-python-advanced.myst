@@ -964,9 +964,9 @@ ergodic distribution.
 To  construct the BEGS  approximation to ${\mathcal B}^*$, we just follow steps set forth on pages 648 - 650 of section III.D of
 {cite}`BEGS1`
 
-{cite}`BEGS1`- notation in BEGS might be confusing at first sight, so
+`- notation in BEGS might be confusing at first sight, so
   it is important to stare and digest before computing
-- there are also some sign errors in the  text that we'll want
+- there are also some sign errors in the {cite}`BEGS1 text that we'll want
   to correct
 
 Here is a step-by-step description of the {cite}`BEGS1` approximation procedure.

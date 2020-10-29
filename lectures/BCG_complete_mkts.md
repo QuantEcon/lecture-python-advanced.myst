@@ -46,7 +46,7 @@ markets in one-period Arrow securities.
 
 This simplification of BCG’s setup helps us by
 
-{cite}`Modigliani_Miller_1958`- creating a benchmark economy to compare with outcomes in BCG’s
+`- creating a benchmark economy to compare with outcomes in BCG’s
   incomplete markets economy
 - creating a good guess for initial values of some equilibrium objects
   to be computed in BCG’s incomplete markets economy via an iterative
@@ -54,7 +54,7 @@ This simplification of BCG’s setup helps us by
 - illustrating classic complete markets outcomes that include
     - indeterminacy of consumers’ portfolio choices
     - indeterminacy of firms' financial structures that underlies a
-      Modigliani-Miller theorem 
+      Modigliani-Miller theorem {cite}`Modigliani_Miller_1958
 - introducing `Big K, little k` issues in a simple context that will
   recur in the BCG incomplete markets environment
 
@@ -65,7 +65,7 @@ A Big K, little k analysis also played roles in [this quantecon lecture](https:/
 
 The economy lasts for two periods, $t=0, 1$.
 
-There are unit measure continua  of two types of consumers named $i=1,2$.
+There are two types of consumers named $i=1,2$.
 
 A scalar random variable $\epsilon$ with probability density $g(\epsilon)$ affects both
 
@@ -402,9 +402,9 @@ not now.
 
 ### Objects appearing in a competitive equilibrium
 
-We let
+Let
 
-- $a^i(\epsilon)$ be consumer $i$’s purchases of claims
+- $a^i(\epsilon)$ be consumer $i$ ’s purchases of claims
   on time $1$ consumption in state $\epsilon$
 - $q(\epsilon)$ be a pricing kernel for one-period Arrow
   securities
@@ -412,6 +412,8 @@ We let
   the firm, $\sum_i \theta_0^i =1$
 - $\theta^i$ be the fraction of the firm’s shares purchased by
   consumer $i$ at time $t=0$
+- $- \bar a^i(\epsilon; \theta^i)$ be debt limits constraining consumer $i$ ' s issues of claims
+  on time $1$ consumption in state $\epsilon$
 - $V$ be the value of the representative firm
 - $\tilde V$ be the value of equity issued by the representative
   firm
@@ -471,6 +473,31 @@ As a price taker, each consumer faces a given Arrow securities pricing kernel
 $q(\epsilon)$, a given value of a firm $V$ that has chosen capital stock $k$, a price of
 equity $\tilde V$, and given prospective random dividends next period $A k^\alpha e^\epsilon$.
 
+Consumer $i$ also faces a state-by-state borrowing limit that restricts quantities of Arrow securities that he can issue.
+
+If we evaluate consumer $i$'s time $1$ budget constraint at zero consumption $c^i(\epsilon) = 0$ and solve for $-a^i(\epsilon)$
+we obtain
+
+$$
+- \bar a^i(\epsilon;\theta^i) = w_1^i(\epsilon) +\theta^i A k^\alpha e^\epsilon
+$$
+
+The quantity $- \bar a^i(\epsilon;\theta^i)$ is the maximum amount that it is feasible for  consumer $i$ to repay to
+his Arrow security creditors at time $1$ in state $\epsilon$.
+
+To implement trading with one-period Arrow securities, we must impose on agent $i$ the state-by-state debt limits
+
+$$
+-a^i(\epsilon) \leq -  \bar a^i(\epsilon;\theta^i)
+$$
+
+Notice that consumer $i$'s borrowing limit depends on
+
+* his endowment at time $1$ in state $\epsilon$
+* his share $\theta^i$ of a representive firm's dividends
+
+These are the two sources of **collateral** that back the consumer's issues of Arrow securities that pay off in state $\epsilon$
+
 Consumer $i$ chooses a scalar $c_0^i$ and a function
 $c_1^i(\epsilon)$ to maximize
 
@@ -478,19 +505,21 @@ $$
 u(c_0^i) + \beta \int u(c_1^i(\epsilon)) g (\epsilon) d \epsilon
 $$
 
-subject to time $0$ and time $1$ budget constraints
+subject to his state-by-state debt limits and the time $0$ and time $1$ budget constraints
 
 $$
 \begin{aligned}
 c_0^i & \leq w_0^i +\theta_0^i V - \int q(\epsilon) a^i(\epsilon) d \epsilon - \theta^i \tilde V \cr
-c_1^i & \leq w_1^i(\epsilon) +\theta^i A k^\alpha e^\epsilon + a^i(\epsilon)
+c_1^i(\epsilon) & \leq w_1^i(\epsilon) +\theta^i A k^\alpha e^\epsilon + a^i(\epsilon)
 \end{aligned}
 $$
 
 Attach Lagrange multiplier $\lambda_0^i$ to the budget constraint
-at time $0$ and scaled Lagrange multiplier
+at time $0$,  scaled Lagrange multiplier
 $\beta \lambda_1^i(\epsilon) g(\epsilon)$ to the budget constraint
-at time $1$ and state $\epsilon$ and form the Lagrangian
+at time $1$ and state $\epsilon$, and scaled Lagrange multiplier
+$\beta \phi_1^i(\epsilon) g(\epsilon)$ to the debt limit  at time $1$ and state $\epsilon$,
+then  form the Lagrangian
 
 $$
 \begin{aligned}
@@ -498,12 +527,13 @@ L^i & = u(c_0^i) + \beta \int u(c^i_1(\epsilon)) g(\epsilon) d \epsilon \cr
      & + \lambda_0^i [ w_0^i + \theta_0^i - \int q(\epsilon) a^i(\epsilon) d \epsilon -
           \theta^i \tilde V - c_0^i ] \cr
       & + \beta \int \lambda_1^i(\epsilon) [ w_1^i(\epsilon) + \theta^i A k^\alpha e^\epsilon
-           + a^i(\epsilon) c_1^i(\epsilon) g(\epsilon)] d \epsilon
+           + a^i(\epsilon) c_1^i(\epsilon) ] g(\epsilon) d \epsilon \cr
+      & + \beta \int \phi_1^i(\epsilon)  [ - \bar a^i(\epsilon; \theta^i) - a^i(\epsilon) ]    g(\epsilon) d \epsilon
 \end{aligned}
 $$
 
-First-order necessary conditions for an optimum with respect to
-$c_0^i, c_1^i(\epsilon)$, and $a^i(\epsilon)$ are
+Off corners, first-order necessary conditions for an optimum with respect to
+$c_0^i, c_1^i(\epsilon)$ and $a^i(\epsilon)$ are
 
 $$
 \begin{aligned}
@@ -522,7 +552,7 @@ plan to satisfy
 q(\epsilon) = \beta \left( \frac{u'(c_1^i(\epsilon))}{u'(c_0^i)} \right) g(\epsilon)
 ```
 
-To deduce a restriction on the consumer’s choice of $\theta^i$ we
+To deduce a restriction on equilibrium prices,  we
 solve the period $1$ budget constraint to express
 $a^i(\epsilon)$ as
 

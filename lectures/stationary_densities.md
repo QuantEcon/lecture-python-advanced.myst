@@ -673,8 +673,8 @@ For one such set of conditions see theorem 8.2.14 of [EDTC](http://johnstachursk
 
 In addition
 
-{cite}`StokeyLucas1989`{cite}`LasotaMackey1994`{cite}`MeynTweedie2009`*   contains a classic (but slightly outdated) treatment of these topics.
-* From the mathematical literature,   and  give outstanding in-depth treatments.
+```* {cite}`StokeyLucas1989  contains a classic (but slightly outdated) treatment of these topics.
+* From the mathematical literature, {cite}`LasotaMackey1994  and {cite}`MeynTweedie2009 give outstanding in-depth treatments.
 * Section 8.1.2 of [EDTC](http://johnstachurski.net/edtc.html) provides detailed intuition, and section 8.3 gives additional references.
 * [EDTC](http://johnstachurski.net/edtc.html), section 11.3.4
   provides a specific treatment for the growth model we considered in this
