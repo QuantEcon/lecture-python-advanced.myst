@@ -156,8 +156,8 @@ If you want to understand more about why one serious quantitative researcher is 
 
 Our discussion in this lecture is based on
 
-``* {cite}`HansenSargent2000
-* {cite}`HansenSargent2008
+* {cite}`HansenSargent2000`
+* {cite}`HansenSargent2008`
 
 ## The Model
 

@@ -46,7 +46,7 @@ markets in one-period Arrow securities.
 
 This simplification of BCG’s setup helps us by
 
-`- creating a benchmark economy to compare with outcomes in BCG’s
+- creating a benchmark economy to compare with outcomes in BCG’s
   incomplete markets economy
 - creating a good guess for initial values of some equilibrium objects
   to be computed in BCG’s incomplete markets economy via an iterative
@@ -54,7 +54,7 @@ This simplification of BCG’s setup helps us by
 - illustrating classic complete markets outcomes that include
     - indeterminacy of consumers’ portfolio choices
     - indeterminacy of firms' financial structures that underlies a
-      Modigliani-Miller theorem {cite}`Modigliani_Miller_1958
+      Modigliani-Miller theorem {cite}`Modigliani_Miller_1958`
 - introducing `Big K, little k` issues in a simple context that will
   recur in the BCG incomplete markets environment
 

@@ -40,8 +40,8 @@ tags: [hide-output]
 
 This lecture describes two types of consumption-smoothing models.
 
-`* one is in the **complete markets** tradition of Kenneth Arrow <https://en.wikipedia.org/wiki/Kenneth_Arrow>
-* the other is in the **incomplete markets** tradition  of Hall {cite}`Hall1978
+* one is in the **complete markets** tradition of Kenneth Arrow <https://en.wikipedia.org/wiki/Kenneth_Arrow>
+* the other is in the **incomplete markets** tradition  of Hall {cite}`Hall1978`
 
 *Complete markets* allow a consumer  to buy or sell claims contingent on all possible states of the world.
 

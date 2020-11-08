@@ -74,19 +74,19 @@ The famous *Fourier transform* and its inverse are used to map between the two r
 For supplementary reading, see
 
 ```{only} html
-``<a href=/_static/lecture_specific/arma/time_series_book.pdf download></a>``* {cite}`Ljungqvist2012, chapter 2
-* {cite}`Sargent1987, chapter 11
+<a href=/_static/lecture_specific/arma/time_series_book.pdf download></a>* {cite}`Ljungqvist2012`, chapter 2
+* {cite}`Sargent1987`, chapter 11
 * John Cochrane's notes on time series analysis, chapter 8
-* {cite}`Shiryaev1995, chapter 6
-* {cite}`CryerChan2008, all
+* {cite}`Shiryaev1995`, chapter 6
+* {cite}`CryerChan2008`, all
 ```
 
 ```{only} latex
-````* {cite}`Ljungqvist2012, chapter 2
-* {cite}`Sargent1987, chapter 11
+* {cite}`Ljungqvist2012`, chapter 2
+* {cite}`Sargent1987`, chapter 11
 * John Cochrane's [notes on time series analysis](https://lectures.quantecon.org/_downloads/time_series_book.pdf), chapter 8
-* {cite}`Shiryaev1995, chapter 6
-* {cite}`CryerChan2008, all
+* {cite}`Shiryaev1995`, chapter 6
+* {cite}`CryerChan2008`, all
 ```
 
 Let's start with some imports:

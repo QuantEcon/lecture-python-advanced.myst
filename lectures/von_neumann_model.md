@@ -60,6 +60,9 @@ np.set_printoptions(precision=2)
 The code below provides the `Neumann` class
 
 ```{code-cell} python3
+---
+tags: [output_scroll]
+---
 class Neumann(object):
 
     """

@@ -321,7 +321,7 @@ After that we'll perform some additional simulations.
 
 We use a slightly modified version of the algorithm recommended by Arellano.
 
-`* The appendix to {cite}`arellano2008default recommends value function iteration until
+* The appendix to {cite}`arellano2008default` recommends value function iteration until
   convergence, updating the price, and then repeating.
 * Instead, we update the bond price at every value function iteration step.
 
