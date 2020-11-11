@@ -61,7 +61,7 @@ The code below provides the `Neumann` class
 
 ```{code-cell} python3
 ---
-tags: [output_scroll]
+tags: [scroll-output]
 ---
 class Neumann(object):
 

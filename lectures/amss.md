@@ -415,7 +415,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
 
 ```{literalinclude} _static/lecture_specific/opt_tax_recur/sequential_allocation.py
 ---
-tags: [output_scroll]
+tags: [scroll-output]
 ---
 ```
 
