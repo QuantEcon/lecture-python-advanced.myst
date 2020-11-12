@@ -308,7 +308,7 @@ firm, where $\theta^1_0 + \theta^2_0 = 1$.
 The initial value of a representative firm is $V$ (an object to be
 determined in a rational expectations equilibrium).
 
-Household $i$ buys $\theta^i$ shares of equity and buys bonds
+Consumer $i$ buys $\theta^i$ shares of equity and buys bonds
 worth $\check p \xi^i$ where $\check p$ is the bond price.
 
 Being a price-taker, a consumer takes $V$, $\check q$, $\check p$, and $K, B$
@@ -323,7 +323,7 @@ d^b(K,B;\epsilon) &= \min \left\{ \frac{e^\epsilon  A K^\alpha}{B}, 1 \right\}
 \end{aligned}
 $$
 
-Household $i$’s optimization problem is
+Consumer $i$’s optimization problem is
 
 $$
 \begin{aligned}
@@ -335,12 +335,12 @@ $$
 \end{aligned}
 $$
 
-The last two inequalities impose that the household cannot short sell either
+The last two inequalities impose that the consumer cannot short sell either
 equity or bonds.
 
 In a rational expectations equilibrium, $\check q = q(K,B)$ and $\check p = p(K,B)$
 
-We form household $i$’s Lagrangian:
+We form consumer $i$’s Lagrangian:
 
 $$
 \begin{aligned}
@@ -350,7 +350,7 @@ L^i := &  u(c^i_0) + \beta \int u(c^i(\epsilon)) g(\epsilon) \ d\epsilon  \\
 \end{aligned}
 $$
 
-Household $i$’s first-order necessary conditions for an optimum
+Consumer $i$’s first-order necessary conditions for an optimum
 include:
 
 $$
@@ -362,7 +362,7 @@ c^i_1(\epsilon):& \quad u^\prime(c^i_1(\epsilon)) = \lambda^i_1(\epsilon) \\
 \end{aligned}
 $$
 
-We can combine and rearrange household $i$’s first-order
+We can combine and rearrange consumer $i$’s first-order
 conditions to become:
 
 $$
@@ -546,7 +546,7 @@ little $k$, little $b$ from the firm’s first-order
 conditions equal to the big $K$, big $B$ at the big
 $C$’s that appear in the pricing functions, then
 
-- households’ Euler equations are satisfied if little $c$’s are
+- consumers’ Euler equations are satisfied if little $c$’s are
   equated to  Big C’s
 - firms’ first-order necessary conditions for $k, b$ are
   satisfied.
@@ -572,7 +572,7 @@ Here goes:
    effect temporarily treating them as Big $K,B$ values. Thus, in
    this step 6 little k, b are frozen at guessed at value of K, B.)
    Fixing the values of $V$, $b$ and $k$, compute
-   optimal choices of consumption $c^i$ with households’ FOCs.
+   optimal choices of consumption $c^i$ with consumers’ FOCs.
    Assume that only agent 2 holds debt: $\xi^2 = b$ and that both agents
    hold equity: $0 <\theta^i < 1$ for $i=1,2$.
 1. Set high and low bounds for equity holdings for agent 1 as  $\theta^1_h$ and $\theta^1_l$. Guess

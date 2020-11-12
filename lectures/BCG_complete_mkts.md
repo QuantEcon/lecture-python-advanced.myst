@@ -69,13 +69,13 @@ There are two types of consumers named $i=1,2$.
 
 A scalar random variable $\epsilon$ with probability density $g(\epsilon)$ affects both
 
-- the physical return in period $1$ from investing
-  $k \geq 0$ in capital in period $0$.
+- the  return in period $1$ from investing
+  $k \geq 0$ in physical capital in period $0$.
 - exogenous period $1$ endowments of the consumption good for
   agents of types $i =1$ and $i=2$.
 
 Type $i=1$ and $i=2$ agents’ period $1$ endowments are
-correlated with the physical return on capital in different ways.
+correlated with the  return on physical capital in different ways.
 
 We discuss two arrangements:
 
@@ -112,7 +112,7 @@ Where $\alpha \in (0,1)$ and $A >0$
 
 $$
 \begin{aligned}
- c_0^1 + c_0^2 & = w_0^1 + w_0^2 - k \cr
+ c_0^1 + c_0^2 + k & = w_0^1 + w_0^2  \cr
  c_1^1(\epsilon) + c_1^2(\epsilon) & =  w_1^1(\epsilon) + w_1^2(\epsilon) + e^\epsilon A k^\alpha, \quad k \geq 0
 \end{aligned}
 $$
@@ -323,14 +323,14 @@ $i$.
 Then define Big $C^i$ as
 
 $$
-C^i = \int c^i(\omega) d \, \omega
+C^i = \int_0^1 c^i(\omega) d \, \omega
 $$
 
 In the same spirit, let $\zeta \in [0,1]$ index a particular firm.
 Then define Big $K$ as
 
 $$
-K = \int k(\zeta) d \, \zeta
+K = \int_0^1 k(\zeta) d \, \zeta
 $$
 
 The assumption that there are continua of our three types of
@@ -371,7 +371,7 @@ $$
 \end{aligned}
 $$
 
-Consumers also own shares in  a firm that operates the technology for converging
+Consumers also own shares in  a firm that operates the technology for converting
 nonnegative amounts of the time $0$ consumption good one-for-one
 into a capital good $k$ that produces
 $A k^\alpha e^\epsilon$ units of the time $1$ consumption good
@@ -471,7 +471,7 @@ equity $\tilde V$, and  prospective next period random dividends  $A k^\alpha e^
 
 Consumer $i$ also confronts a state-by-state borrowing limit that restricts quantities of Arrow securities that he can issue.
 
-If we evaluate consumer $i$'s time $1$ budget constraint at zero consumption $c^i(\epsilon) = 0$ and solve for $-a^i(\epsilon)$
+If we evaluate consumer $i$'s time $1$ budget constraint at zero consumption $c^i_1(\epsilon) = 0$ and solve for $-a^i(\epsilon)$
 we obtain
 
 ```{math}
