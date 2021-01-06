@@ -171,7 +171,7 @@ $$
 with
 
 $$
-r(x_t, s_t, u_t) = -( x_t' R_{s_t} x_t + u_t' Q_{s_t} u_t + 2 u_t' W_{s_t} x_t)
+r(x_t, s_t, u_t) = x_t' R_{s_t} x_t + u_t' Q_{s_t} u_t + 2 u_t' W_{s_t} x_t
 $$
 
 subject to linear laws of motion with matrices $(A,B,C)$ each
