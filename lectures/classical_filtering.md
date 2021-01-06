@@ -225,7 +225,8 @@ $$
 
 Here's the code that computes solutions to LQ control and filtering problems using the methods described here and in :doc: lu_tricks.
 
-```{literalinclude} _static/lecture_specific/lu_tricks/control_and_filter.py
+```{code-cell} python3
+:file: _static/lecture_specific/lu_tricks/control_and_filter.py
 ```
 
 Let's use this code to tackle two interesting examples.
