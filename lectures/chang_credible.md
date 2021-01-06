@@ -809,8 +809,9 @@ code for now. We can increase accuracy by increasing the number of subgradients)
 
 The following code computes sustainable plans
 
-```{literalinclude} _static/lecture_specific/chang_credible/changecon.py
+```{code-cell} python3
 ---
+file: _static/lecture_specific/chang_credible/changecon.py
 tags: [output_scroll]
 ---
 ```
