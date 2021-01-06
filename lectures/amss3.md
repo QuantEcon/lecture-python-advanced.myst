@@ -131,7 +131,8 @@ $$
 
 The following Python code sets up the economy
 
-```{literalinclude} _static/lecture_specific/opt_tax_recur/crra_utility.py
+```{code-cell} python3
+:file: _static/lecture_specific/opt_tax_recur/crra_utility.py
 ```
 
 ### First and Second Moments
@@ -163,20 +164,23 @@ We begin by showing the code that we used in earlier lectures on the AMSS model.
 
 Here it is
 
-```{literalinclude} _static/lecture_specific/opt_tax_recur/sequential_allocation.py
+```{code-cell} python3
 ---
+file: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
 tags: [output_scroll]
 ---
 ```
 
-```{literalinclude} _static/lecture_specific/amss/recursive_allocation.py
+```{code-cell} python3
 ---
+file: _static/lecture_specific/amss/recursive_allocation.py
 tags: [output_scroll]
 ---
 ```
 
-```{literalinclude} _static/lecture_specific/amss/utilities.py
+```{code-cell} python3
 ---
+file: _static/lecture_specific/amss/utilities.py
 tags: [output_scroll]
 ---
 ```
