@@ -18,7 +18,7 @@ kernelspec:
 </div>
 ```
 
-# Irrelevance of Capital Structures with Complete Markets
+# Irrelevance of Capital Structure with Complete Markets
 
 ```{contents} Contents
 :depth: 2
@@ -408,8 +408,6 @@ Let
   the firm, $\sum_i \theta_0^i =1$
 - $\theta^i$ be the fraction of a firm’s shares purchased by
   consumer $i$ at time $t=0$
-- $- \bar a^i(\epsilon; \theta^i)$ be debt limits constraining consumer $i$ ' s issues of claims
-  on time $1$ consumption in state $\epsilon$
 - $V$ be the value of the representative firm
 - $\tilde V$ be the value of equity issued by the representative
   firm
@@ -469,8 +467,6 @@ As a price taker, each consumer faces a given Arrow securities pricing kernel
 $q(\epsilon)$, a given value of a firm $V$ that has chosen capital stock $k$, a price of
 equity $\tilde V$, and  prospective next period random dividends  $A k^\alpha e^\epsilon$.
 
-Consumer $i$ also confronts a state-by-state borrowing limit that restricts quantities of Arrow securities that he can issue.
-
 If we evaluate consumer $i$'s time $1$ budget constraint at zero consumption $c^i_1(\epsilon) = 0$ and solve for $-a^i(\epsilon)$
 we obtain
 
@@ -483,18 +479,12 @@ we obtain
 The quantity $- \bar a^i(\epsilon;\theta^i)$ is the maximum amount that it is feasible for  consumer $i$ to repay to
 his Arrow security creditors at time $1$ in state $\epsilon$.
 
-To arrange trading with one-period Arrow securities, we must impose on agent $i$ the state-by-state debt limits
-
-$$
--a^i(\epsilon) \leq -  \bar a^i(\epsilon;\theta^i)
-$$
-
-Notice that consumer $i$'s borrowing limit defined in {eq}`debtlimit` depends on
+Notice that $-\bar a^i(\epsilon;\theta^i)$ defined in {eq}`debtlimit` depends on
 
 * his endowment $w_1^i(\epsilon)$ at time $1$ in state $\epsilon$
 * his share $\theta^i$ of a representive firm's dividends
 
-These constitute the two sources of **collateral** that back the consumer's issues of Arrow securities that pay off in state $\epsilon$
+These constitute  two sources of **collateral** that back the consumer's issues of Arrow securities that pay off in state $\epsilon$
 
 Consumer $i$ chooses a scalar $c_0^i$ and a function
 $c_1^i(\epsilon)$ to maximize
@@ -503,7 +493,7 @@ $$
 u(c_0^i) + \beta \int u(c_1^i(\epsilon)) g (\epsilon) d \epsilon
 $$
 
-subject to his state-by-state debt limits and  time $0$ and time $1$ budget constraints
+subject to  time $0$ and time $1$ budget constraints
 
 $$
 \begin{aligned}
@@ -513,10 +503,9 @@ c_1^i(\epsilon) & \leq w_1^i(\epsilon) +\theta^i A k^\alpha e^\epsilon + a^i(\ep
 $$
 
 Attach Lagrange multiplier $\lambda_0^i$ to the budget constraint
-at time $0$,  scaled Lagrange multiplier
+at time $0$ and scaled Lagrange multiplier
 $\beta \lambda_1^i(\epsilon) g(\epsilon)$ to the budget constraint
-at time $1$ and state $\epsilon$, and scaled Lagrange multiplier
-$\beta \phi_1^i(\epsilon) g(\epsilon)$ to the debt limit  at time $1$ and state $\epsilon$,
+at time $1$ and state $\epsilon$,
 then  form the Lagrangian
 
 $$
@@ -525,8 +514,7 @@ L^i & = u(c_0^i) + \beta \int u(c^i_1(\epsilon)) g(\epsilon) d \epsilon \cr
      & + \lambda_0^i [ w_0^i + \theta_0^i - \int q(\epsilon) a^i(\epsilon) d \epsilon -
           \theta^i \tilde V - c_0^i ] \cr
       & + \beta \int \lambda_1^i(\epsilon) [ w_1^i(\epsilon) + \theta^i A k^\alpha e^\epsilon
-           + a^i(\epsilon) c_1^i(\epsilon) ] g(\epsilon) d \epsilon \cr
-      & + \beta \int \phi_1^i(\epsilon)  [ - \bar a^i(\epsilon; \theta^i) + a^i(\epsilon) ]    g(\epsilon) d \epsilon
+           + a^i(\epsilon) c_1^i(\epsilon) ] g(\epsilon) d \epsilon
 \end{aligned}
 $$
 
@@ -806,8 +794,6 @@ equilibrium allocations of the complete market BCG model given a list
 of parameter values.
 
 It consists of 4 functions that do the following things:
-
-> 
 
 * `opt_k` computes the planner's optimal capital $K$
     - First, create a grid for capital.

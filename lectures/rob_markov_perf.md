@@ -71,9 +71,7 @@ to misspecifications of the state dynamics, a Markov perfect equilibrium  can be
 backward recursion  on  two sets of equations
 
 * a pair of Bellman equations, one for each agent.
-* a pair of equations that express linear decision rules for each agent as functions of that agent's  continuation value function as well as parameters of
-
-preferences and state transition matrices.
+* a pair of equations that express linear decision rules for each agent as functions of that agent's  continuation value function as well as parameters of preferences and state transition matrices.
 
 This lecture shows how  a similar equilibrium concept and similar computational  procedures
 apply when we impute concerns about robustness to both decision-makers.
@@ -630,7 +628,7 @@ def nnash_robust(A, C, B1, B2, R1, R2, Q1, Q2, S1, S2, W1, W2, M1, M2,
             break
 
     else:
-        raise ValueError(f'No convergence: Iteration limit of {maxiter} \
+        raise ValueError(f'No convergence: Iteration limit of {max_iter} \
             reached in nnash')
 
     return F1, F2, P1, P2

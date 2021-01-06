@@ -397,8 +397,6 @@ $z_c(s^t)$ into the first-order condition {eq}`AMSS_foc;a`, we  find  two
 differences from the corresponding condition for the optimal allocation
 in a Lucas-Stokey economy with state-contingent government debt.
 
-> 
-
 1. The term involving $b_t(s^{t-1})$ in the first-order condition
    {eq}`AMSS_foc;a` does not appear in the corresponding expression
    for the Lucas-Stokey economy.
