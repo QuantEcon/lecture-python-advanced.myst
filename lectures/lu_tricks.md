@@ -892,7 +892,8 @@ solving a related undiscounted problem.
 Here's the code that computes solutions to the LQ problem using the methods described
 above.
 
-```{literalinclude} _static/lecture_specific/lu_tricks/control_and_filter.py
+```{code-cell} python3
+:file: _static/lecture_specific/lu_tricks/control_and_filter.py
 ```
 
 ### Example
