@@ -171,8 +171,7 @@ This lecture describes:
   which a government faces exogenous time-varying interest rates for
   issuing one-period risk-free debt.
 
-A {doc}`sequel to this
-lecture <tax_smoothing_2>`
+A {doc}`sequel to this lecture <tax_smoothing_2>`
 describes applies Markov LQ control to settings in which a government
 issues risk-free debt of different maturities.
 
