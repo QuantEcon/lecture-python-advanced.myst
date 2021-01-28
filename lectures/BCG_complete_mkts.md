@@ -836,6 +836,7 @@ It consists of 4 functions that do the following things:
       $$
       
     - It computes consumption for each agent as
+    
       $$
       \begin{aligned}
       c_0^1 & = \eta C_0 \cr
