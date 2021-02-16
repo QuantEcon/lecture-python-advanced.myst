@@ -165,19 +165,19 @@ Here it is
 
 ```{literalinclude} _static/lecture_specific/opt_tax_recur/sequential_allocation.py
 ---
-tags: [output_scroll]
+tags: [scroll-output]
 ---
 ```
 
 ```{literalinclude} _static/lecture_specific/amss/recursive_allocation.py
 ---
-tags: [output_scroll]
+tags: [scroll-output]
 ---
 ```
 
 ```{literalinclude} _static/lecture_specific/amss/utilities.py
 ---
-tags: [output_scroll]
+tags: [scroll-output]
 ---
 ```
 
