@@ -172,7 +172,7 @@ or
 ```{math}
 :label: eq_55
 
-x_t = \sum^{t-1}_{j=0} L^{-1}_{t,t-j}\, \varepsilon_{t-j}\
+x_t = \sum^{t-1}_{j=0} L^{-1}_{t,t-j}\, \varepsilon_{t-j}
 ```
 
 where $L^{-1}_{i,j}$ denotes the $i,j$ element of $L^{-1}$.

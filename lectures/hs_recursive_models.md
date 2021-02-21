@@ -1751,16 +1751,7 @@ $\{p_t^t\}$.
 
 Apply the following version of a factorization identity:
 
-$$
-\begin{aligned}
- [\Pi &+ \beta^{1/2} L^{-1} \Lambda (I - \beta^{1/2} L^{-1}
-\Delta_h)^{-1} \Theta_h]^\prime [\Pi + \beta^{1/2} L
-\Lambda (I - \beta^{1/2} L \Delta_h)^{-1} \Theta_h]\\
-&= [\hat\Pi + \beta^{1/2} L^{-1} \hat\Lambda
-(I - \beta^{1/2} L^{-1} \Delta_h)^{-1} \Theta_h]^\prime
-[\hat\Pi + \beta^{1/2} L \hat\Lambda
-(I - \beta^{1/2} L \Delta_h)^{-1} \Theta_h]\end{aligned}
-$$
+
 
 The factorization identity guarantees that the
 $[\hat \Lambda, \hat \Pi]$ representation satisfies both
