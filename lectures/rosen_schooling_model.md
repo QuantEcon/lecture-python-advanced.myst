@@ -120,7 +120,7 @@ k+1 matrix, and $\Theta_h$ is a k+1 x 1 matrix.
 This specification sets $N_t = h_{1t-1}$, $n_t = c_t$,
 $h_{\tau+1,t-1} = n_{t-(k-\tau)}$ for $\tau = 1,...,k$.
 
-Below we set things up so that the number of years of education, k, can
+Below we set things up so that the number of years of education, $k$, can
 be varied.
 
 ### Technology
@@ -232,8 +232,8 @@ econ1 = DLE(info1, tech1, pref1)
 We create three other instances by:
 
 1. Raising $\alpha_d$ to 2
-1. Raising k to 7
-1. Raising k to 10
+1. Raising $k$ to 7
+1. Raising $k$ to 10
 
 ```{code-cell} python3
 α_d = np.array([[2]])
@@ -330,7 +330,7 @@ ax2.set_title('Response of $N_t$ to a demand shock')
 plt.show()
 ```
 
-Both panels in the above figure show that raising k lowers the effect of
+Both panels in the above figure show that raising $k$ lowers the effect of
 a positive demand shock on entry into the engineering profession.
 
 Increasing the number of periods of schooling lowers

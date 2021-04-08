@@ -42,8 +42,8 @@ tags: [hide-output]
 This lecture adds a third solution method for the
 linear-quadratic-Gaussian permanent income model with
 $\beta R = 1$, complementing the other two solution methods described in [Optimal Savings I: The Permanent Income Model](https://python-intro.quantecon.org/perm_income.html) and
-[Optimal Savings II: LQ Techniques](https://python-intro.quantecon.org/perm_income_cons.html) and this Jupyter
-notebook [http://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/permanent_income.ipynb](http://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/permanent_income.ipynb).
+[Optimal Savings II: LQ Techniques](https://python-intro.quantecon.org/perm_income_cons.html) and [this Jupyter
+notebook](http://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/permanent_income.ipynb).
 
 The additional solution method uses the **DLE** class.
 
@@ -274,8 +274,8 @@ $\begin{bmatrix} z_t \\ b_t \end{bmatrix}$.
 
 Consequently, the relevant elements of econ1.Sc are the same as in
 $-F$ occur when we apply other approaches to the same model in the lecture
-[Optimal Savings II: LQ Techniques](https://python-intro.quantecon.org/perm_income_cons.html) and this Jupyter
-notebook [http://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/permanent_income.ipynb](http://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/permanent_income.ipynb).
+[Optimal Savings II: LQ Techniques](https://python-intro.quantecon.org/perm_income_cons.html) and [this Jupyter
+notebook](http://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/permanent_income.ipynb).
 
 The plot below quickly replicates the first two figures of
 that lecture and that  notebook to confirm that the solutions are the same

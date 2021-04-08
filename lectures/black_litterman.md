@@ -197,8 +197,7 @@ sample = excess_return.rvs(T)
 w = np.linalg.solve(δ * Σ_est, μ_est)
 
 fig, ax = plt.subplots(figsize=(8, 5))
-ax.set_title('Mean-variance portfolio weights recommendation \
-              and the market portfolio')
+ax.set_title('Mean-variance portfolio weights recommendation and the market portfolio')
 ax.plot(np.arange(N)+1, w, 'o', c='k', label='$w$ (mean-variance)')
 ax.plot(np.arange(N)+1, w_m, 'o', c='r', label='$w_m$ (market portfolio)')
 ax.vlines(np.arange(N)+1, 0, w, lw=1)
@@ -219,7 +218,7 @@ Black and Litterman's responded to this situation in the following way:
 - They want to continue to allow the customer to express his or her
   risk tolerance by setting $\delta$.
 - Leaving $\Sigma$ at its maximum-likelihood value, they push
-  $\mu$ away from its maximum value in a way designed to make
+  $\mu$ away from its maximum-likelihood value in a way designed to make
   portfolio choices that are more plausible in terms of conforming to
   what most people actually do.
 
@@ -314,8 +313,7 @@ d_m = r_m / σ_m
 μ_m = (d_m * Σ_est @ w_m).reshape(N, 1)
 
 fig, ax = plt.subplots(figsize=(8, 5))
-ax.set_title(r'Difference between $\hat{\mu}$ (estimate) and \
-              $\mu_{BL}$ (market implied)')
+ax.set_title(r'Difference between $\hat{\mu}$ (estimate) and $\mu_{BL}$ (market implied)')
 ax.plot(np.arange(N)+1, μ_est, 'o', c='k', label='$\hat{\mu}$')
 ax.plot(np.arange(N)+1, μ_m, 'o', c='r', label='$\mu_{BL}$')
 ax.vlines(np.arange(N) + 1, μ_m, μ_est, lw=1)
@@ -418,8 +416,7 @@ def BL_plot(τ):
     ax[0].vlines(np.arange(N)+1, μ_m, μ_est, lw=1)
     ax[0].axhline(0, c='k', ls='--')
     ax[0].set(xlim=(0, N+1), xlabel='Assets',
-              title=r'Relationship between $\hat{\mu}$, \
-                      $\mu_{BL}$and$\tilde{\mu}$')
+              title=r'Relationship between $\hat{\mu}$, $\mu_{BL}$, and  $ \tilde{\mu}$')
     ax[0].xaxis.set_ticks(np.arange(1, N+1, 1))
     ax[0].legend(numpoints=1)
 

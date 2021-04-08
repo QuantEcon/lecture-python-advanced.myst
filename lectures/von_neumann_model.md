@@ -160,8 +160,8 @@ class Neumann(object):
         f = lambda α: ((B - α * A) @ np.ones((n, 1))).max()
         g = lambda β: (np.ones((1, m)) @ (B - β * A)).min()
 
-        UB = np.asscalar(fsolve(f, 1))  # Upper bound for α, β
-        LB = np.asscalar(fsolve(g, 2))  # Lower bound for α, β
+        UB = fsolve(f, 1).item()  # Upper bound for α, β
+        LB = fsolve(g, 2).item()  # Lower bound for α, β
 
         return LB, UB
 
@@ -220,7 +220,7 @@ class Neumann(object):
             b_eq = 1
 
             res = linprog(c, A_ub=A_iq, b_ub=b_iq, A_eq=A_eq, b_eq=b_eq,
-                          bounds=bounds, options=dict(bland=True, tol=1e-7))
+                          bounds=bounds)
 
         else:
             # Solve the dual LP (for details see the description)
@@ -238,7 +238,7 @@ class Neumann(object):
             b_eq = 1
 
             res = linprog(c, A_ub=A_iq, b_ub=b_iq, A_eq=A_eq, b_eq=b_eq,
-                          bounds=bounds, options=dict(bland=True, tol=1e-7))
+                          bounds=bounds)
 
         if res.status != 0:
             print(res.message)
@@ -567,7 +567,7 @@ The maximal value is called the *technological expansion rate* and is denoted
 by $\alpha_0$. The associated intensity vector $x_0$ is the
 *optimal intensity vector*.
 
-**Definition:** The economic expansion problem* (EEP) for
+**Definition:** The economic expansion problem (EEP) for
 $(A,B)$ is to find a semi-positive $n$-vector $p>0$
 and a number $\beta\in\mathbb{R}$ that satisfy
 
@@ -641,7 +641,7 @@ $\gamma^{*}$ (i.e., if it is *oversupplied*), then its price
 must be zero; and that if any activity provides negative profit, it must
 be unused.
 
-Therefore, the conditions staed in Theorem I ex encode all equilibrium conditions.
+Therefore, the conditions stated in Theorem I ex encode all equilibrium conditions.
 
 So  Theorem I essentially states that under Assumptions I and II there
 always exists an equilibrium $\left(\gamma^{*}, x_0, p_0\right)$
@@ -757,11 +757,13 @@ V(-A) < 0\quad\quad \text{and}\quad\quad V(B)>0
 $$
 
 ```{note}
-*Proof (Sketch)*: * $\Rightarrow$ $V(B)>0$ implies
+*Proof (Sketch)*:
+* $\Rightarrow$ $V(B)>0$ implies
 $x_0^T B \gg \mathbf{0}$, where $x_0$ is a maximizing
 vector. Since $B$ is non-negative, this requires that each
 column of $B$ has at least one positive entry, which is
-Assumption I. * $\Leftarrow$ From Assumption I and the fact
+Assumption I.
+* $\Leftarrow$ From Assumption I and the fact
 that $p>\mathbf{0}$, it follows that $Bp > \mathbf{0}$.
 This implies that the maximizing player can always choose $x$
 so that $x^TBp>0$ so that it must be the case
