@@ -74,6 +74,9 @@ import matplotlib.pyplot as plt
 
 ## A Competitive Equilibrium with Distorting Taxes
 
+At time $t \geq 0$ a random variable $s_t$ belongs to a time-invariant
+set ${\cal S} = [1, 2, \ldots, S]$.
+
 For $t \geq 0$, a history $s^t = [s_t, s_{t-1}, \ldots, s_0]$ of an
 exogenous state $s_t$ has joint probability density $\pi_t(s^t)$.
 
@@ -271,6 +274,8 @@ q_t^0(s^t) = \beta^{t} \pi_{t}(s^{t})
                             {u_c(s^{t})  \over u_c(s^0)}
 ```
 
+(The stochastic process $\{q_t^0(s^t)\}$ is an instance of what finance economists call a *stochastic discount factor* process.)
+
 Using the first-order conditions {eq}`LSA_taxr` and {eq}`LS101` to eliminate
 taxes and prices from {eq}`TS_bcPV2`, we derive the *implementability condition*
 
@@ -325,7 +330,7 @@ multipliers on the feasible conditions {eq}`TSs_techr_opt_tax`.
 
 Given an initial government debt $b_0$,  we want to maximize $J$
 with respect to $\{c_t(s^t), n_t(s^t); \forall s^t \}_{t\geq0}$   and to minimize with respect
-to $\{\theta(s^t); \forall s^t \}_{t\geq0}$.
+to $\Phi$ and with respect to $\{\theta(s^t); \forall s^t \}_{t\geq0}$.
 
 The first-order conditions for the Ramsey problem for periods $t \geq 1$ and $t=0$, respectively, are
 
@@ -383,7 +388,7 @@ For convenience, we suppress the time subscript and the index $s^t$ and obtain
 where we have imposed conditions {eq}`feas1_opt_tax` and {eq}`TSs_techr_opt_tax`.
 
 Equation {eq}`TS_barg` is one equation that can be solved to express the
-unknown $c$ as a function of the  exogenous variable $g$.
+unknown $c$ as a function of the  exogenous variable $g$ and the Lagrange multiplier $\Phi$.
 
 We also know that  time $t=0$ quantities $c_0$ and $n_0$ satisfy
 
@@ -400,13 +405,13 @@ We also know that  time $t=0$ quantities $c_0$ and $n_0$ satisfy
 ```
 
 Notice that a counterpart to $b_0$ does *not* appear
-in {eq}`TS_barg`, so $c$ does not depend on it for $t \geq 1$.
+in {eq}`TS_barg`, so $c$ does not *directly* depend on it for $t \geq 1$.
 
 But things are different for time $t=0$.
 
 An analogous argument for the $t=0$ equations {eq}`eqFONCRamsey0` leads
 to one equation that can be solved for $c_0$ as a function of the
-pair $(g(s_0), b_0)$.
+pair $(g(s_0), b_0)$ and the Lagrange multiplier $\Phi$.
 
 These outcomes mean that the following statement would be  true even when
 government purchases are history-dependent functions $g_t(s^t)$ of the
@@ -446,9 +451,12 @@ influences $c_0$ and $n_0$, there appears no analogous
 variable $b_t$ that influences $c_t$ and $n_t$ for
 $t \geq 1$.
 
-The absence of $b_t$ as a determinant of the  Ramsey allocation for
+The absence of $b_t$ as a direct determinant of the  Ramsey allocation for
 $t \geq 1$ and its presence for $t=0$ is a symptom of the
 *time-inconsistency* of a Ramsey plan.
+
+Of course, $b_0$ affects the Ramsey allocation for $t \geq 1$ *indirectly* through
+its effect on $\Phi$.
 
 $\Phi$ has to take a value that assures that
 the household and the government’s budget constraints are both
@@ -471,7 +479,7 @@ $g(s)$ of $s$.
 
 We maintain these assumptions throughout the remainder of this lecture.
 
-### Determining the Multiplier
+### Determining the Lagrange Multiplier
 
 We complete the Ramsey plan by computing the Lagrange multiplier $\Phi$
 on the implementability constraint {eq}`TSs_cham1`.
@@ -518,7 +526,7 @@ Hence the equation shares much of the structure of a simple asset pricing equati
 $x_t$ being analogous to the price of the asset at time $t$.
 
 We learned earlier that for a Ramsey allocation
-$c_t(s^t), n_t(s^t)$ and $b_t(s_t|s^{t-1})$, and therefore
+$c_t(s^t), n_t(s^t)$, and $b_t(s_t|s^{t-1})$, and therefore
 also $x_t(s^t)$, are each functions of $s_t$ only,  being
 independent of the history $s^{t-1}$ for $t \geq 1$.
 
@@ -535,7 +543,7 @@ u_c(s)
 where $s'$ denotes a next period value of $s$ and
 $x'(s')$ denotes a next period value of $x$.
 
-Equation {eq}`LSA_budget2` is easy to solve for $x(s)$ for
+Given $n(s)$ for $s = $, equation {eq}`LSA_budget2` is easy to solve for $x(s)$ for
 $s = 1, \ldots , S$.
 
 If we let $\vec n, \vec g, \vec x$
@@ -600,7 +608,7 @@ Here is a computational algorithm:
 
 In summary, when $g_t$ is a time-invariant function of a Markov state
 $s_t$, a Ramsey plan can be constructed by solving $3S +3$
-equations in $S$ components each of $\vec c$, $\vec n$, and
+equations for $S$ components each of $\vec c$, $\vec n$, and
 $\vec x$ together with $n_0, c_0$, and $\Phi$.
 
 ### Time Inconsistency
@@ -630,10 +638,10 @@ We shall discuss this more below.
 
 ### Specification with CRRA Utility
 
-In our calculations below and in a {doc}`subsequent lecture <amss>` based on an extension of the Lucas-Stokey model
+In our calculations below and in a {doc}`subsequent lecture <amss>` based on an *extension* of the Lucas-Stokey model
 by  Aiyagari, Marcet, Sargent, and Seppälä (2002) {cite}`aiyagari2002optimal`, we shall modify the one-period utility function assumed above.
 
-(We adopted the preceding utility specification because it was the one used in  the original {cite}`LucasStokey1983` paper)
+(We adopted the preceding utility specification because it was the one used in  the original Lucas-Stokey paper {cite}`LucasStokey1983`. We shall soon  revert to that specification in a subsequent section.)
 
 We will  modify their specification by instead assuming that the  representative agent has  utility function
 
@@ -694,11 +702,10 @@ $b_0$:
 ```{math}
 :label: opt_tax_eqn_10
 
-b_0 + g_0 = \tau_0 (c_0 + g_0) + \frac{\bar b}{R_0}
+b_0 + g_0 = \tau_0 (c_0 + g_0) + \beta  \sum_{s=1}^S \Pi(s | s_0) \frac{u_c(s)}{u_{c,0}} b_1(s)
 ```
 
-where $R_0$ is the gross interest rate for the Markov state $s_0$ that is assumed to prevail at time $t =0$
-and $\tau_0$ is the time $t=0$ tax rate.
+where $\tau_0$ is the time $t=0$ tax rate.
 
 In equation {eq}`opt_tax_eqn_10`, it is understood that
 
@@ -706,8 +713,7 @@ In equation {eq}`opt_tax_eqn_10`, it is understood that
 :nowrap:
 
 \begin{aligned}
-\tau_0 = 1 - \frac{u_{l,0}}{u_{c,0}} \\
-R_0 =  \beta  \sum_{s=1}^S \Pi(s | s_0) \frac{u_c(s)}{u_{c,0}}
+\tau_0 = 1 - \frac{u_{l,0}}{u_{c,0}}
 \end{aligned}
 ```
 
@@ -720,11 +726,14 @@ The above steps are implemented in a class called SequentialAllocation
 
 ## Recursive Formulation of the Ramsey Problem
 
-$x_t(s^t) = u_c(s^t) b_t(s_t | s^{t-1})$ in equation {eq}`LSA_budget`
+We now temporarily revert to Lucas and Stokey's specification.
+
+We start by noting that $x_t(s^t) = u_c(s^t) b_t(s_t | s^{t-1})$ in equation {eq}`LSA_budget`
 appears to be a purely “forward-looking” variable.
 
-But $x_t(s^t)$ is a also a  natural candidate for a state variable in
-a recursive formulation of the Ramsey problem.
+But $x_t(s^t)$ is  a  natural candidate for a state variable in
+a recursive formulation of the Ramsey problem, one that records history-dependence and so is
+``backward-looking''.
 
 ### Intertemporal Delegation
 
@@ -732,8 +741,8 @@ To express a Ramsey plan recursively, we imagine that a time $0$
 Ramsey planner is followed by a sequence of continuation Ramsey planners
 at times $t = 1, 2, \ldots$.
 
-A “continuation Ramsey planner” at times $t \geq 1$ has a
-different objective function and faces different constraints and state variabls than does the
+A “continuation Ramsey planner” at time $t \geq 1$ has a
+different objective function and faces different constraints and state variables than does the
 Ramsey planner at time $t =0$.
 
 A key step in representing a Ramsey plan recursively is
@@ -761,12 +770,12 @@ Furthermore, the Ramsey planner cares about $(c_0(s_0), \ell_0(s_0))$, while
 continuation Ramsey planners do not.
 
 The time $0$ Ramsey planner
-hands a state-contingent function that make $x_1$ a function of $s_1$ to a time $1$
+hands a state-contingent function that make $x_1$ a function of $s_1$ to a time $1$, state $s_1$
 continuation Ramsey planner.
 
 These lines of delegated authorities and
 responsibilities across time express the continuation Ramsey planners’
-obligations to implement their parts of the original Ramsey plan,
+obligations to implement their parts of an original Ramsey plan that had been
 designed once-and-for-all at time $0$.
 
 ### Two Bellman Equations
@@ -778,7 +787,7 @@ $(x_t, s_t)$.
 * Let $V(x, s)$ be the value of a **continuation Ramsey plan** at $x_t = x, s_t =s$ for $t \geq 1$.
 * Let $W(b, s)$ be the value of a **Ramsey plan** at time $0$ at $b_0=b$ and $s_0 = s$.
 
-We work backward by presenting a Bellman equation for
+We work backward by preparing a Bellman equation for
 $V(x,s)$ first, then a Bellman equation for $W(b,s)$.
 
 ### The Continuation Ramsey Problem
@@ -794,7 +803,7 @@ V(x, s) = \max_{n, \{x'(s')\}} u(n-g(s), 1-n) + \beta \sum_{s'\in S} \Pi(s'| s) 
 
 where maximization over $n$ and the $S$ elements of
 $x'(s')$ is subject to the single implementability constraint for
-$t \geq 1$.
+$t \geq 1$:
 
 ```{math}
 :label: LSA_Bellman1cons
@@ -822,7 +831,7 @@ are $S+1$ time-invariant policy functions
 
 ### The Ramsey Problem
 
-The Bellman equation for the time $0$ Ramsey planner is
+The Bellman equation of  the time $0$ Ramsey planner is
 
 ```{math}
 :label: LSA_Bellman2
@@ -864,7 +873,7 @@ continuation Ramsey planners.
 The value function $V(x_t, s_t)$ of the time $t$
 continuation Ramsey planner equals
 $E_t \sum_{\tau = t}^\infty \beta^{\tau - t} u(c_t, l_t)$, where
-the consumption and leisure processes are evaluated along the original
+consumption and leisure processes are evaluated along the original
 time $0$ Ramsey plan.
 
 ### First-Order Conditions
@@ -872,7 +881,7 @@ time $0$ Ramsey plan.
 Attach a Lagrange multiplier $\Phi_1(x,s)$ to constraint {eq}`LSA_Bellman1cons` and a
 Lagrange multiplier $\Phi_0$ to constraint {eq}`Bellman2cons`.
 
-Time $t \geq 1$: the first-order conditions for the time $t \geq 1$ constrained
+Time $t \geq 1$: First-order conditions for the time $t \geq 1$ constrained
 maximization problem on the right side of the continuation Ramsey
 planner’s Bellman equation {eq}`LSA_Bellman1` are
 
@@ -946,7 +955,7 @@ formulated the Ramsey plan in the space of sequences.
 
 ### State Variable Degeneracy
 
-Equations {eq}`LSAx0` and {eq}`LSAn0` imply that $\Phi_0 = \Phi_1$
+Equations {eq}`LSAenv` and {eq}`LSAx0` imply that $\Phi_0 = \Phi_1$
 and that
 
 ```{math}
@@ -1017,6 +1026,8 @@ The above steps are implemented in a class called `RecursiveAllocation`.
 ```
 
 ## Examples
+
+We return to the setup with CRRA preferences described above.
 
 ### Anticipated One-Period War
 
