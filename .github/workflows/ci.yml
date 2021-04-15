@@ -1,4 +1,4 @@
-name: Build Project [using jupyter-book]
+name: Build HTML [using jupyter-book]
 on: [push]
 jobs:
   tests:
@@ -14,17 +14,29 @@ jobs:
           miniconda-version: 'latest'
           python-version: 3.8
           environment-file: environment.yml
-          activate-environment: lecture-python-advanced.myst
+          activate-environment: quantecon
       - name: Display Conda Environment Versions
         shell: bash -l {0}
         run: conda list
       - name: Display Pip Versions
         shell: bash -l {0}
         run: pip list
+      # - name: Download "build" folder (cache)
+      #   uses: dawidd6/action-download-artifact@v2
+      #   with:
+      #     workflow: publish.yml
+      #     branch: main
+      #     name: build-cache
+      #     path: _build
       - name: Build HTML
         shell: bash -l {0}
         run: |
           jb build lectures --path-output ./
+      - name: Save Build as Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: _build
+          path: _build
       - name: Preview Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.1
         with:

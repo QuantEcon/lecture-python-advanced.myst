@@ -1,0 +1,74 @@
+name: Build & Publish to GH-PAGES
+on:
+  push:
+    tags:
+      - 'publish*'
+jobs:
+  publish:
+    if: github.event_name == 'push' && startsWith(github.event.ref, 'refs/tags')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Anaconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          auto-activate-base: true
+          miniconda-version: 'latest'
+          python-version: 3.8
+          environment-file: environment.yml
+          activate-environment: quantecon
+      - name: Display Conda Environment Versions
+        shell: bash -l {0}
+        run: conda list
+      - name: Display Pip Versions
+        shell: bash -l {0}
+        run: pip list
+      - name: Build HTML
+        shell: bash -l {0}
+        run: |
+          jb build lectures --path-output ./
+      - name: Build Download Notebooks (sphinx-tojupyter)
+        shell: bash -l {0}
+        run: |
+          jb build lectures --path-output ./ --builder=custom --custom-builder=jupyter
+          zip -r download-notebooks.zip _build/jupyter
+      - uses: actions/upload-artifact@v2
+        with:
+          name: download-notebooks
+          path: download-notebooks.zip
+      - name: Copy Download Notebooks for GH-PAGES
+        shell: bash -l {0}
+        run: |
+          mkdir _build/html/_notebooks
+          cp _build/jupyter/*.ipynb _build/html/_notebooks
+      - name: Deploy website to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: _build/html/
+          cname: python-advanced.quantecon.org
+      - name: Upload "_build" folder (cache)
+        uses: actions/upload-artifact@v2
+        with:
+          name: build-cache
+          path: _build
+      - name: Prepare lecture-python-advanced.notebooks sync
+        shell: bash -l {0}
+        run: |
+          mkdir -p _build/lecture-python-advanced.notebooks
+          cp -a _notebook_repo/. _build/lecture-python-advanced.notebooks
+          cp _build/jupyter/*.ipynb _build/lecture-python-advanced.notebooks
+          ls -a _build/lecture-python-advanced.notebooks
+      - name: Commit latest notebooks to lecture-python-advanced.notebooks
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.QUANTECON_SERVICES_PAT }}
+        with:
+          source-directory: '_build/lecture-python-advanced.notebooks/'
+          destination-repository-username: 'QuantEcon'
+          destination-repository-name: 'lecture-python-advanced.notebooks'
+          commit-message: 'auto publishing updates to notebooks'
+          destination-github-username: 'quantecon-services'
+          user-email: services@quantecon.org

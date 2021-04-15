@@ -24,21 +24,6 @@ kernelspec:
 :depth: 2
 ```
 
-**Software Requirement:**
-
-This lecture requires the use of some older software versions to run. If
-you would like to execute this lecture please download the following
-<a href=_static/downloads/amss_environment.yml download>amss_environment.yml</a>
-file. This specifies the software required and an environment can be
-created using [conda](https://docs.conda.io/en/latest/):
-
-Open a terminal:
-
-```{code-block} bash
-conda env create --file amss_environment.yml
-conda activate amss
-```
-
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 ```{code-cell} ipython

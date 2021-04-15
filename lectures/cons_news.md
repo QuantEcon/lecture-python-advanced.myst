@@ -123,7 +123,7 @@ y_{t+1} - y_t =  a_{t+1} - \beta  a_t \quad
 ```
 
 where $\{a_t\}$ is another i.i.d. normally distributed scalar
-process, with means of zero and now variances $\sigma_a^2$.
+process, with means of zero and now variances $\sigma_a^2 > \sigma_\epsilon^2$.
 
 The two i.i.d. shock variances are related by
 
@@ -175,7 +175,7 @@ Using calculations in the {doc}`quantecon lecture <classical_filtering>`, where
 $z \in C$ is a complex variable, the covariance generating
 function $g (z) =
 \sum_{j=-\infty}^\infty g_j z^j$
-of the $\{(y_t - y_{t-1})\}$ process equals
+of the $\{y_t - y_{t-1}\}$ process equals
 
 $$
 g(z) = \sigma_\epsilon^2  h(z) h(z^{-1}) = \beta^{-2} \sigma_\epsilon^2 > \sigma_\epsilon^2 ,
@@ -420,9 +420,11 @@ exactly the same histories of nonfinancial income.
 
 The consumer with information associated with representation {eq}`eqn_1`
 responds to each shock $\epsilon_{t+1}$ by leaving his consumption
-unaltered and **saving** all of $a_{t+1}$ in anticipation of the
-permanently increased taxes that he will bear to pay for the addition
-$a_{t+1}$ to his time $t+1$ nonfinancial income.
+unaltered and **saving** all of $\epsilon_{t+1}$ in anticipation of the
+permanently increased taxes that he will bear in order to service the  permanent interest payments on the risk-free
+bonds  that the government has
+presumably issued to pay for the one-time  addition
+$\epsilon_{t+1}$ to his time $t+1$ nonfinancial income.
 
 The consumer with information associated with representation {eq}`eqn_2`
 responds to a shock $a_{t+1}$ by increasing his consumption by

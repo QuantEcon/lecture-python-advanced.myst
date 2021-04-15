@@ -133,7 +133,7 @@ While the converse is not true, a kind of partial converse holds, as we'll {ref}
 
 What vector within a linear subspace of $\mathbb R^n$  best approximates a given vector in $\mathbb R^n$?
 
-The next theorem provides answer to this question.
+The next theorem answers this question.
 
 **Theorem** (OPT) Given $y \in \mathbb R^n$ and linear subspace $S \subset \mathbb R^n$,
 there exists a unique solution to the minimization problem
@@ -287,7 +287,7 @@ Combining this result with {eq}`pob` verifies the claim.
 
 ### Projection onto an Orthonormal Basis
 
-When the subspace onto which are projecting is orthonormal, computing the projection simplifies:
+When a subspace onto which we project is orthonormal, computing the projection simplifies:
 
 **Theorem** If $\{u_1, \ldots, u_k\}$ is an orthonormal basis for $S$, then
 
@@ -305,7 +305,7 @@ Clearly, $P y \in S$.
 
 We claim that $y - P y \perp S$ also holds.
 
-It sufficies to show that $y - P y \perp$ any basis vector $u_i$ (why?).
+It sufficies to show that $y - P y \perp$ any basis vector $u_i$.
 
 This is true because
 
@@ -315,7 +315,9 @@ $$
 \langle u_i, u_j  \rangle = 0
 $$
 
-## Projection Using Matrix Algebra
+(Why is this sufficient to establish the claim that $y - P y \perp S$?)
+
+## Projection Via Matrix Algebra
 
 Let $S$ be a linear subspace of $\mathbb R^n$ and  let $y \in \mathbb R^n$.
 
@@ -349,7 +351,7 @@ a := (X' X)^{-1} X' y
 $$
 
 An expression of the form $X a$ is precisely a linear combination of the
-columns of $X$, and hence an element of $S$.
+columns of $X$ and hence an element of $S$.
 
 Claim 2 is equivalent to the statement
 
@@ -359,7 +361,7 @@ y - X (X' X)^{-1} X' y \, \perp\,  X b
 b \in \mathbb R^K
 $$
 
-This is true: If $b \in \mathbb R^K$, then
+To verify this, notice that if $b \in \mathbb R^K$, then
 
 $$
 (X b)' [y - X (X' X)^{-1} X'
@@ -413,9 +415,9 @@ basis.
 
 ### Application: Overdetermined Systems of Equations
 
-Let $y \in \mathbb R^n$ and let $X$ is $n \times k$ with linearly independent columns.
+Let $y \in \mathbb R^n$ and let $X$ be $n \times k$ with linearly independent columns.
 
-Given $X$ and $y$, we seek $b \in \mathbb R^k$ satisfying the system of linear equations $X b = y$.
+Given $X$ and $y$, we seek $b \in \mathbb R^k$ that  satisfies the system of linear equations $X b = y$.
 
 If $n > k$ (more equations than unknowns), then $b$ is said to be **overdetermined**.
 
@@ -426,9 +428,9 @@ The best approach here is to
 * Accept that an exact solution may not exist.
 * Look instead for an approximate solution.
 
-By approximate solution, we mean a $b \in \mathbb R^k$ such that $X b$ is as close to $y$ as possible.
+By approximate solution, we mean a $b \in \mathbb R^k$ such that $X b$ is  close to $y$.
 
-The next theorem shows that the solution is well defined and unique.
+The next theorem shows that a best approximation is well defined and unique.
 
 The proof uses the OPT.
 
@@ -492,7 +494,7 @@ The set $\mathcal{F}$ is sometimes called the hypothesis space.
 
 The theory of statistical learning tells us that to prevent overfitting we should take the set $\mathcal{F}$ to be relatively simple.
 
-If we let $\mathcal{F}$ be the class of linear functions $1/N$, the problem is
+If we let $\mathcal{F}$ be the class of linear functions, the problem is
 
 $$
 \min_{b \in \mathbb R^K} \;
@@ -525,7 +527,7 @@ x_n :=
     x_{nK}
 \end{array}
 \right)
-= \text{ :math:`n`-th obs on all regressors}
+= n\text{-th obs on all regressors}
 $$
 
 and
@@ -663,7 +665,7 @@ Some rearranging gives $X = Q R$.
 
 ### Linear Regression via QR Decomposition
 
-For matrices $X$ and $y$ that overdetermine $beta$ in the linear
+For matrices $X$ and $y$ that overdetermine $\beta$ in the linear
 equation system $y = X \beta$, we found  the least squares approximator $\hat \beta = (X' X)^{-1} X' y$.
 
 Using the QR decomposition $X = Q R$ gives
@@ -726,7 +728,7 @@ $$
 ### Exercise 1
 
 If $x \in S$ and $x \in S^\perp$, then we have in particular
-that $\langle x, x \rangle = 0$, ut then $x = 0$.
+that $\langle x, x \rangle = 0$, but then $x = 0$.
 
 ### Exercise 2
 

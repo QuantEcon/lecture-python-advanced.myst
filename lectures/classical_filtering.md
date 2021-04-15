@@ -172,7 +172,7 @@ or
 ```{math}
 :label: eq_55
 
-x_t = \sum^{t-1}_{j=0} L^{-1}_{t,t-j}\, \varepsilon_{t-j}\
+x_t = \sum^{t-1}_{j=0} L^{-1}_{t,t-j}\, \varepsilon_{t-j}
 ```
 
 where $L^{-1}_{i,j}$ denotes the $i,j$ element of $L^{-1}$.
@@ -223,7 +223,7 @@ $$
 
 ### Implementation
 
-Here's the code that computes solutions to LQ control and filtering problems using the methods described here and in :doc: lu_tricks.
+Here's the code that computes solutions to LQ control and filtering problems using the methods described here and in {doc}`lu_tricks <lu_tricks>`.
 
 ```{code-cell} python3
 :file: _static/lecture_specific/lu_tricks/control_and_filter.py
@@ -256,7 +256,7 @@ h = 0.0
 example = LQFilter(d, h, y_m, r=d)
 ```
 
-The Wold representation is computed by example.coefficients_of_c().
+The Wold representation is computed by `example.coeffs_of_c()`.
 
 Let's check that it "flips roots" as required
 

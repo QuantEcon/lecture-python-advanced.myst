@@ -40,7 +40,7 @@ tags: [hide-output]
 
 This lecture describes two types of consumption-smoothing models.
 
-* one is in the **complete markets** tradition of Kenneth Arrow <https://en.wikipedia.org/wiki/Kenneth_Arrow>
+* one is in the **complete markets** tradition of [Kenneth Arrow](https://en.wikipedia.org/wiki/Kenneth_Arrow)
 * the other is in the **incomplete markets** tradition  of Hall {cite}`Hall1978`
 
 *Complete markets* allow a consumer  to buy or sell claims contingent on all possible states of the world.
@@ -192,10 +192,16 @@ $$
 Please note that
 
 $$
-E_t b_{t+1} = \int \phi_{t+1}(x_{t+1} | A x_t, C C') b_{t+1}(x_{t+1}) d x_{t+1}
+\beta E_t b_{t+1} = \beta \int \phi_{t+1}(x_{t+1} | A x_t, C C') b_{t+1}(x_{t+1}) d x_{t+1}
 $$
 
-which verifies that $E_t b_{t+1}$ is the **value** of time $t+1$ state-contingent claims on time $t+1$ consumption issued by the consumer at time $t$
+or
+
+$$
+\beta E_t b_{t+1} = \int   q_{t+1}(x_{t+1}| x_t) b_{t+1}(x_{t+1})  d x_{t+1}
+$$
+
+which verifies that $\beta E_t b_{t+1}$ is the **value** of time $t+1$ state-contingent claims on time $t+1$ consumption issued by the consumer at time $t$
 
 We can solve the time $t$ budget constraint forward to obtain
 
@@ -220,7 +226,7 @@ $$
 
 But in the complete markets version, it is tractable to assume a more general utility function that satisfies $u' > 0$ and $u'' < 0$.
 
-The first-order conditions for the consumer's problem with complete
+First-order conditions for the consumer's problem with complete
 markets and our assumption about Arrow securities prices are
 
 $$
@@ -615,7 +621,7 @@ consumption $\bar c$ and indicated how that level depends on the underlying spec
 
 ### Code
 
-Here's some code that, among other things, contains a function called consumption_complete().
+Here's some code that, among other things, contains a function called `consumption_complete()`.
 
 This function computes $\{ b(i) \}_{i=1}^{N}, \bar c$ as outcomes given a set of parameters for the general case with $N$ Markov states
 under the assumption of complete markets
@@ -896,7 +902,7 @@ markets model
 
 ### The Incomplete Markets Model
 
-The code above also contains a function called consumption_incomplete() that uses {eq}`cs_12` and {eq}`cs_13` to
+The code above also contains a function called `consumption_incomplete()` that uses {eq}`cs_12` and {eq}`cs_13` to
 
 * simulate paths of $y_t, c_t, b_{t+1}$
 * plot these against values of $\bar c, b(s_1), b(s_2)$ found in a corresponding  complete markets economy

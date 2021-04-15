@@ -79,8 +79,8 @@ import numpy as np
 import quantecon as qe
 import random
 
-from numba import jit, jitclass, int64, float64
-
+from numba import jit, int64, float64
+from numba.experimental import jitclass
 %matplotlib inline
 ```
 
