@@ -543,7 +543,7 @@ u_c(s)
 where $s'$ denotes a next period value of $s$ and
 $x'(s')$ denotes a next period value of $x$.
 
-Given $n(s)$ for $s = $, equation {eq}`LSA_budget2` is easy to solve for $x(s)$ for
+Given $n(s)$ for $s = 1, \ldots , S$, equation {eq}`LSA_budget2` is easy to solve for $x(s)$ for
 $s = 1, \ldots , S$.
 
 If we let $\vec n, \vec g, \vec x$
@@ -872,7 +872,7 @@ continuation Ramsey planners.
 
 The value function $V(x_t, s_t)$ of the time $t$
 continuation Ramsey planner equals
-$E_t \sum_{\tau = t}^\infty \beta^{\tau - t} u(c_t, l_t)$, where
+$E_t \sum_{\tau = t}^\infty \beta^{\tau - t} u(c_\tau, l_\tau)$, where
 consumption and leisure processes are evaluated along the original
 time $0$ Ramsey plan.
 
