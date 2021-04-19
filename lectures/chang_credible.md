@@ -35,16 +35,16 @@ tags: [hide-output]
 
 ## Overview
 
-Some of the material in this lecture and {doc}`competitive equilibria in the Chang model <chang_ramsey>`
+Some of the material in this lecture and {doc}`Credible Government Policies in a Model of Chang <chang_ramsey>`
 can be viewed as more sophisticated and complete treatments of the topics discussed in
-{doc}`Ramsey plans, time inconsistency, sustainable plans <calvo>`.
+{doc}`Credible Government Policies in a Model of Chang <calvo>`.
 
 This lecture assumes almost  the same economic environment analyzed in
-{doc}`competitive equilibria in the Chang model <chang_ramsey>`.
+{doc}`Credible Government Policies in a Model of Chang <chang_ramsey>`.
 
 The only change  --  and it is a substantial one -- is the timing protocol for making government decisions.
 
-In  {doc}`competitive equilibria in the Chang model <chang_ramsey>`, a *Ramsey planner*
+In  {doc}`Credible Government Policies in a Model of Chang <chang_ramsey>`, a *Ramsey planner*
 chose a comprehensive government policy once-and-for-all at time $0$.
 
 Now in this lecture, there is no time $0$ Ramsey planner.
@@ -58,7 +58,7 @@ We use the notion of a *sustainable plan* proposed in {cite}`chari1990sustainabl
 also referred to as a *credible public policy* in {cite}`stokey1989reputation`.
 
 Technically, this lecture starts where lecture
-{doc}`competitive equilibria in the Chang model <chang_ramsey>` on Ramsey plans
+{doc}`Credible Government Policies in a Model of Chang <chang_ramsey>` on Ramsey plans
 within the Chang {cite}`chang1998credible` model stopped.
 
 That lecture presents recursive representations of  *competitive equilibria* and a *Ramsey plan* for a
@@ -74,7 +74,7 @@ Chang's set-to-set  operator $\tilde D(Z)$ to
 compute a set of values associated with sustainable plans.
 
 Chang's operator $\tilde D(Z)$ is closely connected with the operator
-$D(Z)$ introduced in lecture {doc}`competitive equilibria in the Chang model <chang_ramsey>`.
+$D(Z)$ introduced in lecture {doc}`Credible Government Policies in a Model of Chang <chang_ramsey>`.
 
 * $\tilde D(Z)$ incorporates all of the restrictions imposed in
   constructing the operator $D(Z)$, but $\ldots$.
@@ -94,7 +94,7 @@ import matplotlib.pyplot as plt
 
 ## The Setting
 
-We begin by reviewing the set up deployed in  {doc}`competitive equilibria in the Chang model <chang_ramsey>`.
+We begin by reviewing the set up deployed in  {doc}`Credible Government Policies in a Model of Chang <chang_ramsey>`.
 
 Chang's  model, adopted from Calvo, is designed to focus on the intertemporal trade-offs between
 the welfare benefits of deflation and the welfare costs associated with
@@ -329,7 +329,7 @@ balances $\theta_{t+1}$ functions in this way is an important step
 in constructing a class of competitive equilibria that have a recursive representation.
 
 A closely related observation pervaded the analysis of Stackelberg plans in
-{doc}`dynamic Stackelberg problems <dyn_stack>` and {doc}`the Calvo model <calvo>`.
+{doc}`Credible Government Policies in a Model of Chang <dyn_stack>` and {doc}`Credible Government Policies in a Model of Chang <calvo>`.
 
 ### Competitive Equilibrium
 
@@ -560,7 +560,7 @@ $$
 $$
 
 This operator adds the key incentive constraint to the conditions that
-had defined the earlier $D(Z)$ operator defined in  {doc}`competitive equilibria in the Chang model <chang_ramsey>`.
+had defined the earlier $D(Z)$ operator defined in  {doc}`Credible Government Policies in a Model of Chang <chang_ramsey>`.
 
 Condition {eq}`eqn_chang14` requires that the plan deter the government from wanting to
 take one-shot deviations when candidate continuation values are drawn
@@ -683,7 +683,7 @@ w \geq BR(Z) \Bigr\}
 $$
 
 Aside from the final incentive constraint, this is the same as the
-operator in  {doc}`competitive equilibria in the Chang model <chang_ramsey>`.
+operator in  {doc}`Credible Government Policies in a Model of Chang <chang_ramsey>`.
 
 Consequently, to implement this operator we just need to add one step to
 our *outer hyperplane approximation algorithm* :
@@ -802,7 +802,7 @@ are then variables to be specified for an instance of the Chang class.
 Below we use the class to solve the model and plot the resulting
 equilibrium set, once with $\beta = 0.3$ and once with
 $\beta = 0.8$. We also plot the (larger) competitive equilibrium
-sets, which we described in  {doc}`competitive equilibria in the Chang model <chang_ramsey>`.
+sets, which we described in  {doc}`Credible Government Policies in a Model of Chang <chang_ramsey>`.
 
 (We have set the number of subgradients to 10 in order to speed up the
 code for now. We can increase accuracy by increasing the number of subgradients)

@@ -91,7 +91,7 @@ import scipy.linalg as la
 
 This lecture can be viewed as a followup to [Optimal Savings II: LQ Techniques](https://python-intro.quantecon.org/perm_income_cons.html)
 
-This lecture is also a prologomenon to a lecture on tax-smoothing {doc}`smoothing_tax <smoothing_tax>`
+This lecture is also a prologomenon to a lecture on tax-smoothing {doc}`Consumption Smoothing with Complete and Incomplete Markets <smoothing_tax>`
 
 ## Background
 
@@ -951,6 +951,6 @@ income $y_t$, notice that
 
 ### A sequel
 
-In {doc}`tax smoothing with complete and incomplete markets <smoothing_tax>`, we reinterpret the mathematics and Python code presented in this lecture in order
+In {doc}`Consumption Smoothing with Complete and Incomplete Markets <smoothing_tax>`, we reinterpret the mathematics and Python code presented in this lecture in order
 to construct tax-smoothing models in the incomplete markets tradition of Barro {cite}`Barro1979` as well as in the complete markets tradition of Lucas and Stokey {cite}`LucasStokey1983`.
 

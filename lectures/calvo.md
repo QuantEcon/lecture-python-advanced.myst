@@ -67,7 +67,7 @@ well as from chapter 19 of {cite}`Ljungqvist2012`.
 
 In addition, we'll use ideas from linear-quadratic dynamic programming
 described in  [Linear Quadratic Control](https://python-intro.quantecon.org/lqcontrol.html) as applied to Ramsey problems
-in {doc}`Stackelberg problems <dyn_stack>`.
+in {doc}`Ramsey Plans, Time Inconsistency, Sustainable Plans <dyn_stack>`.
 
 In particular, we have specified the model in a way that allows us to use
 linear-quadratic dynamic programming to compute an optimal government
@@ -193,7 +193,7 @@ x_{t+1} = A x_t + B \mu_t
 We write the model in the state-space form {eq}`eq_old4` even though $\theta_0$ is to be determined and so is not an initial condition
 as it ordinarily would be in the state-space model described in [Linear Quadratic Control](https://python-intro.quantecon.org/lqcontrol.html).
 
-We write the model in the form {eq}`eq_old4` because we want to apply an approach described in  {doc}`Stackelberg problems <dyn_stack>`.
+We write the model in the form {eq}`eq_old4` because we want to apply an approach described in  {doc}`Ramsey Plans, Time Inconsistency, Sustainable Plans <dyn_stack>`.
 
 Assume that a representative household's utility of real balances at
 time $t$ is:
@@ -351,7 +351,7 @@ First, we consider a Ramsey planner that  chooses
 $\{\mu_t, \theta_t\}_{t=0}^\infty$ to maximize {eq}`eq_old7`
 subject to the law of motion {eq}`eq_old4`.
 
-We can split this problem into two stages, as in {doc}`Stackelberg problems <dyn_stack>` and  {cite}`Ljungqvist2012` Chapter 19.
+We can split this problem into two stages, as in {doc}`Ramsey Plans, Time Inconsistency, Sustainable Plans <dyn_stack>` and  {cite}`Ljungqvist2012` Chapter 19.
 
 In the first stage, we take the initial inflation rate $\theta_0$ as given,
 and then solve the resulting LQ dynamic programming problem.
@@ -387,7 +387,7 @@ $$
 x' = Ax + B\mu
 $$
 
-As in {doc}`Stackelberg problems <dyn_stack>`, we map this problem into a linear-quadratic control problem and then carefully use the
+As in {doc}`Ramsey Plans, Time Inconsistency, Sustainable Plans <dyn_stack>`, we map this problem into a linear-quadratic control problem and then carefully use the
 optimal value function associated with it.
 
 Guessing that $J(x) = - x'Px$ and substituting into the Bellman
@@ -483,7 +483,7 @@ equation {eq}`eq_old3` plays three roles simultaneously:
 
 ### Time Inconsistency
 
-As discussed in {doc}`Stackelberg problems <dyn_stack>` and {doc}`Optimal taxation with state-contingent debt <opt_tax_recur>`, a continuation Ramsey plan is not a Ramsey plan.
+As discussed in {doc}`Ramsey Plans, Time Inconsistency, Sustainable Plans <dyn_stack>` and {doc}`Ramsey Plans, Time Inconsistency, Sustainable Plans <opt_tax_recur>`, a continuation Ramsey plan is not a Ramsey plan.
 
 This is a concise way of characterizing the time inconsistency of a Ramsey plan.
 

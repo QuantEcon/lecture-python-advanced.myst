@@ -37,7 +37,7 @@ tags: [hide-output]
 
 ## Introduction
 
-This is a prolegomenon to another lecture {doc}`BCG_incomplete_mkts <BCG_incomplete_mkts>` about a model with
+This is a prolegomenon to another lecture {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_incomplete_mkts>` about a model with
 incomplete markets authored by Bisin, Clementi, and Gottardi {cite}`BCG_2018`.
 
 We adopt specifications of preferences and technologies very close to
@@ -59,7 +59,7 @@ This simplification of BCG’s setup helps us by
   recur in the BCG incomplete markets environment
 
 A Big K, little k analysis also played roles in [this quantecon lecture](https://python.quantecon.org/cass_koopmans.html) as well  as
-[here](https://python.quantecon.org/rational_expectations.html) and {doc}`here <dyn_stack>`.
+[here](https://python.quantecon.org/rational_expectations.html) and {doc}`Irrelevance of Capital Structure with Complete Markets <dyn_stack>`.
 
 ### Setup
 
@@ -782,7 +782,7 @@ about firms’ finance:
 Please note the role of the assumption of complete markets in Arrow
 securities in substantiating these claims.
 
-In {doc}`Equilibrium Capital Structures with Incomplete Markets <BCG_incomplete_mkts>`, we will assume that markets are (very)
+In {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_incomplete_mkts>`, we will assume that markets are (very)
 incomplete – we’ll shut down markets in almost all Arrow securities.
 
 That will pull the rug from underneath the Modigliani-Miller theorem.

@@ -38,7 +38,7 @@ tags: [hide-output]
 
 ## Overview
 
-This lecture describes tax-smoothing models that are counterparts to consumption-smoothing models in {doc}`smoothing <smoothing>`.
+This lecture describes tax-smoothing models that are counterparts to consumption-smoothing models in {doc}`Tax Smoothing with Complete and Incomplete Markets <smoothing>`.
 
 * one is in the **complete markets** tradition of Lucas and Stokey {cite}`LucasStokey1983`.
 * the other is in the **incomplete markets** tradition  of  Barro {cite}`Barro1979`.
@@ -76,7 +76,7 @@ For each version of a consumption-smoothing model,  a tax-smoothing counterpart 
 * a consumer's  nonfinancial income as a government's purchases
 * a consumer's *debt* as a government's *assets*
 
-Thus, we can convert  the consumption-smoothing models in lecture {doc}`smoothing <smoothing>` into  tax-smoothing models by setting
+Thus, we can convert  the consumption-smoothing models in lecture {doc}`Tax Smoothing with Complete and Incomplete Markets <smoothing>` into  tax-smoothing models by setting
 $c_t = T_t$, $y_t = G_t$, and $- b_t = a_t$,  where $T_t$ is total tax
 collections, $\{G_t\}$ is an exogenous government expenditures
 process, and $a_t$ is the government's holdings of one-period risk-free bonds coming maturing at the due at the beginning of time $t$.
@@ -101,7 +101,7 @@ import matplotlib.pyplot as plt
 import scipy.linalg as la
 ```
 
-To exploit the isomorphism between consumption-smoothing and tax-smoothing models, we  simply use code from {doc}`smoothing <smoothing>`
+To exploit the isomorphism between consumption-smoothing and tax-smoothing models, we  simply use code from {doc}`Tax Smoothing with Complete and Incomplete Markets <smoothing>`
 
 ### Code
 
@@ -870,7 +870,7 @@ ts_ex5.display()
 ### Continuous-State Gaussian Model
 
 To construct a tax-smoothing version of the  complete markets consumption-smoothing model with a continuous state space that we presented in
-the lecture {doc}`consumption smoothing with complete and incomplete markets <smoothing>`, we simply relabel variables.
+the lecture {doc}`Tax Smoothing with Complete and Incomplete Markets <smoothing>`, we simply relabel variables.
 
 Thus,  a government  faces a sequence of budget constraints
 
@@ -902,7 +902,7 @@ $$
 which states that the present value of government purchases equals the value of government assets at $t$ plus the present value of tax
 receipts.
 
-With these relabelings, examples presented in {doc}`consumption smoothing with complete and incomplete markets <smoothing>` can be
+With these relabelings, examples presented in {doc}`Tax Smoothing with Complete and Incomplete Markets <smoothing>` can be
 interpreted as tax-smoothing models.
 
 **Returns:** In the continuous state version of our incomplete markets model, the  ex post one-period   gross  rate of return on the government portfolio equals
@@ -919,15 +919,15 @@ and specified them in ways designed to align our models closely with the consump
 Other lectures make these objects endogenous and describe  how a government  optimally  manipulates prices of government debt, albeit indirectly via effects distorting
 taxes have on equilibrium prices and allocations.
 
-In {doc}`optimal taxation in an LQ economy <lqramsey>` and {doc}`recursive optimal taxation <opt_tax_recur>`, we study **complete-markets**
+In {doc}`Tax Smoothing with Complete and Incomplete Markets <lqramsey>` and {doc}`Tax Smoothing with Complete and Incomplete Markets <opt_tax_recur>`, we study **complete-markets**
 models in which the government recognizes that it can manipulate  Arrow securities prices.
 
-Linear-quadratic versions of the Lucas-Stokey tax-smoothing model are described in {doc}`lqramsey <lqramsey>`.
+Linear-quadratic versions of the Lucas-Stokey tax-smoothing model are described in {doc}`Tax Smoothing with Complete and Incomplete Markets <lqramsey>`.
 
-That lecture is a warm-up for the non-linear-quadratic model of tax smoothing described in {doc}`opt_tax_recur <opt_tax_recur>`.
+That lecture is a warm-up for the non-linear-quadratic model of tax smoothing described in {doc}`Tax Smoothing with Complete and Incomplete Markets <opt_tax_recur>`.
 
-In both {doc}`lqramsey <lqramsey>` and {doc}`opt_tax_recur <opt_tax_recur>`, the government  recognizes that its decisions affect prices.
+In both {doc}`Tax Smoothing with Complete and Incomplete Markets <lqramsey>` and {doc}`Tax Smoothing with Complete and Incomplete Markets <opt_tax_recur>`, the government  recognizes that its decisions affect prices.
 
-In {doc}`optimal taxation with incomplete markets <amss>`, we study an **incomplete-markets** model in which the
+In {doc}`Tax Smoothing with Complete and Incomplete Markets <amss>`, we study an **incomplete-markets** model in which the
 government also manipulates  prices of government debt.
 

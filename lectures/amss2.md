@@ -38,8 +38,8 @@ tags: [hide-output]
 This lecture extends our investigations of how optimal policies for levying a flat-rate tax on labor income and  issuing government debt depend
 on whether there are complete  markets for debt.
 
-A Ramsey allocation and Ramsey policy in the AMSS {cite}`aiyagari2002optimal` model described in {doc}`optimal taxation without state-contingent debt <amss>` generally differs
-from a Ramsey allocation and Ramsey policy in the  Lucas-Stokey {cite}`LucasStokey1983` model described in {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
+A Ramsey allocation and Ramsey policy in the AMSS {cite}`aiyagari2002optimal` model described in {doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <amss>` generally differs
+from a Ramsey allocation and Ramsey policy in the  Lucas-Stokey {cite}`LucasStokey1983` model described in {doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <opt_tax_recur>`.
 
 This is because the implementability restriction that a competitive equilibrium with a distorting tax  imposes on  allocations in the Lucas-Stokey model is just one among a set of
 implementability conditions imposed in  the AMSS model.
@@ -51,7 +51,7 @@ The  measurability constraints imposed by the AMSS model are inherited from the 
 can be traded.
 
 Differences between the  Ramsey allocations in the two models   indicate that at least some of the measurability constraints of the AMSS model of
-{doc}`optimal taxation without state-contingent debt <amss>` are violated at the Ramsey allocation of a corresponding  {cite}`LucasStokey1983` model with state-contingent debt.
+{doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <amss>` are violated at the Ramsey allocation of a corresponding  {cite}`LucasStokey1983` model with state-contingent debt.
 
 Another way to say this is that differences between the Ramsey allocations of the two models indicate that some of the measurability constraints of the
 AMSS model are violated at the  Ramsey allocation of the Lucas-Stokey model.
@@ -198,7 +198,7 @@ case of a CRRA utility specification that we shall use in our example economies.
 
 ### Specification with CRRA Utility
 
-As in lectures {doc}`optimal taxation without state-contingent debt <amss>` and {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`,
+As in lectures {doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <amss>` and {doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <opt_tax_recur>`,
 we assume that the representative agent has utility function
 
 $$
@@ -274,8 +274,8 @@ $$
 
 Here are several classes that do most of the work for us.
 
-The code is  mostly taken or adapted from the earlier lectures {doc}`optimal taxation without state-contingent debt <amss>` and
-{doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
+The code is  mostly taken or adapted from the earlier lectures {doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <amss>` and
+{doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <opt_tax_recur>`.
 
 ```{literalinclude} _static/lecture_specific/opt_tax_recur/sequential_allocation.py
 ---
@@ -307,7 +307,7 @@ This insight tells us to find a $b_0$ and other fundamentals for the Lucas-Stoke
 want to borrow the same value $\bar b$ next period for all states and all dates.
 
 We accomplish this by using various equations for the Lucas-Stokey {cite}`LucasStokey1983` model
-presented in {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
+presented in {doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <opt_tax_recur>`.
 
 We use the following steps.
 

@@ -939,7 +939,7 @@ run(construct_arrays2, {"σ_vals":[0.5, 1.]}, state_vec2)
 The following lectures describe how Markov jump linear quadratic dynamic programming can be used to extend the {cite}`Barro1979` model
 of optimal tax-smoothing and government debt in several interesting directions
 
-1. {doc}`How to Pay for a War: Part 1 <tax_smoothing_1>`
-1. {doc}`How to Pay for a War: Part 2 <tax_smoothing_2>`
-1. {doc}`How to Pay for a War: Part 3 <tax_smoothing_3>`
+1. {doc}`Markov Jump Linear Quadratic Dynamic Programming <tax_smoothing_1>`
+1. {doc}`Markov Jump Linear Quadratic Dynamic Programming <tax_smoothing_2>`
+1. {doc}`Markov Jump Linear Quadratic Dynamic Programming <tax_smoothing_3>`
 
