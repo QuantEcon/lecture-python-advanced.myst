@@ -41,7 +41,7 @@ analyzed **competitive equilibria** and a best competitive equilibrium called a 
 He did this by
 
 * characterizing a competitive equilibrium recursively in a way also employed
-  in the {doc}`dynamic Stackelberg problems <dyn_stack>` and {doc}`Calvo model <calvo>` lectures
+  in the {doc}`Competitive Equilibria of a Model of Chang <dyn_stack>` and {doc}`Competitive Equilibria of a Model of Chang <calvo>` lectures
   to pose Stackelberg problems in linear economies, and then
 * appropriately adapting an argument of Abreu, Pearce, and Stachetti
   {cite}`APS1990` to describe key features of the  set of competitive equilibria
@@ -51,11 +51,11 @@ as a simple structure that conveys ideas that apply more broadly.
 
 A textbook version of Chang's model appears in chapter 25 of {cite}`Ljungqvist2012`.
 
-This lecture and {doc}`Credible Government Policies in Chang Model <chang_credible>`
+This lecture and {doc}`Competitive Equilibria of a Model of Chang <chang_credible>`
 can be viewed as more sophisticated and complete treatments of the
-topics discussed in {doc}`Ramsey plans, time inconsistency, sustainable plans <calvo>`.
+topics discussed in {doc}`Competitive Equilibria of a Model of Chang <calvo>`.
 
-Both this lecture and {doc}`Credible Government Policies in Chang Model <chang_credible>`
+Both this lecture and {doc}`Competitive Equilibria of a Model of Chang <chang_credible>`
 make extensive use of an idea to which we apply the nickname
 **dynamic programming squared**.
 
@@ -66,8 +66,8 @@ In dynamic programming squared problems there are typically two interrelated Bel
   value function $v_p$ in which $v_a$ appears as an argument.
 
 We encountered problems with this structure in
-{doc}`dynamic Stackelberg problems <dyn_stack>`,
-{doc}`optimal taxation with state-contingent debt <opt_tax_recur>`,
+{doc}`Competitive Equilibria of a Model of Chang <dyn_stack>`,
+{doc}`Competitive Equilibria of a Model of Chang <opt_tax_recur>`,
 and other lectures.
 
 We'll start with some standard imports:
@@ -257,7 +257,7 @@ choices framed by how the private sector wants to respond when the
 government takes time $t$ actions that differ from what the
 private sector had expected.
 
-This consideration will be important in lecture {doc}`credible government policies <chang_credible>` when
+This consideration will be important in lecture {doc}`Competitive Equilibria of a Model of Chang <chang_credible>` when
 we study *credible government policies*.
 
 The model is designed to focus on the intertemporal trade-offs between
@@ -336,7 +336,7 @@ balances $\theta_{t+1}$ functions in this way is an important step
 in constructing a class of competitive equilibria that have a recursive representation.
 
 A closely related observation pervaded the analysis of Stackelberg plans
-in lecture  {doc}`dynamic Stackelberg problems <dyn_stack>`.
+in lecture  {doc}`Competitive Equilibria of a Model of Chang <dyn_stack>`.
 
 ## Competitive Equilibrium
 
@@ -441,7 +441,7 @@ The continuation of a competitive equilibrium is a competitive equilibrium.
 That is, $(\vec m, \vec x, \vec h) \in CE$ implies that $(\vec m_t,
 \vec x_t, \vec h_t) \in CE \  \forall \ t \geq 1$.
 
-(Lecture {doc}`dynamic Stackelberg problems <dyn_stack>` also used a version of this insight)
+(Lecture {doc}`Competitive Equilibria of a Model of Chang <dyn_stack>` also used a version of this insight)
 
 We can now state that a **Ramsey problem** is to
 
@@ -653,12 +653,12 @@ operator is wasteful because it works with a state vector that is bigger
 than necessary.
 
 We introduce this operator because it helps to prepare
-the way for Chang’s operator called $\tilde D(Z)$ that we shall describe in lecture {doc}`credible government policies <chang_credible>`.
+the way for Chang’s operator called $\tilde D(Z)$ that we shall describe in lecture {doc}`Competitive Equilibria of a Model of Chang <chang_credible>`.
 
 It is also useful because a fixed point of the operator to
 be defined here provides a good guess for an initial set
 from which to initiate iterations on Chang’s set-to-set operator  $\tilde D(Z)$
-to be described in lecture {doc}`credible government policies <chang_credible>`.
+to be described in lecture {doc}`Competitive Equilibria of a Model of Chang <chang_credible>`.
 
 Let $S$ be the set of all pairs $(w, \theta)$ of competitive
 equilibrium values and associated initial marginal utilities.
@@ -937,8 +937,8 @@ plot_competitive(ch2)
 
 In this section we solve the Bellman equation confronting a **continuation Ramsey planner**.
 
-The construction of a Ramsey plan is decomposed into a two subproblems in {doc}`Ramsey plans, time inconsistency, sustainable plans <calvo>`
-and {doc}`dynamic Stackelberg problems <dyn_stack>`.
+The construction of a Ramsey plan is decomposed into a two subproblems in {doc}`Competitive Equilibria of a Model of Chang <calvo>`
+and {doc}`Competitive Equilibria of a Model of Chang <dyn_stack>`.
 
 * Subproblem 1 is faced by a sequence of continuation Ramsey planners at $t \geq 1$.
 * Subproblem 2 is faced by a Ramsey planner at $t = 0$.
@@ -1096,7 +1096,7 @@ for model in (ch1, ch2):
 
 ### Next Steps
 
-In {doc}`Credible Government Policies in Chang Model <chang_credible>` we shall find
+In {doc}`Competitive Equilibria of a Model of Chang <chang_credible>` we shall find
 a subset of competitive equilibria that are **sustainable**
 in the sense that a sequence of government administrations  that chooses
 sequentially, rather than once and for all at time $0$ will choose to implement them.

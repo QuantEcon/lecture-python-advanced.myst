@@ -28,7 +28,7 @@ kernelspec:
 ```
 
 This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
-{cite}`HS2013` class of models described in detail in {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
+{cite}`HS2013` class of models described in detail in {doc}`Cattle Cycles <hs_recursive_models>`.
 
 In addition to what's in Anaconda, this lecture uses the quantecon library.
 

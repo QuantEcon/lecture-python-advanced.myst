@@ -91,8 +91,8 @@ Friedman’s adaptive expectation scheme the **answer**.
 Muth (1960) used classical prediction methods based on lag-operators and
 $z$-transforms to find the answer to his question.
 
-Please see lectures {doc}`Classical Control with Linear Algebra <lu_tricks>` and
-{doc}`Classical Filtering and Prediction with Linear Algebra <classical_filtering>` for an introduction to the classical
+Please see lectures {doc}`Reverse Engineering a la Muth <lu_tricks>` and
+{doc}`Reverse Engineering a la Muth <classical_filtering>` for an introduction to the classical
 tools that Muth used.
 
 Rather than using those classical tools, in this lecture we apply the
@@ -150,8 +150,8 @@ $a_t = y_t - E[y_t |y_{t-1}, y_{t-2}, \ldots ]$.
 $a_t$ is in the space spanned by square summable linear
 combinations of $y_t, y_{t-1}, \ldots$.
 
-For more ramifications of this property, see the lectures  {doc}`Shock Non-Invertibility <hs_invertibility_example>`  and
-{doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
+For more ramifications of this property, see the lectures  {doc}`Reverse Engineering a la Muth <hs_invertibility_example>`  and
+{doc}`Reverse Engineering a la Muth <hs_recursive_models>`.
 
 Later we’ll stack these state-space systems {eq}`state-space` and {eq}`innovations` to display some
 classic findings of Muth.

@@ -48,14 +48,14 @@ import matplotlib.pyplot as plt
 ```
 
 This lecture uses the method of   **Markov jump linear quadratic dynamic programming** that is described in lecture
-{doc}`Markov Jump LQ dynamic programming <markov_jump_lq>`
+{doc}`How to Pay for a War: Part 1 <markov_jump_lq>`
 to extend the {cite}`Barro1979` model of optimal tax-smoothing and government debt in a
 particular direction.
 
 This lecture has two sequels that offer further extensions of the Barro model
 
-1. {doc}`How to Pay for a War: Part 2 <tax_smoothing_2>`
-1. {doc}`How to Pay for a War: Part 3 <tax_smoothing_3>`
+1. {doc}`How to Pay for a War: Part 1 <tax_smoothing_2>`
+1. {doc}`How to Pay for a War: Part 1 <tax_smoothing_3>`
 
 The extensions are modified versions of
 his 1979 model later suggested by Barro (1999 {cite}`barro1999determinants`, 2003 {cite}`barro2003religion`).
@@ -128,7 +128,7 @@ dynamic programming problem to represent variation over time in
 - default rates
 - roll over risks
 
-As described in {doc}`Markov Jump LQ dynamic programming <markov_jump_lq>`,
+As described in {doc}`How to Pay for a War: Part 1 <markov_jump_lq>`,
 the idea underlying **Markov jump linear quadratic dynamic programming**
 is to replace the constant matrices defining a **linear quadratic
 dynamic programming problem** with matrices that are fixed functions of
@@ -171,8 +171,7 @@ This lecture describes:
   which a government faces exogenous time-varying interest rates for
   issuing one-period risk-free debt.
 
-A {doc}`sequel to this
-lecture <tax_smoothing_2>`
+A {doc}`How to Pay for a War: Part 1 <tax_smoothing_2>`
 describes applies Markov LQ control to settings in which a government
 issues risk-free debt of different maturities.
 
