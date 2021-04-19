@@ -49,6 +49,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from numba import jit, vectorize
 from ipywidgets import interact
+from ipywidgets.embed import embed_minimal_html
 ```
 
 ### Background
@@ -815,5 +816,7 @@ fig = interact(interact_attraction_basis,
                ρ=(0.0, 1.0, 0.05),
                maxiter=(50, 5000, 50),
                npts=(25, 750, 25))
+from IPython.display import display
+display(fig)
 ```
 
