@@ -223,7 +223,7 @@ $$
 
 ### Implementation
 
-Here's the code that computes solutions to LQ control and filtering problems using the methods described here and in {doc}`lu_tricks <lu_tricks>`.
+Here's the code that computes solutions to LQ control and filtering problems using the methods described here and in {doc}`Classical Control with Linear Algebra <lu_tricks>`.
 
 ```{literalinclude} _static/lecture_specific/lu_tricks/control_and_filter.py
 ```
@@ -829,7 +829,7 @@ Thus, we have
 \, X_t
 ```
 
-This formula is useful in solving stochastic versions of problem 1 of lecture {doc}`lu_tricks <lu_tricks>` in which the randomness emerges because $\{a_t\}$ is a stochastic
+This formula is useful in solving stochastic versions of problem 1 of lecture {doc}`Classical Control with Linear Algebra <lu_tricks>` in which the randomness emerges because $\{a_t\}$ is a stochastic
 process.
 
 The problem is to maximize

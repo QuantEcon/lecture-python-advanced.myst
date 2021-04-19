@@ -37,7 +37,7 @@ tags: [hide-output]
 
 ## Introduction
 
-This is a prolegomenon to another lecture {doc}`BCG_incomplete_mkts <BCG_incomplete_mkts>` about a model with
+This is a prolegomenon to another lecture {doc}`Equilibrium Capital Structures with Incomplete Markets <BCG_incomplete_mkts>` about a model with
 incomplete markets authored by Bisin, Clementi, and Gottardi {cite}`BCG_2018`.
 
 We adopt specifications of preferences and technologies very close to
