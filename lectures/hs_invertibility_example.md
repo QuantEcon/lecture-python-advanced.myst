@@ -30,7 +30,7 @@ kernelspec:
 ## Overview
 
 This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
-{cite}`HS2013` class of models described in detail in {doc}`Shock Non Invertibility <hs_recursive_models>`.
+{cite}`HS2013` class of models described in detail in {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
 
 In addition to what's in Anaconda, this lecture uses the quantecon library.
 
@@ -71,7 +71,7 @@ A shock-invertibility that is technically close to the one studied here is discu
 Eric Leeper, Todd Walker, and Susan Yang {cite}`Leeper_Walker_Yang` in their  analysis of **fiscal foresight**.
 
 A distinct shock-invertibility issue is present in the special LQ consumption smoothing model
-in {doc}`Shock Non Invertibility <cons_news>`.
+in {doc}`quantecon lecture <cons_news>`.
 
 ## Model
 

@@ -37,18 +37,18 @@ tags: [hide-output]
 
 ## Introduction
 
-This is an extension of an earlier lecture {doc}`Equilibrium Capital Structures with Incomplete Markets <BCG_complete_mkts>` about a **complete markets**
+This is an extension of an earlier lecture {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_complete_mkts>` about a **complete markets**
 model.
 
 In contrast to that lecture, this one  describes an instance of a model authored by Bisin, Clementi, and Gottardi {cite}`BCG_2018`
 in which financial markets are **incomplete**.
 
 Instead of being able to trade equities and a full set of one-period
-Arrow securities as they can in {doc}`Equilibrium Capital Structures with Incomplete Markets <BCG_complete_mkts>`, here consumers and firms trade only equity and a bond.
+Arrow securities as they can in {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_complete_mkts>`, here consumers and firms trade only equity and a bond.
 
 It is useful to watch how outcomes differ  in the two settings.
 
-In the complete markets economy in {doc}`Equilibrium Capital Structures with Incomplete Markets <BCG_complete_mkts>`
+In the complete markets economy in {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_complete_mkts>`
 
 - there is a unique  stochastic discount factor that prices all assets
 - consumers’ portfolio choices are indeterminate
@@ -63,7 +63,7 @@ In the incomplete markets economy studied here
 - while **individual** firms' financial structures are indeterminate, thus conforming to part of a Modigliani-Miller theorem,
   {cite}`Modigliani_Miller_1958`, the **aggregate**  of all firms' financial structures **is** determinate.
 
-A  `Big K, little k` analysis played an important role in the  previous lecture {doc}`Equilibrium Capital Structures with Incomplete Markets <BCG_complete_mkts>`.
+A  `Big K, little k` analysis played an important role in the  previous lecture {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_complete_mkts>`.
 
 A more subtle version of a `Big K, little k`   features in  the   BCG incomplete markets environment here.
 
@@ -71,7 +71,7 @@ We use it to convey the heart of what BCG call a **rational conjectures** equili
 equilibrium pricing functions in regions of the state space that  an average consumer or firm does not visit in equilibrium.
 
 Note that the absence of complete markets means that we can compute competitive equilibrium prices and allocations by first solving
-the simple planning problem that we did in {doc}`Equilibrium Capital Structures with Incomplete Markets <BCG_complete_mkts>`.
+the simple planning problem that we did in {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_complete_mkts>`.
 
 Instead, we compute an equilibrium by solving a system of simultaneous inequalities.
 
@@ -107,7 +107,7 @@ $\theta^i_0$ shares of a representative firm.
 
 ### Measures of agents and firms
 
-As in the companion lecture {doc}`Equilibrium Capital Structures with Incomplete Markets <BCG_complete_mkts>` that studies a complete markets version of
+As in the companion lecture {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_complete_mkts>` that studies a complete markets version of
 the model, we follow BCG in assuming that there are unit measures of
 
 - consumers of type $i=1$
@@ -1316,7 +1316,7 @@ indeterminate, the **market’s** financial structure is determinant and
 sits at the red dot in the above graph.
 
 This contrasts sharply with the *unqualified* Modigliani-Miller theorem
-descibed in the complete markets model in the lecture {doc}`Equilibrium Capital Structures with Incomplete Markets <BCG_complete_mkts>`.
+descibed in the complete markets model in the lecture {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_complete_mkts>`.
 
 There the **market’s** financial structure was indeterminate.
 

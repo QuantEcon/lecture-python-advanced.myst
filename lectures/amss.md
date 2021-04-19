@@ -46,7 +46,7 @@ from scipy.interpolate import UnivariateSpline
 from quantecon import MarkovChain
 ```
 
-In {doc}`Optimal Taxation without State-Contingent Debt <opt_tax_recur>`, we described a model of
+In {doc}`an earlier lecture <opt_tax_recur>`, we described a model of
 optimal taxation with state-contingent debt due to
 Robert E. Lucas, Jr.,  and Nancy Stokey  {cite}`LucasStokey1983`.
 
@@ -65,7 +65,7 @@ We begin with an introduction to the model.
 
 ## Competitive Equilibrium with Distorting Taxes
 
-Many but not all features of the economy are identical to those of {doc}`Optimal Taxation without State-Contingent Debt <opt_tax_recur>`.
+Many but not all features of the economy are identical to those of {doc}`the Lucas-Stokey economy <opt_tax_recur>`.
 
 Let's start with things that are identical.
 
@@ -112,7 +112,7 @@ where
 
 The government imposes a flat rate tax $\tau_t(s^t)$ on labor income at time $t$, history $s^t$.
 
-Lucas and Stokey assumed that there are complete markets in one-period Arrow securities; also see {doc}`Optimal Taxation without State-Contingent Debt <smoothing>`.
+Lucas and Stokey assumed that there are complete markets in one-period Arrow securities; also see {doc}`smoothing models <smoothing>`.
 
 It is at this point that AMSS {cite}`aiyagari2002optimal` modify the Lucas and Stokey economy.
 
@@ -393,7 +393,7 @@ in a Lucas-Stokey economy with state-contingent government debt.
    {eq}`AMSS_foc;a` may change over time in response to realizations of the state,
    while the multiplier $\Phi$ in the Lucas-Stokey economy is time-invariant.
 
-We need some code from our {doc}`Optimal Taxation without State-Contingent Debt <opt_tax_recur>`
+We need some code from our {doc}`an earlier lecture <opt_tax_recur>`
 on optimal taxation with state-contingent debt  sequential allocation implementation:
 
 ```{literalinclude} _static/lecture_specific/opt_tax_recur/sequential_allocation.py
@@ -403,7 +403,7 @@ tags: [output_scroll]
 ```
 
 To analyze the AMSS model, we find it useful to adopt a recursive formulation
-using techniques like those in our lectures on {doc}`Optimal Taxation without State-Contingent Debt <dyn_stack>` and {doc}`Optimal Taxation without State-Contingent Debt <opt_tax_recur>`.
+using techniques like those in our lectures on {doc}`dynamic Stackelberg models <dyn_stack>` and {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
 
 ## Recursive Version of AMSS Model
 
@@ -618,7 +618,7 @@ Along a Ramsey plan, the state variable $x_t = x_t(s^t, b_0)$
 becomes a function of the history $s^t$ and initial
 government debt $b_0$.
 
-In {doc}`Optimal Taxation without State-Contingent Debt <opt_tax_recur>`, we
+In {doc}`Lucas-Stokey model <opt_tax_recur>`, we
 found that
 
 * a counterpart to $V_x(x,s)$ is time-invariant and equal to
@@ -684,7 +684,7 @@ We will first build some useful functions for solving the model
 
 ### Anticipated One-Period War
 
-In our lecture on {doc}`Optimal Taxation without State-Contingent Debt <opt_tax_recur>`
+In our lecture on {doc}`optimal taxation with state contingent debt <opt_tax_recur>`
 we studied how the government manages uncertainty in a simple setting.
 
 As in that lecture, we assume the one-period utility function
@@ -699,7 +699,7 @@ utility as a function of $n$ rather than leisure $l$.
 ```
 
 We consider the same government expenditure process studied in the lecture on
-{doc}`Optimal Taxation without State-Contingent Debt <opt_tax_recur>`.
+{doc}`optimal taxation with state contingent debt <opt_tax_recur>`.
 
 Government expenditures are known for sure in all periods except one.
 
@@ -736,7 +736,7 @@ $$
 g = \left(\begin{matrix} 0.1\\0.1\\0.1\\0.1\\0.2\\0.1 \end{matrix}\right)
 $$
 
-We assume the same utility parameters as in the {doc}`Optimal Taxation without State-Contingent Debt <opt_tax_recur>`.
+We assume the same utility parameters as in the {doc}`Lucas-Stokey economy <opt_tax_recur>`.
 
 This utility function is implemented in the following class.
 
@@ -849,7 +849,7 @@ History dependence occurs more dramatically in a case in which the government
 perpetually faces the prospect  of war.
 
 This case was studied in the final example of the lecture on
-{doc}`Optimal Taxation without State-Contingent Debt <opt_tax_recur>`.
+{doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
 
 There, each period the government faces a constant probability, $0.5$, of war.
 

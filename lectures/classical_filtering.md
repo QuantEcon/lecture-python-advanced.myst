@@ -26,7 +26,7 @@ kernelspec:
 
 ## Overview
 
-This is a sequel to the earlier lecture {doc}`Classical Prediction and Filtering With Linear Algebra <lu_tricks>`.
+This is a sequel to the earlier lecture {doc}`Classical Control with Linear Algebra <lu_tricks>`.
 
 That lecture used linear algebra -- in particular,  the [LU decomposition](https://en.wikipedia.org/wiki/LU_decomposition)  -- to formulate and solve a class of linear-quadratic optimal control problems.
 
@@ -223,7 +223,7 @@ $$
 
 ### Implementation
 
-Here's the code that computes solutions to LQ control and filtering problems using the methods described here and in {doc}`Classical Prediction and Filtering With Linear Algebra <lu_tricks>`.
+Here's the code that computes solutions to LQ control and filtering problems using the methods described here and in {doc}`Classical Control with Linear Algebra <lu_tricks>`.
 
 ```{literalinclude} _static/lecture_specific/lu_tricks/control_and_filter.py
 ```
@@ -438,7 +438,7 @@ Maximization is over choices of $y_0,
 y_1 \ldots, y_N$, where $y_t$ is required to be a linear function
 of $\{y_{t-s-1}, t+m-1\geq 0;\ a_{t-s}, t\geq s\geq 0\}$.
 
-We saw in the lecture {doc}`Classical Prediction and Filtering With Linear Algebra <lu_tricks>`  that the solution of this problem under certainty could be represented in the feedback-feedforward form
+We saw in the lecture {doc}`Classical Control with Linear Algebra <lu_tricks>`  that the solution of this problem under certainty could be represented in the feedback-feedforward form
 
 $$
 U \bar y
@@ -829,7 +829,7 @@ Thus, we have
 \, X_t
 ```
 
-This formula is useful in solving stochastic versions of problem 1 of lecture {doc}`Classical Prediction and Filtering With Linear Algebra <lu_tricks>` in which the randomness emerges because $\{a_t\}$ is a stochastic
+This formula is useful in solving stochastic versions of problem 1 of lecture {doc}`Classical Control with Linear Algebra <lu_tricks>` in which the randomness emerges because $\{a_t\}$ is a stochastic
 process.
 
 The problem is to maximize
