@@ -49,7 +49,7 @@ We  focus on special settings with
 These specifications simplify calculations and allow us to give a simple example that illustrates basic forces.
 
 This lecture is based on ideas described in chapter 15 of  {cite}`HansenSargent2008` and in [Markov perfect equilibrium](https://python-intro.quantecon.org/markov_perf.html)
-and {doc}`Robust Markov Perfect Equilibrium <robustness>`.
+and {doc}`Robustness <robustness>`.
 
 Let's start with some standard imports:
 
@@ -207,11 +207,11 @@ where
 * $\Pi_{it} := R_i + F_{-it}' S_i F_{-it}$
 * $\Gamma_{it} := W_i' - M_i' F_{-it}$
 
-This is an LQ robust dynamic programming problem of the type studied in the {doc}`Robust Markov Perfect Equilibrium <robustness>` lecture,
+This is an LQ robust dynamic programming problem of the type studied in the {doc}`Robustness <robustness>` lecture,
 which can be solved by working backward.
 
 Maximization with respect to distortion  $v_{1t}$ leads to  the following version of the $\mathcal D$ operator from
-the {doc}`Robust Markov Perfect Equilibrium <robustness>` lecture, namely
+the {doc}`Robustness <robustness>` lecture, namely
 
 ```{math}
 :label: rmp-rb_d

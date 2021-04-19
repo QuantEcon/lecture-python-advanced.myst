@@ -36,7 +36,7 @@ tags: [hide-output]
 ## Overview
 
 This lecture studies government debt in an AMSS
-economy {cite}`aiyagari2002optimal` of the type described in {doc}`Fiscal Risk and Government Debt <amss>`.
+economy {cite}`aiyagari2002optimal` of the type described in {doc}`Optimal Taxation without State-Contingent Debt <amss>`.
 
 We study the behavior of government debt  as time $t \rightarrow + \infty$.
 
@@ -53,20 +53,20 @@ of {cite}`BEGS1` (BEGS).
 
 We study an  {cite}`aiyagari2002optimal` economy with  three Markov states driving government expenditures.
 
-* In a {doc}`Fiscal Risk and Government Debt <amss2>`, we showed that with only two Markov states, it is possible that eventually endogenous
+* In a {doc}`previous lecture <amss2>`, we showed that with only two Markov states, it is possible that eventually endogenous
   interest rate fluctuations support complete markets allocations and Ramsey outcomes.
 * The presence of three states  prevents the full spanning that eventually prevails in the two-state example featured in
-  {doc}`Fiscal Risk and Government Debt <amss2>`.
+  {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`.
 
 The lack of full spanning means that the ergodic distribution of the par value of government debt is nontrivial, in contrast to the situation
-in {doc}`Fiscal Risk and Government Debt <amss2>`  where  the ergodic distribution of the par value is concentrated on one point.
+in {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`  where  the ergodic distribution of the par value is concentrated on one point.
 
 Nevertheless,   {cite}`BEGS1` (BEGS) establish  for general settings that include ours, the Ramsey
 planner steers government assets to a level that comes
 **as close as possible** to providing full spanning in a precise a sense defined by
 BEGS that we describe below.
 
-We use code constructed {doc}`Fiscal Risk and Government Debt <amss2>`.
+We use code constructed {doc}`in a previous lecture <amss2>`.
 
 **Warning:** Key equations in  {cite}`BEGS1` section III.D carry  typos  that we correct below.
 
@@ -80,7 +80,7 @@ from scipy.optimize import minimize
 
 ## The Economy
 
-As in {doc}`Fiscal Risk and Government Debt <amss>` and {doc}`Fiscal Risk and Government Debt <opt_tax_recur>`,
+As in {doc}`Optimal Taxation without State-Contingent Debt <amss>` and {doc}`Optimal Taxation with State-Contingent Debt <opt_tax_recur>`,
 we assume that the  representative agent has  utility function
 
 $$
@@ -123,7 +123,7 @@ The following Python code sets up the economy
 
 We'll want  first and second moments of some key random variables below.
 
-The following code computes these moments; the code is recycled from {doc}`Fiscal Risk and Government Debt <amss2>`.
+The following code computes these moments; the code is recycled from {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`.
 
 ```{code-cell} python3
 def mean(x, s):
@@ -212,7 +212,7 @@ plt.show()
 The long simulation apparently  indicates eventual convergence to an ergodic distribution.
 
 It takes about 1000 periods to reach the ergodic distribution -- an outcome that is forecast by
-approximations to rates of convergence that appear in {cite}`BEGS1` and that we discuss in {doc}`Fiscal Risk and Government Debt <amss2>`.
+approximations to rates of convergence that appear in {cite}`BEGS1` and that we discuss in {doc}`a previous lecture <amss2>`.
 
 We discard the first 2000 observations of the simulation and construct the histogram of
 the part value of government debt.
@@ -274,11 +274,11 @@ We apply the results of {cite}`BEGS1` to interpret
 We begin by computing  objects required by the theory of section III.i
 of {cite}`BEGS1`.
 
-As in {doc}`Fiscal Risk and Government Debt <amss2>`, we recall  that  {cite}`BEGS1` used a particular
+As in {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`, we recall  that  {cite}`BEGS1` used a particular
 notation to represent what we can regard as a  generalization of the AMSS model.
 
 We introduce some of the  {cite}`BEGS1` notation so that readers can quickly relate notation that appears in their key formulas to the notation
-that we have used in previous lectures {doc}`Fiscal Risk and Government Debt <amss>` and {doc}`Fiscal Risk and Government Debt <amss2>`.
+that we have used in previous lectures {doc}`here <amss>` and {doc}`here <amss2>`.
 
 BEGS work with objects $B_t, {\mathcal B}_t, {\mathcal R}_t, {\mathcal X}_t$ that are related to  notation that we used in
 earlier lectures by
@@ -381,7 +381,7 @@ So the primary use of equation {eq}`eq_criterion_fiscal_1` is how  it  confirms 
 the ergodic distribution solves a fiscal-risk minimization problem.
 
 As an example, notice how we used the formula for the mean of ${\mathcal B}$ in the ergodic distribution of the special AMSS economy in
-{doc}`Fiscal Risk and Government Debt <amss2>`
+{doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`
 
 * **first** we computed the ergodic distribution using a reverse-engineering construction
 * **then** we verified that ${\mathcal B}$  agrees with the mean of that distribution
@@ -509,7 +509,7 @@ $$
 \hat b = \frac{ {\mathcal B}^*}{div}
 $$
 
-In the two-Markov-state AMSS economy in {doc}`Fiscal Risk and Government Debt <amss2>`,
+In the two-Markov-state AMSS economy in {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`,
 $E_t u_{c,t+1} = E u_{c,t+1}$ in the ergodic distribution and we  have confirmed that
 this formula very accurately describes a **constant** par value of government debt that
 

@@ -54,15 +54,15 @@ The model features
 
 After first presenting the model in a space of sequences, we shall represent it
 recursively in terms of two Bellman equations formulated along lines that we
-encountered in {doc}`Optimal Taxation with State-Contingent Debt <dyn_stack>`.
+encountered in {doc}`Dynamic Stackelberg models <dyn_stack>`.
 
-As in {doc}`Optimal Taxation with State-Contingent Debt <dyn_stack>`, to apply dynamic programming
+As in {doc}`Dynamic Stackelberg models <dyn_stack>`, to apply dynamic programming
 we shall define the state vector artfully.
 
 In particular, we shall include forward-looking variables that summarize  optimal
 responses of private agents to a Ramsey plan.
 
-See {doc}`Optimal Taxation with State-Contingent Debt <lqramsey>` for analysis within a linear-quadratic setting.
+See {doc}`Optimal taxation <lqramsey>` for analysis within a linear-quadratic setting.
 
 Let's start with some standard imports:
 
@@ -638,7 +638,7 @@ We shall discuss this more below.
 
 ### Specification with CRRA Utility
 
-In our calculations below and in a {doc}`Optimal Taxation with State-Contingent Debt <amss>` based on an *extension* of the Lucas-Stokey model
+In our calculations below and in a {doc}`subsequent lecture <amss>` based on an *extension* of the Lucas-Stokey model
 by  Aiyagari, Marcet, Sargent, and Seppälä (2002) {cite}`aiyagari2002optimal`, we shall modify the one-period utility function assumed above.
 
 (We adopted the preceding utility specification because it was the one used in  the original Lucas-Stokey paper {cite}`LucasStokey1983`. We shall soon  revert to that specification in a subsequent section.)
@@ -1413,7 +1413,7 @@ Instead, the government raises the tax rate when $g_t$ is high.
 
 ### Further Comments
 
-A {doc}`Optimal Taxation with State-Contingent Debt <amss>` describes an extension of the Lucas-Stokey model
+A {doc}`related lecture <amss>` describes an extension of the Lucas-Stokey model
 by  Aiyagari, Marcet, Sargent, and Seppälä (2002) {cite}`aiyagari2002optimal`.
 
 In the AMSS economy, only a risk-free bond is traded.

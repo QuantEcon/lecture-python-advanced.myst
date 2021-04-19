@@ -48,13 +48,13 @@ The class of models is implemented in a Python class DLE that is part of  quante
 
 Subsequent lectures use the DLE class to implement various instances that have appeared in the economics literature
 
-1. {doc}`Recursive Models of Dynamic Linear Economies <growth_in_dles>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <lucas_asset_pricing_dles>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <irfs_in_hall_model>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <permanent_income_dles>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <rosen_schooling_model>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <cattle_cycles>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <hs_invertibility_example>`
+1. {doc}`Growth in Dynamic Linear Economies <growth_in_dles>`
+1. {doc}`Lucas Asset Pricing using DLE <lucas_asset_pricing_dles>`
+1. {doc}`IRFs in Hall Model <irfs_in_hall_model>`
+1. {doc}`Permanent Income Using the DLE class <permanent_income_dles>`
+1. {doc}`Rosen schooling model <rosen_schooling_model>`
+1. {doc}`Cattle cycles <cattle_cycles>`
+1. {doc}`Shock Non Invertibility <hs_invertibility_example>`
 
 ### Overview of the Models
 
@@ -1773,13 +1773,13 @@ Now we'll provide quick overviews of  examples of  economies that fit within our
 
 We provide details for a number  of these examples in subsequent lectures
 
-1. {doc}`Recursive Models of Dynamic Linear Economies <growth_in_dles>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <lucas_asset_pricing_dles>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <irfs_in_hall_model>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <permanent_income_dles>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <rosen_schooling_model>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <cattle_cycles>`
-1. {doc}`Recursive Models of Dynamic Linear Economies <hs_invertibility_example>`
+1. {doc}`Growth in Dynamic Linear Economies <growth_in_dles>`
+1. {doc}`Lucas Asset Pricing using DLE <lucas_asset_pricing_dles>`
+1. {doc}`IRFs in Hall Model <irfs_in_hall_model>`
+1. {doc}`Permanent Income Using the DLE class <permanent_income_dles>`
+1. {doc}`Rosen schooling model <rosen_schooling_model>`
+1. {doc}`Cattle cycles <cattle_cycles>`
+1. {doc}`Shock Non Invertibility <hs_invertibility_example>`
 
 We'll start with an example of a **partial equilibrium** in which we posit demand and supply curves
 
@@ -1960,7 +1960,7 @@ where $\alpha_0 > 0$, $\alpha_1 > 0$, and
 $\{\tilde d_t\}_{t=0}^\infty$ is a stochastic process with mean
 zero representing a demand shifter.
 
-For more details see {doc}`Recursive Models of Dynamic Linear Economies <cattle_cycles>`
+For more details see {doc}`Cattle cycles <cattle_cycles>`
 
 ## Models of Occupational Choice and Pay
 
@@ -2036,7 +2036,7 @@ $\lambda_1$ embodies Rosen’s demand parameter $\alpha_d$.
 
 **Remark:** This has an Imai-Keane flavor.
 
-For more details and Python code see {doc}`Recursive Models of Dynamic Linear Economies <rosen_schooling_model>`.
+For more details and Python code see {doc}`Rosen schooling model <rosen_schooling_model>`.
 
 ### Skilled and Unskilled Workers
 
@@ -2148,7 +2148,7 @@ $$
 {\mathcal M}_t^c  =  (\Phi_c)^\prime {\mathcal M}_t^d = \phi_c {\cal M}_t^e
 $$
 
-For more details see {doc}`Recursive Models of Dynamic Linear Economies <permanent_income_dles>`
+For more details see {doc}`Permanent Income Using the DLE class <permanent_income_dles>`
 
 **Testing Permanent Income Models:**
 

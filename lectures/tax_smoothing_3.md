@@ -38,9 +38,9 @@ tags: [hide-output]
 
 ## Another Application of Markov Jump Linear Quadratic Dynamic Programming
 
-This is another {doc}`How to Pay for a War: Part 3 <tax_smoothing_1>`.
+This is another {doc}`sequel to an earlier lecture <tax_smoothing_1>`.
 
-We again use a method introduced in lecture {doc}`How to Pay for a War: Part 3 <markov_jump_lq>`
+We again use a method introduced in lecture {doc}`Markov Jump LQ dynamic programming <markov_jump_lq>`
 to implement some ideas Barro (1999 {cite}`barro1999determinants`, 2003 {cite}`barro2003religion`) that
 extend his classic 1979 {cite}`Barro1979` model of tax smoothing.
 
@@ -103,7 +103,8 @@ while $b_{t-1,t}$ is an endogenous state variable inherited from
 the past at time $t$ and $p^t_{t+1}$ is an exogenous state
 variable at time $t$.
 
-This is the same set-up as used {doc}`How to Pay for a War: Part 3 <tax_smoothing_1>`.
+This is the same set-up as used {doc}`in this
+lecture <tax_smoothing_1>`.
 
 We will consider a situation in which the government faces “roll-over
 risk”.
@@ -243,7 +244,7 @@ lqm.stationary_values();
 ```
 
 This model is simulated below, using the same process for $G_t$ as
-in {doc}`How to Pay for a War: Part 3 <tax_smoothing_2>`.
+in {doc}`this lecture <tax_smoothing_2>`.
 
 When $p^t_{t+1} = \beta$
 government debt fluctuates around zero.

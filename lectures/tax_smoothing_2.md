@@ -38,9 +38,9 @@ tags: [hide-output]
 
 ## An Application of Markov Jump Linear Quadratic Dynamic Programming
 
-This is a {doc}`How to Pay for a War: Part 2 <tax_smoothing_1>`.
+This is a {doc}`sequel to an earlier lecture <tax_smoothing_1>`.
 
-We use a method introduced in lecture {doc}`How to Pay for a War: Part 2 <markov_jump_lq>` to
+We use a method introduced in lecture {doc}`Markov Jump LQ dynamic programming <markov_jump_lq>` to
 implement suggestions by Barro (1999 {cite}`barro1999determinants`, 2003 {cite}`barro2003religion`) for extending his
 classic 1979 model of tax smoothing.
 
@@ -58,7 +58,7 @@ Wanting tractability induced Barro in 1979 {cite}`Barro1979` to assume that
 - the government trades only one-period risk-free debt, and
 - the one-period risk-free interest rate is constant
 
-In our {doc}`How to Pay for a War: Part 2 <tax_smoothing_1>`, we relaxed the second of these assumptions but not the first.
+In our {doc}`earlier lecture <tax_smoothing_1>`, we relaxed the second of these assumptions but not the first.
 
 In particular, we used *Markov jump linear quadratic dynamic programming*
 to allow the exogenous interest rate to vary over time.
@@ -311,7 +311,7 @@ $$
 Thus, in this problem all the matrices apart from $B$ may depend
 on the Markov state at time $t$.
 
-As shown in the {doc}`How to Pay for a War: Part 2 <tax_smoothing_1>`,
+As shown in the {doc}`previous lecture <tax_smoothing_1>`,
 the `LQMarkov` class can solve Markov jump LQ problems when provided with the
 $A, B, C, R, Q, W$ matrices for each Markov state.
 

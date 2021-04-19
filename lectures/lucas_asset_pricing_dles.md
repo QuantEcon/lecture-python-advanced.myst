@@ -28,7 +28,7 @@ kernelspec:
 ```
 
 This is one of a suite of lectures that use the quantecon DLE class to instantiate models within the
-{cite}`HS2013` class of models described in detail in {doc}`Lucas Asset Pricing Using DLE <hs_recursive_models>`.
+{cite}`HS2013` class of models described in detail in {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
 
 In addition to what's in Anaconda, this lecture uses the quantecon library
 
@@ -48,7 +48,7 @@ We assume basic knowledge of the class of economic environments that fall within
 DLE class.
 
 Many details about the basic environment are contained in the lecture
-{doc}`Lucas Asset Pricing Using DLE <growth_in_dles>`.
+{doc}`Growth in Dynamic Linear Economies <growth_in_dles>`.
 
 We'll also need the following imports
 

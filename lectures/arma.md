@@ -109,7 +109,7 @@ As in other fields, successful economic modeling typically assumes the existence
 If these assumptions are correct, then each new observation $X_t, X_{t+1},\ldots$ can provide additional information about the time-invariant features, allowing us to  learn from as data arrive.
 
 For this reason, we will focus in what follows on processes that are *stationary* --- or become so after a transformation
-(see for example {doc}`Covariance Stationary Processes <additive_functionals>`).
+(see for example {doc}`this lecture <additive_functionals>`).
 
 (arma_defs)=
 ### Definitions
