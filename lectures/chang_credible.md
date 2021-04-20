@@ -811,7 +811,7 @@ The following code computes sustainable plans
 
 ```{code-cell} python3
 ---
-file: _static/lecture_specific/chang_credible/changecon.py
+load: _static/lecture_specific/chang_credible/changecon.py
 tags: [output_scroll]
 ---
 ```

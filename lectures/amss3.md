@@ -151,21 +151,21 @@ Here it is
 
 ```{code-cell} python3
 ---
-file: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
+load: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
 tags: [output_scroll]
 ---
 ```
 
 ```{code-cell} python3
 ---
-file: _static/lecture_specific/amss/recursive_allocation.py
+load: _static/lecture_specific/amss/recursive_allocation.py
 tags: [output_scroll]
 ---
 ```
 
 ```{code-cell} python3
 ---
-file: _static/lecture_specific/amss/utilities.py
+load: _static/lecture_specific/amss/utilities.py
 tags: [output_scroll]
 ---
 ```
