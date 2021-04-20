@@ -33,7 +33,7 @@ In addition to what's in Anaconda, this lecture deploys the quantecon library:
 ---
 tags: [hide-output]
 ---
-!pip install --upgrade quantecon
+!conda install -y quantecon
 ```
 
 ## Another Application of Markov Jump Linear Quadratic Dynamic Programming

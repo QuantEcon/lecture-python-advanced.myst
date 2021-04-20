@@ -33,7 +33,7 @@ In addition to what's in Anaconda, this lecture will deploy quantecon:
 ---
 tags: [hide-output]
 ---
-!pip install --upgrade quantecon
+!conda install -y quantecon
 ```
 
 ## Reader's Guide
