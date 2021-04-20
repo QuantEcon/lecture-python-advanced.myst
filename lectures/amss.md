@@ -124,9 +124,9 @@ Ruling out complete markets in this way is a step in the direction of making tot
 
 In period $t$ and history $s^t$, let
 
-* $b_{t+1}(s^t)$ be the amount of the time $t+1$ consumption good that at time $t$ the government promised to pay
+* $b_{t+1}(s^t)$ be the amount of the time $t+1$ consumption good that at time $t$, history $s^t$ the government promised to pay
 * $R_t(s^t)$ be the gross interest rate on  risk-free one-period debt between periods $t$ and $t+1$
-* $T_t(s^t)$ be a non-negative lump-sum transfer to the representative household [^fn_a]
+* $T_t(s^t)$ be a non-negative lump-sum *transfer* to the representative household [^fn_a]
 
 That $b_{t+1}(s^t)$ is the same for all realizations of $s_{t+1}$ captures its *risk-free* character.
 
@@ -169,7 +169,8 @@ b_t(s^{t-1}) =  z(s^t) + \beta  \sum_{s^{t+1}\vert s^t}  \pi_{t+1}(s^{t+1} | s^t
                        { u_c(s^{t+1}) \over u_c(s^{t}) } \; b_{t+1}(s^t)
 ```
 
-Components of $z(s^t)$ on the right side depend on $s^t$, but the left side is required to depend on $s^{t-1}$ only.
+Components of $z(s^t)$ on the right side depend on $s^t$, but the left side is required to depend only
+on $s^{t-1}$ .
 
 **This is what it means for one-period government debt to be risk-free**.
 
@@ -201,6 +202,9 @@ b_t(s^{t-1})
         \end{aligned}
 ```
 
+Notice how the conditioning sets in equation {eq}`TS_gov_wo3` differ: they are $s^{t-1}$ on the left side and
+$s^t$ on the right side.
+
 Now let's
 
 * substitute the resource constraint into the net-of-interest government surplus, and
@@ -216,7 +220,7 @@ z(s^t)
         -g_t(s_t) - T_t(s^t)\,.
 ```
 
-If we substitute the  appropriate versions of the right side of {eq}`AMSS_44_2` for $z(s^{t+j})$ into equation {eq}`TS_gov_wo3`,
+If we substitute  appropriate versions of the right side of {eq}`AMSS_44_2` for $z(s^{t+j})$ into equation {eq}`TS_gov_wo3`,
 we obtain a sequence of *implementability constraints* on a Ramsey allocation in an AMSS economy.
 
 Expression {eq}`TS_gov_wo3` at time $t=0$ and initial state $s^0$
@@ -244,13 +248,13 @@ Equation {eq}`TS_gov_wo4a` must hold for each $s^t$ for each $t \geq 1$.
 
 ### Comparison with Lucas-Stokey Economy
 
-The expression on the right side of {eq}`TS_gov_wo4a` in the Lucas-Stokey (1983) economy would  equal the present value of a continuation stream of government surpluses evaluated at what would be competitive equilibrium Arrow-Debreu prices at date $t$.
+The expression on the right side of {eq}`TS_gov_wo4a` in the Lucas-Stokey (1983) economy would  equal the present value of a continuation stream of government net-of-interest surpluses evaluated at what would be competitive equilibrium Arrow-Debreu prices at date $t$.
 
 In the Lucas-Stokey economy, that present value is measurable with respect to $s^t$.
 
 In the AMSS economy, the restriction that government debt be risk-free imposes that that same present value must be measurable with respect to $s^{t-1}$.
 
-In a language used in the literature on incomplete markets models, it can be said that the AMSS model requires that at each $(t, s^t)$ what would be the present value of continuation government surpluses in the Lucas-Stokey model must belong to  the **marketable subspace** of the AMSS model.
+In a language used in the literature on incomplete markets models, it can be said that the AMSS model requires that at each $(t, s^t)$ what would be the present value of continuation government net-of-interest surpluses in the Lucas-Stokey model must belong to  the **marketable subspace** of the AMSS model.
 
 ### Ramsey Problem Without State-contingent Debt
 
@@ -279,7 +283,7 @@ and
 \mathbb E_{t} \sum_{j=0}^\infty \beta^j
     { u_c(s^{t+j}) \over u_c(s^{t}) } \;
     z(s^{t+j}) = b_t(s^{t-1})
-      \quad \forall \,  s^t
+      \quad \forall \, t,  s^t
 ```
 
 given $b_0(s^{-1})$.
@@ -291,7 +295,7 @@ Let $\gamma_0(s^0)$ be a non-negative Lagrange multiplier on constraint {eq}`AMS
 As in the Lucas-Stokey economy, this multiplier is strictly positive when the government must resort to
 distortionary taxation; otherwise it equals zero.
 
-A consequence of the assumption that there are no markets in state-contingent securities  and that a market exists only in a risk-free security is that we have to attach stochastic processes $\{\gamma_t(s^t)\}_{t=1}^\infty$ of
+A consequence of the assumption that there are no markets in state-contingent securities  and that a market exists only in a risk-free security is that we have to attach a stochastic process $\{\gamma_t(s^t)\}_{t=1}^\infty$ of
 Lagrange multipliers to the implementability constraints {eq}`AMSS_46`.
 
 Depending on how the constraints  bind, these multipliers can be positive or negative:
@@ -299,7 +303,7 @@ Depending on how the constraints  bind, these multipliers can be positive or neg
 $$
 \begin{aligned}
    \gamma_t(s^t)
-   &\;\geq\; (\leq)\;\, 0 \quad \text{if the constraint binds in this direction }
+   &\;\geq\; (\leq)\;\, 0 \quad \text{if the constraint binds in the following direction }
    \\
    & \mathbb E_{t} \sum_{j=0}^\infty \beta^j
     { u_c(s^{t+j}) \over u_c(s^{t}) } \;z(s^{t+j}) \;\geq \;(\leq)\;\, b_t(s^{t-1})
@@ -393,7 +397,7 @@ in a Lucas-Stokey economy with state-contingent government debt.
    {eq}`AMSS_foc;a` may change over time in response to realizations of the state,
    while the multiplier $\Phi$ in the Lucas-Stokey economy is time-invariant.
 
-We need some code from our {doc}`an earlier lecture <opt_tax_recur>`
+We need some code from  {doc}`an earlier lecture <opt_tax_recur>`
 on optimal taxation with state-contingent debt  sequential allocation implementation:
 
 ```{code-cell} python3
@@ -625,8 +629,7 @@ found that
 * a counterpart to $V_x(x,s)$ is time-invariant and equal to
   the Lagrange multiplier on the Lucas-Stokey implementability constraint
 * time invariance of $V_x(x,s)$  is the source of a key
-  feature of the Lucas-Stokey model, namely, state variable degeneracy
-  (i.e., $x_t$ is an exact function of $s_t$)
+  feature of the Lucas-Stokey model, namely, **state variable degeneracy** in which $x_t$ is an exact time-invariant function of $s_t$)
 
 That $V_x(x,s)$ varies over time according to a twisted martingale
 means that there is no state-variable degeneracy in the AMSS model.
@@ -654,7 +657,7 @@ Furthermore, when the Markov chain $\Pi(s| s_-)$ and the government
 expenditure function $g(s)$ are such that $g_t$ is perpetually
 random, $V_x(x, s)$ almost surely converges to zero.
 
-For quasi-linear preferences, the first-order condition with respect to $n(s)$ becomes
+For quasi-linear preferences, the first-order condition for maximizing {eq}`eqn:AMSSapp5` subject to  {eq}`eqn:AMSSapp6` with respect to $n(s)$ becomes
 
 $$
 (1-\mu(s|s_-) ) (1 - u_l(s)) + \mu(s|s_-) n(s) u_{ll}(s) =0
@@ -820,7 +823,7 @@ If it is able to trade state-contingent debt, then at time $t=2$
 
 * the government purchases an Arrow security that pays off when $g_3 = g_h$
 * the government sells an Arrow security that  pays off when $g_3 = g_l$
-* These purchases are designed in such a way that regardless of whether or not there is a war at $t=3$, the government will begin  period $t=4$ with the *same* government debt
+* these purchases are designed in such a way that regardless of whether or not there is a war at $t=3$, the government will begin  period $t=4$ with the *same* government debt
 
 This pattern facilities smoothing tax rates across  states.
 
