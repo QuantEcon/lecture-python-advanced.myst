@@ -813,14 +813,19 @@ plt.colorbar(cf, cax=cbar_ax)
 plt.show()
 ```
 
-```{code-cell} python3
-# To Generate an Interactive Plot you can use the ipywidget
-# decorator `interact`.
-# Note: This doesn't currently display on the website. Working
-# to support rich content such as ipywidgets as HTML javascript objects.
-# https://github.com/QuantEcon/lecture-python-advanced.myst/issues/28
-# However you can use the binder link to launch this notebook on mybinder
+```{note}
+To Generate an Interactive Plot you can use the ipywidget
+decorator `interact`.
 
+This doesn't currently display on the website. Working
+to support rich content such as ipywidgets as HTML javascript objects.
+
+https://github.com/QuantEcon/lecture-python-advanced.myst/issues/28
+
+However you can use the [binder link](https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/matsuyama.ipynb) to launch this notebook on mybinder
+```
+
+```{code-cell} python3
 @interact(ρ=(0.0, 1.0, 0.05), maxiter=(50, 5000, 50), npts=(25, 750, 25))
 def interact_attraction_basis(ρ=0.2, maxiter=250, npts=250):
     # Create the figure and axis that we will plot on
