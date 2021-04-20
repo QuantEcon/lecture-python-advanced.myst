@@ -1042,7 +1042,7 @@ the ordinary least-squares estimator  of $\beta$ that we shall compare to the co
 coefficients.
 
 ```{code-cell} python3
-_, _, Σ_x, Σ_y = lss.stationary_distributions()
+_, _, Σ_x, Σ_y, Σ_yx = lss.stationary_distributions()
 
 Σ_11 = Σ_x[0, 0]
 Σ_12 = Σ_x[0, 1:4]
@@ -1261,7 +1261,7 @@ Image(fig2.to_image(format="png"))
 ```
 
 ```{code-cell} python3
-_, _, Σ_x, Σ_y = lss.stationary_distributions()
+_, _, Σ_x, Σ_y, Σ_yx = lss.stationary_distributions()
 
 Σ_11 = Σ_x[1, 1]
 Σ_12 = Σ_x[1, 2:5]
@@ -1296,7 +1296,7 @@ np.abs(reg_res.rsquared - R_squared) < 1e-2
 ```
 
 ```{code-cell} python3
-_, _, Σ_x, Σ_y = lss.stationary_distributions()
+_, _, Σ_x, Σ_y, Σ_yx = lss.stationary_distributions()
 
 Σ_11 = Σ_x[1, 1]
 Σ_12 = Σ_x[1, 2:6]
