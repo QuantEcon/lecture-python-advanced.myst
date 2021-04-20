@@ -248,7 +248,7 @@ In equation {eq}`amss2_TS_barg10`, it is understood that $c$ and $g$ are each fu
 The CRRA utility function is represented in the following class.
 
 ```{code-cell} python3
-:file: _static/lecture_specific/opt_tax_recur/crra_utility.py
+:load: _static/lecture_specific/opt_tax_recur/crra_utility.py
 ```
 
 ## Example Economy

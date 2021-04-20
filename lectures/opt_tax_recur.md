@@ -722,7 +722,7 @@ In equation {eq}`opt_tax_eqn_10`, it is understood that
 The above steps are implemented in a class called SequentialAllocation
 
 ```{code-cell} python3
-:file: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
+:load: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
 ```
 
 ## Recursive Formulation of the Ramsey Problem
@@ -1024,7 +1024,7 @@ through them, the value of initial government debt $b_0$.
 The above steps are implemented in a class called `RecursiveAllocation`.
 
 ```{code-cell} python3
-:file: _static/lecture_specific/opt_tax_recur/recursive_allocation.py
+:load: _static/lecture_specific/opt_tax_recur/recursive_allocation.py
 ```
 
 ## Examples
@@ -1078,7 +1078,7 @@ utility as a function of $n$ rather than leisure $l$.
 This utility function is implemented in the class `CRRAutility`.
 
 ```{code-cell} python3
-:file: _static/lecture_specific/opt_tax_recur/crra_utility.py
+:load: _static/lecture_specific/opt_tax_recur/crra_utility.py
 ```
 
 We set initial government debt $b_0 = 1$.
@@ -1357,7 +1357,7 @@ $$
 We will create a new class LogUtility to represent this utility function
 
 ```{code-cell} python3
-:file: _static/lecture_specific/opt_tax_recur/log_utility.py
+:load: _static/lecture_specific/opt_tax_recur/log_utility.py
 ```
 
 Also, suppose that $g_t$ follows a two-state IID process with equal

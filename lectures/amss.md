@@ -672,7 +672,7 @@ assets, returning any excess revenues to the household as non-negative lump-sum 
 The recursive formulation is implemented as follows
 
 ```{code-cell} python3
-:file: _static/lecture_specific/amss/recursive_allocation.py
+:load: _static/lecture_specific/amss/recursive_allocation.py
 ```
 
 ## Examples
@@ -682,7 +682,7 @@ We now turn to some examples.
 We will first build some useful functions for solving the model
 
 ```{code-cell} python3
-:file: _static/lecture_specific/amss/utilities.py
+:load: _static/lecture_specific/amss/utilities.py
 ```
 
 ### Anticipated One-Period War
@@ -744,7 +744,7 @@ We assume the same utility parameters as in the {doc}`Lucas-Stokey economy <opt_
 This utility function is implemented in the following class.
 
 ```{code-cell} python3
-:file: _static/lecture_specific/opt_tax_recur/crra_utility.py
+:load: _static/lecture_specific/opt_tax_recur/crra_utility.py
 ```
 
 The following figure plots the Ramsey plan under both complete and incomplete
@@ -866,7 +866,7 @@ $$
 In accordance, we will re-define our utility function.
 
 ```{code-cell} python3
-:file: _static/lecture_specific/opt_tax_recur/log_utility.py
+:load: _static/lecture_specific/opt_tax_recur/log_utility.py
 ```
 
 With these preferences, Ramsey tax rates will vary even in the Lucas-Stokey

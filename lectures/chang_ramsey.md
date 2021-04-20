@@ -883,7 +883,7 @@ $\beta = 0.8$.
 code for now - we can increase accuracy by increasing the number of subgradients)
 
 ```{code-cell} python3
-:file: _static/lecture_specific/chang_credible/changecon.py
+:load: _static/lecture_specific/chang_credible/changecon.py
 ```
 
 ```{code-cell} python3

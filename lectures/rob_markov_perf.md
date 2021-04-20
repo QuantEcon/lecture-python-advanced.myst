@@ -455,7 +455,7 @@ Consider the  duopoly model with parameter values of:
 From these, we computed the infinite horizon MPE without robustness using the code
 
 ```{code-cell} python3
-:file: _static/lecture_specific/markov_perf/duopoly_mpe.py
+:load: _static/lecture_specific/markov_perf/duopoly_mpe.py
 ```
 
 #### Markov Perfect Equilibrium with Robustness

@@ -117,7 +117,7 @@ $$
 The following Python code sets up the economy
 
 ```{code-cell} python3
-:file: _static/lecture_specific/opt_tax_recur/crra_utility.py
+:load: _static/lecture_specific/opt_tax_recur/crra_utility.py
 ```
 
 ### First and Second Moments

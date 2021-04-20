@@ -226,7 +226,7 @@ $$
 Here's the code that computes solutions to LQ control and filtering problems using the methods described here and in {doc}`Classical Control with Linear Algebra <lu_tricks>`.
 
 ```{code-cell} python3
-:file: _static/lecture_specific/lu_tricks/control_and_filter.py
+:load: _static/lecture_specific/lu_tricks/control_and_filter.py
 ```
 
 Let's use this code to tackle two interesting examples.
