@@ -589,17 +589,15 @@ sustainable outcome:
 1. choose an initial $(w_0, \theta_0) \in S$;
 1. generate a sustainable outcome recursively by iterating on {eq}`chang501`, which we repeat here for convenience:
 
-> $$
-> \begin{aligned}
-> \hat h_t & = h(w_t,\theta_t) \\
-> m_t & = m(h_t, w_t,\theta_t) \\
-> x_t & = x(h_t, w_t,\theta_t) \\
-> w_{t+1} & = \chi(h_t, w_t,\theta_t)  \\
-> \theta_{t+1}  & = \Psi(h_t, w_t,\theta_t)
-> \end{aligned}
-> $$
-> 
-> 
+   $$
+   \begin{aligned}
+   \hat h_t & = h(w_t,\theta_t) \\
+   m_t & = m(h_t, w_t,\theta_t) \\
+   x_t & = x(h_t, w_t,\theta_t) \\
+   w_{t+1} & = \chi(h_t, w_t,\theta_t)  \\
+   \theta_{t+1}  & = \Psi(h_t, w_t,\theta_t)
+   \end{aligned}
+   $$
 
 ## Calculating the Set of Sustainable Promise-Value Pairs
 

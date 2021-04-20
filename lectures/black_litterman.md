@@ -529,13 +529,13 @@ labeled as iso-likelihood ellipses
 
 > **Remark:** More generally there is a class of density functions
 > that possesses this feature, i.e.
-> 
+>
 > $$
-> \exists g: \mathbb{R}_+ \mapsto \mathbb{R}_+ \ \ \text{ and } \ \ c \geq 0,
-> \ \ \text{s.t.  the density } \ \ f \ \ \text{of} \ \ Z  \ \
-> \text{ has the form } \quad f(z) = c g(z\cdot z)
-> $$
-> 
+  \exists g: \mathbb{R}_+ \mapsto \mathbb{R}_+ \ \ \text{ and } \ \ c \geq 0,
+  \ \ \text{s.t.  the density } \ \ f \ \ \text{of} \ \ Z  \ \
+  \text{ has the form } \quad f(z) = c g(z\cdot z)
+  $$
+>
 > This property is called **spherical symmetry** (see p 81. in Leamer
 > (1978) {cite}`leamer1978specification`).
 
