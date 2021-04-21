@@ -758,7 +758,7 @@ def quad_plot(arma):
 
     """
     num_rows, num_cols = 2, 2
-    fig, axes = plt.subplots(num_rows, num_cols, figsize=(12, 8))
+    fig, axes = plt.subplots(num_rows, num_cols, figsize=(10, 7))
     plot_functions = [plot_impulse_response,
                       plot_spectral_density,
                       plot_autocovariance,
