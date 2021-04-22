@@ -547,7 +547,7 @@ conditions equal to the big $K$, big $B$ at the big
 $C$’s that appear in the pricing functions, then
 
 - consumers’ Euler equations are satisfied if little $c$’s are
-  equated to  Big C’s
+  equated to  Big $C$’s
 - firms’ first-order necessary conditions for $k, b$ are
   satisfied.
 - $\check q = q(K,B)$ and
@@ -570,7 +570,7 @@ Here goes:
    $\epsilon^* \equiv \log\left(\frac{b}{Ak^\alpha}\right)$.
 1. (In this step we abuse notation by freezing $V, k, b$ and in
    effect temporarily treating them as Big $K,B$ values. Thus, in
-   this step 6 little k, b are frozen at guessed at value of K, B.)
+   this step 6 little $k, b$ are frozen at guessed at value of $K, B$.)
    Fixing the values of $V$, $b$ and $k$, compute
    optimal choices of consumption $c^i$ with consumers’ FOCs.
    Assume that only agent 2 holds debt: $\xi^2 = b$ and that both agents
