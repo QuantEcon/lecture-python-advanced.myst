@@ -184,14 +184,12 @@ and $\tau_0$ is the time $t=0$ tax rate.
 
 In equation {eq}`eqn_AMSS2_10`, it is understood that
 
-```{math}
-:nowrap:
-
+$$
 \begin{aligned}
 \tau_0 = 1 - \frac{u_{l,0}}{u_{c,0}} \\
 R_0^{-1} =  \beta  \sum_{s=1}^S \Pi(s | s_0) \frac{u_c(s)}{u_{c,0}}
 \end{aligned}
-```
+$$
 
 It is useful to transform  some of the above equations to forms that are more natural for analyzing the
 case of a CRRA utility specification that we shall use in our example economies.
