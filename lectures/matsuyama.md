@@ -826,6 +826,7 @@ However you can use the [binder link](https://mybinder.org/v2/gh/QuantEcon/lectu
 ```
 
 ```{code-cell} python3
+:tags: ["remove-output"]
 @interact(ρ=(0.0, 1.0, 0.05), maxiter=(50, 5000, 50), npts=(25, 750, 25))
 def interact_attraction_basis(ρ=0.2, maxiter=250, npts=250):
     # Create the figure and axis that we will plot on

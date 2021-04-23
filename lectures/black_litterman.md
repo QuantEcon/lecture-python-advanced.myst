@@ -393,6 +393,7 @@ However you can use the [binder link](https://mybinder.org/v2/gh/QuantEcon/lectu
 ```
 
 ```{code-cell} python3
+:tags: ["remove-output"]
 def black_litterman(λ, μ1, μ2, Σ1, Σ2):
     """
     This function calculates the Black-Litterman mixture
