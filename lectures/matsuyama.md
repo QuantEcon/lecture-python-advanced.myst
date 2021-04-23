@@ -793,6 +793,42 @@ in real-time. Below we use an interactive plot to do this.
 Note, interactive plotting requires the [ipywidgets](https://github.com/jupyter-widgets/ipywidgets) module to be installed and enabled.
 
 ```{code-cell} python3
+#Setup Parameters
+ρ=0.2
+maxiter=250
+npts=250
+
+# Create the figure and axis that we will plot on
+fig, ax = plt.subplots(figsize=(12, 10))
+
+# Create model and attraction basis
+s1, θ, δ = 0.5, 2.5, 0.75
+model = MSGSync(s1, θ, δ, ρ)
+ab = model.create_attraction_basis(maxiter=maxiter, npts=npts)
+
+# Color map with colormesh
+unitrange = np.linspace(0, 1, npts)
+cf = ax.pcolormesh(unitrange, unitrange, ab, cmap="viridis")
+cbar_ax = fig.add_axes([0.95, 0.15, 0.05, 0.7])
+plt.colorbar(cf, cax=cbar_ax)
+plt.show()
+```
+
+```{note}
+To Generate an Interactive Plot you can use the ipywidget
+decorator `interact`.
+
+This doesn't currently display on the website. Working
+to support rich content such as ipywidgets as HTML javascript objects.
+
+https://github.com/QuantEcon/lecture-python-advanced.myst/issues/28
+
+However you can use the [binder link](https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/matsuyama.ipynb) to launch this notebook on mybinder
+```
+
+```{code-cell} python3
+:tags: ["remove-output"]
+@interact(ρ=(0.0, 1.0, 0.05), maxiter=(50, 5000, 50), npts=(25, 750, 25))
 def interact_attraction_basis(ρ=0.2, maxiter=250, npts=250):
     # Create the figure and axis that we will plot on
     fig, ax = plt.subplots(figsize=(12, 10))
@@ -808,15 +844,5 @@ def interact_attraction_basis(ρ=0.2, maxiter=250, npts=250):
     cbar_ax = fig.add_axes([0.95, 0.15, 0.05, 0.7])
     plt.colorbar(cf, cax=cbar_ax)
     plt.show()
-    return None
-```
-
-```{code-cell} python3
-fig = interact(interact_attraction_basis,
-               ρ=(0.0, 1.0, 0.05),
-               maxiter=(50, 5000, 50),
-               npts=(25, 750, 25))
-from IPython.display import display
-display(fig)
 ```
 

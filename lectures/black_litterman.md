@@ -380,7 +380,20 @@ If $\hat \mu$ is the maximum likelihood estimator
 and $\tau$ is chosen heavily to weight this view, then the
 customer's portfolio will involve big short-long positions.
 
+```{note}
+To Generate an Interactive Plot you can use the ipywidget
+decorator `interact`.
+
+This doesn't currently display on the website. Working
+to support rich content such as ipywidgets as HTML javascript objects.
+
+https://github.com/QuantEcon/lecture-python-advanced.myst/issues/28
+
+However you can use the [binder link](https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/black_litterman.ipynb) to launch this notebook on mybinder
+```
+
 ```{code-cell} python3
+:tags: ["remove-output"]
 def black_litterman(λ, μ1, μ2, Σ1, Σ2):
     """
     This function calculates the Black-Litterman mixture
