@@ -617,6 +617,7 @@ $\bar d_2$ (or $\lambda$ ), we can trace out the whole curve
 as the figure below illustrates.
 
 ```{code-cell} python3
+:tags: ["remove-output"]
 np.random.seed(1987102)
 
 N = 2                                           # Number of assets
@@ -702,6 +703,7 @@ following figure, on which the curve connecting $\hat \mu$
 and $\mu_{BL}$ are bending
 
 ```{code-cell} python3
+:tags: ["remove-output"]
 λ_grid = np.linspace(.001, 20000, 1000)
 curve = np.asarray([black_litterman(λ, μ_m, μ_est, Σ_est,
                                     τ * np.eye(N)).flatten() for λ in λ_grid])
