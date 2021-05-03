@@ -382,10 +382,10 @@ customer's portfolio will involve big short-long positions.
 
 ```{note}
 To Generate an Interactive Plot you can use the ipywidget
-decorator `interact`.
+decorator `interact`. Interactive plotting requires the [ipywidgets](https://github.com/jupyter-widgets/ipywidgets) module to be installed and enabled.
 
-This doesn't currently display on the website. Working
-to support rich content such as ipywidgets as HTML javascript objects.
+The following `code-cell` doesn't currently display on the website. We are working
+to support rich content such as `ipywidgets` as HTML javascript objects.
 
 https://github.com/QuantEcon/lecture-python-advanced.myst/issues/28
 
@@ -616,6 +616,15 @@ $\bar d_2$ on the RHS of the constraint, by varying
 $\bar d_2$ (or $\lambda$ ), we can trace out the whole curve
 as the figure below illustrates.
 
+```{note}
+The following `code-cell` doesn't currently display on the website. We are working
+to support rich content such as `ipywidgets` as HTML javascript objects.
+
+https://github.com/QuantEcon/lecture-python-advanced.myst/issues/28
+
+However you can use the [binder link](https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/black_litterman.ipynb) to launch this notebook on mybinder
+```
+
 ```{code-cell} python3
 :tags: ["remove-output"]
 np.random.seed(1987102)
@@ -701,6 +710,15 @@ $\tau I$ instead of $\tau \Sigma$.
 This leads to the
 following figure, on which the curve connecting $\hat \mu$
 and $\mu_{BL}$ are bending
+
+```{note}
+The following `code-cell` doesn't currently display on the website. We are working
+to support rich content such as `ipywidgets` as HTML javascript objects.
+
+https://github.com/QuantEcon/lecture-python-advanced.myst/issues/28
+
+However you can use the [binder link](https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/black_litterman.ipynb) to launch this notebook on mybinder
+```
 
 ```{code-cell} python3
 :tags: ["remove-output"]

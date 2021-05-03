@@ -787,9 +787,7 @@ plt.show()
 
 Additionally, instead of just seeing 4 plots at once, we might want to
 manually be able to change $\rho$ and see how it affects the plot
-in real-time. Below we use an interactive plot to do this.
-
-Note, interactive plotting requires the [ipywidgets](https://github.com/jupyter-widgets/ipywidgets) module to be installed and enabled.
+in real-time. Below we will turn the following figure into an interactive plot.
 
 ```{code-cell} python3
 #Setup Parameters
@@ -815,14 +813,14 @@ plt.show()
 
 ```{note}
 To Generate an Interactive Plot you can use the ipywidget
-decorator `interact`.
+decorator `interact`. Interactive plotting requires the [ipywidgets](https://github.com/jupyter-widgets/ipywidgets) module to be installed and enabled.
 
-This doesn't currently display on the website. Working
+This doesn't currently display on the website. We are working
 to support rich content such as ipywidgets as HTML javascript objects.
 
 https://github.com/QuantEcon/lecture-python-advanced.myst/issues/28
 
-However you can use the [binder link](https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/matsuyama.ipynb) to launch this notebook on mybinder
+However you can use the [binder link](https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/matsuyama.ipynb) to launch this notebook on mybinder.
 ```
 
 ```{code-cell} python3
