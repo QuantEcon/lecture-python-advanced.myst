@@ -45,28 +45,28 @@ We use these techniques
 * simulations
 * a regression coefficient from the tail of a long simulation that allows us to verify that  the asymptotic mean of government debt solves
   a fiscal-risk minimization  problem
-* an approximation to the mean of an ergodic distribution of government debt
-* an approximation  to the rate of convergence to an ergodic distribution of government debt
+* an approximation to the **mean** of an ergodic distribution of government debt
+* an approximation  to the **rate of convergence** to an ergodic distribution of government debt
 
-We apply tools applicable to  more general incomplete markets economies that are presented on pages 648 - 650 in section III.D
+We apply tools that are applicable to  more general incomplete markets economies that are presented on pages 648 - 650 in section III.D
 of {cite}`BEGS1` (BEGS).
 
-We study an  {cite}`aiyagari2002optimal` economy with  three Markov states driving government expenditures.
+We study an AMSS economy {cite}`aiyagari2002optimal`  with  three Markov states driving government expenditures.
 
-* In a {doc}`previous lecture <amss2>`, we showed that with only two Markov states, it is possible that eventually endogenous
-  interest rate fluctuations support complete markets allocations and Ramsey outcomes.
+* In a {doc}`previous lecture <amss2>`, we showed that with only two Markov states, it is possible that  endogenous
+  interest rate fluctuations eventually can support complete markets allocations and Ramsey outcomes.
 * The presence of three states  prevents the full spanning that eventually prevails in the two-state example featured in
   {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`.
 
 The lack of full spanning means that the ergodic distribution of the par value of government debt is nontrivial, in contrast to the situation
-in {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`  where  the ergodic distribution of the par value is concentrated on one point.
+in {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`  in which the ergodic distribution of the par value of government debt is concentrated on one point.
 
-Nevertheless,   {cite}`BEGS1` (BEGS) establish  for general settings that include ours, the Ramsey
+Nevertheless,   {cite}`BEGS1` (BEGS) establish that, for general settings that include ours, the Ramsey
 planner steers government assets to a level that comes
 **as close as possible** to providing full spanning in a precise a sense defined by
 BEGS that we describe below.
 
-We use code constructed {doc}`in a previous lecture <amss2>`.
+We use code constructed in {doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <amss2>`.
 
 **Warning:** Key equations in  {cite}`BEGS1` section III.D carry  typos  that we correct below.
 
@@ -123,7 +123,7 @@ The following Python code sets up the economy
 
 We'll want  first and second moments of some key random variables below.
 
-The following code computes these moments; the code is recycled from {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`.
+The following code computes these moments; the code is recycled from {doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <amss2>`.
 
 ```{code-cell} python3
 def mean(x, s):
@@ -212,10 +212,10 @@ plt.show()
 The long simulation apparently  indicates eventual convergence to an ergodic distribution.
 
 It takes about 1000 periods to reach the ergodic distribution -- an outcome that is forecast by
-approximations to rates of convergence that appear in {cite}`BEGS1` and that we discuss in {doc}`a previous lecture <amss2>`.
+approximations to rates of convergence that appear in BEGS {cite}`BEGS1` and that we discuss in {doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <amss2>`.
 
-We discard the first 2000 observations of the simulation and construct the histogram of
-the part value of government debt.
+Let's discard the first 2000 observations of the simulation and construct the histogram of
+the par value of government debt.
 
 We obtain the following graph for the histogram of the last 100,000 observations on the par value of government debt.
 
@@ -224,9 +224,9 @@ We obtain the following graph for the histogram of the last 100,000 observations
 ```
 
 The  black vertical line denotes the sample mean for the last 100,000 observations included in the histogram; the  green vertical line denotes the
-value of $\frac{ {\mathcal B}^*}{E u_c}$, associated with the sample (presumably) from
-the ergodic  where ${\mathcal B}^*$ is the regression coefficient described below;  the red vertical line denotes an approximation by {cite}`BEGS1` to the mean of the ergodic
-distribution that can be precomputed before sampling from the ergodic distribution, as described below.
+value of $\frac{ {\mathcal B}^*}{E u_c}$, associated with a sample from our approximation to
+the ergodic distribution where ${\mathcal B}^*$ is a regression coefficient to be described below;  the red vertical line denotes an approximation by {cite}`BEGS1` to the mean of the ergodic
+distribution that can be computed **before**  the ergodic distribution has been approximated, as described below.
 
 Before moving on to discuss the histogram and the vertical lines approximating the ergodic  mean of government debt in more detail, the following graphs show
 government debt and taxes early in the simulation, for periods 1-100 and 101 to 200
@@ -258,26 +258,26 @@ plt.show()
 ```
 
 For the short samples early in our simulated sample of  102,000 observations, fluctuations in government debt and the tax rate
-conceal the weak but inexorable force that the Ramsey planner puts into both series driving them toward ergodic distributions far from
+conceal the weak but inexorable force that the Ramsey planner puts into both series driving them toward ergodic marginal distributions that are far from
 these early observations
 
 * early observations are more influenced by the initial value of the par value of government debt than by the ergodic mean of the par value of government debt
-* much later observations are more influenced by the ergodic mean and are independent of the initial value of the par value of government debt
+* much later observations are more influenced by the ergodic mean and are independent of the par value of initial government debt
 
 ## Asymptotic Mean and Rate of Convergence
 
-We apply the results of {cite}`BEGS1` to interpret
+We apply the results of BEGS {cite}`BEGS1` to interpret
 
 * the mean of the ergodic distribution of government debt
 * the rate of convergence  to the ergodic distribution from an arbitrary initial government debt
 
 We begin by computing  objects required by the theory of section III.i
-of {cite}`BEGS1`.
+of BEGS {cite}`BEGS1`.
 
-As in {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`, we recall  that  {cite}`BEGS1` used a particular
-notation to represent what we can regard as a  generalization of the AMSS model.
+As in {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`, we recall  that  BEGS {cite}`BEGS1` used a particular
+notation to represent what we can regard as their  generalization of an AMSS model.
 
-We introduce some of the  {cite}`BEGS1` notation so that readers can quickly relate notation that appears in their key formulas to the notation
+We introduce some of the  {cite}`BEGS1` notation so that readers can quickly relate notation that appears in key BEGS formulas to the notation
 that we have used in previous lectures {doc}`here <amss>` and {doc}`here <amss2>`.
 
 BEGS work with objects $B_t, {\mathcal B}_t, {\mathcal R}_t, {\mathcal X}_t$ that are related to  notation that we used in
@@ -293,7 +293,7 @@ b_t(s^{t-1}) & = {\mathcal R}_{t-1} B_{t-1} \\
 \end{aligned}
 $$
 
-{cite}`BEGS1` call ${\mathcal X}_t$ the **effective** government deficit, and ${\mathcal B}_t$ the **effective** government debt.
+BEGS {cite}`BEGS1` call ${\mathcal X}_t$ the **effective** government deficit and ${\mathcal B}_t$ the **effective** government debt.
 
 Equation (44) of {cite}`BEGS1` expresses the time $t$ state $s$ government budget constraint as
 
@@ -303,7 +303,7 @@ Equation (44) of {cite}`BEGS1` expresses the time $t$ state $s$ government budge
 {\mathcal B}(s) = {\mathcal R}_\tau(s, s_{-}) {\mathcal B}_{-} + {\mathcal X}_{\tau} (s)
 ```
 
-where the dependence on $\tau$ is to remind us that these objects depend on the tax rate;  $s_{-}$ is last period's Markov state.
+where the dependence on $\tau$ is meant to remind us that these objects depend on the tax rate;  $s_{-}$ is last period's Markov state.
 
 BEGS interpret random variations in the right side of {eq}`eq_fiscal_risk_1`  as **fiscal risks** generated by
 
@@ -313,7 +313,7 @@ BEGS interpret random variations in the right side of {eq}`eq_fiscal_risk_1`  as
 
 ### Asymptotic Mean
 
-BEGS give conditions under which the ergodic mean of ${\mathcal B}_t$ approximately satisfies the equation
+BEGS give conditions under which the ergodic mean of ${\mathcal B}_t$ is approximated by
 
 ```{math}
 :label: prelim_formula_1
@@ -334,11 +334,11 @@ Regression coefficient ${\mathcal B}^*$ solves  a variance-minimization problem:
 {\mathcal B}^* = {\rm argmin}_{\mathcal B}  {\rm var}^\infty ({\mathcal R} {\mathcal B} + {\mathcal X})
 ```
 
-The minimand in criterion {eq}`eq_criterion_fiscal_1`  measures fiscal risk associated with a given tax-debt policy that appears on the right side
+The minimand in criterion {eq}`eq_criterion_fiscal_1`  measures  **fiscal risk** associated with a given tax-debt policy that appears on the right side
 of equation {eq}`eq_fiscal_risk_1`.
 
 Expressing formula {eq}`prelim_formula_1` in terms of  our notation tells us that the ergodic mean of the par value $b$ of government debt in the
-AMSS model should approximately equal
+AMSS model should be approximately
 
 ```{math}
 :label: key_formula_1
@@ -360,35 +360,35 @@ BEGS also derive the following  approximation to the rate of convergence to ${\m
 > 
 > 
 
-(See the equation above equation (47) in {cite}`BEGS1`)
+(See the equation above equation (47) in BEGS {cite}`BEGS1`)
 
-### More Advanced Material
+### More Advanced Topic
 
-The remainder of this lecture is about  technical material based on  formulas from {cite}`BEGS1`.
+The remainder of this lecture is about  technical material based on  formulas from BEGS {cite}`BEGS1`.
 
-The topic is interpreting  and extending formula {eq}`eq_criterion_fiscal_1` for the ergodic mean ${\mathcal B}^*$.
+The topic involves interpreting  and extending formula {eq}`eq_criterion_fiscal_1` for the ergodic mean ${\mathcal B}^*$.
 
 ### Chicken and Egg
 
-Attributes of the ergodic distribution for ${\mathcal B}_t$  appear
-on the right side of  formula {eq}`eq_criterion_fiscal_1` for the ergodic mean ${\mathcal B}^*$.
+Notice how attributes of the ergodic distribution for ${\mathcal B}_t$  appear
+on the right side of  formula {eq}`eq_criterion_fiscal_1` for approximating  the ergodic mean via ${\mathcal B}^*$.
 
-Thus,  formula  {eq}`eq_criterion_fiscal_1` is not useful for estimating  the mean of the ergodic in advance of actually computing the ergodic distribution
+Therefor,  formula  {eq}`eq_criterion_fiscal_1` is not useful for estimating  the mean of the ergodic **in advance** of actually approximating the ergodic distribution.
 
 * we need to know the  ergodic distribution to compute the right side of formula {eq}`eq_criterion_fiscal_1`
 
-So the primary use of equation {eq}`eq_criterion_fiscal_1` is how  it  confirms that
-the ergodic distribution solves a fiscal-risk minimization problem.
+So the primary use of equation {eq}`eq_criterion_fiscal_1` is how  it  **confirms** that
+the ergodic distribution solves a **fiscal-risk minimization problem**.
 
 As an example, notice how we used the formula for the mean of ${\mathcal B}$ in the ergodic distribution of the special AMSS economy in
 {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`
 
 * **first** we computed the ergodic distribution using a reverse-engineering construction
-* **then** we verified that ${\mathcal B}$  agrees with the mean of that distribution
+* **then** we verified that ${\mathcal B}^*$  agrees with the mean of that distribution
 
 ### Approximating the Ergodic Mean
 
-{cite}`BEGS1` propose  an approximation to  ${\mathcal B}^*$ that can be computed without first knowing the
+BEGS also {cite}`BEGS1` propose  an approximation to  ${\mathcal B}^*$ that can be computed **without** first approximating  the
 ergodic distribution.
 
 To  construct the BEGS  approximation to ${\mathcal B}^*$, we just follow steps set forth on pages 648 - 650 of section III.D of
@@ -397,9 +397,9 @@ To  construct the BEGS  approximation to ${\mathcal B}^*$, we just follow steps 
 - notation in BEGS might be confusing at first sight, so
   it is important to stare and digest before computing
 - there are also some sign errors in the {cite}`BEGS1` text that we'll want
-  to correct
+  to correct here
 
-Here is a step-by-step description of the {cite}`BEGS1` approximation procedure.
+Here is a step-by-step description of the BEGS {cite}`BEGS1` approximation procedure.
 
 ### Step by Step
 
@@ -417,7 +417,7 @@ $S=3$ in our case, but we'll write code for a general integer
 $S$.
 
 **Typo alert:** Please note that there is a sign error in equation (42)
-of {cite}`BEGS1` -- it should be a minus rather than a plus in the middle.
+of BEGS {cite}`BEGS1` -- it should be a **minus** rather than a **plus** in the middle.
 
 * We have made the appropriate correction in the above equation.
 
@@ -450,7 +450,7 @@ $$
 This equation says that at a constant discount factor $\beta$,  equivalent government debt ${\mathcal B}$ equals the
 present value of the mean effective government **surplus**.
 
-**Typo alert**: there is a sign error in equation (46) of {cite}`BEGS1` --the left
+**Another typo alert**: there is a sign error in equation (46) of BEGS {cite}`BEGS1` --the left
 side should be multiplied by $-1$.
 
 * We have made this correction in the above equation.
@@ -458,7 +458,7 @@ side should be multiplied by $-1$.
 For a given ${\mathcal B}$, let a $\tau$ that solves the
 above equation be called $\tau(\mathcal B)$.
 
-We'll use a Python root solver to finds a $\tau$ that this
+We'll use a Python root solver to find a $\tau$ that solves this
 equation for a given ${\mathcal B}$.
 
 We'll use this function to induce a function $\tau({\mathcal B})$.
@@ -471,13 +471,13 @@ $$
 J({\mathcal B})(s) =  \mathcal R_{\tau({\mathcal B})}(s) {\mathcal B} + {\mathcal X}_{\tau({\mathcal B})}(s) ,  \quad s = 1, \ldots, S
 $$
 
-**Step 5:** Now that we have a machine to compute the random variable
+**Step 5:** Now that we have a way to compute the random variable
 $J({\mathcal B})(s), s= 1, \ldots, S$, via  a composition of  Python
 functions, we can use the population variance  function that we
 defined in the code above to construct a function
 ${\rm var}(J({\mathcal B}))$.
 
-We put ${\rm var}(J({\mathcal B}))$ into a function minimizer and
+We put ${\rm var}(J({\mathcal B}))$ into a Python function minimizer and
 compute
 
 $$
@@ -510,7 +510,9 @@ $$
 $$
 
 In the two-Markov-state AMSS economy in {doc}`Fiscal Insurance via Fluctuating Interest Rates <amss2>`,
-$E_t u_{c,t+1} = E u_{c,t+1}$ in the ergodic distribution and we  have confirmed that
+$E_t u_{c,t+1} = E u_{c,t+1}$ in the ergodic distribution.
+
+We  have confirmed that
 this formula very accurately describes a **constant** par value of government debt that
 
 * supports full fiscal insurance via fluctuating interest parameters, and
@@ -520,10 +522,10 @@ In the three-Markov-state economy of this lecture, the par value of government d
 
 In this economy, $\hat b$ given by the above formula approximates the mean of the ergodic distribution of  the par value of  government debt
 
-so while the approximation circumvents the chicken and egg problem surrounding
+so while the approximation circumvents the chicken and egg problem that  surrounds
 : the much better approximation associated with the green vertical line, it does so by enlarging the approximation error
 
-* this is the red vertical line plotted in the histogram of the last 100,000 observations of our simulation of the  par value of government debt plotted above
+* $\hat b$ is represented by the red vertical line plotted in the histogram of the last 100,000 observations of our simulation of the  par value of government debt plotted above
 * the approximation is fairly accurate but not perfect
 
 ### Execution
@@ -564,12 +566,14 @@ Remember that in our code $\pi$ is a $3 \times 3$ transition
 matrix.
 
 But because we are studying an IID case, $\pi$ has identical
-rows and we only need to compute objects for one row of $\pi$.
+rows and we need only  to compute objects for one row of $\pi$.
 
 This explains why at some places below we set $s=0$ just to pick
-off the first row of $\pi$ in the calculations.
+off the first row of $\pi$.
 
-### Code
+### Running the code
+
+Let's take the code out for a spin.
 
 First, let's compute ${\mathcal R}$ and ${\mathcal X}$
 according to our formulas
