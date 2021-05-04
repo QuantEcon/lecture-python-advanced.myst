@@ -118,7 +118,7 @@ It is at this point that AMSS {cite}`aiyagari2002optimal` modify the Lucas and S
 
 AMSS allow the government to issue only one-period risk-free debt each period.
 
-Ruling out complete markets in this way is a step in the direction of making total tax collections behave more like that prescribed in {cite}`Barro1979` than they do in {cite}`LucasStokey1983`.
+Ruling out complete markets in this way is a step in the direction of making total tax collections behave more like that prescribed in Robert Barro (1979) {cite}`Barro1979` than they do in Lucas and Stokey (1983) {cite}`LucasStokey1983`.
 
 ### Risk-free One-Period Debt Only
 
@@ -139,14 +139,14 @@ The government’s budget constraint in period $t$ at history $s^t$ is
 
 \begin{aligned}
 b_t(s^{t-1})
-    & =    \tau^n_t(s^t) n_t(s^t) - g_t(s_t) - T_t(s^t) +
+    & =    \tau^n_t(s^t) n_t(s^t) - g(s_t) - T_t(s^t) +
                    {b_{t+1}(s^t) \over R_t(s^t )}
     \\
-    & \equiv z(s^t) + {b_{t+1}(s^t) \over R_t(s^t )},
+    & \equiv z_t(s^t) + {b_{t+1}(s^t) \over R_t(s^t )},
 \end{aligned}
 ```
 
-where $z(s^t)$ is the net-of-interest government surplus.
+where $z_t(s^t)$ is the net-of-interest government surplus.
 
 To rule out Ponzi schemes, we assume that the government is subject to a **natural debt limit** (to be discussed in a forthcoming lecture).
 
@@ -165,16 +165,16 @@ yields:
 ```{math}
 :label: TS_gov_wo2
 
-b_t(s^{t-1}) =  z(s^t) + \beta  \sum_{s^{t+1}\vert s^t}  \pi_{t+1}(s^{t+1} | s^t)
+b_t(s^{t-1}) =  z_t(s^t) + \beta  \sum_{s^{t+1}\vert s^t}  \pi_{t+1}(s^{t+1} | s^t)
                        { u_c(s^{t+1}) \over u_c(s^{t}) } \; b_{t+1}(s^t)
 ```
 
-Components of $z(s^t)$ on the right side depend on $s^t$, but the left side is required to depend only
+Components of $z_t(s^t)$ on the right side depend on $s^t$, but the left side is required to depend only
 on $s^{t-1}$ .
 
 **This is what it means for one-period government debt to be risk-free**.
 
-Therefore, the sum on the right side of equation {eq}`TS_gov_wo2` also has to depend only on $s^{t-1}$.
+Therefore, the right side of equation {eq}`TS_gov_wo2` also has to depend only on $s^{t-1}$.
 
 This requirement will give rise to **measurability constraints** on the Ramsey allocation to be discussed soon.
 
@@ -183,13 +183,13 @@ side of next period’s budget constraint (associated with a
 particular realization $s_{t}$) we get
 
 $$
-b_t(s^{t-1}) =  z(s^t) + \sum_{s^{t+1}\vert s^t} \beta  \pi_{t+1}(s^{t+1} | s^t)
+b_t(s^{t-1}) =  z_t(s^t) + \sum_{s^{t+1}\vert s^t} \beta  \pi_{t+1}(s^{t+1} | s^t)
                        { u_c(s^{t+1}) \over u_c(s^{t}) }
-\, \left[z(s^{t+1}) + {b_{t+2}(s^{t+1}) \over R_{t+1}(s^{t+1})}\right]
+\, \left[z_{t+1}(s^{t+1}) + {b_{t+2}(s^{t+1}) \over R_{t+1}(s^{t+1})}\right]
 $$
 
 After making similar repeated substitutions for all future occurrences of
-government indebtedness, and by invoking the natural debt limit, we
+government indebtedness, and by invoking a natural debt limit, we
 arrive at:
 
 ```{math}
@@ -198,7 +198,7 @@ arrive at:
 \begin{aligned}
 b_t(s^{t-1})
     &=  \sum_{j=0}^\infty \sum_{s^{t+j} | s^t} \beta^j  \pi_{t+j}(s^{t+j} | s^t)
-              { u_c(s^{t+j}) \over u_c(s^{t}) } \;z(s^{t+j})
+              { u_c(s^{t+j}) \over u_c(s^{t}) } \;z_{t+j}(s^{t+j})
         \end{aligned}
 ```
 
@@ -210,17 +210,17 @@ Now let's
 * substitute the resource constraint into the net-of-interest government surplus, and
 * use the household’s first-order condition $1-\tau^n_t(s^t)= u_{\ell}(s^t) /u_c(s^t)$ to eliminate the labor tax rate
 
-so that we can express the net-of-interest government surplus $z(s^t)$ as
+so that we can express the net-of-interest government surplus $z_t(s^t)$ as
 
 ```{math}
 :label: AMSS_44_2
 
-z(s^t)
-    = \left[1 - {u_{\ell}(s^t) \over u_c(s^t)}\right] \left[c_t(s^t)+g_t(s_t)\right]
-        -g_t(s_t) - T_t(s^t)\,.
+z_t(s^t)
+    = \left[1 - {u_{\ell}(s^t) \over u_c(s^t)}\right] \left[c_t(s^t)+g(s_t)\right]
+        -g(s_t) - T_t(s^t)\,.
 ```
 
-If we substitute  appropriate versions of the right side of {eq}`AMSS_44_2` for $z(s^{t+j})$ into equation {eq}`TS_gov_wo3`,
+If we substitute  appropriate versions of the right side of {eq}`AMSS_44_2` for $z_{t+j}(s^{t+j})$ into equation {eq}`TS_gov_wo3`,
 we obtain a sequence of *implementability constraints* on a Ramsey allocation in an AMSS economy.
 
 Expression {eq}`TS_gov_wo3` at time $t=0$ and initial state $s^0$
@@ -230,7 +230,7 @@ was also  an *implementability constraint* on a Ramsey allocation in a Lucas-Sto
 :label: TS_gov_wo4
 
 b_0(s^{-1}) = \mathbb E_0 \sum_{j=0}^\infty \beta^j
-               { u_c(s^{j}) \over u_c(s^{0}) } \;z(s^{j})
+               { u_c(s^{j}) \over u_c(s^{0}) } \;z_j(s^{j})
 ```
 
 Indeed, it was the *only* implementability constraint there.
@@ -241,7 +241,7 @@ But now we also have a large number of additional implementability constraints
 :label: TS_gov_wo4a
 
 b_t(s^{t-1}) =  \mathbb E_t \sum_{j=0}^\infty \beta^j
-              { u_c(s^{t+j}) \over u_c(s^{t}) } \;z(s^{t+j})
+              { u_c(s^{t+j}) \over u_c(s^{t}) } \;z_{t+j}(s^{t+j})
 ```
 
 Equation {eq}`TS_gov_wo4a` must hold for each $s^t$ for each $t \geq 1$.
@@ -263,7 +263,7 @@ After we have substituted the resource constraint into the utility function, we 
 $$
 \max_{\{c_t(s^t),b_{t+1}(s^t)\}}
 \mathbb E_0 \sum_{t=0}^\infty \beta^t
-                        u\left(c_t(s^t),1-c_t(s^t)-g_t(s_t)\right)
+                        u\left(c_t(s^t),1-c_t(s^t)-g(s_t)\right)
 $$
 
 where the maximization is subject to
@@ -272,7 +272,7 @@ where the maximization is subject to
 :label: AMSS_44
 
 \mathbb E_{0} \sum_{j=0}^\infty \beta^j
-      { u_c(s^{j}) \over u_c(s^{0}) } \;z(s^{j}) \geq b_0(s^{-1})
+      { u_c(s^{j}) \over u_c(s^{0}) } \;z_j(s^{j}) \geq b_0(s^{-1})
 ```
 
 and
@@ -282,7 +282,7 @@ and
 
 \mathbb E_{t} \sum_{j=0}^\infty \beta^j
     { u_c(s^{t+j}) \over u_c(s^{t}) } \;
-    z(s^{t+j}) = b_t(s^{t-1})
+    z_{t+j}(s^{t+j}) = b_t(s^{t-1})
       \quad \forall \, t,  s^t
 ```
 
@@ -306,7 +306,7 @@ $$
    &\;\geq\; (\leq)\;\, 0 \quad \text{if the constraint binds in the following direction }
    \\
    & \mathbb E_{t} \sum_{j=0}^\infty \beta^j
-    { u_c(s^{t+j}) \over u_c(s^{t}) } \;z(s^{t+j}) \;\geq \;(\leq)\;\, b_t(s^{t-1})
+    { u_c(s^{t+j}) \over u_c(s^{t}) } \;z_{t+j}(s^{t+j}) \;\geq \;(\leq)\;\, b_t(s^{t-1})
 \end{aligned}
 $$
 
@@ -331,14 +331,14 @@ Then a Lagrangian for the Ramsey problem can  be represented as
 
 \begin{aligned}
    J &= \mathbb E_{0} \sum_{t=0}^\infty \beta^t
-                        \biggl\{ u\left(c_t(s^t), 1-c_t(s^t)-g_t(s_t)\right)\\
+                        \biggl\{ u\left(c_t(s^t), 1-c_t(s^t)-g(s_t)\right)\\
    &  \qquad + \gamma_t(s^t) \Bigl[ \mathbb E_{t} \sum_{j=0}^\infty \beta^j
-         u_c(s^{t+j}) \,z(s^{t+j}) - u_c(s^{t}) \,b_t(s^{t-1}) \biggr\}
+         u_c(s^{t+j}) \,z_{t+j}(s^{t+j}) - u_c(s^{t}) \,b_t(s^{t-1}) \biggr\}
          \\
    &= \mathbb E_{0} \sum_{t=0}^\infty \beta^t
-                         \biggl\{ u\left(c_t(s^t), 1-c_t(s^t)-g_t(s_t)\right)
+                         \biggl\{ u\left(c_t(s^t), 1-c_t(s^t)-g(s_t)\right)
         \\
-   &  \qquad + \Psi_t(s^t)\, u_c(s^{t}) \,z(s^{t}) -
+   &  \qquad + \Psi_t(s^t)\, u_c(s^{t}) \,z_t(s^{t}) -
                    \gamma_t(s^t)\, u_c(s^{t}) \, b_t(s^{t-1})  \biggr\}
 \end{aligned}
 ```
@@ -365,7 +365,7 @@ to $c_t(s^t)$ can be expressed as
 
 \begin{aligned}
   u_c(s^t)-u_{\ell}(s^t) &+ \Psi_t(s^t)\left\{ \left[
-    u_{cc}(s^t) - u_{c\ell}(s^{t})\right]z(s^{t}) +
+    u_{cc}(s^t) - u_{c\ell}(s^{t})\right]z_t(s^{t}) +
     u_{c}(s^{t})\,z_c(s^{t}) \right\}
     \\
     & \hspace{35mm} - \gamma_t(s^t)\left[
@@ -381,7 +381,7 @@ and with respect to $b_t(s^t)$ as
 \mathbb E_{t} \left[\gamma_{t+1}(s^{t+1})\,u_c(s^{t+1})\right] = 0
 ```
 
-If we substitute $z(s^t)$ from {eq}`AMSS_44_2` and its derivative
+If we substitute $z_t(s^t)$ from {eq}`AMSS_44_2` and its derivative
 $z_c(s^t)$ into the first-order condition {eq}`AMSS_foc;a`, we  find  two
 differences from the corresponding condition for the optimal allocation
 in a Lucas-Stokey economy with state-contingent government debt.
@@ -392,7 +392,7 @@ in a Lucas-Stokey economy with state-contingent government debt.
     * This term reflects the constraint that
       beginning-of-period government indebtedness must be the same across all
       realizations of next period’s state, a constraint that would  not be present if
-      government debt could be state contingent.
+      government debt could be state-contingent.
 1. The Lagrange multiplier $\Psi_t(s^t)$ in the first-order condition
    {eq}`AMSS_foc;a` may change over time in response to realizations of the state,
    while the multiplier $\Phi$ in the Lucas-Stokey economy is time-invariant.
@@ -437,8 +437,7 @@ $$
 where $R_t(s^t)$ is the gross risk-free rate of interest between $t$
 and $t+1$ at history $s^t$ and $T_t(s^t)$ are non-negative transfers.
 
-Throughout this lecture, we shall set transfers to zero (for some issues about the limiting behavior of debt, this makes a possibly
-important  difference from AMSS {cite}`aiyagari2002optimal`, who restricted transfers
+Throughout this lecture, we shall set transfers to zero (for some issues about the limiting behavior of debt, this is  possibly an important  difference from AMSS {cite}`aiyagari2002optimal`, who restricted transfers
 to be non-negative).
 
 In this case, the household faces a sequence of budget constraints
@@ -584,7 +583,7 @@ condition with respect to $x(s)$ is
 \beta V_x(x(s),s) = \mu(s|s_-)
 ```
 
-Applying the envelope theorem to Bellman equation {eq}`eqn:AMSSapp5` gives
+Applying an envelope theorem to Bellman equation {eq}`eqn:AMSSapp5` gives
 
 ```{math}
 :label: eqn:AMSSapp8
@@ -599,7 +598,7 @@ Equations {eq}`eqn:AMSSapp7` and {eq}`eqn:AMSSapp8` imply that
 :label: eqn:AMSSapp9
 
 V_x(x_-, s_-) = \sum_{s} \left( \Pi(s|s_-) {\frac{u_c(s)}{\sum_{\tilde s}
-\Pi(\tilde s| s_-) u_c(\tilde s)}} \right) V_x(x(s), s)
+\Pi(\tilde s| s_-) u_c(\tilde s)}} \right) V_x(x, s)
 ```
 
 Equation {eq}`eqn:AMSSapp9` states that $V_x(x, s)$ is a *risk-adjusted martingale*.
@@ -629,7 +628,7 @@ found that
 * a counterpart to $V_x(x,s)$ is time-invariant and equal to
   the Lagrange multiplier on the Lucas-Stokey implementability constraint
 * time invariance of $V_x(x,s)$  is the source of a key
-  feature of the Lucas-Stokey model, namely, **state variable degeneracy** in which $x_t$ is an exact time-invariant function of $s_t$)
+  feature of the Lucas-Stokey model, namely, **state variable degeneracy** in which $x_t$ is an exact time-invariant function of $s_t$.
 
 That $V_x(x,s)$ varies over time according to a twisted martingale
 means that there is no state-variable degeneracy in the AMSS model.
@@ -690,7 +689,7 @@ We will first build some useful functions for solving the model
 
 ### Anticipated One-Period War
 
-In our lecture on {doc}`optimal taxation with state contingent debt <opt_tax_recur>`
+In our lecture on {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`
 we studied how the government manages uncertainty in a simple setting.
 
 As in that lecture, we assume the one-period utility function
@@ -704,8 +703,8 @@ For convenience in  matching our computer code, we have expressed
 utility as a function of $n$ rather than leisure $l$.
 ```
 
-We consider the same government expenditure process studied in the lecture on
-{doc}`optimal taxation with state contingent debt <opt_tax_recur>`.
+We first consider a government expenditure process that we  studied earlier in a lecture on
+{doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
 
 Government expenditures are known for sure in all periods except one.
 
@@ -750,18 +749,18 @@ This utility function is implemented in the following class.
 :load: _static/lecture_specific/opt_tax_recur/crra_utility.py
 ```
 
-The following figure plots the Ramsey plan under both complete and incomplete
+The following figure plots  Ramsey plans under complete and incomplete
 markets for both possible realizations of the state at time $t=3$.
 
-Optimal policies when  the government has  access to state contingent debt are
-represented by black lines, while the optimal policies when there is only a risk-free bond are in red.
+Ramsey outcomes and  policies when  the government has  access to state-contingent debt are
+represented by black lines and  by red lines when there is only a risk-free bond.
 
 Paths with circles are histories in which there is peace, while those with
 triangle denote war.
 
 ```{code-cell} python3
 # Initialize μgrid for value function iteration
-μ_grid = np.linspace(-0.7, 0.01, 200)
+μ_grid = np.linspace(-0.7, 0.01, 300)
 
 time_example = CRRAutility()
 
@@ -821,34 +820,37 @@ How a Ramsey planner responds to  war depends on the structure of the asset mark
 
 If it is able to trade state-contingent debt, then at time $t=2$
 
-* the government purchases an Arrow security that pays off when $g_3 = g_h$
-* the government sells an Arrow security that  pays off when $g_3 = g_l$
-* these purchases are designed in such a way that regardless of whether or not there is a war at $t=3$, the government will begin  period $t=4$ with the *same* government debt
+* the government **purchases** an Arrow security that pays off when $g_3 = g_h$
+* the government **sells** an Arrow security that  pays off when $g_3 = g_l$
+* the Ramsey planner designs these purchases and sales  designed so  that, regardless of whether or not there is a war at $t=3$, the government  begins  period $t=4$ with the *same* government debt
 
 This pattern facilities smoothing tax rates across  states.
 
-The government without state contingent debt cannot do this.
+The government without state-contingent debt cannot do this.
 
 Instead, it must enter   time $t=3$ with the same level of debt falling due whether there is peace or war at $t=3$.
 
-It responds to this constraint by smoothing tax rates across time.
+The risk-free rate between time $2$ and time $3$ is unusually **low** because at time $2$ consumption at time $3$ is expected to be unusually **low**.
 
-To finance a war it raises taxes and issues more debt.
+A **low** risk-free rate of return on government debt between time $2$ and time $3$ allows the government to enter period $3$ with **lower** government debt than it entered period $2$.
+
+To finance a war at time $3$ it raises taxes and issues more debt to carry into perpetual peace that begins in period $4$.
 
 To service the additional debt burden, it raises taxes in all future periods.
 
-The absence of state contingent debt leads to an important difference in the
+The absence of state-contingent debt leads to an important difference in the
 optimal tax policy.
 
-When the Ramsey planner has access to state contingent debt, the optimal tax
+When the Ramsey planner has access to state-contingent debt, the optimal tax
 policy is history independent
 
 * the tax rate is a function  of the current level of government spending only,
   given the Lagrange multiplier on the implementability constraint
 
-Without state contingent debt, the optimal tax rate is history dependent.
+Without state-contingent debt, the optimal tax rate is history dependent.
 
-* A war at time $t=3$ causes a permanent increase in the tax rate.
+* A war at time $t=3$ causes a permanent **increase** in the tax rate.
+* Peace at time $t=3$ causes a permanent **reduction** in the tax rate.
 
 #### Perpetual War Alert
 
@@ -876,7 +878,7 @@ With these preferences, Ramsey tax rates will vary even in the Lucas-Stokey
 model with state-contingent debt.
 
 The figure below plots optimal tax policies for both the economy with
-state contingent debt (circles) and the economy with only a risk-free bond
+state-contingent debt (circles) and the economy with only a risk-free bond
 (triangles).
 
 ```{code-cell} python3
@@ -917,15 +919,19 @@ plt.show()
 ```
 
 When the government experiences a prolonged period of peace, it is able to reduce
-government debt and set permanently lower tax rates.
+government debt and set persistently lower tax rates.
 
 However, the government  finances a long war by borrowing and raising taxes.
 
-This results in a drift away from  policies with state contingent debt that
+This results in a drift away from  policies with state-contingent debt that
 depends on the history of shocks.
 
 This is even more evident in the following figure that plots the evolution of
 the two policies over 200 periods.
+
+This outcome reflects the presence of a force for **precautionary saving** that the incomplete markets structure imparts to the Ramsey plan.
+
+In {doc}`this subsequent lecture <amss2>` and  {doc}`this subsequent lecture <amss3>`, some ultimate consequences of that force are explored.
 
 ```{code-cell} python3
 T = 200  # Set T to 200 periods
