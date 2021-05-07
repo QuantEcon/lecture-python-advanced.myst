@@ -251,7 +251,7 @@ c_bar, debt_complete = consumption_complete(cp)
 
 c_path, debt_path, y_path = consumption_incomplete(cp, s_path)
 
-fig, ax = plt.subplots(1, 2, figsize=(15, 5))
+fig, ax = plt.subplots(1, 2, figsize=(14, 4))
 
 ax[0].set_title('Consumption paths')
 ax[0].plot(np.arange(N_simul), c_path, label='incomplete market')
@@ -285,7 +285,7 @@ income $y_t$, notice that
 As indicated above, we relabel variables to acquire tax-smoothing interpretations of the complete markets and incomplete markets consumption-smoothing models.
 
 ```{code-cell} python3
-fig, ax = plt.subplots(1, 2, figsize=(15, 5))
+fig, ax = plt.subplots(1, 2, figsize=(14, 4))
 
 ax[0].set_title('Tax collection paths')
 ax[0].plot(np.arange(N_simul), c_path, label='incomplete market')

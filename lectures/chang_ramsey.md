@@ -882,7 +882,8 @@ $\beta = 0.8$.
 (Here we have set the number of subgradients to 10 in order to speed up the
 code for now - we can increase accuracy by increasing the number of subgradients)
 
-```{literalinclude} _static/lecture_specific/chang_credible/changecon.py
+```{code-cell} python3
+:load: _static/lecture_specific/chang_credible/changecon.py
 ```
 
 ```{code-cell} python3

@@ -281,7 +281,7 @@ The plot below quickly replicates the first two figures of
 that lecture and that  notebook to confirm that the solutions are the same
 
 ```{code-cell} python3
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 5))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
 
 for i in range(25):
     econ1.compute_sequence(x0, ts_length=150)
