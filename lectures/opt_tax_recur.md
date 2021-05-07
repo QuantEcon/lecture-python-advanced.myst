@@ -1114,7 +1114,7 @@ sim_seq_h[4] = time_example.G[sHist_h]
 sim_seq_l[5] = time_example.Θ[sHist_l] * sim_seq_l[1]
 sim_seq_h[5] = time_example.Θ[sHist_h] * sim_seq_h[1]
 
-fig, axes = plt.subplots(3, 2, figsize=(14, 10))
+fig, axes = plt.subplots(3, 2, figsize=(12, 8))
 titles = ['Consumption', 'Labor Supply', 'Government Debt',
           'Tax Rate', 'Government Spending', 'Output']
 
@@ -1392,7 +1392,7 @@ sim_bel[4] = log_example.G[sHist]
 sim_seq[5] = log_example.Θ[sHist] * sim_seq[1]
 sim_bel[5] = log_example.Θ[sHist] * sim_bel[1]
 
-fig, axes = plt.subplots(3, 2, figsize=(14, 10))
+fig, axes = plt.subplots(3, 2, figsize=(10, 6))
 titles = ['Consumption', 'Labor Supply', 'Government Debt',
           'Tax Rate', 'Government Spending', 'Output']
 
