@@ -1093,7 +1093,7 @@ the difference in the two models:
 epsgrid = np.linspace(-1,1,1000)
 
 
-fig, ax = plt.subplots(1,2,figsize=(15,7))
+fig, ax = plt.subplots(1,2,figsize=(14,6))
 ax[0].plot(epsgrid, mdl1.w11(epsgrid), color='black', label='Agent 1\'s endowment')
 ax[0].plot(epsgrid, mdl1.w21(epsgrid), color='blue', label='Agent 2\'s endowment')
 ax[0].plot(epsgrid, mdl1.Y(epsgrid,1), color='red', label=r'Production with $k=1$')
