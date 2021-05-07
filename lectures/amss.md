@@ -400,8 +400,9 @@ in a Lucas-Stokey economy with state-contingent government debt.
 We need some code from  {doc}`an earlier lecture <opt_tax_recur>`
 on optimal taxation with state-contingent debt  sequential allocation implementation:
 
-```{literalinclude} _static/lecture_specific/opt_tax_recur/sequential_allocation.py
+```{code-cell} python3
 ---
+load: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
 tags: [output_scroll]
 ---
 ```
@@ -672,7 +673,8 @@ assets, returning any excess revenues to the household as non-negative lump-sum 
 
 The recursive formulation is implemented as follows
 
-```{literalinclude} _static/lecture_specific/amss/recursive_allocation.py
+```{code-cell} python3
+:load: _static/lecture_specific/amss/recursive_allocation.py
 ```
 
 ## Examples
@@ -681,7 +683,8 @@ We now turn to some examples.
 
 We will first build some useful functions for solving the model
 
-```{literalinclude} _static/lecture_specific/amss/utilities.py
+```{code-cell} python3
+:load: _static/lecture_specific/amss/utilities.py
 ```
 
 ### Anticipated One-Period War
@@ -742,7 +745,8 @@ We assume the same utility parameters as in the {doc}`Lucas-Stokey economy <opt_
 
 This utility function is implemented in the following class.
 
-```{literalinclude} _static/lecture_specific/opt_tax_recur/crra_utility.py
+```{code-cell} python3
+:load: _static/lecture_specific/opt_tax_recur/crra_utility.py
 ```
 
 The following figure plots  Ramsey plans under complete and incomplete
@@ -866,7 +870,8 @@ $$
 
 In accordance, we will re-define our utility function.
 
-```{literalinclude} _static/lecture_specific/opt_tax_recur/log_utility.py
+```{code-cell} python3
+:load: _static/lecture_specific/opt_tax_recur/log_utility.py
 ```
 
 With these preferences, Ramsey tax rates will vary even in the Lucas-Stokey

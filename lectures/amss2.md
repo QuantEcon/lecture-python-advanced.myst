@@ -245,7 +245,8 @@ In equation {eq}`amss2_TS_barg10`, it is understood that $c$ and $g$ are each fu
 
 The CRRA utility function is represented in the following class.
 
-```{literalinclude} _static/lecture_specific/opt_tax_recur/crra_utility.py
+```{code-cell} python3
+:load: _static/lecture_specific/opt_tax_recur/crra_utility.py
 ```
 
 ## Example Economy
@@ -275,20 +276,23 @@ Here are several classes that do most of the work for us.
 The code is  mostly taken or adapted from the earlier lectures {doc}`optimal taxation without state-contingent debt <amss>` and
 {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
 
-```{literalinclude} _static/lecture_specific/opt_tax_recur/sequential_allocation.py
+```{code-cell} python3
 ---
+load: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
 tags: [output_scroll]
 ---
 ```
 
-```{literalinclude} _static/lecture_specific/amss/recursive_allocation.py
+```{code-cell} python3
 ---
+load: _static/lecture_specific/amss/recursive_allocation.py
 tags: [output_scroll]
 ---
 ```
 
-```{literalinclude} _static/lecture_specific/amss/utilities.py
+```{code-cell} python3
 ---
+load: _static/lecture_specific/amss/utilities.py
 tags: [output_scroll]
 ---
 ```
