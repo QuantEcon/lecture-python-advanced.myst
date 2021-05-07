@@ -269,7 +269,7 @@ for i in range(T):
     tax[i, :] = S @ x[:, i] + M @ u[:, i]
 
 # Plot of debt issuance and taxation
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 4))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 3))
 ax1.plot(x[0, :])
 ax1.set_title('One-period debt issuance')
 ax1.set_xlabel('Time')
@@ -310,7 +310,7 @@ for i in range(T):
     tax[i, :] = S @ x[:, i] + M @ u[:, i]
 
 # Plot of debt issuance and taxation
-fig, (ax1, ax2) =  plt.subplots(1, 2, figsize=(16, 4))
+fig, (ax1, ax2) =  plt.subplots(1, 2, figsize=(12, 3))
 ax1.plot(x[0, :])
 ax1.set_title('One-period debt issuance')
 ax1.set_xlabel('Time')
