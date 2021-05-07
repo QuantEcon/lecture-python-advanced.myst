@@ -36,7 +36,7 @@ In addition to what's in Anaconda, this lecture uses the quantecon library
 ---
 tags: [hide-output]
 ---
-!pip install --upgrade quantecon
+!conda install -y quantecon
 ```
 
 This lecture uses  the DLE class to price payout

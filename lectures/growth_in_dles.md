@@ -36,7 +36,7 @@ In addition to what's included in  Anaconda, this lecture uses the quantecon lib
 ---
 tags: [hide-output]
 ---
-!pip install --upgrade quantecon
+!conda install -y quantecon
 ```
 
 This lecture describes several complete market economies having a
