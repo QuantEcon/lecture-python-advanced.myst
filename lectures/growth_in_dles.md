@@ -126,11 +126,9 @@ allocation solves the following planning problem.
 
 Choose $\{c_t, s_t, i_t, h_t, k_t, g_t\}_{t=0}^\infty$ to maximize
 
-> $$
-> - \frac{1}{2}\mathbb{E}\sum_{t=0}^\infty \beta^t [(s_t-b_t)\cdot(s_t - b_t) + g_t \cdot g_t]
-> $$
-> 
-> 
+$$
+-\frac{1}{2}\mathbb{E}\sum_{t=0}^\infty \beta^t [(s_t-b_t)\cdot(s_t - b_t) + g_t \cdot g_t]
+$$ 
 
 subject to the linear constraints
 
