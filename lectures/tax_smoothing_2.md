@@ -808,7 +808,7 @@ x, u, w, t = lqm3.compute_sequence(x0, ts_length=300)
 ```{code-cell} python3
 # Plots of different maturities debt issuance
 
-fig, (ax1, ax2, ax3, ax4) = plt.subplots(1, 4, figsize=(16, 4))
+fig, (ax1, ax2, ax3, ax4) = plt.subplots(1, 4, figsize=(11, 3))
 ax1.plot(u[0, :])
 ax1.set_title('One-period debt issuance')
 ax1.set_xlabel('Time')
