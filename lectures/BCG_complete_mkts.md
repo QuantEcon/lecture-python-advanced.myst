@@ -836,14 +836,15 @@ It consists of 4 functions that do the following things:
       $$
       
     - It computes consumption for each agent as
-* $$
-  \begin{aligned}
-  c_0^1 & = \eta C_0 \cr
-  c_0^2 & = (1 - \eta) C_0 \cr
-  c_1^1(\epsilon) & = \eta C_1 (\epsilon) \cr
-  c_1^2 (\epsilon) & = (1 - \eta) C_1(\epsilon)
-  \end{aligned}
-  $$
+    
+      $$
+      \begin{aligned}
+      c_0^1 & = \eta C_0 \cr
+      c_0^2 & = (1 - \eta) C_0 \cr
+      c_1^1(\epsilon) & = \eta C_1 (\epsilon) \cr
+      c_1^2 (\epsilon) & = (1 - \eta) C_1(\epsilon)
+      \end{aligned}
+      $$
   
 
 The list of parameters includes:
