@@ -19,56 +19,73 @@ jobs:
           python-version: 3.8
           environment-file: environment.yml
           activate-environment: quantecon
+      - name: Install latex dependencies
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get install -y     \
+            texlive-latex-recommended \
+            texlive-latex-extra       \
+            texlive-fonts-recommended \
+            texlive-fonts-extra       \
+            texlive-xetex             \
+            latexmk                   \
+            xindy
       - name: Display Conda Environment Versions
         shell: bash -l {0}
         run: conda list
       - name: Display Pip Versions
         shell: bash -l {0}
         run: pip list
-      - name: Build HTML
+      # Build Assets (Download Notebooks and PDF via LaTeX)
+      - name: Build PDF from LaTeX
         shell: bash -l {0}
         run: |
-          jb build lectures --path-output ./
+          jb build lectures --builder pdflatex --path-output ./ -n --keep-going
+      - name: Copy LaTeX PDF for GH-PAGES
+        shell: bash -l {0}
+        run: |
+          mkdir -p _build/html/_pdf
+          cp -u _build/latex/*.pdf _build/html/_pdf
       - name: Build Download Notebooks (sphinx-tojupyter)
         shell: bash -l {0}
         run: |
           jb build lectures --path-output ./ --builder=custom --custom-builder=jupyter
-          zip -r download-notebooks.zip _build/jupyter
-      - uses: actions/upload-artifact@v2
-        with:
-          name: download-notebooks
-          path: download-notebooks.zip
       - name: Copy Download Notebooks for GH-PAGES
         shell: bash -l {0}
         run: |
-          mkdir _build/html/_notebooks
-          cp _build/jupyter/*.ipynb _build/html/_notebooks
+          mkdir -p _build/html/_notebooks
+          cp -u _build/jupyter/*.ipynb _build/html/_notebooks
+      # Build HTML (Website)
+      - name: Build HTML
+        shell: bash -l {0}
+        run: |
+          jb build lectures --path-output ./
       - name: Deploy website to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: _build/html/
-          cname: python-advanced.quantecon.org
+          # cname: python-advanced.quantecon.org
       - name: Upload "_build" folder (cache)
         uses: actions/upload-artifact@v2
         with:
           name: build-cache
           path: _build
-      - name: Prepare lecture-python-advanced.notebooks sync
-        shell: bash -l {0}
-        run: |
-          mkdir -p _build/lecture-python-advanced.notebooks
-          cp -a _notebook_repo/. _build/lecture-python-advanced.notebooks
-          cp _build/jupyter/*.ipynb _build/lecture-python-advanced.notebooks
-          ls -a _build/lecture-python-advanced.notebooks
-      - name: Commit latest notebooks to lecture-python-advanced.notebooks
-        uses: cpina/github-action-push-to-another-repository@master
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.QUANTECON_SERVICES_PAT }}
-        with:
-          source-directory: '_build/lecture-python-advanced.notebooks/'
-          destination-repository-username: 'QuantEcon'
-          destination-repository-name: 'lecture-python-advanced.notebooks'
-          commit-message: 'auto publishing updates to notebooks'
-          destination-github-username: 'quantecon-services'
-          user-email: services@quantecon.org
+      # - name: Prepare lecture-python-advanced.notebooks sync
+      #   shell: bash -l {0}
+      #   run: |
+      #     mkdir -p _build/lecture-python-advanced.notebooks
+      #     cp -a _notebook_repo/. _build/lecture-python-advanced.notebooks
+      #     cp _build/jupyter/*.ipynb _build/lecture-python-advanced.notebooks
+      #     ls -a _build/lecture-python-advanced.notebooks
+      # - name: Commit latest notebooks to lecture-python-advanced.notebooks
+      #   uses: cpina/github-action-push-to-another-repository@master
+      #   env:
+      #     API_TOKEN_GITHUB: ${{ secrets.QUANTECON_SERVICES_PAT }}
+      #   with:
+      #     source-directory: '_build/lecture-python-advanced.notebooks/'
+      #     destination-repository-username: 'QuantEcon'
+      #     destination-repository-name: 'lecture-python-advanced.notebooks'
+      #     commit-message: 'auto publishing updates to notebooks'
+      #     destination-github-username: 'quantecon-services'
+      #     user-email: services@quantecon.org
