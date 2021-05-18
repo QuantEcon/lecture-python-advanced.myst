@@ -328,7 +328,7 @@ np.random.seed(s)  # Seeds get set the same for both economies
 out = complete_ss(β, b0, x0, A, C, S_y, 80)
 c_hist_com, b_hist_com, y_hist_com, x_hist_com = out
 
-fig, ax = plt.subplots(1, 2, figsize=(15, 5))
+fig, ax = plt.subplots(1, 2, figsize=(14, 4))
 
 # Consumption plots
 ax[0].set_title('Consumption and income')
@@ -918,7 +918,7 @@ c_bar, debt_complete = consumption_complete(cp)
 
 c_path, debt_path, y_path = consumption_incomplete(cp, s_path)
 
-fig, ax = plt.subplots(1, 2, figsize=(15, 5))
+fig, ax = plt.subplots(1, 2, figsize=(14, 4))
 
 ax[0].set_title('Consumption paths')
 ax[0].plot(np.arange(N_simul), c_path, label='incomplete market')

@@ -709,19 +709,18 @@ where $\tau_0$ is the time $t=0$ tax rate.
 
 In equation {eq}`opt_tax_eqn_10`, it is understood that
 
-```{math}
-:nowrap:
-
+$$
 \begin{aligned}
 \tau_0 = 1 - \frac{u_{l,0}}{u_{c,0}}
 \end{aligned}
-```
+$$
 
 ### Sequence Implementation
 
 The above steps are implemented in a class called SequentialAllocation
 
-```{literalinclude} _static/lecture_specific/opt_tax_recur/sequential_allocation.py
+```{code-cell} python3
+:load: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
 ```
 
 ## Recursive Formulation of the Ramsey Problem
@@ -1022,7 +1021,8 @@ through them, the value of initial government debt $b_0$.
 
 The above steps are implemented in a class called `RecursiveAllocation`.
 
-```{literalinclude} _static/lecture_specific/opt_tax_recur/recursive_allocation.py
+```{code-cell} python3
+:load: _static/lecture_specific/opt_tax_recur/recursive_allocation.py
 ```
 
 ## Examples
@@ -1075,7 +1075,8 @@ utility as a function of $n$ rather than leisure $l$.
 
 This utility function is implemented in the class `CRRAutility`.
 
-```{literalinclude} _static/lecture_specific/opt_tax_recur/crra_utility.py
+```{code-cell} python3
+:load: _static/lecture_specific/opt_tax_recur/crra_utility.py
 ```
 
 We set initial government debt $b_0 = 1$.
@@ -1113,7 +1114,7 @@ sim_seq_h[4] = time_example.G[sHist_h]
 sim_seq_l[5] = time_example.Θ[sHist_l] * sim_seq_l[1]
 sim_seq_h[5] = time_example.Θ[sHist_h] * sim_seq_h[1]
 
-fig, axes = plt.subplots(3, 2, figsize=(14, 10))
+fig, axes = plt.subplots(3, 2, figsize=(12, 8))
 titles = ['Consumption', 'Labor Supply', 'Government Debt',
           'Tax Rate', 'Government Spending', 'Output']
 
@@ -1353,7 +1354,8 @@ $$
 
 We will create a new class LogUtility to represent this utility function
 
-```{literalinclude} _static/lecture_specific/opt_tax_recur/log_utility.py
+```{code-cell} python3
+:load: _static/lecture_specific/opt_tax_recur/log_utility.py
 ```
 
 Also, suppose that $g_t$ follows a two-state IID process with equal
@@ -1390,7 +1392,7 @@ sim_bel[4] = log_example.G[sHist]
 sim_seq[5] = log_example.Θ[sHist] * sim_seq[1]
 sim_bel[5] = log_example.Θ[sHist] * sim_bel[1]
 
-fig, axes = plt.subplots(3, 2, figsize=(14, 10))
+fig, axes = plt.subplots(3, 2, figsize=(10, 6))
 titles = ['Consumption', 'Labor Supply', 'Government Debt',
           'Tax Rate', 'Government Spending', 'Output']
 

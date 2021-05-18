@@ -836,14 +836,15 @@ It consists of 4 functions that do the following things:
       $$
       
     - It computes consumption for each agent as
-* $$
-  \begin{aligned}
-  c_0^1 & = \eta C_0 \cr
-  c_0^2 & = (1 - \eta) C_0 \cr
-  c_1^1(\epsilon) & = \eta C_1 (\epsilon) \cr
-  c_1^2 (\epsilon) & = (1 - \eta) C_1(\epsilon)
-  \end{aligned}
-  $$
+    
+      $$
+      \begin{aligned}
+      c_0^1 & = \eta C_0 \cr
+      c_0^2 & = (1 - \eta) C_0 \cr
+      c_1^1(\epsilon) & = \eta C_1 (\epsilon) \cr
+      c_1^2 (\epsilon) & = (1 - \eta) C_1(\epsilon)
+      \end{aligned}
+      $$
   
 
 The list of parameters includes:
@@ -1092,7 +1093,7 @@ the difference in the two models:
 epsgrid = np.linspace(-1,1,1000)
 
 
-fig, ax = plt.subplots(1,2,figsize=(15,7))
+fig, ax = plt.subplots(1,2,figsize=(14,6))
 ax[0].plot(epsgrid, mdl1.w11(epsgrid), color='black', label='Agent 1\'s endowment')
 ax[0].plot(epsgrid, mdl1.w21(epsgrid), color='blue', label='Agent 2\'s endowment')
 ax[0].plot(epsgrid, mdl1.Y(epsgrid,1), color='red', label=r'Production with $k=1$')

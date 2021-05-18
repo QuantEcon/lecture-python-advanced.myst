@@ -804,19 +804,19 @@ We accomplish this in the following steps.
    simulation of $\{\epsilon_t\}_{t=0}^T$ where $T$ is a big
    integer $\epsilon_t = \sigma_\epsilon v_t$, $v_t$ is a
    standard normal scalar, $y_0 =100$, and
-
-$$
-y_{t+1} - y_t =-\beta^{-1} \epsilon_t + \epsilon_{t+1} .
-$$
-
+   
+   $$
+   y_{t+1} - y_t =-\beta^{-1} \epsilon_t + \epsilon_{t+1} .
+   $$
+   
 1. We take the **same** $\{y_t\}$ realization generated in step 1
    and form an innovation process $\{a_t\}$ from the formulas
-
-$$
-\begin{aligned} a_0 & = 0 \cr
-a_t & = \sum_{j=0}^{t-1} \beta^j (y_{t-j} - y_{t-j-1}) + \beta^t a_0, \quad t \geq 1 \end{aligned}
-$$
-
+   
+   $$
+   \begin{aligned} a_0 & = 0 \cr
+   a_t & = \sum_{j=0}^{t-1} \beta^j (y_{t-j} - y_{t-j-1}) + \beta^t a_0, \quad t \geq 1 \end{aligned}
+   $$
+   
 1. We throw away the first $S$ observations and form the sample
    $\{y_t, \epsilon_t, a_t\}_{S+1}^T$ as the realization that
    we’ll use in the following steps.

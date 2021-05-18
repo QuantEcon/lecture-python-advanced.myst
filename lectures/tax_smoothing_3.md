@@ -103,8 +103,7 @@ while $b_{t-1,t}$ is an endogenous state variable inherited from
 the past at time $t$ and $p^t_{t+1}$ is an exogenous state
 variable at time $t$.
 
-This is the same set-up as used {doc}`in this
-lecture <tax_smoothing_1>`.
+This is the same set-up as used {doc}`in this lecture <tax_smoothing_1>`.
 
 We will consider a situation in which the government faces “roll-over
 risk”.
@@ -270,7 +269,7 @@ for i in range(T):
     tax[i, :] = S @ x[:, i] + M @ u[:, i]
 
 # Plot of debt issuance and taxation
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 4))
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 3))
 ax1.plot(x[0, :])
 ax1.set_title('One-period debt issuance')
 ax1.set_xlabel('Time')
@@ -311,7 +310,7 @@ for i in range(T):
     tax[i, :] = S @ x[:, i] + M @ u[:, i]
 
 # Plot of debt issuance and taxation
-fig, (ax1, ax2) =  plt.subplots(1, 2, figsize=(16, 4))
+fig, (ax1, ax2) =  plt.subplots(1, 2, figsize=(12, 3))
 ax1.plot(x[0, :])
 ax1.set_title('One-period debt issuance')
 ax1.set_xlabel('Time')
