@@ -1,0 +1,1429 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11. How to Pay for a War: Part 2 &#8212; Advanced Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/quantecon-book-theme.9deb0a26de8466f54124a1959c24cd33.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/quantecon-book-theme.43eb86aa48ec3aed660cb313c38068cd.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://python-advanced.quantecon.org/tax_smoothing_2.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="12. How to Pay for a War: Part 3" href="tax_smoothing_3.html" />
+    <link rel="prev" title="10. How to Pay for a War: Part 1" href="tax_smoothing_1.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="How to Pay for a War: Part 2"/>
+<meta name="twitter:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="How to Pay for a War: Part 2" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://python-advanced.quantecon.org/tax_smoothing_2.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="wrapper">
+
+        <div class="main">
+
+            <div class="page" id=tax_smoothing_2>
+
+                <div class="page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#an-application-of-markov-jump-linear-quadratic-dynamic-programming">
+   11.1. An Application of Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#two-example-specifications">
+   11.2. Two example specifications
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#one-and-two-period-bonds-but-no-restructuring">
+   11.3. One- and Two-period Bonds but No Restructuring
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mapping-into-an-lq-markov-jump-problem">
+   11.4. Mapping into an LQ Markov Jump Problem
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#penalty-on-different-issuance-across-maturities">
+   11.5. Penalty on Different Issuance Across Maturities
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-model-with-restructuring">
+   11.6. A Model with Restructuring
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#restructuring-as-a-markov-jump-linear-quadratic-control-problem">
+   11.7. Restructuring as a Markov Jump Linear Quadratic Control Problem
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-with-restructuring">
+     11.7.1. Example with Restructuring
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo" alt="logo"></a>
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="page__header">
+
+                    <div class="page__header-copy">
+
+                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+
+                        <p class="page__header-subheading">How to Pay for a War: Part 2</p>
+
+                    </div>
+
+                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><div class="section" id="how-to-pay-for-a-war-part-2">
+<span id="index-0"></span><h1><a class="toc-backref" href="#id8"><span class="section-number">11. </span>How to Pay for a War: Part 2</a><a class="headerlink" href="#how-to-pay-for-a-war-part-2" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#how-to-pay-for-a-war-part-2" id="id8">How to Pay for a War: Part 2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#an-application-of-markov-jump-linear-quadratic-dynamic-programming" id="id9">An Application of Markov Jump Linear Quadratic Dynamic Programming</a></p></li>
+<li><p><a class="reference internal" href="#two-example-specifications" id="id10">Two example specifications</a></p></li>
+<li><p><a class="reference internal" href="#one-and-two-period-bonds-but-no-restructuring" id="id11">One- and Two-period Bonds but No Restructuring</a></p></li>
+<li><p><a class="reference internal" href="#mapping-into-an-lq-markov-jump-problem" id="id12">Mapping into an LQ Markov Jump Problem</a></p></li>
+<li><p><a class="reference internal" href="#penalty-on-different-issuance-across-maturities" id="id13">Penalty on Different Issuance Across Maturities</a></p></li>
+<li><p><a class="reference internal" href="#a-model-with-restructuring" id="id14">A Model with Restructuring</a></p></li>
+<li><p><a class="reference internal" href="#restructuring-as-a-markov-jump-linear-quadratic-control-problem" id="id15">Restructuring as a Markov Jump Linear Quadratic Control Problem</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In addition to what’s in Anaconda, this lecture  deploys the quantecon library:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
+Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.12.5)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="an-application-of-markov-jump-linear-quadratic-dynamic-programming">
+<h2><a class="toc-backref" href="#id9"><span class="section-number">11.1. </span>An Application of Markov Jump Linear Quadratic Dynamic Programming</a><a class="headerlink" href="#an-application-of-markov-jump-linear-quadratic-dynamic-programming" title="Permalink to this headline">¶</a></h2>
+<p>This is a <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">sequel to an earlier lecture</span></a>.</p>
+<p>We use a method introduced in lecture <a class="reference internal" href="markov_jump_lq.html"><span class="doc">Markov Jump LQ dynamic programming</span></a> to
+implement suggestions by Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id216"><span>Bar99</span></a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id217"><span>BM03</span></a>]</span>) for extending his
+classic 1979 model of tax smoothing.</p>
+<p>Barro’s 1979 <span id="id3">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> model is about a government that borrows and lends in order
+to help it minimize an intertemporal measure of distortions caused by
+taxes.</p>
+<p>Technically, Barro’s 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> model looks a lot like a consumption-smoothing model.</p>
+<p>Our generalizations of his 1979 <span id="id5">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> model will also look
+like souped-up consumption-smoothing models.</p>
+<p>Wanting tractability induced Barro in 1979 <span id="id6">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> to assume that</p>
+<ul class="simple">
+<li><p>the government trades only one-period risk-free debt, and</p></li>
+<li><p>the one-period risk-free interest rate is constant</p></li>
+</ul>
+<p>In our <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">earlier lecture</span></a>, we relaxed the second of these assumptions but not the first.</p>
+<p>In particular, we used <em>Markov jump linear quadratic dynamic programming</em>
+to allow the exogenous interest rate to vary over time.</p>
+<p>In this lecture, we add a maturity composition decision to the
+government’s problem by expanding the dimension of the state.</p>
+<p>We assume</p>
+<ul class="simple">
+<li><p>that the government borrows or saves in the form of risk-free bonds
+of maturities <span class="math notranslate nohighlight">\(1, 2, \ldots , H\)</span>.</p></li>
+<li><p>that interest rates on those bonds are time-varying and in particular are
+governed by a jointly stationary stochastic process.</p></li>
+</ul>
+<p>Let’s start with some standard imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="two-example-specifications">
+<h2><a class="toc-backref" href="#id10"><span class="section-number">11.2. </span>Two example specifications</a><a class="headerlink" href="#two-example-specifications" title="Permalink to this headline">¶</a></h2>
+<p>We’ll describe two possible specifications</p>
+<ul class="simple">
+<li><p>In one, each period the government issues zero-coupon
+bonds of one- and two-period maturities and redeems them only when
+they mature – in this version, the maturity structure of government
+debt at each date is partly inherited from the past.</p></li>
+<li><p>In the second, the government redesigns the maturity
+structure of the debt each period.</p></li>
+</ul>
+</div>
+<div class="section" id="one-and-two-period-bonds-but-no-restructuring">
+<h2><a class="toc-backref" href="#id11"><span class="section-number">11.3. </span>One- and Two-period Bonds but No Restructuring</a><a class="headerlink" href="#one-and-two-period-bonds-but-no-restructuring" title="Permalink to this headline">¶</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(T_t\)</span> denote tax collections, <span class="math notranslate nohighlight">\(\beta\)</span> a discount factor,
+<span class="math notranslate nohighlight">\(b_{t,t+1}\)</span> time <span class="math notranslate nohighlight">\(t+1\)</span> goods that the government promises to
+pay at <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(b_{t,t+2}\)</span> time <span class="math notranslate nohighlight">\(t+2\)</span> goods that the
+government promises to pay at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(G_t\)</span> government
+purchases, <span class="math notranslate nohighlight">\(p_{t,t+1}\)</span> the number of time <span class="math notranslate nohighlight">\(t\)</span> goods received
+per time <span class="math notranslate nohighlight">\(t+1\)</span> goods promised, and <span class="math notranslate nohighlight">\(p_{t,t+2}\)</span> the number of
+time <span class="math notranslate nohighlight">\(t\)</span> goods received per time <span class="math notranslate nohighlight">\(t+2\)</span> goods promised.</p>
+<p>Evidently, <span class="math notranslate nohighlight">\(p_{t, t+1}, p_{t,t+2}\)</span> are inversely related to
+appropriate corresponding gross interest rates on government debt.</p>
+<p>In the spirit of Barro (1979) <span id="id7">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span>, government
+expenditures are governed by an exogenous stochastic process.</p>
+<p>Given initial conditions <span class="math notranslate nohighlight">\(b_{-2,0}, b_{-1,0}, z_0, i_0\)</span>, where
+<span class="math notranslate nohighlight">\(i_0\)</span> is the initial Markov state, the government chooses a
+contingency plan for <span class="math notranslate nohighlight">\(\{b_{t, t+1}, b_{t,t+2}, T_t\}_{t=0}^\infty\)</span>
+to maximize.</p>
+<div class="math notranslate nohighlight">
+\[
+- E_0 \sum_{t=0}^\infty \beta^t \left[ T_t^2 + c_1( b_{t,t+1} - b_{t,t+2})^2 \right]
+\]</div>
+<p>subject to the constraints</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+T_t &amp; = G_t + b_{t-2,t} + b_{t-1,t} - p_{t,t+2} b_{t,t+2} - p_{t,t+1} b_{t,t+1} \cr
+  G_t &amp;  = U_{g,s_t} z_t \cr
+  z_{t+1} &amp; = A_{22,s_t} z_t + C_{2,s_t} w_{t+1} \cr
+  \begin{bmatrix}
+   p_{t,t+1} \cr
+   p_{t,t+2} \cr
+   U_{g,s_t} \cr
+   A_{22,s_t} \cr
+   C_{2,s_t}
+  \end{bmatrix} &amp; \sim \textrm{functions of Markov state with transition matrix } \Pi \end{aligned}
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(w_{t+1} \sim {\cal N}(0,I)\)</span> and <span class="math notranslate nohighlight">\(\Pi_{ij}\)</span> is
+the probability that the Markov state moves from state <span class="math notranslate nohighlight">\(i\)</span> to
+state <span class="math notranslate nohighlight">\(j\)</span> in one period.</p>
+<p>The variables
+<span class="math notranslate nohighlight">\(T_t, b_{t, t+1}, b_{t,t+2}\)</span> are <em>control</em> variables chosen at
+<span class="math notranslate nohighlight">\(t\)</span>, while the variables <span class="math notranslate nohighlight">\(b_{t-1,t}, b_{t-2,t}\)</span> are
+endogenous state variables inherited from the past at time <span class="math notranslate nohighlight">\(t\)</span> and
+<span class="math notranslate nohighlight">\(p_{t,t+1}, p_{t,t+2}\)</span> are exogenous state variables at time
+<span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>The parameter <span class="math notranslate nohighlight">\(c_1\)</span> imposes a penalty on the government’s issuing
+different quantities of one and two-period debt.</p>
+<p>This penalty deters the
+government from taking large “long-short” positions in debt of different
+maturities. An example below will show this in action.</p>
+<p>As well as extending the model to allow for a maturity decision for
+government debt, we can also in principle allow the matrices
+<span class="math notranslate nohighlight">\(U_{g,s_t}, A_{22,s_t}, C_{2,s_t}\)</span> to depend on the Markov state <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
+<p>Below, we will often adopt the convention that for matrices appearing in a linear state space,
+<span class="math notranslate nohighlight">\(A_t \equiv A_{s_t}, C_t \equiv C_{s_t}\)</span> and so on, so that dependence on <span class="math notranslate nohighlight">\(t\)</span> is always
+intermediated through the Markov state <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
+</div>
+<div class="section" id="mapping-into-an-lq-markov-jump-problem">
+<h2><a class="toc-backref" href="#id12"><span class="section-number">11.4. </span>Mapping into an LQ Markov Jump Problem</a><a class="headerlink" href="#mapping-into-an-lq-markov-jump-problem" title="Permalink to this headline">¶</a></h2>
+<p>First, define</p>
+<div class="math notranslate nohighlight">
+\[
+\hat b_t = b_{t-1,t} + b_{t-2,t} ,
+\]</div>
+<p>which is debt due at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>Then define the endogenous part of the state:</p>
+<div class="math notranslate nohighlight">
+\[
+\bar b_t = \begin{bmatrix}
+ \hat b_t \cr
+   b_{t-1,t+1}
+\end{bmatrix}
+\]</div>
+<p>and the complete state</p>
+<div class="math notranslate nohighlight">
+\[
+x_t = \begin{bmatrix} \bar b_t \cr
+        z_t
+      \end{bmatrix}
+\]</div>
+<p>and the control vector</p>
+<div class="math notranslate nohighlight">
+\[
+u_{t} =  \begin{bmatrix}
+   b_{t,t+1} \cr
+   b_{t,t+2}
+  \end{bmatrix}
+\]</div>
+<p>The endogenous part of state vector follows the law of motion:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{bmatrix}
+    \hat b_{t+1} \cr
+    b_{t,t+2}
+   \end{bmatrix}
+   =
+   \begin{bmatrix}
+    0 &amp; 1 \cr
+    0 &amp; 0
+   \end{bmatrix}
+ \begin{bmatrix}
+  \hat b_{t} \cr
+  b_{t-1,t+1}
+ \end{bmatrix}
++
+  \begin{bmatrix}
+   1 &amp; 0 \cr
+   0 &amp; 1 \cr
+  \end{bmatrix}
+   \begin{bmatrix}
+    b_{t,t+1} \cr
+    b_{t,t+2}
+   \end{bmatrix}
+\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[
+\bar b_{t+1} = A_{11} \bar b_t + B_1 u_t
+\]</div>
+<p>Define the following functions of the state</p>
+<div class="math notranslate nohighlight">
+\[
+G_t = S_{G,t} x_t, \quad \hat b_t = S_1 x_t
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+M_t  =  \begin{bmatrix} - p_{t,t+1} &amp; - p_{t,t+2} \end{bmatrix}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_{t,t+1}\)</span> is the discount on one period loans in the
+discrete Markov state at time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(p_{t,t+2}\)</span> is the
+discount on two-period loans in the discrete Markov state.</p>
+<p>Define</p>
+<div class="math notranslate nohighlight">
+\[
+S_t = S_{G,t} + S_1
+\]</div>
+<p>Note that in discrete Markov state <span class="math notranslate nohighlight">\(i\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+T_t = M_t u_t + S_t x_t
+\]</div>
+<p>It follows that</p>
+<div class="math notranslate nohighlight">
+\[
+T_t^2 = x_t' S_t' S_t x_t + u_t' M_t' M_t u_t + 2 u_t' M_t' S_t x_t
+\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[
+T_t^2 = x_t'R_t x_t + u_t' Q_t u_t + 2 u_t' W_t x_t
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+R_t = S_t'S_t, \quad Q_t = M_t' M_t, \quad  W_t = M_t' S_t
+\]</div>
+<p>Because the payoff function also includes the penalty parameter on
+issuing debt of different maturities, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+T_t^2 + c_1( b_{t,t+1} - b_{t,t+2})^2 = x_t'R_t x_t + u_t' Q_t u_t + 2 u_t' W_t x_t +  c_1 u_t'Q^c u_t
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(Q^c = \begin{bmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{bmatrix}\)</span>. Therefore, the overall <span class="math notranslate nohighlight">\(Q\)</span> matrix for the Markov jump LQ problem is:</p>
+<div class="math notranslate nohighlight">
+\[
+Q_t^c = Q_t + c_1Q^c
+\]</div>
+<p>The law of motion of the state in all discrete Markov states <span class="math notranslate nohighlight">\(i\)</span>
+is</p>
+<div class="math notranslate nohighlight">
+\[
+x_{t+1} = A_t x_t +  B u_t +  C_t w_{t+1}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+A_t = \begin{bmatrix}  A_{11} &amp; 0 \cr
+                        0 &amp; A_{22,t}
+      \end{bmatrix}, \quad
+       B = \begin{bmatrix}
+                  B_1 \cr
+                  0
+                 \end{bmatrix}, \quad
+        C_t = \begin{bmatrix} 0 \cr C_{2,t} \end{bmatrix}
+\]</div>
+<p>Thus, in this problem all the matrices apart from <span class="math notranslate nohighlight">\(B\)</span> may depend
+on the Markov state at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>As shown in the <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">previous lecture</span></a>,
+the <code class="docutils literal notranslate"><span class="pre">LQMarkov</span></code> class can solve Markov jump LQ problems when provided with the
+<span class="math notranslate nohighlight">\(A, B, C, R, Q, W\)</span> matrices for each Markov state.</p>
+<p>The function below maps the primitive matrices and parameters from the above
+two-period model into the matrices that the <code class="docutils literal notranslate"><span class="pre">LQMarkov</span></code> class requires:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LQ_markov_mapping</span><span class="p">(</span><span class="n">A22</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">Ug</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function which takes A22, C2, Ug, p_{t, t+1}, p_{t, t+2} and penalty</span>
+<span class="sd">    parameter c1, and returns the required matrices for the LQMarkov</span>
+<span class="sd">    model: A, B, C, R, Q, W.</span>
+<span class="sd">    This version uses the condensed version of the endogenous state.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Make sure all matrices can be treated as 2D arrays</span>
+    <span class="n">A22</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">A22</span><span class="p">)</span>
+    <span class="n">C2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">C2</span><span class="p">)</span>
+    <span class="n">Ug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">Ug</span><span class="p">)</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">p2</span><span class="p">)</span>
+
+    <span class="c1"># Find the number of states (z) and shocks (w)</span>
+    <span class="n">nz</span><span class="p">,</span> <span class="n">nw</span> <span class="o">=</span> <span class="n">C2</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># Create A11, B1, S1, S2, Sg, S matrices</span>
+    <span class="n">A11</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">A11</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">B1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">S1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">nz</span><span class="o">+</span><span class="mi">1</span><span class="p">))))</span>
+    <span class="n">Sg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">Ug</span><span class="p">))</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">S1</span> <span class="o">+</span> <span class="n">Sg</span>
+
+    <span class="c1"># Create M matrix</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="o">-</span><span class="n">p1</span><span class="p">,</span> <span class="o">-</span><span class="n">p2</span><span class="p">))</span>
+
+    <span class="c1"># Create A, B, C matrices</span>
+    <span class="n">A_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">A11</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="n">nz</span><span class="p">))))</span>
+    <span class="n">A_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nz</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span> <span class="n">A22</span><span class="p">))</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">A_T</span><span class="p">,</span> <span class="n">A_B</span><span class="p">))</span>
+
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">B1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nz</span><span class="p">,</span> <span class="mi">2</span><span class="p">))))</span>
+
+    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="n">nw</span><span class="p">)),</span> <span class="n">C2</span><span class="p">))</span>
+
+    <span class="c1"># Create Q^c matrix</span>
+    <span class="n">Qc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+    <span class="c1"># Create R, Q, W matrices</span>
+
+    <span class="n">R</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">S</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">M</span> <span class="o">+</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">Qc</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">S</span>
+
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">Q</span><span class="p">,</span> <span class="n">W</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With the above function, we can proceed to solve the model in two steps:</p>
+<ol class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">LQ_markov_mapping</span></code> to map
+<span class="math notranslate nohighlight">\(U_{g,t}, A_{22,t}, C_{2,t}, p_{t,t+1}, p_{t,t+2}\)</span> into the
+<span class="math notranslate nohighlight">\(A, B, C, R, Q, W\)</span> matrices for each of the <span class="math notranslate nohighlight">\(n\)</span> Markov states.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">LQMarkov</span></code> class to solve the resulting n-state Markov
+jump LQ problem.</p></li>
+</ol>
+</div>
+<div class="section" id="penalty-on-different-issuance-across-maturities">
+<h2><a class="toc-backref" href="#id13"><span class="section-number">11.5. </span>Penalty on Different Issuance Across Maturities</a><a class="headerlink" href="#penalty-on-different-issuance-across-maturities" title="Permalink to this headline">¶</a></h2>
+<p>To implement a simple example of the two-period model, we assume that
+<span class="math notranslate nohighlight">\(G_t\)</span> follows an AR(1) process:</p>
+<div class="math notranslate nohighlight">
+\[
+G_{t+1} = \bar G + \rho G_t + \sigma w_{t+1}
+\]</div>
+<p>To do this, we set <span class="math notranslate nohighlight">\(z_t = \begin{bmatrix} 1 \\ G_t \end{bmatrix}\)</span>,
+and consequently:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_{22} = \begin{bmatrix} 1 &amp; 0 \\ \bar G &amp; \rho \end{bmatrix} \hspace{2mm} , \hspace{2mm} C_2 = \begin{bmatrix} 0 \\ \sigma \end{bmatrix} \hspace{2mm} , \hspace{2mm} U_g = \begin{bmatrix} 0 &amp; 1 \end{bmatrix}
+\end{split}\]</div>
+<p>Therefore, in this example, <span class="math notranslate nohighlight">\(A_{22}, C_2\)</span> and <span class="math notranslate nohighlight">\(U_g\)</span> are not
+time-varying.</p>
+<p>We will assume that there are two Markov states, one with a
+flatter yield curve, and one with a steeper yield curve. In state 1,
+prices are:</p>
+<div class="math notranslate nohighlight">
+\[
+p^1_{t,t+1} = \beta \hspace{2mm} , \hspace{2mm} p^1_{t,t+2} = \beta^2 - 0.02
+\]</div>
+<p>and in state 2, prices are:</p>
+<div class="math notranslate nohighlight">
+\[
+p^2_{t,t+1} = \beta \hspace{2mm} , \hspace{2mm}  p^2_{t,t+2} = \beta^2 + 0.02
+\]</div>
+<p>We first solve the model with no penalty parameter on different issuance
+across maturities, i.e. <span class="math notranslate nohighlight">\(c_1 = 0\)</span>.</p>
+<p>We also need to specify a
+transition matrix for the Markov state, we use:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Pi = \begin{bmatrix} 0.9 &amp; 0.1 \\ 0.1 &amp; 0.9 \end{bmatrix}
+\end{split}\]</div>
+<p>Thus, each Markov state is persistent, and there is an equal chance of
+moving from one to the other.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model parameters</span>
+<span class="n">β</span><span class="p">,</span> <span class="n">Gbar</span><span class="p">,</span> <span class="n">ρ</span><span class="p">,</span> <span class="n">σ</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+<span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span> <span class="o">=</span> <span class="n">β</span><span class="p">,</span> <span class="n">β</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">β</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.02</span>
+
+<span class="c1"># Basic model matrices</span>
+<span class="n">A22</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">Gbar</span><span class="p">,</span> <span class="n">ρ</span><span class="p">]</span> <span class="p">,])</span>
+<span class="n">C_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="n">σ</span><span class="p">]])</span>
+<span class="n">Ug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="n">A1</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> <span class="n">W1</span> <span class="o">=</span> <span class="n">LQ_markov_mapping</span><span class="p">(</span><span class="n">A22</span><span class="p">,</span> <span class="n">C_2</span><span class="p">,</span> <span class="n">Ug</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+<span class="n">A2</span><span class="p">,</span> <span class="n">B2</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Q2</span><span class="p">,</span> <span class="n">W2</span> <span class="o">=</span> <span class="n">LQ_markov_mapping</span><span class="p">(</span><span class="n">A22</span><span class="p">,</span> <span class="n">C_2</span><span class="p">,</span> <span class="n">Ug</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+
+<span class="c1"># Small penalties on debt required to implement no-Ponzi scheme</span>
+<span class="n">R1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">R1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-9</span>
+<span class="n">R2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">R2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-9</span>
+
+<span class="c1"># Construct lists of matrices correspond to each state</span>
+<span class="n">As</span> <span class="o">=</span> <span class="p">[</span><span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">]</span>
+<span class="n">Bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">]</span>
+<span class="n">Cs</span> <span class="o">=</span> <span class="p">[</span><span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="p">]</span>
+<span class="n">Rs</span> <span class="o">=</span> <span class="p">[</span><span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">]</span>
+<span class="n">Qs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Q1</span><span class="p">,</span> <span class="n">Q2</span><span class="p">]</span>
+<span class="n">Ws</span> <span class="o">=</span> <span class="p">[</span><span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">]</span>
+
+<span class="n">Π</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]])</span>
+
+<span class="c1"># Construct and solve the model using the LQMarkov class</span>
+<span class="n">lqm</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ws</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+<span class="n">lqm</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">()</span>
+
+<span class="c1"># Simulate the model</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">lqm</span><span class="o">.</span><span class="n">compute_sequence</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+<span class="c1"># Plot of one and two-period debt issuance</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;One-period debt issuance&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Two-period debt issuance&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/tax_smoothing_2_7_0.png" src="_images/tax_smoothing_2_7_0.png" />
+</div>
+</div>
+<p>The above simulations show that when no penalty is imposed on different
+issuances across maturities, the government has an incentive to take
+large “long-short” positions in debt of different maturities.</p>
+<p>To prevent such an outcome, we now set <span class="math notranslate nohighlight">\(c_1 = 0.01\)</span>.</p>
+<p>This penalty is enough
+to ensure that the government issues positive quantities of both one and
+two-period debt:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Put small penalty on different issuance across maturities</span>
+<span class="n">c1</span> <span class="o">=</span> <span class="mf">0.01</span>
+
+<span class="n">A1</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> <span class="n">W1</span> <span class="o">=</span> <span class="n">LQ_markov_mapping</span><span class="p">(</span><span class="n">A22</span><span class="p">,</span> <span class="n">C_2</span><span class="p">,</span> <span class="n">Ug</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+<span class="n">A2</span><span class="p">,</span> <span class="n">B2</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Q2</span><span class="p">,</span> <span class="n">W2</span> <span class="o">=</span> <span class="n">LQ_markov_mapping</span><span class="p">(</span><span class="n">A22</span><span class="p">,</span> <span class="n">C_2</span><span class="p">,</span> <span class="n">Ug</span><span class="p">,</span> <span class="n">p3</span><span class="p">,</span> <span class="n">p4</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+
+<span class="c1"># Small penalties on debt required to implement no-Ponzi scheme</span>
+<span class="n">R1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">R1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-9</span>
+<span class="n">R2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">R2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-9</span>
+
+<span class="c1"># Construct lists of matrices</span>
+<span class="n">As</span> <span class="o">=</span> <span class="p">[</span><span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">]</span>
+<span class="n">Bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">]</span>
+<span class="n">Cs</span> <span class="o">=</span> <span class="p">[</span><span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="p">]</span>
+<span class="n">Rs</span> <span class="o">=</span> <span class="p">[</span><span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">]</span>
+<span class="n">Qs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Q1</span><span class="p">,</span> <span class="n">Q2</span><span class="p">]</span>
+<span class="n">Ws</span> <span class="o">=</span> <span class="p">[</span><span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">]</span>
+
+<span class="c1"># Construct and solve the model using the LQMarkov class</span>
+<span class="n">lqm2</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ws</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+<span class="n">lqm2</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">()</span>
+
+<span class="c1"># Simulate the model</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">lqm2</span><span class="o">.</span><span class="n">compute_sequence</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+<span class="c1"># Plot of one and two-period debt issuance</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;One-period debt issuance&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Two-period debt issuance&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/tax_smoothing_2_9_0.png" src="_images/tax_smoothing_2_9_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="a-model-with-restructuring">
+<h2><a class="toc-backref" href="#id14"><span class="section-number">11.6. </span>A Model with Restructuring</a><a class="headerlink" href="#a-model-with-restructuring" title="Permalink to this headline">¶</a></h2>
+<p>This model alters two features of the previous model:</p>
+<ol class="simple">
+<li><p>The maximum horizon of government debt is now extended to a general
+<em>H</em> periods.</p></li>
+<li><p>The government is able to redesign the maturity structure of debt
+every period.</p></li>
+</ol>
+<p>We impose a cost on adjusting issuance of each maturity by amending the
+payoff function to become:</p>
+<div class="math notranslate nohighlight">
+\[
+T_t^2 + \sum_{j=0}^{H-1} c_2 (b_{t+j}^{t-1} - b_{t+j+1}^t)^2
+\]</div>
+<p>The government’s budget constraint is now:</p>
+<div class="math notranslate nohighlight">
+\[
+T_t + \sum_{j=1}^Hp_{t,t+j} b_{t+j}^t = b_t^{t-1} + \sum_{j=1}^{H-1} p_{t,t+j} b_{t+j}^{t-1} + G_t
+\]</div>
+<p>To map this into the Markov Jump LQ framework, we define state and
+control variables.</p>
+<p>Let:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\bar b_t = \begin{bmatrix} b^{t-1}_t \\ b^{t-1}_{t+1} \\ \vdots \\  b^{t-1}_{t+H-1} \end{bmatrix} \hspace{2mm} , \hspace{2mm} u_t = \begin{bmatrix} b^{t}_{t+1} \\ b^{t}_{t+2} \\ \vdots \\  b^{t}_{t+H} \end{bmatrix}
+\end{split}\]</div>
+<p>Thus, <span class="math notranslate nohighlight">\(\bar b_t\)</span> is the endogenous state (debt issued last period)
+and <span class="math notranslate nohighlight">\(u_t\)</span> is the control (debt issued today).</p>
+<p>As before, we will
+also have the exogenous state <span class="math notranslate nohighlight">\(z_t\)</span>, which determines government
+spending.</p>
+<p>Therefore, the full state is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x_t = \begin{bmatrix} \bar b_t \\ z_t \end{bmatrix}
+\end{split}\]</div>
+<p>We also define a vector <span class="math notranslate nohighlight">\(p_t\)</span> that contains the time <span class="math notranslate nohighlight">\(t\)</span>
+price of goods in period <span class="math notranslate nohighlight">\(t + j\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+p_t = \begin{bmatrix} p_{t,t+1} \\ p_{t,t+2} \\ \vdots \\  p_{t,t+H} \end{bmatrix}
+\end{split}\]</div>
+<p>Finally, we define three useful matrices <span class="math notranslate nohighlight">\(S_s, S_x, \tilde S_x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} p_{t,t+1} \\ p_{t,t+2} \\ \vdots \\  p_{t,t+H-1} \end{bmatrix} = S_s p_t \text{ where } S_s = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\ \vdots &amp; &amp; \ddots &amp; &amp; \\ 0 &amp; 0 &amp; \cdots &amp; 1 &amp; 0  \end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} b^{t-1}_{t+1} \\ b^{t-1}_{t+2} \\ \vdots \\  b^{t-1}_{t+T-1} \end{bmatrix} = S_x \bar b_t  \text{ where } S_x = \begin{bmatrix} 0 &amp; 1 &amp; 0 &amp; \cdots &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; \cdots &amp; 0 \\ \vdots &amp; &amp;  &amp; \ddots &amp; \\ 0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1  \end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+b^{t-1}_t = \tilde S_x \bar b_t \text{ where } \tilde S_x = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \end{bmatrix}
+\]</div>
+<p>In terms of dimensions, the first two matrices defined above are <span class="math notranslate nohighlight">\((H-1) \times H\)</span>.</p>
+<p>The last is <span class="math notranslate nohighlight">\(1 \times H\)</span></p>
+<p>We can now write the government’s budget constraint in matrix notation.
+Rearranging the government budget constraint gives:</p>
+<div class="math notranslate nohighlight">
+\[
+T_t = b_t^{t-1} + \sum_{j=1}^{H-1} p_{t+j}^t b_{t+j}^{t-1} + G_t - \sum_{j=1}^H p_{t+j}^t b_{t+j}^t
+\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight">
+\[
+T_t = \tilde S_x \bar b_t + (S_s p_t) \cdot (S_x \bar b_t) + U_g z_t - p_t \cdot u_t
+\]</div>
+<p>If we want to write this in terms of the full state, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+T_t = \begin{bmatrix}  (\tilde S_x + p_t'S_s'S_x) &amp; Ug \end{bmatrix} x_t - p_t' u_t
+\]</div>
+<p>To simplify the notation, let <span class="math notranslate nohighlight">\(S_t = \begin{bmatrix}  (\tilde S_x + p_t’S_s’S_x) &amp; Ug \end{bmatrix}\)</span>.</p>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+T_t = S_t x_t - p_t' u_t
+\]</div>
+<p>Therefore</p>
+<div class="math notranslate nohighlight">
+\[
+T_t^2 = x_t' R_t x_t + u_t ' Q_t u_t + 2 u_t'W_t x_t
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+R_t = S_t'S_t , \hspace{5mm} Q_t = p_t p_t' , \hspace{5mm} W_t = -p_t S_t
+\]</div>
+<p>where to economize on notation we adopt the convention that for the linear state matrices
+<span class="math notranslate nohighlight">\(R_t \equiv R_{s_t}, Q_t \equiv W_{s_t}\)</span> and so on.</p>
+<p>We’ll continue to use this convention also for the linear state matrices <span class="math notranslate nohighlight">\(A, B, W\)</span> and so on below.</p>
+<p>Because the payoff function also includes the penalty parameter for
+rescheduling, we have:</p>
+<div class="math notranslate nohighlight">
+\[
+T_t^2 + \sum_{j=0}^{H-1} c_2 (b_{t+j}^{t-1} - b_{t+j+1}^t)^2 = T_t^2 + c_2(\bar b_t - u_t)'(\bar b_t - u_t)
+\]</div>
+<p>Because the complete state is <span class="math notranslate nohighlight">\(x_t\)</span> and not <span class="math notranslate nohighlight">\(\bar b_t\)</span>, we
+rewrite this as:</p>
+<div class="math notranslate nohighlight">
+\[
+T_t^2 + c_2(S_c x_t - u_t)'(S_c x_t - u_t)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(S_c = \begin{bmatrix} I &amp; 0 \end{bmatrix}\)</span></p>
+<p>Multiplying this out gives:</p>
+<div class="math notranslate nohighlight">
+\[
+T_t^2 + c_2 x_t' S_c' S_c x_t - 2c_2 u_t' S_c x_t + c_2 u_t'u_t
+\]</div>
+<p>Therefore, with the cost term, we must amend our <span class="math notranslate nohighlight">\(R,Q,W\)</span> matrices
+as follows:</p>
+<div class="math notranslate nohighlight">
+\[
+R^c_t = R_t + c_2 S_c'S_c
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+Q^c_t = Q_t + c_2 I
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+W^c_t = W_t - c_2 S_c
+\]</div>
+<p>To finish mapping into the Markov jump LQ setup, we need to construct
+the law of motion for the full state.</p>
+<p>This is simpler than in the
+previous setup, as we now have <span class="math notranslate nohighlight">\(\bar b_{t+1} = u_t\)</span>.</p>
+<p>Therefore:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x_{t+1} \equiv \begin{bmatrix} \bar b_{t+1} \\ z_{t+1} \end{bmatrix} = A_t x_t + B u_t + C_t w_{t+1}
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_t = \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; A_{22,t} \end{bmatrix} , \hspace{5mm} B = \begin{bmatrix} I \\ 0 \end{bmatrix} , \hspace{5mm} C = \begin{bmatrix} 0 \\ C_{2,t} \end{bmatrix}
+\end{split}\]</div>
+<p>This completes the mapping into a Markov jump LQ problem.</p>
+</div>
+<div class="section" id="restructuring-as-a-markov-jump-linear-quadratic-control-problem">
+<h2><a class="toc-backref" href="#id15"><span class="section-number">11.7. </span>Restructuring as a Markov Jump Linear Quadratic Control Problem</a><a class="headerlink" href="#restructuring-as-a-markov-jump-linear-quadratic-control-problem" title="Permalink to this headline">¶</a></h2>
+<p>As with the previous model, we can use a function to map the primitives
+of the model with restructuring into the matrices that the <code class="docutils literal notranslate"><span class="pre">LQMarkov</span></code>
+class requires:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LQ_markov_mapping_restruct</span><span class="p">(</span><span class="n">A22</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">Ug</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">p_t</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Function which takes A22, C2, T, p_t, c and returns the</span>
+<span class="sd">    required matrices for the LQMarkov model: A, B, C, R, Q, W</span>
+<span class="sd">    Note, p_t should be a T by 1 matrix</span>
+<span class="sd">    c is the rescheduling cost (a scalar)</span>
+<span class="sd">    This version uses the condensed version of the endogenous state</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Make sure all matrices can be treated as 2D arrays</span>
+    <span class="n">A22</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">A22</span><span class="p">)</span>
+    <span class="n">C2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">C2</span><span class="p">)</span>
+    <span class="n">Ug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">Ug</span><span class="p">)</span>
+    <span class="n">p_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">p_t</span><span class="p">)</span>
+
+    <span class="c1"># Find the number of states (z) and shocks (w)</span>
+    <span class="n">nz</span><span class="p">,</span> <span class="n">nw</span> <span class="o">=</span> <span class="n">C2</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># Create Sx, tSx, Ss, S_t matrices (tSx stands for \tilde S_x)</span>
+    <span class="n">Ss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))))</span>
+    <span class="n">Sx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">)))</span>
+    <span class="n">tSx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
+    <span class="n">tSx</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">S_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">tSx</span> <span class="o">+</span> <span class="n">p_t</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Ss</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sx</span><span class="p">,</span> <span class="n">Ug</span><span class="p">))</span>
+
+    <span class="c1"># Create A, B, C matrices</span>
+    <span class="n">A_T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">nz</span><span class="p">))))</span>
+    <span class="n">A_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nz</span><span class="p">,</span> <span class="n">T</span><span class="p">)),</span> <span class="n">A22</span><span class="p">))</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">A_T</span><span class="p">,</span> <span class="n">A_B</span><span class="p">))</span>
+
+    <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nz</span><span class="p">,</span> <span class="n">T</span><span class="p">))))</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">nw</span><span class="p">)),</span> <span class="n">C2</span><span class="p">))</span>
+
+    <span class="c1"># Create cost matrix Sc</span>
+    <span class="n">Sc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">nz</span><span class="p">))))</span>
+
+    <span class="c1"># Create R_t, Q_t, W_t matrices</span>
+
+    <span class="n">R_c</span> <span class="o">=</span> <span class="n">S_t</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">S_t</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">Sc</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sc</span>
+    <span class="n">Q_c</span> <span class="o">=</span> <span class="n">p_t</span> <span class="o">@</span> <span class="n">p_t</span><span class="o">.</span><span class="n">T</span> <span class="o">+</span> <span class="n">c</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">W_c</span> <span class="o">=</span> <span class="o">-</span><span class="n">p_t</span> <span class="o">@</span> <span class="n">S_t</span> <span class="o">-</span> <span class="n">c</span> <span class="o">*</span> <span class="n">Sc</span>
+
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">R_c</span><span class="p">,</span> <span class="n">Q_c</span><span class="p">,</span> <span class="n">W_c</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="example-with-restructuring">
+<h3><span class="section-number">11.7.1. </span>Example with Restructuring<a class="headerlink" href="#example-with-restructuring" title="Permalink to this headline">¶</a></h3>
+<p>As an example of the model with restructuring, consider this model
+where <span class="math notranslate nohighlight">\(H = 3\)</span>.</p>
+<p>We will assume that there are two Markov states, one with a
+flatter yield curve, and one with a steeper yield curve.</p>
+<p>In state 1,
+prices are:</p>
+<div class="math notranslate nohighlight">
+\[
+p^1_{t,t+1} = 0.9695 \hspace{2mm} , \hspace{2mm} p^1_{t,t+2} = 0.902 \hspace{2mm} , \hspace{2mm} p^1_{t,t+3} = 0.8369
+\]</div>
+<p>and in state 2, prices are:</p>
+<div class="math notranslate nohighlight">
+\[
+p^2_{t,t+1} = 0.9295 \hspace{2mm} , \hspace{2mm} p^2_{t,t+2} = 0.902 \hspace{2mm} , \hspace{2mm} p^2_{t,t+3} = 0.8769
+\]</div>
+<p>We will assume the same transition matrix and <span class="math notranslate nohighlight">\(G_t\)</span> process as
+above</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># New model parameters</span>
+<span class="n">H</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">p1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.9695</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.902</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.8369</span><span class="p">]])</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.9295</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.902</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.8769</span><span class="p">]])</span>
+<span class="n">Pi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]])</span>
+
+<span class="c1"># Put penalty on different issuance across maturities</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">A1</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">C1</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> <span class="n">W1</span> <span class="o">=</span> <span class="n">LQ_markov_mapping_restruct</span><span class="p">(</span><span class="n">A22</span><span class="p">,</span> <span class="n">C_2</span><span class="p">,</span> <span class="n">Ug</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">p1</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+<span class="n">A2</span><span class="p">,</span> <span class="n">B2</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Q2</span><span class="p">,</span> <span class="n">W2</span> <span class="o">=</span> <span class="n">LQ_markov_mapping_restruct</span><span class="p">(</span><span class="n">A22</span><span class="p">,</span> <span class="n">C_2</span><span class="p">,</span> <span class="n">Ug</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">p2</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+
+<span class="c1"># Small penalties on debt required to implement no-Ponzi scheme</span>
+<span class="n">R1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">R1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-9</span>
+<span class="n">R1</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">R1</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-9</span>
+<span class="n">R1</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">R1</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-9</span>
+<span class="n">R2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">R2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-9</span>
+<span class="n">R2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">R2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-9</span>
+<span class="n">R2</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">R2</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-9</span>
+
+<span class="c1"># Construct lists of matrices</span>
+<span class="n">As</span> <span class="o">=</span> <span class="p">[</span><span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">]</span>
+<span class="n">Bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">]</span>
+<span class="n">Cs</span> <span class="o">=</span> <span class="p">[</span><span class="n">C1</span><span class="p">,</span> <span class="n">C2</span><span class="p">]</span>
+<span class="n">Rs</span> <span class="o">=</span> <span class="p">[</span><span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">]</span>
+<span class="n">Qs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Q1</span><span class="p">,</span> <span class="n">Q2</span><span class="p">]</span>
+<span class="n">Ws</span> <span class="o">=</span> <span class="p">[</span><span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">]</span>
+
+<span class="c1"># Construct and solve the model using the LQMarkov class</span>
+<span class="n">lqm3</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ws</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+<span class="n">lqm3</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">()</span>
+
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">]])</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">lqm3</span><span class="o">.</span><span class="n">compute_sequence</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plots of different maturities debt issuance</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;One-period debt issuance&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Two-period debt issuance&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Three-period debt issuance&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Total debt issuance&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/tax_smoothing_2_14_0.png" src="_images/tax_smoothing_2_14_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot share of debt issuance that is short-term</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">+</span> <span class="n">u</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:])))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;One-period debt issuance share&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/tax_smoothing_2_15_0.png" src="_images/tax_smoothing_2_15_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                    <p class="caption">
+ <span class="caption-text">
+  Tools and Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="orth_proj.html">
+   1. Orthogonal Projections and Their Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stationary_densities.html">
+   2. Continuous State Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="muth_kalman.html">
+   3. Reverse Engineering a la Muth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discrete_dp.html">
+   4. Discrete State Dynamic Programming
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  LQ Control
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_news.html">
+   5. Information and Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing.html">
+   6. Consumption Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing_tax.html">
+   7. Tax Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   8. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_jump_lq.html">
+   9. Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_1.html">
+   10. How to Pay for a War: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   11. How to Pay for a War: Part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_3.html">
+   12. How to Pay for a War: Part 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lqramsey.html">
+   13. Optimal Taxation in an LQ Economy
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Multiple Agent Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   14. Robust Markov Perfect Equilibrium
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arellano.html">
+   15. Default Risk and Income Fluctuations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="matsuyama.html">
+   16. Globalization and Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coase.html">
+   17. Coase’s Theory of the Firm
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Linear Economies
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_recursive_models.html">
+   18. Recursive Models of Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="growth_in_dles.html">
+   19. Growth in Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_asset_pricing_dles.html">
+   20. Lucas Asset Pricing Using DLE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="irfs_in_hall_model.html">
+   21. IRFs in Hall Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="permanent_income_dles.html">
+   22. Permanent Income Model using the DLE Class
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rosen_schooling_model.html">
+   23. Rosen Schooling Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cattle_cycles.html">
+   24. Cattle Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_invertibility_example.html">
+   25. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Classic Linear Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="von_neumann_model.html">
+   26. Von Neumann Growth Model (and a Generalization)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Time Series Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arma.html">
+   27. Covariance Stationary Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="estspec.html">
+   28. Estimation of Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additive_functionals.html">
+   29. Additive and Multiplicative Functionals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lu_tricks.html">
+   30. Classical Control with Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classical_filtering.html">
+   31. Classical Prediction and Filtering With Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="knowing_forecasts_of_others.html">
+   32. Knowing the Forecasts of Others
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Asset Pricing and Finance
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_model.html">
+   33. Asset Pricing II: The Lucas Asset Pricing Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="black_litterman.html">
+   34. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_complete_mkts.html">
+   35. Irrelevance of Capital Structure with Complete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_incomplete_mkts.html">
+   36. Equilibrium Capital Structures with Incomplete Markets
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Programming Squared
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dyn_stack.html">
+   37. Stackelberg Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo.html">
+   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opt_tax_recur.html">
+   39. Optimal Taxation with State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss.html">
+   40. Optimal Taxation without State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss2.html">
+   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss3.html">
+   42. Fiscal Risk and Government Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_ramsey.html">
+   43. Competitive Equilibria of a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_credible.html">
+   44. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   45. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   46. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   47. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="toolbar">
+
+            <div class="toolbar__inner">
+
+                <ul class="toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                    <!-- <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <i data-feather="search"></i>
+                        </form>
+                    </li> -->
+                </ul>
+
+                <ul class="toolbar__links">
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/tax_smoothing_2.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Launch Notebook" id="launchButton"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/tax_smoothing_2.ipynb" target="_blank"><i data-feather="play-circle"></i></a></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/tax_smoothing_2.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p style="color: white;">Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title">QuantEcon Notebook Launcher</p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input" onchange="onChangeListener()">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/tax_smoothing_2.ipynb">BinderHub</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <!-- <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" onchange="onChangeListener()">
+                <i class="fas fa-check-circle"></i>
+            </li> -->
+            </ul>
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

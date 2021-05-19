@@ -1,0 +1,1643 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14. Robust Markov Perfect Equilibrium &#8212; Advanced Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/quantecon-book-theme.9deb0a26de8466f54124a1959c24cd33.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/quantecon-book-theme.43eb86aa48ec3aed660cb313c38068cd.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://python-advanced.quantecon.org/rob_markov_perf.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="15. Default Risk and Income Fluctuations" href="arellano.html" />
+    <link rel="prev" title="13. Optimal Taxation in an LQ Economy" href="lqramsey.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="Robust Markov Perfect Equilibrium"/>
+<meta name="twitter:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="Robust Markov Perfect Equilibrium" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://python-advanced.quantecon.org/rob_markov_perf.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="wrapper">
+
+        <div class="main">
+
+            <div class="page" id=rob_markov_perf>
+
+                <div class="page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   14.1. Overview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-setup">
+     14.1.1. Basic Setup
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-markov-perfect-equilibria-with-robust-agents">
+   14.2. Linear Markov Perfect Equilibria with Robust Agents
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modified-coupled-linear-regulator-problems">
+     14.2.1. Modified Coupled Linear Regulator Problems
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#computing-equilibrium">
+     14.2.2. Computing Equilibrium
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#key-insight">
+     14.2.3. Key Insight
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#worst-case-shocks">
+     14.2.4. Worst-case Shocks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#infinite-horizon">
+     14.2.5. Infinite Horizon
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#implementation">
+     14.2.6. Implementation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#application">
+   14.3. Application
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-duopoly-model">
+     14.3.1. A Duopoly Model
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameters-and-solution">
+     14.3.2. Parameters and Solution
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#markov-perfect-equilibrium-with-robustness">
+       14.3.2.1. Markov Perfect Equilibrium with Robustness
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#some-details">
+     14.3.3. Some Details
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#consistency-check">
+       14.3.3.1. Consistency Check
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#comparative-dynamics-under-baseline-transition-dynamics">
+       14.3.3.2. Comparative Dynamics under Baseline Transition Dynamics
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#heterogeneous-beliefs">
+       14.3.3.3. Heterogeneous Beliefs
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo" alt="logo"></a>
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="page__header">
+
+                    <div class="page__header-copy">
+
+                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+
+                        <p class="page__header-subheading">Robust Markov Perfect Equilibrium</p>
+
+                    </div>
+
+                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" align="right" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><div class="section" id="robust-markov-perfect-equilibrium">
+<h1><a class="toc-backref" href="#id3"><span class="section-number">14. </span>Robust Markov Perfect Equilibrium</a><a class="headerlink" href="#robust-markov-perfect-equilibrium" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#robust-markov-perfect-equilibrium" id="id3">Robust Markov Perfect Equilibrium</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id4">Overview</a></p></li>
+<li><p><a class="reference internal" href="#linear-markov-perfect-equilibria-with-robust-agents" id="id5">Linear Markov Perfect Equilibria with Robust Agents</a></p></li>
+<li><p><a class="reference internal" href="#application" id="id6">Application</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
+Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.12.5)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id4"><span class="section-number">14.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p id="index-0">This lecture describes  a Markov perfect equilibrium  with robust agents.</p>
+<p>We  focus on special settings with</p>
+<ul class="simple">
+<li><p>two players</p></li>
+<li><p>quadratic payoff functions</p></li>
+<li><p>linear transition rules for the state vector</p></li>
+</ul>
+<p>These specifications simplify calculations and allow us to give a simple example that illustrates basic forces.</p>
+<p>This lecture is based on ideas described in chapter 15 of  <span id="id1">[<a class="reference internal" href="zreferences.html#id137"><span>HS08a</span></a>]</span> and in <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a>
+and <a class="reference internal" href="robustness.html"><span class="doc">Robustness</span></a>.</p>
+<p>Let’s start with some standard imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">solve</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="basic-setup">
+<h3><span class="section-number">14.1.1. </span>Basic Setup<a class="headerlink" href="#basic-setup" title="Permalink to this headline">¶</a></h3>
+<p>Decisions of two agents affect the motion of a  state vector
+that appears as an argument of   payoff functions of both agents.</p>
+<p>As described in <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a>, when decision-makers have no concerns about the robustness of their decision rules
+to misspecifications of the state dynamics, a Markov perfect equilibrium  can be computed via
+backward recursion  on  two sets of equations</p>
+<ul class="simple">
+<li><p>a pair of Bellman equations, one for each agent.</p></li>
+<li><p>a pair of equations that express linear decision rules for each agent as functions of that agent’s  continuation value function as well as parameters of preferences and state transition matrices.</p></li>
+</ul>
+<p>This lecture shows how  a similar equilibrium concept and similar computational  procedures
+apply when we impute concerns about robustness to both decision-makers.</p>
+<p>A Markov perfect equilibrium with robust agents will be characterized by</p>
+<ul class="simple">
+<li><p>a pair of Bellman equations, one for each agent.</p></li>
+<li><p>a pair of equations that express linear decision rules for each agent as functions of that agent’s  continuation value function as well as parameters of
+preferences and state transition matrices.</p></li>
+<li><p>a pair of equations that express linear decision rules for worst-case shocks for each agent as functions of that agent’s  continuation value function as well as parameters of
+preferences and state transition matrices.</p></li>
+</ul>
+<p>Below, we’ll construct a robust firms version of the classic duopoly model with
+adjustment costs analyzed in <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a>.</p>
+</div>
+</div>
+<div class="section" id="linear-markov-perfect-equilibria-with-robust-agents">
+<h2><a class="toc-backref" href="#id5"><span class="section-number">14.2. </span>Linear Markov Perfect Equilibria with Robust Agents</a><a class="headerlink" href="#linear-markov-perfect-equilibria-with-robust-agents" title="Permalink to this headline">¶</a></h2>
+<p id="index-1">As we saw in <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a>, the study of Markov perfect equilibria in dynamic games with two players
+leads us to an interrelated pair of Bellman equations.</p>
+<p>In linear quadratic dynamic games, these “stacked Bellman equations” become “stacked Riccati equations” with a tractable mathematical structure.</p>
+<div class="section" id="modified-coupled-linear-regulator-problems">
+<h3><span class="section-number">14.2.1. </span>Modified Coupled Linear Regulator Problems<a class="headerlink" href="#modified-coupled-linear-regulator-problems" title="Permalink to this headline">¶</a></h3>
+<p>We consider a general linear quadratic regulator game with two players, each of whom fears model misspecifications.</p>
+<p>We often call the players agents.</p>
+<p>The agents share a common baseline model for the transition dynamics of the state vector</p>
+<ul class="simple">
+<li><p>this is a counterpart of a ‘rational expectations’ assumption of shared beliefs</p></li>
+</ul>
+<p>But now one or more agents doubt that the baseline model is correctly specified.</p>
+<p>The agents express the possibility that their baseline specification is incorrect by adding a contribution <span class="math notranslate nohighlight">\(C v_{it}\)</span> to the time <span class="math notranslate nohighlight">\(t\)</span> transition law for the state</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(C\)</span> is the usual <em>volatility matrix</em> that appears in stochastic versions of optimal linear regulator problems.</p></li>
+<li><p><span class="math notranslate nohighlight">\(v_{it}\)</span> is a possibly history-dependent vector of distortions to the dynamics of the state that agent <span class="math notranslate nohighlight">\(i\)</span> uses to  represent misspecification of the original model.</p></li>
+</ul>
+<p>For convenience, we’ll start with a finite horizon formulation, where <span class="math notranslate nohighlight">\(t_0\)</span> is the initial date and <span class="math notranslate nohighlight">\(t_1\)</span> is the common terminal date.</p>
+<p>Player <span class="math notranslate nohighlight">\(i\)</span> takes a sequence <span class="math notranslate nohighlight">\(\{u_{-it}\}\)</span> as given and chooses a sequence <span class="math notranslate nohighlight">\(\{u_{it}\}\)</span> to minimize and <span class="math notranslate nohighlight">\(\{v_{it}\}\)</span> to maximize</p>
+<div class="math notranslate nohighlight" id="equation-rmp-orig-1">
+<span class="eqno">(14.1)<a class="headerlink" href="#equation-rmp-orig-1" title="Permalink to this equation">¶</a></span>\[\sum_{t=t_0}^{t_1 - 1}
+\beta^{t - t_0}
+\left\{
+    x_t' R_i x_t +
+    u_{it}' Q_i u_{it} +
+    u_{-it}' S_i u_{-it} +
+    2 x_t' W_i u_{it} +
+    2 u_{-it}' M_i u_{it} -
+    \theta_i v_{it}' v_{it}
+\right\}\]</div>
+<p>while  thinking that the state evolves according to</p>
+<div class="math notranslate nohighlight" id="equation-rmp-orig-0">
+<span class="eqno">(14.2)<a class="headerlink" href="#equation-rmp-orig-0" title="Permalink to this equation">¶</a></span>\[x_{t+1} = A x_t + B_1 u_{1t} + B_2 u_{2t} + C v_{it}\]</div>
+<p>Here</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_t\)</span> is an <span class="math notranslate nohighlight">\(n \times 1\)</span> state vector,   <span class="math notranslate nohighlight">\(u_{it}\)</span> is a <span class="math notranslate nohighlight">\(k_i \times 1\)</span> vector of controls for player <span class="math notranslate nohighlight">\(i\)</span>, and</p></li>
+<li><p><span class="math notranslate nohighlight">\(v_{it}\)</span> is an <span class="math notranslate nohighlight">\(h \times 1\)</span> vector of distortions to the state dynamics that concern  player <span class="math notranslate nohighlight">\(i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(R_i\)</span> is <span class="math notranslate nohighlight">\(n \times n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(S_i\)</span> is <span class="math notranslate nohighlight">\(k_{-i} \times k_{-i}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(Q_i\)</span> is <span class="math notranslate nohighlight">\(k_i \times k_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(W_i\)</span> is <span class="math notranslate nohighlight">\(n \times k_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(M_i\)</span> is <span class="math notranslate nohighlight">\(k_{-i} \times k_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A\)</span> is <span class="math notranslate nohighlight">\(n \times n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(B_i\)</span> is <span class="math notranslate nohighlight">\(n \times k_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(C\)</span> is <span class="math notranslate nohighlight">\(n \times h\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_i \in [\underline \theta_i, +\infty]\)</span> is a scalar multiplier parameter of player <span class="math notranslate nohighlight">\(i\)</span></p></li>
+</ul>
+<p>If <span class="math notranslate nohighlight">\(\theta_i = + \infty\)</span>, player <span class="math notranslate nohighlight">\(i\)</span> completely trusts the baseline model.</p>
+<p>If <span class="math notranslate nohighlight">\(\theta_i &lt; _\infty\)</span>, player <span class="math notranslate nohighlight">\(i\)</span> suspects that some other unspecified model actually governs the transition dynamics.</p>
+<p>The term <span class="math notranslate nohighlight">\(\theta_i v_{it}' v_{it}\)</span> is a time <span class="math notranslate nohighlight">\(t\)</span> contribution to an entropy penalty that an (imaginary) loss-maximizing agent inside
+agent <span class="math notranslate nohighlight">\(i\)</span>’s mind charges for distorting the law of motion in a way that harms agent <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<ul class="simple">
+<li><p>the imaginary loss-maximizing  agent helps the loss-minimizing agent by helping him construct bounds on the behavior of his decision rule over a
+large <strong>set</strong> of alternative models of state transition dynamics.</p></li>
+</ul>
+</div>
+<div class="section" id="computing-equilibrium">
+<h3><span class="section-number">14.2.2. </span>Computing Equilibrium<a class="headerlink" href="#computing-equilibrium" title="Permalink to this headline">¶</a></h3>
+<p>We formulate a linear robust Markov perfect equilibrium as follows.</p>
+<p>Player <span class="math notranslate nohighlight">\(i\)</span> employs linear decision rules <span class="math notranslate nohighlight">\(u_{it} = - F_{it} x_t\)</span>, where <span class="math notranslate nohighlight">\(F_{it}\)</span> is a <span class="math notranslate nohighlight">\(k_i \times n\)</span> matrix.</p>
+<p>Player <span class="math notranslate nohighlight">\(i\)</span>’s malevolent alter ego employs decision rules <span class="math notranslate nohighlight">\(v_{it} = K_{it} x_t\)</span> where <span class="math notranslate nohighlight">\(K_{it}\)</span> is an  <span class="math notranslate nohighlight">\(h \times n\)</span> matrix.</p>
+<p>A robust Markov perfect equilibrium is a pair of sequences <span class="math notranslate nohighlight">\(\{F_{1t}, F_{2t}\}\)</span> and  a pair of sequences <span class="math notranslate nohighlight">\(\{K_{1t}, K_{2t}\}\)</span> over <span class="math notranslate nohighlight">\(t = t_0, \ldots, t_1 - 1\)</span> that satisfy</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\{F_{1t}, K_{1t}\}\)</span> solves player 1’s robust decision problem, taking <span class="math notranslate nohighlight">\(\{F_{2t}\}\)</span> as given, and</p></li>
+<li><p><span class="math notranslate nohighlight">\(\{F_{2t}, K_{2t}\}\)</span> solves player 2’s robust decision problem, taking <span class="math notranslate nohighlight">\(\{F_{1t}\}\)</span> as given.</p></li>
+</ul>
+<p>If we substitute <span class="math notranslate nohighlight">\(u_{2t} = - F_{2t} x_t\)</span>  into <a class="reference internal" href="#equation-rmp-orig-1">(14.1)</a> and <a class="reference internal" href="#equation-rmp-orig-0">(14.2)</a>, then player 1’s problem becomes minimization-maximization of</p>
+<div class="math notranslate nohighlight" id="equation-rmp-eq-mpe-p1p">
+<span class="eqno">(14.3)<a class="headerlink" href="#equation-rmp-eq-mpe-p1p" title="Permalink to this equation">¶</a></span>\[\sum_{t=t_0}^{t_1 - 1}
+\beta^{t - t_0}
+    \left\{
+    x_t' \Pi_{1t} x_t +
+    u_{1t}' Q_1 u_{1t} +
+    2 u_{1t}' \Gamma_{1t} x_t -
+    \theta_1 v_{1t}' v_{1t}
+    \right\}\]</div>
+<p>subject to</p>
+<div class="math notranslate nohighlight" id="equation-rmp-eq-mpe-p1d">
+<span class="eqno">(14.4)<a class="headerlink" href="#equation-rmp-eq-mpe-p1d" title="Permalink to this equation">¶</a></span>\[x_{t+1} = \Lambda_{1t} x_t + B_1 u_{1t} + C v_{1t}\]</div>
+<p>where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\Lambda_{it} := A - B_{-i} F_{-it}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Pi_{it} := R_i + F_{-it}' S_i F_{-it}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\Gamma_{it} := W_i' - M_i' F_{-it}\)</span></p></li>
+</ul>
+<p>This is an LQ robust dynamic programming problem of the type studied in the <a class="reference internal" href="robustness.html"><span class="doc">Robustness</span></a> lecture,
+which can be solved by working backward.</p>
+<p>Maximization with respect to distortion  <span class="math notranslate nohighlight">\(v_{1t}\)</span> leads to  the following version of the <span class="math notranslate nohighlight">\(\mathcal D\)</span> operator from
+the <a class="reference internal" href="robustness.html"><span class="doc">Robustness</span></a> lecture, namely</p>
+<div class="math notranslate nohighlight" id="equation-rmp-rb-d">
+<span class="eqno">(14.5)<a class="headerlink" href="#equation-rmp-rb-d" title="Permalink to this equation">¶</a></span>\[\mathcal D_1(P) := P + PC (\theta_1 I - C' P C)^{-1} C' P\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(F_{1t}\)</span> in the policy rule <span class="math notranslate nohighlight">\(u_{1t} = - F_{1t} x_t\)</span> that solves agent 1’s  problem satisfies</p>
+<div class="math notranslate nohighlight" id="equation-rmp-orig-3">
+<span class="eqno">(14.6)<a class="headerlink" href="#equation-rmp-orig-3" title="Permalink to this equation">¶</a></span>\[F_{1t}
+= (Q_1 + \beta B_1' {\mathcal D}_1( P_{1t+1}) B_1)^{-1}
+(\beta B_1' {\mathcal D}_1( P_{1t+1}) \Lambda_{1t} + \Gamma_{1t})\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_{1t}\)</span> solves the matrix Riccati difference equation</p>
+<div class="math notranslate nohighlight" id="equation-rmp-orig-4">
+<span class="eqno">(14.7)<a class="headerlink" href="#equation-rmp-orig-4" title="Permalink to this equation">¶</a></span>\[P_{1t} =
+\Pi_{1t} -
+(\beta B_1' {\mathcal D}_1(P_{1t+1}) \Lambda_{1t} + \Gamma_{1t})' (Q_1 + \beta B_1' {\mathcal D}_1( P_{1t+1}) B_1)^{-1}
+(\beta B_1' {\mathcal D}_1(P_{1t+1}) \Lambda_{1t} + \Gamma_{1t}) +
+\beta \Lambda_{1t}' {\mathcal D}_1(P_{1t+1}) \Lambda_{1t}\]</div>
+<p>Similarly, the policy that solves player 2’s problem is</p>
+<div class="math notranslate nohighlight" id="equation-rmp-orig-5">
+<span class="eqno">(14.8)<a class="headerlink" href="#equation-rmp-orig-5" title="Permalink to this equation">¶</a></span>\[F_{2t} = (Q_2 + \beta B_2' {\mathcal D}_2( P_{2t+1} ) B_2)^{-1}
+(\beta B_2' {\mathcal D}_2 (P_{2t+1}) \Lambda_{2t} + \Gamma_{2t})\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_{2t}\)</span> solves</p>
+<div class="math notranslate nohighlight" id="equation-rmp-orig-6">
+<span class="eqno">(14.9)<a class="headerlink" href="#equation-rmp-orig-6" title="Permalink to this equation">¶</a></span>\[P_{2t} =
+\Pi_{2t} - (\beta B_2' {\mathcal D}_2 ( P_{2t+1}) \Lambda_{2t} + \Gamma_{2t})' (Q_2 + \beta B_2' {\mathcal D}_2 ( P_{2t+1}) B_2)^{-1}
+  (\beta B_2' {\mathcal D}_2 ( P_{2t+1}) \Lambda_{2t} + \Gamma_{2t}) + \beta \Lambda_{2t}' {\mathcal D}_2 ( P_{2t+1})  \Lambda_{2t}\]</div>
+<p>Here in all cases <span class="math notranslate nohighlight">\(t = t_0, \ldots, t_1 - 1\)</span> and the terminal conditions are <span class="math notranslate nohighlight">\(P_{it_1} = 0\)</span>.</p>
+<p>The solution procedure is to use equations <a class="reference internal" href="#equation-rmp-orig-3">(14.6)</a>, <a class="reference internal" href="#equation-rmp-orig-4">(14.7)</a>, <a class="reference internal" href="#equation-rmp-orig-5">(14.8)</a>, and <a class="reference internal" href="#equation-rmp-orig-6">(14.9)</a>, and “work backwards” from time <span class="math notranslate nohighlight">\(t_1 - 1\)</span>.</p>
+<p>Since we’re working backwards, <span class="math notranslate nohighlight">\(P_{1t+1}\)</span> and <span class="math notranslate nohighlight">\(P_{2t+1}\)</span> are taken as given at each stage.</p>
+<p>Moreover, since</p>
+<ul class="simple">
+<li><p>some terms on the right-hand side of <a class="reference internal" href="#equation-rmp-orig-3">(14.6)</a> contain <span class="math notranslate nohighlight">\(F_{2t}\)</span></p></li>
+<li><p>some terms on the right-hand side of <a class="reference internal" href="#equation-rmp-orig-5">(14.8)</a> contain <span class="math notranslate nohighlight">\(F_{1t}\)</span></p></li>
+</ul>
+<p>we need to solve these <span class="math notranslate nohighlight">\(k_1 + k_2\)</span> equations simultaneously.</p>
+</div>
+<div class="section" id="key-insight">
+<h3><span class="section-number">14.2.3. </span>Key Insight<a class="headerlink" href="#key-insight" title="Permalink to this headline">¶</a></h3>
+<p>As in <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a>, a key insight here  is that  equations  <a class="reference internal" href="#equation-rmp-orig-3">(14.6)</a> and <a class="reference internal" href="#equation-rmp-orig-5">(14.8)</a> are linear in <span class="math notranslate nohighlight">\(F_{1t}\)</span> and <span class="math notranslate nohighlight">\(F_{2t}\)</span>.</p>
+<p>After these equations have been solved, we can take  <span class="math notranslate nohighlight">\(F_{it}\)</span> and solve for <span class="math notranslate nohighlight">\(P_{it}\)</span> in <a class="reference internal" href="#equation-rmp-orig-4">(14.7)</a> and <a class="reference internal" href="#equation-rmp-orig-6">(14.9)</a>.</p>
+<p>Notice how <span class="math notranslate nohighlight">\(j\)</span>’s control law <span class="math notranslate nohighlight">\(F_{jt}\)</span> is a function of <span class="math notranslate nohighlight">\(\{F_{is}, s \geq t, i \neq j \}\)</span>.</p>
+<p>Thus, agent <span class="math notranslate nohighlight">\(i\)</span>’s choice of <span class="math notranslate nohighlight">\(\{F_{it}; t = t_0, \ldots, t_1 - 1\}\)</span> influences agent <span class="math notranslate nohighlight">\(j\)</span>’s choice of control laws.</p>
+<p>However, in the Markov perfect equilibrium of this game, each agent is assumed to ignore the influence that his choice exerts on the other agent’s choice.</p>
+<p>After these equations have been solved, we can also deduce associated sequences of worst-case shocks.</p>
+</div>
+<div class="section" id="worst-case-shocks">
+<h3><span class="section-number">14.2.4. </span>Worst-case Shocks<a class="headerlink" href="#worst-case-shocks" title="Permalink to this headline">¶</a></h3>
+<p>For agent <span class="math notranslate nohighlight">\(i\)</span> the maximizing or worst-case shock <span class="math notranslate nohighlight">\(v_{it}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+v_{it} = K_{it} x_t
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+K_{it} = \theta_i^{-1} (I - \theta_i^{-1} C' P_{i,t+1} C)^{-1} C' P_{i,t+1} (A - B_1 F_{it} - B_2 F_{2t})
+\]</div>
+</div>
+<div class="section" id="infinite-horizon">
+<h3><span class="section-number">14.2.5. </span>Infinite Horizon<a class="headerlink" href="#infinite-horizon" title="Permalink to this headline">¶</a></h3>
+<p>We often want to compute the solutions of such games for infinite horizons, in the hope that the decision rules <span class="math notranslate nohighlight">\(F_{it}\)</span> settle down to be time-invariant as <span class="math notranslate nohighlight">\(t_1 \rightarrow +\infty\)</span>.</p>
+<p>In practice, we usually fix <span class="math notranslate nohighlight">\(t_1\)</span> and compute the equilibrium of an infinite horizon game by driving <span class="math notranslate nohighlight">\(t_0 \rightarrow - \infty\)</span>.</p>
+<p>This is the approach we adopt in the next section.</p>
+</div>
+<div class="section" id="implementation">
+<h3><span class="section-number">14.2.6. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
+<p>We use the function nnash_robust to compute a
+Markov perfect equilibrium of the infinite horizon linear quadratic dynamic
+game with robust planers in the manner described above.</p>
+</div>
+</div>
+<div class="section" id="application">
+<h2><a class="toc-backref" href="#id6"><span class="section-number">14.3. </span>Application</a><a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-duopoly-model">
+<span id="index-2"></span><h3><span class="section-number">14.3.1. </span>A Duopoly Model<a class="headerlink" href="#a-duopoly-model" title="Permalink to this headline">¶</a></h3>
+<p>Without concerns for robustness, the model is identical to the duopoly model from the <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a> lecture.</p>
+<p>To begin, we briefly review the structure of that model.</p>
+<p>Two firms are the only producers of a good the demand for which is governed by a linear inverse demand function</p>
+<div class="math notranslate nohighlight" id="equation-rgame2">
+<span class="eqno">(14.10)<a class="headerlink" href="#equation-rgame2" title="Permalink to this equation">¶</a></span>\[p = a_0 - a_1 (q_1 +  q_2)\]</div>
+<p>Here <span class="math notranslate nohighlight">\(p = p_t\)</span> is the price of the good, <span class="math notranslate nohighlight">\(q_i = q_{it}\)</span> is the output of firm <span class="math notranslate nohighlight">\(i=1,2\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(a_0 &gt; 0, a_1 &gt;0\)</span>.</p>
+<p>In <a class="reference internal" href="#equation-rgame2">(14.10)</a> and what follows,</p>
+<ul class="simple">
+<li><p>the time subscript is suppressed when possible to simplify notation</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat x\)</span> denotes a next period value of variable <span class="math notranslate nohighlight">\(x\)</span></p></li>
+</ul>
+<p>Each firm recognizes that its output affects total output and therefore the market price.</p>
+<p>The one-period payoff function of firm <span class="math notranslate nohighlight">\(i\)</span> is price times quantity minus adjustment costs:</p>
+<div class="math notranslate nohighlight" id="equation-rgame1">
+<span class="eqno">(14.11)<a class="headerlink" href="#equation-rgame1" title="Permalink to this equation">¶</a></span>\[\pi_i = p q_i - \gamma (\hat q_i - q_i)^2, \quad \gamma &gt; 0 ,\]</div>
+<p>Substituting the inverse demand curve <a class="reference internal" href="#equation-rgame2">(14.10)</a> into <a class="reference internal" href="#equation-rgame1">(14.11)</a> lets us express the one-period payoff as</p>
+<div class="math notranslate nohighlight" id="equation-rgame3">
+<span class="eqno">(14.12)<a class="headerlink" href="#equation-rgame3" title="Permalink to this equation">¶</a></span>\[\pi_i(q_i, q_{-i}, \hat q_i) = a_0 q_i - a_1 q_i^2 - a_1 q_i q_{-i} - \gamma (\hat q_i - q_i)^2 ,\]</div>
+<p>where <span class="math notranslate nohighlight">\(q_{-i}\)</span> denotes the output of the firm other than <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>The objective of the firm is to maximize <span class="math notranslate nohighlight">\(\sum_{t=0}^\infty \beta^t \pi_{it}\)</span>.</p>
+<p>Firm <span class="math notranslate nohighlight">\(i\)</span> chooses a decision rule that sets next period quantity <span class="math notranslate nohighlight">\(\hat q_i\)</span> as a function <span class="math notranslate nohighlight">\(f_i\)</span> of the current state <span class="math notranslate nohighlight">\((q_i, q_{-i})\)</span>.</p>
+<p>This completes our review of the duopoly model without concerns for robustness.</p>
+<p>Now we activate robustness  concerns of both firms.</p>
+<p>To map a robust version of the duopoly model  into  coupled robust linear-quadratic dynamic programming
+problems, we again define the state and controls as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x_t :=
+\begin{bmatrix}
+    1 \\
+    q_{1t} \\
+    q_{2t}
+\end{bmatrix}
+\quad \text{and} \quad
+u_{it} :=
+q_{i,t+1} - q_{it}, \quad i=1,2
+\end{split}\]</div>
+<p>If we write</p>
+<div class="math notranslate nohighlight">
+\[
+x_t' R_i x_t + u_{it}' Q_i u_{it}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(Q_1 = Q_2 = \gamma\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+R_1 :=
+\begin{bmatrix}
+   0              &amp; -\frac{a_0}{2}  &amp; 0 \\
+   -\frac{a_0}{2} &amp;  a_1            &amp;  \frac{a_1}{2} \\
+   0              &amp;   \frac{a_1}{2} &amp; 0
+\end{bmatrix}
+\quad \text{and} \quad
+R_2 :=
+\begin{bmatrix}
+   0              &amp; 0             &amp; -\frac{a_0}{2} \\
+   0              &amp; 0             &amp; \frac{a_1}{2} \\
+   -\frac{a_0}{2} &amp; \frac{a_1}{2} &amp; a_1
+\end{bmatrix}
+\end{split}\]</div>
+<p>then we recover the  one-period  payoffs <a class="reference internal" href="#equation-rgame1">(14.11)</a> for the two firms in the duopoly model.</p>
+<p>The law of motion for the state <span class="math notranslate nohighlight">\(x_t\)</span> is <span class="math notranslate nohighlight">\(x_{t+1} = A x_t + B_1 u_{1t} + B_2 u_{2t}\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A :=
+\begin{bmatrix}
+   1 &amp; 0 &amp; 0 \\
+   0 &amp; 1 &amp; 0 \\
+   0 &amp; 0 &amp; 1
+\end{bmatrix},
+\quad
+B_1 :=
+\begin{bmatrix}
+       0 \\
+       1 \\
+       0
+\end{bmatrix},
+\quad
+B_2 :=
+\begin{bmatrix}
+            0 \\
+            0 \\
+            1
+\end{bmatrix}
+\end{split}\]</div>
+<p>A robust  decision rule of firm <span class="math notranslate nohighlight">\(i\)</span> will take the form <span class="math notranslate nohighlight">\(u_{it} = - F_i x_t\)</span>, inducing the following closed-loop system for the evolution of <span class="math notranslate nohighlight">\(x\)</span> in the Markov perfect equilibrium:</p>
+<div class="math notranslate nohighlight" id="equation-rmp-eq-mpe-cle">
+<span class="eqno">(14.13)<a class="headerlink" href="#equation-rmp-eq-mpe-cle" title="Permalink to this equation">¶</a></span>\[x_{t+1} = (A - B_1 F_1 -B_1 F_2 ) x_t\]</div>
+</div>
+<div class="section" id="parameters-and-solution">
+<h3><span class="section-number">14.3.2. </span>Parameters and Solution<a class="headerlink" href="#parameters-and-solution" title="Permalink to this headline">¶</a></h3>
+<p>Consider the  duopoly model with parameter values of:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(a_0 = 10\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(a_1 = 2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta = 0.96\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma = 12\)</span></p></li>
+</ul>
+<p>From these, we computed the infinite horizon MPE without robustness using the code</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
+
+<span class="c1"># Parameters</span>
+<span class="n">a0</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">β</span> <span class="o">=</span> <span class="mf">0.96</span>
+<span class="n">γ</span> <span class="o">=</span> <span class="mf">12.0</span>
+
+<span class="c1"># In LQ form</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">B1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]])</span>
+<span class="n">B2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">]])</span>
+
+
+<span class="n">R1</span> <span class="o">=</span> <span class="p">[[</span>      <span class="mf">0.</span><span class="p">,</span>     <span class="o">-</span><span class="n">a0</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>          <span class="mf">0.</span><span class="p">],</span>
+      <span class="p">[</span><span class="o">-</span><span class="n">a0</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>          <span class="n">a1</span><span class="p">,</span>     <span class="n">a1</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">],</span>
+      <span class="p">[</span>       <span class="mi">0</span><span class="p">,</span>     <span class="n">a1</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>          <span class="mf">0.</span><span class="p">]]</span>
+
+<span class="n">R2</span> <span class="o">=</span> <span class="p">[[</span>     <span class="mf">0.</span><span class="p">,</span>           <span class="mf">0.</span><span class="p">,</span>      <span class="o">-</span><span class="n">a0</span> <span class="o">/</span> <span class="mi">2</span><span class="p">],</span>
+      <span class="p">[</span>     <span class="mf">0.</span><span class="p">,</span>           <span class="mf">0.</span><span class="p">,</span>      <span class="n">a1</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">],</span>
+      <span class="p">[</span><span class="o">-</span><span class="n">a0</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>      <span class="n">a1</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>           <span class="n">a1</span><span class="p">]]</span>
+
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">Q2</span> <span class="o">=</span> <span class="n">γ</span>
+<span class="n">S1</span> <span class="o">=</span> <span class="n">S2</span> <span class="o">=</span> <span class="n">W1</span> <span class="o">=</span> <span class="n">W2</span> <span class="o">=</span> <span class="n">M1</span> <span class="o">=</span> <span class="n">M2</span> <span class="o">=</span> <span class="mf">0.0</span>
+
+<span class="c1"># Solve using QE&#39;s nnash function</span>
+<span class="n">F1</span><span class="p">,</span> <span class="n">F2</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">nnash</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> 
+                          <span class="n">Q2</span><span class="p">,</span> <span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">M1</span><span class="p">,</span> 
+                          <span class="n">M2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+
+<span class="c1"># Display policies</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Computed policies for firm 1 and firm 2:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F1 = </span><span class="si">{</span><span class="n">F1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;F2 = </span><span class="si">{</span><span class="n">F2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Computed policies for firm 1 and firm 2:
+
+F1 = [[-0.66846615  0.29512482  0.07584666]]
+F2 = [[-0.66846615  0.07584666  0.29512482]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="markov-perfect-equilibrium-with-robustness">
+<h4><span class="section-number">14.3.2.1. </span>Markov Perfect Equilibrium with Robustness<a class="headerlink" href="#markov-perfect-equilibrium-with-robustness" title="Permalink to this headline">¶</a></h4>
+<p>We add robustness concerns to the Markov Perfect Equilibrium model by
+extending the function <code class="docutils literal notranslate"><span class="pre">qe.nnash</span></code>
+(<a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqnash.py">link</a>)
+into a robustness version by adding the maximization operator
+<span class="math notranslate nohighlight">\(\mathcal D(P)\)</span> into the backward induction.</p>
+<p>The MPE with robustness function is <code class="docutils literal notranslate"><span class="pre">nnash_robust</span></code>.</p>
+<p>The function’s code is as follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">nnash_robust</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> <span class="n">Q2</span><span class="p">,</span> <span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span>
+                 <span class="n">θ1</span><span class="p">,</span> <span class="n">θ2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Compute the limit of a Nash linear quadratic dynamic game with</span>
+<span class="sd">    robustness concern.</span>
+
+<span class="sd">    In this problem, player i minimizes</span>
+<span class="sd">    .. math::</span>
+<span class="sd">        \sum_{t=0}^{\infty}</span>
+<span class="sd">        \left\{</span>
+<span class="sd">            x_t&#39; r_i x_t + 2 x_t&#39; w_i</span>
+<span class="sd">            u_{it} +u_{it}&#39; q_i u_{it} + u_{jt}&#39; s_i u_{jt} + 2 u_{jt}&#39;</span>
+<span class="sd">            m_i u_{it}</span>
+<span class="sd">        \right\}</span>
+<span class="sd">    subject to the law of motion</span>
+<span class="sd">    .. math::</span>
+<span class="sd">        x_{it+1} = A x_t + b_1 u_{1t} + b_2 u_{2t} + C w_{it+1}</span>
+<span class="sd">    and a perceived control law :math:`u_j(t) = - f_j x_t` for the other</span>
+<span class="sd">    player.</span>
+
+<span class="sd">    The player i also concerns about the model misspecification,</span>
+<span class="sd">    and maximizes</span>
+<span class="sd">    .. math::</span>
+<span class="sd">        \sum_{t=0}^{\infty}</span>
+<span class="sd">        \left\{</span>
+<span class="sd">            \beta^{t+1} \theta_{i} w_{it+1}&#39;w_{it+1}</span>
+<span class="sd">        \right\}</span>
+
+<span class="sd">    The solution computed in this routine is the :math:`f_i` and</span>
+<span class="sd">    :math:`P_i` of the associated double optimal linear regulator</span>
+<span class="sd">    problem.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    A : scalar(float) or array_like(float)</span>
+<span class="sd">        Corresponds to the MPE equations, should be of size (n, n)</span>
+<span class="sd">    C : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (n, c), c is the size of w</span>
+<span class="sd">    B1 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (n, k_1)</span>
+<span class="sd">    B2 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (n, k_2)</span>
+<span class="sd">    R1 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (n, n)</span>
+<span class="sd">    R2 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (n, n)</span>
+<span class="sd">    Q1 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (k_1, k_1)</span>
+<span class="sd">    Q2 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (k_2, k_2)</span>
+<span class="sd">    S1 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (k_1, k_1)</span>
+<span class="sd">    S2 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (k_2, k_2)</span>
+<span class="sd">    W1 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (n, k_1)</span>
+<span class="sd">    W2 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (n, k_2)</span>
+<span class="sd">    M1 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (k_2, k_1)</span>
+<span class="sd">    M2 : scalar(float) or array_like(float)</span>
+<span class="sd">        As above, size (k_1, k_2)</span>
+<span class="sd">    θ1 : scalar(float)</span>
+<span class="sd">            Robustness parameter of player 1</span>
+<span class="sd">    θ2 : scalar(float)</span>
+<span class="sd">            Robustness parameter of player 2</span>
+<span class="sd">    beta : scalar(float), optional(default=1.0)</span>
+<span class="sd">          Discount factor</span>
+<span class="sd">    tol : scalar(float), optional(default=1e-8)</span>
+<span class="sd">         This is the tolerance level for convergence</span>
+<span class="sd">    max_iter : scalar(int), optional(default=1000)</span>
+<span class="sd">        This is the maximum number of iterations allowed</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    F1 : array_like, dtype=float, shape=(k_1, n)</span>
+<span class="sd">        Feedback law for agent 1</span>
+<span class="sd">    F2 : array_like, dtype=float, shape=(k_2, n)</span>
+<span class="sd">        Feedback law for agent 2</span>
+<span class="sd">    P1 : array_like, dtype=float, shape=(n, n)</span>
+<span class="sd">        The steady-state solution to the associated discrete matrix</span>
+<span class="sd">        Riccati equation for agent 1</span>
+<span class="sd">    P2 : array_like, dtype=float, shape=(n, n)</span>
+<span class="sd">        The steady-state solution to the associated discrete matrix</span>
+<span class="sd">        Riccati equation for agent 2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Unload parameters and make sure everything is a matrix</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> <span class="n">Q2</span><span class="p">,</span> <span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">M1</span><span class="p">,</span> <span class="n">M2</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asmatrix</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span> <span class="n">Q2</span><span class="p">,</span> <span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">M1</span><span class="p">,</span> <span class="n">M2</span> <span class="o">=</span> <span class="n">params</span>
+
+
+    <span class="c1"># Multiply A, B1, B2 by sqrt(β) to enforce discounting</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B2</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">β</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">)]</span>
+
+    <span class="c1"># Initial values</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">k_1</span> <span class="o">=</span> <span class="n">B1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">k_2</span> <span class="o">=</span> <span class="n">B2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">v1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k_1</span><span class="p">)</span>
+    <span class="n">v2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k_2</span><span class="p">)</span>
+    <span class="n">P1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-5</span>
+    <span class="n">P2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1e-5</span>
+    <span class="n">F1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">k_1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">F2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">k_2</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+
+    <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">max_iter</span><span class="p">):</span>
+        <span class="c1"># Update</span>
+        <span class="n">F10</span> <span class="o">=</span> <span class="n">F1</span>
+        <span class="n">F20</span> <span class="o">=</span> <span class="n">F2</span>
+
+        <span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># D1(P1)</span>
+        <span class="c1"># Note: INV1 may not be solved if the matrix is singular</span>
+        <span class="n">INV1</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">θ1</span> <span class="o">*</span> <span class="n">I</span> <span class="o">-</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P1</span> <span class="o">@</span> <span class="n">C</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+        <span class="n">D1P1</span> <span class="o">=</span>  <span class="n">P1</span> <span class="o">+</span> <span class="n">P1</span> <span class="o">@</span> <span class="n">C</span> <span class="o">@</span> <span class="n">INV1</span> <span class="o">@</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P1</span>
+
+        <span class="c1"># D2(P2)</span>
+        <span class="c1"># Note: INV2 may not be solved if the matrix is singular</span>
+        <span class="n">INV2</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">θ2</span> <span class="o">*</span> <span class="n">I</span> <span class="o">-</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P2</span> <span class="o">@</span> <span class="n">C</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+        <span class="n">D2P2</span> <span class="o">=</span>  <span class="n">P2</span> <span class="o">+</span> <span class="n">P2</span> <span class="o">@</span> <span class="n">C</span> <span class="o">@</span> <span class="n">INV2</span> <span class="o">@</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P2</span>
+
+        <span class="n">G2</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">Q2</span> <span class="o">+</span> <span class="n">B2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">D2P2</span> <span class="o">@</span> <span class="n">B2</span><span class="p">,</span> <span class="n">v2</span><span class="p">)</span>
+        <span class="n">G1</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">Q1</span> <span class="o">+</span> <span class="n">B1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">D1P1</span> <span class="o">@</span> <span class="n">B1</span><span class="p">,</span> <span class="n">v1</span><span class="p">)</span>
+        <span class="n">H2</span> <span class="o">=</span> <span class="n">G2</span> <span class="o">@</span> <span class="n">B2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">D2P2</span>
+        <span class="n">H1</span> <span class="o">=</span> <span class="n">G1</span> <span class="o">@</span> <span class="n">B1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">D1P1</span>
+
+        <span class="c1"># Break up the computation of F1, F2</span>
+        <span class="n">F1_left</span> <span class="o">=</span> <span class="n">v1</span> <span class="o">-</span> <span class="p">(</span><span class="n">H1</span> <span class="o">@</span> <span class="n">B2</span> <span class="o">+</span> <span class="n">G1</span> <span class="o">@</span> <span class="n">M1</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">@</span> <span class="p">(</span><span class="n">H2</span> <span class="o">@</span> <span class="n">B1</span> <span class="o">+</span> <span class="n">G2</span> <span class="o">@</span> <span class="n">M2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">F1_right</span> <span class="o">=</span> <span class="n">H1</span> <span class="o">@</span> <span class="n">A</span> <span class="o">+</span> <span class="n">G1</span> <span class="o">@</span> <span class="n">W1</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> \
+                   <span class="p">(</span><span class="n">H1</span> <span class="o">@</span> <span class="n">B2</span> <span class="o">+</span> <span class="n">G1</span> <span class="o">@</span> <span class="n">M1</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">@</span> <span class="p">(</span><span class="n">H2</span> <span class="o">@</span> <span class="n">A</span> <span class="o">+</span> <span class="n">G2</span> <span class="o">@</span> <span class="n">W2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">F1</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">F1_left</span><span class="p">,</span> <span class="n">F1_right</span><span class="p">)</span>
+        <span class="n">F2</span> <span class="o">=</span> <span class="n">H2</span> <span class="o">@</span> <span class="n">A</span> <span class="o">+</span> <span class="n">G2</span> <span class="o">@</span> <span class="n">W2</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="p">(</span><span class="n">H2</span> <span class="o">@</span> <span class="n">B1</span> <span class="o">+</span> <span class="n">G2</span> <span class="o">@</span> <span class="n">M2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span> <span class="o">@</span> <span class="n">F1</span>
+
+        <span class="n">Λ1</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B2</span> <span class="o">@</span> <span class="n">F2</span>
+        <span class="n">Λ2</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B1</span> <span class="o">@</span> <span class="n">F1</span>
+        <span class="n">Π1</span> <span class="o">=</span> <span class="n">R1</span> <span class="o">+</span> <span class="n">F2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">S1</span> <span class="o">@</span> <span class="n">F2</span>
+        <span class="n">Π2</span> <span class="o">=</span> <span class="n">R2</span> <span class="o">+</span> <span class="n">F1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">S2</span> <span class="o">@</span> <span class="n">F1</span>
+        <span class="n">Γ1</span> <span class="o">=</span> <span class="n">W1</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">M1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">F2</span>
+        <span class="n">Γ2</span> <span class="o">=</span> <span class="n">W2</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">M2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">F1</span>
+
+        <span class="c1"># Compute P1 and P2</span>
+        <span class="n">P1</span> <span class="o">=</span> <span class="n">Π1</span> <span class="o">-</span> <span class="p">(</span><span class="n">B1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">D1P1</span> <span class="o">@</span> <span class="n">Λ1</span> <span class="o">+</span> <span class="n">Γ1</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">F1</span> <span class="o">+</span> \
+             <span class="n">Λ1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">D1P1</span> <span class="o">@</span> <span class="n">Λ1</span>
+        <span class="n">P2</span> <span class="o">=</span> <span class="n">Π2</span> <span class="o">-</span> <span class="p">(</span><span class="n">B2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">D2P2</span> <span class="o">@</span> <span class="n">Λ2</span> <span class="o">+</span> <span class="n">Γ2</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">F2</span> <span class="o">+</span> \
+             <span class="n">Λ2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">D2P2</span> <span class="o">@</span> <span class="n">Λ2</span>
+
+        <span class="n">dd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">F10</span> <span class="o">-</span> <span class="n">F1</span><span class="p">))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">F20</span> <span class="o">-</span> <span class="n">F2</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">dd</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">:</span>  <span class="c1"># success!</span>
+            <span class="k">break</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;No convergence: Iteration limit of </span><span class="si">{</span><span class="n">max_iter</span><span class="si">}</span><span class="s1"> </span><span class="se">\</span>
+<span class="s1">            reached in nnash&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">F1</span><span class="p">,</span> <span class="n">F2</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="some-details">
+<h3><span class="section-number">14.3.3. </span>Some Details<a class="headerlink" href="#some-details" title="Permalink to this headline">¶</a></h3>
+<p>Firm  <span class="math notranslate nohighlight">\(i\)</span> wants to minimize</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{t=t_0}^{t_1 - 1}
+\beta^{t - t_0}
+\left\{
+    x_t' R_i x_t +
+    u_{it}' Q_i u_{it} +
+    u_{-it}' S_i u_{-it} +
+    2 x_t' W_i u_{it} +
+    2 u_{-it}' M_i u_{it}
+\right\}
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+x_t :=
+\begin{bmatrix}
+    1 \\
+    q_{1t} \\
+    q_{2t}
+\end{bmatrix}
+\quad \text{and} \quad
+u_{it} :=
+q_{i,t+1} - q_{it}, \quad i=1,2
+\end{split}
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+R_1 :=
+\begin{bmatrix}
+   0              &amp; -\frac{a_0}{2}  &amp; 0 \\
+   -\frac{a_0}{2} &amp;  a_1            &amp;  \frac{a_1}{2} \\
+   0              &amp;   \frac{a_1}{2} &amp; 0
+\end{bmatrix}
+\text{,} \quad
+R_2 :=
+\begin{bmatrix}
+   0              &amp; 0             &amp; -\frac{a_0}{2} \\
+   0              &amp; 0             &amp; \frac{a_1}{2} \\
+   -\frac{a_0}{2} &amp; \frac{a_1}{2} &amp; a_1
+\end{bmatrix}
+\text{,} \quad
+Q_1 = Q_2 = \gamma
+\text{,} \quad
+S_1 = S_2 = 0
+\text{,} \quad
+W_1 = W_2 = 0
+\text{,} \quad
+M_1 = M_2 = 0
+\end{split}
+\end{split}\]</div>
+<p>The parameters of the duopoly model are:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(a_0 = 10\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(a_1 = 2\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta = 0.96\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\gamma = 12\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
+<span class="n">a0</span> <span class="o">=</span> <span class="mf">10.0</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">β</span> <span class="o">=</span> <span class="mf">0.96</span>
+<span class="n">γ</span> <span class="o">=</span> <span class="mf">12.0</span>
+
+
+<span class="c1"># In LQ form</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">B1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">]])</span>
+<span class="n">B2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.</span><span class="p">]])</span>
+
+
+<span class="n">R1</span> <span class="o">=</span> <span class="p">[[</span>      <span class="mf">0.</span><span class="p">,</span>     <span class="o">-</span><span class="n">a0</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>          <span class="mf">0.</span><span class="p">],</span>
+      <span class="p">[</span><span class="o">-</span><span class="n">a0</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>          <span class="n">a1</span><span class="p">,</span>     <span class="n">a1</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">],</span>
+      <span class="p">[</span>       <span class="mi">0</span><span class="p">,</span>     <span class="n">a1</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>          <span class="mf">0.</span><span class="p">]]</span>
+
+<span class="n">R2</span> <span class="o">=</span> <span class="p">[[</span>     <span class="mf">0.</span><span class="p">,</span>           <span class="mf">0.</span><span class="p">,</span>      <span class="o">-</span><span class="n">a0</span> <span class="o">/</span> <span class="mi">2</span><span class="p">],</span>
+      <span class="p">[</span>     <span class="mf">0.</span><span class="p">,</span>           <span class="mf">0.</span><span class="p">,</span>      <span class="n">a1</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">],</span>
+      <span class="p">[</span><span class="o">-</span><span class="n">a0</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>      <span class="n">a1</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">,</span>           <span class="n">a1</span><span class="p">]]</span>
+
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">Q2</span> <span class="o">=</span> <span class="n">γ</span>
+<span class="n">S1</span> <span class="o">=</span> <span class="n">S2</span> <span class="o">=</span> <span class="n">W1</span> <span class="o">=</span> <span class="n">W2</span> <span class="o">=</span> <span class="n">M1</span> <span class="o">=</span> <span class="n">M2</span> <span class="o">=</span> <span class="mf">0.0</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="consistency-check">
+<h4><span class="section-number">14.3.3.1. </span>Consistency Check<a class="headerlink" href="#consistency-check" title="Permalink to this headline">¶</a></h4>
+<p>We first conduct a comparison test to check if <code class="docutils literal notranslate"><span class="pre">nnash_robust</span></code> agrees
+with <code class="docutils literal notranslate"><span class="pre">qe.nnash</span></code> in the non-robustness case in which each <span class="math notranslate nohighlight">\(\theta_i \approx +\infty\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Solve using QE&#39;s nnash function</span>
+<span class="n">F1</span><span class="p">,</span> <span class="n">F2</span><span class="p">,</span> <span class="n">P1</span><span class="p">,</span> <span class="n">P2</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">nnash</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span>
+                          <span class="n">Q2</span><span class="p">,</span> <span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">M1</span><span class="p">,</span>
+                          <span class="n">M2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+
+<span class="c1"># Solve using nnash_robust</span>
+<span class="n">F1r</span><span class="p">,</span> <span class="n">F2r</span><span class="p">,</span> <span class="n">P1r</span><span class="p">,</span> <span class="n">P2r</span> <span class="o">=</span> <span class="n">nnash_robust</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span>
+                                  <span class="n">Q2</span><span class="p">,</span> <span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">,</span>
+                                  <span class="mf">1e-10</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1 and F1r should be the same: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">F1</span><span class="p">,</span> <span class="n">F1r</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F2 and F2r should be the same: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">F1</span><span class="p">,</span> <span class="n">F1r</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P1 and P1r should be the same: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">P1r</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;P2 and P2r should be the same: &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">P1</span><span class="p">,</span> <span class="n">P1r</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>F1 and F1r should be the same:  True
+F2 and F2r should be the same:  True
+P1 and P1r should be the same:  True
+P2 and P2r should be the same:  True
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that the results are consistent across the two functions.</p>
+</div>
+<div class="section" id="comparative-dynamics-under-baseline-transition-dynamics">
+<h4><span class="section-number">14.3.3.2. </span>Comparative Dynamics under Baseline Transition Dynamics<a class="headerlink" href="#comparative-dynamics-under-baseline-transition-dynamics" title="Permalink to this headline">¶</a></h4>
+<p>We want to compare the dynamics of price and output under the baseline
+MPE model with those under the baseline model under the robust decision rules within the robust MPE.</p>
+<p>This means that we simulate the state dynamics under the MPE  equilibrium <strong>closed-loop</strong> transition matrix</p>
+<div class="math notranslate nohighlight">
+\[
+A^o = A - B_1 F_1 - B_2 F_2
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> are the firms’ robust decision rules within the robust markov_perfect equilibrium</p>
+<ul class="simple">
+<li><p>by simulating under the baseline model transition dynamics and the robust MPE rules we are in assuming that at the end of the day
+firms’ concerns about misspecification of the baseline model do not materialize.</p></li>
+<li><p>a short way of saying this is that misspecification fears are all ‘just in the minds’ of the firms.</p></li>
+<li><p>simulating under the baseline model is a common practice in the literature.</p></li>
+<li><p>note that <em>some</em> assumption about the model that actually governs the data has to be made in order to create a simulation.</p></li>
+<li><p>later we will describe the (erroneous) beliefs of the two firms  that justify their robust decisions as best responses to transition
+laws that are distorted relative to the baseline model.</p></li>
+</ul>
+<p>After simulating <span class="math notranslate nohighlight">\(x_t\)</span> under the baseline transition dynamics and robust decision rules <span class="math notranslate nohighlight">\(F_i, i = 1, 2\)</span>, we
+extract and plot industry output <span class="math notranslate nohighlight">\(q_t=q_{1t}+q_{2t}\)</span> and price <span class="math notranslate nohighlight">\(p_t = a_0 − a_1 q_t\)</span>.</p>
+<p>Here we set the robustness and volatility matrix parameters as follows:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\theta_1 = 0.02\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_2 = 0.04\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(C = \begin{pmatrix} 0 \\ 0.01 \\ 0.01 \end{pmatrix}\)</span></p></li>
+</ul>
+<p>Because we have set <span class="math notranslate nohighlight">\(\theta_1 &lt; \theta_2 &lt; + \infty\)</span> we know that</p>
+<ul class="simple">
+<li><p>both firms fear that the baseline specification of the state transition dynamics are incorrect.</p></li>
+<li><p>firm <span class="math notranslate nohighlight">\(1\)</span> fears misspecification more than firm <span class="math notranslate nohighlight">\(2\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Robustness parameters and matrix</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asmatrix</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">]])</span>
+<span class="n">θ1</span> <span class="o">=</span> <span class="mf">0.02</span>
+<span class="n">θ2</span> <span class="o">=</span> <span class="mf">0.04</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>
+
+
+<span class="c1"># Solve using nnash_robust</span>
+<span class="n">F1r</span><span class="p">,</span> <span class="n">F2r</span><span class="p">,</span> <span class="n">P1r</span><span class="p">,</span> <span class="n">P2r</span> <span class="o">=</span> <span class="n">nnash_robust</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">B1</span><span class="p">,</span> <span class="n">B2</span><span class="p">,</span> <span class="n">R1</span><span class="p">,</span> <span class="n">R2</span><span class="p">,</span> <span class="n">Q1</span><span class="p">,</span>
+                                  <span class="n">Q2</span><span class="p">,</span> <span class="n">S1</span><span class="p">,</span> <span class="n">S2</span><span class="p">,</span> <span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">,</span> <span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span>
+                                  <span class="n">θ1</span><span class="p">,</span> <span class="n">θ2</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+
+
+
+<span class="c1"># MPE output and price</span>
+<span class="n">AF</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B1</span> <span class="o">@</span> <span class="n">F1</span> <span class="o">-</span> <span class="n">B2</span> <span class="o">@</span> <span class="n">F2</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">[:,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">AF</span> <span class="o">@</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span>
+<span class="n">q1</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">q1</span> <span class="o">+</span> <span class="n">q2</span>       <span class="c1"># Total output, MPE</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">a0</span> <span class="o">-</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">q</span>   <span class="c1"># Price, MPE</span>
+
+
+<span class="c1"># RMPE output and price</span>
+<span class="n">AO</span> <span class="o">=</span> <span class="n">A</span> <span class="o">-</span> <span class="n">B1</span> <span class="o">@</span> <span class="n">F1r</span> <span class="o">-</span> <span class="n">B2</span> <span class="o">@</span> <span class="n">F2r</span>
+<span class="n">xr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">xr</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">xr</span><span class="p">[:,</span> <span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">AO</span> <span class="o">@</span> <span class="n">xr</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span>
+<span class="n">qr1</span> <span class="o">=</span> <span class="n">xr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">qr2</span> <span class="o">=</span> <span class="n">xr</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">qr</span> <span class="o">=</span> <span class="n">qr1</span> <span class="o">+</span> <span class="n">qr2</span>      <span class="c1"># Total output, RMPE</span>
+<span class="n">pr</span> <span class="o">=</span> <span class="n">a0</span> <span class="o">-</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">qr</span>   <span class="c1"># Price, RMPE</span>
+
+<span class="c1"># RMPE heterogeneous beliefs output and price</span>
+<span class="n">I</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">INV1</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">θ1</span> <span class="o">*</span> <span class="n">I</span> <span class="o">-</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P1</span> <span class="o">@</span> <span class="n">C</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+<span class="n">K1</span> <span class="o">=</span>  <span class="n">P1</span> <span class="o">@</span> <span class="n">C</span> <span class="o">@</span> <span class="n">INV1</span> <span class="o">@</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P1</span> <span class="o">@</span> <span class="n">AO</span>
+<span class="n">AOCK1</span> <span class="o">=</span> <span class="n">AO</span> <span class="o">+</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">K1</span>
+
+<span class="n">INV2</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">θ2</span> <span class="o">*</span> <span class="n">I</span> <span class="o">-</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P2</span> <span class="o">@</span> <span class="n">C</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+<span class="n">K2</span> <span class="o">=</span>  <span class="n">P2</span> <span class="o">@</span> <span class="n">C</span> <span class="o">@</span> <span class="n">INV2</span> <span class="o">@</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">P2</span> <span class="o">@</span> <span class="n">AO</span>
+<span class="n">AOCK2</span> <span class="o">=</span> <span class="n">AO</span> <span class="o">+</span> <span class="n">C</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">K2</span>
+<span class="n">xrp1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">xrp2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="n">xrp1</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">xrp2</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">xrp1</span><span class="p">[:,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">AOCK1</span> <span class="o">@</span> <span class="n">xrp1</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span>
+    <span class="n">xrp2</span><span class="p">[:,</span> <span class="n">t</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">AOCK2</span> <span class="o">@</span> <span class="n">xrp2</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span>
+<span class="n">qrp11</span> <span class="o">=</span> <span class="n">xrp1</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">qrp12</span> <span class="o">=</span> <span class="n">xrp1</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">qrp21</span> <span class="o">=</span> <span class="n">xrp2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">qrp22</span> <span class="o">=</span> <span class="n">xrp2</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+<span class="n">qrp1</span> <span class="o">=</span> <span class="n">qrp11</span> <span class="o">+</span> <span class="n">qrp12</span>       <span class="c1"># Total output, RMPE from player 1&#39;s belief</span>
+<span class="n">qrp2</span> <span class="o">=</span> <span class="n">qrp21</span> <span class="o">+</span> <span class="n">qrp22</span>       <span class="c1"># Total output, RMPE from player 2&#39;s belief</span>
+<span class="n">prp1</span> <span class="o">=</span> <span class="n">a0</span> <span class="o">-</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">qrp1</span>      <span class="c1"># Price, RMPE from player 1&#39;s belief</span>
+<span class="n">prp2</span> <span class="o">=</span> <span class="n">a0</span> <span class="o">-</span> <span class="n">a1</span> <span class="o">*</span> <span class="n">qrp2</span>      <span class="c1"># Price, RMPE from player 2&#39;s belief</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code prepares graphs that compare market-wide output <span class="math notranslate nohighlight">\(q_{1t} + q_{2t}\)</span> and  the price of the good
+<span class="math notranslate nohighlight">\(p_t\)</span> under equilibrium decision rules <span class="math notranslate nohighlight">\(F_i, i = 1, 2\)</span> from an ordinary Markov perfect equilibrium and the decision rules
+under a  Markov perfect equilibrium with robust firms with multiplier parameters <span class="math notranslate nohighlight">\(\theta_i, i = 1,2\)</span> set as described above.</p>
+<p>Both industry output and price  are under the transition dynamics associated with the baseline model; only the decision rules <span class="math notranslate nohighlight">\(F_i\)</span> differ across the two
+equilibrium objects presented.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MPE output&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="s1">&#39;m-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RMPE output&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MPE price&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span> <span class="s1">&#39;m-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RMPE price&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/rob_markov_perf_15_0.png" src="_images/rob_markov_perf_15_0.png" />
+</div>
+</div>
+<p>Under the dynamics associated with the baseline model, the price path is higher with the Markov perfect equilibrium robust decision rules
+than it is with decision rules for the ordinary Markov perfect equilibrium.</p>
+<p>So is the industry output path.</p>
+<p>To dig a little beneath the forces driving these outcomes, we want to plot <span class="math notranslate nohighlight">\(q_{1t}\)</span>
+and <span class="math notranslate nohighlight">\(q_{2t}\)</span> in the Markov perfect equilibrium with robust firms and to compare them with corresponding objects
+in the Markov perfect equilibrium without robust firms</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;firm 1 MPE output&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qr1</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;firm 1 RMPE output&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">q2</span><span class="p">,</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;firm 2 MPE output&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qr2</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;firm 2 RMPE output&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/rob_markov_perf_17_0.png" src="_images/rob_markov_perf_17_0.png" />
+</div>
+</div>
+<p>Evidently, firm 1’s output path is substantially lower when firms are  robust firms while
+firm 2’s output path is virtually the same as it would be in an ordinary  Markov perfect equilibrium with no robust firms.</p>
+<p>Recall that we have set <span class="math notranslate nohighlight">\(\theta_1 = .02\)</span> and <span class="math notranslate nohighlight">\(\theta_2 = .04\)</span>, so that firm 1 fears
+misspecification of the baseline model substantially more than does firm 2</p>
+<ul class="simple">
+<li><p>but also please notice that firm <span class="math notranslate nohighlight">\(2\)</span>’s  behavior in the Markov perfect equilibrium with robust firms responds to the decision rule <span class="math notranslate nohighlight">\(F_1 x_t\)</span>
+employed by firm <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+<li><p>thus it is something of a coincidence that its output is almost the same in the two equilibria.</p></li>
+</ul>
+<p>Larger  concerns about misspecification induce firm 1 to be more cautious than firm 2 in predicting market price and the output of the other firm.</p>
+<p>To explore this, we study next how <em>ex-post</em> the two firms’ beliefs about state dynamics differ in  the Markov perfect equilibrium with robust firms.</p>
+<p>(by <em>ex-post</em> we mean <em>after</em> extremization of each firm’s intertemporal objective)</p>
+</div>
+<div class="section" id="heterogeneous-beliefs">
+<h4><span class="section-number">14.3.3.3. </span>Heterogeneous Beliefs<a class="headerlink" href="#heterogeneous-beliefs" title="Permalink to this headline">¶</a></h4>
+<p>As before, let <span class="math notranslate nohighlight">\(A^o = A - B\_1 F\_1^r - B\_2 F\_2^r\)</span>, where in a robust MPE, <span class="math notranslate nohighlight">\(F_i^r\)</span> is a robust decision rule for firm <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>Worst-case forecasts of  <span class="math notranslate nohighlight">\(x_t\)</span> starting from <span class="math notranslate nohighlight">\(t=0\)</span> differ between the two firms.</p>
+<p>This means that  worst-case forecasts of industry output <span class="math notranslate nohighlight">\(q_{1t} + q_{2t}\)</span> and price <span class="math notranslate nohighlight">\(p_t\)</span> also differ between the two firms.</p>
+<p>To find these worst-case beliefs, we compute the following three “closed-loop” transition matrices</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A^o\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A^o + C K\_1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(A^o + C K\_2\)</span></p></li>
+</ul>
+<p>We call the first transition law, namely, <span class="math notranslate nohighlight">\(A^o\)</span>,  the baseline transition under firms’ robust decision rules.</p>
+<p>We call the second and third worst-case transitions under robust decision
+rules for firms 1 and 2.</p>
+<p>From <span class="math notranslate nohighlight">\(\{x_t\}\)</span> paths generated by  each of these transition laws, we pull off the associated price and total output sequences.</p>
+<p>The following code plots them</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Baseline Robust transition matrix AO is: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">AO</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Player 1</span><span class="se">\&#39;</span><span class="s1">s worst-case transition matrix AOCK1 is: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> \
+<span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">AOCK1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Player 2</span><span class="se">\&#39;</span><span class="s1">s worst-case transition matrix AOCK2 is: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> \
+<span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">AOCK2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Baseline Robust transition matrix AO is: 
+ [[ 1.     0.     0.   ]
+ [ 0.666  0.682 -0.074]
+ [ 0.671 -0.071  0.694]]
+Player 1&#39;s worst-case transition matrix AOCK1 is: 
+ [[ 0.998  0.002  0.   ]
+ [ 0.664  0.685 -0.074]
+ [ 0.669 -0.069  0.694]]
+Player 2&#39;s worst-case transition matrix AOCK2 is: 
+ [[ 0.999  0.     0.001]
+ [ 0.665  0.683 -0.073]
+ [ 0.67  -0.071  0.695]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># == Plot == #</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qrp1</span><span class="p">,</span> <span class="s1">&#39;b--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RMPE worst-case belief output player 1&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qrp2</span><span class="p">,</span> <span class="s1">&#39;r:&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RMPE worst-case belief output player 2&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">qr</span><span class="p">,</span> <span class="s1">&#39;m-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RMPE output&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prp1</span><span class="p">,</span> <span class="s1">&#39;b--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RMPE worst-case belief price player 1&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">prp2</span><span class="p">,</span> <span class="s1">&#39;r:&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RMPE worst-case belief price player 2&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">pr</span><span class="p">,</span> <span class="s1">&#39;m-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;RMPE price&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/rob_markov_perf_20_0.png" src="_images/rob_markov_perf_20_0.png" />
+</div>
+</div>
+<p>We see from the above graph that under robustness concerns, player 1 and
+player 2  have heterogeneous beliefs about total  output and the goods  price
+even though they share the same baseline model and information</p>
+<ul class="simple">
+<li><p>firm 1 thinks that total output will be higher and price lower than does firm 2</p></li>
+<li><p>this leads firm 1 to produce less than firm 2</p></li>
+</ul>
+<p>These beliefs justify (or <strong>rationalize</strong>) the Markov perfect equilibrium  robust decision rules.</p>
+<p>This means that the robust rules are the unique <strong>optimal</strong> rules (or best responses) to the indicated worst-case transition dynamics.</p>
+<p>(<span id="id2">[<a class="reference internal" href="zreferences.html#id137"><span>HS08a</span></a>]</span> discuss how this property of robust decision rules is connected to the concept of <em>admissibility</em> in Bayesian statistical decision theory)</p>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                    <p class="caption">
+ <span class="caption-text">
+  Tools and Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="orth_proj.html">
+   1. Orthogonal Projections and Their Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stationary_densities.html">
+   2. Continuous State Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="muth_kalman.html">
+   3. Reverse Engineering a la Muth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discrete_dp.html">
+   4. Discrete State Dynamic Programming
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  LQ Control
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_news.html">
+   5. Information and Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing.html">
+   6. Consumption Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing_tax.html">
+   7. Tax Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   8. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_jump_lq.html">
+   9. Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_1.html">
+   10. How to Pay for a War: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_2.html">
+   11. How to Pay for a War: Part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_3.html">
+   12. How to Pay for a War: Part 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lqramsey.html">
+   13. Optimal Taxation in an LQ Economy
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Multiple Agent Models
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   14. Robust Markov Perfect Equilibrium
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arellano.html">
+   15. Default Risk and Income Fluctuations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="matsuyama.html">
+   16. Globalization and Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coase.html">
+   17. Coase’s Theory of the Firm
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Linear Economies
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_recursive_models.html">
+   18. Recursive Models of Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="growth_in_dles.html">
+   19. Growth in Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_asset_pricing_dles.html">
+   20. Lucas Asset Pricing Using DLE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="irfs_in_hall_model.html">
+   21. IRFs in Hall Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="permanent_income_dles.html">
+   22. Permanent Income Model using the DLE Class
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rosen_schooling_model.html">
+   23. Rosen Schooling Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cattle_cycles.html">
+   24. Cattle Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_invertibility_example.html">
+   25. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Classic Linear Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="von_neumann_model.html">
+   26. Von Neumann Growth Model (and a Generalization)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Time Series Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arma.html">
+   27. Covariance Stationary Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="estspec.html">
+   28. Estimation of Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additive_functionals.html">
+   29. Additive and Multiplicative Functionals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lu_tricks.html">
+   30. Classical Control with Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classical_filtering.html">
+   31. Classical Prediction and Filtering With Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="knowing_forecasts_of_others.html">
+   32. Knowing the Forecasts of Others
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Asset Pricing and Finance
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_model.html">
+   33. Asset Pricing II: The Lucas Asset Pricing Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="black_litterman.html">
+   34. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_complete_mkts.html">
+   35. Irrelevance of Capital Structure with Complete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_incomplete_mkts.html">
+   36. Equilibrium Capital Structures with Incomplete Markets
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Programming Squared
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dyn_stack.html">
+   37. Stackelberg Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo.html">
+   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opt_tax_recur.html">
+   39. Optimal Taxation with State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss.html">
+   40. Optimal Taxation without State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss2.html">
+   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss3.html">
+   42. Fiscal Risk and Government Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_ramsey.html">
+   43. Competitive Equilibria of a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_credible.html">
+   44. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   45. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   46. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   47. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="toolbar">
+
+            <div class="toolbar__inner">
+
+                <ul class="toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                    <!-- <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <i data-feather="search"></i>
+                        </form>
+                    </li> -->
+                </ul>
+
+                <ul class="toolbar__links">
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/rob_markov_perf.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Launch Notebook" id="launchButton"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/rob_markov_perf.ipynb" target="_blank"><i data-feather="play-circle"></i></a></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/rob_markov_perf.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p style="color: white;">Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title">QuantEcon Notebook Launcher</p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input" onchange="onChangeListener()">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/rob_markov_perf.ipynb">BinderHub</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <!-- <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" onchange="onChangeListener()">
+                <i class="fas fa-check-circle"></i>
+            </li> -->
+            </ul>
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

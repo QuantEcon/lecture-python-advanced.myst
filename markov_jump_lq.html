@@ -1,0 +1,1748 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9. Markov Jump Linear Quadratic Dynamic Programming &#8212; Advanced Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/quantecon-book-theme.9deb0a26de8466f54124a1959c24cd33.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/quantecon-book-theme.43eb86aa48ec3aed660cb313c38068cd.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://python-advanced.quantecon.org/markov_jump_lq.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="10. How to Pay for a War: Part 1" href="tax_smoothing_1.html" />
+    <link rel="prev" title="8. Robustness" href="robustness.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="Markov Jump Linear Quadratic Dynamic Programming"/>
+<meta name="twitter:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="Markov Jump Linear Quadratic Dynamic Programming" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://python-advanced.quantecon.org/markov_jump_lq.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="wrapper">
+
+        <div class="main">
+
+            <div class="page" id=markov_jump_lq>
+
+                <div class="page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   9.1. Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#review-of-useful-lq-dynamic-programming-formulas">
+   9.2. Review of useful LQ dynamic programming formulas
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linked-riccati-equations-for-markov-lq-dynamic-programming">
+   9.3. Linked Riccati equations for Markov LQ dynamic programming
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#applications">
+   9.4. Applications
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-1">
+   9.5. Example 1
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#example-2">
+   9.6. Example 2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-examples">
+   9.7. More examples
+  </a>
+ </li>
+</ul>
+
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo" alt="logo"></a>
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="page__header">
+
+                    <div class="page__header-copy">
+
+                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+
+                        <p class="page__header-subheading">Markov Jump Linear Quadratic Dynamic Programming</p>
+
+                    </div>
+
+                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><div class="section" id="markov-jump-linear-quadratic-dynamic-programming">
+<span id="index-0"></span><h1><a class="toc-backref" href="#id6"><span class="section-number">9. </span>Markov Jump Linear Quadratic Dynamic Programming</a><a class="headerlink" href="#markov-jump-linear-quadratic-dynamic-programming" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#markov-jump-linear-quadratic-dynamic-programming" id="id6">Markov Jump Linear Quadratic Dynamic Programming</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p></li>
+<li><p><a class="reference internal" href="#review-of-useful-lq-dynamic-programming-formulas" id="id8">Review of useful LQ dynamic programming formulas</a></p></li>
+<li><p><a class="reference internal" href="#linked-riccati-equations-for-markov-lq-dynamic-programming" id="id9">Linked Riccati equations for Markov LQ dynamic programming</a></p></li>
+<li><p><a class="reference internal" href="#applications" id="id10">Applications</a></p></li>
+<li><p><a class="reference internal" href="#example-1" id="id11">Example 1</a></p></li>
+<li><p><a class="reference internal" href="#example-2" id="id12">Example 2</a></p></li>
+<li><p><a class="reference internal" href="#more-examples" id="id13">More examples</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
+Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.12.5)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id7"><span class="section-number">9.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This lecture describes <strong>Markov jump linear quadratic dynamic programming</strong>, an extension of the method described in the <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">first LQ control lecture</a>.</p>
+<p>Markov jump linear quadratic dynamic programming is described and analyzed in <span id="id1">[<a class="reference internal" href="zreferences.html#id213"><span>DVGC99</span></a>]</span> and the references cited there.</p>
+<p>The method has been applied to problems in macroeconomics and monetary economics by <span id="id2">[<a class="reference internal" href="zreferences.html#id214"><span>SW+08</span></a>]</span> and <span id="id3">[<a class="reference internal" href="zreferences.html#id215"><span>SW09</span></a>]</span>.</p>
+<p>The periodic models of seasonality described in chapter 14 of <span id="id4">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> are a special case of Markov jump linear quadratic problems.</p>
+<p><strong>Markov jump linear quadratic dynamic programming</strong> combines advantages
+of</p>
+<ul class="simple">
+<li><p>the computational simplicity of <strong>linear quadratic dynamic
+programming</strong>, with</p></li>
+<li><p>the ability of <strong>finite state Markov chains</strong> to represent
+interesting patterns of random variation.</p></li>
+</ul>
+<p>The idea is to replace the constant matrices that define a <strong>linear quadratic dynamic programming problem</strong>
+with <span class="math notranslate nohighlight">\(N\)</span> sets of matrices that are fixed functions of
+the state of an <span class="math notranslate nohighlight">\(N\)</span> state Markov chain.</p>
+<p>The state of the Markov chain together with   the continuous <span class="math notranslate nohighlight">\(n \times 1\)</span> state vector <span class="math notranslate nohighlight">\(x_t\)</span> form the state of the system.</p>
+<p>For the class of infinite horizon problems being studied in this lecture, we obtain  <span class="math notranslate nohighlight">\(N\)</span> interrelated
+matrix Riccati equations that determine <span class="math notranslate nohighlight">\(N\)</span> optimal value
+functions and <span class="math notranslate nohighlight">\(N\)</span> linear decision rules.</p>
+<p>One of these value functions and one of these decision rules apply in each of the <span class="math notranslate nohighlight">\(N\)</span> Markov states.</p>
+<p>That is,  when the Markov state is in state <span class="math notranslate nohighlight">\(j\)</span>, the value function and the decision rule
+for state <span class="math notranslate nohighlight">\(j\)</span> prevails.</p>
+</div>
+<div class="section" id="review-of-useful-lq-dynamic-programming-formulas">
+<h2><a class="toc-backref" href="#id8"><span class="section-number">9.2. </span>Review of useful LQ dynamic programming formulas</a><a class="headerlink" href="#review-of-useful-lq-dynamic-programming-formulas" title="Permalink to this headline">¶</a></h2>
+<p>To begin, it is handy to have the following reminder in mind.</p>
+<p>A <strong>linear quadratic dynamic programming problem</strong> consists of a scalar
+discount factor <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>, an <span class="math notranslate nohighlight">\(n\times 1\)</span> state
+vector <span class="math notranslate nohighlight">\(x_t\)</span>, an initial condition for <span class="math notranslate nohighlight">\(x_0\)</span>, a
+<span class="math notranslate nohighlight">\(k \times 1\)</span> control vector <span class="math notranslate nohighlight">\(u_t\)</span>, a <span class="math notranslate nohighlight">\(p \times 1\)</span>
+random shock vector <span class="math notranslate nohighlight">\(w_{t+1}\)</span> and the following two triples of
+matrices:</p>
+<ul class="simple">
+<li><p>A triple of matrices <span class="math notranslate nohighlight">\((R, Q, W)\)</span> defining a loss function</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+r(x_t, u_t) = x_t' R x_t + u_t' Q u_t + 2 u_t' W x_t
+\]</div>
+<ul class="simple">
+<li><p>a triple of matrices <span class="math notranslate nohighlight">\((A, B, C)\)</span> defining a state-transition
+law</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+x_{t+1} = A x_t + B u_t + C w_{t+1}
+\]</div>
+<p>The problem is</p>
+<div class="math notranslate nohighlight">
+\[
+-x_0' P x_0 - \rho = \min_{\{u_t\}_{t=0}^\infty} E \sum_{t=0}^{\infty} \beta^t r(x_t, u_t)
+\]</div>
+<p>subject to the transition law for the state.</p>
+<p>The optimal decision rule  has the form</p>
+<div class="math notranslate nohighlight">
+\[
+u_t = - F x_t
+\]</div>
+<p>and the optimal value function is of the form</p>
+<div class="math notranslate nohighlight">
+\[
+-\left( x_t' P x_t  + \rho \right)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(P\)</span> solves the algebraic matrix Riccati equation</p>
+<div class="math notranslate nohighlight">
+\[
+P = R+ \beta A' P A
+          -(\beta B'  P A + W)' (Q + \beta B P B )^{-1} (\beta B P A + W)
+\]</div>
+<p>and the constant <span class="math notranslate nohighlight">\(\rho\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+\rho = \beta
+  \left( \rho + {\rm trace}(P C C') \right)
+\]</div>
+<p>and the matrix <span class="math notranslate nohighlight">\(F\)</span> in the decision rule for <span class="math notranslate nohighlight">\(u_t\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+F = (Q + \beta  B' P B)^{-1} (\beta (B' P A )+ W)
+\]</div>
+<p>With the preceding formulas in mind, we are ready to approach Markov Jump linear quadratic dynamic programming.</p>
+</div>
+<div class="section" id="linked-riccati-equations-for-markov-lq-dynamic-programming">
+<h2><a class="toc-backref" href="#id9"><span class="section-number">9.3. </span>Linked Riccati equations for Markov LQ dynamic programming</a><a class="headerlink" href="#linked-riccati-equations-for-markov-lq-dynamic-programming" title="Permalink to this headline">¶</a></h2>
+<p>The key idea is to make the matrices <span class="math notranslate nohighlight">\(A, B, C, R, Q, W\)</span> fixed
+functions of a finite state <span class="math notranslate nohighlight">\(s\)</span> that is governed by an <span class="math notranslate nohighlight">\(N\)</span>
+state Markov chain.</p>
+<p>This makes decision rules depend on the Markov
+state, and so fluctuate through time in limited ways.</p>
+<p>In particular, we use the following extension of a discrete-time linear
+quadratic dynamic programming problem.</p>
+<p>We let <span class="math notranslate nohighlight">\(s_t \in [1, 2, \ldots, N]\)</span> be a time <span class="math notranslate nohighlight">\(t\)</span> realization of an
+<span class="math notranslate nohighlight">\(N\)</span>-state Markov chain with transition matrix <span class="math notranslate nohighlight">\(\Pi\)</span> having
+typical element <span class="math notranslate nohighlight">\(\Pi_{ij}\)</span>.</p>
+<p>Here <span class="math notranslate nohighlight">\(i\)</span> denotes today and
+<span class="math notranslate nohighlight">\(j\)</span> denotes tomorrow and</p>
+<div class="math notranslate nohighlight">
+\[
+\Pi_{ij} = {\rm Prob}(s_{t+1} = j |s_t = i)
+\]</div>
+<p>We’ll switch between labeling today’s state as <span class="math notranslate nohighlight">\(s_t\)</span> and
+<span class="math notranslate nohighlight">\(i\)</span> and between labeling tomorrow’s state as <span class="math notranslate nohighlight">\(s_{t+1}\)</span> or
+<span class="math notranslate nohighlight">\(j\)</span>.</p>
+<p>The decision-maker solves the minimization problem:</p>
+<div class="math notranslate nohighlight">
+\[
+\min_{\{u_t\}_{t=0}^\infty} E \sum_{t=0}^{\infty} \beta^t r(x_t, s_t, u_t)
+\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[
+r(x_t, s_t, u_t) = x_t' R_{s_t} x_t + u_t' Q_{s_t} u_t + 2 u_t' W_{s_t} x_t
+\]</div>
+<p>subject to linear laws of motion with matrices <span class="math notranslate nohighlight">\((A,B,C)\)</span> each
+possibly dependent on the Markov-state-<span class="math notranslate nohighlight">\(s_t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+x_{t+1} = A_{s_t} x_t + B_{s_t} u_t + C_{s_t} w_{t+1}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\{w_{t+1}\}\)</span> is an i.i.d. stochastic process with
+<span class="math notranslate nohighlight">\(w_{t+1} \sim {\cal N}(0,I)\)</span>.</p>
+<p>The optimal decision rule for this problem has the form</p>
+<div class="math notranslate nohighlight">
+\[
+u_t = - F_{s_t} x_t
+\]</div>
+<p>and the optimal value functions are of the form</p>
+<div class="math notranslate nohighlight">
+\[
+-\left( x_t' P_{s_t} x_t  + \rho_{s_t} \right)
+\]</div>
+<p>or equivalently</p>
+<div class="math notranslate nohighlight">
+\[
+-x_t' P_i x_t - \rho_i
+\]</div>
+<p>The optimal value functions <span class="math notranslate nohighlight">\(- x' P_i x - \rho_i\)</span> for
+<span class="math notranslate nohighlight">\(i = 1, \ldots, n\)</span> satisfy the <span class="math notranslate nohighlight">\(N\)</span>
+interrelated Bellman equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split}
+-x' P_i x - \rho_i &amp; = \max_u -
+  \\
+  &amp;
+   \left[
+     x'R_i x + u' Q_i u + 2 u' W_i x +
+             \beta \sum_j \Pi_{ij}E ((A_i x + B_i u + C_i w)' P_j
+             (A_i x + B_i u + C_i w) x + \rho_j)
+   \right]
+\end{split}
+\end{split}\]</div>
+<p>The matrices <span class="math notranslate nohighlight">\(P_{s_t} = P_i\)</span> and the scalars
+<span class="math notranslate nohighlight">\(\rho_{s_t} = \rho_i, i = 1, \ldots\)</span>, n satisfy the following stacked system of
+<strong>algebraic matrix Riccati</strong> equations:</p>
+<div class="math notranslate nohighlight">
+\[
+P_i = R_i + \beta \sum_j A_i' P_j A_i
+ \Pi_{ij}
+          -\sum_j \Pi_{ij}[ (\beta B_i'  P_j A_i + W_i)' (Q + \beta B_i' P_j B_i)^{-1}
+          (\beta B_i' P_j A_i + W_i)]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\rho_i = \beta
+ \sum_j \Pi_{ij} ( \rho_j + {\rm trace}(P_j C_i C_i') )
+\]</div>
+<p>and the <span class="math notranslate nohighlight">\(F_i\)</span> in the optimal decision rules are</p>
+<div class="math notranslate nohighlight">
+\[
+F_i = (Q_i + \beta \sum_j \Pi_{ij} B_i' P_j B_i)^{-1}
+(\beta \sum_j \Pi_{ij}(B_i' P_j A_i )+ W_i)
+\]</div>
+</div>
+<div class="section" id="applications">
+<h2><a class="toc-backref" href="#id10"><span class="section-number">9.4. </span>Applications</a><a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>We now describe some Python code and a few examples that put the code to work.</p>
+<p>To begin, we import these Python modules</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set discount factor</span>
+<span class="n">β</span> <span class="o">=</span> <span class="mf">0.95</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-1">
+<h2><a class="toc-backref" href="#id11"><span class="section-number">9.5. </span>Example 1</a><a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h2>
+<p>This example is a version of a classic problem of optimally adjusting a variable <span class="math notranslate nohighlight">\(k_t\)</span> to a target level in the face of costly adjustment.</p>
+<p>This provides a model of gradual adjustment.</p>
+<p>Given <span class="math notranslate nohighlight">\(k_{0}\)</span>, the objective function is</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{\left\{ k_{t}\right\} _{t=1}^{\infty}}E_{0}\sum_{t=0}^{\infty}\beta^{t}r\left(s_{t},k_{t}\right)
+\]</div>
+<p>where the one-period payoff function is</p>
+<div class="math notranslate nohighlight">
+\[
+r(s_{t},k_{t})=f_{1,s_t} k_{t}-f_{2,s_t} k_{t}^{2}-d_{s_t}(k_{t+1}-k_{t})^{2},
+\]</div>
+<p><span class="math notranslate nohighlight">\(E_0\)</span> is a mathematical expectation conditioned on time <span class="math notranslate nohighlight">\(0\)</span> information <span class="math notranslate nohighlight">\(x_0, s_0\)</span>
+and the transition law for continuous state variable <span class="math notranslate nohighlight">\(k_t\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+k_{t+1}-k_{t}=u_{t}
+\]</div>
+<p>We can think of <span class="math notranslate nohighlight">\(k_t\)</span> as the decision-maker’s capital and
+<span class="math notranslate nohighlight">\(u_t\)</span> as costs of adjusting the level of capital.</p>
+<p>We assume that <span class="math notranslate nohighlight">\(f_{1}\left(s_{t}\right)&gt;0\)</span>,
+<span class="math notranslate nohighlight">\(f_{2}\left(s_{t}\right)&gt;0\)</span>, and <span class="math notranslate nohighlight">\(d\left(s_{t}\right)&gt;0\)</span>.</p>
+<p>Denote the state transition matrix for Markov state
+<span class="math notranslate nohighlight">\(s_{t}\in\left\{1,2 \right\}\)</span> as <span class="math notranslate nohighlight">\(\Pi\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr \left(s_{t+1}=j \mid s_{t}= i \right)=\Pi_{ij}
+\]</div>
+<p>Let <span class="math notranslate nohighlight">\(x_{t}=\begin{bmatrix} k_{t}\\ 1 \end{bmatrix}\)</span></p>
+<p>We can represent the one-period payoff function
+<span class="math notranslate nohighlight">\(r\left(s_{t},k_{t}\right)\)</span> and the state-transition law as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+r\left(s_{t},k_{t}\right)   =f_{1,s_t} k_{t}-f_{2,s_t} k_{t}^{2}-d_{s_t} u_{t}{}^{2} \\
+    =-x_{t}^{\prime}\underset{\equiv R(s_{t})}{\underbrace{\begin{bmatrix}
+f_{2,s_t} &amp; -\frac{f_{1,s_t}}{2}\\
+-\frac{f_{1,s_t}}{2} &amp; 0
+\end{bmatrix}}}x_{t}+\underset{\equiv Q\left(s_{t}\right)}{\underbrace{d_{s_t}}}u_{t}{}^{2}
+ \end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x_{t+1}=\begin{bmatrix}
+k_{t+1}\\
+1
+\end{bmatrix}=\underset{\equiv A\left(s_{t}\right)}{\underbrace{I_{2}}}x_{t}+\underset{\equiv B\left(s_{t}\right)}{\underbrace{\begin{bmatrix}
+1\\
+0
+\end{bmatrix}}}u_{t}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">construct_arrays1</span><span class="p">(</span><span class="n">f1_vals</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span> <span class="p">,</span><span class="mf">1.</span><span class="p">],</span>
+                      <span class="n">f2_vals</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                      <span class="n">d_vals</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Construct matrices that map the problem described in example 1</span>
+<span class="sd">    into a Markov jump linear quadratic dynamic programming problem</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Number of Markov states</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">f1_vals</span><span class="p">)</span>
+    <span class="c1"># Number of state and control variables</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span>
+
+    <span class="c1"># Construct sets of matrices for each state</span>
+    <span class="n">As</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span>
+    <span class="n">Bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">)]</span>
+
+    <span class="n">Rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">Qs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">Rs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">f2_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">Rs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="n">f1_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">Rs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="n">f1_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+
+        <span class="n">Qs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">d_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+
+    <span class="c1"># Compute the optimal k level of the payoff function in each state</span>
+    <span class="n">k_star</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">k_star</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f1_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">f2_vals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">Ns</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="p">,</span> <span class="n">k_star</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The continuous part of the state <span class="math notranslate nohighlight">\(x_t\)</span> consists of two variables,
+namely, <span class="math notranslate nohighlight">\(k_t\)</span> and a constant term.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state_vec1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="s2">&quot;constant term&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We start with a Markov transition matrix that makes the Markov state be
+strictly periodic:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Pi_{1}=\begin{bmatrix}
+0 &amp; 1\\
+1 &amp; 0
+\end{bmatrix},
+\end{split}\]</div>
+<p>We set <span class="math notranslate nohighlight">\(f_{1,{s_t}}\)</span> and <span class="math notranslate nohighlight">\(f_{2,{s_t}}\)</span> to be independent of the
+Markov state <span class="math notranslate nohighlight">\(s_t\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+f_{1,1}=f_{1,2} = 1,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+f_{2,1} =f_{2,2} = 1
+\]</div>
+<p>In contrast to <span class="math notranslate nohighlight">\(f_{1,{s_t}}\)</span> and <span class="math notranslate nohighlight">\(f_{2,{s_t}}\)</span>, we make the
+adjustment cost <span class="math notranslate nohighlight">\(d_{s_t}\)</span> vary across Markov states <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
+<p>We set the adjustment cost to be lower in Markov state <span class="math notranslate nohighlight">\(2\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+d_1=1, d_2 = 0.5
+\]</div>
+<p>The following code forms a Markov switching LQ problem and computes the
+optimal value functions and optimal decision rules for each Markov state</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct Markov transition matrix</span>
+<span class="n">Π1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+               <span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct matrices</span>
+<span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">Ns</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="p">,</span> <span class="n">k_star</span> <span class="o">=</span> <span class="n">construct_arrays1</span><span class="p">(</span><span class="n">d_vals</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct a Markov Jump LQ problem</span>
+<span class="n">ex1_a</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π1</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ns</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+<span class="c1"># Solve for optimal value functions and decision rules</span>
+<span class="n">ex1_a</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at the value function matrices and the decision rules for
+each Markov state</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># P(s)</span>
+<span class="n">ex1_a</span><span class="o">.</span><span class="n">Ps</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[ 1.56626026, -0.78313013],
+        [-0.78313013, -4.60843493]],
+
+       [[ 1.37424214, -0.68712107],
+        [-0.68712107, -4.65643947]]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># d(s) = 0, since there is no randomness</span>
+<span class="n">ex1_a</span><span class="o">.</span><span class="n">ds</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># F(s)</span>
+<span class="n">ex1_a</span><span class="o">.</span><span class="n">Fs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[ 0.56626026, -0.28313013]],
+
+       [[ 0.74848427, -0.37424214]]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we’ll plot the decision rules and see if they make sense</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the optimal decision rules</span>
+<span class="n">k_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="c1"># Optimal choice in state s1</span>
+<span class="n">u1_star</span> <span class="o">=</span> <span class="o">-</span> <span class="n">ex1_a</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">ex1_a</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_grid</span>
+<span class="c1"># Optimal choice in state s2</span>
+<span class="n">u2_star</span> <span class="o">=</span> <span class="o">-</span> <span class="n">ex1_a</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">ex1_a</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_grid</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">k_grid</span> <span class="o">+</span> <span class="n">u1_star</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_1$ (high)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">k_grid</span> <span class="o">+</span> <span class="n">u2_star</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_2$ (low)&quot;</span><span class="p">)</span>
+
+<span class="c1"># The optimal k*</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">k_star</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">k_star</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span> <span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="c1"># 45 degree line</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;45 degree line&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$k_t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$k_{t+1}$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/markov_jump_lq_18_0.png" src="_images/markov_jump_lq_18_0.png" />
+</div>
+</div>
+<p>The above graph plots <span class="math notranslate nohighlight">\(k_{t+1}= k_t + u_t = k_t - F x_t\)</span> as an affine
+(i.e., linear in <span class="math notranslate nohighlight">\(k_t\)</span> plus a constant) function of <span class="math notranslate nohighlight">\(k_t\)</span>
+for both Markov states <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
+<p>It also plots the 45 degree line.</p>
+<p>Notice that the two <span class="math notranslate nohighlight">\(s_t\)</span>-dependent <em>closed loop</em> functions that
+determine <span class="math notranslate nohighlight">\(k_{t+1}\)</span> as functions of <span class="math notranslate nohighlight">\(k_t\)</span> share the same
+rest point (also called a fixed point) at <span class="math notranslate nohighlight">\(k_t = 0.5\)</span>.</p>
+<p>Evidently, the optimal decision rule in Markov state <span class="math notranslate nohighlight">\(2\)</span>,
+in which the adjustment cost is lower, makes <span class="math notranslate nohighlight">\(k_{t+1}\)</span> a flatter
+function of <span class="math notranslate nohighlight">\(k_t\)</span> in Markov state <span class="math notranslate nohighlight">\(2\)</span>.</p>
+<p>This happens because when <span class="math notranslate nohighlight">\(k_t\)</span> is not at its fixed point,
+<span class="math notranslate nohighlight">\(| u_{t,2}| &gt; | u_{t,2} |\)</span>, so
+that the decision-maker adjusts toward the fixed point faster when
+the Markov state <span class="math notranslate nohighlight">\(s_t\)</span> takes a value that makes it cheaper.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute time series</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">x_path</span> <span class="o">=</span> <span class="n">ex1_a</span><span class="o">.</span><span class="n">compute_sequence</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">x_path</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$k_t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Optimal path of $k_t$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/markov_jump_lq_20_0.png" src="_images/markov_jump_lq_20_0.png" />
+</div>
+</div>
+<p>Now we’ll depart from the preceding transition matrix that made the
+Markov state be strictly periodic.</p>
+<p>We’ll begin with symmetric transition matrices of the form</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Pi_{2}=\begin{bmatrix}
+1-\lambda &amp; \lambda\\
+\lambda &amp; 1-\lambda
+\end{bmatrix}.
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ</span> <span class="o">=</span> <span class="mf">0.8</span> <span class="c1"># high λ</span>
+<span class="n">Π2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">,</span> <span class="n">λ</span><span class="p">],</span>
+               <span class="p">[</span><span class="n">λ</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">]])</span>
+
+<span class="n">ex1_b</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π2</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ns</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+<span class="n">ex1_b</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">();</span>
+<span class="n">ex1_b</span><span class="o">.</span><span class="n">Fs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[ 0.57291724, -0.28645862]],
+
+       [[ 0.74434525, -0.37217263]]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="c1"># low λ</span>
+<span class="n">Π2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">,</span> <span class="n">λ</span><span class="p">],</span>
+               <span class="p">[</span><span class="n">λ</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">]])</span>
+
+<span class="n">ex1_b</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π2</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ns</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+<span class="n">ex1_b</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">();</span>
+<span class="n">ex1_b</span><span class="o">.</span><span class="n">Fs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[ 0.59533259, -0.2976663 ]],
+
+       [[ 0.72818728, -0.36409364]]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can plot optimal decision rules associated with different
+<span class="math notranslate nohighlight">\(\lambda\)</span> values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">F1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">F2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">λ</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">):</span>
+    <span class="n">Π2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">,</span> <span class="n">λ</span><span class="p">],</span>
+                   <span class="p">[</span><span class="n">λ</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">]])</span>
+
+    <span class="n">ex1_b</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π2</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ns</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+    <span class="n">ex1_b</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">();</span>
+    <span class="n">F1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">ex1_b</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">F2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">ex1_b</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">state_var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_vec1</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_1$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F2</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_2$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$F_</span><span class="si">{s_t}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coefficient on </span><span class="si">{</span><span class="n">state_var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/markov_jump_lq_26_0.png" src="_images/markov_jump_lq_26_0.png" />
+<img alt="_images/markov_jump_lq_26_1.png" src="_images/markov_jump_lq_26_1.png" />
+</div>
+</div>
+<p>Notice how the decision rules’ constants and slopes behave as functions
+of <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>Evidently, as the Markov chain becomes <em>more nearly periodic</em> (i.e., as
+<span class="math notranslate nohighlight">\(\lambda \rightarrow 1\)</span>), the dynamic program adjusts capital
+faster in the low adjustment cost Markov state to take advantage of what
+is only temporarily a more favorable time to invest.</p>
+<p>Now let’s study situations in which the Markov transition matrix
+<span class="math notranslate nohighlight">\(\Pi\)</span> is asymmetric</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Pi_{3}=\begin{bmatrix}
+1-\lambda &amp; \lambda\\
+\delta &amp; 1-\delta
+\end{bmatrix}.
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ</span><span class="p">,</span> <span class="n">δ</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span>
+<span class="n">Π3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">,</span> <span class="n">λ</span><span class="p">],</span>
+               <span class="p">[</span><span class="n">δ</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">δ</span><span class="p">]])</span>
+
+<span class="n">ex1_b</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π3</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ns</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+<span class="n">ex1_b</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">();</span>
+<span class="n">ex1_b</span><span class="o">.</span><span class="n">Fs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[[ 0.57169781, -0.2858489 ]],
+
+       [[ 0.72749075, -0.36374537]]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can plot optimal decision rules for different <span class="math notranslate nohighlight">\(\lambda\)</span> and
+<span class="math notranslate nohighlight">\(\delta\)</span> values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">δ_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="n">λ_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">δ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+<span class="n">δ_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">δ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+<span class="n">F1_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">δ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vec1</span><span class="p">)))</span>
+<span class="n">F2_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">δ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vec1</span><span class="p">)))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">λ</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">):</span>
+    <span class="n">λ_grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">λ</span>
+    <span class="n">δ_grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">δ_vals</span>
+    <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">δ</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">δ_vals</span><span class="p">):</span>
+        <span class="n">Π3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">,</span> <span class="n">λ</span><span class="p">],</span>
+                       <span class="p">[</span><span class="n">δ</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">δ</span><span class="p">]])</span>
+
+        <span class="n">ex1_b</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π3</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ns</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+        <span class="n">ex1_b</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">();</span>
+        <span class="n">F1_grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">ex1_b</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">F2_grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">ex1_b</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">state_var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_vec1</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+    <span class="c1"># high adjustment cost, blue surface</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">λ_grid</span><span class="p">,</span> <span class="n">δ_grid</span><span class="p">,</span> <span class="n">F1_grid</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+    <span class="c1"># low adjustment cost, red surface</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">λ_grid</span><span class="p">,</span> <span class="n">δ_grid</span><span class="p">,</span> <span class="n">F2_grid</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$\delta$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">&quot;$F_</span><span class="si">{s_t}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coefficient on </span><span class="si">{</span><span class="n">state_var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/markov_jump_lq_31_0.png" src="_images/markov_jump_lq_31_0.png" />
+<img alt="_images/markov_jump_lq_31_1.png" src="_images/markov_jump_lq_31_1.png" />
+</div>
+</div>
+<p>The following code defines a wrapper function that computes optimal
+decision rules for cases with different Markov transition matrices</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">construct_func</span><span class="p">,</span> <span class="n">vals_dict</span><span class="p">,</span> <span class="n">state_vec</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A Wrapper function that repeats the computation above</span>
+<span class="sd">    for different cases</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">Ns</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="p">,</span> <span class="n">k_star</span> <span class="o">=</span> <span class="n">construct_func</span><span class="p">(</span><span class="o">**</span><span class="n">vals_dict</span><span class="p">)</span>
+
+    <span class="c1"># Symmetric Π</span>
+    <span class="c1"># Notice that pure periodic transition is a special case</span>
+    <span class="c1"># when λ=1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;symmetric Π case:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">λ_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">F1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vec</span><span class="p">)))</span>
+    <span class="n">F2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vec</span><span class="p">)))</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">λ</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">):</span>
+        <span class="n">Π2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">,</span> <span class="n">λ</span><span class="p">],</span>
+                       <span class="p">[</span><span class="n">λ</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">]])</span>
+
+        <span class="n">mplq</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π2</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ns</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+        <span class="n">mplq</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">();</span>
+        <span class="n">F1</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">mplq</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">F2</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">mplq</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">state_var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_vec</span><span class="p">):</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_1$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F2</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_2$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$F(\overline</span><span class="si">{s}</span><span class="s2">_t)$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coefficient on </span><span class="si">{</span><span class="n">state_var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Plot optimal k*_{s_t} and k that optimal policies are targeting</span>
+    <span class="c1"># only for example 1</span>
+    <span class="k">if</span> <span class="n">state_vec</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="s2">&quot;constant term&quot;</span><span class="p">]:</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+            <span class="n">F</span> <span class="o">=</span> <span class="p">[</span><span class="n">F1</span><span class="p">,</span> <span class="n">F2</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">k_star</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">k_star</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span>
+                    <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$k^*(\overline</span><span class="si">{s}</span><span class="s2">_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;)$&quot;</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="o">-</span> <span class="n">F</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">F</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
+                    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$k^</span><span class="si">{target}</span><span class="s2">(\overline</span><span class="si">{s}</span><span class="s2">_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;)$&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Plot a vertical line at λ=0.5</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">k_star</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">k_star</span><span class="p">)],</span> <span class="s2">&quot;-.&quot;</span><span class="p">)</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$k$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Optimal k levels and k targets&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">k_star</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">k_star</span><span class="p">)</span><span class="o">-</span><span class="nb">min</span><span class="p">(</span><span class="n">k_star</span><span class="p">))</span><span class="o">/</span><span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;$\lambda=0.5$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="c1"># Asymmetric Π</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;asymmetric Π case:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">δ_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="n">λ_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">δ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+    <span class="n">δ_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">δ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
+    <span class="n">F1_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">δ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vec</span><span class="p">)))</span>
+    <span class="n">F2_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">λ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">δ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">state_vec</span><span class="p">)))</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">λ</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">):</span>
+        <span class="n">λ_grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">λ</span>
+        <span class="n">δ_grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">δ_vals</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">δ</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">δ_vals</span><span class="p">):</span>
+            <span class="n">Π3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">,</span> <span class="n">λ</span><span class="p">],</span>
+                           <span class="p">[</span><span class="n">δ</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">δ</span><span class="p">]])</span>
+
+            <span class="n">mplq</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π3</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ns</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+            <span class="n">mplq</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">();</span>
+            <span class="n">F1_grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">mplq</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+            <span class="n">F2_grid</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">mplq</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">state_var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_vec</span><span class="p">):</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">λ_grid</span><span class="p">,</span> <span class="n">δ_grid</span><span class="p">,</span> <span class="n">F1_grid</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">λ_grid</span><span class="p">,</span> <span class="n">δ_grid</span><span class="p">,</span> <span class="n">F2_grid</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$\delta$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">&quot;$F(\overline</span><span class="si">{s}</span><span class="s2">_t)$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coefficient on </span><span class="si">{</span><span class="n">state_var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To illustrate the code with another example, we shall set
+<span class="math notranslate nohighlight">\(f_{2,s_t}\)</span> and <span class="math notranslate nohighlight">\(d_{s_t}\)</span> as constant functions and</p>
+<div class="math notranslate nohighlight">
+\[
+f_{1,1} = 0.5, f_{1,2} = 1
+\]</div>
+<p>Thus, the sole role of the Markov jump state <span class="math notranslate nohighlight">\(s_t\)</span> is to identify
+times in which capital is very productive and other times in which it is
+less productive.</p>
+<p>The example below reveals much about the structure of the optimum
+problem and optimal policies.</p>
+<p>Only <span class="math notranslate nohighlight">\(f_{1,{s_t}}\)</span> varies with <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
+<p>So there are different <span class="math notranslate nohighlight">\(s_t\)</span>-dependent optimal static <span class="math notranslate nohighlight">\(k\)</span>
+level in different states <span class="math notranslate nohighlight">\(k^*_{s_t}=\frac{f_{1,{s_t}}}{2 f_{2,{s_t}}}\)</span>,
+values of <span class="math notranslate nohighlight">\(k\)</span> that maximize one-period payoff functions in each
+state.</p>
+<p>We denote a target <span class="math notranslate nohighlight">\(k\)</span> level as <span class="math notranslate nohighlight">\(k^{target}_{s_t}\)</span>, the fixed
+point of the optimal policies in each state, given the value of
+<span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>We call <span class="math notranslate nohighlight">\(k^{target}_{s_t}\)</span> a “target” because in each Markov state
+<span class="math notranslate nohighlight">\(s_t\)</span>, optimal policies are contraction mappings and will push
+<span class="math notranslate nohighlight">\(k_t\)</span> towards a fixed point <span class="math notranslate nohighlight">\(k^{target}_{s_t}\)</span>.</p>
+<p>When <span class="math notranslate nohighlight">\(\lambda \rightarrow 0\)</span>, each Markov state becomes close to
+absorbing state and consequently
+<span class="math notranslate nohighlight">\(k^{target}_{s_t} \rightarrow k^*_{s_t}\)</span>.</p>
+<p>But when <span class="math notranslate nohighlight">\(\lambda \rightarrow 1\)</span>, the Markov transition matrix
+becomes more nearly periodic, so the optimum decision rules target more
+at the optimal <span class="math notranslate nohighlight">\(k\)</span> level in the other state in order to enjoy higher
+expected payoff in the next period.</p>
+<p>The switch happens at <span class="math notranslate nohighlight">\(\lambda = 0.5\)</span> when both states are equally
+likely to be reached.</p>
+<p>Below we plot an additional figure that shows optimal <span class="math notranslate nohighlight">\(k\)</span> levels
+in the two states Markov jump state and also how the targeted <span class="math notranslate nohighlight">\(k\)</span>
+levels change as <span class="math notranslate nohighlight">\(\lambda\)</span> changes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">construct_arrays1</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;f1_vals&quot;</span><span class="p">:[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]},</span> <span class="n">state_vec1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_35_1.png" src="_images/markov_jump_lq_35_1.png" />
+<img alt="_images/markov_jump_lq_35_2.png" src="_images/markov_jump_lq_35_2.png" />
+<img alt="_images/markov_jump_lq_35_3.png" src="_images/markov_jump_lq_35_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_35_5.png" src="_images/markov_jump_lq_35_5.png" />
+<img alt="_images/markov_jump_lq_35_6.png" src="_images/markov_jump_lq_35_6.png" />
+</div>
+</div>
+<p>Set <span class="math notranslate nohighlight">\(f_{1,{s_t}}\)</span> and <span class="math notranslate nohighlight">\(d_{s_t}\)</span> as constant functions and</p>
+<div class="math notranslate nohighlight">
+\[
+f_{2,1} = 0.5, f_{2,2} = 1
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">construct_arrays1</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;f2_vals&quot;</span><span class="p">:[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]},</span> <span class="n">state_vec1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_37_1.png" src="_images/markov_jump_lq_37_1.png" />
+<img alt="_images/markov_jump_lq_37_2.png" src="_images/markov_jump_lq_37_2.png" />
+<img alt="_images/markov_jump_lq_37_3.png" src="_images/markov_jump_lq_37_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_37_5.png" src="_images/markov_jump_lq_37_5.png" />
+<img alt="_images/markov_jump_lq_37_6.png" src="_images/markov_jump_lq_37_6.png" />
+</div>
+</div>
+</div>
+<div class="section" id="example-2">
+<h2><a class="toc-backref" href="#id12"><span class="section-number">9.6. </span>Example 2</a><a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h2>
+<p>We now add to the example 1 setup another state variable <span class="math notranslate nohighlight">\(w_t\)</span>
+that follows the evolution law</p>
+<div class="math notranslate nohighlight">
+\[
+w_{t+1}=\alpha_{0}\left(s_{t}\right)+\rho\left(s_{t}\right)w_{t}+\sigma\left(s_{t}\right)\epsilon_{t+1},\quad\epsilon_{t+1}\sim N\left(0,1\right)
+\]</div>
+<p>We think of <span class="math notranslate nohighlight">\(w_t\)</span> as a rental rate or tax rate that the decision
+maker pays each period for <span class="math notranslate nohighlight">\(k_t\)</span>.</p>
+<p>To capture this idea, we add to the decision-maker’s one-period payoff
+function the product of <span class="math notranslate nohighlight">\(w_t\)</span> and <span class="math notranslate nohighlight">\(k_t\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+r(s_{t},k_{t},w_{t})=f_{1,s_{t}} k_{t}-f_{2, s_{t}} k_{t}^{2}-d_{s_{t}} (k_{t+1}-k_{t})^{2}-w_{t}k_{t},
+\]</div>
+<p>We now let the continuous part of the state at time <span class="math notranslate nohighlight">\(t\)</span> be
+<span class="math notranslate nohighlight">\(x_{t}=\begin{bmatrix} k_{t}\\ 1\\ w_{t} \end{bmatrix}\)</span>
+and continue to set the control <span class="math notranslate nohighlight">\(u_{t}=k_{t+1}-k_{t}\)</span>.</p>
+<p>We can write the one-period payoff function
+<span class="math notranslate nohighlight">\(r\left(s_{t},k_{t},w_{t}\right)\)</span> and the state-transition law as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+r\left(s_{t},k_{t},w_{t}\right)
+  &amp; =f_{1}\left(s_{t}\right)k_{t}-f_{2}\left(s_{t}\right)k_{t}^{2}-d\left(s_{t}\right)\left(k_{t+1}-k_{t}\right)^{2}-w_{t}k_{t} \\
+  &amp; =-\left(x_{t}^{\prime}\underset{\equiv R\left(s_{t}\right)}{\underbrace{
+   \begin{bmatrix}
+      f_{2}\left(s_{t}\right) &amp; -\frac{f_{1}\left(s_{t}\right)}{2} &amp; \frac{1}{2}\\
+      -\frac{f_{1}\left(s_{t}\right)}{2} &amp; 0 &amp; 0\\
+      \frac{1}{2} &amp; 0 &amp; 0
+   \end{bmatrix}}}
+x_{t}+
+\underset{\equiv Q\left(s_{t}\right)}{\underbrace{d\left(s_{t}\right)}}u_{t}^{2}\right),
+\end{aligned}
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x_{t+1}=\begin{bmatrix}
+k_{t+1}\\
+1\\
+w_{t+1}
+\end{bmatrix}=\underset{\equiv A\left(s_{t}\right)}{\underbrace{\begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; \alpha_{0}\left(s_{t}\right) &amp; \rho\left(s_{t}\right)
+\end{bmatrix}}}x_{t}+\underset{\equiv B\left(s_{t}\right)}{\underbrace{\begin{bmatrix}
+1\\
+0\\
+0
+\end{bmatrix}}}u_{t}+\underset{\equiv C\left(s_{t}\right)}{\underbrace{\begin{bmatrix}
+0\\
+0\\
+\sigma\left(s_{t}\right)
+\end{bmatrix}}}\epsilon_{t+1}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">construct_arrays2</span><span class="p">(</span><span class="n">f1_vals</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span> <span class="p">,</span><span class="mf">1.</span><span class="p">],</span>
+                      <span class="n">f2_vals</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                      <span class="n">d_vals</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                      <span class="n">α0_vals</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">],</span>
+                      <span class="n">ρ_vals</span><span class="o">=</span><span class="p">[</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+                      <span class="n">σ_vals</span><span class="o">=</span><span class="p">[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Construct matrices that maps the problem described in example 2</span>
+<span class="sd">    into a Markov jump linear quadratic dynamic programming problem.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">f1_vals</span><span class="p">)</span>
+    <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+
+    <span class="n">Rs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">Qs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+    <span class="n">As</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">Bs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">))</span>
+    <span class="n">Cs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+        <span class="n">Rs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">f2_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">Rs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="n">f1_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">Rs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="n">f1_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">Rs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">Rs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>
+
+        <span class="n">Qs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">d_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="n">As</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">As</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">As</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">α0_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">As</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ρ_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="n">Bs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="n">Cs</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">σ_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]]])</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="n">Ns</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">k_star</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">Ns</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="p">,</span> <span class="n">k_star</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">state_vec2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="s2">&quot;constant term&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Only <span class="math notranslate nohighlight">\(d_{s_t}\)</span> depends on <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">construct_arrays2</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;d_vals&quot;</span><span class="p">:[</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]},</span> <span class="n">state_vec2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_42_1.png" src="_images/markov_jump_lq_42_1.png" />
+<img alt="_images/markov_jump_lq_42_2.png" src="_images/markov_jump_lq_42_2.png" />
+<img alt="_images/markov_jump_lq_42_3.png" src="_images/markov_jump_lq_42_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_42_5.png" src="_images/markov_jump_lq_42_5.png" />
+<img alt="_images/markov_jump_lq_42_6.png" src="_images/markov_jump_lq_42_6.png" />
+<img alt="_images/markov_jump_lq_42_7.png" src="_images/markov_jump_lq_42_7.png" />
+</div>
+</div>
+<p>Only <span class="math notranslate nohighlight">\(f_{1,{s_t}}\)</span> depends on <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">construct_arrays2</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;f1_vals&quot;</span><span class="p">:[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]},</span> <span class="n">state_vec2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_44_1.png" src="_images/markov_jump_lq_44_1.png" />
+<img alt="_images/markov_jump_lq_44_2.png" src="_images/markov_jump_lq_44_2.png" />
+<img alt="_images/markov_jump_lq_44_3.png" src="_images/markov_jump_lq_44_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_44_5.png" src="_images/markov_jump_lq_44_5.png" />
+<img alt="_images/markov_jump_lq_44_6.png" src="_images/markov_jump_lq_44_6.png" />
+<img alt="_images/markov_jump_lq_44_7.png" src="_images/markov_jump_lq_44_7.png" />
+</div>
+</div>
+<p>Only <span class="math notranslate nohighlight">\(f_{2,{s_t}}\)</span> depends on <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">construct_arrays2</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;f2_vals&quot;</span><span class="p">:[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]},</span> <span class="n">state_vec2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_46_1.png" src="_images/markov_jump_lq_46_1.png" />
+<img alt="_images/markov_jump_lq_46_2.png" src="_images/markov_jump_lq_46_2.png" />
+<img alt="_images/markov_jump_lq_46_3.png" src="_images/markov_jump_lq_46_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_46_5.png" src="_images/markov_jump_lq_46_5.png" />
+<img alt="_images/markov_jump_lq_46_6.png" src="_images/markov_jump_lq_46_6.png" />
+<img alt="_images/markov_jump_lq_46_7.png" src="_images/markov_jump_lq_46_7.png" />
+</div>
+</div>
+<p>Only <span class="math notranslate nohighlight">\(\alpha_0(s_t)\)</span> depends on <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">construct_arrays2</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;α0_vals&quot;</span><span class="p">:[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]},</span> <span class="n">state_vec2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_48_1.png" src="_images/markov_jump_lq_48_1.png" />
+<img alt="_images/markov_jump_lq_48_2.png" src="_images/markov_jump_lq_48_2.png" />
+<img alt="_images/markov_jump_lq_48_3.png" src="_images/markov_jump_lq_48_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_48_5.png" src="_images/markov_jump_lq_48_5.png" />
+<img alt="_images/markov_jump_lq_48_6.png" src="_images/markov_jump_lq_48_6.png" />
+<img alt="_images/markov_jump_lq_48_7.png" src="_images/markov_jump_lq_48_7.png" />
+</div>
+</div>
+<p>Only <span class="math notranslate nohighlight">\(\rho_{s_t}\)</span> depends on <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">construct_arrays2</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;ρ_vals&quot;</span><span class="p">:[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">]},</span> <span class="n">state_vec2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_50_1.png" src="_images/markov_jump_lq_50_1.png" />
+<img alt="_images/markov_jump_lq_50_2.png" src="_images/markov_jump_lq_50_2.png" />
+<img alt="_images/markov_jump_lq_50_3.png" src="_images/markov_jump_lq_50_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_50_5.png" src="_images/markov_jump_lq_50_5.png" />
+<img alt="_images/markov_jump_lq_50_6.png" src="_images/markov_jump_lq_50_6.png" />
+<img alt="_images/markov_jump_lq_50_7.png" src="_images/markov_jump_lq_50_7.png" />
+</div>
+</div>
+<p>Only <span class="math notranslate nohighlight">\(\sigma_{s_t}\)</span> depends on <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">run</span><span class="p">(</span><span class="n">construct_arrays2</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;σ_vals&quot;</span><span class="p">:[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">]},</span> <span class="n">state_vec2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_52_1.png" src="_images/markov_jump_lq_52_1.png" />
+<img alt="_images/markov_jump_lq_52_2.png" src="_images/markov_jump_lq_52_2.png" />
+<img alt="_images/markov_jump_lq_52_3.png" src="_images/markov_jump_lq_52_3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
+</pre></div>
+</div>
+<img alt="_images/markov_jump_lq_52_5.png" src="_images/markov_jump_lq_52_5.png" />
+<img alt="_images/markov_jump_lq_52_6.png" src="_images/markov_jump_lq_52_6.png" />
+<img alt="_images/markov_jump_lq_52_7.png" src="_images/markov_jump_lq_52_7.png" />
+</div>
+</div>
+</div>
+<div class="section" id="more-examples">
+<h2><a class="toc-backref" href="#id13"><span class="section-number">9.7. </span>More examples</a><a class="headerlink" href="#more-examples" title="Permalink to this headline">¶</a></h2>
+<p>The following lectures describe how Markov jump linear quadratic dynamic programming can be used to extend the <span id="id5">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> model
+of optimal tax-smoothing and government debt in several interesting directions</p>
+<ol class="simple">
+<li><p><a class="reference internal" href="tax_smoothing_1.html"><span class="doc">How to Pay for a War: Part 1</span></a></p></li>
+<li><p><a class="reference internal" href="tax_smoothing_2.html"><span class="doc">How to Pay for a War: Part 2</span></a></p></li>
+<li><p><a class="reference internal" href="tax_smoothing_3.html"><span class="doc">How to Pay for a War: Part 3</span></a></p></li>
+</ol>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                    <p class="caption">
+ <span class="caption-text">
+  Tools and Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="orth_proj.html">
+   1. Orthogonal Projections and Their Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stationary_densities.html">
+   2. Continuous State Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="muth_kalman.html">
+   3. Reverse Engineering a la Muth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discrete_dp.html">
+   4. Discrete State Dynamic Programming
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  LQ Control
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_news.html">
+   5. Information and Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing.html">
+   6. Consumption Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing_tax.html">
+   7. Tax Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   8. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   9. Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_1.html">
+   10. How to Pay for a War: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_2.html">
+   11. How to Pay for a War: Part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_3.html">
+   12. How to Pay for a War: Part 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lqramsey.html">
+   13. Optimal Taxation in an LQ Economy
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Multiple Agent Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   14. Robust Markov Perfect Equilibrium
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arellano.html">
+   15. Default Risk and Income Fluctuations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="matsuyama.html">
+   16. Globalization and Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coase.html">
+   17. Coase’s Theory of the Firm
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Linear Economies
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_recursive_models.html">
+   18. Recursive Models of Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="growth_in_dles.html">
+   19. Growth in Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_asset_pricing_dles.html">
+   20. Lucas Asset Pricing Using DLE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="irfs_in_hall_model.html">
+   21. IRFs in Hall Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="permanent_income_dles.html">
+   22. Permanent Income Model using the DLE Class
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rosen_schooling_model.html">
+   23. Rosen Schooling Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cattle_cycles.html">
+   24. Cattle Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_invertibility_example.html">
+   25. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Classic Linear Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="von_neumann_model.html">
+   26. Von Neumann Growth Model (and a Generalization)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Time Series Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arma.html">
+   27. Covariance Stationary Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="estspec.html">
+   28. Estimation of Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additive_functionals.html">
+   29. Additive and Multiplicative Functionals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lu_tricks.html">
+   30. Classical Control with Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classical_filtering.html">
+   31. Classical Prediction and Filtering With Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="knowing_forecasts_of_others.html">
+   32. Knowing the Forecasts of Others
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Asset Pricing and Finance
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_model.html">
+   33. Asset Pricing II: The Lucas Asset Pricing Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="black_litterman.html">
+   34. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_complete_mkts.html">
+   35. Irrelevance of Capital Structure with Complete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_incomplete_mkts.html">
+   36. Equilibrium Capital Structures with Incomplete Markets
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Programming Squared
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dyn_stack.html">
+   37. Stackelberg Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo.html">
+   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opt_tax_recur.html">
+   39. Optimal Taxation with State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss.html">
+   40. Optimal Taxation without State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss2.html">
+   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss3.html">
+   42. Fiscal Risk and Government Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_ramsey.html">
+   43. Competitive Equilibria of a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_credible.html">
+   44. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   45. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   46. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   47. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="toolbar">
+
+            <div class="toolbar__inner">
+
+                <ul class="toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                    <!-- <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <i data-feather="search"></i>
+                        </form>
+                    </li> -->
+                </ul>
+
+                <ul class="toolbar__links">
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/markov_jump_lq.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Launch Notebook" id="launchButton"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/markov_jump_lq.ipynb" target="_blank"><i data-feather="play-circle"></i></a></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/markov_jump_lq.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p style="color: white;">Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title">QuantEcon Notebook Launcher</p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input" onchange="onChangeListener()">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/markov_jump_lq.ipynb">BinderHub</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <!-- <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" onchange="onChangeListener()">
+                <i class="fas fa-check-circle"></i>
+            </li> -->
+            </ul>
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

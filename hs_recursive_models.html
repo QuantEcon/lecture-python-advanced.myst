@@ -1,0 +1,2991 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>18. Recursive Models of Dynamic Linear Economies &#8212; Advanced Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/quantecon-book-theme.9deb0a26de8466f54124a1959c24cd33.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/quantecon-book-theme.43eb86aa48ec3aed660cb313c38068cd.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://python-advanced.quantecon.org/hs_recursive_models.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="19. Growth in Dynamic Linear Economies" href="growth_in_dles.html" />
+    <link rel="prev" title="17. Coase’s Theory of the Firm" href="coase.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="Recursive Models of Dynamic Linear Economies"/>
+<meta name="twitter:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="Recursive Models of Dynamic Linear Economies" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://python-advanced.quantecon.org/hs_recursive_models.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="wrapper">
+
+        <div class="main">
+
+            <div class="page" id=hs_recursive_models>
+
+                <div class="page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-suite-of-models">
+   18.1. A Suite of Models
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#overview-of-the-models">
+     18.1.1. Overview of the Models
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#forecasting">
+     18.1.2. Forecasting?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#theory-and-econometrics">
+     18.1.3. Theory and Econometrics
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#more-details">
+     18.1.4. More Details
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stochastic-model-of-information-flows-and-outcomes">
+     18.1.5. Stochastic Model of Information Flows and Outcomes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#information-sets">
+     18.1.6. Information Sets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#prediction-theory">
+     18.1.7. Prediction Theory
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#orthogonal-decomposition">
+     18.1.8. Orthogonal Decomposition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#taste-and-technology-shocks">
+     18.1.9. Taste and Technology Shocks
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#production-technology">
+     18.1.10. Production Technology
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#household-technology">
+     18.1.11. Household Technology
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#preferences">
+     18.1.12. Preferences
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#endowment-economy">
+     18.1.13. Endowment Economy
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-period-adjustment-costs">
+     18.1.14. Single-Period Adjustment Costs
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimal-resource-allocation">
+     18.1.15. Optimal Resource Allocation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lagrangian-formulation">
+     18.1.16. Lagrangian Formulation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dynamic-programming">
+     18.1.17. Dynamic Programming
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#other-mathematical-infrastructure">
+     18.1.18. Other mathematical infrastructure
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#representative-household">
+     18.1.19. Representative Household
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#type-i-firm">
+     18.1.20. Type I Firm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#type-ii-firm">
+     18.1.21. Type II Firm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#competitive-equilibrium-definition">
+     18.1.22. Competitive Equilibrium:  Definition
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#asset-pricing">
+     18.1.23. Asset pricing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#re-opening-markets">
+     18.1.24. Re-Opening Markets
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#econometrics">
+   18.2. Econometrics
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#factorization-of-likelihood-function">
+     18.2.1. Factorization of Likelihood Function
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#covariance-generating-functions">
+     18.2.2. Covariance Generating Functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#spectral-factorization-identity">
+     18.2.3. Spectral Factorization Identity
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#wold-and-vector-autoregressive-representations">
+     18.2.4. Wold and Vector Autoregressive Representations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamic-demand-curves-and-canonical-household-technologies">
+   18.3. Dynamic Demand Curves and Canonical Household Technologies
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#canonical-household-technologies">
+     18.3.1. Canonical Household Technologies
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dynamic-demand-functions">
+     18.3.2. Dynamic Demand Functions
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gorman-aggregation-and-engel-curves">
+   18.4. Gorman Aggregation and Engel Curves
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#re-opened-markets">
+     18.4.1. Re-Opened Markets
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#dynamic-demand">
+     18.4.2. Dynamic Demand
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#attaining-a-canonical-household-technology">
+     18.4.3. Attaining a Canonical Household Technology
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#partial-equilibrium">
+   18.5. Partial Equilibrium
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#equilibrium-investment-under-uncertainty">
+   18.6. Equilibrium Investment Under Uncertainty
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-rosen-topel-housing-model">
+   18.7. A Rosen-Topel Housing Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cattle-cycles">
+   18.8. Cattle Cycles
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#models-of-occupational-choice-and-pay">
+   18.9. Models of Occupational Choice and Pay
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#market-for-engineers">
+     18.9.1. Market for Engineers
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#skilled-and-unskilled-workers">
+     18.9.2. Skilled and Unskilled Workers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#permanent-income-models">
+   18.10. Permanent Income Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gorman-heterogeneous-households">
+   18.11. Gorman Heterogeneous Households
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#non-gorman-heterogeneous-households">
+   18.12. Non-Gorman Heterogeneous Households
+  </a>
+ </li>
+</ul>
+
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo" alt="logo"></a>
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="page__header">
+
+                    <div class="page__header-copy">
+
+                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+
+                        <p class="page__header-subheading">Recursive Models of Dynamic Linear Economies</p>
+
+                    </div>
+
+                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" align="right" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><div class="section" id="recursive-models-of-dynamic-linear-economies">
+<span id="index-0"></span><h1><a class="toc-backref" href="#id14"><span class="section-number">18. </span>Recursive Models of Dynamic Linear Economies</a><a class="headerlink" href="#recursive-models-of-dynamic-linear-economies" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#recursive-models-of-dynamic-linear-economies" id="id14">Recursive Models of Dynamic Linear Economies</a></p>
+<ul>
+<li><p><a class="reference internal" href="#a-suite-of-models" id="id15">A Suite of Models</a></p></li>
+<li><p><a class="reference internal" href="#econometrics" id="id16">Econometrics</a></p></li>
+<li><p><a class="reference internal" href="#dynamic-demand-curves-and-canonical-household-technologies" id="id17">Dynamic Demand Curves and Canonical Household Technologies</a></p></li>
+<li><p><a class="reference internal" href="#gorman-aggregation-and-engel-curves" id="id18">Gorman Aggregation and Engel Curves</a></p></li>
+<li><p><a class="reference internal" href="#partial-equilibrium" id="id19">Partial Equilibrium</a></p></li>
+<li><p><a class="reference internal" href="#equilibrium-investment-under-uncertainty" id="id20">Equilibrium Investment Under Uncertainty</a></p></li>
+<li><p><a class="reference internal" href="#a-rosen-topel-housing-model" id="id21">A Rosen-Topel Housing Model</a></p></li>
+<li><p><a class="reference internal" href="#cattle-cycles" id="id22">Cattle Cycles</a></p></li>
+<li><p><a class="reference internal" href="#models-of-occupational-choice-and-pay" id="id23">Models of Occupational Choice and Pay</a></p></li>
+<li><p><a class="reference internal" href="#permanent-income-models" id="id24">Permanent Income Models</a></p></li>
+<li><p><a class="reference internal" href="#gorman-heterogeneous-households" id="id25">Gorman Heterogeneous Households</a></p></li>
+<li><p><a class="reference internal" href="#non-gorman-heterogeneous-households" id="id26">Non-Gorman Heterogeneous Households</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<blockquote class="epigraph">
+<div><p>“Mathematics is the art of giving the same name to different things” – Henri Poincare</p>
+</div></blockquote>
+<blockquote class="epigraph">
+<div><p>“Complete market economies are all alike” –     Robert E. Lucas, Jr., (1989)</p>
+</div></blockquote>
+<blockquote class="epigraph">
+<div><p>“Every partial equilibrium model can be reinterpreted as a general equilibrium model.” –   Anonymous</p>
+</div></blockquote>
+<div class="section" id="a-suite-of-models">
+<h2><a class="toc-backref" href="#id15"><span class="section-number">18.1. </span>A Suite of Models</a><a class="headerlink" href="#a-suite-of-models" title="Permalink to this headline">¶</a></h2>
+<p>This lecture presents  a class of  linear-quadratic-Gaussian models of general economic equilibrium
+designed by Lars Peter Hansen and Thomas J. Sargent <span id="id1">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span>.</p>
+<p>The class of models is implemented in a Python class DLE that is part of  quantecon.</p>
+<p>Subsequent lectures use the DLE class to implement various instances that have appeared in the economics literature</p>
+<ol class="simple">
+<li><p><a class="reference internal" href="growth_in_dles.html"><span class="doc">Growth in Dynamic Linear Economies</span></a></p></li>
+<li><p><a class="reference internal" href="lucas_asset_pricing_dles.html"><span class="doc">Lucas Asset Pricing using DLE</span></a></p></li>
+<li><p><a class="reference internal" href="irfs_in_hall_model.html"><span class="doc">IRFs in Hall Model</span></a></p></li>
+<li><p><a class="reference internal" href="permanent_income_dles.html"><span class="doc">Permanent Income Using the DLE class</span></a></p></li>
+<li><p><a class="reference internal" href="rosen_schooling_model.html"><span class="doc">Rosen schooling model</span></a></p></li>
+<li><p><a class="reference internal" href="cattle_cycles.html"><span class="doc">Cattle cycles</span></a></p></li>
+<li><p><a class="reference internal" href="hs_invertibility_example.html"><span class="doc">Shock Non Invertibility</span></a></p></li>
+</ol>
+<div class="section" id="overview-of-the-models">
+<h3><span class="section-number">18.1.1. </span>Overview of the Models<a class="headerlink" href="#overview-of-the-models" title="Permalink to this headline">¶</a></h3>
+<p>In saying that “complete markets are all alike”, Robert E. Lucas, Jr. was noting  that all of them have</p>
+<ul class="simple">
+<li><p>a commodity space.</p></li>
+<li><p>a space dual to the commodity space in which prices reside.</p></li>
+<li><p>endowments of resources.</p></li>
+<li><p>peoples’ preferences over goods.</p></li>
+<li><p>physical technologies for transforming resources into goods.</p></li>
+<li><p>random processes that govern shocks to technologies and preferences and associated information flows.</p></li>
+<li><p>a single budget constraint per person.</p></li>
+<li><p>the existence of a representative consumer even when there are many people in the model.</p></li>
+<li><p>a concept of competitive equilibrium.</p></li>
+<li><p>theorems connecting competitive equilibrium allocations to allocations that would be chosen by a benevolent social planner.</p></li>
+</ul>
+<p>The models have <strong>no frictions</strong> such as <span class="math notranslate nohighlight">\(\ldots\)</span></p>
+<ul class="simple">
+<li><p>Enforcement difficulties</p></li>
+<li><p>Information asymmetries</p></li>
+<li><p>Other forms of transactions costs</p></li>
+<li><p>Externalities</p></li>
+</ul>
+<p>The models extensively use the  powerful ideas of</p>
+<ul class="simple">
+<li><p>Indexing commodities and their prices by time (John R. Hicks).</p></li>
+<li><p>Indexing commodities and their prices by chance (Kenneth Arrow).</p></li>
+</ul>
+<p>Much of  the imperialism of complete markets models comes from applying these two tricks.</p>
+<p>The Hicks trick of indexing commodities by time is the idea that <strong>dynamics are a special case of statics</strong>.</p>
+<p>The Arrow trick of indexing commodities by chance is the idea that <strong>analysis of trade under uncertainty is a special
+case of the analysis of trade under certainty</strong>.</p>
+<p>The <span id="id2">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> class of models specify the commodity space, preferences, technologies, stochastic shocks and information flows in ways
+that allow the models to be analyzed completely using only the tools of linear time series models and linear-quadratic optimal control described
+in the two lectures  <a class="reference external" href="https://python-intro.quantecon.org/linear_models.html">Linear State Space Models</a> and <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Control</a>.</p>
+<p>There are costs and benefits associated with the simplifications and specializations needed to make a particular model fit within the
+<span id="id3">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> class</p>
+<ul class="simple">
+<li><p>the costs are that  linear-quadratic structures are sometimes too confining.</p></li>
+<li><p>benefits include computational speed, simplicity, and ability to analyze many model features analytically or nearly analytically.</p></li>
+</ul>
+<p>A variety of superficially different models are all instances of the <span id="id4">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> class of models</p>
+<ul class="simple">
+<li><p>Lucas asset pricing model</p></li>
+<li><p>Lucas-Prescott model of investment under uncertainty</p></li>
+<li><p>Asset pricing models with habit persistence</p></li>
+<li><p>Rosen-Topel equilibrium model of housing</p></li>
+<li><p>Rosen schooling models</p></li>
+<li><p>Rosen-Murphy-Scheinkman model of cattle cycles</p></li>
+<li><p>Hansen-Sargent-Tallarini model of robustness and asset pricing</p></li>
+<li><p>Many more <span class="math notranslate nohighlight">\(\ldots\)</span></p></li>
+</ul>
+<p id="section-1">The diversity of these models conceals an essential unity that illustrates the quotation by Robert E. Lucas, Jr., with which
+we began this lecture.</p>
+</div>
+<div class="section" id="forecasting">
+<h3><span class="section-number">18.1.2. </span>Forecasting?<a class="headerlink" href="#forecasting" title="Permalink to this headline">¶</a></h3>
+<p>A consequence of a single budget constraint per person  plus the Hicks-Arrow tricks is that households and firms need not forecast.</p>
+<p>But there exist equivalent structures called <strong>recursive competitive equilibria</strong> in which  they do appear to need to forecast.</p>
+<p>In these structures, to forecast, households and firms use:</p>
+<ul class="simple">
+<li><p>equilibrium pricing functions, and</p></li>
+<li><p>knowledge of the  Markov structure of the economy’s state vector.</p></li>
+</ul>
+</div>
+<div class="section" id="theory-and-econometrics">
+<h3><span class="section-number">18.1.3. </span>Theory and Econometrics<a class="headerlink" href="#theory-and-econometrics" title="Permalink to this headline">¶</a></h3>
+<p>For an application of the  <span id="id5">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> class of models, the outcome of theorizing is a stochastic process, i.e., a probability
+distribution over sequences of prices and quantities, indexed by  parameters describing preferences, technologies, and information flows.</p>
+<p>Another name for that object is a likelihood function, a key object of both frequentist and Bayesian statistics.</p>
+<p>There are two important uses of an <strong>equilibrium stochastic process</strong> or <strong>likelihood function</strong>.</p>
+<p>The first is to solve the <strong>direct problem</strong>.</p>
+<p>The <strong>direct problem</strong> takes as inputs values of the parameters that define preferences, technologies, and information flows and as
+an output characterizes or simulates random paths of quantities and prices.</p>
+<p>The second use of an equilibrium stochastic process or likelihood function is to solve the <strong>inverse problem</strong>.</p>
+<p>The <strong>inverse problem</strong> takes as an input a time series sample of observations on a subset of prices and quantities determined by the model
+and from them makes inferences about the parameters that define the model’s preferences, technologies, and information flows.</p>
+</div>
+<div class="section" id="more-details">
+<h3><span class="section-number">18.1.4. </span>More Details<a class="headerlink" href="#more-details" title="Permalink to this headline">¶</a></h3>
+<p>A <span id="id6">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> economy consists of <strong>lists of matrices</strong> that describe peoples’ household technologies, their preferences over
+consumption services,  their production technologies, and their information sets.</p>
+<p>There are complete markets in history-contingent commodities.</p>
+<p>Competitive equilibrium allocations and prices</p>
+<ul class="simple">
+<li><p>satisfy equations that are easy to write down and solve</p></li>
+<li><p>have representations that are convenient econometrically</p></li>
+</ul>
+<p>Different example economies manifest themselves simply as different settings for various matrices.</p>
+<p><span id="id7">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> use these tools:</p>
+<ul class="simple">
+<li><p>A theory of recursive dynamic competitive economies</p></li>
+<li><p>Linear optimal control theory</p></li>
+<li><p>Recursive methods for estimating and interpreting vector
+autoregressions</p></li>
+</ul>
+<p>The models are flexible enough to express alternative senses of a representative household</p>
+<ul class="simple">
+<li><p>A single ‘stand-in’ household of the type used to good effect by Edward C. Prescott.</p></li>
+<li><p>Heterogeneous households satisfying conditions for Gorman aggregation
+into a representative household.</p></li>
+<li><p>Heterogeneous household technologies that  violate conditions for Gorman
+aggregation but are still susceptible to aggregation into a single
+representative household via ‘non-Gorman’ or ‘mongrel’ aggregation’.</p></li>
+</ul>
+<p>These three alternative types of aggregation have different consequences in terms of how  prices and allocations can be computed.</p>
+<p>In particular, can prices and an aggregate allocation be computed before the
+equilibrium allocation to individual heterogeneous households is computed?</p>
+<ul class="simple">
+<li><p>Answers are “Yes” for Gorman aggregation, “No” for non-Gorman
+aggregation.</p></li>
+</ul>
+<p>In summary, the insights and practical benefits from economics to be introduced in this lecture
+are</p>
+<ul class="simple">
+<li><p>Deeper understandings that come from recognizing common underlying
+structures.</p></li>
+<li><p>Speed and ease of computation that comes from unleashing a common suite of Python programs.</p></li>
+</ul>
+<p>We’ll use the following <strong>mathematical tools</strong></p>
+<ul class="simple">
+<li><p>Stochastic Difference Equations (Linear).</p></li>
+<li><p>Duality: LQ Dynamic Programming and Linear Filtering  are the same things
+mathematically.</p></li>
+<li><p>The Spectral Factorization Identity (for understanding vector
+autoregressions and non-Gorman aggregation).</p></li>
+</ul>
+<p>So here is our roadmap.</p>
+<p>We’ll describe sets of matrices that pin down</p>
+<ul class="simple">
+<li><p>Information</p></li>
+<li><p>Technologies</p></li>
+<li><p>Preferences</p></li>
+</ul>
+<p>Then we’ll describe</p>
+<ul class="simple">
+<li><p>Equilibrium concept and computation</p></li>
+<li><p>Econometric representation and estimation</p></li>
+</ul>
+</div>
+<div class="section" id="stochastic-model-of-information-flows-and-outcomes">
+<span id="section-3"></span><h3><span class="section-number">18.1.5. </span>Stochastic Model of Information Flows and Outcomes<a class="headerlink" href="#stochastic-model-of-information-flows-and-outcomes" title="Permalink to this headline">¶</a></h3>
+<p>We’ll use  stochastic linear difference equations to describe information flows <strong>and</strong> equilibrium outcomes.</p>
+<p>The sequence <span class="math notranslate nohighlight">\(\{w_t : t=1,2, \ldots\}\)</span> is said to be a martingale
+difference sequence adapted to <span class="math notranslate nohighlight">\(\{J_t : t=0, 1, \ldots \}\)</span> if
+<span class="math notranslate nohighlight">\(E(w_{t+1} \vert J_t) = 0\)</span> for <span class="math notranslate nohighlight">\(t=0, 1, \ldots\,\)</span>.</p>
+<p>The sequence <span class="math notranslate nohighlight">\(\{w_t : t=1,2,\ldots\}\)</span> is said to be conditionally
+homoskedastic if <span class="math notranslate nohighlight">\(E(w_{t+1}w_{t+1}^\prime \mid J_t) = I\)</span> for
+<span class="math notranslate nohighlight">\(t=0,1, \ldots\,\)</span>.</p>
+<p>We assume that the <span class="math notranslate nohighlight">\(\{w_t : t=1,2,\ldots\}\)</span> process is
+conditionally homoskedastic.</p>
+<p id="linear-stochastic-difference-equations-1">Let <span class="math notranslate nohighlight">\(\{x_t : t=1,2,\ldots\}\)</span> be a sequence of
+<span class="math notranslate nohighlight">\(n\)</span>-dimensional random vectors, i.e. an <span class="math notranslate nohighlight">\(n\)</span>-dimensional
+stochastic process.</p>
+<p>The process <span class="math notranslate nohighlight">\(\{x_t : t=1,2,\ldots\}\)</span> is constructed recursively
+using an initial random vector
+<span class="math notranslate nohighlight">\(x_0\sim {\mathcal N}(\hat x_0, \Sigma_0)\)</span> and a time-invariant
+law of motion:</p>
+<div class="math notranslate nohighlight">
+\[
+x_{t+1} = Ax_t + Cw_{t+1}
+\]</div>
+<p>for <span class="math notranslate nohighlight">\(t=0,1,\ldots\)</span>  where <span class="math notranslate nohighlight">\(A\)</span> is an <span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(n\)</span> matrix and <span class="math notranslate nohighlight">\(C\)</span> is an
+<span class="math notranslate nohighlight">\(n\)</span> by <span class="math notranslate nohighlight">\(N\)</span> matrix.</p>
+<p>Evidently, the distribution of <span class="math notranslate nohighlight">\(x_{t+1}\)</span> conditional on <span class="math notranslate nohighlight">\(x_t\)</span> is
+<span class="math notranslate nohighlight">\({\mathcal N}(Ax_t, CC')\)</span>.</p>
+</div>
+<div class="section" id="information-sets">
+<h3><span class="section-number">18.1.6. </span>Information Sets<a class="headerlink" href="#information-sets" title="Permalink to this headline">¶</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(J_0\)</span> be generated by <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(J_t\)</span> be generated
+by <span class="math notranslate nohighlight">\(x_0, w_1, \ldots ,
+w_t\)</span>, which means that <span class="math notranslate nohighlight">\(J_t\)</span> consists of the set of all measurable
+functions of <span class="math notranslate nohighlight">\(\{x_0, w_1,\ldots,
+w_t\}\)</span>.</p>
+</div>
+<div class="section" id="prediction-theory">
+<h3><span class="section-number">18.1.7. </span>Prediction Theory<a class="headerlink" href="#prediction-theory" title="Permalink to this headline">¶</a></h3>
+<p>The optimal forecast of <span class="math notranslate nohighlight">\(x_{t+1}\)</span> given current information is</p>
+<div class="math notranslate nohighlight">
+\[
+E(x_{t+1} \mid J_t) = Ax_t
+\]</div>
+<p>and the one-step-ahead forecast error is</p>
+<div class="math notranslate nohighlight">
+\[
+x_{t+1} - E(x_{t+1} \mid J_t) = Cw_{t+1}
+\]</div>
+<p>The covariance matrix of <span class="math notranslate nohighlight">\(x_{t+1}\)</span> conditioned on <span class="math notranslate nohighlight">\(J_t\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+E (x_{t+1} - E ( x_{t+1} \mid J_t) ) (x_{t+1} - E ( x_{t+1} \mid J_t))^\prime  = CC^\prime
+\]</div>
+<p>A nonrecursive expression for <span class="math notranslate nohighlight">\(x_t\)</span> as a function of
+<span class="math notranslate nohighlight">\(x_0, w_1, w_2, \ldots,  w_t\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ x_t &amp;= Ax_{t-1} + Cw_t \\
+&amp;= A^2 x_{t-2} + ACw_{t-1} + Cw_t \\
+&amp;= \Bigl[\sum_{\tau=0}^{t-1} A^\tau Cw_{t-\tau} \Bigr] + A^t x_0
+\end{aligned}
+\end{split}\]</div>
+<p id="prediction-theory-1">Shift forward in time:</p>
+<div class="math notranslate nohighlight">
+\[
+x_{t+j} = \sum^{j-1}_{s=0} A^s C w_{t+j-s} + A^j x_t
+\]</div>
+<p>Projecting on the information set <span class="math notranslate nohighlight">\(\{ x_0, w_t, w_{t-1},
+\ldots, w_1\}\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[
+E_t x_{t+j} = A^j x_t
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_t (\cdot) \equiv  E [ (\cdot) \mid x_0, w_t, w_{t-1}, \ldots, w_1]
+= E (\cdot) \mid J_t\)</span>, and <span class="math notranslate nohighlight">\(x_t\)</span> is in <span class="math notranslate nohighlight">\(J_t\)</span>.</p>
+<p id="prediction-theory-2">It is useful to obtain the covariance matrix of the <span class="math notranslate nohighlight">\(j\)</span>-step-ahead
+prediction error <span class="math notranslate nohighlight">\(x_{t+j} - E_t x_{t+j} = \sum^{j-1}_{s=0} A^s C w_{t-s+j}\)</span>.</p>
+<p>Evidently,</p>
+<div class="math notranslate nohighlight">
+\[
+E_t (x_{t+j} - E_t x_{t+j})  (x_{t+j} - E_t x_{t+j})^\prime =
+\sum^{j-1}_{k=0} A^k C C^\prime A^{k^\prime} \equiv v_j
+\]</div>
+<p><span class="math notranslate nohighlight">\(v_j\)</span> can be calculated recursively via</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ v_1 &amp;= CC^\prime \\
+ v_j &amp;= CC^\prime + A v_{j-1} A^\prime, \quad j \geq 2
+\end{aligned}
+\end{split}\]</div>
+</div>
+<div class="section" id="orthogonal-decomposition">
+<h3><span class="section-number">18.1.8. </span>Orthogonal Decomposition<a class="headerlink" href="#orthogonal-decomposition" title="Permalink to this headline">¶</a></h3>
+<p>To decompose these covariances into parts attributable to the individual
+components of <span class="math notranslate nohighlight">\(w_t\)</span>, we let <span class="math notranslate nohighlight">\(i_\tau\)</span> be an
+<span class="math notranslate nohighlight">\(N\)</span>-dimensional column vector of zeroes except in position
+<span class="math notranslate nohighlight">\(\tau\)</span>, where there is a one. Define a matrix
+<span class="math notranslate nohighlight">\(\upsilon_{j,\tau}\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\upsilon_{j,\tau} = \sum_{k=0}^{j-1} A^k C i_\tau i_\tau^\prime C^\prime
+A^{^\prime k} .
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\sum_{\tau=1}^N i_\tau i_\tau^\prime = I\)</span>, so that we
+have</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{\tau=1}^N \upsilon_{j, \tau} = \upsilon_j
+\]</div>
+<p>Evidently, the matrices
+<span class="math notranslate nohighlight">\(\{ \upsilon_{j, \tau} , \tau = 1, \ldots, N \}\)</span> give an
+orthogonal decomposition of the covariance matrix of
+<span class="math notranslate nohighlight">\(j\)</span>-step-ahead prediction errors into the parts attributable to
+each of the components <span class="math notranslate nohighlight">\(\tau =
+1, \ldots, N\)</span>.</p>
+</div>
+<div class="section" id="taste-and-technology-shocks">
+<h3><span class="section-number">18.1.9. </span>Taste and Technology Shocks<a class="headerlink" href="#taste-and-technology-shocks" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(E(w_t \mid J_{t-1}) = 0\)</span> and <span class="math notranslate nohighlight">\(E(w_t
+w_t^\prime \mid J_{t-1}) = I\)</span> for <span class="math notranslate nohighlight">\(t=1,2, \ldots\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+b_t = U_b z_t \hbox{ and } d_t = U_dz_t,
+\]</div>
+<p><span class="math notranslate nohighlight">\(U_b\)</span> and <span class="math notranslate nohighlight">\(U_d\)</span> are matrices that select entries of
+<span class="math notranslate nohighlight">\(z_t\)</span>. The law of motion for <span class="math notranslate nohighlight">\(\{z_t : t=0, 1, \ldots\}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+z_{t+1} = A_{22} z_t + C_2 w_{t+1} \ \hbox { for } t = 0, 1, \ldots
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(z_0\)</span> is a given initial condition. The eigenvalues of the
+matrix <span class="math notranslate nohighlight">\(A_{22}\)</span> have absolute values that are less than or equal
+to one.</p>
+<p>Thus, in summary, our model of <strong>information and shocks</strong> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+z_{t+1} &amp;=A_{22} z_t + C_2 w_{t+1}
+\\  b_t &amp;= U_b z_t \\ d_t &amp;= U_d z_t .
+\end{aligned}
+\end{split}\]</div>
+<p>We can now briefly summarize other components of our economies, in particular</p>
+<ul class="simple">
+<li><p>Production technologies</p></li>
+<li><p>Household technologies</p></li>
+<li><p>Household preferences</p></li>
+</ul>
+</div>
+<div class="section" id="production-technology">
+<h3><span class="section-number">18.1.10. </span>Production Technology<a class="headerlink" href="#production-technology" title="Permalink to this headline">¶</a></h3>
+<p>Where <span class="math notranslate nohighlight">\(c_t\)</span> is a vector of consumption rates, <span class="math notranslate nohighlight">\(k_t\)</span> is a vector of physical capital goods, <span class="math notranslate nohighlight">\(g_t\)</span> is
+a vector intermediate productions goods, <span class="math notranslate nohighlight">\(d_t\)</span> is a vector of technology shocks, the production technology is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\Phi_c c_t +  \Phi_g g_t + \Phi_i i_t &amp;=\Gamma k_{t-1} + d_t \\
+k_t &amp;=\Delta_k k_{t-1} + \Theta_k i_t \\ g_t \cdot g_t &amp;=\ell_t^2
+\end{aligned}
+\end{split}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\Phi_c, \Phi_g, \Phi_i, \Gamma, \Delta_k, \Theta_k\)</span> are all matrices conformable to the vectors they multiply and
+<span class="math notranslate nohighlight">\(\ell_t\)</span> is a disutility generating resource supplied by the household.</p>
+<p>For technical reasons that facilitate computations, we make the following.</p>
+<p><strong>Assumption:</strong> <span class="math notranslate nohighlight">\([\Phi_c\ \Phi_g]\)</span> is nonsingular.</p>
+</div>
+<div class="section" id="household-technology">
+<h3><span class="section-number">18.1.11. </span>Household Technology<a class="headerlink" href="#household-technology" title="Permalink to this headline">¶</a></h3>
+<p>Households confront a technology that allows them to devote consumption goods to construct a vector <span class="math notranslate nohighlight">\(h_t\)</span> of household capital goods
+and a vector <span class="math notranslate nohighlight">\(s_t\)</span> of utility generating  house services</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+s_t &amp;=  \Lambda h_{t-1} + \Pi c_t \\
+h_t &amp;= \Delta_h h_{t-1} + \Theta_h c_t
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Lambda, \Pi, \Delta_h, \Theta_h\)</span> are matrices that pin down the household technology.</p>
+<p>We make the following</p>
+<p><strong>Assumption:</strong> The absolute values of the eigenvalues of <span class="math notranslate nohighlight">\(\Delta_h\)</span>
+are less than or equal to one.</p>
+<p>Below, we’ll outline further assumptions that we shall occasionally impose.</p>
+</div>
+<div class="section" id="preferences">
+<h3><span class="section-number">18.1.12. </span>Preferences<a class="headerlink" href="#preferences" title="Permalink to this headline">¶</a></h3>
+<p>Where <span class="math notranslate nohighlight">\(b_t\)</span> is a stochastic process of preference shocks that will play the role of demand shifters, the representative household orders
+stochastic processes of consumption services <span class="math notranslate nohighlight">\(s_t\)</span> according to</p>
+<div class="math notranslate nohighlight">
+\[
+\Bigl( {1 \over 2}\Bigr)  E \sum_{t=0}^\infty \beta^t [ (s_t -
+b_t) \cdot ( s_t - b_t) + \ell_t^2 ] \bigl| J_0 , \ 0 &lt; \beta &lt; 1
+\]</div>
+<p>We now proceed to give examples of production and household technologies that appear in various models that appear in the literature.</p>
+<p>First, we give examples of production Technologies</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_c c_t + \Phi_g g_t + \Phi_i i_t = \Gamma k_{t-1} + d_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mid g_t \mid \leq \ell_t
+\]</div>
+<p>so we’ll be looking for specifications of the matrices <span class="math notranslate nohighlight">\(\Phi_c, \Phi_g, \Phi_i, \Gamma, \Delta_k, \Theta_k\)</span> that define them.</p>
+</div>
+<div class="section" id="endowment-economy">
+<h3><span class="section-number">18.1.13. </span>Endowment Economy<a class="headerlink" href="#endowment-economy" title="Permalink to this headline">¶</a></h3>
+<p>There is a single consumption good that cannot be stored over time.</p>
+<p>In time period <span class="math notranslate nohighlight">\(t\)</span>, there is an endowment <span class="math notranslate nohighlight">\(d_t\)</span> of this single
+good.</p>
+<p>There is neither a capital stock, nor an intermediate good, nor a
+rate of investment.</p>
+<p>So <span class="math notranslate nohighlight">\(c_t = d_t\)</span>.</p>
+<p>To implement this specification, we can choose <span class="math notranslate nohighlight">\(A_{22}, C_2\)</span>, and
+<span class="math notranslate nohighlight">\(U_d\)</span> to make <span class="math notranslate nohighlight">\(d_t\)</span> follow any of a variety of stochastic
+processes.</p>
+<p>To satisfy our earlier rank assumption, we set:</p>
+<div class="math notranslate nohighlight">
+\[
+c_t + i_t = d_{1t}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+g_t = \phi_1 i_t
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi_1\)</span> is a small positive number.</p>
+<p>To implement this
+version, we set <span class="math notranslate nohighlight">\(\Delta_k = \Theta_k = 0\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Phi_c =  \begin{bmatrix}  1 \\ 0 \\ \end{bmatrix},
+\Phi_i = \begin{bmatrix} 1 \\ \phi_1 \\ \end{bmatrix} , \ \ \Phi_g =
+\begin{bmatrix} 0 \\ -1 \\ \end{bmatrix},  \ \ \Gamma = \begin{bmatrix}
+ 0 \\ 0 \end{bmatrix},  \ \ d_t  = \begin{bmatrix} d_{1t}
+\\ 0 \end{bmatrix}
+\end{split}\]</div>
+<p>We can use this specification to create a linear-quadratic version of
+Lucas’s (1978) asset pricing model.</p>
+</div>
+<div class="section" id="single-period-adjustment-costs">
+<h3><span class="section-number">18.1.14. </span>Single-Period Adjustment Costs<a class="headerlink" href="#single-period-adjustment-costs" title="Permalink to this headline">¶</a></h3>
+<p>There is a single consumption good, a single intermediate good, and a
+single investment good.</p>
+<p>The technology is described by</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+c_t &amp;=\gamma k_{t-1} + d_{1t} ,\ \ \gamma &gt; 0 \\
+\phi_1 i_t &amp;= g_t + d_{2t}, \ \ \phi_1 &gt; 0 \\
+\ell^2_t &amp;=  g^2_t \\
+k_t &amp;= \delta_k k_{t-1} + i_t ,\ 0&lt; \delta_k &lt; 1
+\end{aligned}
+\end{split}\]</div>
+<p>Set</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Phi_c = \begin{bmatrix}1 \\ 0 \end{bmatrix} ,\ \Phi_g = \begin{bmatrix}0 \\
+-1 \end{bmatrix}, \ \Phi_i = \begin{bmatrix} 0 \\ \phi_1 \end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Gamma = \begin{bmatrix} \gamma \\ 0 \end{bmatrix}, \ \Delta_k = \delta_k,
+\ \Theta_k = 1
+\end{split}\]</div>
+<p>We set <span class="math notranslate nohighlight">\(A_{22}, C_2\)</span> and <span class="math notranslate nohighlight">\(U_d\)</span> to make
+<span class="math notranslate nohighlight">\((d_{1t}, d_{2t})^\prime = d_t\)</span> follow a desired stochastic
+process.</p>
+<p>Now we describe some examples of preferences, which as we have seen are ordered by</p>
+<div class="math notranslate nohighlight">
+\[
+-\left({1 \over 2}\right) E \sum^\infty_{t=0} \beta^t \left[ (s_t - b_t) \cdot (s_t -
+b_t) + (\ell_t)^2 \right] \mid J_0 \quad ,\ 0 &lt; \beta &lt; 1
+\]</div>
+<p>where household services are produced via the household technology</p>
+<div class="math notranslate nohighlight">
+\[
+h_t = \Delta_h h_{t-1} + \Theta_h c_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+s_t = \Lambda h_{t-1} + \Pi c_t
+\]</div>
+<p>and we make</p>
+<p><strong>Assumption:</strong> The absolute values of the eigenvalues of <span class="math notranslate nohighlight">\(\Delta_h\)</span>
+are less than or equal to one.</p>
+<p>Later we shall introduce <strong>canonical</strong>  household technologies that  satisfy an ‘invertibility’
+requirement relating sequences <span class="math notranslate nohighlight">\(\{s_t\}\)</span> of services and
+<span class="math notranslate nohighlight">\(\{c_t\}\)</span> of consumption flows.</p>
+<p>And  we’ll describe how to obtain a canonical representation
+of a household technology from one that is not canonical.</p>
+<p>Here are some examples of household preferences.</p>
+<p><strong>Time Separable preferences</strong></p>
+<div class="math notranslate nohighlight">
+\[
+-{1\over 2} E \sum^\infty_{t=0} \beta^t \left[ (c_t - b_t)^2 + \ell_t^2
+\right] \mid J_0 \quad ,\ 0 &lt; \beta &lt; 1
+\]</div>
+<p><strong>Consumer Durables</strong></p>
+<div class="math notranslate nohighlight">
+\[
+h_t = \delta_h h_{t-1} + c_t \quad ,\ 0 &lt; \delta_h &lt; 1
+\]</div>
+<p>Services at <span class="math notranslate nohighlight">\(t\)</span> are related to the stock of durables at the
+beginning of the period:</p>
+<div class="math notranslate nohighlight">
+\[
+s_t = \lambda h_{t-1} \ , \ \lambda &gt; 0
+\]</div>
+<p>Preferences are ordered by</p>
+<div class="math notranslate nohighlight">
+\[
+-{1 \over 2} E \sum^\infty_{t=0} \beta^t \left[(\lambda h_{t-1} -
+b_t)^2 + \ell_t^2\right] \mid J_0
+\]</div>
+<p>Set <span class="math notranslate nohighlight">\(\Delta_h = \delta_h,
+\Theta_h =1, \Lambda = \lambda, \Pi = 0\)</span>.</p>
+<p><strong>Habit Persistence</strong></p>
+<div class="math notranslate nohighlight">
+\[
+-\Bigl({1\over 2}\Bigr)\, E \sum^\infty_{t=0} \beta^t \Bigl[\bigl(c_t - \lambda
+ (1-\delta_h) \sum^\infty_{j=0}\, \delta^j_h\, c_{t-j-1}-b_t\bigr)^2+\ell^2_t\Bigl]  \bigl| J_0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+0&lt;\beta &lt; 1\ ,\ 0 &lt; \delta_h &lt; 1\ ,\ \lambda &gt; 0
+\]</div>
+<p>Here the effective bliss point <span class="math notranslate nohighlight">\(b_t + \lambda (1 - \delta_h)
+\sum^\infty_{j=0} \delta^j_h\, c_{t-j-1}\)</span> shifts in response to a moving
+average of past consumption.</p>
+<p><strong>Initial Conditions</strong></p>
+<p>Preferences of this form require an initial condition for the geometric
+sum <span class="math notranslate nohighlight">\(\sum^\infty_{j=0} \delta_h^j c_{t - j-1}\)</span> that we specify as
+an initial condition for the ‘stock of household durables,’
+<span class="math notranslate nohighlight">\(h_{-1}\)</span>.</p>
+<p id="habit-persistence-1">Set</p>
+<div class="math notranslate nohighlight">
+\[
+h_t = \delta_h h_{t-1} + (1-\delta_h) c_t \quad ,\ 0 &lt; \delta_h &lt; 1
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+h_t = (1 - \delta_h) \sum^t_{j=0} \delta_h^j\, c_{t-j} + \delta^{t+1}_h\,
+h_{-1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+s_t = - \lambda h_{t-1} + c_t, \ \lambda &gt; 0
+\]</div>
+<p>To implement, set
+<span class="math notranslate nohighlight">\(\Lambda = -\lambda,\ \Pi = 1,\ \Delta_h = \delta_h,\ \Theta_h=1-\delta_h\)</span>.</p>
+<p><strong>Seasonal Habit Persistence</strong></p>
+<div class="math notranslate nohighlight">
+\[
+-\Bigl({1\over 2}\Bigr) \, E \sum^\infty_{t=0} \beta^t  \Bigl[\bigl(c_t - \lambda
+ (1-\delta_h) \sum^\infty_{j=0}\, \delta^{j}_h\, c_{t-4j-4}-b_t\bigr)^2+\ell^2_t\Bigr]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+0&lt;\beta &lt; 1\ ,\ 0 &lt; \delta_h &lt; 1\ ,\ \lambda &gt; 0
+\]</div>
+<p>Here the effective bliss point <span class="math notranslate nohighlight">\(b_t + \lambda (1 - \delta_h) \sum^\infty_{j=0} \delta^j_h\, c_{t-4j-4}\)</span> shifts in response to a
+moving average of past consumptions of the same quarter.</p>
+<p>To implement, set</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde h_t = \delta_h \tilde h_{t-4} + (1-\delta_h) c_t \quad ,\ 0 &lt; \delta_h &lt; 1
+\]</div>
+<p>This implies that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+h_t = \begin{bmatrix}\tilde h_t \\
+      \tilde h_{t-1}\\
+      \tilde h_{t-2}\\
+      \tilde  h_{t-3}\end{bmatrix}  =
+      \begin{bmatrix} 0 &amp; 0 &amp; 0 &amp; \delta_h \\
+                1 &amp; 0 &amp; 0 &amp; 0 \\
+                0 &amp; 1 &amp; 0 &amp; 0 \\
+                0 &amp; 0 &amp; 1 &amp; 0 \end{bmatrix}
+                \begin{bmatrix} \tilde h_{t-1} \\ \tilde h_{t-2} \\ \tilde h_{t-3} \\ \tilde h_{t-4} \end{bmatrix}
+                + \begin{bmatrix}(1 - \delta_h) \\ 0 \\ 0 \\ 0 \end{bmatrix} c_t
+\end{split}\]</div>
+<p>with consumption services</p>
+<div class="math notranslate nohighlight">
+\[
+s_t = - \begin{bmatrix}0 &amp; 0 &amp; 0 &amp; -\lambda\end{bmatrix}  h_{t-1} + c_t \quad , \ \lambda &gt; 0
+\]</div>
+<p><strong>Adjustment Costs</strong>.</p>
+<p>Recall</p>
+<div class="math notranslate nohighlight">
+\[
+-\Bigl({1 \over 2}\Bigr) E \sum^\infty_{t=0} \beta^t [(c_t - b_{1t})^2 +
+\lambda^2 (c_t - c_{t-1})^2 + \ell^2_t ] \mid J_0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+0 &lt; \beta &lt; 1 \quad, \ \lambda &gt; 0
+\]</div>
+<p>To capture adjustment costs, set</p>
+<div class="math notranslate nohighlight">
+\[
+h_t  = c_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+s_t = \begin{bmatrix} 0 \\ - \lambda \end{bmatrix} h_{t-1} +
+\begin{bmatrix} 1 \\ \lambda \end{bmatrix} c_t
+\end{split}\]</div>
+<p>so that</p>
+<div class="math notranslate nohighlight">
+\[
+s_{1t} = c_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+s_{2t} = \lambda (c_t - c_{t-1} )
+\]</div>
+<p>We set the first component <span class="math notranslate nohighlight">\(b_{1t}\)</span> of <span class="math notranslate nohighlight">\(b_t\)</span> to capture the
+stochastic bliss process and set the second component identically equal
+to zero.</p>
+<p>Thus, we set <span class="math notranslate nohighlight">\(\Delta_h = 0, \Theta_h = 1\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Lambda = \begin{bmatrix} 0 \\ -\lambda \end{bmatrix}\ ,\ \Pi =
+\begin{bmatrix} 1 \\ \lambda \end{bmatrix}
+\end{split}\]</div>
+<p><strong>Multiple Consumption Goods</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Lambda = \begin{bmatrix} 0\\0\end{bmatrix} \ \hbox { and } \ \Pi =
+\begin{bmatrix}\pi_1 &amp; 0 \\ \pi_2 &amp; \pi_3 \end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+-{1 \over 2} \beta^t (\Pi c_t - b_t)^\prime (\Pi c_t - b_t)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mu_t= - \beta^t [\Pi^\prime \Pi\, c_t - \Pi^\prime\, b_t]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+c_t = - (\Pi^\prime \Pi)^{-1} \beta^{-t} \mu_t + (\Pi^\prime \Pi)^{-1}
+\Pi^\prime b_t
+\]</div>
+<p>This is called the <strong>Frisch demand function</strong> for consumption.</p>
+<p>We can think of the vector <span class="math notranslate nohighlight">\(\mu_t\)</span> as playing the role of prices,
+up to a common factor, for all dates and states.</p>
+<p>The scale factor is
+determined by the choice of numeraire.</p>
+<p>Notions of <strong>substitutes and complements</strong> can be defined in terms of these
+Frisch demand functions.</p>
+<p>Two goods can be said to be <strong>substitutes</strong> if the
+cross-price effect is positive and to be <strong>complements</strong> if this effect is
+negative.</p>
+<p>Hence this classification is determined by the off-diagonal
+element of <span class="math notranslate nohighlight">\(-(\Pi^\prime \Pi)^{-1}\)</span>, which is equal to
+<span class="math notranslate nohighlight">\(\pi_2 \pi_3 /\det
+(\Pi^\prime \Pi)\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(\pi_2\)</span> and <span class="math notranslate nohighlight">\(\pi_3\)</span> have the same
+sign, the goods are substitutes.</p>
+<p>If they have opposite signs, the goods
+are complements.</p>
+<p>To summarize, our economic structure consists of the matrices that define the following components:</p>
+<p><strong>Information and shocks</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+z_{t+1} &amp;=A_{22} z_t + C_2 w_{t+1}
+\\  b_t &amp;= U_b z_t \\ d_t &amp;= U_d z_t
+\end{aligned}
+\end{split}\]</div>
+<p><strong>Production Technology</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\Phi_c c_t &amp;+ \Phi_g g_t + \Phi_i i_t = \Gamma k_{t-1} + d_t \\
+k_t &amp;=\Delta_k k_{t-1} + \Theta_k i_t \\ g_t \cdot g_t &amp;=\ell_t^2
+\end{aligned}
+\end{split}\]</div>
+<p><strong>Household Technology</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+s_t &amp;=
+\Lambda h_{t-1} + \Pi c_t \\ h_t &amp;= \Delta_h h_{t-1} + \Theta_h c_t
+\end{aligned}
+\end{split}\]</div>
+<p><strong>Preferences</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\Bigl( {1 \over 2}\Bigr)  E \sum_{t=0}^\infty \beta^t [ (s_t -
+b_t) \cdot ( s_t - b_t) + \ell_t^2 ] \bigl| J_0 , \ 0 &lt; \beta &lt; 1
+\]</div>
+<p><strong>Next steps:</strong> we move on to discuss two closely connected concepts</p>
+<ul class="simple">
+<li><p>A Planning Problem or Optimal Resource Allocation Problem</p></li>
+<li><p>Competitive Equilibrium</p></li>
+</ul>
+</div>
+<div class="section" id="optimal-resource-allocation">
+<h3><span class="section-number">18.1.15. </span>Optimal Resource Allocation<a class="headerlink" href="#optimal-resource-allocation" title="Permalink to this headline">¶</a></h3>
+<p>Imagine a planner who chooses sequences <span class="math notranslate nohighlight">\(\{c_t, i_t, g_t\}_{t=0}^\infty\)</span> to maximize</p>
+<div class="math notranslate nohighlight">
+\[
+-(1/2)E \sum_{t=0}^\infty \beta^t [ (s_t - b_t) \cdot (s_t - b_t) + g_t \cdot g_t ] \bigl| J_0
+\]</div>
+<p>subject to the constraints</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\Phi_c c_t &amp;+ \Phi_g \, g_t + \Phi_i i_t = \Gamma k_{t-1} + d_t,
+\\
+k_t &amp;= \Delta_k k_{t-1} + \Theta_k i_t , \\
+h_t &amp;= \Delta_h h_{t-1} + \Theta_h c_t , \\
+s_t &amp;=\Lambda h_{t-1} + \Pi c_t , \\
+  z _{t+1} &amp;= A_{22} z_t + C_2 w_{t+1} , \ b_t = U_b z_t,  \  \hbox{ and } \
+d_t = U_d z_t
+\end{aligned}
+\end{split}\]</div>
+<p>and initial conditions for <span class="math notranslate nohighlight">\(h_{-1}, k_{-1}\)</span>, and <span class="math notranslate nohighlight">\(z_0\)</span>.</p>
+<p>Throughout, we shall impose the following <strong>square summability</strong> conditions</p>
+<div class="math notranslate nohighlight">
+\[
+E \sum^\infty_{t=0} \beta^t h_t \cdot h_t \mid J_0 &lt; \infty\ \hbox { and }\
+E \sum^\infty_{t=0} \beta^t k_t \cdot k_t \mid J_0 &lt; \infty
+\]</div>
+<p>Define:</p>
+<div class="math notranslate nohighlight">
+\[
+L_0^2 = [ \{ y_t \}  : y_t \ \hbox{is a random
+variable in } \  J_t \ \hbox{ and } \  E \sum_{t=0}^\infty \beta^t
+y_t^2 \mid J_0 &lt; + \infty]
+\]</div>
+<p>Thus, we require that each component of <span class="math notranslate nohighlight">\(h_t\)</span> and each component of
+<span class="math notranslate nohighlight">\(k_t\)</span> belong to <span class="math notranslate nohighlight">\(L_0^2\)</span>.</p>
+<p>We shall compare and utilize two approaches to solving the planning problem</p>
+<ul class="simple">
+<li><p>Lagrangian formulation</p></li>
+<li><p>Dynamic programming</p></li>
+</ul>
+</div>
+<div class="section" id="lagrangian-formulation">
+<h3><span class="section-number">18.1.16. </span>Lagrangian Formulation<a class="headerlink" href="#lagrangian-formulation" title="Permalink to this headline">¶</a></h3>
+<p>Form the Lagrangian</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+{\mathcal L} &amp;= - E \sum_{t=0}^\infty \beta^t \biggl[
+\Bigl( {1 \over 2} \Bigr) [ (s_t - b_t) \cdot (s_t - b_t) + g_t
+\cdot g_t] \\ &amp;+   {\cal M}_t^{d \prime} \cdot ( \Phi _cc_t  +
+\Phi_gg_t + \Phi_ii_t - \Gamma k_{t-1} - d_t ) \\ &amp;+{\cal M}_t^{k
+\prime} \cdot (k_t - \Delta_k k_{t-1} - \Theta_k i_t ) \\ &amp;+ {\cal
+M}_t^{h \prime} \cdot (h_t - \Delta_h h_{t-1} - \Theta_h c_t) \\ &amp;+
+{\cal M}_t^{s \prime} \cdot (s_t - \Lambda h_{t-1} - \Pi c_t )
+\biggr] \Bigl| J_0
+\end{aligned}
+\end{split}\]</div>
+<p>The planner maximizes <span class="math notranslate nohighlight">\({\mathcal L}\)</span> with respect to the quantities <span class="math notranslate nohighlight">\(\{c_t, i_t, g_t\}_{t=0}^\infty\)</span>
+and minimizes with respect to the Lagrange multipliers <span class="math notranslate nohighlight">\({\cal M}_t^d, {\cal M}_t^k, {\cal M}_t^h, {\cal M}_t^s\)</span>.</p>
+<p>First-order necessary conditions for maximization with respect to
+<span class="math notranslate nohighlight">\(c_t, g_t,
+h_t, i_t, k_t\)</span>, and <span class="math notranslate nohighlight">\(s_t\)</span>, respectively, are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+-\Phi_c^\prime  {\cal M}_t^d &amp;+\Theta_h^\prime {\cal
+M}_t^h + \Pi^\prime {\cal M}_t^s = 0 , \\
+&amp;- g_t - \Phi_g^\prime  {\cal M}_t^d = 0 , \\
+-{\cal M}_t^h &amp;+ \beta E ( \Delta_h^\prime {\cal M}^h_{t+1} +
+\Lambda^\prime {\cal M}_{t+1}^s ) \mid J_t = 0 , \\
+&amp;- \Phi_i^\prime {\cal M}_t^d + \Theta_k^\prime {\cal M}_t^k = 0 , \\
+-{\cal M}_t^k &amp;+ \beta E ( \Delta_k^\prime {\cal M}^k_{t+1} + \Gamma^\prime
+{\cal M}_{t+1}^d) \mid J_t = 0 , \\
+&amp;- s_t + b_t - {\cal M}_t^s = 0
+\end{aligned}
+\end{split}\]</div>
+<p>for <span class="math notranslate nohighlight">\(t=0,1, \ldots\)</span>.</p>
+<p>In addition, we have the complementary
+slackness conditions (these recover the original transition equations)
+and also transversality conditions</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\lim_{t \to \infty}&amp; \beta^t  E [ {\cal M}_t^{k \prime} k_t ]
+\mid J_0 = 0  \\
+\lim_{t \to \infty}&amp; \beta^t   E [ {\cal M}_t^{h \prime} h_t ]
+\mid J_0 = 0
+\end{aligned}
+\end{split}\]</div>
+<p>The system formed by the FONCs and the transition equations can be  handed over to Python.</p>
+<p>Python will solve the planning problem for fixed parameter values.</p>
+<p>Here are the <strong>Python  Ready Equations</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+-\Phi_c^\prime  {\cal M}_t^d &amp;+\Theta_h^\prime {\cal
+M}_t^h + \Pi^\prime {\cal M}_t^s = 0 , \\
+&amp;- g_t - \Phi_g^\prime  {\cal M}_t^d = 0 , \\
+- {\cal M}_t^h &amp;+ \beta E ( \Delta_h^\prime {\cal M}^h_{t+1} +
+\Lambda^\prime {\cal M}_{t+1}^s ) \mid J_t = 0 , \\
+&amp;- \Phi_i^\prime {\cal M}_t^d + \Theta_k^\prime {\cal M}_t^k = 0 , \\
+-{\cal M}_t^k &amp;+ \beta E ( \Delta_k^\prime {\cal M}^k_{t+1} + \Gamma^\prime
+{\cal M}_{t+1}^d) \mid J_t = 0 , \\
+&amp;- s_t + b_t - {\cal M}_t^s = 0 \\
+\Phi_c c_t &amp;+ \Phi_g \, g_t + \Phi_i i_t = \Gamma k_{t-1} + d_t,
+\\
+k_t &amp;= \Delta_k k_{t-1} + \Theta_k i_t , \\
+h_t &amp;= \Delta_h h_{t-1} + \Theta_h c_t , \\
+s_t &amp;=\Lambda h_{t-1} + \Pi c_t , \\
+z _{t+1} &amp;= A_{22} z_t + C_2 w_{t+1} , \ b_t = U_b z_t,  \  \hbox{ and } \
+d_t = U_d z_t
+\end{aligned}
+\end{split}\]</div>
+<p>The Lagrange multipliers or <strong>shadow prices</strong> satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+{\cal M}_t^s = b_t - s_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+{\cal M}_t^h = E \biggl[ \sum_{\tau =1}^\infty \beta^\tau
+(\Delta_h^\prime)^{\tau - 1} \Lambda^\prime {\cal M}_{t+ \tau}^s
+\mid J_t\biggr]
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\cal M}_t^d = \begin{bmatrix}\Phi_c^\prime\\ \Phi_g^\prime\\\end{bmatrix}^{-1}\
+\begin{bmatrix} \Theta_h^\prime {\cal M}_t^h  + \Pi^\prime {\cal M}_t^s \\
+-g_t \end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+{\cal M}_t^k = E \biggl[\sum _{\tau=1}^\infty \beta^\tau (\Delta_k^\prime)^{\tau-1}
+\Gamma^\prime {\cal M}_{t+ \tau}^d \mid J_t\biggr]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+{\cal M}_t^i =
+\Theta _k^\prime {\cal M}_t^k
+\]</div>
+<p>Although it is possible to use matrix operator methods to solve the above <strong>Python ready equations</strong>, that is not
+the approach we’ll use.</p>
+<p>Instead, we’ll use dynamic programming to get recursive representations for both quantities and shadow prices.</p>
+</div>
+<div class="section" id="dynamic-programming">
+<h3><span class="section-number">18.1.17. </span>Dynamic Programming<a class="headerlink" href="#dynamic-programming" title="Permalink to this headline">¶</a></h3>
+<p>Dynamic Programming  always starts with the word <strong>let</strong>.</p>
+<p>Thus, let <span class="math notranslate nohighlight">\(V(x_0)\)</span> be the optimal value function for the  planning problem as a function of the initial state vector <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
+<p>(Thus, in essence, dynamic programming amounts to an application of a <strong>guess and verify</strong> method in which we begin with a guess about the answer
+to the problem we want to solve. That’s why we start with <strong>let</strong> <span class="math notranslate nohighlight">\(V(x_0)\)</span> be the (value of the) answer to the problem, then establish and
+verify a bunch of conditions <span class="math notranslate nohighlight">\(V(x_0)\)</span> has to satisfy if indeed it is the answer)</p>
+<p>The optimal value function <span class="math notranslate nohighlight">\(V(x)\)</span> satisfies the <strong>Bellman equation</strong></p>
+<div class="math notranslate nohighlight">
+\[
+V(x_0) = \max_{c_0, i_0, g_0} [ - .5 [ (s_0 - b_0) \cdot (s_0 - b_0) + g_0 \cdot g_0 ] + \beta  E V
+(x_1) ]
+\]</div>
+<p>subject to the linear constraints</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\Phi _cc_0 &amp;+ \Phi_g g_0 + \Phi_ii_0 = \Gamma k_{-1} + d_0 ,\\
+k_0 &amp;= \Delta_k k_{-1} + \Theta_k i_0 , \\
+h_0 &amp;= \Delta_h h_{-1} + \Theta_h c_0 , \\
+s_0 &amp;= \Lambda h_{-1} + \Pi c_0 , \\
+z_1 &amp;= A_{22} z_0 + C_2 w_1,\ b_0 = U_b z_0 \ \hbox{ and }\  d_0 =
+U_d z_0
+\end{aligned}
+\end{split}\]</div>
+<p>Because this is a  linear-quadratic dynamic programming problem, it turns out that the value function has the form</p>
+<div class="math notranslate nohighlight">
+\[
+V(x) = x' P x + \rho
+\]</div>
+<p id="dynamic-programming-1">Thus, we want to solve  an instance of the following linear-quadratic dynamic programming problem:</p>
+<p>Choose a contingency plan for <span class="math notranslate nohighlight">\(\{x_{t+1}, u_t \}_{t=0}^\infty\)</span> to
+maximize</p>
+<div class="math notranslate nohighlight">
+\[
+- E \sum_{t=0}^\infty  \beta^t [ x_t^\prime  R x_t + u_t^\prime  Q
+u_t + 2 u_t^\prime  W' x_t ], \ 0 &lt; \beta &lt; 1
+\]</div>
+<p>subject to</p>
+<div class="math notranslate nohighlight">
+\[
+x_{t+1} = A x_t + B u_t + C w_{t+1}, \ t \geq 0
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(x_0\)</span> is given; <span class="math notranslate nohighlight">\(x_t\)</span> is an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector
+of state variables, and <span class="math notranslate nohighlight">\(u_t\)</span> is a <span class="math notranslate nohighlight">\(k \times 1\)</span> vector of
+control variables.</p>
+<p>We assume <span class="math notranslate nohighlight">\(w_{t+1}\)</span> is a martingale difference
+sequence with <span class="math notranslate nohighlight">\(E w_t w_t^\prime = I\)</span>, and that <span class="math notranslate nohighlight">\(C\)</span> is a
+matrix conformable to <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(w\)</span>.</p>
+<p>The optimal value function <span class="math notranslate nohighlight">\(V(x)\)</span> satisfies the Bellman equation</p>
+<div class="math notranslate nohighlight">
+\[
+V (x_t) = \max_{u_t} \Bigl\{-( x_t^\prime R x_t + u_t^\prime Q u_t + 2
+u_t^\prime W x_t) + \beta E_t V (x_{t+1}) \Bigr\}
+\]</div>
+<p>where maximization is subject to</p>
+<div class="math notranslate nohighlight">
+\[
+x_{t+1} = A x_t + B u_t + C w_{t+1}, \ t \geq 0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+V(x_t) = - x_t^\prime P x_t - \rho
+\]</div>
+<p><span class="math notranslate nohighlight">\(P\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+P =  R + \beta A^\prime P A - (\beta A^\prime P
+B + W)   (Q + \beta B^\prime P B)^{-1} (\beta B^\prime P
+A + W')
+\]</div>
+<p>This equation in <span class="math notranslate nohighlight">\(P\)</span> is called the <strong>algebraic matrix Riccati
+equation</strong>.</p>
+<p>The optimal decision rule is <span class="math notranslate nohighlight">\(u_t = - F x_t\)</span>, where</p>
+<div class="math notranslate nohighlight">
+\[
+F = (Q + \beta B^\prime P B)^{-1} (\beta B^\prime P A +
+W')
+\]</div>
+<p>The optimum decision rule for <span class="math notranslate nohighlight">\(u_t\)</span> is independent of the
+parameters <span class="math notranslate nohighlight">\(C\)</span>, and so of the noise statistics.</p>
+<p>Iterating on the Bellman operator leads to</p>
+<div class="math notranslate nohighlight">
+\[
+V_{j+1} (x_t) = \max_{u_t} \Bigl\{-( x_t^\prime R x_t + u_t^\prime Q
+u_t + 2 u_t^\prime W x_t) + \beta E_t V_j (x_{t+1}) \Bigr\}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+V_j (x_t) =- x_t^\prime P_{j} x_t - \rho_{j}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(P_{j}\)</span> and <span class="math notranslate nohighlight">\(\rho_{j}\)</span> satisfy the equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+P_{j+1} &amp;= R + \beta A^\prime P_{j} A - (\beta
+A^\prime P_{j} B + W)  (Q + \beta B^\prime P_{j} B)^{-1} (\beta B^\prime P_{j}
+A + W')\\  \rho_{j+1} &amp;=\beta \rho_{j} + \beta \ {\rm trace} \ P_{j} C C^\prime
+\end{aligned}
+\end{split}\]</div>
+<p>We can now state the planning problem as a dynamic programming problem</p>
+<div class="math notranslate nohighlight">
+\[
+\max_{ \{u_t, x_{t+1}\} }\ - E \sum_{t=0}^\infty \beta^t [x_t^\prime
+Rx_t + u_t^\prime Q u_t + 2u_t^\prime W 'x_t ] , \quad 0 &lt; \beta &lt; 1
+\]</div>
+<p>where  maximization is subject to</p>
+<div class="math notranslate nohighlight">
+\[
+x_{t+1} = Ax_t + B u_t + Cw_{t+1} , \ t \geq 0
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x_t = \begin{bmatrix} h_{t-1} \\ k_{t-1} \\ z_t \end{bmatrix} , \qquad
+u_t = i_t
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+A &amp;=\begin{bmatrix} \Delta_h &amp; \Theta_h U_c [ \Phi_c \ \
+\Phi_g]^{-1} \Gamma &amp; \Theta_h U_c [ \Phi_c \ \ \Phi_g]^{-1}  U_d \\ 0
+&amp; \Delta_k &amp; 0 \\ 0 &amp; 0 &amp; A_{22} \\  \end{bmatrix} \\
+B &amp;= \begin{bmatrix} - \Theta_h U_c [ \Phi_c \ \ \Phi_g]^{-1} \Phi_i
+\\ \Theta_k \\ 0 \end{bmatrix}  \ ,\ C = \begin{bmatrix} 0 \\ 0 \\
+C_2 \end{bmatrix}
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} x_t \\ u_t  \end{bmatrix}^\prime S \begin{bmatrix} x_t
+\\ u_t \end{bmatrix} = \begin{bmatrix} x_t \\ u_t \end{bmatrix}^\prime\ \
+\begin{bmatrix} R &amp; W \\ W' &amp; Q  \end{bmatrix}\ \ \begin{bmatrix} x_t
+\\ u_t \end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+S = (G^\prime G + H^\prime H) / 2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+H = [\Lambda \ \vdots \ \Pi U_c [ \Phi_c \ \ \Phi_g]^{-1} \Gamma  \
+\vdots \ \Pi U_c [ \Phi_c \ \ \Phi_g]^{-1} U_d - U_b  \ \vdots \
+ - \Pi U_c [\Phi_c \ \ \Phi_g]^{-1} \Phi_i]
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+G =
+U_g [ \Phi_c \ \ \Phi_g]^{-1} [0 \ \vdots \ \Gamma \ \vdots \ U_d \
+\vdots \ - \Phi_i] .
+\]</div>
+<p><strong>Lagrange multipliers as gradient of value function</strong></p>
+<p>A useful fact is that Lagrange multipliers equal gradients of the  planner’s value function</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+{\mathcal M}_t^k &amp;= M_k x_t\ \hbox{ and }\ {\cal M}_t^h = M_h
+x_t \ \hbox{ where } \\
+M_k &amp;= 2 \beta [ 0 \ I \ 0 ] P A^o  \\
+M_h &amp;= 2 \beta [ I \ 0 \ 0 ] P A^o
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+{\mathcal M}_t^s = M_s x_t \ \hbox{ where }\ M_s = (S_b -
+S_s)\ \hbox{ and } \ S_b = [ 0 \ 0 \ U_b ]
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+{\mathcal M}_t^d = M_d x_t\ \hbox{ where }\ M_d = \begin{bmatrix}
+\Phi_c^\prime \\ \Phi_g^\prime \\ \end{bmatrix} ^{-1}
+\begin{bmatrix}\Theta_h^\prime M_h + \Pi^\prime M_s \\ -S_g \end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+{\mathcal M}_t^c = M_c x_t\ \hbox{ where }\ M_c = \Theta_h^\prime
+M_h + \Pi^\prime M_s
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+{\mathcal M}_t^i = M_i x_t\ \hbox{ where } \ M_i = \Theta_k^\prime M_k
+\]</div>
+<p>We will use this fact and these equations to compute competitive equilibrium prices.</p>
+</div>
+<div class="section" id="other-mathematical-infrastructure">
+<h3><span class="section-number">18.1.18. </span>Other mathematical infrastructure<a class="headerlink" href="#other-mathematical-infrastructure" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start with describing the <strong>commodity space</strong> and <strong>pricing functional</strong> for our competitive equilibrium.</p>
+<p>For the  <strong>commodity space</strong>, we use</p>
+<div class="math notranslate nohighlight">
+\[
+L_0^2 = [ \{ y_t \}  : y_t \ \hbox{is a random
+variable in } \  J_t \ \hbox{ and } \  E \sum_{t=0}^\infty \beta^t
+y_t^2 \mid J_0 &lt; + \infty]
+\]</div>
+<p>For <strong>pricing functionals</strong>, we express  values as inner products</p>
+<div class="math notranslate nohighlight">
+\[
+\pi (c) = E \sum_{t=0}^\infty \beta^t p_t^0 \cdot c_t \mid J_0
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(p_t^0\)</span> belongs to <span class="math notranslate nohighlight">\(L_0^2\)</span>.</p>
+<p>With these objects in our toolkit, we move on to state the
+problem of a <strong>Representative Household in a competitive equilibrium</strong>.</p>
+</div>
+<div class="section" id="representative-household">
+<h3><span class="section-number">18.1.19. </span>Representative Household<a class="headerlink" href="#representative-household" title="Permalink to this headline">¶</a></h3>
+<p>The representative household owns endowment process and initial stocks of <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(k\)</span> and
+chooses stochastic processes for <span class="math notranslate nohighlight">\(\{c_t,\, s_t,\, h_t,\,
+\ell_t\}^\infty_{t=0}\)</span>, each element of which is in <span class="math notranslate nohighlight">\(L^2_0\)</span>, to
+maximize</p>
+<div class="math notranslate nohighlight">
+\[
+-\ {1 \over 2}\ E_0 \sum^\infty_{t=0} \beta^t\, \Bigl[(s_t-b_t) \cdot (s_t -
+b_t) + \ell_t^2\Bigr]
+\]</div>
+<p>subject to</p>
+<div class="math notranslate nohighlight">
+\[
+E\sum^\infty_{t=0} \beta^t\, p^0_t \cdot c_t \mid J_0 = E \sum^\infty_{t=0}
+\beta^t\, (w^0_t \ell_t + \alpha^0_t \cdot d_t) \mid J_0 +
+v_0 \cdot k_{-1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+s_t = \Lambda h_{t-1} + \Pi c_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+h_t = \Delta_h h_{t-1} + \Theta_h c_t, \quad h_{-1}, k_{-1}\
+\hbox{ given}
+\]</div>
+<p>We now describe the problems faced by two types of firms called type I and type II.</p>
+</div>
+<div class="section" id="type-i-firm">
+<h3><span class="section-number">18.1.20. </span>Type I Firm<a class="headerlink" href="#type-i-firm" title="Permalink to this headline">¶</a></h3>
+<p>A type I firm rents capital and labor and endowments and produces
+<span class="math notranslate nohighlight">\(c_t, i_t\)</span>.</p>
+<p>It chooses stochastic processes for
+<span class="math notranslate nohighlight">\(\{c_t, i_t, k_t, \ell_t,
+g_t, d_t\}\)</span>, each element of which is in <span class="math notranslate nohighlight">\(L^2_0\)</span>, to maximize</p>
+<div class="math notranslate nohighlight">
+\[
+E_0\, \sum^\infty_{t=0} \beta^t\, (p^0_t \cdot c_t + q^0_t \cdot i_t - r^0_t
+\cdot k_{t-1} - w^0_t \ell_t - \alpha^0_t \cdot d_t)
+\]</div>
+<p>subject to</p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_c\, c_t + \Phi_g\, g_t + \Phi_i\, i_t = \Gamma k_{t-1} + d_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+-\, \ell_t^2 + g_t \cdot g_t = 0
+\]</div>
+</div>
+<div class="section" id="type-ii-firm">
+<h3><span class="section-number">18.1.21. </span>Type II Firm<a class="headerlink" href="#type-ii-firm" title="Permalink to this headline">¶</a></h3>
+<p>A firm of type II  acquires capital via investment and then rents
+stocks of capital to the <span class="math notranslate nohighlight">\(c,i\)</span>-producing type I firm.</p>
+<p>A type II firm is a price taker facing the vector <span class="math notranslate nohighlight">\(v_0\)</span> and the stochastic
+processes <span class="math notranslate nohighlight">\(\{r^0_t, q^0_t\}\)</span>.</p>
+<p>The firm chooses <span class="math notranslate nohighlight">\(k_{-1}\)</span> and
+stochastic processes for <span class="math notranslate nohighlight">\(\{k_t, i_t\}^\infty_{t=0}\)</span> to maximize</p>
+<div class="math notranslate nohighlight">
+\[
+E \sum^\infty_{t=0} \beta^t (r_t^0 \cdot k_{t-1} - q^0_t \cdot i_t) \mid
+J_0 - v_0 \cdot k_{-1}
+\]</div>
+<p>subject to</p>
+<div class="math notranslate nohighlight">
+\[
+k_t = \Delta_k k_{t-1} + \Theta_k i_t
+\]</div>
+</div>
+<div class="section" id="competitive-equilibrium-definition">
+<h3><span class="section-number">18.1.22. </span>Competitive Equilibrium:  Definition<a class="headerlink" href="#competitive-equilibrium-definition" title="Permalink to this headline">¶</a></h3>
+<p>We can now state the following.</p>
+<p><strong>Definition:</strong> A competitive equilibrium is a price system
+<span class="math notranslate nohighlight">\([v_0, \{p^0_t, w^0_t, \alpha^0_t, q^0_t, r^0_t\}^\infty_{t=0}]\)</span>
+and an allocation <span class="math notranslate nohighlight">\(\{c_t, i_t, k_t, h_t, g_t, d_t\}^\infty_{t=0}\)</span>
+that satisfy the following conditions:</p>
+<ul class="simple">
+<li><p>Each component of the price system and the allocation resides in the space <span class="math notranslate nohighlight">\(L^2_0\)</span>.</p></li>
+<li><p>Given the price system and given <span class="math notranslate nohighlight">\(h_{-1},\, k_{-1}\)</span>, the allocation solves the representative household’s problem and
+the problems of the two types of firms.</p></li>
+</ul>
+<p>Versions of the two classical welfare theorems prevail under our assumptions.</p>
+<p>We exploit that fact in our algorithm for computing a competitive equilibrium.</p>
+<p><strong>Step 1:</strong> Solve the planning problem by using dynamic programming.</p>
+<p>The allocation (i.e., <strong>quantities</strong>) that solve the planning problem <strong>are</strong> the
+competitive equilibrium quantities.</p>
+<p><strong>Step 2:</strong> use the following formulas to compute the <strong>equilibrium price system</strong></p>
+<div class="math notranslate nohighlight">
+\[
+p^0_t = \bigl[\Pi^\prime {\cal M}^s_t + \Theta^\prime_h {\cal M}^h_t\bigr]/
+\mu^w_0 = {\cal M}^c_t / \mu^w_0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+w^0_t = \mid S_g x_t \mid / \mu^w_0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+r^0_t = \Gamma^\prime {\cal M}^d_t / \mu^w_0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+q^0_t = \Theta^\prime_k {\cal M}^k_t / \mu^w_0 = {\cal M}^i_t /
+\mu^w_0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\alpha^0_t =   {\cal M}^d_t / \mu^w_0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+v_0 = \Gamma^\prime {\cal M}^d_0 / \mu^w_0 + \Delta^\prime_k
+{\cal M}^k_0 / \mu^w_0
+\]</div>
+<p><strong>Verification:</strong> With this price system, values can be assigned to the Lagrange
+multipliers for each of our three classes of agents that cause all
+first-order necessary conditions to be satisfied at these prices and at
+the quantities associated with the optimum of the planning problem.</p>
+</div>
+<div class="section" id="asset-pricing">
+<h3><span class="section-number">18.1.23. </span>Asset pricing<a class="headerlink" href="#asset-pricing" title="Permalink to this headline">¶</a></h3>
+<p>An important use of an equilibrium pricing system is to do asset pricing.</p>
+<p>Thus, imagine that we are presented a dividend stream: <span class="math notranslate nohighlight">\(\{y_t\} \in L^2_0\)</span>
+and want to compute the value of a perpetual claim to this stream.</p>
+<p>To value this asset we simply take <strong>price times quantity</strong> and add to get
+an asset value: <span class="math notranslate nohighlight">\(a_0 =  E\, \sum_{t=0}^\infty\, \beta^t\ p_t^0 \cdot y_t \mid J_0\)</span>.</p>
+<p>To compute <span class="math notranslate nohighlight">\(ao\)</span> we proceed as follows.</p>
+<p>We let</p>
+<div class="math notranslate nohighlight">
+\[
+y_t = U_a\, x_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+a_0 = E \sum^\infty_{t=0}\, \beta^t\, x^\prime_t\, Z_a x_t \mid J_0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+Z_a = U^\prime_a M_c / \mu^w_0
+\]</div>
+<p>We have the following convenient formulas:</p>
+<div class="math notranslate nohighlight">
+\[
+a_0 = x^\prime_0\, \mu_a\, x_0 + \sigma_a
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mu_a = \sum^\infty_{\tau=0}\, \beta^\tau\, (A^{o \prime})^\tau\ Z_a\,
+A^{o \tau}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sigma_a = {\beta \over 1 - \beta}\ {\rm trace } \left( Z_a \sum^\infty_{\tau = 0}
+\,\beta^\tau\, (A^o)^\tau\, C C^\prime (A^{o \prime})^\tau \right)
+\]</div>
+</div>
+<div class="section" id="re-opening-markets">
+<h3><span class="section-number">18.1.24. </span>Re-Opening Markets<a class="headerlink" href="#re-opening-markets" title="Permalink to this headline">¶</a></h3>
+<p>We have assumed that all trading occurs once-and-for-all at time <span class="math notranslate nohighlight">\(t=0\)</span>.</p>
+<p>If we were to <strong>re-open markets</strong> at some time <span class="math notranslate nohighlight">\(t &gt;0\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> wealth levels implicitly defined by
+time <span class="math notranslate nohighlight">\(0\)</span> trades, we would obtain the same equilibrium allocation (i.e., quantities) and the following time <span class="math notranslate nohighlight">\(t\)</span>
+price system</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+L^2_t &amp;= [\{y_s\}^\infty_{s=t} : \ y_s \ \hbox{ is a random variable
+in }\ J_s\ \hbox{ for }\ s \geq t \\
+&amp;\hbox {and } E\, \sum^\infty_{s=t}\, \beta^{s-t}\ y^2_s \mid J_t &lt; + \infty] .
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+p^t_s = M_c x_s / [\bar e_j M_c x_t ], \qquad s \geq t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+w^t_s = \mid S_g x_s \vert / [\bar e_j M_c x_t], \ \ s \geq t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+r^t_s = \Gamma^\prime M_d x_s / [\bar e_j M_c x_t],\ \ s \geq t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+q^t_s = M_i x_s / [\bar e_j \, M_c x_t], \qquad s \geq t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\alpha^t_s =   M_d x_s / [\bar e_j \, M_c x_t] , \ \ s \geq t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+v_t = [\Gamma^\prime M_d + \Delta^\prime_k M_k] x_t / \, [\bar e_j \, M_c x_t]
+\]</div>
+</div>
+</div>
+<div class="section" id="econometrics">
+<h2><a class="toc-backref" href="#id16"><span class="section-number">18.2. </span>Econometrics</a><a class="headerlink" href="#econometrics" title="Permalink to this headline">¶</a></h2>
+<p>Up to now, we have described how to solve the <strong>direct problem</strong> that maps model parameters into an (equilibrium) stochastic process
+of prices and quantities.</p>
+<p>Recall the <strong>inverse problem</strong> of inferring model parameters from a single realization of a time series of some of the prices and quantities.</p>
+<p>Another name for the inverse problem is <strong>econometrics</strong>.</p>
+<p>An advantage of the <span id="id8">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> structure is that it comes with a self-contained theory of econometrics.</p>
+<p>It is really just a tale of two state-space representations.</p>
+<p>Here they are:</p>
+<p><strong>Original State-Space Representation:</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+x_{t+1} &amp;= A^o x_t + Cw_{t+1} \\
+y_t &amp; =  Gx_t + v_t
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(v_t\)</span> is a martingale difference sequence of measurement
+errors that satisfies <span class="math notranslate nohighlight">\(Ev_t
+v_t' = R, E w_{t+1} v_s' = 0\)</span> for all <span class="math notranslate nohighlight">\(t+1 \geq s\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+x_0 \sim {\mathcal N}(\hat x_0,\Sigma_0)
+\]</div>
+<p><strong>Innovations Representation:</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\hat x_{t+1} &amp;=A^o \hat x_t + K_t a_t \\
+y_t &amp;= G \hat x_t + a_t,
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(a_t = y_t - E[y_t | y^{t-1}], E a_t a_t^\prime \equiv \Omega_t =  G \Sigma_t G^\prime + R\)</span>.</p>
+<p id="statistical-representations-1">Compare numbers of shocks in the two representations:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n_w + n_y\)</span> versus  <span class="math notranslate nohighlight">\(n_y\)</span></p></li>
+</ul>
+<p>Compare spaces spanned</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H(y^t) \subset H(w^t,v^t)\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(H(y^t) = H(a^t)\)</span></p></li>
+</ul>
+<p><strong>Kalman Filter:</strong>.</p>
+<p>Kalman gain:</p>
+<div class="math notranslate nohighlight">
+\[
+K_t = A^o \Sigma_t G^\prime (G \Sigma_t G^\prime + R)^{-1}
+\]</div>
+<p>Riccati Difference Equation:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\Sigma_{t+1} &amp;= A^o \Sigma_t A^{o \prime} + CC^\prime \\
+&amp;- A^o \Sigma_t G^\prime (G \Sigma_t G^\prime + R)^{-1} G \Sigma_t A^{o \prime}
+\end{aligned}
+\end{split}\]</div>
+<p><strong>Innovations Representation as Whitener</strong></p>
+<p>Whitening Filter:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+a_t &amp;=y_t - G \hat x_t \\
+\hat x_{t+1} &amp;=  A^o \hat x_t + K_t  a_t
+\end{aligned}
+\end{split}\]</div>
+<p>can be used recursively to construct a record of innovations
+<span class="math notranslate nohighlight">\(\{ a_t \}^T_{t=0}\)</span> from an <span class="math notranslate nohighlight">\((\hat x_0, \Sigma_0)\)</span> and a
+record of observations <span class="math notranslate nohighlight">\(\{ y_t \}^T_{t=0}\)</span>.</p>
+<p><strong>Limiting Time-Invariant Innovations Representation</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\Sigma &amp;= A^o \Sigma A^{o \prime} + CC^\prime \\
+&amp;- A^o \Sigma G^\prime (G \Sigma G^\prime + R)^{-1} G \Sigma A^{o \prime} \\
+K &amp;= A^o \Sigma_t G^\prime (G \Sigma G^\prime + R)^{-1}
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\hat x_{t+1} &amp;= A^o \hat x_t + K a_t \\
+y_t &amp;= G \hat x_t + a_t
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E a_t a_t^\prime \equiv \Omega =  G \Sigma G^\prime + R\)</span>.</p>
+<div class="section" id="factorization-of-likelihood-function">
+<h3><span class="section-number">18.2.1. </span>Factorization of Likelihood Function<a class="headerlink" href="#factorization-of-likelihood-function" title="Permalink to this headline">¶</a></h3>
+<p>Sample of observations <span class="math notranslate nohighlight">\(\{y_s\}_{s=0}^T\)</span> on a
+<span class="math notranslate nohighlight">\((n_y \times 1)\)</span> vector.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+f(y_T, y_{T-1}, \ldots, y_0 )&amp;=
+   f_T(y_T \vert y_{T-1}, \ldots, y_0) f_{T-1}(y_{T-1} \vert
+   y_{T-2}, \ldots, y_0) \cdots   f_1(y_1 \vert y_0)  f_0(y_0 )  \\
+&amp;= g_T(a_T) g_{T-1} (a_{T-1}) \ldots g_1(a_1) f_0(y_0).
+\end{aligned}
+\end{split}\]</div>
+<p>Gaussian Log-Likelihood:</p>
+<div class="math notranslate nohighlight">
+\[
+-.5 \sum_{t=0}^T \biggl\{ n_y \ln (2 \pi ) + \ln \vert \Omega _t \vert
+      + a_t' \Omega_t^{-1} a_t \biggr\}
+\]</div>
+</div>
+<div class="section" id="covariance-generating-functions">
+<h3><span class="section-number">18.2.2. </span>Covariance Generating Functions<a class="headerlink" href="#covariance-generating-functions" title="Permalink to this headline">¶</a></h3>
+<p>Autocovariance: <span class="math notranslate nohighlight">\(C_x(\tau) = E x_t x_{t-\tau}'\)</span>.</p>
+<p>Generating Function:
+<span class="math notranslate nohighlight">\(S_x(z) = \sum_{\tau = -\infty}^\infty C_x(\tau) z^\tau, z \in C\)</span>.</p>
+</div>
+<div class="section" id="spectral-factorization-identity">
+<h3><span class="section-number">18.2.3. </span>Spectral Factorization Identity<a class="headerlink" href="#spectral-factorization-identity" title="Permalink to this headline">¶</a></h3>
+<p>Original state-space representation has too many shocks and implies:</p>
+<div class="math notranslate nohighlight">
+\[
+S_y(z) = G (zI - A^o)^{-1} C C^\prime (z^{-1} I - (A^o)^\prime)^{-1}
+G^\prime + R
+\]</div>
+<p>Innovations representation has as many shocks as dimension of
+<span class="math notranslate nohighlight">\(y_t\)</span> and implies</p>
+<div class="math notranslate nohighlight">
+\[
+S_y(z) = [G(zI-A^o)^{-1}K +I] [G \Sigma G^\prime + R]
+[K^\prime (z^{-1} I -A^{o\prime})^{-1} G^\prime + I]
+\]</div>
+<p>Equating these two leads to:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ &amp; G (zI -  A^o)^{-1} C C^\prime (z^{-1} I - A^{o\prime})^{-1} G^\prime + R = \\
+&amp; [G(zI-A^o)^{-1}K +I] [G \Sigma G^\prime + R] [K'(z^{-1} I -A^{o\prime})^{-1}
+G^\prime + I] .
+\end{aligned}
+\end{split}\]</div>
+<p><strong>Key Insight:</strong> The zeros of the polynomial
+<span class="math notranslate nohighlight">\(\det [G(zI-A^o)^{-1}K +I]\)</span> all lie inside the unit circle, which
+means that <span class="math notranslate nohighlight">\(a_t\)</span> lies in the space spanned by square summable
+linear combinations of <span class="math notranslate nohighlight">\(y^t\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+H(a^t) = H(y^t)
+\]</div>
+<p><strong>Key Property:</strong> Invertibility</p>
+</div>
+<div class="section" id="wold-and-vector-autoregressive-representations">
+<h3><span class="section-number">18.2.4. </span>Wold and Vector Autoregressive Representations<a class="headerlink" href="#wold-and-vector-autoregressive-representations" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start with some lag operator arithmetic.</p>
+<p>The lag operator <span class="math notranslate nohighlight">\(L\)</span> and the inverse lag operator  <span class="math notranslate nohighlight">\(L^{-1}\)</span> each map an infinite sequence into an infinite sequence according to the
+transformation rules</p>
+<div class="math notranslate nohighlight">
+\[
+L x_t \equiv x_{t-1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+L^{-1} x_t \equiv x_{t+1}
+\]</div>
+<p>A <strong>Wold moving average representation</strong>  for <span class="math notranslate nohighlight">\(\{y_t\}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+y_t = [ G(I-A^oL)^{-1}KL + I] a_t
+\]</div>
+<p>Applying the inverse of the operator on the right side and using</p>
+<div class="math notranslate nohighlight">
+\[
+[G(I-A^oL)^{-1}KL+I]^{-1} = I - G[I - (A^o-KG)L]^{-1}KL
+\]</div>
+<p>gives the <strong>vector autoregressive representation</strong></p>
+<div class="math notranslate nohighlight">
+\[
+y_t = \sum_{j=1}^\infty G (A^o -KG)^{j-1} K y_{t-j} + a_t
+\]</div>
+</div>
+</div>
+<div class="section" id="dynamic-demand-curves-and-canonical-household-technologies">
+<span id="wold-and-vector-autoregressive-representations-1"></span><h2><a class="toc-backref" href="#id17"><span class="section-number">18.3. </span>Dynamic Demand Curves and Canonical Household Technologies</a><a class="headerlink" href="#dynamic-demand-curves-and-canonical-household-technologies" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="canonical-household-technologies">
+<h3><span class="section-number">18.3.1. </span>Canonical Household Technologies<a class="headerlink" href="#canonical-household-technologies" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+h_t &amp;=\Delta_h h_{t-1} + \Theta_h  c_t \\
+             s_t &amp;= \Lambda h_{t-1} + \Pi c_t  \\
+             b_t  &amp;=U_b z_t
+\end{aligned}
+\end{split}\]</div>
+<p><strong>Definition:</strong> A household service technology
+<span class="math notranslate nohighlight">\((\Delta_h, \Theta_h, \Pi,\Lambda, U_b)\)</span> is said to be <strong>canonical</strong>
+if</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\color{blue}{\Pi}\)</span> is nonsingular, and</p></li>
+<li><p>the absolute values of the eigenvalues of <span class="math notranslate nohighlight">\(\color{blue}{(\Delta_h - \Theta_h \Pi^{-1}\Lambda)}\)</span> are strictly less than <span class="math notranslate nohighlight">\(1/\sqrt\beta\)</span>.</p></li>
+</ul>
+<p><strong>Key invertibility property:</strong> A canonical household service
+technology maps a service process <span class="math notranslate nohighlight">\(\{s_t\}\)</span> in <span class="math notranslate nohighlight">\(L_0^2\)</span>
+into a corresponding consumption process <span class="math notranslate nohighlight">\(\{c_t\}\)</span> for which the
+implied household capital stock process <span class="math notranslate nohighlight">\(\{h_t\}\)</span> is also in
+<span class="math notranslate nohighlight">\(L^2_0\)</span>.</p>
+<p>An inverse household technology:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+c_t &amp;= - \Pi^{-1} \Lambda h_{t-1} + \Pi^{-1} s_t\\
+h_t &amp;= (\Delta_h - \Theta_h\Pi^{-1} \Lambda) h_{t-1} + \Theta_h \Pi^{-1}
+s_t
+\end{aligned}
+\end{split}\]</div>
+<p>The restriction  on the eigenvalues of the matrix
+<span class="math notranslate nohighlight">\((\Delta_h - \Theta_h \Pi^{-1}
+\Lambda)\)</span> keeps the household capital stock <span class="math notranslate nohighlight">\(\{h_t\}\)</span> in
+<span class="math notranslate nohighlight">\(L_0^2\)</span>.</p>
+</div>
+<div class="section" id="dynamic-demand-functions">
+<span id="canonical-household-technologies-3"></span><h3><span class="section-number">18.3.2. </span>Dynamic Demand Functions<a class="headerlink" href="#dynamic-demand-functions" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\rho^0_t \equiv \Pi^{-1 \prime} \Bigl[p^0_t - \Theta _h^\prime E_t
+\sum^\infty_{\tau=1} \beta^\tau (\Delta_h^\prime - \Lambda^\prime \Pi^{-1 \prime}
+\Theta_h^\prime )^{\tau-1}\Lambda^\prime \Pi^{-1 \prime} p^0_{t+\tau} \Bigr]
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+s_{i,t}&amp;= \Lambda h_{i,t-1} \\
+h_{i,t}&amp;= \Delta _h h_{i,t-1}
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(h_{i,-1} = h_{-1}\)</span>.</p>
+<div class="math notranslate nohighlight" id="dynamic-demand-functions-1">
+\[
+W_0 = E_0\sum^\infty_{t=0}\beta ^t(w^0_t\ell _t + \alpha ^0_t\cdot d_t) + v_0\cdot k_{-1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mu^w_0 = {E_0 \sum^\infty_{t=0} \beta^t \rho^0_t\cdot
+ (b_t -s_{i,t}) - W_0 \over E_0 \sum^\infty_{t=0}
+\beta^t \rho^0_t \cdot \rho^0_t}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+c_t &amp;= -\Pi^{-1} \Lambda h_{t-1} + \Pi ^{-1} b_t
+-\Pi^{-1} \mu_0^w E_t \{ \Pi^{\prime\, -1} - \Pi^{\prime\, -1}\Theta_h ' \\
+&amp; \qquad [I - (\Delta_h ' - \Lambda ' \Pi^{\prime \, -1} \Theta_h ')\beta L^{-1}]
+^{-1} \Lambda ' \Pi^{\prime -1} \beta L^{-1} \}  p_t^0  \\
+h_t &amp;= \Delta_h h_{t-1} + \Theta_h c_t
+\end{aligned}
+\end{split}\]</div>
+<p>This system expresses consumption demands at date <span class="math notranslate nohighlight">\(t\)</span> as
+functions of: (i) time-<span class="math notranslate nohighlight">\(t\)</span> conditional expectations of future
+scaled Arrow-Debreu prices <span class="math notranslate nohighlight">\(\{p_{t+s}^0\}_{s=0}^\infty\)</span>; (ii) the
+stochastic process for the household’s endowment <span class="math notranslate nohighlight">\(\{d_t\}\)</span> and
+preference shock <span class="math notranslate nohighlight">\(\{b_t\}\)</span>, as mediated through the multiplier
+<span class="math notranslate nohighlight">\(\mu_0^w\)</span> and wealth <span class="math notranslate nohighlight">\(W_0\)</span>; and (iii) past values of
+consumption, as mediated through the state variable <span class="math notranslate nohighlight">\(h_{t-1}\)</span>.</p>
+</div>
+</div>
+<div class="section" id="gorman-aggregation-and-engel-curves">
+<h2><a class="toc-backref" href="#id18"><span class="section-number">18.4. </span>Gorman Aggregation and Engel Curves</a><a class="headerlink" href="#gorman-aggregation-and-engel-curves" title="Permalink to this headline">¶</a></h2>
+<p>We shall explore how the dynamic demand schedule for consumption goods
+opens up the possibility of satisfying Gorman’s (1953) conditions for
+aggregation in a heterogeneous consumer model.</p>
+<p>The first equation of our demand system is an Engel curve for consumption that is linear in the
+marginal utility <span class="math notranslate nohighlight">\(\mu_0^2\)</span> of individual wealth with a coefficient
+on <span class="math notranslate nohighlight">\(\mu_0^w\)</span> that depends only on prices.</p>
+<p>The multiplier <span class="math notranslate nohighlight">\(\mu_0^w\)</span> depends on wealth in an affine relationship, so that
+consumption is linear in wealth.</p>
+<p>In a model with multiple consumers who have the same household technologies
+(<span class="math notranslate nohighlight">\(\Delta_h, \Theta_h, \Lambda, \Pi\)</span>) but possibly different
+preference shock processes and initial values of household capital
+stocks, the coefficient on the marginal utility of wealth is the same
+for all consumers.</p>
+<p>Gorman showed that when Engel curves satisfy this
+property, there exists a unique community or aggregate preference
+ordering over aggregate consumption that is independent of the
+distribution of wealth.</p>
+<div class="section" id="re-opened-markets">
+<h3><span class="section-number">18.4.1. </span>Re-Opened Markets<a class="headerlink" href="#re-opened-markets" title="Permalink to this headline">¶</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\rho^t_{t} \equiv \Pi^{-1 \prime} \Bigl[p^t_{t} - \Theta _h^\prime E_t
+\sum^\infty_{\tau=1} \beta^\tau (\Delta_h^\prime - \Lambda^\prime \Pi^{-1 \prime}
+\Theta_h^\prime )^{\tau-1}\Lambda^\prime \Pi^{-1 \prime} p^t_{t+\tau} \Bigr]
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+s_{i,t}&amp;= \Lambda h_{i,t-1} \\
+h_{i,t}&amp;= \Delta _h h_{i,t-1},
+\end{aligned}
+\end{split}\]</div>
+<p>where now <span class="math notranslate nohighlight">\(h_{i,t-1} = h_{t-1}\)</span>. Define time <span class="math notranslate nohighlight">\(t\)</span> wealth
+<span class="math notranslate nohighlight">\(W_t\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+W_t = E_t\sum^\infty_{j=0}\beta ^j(w^t_{t+j}\ell_{t+j} + \alpha ^t_{t+j}\cdot d_{t+j}) + v_t\cdot k_{t-1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mu^w_t = {E_t \sum^\infty_{j=0} \beta^j \rho^t_{t+j}\cdot
+(b_{t+j} -s_{i,t+j}) - W_t \over E_t \sum^\infty_{t=0}
+\beta^j \rho^t_{t+j} \cdot \rho^t_{t+j}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+c_t &amp;= -\Pi^{-1} \Lambda h_{t-1} + \Pi ^{-1} b_t
+-\Pi^{-1} \mu_t^w E_t \{ \Pi^{\prime\, -1} - \Pi^{\prime\, -1}\Theta_h ' \\
+&amp; \qquad [I - (\Delta_h ' - \Lambda ' \Pi^{\prime \, -1} \Theta_h ')\beta L^{-1}]
+^{-1} \Lambda ' \Pi^{\prime -1} \beta L^{-1} \}  p_t^t  \\
+h_t &amp;= \Delta_h h_{t-1} + \Theta_h c_t
+\end{aligned}
+\end{split}\]</div>
+</div>
+<div class="section" id="dynamic-demand">
+<h3><span class="section-number">18.4.2. </span>Dynamic Demand<a class="headerlink" href="#dynamic-demand" title="Permalink to this headline">¶</a></h3>
+<p>Define a time <span class="math notranslate nohighlight">\(t\)</span> continuation of a sequence
+<span class="math notranslate nohighlight">\(\{z_t\}_{t=0}^\infty\)</span> as the sequence
+<span class="math notranslate nohighlight">\(\{z_\tau\}_{\tau=t}^\infty\)</span>. The demand system indicates that the
+time <span class="math notranslate nohighlight">\(t\)</span> vector of demands for <span class="math notranslate nohighlight">\(c_t\)</span> is influenced by:</p>
+<p>Through the multiplier <span class="math notranslate nohighlight">\(\mu^w_t\)</span>, the time <span class="math notranslate nohighlight">\(t\)</span> continuation
+of the preference shock process <span class="math notranslate nohighlight">\(\{b_t\}\)</span> and the time <span class="math notranslate nohighlight">\(t\)</span>
+continuation of <span class="math notranslate nohighlight">\(\{s_{i,t}\}\)</span>.</p>
+<p>The time <span class="math notranslate nohighlight">\(t-1\)</span> level of household durables <span class="math notranslate nohighlight">\(h_{t-1}\)</span>.</p>
+<p>Everything that affects the household’s time <span class="math notranslate nohighlight">\(t\)</span> wealth, including
+its stock of physical capital <span class="math notranslate nohighlight">\(k_{t-1}\)</span> and its value <span class="math notranslate nohighlight">\(v_t\)</span>,
+the time <span class="math notranslate nohighlight">\(t\)</span> continuation of the factor prices
+<span class="math notranslate nohighlight">\(\{w_t, \alpha_t\}\)</span>, the household’s continuation endowment
+process, and the household’s continuation plan for <span class="math notranslate nohighlight">\(\{\ell_t\}\)</span>.</p>
+<p>The time <span class="math notranslate nohighlight">\(t\)</span> continuation of the vector of prices
+<span class="math notranslate nohighlight">\(\{p_t^t\}\)</span>.</p>
+</div>
+<div class="section" id="attaining-a-canonical-household-technology">
+<h3><span class="section-number">18.4.3. </span>Attaining a Canonical Household Technology<a class="headerlink" href="#attaining-a-canonical-household-technology" title="Permalink to this headline">¶</a></h3>
+<p>Apply the following version of a factorization identity:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp;[\Pi + \beta^{1/2} L^{-1} \Lambda (I - \beta^{1/2} L^{-1}
+\Delta_h)^{-1} \Theta_h]^\prime [\Pi + \beta^{1/2} L
+\Lambda (I - \beta^{1/2} L \Delta_h)^{-1} \Theta_h] \\
+&amp;\quad = [\hat\Pi + \beta^{1/2} L^{-1} \hat\Lambda
+(I - \beta^{1/2} L^{-1} \Delta_h)^{-1} \Theta_h]^\prime
+[\hat\Pi + \beta^{1/2} L \hat\Lambda
+(I - \beta^{1/2} L \Delta_h)^{-1} \Theta_h]
+\end{aligned}
+\end{split}\]</div>
+<p>The factorization identity guarantees that the
+<span class="math notranslate nohighlight">\([\hat \Lambda, \hat \Pi]\)</span> representation satisfies both
+requirements for a canonical representation.</p>
+</div>
+</div>
+<div class="section" id="partial-equilibrium">
+<h2><a class="toc-backref" href="#id19"><span class="section-number">18.5. </span>Partial Equilibrium</a><a class="headerlink" href="#partial-equilibrium" title="Permalink to this headline">¶</a></h2>
+<p>Now we’ll provide quick overviews of  examples of  economies that fit within our framework</p>
+<p>We provide details for a number  of these examples in subsequent lectures</p>
+<ol class="simple">
+<li><p><a class="reference internal" href="growth_in_dles.html"><span class="doc">Growth in Dynamic Linear Economies</span></a></p></li>
+<li><p><a class="reference internal" href="lucas_asset_pricing_dles.html"><span class="doc">Lucas Asset Pricing using DLE</span></a></p></li>
+<li><p><a class="reference internal" href="irfs_in_hall_model.html"><span class="doc">IRFs in Hall Model</span></a></p></li>
+<li><p><a class="reference internal" href="permanent_income_dles.html"><span class="doc">Permanent Income Using the DLE class</span></a></p></li>
+<li><p><a class="reference internal" href="rosen_schooling_model.html"><span class="doc">Rosen schooling model</span></a></p></li>
+<li><p><a class="reference internal" href="cattle_cycles.html"><span class="doc">Cattle cycles</span></a></p></li>
+<li><p><a class="reference internal" href="hs_invertibility_example.html"><span class="doc">Shock Non Invertibility</span></a></p></li>
+</ol>
+<p>We’ll start with an example of a <strong>partial equilibrium</strong> in which we posit demand and supply curves</p>
+<p>Suppose that we want to capture the dynamic  demand curve:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+  c_t &amp;=  -\Pi^{-1} \Lambda h_{t-1} + \Pi ^{-1} b_t - \Pi^{-1}
+    \mu_0^w E_t \{ \Pi^{\prime\, -1} - \Pi^{\prime\, -1}\Theta_h' \\
+  &amp; \qquad[I - (\Delta_h' - \Lambda' \Pi^{\prime\, -1} \Theta_h')\beta
+     L^{-1}]^{-1} \Lambda' \Pi^{\prime -1} \beta L^{-1} \}  p_t  \\
+  h_t &amp;= \Delta_h h_{t-1} + \Theta_h c_t
+\end{aligned}
+\end{split}\]</div>
+<p>From material described earlier in this lecture, we know how to reverse engineer preferences that generate this demand system</p>
+<ul class="simple">
+<li><p>note how the demand equations are cast in terms of the matrices in our standard preference representation</p></li>
+</ul>
+<p>Now let’s turn to supply.</p>
+<p>A representative firm takes as given and beyond its control the
+stochastic process <span class="math notranslate nohighlight">\(\{p_t\}_{t=0}^\infty\)</span>.</p>
+<p>The firm sells its
+output <span class="math notranslate nohighlight">\(c_t\)</span> in a competitive market each period.</p>
+<p>Only spot markets convene at each date <span class="math notranslate nohighlight">\(t\geq 0\)</span>.</p>
+<p>The firm also faces an exogenous process of cost disturbances <span class="math notranslate nohighlight">\(d_t\)</span>.</p>
+<p>The firm chooses stochastic processes <span class="math notranslate nohighlight">\(\{c_t, g_t, i_t, k_t\}_{t=0}^\infty\)</span> to maximize</p>
+<div class="math notranslate nohighlight">
+\[
+E_0 \sum_{t=0}^\infty \beta^t \{ p_t \cdot c_t - g_t \cdot g_t/2 \}
+\]</div>
+<p>subject to given <span class="math notranslate nohighlight">\(k_{-1}\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\Phi_c c_t  +  \Phi_i i_t + \Phi_g g_t &amp;=\Gamma k_{t-1} + d_t  \\
+   k_t&amp; =   \Delta_k k_{t-1} + \Theta_k i_t . \\
+ %  x_{t+1}&amp; = A^o x_t + C w_{t+1}  \\
+ %  d_t&amp; = S_d x_t  \\
+ %  p_t&amp; = M_c x_t
+\end{aligned}
+\end{split}\]</div>
+</div>
+<div class="section" id="equilibrium-investment-under-uncertainty">
+<h2><a class="toc-backref" href="#id20"><span class="section-number">18.6. </span>Equilibrium Investment Under Uncertainty</a><a class="headerlink" href="#equilibrium-investment-under-uncertainty" title="Permalink to this headline">¶</a></h2>
+<p>A representative firm maximizes</p>
+<div class="math notranslate nohighlight">
+\[
+E \sum_{t=0}^\infty \beta^t \{ p_t c_t - g_t^2/2 \}
+\]</div>
+<p>subject to the technology</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ c_t &amp;= \gamma k_{t-1} \\
+             k_t &amp;= \delta_k k_{t-1} + i_t \\
+             g_t &amp;= f_1 i_t + f_2 d_t
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(d_t\)</span> is a cost shifter, <span class="math notranslate nohighlight">\(\gamma&gt; 0\)</span>, and
+<span class="math notranslate nohighlight">\(f_1 &gt;0\)</span> is a cost parameter and <span class="math notranslate nohighlight">\(f_2 =1\)</span>. Demand is
+governed by</p>
+<div class="math notranslate nohighlight">
+\[
+p_t = \alpha_0 - \alpha_1 c_t + u_t
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(u_t\)</span> is a demand shifter with mean zero and
+<span class="math notranslate nohighlight">\(\alpha_0, \alpha_1\)</span> are positive parameters.</p>
+<p>Assume that <span class="math notranslate nohighlight">\(u_t, d_t\)</span> are uncorrelated first-order autoregressive processes.</p>
+</div>
+<div class="section" id="a-rosen-topel-housing-model">
+<h2><a class="toc-backref" href="#id21"><span class="section-number">18.7. </span>A Rosen-Topel Housing Model</a><a class="headerlink" href="#a-rosen-topel-housing-model" title="Permalink to this headline">¶</a></h2>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ R_t &amp;= b_t + \alpha h_t \\
+             p_t &amp;= E_t \sum_{\tau =0}^\infty (\beta \delta_h)^\tau
+                       R_{t+\tau}
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(h_t\)</span> is the stock of housing at time <span class="math notranslate nohighlight">\(t\)</span>
+<span class="math notranslate nohighlight">\(R_t\)</span> is the rental rate for housing, <span class="math notranslate nohighlight">\(p_t\)</span> is the price of
+new houses, and <span class="math notranslate nohighlight">\(b_t\)</span> is a demand shifter; <span class="math notranslate nohighlight">\(\alpha &lt; 0\)</span> is a
+demand parameter, and <span class="math notranslate nohighlight">\(\delta_h\)</span> is a depreciation factor for
+houses.</p>
+<p>We cast this demand specification within our class of models by letting
+the stock of houses <span class="math notranslate nohighlight">\(h_t\)</span> evolve according to</p>
+<div class="math notranslate nohighlight">
+\[
+h_t = \delta_h h_{t-1} + c_t, \quad \delta_h \in (0,1)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_t\)</span> is the rate of production of new houses.</p>
+<p>Houses produce services <span class="math notranslate nohighlight">\(s_t\)</span> according to
+<span class="math notranslate nohighlight">\(s_t  = \bar \lambda h_t\)</span> or
+<span class="math notranslate nohighlight">\(s_t  = \lambda h_{t-1} + \pi c_t,\)</span> where
+<span class="math notranslate nohighlight">\(\lambda= \bar \lambda \delta_h, \pi = \bar \lambda\)</span>.</p>
+<p>We can take <span class="math notranslate nohighlight">\(\bar \lambda \rho_t^0  = R_t\)</span> as the rental rate on housing at
+time <span class="math notranslate nohighlight">\(t\)</span>, measured in units of time <span class="math notranslate nohighlight">\(t\)</span> consumption (housing).</p>
+<p>Demand for housing services is</p>
+<div class="math notranslate nohighlight">
+\[
+s_t = b_t - \mu_0 \rho_t^0
+\]</div>
+<p>where the price of new houses <span class="math notranslate nohighlight">\(p_t\)</span> is related to
+<span class="math notranslate nohighlight">\(\rho_t^0\)</span> by
+<span class="math notranslate nohighlight">\(\rho_t^0 = \pi^{-1} [  p_t - \beta \delta_h E_t p_{t+1}]\)</span>.</p>
+</div>
+<div class="section" id="cattle-cycles">
+<h2><a class="toc-backref" href="#id22"><span class="section-number">18.8. </span>Cattle Cycles</a><a class="headerlink" href="#cattle-cycles" title="Permalink to this headline">¶</a></h2>
+<p>Rosen, Murphy, and Scheinkman (1994). Let <span class="math notranslate nohighlight">\(p_t\)</span> be the price of
+freshly slaughtered beef, <span class="math notranslate nohighlight">\(m_t\)</span> the feeding cost of preparing an
+animal for slaughter, <span class="math notranslate nohighlight">\(\tilde h_t\)</span> the one-period holding cost for
+a mature animal, <span class="math notranslate nohighlight">\(\gamma_1 \tilde h_t\)</span> the one-period holding cost
+for a yearling, and <span class="math notranslate nohighlight">\(\gamma_0 \tilde
+h_t\)</span> the one-period holding cost for a calf.</p>
+<p>The cost processes
+<span class="math notranslate nohighlight">\(\{\tilde h_t, m_t\}_{t=0}^\infty\)</span> are exogenous, while the
+stochastic process <span class="math notranslate nohighlight">\(\{p_t\}_{t=0}^\infty\)</span> is determined by a
+rational expectations equilibrium. Let <span class="math notranslate nohighlight">\(\tilde x_t\)</span> be the
+breeding stock, and <span class="math notranslate nohighlight">\(\tilde y_t\)</span> be the total stock of animals.</p>
+<p>The law of motion for cattle stocks is</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde x_t = (1-\delta) \tilde x_{t-1} + g \tilde x_{t-3} - c_t
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_t\)</span> is a rate of slaughtering. The total head-count of
+cattle</p>
+<div class="math notranslate nohighlight">
+\[
+\tilde y_t = \tilde x_t + g \tilde x_{t-1} + g \tilde x_{t-2}
+\]</div>
+<p>is the sum of adults, calves, and yearlings, respectively.</p>
+<p id="cattle-cycles-1">A representative farmer chooses <span class="math notranslate nohighlight">\(\{c_t, \tilde x_t\}\)</span> to maximize</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ E_0 \sum_{t=0}^\infty \beta^t \{ p_t c_t &amp;-
+     \tilde h_t \tilde x_t
+        -(\gamma_0 \tilde h_t) (g \tilde x_{t-1}) - (\gamma_1 \tilde h_t)
+         (g \tilde x_{t-2}) - m_t c_t \\
+         &amp;-   \Psi(\tilde x_t, \tilde x_{t-1},
+         \tilde x_{t-2}, c_t) \}
+\end{aligned}
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\Psi = {\psi_1 \over 2} \tilde x_t^2 + {\psi_2 \over 2} \tilde x_{t-1}^2
+      + {\psi_3 \over 2} \tilde x_{t-2}^2 + {\psi_4 \over 2} c_t^2
+\]</div>
+<p>Demand is governed by</p>
+<div class="math notranslate nohighlight">
+\[
+c_t = \alpha_0 - \alpha_1 p_t + \tilde d_t
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_0 &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\alpha_1 &gt; 0\)</span>, and
+<span class="math notranslate nohighlight">\(\{\tilde d_t\}_{t=0}^\infty\)</span> is a stochastic process with mean
+zero representing a demand shifter.</p>
+<p>For more details see <a class="reference internal" href="cattle_cycles.html"><span class="doc">Cattle cycles</span></a></p>
+</div>
+<div class="section" id="models-of-occupational-choice-and-pay">
+<h2><a class="toc-backref" href="#id23"><span class="section-number">18.9. </span>Models of Occupational Choice and Pay</a><a class="headerlink" href="#models-of-occupational-choice-and-pay" title="Permalink to this headline">¶</a></h2>
+<p>We’ll describe the following pair of schooling models that view education as a time-to-build process:</p>
+<ul class="simple">
+<li><p>Rosen schooling model for engineers</p></li>
+<li><p>Two-occupation model</p></li>
+</ul>
+<div class="section" id="market-for-engineers">
+<h3><span class="section-number">18.9.1. </span>Market for Engineers<a class="headerlink" href="#market-for-engineers" title="Permalink to this headline">¶</a></h3>
+<p>Ryoo and Rosen’s (2004) <span id="id9">[<a class="reference internal" href="zreferences.html#id51"><span>RR04</span></a>]</span> model consists of the following equations:</p>
+<p>first, a demand curve for engineers</p>
+<div class="math notranslate nohighlight">
+\[
+w_t = - \alpha_d N_t + \epsilon_{1t}\ ,\ \alpha_d &gt; 0
+\]</div>
+<p>second, a time-to-build structure of the education process</p>
+<div class="math notranslate nohighlight">
+\[
+N_{t+k} = \delta_N N_{t+k-1} + n_t\ ,\ 0&lt;\delta_N&lt;1
+\]</div>
+<p>third, a definition of the discounted present value of each new
+engineering student</p>
+<div class="math notranslate nohighlight">
+\[
+v_t = \beta^k E_t \sum^\infty_{j=0} (\beta  \delta_N)^j
+   w_{t+k+j};
+\]</div>
+<p>and fourth, a supply curve of new students driven by <span class="math notranslate nohighlight">\(v_t\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+n_t = \alpha_s v_t + \epsilon_{2t}\ ,\ \alpha_s &gt; 0
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\{\epsilon_{1t}, \epsilon_{2t}\}\)</span> are stochastic processes
+of labor demand and supply shocks.</p>
+<p id="market-for-engineers-1"><strong>Definition:</strong> A partial equilibrium is a stochastic process
+<span class="math notranslate nohighlight">\(\{w_t, N_t, v_t, n_t\}^\infty_{t=0}\)</span> satisfying these four
+equations, and initial conditions
+<span class="math notranslate nohighlight">\(N_{-1}, n_{-s}, s=1, \ldots, -k\)</span>.</p>
+<p>We sweep the time-to-build structure and the demand for engineers into
+the household technology and putting the supply of new engineers into
+the technology for producing goods.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ s_t &amp;= [\lambda_1 \ 0 \ \ldots \ 0]\ \begin{bmatrix}
+h_{1t-1}\\ h_{2t-1}\\ \vdots \\ h_{k+1,t-1}\end{bmatrix} + 0 \cdot c_t \\
+\begin{bmatrix} h_{1t}\\ h_{2t}\\ \vdots\\ h_{k,t} \\
+   h_{k+1,t}\end{bmatrix} &amp;=
+\begin{bmatrix} \delta_N &amp; 1 &amp; 0 &amp; \cdots &amp; 0\\ 0 &amp; 0 &amp; 1 &amp; \cdots &amp; 0\\
+\vdots &amp; \vdots &amp; \vdots &amp; \ddots &amp; \vdots\\ 0 &amp; \cdots &amp; \cdots &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 0 &amp; \cdots &amp; 0 \end{bmatrix} \begin{bmatrix}h_{1t-1}\\ h_{2t-1}\\ \vdots\\ h_{k,t-1} \\
+      h_{k+1,t-1}\end{bmatrix} + \begin{bmatrix}0\\ 0\\ \vdots\\  0\\ 1\\\end{bmatrix}  c_t \\
+%b_t &amp;= \epsilon_{1t}
+\end{aligned}
+\end{split}\]</div>
+<p>This specification sets Rosen’s <span class="math notranslate nohighlight">\(N_t = h_{1t-1}, n_t = c_t,
+h_{\tau+1,t-1} = n_{t-\tau}, \tau=1, \ldots, k\)</span>, and uses the
+home-produced service to capture the demand for labor. Here
+<span class="math notranslate nohighlight">\(\lambda_1\)</span> embodies Rosen’s demand parameter <span class="math notranslate nohighlight">\(\alpha_d\)</span>.</p>
+<ul class="simple">
+<li><p>The supply of new workers becomes our consumption.</p></li>
+<li><p>The dynamic demand curve becomes Rosen’s dynamic supply curve for new workers.</p></li>
+</ul>
+<p><strong>Remark:</strong> This has an Imai-Keane flavor.</p>
+<p>For more details and Python code see <a class="reference internal" href="rosen_schooling_model.html"><span class="doc">Rosen schooling model</span></a>.</p>
+</div>
+<div class="section" id="skilled-and-unskilled-workers">
+<h3><span class="section-number">18.9.2. </span>Skilled and Unskilled Workers<a class="headerlink" href="#skilled-and-unskilled-workers" title="Permalink to this headline">¶</a></h3>
+<p>First, a demand curve for labor</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} w_{ut} \\ w_{st} \end{bmatrix}
+     = \alpha_d \begin{bmatrix} N_{ut} \\ N_{st} \end{bmatrix}
+        + \epsilon_{1t}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha_d\)</span> is a <span class="math notranslate nohighlight">\((2 \times 2)\)</span> matrix of demand
+parameters and <span class="math notranslate nohighlight">\(\epsilon_{1t}\)</span> is a vector of demand shifters
+second, time-to-train specifications for skilled and unskilled labor,
+respectively:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ N_{st+k} &amp;=\delta_N N_{st+k-1} + n_{st} \\
+             N_{ut} &amp;=\delta_N N_{ut-1} + n_{ut} ;
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(N_{st}, N_{ut}\)</span> are stocks of the two types of labor, and
+<span class="math notranslate nohighlight">\(n_{st}, n_{ut}\)</span> are entry rates into the two occupations.</p>
+<p id="skilled-and-unskilled-workers-1">third, definitions of discounted present values of new entrants to the
+skilled and unskilled occupations, respectively:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+ v_{st} &amp;= E_t \beta^k \sum_{j=0}^\infty (\beta \delta_N)^j
+         w_{st+k+j} \\
+             v_{ut} &amp;=E_t \sum_{j=0}^\infty (\beta \delta_N)^j
+    w_{ut+j}
+\end{aligned}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(w_{ut}, w_{st}\)</span> are wage rates for the two occupations;
+and fourth, supply curves for new entrants:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}n_{st} \\ n_{ut}\end{bmatrix}
+      = \alpha_s \begin{bmatrix} v_{ut} \\ v_{st} \end{bmatrix} +
+        \epsilon_{2t}
+\end{split}\]</div>
+<p><strong>Short Cut</strong></p>
+<p>As an alternative, Siow simply used the  <strong>equalizing differences</strong>
+condition</p>
+<div class="math notranslate nohighlight">
+\[
+v_{ut} = v_{st}
+\]</div>
+</div>
+</div>
+<div class="section" id="permanent-income-models">
+<h2><a class="toc-backref" href="#id24"><span class="section-number">18.10. </span>Permanent Income Models</a><a class="headerlink" href="#permanent-income-models" title="Permalink to this headline">¶</a></h2>
+<p>We’ll describe a class of permanent income models that feature</p>
+<ul class="simple">
+<li><p>Many consumption goods and services</p></li>
+<li><p>A single capital good with <span class="math notranslate nohighlight">\(R \beta =1\)</span></p></li>
+<li><p>The physical production technology</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+\phi_c \cdot c_t+i_t&amp;=\gamma k_{t-1}+e_t \\
+            k_t&amp;= k_{t-1} + i_t
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+\phi_ii_t-g_t=0
+\]</div>
+<p><strong>Implication One:</strong></p>
+<p>Equality of Present Values of Moving Average Coefficients of <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(e\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+k_{t-1} = \beta \sum_{j=0}^\infty \beta^j (\phi_c \cdot c_{t+j} - e_{t+j}) \quad  \Rightarrow
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k_{t-1} = \beta \sum_{j=0}^\infty  \beta^j E (\phi_c
+    \cdot c_{t+j} - e_{t+j})|J_t \quad \Rightarrow
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\sum_{j=0}^\infty \beta^j (\phi_c)^\prime \chi_j =
+ \sum_{j=0}^\infty \beta^j \epsilon_j
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\chi_j w_t\)</span> is the response of <span class="math notranslate nohighlight">\(c_{t+j}\)</span> to
+<span class="math notranslate nohighlight">\(w_t\)</span> and <span class="math notranslate nohighlight">\(\epsilon_j w_t\)</span> is the response of endowment
+<span class="math notranslate nohighlight">\(e_{t+j}\)</span> to <span class="math notranslate nohighlight">\(w_t\)</span>:</p>
+<p><strong>Implication Two:</strong></p>
+<p>Martingales</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+{\mathcal M}_t^k  &amp;= E ({\mathcal M}_{t+1}^k | J_t) \\
+{\mathcal M}_t^e  &amp;= E ({\mathcal M}_{t+1}^e | J_t)
+\end{aligned}
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+{\mathcal M}_t^c  =  (\Phi_c)^\prime {\mathcal M}_t^d = \phi_c {\cal M}_t^e
+\]</div>
+<p>For more details see <a class="reference internal" href="permanent_income_dles.html"><span class="doc">Permanent Income Using the DLE class</span></a></p>
+<p><strong>Testing Permanent Income Models:</strong></p>
+<p>We have two types of  implications of permanent income models:</p>
+<ul class="simple">
+<li><p>Equality of present values of moving average coefficients.</p></li>
+<li><p>Martingale <span class="math notranslate nohighlight">\({\mathcal M}_t^k\)</span>.</p></li>
+</ul>
+<p>These have been tested in work by Hansen, Sargent, and Roberts (1991) <span id="id10">[<a class="reference internal" href="zreferences.html#id40"><span>SHR91</span></a>]</span>
+and by Attanasio and Pavoni (2011) <span id="id11">[<a class="reference internal" href="zreferences.html#id39"><span>AP11</span></a>]</span>.</p>
+</div>
+<div class="section" id="gorman-heterogeneous-households">
+<h2><a class="toc-backref" href="#id25"><span class="section-number">18.11. </span>Gorman Heterogeneous Households</a><a class="headerlink" href="#gorman-heterogeneous-households" title="Permalink to this headline">¶</a></h2>
+<p>We now assume that there is a finite number of households, each with its own household  technology and
+preferences over consumption services.</p>
+<p>Household <span class="math notranslate nohighlight">\(j\)</span> orders preferences over consumption processes according to</p>
+<div class="math notranslate nohighlight">
+\[
+-\ \left({1 \over 2}\right)\ E \sum_{t=0}^\infty\, \beta^t\, \bigl[(s_{jt} -
+b_{jt}) \cdot (s_{jt} - b_{jt}) + \ell_{jt}^{2}\bigr] \mid J_0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+s_{jt} = \Lambda\, h_{j,t-1} + \Pi\, c_{jt}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+h_{jt} = \Delta_h\, h_{j,t-1} + \Theta_h\, c_{jt}
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(h_{j,-1}\)</span> is given</p>
+<div class="math notranslate nohighlight">
+\[
+b_{jt} = U_{bj} z_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+E\, \sum_{t=0}^\infty\, \beta^t\, p_t^0\, \cdot c_{jt} \mid J_0 = E\,
+\sum_{t=0}^\infty\, \beta^t\, (w_t^0\, \ell_{jt} + \alpha_t^0\, \cdot
+     d_{jt}) \mid
+J_0 + v_0\, \cdot k_{j,-1},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(k_{j,-1}\)</span> is given. The <span class="math notranslate nohighlight">\(j^{\rm th}\)</span> consumer owns
+an endowment process <span class="math notranslate nohighlight">\(d_{jt}\)</span>, governed by the stochastic process
+<span class="math notranslate nohighlight">\(d_{jt} = U_{dj}\, z_t\)</span>.</p>
+<p id="gorman-heterogeneous-households-1">We refer to this as a setting with  Gorman heterogeneous households.</p>
+<p>This specification confines heterogeneity among consumers to:</p>
+<ul class="simple">
+<li><p>differences in the preference processes <span class="math notranslate nohighlight">\(\{b_{jt}\}\)</span>, represented by different selections of <span class="math notranslate nohighlight">\(U_{bj}\)</span></p></li>
+<li><p>differences in the endowment processes <span class="math notranslate nohighlight">\(\{d_{jt}\}\)</span>, represented by different selections of <span class="math notranslate nohighlight">\(U_{dj}\)</span></p></li>
+<li><p>differences in <span class="math notranslate nohighlight">\(h_{j,-1}\)</span> and</p></li>
+<li><p>differences in <span class="math notranslate nohighlight">\(k_{j,-1}\)</span></p></li>
+</ul>
+<p>The matrices <span class="math notranslate nohighlight">\(\Lambda,\,\Pi,\,\Delta_h,\,\Theta_h\)</span> do not depend on <span class="math notranslate nohighlight">\(j\)</span>.</p>
+<p>This makes everybody’s demand system have the form described earlier,
+with different <span class="math notranslate nohighlight">\(\mu_{j0}^w\)</span>’s (reflecting different wealth
+levels) and different <span class="math notranslate nohighlight">\(b_{jt}\)</span> preference shock processes and
+initial conditions for household capital stocks.</p>
+<p><strong>Punchline:</strong> there exists a representative consumer.</p>
+<p>We can use the representative consumer to compute a competitive equilibrium <strong>aggregate</strong> allocation and price system.</p>
+<p>With the equilibrium aggregate allocation and price system in hand, we can then compute allocations to each household.</p>
+<p><strong>Computing  Allocations to Individuals:</strong></p>
+<p>Set</p>
+<div class="math notranslate nohighlight">
+\[
+\ell_{jt} = (\mu_{0j}^w/\mu_{0a}^w) \ell_{at}
+\]</div>
+<p>Then solve the following equation for <span class="math notranslate nohighlight">\(\mu_{0j}^{w}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_{0j}^{w}  E_0 \sum_{t=0}^\infty \beta^t \{\rho_t^0 \cdot \rho_t^0
+    + (w_t^0/ \mu_{0a}^{w}) \ell_{at} \}
+    = E_0 \sum_{t=0}^\infty \beta^t \{ \rho_t^0 \cdot (b_{jt} - s_{jt}^i)
+    -  \alpha_t^0 \cdot d_{jt} \}
+       - v_0 k_{j,-1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+s_{jt} - b_{jt} = \mu_{0j}^w\rho^0_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+c_{jt} &amp;= - \Pi^{-1} \Lambda h_{j,t-1} + \Pi^{-1}s_{jt} \\
+h_{jt} &amp;= (\Delta_h - \Theta_h \Pi^{-1}\Lambda) h_{j,t-1} + \Pi^{-1}
+   \Theta_h  s_{jt}
+\end{aligned}
+\end{split}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(h_{j,-1}\)</span> given.</p>
+</div>
+<div class="section" id="non-gorman-heterogeneous-households">
+<h2><a class="toc-backref" href="#id26"><span class="section-number">18.12. </span>Non-Gorman Heterogeneous Households</a><a class="headerlink" href="#non-gorman-heterogeneous-households" title="Permalink to this headline">¶</a></h2>
+<p>We now describe a less tractable type of heterogeneity across households that we dub <strong>Non-Gorman heterogeneity</strong>.</p>
+<p>Here is the specification:</p>
+<p>Preferences and Household Technologies:</p>
+<div class="math notranslate nohighlight">
+\[
+- {1\over 2} E\, \sum^\infty_{t=0}\, \beta^t\, [ (s_{it} - b_{it}) \cdot
+(s_{it} - b_{it}) + \ell^2_{it}]\mid J_0
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+s_{it} &amp;= \Lambda_i h_{i t-1} + \Pi_i\, c_{it} \\
+h_{it} &amp;=\Delta_{h_i}\, h_{i t-1} + \Theta_{h_i} c_{it}\ ,\ i=1,2 .
+\end{aligned}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+b_{it} = U_{bi} z_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+z_{t+1} = A_{22} z_t + C_2 w_{t+1}
+\]</div>
+<p><strong>Production Technology</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\Phi_c (c_{1t} + c_{2t}) + \Phi_g g_t + \Phi_i i_t = \Gamma
+k_{t-1} + d_{1t} + d_{2t}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+k_t = \Delta_k k_{t-1} + \Theta_k i_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+g_t \cdot g_t = \ell^2_t,\qquad
+   \ \ell_t = \ell_{1t} + \ell_{2t}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+d_{it} = U_{d_i} z_t, \quad \ i=1,2
+\]</div>
+<p><strong>Pareto Problem:</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+&amp; - {1\over 2}\, \lambda E_0 \sum^\infty_{t=0}\, \beta^t [ (s_{1t}
+-b_{1t})\cdot (s_{1t} - b_{1t}) + \ell^2_{1t}]\\
+&amp;
+-{1\over 2}\, (1-\lambda) E_0 \sum^\infty_{t=0}\, \beta^t [ (s_{2t} -
+b_{2t}) \cdot (s_{2t} - b_{2t}) + \ell^2_{2t}]
+\end{aligned}
+\end{split}\]</div>
+<p><strong>Mongrel Aggregation: Static</strong></p>
+<p>There is what we call a kind of <strong>mongrel aggregation</strong> in this setting.</p>
+<p>We first describe the idea within a simple static setting in which there is a single consumer static inverse demand with
+implied preferences:</p>
+<div class="math notranslate nohighlight">
+\[
+c_t = \Pi^{-1} b_t - \mu_0 \Pi^{-1} \Pi^{-1 \prime} p_t
+\]</div>
+<p>An inverse demand curve is</p>
+<div class="math notranslate nohighlight">
+\[
+p_t = \mu_0^{-1} \Pi' b_t - \mu_0^{-1} \Pi' \Pi c_t
+\]</div>
+<p>Integrating the marginal utility vector shows that preferences can be
+taken to be</p>
+<div class="math notranslate nohighlight">
+\[
+( - 2 \mu_0)^{-1} (\Pi c_t - b_t) \cdot (\Pi c_t - b_t )
+\]</div>
+<p id="mongrel-aggregation-static-1"><strong>Key Insight:</strong> Factor the inverse of a ‘covariance matrix’.</p>
+<p>Now assume that there are two consumers, <span class="math notranslate nohighlight">\(i=1,2\)</span>, with demand curves</p>
+<div class="math notranslate nohighlight">
+\[
+c_{it} = \Pi_i^{-1} b_{it} - \mu_{0i} \Pi_i^{-1} \Pi_i^{-1 \prime} p_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+c_{1t} + c_{2t} = (\Pi_1^{-1} b_{1t} + \Pi_2^{-1} b_{2t})
+    - (\mu_{01} \Pi_1^{-1} \Pi_1^{-1 \prime} + \mu_{02} \Pi_2
+       \Pi_2^{-1 \prime}) p_t
+\]</div>
+<p>Setting <span class="math notranslate nohighlight">\(c_{1t} + c_{2t} = c_t\)</span> and solving for <span class="math notranslate nohighlight">\(p_t\)</span> gives</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+p_t &amp;= (\mu_{01} \Pi_1^{-1} \Pi_1^{-1 \prime} + \mu_{02}
+    \Pi_2^{-1} \Pi_2^{-1 \prime})^{-1}
+      (\Pi_1^{-1} b_{1t} + \Pi_2^{-1} b_{2t}) \\
+&amp;- (\mu_{01} \Pi_1^{-1} \Pi_1^{-1 \prime} +
+     \mu_{02} \Pi_2^{-1} \Pi_2^{-1 \prime}
+      )^{-1} c_t
+\end{aligned}
+\end{split}\]</div>
+<p><strong>Punchline:</strong> choose <span class="math notranslate nohighlight">\(\Pi\)</span> associated with the aggregate ordering to
+satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_0^{-1} \Pi' \Pi = (\mu_{01} \Pi_1^{-1} \Pi_2^{-1 \prime}
+      + \mu_{02} \Pi_2^{-1} \Pi_2^{-1 \prime})^{-1}
+\]</div>
+<p><strong>Dynamic Analogue:</strong></p>
+<p>We now describe how to extend mongrel aggregation to a dynamic setting.</p>
+<p>The key comparison is</p>
+<ul class="simple">
+<li><p>Static: factor a covariance matrix-like object</p></li>
+<li><p>Dynamic: factor a spectral-density matrix-like object</p></li>
+</ul>
+<p>Programming Problem for Dynamic Mongrel Aggregation:</p>
+<p>Our strategy for deducing the mongrel preference ordering over
+<span class="math notranslate nohighlight">\(c_t = c_{1t} + c_{2t}\)</span> is to solve the programming problem:
+choose <span class="math notranslate nohighlight">\(\{c_{1t},c_{2t}\}\)</span> to maximize the criterion</p>
+<div class="math notranslate nohighlight">
+\[
+\sum^\infty_{t=0} \beta^t [\lambda (s_{1t} - b_{1t}) \cdot (s_{1t} - b_{1t})
+ + (1-\lambda) (s_{2t} - b_{2t}) \cdot (s_{2t} - b_{2t})]
+\]</div>
+<p>subject to</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+h_{jt} &amp;= \Delta_{hj}\, h_{jt-1} + \Theta_{hj}\, c_{jt}, j=1,2\\
+s_{jt} &amp;=\Delta_j h_{jt-1} + \Pi_j c_{jt}\ , j=1,2\\
+c_{1t} +   c_{2t} &amp;=c_t
+\end{aligned}
+\end{split}\]</div>
+<p>subject to <span class="math notranslate nohighlight">\((h_{1, -1},\, h_{2, -1})\)</span> given and
+<span class="math notranslate nohighlight">\(\{b_{1t}\},\, \{b_{2t}\},\, \{c_t\}\)</span> being known and fixed
+sequences.</p>
+<p>Substituting the <span class="math notranslate nohighlight">\(\{c_{1t},\, c_{2t}\}\)</span> sequences that
+solve this problem as functions of <span class="math notranslate nohighlight">\(\{b_{1t},\, b_{2t},\, c_t\}\)</span>
+into the objective determines a mongrel preference ordering over
+<span class="math notranslate nohighlight">\(\{c_t\} = \{c_{1t} + c_{2t}\}\)</span>.</p>
+<p>In solving this problem, it is convenient to proceed by using Fourier
+transforms.  For details, please see <span id="id12">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> where they deploy a</p>
+<p><strong>Secret Weapon:</strong> Another application of the spectral factorization
+identity.</p>
+<p><strong>Concluding remark:</strong> The <span id="id13">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> class of models described in this lecture are all complete markets models.  We have exploited
+the fact that complete market models <strong>are all alike</strong> to allow us to define a class that <strong>gives the same name to different things</strong> in the
+spirit of Henri Poincare.</p>
+<p>Could we create such a class for <strong>incomplete markets</strong> models?</p>
+<p>That would be nice, but before trying it would be wise to contemplate
+the remainder of a statement by Robert E. Lucas, Jr., with which we began this lecture.</p>
+<blockquote class="epigraph">
+<div><p>“Complete market economies are all alike but each incomplete market  economy is incomplete in its own individual way.”   Robert E. Lucas,   Jr., (1989)</p>
+</div></blockquote>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                    <p class="caption">
+ <span class="caption-text">
+  Tools and Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="orth_proj.html">
+   1. Orthogonal Projections and Their Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stationary_densities.html">
+   2. Continuous State Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="muth_kalman.html">
+   3. Reverse Engineering a la Muth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discrete_dp.html">
+   4. Discrete State Dynamic Programming
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  LQ Control
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_news.html">
+   5. Information and Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing.html">
+   6. Consumption Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing_tax.html">
+   7. Tax Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   8. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_jump_lq.html">
+   9. Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_1.html">
+   10. How to Pay for a War: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_2.html">
+   11. How to Pay for a War: Part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_3.html">
+   12. How to Pay for a War: Part 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lqramsey.html">
+   13. Optimal Taxation in an LQ Economy
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Multiple Agent Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   14. Robust Markov Perfect Equilibrium
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arellano.html">
+   15. Default Risk and Income Fluctuations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="matsuyama.html">
+   16. Globalization and Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coase.html">
+   17. Coase’s Theory of the Firm
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Linear Economies
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   18. Recursive Models of Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="growth_in_dles.html">
+   19. Growth in Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_asset_pricing_dles.html">
+   20. Lucas Asset Pricing Using DLE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="irfs_in_hall_model.html">
+   21. IRFs in Hall Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="permanent_income_dles.html">
+   22. Permanent Income Model using the DLE Class
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rosen_schooling_model.html">
+   23. Rosen Schooling Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cattle_cycles.html">
+   24. Cattle Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_invertibility_example.html">
+   25. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Classic Linear Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="von_neumann_model.html">
+   26. Von Neumann Growth Model (and a Generalization)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Time Series Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arma.html">
+   27. Covariance Stationary Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="estspec.html">
+   28. Estimation of Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additive_functionals.html">
+   29. Additive and Multiplicative Functionals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lu_tricks.html">
+   30. Classical Control with Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classical_filtering.html">
+   31. Classical Prediction and Filtering With Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="knowing_forecasts_of_others.html">
+   32. Knowing the Forecasts of Others
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Asset Pricing and Finance
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_model.html">
+   33. Asset Pricing II: The Lucas Asset Pricing Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="black_litterman.html">
+   34. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_complete_mkts.html">
+   35. Irrelevance of Capital Structure with Complete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_incomplete_mkts.html">
+   36. Equilibrium Capital Structures with Incomplete Markets
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Programming Squared
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dyn_stack.html">
+   37. Stackelberg Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo.html">
+   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opt_tax_recur.html">
+   39. Optimal Taxation with State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss.html">
+   40. Optimal Taxation without State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss2.html">
+   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss3.html">
+   42. Fiscal Risk and Government Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_ramsey.html">
+   43. Competitive Equilibria of a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_credible.html">
+   44. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   45. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   46. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   47. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="toolbar">
+
+            <div class="toolbar__inner">
+
+                <ul class="toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                    <!-- <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <i data-feather="search"></i>
+                        </form>
+                    </li> -->
+                </ul>
+
+                <ul class="toolbar__links">
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/hs_recursive_models.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Launch Notebook" id="launchButton"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/hs_recursive_models.ipynb" target="_blank"><i data-feather="play-circle"></i></a></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/hs_recursive_models.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p style="color: white;">Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title">QuantEcon Notebook Launcher</p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input" onchange="onChangeListener()">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/hs_recursive_models.ipynb">BinderHub</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <!-- <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" onchange="onChangeListener()">
+                <i class="fas fa-check-circle"></i>
+            </li> -->
+            </ul>
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

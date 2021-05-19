@@ -1,0 +1,2016 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>38. Ramsey Plans, Time Inconsistency, Sustainable Plans &#8212; Advanced Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/quantecon-book-theme.9deb0a26de8466f54124a1959c24cd33.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/quantecon-book-theme.43eb86aa48ec3aed660cb313c38068cd.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://python-advanced.quantecon.org/calvo.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="39. Optimal Taxation with State-Contingent Debt" href="opt_tax_recur.html" />
+    <link rel="prev" title="37. Stackelberg Plans" href="dyn_stack.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="Ramsey Plans, Time Inconsistency, Sustainable Plans"/>
+<meta name="twitter:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="Ramsey Plans, Time Inconsistency, Sustainable Plans" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://python-advanced.quantecon.org/calvo.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="wrapper">
+
+        <div class="main">
+
+            <div class="page" id=calvo>
+
+                <div class="page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   38.1. Overview
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#the-model">
+   38.2. The Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structure">
+   38.3. Structure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#intertemporal-influences">
+   38.4. Intertemporal Influences
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#four-models-of-government-policy">
+   38.5. Four Models of Government Policy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-ramsey-planner">
+   38.6. A Ramsey Planner
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#subproblem-1">
+     38.6.1. Subproblem 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#subproblem-2">
+     38.6.2. Subproblem 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#representation-of-ramsey-plan">
+     38.6.3. Representation of Ramsey Plan
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#multiple-roles-of-theta-t">
+     38.6.4. Multiple roles of
+     <span class="math notranslate nohighlight">
+      \(\theta_t\)
+     </span>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#time-inconsistency">
+     38.6.5. Time Inconsistency
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-constrained-to-a-constant-growth-rate-ramsey-government">
+   38.7. A Constrained-to-a-Constant-Growth-Rate Ramsey Government
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#markov-perfect-governments">
+   38.8. Markov Perfect Governments
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#equilibrium-outcomes-for-three-models-of-government-policy-making">
+   38.9. Equilibrium Outcomes for Three Models of Government Policy Making
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#time-inconsistency-of-ramsey-plan">
+     38.9.1. Time Inconsistency of Ramsey Plan
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#meaning-of-time-inconsistency">
+     38.9.2. Meaning of Time Inconsistency
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ramsey-plans-strike-back">
+     38.9.3. Ramsey Plans Strike Back
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-fourth-model-of-government-decision-making">
+   38.10. A Fourth Model of Government Decision Making
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-theory-of-government-decision-making">
+     38.10.1. A Theory of Government Decision Making
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#temptation-to-deviate-from-plan">
+     38.10.2. Temptation to Deviate from Plan
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sustainable-or-credible-plan">
+   38.11. Sustainable or Credible Plan
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#abreu-s-self-enforcing-plan">
+     38.11.1. Abreu’s Self-Enforcing Plan
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#abreu-carrot-stick-plan">
+     38.11.2. Abreu Carrot-Stick Plan
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-of-self-enforcing-plan">
+     38.11.3. Example of Self-Enforcing Plan
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#recursive-representation-of-a-sustainable-plan">
+     38.11.4. Recursive Representation of a Sustainable Plan
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#whose-credible-plan-is-it">
+   38.12. Whose Credible Plan is it?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comparison-of-equilibrium-values">
+   38.13. Comparison of Equilibrium Values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#note-on-dynamic-programming-squared">
+   38.14. Note on Dynamic Programming Squared
+  </a>
+ </li>
+</ul>
+
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo" alt="logo"></a>
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="page__header">
+
+                    <div class="page__header-copy">
+
+                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+
+                        <p class="page__header-subheading">Ramsey Plans, Time Inconsistency, Sustainable Plans</p>
+
+                    </div>
+
+                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" align="right" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><div class="section" id="ramsey-plans-time-inconsistency-sustainable-plans">
+<h1><a class="toc-backref" href="#id22"><span class="section-number">38. </span>Ramsey Plans, Time Inconsistency, Sustainable Plans</a><a class="headerlink" href="#ramsey-plans-time-inconsistency-sustainable-plans" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<span id="index-0"></span><p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ramsey-plans-time-inconsistency-sustainable-plans" id="id22">Ramsey Plans, Time Inconsistency, Sustainable Plans</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id23">Overview</a></p></li>
+<li><p><a class="reference internal" href="#the-model" id="id24">The Model</a></p></li>
+<li><p><a class="reference internal" href="#structure" id="id25">Structure</a></p></li>
+<li><p><a class="reference internal" href="#intertemporal-influences" id="id26">Intertemporal Influences</a></p></li>
+<li><p><a class="reference internal" href="#four-models-of-government-policy" id="id27">Four Models of Government Policy</a></p></li>
+<li><p><a class="reference internal" href="#a-ramsey-planner" id="id28">A Ramsey Planner</a></p></li>
+<li><p><a class="reference internal" href="#a-constrained-to-a-constant-growth-rate-ramsey-government" id="id29">A Constrained-to-a-Constant-Growth-Rate Ramsey Government</a></p></li>
+<li><p><a class="reference internal" href="#markov-perfect-governments" id="id30">Markov Perfect Governments</a></p></li>
+<li><p><a class="reference internal" href="#equilibrium-outcomes-for-three-models-of-government-policy-making" id="id31">Equilibrium Outcomes for Three Models of Government Policy Making</a></p></li>
+<li><p><a class="reference internal" href="#a-fourth-model-of-government-decision-making" id="id32">A Fourth Model of Government Decision Making</a></p></li>
+<li><p><a class="reference internal" href="#sustainable-or-credible-plan" id="id33">Sustainable or Credible Plan</a></p></li>
+<li><p><a class="reference internal" href="#whose-credible-plan-is-it" id="id34">Whose Credible Plan is it?</a></p></li>
+<li><p><a class="reference internal" href="#comparison-of-equilibrium-values" id="id35">Comparison of Equilibrium Values</a></p></li>
+<li><p><a class="reference internal" href="#note-on-dynamic-programming-squared" id="id36">Note on Dynamic Programming Squared</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
+Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.12.5)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id23"><span class="section-number">38.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This lecture describes a linear-quadratic version of a model that Guillermo Calvo <span id="id1">[<a class="reference internal" href="zreferences.html#id119"><span>Cal78</span></a>]</span>
+used to illustrate the <strong>time inconsistency</strong> of optimal government
+plans.</p>
+<p>Like Chang <span id="id2">[<a class="reference internal" href="zreferences.html#id195"><span>Cha98</span></a>]</span>, we use the model as a laboratory in which to explore the consequences of
+different timing protocols for government decision making.</p>
+<p>The model focuses attention on intertemporal tradeoffs between</p>
+<ul class="simple">
+<li><p>welfare benefits that anticipated deflation generates by increasing a representative agent’s liquidity as measured by his or her real money balances, and</p></li>
+<li><p>costs associated with  distorting taxes that must be used to withdraw money from the economy in order to generate anticipated deflation</p></li>
+</ul>
+<p>The model features</p>
+<ul class="simple">
+<li><p>rational expectations</p></li>
+<li><p>costly government actions at all dates <span class="math notranslate nohighlight">\(t \geq 1\)</span> that increase household
+utilities at dates before <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p>two Bellman equations, one that expresses the private sector’s  expectation of future inflation
+as a function of current and future government actions, another that
+describes  the value function of a  Ramsey planner</p></li>
+</ul>
+<p>A theme of this lecture is that  timing protocols affect  outcomes.</p>
+<p>We’ll use ideas from  papers by Cagan <span id="id3">[<a class="reference internal" href="zreferences.html#id60"><span>Cag56</span></a>]</span>, Calvo <span id="id4">[<a class="reference internal" href="zreferences.html#id119"><span>Cal78</span></a>]</span>, Stokey <span id="id5">[<a class="reference internal" href="zreferences.html#id203"><span>Sto89</span></a>]</span>, <span id="id6">[<a class="reference internal" href="zreferences.html#id57"><span>Sto91</span></a>]</span>,
+Chari and Kehoe <span id="id7">[<a class="reference internal" href="zreferences.html#id196"><span>CK90</span></a>]</span>, Chang <span id="id8">[<a class="reference internal" href="zreferences.html#id195"><span>Cha98</span></a>]</span>, and Abreu <span id="id9">[<a class="reference internal" href="zreferences.html#id56"><span>Abr88</span></a>]</span> as
+well as from chapter 19 of <span id="id10">[<a class="reference internal" href="zreferences.html#id153"><span>LS18</span></a>]</span>.</p>
+<p>In addition, we’ll use ideas from linear-quadratic dynamic programming
+described in  <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Control</a> as applied to Ramsey problems
+in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a>.</p>
+<p>In particular, we have specified the model in a way that allows us to use
+linear-quadratic dynamic programming to compute an optimal government
+plan under a timing protocol in which a government chooses an infinite
+sequence of money supply growth rates once and for all at time
+<span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>We’ll start with some imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">LQ</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-model">
+<h2><a class="toc-backref" href="#id24"><span class="section-number">38.2. </span>The Model</a><a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
+<p>There is no uncertainty.</p>
+<p>Let:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(p_t\)</span> be the log of the price level</p></li>
+<li><p><span class="math notranslate nohighlight">\(m_t\)</span> be the log of nominal money balances</p></li>
+<li><p><span class="math notranslate nohighlight">\(\theta_t = p_{t+1} - p_t\)</span> be the net rate of inflation between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_t = m_{t+1} - m_t\)</span> be the net rate of growth of nominal balances</p></li>
+</ul>
+<p>The demand for real balances is governed by a perfect foresight
+version of the Cagan <span id="id11">[<a class="reference internal" href="zreferences.html#id60"><span>Cag56</span></a>]</span> demand function:</p>
+<div class="math notranslate nohighlight" id="equation-eq-old1">
+<span class="eqno">(38.1)<a class="headerlink" href="#equation-eq-old1" title="Permalink to this equation">¶</a></span>\[m_t - p_t = -\alpha(p_{t+1} - p_t) \: , \: \alpha &gt; 0\]</div>
+<p>for <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
+<p>Equation <a class="reference internal" href="#equation-eq-old1">(38.1)</a> asserts that the demand for real balances is inversely
+related to the public’s expected rate of inflation, which here equals
+the actual rate of inflation.</p>
+<p>(When there is no uncertainty, an assumption of <strong>rational expectations</strong> simplifies to <strong>perfect foresight</strong>).</p>
+<p>(See <span id="id12">[<a class="reference internal" href="zreferences.html#id61"><span>Sar77</span></a>]</span> for a rational expectations version of the model when there is uncertainty)</p>
+<p>Subtracting the demand function at time <span class="math notranslate nohighlight">\(t\)</span> from the demand
+function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_t - \theta_t = -\alpha \theta_{t+1} + \alpha \theta_t
+\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight" id="equation-eq-old2">
+<span class="eqno">(38.2)<a class="headerlink" href="#equation-eq-old2" title="Permalink to this equation">¶</a></span>\[\theta_t = \frac{\alpha}{1+\alpha} \theta_{t+1} + \frac{1}{1+\alpha} \mu_t\]</div>
+<p>Because <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>,  <span class="math notranslate nohighlight">\(0 &lt; \frac{\alpha}{1+\alpha} &lt; 1\)</span>.</p>
+<p><strong>Definition:</strong> For a scalar <span class="math notranslate nohighlight">\(x_t\)</span>, let <span class="math notranslate nohighlight">\(L^2\)</span> be the space of sequences
+<span class="math notranslate nohighlight">\(\{x_t\}_{t=0}^\infty\)</span> satisfying</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{t=0}^\infty  x_t^2 &lt; +\infty
+\]</div>
+<p>We say that a sequence that belongs to <span class="math notranslate nohighlight">\(L^2\)</span>   is <strong>square summable</strong>.</p>
+<p>When we assume that the sequence <span class="math notranslate nohighlight">\(\vec \mu = \{\mu_t\}_{t=0}^\infty\)</span> is square summable and we require that the sequence
+<span class="math notranslate nohighlight">\(\vec \theta = \{\theta_t\}_{t=0}^\infty\)</span> is square summable,
+the linear difference equation <a class="reference internal" href="#equation-eq-old2">(38.2)</a> can be solved forward to get:</p>
+<div class="math notranslate nohighlight" id="equation-eq-old3">
+<span class="eqno">(38.3)<a class="headerlink" href="#equation-eq-old3" title="Permalink to this equation">¶</a></span>\[\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}\]</div>
+<p><strong>Insight:</strong> In the spirit of Chang <span id="id13">[<a class="reference internal" href="zreferences.html#id195"><span>Cha98</span></a>]</span>, note that equations <a class="reference internal" href="#equation-eq-old1">(38.1)</a> and <a class="reference internal" href="#equation-eq-old3">(38.3)</a> show that <span class="math notranslate nohighlight">\(\theta_t\)</span> intermediates
+how choices of <span class="math notranslate nohighlight">\(\mu_{t+j}, \ j=0, 1, \ldots\)</span> impinge on time <span class="math notranslate nohighlight">\(t\)</span>
+real balances <span class="math notranslate nohighlight">\(m_t - p_t = -\alpha \theta_t\)</span>.</p>
+<p>We shall use this insight to help us simplify and analyze government policy problems.</p>
+<p>That future rates of money creation influence earlier rates of inflation
+creates optimal government policy problems in which timing protocols
+matter.</p>
+<p>We can rewrite the model  as:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+  1 \\
+  \theta_{t+1}
+\end{bmatrix} =
+\begin{bmatrix}
+  1 &amp; 0 \\
+  0 &amp; \frac{1+\alpha}{\alpha}
+\end{bmatrix}
+\begin{bmatrix}
+  1 \\
+  \theta_{t}
+\end{bmatrix}  +
+\begin{bmatrix}
+  0 \\
+  -\frac{1}{\alpha}
+\end{bmatrix}
+\mu_t
+\end{split}\]</div>
+<p>or</p>
+<div class="math notranslate nohighlight" id="equation-eq-old4">
+<span class="eqno">(38.4)<a class="headerlink" href="#equation-eq-old4" title="Permalink to this equation">¶</a></span>\[x_{t+1} = A x_t + B \mu_t\]</div>
+<p>We write the model in the state-space form <a class="reference internal" href="#equation-eq-old4">(38.4)</a> even though <span class="math notranslate nohighlight">\(\theta_0\)</span> is to be determined and so is not an initial condition
+as it ordinarily would be in the state-space model described in <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Control</a>.</p>
+<p>We write the model in the form <a class="reference internal" href="#equation-eq-old4">(38.4)</a> because we want to apply an approach described in  <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a>.</p>
+<p>Assume that a representative household’s utility of real balances at
+time <span class="math notranslate nohighlight">\(t\)</span> is:</p>
+<div class="math notranslate nohighlight" id="equation-eq-old5">
+<span class="eqno">(38.5)<a class="headerlink" href="#equation-eq-old5" title="Permalink to this equation">¶</a></span>\[U(m_t - p_t) = a_0 + a_1 (m_t - p_t) - \frac{a_2}{2} (m_t - p_t)^2, \quad a_0 &gt; 0, a_1 &gt; 0, a_2 &gt; 0\]</div>
+<p>The “bliss level” of real balances is then <span class="math notranslate nohighlight">\(\frac{a_1}{a_2}\)</span>.</p>
+<p>The money demand function <a class="reference internal" href="#equation-eq-old1">(38.1)</a> and the utility function <a class="reference internal" href="#equation-eq-old5">(38.5)</a>
+imply that utility maximizing or  bliss level of real balances is attained when:</p>
+<div class="math notranslate nohighlight">
+\[
+\theta_t = \theta^* = -\frac{a_1}{a_2 \alpha}
+\]</div>
+<p>Below, we introduce the discount factor <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span> that a representative household and a benevolent government
+both use to discount future utilities.</p>
+<p>(If we set parameters so that <span class="math notranslate nohighlight">\(\theta^* = \log(\beta)\)</span>, then we can
+regard a recommendation to set <span class="math notranslate nohighlight">\(\theta_t = \theta^*\)</span> as a “poor
+man’s Friedman rule” that attains Milton Friedman’s <strong>optimal quantity of money</strong>)</p>
+<p>Via equation <a class="reference internal" href="#equation-eq-old3">(38.3)</a>, a government plan
+<span class="math notranslate nohighlight">\(\vec \mu = \{\mu_t \}_{t=0}^\infty\)</span> leads to an equilibrium
+sequence of inflation outcomes
+<span class="math notranslate nohighlight">\(\vec \theta = \{ \theta_t \}_{t=0}^\infty\)</span>.</p>
+<p>We assume that social costs <span class="math notranslate nohighlight">\(\frac{c}{2} \mu_t^2\)</span> are incurred at
+<span class="math notranslate nohighlight">\(t\)</span> when the government changes the stock of nominal money
+balances at rate <span class="math notranslate nohighlight">\(\mu_t\)</span>.</p>
+<p>Therefore, the one-period welfare function of a benevolent government
+is:</p>
+<div class="math notranslate nohighlight" id="equation-eq-old6">
+<span class="eqno">(38.6)<a class="headerlink" href="#equation-eq-old6" title="Permalink to this equation">¶</a></span>\[\begin{split}-s(\theta_t, \mu_t) \equiv - r(x_t,\mu_t) = \begin{bmatrix} 1 \\ \theta_t \end{bmatrix}' \begin{bmatrix} a_0 &amp; -\frac{a_1 \alpha}{2} \\ -\frac{a_1 \alpha}{2} &amp; -\frac{a_2 \alpha^2}{2} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_t \end{bmatrix} - \frac{c}{2} \mu_t^2 =  - x_t'Rx_t - Q \mu_t^2\end{split}\]</div>
+<p>Household welfare is summarized by:</p>
+<div class="math notranslate nohighlight" id="equation-eq-old7">
+<span class="eqno">(38.7)<a class="headerlink" href="#equation-eq-old7" title="Permalink to this equation">¶</a></span>\[v_0 = - \sum_{t=0}^\infty \beta^t r(x_t,\mu_t) = - \sum_{t=0}^\infty \beta^t s(\theta_t,\mu_t)\]</div>
+<p>We can represent the dependence of  <span class="math notranslate nohighlight">\(v_0\)</span> on <span class="math notranslate nohighlight">\((\vec \theta, \vec \mu)\)</span> recursively via the linear difference equation</p>
+<div class="math notranslate nohighlight" id="equation-eq-old8">
+<span class="eqno">(38.8)<a class="headerlink" href="#equation-eq-old8" title="Permalink to this equation">¶</a></span>\[v_t = - s(\theta_t, \mu_t) + \beta v_{t+1}\]</div>
+</div>
+<div class="section" id="structure">
+<h2><a class="toc-backref" href="#id25"><span class="section-number">38.3. </span>Structure</a><a class="headerlink" href="#structure" title="Permalink to this headline">¶</a></h2>
+<p>The following structure is induced by private agents’
+behavior as summarized by the demand function for money <a class="reference internal" href="#equation-eq-old1">(38.1)</a> that leads to equation <a class="reference internal" href="#equation-eq-old3">(38.3)</a> that tells how future
+settings of <span class="math notranslate nohighlight">\(\mu\)</span> affect the current value of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Equation <a class="reference internal" href="#equation-eq-old3">(38.3)</a> maps a <strong>policy</strong> sequence of money growth rates
+<span class="math notranslate nohighlight">\(\vec \mu =\{\mu_t\}_{t=0}^\infty \in L^2\)</span>  into an inflation sequence
+<span class="math notranslate nohighlight">\(\vec \theta = \{\theta_t\}_{t=0}^\infty \in L^2\)</span>.</p>
+<p>These, in turn, induce a discounted value to a government sequence
+<span class="math notranslate nohighlight">\(\vec v = \{v_t\}_{t=0}^\infty \in L^2\)</span> that satisfies the
+recursion</p>
+<div class="math notranslate nohighlight">
+\[
+v_t = - s(\theta_t,\mu_t) + \beta v_{t+1}
+\]</div>
+<p>where we have called <span class="math notranslate nohighlight">\(s(\theta_t, \mu_t) = r(x_t, \mu_t)\)</span> as
+above.</p>
+<p>Thus, we have a triple of sequences
+<span class="math notranslate nohighlight">\(\vec \mu, \vec \theta, \vec v\)</span> associated with a
+<span class="math notranslate nohighlight">\(\vec \mu \in L^2\)</span>.</p>
+<p>At this point <span class="math notranslate nohighlight">\(\vec \mu \in L^2\)</span> is an arbitrary exogenous policy.</p>
+<p>To make <span class="math notranslate nohighlight">\(\vec \mu\)</span> endogenous, we require a theory of government
+decisions.</p>
+</div>
+<div class="section" id="intertemporal-influences">
+<h2><a class="toc-backref" href="#id26"><span class="section-number">38.4. </span>Intertemporal Influences</a><a class="headerlink" href="#intertemporal-influences" title="Permalink to this headline">¶</a></h2>
+<p>Criterion function <a class="reference internal" href="#equation-eq-old7">(38.7)</a> and the constraint system <a class="reference internal" href="#equation-eq-old4">(38.4)</a> exhibit the following
+structure:</p>
+<ul class="simple">
+<li><p>Setting <span class="math notranslate nohighlight">\(\mu_t \neq 0\)</span> imposes costs
+<span class="math notranslate nohighlight">\(\frac{c}{2} \mu_t^2\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> and at no other times;
+but</p></li>
+<li><p>The money growth rate <span class="math notranslate nohighlight">\(\mu_t\)</span> affects the representative
+household’s one-period utilities at all dates
+<span class="math notranslate nohighlight">\(s = 0, 1, \ldots, t\)</span>.</p></li>
+</ul>
+<p>That settings of <span class="math notranslate nohighlight">\(\mu\)</span> at one date affect household utilities at
+earlier dates sets the stage for the emergence of a time-inconsistent
+optimal government plan  under a Ramsey (also called a Stackelberg)  timing protocol.</p>
+<p>We’ll study outcomes under a Ramsey timing protocol below.</p>
+<p>But we’ll also study the consequences of other timing protocols.</p>
+</div>
+<div class="section" id="four-models-of-government-policy">
+<h2><a class="toc-backref" href="#id27"><span class="section-number">38.5. </span>Four Models of Government Policy</a><a class="headerlink" href="#four-models-of-government-policy" title="Permalink to this headline">¶</a></h2>
+<p>We consider four models of policymakers that  differ in</p>
+<ul class="simple">
+<li><p>what a policymaker is allowed to choose, either a sequence
+<span class="math notranslate nohighlight">\(\vec \mu\)</span> or just a single period  <span class="math notranslate nohighlight">\(\mu_t\)</span>.</p></li>
+<li><p>when a policymaker chooses, either at time <span class="math notranslate nohighlight">\(0\)</span> or at times
+<span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p></li>
+<li><p>what a policymaker assumes about how its choice of <span class="math notranslate nohighlight">\(\mu_t\)</span>
+affects private agents’ expectations about earlier and later
+inflation rates.</p></li>
+</ul>
+<p>In two of our models, a single policymaker  chooses a sequence
+<span class="math notranslate nohighlight">\(\{\mu_t\}_{t=0}^\infty\)</span> once and for all, taking into account how
+<span class="math notranslate nohighlight">\(\mu_t\)</span> affects household one-period utilities at dates <span class="math notranslate nohighlight">\(s = 0, 1, \ldots, t-1\)</span></p>
+<ul class="simple">
+<li><p>these two models  thus employ a  <strong>Ramsey</strong> or <strong>Stackelberg</strong> timing protocol.</p></li>
+</ul>
+<p>In two other models, there is a sequence of policymakers, each of whom
+sets <span class="math notranslate nohighlight">\(\mu_t\)</span> at one <span class="math notranslate nohighlight">\(t\)</span> only</p>
+<ul class="simple">
+<li><p>Each such policymaker ignores  effects that its choice of <span class="math notranslate nohighlight">\(\mu_t\)</span> has on household one-period utilities at dates <span class="math notranslate nohighlight">\(s = 0, 1, \ldots, t-1\)</span>.</p></li>
+</ul>
+<p>The four models differ with respect to timing protocols, constraints on
+government choices, and government policymakers’ beliefs about how their
+decisions affect private agents’ beliefs about future government
+decisions.</p>
+<p>The models are</p>
+<ul class="simple">
+<li><p>A single Ramsey planner chooses a sequence
+<span class="math notranslate nohighlight">\(\{\mu_t\}_{t=0}^\infty\)</span> once and for all at time <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+<li><p>A single Ramsey planner chooses a sequence
+<span class="math notranslate nohighlight">\(\{\mu_t\}_{t=0}^\infty\)</span> once and for all at time <span class="math notranslate nohighlight">\(0\)</span>
+subject to the constraint that <span class="math notranslate nohighlight">\(\mu_t = \mu\)</span> for all
+<span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p></li>
+<li><p>A sequence of separate policymakers chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> for <span class="math notranslate nohighlight">\(t =0, 1, 2, \ldots\)</span></p>
+<ul>
+<li><p>a time <span class="math notranslate nohighlight">\(t\)</span> policymaker chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> only and forecasts that future government decisions are unaffected by its choice.</p></li>
+</ul>
+</li>
+<li><p>A sequence of separate policymakers chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> for <span class="math notranslate nohighlight">\(t =0, 1, 2, \ldots\)</span></p>
+<ul>
+<li><p>a time <span class="math notranslate nohighlight">\(t\)</span> policymaker chooses  only <span class="math notranslate nohighlight">\(\mu_t\)</span> but believes that its choice of <span class="math notranslate nohighlight">\(\mu_t\)</span>  shapes private agents’ beliefs about  future rates of money creation and inflation, and through them, future government actions.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="a-ramsey-planner">
+<h2><a class="toc-backref" href="#id28"><span class="section-number">38.6. </span>A Ramsey Planner</a><a class="headerlink" href="#a-ramsey-planner" title="Permalink to this headline">¶</a></h2>
+<p>First, we consider a Ramsey planner that  chooses
+<span class="math notranslate nohighlight">\(\{\mu_t, \theta_t\}_{t=0}^\infty\)</span> to maximize <a class="reference internal" href="#equation-eq-old7">(38.7)</a>
+subject to the law of motion <a class="reference internal" href="#equation-eq-old4">(38.4)</a>.</p>
+<p>We can split this problem into two stages, as in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a> and  <span id="id14">[<a class="reference internal" href="zreferences.html#id153"><span>LS18</span></a>]</span> Chapter 19.</p>
+<p>In the first stage, we take the initial inflation rate <span class="math notranslate nohighlight">\(\theta_0\)</span> as given,
+and then solve the resulting LQ dynamic programming problem.</p>
+<p>In the second stage, we maximize over the initial inflation rate <span class="math notranslate nohighlight">\(\theta_0\)</span>.</p>
+<p>Define a feasible set of
+<span class="math notranslate nohighlight">\((\overrightarrow x_1, \overrightarrow \mu_0)\)</span> sequences:</p>
+<div class="math notranslate nohighlight">
+\[
+\Omega(x_0) = \left \lbrace ( \overrightarrow x_1, \overrightarrow \mu_0) : x_{t+1}
+= A x_t + B \mu_t \: , \: \forall t \geq 0 \right \rbrace
+\]</div>
+<div class="section" id="subproblem-1">
+<h3><span class="section-number">38.6.1. </span>Subproblem 1<a class="headerlink" href="#subproblem-1" title="Permalink to this headline">¶</a></h3>
+<p>The value function</p>
+<div class="math notranslate nohighlight">
+\[
+J(x_0) = \max_{(\overrightarrow x_1, \overrightarrow \mu_0) \in \Omega(x_0)}
+- \sum_{t=0}^\infty \beta^t r(x_t,\mu_t)
+\]</div>
+<p>satisfies the Bellman equation</p>
+<div class="math notranslate nohighlight">
+\[
+J(x) = \max_{\mu,x'}\{-r(x,\mu) + \beta J(x')\}
+\]</div>
+<p>subject to:</p>
+<div class="math notranslate nohighlight">
+\[
+x' = Ax + B\mu
+\]</div>
+<p>As in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a>, we map this problem into a linear-quadratic control problem and then carefully use the
+optimal value function associated with it.</p>
+<p>Guessing that <span class="math notranslate nohighlight">\(J(x) = - x'Px\)</span> and substituting into the Bellman
+equation gives rise to the algebraic matrix Riccati equation:</p>
+<div class="math notranslate nohighlight">
+\[
+P = R + \beta A'PA - \beta^2 A'PB(Q + \beta B'PB)^{-1} B'PA
+\]</div>
+<p>and the optimal decision rule</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_t = - F x_t
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+F = \beta (Q + \beta B'PB)^{-1} B'PA
+\]</div>
+<p>The QuantEcon <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqcontrol.py">LQ</a> class solves for <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(P\)</span> given inputs
+<span class="math notranslate nohighlight">\(Q, R, A, B\)</span>, and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
+</div>
+<div class="section" id="subproblem-2">
+<h3><span class="section-number">38.6.2. </span>Subproblem 2<a class="headerlink" href="#subproblem-2" title="Permalink to this headline">¶</a></h3>
+<p>The value of the Ramsey problem is</p>
+<div class="math notranslate nohighlight">
+\[
+V = \max_{x_0} J(x_0)
+\]</div>
+<p>The value function</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+J(x_0) = -\begin{bmatrix} 1 &amp; \theta_0 \end{bmatrix} \begin{bmatrix} P_{11} &amp; P_{12} \\ P_{21} &amp; P_{22} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_0 \end{bmatrix} = -P_{11} - 2 P_{21} \theta_0 - P_{22} \theta_0^2
+\end{split}\]</div>
+<p>Maximizing this with respect to <span class="math notranslate nohighlight">\(\theta_0\)</span> yields the FOC:</p>
+<div class="math notranslate nohighlight">
+\[
+- 2 P_{21} - 2 P_{22} \theta_0 =0
+\]</div>
+<p>which implies</p>
+<div class="math notranslate nohighlight">
+\[
+\theta_0^* = - \frac{P_{21}}{P_{22}}
+\]</div>
+</div>
+<div class="section" id="representation-of-ramsey-plan">
+<h3><span class="section-number">38.6.3. </span>Representation of Ramsey Plan<a class="headerlink" href="#representation-of-ramsey-plan" title="Permalink to this headline">¶</a></h3>
+<p>The preceding calculations indicate that we can represent a Ramsey plan
+<span class="math notranslate nohighlight">\(\vec \mu\)</span> recursively with the following system created in the spirit of Chang <span id="id15">[<a class="reference internal" href="zreferences.html#id195"><span>Cha98</span></a>]</span>:</p>
+<div class="math notranslate nohighlight" id="equation-eq-old9">
+<span class="eqno">(38.9)<a class="headerlink" href="#equation-eq-old9" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+\theta_0 &amp; = \theta_0^* \\
+\mu_t &amp;  = b_0 + b_1 \theta_t \\
+\theta_{t+1} &amp; = d_0 + d_1 \theta_t
+\end{aligned}\end{split}\]</div>
+<p>To interpret this system, think of the  sequence
+<span class="math notranslate nohighlight">\(\{\theta_t\}_{t=0}^\infty\)</span> as a sequence of
+synthetic <strong>promised inflation rates</strong> that are just computational devices for
+generating a sequence <span class="math notranslate nohighlight">\(\vec\mu\)</span> of money growth rates that are to
+be substituted into equation <a class="reference internal" href="#equation-eq-old3">(38.3)</a> to form actual rates of inflation.</p>
+<p>It can be verified that if we substitute a plan
+<span class="math notranslate nohighlight">\(\vec \mu = \{\mu_t\}_{t=0}^\infty\)</span> that satisfies these equations
+into equation <a class="reference internal" href="#equation-eq-old3">(38.3)</a>, we obtain the same sequence <span class="math notranslate nohighlight">\(\vec \theta\)</span>
+generated by the system <a class="reference internal" href="#equation-eq-old9">(38.9)</a>.</p>
+<p>(Here an application of the Big <span class="math notranslate nohighlight">\(K\)</span>, little <span class="math notranslate nohighlight">\(k\)</span> trick could once again be enlightening)</p>
+<p>Thus, our construction of a Ramsey plan guarantees that <strong>promised
+inflation</strong> equals <strong>actual inflation</strong>.</p>
+</div>
+<div class="section" id="multiple-roles-of-theta-t">
+<h3><span class="section-number">38.6.4. </span>Multiple roles of <span class="math notranslate nohighlight">\(\theta_t\)</span><a class="headerlink" href="#multiple-roles-of-theta-t" title="Permalink to this headline">¶</a></h3>
+<p>The inflation rate <span class="math notranslate nohighlight">\(\theta_t\)</span> that appears in the system <a class="reference internal" href="#equation-eq-old9">(38.9)</a> and
+equation <a class="reference internal" href="#equation-eq-old3">(38.3)</a> plays three roles simultaneously:</p>
+<ul class="simple">
+<li><p>In equation <a class="reference internal" href="#equation-eq-old3">(38.3)</a>, <span class="math notranslate nohighlight">\(\theta_t\)</span> is the actual rate of inflation
+between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span>.</p></li>
+<li><p>In equation  <a class="reference internal" href="#equation-eq-old2">(38.2)</a> and <a class="reference internal" href="#equation-eq-old3">(38.3)</a>, <span class="math notranslate nohighlight">\(\theta_t\)</span> is also the public’s
+expected rate of inflation between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span>.</p></li>
+<li><p>In system <a class="reference internal" href="#equation-eq-old9">(38.9)</a>, <span class="math notranslate nohighlight">\(\theta_t\)</span> is a promised rate of inflation
+chosen by the Ramsey planner at time <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+</ul>
+</div>
+<div class="section" id="time-inconsistency">
+<h3><span class="section-number">38.6.5. </span>Time Inconsistency<a class="headerlink" href="#time-inconsistency" title="Permalink to this headline">¶</a></h3>
+<p>As discussed in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a> and <a class="reference internal" href="opt_tax_recur.html"><span class="doc">Optimal taxation with state-contingent debt</span></a>, a continuation Ramsey plan is not a Ramsey plan.</p>
+<p>This is a concise way of characterizing the time inconsistency of a Ramsey plan.</p>
+<p>The time inconsistency of a Ramsey plan has motivated other models of government decision making
+that alter either</p>
+<ul class="simple">
+<li><p>the timing protocol and/or</p></li>
+<li><p>assumptions about how government decision makers think their decisions affect private agents’ beliefs about future government decisions</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="a-constrained-to-a-constant-growth-rate-ramsey-government">
+<h2><a class="toc-backref" href="#id29"><span class="section-number">38.7. </span>A Constrained-to-a-Constant-Growth-Rate Ramsey Government</a><a class="headerlink" href="#a-constrained-to-a-constant-growth-rate-ramsey-government" title="Permalink to this headline">¶</a></h2>
+<p>We now consider the following peculiar model of optimal government behavior.</p>
+<p>We have created this model in order to highlight an aspect of an optimal government policy associated with its time inconsistency,
+namely, the feature that optimal settings of the  policy instrument vary over time.</p>
+<p>Instead of allowing the Ramsey government to choose different settings of its instrument at different moments, we now assume that
+at time <span class="math notranslate nohighlight">\(0\)</span>, a Ramsey  government at time <span class="math notranslate nohighlight">\(0\)</span> once and for all  chooses a <strong>constant</strong> sequence
+<span class="math notranslate nohighlight">\(\mu_t = \check \mu\)</span> for all <span class="math notranslate nohighlight">\(t \geq 0\)</span> to maximize</p>
+<div class="math notranslate nohighlight">
+\[
+U(-\alpha \check \mu) - \frac{c}{2} \check \mu^2
+\]</div>
+<p>Here we have imposed the perfect foresight outcome implied by equation <a class="reference internal" href="#equation-eq-old2">(38.2)</a> that
+<span class="math notranslate nohighlight">\(\theta_t = \check \mu\)</span> when the government chooses a constant
+<span class="math notranslate nohighlight">\(\mu\)</span> for all <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
+<p>With the quadratic form <a class="reference internal" href="#equation-eq-old5">(38.5)</a> for the utility function <span class="math notranslate nohighlight">\(U\)</span>, the
+maximizing <span class="math notranslate nohighlight">\(\bar \mu\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\check \mu = - \frac{\alpha a_1}{\alpha^2 a_2 + c }
+\]</div>
+<p><strong>Summary:</strong> We have  introduced the constrained-to-a-constant <span class="math notranslate nohighlight">\(\mu\)</span>
+government in order to highlight  time-variation of
+<span class="math notranslate nohighlight">\(\mu_t\)</span> as a telltale sign of  time inconsistency of a Ramsey plan.</p>
+</div>
+<div class="section" id="markov-perfect-governments">
+<h2><a class="toc-backref" href="#id30"><span class="section-number">38.8. </span>Markov Perfect Governments</a><a class="headerlink" href="#markov-perfect-governments" title="Permalink to this headline">¶</a></h2>
+<p>We now  change the timing protocol by considering a sequence of
+government policymakers, the time <span class="math notranslate nohighlight">\(t\)</span> representative of which
+chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> and expects all future governments to set
+<span class="math notranslate nohighlight">\(\mu_{t+j} = \bar \mu\)</span>.</p>
+<p>This assumption mirrors an assumption made in a different setting <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov Perfect Equilibrium</a>.</p>
+<p>Further, a government  policymaker at <span class="math notranslate nohighlight">\(t\)</span> believes that <span class="math notranslate nohighlight">\(\bar \mu\)</span> is
+unaffected by its choice of <span class="math notranslate nohighlight">\(\mu_t\)</span>.</p>
+<p>The time <span class="math notranslate nohighlight">\(t\)</span> rate of inflation is then:</p>
+<div class="math notranslate nohighlight">
+\[
+\theta_t = \frac{\alpha}{1+\alpha} \bar \mu + \frac{1}{1+\alpha} \mu_t
+\]</div>
+<p>The time <span class="math notranslate nohighlight">\(t\)</span> government policymaker then chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> to
+maximize:</p>
+<div class="math notranslate nohighlight">
+\[
+W = U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2 + \beta V(\bar \mu)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(V(\bar \mu)\)</span> is the time <span class="math notranslate nohighlight">\(0\)</span> value <span class="math notranslate nohighlight">\(v_0\)</span> of
+recursion <a class="reference internal" href="#equation-eq-old8">(38.8)</a> under a money supply growth rate that is forever constant
+at <span class="math notranslate nohighlight">\(\bar \mu\)</span>.</p>
+<p>Substituting for <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(\theta_t\)</span> gives:</p>
+<div class="math notranslate nohighlight">
+\[
+W = a_0 + a_1(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t) - \frac{a_2}{2}((-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t)^2 - \frac{c}{2} \mu_t^2 + \beta V(\bar \mu)
+\]</div>
+<p>The first-order necessary condition for <span class="math notranslate nohighlight">\(\mu_t\)</span> is then:</p>
+<div class="math notranslate nohighlight">
+\[
+- \frac{\alpha}{1+\alpha} a_1 - a_2(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t)(- \frac{\alpha}{1+\alpha}) - c \mu_t = 0
+\]</div>
+<p>Rearranging we get:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_t = \frac{- a_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha}a_2} - \frac{\alpha^2 a_2}{\left[ \frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} a_2 \right] (1+\alpha)}\bar \mu
+\]</div>
+<p>A <strong>Markov Perfect Equilibrium</strong> (MPE) outcome sets
+<span class="math notranslate nohighlight">\(\mu_t = \bar \mu\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_t = \bar \mu = \frac{-a_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} a_2 + \frac{\alpha^2}{1+\alpha} a_2}
+\]</div>
+<p>In light of results  presented in the previous section, this can be
+simplified to:</p>
+<div class="math notranslate nohighlight">
+\[
+\bar \mu = - \frac{\alpha a_1}{\alpha^2 a_2 + (1+\alpha)c}
+\]</div>
+</div>
+<div class="section" id="equilibrium-outcomes-for-three-models-of-government-policy-making">
+<h2><a class="toc-backref" href="#id31"><span class="section-number">38.9. </span>Equilibrium Outcomes for Three Models of Government Policy Making</a><a class="headerlink" href="#equilibrium-outcomes-for-three-models-of-government-policy-making" title="Permalink to this headline">¶</a></h2>
+<p>Below we compute sequences <span class="math notranslate nohighlight">\(\{ \theta_t,\mu_t \}\)</span> under a Ramsey
+plan and compare these with the constant levels of <span class="math notranslate nohighlight">\(\theta\)</span> and
+<span class="math notranslate nohighlight">\(\mu\)</span> in a) a Markov Perfect Equilibrium, and b) a Ramsey plan
+in which the planner is restricted to choose <span class="math notranslate nohighlight">\(\mu_t = \check\mu\)</span>
+for all <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
+<p>We denote the Ramsey sequence as <span class="math notranslate nohighlight">\(\theta^R, \mu^R\)</span> and the MPE
+values as <span class="math notranslate nohighlight">\(\theta^{MPE}, \mu^{MPE}\)</span>.</p>
+<p>The bliss level of inflation is denoted by <span class="math notranslate nohighlight">\(\theta^*\)</span>.</p>
+<p>First, we will create a class ChangLQ that solves the models and stores their values</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ChangLQ</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Class to solve LQ Chang model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">α0</span><span class="p">,</span> <span class="n">α1</span><span class="p">,</span> <span class="n">α2</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">θ_n</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+
+        <span class="c1"># Record parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">α0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">α1</span> <span class="o">=</span> <span class="n">α</span><span class="p">,</span> <span class="n">α0</span><span class="p">,</span> <span class="n">α1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">α2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">θ_n</span> <span class="o">=</span> <span class="n">α2</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">θ_n</span>
+
+        <span class="c1"># Create β using &quot;Poor Man&#39;s Friedman Rule&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">α1</span> <span class="o">/</span> <span class="p">(</span><span class="n">α</span> <span class="o">*</span> <span class="n">α2</span><span class="p">))</span>
+
+        <span class="c1"># Solve the Ramsey Problem #</span>
+
+        <span class="c1"># LQ Matrices</span>
+        <span class="n">R</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">α0</span><span class="p">,</span>            <span class="o">-</span><span class="n">α1</span> <span class="o">*</span> <span class="n">α</span> <span class="o">/</span> <span class="mi">2</span><span class="p">],</span>
+                       <span class="p">[</span><span class="o">-</span><span class="n">α1</span> <span class="o">*</span> <span class="n">α</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="n">α2</span> <span class="o">*</span> <span class="n">α</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]])</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="n">c</span> <span class="o">/</span> <span class="mi">2</span><span class="p">]])</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">α</span><span class="p">)</span> <span class="o">/</span> <span class="n">α</span><span class="p">]])</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="n">α</span><span class="p">]])</span>
+
+        <span class="c1"># Solve LQ Problem (Subproblem 1)</span>
+        <span class="n">lq</span> <span class="o">=</span> <span class="n">LQ</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">lq</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">()</span>
+
+        <span class="c1"># Solve Subproblem 2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">θ_R</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Find bliss level of θ</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">θ_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">)</span>
+
+        <span class="c1"># Solve the Markov Perfect Equilibrium</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">μ_MPE</span> <span class="o">=</span> <span class="o">-</span><span class="n">α1</span> <span class="o">/</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">α</span><span class="p">)</span> <span class="o">/</span> <span class="n">α</span> <span class="o">*</span> <span class="n">c</span> <span class="o">+</span> <span class="n">α</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">α</span><span class="p">)</span>
+                      <span class="o">*</span> <span class="n">α2</span> <span class="o">+</span> <span class="n">α</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">α</span><span class="p">)</span> <span class="o">*</span> <span class="n">α2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">θ_MPE</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ_MPE</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">μ_check</span> <span class="o">=</span> <span class="o">-</span><span class="n">α</span> <span class="o">*</span> <span class="n">α1</span> <span class="o">/</span> <span class="p">(</span><span class="n">α2</span> <span class="o">*</span> <span class="n">α</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span>
+
+        <span class="c1"># Calculate value under MPE and Check economy</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_MPE</span>  <span class="o">=</span> <span class="p">(</span><span class="n">α0</span> <span class="o">+</span> <span class="n">α1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">α</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ_MPE</span><span class="p">)</span> <span class="o">-</span> <span class="n">α2</span> <span class="o">/</span> <span class="mi">2</span>
+                      <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">α</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ_MPE</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">c</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ_MPE</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_check</span> <span class="o">=</span> <span class="p">(</span><span class="n">α0</span> <span class="o">+</span> <span class="n">α1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">α</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ_check</span><span class="p">)</span> <span class="o">-</span> <span class="n">α2</span><span class="o">/</span><span class="mi">2</span>
+                        <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">α</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ_check</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">c</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">μ_check</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> \
+                        <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">)</span>
+
+        <span class="c1"># Simulate Ramsey plan for large number of periods</span>
+        <span class="n">θ_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">))))</span>
+        <span class="n">μ_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">J_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+        <span class="n">θ_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">θ_R</span>
+        <span class="n">μ_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">θ_series</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="n">J_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">θ_series</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span> <span class="o">@</span> <span class="n">θ_series</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+            <span class="n">θ_series</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">)</span> <span class="o">@</span> <span class="n">θ_series</span><span class="p">[:,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">μ_series</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">@</span> <span class="n">θ_series</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span>
+            <span class="n">J_series</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">θ_series</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span> <span class="o">@</span> <span class="n">θ_series</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_series</span> <span class="o">=</span> <span class="n">J_series</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">μ_series</span> <span class="o">=</span> <span class="n">μ_series</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">θ_series</span> <span class="o">=</span> <span class="n">θ_series</span>
+
+        <span class="c1"># Find the range of θ in Ramsey plan</span>
+        <span class="n">θ_LB</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">θ_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">θ_LB</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">θ_LB</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">θ_B</span><span class="p">)</span>
+        <span class="n">θ_UB</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">θ_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+        <span class="n">θ_UB</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">θ_UB</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">θ_MPE</span><span class="p">)</span>
+        <span class="n">θ_range</span> <span class="o">=</span> <span class="n">θ_UB</span> <span class="o">-</span> <span class="n">θ_LB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">θ_LB</span> <span class="o">=</span> <span class="n">θ_LB</span> <span class="o">-</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">θ_range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">θ_UB</span> <span class="o">=</span> <span class="n">θ_UB</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">θ_range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">θ_range</span> <span class="o">=</span> <span class="n">θ_range</span>
+
+        <span class="c1"># Find value function and policy functions over range of θ</span>
+        <span class="n">θ_space</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">θ_LB</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">θ_UB</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+        <span class="n">J_space</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+        <span class="n">check_space</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+        <span class="n">μ_space</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+        <span class="n">θ_prime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">200</span><span class="p">):</span>
+            <span class="n">J_space</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">θ_space</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> \
+                        <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">P</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">θ_space</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span><span class="o">.</span><span class="n">T</span>
+            <span class="n">μ_space</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">θ_space</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">x_prime</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">θ_space</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+            <span class="n">θ_prime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x_prime</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">check_space</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">α0</span> <span class="o">+</span> <span class="n">α1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">α</span> <span class="o">*</span> <span class="n">θ_space</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">-</span>
+            <span class="n">α2</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">α</span> <span class="o">*</span> <span class="n">θ_space</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">c</span><span class="o">/</span><span class="mi">2</span> <span class="o">*</span> <span class="n">θ_space</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">)</span>
+
+        <span class="n">J_LB</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">J_space</span><span class="p">)</span>
+        <span class="n">J_UB</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">J_space</span><span class="p">)</span>
+        <span class="n">J_range</span> <span class="o">=</span> <span class="n">J_UB</span> <span class="o">-</span> <span class="n">J_LB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_LB</span> <span class="o">=</span> <span class="n">J_LB</span> <span class="o">-</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">J_range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_UB</span> <span class="o">=</span> <span class="n">J_UB</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">J_range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_range</span> <span class="o">=</span> <span class="n">J_range</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">J_space</span> <span class="o">=</span> <span class="n">J_space</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">θ_space</span> <span class="o">=</span> <span class="n">θ_space</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">μ_space</span> <span class="o">=</span> <span class="n">μ_space</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">θ_prime</span> <span class="o">=</span> <span class="n">θ_prime</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_space</span> <span class="o">=</span> <span class="n">check_space</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will create an instance of ChangLQ with the following parameters</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clq</span> <span class="o">=</span> <span class="n">ChangLQ</span><span class="p">(</span><span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">α0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">α1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">α2</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">clq</span><span class="o">.</span><span class="n">β</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8464817248906141
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following code generates a figure that plots the value function from the Ramsey Planner’s
+problem, which is maximized at <span class="math notranslate nohighlight">\(\theta^R_0\)</span>.</p>
+<p>The figure also shows the limiting value <span class="math notranslate nohighlight">\(\theta_\infty^R\)</span> to which  the inflation rate <span class="math notranslate nohighlight">\(\theta_t\)</span> converges under the Ramsey plan and compares it to the MPE value and the bliss value.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_value_function</span><span class="p">(</span><span class="n">clq</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method to plot the value function over the relevant range of θ</span>
+
+<span class="sd">    Here clq is an instance of ChangLQ</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_LB</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_UB</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">clq</span><span class="o">.</span><span class="n">J_LB</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">J_UB</span><span class="p">])</span>
+
+    <span class="c1"># Plot value function</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_space</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">J_space</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$J(\theta)$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_space</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">J_space</span><span class="p">)]</span>
+    <span class="n">tR</span> <span class="o">=</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">θ_points</span> <span class="o">=</span> <span class="p">[</span><span class="n">t1</span><span class="p">,</span> <span class="n">tR</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_B</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_MPE</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$\theta_0^R$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\theta_\infty^R$&quot;</span><span class="p">,</span>
+              <span class="sa">r</span><span class="s2">&quot;$\theta^*$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\theta^</span><span class="si">{MPE}</span><span class="s2">$&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Add points for θs</span>
+    <span class="k">for</span> <span class="n">θ</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">θ_points</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">J_LB</span> <span class="o">+</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">J_range</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span>
+                    <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">J_LB</span> <span class="o">+</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">J_range</span><span class="p">),</span>
+                    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">θ</span> <span class="o">-</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_range</span><span class="p">,</span>
+                    <span class="n">clq</span><span class="o">.</span><span class="n">J_LB</span> <span class="o">+</span> <span class="mf">0.08</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">J_range</span><span class="p">),</span>
+                    <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plot_value_function</span><span class="p">(</span><span class="n">clq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/calvo_9_0.png" src="_images/calvo_9_0.png" />
+</div>
+</div>
+<p>The next code generates a figure that plots the value function from the Ramsey Planner’s
+problem as well as that for a Ramsey planner that  must choose a constant
+<span class="math notranslate nohighlight">\(\mu\)</span> (that in turn  equals an  implied constant <span class="math notranslate nohighlight">\(\theta\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compare_ramsey_check</span><span class="p">(</span><span class="n">clq</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method to compare values of Ramsey and Check</span>
+
+<span class="sd">    Here clq is an instance of ChangLQ</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+    <span class="n">check_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">check_space</span><span class="p">)</span>
+    <span class="n">check_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">check_space</span><span class="p">)</span>
+    <span class="n">check_range</span> <span class="o">=</span> <span class="n">check_max</span> <span class="o">-</span> <span class="n">check_min</span>
+    <span class="n">check_LB</span> <span class="o">=</span> <span class="n">check_min</span> <span class="o">-</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">check_range</span>
+    <span class="n">check_UB</span> <span class="o">=</span> <span class="n">check_max</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">check_range</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_LB</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_UB</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">check_LB</span><span class="p">,</span> <span class="n">check_UB</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_space</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">J_space</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$J(\theta)$&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_space</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">check_space</span><span class="p">,</span>
+            <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$V^\check(\theta)$&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+
+    <span class="n">θ_points</span> <span class="o">=</span> <span class="p">[</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_space</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">J_space</span><span class="p">)],</span>
+                    <span class="n">clq</span><span class="o">.</span><span class="n">μ_check</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$\theta_0^R$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\theta^\check$&quot;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">θ</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">θ_points</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">check_LB</span> <span class="o">+</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">check_range</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span>
+                    <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">check_LB</span> <span class="o">+</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">check_range</span><span class="p">),</span>
+                    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">θ</span> <span class="o">-</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">check_range</span><span class="p">,</span>
+                            <span class="n">check_LB</span> <span class="o">+</span> <span class="mf">0.08</span> <span class="o">*</span> <span class="n">check_range</span><span class="p">),</span>
+                    <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">compare_ramsey_check</span><span class="p">(</span><span class="n">clq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/calvo_11_0.png" src="_images/calvo_11_0.png" />
+</div>
+</div>
+<p>The next code generates  figures that plot the policy functions for a continuation Ramsey
+planner.</p>
+<p>The left figure shows the choice of <span class="math notranslate nohighlight">\(\theta'\)</span> chosen by a
+continuation Ramsey planner who inherits <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>The right figure plots a continuation Ramsey planner’s choice of
+<span class="math notranslate nohighlight">\(\mu\)</span> as a function of an inherited <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_policy_functions</span><span class="p">(</span><span class="n">clq</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method to plot the policy functions over the relevant range of θ</span>
+
+<span class="sd">    Here clq is an instance of ChangLQ</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$\theta_0^R$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\theta_\infty^R$&quot;</span><span class="p">]</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_LB</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_UB</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_space</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_prime</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\theta&#39;(\theta)$&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_LB</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_UB</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta&#39;$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+    <span class="n">θ_points</span> <span class="o">=</span> <span class="p">[</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_space</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">J_space</span><span class="p">)],</span>
+                    <span class="n">clq</span><span class="o">.</span><span class="n">θ_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+    <span class="k">for</span> <span class="n">θ</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">θ_points</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_LB</span> <span class="o">+</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_range</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span>
+                    <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_LB</span> <span class="o">+</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_range</span><span class="p">),</span>
+                    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">θ</span> <span class="o">-</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_range</span><span class="p">,</span>
+                            <span class="n">clq</span><span class="o">.</span><span class="n">θ_LB</span> <span class="o">+</span> <span class="mf">0.08</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_range</span><span class="p">),</span>
+                    <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">μ_min</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">μ_space</span><span class="p">)</span>
+    <span class="n">μ_max</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">μ_space</span><span class="p">)</span>
+    <span class="n">μ_range</span> <span class="o">=</span> <span class="n">μ_max</span> <span class="o">-</span> <span class="n">μ_min</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">μ_min</span> <span class="o">-</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">μ_range</span><span class="p">,</span> <span class="n">μ_max</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">μ_range</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_space</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">μ_space</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\mu(\theta)$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\theta$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_LB</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_UB</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">θ</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">θ_points</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">μ_min</span> <span class="o">-</span> <span class="mf">0.03</span> <span class="o">*</span> <span class="n">μ_range</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="s1">&#39;v&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">μ_min</span> <span class="o">-</span> <span class="mf">0.03</span> <span class="o">*</span> <span class="n">μ_range</span><span class="p">),</span>
+                    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="n">θ</span> <span class="o">-</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">θ_range</span><span class="p">,</span>
+                            <span class="n">μ_min</span> <span class="o">+</span> <span class="mf">0.03</span> <span class="o">*</span> <span class="n">μ_range</span><span class="p">),</span>
+                    <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plot_policy_functions</span><span class="p">(</span><span class="n">clq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/calvo_13_0.png" src="_images/calvo_13_0.png" />
+</div>
+</div>
+<p>The following code generates a figure that plots sequences of <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\theta\)</span>
+in the Ramsey plan and compares these to the constant levels in a MPE
+and in a Ramsey plan with a government restricted to set <span class="math notranslate nohighlight">\(\mu_t\)</span>
+to a constant for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_ramsey_MPE</span><span class="p">(</span><span class="n">clq</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Method to plot Ramsey plan against Markov Perfect Equilibrium</span>
+
+<span class="sd">    Here clq is an instance of ChangLQ</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+    <span class="n">plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="n">T</span><span class="p">],</span> <span class="n">clq</span><span class="o">.</span><span class="n">μ_series</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">T</span><span class="p">]]</span>
+    <span class="n">MPEs</span> <span class="o">=</span> <span class="p">[</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_MPE</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">μ_MPE</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;\theta&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\mu&quot;</span><span class="p">]</span>
+
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_B</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\theta^*$&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">plot</span><span class="p">,</span> <span class="n">MPE</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">plots</span><span class="p">,</span> <span class="n">MPEs</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$&quot;</span> <span class="o">+</span> <span class="n">label</span> <span class="o">+</span> <span class="s2">&quot;^R$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">MPE</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$&quot;</span> <span class="o">+</span> <span class="n">label</span> <span class="o">+</span> <span class="s2">&quot;^</span><span class="si">{MPE}</span><span class="s2">$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">μ_check</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$&quot;</span> <span class="o">+</span> <span class="n">label</span> <span class="o">+</span> <span class="s2">&quot;^\check$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$t$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$&quot;</span> <span class="o">+</span> <span class="n">label</span> <span class="o">+</span> <span class="s2">&quot;_t$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">plot_ramsey_MPE</span><span class="p">(</span><span class="n">clq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/calvo_15_0.png" src="_images/calvo_15_0.png" />
+</div>
+</div>
+<div class="section" id="time-inconsistency-of-ramsey-plan">
+<h3><span class="section-number">38.9.1. </span>Time Inconsistency of Ramsey Plan<a class="headerlink" href="#time-inconsistency-of-ramsey-plan" title="Permalink to this headline">¶</a></h3>
+<p>The variation over time in <span class="math notranslate nohighlight">\(\vec \mu\)</span> chosen by the Ramsey planner
+is a symptom of time inconsistency.</p>
+<ul class="simple">
+<li><p>The Ramsey planner reaps immediate benefits from promising lower
+inflation later to be achieved by costly distorting taxes.</p></li>
+<li><p>These benefits are intermediated by reductions in expected inflation
+that precede the  reductions in money creation rates that rationalize them, as indicated by
+equation <a class="reference internal" href="#equation-eq-old3">(38.3)</a>.</p></li>
+<li><p>A government authority offered the opportunity to ignore effects on
+past utilities and to reoptimize at date <span class="math notranslate nohighlight">\(t \geq 1\)</span> would, if allowed, want
+to deviate from a Ramsey plan.</p></li>
+</ul>
+<p><strong>Note:</strong> A modified Ramsey plan constructed under the restriction that
+<span class="math notranslate nohighlight">\(\mu_t\)</span> must be constant over time is time consistent (see
+<span class="math notranslate nohighlight">\(\check \mu\)</span> and <span class="math notranslate nohighlight">\(\check \theta\)</span> in the above graphs).</p>
+</div>
+<div class="section" id="meaning-of-time-inconsistency">
+<h3><span class="section-number">38.9.2. </span>Meaning of Time Inconsistency<a class="headerlink" href="#meaning-of-time-inconsistency" title="Permalink to this headline">¶</a></h3>
+<p>In settings in which governments actually choose sequentially, many economists
+regard a time inconsistent plan implausible because of the incentives to
+deviate that occur along the plan.</p>
+<p>A way to summarize this <em>defect</em> in a Ramsey plan is to say that it
+is not credible because there  endure incentives for policymakers
+to deviate from it.</p>
+<p>For that reason, the Markov perfect equilibrium concept attracts many
+economists.</p>
+<ul class="simple">
+<li><p>A Markov perfect equilibrium plan is constructed to insure that government policymakers who choose sequentially do not want to deviate from it.</p></li>
+</ul>
+<p>The <em>no incentive to deviate from the plan</em> property is what makes the Markov perfect equilibrium concept attractive.</p>
+</div>
+<div class="section" id="ramsey-plans-strike-back">
+<h3><span class="section-number">38.9.3. </span>Ramsey Plans Strike Back<a class="headerlink" href="#ramsey-plans-strike-back" title="Permalink to this headline">¶</a></h3>
+<p>Research by Abreu <span id="id16">[<a class="reference internal" href="zreferences.html#id56"><span>Abr88</span></a>]</span>,  Chari and Kehoe <span id="id17">[<a class="reference internal" href="zreferences.html#id196"><span>CK90</span></a>]</span>
+<span id="id18">[<a class="reference internal" href="zreferences.html#id203"><span>Sto89</span></a>]</span>, and Stokey <span id="id19">[<a class="reference internal" href="zreferences.html#id57"><span>Sto91</span></a>]</span> discovered conditions under which a Ramsey plan can be rescued from the complaint that it is not credible.</p>
+<p>They  accomplished this by expanding the
+description of a plan to include expectations about <strong>adverse consequences</strong> of deviating from
+it that can serve to deter deviations.</p>
+<p>We turn to such theories of <strong>sustainable plans</strong> next.</p>
+</div>
+</div>
+<div class="section" id="a-fourth-model-of-government-decision-making">
+<h2><a class="toc-backref" href="#id32"><span class="section-number">38.10. </span>A Fourth Model of Government Decision Making</a><a class="headerlink" href="#a-fourth-model-of-government-decision-making" title="Permalink to this headline">¶</a></h2>
+<p>This is a model in which</p>
+<ul class="simple">
+<li><p>The government chooses <span class="math notranslate nohighlight">\(\{\mu_t\}_{t=0}^\infty\)</span> not once and
+for all at <span class="math notranslate nohighlight">\(t=0\)</span> but chooses to set <span class="math notranslate nohighlight">\(\mu_t\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, not before.</p></li>
+<li><p>private agents’ forecasts of
+<span class="math notranslate nohighlight">\(\{\mu_{t+j+1}, \theta_{t+j+1}\}_{j=0}^\infty\)</span> respond to
+whether the government at <span class="math notranslate nohighlight">\(t\)</span> <strong>confirms</strong> or <strong>disappoints</strong>
+their forecasts of <span class="math notranslate nohighlight">\(\mu_t\)</span> brought into period <span class="math notranslate nohighlight">\(t\)</span> from
+period <span class="math notranslate nohighlight">\(t-1\)</span>.</p></li>
+<li><p>the government at each time <span class="math notranslate nohighlight">\(t\)</span> understands how private agents’
+forecasts will respond to its choice of <span class="math notranslate nohighlight">\(\mu_t\)</span>.</p></li>
+<li><p>at each <span class="math notranslate nohighlight">\(t\)</span>, the government chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> to maximize
+a continuation discounted utility of a representative household.</p></li>
+</ul>
+<div class="section" id="a-theory-of-government-decision-making">
+<h3><span class="section-number">38.10.1. </span>A Theory of Government Decision Making<a class="headerlink" href="#a-theory-of-government-decision-making" title="Permalink to this headline">¶</a></h3>
+<p><span class="math notranslate nohighlight">\(\vec \mu\)</span> is chosen by a sequence of government
+decision makers, one for each <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
+<p>We assume the following within-period and between-period timing protocol
+for each <span class="math notranslate nohighlight">\(t \geq 0\)</span>:</p>
+<ul class="simple">
+<li><p>at time <span class="math notranslate nohighlight">\(t-1\)</span>, private agents expect  that the government will set
+<span class="math notranslate nohighlight">\(\mu_t = \tilde \mu_t\)</span>, and more generally that it will set
+<span class="math notranslate nohighlight">\(\mu_{t+j} = \tilde \mu_{t+j}\)</span> for all <span class="math notranslate nohighlight">\(j \geq 0\)</span>.</p></li>
+<li><p>The forecasts <span class="math notranslate nohighlight">\(\{\tilde \mu_{t+j}\}_{j \geq 0}\)</span> determine a
+<span class="math notranslate nohighlight">\(\theta_t = \tilde \theta_t\)</span> and an associated log
+of real balances <span class="math notranslate nohighlight">\(m_t - p_t = -\alpha\tilde \theta_t\)</span> at
+<span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Given those expectations and an associated <span class="math notranslate nohighlight">\(\theta_t = \tilde \theta_t\)</span>, at
+<span class="math notranslate nohighlight">\(t\)</span> a government is free to set <span class="math notranslate nohighlight">\(\mu_t \in {\bf R}\)</span>.</p></li>
+<li><p>If the government at <span class="math notranslate nohighlight">\(t\)</span> <strong>confirms</strong> private agents’
+expectations by setting <span class="math notranslate nohighlight">\(\mu_t = \tilde \mu_t\)</span> at time
+<span class="math notranslate nohighlight">\(t\)</span>, private agents expect the continuation government policy
+<span class="math notranslate nohighlight">\(\{\tilde \mu_{t+j+1}\}_{j=0}^\infty\)</span> and therefore bring
+expectation <span class="math notranslate nohighlight">\(\tilde \theta_{t+1}\)</span> into period <span class="math notranslate nohighlight">\(t+1\)</span>.</p></li>
+<li><p>If the government at <span class="math notranslate nohighlight">\(t\)</span> <strong>disappoints</strong> private agents by setting
+<span class="math notranslate nohighlight">\(\mu_t \neq \tilde \mu_t\)</span>, private agents expect
+<span class="math notranslate nohighlight">\(\{\mu^A_j\}_{j=0}^\infty\)</span> as the
+continuation policy for <span class="math notranslate nohighlight">\(t+1\)</span>, i.e.,
+<span class="math notranslate nohighlight">\(\{\mu_{t+j+1}\} = \{\mu_j^A \}_{j=0}^\infty\)</span> and therefore
+expect an associated <span class="math notranslate nohighlight">\(\theta_0^A\)</span> for <span class="math notranslate nohighlight">\(t+1\)</span>. Here <span class="math notranslate nohighlight">\(\vec \mu^A = \{\mu_j^A \}_{j=0}^\infty\)</span> is
+an alternative government plan to be described below.</p></li>
+</ul>
+</div>
+<div class="section" id="temptation-to-deviate-from-plan">
+<h3><span class="section-number">38.10.2. </span>Temptation to Deviate from Plan<a class="headerlink" href="#temptation-to-deviate-from-plan" title="Permalink to this headline">¶</a></h3>
+<p>The government’s one-period return function <span class="math notranslate nohighlight">\(s(\theta,\mu)\)</span>
+described in equation <a class="reference internal" href="#equation-eq-old6">(38.6)</a> above has the property that for all
+<span class="math notranslate nohighlight">\(\theta\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+- s(\theta, 0 ) \geq  - s(\theta, \mu) \quad
+\]</div>
+<p>This inequality implies that whenever the policy calls for the
+government to set <span class="math notranslate nohighlight">\(\mu \neq 0\)</span>, the government could raise its
+one-period payoff by setting <span class="math notranslate nohighlight">\(\mu =0\)</span>.</p>
+<p>Disappointing private sector expectations in that way would increase the
+government’s <strong>current</strong> payoff but would have adverse consequences for
+<strong>subsequent</strong> government payoffs because the private sector would alter
+its expectations about future settings of <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<p>The <strong>temporary</strong> gain constitutes the government’s temptation to
+deviate from a plan.</p>
+<p>If the government at <span class="math notranslate nohighlight">\(t\)</span> is to resist the temptation to raise its
+current payoff, it is only because it forecasts adverse  consequences that
+its setting of <span class="math notranslate nohighlight">\(\mu_t\)</span> would bring for continuation  government payoffs via  alterations  in the private sector’s expectations.</p>
+</div>
+</div>
+<div class="section" id="sustainable-or-credible-plan">
+<h2><a class="toc-backref" href="#id33"><span class="section-number">38.11. </span>Sustainable or Credible Plan</a><a class="headerlink" href="#sustainable-or-credible-plan" title="Permalink to this headline">¶</a></h2>
+<p>We call a plan <span class="math notranslate nohighlight">\(\vec \mu\)</span> <strong>sustainable</strong> or <strong>credible</strong> if at
+each <span class="math notranslate nohighlight">\(t \geq 0\)</span> the government chooses to confirm private
+agents’ prior expectation of its setting for <span class="math notranslate nohighlight">\(\mu_t\)</span>.</p>
+<p>The government will choose to confirm prior expectations only if the
+long-term <strong>loss</strong> from disappointing private sector expectations –
+coming from the government’s understanding of the way the private sector
+adjusts its  expectations in response to having its prior
+expectations at <span class="math notranslate nohighlight">\(t\)</span> disappointed – outweigh the short-term
+<strong>gain</strong> from disappointing those expectations.</p>
+<p>The theory of sustainable or credible plans assumes throughout that private sector
+expectations about what future governments will do are based on the
+assumption that governments at times <span class="math notranslate nohighlight">\(t \geq 0\)</span> always act to
+maximize the continuation discounted utilities that describe those
+governments’ purposes.</p>
+<p>This aspect of the theory means that credible plans always come in <strong>pairs</strong>:</p>
+<ul class="simple">
+<li><p>a credible (continuation) plan to be followed if the government at
+<span class="math notranslate nohighlight">\(t\)</span> <strong>confirms</strong> private sector expectations</p></li>
+<li><p>a credible plan to be followed if the government at <span class="math notranslate nohighlight">\(t\)</span>
+<strong>disappoints</strong> private sector expectations</p></li>
+</ul>
+<p>That credible plans come in pairs threaten to bring an explosion of plans to keep track of</p>
+<ul class="simple">
+<li><p>each credible plan itself consists of two credible plans</p></li>
+<li><p>therefore, the number of plans underlying one plan is unbounded</p></li>
+</ul>
+<p>But Dilip Abreu showed how to render manageable the number of plans that must be kept track of.</p>
+<p>The key is an  object called a <strong>self-enforcing</strong> plan.</p>
+<div class="section" id="abreu-s-self-enforcing-plan">
+<h3><span class="section-number">38.11.1. </span>Abreu’s Self-Enforcing Plan<a class="headerlink" href="#abreu-s-self-enforcing-plan" title="Permalink to this headline">¶</a></h3>
+<p>A plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> (here the superscipt <span class="math notranslate nohighlight">\(A\)</span> is for Abreu) is said to be <strong>self-enforcing</strong> if</p>
+<ul class="simple">
+<li><p>the consequence of disappointing private agents’ expectations at time
+<span class="math notranslate nohighlight">\(j\)</span> is to <strong>restart</strong>  plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span>  at time <span class="math notranslate nohighlight">\(j+1\)</span></p></li>
+<li><p>the consequence of restarting the plan is sufficiently adverse that it forever deters all
+deviations from the plan</p></li>
+</ul>
+<p>More precisely, a government plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> with equilibrium inflation sequence <span class="math notranslate nohighlight">\(\vec \theta^A\)</span> is
+<strong>self-enforcing</strong> if</p>
+<div class="math notranslate nohighlight" id="equation-eq-old10">
+<span class="eqno">(38.10)<a class="headerlink" href="#equation-eq-old10" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+v_j^A &amp; = - s(\theta^A_j, \mu^A_j) + \beta v_{j+1}^A \\
+&amp; \geq - s(\theta^A_j, 0 ) + \beta v_0^A \equiv v_j^{A,D}, \quad j \geq 0
+\end{aligned}\end{split}\]</div>
+<p>(Here it is useful to recall that setting <span class="math notranslate nohighlight">\(\mu=0\)</span> is the maximizing choice for the government’s one-period return function)</p>
+<p>The first line tells the consequences of confirming private agents’
+expectations by following the plan, while the second line tells the consequences of
+disappointing private agents’ expectations by deviating from the plan.</p>
+<p>A consequence of the inequality stated in the  definition is that a self-enforcing plan is
+credible.</p>
+<p>Self-enforcing plans can be used to construct other credible plans, including ones with better values.</p>
+<p>Thus, where <span class="math notranslate nohighlight">\(\vec v^A\)</span> is the value associated with a self-enforcing plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span>,
+a sufficient condition for another plan <span class="math notranslate nohighlight">\(\vec \mu\)</span> associated with inflation <span class="math notranslate nohighlight">\(\vec \theta\)</span> and value <span class="math notranslate nohighlight">\(\vec v\)</span>  to be <strong>credible</strong> is that</p>
+<div class="math notranslate nohighlight" id="equation-eq-old100a">
+<span class="eqno">(38.11)<a class="headerlink" href="#equation-eq-old100a" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+v_j &amp; = - s( \theta_j, \mu_j) + \beta  v_{j+1} \\
+&amp; \geq  -s( \theta_j, 0) + \beta v_0^A \quad \forall j \geq 0
+\end{aligned}\end{split}\]</div>
+<p>For this condition to be satisfied it is necessary and sufficient that</p>
+<div class="math notranslate nohighlight">
+\[
+-s( \theta_j, 0) - ( - s( \theta_j, \mu_j) )  &lt;  \beta ( v_{j+1} - v_0^A )
+\]</div>
+<p>The left side of the above inequality is the government’s <strong>gain</strong> from deviating from the plan, while the right side is the government’s <strong>loss</strong> from deviating
+from the plan.</p>
+<p>A government never wants to deviate from a credible plan.</p>
+<p>Abreu taught us that  key step in constructing a credible plan is first constructing a
+self-enforcing plan that has a low time <span class="math notranslate nohighlight">\(0\)</span> value.</p>
+<p>The idea is to use the self-enforcing plan as a continuation plan whenever
+the government’s choice at time <span class="math notranslate nohighlight">\(t\)</span> fails to confirm private
+agents’ expectation.</p>
+<p>We shall use a construction featured in Abreu (<span id="id20">[<a class="reference internal" href="zreferences.html#id56"><span>Abr88</span></a>]</span>) to construct a
+self-enforcing plan with low time <span class="math notranslate nohighlight">\(0\)</span> value.</p>
+</div>
+<div class="section" id="abreu-carrot-stick-plan">
+<h3><span class="section-number">38.11.2. </span>Abreu Carrot-Stick Plan<a class="headerlink" href="#abreu-carrot-stick-plan" title="Permalink to this headline">¶</a></h3>
+<p>Abreu (<span id="id21">[<a class="reference internal" href="zreferences.html#id56"><span>Abr88</span></a>]</span>) invented a way to create a self-enforcing plan with a low
+initial value.</p>
+<p>Imitating his idea, we can construct a self-enforcing plan
+<span class="math notranslate nohighlight">\(\vec \mu\)</span> with a low time <span class="math notranslate nohighlight">\(0\)</span> value to the government by
+insisting that future government decision makers set <span class="math notranslate nohighlight">\(\mu_t\)</span> to a value yielding low
+one-period utilities to the household for a long time, after which
+government  decisions thereafter  yield high one-period utilities.</p>
+<ul class="simple">
+<li><p>Low one-period utilities early are a <strong>stick</strong></p></li>
+<li><p>High one-period utilities later are a <strong>carrot</strong></p></li>
+</ul>
+<p>Consider a candidate plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> that sets
+<span class="math notranslate nohighlight">\(\mu_t^A = \bar \mu\)</span> (a high positive
+number) for <span class="math notranslate nohighlight">\(T_A\)</span> periods, and then reverts to the Ramsey plan.</p>
+<p>Denote this sequence by <span class="math notranslate nohighlight">\(\{\mu_t^A\}_{t=0}^\infty\)</span>.</p>
+<p>The sequence of inflation rates implied by this plan,
+<span class="math notranslate nohighlight">\(\{\theta_t^A\}_{t=0}^\infty\)</span>, can be calculated using:</p>
+<div class="math notranslate nohighlight">
+\[
+\theta_t^A = \frac{1}{1+\alpha} \sum_{j=0}^{\infty} \left(\frac{\alpha}{1+\alpha}\right)^j \mu^A_{t+j}
+\]</div>
+<p>The value of <span class="math notranslate nohighlight">\(\{\theta_t^A,\mu_t^A \}_{t=0}^\infty\)</span> at time <span class="math notranslate nohighlight">\(0\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+v^A_0 =  - \sum_{t=0}^{T_A-1} \beta^t s(\theta_t^A,\mu_t^A) +\beta^{T_A} J(\theta^R_0)
+\]</div>
+<p>For an appropriate <span class="math notranslate nohighlight">\(T_A\)</span>, this plan can be verified to be self-enforcing and therefore credible.</p>
+</div>
+<div class="section" id="example-of-self-enforcing-plan">
+<h3><span class="section-number">38.11.3. </span>Example of Self-Enforcing Plan<a class="headerlink" href="#example-of-self-enforcing-plan" title="Permalink to this headline">¶</a></h3>
+<p>The following example implements an Abreu stick-and-carrot plan.</p>
+<p>The government sets <span class="math notranslate nohighlight">\(\mu_t^A = 0.1\)</span> for <span class="math notranslate nohighlight">\(t=0, 1, \ldots, 9\)</span>
+and then starts the <strong>Ramsey plan</strong>.</p>
+<p>We have computed outcomes for this plan.</p>
+<p>For this plan, we plot the <span class="math notranslate nohighlight">\(\theta^A\)</span>, <span class="math notranslate nohighlight">\(\mu^A\)</span> sequences as
+well as the implied <span class="math notranslate nohighlight">\(v^A\)</span> sequence.</p>
+<p>Notice that because the government sets money supply growth high for 10
+periods, inflation starts high.</p>
+<p>Inflation gradually slowly declines  because people  expect the government to lower the money growth rate after period
+<span class="math notranslate nohighlight">\(10\)</span>.</p>
+<p>From the 10th period onwards, the inflation rate <span class="math notranslate nohighlight">\(\theta^A_t\)</span>
+associated with this <strong>Abreu plan</strong> starts the Ramsey plan from its
+beginning, i.e., <span class="math notranslate nohighlight">\(\theta^A_{t+10} =\theta^R_t \ \ \forall t \geq 0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">abreu_plan</span><span class="p">(</span><span class="n">clq</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">T_A</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">μ_bar</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">T_Plot</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+
+    <span class="c1"># Append Ramsey μ series to stick μ series</span>
+    <span class="n">clq</span><span class="o">.</span><span class="n">μ_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T_A</span><span class="p">)</span> <span class="o">*</span> <span class="n">μ_bar</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">μ_series</span><span class="p">[:</span><span class="o">-</span><span class="n">T_A</span><span class="p">])</span>
+
+    <span class="c1"># Calculate implied stick θ series</span>
+    <span class="n">clq</span><span class="o">.</span><span class="n">θ_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">discount</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="n">discount</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">α</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">clq</span><span class="o">.</span><span class="n">α</span><span class="p">))</span><span class="o">**</span><span class="n">t</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">clq</span><span class="o">.</span><span class="n">μ_A</span><span class="p">[</span><span class="n">t</span><span class="p">:]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">clq</span><span class="o">.</span><span class="n">θ_A</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">α</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">μ_A</span><span class="p">[</span><span class="n">t</span><span class="p">:]</span> <span class="o">*</span> <span class="n">discount</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">length</span><span class="p">])</span>
+
+    <span class="c1"># Calculate utility of stick plan</span>
+    <span class="n">U_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="n">U_A</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">clq</span><span class="o">.</span><span class="n">β</span><span class="o">**</span><span class="n">t</span> <span class="o">*</span> <span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">α0</span> <span class="o">+</span> <span class="n">clq</span><span class="o">.</span><span class="n">α1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_A</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+                 <span class="o">-</span> <span class="n">clq</span><span class="o">.</span><span class="n">α2</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_A</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="n">clq</span><span class="o">.</span><span class="n">c</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">μ_A</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">clq</span><span class="o">.</span><span class="n">V_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="n">clq</span><span class="o">.</span><span class="n">V_A</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">U_A</span><span class="p">[</span><span class="n">t</span><span class="p">:]</span> <span class="o">/</span> <span class="n">clq</span><span class="o">.</span><span class="n">β</span><span class="o">**</span><span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># Make sure Abreu plan is self-enforcing</span>
+    <span class="n">clq</span><span class="o">.</span><span class="n">V_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T_Plot</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T_Plot</span><span class="p">):</span>
+        <span class="n">clq</span><span class="o">.</span><span class="n">V_dev</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">α0</span> <span class="o">+</span> <span class="n">clq</span><span class="o">.</span><span class="n">α1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_A</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+                        <span class="o">-</span> <span class="n">clq</span><span class="o">.</span><span class="n">α2</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_A</span><span class="p">[</span><span class="n">t</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> \
+                        <span class="o">+</span> <span class="n">clq</span><span class="o">.</span><span class="n">β</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">V_A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">V_dev</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">T_Plot</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$V^{A, D}_t$&quot;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+
+    <span class="n">plots</span> <span class="o">=</span> <span class="p">[</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_A</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">μ_A</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">V_A</span><span class="p">]</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s2">&quot;$\theta_t^A$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\mu_t^A$&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$V^A_t$&quot;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">plot</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">plots</span><span class="p">,</span> <span class="n">axes</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">plot</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">T_Plot</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;$t$&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">abreu_plan</span><span class="p">(</span><span class="n">clq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/calvo_17_0.png" src="_images/calvo_17_0.png" />
+</div>
+</div>
+<p>To confirm that the plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> is <strong>self-enforcing</strong>,  we
+plot an object that we call <span class="math notranslate nohighlight">\(V_t^{A,D}\)</span>, defined in the key inequality in the second line of equation <a class="reference internal" href="#equation-eq-old10">(38.10)</a> above.</p>
+<p><span class="math notranslate nohighlight">\(V_t^{A,D}\)</span> is the value at <span class="math notranslate nohighlight">\(t\)</span> of deviating from the
+self-enforcing plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> by setting <span class="math notranslate nohighlight">\(\mu_t = 0\)</span> and
+then restarting the plan at <span class="math notranslate nohighlight">\(v^A_0\)</span> at <span class="math notranslate nohighlight">\(t+1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+v_t^{A,D} = -s( \theta_j, 0) + \beta v_0^A
+\]</div>
+<p>In the above graph  <span class="math notranslate nohighlight">\(v_t^A &gt; v_t^{A,D}\)</span>, which confirms that <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> is a self-enforcing plan.</p>
+<p>We can also verify the inequalities required for <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> to
+be self-confirming numerically as follows</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">V_A</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">clq</span><span class="o">.</span><span class="n">V_dev</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Given that plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> is self-enforcing, we can check that
+the Ramsey plan <span class="math notranslate nohighlight">\(\vec \mu^R\)</span> is credible by verifying that:</p>
+<div class="math notranslate nohighlight">
+\[
+v^R_t \geq - s(\theta^R_t,0) + \beta v^A_0 , \quad \forall t \geq 0
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_ramsey</span><span class="p">(</span><span class="n">clq</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="c1"># Make sure Ramsey plan is sustainable</span>
+    <span class="n">R_dev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+        <span class="n">R_dev</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">α0</span> <span class="o">+</span> <span class="n">clq</span><span class="o">.</span><span class="n">α1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="p">])</span>
+                    <span class="o">-</span> <span class="n">clq</span><span class="o">.</span><span class="n">α2</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="p">])</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> \
+                    <span class="o">+</span> <span class="n">clq</span><span class="o">.</span><span class="n">β</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">V_A</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">J_series</span> <span class="o">&gt;</span> <span class="n">R_dev</span><span class="p">)</span>
+
+<span class="n">check_ramsey</span><span class="p">(</span><span class="n">clq</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="recursive-representation-of-a-sustainable-plan">
+<h3><span class="section-number">38.11.4. </span>Recursive Representation of a Sustainable Plan<a class="headerlink" href="#recursive-representation-of-a-sustainable-plan" title="Permalink to this headline">¶</a></h3>
+<p>We can represent a sustainable plan recursively by taking the
+continuation value <span class="math notranslate nohighlight">\(v_t\)</span> as a state variable.</p>
+<p>We form the following 3-tuple of functions:</p>
+<div class="math notranslate nohighlight" id="equation-eq-old11">
+<span class="eqno">(38.12)<a class="headerlink" href="#equation-eq-old11" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+\hat \mu_t &amp; = \nu_\mu(v_t) \\
+\theta_t &amp; = \nu_\theta(v_t) \\
+v_{t+1} &amp; = \nu_v(v_t, \mu_t )
+\end{aligned}\end{split}\]</div>
+<p>In addition to these equations, we need an initial value <span class="math notranslate nohighlight">\(v_0\)</span> to
+characterize a sustainable plan.</p>
+<p>The first equation of <a class="reference internal" href="#equation-eq-old11">(38.12)</a> tells the recommended value of
+<span class="math notranslate nohighlight">\(\hat \mu_t\)</span> as a function of the promised value <span class="math notranslate nohighlight">\(v_t\)</span>.</p>
+<p>The second equation of <a class="reference internal" href="#equation-eq-old11">(38.12)</a>  tells the inflation rate as a function of
+<span class="math notranslate nohighlight">\(v_t\)</span>.</p>
+<p>The third equation of <a class="reference internal" href="#equation-eq-old11">(38.12)</a>  updates the continuation value in a way that
+depends on whether the government at <span class="math notranslate nohighlight">\(t\)</span> confirms private agents’
+expectations by setting <span class="math notranslate nohighlight">\(\mu_t\)</span> equal to the recommended value
+<span class="math notranslate nohighlight">\(\hat \mu_t\)</span>, or whether it disappoints those expectations.</p>
+</div>
+</div>
+<div class="section" id="whose-credible-plan-is-it">
+<h2><a class="toc-backref" href="#id34"><span class="section-number">38.12. </span>Whose Credible Plan is it?</a><a class="headerlink" href="#whose-credible-plan-is-it" title="Permalink to this headline">¶</a></h2>
+<p>A credible government plan <span class="math notranslate nohighlight">\(\vec \mu\)</span> plays multiple roles.</p>
+<ul class="simple">
+<li><p>It is a sequence of actions chosen by the government.</p></li>
+<li><p>It is a sequence of private agents’ forecasts of government actions.</p></li>
+</ul>
+<p>Thus, <span class="math notranslate nohighlight">\(\vec \mu\)</span> is both a government policy and a collection of private agents’ forecasts of  government policy.</p>
+<p>Does the government <em>choose</em>  policy actions or does it simply <em>confirm</em> prior private sector forecasts of those actions?</p>
+<p>An argument in favor of the <em>government chooses</em> interpretation comes from noting that the theory of credible plans builds in a theory that the government each period chooses
+the action that it wants.</p>
+<p>An argument in favor of the <em>simply confirm</em> interpretation is gathered from staring at the key inequality <a class="reference internal" href="#equation-eq-old100a">(38.11)</a> that defines a credible policy.</p>
+</div>
+<div class="section" id="comparison-of-equilibrium-values">
+<h2><a class="toc-backref" href="#id35"><span class="section-number">38.13. </span>Comparison of Equilibrium Values</a><a class="headerlink" href="#comparison-of-equilibrium-values" title="Permalink to this headline">¶</a></h2>
+<p>We have computed plans for</p>
+<ul class="simple">
+<li><p>an ordinary (unrestricted) Ramsey planner who chooses a sequence
+<span class="math notranslate nohighlight">\(\{\mu_t\}_{t=0}^\infty\)</span> at time <span class="math notranslate nohighlight">\(0\)</span></p></li>
+<li><p>a Ramsey planner restricted to choose a constant <span class="math notranslate nohighlight">\(\mu\)</span> for all
+<span class="math notranslate nohighlight">\(t \geq 0\)</span></p></li>
+<li><p>a Markov perfect sequence of governments</p></li>
+</ul>
+<p>Below we compare equilibrium time zero values for these three.</p>
+<p>We confirm that the value delivered by the unrestricted Ramsey planner
+exceeds the value delivered by the restricted Ramsey planner which in
+turn exceeds the value delivered by the Markov perfect sequence of
+governments.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clq</span><span class="o">.</span><span class="n">J_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.67918822960449
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clq</span><span class="o">.</span><span class="n">J_check</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.676729524674898
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">clq</span><span class="o">.</span><span class="n">J_MPE</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.663435886995107
+</pre></div>
+</div>
+</div>
+</div>
+<p>We have also computed <strong>credible plans</strong> for a government or sequence
+of governments that choose sequentially.</p>
+<p>These include</p>
+<ul class="simple">
+<li><p>a <strong>self-enforcing</strong> plan that gives a low initial value <span class="math notranslate nohighlight">\(v_0\)</span>.</p></li>
+<li><p>a better plan – possibly one that attains values associated with
+Ramsey plan – that is not self-enforcing.</p></li>
+</ul>
+</div>
+<div class="section" id="note-on-dynamic-programming-squared">
+<h2><a class="toc-backref" href="#id36"><span class="section-number">38.14. </span>Note on Dynamic Programming Squared</a><a class="headerlink" href="#note-on-dynamic-programming-squared" title="Permalink to this headline">¶</a></h2>
+<p>The theory deployed  in this lecture is an application of what we  nickname <strong>dynamic programming squared</strong>.</p>
+<p>The nickname refers to the fact that a value satisfying one Bellman equation is itself an argument in a second Bellman equation.</p>
+<p>Thus, our models have involved two Bellman equations:</p>
+<ul class="simple">
+<li><p>equation <a class="reference internal" href="#equation-eq-old1">(38.1)</a> expresses how <span class="math notranslate nohighlight">\(\theta_t\)</span> depends on <span class="math notranslate nohighlight">\(\mu_t\)</span>
+and <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span></p></li>
+<li><p>equation <a class="reference internal" href="#equation-eq-old4">(38.4)</a> expresses how value <span class="math notranslate nohighlight">\(v_t\)</span> depends on
+<span class="math notranslate nohighlight">\((\mu_t, \theta_t)\)</span> and <span class="math notranslate nohighlight">\(v_{t+1}\)</span></p></li>
+</ul>
+<p>A value <span class="math notranslate nohighlight">\(\theta\)</span> from one Bellman equation appears as an argument of a second Bellman equation for another value <span class="math notranslate nohighlight">\(v\)</span>.</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                    <p class="caption">
+ <span class="caption-text">
+  Tools and Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="orth_proj.html">
+   1. Orthogonal Projections and Their Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stationary_densities.html">
+   2. Continuous State Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="muth_kalman.html">
+   3. Reverse Engineering a la Muth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discrete_dp.html">
+   4. Discrete State Dynamic Programming
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  LQ Control
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_news.html">
+   5. Information and Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing.html">
+   6. Consumption Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing_tax.html">
+   7. Tax Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   8. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_jump_lq.html">
+   9. Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_1.html">
+   10. How to Pay for a War: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_2.html">
+   11. How to Pay for a War: Part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_3.html">
+   12. How to Pay for a War: Part 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lqramsey.html">
+   13. Optimal Taxation in an LQ Economy
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Multiple Agent Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   14. Robust Markov Perfect Equilibrium
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arellano.html">
+   15. Default Risk and Income Fluctuations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="matsuyama.html">
+   16. Globalization and Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coase.html">
+   17. Coase’s Theory of the Firm
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Linear Economies
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_recursive_models.html">
+   18. Recursive Models of Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="growth_in_dles.html">
+   19. Growth in Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_asset_pricing_dles.html">
+   20. Lucas Asset Pricing Using DLE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="irfs_in_hall_model.html">
+   21. IRFs in Hall Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="permanent_income_dles.html">
+   22. Permanent Income Model using the DLE Class
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rosen_schooling_model.html">
+   23. Rosen Schooling Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cattle_cycles.html">
+   24. Cattle Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_invertibility_example.html">
+   25. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Classic Linear Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="von_neumann_model.html">
+   26. Von Neumann Growth Model (and a Generalization)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Time Series Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arma.html">
+   27. Covariance Stationary Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="estspec.html">
+   28. Estimation of Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additive_functionals.html">
+   29. Additive and Multiplicative Functionals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lu_tricks.html">
+   30. Classical Control with Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classical_filtering.html">
+   31. Classical Prediction and Filtering With Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="knowing_forecasts_of_others.html">
+   32. Knowing the Forecasts of Others
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Asset Pricing and Finance
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_model.html">
+   33. Asset Pricing II: The Lucas Asset Pricing Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="black_litterman.html">
+   34. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_complete_mkts.html">
+   35. Irrelevance of Capital Structure with Complete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_incomplete_mkts.html">
+   36. Equilibrium Capital Structures with Incomplete Markets
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Programming Squared
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dyn_stack.html">
+   37. Stackelberg Plans
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opt_tax_recur.html">
+   39. Optimal Taxation with State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss.html">
+   40. Optimal Taxation without State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss2.html">
+   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss3.html">
+   42. Fiscal Risk and Government Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_ramsey.html">
+   43. Competitive Equilibria of a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_credible.html">
+   44. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   45. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   46. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   47. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="toolbar">
+
+            <div class="toolbar__inner">
+
+                <ul class="toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                    <!-- <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <i data-feather="search"></i>
+                        </form>
+                    </li> -->
+                </ul>
+
+                <ul class="toolbar__links">
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/calvo.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Launch Notebook" id="launchButton"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/calvo.ipynb" target="_blank"><i data-feather="play-circle"></i></a></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/calvo.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p style="color: white;">Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title">QuantEcon Notebook Launcher</p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input" onchange="onChangeListener()">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/calvo.ipynb">BinderHub</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <!-- <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" onchange="onChangeListener()">
+                <i class="fas fa-check-circle"></i>
+            </li> -->
+            </ul>
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

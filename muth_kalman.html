@@ -1,0 +1,993 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. Reverse Engineering a la Muth &#8212; Advanced Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/quantecon-book-theme.9deb0a26de8466f54124a1959c24cd33.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/quantecon-book-theme.43eb86aa48ec3aed660cb313c38068cd.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://python-advanced.quantecon.org/muth_kalman.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Discrete State Dynamic Programming" href="discrete_dp.html" />
+    <link rel="prev" title="2. Continuous State Markov Chains" href="stationary_densities.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="Reverse Engineering a la Muth"/>
+<meta name="twitter:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="Reverse Engineering a la Muth" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://python-advanced.quantecon.org/muth_kalman.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="wrapper">
+
+        <div class="main">
+
+            <div class="page" id=muth_kalman>
+
+                <div class="page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#friedman-1956-and-muth-1960">
+   3.1. Friedman (1956) and Muth (1960)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-process-for-which-adaptive-expectations-are-optimal">
+   3.2. A Process for Which Adaptive Expectations are Optimal
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#some-useful-state-space-math">
+   3.3. Some Useful State-Space Math
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#estimates-of-unobservables">
+   3.4. Estimates of Unobservables
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#relation-between-unobservable-and-observable">
+   3.5. Relation between Unobservable and Observable
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#innovations">
+     3.5.1. Innovations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ma-and-ar-representations">
+   3.6. MA and AR Representations
+  </a>
+ </li>
+</ul>
+
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo" alt="logo"></a>
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="page__header">
+
+                    <div class="page__header-copy">
+
+                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+
+                        <p class="page__header-subheading">Reverse Engineering a la Muth</p>
+
+                    </div>
+
+                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" align="right" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><div class="section" id="reverse-engineering-a-la-muth">
+<span id="index-0"></span><h1><a class="toc-backref" href="#id5"><span class="section-number">3. </span>Reverse Engineering a la Muth</a><a class="headerlink" href="#reverse-engineering-a-la-muth" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#reverse-engineering-a-la-muth" id="id5">Reverse Engineering a la Muth</a></p>
+<ul>
+<li><p><a class="reference internal" href="#friedman-1956-and-muth-1960" id="id6">Friedman (1956) and Muth (1960)</a></p></li>
+<li><p><a class="reference internal" href="#a-process-for-which-adaptive-expectations-are-optimal" id="id7">A Process for Which Adaptive Expectations are Optimal</a></p></li>
+<li><p><a class="reference internal" href="#some-useful-state-space-math" id="id8">Some Useful State-Space Math</a></p></li>
+<li><p><a class="reference internal" href="#estimates-of-unobservables" id="id9">Estimates of Unobservables</a></p></li>
+<li><p><a class="reference internal" href="#relation-between-unobservable-and-observable" id="id10">Relation between Unobservable and Observable</a></p></li>
+<li><p><a class="reference internal" href="#ma-and-ar-representations" id="id11">MA and AR Representations</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In addition to what’s in Anaconda, this lecture uses the quantecon library.</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
+Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.12.5)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We’ll also need the following imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
+
+<span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">Kalman</span>
+<span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">LinearStateSpace</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This lecture uses the Kalman filter to reformulate John F. Muth’s first
+paper <span id="id1">[<a class="reference internal" href="zreferences.html#id90"><span>Mut60</span></a>]</span> about rational expectations.</p>
+<p>Muth used <em>classical</em> prediction methods to reverse engineer a
+stochastic process that renders optimal Milton Friedman’s <span id="id2">[<a class="reference internal" href="zreferences.html#id131"><span>Fri56</span></a>]</span> “adaptive
+expectations” scheme.</p>
+<div class="section" id="friedman-1956-and-muth-1960">
+<h2><a class="toc-backref" href="#id6"><span class="section-number">3.1. </span>Friedman (1956) and Muth (1960)</a><a class="headerlink" href="#friedman-1956-and-muth-1960" title="Permalink to this headline">¶</a></h2>
+<p>Milton Friedman <span id="id3">[<a class="reference internal" href="zreferences.html#id131"><span>Fri56</span></a>]</span> (1956) posited that
+consumer’s forecast their future disposable income with the adaptive
+expectations scheme</p>
+<div class="math notranslate nohighlight" id="equation-expectations">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-expectations" title="Permalink to this equation">¶</a></span>\[y_{t+i,t}^* = K \sum_{j=0}^\infty (1 - K)^j y_{t-j}\]</div>
+<p>where <span class="math notranslate nohighlight">\(K \in (0,1)\)</span> and <span class="math notranslate nohighlight">\(y_{t+i,t}^*\)</span> is a forecast of
+future <span class="math notranslate nohighlight">\(y\)</span> over horizon <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>Milton Friedman justified the <strong>exponential smoothing</strong> forecasting
+scheme <a class="reference internal" href="#equation-expectations">(3.1)</a> informally, noting  that it seemed a plausible way to use
+past income to forecast future income.</p>
+<p>In his first paper about rational expectations, John F. Muth <span id="id4">[<a class="reference internal" href="zreferences.html#id90"><span>Mut60</span></a>]</span>
+reverse-engineered a univariate stochastic process
+<span class="math notranslate nohighlight">\(\{y_t\}_{t=- \infty}^\infty\)</span> for which Milton Friedman’s adaptive
+expectations scheme gives linear least forecasts of <span class="math notranslate nohighlight">\(y_{t+j}\)</span> for
+any horizon <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>Muth sought a setting and a sense in which Friedman’s forecasting scheme
+is optimal.</p>
+<p>That is, Muth asked for what optimal forecasting <strong>question</strong> is Milton
+Friedman’s adaptive expectation scheme the <strong>answer</strong>.</p>
+<p>Muth (1960) used classical prediction methods based on lag-operators and
+<span class="math notranslate nohighlight">\(z\)</span>-transforms to find the answer to his question.</p>
+<p>Please see lectures <a class="reference internal" href="lu_tricks.html"><span class="doc">Classical Control with Linear Algebra</span></a> and
+<a class="reference internal" href="classical_filtering.html"><span class="doc">Classical Filtering and Prediction with Linear Algebra</span></a> for an introduction to the classical
+tools that Muth used.</p>
+<p>Rather than using those classical tools, in this lecture we apply the
+Kalman filter to express the heart of Muth’s analysis concisely.</p>
+<p>The lecture <a class="reference external" href="https://python-intro.quantecon.org/kalman.html">First Look at Kalman Filter</a> describes the Kalman filter.</p>
+<p>We’ll use limiting versions of the Kalman filter corresponding to what are called <strong>stationary values</strong> in that lecture.</p>
+</div>
+<div class="section" id="a-process-for-which-adaptive-expectations-are-optimal">
+<h2><a class="toc-backref" href="#id7"><span class="section-number">3.2. </span>A Process for Which Adaptive Expectations are Optimal</a><a class="headerlink" href="#a-process-for-which-adaptive-expectations-are-optimal" title="Permalink to this headline">¶</a></h2>
+<p>Suppose that an observable <span class="math notranslate nohighlight">\(y_t\)</span> is the sum of an unobserved
+random walk <span class="math notranslate nohighlight">\(x_t\)</span> and an IID shock <span class="math notranslate nohighlight">\(\epsilon_{2,t}\)</span>:</p>
+<div class="math notranslate nohighlight" id="equation-state-space">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-state-space" title="Permalink to this equation">¶</a></span>\[\begin{aligned} x_{t+1} &amp; = x_t + \sigma_x \epsilon_{1,t+1} \cr
+          y_t &amp; = x_t + \sigma_y \epsilon_{2,t} \end{aligned}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{bmatrix} \epsilon_{1,t+1} \cr \epsilon_{2,t} \end{bmatrix} \sim {\mathcal N} (0, I)
+\]</div>
+<p>is an IID process.</p>
+<p><strong>Note:</strong> A property of the state-space representation <a class="reference internal" href="#equation-state-space">(3.2)</a> is that in
+general neither <span class="math notranslate nohighlight">\(\epsilon_{1,t}\)</span> nor <span class="math notranslate nohighlight">\(\epsilon_{2,t}\)</span> is in
+the space spanned by square-summable linear combinations of
+<span class="math notranslate nohighlight">\(y_t, y_{t-1}, \ldots\)</span>.</p>
+<p>In general
+<span class="math notranslate nohighlight">\(\begin{bmatrix} \epsilon_{1,t} \cr \epsilon_{2t} \end{bmatrix}\)</span>
+has more information about future <span class="math notranslate nohighlight">\(y_{t+j}\)</span>’s than is contained
+in <span class="math notranslate nohighlight">\(y_t, y_{t-1}, \ldots\)</span>.</p>
+<p>We can use the asymptotic or stationary values of the Kalman gain and
+the one-step-ahead conditional state covariance matrix to compute a
+time-invariant <em>innovations representation</em></p>
+<div class="math notranslate nohighlight" id="equation-innovations">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-innovations" title="Permalink to this equation">¶</a></span>\[\begin{aligned} \hat x_{t+1} &amp; = \hat x_t + K a_t  \cr
+           y_t &amp; = \hat x_t + a_t \end{aligned}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat x_t = E [x_t | y_{t-1}, y_{t-2}, \ldots ]\)</span> and
+<span class="math notranslate nohighlight">\(a_t = y_t - E[y_t |y_{t-1}, y_{t-2}, \ldots ]\)</span>.</p>
+<p><strong>Note:</strong> A key property about an <em>innovations representation</em> is that
+<span class="math notranslate nohighlight">\(a_t\)</span> is in the space spanned by square summable linear
+combinations of <span class="math notranslate nohighlight">\(y_t, y_{t-1}, \ldots\)</span>.</p>
+<p>For more ramifications of this property, see the lectures  <a class="reference internal" href="hs_invertibility_example.html"><span class="doc">Shock Non-Invertibility</span></a>  and
+<a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
+<p>Later we’ll stack these state-space systems <a class="reference internal" href="#equation-state-space">(3.2)</a> and <a class="reference internal" href="#equation-innovations">(3.3)</a> to display some
+classic findings of Muth.</p>
+<p>But first, let’s create an instance of the state-space system <a class="reference internal" href="#equation-state-space">(3.2)</a> then
+apply the quantecon <code class="docutils literal notranslate"><span class="pre">Kalman</span></code> class, then uses it to construct the associated “innovations representation”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make some parameter choices</span>
+<span class="c1"># sigx/sigy are state noise std err and measurement noise std err</span>
+<span class="n">μ_0</span><span class="p">,</span> <span class="n">σ_x</span><span class="p">,</span> <span class="n">σ_y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span>
+
+<span class="c1"># Create a LinearStateSpace object</span>
+<span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">σ_x</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">σ_y</span>
+<span class="n">ss</span> <span class="o">=</span> <span class="n">LinearStateSpace</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">mu_0</span><span class="o">=</span><span class="n">μ_0</span><span class="p">)</span>
+
+<span class="c1"># Set prior and initialize the Kalman type</span>
+<span class="n">x_hat_0</span><span class="p">,</span> <span class="n">Σ_0</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span>
+<span class="n">kmuth</span> <span class="o">=</span> <span class="n">Kalman</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">x_hat_0</span><span class="p">,</span> <span class="n">Σ_0</span><span class="p">)</span>
+
+<span class="c1"># Computes stationary values which we need for the innovation</span>
+<span class="c1"># representation</span>
+<span class="n">S1</span><span class="p">,</span> <span class="n">K1</span> <span class="o">=</span> <span class="n">kmuth</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">()</span>
+
+<span class="c1"># Form innovation representation state-space</span>
+<span class="n">Ak</span><span class="p">,</span> <span class="n">Ck</span><span class="p">,</span> <span class="n">Gk</span><span class="p">,</span> <span class="n">Hk</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> <span class="n">K1</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="mi">1</span>
+
+<span class="n">ssk</span> <span class="o">=</span> <span class="n">LinearStateSpace</span><span class="p">(</span><span class="n">Ak</span><span class="p">,</span> <span class="n">Ck</span><span class="p">,</span> <span class="n">Gk</span><span class="p">,</span> <span class="n">Hk</span><span class="p">,</span> <span class="n">mu_0</span><span class="o">=</span><span class="n">x_hat_0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="some-useful-state-space-math">
+<h2><a class="toc-backref" href="#id8"><span class="section-number">3.3. </span>Some Useful State-Space Math</a><a class="headerlink" href="#some-useful-state-space-math" title="Permalink to this headline">¶</a></h2>
+<p>Now we want to map the time-invariant innovations representation <a class="reference internal" href="#equation-innovations">(3.3)</a> and
+the original state-space system <a class="reference internal" href="#equation-state-space">(3.2)</a> into a convenient form for deducing
+the impulse responses from the original shocks to the <span class="math notranslate nohighlight">\(x_t\)</span> and
+<span class="math notranslate nohighlight">\(\hat x_t\)</span>.</p>
+<p>Putting both of these representations into a single state-space system
+is yet another application of the insight that “finding the state is an
+art”.</p>
+<p>We’ll define a state vector and appropriate state-space matrices that
+allow us to represent both systems in one fell swoop.</p>
+<p>Note that</p>
+<div class="math notranslate nohighlight">
+\[
+a_t = x_t + \sigma_y \epsilon_{2,t} - \hat x_t
+\]</div>
+<p>so that</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned} \hat x_{t+1} &amp; = \hat x_t + K (x_t + \sigma_y \epsilon_{2,t} - \hat x_t) \cr
+       &amp; = (1-K) \hat x_t + K x_t + K \sigma_y \epsilon_{2,t} \end{aligned}
+\]</div>
+<p>The stacked system</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{bmatrix} x_{t+1} \cr \hat x_{t+1} \cr \epsilon_{2,t+1} \end{bmatrix} =
+\begin{bmatrix} 1 &amp; 0 &amp; 0 \cr K &amp; (1-K) &amp; K \sigma_y \cr 0 &amp; 0 &amp; 0 \end{bmatrix}
+\begin{bmatrix} x_{t} \cr \hat x_t \cr \epsilon_{2,t} \end{bmatrix}+
+\begin{bmatrix} \sigma_x &amp; 0 \cr 0 &amp; 0 \cr 0 &amp; 1 \end{bmatrix}
+\begin{bmatrix} \epsilon_{1,t+1} \cr \epsilon_{2,t+1} \end{bmatrix}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\begin{bmatrix} y_t \cr a_t \end{bmatrix} = \begin{bmatrix} 1 &amp; 0 &amp; \sigma_y \cr
+                                      1 &amp; -1 &amp; \sigma_y \end{bmatrix}  \begin{bmatrix} x_{t} \cr \hat x_t \cr \epsilon_{2,t} \end{bmatrix}
+\]</div>
+<p>is a state-space system that tells us how the shocks
+<span class="math notranslate nohighlight">\(\begin{bmatrix} \epsilon_{1,t+1} \cr \epsilon_{2,t+1} \end{bmatrix}\)</span>
+affect states <span class="math notranslate nohighlight">\(\hat x_{t+1}, x_t\)</span>, the observable <span class="math notranslate nohighlight">\(y_t\)</span>, and
+the innovation <span class="math notranslate nohighlight">\(a_t\)</span>.</p>
+<p>With this tool at our disposal, let’s form the composite system and
+simulate it</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create grand state-space for y_t, a_t as observed vars -- Use</span>
+<span class="c1"># stacking trick above</span>
+<span class="n">Af</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mi">1</span><span class="p">,</span>      <span class="mi">0</span><span class="p">,</span>        <span class="mi">0</span><span class="p">],</span>
+               <span class="p">[</span><span class="n">K1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">K1</span><span class="p">,</span> <span class="n">K1</span> <span class="o">*</span> <span class="n">σ_y</span><span class="p">],</span>
+               <span class="p">[</span> <span class="mi">0</span><span class="p">,</span>      <span class="mi">0</span><span class="p">,</span>        <span class="mi">0</span><span class="p">]])</span>
+<span class="n">Cf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">σ_x</span><span class="p">,</span>        <span class="mi">0</span><span class="p">],</span>
+               <span class="p">[</span>  <span class="mi">0</span><span class="p">,</span> <span class="n">K1</span> <span class="o">*</span> <span class="n">σ_y</span><span class="p">],</span>
+               <span class="p">[</span>  <span class="mi">0</span><span class="p">,</span>        <span class="mi">1</span><span class="p">]])</span>
+<span class="n">Gf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="n">σ_y</span><span class="p">],</span>
+               <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">σ_y</span><span class="p">]])</span>
+
+<span class="n">μ_true</span><span class="p">,</span> <span class="n">μ_prior</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span>
+<span class="n">μ_f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">μ_true</span><span class="p">,</span> <span class="n">μ_prior</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Create the state-space</span>
+<span class="n">ssf</span> <span class="o">=</span> <span class="n">LinearStateSpace</span><span class="p">(</span><span class="n">Af</span><span class="p">,</span> <span class="n">Cf</span><span class="p">,</span> <span class="n">Gf</span><span class="p">,</span> <span class="n">mu_0</span><span class="o">=</span><span class="n">μ_f</span><span class="p">)</span>
+
+<span class="c1"># Draw observations of y from the state-space model</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">xf</span><span class="p">,</span> <span class="n">yf</span> <span class="o">=</span> <span class="n">ssf</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Kalman gain = </span><span class="si">{</span><span class="n">K1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conditional variance = </span><span class="si">{</span><span class="n">S1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Kalman gain = [[0.181]]
+Conditional variance = [[5.5249]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have simulated our joint system, we have <span class="math notranslate nohighlight">\(x_t\)</span>,
+<span class="math notranslate nohighlight">\(\hat{x_t}\)</span>, and <span class="math notranslate nohighlight">\(y_t\)</span>.</p>
+<p>We can now investigate how these
+variables are related by plotting some key objects.</p>
+</div>
+<div class="section" id="estimates-of-unobservables">
+<h2><a class="toc-backref" href="#id9"><span class="section-number">3.4. </span>Estimates of Unobservables</a><a class="headerlink" href="#estimates-of-unobservables" title="Permalink to this headline">¶</a></h2>
+<p>First, let’s plot the hidden state <span class="math notranslate nohighlight">\(x_t\)</span> and the filtered version
+<span class="math notranslate nohighlight">\(\hat x_t\)</span> that is linear-least squares projection of <span class="math notranslate nohighlight">\(x_t\)</span>
+on the history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \ldots\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xf</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$x_t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xf</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Filtered $x_t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x$ vs $\hat</span><span class="si">{x}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/muth_kalman_9_0.png" src="_images/muth_kalman_9_0.png" />
+</div>
+</div>
+<p>Note how <span class="math notranslate nohighlight">\(x_t\)</span> and <span class="math notranslate nohighlight">\(\hat{x_t}\)</span> differ.</p>
+<p>For Friedman, <span class="math notranslate nohighlight">\(\hat x_t\)</span> and not <span class="math notranslate nohighlight">\(x_t\)</span> is the consumer’s
+idea about her/his <em>permanent income</em>.</p>
+</div>
+<div class="section" id="relation-between-unobservable-and-observable">
+<h2><a class="toc-backref" href="#id10"><span class="section-number">3.5. </span>Relation between Unobservable and Observable</a><a class="headerlink" href="#relation-between-unobservable-and-observable" title="Permalink to this headline">¶</a></h2>
+<p>Now let’s plot <span class="math notranslate nohighlight">\(x_t\)</span> and <span class="math notranslate nohighlight">\(y_t\)</span>.</p>
+<p>Recall that <span class="math notranslate nohighlight">\(y_t\)</span> is just <span class="math notranslate nohighlight">\(x_t\)</span> plus white noise</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">yf</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xf</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$x$ and $y$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/muth_kalman_11_0.png" src="_images/muth_kalman_11_0.png" />
+</div>
+</div>
+<p>We see above that <span class="math notranslate nohighlight">\(y\)</span> seems to look like white noise around the
+values of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<div class="section" id="innovations">
+<h3><span class="section-number">3.5.1. </span>Innovations<a class="headerlink" href="#innovations" title="Permalink to this headline">¶</a></h3>
+<p>Recall that we wrote down the innovation representation that depended on
+<span class="math notranslate nohighlight">\(a_t\)</span>. We now plot the innovations <span class="math notranslate nohighlight">\(\{a_t\}\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">yf</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Innovation $a_t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/muth_kalman_13_0.png" src="_images/muth_kalman_13_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="ma-and-ar-representations">
+<h2><a class="toc-backref" href="#id11"><span class="section-number">3.6. </span>MA and AR Representations</a><a class="headerlink" href="#ma-and-ar-representations" title="Permalink to this headline">¶</a></h2>
+<p>Now we shall extract from the <code class="docutils literal notranslate"><span class="pre">Kalman</span></code> instance <code class="docutils literal notranslate"><span class="pre">kmuth</span></code> coefficients of</p>
+<ul class="simple">
+<li><p>a fundamental moving average representation that represents
+<span class="math notranslate nohighlight">\(y_t\)</span> as a one-sided moving sum of current and past
+<span class="math notranslate nohighlight">\(a_t\)</span>s that are square summable linear combinations of <span class="math notranslate nohighlight">\(y_t, y_{t-1}, \ldots\)</span>.</p></li>
+<li><p>a univariate autoregression representation that depicts the
+coefficients in a linear least square projection of <span class="math notranslate nohighlight">\(y_t\)</span> on
+the semi-infinite history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \ldots\)</span>.</p></li>
+</ul>
+<p>Then we’ll plot each of them</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Kalman Methods for MA and VAR</span>
+<span class="n">coefs_ma</span> <span class="o">=</span> <span class="n">kmuth</span><span class="o">.</span><span class="n">stationary_coefficients</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;ma&quot;</span><span class="p">)</span>
+<span class="n">coefs_var</span> <span class="o">=</span> <span class="n">kmuth</span><span class="o">.</span><span class="n">stationary_coefficients</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;var&quot;</span><span class="p">)</span>
+
+<span class="c1"># Coefficients come in a list of arrays, but we</span>
+<span class="c1"># want to plot them and so need to stack into an array</span>
+<span class="n">coefs_ma_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">coefs_ma</span><span class="p">)</span>
+<span class="n">coefs_var_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">coefs_var</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">coefs_ma_array</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;MA&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">coefs_var_array</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;VAR&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/muth_kalman_15_0.png" src="_images/muth_kalman_15_0.png" />
+</div>
+</div>
+<p>The <strong>moving average</strong> coefficients in the top panel show tell-tale
+signs of <span class="math notranslate nohighlight">\(y_t\)</span> being a process whose first difference is a first-order
+autoregression.</p>
+<p>The <strong>autoregressive coefficients</strong> decline geometrically with decay
+rate <span class="math notranslate nohighlight">\((1-K)\)</span>.</p>
+<p>These are exactly the target outcomes that Muth (1960) aimed to reverse
+engineer</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;decay parameter 1 - K1 = </span><span class="si">{</span><span class="mi">1</span> <span class="o">-</span> <span class="n">K1</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>decay parameter 1 - K1 = [[0.819]]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                    <p class="caption">
+ <span class="caption-text">
+  Tools and Techniques
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="orth_proj.html">
+   1. Orthogonal Projections and Their Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stationary_densities.html">
+   2. Continuous State Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   3. Reverse Engineering a la Muth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discrete_dp.html">
+   4. Discrete State Dynamic Programming
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  LQ Control
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_news.html">
+   5. Information and Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing.html">
+   6. Consumption Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing_tax.html">
+   7. Tax Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   8. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_jump_lq.html">
+   9. Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_1.html">
+   10. How to Pay for a War: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_2.html">
+   11. How to Pay for a War: Part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_3.html">
+   12. How to Pay for a War: Part 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lqramsey.html">
+   13. Optimal Taxation in an LQ Economy
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Multiple Agent Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   14. Robust Markov Perfect Equilibrium
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arellano.html">
+   15. Default Risk and Income Fluctuations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="matsuyama.html">
+   16. Globalization and Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coase.html">
+   17. Coase’s Theory of the Firm
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Linear Economies
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_recursive_models.html">
+   18. Recursive Models of Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="growth_in_dles.html">
+   19. Growth in Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_asset_pricing_dles.html">
+   20. Lucas Asset Pricing Using DLE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="irfs_in_hall_model.html">
+   21. IRFs in Hall Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="permanent_income_dles.html">
+   22. Permanent Income Model using the DLE Class
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rosen_schooling_model.html">
+   23. Rosen Schooling Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cattle_cycles.html">
+   24. Cattle Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_invertibility_example.html">
+   25. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Classic Linear Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="von_neumann_model.html">
+   26. Von Neumann Growth Model (and a Generalization)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Time Series Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arma.html">
+   27. Covariance Stationary Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="estspec.html">
+   28. Estimation of Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additive_functionals.html">
+   29. Additive and Multiplicative Functionals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lu_tricks.html">
+   30. Classical Control with Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classical_filtering.html">
+   31. Classical Prediction and Filtering With Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="knowing_forecasts_of_others.html">
+   32. Knowing the Forecasts of Others
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Asset Pricing and Finance
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_model.html">
+   33. Asset Pricing II: The Lucas Asset Pricing Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="black_litterman.html">
+   34. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_complete_mkts.html">
+   35. Irrelevance of Capital Structure with Complete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_incomplete_mkts.html">
+   36. Equilibrium Capital Structures with Incomplete Markets
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Programming Squared
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dyn_stack.html">
+   37. Stackelberg Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo.html">
+   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opt_tax_recur.html">
+   39. Optimal Taxation with State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss.html">
+   40. Optimal Taxation without State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss2.html">
+   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss3.html">
+   42. Fiscal Risk and Government Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_ramsey.html">
+   43. Competitive Equilibria of a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_credible.html">
+   44. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   45. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   46. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   47. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="toolbar">
+
+            <div class="toolbar__inner">
+
+                <ul class="toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                    <!-- <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <i data-feather="search"></i>
+                        </form>
+                    </li> -->
+                </ul>
+
+                <ul class="toolbar__links">
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/muth_kalman.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Launch Notebook" id="launchButton"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/muth_kalman.ipynb" target="_blank"><i data-feather="play-circle"></i></a></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/muth_kalman.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p style="color: white;">Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title">QuantEcon Notebook Launcher</p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input" onchange="onChangeListener()">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/muth_kalman.ipynb">BinderHub</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <!-- <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" onchange="onChangeListener()">
+                <i class="fas fa-check-circle"></i>
+            </li> -->
+            </ul>
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

@@ -1,0 +1,1125 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10. How to Pay for a War: Part 1 &#8212; Advanced Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/quantecon-book-theme.9deb0a26de8466f54124a1959c24cd33.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/quantecon-book-theme.43eb86aa48ec3aed660cb313c38068cd.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://python-advanced.quantecon.org/tax_smoothing_1.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="11. How to Pay for a War: Part 2" href="tax_smoothing_2.html" />
+    <link rel="prev" title="9. Markov Jump Linear Quadratic Dynamic Programming" href="markov_jump_lq.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="How to Pay for a War: Part 1"/>
+<meta name="twitter:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="How to Pay for a War: Part 1" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://python-advanced.quantecon.org/tax_smoothing_1.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="wrapper">
+
+        <div class="main">
+
+            <div class="page" id=tax_smoothing_1>
+
+                <div class="page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#reader-s-guide">
+   10.1. Reader’s Guide
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#public-finance-questions">
+   10.2. Public Finance Questions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#barro-1979-model">
+   10.3. Barro (1979) Model
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python-class-to-solve-markov-jump-linear-quadratic-control-problems">
+   10.4. Python Class to Solve Markov Jump Linear Quadratic Control Problems
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#barro-model-with-a-time-varying-interest-rate">
+   10.5. Barro Model with a Time-varying Interest Rate
+  </a>
+ </li>
+</ul>
+
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo" alt="logo"></a>
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="page__header">
+
+                    <div class="page__header-copy">
+
+                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+
+                        <p class="page__header-subheading">How to Pay for a War: Part 1</p>
+
+                    </div>
+
+                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><div class="section" id="how-to-pay-for-a-war-part-1">
+<span id="index-0"></span><h1><a class="toc-backref" href="#id18"><span class="section-number">10. </span>How to Pay for a War: Part 1</a><a class="headerlink" href="#how-to-pay-for-a-war-part-1" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#how-to-pay-for-a-war-part-1" id="id18">How to Pay for a War: Part 1</a></p>
+<ul>
+<li><p><a class="reference internal" href="#reader-s-guide" id="id19">Reader’s Guide</a></p></li>
+<li><p><a class="reference internal" href="#public-finance-questions" id="id20">Public Finance Questions</a></p></li>
+<li><p><a class="reference internal" href="#barro-1979-model" id="id21">Barro (1979) Model</a></p></li>
+<li><p><a class="reference internal" href="#python-class-to-solve-markov-jump-linear-quadratic-control-problems" id="id22">Python Class to Solve Markov Jump Linear Quadratic Control Problems</a></p></li>
+<li><p><a class="reference internal" href="#barro-model-with-a-time-varying-interest-rate" id="id23">Barro Model with a Time-varying Interest Rate</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In addition to what’s in Anaconda, this lecture will deploy quantecon:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
+Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.12.5)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="reader-s-guide">
+<h2><a class="toc-backref" href="#id19"><span class="section-number">10.1. </span>Reader’s Guide</a><a class="headerlink" href="#reader-s-guide" title="Permalink to this headline">¶</a></h2>
+<p>Let’s start with some standard imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>This lecture uses the method of   <strong>Markov jump linear quadratic dynamic programming</strong> that is described in lecture
+<a class="reference internal" href="markov_jump_lq.html"><span class="doc">Markov Jump LQ dynamic programming</span></a>
+to extend the <span id="id1">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> model of optimal tax-smoothing and government debt in a
+particular direction.</p>
+<p>This lecture has two sequels that offer further extensions of the Barro model</p>
+<ol class="simple">
+<li><p><a class="reference internal" href="tax_smoothing_2.html"><span class="doc">How to Pay for a War: Part 2</span></a></p></li>
+<li><p><a class="reference internal" href="tax_smoothing_3.html"><span class="doc">How to Pay for a War: Part 3</span></a></p></li>
+</ol>
+<p>The extensions are modified versions of
+his 1979 model later suggested by Barro (1999 <span id="id2">[<a class="reference internal" href="zreferences.html#id216"><span>Bar99</span></a>]</span>, 2003 <span id="id3">[<a class="reference internal" href="zreferences.html#id217"><span>BM03</span></a>]</span>).</p>
+<p>Barro’s original 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> model is about a government that borrows and lends
+in order to minimize an intertemporal measure of distortions
+caused by taxes.</p>
+<p>Technical tractability induced Barro <span id="id5">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> to assume that</p>
+<ul class="simple">
+<li><p>the government trades only one-period risk-free debt, and</p></li>
+<li><p>the one-period risk-free interest rate is constant</p></li>
+</ul>
+<p>By using  <em>Markov jump linear quadratic dynamic
+programming</em> we  can allow interest rates to move over time in
+empirically interesting ways.</p>
+<p>Also, by expanding the dimension of the
+state, we can add a maturity composition decision to the government’s
+problem.</p>
+<p>It is by doing these two things that we extend Barro’s 1979 <span id="id6">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span>
+model along lines he suggested in Barro (1999 <span id="id7">[<a class="reference internal" href="zreferences.html#id216"><span>Bar99</span></a>]</span>, 2003 <span id="id8">[<a class="reference internal" href="zreferences.html#id217"><span>BM03</span></a>]</span>).</p>
+<p>Barro (1979) <span id="id9">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> assumed</p>
+<ul class="simple">
+<li><p>that a government faces an <strong>exogenous sequence</strong> of expenditures
+that it must finance by a tax collection sequence whose expected
+present value equals the initial debt it owes plus the expected
+present value of those expenditures.</p></li>
+<li><p>that the government wants to minimize the following measure of tax
+distortions: <span class="math notranslate nohighlight">\(E_0 \sum_{t=0}^{\infty} \beta^t T_t^2\)</span>, where <span class="math notranslate nohighlight">\(T_t\)</span> are total tax collections and <span class="math notranslate nohighlight">\(E_0\)</span>
+is a mathematical expectation conditioned on time <span class="math notranslate nohighlight">\(0\)</span>
+information.</p></li>
+<li><p>that the government trades only one asset, a risk-free one-period
+bond.</p></li>
+<li><p>that the gross interest rate on the one-period bond is constant and
+equal to <span class="math notranslate nohighlight">\(\beta^{-1}\)</span>, the reciprocal of the factor
+<span class="math notranslate nohighlight">\(\beta\)</span> at which the government discounts future tax distortions.</p></li>
+</ul>
+<p>Barro’s model can be mapped into a discounted linear quadratic dynamic
+programming problem.</p>
+<p>Partly inspired by Barro
+(1999) <span id="id10">[<a class="reference internal" href="zreferences.html#id216"><span>Bar99</span></a>]</span> and Barro (2003) <span id="id11">[<a class="reference internal" href="zreferences.html#id217"><span>BM03</span></a>]</span>,
+our generalizations of Barro’s (1979) <span id="id12">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> model assume</p>
+<ul class="simple">
+<li><p>that the government borrows or saves in the form of risk-free bonds
+of maturities <span class="math notranslate nohighlight">\(1, 2, \ldots , H\)</span>.</p></li>
+<li><p>that interest rates on those bonds are time-varying and in particular,
+governed by a jointly stationary stochastic process.</p></li>
+</ul>
+<p>Our generalizations are designed to fit within a generalization of an
+ordinary linear quadratic dynamic programming problem in which matrices
+that define the quadratic objective function and the state transition
+function are <strong>time-varying</strong> and <strong>stochastic</strong>.</p>
+<p>This generalization, known as a <strong>Markov jump linear quadratic dynamic
+program</strong>, combines</p>
+<ul class="simple">
+<li><p>the computational simplicity of <strong>linear quadratic dynamic
+programming</strong>, and</p></li>
+<li><p>the ability of <strong>finite state Markov chains</strong> to represent
+interesting patterns of random variation.</p></li>
+</ul>
+<p>We want the stochastic time variation in the matrices defining the
+dynamic programming problem to represent variation over time in</p>
+<ul class="simple">
+<li><p>interest rates</p></li>
+<li><p>default rates</p></li>
+<li><p>roll over risks</p></li>
+</ul>
+<p>As described in <a class="reference internal" href="markov_jump_lq.html"><span class="doc">Markov Jump LQ dynamic programming</span></a>,
+the idea underlying <strong>Markov jump linear quadratic dynamic programming</strong>
+is to replace the constant matrices defining a <strong>linear quadratic
+dynamic programming problem</strong> with matrices that are fixed functions of
+an <span class="math notranslate nohighlight">\(N\)</span> state Markov chain.</p>
+<p>For infinite horizon problems, this leads to <span class="math notranslate nohighlight">\(N\)</span> interrelated
+matrix Riccati equations that pin down <span class="math notranslate nohighlight">\(N\)</span> value functions and
+<span class="math notranslate nohighlight">\(N\)</span> linear decision rules, applying to the <span class="math notranslate nohighlight">\(N\)</span> Markov
+states.</p>
+</div>
+<div class="section" id="public-finance-questions">
+<h2><a class="toc-backref" href="#id20"><span class="section-number">10.2. </span>Public Finance Questions</a><a class="headerlink" href="#public-finance-questions" title="Permalink to this headline">¶</a></h2>
+<p>Barro’s 1979 <span id="id13">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> model is designed to answer questions such as</p>
+<ul class="simple">
+<li><p>Should a government finance an exogenous surge in government
+expenditures by raising taxes or borrowing?</p></li>
+<li><p>How does the answer to that first question depend on the exogenous
+stochastic process for government expenditures, for example, on
+whether the surge in government expenditures can be expected to be
+temporary or permanent?</p></li>
+</ul>
+<p>Barro’s 1999 <span id="id14">[<a class="reference internal" href="zreferences.html#id216"><span>Bar99</span></a>]</span> and 2003 <span id="id15">[<a class="reference internal" href="zreferences.html#id217"><span>BM03</span></a>]</span>
+models are designed to answer more fine-grained
+questions such as</p>
+<ul class="simple">
+<li><p>What determines whether a government wants to issue short-term or
+long-term debt?</p></li>
+<li><p>How do roll-over risks affect that decision?</p></li>
+<li><p>How does the government’s long-short <em>portfolio management</em> decision
+depend on features of the exogenous stochastic process for government
+expenditures?</p></li>
+</ul>
+<p>Thus, both the simple and the more fine-grained versions of Barro’s
+models are ways of precisely formulating the classic issue of <em>How to
+pay for a war</em>.</p>
+<p>This lecture describes:</p>
+<ul class="simple">
+<li><p>An application of Markov jump LQ dynamic programming to a model in
+which a government faces exogenous time-varying interest rates for
+issuing one-period risk-free debt.</p></li>
+</ul>
+<p>A <a class="reference internal" href="tax_smoothing_2.html"><span class="doc">sequel to this lecture</span></a>
+describes applies Markov LQ control to settings in which a government
+issues risk-free debt of different maturities.</p>
+</div>
+<div class="section" id="barro-1979-model">
+<h2><a class="toc-backref" href="#id21"><span class="section-number">10.3. </span>Barro (1979) Model</a><a class="headerlink" href="#barro-1979-model" title="Permalink to this headline">¶</a></h2>
+<p>We begin by solving a version of the Barro (1979) <span id="id16">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> model by mapping it
+into the original LQ framework.</p>
+<p>As mentioned <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">in this lecture</a>, the
+Barro model is mathematically isomorphic with the LQ permanent income
+model.</p>
+<p>Let <span class="math notranslate nohighlight">\(T_t\)</span> denote tax collections, <span class="math notranslate nohighlight">\(\beta\)</span> a discount factor,
+<span class="math notranslate nohighlight">\(b_{t,t+1}\)</span> time <span class="math notranslate nohighlight">\(t+1\)</span> goods that the government promises to
+pay at <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(G_t\)</span> government purchases, <span class="math notranslate nohighlight">\(p_{t,t+1}\)</span>
+the number of time <span class="math notranslate nohighlight">\(t\)</span> goods received per time <span class="math notranslate nohighlight">\(t+1\)</span> goods
+promised.</p>
+<p>Evidently, <span class="math notranslate nohighlight">\(p_{t, t+1}\)</span> is inversely related to
+appropriate corresponding gross interest rates on government debt.</p>
+<p>In the spirit of Barro (1979) <span id="id17">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span>, the stochastic process of government
+expenditures is exogenous.</p>
+<p>The government’s problem is to choose a plan
+for taxation and borrowing <span class="math notranslate nohighlight">\(\{b_{t+1}, T_t\}_{t=0}^\infty\)</span> to
+minimize</p>
+<div class="math notranslate nohighlight">
+\[
+E_0 \sum_{t=0}^\infty \beta^t T_t^2
+\]</div>
+<p>subject to the constraints</p>
+<div class="math notranslate nohighlight">
+\[
+T_t + p_{t,t+1} b_{t,t+1} = G_t + b_{t-1,t}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+G_t = U_{g} z_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+z_{t+1} = A_{22} z_t + C_{2} w_{t+1}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(w_{t+1} \sim {\cal N}(0,I)\)</span></p>
+<p>The variables
+<span class="math notranslate nohighlight">\(T_t, b_{t, t+1}\)</span> are <em>control</em> variables chosen at <span class="math notranslate nohighlight">\(t\)</span>,
+while <span class="math notranslate nohighlight">\(b_{t-1,t}\)</span> is an endogenous state variable inherited from
+the past at time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(p_{t,t+1}\)</span> is an exogenous state
+variable at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>To begin, we  assume that
+<span class="math notranslate nohighlight">\(p_{t,t+1}\)</span> is constant (and equal to <span class="math notranslate nohighlight">\(\beta\)</span>)</p>
+<ul class="simple">
+<li><p>later  we will  extend the model to allow <span class="math notranslate nohighlight">\(p_{t,t+1}\)</span> to vary over time</p></li>
+</ul>
+<p>To map into the LQ framework, we use
+<span class="math notranslate nohighlight">\(x_t = \begin{bmatrix} b_{t-1,t} \\ z_t \end{bmatrix}\)</span> as the
+state vector, and <span class="math notranslate nohighlight">\(u_t = b_{t,t+1}\)</span> as the control variable.</p>
+<p>Therefore, the <span class="math notranslate nohighlight">\((A, B, C)\)</span> matrices are defined by the state-transition law:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+x_{t+1} = \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; A_{22} \end{bmatrix} x_t + \begin{bmatrix} 1 \\ 0 \end{bmatrix} u_t + \begin{bmatrix} 0 \\ C_2 \end{bmatrix} w_{t+1}
+\end{split}\]</div>
+<p>To find the appropriate <span class="math notranslate nohighlight">\((R, Q, W)\)</span> matrices, we note that <span class="math notranslate nohighlight">\(G_t\)</span> and
+<span class="math notranslate nohighlight">\(b_{t-1,t}\)</span> can be written as appropriately defined functions of
+the current state:</p>
+<div class="math notranslate nohighlight">
+\[
+G_t = S_G x_t \hspace{2mm}, \hspace{2mm} b_{t-1,t} = S_1 x_t
+\]</div>
+<p>If we define <span class="math notranslate nohighlight">\(M_t = - p_{t,t+1}\)</span>, and let <span class="math notranslate nohighlight">\(S = S_G + S_1\)</span>, then
+we can write taxation as a function of the states and control using the
+government’s budget constraint:</p>
+<div class="math notranslate nohighlight">
+\[
+T_t = S x_t + M_t u_t
+\]</div>
+<p>It follows that the <span class="math notranslate nohighlight">\((R, Q, W)\)</span> matrices are implicitly defined by:</p>
+<div class="math notranslate nohighlight">
+\[
+T_t^2 = x_t'S'Sx_t + u_t'M_t'M_tu_t + 2 u_t'M_t'S x_t
+\]</div>
+<p>If we assume that <span class="math notranslate nohighlight">\(p_{t,t+1} = \beta\)</span>, then <span class="math notranslate nohighlight">\(M_t \equiv M = -\beta\)</span>.</p>
+<p>In this case, none of
+the LQ matrices are time varying, and we can use the original LQ
+framework.</p>
+<p>We will implement this constant interest-rate version first, assuming
+that <span class="math notranslate nohighlight">\(G_t\)</span> follows an AR(1) process:</p>
+<div class="math notranslate nohighlight">
+\[
+G_{t+1} = \bar G + \rho G_t + \sigma w_{t+1}
+\]</div>
+<p>To do this, we set
+<span class="math notranslate nohighlight">\(z_t = \begin{bmatrix} 1 \\ G_t \end{bmatrix}\)</span>, and consequently:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A_{22} = \begin{bmatrix} 1 &amp; 0 \\ \bar G &amp; \rho \end{bmatrix} \hspace{2mm} ,
+\hspace{2mm} C_2 = \begin{bmatrix} 0 \\ \sigma \end{bmatrix}
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model parameters</span>
+<span class="n">β</span><span class="p">,</span> <span class="n">Gbar</span><span class="p">,</span> <span class="n">ρ</span><span class="p">,</span> <span class="n">σ</span> <span class="o">=</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span>
+
+<span class="c1"># Basic model matrices</span>
+<span class="n">A22</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="n">Gbar</span><span class="p">,</span> <span class="n">ρ</span><span class="p">],])</span>
+
+<span class="n">C2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span>
+               <span class="p">[</span><span class="n">σ</span><span class="p">]])</span>
+
+<span class="n">Ug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+
+<span class="c1"># LQ framework matrices</span>
+<span class="n">A_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">A_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">A22</span><span class="p">))</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">A_t</span><span class="p">,</span> <span class="n">A_b</span><span class="p">))</span>
+
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">B</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">C2</span><span class="p">))</span>
+
+<span class="n">Sg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span> <span class="n">Ug</span><span class="p">))</span>
+<span class="n">S1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">S1</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">S1</span> <span class="o">+</span> <span class="n">Sg</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="n">β</span><span class="p">]])</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="n">S</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">S</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">M</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">M</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">S</span>
+
+<span class="c1"># Small penalty on the debt required to implement the no-Ponzi scheme</span>
+<span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">R</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1e-9</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now create an instance of <code class="docutils literal notranslate"><span class="pre">LQ</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">LQBarro</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQ</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">R</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="n">C</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="n">W</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+<span class="n">P</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">LQBarro</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">()</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see the isomorphism by noting that consumption is a martingale in
+the permanent income model and that taxation is a martingale in Barro’s
+model.</p>
+<p>We can check this using the <span class="math notranslate nohighlight">\(F\)</span> matrix of the LQ model.</p>
+<p>Because <span class="math notranslate nohighlight">\(u_t = -F x_t\)</span>, we have</p>
+<div class="math notranslate nohighlight">
+\[
+T_t = S x_t + M u_t = (S - MF) x_t
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+T_{t+1} = (S-MF)x_{t+1} = (S-MF)(Ax_t + B u_t + C w_{t+1}) = (S-MF)((A-BF)x_t + C w_{t+1})
+\]</div>
+<p>Therefore, the mathematical expectation of <span class="math notranslate nohighlight">\(T_{t+1}\)</span> conditional on  time
+<span class="math notranslate nohighlight">\(t\)</span> information is</p>
+<div class="math notranslate nohighlight">
+\[
+E_t T_{t+1} = (S-MF)(A-BF)x_t
+\]</div>
+<p>Consequently, taxation is a martingale (<span class="math notranslate nohighlight">\(E_t T_{t+1} = T_t\)</span>) if</p>
+<div class="math notranslate nohighlight">
+\[
+(S-MF)(A-BF) = (S-MF) ,
+\]</div>
+<p>which holds in this case:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">S</span> <span class="o">-</span> <span class="n">M</span> <span class="o">@</span> <span class="n">F</span><span class="p">,</span> <span class="p">(</span><span class="n">S</span> <span class="o">-</span> <span class="n">M</span> <span class="o">@</span> <span class="n">F</span><span class="p">)</span> <span class="o">@</span> <span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span> <span class="o">@</span> <span class="n">F</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([[ 0.05000002, 19.79166502,  0.2083334 ]]),
+ array([[ 0.05000002, 19.79166504,  0.2083334 ]]))
+</pre></div>
+</div>
+</div>
+</div>
+<p>This explains the  fanning out of the conditional empirical  distribution of  taxation across time, computing
+by simulation the
+Barro model a large number of times:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">250</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">LQBarro</span><span class="o">.</span><span class="n">compute_sequence</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span> <span class="p">((</span><span class="n">S</span> <span class="o">-</span> <span class="n">M</span> <span class="o">@</span> <span class="n">F</span><span class="p">)</span> <span class="o">@</span> <span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Taxation&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/tax_smoothing_1_11_0.png" src="_images/tax_smoothing_1_11_0.png" />
+</div>
+</div>
+<p>We can see a similar, but a smoother pattern, if we plot government debt
+over time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">250</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">LQBarro</span><span class="o">.</span><span class="n">compute_sequence</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Govt Debt&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/tax_smoothing_1_13_0.png" src="_images/tax_smoothing_1_13_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="python-class-to-solve-markov-jump-linear-quadratic-control-problems">
+<h2><a class="toc-backref" href="#id22"><span class="section-number">10.4. </span>Python Class to Solve Markov Jump Linear Quadratic Control Problems</a><a class="headerlink" href="#python-class-to-solve-markov-jump-linear-quadratic-control-problems" title="Permalink to this headline">¶</a></h2>
+<p>To implement the extension to the Barro model in which <span class="math notranslate nohighlight">\(p_{t,t+1}\)</span>
+varies over time, we must allow the M matrix to be time-varying.</p>
+<p>Our <span class="math notranslate nohighlight">\(Q\)</span> and <span class="math notranslate nohighlight">\(W\)</span> matrices must also vary over time.</p>
+<p>We can solve such a
+model using the <code class="docutils literal notranslate"><span class="pre">LQMarkov</span></code> class that solves Markov jump linear
+quandratic control problems as described above.</p>
+<p>The code for the class can be viewed
+<a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqcontrol.py#L334">here</a>.</p>
+<p>The class takes lists of matrices that corresponds to <span class="math notranslate nohighlight">\(N\)</span> Markov states.</p>
+<p>The value and policy functions are then found by iterating on  a coupled system of matrix Riccati difference
+equations.</p>
+<p>Optimal  <span class="math notranslate nohighlight">\(P_s,F_s,d_s\)</span>  are stored as attributes.</p>
+<p>The class also contains a “method” for simulating the model.</p>
+</div>
+<div class="section" id="barro-model-with-a-time-varying-interest-rate">
+<h2><a class="toc-backref" href="#id23"><span class="section-number">10.5. </span>Barro Model with a Time-varying Interest Rate</a><a class="headerlink" href="#barro-model-with-a-time-varying-interest-rate" title="Permalink to this headline">¶</a></h2>
+<p>We can use the above class to implement a version of the Barro model
+with a time-varying interest rate. The simplest way to extend the model
+is to allow the interest rate to take two possible values. We set:</p>
+<div class="math notranslate nohighlight">
+\[
+p^1_{t,t+1} = \beta + 0.02 = 0.97
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+p^2_{t,t+1} = \beta - 0.017 = 0.933
+\]</div>
+<p>Thus, the first Markov state  has a low interest rate, and the
+second Markov state has a high interest rate.</p>
+<p>We also need to specify a transition matrix for the Markov state.</p>
+<p>We use:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\Pi = \begin{bmatrix} 0.8 &amp; 0.2 \\ 0.2 &amp; 0.8 \end{bmatrix}
+\end{split}\]</div>
+<p>(so each Markov state is persistent, and there is an equal chance
+of moving from one state to the other)</p>
+<p>The choice of parameters means that the unconditional expectation of
+<span class="math notranslate nohighlight">\(p_{t,t+1}\)</span> is 0.9515, higher than <span class="math notranslate nohighlight">\(\beta (=0.95)\)</span>.</p>
+<p>If we
+were to set <span class="math notranslate nohighlight">\(p_{t,t+1} = 0.9515\)</span> in the version of the model with
+a constant interest rate, government debt would explode.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create list of matrices that corresponds to each Markov state</span>
+<span class="n">Π</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span>
+              <span class="p">[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">]])</span>
+
+<span class="n">As</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span> <span class="n">A</span><span class="p">]</span>
+<span class="n">Bs</span> <span class="o">=</span> <span class="p">[</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span><span class="p">]</span>
+<span class="n">Cs</span> <span class="o">=</span> <span class="p">[</span><span class="n">C</span><span class="p">,</span> <span class="n">C</span><span class="p">]</span>
+<span class="n">Rs</span> <span class="o">=</span> <span class="p">[</span><span class="n">R</span><span class="p">,</span> <span class="n">R</span><span class="p">]</span>
+
+<span class="n">M1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="n">β</span> <span class="o">-</span> <span class="mf">0.02</span><span class="p">]])</span>
+<span class="n">M2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="n">β</span> <span class="o">+</span> <span class="mf">0.017</span><span class="p">]])</span>
+
+<span class="n">Q1</span> <span class="o">=</span> <span class="n">M1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">M1</span>
+<span class="n">Q2</span> <span class="o">=</span> <span class="n">M2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">M2</span>
+<span class="n">Qs</span> <span class="o">=</span> <span class="p">[</span><span class="n">Q1</span><span class="p">,</span> <span class="n">Q2</span><span class="p">]</span>
+<span class="n">W1</span> <span class="o">=</span> <span class="n">M1</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">S</span>
+<span class="n">W2</span> <span class="o">=</span> <span class="n">M2</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">S</span>
+<span class="n">Ws</span> <span class="o">=</span> <span class="p">[</span><span class="n">W1</span><span class="p">,</span> <span class="n">W2</span><span class="p">]</span>
+
+<span class="c1"># create Markov Jump LQ DP problem instance</span>
+<span class="n">lqm</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LQMarkov</span><span class="p">(</span><span class="n">Π</span><span class="p">,</span> <span class="n">Qs</span><span class="p">,</span> <span class="n">Rs</span><span class="p">,</span> <span class="n">As</span><span class="p">,</span> <span class="n">Bs</span><span class="p">,</span> <span class="n">Cs</span><span class="o">=</span><span class="n">Cs</span><span class="p">,</span> <span class="n">Ns</span><span class="o">=</span><span class="n">Ws</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="n">β</span><span class="p">)</span>
+<span class="n">lqm</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The decision rules are now dependent on the Markov state:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lqm</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-0.98437712, 19.20516427, -0.8314215 ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lqm</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1.01434301, 21.5847983 , -0.83851116]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Simulating a large number of such economies over time reveals
+interesting dynamics.</p>
+<p>Debt tends to stay low and stable but
+recurrently surges.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="mi">2000</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">25</span><span class="p">]])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">250</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">lqm</span><span class="o">.</span><span class="n">compute_sequence</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Govt Debt&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/tax_smoothing_1_20_0.png" src="_images/tax_smoothing_1_20_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                    <p class="caption">
+ <span class="caption-text">
+  Tools and Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="orth_proj.html">
+   1. Orthogonal Projections and Their Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stationary_densities.html">
+   2. Continuous State Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="muth_kalman.html">
+   3. Reverse Engineering a la Muth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discrete_dp.html">
+   4. Discrete State Dynamic Programming
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  LQ Control
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_news.html">
+   5. Information and Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing.html">
+   6. Consumption Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing_tax.html">
+   7. Tax Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   8. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_jump_lq.html">
+   9. Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   10. How to Pay for a War: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_2.html">
+   11. How to Pay for a War: Part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_3.html">
+   12. How to Pay for a War: Part 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lqramsey.html">
+   13. Optimal Taxation in an LQ Economy
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Multiple Agent Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   14. Robust Markov Perfect Equilibrium
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arellano.html">
+   15. Default Risk and Income Fluctuations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="matsuyama.html">
+   16. Globalization and Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coase.html">
+   17. Coase’s Theory of the Firm
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Linear Economies
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_recursive_models.html">
+   18. Recursive Models of Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="growth_in_dles.html">
+   19. Growth in Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_asset_pricing_dles.html">
+   20. Lucas Asset Pricing Using DLE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="irfs_in_hall_model.html">
+   21. IRFs in Hall Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="permanent_income_dles.html">
+   22. Permanent Income Model using the DLE Class
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rosen_schooling_model.html">
+   23. Rosen Schooling Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cattle_cycles.html">
+   24. Cattle Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_invertibility_example.html">
+   25. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Classic Linear Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="von_neumann_model.html">
+   26. Von Neumann Growth Model (and a Generalization)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Time Series Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arma.html">
+   27. Covariance Stationary Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="estspec.html">
+   28. Estimation of Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additive_functionals.html">
+   29. Additive and Multiplicative Functionals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lu_tricks.html">
+   30. Classical Control with Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classical_filtering.html">
+   31. Classical Prediction and Filtering With Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="knowing_forecasts_of_others.html">
+   32. Knowing the Forecasts of Others
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Asset Pricing and Finance
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_model.html">
+   33. Asset Pricing II: The Lucas Asset Pricing Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="black_litterman.html">
+   34. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_complete_mkts.html">
+   35. Irrelevance of Capital Structure with Complete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_incomplete_mkts.html">
+   36. Equilibrium Capital Structures with Incomplete Markets
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Programming Squared
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dyn_stack.html">
+   37. Stackelberg Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo.html">
+   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opt_tax_recur.html">
+   39. Optimal Taxation with State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss.html">
+   40. Optimal Taxation without State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss2.html">
+   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss3.html">
+   42. Fiscal Risk and Government Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_ramsey.html">
+   43. Competitive Equilibria of a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_credible.html">
+   44. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   45. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   46. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   47. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="toolbar">
+
+            <div class="toolbar__inner">
+
+                <ul class="toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                    <!-- <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <i data-feather="search"></i>
+                        </form>
+                    </li> -->
+                </ul>
+
+                <ul class="toolbar__links">
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/tax_smoothing_1.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Launch Notebook" id="launchButton"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/tax_smoothing_1.ipynb" target="_blank"><i data-feather="play-circle"></i></a></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/tax_smoothing_1.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p style="color: white;">Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title">QuantEcon Notebook Launcher</p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input" onchange="onChangeListener()">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/tax_smoothing_1.ipynb">BinderHub</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <!-- <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" onchange="onChangeListener()">
+                <i class="fas fa-check-circle"></i>
+            </li> -->
+            </ul>
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

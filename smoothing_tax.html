@@ -1,0 +1,1999 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7. Tax Smoothing with Complete and Incomplete Markets &#8212; Advanced Quantitative Economics with Python</title>
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    
+  <link href="_static/css/theme.css" rel="stylesheet" />
+  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="_static/quantecon-book-theme.9deb0a26de8466f54124a1959c24cd33.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="_static/quantecon-book-theme.43eb86aa48ec3aed660cb313c38068cd.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://python-advanced.quantecon.org/smoothing_tax.html" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="8. Robustness" href="robustness.html" />
+    <link rel="prev" title="6. Consumption Smoothing with Complete and Incomplete Markets" href="smoothing.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="Tax Smoothing with Complete and Incomplete Markets"/>
+<meta name="twitter:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="Tax Smoothing with Complete and Incomplete Markets" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://python-advanced.quantecon.org/smoothing_tax.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+
+    <span id="top"></span>
+
+    <div class="wrapper">
+
+        <div class="main">
+
+            <div class="page" id=smoothing_tax>
+
+                <div class="page__toc">
+
+                    <div class="inner">
+
+                        
+                        <div class="page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#overview">
+   7.1. Overview
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#isomorphism-between-consumption-and-tax-smoothing">
+     7.1.1. Isomorphism between Consumption and Tax Smoothing
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#link-to-history">
+       7.1.1.1. Link to History
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#code">
+     7.1.2. Code
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#revisiting-the-consumption-smoothing-model">
+     7.1.3. Revisiting the consumption-smoothing model
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#relabeling-variables-to-create-tax-smoothing-models">
+       7.1.3.1. Relabeling variables to create tax-smoothing models
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tax-smoothing-with-complete-markets">
+   7.2. Tax Smoothing with Complete Markets
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#returns-on-state-contingent-debt">
+   7.3. Returns on State-Contingent Debt
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#an-example-of-tax-smoothing">
+     7.3.1. An Example of Tax Smoothing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#explanation">
+     7.3.2. Explanation
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-finite-markov-chain-tax-smoothing-examples">
+   7.4. More Finite Markov Chain Tax-Smoothing Examples
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameters">
+     7.4.1. Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-1">
+     7.4.2. Example 1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-2">
+     7.4.3. Example 2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-3">
+     7.4.4. Example 3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-4">
+     7.4.5. Example 4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-5">
+     7.4.6. Example 5
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#continuous-state-gaussian-model">
+     7.4.7. Continuous-State Gaussian Model
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#related-lectures">
+       7.4.7.1. Related Lectures
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo" alt="logo"></a>
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="page__toc-footer">
+                            
+                            
+                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="page__header">
+
+                    <div class="page__header-copy">
+
+                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+
+                        <p class="page__header-subheading">Tax Smoothing with Complete and Incomplete Markets</p>
+
+                    </div>
+
+                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" align="right" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><div class="section" id="tax-smoothing-with-complete-and-incomplete-markets">
+<h1><a class="toc-backref" href="#id11"><span class="section-number">7. </span>Tax Smoothing with Complete and Incomplete Markets</a><a class="headerlink" href="#tax-smoothing-with-complete-and-incomplete-markets" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<span id="index-0"></span><p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#tax-smoothing-with-complete-and-incomplete-markets" id="id11">Tax Smoothing with Complete and Incomplete Markets</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id12">Overview</a></p></li>
+<li><p><a class="reference internal" href="#tax-smoothing-with-complete-markets" id="id13">Tax Smoothing with Complete Markets</a></p></li>
+<li><p><a class="reference internal" href="#returns-on-state-contingent-debt" id="id14">Returns on State-Contingent Debt</a></p></li>
+<li><p><a class="reference internal" href="#more-finite-markov-chain-tax-smoothing-examples" id="id15">More Finite Markov Chain Tax-Smoothing Examples</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>In addition to what’s in Anaconda, this lecture uses the  library:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
+Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.12.5)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="overview">
+<h2><a class="toc-backref" href="#id12"><span class="section-number">7.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This lecture describes tax-smoothing models that are counterparts to consumption-smoothing models in <a class="reference internal" href="smoothing.html"><span class="doc">Consumption Smoothing with Complete and Incomplete Markets</span></a>.</p>
+<ul class="simple">
+<li><p>one is in the <strong>complete markets</strong> tradition of Lucas and Stokey <span id="id1">[<a class="reference internal" href="zreferences.html#id156"><span>LS83</span></a>]</span>.</p></li>
+<li><p>the other is in the <strong>incomplete markets</strong> tradition  of  Barro <span id="id2">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span>.</p></li>
+</ul>
+<p><em>Complete markets</em> allow a  government to buy or sell claims contingent on all possible Markov states.</p>
+<p><em>Incomplete markets</em> allow a  government to buy or sell only a limited set of securities, often only a single risk-free security.</p>
+<p>Barro <span id="id3">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span>  worked in an incomplete markets tradition by assuming
+that the only asset that can be traded is a risk-free one period bond.</p>
+<p>In his consumption-smoothing model, Hall <span id="id4">[<a class="reference internal" href="zreferences.html#id132"><span>Hal78</span></a>]</span> had  assumed an exogenous stochastic process of nonfinancial income and
+an exogenous gross interest rate on one period risk-free debt that equals
+<span class="math notranslate nohighlight">\(\beta^{-1}\)</span>, where <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span> is also a consumer’s
+intertemporal discount factor.</p>
+<p>Barro <span id="id5">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> made an analogous assumption about the risk-free interest
+rate in a tax-smoothing model that turns out to have the same mathematical structure as Hall’s
+consumption-smoothing model.</p>
+<p>To get Barro’s model from Hall’s, all we have to do is to rename variables.</p>
+<p>We maintain Hall’s and Barro’s assumption about the interest rate when we describe an
+incomplete markets version of our model.</p>
+<p>In addition, we extend their assumption about the interest rate to an appropriate counterpart to create a “complete markets” model in the style of
+Lucas and Stokey <span id="id6">[<a class="reference internal" href="zreferences.html#id156"><span>LS83</span></a>]</span>.</p>
+<div class="section" id="isomorphism-between-consumption-and-tax-smoothing">
+<h3><span class="section-number">7.1.1. </span>Isomorphism between Consumption and Tax Smoothing<a class="headerlink" href="#isomorphism-between-consumption-and-tax-smoothing" title="Permalink to this headline">¶</a></h3>
+<p>For each version of a consumption-smoothing model,  a tax-smoothing counterpart can be obtained simply by relabeling</p>
+<ul class="simple">
+<li><p>consumption as tax collections</p></li>
+<li><p>a consumer’s one-period utility function as a government’s one-period loss function from collecting taxes that impose deadweight welfare losses</p></li>
+<li><p>a consumer’s  nonfinancial income as a government’s purchases</p></li>
+<li><p>a consumer’s <em>debt</em> as a government’s <em>assets</em></p></li>
+</ul>
+<p>Thus, we can convert  the consumption-smoothing models in lecture <a class="reference internal" href="smoothing.html"><span class="doc">Consumption Smoothing with Complete and Incomplete Markets</span></a> into  tax-smoothing models by setting
+<span class="math notranslate nohighlight">\(c_t = T_t\)</span>, <span class="math notranslate nohighlight">\(y_t = G_t\)</span>, and <span class="math notranslate nohighlight">\(- b_t = a_t\)</span>,  where <span class="math notranslate nohighlight">\(T_t\)</span> is total tax
+collections, <span class="math notranslate nohighlight">\(\{G_t\}\)</span> is an exogenous government expenditures
+process, and <span class="math notranslate nohighlight">\(a_t\)</span> is the government’s holdings of one-period risk-free bonds coming maturing at the due at the beginning of time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>For elaborations on this theme, please see <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">Optimal Savings II: LQ Techniques</a> and later parts of this lecture.</p>
+<p>We’ll spend most of this lecture studying acquire finite-state Markov specification,
+but will also  treat the linear state space specification.</p>
+<div class="section" id="link-to-history">
+<h4><span class="section-number">7.1.1.1. </span>Link to History<a class="headerlink" href="#link-to-history" title="Permalink to this headline">¶</a></h4>
+<p>For those who love history, President Thomas Jefferson’s Secretary of Treasury Albert Gallatin (1807) <span id="id7">[<a class="reference internal" href="zreferences.html#id114"><span>Gal37</span></a>]</span> seems to have prescribed policies that
+come from Barro’s model <span id="id8">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span></p>
+<p>Let’s start with some standard imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To exploit the isomorphism between consumption-smoothing and tax-smoothing models, we  simply use code from <a class="reference internal" href="smoothing.html"><span class="doc">Consumption Smoothing with Complete and Incomplete Markets</span></a></p>
+</div>
+</div>
+<div class="section" id="code">
+<h3><span class="section-number">7.1.2. </span>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
+<p>Among other things, this code contains a function called <code class="docutils literal notranslate"><span class="pre">consumption_complete()</span></code>.</p>
+<p>This function computes <span class="math notranslate nohighlight">\(\{ b(i) \}_{i=1}^{N}, \bar c\)</span> as outcomes given a set of parameters for the general case with <span class="math notranslate nohighlight">\(N\)</span> Markov states
+under the assumption of complete markets</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ConsumptionProblem</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    The data for a consumption problem, including some default values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">β</span><span class="o">=.</span><span class="mi">96</span><span class="p">,</span>
+                 <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
+                 <span class="n">b0</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                 <span class="n">P</span><span class="o">=</span><span class="p">[[</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">],</span>
+                    <span class="p">[</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="o">.</span><span class="mi">6</span><span class="p">]],</span>
+                 <span class="n">init</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        β : discount factor</span>
+<span class="sd">        y : list containing the two income levels</span>
+<span class="sd">        b0 : debt in period 0 (= initial state debt level)</span>
+<span class="sd">        P : 2x2 transition matrix</span>
+<span class="sd">        init : index of initial state s0</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">β</span> <span class="o">=</span> <span class="n">β</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">b0</span> <span class="o">=</span> <span class="n">b0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init</span> <span class="o">=</span> <span class="n">init</span>
+
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N_simul</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+
+<span class="sd">        N_simul : number of periods for simulation</span>
+<span class="sd">        random_state : random state for simulating Markov chain</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># For the simulation define a quantecon MC class</span>
+        <span class="n">mc</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">MarkovChain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="p">)</span>
+        <span class="n">s_path</span> <span class="o">=</span> <span class="n">mc</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">N_simul</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">s_path</span>
+
+
+<span class="k">def</span> <span class="nf">consumption_complete</span><span class="p">(</span><span class="n">cp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes endogenous values for the complete market case.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    cp : instance of ConsumptionProblem</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+
+<span class="sd">        c_bar : constant consumption</span>
+<span class="sd">        b : optimal debt in each state</span>
+
+<span class="sd">    associated with the price system</span>
+
+<span class="sd">        Q = β * P</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">β</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">init</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">β</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">P</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">b0</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">init</span>   <span class="c1"># Unpack</span>
+
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">β</span> <span class="o">*</span> <span class="n">P</span>                               <span class="c1"># assumed price system</span>
+
+    <span class="c1"># construct matrices of augmented equation system</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span>
+
+    <span class="n">y_aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">y_aug</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">init</span><span class="p">]</span> <span class="o">-</span> <span class="n">b0</span>
+    <span class="n">y_aug</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="n">Q_aug</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">Q_aug</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="n">init</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">Q_aug</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">Q</span>
+
+    <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">A</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">A</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span> <span class="o">-</span> <span class="n">Q_aug</span><span class="p">)</span> <span class="o">@</span> <span class="n">y_aug</span>
+
+    <span class="n">c_bar</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">c_bar</span><span class="p">,</span> <span class="n">b</span>
+
+
+<span class="k">def</span> <span class="nf">consumption_incomplete</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">s_path</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Computes endogenous values for the incomplete market case.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+
+<span class="sd">    cp : instance of ConsumptionProblem</span>
+<span class="sd">    s_path : the path of states</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">β</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">b0</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">β</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">P</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">cp</span><span class="o">.</span><span class="n">b0</span>  <span class="c1"># Unpack</span>
+
+    <span class="n">N_simul</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s_path</span><span class="p">)</span>
+
+    <span class="c1"># Useful variables</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">shape</span> <span class="o">=</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="n">β</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span> <span class="o">@</span> <span class="n">y</span>
+
+    <span class="c1"># Store consumption and debt path</span>
+    <span class="n">b_path</span><span class="p">,</span> <span class="n">c_path</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N_simul</span><span class="o">+</span><span class="mi">1</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N_simul</span><span class="p">)</span>
+    <span class="n">b_path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">b0</span>
+
+    <span class="c1"># Optimal decisions from (12) and (13)</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">β</span><span class="p">)</span> <span class="o">*</span> <span class="n">v</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">β</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">s_path</span><span class="p">):</span>
+        <span class="n">c_path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">β</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="n">b_path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))[</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">b_path</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">b_path</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="n">db</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">c_path</span><span class="p">,</span> <span class="n">b_path</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">s_path</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="revisiting-the-consumption-smoothing-model">
+<h3><span class="section-number">7.1.3. </span>Revisiting the consumption-smoothing model<a class="headerlink" href="#revisiting-the-consumption-smoothing-model" title="Permalink to this headline">¶</a></h3>
+<p>The code above also contains a function called <code class="docutils literal notranslate"><span class="pre">consumption_incomplete()</span></code> that uses <a class="reference internal" href="smoothing.html#equation-cs-12">(6.17)</a> and <a class="reference internal" href="smoothing.html#equation-cs-13">(6.18)</a> to</p>
+<ul class="simple">
+<li><p>simulate paths of <span class="math notranslate nohighlight">\(y_t, c_t, b_{t+1}\)</span></p></li>
+<li><p>plot these against values of <span class="math notranslate nohighlight">\(\bar c, b(s_1), b(s_2)\)</span> found in a corresponding  complete markets economy</p></li>
+</ul>
+<p>Let’s try this, using the same parameters in both complete and incomplete markets economies</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cp</span> <span class="o">=</span> <span class="n">ConsumptionProblem</span><span class="p">()</span>
+<span class="n">s_path</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">simulate</span><span class="p">()</span>
+<span class="n">N_simul</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s_path</span><span class="p">)</span>
+
+<span class="n">c_bar</span><span class="p">,</span> <span class="n">debt_complete</span> <span class="o">=</span> <span class="n">consumption_complete</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
+
+<span class="n">c_path</span><span class="p">,</span> <span class="n">debt_path</span><span class="p">,</span> <span class="n">y_path</span> <span class="o">=</span> <span class="n">consumption_incomplete</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">s_path</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Consumption paths&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">c_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;incomplete market&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">c_bar</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;complete market&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">y_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">6</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Periods&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Debt paths&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">debt_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;incomplete market&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">debt_complete</span><span class="p">[</span><span class="n">s_path</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;complete market&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">y_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;income&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">6</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Periods&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/smoothing_tax_7_0.png" src="_images/smoothing_tax_7_0.png" />
+</div>
+</div>
+<p>In the graph on the left, for the same sample path of nonfinancial
+income <span class="math notranslate nohighlight">\(y_t\)</span>, notice that</p>
+<ul class="simple">
+<li><p>consumption is constant when there are complete markets.</p></li>
+<li><p>consumption takes a random walk in the incomplete markets version of the model.</p></li>
+<li><p>the consumer’s debt oscillates between two values that are functions
+of the Markov state in the complete markets model.</p></li>
+<li><p>the consumer’s debt  drifts because it contains a unit root in the incomplete markets economy.</p></li>
+</ul>
+<div class="section" id="relabeling-variables-to-create-tax-smoothing-models">
+<h4><span class="section-number">7.1.3.1. </span>Relabeling variables to create tax-smoothing models<a class="headerlink" href="#relabeling-variables-to-create-tax-smoothing-models" title="Permalink to this headline">¶</a></h4>
+<p>As indicated above, we relabel variables to acquire tax-smoothing interpretations of the complete markets and incomplete markets consumption-smoothing models.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Tax collection paths&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">c_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;incomplete market&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">c_bar</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;complete market&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">y_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;govt expenditures&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">6</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Periods&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">1.4</span><span class="p">,</span> <span class="mf">2.1</span><span class="p">])</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Government assets paths&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">debt_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;incomplete market&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">debt_complete</span><span class="p">[</span><span class="n">s_path</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;complete market&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N_simul</span><span class="p">),</span> <span class="n">y_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;govt expenditures&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Periods&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/smoothing_tax_9_0.png" src="_images/smoothing_tax_9_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="tax-smoothing-with-complete-markets">
+<h2><a class="toc-backref" href="#id13"><span class="section-number">7.2. </span>Tax Smoothing with Complete Markets</a><a class="headerlink" href="#tax-smoothing-with-complete-markets" title="Permalink to this headline">¶</a></h2>
+<p>It is instructive  to focus on a simple tax-smoothing example with complete markets.</p>
+<p>This example illustrates how, in a complete markets model like that of Lucas and Stokey <span id="id9">[<a class="reference internal" href="zreferences.html#id156"><span>LS83</span></a>]</span>, the government purchases
+insurance from the private sector.</p>
+<p>Payouts from the insurance it had purchased  allows the government to avoid raising taxes when  emergencies make government expenditures surge.</p>
+<p>We assume that government expenditures take one of two values <span class="math notranslate nohighlight">\(G_1 &lt; G_2\)</span>, where Markov state <span class="math notranslate nohighlight">\(1\)</span> means “peace” and Markov state <span class="math notranslate nohighlight">\(2\)</span> means “war”.</p>
+<p>The government budget constraint in Markov state <span class="math notranslate nohighlight">\(i\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+T_i + b_i = G_i + \sum_j Q_{ij} b_j
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+Q_{ij} = \beta P_{ij}
+\]</div>
+<p>is the price today of one unit of goods in Markov  state   <span class="math notranslate nohighlight">\(j\)</span> tomorrow when
+the Markov state is <span class="math notranslate nohighlight">\(i\)</span> today.</p>
+<p><span class="math notranslate nohighlight">\(b_i\)</span> is the government’s level of <em>assets</em> when it arrives in Markov state <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>That is, <span class="math notranslate nohighlight">\(b_i\)</span> equals  one-period state-contingent claims <em>owed to the government</em> that fall due at time <span class="math notranslate nohighlight">\(t\)</span> when the Markov state is <span class="math notranslate nohighlight">\(i\)</span>.</p>
+<p>Thus, if <span class="math notranslate nohighlight">\(b_i &lt; 0\)</span>, it means the government <strong>is owed</strong> <span class="math notranslate nohighlight">\(b_i\)</span> or <strong>owes</strong> <span class="math notranslate nohighlight">\(-b_i\)</span> when the economy arrives in Markov state <span class="math notranslate nohighlight">\(i\)</span> at time
+<span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>In our examples below, this  happens when in a previous war-time  period the government has sold an Arrow securities paying off <span class="math notranslate nohighlight">\(- b_i\)</span>
+in peacetime Markov state <span class="math notranslate nohighlight">\(i\)</span></p>
+<p>It can be enlightening to express the government’s budget constraint in Markov state <span class="math notranslate nohighlight">\(i\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+T_i = G_i +  \left(\sum_j Q_{ij} b_j -   b_i\right)
+\]</div>
+<p>in which the term <span class="math notranslate nohighlight">\((\sum_j Q_{ij} b_j -   b_i)\)</span>   equals the net amount that the government spends to purchase one-period Arrow securities
+that will pay off next period in Markov states <span class="math notranslate nohighlight">\(j = 1, \ldots, N\)</span> after it has received payments <span class="math notranslate nohighlight">\(b_i\)</span> this period.</p>
+</div>
+<div class="section" id="returns-on-state-contingent-debt">
+<h2><a class="toc-backref" href="#id14"><span class="section-number">7.3. </span>Returns on State-Contingent Debt</a><a class="headerlink" href="#returns-on-state-contingent-debt" title="Permalink to this headline">¶</a></h2>
+<p>Notice that <span class="math notranslate nohighlight">\(\sum_{j'=1}^N Q_{ij'} b(j')\)</span> is the amount that the government spends  in Markov state <span class="math notranslate nohighlight">\(i\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> to purchase
+one-period state-contingent claims that will pay off in Markov state <span class="math notranslate nohighlight">\(j'\)</span> at time <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
+<p>Then the <em>ex post</em> one-period gross return on the portfolio of government assets  held from state <span class="math notranslate nohighlight">\(i\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>
+to state <span class="math notranslate nohighlight">\(j\)</span> at time <span class="math notranslate nohighlight">\(t+1\)</span>  is</p>
+<div class="math notranslate nohighlight">
+\[
+R(j | i) = \frac{b(j) }{ \sum_{j'=1}^N Q_{ij'} b(j') }
+\]</div>
+<p>The cumulative return earned from putting <span class="math notranslate nohighlight">\(1\)</span> unit of time <span class="math notranslate nohighlight">\(t\)</span> goods into the government portfolio of state-contingent securities at
+time <span class="math notranslate nohighlight">\(t\)</span> and then rolling over the proceeds into the government portfolio each period thereafter is</p>
+<div class="math notranslate nohighlight">
+\[
+R^T(s_{t+T}, s_{t+T-1}, \ldots, s_t) \equiv R(s_{t+1} | s_t) R (s_{t+2} | s_{t+1} )
+\cdots R(s_{t+T} | s_{t+T-1} )
+\]</div>
+<p>Here is some code that computes one-period and cumulative returns on the government portfolio in the finite-state Markov version of our complete
+markets model.</p>
+<p><strong>Convention:</strong>  In this code, when <span class="math notranslate nohighlight">\(P_{ij}=0\)</span>,  we arbitrarily set <span class="math notranslate nohighlight">\(R(j | i)\)</span> to be <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ex_post_gross_return</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">cp</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    calculate the ex post one-period gross return on the portfolio</span>
+<span class="sd">    of government assets, given b and Q.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">β</span> <span class="o">*</span> <span class="n">cp</span><span class="o">.</span><span class="n">P</span>
+
+    <span class="n">values</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">@</span> <span class="n">b</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">R</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">ind</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">!=</span> <span class="mi">0</span>
+        <span class="n">R</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">/</span> <span class="n">values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">R</span>
+
+<span class="k">def</span> <span class="nf">cumulative_return</span><span class="p">(</span><span class="n">s_path</span><span class="p">,</span> <span class="n">R</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    compute cumulative return from holding 1 unit market portfolio</span>
+<span class="sd">    of government bonds, given some simulated state path.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s_path</span><span class="p">)</span>
+
+    <span class="n">RT_path</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">RT_path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">RT_path</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumprod</span><span class="p">([</span><span class="n">R</span><span class="p">[</span><span class="n">s_path</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">s_path</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">)])</span>
+
+    <span class="k">return</span> <span class="n">RT_path</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="an-example-of-tax-smoothing">
+<h3><span class="section-number">7.3.1. </span>An Example of Tax Smoothing<a class="headerlink" href="#an-example-of-tax-smoothing" title="Permalink to this headline">¶</a></h3>
+<p>We’ll study a tax-smoothing model with two Markov states.</p>
+<p>In Markov state <span class="math notranslate nohighlight">\(1\)</span>, there is peace and government expenditures are low.</p>
+<p>In Markov state <span class="math notranslate nohighlight">\(2\)</span>, there is war and government expenditures are high.</p>
+<p>We’ll compute optimal policies in both complete and incomplete markets settings.</p>
+<p>Then we’ll feed in a <strong>particular</strong> assumed path of Markov states and study outcomes.</p>
+<ul class="simple">
+<li><p>We’ll assume that the initial Markov state is state <span class="math notranslate nohighlight">\(1\)</span>, which means we start from a state of peace.</p></li>
+<li><p>The government  then experiences 3 time periods of war and come back to peace again.</p></li>
+<li><p>The history of Markov states is therefore <span class="math notranslate nohighlight">\(\{ peace, war, war, war, peace \}\)</span>.</p></li>
+</ul>
+<p>In addition, as indicated above, to simplify our example, we’ll set the government’s initial
+asset level to <span class="math notranslate nohighlight">\(1\)</span>, so that <span class="math notranslate nohighlight">\(b_1 = 1\)</span>.</p>
+<p>Here’s code that itinitializes government assets to be unity in an initial peace time  Markov state.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Parameters</span>
+<span class="n">β</span> <span class="o">=</span> <span class="o">.</span><span class="mi">96</span>
+
+<span class="c1"># change notation y to g in the tax-smoothing example</span>
+<span class="n">g</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">b0</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span> <span class="o">.</span><span class="mi">2</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">.</span><span class="mi">4</span><span class="p">,</span> <span class="o">.</span><span class="mi">6</span><span class="p">]])</span>
+
+<span class="n">cp</span> <span class="o">=</span> <span class="n">ConsumptionProblem</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">P</span><span class="p">)</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="n">β</span> <span class="o">*</span> <span class="n">P</span>
+
+<span class="c1"># change notation c_bar to T_bar in the tax-smoothing example</span>
+<span class="n">T_bar</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">consumption_complete</span><span class="p">(</span><span class="n">cp</span><span class="p">)</span>
+<span class="n">R</span> <span class="o">=</span> <span class="n">ex_post_gross_return</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">cp</span><span class="p">)</span>
+<span class="n">s_path</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">RT_path</span> <span class="o">=</span> <span class="n">cumulative_return</span><span class="p">(</span><span class="n">s_path</span><span class="p">,</span> <span class="n">R</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">P</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Q </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">Q</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Govt expenditures in peace and war = </span><span class="si">{</span><span class="n">g</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Constant tax collections = </span><span class="si">{</span><span class="n">T_bar</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Govt debts in two states = </span><span class="si">{</span><span class="o">-</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Now let&#39;s check the government&#39;s budget constraint in peace and war.</span>
+<span class="s2">Our assumptions imply that the government always purchases 0 units of the</span>
+<span class="s2">Arrow peace security.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+<span class="n">AS1</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span> <span class="o">@</span> <span class="n">b</span>
+<span class="c1"># spending on Arrow security</span>
+<span class="c1"># since the spending on Arrow peace security is not 0 anymore after we change b0 to 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Spending on Arrow security in peace = </span><span class="si">{</span><span class="n">AS1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">AS2</span> <span class="o">=</span> <span class="n">Q</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span> <span class="o">@</span> <span class="n">b</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Spending on Arrow security in war = </span><span class="si">{</span><span class="n">AS2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="c1"># tax collections minus debt levels</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Government tax collections minus debt levels in peace and war&quot;</span><span class="p">)</span>
+<span class="n">TB1</span> <span class="o">=</span> <span class="n">T_bar</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T+b in peace = </span><span class="si">{</span><span class="n">TB1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">TB2</span> <span class="o">=</span> <span class="n">T_bar</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T+b in war = </span><span class="si">{</span><span class="n">TB2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total government spending in peace and war&quot;</span><span class="p">)</span>
+<span class="n">G1</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">AS1</span>
+<span class="n">G2</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">AS2</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Peace = </span><span class="si">{</span><span class="n">G1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;War = </span><span class="si">{</span><span class="n">G2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Let&#39;s see ex-post and ex-ante returns on Arrow securities&quot;</span><span class="p">)</span>
+
+<span class="n">Π</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reciprocal</span><span class="p">(</span><span class="n">Q</span><span class="p">)</span>
+<span class="n">exret</span> <span class="o">=</span> <span class="n">Π</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ex-post returns to purchase of Arrow securities = </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">exret</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">exant</span> <span class="o">=</span> <span class="n">Π</span> <span class="o">*</span> <span class="n">P</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ex-ante returns to purchase of Arrow securities </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">exant</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Ex-post one-period gross return on the portfolio of government assets&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The cumulative return earned from holding 1 unit market portfolio of government bonds&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">RT_path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
+ [[0.8 0.2]
+ [0.4 0.6]]
+Q 
+ [[0.768 0.192]
+ [0.384 0.576]]
+Govt expenditures in peace and war = [1, 2]
+Constant tax collections = 1.2716883116883118
+Govt debts in two states = [-1.         -2.62337662]
+
+Now let&#39;s check the government&#39;s budget constraint in peace and war.
+Our assumptions imply that the government always purchases 0 units of the
+Arrow peace security.
+
+Spending on Arrow security in peace = 1.2716883116883118
+Spending on Arrow security in war = 1.895064935064935
+
+Government tax collections minus debt levels in peace and war
+T+b in peace = 2.2716883116883118
+T+b in war = 3.895064935064935
+
+Total government spending in peace and war
+Peace = 2.2716883116883118
+War = 3.895064935064935
+
+Let&#39;s see ex-post and ex-ante returns on Arrow securities
+Ex-post returns to purchase of Arrow securities = 
+ [[1.30208333 5.20833333]
+ [2.60416667 1.73611111]]
+Ex-ante returns to purchase of Arrow securities 
+ [[1.04166667 1.04166667]
+ [1.04166667 1.04166667]]
+
+The Ex-post one-period gross return on the portfolio of government assets
+[[0.78635621 2.0629085 ]
+ [0.5276864  1.38432018]]
+
+The cumulative return earned from holding 1 unit market portfolio of government bonds
+2.0860704239993675
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="explanation">
+<h3><span class="section-number">7.3.2. </span>Explanation<a class="headerlink" href="#explanation" title="Permalink to this headline">¶</a></h3>
+<p>In this example, the government always purchase <span class="math notranslate nohighlight">\(1\)</span> units of the
+Arrow security that pays off in peace time (Markov state <span class="math notranslate nohighlight">\(1\)</span>).</p>
+<p>And it purchases a higher amount of the security that pays off in war
+time (Markov state <span class="math notranslate nohighlight">\(2\)</span>).</p>
+<p>Thus, this is an example in which</p>
+<ul class="simple">
+<li><p>during peacetime, the government purchases <em>insurance</em> against the possibility that war breaks out next period</p></li>
+<li><p>during wartime, the government purchases <em>insurance</em> against the possibility that war continues another period</p></li>
+<li><p>so long as peace continues, the ex post return  on  insurance against war is low</p></li>
+<li><p>when war breaks out or continues, the ex post return  on insurance against war  is high</p></li>
+<li><p>given the history of states that  we assumed, the value of one unit of the portfolio of government assets eventually doubles in the end because of high returns during wartime.</p></li>
+</ul>
+<p>We recommend plugging the quantities computed above into the government
+budget constraints in the two Markov states and staring.</p>
+<p><em>Exercise:</em> try changing the Markov transition matrix so that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+P = \begin{bmatrix}
+        1 &amp; 0 \\
+       .2 &amp; .8
+    \end{bmatrix}
+\end{split}\]</div>
+<p>Also, start the system in Markov state <span class="math notranslate nohighlight">\(2\)</span> (war) with initial
+government assets <span class="math notranslate nohighlight">\(- 10\)</span>, so that the government starts the
+war in debt and <span class="math notranslate nohighlight">\(b_2 = -10\)</span>.</p>
+</div>
+</div>
+<div class="section" id="more-finite-markov-chain-tax-smoothing-examples">
+<h2><a class="toc-backref" href="#id15"><span class="section-number">7.4. </span>More Finite Markov Chain Tax-Smoothing Examples</a><a class="headerlink" href="#more-finite-markov-chain-tax-smoothing-examples" title="Permalink to this headline">¶</a></h2>
+<p>To interpret some episodes in the fiscal history of the United States, we find it interesting to study a few more examples.</p>
+<p>We compute examples  in an <span class="math notranslate nohighlight">\(N\)</span> state Markov setting under both complete and incomplete markets.</p>
+<p>These examples differ in how Markov states are jumping between peace and war.</p>
+<p>To wrap procedures for solving models, relabeling  graphs so that we record government <em>debt</em> rather than  government <em>assets</em>,
+and displaying  results, we construct a Python class.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TaxSmoothingExample</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    construct a tax-smoothing example, by relabeling consumption problem class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">β</span><span class="o">=.</span><span class="mi">96</span><span class="p">,</span>
+                 <span class="n">init</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">s_path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">N_simul</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">states</span> <span class="o">=</span> <span class="n">states</span> <span class="c1"># state names</span>
+
+        <span class="c1"># if the path of states is not specified</span>
+        <span class="k">if</span> <span class="n">s_path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cp</span> <span class="o">=</span> <span class="n">ConsumptionProblem</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">init</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">s_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">N_simul</span><span class="o">=</span><span class="n">N_simul</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">random_state</span><span class="p">)</span>
+        <span class="c1"># if the path of states is specified</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cp</span> <span class="o">=</span> <span class="n">ConsumptionProblem</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="n">s_path</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">s_path</span> <span class="o">=</span> <span class="n">s_path</span>
+
+        <span class="c1"># solve for complete market case</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T_bar</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="n">consumption_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">debt_value</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">β</span> <span class="o">*</span> <span class="n">P</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># solve for incomplete market case</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">T_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">asset_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g_path</span> <span class="o">=</span> \
+            <span class="n">consumption_incomplete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">s_path</span><span class="p">)</span>
+
+        <span class="c1"># calculate returns on state-contingent debt</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">=</span> <span class="n">ex_post_gross_return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">RT_path</span> <span class="o">=</span> <span class="n">cumulative_return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">s_path</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="c1"># plot graphs</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T_path</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Tax collection paths&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">T_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;incomplete market&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">T_bar</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;complete market&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">g_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;govt expenditures&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">6</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Periods&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Government debt paths&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">asset_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;incomplete market&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">s_path</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;complete market&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">g_path</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;govt expenditures&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">debt_value</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">s_path</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;value of debts today&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Periods&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cumulative return path (complete markets)&#39;</span><span class="p">)</span>
+        <span class="n">line1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">RT_path</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">c1</span> <span class="o">=</span> <span class="n">line1</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Periods&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Cumulative return&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c1</span><span class="p">)</span>
+
+        <span class="n">ax_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twinx</span><span class="p">()</span>
+        <span class="n">ax_</span><span class="o">.</span><span class="n">_get_lines</span><span class="o">.</span><span class="n">prop_cycler</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">_get_lines</span><span class="o">.</span><span class="n">prop_cycler</span>
+        <span class="n">line2</span> <span class="o">=</span> <span class="n">ax_</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">g_path</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">c2</span> <span class="o">=</span> <span class="n">line2</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span>
+        <span class="n">ax_</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Government expenditures&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">c2</span><span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+        <span class="c1"># plot detailed information</span>
+        <span class="n">Q</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="o">.</span><span class="n">β</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="o">.</span><span class="n">P</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;P </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="o">.</span><span class="n">P</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Q </span><span class="se">\n</span><span class="s2"> </span><span class="si">{</span><span class="n">Q</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Govt expenditures in </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Constant tax collections = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">T_bar</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Govt debt in </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)</span><span class="si">}</span><span class="s2"> states = </span><span class="si">{</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Government tax collections minus debt levels in </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)):</span>
+            <span class="n">TB</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">T_bar</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  T+b in </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">TB</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total government spending in </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)):</span>
+            <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="o">.</span><span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2"> = </span><span class="si">{</span><span class="n">G</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Let&#39;s see ex-post and ex-ante returns on Arrow securities </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ex-post returns to purchase of Arrow securities:&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  π(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">exant</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="o">.</span><span class="n">β</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Ex-ante returns to purchase of Arrow securities = </span><span class="si">{</span><span class="n">exant</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The Ex-post one-period gross return on the portfolio of government assets&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The cumulative return earned from holding 1 unit market portfolio of government bonds&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RT_path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="parameters">
+<h3><span class="section-number">7.4.1. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">γ</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
+<span class="n">λ</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
+<span class="n">ϕ</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
+<span class="n">θ</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
+<span class="n">ψ</span> <span class="o">=</span> <span class="o">.</span><span class="mi">1</span>
+<span class="n">g_L</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span>
+<span class="n">g_M</span> <span class="o">=</span> <span class="o">.</span><span class="mi">8</span>
+<span class="n">g_H</span> <span class="o">=</span> <span class="mf">1.2</span>
+<span class="n">β</span> <span class="o">=</span> <span class="o">.</span><span class="mi">96</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-1">
+<h3><span class="section-number">7.4.2. </span>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h3>
+<p>This example is designed to produce some stylized versions of tax, debt, and deficit paths followed by the United States during and
+after the Civil War and also during and after World War I.</p>
+<p>We set the Markov chain to have three states</p>
+<div class="math notranslate nohighlight">
+\[
+P =
+\begin{bmatrix}
+    1 - \lambda &amp; \lambda  &amp; 0    \cr
+    0           &amp; 1 - \phi &amp; \phi \cr
+    0           &amp; 0        &amp; 1
+\end{bmatrix}
+\]</div>
+<p>where the government expenditure vector  <span class="math notranslate nohighlight">\(g = \begin{bmatrix} g_L &amp; g_H &amp; g_M \end{bmatrix}\)</span> where <span class="math notranslate nohighlight">\(g_L &lt; g_M &lt; g_H\)</span>.</p>
+<p>We set <span class="math notranslate nohighlight">\(b_0 = 1\)</span> and assume that the initial Markov state is state <span class="math notranslate nohighlight">\(1\)</span> so that the system starts off in peace.</p>
+<p>These parameters have government expenditure beginning at a low level, surging during the war, then decreasing after the war to a level
+that exceeds its prewar level.</p>
+<p>(This type of  pattern occurred in the US Civil War and World War I experiences.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g_ex1</span> <span class="o">=</span> <span class="p">[</span><span class="n">g_L</span><span class="p">,</span> <span class="n">g_H</span><span class="p">,</span> <span class="n">g_M</span><span class="p">]</span>
+<span class="n">P_ex1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">,</span> <span class="n">λ</span><span class="p">,</span>  <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">ϕ</span><span class="p">,</span>  <span class="n">ϕ</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">]])</span>
+<span class="n">b0_ex1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">states_ex1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;peace&#39;</span><span class="p">,</span> <span class="s1">&#39;war&#39;</span><span class="p">,</span> <span class="s1">&#39;postwar&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_ex1</span> <span class="o">=</span> <span class="n">TaxSmoothingExample</span><span class="p">(</span><span class="n">g_ex1</span><span class="p">,</span> <span class="n">P_ex1</span><span class="p">,</span> <span class="n">b0_ex1</span><span class="p">,</span> <span class="n">states_ex1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ts_ex1</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/smoothing_tax_20_0.png" src="_images/smoothing_tax_20_0.png" />
+<img alt="_images/smoothing_tax_20_1.png" src="_images/smoothing_tax_20_1.png" />
+<img alt="_images/smoothing_tax_20_2.png" src="_images/smoothing_tax_20_2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
+ [[0.9 0.1 0. ]
+ [0.  0.9 0.1]
+ [0.  0.  1. ]]
+Q 
+ [[0.864 0.096 0.   ]
+ [0.    0.864 0.096]
+ [0.    0.    0.96 ]]
+Govt expenditures in peace, war, postwar = [0.5 1.2 0.8]
+Constant tax collections = 0.7548096885813149
+Govt debt in 3 states = [-1.         -4.07093426 -1.12975779]
+
+Government tax collections minus debt levels in peace, war, postwar
+  T+b in peace = 1.754809688581315
+  T+b in war = 4.825743944636679
+  T+b in postwar = 1.8845674740484437
+
+Total government spending in peace, war, postwar
+  peace = 1.754809688581315
+  war = 4.825743944636679
+  postwar = 1.8845674740484437
+
+Let&#39;s see ex-post and ex-ante returns on Arrow securities 
+
+Ex-post returns to purchase of Arrow securities:
+  π(peace|peace) = 1.1574074074074074
+  π(war|peace) = 10.416666666666666
+  π(war|war) = 1.1574074074074074
+  π(postwar|war) = 10.416666666666666
+  π(postwar|postwar) = 1.0416666666666667
+
+Ex-ante returns to purchase of Arrow securities = 1.0416666666666667
+
+The Ex-post one-period gross return on the portfolio of government assets
+[[0.7969336  3.24426428 0.        ]
+ [0.         1.12278592 0.31159337]
+ [0.         0.         1.04166667]]
+
+The cumulative return earned from holding 1 unit market portfolio of government bonds
+0.17908622141460384
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The following shows the use of the wrapper class when a specific state path is given</span>
+<span class="n">s_path</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">ts_s_path</span> <span class="o">=</span> <span class="n">TaxSmoothingExample</span><span class="p">(</span><span class="n">g_ex1</span><span class="p">,</span> <span class="n">P_ex1</span><span class="p">,</span> <span class="n">b0_ex1</span><span class="p">,</span> <span class="n">states_ex1</span><span class="p">,</span> <span class="n">s_path</span><span class="o">=</span><span class="n">s_path</span><span class="p">)</span>
+<span class="n">ts_s_path</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/smoothing_tax_21_0.png" src="_images/smoothing_tax_21_0.png" />
+<img alt="_images/smoothing_tax_21_1.png" src="_images/smoothing_tax_21_1.png" />
+<img alt="_images/smoothing_tax_21_2.png" src="_images/smoothing_tax_21_2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
+ [[0.9 0.1 0. ]
+ [0.  0.9 0.1]
+ [0.  0.  1. ]]
+Q 
+ [[0.864 0.096 0.   ]
+ [0.    0.864 0.096]
+ [0.    0.    0.96 ]]
+Govt expenditures in peace, war, postwar = [0.5 1.2 0.8]
+Constant tax collections = 0.7548096885813149
+Govt debt in 3 states = [-1.         -4.07093426 -1.12975779]
+
+Government tax collections minus debt levels in peace, war, postwar
+  T+b in peace = 1.754809688581315
+  T+b in war = 4.825743944636679
+  T+b in postwar = 1.8845674740484437
+
+Total government spending in peace, war, postwar
+  peace = 1.754809688581315
+  war = 4.825743944636679
+  postwar = 1.8845674740484437
+
+Let&#39;s see ex-post and ex-ante returns on Arrow securities 
+
+Ex-post returns to purchase of Arrow securities:
+  π(peace|peace) = 1.1574074074074074
+  π(war|peace) = 10.416666666666666
+  π(war|war) = 1.1574074074074074
+  π(postwar|war) = 10.416666666666666
+  π(postwar|postwar) = 1.0416666666666667
+
+Ex-ante returns to purchase of Arrow securities = 1.0416666666666667
+
+The Ex-post one-period gross return on the portfolio of government assets
+[[0.7969336  3.24426428 0.        ]
+ [0.         1.12278592 0.31159337]
+ [0.         0.         1.04166667]]
+
+The cumulative return earned from holding 1 unit market portfolio of government bonds
+0.9045311615620274
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-2">
+<h3><span class="section-number">7.4.3. </span>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h3>
+<p>This example captures a peace followed by a war, eventually followed by a  permanent peace .</p>
+<p>Here we set</p>
+<div class="math notranslate nohighlight">
+\[
+P =
+\begin{bmatrix}
+    1    &amp; 0        &amp; 0      \cr
+    0    &amp; 1-\gamma &amp; \gamma \cr
+    \phi &amp; 0        &amp; 1-\phi
+\end{bmatrix}
+\]</div>
+<p>where the government expenditure vector <span class="math notranslate nohighlight">\(g = \begin{bmatrix} g_L &amp; g_L &amp; g_H \end{bmatrix}\)</span> and where <span class="math notranslate nohighlight">\(g_L &lt; g_H\)</span>.</p>
+<p>We assume <span class="math notranslate nohighlight">\(b_0 = 1\)</span> and that the initial Markov state is state <span class="math notranslate nohighlight">\(2\)</span> so that the system starts off in a temporary peace.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g_ex2</span> <span class="o">=</span> <span class="p">[</span><span class="n">g_L</span><span class="p">,</span> <span class="n">g_L</span><span class="p">,</span> <span class="n">g_H</span><span class="p">]</span>
+<span class="n">P_ex2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">γ</span><span class="p">,</span>    <span class="n">γ</span><span class="p">],</span>
+                  <span class="p">[</span><span class="n">ϕ</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">ϕ</span><span class="p">]])</span>
+<span class="n">b0_ex2</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">states_ex2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;peace&#39;</span><span class="p">,</span> <span class="s1">&#39;temporary peace&#39;</span><span class="p">,</span> <span class="s1">&#39;war&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_ex2</span> <span class="o">=</span> <span class="n">TaxSmoothingExample</span><span class="p">(</span><span class="n">g_ex2</span><span class="p">,</span> <span class="n">P_ex2</span><span class="p">,</span> <span class="n">b0_ex2</span><span class="p">,</span> <span class="n">states_ex2</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ts_ex2</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/smoothing_tax_24_0.png" src="_images/smoothing_tax_24_0.png" />
+<img alt="_images/smoothing_tax_24_1.png" src="_images/smoothing_tax_24_1.png" />
+<img alt="_images/smoothing_tax_24_2.png" src="_images/smoothing_tax_24_2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
+ [[1.  0.  0. ]
+ [0.  0.9 0.1]
+ [0.1 0.  0.9]]
+Q 
+ [[0.96  0.    0.   ]
+ [0.    0.864 0.096]
+ [0.096 0.    0.864]]
+Govt expenditures in peace, temporary peace, war = [0.5 0.5 1.2]
+Constant tax collections = 0.6053287197231834
+Govt debt in 3 states = [ 2.63321799 -1.         -2.51384083]
+
+Government tax collections minus debt levels in peace, temporary peace, war
+  T+b in peace = -2.027889273356399
+  T+b in temporary peace = 1.6053287197231834
+  T+b in war = 3.1191695501730106
+
+Total government spending in peace, temporary peace, war
+  peace = -2.027889273356399
+  temporary peace = 1.6053287197231834
+  war = 3.119169550173011
+
+Let&#39;s see ex-post and ex-ante returns on Arrow securities 
+
+Ex-post returns to purchase of Arrow securities:
+  π(peace|peace) = 1.0416666666666667
+  π(temporary peace|temporary peace) = 1.1574074074074074
+  π(war|temporary peace) = 10.416666666666666
+  π(peace|war) = 10.416666666666666
+  π(war|war) = 1.1574074074074074
+
+Ex-ante returns to purchase of Arrow securities = 1.0416666666666667
+
+The Ex-post one-period gross return on the portfolio of government assets
+[[ 1.04166667  0.          0.        ]
+ [ 0.          0.90470824  2.27429251]
+ [-1.37206116  0.          1.30985865]]
+
+The cumulative return earned from holding 1 unit market portfolio of government bonds
+-9.3689917325942
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-3">
+<h3><span class="section-number">7.4.4. </span>Example 3<a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h3>
+<p>This example features a situation in which one of the states is a war state with no hope of peace next period, while another state
+is a war state with a positive probability of peace next period.</p>
+<p>The Markov chain is:</p>
+<div class="math notranslate nohighlight">
+\[
+P =
+\begin{bmatrix}
+            1 - \lambda &amp; \lambda  &amp; 0      &amp; 0         \cr
+    0           &amp; 1 - \phi &amp; \phi   &amp; 0         \cr
+    0           &amp; 0        &amp; 1-\psi &amp; \psi      \cr
+    \theta      &amp; 0        &amp; 0      &amp; 1 - \theta
+\end{bmatrix}
+\]</div>
+<p>with government expenditure levels for the four states being
+<span class="math notranslate nohighlight">\(\begin{bmatrix} g_L &amp; g_L &amp; g_H &amp; g_H \end{bmatrix}\)</span> where <span class="math notranslate nohighlight">\(g_L &lt; g_H\)</span>.</p>
+<p>We start with <span class="math notranslate nohighlight">\(b_0 = 1\)</span> and <span class="math notranslate nohighlight">\(s_0 = 1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g_ex3</span> <span class="o">=</span> <span class="p">[</span><span class="n">g_L</span><span class="p">,</span> <span class="n">g_L</span><span class="p">,</span> <span class="n">g_H</span><span class="p">,</span> <span class="n">g_H</span><span class="p">]</span>
+<span class="n">P_ex3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">,</span>  <span class="n">λ</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="o">-</span><span class="n">ϕ</span><span class="p">,</span>   <span class="n">ϕ</span><span class="p">,</span>     <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="o">-</span><span class="n">ψ</span><span class="p">,</span>    <span class="n">ψ</span><span class="p">],</span>
+                  <span class="p">[</span><span class="n">θ</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="o">-</span><span class="n">θ</span> <span class="p">]])</span>
+<span class="n">b0_ex3</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">states_ex3</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;peace1&#39;</span><span class="p">,</span> <span class="s1">&#39;peace2&#39;</span><span class="p">,</span> <span class="s1">&#39;war1&#39;</span><span class="p">,</span> <span class="s1">&#39;war2&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_ex3</span> <span class="o">=</span> <span class="n">TaxSmoothingExample</span><span class="p">(</span><span class="n">g_ex3</span><span class="p">,</span> <span class="n">P_ex3</span><span class="p">,</span> <span class="n">b0_ex3</span><span class="p">,</span> <span class="n">states_ex3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ts_ex3</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/smoothing_tax_27_0.png" src="_images/smoothing_tax_27_0.png" />
+<img alt="_images/smoothing_tax_27_1.png" src="_images/smoothing_tax_27_1.png" />
+<img alt="_images/smoothing_tax_27_2.png" src="_images/smoothing_tax_27_2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
+ [[0.9 0.1 0.  0. ]
+ [0.  0.9 0.1 0. ]
+ [0.  0.  0.9 0.1]
+ [0.1 0.  0.  0.9]]
+Q 
+ [[0.864 0.096 0.    0.   ]
+ [0.    0.864 0.096 0.   ]
+ [0.    0.    0.864 0.096]
+ [0.096 0.    0.    0.864]]
+Govt expenditures in peace1, peace2, war1, war2 = [0.5 0.5 1.2 1.2]
+Constant tax collections = 0.6927944572748268
+Govt debt in 4 states = [-1.         -3.42494226 -6.86027714 -4.43533487]
+
+Government tax collections minus debt levels in peace1, peace2, war1, war2
+  T+b in peace1 = 1.6927944572748268
+  T+b in peace2 = 4.117736720554273
+  T+b in war1 = 7.553071593533488
+  T+b in war2 = 5.1281293302540405
+
+Total government spending in peace1, peace2, war1, war2
+  peace1 = 1.6927944572748268
+  peace2 = 4.117736720554273
+  war1 = 7.553071593533487
+  war2 = 5.1281293302540405
+
+Let&#39;s see ex-post and ex-ante returns on Arrow securities 
+
+Ex-post returns to purchase of Arrow securities:
+  π(peace1|peace1) = 1.1574074074074074
+  π(peace2|peace1) = 10.416666666666666
+  π(peace2|peace2) = 1.1574074074074074
+  π(war1|peace2) = 10.416666666666666
+  π(war1|war1) = 1.1574074074074074
+  π(war2|war1) = 10.416666666666666
+  π(peace1|war2) = 10.416666666666666
+  π(war2|war2) = 1.1574074074074074
+
+Ex-ante returns to purchase of Arrow securities = 1.0416666666666667
+
+The Ex-post one-period gross return on the portfolio of government assets
+[[0.83836741 2.87135998 0.         0.        ]
+ [0.         0.94670854 1.89628977 0.        ]
+ [0.         0.         1.07983627 0.69814023]
+ [0.2545741  0.         0.         1.1291214 ]]
+
+The cumulative return earned from holding 1 unit market portfolio of government bonds
+0.02371440178864223
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-4">
+<h3><span class="section-number">7.4.5. </span>Example 4<a class="headerlink" href="#example-4" title="Permalink to this headline">¶</a></h3>
+<p>Here the Markov chain is:</p>
+<div class="math notranslate nohighlight">
+\[
+P =
+\begin{bmatrix}
+            1 - \lambda &amp; \lambda  &amp; 0      &amp; 0          &amp; 0      \cr
+            0           &amp; 1 - \phi &amp; \phi   &amp; 0          &amp; 0      \cr
+    0           &amp; 0        &amp; 1-\psi &amp; \psi       &amp; 0      \cr
+    0           &amp; 0        &amp; 0      &amp; 1 - \theta &amp; \theta \cr
+    0           &amp; 0        &amp; 0      &amp; 0          &amp; 1
+\end{bmatrix}
+\]</div>
+<p>with government expenditure levels for the five states being
+<span class="math notranslate nohighlight">\(\begin{bmatrix} g_L &amp; g_L &amp; g_H &amp; g_H &amp; g_L \end{bmatrix}\)</span> where <span class="math notranslate nohighlight">\(g_L &lt; g_H\)</span>.</p>
+<p>We ssume that <span class="math notranslate nohighlight">\(b_0 = 1\)</span> and <span class="math notranslate nohighlight">\(s_0 = 1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g_ex4</span> <span class="o">=</span> <span class="p">[</span><span class="n">g_L</span><span class="p">,</span> <span class="n">g_L</span><span class="p">,</span> <span class="n">g_H</span><span class="p">,</span> <span class="n">g_H</span><span class="p">,</span> <span class="n">g_L</span><span class="p">]</span>
+<span class="n">P_ex4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">,</span>  <span class="n">λ</span><span class="p">,</span>   <span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="o">-</span><span class="n">ϕ</span><span class="p">,</span>   <span class="n">ϕ</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="o">-</span><span class="n">ψ</span><span class="p">,</span>    <span class="n">ψ</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="o">-</span><span class="n">θ</span><span class="p">,</span>   <span class="n">θ</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>     <span class="mi">0</span><span class="p">,</span>   <span class="mi">1</span><span class="p">]])</span>
+<span class="n">b0_ex4</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">states_ex4</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;peace1&#39;</span><span class="p">,</span> <span class="s1">&#39;peace2&#39;</span><span class="p">,</span> <span class="s1">&#39;war1&#39;</span><span class="p">,</span> <span class="s1">&#39;war2&#39;</span><span class="p">,</span> <span class="s1">&#39;permanent peace&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_ex4</span> <span class="o">=</span> <span class="n">TaxSmoothingExample</span><span class="p">(</span><span class="n">g_ex4</span><span class="p">,</span> <span class="n">P_ex4</span><span class="p">,</span> <span class="n">b0_ex4</span><span class="p">,</span> <span class="n">states_ex4</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ts_ex4</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/smoothing_tax_30_0.png" src="_images/smoothing_tax_30_0.png" />
+<img alt="_images/smoothing_tax_30_1.png" src="_images/smoothing_tax_30_1.png" />
+<img alt="_images/smoothing_tax_30_2.png" src="_images/smoothing_tax_30_2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
+ [[0.9 0.1 0.  0.  0. ]
+ [0.  0.9 0.1 0.  0. ]
+ [0.  0.  0.9 0.1 0. ]
+ [0.  0.  0.  0.9 0.1]
+ [0.  0.  0.  0.  1. ]]
+Q 
+ [[0.864 0.096 0.    0.    0.   ]
+ [0.    0.864 0.096 0.    0.   ]
+ [0.    0.    0.864 0.096 0.   ]
+ [0.    0.    0.    0.864 0.096]
+ [0.    0.    0.    0.    0.96 ]]
+Govt expenditures in peace1, peace2, war1, war2, permanent peace = [0.5 0.5 1.2 1.2 0.5]
+Constant tax collections = 0.6349979047185738
+Govt debt in 5 states = [-1.         -2.82289484 -5.4053292  -1.77211121  3.37494762]
+
+Government tax collections minus debt levels in peace1, peace2, war1, war2, permanent peace
+  T+b in peace1 = 1.6349979047185736
+  T+b in peace2 = 3.4578927455370505
+  T+b in war1 = 6.040327103363229
+  T+b in war2 = 2.407109110283644
+  T+b in permanent peace = -2.739949713245767
+
+Total government spending in peace1, peace2, war1, war2, permanent peace
+  peace1 = 1.6349979047185736
+  peace2 = 3.457892745537051
+  war1 = 6.040327103363228
+  war2 = 2.407109110283644
+  permanent peace = -2.739949713245767
+
+Let&#39;s see ex-post and ex-ante returns on Arrow securities 
+
+Ex-post returns to purchase of Arrow securities:
+  π(peace1|peace1) = 1.1574074074074074
+  π(peace2|peace1) = 10.416666666666666
+  π(peace2|peace2) = 1.1574074074074074
+  π(war1|peace2) = 10.416666666666666
+  π(war1|war1) = 1.1574074074074074
+  π(war2|war1) = 10.416666666666666
+  π(war2|war2) = 1.1574074074074074
+  π(permanent peace|war2) = 10.416666666666666
+  π(permanent peace|permanent peace) = 1.0416666666666667
+
+Ex-ante returns to purchase of Arrow securities = 1.0416666666666667
+
+The Ex-post one-period gross return on the portfolio of government assets
+[[ 0.8810589   2.48713661  0.          0.          0.        ]
+ [ 0.          0.95436011  1.82742569  0.          0.        ]
+ [ 0.          0.          1.11672808  0.36611394  0.        ]
+ [ 0.          0.          0.          1.46806216 -2.79589276]
+ [ 0.          0.          0.          0.          1.04166667]]
+
+The cumulative return earned from holding 1 unit market portfolio of government bonds
+-11.132109773063592
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="example-5">
+<h3><span class="section-number">7.4.6. </span>Example 5<a class="headerlink" href="#example-5" title="Permalink to this headline">¶</a></h3>
+<p>The  example captures a case when  the system follows a deterministic path from peace to war, and back to peace again.</p>
+<p>Since there is no randomness, the outcomes in complete markets setting should be the same as in incomplete markets setting.</p>
+<p>The Markov chain is:</p>
+<div class="math notranslate nohighlight">
+\[
+P =
+\begin{bmatrix}
+            0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \cr
+    0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \cr
+    0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \cr
+    0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \cr
+    0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \cr
+    0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \cr
+    0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \cr
+\end{bmatrix}
+\]</div>
+<p>with government expenditure levels for the seven states being
+<span class="math notranslate nohighlight">\(\begin{bmatrix} g_L &amp; g_L &amp; g_H &amp; g_H &amp;  g_H &amp; g_H &amp; g_L \end{bmatrix}\)</span> where
+<span class="math notranslate nohighlight">\(g_L &lt; g_H\)</span>. Assume <span class="math notranslate nohighlight">\(b_0 = 1\)</span> and <span class="math notranslate nohighlight">\(s_0 = 1\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g_ex5</span> <span class="o">=</span> <span class="p">[</span><span class="n">g_L</span><span class="p">,</span> <span class="n">g_L</span><span class="p">,</span> <span class="n">g_H</span><span class="p">,</span> <span class="n">g_H</span><span class="p">,</span> <span class="n">g_H</span><span class="p">,</span> <span class="n">g_H</span><span class="p">,</span> <span class="n">g_L</span><span class="p">]</span>
+<span class="n">P_ex5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="n">b0_ex5</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">states_ex5</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;peace1&#39;</span><span class="p">,</span> <span class="s1">&#39;peace2&#39;</span><span class="p">,</span> <span class="s1">&#39;war1&#39;</span><span class="p">,</span> <span class="s1">&#39;war2&#39;</span><span class="p">,</span> <span class="s1">&#39;war3&#39;</span><span class="p">,</span> <span class="s1">&#39;permanent peace&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_ex5</span> <span class="o">=</span> <span class="n">TaxSmoothingExample</span><span class="p">(</span><span class="n">g_ex5</span><span class="p">,</span> <span class="n">P_ex5</span><span class="p">,</span> <span class="n">b0_ex5</span><span class="p">,</span> <span class="n">states_ex5</span><span class="p">,</span> <span class="n">N_simul</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ts_ex5</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/smoothing_tax_33_0.png" src="_images/smoothing_tax_33_0.png" />
+<img alt="_images/smoothing_tax_33_1.png" src="_images/smoothing_tax_33_1.png" />
+<img alt="_images/smoothing_tax_33_2.png" src="_images/smoothing_tax_33_2.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
+ [[0 1 0 0 0 0 0]
+ [0 0 1 0 0 0 0]
+ [0 0 0 1 0 0 0]
+ [0 0 0 0 1 0 0]
+ [0 0 0 0 0 1 0]
+ [0 0 0 0 0 0 1]
+ [0 0 0 0 0 0 1]]
+Q 
+ [[0.   0.96 0.   0.   0.   0.   0.  ]
+ [0.   0.   0.96 0.   0.   0.   0.  ]
+ [0.   0.   0.   0.96 0.   0.   0.  ]
+ [0.   0.   0.   0.   0.96 0.   0.  ]
+ [0.   0.   0.   0.   0.   0.96 0.  ]
+ [0.   0.   0.   0.   0.   0.   0.96]
+ [0.   0.   0.   0.   0.   0.   0.96]]
+Govt expenditures in peace1, peace2, war1, war2, war3, permanent peace = [0.5 0.5 1.2 1.2 1.2 1.2 0.5]
+Constant tax collections = 0.5571895472128002
+Govt debt in 6 states = [-1.         -1.10123911 -1.20669652 -0.58738132  0.05773868  0.72973868
+  1.42973868]
+
+Government tax collections minus debt levels in peace1, peace2, war1, war2, war3, permanent peace
+  T+b in peace1 = 1.5571895472128001
+  T+b in peace2 = 1.6584286588928006
+  T+b in war1 = 1.7638860668928005
+  T+b in war2 = 1.1445708668928007
+  T+b in war3 = 0.4994508668928011
+  T+b in permanent peace = -0.1725491331071991
+
+Total government spending in peace1, peace2, war1, war2, war3, permanent peace
+  peace1 = 1.5571895472128003
+  peace2 = 1.6584286588928003
+  war1 = 1.7638860668928005
+  war2 = 1.1445708668928007
+  war3 = 0.4994508668928006
+  permanent peace = -0.17254913310719933
+
+Let&#39;s see ex-post and ex-ante returns on Arrow securities 
+
+Ex-post returns to purchase of Arrow securities:
+  π(peace2|peace1) = 1.0416666666666667
+  π(war1|peace2) = 1.0416666666666667
+  π(war2|war1) = 1.0416666666666667
+  π(war3|war2) = 1.0416666666666667
+  π(permanent peace|war3) = 1.0416666666666667
+
+Ex-ante returns to purchase of Arrow securities = 1.0416666666666667
+
+The Ex-post one-period gross return on the portfolio of government assets
+[[0.         1.04166667 0.         0.         0.         0.
+  0.        ]
+ [0.         0.         1.04166667 0.         0.         0.
+  0.        ]
+ [0.         0.         0.         1.04166667 0.         0.
+  0.        ]
+ [0.         0.         0.         0.         1.04166667 0.
+  0.        ]
+ [0.         0.         0.         0.         0.         1.04166667
+  0.        ]
+ [0.         0.         0.         0.         0.         0.
+  1.04166667]
+ [0.         0.         0.         0.         0.         0.
+  1.04166667]]
+
+The cumulative return earned from holding 1 unit market portfolio of government bonds
+1.2775343959060064
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="continuous-state-gaussian-model">
+<h3><span class="section-number">7.4.7. </span>Continuous-State Gaussian Model<a class="headerlink" href="#continuous-state-gaussian-model" title="Permalink to this headline">¶</a></h3>
+<p>To construct a tax-smoothing version of the  complete markets consumption-smoothing model with a continuous state space that we presented in
+the lecture <a class="reference internal" href="smoothing.html"><span class="doc">consumption smoothing with complete and incomplete markets</span></a>, we simply relabel variables.</p>
+<p>Thus,  a government  faces a sequence of budget constraints</p>
+<div class="math notranslate nohighlight">
+\[
+T_t + b_t = g_t + \beta \mathbb E_t b_{t+1}, \quad t \geq 0
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(T_t\)</span> is tax revenues, <span class="math notranslate nohighlight">\(b_t\)</span> are receipts at <span class="math notranslate nohighlight">\(t\)</span> from contingent claims that the government had <em>purchased</em> at time <span class="math notranslate nohighlight">\(t-1\)</span>,
+and</p>
+<div class="math notranslate nohighlight">
+\[
+\beta \mathbb E_t b_{t+1} \equiv \int q_{t+1}(x_{t+1} | x_t) b_{t+1}(x_{t+1}) d x_{t+1}
+\]</div>
+<p>is the value of time <span class="math notranslate nohighlight">\(t+1\)</span> state-contingent claims purchased  by the government  at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>As above with the consumption-smoothing model, we can solve the time <span class="math notranslate nohighlight">\(t\)</span> budget constraint forward to obtain</p>
+<div class="math notranslate nohighlight">
+\[
+b_t = \mathbb E_t  \sum_{j=0}^\infty \beta^j (g_{t+j} - T_{t+j} )
+\]</div>
+<p>which can be rearranged to become</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb E_t  \sum_{j=0}^\infty \beta^j g_{t+j}  = b_t + \mathbb E_t \sum_{j=0}^\infty \beta^j T_{t+j}
+\]</div>
+<p>which states that the present value of government purchases equals the value of government assets at <span class="math notranslate nohighlight">\(t\)</span> plus the present value of tax
+receipts.</p>
+<p>With these relabelings, examples presented in <a class="reference internal" href="smoothing.html"><span class="doc">consumption smoothing with complete and incomplete markets</span></a> can be
+interpreted as tax-smoothing models.</p>
+<p><strong>Returns:</strong> In the continuous state version of our incomplete markets model, the  ex post one-period   gross  rate of return on the government portfolio equals</p>
+<div class="math notranslate nohighlight">
+\[
+R(x_{t+1} | x_t) = \frac{b(x_{t+1})}{\beta E b(x_{t+1})| x_t}
+\]</div>
+<div class="section" id="related-lectures">
+<h4><span class="section-number">7.4.7.1. </span>Related Lectures<a class="headerlink" href="#related-lectures" title="Permalink to this headline">¶</a></h4>
+<p>Throughout this lecture, we have taken one-period interest rates and Arrow security prices as exogenous objects determined outside the model
+and specified them in ways designed to align our models closely with the consumption smoothing model of Barro <span id="id10">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span>.</p>
+<p>Other lectures make these objects endogenous and describe  how a government  optimally  manipulates prices of government debt, albeit indirectly via effects distorting
+taxes have on equilibrium prices and allocations.</p>
+<p>In <a class="reference internal" href="lqramsey.html"><span class="doc">optimal taxation in an LQ economy</span></a> and <a class="reference internal" href="opt_tax_recur.html"><span class="doc">recursive optimal taxation</span></a>, we study <strong>complete-markets</strong>
+models in which the government recognizes that it can manipulate  Arrow securities prices.</p>
+<p>Linear-quadratic versions of the Lucas-Stokey tax-smoothing model are described in <a class="reference internal" href="lqramsey.html"><span class="doc">Optimal Taxation in an LQ Economy</span></a>.</p>
+<p>That lecture is a warm-up for the non-linear-quadratic model of tax smoothing described in <a class="reference internal" href="opt_tax_recur.html"><span class="doc">Optimal Taxation with State-Contingent Debt</span></a>.</p>
+<p>In both <a class="reference internal" href="lqramsey.html"><span class="doc">Optimal Taxation in an LQ Economy</span></a> and <a class="reference internal" href="opt_tax_recur.html"><span class="doc">Optimal Taxation with State-Contingent Debt</span></a>, the government  recognizes that its decisions affect prices.</p>
+<p>In <a class="reference internal" href="amss.html"><span class="doc">optimal taxation with incomplete markets</span></a>, we study an <strong>incomplete-markets</strong> model in which the
+government also manipulates  prices of government debt.</p>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                    <p class="caption">
+ <span class="caption-text">
+  Tools and Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="orth_proj.html">
+   1. Orthogonal Projections and Their Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stationary_densities.html">
+   2. Continuous State Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="muth_kalman.html">
+   3. Reverse Engineering a la Muth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discrete_dp.html">
+   4. Discrete State Dynamic Programming
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  LQ Control
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_news.html">
+   5. Information and Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing.html">
+   6. Consumption Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   7. Tax Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   8. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_jump_lq.html">
+   9. Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_1.html">
+   10. How to Pay for a War: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_2.html">
+   11. How to Pay for a War: Part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_3.html">
+   12. How to Pay for a War: Part 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lqramsey.html">
+   13. Optimal Taxation in an LQ Economy
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Multiple Agent Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   14. Robust Markov Perfect Equilibrium
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arellano.html">
+   15. Default Risk and Income Fluctuations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="matsuyama.html">
+   16. Globalization and Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coase.html">
+   17. Coase’s Theory of the Firm
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Linear Economies
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_recursive_models.html">
+   18. Recursive Models of Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="growth_in_dles.html">
+   19. Growth in Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_asset_pricing_dles.html">
+   20. Lucas Asset Pricing Using DLE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="irfs_in_hall_model.html">
+   21. IRFs in Hall Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="permanent_income_dles.html">
+   22. Permanent Income Model using the DLE Class
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rosen_schooling_model.html">
+   23. Rosen Schooling Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cattle_cycles.html">
+   24. Cattle Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_invertibility_example.html">
+   25. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Classic Linear Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="von_neumann_model.html">
+   26. Von Neumann Growth Model (and a Generalization)
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Time Series Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arma.html">
+   27. Covariance Stationary Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="estspec.html">
+   28. Estimation of Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additive_functionals.html">
+   29. Additive and Multiplicative Functionals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lu_tricks.html">
+   30. Classical Control with Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classical_filtering.html">
+   31. Classical Prediction and Filtering With Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="knowing_forecasts_of_others.html">
+   32. Knowing the Forecasts of Others
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Asset Pricing and Finance
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_model.html">
+   33. Asset Pricing II: The Lucas Asset Pricing Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="black_litterman.html">
+   34. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_complete_mkts.html">
+   35. Irrelevance of Capital Structure with Complete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_incomplete_mkts.html">
+   36. Equilibrium Capital Structures with Incomplete Markets
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Dynamic Programming Squared
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="dyn_stack.html">
+   37. Stackelberg Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo.html">
+   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opt_tax_recur.html">
+   39. Optimal Taxation with State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss.html">
+   40. Optimal Taxation without State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss2.html">
+   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss3.html">
+   42. Fiscal Risk and Government Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_ramsey.html">
+   43. Competitive Equilibria of a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_credible.html">
+   44. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   45. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   46. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   47. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="toolbar">
+
+            <div class="toolbar__inner">
+
+                <ul class="toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                    <!-- <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <i data-feather="search"></i>
+                        </form>
+                    </li> -->
+                </ul>
+
+                <ul class="toolbar__links">
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/smoothing_tax.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Launch Notebook" id="launchButton"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/smoothing_tax.ipynb" target="_blank"><i data-feather="play-circle"></i></a></li>
+                        <li data-tippy-content="Download PDF" onClick="window.print()"><i data-feather="file"></i></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/smoothing_tax.md" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="" download><p style="color: white;">Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title">QuantEcon Notebook Launcher</p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input" onchange="onChangeListener()">
+                
+                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/smoothing_tax.ipynb">BinderHub</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <!-- <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" onchange="onChangeListener()">
+                <i class="fas fa-check-circle"></i>
+            </li> -->
+            </ul>
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>
