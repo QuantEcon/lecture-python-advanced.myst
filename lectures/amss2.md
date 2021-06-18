@@ -433,6 +433,7 @@ debt equal to $b_0 = -1.038698407551764$.
 These graphs report outcomes for both the Lucas-Stokey economy with complete markets and the AMSS economy with one-period risk-free debt only.
 
 ```{code-cell} python3
+:tags: ["output_scroll"]
 μ_grid = np.linspace(-0.09, 0.1, 100)
 
 log_example = CRRAutility()

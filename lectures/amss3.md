@@ -176,6 +176,7 @@ government debt equal to $-.5$.
 Here is a graph of a long simulation of 102000 periods.
 
 ```{code-cell} python3
+:tags: ["output_scroll"]
 μ_grid = np.linspace(-0.09, 0.1, 100)
 
 log_example = CRRAutility(π=(1 / 3) * np.ones((3, 3)),
