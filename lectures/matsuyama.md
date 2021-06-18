@@ -711,7 +711,7 @@ Dark colors indicate synchronization, while light colors indicate failure to syn
 
 (matsrep)=
 ```{figure} /_static/lecture_specific/matsuyama/matsuyama_14.png
-:scale: 60
+:scale: 50
 ```
 
 As you can see, larger values of $\rho$ translate to more synchronization.
@@ -723,7 +723,7 @@ In the solution to the exercises, you'll also find a figure with sliders, allowi
 Here's one snapshot from the interactive figure
 
 ```{figure} /_static/lecture_specific/matsuyama/matsuyama_18.png
-
+:scale: 80
 ```
 
 ## Exercises
