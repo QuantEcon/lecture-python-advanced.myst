@@ -115,7 +115,7 @@ payoffs depend on next period's realization of the Markov state.
 * In an $N$ state Markov state version,  $N$ such securities are traded each period.
 * In a continuous state Markov state version, a continuum of such securities are traded each period.
 
-These state-contingent securities are commonly called Arrow securities, after Kenneth Arrow <https://en.wikipedia.org/wiki/Kenneth_Arrow>
+These state-contingent securities are commonly called Arrow securities, after [Kenneth Arrow](https://en.wikipedia.org/wiki/Kenneth_Arrow).
 
 In the **incomplete markets version**, the consumer can buy and sell only one security each period, a risk-free one-period bond with gross
 one-period return $\beta^{-1}$.
