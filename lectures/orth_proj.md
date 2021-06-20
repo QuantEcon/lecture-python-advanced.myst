@@ -329,7 +329,7 @@ $$
 
 Evidently  $Py$ is a linear function from $y \in \mathbb R^n$ to $P y \in \mathbb R^n$.
 
-This reference is useful [https://en.wikipedia.org/wiki/Linear_map#Matrices](https://en.wikipedia.org/wiki/Linear_map#Matrices).
+[This reference](https://en.wikipedia.org/wiki/Linear_map#Matrices) is useful.
 
 **Theorem.** Let the columns of $n \times k$ matrix $X$ form a basis of $S$.  Then
 
@@ -340,7 +340,7 @@ $$
 Proof: Given arbitrary $y \in \mathbb R^n$ and $P = X (X'X)^{-1} X'$, our claim is that
 
 1. $P y \in S$, and
-1. $y - P y \perp S$
+2. $y - P y \perp S$
 
 Claim 1 is true because
 
