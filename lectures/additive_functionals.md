@@ -406,7 +406,7 @@ The code below adds some functions that generate plots for instances of the `AMF
 
 ```{code-cell} python3
 ---
-tags: [scroll-output]
+tags: [collapse-20]
 ---
 def plot_given_paths(amf, T, ypath, mpath, spath, tpath,
                     mbounds, sbounds, horline=0, show_trend=True):
