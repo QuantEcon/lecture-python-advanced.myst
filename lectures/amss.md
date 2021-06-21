@@ -403,7 +403,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
 ```{code-cell} python3
 ---
 load: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
-tags: [output_scroll]
+tags: [collapse-20]
 ---
 ```
 
@@ -759,6 +759,7 @@ Paths with circles are histories in which there is peace, while those with
 triangle denote war.
 
 ```{code-cell} python3
+:tags: ["scroll-output"]
 # Initialize μgrid for value function iteration
 μ_grid = np.linspace(-0.7, 0.01, 300)
 
@@ -882,6 +883,7 @@ state-contingent debt (circles) and the economy with only a risk-free bond
 (triangles).
 
 ```{code-cell} python3
+:tags: ["scroll-output"]
 log_example = LogUtility()
 log_example.transfers = True                    # Government can use transfers
 log_sequential = SequentialAllocation(log_example)  # Solve sequential problem

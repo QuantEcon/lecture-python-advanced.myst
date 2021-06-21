@@ -279,21 +279,21 @@ The code is  mostly taken or adapted from the earlier lectures {doc}`optimal tax
 ```{code-cell} python3
 ---
 load: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
-tags: [output_scroll]
+tags: [collapse-20]
 ---
 ```
 
 ```{code-cell} python3
 ---
 load: _static/lecture_specific/amss/recursive_allocation.py
-tags: [output_scroll]
+tags: [collapse-20]
 ---
 ```
 
 ```{code-cell} python3
 ---
 load: _static/lecture_specific/amss/utilities.py
-tags: [output_scroll]
+tags: [collapse-20]
 ---
 ```
 
@@ -433,6 +433,7 @@ debt equal to $b_0 = -1.038698407551764$.
 These graphs report outcomes for both the Lucas-Stokey economy with complete markets and the AMSS economy with one-period risk-free debt only.
 
 ```{code-cell} python3
+:tags: ["scroll-output"]
 μ_grid = np.linspace(-0.09, 0.1, 100)
 
 log_example = CRRAutility()
