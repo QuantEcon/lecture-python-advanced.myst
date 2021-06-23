@@ -246,7 +246,7 @@ In equation {eq}`amss2_TS_barg10`, it is understood that $c$ and $g$ are each fu
 The CRRA utility function is represented in the following class.
 
 ```{code-cell} python3
-:load: _static/lecture_specific/opt_tax_recur/crra_utility.py
+:load: _static/lecture_specific/amss2/crra_utility.py
 ```
 
 ## Example Economy
@@ -278,21 +278,21 @@ The code is  mostly taken or adapted from the earlier lectures {doc}`optimal tax
 
 ```{code-cell} python3
 ---
-load: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
+load: _static/lecture_specific/amss2/sequential_allocation.py
 tags: [collapse-20]
 ---
 ```
 
 ```{code-cell} python3
 ---
-load: _static/lecture_specific/amss/recursive_allocation.py
+load: _static/lecture_specific/amss2/recursive_allocation.py
 tags: [collapse-20]
 ---
 ```
 
 ```{code-cell} python3
 ---
-load: _static/lecture_specific/amss/utilities.py
+load: _static/lecture_specific/amss2/utilities.py
 tags: [collapse-20]
 ---
 ```
@@ -433,7 +433,6 @@ debt equal to $b_0 = -1.038698407551764$.
 These graphs report outcomes for both the Lucas-Stokey economy with complete markets and the AMSS economy with one-period risk-free debt only.
 
 ```{code-cell} python3
-:tags: ["scroll-output"]
 μ_grid = np.linspace(-0.09, 0.1, 100)
 
 log_example = CRRAutility()
