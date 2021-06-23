@@ -678,6 +678,7 @@ assets, returning any excess revenues to the household as non-negative lump-sum 
 The recursive formulation is implemented as follows
 
 ```{code-cell} python3
+:tags: [collapse-30]
 :load: _static/lecture_specific/amss/recursive_allocation.py
 ```
 
@@ -757,7 +758,6 @@ Paths with circles are histories in which there is peace, while those with
 triangle denote war.
 
 ```{code-cell} python3
-:tags: ["scroll-output"]
 # WARNING: DO NOT EXPECT THE CODE TO WORK IF YOU CHANGE PARAMETERS
 σ = 2
 γ = 2
@@ -800,6 +800,7 @@ b_0 = 1.0
 ```
 
 ```{code-cell} python3
+:tags: ["scroll-output"]
 %%time
 
 amss_model.solve(V, σ_v_star, b_0, W, σ_w_star)
@@ -932,6 +933,7 @@ amss_model = AMSS(log_pref, β, Π, g, x_grid, bounds_v)
 ```
 
 ```{code-cell} python3
+:tags: ["scroll-output"]
 %%time
 
 amss_model.solve(V, σ_v_star, b_0, W, σ_w_star, tol_vfi=3e-5, maxitr=3000,
@@ -943,7 +945,6 @@ ls_model = SequentialLS(log_pref, g=g, π=Π)  # Solve sequential problem
 ```
 
 ```{code-cell} python3
-:tags: ["scroll-output"]
 
 # WARNING: DO NOT EXPECT THE CODE TO WORK IF YOU CHANGE PARAMETERS
 s_hist = np.array([0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
