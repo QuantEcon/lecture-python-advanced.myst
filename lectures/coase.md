@@ -147,7 +147,7 @@ have been undertaken and $t=1$ indicating that the good is complete.
 The subcontracting scheme by which tasks are allocated across firms is illustrated in the figure below
 
 ```{figure} /_static/lecture_specific/coase/subcontracting.png
-
+:align: center
 ```
 
 In this example,
@@ -167,7 +167,7 @@ At this point, production unfolds in the opposite direction (i.e., from upstream
 The length of the interval of stages (range of tasks) carried out by firm $i$ is denoted by $\ell_i$.
 
 ```{figure} /_static/lecture_specific/coase/allocation.png
-
+:align: center
 ```
 
 Each firm chooses only its *upstream* boundary, treating its downstream boundary as given.
