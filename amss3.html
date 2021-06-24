@@ -9,25 +9,43 @@
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script>
-        MathJax = {
-          loader: {load: ['[tex]/boldsymbol']},
-          tex: {
-            packages: {'[+]': ['boldsymbol']},
-            inlineMath: [['$', '$'], ['\\(', '\\)']],
-            processEscapes: true,
-            macros: {
-                "argmax" : "arg\\,max",
-                "argmin" : "arg\\,min"
-            }
-          },
-          svg: {
-            fontCache: 'global',
-            scale: 0.92,
-            displayAlign: "center",
-          },
-        };
-    </script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol']},
+            tex: {
+                packages: {'[+]': ['boldsymbol']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
     
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -45,7 +63,7 @@
       
 
     
-    <link rel="stylesheet" href="_static/quantecon-book-theme.48c7e3a8f180f886af6ac238ed81cfdf.css" type="text/css" />
+    <link rel="stylesheet" href="_static/quantecon-book-theme.857ff391aaabaeb8c161d2309c375fe6.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -67,7 +85,7 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/quantecon-book-theme.f77f720613e25edc6a92ce4459c6ecdc.js"></script>
+    <script src="_static/quantecon-book-theme.76bf49d7bbc59738cdb03766fad654af.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -305,20 +323,20 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
-Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
 Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
 Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
 Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
 Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.5.30)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
 Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
 Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
-Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
 </pre></div>
 </div>
 </div>
@@ -466,7 +484,7 @@ in Markov state <span class="math notranslate nohighlight">\(2\)</span>.</p>
 <p>To generate a long simulation we use the following code.</p>
 <p>We begin by showing the code that we used in earlier lectures on the AMSS model.</p>
 <p>Here it is</p>
-<div class="cell tag_output_scroll docutils container">
+<div class="cell tag_collapse-20 docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">root</span>
@@ -630,7 +648,7 @@ in Markov state <span class="math notranslate nohighlight">\(2\)</span>.</p>
 </div>
 </div>
 </div>
-<div class="cell tag_output_scroll docutils container">
+<div class="cell tag_collapse-20 docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fmin_slsqp</span>
@@ -934,7 +952,7 @@ in Markov state <span class="math notranslate nohighlight">\(2\)</span>.</p>
 </div>
 </div>
 </div>
-<div class="cell tag_output_scroll docutils container">
+<div class="cell tag_collapse-20 docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">UnivariateSpline</span>
@@ -1012,7 +1030,7 @@ in Markov state <span class="math notranslate nohighlight">\(2\)</span>.</p>
 <p>Next, we show the code that we use to generate a very long simulation starting from initial
 government debt equal to <span class="math notranslate nohighlight">\(-.5\)</span>.</p>
 <p>Here is a graph of a long simulation of 102000 periods.</p>
-<div class="cell docutils container">
+<div class="cell tag_scroll-output docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
 
@@ -1059,463 +1077,463 @@ government debt equal to <span class="math notranslate nohighlight">\(-.5\)</spa
   x * u_c / Eu_c - u_c * (c - T) - Un(c, n) * n - β * xprime,
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.03826635338765879
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.038266353387659685
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0015144378246640102
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.001514437824663858
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.001338757505005931
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0013387575049939554
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0011833202400531697
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0011833202400657653
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0010600307116113044
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0010600307116114583
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0009506620324953103
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0009506620324919388
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0008518776517217105
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0008518776517224762
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0007625857031042574
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0007625857031034911
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0006819563061664624
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.000681956306166462
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0006094002927265236
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0006094002927259092
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0005443007356812933
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0005443007356820606
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00048599500343710403
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00048599500343817956
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00043383959359129894
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00043383959359099167
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00038722730865154364
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0003872273086516976
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00034559541217441756
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0003455954121747255
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00030842870645186995
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0003084287064520241
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00027525901875888776
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00027525901875750215
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0002456631292022679
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0002456631291987252
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0002192598853389609
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0002192598853386519
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0001957069581994143
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00019570695819910524
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00017469751641540997
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00017469751641463853
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0001559569713177017
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00015595697130706425
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00013923987965395665
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00013923987966181747
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00012432704762400219
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00012432704760179648
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00011102285953861857
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.00011102285955496233
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.915283205602009e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.915283206542706e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.856139177111806e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.856139177667068e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.910986485633826e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.910986485479568e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.067466533640955e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.067466533563813e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.314566737294187e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.314566737510182e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.64247460074813e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.6424746008870015e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.0424471419515265e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.0424471420286905e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.506694213152662e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.506694213090949e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.0282743546130216e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.028274354705623e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.601001916880814e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.601001917035152e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.219364287636261e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.219364287497378e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.878448157980681e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.878448158073293e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.573873836634928e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5738738362336502e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.3017369974021278e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.3017369975410395e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.058556253606625e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.058556253405974e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8412273760135596e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8412273759826886e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6470096734934458e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6470096751019742e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4734148600335048e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4734148485880577e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3182214261392376e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.318221437631152e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1794654707669644e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1794654657555846e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0553942907595817e-05
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0553942937602366e-05
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.444436188543865e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.444436184212906e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.452171093027302e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.452171116847625e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.56468167806777e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.564681650070985e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.7708364528089615e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.770836420635394e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.060699338957744e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.0606993841244255e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.425387480568863e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.425387446693463e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.856977672602031e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.856977697351171e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.3483826004820025e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.348382594294618e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.893276559940897e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.893276563653274e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.4860028909030738e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.4860028711033466e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.121510914831881e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1215109168427032e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7952841381626934e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7952841533218587e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5032842628196883e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5032842597259267e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.241904776082534e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.2419047714418913e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0079207929991667e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0079207786132083e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.798447222306102e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.798447250304498e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6109041006129437e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6109041020051247e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4429884550086763e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4429884564008626e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2926354633605886e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.292635466299663e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1580012294813852e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1580012331939103e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0374362464202168e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0374362558562333e-06
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.29465024528792e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.294650180318699e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.327660575801464e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.327660600551764e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.461585548708321e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.461585533239468e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.685866003670006e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.685866088749163e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.991017204051948e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.991017174661058e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.368606230153349e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.36860628893542e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.811036814989664e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.811036886146955e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.311543365598121e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.3115433021754784e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.864050412290746e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.8640499080023683e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.463127375027725e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.463127907160423e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1039146421747325e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.1039146112368367e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7820606089384444e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.7820606135791934e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.493665389363336e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.493665383175788e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.235241620521029e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.235241608145875e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0036658359769422e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.003665913321971e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7961407148306257e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7961403497622294e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6101613645356744e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.610161197470407e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4434846506832767e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4434845516815915e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2941024431926782e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2941018955897008e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.16021398203775e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.160214022257072e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0402094732515552e-07
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0402095707062455e-07
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.32645088625257e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.326455712584419e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.362280077446157e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.362279303995097e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.497999687000661e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.498000367637141e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.7232377019266e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.72323835162517e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.028699530067692e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.028700148828327e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.406058621051576e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.40605930168838e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.8478552544076145e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.847855826761348e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.347405320289139e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.347405939049998e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.8987202530527766e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.8987207635305296e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.496433678146817e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.4964341422175376e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.13573703083457e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.135737556781415e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.8123215479963655e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.8123219656600677e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5223254419267672e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.522325921466587e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.2622884991608213e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.262288870417482e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0291090459787667e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.029109448173489e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8200076583394126e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8200080450651187e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.632493006485936e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6324933468045708e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4643321236502826e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4643324794379485e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3135236911833557e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3135240005639456e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1782735357283838e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1782738451089755e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0569735759650394e-08
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0569739008146597e-08
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.481822234242872e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.481825482739086e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.506072428641933e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.506075058377058e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.63090020315703e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.630903142272699e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.845919813139629e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.845922133494191e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.141820146090034e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.141822775825138e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.510253035519465e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.5102555105642815e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.94373224839319e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.943734568747717e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.435549745703528e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.435552070251801e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.979731806990371e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.9797338215989045e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.5708275780943832e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.5708291277933173e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.204000760909291e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.2040015357589022e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.8749135951051007e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.8749143699546843e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5796780426749427e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5796783526149204e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.314805112833155e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.3148054227731078e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.077168754071817e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0771682891624414e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.8639627725668287e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.863962617597153e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6726721627755935e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.6726718528360362e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5010411836632822e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5010399439045342e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.347045464141959e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3470439144434676e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2088698423917748e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.208868292693266e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0848883747579726e-09
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0848865151197229e-09
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.736389207008655e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.736370610626013e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.738141545497723e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8.738116750320432e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.842361504503251e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.842338259024469e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.038546776998429e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7.038520432122275e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.317222506024924e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.317196161148672e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.669921138635622e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.669891694362015e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.08902590635287e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.089001111175093e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.5677258839243e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.5677010887464574e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.099892013445072e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.0998610194726226e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.6800337128065647e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.6800151164231657e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.3032275895675577e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.303199694992287e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.965047704522347e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.9650353069334276e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.6615376771307515e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.661517531048607e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.3891316508919534e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.3891115048097814e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.144637246663017e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.144623299375382e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9251906214012063e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.9251828729081158e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7282363220839834e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.72821617600175e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.551446701381546e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.5514327540938609e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3927622098229812e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.3927591104257742e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2503309575504836e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.2503170102627754e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1224823694434142e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.1224715215529797e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0077194366258723e-10
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0077132378313558e-10
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.046954709876977e-11
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.046970206863864e-11
 </pre></div>
 </div>
 <img alt="_images/amss3_13_154.png" src="_images/amss3_13_154.png" />
@@ -2045,7 +2063,7 @@ algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.1994845546544417
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.1994824460459537
 </pre></div>
 </div>
 </div>
@@ -2074,7 +2092,7 @@ algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.057767335514381
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.057765476034679
 </pre></div>
 </div>
 </div>
@@ -2087,7 +2105,7 @@ algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.09572904833250909
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.09572923027310808
 </pre></div>
 </div>
 </div>
@@ -2100,8 +2118,8 @@ algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.9998398 , 1.10746593, 1.2260276 ]),
- array([0.00202734, 0.12464768, 0.27315316]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.9998398 , 1.10746593, 1.22602761]),
+ array([0.00202713, 0.12464744, 0.27315291]))
 </pre></div>
 </div>
 </div>
@@ -2114,7 +2132,7 @@ algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9931353437178791
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9931353430417418
 </pre></div>
 </div>
 </div>
@@ -2126,7 +2144,7 @@ algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.92643823, 0.8802712 , 0.83662638])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.92643818, 0.88027115, 0.83662634])
 </pre></div>
 </div>
 </div>
@@ -2171,6 +2189,8 @@ algorithm.</p>
                 </footer> <!-- .page__footer -->
 
             </div> <!-- .page -->
+
+            
 
             
             <div class="sidebar bd-sidebar inactive" id="site-navigation">
@@ -2528,7 +2548,7 @@ algorithm.</p>
                     <p>Lecture (PDF)</p>
                 </li>
                 <li class="download-pdf-file">
-                    <a href="" download><p style="color: white;">Book (PDF)</p></a>
+                    <a href="" download><p>Book (PDF)</p></a>
                 </li>
             </ul>
         </div>

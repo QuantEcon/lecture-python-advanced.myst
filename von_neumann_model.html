@@ -9,25 +9,43 @@
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-    <script>
-        MathJax = {
-          loader: {load: ['[tex]/boldsymbol']},
-          tex: {
-            packages: {'[+]': ['boldsymbol']},
-            inlineMath: [['$', '$'], ['\\(', '\\)']],
-            processEscapes: true,
-            macros: {
-                "argmax" : "arg\\,max",
-                "argmin" : "arg\\,min"
-            }
-          },
-          svg: {
-            fontCache: 'global',
-            scale: 0.92,
-            displayAlign: "center",
-          },
-        };
-    </script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol']},
+            tex: {
+                packages: {'[+]': ['boldsymbol']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
     
     
   <link href="_static/css/theme.css" rel="stylesheet" />
@@ -45,7 +63,7 @@
       
 
     
-    <link rel="stylesheet" href="_static/quantecon-book-theme.48c7e3a8f180f886af6ac238ed81cfdf.css" type="text/css" />
+    <link rel="stylesheet" href="_static/quantecon-book-theme.857ff391aaabaeb8c161d2309c375fe6.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -67,7 +85,7 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/quantecon-book-theme.f77f720613e25edc6a92ce4459c6ecdc.js"></script>
+    <script src="_static/quantecon-book-theme.76bf49d7bbc59738cdb03766fad654af.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
@@ -291,7 +309,7 @@ following important tools:</p>
 </div>
 </div>
 <p>The code below provides the <code class="docutils literal notranslate"><span class="pre">Neumann</span></code> class</p>
-<div class="cell tag_output_scroll docutils container">
+<div class="cell tag_collapse-20 docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Neumann</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
@@ -1119,7 +1137,7 @@ associated with a given <span class="math notranslate nohighlight">\(\gamma\)</s
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Value of the game with γ = 2
--0.24000000097850305
+-0.2400000009785035
 Intensity vector (from the primal)
 [0.32 0.28 0.4 ]
 Price vector (from the dual)
@@ -1217,9 +1235,9 @@ input-output pair <span class="math notranslate nohighlight">\((A, B)\)</span></
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>α_0 = 1.1343231229111552
-x_0 = [1.67e-11 1.83e-11 3.24e-01 2.61e-01 4.15e-01]
-The corresponding p from the dual = [5.04e-01 4.96e-01 2.96e-12 2.24e-12 3.08e-12 3.56e-12]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>α_0 = 1.1343201892450452
+x_0 = [1.67e-11 1.84e-11 3.24e-01 2.61e-01 4.15e-01]
+The corresponding p from the dual = [5.04e-01 4.96e-01 2.97e-12 2.24e-12 3.08e-12 3.56e-12]
 </pre></div>
 </div>
 </div>
@@ -1234,7 +1252,7 @@ The corresponding p from the dual = [5.04e-01 4.96e-01 2.96e-12 2.24e-12 3.08e-1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>β_0 = 1.2579826870933175
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>β_0 = 1.2579826647415757
 p_0 = [5.11e-01 4.89e-01 2.73e-08 2.17e-08 1.88e-08 2.66e-09]
 The corresponding x from the primal = [1.61e-09 1.65e-09 3.27e-01 2.60e-01 4.12e-01]
 </pre></div>
@@ -1337,6 +1355,8 @@ associated expansion and interest factors, respectively. Then we have</p>
                 </footer> <!-- .page__footer -->
 
             </div> <!-- .page -->
+
+            
 
             
             <div class="sidebar bd-sidebar inactive" id="site-navigation">
@@ -1694,7 +1714,7 @@ associated expansion and interest factors, respectively. Then we have</p>
                     <p>Lecture (PDF)</p>
                 </li>
                 <li class="download-pdf-file">
-                    <a href="" download><p style="color: white;">Book (PDF)</p></a>
+                    <a href="" download><p>Book (PDF)</p></a>
                 </li>
             </ul>
         </div>

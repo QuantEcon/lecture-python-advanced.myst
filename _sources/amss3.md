@@ -117,7 +117,7 @@ $$
 The following Python code sets up the economy
 
 ```{code-cell} python3
-:load: _static/lecture_specific/opt_tax_recur/crra_utility.py
+:load: _static/lecture_specific/amss2/crra_utility.py
 ```
 
 ### First and Second Moments
@@ -151,22 +151,22 @@ Here it is
 
 ```{code-cell} python3
 ---
-load: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
-tags: [output_scroll]
+load: _static/lecture_specific/amss2/sequential_allocation.py
+tags: [collapse-20]
 ---
 ```
 
 ```{code-cell} python3
 ---
-load: _static/lecture_specific/amss/recursive_allocation.py
-tags: [output_scroll]
+load: _static/lecture_specific/amss2/recursive_allocation.py
+tags: [collapse-20]
 ---
 ```
 
 ```{code-cell} python3
 ---
-load: _static/lecture_specific/amss/utilities.py
-tags: [output_scroll]
+load: _static/lecture_specific/amss2/utilities.py
+tags: [collapse-20]
 ---
 ```
 
@@ -176,6 +176,7 @@ government debt equal to $-.5$.
 Here is a graph of a long simulation of 102000 periods.
 
 ```{code-cell} python3
+:tags: ["scroll-output"]
 μ_grid = np.linspace(-0.09, 0.1, 100)
 
 log_example = CRRAutility(π=(1 / 3) * np.ones((3, 3)),
@@ -224,7 +225,6 @@ the par value of government debt.
 We obtain the following graph for the histogram of the last 100,000 observations on the par value of government debt.
 
 ```{figure} /_static/lecture_specific/amss3/amss3_g3.png
-
 ```
 
 The  black vertical line denotes the sample mean for the last 100,000 observations included in the histogram; the  green vertical line denotes the
