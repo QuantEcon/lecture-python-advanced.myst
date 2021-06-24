@@ -810,7 +810,7 @@ The following code computes sustainable plans
 ```{code-cell} python3
 ---
 load: _static/lecture_specific/chang_credible/changecon.py
-tags: [output_scroll]
+tags: [collapse-20]
 ---
 ```
 
