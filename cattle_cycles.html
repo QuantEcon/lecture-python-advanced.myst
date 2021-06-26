@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>24. Cattle Cycles &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -237,7 +237,7 @@
 </ul>
 </div>
 <p>This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
-<span id="id2">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
+<span id="id2">[<a class="reference internal" href="zreferences.html#id53">HS13</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
 <p>In addition to what’s in Anaconda, this lecture uses the quantecon library.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
@@ -247,26 +247,28 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
-Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
-Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
-Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
-Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.5.30)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
+Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
 Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
-Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
 </pre></div>
 </div>
 </div>
 </div>
 <p>This lecture uses the DLE class to construct instances of  the “Cattle Cycles” model
-of Rosen, Murphy and Scheinkman (1994) <span id="id3">[<a class="reference internal" href="zreferences.html#id52"><span>RMS94</span></a>]</span>.</p>
+of Rosen, Murphy and Scheinkman (1994) <span id="id3">[<a class="reference internal" href="zreferences.html#id52">RMS94</a>]</span>.</p>
 <p>That paper constructs a rational expectations equilibrium model to
 understand sources of recurrent cycles in US cattle stocks and prices.</p>
 <p>We make the following imports:</p>
@@ -422,7 +424,7 @@ A_{22} =
 </div>
 </div>
 </div>
-<p>We set parameters to those used by <span id="id4">[<a class="reference internal" href="zreferences.html#id52"><span>RMS94</span></a>]</span></p>
+<p>We set parameters to those used by <span id="id4">[<a class="reference internal" href="zreferences.html#id52">RMS94</a>]</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.909</span><span class="p">]])</span>
@@ -491,6 +493,12 @@ A_{22} =
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-4-568c6d4eae41&gt;:59: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray
+  ub = np.array([[πh * a0, 0, 0, πh]])
+</pre></div>
+</div>
+</div>
 </div>
 <p>Notice that we have set <span class="math notranslate nohighlight">\(\rho_1 = \rho_2 = 0\)</span>, so <span class="math notranslate nohighlight">\(h_t\)</span> and
 <span class="math notranslate nohighlight">\(m_t\)</span> consist of a constant and a white noise component.</p>
@@ -556,7 +564,7 @@ baseline case of <span class="math notranslate nohighlight">\(\rho_3 = 0.6\)</sp
 </div>
 </div>
 </div>
-<p><span id="id5">[<a class="reference internal" href="zreferences.html#id52"><span>RMS94</span></a>]</span> use the model to understand the
+<p><span id="id5">[<a class="reference internal" href="zreferences.html#id52">RMS94</a>]</span> use the model to understand the
 sources of recurrent cycles in total cattle stocks.</p>
 <p>Plotting <span class="math notranslate nohighlight">\(y_t\)</span> for a simulation of their model shows its ability
 to generate cycles in quantities</p>
@@ -576,7 +584,7 @@ to generate cycles in quantities</p>
 <img alt="_images/cattle_cycles_13_0.png" src="_images/cattle_cycles_13_0.png" />
 </div>
 </div>
-<p>In their Figure 3, <span id="id6">[<a class="reference internal" href="zreferences.html#id52"><span>RMS94</span></a>]</span> plot the impulse response functions
+<p>In their Figure 3, <span id="id6">[<a class="reference internal" href="zreferences.html#id52">RMS94</a>]</span> plot the impulse response functions
 of consumption and the breeding stock of cattle to the demand shock,
 <span class="math notranslate nohighlight">\(\tilde d_t\)</span>, under the three different values of <span class="math notranslate nohighlight">\(\rho_3\)</span>.</p>
 <p>We replicate their Figure 3 below</p>
@@ -617,7 +625,7 @@ rises immediately but is later reduced to build stocks up again.</p></li>
 immediately, in order to build up stocks to satisfy the permanent
 rise in future demand.</p></li>
 </ul>
-<p>In Figure 4 of their paper, <span id="id7">[<a class="reference internal" href="zreferences.html#id52"><span>RMS94</span></a>]</span> plot the response to a demand shock
+<p>In Figure 4 of their paper, <span id="id7">[<a class="reference internal" href="zreferences.html#id52">RMS94</a>]</span> plot the response to a demand shock
 of the breeding stock <em>and</em> the total stock, for <span class="math notranslate nohighlight">\(\rho_3 = 0\)</span> and
 <span class="math notranslate nohighlight">\(\rho_3 = 0.6\)</span>.</p>
 <p>We replicate their Figure 4 below</p>

@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>5. Information and Consumption Smoothing &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -299,20 +299,22 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
-Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
-Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
-Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
 Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.5.30)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
-Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
-Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
 Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
 </pre></div>
 </div>
 </div>
@@ -361,7 +363,7 @@ the tax cut</p></li>
 generating function along lines described in <a class="reference internal" href="classical_filtering.html"><span class="doc">this lecture</span></a></p></li>
 </ul>
 <p>This lecture can be regarded as an introduction to some of the <strong>invertibility</strong> issues that take center stage in
-the analysis of <strong>fiscal foresight</strong> by Eric Leeper, Todd Walker, and Susan Yang <span id="id1">[<a class="reference internal" href="zreferences.html#id15"><span>LWY13</span></a>]</span>.</p>
+the analysis of <strong>fiscal foresight</strong> by Eric Leeper, Todd Walker, and Susan Yang <span id="id1">[<a class="reference internal" href="zreferences.html#id15">LWY13</a>]</span>.</p>
 </div>
 <div class="section" id="two-representations-of-the-same-nonfinancial-income-process">
 <h2><a class="toc-backref" href="#id5"><span class="section-number">5.2. </span>Two Representations of the <strong>Same</strong> Nonfinancial Income Process</a><a class="headerlink" href="#two-representations-of-the-same-nonfinancial-income-process" title="Permalink to this headline">¶</a></h2>
@@ -971,7 +973,7 @@ case, we can simply replace the corresponding matrices.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f99620cd400&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd70094a100&gt;
 </pre></div>
 </div>
 <img alt="_images/cons_news_15_1.png" src="_images/cons_news_15_1.png" />
@@ -1008,7 +1010,7 @@ permanently <strong>decreases</strong> by <span class="math notranslate nohighli
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9961eb7a30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd6d274b8e0&gt;
 </pre></div>
 </div>
 <img alt="_images/cons_news_18_1.png" src="_images/cons_news_18_1.png" />
@@ -1047,7 +1049,7 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9961ac72b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd6d22f7af0&gt;
 </pre></div>
 </div>
 <img alt="_images/cons_news_21_1.png" src="_images/cons_news_21_1.png" />
@@ -1065,7 +1067,7 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9961aba4f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd6d22b3760&gt;
 </pre></div>
 </div>
 <img alt="_images/cons_news_22_1.png" src="_images/cons_news_22_1.png" />
@@ -1132,7 +1134,7 @@ computed earlier.</p>
 <p>This <a class="reference internal" href="hs_invertibility_example.html"><span class="doc">quantecon lecture</span></a> contains another example of a shock-invertibility issue that is endemic
 to the LQ permanent income or consumption smoothing model.</p>
 <p>The technical issue discussed there is ultimately the source of the shock-invertibility issues discussed by
-Eric Leeper, Todd Walker, and Susan Yang <span id="id2">[<a class="reference internal" href="zreferences.html#id15"><span>LWY13</span></a>]</span> in their  analysis of <strong>fiscal foresight</strong>.</p>
+Eric Leeper, Todd Walker, and Susan Yang <span id="id2">[<a class="reference internal" href="zreferences.html#id15">LWY13</a>]</span> in their  analysis of <strong>fiscal foresight</strong>.</p>
 </div>
 </div>
 </div>

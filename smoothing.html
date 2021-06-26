@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>6. Consumption Smoothing with Complete and Incomplete Markets &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -304,20 +304,22 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
-Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
-Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
-Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
-Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
-Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
 Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.5.30)
-Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
 </pre></div>
 </div>
 </div>
@@ -327,11 +329,11 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/m
 <p>This lecture describes two types of consumption-smoothing models.</p>
 <ul class="simple">
 <li><p>one is in the <strong>complete markets</strong> tradition of <a class="reference external" href="https://en.wikipedia.org/wiki/Kenneth_Arrow">Kenneth Arrow</a></p></li>
-<li><p>the other is in the <strong>incomplete markets</strong> tradition  of Hall <span id="id1">[<a class="reference internal" href="zreferences.html#id132"><span>Hal78</span></a>]</span></p></li>
+<li><p>the other is in the <strong>incomplete markets</strong> tradition  of Hall <span id="id1">[<a class="reference internal" href="zreferences.html#id132">Hal78</a>]</span></p></li>
 </ul>
 <p><em>Complete markets</em> allow a consumer  to buy or sell claims contingent on all possible states of the world.</p>
 <p><em>Incomplete markets</em> allow a consumer to buy or sell only a limited set of securities, often only a single risk-free security.</p>
-<p>Hall <span id="id2">[<a class="reference internal" href="zreferences.html#id132"><span>Hal78</span></a>]</span> worked in an incomplete markets tradition by assuming
+<p>Hall <span id="id2">[<a class="reference internal" href="zreferences.html#id132">Hal78</a>]</span> worked in an incomplete markets tradition by assuming
 that the only asset that can be traded is a risk-free one period bond.</p>
 <p>Hall assumed an exogenous stochastic process of nonfinancial income and
 an exogenous and time-invariant gross interest rate on one period risk-free debt that equals
@@ -937,7 +939,7 @@ under the assumption of complete markets</p>
 </div>
 <p>Below, we’ll take the outcomes produced by this code – in particular the implied
 consumption and debt paths – and compare them with outcomes
-from an incomplete markets model in the spirit of Hall <span id="id3">[<a class="reference internal" href="zreferences.html#id132"><span>Hal78</span></a>]</span></p>
+from an incomplete markets model in the spirit of Hall <span id="id3">[<a class="reference internal" href="zreferences.html#id132">Hal78</a>]</span></p>
 </div>
 </div>
 <div class="section" id="model-2-one-period-risk-free-debt-only">
@@ -1094,7 +1096,7 @@ markets economy.</p></li>
 <div class="section" id="a-sequel">
 <h3><span class="section-number">6.5.3. </span>A sequel<a class="headerlink" href="#a-sequel" title="Permalink to this headline">¶</a></h3>
 <p>In <a class="reference internal" href="smoothing_tax.html"><span class="doc">tax smoothing with complete and incomplete markets</span></a>, we reinterpret the mathematics and Python code presented in this lecture in order
-to construct tax-smoothing models in the incomplete markets tradition of Barro <span id="id4">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> as well as in the complete markets tradition of Lucas and Stokey <span id="id5">[<a class="reference internal" href="zreferences.html#id156"><span>LS83</span></a>]</span>.</p>
+to construct tax-smoothing models in the incomplete markets tradition of Barro <span id="id4">[<a class="reference internal" href="zreferences.html#id116">Bar79</a>]</span> as well as in the complete markets tradition of Lucas and Stokey <span id="id5">[<a class="reference internal" href="zreferences.html#id156">LS83</a>]</span>.</p>
 </div>
 </div>
 </div>

@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>27. Covariance Stationary Processes &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -343,20 +343,20 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
-Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
-Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
-Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.5.30)
-Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
-Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.5.30)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
 </pre></div>
 </div>
 </div>
@@ -395,11 +395,11 @@ autocovariance function of a covariance stationary process.</p>
 <p>For supplementary reading, see</p>
 <p><a href=/_static/lecture_specific/arma/time_series_book.pdf download></a></p>
 <ul class="simple">
-<li><p><span id="id1">[<a class="reference internal" href="zreferences.html#id153"><span>LS18</span></a>]</span>, chapter 2</p></li>
-<li><p><span id="id2">[<a class="reference internal" href="zreferences.html#id177"><span>Sar87</span></a>]</span>, chapter 11</p></li>
+<li><p><span id="id1">[<a class="reference internal" href="zreferences.html#id153">LS18</a>]</span>, chapter 2</p></li>
+<li><p><span id="id2">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span>, chapter 11</p></li>
 <li><p>John Cochrane’s notes on time series analysis, chapter 8</p></li>
-<li><p><span id="id3">[<a class="reference internal" href="zreferences.html#id188"><span>Shi95</span></a>]</span>, chapter 6</p></li>
-<li><p><span id="id4">[<a class="reference internal" href="zreferences.html#id123"><span>CC08</span></a>]</span>, all</p></li>
+<li><p><span id="id3">[<a class="reference internal" href="zreferences.html#id188">Shi95</a>]</span>, chapter 6</p></li>
+<li><p><span id="id4">[<a class="reference internal" href="zreferences.html#id123">CC08</a>]</span>, all</p></li>
 </ul>
 <p>Let’s start with some imports:</p>
 <div class="cell docutils container">
@@ -480,7 +480,7 @@ X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j} + \eta_t
 <li><p><span class="math notranslate nohighlight">\(\psi_0 \epsilon_t\)</span> is the one-step ahead prediction error in forecasting <span class="math notranslate nohighlight">\(X_t\)</span> as a linear least-squares function of the infinite history <span class="math notranslate nohighlight">\(X_{t-1}, X_{t-2}, \ldots\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\eta_t\)</span> can be expressed as a linear function of <span class="math notranslate nohighlight">\(X_{t-1}, X_{t-2},\ldots\)</span> and is perfectly predictable over arbitrarily long horizons</p></li>
 </ul>
-<p>For the method of constructing a Wold representation, intuition, and further discussion, see <span id="id9">[<a class="reference internal" href="zreferences.html#id177"><span>Sar87</span></a>]</span>, p. 286.</p>
+<p>For the method of constructing a Wold representation, intuition, and further discussion, see <span id="id9">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span>, p. 286.</p>
 </div>
 <div class="section" id="ar-and-ma">
 <h3><span class="section-number">27.2.5. </span>AR and MA<a class="headerlink" href="#ar-and-ma" title="Permalink to this headline">¶</a></h3>
@@ -571,7 +571,7 @@ average process</em>, or ARMA(<span class="math notranslate nohighlight">\(p,q\)
 <p>This condition is sufficient to guarantee that the ARMA(<span class="math notranslate nohighlight">\(p,q\)</span>) process is covariance stationary.</p>
 <p>In fact, it implies that the process falls within the class of general linear processes <a class="reference internal" href="#generalized-lps"><span class="std std-ref">described above</span></a>.</p>
 <p>That is, given an ARMA(<span class="math notranslate nohighlight">\(p,q\)</span>) process <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> satisfying the unit circle condition, there exists a square summable sequence <span class="math notranslate nohighlight">\(\{\psi_t\}\)</span> with <span class="math notranslate nohighlight">\(X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j}\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p>The sequence <span class="math notranslate nohighlight">\(\{\psi_t\}\)</span> can be obtained by a recursive procedure outlined on page 79 of <span id="id11">[<a class="reference internal" href="zreferences.html#id123"><span>CC08</span></a>]</span>.</p>
+<p>The sequence <span class="math notranslate nohighlight">\(\{\psi_t\}\)</span> can be obtained by a recursive procedure outlined on page 79 of <span id="id11">[<a class="reference internal" href="zreferences.html#id123">CC08</a>]</span>.</p>
 <p>The function <span class="math notranslate nohighlight">\(t \mapsto \psi_t\)</span> is often called the <em>impulse response function</em>.</p>
 </div>
 </div>
@@ -640,7 +640,7 @@ all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the p
 <div class="math notranslate nohighlight" id="equation-ma1-sd-ed">
 <span class="eqno">(27.10)<a class="headerlink" href="#equation-ma1-sd-ed" title="Permalink to this equation">¶</a></span>\[f(\omega)
 = \sigma^2 ( 1 + 2 \theta \cos(\omega) + \theta^2 )\]</div>
-<p>With a bit more effort, it’s possible to show (see, e.g., p. 261 of <span id="id14">[<a class="reference internal" href="zreferences.html#id177"><span>Sar87</span></a>]</span>) that the spectral density of the AR(1) process <span class="math notranslate nohighlight">\(X_t = \phi X_{t-1} + \epsilon_t\)</span> is</p>
+<p>With a bit more effort, it’s possible to show (see, e.g., p. 261 of <span id="id14">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span>) that the spectral density of the AR(1) process <span class="math notranslate nohighlight">\(X_t = \phi X_{t-1} + \epsilon_t\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-ar1-sd-ed">
 <span class="eqno">(27.11)<a class="headerlink" href="#equation-ar1-sd-ed" title="Permalink to this equation">¶</a></span>\[f(\omega)
 = \frac{\sigma^2}{ 1 - 2 \phi \cos(\omega) + \phi^2 }\]</div>
@@ -653,7 +653,7 @@ all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the p
 <li><p>the polynomials <span class="math notranslate nohighlight">\(\phi(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\theta(\cdot)\)</span> are as defined in <a class="reference internal" href="#equation-arma-poly">(27.7)</a>.</p></li>
 </ul>
 <p>The derivation of <a class="reference internal" href="#equation-arma-sd">(27.12)</a> uses the fact that convolutions become products under Fourier transformations.</p>
-<p>The proof is elegant and can be found in many places — see, for example, <span id="id15">[<a class="reference internal" href="zreferences.html#id177"><span>Sar87</span></a>]</span>, chapter 11, section 4.</p>
+<p>The proof is elegant and can be found in many places — see, for example, <span id="id15">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span>, chapter 11, section 4.</p>
 <p>It’s a nice exercise to verify that <a class="reference internal" href="#equation-ma1-sd-ed">(27.10)</a> and <a class="reference internal" href="#equation-ar1-sd-ed">(27.11)</a> are indeed special cases of <a class="reference internal" href="#equation-arma-sd">(27.12)</a>.</p>
 </div>
 <div class="section" id="interpreting-the-spectral-density">
@@ -740,11 +740,7 @@ products on the right-hand side of <a class="reference internal" href="#equation
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-5-ad30c041f75f&gt;:27: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(times, y3, label=&#39;$\gamma(k) \cos(\pi k)$&#39;)
-</pre></div>
-</div>
-<img alt="_images/arma_9_1.png" src="_images/arma_9_1.png" />
+<img alt="_images/arma_9_0.png" src="_images/arma_9_0.png" />
 </div>
 </div>
 <p>On the other hand, if we evaluate <span class="math notranslate nohighlight">\(f(\omega)\)</span> at <span class="math notranslate nohighlight">\(\omega = \pi / 3\)</span>, then the cycles are
@@ -789,11 +785,7 @@ both positive and negative terms, and hence the sum of these terms is much small
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-6-d2d2e448568a&gt;:27: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(times, y3, label=&#39;$\gamma(k) \cos(\pi k/3)$&#39;)
-</pre></div>
-</div>
-<img alt="_images/arma_11_1.png" src="_images/arma_11_1.png" />
+<img alt="_images/arma_11_0.png" src="_images/arma_11_0.png" />
 </div>
 </div>
 <p>In summary, the spectral density is large at frequencies <span class="math notranslate nohighlight">\(\omega\)</span> where the autocovariance function exhibits damped cycles.</p>
@@ -810,7 +802,7 @@ both positive and negative terms, and hence the sum of these terms is much small
 </div>
 <div class="section" id="mathematical-theory">
 <h3><span class="section-number">27.3.7. </span>Mathematical Theory<a class="headerlink" href="#mathematical-theory" title="Permalink to this headline">¶</a></h3>
-<p id="index-20">This section is loosely based on <span id="id16">[<a class="reference internal" href="zreferences.html#id177"><span>Sar87</span></a>]</span>, p. 249-253, and included for those who</p>
+<p id="index-20">This section is loosely based on <span id="id16">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span>, p. 249-253, and included for those who</p>
 <ul class="simple">
 <li><p>would like a bit more insight into spectral densities</p></li>
 <li><p>and have at least some background in <a class="reference external" href="https://en.wikipedia.org/wiki/Hilbert_space">Hilbert space</a> theory</p></li>
@@ -875,7 +867,7 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
 </ol>
 <div class="section" id="application">
 <h3><span class="section-number">27.4.1. </span>Application<a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h3>
-<p>Let’s use this code to replicate the plots on pages 68–69 of <span id="id17">[<a class="reference internal" href="zreferences.html#id153"><span>LS18</span></a>]</span>.</p>
+<p>Let’s use this code to replicate the plots on pages 68–69 of <span id="id17">[<a class="reference internal" href="zreferences.html#id153">LS18</a>]</span>.</p>
 <p>Here are some functions to generate the plots</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -946,17 +938,13 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-7-4995e3f7b93d&gt;:5: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(list(range(len(yi))), yi)
-/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:85: ComplexWarning: Casting complex values to real discards the imaginary part
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:83: ComplexWarning: Casting complex values to real discards the imaginary part
   return array(a, dtype, copy=False, order=order)
 &lt;ipython-input-7-4995e3f7b93d&gt;:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
-/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:916: ComplexWarning: Casting complex values to real discards the imaginary part
+/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:948: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
-&lt;ipython-input-7-4995e3f7b93d&gt;:23: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(list(range(len(acov))), acov)
 </pre></div>
 </div>
 <img alt="_images/arma_15_1.png" src="_images/arma_15_1.png" />
@@ -971,7 +959,7 @@ which is at it should be.</p>
 <li><p>it is actually challenging to visualize a time series realization of white noise – a sequence of surprises – but this too looks pretty good.</p></li>
 </ul>
 <p>To get some more examples, as our laboratory
-we’ll replicate quartets of graphs that <span id="id18">[<a class="reference internal" href="zreferences.html#id153"><span>LS18</span></a>]</span> use to teach “how to read spectral densities”.</p>
+we’ll replicate quartets of graphs that <span id="id18">[<a class="reference internal" href="zreferences.html#id153">LS18</a>]</span> use to teach “how to read spectral densities”.</p>
 <p>Ljunqvist and Sargent’s first  model is  <span class="math notranslate nohighlight">\(X_t = 1.3 X_{t-1} - .7 X_{t-2} + \epsilon_t\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -983,17 +971,13 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-7-4995e3f7b93d&gt;:5: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(list(range(len(yi))), yi)
-/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:85: ComplexWarning: Casting complex values to real discards the imaginary part
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:83: ComplexWarning: Casting complex values to real discards the imaginary part
   return array(a, dtype, copy=False, order=order)
 &lt;ipython-input-7-4995e3f7b93d&gt;:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
-/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:916: ComplexWarning: Casting complex values to real discards the imaginary part
+/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:948: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
-&lt;ipython-input-7-4995e3f7b93d&gt;:23: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(list(range(len(acov))), acov)
 </pre></div>
 </div>
 <img alt="_images/arma_17_1.png" src="_images/arma_17_1.png" />
@@ -1010,17 +994,13 @@ Invalid limit will be ignored.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-7-4995e3f7b93d&gt;:5: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(list(range(len(yi))), yi)
-/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:85: ComplexWarning: Casting complex values to real discards the imaginary part
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:83: ComplexWarning: Casting complex values to real discards the imaginary part
   return array(a, dtype, copy=False, order=order)
 &lt;ipython-input-7-4995e3f7b93d&gt;:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
-/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:916: ComplexWarning: Casting complex values to real discards the imaginary part
+/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:948: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
-&lt;ipython-input-7-4995e3f7b93d&gt;:23: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(list(range(len(acov))), acov)
 </pre></div>
 </div>
 <img alt="_images/arma_19_1.png" src="_images/arma_19_1.png" />
@@ -1037,17 +1017,13 @@ Invalid limit will be ignored.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-7-4995e3f7b93d&gt;:5: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(list(range(len(yi))), yi)
-/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:85: ComplexWarning: Casting complex values to real discards the imaginary part
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:83: ComplexWarning: Casting complex values to real discards the imaginary part
   return array(a, dtype, copy=False, order=order)
 &lt;ipython-input-7-4995e3f7b93d&gt;:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
-/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:916: ComplexWarning: Casting complex values to real discards the imaginary part
+/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:948: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
-&lt;ipython-input-7-4995e3f7b93d&gt;:23: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(list(range(len(acov))), acov)
 </pre></div>
 </div>
 <img alt="_images/arma_21_1.png" src="_images/arma_21_1.png" />
@@ -1064,17 +1040,13 @@ Invalid limit will be ignored.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-7-4995e3f7b93d&gt;:5: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(list(range(len(yi))), yi)
-/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:85: ComplexWarning: Casting complex values to real discards the imaginary part
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:83: ComplexWarning: Casting complex values to real discards the imaginary part
   return array(a, dtype, copy=False, order=order)
 &lt;ipython-input-7-4995e3f7b93d&gt;:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
-/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:916: ComplexWarning: Casting complex values to real discards the imaginary part
+/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:948: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
-&lt;ipython-input-7-4995e3f7b93d&gt;:23: UserWarning: In Matplotlib 3.3 individual lines on a stem plot will be added as a LineCollection instead of individual lines. This significantly improves the performance of a stem plot. To remove this warning and switch to the new behaviour, set the &quot;use_line_collection&quot; keyword argument to True.
-  ax.stem(list(range(len(acov))), acov)
 </pre></div>
 </div>
 <img alt="_images/arma_23_1.png" src="_images/arma_23_1.png" />

@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>7. Tax Smoothing with Complete and Incomplete Markets &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -327,20 +327,22 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
-Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
-Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
-Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.5.30)
-Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
 Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.5.30)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
 </pre></div>
 </div>
 </div>
@@ -349,25 +351,25 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/m
 <h2><a class="toc-backref" href="#id12"><span class="section-number">7.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>This lecture describes tax-smoothing models that are counterparts to consumption-smoothing models in <a class="reference internal" href="smoothing.html"><span class="doc">Consumption Smoothing with Complete and Incomplete Markets</span></a>.</p>
 <ul class="simple">
-<li><p>one is in the <strong>complete markets</strong> tradition of Lucas and Stokey <span id="id1">[<a class="reference internal" href="zreferences.html#id156"><span>LS83</span></a>]</span>.</p></li>
-<li><p>the other is in the <strong>incomplete markets</strong> tradition  of  Barro <span id="id2">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span>.</p></li>
+<li><p>one is in the <strong>complete markets</strong> tradition of Lucas and Stokey <span id="id1">[<a class="reference internal" href="zreferences.html#id156">LS83</a>]</span>.</p></li>
+<li><p>the other is in the <strong>incomplete markets</strong> tradition  of  Barro <span id="id2">[<a class="reference internal" href="zreferences.html#id116">Bar79</a>]</span>.</p></li>
 </ul>
 <p><em>Complete markets</em> allow a  government to buy or sell claims contingent on all possible Markov states.</p>
 <p><em>Incomplete markets</em> allow a  government to buy or sell only a limited set of securities, often only a single risk-free security.</p>
-<p>Barro <span id="id3">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span>  worked in an incomplete markets tradition by assuming
+<p>Barro <span id="id3">[<a class="reference internal" href="zreferences.html#id116">Bar79</a>]</span>  worked in an incomplete markets tradition by assuming
 that the only asset that can be traded is a risk-free one period bond.</p>
-<p>In his consumption-smoothing model, Hall <span id="id4">[<a class="reference internal" href="zreferences.html#id132"><span>Hal78</span></a>]</span> had  assumed an exogenous stochastic process of nonfinancial income and
+<p>In his consumption-smoothing model, Hall <span id="id4">[<a class="reference internal" href="zreferences.html#id132">Hal78</a>]</span> had  assumed an exogenous stochastic process of nonfinancial income and
 an exogenous gross interest rate on one period risk-free debt that equals
 <span class="math notranslate nohighlight">\(\beta^{-1}\)</span>, where <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span> is also a consumer’s
 intertemporal discount factor.</p>
-<p>Barro <span id="id5">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span> made an analogous assumption about the risk-free interest
+<p>Barro <span id="id5">[<a class="reference internal" href="zreferences.html#id116">Bar79</a>]</span> made an analogous assumption about the risk-free interest
 rate in a tax-smoothing model that turns out to have the same mathematical structure as Hall’s
 consumption-smoothing model.</p>
 <p>To get Barro’s model from Hall’s, all we have to do is to rename variables.</p>
 <p>We maintain Hall’s and Barro’s assumption about the interest rate when we describe an
 incomplete markets version of our model.</p>
 <p>In addition, we extend their assumption about the interest rate to an appropriate counterpart to create a “complete markets” model in the style of
-Lucas and Stokey <span id="id6">[<a class="reference internal" href="zreferences.html#id156"><span>LS83</span></a>]</span>.</p>
+Lucas and Stokey <span id="id6">[<a class="reference internal" href="zreferences.html#id156">LS83</a>]</span>.</p>
 <div class="section" id="isomorphism-between-consumption-and-tax-smoothing">
 <h3><span class="section-number">7.1.1. </span>Isomorphism between Consumption and Tax Smoothing<a class="headerlink" href="#isomorphism-between-consumption-and-tax-smoothing" title="Permalink to this headline">¶</a></h3>
 <p>For each version of a consumption-smoothing model,  a tax-smoothing counterpart can be obtained simply by relabeling</p>
@@ -386,8 +388,8 @@ process, and <span class="math notranslate nohighlight">\(a_t\)</span> is the go
 but will also  treat the linear state space specification.</p>
 <div class="section" id="link-to-history">
 <h4><span class="section-number">7.1.1.1. </span>Link to History<a class="headerlink" href="#link-to-history" title="Permalink to this headline">¶</a></h4>
-<p>For those who love history, President Thomas Jefferson’s Secretary of Treasury Albert Gallatin (1807) <span id="id7">[<a class="reference internal" href="zreferences.html#id114"><span>Gal37</span></a>]</span> seems to have prescribed policies that
-come from Barro’s model <span id="id8">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span></p>
+<p>For those who love history, President Thomas Jefferson’s Secretary of Treasury Albert Gallatin (1807) <span id="id7">[<a class="reference internal" href="zreferences.html#id114">Gal37</a>]</span> seems to have prescribed policies that
+come from Barro’s model <span id="id8">[<a class="reference internal" href="zreferences.html#id116">Bar79</a>]</span></p>
 <p>Let’s start with some standard imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -624,7 +626,7 @@ of the Markov state in the complete markets model.</p></li>
 <div class="section" id="tax-smoothing-with-complete-markets">
 <h2><a class="toc-backref" href="#id13"><span class="section-number">7.2. </span>Tax Smoothing with Complete Markets</a><a class="headerlink" href="#tax-smoothing-with-complete-markets" title="Permalink to this headline">¶</a></h2>
 <p>It is instructive  to focus on a simple tax-smoothing example with complete markets.</p>
-<p>This example illustrates how, in a complete markets model like that of Lucas and Stokey <span id="id9">[<a class="reference internal" href="zreferences.html#id156"><span>LS83</span></a>]</span>, the government purchases
+<p>This example illustrates how, in a complete markets model like that of Lucas and Stokey <span id="id9">[<a class="reference internal" href="zreferences.html#id156">LS83</a>]</span>, the government purchases
 insurance from the private sector.</p>
 <p>Payouts from the insurance it had purchased  allows the government to avoid raising taxes when  emergencies make government expenditures surge.</p>
 <p>We assume that government expenditures take one of two values <span class="math notranslate nohighlight">\(G_1 &lt; G_2\)</span>, where Markov state <span class="math notranslate nohighlight">\(1\)</span> means “peace” and Markov state <span class="math notranslate nohighlight">\(2\)</span> means “war”.</p>
@@ -1594,7 +1596,7 @@ R(x_{t+1} | x_t) = \frac{b(x_{t+1})}{\beta E b(x_{t+1})| x_t}
 <div class="section" id="related-lectures">
 <h4><span class="section-number">7.4.7.1. </span>Related Lectures<a class="headerlink" href="#related-lectures" title="Permalink to this headline">¶</a></h4>
 <p>Throughout this lecture, we have taken one-period interest rates and Arrow security prices as exogenous objects determined outside the model
-and specified them in ways designed to align our models closely with the consumption smoothing model of Barro <span id="id10">[<a class="reference internal" href="zreferences.html#id116"><span>Bar79</span></a>]</span>.</p>
+and specified them in ways designed to align our models closely with the consumption smoothing model of Barro <span id="id10">[<a class="reference internal" href="zreferences.html#id116">Bar79</a>]</span>.</p>
 <p>Other lectures make these objects endogenous and describe  how a government  optimally  manipulates prices of government debt, albeit indirectly via effects distorting
 taxes have on equilibrium prices and allocations.</p>
 <p>In <a class="reference internal" href="lqramsey.html"><span class="doc">optimal taxation in an LQ economy</span></a> and <a class="reference internal" href="opt_tax_recur.html"><span class="doc">recursive optimal taxation</span></a>, we study <strong>complete-markets</strong>

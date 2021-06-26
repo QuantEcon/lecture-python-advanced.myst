@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>19. Growth in Dynamic Linear Economies &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -253,7 +253,7 @@
 </ul>
 </div>
 <p>This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
-<span id="id1">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
+<span id="id1">[<a class="reference internal" href="zreferences.html#id53">HS13</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
 <p>In addition to what’s included in  Anaconda, this lecture uses the quantecon library.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
@@ -262,56 +262,23 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting quantecon
-  Downloading quantecon-0.5.0-py3-none-any.whl (229 kB)
-?25l
-     |█▍                              | 10 kB 31.9 MB/s eta 0:00:01
-     |██▉                             | 20 kB 34.8 MB/s eta 0:00:01
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     |████▎                           | 30 kB 21.4 MB/s eta 0:00:01
-     |█████▊                          | 40 kB 17.0 MB/s eta 0:00:01
-     |███████▏                        | 51 kB 12.0 MB/s eta 0:00:01
-     |████████▌                       | 61 kB 12.4 MB/s eta 0:00:01
-     |██████████                      | 71 kB 11.3 MB/s eta 0:00:01
-     |███████████▍                    | 81 kB 12.4 MB/s eta 0:00:01
-     |████████████▉                   | 92 kB 12.8 MB/s eta 0:00:01
-     |██████████████▎                 | 102 kB 11.6 MB/s eta 0:00:01
-     |███████████████▊                | 112 kB 11.6 MB/s eta 0:00:01
-     |█████████████████               | 122 kB 11.6 MB/s eta 0:00:01
-     |██████████████████▌             | 133 kB 11.6 MB/s eta 0:00:01
-     |████████████████████            | 143 kB 11.6 MB/s eta 0:00:01
-     |█████████████████████▍          | 153 kB 11.6 MB/s eta 0:00:01
-     |██████████████████████▉         | 163 kB 11.6 MB/s eta 0:00:01
-     |████████████████████████▏       | 174 kB 11.6 MB/s eta 0:00:01
-     |█████████████████████████▋      | 184 kB 11.6 MB/s eta 0:00:01
-     |███████████████████████████     | 194 kB 11.6 MB/s eta 0:00:01
-     |████████████████████████████▌   | 204 kB 11.6 MB/s eta 0:00:01
-     |██████████████████████████████  | 215 kB 11.6 MB/s eta 0:00:01
-     |███████████████████████████████▍| 225 kB 11.6 MB/s eta 0:00:01
-     |████████████████████████████████| 229 kB 11.6 MB/s 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25hRequirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.50.1)
-Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.18.5)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.1)
-Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: llvmlite&lt;0.34,&gt;=0.33.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.33.0+1.g022ab0f)
-Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (49.2.0.post20200714)
-Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
-Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.5.30)
 Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.9)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: quantecon
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed quantecon-0.5.0
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
 </pre></div>
 </div>
 </div>
@@ -442,7 +409,7 @@ d_t = U_dz_t
 \]</div>
 <p>The DLE class in Python maps this planning problem into a linear-quadratic dynamic programming problem and then solves it by using
 QuantEcon’s LQ class.</p>
-<p>(See Section 5.5 of Hansen &amp; Sargent (2013) <span id="id2">[<a class="reference internal" href="zreferences.html#id53"><span>HS13</span></a>]</span> for a full
+<p>(See Section 5.5 of Hansen &amp; Sargent (2013) <span id="id2">[<a class="reference internal" href="zreferences.html#id53">HS13</a>]</span> for a full
 description of how to map these economies into an LQ setting, and how to
 use the solution to the LQ problem to construct the output matrices in
 order to simulate the economies)</p>

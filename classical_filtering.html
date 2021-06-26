@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>31. Classical Prediction and Filtering With Linear Algebra &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -306,7 +306,7 @@ the <a class="reference external" href="https://en.wikipedia.org/wiki/Cholesky_d
 <li><p>With every linear least squares prediction or filtering problem there is implicitly affiliated a LQ control problem.</p></li>
 </ul>
 <p>An understanding of these connections has repeatedly proved useful in cracking interesting applied problems.</p>
-<p>For example, Sargent <span id="id1">[<a class="reference internal" href="zreferences.html#id177"><span>Sar87</span></a>]</span> [chs. IX, XIV] and Hansen and Sargent <span id="id2">[<a class="reference internal" href="zreferences.html#id87"><span>HS80</span></a>]</span> formulated
+<p>For example, Sargent <span id="id1">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span> [chs. IX, XIV] and Hansen and Sargent <span id="id2">[<a class="reference internal" href="zreferences.html#id87">HS80</a>]</span> formulated
 and solved control and filtering problems using <span class="math notranslate nohighlight">\(z\)</span>-transform methods.</p>
 <p>In this lecture, we begin to investigate these ideas by using mostly elementary linear algebra.</p>
 <p>This is the main purpose and focus of the lecture.</p>
@@ -324,7 +324,7 @@ formulas and associated linear algebra.</p>
 </div>
 <div class="section" id="references">
 <h3><span class="section-number">31.1.1. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
-<p>Useful references include <span id="id3">[<a class="reference internal" href="zreferences.html#id86"><span>Whi63</span></a>]</span>, <span id="id4">[<a class="reference internal" href="zreferences.html#id87"><span>HS80</span></a>]</span>, <span id="id5">[<a class="reference internal" href="zreferences.html#id88"><span>Orf88</span></a>]</span>, <span id="id6">[<a class="reference internal" href="zreferences.html#id89"><span>AP91</span></a>]</span>, and <span id="id7">[<a class="reference internal" href="zreferences.html#id90"><span>Mut60</span></a>]</span>.</p>
+<p>Useful references include <span id="id3">[<a class="reference internal" href="zreferences.html#id86">Whi63</a>]</span>, <span id="id4">[<a class="reference internal" href="zreferences.html#id87">HS80</a>]</span>, <span id="id5">[<a class="reference internal" href="zreferences.html#id88">Orf88</a>]</span>, <span id="id6">[<a class="reference internal" href="zreferences.html#id89">AP91</a>]</span>, and <span id="id7">[<a class="reference internal" href="zreferences.html#id90">Mut60</a>]</span>.</p>
 </div>
 </div>
 <div class="section" id="finite-dimensional-prediction">
@@ -971,7 +971,7 @@ detail below.</p>
 </div>
 <div class="section" id="prediction">
 <h3><span class="section-number">31.2.4. </span>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">¶</a></h3>
-<p>It immediately follows from the “orthogonality principle” of least squares (see <span id="id8">[<a class="reference internal" href="zreferences.html#id89"><span>AP91</span></a>]</span> or <span id="id9">[<a class="reference internal" href="zreferences.html#id177"><span>Sar87</span></a>]</span> [ch. X]) that</p>
+<p>It immediately follows from the “orthogonality principle” of least squares (see <span id="id8">[<a class="reference internal" href="zreferences.html#id89">AP91</a>]</span> or <span id="id9">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span> [ch. X]) that</p>
 <div class="math notranslate nohighlight" id="equation-eq-58">
 <span class="eqno">(31.7)<a class="headerlink" href="#equation-eq-58" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     \mathbb{\hat E} &amp; [x_t \mid x_{t-m},\, x_{t-m+1}, \ldots x_1]
@@ -1126,7 +1126,7 @@ random variable <span class="math notranslate nohighlight">\(\hat X_{t+j}\)</spa
 \ldots \}\)</span> that minimizes <span class="math notranslate nohighlight">\(\mathbb{E}(\hat X_{t+j} - X_{t+j})^2\)</span>.</p>
 <p>That is, the problem is to find a <span class="math notranslate nohighlight">\(\gamma_j (L) = \sum^\infty_{k=0} \gamma_{jk}\, L^k\)</span> such that <span class="math notranslate nohighlight">\(\sum^\infty_{k=0} \vert \gamma_{jk} \vert^2 &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E} [\gamma_j \, (L) X_t -X_{t+j}]^2\)</span> is minimized.</p>
 <p>The <strong>linear least squares filtering problem</strong> is to find a <span class="math notranslate nohighlight">\(b\,(L) = \sum^\infty_{j=0} b_j\, L^j\)</span> such that <span class="math notranslate nohighlight">\(\sum^\infty_{j=0}\vert b_j \vert^2 &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E} [b\, (L) X_t -Y_t ]^2\)</span> is minimized.</p>
-<p>Interesting versions of these problems related to the permanent income theory were studied by <span id="id10">[<a class="reference internal" href="zreferences.html#id90"><span>Mut60</span></a>]</span>.</p>
+<p>Interesting versions of these problems related to the permanent income theory were studied by <span id="id10">[<a class="reference internal" href="zreferences.html#id90">Mut60</a>]</span>.</p>
 <div class="section" id="problem-formulation">
 <h3><span class="section-number">31.4.1. </span>Problem Formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h3>
 <p>These problems are solved as follows.</p>
@@ -1155,7 +1155,7 @@ random variable <span class="math notranslate nohighlight">\(\hat X_{t+j}\)</spa
     x_t &amp;= C(L) v_{1t} + D(L) v_{2t}
 \end{aligned}
 \end{split}\]</div>
-<p>Then, as shown for example in <span id="id11">[<a class="reference internal" href="zreferences.html#id177"><span>Sar87</span></a>]</span> [ch. XI], it is true that</p>
+<p>Then, as shown for example in <span id="id11">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span> [ch. XI], it is true that</p>
 <div class="math notranslate nohighlight" id="equation-eq-29">
 <span class="eqno">(31.14)<a class="headerlink" href="#equation-eq-29" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     g_y(z) &amp;= A(z) A(z^{-1}) + B (z) B(z^{-1}) \\
@@ -1219,9 +1219,9 @@ b(L) = \left[{g_{YX} (L) \over c(L^{-1})}\right]_+ c(L)^{-1}
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-eq-37">
 <span class="eqno">(31.22)<a class="headerlink" href="#equation-eq-37" title="Permalink to this equation">¶</a></span>\[b(L) = \left[ {d(L)d(L^{-1}) \over c(L^{-1})} \right]_+ c(L)^{-1}\]</div>
-<p>Formulas <a class="reference internal" href="#equation-eq-36">(31.21)</a> and <a class="reference internal" href="#equation-eq-37">(31.22)</a>  are discussed in detail in  <span id="id12">[<a class="reference internal" href="zreferences.html#id66"><span>Whi83</span></a>]</span> and <span id="id13">[<a class="reference internal" href="zreferences.html#id177"><span>Sar87</span></a>]</span>.</p>
+<p>Formulas <a class="reference internal" href="#equation-eq-36">(31.21)</a> and <a class="reference internal" href="#equation-eq-37">(31.22)</a>  are discussed in detail in  <span id="id12">[<a class="reference internal" href="zreferences.html#id66">Whi83</a>]</span> and <span id="id13">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span>.</p>
 <p>The interested reader can there find several examples of the use of these formulas in economics
-Some classic examples using these formulas are due to <span id="id14">[<a class="reference internal" href="zreferences.html#id90"><span>Mut60</span></a>]</span>.</p>
+Some classic examples using these formulas are due to <span id="id14">[<a class="reference internal" href="zreferences.html#id90">Mut60</a>]</span>.</p>
 <p>As an example of the usefulness of formula <a class="reference internal" href="#equation-eq-37">(31.22)</a>, we let <span class="math notranslate nohighlight">\(X_t\)</span> be a stochastic process with Wold moving average representation</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1247,7 +1247,7 @@ X_t
 <p>Then <a class="reference internal" href="#equation-eq-37">(31.22)</a>  becomes</p>
 <div class="math notranslate nohighlight" id="equation-eq-38">
 <span class="eqno">(31.23)<a class="headerlink" href="#equation-eq-38" title="Permalink to this equation">¶</a></span>\[b(L)=\left[{c(L)\over 1-\delta L^{-1}}\right]_+ c(L)^{-1}\]</div>
-<p>In order to evaluate the term in the annihilation operator, we use the following result from <span id="id15">[<a class="reference internal" href="zreferences.html#id87"><span>HS80</span></a>]</span>.</p>
+<p>In order to evaluate the term in the annihilation operator, we use the following result from <span id="id15">[<a class="reference internal" href="zreferences.html#id87">HS80</a>]</span>.</p>
 <p><strong>Proposition</strong> Let</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(g(z) = \sum^\infty_{j=0} g_j \, z^j\)</span> where <span class="math notranslate nohighlight">\(\sum^\infty_{j=0} \vert g_j \vert^2 &lt; + \infty\)</span>.</p></li>
@@ -1426,7 +1426,7 @@ objects in <a class="reference internal" href="lu_tricks.html#equation-onetwenty
     g_{YX} (z) &amp;= D (z) D (z^{-1})^\prime
 \end{aligned}
 \end{split}\]</div>
-<p>A factorization of <span class="math notranslate nohighlight">\(g_X (z)\)</span> can be found (see <span id="id16">[<a class="reference internal" href="zreferences.html#id65"><span>Roz67</span></a>]</span> or <span id="id17">[<a class="reference internal" href="zreferences.html#id66"><span>Whi83</span></a>]</span>) of the form</p>
+<p>A factorization of <span class="math notranslate nohighlight">\(g_X (z)\)</span> can be found (see <span id="id16">[<a class="reference internal" href="zreferences.html#id65">Roz67</a>]</span> or <span id="id17">[<a class="reference internal" href="zreferences.html#id66">Whi83</a>]</span>) of the form</p>
 <div class="math notranslate nohighlight">
 \[
 D (z) D (z^{-1})^\prime + H = C (z) C (z^{-1})^\prime, \quad C (z) =
