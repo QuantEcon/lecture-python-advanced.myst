@@ -24,6 +24,15 @@ kernelspec:
 :depth: 2
 ```
 
+In addition to what's in Anaconda, this lecture will need the following libraries:
+
+```{code-cell} ipython
+---
+tags: [hide-output]
+---
+!pip install interpolation
+```
+
 ## Overview
 
 In 1937, Ronald Coase wrote a brilliant essay on the nature of the firm {cite}`coase1937nature`.
