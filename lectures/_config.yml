@@ -53,10 +53,18 @@ sphinx:
       google_analytics_id: UA-54984338-11
     mathjax_config:
       TeX:
+        extensions: ["autobold.js"]
         Macros:
           "argmax" : "arg\\,max"
           "argmin" : "arg\\,min"
-    mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js
+          "col"    : "col"
+        tex2jax: 
+          inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+          processEscapes: true
+        SVG:
+          scale: 0.92,
+          useGlobalCache: true
+    mathjax_path: https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML
     rediraffe_redirects:
       index_toc.md: intro.md
     tojupyter_static_file_path: ["source/_static", "_static"]
