@@ -237,7 +237,7 @@ where $P_{1t}$ solves the matrix Riccati difference equation
 P_{1t} =
 \Pi_{1t} -
 (\beta B_1' {\mathcal D}_1(P_{1t+1}) \Lambda_{1t} + \Gamma_{1t})' (Q_1 + \beta B_1' {\mathcal D}_1( P_{1t+1}) B_1)^{-1}
-(\beta B_1' {\mathcal D}_1(P_{1t+1}) \Lambda_{1t} + \Gamma_{1t}) +
+(\beta B_1' {\mathcal D}_1(P_{1t+1}) \Lambda_{1t} + \Gamma_{1t}) + \\
 \beta \Lambda_{1t}' {\mathcal D}_1(P_{1t+1}) \Lambda_{1t}
 ```
 
@@ -256,8 +256,8 @@ where $P_{2t}$ solves
 :label: rmp-orig-6
 
 P_{2t} =
-\Pi_{2t} - (\beta B_2' {\mathcal D}_2 ( P_{2t+1}) \Lambda_{2t} + \Gamma_{2t})' (Q_2 + \beta B_2' {\mathcal D}_2 ( P_{2t+1}) B_2)^{-1}
-  (\beta B_2' {\mathcal D}_2 ( P_{2t+1}) \Lambda_{2t} + \Gamma_{2t}) + \beta \Lambda_{2t}' {\mathcal D}_2 ( P_{2t+1})  \Lambda_{2t}
+\Pi_{2t} - (\beta B_2' {\mathcal D}_2 ( P_{2t+1}) \Lambda_{2t} + \Gamma_{2t})' (Q_2 + \beta B_2' {\mathcal D}_2 ( P_{2t+1}) B_2)^{-1}(\beta B_2' {\mathcal D}_2 ( P_{2t+1}) \Lambda_{2t} + \Gamma_{2t}) + \\
+\beta \Lambda_{2t}' {\mathcal D}_2 ( P_{2t+1})  \Lambda_{2t}
 ```
 
 Here in all cases $t = t_0, \ldots, t_1 - 1$ and the terminal conditions are $P_{it_1} = 0$.
