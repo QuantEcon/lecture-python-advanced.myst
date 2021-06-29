@@ -399,11 +399,11 @@ autocovariance function of a covariance stationary process.</p>
 <p>For supplementary reading, see</p>
 <p><a href=/_static/lecture_specific/arma/time_series_book.pdf download></a></p>
 <ul class="simple">
-<li><p><span id="id1">[<a class="reference internal" href="zreferences.html#id153">LS18</a>]</span>, chapter 2</p></li>
-<li><p><span id="id2">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span>, chapter 11</p></li>
+<li><p><span id="id1">[<a class="reference internal" href="zreferences.html#id153" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">LS18</a>]</span>, chapter 2</p></li>
+<li><p><span id="id2">[<a class="reference internal" href="zreferences.html#id177" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, chapter 11</p></li>
 <li><p>John Cochrane’s notes on time series analysis, chapter 8</p></li>
-<li><p><span id="id3">[<a class="reference internal" href="zreferences.html#id188">Shi95</a>]</span>, chapter 6</p></li>
-<li><p><span id="id4">[<a class="reference internal" href="zreferences.html#id123">CC08</a>]</span>, all</p></li>
+<li><p><span id="id3">[<a class="reference internal" href="zreferences.html#id188" title="A N Shiriaev. Probability. Graduate texts in mathematics. Springer. Springer, 2nd edition, 1995.">Shi95</a>]</span>, chapter 6</p></li>
+<li><p><span id="id4">[<a class="reference internal" href="zreferences.html#id123" title="J. D. Cryer and K-S. Chan. Time Series Analysis. Springer, 2nd edition edition, 2008.">CC08</a>]</span>, all</p></li>
 </ul>
 <p>Let’s start with some imports:</p>
 <div class="cell docutils container">
@@ -484,7 +484,7 @@ X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j} + \eta_t
 <li><p><span class="math notranslate nohighlight">\(\psi_0 \epsilon_t\)</span> is the one-step ahead prediction error in forecasting <span class="math notranslate nohighlight">\(X_t\)</span> as a linear least-squares function of the infinite history <span class="math notranslate nohighlight">\(X_{t-1}, X_{t-2}, \ldots\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\eta_t\)</span> can be expressed as a linear function of <span class="math notranslate nohighlight">\(X_{t-1}, X_{t-2},\ldots\)</span> and is perfectly predictable over arbitrarily long horizons</p></li>
 </ul>
-<p>For the method of constructing a Wold representation, intuition, and further discussion, see <span id="id9">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span>, p. 286.</p>
+<p>For the method of constructing a Wold representation, intuition, and further discussion, see <span id="id9">[<a class="reference internal" href="zreferences.html#id177" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, p. 286.</p>
 </div>
 <div class="section" id="ar-and-ma">
 <h3><span class="section-number">27.2.5. </span>AR and MA<a class="headerlink" href="#ar-and-ma" title="Permalink to this headline">¶</a></h3>
@@ -575,7 +575,7 @@ average process</em>, or ARMA(<span class="math notranslate nohighlight">\(p,q\)
 <p>This condition is sufficient to guarantee that the ARMA(<span class="math notranslate nohighlight">\(p,q\)</span>) process is covariance stationary.</p>
 <p>In fact, it implies that the process falls within the class of general linear processes <a class="reference internal" href="#generalized-lps"><span class="std std-ref">described above</span></a>.</p>
 <p>That is, given an ARMA(<span class="math notranslate nohighlight">\(p,q\)</span>) process <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> satisfying the unit circle condition, there exists a square summable sequence <span class="math notranslate nohighlight">\(\{\psi_t\}\)</span> with <span class="math notranslate nohighlight">\(X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j}\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p>The sequence <span class="math notranslate nohighlight">\(\{\psi_t\}\)</span> can be obtained by a recursive procedure outlined on page 79 of <span id="id11">[<a class="reference internal" href="zreferences.html#id123">CC08</a>]</span>.</p>
+<p>The sequence <span class="math notranslate nohighlight">\(\{\psi_t\}\)</span> can be obtained by a recursive procedure outlined on page 79 of <span id="id11">[<a class="reference internal" href="zreferences.html#id123" title="J. D. Cryer and K-S. Chan. Time Series Analysis. Springer, 2nd edition edition, 2008.">CC08</a>]</span>.</p>
 <p>The function <span class="math notranslate nohighlight">\(t \mapsto \psi_t\)</span> is often called the <em>impulse response function</em>.</p>
 </div>
 </div>
@@ -644,7 +644,7 @@ all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the p
 <div class="math notranslate nohighlight" id="equation-ma1-sd-ed">
 <span class="eqno">(27.10)<a class="headerlink" href="#equation-ma1-sd-ed" title="Permalink to this equation">¶</a></span>\[f(\omega)
 = \sigma^2 ( 1 + 2 \theta \cos(\omega) + \theta^2 )\]</div>
-<p>With a bit more effort, it’s possible to show (see, e.g., p. 261 of <span id="id14">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span>) that the spectral density of the AR(1) process <span class="math notranslate nohighlight">\(X_t = \phi X_{t-1} + \epsilon_t\)</span> is</p>
+<p>With a bit more effort, it’s possible to show (see, e.g., p. 261 of <span id="id14">[<a class="reference internal" href="zreferences.html#id177" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>) that the spectral density of the AR(1) process <span class="math notranslate nohighlight">\(X_t = \phi X_{t-1} + \epsilon_t\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-ar1-sd-ed">
 <span class="eqno">(27.11)<a class="headerlink" href="#equation-ar1-sd-ed" title="Permalink to this equation">¶</a></span>\[f(\omega)
 = \frac{\sigma^2}{ 1 - 2 \phi \cos(\omega) + \phi^2 }\]</div>
@@ -657,7 +657,7 @@ all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the p
 <li><p>the polynomials <span class="math notranslate nohighlight">\(\phi(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\theta(\cdot)\)</span> are as defined in <a class="reference internal" href="#equation-arma-poly">(27.7)</a>.</p></li>
 </ul>
 <p>The derivation of <a class="reference internal" href="#equation-arma-sd">(27.12)</a> uses the fact that convolutions become products under Fourier transformations.</p>
-<p>The proof is elegant and can be found in many places — see, for example, <span id="id15">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span>, chapter 11, section 4.</p>
+<p>The proof is elegant and can be found in many places — see, for example, <span id="id15">[<a class="reference internal" href="zreferences.html#id177" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, chapter 11, section 4.</p>
 <p>It’s a nice exercise to verify that <a class="reference internal" href="#equation-ma1-sd-ed">(27.10)</a> and <a class="reference internal" href="#equation-ar1-sd-ed">(27.11)</a> are indeed special cases of <a class="reference internal" href="#equation-arma-sd">(27.12)</a>.</p>
 </div>
 <div class="section" id="interpreting-the-spectral-density">
@@ -806,7 +806,7 @@ both positive and negative terms, and hence the sum of these terms is much small
 </div>
 <div class="section" id="mathematical-theory">
 <h3><span class="section-number">27.3.7. </span>Mathematical Theory<a class="headerlink" href="#mathematical-theory" title="Permalink to this headline">¶</a></h3>
-<p id="index-20">This section is loosely based on <span id="id16">[<a class="reference internal" href="zreferences.html#id177">Sar87</a>]</span>, p. 249-253, and included for those who</p>
+<p id="index-20">This section is loosely based on <span id="id16">[<a class="reference internal" href="zreferences.html#id177" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, p. 249-253, and included for those who</p>
 <ul class="simple">
 <li><p>would like a bit more insight into spectral densities</p></li>
 <li><p>and have at least some background in <a class="reference external" href="https://en.wikipedia.org/wiki/Hilbert_space">Hilbert space</a> theory</p></li>
@@ -871,7 +871,7 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
 </ol>
 <div class="section" id="application">
 <h3><span class="section-number">27.4.1. </span>Application<a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h3>
-<p>Let’s use this code to replicate the plots on pages 68–69 of <span id="id17">[<a class="reference internal" href="zreferences.html#id153">LS18</a>]</span>.</p>
+<p>Let’s use this code to replicate the plots on pages 68–69 of <span id="id17">[<a class="reference internal" href="zreferences.html#id153" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">LS18</a>]</span>.</p>
 <p>Here are some functions to generate the plots</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -963,7 +963,7 @@ which is at it should be.</p>
 <li><p>it is actually challenging to visualize a time series realization of white noise – a sequence of surprises – but this too looks pretty good.</p></li>
 </ul>
 <p>To get some more examples, as our laboratory
-we’ll replicate quartets of graphs that <span id="id18">[<a class="reference internal" href="zreferences.html#id153">LS18</a>]</span> use to teach “how to read spectral densities”.</p>
+we’ll replicate quartets of graphs that <span id="id18">[<a class="reference internal" href="zreferences.html#id153" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">LS18</a>]</span> use to teach “how to read spectral densities”.</p>
 <p>Ljunqvist and Sargent’s first  model is  <span class="math notranslate nohighlight">\(X_t = 1.3 X_{t-1} - .7 X_{t-2} + \epsilon_t\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

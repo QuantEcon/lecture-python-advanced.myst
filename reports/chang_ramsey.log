@@ -1,19 +1,19 @@
 Traceback (most recent call last):
-  File "/Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+  File "/Users/matthewmckay/anaconda3/envs/lecture-datascience/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
     executenb(
-  File "/Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages/nbclient/client.py", line 1087, in execute
+  File "/Users/matthewmckay/anaconda3/envs/lecture-datascience/lib/python3.8/site-packages/nbclient/client.py", line 1087, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
+  File "/Users/matthewmckay/anaconda3/envs/lecture-datascience/lib/python3.8/site-packages/nbclient/util.py", line 74, in wrapped
     return just_run(coro(*args, **kwargs))
-  File "/Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
+  File "/Users/matthewmckay/anaconda3/envs/lecture-datascience/lib/python3.8/site-packages/nbclient/util.py", line 53, in just_run
     return loop.run_until_complete(coro)
-  File "/Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
+  File "/Users/matthewmckay/anaconda3/envs/lecture-datascience/lib/python3.8/asyncio/base_events.py", line 616, in run_until_complete
     return future.result()
-  File "/Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages/nbclient/client.py", line 540, in async_execute
+  File "/Users/matthewmckay/anaconda3/envs/lecture-datascience/lib/python3.8/site-packages/nbclient/client.py", line 540, in async_execute
     await self.async_execute_cell(
-  File "/Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages/nbclient/client.py", line 832, in async_execute_cell
+  File "/Users/matthewmckay/anaconda3/envs/lecture-datascience/lib/python3.8/site-packages/nbclient/client.py", line 832, in async_execute_cell
     self._check_raise_for_error(cell, exec_reply)
-  File "/Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages/nbclient/client.py", line 740, in _check_raise_for_error
+  File "/Users/matthewmckay/anaconda3/envs/lecture-datascience/lib/python3.8/site-packages/nbclient/client.py", line 740, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
@@ -41,21 +41,21 @@ ch1.solve_sustainable()
 [0m[1;32m    232[0m                                       b_eq = beq_S, bounds=(self.w_bnds_s, \
 [1;32m    233[0m                                           self.p_bnds_s))
 
-[0;32m~/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages/scipy/optimize/_linprog.py[0m in [0;36mlinprog[0;34m(c, A_ub, b_ub, A_eq, b_eq, bounds, method, callback, options, x0)[0m
+[0;32m~/anaconda3/envs/lecture-datascience/lib/python3.8/site-packages/scipy/optimize/_linprog.py[0m in [0;36mlinprog[0;34m(c, A_ub, b_ub, A_eq, b_eq, bounds, method, callback, options, x0)[0m
 [1;32m    558[0m     [0mdisp[0m [0;34m=[0m [0msolver_options[0m[0;34m.[0m[0mget[0m[0;34m([0m[0;34m'disp'[0m[0;34m,[0m [0;32mFalse[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m    559[0m [0;34m[0m[0m
 [0;32m--> 560[0;31m     x, fun, slack, con, status, message = _postprocess(x, postsolve_args,
 [0m[1;32m    561[0m                                                        [0mcomplete[0m[0;34m,[0m [0mstatus[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 [1;32m    562[0m                                                        [0mmessage[0m[0;34m,[0m [0mtol[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages/scipy/optimize/_linprog_util.py[0m in [0;36m_postprocess[0;34m(x, postsolve_args, complete, status, message, tol, iteration, disp)[0m
+[0;32m~/anaconda3/envs/lecture-datascience/lib/python3.8/site-packages/scipy/optimize/_linprog_util.py[0m in [0;36m_postprocess[0;34m(x, postsolve_args, complete, status, message, tol, iteration, disp)[0m
 [1;32m   1536[0m     )
 [1;32m   1537[0m [0;34m[0m[0m
 [0;32m-> 1538[0;31m     status, message = _check_result(
 [0m[1;32m   1539[0m         [0mx[0m[0;34m,[0m [0mfun[0m[0;34m,[0m [0mstatus[0m[0;34m,[0m [0mslack[0m[0;34m,[0m [0mcon[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
 [1;32m   1540[0m         [0mbounds[0m[0;34m,[0m [0mtol[0m[0;34m,[0m [0mmessage[0m[0;34m[0m[0;34m[0m[0m
 
-[0;32m~/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages/scipy/optimize/_linprog_util.py[0m in [0;36m_check_result[0;34m(x, fun, status, slack, con, bounds, tol, message)[0m
+[0;32m~/anaconda3/envs/lecture-datascience/lib/python3.8/site-packages/scipy/optimize/_linprog_util.py[0m in [0;36m_check_result[0;34m(x, fun, status, slack, con, bounds, tol, message)[0m
 [1;32m   1451[0m         [0;31m# nearly basic feasible solution. Postsolving can make the solution[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 [1;32m   1452[0m         [0;31m# basic, however, this solution is NOT optimal[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
 [0;32m-> 1453[0;31m         [0;32mraise[0m [0mValueError[0m[0;34m([0m[0mmessage[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m

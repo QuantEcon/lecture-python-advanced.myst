@@ -331,7 +331,7 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /Users/matth
 <p>For example, outputs, prices, and dividends typically display  irregular but persistent growth.</p>
 <p>Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.</p>
 <p>Are there ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process?</p>
-<p>The answer provided by Hansen and Scheinkman <span id="id1">[<a class="reference internal" href="zreferences.html#id83">HS09</a>]</span> is yes.</p>
+<p>The answer provided by Hansen and Scheinkman <span id="id1">[<a class="reference internal" href="zreferences.html#id83" title="Lars Peter Hansen and José A Scheinkman. Long-term risk: an operator approach. Econometrica, 77(1):177–234, 2009.">HS09</a>]</span> is yes.</p>
 <p>They described  two classes of time series models that accommodate growth.</p>
 <p>They are</p>
 <ol class="simple">
@@ -340,7 +340,7 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /Users/matth
 </ol>
 <p>These two classes of processes are closely connected.</p>
 <p>If a process <span class="math notranslate nohighlight">\(\{y_t\}\)</span> is an additive functional and <span class="math notranslate nohighlight">\(\phi_t = \exp(y_t)\)</span>, then <span class="math notranslate nohighlight">\(\{\phi_t\}\)</span> is a multiplicative functional.</p>
-<p>Hansen and Sargent <span id="id2">[<a class="reference internal" href="zreferences.html#id85">HS08b</a>]</span> (chs. 5 and 8) describe discrete time versions of additive and multiplicative functionals.</p>
+<p>Hansen and Sargent <span id="id2">[<a class="reference internal" href="zreferences.html#id85" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton university press, 2008.">HS08b</a>]</span> (chs. 5 and 8) describe discrete time versions of additive and multiplicative functionals.</p>
 <p>In this lecture, we describe both  additive functionals and multiplicative functionals.</p>
 <p>We also describe and compute decompositions of additive and multiplicative processes into four components:</p>
 <ol class="simple">
@@ -350,7 +350,7 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /Users/matth
 <li><p>a <strong>martingale</strong></p></li>
 </ol>
 <p>We describe how to construct,  simulate,  and interpret these components.</p>
-<p>More details about  these concepts and algorithms  can be found in Hansen and Sargent <span id="id3">[<a class="reference internal" href="zreferences.html#id85">HS08b</a>]</span>.</p>
+<p>More details about  these concepts and algorithms  can be found in Hansen and Sargent <span id="id3">[<a class="reference internal" href="zreferences.html#id85" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton university press, 2008.">HS08b</a>]</span>.</p>
 <p>Let’s start with some imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -368,7 +368,7 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /Users/matth
 </div>
 <div class="section" id="a-particular-additive-functional">
 <h2><a class="toc-backref" href="#id12"><span class="section-number">29.2. </span>A Particular Additive Functional</a><a class="headerlink" href="#a-particular-additive-functional" title="Permalink to this headline">¶</a></h2>
-<p>Hansen and Sargent <span id="id4">[<a class="reference internal" href="zreferences.html#id85">HS08b</a>]</span>  describe a general class of additive functionals.</p>
+<p>Hansen and Sargent <span id="id4">[<a class="reference internal" href="zreferences.html#id85" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton university press, 2008.">HS08b</a>]</span>  describe a general class of additive functionals.</p>
 <p>This lecture focuses on a subclass of these: a scalar process <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> whose increments are driven by a Gaussian vector autoregression.</p>
 <p>Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
 by using linear state-space tools.</p>
@@ -487,7 +487,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 <div class="section" id="simulation">
 <h3><span class="section-number">29.3.1. </span>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h3>
 <p>When simulating we embed our variables into a bigger system.</p>
-<p>This system also constructs the components of the decompositions of <span class="math notranslate nohighlight">\(y_t\)</span> and of <span class="math notranslate nohighlight">\(\exp(y_t)\)</span> proposed by Hansen and Scheinkman <span id="id5">[<a class="reference internal" href="zreferences.html#id83">HS09</a>]</span>.</p>
+<p>This system also constructs the components of the decompositions of <span class="math notranslate nohighlight">\(y_t\)</span> and of <span class="math notranslate nohighlight">\(\exp(y_t)\)</span> proposed by Hansen and Scheinkman <span id="id5">[<a class="reference internal" href="zreferences.html#id83" title="Lars Peter Hansen and José A Scheinkman. Long-term risk: an operator approach. Econometrica, 77(1):177–234, 2009.">HS09</a>]</span>.</p>
 <p>All of these objects are computed using the code below</p>
 <div class="cell docutils container" id="amf-lss">
 <div class="cell_input docutils container">
@@ -971,7 +971,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 </div>
 <div class="section" id="decomposition">
 <h3><span class="section-number">29.3.2. </span>Decomposition<a class="headerlink" href="#decomposition" title="Permalink to this headline">¶</a></h3>
-<p>Hansen and Sargent <span id="id6">[<a class="reference internal" href="zreferences.html#id85">HS08b</a>]</span> describe how to construct a decomposition of
+<p>Hansen and Sargent <span id="id6">[<a class="reference internal" href="zreferences.html#id85" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton university press, 2008.">HS08b</a>]</span> describe how to construct a decomposition of
 an additive functional into four parts:</p>
 <ul class="simple">
 <li><p>a constant inherited from initial values <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span></p></li>
@@ -989,7 +989,7 @@ functionals defined by <a class="reference internal" href="#equation-old1-additi
   g &amp; := D (I - A)^{-1}
 \end{aligned}
 \end{split}\]</div>
-<p>Then the Hansen-Scheinkman <span id="id7">[<a class="reference internal" href="zreferences.html#id83">HS09</a>]</span> decomposition is</p>
+<p>Then the Hansen-Scheinkman <span id="id7">[<a class="reference internal" href="zreferences.html#id83" title="Lars Peter Hansen and José A Scheinkman. Long-term risk: an operator approach. Econometrica, 77(1):177–234, 2009.">HS09</a>]</span> decomposition is</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -1171,7 +1171,7 @@ for a limited horizon <span class="math notranslate nohighlight">\(T\)</span>.</
 </div>
 <div class="section" id="peculiar-large-sample-property">
 <h3><span class="section-number">29.4.2. </span>Peculiar Large Sample Property<a class="headerlink" href="#peculiar-large-sample-property" title="Permalink to this headline">¶</a></h3>
-<p>Hansen and Sargent <span id="id8">[<a class="reference internal" href="zreferences.html#id85">HS08b</a>]</span> (ch. 8) describe the following two properties of the  martingale component
+<p>Hansen and Sargent <span id="id8">[<a class="reference internal" href="zreferences.html#id85" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton university press, 2008.">HS08b</a>]</span> (ch. 8) describe the following two properties of the  martingale component
 <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> of the multiplicative decomposition</p>
 <ul class="simple">
 <li><p>while <span class="math notranslate nohighlight">\(E_0 \widetilde M_t = 1\)</span> for all <span class="math notranslate nohighlight">\(t \geq 0\)</span>,
@@ -1181,7 +1181,7 @@ zero almost surely</p></li>
 </ul>
 <p>The first property follows from the fact that <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> is a multiplicative martingale with initial condition
 <span class="math notranslate nohighlight">\(\widetilde M_0 = 1\)</span>.</p>
-<p>The second is a <strong>peculiar property</strong> noted and proved by Hansen and Sargent <span id="id9">[<a class="reference internal" href="zreferences.html#id85">HS08b</a>]</span>.</p>
+<p>The second is a <strong>peculiar property</strong> noted and proved by Hansen and Sargent <span id="id9">[<a class="reference internal" href="zreferences.html#id85" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton university press, 2008.">HS08b</a>]</span>.</p>
 <p>The following simulation of many paths of <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> illustrates both properties</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
