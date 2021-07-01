@@ -53,9 +53,11 @@ jobs:
           mkdir -p _build/html/_notebooks
           cp -u _build/jupyter/*.ipynb _build/html/_notebooks
       # Build HTML (Website)
+      # rm .doctress to remove `sphinx` rendering issues for ipywidget mimetypes
       - name: Build HTML
         shell: bash -l {0}
         run: |
+          rm -r _build/.doctrees
           jb build lectures --path-output ./
       - name: Save Build as Artifact
         uses: actions/upload-artifact@v1
