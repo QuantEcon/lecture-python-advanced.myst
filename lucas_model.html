@@ -323,13 +323,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: interpolation in /Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages (2.2.1)
-Requirement already satisfied: numba&gt;=0.47 in /Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages (from interpolation) (0.51.2)
-Requirement already satisfied: tempita&gt;=0.5.2 in /Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages (from interpolation) (0.5.2)
-Requirement already satisfied: numpy&gt;=1.18.1 in /Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages (from interpolation) (1.19.2)
-Requirement already satisfied: scipy&gt;=1.4.1 in /Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages (from interpolation) (1.5.2)
-Requirement already satisfied: setuptools in /Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages (from numba&gt;=0.47-&gt;interpolation) (50.3.1.post20201107)
-Requirement already satisfied: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /Users/matthewmckay/anaconda3/envs/lecture-python-advanced/lib/python3.8/site-packages (from numba&gt;=0.47-&gt;interpolation) (0.34.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: interpolation in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (2.2.1)
+Requirement already satisfied: numpy&gt;=1.18.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (1.19.2)
+Requirement already satisfied: tempita&gt;=0.5.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (0.5.2)
+Requirement already satisfied: scipy&gt;=1.4.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (1.5.2)
+Requirement already satisfied: numba&gt;=0.47 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (0.51.2)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.47-&gt;interpolation) (50.3.1.post20201107)
+Requirement already satisfied: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.47-&gt;interpolation) (0.34.0)
 </pre></div>
 </div>
 </div>
@@ -338,7 +338,7 @@ Requirement already satisfied: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /Users/matth
 <h2><a class="toc-backref" href="#id4"><span class="section-number">33.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>As stated in an <a class="reference external" href="https://python-intro.quantecon.org/markov_asset.html">earlier lecture</a>, an asset is a claim on a stream of prospective payments.</p>
 <p>What is the correct price to pay for such a claim?</p>
-<p>The elegant asset pricing model of Lucas <span id="id1">[<a class="reference internal" href="zreferences.html#id154" title="Robert E Lucas, Jr. Asset prices in an exchange economy. Econometrica: Journal of the Econometric Society, 46(6):1429–1445, 1978.">Luc78</a>]</span> attempts to answer this question in an equilibrium setting with risk-averse agents.</p>
+<p>The elegant asset pricing model of Lucas <span id="id1">[<a class="reference internal" href="zreferences.html#id154">Luc78</a>]</span> attempts to answer this question in an equilibrium setting with risk-averse agents.</p>
 <p>While we mentioned some consequences of Lucas’ model <a class="reference external" href="https://python-intro.quantecon.org/markov_asset.html#Risk-Neutral-Pricing">earlier</a>, it is now time to work through the model more carefully and try to understand where the fundamental asset pricing equation comes from.</p>
 <p>A side benefit of studying Lucas’ model is that it provides a beautiful illustration of model building in general and equilibrium pricing in competitive models in particular.</p>
 <p>Another difference to our <a class="reference external" href="https://python-intro.quantecon.org/markov_asset.html">first asset pricing lecture</a> is that the state space and shock will be continuous rather than discrete.</p>
