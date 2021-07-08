@@ -520,7 +520,7 @@ In particular, assume that
 :label: kf1&2
 
 \begin{aligned}
-  w_t  & =   \theta_t + e_t  \label{kf1}  \\
+  w_t  & =   \theta_t + e_t  \\
   \theta_{t+1} & =  \rho \theta_t + v_t
   \end{aligned}
 ```
@@ -684,14 +684,14 @@ industry $i$ receives a vector $w_t$ of *two* noisy signals
 on $\theta_t$:
 
 $$
-\begin{eqnarray*}
-\theta_{t+1} & = & \rho\theta_{t}+v_{t} \label{kf20} \\
-w_{t} & = & \begin{bmatrix}1\\
+\begin{aligned}
+\theta_{t+1} & = \rho\theta_{t}+v_{t} \\
+w_{t} & = \begin{bmatrix}1 \\
 1
 \end{bmatrix}\theta_{t}+\begin{bmatrix}e_{1t} \\
 e_{2t}
-\end{bmatrix} \label{kf21}
-\end{eqnarray*}
+\end{bmatrix}
+\end{aligned}
 $$
 
 To justify that we are constructing is a **pooling equilibrium** we can
@@ -833,7 +833,7 @@ We use the following representation for constructing the
 `quantecon.LinearStateSpace` instance.
 
 $$
-\begin{eqnarray*}
+\begin{aligned}
 \underbrace{\left[\begin{array}{c}
 e_{t+1}\\
 k_{t+1}^{i}\\
@@ -841,7 +841,7 @@ k_{t+1}^{i}\\
 P_{t+1}\\
 \theta_{t+1}\\
 v_{t+1}
-\end{array}\right]}_{x_{t+1}} & = & \underbrace{\left[\begin{array}{cccccc}
+\end{array}\right]}_{x_{t+1}} & =  \underbrace{\left[\begin{array}{cccccc}
 0 & 0 & 0 & 0 & 0 & 0\\
 \frac{\kappa}{\lambda-\rho} & \tilde{\lambda} & \frac{-1}{\lambda-\rho}\frac{\kappa\sigma_{e}^{2}}{p} & 0 & \frac{\rho}{\lambda-\rho} & 0\\
 -\kappa & 0 & \frac{\kappa\sigma_{e}^{2}}{p} & 0 & 0 & 1\\
@@ -870,7 +870,7 @@ z_{2,t+1}
 P_{t}\\
 e_{t}+\theta_{t}\\
 e_{t}
-\end{array}\right]}_{y_{t}} & = & \underbrace{\left[\begin{array}{cccccc}
+\end{array}\right]}_{y_{t}} & = \underbrace{\left[\begin{array}{cccccc}
 0 & 0 & 0 & 1 & 0 & 0\\
 1 & 0 & 0 & 0 & 1 & 0\\
 1 & 0 & 0 & 0 & 0 & 0
@@ -890,9 +890,9 @@ v_{t}
 z_{1,t+1}\\
 z_{2,t+1}\\
 w_{t+1}
-\end{array}\right] & \sim & \mathcal{N}\left(0,I\right)\\
-\kappa & = & \frac{\rho p}{p+\sigma_{e}^{2}}
-\end{eqnarray*}
+\end{array}\right] & \sim \mathcal{N}\left(0,I\right)\\
+\kappa & = \frac{\rho p}{p+\sigma_{e}^{2}}
+\end{aligned}
 $$
 
 This representation includes extraneous variables  such as $P_{t}$ in the
@@ -1097,7 +1097,7 @@ a firm receives in Townsend's original model.
 For this purpose, we include  equilibrium goods prices from  both industries appear in the state vector:
 
 $$
-\begin{eqnarray*}
+\begin{aligned}
 \underbrace{\left[\begin{array}{c}
 e_{1,t+1}\\
 e_{2,t+1}\\
@@ -1107,7 +1107,7 @@ P_{t+1}^{1}\\
 P_{t+1}^{2}\\
 \theta_{t+1}\\
 v_{t+1}
-\end{array}\right]}_{x_{t+1}} & = & \underbrace{\left[\begin{array}{cccccccc}
+\end{array}\right]}_{x_{t+1}} & = \underbrace{\left[\begin{array}{cccccccc}
 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
 \frac{\kappa}{\lambda-\rho} & \frac{\kappa}{\lambda-\rho} & \tilde{\lambda} & \frac{-1}{\lambda-\rho}\frac{\kappa\sigma_{e}^{2}}{p} & 0 & 0 & \frac{\rho}{\lambda-\rho} & 0\\
@@ -1146,7 +1146,7 @@ e_{1,t}+\theta_{t}\\
 e_{2,t}+\theta_{t}\\
 e_{1,t}\\
 e_{2,t}
-\end{array}\right]}_{y_{t}} & = & \underbrace{\left[\begin{array}{cccccccc}
+\end{array}\right]}_{y_{t}} & = \underbrace{\left[\begin{array}{cccccccc}
 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0\\
 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0\\
 1 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\
@@ -1175,9 +1175,9 @@ z_{1,t+1}\\
 z_{2,t+1}\\
 z_{3,t+1}\\
 w_{t+1}
-\end{array}\right] & \sim & \mathcal{N}\left(0,I\right)\\
-\kappa & = & \frac{\rho p}{2p+\sigma_{e}^{2}}
-\end{eqnarray*}
+\end{array}\right] & \sim \mathcal{N}\left(0,I\right)\\
+\kappa & = \frac{\rho p}{2p+\sigma_{e}^{2}}
+\end{aligned}
 $$
 
 ```{code-cell} python3
@@ -1387,8 +1387,8 @@ equilibrium hidden-state  reconstruction error variance in the two-signal model:
 
 ```{code-cell} python3
 display(Latex('$\\textbf{Reconstruction error variances}$'))
-display(Latex(f'One-noise structure: ${round(p_one, 6)}$'))
-display(Latex(f'Two-noise structure: ${round(p_two, 6)}$'))
+display(Latex(f'One-noise structure: {round(p_one, 6)}'))
+display(Latex(f'Two-noise structure: {round(p_two, 6)}'))
 ```
 
 Kalman gains  for the two
@@ -1396,8 +1396,8 @@ structures are
 
 ```{code-cell} python3
 display(Latex('$\\textbf{Kalman Gains}$'))
-display(Latex(f'One noisy-signal structure: ${round(κ_one, 6)}$'))
-display(Latex(f'Two noisy-signals structure: ${round(κ_two, 6)}$'))
+display(Latex(f'One noisy-signal structure: {round(κ_one, 6)}'))
+display(Latex(f'Two noisy-signals structure: {round(κ_two, 6)}'))
 ```
 
 ## Notes on History of the Problem
