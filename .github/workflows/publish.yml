@@ -36,6 +36,13 @@ jobs:
       - name: Display Pip Versions
         shell: bash -l {0}
         run: pip list
+      - name: Download "build" folder (cache)
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: cache.yml
+          branch: main
+          name: build-cache
+          path: _build
       # Build Assets (Download Notebooks and PDF via LaTeX)
       # - name: Build PDF from LaTeX
       #   shell: bash -l {0}
@@ -56,36 +63,39 @@ jobs:
           mkdir -p _build/html/_notebooks
           cp -u _build/jupyter/*.ipynb _build/html/_notebooks
       # Build HTML (Website)
+      # BUG: rm .doctress to remove `sphinx` rendering issues for ipywidget mimetypes
+      # and clear the sphinx cache for building final HTML documents.
       - name: Build HTML
         shell: bash -l {0}
         run: |
+          rm -r _build/.doctrees
           jb build lectures --path-output ./
       - name: Deploy website to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: _build/html/
-          # cname: python-advanced.quantecon.org
+          cname: python-advanced.quantecon.org
       - name: Upload "_build" folder (cache)
         uses: actions/upload-artifact@v2
         with:
           name: build-cache
           path: _build
-      # - name: Prepare lecture-python-advanced.notebooks sync
-      #   shell: bash -l {0}
-      #   run: |
-      #     mkdir -p _build/lecture-python-advanced.notebooks
-      #     cp -a _notebook_repo/. _build/lecture-python-advanced.notebooks
-      #     cp _build/jupyter/*.ipynb _build/lecture-python-advanced.notebooks
-      #     ls -a _build/lecture-python-advanced.notebooks
-      # - name: Commit latest notebooks to lecture-python-advanced.notebooks
-      #   uses: cpina/github-action-push-to-another-repository@master
-      #   env:
-      #     API_TOKEN_GITHUB: ${{ secrets.QUANTECON_SERVICES_PAT }}
-      #   with:
-      #     source-directory: '_build/lecture-python-advanced.notebooks/'
-      #     destination-repository-username: 'QuantEcon'
-      #     destination-repository-name: 'lecture-python-advanced.notebooks'
-      #     commit-message: 'auto publishing updates to notebooks'
-      #     destination-github-username: 'quantecon-services'
-      #     user-email: services@quantecon.org
+      - name: Prepare lecture-python-advanced.notebooks sync
+        shell: bash -l {0}
+        run: |
+          mkdir -p _build/lecture-python-advanced.notebooks
+          cp -a _notebook_repo/. _build/lecture-python-advanced.notebooks
+          cp _build/jupyter/*.ipynb _build/lecture-python-advanced.notebooks
+          ls -a _build/lecture-python-advanced.notebooks
+      - name: Commit latest notebooks to lecture-python-advanced.notebooks
+        uses: cpina/github-action-push-to-another-repository@master
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.QUANTECON_SERVICES_PAT }}
+        with:
+          source-directory: '_build/lecture-python-advanced.notebooks/'
+          destination-repository-username: 'QuantEcon'
+          destination-repository-name: 'lecture-python-advanced.notebooks'
+          commit-message: 'auto publishing updates to notebooks'
+          destination-github-username: 'quantecon-services'
+          user-email: services@quantecon.org
