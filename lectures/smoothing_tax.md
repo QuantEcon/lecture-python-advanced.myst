@@ -227,7 +227,7 @@ def consumption_incomplete(cp, s_path):
     db = ((1 - β) * v - y) / β
 
     for i, s in enumerate(s_path):
-        c_path[i] = (1 - β) * (v - b_path[i] * np.ones((n, 1)))[s, 0]
+        c_path[i] = (1 - β) * (v - np.full((n, 1), b_path[i]))[s, 0]
         b_path[i + 1] = b_path[i] + db[s, 0]
 
     return c_path, b_path[:-1], y[s_path]
@@ -255,7 +255,7 @@ fig, ax = plt.subplots(1, 2, figsize=(14, 4))
 
 ax[0].set_title('Consumption paths')
 ax[0].plot(np.arange(N_simul), c_path, label='incomplete market')
-ax[0].plot(np.arange(N_simul), c_bar * np.ones(N_simul), label='complete market')
+ax[0].plot(np.arange(N_simul), np.full(N_simul, c_bar), label='complete market')
 ax[0].plot(np.arange(N_simul), y_path, label='income', alpha=.6, ls='--')
 ax[0].legend()
 ax[0].set_xlabel('Periods')
@@ -289,7 +289,7 @@ fig, ax = plt.subplots(1, 2, figsize=(14, 4))
 
 ax[0].set_title('Tax collection paths')
 ax[0].plot(np.arange(N_simul), c_path, label='incomplete market')
-ax[0].plot(np.arange(N_simul), c_bar * np.ones(N_simul), label='complete market')
+ax[0].plot(np.arange(N_simul), np.full(N_simul, c_bar), label='complete market')
 ax[0].plot(np.arange(N_simul), y_path, label='govt expenditures', alpha=.6, ls='--')
 ax[0].legend()
 ax[0].set_xlabel('Periods')
@@ -584,7 +584,7 @@ class TaxSmoothingExample:
         plt.figure()
         plt.title('Tax collection paths')
         plt.plot(np.arange(N), self.T_path, label='incomplete market')
-        plt.plot(np.arange(N), self.T_bar * np.ones(N), label='complete market')
+        plt.plot(np.arange(N), np.full(N, self.T_bar), label='complete market')
         plt.plot(np.arange(N), self.g_path, label='govt expenditures', alpha=.6, ls='--')
         plt.legend()
         plt.xlabel('Periods')

@@ -179,7 +179,7 @@ Here is a graph of a long simulation of 102000 periods.
 :tags: ["scroll-output"]
 μ_grid = np.linspace(-0.09, 0.1, 100)
 
-log_example = CRRAutility(π=(1 / 3) * np.ones((3, 3)),
+log_example = CRRAutility(π=np.full((3, 3), 1 / 3),
                           G=np.array([0.1, 0.2, .3]),
                           Θ=np.ones(3))
 
@@ -539,7 +539,7 @@ Now let's move on to compute things step by step.
 #### Step 1
 
 ```{code-cell} python3
-u = CRRAutility(π=(1 / 3) * np.ones((3, 3)),
+u = CRRAutility(π=np.full((3, 3), 1 / 3),
                 G=np.array([0.1, 0.2, .3]),
                 Θ=np.ones(3))
 

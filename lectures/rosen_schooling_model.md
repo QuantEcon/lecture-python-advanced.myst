@@ -188,7 +188,7 @@ k = 4  # Number of periods of schooling required to become an engineer
 α_d = np.array([[0.1]])
 α_s = 1
 ε_1 = 1e-7
-λ_1 = np.ones((1, k)) * ε_1
+λ_1 = np.full((1, k), ε_1)
 # Use of ε_1 is trick to aquire detectability, see HS2013 p. 228 footnote 4
 l_λ = np.hstack((α_d, λ_1))
 π_h = np.array([[0]])
@@ -244,7 +244,7 @@ econ2 = DLE(info1, tech1, pref2)
 α_d = np.array([[0.1]])
 
 k = 7
-λ_1 = np.ones((1, k)) * ε_1
+λ_1 = np.full((1, k), ε_1)
 l_λ = np.hstack((α_d, λ_1))
 d1 = np.vstack((δ_n, np.zeros((k - 1, 1))))
 d2 = np.hstack((d1, np.eye(k)))
@@ -256,7 +256,7 @@ Pref3 = Preferences(β, l_λ, π_h, δ_h, θ_h)
 econ3 = DLE(info1, tech1, Pref3)
 
 k = 10
-λ_1 = np.ones((1, k)) * ε_1
+λ_1 = np.full((1, k), ε_1)
 l_λ = np.hstack((α_d, λ_1))
 d1 = np.vstack((δ_n, np.zeros((k - 1, 1))))
 d2 = np.hstack((d1, np.eye(k)))

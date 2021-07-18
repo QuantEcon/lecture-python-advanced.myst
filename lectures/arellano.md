@@ -480,7 +480,7 @@ def solve(model, tol=1e-8, maxiter=10_000):
     iBstar = np.zeros((ny, nB), int64)
     default_prob = np.zeros((ny, nB))
     default_states = np.zeros((ny, nB))
-    q = np.ones((ny, nB)) * 0.95
+    q = np.full((ny, nB), 0.95)
     Vd = np.zeros(ny)
     Vc, V, Vupd = np.zeros((ny, nB)), np.zeros((ny, nB)), np.zeros((ny, nB))
 
