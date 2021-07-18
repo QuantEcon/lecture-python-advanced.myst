@@ -1168,7 +1168,7 @@ beginning, i.e., $\theta^A_{t+10} =\theta^R_t \ \ \forall t \geq 0$.
 def abreu_plan(clq, T=1000, T_A=10, μ_bar=0.1, T_Plot=20):
 
     # Append Ramsey μ series to stick μ series
-    clq.μ_A = np.append(np.ones(T_A) * μ_bar, clq.μ_series[:-T_A])
+    clq.μ_A = np.append(np.full(T_A, μ_bar), clq.μ_series[:-T_A])
 
     # Calculate implied stick θ series
     clq.θ_A = np.zeros(T)

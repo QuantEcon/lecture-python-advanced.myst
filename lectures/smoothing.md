@@ -299,7 +299,7 @@ def complete_ss(β, b0, x0, A, C, S_y, T=12):
 
     # Constant level of consumption
     cbar = (1 - β) * (S_y @ rm @ x0 - b0)
-    c_hist = np.ones(T) * cbar
+    c_hist = np.full(T, cbar)
 
     # Debt
     x_hist, y_hist = lss.simulate(T)
@@ -743,7 +743,7 @@ def consumption_incomplete(cp, s_path):
     db = ((1 - β) * v - y) / β
 
     for i, s in enumerate(s_path):
-        c_path[i] = (1 - β) * (v - b_path[i] * np.ones((n, 1)))[s, 0]
+        c_path[i] = (1 - β) * (v - np.full((n, 1), b_path[i]))[s, 0]
         b_path[i + 1] = b_path[i] + db[s, 0]
 
     return c_path, b_path[:-1], y[s_path]
@@ -922,7 +922,7 @@ fig, ax = plt.subplots(1, 2, figsize=(14, 4))
 
 ax[0].set_title('Consumption paths')
 ax[0].plot(np.arange(N_simul), c_path, label='incomplete market')
-ax[0].plot(np.arange(N_simul), c_bar * np.ones(N_simul),
+ax[0].plot(np.arange(N_simul), np.full(N_simul, c_bar),
                     label='complete market')
 ax[0].plot(np.arange(N_simul), y_path, label='income', alpha=.6, ls='--')
 ax[0].legend()

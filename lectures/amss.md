@@ -779,8 +779,8 @@ x_grid = UCGrid((x_min, x_max, x_num))
 crra_pref = CRRAutility(β=β, σ=σ, γ=γ)
 
 S = len(Π)
-bounds_v = np.vstack([np.hstack([np.ones(S) * -10., np.zeros(S)]),
-                      np.hstack([np.ones(S) - g, np.ones(S) * 10])]).T
+bounds_v = np.vstack([np.hstack([np.full(S, -10.), np.zeros(S)]),
+                      np.hstack([np.ones(S) - g, np.full(S, 10.)])]).T
 
 amss_model = AMSS(crra_pref, β, Π, g, x_grid, bounds_v)
 ```
@@ -906,7 +906,7 @@ state-contingent debt (circles) and the economy with only a risk-free bond
 ```{code-cell} python3
 # WARNING: DO NOT EXPECT THE CODE TO WORK IF YOU CHANGE PARAMETERS
 ψ = 0.69
-Π = 0.5 * np.ones((2, 2))
+Π = np.full((2, 2), 0.5)
 β = 0.9
 g = np.array([0.1, 0.2])
 
@@ -923,11 +923,11 @@ bounds_v = np.vstack([np.zeros(2 * S), np.hstack([1 - g, np.ones(S)]) ]).T
 V = np.zeros((len(Π), x_num))
 V[:] = -(nodes(x_grid).T + x_max) ** 2 / 14
 
-σ_v_star = 1 - np.ones((S, x_num, S * 2)) * 0.55
+σ_v_star = 1 - np.full((S, x_num, S * 2), 0.55)
 
 W = np.empty(len(Π))
 b_0 = 0.5
-σ_w_star = 1 - np.ones((S, 2)) * 0.55
+σ_w_star = 1 - np.full((S, 2), 0.55)
 
 amss_model = AMSS(log_pref, β, Π, g, x_grid, bounds_v)
 ```
