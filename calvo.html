@@ -392,13 +392,11 @@ Requirement already satisfied, skipping upgrade: requests in /usr/share/minicond
 Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
 Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
 Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
 Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
 Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
 Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
 </pre></div>
 </div>
 </div>
@@ -1415,7 +1413,7 @@ beginning, i.e., <span class="math notranslate nohighlight">\(\theta^A_{t+10} =\
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">abreu_plan</span><span class="p">(</span><span class="n">clq</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">T_A</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">μ_bar</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">T_Plot</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
 
     <span class="c1"># Append Ramsey μ series to stick μ series</span>
-    <span class="n">clq</span><span class="o">.</span><span class="n">μ_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T_A</span><span class="p">)</span> <span class="o">*</span> <span class="n">μ_bar</span><span class="p">,</span> <span class="n">clq</span><span class="o">.</span><span class="n">μ_series</span><span class="p">[:</span><span class="o">-</span><span class="n">T_A</span><span class="p">])</span>
+    <span class="n">clq</span><span class="o">.</span><span class="n">μ_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">T_A</span><span class="p">,</span> <span class="n">μ_bar</span><span class="p">),</span> <span class="n">clq</span><span class="o">.</span><span class="n">μ_series</span><span class="p">[:</span><span class="o">-</span><span class="n">T_A</span><span class="p">])</span>
 
     <span class="c1"># Calculate implied stick θ series</span>
     <span class="n">clq</span><span class="o">.</span><span class="n">θ_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
