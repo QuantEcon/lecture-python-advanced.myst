@@ -5,7 +5,7 @@ class LogUtility:
     def __init__(self,
                  β=0.9,
                  ψ=0.69,
-                 π=0.5*np.ones((2, 2)),
+                 π=np.full((2, 2), 0.5),
                  G=np.array([0.1, 0.2]),
                  Θ=np.ones(2),
                  transfers=False):

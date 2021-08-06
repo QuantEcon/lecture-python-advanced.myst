@@ -7,7 +7,7 @@ class CRRAutility:
                  β=0.9,
                  σ=2,
                  γ=2,
-                 π=0.5*np.ones((2, 2)),
+                 π=np.full((2, 2), 0.5),
                  G=np.array([0.1, 0.2]),
                  Θ=np.ones(2),
                  transfers=False):
