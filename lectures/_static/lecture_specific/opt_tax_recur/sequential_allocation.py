@@ -10,7 +10,7 @@ class SequentialLS:
 
     def __init__(self,
                  pref,
-                 π=0.5*np.ones((2, 2)),
+                 π=np.full((2, 2), 0.5),
                  g=np.array([0.1, 0.2])):
 
         # Initialize from pref object attributes
@@ -42,7 +42,7 @@ class SequentialLS:
         '''
         S, g = self.S, self.g
 
-        res = root(self.FOC_first_best, 0.5 * np.ones(S), args=(g,))
+        res = root(self.FOC_first_best, np.full(S, 0.5), args=(g,))
 
         if (res.fun > 1e-10).any():
             raise Exception('Could not find first best')

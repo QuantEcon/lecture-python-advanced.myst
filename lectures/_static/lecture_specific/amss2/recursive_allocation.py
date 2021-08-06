@@ -184,7 +184,7 @@ class BellmanEquation:
             n = z[S:]
             return np.hstack([Θ * Uc(c, n) + Un(c, n), Θ * n - c - G])
 
-        res = root(res, 0.5 * np.ones(2 * S))
+        res = root(res, np.full(2 * S, 0.5))
         if not res.success:
             raise Exception('Could not find first best')
 

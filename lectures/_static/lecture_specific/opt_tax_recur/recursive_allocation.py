@@ -8,7 +8,7 @@ class RecursiveLS:
     def __init__(self,
                  pref,
                  x_grid,
-                 π=0.5*np.ones((2, 2)),
+                 π=np.full((2, 2), 0.5),
                  g=np.array([0.1, 0.2])):
 
         self.π, self.g, self.S = π, g, len(π)
