@@ -206,7 +206,7 @@ print(econ2.css, econ2.iss, econ2.kss)
 The first graph shows that there seems to be a downward trend in both
 consumption and investment.
 
-his is a consequence of the decrease in the largest endogenous
+This is a consequence of the decrease in the largest endogenous
 eigenvalue from unity in the earlier economy, caused by the higher
 adjustment cost.
 
