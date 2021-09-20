@@ -1462,7 +1462,7 @@ they are the same as their own.
 {cite}`sargent91` proposed a way to compute an equilibrium
 without making Townsend’s approximation.
 
-Extending the reasoning of {cite}`muth1960`, Sargent noticed that it is possible to
+Extending the reasoning of {cite}`Muth1960`, Sargent noticed that it is possible to
 summarize the relevant history with a low dimensional object, namely, a
 small number of current and lagged forecasting errors.
 
