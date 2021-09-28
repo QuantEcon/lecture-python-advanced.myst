@@ -1,4 +1,4 @@
-z---
+---
 jupytext:
   text_representation:
     extension: .md
@@ -46,16 +46,18 @@ We  begin with a **key asset pricing equation**:
 
 
 $$
- E m R^i = 1  
+E m R^i = 1  
 $$ (eq:EMR1)
 
 for $i=1, \ldots, I$ and where
  
-$$\begin{aligned}
+$$
+\begin{aligned}
 m &=\text { stochastic discount factor } \\
 R^{i} &= \text {random gross return  on asset }  i \\
 E &\sim \text { mathematical expectation }
-\end{aligned}$$
+\end{aligned}
+$$
 
 The random gross returns $R^i$ and the scalar stochastic discount factor $m$ live 
 live in a common probability space. 
@@ -87,7 +89,9 @@ $\operatorname{cov}\left(m, R^{i}\right)  =  E (m - E m)(R^i - E R^i) $
 of a
 covariance implies that
 
-$$ E m R^i = E m E R^{i}+\operatorname{cov}\left(m, R^{i}\right)  $$
+$$ 
+E m R^i = E m E R^{i}+\operatorname{cov}\left(m, R^{i}\right)
+$$
 
 Substituting this result into 
 key equation {eq}`eq:EMR1` gives
@@ -119,11 +123,14 @@ $$
 
 which can be rearranged to become
 
-$$E R^i = R^{f}-\operatorname{cov}\left(m, R^{i}\right) R^{f} . $$
+$$
+E R^i = R^{f}-\operatorname{cov}\left(m, R^{i}\right) R^{f} . 
+$$
 
 It follows that we can express an **excess return** $E R^{i}-R^{f}$ on asset $i$ relative to the risk-free rate as
 
-$$ E R^{i}-R^{f} = -\operatorname{cov}\left(m, R^{i}\right) R^{f} 
+$$ 
+E R^{i}-R^{f} = -\operatorname{cov}\left(m, R^{i}\right) R^{f} 
 $$ (eq:EMR3)
  
 
@@ -157,11 +164,15 @@ To interpret this representation it helps to provide the following widely used e
 
 A popular model of $m$ is
 
-$$ m_{t+1} = \exp(-\rho) \exp(- \gamma(c_{t+1} - c_t)) $$
+$$ 
+m_{t+1} = \exp(-\rho) \exp(- \gamma(c_{t+1} - c_t)) 
+$$
 
 where $ \rho > 0$, $\gamma > 0$,  and the log of consumption growth is governed by
 
-$$ c_{t+1} - c_t = \mu + \sigma_c \epsilon_{t+1} $$
+$$ 
+c_{t+1} - c_t = \mu + \sigma_c \epsilon_{t+1} 
+$$
 
 where $\epsilon_{t+1} \sim {\mathcal N}(0,1)$.
 
@@ -173,15 +184,21 @@ Here
   
 
 
-$$ m_{t+1} = \exp(-\rho) \exp( - \gamma \mu - \gamma \sigma_c \epsilon_{t+1}) $$
+$$ 
+m_{t+1} = \exp(-\rho) \exp( - \gamma \mu - \gamma \sigma_c \epsilon_{t+1}) 
+$$
 
 In this case 
 
-$$ E m_{t+1} = \exp(-\rho) \exp \left( - \gamma \mu + \frac{\sigma_c^2 \gamma^2}{2} \right) $$
+$$ 
+E m_{t+1} = \exp(-\rho) \exp \left( - \gamma \mu + \frac{\sigma_c^2 \gamma^2}{2} \right) 
+$$
 
 and 
 
-$$ \operatorname{var}(m_{t+1}) = E(m) [ \exp(\sigma_c^2 \gamma^2) - 1) ] $$
+$$ 
+\operatorname{var}(m_{t+1}) = E(m) [ \exp(\sigma_c^2 \gamma^2) - 1) ] 
+$$
 
 When $\gamma >0$, it is true that  
 
@@ -224,7 +241,8 @@ $$ (eq:EMR5)
 
 where $\rho_{m, R^i}$ is the correlation coefficient  defined as
 
-$$ \rho_{m, R^i} \equiv \frac{\operatorname{cov}\left(m, R^{i}\right)}{\sigma(m) \sigma\left(R^{i}\right)} 
+$$ 
+\rho_{m, R^i} \equiv \frac{\operatorname{cov}\left(m, R^{i}\right)}{\sigma(m) \sigma\left(R^{i}\right)} 
 $$
 
 
@@ -232,7 +250,9 @@ and where $\sigma$ denotes the standard deviation of the variable in parentheses
 
 Equation {eq}`eq:EMR5`  implies
 
-$$E R^{i}=R^{f}-\rho_{m, R^i} \frac{\sigma(m)}{E(m)} \sigma\left(R^{i}\right)$$
+$$
+E R^{i}=R^{f}-\rho_{m, R^i} \frac{\sigma(m)}{E(m)} \sigma\left(R^{i}\right)
+$$
 
 Because $\rho_{m, R^i} \in [-1,1]$, it follows that  $|\rho_{m, R^i}| \leq 1$ and that
 
@@ -250,14 +270,18 @@ Evidently, points on the frontier correspond to gross returns that are perfectly
 
 We summarize this observation  as
 
-$$\rho_{m, R^{i}}=\left\{\begin{array}{ll}
+$$
+\rho_{m, R^{i}}=\left\{\begin{array}{ll}
 +1 & \implies R^i \text { is on  lower frontier } \\
 -1 & \implies R^i \text { is on  an upper frontier }
-\end{array}\right.$$
+\end{array}\right.
+$$
 
 The image below illustrates a mean-variance frontier.
 
-<img src = "./AssetPricing_v1.jpg" style="zoom:60%">
+```{figure} _static/lecture_specific/asset_pricing_lph/AssetPricing_v1.jpg
+:scale: 60%
+```
 
 The mathematical  structure of the mean-variance frontier described by inequality {eq}`eq:ERM6` implies 
 that
@@ -285,7 +309,8 @@ that
 
 - for any mean-variance-efficient return $R^{m v}$ that is on the frontier but that is  **not** $R^{f}$, there exists  a **single-beta representation** for any return $R^i$ that takes the form:
 
-$$ E R^{i}=R^{f}+\beta_{i, R^{m v}}\left[E\left(R^{m v}\right)-R^{f}\right] 
+$$ 
+E R^{i}=R^{f}+\beta_{i, R^{m v}}\left[E\left(R^{m v}\right)-R^{f}\right] 
 $$ (eq:EMR7) 
    
 - The special case of a single-beta representation {eq}`eq:EMR7` with $ R^{i}=R^{m v}$   is 
@@ -308,7 +333,8 @@ Two representations are often used in empirical work.
 One is a  **time-series regression** of  gross return $R_t^i$ on multiple
 risk factors $f_t^j, j = a, b, \ldots $ that is designed to uncover exposures of return $R^i$ to each of a set of  **risk-factors** $f_t^j, j = a, b, \ldots, $:
 
-- $$R_{t}^{i}=a_{i}+\beta_{i, a} f_{t}^{a}+\beta_{i, b} f_{t}^{b}+\ldots+\epsilon_{t}^{i}, \quad t=1,2, \ldots, T\\
+$$
+R_{t}^{i}=a_{i}+\beta_{i, a} f_{t}^{a}+\beta_{i, b} f_{t}^{b}+\ldots+\epsilon_{t}^{i}, \quad t=1,2, \ldots, T\\
 \epsilon_{t}^{i} \perp f_{t}^{j}, i=1,2, \ldots, I; j = a, b, \ldots 
 $$
 
@@ -362,7 +388,9 @@ The basic idea is to implement the following two steps.
 $E R^i$ over some period and then  estimate the  **cross-section regression**
 
 
-$$\underbrace{E\left(R^{i}\right)}_{\text{average return over time series}}=\gamma+\underbrace{\beta_{i, a}}_{\text{regressor}\quad} \underbrace{\lambda_{a}}_{\text{regression}\\\text{coefficient}}+\underbrace{\beta_{i, b}}_{\text{regressor}\quad} \underbrace{\lambda_{b}}_{\text{regression}\\\text{coefficient}}+\cdots+\underbrace{\alpha_{i}}_{\text{pricing errors}}, i=1, \ldots, I; \quad \underbrace{\alpha_i \perp \beta_{i,j},j = a, b, \ldots}_{\text{least squares orthogonality condition}}$$
+$$
+\underbrace{E\left(R^{i}\right)}_{\text{average return over time series}}=\gamma+\underbrace{\beta_{i, a}}_{\text{regressor}\quad} \underbrace{\lambda_{a}}_{\text{regression}\\\text{coefficient}}+\underbrace{\beta_{i, b}}_{\text{regressor}\quad} \underbrace{\lambda_{b}}_{\text{regression}\\\text{coefficient}}+\cdots+\underbrace{\alpha_{i}}_{\text{pricing errors}}, i=1, \ldots, I; \quad \underbrace{\alpha_i \perp \beta_{i,j},j = a, b, \ldots}_{\text{least squares orthogonality condition}}
+$$
 
 - estimate $\gamma, \lambda_{a}, \lambda_{b}, \ldots$ by an appropriate regression technique, being thoughtful about recognizing that the regressors have been generated by a step 1 regression.
 
