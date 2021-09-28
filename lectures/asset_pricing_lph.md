@@ -1,4 +1,4 @@
----
+z---
 jupytext:
   text_representation:
     extension: .md
@@ -11,10 +11,17 @@ kernelspec:
   name: python3
 ---
 
-## Elementary asset pricing theory
+# Elementary Asset Pricing Theory
 
 
-This lecture summarize the heart of applied asset-pricing theory.
+```{index} single: Elementary Asset Pricing
+```
+
+```{contents} Contents
+:depth: 2
+```
+
+This lecture summarizes the heart of applied asset-pricing theory.
 
 From a single equation, we'll derive 
 
@@ -29,6 +36,11 @@ To do this, we use two ideas:
   * an asset pricing equation
   
   * a Cauchy-Schwartz inequality
+
+
+For background and basic  concepts, see our lecture [orthogonal projections and their applications](https://python-advanced.quantecon.org/orth_proj.html).
+
+As a sequel to the material here, please see our lecture [two modifications of mean-variance portfolio theory](https://python-advanced.quantecon.org/black_litterman.html).
 
 We  begin with a **key asset pricing equation**:
 
