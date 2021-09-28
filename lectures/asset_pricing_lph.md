@@ -352,20 +352,15 @@ Model objects are interpreted as follows:
    
    
 
-The other representation entails  a **cross-section regression**  of **average returns** to assets
-$i =1, 2, \ldots, I$ on *prices of risk* $\lambda_j$ for $j =a, b, c, \ldots$ 
+The other representation entails  a **cross-section regression**  of **average returns** $E R^i$ for  assets
+$i =1, 2, \ldots, I$ on **prices of risk** $\lambda_j$ for $j =a, b, c, \ldots$ 
 
 Here is the regression specification:
 
 
 $$
-\begin{aligned}
-E R^{i} &  =\gamma+\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots
- & \quad \text{for } i=1,2, \ldots, I \sim \text { returns } R^i
- \lambda_{j}, & j=a, b, \ldots \ldots = \text { price of  exposure } 
- \text { to risk factor } a, b, \ldots 
-\end{aligned}
-$$
+E R^{i}   =\gamma+\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots
+ $$
 
 
 +++
