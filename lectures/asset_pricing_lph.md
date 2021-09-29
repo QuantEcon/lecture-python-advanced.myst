@@ -454,20 +454,20 @@ Please assume the parameter values set below and then simulate 2000 observations
 above for 5 assets, $i = 1, \ldots, 5$.
 
 \begin{align*}
-  E\left[R^f\right] &= 0.02  \\
-  \sigma_f &= 0.00 \\
-  \xi &= 0.06 \\
-  \lambda &= 0.04 \\
-  \beta_{1, R^m} &= 0.2 \\
-  \sigma_1 &= 0.04 \\
-  \beta_{2, R^m} &= .4 \\
-  \sigma_2 &= 0.04 \\
-  \beta_{3, R^m} &= .6 \\
-  \sigma_3 &= 0.04 \\
-  \beta_{4, R^m} &= .8 \\
-  \sigma_4 &= 0.04 \\
-  \beta_{5, R^m} &= 1.0 \\
-  \sigma_5 &= 0.04 \\
+E\left[R^f\right] &= 0.02 \\
+\sigma_f &= 0.00 \\
+\xi &= 0.06 \\
+\lambda &= 0.04 \\
+\beta_{1, R^m} &= 0.2 \\
+\sigma_1 &= 0.04 \\
+\beta_{2, R^m} &= .4 \\
+\sigma_2 &= 0.04 \\
+\beta_{3, R^m} &= .6 \\
+\sigma_3 &= 0.04 \\
+\beta_{4, R^m} &= .8 \\
+\sigma_4 &= 0.04 \\
+\beta_{5, R^m} &= 1.0 \\
+\sigma_5 &= 0.04
 \end{align*}
 
 ## Exercises (Intermediate)
@@ -476,13 +476,15 @@ Now come some even more fun parts!
 
 Our theory implies that there exist values of  two scalars, $a$ and $b$, such that  a legitimate stochastic discount factor is:
 
-$$m_t = a + b R^m_t$$
+$$
+m_t = a + b R^m_t
+$$
 
 The parameters $a, b$ must satisfy the following equations:
 
 \begin{align*}
-  E[(a + b R_t^m) R^m_t)] &= 1 \\
-  E[(a + b R_t^m) R^f_t)] &= 1 \\
+E[(a + b R_t^m) R^m_t)] &= 1 \\
+E[(a + b R_t^m) R^f_t)] &= 1
 \end{align*}
 
 ### Exercise 4
@@ -637,10 +639,10 @@ Q: How close did your estimates come to the parameters we specified?
 
 ### Solution to Exercise 4
 
-$$\begin{align}
+\begin{align}
 a ((E(R^f) + \xi) + b ((E(R^f) + \xi)^2 + \lambda^2 + \sigma_f^2) & =1 \cr
 a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) & = 1 
-\end{align}$$
+\end{align}
 
 ```{code-cell} ipython3
 # Code here
