@@ -396,3 +396,286 @@ For excess returns $R^{ei} = R^i - R^f$ we have
 $$
 E R^{e i}=\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots+\alpha_{i}, i=1, \ldots, I
 $$
+
+## Exercises (Introductory)
+
+Let's start with some imports.
+
+```{code-cell} ipython3
+import numpy as np
+from scipy.stats import stats
+import statsmodels.api as sm
+from statsmodels.sandbox.regression.gmm import GMM
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+Lots of our calculations will involve computing population and sample OLS regressions.
+
+So we define a function for simple univariate OLS regression that calls the `OLS` routine from `statsmodels`.
+
+```{code-cell} ipython3
+def simple_ols(X, Y, constant=False):
+
+    if constant:
+        X = sm.add_constant(X)
+
+    model = sm.OLS(Y, X)
+    res = model.fit()
+
+    β_hat = res.params[-1]
+    σ_hat = np.sqrt(res.resid @ res.resid / res.df_resid)
+
+    return β_hat, σ_hat
+```
+
+### Exercise 1
+
+Look at the equation, 
+
+$$
+R^i_t - R^f = \beta_{i, R^m} (R^m_t - R^f) + \sigma_i \varepsilon_{i, t}.
+$$
+
+Verify that this equation is a regression equation.
+
+### Exercise 2
+
+Give a formula for the regression coefficient $\beta_{i, R^m}$.
+
+### Exercise 3
+
+Recall our earlier discussions of a **direct problem** and an **inverse problem**.
+
+* A direct problem is about simulating a particular model.
+* An inverse problem is about using data to **estimate** or **choose** a particular model from a manifold of models.
+
+Please assume the parameter values set below and then simulate 2000 observations from the theory specified
+above for 5 assets, $i = 1, \ldots, 5$.
+
+\begin{align*}
+  E\left[R^f\right] &= 0.02  \\
+  \sigma_f &= 0.00 \\
+  \xi &= 0.06 \\
+  \lambda &= 0.04 \\
+  \beta_{1, R^m} &= 0.2 \\
+  \sigma_1 &= 0.04 \\
+  \beta_{2, R^m} &= .4 \\
+  \sigma_2 &= 0.04 \\
+  \beta_{3, R^m} &= .6 \\
+  \sigma_3 &= 0.04 \\
+  \beta_{4, R^m} &= .8 \\
+  \sigma_4 &= 0.04 \\
+  \beta_{5, R^m} &= 1.0 \\
+  \sigma_5 &= 0.04 \\
+\end{align*}
+
+## Exercises (Intermediate)
+
+Now come some even more fun parts!
+
+Our theory implies that there exist values of  two scalars, $a$ and $b$, such that  a legitimate stochastic discount factor is:
+
+$$m_t = a + b R^m_t$$
+
+The parameters $a, b$ must satisfy the following equations:
+
+\begin{align*}
+  E[(a + b R_t^m) R^m_t)] &= 1 \\
+  E[(a + b R_t^m) R^f_t)] &= 1 \\
+\end{align*}
+
+### Exercise 4
+
+Using the equations above, find a system of two **linear** equations that you can solve for $a$ and $b$ as functions of the parameters $(\lambda, \xi, E[R_f])$.
+
+Write a function that can solve these equations.
+
+Please check the **condition number** of a key matrix that must be inverted to determine a, b
+
+### Exercise 5
+
+Using the estimates of the parameters that you generated above, compute the implied stochastic discount factor.
+
+
+
+## Solutions (Introductory)
+
+### Solution to Exercise 1
+
+To verify that it is a **regression equation** we must show that the residual is orthogonal to the regressor.
+
+Our assumptions about mutual orthogonality imply that
+
+$$
+E\left[\epsilon_{i,t}\right]=0,\quad E\left[\epsilon_{i,t}u_{t}\right]=0
+$$
+
+It follows that
+
+$$
+\begin{aligned}
+E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&=E\left[\sigma_{i}\epsilon_{i,t}\left(\xi+\lambda u_{t}\right)\right] \\
+	&=\sigma_{i}\xi E\left[\epsilon_{i,t}\right]+\sigma_{i}\lambda E\left[\epsilon_{i,t}u_{t}\right] \\
+	&=0
+\end{aligned}
+$$
+
+### Solution to Exercise 2
+
+The regression coefficient $\beta_{i, R^m}$ is
+
+$$
+\beta_{i,R^{m}}=\frac{Cov\left(R_{t}^{i}-R^{f},R_{t}^{m}-R^{f}\right)}{Var\left(R_{t}^{m}-R^{f}\right)}
+$$
+
+### Solution to Exercise 3
+
+**Direct Problem:**
+
+```{code-cell} ipython3
+# Code for the direct problem
+
+# assign the parameter values
+ERf = 0.02
+σf = 0.00 # Zejin: Hi tom, here is where you manipulate σf
+ξ = 0.06
+λ = 0.08
+βi = np.array([0.2, .4, .6, .8, 1.0])
+σi = np.array([0.04, 0.04, 0.04, 0.04, 0.04])
+```
+
+```{code-cell} ipython3
+# in this cell we set the number of assets and number of observations
+# we first set T to a large number to verify our computation results
+T = 2000
+N = 5
+```
+
+```{code-cell} ipython3
+# simulate i.i.d. random shocks
+e = np.random.normal(size=T)
+u = np.random.normal(size=T)
+ϵ = np.random.normal(size=(N, T))
+```
+
+```{code-cell} ipython3
+# simulate the return on a risk-free asset
+Rf = ERf + σf * e
+
+# simulate the return on the market portfolio
+excess_Rm = ξ + λ * u
+Rm = Rf + excess_Rm
+
+# simulate the return on asset i
+Ri = np.empty((N, T))
+for i in range(N):
+    Ri[i, :] = Rf + βi[i] * excess_Rm + σi[i] * ϵ[i, :]
+```
+
+Now that we have a panel of data, we'd like to solve the inverse problem by assuming the theory specified above and estimating the coefficients given above.
+
+```{code-cell} ipython3
+# Code for the inverse problem
+```
+
+**Inverse Problem:**
+
+We will solve the inverse problem by simple OLS regressions.
+
+1. estimate $E\left[R^f\right]$ and $\sigma_f$
+
+```{code-cell} ipython3
+ERf_hat, σf_hat = simple_ols(np.ones(T), Rf)
+```
+
+```{code-cell} ipython3
+ERf_hat, σf_hat
+```
+
+Let's  compare these with the _true_ population parameter values.
+
+```{code-cell} ipython3
+ERf, σf
+```
+
+2. $\xi$ and $\lambda$
+
+```{code-cell} ipython3
+ξ_hat, λ_hat = simple_ols(np.ones(T), Rm - Rf)
+```
+
+```{code-cell} ipython3
+ξ_hat, λ_hat
+```
+
+```{code-cell} ipython3
+ξ, λ
+```
+
+3. $\beta_{i, R^m}$ and $\sigma_i$
+
+```{code-cell} ipython3
+βi_hat = np.empty(N)
+σi_hat = np.empty(N)
+
+for i in range(N):
+    βi_hat[i], σi_hat[i] = simple_ols(Rm - Rf, Ri[i, :] - Rf)
+```
+
+```{code-cell} ipython3
+βi_hat, σi_hat
+```
+
+```{code-cell} ipython3
+βi, σi
+```
+
+Q: How close did your estimates come to the parameters we specified?
+
+## Solutions (Intermediate)
+
+### Solution to Exercise 4
+
+$$\begin{align}
+a ((E(R^f) + \xi) + b ((E(R^f) + \xi)^2 + \lambda^2 + \sigma_f^2) & =1 \cr
+a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) & = 1 
+\end{align}$$
+
+```{code-cell} ipython3
+# Code here
+def solve_ab(ERf, σf, λ, ξ):
+
+    M = np.empty((2, 2))
+    M[0, 0] = ERf + ξ
+    M[0, 1] = (ERf + ξ) ** 2 + λ ** 2 + σf ** 2
+    M[1, 0] = ERf
+    M[1, 1] = ERf ** 2 + ξ * ERf + σf ** 2
+
+    a, b = np.linalg.solve(M, np.ones(2))
+    condM = np.linalg.cond(M)
+
+    return a, b, condM
+```
+
+Let's try to solve $a$ and $b$ using the actual model parameters.
+
+```{code-cell} ipython3
+a, b, condM = solve_ab(ERf, σf, λ, ξ)
+```
+
+```{code-cell} ipython3
+a, b, condM
+```
+
+### Solution to Exercise 5
+
+Now let's pass $\hat{E}(R^f), \hat{\sigma}^f, \hat{\lambda}, \hat{\xi}$ to the function `solve_ab`.
+
+```{code-cell} ipython3
+a_hat, b_hat, M_hat = solve_ab(ERf_hat, σf_hat, λ_hat, ξ_hat)
+```
+
+```{code-cell} ipython3
+a_hat, b_hat, M_hat
+```
