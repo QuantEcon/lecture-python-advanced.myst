@@ -21,6 +21,8 @@ kernelspec:
 :depth: 2
 ```
 
+## Overview
+
 This lecture summarizes the heart of applied asset-pricing theory.
 
 From a single equation, we'll derive 
@@ -41,6 +43,8 @@ To do this, we use two ideas:
 For background and basic  concepts, see our lecture [orthogonal projections and their applications](https://python-advanced.quantecon.org/orth_proj.html).
 
 As a sequel to the material here, please see our lecture [two modifications of mean-variance portfolio theory](https://python-advanced.quantecon.org/black_litterman.html).
+
+## Key Equation
 
 We  begin with a **key asset pricing equation**:
 
@@ -68,6 +72,8 @@ that end up having the same payouts must have the same price.
 
 They also explain how the __absence of an arbitrage__ implies that the stochastic discount
 factor $m \geq 0$.
+
+## Implications of Key Equation
 
 
 We combine  key equation {eq}`eq:EMR1` with a  remark of Lars Peter Hansen that   "asset pricing theory is all about covariances".
@@ -137,7 +143,7 @@ $$ (eq:EMR3)
 Equation {eq}`eq:EMR3` can be rearranged to display important parts of asset pricing theory.
 
 
-**Expected return - Beta representation**
+## Expected Return - Beta Representation
 
 We can obtain the celebrated **expected-return-Beta -representation** for gross return $R^i$ simply  by rearranging excess return equation {eq}`eq:EMR3` to become
 
@@ -217,7 +223,7 @@ An asset with an $R^i$ that is low when consumption growth is low has $\beta_i$ 
 
  
 
-**Mean-Variance Frontier**
+## Mean-Variance Frontier 
 
 Now we'll derive the celebrated **mean-variance frontier**.
 
@@ -320,7 +326,7 @@ $$ (eq:EMR7)
 
 +++
 
-**Empirical implementations**
+## Empirical Implementations
 
 
 We briefly describe empirical implementations of multi-factor generalizations of the single-factor model described above.  
@@ -397,7 +403,7 @@ $$
 E R^{e i}=\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots+\alpha_{i}, i=1, \ldots, I
 $$
 
-## Exercises (Introductory)
+## Exercises 
 
 Let's start with some imports.
 
@@ -470,7 +476,7 @@ E\left[R^f\right] &= 0.02 \\
 \sigma_5 &= 0.04
 \end{align*}
 
-## Exercises (Intermediate)
+**More Exercises**
 
 Now come some even more fun parts!
 
@@ -501,7 +507,7 @@ Using the estimates of the parameters that you generated above, compute the impl
 
 
 
-## Solutions (Introductory)
+## Solutions 
 
 ### Solution to Exercise 1
 
@@ -635,7 +641,7 @@ for i in range(N):
 
 Q: How close did your estimates come to the parameters we specified?
 
-## Solutions (Intermediate)
+
 
 ### Solution to Exercise 4
 
