@@ -349,7 +349,15 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/robustness.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="9. Markov Jump Linear Quadratic Dynamic Programming" href="markov_jump_lq.html" />
@@ -600,20 +608,20 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.1)
-Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
-Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
 Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
 Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
-Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
 Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
 Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
-Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
 Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
 </pre></div>
 </div>
 </div>
@@ -708,8 +716,8 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/m
 <h3><span class="section-number">8.1.3. </span>Other References<a class="headerlink" href="#other-references" title="Permalink to this headline">¶</a></h3>
 <p>Our discussion in this lecture is based on</p>
 <ul class="simple">
-<li><p><span id="id1">[<a class="reference internal" href="zreferences.html#id138">HS00</a>]</span></p></li>
-<li><p><span id="id2">[<a class="reference internal" href="zreferences.html#id137">HS08a</a>]</span></p></li>
+<li><p><span id="id1">[<a class="reference internal" href="zreferences.html#id145">HS00</a>]</span></p></li>
+<li><p><span id="id2">[<a class="reference internal" href="zreferences.html#id144">HS08a</a>]</span></p></li>
 </ul>
 </div>
 </div>
@@ -813,7 +821,7 @@ P = \mathcal B ( \mathcal D( P ))
 \]</div>
 <p>The operator <span class="math notranslate nohighlight">\(\mathcal B\)</span> is the standard (i.e., non-robust) LQ Bellman operator, and <span class="math notranslate nohighlight">\(P = \mathcal B(P)\)</span> is the standard matrix Riccati equation coming from the
 Bellman equation — see <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html#Infinite-Horizon">this discussion</a>.</p>
-<p>Under some regularity conditions (see <span id="id3">[<a class="reference internal" href="zreferences.html#id137">HS08a</a>]</span>), the operator <span class="math notranslate nohighlight">\(\mathcal B \circ \mathcal D\)</span>
+<p>Under some regularity conditions (see <span id="id3">[<a class="reference internal" href="zreferences.html#id144">HS08a</a>]</span>), the operator <span class="math notranslate nohighlight">\(\mathcal B \circ \mathcal D\)</span>
 has a unique positive definite fixed point, which we denote below by <span class="math notranslate nohighlight">\(\hat P\)</span>.</p>
 <p>A robust policy, indexed by <span class="math notranslate nohighlight">\(\theta\)</span>, is <span class="math notranslate nohighlight">\(u  = - \hat F x\)</span> where</p>
 <div class="math notranslate nohighlight" id="equation-rb-oc-ih">
@@ -1437,10 +1445,10 @@ loss minimizer.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7f56ae8007f0&gt;]
-[&lt;matplotlib.lines.Line2D object at 0x7f56ae7fbac0&gt;]
-[&lt;matplotlib.lines.Line2D object at 0x7f56ac2cf790&gt;]
-[&lt;matplotlib.lines.Line2D object at 0x7f56ac2cfee0&gt;]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fc971be28e0&gt;]
+[&lt;matplotlib.lines.Line2D object at 0x7fc971bd8b20&gt;]
+[&lt;matplotlib.lines.Line2D object at 0x7fc9706a9c10&gt;]
+[&lt;matplotlib.lines.Line2D object at 0x7fc9706cf130&gt;]
 </pre></div>
 </div>
 <img alt="_images/robustness_5_1.png" src="_images/robustness_5_1.png" />
@@ -1766,18 +1774,23 @@ latter is just <span class="math notranslate nohighlight">\(\hat P\)</span>.</p>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="asset_pricing_lph.html">
+   34. Elementary Asset Pricing Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   34. Two Modifications of Mean-Variance Portfolio Theory
+   35. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   35. Irrelevance of Capital Structure with Complete Markets
+   36. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   36. Equilibrium Capital Structures with Incomplete Markets
+   37. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1789,42 +1802,42 @@ latter is just <span class="math notranslate nohighlight">\(\hat P\)</span>.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   37. Stackelberg Plans
+   38. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   39. Optimal Taxation with State-Contingent Debt
+   40. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   40. Optimal Taxation without State-Contingent Debt
+   41. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+   42. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   42. Fiscal Risk and Government Debt
+   43. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   43. Competitive Equilibria of a Model of Chang
+   44. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   44. Credible Government Policies in a Model of Chang
+   45. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1836,17 +1849,17 @@ latter is just <span class="math notranslate nohighlight">\(\hat P\)</span>.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   45. Troubleshooting
+   46. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   46. References
+   47. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   47. Execution Statistics
+   48. Execution Statistics
   </a>
  </li>
 </ul>

@@ -293,10 +293,18 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/lucas_model.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="34. Two Modifications of Mean-Variance Portfolio Theory" href="black_litterman.html" />
+    <link rel="next" title="34. Elementary Asset Pricing Theory" href="asset_pricing_lph.html" />
     <link rel="prev" title="32. Knowing the Forecasts of Others" href="knowing_forecasts_of_others.html" />
 
 <!-- Normal Meta Tags -->
@@ -519,13 +527,38 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: interpolation in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (2.2.1)
-Requirement already satisfied: numba&gt;=0.47 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (0.51.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting interpolation
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading interpolation-2.2.1-py3-none-any.whl (56 kB)
+?25l
+     |█████▉                          | 10 kB 20.9 MB/s eta 0:00:01
+     |███████████▋                    | 20 kB 25.2 MB/s eta 0:00:01
+     |█████████████████▍              | 30 kB 31.0 MB/s eta 0:00:01
+     |███████████████████████▏        | 40 kB 12.4 MB/s eta 0:00:01
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     |█████████████████████████████   | 51 kB 6.7 MB/s eta 0:00:01
+     |████████████████████████████████| 56 kB 4.2 MB/s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25hRequirement already satisfied: numpy&gt;=1.18.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (1.19.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting tempita&gt;=0.5.2
+  Downloading Tempita-0.5.2-py3-none-any.whl (12 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.47 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (0.51.2)
 Requirement already satisfied: scipy&gt;=1.4.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (1.5.2)
-Requirement already satisfied: tempita&gt;=0.5.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (0.5.2)
-Requirement already satisfied: numpy&gt;=1.18.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (1.19.2)
 Requirement already satisfied: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.47-&gt;interpolation) (0.34.0)
 Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.47-&gt;interpolation) (50.3.1.post20201107)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: tempita, interpolation
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed interpolation-2.2.1 tempita-0.5.2
 </pre></div>
 </div>
 </div>
@@ -534,7 +567,7 @@ Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quanteco
 <h2><a class="toc-backref" href="#id4"><span class="section-number">33.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>As stated in an <a class="reference external" href="https://python-intro.quantecon.org/markov_asset.html">earlier lecture</a>, an asset is a claim on a stream of prospective payments.</p>
 <p>What is the correct price to pay for such a claim?</p>
-<p>The elegant asset pricing model of Lucas <span id="id1">[<a class="reference internal" href="zreferences.html#id154">Luc78</a>]</span> attempts to answer this question in an equilibrium setting with risk-averse agents.</p>
+<p>The elegant asset pricing model of Lucas <span id="id1">[<a class="reference internal" href="zreferences.html#id161">Luc78</a>]</span> attempts to answer this question in an equilibrium setting with risk-averse agents.</p>
 <p>While we mentioned some consequences of Lucas’ model <a class="reference external" href="https://python-intro.quantecon.org/markov_asset.html#Risk-Neutral-Pricing">earlier</a>, it is now time to work through the model more carefully and try to understand where the fundamental asset pricing equation comes from.</p>
 <p>A side benefit of studying Lucas’ model is that it provides a beautiful illustration of model building in general and equilibrium pricing in competitive models in particular.</p>
 <p>Another difference to our <a class="reference external" href="https://python-intro.quantecon.org/markov_asset.html">first asset pricing lecture</a> is that the state space and shock will be continuous rather than discrete.</p>
@@ -1213,18 +1246,23 @@ utility.</p>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="asset_pricing_lph.html">
+   34. Elementary Asset Pricing Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   34. Two Modifications of Mean-Variance Portfolio Theory
+   35. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   35. Irrelevance of Capital Structure with Complete Markets
+   36. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   36. Equilibrium Capital Structures with Incomplete Markets
+   37. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1236,42 +1274,42 @@ utility.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   37. Stackelberg Plans
+   38. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   39. Optimal Taxation with State-Contingent Debt
+   40. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   40. Optimal Taxation without State-Contingent Debt
+   41. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+   42. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   42. Fiscal Risk and Government Debt
+   43. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   43. Competitive Equilibria of a Model of Chang
+   44. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   44. Credible Government Policies in a Model of Chang
+   45. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1283,17 +1321,17 @@ utility.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   45. Troubleshooting
+   46. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   46. References
+   47. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   47. Execution Statistics
+   48. Execution Statistics
   </a>
  </li>
 </ul>

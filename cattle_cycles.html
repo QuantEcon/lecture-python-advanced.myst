@@ -167,7 +167,15 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/cattle_cycles.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="25. Shock Non Invertibility" href="hs_invertibility_example.html" />
@@ -309,7 +317,7 @@
 </ul>
 </div>
 <p>This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
-<span id="id2">[<a class="reference internal" href="zreferences.html#id53">HS13</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
+<span id="id2">[<a class="reference internal" href="zreferences.html#id60">HS13</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
 <p>In addition to what’s in Anaconda, this lecture uses the quantecon library.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
@@ -319,26 +327,26 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.1)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
 Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
-Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
-Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
-Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
-Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
-Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
 Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
 </pre></div>
 </div>
 </div>
 </div>
 <p>This lecture uses the DLE class to construct instances of  the “Cattle Cycles” model
-of Rosen, Murphy and Scheinkman (1994) <span id="id3">[<a class="reference internal" href="zreferences.html#id52">RMS94</a>]</span>.</p>
+of Rosen, Murphy and Scheinkman (1994) <span id="id3">[<a class="reference internal" href="zreferences.html#id59">RMS94</a>]</span>.</p>
 <p>That paper constructs a rational expectations equilibrium model to
 understand sources of recurrent cycles in US cattle stocks and prices.</p>
 <p>We make the following imports:</p>
@@ -494,7 +502,7 @@ A_{22} =
 </div>
 </div>
 </div>
-<p>We set parameters to those used by <span id="id4">[<a class="reference internal" href="zreferences.html#id52">RMS94</a>]</span></p>
+<p>We set parameters to those used by <span id="id4">[<a class="reference internal" href="zreferences.html#id59">RMS94</a>]</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.909</span><span class="p">]])</span>
@@ -634,7 +642,7 @@ baseline case of <span class="math notranslate nohighlight">\(\rho_3 = 0.6\)</sp
 </div>
 </div>
 </div>
-<p><span id="id5">[<a class="reference internal" href="zreferences.html#id52">RMS94</a>]</span> use the model to understand the
+<p><span id="id5">[<a class="reference internal" href="zreferences.html#id59">RMS94</a>]</span> use the model to understand the
 sources of recurrent cycles in total cattle stocks.</p>
 <p>Plotting <span class="math notranslate nohighlight">\(y_t\)</span> for a simulation of their model shows its ability
 to generate cycles in quantities</p>
@@ -654,7 +662,7 @@ to generate cycles in quantities</p>
 <img alt="_images/cattle_cycles_13_0.png" src="_images/cattle_cycles_13_0.png" />
 </div>
 </div>
-<p>In their Figure 3, <span id="id6">[<a class="reference internal" href="zreferences.html#id52">RMS94</a>]</span> plot the impulse response functions
+<p>In their Figure 3, <span id="id6">[<a class="reference internal" href="zreferences.html#id59">RMS94</a>]</span> plot the impulse response functions
 of consumption and the breeding stock of cattle to the demand shock,
 <span class="math notranslate nohighlight">\(\tilde d_t\)</span>, under the three different values of <span class="math notranslate nohighlight">\(\rho_3\)</span>.</p>
 <p>We replicate their Figure 3 below</p>
@@ -695,7 +703,7 @@ rises immediately but is later reduced to build stocks up again.</p></li>
 immediately, in order to build up stocks to satisfy the permanent
 rise in future demand.</p></li>
 </ul>
-<p>In Figure 4 of their paper, <span id="id7">[<a class="reference internal" href="zreferences.html#id52">RMS94</a>]</span> plot the response to a demand shock
+<p>In Figure 4 of their paper, <span id="id7">[<a class="reference internal" href="zreferences.html#id59">RMS94</a>]</span> plot the response to a demand shock
 of the breeding stock <em>and</em> the total stock, for <span class="math notranslate nohighlight">\(\rho_3 = 0\)</span> and
 <span class="math notranslate nohighlight">\(\rho_3 = 0.6\)</span>.</p>
 <p>We replicate their Figure 4 below</p>
@@ -991,18 +999,23 @@ lecture.</p>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="asset_pricing_lph.html">
+   34. Elementary Asset Pricing Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   34. Two Modifications of Mean-Variance Portfolio Theory
+   35. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   35. Irrelevance of Capital Structure with Complete Markets
+   36. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   36. Equilibrium Capital Structures with Incomplete Markets
+   37. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1014,42 +1027,42 @@ lecture.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   37. Stackelberg Plans
+   38. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   39. Optimal Taxation with State-Contingent Debt
+   40. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   40. Optimal Taxation without State-Contingent Debt
+   41. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+   42. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   42. Fiscal Risk and Government Debt
+   43. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   43. Competitive Equilibria of a Model of Chang
+   44. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   44. Credible Government Policies in a Model of Chang
+   45. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1061,17 +1074,17 @@ lecture.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   45. Troubleshooting
+   46. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   46. References
+   47. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   47. Execution Statistics
+   48. Execution Statistics
   </a>
  </li>
 </ul>

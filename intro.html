@@ -251,7 +251,15 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/intro.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="1. Orthogonal Projections and Their Applications" href="orth_proj.html" />
@@ -413,30 +421,31 @@
 <p class="caption"><span class="caption-text">Asset Pricing and Finance</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="lucas_model.html">33. Asset Pricing II: The Lucas Asset Pricing Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="black_litterman.html">34. Two Modifications of Mean-Variance Portfolio Theory</a></li>
-<li class="toctree-l1"><a class="reference internal" href="BCG_complete_mkts.html">35. Irrelevance of Capital Structure with Complete Markets</a></li>
-<li class="toctree-l1"><a class="reference internal" href="BCG_incomplete_mkts.html">36. Equilibrium Capital Structures with Incomplete Markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="asset_pricing_lph.html">34. Elementary Asset Pricing Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="black_litterman.html">35. Two Modifications of Mean-Variance Portfolio Theory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BCG_complete_mkts.html">36. Irrelevance of Capital Structure with Complete Markets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="BCG_incomplete_mkts.html">37. Equilibrium Capital Structures with Incomplete Markets</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Dynamic Programming Squared</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="dyn_stack.html">37. Stackelberg Plans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calvo.html">38. Ramsey Plans, Time Inconsistency, Sustainable Plans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="opt_tax_recur.html">39. Optimal Taxation with State-Contingent Debt</a></li>
-<li class="toctree-l1"><a class="reference internal" href="amss.html">40. Optimal Taxation without State-Contingent Debt</a></li>
-<li class="toctree-l1"><a class="reference internal" href="amss2.html">41. Fluctuating Interest Rates Deliver Fiscal Insurance</a></li>
-<li class="toctree-l1"><a class="reference internal" href="amss3.html">42. Fiscal Risk and Government Debt</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chang_ramsey.html">43. Competitive Equilibria of a Model of Chang</a></li>
-<li class="toctree-l1"><a class="reference internal" href="chang_credible.html">44. Credible Government Policies in a Model of Chang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dyn_stack.html">38. Stackelberg Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calvo.html">39. Ramsey Plans, Time Inconsistency, Sustainable Plans</a></li>
+<li class="toctree-l1"><a class="reference internal" href="opt_tax_recur.html">40. Optimal Taxation with State-Contingent Debt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="amss.html">41. Optimal Taxation without State-Contingent Debt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="amss2.html">42. Fluctuating Interest Rates Deliver Fiscal Insurance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="amss3.html">43. Fiscal Risk and Government Debt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chang_ramsey.html">44. Competitive Equilibria of a Model of Chang</a></li>
+<li class="toctree-l1"><a class="reference internal" href="chang_credible.html">45. Credible Government Policies in a Model of Chang</a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Other</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">45. Troubleshooting</a></li>
-<li class="toctree-l1"><a class="reference internal" href="zreferences.html">46. References</a></li>
-<li class="toctree-l1"><a class="reference internal" href="status.html">47. Execution Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">46. Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zreferences.html">47. References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="status.html">48. Execution Statistics</a></li>
 </ul>
 </div>
 <div class="admonition-previous-website admonition">
@@ -708,18 +717,23 @@
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="asset_pricing_lph.html">
+   34. Elementary Asset Pricing Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   34. Two Modifications of Mean-Variance Portfolio Theory
+   35. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   35. Irrelevance of Capital Structure with Complete Markets
+   36. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   36. Equilibrium Capital Structures with Incomplete Markets
+   37. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -731,42 +745,42 @@
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   37. Stackelberg Plans
+   38. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   39. Optimal Taxation with State-Contingent Debt
+   40. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   40. Optimal Taxation without State-Contingent Debt
+   41. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+   42. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   42. Fiscal Risk and Government Debt
+   43. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   43. Competitive Equilibria of a Model of Chang
+   44. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   44. Credible Government Policies in a Model of Chang
+   45. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -778,17 +792,17 @@
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   45. Troubleshooting
+   46. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   46. References
+   47. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   47. Execution Statistics
+   48. Execution Statistics
   </a>
  </li>
 </ul>

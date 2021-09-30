@@ -398,7 +398,15 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/tax_smoothing_2.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="12. How to Pay for a War: Part 3" href="tax_smoothing_3.html" />
@@ -568,20 +576,20 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.1)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
 Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
 Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
 Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
-Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
 Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
-Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
-Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
 </pre></div>
 </div>
 </div>
@@ -590,15 +598,15 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/m
 <h2><a class="toc-backref" href="#id9"><span class="section-number">11.1. </span>An Application of Markov Jump Linear Quadratic Dynamic Programming</a><a class="headerlink" href="#an-application-of-markov-jump-linear-quadratic-dynamic-programming" title="Permalink to this headline">¶</a></h2>
 <p>This is a <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">sequel to an earlier lecture</span></a>.</p>
 <p>We use a method introduced in lecture <a class="reference internal" href="markov_jump_lq.html"><span class="doc">Markov Jump LQ dynamic programming</span></a> to
-implement suggestions by Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id216">Bar99</a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id217">BM03</a>]</span>) for extending his
+implement suggestions by Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id223">Bar99</a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id224">BM03</a>]</span>) for extending his
 classic 1979 model of tax smoothing.</p>
-<p>Barro’s 1979 <span id="id3">[<a class="reference internal" href="zreferences.html#id116">Bar79</a>]</span> model is about a government that borrows and lends in order
+<p>Barro’s 1979 <span id="id3">[<a class="reference internal" href="zreferences.html#id123">Bar79</a>]</span> model is about a government that borrows and lends in order
 to help it minimize an intertemporal measure of distortions caused by
 taxes.</p>
-<p>Technically, Barro’s 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id116">Bar79</a>]</span> model looks a lot like a consumption-smoothing model.</p>
-<p>Our generalizations of his 1979 <span id="id5">[<a class="reference internal" href="zreferences.html#id116">Bar79</a>]</span> model will also look
+<p>Technically, Barro’s 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id123">Bar79</a>]</span> model looks a lot like a consumption-smoothing model.</p>
+<p>Our generalizations of his 1979 <span id="id5">[<a class="reference internal" href="zreferences.html#id123">Bar79</a>]</span> model will also look
 like souped-up consumption-smoothing models.</p>
-<p>Wanting tractability induced Barro in 1979 <span id="id6">[<a class="reference internal" href="zreferences.html#id116">Bar79</a>]</span> to assume that</p>
+<p>Wanting tractability induced Barro in 1979 <span id="id6">[<a class="reference internal" href="zreferences.html#id123">Bar79</a>]</span> to assume that</p>
 <ul class="simple">
 <li><p>the government trades only one-period risk-free debt, and</p></li>
 <li><p>the one-period risk-free interest rate is constant</p></li>
@@ -650,7 +658,7 @@ per time <span class="math notranslate nohighlight">\(t+1\)</span> goods promise
 time <span class="math notranslate nohighlight">\(t\)</span> goods received per time <span class="math notranslate nohighlight">\(t+2\)</span> goods promised.</p>
 <p>Evidently, <span class="math notranslate nohighlight">\(p_{t, t+1}, p_{t,t+2}\)</span> are inversely related to
 appropriate corresponding gross interest rates on government debt.</p>
-<p>In the spirit of Barro (1979) <span id="id7">[<a class="reference internal" href="zreferences.html#id116">Bar79</a>]</span>, government
+<p>In the spirit of Barro (1979) <span id="id7">[<a class="reference internal" href="zreferences.html#id123">Bar79</a>]</span>, government
 expenditures are governed by an exogenous stochastic process.</p>
 <p>Given initial conditions <span class="math notranslate nohighlight">\(b_{-2,0}, b_{-1,0}, z_0, i_0\)</span>, where
 <span class="math notranslate nohighlight">\(i_0\)</span> is the initial Markov state, the government chooses a
@@ -1605,18 +1613,23 @@ above</p>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="asset_pricing_lph.html">
+   34. Elementary Asset Pricing Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   34. Two Modifications of Mean-Variance Portfolio Theory
+   35. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   35. Irrelevance of Capital Structure with Complete Markets
+   36. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   36. Equilibrium Capital Structures with Incomplete Markets
+   37. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1628,42 +1641,42 @@ above</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   37. Stackelberg Plans
+   38. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   39. Optimal Taxation with State-Contingent Debt
+   40. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   40. Optimal Taxation without State-Contingent Debt
+   41. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+   42. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   42. Fiscal Risk and Government Debt
+   43. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   43. Competitive Equilibria of a Model of Chang
+   44. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   44. Credible Government Policies in a Model of Chang
+   45. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1675,17 +1688,17 @@ above</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   45. Troubleshooting
+   46. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   46. References
+   47. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   47. Execution Statistics
+   48. Execution Statistics
   </a>
  </li>
 </ul>

@@ -377,7 +377,15 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/stationary_densities.html" />
+    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="3. Reverse Engineering a la Muth" href="muth_kalman.html" />
@@ -635,20 +643,20 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.1)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
-Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
-Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
-Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
-Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
 Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
 </pre></div>
 </div>
 </div>
@@ -684,7 +692,7 @@ such as simulation, distribution dynamics, stability, ergodicity, etc.</p>
 <p class="admonition-title">Note</p>
 <p>For some people, the term “Markov chain” always refers to a process with a
 finite or discrete state space.  We follow the mainstream
-mathematical literature (e.g., <span id="id1">[<a class="reference internal" href="zreferences.html#id163">MT09</a>]</span>) in using the term to refer to any discrete <strong>time</strong>
+mathematical literature (e.g., <span id="id1">[<a class="reference internal" href="zreferences.html#id170">MT09</a>]</span>) in using the term to refer to any discrete <strong>time</strong>
 Markov process.</p>
 </div>
 <p>Let’s begin with some imports:</p>
@@ -797,7 +805,7 @@ X_{t+1} = \alpha X_t + \sigma_t \,  \xi_{t+1},
 <li><p><span class="math notranslate nohighlight">\(\delta\)</span> is a depreciation rate</p></li>
 <li><p><span class="math notranslate nohighlight">\(f \colon \mathbb R_+ \to \mathbb R_+\)</span> is a production function satisfying <span class="math notranslate nohighlight">\(f(k) &gt; 0\)</span> whenever <span class="math notranslate nohighlight">\(k &gt; 0\)</span></p></li>
 </ul>
-<p>(The fixed savings rate can be rationalized as the optimal policy for a particular set of technologies and preferences (see <span id="id2">[<a class="reference internal" href="zreferences.html#id153">LS18</a>]</span>, section
+<p>(The fixed savings rate can be rationalized as the optimal policy for a particular set of technologies and preferences (see <span id="id2">[<a class="reference internal" href="zreferences.html#id160">LS18</a>]</span>, section
 3.1.2), although we omit the details here).</p>
 <p>Equation <a class="reference internal" href="#equation-statd-ss">(2.5)</a> is a special case of <a class="reference internal" href="#equation-statd-srs">(2.3)</a> with <span class="math notranslate nohighlight">\(\mu(x) = (1 - \delta)x\)</span> and <span class="math notranslate nohighlight">\(\sigma(x) = s f(x)\)</span>.</p>
 <p>Now let’s obtain the stochastic kernel corresponding to the generic model <a class="reference internal" href="#equation-statd-srs">(2.3)</a>.</p>
@@ -1021,7 +1029,7 @@ be familiar with measure theory.</p>
 <p>We can, however, construct a fairly general theory using distribution functions.</p>
 <div class="section" id="example-and-definitions">
 <h3><span class="section-number">2.3.1. </span>Example and Definitions<a class="headerlink" href="#example-and-definitions" title="Permalink to this headline">¶</a></h3>
-<p>To illustrate the issues, recall that Hopenhayn and Rogerson <span id="id3">[<a class="reference internal" href="zreferences.html#id142">HR93</a>]</span> study a model of firm dynamics where individual firm productivity follows the exogenous process</p>
+<p>To illustrate the issues, recall that Hopenhayn and Rogerson <span id="id3">[<a class="reference internal" href="zreferences.html#id149">HR93</a>]</span> study a model of firm dynamics where individual firm productivity follows the exogenous process</p>
 <div class="math notranslate nohighlight">
 \[
 X_{t+1} = a + \rho X_t + \xi_{t+1},
@@ -1109,8 +1117,8 @@ of <a class="reference internal" href="#equation-statd-dca">(2.16)</a> is often 
 <p>For one such set of conditions see theorem 8.2.14 of <a class="reference external" href="http://johnstachurski.net/edtc.html">EDTC</a>.</p>
 <p>In addition</p>
 <ul class="simple">
-<li><p><span id="id5">[<a class="reference internal" href="zreferences.html#id189">SLP89</a>]</span>  contains a classic (but slightly outdated) treatment of these topics.</p></li>
-<li><p>From the mathematical literature, <span id="id6">[<a class="reference internal" href="zreferences.html#id152">LM94</a>]</span>  and <span id="id7">[<a class="reference internal" href="zreferences.html#id163">MT09</a>]</span> give outstanding in-depth treatments.</p></li>
+<li><p><span id="id5">[<a class="reference internal" href="zreferences.html#id196">SLP89</a>]</span>  contains a classic (but slightly outdated) treatment of these topics.</p></li>
+<li><p>From the mathematical literature, <span id="id6">[<a class="reference internal" href="zreferences.html#id159">LM94</a>]</span>  and <span id="id7">[<a class="reference internal" href="zreferences.html#id170">MT09</a>]</span> give outstanding in-depth treatments.</p></li>
 <li><p>Section 8.1.2 of <a class="reference external" href="http://johnstachurski.net/edtc.html">EDTC</a> provides detailed intuition, and section 8.3 gives additional references.</p></li>
 <li><p><a class="reference external" href="http://johnstachurski.net/edtc.html">EDTC</a>, section 11.3.4
 provides a specific treatment for the growth model we considered in this
@@ -1684,18 +1692,23 @@ series for one boxplot all at once</p>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="asset_pricing_lph.html">
+   34. Elementary Asset Pricing Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   34. Two Modifications of Mean-Variance Portfolio Theory
+   35. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   35. Irrelevance of Capital Structure with Complete Markets
+   36. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   36. Equilibrium Capital Structures with Incomplete Markets
+   37. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1707,42 +1720,42 @@ series for one boxplot all at once</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   37. Stackelberg Plans
+   38. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   38. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   39. Optimal Taxation with State-Contingent Debt
+   40. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   40. Optimal Taxation without State-Contingent Debt
+   41. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   41. Fluctuating Interest Rates Deliver Fiscal Insurance
+   42. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   42. Fiscal Risk and Government Debt
+   43. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   43. Competitive Equilibria of a Model of Chang
+   44. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   44. Credible Government Policies in a Model of Chang
+   45. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1754,17 +1767,17 @@ series for one boxplot all at once</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   45. Troubleshooting
+   46. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   46. References
+   47. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   47. Execution Statistics
+   48. Execution Statistics
   </a>
  </li>
 </ul>
