@@ -24,6 +24,19 @@ jobs:
         run: |
           conda install anaconda
           pip install jupyter-book sphinx-multitoc-numbering quantecon-book-theme sphinxext-rediraffe sphinx_tojupyter
+      - name: Install latex dependencies
+        run: |
+          sudo apt-get -qq update
+          sudo apt-get install -y     \
+            texlive-latex-recommended \
+            texlive-latex-extra       \
+            texlive-fonts-recommended \
+            texlive-fonts-extra       \
+            texlive-xetex             \
+            latexmk                   \
+            xindy                     \
+            dvipng                    \
+            cm-super
       - name: Build Lectures (+ Execution Checks)
         shell: bash -l {0}
         run: jb build lectures --path-output=./ -W --keep-going
