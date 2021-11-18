@@ -5,16 +5,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>36. Irrelevance of Capital Structure with Complete Markets &#8212; Advanced Quantitative Economics with Python</title>
+    <title>37. Irrelevance of Capital Structure with Complete Markets &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     
         <script>
             MathJax = {
-            loader: {load: ['[tex]/boldsymbol']},
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
             tex: {
-                packages: {'[+]': ['boldsymbol']},
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 processEscapes: true,
                 macros: {
@@ -48,8 +48,8 @@
     
     
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -63,7 +63,7 @@
       
 
     
-    <link rel="stylesheet" href="_static/quantecon-book-theme.857ff391aaabaeb8c161d2309c375fe6.css" type="text/css" />
+    <link rel="stylesheet" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -72,7 +72,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -85,7 +85,7 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/quantecon-book-theme.76bf49d7bbc59738cdb03766fad654af.js"></script>
+    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -101,8 +101,8 @@
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="37. Equilibrium Capital Structures with Incomplete Markets" href="BCG_incomplete_mkts.html" />
-    <link rel="prev" title="35. Two Modifications of Mean-Variance Portfolio Theory" href="black_litterman.html" />
+    <link rel="next" title="38. Equilibrium Capital Structures with Incomplete Markets" href="BCG_incomplete_mkts.html" />
+    <link rel="prev" title="36. Two Modifications of Mean-Variance Portfolio Theory" href="black_litterman.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -132,67 +132,67 @@
 
     <span id="top"></span>
 
-    <div class="wrapper">
+    <div class="qe-wrapper">
 
-        <div class="main">
+        <div class="qe-main">
 
-            <div class="page" id=BCG_complete_mkts>
+            <div class="qe-page" id=BCG_complete_mkts>
 
-                <div class="page__toc">
+                <div class="qe-page__toc">
 
                     <div class="inner">
 
                         
-                        <div class="page__toc-header">
+                        <div class="qe-page__toc-header">
                             On this page
                         </div>
 
 
-                        <nav id="bd-toc-nav" class="page__toc-nav">
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   36.1. Introduction
+   37.1. Introduction
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#setup">
-     36.1.1. Setup
+     37.1.1. Setup
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#endowments">
-     36.1.2. Endowments
+     37.1.2. Endowments
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#technology">
-     36.1.3. Technology:
+     37.1.3. Technology:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#preferences">
-     36.1.4. Preferences:
+     37.1.4. Preferences:
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#parameterizations">
-     36.1.5. Parameterizations
+     37.1.5. Parameterizations
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#pareto-criterion-and-planning-problem">
-     36.1.6. Pareto criterion and planning problem
+     37.1.6. Pareto criterion and planning problem
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#helpful-observations-and-bookkeeping">
-     36.1.7. Helpful observations and bookkeeping
+     37.1.7. Helpful observations and bookkeeping
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#remarks">
-       36.1.7.1. Remarks
+       37.1.7.1. Remarks
       </a>
      </li>
     </ul>
@@ -201,71 +201,71 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#competitive-equilibrium">
-   36.2. Competitive equilibrium
+   37.2. Competitive equilibrium
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#measures-of-agents-and-firms">
-     36.2.1. Measures of agents and firms
+     37.2.1. Measures of agents and firms
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#ownership">
-       36.2.1.1. Ownership
+       37.2.1.1. Ownership
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#asset-markets">
-       36.2.1.2. Asset markets
+       37.2.1.2. Asset markets
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#objects-appearing-in-a-competitive-equilibrium">
-     36.2.2. Objects appearing in a competitive equilibrium
+     37.2.2. Objects appearing in a competitive equilibrium
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#a-representative-firms-problem">
-     36.2.3. A representative firm’s problem
+     37.2.3. A representative firm’s problem
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#a-consumers-problem">
-     36.2.4. A consumer’s problem
+     37.2.4. A consumer’s problem
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#computing-competitive-equilibrium-prices-and-quantities">
-     36.2.5. Computing competitive equilibrium prices and quantities
+     37.2.5. Computing competitive equilibrium prices and quantities
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#modigliani-miller-theorem">
-     36.2.6. Modigliani-Miller theorem
+     37.2.6. Modigliani-Miller theorem
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#code">
-   36.3. Code
+   37.3. Code
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#examples">
-     36.3.1. Examples
+     37.3.1. Examples
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#st-example">
-       36.3.1.1. 1st example
+       37.3.1.1. 1st example
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#nd-example">
-       36.3.1.2. 2nd example
+       37.3.1.2. 2nd example
       </a>
      </li>
     </ul>
@@ -286,7 +286,7 @@
 
                         </nav>
 
-                        <div class="page__toc-footer">
+                        <div class="qe-page__toc-footer">
                             
                             
                             <p><a href="#top"><strong>Back to top</strong></a></p>
@@ -296,24 +296,24 @@
 
                 </div>
 
-                <div class="page__header">
+                <div class="qe-page__header">
 
-                    <div class="page__header-copy">
+                    <div class="qe-page__header-copy">
 
-                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
 
-                        <p class="page__header-subheading">Irrelevance of Capital Structure with Complete Markets</p>
+                        <p class="qe-page__header-subheading">Irrelevance of Capital Structure with Complete Markets</p>
 
                     </div>
 
-                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
 
                 </div> <!-- .page__header -->
 
 
 
                 
-                <main class="page__content" role="main">
+                <main class="qe-page__content" role="main">
                     
                     <div>
                         
@@ -322,7 +322,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><div class="section" id="irrelevance-of-capital-structure-with-complete-markets">
-<h1><a class="toc-backref" href="#id4"><span class="section-number">36. </span>Irrelevance of Capital Structure with Complete Markets</a><a class="headerlink" href="#irrelevance-of-capital-structure-with-complete-markets" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id4"><span class="section-number">37. </span>Irrelevance of Capital Structure with Complete Markets</a><a class="headerlink" href="#irrelevance-of-capital-structure-with-complete-markets" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
@@ -345,34 +345,32 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.1)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
-Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.2)
 Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
-Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
-Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
-Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
 Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: interpolation in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (2.2.1)
-Requirement already satisfied: scipy&gt;=1.4.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (1.5.2)
 Requirement already satisfied: tempita&gt;=0.5.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (0.5.2)
+Requirement already satisfied: scipy&gt;=1.4.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (1.5.2)
 Requirement already satisfied: numba&gt;=0.47 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (0.51.2)
 Requirement already satisfied: numpy&gt;=1.18.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from interpolation) (1.19.2)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.47-&gt;interpolation) (50.3.1.post20201107)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.47-&gt;interpolation) (50.3.1.post20201107)
-Requirement already satisfied: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.47-&gt;interpolation) (0.34.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.47-&gt;interpolation) (0.34.0)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting package metadata (current_repodata.json): - 
@@ -423,11 +421,11 @@ Requirement already satisfied: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/m
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>done
-Solving environment: \ 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
+Solving environment: | 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
@@ -530,6 +528,12 @@ Solving environment: \
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>done
@@ -541,9 +545,9 @@ Solving environment: \
 </div>
 </div>
 <div class="section" id="introduction">
-<h2><a class="toc-backref" href="#id5"><span class="section-number">36.1. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5"><span class="section-number">37.1. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>This is a prolegomenon to another lecture <a class="reference internal" href="BCG_incomplete_mkts.html"><span class="doc">Equilibrium Capital Structures with Incomplete Markets</span></a> about a model with
-incomplete markets authored by Bisin, Clementi, and Gottardi <span id="id1">[<a class="reference internal" href="zreferences.html#id18">BCG18</a>]</span>.</p>
+incomplete markets authored by Bisin, Clementi, and Gottardi <span id="id1">[<a class="reference internal" href="zreferences.html#id25">BCG18</a>]</span>.</p>
 <p>We adopt specifications of preferences and technologies very close to
 Bisin, Clemente, and Gottardi’s  but unlike them  assume that there are complete
 markets in one-period Arrow securities.</p>
@@ -558,7 +562,7 @@ algorithm</p></li>
 <ul>
 <li><p>indeterminacy of consumers’ portfolio choices</p></li>
 <li><p>indeterminacy of firms’ financial structures that underlies a
-Modigliani-Miller theorem <span id="id2">[<a class="reference internal" href="zreferences.html#id19">MM58</a>]</span></p></li>
+Modigliani-Miller theorem <span id="id2">[<a class="reference internal" href="zreferences.html#id26">MM58</a>]</span></p></li>
 </ul>
 </li>
 <li><p>introducing <code class="docutils literal notranslate"><span class="pre">Big</span> <span class="pre">K,</span> <span class="pre">little</span> <span class="pre">k</span></code> issues in a simple context that will
@@ -567,7 +571,7 @@ recur in the BCG incomplete markets environment</p></li>
 <p>A Big K, little k analysis also played roles in <a class="reference external" href="https://python.quantecon.org/cass_koopmans.html">this quantecon lecture</a> as well  as
 <a class="reference external" href="https://python.quantecon.org/rational_expectations.html">here</a> and <a class="reference internal" href="dyn_stack.html"><span class="doc">here</span></a>.</p>
 <div class="section" id="setup">
-<h3><span class="section-number">36.1.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.1.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
 <p>The economy lasts for two periods, <span class="math notranslate nohighlight">\(t=0, 1\)</span>.</p>
 <p>There are two types of consumers named <span class="math notranslate nohighlight">\(i=1,2\)</span>.</p>
 <p>A scalar random variable <span class="math notranslate nohighlight">\(\epsilon\)</span> with probability density <span class="math notranslate nohighlight">\(g(\epsilon)\)</span> affects both</p>
@@ -591,7 +595,7 @@ the realization of random variable <span class="math notranslate nohighlight">\(
 </ul>
 </div>
 <div class="section" id="endowments">
-<h3><span class="section-number">36.1.2. </span>Endowments<a class="headerlink" href="#endowments" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.1.2. </span>Endowments<a class="headerlink" href="#endowments" title="Permalink to this headline">¶</a></h3>
 <p>There is a single consumption good in period <span class="math notranslate nohighlight">\(0\)</span> and at each
 random state <span class="math notranslate nohighlight">\(\epsilon\)</span> in period <span class="math notranslate nohighlight">\(1\)</span>.</p>
 <p>Economy-wide endowments in periods <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> are</p>
@@ -607,7 +611,7 @@ type <span class="math notranslate nohighlight">\(i=1\)</span> and type <span cl
 <p>We don’t need to do that in order to describe a social planning problem.</p>
 </div>
 <div class="section" id="technology">
-<h3><span class="section-number">36.1.3. </span>Technology:<a class="headerlink" href="#technology" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.1.3. </span>Technology:<a class="headerlink" href="#technology" title="Permalink to this headline">¶</a></h3>
 <p>Where <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> and <span class="math notranslate nohighlight">\(A &gt;0\)</span></p>
 <div class="math notranslate nohighlight">
 \[
@@ -618,7 +622,7 @@ type <span class="math notranslate nohighlight">\(i=1\)</span> and type <span cl
 \]</div>
 </div>
 <div class="section" id="preferences">
-<h3><span class="section-number">36.1.4. </span>Preferences:<a class="headerlink" href="#preferences" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.1.4. </span>Preferences:<a class="headerlink" href="#preferences" title="Permalink to this headline">¶</a></h3>
 <p>A consumer of type <span class="math notranslate nohighlight">\(i\)</span> orders period <span class="math notranslate nohighlight">\(0\)</span> consumption
 <span class="math notranslate nohighlight">\(c_0^i\)</span> and state <span class="math notranslate nohighlight">\(\epsilon\)</span>, period <span class="math notranslate nohighlight">\(1\)</span> consumption
 <span class="math notranslate nohighlight">\(c^i_1(\epsilon)\)</span> by</p>
@@ -636,7 +640,7 @@ u(c) = \begin{cases}
 \end{split}\]</div>
 </div>
 <div class="section" id="parameterizations">
-<h3><span class="section-number">36.1.5. </span>Parameterizations<a class="headerlink" href="#parameterizations" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.1.5. </span>Parameterizations<a class="headerlink" href="#parameterizations" title="Permalink to this headline">¶</a></h3>
 <p>Following BCG, we shall employ the following parameterizations:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -652,7 +656,7 @@ mass function that serves as a discrete approximation to a standardized
 normal density.</p>
 </div>
 <div class="section" id="pareto-criterion-and-planning-problem">
-<h3><span class="section-number">36.1.6. </span>Pareto criterion and planning problem<a class="headerlink" href="#pareto-criterion-and-planning-problem" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.1.6. </span>Pareto criterion and planning problem<a class="headerlink" href="#pareto-criterion-and-planning-problem" title="Permalink to this headline">¶</a></h3>
 <p>The planner’s objective function is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -698,7 +702,7 @@ capital</p>
 <p>for <span class="math notranslate nohighlight">\(i = 1,2\)</span>.</p>
 </div>
 <div class="section" id="helpful-observations-and-bookkeeping">
-<h3><span class="section-number">36.1.7. </span>Helpful observations and bookkeeping<a class="headerlink" href="#helpful-observations-and-bookkeeping" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.1.7. </span>Helpful observations and bookkeeping<a class="headerlink" href="#helpful-observations-and-bookkeeping" title="Permalink to this headline">¶</a></h3>
 <p>Evidently,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -739,7 +743,7 @@ for <span class="math notranslate nohighlight">\(c^1 = c^1(\epsilon)\)</span> an
 to be discussed in detail below, let <span class="math notranslate nohighlight">\(K\)</span> be the value of <span class="math notranslate nohighlight">\(k\)</span>
 that solves the preceding equation so that</p>
 <div class="math notranslate nohighlight" id="equation-focke">
-<span class="eqno">(36.1)<a class="headerlink" href="#equation-focke" title="Permalink to this equation">¶</a></span>\[1 =  \beta \alpha A K^{\alpha -1} \int \left( \frac{w_1(\epsilon) + A K^\alpha e^\epsilon}
+<span class="eqno">(37.1)<a class="headerlink" href="#equation-focke" title="Permalink to this equation">¶</a></span>\[1 =  \beta \alpha A K^{\alpha -1} \int \left( \frac{w_1(\epsilon) + A K^\alpha e^\epsilon}
                     {w_0 - K } \right)^{-\gamma} g(\epsilon) e^\epsilon d \epsilon\]</div>
 <p>The associated optimal consumption allocation is</p>
 <div class="math notranslate nohighlight">
@@ -757,9 +761,9 @@ c_1^2 (\epsilon) &amp; = (1 - \eta) C_1(\epsilon)
 mentioned above that is a function of the Pareto weight <span class="math notranslate nohighlight">\(\phi_1\)</span>
 and the utility curvature parameter <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
 <div class="section" id="remarks">
-<h4><span class="section-number">36.1.7.1. </span>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">37.1.7.1. </span>Remarks<a class="headerlink" href="#remarks" title="Permalink to this headline">¶</a></h4>
 <p>The relative Pareto weight parameter <span class="math notranslate nohighlight">\(\eta\)</span> does not appear in
-equation <a class="reference internal" href="#equation-focke">(36.1)</a> that determines <span class="math notranslate nohighlight">\(K\)</span>.</p>
+equation <a class="reference internal" href="#equation-focke">(37.1)</a> that determines <span class="math notranslate nohighlight">\(K\)</span>.</p>
 <p>Neither does it influence <span class="math notranslate nohighlight">\(C_0\)</span> or <span class="math notranslate nohighlight">\(C_1(\epsilon)\)</span>, which
 depend solely on <span class="math notranslate nohighlight">\(K\)</span>.</p>
 <p>The role of <span class="math notranslate nohighlight">\(\eta\)</span> is to determine how to allocate total
@@ -769,7 +773,7 @@ consumption between the two types of consumers.</p>
 </div>
 </div>
 <div class="section" id="competitive-equilibrium">
-<h2><a class="toc-backref" href="#id6"><span class="section-number">36.2. </span>Competitive equilibrium</a><a class="headerlink" href="#competitive-equilibrium" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6"><span class="section-number">37.2. </span>Competitive equilibrium</a><a class="headerlink" href="#competitive-equilibrium" title="Permalink to this headline">¶</a></h2>
 <p>We now describe a competitive equilibrium for an economy that has
 specifications of consumer preferences, technology, and aggregate
 endowments that are identical to those in the preceding planning
@@ -779,7 +783,7 @@ prices play an important role in a competitive equilibrium.</p>
 <p>To understand how the planning economy is related to a competitive
 equilibrium, we now turn to  the <code class="docutils literal notranslate"><span class="pre">Big</span> <span class="pre">K,</span> <span class="pre">little</span> <span class="pre">k</span></code> distinction.</p>
 <div class="section" id="measures-of-agents-and-firms">
-<h3><span class="section-number">36.2.1. </span>Measures of agents and firms<a class="headerlink" href="#measures-of-agents-and-firms" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.2.1. </span>Measures of agents and firms<a class="headerlink" href="#measures-of-agents-and-firms" title="Permalink to this headline">¶</a></h3>
 <p>We follow BCG in assuming that there are  unit measures of</p>
 <ul class="simple">
 <li><p>consumers of type <span class="math notranslate nohighlight">\(i=1\)</span></p></li>
@@ -818,7 +822,7 @@ powerless <strong>price taker</strong>:</p>
 making a host of competitive agents take as given equilibrium prices
 that are determined by the independent decisions of hosts of agents who behave just like they do.</p>
 <div class="section" id="ownership">
-<h4><span class="section-number">36.2.1.1. </span>Ownership<a class="headerlink" href="#ownership" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">37.2.1.1. </span>Ownership<a class="headerlink" href="#ownership" title="Permalink to this headline">¶</a></h4>
 <p>Consumers of type <span class="math notranslate nohighlight">\(i\)</span> own the following exogenous quantities of
 the consumption good in periods <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -849,7 +853,7 @@ shares of a firm and</p>
 \]</div>
 </div>
 <div class="section" id="asset-markets">
-<h4><span class="section-number">36.2.1.2. </span>Asset markets<a class="headerlink" href="#asset-markets" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">37.2.1.2. </span>Asset markets<a class="headerlink" href="#asset-markets" title="Permalink to this headline">¶</a></h4>
 <p>At time <span class="math notranslate nohighlight">\(0\)</span>, consumers trade the following assets with  other consumers
 and with firms:</p>
 <ul class="simple">
@@ -862,7 +866,7 @@ not now.</p>
 </div>
 </div>
 <div class="section" id="objects-appearing-in-a-competitive-equilibrium">
-<h3><span class="section-number">36.2.2. </span>Objects appearing in a competitive equilibrium<a class="headerlink" href="#objects-appearing-in-a-competitive-equilibrium" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.2.2. </span>Objects appearing in a competitive equilibrium<a class="headerlink" href="#objects-appearing-in-a-competitive-equilibrium" title="Permalink to this headline">¶</a></h3>
 <p>Let</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(a^i(\epsilon)\)</span> be consumer <span class="math notranslate nohighlight">\(i\)</span> ’s purchases of claims
@@ -884,7 +888,7 @@ for Arrow securities</p></li>
 consumers and a representative firm in a competitive equilibrium.</p>
 </div>
 <div class="section" id="a-representative-firms-problem">
-<h3><span class="section-number">36.2.3. </span>A representative firm’s problem<a class="headerlink" href="#a-representative-firms-problem" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.2.3. </span>A representative firm’s problem<a class="headerlink" href="#a-representative-firms-problem" title="Permalink to this headline">¶</a></h3>
 <p>A representative firm takes Arrow security prices <span class="math notranslate nohighlight">\(q(\epsilon)\)</span> as
 given.</p>
 <p>The firm purchases capital <span class="math notranslate nohighlight">\(k \geq 0\)</span> from consumers at time
@@ -918,7 +922,7 @@ V = - k + \tilde V
 that it purchases and uses as capital.</p>
 </div>
 <div class="section" id="a-consumers-problem">
-<h3><span class="section-number">36.2.4. </span>A consumer’s problem<a class="headerlink" href="#a-consumers-problem" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.2.4. </span>A consumer’s problem<a class="headerlink" href="#a-consumers-problem" title="Permalink to this headline">¶</a></h3>
 <p>We now pose a consumer’s problem in a competitive equilibrium.</p>
 <p>As a price taker, each consumer faces a given Arrow securities pricing kernel
 <span class="math notranslate nohighlight">\(q(\epsilon)\)</span>, a given value of a firm <span class="math notranslate nohighlight">\(V\)</span> that has chosen capital stock <span class="math notranslate nohighlight">\(k\)</span>, a price of
@@ -926,10 +930,10 @@ equity <span class="math notranslate nohighlight">\(\tilde V\)</span>, and  pros
 <p>If we evaluate consumer <span class="math notranslate nohighlight">\(i\)</span>’s time <span class="math notranslate nohighlight">\(1\)</span> budget constraint at zero consumption <span class="math notranslate nohighlight">\(c^i_1(\epsilon) = 0\)</span> and solve for <span class="math notranslate nohighlight">\(-a^i(\epsilon)\)</span>
 we obtain</p>
 <div class="math notranslate nohighlight" id="equation-debtlimit">
-<span class="eqno">(36.2)<a class="headerlink" href="#equation-debtlimit" title="Permalink to this equation">¶</a></span>\[-\bar a^i(\epsilon;\theta^i) = w_1^i(\epsilon) +\theta^i A k^\alpha e^\epsilon\]</div>
+<span class="eqno">(37.2)<a class="headerlink" href="#equation-debtlimit" title="Permalink to this equation">¶</a></span>\[-\bar a^i(\epsilon;\theta^i) = w_1^i(\epsilon) +\theta^i A k^\alpha e^\epsilon\]</div>
 <p>The quantity <span class="math notranslate nohighlight">\(- \bar a^i(\epsilon;\theta^i)\)</span> is the maximum amount that it is feasible for  consumer <span class="math notranslate nohighlight">\(i\)</span> to repay to
 his Arrow security creditors at time <span class="math notranslate nohighlight">\(1\)</span> in state <span class="math notranslate nohighlight">\(\epsilon\)</span>.</p>
-<p>Notice that <span class="math notranslate nohighlight">\(-\bar a^i(\epsilon;\theta^i)\)</span> defined in <a class="reference internal" href="#equation-debtlimit">(36.2)</a> depends on</p>
+<p>Notice that <span class="math notranslate nohighlight">\(-\bar a^i(\epsilon;\theta^i)\)</span> defined in <a class="reference internal" href="#equation-debtlimit">(37.2)</a> depends on</p>
 <ul class="simple">
 <li><p>his endowment <span class="math notranslate nohighlight">\(w_1^i(\epsilon)\)</span> at time <span class="math notranslate nohighlight">\(1\)</span> in state <span class="math notranslate nohighlight">\(\epsilon\)</span></p></li>
 <li><p>his share <span class="math notranslate nohighlight">\(\theta^i\)</span> of a representive firm’s dividends</p></li>
@@ -977,7 +981,7 @@ a^i(\epsilon): \quad &amp; -\lambda_0^i q(\epsilon) + \beta \lambda_1^i(\epsilon
 <p>These equations imply that consumer <span class="math notranslate nohighlight">\(i\)</span> adjusts its consumption
 plan to satisfy</p>
 <div class="math notranslate nohighlight" id="equation-qgeqn">
-<span class="eqno">(36.3)<a class="headerlink" href="#equation-qgeqn" title="Permalink to this equation">¶</a></span>\[q(\epsilon) = \beta \left( \frac{u'(c_1^i(\epsilon))}{u'(c_0^i)} \right) g(\epsilon)\]</div>
+<span class="eqno">(37.3)<a class="headerlink" href="#equation-qgeqn" title="Permalink to this equation">¶</a></span>\[q(\epsilon) = \beta \left( \frac{u'(c_1^i(\epsilon))}{u'(c_0^i)} \right) g(\epsilon)\]</div>
 <p>To deduce a restriction on equilibrium prices,  we
 solve the period <span class="math notranslate nohighlight">\(1\)</span> budget constraint to express
 <span class="math notranslate nohighlight">\(a^i(\epsilon)\)</span> as</p>
@@ -989,18 +993,18 @@ a^i(\epsilon) = c_1^i(\epsilon) - w_1^i(\epsilon) - \theta^i A k^\alpha e^\epsil
 budget constraint and rearrange to get the single intertemporal budget
 constraint</p>
 <div class="math notranslate nohighlight" id="equation-noarb">
-<span class="eqno">(36.4)<a class="headerlink" href="#equation-noarb" title="Permalink to this equation">¶</a></span>\[w_0^i + \theta_0^i V + \int w_1^i(\epsilon) q(\epsilon) d \epsilon + \theta^i \left[ A k^\alpha \int e^\epsilon q(\epsilon) d \epsilon - \tilde V \right]
+<span class="eqno">(37.4)<a class="headerlink" href="#equation-noarb" title="Permalink to this equation">¶</a></span>\[w_0^i + \theta_0^i V + \int w_1^i(\epsilon) q(\epsilon) d \epsilon + \theta^i \left[ A k^\alpha \int e^\epsilon q(\epsilon) d \epsilon - \tilde V \right]
 \geq c_0^i + \int c_1^i(\epsilon) q(\epsilon) d \epsilon\]</div>
-<p>The right side of inequality <a class="reference internal" href="#equation-noarb">(36.4)</a> is the present value
+<p>The right side of inequality <a class="reference internal" href="#equation-noarb">(37.4)</a> is the present value
 of consumer <span class="math notranslate nohighlight">\(i\)</span>’s consumption while the left side is the present
 value of consumer <span class="math notranslate nohighlight">\(i\)</span>’s endowment when consumer <span class="math notranslate nohighlight">\(i\)</span> buys
 <span class="math notranslate nohighlight">\(\theta^i\)</span> shares of equity.</p>
-<p>From inequality <a class="reference internal" href="#equation-noarb">(36.4)</a>, we deduce two
+<p>From inequality <a class="reference internal" href="#equation-noarb">(37.4)</a>, we deduce two
 findings.</p>
 <p><strong>1. No arbitrage profits condition:</strong></p>
 <p>Unless</p>
 <div class="math notranslate nohighlight" id="equation-tilde">
-<span class="eqno">(36.5)<a class="headerlink" href="#equation-tilde" title="Permalink to this equation">¶</a></span>\[\tilde V =  A k^\alpha \int e^\epsilon q (\epsilon) d \epsilon\]</div>
+<span class="eqno">(37.5)<a class="headerlink" href="#equation-tilde" title="Permalink to this equation">¶</a></span>\[\tilde V =  A k^\alpha \int e^\epsilon q (\epsilon) d \epsilon\]</div>
 <p>an <strong>arbitrage</strong> opportunity would be open.</p>
 <p>If</p>
 <div class="math notranslate nohighlight">
@@ -1022,14 +1026,14 @@ opportunity in a competitive equilibrium.</p>
 <p>Therefore, it must be true
 that the following no arbitrage condition prevails:</p>
 <div class="math notranslate nohighlight" id="equation-tildev20">
-<span class="eqno">(36.6)<a class="headerlink" href="#equation-tildev20" title="Permalink to this equation">¶</a></span>\[\tilde V = \int A k^\alpha e^\epsilon q(\epsilon;K) d \epsilon\]</div>
-<p>Equation <a class="reference internal" href="#equation-tildev20">(36.6)</a> asserts that the value of equity
+<span class="eqno">(37.6)<a class="headerlink" href="#equation-tildev20" title="Permalink to this equation">¶</a></span>\[\tilde V = \int A k^\alpha e^\epsilon q(\epsilon;K) d \epsilon\]</div>
+<p>Equation <a class="reference internal" href="#equation-tildev20">(37.6)</a> asserts that the value of equity
 equals the value of the state-contingent dividends
 <span class="math notranslate nohighlight">\(Ak^\alpha e^\epsilon\)</span> evaluated at the Arrow security prices
 <span class="math notranslate nohighlight">\(q(\epsilon; K)\)</span> that we have expressed as a function of <span class="math notranslate nohighlight">\(K\)</span>.</p>
 <p>We’ll say more about this equation later.</p>
 <p><strong>2. Indeterminacy of portfolio</strong></p>
-<p>When the no-arbitrage pricing equation <a class="reference internal" href="#equation-tildev20">(36.6)</a>
+<p>When the no-arbitrage pricing equation <a class="reference internal" href="#equation-tildev20">(37.6)</a>
 prevails, a consumer of type <span class="math notranslate nohighlight">\(i\)</span>’s choice <span class="math notranslate nohighlight">\(\theta^i\)</span> of equity is
 indeterminate.</p>
 <p>Consumer of type <span class="math notranslate nohighlight">\(i\)</span> can offset any choice of
@@ -1037,7 +1041,7 @@ indeterminate.</p>
 securities.</p>
 </div>
 <div class="section" id="computing-competitive-equilibrium-prices-and-quantities">
-<h3><span class="section-number">36.2.5. </span>Computing competitive equilibrium prices and quantities<a class="headerlink" href="#computing-competitive-equilibrium-prices-and-quantities" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.2.5. </span>Computing competitive equilibrium prices and quantities<a class="headerlink" href="#computing-competitive-equilibrium-prices-and-quantities" title="Permalink to this headline">¶</a></h3>
 <p>Having computed an allocation that solves the planning problem, we can
 readily compute a competitive equilibrium via the following steps that,
 as we’ll see, relies heavily on the <code class="docutils literal notranslate"><span class="pre">Big</span> <span class="pre">K,</span> <span class="pre">little</span> <span class="pre">k</span></code>,
@@ -1052,30 +1056,30 @@ depend on Big <span class="math notranslate nohighlight">\(K\)</span> and Big <s
 <p>With <span class="math notranslate nohighlight">\(K\)</span> in hand, we make the following guess for competitive
 equilibrium Arrow securities prices</p>
 <div class="math notranslate nohighlight" id="equation-arrowprices">
-<span class="eqno">(36.7)<a class="headerlink" href="#equation-arrowprices" title="Permalink to this equation">¶</a></span>\[q(\epsilon;K) = \beta \left( \frac{u'\left( w_1(\epsilon) + A K^\alpha e^\epsilon\right)} {u'(w_0 - K )} \right)^{-\gamma}\]</div>
+<span class="eqno">(37.7)<a class="headerlink" href="#equation-arrowprices" title="Permalink to this equation">¶</a></span>\[q(\epsilon;K) = \beta \left( \frac{u'\left( w_1(\epsilon) + A K^\alpha e^\epsilon\right)} {u'(w_0 - K )} \right)^{-\gamma}\]</div>
 <p>To confirm the guess, we begin by considering its consequences  for the firm’s choice of <span class="math notranslate nohighlight">\(k\)</span>.</p>
-<p>With Arrow securities prices <a class="reference internal" href="#equation-arrowprices">(36.7)</a>, the firm’s
+<p>With Arrow securities prices <a class="reference internal" href="#equation-arrowprices">(37.7)</a>, the firm’s
 first-order necessary condition for choosing <span class="math notranslate nohighlight">\(k\)</span> becomes</p>
 <div class="math notranslate nohighlight" id="equation-kk">
-<span class="eqno">(36.8)<a class="headerlink" href="#equation-kk" title="Permalink to this equation">¶</a></span>\[-1 + \alpha A k^{\alpha -1} \int e^\epsilon q(\epsilon;K) d \epsilon = 0\]</div>
+<span class="eqno">(37.8)<a class="headerlink" href="#equation-kk" title="Permalink to this equation">¶</a></span>\[-1 + \alpha A k^{\alpha -1} \int e^\epsilon q(\epsilon;K) d \epsilon = 0\]</div>
 <p>which can be verified to be satisfied if the firm sets</p>
 <div class="math notranslate nohighlight">
 \[
 k = K
 \]</div>
-<p>because by setting <span class="math notranslate nohighlight">\(k=K\)</span> equation <a class="reference internal" href="#equation-kk">(36.8)</a> becomes
+<p>because by setting <span class="math notranslate nohighlight">\(k=K\)</span> equation <a class="reference internal" href="#equation-kk">(37.8)</a> becomes
 equivalent with the planner’s first-order condition
-<a class="reference internal" href="#equation-focke">(36.1)</a> for setting <span class="math notranslate nohighlight">\(K\)</span>.</p>
+<a class="reference internal" href="#equation-focke">(37.1)</a> for setting <span class="math notranslate nohighlight">\(K\)</span>.</p>
 <p>To pose a consumer’s problem in a competitive equilibrium, we require
 not only the above guess for the Arrow securities pricing kernel
 <span class="math notranslate nohighlight">\(q(\epsilon)\)</span> but the value of equity <span class="math notranslate nohighlight">\(\tilde V\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-tildev2">
-<span class="eqno">(36.9)<a class="headerlink" href="#equation-tildev2" title="Permalink to this equation">¶</a></span>\[\tilde V = \int A K^\alpha e^\epsilon q(\epsilon;K) d \epsilon\]</div>
+<span class="eqno">(37.9)<a class="headerlink" href="#equation-tildev2" title="Permalink to this equation">¶</a></span>\[\tilde V = \int A K^\alpha e^\epsilon q(\epsilon;K) d \epsilon\]</div>
 <p>Let <span class="math notranslate nohighlight">\(\tilde V\)</span> be the value of equity implied by Arrow securities
-price function <a class="reference internal" href="#equation-arrowprices">(36.7)</a> and formula
-<a class="reference internal" href="#equation-tildev2">(36.9)</a>.</p>
-<p>At the Arrow securities prices <span class="math notranslate nohighlight">\(q(\epsilon)\)</span> given by <a class="reference internal" href="#equation-arrowprices">(36.7)</a>
-and equity value <span class="math notranslate nohighlight">\(\tilde V\)</span> given by <a class="reference internal" href="#equation-tildev2">(36.9)</a>,
+price function <a class="reference internal" href="#equation-arrowprices">(37.7)</a> and formula
+<a class="reference internal" href="#equation-tildev2">(37.9)</a>.</p>
+<p>At the Arrow securities prices <span class="math notranslate nohighlight">\(q(\epsilon)\)</span> given by <a class="reference internal" href="#equation-arrowprices">(37.7)</a>
+and equity value <span class="math notranslate nohighlight">\(\tilde V\)</span> given by <a class="reference internal" href="#equation-tildev2">(37.9)</a>,
 consumer <span class="math notranslate nohighlight">\(i=1,2\)</span> choose consumption allocations and portolios
 that satisfy the first-order necessary conditions</p>
 <div class="math notranslate nohighlight">
@@ -1101,7 +1105,7 @@ associated with the same distribution of wealth <span class="math notranslate no
 <strong>Hint:</strong> Think about the portfolio indeterminacy finding above.</p>
 </div>
 <div class="section" id="modigliani-miller-theorem">
-<h3><span class="section-number">36.2.6. </span>Modigliani-Miller theorem<a class="headerlink" href="#modigliani-miller-theorem" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.2.6. </span>Modigliani-Miller theorem<a class="headerlink" href="#modigliani-miller-theorem" title="Permalink to this headline">¶</a></h3>
 <p>We now allow a firm to issue both bonds and equity.</p>
 <p>Payouts from equity and bonds, respectively, are</p>
 <div class="math notranslate nohighlight">
@@ -1145,7 +1149,7 @@ p(k, b) &amp; =   \frac{A k^\alpha}{b} \int_{-\infty}^{\epsilon^*} e^\epsilon q(
 \]</div>
 <p>which is the same expression that we obtained above when we assumed that
 the firm issued only equity.</p>
-<p>We thus obtain a version of the celebrated Modigliani-Miller theorem <span id="id3">[<a class="reference internal" href="zreferences.html#id19">MM58</a>]</span>
+<p>We thus obtain a version of the celebrated Modigliani-Miller theorem <span id="id3">[<a class="reference internal" href="zreferences.html#id26">MM58</a>]</span>
 about firms’ finance:</p>
 <p><strong>Modigliani-Miller theorem:</strong></p>
 <ul class="simple">
@@ -1165,7 +1169,7 @@ incomplete – we’ll shut down markets in almost all Arrow securities.</p>
 </div>
 </div>
 <div class="section" id="code">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">36.3. </span>Code</a><a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7"><span class="section-number">37.3. </span>Code</a><a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
 <p>We create a class object <code class="docutils literal notranslate"><span class="pre">BCG_complete_markets</span></code> to compute
 equilibrium allocations of the complete market BCG model given a list
 of parameter values.</p>
@@ -1451,10 +1455,10 @@ Gauss-Hermite quadrature: default value is 10</p></li>
 </div>
 </div>
 <div class="section" id="examples">
-<h3><span class="section-number">36.3.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">37.3.1. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <p>Below we provide some examples of how to use <code class="docutils literal notranslate"><span class="pre">BCG_complete</span> <span class="pre">markets</span></code>.</p>
 <div class="section" id="st-example">
-<h4><span class="section-number">36.3.1.1. </span>1st example<a class="headerlink" href="#st-example" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">37.3.1.1. </span>1st example<a class="headerlink" href="#st-example" title="Permalink to this headline">¶</a></h4>
 <p>In the first example, we set up instances of  BCG complete markets
 models.</p>
 <p>We can use either default parameter values or set parameter values as we
@@ -1542,7 +1546,7 @@ The optimal c20 for model 2: 0.92862
 </div>
 </div>
 <div class="section" id="nd-example">
-<h4><span class="section-number">36.3.1.2. </span>2nd example<a class="headerlink" href="#nd-example" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">37.3.1.2. </span>2nd example<a class="headerlink" href="#nd-example" title="Permalink to this headline">¶</a></h4>
 <p>In the second example, we illustrate how the optimal choice of <span class="math notranslate nohighlight">\(k\)</span>
 is influenced by the correlation parameter <span class="math notranslate nohighlight">\(\chi_i\)</span>.</p>
 <p>We will need to install the <code class="docutils literal notranslate"><span class="pre">plotly</span></code> package for 3D illustration. See
@@ -1582,8 +1586,8 @@ is influenced by the correlation parameter <span class="math notranslate nohighl
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3.02 s, sys: 7.65 ms, total: 3.03 s
-Wall time: 3.01 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 3.14 s, sys: 7.74 ms, total: 3.15 s
+Wall time: 3.14 s
 </pre></div>
 </div>
 </div>
@@ -1597,8 +1601,8 @@ Wall time: 3.01 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.1 ms, sys: 12 µs, total: 10.1 ms
-Wall time: 9.66 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 15.6 ms, sys: 54 µs, total: 15.6 ms
+Wall time: 9.87 ms
 </pre></div>
 </div>
 </div>
@@ -1664,7 +1668,7 @@ Wall time: 9.66 ms
                 
 
 
-                <footer class="page__footer">
+                <footer class="qe-page__footer">
 
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
@@ -1677,16 +1681,16 @@ Wall time: 9.66 ms
             
 
             
-            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
 
-                <div class="sidebar__header">
+                <div class="qe-sidebar__header">
 
 
                     Contents
 
                 </div>
 
-                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p class="caption">
  <span class="caption-text">
   Tools and Techniques
@@ -1736,33 +1740,28 @@ Wall time: 9.66 ms
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="robustness.html">
-   8. Robustness
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   9. Markov Jump Linear Quadratic Dynamic Programming
+   8. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   10. How to Pay for a War: Part 1
+   9. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   11. How to Pay for a War: Part 2
+   10. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   12. How to Pay for a War: Part 3
+   11. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   13. Optimal Taxation in an LQ Economy
+   12. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -1773,23 +1772,18 @@ Wall time: 9.66 ms
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="rob_markov_perf.html">
-   14. Robust Markov Perfect Equilibrium
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   15. Default Risk and Income Fluctuations
+   13. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   16. Globalization and Cycles
+   14. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   17. Coase’s Theory of the Firm
+   15. Coase’s Theory of the Firm
   </a>
  </li>
 </ul>
@@ -1801,42 +1795,64 @@ Wall time: 9.66 ms
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   18. Recursive Models of Dynamic Linear Economies
+   16. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   19. Growth in Dynamic Linear Economies
+   17. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   20. Lucas Asset Pricing Using DLE
+   18. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   21. IRFs in Hall Models
+   19. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   22. Permanent Income Model using the DLE Class
+   20. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   21. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   22. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   23. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Risk, Model Uncertainty, and Robustness
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="five_preferences.html">
+   24. Risk and Model Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   25. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   26. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1848,7 +1864,7 @@ Wall time: 9.66 ms
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="von_neumann_model.html">
-   26. Von Neumann Growth Model (and a Generalization)
+   27. Von Neumann Growth Model (and a Generalization)
   </a>
  </li>
 </ul>
@@ -1860,32 +1876,32 @@ Wall time: 9.66 ms
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   27. Covariance Stationary Processes
+   28. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   28. Estimation of Spectra
+   29. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   29. Additive and Multiplicative Functionals
+   30. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   30. Classical Control with Linear Algebra
+   31. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   31. Classical Prediction and Filtering With Linear Algebra
+   32. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   32. Knowing the Forecasts of Others
+   33. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -1897,27 +1913,27 @@ Wall time: 9.66 ms
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   33. Asset Pricing II: The Lucas Asset Pricing Model
+   34. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   34. Elementary Asset Pricing Theory
+   35. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   35. Two Modifications of Mean-Variance Portfolio Theory
+   36. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   36. Irrelevance of Capital Structure with Complete Markets
+   37. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   37. Equilibrium Capital Structures with Incomplete Markets
+   38. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1929,42 +1945,42 @@ Wall time: 9.66 ms
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   38. Stackelberg Plans
+   39. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   40. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   40. Optimal Taxation with State-Contingent Debt
+   41. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   41. Optimal Taxation without State-Contingent Debt
+   42. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   42. Fluctuating Interest Rates Deliver Fiscal Insurance
+   43. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   43. Fiscal Risk and Government Debt
+   44. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   44. Competitive Equilibria of a Model of Chang
+   45. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   45. Credible Government Policies in a Model of Chang
+   46. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1976,24 +1992,24 @@ Wall time: 9.66 ms
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   47. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   48. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   49. Execution Statistics
   </a>
  </li>
 </ul>
 
                 </nav>
 
-                <div class="sidebar__footer">
+                <div class="qe-sidebar__footer">
 
                 </div>
 
@@ -2001,11 +2017,11 @@ Wall time: 9.66 ms
             
         </div> <!-- .main -->
 
-        <div class="toolbar">
+        <div class="qe-toolbar">
 
-            <div class="toolbar__inner">
+            <div class="qe-toolbar__inner">
 
-                <ul class="toolbar__main">
+                <ul class="qe-toolbar__main">
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
@@ -2017,12 +2033,12 @@ Wall time: 9.66 ms
                     </li> -->
                 </ul>
 
-                <ul class="toolbar__links">
+                <ul class="qe-toolbar__links">
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/BCG_complete_mkts.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/BCG_complete_mkts.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/BCG_complete_mkts.md" download><i data-feather="github"></i></a></li>

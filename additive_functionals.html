@@ -5,16 +5,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>29. Additive and Multiplicative Functionals &#8212; Advanced Quantitative Economics with Python</title>
+    <title>30. Additive and Multiplicative Functionals &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     
         <script>
             MathJax = {
-            loader: {load: ['[tex]/boldsymbol']},
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
             tex: {
-                packages: {'[+]': ['boldsymbol']},
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 processEscapes: true,
                 macros: {
@@ -48,8 +48,8 @@
     
     
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -63,7 +63,7 @@
       
 
     
-    <link rel="stylesheet" href="_static/quantecon-book-theme.857ff391aaabaeb8c161d2309c375fe6.css" type="text/css" />
+    <link rel="stylesheet" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -72,7 +72,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -85,7 +85,7 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/quantecon-book-theme.76bf49d7bbc59738cdb03766fad654af.js"></script>
+    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -115,8 +115,8 @@
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="30. Classical Control with Linear Algebra" href="lu_tricks.html" />
-    <link rel="prev" title="28. Estimation of Spectra" href="estspec.html" />
+    <link rel="next" title="31. Classical Control with Linear Algebra" href="lu_tricks.html" />
+    <link rel="prev" title="29. Estimation of Spectra" href="estspec.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -146,100 +146,100 @@
 
     <span id="top"></span>
 
-    <div class="wrapper">
+    <div class="qe-wrapper">
 
-        <div class="main">
+        <div class="qe-main">
 
-            <div class="page" id=additive_functionals>
+            <div class="qe-page" id=additive_functionals>
 
-                <div class="page__toc">
+                <div class="qe-page__toc">
 
                     <div class="inner">
 
                         
-                        <div class="page__toc-header">
+                        <div class="qe-page__toc-header">
                             On this page
                         </div>
 
 
-                        <nav id="bd-toc-nav" class="page__toc-nav">
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#overview">
-   29.1. Overview
+   30.1. Overview
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-particular-additive-functional">
-   29.2. A Particular Additive Functional
+   30.2. A Particular Additive Functional
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#linear-state-space-representation">
-     29.2.1. Linear State-Space Representation
+     30.2.1. Linear State-Space Representation
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dynamics">
-   29.3. Dynamics
+   30.3. Dynamics
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#simulation">
-     29.3.1. Simulation
+     30.3.1. Simulation
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#plotting">
-       29.3.1.1. Plotting
+       30.3.1.1. Plotting
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#decomposition">
-     29.3.2. Decomposition
+     30.3.2. Decomposition
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#code">
-   29.4. Code
+   30.4. Code
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#associated-multiplicative-functional">
-     29.4.1. Associated Multiplicative Functional
+     30.4.1. Associated Multiplicative Functional
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#peculiar-large-sample-property">
-     29.4.2. Peculiar Large Sample Property
+     30.4.2. Peculiar Large Sample Property
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#more-about-the-multiplicative-martingale">
-   29.5. More About the Multiplicative Martingale
+   30.5. More About the Multiplicative Martingale
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#simulating-a-multiplicative-martingale-again">
-     29.5.1. Simulating a Multiplicative Martingale Again
+     30.5.1. Simulating a Multiplicative Martingale Again
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#sample-paths">
-     29.5.2. Sample Paths
+     30.5.2. Sample Paths
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#multiplicative-martingale-as-likelihood-ratio-process">
-     29.5.3. Multiplicative Martingale as Likelihood Ratio Process
+     30.5.3. Multiplicative Martingale as Likelihood Ratio Process
     </a>
    </li>
   </ul>
@@ -258,7 +258,7 @@
 
                         </nav>
 
-                        <div class="page__toc-footer">
+                        <div class="qe-page__toc-footer">
                             
                             
                             <p><a href="#top"><strong>Back to top</strong></a></p>
@@ -268,24 +268,24 @@
 
                 </div>
 
-                <div class="page__header">
+                <div class="qe-page__header">
 
-                    <div class="page__header-copy">
+                    <div class="qe-page__header-copy">
 
-                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
 
-                        <p class="page__header-subheading">Additive and Multiplicative Functionals</p>
+                        <p class="qe-page__header-subheading">Additive and Multiplicative Functionals</p>
 
                     </div>
 
-                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
 
                 </div> <!-- .page__header -->
 
 
 
                 
-                <main class="page__content" role="main">
+                <main class="qe-page__content" role="main">
                     
                     <div>
                         
@@ -294,7 +294,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><div class="section" id="additive-and-multiplicative-functionals">
-<h1><a class="toc-backref" href="#id10"><span class="section-number">29. </span>Additive and Multiplicative Functionals</a><a class="headerlink" href="#additive-and-multiplicative-functionals" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id10"><span class="section-number">30. </span>Additive and Multiplicative Functionals</a><a class="headerlink" href="#additive-and-multiplicative-functionals" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <span id="index-0"></span><p class="topic-title">Contents</p>
 <ul class="simple">
@@ -317,32 +317,34 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.2)
 Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
-Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
-Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
 Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
 Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
 Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="overview">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">29.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11"><span class="section-number">30.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>Many economic time series display persistent growth that prevents them from being  asymptotically stationary and ergodic.</p>
 <p>For example, outputs, prices, and dividends typically display  irregular but persistent growth.</p>
 <p>Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.</p>
 <p>Are there ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process?</p>
-<p>The answer provided by Hansen and Scheinkman <span id="id1">[<a class="reference internal" href="zreferences.html#id90">HS09</a>]</span> is yes.</p>
+<p>The answer provided by Hansen and Scheinkman <span id="id1">[<a class="reference internal" href="zreferences.html#id99">HS09</a>]</span> is yes.</p>
 <p>They described  two classes of time series models that accommodate growth.</p>
 <p>They are</p>
 <ol class="simple">
@@ -351,7 +353,7 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/m
 </ol>
 <p>These two classes of processes are closely connected.</p>
 <p>If a process <span class="math notranslate nohighlight">\(\{y_t\}\)</span> is an additive functional and <span class="math notranslate nohighlight">\(\phi_t = \exp(y_t)\)</span>, then <span class="math notranslate nohighlight">\(\{\phi_t\}\)</span> is a multiplicative functional.</p>
-<p>Hansen and Sargent <span id="id2">[<a class="reference internal" href="zreferences.html#id92">HS08b</a>]</span> (chs. 5 and 8) describe discrete time versions of additive and multiplicative functionals.</p>
+<p>Hansen and Sargent <span id="id2">[<a class="reference internal" href="zreferences.html#id101">HS08b</a>]</span> (chs. 5 and 8) describe discrete time versions of additive and multiplicative functionals.</p>
 <p>In this lecture, we describe both  additive functionals and multiplicative functionals.</p>
 <p>We also describe and compute decompositions of additive and multiplicative processes into four components:</p>
 <ol class="simple">
@@ -361,7 +363,7 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/m
 <li><p>a <strong>martingale</strong></p></li>
 </ol>
 <p>We describe how to construct,  simulate,  and interpret these components.</p>
-<p>More details about  these concepts and algorithms  can be found in Hansen and Sargent <span id="id3">[<a class="reference internal" href="zreferences.html#id92">HS08b</a>]</span>.</p>
+<p>More details about  these concepts and algorithms  can be found in Hansen and Sargent <span id="id3">[<a class="reference internal" href="zreferences.html#id101">HS08b</a>]</span>.</p>
 <p>Let’s start with some imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -378,14 +380,14 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/m
 </div>
 </div>
 <div class="section" id="a-particular-additive-functional">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">29.2. </span>A Particular Additive Functional</a><a class="headerlink" href="#a-particular-additive-functional" title="Permalink to this headline">¶</a></h2>
-<p>Hansen and Sargent <span id="id4">[<a class="reference internal" href="zreferences.html#id92">HS08b</a>]</span>  describe a general class of additive functionals.</p>
+<h2><a class="toc-backref" href="#id12"><span class="section-number">30.2. </span>A Particular Additive Functional</a><a class="headerlink" href="#a-particular-additive-functional" title="Permalink to this headline">¶</a></h2>
+<p>Hansen and Sargent <span id="id4">[<a class="reference internal" href="zreferences.html#id101">HS08b</a>]</span>  describe a general class of additive functionals.</p>
 <p>This lecture focuses on a subclass of these: a scalar process <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> whose increments are driven by a Gaussian vector autoregression.</p>
 <p>Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
 by using linear state-space tools.</p>
 <p>We construct our  additive functional from two pieces, the first of which is a <strong>first-order vector autoregression</strong> (VAR)</p>
 <div class="math notranslate nohighlight" id="equation-old1-additive-functionals">
-<span class="eqno">(29.1)<a class="headerlink" href="#equation-old1-additive-functionals" title="Permalink to this equation">¶</a></span>\[x_{t+1} = A x_t + B z_{t+1}\]</div>
+<span class="eqno">(30.1)<a class="headerlink" href="#equation-old1-additive-functionals" title="Permalink to this equation">¶</a></span>\[x_{t+1} = A x_t + B z_{t+1}\]</div>
 <p>Here</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(x_t\)</span> is an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector,</p></li>
@@ -399,17 +401,17 @@ of <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> as
 <ul class="simple">
 <li><p>a scalar constant <span class="math notranslate nohighlight">\(\nu\)</span>,</p></li>
 <li><p>the vector <span class="math notranslate nohighlight">\(x_t\)</span>, and</p></li>
-<li><p>the same Gaussian vector <span class="math notranslate nohighlight">\(z_{t+1}\)</span> that appears in the VAR <a class="reference internal" href="#equation-old1-additive-functionals">(29.1)</a></p></li>
+<li><p>the same Gaussian vector <span class="math notranslate nohighlight">\(z_{t+1}\)</span> that appears in the VAR <a class="reference internal" href="#equation-old1-additive-functionals">(30.1)</a></p></li>
 </ul>
 <p>In particular,</p>
 <div class="math notranslate nohighlight" id="equation-old2-additive-functionals">
-<span class="eqno">(29.2)<a class="headerlink" href="#equation-old2-additive-functionals" title="Permalink to this equation">¶</a></span>\[y_{t+1} - y_{t} = \nu + D x_{t} + F z_{t+1}\]</div>
+<span class="eqno">(30.2)<a class="headerlink" href="#equation-old2-additive-functionals" title="Permalink to this equation">¶</a></span>\[y_{t+1} - y_{t} = \nu + D x_{t} + F z_{t+1}\]</div>
 <p>Here <span class="math notranslate nohighlight">\(y_0 \sim {\cal N}(\mu_{y0}, \Sigma_{y0})\)</span> is a random
 initial condition for <span class="math notranslate nohighlight">\(y\)</span>.</p>
 <p>The nonstationary random process <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> displays
 systematic but random <em>arithmetic growth</em>.</p>
 <div class="section" id="linear-state-space-representation">
-<h3><span class="section-number">29.2.1. </span>Linear State-Space Representation<a class="headerlink" href="#linear-state-space-representation" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">30.2.1. </span>Linear State-Space Representation<a class="headerlink" href="#linear-state-space-representation" title="Permalink to this headline">¶</a></h3>
 <p>A convenient way to represent our additive functional is to use a <a class="reference external" href="https://python-intro.quantecon.org/linear_models.html">linear state space system</a>.</p>
 <p>To do this, we set up state and observation vectors</p>
 <div class="math notranslate nohighlight">
@@ -469,11 +471,11 @@ z_{t+1}
 </div>
 </div>
 <div class="section" id="dynamics">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">29.3. </span>Dynamics</a><a class="headerlink" href="#dynamics" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id13"><span class="section-number">30.3. </span>Dynamics</a><a class="headerlink" href="#dynamics" title="Permalink to this headline">¶</a></h2>
 <p>Let’s run some simulations to build intuition.</p>
 <p id="addfunc-eg1">In doing so we’ll assume that <span class="math notranslate nohighlight">\(z_{t+1}\)</span> is scalar and that <span class="math notranslate nohighlight">\(\tilde x_t\)</span> follows a 4th-order scalar autoregression.</p>
 <div class="math notranslate nohighlight" id="equation-ftaf">
-<span class="eqno">(29.3)<a class="headerlink" href="#equation-ftaf" title="Permalink to this equation">¶</a></span>\[\tilde x_{t+1} = \phi_1 \tilde x_{t} + \phi_2 \tilde x_{t-1} +
+<span class="eqno">(30.3)<a class="headerlink" href="#equation-ftaf" title="Permalink to this equation">¶</a></span>\[\tilde x_{t+1} = \phi_1 \tilde x_{t} + \phi_2 \tilde x_{t-1} +
 \phi_3 \tilde x_{t-2} +
 \phi_4 \tilde x_{t-3} + \sigma z_{t+1}\]</div>
 <p>in which the zeros <span class="math notranslate nohighlight">\(z\)</span>  of the polynomial</p>
@@ -489,16 +491,16 @@ z_{t+1}
 y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 \]</div>
 <p>with an initial condition for <span class="math notranslate nohighlight">\(y_0\)</span>.</p>
-<p>While <a class="reference internal" href="#equation-ftaf">(29.3)</a> is not a first order system like <a class="reference internal" href="#equation-old1-additive-functionals">(29.1)</a>, we know that it can be mapped  into a first order system.</p>
+<p>While <a class="reference internal" href="#equation-ftaf">(30.3)</a> is not a first order system like <a class="reference internal" href="#equation-old1-additive-functionals">(30.1)</a>, we know that it can be mapped  into a first order system.</p>
 <ul class="simple">
 <li><p>For an example of such a mapping, see <a class="reference external" href="https://python-intro.quantecon.org/linear_models.html#Second-order-Difference-Equation">this example</a>.</p></li>
 </ul>
-<p>In fact, this whole model can be mapped into the additive functional system definition in <a class="reference internal" href="#equation-old1-additive-functionals">(29.1)</a> – <a class="reference internal" href="#equation-old2-additive-functionals">(29.2)</a>  by appropriate selection of the matrices <span class="math notranslate nohighlight">\(A, B, D, F\)</span>.</p>
+<p>In fact, this whole model can be mapped into the additive functional system definition in <a class="reference internal" href="#equation-old1-additive-functionals">(30.1)</a> – <a class="reference internal" href="#equation-old2-additive-functionals">(30.2)</a>  by appropriate selection of the matrices <span class="math notranslate nohighlight">\(A, B, D, F\)</span>.</p>
 <p>You can try writing these matrices down now as an exercise — correct expressions appear in the code below.</p>
 <div class="section" id="simulation">
-<h3><span class="section-number">29.3.1. </span>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">30.3.1. </span>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h3>
 <p>When simulating we embed our variables into a bigger system.</p>
-<p>This system also constructs the components of the decompositions of <span class="math notranslate nohighlight">\(y_t\)</span> and of <span class="math notranslate nohighlight">\(\exp(y_t)\)</span> proposed by Hansen and Scheinkman <span id="id5">[<a class="reference internal" href="zreferences.html#id90">HS09</a>]</span>.</p>
+<p>This system also constructs the components of the decompositions of <span class="math notranslate nohighlight">\(y_t\)</span> and of <span class="math notranslate nohighlight">\(\exp(y_t)\)</span> proposed by Hansen and Scheinkman <span id="id5">[<a class="reference internal" href="zreferences.html#id99">HS09</a>]</span>.</p>
 <p>All of these objects are computed using the code below</p>
 <div class="cell docutils container" id="amf-lss">
 <div class="cell_input docutils container">
@@ -657,7 +659,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 </div>
 </div>
 <div class="section" id="plotting">
-<h4><span class="section-number">29.3.1.1. </span>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">30.3.1.1. </span>Plotting<a class="headerlink" href="#plotting" title="Permalink to this headline">¶</a></h4>
 <p>The code below adds some functions that generate plots for instances of the <code class="docutils literal notranslate"><span class="pre">AMF_LSS_VAR</span></code> <a class="reference internal" href="#amf-lss"><span class="std std-ref">class</span></a>.</p>
 <div class="cell tag_collapse-20 docutils container">
 <div class="cell_input docutils container">
@@ -981,8 +983,8 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 </div>
 </div>
 <div class="section" id="decomposition">
-<h3><span class="section-number">29.3.2. </span>Decomposition<a class="headerlink" href="#decomposition" title="Permalink to this headline">¶</a></h3>
-<p>Hansen and Sargent <span id="id6">[<a class="reference internal" href="zreferences.html#id92">HS08b</a>]</span> describe how to construct a decomposition of
+<h3><span class="section-number">30.3.2. </span>Decomposition<a class="headerlink" href="#decomposition" title="Permalink to this headline">¶</a></h3>
+<p>Hansen and Sargent <span id="id6">[<a class="reference internal" href="zreferences.html#id101">HS08b</a>]</span> describe how to construct a decomposition of
 an additive functional into four parts:</p>
 <ul class="simple">
 <li><p>a constant inherited from initial values <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span></p></li>
@@ -991,7 +993,7 @@ an additive functional into four parts:</p>
 <li><p>an (asymptotically) stationary component</p></li>
 </ul>
 <p>To attain this decomposition for the particular class of additive
-functionals defined by <a class="reference internal" href="#equation-old1-additive-functionals">(29.1)</a> and <a class="reference internal" href="#equation-old2-additive-functionals">(29.2)</a>, we first construct the matrices</p>
+functionals defined by <a class="reference internal" href="#equation-old1-additive-functionals">(30.1)</a> and <a class="reference internal" href="#equation-old2-additive-functionals">(30.2)</a>, we first construct the matrices</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -1000,7 +1002,7 @@ functionals defined by <a class="reference internal" href="#equation-old1-additi
   g &amp; := D (I - A)^{-1}
 \end{aligned}
 \end{split}\]</div>
-<p>Then the Hansen-Scheinkman <span id="id7">[<a class="reference internal" href="zreferences.html#id90">HS09</a>]</span> decomposition is</p>
+<p>Then the Hansen-Scheinkman <span id="id7">[<a class="reference internal" href="zreferences.html#id99">HS09</a>]</span> decomposition is</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -1011,7 +1013,7 @@ functionals defined by <a class="reference internal" href="#equation-old1-additi
      \overbrace{g x_0 + y_0}^{\text{initial conditions}}
 \end{aligned}
 \]</div>
-<p>At this stage, you should pause and verify that <span class="math notranslate nohighlight">\(y_{t+1} - y_t\)</span> satisfies <a class="reference internal" href="#equation-old2-additive-functionals">(29.2)</a>.</p>
+<p>At this stage, you should pause and verify that <span class="math notranslate nohighlight">\(y_{t+1} - y_t\)</span> satisfies <a class="reference internal" href="#equation-old2-additive-functionals">(30.2)</a>.</p>
 <p>It is convenient for us to introduce the following notation:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\tau_t = \nu t\)</span> , a linear, deterministic trend</p></li>
@@ -1021,7 +1023,7 @@ functionals defined by <a class="reference internal" href="#equation-old1-additi
 <p>We want to characterize and simulate components <span class="math notranslate nohighlight">\(\tau_t, m_t, s_t\)</span> of the decomposition.</p>
 <p>A convenient way to do this is to construct an appropriate instance of a <a class="reference external" href="https://python-intro.quantecon.org/linear_models.html">linear state space system</a> by using <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py">LinearStateSpace</a> from <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a>.</p>
 <p>This will allow us to use the routines in <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py">LinearStateSpace</a> to study dynamics.</p>
-<p>To start, observe that, under the dynamics in <a class="reference internal" href="#equation-old1-additive-functionals">(29.1)</a> and <a class="reference internal" href="#equation-old2-additive-functionals">(29.2)</a> and with the
+<p>To start, observe that, under the dynamics in <a class="reference internal" href="#equation-old1-additive-functionals">(30.1)</a> and <a class="reference internal" href="#equation-old2-additive-functionals">(30.2)</a> and with the
 definitions just given,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1100,7 +1102,7 @@ interest.</p>
 </div>
 </div>
 <div class="section" id="code">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">29.4. </span>Code</a><a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14"><span class="section-number">30.4. </span>Code</a><a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
 <p>The class <code class="docutils literal notranslate"><span class="pre">AMF_LSS_VAR</span></code> mentioned <a class="reference internal" href="#amf-lss"><span class="std std-ref">above</span></a> does all that we want to study our additive functional.</p>
 <p>In fact, <code class="docutils literal notranslate"><span class="pre">AMF_LSS_VAR</span></code> does more
 because it allows us to study  an associated multiplicative functional as well.</p>
@@ -1131,7 +1133,7 @@ you will generate (modulo randomness) the plot</p>
 constant band</p></li>
 </ul>
 <div class="section" id="associated-multiplicative-functional">
-<h3><span class="section-number">29.4.1. </span>Associated Multiplicative Functional<a class="headerlink" href="#associated-multiplicative-functional" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">30.4.1. </span>Associated Multiplicative Functional<a class="headerlink" href="#associated-multiplicative-functional" title="Permalink to this headline">¶</a></h3>
 <p>Where <span class="math notranslate nohighlight">\(\{y_t\}\)</span> is our additive functional, let <span class="math notranslate nohighlight">\(M_t = \exp(y_t)\)</span>.</p>
 <p>As mentioned above, the process <span class="math notranslate nohighlight">\(\{M_t\}\)</span> is called a <strong>multiplicative functional</strong>.</p>
 <p>Corresponding to the additive decomposition described above we have a multiplicative decomposition of  <span class="math notranslate nohighlight">\(M_t\)</span></p>
@@ -1181,8 +1183,8 @@ for a limited horizon <span class="math notranslate nohighlight">\(T\)</span>.</
 <p>Let’s see what happens when we set <span class="math notranslate nohighlight">\(T = 12000\)</span> instead of <span class="math notranslate nohighlight">\(150\)</span>.</p>
 </div>
 <div class="section" id="peculiar-large-sample-property">
-<h3><span class="section-number">29.4.2. </span>Peculiar Large Sample Property<a class="headerlink" href="#peculiar-large-sample-property" title="Permalink to this headline">¶</a></h3>
-<p>Hansen and Sargent <span id="id8">[<a class="reference internal" href="zreferences.html#id92">HS08b</a>]</span> (ch. 8) describe the following two properties of the  martingale component
+<h3><span class="section-number">30.4.2. </span>Peculiar Large Sample Property<a class="headerlink" href="#peculiar-large-sample-property" title="Permalink to this headline">¶</a></h3>
+<p>Hansen and Sargent <span id="id8">[<a class="reference internal" href="zreferences.html#id101">HS08b</a>]</span> (ch. 8) describe the following two properties of the  martingale component
 <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> of the multiplicative decomposition</p>
 <ul class="simple">
 <li><p>while <span class="math notranslate nohighlight">\(E_0 \widetilde M_t = 1\)</span> for all <span class="math notranslate nohighlight">\(t \geq 0\)</span>,
@@ -1192,7 +1194,7 @@ zero almost surely</p></li>
 </ul>
 <p>The first property follows from the fact that <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> is a multiplicative martingale with initial condition
 <span class="math notranslate nohighlight">\(\widetilde M_0 = 1\)</span>.</p>
-<p>The second is a <strong>peculiar property</strong> noted and proved by Hansen and Sargent <span id="id9">[<a class="reference internal" href="zreferences.html#id92">HS08b</a>]</span>.</p>
+<p>The second is a <strong>peculiar property</strong> noted and proved by Hansen and Sargent <span id="id9">[<a class="reference internal" href="zreferences.html#id101">HS08b</a>]</span>.</p>
 <p>The following simulation of many paths of <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> illustrates both properties</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1212,7 +1214,7 @@ zero almost surely</p></li>
 </div>
 </div>
 <div class="section" id="more-about-the-multiplicative-martingale">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">29.5. </span>More About the Multiplicative Martingale</a><a class="headerlink" href="#more-about-the-multiplicative-martingale" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15"><span class="section-number">30.5. </span>More About the Multiplicative Martingale</a><a class="headerlink" href="#more-about-the-multiplicative-martingale" title="Permalink to this headline">¶</a></h2>
 <p>Let’s drill down and study probability distribution of the multiplicative martingale  <span class="math notranslate nohighlight">\(\{\widetilde M_t\}_{t=0}^\infty\)</span>  in
 more detail.</p>
 <p>As we  have seen, it has representation</p>
@@ -1223,7 +1225,7 @@ more detail.</p>
 <p>where <span class="math notranslate nohighlight">\(H =  [F + D(I-A)^{-1} B]\)</span>.</p>
 <p>It follows that <span class="math notranslate nohighlight">\(\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2}, t H \cdot H )\)</span> and that consequently <span class="math notranslate nohighlight">\({\widetilde M}_t\)</span> is log normal.</p>
 <div class="section" id="simulating-a-multiplicative-martingale-again">
-<h3><span class="section-number">29.5.1. </span>Simulating a Multiplicative Martingale Again<a class="headerlink" href="#simulating-a-multiplicative-martingale-again" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">30.5.1. </span>Simulating a Multiplicative Martingale Again<a class="headerlink" href="#simulating-a-multiplicative-martingale-again" title="Permalink to this headline">¶</a></h3>
 <p>Next, we want a program to simulate the likelihood ratio process <span class="math notranslate nohighlight">\(\{ \tilde{M}_t \}_{t=0}^\infty\)</span>.</p>
 <p>In particular, we want to simulate 5000 sample paths of length <span class="math notranslate nohighlight">\(T\)</span> for the case in which <span class="math notranslate nohighlight">\(x\)</span> is a scalar and
 <span class="math notranslate nohighlight">\([A, B, D, F] = [0.8, 0.001, 1.0, 0.01]\)</span> and <span class="math notranslate nohighlight">\(\nu = 0.005\)</span>.</p>
@@ -1231,7 +1233,7 @@ more detail.</p>
 <p>Here is code that accomplishes these tasks.</p>
 </div>
 <div class="section" id="sample-paths">
-<h3><span class="section-number">29.5.2. </span>Sample Paths<a class="headerlink" href="#sample-paths" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">30.5.2. </span>Sample Paths<a class="headerlink" href="#sample-paths" title="Permalink to this headline">¶</a></h3>
 <p>Let’s write a program to simulate sample paths of <span class="math notranslate nohighlight">\(\{ x_t, y_{t} \}_{t=0}^{\infty}\)</span>.</p>
 <p>We’ll do this by formulating the additive functional as a linear state space model and putting the <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py">LinearStateSpace</a> class to work.</p>
 <div class="cell docutils container">
@@ -1516,7 +1518,7 @@ even as most mass in the distribution of <span class="math notranslate nohighlig
 </ul>
 </div>
 <div class="section" id="multiplicative-martingale-as-likelihood-ratio-process">
-<h3><span class="section-number">29.5.3. </span>Multiplicative Martingale as Likelihood Ratio Process<a class="headerlink" href="#multiplicative-martingale-as-likelihood-ratio-process" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">30.5.3. </span>Multiplicative Martingale as Likelihood Ratio Process<a class="headerlink" href="#multiplicative-martingale-as-likelihood-ratio-process" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="https://python.quantecon.org/likelihood_ratio_process.html">This lecture</a> studies <strong>likelihood processes</strong>
 and <strong>likelihood ratio processes</strong>.</p>
 <p>A <strong>likelihood ratio process</strong> is  a  multiplicative  martingale with mean unity.</p>
@@ -1552,7 +1554,7 @@ and <strong>likelihood ratio processes</strong>.</p>
                 
 
 
-                <footer class="page__footer">
+                <footer class="qe-page__footer">
 
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
@@ -1565,16 +1567,16 @@ and <strong>likelihood ratio processes</strong>.</p>
             
 
             
-            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
 
-                <div class="sidebar__header">
+                <div class="qe-sidebar__header">
 
 
                     Contents
 
                 </div>
 
-                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p class="caption">
  <span class="caption-text">
   Tools and Techniques
@@ -1624,33 +1626,28 @@ and <strong>likelihood ratio processes</strong>.</p>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="robustness.html">
-   8. Robustness
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   9. Markov Jump Linear Quadratic Dynamic Programming
+   8. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   10. How to Pay for a War: Part 1
+   9. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   11. How to Pay for a War: Part 2
+   10. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   12. How to Pay for a War: Part 3
+   11. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   13. Optimal Taxation in an LQ Economy
+   12. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -1661,23 +1658,18 @@ and <strong>likelihood ratio processes</strong>.</p>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="rob_markov_perf.html">
-   14. Robust Markov Perfect Equilibrium
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   15. Default Risk and Income Fluctuations
+   13. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   16. Globalization and Cycles
+   14. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   17. Coase’s Theory of the Firm
+   15. Coase’s Theory of the Firm
   </a>
  </li>
 </ul>
@@ -1689,42 +1681,64 @@ and <strong>likelihood ratio processes</strong>.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   18. Recursive Models of Dynamic Linear Economies
+   16. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   19. Growth in Dynamic Linear Economies
+   17. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   20. Lucas Asset Pricing Using DLE
+   18. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   21. IRFs in Hall Models
+   19. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   22. Permanent Income Model using the DLE Class
+   20. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   21. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   22. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   23. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Risk, Model Uncertainty, and Robustness
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="five_preferences.html">
+   24. Risk and Model Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   25. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   26. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1736,7 +1750,7 @@ and <strong>likelihood ratio processes</strong>.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="von_neumann_model.html">
-   26. Von Neumann Growth Model (and a Generalization)
+   27. Von Neumann Growth Model (and a Generalization)
   </a>
  </li>
 </ul>
@@ -1748,32 +1762,32 @@ and <strong>likelihood ratio processes</strong>.</p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   27. Covariance Stationary Processes
+   28. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   28. Estimation of Spectra
+   29. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   29. Additive and Multiplicative Functionals
+   30. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   30. Classical Control with Linear Algebra
+   31. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   31. Classical Prediction and Filtering With Linear Algebra
+   32. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   32. Knowing the Forecasts of Others
+   33. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -1785,27 +1799,27 @@ and <strong>likelihood ratio processes</strong>.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   33. Asset Pricing II: The Lucas Asset Pricing Model
+   34. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   34. Elementary Asset Pricing Theory
+   35. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   35. Two Modifications of Mean-Variance Portfolio Theory
+   36. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   36. Irrelevance of Capital Structure with Complete Markets
+   37. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   37. Equilibrium Capital Structures with Incomplete Markets
+   38. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1817,42 +1831,42 @@ and <strong>likelihood ratio processes</strong>.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   38. Stackelberg Plans
+   39. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   40. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   40. Optimal Taxation with State-Contingent Debt
+   41. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   41. Optimal Taxation without State-Contingent Debt
+   42. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   42. Fluctuating Interest Rates Deliver Fiscal Insurance
+   43. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   43. Fiscal Risk and Government Debt
+   44. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   44. Competitive Equilibria of a Model of Chang
+   45. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   45. Credible Government Policies in a Model of Chang
+   46. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1864,24 +1878,24 @@ and <strong>likelihood ratio processes</strong>.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   47. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   48. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   49. Execution Statistics
   </a>
  </li>
 </ul>
 
                 </nav>
 
-                <div class="sidebar__footer">
+                <div class="qe-sidebar__footer">
 
                 </div>
 
@@ -1889,11 +1903,11 @@ and <strong>likelihood ratio processes</strong>.</p>
             
         </div> <!-- .main -->
 
-        <div class="toolbar">
+        <div class="qe-toolbar">
 
-            <div class="toolbar__inner">
+            <div class="qe-toolbar__inner">
 
-                <ul class="toolbar__main">
+                <ul class="qe-toolbar__main">
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
@@ -1905,12 +1919,12 @@ and <strong>likelihood ratio processes</strong>.</p>
                     </li> -->
                 </ul>
 
-                <ul class="toolbar__links">
+                <ul class="qe-toolbar__links">
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/additive_functionals.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/additive_functionals.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/additive_functionals.md" download><i data-feather="github"></i></a></li>

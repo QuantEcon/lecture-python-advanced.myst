@@ -5,16 +5,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>13. Optimal Taxation in an LQ Economy &#8212; Advanced Quantitative Economics with Python</title>
+    <title>12. Optimal Taxation in an LQ Economy &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     
         <script>
             MathJax = {
-            loader: {load: ['[tex]/boldsymbol']},
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
             tex: {
-                packages: {'[+]': ['boldsymbol']},
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 processEscapes: true,
                 macros: {
@@ -48,8 +48,8 @@
     
     
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -63,7 +63,7 @@
       
 
     
-    <link rel="stylesheet" href="_static/quantecon-book-theme.857ff391aaabaeb8c161d2309c375fe6.css" type="text/css" />
+    <link rel="stylesheet" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -72,7 +72,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -85,7 +85,7 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/quantecon-book-theme.76bf49d7bbc59738cdb03766fad654af.js"></script>
+    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -279,12 +279,19 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/lqramsey.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="14. Robust Markov Perfect Equilibrium" href="rob_markov_perf.html" />
-    <link rel="prev" title="12. How to Pay for a War: Part 3" href="tax_smoothing_3.html" />
+    <link rel="next" title="13. Default Risk and Income Fluctuations" href="arellano.html" />
+    <link rel="prev" title="11. How to Pay for a War: Part 3" href="tax_smoothing_3.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -314,152 +321,152 @@
 
     <span id="top"></span>
 
-    <div class="wrapper">
+    <div class="qe-wrapper">
 
-        <div class="main">
+        <div class="qe-main">
 
-            <div class="page" id=lqramsey>
+            <div class="qe-page" id=lqramsey>
 
-                <div class="page__toc">
+                <div class="qe-page__toc">
 
                     <div class="inner">
 
                         
-                        <div class="page__toc-header">
+                        <div class="qe-page__toc-header">
                             On this page
                         </div>
 
 
-                        <nav id="bd-toc-nav" class="page__toc-nav">
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#overview">
-   13.1. Overview
+   12.1. Overview
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#model-features">
-     13.1.1. Model Features
+     12.1.1. Model Features
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-ramsey-problem">
-   13.2. The Ramsey Problem
+   12.2. The Ramsey Problem
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#technology">
-     13.2.1. Technology
+     12.2.1. Technology
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#households">
-     13.2.2. Households
+     12.2.2. Households
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#government">
-     13.2.3. Government
+     12.2.3. Government
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exogenous-variables">
-     13.2.4. Exogenous Variables
+     12.2.4. Exogenous Variables
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#feasibility">
-     13.2.5. Feasibility
+     12.2.5. Feasibility
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#government-budget-constraint">
-     13.2.6. Government Budget Constraint
+     12.2.6. Government Budget Constraint
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#equilibrium">
-     13.2.7. Equilibrium
+     12.2.7. Equilibrium
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#solution">
-     13.2.8. Solution
+     12.2.8. Solution
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#computing-the-quadratic-term">
-     13.2.9. Computing the Quadratic Term
+     12.2.9. Computing the Quadratic Term
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#finite-state-markov-case">
-     13.2.10. Finite State Markov Case
+     12.2.10. Finite State Markov Case
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#other-variables">
-     13.2.11. Other Variables
+     12.2.11. Other Variables
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#a-martingale">
-     13.2.12. A Martingale
+     12.2.12. A Martingale
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#implementation">
-   13.3. Implementation
+   12.3. Implementation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#comments-on-the-code">
-     13.3.1. Comments on the Code
+     12.3.1. Comments on the Code
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#examples">
-   13.4. Examples
+   12.4. Examples
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-continuous-case">
-     13.4.1. The Continuous Case
+     12.4.1. The Continuous Case
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-discrete-case">
-     13.4.2. The Discrete Case
+     12.4.2. The Discrete Case
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   13.5. Exercises
+   12.5. Exercises
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-1">
-     13.5.1. Exercise 1
+     12.5.1. Exercise 1
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#solutions">
-   13.6. Solutions
+   12.6. Solutions
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id5">
-     13.6.1. Exercise 1
+     12.6.1. Exercise 1
     </a>
    </li>
   </ul>
@@ -478,7 +485,7 @@
 
                         </nav>
 
-                        <div class="page__toc-footer">
+                        <div class="qe-page__toc-footer">
                             
                             
                             <p><a href="#top"><strong>Back to top</strong></a></p>
@@ -488,24 +495,24 @@
 
                 </div>
 
-                <div class="page__header">
+                <div class="qe-page__header">
 
-                    <div class="page__header-copy">
+                    <div class="qe-page__header-copy">
 
-                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
 
-                        <p class="page__header-subheading">Optimal Taxation in an LQ Economy</p>
+                        <p class="qe-page__header-subheading">Optimal Taxation in an LQ Economy</p>
 
                     </div>
 
-                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
 
                 </div> <!-- .page__header -->
 
 
 
                 
-                <main class="page__content" role="main">
+                <main class="qe-page__content" role="main">
                     
                     <div>
                         
@@ -514,7 +521,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><div class="section" id="optimal-taxation-in-an-lq-economy">
-<h1><a class="toc-backref" href="#id6"><span class="section-number">13. </span><span class="target" id="index-0"></span>Optimal Taxation in an LQ Economy</a><a class="headerlink" href="#optimal-taxation-in-an-lq-economy" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id6"><span class="section-number">12. </span><span class="target" id="index-0"></span>Optimal Taxation in an LQ Economy</a><a class="headerlink" href="#optimal-taxation-in-an-lq-economy" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <span id="index-1"></span><p class="topic-title">Contents</p>
 <ul class="simple">
@@ -538,42 +545,40 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.1)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.2)
+Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
-Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
 Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
 Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
-Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
-Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
 Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="overview">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">13.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7"><span class="section-number">12.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>In this lecture, we study optimal fiscal policy in a linear quadratic setting.</p>
-<p>We modify a model of Robert Lucas and Nancy Stokey <span id="id1">[<a class="reference internal" href="zreferences.html#id163">LS83</a>]</span> so that convenient formulas for
+<p>We modify a model of Robert Lucas and Nancy Stokey <span id="id1">[<a class="reference internal" href="zreferences.html#id172">LS83</a>]</span> so that convenient formulas for
 solving linear-quadratic models can be applied.</p>
 <p>The economy consists of a representative household and a benevolent government.</p>
 <p>The government finances an exogenous stream of government purchases with state-contingent loans and a linear tax on labor income.</p>
 <p>A linear tax is sometimes called a flat-rate tax.</p>
 <p>The household maximizes utility by choosing paths for consumption and labor, taking prices and the government’s tax rate and borrowing plans as given.</p>
 <p>Maximum attainable utility for the household depends on the government’s tax and borrowing plans.</p>
-<p>The <em>Ramsey problem</em> <span id="id2">[<a class="reference internal" href="zreferences.html#id181">Ram27</a>]</span> is  to choose tax and borrowing plans that maximize the household’s welfare, taking the household’s optimizing behavior as given.</p>
+<p>The <em>Ramsey problem</em> <span id="id2">[<a class="reference internal" href="zreferences.html#id190">Ram27</a>]</span> is  to choose tax and borrowing plans that maximize the household’s welfare, taking the household’s optimizing behavior as given.</p>
 <p>There is a large number of competitive equilibria indexed by different government fiscal policies.</p>
 <p>The Ramsey planner chooses the best competitive equilibrium.</p>
 <p>We want to study  the dynamics of tax rates,  tax revenues, government debt under a Ramsey plan.</p>
-<p>Because the Lucas and Stokey model features state-contingent government debt, the government debt dynamics differ substantially from those in a model of Robert Barro <span id="id3">[<a class="reference internal" href="zreferences.html#id123">Bar79</a>]</span>.</p>
+<p>Because the Lucas and Stokey model features state-contingent government debt, the government debt dynamics differ substantially from those in a model of Robert Barro <span id="id3">[<a class="reference internal" href="zreferences.html#id132">Bar79</a>]</span>.</p>
 <p>The treatment given here closely follows <a href=_static/lecture_specific/lqramsey/firenze.pdf download>this manuscript</a>, prepared
 by Thomas J. Sargent and Francois R. Velde.</p>
 <p>We cover only the key features of the problem in this lecture, leaving you to refer to that source for additional results and intuition.</p>
@@ -594,7 +599,7 @@ by Thomas J. Sargent and Francois R. Velde.</p>
 </div>
 </div>
 <div class="section" id="model-features">
-<h3><span class="section-number">13.1.1. </span>Model Features<a class="headerlink" href="#model-features" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.1.1. </span>Model Features<a class="headerlink" href="#model-features" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Linear quadratic (LQ) model</p></li>
 <li><p>Representative household</p></li>
@@ -604,27 +609,27 @@ by Thomas J. Sargent and Francois R. Velde.</p>
 </div>
 </div>
 <div class="section" id="the-ramsey-problem">
-<h2><a class="toc-backref" href="#id8"><span class="section-number">13.2. </span>The Ramsey Problem</a><a class="headerlink" href="#the-ramsey-problem" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id8"><span class="section-number">12.2. </span>The Ramsey Problem</a><a class="headerlink" href="#the-ramsey-problem" title="Permalink to this headline">¶</a></h2>
 <p>We begin by outlining the key assumptions regarding technology, households and the government sector.</p>
 <div class="section" id="technology">
-<h3><span class="section-number">13.2.1. </span>Technology<a class="headerlink" href="#technology" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.1. </span>Technology<a class="headerlink" href="#technology" title="Permalink to this headline">¶</a></h3>
 <p>Labor can be converted one-for-one into a single, non-storable consumption good.</p>
 <p>In the usual spirit of the LQ model, the amount of labor supplied in each period is unrestricted.</p>
 <p>This is unrealistic, but helpful when it comes to solving the model.</p>
 <p>Realistic labor supply can be induced by suitable parameter values.</p>
 </div>
 <div class="section" id="households">
-<h3><span class="section-number">13.2.2. </span>Households<a class="headerlink" href="#households" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.2. </span>Households<a class="headerlink" href="#households" title="Permalink to this headline">¶</a></h3>
 <p>Consider a representative household who chooses a path <span class="math notranslate nohighlight">\(\{\ell_t, c_t\}\)</span>
 for labor and consumption to maximize</p>
 <div class="math notranslate nohighlight" id="equation-lq-hu">
-<span class="eqno">(13.1)<a class="headerlink" href="#equation-lq-hu" title="Permalink to this equation">¶</a></span>\[-\mathbb E \frac{1}{2} \sum_{t=0}^{\infty} \beta^t
+<span class="eqno">(12.1)<a class="headerlink" href="#equation-lq-hu" title="Permalink to this equation">¶</a></span>\[-\mathbb E \frac{1}{2} \sum_{t=0}^{\infty} \beta^t
 \left[
    (c_t - b_t)^2 + \ell_t^2
 \right]\]</div>
 <p>subject to the budget constraint</p>
 <div class="math notranslate nohighlight" id="equation-lq-hc">
-<span class="eqno">(13.2)<a class="headerlink" href="#equation-lq-hc" title="Permalink to this equation">¶</a></span>\[\mathbb E \sum_{t=0}^{\infty} \beta^t p^0_t
+<span class="eqno">(12.2)<a class="headerlink" href="#equation-lq-hc" title="Permalink to this equation">¶</a></span>\[\mathbb E \sum_{t=0}^{\infty} \beta^t p^0_t
 \left[
     d_t + (1 - \tau_t) \ell_t + s_t - c_t
 \right] = 0\]</div>
@@ -647,17 +652,17 @@ the Arrow-Debreu time <span class="math notranslate nohighlight">\(0\)</span> pr
 \]</div>
 <p>Thus, our scaled Arrow-Debreu price is the ordinary Arrow-Debreu price multiplied by the discount factor <span class="math notranslate nohighlight">\(\beta^t\)</span> and divided
 by an appropriate probability.</p>
-<p>The budget constraint <a class="reference internal" href="#equation-lq-hc">(13.2)</a> requires that the present value of consumption be restricted to equal the present value of endowments, labor income and coupon payments on bond holdings.</p>
+<p>The budget constraint <a class="reference internal" href="#equation-lq-hc">(12.2)</a> requires that the present value of consumption be restricted to equal the present value of endowments, labor income and coupon payments on bond holdings.</p>
 </div>
 <div class="section" id="government">
-<h3><span class="section-number">13.2.3. </span>Government<a class="headerlink" href="#government" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.3. </span>Government<a class="headerlink" href="#government" title="Permalink to this headline">¶</a></h3>
 <p>The government imposes a linear tax on labor income, fully committing to a stochastic path of tax rates at time zero.</p>
 <p>The government also issues state-contingent debt.</p>
 <p>Given government tax and borrowing plans, we can construct a competitive equilibrium with distorting government taxes.</p>
 <p>Among all such competitive equilibria, the Ramsey plan is the one that maximizes the welfare of the representative consumer.</p>
 </div>
 <div class="section" id="exogenous-variables">
-<h3><span class="section-number">13.2.4. </span>Exogenous Variables<a class="headerlink" href="#exogenous-variables" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.4. </span>Exogenous Variables<a class="headerlink" href="#exogenous-variables" title="Permalink to this headline">¶</a></h3>
 <p>Endowments, government expenditure, the preference shock process <span class="math notranslate nohighlight">\(b_t\)</span>, and
 promised coupon payments on initial government debt <span class="math notranslate nohighlight">\(s_t\)</span> are all exogenous, and given by</p>
 <ul class="simple">
@@ -675,26 +680,26 @@ an exogenous stochastic process taking values in <span class="math notranslate n
 </ol>
 </div>
 <div class="section" id="feasibility">
-<h3><span class="section-number">13.2.5. </span>Feasibility<a class="headerlink" href="#feasibility" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.5. </span>Feasibility<a class="headerlink" href="#feasibility" title="Permalink to this headline">¶</a></h3>
 <p>The period-by-period feasibility restriction for this economy is</p>
 <div class="math notranslate nohighlight" id="equation-lq-feasible">
-<span class="eqno">(13.3)<a class="headerlink" href="#equation-lq-feasible" title="Permalink to this equation">¶</a></span>\[c_t + g_t = d_t + \ell_t\]</div>
-<p>A labor-consumption process <span class="math notranslate nohighlight">\(\{\ell_t, c_t\}\)</span> is called <em>feasible</em> if <a class="reference internal" href="#equation-lq-feasible">(13.3)</a> holds for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<span class="eqno">(12.3)<a class="headerlink" href="#equation-lq-feasible" title="Permalink to this equation">¶</a></span>\[c_t + g_t = d_t + \ell_t\]</div>
+<p>A labor-consumption process <span class="math notranslate nohighlight">\(\{\ell_t, c_t\}\)</span> is called <em>feasible</em> if <a class="reference internal" href="#equation-lq-feasible">(12.3)</a> holds for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
 </div>
 <div class="section" id="government-budget-constraint">
-<h3><span class="section-number">13.2.6. </span>Government Budget Constraint<a class="headerlink" href="#government-budget-constraint" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.6. </span>Government Budget Constraint<a class="headerlink" href="#government-budget-constraint" title="Permalink to this headline">¶</a></h3>
 <p>Where <span class="math notranslate nohighlight">\(p_t^0\)</span> is again a scaled Arrow-Debreu price, the time zero government budget constraint is</p>
 <div class="math notranslate nohighlight" id="equation-lq-gc">
-<span class="eqno">(13.4)<a class="headerlink" href="#equation-lq-gc" title="Permalink to this equation">¶</a></span>\[\mathbb E \sum_{t=0}^{\infty} \beta^t p^0_t
+<span class="eqno">(12.4)<a class="headerlink" href="#equation-lq-gc" title="Permalink to this equation">¶</a></span>\[\mathbb E \sum_{t=0}^{\infty} \beta^t p^0_t
 (s_t + g_t - \tau_t \ell_t ) = 0\]</div>
 </div>
 <div class="section" id="equilibrium">
-<h3><span class="section-number">13.2.7. </span>Equilibrium<a class="headerlink" href="#equilibrium" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.7. </span>Equilibrium<a class="headerlink" href="#equilibrium" title="Permalink to this headline">¶</a></h3>
 <p>An <em>equilibrium</em> is a feasible allocation <span class="math notranslate nohighlight">\(\{\ell_t, c_t\}\)</span>, a sequence
 of prices <span class="math notranslate nohighlight">\(\{p_t^0\}\)</span>, and a tax system <span class="math notranslate nohighlight">\(\{\tau_t\}\)</span> such that</p>
 <ol class="simple">
 <li><p>The allocation <span class="math notranslate nohighlight">\(\{\ell_t, c_t\}\)</span> is optimal for the household given <span class="math notranslate nohighlight">\(\{p_t^0\}\)</span> and <span class="math notranslate nohighlight">\(\{\tau_t\}\)</span>.</p></li>
-<li><p>The government’s budget constraint <a class="reference internal" href="#equation-lq-gc">(13.4)</a> is satisfied.</p></li>
+<li><p>The government’s budget constraint <a class="reference internal" href="#equation-lq-gc">(12.4)</a> is satisfied.</p></li>
 </ol>
 <p>The <em>Ramsey problem</em> is to choose the equilibrium <span class="math notranslate nohighlight">\(\{\ell_t, c_t, \tau_t, p_t^0\}\)</span> that maximizes the
 household’s welfare.</p>
@@ -705,36 +710,36 @@ then <span class="math notranslate nohighlight">\(\{\tau_t\}\)</span> is called 
 <li><p>Use the first-order conditions from the household problem to pin down
 prices and allocations given <span class="math notranslate nohighlight">\(\{\tau_t\}\)</span>.</p></li>
 <li><p>Use these expressions to rewrite the government budget constraint
-<a class="reference internal" href="#equation-lq-gc">(13.4)</a> in terms of exogenous variables and allocations.</p></li>
-<li><p>Maximize the household’s objective function <a class="reference internal" href="#equation-lq-hu">(13.1)</a> subject to the
+<a class="reference internal" href="#equation-lq-gc">(12.4)</a> in terms of exogenous variables and allocations.</p></li>
+<li><p>Maximize the household’s objective function <a class="reference internal" href="#equation-lq-hu">(12.1)</a> subject to the
 constraint constructed in step 2 and the feasibility constraint
-<a class="reference internal" href="#equation-lq-feasible">(13.3)</a>.</p></li>
+<a class="reference internal" href="#equation-lq-feasible">(12.3)</a>.</p></li>
 </ol>
 <p>The solution to this maximization problem pins down all quantities of interest.</p>
 </div>
 <div class="section" id="solution">
-<h3><span class="section-number">13.2.8. </span>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.8. </span>Solution<a class="headerlink" href="#solution" title="Permalink to this headline">¶</a></h3>
 <p>Step one is to obtain the first-conditions for the household’s problem,
 taking taxes and prices as given.</p>
-<p>Letting <span class="math notranslate nohighlight">\(\mu\)</span> be the Lagrange multiplier on <a class="reference internal" href="#equation-lq-hc">(13.2)</a>, the first-order
+<p>Letting <span class="math notranslate nohighlight">\(\mu\)</span> be the Lagrange multiplier on <a class="reference internal" href="#equation-lq-hc">(12.2)</a>, the first-order
 conditions are <span class="math notranslate nohighlight">\(p_t^0 = (c_t - b_t) / \mu\)</span> and <span class="math notranslate nohighlight">\(\ell_t = (c_t - b_t)
 (1 - \tau_t)\)</span>.</p>
 <p>Rearranging and normalizing at <span class="math notranslate nohighlight">\(\mu = b_0 - c_0\)</span>, we can write these
 conditions as</p>
 <div class="math notranslate nohighlight" id="equation-lq-hfoc">
-<span class="eqno">(13.5)<a class="headerlink" href="#equation-lq-hfoc" title="Permalink to this equation">¶</a></span>\[p_t^0 = \frac{b_t - c_t}{b_0 - c_0}
+<span class="eqno">(12.5)<a class="headerlink" href="#equation-lq-hfoc" title="Permalink to this equation">¶</a></span>\[p_t^0 = \frac{b_t - c_t}{b_0 - c_0}
 \quad \text{and} \quad
 \tau_t = 1 - \frac{\ell_t}{b_t - c_t}\]</div>
-<p>Substituting <a class="reference internal" href="#equation-lq-hfoc">(13.5)</a> into the government’s budget constraint <a class="reference internal" href="#equation-lq-gc">(13.4)</a>
+<p>Substituting <a class="reference internal" href="#equation-lq-hfoc">(12.5)</a> into the government’s budget constraint <a class="reference internal" href="#equation-lq-gc">(12.4)</a>
 yields</p>
 <div class="math notranslate nohighlight" id="equation-lq-gc2">
-<span class="eqno">(13.6)<a class="headerlink" href="#equation-lq-gc2" title="Permalink to this equation">¶</a></span>\[\mathbb E \sum_{t=0}^{\infty} \beta^t
+<span class="eqno">(12.6)<a class="headerlink" href="#equation-lq-gc2" title="Permalink to this equation">¶</a></span>\[\mathbb E \sum_{t=0}^{\infty} \beta^t
 \left[ (b_t - c_t)(s_t + g_t - \ell_t) + \ell_t^2 \right] = 0\]</div>
-<p>The Ramsey problem now amounts to maximizing <a class="reference internal" href="#equation-lq-hu">(13.1)</a> subject to
-<a class="reference internal" href="#equation-lq-gc2">(13.6)</a> and <a class="reference internal" href="#equation-lq-feasible">(13.3)</a>.</p>
+<p>The Ramsey problem now amounts to maximizing <a class="reference internal" href="#equation-lq-hu">(12.1)</a> subject to
+<a class="reference internal" href="#equation-lq-gc2">(12.6)</a> and <a class="reference internal" href="#equation-lq-feasible">(12.3)</a>.</p>
 <p>The associated Lagrangian is</p>
 <div class="math notranslate nohighlight" id="equation-lq-rp">
-<span class="eqno">(13.7)<a class="headerlink" href="#equation-lq-rp" title="Permalink to this equation">¶</a></span>\[\mathscr L =
+<span class="eqno">(12.7)<a class="headerlink" href="#equation-lq-rp" title="Permalink to this equation">¶</a></span>\[\mathscr L =
 \mathbb E  \sum_{t=0}^{\infty} \beta^t
 \left\{
 -\frac{1}{2} \left[ (c_t - b_t)^2 + \ell_t^2 \right] +
@@ -751,10 +756,10 @@ yields</p>
 \[
 \ell_t - \lambda [(b_t - c_t) - 2 \ell_t ] = \mu_t
 \]</div>
-<p>Combining these last two equalities with <a class="reference internal" href="#equation-lq-feasible">(13.3)</a> and working
+<p>Combining these last two equalities with <a class="reference internal" href="#equation-lq-feasible">(12.3)</a> and working
 through the algebra, one can show that</p>
 <div class="math notranslate nohighlight" id="equation-lq-lcex">
-<span class="eqno">(13.8)<a class="headerlink" href="#equation-lq-lcex" title="Permalink to this equation">¶</a></span>\[\ell_t = \bar \ell_t - \nu m_t
+<span class="eqno">(12.8)<a class="headerlink" href="#equation-lq-lcex" title="Permalink to this equation">¶</a></span>\[\ell_t = \bar \ell_t - \nu m_t
 \quad \text{and} \quad
 c_t = \bar c_t - \nu m_t\]</div>
 <p>where</p>
@@ -766,16 +771,16 @@ c_t = \bar c_t - \nu m_t\]</div>
 </ul>
 <p>Apart from <span class="math notranslate nohighlight">\(\nu\)</span>, all of these quantities are expressed in terms of exogenous variables.</p>
 <p>To solve for <span class="math notranslate nohighlight">\(\nu\)</span>, we can use the government’s budget constraint again.</p>
-<p>The term inside the brackets in <a class="reference internal" href="#equation-lq-gc2">(13.6)</a> is <span class="math notranslate nohighlight">\((b_t - c_t)(s_t + g_t) - (b_t - c_t) \ell_t + \ell_t^2\)</span>.</p>
-<p>Using <a class="reference internal" href="#equation-lq-lcex">(13.8)</a>, the definitions above and the fact that <span class="math notranslate nohighlight">\(\bar \ell
+<p>The term inside the brackets in <a class="reference internal" href="#equation-lq-gc2">(12.6)</a> is <span class="math notranslate nohighlight">\((b_t - c_t)(s_t + g_t) - (b_t - c_t) \ell_t + \ell_t^2\)</span>.</p>
+<p>Using <a class="reference internal" href="#equation-lq-lcex">(12.8)</a>, the definitions above and the fact that <span class="math notranslate nohighlight">\(\bar \ell
 = b - \bar c\)</span>, this term can be rewritten as</p>
 <div class="math notranslate nohighlight">
 \[
 (b_t - \bar c_t) (g_t + s_t ) + 2 m_t^2 ( \nu^2 - \nu)
 \]</div>
-<p>Reinserting into <a class="reference internal" href="#equation-lq-gc2">(13.6)</a>, we get</p>
+<p>Reinserting into <a class="reference internal" href="#equation-lq-gc2">(12.6)</a>, we get</p>
 <div class="math notranslate nohighlight" id="equation-lq-gc22">
-<span class="eqno">(13.9)<a class="headerlink" href="#equation-lq-gc22" title="Permalink to this equation">¶</a></span>\[\mathbb E
+<span class="eqno">(12.9)<a class="headerlink" href="#equation-lq-gc22" title="Permalink to this equation">¶</a></span>\[\mathbb E
 \left\{
 \sum_{t=0}^{\infty} \beta^t
 (b_t - \bar c_t) (g_t + s_t )
@@ -786,19 +791,19 @@ c_t = \bar c_t - \nu m_t\]</div>
 \right\} = 0\]</div>
 <p>Although it might not be clear yet, we are nearly there because:</p>
 <ul class="simple">
-<li><p>The two expectations terms in <a class="reference internal" href="#equation-lq-gc22">(13.9)</a> can be solved for in terms of model primitives.</p></li>
+<li><p>The two expectations terms in <a class="reference internal" href="#equation-lq-gc22">(12.9)</a> can be solved for in terms of model primitives.</p></li>
 <li><p>This in turn allows us to solve for the Lagrange multiplier <span class="math notranslate nohighlight">\(\nu\)</span>.</p></li>
-<li><p>With <span class="math notranslate nohighlight">\(\nu\)</span> in hand, we can go back and solve for the allocations via <a class="reference internal" href="#equation-lq-lcex">(13.8)</a>.</p></li>
+<li><p>With <span class="math notranslate nohighlight">\(\nu\)</span> in hand, we can go back and solve for the allocations via <a class="reference internal" href="#equation-lq-lcex">(12.8)</a>.</p></li>
 <li><p>Once we have the allocations, prices and the tax system can be derived from
-<a class="reference internal" href="#equation-lq-hfoc">(13.5)</a>.</p></li>
+<a class="reference internal" href="#equation-lq-hfoc">(12.5)</a>.</p></li>
 </ul>
 </div>
 <div class="section" id="computing-the-quadratic-term">
-<h3><span class="section-number">13.2.9. </span>Computing the Quadratic Term<a class="headerlink" href="#computing-the-quadratic-term" title="Permalink to this headline">¶</a></h3>
-<p>Let’s consider how to obtain the term <span class="math notranslate nohighlight">\(\nu\)</span> in <a class="reference internal" href="#equation-lq-gc22">(13.9)</a>.</p>
+<h3><span class="section-number">12.2.9. </span>Computing the Quadratic Term<a class="headerlink" href="#computing-the-quadratic-term" title="Permalink to this headline">¶</a></h3>
+<p>Let’s consider how to obtain the term <span class="math notranslate nohighlight">\(\nu\)</span> in <a class="reference internal" href="#equation-lq-gc22">(12.9)</a>.</p>
 <p>If we can compute the two expected geometric sums</p>
 <div class="math notranslate nohighlight" id="equation-lq-gc3">
-<span class="eqno">(13.10)<a class="headerlink" href="#equation-lq-gc3" title="Permalink to this equation">¶</a></span>\[b_0 := \mathbb E
+<span class="eqno">(12.10)<a class="headerlink" href="#equation-lq-gc3" title="Permalink to this equation">¶</a></span>\[b_0 := \mathbb E
 \left\{
 \sum_{t=0}^{\infty} \beta^t
 (b_t - \bar c_t) (g_t + s_t )
@@ -816,20 +821,20 @@ b_0 + a_0 (\nu^2 - \nu) = 0
 <p>for <span class="math notranslate nohighlight">\(\nu\)</span>.</p>
 <p>Provided that <span class="math notranslate nohighlight">\(4 b_0 &lt; a_0\)</span>, there is a unique solution <span class="math notranslate nohighlight">\(\nu \in
 (0, 1/2)\)</span>, and a unique corresponding <span class="math notranslate nohighlight">\(\lambda &gt; 0\)</span>.</p>
-<p>Let’s work out how to compute mathematical expectations  in <a class="reference internal" href="#equation-lq-gc3">(13.10)</a>.</p>
+<p>Let’s work out how to compute mathematical expectations  in <a class="reference internal" href="#equation-lq-gc3">(12.10)</a>.</p>
 <p>For the first one, the random variable <span class="math notranslate nohighlight">\((b_t - \bar c_t) (g_t + s_t )\)</span> inside the summation can be expressed as</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{1}{2} x_t' (S_b - S_d + S_g)' (S_g + S_s) x_t
 \]</div>
-<p>For the second expectation in <a class="reference internal" href="#equation-lq-gc3">(13.10)</a>, the random variable <span class="math notranslate nohighlight">\(2 m_t^2\)</span> can be written as</p>
+<p>For the second expectation in <a class="reference internal" href="#equation-lq-gc3">(12.10)</a>, the random variable <span class="math notranslate nohighlight">\(2 m_t^2\)</span> can be written as</p>
 <div class="math notranslate nohighlight">
 \[
 \frac{1}{2} x_t' (S_b - S_d - S_s)' (S_b - S_d - S_s) x_t
 \]</div>
 <p>It follows that both objects of interest are special cases of the expression</p>
 <div class="math notranslate nohighlight" id="equation-lq-eqs">
-<span class="eqno">(13.11)<a class="headerlink" href="#equation-lq-eqs" title="Permalink to this equation">¶</a></span>\[q(x_0) = \mathbb E \sum_{t=0}^{\infty} \beta^t x_t' H x_t\]</div>
+<span class="eqno">(12.11)<a class="headerlink" href="#equation-lq-eqs" title="Permalink to this equation">¶</a></span>\[q(x_0) = \mathbb E \sum_{t=0}^{\infty} \beta^t x_t' H x_t\]</div>
 <p>where <span class="math notranslate nohighlight">\(H\)</span> is a matrix conformable to <span class="math notranslate nohighlight">\(x_t\)</span> and <span class="math notranslate nohighlight">\(x_t'\)</span> is the transpose of column vector <span class="math notranslate nohighlight">\(x_t\)</span>.</p>
 <p>Suppose first that <span class="math notranslate nohighlight">\(\{x_t\}\)</span> is the Gaussian VAR described <a class="reference internal" href="#lq-twospec"><span class="std std-ref">above</span></a>.</p>
 <p>In this case, the formula for computing <span class="math notranslate nohighlight">\(q(x_0)\)</span> is known to be <span class="math notranslate nohighlight">\(q(x_0) = x_0' Q x_0 + v\)</span>, where</p>
@@ -841,7 +846,7 @@ b_0 + a_0 (\nu^2 - \nu) = 0
 using <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/matrix_eqn.py#L25">this function</a>.</p>
 </div>
 <div class="section" id="finite-state-markov-case">
-<h3><span class="section-number">13.2.10. </span>Finite State Markov Case<a class="headerlink" href="#finite-state-markov-case" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.10. </span>Finite State Markov Case<a class="headerlink" href="#finite-state-markov-case" title="Permalink to this headline">¶</a></h3>
 <p>Next, suppose that <span class="math notranslate nohighlight">\(\{x_t\}\)</span> is the discrete Markov process described <a class="reference internal" href="#lq-twospec"><span class="std std-ref">above</span></a>.</p>
 <p>Suppose further that each <span class="math notranslate nohighlight">\(x_t\)</span> takes values in the state space <span class="math notranslate nohighlight">\(\{x^1, \ldots, x^N\} \subset \mathbb R^k\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(h \colon \mathbb R^k \to \mathbb R\)</span> be a given function, and suppose that we
@@ -854,19 +859,19 @@ q(x_0) = \mathbb E \sum_{t=0}^{\infty} \beta^t h(x_t)
 <p>For example, in the discussion above, <span class="math notranslate nohighlight">\(h(x_t) = x_t' H x_t\)</span>.</p>
 <p>It is legitimate to pass the expectation through the sum, leading to</p>
 <div class="math notranslate nohighlight" id="equation-lq-ise">
-<span class="eqno">(13.12)<a class="headerlink" href="#equation-lq-ise" title="Permalink to this equation">¶</a></span>\[q(x_0) = \sum_{t=0}^{\infty} \beta^t (P^t h)[j]\]</div>
+<span class="eqno">(12.12)<a class="headerlink" href="#equation-lq-ise" title="Permalink to this equation">¶</a></span>\[q(x_0) = \sum_{t=0}^{\infty} \beta^t (P^t h)[j]\]</div>
 <p>Here</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P^t\)</span> is the <span class="math notranslate nohighlight">\(t\)</span>-th power of the transition matrix <span class="math notranslate nohighlight">\(P\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\(h\)</span> is, with some abuse of notation, the vector <span class="math notranslate nohighlight">\((h(x^1), \ldots, h(x^N))\)</span>.</p></li>
 <li><p><span class="math notranslate nohighlight">\((P^t h)[j]\)</span> indicates the <span class="math notranslate nohighlight">\(j\)</span>-th element of <span class="math notranslate nohighlight">\(P^t h\)</span>.</p></li>
 </ul>
-<p>It can be shown that <a class="reference internal" href="#equation-lq-ise">(13.12)</a> is in fact equal to the <span class="math notranslate nohighlight">\(j\)</span>-th element of
+<p>It can be shown that <a class="reference internal" href="#equation-lq-ise">(12.12)</a> is in fact equal to the <span class="math notranslate nohighlight">\(j\)</span>-th element of
 the vector <span class="math notranslate nohighlight">\((I - \beta P)^{-1} h\)</span>.</p>
 <p>This last fact is applied in the calculations below.</p>
 </div>
 <div class="section" id="other-variables">
-<h3><span class="section-number">13.2.11. </span>Other Variables<a class="headerlink" href="#other-variables" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.11. </span>Other Variables<a class="headerlink" href="#other-variables" title="Permalink to this headline">¶</a></h3>
 <p>We are interested in tracking several other variables besides the ones
 described above.</p>
 <p>To prepare the way for this, we define</p>
@@ -878,7 +883,7 @@ p^t_{t+j} = \frac{b_{t+j}- c_{t+j}}{b_t - c_t}
 <p>These are prices that would prevail at time <span class="math notranslate nohighlight">\(t\)</span> if markets were reopened at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>These prices are constituents of the present value of government obligations outstanding at time <span class="math notranslate nohighlight">\(t\)</span>, which can be expressed as</p>
 <div class="math notranslate nohighlight" id="equation-lq-cb">
-<span class="eqno">(13.13)<a class="headerlink" href="#equation-lq-cb" title="Permalink to this equation">¶</a></span>\[B_t :=
+<span class="eqno">(12.13)<a class="headerlink" href="#equation-lq-cb" title="Permalink to this equation">¶</a></span>\[B_t :=
 \mathbb E_t \sum_{j=0}^{\infty} \beta^j p^t_{t+j}
 (\tau_{t+j} \ell_{t+j} - g_{t+j})\]</div>
 <p>Using our expression for prices and the Ramsey plan, we can also write
@@ -896,22 +901,22 @@ B_t =
 \[
 p^t_{t+j} = p^t_{t+1} p^{t+1}_{t+j}
 \]</div>
-<p>it is possible to verify that <a class="reference internal" href="#equation-lq-cb">(13.13)</a> implies that</p>
+<p>it is possible to verify that <a class="reference internal" href="#equation-lq-cb">(12.13)</a> implies that</p>
 <div class="math notranslate nohighlight">
 \[
 B_t = (\tau_t \ell_t - g_t) + E_t \sum_{j=1}^\infty p^t_{t+j} (\tau_{t+j} \ell_{t+j} - g_{t+j})
 \]</div>
 <p>and</p>
 <div class="math notranslate nohighlight" id="equation-lq-cb22">
-<span class="eqno">(13.14)<a class="headerlink" href="#equation-lq-cb22" title="Permalink to this equation">¶</a></span>\[B_t =   (\tau_t \ell_t - g_t) + \beta E_t p^t_{t+1} B_{t+1}\]</div>
+<span class="eqno">(12.14)<a class="headerlink" href="#equation-lq-cb22" title="Permalink to this equation">¶</a></span>\[B_t =   (\tau_t \ell_t - g_t) + \beta E_t p^t_{t+1} B_{t+1}\]</div>
 <p>Define</p>
 <div class="math notranslate nohighlight" id="equation-lq-rfr">
-<span class="eqno">(13.15)<a class="headerlink" href="#equation-lq-rfr" title="Permalink to this equation">¶</a></span>\[R^{-1}_{t} := \mathbb E_t \beta^j p^t_{t+1}\]</div>
+<span class="eqno">(12.15)<a class="headerlink" href="#equation-lq-rfr" title="Permalink to this equation">¶</a></span>\[R^{-1}_{t} := \mathbb E_t \beta^j p^t_{t+1}\]</div>
 <p><span class="math notranslate nohighlight">\(R_{t}\)</span> is the gross <span class="math notranslate nohighlight">\(1\)</span>-period risk-free rate for loans
 between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
 </div>
 <div class="section" id="a-martingale">
-<h3><span class="section-number">13.2.12. </span>A Martingale<a class="headerlink" href="#a-martingale" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.2.12. </span>A Martingale<a class="headerlink" href="#a-martingale" title="Permalink to this headline">¶</a></h3>
 <p>We now want to study the following two objects, namely,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -930,33 +935,33 @@ period <span class="math notranslate nohighlight">\(t+1\)</span> if it had simpl
 </ul>
 <p>Thus, <span class="math notranslate nohighlight">\(\pi_{t+1}\)</span> is the excess payout on the actual portfolio of state-contingent government debt  relative to an alternative
 portfolio sufficient to finance <span class="math notranslate nohighlight">\(B_t + g_t - \tau_t \ell_t\)</span> and consisting entirely of risk-free one-period bonds.</p>
-<p>Use expressions <a class="reference internal" href="#equation-lq-cb22">(13.14)</a> and <a class="reference internal" href="#equation-lq-rfr">(13.15)</a> to obtain</p>
+<p>Use expressions <a class="reference internal" href="#equation-lq-cb22">(12.14)</a> and <a class="reference internal" href="#equation-lq-rfr">(12.15)</a> to obtain</p>
 <div class="math notranslate nohighlight">
 \[
 \pi_{t+1} = B_{t+1} - \frac{1}{\beta E_t p^t_{t+1}} \left[\beta E_t p^t_{t+1} B_{t+1} \right]
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-lq-pidist">
-<span class="eqno">(13.16)<a class="headerlink" href="#equation-lq-pidist" title="Permalink to this equation">¶</a></span>\[\pi_{t+1} = B_{t+1} - \tilde E_t B_{t+1}\]</div>
+<span class="eqno">(12.16)<a class="headerlink" href="#equation-lq-pidist" title="Permalink to this equation">¶</a></span>\[\pi_{t+1} = B_{t+1} - \tilde E_t B_{t+1}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\tilde E_t\)</span> is the conditional mathematical expectation taken with respect to a one-step transition density
 that has been formed by multiplying the original transition density with the likelihood ratio</p>
 <div class="math notranslate nohighlight">
 \[
 m^t_{t+1} = \frac{p^t_{t+1}}{E_t p^t_{t+1}}
 \]</div>
-<p>It follows from equation <a class="reference internal" href="#equation-lq-pidist">(13.16)</a> that</p>
+<p>It follows from equation <a class="reference internal" href="#equation-lq-pidist">(12.16)</a> that</p>
 <div class="math notranslate nohighlight">
 \[
 \tilde E_t \pi_{t+1} = \tilde E_t B_{t+1} - \tilde E_t B_{t+1} = 0
 \]</div>
 <p>which asserts that <span class="math notranslate nohighlight">\(\{\pi_{t+1}\}\)</span> is a martingale difference sequence under the distorted probability measure, and
 that  <span class="math notranslate nohighlight">\(\{\Pi_t\}\)</span> is a martingale under the distorted probability measure.</p>
-<p>In the tax-smoothing model of Robert Barro <span id="id4">[<a class="reference internal" href="zreferences.html#id123">Bar79</a>]</span>, government debt is a random walk.</p>
+<p>In the tax-smoothing model of Robert Barro <span id="id4">[<a class="reference internal" href="zreferences.html#id132">Bar79</a>]</span>, government debt is a random walk.</p>
 <p>In the current model, government debt <span class="math notranslate nohighlight">\(\{B_t\}\)</span> is not a random walk, but the <code class="docutils literal notranslate"><span class="pre">excess</span> <span class="pre">payoff</span></code> <span class="math notranslate nohighlight">\(\{\Pi_t\}\)</span> on it is.</p>
 </div>
 </div>
 <div class="section" id="implementation">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">13.3. </span>Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9"><span class="section-number">12.3. </span>Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
 <p>The following code provides functions for</p>
 <ol class="simple">
 <li><p>Solving for the Ramsey plan given a specification of the economy.</p></li>
@@ -1228,8 +1233,8 @@ that  <span class="math notranslate nohighlight">\(\{\Pi_t\}\)</span> is a marti
 </div>
 </div>
 <div class="section" id="comments-on-the-code">
-<h3><span class="section-number">13.3.1. </span>Comments on the Code<a class="headerlink" href="#comments-on-the-code" title="Permalink to this headline">¶</a></h3>
-<p>The function <code class="docutils literal notranslate"><span class="pre">var_quadratic_sum</span></code> imported from <code class="docutils literal notranslate"><span class="pre">quadsums</span></code> is for computing the value of <a class="reference internal" href="#equation-lq-eqs">(13.11)</a>
+<h3><span class="section-number">12.3.1. </span>Comments on the Code<a class="headerlink" href="#comments-on-the-code" title="Permalink to this headline">¶</a></h3>
+<p>The function <code class="docutils literal notranslate"><span class="pre">var_quadratic_sum</span></code> imported from <code class="docutils literal notranslate"><span class="pre">quadsums</span></code> is for computing the value of <a class="reference internal" href="#equation-lq-eqs">(12.11)</a>
 when the exogenous process <span class="math notranslate nohighlight">\(\{ x_t \}\)</span> is of the VAR type described <a class="reference internal" href="#lq-twospec"><span class="std std-ref">above</span></a>.</p>
 <p>Below the definition of the function, you will see definitions of two <code class="docutils literal notranslate"><span class="pre">namedtuple</span></code> objects, <code class="docutils literal notranslate"><span class="pre">Economy</span></code> and <code class="docutils literal notranslate"><span class="pre">Path</span></code>.</p>
 <p>The first is used to collect all the parameters and primitives of a given LQ
@@ -1245,10 +1250,10 @@ economy, while the second collects output of the computations.</p>
 </div>
 </div>
 <div class="section" id="examples">
-<h2><a class="toc-backref" href="#id10"><span class="section-number">13.4. </span>Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10"><span class="section-number">12.4. </span>Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
 <p>Let’s look at two examples of usage.</p>
 <div class="section" id="the-continuous-case">
-<span id="lq-cc"></span><h3><span class="section-number">13.4.1. </span>The Continuous Case<a class="headerlink" href="#the-continuous-case" title="Permalink to this headline">¶</a></h3>
+<span id="lq-cc"></span><h3><span class="section-number">12.4.1. </span>The Continuous Case<a class="headerlink" href="#the-continuous-case" title="Permalink to this headline">¶</a></h3>
 <p>Our first example adopts the VAR specification described <a class="reference internal" href="#lq-twospec"><span class="std std-ref">above</span></a>.</p>
 <p>Regarding the primitives, we set</p>
 <ul class="simple">
@@ -1305,7 +1310,7 @@ much less variable than government expenditure.</p>
 <p>See the original <a href=_static/lecture_specific/lqramsey/firenze.pdf download>manuscript</a> for comments and interpretation.</p>
 </div>
 <div class="section" id="the-discrete-case">
-<h3><span class="section-number">13.4.2. </span>The Discrete Case<a class="headerlink" href="#the-discrete-case" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.4.2. </span>The Discrete Case<a class="headerlink" href="#the-discrete-case" title="Permalink to this headline">¶</a></h3>
 <p>Our second example adopts a discrete Markov specification for the exogenous process</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1356,9 +1361,9 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="section" id="exercises">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">13.5. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11"><span class="section-number">12.5. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="exercise-1">
-<span id="lqramsey-ex1"></span><h3><span class="section-number">13.5.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
+<span id="lqramsey-ex1"></span><h3><span class="section-number">12.5.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
 <p>Modify the VAR example <a class="reference internal" href="#lq-cc"><span class="std std-ref">given above</span></a>, setting</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1369,9 +1374,9 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="section" id="solutions">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">13.6. </span>Solutions</a><a class="headerlink" href="#solutions" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12"><span class="section-number">12.6. </span>Solutions</a><a class="headerlink" href="#solutions" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id5">
-<h3><span class="section-number">13.6.1. </span>Exercise 1<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">12.6.1. </span>Exercise 1<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># == Parameters == #</span>
@@ -1444,7 +1449,7 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
                 
 
 
-                <footer class="page__footer">
+                <footer class="qe-page__footer">
 
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
@@ -1457,16 +1462,16 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
             
 
             
-            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
 
-                <div class="sidebar__header">
+                <div class="qe-sidebar__header">
 
 
                     Contents
 
                 </div>
 
-                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p class="caption">
  <span class="caption-text">
   Tools and Techniques
@@ -1516,33 +1521,28 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="robustness.html">
-   8. Robustness
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   9. Markov Jump Linear Quadratic Dynamic Programming
+   8. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   10. How to Pay for a War: Part 1
+   9. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   11. How to Pay for a War: Part 2
+   10. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   12. How to Pay for a War: Part 3
+   11. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   13. Optimal Taxation in an LQ Economy
+   12. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -1553,23 +1553,18 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="rob_markov_perf.html">
-   14. Robust Markov Perfect Equilibrium
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   15. Default Risk and Income Fluctuations
+   13. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   16. Globalization and Cycles
+   14. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   17. Coase’s Theory of the Firm
+   15. Coase’s Theory of the Firm
   </a>
  </li>
 </ul>
@@ -1581,42 +1576,64 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   18. Recursive Models of Dynamic Linear Economies
+   16. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   19. Growth in Dynamic Linear Economies
+   17. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   20. Lucas Asset Pricing Using DLE
+   18. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   21. IRFs in Hall Models
+   19. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   22. Permanent Income Model using the DLE Class
+   20. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   21. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   22. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   23. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Risk, Model Uncertainty, and Robustness
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="five_preferences.html">
+   24. Risk and Model Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   25. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   26. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1628,7 +1645,7 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="von_neumann_model.html">
-   26. Von Neumann Growth Model (and a Generalization)
+   27. Von Neumann Growth Model (and a Generalization)
   </a>
  </li>
 </ul>
@@ -1640,32 +1657,32 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   27. Covariance Stationary Processes
+   28. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   28. Estimation of Spectra
+   29. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   29. Additive and Multiplicative Functionals
+   30. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   30. Classical Control with Linear Algebra
+   31. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   31. Classical Prediction and Filtering With Linear Algebra
+   32. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   32. Knowing the Forecasts of Others
+   33. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -1677,27 +1694,27 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   33. Asset Pricing II: The Lucas Asset Pricing Model
+   34. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   34. Elementary Asset Pricing Theory
+   35. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   35. Two Modifications of Mean-Variance Portfolio Theory
+   36. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   36. Irrelevance of Capital Structure with Complete Markets
+   37. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   37. Equilibrium Capital Structures with Incomplete Markets
+   38. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1709,42 +1726,42 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   38. Stackelberg Plans
+   39. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   40. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   40. Optimal Taxation with State-Contingent Debt
+   41. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   41. Optimal Taxation without State-Contingent Debt
+   42. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   42. Fluctuating Interest Rates Deliver Fiscal Insurance
+   43. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   43. Fiscal Risk and Government Debt
+   44. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   44. Competitive Equilibria of a Model of Chang
+   45. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   45. Credible Government Policies in a Model of Chang
+   46. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1756,24 +1773,24 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   47. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   48. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   49. Execution Statistics
   </a>
  </li>
 </ul>
 
                 </nav>
 
-                <div class="sidebar__footer">
+                <div class="qe-sidebar__footer">
 
                 </div>
 
@@ -1781,11 +1798,11 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
             
         </div> <!-- .main -->
 
-        <div class="toolbar">
+        <div class="qe-toolbar">
 
-            <div class="toolbar__inner">
+            <div class="qe-toolbar__inner">
 
-                <ul class="toolbar__main">
+                <ul class="qe-toolbar__main">
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
@@ -1797,12 +1814,12 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
                     </li> -->
                 </ul>
 
-                <ul class="toolbar__links">
+                <ul class="qe-toolbar__links">
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/lqramsey.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/lqramsey.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/lqramsey.md" download><i data-feather="github"></i></a></li>

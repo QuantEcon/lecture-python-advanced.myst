@@ -5,16 +5,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>32. Knowing the Forecasts of Others &#8212; Advanced Quantitative Economics with Python</title>
+    <title>33. Knowing the Forecasts of Others &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     
         <script>
             MathJax = {
-            loader: {load: ['[tex]/boldsymbol']},
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
             tex: {
-                packages: {'[+]': ['boldsymbol']},
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 processEscapes: true,
                 macros: {
@@ -48,8 +48,8 @@
     
     
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -63,7 +63,7 @@
       
 
     
-    <link rel="stylesheet" href="_static/quantecon-book-theme.857ff391aaabaeb8c161d2309c375fe6.css" type="text/css" />
+    <link rel="stylesheet" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -72,7 +72,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -85,7 +85,7 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/quantecon-book-theme.76bf49d7bbc59738cdb03766fad654af.js"></script>
+    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -272,12 +272,19 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/knowing_forecasts_of_others.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="33. Asset Pricing II: The Lucas Asset Pricing Model" href="lucas_model.html" />
-    <link rel="prev" title="31. Classical Prediction and Filtering With Linear Algebra" href="classical_filtering.html" />
+    <link rel="next" title="34. Asset Pricing II: The Lucas Asset Pricing Model" href="lucas_model.html" />
+    <link rel="prev" title="32. Classical Prediction and Filtering With Linear Algebra" href="classical_filtering.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -307,61 +314,61 @@
 
     <span id="top"></span>
 
-    <div class="wrapper">
+    <div class="qe-wrapper">
 
-        <div class="main">
+        <div class="qe-main">
 
-            <div class="page" id=knowing_forecasts_of_others>
+            <div class="qe-page" id=knowing_forecasts_of_others>
 
-                <div class="page__toc">
+                <div class="qe-page__toc">
 
                     <div class="inner">
 
                         
-                        <div class="page__toc-header">
+                        <div class="qe-page__toc-header">
                             On this page
                         </div>
 
 
-                        <nav id="bd-toc-nav" class="page__toc-nav">
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introduction">
-   32.1. Introduction
+   33.1. Introduction
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#a-sequence-of-models">
-     32.1.1. A Sequence of Models
+     33.1.1. A Sequence of Models
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#the-setting">
-   32.2. The Setting
+   33.2. The Setting
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#tactics">
-   32.3. Tactics
+   33.3. Tactics
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#equilibrium-conditions">
-   32.4. Equilibrium conditions
+   33.4. Equilibrium conditions
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#equilibrium-under-perfect-foresight">
-     32.4.1. Equilibrium under perfect foresight
+     33.4.1. Equilibrium under perfect foresight
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#equilibrium-with-theta-t-stochastic-but-observed-at-t">
-   32.5. Equilibrium with
+   33.5. Equilibrium with
    <span class="math notranslate nohighlight">
     \(\theta_t\)
    </span>
@@ -373,17 +380,17 @@
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#filtering">
-     32.5.1. Filtering
+     33.5.1. Filtering
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#one-noisy-signal">
-       32.5.1.1. One noisy signal
+       33.5.1.1. One noisy signal
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#theta-reconstruction-error">
-       32.5.1.2.
+       33.5.1.2.
        <span class="math notranslate nohighlight">
         \(\theta\)
        </span>
@@ -394,19 +401,19 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#two-noisy-signals">
-     32.5.2. Two noisy signals
+     33.5.2. Two noisy signals
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#guess-and-verify-tactic">
-   32.6. Guess-and-verify tactic
+   33.6. Guess-and-verify tactic
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#equilibrium-with-one-signal-on-theta-t">
-   32.7. Equilibrium with one signal on
+   33.7. Equilibrium with one signal on
    <span class="math notranslate nohighlight">
     \(\theta_t\)
    </span>
@@ -414,7 +421,7 @@
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#step-1-solve-for-tilde-lambda-and-lambda">
-     32.7.1. Step 1: Solve for
+     33.7.1. Step 1: Solve for
      <span class="math notranslate nohighlight">
       \(\tilde{\lambda}\)
      </span>
@@ -426,7 +433,7 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#step-2-solve-for-p">
-     32.7.2. Step 2: Solve for
+     33.7.2. Step 2: Solve for
      <span class="math notranslate nohighlight">
       \(p\)
      </span>
@@ -434,7 +441,7 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#step-3-represent-the-system-using-quantecon-linearstatespace">
-     32.7.3. Step 3: Represent the system using
+     33.7.3. Step 3: Represent the system using
      <code class="docutils literal notranslate">
       <span class="pre">
        quantecon.LinearStateSpace
@@ -444,19 +451,19 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#step-4-compute-impulse-response-functions">
-     32.7.4. Step 4: Compute impulse response functions
+     33.7.4. Step 4: Compute impulse response functions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#step-5-compute-stationary-covariance-matrices-and-population-regressions">
-     32.7.5. Step 5: Compute stationary covariance matrices and population regressions
+     33.7.5. Step 5: Compute stationary covariance matrices and population regressions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#equilibrium-with-two-noisy-signals-on-theta-t">
-   32.8. Equilibrium with two noisy signals on
+   33.8. Equilibrium with two noisy signals on
    <span class="math notranslate nohighlight">
     \(\theta_t\)
    </span>
@@ -464,22 +471,22 @@
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#key-step">
-   32.9. Key step
+   33.9. Key step
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#comparison-of-the-two-signal-structures">
-   32.10. Comparison of the two signal structures
+   33.10. Comparison of the two signal structures
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#notes-on-history-of-the-problem">
-   32.11. Notes on History of the Problem
+   33.11. Notes on History of the Problem
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#further-historical-remarks">
-     32.11.1. Further historical remarks
+     33.11.1. Further historical remarks
     </a>
    </li>
   </ul>
@@ -498,7 +505,7 @@
 
                         </nav>
 
-                        <div class="page__toc-footer">
+                        <div class="qe-page__toc-footer">
                             
                             
                             <p><a href="#top"><strong>Back to top</strong></a></p>
@@ -508,24 +515,24 @@
 
                 </div>
 
-                <div class="page__header">
+                <div class="qe-page__header">
 
-                    <div class="page__header-copy">
+                    <div class="qe-page__header-copy">
 
-                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
 
-                        <p class="page__header-subheading">Knowing the Forecasts of Others</p>
+                        <p class="qe-page__header-subheading">Knowing the Forecasts of Others</p>
 
                     </div>
 
-                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
 
                 </div> <!-- .page__header -->
 
 
 
                 
-                <main class="page__content" role="main">
+                <main class="qe-page__content" role="main">
                     
                     <div>
                         
@@ -534,7 +541,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><div class="section" id="knowing-the-forecasts-of-others">
-<h1><a class="toc-backref" href="#id43"><span class="section-number">32. </span>Knowing the Forecasts of Others</a><a class="headerlink" href="#knowing-the-forecasts-of-others" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id43"><span class="section-number">33. </span>Knowing the Forecasts of Others</a><a class="headerlink" href="#knowing-the-forecasts-of-others" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
@@ -564,23 +571,21 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.2)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
-Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
-Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
-Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
-Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
 Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
 Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting package metadata (current_repodata.json): - 
@@ -631,17 +636,17 @@ Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.de
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>done
-Solving environment: \ 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+Solving environment: - 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
@@ -738,6 +743,24 @@ Solving environment: \
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>done
@@ -749,24 +772,24 @@ Solving environment: \
 </div>
 </div>
 <div class="section" id="introduction">
-<h2><a class="toc-backref" href="#id44"><span class="section-number">32.1. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>Robert E. Lucas, Jr. <span id="id1">[<a class="reference internal" href="zreferences.html#id10">REL75</a>]</span>, Kenneth Kasa  <span id="id2">[<a class="reference internal" href="zreferences.html#id13">Kas00</a>]</span>, and Robert Townsend
-<span id="id3">[<a class="reference internal" href="zreferences.html#id14">Tow83</a>]</span> showed that giving decision makers  incentives to infer persistent hidden  state
+<h2><a class="toc-backref" href="#id44"><span class="section-number">33.1. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Robert E. Lucas, Jr. <span id="id1">[<a class="reference internal" href="zreferences.html#id17">REL75</a>]</span>, Kenneth Kasa  <span id="id2">[<a class="reference internal" href="zreferences.html#id20">Kas00</a>]</span>, and Robert Townsend
+<span id="id3">[<a class="reference internal" href="zreferences.html#id21">Tow83</a>]</span> showed that giving decision makers  incentives to infer persistent hidden  state
 variables from equilibrium prices and quantities can
 elongate and amplify impulse responses to aggregate
 shocks in business cycle models.</p>
-<p>Townsend <span id="id4">[<a class="reference internal" href="zreferences.html#id14">Tow83</a>]</span>
+<p>Townsend <span id="id4">[<a class="reference internal" href="zreferences.html#id21">Tow83</a>]</span>
 noted  that  such incentives can naturally
 induce decision makers to want  to forecast the forecast of others.</p>
 <p>This theme has been pursued and extended in analyses in which
 decision makers’ imperfect information forces them into pursuing an
 infinite recursion of forming beliefs about the beliefs of other
-(e.g., <span id="id5">[<a class="reference internal" href="zreferences.html#id17">AMS02</a>]</span>).</p>
-<p>Lucas <span id="id6">[<a class="reference internal" href="zreferences.html#id10">REL75</a>]</span> side stepped having decision makers forecast the
+(e.g., <span id="id5">[<a class="reference internal" href="zreferences.html#id24">AMS02</a>]</span>).</p>
+<p>Lucas <span id="id6">[<a class="reference internal" href="zreferences.html#id17">REL75</a>]</span> side stepped having decision makers forecast the
 forecasts of other decision makers by assuming that they simply pool their
 information before forecasting.</p>
 <p>A <strong>pooling equilibrium</strong> like Lucas’s plays a prominent role in this lecture.</p>
-<p>Because he didn’t assume such pooling, <span id="id7">[<a class="reference internal" href="zreferences.html#id14">Tow83</a>]</span>
+<p>Because he didn’t assume such pooling, <span id="id7">[<a class="reference internal" href="zreferences.html#id21">Tow83</a>]</span>
 confronted the forecasting the forecasts of others problem.</p>
 <p>To formulate the  problem recursively required that Townsend define  decision maker’s <strong>state</strong> vector.</p>
 <p>Townsend concluded that his original  model required an intractable infinite dimensional  state space.</p>
@@ -778,8 +801,8 @@ we show how to formulate Townsend’s original model in terms of a low-dimension
 <p>By doing so, we show that Townsend’s model shares equilibrium prices and quantities with those   that
 prevail in a pooling equilibrium.</p>
 <p>That finding emerged from a line of research about  Townsend’s model that  culminated in
-<span id="id8">[<a class="reference internal" href="zreferences.html#id11">PS05</a>]</span> that built on <span id="id9">[<a class="reference internal" href="zreferences.html#id12">PCL86</a>]</span>.</p>
-<p>However, rather than deploying the <span id="id10">[<a class="reference internal" href="zreferences.html#id12">PCL86</a>]</span> machinery here, we shall rely instead on a sneaky
+<span id="id8">[<a class="reference internal" href="zreferences.html#id18">PS05</a>]</span> that built on <span id="id9">[<a class="reference internal" href="zreferences.html#id19">PCL86</a>]</span>.</p>
+<p>However, rather than deploying the <span id="id10">[<a class="reference internal" href="zreferences.html#id19">PCL86</a>]</span> machinery here, we shall rely instead on a sneaky
 <strong>guess-and-verify</strong> tactic.</p>
 <ul class="simple">
 <li><p>We compute a pooling equilibrium and represent it as an instance of  a linear  state-space system provided by
@@ -795,11 +818,11 @@ set in Townsend’s original model equals its information set in a pooling equil
 prices and quantities in Townsend’s original model equal those in a pooling equilibrium.</p></li>
 </ul>
 <div class="section" id="a-sequence-of-models">
-<h3><span class="section-number">32.1.1. </span>A Sequence of Models<a class="headerlink" href="#a-sequence-of-models" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">33.1.1. </span>A Sequence of Models<a class="headerlink" href="#a-sequence-of-models" title="Permalink to this headline">¶</a></h3>
 <p>We proceed by describing  a sequence of models of two industries that are linked in a
 single way: shocks to the demand curves for their products have a common
 component.</p>
-<p>The models are simplified versions   of Townsend’s  <span id="id11">[<a class="reference internal" href="zreferences.html#id14">Tow83</a>]</span>.</p>
+<p>The models are simplified versions   of Townsend’s  <span id="id11">[<a class="reference internal" href="zreferences.html#id21">Tow83</a>]</span>.</p>
 <p>Townsend’s is a model of a rational expectations equilibrium in which firms confront
 the problem  <strong>forecasting the forecasts of others</strong>.</p>
 <p>In Townsend’s model, firms condition  their forecasts on observed endogenous variables whose equilibrium laws of motion
@@ -815,7 +838,7 @@ in  <a class="reference external" href="https://python-intro.quantecon.org/kalma
 </div>
 </div>
 <div class="section" id="the-setting">
-<h2><a class="toc-backref" href="#id45"><span class="section-number">32.2. </span>The Setting</a><a class="headerlink" href="#the-setting" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id45"><span class="section-number">33.2. </span>The Setting</a><a class="headerlink" href="#the-setting" title="Permalink to this headline">¶</a></h2>
 <p>We cast all variables in terms of deviations from means.</p>
 <p>Therefore,  we omit constants from inverse demand curves
 and other functions.</p>
@@ -827,13 +850,13 @@ production, capital <span class="math notranslate nohighlight">\(k_t^i\)</span>,
 <span class="math notranslate nohighlight">\(y_t^i = f k_t^i\)</span>, <span class="math notranslate nohighlight">\(f &gt;0\)</span>, acts as a price taker with
 respect to output price <span class="math notranslate nohighlight">\(P_t^i\)</span>, and maximizes</p>
 <div class="math notranslate nohighlight" id="equation-town1">
-<span class="eqno">(32.1)<a class="headerlink" href="#equation-town1" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.1)<a class="headerlink" href="#equation-town1" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   E_0^i \sum_{t=0}^\infty \beta^t \left\{ P_t^i f k_t^i - .5
      h (k_{t+1}^i - k_t^i)^2 \right\} ,
   \quad h &gt;0  .\end{aligned}\]</div>
 <p>Demand in industry <span class="math notranslate nohighlight">\(i\)</span> is described by the inverse demand curve</p>
 <div class="math notranslate nohighlight" id="equation-town2">
-<span class="eqno">(32.2)<a class="headerlink" href="#equation-town2" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.2)<a class="headerlink" href="#equation-town2" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   P_t^i = - b Y_t^i + \theta_t + \epsilon_t^i  , \quad b &gt;0,
   \end{aligned}\]</div>
 <p>where <span class="math notranslate nohighlight">\(P_t^i\)</span> is the price of good <span class="math notranslate nohighlight">\(i\)</span> at <span class="math notranslate nohighlight">\(t\)</span>,
@@ -844,7 +867,7 @@ component of the demand shock that is i.i.d. and whose time <span class="math no
 marginal distributon is <span class="math notranslate nohighlight">\({\mathcal N}(0, \sigma_{\epsilon}^2)\)</span>.</p>
 <p>We assume that <span class="math notranslate nohighlight">\(\theta_t\)</span> is governed by</p>
 <div class="math notranslate nohighlight" id="equation-town2a">
-<span class="eqno">(32.3)<a class="headerlink" href="#equation-town2a" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.3)<a class="headerlink" href="#equation-town2a" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   \theta_{t+1} = \rho \theta_t + v_{t}
   \end{aligned}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{v_{t}\}\)</span> is an i.i.d. sequence of Gaussian shocks each
@@ -867,7 +890,7 @@ between <span class="math notranslate nohighlight">\(k_t^i\)</span> and <span cl
 optimization problem.</p>
 </div>
 <div class="section" id="tactics">
-<h2><a class="toc-backref" href="#id46"><span class="section-number">32.3. </span>Tactics</a><a class="headerlink" href="#tactics" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id46"><span class="section-number">33.3. </span>Tactics</a><a class="headerlink" href="#tactics" title="Permalink to this headline">¶</a></h2>
 <p>We shall  compute
 equilibrium laws of motion for capital in industry <span class="math notranslate nohighlight">\(i\)</span> under a
 sequence of assumptions about what a representative firm observes.</p>
@@ -922,7 +945,7 @@ signals on <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li
 </ul>
 <p>We want ultimately to compare outcomes in  a pooling equilibrium
 with an equilibrium under the following alternative information structure for a firm
-in industry <span class="math notranslate nohighlight">\(i\)</span> that interested <span id="id12">[<a class="reference internal" href="zreferences.html#id14">Tow83</a>]</span>:</p>
+in industry <span class="math notranslate nohighlight">\(i\)</span> that interested <span id="id12">[<a class="reference internal" href="zreferences.html#id21">Tow83</a>]</span>:</p>
 <ul class="simple">
 <li><p><strong>Firm</strong> <span class="math notranslate nohighlight">\(i\)</span>’s <strong>noise-ridden signal on</strong> <span class="math notranslate nohighlight">\(\theta_t\)</span> <strong>and the
 price in industry</strong> <span class="math notranslate nohighlight">\(-i\)</span>, a firm in industry
@@ -944,7 +967,7 @@ received by firms in industry <span class="math notranslate nohighlight">\(-i\)<
 <p>We shall eventually verify this assertion  by using a guess and verify tactic. <a class="footnote-reference brackets" href="#footnote0" id="id13">1</a></p>
 </div>
 <div class="section" id="equilibrium-conditions">
-<h2><a class="toc-backref" href="#id47"><span class="section-number">32.4. </span>Equilibrium conditions</a><a class="headerlink" href="#equilibrium-conditions" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id47"><span class="section-number">33.4. </span>Equilibrium conditions</a><a class="headerlink" href="#equilibrium-conditions" title="Permalink to this headline">¶</a></h2>
 <p>It is convenient to solve the firm’s problem without
 uncertainty  by forming the Lagrangian:</p>
 <div class="math notranslate nohighlight">
@@ -958,41 +981,41 @@ P_t^i  k_t^i - .5   (\mu_t^i)^2  + \phi_t^i \left[
 transition law for <span class="math notranslate nohighlight">\(k_{t+1}^i\)</span>. First order conditions for the
 nonstochastic problem are</p>
 <div class="math notranslate nohighlight" id="equation-town4">
-<span class="eqno">(32.4)<a class="headerlink" href="#equation-town4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.4)<a class="headerlink" href="#equation-town4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
   \phi_t^i &amp; =  \beta \phi_{t+1}^i + \beta  P_{t+1}^i   \\
   \mu_t^i &amp; =  \phi_t^i .   \end{aligned}\end{split}\]</div>
-<p>Substituting the demand function <a class="reference internal" href="#equation-town2">(32.2)</a> for
+<p>Substituting the demand function <a class="reference internal" href="#equation-town2">(33.2)</a> for
 <span class="math notranslate nohighlight">\(P_t^i\)</span>, imposing the condition that the representative firm is
 representative ( <span class="math notranslate nohighlight">\(k_t^i = K_t^i\)</span>), and using the definition below
-of <span class="math notranslate nohighlight">\(g_t^i\)</span>, the Euler equation <a class="reference internal" href="#equation-town4">(32.4)</a>, lagged
+of <span class="math notranslate nohighlight">\(g_t^i\)</span>, the Euler equation <a class="reference internal" href="#equation-town4">(33.4)</a>, lagged
 by one period, can be expressed as
 <span class="math notranslate nohighlight">\(- b k_t^i + \theta_t + \epsilon_t^i + (k_{t+1}^i - k_t^i) - g_t^i =0\)</span>
 or</p>
 <div class="math notranslate nohighlight" id="equation-pcl11">
-<span class="eqno">(32.5)<a class="headerlink" href="#equation-pcl11" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.5)<a class="headerlink" href="#equation-pcl11" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   k_{t+1}^i = (b+1) k_t^i - \theta_t - \epsilon_t^i + g_t^i
   \end{aligned}\]</div>
 <p>where we define <span class="math notranslate nohighlight">\(g_t^i\)</span> by</p>
 <div class="math notranslate nohighlight" id="equation-town7">
-<span class="eqno">(32.6)<a class="headerlink" href="#equation-town7" title="Permalink to this equation">¶</a></span>\[g_t^i = \beta^{-1} (k_t^i - k_{t-1}^i)\]</div>
-<p>We can write  Euler equation <a class="reference internal" href="#equation-town4">(32.4)</a> as:</p>
+<span class="eqno">(33.6)<a class="headerlink" href="#equation-town7" title="Permalink to this equation">¶</a></span>\[g_t^i = \beta^{-1} (k_t^i - k_{t-1}^i)\]</div>
+<p>We can write  Euler equation <a class="reference internal" href="#equation-town4">(33.4)</a> as:</p>
 <div class="math notranslate nohighlight" id="equation-pcl10">
-<span class="eqno">(32.7)<a class="headerlink" href="#equation-pcl10" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.7)<a class="headerlink" href="#equation-pcl10" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   g_t^i = P_t^i + \beta g_{t+1}^i
   \end{aligned}\]</div>
 <p>In addition, we have the law of motion for <span class="math notranslate nohighlight">\(\theta_t\)</span>,
-<a class="reference internal" href="#equation-town2a">(32.3)</a>, and the demand equation
-<a class="reference internal" href="#equation-town2">(32.2)</a>.</p>
+<a class="reference internal" href="#equation-town2a">(33.3)</a>, and the demand equation
+<a class="reference internal" href="#equation-town2">(33.2)</a>.</p>
 <p>In summary, with perfect foresight, equilibrium conditions for industry
 <span class="math notranslate nohighlight">\(i\)</span> include the following system of difference equations:</p>
 <div class="math notranslate nohighlight" id="equation-sol1">
-<span class="eqno">(32.8)<a class="headerlink" href="#equation-sol1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.8)<a class="headerlink" href="#equation-sol1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
   k_{t+1}^i &amp; =  (1+b)k_t^i - \epsilon_t^i -\theta_t + g_t^i \\
   \theta_{t+1} &amp; =  \rho \theta_t + v_t \\
   g_{t+1}^i  &amp; = \beta^{-1} (g_t^i - P_t^i)   \\
   P_t^i &amp; =  -b k_t^i + \epsilon_t^i + \theta_t  \end{aligned}\end{split}\]</div>
 <p>Without perfect foresight, the same system prevails except that the
-following equation replaces the third equation of <a class="reference internal" href="#equation-sol1">(32.8)</a>:</p>
+following equation replaces the third equation of <a class="reference internal" href="#equation-sol1">(33.8)</a>:</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -1002,16 +1025,16 @@ g_{t+1,t}^i = \beta^{-1} (g_t^i - P_t^i) \end{aligned}
 <span class="math notranslate nohighlight">\(x_{t+1,t}\)</span> denotes the mathematical expectation of
 <span class="math notranslate nohighlight">\(x_{t+1}\)</span> conditional on information at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <div class="section" id="equilibrium-under-perfect-foresight">
-<h3><span class="section-number">32.4.1. </span>Equilibrium under perfect foresight<a class="headerlink" href="#equilibrium-under-perfect-foresight" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">33.4.1. </span>Equilibrium under perfect foresight<a class="headerlink" href="#equilibrium-under-perfect-foresight" title="Permalink to this headline">¶</a></h3>
 <p>Our first step is to compute the equilibrium law of motion for
 <span class="math notranslate nohighlight">\(k_t^i\)</span> under perfect foresight.</p>
 <p>Let <span class="math notranslate nohighlight">\(L\)</span> be the lag
 operator. <a class="footnote-reference brackets" href="#footnote3" id="id14">2</a></p>
-<p>Equations <a class="reference internal" href="#equation-pcl10">(32.7)</a> and <a class="reference internal" href="#equation-pcl11">(32.5)</a>
+<p>Equations <a class="reference internal" href="#equation-pcl10">(33.7)</a> and <a class="reference internal" href="#equation-pcl11">(33.5)</a>
 imply the second order difference equation in
 <span class="math notranslate nohighlight">\(k_t^i\)</span>: <a class="footnote-reference brackets" href="#footnote4" id="id15">3</a></p>
 <div class="math notranslate nohighlight" id="equation-euler1">
-<span class="eqno">(32.9)<a class="headerlink" href="#equation-euler1" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.9)<a class="headerlink" href="#equation-euler1" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   \left[ (L^{-1} - (1+b))(1-\beta L^{-1}) + b\right] k_t^i
   = \beta L^{-1} \epsilon_t^i + \beta L^{-1} \theta_t .
   \end{aligned}\]</div>
@@ -1026,7 +1049,7 @@ imply the second order difference equation in
 <p>where <span class="math notranslate nohighlight">\(|\tilde \lambda | &lt; 1\)</span> is the smaller root and
 <span class="math notranslate nohighlight">\(\lambda\)</span> is the larger root of
 <span class="math notranslate nohighlight">\((\lambda-1)(\lambda-1/\beta)=b\lambda\)</span>.</p>
-<p>Therefore, <a class="reference internal" href="#equation-euler1">(32.9)</a> can be expressed as</p>
+<p>Therefore, <a class="reference internal" href="#equation-euler1">(33.9)</a> can be expressed as</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -1047,36 +1070,36 @@ k_{t+1}^i = \tilde \lambda k_t^i + {\tilde \lambda \beta \over 1 -\tilde
 conditions for a representative firm in industry <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>Thus,  under perfect foresight the equilibrium capital stock in industry <span class="math notranslate nohighlight">\(i\)</span> satisfies</p>
 <div class="math notranslate nohighlight" id="equation-town5">
-<span class="eqno">(32.10)<a class="headerlink" href="#equation-town5" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.10)<a class="headerlink" href="#equation-town5" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   k_{t+1}^i = \tilde \lambda k_t^i + \sum_{j=1}^\infty (\tilde \lambda \beta)^j
   (\epsilon_{t+j}^i +  \theta_{t+j}) .
   \end{aligned}\]</div>
 <p>Next, we shall investigate consequences of replacing future  values of
-<span class="math notranslate nohighlight">\((\epsilon_{t+j}^i +  \theta_{t+j})\)</span> in equation <a class="reference internal" href="#equation-town5">(32.10)</a>  with alternative forecasting schemes.</p>
+<span class="math notranslate nohighlight">\((\epsilon_{t+j}^i +  \theta_{t+j})\)</span> in equation <a class="reference internal" href="#equation-town5">(33.10)</a>  with alternative forecasting schemes.</p>
 <p>In particular, we shall compute   equilibrium laws of motion for capital
 under alternative assumptions about the information available to
 decision makers in market <span class="math notranslate nohighlight">\(i\)</span>.</p>
 </div>
 </div>
 <div class="section" id="equilibrium-with-theta-t-stochastic-but-observed-at-t">
-<h2><a class="toc-backref" href="#id48"><span class="section-number">32.5. </span>Equilibrium with <span class="math notranslate nohighlight">\(\theta_t\)</span> stochastic but observed at <span class="math notranslate nohighlight">\(t\)</span></a><a class="headerlink" href="#equilibrium-with-theta-t-stochastic-but-observed-at-t" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id48"><span class="section-number">33.5. </span>Equilibrium with <span class="math notranslate nohighlight">\(\theta_t\)</span> stochastic but observed at <span class="math notranslate nohighlight">\(t\)</span></a><a class="headerlink" href="#equilibrium-with-theta-t-stochastic-but-observed-at-t" title="Permalink to this headline">¶</a></h2>
 <p>If future <span class="math notranslate nohighlight">\(\theta\)</span>’s are unknown at <span class="math notranslate nohighlight">\(t\)</span>, it is appropriate
 to replace all random variables on the right side of
-<a class="reference internal" href="#equation-town5">(32.10)</a> with their conditional expectations based on
+<a class="reference internal" href="#equation-town5">(33.10)</a> with their conditional expectations based on
 the information available to decision makers in market <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>For now, we assume that this information set
 <span class="math notranslate nohighlight">\(I_t^p = \begin{bmatrix} \theta^t &amp; \epsilon^{it} \end{bmatrix}\)</span>,
 where <span class="math notranslate nohighlight">\(z^t\)</span> represents the infinite history of variable
 <span class="math notranslate nohighlight">\(z_s\)</span> up to time <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>Later we shall give firms less information.</p>
-<p>To obtain an appropriate counterpart to <a class="reference internal" href="#equation-town5">(32.10)</a> under our
+<p>To obtain an appropriate counterpart to <a class="reference internal" href="#equation-town5">(33.10)</a> under our
 current assumption about information, we apply a certainty equivalence
 principle.</p>
-<p>In particular, it is appropriate to take <a class="reference internal" href="#equation-town5">(32.10)</a> and
+<p>In particular, it is appropriate to take <a class="reference internal" href="#equation-town5">(33.10)</a> and
 replace each term <span class="math notranslate nohighlight">\(( \epsilon_{t+j}^i+ \theta_{t+j} )\)</span> on the
 right side with
 <span class="math notranslate nohighlight">\(E[ (\epsilon_{t+j}^i+ \theta_{t+j}) \vert \theta^t ]\)</span>.</p>
-<p>After using <a class="reference internal" href="#equation-town2a">(32.3)</a> and the i.i.d. assumption about
+<p>After using <a class="reference internal" href="#equation-town2a">(33.3)</a> and the i.i.d. assumption about
 <span class="math notranslate nohighlight">\(\{\epsilon_t^i\}\)</span>, this gives</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1088,28 +1111,28 @@ k_{t+1}^i = \tilde \lambda k_t^i + {\tilde \lambda \beta \rho \over 1 -
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-solution1">
-<span class="eqno">(32.11)<a class="headerlink" href="#equation-solution1" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.11)<a class="headerlink" href="#equation-solution1" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   k_{t+1}^i = \tilde \lambda k_t^i  + {\rho \over  \lambda - \rho} \theta_t
   \end{aligned}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\lambda \equiv (\beta \tilde \lambda)^{-1}\)</span>.</p>
 <p>For future purposes, it is useful to represent the equilibrium
 <span class="math notranslate nohighlight">\(\{k_t^i\}_t\)</span> process recursively as</p>
 <div class="math notranslate nohighlight" id="equation-sol10">
-<span class="eqno">(32.12)<a class="headerlink" href="#equation-sol10" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.12)<a class="headerlink" href="#equation-sol10" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
   k_{t+1}^i  &amp; =  \tilde \lambda k_t^i  + {1 \over \lambda - \rho}
   \hat \theta_{t+1}  \\
   \hat \theta_{t+1}  &amp; =  \rho \theta_t \\
   \theta_{t+1} &amp; =  \rho \theta_t + v_t.   \end{aligned}\end{split}\]</div>
 <div class="section" id="filtering">
-<h3><span class="section-number">32.5.1. </span>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">33.5.1. </span>Filtering<a class="headerlink" href="#filtering" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="one-noisy-signal">
-<h4><span class="section-number">32.5.1.1. </span>One noisy signal<a class="headerlink" href="#one-noisy-signal" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">33.5.1.1. </span>One noisy signal<a class="headerlink" href="#one-noisy-signal" title="Permalink to this headline">¶</a></h4>
 <p>We get closer to a model that we ultimately want to study by now
 assuming that firms in market <span class="math notranslate nohighlight">\(i\)</span> do not observe <span class="math notranslate nohighlight">\(\theta_t\)</span>,
 but instead observe a history  <span class="math notranslate nohighlight">\(w^t\)</span> of noisy signals at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>In particular, assume that</p>
 <div class="math notranslate nohighlight" id="equation-kf1-2">
-<span class="eqno">(32.13)<a class="headerlink" href="#equation-kf1-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.13)<a class="headerlink" href="#equation-kf1-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
   w_t  &amp; =   \theta_t + e_t  \\
   \theta_{t+1} &amp; =  \rho \theta_t + v_t
   \end{aligned}\end{split}\]</div>
@@ -1126,26 +1149,26 @@ i.i.d. Gaussian shock processes with means of zero and variances
 <p>where <span class="math notranslate nohighlight">\(w^t = [w_t, w_{t-1}, \ldots, w_0]\)</span> denotes the history of the <span class="math notranslate nohighlight">\(w_s\)</span> process up to
 and including <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>Associated with the state-space representation
-<a class="reference internal" href="#equation-kf1-2">(32.13)</a> is the <em>innovations
+<a class="reference internal" href="#equation-kf1-2">(33.13)</a> is the <em>innovations
 representation</em></p>
 <div class="math notranslate nohighlight" id="equation-kf3-4">
-<span class="eqno">(32.14)<a class="headerlink" href="#equation-kf3-4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.14)<a class="headerlink" href="#equation-kf3-4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
   \hat \theta_{t+1}  &amp; =     \rho \hat \theta_t + k a_t  \\
   w_t &amp; =  \hat \theta_t + a_t
   \end{aligned}\end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(a_t \equiv w_t - E(w_t | w^{t-1})\)</span> is the <em>innovations</em>
 process in <span class="math notranslate nohighlight">\(w_t\)</span> and the Kalman gain <span class="math notranslate nohighlight">\(k\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-kal1">
-<span class="eqno">(32.15)<a class="headerlink" href="#equation-kal1" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.15)<a class="headerlink" href="#equation-kal1" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   k = {\rho p \over p + \sigma_e^2} \end{aligned}\]</div>
 <p>and where <span class="math notranslate nohighlight">\(p\)</span> satisfies the Riccati equation</p>
 <div class="math notranslate nohighlight" id="equation-kf6">
-<span class="eqno">(32.16)<a class="headerlink" href="#equation-kf6" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.16)<a class="headerlink" href="#equation-kf6" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   p = \sigma_v^2   + { p \rho^2 \sigma_e^2 \over \sigma_e^2 + p}.
   \end{aligned}\]</div>
 </div>
 <div class="section" id="theta-reconstruction-error">
-<h4><span class="section-number">32.5.1.2. </span><span class="math notranslate nohighlight">\(\theta\)</span>-reconstruction error:<a class="headerlink" href="#theta-reconstruction-error" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">33.5.1.2. </span><span class="math notranslate nohighlight">\(\theta\)</span>-reconstruction error:<a class="headerlink" href="#theta-reconstruction-error" title="Permalink to this headline">¶</a></h4>
 <p>Define the state <em>reconstruction error</em> <span class="math notranslate nohighlight">\(\tilde \theta_t\)</span> by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1154,46 +1177,46 @@ process in <span class="math notranslate nohighlight">\(w_t\)</span> and the Kal
 \end{aligned}
 \]</div>
 <p>Then <span class="math notranslate nohighlight">\(p = E \tilde \theta_t^2\)</span>.</p>
-<p>Equations <a class="reference internal" href="#equation-kf1-2">(32.13)</a> and <a class="reference internal" href="#equation-kf3-4">(32.14)</a> imply</p>
+<p>Equations <a class="reference internal" href="#equation-kf1-2">(33.13)</a> and <a class="reference internal" href="#equation-kf3-4">(33.14)</a> imply</p>
 <div class="math notranslate nohighlight" id="equation-kf7">
-<span class="eqno">(32.17)<a class="headerlink" href="#equation-kf7" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.17)<a class="headerlink" href="#equation-kf7" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   \tilde \theta_{t+1} = (\rho - k) \tilde \theta_t + v_t - k e_t .
   \end{aligned}\]</div>
 <p>Now notice that we can express <span class="math notranslate nohighlight">\(\hat \theta_{t+1}\)</span> as</p>
 <div class="math notranslate nohighlight" id="equation-kf8">
-<span class="eqno">(32.18)<a class="headerlink" href="#equation-kf8" title="Permalink to this equation">¶</a></span>\[\hat \theta_{t+1}   = [\rho \theta_t + v_t]  + [ ke_t - (\rho -k) \tilde \theta_t - v_t]  ,\]</div>
+<span class="eqno">(33.18)<a class="headerlink" href="#equation-kf8" title="Permalink to this equation">¶</a></span>\[\hat \theta_{t+1}   = [\rho \theta_t + v_t]  + [ ke_t - (\rho -k) \tilde \theta_t - v_t]  ,\]</div>
 <p>where the first term in braces  equals
 <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span> and the second term in braces equals
 <span class="math notranslate nohighlight">\(-\tilde \theta_{t+1}\)</span>.</p>
-<p>We can express <a class="reference internal" href="#equation-solution1">(32.11)</a> as</p>
+<p>We can express <a class="reference internal" href="#equation-solution1">(33.11)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-solution2">
-<span class="eqno">(32.19)<a class="headerlink" href="#equation-solution2" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.19)<a class="headerlink" href="#equation-solution2" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   k_{t+1}^i = \tilde \lambda k_t^i + {1 \over \lambda - \rho}
   E \theta_{t+1} | \theta^t .
   \end{aligned}\]</div>
 <p>An application of a certainty equivalence principle asserts that when
 only <span class="math notranslate nohighlight">\(w^t\)</span> is observed, the appropriate solution is found by
 replacing the information set <span class="math notranslate nohighlight">\(\theta^t\)</span> with <span class="math notranslate nohighlight">\(w^t\)</span> in
-<a class="reference internal" href="#equation-solution2">(32.19)</a>.</p>
-<p>Making this substitution and using <a class="reference internal" href="#equation-kf8">(32.18)</a> leads to</p>
+<a class="reference internal" href="#equation-solution2">(33.19)</a>.</p>
+<p>Making this substitution and using <a class="reference internal" href="#equation-kf8">(33.18)</a> leads to</p>
 <div class="math notranslate nohighlight" id="equation-kf9">
-<span class="eqno">(32.20)<a class="headerlink" href="#equation-kf9" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.20)<a class="headerlink" href="#equation-kf9" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   k_{t+1}^i   = \tilde \lambda k_t^i + {\rho \over  \lambda - \rho} \theta_t + {k \over  \lambda - \rho} e_t  - {\rho - k \over  \lambda - \rho} \tilde \theta_t .
   \end{aligned}\]</div>
-<p>Simplifying equation <a class="reference internal" href="#equation-kf8">(32.18)</a>, we also have</p>
+<p>Simplifying equation <a class="reference internal" href="#equation-kf8">(33.18)</a>, we also have</p>
 <div class="math notranslate nohighlight" id="equation-kf8a">
-<span class="eqno">(32.21)<a class="headerlink" href="#equation-kf8a" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.21)<a class="headerlink" href="#equation-kf8a" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   \hat \theta_{t+1}  = \rho \theta_t +  ke_t - (\rho -k) \tilde \theta_t  .
   \end{aligned}\]</div>
-<p>Equations <a class="reference internal" href="#equation-kf9">(32.20)</a>, <a class="reference internal" href="#equation-kf8a">(32.21)</a> describe
+<p>Equations <a class="reference internal" href="#equation-kf9">(33.20)</a>, <a class="reference internal" href="#equation-kf8a">(33.21)</a> describe
 the equilibrium when <span class="math notranslate nohighlight">\(w^t\)</span> is observed.</p>
-<p>Relative to <a class="reference internal" href="#equation-solution1">(32.11)</a>, the equilibrium acquires a new
+<p>Relative to <a class="reference internal" href="#equation-solution1">(33.11)</a>, the equilibrium acquires a new
 state variable, namely, the <span class="math notranslate nohighlight">\(\theta\)</span>–reconstruction error,
 <span class="math notranslate nohighlight">\(\tilde \theta_t\)</span>.</p>
-<p>For future purposes, by using <a class="reference internal" href="#equation-kal1">(32.15)</a>, it is useful to
-write <a class="reference internal" href="#equation-kf9">(32.20)</a> as</p>
+<p>For future purposes, by using <a class="reference internal" href="#equation-kal1">(33.15)</a>, it is useful to
+write <a class="reference internal" href="#equation-kf9">(33.20)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-sol2a">
-<span class="eqno">(32.22)<a class="headerlink" href="#equation-sol2a" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.22)<a class="headerlink" href="#equation-sol2a" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   k_{t+1}^i = \tilde \lambda k_t^i + {\rho \over  \lambda - \rho } \theta_t + {1 \over  \lambda - \rho} {p \rho \over p + \sigma_e^2} e_t - {1 \over \lambda - \rho} {\rho \sigma_e^2 \over p + \sigma_e^2}
   \tilde \theta_t
   \end{aligned}\]</div>
@@ -1201,7 +1224,7 @@ write <a class="reference internal" href="#equation-kf9">(32.20)</a> as</p>
 signal <span class="math notranslate nohighlight">\(w_t\)</span> on <span class="math notranslate nohighlight">\(\theta_t\)</span> at <span class="math notranslate nohighlight">\(t\)</span>, we can represent an
 equilibrium law of motion for <span class="math notranslate nohighlight">\(k_t^i\)</span> as</p>
 <div class="math notranslate nohighlight" id="equation-sol0a">
-<span class="eqno">(32.23)<a class="headerlink" href="#equation-sol0a" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.23)<a class="headerlink" href="#equation-sol0a" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
 k_{t+1}^i &amp; =  \tilde \lambda k_t^i + {1 \over \lambda - \rho}   \hat \theta_{t+1}  \\
 \hat \theta_{t+1} &amp; =  \rho \theta_t + {\rho p \over p + \sigma_e^2} e_t - {\rho \sigma_e^2 \over p + \sigma_e^2} \tilde \theta_t  \\
 \tilde \theta_{t+1} &amp; = { \rho \sigma_e^2 \over p + \sigma_e^2} \tilde
@@ -1210,7 +1233,7 @@ k_{t+1}^i &amp; =  \tilde \lambda k_t^i + {1 \over \lambda - \rho}   \hat \theta
 </div>
 </div>
 <div class="section" id="two-noisy-signals">
-<h3><span class="section-number">32.5.2. </span>Two noisy signals<a class="headerlink" href="#two-noisy-signals" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">33.5.2. </span>Two noisy signals<a class="headerlink" href="#two-noisy-signals" title="Permalink to this headline">¶</a></h3>
 <p>We now construct a <strong>pooling equilibrium</strong> by assuming that a firm in
 industry <span class="math notranslate nohighlight">\(i\)</span> receives a vector <span class="math notranslate nohighlight">\(w_t\)</span> of <em>two</em> noisy signals
 on <span class="math notranslate nohighlight">\(\theta_t\)</span>:</p>
@@ -1239,7 +1262,7 @@ assume that</p>
 <span class="math notranslate nohighlight">\(-i\)</span>.</p>
 <p>The appropriate innovations representation becomes</p>
 <div class="math notranslate nohighlight" id="equation-kf22-23">
-<span class="eqno">(32.24)<a class="headerlink" href="#equation-kf22-23" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.24)<a class="headerlink" href="#equation-kf22-23" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
   \hat \theta_{t+1} &amp; =   \rho
   \hat \theta_t + k a_t  \\
   w_t  &amp; =  \begin{bmatrix} 1 \\ 1 \end{bmatrix} \hat \theta_t + a_t
@@ -1249,33 +1272,33 @@ assume that</p>
 is now a <span class="math notranslate nohighlight">\((1 \times 2)\)</span> vector of Kalman gains.</p>
 <p>Formulas for the Kalman filter imply that</p>
 <div class="math notranslate nohighlight" id="equation-kf24">
-<span class="eqno">(32.25)<a class="headerlink" href="#equation-kf24" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.25)<a class="headerlink" href="#equation-kf24" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   k ={ \rho  p \over 2 p + \sigma_e^2}
   \begin{bmatrix}1 &amp; 1 \end{bmatrix}
   \end{aligned}\]</div>
 <p>where <span class="math notranslate nohighlight">\(p = E \tilde \theta_t \tilde \theta_t^T\)</span> now satisfies the
 Riccati equation</p>
 <div class="math notranslate nohighlight" id="equation-ricc2">
-<span class="eqno">(32.26)<a class="headerlink" href="#equation-ricc2" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(33.26)<a class="headerlink" href="#equation-ricc2" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   p = \sigma_v^2 + {p \rho^2 \sigma_e^2 \over 2 p + \sigma_e^2}.
   \end{aligned}\]</div>
 <p>Thus, when a representative firm in industry <span class="math notranslate nohighlight">\(i\)</span> observes <em>two</em>
 noisy signals on <span class="math notranslate nohighlight">\(\theta_t\)</span>, we can express the equilibrium law of
 motion for capital recursively as</p>
 <div class="math notranslate nohighlight" id="equation-sol3">
-<span class="eqno">(32.27)<a class="headerlink" href="#equation-sol3" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.27)<a class="headerlink" href="#equation-sol3" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
 k_{t+1}^i &amp; =  \tilde \lambda k_t^i + {1 \over \lambda - \rho}\hat \theta_{t+1}  \\
 \hat \theta_{t+1} &amp; =  \rho \theta_t + {\rho p \over 2  p + \sigma_e^2} (e_{1t}+e_{2t}) - {\rho \sigma_e^2 \over 2 p + \sigma_e^2} \tilde \theta_t \\
 \tilde \theta_{t+1} &amp; =  { \rho \sigma_e^2 \over 2 p + \sigma_e^2} \tilde  \theta_t - {p \rho \over 2 p + \sigma_e^2}(e_{1t}+e_{2t}) +v_t \\
 \theta_{t+1} &amp; =  \rho \theta_t + v_t .
  \end{aligned}\end{split}\]</div>
 <p>Below, by using a guess-and-verify tactic,  we shall show that outcomes in this  <strong>pooling equilibrium</strong> equal those in an equilibrium under the alternative
-information structure that interested <span id="id16">[<a class="reference internal" href="zreferences.html#id14">Tow83</a>]</span>. <a class="footnote-reference brackets" href="#footnote5" id="id17">4</a></p>
+information structure that interested <span id="id16">[<a class="reference internal" href="zreferences.html#id21">Tow83</a>]</span>. <a class="footnote-reference brackets" href="#footnote5" id="id17">4</a></p>
 </div>
 </div>
 <div class="section" id="guess-and-verify-tactic">
-<h2><a class="toc-backref" href="#id49"><span class="section-number">32.6. </span>Guess-and-verify tactic</a><a class="headerlink" href="#guess-and-verify-tactic" title="Permalink to this headline">¶</a></h2>
-<p>As a preliminary step we shall take our recursive representation <a class="reference internal" href="#equation-sol0a">(32.23)</a>
+<h2><a class="toc-backref" href="#id49"><span class="section-number">33.6. </span>Guess-and-verify tactic</a><a class="headerlink" href="#guess-and-verify-tactic" title="Permalink to this headline">¶</a></h2>
+<p>As a preliminary step we shall take our recursive representation <a class="reference internal" href="#equation-sol0a">(33.23)</a>
 of an equilibrium in industry <span class="math notranslate nohighlight">\(i\)</span> with one noisy signal
 on <span class="math notranslate nohighlight">\(\theta_t\)</span> and perform the following steps:</p>
 <ul class="simple">
@@ -1285,7 +1308,7 @@ root-finding problem and then solving it using <code class="docutils literal not
 using <code class="docutils literal notranslate"><span class="pre">quantecon.solve_discrete_riccati</span></code></p></li>
 <li><p>Add a <em>measurement equation</em> for
 <span class="math notranslate nohighlight">\(P_t^i = b k_t^i + \theta_t + e_t\)</span>, <span class="math notranslate nohighlight">\(\theta_t + e_t\)</span>,
-and <span class="math notranslate nohighlight">\(e_t\)</span> to system <a class="reference internal" href="#equation-sol0a">(32.23)</a>. Write the resulting system
+and <span class="math notranslate nohighlight">\(e_t\)</span> to system <a class="reference internal" href="#equation-sol0a">(33.23)</a>. Write the resulting system
 in state-space form and encode it using <code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code></p></li>
 <li><p>Use methods of the <code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code> to compute impulse response
 functions of <span class="math notranslate nohighlight">\(k_t^i\)</span> with respect to shocks <span class="math notranslate nohighlight">\(v_t, e_t\)</span>.</p></li>
@@ -1296,9 +1319,9 @@ structure.</p>
 <p>We proceed to analyze first the one-noisy-signal structure and then the two-noisy-signal structure.</p>
 </div>
 <div class="section" id="equilibrium-with-one-signal-on-theta-t">
-<h2><a class="toc-backref" href="#id50"><span class="section-number">32.7. </span>Equilibrium with one signal on <span class="math notranslate nohighlight">\(\theta_t\)</span></a><a class="headerlink" href="#equilibrium-with-one-signal-on-theta-t" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id50"><span class="section-number">33.7. </span>Equilibrium with one signal on <span class="math notranslate nohighlight">\(\theta_t\)</span></a><a class="headerlink" href="#equilibrium-with-one-signal-on-theta-t" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="step-1-solve-for-tilde-lambda-and-lambda">
-<h3><span class="section-number">32.7.1. </span>Step 1: Solve for <span class="math notranslate nohighlight">\(\tilde{\lambda}\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span><a class="headerlink" href="#step-1-solve-for-tilde-lambda-and-lambda" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">33.7.1. </span>Step 1: Solve for <span class="math notranslate nohighlight">\(\tilde{\lambda}\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span><a class="headerlink" href="#step-1-solve-for-tilde-lambda-and-lambda" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
 <li><p>Cast
 <span class="math notranslate nohighlight">\(\left(\lambda-1\right)\left(\lambda-\frac{1}{\beta}\right)=b\lambda\)</span>
@@ -1311,7 +1334,7 @@ function of <span class="math notranslate nohighlight">\(\lambda\)</span>.</p></
 <span class="math notranslate nohighlight">\(p\left(\lambda\right)=\lambda^{2}-\left(1+b+\frac{1}{\beta}\right)\lambda+\frac{1}{\beta}\)</span>.</p>
 </div>
 <div class="section" id="step-2-solve-for-p">
-<h3><span class="section-number">32.7.2. </span>Step 2: Solve for <span class="math notranslate nohighlight">\(p\)</span><a class="headerlink" href="#step-2-solve-for-p" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">33.7.2. </span>Step 2: Solve for <span class="math notranslate nohighlight">\(p\)</span><a class="headerlink" href="#step-2-solve-for-p" title="Permalink to this headline">¶</a></h3>
 <ol class="simple">
 <li><p>Cast
 <span class="math notranslate nohighlight">\(p=\sigma_{v}^{2}+\frac{p\rho^{2}\sigma_{e}^{2}}{2p+\sigma_{e}^{2}}\)</span>
@@ -1338,7 +1361,7 @@ as a discrete matrix Riccati equation.</p></li>
 \end{split}\]</div>
 </div>
 <div class="section" id="step-3-represent-the-system-using-quantecon-linearstatespace">
-<h3><span class="section-number">32.7.3. </span>Step 3: Represent the system using <code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code><a class="headerlink" href="#step-3-represent-the-system-using-quantecon-linearstatespace" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">33.7.3. </span>Step 3: Represent the system using <code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code><a class="headerlink" href="#step-3-represent-the-system-using-quantecon-linearstatespace" title="Permalink to this headline">¶</a></h3>
 <p>We use the following representation for constructing the
 <code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code> instance.</p>
 <div class="math notranslate nohighlight">
@@ -1432,7 +1455,7 @@ if (typeof require !== 'undefined') {
 require.undef("plotly");
 requirejs.config({
     paths: {
-        'plotly': ['https://cdn.plot.ly/plotly-2.4.2.min']
+        'plotly': ['https://cdn.plot.ly/plotly-2.6.3.min']
     }
 });
 require(['plotly'], function(Plotly) {
@@ -1566,7 +1589,7 @@ require(['plotly'], function(Plotly) {
 </div>
 </div>
 <div class="section" id="step-4-compute-impulse-response-functions">
-<h3><span class="section-number">32.7.4. </span>Step 4: Compute impulse response functions<a class="headerlink" href="#step-4-compute-impulse-response-functions" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">33.7.4. </span>Step 4: Compute impulse response functions<a class="headerlink" href="#step-4-compute-impulse-response-functions" title="Permalink to this headline">¶</a></h3>
 <p>To compute impulse response functions of <span class="math notranslate nohighlight">\(k_t^i\)</span>, we use the <code class="docutils literal notranslate"><span class="pre">impulse_response</span></code> method of the
 <code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code> class and plot the result.</p>
 <div class="cell docutils container">
@@ -1593,7 +1616,7 @@ require(['plotly'], function(Plotly) {
 </div>
 </div>
 <div class="section" id="step-5-compute-stationary-covariance-matrices-and-population-regressions">
-<h3><span class="section-number">32.7.5. </span>Step 5: Compute stationary covariance matrices and population regressions<a class="headerlink" href="#step-5-compute-stationary-covariance-matrices-and-population-regressions" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">33.7.5. </span>Step 5: Compute stationary covariance matrices and population regressions<a class="headerlink" href="#step-5-compute-stationary-covariance-matrices-and-population-regressions" title="Permalink to this headline">¶</a></h3>
 <p>We compute stationary covariance matrices  by
 calling the <code class="docutils literal notranslate"><span class="pre">stationary_distributions</span></code> method of
 the <code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code> class.</p>
@@ -1634,9 +1657,9 @@ coefficients.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Regression coefficients (e_t on k_t, P_t, \tilde{\theta_t})
 ------------------------------
-k_t: -3.2755568452197705
-\tilde{\theta_t}: -0.964946117047546
-P_t: 0.9649461170475461
+k_t: -3.275556845219768
+\tilde{\theta_t}: -0.9649461170475454
+P_t: 0.9649461170475454
 </pre></div>
 </div>
 </div>
@@ -1650,7 +1673,7 @@ P_t: 0.9649461170475461
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9649461170475461
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9649461170475452
 </pre></div>
 </div>
 </div>
@@ -1701,7 +1724,7 @@ P_t: 0.9649461170475461
 </div>
 </div>
 <div class="section" id="equilibrium-with-two-noisy-signals-on-theta-t">
-<h2><a class="toc-backref" href="#id51"><span class="section-number">32.8. </span>Equilibrium with two noisy signals on <span class="math notranslate nohighlight">\(\theta_t\)</span></a><a class="headerlink" href="#equilibrium-with-two-noisy-signals-on-theta-t" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id51"><span class="section-number">33.8. </span>Equilibrium with two noisy signals on <span class="math notranslate nohighlight">\(\theta_t\)</span></a><a class="headerlink" href="#equilibrium-with-two-noisy-signals-on-theta-t" title="Permalink to this headline">¶</a></h2>
 <p>Steps 1, 4, and 5 are identical to those for the  one-noisy-signal structure.</p>
 <p>Step 2  requires only a straightforward modification.</p>
 <p>For step 3, we use construct the  following state-space representation so that we can get our hands on
@@ -2020,7 +2043,7 @@ P^{2}_t: 0.9621171983721839
 </div>
 </div>
 <div class="section" id="key-step">
-<h2><a class="toc-backref" href="#id52"><span class="section-number">32.9. </span>Key step</a><a class="headerlink" href="#key-step" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id52"><span class="section-number">33.9. </span>Key step</a><a class="headerlink" href="#key-step" title="Permalink to this headline">¶</a></h2>
 <p>Now we come to the key step of verifying that equilibrium outcomes for prices and quantities are identical
 in the pooling equilibrium and Townsend’s original model.</p>
 <p>We accomplish this by  compute a population linear least squares regression of the noisy signal that firms in the other
@@ -2064,7 +2087,7 @@ set in Townsend’s original model equals its information set in a pooling equil
 <p>Therefore, equilibrium prices and quantities in Townsend’s original model equal those in a pooling equilibrium.</p>
 </div>
 <div class="section" id="comparison-of-the-two-signal-structures">
-<h2><a class="toc-backref" href="#id53"><span class="section-number">32.10. </span>Comparison of the two signal structures</a><a class="headerlink" href="#comparison-of-the-two-signal-structures" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id53"><span class="section-number">33.10. </span>Comparison of the two signal structures</a><a class="headerlink" href="#comparison-of-the-two-signal-structures" title="Permalink to this headline">¶</a></h2>
 <p>It is enlightening side by side to  plot impulse response functions for capital in an industry for the two
 information noisy-signal information structures.</p>
 <p>Please remember that the two-signal structure corresponds to the <strong>pooling equilibrium</strong> and also
@@ -2136,7 +2159,7 @@ structures are</p>
 </div>
 </div>
 <div class="section" id="notes-on-history-of-the-problem">
-<h2><a class="toc-backref" href="#id54"><span class="section-number">32.11. </span>Notes on History of the Problem</a><a class="headerlink" href="#notes-on-history-of-the-problem" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id54"><span class="section-number">33.11. </span>Notes on History of the Problem</a><a class="headerlink" href="#notes-on-history-of-the-problem" title="Permalink to this headline">¶</a></h2>
 <p>To truncate what he saw as an intractable, infinite dimensional  state space,
 Townsend constructed an approximating model in which the common hidden Markov demand shock
 is revealed to all firms  after a fixed number of periods.</p>
@@ -2153,21 +2176,21 @@ hidden Markov component of the demand shock <span class="math notranslate nohigh
 <p>Townsend argued that the more manageable model  could do a good job of
 approximating the intractable model in which the Markov component of the demand shock remains unobserved
 for ever.</p>
-<p>By applying technical machinery of <span id="id18">[<a class="reference internal" href="zreferences.html#id12">PCL86</a>]</span>,
-<span id="id19">[<a class="reference internal" href="zreferences.html#id11">PS05</a>]</span> showed that there is a recursive
+<p>By applying technical machinery of <span id="id18">[<a class="reference internal" href="zreferences.html#id19">PCL86</a>]</span>,
+<span id="id19">[<a class="reference internal" href="zreferences.html#id18">PS05</a>]</span> showed that there is a recursive
 representation of the equilibrium of the perpetually and symmetrically
 uninformed model formulated but not completely solved in section 8 of
-<span id="id20">[<a class="reference internal" href="zreferences.html#id14">Tow83</a>]</span>.</p>
-<p>A reader of <span id="id21">[<a class="reference internal" href="zreferences.html#id11">PS05</a>]</span> will notice that their representation of the equilibrium of
+<span id="id20">[<a class="reference internal" href="zreferences.html#id21">Tow83</a>]</span>.</p>
+<p>A reader of <span id="id21">[<a class="reference internal" href="zreferences.html#id18">PS05</a>]</span> will notice that their representation of the equilibrium of
 Townsend’s model exactly matches that of the  <strong>pooling equilibrium</strong> presented here.</p>
 <p>We have structured  our notation in  this lecture to faciliate comparison of the <strong>pooling equilibrium</strong>
-constructed here with the equilibrium of Townsend’s model reported in  <span id="id22">[<a class="reference internal" href="zreferences.html#id11">PS05</a>]</span>.</p>
-<p>The computational method of <span id="id23">[<a class="reference internal" href="zreferences.html#id11">PS05</a>]</span> is recursive:
+constructed here with the equilibrium of Townsend’s model reported in  <span id="id22">[<a class="reference internal" href="zreferences.html#id18">PS05</a>]</span>.</p>
+<p>The computational method of <span id="id23">[<a class="reference internal" href="zreferences.html#id18">PS05</a>]</span> is recursive:
 it enlists the Kalman filter and invariant subspace methods for
 solving systems of Euler
 equations <a class="footnote-reference brackets" href="#footnote1" id="id24">5</a> .</p>
-<p>As <span id="id25">[<a class="reference internal" href="zreferences.html#id16">Sin87</a>]</span>,
-<span id="id26">[<a class="reference internal" href="zreferences.html#id13">Kas00</a>]</span>, and <span id="id27">[<a class="reference internal" href="zreferences.html#id15">Sar91</a>]</span> also
+<p>As <span id="id25">[<a class="reference internal" href="zreferences.html#id23">Sin87</a>]</span>,
+<span id="id26">[<a class="reference internal" href="zreferences.html#id20">Kas00</a>]</span>, and <span id="id27">[<a class="reference internal" href="zreferences.html#id22">Sar91</a>]</span> also
 found, the equilibrium is fully revealing: observed prices tell
 participants in industry <span class="math notranslate nohighlight">\(i\)</span> all of the information held by
 participants in market <span class="math notranslate nohighlight">\(-i\)</span> (<span class="math notranslate nohighlight">\(-i\)</span> means not <span class="math notranslate nohighlight">\(i\)</span>).</p>
@@ -2181,10 +2204,10 @@ forecasting the forecasts of others.</p>
 <p>They know those forecasts because
 they are the same as their own.</p>
 <div class="section" id="further-historical-remarks">
-<h3><span class="section-number">32.11.1. </span>Further historical remarks<a class="headerlink" href="#further-historical-remarks" title="Permalink to this headline">¶</a></h3>
-<p><span id="id29">[<a class="reference internal" href="zreferences.html#id15">Sar91</a>]</span> proposed a way to compute an equilibrium
+<h3><span class="section-number">33.11.1. </span>Further historical remarks<a class="headerlink" href="#further-historical-remarks" title="Permalink to this headline">¶</a></h3>
+<p><span id="id29">[<a class="reference internal" href="zreferences.html#id22">Sar91</a>]</span> proposed a way to compute an equilibrium
 without making Townsend’s approximation.</p>
-<p>Extending the reasoning of <span id="id30">[<a class="reference internal" href="zreferences.html#id97">Mut60</a>]</span>, Sargent noticed that it is possible to
+<p>Extending the reasoning of <span id="id30">[<a class="reference internal" href="zreferences.html#id106">Mut60</a>]</span>, Sargent noticed that it is possible to
 summarize the relevant history with a low dimensional object, namely, a
 small number of current and lagged forecasting errors.</p>
 <p>Positing an
@@ -2197,14 +2220,14 @@ form.</p>
 appropriate orders of the autoregressive and moving average pieces of
 the equilibrium representation.</p>
 <p>By working in the frequency
-domain <span id="id31">[<a class="reference internal" href="zreferences.html#id13">Kas00</a>]</span> showed how to discover the appropriate
+domain <span id="id31">[<a class="reference internal" href="zreferences.html#id20">Kas00</a>]</span> showed how to discover the appropriate
 orders of the autoregressive and moving average parts, and also how to
 compute an equilibrium.</p>
-<p>The  <span id="id32">[<a class="reference internal" href="zreferences.html#id11">PS05</a>]</span> recursive computational method, which stays in the time domain, also
+<p>The  <span id="id32">[<a class="reference internal" href="zreferences.html#id18">PS05</a>]</span> recursive computational method, which stays in the time domain, also
 discovered appropriate orders of the autoregressive and moving
 average pieces.</p>
 <p>In addition, by displaying equilibrium representations
-in the form of <span id="id33">[<a class="reference internal" href="zreferences.html#id12">PCL86</a>]</span>, <span id="id34">[<a class="reference internal" href="zreferences.html#id11">PS05</a>]</span>
+in the form of <span id="id33">[<a class="reference internal" href="zreferences.html#id19">PCL86</a>]</span>, <span id="id34">[<a class="reference internal" href="zreferences.html#id18">PS05</a>]</span>
 showed how the moving average piece is linked to the innovation process
 of the hidden persistent component of the demand shock.</p>
 <p>That scalar
@@ -2214,30 +2237,30 @@ makers face in Townsend’s model.</p>
 <hr class="footnotes docutils" />
 <dl class="footnote brackets">
 <dt class="label" id="footnote0"><span class="brackets"><a class="fn-backref" href="#id13">1</a></span></dt>
-<dd><p><span id="id35">[<a class="reference internal" href="zreferences.html#id11">PS05</a>]</span> verified this assertion using a different tactic, namely, by constructing
+<dd><p><span id="id35">[<a class="reference internal" href="zreferences.html#id18">PS05</a>]</span> verified this assertion using a different tactic, namely, by constructing
 analytic formulas an equilibrium under the incomplete
 information structure and confirming that they match the pooling equilibrium formulas derived here.</p>
 </dd>
 <dt class="label" id="footnote3"><span class="brackets"><a class="fn-backref" href="#id14">2</a></span></dt>
-<dd><p>See <span id="id36">[<a class="reference internal" href="zreferences.html#id184">Sar87</a>]</span>, especially
+<dd><p>See <span id="id36">[<a class="reference internal" href="zreferences.html#id193">Sar87</a>]</span>, especially
 chapters IX and XIV, for the principles  that guide solving some roots backwards and others forwards.</p>
 </dd>
 <dt class="label" id="footnote4"><span class="brackets"><a class="fn-backref" href="#id15">3</a></span></dt>
-<dd><p>As noted <span id="id37">[<a class="reference internal" href="zreferences.html#id184">Sar87</a>]</span>, this difference equation is the Euler equation for
+<dd><p>As noted <span id="id37">[<a class="reference internal" href="zreferences.html#id193">Sar87</a>]</span>, this difference equation is the Euler equation for
 the planning problem   of maximizing the discounted sum of consumer plus
 producer surplus.</p>
 </dd>
 <dt class="label" id="footnote5"><span class="brackets"><a class="fn-backref" href="#id17">4</a></span></dt>
-<dd><p><span id="id38">[<a class="reference internal" href="zreferences.html#id11">PS05</a>]</span> verify the same claim by applying   machinery of  <span id="id39">[<a class="reference internal" href="zreferences.html#id12">PCL86</a>]</span>.</p>
+<dd><p><span id="id38">[<a class="reference internal" href="zreferences.html#id18">PS05</a>]</span> verify the same claim by applying   machinery of  <span id="id39">[<a class="reference internal" href="zreferences.html#id19">PCL86</a>]</span>.</p>
 </dd>
 <dt class="label" id="footnote1"><span class="brackets"><a class="fn-backref" href="#id24">5</a></span></dt>
-<dd><p>See <span id="id40">[<a class="reference internal" href="zreferences.html#id122">AHMS96</a>]</span> for an account of invariant subspace methods.</p>
+<dd><p>See <span id="id40">[<a class="reference internal" href="zreferences.html#id131">AHMS96</a>]</span> for an account of invariant subspace methods.</p>
 </dd>
 <dt class="label" id="footnote2"><span class="brackets"><a class="fn-backref" href="#id28">6</a></span></dt>
-<dd><p>See <span id="id41">[<a class="reference internal" href="zreferences.html#id122">AHMS96</a>]</span> for a discussion
+<dd><p>See <span id="id41">[<a class="reference internal" href="zreferences.html#id131">AHMS96</a>]</span> for a discussion
 of the information assumptions needed to create a situation
 in which higher order beliefs appear in equilibrium decision rules.  The way
-to read our findings in light of <span id="id42">[<a class="reference internal" href="zreferences.html#id17">AMS02</a>]</span> is that Townsend’s
+to read our findings in light of <span id="id42">[<a class="reference internal" href="zreferences.html#id24">AMS02</a>]</span> is that Townsend’s
 section 8 model  has too few sources of random shocks relative
 to sources of signals to permit higher order beliefs to
 play a role.</p>
@@ -2273,7 +2296,7 @@ play a role.</p>
                 
 
 
-                <footer class="page__footer">
+                <footer class="qe-page__footer">
 
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
@@ -2286,16 +2309,16 @@ play a role.</p>
             
 
             
-            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
 
-                <div class="sidebar__header">
+                <div class="qe-sidebar__header">
 
 
                     Contents
 
                 </div>
 
-                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p class="caption">
  <span class="caption-text">
   Tools and Techniques
@@ -2345,33 +2368,28 @@ play a role.</p>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="robustness.html">
-   8. Robustness
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   9. Markov Jump Linear Quadratic Dynamic Programming
+   8. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   10. How to Pay for a War: Part 1
+   9. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   11. How to Pay for a War: Part 2
+   10. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   12. How to Pay for a War: Part 3
+   11. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   13. Optimal Taxation in an LQ Economy
+   12. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -2382,23 +2400,18 @@ play a role.</p>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="rob_markov_perf.html">
-   14. Robust Markov Perfect Equilibrium
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   15. Default Risk and Income Fluctuations
+   13. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   16. Globalization and Cycles
+   14. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   17. Coase’s Theory of the Firm
+   15. Coase’s Theory of the Firm
   </a>
  </li>
 </ul>
@@ -2410,42 +2423,64 @@ play a role.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   18. Recursive Models of Dynamic Linear Economies
+   16. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   19. Growth in Dynamic Linear Economies
+   17. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   20. Lucas Asset Pricing Using DLE
+   18. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   21. IRFs in Hall Models
+   19. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   22. Permanent Income Model using the DLE Class
+   20. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   21. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   22. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   23. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Risk, Model Uncertainty, and Robustness
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="five_preferences.html">
+   24. Risk and Model Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   25. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   26. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -2457,7 +2492,7 @@ play a role.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="von_neumann_model.html">
-   26. Von Neumann Growth Model (and a Generalization)
+   27. Von Neumann Growth Model (and a Generalization)
   </a>
  </li>
 </ul>
@@ -2469,32 +2504,32 @@ play a role.</p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   27. Covariance Stationary Processes
+   28. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   28. Estimation of Spectra
+   29. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   29. Additive and Multiplicative Functionals
+   30. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   30. Classical Control with Linear Algebra
+   31. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   31. Classical Prediction and Filtering With Linear Algebra
+   32. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   32. Knowing the Forecasts of Others
+   33. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -2506,27 +2541,27 @@ play a role.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   33. Asset Pricing II: The Lucas Asset Pricing Model
+   34. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   34. Elementary Asset Pricing Theory
+   35. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   35. Two Modifications of Mean-Variance Portfolio Theory
+   36. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   36. Irrelevance of Capital Structure with Complete Markets
+   37. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   37. Equilibrium Capital Structures with Incomplete Markets
+   38. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -2538,42 +2573,42 @@ play a role.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   38. Stackelberg Plans
+   39. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   40. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   40. Optimal Taxation with State-Contingent Debt
+   41. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   41. Optimal Taxation without State-Contingent Debt
+   42. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   42. Fluctuating Interest Rates Deliver Fiscal Insurance
+   43. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   43. Fiscal Risk and Government Debt
+   44. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   44. Competitive Equilibria of a Model of Chang
+   45. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   45. Credible Government Policies in a Model of Chang
+   46. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -2585,24 +2620,24 @@ play a role.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   47. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   48. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   49. Execution Statistics
   </a>
  </li>
 </ul>
 
                 </nav>
 
-                <div class="sidebar__footer">
+                <div class="qe-sidebar__footer">
 
                 </div>
 
@@ -2610,11 +2645,11 @@ play a role.</p>
             
         </div> <!-- .main -->
 
-        <div class="toolbar">
+        <div class="qe-toolbar">
 
-            <div class="toolbar__inner">
+            <div class="qe-toolbar__inner">
 
-                <ul class="toolbar__main">
+                <ul class="qe-toolbar__main">
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
@@ -2626,12 +2661,12 @@ play a role.</p>
                     </li> -->
                 </ul>
 
-                <ul class="toolbar__links">
+                <ul class="qe-toolbar__links">
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/knowing_forecasts_of_others.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/knowing_forecasts_of_others.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/knowing_forecasts_of_others.md" download><i data-feather="github"></i></a></li>

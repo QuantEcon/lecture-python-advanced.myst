@@ -5,16 +5,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>14. Robust Markov Perfect Equilibrium &#8212; Advanced Quantitative Economics with Python</title>
+    <title>26. Robust Markov Perfect Equilibrium &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     
         <script>
             MathJax = {
-            loader: {load: ['[tex]/boldsymbol']},
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
             tex: {
-                packages: {'[+]': ['boldsymbol']},
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 processEscapes: true,
                 macros: {
@@ -48,8 +48,8 @@
     
     
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -63,7 +63,7 @@
       
 
     
-    <link rel="stylesheet" href="_static/quantecon-book-theme.857ff391aaabaeb8c161d2309c375fe6.css" type="text/css" />
+    <link rel="stylesheet" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -72,7 +72,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -85,7 +85,7 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/quantecon-book-theme.76bf49d7bbc59738cdb03766fad654af.js"></script>
+    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -349,12 +349,19 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/rob_markov_perf.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="15. Default Risk and Income Fluctuations" href="arellano.html" />
-    <link rel="prev" title="13. Optimal Taxation in an LQ Economy" href="lqramsey.html" />
+    <link rel="next" title="27. Von Neumann Growth Model (and a Generalization)" href="von_neumann_model.html" />
+    <link rel="prev" title="25. Robustness" href="robustness.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -384,113 +391,113 @@
 
     <span id="top"></span>
 
-    <div class="wrapper">
+    <div class="qe-wrapper">
 
-        <div class="main">
+        <div class="qe-main">
 
-            <div class="page" id=rob_markov_perf>
+            <div class="qe-page" id=rob_markov_perf>
 
-                <div class="page__toc">
+                <div class="qe-page__toc">
 
                     <div class="inner">
 
                         
-                        <div class="page__toc-header">
+                        <div class="qe-page__toc-header">
                             On this page
                         </div>
 
 
-                        <nav id="bd-toc-nav" class="page__toc-nav">
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#overview">
-   14.1. Overview
+   26.1. Overview
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#basic-setup">
-     14.1.1. Basic Setup
+     26.1.1. Basic Setup
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#linear-markov-perfect-equilibria-with-robust-agents">
-   14.2. Linear Markov Perfect Equilibria with Robust Agents
+   26.2. Linear Markov Perfect Equilibria with Robust Agents
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#modified-coupled-linear-regulator-problems">
-     14.2.1. Modified Coupled Linear Regulator Problems
+     26.2.1. Modified Coupled Linear Regulator Problems
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#computing-equilibrium">
-     14.2.2. Computing Equilibrium
+     26.2.2. Computing Equilibrium
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#key-insight">
-     14.2.3. Key Insight
+     26.2.3. Key Insight
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#worst-case-shocks">
-     14.2.4. Worst-case Shocks
+     26.2.4. Worst-case Shocks
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#infinite-horizon">
-     14.2.5. Infinite Horizon
+     26.2.5. Infinite Horizon
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#implementation">
-     14.2.6. Implementation
+     26.2.6. Implementation
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#application">
-   14.3. Application
+   26.3. Application
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#a-duopoly-model">
-     14.3.1. A Duopoly Model
+     26.3.1. A Duopoly Model
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#parameters-and-solution">
-     14.3.2. Parameters and Solution
+     26.3.2. Parameters and Solution
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#markov-perfect-equilibrium-with-robustness">
-       14.3.2.1. Markov Perfect Equilibrium with Robustness
+       26.3.2.1. Markov Perfect Equilibrium with Robustness
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#some-details">
-     14.3.3. Some Details
+     26.3.3. Some Details
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#consistency-check">
-       14.3.3.1. Consistency Check
+       26.3.3.1. Consistency Check
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#comparative-dynamics-under-baseline-transition-dynamics">
-       14.3.3.2. Comparative Dynamics under Baseline Transition Dynamics
+       26.3.3.2. Comparative Dynamics under Baseline Transition Dynamics
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#heterogeneous-beliefs">
-       14.3.3.3. Heterogeneous Beliefs
+       26.3.3.3. Heterogeneous Beliefs
       </a>
      </li>
     </ul>
@@ -511,7 +518,7 @@
 
                         </nav>
 
-                        <div class="page__toc-footer">
+                        <div class="qe-page__toc-footer">
                             
                             
                             <p><a href="#top"><strong>Back to top</strong></a></p>
@@ -521,24 +528,24 @@
 
                 </div>
 
-                <div class="page__header">
+                <div class="qe-page__header">
 
-                    <div class="page__header-copy">
+                    <div class="qe-page__header-copy">
 
-                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
 
-                        <p class="page__header-subheading">Robust Markov Perfect Equilibrium</p>
+                        <p class="qe-page__header-subheading">Robust Markov Perfect Equilibrium</p>
 
                     </div>
 
-                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
 
                 </div> <!-- .page__header -->
 
 
 
                 
-                <main class="page__content" role="main">
+                <main class="qe-page__content" role="main">
                     
                     <div>
                         
@@ -547,7 +554,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><div class="section" id="robust-markov-perfect-equilibrium">
-<h1><a class="toc-backref" href="#id3"><span class="section-number">14. </span>Robust Markov Perfect Equilibrium</a><a class="headerlink" href="#robust-markov-perfect-equilibrium" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id3"><span class="section-number">26. </span>Robust Markov Perfect Equilibrium</a><a class="headerlink" href="#robust-markov-perfect-equilibrium" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
@@ -568,27 +575,27 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.2)
+Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
-Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
-Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
-Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
-Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
 Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
 Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
+Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
 Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="overview">
-<h2><a class="toc-backref" href="#id4"><span class="section-number">14.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4"><span class="section-number">26.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p id="index-0">This lecture describes  a Markov perfect equilibrium  with robust agents.</p>
 <p>We  focus on special settings with</p>
 <ul class="simple">
@@ -597,7 +604,7 @@ Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/m
 <li><p>linear transition rules for the state vector</p></li>
 </ul>
 <p>These specifications simplify calculations and allow us to give a simple example that illustrates basic forces.</p>
-<p>This lecture is based on ideas described in chapter 15 of  <span id="id1">[<a class="reference internal" href="zreferences.html#id144">HS08a</a>]</span> and in <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a>
+<p>This lecture is based on ideas described in chapter 15 of  <span id="id1">[<a class="reference internal" href="zreferences.html#id153">HS08a</a>]</span> and in <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a>
 and <a class="reference internal" href="robustness.html"><span class="doc">Robustness</span></a>.</p>
 <p>Let’s start with some standard imports:</p>
 <div class="cell docutils container">
@@ -612,7 +619,7 @@ and <a class="reference internal" href="robustness.html"><span class="doc">Robus
 </div>
 </div>
 <div class="section" id="basic-setup">
-<h3><span class="section-number">14.1.1. </span>Basic Setup<a class="headerlink" href="#basic-setup" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">26.1.1. </span>Basic Setup<a class="headerlink" href="#basic-setup" title="Permalink to this headline">¶</a></h3>
 <p>Decisions of two agents affect the motion of a  state vector
 that appears as an argument of   payoff functions of both agents.</p>
 <p>As described in <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a>, when decision-makers have no concerns about the robustness of their decision rules
@@ -637,12 +644,12 @@ adjustment costs analyzed in <a class="reference external" href="https://python-
 </div>
 </div>
 <div class="section" id="linear-markov-perfect-equilibria-with-robust-agents">
-<h2><a class="toc-backref" href="#id5"><span class="section-number">14.2. </span>Linear Markov Perfect Equilibria with Robust Agents</a><a class="headerlink" href="#linear-markov-perfect-equilibria-with-robust-agents" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5"><span class="section-number">26.2. </span>Linear Markov Perfect Equilibria with Robust Agents</a><a class="headerlink" href="#linear-markov-perfect-equilibria-with-robust-agents" title="Permalink to this headline">¶</a></h2>
 <p id="index-1">As we saw in <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a>, the study of Markov perfect equilibria in dynamic games with two players
 leads us to an interrelated pair of Bellman equations.</p>
 <p>In linear quadratic dynamic games, these “stacked Bellman equations” become “stacked Riccati equations” with a tractable mathematical structure.</p>
 <div class="section" id="modified-coupled-linear-regulator-problems">
-<h3><span class="section-number">14.2.1. </span>Modified Coupled Linear Regulator Problems<a class="headerlink" href="#modified-coupled-linear-regulator-problems" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">26.2.1. </span>Modified Coupled Linear Regulator Problems<a class="headerlink" href="#modified-coupled-linear-regulator-problems" title="Permalink to this headline">¶</a></h3>
 <p>We consider a general linear quadratic regulator game with two players, each of whom fears model misspecifications.</p>
 <p>We often call the players agents.</p>
 <p>The agents share a common baseline model for the transition dynamics of the state vector</p>
@@ -658,7 +665,7 @@ leads us to an interrelated pair of Bellman equations.</p>
 <p>For convenience, we’ll start with a finite horizon formulation, where <span class="math notranslate nohighlight">\(t_0\)</span> is the initial date and <span class="math notranslate nohighlight">\(t_1\)</span> is the common terminal date.</p>
 <p>Player <span class="math notranslate nohighlight">\(i\)</span> takes a sequence <span class="math notranslate nohighlight">\(\{u_{-it}\}\)</span> as given and chooses a sequence <span class="math notranslate nohighlight">\(\{u_{it}\}\)</span> to minimize and <span class="math notranslate nohighlight">\(\{v_{it}\}\)</span> to maximize</p>
 <div class="math notranslate nohighlight" id="equation-rmp-orig-1">
-<span class="eqno">(14.1)<a class="headerlink" href="#equation-rmp-orig-1" title="Permalink to this equation">¶</a></span>\[\sum_{t=t_0}^{t_1 - 1}
+<span class="eqno">(26.1)<a class="headerlink" href="#equation-rmp-orig-1" title="Permalink to this equation">¶</a></span>\[\sum_{t=t_0}^{t_1 - 1}
 \beta^{t - t_0}
 \left\{
     x_t' R_i x_t +
@@ -670,7 +677,7 @@ leads us to an interrelated pair of Bellman equations.</p>
 \right\}\]</div>
 <p>while  thinking that the state evolves according to</p>
 <div class="math notranslate nohighlight" id="equation-rmp-orig-0">
-<span class="eqno">(14.2)<a class="headerlink" href="#equation-rmp-orig-0" title="Permalink to this equation">¶</a></span>\[x_{t+1} = A x_t + B_1 u_{1t} + B_2 u_{2t} + C v_{it}\]</div>
+<span class="eqno">(26.2)<a class="headerlink" href="#equation-rmp-orig-0" title="Permalink to this equation">¶</a></span>\[x_{t+1} = A x_t + B_1 u_{1t} + B_2 u_{2t} + C v_{it}\]</div>
 <p>Here</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(x_t\)</span> is an <span class="math notranslate nohighlight">\(n \times 1\)</span> state vector,   <span class="math notranslate nohighlight">\(u_{it}\)</span> is a <span class="math notranslate nohighlight">\(k_i \times 1\)</span> vector of controls for player <span class="math notranslate nohighlight">\(i\)</span>, and</p></li>
@@ -695,7 +702,7 @@ large <strong>set</strong> of alternative models of state transition dynamics.</
 </ul>
 </div>
 <div class="section" id="computing-equilibrium">
-<h3><span class="section-number">14.2.2. </span>Computing Equilibrium<a class="headerlink" href="#computing-equilibrium" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">26.2.2. </span>Computing Equilibrium<a class="headerlink" href="#computing-equilibrium" title="Permalink to this headline">¶</a></h3>
 <p>We formulate a linear robust Markov perfect equilibrium as follows.</p>
 <p>Player <span class="math notranslate nohighlight">\(i\)</span> employs linear decision rules <span class="math notranslate nohighlight">\(u_{it} = - F_{it} x_t\)</span>, where <span class="math notranslate nohighlight">\(F_{it}\)</span> is a <span class="math notranslate nohighlight">\(k_i \times n\)</span> matrix.</p>
 <p>Player <span class="math notranslate nohighlight">\(i\)</span>’s malevolent alter ego employs decision rules <span class="math notranslate nohighlight">\(v_{it} = K_{it} x_t\)</span> where <span class="math notranslate nohighlight">\(K_{it}\)</span> is an  <span class="math notranslate nohighlight">\(h \times n\)</span> matrix.</p>
@@ -704,9 +711,9 @@ large <strong>set</strong> of alternative models of state transition dynamics.</
 <li><p><span class="math notranslate nohighlight">\(\{F_{1t}, K_{1t}\}\)</span> solves player 1’s robust decision problem, taking <span class="math notranslate nohighlight">\(\{F_{2t}\}\)</span> as given, and</p></li>
 <li><p><span class="math notranslate nohighlight">\(\{F_{2t}, K_{2t}\}\)</span> solves player 2’s robust decision problem, taking <span class="math notranslate nohighlight">\(\{F_{1t}\}\)</span> as given.</p></li>
 </ul>
-<p>If we substitute <span class="math notranslate nohighlight">\(u_{2t} = - F_{2t} x_t\)</span>  into <a class="reference internal" href="#equation-rmp-orig-1">(14.1)</a> and <a class="reference internal" href="#equation-rmp-orig-0">(14.2)</a>, then player 1’s problem becomes minimization-maximization of</p>
+<p>If we substitute <span class="math notranslate nohighlight">\(u_{2t} = - F_{2t} x_t\)</span>  into <a class="reference internal" href="#equation-rmp-orig-1">(26.1)</a> and <a class="reference internal" href="#equation-rmp-orig-0">(26.2)</a>, then player 1’s problem becomes minimization-maximization of</p>
 <div class="math notranslate nohighlight" id="equation-rmp-eq-mpe-p1p">
-<span class="eqno">(14.3)<a class="headerlink" href="#equation-rmp-eq-mpe-p1p" title="Permalink to this equation">¶</a></span>\[\sum_{t=t_0}^{t_1 - 1}
+<span class="eqno">(26.3)<a class="headerlink" href="#equation-rmp-eq-mpe-p1p" title="Permalink to this equation">¶</a></span>\[\sum_{t=t_0}^{t_1 - 1}
 \beta^{t - t_0}
     \left\{
     x_t' \Pi_{1t} x_t +
@@ -716,7 +723,7 @@ large <strong>set</strong> of alternative models of state transition dynamics.</
     \right\}\]</div>
 <p>subject to</p>
 <div class="math notranslate nohighlight" id="equation-rmp-eq-mpe-p1d">
-<span class="eqno">(14.4)<a class="headerlink" href="#equation-rmp-eq-mpe-p1d" title="Permalink to this equation">¶</a></span>\[x_{t+1} = \Lambda_{1t} x_t + B_1 u_{1t} + C v_{1t}\]</div>
+<span class="eqno">(26.4)<a class="headerlink" href="#equation-rmp-eq-mpe-p1d" title="Permalink to this equation">¶</a></span>\[x_{t+1} = \Lambda_{1t} x_t + B_1 u_{1t} + C v_{1t}\]</div>
 <p>where</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\Lambda_{it} := A - B_{-i} F_{-it}\)</span></p></li>
@@ -728,49 +735,49 @@ which can be solved by working backward.</p>
 <p>Maximization with respect to distortion  <span class="math notranslate nohighlight">\(v_{1t}\)</span> leads to  the following version of the <span class="math notranslate nohighlight">\(\mathcal D\)</span> operator from
 the <a class="reference internal" href="robustness.html"><span class="doc">Robustness</span></a> lecture, namely</p>
 <div class="math notranslate nohighlight" id="equation-rmp-rb-d">
-<span class="eqno">(14.5)<a class="headerlink" href="#equation-rmp-rb-d" title="Permalink to this equation">¶</a></span>\[\mathcal D_1(P) := P + PC (\theta_1 I - C' P C)^{-1} C' P\]</div>
+<span class="eqno">(26.5)<a class="headerlink" href="#equation-rmp-rb-d" title="Permalink to this equation">¶</a></span>\[\mathcal D_1(P) := P + PC (\theta_1 I - C' P C)^{-1} C' P\]</div>
 <p>The matrix <span class="math notranslate nohighlight">\(F_{1t}\)</span> in the policy rule <span class="math notranslate nohighlight">\(u_{1t} = - F_{1t} x_t\)</span> that solves agent 1’s  problem satisfies</p>
 <div class="math notranslate nohighlight" id="equation-rmp-orig-3">
-<span class="eqno">(14.6)<a class="headerlink" href="#equation-rmp-orig-3" title="Permalink to this equation">¶</a></span>\[F_{1t}
+<span class="eqno">(26.6)<a class="headerlink" href="#equation-rmp-orig-3" title="Permalink to this equation">¶</a></span>\[F_{1t}
 = (Q_1 + \beta B_1' {\mathcal D}_1( P_{1t+1}) B_1)^{-1}
 (\beta B_1' {\mathcal D}_1( P_{1t+1}) \Lambda_{1t} + \Gamma_{1t})\]</div>
 <p>where <span class="math notranslate nohighlight">\(P_{1t}\)</span> solves the matrix Riccati difference equation</p>
 <div class="math notranslate nohighlight" id="equation-rmp-orig-4">
-<span class="eqno">(14.7)<a class="headerlink" href="#equation-rmp-orig-4" title="Permalink to this equation">¶</a></span>\[\begin{split}P_{1t} =
+<span class="eqno">(26.7)<a class="headerlink" href="#equation-rmp-orig-4" title="Permalink to this equation">¶</a></span>\[\begin{split}P_{1t} =
 \Pi_{1t} -
 (\beta B_1' {\mathcal D}_1(P_{1t+1}) \Lambda_{1t} + \Gamma_{1t})' (Q_1 + \beta B_1' {\mathcal D}_1( P_{1t+1}) B_1)^{-1}
 (\beta B_1' {\mathcal D}_1(P_{1t+1}) \Lambda_{1t} + \Gamma_{1t}) + \\
 \beta \Lambda_{1t}' {\mathcal D}_1(P_{1t+1}) \Lambda_{1t}\end{split}\]</div>
 <p>Similarly, the policy that solves player 2’s problem is</p>
 <div class="math notranslate nohighlight" id="equation-rmp-orig-5">
-<span class="eqno">(14.8)<a class="headerlink" href="#equation-rmp-orig-5" title="Permalink to this equation">¶</a></span>\[F_{2t} = (Q_2 + \beta B_2' {\mathcal D}_2( P_{2t+1} ) B_2)^{-1}
+<span class="eqno">(26.8)<a class="headerlink" href="#equation-rmp-orig-5" title="Permalink to this equation">¶</a></span>\[F_{2t} = (Q_2 + \beta B_2' {\mathcal D}_2( P_{2t+1} ) B_2)^{-1}
 (\beta B_2' {\mathcal D}_2 (P_{2t+1}) \Lambda_{2t} + \Gamma_{2t})\]</div>
 <p>where <span class="math notranslate nohighlight">\(P_{2t}\)</span> solves</p>
 <div class="math notranslate nohighlight" id="equation-rmp-orig-6">
-<span class="eqno">(14.9)<a class="headerlink" href="#equation-rmp-orig-6" title="Permalink to this equation">¶</a></span>\[\begin{split}P_{2t} =
+<span class="eqno">(26.9)<a class="headerlink" href="#equation-rmp-orig-6" title="Permalink to this equation">¶</a></span>\[\begin{split}P_{2t} =
 \Pi_{2t} - (\beta B_2' {\mathcal D}_2 ( P_{2t+1}) \Lambda_{2t} + \Gamma_{2t})' (Q_2 + \beta B_2' {\mathcal D}_2 ( P_{2t+1}) B_2)^{-1}(\beta B_2' {\mathcal D}_2 ( P_{2t+1}) \Lambda_{2t} + \Gamma_{2t}) + \\
 \beta \Lambda_{2t}' {\mathcal D}_2 ( P_{2t+1})  \Lambda_{2t}\end{split}\]</div>
 <p>Here in all cases <span class="math notranslate nohighlight">\(t = t_0, \ldots, t_1 - 1\)</span> and the terminal conditions are <span class="math notranslate nohighlight">\(P_{it_1} = 0\)</span>.</p>
-<p>The solution procedure is to use equations <a class="reference internal" href="#equation-rmp-orig-3">(14.6)</a>, <a class="reference internal" href="#equation-rmp-orig-4">(14.7)</a>, <a class="reference internal" href="#equation-rmp-orig-5">(14.8)</a>, and <a class="reference internal" href="#equation-rmp-orig-6">(14.9)</a>, and “work backwards” from time <span class="math notranslate nohighlight">\(t_1 - 1\)</span>.</p>
+<p>The solution procedure is to use equations <a class="reference internal" href="#equation-rmp-orig-3">(26.6)</a>, <a class="reference internal" href="#equation-rmp-orig-4">(26.7)</a>, <a class="reference internal" href="#equation-rmp-orig-5">(26.8)</a>, and <a class="reference internal" href="#equation-rmp-orig-6">(26.9)</a>, and “work backwards” from time <span class="math notranslate nohighlight">\(t_1 - 1\)</span>.</p>
 <p>Since we’re working backwards, <span class="math notranslate nohighlight">\(P_{1t+1}\)</span> and <span class="math notranslate nohighlight">\(P_{2t+1}\)</span> are taken as given at each stage.</p>
 <p>Moreover, since</p>
 <ul class="simple">
-<li><p>some terms on the right-hand side of <a class="reference internal" href="#equation-rmp-orig-3">(14.6)</a> contain <span class="math notranslate nohighlight">\(F_{2t}\)</span></p></li>
-<li><p>some terms on the right-hand side of <a class="reference internal" href="#equation-rmp-orig-5">(14.8)</a> contain <span class="math notranslate nohighlight">\(F_{1t}\)</span></p></li>
+<li><p>some terms on the right-hand side of <a class="reference internal" href="#equation-rmp-orig-3">(26.6)</a> contain <span class="math notranslate nohighlight">\(F_{2t}\)</span></p></li>
+<li><p>some terms on the right-hand side of <a class="reference internal" href="#equation-rmp-orig-5">(26.8)</a> contain <span class="math notranslate nohighlight">\(F_{1t}\)</span></p></li>
 </ul>
 <p>we need to solve these <span class="math notranslate nohighlight">\(k_1 + k_2\)</span> equations simultaneously.</p>
 </div>
 <div class="section" id="key-insight">
-<h3><span class="section-number">14.2.3. </span>Key Insight<a class="headerlink" href="#key-insight" title="Permalink to this headline">¶</a></h3>
-<p>As in <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a>, a key insight here  is that  equations  <a class="reference internal" href="#equation-rmp-orig-3">(14.6)</a> and <a class="reference internal" href="#equation-rmp-orig-5">(14.8)</a> are linear in <span class="math notranslate nohighlight">\(F_{1t}\)</span> and <span class="math notranslate nohighlight">\(F_{2t}\)</span>.</p>
-<p>After these equations have been solved, we can take  <span class="math notranslate nohighlight">\(F_{it}\)</span> and solve for <span class="math notranslate nohighlight">\(P_{it}\)</span> in <a class="reference internal" href="#equation-rmp-orig-4">(14.7)</a> and <a class="reference internal" href="#equation-rmp-orig-6">(14.9)</a>.</p>
+<h3><span class="section-number">26.2.3. </span>Key Insight<a class="headerlink" href="#key-insight" title="Permalink to this headline">¶</a></h3>
+<p>As in <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a>, a key insight here  is that  equations  <a class="reference internal" href="#equation-rmp-orig-3">(26.6)</a> and <a class="reference internal" href="#equation-rmp-orig-5">(26.8)</a> are linear in <span class="math notranslate nohighlight">\(F_{1t}\)</span> and <span class="math notranslate nohighlight">\(F_{2t}\)</span>.</p>
+<p>After these equations have been solved, we can take  <span class="math notranslate nohighlight">\(F_{it}\)</span> and solve for <span class="math notranslate nohighlight">\(P_{it}\)</span> in <a class="reference internal" href="#equation-rmp-orig-4">(26.7)</a> and <a class="reference internal" href="#equation-rmp-orig-6">(26.9)</a>.</p>
 <p>Notice how <span class="math notranslate nohighlight">\(j\)</span>’s control law <span class="math notranslate nohighlight">\(F_{jt}\)</span> is a function of <span class="math notranslate nohighlight">\(\{F_{is}, s \geq t, i \neq j \}\)</span>.</p>
 <p>Thus, agent <span class="math notranslate nohighlight">\(i\)</span>’s choice of <span class="math notranslate nohighlight">\(\{F_{it}; t = t_0, \ldots, t_1 - 1\}\)</span> influences agent <span class="math notranslate nohighlight">\(j\)</span>’s choice of control laws.</p>
 <p>However, in the Markov perfect equilibrium of this game, each agent is assumed to ignore the influence that his choice exerts on the other agent’s choice.</p>
 <p>After these equations have been solved, we can also deduce associated sequences of worst-case shocks.</p>
 </div>
 <div class="section" id="worst-case-shocks">
-<h3><span class="section-number">14.2.4. </span>Worst-case Shocks<a class="headerlink" href="#worst-case-shocks" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">26.2.4. </span>Worst-case Shocks<a class="headerlink" href="#worst-case-shocks" title="Permalink to this headline">¶</a></h3>
 <p>For agent <span class="math notranslate nohighlight">\(i\)</span> the maximizing or worst-case shock <span class="math notranslate nohighlight">\(v_{it}\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -783,29 +790,29 @@ K_{it} = \theta_i^{-1} (I - \theta_i^{-1} C' P_{i,t+1} C)^{-1} C' P_{i,t+1} (A -
 \]</div>
 </div>
 <div class="section" id="infinite-horizon">
-<h3><span class="section-number">14.2.5. </span>Infinite Horizon<a class="headerlink" href="#infinite-horizon" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">26.2.5. </span>Infinite Horizon<a class="headerlink" href="#infinite-horizon" title="Permalink to this headline">¶</a></h3>
 <p>We often want to compute the solutions of such games for infinite horizons, in the hope that the decision rules <span class="math notranslate nohighlight">\(F_{it}\)</span> settle down to be time-invariant as <span class="math notranslate nohighlight">\(t_1 \rightarrow +\infty\)</span>.</p>
 <p>In practice, we usually fix <span class="math notranslate nohighlight">\(t_1\)</span> and compute the equilibrium of an infinite horizon game by driving <span class="math notranslate nohighlight">\(t_0 \rightarrow - \infty\)</span>.</p>
 <p>This is the approach we adopt in the next section.</p>
 </div>
 <div class="section" id="implementation">
-<h3><span class="section-number">14.2.6. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">26.2.6. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
 <p>We use the function nnash_robust to compute a
 Markov perfect equilibrium of the infinite horizon linear quadratic dynamic
 game with robust planers in the manner described above.</p>
 </div>
 </div>
 <div class="section" id="application">
-<h2><a class="toc-backref" href="#id6"><span class="section-number">14.3. </span>Application</a><a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6"><span class="section-number">26.3. </span>Application</a><a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="a-duopoly-model">
-<span id="index-2"></span><h3><span class="section-number">14.3.1. </span>A Duopoly Model<a class="headerlink" href="#a-duopoly-model" title="Permalink to this headline">¶</a></h3>
+<span id="index-2"></span><h3><span class="section-number">26.3.1. </span>A Duopoly Model<a class="headerlink" href="#a-duopoly-model" title="Permalink to this headline">¶</a></h3>
 <p>Without concerns for robustness, the model is identical to the duopoly model from the <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov perfect equilibrium</a> lecture.</p>
 <p>To begin, we briefly review the structure of that model.</p>
 <p>Two firms are the only producers of a good the demand for which is governed by a linear inverse demand function</p>
 <div class="math notranslate nohighlight" id="equation-rgame2">
-<span class="eqno">(14.10)<a class="headerlink" href="#equation-rgame2" title="Permalink to this equation">¶</a></span>\[p = a_0 - a_1 (q_1 +  q_2)\]</div>
+<span class="eqno">(26.10)<a class="headerlink" href="#equation-rgame2" title="Permalink to this equation">¶</a></span>\[p = a_0 - a_1 (q_1 +  q_2)\]</div>
 <p>Here <span class="math notranslate nohighlight">\(p = p_t\)</span> is the price of the good, <span class="math notranslate nohighlight">\(q_i = q_{it}\)</span> is the output of firm <span class="math notranslate nohighlight">\(i=1,2\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(a_0 &gt; 0, a_1 &gt;0\)</span>.</p>
-<p>In <a class="reference internal" href="#equation-rgame2">(14.10)</a> and what follows,</p>
+<p>In <a class="reference internal" href="#equation-rgame2">(26.10)</a> and what follows,</p>
 <ul class="simple">
 <li><p>the time subscript is suppressed when possible to simplify notation</p></li>
 <li><p><span class="math notranslate nohighlight">\(\hat x\)</span> denotes a next period value of variable <span class="math notranslate nohighlight">\(x\)</span></p></li>
@@ -813,10 +820,10 @@ game with robust planers in the manner described above.</p>
 <p>Each firm recognizes that its output affects total output and therefore the market price.</p>
 <p>The one-period payoff function of firm <span class="math notranslate nohighlight">\(i\)</span> is price times quantity minus adjustment costs:</p>
 <div class="math notranslate nohighlight" id="equation-rgame1">
-<span class="eqno">(14.11)<a class="headerlink" href="#equation-rgame1" title="Permalink to this equation">¶</a></span>\[\pi_i = p q_i - \gamma (\hat q_i - q_i)^2, \quad \gamma &gt; 0 ,\]</div>
-<p>Substituting the inverse demand curve <a class="reference internal" href="#equation-rgame2">(14.10)</a> into <a class="reference internal" href="#equation-rgame1">(14.11)</a> lets us express the one-period payoff as</p>
+<span class="eqno">(26.11)<a class="headerlink" href="#equation-rgame1" title="Permalink to this equation">¶</a></span>\[\pi_i = p q_i - \gamma (\hat q_i - q_i)^2, \quad \gamma &gt; 0 ,\]</div>
+<p>Substituting the inverse demand curve <a class="reference internal" href="#equation-rgame2">(26.10)</a> into <a class="reference internal" href="#equation-rgame1">(26.11)</a> lets us express the one-period payoff as</p>
 <div class="math notranslate nohighlight" id="equation-rgame3">
-<span class="eqno">(14.12)<a class="headerlink" href="#equation-rgame3" title="Permalink to this equation">¶</a></span>\[\pi_i(q_i, q_{-i}, \hat q_i) = a_0 q_i - a_1 q_i^2 - a_1 q_i q_{-i} - \gamma (\hat q_i - q_i)^2 ,\]</div>
+<span class="eqno">(26.12)<a class="headerlink" href="#equation-rgame3" title="Permalink to this equation">¶</a></span>\[\pi_i(q_i, q_{-i}, \hat q_i) = a_0 q_i - a_1 q_i^2 - a_1 q_i q_{-i} - \gamma (\hat q_i - q_i)^2 ,\]</div>
 <p>where <span class="math notranslate nohighlight">\(q_{-i}\)</span> denotes the output of the firm other than <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>The objective of the firm is to maximize <span class="math notranslate nohighlight">\(\sum_{t=0}^\infty \beta^t \pi_{it}\)</span>.</p>
 <p>Firm <span class="math notranslate nohighlight">\(i\)</span> chooses a decision rule that sets next period quantity <span class="math notranslate nohighlight">\(\hat q_i\)</span> as a function <span class="math notranslate nohighlight">\(f_i\)</span> of the current state <span class="math notranslate nohighlight">\((q_i, q_{-i})\)</span>.</p>
@@ -858,7 +865,7 @@ R_2 :=
    -\frac{a_0}{2} &amp; \frac{a_1}{2} &amp; a_1
 \end{bmatrix}
 \end{split}\]</div>
-<p>then we recover the  one-period  payoffs <a class="reference internal" href="#equation-rgame1">(14.11)</a> for the two firms in the duopoly model.</p>
+<p>then we recover the  one-period  payoffs <a class="reference internal" href="#equation-rgame1">(26.11)</a> for the two firms in the duopoly model.</p>
 <p>The law of motion for the state <span class="math notranslate nohighlight">\(x_t\)</span> is <span class="math notranslate nohighlight">\(x_{t+1} = A x_t + B_1 u_{1t} + B_2 u_{2t}\)</span> where</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -885,10 +892,10 @@ B_2 :=
 \end{split}\]</div>
 <p>A robust  decision rule of firm <span class="math notranslate nohighlight">\(i\)</span> will take the form <span class="math notranslate nohighlight">\(u_{it} = - F_i x_t\)</span>, inducing the following closed-loop system for the evolution of <span class="math notranslate nohighlight">\(x\)</span> in the Markov perfect equilibrium:</p>
 <div class="math notranslate nohighlight" id="equation-rmp-eq-mpe-cle">
-<span class="eqno">(14.13)<a class="headerlink" href="#equation-rmp-eq-mpe-cle" title="Permalink to this equation">¶</a></span>\[x_{t+1} = (A - B_1 F_1 -B_1 F_2 ) x_t\]</div>
+<span class="eqno">(26.13)<a class="headerlink" href="#equation-rmp-eq-mpe-cle" title="Permalink to this equation">¶</a></span>\[x_{t+1} = (A - B_1 F_1 -B_1 F_2 ) x_t\]</div>
 </div>
 <div class="section" id="parameters-and-solution">
-<h3><span class="section-number">14.3.2. </span>Parameters and Solution<a class="headerlink" href="#parameters-and-solution" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">26.3.2. </span>Parameters and Solution<a class="headerlink" href="#parameters-and-solution" title="Permalink to this headline">¶</a></h3>
 <p>Consider the  duopoly model with parameter values of:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(a_0 = 10\)</span></p></li>
@@ -948,7 +955,7 @@ F2 = [[-0.66846615  0.07584666  0.29512482]]
 </div>
 </div>
 <div class="section" id="markov-perfect-equilibrium-with-robustness">
-<h4><span class="section-number">14.3.2.1. </span>Markov Perfect Equilibrium with Robustness<a class="headerlink" href="#markov-perfect-equilibrium-with-robustness" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">26.3.2.1. </span>Markov Perfect Equilibrium with Robustness<a class="headerlink" href="#markov-perfect-equilibrium-with-robustness" title="Permalink to this headline">¶</a></h4>
 <p>We add robustness concerns to the Markov Perfect Equilibrium model by
 extending the function <code class="docutils literal notranslate"><span class="pre">qe.nnash</span></code>
 (<a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqnash.py">link</a>)
@@ -1127,7 +1134,7 @@ into a robustness version by adding the maximization operator
 </div>
 </div>
 <div class="section" id="some-details">
-<h3><span class="section-number">14.3.3. </span>Some Details<a class="headerlink" href="#some-details" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">26.3.3. </span>Some Details<a class="headerlink" href="#some-details" title="Permalink to this headline">¶</a></h3>
 <p>Firm  <span class="math notranslate nohighlight">\(i\)</span> wants to minimize</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1220,7 +1227,7 @@ M_1 = M_2 = 0
 </div>
 </div>
 <div class="section" id="consistency-check">
-<h4><span class="section-number">14.3.3.1. </span>Consistency Check<a class="headerlink" href="#consistency-check" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">26.3.3.1. </span>Consistency Check<a class="headerlink" href="#consistency-check" title="Permalink to this headline">¶</a></h4>
 <p>We first conduct a comparison test to check if <code class="docutils literal notranslate"><span class="pre">nnash_robust</span></code> agrees
 with <code class="docutils literal notranslate"><span class="pre">qe.nnash</span></code> in the non-robustness case in which each <span class="math notranslate nohighlight">\(\theta_i \approx +\infty\)</span></p>
 <div class="cell docutils container">
@@ -1254,7 +1261,7 @@ P2 and P2r should be the same:  True
 <p>We can see that the results are consistent across the two functions.</p>
 </div>
 <div class="section" id="comparative-dynamics-under-baseline-transition-dynamics">
-<h4><span class="section-number">14.3.3.2. </span>Comparative Dynamics under Baseline Transition Dynamics<a class="headerlink" href="#comparative-dynamics-under-baseline-transition-dynamics" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">26.3.3.2. </span>Comparative Dynamics under Baseline Transition Dynamics<a class="headerlink" href="#comparative-dynamics-under-baseline-transition-dynamics" title="Permalink to this headline">¶</a></h4>
 <p>We want to compare the dynamics of price and output under the baseline
 MPE model with those under the baseline model under the robust decision rules within the robust MPE.</p>
 <p>This means that we simulate the state dynamics under the MPE  equilibrium <strong>closed-loop</strong> transition matrix</p>
@@ -1423,7 +1430,7 @@ employed by firm <span class="math notranslate nohighlight">\(1\)</span>.</p></l
 <p>(by <em>ex-post</em> we mean <em>after</em> extremization of each firm’s intertemporal objective)</p>
 </div>
 <div class="section" id="heterogeneous-beliefs">
-<h4><span class="section-number">14.3.3.3. </span>Heterogeneous Beliefs<a class="headerlink" href="#heterogeneous-beliefs" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">26.3.3.3. </span>Heterogeneous Beliefs<a class="headerlink" href="#heterogeneous-beliefs" title="Permalink to this headline">¶</a></h4>
 <p>As before, let <span class="math notranslate nohighlight">\(A^o = A - B\_1 F\_1^r - B\_2 F\_2^r\)</span>, where in a robust MPE, <span class="math notranslate nohighlight">\(F_i^r\)</span> is a robust decision rule for firm <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>Worst-case forecasts of  <span class="math notranslate nohighlight">\(x_t\)</span> starting from <span class="math notranslate nohighlight">\(t=0\)</span> differ between the two firms.</p>
 <p>This means that  worst-case forecasts of industry output <span class="math notranslate nohighlight">\(q_{1t} + q_{2t}\)</span> and price <span class="math notranslate nohighlight">\(p_t\)</span> also differ between the two firms.</p>
@@ -1504,7 +1511,7 @@ even though they share the same baseline model and information</p>
 </ul>
 <p>These beliefs justify (or <strong>rationalize</strong>) the Markov perfect equilibrium  robust decision rules.</p>
 <p>This means that the robust rules are the unique <strong>optimal</strong> rules (or best responses) to the indicated worst-case transition dynamics.</p>
-<p>(<span id="id2">[<a class="reference internal" href="zreferences.html#id144">HS08a</a>]</span> discuss how this property of robust decision rules is connected to the concept of <em>admissibility</em> in Bayesian statistical decision theory)</p>
+<p>(<span id="id2">[<a class="reference internal" href="zreferences.html#id153">HS08a</a>]</span> discuss how this property of robust decision rules is connected to the concept of <em>admissibility</em> in Bayesian statistical decision theory)</p>
 </div>
 </div>
 </div>
@@ -1536,7 +1543,7 @@ even though they share the same baseline model and information</p>
                 
 
 
-                <footer class="page__footer">
+                <footer class="qe-page__footer">
 
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
@@ -1549,16 +1556,16 @@ even though they share the same baseline model and information</p>
             
 
             
-            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
 
-                <div class="sidebar__header">
+                <div class="qe-sidebar__header">
 
 
                     Contents
 
                 </div>
 
-                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p class="caption">
  <span class="caption-text">
   Tools and Techniques
@@ -1608,33 +1615,28 @@ even though they share the same baseline model and information</p>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="robustness.html">
-   8. Robustness
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   9. Markov Jump Linear Quadratic Dynamic Programming
+   8. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   10. How to Pay for a War: Part 1
+   9. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   11. How to Pay for a War: Part 2
+   10. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   12. How to Pay for a War: Part 3
+   11. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   13. Optimal Taxation in an LQ Economy
+   12. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -1643,25 +1645,20 @@ even though they share the same baseline model and information</p>
   Multiple Agent Models
  </span>
 </p>
-<ul class="current nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1 current active active">
-  <a class="current reference internal" href="#">
-   14. Robust Markov Perfect Equilibrium
-  </a>
- </li>
+<ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   15. Default Risk and Income Fluctuations
+   13. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   16. Globalization and Cycles
+   14. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   17. Coase’s Theory of the Firm
+   15. Coase’s Theory of the Firm
   </a>
  </li>
 </ul>
@@ -1673,42 +1670,64 @@ even though they share the same baseline model and information</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   18. Recursive Models of Dynamic Linear Economies
+   16. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   19. Growth in Dynamic Linear Economies
+   17. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   20. Lucas Asset Pricing Using DLE
+   18. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   21. IRFs in Hall Models
+   19. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   22. Permanent Income Model using the DLE Class
+   20. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   21. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   22. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   23. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Risk, Model Uncertainty, and Robustness
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="five_preferences.html">
+   24. Risk and Model Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   25. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   26. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1720,7 +1739,7 @@ even though they share the same baseline model and information</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="von_neumann_model.html">
-   26. Von Neumann Growth Model (and a Generalization)
+   27. Von Neumann Growth Model (and a Generalization)
   </a>
  </li>
 </ul>
@@ -1732,32 +1751,32 @@ even though they share the same baseline model and information</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   27. Covariance Stationary Processes
+   28. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   28. Estimation of Spectra
+   29. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   29. Additive and Multiplicative Functionals
+   30. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   30. Classical Control with Linear Algebra
+   31. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   31. Classical Prediction and Filtering With Linear Algebra
+   32. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   32. Knowing the Forecasts of Others
+   33. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -1769,27 +1788,27 @@ even though they share the same baseline model and information</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   33. Asset Pricing II: The Lucas Asset Pricing Model
+   34. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   34. Elementary Asset Pricing Theory
+   35. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   35. Two Modifications of Mean-Variance Portfolio Theory
+   36. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   36. Irrelevance of Capital Structure with Complete Markets
+   37. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   37. Equilibrium Capital Structures with Incomplete Markets
+   38. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1801,42 +1820,42 @@ even though they share the same baseline model and information</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   38. Stackelberg Plans
+   39. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   40. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   40. Optimal Taxation with State-Contingent Debt
+   41. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   41. Optimal Taxation without State-Contingent Debt
+   42. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   42. Fluctuating Interest Rates Deliver Fiscal Insurance
+   43. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   43. Fiscal Risk and Government Debt
+   44. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   44. Competitive Equilibria of a Model of Chang
+   45. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   45. Credible Government Policies in a Model of Chang
+   46. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1848,24 +1867,24 @@ even though they share the same baseline model and information</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   47. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   48. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   49. Execution Statistics
   </a>
  </li>
 </ul>
 
                 </nav>
 
-                <div class="sidebar__footer">
+                <div class="qe-sidebar__footer">
 
                 </div>
 
@@ -1873,11 +1892,11 @@ even though they share the same baseline model and information</p>
             
         </div> <!-- .main -->
 
-        <div class="toolbar">
+        <div class="qe-toolbar">
 
-            <div class="toolbar__inner">
+            <div class="qe-toolbar__inner">
 
-                <ul class="toolbar__main">
+                <ul class="qe-toolbar__main">
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
@@ -1889,12 +1908,12 @@ even though they share the same baseline model and information</p>
                     </li> -->
                 </ul>
 
-                <ul class="toolbar__links">
+                <ul class="qe-toolbar__links">
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/rob_markov_perf.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/rob_markov_perf.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/rob_markov_perf.md" download><i data-feather="github"></i></a></li>

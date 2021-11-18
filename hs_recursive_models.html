@@ -5,16 +5,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>18. Recursive Models of Dynamic Linear Economies &#8212; Advanced Quantitative Economics with Python</title>
+    <title>16. Recursive Models of Dynamic Linear Economies &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     
         <script>
             MathJax = {
-            loader: {load: ['[tex]/boldsymbol']},
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
             tex: {
-                packages: {'[+]': ['boldsymbol']},
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 processEscapes: true,
                 macros: {
@@ -48,8 +48,8 @@
     
     
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -63,7 +63,7 @@
       
 
     
-    <link rel="stylesheet" href="_static/quantecon-book-theme.857ff391aaabaeb8c161d2309c375fe6.css" type="text/css" />
+    <link rel="stylesheet" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -72,7 +72,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -85,7 +85,7 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/quantecon-book-theme.76bf49d7bbc59738cdb03766fad654af.js"></script>
+    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -251,12 +251,19 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/hs_recursive_models.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="19. Growth in Dynamic Linear Economies" href="growth_in_dles.html" />
-    <link rel="prev" title="17. Coase’s Theory of the Firm" href="coase.html" />
+    <link rel="next" title="17. Growth in Dynamic Linear Economies" href="growth_in_dles.html" />
+    <link rel="prev" title="15. Coase’s Theory of the Firm" href="coase.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -286,267 +293,267 @@
 
     <span id="top"></span>
 
-    <div class="wrapper">
+    <div class="qe-wrapper">
 
-        <div class="main">
+        <div class="qe-main">
 
-            <div class="page" id=hs_recursive_models>
+            <div class="qe-page" id=hs_recursive_models>
 
-                <div class="page__toc">
+                <div class="qe-page__toc">
 
                     <div class="inner">
 
                         
-                        <div class="page__toc-header">
+                        <div class="qe-page__toc-header">
                             On this page
                         </div>
 
 
-                        <nav id="bd-toc-nav" class="page__toc-nav">
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-suite-of-models">
-   18.1. A Suite of Models
+   16.1. A Suite of Models
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#overview-of-the-models">
-     18.1.1. Overview of the Models
+     16.1.1. Overview of the Models
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#forecasting">
-     18.1.2. Forecasting?
+     16.1.2. Forecasting?
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#theory-and-econometrics">
-     18.1.3. Theory and Econometrics
+     16.1.3. Theory and Econometrics
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#more-details">
-     18.1.4. More Details
+     16.1.4. More Details
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#stochastic-model-of-information-flows-and-outcomes">
-     18.1.5. Stochastic Model of Information Flows and Outcomes
+     16.1.5. Stochastic Model of Information Flows and Outcomes
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#information-sets">
-     18.1.6. Information Sets
+     16.1.6. Information Sets
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#prediction-theory">
-     18.1.7. Prediction Theory
+     16.1.7. Prediction Theory
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#orthogonal-decomposition">
-     18.1.8. Orthogonal Decomposition
+     16.1.8. Orthogonal Decomposition
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#taste-and-technology-shocks">
-     18.1.9. Taste and Technology Shocks
+     16.1.9. Taste and Technology Shocks
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#production-technology">
-     18.1.10. Production Technology
+     16.1.10. Production Technology
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#household-technology">
-     18.1.11. Household Technology
+     16.1.11. Household Technology
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#preferences">
-     18.1.12. Preferences
+     16.1.12. Preferences
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#endowment-economy">
-     18.1.13. Endowment Economy
+     16.1.13. Endowment Economy
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#single-period-adjustment-costs">
-     18.1.14. Single-Period Adjustment Costs
+     16.1.14. Single-Period Adjustment Costs
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#optimal-resource-allocation">
-     18.1.15. Optimal Resource Allocation
+     16.1.15. Optimal Resource Allocation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#lagrangian-formulation">
-     18.1.16. Lagrangian Formulation
+     16.1.16. Lagrangian Formulation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dynamic-programming">
-     18.1.17. Dynamic Programming
+     16.1.17. Dynamic Programming
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#other-mathematical-infrastructure">
-     18.1.18. Other mathematical infrastructure
+     16.1.18. Other mathematical infrastructure
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#representative-household">
-     18.1.19. Representative Household
+     16.1.19. Representative Household
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#type-i-firm">
-     18.1.20. Type I Firm
+     16.1.20. Type I Firm
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#type-ii-firm">
-     18.1.21. Type II Firm
+     16.1.21. Type II Firm
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#competitive-equilibrium-definition">
-     18.1.22. Competitive Equilibrium:  Definition
+     16.1.22. Competitive Equilibrium:  Definition
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#asset-pricing">
-     18.1.23. Asset pricing
+     16.1.23. Asset pricing
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#re-opening-markets">
-     18.1.24. Re-Opening Markets
+     16.1.24. Re-Opening Markets
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#econometrics">
-   18.2. Econometrics
+   16.2. Econometrics
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#factorization-of-likelihood-function">
-     18.2.1. Factorization of Likelihood Function
+     16.2.1. Factorization of Likelihood Function
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#covariance-generating-functions">
-     18.2.2. Covariance Generating Functions
+     16.2.2. Covariance Generating Functions
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#spectral-factorization-identity">
-     18.2.3. Spectral Factorization Identity
+     16.2.3. Spectral Factorization Identity
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#wold-and-vector-autoregressive-representations">
-     18.2.4. Wold and Vector Autoregressive Representations
+     16.2.4. Wold and Vector Autoregressive Representations
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#dynamic-demand-curves-and-canonical-household-technologies">
-   18.3. Dynamic Demand Curves and Canonical Household Technologies
+   16.3. Dynamic Demand Curves and Canonical Household Technologies
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#canonical-household-technologies">
-     18.3.1. Canonical Household Technologies
+     16.3.1. Canonical Household Technologies
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dynamic-demand-functions">
-     18.3.2. Dynamic Demand Functions
+     16.3.2. Dynamic Demand Functions
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gorman-aggregation-and-engel-curves">
-   18.4. Gorman Aggregation and Engel Curves
+   16.4. Gorman Aggregation and Engel Curves
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#re-opened-markets">
-     18.4.1. Re-Opened Markets
+     16.4.1. Re-Opened Markets
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dynamic-demand">
-     18.4.2. Dynamic Demand
+     16.4.2. Dynamic Demand
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#attaining-a-canonical-household-technology">
-     18.4.3. Attaining a Canonical Household Technology
+     16.4.3. Attaining a Canonical Household Technology
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#partial-equilibrium">
-   18.5. Partial Equilibrium
+   16.5. Partial Equilibrium
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#equilibrium-investment-under-uncertainty">
-   18.6. Equilibrium Investment Under Uncertainty
+   16.6. Equilibrium Investment Under Uncertainty
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#a-rosen-topel-housing-model">
-   18.7. A Rosen-Topel Housing Model
+   16.7. A Rosen-Topel Housing Model
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#cattle-cycles">
-   18.8. Cattle Cycles
+   16.8. Cattle Cycles
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#models-of-occupational-choice-and-pay">
-   18.9. Models of Occupational Choice and Pay
+   16.9. Models of Occupational Choice and Pay
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#market-for-engineers">
-     18.9.1. Market for Engineers
+     16.9.1. Market for Engineers
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#skilled-and-unskilled-workers">
-     18.9.2. Skilled and Unskilled Workers
+     16.9.2. Skilled and Unskilled Workers
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#permanent-income-models">
-   18.10. Permanent Income Models
+   16.10. Permanent Income Models
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#gorman-heterogeneous-households">
-   18.11. Gorman Heterogeneous Households
+   16.11. Gorman Heterogeneous Households
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#non-gorman-heterogeneous-households">
-   18.12. Non-Gorman Heterogeneous Households
+   16.12. Non-Gorman Heterogeneous Households
   </a>
  </li>
 </ul>
@@ -563,7 +570,7 @@
 
                         </nav>
 
-                        <div class="page__toc-footer">
+                        <div class="qe-page__toc-footer">
                             
                             
                             <p><a href="#top"><strong>Back to top</strong></a></p>
@@ -573,24 +580,24 @@
 
                 </div>
 
-                <div class="page__header">
+                <div class="qe-page__header">
 
-                    <div class="page__header-copy">
+                    <div class="qe-page__header-copy">
 
-                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
 
-                        <p class="page__header-subheading">Recursive Models of Dynamic Linear Economies</p>
+                        <p class="qe-page__header-subheading">Recursive Models of Dynamic Linear Economies</p>
 
                     </div>
 
-                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
 
                 </div> <!-- .page__header -->
 
 
 
                 
-                <main class="page__content" role="main">
+                <main class="qe-page__content" role="main">
                     
                     <div>
                         
@@ -599,7 +606,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><div class="section" id="recursive-models-of-dynamic-linear-economies">
-<span id="index-0"></span><h1><a class="toc-backref" href="#id14"><span class="section-number">18. </span>Recursive Models of Dynamic Linear Economies</a><a class="headerlink" href="#recursive-models-of-dynamic-linear-economies" title="Permalink to this headline">¶</a></h1>
+<span id="index-0"></span><h1><a class="toc-backref" href="#id14"><span class="section-number">16. </span>Recursive Models of Dynamic Linear Economies</a><a class="headerlink" href="#recursive-models-of-dynamic-linear-economies" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
@@ -631,9 +638,9 @@
 <div><p>“Every partial equilibrium model can be reinterpreted as a general equilibrium model.” –   Anonymous</p>
 </div></blockquote>
 <div class="section" id="a-suite-of-models">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">18.1. </span>A Suite of Models</a><a class="headerlink" href="#a-suite-of-models" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15"><span class="section-number">16.1. </span>A Suite of Models</a><a class="headerlink" href="#a-suite-of-models" title="Permalink to this headline">¶</a></h2>
 <p>This lecture presents  a class of  linear-quadratic-Gaussian models of general economic equilibrium
-designed by Lars Peter Hansen and Thomas J. Sargent <span id="id1">[<a class="reference internal" href="zreferences.html#id60">HS13</a>]</span>.</p>
+designed by Lars Peter Hansen and Thomas J. Sargent <span id="id1">[<a class="reference internal" href="zreferences.html#id67">HS13</a>]</span>.</p>
 <p>The class of models is implemented in a Python class DLE that is part of  quantecon.</p>
 <p>Subsequent lectures use the DLE class to implement various instances that have appeared in the economics literature</p>
 <ol class="simple">
@@ -646,7 +653,7 @@ designed by Lars Peter Hansen and Thomas J. Sargent <span id="id1">[<a class="re
 <li><p><a class="reference internal" href="hs_invertibility_example.html"><span class="doc">Shock Non Invertibility</span></a></p></li>
 </ol>
 <div class="section" id="overview-of-the-models">
-<h3><span class="section-number">18.1.1. </span>Overview of the Models<a class="headerlink" href="#overview-of-the-models" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.1. </span>Overview of the Models<a class="headerlink" href="#overview-of-the-models" title="Permalink to this headline">¶</a></h3>
 <p>In saying that “complete markets are all alike”, Robert E. Lucas, Jr. was noting  that all of them have</p>
 <ul class="simple">
 <li><p>a commodity space.</p></li>
@@ -676,16 +683,16 @@ designed by Lars Peter Hansen and Thomas J. Sargent <span id="id1">[<a class="re
 <p>The Hicks trick of indexing commodities by time is the idea that <strong>dynamics are a special case of statics</strong>.</p>
 <p>The Arrow trick of indexing commodities by chance is the idea that <strong>analysis of trade under uncertainty is a special
 case of the analysis of trade under certainty</strong>.</p>
-<p>The <span id="id2">[<a class="reference internal" href="zreferences.html#id60">HS13</a>]</span> class of models specify the commodity space, preferences, technologies, stochastic shocks and information flows in ways
+<p>The <span id="id2">[<a class="reference internal" href="zreferences.html#id67">HS13</a>]</span> class of models specify the commodity space, preferences, technologies, stochastic shocks and information flows in ways
 that allow the models to be analyzed completely using only the tools of linear time series models and linear-quadratic optimal control described
 in the two lectures  <a class="reference external" href="https://python-intro.quantecon.org/linear_models.html">Linear State Space Models</a> and <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Control</a>.</p>
 <p>There are costs and benefits associated with the simplifications and specializations needed to make a particular model fit within the
-<span id="id3">[<a class="reference internal" href="zreferences.html#id60">HS13</a>]</span> class</p>
+<span id="id3">[<a class="reference internal" href="zreferences.html#id67">HS13</a>]</span> class</p>
 <ul class="simple">
 <li><p>the costs are that  linear-quadratic structures are sometimes too confining.</p></li>
 <li><p>benefits include computational speed, simplicity, and ability to analyze many model features analytically or nearly analytically.</p></li>
 </ul>
-<p>A variety of superficially different models are all instances of the <span id="id4">[<a class="reference internal" href="zreferences.html#id60">HS13</a>]</span> class of models</p>
+<p>A variety of superficially different models are all instances of the <span id="id4">[<a class="reference internal" href="zreferences.html#id67">HS13</a>]</span> class of models</p>
 <ul class="simple">
 <li><p>Lucas asset pricing model</p></li>
 <li><p>Lucas-Prescott model of investment under uncertainty</p></li>
@@ -700,7 +707,7 @@ in the two lectures  <a class="reference external" href="https://python-intro.qu
 we began this lecture.</p>
 </div>
 <div class="section" id="forecasting">
-<h3><span class="section-number">18.1.2. </span>Forecasting?<a class="headerlink" href="#forecasting" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.2. </span>Forecasting?<a class="headerlink" href="#forecasting" title="Permalink to this headline">¶</a></h3>
 <p>A consequence of a single budget constraint per person  plus the Hicks-Arrow tricks is that households and firms need not forecast.</p>
 <p>But there exist equivalent structures called <strong>recursive competitive equilibria</strong> in which  they do appear to need to forecast.</p>
 <p>In these structures, to forecast, households and firms use:</p>
@@ -710,8 +717,8 @@ we began this lecture.</p>
 </ul>
 </div>
 <div class="section" id="theory-and-econometrics">
-<h3><span class="section-number">18.1.3. </span>Theory and Econometrics<a class="headerlink" href="#theory-and-econometrics" title="Permalink to this headline">¶</a></h3>
-<p>For an application of the  <span id="id5">[<a class="reference internal" href="zreferences.html#id60">HS13</a>]</span> class of models, the outcome of theorizing is a stochastic process, i.e., a probability
+<h3><span class="section-number">16.1.3. </span>Theory and Econometrics<a class="headerlink" href="#theory-and-econometrics" title="Permalink to this headline">¶</a></h3>
+<p>For an application of the  <span id="id5">[<a class="reference internal" href="zreferences.html#id67">HS13</a>]</span> class of models, the outcome of theorizing is a stochastic process, i.e., a probability
 distribution over sequences of prices and quantities, indexed by  parameters describing preferences, technologies, and information flows.</p>
 <p>Another name for that object is a likelihood function, a key object of both frequentist and Bayesian statistics.</p>
 <p>There are two important uses of an <strong>equilibrium stochastic process</strong> or <strong>likelihood function</strong>.</p>
@@ -723,8 +730,8 @@ an output characterizes or simulates random paths of quantities and prices.</p>
 and from them makes inferences about the parameters that define the model’s preferences, technologies, and information flows.</p>
 </div>
 <div class="section" id="more-details">
-<h3><span class="section-number">18.1.4. </span>More Details<a class="headerlink" href="#more-details" title="Permalink to this headline">¶</a></h3>
-<p>A <span id="id6">[<a class="reference internal" href="zreferences.html#id60">HS13</a>]</span> economy consists of <strong>lists of matrices</strong> that describe peoples’ household technologies, their preferences over
+<h3><span class="section-number">16.1.4. </span>More Details<a class="headerlink" href="#more-details" title="Permalink to this headline">¶</a></h3>
+<p>A <span id="id6">[<a class="reference internal" href="zreferences.html#id67">HS13</a>]</span> economy consists of <strong>lists of matrices</strong> that describe peoples’ household technologies, their preferences over
 consumption services,  their production technologies, and their information sets.</p>
 <p>There are complete markets in history-contingent commodities.</p>
 <p>Competitive equilibrium allocations and prices</p>
@@ -733,7 +740,7 @@ consumption services,  their production technologies, and their information sets
 <li><p>have representations that are convenient econometrically</p></li>
 </ul>
 <p>Different example economies manifest themselves simply as different settings for various matrices.</p>
-<p><span id="id7">[<a class="reference internal" href="zreferences.html#id60">HS13</a>]</span> use these tools:</p>
+<p><span id="id7">[<a class="reference internal" href="zreferences.html#id67">HS13</a>]</span> use these tools:</p>
 <ul class="simple">
 <li><p>A theory of recursive dynamic competitive economies</p></li>
 <li><p>Linear optimal control theory</p></li>
@@ -785,7 +792,7 @@ autoregressions and non-Gorman aggregation).</p></li>
 </ul>
 </div>
 <div class="section" id="stochastic-model-of-information-flows-and-outcomes">
-<span id="section-3"></span><h3><span class="section-number">18.1.5. </span>Stochastic Model of Information Flows and Outcomes<a class="headerlink" href="#stochastic-model-of-information-flows-and-outcomes" title="Permalink to this headline">¶</a></h3>
+<span id="section-3"></span><h3><span class="section-number">16.1.5. </span>Stochastic Model of Information Flows and Outcomes<a class="headerlink" href="#stochastic-model-of-information-flows-and-outcomes" title="Permalink to this headline">¶</a></h3>
 <p>We’ll use  stochastic linear difference equations to describe information flows <strong>and</strong> equilibrium outcomes.</p>
 <p>The sequence <span class="math notranslate nohighlight">\(\{w_t : t=1,2, \ldots\}\)</span> is said to be a martingale
 difference sequence adapted to <span class="math notranslate nohighlight">\(\{J_t : t=0, 1, \ldots \}\)</span> if
@@ -812,7 +819,7 @@ x_{t+1} = Ax_t + Cw_{t+1}
 <span class="math notranslate nohighlight">\({\mathcal N}(Ax_t, CC')\)</span>.</p>
 </div>
 <div class="section" id="information-sets">
-<h3><span class="section-number">18.1.6. </span>Information Sets<a class="headerlink" href="#information-sets" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.6. </span>Information Sets<a class="headerlink" href="#information-sets" title="Permalink to this headline">¶</a></h3>
 <p>Let <span class="math notranslate nohighlight">\(J_0\)</span> be generated by <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(J_t\)</span> be generated
 by <span class="math notranslate nohighlight">\(x_0, w_1, \ldots ,
 w_t\)</span>, which means that <span class="math notranslate nohighlight">\(J_t\)</span> consists of the set of all measurable
@@ -820,7 +827,7 @@ functions of <span class="math notranslate nohighlight">\(\{x_0, w_1,\ldots,
 w_t\}\)</span>.</p>
 </div>
 <div class="section" id="prediction-theory">
-<h3><span class="section-number">18.1.7. </span>Prediction Theory<a class="headerlink" href="#prediction-theory" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.7. </span>Prediction Theory<a class="headerlink" href="#prediction-theory" title="Permalink to this headline">¶</a></h3>
 <p>The optimal forecast of <span class="math notranslate nohighlight">\(x_{t+1}\)</span> given current information is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -877,7 +884,7 @@ E_t (x_{t+j} - E_t x_{t+j})  (x_{t+j} - E_t x_{t+j})^\prime =
 \end{split}\]</div>
 </div>
 <div class="section" id="orthogonal-decomposition">
-<h3><span class="section-number">18.1.8. </span>Orthogonal Decomposition<a class="headerlink" href="#orthogonal-decomposition" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.8. </span>Orthogonal Decomposition<a class="headerlink" href="#orthogonal-decomposition" title="Permalink to this headline">¶</a></h3>
 <p>To decompose these covariances into parts attributable to the individual
 components of <span class="math notranslate nohighlight">\(w_t\)</span>, we let <span class="math notranslate nohighlight">\(i_\tau\)</span> be an
 <span class="math notranslate nohighlight">\(N\)</span>-dimensional column vector of zeroes except in position
@@ -902,7 +909,7 @@ each of the components <span class="math notranslate nohighlight">\(\tau =
 1, \ldots, N\)</span>.</p>
 </div>
 <div class="section" id="taste-and-technology-shocks">
-<h3><span class="section-number">18.1.9. </span>Taste and Technology Shocks<a class="headerlink" href="#taste-and-technology-shocks" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.9. </span>Taste and Technology Shocks<a class="headerlink" href="#taste-and-technology-shocks" title="Permalink to this headline">¶</a></h3>
 <p><span class="math notranslate nohighlight">\(E(w_t \mid J_{t-1}) = 0\)</span> and <span class="math notranslate nohighlight">\(E(w_t
 w_t^\prime \mid J_{t-1}) = I\)</span> for <span class="math notranslate nohighlight">\(t=1,2, \ldots\)</span></p>
 <div class="math notranslate nohighlight">
@@ -934,7 +941,7 @@ z_{t+1} &amp;=A_{22} z_t + C_2 w_{t+1}
 </ul>
 </div>
 <div class="section" id="production-technology">
-<h3><span class="section-number">18.1.10. </span>Production Technology<a class="headerlink" href="#production-technology" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.10. </span>Production Technology<a class="headerlink" href="#production-technology" title="Permalink to this headline">¶</a></h3>
 <p>Where <span class="math notranslate nohighlight">\(c_t\)</span> is a vector of consumption rates, <span class="math notranslate nohighlight">\(k_t\)</span> is a vector of physical capital goods, <span class="math notranslate nohighlight">\(g_t\)</span> is
 a vector intermediate productions goods, <span class="math notranslate nohighlight">\(d_t\)</span> is a vector of technology shocks, the production technology is</p>
 <div class="math notranslate nohighlight">
@@ -950,7 +957,7 @@ k_t &amp;=\Delta_k k_{t-1} + \Theta_k i_t \\ g_t \cdot g_t &amp;=\ell_t^2
 <p><strong>Assumption:</strong> <span class="math notranslate nohighlight">\([\Phi_c\ \Phi_g]\)</span> is nonsingular.</p>
 </div>
 <div class="section" id="household-technology">
-<h3><span class="section-number">18.1.11. </span>Household Technology<a class="headerlink" href="#household-technology" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.11. </span>Household Technology<a class="headerlink" href="#household-technology" title="Permalink to this headline">¶</a></h3>
 <p>Households confront a technology that allows them to devote consumption goods to construct a vector <span class="math notranslate nohighlight">\(h_t\)</span> of household capital goods
 and a vector <span class="math notranslate nohighlight">\(s_t\)</span> of utility generating  house services</p>
 <div class="math notranslate nohighlight">
@@ -967,7 +974,7 @@ are less than or equal to one.</p>
 <p>Below, we’ll outline further assumptions that we shall occasionally impose.</p>
 </div>
 <div class="section" id="preferences">
-<h3><span class="section-number">18.1.12. </span>Preferences<a class="headerlink" href="#preferences" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.12. </span>Preferences<a class="headerlink" href="#preferences" title="Permalink to this headline">¶</a></h3>
 <p>Where <span class="math notranslate nohighlight">\(b_t\)</span> is a stochastic process of preference shocks that will play the role of demand shifters, the representative household orders
 stochastic processes of consumption services <span class="math notranslate nohighlight">\(s_t\)</span> according to</p>
 <div class="math notranslate nohighlight">
@@ -988,7 +995,7 @@ b_t) \cdot ( s_t - b_t) + \ell_t^2 ] \bigl| J_0 , \ 0 &lt; \beta &lt; 1
 <p>so we’ll be looking for specifications of the matrices <span class="math notranslate nohighlight">\(\Phi_c, \Phi_g, \Phi_i, \Gamma, \Delta_k, \Theta_k\)</span> that define them.</p>
 </div>
 <div class="section" id="endowment-economy">
-<h3><span class="section-number">18.1.13. </span>Endowment Economy<a class="headerlink" href="#endowment-economy" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.13. </span>Endowment Economy<a class="headerlink" href="#endowment-economy" title="Permalink to this headline">¶</a></h3>
 <p>There is a single consumption good that cannot be stored over time.</p>
 <p>In time period <span class="math notranslate nohighlight">\(t\)</span>, there is an endowment <span class="math notranslate nohighlight">\(d_t\)</span> of this single
 good.</p>
@@ -1022,7 +1029,7 @@ version, we set <span class="math notranslate nohighlight">\(\Delta_k = \Theta_k
 Lucas’s (1978) asset pricing model.</p>
 </div>
 <div class="section" id="single-period-adjustment-costs">
-<h3><span class="section-number">18.1.14. </span>Single-Period Adjustment Costs<a class="headerlink" href="#single-period-adjustment-costs" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.14. </span>Single-Period Adjustment Costs<a class="headerlink" href="#single-period-adjustment-costs" title="Permalink to this headline">¶</a></h3>
 <p>There is a single consumption good, a single intermediate good, and a
 single investment good.</p>
 <p>The technology is described by</p>
@@ -1282,7 +1289,7 @@ b_t) \cdot ( s_t - b_t) + \ell_t^2 ] \bigl| J_0 , \ 0 &lt; \beta &lt; 1
 </ul>
 </div>
 <div class="section" id="optimal-resource-allocation">
-<h3><span class="section-number">18.1.15. </span>Optimal Resource Allocation<a class="headerlink" href="#optimal-resource-allocation" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.15. </span>Optimal Resource Allocation<a class="headerlink" href="#optimal-resource-allocation" title="Permalink to this headline">¶</a></h3>
 <p>Imagine a planner who chooses sequences <span class="math notranslate nohighlight">\(\{c_t, i_t, g_t\}_{t=0}^\infty\)</span> to maximize</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1324,7 +1331,7 @@ y_t^2 \mid J_0 &lt; + \infty]
 </ul>
 </div>
 <div class="section" id="lagrangian-formulation">
-<h3><span class="section-number">18.1.16. </span>Lagrangian Formulation<a class="headerlink" href="#lagrangian-formulation" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.16. </span>Lagrangian Formulation<a class="headerlink" href="#lagrangian-formulation" title="Permalink to this headline">¶</a></h3>
 <p>Form the Lagrangian</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1427,7 +1434,7 @@ the approach we’ll use.</p>
 <p>Instead, we’ll use dynamic programming to get recursive representations for both quantities and shadow prices.</p>
 </div>
 <div class="section" id="dynamic-programming">
-<h3><span class="section-number">18.1.17. </span>Dynamic Programming<a class="headerlink" href="#dynamic-programming" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.17. </span>Dynamic Programming<a class="headerlink" href="#dynamic-programming" title="Permalink to this headline">¶</a></h3>
 <p>Dynamic Programming  always starts with the word <strong>let</strong>.</p>
 <p>Thus, let <span class="math notranslate nohighlight">\(V(x_0)\)</span> be the optimal value function for the  planning problem as a function of the initial state vector <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
 <p>(Thus, in essence, dynamic programming amounts to an application of a <strong>guess and verify</strong> method in which we begin with a guess about the answer
@@ -1611,7 +1618,7 @@ M_h + \Pi^\prime M_s
 <p>We will use this fact and these equations to compute competitive equilibrium prices.</p>
 </div>
 <div class="section" id="other-mathematical-infrastructure">
-<h3><span class="section-number">18.1.18. </span>Other mathematical infrastructure<a class="headerlink" href="#other-mathematical-infrastructure" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.18. </span>Other mathematical infrastructure<a class="headerlink" href="#other-mathematical-infrastructure" title="Permalink to this headline">¶</a></h3>
 <p>Let’s start with describing the <strong>commodity space</strong> and <strong>pricing functional</strong> for our competitive equilibrium.</p>
 <p>For the  <strong>commodity space</strong>, we use</p>
 <div class="math notranslate nohighlight">
@@ -1630,7 +1637,7 @@ y_t^2 \mid J_0 &lt; + \infty]
 problem of a <strong>Representative Household in a competitive equilibrium</strong>.</p>
 </div>
 <div class="section" id="representative-household">
-<h3><span class="section-number">18.1.19. </span>Representative Household<a class="headerlink" href="#representative-household" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.19. </span>Representative Household<a class="headerlink" href="#representative-household" title="Permalink to this headline">¶</a></h3>
 <p>The representative household owns endowment process and initial stocks of <span class="math notranslate nohighlight">\(h\)</span> and <span class="math notranslate nohighlight">\(k\)</span> and
 chooses stochastic processes for <span class="math notranslate nohighlight">\(\{c_t,\, s_t,\, h_t,\,
 \ell_t\}^\infty_{t=0}\)</span>, each element of which is in <span class="math notranslate nohighlight">\(L^2_0\)</span>, to
@@ -1659,7 +1666,7 @@ h_t = \Delta_h h_{t-1} + \Theta_h c_t, \quad h_{-1}, k_{-1}\
 <p>We now describe the problems faced by two types of firms called type I and type II.</p>
 </div>
 <div class="section" id="type-i-firm">
-<h3><span class="section-number">18.1.20. </span>Type I Firm<a class="headerlink" href="#type-i-firm" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.20. </span>Type I Firm<a class="headerlink" href="#type-i-firm" title="Permalink to this headline">¶</a></h3>
 <p>A type I firm rents capital and labor and endowments and produces
 <span class="math notranslate nohighlight">\(c_t, i_t\)</span>.</p>
 <p>It chooses stochastic processes for
@@ -1681,7 +1688,7 @@ E_0\, \sum^\infty_{t=0} \beta^t\, (p^0_t \cdot c_t + q^0_t \cdot i_t - r^0_t
 \]</div>
 </div>
 <div class="section" id="type-ii-firm">
-<h3><span class="section-number">18.1.21. </span>Type II Firm<a class="headerlink" href="#type-ii-firm" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.21. </span>Type II Firm<a class="headerlink" href="#type-ii-firm" title="Permalink to this headline">¶</a></h3>
 <p>A firm of type II  acquires capital via investment and then rents
 stocks of capital to the <span class="math notranslate nohighlight">\(c,i\)</span>-producing type I firm.</p>
 <p>A type II firm is a price taker facing the vector <span class="math notranslate nohighlight">\(v_0\)</span> and the stochastic
@@ -1700,7 +1707,7 @@ k_t = \Delta_k k_{t-1} + \Theta_k i_t
 \]</div>
 </div>
 <div class="section" id="competitive-equilibrium-definition">
-<h3><span class="section-number">18.1.22. </span>Competitive Equilibrium:  Definition<a class="headerlink" href="#competitive-equilibrium-definition" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.22. </span>Competitive Equilibrium:  Definition<a class="headerlink" href="#competitive-equilibrium-definition" title="Permalink to this headline">¶</a></h3>
 <p>We can now state the following.</p>
 <p><strong>Definition:</strong> A competitive equilibrium is a price system
 <span class="math notranslate nohighlight">\([v_0, \{p^0_t, w^0_t, \alpha^0_t, q^0_t, r^0_t\}^\infty_{t=0}]\)</span>
@@ -1750,7 +1757,7 @@ first-order necessary conditions to be satisfied at these prices and at
 the quantities associated with the optimum of the planning problem.</p>
 </div>
 <div class="section" id="asset-pricing">
-<h3><span class="section-number">18.1.23. </span>Asset pricing<a class="headerlink" href="#asset-pricing" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.23. </span>Asset pricing<a class="headerlink" href="#asset-pricing" title="Permalink to this headline">¶</a></h3>
 <p>An important use of an equilibrium pricing system is to do asset pricing.</p>
 <p>Thus, imagine that we are presented a dividend stream: <span class="math notranslate nohighlight">\(\{y_t\} \in L^2_0\)</span>
 and want to compute the value of a perpetual claim to this stream.</p>
@@ -1787,7 +1794,7 @@ A^{o \tau}
 \]</div>
 </div>
 <div class="section" id="re-opening-markets">
-<h3><span class="section-number">18.1.24. </span>Re-Opening Markets<a class="headerlink" href="#re-opening-markets" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.1.24. </span>Re-Opening Markets<a class="headerlink" href="#re-opening-markets" title="Permalink to this headline">¶</a></h3>
 <p>We have assumed that all trading occurs once-and-for-all at time <span class="math notranslate nohighlight">\(t=0\)</span>.</p>
 <p>If we were to <strong>re-open markets</strong> at some time <span class="math notranslate nohighlight">\(t &gt;0\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> wealth levels implicitly defined by
 time <span class="math notranslate nohighlight">\(0\)</span> trades, we would obtain the same equilibrium allocation (i.e., quantities) and the following time <span class="math notranslate nohighlight">\(t\)</span>
@@ -1827,12 +1834,12 @@ v_t = [\Gamma^\prime M_d + \Delta^\prime_k M_k] x_t / \, [\bar e_j \, M_c x_t]
 </div>
 </div>
 <div class="section" id="econometrics">
-<h2><a class="toc-backref" href="#id16"><span class="section-number">18.2. </span>Econometrics</a><a class="headerlink" href="#econometrics" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id16"><span class="section-number">16.2. </span>Econometrics</a><a class="headerlink" href="#econometrics" title="Permalink to this headline">¶</a></h2>
 <p>Up to now, we have described how to solve the <strong>direct problem</strong> that maps model parameters into an (equilibrium) stochastic process
 of prices and quantities.</p>
 <p>Recall the <strong>inverse problem</strong> of inferring model parameters from a single realization of a time series of some of the prices and quantities.</p>
 <p>Another name for the inverse problem is <strong>econometrics</strong>.</p>
-<p>An advantage of the <span id="id8">[<a class="reference internal" href="zreferences.html#id60">HS13</a>]</span> structure is that it comes with a self-contained theory of econometrics.</p>
+<p>An advantage of the <span id="id8">[<a class="reference internal" href="zreferences.html#id67">HS13</a>]</span> structure is that it comes with a self-contained theory of econometrics.</p>
 <p>It is really just a tale of two state-space representations.</p>
 <p>Here they are:</p>
 <p><strong>Original State-Space Representation:</strong></p>
@@ -1912,7 +1919,7 @@ y_t &amp;= G \hat x_t + a_t
 \end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\(E a_t a_t^\prime \equiv \Omega =  G \Sigma G^\prime + R\)</span>.</p>
 <div class="section" id="factorization-of-likelihood-function">
-<h3><span class="section-number">18.2.1. </span>Factorization of Likelihood Function<a class="headerlink" href="#factorization-of-likelihood-function" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.2.1. </span>Factorization of Likelihood Function<a class="headerlink" href="#factorization-of-likelihood-function" title="Permalink to this headline">¶</a></h3>
 <p>Sample of observations <span class="math notranslate nohighlight">\(\{y_s\}_{s=0}^T\)</span> on a
 <span class="math notranslate nohighlight">\((n_y \times 1)\)</span> vector.</p>
 <div class="math notranslate nohighlight">
@@ -1932,13 +1939,13 @@ f(y_T, y_{T-1}, \ldots, y_0 )&amp;=
 \]</div>
 </div>
 <div class="section" id="covariance-generating-functions">
-<h3><span class="section-number">18.2.2. </span>Covariance Generating Functions<a class="headerlink" href="#covariance-generating-functions" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.2.2. </span>Covariance Generating Functions<a class="headerlink" href="#covariance-generating-functions" title="Permalink to this headline">¶</a></h3>
 <p>Autocovariance: <span class="math notranslate nohighlight">\(C_x(\tau) = E x_t x_{t-\tau}'\)</span>.</p>
 <p>Generating Function:
 <span class="math notranslate nohighlight">\(S_x(z) = \sum_{\tau = -\infty}^\infty C_x(\tau) z^\tau, z \in C\)</span>.</p>
 </div>
 <div class="section" id="spectral-factorization-identity">
-<h3><span class="section-number">18.2.3. </span>Spectral Factorization Identity<a class="headerlink" href="#spectral-factorization-identity" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.2.3. </span>Spectral Factorization Identity<a class="headerlink" href="#spectral-factorization-identity" title="Permalink to this headline">¶</a></h3>
 <p>Original state-space representation has too many shocks and implies:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1972,7 +1979,7 @@ H(a^t) = H(y^t)
 <p><strong>Key Property:</strong> Invertibility</p>
 </div>
 <div class="section" id="wold-and-vector-autoregressive-representations">
-<h3><span class="section-number">18.2.4. </span>Wold and Vector Autoregressive Representations<a class="headerlink" href="#wold-and-vector-autoregressive-representations" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.2.4. </span>Wold and Vector Autoregressive Representations<a class="headerlink" href="#wold-and-vector-autoregressive-representations" title="Permalink to this headline">¶</a></h3>
 <p>Let’s start with some lag operator arithmetic.</p>
 <p>The lag operator <span class="math notranslate nohighlight">\(L\)</span> and the inverse lag operator  <span class="math notranslate nohighlight">\(L^{-1}\)</span> each map an infinite sequence into an infinite sequence according to the
 transformation rules</p>
@@ -2002,9 +2009,9 @@ y_t = \sum_{j=1}^\infty G (A^o -KG)^{j-1} K y_{t-j} + a_t
 </div>
 </div>
 <div class="section" id="dynamic-demand-curves-and-canonical-household-technologies">
-<span id="wold-and-vector-autoregressive-representations-1"></span><h2><a class="toc-backref" href="#id17"><span class="section-number">18.3. </span>Dynamic Demand Curves and Canonical Household Technologies</a><a class="headerlink" href="#dynamic-demand-curves-and-canonical-household-technologies" title="Permalink to this headline">¶</a></h2>
+<span id="wold-and-vector-autoregressive-representations-1"></span><h2><a class="toc-backref" href="#id17"><span class="section-number">16.3. </span>Dynamic Demand Curves and Canonical Household Technologies</a><a class="headerlink" href="#dynamic-demand-curves-and-canonical-household-technologies" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="canonical-household-technologies">
-<h3><span class="section-number">18.3.1. </span>Canonical Household Technologies<a class="headerlink" href="#canonical-household-technologies" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.3.1. </span>Canonical Household Technologies<a class="headerlink" href="#canonical-household-technologies" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -2040,7 +2047,7 @@ s_t
 <span class="math notranslate nohighlight">\(L_0^2\)</span>.</p>
 </div>
 <div class="section" id="dynamic-demand-functions">
-<span id="canonical-household-technologies-3"></span><h3><span class="section-number">18.3.2. </span>Dynamic Demand Functions<a class="headerlink" href="#dynamic-demand-functions" title="Permalink to this headline">¶</a></h3>
+<span id="canonical-household-technologies-3"></span><h3><span class="section-number">16.3.2. </span>Dynamic Demand Functions<a class="headerlink" href="#dynamic-demand-functions" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[
 \rho^0_t \equiv \Pi^{-1 \prime} \Bigl[p^0_t - \Theta _h^\prime E_t
@@ -2085,7 +2092,7 @@ consumption, as mediated through the state variable <span class="math notranslat
 </div>
 </div>
 <div class="section" id="gorman-aggregation-and-engel-curves">
-<h2><a class="toc-backref" href="#id18"><span class="section-number">18.4. </span>Gorman Aggregation and Engel Curves</a><a class="headerlink" href="#gorman-aggregation-and-engel-curves" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id18"><span class="section-number">16.4. </span>Gorman Aggregation and Engel Curves</a><a class="headerlink" href="#gorman-aggregation-and-engel-curves" title="Permalink to this headline">¶</a></h2>
 <p>We shall explore how the dynamic demand schedule for consumption goods
 opens up the possibility of satisfying Gorman’s (1953) conditions for
 aggregation in a heterogeneous consumer model.</p>
@@ -2104,7 +2111,7 @@ property, there exists a unique community or aggregate preference
 ordering over aggregate consumption that is independent of the
 distribution of wealth.</p>
 <div class="section" id="re-opened-markets">
-<h3><span class="section-number">18.4.1. </span>Re-Opened Markets<a class="headerlink" href="#re-opened-markets" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.4.1. </span>Re-Opened Markets<a class="headerlink" href="#re-opened-markets" title="Permalink to this headline">¶</a></h3>
 <div class="math notranslate nohighlight">
 \[
 \rho^t_{t} \equiv \Pi^{-1 \prime} \Bigl[p^t_{t} - \Theta _h^\prime E_t
@@ -2142,7 +2149,7 @@ h_t &amp;= \Delta_h h_{t-1} + \Theta_h c_t
 \end{split}\]</div>
 </div>
 <div class="section" id="dynamic-demand">
-<h3><span class="section-number">18.4.2. </span>Dynamic Demand<a class="headerlink" href="#dynamic-demand" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.4.2. </span>Dynamic Demand<a class="headerlink" href="#dynamic-demand" title="Permalink to this headline">¶</a></h3>
 <p>Define a time <span class="math notranslate nohighlight">\(t\)</span> continuation of a sequence
 <span class="math notranslate nohighlight">\(\{z_t\}_{t=0}^\infty\)</span> as the sequence
 <span class="math notranslate nohighlight">\(\{z_\tau\}_{\tau=t}^\infty\)</span>. The demand system indicates that the
@@ -2160,7 +2167,7 @@ process, and the household’s continuation plan for <span class="math notransla
 <span class="math notranslate nohighlight">\(\{p_t^t\}\)</span>.</p>
 </div>
 <div class="section" id="attaining-a-canonical-household-technology">
-<h3><span class="section-number">18.4.3. </span>Attaining a Canonical Household Technology<a class="headerlink" href="#attaining-a-canonical-household-technology" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.4.3. </span>Attaining a Canonical Household Technology<a class="headerlink" href="#attaining-a-canonical-household-technology" title="Permalink to this headline">¶</a></h3>
 <p>Apply the following version of a factorization identity:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -2180,7 +2187,7 @@ requirements for a canonical representation.</p>
 </div>
 </div>
 <div class="section" id="partial-equilibrium">
-<h2><a class="toc-backref" href="#id19"><span class="section-number">18.5. </span>Partial Equilibrium</a><a class="headerlink" href="#partial-equilibrium" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id19"><span class="section-number">16.5. </span>Partial Equilibrium</a><a class="headerlink" href="#partial-equilibrium" title="Permalink to this headline">¶</a></h2>
 <p>Now we’ll provide quick overviews of  examples of  economies that fit within our framework</p>
 <p>We provide details for a number  of these examples in subsequent lectures</p>
 <ol class="simple">
@@ -2233,7 +2240,7 @@ E_0 \sum_{t=0}^\infty \beta^t \{ p_t \cdot c_t - g_t \cdot g_t/2 \}
 \end{split}\]</div>
 </div>
 <div class="section" id="equilibrium-investment-under-uncertainty">
-<h2><a class="toc-backref" href="#id20"><span class="section-number">18.6. </span>Equilibrium Investment Under Uncertainty</a><a class="headerlink" href="#equilibrium-investment-under-uncertainty" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id20"><span class="section-number">16.6. </span>Equilibrium Investment Under Uncertainty</a><a class="headerlink" href="#equilibrium-investment-under-uncertainty" title="Permalink to this headline">¶</a></h2>
 <p>A representative firm maximizes</p>
 <div class="math notranslate nohighlight">
 \[
@@ -2260,7 +2267,7 @@ p_t = \alpha_0 - \alpha_1 c_t + u_t
 <p>Assume that <span class="math notranslate nohighlight">\(u_t, d_t\)</span> are uncorrelated first-order autoregressive processes.</p>
 </div>
 <div class="section" id="a-rosen-topel-housing-model">
-<h2><a class="toc-backref" href="#id21"><span class="section-number">18.7. </span>A Rosen-Topel Housing Model</a><a class="headerlink" href="#a-rosen-topel-housing-model" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id21"><span class="section-number">16.7. </span>A Rosen-Topel Housing Model</a><a class="headerlink" href="#a-rosen-topel-housing-model" title="Permalink to this headline">¶</a></h2>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -2297,7 +2304,7 @@ s_t = b_t - \mu_0 \rho_t^0
 <span class="math notranslate nohighlight">\(\rho_t^0 = \pi^{-1} [  p_t - \beta \delta_h E_t p_{t+1}]\)</span>.</p>
 </div>
 <div class="section" id="cattle-cycles">
-<h2><a class="toc-backref" href="#id22"><span class="section-number">18.8. </span>Cattle Cycles</a><a class="headerlink" href="#cattle-cycles" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id22"><span class="section-number">16.8. </span>Cattle Cycles</a><a class="headerlink" href="#cattle-cycles" title="Permalink to this headline">¶</a></h2>
 <p>Rosen, Murphy, and Scheinkman (1994). Let <span class="math notranslate nohighlight">\(p_t\)</span> be the price of
 freshly slaughtered beef, <span class="math notranslate nohighlight">\(m_t\)</span> the feeding cost of preparing an
 animal for slaughter, <span class="math notranslate nohighlight">\(\tilde h_t\)</span> the one-period holding cost for
@@ -2350,15 +2357,15 @@ zero representing a demand shifter.</p>
 <p>For more details see <a class="reference internal" href="cattle_cycles.html"><span class="doc">Cattle cycles</span></a></p>
 </div>
 <div class="section" id="models-of-occupational-choice-and-pay">
-<h2><a class="toc-backref" href="#id23"><span class="section-number">18.9. </span>Models of Occupational Choice and Pay</a><a class="headerlink" href="#models-of-occupational-choice-and-pay" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id23"><span class="section-number">16.9. </span>Models of Occupational Choice and Pay</a><a class="headerlink" href="#models-of-occupational-choice-and-pay" title="Permalink to this headline">¶</a></h2>
 <p>We’ll describe the following pair of schooling models that view education as a time-to-build process:</p>
 <ul class="simple">
 <li><p>Rosen schooling model for engineers</p></li>
 <li><p>Two-occupation model</p></li>
 </ul>
 <div class="section" id="market-for-engineers">
-<h3><span class="section-number">18.9.1. </span>Market for Engineers<a class="headerlink" href="#market-for-engineers" title="Permalink to this headline">¶</a></h3>
-<p>Ryoo and Rosen’s (2004) <span id="id9">[<a class="reference internal" href="zreferences.html#id58">RR04</a>]</span> model consists of the following equations:</p>
+<h3><span class="section-number">16.9.1. </span>Market for Engineers<a class="headerlink" href="#market-for-engineers" title="Permalink to this headline">¶</a></h3>
+<p>Ryoo and Rosen’s (2004) <span id="id9">[<a class="reference internal" href="zreferences.html#id65">RR04</a>]</span> model consists of the following equations:</p>
 <p>first, a demand curve for engineers</p>
 <div class="math notranslate nohighlight">
 \[
@@ -2416,7 +2423,7 @@ home-produced service to capture the demand for labor. Here
 <p>For more details and Python code see <a class="reference internal" href="rosen_schooling_model.html"><span class="doc">Rosen schooling model</span></a>.</p>
 </div>
 <div class="section" id="skilled-and-unskilled-workers">
-<h3><span class="section-number">18.9.2. </span>Skilled and Unskilled Workers<a class="headerlink" href="#skilled-and-unskilled-workers" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">16.9.2. </span>Skilled and Unskilled Workers<a class="headerlink" href="#skilled-and-unskilled-workers" title="Permalink to this headline">¶</a></h3>
 <p>First, a demand curve for labor</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -2466,7 +2473,7 @@ v_{ut} = v_{st}
 </div>
 </div>
 <div class="section" id="permanent-income-models">
-<h2><a class="toc-backref" href="#id24"><span class="section-number">18.10. </span>Permanent Income Models</a><a class="headerlink" href="#permanent-income-models" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id24"><span class="section-number">16.10. </span>Permanent Income Models</a><a class="headerlink" href="#permanent-income-models" title="Permalink to this headline">¶</a></h2>
 <p>We’ll describe a class of permanent income models that feature</p>
 <ul class="simple">
 <li><p>Many consumption goods and services</p></li>
@@ -2524,11 +2531,11 @@ k_{t-1} = \beta \sum_{j=0}^\infty  \beta^j E (\phi_c
 <li><p>Equality of present values of moving average coefficients.</p></li>
 <li><p>Martingale <span class="math notranslate nohighlight">\({\mathcal M}_t^k\)</span>.</p></li>
 </ul>
-<p>These have been tested in work by Hansen, Sargent, and Roberts (1991) <span id="id10">[<a class="reference internal" href="zreferences.html#id47">SHR91</a>]</span>
-and by Attanasio and Pavoni (2011) <span id="id11">[<a class="reference internal" href="zreferences.html#id46">AP11</a>]</span>.</p>
+<p>These have been tested in work by Hansen, Sargent, and Roberts (1991) <span id="id10">[<a class="reference internal" href="zreferences.html#id54">SHR91</a>]</span>
+and by Attanasio and Pavoni (2011) <span id="id11">[<a class="reference internal" href="zreferences.html#id53">AP11</a>]</span>.</p>
 </div>
 <div class="section" id="gorman-heterogeneous-households">
-<h2><a class="toc-backref" href="#id25"><span class="section-number">18.11. </span>Gorman Heterogeneous Households</a><a class="headerlink" href="#gorman-heterogeneous-households" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id25"><span class="section-number">16.11. </span>Gorman Heterogeneous Households</a><a class="headerlink" href="#gorman-heterogeneous-households" title="Permalink to this headline">¶</a></h2>
 <p>We now assume that there is a finite number of households, each with its own household  technology and
 preferences over consumption services.</p>
 <p>Household <span class="math notranslate nohighlight">\(j\)</span> orders preferences over consumption processes according to</p>
@@ -2606,7 +2613,7 @@ h_{jt} &amp;= (\Delta_h - \Theta_h \Pi^{-1}\Lambda) h_{j,t-1} + \Pi^{-1}
 <p>Here <span class="math notranslate nohighlight">\(h_{j,-1}\)</span> given.</p>
 </div>
 <div class="section" id="non-gorman-heterogeneous-households">
-<h2><a class="toc-backref" href="#id26"><span class="section-number">18.12. </span>Non-Gorman Heterogeneous Households</a><a class="headerlink" href="#non-gorman-heterogeneous-households" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id26"><span class="section-number">16.12. </span>Non-Gorman Heterogeneous Households</a><a class="headerlink" href="#non-gorman-heterogeneous-households" title="Permalink to this headline">¶</a></h2>
 <p>We now describe a less tractable type of heterogeneity across households that we dub <strong>Non-Gorman heterogeneity</strong>.</p>
 <p>Here is the specification:</p>
 <p>Preferences and Household Technologies:</p>
@@ -2743,10 +2750,10 @@ solve this problem as functions of <span class="math notranslate nohighlight">\(
 into the objective determines a mongrel preference ordering over
 <span class="math notranslate nohighlight">\(\{c_t\} = \{c_{1t} + c_{2t}\}\)</span>.</p>
 <p>In solving this problem, it is convenient to proceed by using Fourier
-transforms.  For details, please see <span id="id12">[<a class="reference internal" href="zreferences.html#id60">HS13</a>]</span> where they deploy a</p>
+transforms.  For details, please see <span id="id12">[<a class="reference internal" href="zreferences.html#id67">HS13</a>]</span> where they deploy a</p>
 <p><strong>Secret Weapon:</strong> Another application of the spectral factorization
 identity.</p>
-<p><strong>Concluding remark:</strong> The <span id="id13">[<a class="reference internal" href="zreferences.html#id60">HS13</a>]</span> class of models described in this lecture are all complete markets models.  We have exploited
+<p><strong>Concluding remark:</strong> The <span id="id13">[<a class="reference internal" href="zreferences.html#id67">HS13</a>]</span> class of models described in this lecture are all complete markets models.  We have exploited
 the fact that complete market models <strong>are all alike</strong> to allow us to define a class that <strong>gives the same name to different things</strong> in the
 spirit of Henri Poincare.</p>
 <p>Could we create such a class for <strong>incomplete markets</strong> models?</p>
@@ -2784,7 +2791,7 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
                 
 
 
-                <footer class="page__footer">
+                <footer class="qe-page__footer">
 
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
@@ -2797,16 +2804,16 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
             
 
             
-            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
 
-                <div class="sidebar__header">
+                <div class="qe-sidebar__header">
 
 
                     Contents
 
                 </div>
 
-                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p class="caption">
  <span class="caption-text">
   Tools and Techniques
@@ -2856,33 +2863,28 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="robustness.html">
-   8. Robustness
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   9. Markov Jump Linear Quadratic Dynamic Programming
+   8. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   10. How to Pay for a War: Part 1
+   9. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   11. How to Pay for a War: Part 2
+   10. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   12. How to Pay for a War: Part 3
+   11. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   13. Optimal Taxation in an LQ Economy
+   12. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -2893,23 +2895,18 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="rob_markov_perf.html">
-   14. Robust Markov Perfect Equilibrium
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   15. Default Risk and Income Fluctuations
+   13. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   16. Globalization and Cycles
+   14. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   17. Coase’s Theory of the Firm
+   15. Coase’s Theory of the Firm
   </a>
  </li>
 </ul>
@@ -2921,42 +2918,64 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   18. Recursive Models of Dynamic Linear Economies
+   16. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   19. Growth in Dynamic Linear Economies
+   17. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   20. Lucas Asset Pricing Using DLE
+   18. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   21. IRFs in Hall Models
+   19. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   22. Permanent Income Model using the DLE Class
+   20. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   21. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   22. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   23. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Risk, Model Uncertainty, and Robustness
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="five_preferences.html">
+   24. Risk and Model Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   25. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   26. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -2968,7 +2987,7 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="von_neumann_model.html">
-   26. Von Neumann Growth Model (and a Generalization)
+   27. Von Neumann Growth Model (and a Generalization)
   </a>
  </li>
 </ul>
@@ -2980,32 +2999,32 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   27. Covariance Stationary Processes
+   28. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   28. Estimation of Spectra
+   29. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   29. Additive and Multiplicative Functionals
+   30. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   30. Classical Control with Linear Algebra
+   31. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   31. Classical Prediction and Filtering With Linear Algebra
+   32. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   32. Knowing the Forecasts of Others
+   33. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -3017,27 +3036,27 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   33. Asset Pricing II: The Lucas Asset Pricing Model
+   34. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   34. Elementary Asset Pricing Theory
+   35. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   35. Two Modifications of Mean-Variance Portfolio Theory
+   36. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   36. Irrelevance of Capital Structure with Complete Markets
+   37. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   37. Equilibrium Capital Structures with Incomplete Markets
+   38. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -3049,42 +3068,42 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   38. Stackelberg Plans
+   39. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   40. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   40. Optimal Taxation with State-Contingent Debt
+   41. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   41. Optimal Taxation without State-Contingent Debt
+   42. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   42. Fluctuating Interest Rates Deliver Fiscal Insurance
+   43. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   43. Fiscal Risk and Government Debt
+   44. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   44. Competitive Equilibria of a Model of Chang
+   45. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   45. Credible Government Policies in a Model of Chang
+   46. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -3096,24 +3115,24 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   47. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   48. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   49. Execution Statistics
   </a>
  </li>
 </ul>
 
                 </nav>
 
-                <div class="sidebar__footer">
+                <div class="qe-sidebar__footer">
 
                 </div>
 
@@ -3121,11 +3140,11 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
             
         </div> <!-- .main -->
 
-        <div class="toolbar">
+        <div class="qe-toolbar">
 
-            <div class="toolbar__inner">
+            <div class="qe-toolbar__inner">
 
-                <ul class="toolbar__main">
+                <ul class="qe-toolbar__main">
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
@@ -3137,12 +3156,12 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
                     </li> -->
                 </ul>
 
-                <ul class="toolbar__links">
+                <ul class="qe-toolbar__links">
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/hs_recursive_models.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/hs_recursive_models.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/hs_recursive_models.md" download><i data-feather="github"></i></a></li>

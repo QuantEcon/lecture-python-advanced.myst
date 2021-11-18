@@ -5,16 +5,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>48. Execution Statistics &#8212; Advanced Quantitative Economics with Python</title>
+    <title>49. Execution Statistics &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     
         <script>
             MathJax = {
-            loader: {load: ['[tex]/boldsymbol']},
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
             tex: {
-                packages: {'[+]': ['boldsymbol']},
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 processEscapes: true,
                 macros: {
@@ -48,8 +48,8 @@
     
     
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -63,7 +63,7 @@
       
 
     
-    <link rel="stylesheet" href="_static/quantecon-book-theme.857ff391aaabaeb8c161d2309c375fe6.css" type="text/css" />
+    <link rel="stylesheet" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -72,7 +72,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -85,7 +85,7 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/quantecon-book-theme.76bf49d7bbc59738cdb03766fad654af.js"></script>
+    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -391,11 +391,18 @@
         const thebe_selector_output = ".output"
     </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/status.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="47. References" href="zreferences.html" />
+    <link rel="prev" title="48. References" href="zreferences.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -425,20 +432,20 @@
 
     <span id="top"></span>
 
-    <div class="wrapper">
+    <div class="qe-wrapper">
 
-        <div class="main">
+        <div class="qe-main">
 
-            <div class="page" id=status>
+            <div class="qe-page" id=status>
 
-                <div class="page__toc">
+                <div class="qe-page__toc">
 
                     <div class="inner">
 
                         
 
 
-                        <nav id="bd-toc-nav" class="page__toc-nav">
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             
                             <p class="logo">
                                 
@@ -452,7 +459,7 @@
 
                         </nav>
 
-                        <div class="page__toc-footer">
+                        <div class="qe-page__toc-footer">
                             
                             
                             <p><a href="#top"><strong>Back to top</strong></a></p>
@@ -462,29 +469,29 @@
 
                 </div>
 
-                <div class="page__header">
+                <div class="qe-page__header">
 
-                    <div class="page__header-copy">
+                    <div class="qe-page__header-copy">
 
-                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
 
-                        <p class="page__header-subheading">Execution Statistics</p>
+                        <p class="qe-page__header-subheading">Execution Statistics</p>
 
                     </div>
 
-                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
 
                 </div> <!-- .page__header -->
 
 
 
                 
-                <main class="page__content" role="main">
+                <main class="qe-page__content" role="main">
                     
                     <div>
                         
   <div class="section" id="execution-statistics">
-<h1><span class="section-number">48. </span>Execution Statistics<a class="headerlink" href="#execution-statistics" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">49. </span>Execution Statistics<a class="headerlink" href="#execution-statistics" title="Permalink to this headline">¶</a></h1>
 <p>This table contains the latest execution statistics.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -497,297 +504,303 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>BCG_complete_mkts</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:12</p></td>
 <td><p>cache</p></td>
-<td><p>35.01</p></td>
+<td><p>41.03</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-odd"><td><p>BCG_incomplete_mkts</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>392.61</p></td>
+<td><p>470.14</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-even"><td><p>additive_functionals</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>22.03</p></td>
+<td><p>22.64</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-odd"><td><p>amss</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>580.91</p></td>
+<td><p>426.11</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-even"><td><p>amss2</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>92.44</p></td>
+<td><p>120.97</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-odd"><td><p>amss3</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>436.91</p></td>
+<td><p>567.58</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-even"><td><p>arellano</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>26.63</p></td>
+<td><p>28.47</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-odd"><td><p>arma</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>11.02</p></td>
+<td><p>11.34</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-even"><td><p>asset_pricing_lph</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>2.32</p></td>
+<td><p>2.41</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-odd"><td><p>black_litterman</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>83.42</p></td>
+<td><p>72.04</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-even"><td><p>calvo</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>6.76</p></td>
+<td><p>8.02</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-odd"><td><p>cattle_cycles</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>5.34</p></td>
+<td><p>5.86</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-even"><td><p>chang_credible</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
 <td><p>-</p></td>
 <td><p>❌</p></td>
 </tr>
 <tr class="row-odd"><td><p>chang_ramsey</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
 <td><p>-</p></td>
 <td><p>❌</p></td>
 </tr>
 <tr class="row-even"><td><p>classical_filtering</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>1.45</p></td>
+<td><p>1.43</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-odd"><td><p>coase</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>11.29</p></td>
+<td><p>13.44</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-even"><td><p>cons_news</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>5.55</p></td>
+<td><p>5.81</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-odd"><td><p>discrete_dp</p></td>
-<td><p>2021-09-30 05:54</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>15.9</p></td>
+<td><p>14.47</p></td>
 <td><p>✅</p></td>
 </tr>
 <tr class="row-even"><td><p>dyn_stack</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>7.86</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>estspec</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>6.26</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>growth_in_dles</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>5.53</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>hs_invertibility_example</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>5.52</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>hs_recursive_models</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>0.87</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>intro</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>0.87</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>irfs_in_hall_model</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>5.64</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>knowing_forecasts_of_others</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>27.03</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>lqramsey</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>7.89</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>lu_tricks</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>3.11</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>lucas_asset_pricing_dles</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>5.58</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>lucas_model</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>12.03</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>markov_jump_lq</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>117.3</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>matsuyama</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>9.02</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>muth_kalman</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>7.02</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>opt_tax_recur</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>60.89</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>orth_proj</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>1.29</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>permanent_income_dles</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>5.55</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>rob_markov_perf</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>5.35</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>robustness</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>9.03</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>rosen_schooling_model</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>6.02</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>smoothing</p></td>
-<td><p>2021-09-30 05:54</p></td>
-<td><p>cache</p></td>
-<td><p>5.84</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>smoothing_tax</p></td>
-<td><p>2021-09-30 05:55</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
 <td><p>10.02</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>stationary_densities</p></td>
-<td><p>2021-09-30 05:55</p></td>
+<tr class="row-odd"><td><p>estspec</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>13.51</p></td>
+<td><p>8.02</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>status</p></td>
-<td><p>2021-09-30 05:55</p></td>
+<tr class="row-even"><td><p>five_preferences</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>0.87</p></td>
+<td><p>46.03</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>tax_smoothing_1</p></td>
-<td><p>2021-09-30 05:55</p></td>
+<tr class="row-odd"><td><p>growth_in_dles</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>14.84</p></td>
+<td><p>5.76</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>tax_smoothing_2</p></td>
-<td><p>2021-09-30 05:55</p></td>
+<tr class="row-even"><td><p>hs_invertibility_example</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>5.97</p></td>
+<td><p>7.02</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>tax_smoothing_3</p></td>
-<td><p>2021-09-30 05:55</p></td>
+<tr class="row-odd"><td><p>hs_recursive_models</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>0.88</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>intro</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>0.88</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>irfs_in_hall_model</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>5.83</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>knowing_forecasts_of_others</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>27.72</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>lqramsey</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>8.71</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>lu_tricks</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>2.75</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>lucas_asset_pricing_dles</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>5.67</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>lucas_model</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>10.54</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>markov_jump_lq</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>171.07</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>matsuyama</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>9.56</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>muth_kalman</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>6.65</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>opt_tax_recur</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>63.03</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>orth_proj</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>2.02</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>permanent_income_dles</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>5.84</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>rob_markov_perf</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>5.94</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>robustness</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>9.58</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>rosen_schooling_model</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>5.79</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>smoothing</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
 <td><p>6.35</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>troubleshooting</p></td>
-<td><p>2021-09-30 05:55</p></td>
+<tr class="row-odd"><td><p>smoothing_tax</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>0.87</p></td>
+<td><p>10.35</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>von_neumann_model</p></td>
-<td><p>2021-09-30 05:55</p></td>
+<tr class="row-even"><td><p>stationary_densities</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>2.93</p></td>
+<td><p>16.02</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>zreferences</p></td>
-<td><p>2021-09-30 05:55</p></td>
+<tr class="row-odd"><td><p>status</p></td>
+<td><p>2021-11-18 20:13</p></td>
 <td><p>cache</p></td>
-<td><p>0.87</p></td>
+<td><p>0.88</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>tax_smoothing_1</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>16.64</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>tax_smoothing_2</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>6.74</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>tax_smoothing_3</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>6.55</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>troubleshooting</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>0.88</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p>von_neumann_model</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>3.29</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p>zreferences</p></td>
+<td><p>2021-11-18 20:13</p></td>
+<td><p>cache</p></td>
+<td><p>0.88</p></td>
 <td><p>✅</p></td>
 </tr>
 </tbody>
@@ -822,7 +835,7 @@ executed using the following <a class="reference external" href="https://docs.gi
                 
 
 
-                <footer class="page__footer">
+                <footer class="qe-page__footer">
 
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
@@ -835,16 +848,16 @@ executed using the following <a class="reference external" href="https://docs.gi
             
 
             
-            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
 
-                <div class="sidebar__header">
+                <div class="qe-sidebar__header">
 
 
                     Contents
 
                 </div>
 
-                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p class="caption">
  <span class="caption-text">
   Tools and Techniques
@@ -894,33 +907,28 @@ executed using the following <a class="reference external" href="https://docs.gi
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="robustness.html">
-   8. Robustness
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   9. Markov Jump Linear Quadratic Dynamic Programming
+   8. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   10. How to Pay for a War: Part 1
+   9. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   11. How to Pay for a War: Part 2
+   10. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   12. How to Pay for a War: Part 3
+   11. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   13. Optimal Taxation in an LQ Economy
+   12. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -931,23 +939,18 @@ executed using the following <a class="reference external" href="https://docs.gi
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="rob_markov_perf.html">
-   14. Robust Markov Perfect Equilibrium
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   15. Default Risk and Income Fluctuations
+   13. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   16. Globalization and Cycles
+   14. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   17. Coase’s Theory of the Firm
+   15. Coase’s Theory of the Firm
   </a>
  </li>
 </ul>
@@ -959,42 +962,64 @@ executed using the following <a class="reference external" href="https://docs.gi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   18. Recursive Models of Dynamic Linear Economies
+   16. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   19. Growth in Dynamic Linear Economies
+   17. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   20. Lucas Asset Pricing Using DLE
+   18. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   21. IRFs in Hall Models
+   19. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   22. Permanent Income Model using the DLE Class
+   20. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   21. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   22. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   23. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Risk, Model Uncertainty, and Robustness
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="five_preferences.html">
+   24. Risk and Model Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   25. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   26. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1006,7 +1031,7 @@ executed using the following <a class="reference external" href="https://docs.gi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="von_neumann_model.html">
-   26. Von Neumann Growth Model (and a Generalization)
+   27. Von Neumann Growth Model (and a Generalization)
   </a>
  </li>
 </ul>
@@ -1018,32 +1043,32 @@ executed using the following <a class="reference external" href="https://docs.gi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   27. Covariance Stationary Processes
+   28. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   28. Estimation of Spectra
+   29. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   29. Additive and Multiplicative Functionals
+   30. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   30. Classical Control with Linear Algebra
+   31. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   31. Classical Prediction and Filtering With Linear Algebra
+   32. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   32. Knowing the Forecasts of Others
+   33. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -1055,27 +1080,27 @@ executed using the following <a class="reference external" href="https://docs.gi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   33. Asset Pricing II: The Lucas Asset Pricing Model
+   34. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   34. Elementary Asset Pricing Theory
+   35. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   35. Two Modifications of Mean-Variance Portfolio Theory
+   36. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   36. Irrelevance of Capital Structure with Complete Markets
+   37. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   37. Equilibrium Capital Structures with Incomplete Markets
+   38. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1087,42 +1112,42 @@ executed using the following <a class="reference external" href="https://docs.gi
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   38. Stackelberg Plans
+   39. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   40. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   40. Optimal Taxation with State-Contingent Debt
+   41. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   41. Optimal Taxation without State-Contingent Debt
+   42. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   42. Fluctuating Interest Rates Deliver Fiscal Insurance
+   43. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   43. Fiscal Risk and Government Debt
+   44. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   44. Competitive Equilibria of a Model of Chang
+   45. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   45. Credible Government Policies in a Model of Chang
+   46. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1134,24 +1159,24 @@ executed using the following <a class="reference external" href="https://docs.gi
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   47. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   48. References
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   48. Execution Statistics
+   49. Execution Statistics
   </a>
  </li>
 </ul>
 
                 </nav>
 
-                <div class="sidebar__footer">
+                <div class="qe-sidebar__footer">
 
                 </div>
 
@@ -1159,11 +1184,11 @@ executed using the following <a class="reference external" href="https://docs.gi
             
         </div> <!-- .main -->
 
-        <div class="toolbar">
+        <div class="qe-toolbar">
 
-            <div class="toolbar__inner">
+            <div class="qe-toolbar__inner">
 
-                <ul class="toolbar__main">
+                <ul class="qe-toolbar__main">
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
@@ -1175,12 +1200,12 @@ executed using the following <a class="reference external" href="https://docs.gi
                     </li> -->
                 </ul>
 
-                <ul class="toolbar__links">
+                <ul class="qe-toolbar__links">
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/status.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/status.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/status.md" download><i data-feather="github"></i></a></li>

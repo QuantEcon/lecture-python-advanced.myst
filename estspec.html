@@ -5,16 +5,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>28. Estimation of Spectra &#8212; Advanced Quantitative Economics with Python</title>
+    <title>29. Estimation of Spectra &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     
         <script>
             MathJax = {
-            loader: {load: ['[tex]/boldsymbol']},
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
             tex: {
-                packages: {'[+]': ['boldsymbol']},
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
                 inlineMath: [['$', '$'], ['\\(', '\\)']],
                 processEscapes: true,
                 macros: {
@@ -48,8 +48,8 @@
     
     
     
-  <link href="_static/css/theme.css" rel="stylesheet" />
-  <link href="_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <link href="_static/css/theme.css" rel="stylesheet">
+  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -63,7 +63,7 @@
       
 
     
-    <link rel="stylesheet" href="_static/quantecon-book-theme.857ff391aaabaeb8c161d2309c375fe6.css" type="text/css" />
+    <link rel="stylesheet" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
@@ -72,7 +72,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.1c5a1a01449ed65a7b51.js">
+  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -85,7 +85,7 @@
     <script src="_static/copybutton.js"></script>
     <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="_static/quantecon-book-theme.76bf49d7bbc59738cdb03766fad654af.js"></script>
+    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script type="text/x-mathjax-config">MathJax.Hub.Config({"TeX": {"Macros": {"argmax": "arg\\,max", "argmin": "arg\\,min"}}, "tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
@@ -234,8 +234,8 @@
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="29. Additive and Multiplicative Functionals" href="additive_functionals.html" />
-    <link rel="prev" title="27. Covariance Stationary Processes" href="arma.html" />
+    <link rel="next" title="30. Additive and Multiplicative Functionals" href="additive_functionals.html" />
+    <link rel="prev" title="28. Covariance Stationary Processes" href="arma.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -265,98 +265,98 @@
 
     <span id="top"></span>
 
-    <div class="wrapper">
+    <div class="qe-wrapper">
 
-        <div class="main">
+        <div class="qe-main">
 
-            <div class="page" id=estspec>
+            <div class="qe-page" id=estspec>
 
-                <div class="page__toc">
+                <div class="qe-page__toc">
 
                     <div class="inner">
 
                         
-                        <div class="page__toc-header">
+                        <div class="qe-page__toc-header">
                             On this page
                         </div>
 
 
-                        <nav id="bd-toc-nav" class="page__toc-nav">
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#overview">
-   28.1. Overview
+   29.1. Overview
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#periodograms">
-   28.2. Periodograms
+   29.2. Periodograms
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#interpretation">
-     28.2.1. Interpretation
+     29.2.1. Interpretation
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#calculation">
-     28.2.2. Calculation
+     29.2.2. Calculation
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#smoothing">
-   28.3. Smoothing
+   29.3. Smoothing
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#estimation-with-smoothing">
-     28.3.1. Estimation with Smoothing
+     29.3.1. Estimation with Smoothing
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#pre-filtering-and-smoothing">
-     28.3.2. Pre-Filtering and Smoothing
+     29.3.2. Pre-Filtering and Smoothing
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-ar-1-setting">
-     28.3.3. The AR(1) Setting
+     29.3.3. The AR(1) Setting
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   28.4. Exercises
+   29.4. Exercises
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-1">
-     28.4.1. Exercise 1
+     29.4.1. Exercise 1
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#exercise-2">
-     28.4.2. Exercise 2
+     29.4.2. Exercise 2
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#solutions">
-   28.5. Solutions
+   29.5. Solutions
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
-     28.5.1. Exercise 1
+     29.5.1. Exercise 1
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id5">
-     28.5.2. Exercise 2
+     29.5.2. Exercise 2
     </a>
    </li>
   </ul>
@@ -375,7 +375,7 @@
 
                         </nav>
 
-                        <div class="page__toc-footer">
+                        <div class="qe-page__toc-footer">
                             
                             
                             <p><a href="#top"><strong>Back to top</strong></a></p>
@@ -385,24 +385,24 @@
 
                 </div>
 
-                <div class="page__header">
+                <div class="qe-page__header">
 
-                    <div class="page__header-copy">
+                    <div class="qe-page__header-copy">
 
-                        <p class="page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+                        <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
 
-                        <p class="page__header-subheading">Estimation of Spectra</p>
+                        <p class="qe-page__header-subheading">Estimation of Spectra</p>
 
                     </div>
 
-                    <p class="page__header-authors">Thomas J. Sargent & John Stachurski</p>
+                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
 
                 </div> <!-- .page__header -->
 
 
 
                 
-                <main class="page__content" role="main">
+                <main class="qe-page__content" role="main">
                     
                     <div>
                         
@@ -411,7 +411,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><div class="section" id="estimation-of-spectra">
-<h1><a class="toc-backref" href="#id6"><span class="section-number">28. </span>Estimation of <span class="target" id="index-0"></span>Spectra</a><a class="headerlink" href="#estimation-of-spectra" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id6"><span class="section-number">29. </span>Estimation of <span class="target" id="index-0"></span>Spectra</a><a class="headerlink" href="#estimation-of-spectra" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <span id="index-1"></span><p class="topic-title">Contents</p>
 <ul class="simple">
@@ -434,34 +434,34 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already up-to-date: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.2)
 Requirement already satisfied, skipping upgrade: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.5.2)
-Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
 Requirement already satisfied, skipping upgrade: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.19.2)
-Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+Requirement already satisfied, skipping upgrade: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.51.2)
 Requirement already satisfied, skipping upgrade: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.24.0)
+Requirement already satisfied, skipping upgrade: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.6.2)
+Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
+Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (50.3.1.post20201107)
-Requirement already satisfied, skipping upgrade: llvmlite&lt;0.35,&gt;=0.34.0.dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.34.0)
-Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
 Requirement already satisfied, skipping upgrade: idna&lt;3,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.10)
-Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.25.11)
-Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
 Requirement already satisfied, skipping upgrade: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2020.6.20)
+Requirement already satisfied, skipping upgrade: chardet&lt;4,&gt;=3.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.0.4)
+Requirement already satisfied, skipping upgrade: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.1.0)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="overview">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">28.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id7"><span class="section-number">29.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>In a <a class="reference internal" href="arma.html#arma"><span class="std std-ref">previous lecture</span></a>, we covered some fundamental properties of covariance stationary linear stochastic processes.</p>
 <p>One objective for that lecture was to introduce spectral densities — a standard and very useful technique for analyzing such processes.</p>
 <p>In this lecture, we turn to the problem of estimating spectral densities and other related quantities from data.</p>
 <p id="index-2">Estimates of the spectral density are computed using what is known as a periodogram — which in
 turn is computed via the famous <a class="reference external" href="https://en.wikipedia.org/wiki/Fast_Fourier_transform">fast Fourier transform</a>.</p>
 <p>Once the basic technique has been explained, we will apply it to the analysis of several key macroeconomic time series.</p>
-<p>For supplementary reading, see <span id="id1">[<a class="reference internal" href="zreferences.html#id184">Sar87</a>]</span> or <span id="id2">[<a class="reference internal" href="zreferences.html#id130">CC08</a>]</span>.</p>
+<p>For supplementary reading, see <span id="id1">[<a class="reference internal" href="zreferences.html#id193">Sar87</a>]</span> or <span id="id2">[<a class="reference internal" href="zreferences.html#id139">CC08</a>]</span>.</p>
 <p>Let’s start with some standard imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -475,7 +475,7 @@ turn is computed via the famous <a class="reference external" href="https://en.w
 </div>
 </div>
 <div class="section" id="periodograms">
-<span id="id3"></span><h2><a class="toc-backref" href="#id8"><span class="section-number">28.2. </span><span class="target" id="index-3"></span>Periodograms</a><a class="headerlink" href="#periodograms" title="Permalink to this headline">¶</a></h2>
+<span id="id3"></span><h2><a class="toc-backref" href="#id8"><span class="section-number">29.2. </span><span class="target" id="index-3"></span>Periodograms</a><a class="headerlink" href="#periodograms" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference internal" href="arma.html#arma-specd"><span class="std std-ref">Recall that</span></a> the spectral density <span class="math notranslate nohighlight">\(f\)</span> of a covariance stationary process with
 autocorrelation function <span class="math notranslate nohighlight">\(\gamma\)</span> can be written</p>
 <div class="math notranslate nohighlight">
@@ -487,7 +487,7 @@ f(\omega) = \gamma(0) + 2 \sum_{k \geq 1} \gamma(k) \cos(\omega k),
 <p>In particular, let <span class="math notranslate nohighlight">\(X_0, \ldots, X_{n-1}\)</span> be <span class="math notranslate nohighlight">\(n\)</span> consecutive observations of a single time series that is assumed to be covariance stationary.</p>
 <p>The most common estimator of the spectral density of this process is the <em>periodogram</em> of <span class="math notranslate nohighlight">\(X_0, \ldots, X_{n-1}\)</span>, which is defined as</p>
 <div class="math notranslate nohighlight" id="equation-estspec-p">
-<span class="eqno">(28.1)<a class="headerlink" href="#equation-estspec-p" title="Permalink to this equation">¶</a></span>\[I(\omega)
+<span class="eqno">(29.1)<a class="headerlink" href="#equation-estspec-p" title="Permalink to this equation">¶</a></span>\[I(\omega)
 := \frac{1}{n} \left| \sum_{t=0}^{n-1} X_t e^{i t \omega} \right|^2,
 \qquad \omega \in \mathbb R\]</div>
 <p>(Recall that <span class="math notranslate nohighlight">\(|z|\)</span> denotes the modulus of complex number <span class="math notranslate nohighlight">\(z\)</span>)</p>
@@ -509,7 +509,7 @@ I(\omega)
 <span class="math notranslate nohighlight">\(\mathbb R\)</span>.</p>
 <p>The next section helps to explain the connection between the periodogram and the spectral density.</p>
 <div class="section" id="interpretation">
-<h3><span class="section-number">28.2.1. </span>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">29.2.1. </span>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this headline">¶</a></h3>
 <p id="index-4">To interpret the periodogram, it is convenient to focus on its values at the <em>Fourier frequencies</em></p>
 <div class="math notranslate nohighlight">
 \[
@@ -558,8 +558,8 @@ I(\omega_j) = \hat \gamma(0) +
 we see that <span class="math notranslate nohighlight">\(I(\omega_j)\)</span> is just a sample analog of <span class="math notranslate nohighlight">\(f(\omega_j)\)</span>.</p>
 </div>
 <div class="section" id="calculation">
-<h3><span class="section-number">28.2.2. </span>Calculation<a class="headerlink" href="#calculation" title="Permalink to this headline">¶</a></h3>
-<p id="index-5">Let’s now consider how to compute the periodogram as defined in <a class="reference internal" href="#equation-estspec-p">(28.1)</a>.</p>
+<h3><span class="section-number">29.2.2. </span>Calculation<a class="headerlink" href="#calculation" title="Permalink to this headline">¶</a></h3>
+<p id="index-5">Let’s now consider how to compute the periodogram as defined in <a class="reference internal" href="#equation-estspec-p">(29.1)</a>.</p>
 <p>There are already functions available that will do this for us
 — an example is <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa.stattools.periodogram</span></code> in the <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> package.</p>
 <p>However, it is very simple to replicate their results, and this will give us a platform to make useful extensions.</p>
@@ -585,7 +585,7 @@ A_j := \sum_{t=0}^{n-1} a_t \exp \left\{ i 2 \pi \frac{tj}{n} \right\},
 <p>Let’s generate some data for this function using the <code class="docutils literal notranslate"><span class="pre">ARMA</span></code> class from <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py">QuantEcon.py</a> (see the <a class="reference internal" href="arma.html#arma"><span class="std std-ref">lecture on linear processes</span></a> for more details).</p>
 <p>Here’s a code snippet that, once the preceding code has been run, generates data from the process</p>
 <div class="math notranslate nohighlight" id="equation-esp-arma">
-<span class="eqno">(28.2)<a class="headerlink" href="#equation-esp-arma" title="Permalink to this equation">¶</a></span>\[X_t = 0.5 X_{t-1} + \epsilon_t - 0.8 \epsilon_{t-2}\]</div>
+<span class="eqno">(29.2)<a class="headerlink" href="#equation-esp-arma" title="Permalink to this equation">¶</a></span>\[X_t = 0.5 X_{t-1} + \epsilon_t - 0.8 \epsilon_{t-2}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{ \epsilon_t \}\)</span> is white noise with unit variance, and compares the periodogram to the actual spectral density</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -623,7 +623,7 @@ perhaps it’s not surprising that the estimate is poor.</p>
 </div>
 </div>
 <div class="section" id="smoothing">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">28.3. </span><span class="target" id="index-6"></span>Smoothing</a><a class="headerlink" href="#smoothing" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9"><span class="section-number">29.3. </span><span class="target" id="index-6"></span>Smoothing</a><a class="headerlink" href="#smoothing" title="Permalink to this headline">¶</a></h2>
 <p id="index-7">There are two related issues here.</p>
 <p>One is that, given the way the fast Fourier transform is implemented, the
 number of points <span class="math notranslate nohighlight">\(\omega\)</span> at which <span class="math notranslate nohighlight">\(I(\omega)\)</span> is estimated
@@ -641,13 +641,13 @@ I(\omega_{j-p}), I(\omega_{j-p+1}), \ldots, I(\omega_j), \ldots, I(\omega_{j+p})
 \]</div>
 <p>This weighted average can be written as</p>
 <div class="math notranslate nohighlight" id="equation-estspec-ws">
-<span class="eqno">(28.3)<a class="headerlink" href="#equation-estspec-ws" title="Permalink to this equation">¶</a></span>\[I_S(\omega_j) := \sum_{\ell = -p}^{p} w(\ell) I(\omega_{j+\ell})\]</div>
+<span class="eqno">(29.3)<a class="headerlink" href="#equation-estspec-ws" title="Permalink to this equation">¶</a></span>\[I_S(\omega_j) := \sum_{\ell = -p}^{p} w(\ell) I(\omega_{j+\ell})\]</div>
 <p>where the weights <span class="math notranslate nohighlight">\(w(-p), \ldots, w(p)\)</span> are a sequence of <span class="math notranslate nohighlight">\(2p + 1\)</span> nonnegative
 values summing to one.</p>
 <p>In general, larger values of <span class="math notranslate nohighlight">\(p\)</span> indicate more smoothing — more on
 this below.</p>
 <p>The next figure shows the kind of sequence typically used.</p>
-<p>Note the smaller weights towards the edges and larger weights in the center, so that more distant values from <span class="math notranslate nohighlight">\(I(\omega_j)\)</span> have less weight than closer ones in the sum <a class="reference internal" href="#equation-estspec-ws">(28.3)</a>.</p>
+<p>Note the smaller weights towards the edges and larger weights in the center, so that more distant values from <span class="math notranslate nohighlight">\(I(\omega_j)\)</span> have less weight than closer ones in the sum <a class="reference internal" href="#equation-estspec-ws">(29.3)</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hanning_window</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
@@ -670,7 +670,7 @@ this below.</p>
 </div>
 </div>
 <div class="section" id="estimation-with-smoothing">
-<h3><span class="section-number">28.3.1. </span>Estimation with Smoothing<a class="headerlink" href="#estimation-with-smoothing" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">29.3.1. </span>Estimation with Smoothing<a class="headerlink" href="#estimation-with-smoothing" title="Permalink to this headline">¶</a></h3>
 <p id="index-9">Our next step is to provide code that will not only estimate the periodogram but also provide smoothing as required.</p>
 <p>Such functions have been written in  <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/estspec.py">estspec.py</a> and are available once you’ve installed <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a>.</p>
 <p>The <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/estspec.py">GitHub listing</a> displays three functions,  <code class="docutils literal notranslate"><span class="pre">smooth()</span></code>, <code class="docutils literal notranslate"><span class="pre">periodogram()</span></code>, <code class="docutils literal notranslate"><span class="pre">ar_periodogram()</span></code>. We will discuss the first two here and the third one <a class="reference internal" href="#ar-periodograms"><span class="std std-ref">below</span></a>.</p>
@@ -678,7 +678,7 @@ this below.</p>
 <p>Regarding the <code class="docutils literal notranslate"><span class="pre">smooth()</span></code> function, since smoothing adds a nontrivial amount of computation, we have applied a fairly terse array-centric method based around <code class="docutils literal notranslate"><span class="pre">np.convolve</span></code>.</p>
 <p>Readers are left either to  explore or simply to use this code according to their interests.</p>
 <p>The next three figures each show smoothed and unsmoothed periodograms, as well as the population or “true” spectral density.</p>
-<p>(The model is the same as before — see equation <a class="reference internal" href="#equation-esp-arma">(28.2)</a> — and there are 400 observations)</p>
+<p>(The model is the same as before — see equation <a class="reference internal" href="#equation-esp-arma">(29.2)</a> — and there are 400 observations)</p>
 <p>From the top figure to bottom, the window length is varied from small to large.</p>
 <div class="figure align-default" id="fig-window-smoothing">
 <img alt="_images/window_smoothing.png" src="_images/window_smoothing.png" />
@@ -692,7 +692,7 @@ and the choice of appropriate smoothing will have to be made based on
 judgement/priors or some other theory.</p>
 </div>
 <div class="section" id="pre-filtering-and-smoothing">
-<span id="estspec-pfas"></span><h3><span class="section-number">28.3.2. </span>Pre-Filtering and Smoothing<a class="headerlink" href="#pre-filtering-and-smoothing" title="Permalink to this headline">¶</a></h3>
+<span id="estspec-pfas"></span><h3><span class="section-number">29.3.2. </span>Pre-Filtering and Smoothing<a class="headerlink" href="#pre-filtering-and-smoothing" title="Permalink to this headline">¶</a></h3>
 <span class="target" id="index-10"></span><p id="index-11">In the <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/estspec.py">code listing</a>, we showed three functions from the file <code class="docutils literal notranslate"><span class="pre">estspec.py</span></code>.</p>
 <p>The third function in the file (<code class="docutils literal notranslate"><span class="pre">ar_periodogram()</span></code>) adds a pre-processing step to periodogram smoothing.</p>
 <p>First, we describe the basic idea, and after that we give the code.</p>
@@ -708,7 +708,7 @@ estimates the spectral density of the original process.</p></li>
 transformation is usually designed to turn the data into something closer to white noise.</p>
 <p>Why would this be desirable in terms of spectral density estimation?</p>
 <p>The reason is that we are smoothing our estimated periodogram based on
-estimated values at nearby points — recall <a class="reference internal" href="#equation-estspec-ws">(28.3)</a>.</p>
+estimated values at nearby points — recall <a class="reference internal" href="#equation-estspec-ws">(29.3)</a>.</p>
 <p>The underlying assumption that makes this a good idea is that the true
 spectral density is relatively regular — the value of <span class="math notranslate nohighlight">\(I(\omega)\)</span> is close
 to that of <span class="math notranslate nohighlight">\(I(\omega')\)</span> when <span class="math notranslate nohighlight">\(\omega\)</span> is close to <span class="math notranslate nohighlight">\(\omega'\)</span>.</p>
@@ -719,14 +719,14 @@ provided the maximum possible amount of information about the value <span class=
 <p>Another way to put this is that if <span class="math notranslate nohighlight">\(I\)</span> is relatively constant, then we can use a large amount of smoothing without introducing too much bias.</p>
 </div>
 <div class="section" id="the-ar-1-setting">
-<span id="ar-periodograms"></span><h3><span class="section-number">28.3.3. </span>The AR(1) Setting<a class="headerlink" href="#the-ar-1-setting" title="Permalink to this headline">¶</a></h3>
+<span id="ar-periodograms"></span><h3><span class="section-number">29.3.3. </span>The AR(1) Setting<a class="headerlink" href="#the-ar-1-setting" title="Permalink to this headline">¶</a></h3>
 <p id="index-12">Let’s examine this idea more carefully in a particular setting — where
 the data are assumed to be generated by an  AR(1) process.</p>
 <p>(More general ARMA settings can be handled using similar techniques to those described below)</p>
 <p>Suppose in particular that <span class="math notranslate nohighlight">\(\{X_t\}\)</span> is covariance stationary and AR(1),
 with</p>
 <div class="math notranslate nohighlight" id="equation-estspec-ar-dgp">
-<span class="eqno">(28.4)<a class="headerlink" href="#equation-estspec-ar-dgp" title="Permalink to this equation">¶</a></span>\[X_{t+1} = \mu + \phi X_t + \epsilon_{t+1}\]</div>
+<span class="eqno">(29.4)<a class="headerlink" href="#equation-estspec-ar-dgp" title="Permalink to this equation">¶</a></span>\[X_{t+1} = \mu + \phi X_t + \epsilon_{t+1}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\phi \in (-1, 1)\)</span> are unknown parameters and <span class="math notranslate nohighlight">\(\{ \epsilon_t \}\)</span> is white noise.</p>
 <p>It follows that if we regress <span class="math notranslate nohighlight">\(X_{t+1}\)</span> on <span class="math notranslate nohighlight">\(X_t\)</span> and an intercept, the residuals
 will approximate white noise.</p>
@@ -738,7 +738,7 @@ will approximate white noise.</p>
 </ul>
 <p>In view of <a class="reference internal" href="arma.html#arma-spec-den"><span class="std std-ref">an earlier result</span></a> we obtained while discussing ARMA processes, <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are related by</p>
 <div class="math notranslate nohighlight" id="equation-ar-sdsc">
-<span class="eqno">(28.5)<a class="headerlink" href="#equation-ar-sdsc" title="Permalink to this equation">¶</a></span>\[f(\omega) = \left| \frac{1}{1 - \phi e^{i\omega}} \right|^2 g(\omega)\]</div>
+<span class="eqno">(29.5)<a class="headerlink" href="#equation-ar-sdsc" title="Permalink to this equation">¶</a></span>\[f(\omega) = \left| \frac{1}{1 - \phi e^{i\omega}} \right|^2 g(\omega)\]</div>
 <p>This suggests that the recoloring step, which constructs an estimate <span class="math notranslate nohighlight">\(I\)</span> of <span class="math notranslate nohighlight">\(f\)</span> from <span class="math notranslate nohighlight">\(I_0\)</span>, should set</p>
 <div class="math notranslate nohighlight">
 \[
@@ -751,7 +751,7 @@ I(\omega) = \left| \frac{1}{1 - \hat \phi e^{i\omega}} \right|^2 I_0(\omega)
 <li><p>“standard smoothed periodogram”, the ordinary smoothed periodogram, and</p></li>
 <li><p>“AR smoothed periodogram”, the pre-whitened and recolored one generated by <code class="docutils literal notranslate"><span class="pre">ar_periodogram()</span></code></p></li>
 </ol>
-<p>The periodograms are calculated from time series drawn from <a class="reference internal" href="#equation-estspec-ar-dgp">(28.4)</a> with <span class="math notranslate nohighlight">\(\mu = 0\)</span> and <span class="math notranslate nohighlight">\(\phi = -0.9\)</span>.</p>
+<p>The periodograms are calculated from time series drawn from <a class="reference internal" href="#equation-estspec-ar-dgp">(29.4)</a> with <span class="math notranslate nohighlight">\(\mu = 0\)</span> and <span class="math notranslate nohighlight">\(\phi = -0.9\)</span>.</p>
 <p>Each time series is of length 150.</p>
 <p>The difference between the three subfigures is just randomness — each one uses a different draw of the time series.</p>
 <div class="figure align-default" id="fig-ar-smoothed-periodogram">
@@ -763,25 +763,25 @@ of being closer to the true spectral density.</p>
 </div>
 </div>
 <div class="section" id="exercises">
-<h2><a class="toc-backref" href="#id10"><span class="section-number">28.4. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10"><span class="section-number">29.4. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="exercise-1">
-<span id="estspec-ex1"></span><h3><span class="section-number">28.4.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
+<span id="estspec-ex1"></span><h3><span class="section-number">29.4.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
 <p>Replicate <a class="reference internal" href="#fig-window-smoothing"><span class="std std-ref">this figure</span></a> (modulo randomness).</p>
-<p>The model is as in equation <a class="reference internal" href="#equation-esp-arma">(28.2)</a> and there are 400 observations.</p>
+<p>The model is as in equation <a class="reference internal" href="#equation-esp-arma">(29.2)</a> and there are 400 observations.</p>
 <p>For the smoothed periodogram, the window type is “hamming”.</p>
 </div>
 <div class="section" id="exercise-2">
-<span id="estspec-ex2"></span><h3><span class="section-number">28.4.2. </span>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h3>
+<span id="estspec-ex2"></span><h3><span class="section-number">29.4.2. </span>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h3>
 <p>Replicate <a class="reference internal" href="#fig-ar-smoothed-periodogram"><span class="std std-ref">this figure</span></a> (modulo randomness).</p>
-<p>The model is as in equation <a class="reference internal" href="#equation-estspec-ar-dgp">(28.4)</a>, with <span class="math notranslate nohighlight">\(\mu = 0\)</span>, <span class="math notranslate nohighlight">\(\phi = -0.9\)</span>
+<p>The model is as in equation <a class="reference internal" href="#equation-estspec-ar-dgp">(29.4)</a>, with <span class="math notranslate nohighlight">\(\mu = 0\)</span>, <span class="math notranslate nohighlight">\(\phi = -0.9\)</span>
 and 150 observations in each time series.</p>
 <p>All periodograms are fit with the “hamming” window and window length of 65.</p>
 </div>
 </div>
 <div class="section" id="solutions">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">28.5. </span>Solutions</a><a class="headerlink" href="#solutions" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id11"><span class="section-number">29.5. </span>Solutions</a><a class="headerlink" href="#solutions" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="id4">
-<h3><span class="section-number">28.5.1. </span>Exercise 1<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">29.5.1. </span>Exercise 1<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Data</span>
@@ -824,7 +824,7 @@ and 150 observations in each time series.</p>
 </div>
 </div>
 <div class="section" id="id5">
-<h3><span class="section-number">28.5.2. </span>Exercise 2<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">29.5.2. </span>Exercise 2<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lp</span> <span class="o">=</span> <span class="n">ARMA</span><span class="p">(</span><span class="o">-</span><span class="mf">0.9</span><span class="p">)</span>
@@ -896,7 +896,7 @@ and 150 observations in each time series.</p>
                 
 
 
-                <footer class="page__footer">
+                <footer class="qe-page__footer">
 
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
@@ -909,16 +909,16 @@ and 150 observations in each time series.</p>
             
 
             
-            <div class="sidebar bd-sidebar inactive" id="site-navigation">
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
 
-                <div class="sidebar__header">
+                <div class="qe-sidebar__header">
 
 
                     Contents
 
                 </div>
 
-                <nav class="sidebar__nav" id="sidebar-nav" aria-label="Main navigation">
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
                     <p class="caption">
  <span class="caption-text">
   Tools and Techniques
@@ -968,33 +968,28 @@ and 150 observations in each time series.</p>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="robustness.html">
-   8. Robustness
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   9. Markov Jump Linear Quadratic Dynamic Programming
+   8. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   10. How to Pay for a War: Part 1
+   9. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   11. How to Pay for a War: Part 2
+   10. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   12. How to Pay for a War: Part 3
+   11. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   13. Optimal Taxation in an LQ Economy
+   12. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -1005,23 +1000,18 @@ and 150 observations in each time series.</p>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
-  <a class="reference internal" href="rob_markov_perf.html">
-   14. Robust Markov Perfect Equilibrium
-  </a>
- </li>
- <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   15. Default Risk and Income Fluctuations
+   13. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   16. Globalization and Cycles
+   14. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   17. Coase’s Theory of the Firm
+   15. Coase’s Theory of the Firm
   </a>
  </li>
 </ul>
@@ -1033,42 +1023,64 @@ and 150 observations in each time series.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   18. Recursive Models of Dynamic Linear Economies
+   16. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   19. Growth in Dynamic Linear Economies
+   17. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   20. Lucas Asset Pricing Using DLE
+   18. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   21. IRFs in Hall Models
+   19. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   22. Permanent Income Model using the DLE Class
+   20. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   21. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   22. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   23. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Risk, Model Uncertainty, and Robustness
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="five_preferences.html">
+   24. Risk and Model Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   25. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   26. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1080,7 +1092,7 @@ and 150 observations in each time series.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="von_neumann_model.html">
-   26. Von Neumann Growth Model (and a Generalization)
+   27. Von Neumann Growth Model (and a Generalization)
   </a>
  </li>
 </ul>
@@ -1092,32 +1104,32 @@ and 150 observations in each time series.</p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   27. Covariance Stationary Processes
+   28. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   28. Estimation of Spectra
+   29. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   29. Additive and Multiplicative Functionals
+   30. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   30. Classical Control with Linear Algebra
+   31. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   31. Classical Prediction and Filtering With Linear Algebra
+   32. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   32. Knowing the Forecasts of Others
+   33. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -1129,27 +1141,27 @@ and 150 observations in each time series.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   33. Asset Pricing II: The Lucas Asset Pricing Model
+   34. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   34. Elementary Asset Pricing Theory
+   35. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   35. Two Modifications of Mean-Variance Portfolio Theory
+   36. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   36. Irrelevance of Capital Structure with Complete Markets
+   37. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   37. Equilibrium Capital Structures with Incomplete Markets
+   38. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1161,42 +1173,42 @@ and 150 observations in each time series.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   38. Stackelberg Plans
+   39. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   40. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   40. Optimal Taxation with State-Contingent Debt
+   41. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   41. Optimal Taxation without State-Contingent Debt
+   42. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   42. Fluctuating Interest Rates Deliver Fiscal Insurance
+   43. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   43. Fiscal Risk and Government Debt
+   44. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   44. Competitive Equilibria of a Model of Chang
+   45. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   45. Credible Government Policies in a Model of Chang
+   46. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1208,24 +1220,24 @@ and 150 observations in each time series.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   46. Troubleshooting
+   47. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   47. References
+   48. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   48. Execution Statistics
+   49. Execution Statistics
   </a>
  </li>
 </ul>
 
                 </nav>
 
-                <div class="sidebar__footer">
+                <div class="qe-sidebar__footer">
 
                 </div>
 
@@ -1233,11 +1245,11 @@ and 150 observations in each time series.</p>
             
         </div> <!-- .main -->
 
-        <div class="toolbar">
+        <div class="qe-toolbar">
 
-            <div class="toolbar__inner">
+            <div class="qe-toolbar__inner">
 
-                <ul class="toolbar__main">
+                <ul class="qe-toolbar__main">
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
@@ -1249,12 +1261,12 @@ and 150 observations in each time series.</p>
                     </li> -->
                 </ul>
 
-                <ul class="toolbar__links">
+                <ul class="qe-toolbar__links">
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/estspec.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="_notebooks/estspec.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/estspec.md" download><i data-feather="github"></i></a></li>
