@@ -263,19 +263,19 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.9)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.26.0)
+Requirement already satisfied: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.20.3)
 Requirement already satisfied: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.54.1)
 Requirement already satisfied: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.7.1)
-Requirement already satisfied: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.20.3)
-Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.26.0)
-Requirement already satisfied: llvmlite&lt;0.38,&gt;=0.37.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.37.0)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (58.0.4)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.9)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (58.0.4)
+Requirement already satisfied: llvmlite&lt;0.38,&gt;=0.37.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.37.0)
 Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.10.8)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.2)
 Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.26.7)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.10.8)
 Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
@@ -469,9 +469,9 @@ simulate it</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_13238/1459986415.py:3: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_14355/1459986415.py:3: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
   Af = np.array([[ 1,      0,        0],
-/tmp/ipykernel_13238/1459986415.py:6: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
+/tmp/ipykernel_14355/1459986415.py:6: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
   Cf = np.array([[σ_x,        0],
 </pre></div>
 </div>
@@ -829,50 +829,38 @@ engineer</p>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Classic Linear Models
- </span>
-</p>
-<ul class="nav bd-sidenav nav sidenav_l1">
- <li class="toctree-l1">
-  <a class="reference internal" href="von_neumann_model.html">
-   27. Von Neumann Growth Model (and a Generalization)
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
   Time Series Models
  </span>
 </p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   28. Covariance Stationary Processes
+   27. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   29. Estimation of Spectra
+   28. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   30. Additive and Multiplicative Functionals
+   29. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   31. Classical Control with Linear Algebra
+   30. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   32. Classical Prediction and Filtering With Linear Algebra
+   31. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   33. Knowing the Forecasts of Others
+   32. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -884,27 +872,27 @@ engineer</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   34. Asset Pricing II: The Lucas Asset Pricing Model
+   33. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   35. Elementary Asset Pricing Theory
+   34. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   36. Two Modifications of Mean-Variance Portfolio Theory
+   35. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   37. Irrelevance of Capital Structure with Complete Markets
+   36. Irrelevance of Capital Structure with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   38. Equilibrium Capital Structures with Incomplete Markets
+   37. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -916,42 +904,42 @@ engineer</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   39. Stackelberg Plans
+   38. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   40. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   39. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   41. Optimal Taxation with State-Contingent Debt
+   40. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   42. Optimal Taxation without State-Contingent Debt
+   41. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   43. Fluctuating Interest Rates Deliver Fiscal Insurance
+   42. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   44. Fiscal Risk and Government Debt
+   43. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   45. Competitive Equilibria of a Model of Chang
+   44. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   46. Credible Government Policies in a Model of Chang
+   45. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -963,17 +951,17 @@ engineer</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   47. Troubleshooting
+   46. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   48. References
+   47. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   49. Execution Statistics
+   48. Execution Statistics
   </a>
  </li>
 </ul>
