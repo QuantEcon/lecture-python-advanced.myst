@@ -190,9 +190,7 @@ Firm 1 seeks a maximum with respect to
 $\{q_{1t+1}, v_{1t} \}_{t=0}^\infty$ and a minimum with respect to
 $\{ \lambda_t\}_{t=0}^\infty$.
 
-We approach this problem using methods described in Ljungqvist and
-Sargent RMT5 chapter 2, appendix A and Macroeconomic Theory, 2nd
-edition, chapter IX.
+We approach this problem using methods described in {cite}`Ljungqvist2012`, chapter 2, appendix A and {cite}`Sargent1987`, chapter IX.
 
 First-order conditions for this problem are
 
@@ -237,8 +235,7 @@ It satisfies **two boundary conditions:**
 - a terminal condition requiring that
   $\lim_{T \rightarrow + \infty} \beta^T q_{1t}^2 < + \infty$
 
-Using the lag operators described in chapter IX of *Macroeconomic
-Theory, Second edition (1987)*, difference equation
+Using the lag operators described in {cite}`Sargent1987`, chapter IX, difference equation
 {eq}`sstack1` can be written as
 
 $$
@@ -1370,7 +1367,16 @@ v2_direct_alt = - z[:, 0].T @ lq1.P @ z[:, 0] + lq1.d
 (np.abs(v2_direct - v2_direct_alt) < tol2).all()
 ```
 
-## MPE vs. Stackelberg
+## Comparing Markov Perfect Equilibrium and  Stackelberg Outcome
+
+It is enlightening to compare equilbrium quantities for firms 1 and 2 under two alternative 
+settings:
+  
+  * A Markov perfect equilibrium like that described in [this lecture](https://python.quantecon.org/markov_perf.html)
+  * A Stackelberg equilbrium 
+
+The following code performs the required computations.
+
 
 ```{code-cell} python3
 vt_MPE = np.zeros(n)
