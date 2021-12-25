@@ -256,11 +256,7 @@
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#dynamic-programming-and-time-consistency-of-followers-problem">
-     38.5.2. Dynamic Programming and Time Consistency of
-     <strong>
-      follower’s
-     </strong>
-     Problem
+     38.5.2. Dynamic Programming and Time Consistency of Follower’s Problem
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -400,19 +396,19 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.54.1)
-Requirement already satisfied: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.20.3)
-Requirement already satisfied: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.7.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.20.3)
+Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.9)
 Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.26.0)
+Requirement already satisfied: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.7.1)
+Requirement already satisfied: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.54.1)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (58.0.4)
+Requirement already satisfied: llvmlite&lt;0.38,&gt;=0.37.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.37.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.9)
-Requirement already satisfied: llvmlite&lt;0.38,&gt;=0.37.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.37.0)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (58.0.4)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.10.8)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.10.8)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.26.7)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.2)
 Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.26.7)
 Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
@@ -426,6 +422,7 @@ follower</strong> that depend on continuation sequences of decisions made once
 and for all by the Stackelberg leader at time <span class="math notranslate nohighlight">\(0\)</span>.</p>
 <p>To facilitate computation and interpretation, we formulate things in a
 context that allows us to apply dynamic programming for linear-quadratic models.</p>
+<p>Technically, our calculations are closely related to ones described <a class="reference external" href="https://python.quantecon.org/lagrangian_lqdp.html">this lecture</a>.</p>
 <p>From the beginning, we carry along a linear-quadratic model of duopoly in
 which firms face adjustment costs that make them want to forecast
 actions of other firms that influence future prices.</p>
@@ -1009,7 +1006,7 @@ sequence <span class="math notranslate nohighlight">\(\vec q_2\)</span>, we must
 terms of <span class="math notranslate nohighlight">\(z^t\)</span>.</p>
 </div>
 <div class="section" id="dynamic-programming-and-time-consistency-of-followers-problem">
-<h3><span class="section-number">38.5.2. </span>Dynamic Programming and Time Consistency of <strong>follower’s</strong> Problem<a class="headerlink" href="#dynamic-programming-and-time-consistency-of-followers-problem" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">38.5.2. </span>Dynamic Programming and Time Consistency of Follower’s Problem<a class="headerlink" href="#dynamic-programming-and-time-consistency-of-followers-problem" title="Permalink to this headline">¶</a></h3>
 <p>Given the sequence <span class="math notranslate nohighlight">\(\vec q_2\)</span> chosen by the Stackelberg leader in
 our duopoly model, it turns out that the Stackelberg <strong>follower’s</strong>
 problem is recursive in the <em>natural</em> state variables that confront a

@@ -43,6 +43,8 @@ and for all by the Stackelberg leader at time $0$.
 To facilitate computation and interpretation, we formulate things in a
 context that allows us to apply dynamic programming for linear-quadratic models.
 
+Technically, our calculations are closely related to ones described [this lecture](https://python.quantecon.org/lagrangian_lqdp.html).
+
 From the beginning, we carry along a linear-quadratic model of duopoly in
 which firms face adjustment costs that make them want to forecast
 actions of other firms that influence future prices.
@@ -774,7 +776,7 @@ sequence $\vec q_2$, we must use representation
 $\check z^t$ and **not** a corresponding representation cast in
 terms of $z^t$.
 
-### Dynamic Programming and Time Consistency of **follower's** Problem
+### Dynamic Programming and Time Consistency of Follower's Problem
 
 Given the sequence $\vec q_2$ chosen by the Stackelberg leader in
 our duopoly model, it turns out that the Stackelberg **follower's**
