@@ -18,7 +18,7 @@ kernelspec:
 </div>
 ```
 
-# Irrelevance of Capital Structure with Complete Markets
+# Irrelevance of Capital Structures with Complete Markets
 
 ```{contents} Contents
 :depth: 2
