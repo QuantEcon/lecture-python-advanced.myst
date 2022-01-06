@@ -3,10 +3,8 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.13.4
 kernelspec:
-  display_name: Python 3 (ipykernel)
+  display_name: Python 3
   language: python
   name: python3
 ---
@@ -57,7 +55,7 @@ employed.
 
 The probability
 of finding a job  is $p(a)$ where $p$ is an increasing, strictly concave,
- and twice differentiable function of $a$ that satisfies
+and twice differentiable function of $a$ that satisfies
 $p(a)   \in [0,1]$ for  $a \geq 0$, $p(0)=0$.
 
 The consumption good is nonstorable.
@@ -71,13 +69,13 @@ smoothing over time and across states.
 
 Once a worker has found a job, he is beyond the planner's grasp.
 
- * This is Shavell and Weiss's assumption, but not Hopenhayn and Nicolini's.
- * Hopenhayn and Nicolini allow the unemployment insurance agency to
+* This is Shavell and Weiss's assumption, but not Hopenhayn and Nicolini's.
+* Hopenhayn and Nicolini allow the unemployment insurance agency to
 impose history-dependent taxes on previously unemployed workers. 
- * Since there is no incentive problem after the worker has found
+* Since there is no incentive problem after the worker has found
 a job, it is optimal for the agency to provide an employed worker with
 a constant level of consumption.
- * Hence, Hopenhayn and Nicolini's insurance agency imposes
+* Hence, Hopenhayn and Nicolini's insurance agency imposes
 a permanent per-period history-dependent tax on a previously
 unemployed but presently employed worker.
 
@@ -98,9 +96,9 @@ be $u(c)-a = u(w)$ forever.
 
 Therefore,
 
-$$  V^e = {u(w) \over (1-\beta)}  . 
+$$  
+V^e = {u(w) \over (1-\beta)}  . 
 $$ (eq:hugo2)
-% \EQN hugo2
 
 Now let $V^u$ be the expected discounted present value of utility for an
 unemployed worker who chooses  consumption, effort  pair $(c,a)$
@@ -112,14 +110,12 @@ $$
 V^u = \max_{a \geq 0} \biggl\{ u(0) - a + \beta \left[
    p(a) V^e + (1-p(a)) V^u \right] \biggr\} .  
 $$ (eq:hugo3)
-%EQN hugo3
    
 The first-order condition for a maximum is
 
 $$ 
 \beta p'(a) \left[V^e - V^u \right] \leq 1 , 
 $$ (eq:hugo4)
-%\EQN hugo4 
 
 with equality if $a>0$. 
 
@@ -134,18 +130,18 @@ Equations {eq}`eq:hugo3`
 form the basis for
 an iterative algorithm for computing $V^u = V_{\rm aut}$. 
 
- * Let $V^u_j$ be
+* Let $V^u_j$ be
 the estimate of $V_{\rm aut}$ at the $j$th iteration.   
 
- * Use this value
+* Use this value
 in equation {eq}`eq:hugo4`  and solve
 for an estimate of effort  $a_j$. 
 
- * Use this value in a version of equation
+* Use this value in a version of equation
 {eq}`eq:hugo3` with $V^u_j$ on the right side
 to compute $V^u_{j+1}$.  
 
- * Iterate to convergence.
+* Iterate to convergence.
 
 ### Unemployment Insurance with Full Information
 
@@ -194,7 +190,7 @@ $$ (eq:hugo5)
 where  minimization is subject to the promise-keeping constraint
 
 $$
- V \leq u(c) - a + \beta
+V \leq u(c) - a + \beta
 \left\{ p(a) V^e + [1-p(a)] V^u \right\}.
 $$ (eq:hugo6)
 
@@ -220,11 +216,11 @@ conditions with
 respect to $c, a$, and $V^u$, respectively, are
 
 $$
-\begin{align} \theta & = {1 \over u'(c)}\,,   \cr
+\begin{aligned} \theta & = {1 \over u'(c)}\,,   \cr
              C(V^u) & = \theta \left[ {1 \over \beta p'(a)} -
                            (V^e - V^u) \right]\,,    \cr
              C'(V^u) & = \theta\,.   
-\end{align}
+\end{aligned}
 $$ (eq:hugo7)
 
 The envelope condition   $C'(V) = \theta$ and the third equation
@@ -247,11 +243,9 @@ implies that $c$ and $a$ are held constant during the unemployment
 spell. 
 
 Thus, the unemployed worker's consumption $c$ and search effort $a$ are both fully smoothed
- during the unemployment
-spell.
+during the unemployment spell.
 
-But
-the worker's consumption is not  smoothed across states of
+But the worker's consumption is not  smoothed across states of
 employment and unemployment unless $V=V^e$.
 
 ### The incentive problem
@@ -324,7 +318,7 @@ observe or enforce $a$, though it can observe and control $c$.
 The worker is free to choose $a$, which puts expression {eq}`eq:hugo4`, the worker's first-order condition under autarky,
 back in the picture.
 
- * We are assuming that the worker's
+* We are assuming that the worker's
 best response to the unemployment insurance arrangement is
 completely characterized by the first-order condition {eq}`eq:hugo4`,
 an instance of the so-called first-order approach to incentive problems.
@@ -363,12 +357,12 @@ At an interior solution,  first-order conditions with
 respect to $c, a$, and $V^u$, respectively, are
 
 $$
-\begin{align} \theta & = {1 \over u'(c)}\,,   \cr
+\begin{aligned} \theta & = {1 \over u'(c)}\,,   \cr
  C(V^u)  & = \theta \left[ {1 \over \beta p'(a)} - (V^e - V^u) \right]
             \,-\, \eta {p''(a) \over p'(a)} (V^e - V^u)                  \cr
          & = \,- \eta {p''(a) \over p'(a)} (V^e - V^u) \,,   \cr
  C'(V^u) & = \theta \,-\, \eta {p'(a) \over 1-p(a)}\, ,  
-\end{align} 
+\end{aligned} 
 $$ (eq:hugo8)
 
 where the second equality in the second equation in {eq}`eq:hugo8`  follows from strict equality
@@ -432,7 +426,7 @@ To compute the upper bound,
 represent condition {eq}`eq:hugo4` as
 
 $$
- V^u \geq V^e  - [\beta  p'(a)]^{-1},
+V^u \geq V^e  - [\beta  p'(a)]^{-1},
 $$
 
 with equality if $ a > 0$.
@@ -655,7 +649,7 @@ In contrast, we will use cubic splines to interpolate across a pre-set grid of p
 Our strategy involves finding a function $C(V)$ -- the expected cost of giving the worker value $V$ -- that satisfies the Bellman equation:
   
 $$
-    C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
+C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 $$ (eq:yad3)
 
 To solve this model, notice that in equations {eq}`eq:hugo21` and {eq}`eq:hugo22`, we have analytical solutions of $c$ and $a$ in terms of (at most) promised value $V$ and $V^u$ (and other parameters). 
@@ -885,10 +879,10 @@ early in an unemployment spell.
 There is a **carrot-and-stick**
 aspect to the replacement rate and search effort  schedules:
 
- * the **carrot** occurs in the forms of high compensation and low search
+* the **carrot** occurs in the forms of high compensation and low search
 effort early in an unemployment spell.  
 
- * the **stick** occurs in the low compensation and high effort  later in
+* the **stick** occurs in the low compensation and high effort  later in
 the spell.   
 
 We shall encounter a related  carrot-and-stick feature in our other lectures about dynamic programming squared.
