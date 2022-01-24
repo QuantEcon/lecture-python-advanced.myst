@@ -549,7 +549,7 @@ For now, we note that by creating the matrix $W$ for large
 $N$ and factoring it into the $LU$ form, good approximations
 to $c(L)$ and $c(\beta L^{-1})^{-1}$ can be obtained.
 
-## The Infinite Horizon Limit
+## Infinite Horizon Limit
 
 For the infinite horizon problem, we propose to discover first-order
 necessary conditions by taking the limits of {eq}`onefour` and {eq}`onefive` as
