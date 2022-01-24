@@ -143,7 +143,7 @@ to compute $V^u_{j+1}$.
 
 * Iterate to convergence.
 
-### Unemployment Insurance with Full Information
+### Full Information
 
 Another benchmark model helps set the stage for the model with private information that we ultimately want to study.
 
@@ -248,7 +248,7 @@ during the unemployment spell.
 But the worker's consumption is not  smoothed across states of
 employment and unemployment unless $V=V^e$.
 
-### The incentive problem
+### Incentive Problem
 
 The preceding efficient insurance scheme requires that the insurance agency
 control both $c$ and $a$. 
@@ -309,7 +309,7 @@ The efficient contract
 relies on  the agency's ability to control *both* the unemployed
 worker's consumption *and* his search effort.
 
-## Unemployment Insurance with Private Information
+## Private Information
 
 Following Shavell and Weiss (1979) {cite}`Shavell_Weiss_79` and
 Hopenhayn and Nicolini (1997) {cite}`Hopenhayn_Nicolini_97`, now assume that  the unemployment insurance agency cannot

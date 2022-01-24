@@ -212,13 +212,13 @@ When $\gamma >0$, it is true that
  
  * when consumption growth is **low**, $m$ is **high**
  
-According the representation {eq}`eq:ERbetarep`, an asset with an $R^i$ that can be expected to be high when consumption growth is low  has $\beta_i$ positive and a low expected return.  
+According to representation {eq}`eq:ERbetarep`, an asset with an $R^i$ that can be expected to be high when consumption growth is low  has $\beta_i$ positive and a low expected return.  
 
-   * because it has a high gross return when consumption growth is low, it is a good hedge against consumption risk, which justifies its low average return
+   * because it has a high gross return when consumption growth is low, it is a good hedge against consumption risk. That justifies its low average return
 
 An asset with an $R^i$ that is low when consumption growth is low has $\beta_i$ negative and a high expected return.
 
-  * because it has a low gross return when consumption growth is low, it is a poor hedge against consumption risk, which justifies its high average return
+  * because it has a low gross return when consumption growth is low, it is a poor hedge against consumption risk. That  justifies its high average return
 
 
  

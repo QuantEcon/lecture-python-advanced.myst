@@ -37,7 +37,7 @@ tags: [hide-output]
 
 This lecture studies two consumers who have exactly the same
 nonfinancial income process and who both conform to the linear-quadratic
-permanent income of consumption smoothing model described in the
+permanent income of consumption smoothing model described in this
 [quantecon lecture](https://python-intro.quantecon.org/perm_income_cons.html).
 
 The two consumers  have different information about
@@ -87,7 +87,7 @@ We compare behaviors of our two consumers as a way to learn about
 This lecture can be regarded as an introduction to some of the **invertibility** issues that take center stage in
 the analysis of **fiscal foresight** by Eric Leeper, Todd Walker, and Susan Yang {cite}`Leeper_Walker_Yang`.
 
-## Two Representations of the **Same** Nonfinancial Income Process
+## Two Representations of  One Nonfinancial Income Process
 
 Where $\beta \in (0,1)$, we study consequences of endowing a
 consumer with one of the two alternative representations for the change
@@ -201,7 +201,7 @@ $$
 \sigma_a^2 = \sigma_\epsilon^2 + [ 1 + (\beta - \beta^{-1})^2 \sum_{j=0}^\infty \beta^{2j} ] = \beta^{-1} \sigma_\epsilon^2 .
 $$
 
-### Application of Kalman filter
+## Application of Kalman filter
 
 We can also obtain representation {eq}`eqn_2` from representation {eq}`eqn_1` by using
 the **Kalman filter**.
@@ -240,7 +240,7 @@ and $\Sigma = (1-\beta^2) \sigma_\epsilon^2$.
 We can also obtain these formulas via the classical filtering theory
 described in {doc}`this lecture <classical_filtering>`.
 
-### News Shocks and Less Informative Shocks
+## News Shocks and Less Informative Shocks
 
 Representation {eq}`eqn_1` is cast in terms of a **news shock**
 $\epsilon_{t+1}$ that represents a shock to nonfinancial income
@@ -333,7 +333,7 @@ for representation {eq}`eqn_2` is
 $d_a(\beta) = \frac{1 -\beta^2}{1 -\beta } = (1 + \beta)$, another
 fact that will be important below.
 
-### Representation of $\epsilon_t$ in Terms of Future $y$’s
+## Representation of $\epsilon_t$ Shock in Terms of Future $y_t$
 
 Notice that reprentation {eq}`eqn_1`, namely, $y_{t+1} - y_t = -\beta^{-1} \epsilon_t + \epsilon_{t+1}$
 implies the linear difference equation
@@ -360,7 +360,7 @@ $$
 Thus, $\epsilon_t$ contains **exact** information about an
 important linear combination of **future** nonfinancial income.
 
-### Representation in Terms of $a_t$ Shocks
+## Representation in Terms of $a_t$ Shocks
 
 Next notice that representation {eq}`eqn_2`, namely, $y_{t+1} - y_t = -
 \beta a_t + a_{t+1}$ implies the linear difference
@@ -384,7 +384,7 @@ $$
 E [ y_{t+1} | y^t ] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}
 $$
 
-### Permanent Income Consumption-Smoothing Model
+## Permanent Income Consumption-Smoothing Model
 
 When we computed optimal consumption-saving policies for the two
 representations using formulas obtained with the difference equation
@@ -468,7 +468,7 @@ Equation Approach” in the [quantecon  lecture](https://python-intro.quantecon.
 
 All the code that we shall use below is presented in that lecture.
 
-### Computations
+## Computations
 
 We shall use Python to form **both** of the above two state-space
 representations, using the following parameter values
@@ -792,7 +792,7 @@ plt.title("innovations representation")
 plt.legend()
 ```
 
-### Simulating the Income Process and Two Associated Shock Processes
+## Simulating  Income Process and Two Associated Shock Processes
 
 We now describe how we form a **single** $\{y_t\}_{t=0}^T$ realization
 that we will use to simulate the two different decision rules associated
@@ -828,7 +828,7 @@ The above steps implement the experiment of comparing decisions made by
 two consumers having **identical** incomes at each date but at each date
 having **different** information about their future incomes.
 
-### Calculating Innovations in Another Way
+## Calculating Innovations in Another Way
 
 Here we use formula {eq}`eqn_3` above to compute $a_{t+1}$ as a function
 of the history
@@ -850,7 +850,7 @@ $$
 We can verify that we recover the same $\{a_t\}$ sequence
 computed earlier.
 
-### Another Invertibility Issue
+## Another Invertibility Issue
 
 This {doc}`quantecon lecture <hs_invertibility_example>` contains another example of a shock-invertibility issue that is endemic
 to the LQ permanent income or consumption smoothing model.

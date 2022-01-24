@@ -124,7 +124,7 @@ In choosing $\vec q_2$, firm 2 takes into account that firm 1 will
 base its choice of $\vec q_1$ on firm 2's choice of
 $\vec q_2$.
 
-### Abstract Statement of the Leader's and Follower's Problems
+### Statement of  Leader's and Follower's Problems
 
 We can express firm 1's problem as
 
@@ -320,7 +320,7 @@ recursively.
 We'll put our little duopoly model into a broader class of models with
 the same conceptual structure.
 
-## The Stackelberg Problem
+## Stackelberg Problem
 
 We formulate a class of linear-quadratic Stackelberg leader-follower
 problems of which our duopoly model is an instance.
@@ -401,7 +401,7 @@ or
 y_{t+1} = A y_t + B u_t
 ```
 
-### Interpretation of the Second Block of Equations
+### Interpretation of  Second Block of Equations
 
 The Stackelberg follower's best response mapping is summarized by the
 second block of equations of {eq}`new3`.
@@ -494,7 +494,7 @@ The value function $w(z_0)$ tells the value of the Stackelberg plan
 as a function of the vector of natural state variables at time $0$,
 $z_0$.
 
-### Two Bellman Equations
+## Two Bellman Equations
 
 We now describe Bellman equations for $v(y)$ and $w(z_0)$.
 
@@ -773,7 +773,7 @@ sequence $\vec q_2$, we must use representation
 $\check z^t$ and **not** a corresponding representation cast in
 terms of $z^t$.
 
-### Dynamic Programming and Time Consistency of Follower's Problem
+## Dynamic Programming and Time Consistency of Follower's Problem
 
 Given the sequence $\vec q_2$ chosen by the Stackelberg leader in
 our duopoly model, it turns out that the Stackelberg **follower's**
@@ -914,7 +914,7 @@ $$
 
 It follows that the follower's plan is time consistent.
 
-## Computing the Stackelberg Plan
+## Computing  Stackelberg Plan
 
 Here is our code to compute a Stackelberg plan via a linear-quadratic
 dynamic program as outlined above
@@ -988,7 +988,7 @@ print("Computed policy for Stackelberg leader\n")
 print(f"F = {F}")
 ```
 
-### Implied Time Series for Price and Quantities
+## Time Series for Price and Quantities
 
 The following code plots the price and quantities
 
@@ -1039,7 +1039,7 @@ v_expanded = -((y0.T @ R @ y0 + ut[:, 0].T @ Q @ ut[:, 0] +
 (v_leader_direct - v_expanded < tol0)[0, 0]
 ```
 
-## Exhibiting Time Inconsistency of Stackelberg Plan
+## Time Inconsistency of Stackelberg Plan
 
 In the code below we compare two values
 
@@ -1086,7 +1086,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Recursive Formulation of the Follower's Problem
+## Recursive Formulation of Follower's Problem
 
 We now formulate and compute the recursive version of the follower's
 problem.

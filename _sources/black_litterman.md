@@ -29,14 +29,22 @@ kernelspec:
 
 ## Overview
 
-### Remarks About Estimating Means and Variances
+This lecture describes extensions to the classical mean-variance portfolio theory summarized in our lecture [Elementary Asset Pricing Theory](https://python-advanced.quantecon.org/asset_pricing_lph.html).
 
-The famous **Black-Litterman** (1992) {cite}`black1992global` portfolio choice model that we
-describe in this lecture is motivated by the finding that with high or
-moderate frequency data, means are more difficult to estimate than
+The classic theory described there assumes that a decision maker completely trusts the statistical model that he posits to govern the joint distribution of returns on a list of available assets.
+
+Both extensions described here put distrust of that statistical model into the mind of the decision maker. 
+
+One is a model of Black and Litterman {cite}`black1992global` that imputes to the decision maker distrust of historically estimated mean returns but still complete trust of estimated covariances of returns. 
+
+The second model also imputes to the decision maker doubts about his  statistical model, but now by saying that, because of that distrust,  the decision maker uses a version of  robust control theory described in this lecture [Robustness](https://python-advanced.quantecon.org/robustness.html).
+
+
+The famous **Black-Litterman** (1992) {cite}`black1992global` portfolio choice model was motivated by the finding that with high frequency or
+moderately high  frequency data, means are more difficult to estimate than
 variances.
 
-A model of **robust portfolio choice** that we'll describe also begins
+A model of **robust portfolio choice** that we'll describe below also begins
 from the same starting point.
 
 To begin, we'll take for granted that means are more difficult to
@@ -56,6 +64,23 @@ Among the ideas in play in this lecture will be
 - A risk-sensitivity operator and its connection to robust control
   theory
 
+
+In summary, we'll describe two ways to  modify the classic
+mean-variance portfolio choice model in ways designed to make its
+recommendations more plausible.
+
+
+Both of the adjustments that we describe are designed to confront a
+widely recognized embarrassment to mean-variance portfolio theory,
+namely, that it usually implies taking very extreme long-short portfolio
+positions.
+
+The two approaches build on a common and widespread hunch --
+that because it is much easier statistically to estimate covariances of
+excess returns than it is to estimate their means, it makes sense to
+adjust investors' subjective beliefs about mean returns in order to render more plausible decisions.
+
+
 Let's start with some imports:
 
 ```{code-cell} ipython
@@ -67,24 +92,9 @@ import matplotlib.pyplot as plt
 from ipywidgets import interact, FloatSlider
 ```
 
-### Adjusting Mean-variance Portfolio Choice Theory for Distrust of Mean Excess Returns
 
-This lecture describes two lines of thought that modify the classic
-mean-variance portfolio choice model in ways designed to make its
-recommendations more plausible.
 
-As we mentioned above, the two approaches build on a common and widespread hunch --
-that because it is much easier statistically to estimate covariances of
-excess returns than it is to estimate their means, it makes sense to
-contemplated the consequences of adjusting investors' subjective beliefs
-about mean returns in order to render more sensible decisions.
-
-Both of the adjustments that we describe are designed to confront a
-widely recognized embarrassment to mean-variance portfolio theory,
-namely, that it usually implies taking very extreme long-short portfolio
-positions.
-
-### Mean-variance Portfolio Choice
+## Mean-Variance Portfolio Choice
 
 A risk-free security earns one-period net return $r_f$.
 
@@ -141,7 +151,7 @@ which implies the following design of a risky portfolio:
 w = (\delta \Sigma)^{-1} \mu
 ```
 
-### Estimating the Mean and Variance
+## Estimating  Mean and Variance
 
 The key inputs into the portfolio choice model {eq}`risky-portfolio` are
 
@@ -154,15 +164,15 @@ squares; that amounts to estimating $\mu$ by a sample mean of
 excess returns and estimating $\Sigma$ by a sample covariance
 matrix.
 
-### The Black-Litterman Starting Point
+## Black-Litterman Starting Point
 
 When estimates of $\mu$ and $\Sigma$ from historical
-sample means and covariances have been combined with **reasonable** values
+sample means and covariances have been combined with **plausible** values
 of the risk-aversion parameter $\delta$ to compute an
 optimal portfolio from formula {eq}`risky-portfolio`, a typical outcome has been
 $w$'s with **extreme long and short positions**.
 
-A common reaction to these outcomes is that they are so unreasonable that a portfolio
+A common reaction to these outcomes is that they are so implausible that a portfolio
 manager cannot recommend them to a customer.
 
 ```{code-cell} python3
@@ -222,7 +232,7 @@ Black and Litterman's responded to this situation in the following way:
   portfolio choices that are more plausible in terms of conforming to
   what most people actually do.
 
-In particular, given $\Sigma$ and a reasonable value
+In particular, given $\Sigma$ and a plausible value
 of $\delta$, Black and Litterman reverse engineered a vector
 $\mu_{BL}$ of mean excess returns that makes the $w$
 implied by formula {eq}`risky-portfolio` equal the **actual** market portfolio
@@ -232,7 +242,7 @@ $$
 w_m = (\delta \Sigma)^{-1} \mu_{BL}
 $$
 
-### Details
+## Details
 
 Let's define
 
@@ -324,7 +334,7 @@ plt.legend(numpoints=1)
 plt.show()
 ```
 
-### Adding *Views*
+## Adding Views
 
 Black and Litterman start with a baseline customer who asserts that he
 or she shares the **market's views**, which means that he or she
@@ -437,7 +447,7 @@ def BL_plot(τ):
     plt.show()
 ```
 
-### Bayes Interpretation of the Black-Litterman Recommendation
+## Bayesian Interpretation 
 
 Consider the following Bayesian interpretation of the Black-Litterman
 recommendation.
@@ -481,7 +491,7 @@ Hence, the Black-Litterman recommendation is consistent with the Bayes
 update of the prior over the mean excess returns in light of the
 realized average excess returns on the market.
 
-### Curve Decolletage
+## Curve Decolletage
 
 Consider two independent "competing" views on the excess market returns
 
@@ -731,7 +741,7 @@ def decolletage(λ):
     plt.show()
 ```
 
-### Black-Litterman Recommendation as Regularization
+## Black-Litterman Recommendation as Regularization
 
 First, consider the OLS regression
 
@@ -831,7 +841,7 @@ of $\tilde \beta$.
 Now, we can give a regularization interpretation of the Black-Litterman
 portfolio recommendation.
 
-To this end, simplify first the equation {eq}`mix-views` characterizing the Black-Litterman recommendation
+To this end, first  simplify the equation {eq}`mix-views` that characterizes the Black-Litterman recommendation
 
 $$
 \begin{aligned}
@@ -880,7 +890,7 @@ So the Black-Litterman procedure results in a recommendation that is a
 compromise between the conservative market portfolio and the more
 extreme portfolio that is implied by estimated "personal" views.
 
-### Digression on A Robust Control Operator
+## A Robust Control Operator
 
 The Black-Litterman approach is partly inspired by the econometric
 insight that it is easier to estimate covariances of excess returns than
@@ -967,7 +977,7 @@ $$
 $$
 
 This asserts that ${\sf T}$ is an indirect utility function for a
-minimization problem in which an **evil agent** chooses a distorted
+minimization problem in which an **adversary** chooses a distorted
 probability distribution $\tilde \phi$ to lower expected utility,
 subject to a penalty term that gets bigger the larger is relative
 entropy.
@@ -979,7 +989,8 @@ $$
 $$
 
 is a robustness parameter when it is $+\infty$, there is no scope for the minimizing agent to distort the distribution,
-so no robustness to alternative distributions is acquired
+so no robustness to alternative distributions is acquired.
+
 As $\theta$ is lowered, more robustness is achieved.
 
 **Note:** The ${\sf T}$ operator is sometimes called a
@@ -988,11 +999,12 @@ As $\theta$ is lowered, more robustness is achieved.
 We shall apply ${\sf T}$to the special case of a linear value
 function $w'(\vec r - r_f 1)$
 where $\vec r - r_f 1 \sim {\mathcal N}(\mu,\Sigma)$ or
-$\vec r - r_f {\bf 1} = \mu + C \epsilon$and
+$\vec r - r_f {\bf 1} = \mu + C \epsilon$ and
 $\epsilon \sim {\mathcal N}(0,I)$.
 
 The associated worst-case distribution of $\epsilon$ is Gaussian
 with mean $v =-\theta^{-1} C' w$ and covariance matrix $I$
+
 (When the value function is affine, the worst-case distribution distorts
 the mean vector of $\epsilon$ but not the covariance matrix
 of $\epsilon$).
@@ -1009,9 +1021,9 @@ $$
 \frac{v'v}{2} = \frac{1}{2\theta^2}  w' C C' w
 $$
 
-### A Robust Mean-variance Portfolio Model
+## A Robust Mean-Variance Portfolio Model
 
-According to criterion (1), the mean-variance portfolio choice problem
+According to criterion {eq}`choice-problem`, the mean-variance portfolio choice problem
 chooses $w$ to maximize
 
 $$
@@ -1025,7 +1037,7 @@ w'\mu - \frac{\delta}{2} w' \Sigma w
 $$
 
 A robust decision maker can be modeled as replacing the mean return
-$E [w ( \vec r - r_f {\bf 1})]$ with the risk-sensitive
+$E [w ( \vec r - r_f {\bf 1})]$ with the risk-sensitive criterion
 
 $$
 {\sf T} [w ( \vec r - r_f {\bf 1})] = w' \mu - \frac{1}{2 \theta} w' \Sigma w
@@ -1143,9 +1155,11 @@ variances".
 That is, we need significantly more data to obtain a given
 precision of the mean estimate than for our variance estimate.
 
-### A Special Case -- IID Sample
+## Special Case -- IID Sample
 
-We start our analysis with the benchmark case of IID data. Consider a
+We start our analysis with the benchmark case of IID data. 
+
+Consider a
 sample of size $N$ generated by the following IID process,
 
 $$
@@ -1178,7 +1192,7 @@ $$
 We are interested in how this (asymptotic) relative rate of convergence
 changes as increasing sampling frequency puts dependence into the data.
 
-### Dependence and Sampling Frequency
+## Dependence and Sampling Frequency
 
 To investigate how sampling frequency affects relative rates of
 convergence, we assume that the data are generated by a mean-reverting
@@ -1234,6 +1248,7 @@ The following figure illustrates how the dependence between the
 observations is related to the sampling frequency
 
 - For any given $h$, the autocorrelation converges to zero as we increase the distance -- $n$-- between the observations. This represents the "weak dependence" of the $X$ process.
+  
 - Moreover, for a fixed lag length, $n$, the dependence vanishes as the sampling frequency goes to infinity. In fact, letting $h$ go to $\infty$ gives back the case of IID data.
 
 ```{code-cell} python3
@@ -1260,7 +1275,7 @@ ax.set(title=r'Autocorrelation functions, $\Gamma_h(n)$',
 plt.show()
 ```
 
-### Frequency and the Mean Estimator
+## Frequency and the Mean Estimator
 
 Consider again the AR(1) process generated by discrete sampling with
 frequency $h$. Assume that we have a sample of size $N$ and
@@ -1287,12 +1302,16 @@ $$
 
 It is explicit in the above equation that time dependence in the data
 inflates the variance of the mean estimator through the covariance
-terms. Moreover, as we can see, a higher sampling frequency---smaller
+terms. 
+
+Moreover, as we can see, a higher sampling frequency---smaller
 $h$---makes all the covariance terms larger, everything else being
-fixed. This implies a relatively slower rate of convergence of the
+fixed. 
+
+This implies a relatively slower rate of convergence of the
 sample average for high-frequency data.
 
-Intuitively, the stronger dependence across observations for high-frequency data reduces the
+Intuitively, stronger dependence across observations for high-frequency data reduces the
 "information content" of each observation relative to the IID case.
 
 We can upper bound the variance term in the following way
@@ -1305,7 +1324,7 @@ $$
 \end{aligned}
 $$
 
-Asymptotically the $\exp(-\kappa h)^{N-1}$ vanishes and the
+Asymptotically, the term $\exp(-\kappa h)^{N-1}$ vanishes and the
 dependence in the data inflates the benchmark IID variance by a factor
 of
 
