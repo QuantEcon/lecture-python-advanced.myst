@@ -59,8 +59,6 @@ These two classes of processes are closely connected.
 
 If a process $\{y_t\}$ is an additive functional and $\phi_t = \exp(y_t)$, then $\{\phi_t\}$ is a multiplicative functional.
 
-Hansen and Sargent {cite}`hansen2008robustness` (chs. 5 and 8) describe discrete time versions of additive and multiplicative functionals.
-
 In this lecture, we describe both  additive functionals and multiplicative functionals.
 
 We also describe and compute decompositions of additive and multiplicative processes into four components:
@@ -88,7 +86,7 @@ from scipy.stats import norm, lognorm
 
 ## A Particular Additive Functional
 
-Hansen and Sargent {cite}`hansen2008robustness`  describe a general class of additive functionals.
+{cite}`hansen2009long` describe a general class of additive functionals.
 
 This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a Gaussian vector autoregression.
 
@@ -722,7 +720,7 @@ Notice the irregular but persistent growth in $y_t$.
 
 ### Decomposition
 
-Hansen and Sargent {cite}`hansen2008robustness` describe how to construct a decomposition of
+Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of
 an additive functional into four parts:
 
 - a constant inherited from initial values $x_0$ and $y_0$
@@ -741,7 +739,7 @@ $$
 \end{aligned}
 $$
 
-Then the Hansen-Scheinkman {cite}`hansen2009long` decomposition is
+Then the Hansen-Scheinkman {cite}`hansen2009long`, {cite}`Hans_Sarg_book` decomposition is
 
 $$
 \begin{aligned}
@@ -939,7 +937,7 @@ Let's see what happens when we set $T = 12000$ instead of $150$.
 
 ### Peculiar Large Sample Property
 
-Hansen and Sargent {cite}`hansen2008robustness` (ch. 8) describe the following two properties of the  martingale component
+Hansen and Sargent {cite}`Hans_Sarg_book` (ch. 8) describe the following two properties of the  martingale component
 $\widetilde M_t$ of the multiplicative decomposition
 
 * while $E_0 \widetilde M_t = 1$ for all $t \geq 0$,
@@ -950,7 +948,7 @@ $\widetilde M_t$ of the multiplicative decomposition
 The first property follows from the fact that $\widetilde M_t$ is a multiplicative martingale with initial condition
 $\widetilde M_0 = 1$.
 
-The second is a **peculiar property** noted and proved by Hansen and Sargent {cite}`hansen2008robustness`.
+The second is a **peculiar property** noted and proved by Hansen and Sargent {cite}`Hans_Sarg_book`.
 
 The following simulation of many paths of $\widetilde M_t$ illustrates both properties
 
