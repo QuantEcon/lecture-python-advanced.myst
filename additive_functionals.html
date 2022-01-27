@@ -279,17 +279,17 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><div class="tex2jax_ignore mathjax_ignore section" id="additive-and-multiplicative-functionals">
-<h1><a class="toc-backref" href="#id10"><span class="section-number">29. </span>Additive and Multiplicative Functionals</a><a class="headerlink" href="#additive-and-multiplicative-functionals" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id11"><span class="section-number">29. </span>Additive and Multiplicative Functionals</a><a class="headerlink" href="#additive-and-multiplicative-functionals" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <span id="index-0"></span><p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#additive-and-multiplicative-functionals" id="id10">Additive and Multiplicative Functionals</a></p>
+<li><p><a class="reference internal" href="#additive-and-multiplicative-functionals" id="id11">Additive and Multiplicative Functionals</a></p>
 <ul>
-<li><p><a class="reference internal" href="#overview" id="id11">Overview</a></p></li>
-<li><p><a class="reference internal" href="#a-particular-additive-functional" id="id12">A Particular Additive Functional</a></p></li>
-<li><p><a class="reference internal" href="#dynamics" id="id13">Dynamics</a></p></li>
-<li><p><a class="reference internal" href="#code" id="id14">Code</a></p></li>
-<li><p><a class="reference internal" href="#more-about-the-multiplicative-martingale" id="id15">More About the Multiplicative Martingale</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id12">Overview</a></p></li>
+<li><p><a class="reference internal" href="#a-particular-additive-functional" id="id13">A Particular Additive Functional</a></p></li>
+<li><p><a class="reference internal" href="#dynamics" id="id14">Dynamics</a></p></li>
+<li><p><a class="reference internal" href="#code" id="id15">Code</a></p></li>
+<li><p><a class="reference internal" href="#more-about-the-multiplicative-martingale" id="id16">More About the Multiplicative Martingale</a></p></li>
 </ul>
 </li>
 </ul>
@@ -305,32 +305,32 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.54.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.9)
 Requirement already satisfied: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.7.1)
-Requirement already satisfied: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.20.3)
 Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.26.0)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.9)
-Requirement already satisfied: llvmlite&lt;0.38,&gt;=0.37.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.37.0)
+Requirement already satisfied: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.54.1)
+Requirement already satisfied: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.20.3)
 Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (58.0.4)
+Requirement already satisfied: llvmlite&lt;0.38,&gt;=0.37.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.37.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.10.8)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.2)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.26.7)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.2)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.10.8)
 Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="overview">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">29.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id12"><span class="section-number">29.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>Many economic time series display persistent growth that prevents them from being  asymptotically stationary and ergodic.</p>
 <p>For example, outputs, prices, and dividends typically display  irregular but persistent growth.</p>
 <p>Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.</p>
 <p>Are there ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process?</p>
-<p>The answer provided by Hansen and Scheinkman <span id="id1">[<a class="reference internal" href="zreferences.html#id101">HS09</a>]</span> is yes.</p>
-<p>They described  two classes of time series models that accommodate growth.</p>
+<p>The answer provided by Hansen  <span id="id1">[<a class="reference internal" href="zreferences.html#id238">Han12</a>]</span> is yes.</p>
+<p>He described  two classes of time series models that accommodate growth.</p>
 <p>They are</p>
 <ol class="simple">
 <li><p><strong>additive functionals</strong> that display random “arithmetic growth”</p></li>
@@ -338,7 +338,6 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/qua
 </ol>
 <p>These two classes of processes are closely connected.</p>
 <p>If a process <span class="math notranslate nohighlight">\(\{y_t\}\)</span> is an additive functional and <span class="math notranslate nohighlight">\(\phi_t = \exp(y_t)\)</span>, then <span class="math notranslate nohighlight">\(\{\phi_t\}\)</span> is a multiplicative functional.</p>
-<p>Hansen and Sargent <span id="id2">[<a class="reference internal" href="zreferences.html#id103">HS08b</a>]</span> (chs. 5 and 8) describe discrete time versions of additive and multiplicative functionals.</p>
 <p>In this lecture, we describe both  additive functionals and multiplicative functionals.</p>
 <p>We also describe and compute decompositions of additive and multiplicative processes into four components:</p>
 <ol class="simple">
@@ -348,7 +347,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/qua
 <li><p>a <strong>martingale</strong></p></li>
 </ol>
 <p>We describe how to construct,  simulate,  and interpret these components.</p>
-<p>More details about  these concepts and algorithms  can be found in Hansen and Sargent <span id="id3">[<a class="reference internal" href="zreferences.html#id103">HS08b</a>]</span>.</p>
+<p>More details about  these concepts and algorithms  can be found in Hansen  <span id="id2">[<a class="reference internal" href="zreferences.html#id238">Han12</a>]</span> and Hansen and Sargent <span id="id3">[<a class="reference internal" href="zreferences.html#id239">HS24</a>]</span>.</p>
 <p>Let’s start with some imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -365,8 +364,8 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/qua
 </div>
 </div>
 <div class="section" id="a-particular-additive-functional">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">29.2. </span>A Particular Additive Functional</a><a class="headerlink" href="#a-particular-additive-functional" title="Permalink to this headline">¶</a></h2>
-<p>Hansen and Sargent <span id="id4">[<a class="reference internal" href="zreferences.html#id103">HS08b</a>]</span>  describe a general class of additive functionals.</p>
+<h2><a class="toc-backref" href="#id13"><span class="section-number">29.2. </span>A Particular Additive Functional</a><a class="headerlink" href="#a-particular-additive-functional" title="Permalink to this headline">¶</a></h2>
+<p><span id="id4">[<a class="reference internal" href="zreferences.html#id238">Han12</a>]</span> describes a general class of additive functionals.</p>
 <p>This lecture focuses on a subclass of these: a scalar process <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> whose increments are driven by a Gaussian vector autoregression.</p>
 <p>Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
 by using linear state-space tools.</p>
@@ -456,7 +455,7 @@ z_{t+1}
 </div>
 </div>
 <div class="section" id="dynamics">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">29.3. </span>Dynamics</a><a class="headerlink" href="#dynamics" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id14"><span class="section-number">29.3. </span>Dynamics</a><a class="headerlink" href="#dynamics" title="Permalink to this headline">¶</a></h2>
 <p>Let’s run some simulations to build intuition.</p>
 <p id="addfunc-eg1">In doing so we’ll assume that <span class="math notranslate nohighlight">\(z_{t+1}\)</span> is scalar and that <span class="math notranslate nohighlight">\(\tilde x_t\)</span> follows a 4th-order scalar autoregression.</p>
 <div class="math notranslate nohighlight" id="equation-ftaf">
@@ -485,7 +484,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 <div class="section" id="simulation">
 <h3><span class="section-number">29.3.1. </span>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h3>
 <p>When simulating we embed our variables into a bigger system.</p>
-<p>This system also constructs the components of the decompositions of <span class="math notranslate nohighlight">\(y_t\)</span> and of <span class="math notranslate nohighlight">\(\exp(y_t)\)</span> proposed by Hansen and Scheinkman <span id="id5">[<a class="reference internal" href="zreferences.html#id101">HS09</a>]</span>.</p>
+<p>This system also constructs the components of the decompositions of <span class="math notranslate nohighlight">\(y_t\)</span> and of <span class="math notranslate nohighlight">\(\exp(y_t)\)</span> proposed by Hansen <span id="id5">[<a class="reference internal" href="zreferences.html#id238">Han12</a>]</span>.</p>
 <p>All of these objects are computed using the code below</p>
 <div class="cell docutils container" id="amf-lss">
 <div class="cell_input docutils container">
@@ -969,7 +968,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 </div>
 <div class="section" id="decomposition">
 <h3><span class="section-number">29.3.2. </span>Decomposition<a class="headerlink" href="#decomposition" title="Permalink to this headline">¶</a></h3>
-<p>Hansen and Sargent <span id="id6">[<a class="reference internal" href="zreferences.html#id103">HS08b</a>]</span> describe how to construct a decomposition of
+<p>Hansen and Sargent <span id="id6">[<a class="reference internal" href="zreferences.html#id239">HS24</a>]</span> describe how to construct a decomposition of
 an additive functional into four parts:</p>
 <ul class="simple">
 <li><p>a constant inherited from initial values <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span></p></li>
@@ -987,7 +986,7 @@ functionals defined by <a class="reference internal" href="#equation-old1-additi
   g &amp; := D (I - A)^{-1}
 \end{aligned}
 \end{split}\]</div>
-<p>Then the Hansen-Scheinkman <span id="id7">[<a class="reference internal" href="zreferences.html#id101">HS09</a>]</span> decomposition is</p>
+<p>Then the Hansen <span id="id7">[<a class="reference internal" href="zreferences.html#id238">Han12</a>]</span>, <span id="id8">[<a class="reference internal" href="zreferences.html#id239">HS24</a>]</span> decomposition is</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -1087,7 +1086,7 @@ interest.</p>
 </div>
 </div>
 <div class="section" id="code">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">29.4. </span>Code</a><a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15"><span class="section-number">29.4. </span>Code</a><a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
 <p>The class <code class="docutils literal notranslate"><span class="pre">AMF_LSS_VAR</span></code> mentioned <a class="reference internal" href="#amf-lss"><span class="std std-ref">above</span></a> does all that we want to study our additive functional.</p>
 <p>In fact, <code class="docutils literal notranslate"><span class="pre">AMF_LSS_VAR</span></code> does more
 because it allows us to study  an associated multiplicative functional as well.</p>
@@ -1169,7 +1168,7 @@ for a limited horizon <span class="math notranslate nohighlight">\(T\)</span>.</
 </div>
 <div class="section" id="peculiar-large-sample-property">
 <h3><span class="section-number">29.4.2. </span>Peculiar Large Sample Property<a class="headerlink" href="#peculiar-large-sample-property" title="Permalink to this headline">¶</a></h3>
-<p>Hansen and Sargent <span id="id8">[<a class="reference internal" href="zreferences.html#id103">HS08b</a>]</span> (ch. 8) describe the following two properties of the  martingale component
+<p>Hansen and Sargent <span id="id9">[<a class="reference internal" href="zreferences.html#id239">HS24</a>]</span> (ch. 8) describe the following two properties of the  martingale component
 <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> of the multiplicative decomposition</p>
 <ul class="simple">
 <li><p>while <span class="math notranslate nohighlight">\(E_0 \widetilde M_t = 1\)</span> for all <span class="math notranslate nohighlight">\(t \geq 0\)</span>,
@@ -1179,7 +1178,7 @@ zero almost surely</p></li>
 </ul>
 <p>The first property follows from the fact that <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> is a multiplicative martingale with initial condition
 <span class="math notranslate nohighlight">\(\widetilde M_0 = 1\)</span>.</p>
-<p>The second is a <strong>peculiar property</strong> noted and proved by Hansen and Sargent <span id="id9">[<a class="reference internal" href="zreferences.html#id103">HS08b</a>]</span>.</p>
+<p>The second is a <strong>peculiar property</strong> noted and proved by Hansen and Sargent <span id="id10">[<a class="reference internal" href="zreferences.html#id239">HS24</a>]</span>.</p>
 <p>The following simulation of many paths of <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> illustrates both properties</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1199,7 +1198,7 @@ zero almost surely</p></li>
 </div>
 </div>
 <div class="section" id="more-about-the-multiplicative-martingale">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">29.5. </span>More About the Multiplicative Martingale</a><a class="headerlink" href="#more-about-the-multiplicative-martingale" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id16"><span class="section-number">29.5. </span>More About the Multiplicative Martingale</a><a class="headerlink" href="#more-about-the-multiplicative-martingale" title="Permalink to this headline">¶</a></h2>
 <p>Let’s drill down and study probability distribution of the multiplicative martingale  <span class="math notranslate nohighlight">\(\{\widetilde M_t\}_{t=0}^\infty\)</span>  in
 more detail.</p>
 <p>As we  have seen, it has representation</p>

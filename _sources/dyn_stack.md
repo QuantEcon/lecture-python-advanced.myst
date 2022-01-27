@@ -473,13 +473,13 @@ The two subproblems are designed
   the state variables confronting and the control variables available
   to the leader
 
-#### Subproblem 1
+**Subproblem 1**
 
 $$
 v(y_0) = \max_{(\vec y_1, \vec u_0) \in \Omega(y_0)} - \sum_{t=0}^\infty \beta^t r(y_t, u_t)
 $$
 
-#### Subproblem 2
+**Subproblem 2**
 
 $$
 w(z_0) = \max_{x_0} v(y_0)
@@ -498,7 +498,7 @@ $z_0$.
 
 We now describe Bellman equations for $v(y)$ and $w(z_0)$.
 
-#### Subproblem 1
+**Subproblem 1**
 
 The value function $v(y)$ in subproblem 1 satisfies the Bellman
 equation
@@ -542,7 +542,7 @@ $$
 u_t = - F y_t
 $$
 
-#### Subproblem 2
+**Subproblem 2**
 
 We find an optimal $x_0$ by equating to zero the gradient of $v(y_0)$
 with respect to $x_0$:
