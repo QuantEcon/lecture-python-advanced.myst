@@ -46,9 +46,9 @@ Asymptotic stationarity and ergodicity are key assumptions needed to make it pos
 
 Are there ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process?
 
-The answer provided by Hansen and Scheinkman {cite}`hansen2009long` is yes.
+The answer provided by Hansen  {cite}`Hansen_2012_Eca` is yes.
 
-They described  two classes of time series models that accommodate growth.
+He described  two classes of time series models that accommodate growth.
 
 They are
 
@@ -70,7 +70,7 @@ We also describe and compute decompositions of additive and multiplicative proce
 
 We describe how to construct,  simulate,  and interpret these components.
 
-More details about  these concepts and algorithms  can be found in Hansen and Sargent {cite}`hansen2008robustness`.
+More details about  these concepts and algorithms  can be found in Hansen  {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
 
 Let's start with some imports:
 
@@ -86,7 +86,7 @@ from scipy.stats import norm, lognorm
 
 ## A Particular Additive Functional
 
-{cite}`hansen2009long` describe a general class of additive functionals.
+{cite}`Hansen_2012_Eca` describes a general class of additive functionals.
 
 This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a Gaussian vector autoregression.
 
@@ -240,7 +240,7 @@ You can try writing these matrices down now as an exercise --- correct expressio
 
 When simulating we embed our variables into a bigger system.
 
-This system also constructs the components of the decompositions of $y_t$ and of $\exp(y_t)$ proposed by Hansen and Scheinkman {cite}`hansen2009long`.
+This system also constructs the components of the decompositions of $y_t$ and of $\exp(y_t)$ proposed by Hansen {cite}`Hansen_2012_Eca`.
 
 All of these objects are computed using the code below
 
@@ -739,7 +739,7 @@ $$
 \end{aligned}
 $$
 
-Then the Hansen-Scheinkman {cite}`hansen2009long`, {cite}`Hans_Sarg_book` decomposition is
+Then the Hansen {cite}`Hansen_2012_Eca`, {cite}`Hans_Sarg_book` decomposition is
 
 $$
 \begin{aligned}
