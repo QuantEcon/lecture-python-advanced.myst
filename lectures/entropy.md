@@ -48,7 +48,7 @@ with probabilities $p_i = \textrm{Prob}(X = x_i) \geq 0, \sum_i p_i =1$.
 Claude Shannon's {cite}`Shannon_1949` definition  of entropy is 
 
 $$ 
- H(p) = \sum_i p_i \log_b (p_i^{-1}) = - \sum_i p_i \log_b (p_i) .
+H(p) = \sum_i p_i \log_b (p_i^{-1}) = - \sum_i p_i \log_b (p_i) .
 $$ (eq:Shannon1)
 
 where $\log_b$ denotes the log function with base $b$.
@@ -76,8 +76,6 @@ Shannon typically used base $2$.
 
 For a discrete random variable $X$ with probability density $p = \{p_i\}_{i=1}^n$,   the **surprisal**
 for state $i$ is  $ s_i = \log\left(\frac{1}{p_i}\right) $.
-
-
 
 
 The quantity $ \log\left(\frac{1}{p_i}\right) $ is called the **surprisal** because it is inversely related to the likelihood that state
@@ -122,9 +120,6 @@ Entropy as a function of $\hat \pi_1$ when $\pi_1 = .5$.
 ```
 
 
-
-
-
 ### Example
 
 Take an $n$-sided possibly unfair die with  a probability distribution $\{p_i\}_{i=1}^n$.
@@ -135,8 +130,6 @@ Among all dies, a fair die  maximizes entropy.
 For a fair die,
 entropy equals $H(p) = - n^{-1} \sum_i \log \left( \frac{1}{n} \right) = \log(n)$.
 
-
-
 To specify the expected number of bits needed to isolate the outcome of one roll of a fair $n$-sided die requires $\log_2 (n)$ bits of information.  
 
 For example,
@@ -146,18 +139,16 @@ For $n=3$, $\log_2(3) = 1.585$.
 
 
 
-
 ## Mathematical Properties of Entropy
 
 For a discrete random variable with probability vector $p$, entropy $H(p)$ is
 a function that satisfies
-*  $H$ is *continuous*.
-*  $H$ is *symmetric*: $H(p_1, p_2, \ldots, p_n) = H(p_{r_1}, \ldots, p_{r_n})$ for any permutation $r_1, \ldots, r_n$ of $1,\ldots, n$.
-* A uniform distribution maximizes $H(p)$:
-$ H(p_1, \ldots, p_n) \leq H(\frac{1}{n}, \ldots, \frac{1}{n}) .$
-*  Maximum entropy increases with the number of states:
+* $H$ is *continuous*.
+* $H$ is *symmetric*: $H(p_1, p_2, \ldots, p_n) = H(p_{r_1}, \ldots, p_{r_n})$ for any permutation $r_1, \ldots, r_n$ of $1,\ldots, n$.
+* A uniform distribution maximizes $H(p)$: $ H(p_1, \ldots, p_n) \leq H(\frac{1}{n}, \ldots, \frac{1}{n}) .$
+* Maximum entropy increases with the number of states:
 $ H(\frac{1}{n}, \ldots, \frac{1}{n} ) \leq H(\frac{1}{n+1} , \ldots, \frac{1}{n+1})$.
-*  Entropy is not affected by events zero probability.
+* Entropy is not affected by events zero probability.
 
 
 ## Conditional Entropy
@@ -168,7 +159,7 @@ occurring with probability density $p(x_i, y_i)$.
 Conditional entropy $H(X| Y)$ is
 defined as
 
-$$ \label{Shannon2}
+$$
 H(X | Y) = \sum_{i,j} p(x_i,y_j) \log \frac{p(y_j)}{p(x_i,y_j)}.
 $$ (eq:Shannon2)
 
@@ -229,7 +220,7 @@ Assume that $\frac{p_i}{q_t} \in (0,\infty)$ for all $i$ for which $p_i >0$.
 Then the Kullback-Leibler statistical divergence, also called **relative entropy**,
 is defined as
 
-$$ \label{Shannon3}
+$$
 D(p|q) = \sum_i p_i \log \left(\frac{p_i}{q_i}\right) = \sum_i q_i \left( \frac{p_i}{q_i}\right) \log\left( \frac{p_i}{q_i}\right) .
 $$ (eq:Shanno3)
 
@@ -262,14 +253,13 @@ $$
 ## Relative entropy and Gaussian distributions
 
 We want to compute relative entropy for two continuous densities $\phi$ and $\hat \phi$ when
-  $\phi$ is ${\cal N}(0,I)$ 
- and  ${\hat \phi}$ is ${\cal N}(w, \Sigma)$, where the covariance matrix $\Sigma$ is nonsingular.
+  $\phi$ is ${\cal N}(0,I)$ and  ${\hat \phi}$ is ${\cal N}(w, \Sigma)$, where the covariance matrix $\Sigma$ is nonsingular.
 
-We seek
- a formula for 
+We seek a formula for 
  
- $$ \textrm{ent} = \int (\log {\hat \phi(\varepsilon)} - \log \phi(\varepsilon) ){\hat \phi(\varepsilon)} d \varepsilon. 
- $$
+$$ 
+\textrm{ent} = \int (\log {\hat \phi(\varepsilon)} - \log \phi(\varepsilon) ){\hat \phi(\varepsilon)} d \varepsilon. 
+$$
 
 **Claim**
 
@@ -277,24 +267,25 @@ $$
 \textrm{ent} = %\int (\log {\hat \phi} - \log \phi ){\hat \phi} d \varepsilon=
 -{1 \over 2} \log
 \det \Sigma + {1 \over 2}w'w + {1 \over 2}\mathrm{trace} (\Sigma - I)
-. \label{relentropy101}
+.
 $$ (eq:relentropy101)
 
 **Proof**
 
 The log likelihood ratio is
 
-\begin{equation} \log {\hat \phi}(\varepsilon) - \log \phi(\varepsilon) =
+$$ 
+\log {\hat \phi}(\varepsilon) - \log \phi(\varepsilon) =
 {1 \over 2} \left[ - (\varepsilon - w)' \Sigma^{-1} (\varepsilon - w)
     +  \varepsilon' \varepsilon - \log \det
-    \Sigma\right] .\label{footnote2} \end{equation}
+    \Sigma\right] .
+$$ (footnote2)
     
 
- Observe
-that
+Observe that
 
 $$
- - \int {1 \over 2} (\varepsilon - w)' \Sigma^{-1} (\varepsilon -
+- \int {1 \over 2} (\varepsilon - w)' \Sigma^{-1} (\varepsilon -
 w) {\hat \phi}(\varepsilon) d\varepsilon = - {1 \over 2}\mathrm{trace}(I).
 $$
 
@@ -318,7 +309,7 @@ Combining terms gives
 $$
 \textrm{ent} = \int (\log {\hat \phi} - \log \phi ){\hat \phi} d \varepsilon= -{1 \over 2} \log
 \det \Sigma + {1 \over 2}w'w + {1 \over 2}\mathrm{trace} (\Sigma - I)
-. \label{relentropy}
+.
 $$ (eq:relentropy)
 
 which agrees with equation {eq}`eq:relentropy101`.
@@ -334,7 +325,7 @@ distributions.
 
 Then
 
-$$ \label{Shannon5}
+$$
 D(N_0|N_1) = \frac{1}{2} \left(\mathrm {trace} (\Sigma_1^{-1} \Sigma_0)
 + (\mu_1 -\mu_0)' \Sigma_1^{-1} (\mu_1 - \mu_0) - \log\left( \frac{ \mathrm {det }\Sigma_0 }{\mathrm {det}\Sigma_1}\right)
    - k \right).
@@ -369,17 +360,15 @@ After flipping signs, {cite}`Backus_Chernov_Zin`  use Kullback-Leibler relative 
 assert is useful for characterizing features of both the data and various theoretical models of stochastic discount factors.
 
 Where $p_{t+1}$ is the physical or true measure, $p_{t+1}^*$ is the risk-neutral measure, and $E_t$ denotes conditional
-expectation under the $p_{t+1}$ measure,
- {cite}`Backus_Chernov_Zin` 
- define entropy as
+expectation under the $p_{t+1}$ measure, {cite}`Backus_Chernov_Zin` define entropy as
  
-$$ \label{eq:BCZ1}
+$$
 L_t (p_{t+1}^*/p_{t+1}) = - E_t \log( p_{t+1}^*/p_{t+1}).
 $$ (eq:BCZ1)
 
 Evidently, by virtue of the minus sign in equation {eq}`eq:BCZ1`,
 
-$$ \label{eqn:BCZ2}
+$$
 L_t (p_{t+1}^*/p_{t+1})  = D_{KL,t}( p_{t+1}^*|p_{t+1}),
 $$ (eq:BCZ2)
 
@@ -420,7 +409,7 @@ $$
 
 As described  in chapter XIV of  {cite}`Sargent1987`, the Wiener-Kolmogorov formula for the one-period ahead prediction error is
 
-$$\label{Shannon6}
+$$
 \sigma_\epsilon^2 = \exp\left[\left( \frac{1}{2\pi}\right) \int_{-\pi}^\pi \log S_x (\omega) d \omega \right].
 $$ (eq:Shannon6)
 
@@ -434,11 +423,10 @@ Consider the following problem  reminiscent of one  described earlier.
 Among all covariance stationary univariate processes with unconditional variance $\sigma_x^2$, find a process with maximal
 one-step-ahead prediction error.
 
-
- The maximizer  is  a process with spectral density
+The maximizer  is  a process with spectral density
 
 $$
- S_x(\omega) = 2 \pi \sigma_x^2.
+S_x(\omega) = 2 \pi \sigma_x^2.
 $$
 
 Thus,  among
@@ -475,7 +463,7 @@ $$
 $$ (eq:Shannon22)
 
 Being a  measure of the unpredictability of an $n \times 1$ vector covariance stationary  stochastic process,
- the left side of  {eq}`eq:Shannon22`  is sometimes called entropy.
+the left side of  {eq}`eq:Shannon22`  is sometimes called entropy.
 
 
 ## Frequency Domain Robust Control
@@ -484,7 +472,6 @@ Chapter 8 of {cite}`hansen2008robustness`  adapts work in the control theory lit
 **frequency domain entropy** criterion for  robust control as
 
 $$
-\label{Shannon21}
 \int_\Gamma \log \det [ \theta I - G_F(\zeta)' G_F(\zeta) ] d \lambda(\zeta) ,
 $$ (eq:Shannon21)
 
@@ -494,7 +481,6 @@ objective function.
 Hansen and Sargent {cite}`hansen2008robustness` show that criterion {eq}`eq:Shannon21`  can be represented as
 
 $$ 
-\label{Shannon220}
 \log \det [ D(0)' D(0)] = \int_\Gamma \log \det [ \theta I - G_F(\zeta)' G_F(\zeta) ] d \lambda(\zeta) ,
 $$ (eq:Shannon220)
 
@@ -502,8 +488,6 @@ for an appropriate covariance stationary stochastic process derived from $\theta
 
 This explains the
 moniker **maximum entropy** robust control for decision rules $F$ designed to maximize  criterion {eq}`eq:Shannon21`.
-
-
 
 
 ## Relative Entropy for a Continuous Random Variable
@@ -521,17 +505,14 @@ $$
 over the interval $g \geq 0$.  
 
 
- That relative entropy $\textrm{ent}(g) \geq 0$ can be established by noting (a) that  $g \log g \geq g-1$ (see  {numref}`figure-example2`)
- and (b) that under $\phi$, $E g =1$.
+That relative entropy $\textrm{ent}(g) \geq 0$ can be established by noting (a) that  $g \log g \geq g-1$ (see  {numref}`figure-example2`)
+and (b) that under $\phi$, $E g =1$.
 
 
- {numref}`figure-example3` and {numref}`figure-example4` display aspects of relative entropy visually for a continuous random variable $x$ for
+{numref}`figure-example3` and {numref}`figure-example4` display aspects of relative entropy visually for a continuous random variable $x$ for
 two densities with likelihood ratio $g \geq 0$.  
 
 Where the numerator density is ${\mathcal N}(0,1)$, for two denominator  Gaussian densities ${\mathcal N}(0,1.5)$ and ${\mathcal N}(0,.95)$, respectively, {numref}`figure-example3` and {numref}`figure-example4`  display the functions  $g \log g$ and $g -1$ as functions of $x$.  
-
-
-
 
 
 
@@ -542,8 +523,6 @@ Where the numerator density is ${\mathcal N}(0,1)$, for two denominator  Gaussia
 The function $g \log g$ for $g \geq 0$. For a random variable $g$ with $E g =1$, $E g \log g \geq 0$.
 ```
 
-
-
 ```{figure} entropy_1_over_15.jpg
 :height: 350px
 :name: figure-example3
@@ -553,13 +532,11 @@ Under the ${\mathcal N}(0,1.5)$ density, $E g =1$.
 ```
 
 
-
-
 ```{figure} entropy_1_over_95.png
 :height: 350px
 :name: figure-example4
 
- $g \log g$ and $g-1$ where  $g$ is the ratio of the density of a ${\mathcal N}(0,1)$ random variable to the density of a ${\mathcal N}(0,1.5)$ random variable.
+$g \log g$ and $g-1$ where  $g$ is the ratio of the density of a ${\mathcal N}(0,1)$ random variable to the density of a ${\mathcal N}(0,1.5)$ random variable.
 Under the ${\mathcal N}(0,1.5)$ density, $E g =1$.
 ```
 
