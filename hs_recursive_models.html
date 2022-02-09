@@ -478,7 +478,7 @@
 <div class="section" id="a-suite-of-models">
 <h2><a class="toc-backref" href="#id15"><span class="section-number">16.1. </span>A Suite of Models</a><a class="headerlink" href="#a-suite-of-models" title="Permalink to this headline">¶</a></h2>
 <p>This lecture presents  a class of  linear-quadratic-Gaussian models of general economic equilibrium
-designed by Lars Peter Hansen and Thomas J. Sargent <span id="id1">[<a class="reference internal" href="zreferences.html#id69">HS13</a>]</span>.</p>
+designed by Lars Peter Hansen and Thomas J. Sargent <span id="id1">[<a class="reference internal" href="zreferences.html#id71">HS13</a>]</span>.</p>
 <p>The class of models is implemented in a Python class DLE that is part of  quantecon.</p>
 <p>Subsequent lectures use the DLE class to implement various instances that have appeared in the economics literature</p>
 <ol class="simple">
@@ -521,16 +521,16 @@ designed by Lars Peter Hansen and Thomas J. Sargent <span id="id1">[<a class="re
 <p>The Hicks trick of indexing commodities by time is the idea that <strong>dynamics are a special case of statics</strong>.</p>
 <p>The Arrow trick of indexing commodities by chance is the idea that <strong>analysis of trade under uncertainty is a special
 case of the analysis of trade under certainty</strong>.</p>
-<p>The <span id="id2">[<a class="reference internal" href="zreferences.html#id69">HS13</a>]</span> class of models specify the commodity space, preferences, technologies, stochastic shocks and information flows in ways
+<p>The <span id="id2">[<a class="reference internal" href="zreferences.html#id71">HS13</a>]</span> class of models specify the commodity space, preferences, technologies, stochastic shocks and information flows in ways
 that allow the models to be analyzed completely using only the tools of linear time series models and linear-quadratic optimal control described
 in the two lectures  <a class="reference external" href="https://python-intro.quantecon.org/linear_models.html">Linear State Space Models</a> and <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Control</a>.</p>
 <p>There are costs and benefits associated with the simplifications and specializations needed to make a particular model fit within the
-<span id="id3">[<a class="reference internal" href="zreferences.html#id69">HS13</a>]</span> class</p>
+<span id="id3">[<a class="reference internal" href="zreferences.html#id71">HS13</a>]</span> class</p>
 <ul class="simple">
 <li><p>the costs are that  linear-quadratic structures are sometimes too confining.</p></li>
 <li><p>benefits include computational speed, simplicity, and ability to analyze many model features analytically or nearly analytically.</p></li>
 </ul>
-<p>A variety of superficially different models are all instances of the <span id="id4">[<a class="reference internal" href="zreferences.html#id69">HS13</a>]</span> class of models</p>
+<p>A variety of superficially different models are all instances of the <span id="id4">[<a class="reference internal" href="zreferences.html#id71">HS13</a>]</span> class of models</p>
 <ul class="simple">
 <li><p>Lucas asset pricing model</p></li>
 <li><p>Lucas-Prescott model of investment under uncertainty</p></li>
@@ -556,7 +556,7 @@ we began this lecture.</p>
 </div>
 <div class="section" id="theory-and-econometrics">
 <h3><span class="section-number">16.1.3. </span>Theory and Econometrics<a class="headerlink" href="#theory-and-econometrics" title="Permalink to this headline">¶</a></h3>
-<p>For an application of the  <span id="id5">[<a class="reference internal" href="zreferences.html#id69">HS13</a>]</span> class of models, the outcome of theorizing is a stochastic process, i.e., a probability
+<p>For an application of the  <span id="id5">[<a class="reference internal" href="zreferences.html#id71">HS13</a>]</span> class of models, the outcome of theorizing is a stochastic process, i.e., a probability
 distribution over sequences of prices and quantities, indexed by  parameters describing preferences, technologies, and information flows.</p>
 <p>Another name for that object is a likelihood function, a key object of both frequentist and Bayesian statistics.</p>
 <p>There are two important uses of an <strong>equilibrium stochastic process</strong> or <strong>likelihood function</strong>.</p>
@@ -569,7 +569,7 @@ and from them makes inferences about the parameters that define the model’s pr
 </div>
 <div class="section" id="more-details">
 <h3><span class="section-number">16.1.4. </span>More Details<a class="headerlink" href="#more-details" title="Permalink to this headline">¶</a></h3>
-<p>A <span id="id6">[<a class="reference internal" href="zreferences.html#id69">HS13</a>]</span> economy consists of <strong>lists of matrices</strong> that describe peoples’ household technologies, their preferences over
+<p>A <span id="id6">[<a class="reference internal" href="zreferences.html#id71">HS13</a>]</span> economy consists of <strong>lists of matrices</strong> that describe peoples’ household technologies, their preferences over
 consumption services,  their production technologies, and their information sets.</p>
 <p>There are complete markets in history-contingent commodities.</p>
 <p>Competitive equilibrium allocations and prices</p>
@@ -578,7 +578,7 @@ consumption services,  their production technologies, and their information sets
 <li><p>have representations that are convenient econometrically</p></li>
 </ul>
 <p>Different example economies manifest themselves simply as different settings for various matrices.</p>
-<p><span id="id7">[<a class="reference internal" href="zreferences.html#id69">HS13</a>]</span> use these tools:</p>
+<p><span id="id7">[<a class="reference internal" href="zreferences.html#id71">HS13</a>]</span> use these tools:</p>
 <ul class="simple">
 <li><p>A theory of recursive dynamic competitive economies</p></li>
 <li><p>Linear optimal control theory</p></li>
@@ -1677,7 +1677,7 @@ v_t = [\Gamma^\prime M_d + \Delta^\prime_k M_k] x_t / \, [\bar e_j \, M_c x_t]
 of prices and quantities.</p>
 <p>Recall the <strong>inverse problem</strong> of inferring model parameters from a single realization of a time series of some of the prices and quantities.</p>
 <p>Another name for the inverse problem is <strong>econometrics</strong>.</p>
-<p>An advantage of the <span id="id8">[<a class="reference internal" href="zreferences.html#id69">HS13</a>]</span> structure is that it comes with a self-contained theory of econometrics.</p>
+<p>An advantage of the <span id="id8">[<a class="reference internal" href="zreferences.html#id71">HS13</a>]</span> structure is that it comes with a self-contained theory of econometrics.</p>
 <p>It is really just a tale of two state-space representations.</p>
 <p>Here they are:</p>
 <p><strong>Original State-Space Representation:</strong></p>
@@ -2203,7 +2203,7 @@ zero representing a demand shifter.</p>
 </ul>
 <div class="section" id="market-for-engineers">
 <h3><span class="section-number">16.9.1. </span>Market for Engineers<a class="headerlink" href="#market-for-engineers" title="Permalink to this headline">¶</a></h3>
-<p>Ryoo and Rosen’s (2004) <span id="id9">[<a class="reference internal" href="zreferences.html#id67">RR04</a>]</span> model consists of the following equations:</p>
+<p>Ryoo and Rosen’s (2004) <span id="id9">[<a class="reference internal" href="zreferences.html#id69">RR04</a>]</span> model consists of the following equations:</p>
 <p>first, a demand curve for engineers</p>
 <div class="math notranslate nohighlight">
 \[
@@ -2369,8 +2369,8 @@ k_{t-1} = \beta \sum_{j=0}^\infty  \beta^j E (\phi_c
 <li><p>Equality of present values of moving average coefficients.</p></li>
 <li><p>Martingale <span class="math notranslate nohighlight">\({\mathcal M}_t^k\)</span>.</p></li>
 </ul>
-<p>These have been tested in work by Hansen, Sargent, and Roberts (1991) <span id="id10">[<a class="reference internal" href="zreferences.html#id56">SHR91</a>]</span>
-and by Attanasio and Pavoni (2011) <span id="id11">[<a class="reference internal" href="zreferences.html#id55">AP11</a>]</span>.</p>
+<p>These have been tested in work by Hansen, Sargent, and Roberts (1991) <span id="id10">[<a class="reference internal" href="zreferences.html#id58">SHR91</a>]</span>
+and by Attanasio and Pavoni (2011) <span id="id11">[<a class="reference internal" href="zreferences.html#id57">AP11</a>]</span>.</p>
 </div>
 <div class="section" id="gorman-heterogeneous-households">
 <h2><a class="toc-backref" href="#id25"><span class="section-number">16.11. </span>Gorman Heterogeneous Households</a><a class="headerlink" href="#gorman-heterogeneous-households" title="Permalink to this headline">¶</a></h2>
@@ -2588,10 +2588,10 @@ solve this problem as functions of <span class="math notranslate nohighlight">\(
 into the objective determines a mongrel preference ordering over
 <span class="math notranslate nohighlight">\(\{c_t\} = \{c_{1t} + c_{2t}\}\)</span>.</p>
 <p>In solving this problem, it is convenient to proceed by using Fourier
-transforms.  For details, please see <span id="id12">[<a class="reference internal" href="zreferences.html#id69">HS13</a>]</span> where they deploy a</p>
+transforms.  For details, please see <span id="id12">[<a class="reference internal" href="zreferences.html#id71">HS13</a>]</span> where they deploy a</p>
 <p><strong>Secret Weapon:</strong> Another application of the spectral factorization
 identity.</p>
-<p><strong>Concluding remark:</strong> The <span id="id13">[<a class="reference internal" href="zreferences.html#id69">HS13</a>]</span> class of models described in this lecture are all complete markets models.  We have exploited
+<p><strong>Concluding remark:</strong> The <span id="id13">[<a class="reference internal" href="zreferences.html#id71">HS13</a>]</span> class of models described in this lecture are all complete markets models.  We have exploited
 the fact that complete market models <strong>are all alike</strong> to allow us to define a class that <strong>gives the same name to different things</strong> in the
 spirit of Henri Poincare.</p>
 <p>Could we create such a class for <strong>incomplete markets</strong> models?</p>
@@ -2807,13 +2807,18 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="entropy.html">
+   25. Etymology of Entropy
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   25. Robustness
+   26. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   26. Robust Markov Perfect Equilibrium
+   27. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -2825,32 +2830,32 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   27. Covariance Stationary Processes
+   28. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   28. Estimation of Spectra
+   29. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   29. Additive and Multiplicative Functionals
+   30. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   30. Classical Control with Linear Algebra
+   31. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   31. Classical Prediction and Filtering With Linear Algebra
+   32. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   32. Knowing the Forecasts of Others
+   33. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -2862,27 +2867,27 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   33. Asset Pricing II: The Lucas Asset Pricing Model
+   34. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   34. Elementary Asset Pricing Theory
+   35. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   35. Two Modifications of Mean-Variance Portfolio Theory
+   36. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   36. Irrelevance of Capital Structures with Complete Markets
+   37. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   37. Equilibrium Capital Structures with Incomplete Markets
+   38. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -2894,47 +2899,47 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   38. Optimal Unemployment Insurance
+   39. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   39. Stackelberg Plans
+   40. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   40. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   41. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   41. Optimal Taxation with State-Contingent Debt
+   42. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   42. Optimal Taxation without State-Contingent Debt
+   43. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   43. Fluctuating Interest Rates Deliver Fiscal Insurance
+   44. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   44. Fiscal Risk and Government Debt
+   45. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   45. Competitive Equilibria of a Model of Chang
+   46. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   46. Credible Government Policies in a Model of Chang
+   47. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -2946,17 +2951,17 @@ the remainder of a statement by Robert E. Lucas, Jr., with which we began this l
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   47. Troubleshooting
+   48. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   48. References
+   49. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   49. Execution Statistics
+   50. Execution Statistics
   </a>
  </li>
 </ul>

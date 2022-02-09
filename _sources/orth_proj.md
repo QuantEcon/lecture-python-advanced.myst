@@ -31,7 +31,7 @@ kernelspec:
 
 Orthogonal projection is a cornerstone of vector space methods, with many diverse applications.
 
-These include, but are not limited to,
+These include
 
 * Least squares projection, also known as linear regression
 * Conditional expectations for multivariate normal (Gaussian) distributions
