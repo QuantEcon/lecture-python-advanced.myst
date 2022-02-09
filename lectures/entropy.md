@@ -267,7 +267,7 @@ $$
 \textrm{ent} = %\int (\log {\hat \phi} - \log \phi ){\hat \phi} d \varepsilon=
 -{1 \over 2} \log
 \det \Sigma + {1 \over 2}w'w + {1 \over 2}\mathrm{trace} (\Sigma - I)
-. \label{relentropy101}
+.
 $$ (eq:relentropy101)
 
 **Proof**
@@ -325,7 +325,7 @@ distributions.
 
 Then
 
-$$ \label{Shannon5}
+$$
 D(N_0|N_1) = \frac{1}{2} \left(\mathrm {trace} (\Sigma_1^{-1} \Sigma_0)
 + (\mu_1 -\mu_0)' \Sigma_1^{-1} (\mu_1 - \mu_0) - \log\left( \frac{ \mathrm {det }\Sigma_0 }{\mathrm {det}\Sigma_1}\right)
    - k \right).
@@ -490,8 +490,6 @@ This explains the
 moniker **maximum entropy** robust control for decision rules $F$ designed to maximize  criterion {eq}`eq:Shannon21`.
 
 
-
-
 ## Relative Entropy for a Continuous Random Variable
 
 Let $x$ be  a continuous random variable with density $\phi(x)$, and let $g(x) $ be a nonnegative random variable satisfying $\int g(x) \phi(x) dx =1$.
@@ -508,16 +506,13 @@ over the interval $g \geq 0$.
 
 
 That relative entropy $\textrm{ent}(g) \geq 0$ can be established by noting (a) that  $g \log g \geq g-1$ (see  {numref}`figure-example2`)
- and (b) that under $\phi$, $E g =1$.
+and (b) that under $\phi$, $E g =1$.
 
 
 {numref}`figure-example3` and {numref}`figure-example4` display aspects of relative entropy visually for a continuous random variable $x$ for
 two densities with likelihood ratio $g \geq 0$.  
 
 Where the numerator density is ${\mathcal N}(0,1)$, for two denominator  Gaussian densities ${\mathcal N}(0,1.5)$ and ${\mathcal N}(0,.95)$, respectively, {numref}`figure-example3` and {numref}`figure-example4`  display the functions  $g \log g$ and $g -1$ as functions of $x$.  
-
-
-
 
 
 
@@ -528,8 +523,6 @@ Where the numerator density is ${\mathcal N}(0,1)$, for two denominator  Gaussia
 The function $g \log g$ for $g \geq 0$. For a random variable $g$ with $E g =1$, $E g \log g \geq 0$.
 ```
 
-
-
 ```{figure} entropy_1_over_15.jpg
 :height: 350px
 :name: figure-example3
@@ -539,13 +532,11 @@ Under the ${\mathcal N}(0,1.5)$ density, $E g =1$.
 ```
 
 
-
-
 ```{figure} entropy_1_over_95.png
 :height: 350px
 :name: figure-example4
 
- $g \log g$ and $g-1$ where  $g$ is the ratio of the density of a ${\mathcal N}(0,1)$ random variable to the density of a ${\mathcal N}(0,1.5)$ random variable.
+$g \log g$ and $g-1$ where  $g$ is the ratio of the density of a ${\mathcal N}(0,1)$ random variable to the density of a ${\mathcal N}(0,1.5)$ random variable.
 Under the ${\mathcal N}(0,1.5)$ density, $E g =1$.
 ```
 
