@@ -79,9 +79,12 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
@@ -302,10 +305,42 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: polytope in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.2.3)
-Requirement already satisfied: networkx&gt;=1.6 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (2.6.3)
-Requirement already satisfied: numpy&gt;=1.10.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (1.20.3)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting polytope
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading polytope-0.2.3.tar.gz (51 kB)
+?25l
+     |██████▍                         | 10 kB 29.1 MB/s eta 0:00:01
+     |████████████▉                   | 20 kB 28.7 MB/s eta 0:00:01
+     |███████████████████▎            | 30 kB 13.8 MB/s eta 0:00:01
+     |█████████████████████████▊      | 40 kB 9.8 MB/s eta 0:00:01
+     |████████████████████████████████| 51 kB 7.4 MB/s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25hRequirement already satisfied: numpy&gt;=1.10.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (1.20.3)
 Requirement already satisfied: scipy&gt;=0.18.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (1.7.1)
+Requirement already satisfied: networkx&gt;=1.6 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (2.6.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Building wheels for collected packages: polytope
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for polytope (setup.py) ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
+?25h  Created wheel for polytope: filename=polytope-0.2.3-py3-none-any.whl size=46059 sha256=d40b9a4bfd698608162242ea09567eac55ae5a9b5625dd1943ad66a37b2fe310
+  Stored in directory: /home/runner/.cache/pip/wheels/dc/0b/33/e063a044f930977e4897732d007122648d9db0e50934094040
+Successfully built polytope
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: polytope
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed polytope-0.2.3
 </pre></div>
 </div>
 </div>
@@ -1551,7 +1586,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 16 iterations and 86.22             seconds
+Convergence achieved after 16 iterations and 103.5             seconds
 </pre></div>
 </div>
 </div>
@@ -1729,7 +1764,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 40 iterations and 478.17             seconds
+Convergence achieved after 40 iterations and 573.45             seconds
 </pre></div>
 </div>
 </div>
@@ -1800,7 +1835,7 @@ differ only in the level of <span class="math notranslate nohighlight">\(\beta\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_16835/3554151967.py:33: RuntimeWarning: invalid value encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_13981/3554151967.py:33: RuntimeWarning: invalid value encountered in log
   uc = lambda c: np.log(c)
 </pre></div>
 </div>
@@ -1814,7 +1849,7 @@ differ only in the level of <span class="math notranslate nohighlight">\(\beta\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_16835/3554151967.py:309: RuntimeWarning: invalid value encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_13981/3554151967.py:309: RuntimeWarning: invalid value encountered in log
   uc = lambda c: np.log(c)
 </pre></div>
 </div>

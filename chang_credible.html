@@ -79,9 +79,12 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
@@ -279,37 +282,10 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting polytope
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading polytope-0.2.3.tar.gz (51 kB)
-?25l
-     |██████▍                         | 10 kB 41.2 MB/s eta 0:00:01
-     |████████████▉                   | 20 kB 45.9 MB/s eta 0:00:01
-     |███████████████████▎            | 30 kB 51.4 MB/s eta 0:00:01
-     |█████████████████████████▊      | 40 kB 23.4 MB/s eta 0:00:01
-     |████████████████████████████████| 51 kB 12.6 MB/s 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25hRequirement already satisfied: numpy&gt;=1.10.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (1.20.3)
-Requirement already satisfied: scipy&gt;=0.18.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (1.7.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: polytope in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.2.3)
+Requirement already satisfied: numpy&gt;=1.10.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (1.20.3)
 Requirement already satisfied: networkx&gt;=1.6 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (2.6.3)
-Building wheels for collected packages: polytope
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for polytope (setup.py) ... ?25l-
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
-?25h  Created wheel for polytope: filename=polytope-0.2.3-py3-none-any.whl size=46059 sha256=e3dc78586df753c8706f88765ce1ea52141bbf0d6bf72899769cd795f06a9fcc
-  Stored in directory: /home/runner/.cache/pip/wheels/dc/0b/33/e063a044f930977e4897732d007122648d9db0e50934094040
-Successfully built polytope
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: polytope
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed polytope-0.2.3
+Requirement already satisfied: scipy&gt;=0.18.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (1.7.1)
 </pre></div>
 </div>
 </div>
@@ -1516,7 +1492,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 16 iterations and 85.82             seconds
+Convergence achieved after 16 iterations and 105.82             seconds
 </pre></div>
 </div>
 </div>
@@ -1706,7 +1682,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 40 iterations and 477.4             seconds
+Convergence achieved after 40 iterations and 591.33             seconds
 </pre></div>
 </div>
 </div>

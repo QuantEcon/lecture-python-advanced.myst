@@ -79,9 +79,12 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
@@ -347,18 +350,18 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.20.3)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.54.1)
 Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.26.0)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.9)
-Requirement already satisfied: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.54.1)
+Requirement already satisfied: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.20.3)
 Requirement already satisfied: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.7.1)
+Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.9)
 Requirement already satisfied: llvmlite&lt;0.38,&gt;=0.37.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.37.0)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (58.0.4)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.10.8)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.26.7)
 Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.26.7)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.2)
 Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
@@ -944,7 +947,7 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:102: ComplexWarning: Casting complex values to real discards the imaginary part
   return array(a, dtype, copy=False, order=order)
-/tmp/ipykernel_11851/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
+/tmp/ipykernel_13914/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:975: ComplexWarning: Casting complex values to real discards the imaginary part
@@ -977,7 +980,7 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:102: ComplexWarning: Casting complex values to real discards the imaginary part
   return array(a, dtype, copy=False, order=order)
-/tmp/ipykernel_11851/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
+/tmp/ipykernel_13914/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:975: ComplexWarning: Casting complex values to real discards the imaginary part
@@ -1000,7 +1003,7 @@ Invalid limit will be ignored.
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:102: ComplexWarning: Casting complex values to real discards the imaginary part
   return array(a, dtype, copy=False, order=order)
-/tmp/ipykernel_11851/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
+/tmp/ipykernel_13914/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:975: ComplexWarning: Casting complex values to real discards the imaginary part
@@ -1023,7 +1026,7 @@ Invalid limit will be ignored.
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:102: ComplexWarning: Casting complex values to real discards the imaginary part
   return array(a, dtype, copy=False, order=order)
-/tmp/ipykernel_11851/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
+/tmp/ipykernel_13914/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:975: ComplexWarning: Casting complex values to real discards the imaginary part
@@ -1046,7 +1049,7 @@ Invalid limit will be ignored.
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/numpy/core/_asarray.py:102: ComplexWarning: Casting complex values to real discards the imaginary part
   return array(a, dtype, copy=False, order=order)
-/tmp/ipykernel_11851/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
+/tmp/ipykernel_13914/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/matplotlib/transforms.py:975: ComplexWarning: Casting complex values to real discards the imaginary part

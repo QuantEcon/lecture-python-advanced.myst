@@ -79,9 +79,12 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
@@ -320,6 +323,12 @@
 <li><p>an asset pricing equation</p></li>
 <li><p>a Cauchy-Schwartz inequality</p></li>
 </ul>
+<p>In this way, we shall derive the basic <strong>capital asset pricing model</strong>, the celebrated CAPM.</p>
+<p>We’ll describe the basic ways that practitioners have implemented the model using</p>
+<ul class="simple">
+<li><p>cross sections of returns on many assets</p></li>
+<li><p>time series of returns on various assets</p></li>
+</ul>
 <p>For background and basic  concepts, see our lecture <a class="reference external" href="https://python-advanced.quantecon.org/orth_proj.html">orthogonal projections and their applications</a>.</p>
 <p>As a sequel to the material here, please see our lecture <a class="reference external" href="https://python-advanced.quantecon.org/black_litterman.html">two modifications of mean-variance portfolio theory</a>.</p>
 </div>
@@ -339,13 +348,18 @@ R^{i} &amp;= \text {random gross return  on asset }  i \\
 E &amp;\sim \text { mathematical expectation }
 \end{aligned}
 \end{split}\]</div>
-<p>The random gross returns <span class="math notranslate nohighlight">\(R^i\)</span> and the scalar stochastic discount factor <span class="math notranslate nohighlight">\(m\)</span> live
+<p>The random gross returns <span class="math notranslate nohighlight">\(R^i\)</span> and the scalar stochastic discount factor <span class="math notranslate nohighlight">\(m\)</span>
 live in a common probability space.</p>
-<p><span id="id1">[<a class="reference internal" href="zreferences.html#id115">HR87</a>]</span> and <span id="id2">[<a class="reference internal" href="zreferences.html#id20">HJ91</a>]</span> explain how the existence of a scarlar stochastic discount factor that verifies  equation
+<p><span id="id1">[<a class="reference internal" href="zreferences.html#id115">HR87</a>]</span> and <span id="id2">[<a class="reference internal" href="zreferences.html#id20">HJ91</a>]</span> explain how <strong>existence</strong> of a scalar stochastic discount factor that verifies  equation
 <a class="reference internal" href="#equation-eq-emr1">(35.1)</a> is implied by a <strong>law of one price</strong> that requires that all portfolios of assets
 that end up having the same payouts must have the same price.</p>
-<p>They also explain how the <strong>absence of an arbitrage</strong> implies that the stochastic discount
+<p>They also explain how the <strong>absence of an arbitrage</strong> opportunity implies that the stochastic discount
 factor <span class="math notranslate nohighlight">\(m \geq 0\)</span>.</p>
+<p>To say something about the <strong>uniqueness</strong> of a stochastic discount factor would require that we impose more theoretical structure than we do in this
+lecture.</p>
+<p>In <strong>complete markets</strong> models like those illustrated in this lecture <a class="reference external" href="https://python-advanced.quantecon.org/BCG_incomplete_mkts.html">equilibrium capital structures with incomplete markets</a>,
+the stochastic discount factor is unique.</p>
+<p>In <strong>incomplete markets</strong> models like those illustrated in this lecture <a class="reference external" href="https://python.quantecon.org/aiyagari.html">the Aiyagari model</a>, the stochastic discount factor is not unique.</p>
 </div>
 <div class="section" id="implications-of-key-equation">
 <h2><a class="toc-backref" href="#id15"><span class="section-number">35.3. </span>Implications of Key Equation</a><a class="headerlink" href="#implications-of-key-equation" title="Permalink to this headline">¶</a></h2>
@@ -357,12 +371,12 @@ factor <span class="math notranslate nohighlight">\(m \geq 0\)</span>.</p>
 <span id="id5">[<a class="reference internal" href="zreferences.html#id16">Ros76</a>]</span>, <span id="id6">[<a class="reference internal" href="zreferences.html#id15">Ros78</a>]</span>, <span id="id7">[<a class="reference internal" href="zreferences.html#id17">HK79</a>]</span>, <span id="id8">[<a class="reference internal" href="zreferences.html#id18">Kre81</a>]</span>, and
 <span id="id9">[<a class="reference internal" href="zreferences.html#id14">CR83</a>]</span>.</p>
 </div>
-<p>By that remark, Lars Hansen meant that interesting restrictions can be deduced by recognizing that <span class="math notranslate nohighlight">\(E m R^i\)</span> is a component of the covariance between <span class="math notranslate nohighlight">\(m \)</span> and <span class="math notranslate nohighlight">\(R^i\)</span> and then using that fact to rearrange key equation  <a class="reference internal" href="#equation-eq-emr1">(35.1)</a>.</p>
+<p>This remark of Lars Hansen refers to the fact that interesting restrictions can be deduced by recognizing that <span class="math notranslate nohighlight">\(E m R^i\)</span> is a component of the covariance between <span class="math notranslate nohighlight">\(m \)</span> and <span class="math notranslate nohighlight">\(R^i\)</span> and then using that fact to rearrange key equation  <a class="reference internal" href="#equation-eq-emr1">(35.1)</a>.</p>
 <p>Let’s do this step by step.</p>
-<p>First note  that the definition
+<p>First note  that the definition of a
+covariance
 <span class="math notranslate nohighlight">\(\operatorname{cov}\left(m, R^{i}\right)  =  E (m - E m)(R^i - E R^i) \)</span>
-of a
-covariance implies that</p>
+implies that</p>
 <div class="math notranslate nohighlight">
 \[ 
 E m R^i = E m E R^{i}+\operatorname{cov}\left(m, R^{i}\right)
@@ -404,7 +418,7 @@ E R^{i}-R^{f} = -\operatorname{cov}\left(m, R^{i}\right) R^{f}
 </div>
 <div class="section" id="expected-return-beta-representation">
 <h2><a class="toc-backref" href="#id16"><span class="section-number">35.4. </span>Expected Return - Beta Representation</a><a class="headerlink" href="#expected-return-beta-representation" title="Permalink to this headline">¶</a></h2>
-<p>We can obtain the celebrated <strong>expected-return-Beta -representation</strong> for gross return <span class="math notranslate nohighlight">\(R^i\)</span> simply  by rearranging excess return equation <a class="reference internal" href="#equation-eq-emr3">(35.3)</a> to become</p>
+<p>We can obtain the celebrated <strong>expected-return-Beta -representation</strong> for gross return <span class="math notranslate nohighlight">\(R^i\)</span>  by simply  rearranging excess return equation <a class="reference internal" href="#equation-eq-emr3">(35.3)</a> to become</p>
 <div class="math notranslate nohighlight">
 \[
 E R^{i}=R^{f}+\left(\underbrace{\frac{\operatorname{cov}\left(R^{i}, m\right)}{\operatorname{var}(m)}}_{\quad\quad\beta_{i,m} = \text{regression coefficient}}\right)\left(\underbrace{-\frac{\operatorname{var}(m)}{E(m)}}_{\quad\lambda_{m} = \text{price of risk}}\right) 
@@ -421,6 +435,7 @@ E R^{i}=R^{f}+\beta_{i, m} \lambda_{m}
 </ul>
 <p>To interpret this representation it helps to provide the following widely used example.</p>
 <p><strong>Example</strong></p>
+<p>Let <span class="math notranslate nohighlight">\(c_t\)</span> be the logarithm of the consumption of a <em>representative consumer</em> or just a single consumer for whom we have data.</p>
 <p>A popular model of <span class="math notranslate nohighlight">\(m\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[ 
@@ -456,32 +471,33 @@ E m_{t+1} = \exp(-\rho) \exp \left( - \gamma \mu + \frac{\sigma_c^2 \gamma^2}{2}
 <li><p>when consumption growth is <strong>high</strong>, <span class="math notranslate nohighlight">\(m\)</span> is <strong>low</strong></p></li>
 <li><p>when consumption growth is <strong>low</strong>, <span class="math notranslate nohighlight">\(m\)</span> is <strong>high</strong></p></li>
 </ul>
-<p>According to representation <a class="reference internal" href="#equation-eq-erbetarep">(35.4)</a>, an asset with an <span class="math notranslate nohighlight">\(R^i\)</span> that can be expected to be high when consumption growth is low  has <span class="math notranslate nohighlight">\(\beta_i\)</span> positive and a low expected return.</p>
+<p>According to representation <a class="reference internal" href="#equation-eq-erbetarep">(35.4)</a>, an asset with a gross return  <span class="math notranslate nohighlight">\(R^i\)</span> that is expected to be <strong>high</strong> when consumption growth is <strong>low</strong>  has <span class="math notranslate nohighlight">\(\beta_i\)</span> positive and a <strong>low</strong> expected return.</p>
 <ul class="simple">
-<li><p>because it has a high gross return when consumption growth is low, it is a good hedge against consumption risk. That justifies its low average return</p></li>
+<li><p>because it has a high gross return when consumption growth is low, it is a good hedge against consumption risk. That justifies its low average return.</p></li>
 </ul>
-<p>An asset with an <span class="math notranslate nohighlight">\(R^i\)</span> that is low when consumption growth is low has <span class="math notranslate nohighlight">\(\beta_i\)</span> negative and a high expected return.</p>
+<p>An asset with an <span class="math notranslate nohighlight">\(R^i\)</span> that is <strong>low</strong> when consumption growth is <strong>low</strong> has <span class="math notranslate nohighlight">\(\beta_i\)</span> negative and a <strong>high</strong> expected return.</p>
 <ul class="simple">
-<li><p>because it has a low gross return when consumption growth is low, it is a poor hedge against consumption risk. That  justifies its high average return</p></li>
+<li><p>because it has a low gross return when consumption growth is low, it is a poor hedge against consumption risk. That  justifies its high average return.</p></li>
 </ul>
 </div>
 <div class="section" id="mean-variance-frontier">
 <h2><a class="toc-backref" href="#id17"><span class="section-number">35.5. </span>Mean-Variance Frontier</a><a class="headerlink" href="#mean-variance-frontier" title="Permalink to this headline">¶</a></h2>
 <p>Now we’ll derive the celebrated <strong>mean-variance frontier</strong>.</p>
-<p>We do this using a classic method of Lars Peter Hansen and Scott
+<p>We do this using a  method deployed by Lars Peter Hansen and Scott
 Richard <span id="id10">[<a class="reference internal" href="zreferences.html#id115">HR87</a>]</span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Methods of Hansen and Richard are described and used extensively by <span id="id11">[<a class="reference internal" href="zreferences.html#id19">Coc05</a>]</span>.</p>
 </div>
-<p>Their  idea was rearrange the key equation  <a class="reference internal" href="#equation-eq-emr1">(35.1)</a>, namely,  <span class="math notranslate nohighlight">\(E m R^i = 1\)</span>, and then  to  apply the Cauchy-Schwarz inequality.</p>
+<p>Their  idea was rearrange the key equation  <a class="reference internal" href="#equation-eq-emr1">(35.1)</a>, namely,  <span class="math notranslate nohighlight">\(E m R^i = 1\)</span>, and then  to  apply a Cauchy-Schwarz inequality.</p>
 <p>A convenient way to remember the Cauchy-Schwartz inequality in our context is that it says that an  <span class="math notranslate nohighlight">\(R^2\)</span> in any regression has to be  less than or equal to <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<p>(Please note that here <span class="math notranslate nohighlight">\(R^2\)</span> denotes the coefficient of determination in a regression, not a return on an asset!)</p>
 <p>Let’s apply that idea to deduce</p>
 <div class="math notranslate nohighlight" id="equation-eq-emr5">
 <span class="eqno">(35.5)<a class="headerlink" href="#equation-eq-emr5" title="Permalink to this equation">¶</a></span>\[ 
 1= E\left(m R^{i}\right)=E(m) E\left(R^{i}\right)+\rho_{m, R^{i}}\frac{\sigma(m)}{E(m)} \sigma\left(R^{i}\right) 
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(\rho_{m, R^i}\)</span> is the correlation coefficient  defined as</p>
+<p>where the correlation coefficient <span class="math notranslate nohighlight">\(\rho_{m, R^i}\)</span> is   defined as</p>
 <div class="math notranslate nohighlight">
 \[ 
 \rho_{m, R^i} \equiv \frac{\operatorname{cov}\left(m, R^{i}\right)}{\sigma(m) \sigma\left(R^{i}\right)} 
@@ -519,13 +535,12 @@ that</p>
 <li><p>all returns on frontier are perfectly correlated.</p>
 <p>Thus,</p>
 <ul class="simple">
-<li><p>Let <span class="math notranslate nohighlight">\(R^m, R^{mv}\)</span> be two returns on frontier.</p></li>
-<li><p>Then for some scalar <span class="math notranslate nohighlight">\(a\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(R^{m v}=R^{f}+a\left(R^{m}-R^{f}\right)\)</span></p></li>
+<li><p>Let <span class="math notranslate nohighlight">\(R^m, R^{mv}\)</span> be two returns on the frontier.</p></li>
+<li><p>Then for some scalar <span class="math notranslate nohighlight">\(a\)</span>, a return <span class="math notranslate nohighlight">\(R^{m v}\)</span> on the mean-variance frontier satisfies the affine equation
+<span class="math notranslate nohighlight">\(R^{m v}=R^{f}+a\left(R^{m}-R^{f}\right)\)</span> .  This is an <strong>exact</strong> equation with no <strong>residual</strong>.</p></li>
 </ul>
-<p>This is an <strong>exact</strong> equation with no <strong>residual</strong></p>
 </li>
-<li><p>each return <span class="math notranslate nohighlight">\(R^i\)</span> that is on the mean-variance frontier is perfectly correlated with <span class="math notranslate nohighlight">\(m\)</span></p>
+<li><p>each return <span class="math notranslate nohighlight">\(R^{mv}\)</span> that is on the mean-variance frontier is perfectly correlated with <span class="math notranslate nohighlight">\(m\)</span></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\left(\rho_{m, R^{i}}=-1\right) \Rightarrow \begin{cases} m=a+b R^{m v} \\ R^{m v}=e+d  m  \end{cases}\)</span> for some scalars <span class="math notranslate nohighlight">\(a, b, e, d\)</span>,</p></li>
 </ul>
@@ -549,7 +564,8 @@ E R^{i}=R^{f}+\beta_{i, R^{m v}}\left[E\left(R^{m v}\right)-R^{f}\right]
 <p>The single-beta representation  <a class="reference internal" href="#equation-eq-emr7">(35.7)</a> is a special case with there being just a single factor.</p>
 <p>Two representations are often used in empirical work.</p>
 <p>One is a  <strong>time-series regression</strong> of  gross return <span class="math notranslate nohighlight">\(R_t^i\)</span> on multiple
-risk factors <span class="math notranslate nohighlight">\(f_t^j, j = a, b, \ldots \)</span> that is designed to uncover exposures of return <span class="math notranslate nohighlight">\(R^i\)</span> to each of a set of  <strong>risk-factors</strong> <span class="math notranslate nohighlight">\(f_t^j, j = a, b, \ldots, \)</span>:</p>
+risk factors <span class="math notranslate nohighlight">\(f_t^j, j = a, b, \ldots \)</span>.</p>
+<p>Such regressions are  designed to uncover exposures of return <span class="math notranslate nohighlight">\(R^i\)</span> to each of a set of  <strong>risk-factors</strong> <span class="math notranslate nohighlight">\(f_t^j, j = a, b, \ldots, \)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 R_{t}^{i}=a_{i}+\beta_{i, a} f_{t}^{a}+\beta_{i, b} f_{t}^{b}+\ldots+\epsilon_{t}^{i}, \quad t=1,2, \ldots, T\\
@@ -558,7 +574,7 @@ R_{t}^{i}=a_{i}+\beta_{i, a} f_{t}^{a}+\beta_{i, b} f_{t}^{b}+\ldots+\epsilon_{t
 <p>For example:</p>
 <ul class="simple">
 <li><p>a popular <strong>single-factor</strong> model specifies the single factor  <span class="math notranslate nohighlight">\(f_t\)</span> to be the return on the market portfolio</p></li>
-<li><p>another popular <strong>single-factor</strong> model called the consumption based model specifies the factor to be  <span class="math notranslate nohighlight">\( m_{t+1} = \beta \frac{u^{\prime}\left(c_{t+1}\right)}{u^{\prime}\left(c_{t}\right)}\)</span>, where <span class="math notranslate nohighlight">\(c_t\)</span> is a representative consumer’s time <span class="math notranslate nohighlight">\(t\)</span> consumption.</p></li>
+<li><p>another popular <strong>single-factor</strong> model called the <strong>consumption-based model</strong> specifies the factor to be  <span class="math notranslate nohighlight">\( m_{t+1} = \beta \frac{u^{\prime}\left(c_{t+1}\right)}{u^{\prime}\left(c_{t}\right)}\)</span>, where <span class="math notranslate nohighlight">\(c_t\)</span> is a representative consumer’s time <span class="math notranslate nohighlight">\(t\)</span> consumption.</p></li>
 </ul>
 <p>Model objects are interpreted as follows:</p>
 <ul class="simple">
@@ -590,7 +606,8 @@ models.</p>
 \underbrace{E\left(R^{i}\right)}_{\text{average return over time series}}=\gamma+\underbrace{\beta_{i, a}}_{\text{regressor}\quad} \underbrace{\lambda_{a}}_{\text{regression}\text{coefficient}}+\underbrace{\beta_{i, b}}_{\text{regressor}\quad} \underbrace{\lambda_{b}}_{\text{regression}\text{coefficient}}+\cdots+\underbrace{\alpha_{i}}_{\text{pricing errors}}, i=1, \ldots, I; \quad \underbrace{\alpha_i \perp \beta_{i,j},j = a, b, \ldots}_{\text{least squares orthogonality condition}}
 \]</div>
 <ul class="simple">
-<li><p>estimate <span class="math notranslate nohighlight">\(\gamma, \lambda_{a}, \lambda_{b}, \ldots\)</span> by an appropriate regression technique, being thoughtful about recognizing that the regressors have been generated by a step 1 regression.</p></li>
+<li><p>Here <span class="math notranslate nohighlight">\(\perp\)</span> means __orthogonal to**</p></li>
+<li><p>estimate <span class="math notranslate nohighlight">\(\gamma, \lambda_{a}, \lambda_{b}, \ldots\)</span> by an appropriate regression technique,  recognizing that the regressors have been generated by a step 1 regression.</p></li>
 </ul>
 <p>Note that presumably  the risk-free return <span class="math notranslate nohighlight">\(E R^{f}=\gamma\)</span>.</p>
 <p>For excess returns <span class="math notranslate nohighlight">\(R^{ei} = R^i - R^f\)</span> we have</p>
@@ -598,6 +615,10 @@ models.</p>
 \[
 E R^{e i}=\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots+\alpha_{i}, i=1, \ldots, I
 \]</div>
+<p>In the  following exercises, we apply components of the theory.</p>
+<p>Our basic tools are random number generator that we shall use to create artificial samples that conform to the theory and
+least squares regressions that let us watch aspects of the theory at work.</p>
+<p>These exercises will further convince us that asset pricing theory is mostly about covariances and least squares regressions.</p>
 </div>
 <div class="section" id="exercises">
 <h2><a class="toc-backref" href="#id19"><span class="section-number">35.7. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
@@ -649,12 +670,12 @@ R^i_t - R^f = \beta_{i, R^m} (R^m_t - R^f) + \sigma_i \varepsilon_{i, t}.
 </div>
 <div class="section" id="exercise-3">
 <h3><span class="section-number">35.7.3. </span>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h3>
-<p>Recall our earlier discussions of a <strong>direct problem</strong> and an <strong>inverse problem</strong>.</p>
+<p>As in many sciences, it is useful to distinguish a  <strong>direct problem</strong> from  an <strong>inverse problem</strong>.</p>
 <ul class="simple">
-<li><p>A direct problem is about simulating a particular model.</p></li>
-<li><p>An inverse problem is about using data to <strong>estimate</strong> or <strong>choose</strong> a particular model from a manifold of models.</p></li>
+<li><p>A direct problem involves simulating a particular model with known parameter values.</p></li>
+<li><p>An inverse problem involves using data to <strong>estimate</strong> or <strong>choose</strong> a particular  parameter vector  from a manifold of models indexed by a set of parameter vectors.</p></li>
 </ul>
-<p>Please assume the parameter values set below and then simulate 2000 observations from the theory specified
+<p>Please assume the parameter values provided below and then simulate 2000 observations from the theory specified
 above for 5 assets, <span class="math notranslate nohighlight">\(i = 1, \ldots, 5\)</span>.</p>
 <div class="amsmath math notranslate nohighlight">
 \[\begin{align*}
@@ -843,7 +864,7 @@ E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&amp;=E\left[\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.06158797668488265, 0.08161599774819933)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.060110476770859456, 0.08019312364913446)
 </pre></div>
 </div>
 </div>
@@ -881,8 +902,8 @@ E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&amp;=E\left[\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.18965526, 0.41333883, 0.60177114, 0.81586822, 1.00326673]),
- array([0.03954234, 0.04043879, 0.04070154, 0.04071622, 0.03966914]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.20263944, 0.395119  , 0.60649427, 0.80175441, 1.01074935]),
+ array([0.04021323, 0.03963437, 0.04001866, 0.0399733 , 0.03855606]))
 </pre></div>
 </div>
 </div>
@@ -903,8 +924,8 @@ E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&amp;=E\left[\
 </div>
 <div class="section" id="solution-to-exercise-4">
 <h3><span class="section-number">35.8.4. </span>Solution to Exercise 4<a class="headerlink" href="#solution-to-exercise-4" title="Permalink to this headline">¶</a></h3>
-<div class="amsmath math notranslate nohighlight" id="equation-9987fbfa-aaa0-41ca-a20d-521820bac9bd">
-<span class="eqno">(35.8)<a class="headerlink" href="#equation-9987fbfa-aaa0-41ca-a20d-521820bac9bd" title="Permalink to this equation">¶</a></span>\[\begin{align}
+<div class="amsmath math notranslate nohighlight" id="equation-12625d5c-b261-4cf0-b5c3-ae33cb72e438">
+<span class="eqno">(35.8)<a class="headerlink" href="#equation-12625d5c-b261-4cf0-b5c3-ae33cb72e438" title="Permalink to this equation">¶</a></span>\[\begin{align}
 a ((E(R^f) + \xi) + b ((E(R^f) + \xi)^2 + \lambda^2 + \sigma_f^2) &amp; =1 \cr
 a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1 
 \end{align}\]</div>
@@ -965,7 +986,7 @@ a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(87.71737986553154, -462.2909085147128, 54.30103829678549)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(87.43994765210724, -467.35394871256403, 54.29203892633663)
 </pre></div>
 </div>
 </div>
