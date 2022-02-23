@@ -39,6 +39,13 @@ To do this, we use two ideas:
   
   * a Cauchy-Schwartz inequality
 
+In this way, we shall derive the basic **capital asset pricing model**, the celebrated CAPM. 
+
+We'll describe the basic ways that practitioners have implemented the model using
+
+* cross sections of returns on many assets
+* time series of returns on various assets
+
 
 For background and basic  concepts, see our lecture [orthogonal projections and their applications](https://python-advanced.quantecon.org/orth_proj.html).
 
@@ -63,15 +70,24 @@ E &\sim \text { mathematical expectation }
 \end{aligned}
 $$
 
-The random gross returns $R^i$ and the scalar stochastic discount factor $m$ live 
+The random gross returns $R^i$ and the scalar stochastic discount factor $m$ 
 live in a common probability space. 
 
-{cite}`HansenRichard1987` and {cite}`Hansen_Jagannathan_1991` explain how the existence of a scarlar stochastic discount factor that verifies  equation
+{cite}`HansenRichard1987` and {cite}`Hansen_Jagannathan_1991` explain how **existence** of a scalar stochastic discount factor that verifies  equation
 {eq}`eq:EMR1` is implied by a __law of one price__ that requires that all portfolios of assets 
 that end up having the same payouts must have the same price.
 
-They also explain how the __absence of an arbitrage__ implies that the stochastic discount
+They also explain how the __absence of an arbitrage__ opportunity implies that the stochastic discount
 factor $m \geq 0$.
+
+To say something about the **uniqueness** of a stochastic discount factor would require that we impose more theoretical structure than we do in this
+lecture.   
+
+In **complete markets** models like those illustrated in this lecture [equilibrium capital structures with incomplete markets](https://python-advanced.quantecon.org/BCG_incomplete_mkts.html),
+the stochastic discount factor is unique.
+
+In **incomplete markets** models like those illustrated in this lecture [the Aiyagari model](https://python.quantecon.org/aiyagari.html), the stochastic discount factor is not unique.
+
 
 ## Implications of Key Equation
 
@@ -85,15 +101,15 @@ Lars Hansen's remark is a concise summary of ideas in {cite}`HansenRichard1987` 
 {cite}`Chamberlain_Rothschild`.
 ```
 
-By that remark, Lars Hansen meant that interesting restrictions can be deduced by recognizing that $E m R^i$ is a component of the covariance between $m $ and $R^i$ and then using that fact to rearrange key equation  {eq}`eq:EMR1`.
+This remark of Lars Hansen refers to the fact that interesting restrictions can be deduced by recognizing that $E m R^i$ is a component of the covariance between $m $ and $R^i$ and then using that fact to rearrange key equation  {eq}`eq:EMR1`.
 
 
 Let's do this step by step.
 
-First note  that the definition 
+First note  that the definition of a
+covariance 
 $\operatorname{cov}\left(m, R^{i}\right)  =  E (m - E m)(R^i - E R^i) $
-of a
-covariance implies that
+ implies that
 
 $$ 
 E m R^i = E m E R^{i}+\operatorname{cov}\left(m, R^{i}\right)
@@ -145,7 +161,7 @@ Equation {eq}`eq:EMR3` can be rearranged to display important parts of asset pri
 
 ## Expected Return - Beta Representation
 
-We can obtain the celebrated **expected-return-Beta -representation** for gross return $R^i$ simply  by rearranging excess return equation {eq}`eq:EMR3` to become
+We can obtain the celebrated **expected-return-Beta -representation** for gross return $R^i$  by simply  rearranging excess return equation {eq}`eq:EMR3` to become
 
 $$
 E R^{i}=R^{f}+\left(\underbrace{\frac{\operatorname{cov}\left(R^{i}, m\right)}{\operatorname{var}(m)}}_{\quad\quad\beta_{i,m} = \text{regression coefficient}}\right)\left(\underbrace{-\frac{\operatorname{var}(m)}{E(m)}}_{\quad\lambda_{m} = \text{price of risk}}\right) 
@@ -167,6 +183,8 @@ To interpret this representation it helps to provide the following widely used e
  
  
 **Example** 
+
+Let $c_t$ be the logarithm of the consumption of a _representative consumer_ or just a single consumer for whom we have data.
 
 A popular model of $m$ is
 
@@ -212,13 +230,13 @@ When $\gamma >0$, it is true that
  
  * when consumption growth is **low**, $m$ is **high**
  
-According to representation {eq}`eq:ERbetarep`, an asset with an $R^i$ that can be expected to be high when consumption growth is low  has $\beta_i$ positive and a low expected return.  
+According to representation {eq}`eq:ERbetarep`, an asset with a gross return  $R^i$ that is expected to be **high** when consumption growth is **low**  has $\beta_i$ positive and a **low** expected return.  
 
-   * because it has a high gross return when consumption growth is low, it is a good hedge against consumption risk. That justifies its low average return
+   * because it has a high gross return when consumption growth is low, it is a good hedge against consumption risk. That justifies its low average return.
 
-An asset with an $R^i$ that is low when consumption growth is low has $\beta_i$ negative and a high expected return.
+An asset with an $R^i$ that is **low** when consumption growth is **low** has $\beta_i$ negative and a **high** expected return.
 
-  * because it has a low gross return when consumption growth is low, it is a poor hedge against consumption risk. That  justifies its high average return
+  * because it has a low gross return when consumption growth is low, it is a poor hedge against consumption risk. That  justifies its high average return.
 
 
  
@@ -227,16 +245,18 @@ An asset with an $R^i$ that is low when consumption growth is low has $\beta_i$ 
 
 Now we'll derive the celebrated **mean-variance frontier**.
 
-We do this using a classic method of Lars Peter Hansen and Scott
+We do this using a  method deployed by Lars Peter Hansen and Scott
 Richard {cite}`HansenRichard1987`. 
 
 ```{note}
 Methods of Hansen and Richard are described and used extensively by {cite}`Cochrane_2005`.
 ```
 
-Their  idea was rearrange the key equation  {eq}`eq:EMR1`, namely,  $E m R^i = 1$, and then  to  apply the Cauchy-Schwarz inequality.
+Their  idea was rearrange the key equation  {eq}`eq:EMR1`, namely,  $E m R^i = 1$, and then  to  apply a Cauchy-Schwarz inequality.
 
 A convenient way to remember the Cauchy-Schwartz inequality in our context is that it says that an  $R^2$ in any regression has to be  less than or equal to $1$.
+
+(Please note that here $R^2$ denotes the coefficient of determination in a regression, not a return on an asset!)
 
 Let's apply that idea to deduce
 
@@ -245,7 +265,7 @@ $$
 1= E\left(m R^{i}\right)=E(m) E\left(R^{i}\right)+\rho_{m, R^{i}}\frac{\sigma(m)}{E(m)} \sigma\left(R^{i}\right) 
 $$ (eq:EMR5) 
 
-where $\rho_{m, R^i}$ is the correlation coefficient  defined as
+where the correlation coefficient $\rho_{m, R^i}$ is   defined as
 
 $$ 
 \rho_{m, R^i} \equiv \frac{\operatorname{cov}\left(m, R^{i}\right)}{\sigma(m) \sigma\left(R^{i}\right)} 
@@ -297,16 +317,13 @@ that
 
   Thus,
    
-   * Let $R^m, R^{mv}$ be two returns on frontier. 
+   * Let $R^m, R^{mv}$ be two returns on the frontier. 
    
-   * Then for some scalar $a$ 
-   
-   * $R^{m v}=R^{f}+a\left(R^{m}-R^{f}\right)$ 
-  
-  This is an **exact** equation with no **residual**
+   * Then for some scalar $a$, a return $R^{m v}$ on the mean-variance frontier satisfies the affine equation
+       $R^{m v}=R^{f}+a\left(R^{m}-R^{f}\right)$ .  This is an **exact** equation with no **residual**.
  
  
-- each return $R^i$ that is on the mean-variance frontier is perfectly correlated with $m$ 
+- each return $R^{mv}$ that is on the mean-variance frontier is perfectly correlated with $m$ 
   
    *  $\left(\rho_{m, R^{i}}=-1\right) \Rightarrow \begin{cases} m=a+b R^{m v} \\ R^{m v}=e+d  m  \end{cases}$ for some scalars $a, b, e, d$, 
    
@@ -337,7 +354,9 @@ Two representations are often used in empirical work.
 
 
 One is a  **time-series regression** of  gross return $R_t^i$ on multiple
-risk factors $f_t^j, j = a, b, \ldots $ that is designed to uncover exposures of return $R^i$ to each of a set of  **risk-factors** $f_t^j, j = a, b, \ldots, $:
+risk factors $f_t^j, j = a, b, \ldots $.
+
+Such regressions are  designed to uncover exposures of return $R^i$ to each of a set of  **risk-factors** $f_t^j, j = a, b, \ldots, $:
 
 $$
 R_{t}^{i}=a_{i}+\beta_{i, a} f_{t}^{a}+\beta_{i, b} f_{t}^{b}+\ldots+\epsilon_{t}^{i}, \quad t=1,2, \ldots, T\\
@@ -348,7 +367,7 @@ For example:
 
    * a popular **single-factor** model specifies the single factor  $f_t$ to be the return on the market portfolio 
    
-   * another popular **single-factor** model called the consumption based model specifies the factor to be  $ m_{t+1} = \beta \frac{u^{\prime}\left(c_{t+1}\right)}{u^{\prime}\left(c_{t}\right)}$, where $c_t$ is a representative consumer's time $t$ consumption.
+   * another popular **single-factor** model called the **consumption-based model** specifies the factor to be  $ m_{t+1} = \beta \frac{u^{\prime}\left(c_{t+1}\right)}{u^{\prime}\left(c_{t}\right)}$, where $c_t$ is a representative consumer's time $t$ consumption.
    
 Model objects are interpreted as follows:   
  
@@ -393,7 +412,9 @@ $$
 \underbrace{E\left(R^{i}\right)}_{\text{average return over time series}}=\gamma+\underbrace{\beta_{i, a}}_{\text{regressor}\quad} \underbrace{\lambda_{a}}_{\text{regression}\text{coefficient}}+\underbrace{\beta_{i, b}}_{\text{regressor}\quad} \underbrace{\lambda_{b}}_{\text{regression}\text{coefficient}}+\cdots+\underbrace{\alpha_{i}}_{\text{pricing errors}}, i=1, \ldots, I; \quad \underbrace{\alpha_i \perp \beta_{i,j},j = a, b, \ldots}_{\text{least squares orthogonality condition}}
 $$
 
-- estimate $\gamma, \lambda_{a}, \lambda_{b}, \ldots$ by an appropriate regression technique, being thoughtful about recognizing that the regressors have been generated by a step 1 regression.
+- Here $\perp$ means __orthogonal to**
+
+- estimate $\gamma, \lambda_{a}, \lambda_{b}, \ldots$ by an appropriate regression technique,  recognizing that the regressors have been generated by a step 1 regression.
 
 Note that presumably  the risk-free return $E R^{f}=\gamma$.
 
@@ -402,6 +423,14 @@ For excess returns $R^{ei} = R^i - R^f$ we have
 $$
 E R^{e i}=\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots+\alpha_{i}, i=1, \ldots, I
 $$
+
+
+In the  following exercises, we apply components of the theory.
+
+Our basic tools are random number generator that we shall use to create artificial samples that conform to the theory and
+least squares regressions that let us watch aspects of the theory at work.
+
+These exercises will further convince us that asset pricing theory is mostly about covariances and least squares regressions.
 
 ## Exercises 
 
@@ -451,12 +480,12 @@ Give a formula for the regression coefficient $\beta_{i, R^m}$.
 
 ### Exercise 3
 
-Recall our earlier discussions of a **direct problem** and an **inverse problem**.
+As in many sciences, it is useful to distinguish a  **direct problem** from  an **inverse problem**.
 
-* A direct problem is about simulating a particular model.
-* An inverse problem is about using data to **estimate** or **choose** a particular model from a manifold of models.
+* A direct problem involves simulating a particular model with known parameter values.
+* An inverse problem involves using data to **estimate** or **choose** a particular  parameter vector  from a manifold of models indexed by a set of parameter vectors.
 
-Please assume the parameter values set below and then simulate 2000 observations from the theory specified
+Please assume the parameter values provided below and then simulate 2000 observations from the theory specified
 above for 5 assets, $i = 1, \ldots, 5$.
 
 \begin{align*}
