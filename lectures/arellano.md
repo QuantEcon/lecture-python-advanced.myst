@@ -332,19 +332,18 @@ The second approach is faster and the two different procedures deliver very simi
 
 Here is a more detailed description of our algorithm:
 
-1. Guess a value function $v(B, y)$ and price function $q(B', y)$.
-1. At each pair $(B, y)$,
-    * update the value of defaulting $v_d(y)$.
-    * update the value of continuing $v_c(B, y)$.
-1. Update the value function $v(B, y)$, the default rule, the implied ex ante default
-   probability, and the price function.
-1. Check for convergence. If converged, stop -- if not, go to step 2.
+1. Guess a pair of non-default and default value functions $v_c$ and $v_d$.
+2. Using these functions, calculate the value function $v$, the corresponding default probabilities and the price function $q$.
+2. At each pair $(B, y)$,
+    1. update the value of defaulting $v_d(y)$.
+    2. update the value of remaining $v_c(B, y)$.
+4. Check for convergence. If converged, stop -- if not, go to step 2.
 
 We use simple discretization on a grid of asset holdings and income levels.
 
-The output process is discretized using [Tauchen's quadrature method](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/markov/approximation.py).
+The output process is discretized using a [quadrature method due to Tauchen](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/markov/approximation.py).
 
-As we have in other places, we will accelerate our code using Numba.
+As we have in other places, we accelerate our code using Numba.
 
 We define a class that will store parameters, grids and transition
 probabilities.
@@ -357,7 +356,7 @@ class Arellano_Economy:
             B_grid_size= 251,   # Grid size for bonds
             B_grid_min=-0.45,   # Smallest B value 
             B_grid_max=0.45,    # Largest B value
-            y_grid_size=21,     # Grid size for income 
+            y_grid_size=51,     # Grid size for income 
             β=0.953,            # Time discount parameter
             γ=2.0,              # Utility parameter
             r=0.017,            # Lending rate
@@ -389,12 +388,26 @@ class Arellano_Economy:
         return self.P, self.y_grid, self.B_grid, self.def_y, self.B0_idx
 ```
 
+Notice how the class returns the data it stores as simple numerical values and
+arrays via the methods `params` and `arrays`.
+
+We will use this data in the Numba-jitted functions defined below.  
+
+Jitted functions prefer simple arguments, since type inference is easier.
+
+Here is the utility function.
+
 
 ```python
 @njit
 def u(c, γ):
     return c**(1-γ)/(1-γ)
+```
 
+Here is a function to compute the bond price at each state, given $v_c$ and
+$v_d$.
+
+```python
 @njit
 def compute_q(v_c, v_d, q, params, arrays):
     """
@@ -413,8 +426,11 @@ def compute_q(v_c, v_d, q, params, arrays):
             default_states = 1.0 * (v_c[B_idx, :] < v_d)
             delta = np.dot(default_states, P[y_idx, :]) 
             q[B_idx, y_idx] = (1 - delta ) / (1 + r)
+```
 
+Next we introduce Bellman operators that updated $v_d$ and $v_c$.
 
+```python
 @njit
 def T_d(y_idx, v_c, v_d, params, arrays):
     """
@@ -457,7 +473,11 @@ def T_c(B_idx, y_idx, v_c, v_d, q, params, arrays):
                 current_max = val
                 Bp_star_idx = Bp_idx
     return current_max, Bp_star_idx
+```
 
+Here is a fast function that calls these operators in the right sequence.
+
+```python
 @njit(parallel=True)
 def update_values_and_prices(v_c, v_d,      # Current guess of value functions
                              B_star, q,     # Arrays to be written to
@@ -520,7 +540,7 @@ def solve(model, tol=1e-8, max_iter=10_000):
     dist = np.inf
     while (current_iter < max_iter) and (dist > tol):
 
-        if current_iter % 10 == 0:
+        if current_iter % 100 == 0:
             print(f"Entering iteration {current_iter}.")
 
         new_v_c, new_v_d = update_values_and_prices(v_c, v_d, B_star, q, params, arrays)
@@ -530,11 +550,12 @@ def solve(model, tol=1e-8, max_iter=10_000):
         v_d = new_v_d
         current_iter += 1
 
+    print(f"Terminating at iteration {current_iter}.")
     return v_c, v_d, q, B_star 
 ```
 
-Finally, we write a function that will allow us to simulate the economy once we have the
-policy functions
+Finally, we write a function that will allow us to simulate the economy once
+we have the policy functions
 
 ```python
 def simulate(model, T, v_c, v_d, q, B_star, y_idx=None, B_idx=None):
@@ -601,20 +622,22 @@ def simulate(model, T, v_c, v_d, q, B_star, y_idx=None, B_idx=None):
 
 ## Results
 
-Let's start by trying to replicate the results obtained in {cite}`arellano2008default`.
+Let's start by trying to replicate the results obtained in
+{cite}`arellano2008default`.
 
 In what follows, all results are computed using Arellano's parameter values.
 
-The values can be seen in the `__init__` method of the `Arellano_Economy` shown above.
+The values can be seen in the `__init__` method of the `Arellano_Economy`
+shown above.
 
-* For example, `r=0.017` matches the average quarterly rate on a 5 year US treasury over the
-  period 1983--2001.
+For example, `r=0.017` matches the average quarterly rate on a 5 year US treasury over the period 1983--2001.
 
-Details on how to compute the figures are reported as solutions to the exercises.
+Details on how to compute the figures are reported as solutions to the
+exercises.
 
-The first figure shows the bond price schedule and replicates Figure 3 of Arellano, where
-$y_L$ and $Y_H$ are particular below average and above average values of output
-$y$.
+The first figure shows the bond price schedule and replicates Figure 3 of
+Arellano, where $y_L$ and $Y_H$ are particular below average and above average
+values of output $y$.
 
 ```{figure} /_static/lecture_specific/arellano/arellano_bond_prices.png
 
@@ -623,16 +646,11 @@ $y$.
 * $y_L$ is 5% below the mean of the $y$ grid values
 * $y_H$ is 5% above  the mean of the $y$ grid values
 
-The grid used to compute this figure was relatively coarse (`ny, nB = 21, 251`) in order to
-match Arrelano's findings.
+The grid used to compute this figure was relatively fine (`y_grid_size,
+B_grid_size = 51, 251`), which explains the minor differences between this and
+Arrelano's figure.
 
-Here's the same relationships computed on a finer grid (`ny, nB = 51, 551`)
-
-```{figure} /_static/lecture_specific/arellano/arellano_bond_prices_2.png
-
-```
-
-In either case, the figure shows that
+The figure shows that
 
 * Higher levels of debt (larger $-B'$) induce larger discounts on the face value, which
   correspond to higher interest rates.
@@ -677,7 +695,7 @@ Periods of relative stability are followed by sharp spikes in the discount rate 
 
 To the extent that you can, replicate the figures shown above
 
-* Use the parameter values listed as defaults in the `__init__` method of the `Arellano_Economy`.
+* Use the parameter values listed as defaults in `Arellano_Economy`.
 * The time series will of course vary depending on the shock draws.
 
 ## Solutions
