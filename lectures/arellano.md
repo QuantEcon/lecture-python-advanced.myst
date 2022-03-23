@@ -29,7 +29,8 @@ jupyter:
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
-```python tags=["hide-output"]
+```python 
+:tags: ["hide-output"]
 !pip install --upgrade quantecon
 ```
 
