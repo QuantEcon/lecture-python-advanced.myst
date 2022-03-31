@@ -29,7 +29,7 @@ jupyter:
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
-```python 
+```{code-cell} python 
 :tags: ["hide-output"]
 !pip install --upgrade quantecon
 ```
@@ -77,7 +77,7 @@ Such dynamics are consistent with experiences of many countries.
 
 Let's start with some imports:
 
-```python
+```{code-cell} python 
 import matplotlib.pyplot as plt
 import numpy as np
 import quantecon as qe
@@ -349,7 +349,7 @@ As we have in other places, we accelerate our code using Numba.
 We define a class that will store parameters, grids and transition
 probabilities.
 
-```python
+```{code-cell} python 
 class Arellano_Economy:
     " Stores data and creates primitives for the Arellano economy. "
 
@@ -399,7 +399,7 @@ Jitted functions prefer simple arguments, since type inference is easier.
 Here is the utility function.
 
 
-```python
+```{code-cell} python 
 @njit
 def u(c, γ):
     return c**(1-γ)/(1-γ)
@@ -408,7 +408,7 @@ def u(c, γ):
 Here is a function to compute the bond price at each state, given $v_c$ and
 $v_d$.
 
-```python
+```{code-cell} python 
 @njit
 def compute_q(v_c, v_d, q, params, arrays):
     """
@@ -431,7 +431,7 @@ def compute_q(v_c, v_d, q, params, arrays):
 
 Next we introduce Bellman operators that updated $v_d$ and $v_c$.
 
-```python
+```{code-cell} python 
 @njit
 def T_d(y_idx, v_c, v_d, params, arrays):
     """
@@ -478,7 +478,7 @@ def T_c(B_idx, y_idx, v_c, v_d, q, params, arrays):
 
 Here is a fast function that calls these operators in the right sequence.
 
-```python
+```{code-cell} python 
 @njit(parallel=True)
 def update_values_and_prices(v_c, v_d,      # Current guess of value functions
                              B_star, q,     # Arrays to be written to
@@ -518,7 +518,7 @@ In fact, one of the jobs of this function is to take an instance of
 `Arellano_Economy`, which is hard for the JIT compiler to handle, and strip it
 down to more basic objects, which are then passed out to jitted functions.
 
-```python
+```{code-cell} python 
 def solve(model, tol=1e-8, max_iter=10_000):
     """
     Given an instance of Arellano_Economy, this function computes the optimal
@@ -558,7 +558,7 @@ def solve(model, tol=1e-8, max_iter=10_000):
 Finally, we write a function that will allow us to simulate the economy once
 we have the policy functions
 
-```python
+```{code-cell} python 
 def simulate(model, T, v_c, v_d, q, B_star, y_idx=None, B_idx=None):
     """
     Simulates the Arellano 2008 model of sovereign debt
@@ -703,17 +703,17 @@ To the extent that you can, replicate the figures shown above
 
 Compute the value function, policy and equilibrium prices
 
-```python
+```{code-cell} python 
 ae = Arellano_Economy()
 ```
 
-```python
+```{code-cell} python 
 v_c, v_d, q, B_star = solve(ae)
 ```
 
 Compute the bond price schedule as seen in figure 3 of Arellano (2008)
 
-```python
+```{code-cell} python 
 # Unpack some useful names
 B_grid, y_grid, P = ae.B_grid, ae.y_grid, ae.P
 B_grid_size, y_grid_size = len(B_grid), len(y_grid)
@@ -744,7 +744,7 @@ plt.show()
 
 Draw a plot of the value functions
 
-```python
+```{code-cell} python 
 v = np.maximum(v_c, np.reshape(v_d, (1, y_grid_size)))
 
 fig, ax = plt.subplots(figsize=(10, 6.5))
@@ -759,7 +759,7 @@ plt.show()
 
 Draw a heat map for default probability
 
-```python
+```{code-cell} python 
 xx, yy = B_grid, y_grid
 zz = np.empty_like(v_c)
 
@@ -780,7 +780,7 @@ plt.show()
 
 Plot a time series of major variables simulated from the model
 
-```python
+```{code-cell} python 
 T = 250
 np.random.seed(42)
 y_sim, y_a_sim, B_sim, q_sim, d_sim = simulate(ae, T, v_c, v_d, q, B_star)
