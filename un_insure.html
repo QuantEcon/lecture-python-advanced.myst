@@ -88,17 +88,16 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/un_insure.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -278,9 +277,9 @@
 <div class="section" id="overview">
 <h2><span class="section-number">39.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>This lecture describes a model of optimal unemployment
-insurance created by  Shavell and Weiss (1979) <span id="id1">[<a class="reference internal" href="zreferences.html#id6">SW79</a>]</span>.</p>
+insurance created by  Shavell and Weiss (1979) <span id="id1">[<a class="reference internal" href="zreferences.html#id6" title="Steven Shavell and Laurence Weiss. The optimal payment of unemployment insurance benefits over time. Journal of political Economy, 87(6):1347-1362, 1979.">SW79</a>]</span>.</p>
 <p>We  use recursive techniques of
-Hopenhayn and Nicolini (1997) <span id="id2">[<a class="reference internal" href="zreferences.html#id5">HN97</a>]</span> to
+Hopenhayn and Nicolini (1997) <span id="id2">[<a class="reference internal" href="zreferences.html#id5" title="Hugo A Hopenhayn and Juan Pablo Nicolini. Optimal Unemployment Insurance. Journal of Political Economy, 105(2):412-438, April 1997. URL: https://ideas.repec.org/a/ucp/jpolec/v105y1997i2p412-38.html, doi:10.1086/262078.">HN97</a>]</span> to
 compute optimal insurance plans for  Shavell and
 Weiss’s model.</p>
 <p>Hopenhayn and Nicolini’s model is a generalization of Shavell and Weiss’s along dimensions that we’ll soon describe.</p>
@@ -505,8 +504,8 @@ worker’s consumption <em>and</em> his search effort.</p>
 </div>
 <div class="section" id="private-information">
 <h2><span class="section-number">39.3. </span>Private Information<a class="headerlink" href="#private-information" title="Permalink to this headline">¶</a></h2>
-<p>Following Shavell and Weiss (1979) <span id="id3">[<a class="reference internal" href="zreferences.html#id6">SW79</a>]</span> and
-Hopenhayn and Nicolini (1997) <span id="id4">[<a class="reference internal" href="zreferences.html#id5">HN97</a>]</span>, now assume that  the unemployment insurance agency cannot
+<p>Following Shavell and Weiss (1979) <span id="id3">[<a class="reference internal" href="zreferences.html#id6" title="Steven Shavell and Laurence Weiss. The optimal payment of unemployment insurance benefits over time. Journal of political Economy, 87(6):1347-1362, 1979.">SW79</a>]</span> and
+Hopenhayn and Nicolini (1997) <span id="id4">[<a class="reference internal" href="zreferences.html#id5" title="Hugo A Hopenhayn and Juan Pablo Nicolini. Optimal Unemployment Insurance. Journal of Political Economy, 105(2):412-438, April 1997. URL: https://ideas.repec.org/a/ucp/jpolec/v105y1997i2p412-38.html, doi:10.1086/262078.">HN97</a>]</span>, now assume that  the unemployment insurance agency cannot
 observe or enforce <span class="math notranslate nohighlight">\(a\)</span>, though it can observe and control <span class="math notranslate nohighlight">\(c\)</span>.</p>
 <p>The worker is free to choose <span class="math notranslate nohighlight">\(a\)</span>, which puts expression <a class="reference internal" href="#equation-eq-hugo4">(39.4)</a>, the worker’s first-order condition under autarky,
 back in the picture.</p>
@@ -532,7 +531,7 @@ the constraint set through the introduction of lotteries.</p></li>
 <li><p>A common finding is that optimal plans do not involve
 lotteries, because convexity of the constraint set is a sufficient
 but not necessary condition for convexity of the cost function.</p></li>
-<li><p>Following Hopenhayn and Nicolini (1997) <span id="id5">[<a class="reference internal" href="zreferences.html#id5">HN97</a>]</span>, we therefore proceed under the assumption that <span class="math notranslate nohighlight">\(C(V)\)</span> is strictly convex in order to characterize the optimal solution.</p></li>
+<li><p>Following Hopenhayn and Nicolini (1997) <span id="id5">[<a class="reference internal" href="zreferences.html#id5" title="Hugo A Hopenhayn and Juan Pablo Nicolini. Optimal Unemployment Insurance. Journal of Political Economy, 105(2):412-438, April 1997. URL: https://ideas.repec.org/a/ucp/jpolec/v105y1997i2p412-38.html, doi:10.1086/262078.">HN97</a>]</span>, we therefore proceed under the assumption that <span class="math notranslate nohighlight">\(C(V)\)</span> is strictly convex in order to characterize the optimal solution.</p></li>
 </ul>
 <p>Let <span class="math notranslate nohighlight">\(\eta\)</span> be the multiplier on constraint <a class="reference internal" href="#equation-eq-hugo4">(39.4)</a>, while
 <span class="math notranslate nohighlight">\(\theta\)</span> continues to denote the multiplier on constraint <a class="reference internal" href="#equation-eq-hugo6">(39.6)</a>.</p>
@@ -783,11 +782,11 @@ the function <code class="docutils literal notranslate"><span class="pre">Vu_err
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interest rate to match 0.1 hazard rate: r = 0.0003431409393866592
-Check p at r: 0.10000000000001996
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interest rate to match 0.1 hazard rate: r = 0.0003431409393866347
+Check p at r: 0.1000000000000173
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/scipy/optimize/minpack.py:175: RuntimeWarning: The iteration is not making good progress, as measured by the 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/scipy/optimize/minpack.py:175: RuntimeWarning: The iteration is not making good progress, as measured by the 
   improvement from the last five Jacobian evaluations.
   warnings.warn(msg, RuntimeWarning)
 </pre></div>
@@ -798,8 +797,8 @@ Check p at r: 0.10000000000001996
 </div>
 <div class="section" id="computation-under-private-information">
 <h3><span class="section-number">39.3.4. </span>Computation under Private Information<a class="headerlink" href="#computation-under-private-information" title="Permalink to this headline">¶</a></h3>
-<p>Our approach to solving the full model is a variant on Judd (1998) <span id="id6">[<a class="reference internal" href="zreferences.html#id166">Jud98</a>]</span>, who uses a polynomial to approximate the value function and a numerical optimizer to perform the optimization at each iteration.</p>
-<p>In contrast, we will use cubic splines to interpolate across a pre-set grid of points to approximate the value function. For further details of the Judd (1998) <span id="id7">[<a class="reference internal" href="zreferences.html#id166">Jud98</a>]</span> method, see <span id="id8">[<a class="reference internal" href="zreferences.html#id173">LS18</a>]</span>, Section 5.7.</p>
+<p>Our approach to solving the full model is a variant on Judd (1998) <span id="id6">[<a class="reference internal" href="zreferences.html#id166" title="K L Judd. Numerical Methods in Economics. Scientific and Engineering. MIT Press, 1998.">Jud98</a>]</span>, who uses a polynomial to approximate the value function and a numerical optimizer to perform the optimization at each iteration.</p>
+<p>In contrast, we will use cubic splines to interpolate across a pre-set grid of points to approximate the value function. For further details of the Judd (1998) <span id="id7">[<a class="reference internal" href="zreferences.html#id166" title="K L Judd. Numerical Methods in Economics. Scientific and Engineering. MIT Press, 1998.">Jud98</a>]</span> method, see <span id="id8">[<a class="reference internal" href="zreferences.html#id173" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">LS18</a>]</span>, Section 5.7.</p>
 <p>Our strategy involves finding a function <span class="math notranslate nohighlight">\(C(V)\)</span> – the expected cost of giving the worker value <span class="math notranslate nohighlight">\(V\)</span> – that satisfies the Bellman equation:</p>
 <div class="math notranslate nohighlight" id="equation-eq-yad3">
 <span class="eqno">(39.15)<a class="headerlink" href="#equation-eq-yad3" title="Permalink to this equation">¶</a></span>\[
@@ -952,13 +951,13 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 0, error:72.95964854907824
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 50, error:12.222761762478058
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 50, error:12.222761762498521
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 100, error:0.12875960366636718
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 100, error:0.12875960366955042
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 150, error:0.0009402349714946467
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 150, error:0.0009402349701304047
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 200, error:6.115461928857258e-06
@@ -1471,7 +1470,7 @@ proper incentives.</p>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="_notebooks/un_insure.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/un_insure.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/un_insure.md" download><i data-feather="github"></i></a></li>
@@ -1486,7 +1485,7 @@ proper incentives.</p>
                     <p>Lecture (PDF)</p>
                 </li>
                 <li class="download-pdf-file">
-                    <a href="_pdf/quantecon-python-advanced.pdf" download><p>Book (PDF)</p></a>
+                    <a href="/_pdf/quantecon-python-advanced.pdf" download><p>Book (PDF)</p></a>
                 </li>
             </ul>
         </div>

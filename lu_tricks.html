@@ -88,17 +88,16 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/lu_tricks.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -362,7 +361,7 @@ class of dynamic optimization and prediction problems by applying the method of 
 </div>
 <div class="section" id="references">
 <h3><span class="section-number">31.1.1. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
-<p>Useful references include <span id="id1">[<a class="reference internal" href="zreferences.html#id106">Whi63</a>]</span>, <span id="id2">[<a class="reference internal" href="zreferences.html#id107">HS80</a>]</span>, <span id="id3">[<a class="reference internal" href="zreferences.html#id108">Orf88</a>]</span>, <span id="id4">[<a class="reference internal" href="zreferences.html#id109">AP91</a>]</span>, and <span id="id5">[<a class="reference internal" href="zreferences.html#id110">Mut60</a>]</span>.</p>
+<p>Useful references include <span id="id1">[<a class="reference internal" href="zreferences.html#id106" title="Peter Whittle. Prediction and regulation by linear least-square methods. English Univ. Press, 1963.">Whi63</a>]</span>, <span id="id2">[<a class="reference internal" href="zreferences.html#id107" title="Lars Peter Hansen and Thomas J Sargent. Formulating and estimating dynamic linear rational expectations models. Journal of Economic Dynamics and control, 2:7–46, 1980.">HS80</a>]</span>, <span id="id3">[<a class="reference internal" href="zreferences.html#id108" title="Sophocles J Orfanidis. Optimum Signal Processing: An Introduction. McGraw Hill Publishing, New York, New York, 1988.">Orf88</a>]</span>, <span id="id4">[<a class="reference internal" href="zreferences.html#id109" title="Papoulis Athanasios and S Unnikrishna Pillai. Probability, random variables, and stochastic processes. Mc-Graw Hill, 1991.">AP91</a>]</span>, and <span id="id5">[<a class="reference internal" href="zreferences.html#id110" title="John F Muth. Optimal properties of exponentially weighted forecasts. Journal of the american statistical association, 55(290):299–306, 1960.">Mut60</a>]</span>.</p>
 </div>
 </div>
 <div class="section" id="a-control-problem">
@@ -416,7 +415,7 @@ p_t = \alpha_0 - \alpha_1 q_t + d_t
 <li><p><span class="math notranslate nohighlight">\(h := 2 \alpha_1\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(d(L) := \sqrt{2 \gamma}(I - L)\)</span></p></li>
 </ul>
-<p>Further examples of this problem for factor demand, economic growth, and government policy problems are given in ch. IX of <span id="id6">[<a class="reference internal" href="zreferences.html#id197">Sar87</a>]</span>.</p>
+<p>Further examples of this problem for factor demand, economic growth, and government policy problems are given in ch. IX of <span id="id6">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>.</p>
 </div>
 </div>
 <div class="section" id="finite-horizon-theory">
@@ -828,9 +827,9 @@ is</p>
 <div class="math notranslate nohighlight" id="equation-onethirteen">
 <span class="eqno">(31.18)<a class="headerlink" href="#equation-onethirteen" title="Permalink to this equation">¶</a></span>\[c(L)\,y_t = c\,(\beta L^{-1})^{-1}a_t\]</div>
 <p>This can be established by using an argument paralleling that in
-chapter IX of <span id="id7">[<a class="reference internal" href="zreferences.html#id197">Sar87</a>]</span>.</p>
+chapter IX of <span id="id7">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>.</p>
 <p>To exhibit the solution in a form
-paralleling that of <span id="id8">[<a class="reference internal" href="zreferences.html#id197">Sar87</a>]</span>, we use <a class="reference internal" href="#equation-oneeleven">(31.17)</a> to write
+paralleling that of <span id="id8">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, we use <a class="reference internal" href="#equation-oneeleven">(31.17)</a> to write
 <a class="reference internal" href="#equation-onethirteen">(31.18)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-junk">
 <span class="eqno">(31.19)<a class="headerlink" href="#equation-junk" title="Permalink to this equation">¶</a></span>\[(1-\lambda_1 L) \cdots (1 - \lambda_mL)y_t = {c^{-2}_0 a_t \over (1-\beta \lambda_1 L^{-1}) \cdots (1 - \beta \lambda_m L^{-1})}\]</div>
@@ -858,7 +857,7 @@ geometric sums of future <span class="math notranslate nohighlight">\(a_t\)</spa
 <p>Furthermore, <a class="reference internal" href="#equation-onefifteen">(31.20)</a> is the unique solution of the Euler equation that satisfies the initial conditions and condition <a class="reference internal" href="#equation-onesix">(31.12)</a>.</p>
 <p>In effect, condition <a class="reference internal" href="#equation-onesix">(31.12)</a> compels us to
 solve the “unstable” roots of <span class="math notranslate nohighlight">\(h+d (\beta z^{-1})d(z)\)</span> forward
-(see <span id="id9">[<a class="reference internal" href="zreferences.html#id197">Sar87</a>]</span>).</p>
+(see <span id="id9">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>).</p>
 <p>The step of factoring the polynomial <span class="math notranslate nohighlight">\(h+d (\beta z^{-1})\, d(z)\)</span> into
 <span class="math notranslate nohighlight">\(c\, (\beta z^{-1})c\,(z)\)</span>, where the zeros of <span class="math notranslate nohighlight">\(c\,(z)\)</span> all
 have modulus exceeding <span class="math notranslate nohighlight">\(\sqrt\beta\)</span>, is central to solving the problem.</p>
@@ -1832,7 +1831,7 @@ is not optimal.</p>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="_notebooks/lu_tricks.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/lu_tricks.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/lu_tricks.md" download><i data-feather="github"></i></a></li>
@@ -1847,7 +1846,7 @@ is not optimal.</p>
                     <p>Lecture (PDF)</p>
                 </li>
                 <li class="download-pdf-file">
-                    <a href="_pdf/quantecon-python-advanced.pdf" download><p>Book (PDF)</p></a>
+                    <a href="/_pdf/quantecon-python-advanced.pdf" download><p>Book (PDF)</p></a>
                 </li>
             </ul>
         </div>

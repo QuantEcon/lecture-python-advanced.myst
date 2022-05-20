@@ -88,17 +88,16 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/chang_ramsey.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -305,30 +304,75 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: polytope in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.2.3)
-Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (0.5.2)
-Requirement already satisfied: networkx&gt;=1.6 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (2.6.3)
-Requirement already satisfied: scipy&gt;=0.18.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (1.7.1)
-Requirement already satisfied: numpy&gt;=1.10.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from polytope) (1.20.3)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (1.9)
-Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (2.26.0)
-Requirement already satisfied: numba&gt;=0.38 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from quantecon) (0.54.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting polytope
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.38,&gt;=0.37.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (0.37.0)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from numba&gt;=0.38-&gt;quantecon) (58.0.4)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (3.2)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (1.26.7)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2021.10.8)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages (from sympy-&gt;quantecon) (1.2.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading polytope-0.2.3.tar.gz (51 kB)
+?25l
+     |██████▍                         | 10 kB 37.6 MB/s eta 0:00:01
+     |████████████▉                   | 20 kB 42.1 MB/s eta 0:00:01
+     |███████████████████▎            | 30 kB 15.2 MB/s eta 0:00:01
+     |█████████████████████████▊      | 40 kB 8.5 MB/s eta 0:00:01
+     |████████████████████████████████| 51 kB 7.0 MB/s 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25hRequirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.5.3)
+Requirement already satisfied: numpy&gt;=1.10.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from polytope) (1.21.5)
+Requirement already satisfied: scipy&gt;=0.18.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from polytope) (1.7.3)
+Requirement already satisfied: networkx&gt;=1.6 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from polytope) (2.7.1)
+Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
+Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
+Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.55.1)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
+Requirement already satisfied: llvmlite&lt;0.39,&gt;=0.38.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.38.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
+Building wheels for collected packages: polytope
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Building wheel for polytope (setup.py) ... ?25l-
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> /
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> -
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
+?25h  Created wheel for polytope: filename=polytope-0.2.3-py3-none-any.whl size=46059 sha256=8c808ddb821422fac8d07f38cf9e7b8dd4328d907c733229edaf595e2de25e83
+  Stored in directory: /home/runner/.cache/pip/wheels/95/f5/21/a783bcd283ac5a8703a014e2751935eaf4dc59628aff4c9688
+Successfully built polytope
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: polytope
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed polytope-0.2.3
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="overview">
 <h2><a class="toc-backref" href="#id14"><span class="section-number">46.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>This lecture describes how Chang <span id="id1">[<a class="reference internal" href="zreferences.html#id215">Cha98</a>]</span>
+<p>This lecture describes how Chang <span id="id1">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Cha98</a>]</span>
 analyzed <strong>competitive equilibria</strong> and a best competitive equilibrium called a  <strong>Ramsey plan</strong>.</p>
 <p>He did this by</p>
 <ul class="simple">
@@ -336,11 +380,11 @@ analyzed <strong>competitive equilibria</strong> and a best competitive equilibr
 in the <a class="reference internal" href="dyn_stack.html"><span class="doc">dynamic Stackelberg problems</span></a> and <a class="reference internal" href="calvo.html"><span class="doc">Calvo model</span></a> lectures
 to pose Stackelberg problems in linear economies, and then</p></li>
 <li><p>appropriately adapting an argument of Abreu, Pearce, and Stachetti
-<span id="id2">[<a class="reference internal" href="zreferences.html#id113">APS90</a>]</span> to describe key features of the  set of competitive equilibria</p></li>
+<span id="id2">[<a class="reference internal" href="zreferences.html#id113" title="Dilip Abreu, David Pearce, and Ennio Stacchetti. Toward a theory of discounted repeated games with imperfect monitoring. Econometrica, 58(5):1041-1063, September 1990.">APS90</a>]</span> to describe key features of the  set of competitive equilibria</p></li>
 </ul>
-<p>Roberto Chang <span id="id3">[<a class="reference internal" href="zreferences.html#id215">Cha98</a>]</span>  chose a model of  Calvo <span id="id4">[<a class="reference internal" href="zreferences.html#id139">Cal78</a>]</span>
+<p>Roberto Chang <span id="id3">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Cha98</a>]</span>  chose a model of  Calvo <span id="id4">[<a class="reference internal" href="zreferences.html#id139" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Cal78</a>]</span>
 as a simple structure that conveys ideas that apply more broadly.</p>
-<p>A textbook version of Chang’s model appears in chapter 25 of <span id="id5">[<a class="reference internal" href="zreferences.html#id173">LS18</a>]</span>.</p>
+<p>A textbook version of Chang’s model appears in chapter 25 of <span id="id5">[<a class="reference internal" href="zreferences.html#id173" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">LS18</a>]</span>.</p>
 <p>This lecture and <a class="reference internal" href="chang_credible.html"><span class="doc">Credible Government Policies in Chang Model</span></a>
 can be viewed as more sophisticated and complete treatments of the
 topics discussed in <a class="reference internal" href="calvo.html"><span class="doc">Ramsey plans, time inconsistency, sustainable plans</span></a>.</p>
@@ -365,14 +409,6 @@ and other lectures.</p>
 <span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>`polytope` failed to import `cvxopt.glpk`.
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>will use `scipy.optimize.linprog`
 </pre></div>
 </div>
 </div>
@@ -405,7 +441,7 @@ sequences <span class="math notranslate nohighlight">\((\vec c, \vec m)\)</span>
 <p>In competitive equilibrium, the price of money sequence <span class="math notranslate nohighlight">\(\vec q\)</span> clears
 markets, thereby reconciling  decisions of the government and the
 representative household.</p>
-<p>Chang adopts a version of a model that <span id="id6">[<a class="reference internal" href="zreferences.html#id139">Cal78</a>]</span> designed to exhibit
+<p>Chang adopts a version of a model that <span id="id6">[<a class="reference internal" href="zreferences.html#id139" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Cal78</a>]</span> designed to exhibit
 time-inconsistency of a Ramsey policy in a simple and transparent
 setting.</p>
 <p>By influencing the representative household’s expectations, government actions at
@@ -440,7 +476,7 @@ respectively, to maximize</p>
 <span class="eqno">(46.3)<a class="headerlink" href="#equation-eqn-chang-ramsey3" title="Permalink to this equation">¶</a></span>\[q_t M_t  \leq \bar m\]</div>
 <p>Here <span class="math notranslate nohighlight">\(q_t\)</span> is the reciprocal of the price level at <span class="math notranslate nohighlight">\(t\)</span>,
 which we can also call the <em>value of money</em>.</p>
-<p>Chang <span id="id7">[<a class="reference internal" href="zreferences.html#id215">Cha98</a>]</span> assumes that</p>
+<p>Chang <span id="id7">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Cha98</a>]</span> assumes that</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(u: \mathbb{R}_+ \rightarrow \mathbb{R}\)</span> is twice continuously differentiable, strictly concave, and strictly increasing;</p></li>
 <li><p><span class="math notranslate nohighlight">\(v: \mathbb{R}_+ \rightarrow \mathbb{R}\)</span> is twice continuously differentiable and strictly concave;</p></li>
@@ -666,7 +702,7 @@ with <span class="math notranslate nohighlight">\(h_t =1\)</span> for all <span 
 constant money supply and constant price level.</p>
 <p>Chang establishes that <span class="math notranslate nohighlight">\(CE\)</span> is also compact.</p>
 <p>Chang makes the following key observation that combines ideas of Abreu, Pearce,
-and Stacchetti <span id="id8">[<a class="reference internal" href="zreferences.html#id113">APS90</a>]</span> with insights of Kydland and Prescott <span id="id9">[<a class="reference internal" href="zreferences.html#id214">KP80</a>]</span>.</p>
+and Stacchetti <span id="id8">[<a class="reference internal" href="zreferences.html#id113" title="Dilip Abreu, David Pearce, and Ennio Stacchetti. Toward a theory of discounted repeated games with imperfect monitoring. Econometrica, 58(5):1041-1063, September 1990.">APS90</a>]</span> with insights of Kydland and Prescott <span id="id9">[<a class="reference internal" href="zreferences.html#id214" title="Finn E Kydland and Edward C Prescott. Dynamic optimal taxation, rational expectations and optimal control. Journal of Economic Dynamics and Control, 2:79–91, 1980.">KP80</a>]</span>.</p>
 <p><strong>Proposition:</strong>
 The continuation of a competitive equilibrium is a competitive equilibrium.</p>
 <p>That is, <span class="math notranslate nohighlight">\((\vec m, \vec x, \vec h) \in CE\)</span> implies that <span class="math notranslate nohighlight">\((\vec m_t,
@@ -734,8 +770,8 @@ outcome to the representative household</p>
 <p>Before we use this proposition to recover a recursive representation of the
 Ramsey plan, note that the proposition relies on knowing the set <span class="math notranslate nohighlight">\(\Omega\)</span>.</p>
 <p>To find <span class="math notranslate nohighlight">\(\Omega\)</span>, Chang uses the insights of Kydland and Prescott
-<span id="id10">[<a class="reference internal" href="zreferences.html#id214">KP80</a>]</span> together with a method based on the
-Abreu, Pearce, and Stacchetti <span id="id11">[<a class="reference internal" href="zreferences.html#id113">APS90</a>]</span> iteration to convergence on an
+<span id="id10">[<a class="reference internal" href="zreferences.html#id214" title="Finn E Kydland and Edward C Prescott. Dynamic optimal taxation, rational expectations and optimal control. Journal of Economic Dynamics and Control, 2:79–91, 1980.">KP80</a>]</span> together with a method based on the
+Abreu, Pearce, and Stacchetti <span id="id11">[<a class="reference internal" href="zreferences.html#id113" title="Dilip Abreu, David Pearce, and Ennio Stacchetti. Toward a theory of discounted repeated games with imperfect monitoring. Econometrica, 58(5):1041-1063, September 1990.">APS90</a>]</span> iteration to convergence on an
 operator <span class="math notranslate nohighlight">\(B\)</span> that maps continuation values into values.</p>
 <p>We want an operator that maps a continuation <span class="math notranslate nohighlight">\(\theta\)</span> into a current <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 <p>Chang lets <span class="math notranslate nohighlight">\(Q\)</span> be a nonempty, bounded subset of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>.</p>
@@ -908,7 +944,7 @@ set <span class="math notranslate nohighlight">\(S_0\)</span>.</p>
 notebook</a>.</p>
 <p>To find <span class="math notranslate nohighlight">\(S\)</span> we use a numerical algorithm called the <em>outer
 hyperplane approximation algorithm</em>.</p>
-<p>It was invented by  Judd, Yeltekin, Conklin <span id="id12">[<a class="reference internal" href="zreferences.html#id95">JYC03</a>]</span>.</p>
+<p>It was invented by  Judd, Yeltekin, Conklin <span id="id12">[<a class="reference internal" href="zreferences.html#id95" title="Kenneth L. Judd, Sevin Yeltekin, and James Conklin. Computing Supergame Equilibria. Econometrica, 71(4):1239-1254, 07 2003. URL: https://ideas.repec.org/a/ecm/emetrp/v71y2003i4p1239-1254.html, doi:.">JYC03</a>]</span>.</p>
 <p>This algorithm constructs the smallest convex set that contains the
 fixed point of the <span class="math notranslate nohighlight">\(D(S)\)</span> operator.</p>
 <p>Given that we are finding the smallest convex set that contains
@@ -1567,7 +1603,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 16 iterations and 86.03             seconds
+Convergence achieved after 16 iterations and 82.25             seconds
 </pre></div>
 </div>
 </div>
@@ -1745,7 +1781,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 40 iterations and 503.19             seconds
+Convergence achieved after 40 iterations and 453.44             seconds
 </pre></div>
 </div>
 </div>
@@ -1816,7 +1852,7 @@ differ only in the level of <span class="math notranslate nohighlight">\(\beta\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_15191/3554151967.py:33: RuntimeWarning: invalid value encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_12192/1608401414.py:33: RuntimeWarning: invalid value encountered in log
   uc = lambda c: np.log(c)
 </pre></div>
 </div>
@@ -1830,14 +1866,14 @@ differ only in the level of <span class="math notranslate nohighlight">\(\beta\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_15191/3554151967.py:309: RuntimeWarning: invalid value encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_12192/1608401414.py:309: RuntimeWarning: invalid value encountered in log
   uc = lambda c: np.log(c)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Convergence achieved after 15 iterations
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.8/site-packages/scipy/optimize/optimize.py:282: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/scipy/optimize/optimize.py:282: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
   warnings.warn(&quot;Values in x were outside bounds during a &quot;
 </pre></div>
 </div>
@@ -1856,7 +1892,7 @@ good.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6.463131208001016e-06, 6.875539781958651e-07)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6.4631311813556636e-06, 6.875652474036542e-07)
 </pre></div>
 </div>
 </div>
@@ -2370,7 +2406,7 @@ smaller set of competitive equilibria.</p>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="_notebooks/chang_ramsey.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/chang_ramsey.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/chang_ramsey.md" download><i data-feather="github"></i></a></li>
@@ -2385,7 +2421,7 @@ smaller set of competitive equilibria.</p>
                     <p>Lecture (PDF)</p>
                 </li>
                 <li class="download-pdf-file">
-                    <a href="_pdf/quantecon-python-advanced.pdf" download><p>Book (PDF)</p></a>
+                    <a href="/_pdf/quantecon-python-advanced.pdf" download><p>Book (PDF)</p></a>
                 </li>
             </ul>
         </div>

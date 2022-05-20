@@ -88,17 +88,16 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/classical_filtering.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -311,7 +310,7 @@ the <a class="reference external" href="https://en.wikipedia.org/wiki/Cholesky_d
 <li><p>With every linear least squares prediction or filtering problem there is implicitly affiliated a LQ control problem.</p></li>
 </ul>
 <p>An understanding of these connections has repeatedly proved useful in cracking interesting applied problems.</p>
-<p>For example, Sargent <span id="id1">[<a class="reference internal" href="zreferences.html#id197">Sar87</a>]</span> [chs. IX, XIV] and Hansen and Sargent <span id="id2">[<a class="reference internal" href="zreferences.html#id107">HS80</a>]</span> formulated
+<p>For example, Sargent <span id="id1">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span> [chs. IX, XIV] and Hansen and Sargent <span id="id2">[<a class="reference internal" href="zreferences.html#id107" title="Lars Peter Hansen and Thomas J Sargent. Formulating and estimating dynamic linear rational expectations models. Journal of Economic Dynamics and control, 2:7–46, 1980.">HS80</a>]</span> formulated
 and solved control and filtering problems using <span class="math notranslate nohighlight">\(z\)</span>-transform methods.</p>
 <p>In this lecture, we begin to investigate these ideas by using mostly elementary linear algebra.</p>
 <p>This is the main purpose and focus of the lecture.</p>
@@ -329,7 +328,7 @@ formulas and associated linear algebra.</p>
 </div>
 <div class="section" id="references">
 <h3><span class="section-number">32.1.1. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h3>
-<p>Useful references include <span id="id3">[<a class="reference internal" href="zreferences.html#id106">Whi63</a>]</span>, <span id="id4">[<a class="reference internal" href="zreferences.html#id107">HS80</a>]</span>, <span id="id5">[<a class="reference internal" href="zreferences.html#id108">Orf88</a>]</span>, <span id="id6">[<a class="reference internal" href="zreferences.html#id109">AP91</a>]</span>, and <span id="id7">[<a class="reference internal" href="zreferences.html#id110">Mut60</a>]</span>.</p>
+<p>Useful references include <span id="id3">[<a class="reference internal" href="zreferences.html#id106" title="Peter Whittle. Prediction and regulation by linear least-square methods. English Univ. Press, 1963.">Whi63</a>]</span>, <span id="id4">[<a class="reference internal" href="zreferences.html#id107" title="Lars Peter Hansen and Thomas J Sargent. Formulating and estimating dynamic linear rational expectations models. Journal of Economic Dynamics and control, 2:7–46, 1980.">HS80</a>]</span>, <span id="id5">[<a class="reference internal" href="zreferences.html#id108" title="Sophocles J Orfanidis. Optimum Signal Processing: An Introduction. McGraw Hill Publishing, New York, New York, 1988.">Orf88</a>]</span>, <span id="id6">[<a class="reference internal" href="zreferences.html#id109" title="Papoulis Athanasios and S Unnikrishna Pillai. Probability, random variables, and stochastic processes. Mc-Graw Hill, 1991.">AP91</a>]</span>, and <span id="id7">[<a class="reference internal" href="zreferences.html#id110" title="John F Muth. Optimal properties of exponentially weighted forecasts. Journal of the american statistical association, 55(290):299–306, 1960.">Mut60</a>]</span>.</p>
 </div>
 </div>
 <div class="section" id="finite-dimensional-prediction">
@@ -976,7 +975,7 @@ detail below.</p>
 </div>
 <div class="section" id="prediction">
 <h3><span class="section-number">32.2.4. </span>Prediction<a class="headerlink" href="#prediction" title="Permalink to this headline">¶</a></h3>
-<p>It immediately follows from the “orthogonality principle” of least squares (see <span id="id8">[<a class="reference internal" href="zreferences.html#id109">AP91</a>]</span> or <span id="id9">[<a class="reference internal" href="zreferences.html#id197">Sar87</a>]</span> [ch. X]) that</p>
+<p>It immediately follows from the “orthogonality principle” of least squares (see <span id="id8">[<a class="reference internal" href="zreferences.html#id109" title="Papoulis Athanasios and S Unnikrishna Pillai. Probability, random variables, and stochastic processes. Mc-Graw Hill, 1991.">AP91</a>]</span> or <span id="id9">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span> [ch. X]) that</p>
 <div class="math notranslate nohighlight" id="equation-eq-58">
 <span class="eqno">(32.7)<a class="headerlink" href="#equation-eq-58" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     \mathbb{\hat E} &amp; [x_t \mid x_{t-m},\, x_{t-m+1}, \ldots x_1]
@@ -1131,7 +1130,7 @@ random variable <span class="math notranslate nohighlight">\(\hat X_{t+j}\)</spa
 \ldots \}\)</span> that minimizes <span class="math notranslate nohighlight">\(\mathbb{E}(\hat X_{t+j} - X_{t+j})^2\)</span>.</p>
 <p>That is, the problem is to find a <span class="math notranslate nohighlight">\(\gamma_j (L) = \sum^\infty_{k=0} \gamma_{jk}\, L^k\)</span> such that <span class="math notranslate nohighlight">\(\sum^\infty_{k=0} \vert \gamma_{jk} \vert^2 &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E} [\gamma_j \, (L) X_t -X_{t+j}]^2\)</span> is minimized.</p>
 <p>The <strong>linear least squares filtering problem</strong> is to find a <span class="math notranslate nohighlight">\(b\,(L) = \sum^\infty_{j=0} b_j\, L^j\)</span> such that <span class="math notranslate nohighlight">\(\sum^\infty_{j=0}\vert b_j \vert^2 &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E} [b\, (L) X_t -Y_t ]^2\)</span> is minimized.</p>
-<p>Interesting versions of these problems related to the permanent income theory were studied by <span id="id10">[<a class="reference internal" href="zreferences.html#id110">Mut60</a>]</span>.</p>
+<p>Interesting versions of these problems related to the permanent income theory were studied by <span id="id10">[<a class="reference internal" href="zreferences.html#id110" title="John F Muth. Optimal properties of exponentially weighted forecasts. Journal of the american statistical association, 55(290):299–306, 1960.">Mut60</a>]</span>.</p>
 <div class="section" id="problem-formulation">
 <h3><span class="section-number">32.4.1. </span>Problem Formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">¶</a></h3>
 <p>These problems are solved as follows.</p>
@@ -1160,7 +1159,7 @@ random variable <span class="math notranslate nohighlight">\(\hat X_{t+j}\)</spa
     x_t &amp;= C(L) v_{1t} + D(L) v_{2t}
 \end{aligned}
 \end{split}\]</div>
-<p>Then, as shown for example in <span id="id11">[<a class="reference internal" href="zreferences.html#id197">Sar87</a>]</span> [ch. XI], it is true that</p>
+<p>Then, as shown for example in <span id="id11">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span> [ch. XI], it is true that</p>
 <div class="math notranslate nohighlight" id="equation-eq-29">
 <span class="eqno">(32.14)<a class="headerlink" href="#equation-eq-29" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
     g_y(z) &amp;= A(z) A(z^{-1}) + B (z) B(z^{-1}) \\
@@ -1224,9 +1223,9 @@ b(L) = \left[{g_{YX} (L) \over c(L^{-1})}\right]_+ c(L)^{-1}
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-eq-37">
 <span class="eqno">(32.22)<a class="headerlink" href="#equation-eq-37" title="Permalink to this equation">¶</a></span>\[b(L) = \left[ {d(L)d(L^{-1}) \over c(L^{-1})} \right]_+ c(L)^{-1}\]</div>
-<p>Formulas <a class="reference internal" href="#equation-eq-36">(32.21)</a> and <a class="reference internal" href="#equation-eq-37">(32.22)</a>  are discussed in detail in  <span id="id12">[<a class="reference internal" href="zreferences.html#id85">Whi83</a>]</span> and <span id="id13">[<a class="reference internal" href="zreferences.html#id197">Sar87</a>]</span>.</p>
+<p>Formulas <a class="reference internal" href="#equation-eq-36">(32.21)</a> and <a class="reference internal" href="#equation-eq-37">(32.22)</a>  are discussed in detail in  <span id="id12">[<a class="reference internal" href="zreferences.html#id85" title="Peter Whittle. Prediction and Regulation by Linear Least Squares Methods. University of Minnesota Press, Minneapolis, Minnesota, 2nd edition, 1983.">Whi83</a>]</span> and <span id="id13">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>.</p>
 <p>The interested reader can there find several examples of the use of these formulas in economics
-Some classic examples using these formulas are due to <span id="id14">[<a class="reference internal" href="zreferences.html#id110">Mut60</a>]</span>.</p>
+Some classic examples using these formulas are due to <span id="id14">[<a class="reference internal" href="zreferences.html#id110" title="John F Muth. Optimal properties of exponentially weighted forecasts. Journal of the american statistical association, 55(290):299–306, 1960.">Mut60</a>]</span>.</p>
 <p>As an example of the usefulness of formula <a class="reference internal" href="#equation-eq-37">(32.22)</a>, we let <span class="math notranslate nohighlight">\(X_t\)</span> be a stochastic process with Wold moving average representation</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1252,7 +1251,7 @@ X_t
 <p>Then <a class="reference internal" href="#equation-eq-37">(32.22)</a>  becomes</p>
 <div class="math notranslate nohighlight" id="equation-eq-38">
 <span class="eqno">(32.23)<a class="headerlink" href="#equation-eq-38" title="Permalink to this equation">¶</a></span>\[b(L)=\left[{c(L)\over 1-\delta L^{-1}}\right]_+ c(L)^{-1}\]</div>
-<p>In order to evaluate the term in the annihilation operator, we use the following result from <span id="id15">[<a class="reference internal" href="zreferences.html#id107">HS80</a>]</span>.</p>
+<p>In order to evaluate the term in the annihilation operator, we use the following result from <span id="id15">[<a class="reference internal" href="zreferences.html#id107" title="Lars Peter Hansen and Thomas J Sargent. Formulating and estimating dynamic linear rational expectations models. Journal of Economic Dynamics and control, 2:7–46, 1980.">HS80</a>]</span>.</p>
 <p><strong>Proposition</strong> Let</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(g(z) = \sum^\infty_{j=0} g_j \, z^j\)</span> where <span class="math notranslate nohighlight">\(\sum^\infty_{j=0} \vert g_j \vert^2 &lt; + \infty\)</span>.</p></li>
@@ -1431,7 +1430,7 @@ objects in <a class="reference internal" href="lu_tricks.html#equation-onetwenty
     g_{YX} (z) &amp;= D (z) D (z^{-1})^\prime
 \end{aligned}
 \end{split}\]</div>
-<p>A factorization of <span class="math notranslate nohighlight">\(g_X (z)\)</span> can be found (see <span id="id16">[<a class="reference internal" href="zreferences.html#id83">Roz67</a>]</span> or <span id="id17">[<a class="reference internal" href="zreferences.html#id85">Whi83</a>]</span>) of the form</p>
+<p>A factorization of <span class="math notranslate nohighlight">\(g_X (z)\)</span> can be found (see <span id="id16">[<a class="reference internal" href="zreferences.html#id83" title="Y. A. Rozanov. Stationary Random Processes. Holden-Day, San Francisco, 1967.">Roz67</a>]</span> or <span id="id17">[<a class="reference internal" href="zreferences.html#id85" title="Peter Whittle. Prediction and Regulation by Linear Least Squares Methods. University of Minnesota Press, Minneapolis, Minnesota, 2nd edition, 1983.">Whi83</a>]</span>) of the form</p>
 <div class="math notranslate nohighlight">
 \[
 D (z) D (z^{-1})^\prime + H = C (z) C (z^{-1})^\prime, \quad C (z) =
@@ -1860,7 +1859,7 @@ be written</p>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
                     <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
-                    <li data-tippy-content="Download Notebook"><a href="_notebooks/classical_filtering.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/classical_filtering.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/classical_filtering.md" download><i data-feather="github"></i></a></li>
@@ -1875,7 +1874,7 @@ be written</p>
                     <p>Lecture (PDF)</p>
                 </li>
                 <li class="download-pdf-file">
-                    <a href="_pdf/quantecon-python-advanced.pdf" download><p>Book (PDF)</p></a>
+                    <a href="/_pdf/quantecon-python-advanced.pdf" download><p>Book (PDF)</p></a>
                 </li>
             </ul>
         </div>
