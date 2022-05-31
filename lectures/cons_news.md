@@ -137,7 +137,7 @@ $$
 so that the variance of the innovation exceeds the variance of the
 original shock by a multiplicative factor $\beta^{-2}$.
 
-Representation {eq}`eq2` is the **innovations representation** of equation {eq}`eq1` associated with
+Representation {eq}`eqn_2` is the **innovations representation** of equation {eq}`eqn_1` associated with
 Kalman filtering theory.
 
 To see how this works, note that equating representations {eq}`eqn_1`
@@ -387,7 +387,7 @@ $$
 ## Permanent Income Consumption-Smoothing Model
 
 When we computed optimal consumption-saving policies for our  two
-representations {eq}`eq1` and {eq}`eq2` by using formulas obtained with the difference equation
+representations {eq}`eqn_1` and {eq}`eqn_2` by using formulas obtained with the difference equation
 approach described in  [quantecon lecture](https://python-intro.quantecon.org/perm_income_cons.html),
 we obtained:
 
@@ -437,14 +437,15 @@ Ricardian equivalence experiment.
 
 ## State Space Representations
 
-We now cast our  representations {eq}`eq1` and {eq}`eq2`, respectively,  in terms of the following two state
+We now cast our  representations {eq}`eqn_1` and {eq}`eqn_2`, respectively,  in terms of the following two state
 space systems:
+
 $$
 \begin{aligned}  \begin{bmatrix} y_{t+1} \cr \epsilon_{t+1} \end{bmatrix}  &=
       \begin{bmatrix} 1 & - \beta^{-1} \cr 0 & 0 \end{bmatrix} \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix}
        + \begin{bmatrix} \sigma_\epsilon \cr \sigma_\epsilon \end{bmatrix}
        v_{t+1} \cr
-y_t & =  \begin{bmatrix} 1 & 0 \end{bmatrix}    \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix} \end{aligned}
+y_t & =  \begin{bmatrix} 1 & 0 \end{bmatrix} \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix} \end{aligned}
 $$ (eqstsp1)
 
 and
@@ -469,7 +470,9 @@ All the code that we shall use below is presented in that lecture.
 ## Computations
 
 We shall use Python to form  two state-space 
-representations {eq}`eqstsp1` and {eq}`eqstsp2`, using the following parameter values
+representations {eq}`eqstsp1` and {eq}`eqstsp2`.
+
+We set the following parameter values
 $\sigma_\epsilon = 1, \sigma_a = \beta^{-1} \sigma_\epsilon = \beta^{-1}$
 where $\beta$ is the **same** value as the discount factor in the
 household’s problem in the LQ savings problem in the [lecture](https://python-intro.quantecon.org/perm_income_cons.html).
@@ -656,9 +659,9 @@ b_{t+1}^{*} &= \beta^{-1}c_{t}^{*}+\beta^{-1}b_{t}-\beta^{-1}y_{t} \\
 $$
 
 Now we construct two Linear State Space models that emerge from using
-optimal policies $u_t =- F x_t$ for the control variable.
+optimal policies of the form $u_t =- F x_t$.
 
-Take the original representation case as an example,
+Take the original representation {eq}`eqn_1` as an example:
 
 $$
 \left[\begin{array}{c}
@@ -686,8 +689,8 @@ b_{t}
 \end{array}\right]
 $$
 
-To have the Linear State Space model of the innovations representation
-case, we can simply replace the corresponding matrices.
+To have the Linear State Space model be of an innovations representation
+form {eq}`eqn_2`, we can simply replace the corresponding matrices.
 
 ```{code-cell} python3
 # Construct two Linear State Space models
@@ -702,7 +705,7 @@ G2 = np.vstack([-F2, Sb])
 LSS2 = qe.LinearStateSpace(ABF2, CLQ2, G2)
 ```
 
-In the following we compute the impulse response functions of
+The following code computes impulse response functions of
 $c_t$ and $b_t$.
 
 ```{code-cell} python3
@@ -729,7 +732,7 @@ plt.legend()
 ```
 
 The above two impulse response functions show that when the consumer has
-the information assumed in the original representation, his response to
+the information assumed in the original representation {eq}`eqn_1`, his response to
 receiving a positive shock of $\epsilon_t$ is to leave his
 consumption unchanged and to save the entire amount of his extra income
 and then forever roll over the extra bonds that he holds.
@@ -751,12 +754,12 @@ plt.legend()
 
 The above impulse responses show that when the consumer has only the
 information that is assumed to be available under the innovations
-representation for $\{y_t - y_{t-1} \}$, he responds to a positive
-$a_t$ by permanently increasing his consumption.
+representation {eq}`eqn_2` for $\{y_t - y_{t-1} \}$, he responds to a positive
+$a_t$ by **permanently** increasing his consumption.
 
 He accomplishes this by consuming a fraction $(1 - \beta^2)$ of
-the increment $a_t$ to his nonfinancial income and saving the rest
-in order to lower $b_{t+1}$ to finance the permanent increment in
+the increment $a_t$ to his nonfinancial income and saving the rest, thereby
+ lowering $b_{t+1}$ in order  to finance the permanent increment in
 his consumption.
 
 The preceding computations confirm what we had derived earlier using
@@ -764,7 +767,7 @@ paper and pencil.
 
 Now let’s simulate some paths of consumption and debt for our two types
 of consumers while always presenting both types with the same
-$\{y_t\}$ path, constructed as described below.
+$\{y_t\}$ path.
 
 ```{code-cell} python3
 # Set time length for simulation
@@ -791,22 +794,22 @@ plt.legend()
 
 ## Simulating  Income Process and Two Associated Shock Processes
 
-We now describe how we form a **single** $\{y_t\}_{t=0}^T$ realization
-that we will use to simulate the two different decision rules associated
+We now  form a **single** $\{y_t\}_{t=0}^T$ realization
+that we will use to simulate decisions associated
 with our two types of consumer.
 
 We accomplish this in the following steps.
 
 1. We form a $\{y_t, \epsilon_t\}$ realization by drawing a long
-   simulation of $\{\epsilon_t\}_{t=0}^T$ where $T$ is a big
-   integer $\epsilon_t = \sigma_\epsilon v_t$, $v_t$ is a
+   simulation of $\{\epsilon_t\}_{t=0}^T$, where $T$ is a big
+   integer, $\epsilon_t = \sigma_\epsilon v_t$, $v_t$ is a
    standard normal scalar, $y_0 =100$, and
    
    $$
    y_{t+1} - y_t =-\beta^{-1} \epsilon_t + \epsilon_{t+1} .
    $$
    
-1. We take the **same** $\{y_t\}$ realization generated in step 1
+1. We take the  $\{y_t\}$ realization generated in step 1
    and form an innovation process $\{a_t\}$ from the formulas
    
    $$
@@ -814,7 +817,7 @@ We accomplish this in the following steps.
    a_t & = \sum_{j=0}^{t-1} \beta^j (y_{t-j} - y_{t-j-1}) + \beta^t a_0, \quad t \geq 1 \end{aligned}
    $$
    
-1. We throw away the first $S$ observations and form the sample
+1. We throw away the first $S$ observations and form a sample
    $\{y_t, \epsilon_t, a_t\}_{S+1}^T$ as the realization that
    we’ll use in the following steps.
 1. We use the step 3 realization to **evaluate** and **simulate** the
@@ -838,7 +841,7 @@ $$
 a_{t+1} &=\beta a_{t}+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
     &=\beta\left(\beta a_{t-1}+\epsilon_{t}-\beta^{-1}\epsilon_{t-1}\right)+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
     &=\beta^{2}a_{t-1}+\beta\left(\epsilon_{t}-\beta^{-1}\epsilon_{t-1}\right)+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
-    &=\cdots \\
+    &=\vdots \\
     &=\beta^{t+1}a_{0}+\sum_{j=0}^{t}\beta^{j}\left(\epsilon_{t+1-j}-\beta^{-1}\epsilon_{t-j}\right) \\
     &=\beta^{t+1}a_{0}+\epsilon_{t+1}+\left(\beta-\beta^{-1}\right)\sum_{j=0}^{t-1}\beta^{j}\epsilon_{t-j}-\beta^{t-1}\epsilon_{0}.
 \end{aligned}
