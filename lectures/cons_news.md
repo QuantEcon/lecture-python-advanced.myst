@@ -40,43 +40,42 @@ nonfinancial income process and who both conform to the linear-quadratic
 permanent income of consumption smoothing model described in this
 [quantecon lecture](https://python-intro.quantecon.org/perm_income_cons.html).
 
-The two consumers  have different information about
+The two consumers  have different information about their
 future nonfinancial incomes.
 
-One consumer each period receives **news** in the form of a shock that simultaneously
+A better informed consumer each period receives **news** in the form of a shock that simultaneously
 affects both **today’s** nonfinancial income and  the
 present value of **future** nonfinancial incomes in a particular way.
 
-The other, less well informed, consumer each period receives a shock
+A less  informed consumer each period receives a shock
 that equals  the part of today’s nonfinancial income that could not be
-forecast from all  past values of nonfinancial income.
+forecast from   past values of nonfinancial income.
 
 Even though they receive exactly the same nonfinancial incomes each
 period, our two consumers behave differently because they have different information about
 their future nonfinancial incomes.
 
 The second consumer receives less information about future nonfinancial
-incomes in a sense that we shall make precise below.
+incomes in a sense that we shall make precise.
 
-This difference in their information sets manifests itself in their responding differently to what they regard as time $t$ information
-shocks.
+This difference in their information sets manifests itself in their responding differently to what they regard as time $t$ **information shocks**.
 
-Thus, while they receive exactly the same histories of
+Thus, although at each date they receive exactly the same histories of
 nonfinancial income, our two consumers receive different **shocks** or **news** about
 their **future** nonfinancial incomes.
 
-We compare behaviors of our two consumers as a way to learn about
+We use the different behaviors of our  consumers as a way to learn about
 
-- operating characteristics of the linear-quadratic permanent income
+- operating characteristics of a linear-quadratic permanent income
   model
 - how the Kalman filter introduced in [this lecture](https://python-intro.quantecon.org/kalman.html)
-  and/or the theory of optimal
+  and/or another representation of the  theory of optimal
   forecasting introduced in {doc}`this lecture <classical_filtering>`
   embody lessons
   that can be applied to the **news** and **noise** literature
-- various ways of representing and computing optimal decision rules in
+- ways of representing and computing optimal decision rules in
   the linear-quadratic permanent income model
-- a **Ricardian equivalence** outcome describing effects on optimal
+- a **Ricardian equivalence** outcome that describes effects on optimal
   consumption of a tax cut at time $t$ accompanied by a foreseen
   permanent increases in taxes that is just sufficient to cover the interest
   payments used to service the risk-free government bonds that are issued to finance
@@ -85,47 +84,51 @@ We compare behaviors of our two consumers as a way to learn about
   generating function along lines described in {doc}`this lecture <classical_filtering>`
 
 This lecture can be regarded as an introduction to some of the **invertibility** issues that take center stage in
-the analysis of **fiscal foresight** by Eric Leeper, Todd Walker, and Susan Yang {cite}`Leeper_Walker_Yang`.
+the analysis of **fiscal foresight** by Eric Leeper, Todd Walker, and Susan Yang {cite}`Leeper_Walker_Yang`, as well
+as in chapter 4  of {cite}`sargent1991observable`. 
 
 ## Two Representations of  One Nonfinancial Income Process
 
-Where $\beta \in (0,1)$, we study consequences of endowing a
+We study consequences of endowing a
 consumer with one of the two alternative representations for the change
 in the consumer’s nonfinancial income $y_{t+1} - y_t$.
 
-The first representation, which we shall refer to as the **original representation**, is
+For both representations, a parameter  $\beta \in (0,1)$ plays key roles. It appears
 
-```{math}
-:label: eqn_1
+- as a **discount factor** applied to future expected one-period utilities, and
+- as a parameter governing the moving average of the change in non-financial income
 
-y_{t+1} - y_t  =  \epsilon_{t+1} - \beta^{-1}  \epsilon_t  \quad
-```
+
+The first representation, which we shall sometimes refer to as the **original representation**, is
+
+
+$$
+y_{t+1} - y_t  =  \epsilon_{t+1} - \beta^{-1}  \epsilon_t  
+$$ (eqn_1)
 
 where $\{\epsilon_t\}$ is an i.i.d. normally distributed scalar
 process with means of zero and contemporaneous variances
 $\sigma_\epsilon^2$.
 
 This representation of the process is used by a consumer who at time
-$t$ knows both $y_t$ and the original shock
+$t$ knows both $y_t$ and the  shock
 $\epsilon_t$ and can use both of them to forecast future
 $y_{t+j}$’s.
 
-Furthermore, as we'll see below, representation {eq}`eqn_1` has the peculiar property that a positive shock
+As we'll see below, representation {eq}`eqn_1` has the peculiar property that a positive shock
 $\epsilon_{t+1}$ leaves the discounted present value of the consumer's financial income at time $t+1$
 unaltered.
 
 The second representation of the **same** $\{y_t\}$ process is
 
-```{math}
-:label: eqn_2
-
-y_{t+1} - y_t =  a_{t+1} - \beta  a_t \quad
-```
+$$
+y_{t+1} - y_t =  a_{t+1} - \beta  a_t 
+$$ (eqn_2)
 
 where $\{a_t\}$ is another i.i.d. normally distributed scalar
 process, with means of zero and now variances $\sigma_a^2 > \sigma_\epsilon^2$.
 
-The two i.i.d. shock variances are related by
+The  i.i.d. shock variances are related by
 
 $$
 \sigma_a^2 = \beta^{-2} \sigma_\epsilon^2 >  \sigma_\epsilon^2
@@ -134,7 +137,7 @@ $$
 so that the variance of the innovation exceeds the variance of the
 original shock by a multiplicative factor $\beta^{-2}$.
 
-The second representation is the **innovations representation** from
+Representation {eq}`eq2` is the **innovations representation** of equation {eq}`eq1` associated with
 Kalman filtering theory.
 
 To see how this works, note that equating representations {eq}`eqn_1`
@@ -172,8 +175,8 @@ Let $g_j \equiv E z_t z_{t-j}$ be the $j$th autocovariance
 of the $\{y_t - y_{t-1}\}$ process.
 
 Using calculations in the {doc}`quantecon lecture <classical_filtering>`, where
-$z \in C$ is a complex variable, the covariance generating
-function $g (z) =
+$z \in C$ is a complex variable, the **covariance generating
+function** $g (z) =
 \sum_{j=-\infty}^\infty g_j z^j$
 of the $\{y_t - y_{t-1}\}$ process equals
 
@@ -189,9 +192,9 @@ $$
 $$
 
 To verify these claims, just notice that
-$g(z) = \beta^{-2} \sigma_\epsilon^2$ implies that the coefficient
-$g_0 = \beta^{-2} \sigma_\epsilon^2$ and that $g_j = 0$ for
-$j \neq 0$.
+$g(z) = \beta^{-2} \sigma_\epsilon^2$ implies that 
+- $g_0 = \beta^{-2} \sigma_\epsilon^2$, and
+- $g_j = 0$ for $j \neq 0$.
 
 Alternatively, if you are uncomfortable with covariance generating
 functions, note that we can directly calculate $\sigma_a^2$ from
@@ -203,8 +206,7 @@ $$
 
 ## Application of Kalman filter
 
-We can also obtain representation {eq}`eqn_2` from representation {eq}`eqn_1` by using
-the **Kalman filter**.
+We can also use the the **Kalman filter** to  obtain representation {eq}`eqn_2` from representation {eq}`eqn_1`.
 
 Thus, from equations associated with the **Kalman filter**, it can be
 verified that the steady-state Kalman gain $K = \beta^2$ and the
@@ -221,23 +223,24 @@ $$
 
 and assume that $\sigma_\epsilon = 1$ for convenience
 
-Compute the steady-state Kalman filter for this system and let $K$
+Let's compute the steady-state Kalman filter for this system.
+
+Let $K$
 be the steady-state gain and $a_{t+1}$ the one-step ahead
 innovation.
 
-The innovations representation is
+The steady-state innovations representation is
 
 $$
 \begin{aligned} \hat \epsilon_{t+1} & = 0 \hat \epsilon_t + K a_{t+1} \cr
            z_{t+1} & = - \beta a_t + a_{t+1} \end{aligned}
 $$
 
-By applying formulas for the steady-state Kalman filter, by hand we
-computed that
+By applying formulas for the steady-state Kalman filter, by hand it is possible to verify that
 $K = \beta^2, \sigma_a^2 = \beta^{-2} \sigma_\epsilon^2 = \beta^{-2},$
 and $\Sigma = (1-\beta^2) \sigma_\epsilon^2$.
 
-We can also obtain these formulas via the classical filtering theory
+Alternatively, we can  obtain these formulas via the classical filtering theory
 described in {doc}`this lecture <classical_filtering>`.
 
 ## News Shocks and Less Informative Shocks
@@ -245,7 +248,7 @@ described in {doc}`this lecture <classical_filtering>`.
 Representation {eq}`eqn_1` is cast in terms of a **news shock**
 $\epsilon_{t+1}$ that represents a shock to nonfinancial income
 coming from taxes, transfers, and other random sources of income changes
-known to a well-informed person having all sorts of information about
+known to a well-informed person who perhaps has  all sorts of information about
 the income process.
 
 Representation {eq}`eqn_2` for the **same** income process is driven by shocks
@@ -258,27 +261,27 @@ $\{y_t - y_{t-1}\}$ process.
 It is cast in terms of what time series statisticians call the
 **innovation** or **fundamental** shock that emerges from applying the
 theory of optimally predicting nonfinancial income based solely on the
-information contained solely in **past** levels of growth in
+information  in **past** levels of growth in
 nonfinancial income.
 
 **Fundamental for the** ${y_t}$ **process** means that the shock
 $a_t$ can be expressed as a square-summable linear combination of
 $y_t, y_{t-1}, \ldots$.
 
-The shock $\epsilon_t$ is **not fundamental** and has more
+The shock $\epsilon_t$ is **not fundamental** because it  has more
 information about the future of the $\{y_t - y_{t-1}\}$ process
 than is contained in $a_t$.
 
 Representation {eq}`eqn_3` reveals the important fact that the **original
 shock** $\epsilon_t$ contains more information about future
 $y$’s than is contained in the semi-infinite history
-$y^t = [y_t, y_{t-1}, \ldots ]$ of current and past $y$’s.
+$y^t = [y_t, y_{t-1}, \ldots ]$.
 
 Staring at representation {eq}`eqn_3` for $a_{t+1}$ shows that it consists
 both of **new news** $\epsilon_{t+1}$ as well as a long moving
 average $(\beta - \beta^{-1})\sum_{j=0}^\infty \beta^j\epsilon_{t-j}$ of **old news**.
 
-The **better informed** representation {eq}`eqn_1` asserts that a shock
+The **move information** representation {eq}`eqn_1` asserts that a shock
 $\epsilon_{t}$ results in an impulse response to nonfinancial
 income of $\epsilon_t$ times the sequence
 
@@ -287,13 +290,13 @@ $$
 $$
 
 so that a shock that **increases** nonfinancial income $y_t$ by
-$\epsilon_t$ at time $t$ is followed by an **increase** in
+$\epsilon_t$ at time $t$ is followed by a change in
 future $y$ of $\epsilon_t$ times $1 - \beta^{-1} < 0$
 in **all** subsequent periods.
 
 Because $1 - \beta^{-1} < 0$, this means that a positive shock of
 $\epsilon_t$ today raises income at time $t$ by
-$\epsilon_t$ and then **decreases all** future incomes by
+$\epsilon_t$ and then permanently  **decreases all** future incomes by
 $(\beta^{-1} -1)\epsilon_t$.
 
 This pattern precisely describes the following mental experiment:
@@ -306,9 +309,8 @@ This pattern precisely describes the following mental experiment:
 - In each future period, the government **rolls over** the one-period
   bond and so continues to borrow $\epsilon_t$ forever.
 - The government imposes a lump-sum tax on the consumer in order to pay
-  just the current interest on the original bond and its successors
-  created by the roll-over operation.
-- In all future periods $t+1, t+2, \ldots$, the government levies
+  just the current interest on the original bond and its rolled over successors.
+- Thus, in periods $t+1, t+2, \ldots$, the government levies
   a lump-sum tax on the consumer of $\beta^{-1} -1$ that is just
   enough to pay the interest on the bond.
 
@@ -316,7 +318,7 @@ The **present value** of the impulse response or moving average
 coefficients equals $d_\epsilon(L) = \frac{0}{1 -\beta } =0$, a fact that we’ll see again
 below.
 
-Representation {eq}`eqn_2`, i.e., the innovation representation, asserts that a
+Representation {eq}`eqn_2`, i.e., the innovations representation, asserts that a
 shock $a_{t}$ results in an impulse response to nonfinancial
 income of $a_t$ times
 
@@ -342,7 +344,7 @@ $$
 \epsilon_t = \beta \epsilon_{t+1} - \beta (y_{t+1} - y_t ).
 $$
 
-Solving forward we eventually obtain
+Solving forward we  obtain
 
 $$
 \epsilon_t = \beta ( y_t - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1} )
@@ -351,14 +353,13 @@ $$
 This equation shows that $\epsilon_t$ equals
 $\beta$ times the one-step-backwards error in
 optimally  **backcasting** $y_t$ based on
-the **future** $y^t_+ \equiv y_{t+1}, y_{t+2}, \ldots ]$ via the optimal backcasting formula
+the semi-infinite **future** $y^t_+ \equiv [y_{t+1}, y_{t+2}, \ldots ]$ via the **optimal backcasting formula**
 
 $$
 E [ y_t | y^t_+] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1}
 $$
 
-Thus, $\epsilon_t$ contains **exact** information about an
-important linear combination of **future** nonfinancial income.
+Thus, $\epsilon_t$  **exactly** reveals the gap between $y_t$ and $E [ y_t | y^t_+]$. 
 
 ## Representation in Terms of $a_t$ Shocks
 
@@ -374,11 +375,10 @@ Solving this equation backward establishes that the one-step-prediction
 error $a_{t+1}$ is
 
 $$
-a_{t+1} = y_{t+1} - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}
+a_{t+1} = y_{t+1} - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j} .
 $$
 
-and where the information set is $y^t = [y_t, y_{t-1}, \ldots ]$,
-the one step-ahead optimal prediction is
+Here the information set is $y^t = [y_t, y_{t-1}, \ldots ]$ and a  one step-ahead optimal prediction is
 
 $$
 E [ y_{t+1} | y^t ] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}
@@ -386,10 +386,10 @@ $$
 
 ## Permanent Income Consumption-Smoothing Model
 
-When we computed optimal consumption-saving policies for the two
-representations using formulas obtained with the difference equation
-approach described in the [quantecon lecture](https://python-intro.quantecon.org/perm_income_cons.html),
-we obtain:
+When we computed optimal consumption-saving policies for our  two
+representations {eq}`eq1` and {eq}`eq2` by using formulas obtained with the difference equation
+approach described in  [quantecon lecture](https://python-intro.quantecon.org/perm_income_cons.html),
+we obtained:
 
 **for a consumer having the information assumed in the news
 representation** {eq}`eqn_1`:
@@ -411,14 +411,13 @@ b_{t+1} - b_t & = - \beta a_t
 \end{aligned}
 $$
 
-These formulas agree with outcomes from the Python programs to be
-reported below using state-space representations and dynamic
+These formulas agree with outcomes from  Python programs below that deploy  state-space representations and dynamic
 programming.
 
-Evidently the two consumers behave differently though they receive
-exactly the same histories of nonfinancial income.
+Evidently, although they receive
+exactly the same histories of nonfinancial incomethe two consumers behave differently.
 
-The consumer with information associated with representation {eq}`eqn_1`
+The better informedconsumer who has the  information sets  associated with representation {eq}`eqn_1`
 responds to each shock $\epsilon_{t+1}$ by leaving his consumption
 unaltered and **saving** all of $\epsilon_{t+1}$ in anticipation of the
 permanently increased taxes that he will bear in order to service the  permanent interest payments on the risk-free
@@ -426,7 +425,7 @@ bonds  that the government has
 presumably issued to pay for the one-time  addition
 $\epsilon_{t+1}$ to his time $t+1$ nonfinancial income.
 
-The consumer with information associated with representation {eq}`eqn_2`
+The less well informed consumer who has  information sets  associated with representation {eq}`eqn_2`
 responds to a shock $a_{t+1}$ by increasing his consumption by
 what he perceives to be the **permanent** part of the increase in
 consumption and by increasing his **saving** by what he perceives to be
@@ -438,16 +437,15 @@ Ricardian equivalence experiment.
 
 ## State Space Representations
 
-We can cast our two representations in terms of the following two state
-space systems
-
+We now cast our  representations {eq}`eq1` and {eq}`eq2`, respectively,  in terms of the following two state
+space systems:
 $$
 \begin{aligned}  \begin{bmatrix} y_{t+1} \cr \epsilon_{t+1} \end{bmatrix}  &=
       \begin{bmatrix} 1 & - \beta^{-1} \cr 0 & 0 \end{bmatrix} \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix}
        + \begin{bmatrix} \sigma_\epsilon \cr \sigma_\epsilon \end{bmatrix}
        v_{t+1} \cr
 y_t & =  \begin{bmatrix} 1 & 0 \end{bmatrix}    \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix} \end{aligned}
-$$
+$$ (eqstsp1)
 
 and
 
@@ -457,7 +455,7 @@ $$
        + \begin{bmatrix} \sigma_a \cr \sigma_a \end{bmatrix}
        u_{t+1} \cr
 y_t & =  \begin{bmatrix} 1 & 0 \end{bmatrix}    \begin{bmatrix} y_t \cr a_t \end{bmatrix} \end{aligned}
-$$
+$$ (eqstsp2)
 
 where $\{v_t\}$ and $\{u_t\}$ are both i.i.d. sequences of
 univariate standardized normal random variables.
@@ -470,13 +468,13 @@ All the code that we shall use below is presented in that lecture.
 
 ## Computations
 
-We shall use Python to form **both** of the above two state-space
-representations, using the following parameter values
+We shall use Python to form  two state-space 
+representations {eq}`eqstsp1` and {eq}`eqstsp2`, using the following parameter values
 $\sigma_\epsilon = 1, \sigma_a = \beta^{-1} \sigma_\epsilon = \beta^{-1}$
 where $\beta$ is the **same** value as the discount factor in the
 household’s problem in the LQ savings problem in the [lecture](https://python-intro.quantecon.org/perm_income_cons.html).
 
-For these two representations, we use the code in the
+For these two representations, we use the code in this
 [lecture](https://python-intro.quantecon.org/perm_income_cons.html) to
 
 - compute optimal decision rules for $c_t, b_t$ for the two types
@@ -484,10 +482,10 @@ For these two representations, we use the code in the
   income
 - use the value function objects $P, d$ returned by the code to
   compute optimal values for the two representations when evaluated at
-  the following initial conditions $x_0 =$
+  the  initial condition 
 
 $$
-\begin{bmatrix} 10 \cr 0 \end{bmatrix}
+x_0 = \begin{bmatrix} 10 \cr 0 \end{bmatrix}
 $$
 
 for each representation.
@@ -499,16 +497,15 @@ for each representation.
   $b_t$ to the respective shocks $\epsilon_t$ and
   $a_t$ for the two representations.
 - run simulations of $\{y_t, c_t, b_t\}$ of length $T$
-  under both of the representations (later I’ll give some more details
-  about how we’ll run some special versions of these)
+  under both of the representations 
 
-We want to solve the LQ problem:
+We formulae the problem:
 
 $$
 \min\ \sum_{t=0}^{\infty}\beta^{t}\left(c_{t}-\gamma\right)^{2}
 $$
 
-subject to the sequence of constraints
+subject to a sequence of constraints
 
 $$
 \quad c_{t}+b_{t}=\frac{1}{1+r}b_{t+1}+y_{t}, \quad t \geq 0
