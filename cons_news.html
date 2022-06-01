@@ -272,24 +272,24 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><div class="tex2jax_ignore mathjax_ignore section" id="information-and-consumption-smoothing">
-<h1><a class="toc-backref" href="#id3"><span class="section-number">5. </span>Information and Consumption Smoothing</a><a class="headerlink" href="#information-and-consumption-smoothing" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id4"><span class="section-number">5. </span>Information and Consumption Smoothing</a><a class="headerlink" href="#information-and-consumption-smoothing" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#information-and-consumption-smoothing" id="id3">Information and Consumption Smoothing</a></p>
+<li><p><a class="reference internal" href="#information-and-consumption-smoothing" id="id4">Information and Consumption Smoothing</a></p>
 <ul>
-<li><p><a class="reference internal" href="#overview" id="id4">Overview</a></p></li>
-<li><p><a class="reference internal" href="#two-representations-of-one-nonfinancial-income-process" id="id5">Two Representations of  One Nonfinancial Income Process</a></p></li>
-<li><p><a class="reference internal" href="#application-of-kalman-filter" id="id6">Application of Kalman filter</a></p></li>
-<li><p><a class="reference internal" href="#news-shocks-and-less-informative-shocks" id="id7">News Shocks and Less Informative Shocks</a></p></li>
-<li><p><a class="reference internal" href="#representation-of-epsilon-t-shock-in-terms-of-future-y-t" id="id8">Representation of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> Shock in Terms of Future <span class="math notranslate nohighlight">\(y_t\)</span></a></p></li>
-<li><p><a class="reference internal" href="#representation-in-terms-of-a-t-shocks" id="id9">Representation in Terms of <span class="math notranslate nohighlight">\(a_t\)</span> Shocks</a></p></li>
-<li><p><a class="reference internal" href="#permanent-income-consumption-smoothing-model" id="id10">Permanent Income Consumption-Smoothing Model</a></p></li>
-<li><p><a class="reference internal" href="#state-space-representations" id="id11">State Space Representations</a></p></li>
-<li><p><a class="reference internal" href="#computations" id="id12">Computations</a></p></li>
-<li><p><a class="reference internal" href="#simulating-income-process-and-two-associated-shock-processes" id="id13">Simulating  Income Process and Two Associated Shock Processes</a></p></li>
-<li><p><a class="reference internal" href="#calculating-innovations-in-another-way" id="id14">Calculating Innovations in Another Way</a></p></li>
-<li><p><a class="reference internal" href="#another-invertibility-issue" id="id15">Another Invertibility Issue</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id5">Overview</a></p></li>
+<li><p><a class="reference internal" href="#two-representations-of-one-nonfinancial-income-process" id="id6">Two Representations of  One Nonfinancial Income Process</a></p></li>
+<li><p><a class="reference internal" href="#application-of-kalman-filter" id="id7">Application of Kalman filter</a></p></li>
+<li><p><a class="reference internal" href="#news-shocks-and-less-informative-shocks" id="id8">News Shocks and Less Informative Shocks</a></p></li>
+<li><p><a class="reference internal" href="#representation-of-epsilon-t-shock-in-terms-of-future-y-t" id="id9">Representation of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> Shock in Terms of Future <span class="math notranslate nohighlight">\(y_t\)</span></a></p></li>
+<li><p><a class="reference internal" href="#representation-in-terms-of-a-t-shocks" id="id10">Representation in Terms of <span class="math notranslate nohighlight">\(a_t\)</span> Shocks</a></p></li>
+<li><p><a class="reference internal" href="#permanent-income-consumption-smoothing-model" id="id11">Permanent Income Consumption-Smoothing Model</a></p></li>
+<li><p><a class="reference internal" href="#state-space-representations" id="id12">State Space Representations</a></p></li>
+<li><p><a class="reference internal" href="#computations" id="id13">Computations</a></p></li>
+<li><p><a class="reference internal" href="#simulating-income-process-and-two-associated-shock-processes" id="id14">Simulating  Income Process and Two Associated Shock Processes</a></p></li>
+<li><p><a class="reference internal" href="#calculating-innovations-in-another-way" id="id15">Calculating Innovations in Another Way</a></p></li>
+<li><p><a class="reference internal" href="#another-invertibility-issue" id="id16">Another Invertibility Issue</a></p></li>
 </ul>
 </li>
 </ul>
@@ -305,60 +305,59 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.5.3)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.21.5)
-Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
 Requirement already satisfied: scipy&gt;=1.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
 Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.55.1)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
+Requirement already satisfied: numpy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.21.5)
+Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
 Requirement already satisfied: llvmlite&lt;0.39,&gt;=0.38.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.38.0)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
 Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="overview">
-<h2><a class="toc-backref" href="#id4"><span class="section-number">5.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5"><span class="section-number">5.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>This lecture studies two consumers who have exactly the same
 nonfinancial income process and who both conform to the linear-quadratic
 permanent income of consumption smoothing model described in this
 <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">quantecon lecture</a>.</p>
-<p>The two consumers  have different information about
+<p>The two consumers  have different information about their
 future nonfinancial incomes.</p>
-<p>One consumer each period receives <strong>news</strong> in the form of a shock that simultaneously
+<p>A better informed consumer each period receives <strong>news</strong> in the form of a shock that simultaneously
 affects both <strong>today’s</strong> nonfinancial income and  the
 present value of <strong>future</strong> nonfinancial incomes in a particular way.</p>
-<p>The other, less well informed, consumer each period receives a shock
+<p>A less  informed consumer each period receives a shock
 that equals  the part of today’s nonfinancial income that could not be
-forecast from all  past values of nonfinancial income.</p>
+forecast from   past values of nonfinancial income.</p>
 <p>Even though they receive exactly the same nonfinancial incomes each
 period, our two consumers behave differently because they have different information about
 their future nonfinancial incomes.</p>
 <p>The second consumer receives less information about future nonfinancial
-incomes in a sense that we shall make precise below.</p>
-<p>This difference in their information sets manifests itself in their responding differently to what they regard as time <span class="math notranslate nohighlight">\(t\)</span> information
-shocks.</p>
-<p>Thus, while they receive exactly the same histories of
+incomes in a sense that we shall make precise.</p>
+<p>This difference in their information sets manifests itself in their responding differently to what they regard as time <span class="math notranslate nohighlight">\(t\)</span> <strong>information shocks</strong>.</p>
+<p>Thus, although at each date they receive exactly the same histories of
 nonfinancial income, our two consumers receive different <strong>shocks</strong> or <strong>news</strong> about
 their <strong>future</strong> nonfinancial incomes.</p>
-<p>We compare behaviors of our two consumers as a way to learn about</p>
+<p>We use the different behaviors of our  consumers as a way to learn about</p>
 <ul class="simple">
-<li><p>operating characteristics of the linear-quadratic permanent income
+<li><p>operating characteristics of a linear-quadratic permanent income
 model</p></li>
 <li><p>how the Kalman filter introduced in <a class="reference external" href="https://python-intro.quantecon.org/kalman.html">this lecture</a>
-and/or the theory of optimal
+and/or another representation of the  theory of optimal
 forecasting introduced in <a class="reference internal" href="classical_filtering.html"><span class="doc">this lecture</span></a>
 embody lessons
 that can be applied to the <strong>news</strong> and <strong>noise</strong> literature</p></li>
-<li><p>various ways of representing and computing optimal decision rules in
+<li><p>ways of representing and computing optimal decision rules in
 the linear-quadratic permanent income model</p></li>
-<li><p>a <strong>Ricardian equivalence</strong> outcome describing effects on optimal
+<li><p>a <strong>Ricardian equivalence</strong> outcome that describes effects on optimal
 consumption of a tax cut at time <span class="math notranslate nohighlight">\(t\)</span> accompanied by a foreseen
 permanent increases in taxes that is just sufficient to cover the interest
 payments used to service the risk-free government bonds that are issued to finance
@@ -367,39 +366,49 @@ the tax cut</p></li>
 generating function along lines described in <a class="reference internal" href="classical_filtering.html"><span class="doc">this lecture</span></a></p></li>
 </ul>
 <p>This lecture can be regarded as an introduction to some of the <strong>invertibility</strong> issues that take center stage in
-the analysis of <strong>fiscal foresight</strong> by Eric Leeper, Todd Walker, and Susan Yang <span id="id1">[<a class="reference internal" href="zreferences.html#id33" title="Eric M. Leeper, Todd B. Walker, and Shu‐Chun Susan Yang. Fiscal foresight and information flows. Econometrica, 81(3):1115-1145, May 2013.">LWY13</a>]</span>.</p>
+the analysis of <strong>fiscal foresight</strong> by Eric Leeper, Todd Walker, and Susan Yang <span id="id1">[<a class="reference internal" href="zreferences.html#id33" title="Eric M. Leeper, Todd B. Walker, and Shu‐Chun Susan Yang. Fiscal foresight and information flows. Econometrica, 81(3):1115-1145, May 2013.">LWY13</a>]</span>, as well
+as in chapter 4  of <span id="id2">[<a class="reference internal" href="zreferences.html#id58" title="Thomas Sargent, Lars Peter Hansen, and Will Roberts. Observable implications of present value budget balance. In Rational Expectations Econometrics. Westview Press, 1991.">SHR91</a>]</span>.</p>
 </div>
 <div class="section" id="two-representations-of-one-nonfinancial-income-process">
-<h2><a class="toc-backref" href="#id5"><span class="section-number">5.2. </span>Two Representations of  One Nonfinancial Income Process</a><a class="headerlink" href="#two-representations-of-one-nonfinancial-income-process" title="Permalink to this headline">¶</a></h2>
-<p>Where <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>, we study consequences of endowing a
+<h2><a class="toc-backref" href="#id6"><span class="section-number">5.2. </span>Two Representations of  One Nonfinancial Income Process</a><a class="headerlink" href="#two-representations-of-one-nonfinancial-income-process" title="Permalink to this headline">¶</a></h2>
+<p>We study consequences of endowing a
 consumer with one of the two alternative representations for the change
 in the consumer’s nonfinancial income <span class="math notranslate nohighlight">\(y_{t+1} - y_t\)</span>.</p>
-<p>The first representation, which we shall refer to as the <strong>original representation</strong>, is</p>
+<p>For both representations, a parameter  <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span> plays key roles. It appears</p>
+<ul class="simple">
+<li><p>as a <strong>discount factor</strong> applied to future expected one-period utilities, and</p></li>
+<li><p>as a parameter governing the moving average of the change in non-financial income</p></li>
+</ul>
+<p>The first representation, which we shall sometimes refer to as the <strong>original representation</strong>, is</p>
 <div class="math notranslate nohighlight" id="equation-eqn-1">
-<span class="eqno">(5.1)<a class="headerlink" href="#equation-eqn-1" title="Permalink to this equation">¶</a></span>\[y_{t+1} - y_t  =  \epsilon_{t+1} - \beta^{-1}  \epsilon_t  \quad\]</div>
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-eqn-1" title="Permalink to this equation">¶</a></span>\[
+y_{t+1} - y_t  =  \epsilon_{t+1} - \beta^{-1}  \epsilon_t  
+\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{\epsilon_t\}\)</span> is an i.i.d. normally distributed scalar
 process with means of zero and contemporaneous variances
 <span class="math notranslate nohighlight">\(\sigma_\epsilon^2\)</span>.</p>
 <p>This representation of the process is used by a consumer who at time
-<span class="math notranslate nohighlight">\(t\)</span> knows both <span class="math notranslate nohighlight">\(y_t\)</span> and the original shock
+<span class="math notranslate nohighlight">\(t\)</span> knows both <span class="math notranslate nohighlight">\(y_t\)</span> and the  shock
 <span class="math notranslate nohighlight">\(\epsilon_t\)</span> and can use both of them to forecast future
 <span class="math notranslate nohighlight">\(y_{t+j}\)</span>’s.</p>
-<p>Furthermore, as we’ll see below, representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> has the peculiar property that a positive shock
+<p>As we’ll see below, representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> has the peculiar property that a positive shock
 <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> leaves the discounted present value of the consumer’s financial income at time <span class="math notranslate nohighlight">\(t+1\)</span>
 unaltered.</p>
 <p>The second representation of the <strong>same</strong> <span class="math notranslate nohighlight">\(\{y_t\}\)</span> process is</p>
 <div class="math notranslate nohighlight" id="equation-eqn-2">
-<span class="eqno">(5.2)<a class="headerlink" href="#equation-eqn-2" title="Permalink to this equation">¶</a></span>\[y_{t+1} - y_t =  a_{t+1} - \beta  a_t \quad\]</div>
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-eqn-2" title="Permalink to this equation">¶</a></span>\[
+y_{t+1} - y_t =  a_{t+1} - \beta  a_t 
+\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{a_t\}\)</span> is another i.i.d. normally distributed scalar
 process, with means of zero and now variances <span class="math notranslate nohighlight">\(\sigma_a^2 &gt; \sigma_\epsilon^2\)</span>.</p>
-<p>The two i.i.d. shock variances are related by</p>
+<p>The  i.i.d. shock variances are related by</p>
 <div class="math notranslate nohighlight">
 \[
 \sigma_a^2 = \beta^{-2} \sigma_\epsilon^2 &gt;  \sigma_\epsilon^2
 \]</div>
 <p>so that the variance of the innovation exceeds the variance of the
 original shock by a multiplicative factor <span class="math notranslate nohighlight">\(\beta^{-2}\)</span>.</p>
-<p>The second representation is the <strong>innovations representation</strong> from
+<p>Representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> is the <strong>innovations representation</strong> of equation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> associated with
 Kalman filtering theory.</p>
 <p>To see how this works, note that equating representations <a class="reference internal" href="#equation-eqn-1">(5.1)</a>
 and <a class="reference internal" href="#equation-eqn-2">(5.2)</a> for <span class="math notranslate nohighlight">\(y_{t+1} - y_t\)</span> implies
@@ -427,8 +436,8 @@ h(L) = \frac{ I -\beta^{-1} L}{ I - \beta L}
 <p>Let <span class="math notranslate nohighlight">\(g_j \equiv E z_t z_{t-j}\)</span> be the <span class="math notranslate nohighlight">\(j\)</span>th autocovariance
 of the <span class="math notranslate nohighlight">\(\{y_t - y_{t-1}\}\)</span> process.</p>
 <p>Using calculations in the <a class="reference internal" href="classical_filtering.html"><span class="doc">quantecon lecture</span></a>, where
-<span class="math notranslate nohighlight">\(z \in C\)</span> is a complex variable, the covariance generating
-function <span class="math notranslate nohighlight">\(g (z) =
+<span class="math notranslate nohighlight">\(z \in C\)</span> is a complex variable, the <strong>covariance generating
+function</strong> <span class="math notranslate nohighlight">\(g (z) =
 \sum_{j=-\infty}^\infty g_j z^j\)</span>
 of the <span class="math notranslate nohighlight">\(\{y_t - y_{t-1}\}\)</span> process equals</p>
 <div class="math notranslate nohighlight">
@@ -442,9 +451,11 @@ process with variance</p>
 \sigma_a^2 = \beta^{-1} \sigma_\epsilon^2 .
 \]</div>
 <p>To verify these claims, just notice that
-<span class="math notranslate nohighlight">\(g(z) = \beta^{-2} \sigma_\epsilon^2\)</span> implies that the coefficient
-<span class="math notranslate nohighlight">\(g_0 = \beta^{-2} \sigma_\epsilon^2\)</span> and that <span class="math notranslate nohighlight">\(g_j = 0\)</span> for
-<span class="math notranslate nohighlight">\(j \neq 0\)</span>.</p>
+<span class="math notranslate nohighlight">\(g(z) = \beta^{-2} \sigma_\epsilon^2\)</span> implies that</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(g_0 = \beta^{-2} \sigma_\epsilon^2\)</span>, and</p></li>
+<li><p><span class="math notranslate nohighlight">\(g_j = 0\)</span> for <span class="math notranslate nohighlight">\(j \neq 0\)</span>.</p></li>
+</ul>
 <p>Alternatively, if you are uncomfortable with covariance generating
 functions, note that we can directly calculate <span class="math notranslate nohighlight">\(\sigma_a^2\)</span> from
 formula <a class="reference internal" href="#equation-eqn-3">(5.3)</a> according to</p>
@@ -454,9 +465,8 @@ formula <a class="reference internal" href="#equation-eqn-3">(5.3)</a> according
 \]</div>
 </div>
 <div class="section" id="application-of-kalman-filter">
-<h2><a class="toc-backref" href="#id6"><span class="section-number">5.3. </span>Application of Kalman filter</a><a class="headerlink" href="#application-of-kalman-filter" title="Permalink to this headline">¶</a></h2>
-<p>We can also obtain representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> from representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> by using
-the <strong>Kalman filter</strong>.</p>
+<h2><a class="toc-backref" href="#id7"><span class="section-number">5.3. </span>Application of Kalman filter</a><a class="headerlink" href="#application-of-kalman-filter" title="Permalink to this headline">¶</a></h2>
+<p>We can also use the the <strong>Kalman filter</strong> to  obtain representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> from representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a>.</p>
 <p>Thus, from equations associated with the <strong>Kalman filter</strong>, it can be
 verified that the steady-state Kalman gain <span class="math notranslate nohighlight">\(K = \beta^2\)</span> and the
 steady state conditional covariance
@@ -469,28 +479,28 @@ state-space representation</p>
            z_{t+1} &amp; = - \beta^{-1} \epsilon_t + \epsilon_{t+1} \end{aligned}
 \]</div>
 <p>and assume that <span class="math notranslate nohighlight">\(\sigma_\epsilon = 1\)</span> for convenience</p>
-<p>Compute the steady-state Kalman filter for this system and let <span class="math notranslate nohighlight">\(K\)</span>
+<p>Let’s compute the steady-state Kalman filter for this system.</p>
+<p>Let <span class="math notranslate nohighlight">\(K\)</span>
 be the steady-state gain and <span class="math notranslate nohighlight">\(a_{t+1}\)</span> the one-step ahead
 innovation.</p>
-<p>The innovations representation is</p>
+<p>The steady-state innovations representation is</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned} \hat \epsilon_{t+1} &amp; = 0 \hat \epsilon_t + K a_{t+1} \cr
            z_{t+1} &amp; = - \beta a_t + a_{t+1} \end{aligned}
 \]</div>
-<p>By applying formulas for the steady-state Kalman filter, by hand we
-computed that
+<p>By applying formulas for the steady-state Kalman filter, by hand it is possible to verify that
 <span class="math notranslate nohighlight">\(K = \beta^2, \sigma_a^2 = \beta^{-2} \sigma_\epsilon^2 = \beta^{-2},\)</span>
 and <span class="math notranslate nohighlight">\(\Sigma = (1-\beta^2) \sigma_\epsilon^2\)</span>.</p>
-<p>We can also obtain these formulas via the classical filtering theory
+<p>Alternatively, we can  obtain these formulas via the classical filtering theory
 described in <a class="reference internal" href="classical_filtering.html"><span class="doc">this lecture</span></a>.</p>
 </div>
 <div class="section" id="news-shocks-and-less-informative-shocks">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">5.4. </span>News Shocks and Less Informative Shocks</a><a class="headerlink" href="#news-shocks-and-less-informative-shocks" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id8"><span class="section-number">5.4. </span>News Shocks and Less Informative Shocks</a><a class="headerlink" href="#news-shocks-and-less-informative-shocks" title="Permalink to this headline">¶</a></h2>
 <p>Representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> is cast in terms of a <strong>news shock</strong>
 <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> that represents a shock to nonfinancial income
 coming from taxes, transfers, and other random sources of income changes
-known to a well-informed person having all sorts of information about
+known to a well-informed person who perhaps has  all sorts of information about
 the income process.</p>
 <p>Representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> for the <strong>same</strong> income process is driven by shocks
 <span class="math notranslate nohighlight">\(a_t\)</span> that contain less information than the news shock
@@ -500,22 +510,22 @@ the income process.</p>
 <p>It is cast in terms of what time series statisticians call the
 <strong>innovation</strong> or <strong>fundamental</strong> shock that emerges from applying the
 theory of optimally predicting nonfinancial income based solely on the
-information contained solely in <strong>past</strong> levels of growth in
+information  in <strong>past</strong> levels of growth in
 nonfinancial income.</p>
 <p><strong>Fundamental for the</strong> <span class="math notranslate nohighlight">\({y_t}\)</span> <strong>process</strong> means that the shock
 <span class="math notranslate nohighlight">\(a_t\)</span> can be expressed as a square-summable linear combination of
 <span class="math notranslate nohighlight">\(y_t, y_{t-1}, \ldots\)</span>.</p>
-<p>The shock <span class="math notranslate nohighlight">\(\epsilon_t\)</span> is <strong>not fundamental</strong> and has more
+<p>The shock <span class="math notranslate nohighlight">\(\epsilon_t\)</span> is <strong>not fundamental</strong> because it  has more
 information about the future of the <span class="math notranslate nohighlight">\(\{y_t - y_{t-1}\}\)</span> process
 than is contained in <span class="math notranslate nohighlight">\(a_t\)</span>.</p>
 <p>Representation <a class="reference internal" href="#equation-eqn-3">(5.3)</a> reveals the important fact that the <strong>original
 shock</strong> <span class="math notranslate nohighlight">\(\epsilon_t\)</span> contains more information about future
 <span class="math notranslate nohighlight">\(y\)</span>’s than is contained in the semi-infinite history
-<span class="math notranslate nohighlight">\(y^t = [y_t, y_{t-1}, \ldots ]\)</span> of current and past <span class="math notranslate nohighlight">\(y\)</span>’s.</p>
+<span class="math notranslate nohighlight">\(y^t = [y_t, y_{t-1}, \ldots ]\)</span>.</p>
 <p>Staring at representation <a class="reference internal" href="#equation-eqn-3">(5.3)</a> for <span class="math notranslate nohighlight">\(a_{t+1}\)</span> shows that it consists
 both of <strong>new news</strong> <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> as well as a long moving
 average <span class="math notranslate nohighlight">\((\beta - \beta^{-1})\sum_{j=0}^\infty \beta^j\epsilon_{t-j}\)</span> of <strong>old news</strong>.</p>
-<p>The <strong>better informed</strong> representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> asserts that a shock
+<p>The <strong>move information</strong> representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> asserts that a shock
 <span class="math notranslate nohighlight">\(\epsilon_{t}\)</span> results in an impulse response to nonfinancial
 income of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> times the sequence</p>
 <div class="math notranslate nohighlight">
@@ -523,12 +533,12 @@ income of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> times
 1, 1- \beta^{-1}, 1- \beta^{-1}, \ldots
 \]</div>
 <p>so that a shock that <strong>increases</strong> nonfinancial income <span class="math notranslate nohighlight">\(y_t\)</span> by
-<span class="math notranslate nohighlight">\(\epsilon_t\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> is followed by an <strong>increase</strong> in
+<span class="math notranslate nohighlight">\(\epsilon_t\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> is followed by a change in
 future <span class="math notranslate nohighlight">\(y\)</span> of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> times <span class="math notranslate nohighlight">\(1 - \beta^{-1} &lt; 0\)</span>
 in <strong>all</strong> subsequent periods.</p>
 <p>Because <span class="math notranslate nohighlight">\(1 - \beta^{-1} &lt; 0\)</span>, this means that a positive shock of
 <span class="math notranslate nohighlight">\(\epsilon_t\)</span> today raises income at time <span class="math notranslate nohighlight">\(t\)</span> by
-<span class="math notranslate nohighlight">\(\epsilon_t\)</span> and then <strong>decreases all</strong> future incomes by
+<span class="math notranslate nohighlight">\(\epsilon_t\)</span> and then permanently  <strong>decreases all</strong> future incomes by
 <span class="math notranslate nohighlight">\((\beta^{-1} -1)\epsilon_t\)</span>.</p>
 <p>This pattern precisely describes the following mental experiment:</p>
 <ul class="simple">
@@ -540,16 +550,15 @@ which it pays a gross one-period risk-free interest rate equal to
 <li><p>In each future period, the government <strong>rolls over</strong> the one-period
 bond and so continues to borrow <span class="math notranslate nohighlight">\(\epsilon_t\)</span> forever.</p></li>
 <li><p>The government imposes a lump-sum tax on the consumer in order to pay
-just the current interest on the original bond and its successors
-created by the roll-over operation.</p></li>
-<li><p>In all future periods <span class="math notranslate nohighlight">\(t+1, t+2, \ldots\)</span>, the government levies
+just the current interest on the original bond and its rolled over successors.</p></li>
+<li><p>Thus, in periods <span class="math notranslate nohighlight">\(t+1, t+2, \ldots\)</span>, the government levies
 a lump-sum tax on the consumer of <span class="math notranslate nohighlight">\(\beta^{-1} -1\)</span> that is just
 enough to pay the interest on the bond.</p></li>
 </ul>
 <p>The <strong>present value</strong> of the impulse response or moving average
 coefficients equals <span class="math notranslate nohighlight">\(d_\epsilon(L) = \frac{0}{1 -\beta } =0\)</span>, a fact that we’ll see again
 below.</p>
-<p>Representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, i.e., the innovation representation, asserts that a
+<p>Representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, i.e., the innovations representation, asserts that a
 shock <span class="math notranslate nohighlight">\(a_{t}\)</span> results in an impulse response to nonfinancial
 income of <span class="math notranslate nohighlight">\(a_t\)</span> times</p>
 <div class="math notranslate nohighlight">
@@ -565,14 +574,14 @@ for representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a
 fact that will be important below.</p>
 </div>
 <div class="section" id="representation-of-epsilon-t-shock-in-terms-of-future-y-t">
-<h2><a class="toc-backref" href="#id8"><span class="section-number">5.5. </span>Representation of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> Shock in Terms of Future <span class="math notranslate nohighlight">\(y_t\)</span></a><a class="headerlink" href="#representation-of-epsilon-t-shock-in-terms-of-future-y-t" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id9"><span class="section-number">5.5. </span>Representation of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> Shock in Terms of Future <span class="math notranslate nohighlight">\(y_t\)</span></a><a class="headerlink" href="#representation-of-epsilon-t-shock-in-terms-of-future-y-t" title="Permalink to this headline">¶</a></h2>
 <p>Notice that reprentation <a class="reference internal" href="#equation-eqn-1">(5.1)</a>, namely, <span class="math notranslate nohighlight">\(y_{t+1} - y_t = -\beta^{-1} \epsilon_t + \epsilon_{t+1}\)</span>
 implies the linear difference equation</p>
 <div class="math notranslate nohighlight">
 \[
 \epsilon_t = \beta \epsilon_{t+1} - \beta (y_{t+1} - y_t ).
 \]</div>
-<p>Solving forward we eventually obtain</p>
+<p>Solving forward we  obtain</p>
 <div class="math notranslate nohighlight">
 \[
 \epsilon_t = \beta ( y_t - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1} )
@@ -580,16 +589,15 @@ implies the linear difference equation</p>
 <p>This equation shows that <span class="math notranslate nohighlight">\(\epsilon_t\)</span> equals
 <span class="math notranslate nohighlight">\(\beta\)</span> times the one-step-backwards error in
 optimally  <strong>backcasting</strong> <span class="math notranslate nohighlight">\(y_t\)</span> based on
-the <strong>future</strong> <span class="math notranslate nohighlight">\(y^t_+ \equiv y_{t+1}, y_{t+2}, \ldots ]\)</span> via the optimal backcasting formula</p>
+the semi-infinite <strong>future</strong> <span class="math notranslate nohighlight">\(y^t_+ \equiv [y_{t+1}, y_{t+2}, \ldots ]\)</span> via the <strong>optimal backcasting formula</strong></p>
 <div class="math notranslate nohighlight">
 \[
 E [ y_t | y^t_+] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1}
 \]</div>
-<p>Thus, <span class="math notranslate nohighlight">\(\epsilon_t\)</span> contains <strong>exact</strong> information about an
-important linear combination of <strong>future</strong> nonfinancial income.</p>
+<p>Thus, <span class="math notranslate nohighlight">\(\epsilon_t\)</span>  <strong>exactly</strong> reveals the gap between <span class="math notranslate nohighlight">\(y_t\)</span> and <span class="math notranslate nohighlight">\(E [ y_t | y^t_+]\)</span>.</p>
 </div>
 <div class="section" id="representation-in-terms-of-a-t-shocks">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">5.6. </span>Representation in Terms of <span class="math notranslate nohighlight">\(a_t\)</span> Shocks</a><a class="headerlink" href="#representation-in-terms-of-a-t-shocks" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id10"><span class="section-number">5.6. </span>Representation in Terms of <span class="math notranslate nohighlight">\(a_t\)</span> Shocks</a><a class="headerlink" href="#representation-in-terms-of-a-t-shocks" title="Permalink to this headline">¶</a></h2>
 <p>Next notice that representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, namely, <span class="math notranslate nohighlight">\(y_{t+1} - y_t = -
 \beta a_t + a_{t+1}\)</span> implies the linear difference
 equation</p>
@@ -601,21 +609,20 @@ a_{t+1} = \beta a_t + (y_{t+1} - y_t)
 error <span class="math notranslate nohighlight">\(a_{t+1}\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[
-a_{t+1} = y_{t+1} - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}
+a_{t+1} = y_{t+1} - (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j} .
 \]</div>
-<p>and where the information set is <span class="math notranslate nohighlight">\(y^t = [y_t, y_{t-1}, \ldots ]\)</span>,
-the one step-ahead optimal prediction is</p>
+<p>Here the information set is <span class="math notranslate nohighlight">\(y^t = [y_t, y_{t-1}, \ldots ]\)</span> and a  one step-ahead optimal prediction is</p>
 <div class="math notranslate nohighlight">
 \[
 E [ y_{t+1} | y^t ] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}
 \]</div>
 </div>
 <div class="section" id="permanent-income-consumption-smoothing-model">
-<h2><a class="toc-backref" href="#id10"><span class="section-number">5.7. </span>Permanent Income Consumption-Smoothing Model</a><a class="headerlink" href="#permanent-income-consumption-smoothing-model" title="Permalink to this headline">¶</a></h2>
-<p>When we computed optimal consumption-saving policies for the two
-representations using formulas obtained with the difference equation
-approach described in the <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">quantecon lecture</a>,
-we obtain:</p>
+<h2><a class="toc-backref" href="#id11"><span class="section-number">5.7. </span>Permanent Income Consumption-Smoothing Model</a><a class="headerlink" href="#permanent-income-consumption-smoothing-model" title="Permalink to this headline">¶</a></h2>
+<p>When we computed optimal consumption-saving policies for our  two
+representations <a class="reference internal" href="#equation-eqn-1">(5.1)</a> and <a class="reference internal" href="#equation-eqn-2">(5.2)</a> by using formulas obtained with the difference equation
+approach described in  <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">quantecon lecture</a>,
+we obtained:</p>
 <p><strong>for a consumer having the information assumed in the news
 representation</strong> <a class="reference internal" href="#equation-eqn-1">(5.1)</a>:</p>
 <div class="math notranslate nohighlight">
@@ -634,19 +641,18 @@ c_{t+1} - c_t &amp; = (1-\beta^2) a_{t+1} \cr
 b_{t+1} - b_t &amp; = - \beta a_t
 \end{aligned}
 \]</div>
-<p>These formulas agree with outcomes from the Python programs to be
-reported below using state-space representations and dynamic
+<p>These formulas agree with outcomes from  Python programs below that deploy  state-space representations and dynamic
 programming.</p>
-<p>Evidently the two consumers behave differently though they receive
-exactly the same histories of nonfinancial income.</p>
-<p>The consumer with information associated with representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a>
+<p>Evidently, although they receive
+exactly the same histories of nonfinancial incomethe two consumers behave differently.</p>
+<p>The better informedconsumer who has the  information sets  associated with representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a>
 responds to each shock <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> by leaving his consumption
 unaltered and <strong>saving</strong> all of <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> in anticipation of the
 permanently increased taxes that he will bear in order to service the  permanent interest payments on the risk-free
 bonds  that the government has
 presumably issued to pay for the one-time  addition
 <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> to his time <span class="math notranslate nohighlight">\(t+1\)</span> nonfinancial income.</p>
-<p>The consumer with information associated with representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a>
+<p>The less well informed consumer who has  information sets  associated with representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a>
 responds to a shock <span class="math notranslate nohighlight">\(a_{t+1}\)</span> by increasing his consumption by
 what he perceives to be the <strong>permanent</strong> part of the increase in
 consumption and by increasing his <strong>saving</strong> by what he perceives to be
@@ -656,20 +662,20 @@ whose behavior sharply illustrates the behavior assumed in a classic
 Ricardian equivalence experiment.</p>
 </div>
 <div class="section" id="state-space-representations">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">5.8. </span>State Space Representations</a><a class="headerlink" href="#state-space-representations" title="Permalink to this headline">¶</a></h2>
-<p>We can cast our two representations in terms of the following two state
-space systems</p>
-<div class="math notranslate nohighlight">
-\[
+<h2><a class="toc-backref" href="#id12"><span class="section-number">5.8. </span>State Space Representations</a><a class="headerlink" href="#state-space-representations" title="Permalink to this headline">¶</a></h2>
+<p>We now cast our  representations <a class="reference internal" href="#equation-eqn-1">(5.1)</a> and <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, respectively,  in terms of the following two state
+space systems:</p>
+<div class="math notranslate nohighlight" id="equation-eqstsp1">
+<span class="eqno">(5.4)<a class="headerlink" href="#equation-eqstsp1" title="Permalink to this equation">¶</a></span>\[
 \begin{aligned}  \begin{bmatrix} y_{t+1} \cr \epsilon_{t+1} \end{bmatrix}  &amp;=
       \begin{bmatrix} 1 &amp; - \beta^{-1} \cr 0 &amp; 0 \end{bmatrix} \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix}
        + \begin{bmatrix} \sigma_\epsilon \cr \sigma_\epsilon \end{bmatrix}
        v_{t+1} \cr
-y_t &amp; =  \begin{bmatrix} 1 &amp; 0 \end{bmatrix}    \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix} \end{aligned}
+y_t &amp; =  \begin{bmatrix} 1 &amp; 0 \end{bmatrix} \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix} \end{aligned}
 \]</div>
 <p>and</p>
-<div class="math notranslate nohighlight">
-\[
+<div class="math notranslate nohighlight" id="equation-eqstsp2">
+<span class="eqno">(5.5)<a class="headerlink" href="#equation-eqstsp2" title="Permalink to this equation">¶</a></span>\[
 \begin{aligned}  \begin{bmatrix} y_{t+1} \cr a_{t+1} \end{bmatrix}  &amp;=
       \begin{bmatrix} 1 &amp; - \beta \cr 0 &amp; 0 \end{bmatrix} \begin{bmatrix} y_t \cr a_t \end{bmatrix}
        + \begin{bmatrix} \sigma_a \cr \sigma_a \end{bmatrix}
@@ -684,13 +690,14 @@ Equation Approach” in the <a class="reference external" href="https://python-i
 <p>All the code that we shall use below is presented in that lecture.</p>
 </div>
 <div class="section" id="computations">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">5.9. </span>Computations</a><a class="headerlink" href="#computations" title="Permalink to this headline">¶</a></h2>
-<p>We shall use Python to form <strong>both</strong> of the above two state-space
-representations, using the following parameter values
+<h2><a class="toc-backref" href="#id13"><span class="section-number">5.9. </span>Computations</a><a class="headerlink" href="#computations" title="Permalink to this headline">¶</a></h2>
+<p>We shall use Python to form  two state-space
+representations <a class="reference internal" href="#equation-eqstsp1">(5.4)</a> and <a class="reference internal" href="#equation-eqstsp2">(5.5)</a>.</p>
+<p>We set the following parameter values
 <span class="math notranslate nohighlight">\(\sigma_\epsilon = 1, \sigma_a = \beta^{-1} \sigma_\epsilon = \beta^{-1}\)</span>
 where <span class="math notranslate nohighlight">\(\beta\)</span> is the <strong>same</strong> value as the discount factor in the
 household’s problem in the LQ savings problem in the <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">lecture</a>.</p>
-<p>For these two representations, we use the code in the
+<p>For these two representations, we use the code in this
 <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">lecture</a> to</p>
 <ul class="simple">
 <li><p>compute optimal decision rules for <span class="math notranslate nohighlight">\(c_t, b_t\)</span> for the two types
@@ -698,11 +705,11 @@ of consumers associated with our two representations of nonfinancial
 income</p></li>
 <li><p>use the value function objects <span class="math notranslate nohighlight">\(P, d\)</span> returned by the code to
 compute optimal values for the two representations when evaluated at
-the following initial conditions <span class="math notranslate nohighlight">\(x_0 =\)</span></p></li>
+the  initial condition</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
-\begin{bmatrix} 10 \cr 0 \end{bmatrix}
+x_0 = \begin{bmatrix} 10 \cr 0 \end{bmatrix}
 \]</div>
 <p>for each representation.</p>
 <ul class="simple">
@@ -713,15 +720,14 @@ use them to obtain impulse response functions of <span class="math notranslate n
 <span class="math notranslate nohighlight">\(b_t\)</span> to the respective shocks <span class="math notranslate nohighlight">\(\epsilon_t\)</span> and
 <span class="math notranslate nohighlight">\(a_t\)</span> for the two representations.</p></li>
 <li><p>run simulations of <span class="math notranslate nohighlight">\(\{y_t, c_t, b_t\}\)</span> of length <span class="math notranslate nohighlight">\(T\)</span>
-under both of the representations (later I’ll give some more details
-about how we’ll run some special versions of these)</p></li>
+under both of the representations</p></li>
 </ul>
-<p>We want to solve the LQ problem:</p>
+<p>We formulae the problem:</p>
 <div class="math notranslate nohighlight">
 \[
 \min\ \sum_{t=0}^{\infty}\beta^{t}\left(c_{t}-\gamma\right)^{2}
 \]</div>
-<p>subject to the sequence of constraints</p>
+<p>subject to a sequence of constraints</p>
 <div class="math notranslate nohighlight">
 \[
 \quad c_{t}+b_{t}=\frac{1}{1+r}b_{t+1}+y_{t}, \quad t \geq 0
@@ -891,8 +897,8 @@ b_{t+1}^{*} &amp;= \beta^{-1}c_{t}^{*}+\beta^{-1}b_{t}-\beta^{-1}y_{t} \\
 \end{aligned}
 \end{split}\]</div>
 <p>Now we construct two Linear State Space models that emerge from using
-optimal policies <span class="math notranslate nohighlight">\(u_t =- F x_t\)</span> for the control variable.</p>
-<p>Take the original representation case as an example,</p>
+optimal policies of the form <span class="math notranslate nohighlight">\(u_t =- F x_t\)</span>.</p>
+<p>Take the original representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> as an example:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \left[\begin{array}{c}
@@ -919,8 +925,8 @@ y_{t}\\
 b_{t}
 \end{array}\right]
 \end{split}\]</div>
-<p>To have the Linear State Space model of the innovations representation
-case, we can simply replace the corresponding matrices.</p>
+<p>To have the Linear State Space model be of an innovations representation
+form <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, we can simply replace the corresponding matrices.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct two Linear State Space models</span>
@@ -937,7 +943,7 @@ case, we can simply replace the corresponding matrices.</p>
 </div>
 </div>
 </div>
-<p>In the following we compute the impulse response functions of
+<p>The following code computes impulse response functions of
 <span class="math notranslate nohighlight">\(c_t\)</span> and <span class="math notranslate nohighlight">\(b_t\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -978,14 +984,14 @@ case, we can simply replace the corresponding matrices.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f261cab6790&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f23c8ea6220&gt;
 </pre></div>
 </div>
 <img alt="_images/cons_news_15_1.png" src="_images/cons_news_15_1.png" />
 </div>
 </div>
 <p>The above two impulse response functions show that when the consumer has
-the information assumed in the original representation, his response to
+the information assumed in the original representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a>, his response to
 receiving a positive shock of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> is to leave his
 consumption unchanged and to save the entire amount of his extra income
 and then forever roll over the extra bonds that he holds.</p>
@@ -1015,7 +1021,7 @@ permanently <strong>decreases</strong> by <span class="math notranslate nohighli
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f25de591700&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f238897bdf0&gt;
 </pre></div>
 </div>
 <img alt="_images/cons_news_18_1.png" src="_images/cons_news_18_1.png" />
@@ -1023,17 +1029,17 @@ permanently <strong>decreases</strong> by <span class="math notranslate nohighli
 </div>
 <p>The above impulse responses show that when the consumer has only the
 information that is assumed to be available under the innovations
-representation for <span class="math notranslate nohighlight">\(\{y_t - y_{t-1} \}\)</span>, he responds to a positive
-<span class="math notranslate nohighlight">\(a_t\)</span> by permanently increasing his consumption.</p>
+representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> for <span class="math notranslate nohighlight">\(\{y_t - y_{t-1} \}\)</span>, he responds to a positive
+<span class="math notranslate nohighlight">\(a_t\)</span> by <strong>permanently</strong> increasing his consumption.</p>
 <p>He accomplishes this by consuming a fraction <span class="math notranslate nohighlight">\((1 - \beta^2)\)</span> of
-the increment <span class="math notranslate nohighlight">\(a_t\)</span> to his nonfinancial income and saving the rest
-in order to lower <span class="math notranslate nohighlight">\(b_{t+1}\)</span> to finance the permanent increment in
+the increment <span class="math notranslate nohighlight">\(a_t\)</span> to his nonfinancial income and saving the rest, thereby
+lowering <span class="math notranslate nohighlight">\(b_{t+1}\)</span> in order  to finance the permanent increment in
 his consumption.</p>
 <p>The preceding computations confirm what we had derived earlier using
 paper and pencil.</p>
 <p>Now let’s simulate some paths of consumption and debt for our two types
 of consumers while always presenting both types with the same
-<span class="math notranslate nohighlight">\(\{y_t\}\)</span> path, constructed as described below.</p>
+<span class="math notranslate nohighlight">\(\{y_t\}\)</span> path.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set time length for simulation</span>
@@ -1054,7 +1060,7 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f25de5032e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f23888ec0d0&gt;
 </pre></div>
 </div>
 <img alt="_images/cons_news_21_1.png" src="_images/cons_news_21_1.png" />
@@ -1072,7 +1078,7 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f25de19d5b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f23caf19fd0&gt;
 </pre></div>
 </div>
 <img alt="_images/cons_news_22_1.png" src="_images/cons_news_22_1.png" />
@@ -1080,22 +1086,22 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="section" id="simulating-income-process-and-two-associated-shock-processes">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">5.10. </span>Simulating  Income Process and Two Associated Shock Processes</a><a class="headerlink" href="#simulating-income-process-and-two-associated-shock-processes" title="Permalink to this headline">¶</a></h2>
-<p>We now describe how we form a <strong>single</strong> <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^T\)</span> realization
-that we will use to simulate the two different decision rules associated
+<h2><a class="toc-backref" href="#id14"><span class="section-number">5.10. </span>Simulating  Income Process and Two Associated Shock Processes</a><a class="headerlink" href="#simulating-income-process-and-two-associated-shock-processes" title="Permalink to this headline">¶</a></h2>
+<p>We now  form a <strong>single</strong> <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^T\)</span> realization
+that we will use to simulate decisions associated
 with our two types of consumer.</p>
 <p>We accomplish this in the following steps.</p>
 <ol>
 <li><p>We form a <span class="math notranslate nohighlight">\(\{y_t, \epsilon_t\}\)</span> realization by drawing a long
-simulation of <span class="math notranslate nohighlight">\(\{\epsilon_t\}_{t=0}^T\)</span> where <span class="math notranslate nohighlight">\(T\)</span> is a big
-integer <span class="math notranslate nohighlight">\(\epsilon_t = \sigma_\epsilon v_t\)</span>, <span class="math notranslate nohighlight">\(v_t\)</span> is a
+simulation of <span class="math notranslate nohighlight">\(\{\epsilon_t\}_{t=0}^T\)</span>, where <span class="math notranslate nohighlight">\(T\)</span> is a big
+integer, <span class="math notranslate nohighlight">\(\epsilon_t = \sigma_\epsilon v_t\)</span>, <span class="math notranslate nohighlight">\(v_t\)</span> is a
 standard normal scalar, <span class="math notranslate nohighlight">\(y_0 =100\)</span>, and</p>
 <div class="math notranslate nohighlight">
 \[
    y_{t+1} - y_t =-\beta^{-1} \epsilon_t + \epsilon_{t+1} .
    \]</div>
 </li>
-<li><p>We take the <strong>same</strong> <span class="math notranslate nohighlight">\(\{y_t\}\)</span> realization generated in step 1
+<li><p>We take the  <span class="math notranslate nohighlight">\(\{y_t\}\)</span> realization generated in step 1
 and form an innovation process <span class="math notranslate nohighlight">\(\{a_t\}\)</span> from the formulas</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1103,7 +1109,7 @@ and form an innovation process <span class="math notranslate nohighlight">\(\{a_
    a_t &amp; = \sum_{j=0}^{t-1} \beta^j (y_{t-j} - y_{t-j-1}) + \beta^t a_0, \quad t \geq 1 \end{aligned}
    \]</div>
 </li>
-<li><p>We throw away the first <span class="math notranslate nohighlight">\(S\)</span> observations and form the sample
+<li><p>We throw away the first <span class="math notranslate nohighlight">\(S\)</span> observations and form a sample
 <span class="math notranslate nohighlight">\(\{y_t, \epsilon_t, a_t\}_{S+1}^T\)</span> as the realization that
 we’ll use in the following steps.</p></li>
 <li><p>We use the step 3 realization to <strong>evaluate</strong> and <strong>simulate</strong> the
@@ -1115,7 +1121,7 @@ two consumers having <strong>identical</strong> incomes at each date but at each
 having <strong>different</strong> information about their future incomes.</p>
 </div>
 <div class="section" id="calculating-innovations-in-another-way">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">5.11. </span>Calculating Innovations in Another Way</a><a class="headerlink" href="#calculating-innovations-in-another-way" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15"><span class="section-number">5.11. </span>Calculating Innovations in Another Way</a><a class="headerlink" href="#calculating-innovations-in-another-way" title="Permalink to this headline">¶</a></h2>
 <p>Here we use formula <a class="reference internal" href="#equation-eqn-3">(5.3)</a> above to compute <span class="math notranslate nohighlight">\(a_{t+1}\)</span> as a function
 of the history
 <span class="math notranslate nohighlight">\(\epsilon_{t+1}, \epsilon_t, \epsilon_{t-1}, \ldots\)</span></p>
@@ -1126,7 +1132,7 @@ of the history
 a_{t+1} &amp;=\beta a_{t}+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
     &amp;=\beta\left(\beta a_{t-1}+\epsilon_{t}-\beta^{-1}\epsilon_{t-1}\right)+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
     &amp;=\beta^{2}a_{t-1}+\beta\left(\epsilon_{t}-\beta^{-1}\epsilon_{t-1}\right)+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
-    &amp;=\cdots \\
+    &amp;=\vdots \\
     &amp;=\beta^{t+1}a_{0}+\sum_{j=0}^{t}\beta^{j}\left(\epsilon_{t+1-j}-\beta^{-1}\epsilon_{t-j}\right) \\
     &amp;=\beta^{t+1}a_{0}+\epsilon_{t+1}+\left(\beta-\beta^{-1}\right)\sum_{j=0}^{t-1}\beta^{j}\epsilon_{t-j}-\beta^{t-1}\epsilon_{0}.
 \end{aligned}
@@ -1135,11 +1141,11 @@ a_{t+1} &amp;=\beta a_{t}+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
 computed earlier.</p>
 </div>
 <div class="section" id="another-invertibility-issue">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">5.12. </span>Another Invertibility Issue</a><a class="headerlink" href="#another-invertibility-issue" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id16"><span class="section-number">5.12. </span>Another Invertibility Issue</a><a class="headerlink" href="#another-invertibility-issue" title="Permalink to this headline">¶</a></h2>
 <p>This <a class="reference internal" href="hs_invertibility_example.html"><span class="doc">quantecon lecture</span></a> contains another example of a shock-invertibility issue that is endemic
 to the LQ permanent income or consumption smoothing model.</p>
 <p>The technical issue discussed there is ultimately the source of the shock-invertibility issues discussed by
-Eric Leeper, Todd Walker, and Susan Yang <span id="id2">[<a class="reference internal" href="zreferences.html#id33" title="Eric M. Leeper, Todd B. Walker, and Shu‐Chun Susan Yang. Fiscal foresight and information flows. Econometrica, 81(3):1115-1145, May 2013.">LWY13</a>]</span> in their  analysis of <strong>fiscal foresight</strong>.</p>
+Eric Leeper, Todd Walker, and Susan Yang <span id="id3">[<a class="reference internal" href="zreferences.html#id33" title="Eric M. Leeper, Todd B. Walker, and Shu‐Chun Susan Yang. Fiscal foresight and information flows. Econometrica, 81(3):1115-1145, May 2013.">LWY13</a>]</span> in their  analysis of <strong>fiscal foresight</strong>.</p>
 </div>
 </div>
 

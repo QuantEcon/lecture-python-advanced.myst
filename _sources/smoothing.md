@@ -43,12 +43,12 @@ This lecture describes two types of consumption-smoothing models.
 * one is in the **complete markets** tradition of [Kenneth Arrow](https://en.wikipedia.org/wiki/Kenneth_Arrow)
 * the other is in the **incomplete markets** tradition  of Hall {cite}`Hall1978`
 
-*Complete markets* allow a consumer  to buy or sell claims contingent on all possible states of the world.
+*Complete markets* allow a consumer  to buy and sell claims contingent on all possible states of the world.
 
-*Incomplete markets* allow a consumer to buy or sell only a limited set of securities, often only a single risk-free security.
+*Incomplete markets* allow a consumer to buy and sell  a limited set of securities, often only a single risk-free security.
 
 Hall {cite}`Hall1978` worked in an incomplete markets tradition by assuming
-that the only asset that can be traded is a risk-free one period bond.
+that the only asset that can be traded is a risk-free one-period bond.
 
 Hall assumed an exogenous stochastic process of nonfinancial income and
 an exogenous and time-invariant gross interest rate on one period risk-free debt that equals
@@ -60,10 +60,10 @@ consumption at time $t+1$ for sure.
 
 So $\beta$ is the price of a one-period risk-free claim to consumption next period.
 
-We maintain Hall's assumption about the interest rate when we describe an
+We preserve Hall's assumption about the interest rate when we describe an
 incomplete markets version of our model.
 
-In addition, we extend Hall's assumption about the risk-free interest rate to its appropriate counterpart when we create another model in which there are markets
+In addition, we extend Hall's assumption about the risk-free interest rate to an appropriate counterpart when we create another model in which there are markets
 in a complete array of one-period Arrow state-contingent securities.
 
 We'll consider two closely related but distinct alternative assumptions about the consumer's
@@ -113,7 +113,7 @@ payoffs depend on next period's realization of the Markov state.
 
 * In the two-state Markov chain case,  two such securities are traded  each period.
 * In an $N$ state Markov state version,  $N$ such securities are traded each period.
-* In a continuous state Markov state version, a continuum of such securities are traded each period.
+* In a continuous state Markov state version, a continuum of such securities is traded each period.
 
 These state-contingent securities are commonly called Arrow securities, after [Kenneth Arrow](https://en.wikipedia.org/wiki/Kenneth_Arrow).
 
