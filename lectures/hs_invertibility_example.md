@@ -30,7 +30,7 @@ kernelspec:
 ## Overview
 
 This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
-{cite}`HS2013` class of models described in detail in {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
+{cite}`HS2013` class of models described  in {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
 
 In addition to what's in Anaconda, this lecture uses the quantecon library.
 
@@ -53,7 +53,7 @@ from math import sqrt
 %matplotlib inline
 ```
 
-This lecture can be viewed as introducing  an early contribution to what is now often called
+This lecture describes  an early contribution to what is now often called
 a **news and noise** issue.
 
 In particular, it analyzes  a **shock-invertibility** issue that is
@@ -64,14 +64,14 @@ histories of the shocks in an econometrician's autoregressive or Wold
 moving average representation span a smaller information space than do
 the shocks that are seen by the agents inside the econometrician's model.
 
-This situation sets the stage for an econometrician who is unaware of the
-problem and consequently  misinterprets  shocks and likely responses to them.
+An econometrician who is unaware of the
+problem would  misinterpret  shocks and likely responses to them.
 
 A shock-invertibility that is technically close to the one studied here is discussed by
 Eric Leeper, Todd Walker, and Susan Yang {cite}`Leeper_Walker_Yang` in their  analysis of **fiscal foresight**.
 
 A distinct shock-invertibility issue is present in the special LQ consumption smoothing model
-in {doc}`quantecon lecture <cons_news>`.
+in this quantecon lecture {doc}`cons_news`.
 
 ## Model
 
@@ -201,7 +201,7 @@ $$
 \mathbb{E}\sum_{j=0}^\infty \beta^j (c_{t+j} - d_{t+j})|J_t = \beta^{-1}k_{t-1} \, \forall t
 $$
 
-If we define the moving average representation of
+Define a moving average representation of
 $(c_t, c_t - d_t)$ in terms of the $w_t$s to be:
 
 $$
@@ -214,16 +214,16 @@ $$
   \right] w_t
 $$
 
-then Hall's model imposes the restriction
+Hall's model imposes the restriction
 $\sigma_2(\beta) = [0\,\,\,0]$.
 
-The agent inside this model sees histories of both components of the
+- The consumer who lives inside this model observes histories of both components of the
 endowment process $d_{1t}$ and $d_{2t}$.
 
-The econometrician has data on the history of the pair
-$[c_t,d_t]$, but not directly on the history of $w_t$.
+- The econometrician has data on the history of the pair
+$[c_t,d_t]$, but not directly on the history of $w_t$'s.
 
-The econometrician obtains a Wold representation for the process
+- The econometrician obtains a Wold representation for the process
 $[c_t,c_t-d_t]$:
 
 $$
@@ -236,11 +236,13 @@ $$
   \right] u_t
 $$
 
+A representation with equivalent shocks would be recovered by estimating a bivariate vector autoregression for $c_t, c_t-d_t$.
+
 The Appendix of chapter 8 of {cite}`HS2013`  explains why the impulse
 response functions in the Wold representation estimated by the
 econometrician do not resemble the impulse response functions that
-depict the response of consumption and the deficit to innovations to
-agents' information.
+depict the response of consumption and the net-of-interest deficit to innovations $w_t$ to
+the consumer's information.
 
 Technically, $\sigma_2(\beta) = [0\,\,\,0]$ implies that the
 history of $u_t$s spans a *smaller* linear space than does the
@@ -253,8 +255,8 @@ $$
 u_t = \sum_{j=0}^\infty \alpha_j w_{t-j}
 $$
 
-Thus, the econometrician's news $u_t$ potentially responds
-belatedly to agents' news $w_t$.
+Thus, the econometrician's news $u_t$ typically responds
+belatedly to the consumer's  news $w_t$.
 
 ## Code
 
@@ -283,7 +285,8 @@ plt.show()
 ```
 
 The above figure displays the impulse response of consumption and the
-deficit to the endowment innovations.
+net-of-interest deficit to the innovations $w_t$ to the consumer's non-financial income 
+or endowment process.
 
 Consumption displays the characteristic "random walk" response with
 respect to each innovation.

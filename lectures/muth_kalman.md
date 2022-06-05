@@ -285,7 +285,7 @@ Note how $x_t$ and $\hat{x_t}$ differ.
 For Friedman, $\hat x_t$ and not $x_t$ is the consumer’s
 idea about her/his *permanent income*.
 
-## Relation between Unobservable and Observable
+## Relationship of Unobservables to Observables
 
 Now let’s plot $x_t$ and $y_t$.
 
