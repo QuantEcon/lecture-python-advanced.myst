@@ -35,10 +35,29 @@ tags: [hide-output]
 
 ## Overview
 
-This lecture studies two consumers who have exactly the same
-nonfinancial income process and who both conform to the linear-quadratic
+In the linear-quadratic
 permanent income of consumption smoothing model described in this
-[quantecon lecture](https://python-intro.quantecon.org/perm_income_cons.html).
+[quantecon lecture](https://python-intro.quantecon.org/perm_income_cons.html),
+a scalar parameter $\beta \in (0,1)$ plays two roles:
+
+- it is a **discount factor** that the consumer applies to future utilities from consumption
+- it is the reciprocal of the   gross **interest rate** on  risk-free one-period loans 
+
+That $\beta$ plays these two roles is essential in delivering the outcome that, **regardless**
+ of the stochastic process that describes his
+non-financial income, the consumer chooses
+to make consumption follow a random walk  (see {cite}`Hall1978`).
+
+In this lecture, we assign a third role to $\beta$:
+
+- it describes  a **first-order moving average** process for the growth in non-financial income  
+
+### Same non-financial incomes, different information
+
+We study two consumers who have exactly the same
+nonfinancial income process and who both conform to the linear-quadratic
+permanent income of consumption smoothing model described 
+[here](https://python-intro.quantecon.org/perm_income_cons.html).
 
 The two consumers  have different information about their
 future nonfinancial incomes.
@@ -83,23 +102,26 @@ We use the different behaviors of our  consumers as a way to learn about
 - a simple application of alternative ways to factor a covariance
   generating function along lines described in {doc}`this lecture <classical_filtering>`
 
-This lecture can be regarded as an introduction to some of the **invertibility** issues that take center stage in
+This lecture can be regarded as an introduction to   **invertibility** issues that take center stage in
 the analysis of **fiscal foresight** by Eric Leeper, Todd Walker, and Susan Yang {cite}`Leeper_Walker_Yang`, as well
 as in chapter 4  of {cite}`sargent1991observable`. 
 
 ## Two Representations of  One Nonfinancial Income Process
 
 We study consequences of endowing a
-consumer with one of the two alternative representations for the change
+consumer with one of two alternative representations for the change
 in the consumer’s nonfinancial income $y_{t+1} - y_t$.
 
-For both representations, a parameter  $\beta \in (0,1)$ plays key roles. It appears
+For both types of consumer,  a parameter  $\beta \in (0,1)$ plays three roles. 
 
-- as a **discount factor** applied to future expected one-period utilities, and
-- as a parameter governing the moving average of the change in non-financial income
+It appears
+
+- as a **discount factor** applied to future expected one-period utilities,
+- as the **reciprocal of a gross interest rate** on one-period loans,  and
+- as a parameter in a first-order moving average that equals  the increment in a consumer's non-financial income
 
 
-The first representation, which we shall sometimes refer to as the **original representation**, is
+The first representation, which we shall sometimes refer to as the **more informative representation**, is
 
 
 $$
@@ -211,7 +233,10 @@ We can also use the the **Kalman filter** to  obtain representation {eq}`eqn_2` 
 Thus, from equations associated with the **Kalman filter**, it can be
 verified that the steady-state Kalman gain $K = \beta^2$ and the
 steady state conditional covariance
-$\Sigma = E [(\epsilon_t - \hat \epsilon_t)^2 | y_{t-1}, y_{t-2}, \ldots ] = (1 - \beta^2) \sigma_\epsilon^2$.
+
+$$
+\Sigma = E [(\epsilon_t - \hat \epsilon_t)^2 | y_{t-1}, y_{t-2}, \ldots ] = (1 - \beta^2) \sigma_\epsilon^2 
+$$ 
 
 In a little more detail, let $z_t = y_t - y_{t-1}$ and form the
 state-space representation
@@ -281,7 +306,7 @@ Staring at representation {eq}`eqn_3` for $a_{t+1}$ shows that it consists
 both of **new news** $\epsilon_{t+1}$ as well as a long moving
 average $(\beta - \beta^{-1})\sum_{j=0}^\infty \beta^j\epsilon_{t-j}$ of **old news**.
 
-The **move information** representation {eq}`eqn_1` asserts that a shock
+The **more information** representation {eq}`eqn_1` asserts that a shock
 $\epsilon_{t}$ results in an impulse response to nonfinancial
 income of $\epsilon_t$ times the sequence
 
@@ -417,7 +442,7 @@ programming.
 Evidently, although they receive
 exactly the same histories of nonfinancial incomethe two consumers behave differently.
 
-The better informedconsumer who has the  information sets  associated with representation {eq}`eqn_1`
+The better informed consumer who has the  information sets  associated with representation {eq}`eqn_1`
 responds to each shock $\epsilon_{t+1}$ by leaving his consumption
 unaltered and **saving** all of $\epsilon_{t+1}$ in anticipation of the
 permanently increased taxes that he will bear in order to service the  permanent interest payments on the risk-free
@@ -431,8 +456,7 @@ what he perceives to be the **permanent** part of the increase in
 consumption and by increasing his **saving** by what he perceives to be
 the temporary part.
 
-We can regard the first consumer as someone
-whose behavior sharply illustrates the behavior assumed in a classic
+The behavior of the  better informed consumer  sharply illustrates the behavior predicted in a classic
 Ricardian equivalence experiment.
 
 ## State Space Representations
@@ -463,7 +487,7 @@ univariate standardized normal random variables.
 
 These two alternative income processes are ready to be used in the
 framework presented in the section “Comparison with the Difference
-Equation Approach” in the [quantecon  lecture](https://python-intro.quantecon.org/perm_income_cons.html).
+Equation Approach” in thid [quantecon  lecture](https://python-intro.quantecon.org/perm_income_cons.html).
 
 All the code that we shall use below is presented in that lecture.
 
@@ -601,7 +625,7 @@ QLQ = np.array([1.])
 ```
 
 ```{code-cell} python3
-# Original representation state transition matrices
+# More informative representation state transition matrices
 ALQ1 = np.array([[1, -R, 0],
                  [0, 0, 0],
                  [-R, 0, R]])
@@ -618,7 +642,7 @@ P1, F1, d1 = LQ1.stationary_values()
 -F1
 ```
 
-Evidently optimal consumption and debt decision rules for the consumer
+Evidently, optimal consumption and debt decision rules for the consumer
 having news representation {eq}`eqn_1` are
 
 $$
@@ -661,7 +685,7 @@ $$
 Now we construct two Linear State Space models that emerge from using
 optimal policies of the form $u_t =- F x_t$.
 
-Take the original representation {eq}`eqn_1` as an example:
+Take the more informative original  representation {eq}`eqn_1` as an example:
 
 $$
 \left[\begin{array}{c}
@@ -725,14 +749,14 @@ c_res1 / σϵ, b_res1 / σϵ
 ```
 
 ```{code-cell} python3
-plt.title("original representation")
+plt.title("more informative representation")
 plt.plot(range(J), c_res1 / σϵ, label="c impulse response function")
 plt.plot(range(J), b_res1 / σϵ, label="b impulse response function")
 plt.legend()
 ```
 
 The above two impulse response functions show that when the consumer has
-the information assumed in the original representation {eq}`eqn_1`, his response to
+the information assumed in the more informative representation {eq}`eqn_1`, his response to
 receiving a positive shock of $\epsilon_t$ is to leave his
 consumption unchanged and to save the entire amount of his extra income
 and then forever roll over the extra bonds that he holds.
@@ -779,7 +803,7 @@ x1, y1 = LSS1.simulate(ts_length=T)
 plt.plot(range(T), y1[0, :], label="c")
 plt.plot(range(T), x1[2, :], label="b")
 plt.plot(range(T), x1[0, :], label="y")
-plt.title("original representation")
+plt.title("more informative representation")
 plt.legend()
 ```
 
@@ -841,7 +865,7 @@ $$
 a_{t+1} &=\beta a_{t}+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
     &=\beta\left(\beta a_{t-1}+\epsilon_{t}-\beta^{-1}\epsilon_{t-1}\right)+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
     &=\beta^{2}a_{t-1}+\beta\left(\epsilon_{t}-\beta^{-1}\epsilon_{t-1}\right)+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
-    &=\vdots \\
+    &= \quad \quad \quad \quad \vdots \quad \quad \quad \vdots \\
     &=\beta^{t+1}a_{0}+\sum_{j=0}^{t}\beta^{j}\left(\epsilon_{t+1-j}-\beta^{-1}\epsilon_{t-j}\right) \\
     &=\beta^{t+1}a_{0}+\epsilon_{t+1}+\left(\beta-\beta^{-1}\right)\sum_{j=0}^{t-1}\beta^{j}\epsilon_{t-j}-\beta^{t-1}\epsilon_{0}.
 \end{aligned}

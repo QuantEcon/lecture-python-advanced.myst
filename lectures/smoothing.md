@@ -105,7 +105,7 @@ sources:
 * opportunities that allow the consumer to transform
   an erratic nonfinancial income
   process into a smoother consumption process by
-  purchasing or selling  one or more financial securities
+  buying and  selling  one or more financial securities
 
 In the **complete markets version**, each period the consumer
 can buy or sell a complete set of one-period ahead state-contingent securities whose
