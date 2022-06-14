@@ -1513,23 +1513,23 @@ problem of extracting a signal from equilibrium prices that decision
 makers face in Townsend’s model.
 
 [^footnote0]: {cite}`Pearlman_Sargent2005` verified this assertion using a different tactic, namely, by constructing
-analytic formulas an equilibrium under the incomplete
+analytic formulas for an equilibrium under the incomplete
 information structure and confirming that they match the pooling equilibrium formulas derived here.
 
 [^footnote1]: See {cite}`ahms` for an account of invariant subspace methods.
 
-[^footnote2]: See {cite}`ahms` for a discussion
-of the information assumptions needed to create a situation
-in which higher order beliefs appear in equilibrium decision rules.  The way
-to read our findings in light of {cite}`ams` is that Townsend's
-section 8 model  has too few sources of random shocks relative
-to sources of signals to permit higher order beliefs to
+[^footnote2]: See {cite}`ams` for a discussion
+of  information assumptions needed to create a situation
+in which higher order beliefs appear in equilibrium decision rules.  A way
+to read our findings in light of {cite}`ams` is that, relative
+to the number of signals agents observe,  Townsend's
+section 8 model  has too few  random shocks  to get higher order beliefs to
 play a role.
 
 [^footnote3]: See {cite}`Sargent1987`, especially
-chapters IX and XIV, for the principles  that guide solving some roots backwards and others forwards.
+chapters IX and XIV, for  principles  that guide solving some roots backwards and others forwards.
 
-[^footnote4]: As noted {cite}`Sargent1987`, this difference equation is the Euler equation for
+[^footnote4]: As noted by {cite}`Sargent1987`, this difference equation is the Euler equation for
 a planning problem   that maximizes the discounted sum of consumer plus
 producer surplus.
 
