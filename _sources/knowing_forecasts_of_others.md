@@ -37,36 +37,37 @@ tags: [hide-output]
 ## Introduction
 
 Robert E. Lucas, Jr. {cite}`lucas75`, Kenneth Kasa  {cite}`kasa`, and Robert Townsend
-{cite}`townsend` showed that into  decision makers into environments in which they want to infer persistent hidden  state
+{cite}`townsend` showed that putting  decision makers into environments in which they want to infer persistent hidden  state
 variables from equilibrium prices and quantities can
 elongate and amplify impulse responses to aggregate
-shocks in business cycle models.
+shocks.
+
+This provides a promising way to think about amplification mechanisms  in business cycle models.
 
 Townsend {cite}`townsend`
-noted  that living in  such environments  can naturally
-induce decision makers to want  to forecast the forecast of others.
+noted  that living in  such environments   makes decision makers  want  to forecast  forecasts of others.
 
 This theme has been pursued  for situations in which
-decision makers' imperfect information forces them into pursuing an
-infinite recursion of forming beliefs about the beliefs of other
+decision makers' imperfect information forces them to pursue an
+infinite recursion that involves forming beliefs about the beliefs of others
 (e.g., {cite}`ams`).
 
 Lucas {cite}`lucas75` side stepped having decision makers forecast the
-forecasts of other decision makers by assuming that they simply pool their
-information before forecasting.
+forecasts of other decision makers by assuming that they simply **pool their
+information** before forecasting.
 
 A **pooling equilibrium** like Lucas's plays a prominent role in this lecture.
 
-But because he didn’t assume such pooling, {cite}`townsend`
+Because he didn’t assume such pooling, {cite}`townsend`
 confronted the forecasting the forecasts of others problem.
 
 To formulate the  problem recursively required that Townsend define a decision maker's **state** vector.
 
 Townsend concluded that his original  model required an intractable infinite dimensional  state space.
 
-Therefore, he constructed a more manageable approximating model in which the hidden Markov component of
+Therefore, he constructed a more manageable approximating model in which a hidden Markov component of
 a demand shock is
-revealed to all firms after a fixed and finite number of periods.
+revealed to all firms after a fixed,  finite number of periods.
 
 In this lecture, we illustrate again the theme that **finding the state is an art** by 
 showing how to formulate Townsend's original model in terms of a low-dimensional state space.
@@ -77,7 +78,7 @@ prevail in a pooling equilibrium.
 That finding emerged from a line of research about  Townsend's model that   built on {cite}`PCL` and that  culminated in
 {cite}`Pearlman_Sargent2005` .
 
-Rather than directly deploying the {cite}`PCL` machinery here, we shall instead implement the following  sneaky
+Rather than directly deploying the {cite}`PCL` machinery here, we shall instead implement a  sneaky
 **guess-and-verify** tactic.
 
 * We first compute a pooling equilibrium and represent it as an instance of  a linear  state-space system provided by
@@ -86,30 +87,34 @@ Rather than directly deploying the {cite}`PCL` machinery here, we shall instead 
   for a firm to match what it is in Townsend's original model. So rather than directly observing the signal received by
   firms in the other industry, a firm sees the equilibrium price
   of the good produced by the other industry.
-* We compute a population linear least squares regression of the noisy signal that firms in the other
+* We compute a population linear least squares regression of the noisy signal at time $t$ that firms in the other
   industry would  receive in a pooling equilibrium on time $t$ information that a firm receives in Townsend's
-  original model. The $R^2$ in this regression equals $1$.  That verifies that a firm's information
-  set in Townsend's original model equals its information set in a pooling equilibrium. Therefore, equilibrium
+  original model. 
+* The $R^2$ in this regression equals $1$. 
+*  That verifies that a firm's information
+  set in Townsend's original model equals its information set in a pooling equilibrium.
+* Therefore, equilibrium
   prices and quantities in Townsend's original model equal those in a pooling equilibrium.
 
 ### A Sequence of Models
 
 We proceed by describing  a sequence of models of two industries that are linked in a
-single way: shocks to the demand curves for their products have a common
+single way: 
+
+* shocks to the demand curves for their products have a common
 component.
 
 The models are simplified versions   of Townsend's  {cite}`townsend`.
 
-Townsend's is a model of a rational expectations equilibrium in which firms confront
-the problem  **forecasting the forecasts of others**.
+Townsend's is a model of a rational expectations equilibrium in which firms want to **forecast  forecasts of others**.
 
 In Townsend's model, firms condition  their forecasts on observed endogenous variables whose equilibrium laws of motion
 are determined by their own forecasting functions.
 
-We start with model  components that we shall  assemble progressively in  ways that can help us to appreciate the structure of the
+We shall  assemble model  components progressively in  ways that can help us to appreciate the structure of the
 **pooling equilibrium**  that ultimately interests us.
 
-While keeping other aspects of the model the same, we shall study
+While keeping all other aspects of the model the same, we shall study
 consequences of alternative assumptions about what decision makers
 observe.
 
@@ -160,7 +165,7 @@ $Y_t^i = f K_t^i$ is output in market $i$, $\theta_t$
 is a persistent component of a demand shock that is common across the
 two industries, and $\epsilon_t^i$ is an industry specific
 component of the demand shock that is i.i.d. and whose time $t$
-marginal distributon is ${\mathcal N}(0, \sigma_{\epsilon}^2)$.
+marginal distribution is ${\mathcal N}(0, \sigma_{\epsilon}^2)$.
 
 We assume that $\theta_t$ is governed by
 
@@ -175,7 +180,7 @@ We assume that $\theta_t$ is governed by
 where $\{v_{t}\}$ is an i.i.d. sequence of Gaussian shocks,  each
 with mean zero and variance $\sigma_v^2$.
 
-To simplify notation, we’ll study a special case of the model by setting
+To simplify notation, we’ll study a special case by setting
 $h=f=1$.
 
 Costs of adjusting their capital stocks impart to firms an incentive to forecast the price of the
@@ -190,7 +195,7 @@ denote objects chosen by a representative firm.
 In each industry, a competitive equilibrium prevails.
 
 To rationalize the big $K$, little $k$ connection, we can
-think of there being a continuum of each type of firm, with each firm being indexed by
+think of there being a continuum of  firms in industry $i$, with each firm being indexed by
 $\omega \in [0,1]$ and
 $K^i = \int_0^1 k^i(\omega) d \omega$.
 
@@ -208,7 +213,7 @@ Successive members of this sequence make a representative firm’s
 information more and more obscure.
 
 We begin with the most information, then gradually withdraw information
-in a way that approaches and eventually reaches an information
+in a way that approaches and eventually reaches the Townsend-like information
 structure that  we are ultimately interested in.
 
 Thus, we shall compute equilibria under the following alternative
@@ -216,20 +221,20 @@ information structures:
 
 - **Perfect foresight:** future values of
   $\theta_t, \epsilon_{t}^i$ are observed in industry $i$.
-- **Observed but stochastic** $\theta_t$:
+- **Observed history of stochastic** $\theta_t$:
   $\{\theta_t, \epsilon_{t}^i\}$ are realizations from a
   stochastic process; current and past values of each are observed at
   time $t$ but future values are not.
 - **One noise-ridden observation on** $\theta_t$: values of
   $\{\theta_t, \epsilon_{t}^i\}$ separately are never observed. However, at
-  time $t$, a history $w^t$ of a scalar noise-ridden
+  time $t$, a history $w^t$ of  scalar noise-ridden
   observations on $\theta_t$ is observed at time $t$.
 - **Two noise-ridden observations on** $\theta_t$: values of
   $\{\theta_t, \epsilon_{t}^i\}$ separately are never observed. However, at
   time $t$, a history $w^t$ of *two* noise-ridden
   observations on $\theta_t$ is observed at time $t$.
 
-Successive computations build one on another.
+Successive computations build one on previous ones.
 
 We proceed by first finding an equilibrium under perfect foresight.
 
@@ -243,13 +248,13 @@ This provides the equilibrium when $\theta_t$ is observed at
 $t$ but future $\theta_{t+j}$ and
 $\epsilon_{t+j}^i$ are not observed.
 
-To find an equilibrium when only a history $w_t$ observations  of a **single** noise-ridden 
+To find an equilibrium when a history $w^t$ observations  of a **single** noise-ridden 
  $\theta_t$ is observed, we again apply a
 certainty equivalence principle and replace future values of the random
 variables $\theta_s, \epsilon_{s}^i, s \geq t$ with their
 mathematical expectations conditioned on $w^t$.
 
-To find an equilibrium when  a history $w_t$ of  **two** noisy
+To find an equilibrium when  a history $w^t$ of  **two** noisy
 signals on $\theta_t$ is observed, we replace future values of the
 random variables $\theta_s, \epsilon_{s}^i, s \geq t$ with their
 mathematical expectations conditioned on history $w^t$.
@@ -263,7 +268,7 @@ We call the equilibrium with two noise-ridden observations on $\theta_t$ a **poo
 
 We want ultimately to compare outcomes in  a pooling equilibrium
 with an equilibrium under the following alternative information structure for a firm
-in industry $i$ that interested Townsend {cite}`townsend`:
+in industry $i$ that originally interested Townsend {cite}`townsend`:
 
 - **Firm** $i$’s **noise-ridden signal on** $\theta_t$ **and the
   price in industry** $-i$, a firm in industry
@@ -278,7 +283,7 @@ That allows it to  infer
 the total demand shock $\theta_t + \epsilon_{t}^i$.
 
 However, at time $t$, the firm sees only $P_t^{-i}$ and does
-not see $Y_t^{-i}$, so that a firm in industry $i$ does not directly
+not see $Y_t^{-i}$, so that a firm in industry $i$ does not **directly**
 observe $\theta_t + \epsilon_t^{-i}$.
 
 Nevertheless, it will turn out that   equilibrium prices and quantities in this equilibrium equal
@@ -286,11 +291,12 @@ their counterparts in a pooling equilibrium because
 firms in industry $i$ are able to infer the noisy signal about the demand shock
 received by firms in industry $-i$.
 
-We shall eventually verify this assertion  by using a guess and verify tactic. [^footnote0]
+We shall verify this assertion  by using a guess and verify tactic that involves running a least 
+squares regression and inspecting its $R^2$. [^footnote0]
 
 ## Equilibrium Conditions
 
-It is convenient to solve the firm’s problem without
+It is convenient to solve a firm’s problem without
 uncertainty  by forming the Lagrangian:
 
 $$
@@ -301,7 +307,9 @@ P_t^i  k_t^i - .5   (\mu_t^i)^2  + \phi_t^i \left[
 $$
 
 where  $\{\phi_t^i\}$ is a sequence of Lagrange multipliers on the
-transition law $k_{t+1}^i = k_{t}^i + \mu_t^i$. First order conditions for the
+transition law $k_{t+1}^i = k_{t}^i + \mu_t^i$.
+
+First order conditions for the
 nonstochastic problem are
 
 ```{math}
@@ -313,8 +321,8 @@ nonstochastic problem are
 ```
 
 Substituting the demand function {eq}`town2` for
-$P_t^i$, imposing the condition that the representative firm is
-representative ($k_t^i = K_t^i$), and using  definition {eq}`town7`
+$P_t^i$, imposing the condition $k_t^i = K_t^i$ that makes representative firm be
+representative, and using  definition {eq}`town7`
 of $g_t^i$, the Euler equation {eq}`town4` lagged
 by one period can be expressed as
 $- b k_t^i + \theta_t + \epsilon_t^i + (k_{t+1}^i - k_t^i) - g_t^i =0$
@@ -351,7 +359,7 @@ In addition, we have the law of motion for $\theta_t$,
 {eq}`town2`.
 
 In summary, with perfect foresight, equilibrium conditions for industry
-$i$ include the following system of difference equations:
+$i$ comprise  the following system of difference equations:
 
 ```{math}
 :label: sol1
@@ -428,7 +436,7 @@ k_{t+1}^i = \tilde \lambda k_t^i + {\tilde \lambda \beta \over 1 -\tilde
 \end{aligned}
 $$
 
-Recall that we have already set $k^i = K^i$ at an appropriate point in the argument, namely, _after_ having derived the first-order necessary
+Recall that we have already set $k^i = K^i$ at the appropriate point in the argument, namely, _after_ having derived the first-order necessary
 conditions for a representative firm in industry $i$.
 
 Thus,  under perfect foresight the equilibrium capital stock in industry $i$ satisfies
@@ -456,7 +464,7 @@ to replace all random variables on the right side of
 {eq}`town5` with their conditional expectations based on
 the information available to decision makers in market $i$.
 
-For now, we assume that this information set
+For now, we assume that this information set is
 $I_t^p = \begin{bmatrix} \theta^t & \epsilon^{it} \end{bmatrix}$,
 where $z^t$ represents the semi-infinite history of variable
 $z_s$ up to time $t$.
@@ -576,7 +584,7 @@ and where $p$ satisfies the Riccati equation
   \end{aligned}
 ```
 
-#### State-reconstruction error:
+#### State-reconstruction error
 
 Define the state *reconstruction error* $\tilde \theta_t$ by
 
@@ -649,11 +657,14 @@ Simplifying equation {eq}`kf8`, we also have
 Equations {eq}`kf9`, {eq}`kf8a` describe
 an equilibrium when $w^t$ is observed.
 
+
+### A new state variable
+
 Relative to {eq}`solution1`, the equilibrium acquires a __new
 state variable__, namely, the $\theta$–reconstruction error,
 $\tilde \theta_t$.
 
-For a subsequent argument we shall make, by using {eq}`kal1`, it is convenient  to
+For a subsequent argument, by using {eq}`kal1`, it is convenient  to
 write {eq}`kf9` as
 
 ```{math}
@@ -665,8 +676,8 @@ write {eq}`kf9` as
   \end{aligned}
 ```
 
-In summary, when decision makers in market $i$ observe a noisy
-signal $w_t$ on $\theta_t$ at $t$, we  an
+In summary, when decision makers in market $i$ observe a semi-infinite history $w^t$ of  noisy
+signals $w_t$ on $\theta_t$ at $t$, we  an
 equilibrium law of motion for $k_t^i$ can be represented as
 
 ```{math}
@@ -682,7 +693,7 @@ k_{t+1}^i & =  \tilde \lambda k_t^i + {1 \over \lambda - \rho}   \hat \theta_{t+
 
 ### Two Noisy Signals
 
-We now construct a **pooling equilibrium** by assuming that a firm in
+We now construct a **pooling equilibrium** by assuming that at time $t$ a firm in
 industry $i$ receives a vector $w_t$ of *two* noisy signals
 on $\theta_t$:
 
@@ -711,7 +722,7 @@ so that a firm in industry $i$ observes the noisy signals on that
 $\theta_t$ presented to firms in both industries $i$ and
 $-i$.
 
-An appropriate innovations representation becomes
+The pertinent  innovations representation now becomes
 
 ```{math}
 :label: kf22&23
@@ -765,7 +776,7 @@ k_{t+1}^i & =  \tilde \lambda k_t^i + {1 \over \lambda - \rho}\hat \theta_{t+1} 
 ```
 
 Below, by using a guess-and-verify tactic,  we shall show that outcomes in this  **pooling equilibrium** equal those in an equilibrium under the alternative
-information structure that interested Townsend {cite}`townsend` but that seemed too challenging to compute. [^footnote5]
+information structure that interested Townsend {cite}`townsend` but that originally seemed too challenging to compute. [^footnote5]
 
 ## Guess-and-Verify Tactic
 
@@ -779,7 +790,8 @@ on $\theta_t$ and perform the following steps:
   using `quantecon.solve_discrete_riccati`
 - Add a *measurement equation* for
   $P_t^i = b k_t^i + \theta_t + e_t$, $\theta_t + e_t$,
-  and $e_t$ to system {eq}`sol0a`. Write the resulting system
+  and $e_t$ to system {eq}`sol0a`. 
+- Write the resulting system
   in state-space form and encode it using `quantecon.LinearStateSpace`
 - Use methods of the `quantecon.LinearStateSpace` to compute impulse response
   functions of $k_t^i$ with respect to shocks $v_t, e_t$.
@@ -1001,7 +1013,7 @@ np.max(np.abs(np.array([[1., b, 0., 0., 1., 0.]]) @ x - x[3])) < 1e-12
 ### Step 4: Compute impulse response functions
 
 To compute impulse response functions of $k_t^i$, we use the `impulse_response` method of the
-`quantecon.LinearStateSpace` class and plot the result.
+`quantecon.LinearStateSpace` class and plot outcomes.
 
 ```{code-cell} python3
 xcoef, ycoef = lss.impulse_response(j=21)
@@ -1028,6 +1040,8 @@ the `quantecon.LinearStateSpace` class.
 By appropriately decomposing the covariance matrix of the state vector, we obtain ingredients
 of pertinent population regression coefficients.
 
+Define
+
 $$
 \Sigma_{x}=\left[\begin{array}{cc}
 \Sigma_{11} & \Sigma_{12}\\
@@ -1041,7 +1055,7 @@ Regression coefficients are  $\beta=\Sigma_{21}\Sigma_{22}^{-1}$.
 
 To verify an instance of a law of large numbers computation, we construct a long  simulation of
 the state vector and for the resulting sample compute
-the ordinary least-squares estimator  of $\beta$ that we shall compare to the corresponding population regression
+the ordinary least-squares estimator  of $\beta$ that we shall compare with corresponding population regression
 coefficients.
 
 ```{code-cell} python3
@@ -1090,14 +1104,14 @@ np.abs(reg_res.rsquared - 1.) < 1e-6
 
 Steps 1, 4, and 5 are identical to those for the  one-noisy-signal structure.
 
-Step 2  requires one straightforward modification.
+Step 2  requires a straightforward modification.
 
-For step 3, we use construct the  following state-space representation so that we can get our hands on
+For step 3, we  construct the  following state-space representation so that we can get our hands on
 all of the random processes that we require in order  to compute a regression of the noisy signal about
-$\theta$ from the other industry that a firm receives directly in a pooling equilibrium from information that
+$\theta$ from the other industry that a firm receives directly in a pooling equilibrium against information that
 a firm would receive in Townsend's original model.
 
-For this purpose, we include  equilibrium goods prices from  both industries appear in the state vector:
+For this purpose, we include  equilibrium goods prices from  both industries in the state vector:
 
 $$
 \begin{aligned}
@@ -1324,11 +1338,11 @@ R_squared
 
 ## Key Step
 
-Now we come to the key step of verifying that equilibrium outcomes for prices and quantities are identical
-in the pooling equilibrium  original model that led Townsend to an infinite-dimensional state space. 
+Now we come to the key step for verifying that equilibrium outcomes for prices and quantities are identical
+in the pooling equilibrium  original model that led Townsend to deduce an infinite-dimensional state space. 
 
 We accomplish this by  computing a population linear least squares regression of the noisy signal that firms in the other
-industry receive in a pooling equilibrium on  time $t$ information that a firm   receives in Townsend's
+industry receive in a pooling equilibrium on  time $t$ information that a firm  would  receive in Townsend's
 original model.
 
 Let's compute the regression and stare at the $R^2$:
@@ -1377,9 +1391,8 @@ Image(fig_comb.to_image(format="png"))
 
 The graphs above show that
 
-* the response of $k_t^i$ to  shocks $v_t$ to the hidden Markov demand state $\theta_t$ process  is **larger** in
-  the two-noisy=signal structure
-* the response of $k_t^i$ to idiosyncratic *own-market*   noise-shocks $e_t$ is **smaller** in the two-noisy-signal structure
+* responses of $k_t^i$ to  shocks $v_t$ to the hidden Markov demand state $\theta_t$ process are   **larger** in   the two-noisy=signal structure
+* responses of $k_t^i$ to idiosyncratic *own-market*   noise-shocks $e_t$ are **smaller** in the two-noisy-signal structure
 
 Taken together, these  findings in turn can be shown to imply that time series correlations and coherences between outputs in
 the two industries are higher in the two-noisy-signals or **pooling** model.
@@ -1414,7 +1427,7 @@ Thus,
 * Townsend wanted to assume that at time $t$ firms in industry $i$ observe
   $k_t^i, Y_t^i, P_t^i, (P^{-i})^t$, where $(P^{-i})^t$ is the history of prices in
   the other market up to time $t$.
-* Because that turned out to be too challenging, Townsend made an
+* Because that turned out to be too challenging, Townsend made a sensible
   alternative assumption that eased his calculations: that after a large
   number $S$ of periods, firms in industry $i$ observe the
   hidden Markov component of the demand shock $\theta_{t-S}$.
@@ -1428,7 +1441,7 @@ for ever.
 By applying technical machinery of {cite}`PCL`,
 {cite}`Pearlman_Sargent2005` showed that there is a recursive
 representation of the equilibrium of the perpetually and symmetrically
-uninformed model formulated but not completely solved in section 8 of
+uninformed model that Townsend wanted to solve
 {cite}`townsend`.
 
 A reader of {cite}`Pearlman_Sargent2005` will notice that their representation of the equilibrium of
@@ -1458,7 +1471,7 @@ decision makers in this model do not really face a problem of
 forecasting the forecasts of others.
 
 Because
-they are the same as their own, they know those forecasts.
+those forecasts are the same as their own, they know them.
 
 ### Further historical remarks
 

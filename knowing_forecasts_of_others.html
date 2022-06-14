@@ -209,14 +209,19 @@ const thebe_selector_output = ".output, .cell_output"
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#state-reconstruction-error">
-       33.5.1.2. State-reconstruction error:
+       33.5.1.2. State-reconstruction error
       </a>
      </li>
     </ul>
    </li>
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-new-state-variable">
+     33.5.2. A new state variable
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#two-noisy-signals">
-     33.5.2. Two Noisy Signals
+     33.5.3. Two Noisy Signals
     </a>
    </li>
   </ul>
@@ -721,35 +726,35 @@ Executing transaction: \
 <div class="section" id="introduction">
 <h2><a class="toc-backref" href="#id44"><span class="section-number">33.1. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Robert E. Lucas, Jr. <span id="id1">[<a class="reference internal" href="zreferences.html#id21" title="Jr. Robert E. Lucas. An equilibrium model of the business cycle. Journal of Political Economy, 83:1113-1144, 1975.">REL75</a>]</span>, Kenneth Kasa  <span id="id2">[<a class="reference internal" href="zreferences.html#id24" title="Kenneth Kasa. Forecasting the forecasts of others in the frequency domain. Review of Economic Dynamics, 3:726–756, 2000.">Kas00</a>]</span>, and Robert Townsend
-<span id="id3">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span> showed that into  decision makers into environments in which they want to infer persistent hidden  state
+<span id="id3">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span> showed that putting  decision makers into environments in which they want to infer persistent hidden  state
 variables from equilibrium prices and quantities can
 elongate and amplify impulse responses to aggregate
-shocks in business cycle models.</p>
+shocks.</p>
+<p>This provides a promising way to think about amplification mechanisms  in business cycle models.</p>
 <p>Townsend <span id="id4">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span>
-noted  that living in  such environments  can naturally
-induce decision makers to want  to forecast the forecast of others.</p>
+noted  that living in  such environments   makes decision makers  want  to forecast  forecasts of others.</p>
 <p>This theme has been pursued  for situations in which
-decision makers’ imperfect information forces them into pursuing an
-infinite recursion of forming beliefs about the beliefs of other
+decision makers’ imperfect information forces them to pursue an
+infinite recursion that involves forming beliefs about the beliefs of others
 (e.g., <span id="id5">[<a class="reference internal" href="zreferences.html#id28" title="Franklin Allen, Stephen Morris, and Hyun Song Shin. Beauty contests, bubbles, and iterated expectations in asset markets. mimeo, 2002.">AMS02</a>]</span>).</p>
 <p>Lucas <span id="id6">[<a class="reference internal" href="zreferences.html#id21" title="Jr. Robert E. Lucas. An equilibrium model of the business cycle. Journal of Political Economy, 83:1113-1144, 1975.">REL75</a>]</span> side stepped having decision makers forecast the
-forecasts of other decision makers by assuming that they simply pool their
-information before forecasting.</p>
+forecasts of other decision makers by assuming that they simply <strong>pool their
+information</strong> before forecasting.</p>
 <p>A <strong>pooling equilibrium</strong> like Lucas’s plays a prominent role in this lecture.</p>
-<p>But because he didn’t assume such pooling, <span id="id7">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span>
+<p>Because he didn’t assume such pooling, <span id="id7">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span>
 confronted the forecasting the forecasts of others problem.</p>
 <p>To formulate the  problem recursively required that Townsend define a decision maker’s <strong>state</strong> vector.</p>
 <p>Townsend concluded that his original  model required an intractable infinite dimensional  state space.</p>
-<p>Therefore, he constructed a more manageable approximating model in which the hidden Markov component of
+<p>Therefore, he constructed a more manageable approximating model in which a hidden Markov component of
 a demand shock is
-revealed to all firms after a fixed and finite number of periods.</p>
+revealed to all firms after a fixed,  finite number of periods.</p>
 <p>In this lecture, we illustrate again the theme that <strong>finding the state is an art</strong> by
 showing how to formulate Townsend’s original model in terms of a low-dimensional state space.</p>
 <p>We show that Townsend’s model shares equilibrium prices and quantities with those   that
 prevail in a pooling equilibrium.</p>
 <p>That finding emerged from a line of research about  Townsend’s model that   built on <span id="id8">[<a class="reference internal" href="zreferences.html#id23" title="Joseph Pearlman, David Currie, and Paul Levine. Rational Expectations Models with Private Information. Economic Modelling, 3(2):90–105, 1986.">PCL86</a>]</span> and that  culminated in
 <span id="id9">[<a class="reference internal" href="zreferences.html#id22" title="Joseph G. Pearlman and Thomas J. Sargent. Knowing the Forecasts of Others. Review of Economic Dynamics, 8(2):480-497, April 2005. URL: https://ideas.repec.org/a/red/issued/v8y2005i2p480-497.html, doi:10.1016/j.red.2004.10.011.">PS05</a>]</span> .</p>
-<p>Rather than directly deploying the <span id="id10">[<a class="reference internal" href="zreferences.html#id23" title="Joseph Pearlman, David Currie, and Paul Levine. Rational Expectations Models with Private Information. Economic Modelling, 3(2):90–105, 1986.">PCL86</a>]</span> machinery here, we shall instead implement the following  sneaky
+<p>Rather than directly deploying the <span id="id10">[<a class="reference internal" href="zreferences.html#id23" title="Joseph Pearlman, David Currie, and Paul Levine. Rational Expectations Models with Private Information. Economic Modelling, 3(2):90–105, 1986.">PCL86</a>]</span> machinery here, we shall instead implement a  sneaky
 <strong>guess-and-verify</strong> tactic.</p>
 <ul class="simple">
 <li><p>We first compute a pooling equilibrium and represent it as an instance of  a linear  state-space system provided by
@@ -758,25 +763,30 @@ the Python class <code class="docutils literal notranslate"><span class="pre">qu
 for a firm to match what it is in Townsend’s original model. So rather than directly observing the signal received by
 firms in the other industry, a firm sees the equilibrium price
 of the good produced by the other industry.</p></li>
-<li><p>We compute a population linear least squares regression of the noisy signal that firms in the other
+<li><p>We compute a population linear least squares regression of the noisy signal at time <span class="math notranslate nohighlight">\(t\)</span> that firms in the other
 industry would  receive in a pooling equilibrium on time <span class="math notranslate nohighlight">\(t\)</span> information that a firm receives in Townsend’s
-original model. The <span class="math notranslate nohighlight">\(R^2\)</span> in this regression equals <span class="math notranslate nohighlight">\(1\)</span>.  That verifies that a firm’s information
-set in Townsend’s original model equals its information set in a pooling equilibrium. Therefore, equilibrium
+original model.</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(R^2\)</span> in this regression equals <span class="math notranslate nohighlight">\(1\)</span>.</p></li>
+<li><p>That verifies that a firm’s information
+set in Townsend’s original model equals its information set in a pooling equilibrium.</p></li>
+<li><p>Therefore, equilibrium
 prices and quantities in Townsend’s original model equal those in a pooling equilibrium.</p></li>
 </ul>
 <div class="section" id="a-sequence-of-models">
 <h3><span class="section-number">33.1.1. </span>A Sequence of Models<a class="headerlink" href="#a-sequence-of-models" title="Permalink to this headline">¶</a></h3>
 <p>We proceed by describing  a sequence of models of two industries that are linked in a
-single way: shocks to the demand curves for their products have a common
-component.</p>
+single way:</p>
+<ul class="simple">
+<li><p>shocks to the demand curves for their products have a common
+component.</p></li>
+</ul>
 <p>The models are simplified versions   of Townsend’s  <span id="id11">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span>.</p>
-<p>Townsend’s is a model of a rational expectations equilibrium in which firms confront
-the problem  <strong>forecasting the forecasts of others</strong>.</p>
+<p>Townsend’s is a model of a rational expectations equilibrium in which firms want to <strong>forecast  forecasts of others</strong>.</p>
 <p>In Townsend’s model, firms condition  their forecasts on observed endogenous variables whose equilibrium laws of motion
 are determined by their own forecasting functions.</p>
-<p>We start with model  components that we shall  assemble progressively in  ways that can help us to appreciate the structure of the
+<p>We shall  assemble model  components progressively in  ways that can help us to appreciate the structure of the
 <strong>pooling equilibrium</strong>  that ultimately interests us.</p>
-<p>While keeping other aspects of the model the same, we shall study
+<p>While keeping all other aspects of the model the same, we shall study
 consequences of alternative assumptions about what decision makers
 observe.</p>
 <p>Technically, this lecture deploys concepts and tools that appear
@@ -812,7 +822,7 @@ respect to output price <span class="math notranslate nohighlight">\(P_t^i\)</sp
 is a persistent component of a demand shock that is common across the
 two industries, and <span class="math notranslate nohighlight">\(\epsilon_t^i\)</span> is an industry specific
 component of the demand shock that is i.i.d. and whose time <span class="math notranslate nohighlight">\(t\)</span>
-marginal distributon is <span class="math notranslate nohighlight">\({\mathcal N}(0, \sigma_{\epsilon}^2)\)</span>.</p>
+marginal distribution is <span class="math notranslate nohighlight">\({\mathcal N}(0, \sigma_{\epsilon}^2)\)</span>.</p>
 <p>We assume that <span class="math notranslate nohighlight">\(\theta_t\)</span> is governed by</p>
 <div class="math notranslate nohighlight" id="equation-town2a">
 <span class="eqno">(33.3)<a class="headerlink" href="#equation-town2a" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
@@ -820,7 +830,7 @@ marginal distributon is <span class="math notranslate nohighlight">\({\mathcal N
   \end{aligned}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{v_{t}\}\)</span> is an i.i.d. sequence of Gaussian shocks,  each
 with mean zero and variance <span class="math notranslate nohighlight">\(\sigma_v^2\)</span>.</p>
-<p>To simplify notation, we’ll study a special case of the model by setting
+<p>To simplify notation, we’ll study a special case by setting
 <span class="math notranslate nohighlight">\(h=f=1\)</span>.</p>
 <p>Costs of adjusting their capital stocks impart to firms an incentive to forecast the price of the
 good that they sell.</p>
@@ -830,7 +840,7 @@ in this lecture <a class="reference external" href="https://python-intro.quantec
 denote objects chosen by a representative firm.</p>
 <p>In each industry, a competitive equilibrium prevails.</p>
 <p>To rationalize the big <span class="math notranslate nohighlight">\(K\)</span>, little <span class="math notranslate nohighlight">\(k\)</span> connection, we can
-think of there being a continuum of each type of firm, with each firm being indexed by
+think of there being a continuum of  firms in industry <span class="math notranslate nohighlight">\(i\)</span>, with each firm being indexed by
 <span class="math notranslate nohighlight">\(\omega \in [0,1]\)</span> and
 <span class="math notranslate nohighlight">\(K^i = \int_0^1 k^i(\omega) d \omega\)</span>.</p>
 <p>In equilibrium, <span class="math notranslate nohighlight">\(k_t^i = K_t^i\)</span>, but  we must distinguish
@@ -845,27 +855,27 @@ sequence of assumptions about what a representative firm observes.</p>
 <p>Successive members of this sequence make a representative firm’s
 information more and more obscure.</p>
 <p>We begin with the most information, then gradually withdraw information
-in a way that approaches and eventually reaches an information
+in a way that approaches and eventually reaches the Townsend-like information
 structure that  we are ultimately interested in.</p>
 <p>Thus, we shall compute equilibria under the following alternative
 information structures:</p>
 <ul class="simple">
 <li><p><strong>Perfect foresight:</strong> future values of
 <span class="math notranslate nohighlight">\(\theta_t, \epsilon_{t}^i\)</span> are observed in industry <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
-<li><p><strong>Observed but stochastic</strong> <span class="math notranslate nohighlight">\(\theta_t\)</span>:
+<li><p><strong>Observed history of stochastic</strong> <span class="math notranslate nohighlight">\(\theta_t\)</span>:
 <span class="math notranslate nohighlight">\(\{\theta_t, \epsilon_{t}^i\}\)</span> are realizations from a
 stochastic process; current and past values of each are observed at
 time <span class="math notranslate nohighlight">\(t\)</span> but future values are not.</p></li>
 <li><p><strong>One noise-ridden observation on</strong> <span class="math notranslate nohighlight">\(\theta_t\)</span>: values of
 <span class="math notranslate nohighlight">\(\{\theta_t, \epsilon_{t}^i\}\)</span> separately are never observed. However, at
-time <span class="math notranslate nohighlight">\(t\)</span>, a history <span class="math notranslate nohighlight">\(w^t\)</span> of a scalar noise-ridden
+time <span class="math notranslate nohighlight">\(t\)</span>, a history <span class="math notranslate nohighlight">\(w^t\)</span> of  scalar noise-ridden
 observations on <span class="math notranslate nohighlight">\(\theta_t\)</span> is observed at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p><strong>Two noise-ridden observations on</strong> <span class="math notranslate nohighlight">\(\theta_t\)</span>: values of
 <span class="math notranslate nohighlight">\(\{\theta_t, \epsilon_{t}^i\}\)</span> separately are never observed. However, at
 time <span class="math notranslate nohighlight">\(t\)</span>, a history <span class="math notranslate nohighlight">\(w^t\)</span> of <em>two</em> noise-ridden
 observations on <span class="math notranslate nohighlight">\(\theta_t\)</span> is observed at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 </ul>
-<p>Successive computations build one on another.</p>
+<p>Successive computations build one on previous ones.</p>
 <p>We proceed by first finding an equilibrium under perfect foresight.</p>
 <p>To compute an equilibrium with current and past but not future values of  <span class="math notranslate nohighlight">\(\theta_t\)</span> observed, we use a
 <em>certainty equivalence principle</em> to justify modifying the perfect
@@ -875,12 +885,12 @@ expectations conditioned on <span class="math notranslate nohighlight">\(\theta_
 <p>This provides the equilibrium when <span class="math notranslate nohighlight">\(\theta_t\)</span> is observed at
 <span class="math notranslate nohighlight">\(t\)</span> but future <span class="math notranslate nohighlight">\(\theta_{t+j}\)</span> and
 <span class="math notranslate nohighlight">\(\epsilon_{t+j}^i\)</span> are not observed.</p>
-<p>To find an equilibrium when only a history <span class="math notranslate nohighlight">\(w_t\)</span> observations  of a <strong>single</strong> noise-ridden
+<p>To find an equilibrium when a history <span class="math notranslate nohighlight">\(w^t\)</span> observations  of a <strong>single</strong> noise-ridden
 <span class="math notranslate nohighlight">\(\theta_t\)</span> is observed, we again apply a
 certainty equivalence principle and replace future values of the random
 variables <span class="math notranslate nohighlight">\(\theta_s, \epsilon_{s}^i, s \geq t\)</span> with their
 mathematical expectations conditioned on <span class="math notranslate nohighlight">\(w^t\)</span>.</p>
-<p>To find an equilibrium when  a history <span class="math notranslate nohighlight">\(w_t\)</span> of  <strong>two</strong> noisy
+<p>To find an equilibrium when  a history <span class="math notranslate nohighlight">\(w^t\)</span> of  <strong>two</strong> noisy
 signals on <span class="math notranslate nohighlight">\(\theta_t\)</span> is observed, we replace future values of the
 random variables <span class="math notranslate nohighlight">\(\theta_s, \epsilon_{s}^i, s \geq t\)</span> with their
 mathematical expectations conditioned on history <span class="math notranslate nohighlight">\(w^t\)</span>.</p>
@@ -893,7 +903,7 @@ signals on <span class="math notranslate nohighlight">\(\theta\)</span>.</p></li
 </ul>
 <p>We want ultimately to compare outcomes in  a pooling equilibrium
 with an equilibrium under the following alternative information structure for a firm
-in industry <span class="math notranslate nohighlight">\(i\)</span> that interested Townsend <span id="id12">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span>:</p>
+in industry <span class="math notranslate nohighlight">\(i\)</span> that originally interested Townsend <span id="id12">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span>:</p>
 <ul class="simple">
 <li><p><strong>Firm</strong> <span class="math notranslate nohighlight">\(i\)</span>’s <strong>noise-ridden signal on</strong> <span class="math notranslate nohighlight">\(\theta_t\)</span> <strong>and the
 price in industry</strong> <span class="math notranslate nohighlight">\(-i\)</span>, a firm in industry
@@ -906,17 +916,18 @@ aggregate endogenous state variable <span class="math notranslate nohighlight">\
 <p>That allows it to  infer
 the total demand shock <span class="math notranslate nohighlight">\(\theta_t + \epsilon_{t}^i\)</span>.</p>
 <p>However, at time <span class="math notranslate nohighlight">\(t\)</span>, the firm sees only <span class="math notranslate nohighlight">\(P_t^{-i}\)</span> and does
-not see <span class="math notranslate nohighlight">\(Y_t^{-i}\)</span>, so that a firm in industry <span class="math notranslate nohighlight">\(i\)</span> does not directly
+not see <span class="math notranslate nohighlight">\(Y_t^{-i}\)</span>, so that a firm in industry <span class="math notranslate nohighlight">\(i\)</span> does not <strong>directly</strong>
 observe <span class="math notranslate nohighlight">\(\theta_t + \epsilon_t^{-i}\)</span>.</p>
 <p>Nevertheless, it will turn out that   equilibrium prices and quantities in this equilibrium equal
 their counterparts in a pooling equilibrium because
 firms in industry <span class="math notranslate nohighlight">\(i\)</span> are able to infer the noisy signal about the demand shock
 received by firms in industry <span class="math notranslate nohighlight">\(-i\)</span>.</p>
-<p>We shall eventually verify this assertion  by using a guess and verify tactic. <a class="footnote-reference brackets" href="#footnote0" id="id13">1</a></p>
+<p>We shall verify this assertion  by using a guess and verify tactic that involves running a least
+squares regression and inspecting its <span class="math notranslate nohighlight">\(R^2\)</span>. <a class="footnote-reference brackets" href="#footnote0" id="id13">1</a></p>
 </div>
 <div class="section" id="equilibrium-conditions">
 <h2><a class="toc-backref" href="#id47"><span class="section-number">33.4. </span>Equilibrium Conditions</a><a class="headerlink" href="#equilibrium-conditions" title="Permalink to this headline">¶</a></h2>
-<p>It is convenient to solve the firm’s problem without
+<p>It is convenient to solve a firm’s problem without
 uncertainty  by forming the Lagrangian:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -926,15 +937,16 @@ P_t^i  k_t^i - .5   (\mu_t^i)^2  + \phi_t^i \left[
    k_t^i + \mu_t^i - k_{t+1}^i \right]  \right\} \end{aligned}
 \]</div>
 <p>where  <span class="math notranslate nohighlight">\(\{\phi_t^i\}\)</span> is a sequence of Lagrange multipliers on the
-transition law <span class="math notranslate nohighlight">\(k_{t+1}^i = k_{t}^i + \mu_t^i\)</span>. First order conditions for the
+transition law <span class="math notranslate nohighlight">\(k_{t+1}^i = k_{t}^i + \mu_t^i\)</span>.</p>
+<p>First order conditions for the
 nonstochastic problem are</p>
 <div class="math notranslate nohighlight" id="equation-town4">
 <span class="eqno">(33.4)<a class="headerlink" href="#equation-town4" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
   \phi_t^i &amp; =  \beta \phi_{t+1}^i + \beta  P_{t+1}^i   \\
   \mu_t^i &amp; =  \phi_t^i .   \end{aligned}\end{split}\]</div>
 <p>Substituting the demand function <a class="reference internal" href="#equation-town2">(33.2)</a> for
-<span class="math notranslate nohighlight">\(P_t^i\)</span>, imposing the condition that the representative firm is
-representative (<span class="math notranslate nohighlight">\(k_t^i = K_t^i\)</span>), and using  definition <a class="reference internal" href="#equation-town7">(33.6)</a>
+<span class="math notranslate nohighlight">\(P_t^i\)</span>, imposing the condition <span class="math notranslate nohighlight">\(k_t^i = K_t^i\)</span> that makes representative firm be
+representative, and using  definition <a class="reference internal" href="#equation-town7">(33.6)</a>
 of <span class="math notranslate nohighlight">\(g_t^i\)</span>, the Euler equation <a class="reference internal" href="#equation-town4">(33.4)</a> lagged
 by one period can be expressed as
 <span class="math notranslate nohighlight">\(- b k_t^i + \theta_t + \epsilon_t^i + (k_{t+1}^i - k_t^i) - g_t^i =0\)</span>
@@ -955,7 +967,7 @@ or</p>
 <a class="reference internal" href="#equation-town2a">(33.3)</a>, and the demand equation
 <a class="reference internal" href="#equation-town2">(33.2)</a>.</p>
 <p>In summary, with perfect foresight, equilibrium conditions for industry
-<span class="math notranslate nohighlight">\(i\)</span> include the following system of difference equations:</p>
+<span class="math notranslate nohighlight">\(i\)</span> comprise  the following system of difference equations:</p>
 <div class="math notranslate nohighlight" id="equation-sol1">
 <span class="eqno">(33.8)<a class="headerlink" href="#equation-sol1" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
   k_{t+1}^i &amp; =  (1+b)k_t^i - \epsilon_t^i -\theta_t + g_t^i \\
@@ -1014,7 +1026,7 @@ k_{t+1}^i = \tilde \lambda k_t^i + {\tilde \lambda \beta \over 1 -\tilde
 (\epsilon_{t+1}^i + \theta_{t+1}  ) .
 \end{aligned}
 \]</div>
-<p>Recall that we have already set <span class="math notranslate nohighlight">\(k^i = K^i\)</span> at an appropriate point in the argument, namely, <em>after</em> having derived the first-order necessary
+<p>Recall that we have already set <span class="math notranslate nohighlight">\(k^i = K^i\)</span> at the appropriate point in the argument, namely, <em>after</em> having derived the first-order necessary
 conditions for a representative firm in industry <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>Thus,  under perfect foresight the equilibrium capital stock in industry <span class="math notranslate nohighlight">\(i\)</span> satisfies</p>
 <div class="math notranslate nohighlight" id="equation-town5">
@@ -1035,7 +1047,7 @@ firms in market <span class="math notranslate nohighlight">\(i\)</span>.</p>
 to replace all random variables on the right side of
 <a class="reference internal" href="#equation-town5">(33.10)</a> with their conditional expectations based on
 the information available to decision makers in market <span class="math notranslate nohighlight">\(i\)</span>.</p>
-<p>For now, we assume that this information set
+<p>For now, we assume that this information set is
 <span class="math notranslate nohighlight">\(I_t^p = \begin{bmatrix} \theta^t &amp; \epsilon^{it} \end{bmatrix}\)</span>,
 where <span class="math notranslate nohighlight">\(z^t\)</span> represents the semi-infinite history of variable
 <span class="math notranslate nohighlight">\(z_s\)</span> up to time <span class="math notranslate nohighlight">\(t\)</span>.</p>
@@ -1116,7 +1128,7 @@ process in <span class="math notranslate nohighlight">\(w_t\)</span> and the Kal
   \end{aligned}\]</div>
 </div>
 <div class="section" id="state-reconstruction-error">
-<h4><span class="section-number">33.5.1.2. </span>State-reconstruction error:<a class="headerlink" href="#state-reconstruction-error" title="Permalink to this headline">¶</a></h4>
+<h4><span class="section-number">33.5.1.2. </span>State-reconstruction error<a class="headerlink" href="#state-reconstruction-error" title="Permalink to this headline">¶</a></h4>
 <p>Define the state <em>reconstruction error</em> <span class="math notranslate nohighlight">\(\tilde \theta_t\)</span> by</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1158,18 +1170,22 @@ replacing the information set <span class="math notranslate nohighlight">\(\thet
   \end{aligned}\]</div>
 <p>Equations <a class="reference internal" href="#equation-kf9">(33.20)</a>, <a class="reference internal" href="#equation-kf8a">(33.21)</a> describe
 an equilibrium when <span class="math notranslate nohighlight">\(w^t\)</span> is observed.</p>
+</div>
+</div>
+<div class="section" id="a-new-state-variable">
+<h3><span class="section-number">33.5.2. </span>A new state variable<a class="headerlink" href="#a-new-state-variable" title="Permalink to this headline">¶</a></h3>
 <p>Relative to <a class="reference internal" href="#equation-solution1">(33.11)</a>, the equilibrium acquires a <strong>new
 state variable</strong>, namely, the <span class="math notranslate nohighlight">\(\theta\)</span>–reconstruction error,
 <span class="math notranslate nohighlight">\(\tilde \theta_t\)</span>.</p>
-<p>For a subsequent argument we shall make, by using <a class="reference internal" href="#equation-kal1">(33.15)</a>, it is convenient  to
+<p>For a subsequent argument, by using <a class="reference internal" href="#equation-kal1">(33.15)</a>, it is convenient  to
 write <a class="reference internal" href="#equation-kf9">(33.20)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-sol2a">
 <span class="eqno">(33.22)<a class="headerlink" href="#equation-sol2a" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
   k_{t+1}^i = \tilde \lambda k_t^i + {\rho \over  \lambda - \rho } \theta_t + {1 \over  \lambda - \rho} {p \rho \over p + \sigma_e^2} e_t - {1 \over \lambda - \rho} {\rho \sigma_e^2 \over p + \sigma_e^2}
   \tilde \theta_t
   \end{aligned}\]</div>
-<p>In summary, when decision makers in market <span class="math notranslate nohighlight">\(i\)</span> observe a noisy
-signal <span class="math notranslate nohighlight">\(w_t\)</span> on <span class="math notranslate nohighlight">\(\theta_t\)</span> at <span class="math notranslate nohighlight">\(t\)</span>, we  an
+<p>In summary, when decision makers in market <span class="math notranslate nohighlight">\(i\)</span> observe a semi-infinite history <span class="math notranslate nohighlight">\(w^t\)</span> of  noisy
+signals <span class="math notranslate nohighlight">\(w_t\)</span> on <span class="math notranslate nohighlight">\(\theta_t\)</span> at <span class="math notranslate nohighlight">\(t\)</span>, we  an
 equilibrium law of motion for <span class="math notranslate nohighlight">\(k_t^i\)</span> can be represented as</p>
 <div class="math notranslate nohighlight" id="equation-sol0a">
 <span class="eqno">(33.23)<a class="headerlink" href="#equation-sol0a" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
@@ -1179,10 +1195,9 @@ k_{t+1}^i &amp; =  \tilde \lambda k_t^i + {1 \over \lambda - \rho}   \hat \theta
    \theta_t - {p \rho \over p + \sigma_e^2} e_t + v_t  \\
 \theta_{t+1} &amp; =  \rho \theta_t + v_t .  \end{aligned}\end{split}\]</div>
 </div>
-</div>
 <div class="section" id="two-noisy-signals">
-<h3><span class="section-number">33.5.2. </span>Two Noisy Signals<a class="headerlink" href="#two-noisy-signals" title="Permalink to this headline">¶</a></h3>
-<p>We now construct a <strong>pooling equilibrium</strong> by assuming that a firm in
+<h3><span class="section-number">33.5.3. </span>Two Noisy Signals<a class="headerlink" href="#two-noisy-signals" title="Permalink to this headline">¶</a></h3>
+<p>We now construct a <strong>pooling equilibrium</strong> by assuming that at time <span class="math notranslate nohighlight">\(t\)</span> a firm in
 industry <span class="math notranslate nohighlight">\(i\)</span> receives a vector <span class="math notranslate nohighlight">\(w_t\)</span> of <em>two</em> noisy signals
 on <span class="math notranslate nohighlight">\(\theta_t\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -1208,7 +1223,7 @@ assume that</p>
 <p>so that a firm in industry <span class="math notranslate nohighlight">\(i\)</span> observes the noisy signals on that
 <span class="math notranslate nohighlight">\(\theta_t\)</span> presented to firms in both industries <span class="math notranslate nohighlight">\(i\)</span> and
 <span class="math notranslate nohighlight">\(-i\)</span>.</p>
-<p>An appropriate innovations representation becomes</p>
+<p>The pertinent  innovations representation now becomes</p>
 <div class="math notranslate nohighlight" id="equation-kf22-23">
 <span class="eqno">(33.24)<a class="headerlink" href="#equation-kf22-23" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
   \hat \theta_{t+1} &amp; =   \rho
@@ -1241,7 +1256,7 @@ k_{t+1}^i &amp; =  \tilde \lambda k_t^i + {1 \over \lambda - \rho}\hat \theta_{t
 \theta_{t+1} &amp; =  \rho \theta_t + v_t .
  \end{aligned}\end{split}\]</div>
 <p>Below, by using a guess-and-verify tactic,  we shall show that outcomes in this  <strong>pooling equilibrium</strong> equal those in an equilibrium under the alternative
-information structure that interested Townsend <span id="id16">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span> but that seemed too challenging to compute. <a class="footnote-reference brackets" href="#footnote5" id="id17">4</a></p>
+information structure that interested Townsend <span id="id16">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span> but that originally seemed too challenging to compute. <a class="footnote-reference brackets" href="#footnote5" id="id17">4</a></p>
 </div>
 </div>
 <div class="section" id="guess-and-verify-tactic">
@@ -1256,7 +1271,8 @@ root-finding problem and  solving it with <code class="docutils literal notransl
 using <code class="docutils literal notranslate"><span class="pre">quantecon.solve_discrete_riccati</span></code></p></li>
 <li><p>Add a <em>measurement equation</em> for
 <span class="math notranslate nohighlight">\(P_t^i = b k_t^i + \theta_t + e_t\)</span>, <span class="math notranslate nohighlight">\(\theta_t + e_t\)</span>,
-and <span class="math notranslate nohighlight">\(e_t\)</span> to system <a class="reference internal" href="#equation-sol0a">(33.23)</a>. Write the resulting system
+and <span class="math notranslate nohighlight">\(e_t\)</span> to system <a class="reference internal" href="#equation-sol0a">(33.23)</a>.</p></li>
+<li><p>Write the resulting system
 in state-space form and encode it using <code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code></p></li>
 <li><p>Use methods of the <code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code> to compute impulse response
 functions of <span class="math notranslate nohighlight">\(k_t^i\)</span> with respect to shocks <span class="math notranslate nohighlight">\(v_t, e_t\)</span>.</p></li>
@@ -1539,7 +1555,7 @@ require(['plotly'], function(Plotly) {
 <div class="section" id="step-4-compute-impulse-response-functions">
 <h3><span class="section-number">33.7.4. </span>Step 4: Compute impulse response functions<a class="headerlink" href="#step-4-compute-impulse-response-functions" title="Permalink to this headline">¶</a></h3>
 <p>To compute impulse response functions of <span class="math notranslate nohighlight">\(k_t^i\)</span>, we use the <code class="docutils literal notranslate"><span class="pre">impulse_response</span></code> method of the
-<code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code> class and plot the result.</p>
+<code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code> class and plot outcomes.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xcoef</span><span class="p">,</span> <span class="n">ycoef</span> <span class="o">=</span> <span class="n">lss</span><span class="o">.</span><span class="n">impulse_response</span><span class="p">(</span><span class="n">j</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
@@ -1570,6 +1586,7 @@ calling the <code class="docutils literal notranslate"><span class="pre">station
 the <code class="docutils literal notranslate"><span class="pre">quantecon.LinearStateSpace</span></code> class.</p>
 <p>By appropriately decomposing the covariance matrix of the state vector, we obtain ingredients
 of pertinent population regression coefficients.</p>
+<p>Define</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \Sigma_{x}=\left[\begin{array}{cc}
@@ -1581,7 +1598,7 @@ of pertinent population regression coefficients.</p>
 <p>Regression coefficients are  <span class="math notranslate nohighlight">\(\beta=\Sigma_{21}\Sigma_{22}^{-1}\)</span>.</p>
 <p>To verify an instance of a law of large numbers computation, we construct a long  simulation of
 the state vector and for the resulting sample compute
-the ordinary least-squares estimator  of <span class="math notranslate nohighlight">\(\beta\)</span> that we shall compare to the corresponding population regression
+the ordinary least-squares estimator  of <span class="math notranslate nohighlight">\(\beta\)</span> that we shall compare with corresponding population regression
 coefficients.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1674,12 +1691,12 @@ P_t: 0.9649461170475454
 <div class="section" id="equilibrium-with-two-noisy-signals-on-theta-t">
 <h2><a class="toc-backref" href="#id51"><span class="section-number">33.8. </span>Equilibrium with Two Noisy Signals on <span class="math notranslate nohighlight">\(\theta_t\)</span></a><a class="headerlink" href="#equilibrium-with-two-noisy-signals-on-theta-t" title="Permalink to this headline">¶</a></h2>
 <p>Steps 1, 4, and 5 are identical to those for the  one-noisy-signal structure.</p>
-<p>Step 2  requires one straightforward modification.</p>
-<p>For step 3, we use construct the  following state-space representation so that we can get our hands on
+<p>Step 2  requires a straightforward modification.</p>
+<p>For step 3, we  construct the  following state-space representation so that we can get our hands on
 all of the random processes that we require in order  to compute a regression of the noisy signal about
-<span class="math notranslate nohighlight">\(\theta\)</span> from the other industry that a firm receives directly in a pooling equilibrium from information that
+<span class="math notranslate nohighlight">\(\theta\)</span> from the other industry that a firm receives directly in a pooling equilibrium against information that
 a firm would receive in Townsend’s original model.</p>
-<p>For this purpose, we include  equilibrium goods prices from  both industries appear in the state vector:</p>
+<p>For this purpose, we include  equilibrium goods prices from  both industries in the state vector:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -1992,10 +2009,10 @@ P^{2}_t: 0.9621171983721839
 </div>
 <div class="section" id="key-step">
 <h2><a class="toc-backref" href="#id52"><span class="section-number">33.9. </span>Key Step</a><a class="headerlink" href="#key-step" title="Permalink to this headline">¶</a></h2>
-<p>Now we come to the key step of verifying that equilibrium outcomes for prices and quantities are identical
-in the pooling equilibrium  original model that led Townsend to an infinite-dimensional state space.</p>
+<p>Now we come to the key step for verifying that equilibrium outcomes for prices and quantities are identical
+in the pooling equilibrium  original model that led Townsend to deduce an infinite-dimensional state space.</p>
 <p>We accomplish this by  computing a population linear least squares regression of the noisy signal that firms in the other
-industry receive in a pooling equilibrium on  time <span class="math notranslate nohighlight">\(t\)</span> information that a firm   receives in Townsend’s
+industry receive in a pooling equilibrium on  time <span class="math notranslate nohighlight">\(t\)</span> information that a firm  would  receive in Townsend’s
 original model.</p>
 <p>Let’s compute the regression and stare at the <span class="math notranslate nohighlight">\(R^2\)</span>:</p>
 <div class="cell docutils container">
@@ -2060,9 +2077,8 @@ information noisy-signal information structures.</p>
 </div>
 <p>The graphs above show that</p>
 <ul class="simple">
-<li><p>the response of <span class="math notranslate nohighlight">\(k_t^i\)</span> to  shocks <span class="math notranslate nohighlight">\(v_t\)</span> to the hidden Markov demand state <span class="math notranslate nohighlight">\(\theta_t\)</span> process  is <strong>larger</strong> in
-the two-noisy=signal structure</p></li>
-<li><p>the response of <span class="math notranslate nohighlight">\(k_t^i\)</span> to idiosyncratic <em>own-market</em>   noise-shocks <span class="math notranslate nohighlight">\(e_t\)</span> is <strong>smaller</strong> in the two-noisy-signal structure</p></li>
+<li><p>responses of <span class="math notranslate nohighlight">\(k_t^i\)</span> to  shocks <span class="math notranslate nohighlight">\(v_t\)</span> to the hidden Markov demand state <span class="math notranslate nohighlight">\(\theta_t\)</span> process are   <strong>larger</strong> in   the two-noisy=signal structure</p></li>
+<li><p>responses of <span class="math notranslate nohighlight">\(k_t^i\)</span> to idiosyncratic <em>own-market</em>   noise-shocks <span class="math notranslate nohighlight">\(e_t\)</span> are <strong>smaller</strong> in the two-noisy-signal structure</p></li>
 </ul>
 <p>Taken together, these  findings in turn can be shown to imply that time series correlations and coherences between outputs in
 the two industries are higher in the two-noisy-signals or <strong>pooling</strong> model.</p>
@@ -2116,7 +2132,7 @@ is revealed to all firms  after a fixed number of periods.</p>
 <li><p>Townsend wanted to assume that at time <span class="math notranslate nohighlight">\(t\)</span> firms in industry <span class="math notranslate nohighlight">\(i\)</span> observe
 <span class="math notranslate nohighlight">\(k_t^i, Y_t^i, P_t^i, (P^{-i})^t\)</span>, where <span class="math notranslate nohighlight">\((P^{-i})^t\)</span> is the history of prices in
 the other market up to time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
-<li><p>Because that turned out to be too challenging, Townsend made an
+<li><p>Because that turned out to be too challenging, Townsend made a sensible
 alternative assumption that eased his calculations: that after a large
 number <span class="math notranslate nohighlight">\(S\)</span> of periods, firms in industry <span class="math notranslate nohighlight">\(i\)</span> observe the
 hidden Markov component of the demand shock <span class="math notranslate nohighlight">\(\theta_{t-S}\)</span>.</p></li>
@@ -2127,7 +2143,7 @@ for ever.</p>
 <p>By applying technical machinery of <span id="id18">[<a class="reference internal" href="zreferences.html#id23" title="Joseph Pearlman, David Currie, and Paul Levine. Rational Expectations Models with Private Information. Economic Modelling, 3(2):90–105, 1986.">PCL86</a>]</span>,
 <span id="id19">[<a class="reference internal" href="zreferences.html#id22" title="Joseph G. Pearlman and Thomas J. Sargent. Knowing the Forecasts of Others. Review of Economic Dynamics, 8(2):480-497, April 2005. URL: https://ideas.repec.org/a/red/issued/v8y2005i2p480-497.html, doi:10.1016/j.red.2004.10.011.">PS05</a>]</span> showed that there is a recursive
 representation of the equilibrium of the perpetually and symmetrically
-uninformed model formulated but not completely solved in section 8 of
+uninformed model that Townsend wanted to solve
 <span id="id20">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span>.</p>
 <p>A reader of <span id="id21">[<a class="reference internal" href="zreferences.html#id22" title="Joseph G. Pearlman and Thomas J. Sargent. Knowing the Forecasts of Others. Review of Economic Dynamics, 8(2):480-497, April 2005. URL: https://ideas.repec.org/a/red/issued/v8y2005i2p480-497.html, doi:10.1016/j.red.2004.10.011.">PS05</a>]</span> will notice that their representation of the equilibrium of
 Townsend’s model exactly matches that of the  <strong>pooling equilibrium</strong> presented here.</p>
@@ -2150,7 +2166,7 @@ sets <a class="footnote-reference brackets" href="#footnote2" id="id28">6</a> .<
 decision makers in this model do not really face a problem of
 forecasting the forecasts of others.</p>
 <p>Because
-they are the same as their own, they know those forecasts.</p>
+those forecasts are the same as their own, they know them.</p>
 <div class="section" id="further-historical-remarks">
 <h3><span class="section-number">33.11.1. </span>Further historical remarks<a class="headerlink" href="#further-historical-remarks" title="Permalink to this headline">¶</a></h3>
 <p>Sargent <span id="id29">[<a class="reference internal" href="zreferences.html#id26" title="Thomas J. Sargent. Equilibrium with signal extraction from endogenous variables. Journal of Economic Dynamics and Control, 15:245–273, 1991.">Sar91</a>]</span> proposed a way to compute an equilibrium
