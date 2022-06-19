@@ -1369,39 +1369,151 @@ set in Townsend's original model equals its information set in a pooling equilib
 
 Therefore, equilibrium prices and quantities in Townsend's original model equal those in a pooling equilibrium.
 
-## Comparison of  Two Signal Structures
 
-It is enlightening side by side to  plot impulse response functions for capital in an industry for the two
-information noisy-signal information structures.
++++
 
-Please remember that the two-signal structure corresponds to the **pooling equilibrium** and also
-**Townsend's original model**.
+## An observed common shock benchmark
 
-```{code-cell} python3
-fig_comb = go.Figure(data=[*fig1.data,
-                         *fig2.update_traces(xaxis='x2', yaxis='y2').data]).set_subplots(1, 2,
-                                                                                         subplot_titles=("One noisy-signal structure", "Two noisy-signal structure"),
-                                                                                         horizontal_spacing=0.1,
-                                                                                         shared_yaxes=True)
+
+For purposes of comparison, it is  useful to construct a model in which demand disturbance in  both industries
+still both share  have a common persistent component $\theta_t$, but in which the persistent component $\theta$ is observed each period.
+
+In this case, firms share the same information immediately and have no need to deploy signal-extraction techniques.
+
+Thus, consider a version of our  model in which histories of both $\epsilon_t^i$ and $\theta_t$ are observed by a representative  firm.
+
+In this case,  the firm's optimal decision rule is  described by
+
+$$
+k_{t+1}^i =  \tilde \lambda k_t^i + \frac{1}{\lambda - \rho} \hat \theta_{t+1} 
+$$
+
+where $\hat \theta_{t+1} = E_t \theta_{t+1}$ is given by
+
+$$
+\hat \theta_{t+1} = \rho \theta_t 
+$$
+
+Thus, the firm's decision rule can be expressed 
+
+
+$$
+k_{t+1}^i = \tilde \lambda k_t^i + \frac{\rho}{\lambda - \rho} \theta_t  
+$$
+
+
+Consequently, when a history  $\theta_s, s \leq t$ is observed without noise, 
+the following state space system prevails:
+
+$$
+\begin{aligned}
+\begin{bmatrix} \theta_{t+1} \cr k_{t+1}^i \end{bmatrix} & =
+\begin{bmatrix} \rho & 0 \cr
+       \frac{\rho}{\lambda -\rho} & \tilde \lambda \end{bmatrix}
+       \begin{bmatrix} \theta_t \cr k_t^i \end{bmatrix} 
+       + \begin{bmatrix} \sigma_v \cr 0 \end{bmatrix} z_{1,t+1} \cr
+\begin{bmatrix} \theta_t \cr  k_t^i \end{bmatrix} & =  \begin{bmatrix} 1 & 0 \cr 0 & 1 \end{bmatrix}
+\begin{bmatrix} \theta_t \cr k_t^i \end{bmatrix} + 
+\begin{bmatrix} 0 \cr 0 \end{bmatrix} z_{1,t+1}
+\end{aligned}
+$$
+
+where $z_{t,t+1} $ is a scalar iid standardized Gaussian process.
+
+As usual, the system can be written as
+
+$$
+\begin{aligned}
+x_{t+1} & = A x_t + C z_{t+1} \cr
+y_t & = G x_t + H w_{t+1} 
+\end{aligned}
+$$
+
+In order once again to use the  quantecon class `quantecon.LinearStateSpace`, let's form  pertinent state-space matrices 
+
+```{code-cell} ipython3
+Ao_lss = np.array([[ρ, 0.],
+                 [ρ / (λ - ρ), λ_tilde]])
+
+Co_lss = np.array([[σ_v], [0.]])
+
+Go_lss = np.identity(2)
+```
+
+```{code-cell} ipython3
+muo_0 = np.array([0., 0.])
+
+lsso = qe.LinearStateSpace(Ao_lss, Co_lss, Go_lss, mu_0=muo_0)
+```
+
+Now let's form and plot an  impulse response function of $k_t^i$ to shocks $v_t$ to $\theta_{t+1}$
+
+```{code-cell} ipython3
+xcoef, ycoef = lsso.impulse_response(j=21)
+data = np.array([ycoef])[0, :, 1, :]
+
+fig = go.Figure(data=go.Scatter(y=data[:-1, 0], name=r'$z_{t+1}$'))
+fig.update_layout(title=r'Impulse Response Function',
+                   xaxis_title= r'lag $j$',
+                   yaxis_title=r'$k^{i}_{t}$')
+fig3 = fig
 # Export to PNG file
-Image(fig_comb.to_image(format="png"))
-# fig_comb.show() will provide interactive plot when running
+Image(fig3.to_image(format="png"))
+# fig1.show() will provide interactive plot when running
 # notebook locally
 ```
 
-The graphs above show that
+## Comparison of  All Signal Structures
 
-* responses of $k_t^i$ to  shocks $v_t$ to the hidden Markov demand state $\theta_t$ process are   **larger** in   the two-noisy=signal structure
-* responses of $k_t^i$ to idiosyncratic *own-market*   noise-shocks $e_t$ are **smaller** in the two-noisy-signal structure
+It is enlightening side by side to  plot impulse response functions for capital for the two
+ noisy-signal information structures and the  noiseless signal on $\theta$ that we have just presented.
 
-Taken together, these  findings in turn can be shown to imply that time series correlations and coherences between outputs in
-the two industries are higher in the two-noisy-signals or **pooling** model.
+Please remember that the two-signal structure corresponds to the **pooling equilibrium** and also
+**Townsend’s original model**.
 
-The enhanced influence of the shocks $v_t$ to the hidden Markov demand state $\theta_t$ process that
+```{code-cell} ipython3
+:hide-output: false
+
+fig_comb = go.Figure(data=[
+                        *fig1.data,
+                        *fig2.update_traces(xaxis='x2', yaxis='y2').data,
+                        *fig3.update_traces(xaxis='x3', yaxis='y3').data
+                    ]).set_subplots(1, 3,
+                           subplot_titles=("One noisy-signal",
+                                           "Two noisy-signal",
+                                           "No Noise"),
+                           horizontal_spacing=0.02,
+                           shared_yaxes=True)
+# Export to PNG file
+Image(fig_comb.to_image(format="png"))
+# fig_comb.show() # will provide interactive plot when running
+# notebook locally
+```
+
+The three panels in the graph above show that
+
+-  responses of $ k_t^i $ to  shocks $ v_t $ to the hidden Markov demand state $ \theta_t $ process are   **largest** in   the no-noisy-signal structure in which the firm observes $\theta_t$ at time $t$
+-  responses of $ k_t^i $ to  shocks $ v_t $ to the hidden Markov demand state $ \theta_t $ process are   **smaller** in   the two-noisy-signal structure 
+-  responses of $ k_t^i $ to  shocks $ v_t $ to the hidden Markov demand state $ \theta_t $ process are   **smallest** in   the one-noisy-signal structure 
+
+With respect to the iid demand shocks $e_t$ the graphs show that 
+
+-  responses of $ k_t^i $ to  shocks $ e_t $ to the hidden Markov demand state $ \theta_t $ process are   **smallest** (i.e., nonexistent) in   the no-noisy-signal structure in which the firm observes $\theta_t$ at time $t$
+-  responses of $ k_t^i $ to  shocks $ e_t $ to the hidden Markov demand state $ \theta_t $ process are   **larger** in   the two-noisy-signal structure  
+- responses of $ k_t^i $ to idiosyncratic *own-market*   noise-shocks $ e_t $ are **largest** in the one-noisy-signal structure 
+
+
+
+
+Among other things,  these  findings indicate that time series correlations and coherences between outputs in the two industries are higher in the two-noisy-signals or **pooling** model than they are in the one-noisy signal model.  
+
+The enhanced influence of the shocks $ v_t $ to the hidden Markov demand state $ \theta_t $ process that
 emerges from the two-noisy-signal model relative to the one-noisy-signal model is a  symptom of a lower
 equilibrium hidden-state  reconstruction error variance in the two-signal model:
 
-```{code-cell} python3
+```{code-cell} ipython3
+:hide-output: false
+
 display(Latex('$\\textbf{Reconstruction error variances}$'))
 display(Latex(f'One-noise structure: {round(p_one, 6)}'))
 display(Latex(f'Two-noise structure: {round(p_two, 6)}'))
@@ -1410,11 +1522,18 @@ display(Latex(f'Two-noise structure: {round(p_two, 6)}'))
 Kalman gains  for the two
 structures are
 
-```{code-cell} python3
+```{code-cell} ipython3
+:hide-output: false
+
 display(Latex('$\\textbf{Kalman Gains}$'))
 display(Latex(f'One noisy-signal structure: {round(κ_one, 6)}'))
 display(Latex(f'Two noisy-signals structure: {round(κ_two, 6)}'))
 ```
+
+Another  lesson that comes from the preceding three-panel graph is that the presence of iid noise
+$\epsilon_t^i$ in industry $i$ generates a response in $k_t^{-i}$ in the two-noisy-signal structure, but not in the one-noisy-signal structure. 
+
++++
 
 ## Notes on History of the Problem
 
@@ -1424,47 +1543,46 @@ is revealed to all firms  after a fixed number of periods.
 
 Thus,
 
-* Townsend wanted to assume that at time $t$ firms in industry $i$ observe
-  $k_t^i, Y_t^i, P_t^i, (P^{-i})^t$, where $(P^{-i})^t$ is the history of prices in
-  the other market up to time $t$.
-* Because that turned out to be too challenging, Townsend made a sensible
+- Townsend wanted to assume that at time $ t $ firms in industry $ i $ observe
+  $ k_t^i, Y_t^i, P_t^i, (P^{-i})^t $, where $ (P^{-i})^t $ is the history of prices in
+  the other market up to time $ t $.  
+- Because that turned out to be too challenging, Townsend made a sensible
   alternative assumption that eased his calculations: that after a large
-  number $S$ of periods, firms in industry $i$ observe the
-  hidden Markov component of the demand shock $\theta_{t-S}$.
+  number $ S $ of periods, firms in industry $ i $ observe the
+  hidden Markov component of the demand shock $ \theta_{t-S} $.  
 
-> 
 
 Townsend argued that the more manageable model  could do a good job of
 approximating the intractable model in which the Markov component of the demand shock remains unobserved
 for ever.
 
-By applying technical machinery of {cite}`PCL`,
-{cite}`Pearlman_Sargent2005` showed that there is a recursive
+By applying technical machinery of [[PCL86](https://python-advanced.quantecon.org/zreferences.html#id23)],
+[[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] showed that there is a recursive
 representation of the equilibrium of the perpetually and symmetrically
 uninformed model that Townsend wanted to solve
-{cite}`townsend`.
+[[Tow83](https://python-advanced.quantecon.org/zreferences.html#id25)].
 
-A reader of {cite}`Pearlman_Sargent2005` will notice that their representation of the equilibrium of
-Townsend's model exactly matches that of the  **pooling equilibrium** presented here.
+A reader of [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] will notice that their representation of the equilibrium of
+Townsend’s model exactly matches that of the  **pooling equilibrium** presented here.
 
 We have structured  our notation in  this lecture to faciliate comparison of the **pooling equilibrium**
-constructed here with the equilibrium of Townsend's model reported in  {cite}`Pearlman_Sargent2005`.
+constructed here with the equilibrium of Townsend’s model reported in  [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)].
 
-The computational method of {cite}`Pearlman_Sargent2005` is recursive:
+The computational method of [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] is recursive:
 it enlists the Kalman filter and invariant subspace methods for
 solving systems of Euler
-equations [^footnote1] .
+equations <sup><a href=#footnote1 id=footnote1-link>[5]</a></sup> .
 
-As {cite}`singleton`,
-{cite}`kasa`, and {cite}`sargent91` also
+As [[Sin87](https://python-advanced.quantecon.org/zreferences.html#id27)],
+[[Kas00](https://python-advanced.quantecon.org/zreferences.html#id24)], and [[Sar91](https://python-advanced.quantecon.org/zreferences.html#id26)] also
 found, the equilibrium is fully revealing: observed prices tell
-participants in industry $i$ all of the information held by
-participants in market $-i$ ($-i$ means not $i$).
+participants in industry $ i $ all of the information held by
+participants in market $ -i $ ($ -i $ means not $ i $).
 
 This
 means that higher-order beliefs play no role: observing equilibrium prices
 in effect lets decision makers pool their information
-sets [^footnote2] .
+sets <sup><a href=#footnote2 id=footnote2-link>[6]</a></sup> .
 
 The disappearance of higher order beliefs means that
 decision makers in this model do not really face a problem of
@@ -1473,12 +1591,14 @@ forecasting the forecasts of others.
 Because
 those forecasts are the same as their own, they know them.
 
++++
+
 ### Further historical remarks
 
-Sargent {cite}`sargent91` proposed a way to compute an equilibrium
+Sargent [[Sar91](https://python-advanced.quantecon.org/zreferences.html#id26)] proposed a way to compute an equilibrium
 without making Townsend’s approximation.
 
-Extending the reasoning of {cite}`Muth1960`, Sargent noticed that it is possible to
+Extending the reasoning of [[Mut60](https://python-advanced.quantecon.org/zreferences.html#id110)], Sargent noticed that it is possible to
 summarize the relevant history with a low dimensional object, namely, a
 small number of current and lagged forecasting errors.
 
@@ -1494,16 +1614,16 @@ appropriate orders of the autoregressive and moving average pieces of
 the equilibrium representation.
 
 By working in the frequency
-domain {cite}`kasa` showed how to discover the appropriate
+domain [[Kas00](https://python-advanced.quantecon.org/zreferences.html#id24)] showed how to discover the appropriate
 orders of the autoregressive and moving average parts, and also how to
 compute an equilibrium.
 
-The  {cite}`Pearlman_Sargent2005` recursive computational method, which stays in the time domain, also
+The  [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] recursive computational method, which stays in the time domain, also
 discovered appropriate orders of the autoregressive and moving
 average pieces.
 
 In addition, by displaying equilibrium representations
-in the form of {cite}`PCL`, {cite}`Pearlman_Sargent2005`
+in the form of [[PCL86](https://python-advanced.quantecon.org/zreferences.html#id23)], [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)]
 showed how the moving average piece is linked to the innovation process
 of the hidden persistent component of the demand shock.
 
@@ -1512,26 +1632,26 @@ innovation process is the additional state variable contributed by the
 problem of extracting a signal from equilibrium prices that decision
 makers face in Townsend’s model.
 
-[^footnote0]: {cite}`Pearlman_Sargent2005` verified this assertion using a different tactic, namely, by constructing
+<p><a id=footnote0 href=#footnote0-link><strong>[1]</strong></a> [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] verified this assertion using a different tactic, namely, by constructing
 analytic formulas for an equilibrium under the incomplete
 information structure and confirming that they match the pooling equilibrium formulas derived here.
 
-[^footnote1]: See {cite}`ahms` for an account of invariant subspace methods.
-
-[^footnote2]: See {cite}`ams` for a discussion
-of  information assumptions needed to create a situation
-in which higher order beliefs appear in equilibrium decision rules.  A way
-to read our findings in light of {cite}`ams` is that, relative
-to the number of signals agents observe,  Townsend's
-section 8 model  has too few  random shocks  to get higher order beliefs to
-play a role.
-
-[^footnote3]: See {cite}`Sargent1987`, especially
+<p><a id=footnote3 href=#footnote3-link><strong>[2]</strong></a> See [[Sar87](https://python-advanced.quantecon.org/zreferences.html#id197)], especially
 chapters IX and XIV, for  principles  that guide solving some roots backwards and others forwards.
 
-[^footnote4]: As noted by {cite}`Sargent1987`, this difference equation is the Euler equation for
+<p><a id=footnote4 href=#footnote4-link><strong>[3]</strong></a> As noted by [[Sar87](https://python-advanced.quantecon.org/zreferences.html#id197)], this difference equation is the Euler equation for
 a planning problem   that maximizes the discounted sum of consumer plus
 producer surplus.
 
-[^footnote5]: {cite}`Pearlman_Sargent2005` verify the same claim by applying   machinery of  {cite}`PCL`.
+<p><a id=footnote5 href=#footnote5-link><strong>[4]</strong></a> [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] verify the same claim by applying   machinery of  [[PCL86](https://python-advanced.quantecon.org/zreferences.html#id23)].
+
+<p><a id=footnote1 href=#footnote1-link><strong>[5]</strong></a> See [[AHMS96](https://python-advanced.quantecon.org/zreferences.html#id135)] for an account of invariant subspace methods.
+
+<p><a id=footnote2 href=#footnote2-link><strong>[6]</strong></a> See [[AMS02](https://python-advanced.quantecon.org/zreferences.html#id28)] for a discussion
+of  information assumptions needed to create a situation
+in which higher order beliefs appear in equilibrium decision rules.  A way
+to read our findings in light of [[AMS02](https://python-advanced.quantecon.org/zreferences.html#id28)] is that, relative
+to the number of signals agents observe,  Townsend’s
+section 8 model  has too few  random shocks  to get higher order beliefs to
+play a role.
 
