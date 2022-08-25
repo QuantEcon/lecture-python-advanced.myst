@@ -685,7 +685,7 @@ Numerical routines would in this case use the alternative form $R \hat \beta = Q
 ## Exercises
 
 ```{exercise-start}
-:label: ex1
+:label: op_ex1
 ```
 
 Show that, for any linear subspace $S \subset \mathbb R^n$,  $S \cap S^{\perp} = \{0\}$.
@@ -693,7 +693,7 @@ Show that, for any linear subspace $S \subset \mathbb R^n$,  $S \cap S^{\perp} =
 ```{exercise-end}
 ```
 
-```{solution-start} ex1
+```{solution-start} op_ex1
 :class: dropdown
 ```
 If $x \in S$ and $x \in S^\perp$, then we have in particular
@@ -703,7 +703,7 @@ that $\langle x, x \rangle = 0$, but then $x = 0$.
 ```
 
 ```{exercise-start}
-:label: ex2
+:label: op_ex2
 ```
 Let $P = X (X' X)^{-1} X'$ and let $M = I - P$.  Show that
 $P$ and $M$ are both idempotent and symmetric.  Can you give any
@@ -712,7 +712,7 @@ intuition as to why they should be idempotent?
 ```{exercise-end}
 ```
 
-```{solution-start} ex2
+```{solution-start} op_ex2
 :class: dropdown
 ```
 
@@ -729,7 +729,7 @@ already the closest point in the subspace to itself).
 
 
 ```{exercise-start}
-:label: ex3
+:label: op_ex3
 ```
 
 Using Gram-Schmidt orthogonalization, produce a linear projection of $y$ onto the column space of $X$ and verify this using the projection matrix $P := X (X' X)^{-1} X'$ and also using QR decomposition, where:
@@ -765,7 +765,7 @@ $$
 ```
 
 
-```{solution-start} ex3
+```{solution-start} op_ex3
 :class: dropdown
 ```
 
