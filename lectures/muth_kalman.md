@@ -237,10 +237,11 @@ simulate it
 # stacking trick above
 Af = np.array([[ 1,      0,        0],
                [K1, 1 - K1, K1 * σ_y],
-               [ 0,      0,        0]])
+               [ 0,      0,        0]],dtype=object)
 Cf = np.array([[σ_x,        0],
                [  0, K1 * σ_y],
-               [  0,        1]])
+               [  0,        1]],
+               dtype=object)
 Gf = np.array([[1,  0, σ_y],
                [1, -1, σ_y]])
 
