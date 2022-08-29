@@ -236,12 +236,11 @@ simulate it
 # Create grand state-space for y_t, a_t as observed vars -- Use
 # stacking trick above
 Af = np.array([[ 1,      0,        0],
-               [K1, 1 - K1, K1 * σ_y],
-               [ 0,      0,        0]],dtype=object)
+               [K1[0][0], 1 - K1[0][0], K1[0][0] * σ_y],
+               [ 0,      0,        0]])
 Cf = np.array([[σ_x,        0],
-               [  0, K1 * σ_y],
-               [  0,        1]],
-               dtype=object)
+               [  0, K1[0][0] * σ_y],
+               [  0,        1]])
 Gf = np.array([[1,  0, σ_y],
                [1, -1, σ_y]])
 
