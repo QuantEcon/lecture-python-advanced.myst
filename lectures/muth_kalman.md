@@ -233,13 +233,16 @@ With this tool at our disposal, let’s form the composite system and
 simulate it
 
 ```{code-cell} python3
+# Extract integer K1 from the nested array
+K1 = K1[0][0]
+
 # Create grand state-space for y_t, a_t as observed vars -- Use
 # stacking trick above
 Af = np.array([[ 1,      0,        0],
-               [K1[0][0], 1 - K1[0][0], K1[0][0] * σ_y],
+               [K1, 1 - K1, K1 * σ_y],
                [ 0,      0,        0]])
 Cf = np.array([[σ_x,        0],
-               [  0, K1[0][0] * σ_y],
+               [  0, K1 * σ_y],
                [  0,        1]])
 Gf = np.array([[1,  0, σ_y],
                [1, -1, σ_y]])
