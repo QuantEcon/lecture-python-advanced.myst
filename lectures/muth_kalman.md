@@ -233,7 +233,7 @@ With this tool at our disposal, let’s form the composite system and
 simulate it
 
 ```{code-cell} python3
-# Extract integer K1 from the nested array
+# Extract the scalar K1 from the nested array
 K1 = K1[0][0]
 
 # Create grand state-space for y_t, a_t as observed vars -- Use
