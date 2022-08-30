@@ -176,6 +176,9 @@ kmuth = Kalman(ss, x_hat_0, Σ_0)
 # representation
 S1, K1 = kmuth.stationary_values()
 
+# Extract scalars from nested arrays
+S1, K1 = S1.item(), K1.item()
+
 # Form innovation representation state-space
 Ak, Ck, Gk, Hk = A, K1, G, 1
 
