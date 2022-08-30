@@ -176,6 +176,9 @@ kmuth = Kalman(ss, x_hat_0, Σ_0)
 # representation
 S1, K1 = kmuth.stationary_values()
 
+# Extract scalars from the nested array
+S1, K1 = S1.item(), K1.item()
+
 # Form innovation representation state-space
 Ak, Ck, Gk, Hk = A, K1, G, 1
 
@@ -233,9 +236,6 @@ With this tool at our disposal, let’s form the composite system and
 simulate it
 
 ```{code-cell} python3
-# Extract the scalar K1 from the nested array
-K1 = K1[0][0]
-
 # Create grand state-space for y_t, a_t as observed vars -- Use
 # stacking trick above
 Af = np.array([[ 1,      0,        0],
