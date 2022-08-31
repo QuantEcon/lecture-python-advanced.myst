@@ -321,7 +321,7 @@ By the definition of greedy policies given above, this means that
 $$
 \sigma^*(s) \in \operatorname*{arg\,max}_{a \in A(s)}
     \left\{
-    r(s, a) + \beta \sum_{s' \in S} v^*(s') Q(s, \sigma(s), s')
+    r(s, a) + \beta \sum_{s' \in S} v^*(s') Q(s, a, s')
     \right\}
 \qquad (s \in S)
 $$

@@ -684,19 +684,56 @@ Numerical routines would in this case use the alternative form $R \hat \beta = Q
 
 ## Exercises
 
-### Exercise 1
+```{exercise-start}
+:label: op_ex1
+```
 
 Show that, for any linear subspace $S \subset \mathbb R^n$,  $S \cap S^{\perp} = \{0\}$.
 
-### Exercise 2
+```{exercise-end}
+```
 
+```{solution-start} op_ex1
+:class: dropdown
+```
+If $x \in S$ and $x \in S^\perp$, then we have in particular
+that $\langle x, x \rangle = 0$, but then $x = 0$.
+
+```{solution-end}
+```
+
+```{exercise-start}
+:label: op_ex2
+```
 Let $P = X (X' X)^{-1} X'$ and let $M = I - P$.  Show that
 $P$ and $M$ are both idempotent and symmetric.  Can you give any
 intuition as to why they should be idempotent?
 
-### Exercise 3
+```{exercise-end}
+```
+
+```{solution-start} op_ex2
+:class: dropdown
+```
+
+Symmetry and idempotence of $M$ and $P$ can be established
+using standard rules for matrix algebra. The intuition behind
+idempotence of $M$ and $P$ is that both are orthogonal
+projections. After a point is projected into a given subspace, applying
+the projection again makes no difference (A point inside the subspace
+is not shifted by orthogonal projection onto that space because it is
+already the closest point in the subspace to itself).
+
+```{solution-end}
+```
+
+
+```{exercise-start}
+:label: op_ex3
+```
 
 Using Gram-Schmidt orthogonalization, produce a linear projection of $y$ onto the column space of $X$ and verify this using the projection matrix $P := X (X' X)^{-1} X'$ and also using QR decomposition, where:
+
 
 $$
 y :=
@@ -723,24 +760,14 @@ X :=
 \right)
 $$
 
-## Solutions
 
-### Exercise 1
+```{exercise-end}
+```
 
-If $x \in S$ and $x \in S^\perp$, then we have in particular
-that $\langle x, x \rangle = 0$, but then $x = 0$.
 
-### Exercise 2
-
-Symmetry and idempotence of $M$ and $P$ can be established
-using standard rules for matrix algebra. The intuition behind
-idempotence of $M$ and $P$ is that both are orthogonal
-projections. After a point is projected into a given subspace, applying
-the projection again makes no difference. (A point inside the subspace
-is not shifted by orthogonal projection onto that space because it is
-already the closest point in the subspace to itself.).
-
-### Exercise 3
+```{solution-start} op_ex3
+:class: dropdown
+```
 
 Here's a function that computes the orthonormal vectors using the GS
 algorithm given in the lecture
@@ -831,4 +858,9 @@ Py3
 ```
 
 Again, we obtain the same answer.
+
+```{solution-end}
+```
+
+
 
