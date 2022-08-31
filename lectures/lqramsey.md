@@ -981,7 +981,9 @@ See the original [manuscript](https://lectures.quantecon.org/_downloads/firenze.
 ## Exercises
 
 (lqramsey_ex1)=
-### Exercise 1
+```{exercise-start}
+:label: lq_ex1
+```
 
 Modify the VAR example {ref}`given above <lq_cc>`, setting
 
@@ -993,9 +995,12 @@ with $\rho = 0.95$ and $C_g = 0.7 \sqrt{1 - \rho^2}$.
 
 Produce the corresponding figures.
 
-## Solutions
+```{exercise-end}
+```
 
-### Exercise 1
+```{solution-start} lq_ex1
+:class: dropdown
+```
 
 ```{code-cell} python3
 # == Parameters == #
@@ -1025,5 +1030,8 @@ gen_fig_1(path)
 
 ```{code-cell} python3
 gen_fig_2(path)
+```
+
+```{solution-end}
 ```
 
