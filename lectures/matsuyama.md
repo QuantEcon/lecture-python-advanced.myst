@@ -728,12 +728,19 @@ Here's one snapshot from the interactive figure
 
 ## Exercises
 
-### Exercise 1
+```{exercise-start}
+:label: matsuyama_ex1
+```
 
 Replicate the figure {ref}`shown above <matsrep>` by coloring initial conditions according to whether or not synchronization occurs from those conditions.
 
-## Solutions
+```{exercise-end}
+```
 
+
+```{solution-start} matsuyama_ex1
+:class: dropdown
+```
 ```{code-cell} python3
 def plot_attraction_basis(s1=0.5, θ=2.5, δ=0.7, ρ=0.2, npts=250, ax=None):
     if ax is None:
@@ -783,8 +790,6 @@ fig.suptitle("Synchronized versus Asynchronized 2-cycles",
 plt.show()
 ```
 
-### Interactive Version
-
 Additionally, instead of just seeing 4 plots at once, we might want to
 manually be able to change $\rho$ and see how it affects the plot
 in real-time. Below we use an interactive plot to do this.
@@ -816,4 +821,5 @@ fig = interact(interact_attraction_basis,
                maxiter=(50, 5000, 50),
                npts=(25, 750, 25))
 ```
-
+```{solution-end}
+```
