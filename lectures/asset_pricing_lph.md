@@ -702,7 +702,7 @@ Please check the **condition number** of a key matrix that must be inverted to d
 :class: dropdown
 ```
 
-The system of two linear equations:
+The system of two linear equations is shown below:
 
 
 $$
