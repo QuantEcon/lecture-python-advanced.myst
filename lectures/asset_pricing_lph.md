@@ -705,10 +705,10 @@ Please check the **condition number** of a key matrix that must be inverted to d
 The system of two linear equations:
 
 
-\begin{align}
+$\begin{align}
 a ((E(R^f) + \xi) + b ((E(R^f) + \xi)^2 + \lambda^2 + \sigma_f^2) & =1 \cr
 a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) & = 1 
-\end{align}
+\end{align}$
 
 
 ```{code-cell} ipython3
