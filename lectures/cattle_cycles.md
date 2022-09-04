@@ -270,8 +270,8 @@ c2 = np.array([[0, 0,  0],
                [0, 1,  0],
                [0, 0, 15]])
 
-πh = πh.item()
-ub = np.array([[πh * a0, 0, 0, πh]])
+πh_scalar = πh.item()
+ub = np.array([[πh_scalar * a0, 0, 0, πh_scalar]])
 uh = np.array([[50, 1, 0, 0]])
 um = np.array([[100, 0, 1, 0]])
 ud = np.vstack(([0, 0, 0, 0],
