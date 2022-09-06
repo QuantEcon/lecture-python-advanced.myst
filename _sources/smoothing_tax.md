@@ -521,7 +521,10 @@ Thus, this is an example in which
 We recommend plugging the quantities computed above into the government
 budget constraints in the two Markov states and staring.
 
-*Exercise:* try changing the Markov transition matrix so that
+```{exercise-start}
+:label: st_ex1
+```
+Try changing the Markov transition matrix so that
 
 $$
 P = \begin{bmatrix}
@@ -533,6 +536,9 @@ $$
 Also, start the system in Markov state $2$ (war) with initial
 government assets $- 10$, so that the government starts the
 war in debt and $b_2 = -10$.
+
+```{exercise-end}
+```
 
 ## More Finite Markov Chain Tax-Smoothing Examples
 

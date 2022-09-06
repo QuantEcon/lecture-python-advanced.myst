@@ -464,7 +464,9 @@ def simple_ols(X, Y, constant=False):
     return β_hat, σ_hat
 ```
 
-### Exercise 1
+```{exercise-start}
+:label: apl_ex1
+```
 
 Look at the equation, 
 
@@ -474,11 +476,60 @@ $$
 
 Verify that this equation is a regression equation.
 
-### Exercise 2
+```{exercise-end}
+```
+
+```{solution-start} apl_ex1
+:class: dropdown
+```
+
+To verify that it is a **regression equation** we must show that the residual is orthogonal to the regressor.
+
+Our assumptions about mutual orthogonality imply that
+
+$$
+E\left[\epsilon_{i,t}\right]=0,\quad E\left[\epsilon_{i,t}u_{t}\right]=0
+$$
+
+It follows that
+
+$$
+\begin{aligned}
+E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&=E\left[\sigma_{i}\epsilon_{i,t}\left(\xi+\lambda u_{t}\right)\right] \\
+	&=\sigma_{i}\xi E\left[\epsilon_{i,t}\right]+\sigma_{i}\lambda E\left[\epsilon_{i,t}u_{t}\right] \\
+	&=0
+\end{aligned}
+$$
+
+```{solution-end}
+```
+
+
+```{exercise-start}
+:label: apl_ex2
+```
 
 Give a formula for the regression coefficient $\beta_{i, R^m}$.
 
-### Exercise 3
+```{exercise-end}
+```
+
+```{solution-start} apl_ex2
+:class: dropdown
+```
+
+The regression coefficient $\beta_{i, R^m}$ is
+
+$$
+\beta_{i,R^{m}}=\frac{Cov\left(R_{t}^{i}-R^{f},R_{t}^{m}-R^{f}\right)}{Var\left(R_{t}^{m}-R^{f}\right)}
+$$
+
+```{solution-end}
+```
+
+```{exercise-start}
+:label: apl_ex3
+```
 
 As in many sciences, it is useful to distinguish a  **direct problem** from  an **inverse problem**.
 
@@ -522,51 +573,12 @@ E[(a + b R_t^m) R^m_t)] &= 1 \\
 E[(a + b R_t^m) R^f_t)] &= 1
 \end{align*}
 
-### Exercise 4
+```{exercise-end}
+```
 
-Using the equations above, find a system of two **linear** equations that you can solve for $a$ and $b$ as functions of the parameters $(\lambda, \xi, E[R_f])$.
-
-Write a function that can solve these equations.
-
-Please check the **condition number** of a key matrix that must be inverted to determine a, b
-
-### Exercise 5
-
-Using the estimates of the parameters that you generated above, compute the implied stochastic discount factor.
-
-
-
-## Solutions 
-
-### Solution to Exercise 1
-
-To verify that it is a **regression equation** we must show that the residual is orthogonal to the regressor.
-
-Our assumptions about mutual orthogonality imply that
-
-$$
-E\left[\epsilon_{i,t}\right]=0,\quad E\left[\epsilon_{i,t}u_{t}\right]=0
-$$
-
-It follows that
-
-$$
-\begin{aligned}
-E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&=E\left[\sigma_{i}\epsilon_{i,t}\left(\xi+\lambda u_{t}\right)\right] \\
-	&=\sigma_{i}\xi E\left[\epsilon_{i,t}\right]+\sigma_{i}\lambda E\left[\epsilon_{i,t}u_{t}\right] \\
-	&=0
-\end{aligned}
-$$
-
-### Solution to Exercise 2
-
-The regression coefficient $\beta_{i, R^m}$ is
-
-$$
-\beta_{i,R^{m}}=\frac{Cov\left(R_{t}^{i}-R^{f},R_{t}^{m}-R^{f}\right)}{Var\left(R_{t}^{m}-R^{f}\right)}
-$$
-
-### Solution to Exercise 3
+```{solution-start} apl_ex3
+:class: dropdown
+```
 
 **Direct Problem:**
 
@@ -670,14 +682,36 @@ for i in range(N):
 
 Q: How close did your estimates come to the parameters we specified?
 
+```{solution-end}
+```
+
+```{exercise-start}
+:label: apl_ex4
+```
+
+Using the equations above, find a system of two **linear** equations that you can solve for $a$ and $b$ as functions of the parameters $(\lambda, \xi, E[R_f])$.
+
+Write a function that can solve these equations.
+
+Please check the **condition number** of a key matrix that must be inverted to determine a, b
+
+```{exercise-end}
+```
+
+```{solution-start} apl_ex4
+:class: dropdown
+```
+
+The system of two linear equations is shown below:
 
 
-### Solution to Exercise 4
-
-\begin{align}
+$$
+\begin{aligned}
 a ((E(R^f) + \xi) + b ((E(R^f) + \xi)^2 + \lambda^2 + \sigma_f^2) & =1 \cr
 a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) & = 1 
-\end{align}
+\end{aligned}
+$$
+
 
 ```{code-cell} ipython3
 # Code here
@@ -705,7 +739,21 @@ a, b, condM = solve_ab(ERf, σf, λ, ξ)
 a, b, condM
 ```
 
-### Solution to Exercise 5
+```{solution-end}
+```
+
+```{exercise-start}
+:label: apl_ex5
+```
+
+Using the estimates of the parameters that you generated above, compute the implied stochastic discount factor.
+
+```{exercise-end}
+```
+
+```{solution-start} apl_ex5
+:class: dropdown
+```
 
 Now let's pass $\hat{E}(R^f), \hat{\sigma}^f, \hat{\lambda}, \hat{\xi}$ to the function `solve_ab`.
 
@@ -715,4 +763,7 @@ a_hat, b_hat, M_hat = solve_ab(ERf_hat, σf_hat, λ_hat, ξ_hat)
 
 ```{code-cell} ipython3
 a_hat, b_hat, M_hat
+```
+
+```{solution-end}
 ```

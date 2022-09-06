@@ -935,7 +935,9 @@ and that the zeros of $\theta (z)$ are not inside the unit circle.
 
 ## Exercises
 
-### Exercise 1
+```{exercise-start}
+:label: cf_ex1
+```
 
 Let $Y_t = (1 - 2 L ) u_t$ where $u_t$ is a mean zero
 white noise with $\mathbb{E} u^2_t = 1$. Let
@@ -964,7 +966,13 @@ $$
 X_{t-j}
 $$
 
-### Exercise 2
+```{exercise-end}
+```
+
+```{exercise-start}
+:label: cf_ex2
+```
+
 
 **Multivariable Prediction:** Let $Y_t$ be an $(n\times 1)$
 vector stochastic process with moving average representation
@@ -1037,4 +1045,7 @@ $$
 \mathbb{\hat E} \left[X_{t+j} \mid X_t, X_{t-1}, \ldots\right]
     = \left[{C(L) \over L^J} \right]_+ C(L)^{-1}\, X_t
 $$
+
+```{exercise-end}
+```
 

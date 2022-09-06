@@ -470,7 +470,9 @@ of being closer to the true spectral density.
 ## Exercises
 
 (estspec_ex1)=
-### Exercise 1
+```{exercise-start}
+:label: est_ex1
+```
 
 Replicate {ref}`this figure <fig_window_smoothing>` (modulo randomness).
 
@@ -478,19 +480,12 @@ The model is as in equation {eq}`esp_arma` and there are 400 observations.
 
 For the smoothed periodogram, the window type is "hamming".
 
-(estspec_ex2)=
-### Exercise 2
+```{exercise-end}
+```
 
-Replicate {ref}`this figure <fig_ar_smoothed_periodogram>` (modulo randomness).
-
-The model is as in equation {eq}`estspec_ar_dgp`, with $\mu = 0$, $\phi = -0.9$
-and 150 observations in each time series.
-
-All periodograms are fit with the "hamming" window and window length of 65.
-
-## Solutions
-
-### Exercise 1
+```{solution-start} est_ex1
+:class: dropdown
+```
 
 ```{code-cell} python3
 ## Data
@@ -517,8 +512,28 @@ for i, wl in enumerate((15, 55, 175)):  # Window lengths
     ax[i].set_title(f'window length = {wl}')
 plt.show()
 ```
+```{solution-end}
+```
 
-### Exercise 2
+
+(estspec_ex2)=
+```{exercise-start}
+:label: est_ex2
+```
+
+Replicate {ref}`this figure <fig_ar_smoothed_periodogram>` (modulo randomness).
+
+The model is as in equation {eq}`estspec_ar_dgp`, with $\mu = 0$, $\phi = -0.9$
+and 150 observations in each time series.
+
+All periodograms are fit with the "hamming" window and window length of 65.
+
+```{exercise-end}
+```
+
+```{solution-start} est_ex2
+:class: dropdown
+```
 
 ```{code-cell} python3
 lp = ARMA(-0.9)
@@ -546,4 +561,5 @@ for i in range(3):
     ax[i].legend(loc='upper left')
 plt.show()
 ```
-
+```{solution-end}
+```

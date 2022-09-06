@@ -538,14 +538,18 @@ Exercise 1 asks you to replicate this figure.
 ## Exercises
 
 (lucas_asset_ex1)=
-### Exercise 1
+```{exercise-start}
+:label: lucas_ex1
+```
 
 Replicate {ref}`the figure <mass_lt_cb>` to show how discount factors affect prices.
 
-## Solutions
+```{exercise-end}
+```
 
-### Exercise 1
-
+```{solution-start} lucas_ex1
+:class: dropdown
+```
 ```{code-cell} python3
 fig, ax = plt.subplots(figsize=(10, 6))
 
@@ -560,4 +564,5 @@ ax.legend(loc='upper left')
 ax.set(xlabel='$y$', ylabel='price', xlim=(min(grid), max(grid)))
 plt.show()
 ```
-
+```{solution-end}
+```

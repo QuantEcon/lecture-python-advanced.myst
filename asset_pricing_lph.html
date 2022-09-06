@@ -186,65 +186,6 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal nav-link" href="#exercises">
    35.7. Exercises
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-1">
-     35.7.1. Exercise 1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-2">
-     35.7.2. Exercise 2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-3">
-     35.7.3. Exercise 3
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-4">
-     35.7.4. Exercise 4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-5">
-     35.7.5. Exercise 5
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#solutions">
-   35.8. Solutions
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-to-exercise-1">
-     35.8.1. Solution to Exercise 1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-to-exercise-2">
-     35.8.2. Solution to Exercise 2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-to-exercise-3">
-     35.8.3. Solution to Exercise 3
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-to-exercise-4">
-     35.8.4. Solution to Exercise 4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#solution-to-exercise-5">
-     35.8.5. Solution to Exercise 5
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -305,7 +246,6 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p><a class="reference internal" href="#mean-variance-frontier" id="id17">Mean-Variance Frontier</a></p></li>
 <li><p><a class="reference internal" href="#empirical-implementations" id="id18">Empirical Implementations</a></p></li>
 <li><p><a class="reference internal" href="#exercises" id="id19">Exercises</a></p></li>
-<li><p><a class="reference internal" href="#solutions" id="id20">Solutions</a></p></li>
 </ul>
 </li>
 </ul>
@@ -655,8 +595,10 @@ least squares regressions that let us watch aspects of the theory at work.</p>
 </div>
 </div>
 </div>
-<div class="section" id="exercise-1">
-<h3><span class="section-number">35.7.1. </span>Exercise 1<a class="headerlink" href="#exercise-1" title="Permalink to this headline">¶</a></h3>
+<div class="exercise admonition" id="apl_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 35.1 </span></p>
+<div class="section" id="exercise-content">
 <p>Look at the equation,</p>
 <div class="math notranslate nohighlight">
 \[
@@ -664,12 +606,50 @@ R^i_t - R^f = \beta_{i, R^m} (R^m_t - R^f) + \sigma_i \varepsilon_{i, t}.
 \]</div>
 <p>Verify that this equation is a regression equation.</p>
 </div>
-<div class="section" id="exercise-2">
-<h3><span class="section-number">35.7.2. </span>Exercise 2<a class="headerlink" href="#exercise-2" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="solution dropdown admonition" id="asset_pricing_lph-solution-1">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#apl_ex1"> Exercise 35.1</a></p>
+<div class="section" id="s">
+<span id="o"></span><span id="l"></span><span id="u"></span><span id="t"></span><span id="i"></span><span id="o"></span><span id="n"></span><span id="-"></span><span id="c"></span><span id="o"></span><span id="n"></span><span id="t"></span><span id="e"></span><span id="n"></span><span id="t"></span><p>To verify that it is a <strong>regression equation</strong> we must show that the residual is orthogonal to the regressor.</p>
+<p>Our assumptions about mutual orthogonality imply that</p>
+<div class="math notranslate nohighlight">
+\[
+E\left[\epsilon_{i,t}\right]=0,\quad E\left[\epsilon_{i,t}u_{t}\right]=0
+\]</div>
+<p>It follows that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&amp;=E\left[\sigma_{i}\epsilon_{i,t}\left(\xi+\lambda u_{t}\right)\right] \\
+	&amp;=\sigma_{i}\xi E\left[\epsilon_{i,t}\right]+\sigma_{i}\lambda E\left[\epsilon_{i,t}u_{t}\right] \\
+	&amp;=0
+\end{aligned}
+\end{split}\]</div>
+</div>
+</div>
+<div class="exercise admonition" id="apl_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 35.2 </span></p>
+<div class="section" id="exercise-content">
 <p>Give a formula for the regression coefficient <span class="math notranslate nohighlight">\(\beta_{i, R^m}\)</span>.</p>
 </div>
-<div class="section" id="exercise-3">
-<h3><span class="section-number">35.7.3. </span>Exercise 3<a class="headerlink" href="#exercise-3" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="solution dropdown admonition" id="asset_pricing_lph-solution-3">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#apl_ex2"> Exercise 35.2</a></p>
+<div class="section" id="s">
+<span id="o"></span><span id="l"></span><span id="u"></span><span id="t"></span><span id="i"></span><span id="o"></span><span id="n"></span><span id="-"></span><span id="c"></span><span id="o"></span><span id="n"></span><span id="t"></span><span id="e"></span><span id="n"></span><span id="t"></span><p>The regression coefficient <span class="math notranslate nohighlight">\(\beta_{i, R^m}\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+\beta_{i,R^{m}}=\frac{Cov\left(R_{t}^{i}-R^{f},R_{t}^{m}-R^{f}\right)}{Var\left(R_{t}^{m}-R^{f}\right)}
+\]</div>
+</div>
+</div>
+<div class="exercise admonition" id="apl_ex3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 35.3 </span></p>
+<div class="section" id="exercise-content">
 <p>As in many sciences, it is useful to distinguish a  <strong>direct problem</strong> from  an <strong>inverse problem</strong>.</p>
 <ul class="simple">
 <li><p>A direct problem involves simulating a particular model with known parameter values.</p></li>
@@ -708,48 +688,12 @@ E[(a + b R_t^m) R^m_t)] &amp;= 1 \\
 E[(a + b R_t^m) R^f_t)] &amp;= 1
 \end{align*}\]</div>
 </div>
-<div class="section" id="exercise-4">
-<h3><span class="section-number">35.7.4. </span>Exercise 4<a class="headerlink" href="#exercise-4" title="Permalink to this headline">¶</a></h3>
-<p>Using the equations above, find a system of two <strong>linear</strong> equations that you can solve for <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> as functions of the parameters <span class="math notranslate nohighlight">\((\lambda, \xi, E[R_f])\)</span>.</p>
-<p>Write a function that can solve these equations.</p>
-<p>Please check the <strong>condition number</strong> of a key matrix that must be inverted to determine a, b</p>
 </div>
-<div class="section" id="exercise-5">
-<h3><span class="section-number">35.7.5. </span>Exercise 5<a class="headerlink" href="#exercise-5" title="Permalink to this headline">¶</a></h3>
-<p>Using the estimates of the parameters that you generated above, compute the implied stochastic discount factor.</p>
-</div>
-</div>
-<div class="section" id="solutions">
-<h2><a class="toc-backref" href="#id20"><span class="section-number">35.8. </span>Solutions</a><a class="headerlink" href="#solutions" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="solution-to-exercise-1">
-<h3><span class="section-number">35.8.1. </span>Solution to Exercise 1<a class="headerlink" href="#solution-to-exercise-1" title="Permalink to this headline">¶</a></h3>
-<p>To verify that it is a <strong>regression equation</strong> we must show that the residual is orthogonal to the regressor.</p>
-<p>Our assumptions about mutual orthogonality imply that</p>
-<div class="math notranslate nohighlight">
-\[
-E\left[\epsilon_{i,t}\right]=0,\quad E\left[\epsilon_{i,t}u_{t}\right]=0
-\]</div>
-<p>It follows that</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{aligned}
-E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&amp;=E\left[\sigma_{i}\epsilon_{i,t}\left(\xi+\lambda u_{t}\right)\right] \\
-	&amp;=\sigma_{i}\xi E\left[\epsilon_{i,t}\right]+\sigma_{i}\lambda E\left[\epsilon_{i,t}u_{t}\right] \\
-	&amp;=0
-\end{aligned}
-\end{split}\]</div>
-</div>
-<div class="section" id="solution-to-exercise-2">
-<h3><span class="section-number">35.8.2. </span>Solution to Exercise 2<a class="headerlink" href="#solution-to-exercise-2" title="Permalink to this headline">¶</a></h3>
-<p>The regression coefficient <span class="math notranslate nohighlight">\(\beta_{i, R^m}\)</span> is</p>
-<div class="math notranslate nohighlight">
-\[
-\beta_{i,R^{m}}=\frac{Cov\left(R_{t}^{i}-R^{f},R_{t}^{m}-R^{f}\right)}{Var\left(R_{t}^{m}-R^{f}\right)}
-\]</div>
-</div>
-<div class="section" id="solution-to-exercise-3">
-<h3><span class="section-number">35.8.3. </span>Solution to Exercise 3<a class="headerlink" href="#solution-to-exercise-3" title="Permalink to this headline">¶</a></h3>
-<p><strong>Direct Problem:</strong></p>
+<div class="solution dropdown admonition" id="asset_pricing_lph-solution-5">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#apl_ex3"> Exercise 35.3</a></p>
+<div class="section" id="s">
+<span id="o"></span><span id="l"></span><span id="u"></span><span id="t"></span><span id="i"></span><span id="o"></span><span id="n"></span><span id="-"></span><span id="c"></span><span id="o"></span><span id="n"></span><span id="t"></span><span id="e"></span><span id="n"></span><span id="t"></span><p><strong>Direct Problem:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code for the direct problem</span>
@@ -829,7 +773,7 @@ E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&amp;=E\left[\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.000000000000003e-02, 3.123283175179055e-17)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.02000000000000003, 3.123283175179055e-17)
 </pre></div>
 </div>
 </div>
@@ -864,7 +808,7 @@ E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&amp;=E\left[\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.05780980693206826, 0.07880549196214993)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.05978760640029006, 0.07942607731457323)
 </pre></div>
 </div>
 </div>
@@ -902,8 +846,8 @@ E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&amp;=E\left[\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.20098988, 0.40182272, 0.59838763, 0.78891851, 0.98925252]),
- array([0.03906006, 0.04036143, 0.04069495, 0.04093843, 0.04075942]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.18534211, 0.40595795, 0.59667281, 0.79691297, 1.00538663]),
+ array([0.04029149, 0.03930841, 0.03883639, 0.04049103, 0.04037741]))
 </pre></div>
 </div>
 </div>
@@ -922,13 +866,28 @@ E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&amp;=E\left[\
 </div>
 <p>Q: How close did your estimates come to the parameters we specified?</p>
 </div>
-<div class="section" id="solution-to-exercise-4">
-<h3><span class="section-number">35.8.4. </span>Solution to Exercise 4<a class="headerlink" href="#solution-to-exercise-4" title="Permalink to this headline">¶</a></h3>
-<div class="amsmath math notranslate nohighlight" id="equation-30b5c273-fe6b-45e2-9839-cbd6e7477cbb">
-<span class="eqno">(35.8)<a class="headerlink" href="#equation-30b5c273-fe6b-45e2-9839-cbd6e7477cbb" title="Permalink to this equation">¶</a></span>\[\begin{align}
+</div>
+<div class="exercise admonition" id="apl_ex4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 35.4 </span></p>
+<div class="section" id="exercise-content">
+<p>Using the equations above, find a system of two <strong>linear</strong> equations that you can solve for <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> as functions of the parameters <span class="math notranslate nohighlight">\((\lambda, \xi, E[R_f])\)</span>.</p>
+<p>Write a function that can solve these equations.</p>
+<p>Please check the <strong>condition number</strong> of a key matrix that must be inverted to determine a, b</p>
+</div>
+</div>
+<div class="solution dropdown admonition" id="asset_pricing_lph-solution-7">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#apl_ex4"> Exercise 35.4</a></p>
+<div class="section" id="s">
+<span id="o"></span><span id="l"></span><span id="u"></span><span id="t"></span><span id="i"></span><span id="o"></span><span id="n"></span><span id="-"></span><span id="c"></span><span id="o"></span><span id="n"></span><span id="t"></span><span id="e"></span><span id="n"></span><span id="t"></span><p>The system of two linear equations is shown below:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
 a ((E(R^f) + \xi) + b ((E(R^f) + \xi)^2 + \lambda^2 + \sigma_f^2) &amp; =1 \cr
 a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1 
-\end{align}\]</div>
+\end{aligned}
+\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code here</span>
@@ -969,9 +928,19 @@ a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1
 </div>
 </div>
 </div>
-<div class="section" id="solution-to-exercise-5">
-<h3><span class="section-number">35.8.5. </span>Solution to Exercise 5<a class="headerlink" href="#solution-to-exercise-5" title="Permalink to this headline">¶</a></h3>
-<p>Now let’s pass <span class="math notranslate nohighlight">\(\hat{E}(R^f), \hat{\sigma}^f, \hat{\lambda}, \hat{\xi}\)</span> to the function <code class="docutils literal notranslate"><span class="pre">solve_ab</span></code>.</p>
+</div>
+<div class="exercise admonition" id="apl_ex5">
+
+<p class="admonition-title"><span class="caption-number">Exercise 35.5 </span></p>
+<div class="section" id="exercise-content">
+<p>Using the estimates of the parameters that you generated above, compute the implied stochastic discount factor.</p>
+</div>
+</div>
+<div class="solution dropdown admonition" id="asset_pricing_lph-solution-9">
+
+<p class="admonition-title">Solution to<a class="reference internal" href="#apl_ex5"> Exercise 35.5</a></p>
+<div class="section" id="s">
+<span id="o"></span><span id="l"></span><span id="u"></span><span id="t"></span><span id="i"></span><span id="o"></span><span id="n"></span><span id="-"></span><span id="c"></span><span id="o"></span><span id="n"></span><span id="t"></span><span id="e"></span><span id="n"></span><span id="t"></span><p>Now let’s pass <span class="math notranslate nohighlight">\(\hat{E}(R^f), \hat{\sigma}^f, \hat{\lambda}, \hat{\xi}\)</span> to the function <code class="docutils literal notranslate"><span class="pre">solve_ab</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_hat</span><span class="p">,</span> <span class="n">b_hat</span><span class="p">,</span> <span class="n">M_hat</span> <span class="o">=</span> <span class="n">solve_ab</span><span class="p">(</span><span class="n">ERf_hat</span><span class="p">,</span> <span class="n">σf_hat</span><span class="p">,</span> <span class="n">λ_hat</span><span class="p">,</span> <span class="n">ξ_hat</span><span class="p">)</span>
@@ -986,8 +955,9 @@ a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(86.21536710429, -465.43448097625827, 53.176725206966125)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(87.80858110524883, -473.86533837805973, 54.90174442261084)
 </pre></div>
+</div>
 </div>
 </div>
 </div>
@@ -1422,6 +1392,8 @@ a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1
                 <select id="launcher-public-input">
                 
                     <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/asset_pricing_lph.ipynb">BinderHub</option>
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/master/asset_pricing_lph.ipynb">Colab</option>
                 
                 </select>
                 <i class="fas fa-check-circle"></i>
