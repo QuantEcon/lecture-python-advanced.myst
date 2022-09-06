@@ -616,9 +616,15 @@ $$
 \Pi(\tilde s| s_-) u_c(\tilde s)}}
 $$
 
-**Exercise**: Please verify that $\check \Pi(s|s_-)$ is a valid Markov
+```{exercise-start}
+:label: amss_ex1
+```
+Please verify that $\check \Pi(s|s_-)$ is a valid Markov
 transition density, i.e., that its elements are all non-negative and
 that for each $s_-$, the sum over $s$ equals unity.
+
+```{exercise-end}
+```
 
 ### Absence of State Variable Degeneracy
 

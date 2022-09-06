@@ -575,27 +575,22 @@ Note that downstream firms choose to be larger, a point we return to below.
 ## Exercises
 
 (lucas_asset_exer1)=
-### Exercise 1
-
+```{exercise-start}
+:label: coa_ex1
+```
 The number of firms is endogenously determined by the primitives.
 
 What do you think will happen in terms of the number of firms as $\delta$ increases?  Why?
 
 Check your intuition by computing the number of firms at delta in (1.01, 1.05, 1.1).
 
-### Exercise 2
+```{exercise-end}
+```
 
-The **value added** of firm $i$ is $v_i := p^*(t_{i-1}) - p^*(t_i)$.
-
-One of the interesting predictions of the model is that value added is increasing with downstreamness, as are several other measures of firm size.
-
-Can you give any intution?
-
-Try to verify this phenomenon (value added increasing with downstreamness) using the code above.
-
-## Solutions
-
-### Exercise 1
+```{solution-start}  coa_ex1
+:class: dropdown
+```
+Here is one solution 
 
 ```{code-cell} python3
 for delta in (1.01, 1.05, 1.1):
@@ -606,8 +601,26 @@ for delta in (1.01, 1.05, 1.1):
    num_firms = len(transaction_stages)
    print(f"When delta={delta} there are {num_firms} firms")
 ```
+```{solution-end}
+```
 
-### Exercise 2
+```{exercise-start}
+:label: coa_ex2
+```
+The **value added** of firm $i$ is $v_i := p^*(t_{i-1}) - p^*(t_i)$.
+
+One of the interesting predictions of the model is that value added is increasing with downstreamness, as are several other measures of firm size.
+
+Can you give any intution?
+
+Try to verify this phenomenon (value added increasing with downstreamness) using the code above.
+
+```{exercise-end}
+```
+
+```{solution-start}  coa_ex2
+:class: dropdown
+```
 
 Firm size increases with downstreamness because $p^*$, the equilibrium price function, is increasing and strictly convex.
 
@@ -640,3 +653,5 @@ ax.set_xticklabels(("downstream firms", "upstream firms"))
 plt.show()
 ```
 
+```{solution-end}
+```

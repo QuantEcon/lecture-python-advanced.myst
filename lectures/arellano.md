@@ -689,14 +689,21 @@ Periods of relative stability are followed by sharp spikes in the discount rate 
 ## Exercises
 
 (arellano_ex1)=
-### Exercise 1
+```{exercise-start}
+:label: arella_ex1
+```
 
 To the extent that you can, replicate the figures shown above
 
 * Use the parameter values listed as defaults in `Arellano_Economy`.
 * The time series will of course vary depending on the shock draws.
 
-## Solutions
+```{exercise-end}
+```
+
+```{solution-start} arella_ex1
+:class: dropdown
+```
 
 Compute the value function, policy and equilibrium prices
 
@@ -817,4 +824,6 @@ for ax, series, title in zip(axes, plot_series, titles):
     ax.set(title=title, xlabel="time")
 
 plt.show()
+```
+```{solution-end}
 ```

@@ -969,7 +969,9 @@ plot_simulation(γ=10)
 
 ## Exercises
 
-### Exercise 1
+```{exercise-start}
+:label: lu_ex1
+```
 
 Consider solving a discounted version $(\beta < 1)$ of problem
 {eq}`oneone`, as follows.
@@ -1008,7 +1010,12 @@ $$
 
 where $f_j = \tilde f_j \beta^{-j/2}, A_j = \tilde A_j$, and $\lambda_j = \tilde \lambda_j \beta^{-1/2}$.
 
-### Exercise 2
+```{exercise-end}
+```
+
+```{exercise-start}
+:label: lu_ex2
+```
 
 Solve the optimal control problem, maximize
 
@@ -1024,7 +1031,12 @@ Make sure that the boundary conditions {eq}`onefive` are satisfied.
 
 (Note: this problem differs from the problem in the text in one important way: instead of $h > 0$ in {eq}`oneone`, $h = 0$. This has an important influence on the solution.)
 
-### Exercise 3
+```{exercise-end}
+```
+
+```{exercise-start}
+:label: lu_ex3
+```
 
 Solve the infinite time-optimal control problem to maximize
 
@@ -1039,7 +1051,12 @@ $$
 y_t = 2y_{t-1} = 2^{t+1} y_{-1} \qquad t > 0
 $$
 
-### Exercise 4
+```{exercise-end}
+```
+
+```{exercise-start}
+:label: lu_ex4
+```
 
 Solve the infinite time problem, to maximize
 
@@ -1053,3 +1070,5 @@ is not optimal.
 
 Prove that the optimal solution is approximately $y_t = .5 y_{t-1}$.
 
+```{exercise-end}
+```
