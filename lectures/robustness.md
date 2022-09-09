@@ -165,7 +165,7 @@ For simplicity, we present ideas in the context of a class of problems with line
 
 To fit in with [our earlier lecture on LQ control](https://python-intro.quantecon.org/lqcontrol.html), we will treat loss minimization rather than value maximization.
 
-To begin, recall the [infinite horizon LQ problem](https://python.quantecon.org/lqcontrol.html#infinite-horizon), where an agent chooses a sequence of controls $\{u_t\}$ to minimize
+To begin, recall the [infinite horizon LQ problem](https://python.quantecon.org/lqcontrol.html#infinite-horizon), where an agent chooses a sequence of controls $\{u_t\}$ to minimize 
 
 ```{math}
 :label: rob_sih

@@ -292,7 +292,7 @@ asked the following question: If
 then what is the distribution of $X_{t+1}$?
 
 Letting $\psi_{t+1}$ denote the distribution of $X_{t+1}$, the
-answer [we gave](https://python-intro.quantecon.org/finite_markov.html#Marginal-Distributions) was that
+answer [we gave](https://python.quantecon.org/finite_markov.html#stationary-distributions) was that
 
 $$
 \psi_{t+1}[j] = \sum_{i \in S} P[i,j] \psi_t[i]
