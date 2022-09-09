@@ -283,7 +283,7 @@ $\sigma(x) = s f(x)$ is strictly positive for all $s$ as required)
 
 ### Distribution Dynamics
 
-In [this section](https://python-intro.quantecon.org/finite_markov.html#Marginal-Distributions) of our lecture on **finite** Markov chains, we
+In [this section](https://python.quantecon.org/finite_markov.html#marginal-distributions) of our lecture on **finite** Markov chains, we
 asked the following question: If
 
 1. $\{X_t\}$ is a Markov chain with stochastic matrix $P$
@@ -516,7 +516,7 @@ Notice that the sequence of densities shown in the figure seems to be
 converging --- more on this in just a moment.
 
 Another quick comment is that each of these distributions could be interpreted
-as a cross-sectional distribution (recall [this discussion](https://python-intro.quantecon.org/finite_markov.html#Example-2:-Cross-Sectional-Distributions)).
+as a cross-sectional distribution (recall [this discussion](https://python.quantecon.org/finite_markov.html#example-2-cross-sectional-distributions)).
 
 ## Beyond Densities
 
@@ -606,7 +606,7 @@ The general case is relatively similar --- references are given below.
 
 ### Theoretical Results
 
-Analogous to [the finite case](https://python-intro.quantecon.org/finite_markov.html#Stationary-Distributions), given a stochastic kernel $p$ and corresponding Markov operator as
+Analogous to [the finite case](https://python.quantecon.org/finite_markov.html#stationary-distributions), given a stochastic kernel $p$ and corresponding Markov operator as
 defined in {eq}`def_dmo`, a density $\psi^*$ on $S$ is called
 *stationary* for $P$ if it is a fixed point of the operator $P$.
 

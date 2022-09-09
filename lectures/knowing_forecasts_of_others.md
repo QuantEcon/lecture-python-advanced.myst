@@ -1595,7 +1595,7 @@ those forecasts are the same as their own, they know them.
 
 ### Further historical remarks
 
-Sargent [[Sar91](https://python-advanced.quantecon.org/zreferences.html#id26)] proposed a way to compute an equilibrium
+Sargent {cite}`sargent91_equilibrium` proposed a way to compute an equilibrium
 without making Townsend’s approximation.
 
 Extending the reasoning of [[Mut60](https://python-advanced.quantecon.org/zreferences.html#id110)], Sargent noticed that it is possible to
