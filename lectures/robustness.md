@@ -150,7 +150,7 @@ This will involve crafting a *skinnier* set at the cost of  a lower *level* (at 
 
 ### Inspiring Video
 
-If you want to understand more about why one serious quantitative researcher is interested in this approach, we recommend [Lars Peter Hansen's Nobel lecture](http://www.nobelprize.org/mediaplayer/index.php?id=1994).
+If you want to understand more about why one serious quantitative researcher is interested in this approach, we recommend [Lars Peter Hansen's Nobel lecture](https://www.nobelprize.org/prizes/economic-sciences/2013/hansen/lecture/).
 
 ### Other References
 
