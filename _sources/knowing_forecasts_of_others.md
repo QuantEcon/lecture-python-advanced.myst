@@ -1573,8 +1573,8 @@ it enlists the Kalman filter and invariant subspace methods for
 solving systems of Euler
 equations <sup><a href=#footnote1 id=footnote1-link>[5]</a></sup> .
 
-As [[Sin87](https://python-advanced.quantecon.org/zreferences.html#id27)],
-[[Kas00](https://python-advanced.quantecon.org/zreferences.html#id24)], and [[Sar91](https://python-advanced.quantecon.org/zreferences.html#id26)] also
+As {cite}`singleton87`,
+[[Kas00](https://python-advanced.quantecon.org/zreferences.html#id24)], and {cite}`sargent91_equilibrium` also
 found, the equilibrium is fully revealing: observed prices tell
 participants in industry $ i $ all of the information held by
 participants in market $ -i $ ($ -i $ means not $ i $).
@@ -1595,7 +1595,7 @@ those forecasts are the same as their own, they know them.
 
 ### Further historical remarks
 
-Sargent [[Sar91](https://python-advanced.quantecon.org/zreferences.html#id26)] proposed a way to compute an equilibrium
+Sargent {cite}`sargent91_equilibrium` proposed a way to compute an equilibrium
 without making Townsend’s approximation.
 
 Extending the reasoning of [[Mut60](https://python-advanced.quantecon.org/zreferences.html#id110)], Sargent noticed that it is possible to

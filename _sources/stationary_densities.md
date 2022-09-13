@@ -283,7 +283,7 @@ $\sigma(x) = s f(x)$ is strictly positive for all $s$ as required)
 
 ### Distribution Dynamics
 
-In [this section](https://python-intro.quantecon.org/finite_markov.html#Marginal-Distributions) of our lecture on **finite** Markov chains, we
+In [this section](https://python.quantecon.org/finite_markov.html#marginal-distributions) of our lecture on **finite** Markov chains, we
 asked the following question: If
 
 1. $\{X_t\}$ is a Markov chain with stochastic matrix $P$
@@ -292,7 +292,7 @@ asked the following question: If
 then what is the distribution of $X_{t+1}$?
 
 Letting $\psi_{t+1}$ denote the distribution of $X_{t+1}$, the
-answer [we gave](https://python-intro.quantecon.org/finite_markov.html#Marginal-Distributions) was that
+answer [we gave](https://python.quantecon.org/finite_markov.html#marginal-distributions) was that
 
 $$
 \psi_{t+1}[j] = \sum_{i \in S} P[i,j] \psi_t[i]
@@ -333,7 +333,7 @@ This operator is usually called the *Markov operator* corresponding to $p$
 Unlike most operators, we write $P$ to the right of its argument,
 instead of to the left (i.e., $\psi P$ instead of $P \psi$).
 This is a common convention, with the intention being to maintain the
-parallel with the finite case --- see [here](https://python-intro.quantecon.org/finite_markov.html#Marginal-Distributions)
+parallel with the finite case --- see [here](https://python.quantecon.org/finite_markov.html#marginal-distributions)
 ```
 
 With this notation, we can write {eq}`statd_fdd` more succinctly as $\psi_{t+1}(y) = (\psi_t P)(y)$ for all $y$, or, dropping the $y$ and letting "$=$" indicate equality of functions,
@@ -516,7 +516,7 @@ Notice that the sequence of densities shown in the figure seems to be
 converging --- more on this in just a moment.
 
 Another quick comment is that each of these distributions could be interpreted
-as a cross-sectional distribution (recall [this discussion](https://python-intro.quantecon.org/finite_markov.html#Example-2:-Cross-Sectional-Distributions)).
+as a cross-sectional distribution (recall [this discussion](https://python.quantecon.org/finite_markov.html#example-2-cross-sectional-distributions)).
 
 ## Beyond Densities
 
@@ -606,7 +606,7 @@ The general case is relatively similar --- references are given below.
 
 ### Theoretical Results
 
-Analogous to [the finite case](https://python-intro.quantecon.org/finite_markov.html#Stationary-Distributions), given a stochastic kernel $p$ and corresponding Markov operator as
+Analogous to [the finite case](https://python.quantecon.org/finite_markov.html#stationary-distributions), given a stochastic kernel $p$ and corresponding Markov operator as
 defined in {eq}`def_dmo`, a density $\psi^*$ on $S$ is called
 *stationary* for $P$ if it is a fixed point of the operator $P$.
 

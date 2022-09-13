@@ -272,7 +272,7 @@ permanent income model.
 The state vector in the LQ problem is
 $\begin{bmatrix} z_t \\ b_t \end{bmatrix}$.
 
-Consequently, the relevant elements of econ1.Sc are the same as in
+Consequently, the relevant elements of `econ1.Sc` are the same as in
 $-F$ occur when we apply other approaches to the same model in the lecture
 [Optimal Savings II: LQ Techniques](https://python-intro.quantecon.org/perm_income_cons.html) and [this Jupyter
 notebook](http://nbviewer.jupyter.org/github/QuantEcon/QuantEcon.notebooks/blob/master/permanent_income.ipynb).

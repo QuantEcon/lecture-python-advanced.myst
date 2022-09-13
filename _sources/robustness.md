@@ -150,7 +150,7 @@ This will involve crafting a *skinnier* set at the cost of  a lower *level* (at 
 
 ### Inspiring Video
 
-If you want to understand more about why one serious quantitative researcher is interested in this approach, we recommend [Lars Peter Hansen's Nobel lecture](http://www.nobelprize.org/mediaplayer/index.php?id=1994).
+If you want to understand more about why one serious quantitative researcher is interested in this approach, we recommend [Lars Peter Hansen's Nobel lecture](https://www.nobelprize.org/prizes/economic-sciences/2013/hansen/lecture/).
 
 ### Other References
 
@@ -165,7 +165,7 @@ For simplicity, we present ideas in the context of a class of problems with line
 
 To fit in with [our earlier lecture on LQ control](https://python-intro.quantecon.org/lqcontrol.html), we will treat loss minimization rather than value maximization.
 
-To begin, recall the [infinite horizon LQ problem](https://python-intro.quantecon.org/lqcontrol.html#Infinite-Horizon), where an agent chooses a sequence of controls $\{u_t\}$ to minimize
+To begin, recall the [infinite horizon LQ problem](https://python.quantecon.org/lqcontrol.html#infinite-horizon), where an agent chooses a sequence of controls $\{u_t\}$ to minimize 
 
 ```{math}
 :label: rob_sih
@@ -312,7 +312,7 @@ $$
 $$
 
 The operator $\mathcal B$ is the standard (i.e., non-robust) LQ Bellman operator, and $P = \mathcal B(P)$ is the standard matrix Riccati equation coming from the
-Bellman equation --- see [this discussion](https://python-intro.quantecon.org/lqcontrol.html#Infinite-Horizon).
+Bellman equation --- see [this discussion](https://python.quantecon.org/lqcontrol.html#infinite-horizon).
 
 Under some regularity conditions (see {cite}`HansenSargent2008`), the operator $\mathcal B \circ \mathcal D$
 has a unique positive definite fixed point, which we denote below by $\hat P$.
@@ -445,7 +445,7 @@ subject to {eq}`rob_lomf`.
 
 What's striking about this optimization problem is that it is once again an LQ discounted dynamic programming problem, with $\mathbf w = \{ w_t \}$ as the sequence of controls.
 
-The expression for the optimal policy can be found by applying the usual LQ formula ([see here](https://python-intro.quantecon.org/lqcontrol.html#Infinite-Horizon)).
+The expression for the optimal policy can be found by applying the usual LQ formula ([see here](https://python.quantecon.org/lqcontrol.html#infinite-horizon)).
 
 We denote it by $K(F, \theta)$, with the interpretation $w_{t+1} = K(F, \theta) x_t$.
 
@@ -610,7 +610,7 @@ subject to
 x_{t+1} = (A + C K) x_t + B u_t
 ```
 
-Once again, the expression for the optimal policy can be found [here](https://python-intro.quantecon.org/lqcontrol.html#Infinite-Horizon) --- we denote
+Once again, the expression for the optimal policy can be found [here](https://python.quantecon.org/lqcontrol.html#infinite-horizon) --- we denote
 it by $\tilde F$.
 
 (rb_eq)=
@@ -1147,7 +1147,7 @@ K(\hat F, \theta) = (\theta I - C'\hat P C)^{-1} C' \hat P  (A - B \hat F)
 \beta (A - B \hat F)' \tilde P (A - B \hat F)
 ```
 
-(revisit [this discussion](https://python-intro.quantecon.org/lqcontrol.html#Infinite-Horizon) if you don't know where {eq}`rb_a2be` comes from) and the optimal policy is
+(revisit [this discussion](https://python.quantecon.org/lqcontrol.html#infinite-horizon) if you don't know where {eq}`rb_a2be` comes from) and the optimal policy is
 
 $$
 w_{t+1} = - \beta (\beta \theta I + \beta C' \tilde P C)^{-1}
