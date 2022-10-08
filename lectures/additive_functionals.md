@@ -1194,9 +1194,11 @@ Then let's use the plots to  investigate how these densities evolve through time
 
 We will plot the densities of $\log {\widetilde M}_t$ for different values of $t$.
 
-Note: `scipy.stats.lognorm` expects you to pass the standard deviation
+```{note}
+`scipy.stats.lognorm` expects you to pass the standard deviation
 first $(tH \cdot H)$ and then the exponent of the mean as a
 keyword argument `scale` (`scale=np.exp(-t * H2 / 2)`).
+```
 
 * See the documentation [here](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html#scipy.stats.lognorm).
 

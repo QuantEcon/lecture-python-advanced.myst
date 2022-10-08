@@ -345,7 +345,9 @@ We now show that
 1. For any $f \in cb\mathbb{R}_+$, the sequence $T^k f$ converges
    uniformly to $f^*$.
 
-(Note: If you find the mathematics heavy going you can take 1--2 as given and skip to the {ref}`next section <lt_comp_eg>`)
+```{note}
+If you find the mathematics heavy going you can take 1--2 as given and skip to the {ref}`next section <lt_comp_eg>`
+```
 
 Recall the [Banach contraction mapping theorem](https://en.wikipedia.org/wiki/Banach_fixed-point_theorem).
 

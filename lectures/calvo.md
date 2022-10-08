@@ -903,9 +903,11 @@ is a symptom of time inconsistency.
   past utilities and to reoptimize at date $t \geq 1$ would, if allowed, want
   to deviate from a Ramsey plan.
 
-**Note:** A modified Ramsey plan constructed under the restriction that
+```{note}
+A modified Ramsey plan constructed under the restriction that
 $\mu_t$ must be constant over time is time consistent (see
 $\check \mu$ and $\check \theta$ in the above graphs).
+```
 
 ### Meaning of Time Inconsistency
 

@@ -179,7 +179,9 @@ a price system, and a government policy such that
 * Given the allocation, government policy, and  price system, the government's
   budget constraint is satisfied for all $t, s^t$.
 
-Note: There are many competitive equilibria with distorting taxes.
+```{note}
+There are many competitive equilibria with distorting taxes.
+```
 
 They are indexed by different government policies.
 
@@ -1077,8 +1079,10 @@ $$
 
 and set  $\sigma = 2$, $\gamma = 2$, and the  discount factor $\beta = 0.9$.
 
-Note: For convenience in terms of matching our code, we have expressed
+```{note}
+For convenience in terms of matching our code, we have expressed
 utility as a function of $n$ rather than leisure $l$.
+```
 
 This utility function is implemented in the class `CRRAutility`.
 

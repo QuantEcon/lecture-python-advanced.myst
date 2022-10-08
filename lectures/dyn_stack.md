@@ -1147,7 +1147,9 @@ the recursive formulation of the follower problem.
 
 Can you spot what features of $\tilde F$ imply this?
 
-Hint: remember the components of $X_t$
+```{hint}
+Remember the components of $X_t$
+```
 
 ```{code-cell} python3
 # Policy function in the follower's problem
