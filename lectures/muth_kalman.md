@@ -122,10 +122,12 @@ $$
 
 is an IID process.
 
-**Note:** A property of the state-space representation {eq}`state-space` is that in
+```{note}
+A property of the state-space representation {eq}`state-space` is that in
 general neither $\epsilon_{1,t}$ nor $\epsilon_{2,t}$ is in
 the space spanned by square-summable linear combinations of
 $y_t, y_{t-1}, \ldots$.
+```
 
 In general
 $\begin{bmatrix} \epsilon_{1,t} \cr \epsilon_{2t} \end{bmatrix}$
@@ -146,9 +148,13 @@ time-invariant *innovations representation*
 where $\hat x_t = E [x_t | y_{t-1}, y_{t-2}, \ldots ]$ and
 $a_t = y_t - E[y_t |y_{t-1}, y_{t-2}, \ldots ]$.
 
-**Note:** A key property about an *innovations representation* is that
+```{note}
+
+A key property about an *innovations representation* is that
 $a_t$ is in the space spanned by square summable linear
 combinations of $y_t, y_{t-1}, \ldots$.
+
+```
 
 For more ramifications of this property, see the lectures  {doc}`Shock Non-Invertibility <hs_invertibility_example>`  and
 {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.

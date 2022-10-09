@@ -1029,7 +1029,9 @@ Express the solution in the "feedback form" {eq}`onefifteen`, giving numerical v
 
 Make sure that the boundary conditions {eq}`onefive` are satisfied.
 
-(Note: this problem differs from the problem in the text in one important way: instead of $h > 0$ in {eq}`oneone`, $h = 0$. This has an important influence on the solution.)
+```{note}
+This problem differs from the problem in the text in one important way: instead of $h > 0$ in {eq}`oneone`, $h = 0$. This has an important influence on the solution.
+```
 
 ```{exercise-end}
 ```

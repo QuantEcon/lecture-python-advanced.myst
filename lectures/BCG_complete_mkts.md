@@ -710,7 +710,10 @@ $[w_0^1, w_0^2, w_1^1(\epsilon), w_1^2(\epsilon), \theta_0^1, \theta_0^2 ]$.
 **Remark:** Multiple arrangements of endowments
 $[w_0^1, w_0^2, w_1^1(\epsilon), w_1^2(\epsilon), \theta_0^1, \theta_0^2 ]$
 associated with the same distribution of wealth $\eta$. Can you explain why?
-**Hint:** Think about the portfolio indeterminacy finding above.
+
+```{hint}
+Think about the portfolio indeterminacy finding above.
+```
 
 ### Modigliani-Miller theorem
 
