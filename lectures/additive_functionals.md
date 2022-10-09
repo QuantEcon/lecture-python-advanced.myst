@@ -1203,6 +1203,7 @@ keyword argument `scale` (`scale=np.exp(-t * H2 / 2)`).
 
 This is peculiar, so make sure you are careful in working with the log normal distribution.
 ```
+
 Here is some code that tackles these tasks
 
 ```{code-cell} python3

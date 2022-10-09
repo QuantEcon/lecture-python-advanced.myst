@@ -128,6 +128,7 @@ general neither $\epsilon_{1,t}$ nor $\epsilon_{2,t}$ is in
 the space spanned by square-summable linear combinations of
 $y_t, y_{t-1}, \ldots$.
 ```
+
 In general
 $\begin{bmatrix} \epsilon_{1,t} \cr \epsilon_{2t} \end{bmatrix}$
 has more information about future $y_{t+j}$’s than is contained

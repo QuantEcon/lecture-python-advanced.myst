@@ -714,6 +714,7 @@ associated with the same distribution of wealth $\eta$. Can you explain why?
 ```{hint}
 Think about the portfolio indeterminacy finding above.
 ```
+
 ### Modigliani-Miller theorem
 
 We now allow a firm to issue both bonds and equity.
