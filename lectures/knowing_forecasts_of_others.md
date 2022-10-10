@@ -1632,7 +1632,7 @@ innovation process is the additional state variable contributed by the
 problem of extracting a signal from equilibrium prices that decision
 makers face in Townsend’s model.
 
-[^footnote0]: [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] verified this assertion using a different tactic, namely, by constructing
+[^footnote0]: [PS05](/zreferences.html#id22) verified this assertion using a different tactic, namely, by constructing
 analytic formulas for an equilibrium under the incomplete
 information structure and confirming that they match the pooling equilibrium formulas derived here.
 
