@@ -1571,7 +1571,7 @@ constructed here with the equilibrium of Townsend’s model reported in  [[PS05]
 The computational method of [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] is recursive:
 it enlists the Kalman filter and invariant subspace methods for
 solving systems of Euler
-equations <sup><a href=#footnote1 id=footnote1-link>[5]</a></sup> .
+equations [^footnote1] .
 
 As {cite}`singleton87`,
 [[Kas00](https://python-advanced.quantecon.org/zreferences.html#id24)], and {cite}`sargent91_equilibrium` also
@@ -1582,7 +1582,7 @@ participants in market $ -i $ ($ -i $ means not $ i $).
 This
 means that higher-order beliefs play no role: observing equilibrium prices
 in effect lets decision makers pool their information
-sets <sup><a href=#footnote2 id=footnote2-link>[6]</a></sup> .
+sets [^footnote2] .
 
 The disappearance of higher order beliefs means that
 decision makers in this model do not really face a problem of
@@ -1632,22 +1632,22 @@ innovation process is the additional state variable contributed by the
 problem of extracting a signal from equilibrium prices that decision
 makers face in Townsend’s model.
 
-<p><a id=footnote0 href=#footnote0-link><strong>[1]</strong></a> [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] verified this assertion using a different tactic, namely, by constructing
+[^footnote0]: [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] verified this assertion using a different tactic, namely, by constructing
 analytic formulas for an equilibrium under the incomplete
 information structure and confirming that they match the pooling equilibrium formulas derived here.
 
-<p><a id=footnote3 href=#footnote3-link><strong>[2]</strong></a> See [[Sar87](https://python-advanced.quantecon.org/zreferences.html#id197)], especially
+[^footnote3]: See [[Sar87](https://python-advanced.quantecon.org/zreferences.html#id197)], especially
 chapters IX and XIV, for  principles  that guide solving some roots backwards and others forwards.
 
-<p><a id=footnote4 href=#footnote4-link><strong>[3]</strong></a> As noted by [[Sar87](https://python-advanced.quantecon.org/zreferences.html#id197)], this difference equation is the Euler equation for
+[^footnote4]: As noted by [[Sar87](https://python-advanced.quantecon.org/zreferences.html#id197)], this difference equation is the Euler equation for
 a planning problem   that maximizes the discounted sum of consumer plus
 producer surplus.
 
-<p><a id=footnote5 href=#footnote5-link><strong>[4]</strong></a> [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] verify the same claim by applying   machinery of  [[PCL86](https://python-advanced.quantecon.org/zreferences.html#id23)].
+[^footnote5]: [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] verify the same claim by applying   machinery of  [[PCL86](https://python-advanced.quantecon.org/zreferences.html#id23)].
 
-<p><a id=footnote1 href=#footnote1-link><strong>[5]</strong></a> See [[AHMS96](https://python-advanced.quantecon.org/zreferences.html#id135)] for an account of invariant subspace methods.
+[^footnote1]: See [[AHMS96](https://python-advanced.quantecon.org/zreferences.html#id135)] for an account of invariant subspace methods.
 
-<p><a id=footnote2 href=#footnote2-link><strong>[6]</strong></a> See [[AMS02](https://python-advanced.quantecon.org/zreferences.html#id28)] for a discussion
+[^footnote2]: See [[AMS02](https://python-advanced.quantecon.org/zreferences.html#id28)] for a discussion
 of  information assumptions needed to create a situation
 in which higher order beliefs appear in equilibrium decision rules.  A way
 to read our findings in light of [[AMS02](https://python-advanced.quantecon.org/zreferences.html#id28)] is that, relative
