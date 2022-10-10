@@ -1632,25 +1632,25 @@ innovation process is the additional state variable contributed by the
 problem of extracting a signal from equilibrium prices that decision
 makers face in Townsend’s model.
 
-[^footnote0]: [PS05](/zreferences.html#id22) verified this assertion using a different tactic, namely, by constructing
+[^footnote0]: [PS05](zreferences.html#id22) verified this assertion using a different tactic, namely, by constructing
 analytic formulas for an equilibrium under the incomplete
 information structure and confirming that they match the pooling equilibrium formulas derived here.
 
-[^footnote3]: See [[Sar87](https://python-advanced.quantecon.org/zreferences.html#id197)], especially
+[^footnote3]: See [[Sar87](zreferences.html#id197)], especially
 chapters IX and XIV, for  principles  that guide solving some roots backwards and others forwards.
 
-[^footnote4]: As noted by [[Sar87](https://python-advanced.quantecon.org/zreferences.html#id197)], this difference equation is the Euler equation for
+[^footnote4]: As noted by [[Sar87](zreferences.html#id197)], this difference equation is the Euler equation for
 a planning problem   that maximizes the discounted sum of consumer plus
 producer surplus.
 
-[^footnote5]: [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] verify the same claim by applying   machinery of  [[PCL86](https://python-advanced.quantecon.org/zreferences.html#id23)].
+[^footnote5]: [[PS05](zreferences.html#id22)] verify the same claim by applying   machinery of  [[PCL86](zreferences.html#id23)].
 
-[^footnote1]: See [[AHMS96](https://python-advanced.quantecon.org/zreferences.html#id135)] for an account of invariant subspace methods.
+[^footnote1]: See [[AHMS96](zreferences.html#id135)] for an account of invariant subspace methods.
 
-[^footnote2]: See [[AMS02](https://python-advanced.quantecon.org/zreferences.html#id28)] for a discussion
+[^footnote2]: See [[AMS02](zreferences.html#id28)] for a discussion
 of  information assumptions needed to create a situation
 in which higher order beliefs appear in equilibrium decision rules.  A way
-to read our findings in light of [[AMS02](https://python-advanced.quantecon.org/zreferences.html#id28)] is that, relative
+to read our findings in light of [[AMS02](zreferences.html#id28)] is that, relative
 to the number of signals agents observe,  Townsend’s
 section 8 model  has too few  random shocks  to get higher order beliefs to
 play a role.
