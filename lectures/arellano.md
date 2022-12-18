@@ -26,7 +26,7 @@ kernelspec:
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
-```{code-cell} python 
+```{code-cell} python
 :tags: ["hide-output"]
 !pip install --upgrade quantecon
 ```
@@ -74,7 +74,7 @@ Such dynamics are consistent with experiences of many countries.
 
 Let's start with some imports:
 
-```{code-cell} python 
+```{code-cell} python
 import matplotlib.pyplot as plt
 import numpy as np
 import quantecon as qe
@@ -346,21 +346,21 @@ As we have in other places, we accelerate our code using Numba.
 We define a class that will store parameters, grids and transition
 probabilities.
 
-```{code-cell} python 
+```{code-cell} python
 class Arellano_Economy:
     " Stores data and creates primitives for the Arellano economy. "
 
-    def __init__(self, 
+    def __init__(self,
             B_grid_size= 251,   # Grid size for bonds
-            B_grid_min=-0.45,   # Smallest B value 
+            B_grid_min=-0.45,   # Smallest B value
             B_grid_max=0.45,    # Largest B value
-            y_grid_size=51,     # Grid size for income 
+            y_grid_size=51,     # Grid size for income
             β=0.953,            # Time discount parameter
             γ=2.0,              # Utility parameter
             r=0.017,            # Lending rate
             ρ=0.945,            # Persistence in the income process
             η=0.025,            # Standard deviation of the income process
-            θ=0.282,            # Prob of re-entering financial markets 
+            θ=0.282,            # Prob of re-entering financial markets
             def_y_param=0.969): # Parameter governing income in default
 
         # Save parameters
@@ -370,7 +370,7 @@ class Arellano_Economy:
         self.y_grid_size = y_grid_size
         self.B_grid_size = B_grid_size
         self.B_grid = np.linspace(B_grid_min, B_grid_max, B_grid_size)
-        mc = qe.markov.tauchen(ρ, η, 0, 3, y_grid_size)
+        mc = qe.markov.tauchen(y_grid_size, ρ, η, 0, 3)
         self.y_grid, self.P = np.exp(mc.state_values), mc.P
 
         # The index at which B_grid is (close to) zero
@@ -380,7 +380,7 @@ class Arellano_Economy:
         self.def_y = np.minimum(def_y_param * np.mean(self.y_grid), self.y_grid)
 
     def params(self):
-        return self.β, self.γ, self.r, self.ρ, self.η, self.θ 
+        return self.β, self.γ, self.r, self.ρ, self.η, self.θ
 
     def arrays(self):
         return self.P, self.y_grid, self.B_grid, self.def_y, self.B0_idx
@@ -389,14 +389,14 @@ class Arellano_Economy:
 Notice how the class returns the data it stores as simple numerical values and
 arrays via the methods `params` and `arrays`.
 
-We will use this data in the Numba-jitted functions defined below.  
+We will use this data in the Numba-jitted functions defined below.
 
 Jitted functions prefer simple arguments, since type inference is easier.
 
 Here is the utility function.
 
 
-```{code-cell} python 
+```{code-cell} python
 @njit
 def u(c, γ):
     return c**(1-γ)/(1-γ)
@@ -405,7 +405,7 @@ def u(c, γ):
 Here is a function to compute the bond price at each state, given $v_c$ and
 $v_d$.
 
-```{code-cell} python 
+```{code-cell} python
 @njit
 def compute_q(v_c, v_d, q, params, arrays):
     """
@@ -414,29 +414,29 @@ def compute_q(v_c, v_d, q, params, arrays):
     This function writes to the array q that is passed in as an argument.
     """
 
-    # Unpack 
-    β, γ, r, ρ, η, θ = params 
+    # Unpack
+    β, γ, r, ρ, η, θ = params
     P, y_grid, B_grid, def_y, B0_idx = arrays
 
     for B_idx in range(len(B_grid)):
         for y_idx in range(len(y_grid)):
             # Compute default probability and corresponding bond price
             default_states = 1.0 * (v_c[B_idx, :] < v_d)
-            delta = np.dot(default_states, P[y_idx, :]) 
+            delta = np.dot(default_states, P[y_idx, :])
             q[B_idx, y_idx] = (1 - delta ) / (1 + r)
 ```
 
 Next we introduce Bellman operators that updated $v_d$ and $v_c$.
 
-```{code-cell} python 
+```{code-cell} python
 @njit
 def T_d(y_idx, v_c, v_d, params, arrays):
     """
     The RHS of the Bellman equation when income is at index y_idx and
     the country has chosen to default.  Returns an update of v_d.
     """
-    # Unpack 
-    β, γ, r, ρ, η, θ = params 
+    # Unpack
+    β, γ, r, ρ, η, θ = params
     P, y_grid, B_grid, def_y, B0_idx = arrays
 
     current_utility = u(def_y[y_idx], γ)
@@ -453,8 +453,8 @@ def T_c(B_idx, y_idx, v_c, v_d, q, params, arrays):
     defaulted state on their debt.  Returns a value that corresponds to
     v_c[B_idx, y_idx], as well as the optimal level of bond sales B'.
     """
-    # Unpack 
-    β, γ, r, ρ, η, θ = params 
+    # Unpack
+    β, γ, r, ρ, η, θ = params
     P, y_grid, B_grid, def_y, B0_idx = arrays
     B = B_grid[B_idx]
     y = y_grid[y_idx]
@@ -475,14 +475,14 @@ def T_c(B_idx, y_idx, v_c, v_d, q, params, arrays):
 
 Here is a fast function that calls these operators in the right sequence.
 
-```{code-cell} python 
+```{code-cell} python
 @njit(parallel=True)
 def update_values_and_prices(v_c, v_d,      # Current guess of value functions
                              B_star, q,     # Arrays to be written to
                              params, arrays):
 
-    # Unpack 
-    β, γ, r, ρ, η, θ = params 
+    # Unpack
+    β, γ, r, ρ, η, θ = params
     P, y_grid, B_grid, def_y, B0_idx = arrays
     y_grid_size = len(y_grid)
     B_grid_size = len(B_grid)
@@ -498,7 +498,7 @@ def update_values_and_prices(v_c, v_d,      # Current guess of value functions
     for y_idx in prange(y_grid_size):
         new_v_d[y_idx] = T_d(y_idx, v_c, v_d, params, arrays)
         for B_idx in range(B_grid_size):
-            new_v_c[B_idx, y_idx], Bp_idx = T_c(B_idx, y_idx, 
+            new_v_c[B_idx, y_idx], Bp_idx = T_c(B_idx, y_idx,
                                             v_c, v_d, q, params, arrays)
             B_star[B_idx, y_idx] = Bp_idx
 
@@ -515,7 +515,7 @@ In fact, one of the jobs of this function is to take an instance of
 `Arellano_Economy`, which is hard for the JIT compiler to handle, and strip it
 down to more basic objects, which are then passed out to jitted functions.
 
-```{code-cell} python 
+```{code-cell} python
 def solve(model, tol=1e-8, max_iter=10_000):
     """
     Given an instance of Arellano_Economy, this function computes the optimal
@@ -524,7 +524,7 @@ def solve(model, tol=1e-8, max_iter=10_000):
     # Unpack
     params = model.params()
     arrays = model.arrays()
-    y_grid_size, B_grid_size = model.y_grid_size, model.B_grid_size 
+    y_grid_size, B_grid_size = model.y_grid_size, model.B_grid_size
 
     # Initial conditions for v_c and v_d
     v_c = np.zeros((B_grid_size, y_grid_size))
@@ -549,13 +549,13 @@ def solve(model, tol=1e-8, max_iter=10_000):
         current_iter += 1
 
     print(f"Terminating at iteration {current_iter}.")
-    return v_c, v_d, q, B_star 
+    return v_c, v_d, q, B_star
 ```
 
 Finally, we write a function that will allow us to simulate the economy once
 we have the policy functions
 
-```{code-cell} python 
+```{code-cell} python
 def simulate(model, T, v_c, v_d, q, B_star, y_idx=None, B_idx=None):
     """
     Simulates the Arellano 2008 model of sovereign debt
@@ -707,17 +707,17 @@ To the extent that you can, replicate the figures shown above
 
 Compute the value function, policy and equilibrium prices
 
-```{code-cell} python 
+```{code-cell} python
 ae = Arellano_Economy()
 ```
 
-```{code-cell} python 
+```{code-cell} python
 v_c, v_d, q, B_star = solve(ae)
 ```
 
 Compute the bond price schedule as seen in figure 3 of Arellano (2008)
 
-```{code-cell} python 
+```{code-cell} python
 # Unpack some useful names
 B_grid, y_grid, P = ae.B_grid, ae.y_grid, ae.P
 B_grid_size, y_grid_size = len(B_grid), len(y_grid)
@@ -748,7 +748,7 @@ plt.show()
 
 Draw a plot of the value functions
 
-```{code-cell} python 
+```{code-cell} python
 v = np.maximum(v_c, np.reshape(v_d, (1, y_grid_size)))
 
 fig, ax = plt.subplots(figsize=(10, 6.5))
@@ -763,14 +763,14 @@ plt.show()
 
 Draw a heat map for default probability
 
-```{code-cell} python 
+```{code-cell} python
 xx, yy = B_grid, y_grid
 zz = np.empty_like(v_c)
 
 for B_idx in range(B_grid_size):
     for y_idx in range(y_grid_size):
         default_states = 1.0 * (v_c[B_idx, :] < v_d)
-        zz[B_idx, y_idx] = np.dot(default_states, P[y_idx, :]) 
+        zz[B_idx, y_idx] = np.dot(default_states, P[y_idx, :])
 
 # Create figure
 fig, ax = plt.subplots(figsize=(10, 6.5))
@@ -784,7 +784,7 @@ plt.show()
 
 Plot a time series of major variables simulated from the model
 
-```{code-cell} python 
+```{code-cell} python
 T = 250
 np.random.seed(42)
 y_sim, y_a_sim, B_sim, q_sim, d_sim = simulate(ae, T, v_c, v_d, q, B_star)
