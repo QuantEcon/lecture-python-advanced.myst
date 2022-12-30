@@ -42,7 +42,7 @@ This lecture describes a linear-quadratic version of a model that Guillermo Calv
 used to illustrate the **time inconsistency** of optimal government
 plans.
 
-Like Chang {cite}`chang1998credible`, we use the model as a laboratory in which to explore the consequences of
+Like Chang {cite}`chang1998credible`, we use the model as a laboratory in which to explore consequences of
 different timing protocols for government decision making.
 
 The model focuses attention on intertemporal tradeoffs between
@@ -53,9 +53,9 @@ The model focuses attention on intertemporal tradeoffs between
 The model features
 
 - rational expectations
-- costly government actions at all dates $t \geq 1$ that increase household
-  utilities at dates before $t$
-- two Bellman equations, one that expresses the private sector's  expectation of future inflation
+- costly government actions at  dates $t \geq 1$ that increase household
+  utilities at all dates before $t$
+- two Bellman equations, one that expresses the private sector's  forecast of future inflation
   as a function of current and future government actions, another that
   describes  the value function of a  Ramsey planner
 
@@ -112,7 +112,7 @@ the actual rate of inflation.
 
 (When there is no uncertainty, an assumption of **rational expectations** simplifies to **perfect foresight**).
 
-(See {cite}`Sargent77hyper` for a rational expectations version of the model when there is uncertainty)
+(See {cite}`Sargent77hyper` for a rational expectations version of the model in which there is uncertainty)
 
 Subtracting the demand function at time $t$ from the demand
 function at $t+1$ gives:
