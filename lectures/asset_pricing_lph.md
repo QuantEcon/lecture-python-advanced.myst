@@ -23,9 +23,10 @@ kernelspec:
 
 ## Overview
 
-This lecture is about  foundations of  asset-pricing theories that are based on the equation
-$ E m R = 1$, where $R$ is the gross return on an asset, $m$ is  a stochastic discount factor, and $E$ is a mathematical
-expectation with respect to the joint distribution of $R$ and $m$.
+This lecture is about  some implications of  asset-pricing theories that are based on the equation
+$ E m R = 1$, where $R$ is the gross return on an asset, $m$ is  a stochastic discount factor, and $E$ is a mathematical expectation with respect to the joint distribution of $R$ and $m$.
+
+Instances of this equation occur in  many models. 
 
 ```{note}
 Chapter 1 of {cite}`Ljungqvist2012` describes the role that this equation plays in a diverse set of
@@ -35,11 +36,11 @@ models in macroeconomics, monetary economics, and public finance.
 
 We aim to convey insights about empirical implications of this equation brought out in the work of Lars Peter Hansen {cite}`HansenRichard1987` and Lars Peter Hansen and Ravi Jagannathan {cite}`Hansen_Jagannathan_1991`. 
 
-By following their footsteps, from a single equation that prevails in wide class of models, we'll derive 
+By following their footsteps, from  that single equation  we'll derive 
 
 * a mean-variance frontier 
 
-* a single-factor model of  excess asset returns  
+* a single-factor model of  excess  returns  
 
 
 To do this, we use two ideas:
@@ -51,7 +52,7 @@ To do this, we use two ideas:
 In particular, we'll apply a Cauchy-Schwartz inequality to a population linear least squares regression equation that is
 implied by $E m R =1$.
 
-We'll describe how  practitioners have implemented the model using
+We'll also describe how  practitioners have implemented the model using
 
 * cross sections of returns on many assets
 * time series of returns on various assets
@@ -348,37 +349,82 @@ $$
 \end{array}\right.
 $$
 
-The image below  illustrates a mean-variance frontier.
+Now let's use matplotlib to draw a mean variance frontier.
 
-```{figure} _static/lecture_specific/asset_pricing_lph/AssetPricing_v1.jpg
-:scale: 60%
+In drawing a frontier, we'll set $\sigma(m) = .25$ and $E m = .99$, values roughly consistent with what many studies calibrate from quarterly US data.
+
+```{code-cell} ipython3
+import matplotlib.pyplot as plt
+import numpy as np
+%matplotlib inline
+
+# Define the function to plot
+def y(x, alpha, beta):
+    return alpha + beta*x
+def z(x, alpha, beta):
+    return alpha - beta*x
+
+sigmam = .25
+Em = .99
+
+# Set the values of alpha and beta
+alpha = 1/Em
+beta = sigmam/Em
+
+# Create a range of values for x
+x = np.linspace(0, .15, 100)
+
+# Calculate the values of y and z
+y_values = y(x, alpha, beta)
+z_values = z(x, alpha, beta)
+
+# Create a figure and axes object
+fig, ax = plt.subplots()
+
+# Plot y
+ax.plot(x, y_values, label=r'$R^f + \frac{\sigma(m)}{E(m)} \sigma(R^i)$')
+ax.plot(x, z_values, label=r'$R^f - \frac{\sigma(m)}{E(m)} \sigma(R^i)$')
+
+plt.title('mean standard deviation frontier')
+plt.xlabel(r"$\sigma(R^i)$")
+plt.ylabel(r"$E (R^i) $")
+plt.text(.053, 1.015, "(.05,1.015)")  
+ax.plot(.05, 1.015, 'o', label="$(\sigma(R^j), E R^j)$")
+# Add a legend and show the plot
+ax.legend()
+plt.show()
 ```
 
-The figure shows two straight lines, the upper one being the locus of $( \sigma(R^i), E(R^i)$ pairs that are on 
-the **mean-variance frontier**.  
 
-Let  $\tilde R^j$ be a return that is **not** on the frontier and that is described by
+The figure shows two straight lines, the blue upper one being the locus of $( \sigma(R^i), E(R^i)$ pairs that are on 
+the **mean-variance frontier** or **mean-standard-deviation frontier**.  
+
+The green dot refers to a return  $R^j$ that is **not** on the frontier and that has moments
+$(\sigma(R^j), E R^j) =  (.05, 1.015)$.  
+
+It is described by the statistical model
 
 $$ 
-\tilde R^j = R^i + \tilde \epsilon^j
+ R^j = R^i +  \epsilon^j
 $$
 
-where $\tilde \epsilon$ is a random variable that has mean zero and that is orthogonal to $R^i$.
+where $R^i$ is a return that is on the frontier and  $\epsilon^j$ is a random variable that has mean zero and that is orthogonal to $R^i$.
 
-Then $ E \tilde R^j = E R^i$ and, as a consequence of $R^j$ not being on the frontier, 
-
-$$
-\sigma^2(\tilde R^j) = \sigma^2(R^i) + \sigma^2(\tilde \epsilon^j)
-$$
-
-The length of the dotted line labeled **idiosyncratic risk** equals
+Then $ E R^j = E R^i$ and, as a consequence of $R^j$ not being on the frontier, 
 
 $$
-\sqrt{ \sigma^2(R^i) + \sigma^2(\tilde \epsilon^j)} - \sigma(R^i)
+\sigma^2(R^j) = \sigma^2(R^i) + \sigma^2(\epsilon^j)
 $$
 
-This is a measure of the part of the risk in $R^j$ that is not priced because it can be diversified away,
-being uncorrelated with the stochastic discount factor.
+The length of a horizontal line from the point $\sigma(R^j), E (R^j) = .05, 1.015$ to
+the frontier   equals
+
+$$
+\sqrt{ \sigma^2(R^i) + \sigma^2( \epsilon^j)} - \sigma(R^i)
+$$
+
+This is a measure of the part of the risk in $R^j$ that is not priced because it is  uncorrelated with the stochastic discount factor and so can be diversified away (i.e., averaged out to zero by holding a diversified portfolio).
+
 
 ## Mathematical Structure of Frontier
 
