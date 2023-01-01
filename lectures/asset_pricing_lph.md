@@ -24,7 +24,7 @@ kernelspec:
 ## Overview
 
 This lecture is about  some implications of  asset-pricing theories that are based on the equation
-$ E m R = 1$, where $R$ is the gross return on an asset, $m$ is  a stochastic discount factor, and $E$ is a mathematical expectation with respect to the joint distribution of $R$ and $m$.
+$E m R = 1,$ where $R$ is the gross return on an asset, $m$ is  a stochastic discount factor, and $E$ is a mathematical expectation with respect to a joint probability distribution of $R$ and $m$.
 
 Instances of this equation occur in  many models. 
 
@@ -424,6 +424,26 @@ $$
 $$
 
 This is a measure of the part of the risk in $R^j$ that is not priced because it is  uncorrelated with the stochastic discount factor and so can be diversified away (i.e., averaged out to zero by holding a diversified portfolio).
+
+
+## Sharpe Ratios and the Price of Risk
+
+An asset's **Sharpe ratio** is defined as
+
+$$
+ \frac{E(R^i) - R^f}{\sigma(R^i)} 
+$$
+
+The above figure reminds us that all assets $R^i$ whose returns are on the mean-standard deviation frontier
+satisfy
+
+$$
+\frac{E(R^i) - R^f}{\sigma(R^i)}  = \frac{\sigma(m)}{E m} 
+$$
+
+The ratio $\frac{\sigma(m)}{E m} $ is often called the **market price of risk**.
+
+Evidently it equals the maximum Sharpe ratio for any asset or portfolio of assets.
 
 
 ## Mathematical Structure of Frontier
