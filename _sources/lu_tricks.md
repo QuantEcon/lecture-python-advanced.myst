@@ -236,7 +236,7 @@ Differentiating {eq}`oneone` with respect to $y_t$ for $t = N-m + 1, \ldots, N$ 
   \beta^{N-1} \left(a_{N-1}-hy_{N-1}-\Bigl(d_0 + \beta \, d_1\,
 L^{-1}\Bigr)\, d(L)\, y_{N-1}\right)
 & = 0 \cr
- \vdots & \vdots\cr
+\vdots \quad \quad \quad \vdots \quad \quad & = 0 \cr
 \beta^{N-m+1} \biggl(a_{N-m+1} - h y_{N-m+1} -(d_0+\beta L^{-1}
 d_1+\cdots\  +\beta^{m-1} L^{-m+1} d_{m-1}) d(L) y_{N-m+1}\biggr)
 & = 0
@@ -1029,7 +1029,9 @@ Express the solution in the "feedback form" {eq}`onefifteen`, giving numerical v
 
 Make sure that the boundary conditions {eq}`onefive` are satisfied.
 
-(Note: this problem differs from the problem in the text in one important way: instead of $h > 0$ in {eq}`oneone`, $h = 0$. This has an important influence on the solution.)
+```{note}
+This problem differs from the problem in the text in one important way: instead of $h > 0$ in {eq}`oneone`, $h = 0$. This has an important influence on the solution.
+```
 
 ```{exercise-end}
 ```

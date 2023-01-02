@@ -207,7 +207,9 @@ $$
 
 can be computed by `np.abs(fft(X))**2 / len(X)`.
 
-Note: The NumPy function `abs` acts elementwise, and correctly handles complex numbers (by computing their modulus, which is exactly what we need).
+```{note}
+The NumPy function `abs` acts elementwise, and correctly handles complex numbers (by computing their modulus, which is exactly what we need).
+```
 
 A function called `periodogram` that puts all this together can be found [here](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/estspec.py).
 

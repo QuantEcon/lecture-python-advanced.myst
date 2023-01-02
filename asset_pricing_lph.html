@@ -178,13 +178,28 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sharpe-ratios-and-the-price-of-risk">
+   35.6. Sharpe Ratios and the Price of Risk
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mathematical-structure-of-frontier">
+   35.7. Mathematical Structure of Frontier
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multi-factor-models">
+   35.8. Multi-factor Models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#empirical-implementations">
-   35.6. Empirical Implementations
+   35.9. Empirical Implementations
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#exercises">
-   35.7. Exercises
+   35.10. Exercises
   </a>
  </li>
 </ul>
@@ -233,47 +248,59 @@ const thebe_selector_output = ".output, .cell_output"
                     <div>
                         
   <div class="tex2jax_ignore mathjax_ignore section" id="elementary-asset-pricing-theory">
-<h1><a class="toc-backref" href="#id12"><span class="section-number">35. </span>Elementary Asset Pricing Theory</a><a class="headerlink" href="#elementary-asset-pricing-theory" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id15"><span class="section-number">35. </span>Elementary Asset Pricing Theory</a><a class="headerlink" href="#elementary-asset-pricing-theory" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <span id="index-0"></span><p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#elementary-asset-pricing-theory" id="id12">Elementary Asset Pricing Theory</a></p>
+<li><p><a class="reference internal" href="#elementary-asset-pricing-theory" id="id15">Elementary Asset Pricing Theory</a></p>
 <ul>
-<li><p><a class="reference internal" href="#overview" id="id13">Overview</a></p></li>
-<li><p><a class="reference internal" href="#key-equation" id="id14">Key Equation</a></p></li>
-<li><p><a class="reference internal" href="#implications-of-key-equation" id="id15">Implications of Key Equation</a></p></li>
-<li><p><a class="reference internal" href="#expected-return-beta-representation" id="id16">Expected Return - Beta Representation</a></p></li>
-<li><p><a class="reference internal" href="#mean-variance-frontier" id="id17">Mean-Variance Frontier</a></p></li>
-<li><p><a class="reference internal" href="#empirical-implementations" id="id18">Empirical Implementations</a></p></li>
-<li><p><a class="reference internal" href="#exercises" id="id19">Exercises</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id16">Overview</a></p></li>
+<li><p><a class="reference internal" href="#key-equation" id="id17">Key Equation</a></p></li>
+<li><p><a class="reference internal" href="#implications-of-key-equation" id="id18">Implications of Key Equation</a></p></li>
+<li><p><a class="reference internal" href="#expected-return-beta-representation" id="id19">Expected Return - Beta Representation</a></p></li>
+<li><p><a class="reference internal" href="#mean-variance-frontier" id="id20">Mean-Variance Frontier</a></p></li>
+<li><p><a class="reference internal" href="#sharpe-ratios-and-the-price-of-risk" id="id21">Sharpe Ratios and the Price of Risk</a></p></li>
+<li><p><a class="reference internal" href="#mathematical-structure-of-frontier" id="id22">Mathematical Structure of Frontier</a></p></li>
+<li><p><a class="reference internal" href="#multi-factor-models" id="id23">Multi-factor Models</a></p></li>
+<li><p><a class="reference internal" href="#empirical-implementations" id="id24">Empirical Implementations</a></p></li>
+<li><p><a class="reference internal" href="#exercises" id="id25">Exercises</a></p></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="overview">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">35.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>This lecture summarizes the heart of applied asset-pricing theory.</p>
-<p>From a single equation, we’ll derive</p>
+<h2><a class="toc-backref" href="#id16"><span class="section-number">35.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>This lecture is about  some implications of  asset-pricing theories that are based on the equation
+<span class="math notranslate nohighlight">\(E m R = 1,\)</span> where <span class="math notranslate nohighlight">\(R\)</span> is the gross return on an asset, <span class="math notranslate nohighlight">\(m\)</span> is  a stochastic discount factor, and <span class="math notranslate nohighlight">\(E\)</span> is a mathematical expectation with respect to a joint probability distribution of <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(m\)</span>.</p>
+<p>Instances of this equation occur in  many models.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Chapter 1 of <span id="id1">[<a class="reference internal" href="zreferences.html#id173" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">LS18</a>]</span> describes the role that this equation plays in a diverse set of
+models in macroeconomics, monetary economics, and public finance.</p>
+</div>
+<p>We aim to convey insights about empirical implications of this equation brought out in the work of Lars Peter Hansen <span id="id2">[<a class="reference internal" href="zreferences.html#id115" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">HR87</a>]</span> and Lars Peter Hansen and Ravi Jagannathan <span id="id3">[<a class="reference internal" href="zreferences.html#id20" title="Lars Peter Hansen and Ravi Jagannathan. Implications of Security Market Data for Models of Dynamic Economies. Journal of Political Economy, 99(2):225-262, April 1991. URL: https://ideas.repec.org/a/ucp/jpolec/v99y1991i2p225-62.html, doi:10.1086/261749.">HJ91</a>]</span>.</p>
+<p>By following their footsteps, from  that single equation  we’ll derive</p>
 <ul class="simple">
 <li><p>a mean-variance frontier</p></li>
-<li><p>a single-factor model of excess returns on each member of a collection of assets</p></li>
+<li><p>a single-factor model of  excess  returns</p></li>
 </ul>
 <p>To do this, we use two ideas:</p>
 <ul class="simple">
-<li><p>an asset pricing equation</p></li>
+<li><p>the equation <span class="math notranslate nohighlight">\(E m R =1 \)</span> that is  implied by an application of a <em>law of one price</em></p></li>
 <li><p>a Cauchy-Schwartz inequality</p></li>
 </ul>
-<p>In this way, we shall derive the basic <strong>capital asset pricing model</strong>, the celebrated CAPM.</p>
-<p>We’ll describe the basic ways that practitioners have implemented the model using</p>
+<p>In particular, we’ll apply a Cauchy-Schwartz inequality to a population linear least squares regression equation that is
+implied by <span class="math notranslate nohighlight">\(E m R =1\)</span>.</p>
+<p>We’ll also describe how  practitioners have implemented the model using</p>
 <ul class="simple">
 <li><p>cross sections of returns on many assets</p></li>
 <li><p>time series of returns on various assets</p></li>
 </ul>
-<p>For background and basic  concepts, see our lecture <a class="reference external" href="https://python-advanced.quantecon.org/orth_proj.html">orthogonal projections and their applications</a>.</p>
+<p>For background and basic  concepts about linear least squares projections, see our lecture <a class="reference external" href="https://python-advanced.quantecon.org/orth_proj.html">orthogonal projections and their applications</a>.</p>
 <p>As a sequel to the material here, please see our lecture <a class="reference external" href="https://python-advanced.quantecon.org/black_litterman.html">two modifications of mean-variance portfolio theory</a>.</p>
 </div>
 <div class="section" id="key-equation">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">35.2. </span>Key Equation</a><a class="headerlink" href="#key-equation" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id17"><span class="section-number">35.2. </span>Key Equation</a><a class="headerlink" href="#key-equation" title="Permalink to this headline">¶</a></h2>
 <p>We  begin with a <strong>key asset pricing equation</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-emr1">
 <span class="eqno">(35.1)<a class="headerlink" href="#equation-eq-emr1" title="Permalink to this equation">¶</a></span>\[
@@ -288,30 +315,30 @@ R^{i} &amp;= \text {random gross return  on asset }  i \\
 E &amp;\sim \text { mathematical expectation }
 \end{aligned}
 \end{split}\]</div>
-<p>The random gross returns <span class="math notranslate nohighlight">\(R^i\)</span> and the scalar stochastic discount factor <span class="math notranslate nohighlight">\(m\)</span>
+<p>The random gross return <span class="math notranslate nohighlight">\(R^i\)</span> for every asset <span class="math notranslate nohighlight">\(i\)</span> and the scalar stochastic discount factor <span class="math notranslate nohighlight">\(m\)</span>
 live in a common probability space.</p>
-<p><span id="id1">[<a class="reference internal" href="zreferences.html#id115" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">HR87</a>]</span> and <span id="id2">[<a class="reference internal" href="zreferences.html#id20" title="Lars Peter Hansen and Ravi Jagannathan. Implications of Security Market Data for Models of Dynamic Economies. Journal of Political Economy, 99(2):225-262, April 1991. URL: https://ideas.repec.org/a/ucp/jpolec/v99y1991i2p225-62.html, doi:10.1086/261749.">HJ91</a>]</span> explain how <strong>existence</strong> of a scalar stochastic discount factor that verifies  equation
+<p><span id="id4">[<a class="reference internal" href="zreferences.html#id115" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">HR87</a>]</span> and <span id="id5">[<a class="reference internal" href="zreferences.html#id20" title="Lars Peter Hansen and Ravi Jagannathan. Implications of Security Market Data for Models of Dynamic Economies. Journal of Political Economy, 99(2):225-262, April 1991. URL: https://ideas.repec.org/a/ucp/jpolec/v99y1991i2p225-62.html, doi:10.1086/261749.">HJ91</a>]</span> explain how <strong>existence</strong> of a scalar stochastic discount factor that verifies  equation
 <a class="reference internal" href="#equation-eq-emr1">(35.1)</a> is implied by a <strong>law of one price</strong> that requires that all portfolios of assets
-that end up having the same payouts must have the same price.</p>
+that bring the  same payouts  have the same price.</p>
 <p>They also explain how the <strong>absence of an arbitrage</strong> opportunity implies that the stochastic discount
 factor <span class="math notranslate nohighlight">\(m \geq 0\)</span>.</p>
-<p>To say something about the <strong>uniqueness</strong> of a stochastic discount factor would require that we impose more theoretical structure than we do in this
+<p>In order to say something about the <strong>uniqueness</strong> of a stochastic discount factor, we  would have to impose more theoretical structure than we do in this
 lecture.</p>
-<p>In <strong>complete markets</strong> models like those illustrated in this lecture <a class="reference external" href="https://python-advanced.quantecon.org/BCG_incomplete_mkts.html">equilibrium capital structures with incomplete markets</a>,
+<p>For example, in <strong>complete markets</strong> models like those illustrated in this lecture <a class="reference external" href="https://python-advanced.quantecon.org/BCG_incomplete_mkts.html">equilibrium capital structures with incomplete markets</a>,
 the stochastic discount factor is unique.</p>
 <p>In <strong>incomplete markets</strong> models like those illustrated in this lecture <a class="reference external" href="https://python.quantecon.org/aiyagari.html">the Aiyagari model</a>, the stochastic discount factor is not unique.</p>
 </div>
 <div class="section" id="implications-of-key-equation">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">35.3. </span>Implications of Key Equation</a><a class="headerlink" href="#implications-of-key-equation" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id18"><span class="section-number">35.3. </span>Implications of Key Equation</a><a class="headerlink" href="#implications-of-key-equation" title="Permalink to this headline">¶</a></h2>
 <p>We combine  key equation <a class="reference internal" href="#equation-eq-emr1">(35.1)</a> with a  remark of Lars Peter Hansen that   “asset pricing theory is all about covariances”.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Lars Hansen’s remark is a concise summary of ideas in <span id="id3">[<a class="reference internal" href="zreferences.html#id115" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">HR87</a>]</span> and
-<span id="id4">[<a class="reference internal" href="zreferences.html#id20" title="Lars Peter Hansen and Ravi Jagannathan. Implications of Security Market Data for Models of Dynamic Economies. Journal of Political Economy, 99(2):225-262, April 1991. URL: https://ideas.repec.org/a/ucp/jpolec/v99y1991i2p225-62.html, doi:10.1086/261749.">HJ91</a>]</span>. For other important foundations of these ideas, see
-<span id="id5">[<a class="reference internal" href="zreferences.html#id16" title="Stephen A. Ross. The arbitrage theory of capital asset pricing. Journal of Economic Theory, 13(3):341-360, December 1976. URL: https://ideas.repec.org/a/eee/jetheo/v13y1976i3p341-360.html, doi:.">Ros76</a>]</span>, <span id="id6">[<a class="reference internal" href="zreferences.html#id15" title="Stephen A Ross. A Simple Approach to the Valuation of Risky Streams. The Journal of Business, 51(3):453-475, July 1978. URL: https://ideas.repec.org/a/ucp/jnlbus/v51y1978i3p453-75.html.">Ros78</a>]</span>, <span id="id7">[<a class="reference internal" href="zreferences.html#id17" title="J. Michael Harrison and David M. Kreps. Martingales and arbitrage in multiperiod securities markets. Journal of Economic Theory, 20(3):381-408, June 1979. URL: https://ideas.repec.org/a/eee/jetheo/v20y1979i3p381-408.html, doi:.">HK79</a>]</span>, <span id="id8">[<a class="reference internal" href="zreferences.html#id18" title="David M. Kreps. Arbitrage and equilibrium in economies with infinitely many commodities. Journal of Mathematical Economics, 8(1):15-35, March 1981. URL: https://ideas.repec.org/a/eee/mateco/v8y1981i1p15-35.html, doi:.">Kre81</a>]</span>, and
-<span id="id9">[<a class="reference internal" href="zreferences.html#id14" title="Gary Chamberlain and Michael Rothschild. Arbitrage, Factor Structure, and Mean-Variance Analysis on Large Asset Markets. Econometrica, 51(5):1281-1304, September 1983. URL: https://ideas.repec.org/a/ecm/emetrp/v51y1983i5p1281-304.html, doi:.">CR83</a>]</span>.</p>
+<p>Lars Hansen’s remark is a concise summary of ideas in <span id="id6">[<a class="reference internal" href="zreferences.html#id115" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">HR87</a>]</span> and
+<span id="id7">[<a class="reference internal" href="zreferences.html#id20" title="Lars Peter Hansen and Ravi Jagannathan. Implications of Security Market Data for Models of Dynamic Economies. Journal of Political Economy, 99(2):225-262, April 1991. URL: https://ideas.repec.org/a/ucp/jpolec/v99y1991i2p225-62.html, doi:10.1086/261749.">HJ91</a>]</span>. Important foundations of these ideas were set down by
+<span id="id8">[<a class="reference internal" href="zreferences.html#id16" title="Stephen A. Ross. The arbitrage theory of capital asset pricing. Journal of Economic Theory, 13(3):341-360, December 1976. URL: https://ideas.repec.org/a/eee/jetheo/v13y1976i3p341-360.html, doi:.">Ros76</a>]</span>, <span id="id9">[<a class="reference internal" href="zreferences.html#id15" title="Stephen A Ross. A Simple Approach to the Valuation of Risky Streams. The Journal of Business, 51(3):453-475, July 1978. URL: https://ideas.repec.org/a/ucp/jnlbus/v51y1978i3p453-75.html.">Ros78</a>]</span>, <span id="id10">[<a class="reference internal" href="zreferences.html#id17" title="J. Michael Harrison and David M. Kreps. Martingales and arbitrage in multiperiod securities markets. Journal of Economic Theory, 20(3):381-408, June 1979. URL: https://ideas.repec.org/a/eee/jetheo/v20y1979i3p381-408.html, doi:.">HK79</a>]</span>, <span id="id11">[<a class="reference internal" href="zreferences.html#id18" title="David M. Kreps. Arbitrage and equilibrium in economies with infinitely many commodities. Journal of Mathematical Economics, 8(1):15-35, March 1981. URL: https://ideas.repec.org/a/eee/mateco/v8y1981i1p15-35.html, doi:.">Kre81</a>]</span>, and
+<span id="id12">[<a class="reference internal" href="zreferences.html#id14" title="Gary Chamberlain and Michael Rothschild. Arbitrage, Factor Structure, and Mean-Variance Analysis on Large Asset Markets. Econometrica, 51(5):1281-1304, September 1983. URL: https://ideas.repec.org/a/ecm/emetrp/v51y1983i5p1281-304.html, doi:.">CR83</a>]</span>.</p>
 </div>
-<p>This remark of Lars Hansen refers to the fact that interesting restrictions can be deduced by recognizing that <span class="math notranslate nohighlight">\(E m R^i\)</span> is a component of the covariance between <span class="math notranslate nohighlight">\(m \)</span> and <span class="math notranslate nohighlight">\(R^i\)</span> and then using that fact to rearrange key equation  <a class="reference internal" href="#equation-eq-emr1">(35.1)</a>.</p>
+<p>This remark of Lars Hansen refers to the fact that interesting restrictions can be deduced by recognizing that <span class="math notranslate nohighlight">\(E m R^i\)</span> is a component of the covariance between <span class="math notranslate nohighlight">\(m \)</span> and <span class="math notranslate nohighlight">\(R^i\)</span> and then using that fact to rearrange  equation  <a class="reference internal" href="#equation-eq-emr1">(35.1)</a>.</p>
 <p>Let’s do this step by step.</p>
 <p>First note  that the definition of a
 covariance
@@ -322,7 +349,7 @@ implies that</p>
 E m R^i = E m E R^{i}+\operatorname{cov}\left(m, R^{i}\right)
 \]</div>
 <p>Substituting this result into
-key equation <a class="reference internal" href="#equation-eq-emr1">(35.1)</a> gives</p>
+equation <a class="reference internal" href="#equation-eq-emr1">(35.1)</a> gives</p>
 <div class="math notranslate nohighlight" id="equation-eq-emr2">
 <span class="eqno">(35.2)<a class="headerlink" href="#equation-eq-emr2" title="Permalink to this equation">¶</a></span>\[
 1 = E m E R^{i}+\operatorname{cov}\left(m, R^{i}\right) 
@@ -357,7 +384,7 @@ E R^{i}-R^{f} = -\operatorname{cov}\left(m, R^{i}\right) R^{f}
 <p>Equation <a class="reference internal" href="#equation-eq-emr3">(35.3)</a> can be rearranged to display important parts of asset pricing theory.</p>
 </div>
 <div class="section" id="expected-return-beta-representation">
-<h2><a class="toc-backref" href="#id16"><span class="section-number">35.4. </span>Expected Return - Beta Representation</a><a class="headerlink" href="#expected-return-beta-representation" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id19"><span class="section-number">35.4. </span>Expected Return - Beta Representation</a><a class="headerlink" href="#expected-return-beta-representation" title="Permalink to this headline">¶</a></h2>
 <p>We can obtain the celebrated <strong>expected-return-Beta -representation</strong> for gross return <span class="math notranslate nohighlight">\(R^i\)</span>  by simply  rearranging excess return equation <a class="reference internal" href="#equation-eq-emr3">(35.3)</a> to become</p>
 <div class="math notranslate nohighlight">
 \[
@@ -370,28 +397,52 @@ E R^{i}=R^{f}+\beta_{i, m} \lambda_{m}
 \]</div>
 <p>Here</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\beta_{i,m}\)</span> is a (population) least squares regression coefficient of gross return <span class="math notranslate nohighlight">\(R^i\)</span> on stochastic discount factor <span class="math notranslate nohighlight">\(m\)</span>, an object that is often called asset <span class="math notranslate nohighlight">\(i\)</span>’s <strong>beta</strong></p></li>
-<li><p><span class="math notranslate nohighlight">\(\lambda_m\)</span> is minus the variance of <span class="math notranslate nohighlight">\(m\)</span> divided by the mean of <span class="math notranslate nohighlight">\(m\)</span>, an object that is often called the <strong>price of risk</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_{i,m}\)</span> is a (population) least squares regression coefficient of gross return <span class="math notranslate nohighlight">\(R^i\)</span> on stochastic discount factor <span class="math notranslate nohighlight">\(m\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda_m\)</span> is minus the variance of <span class="math notranslate nohighlight">\(m\)</span> divided by the mean of <span class="math notranslate nohighlight">\(m\)</span>, an object that is sometimes called a <strong>price of risk</strong>.</p></li>
 </ul>
-<p>To interpret this representation it helps to provide the following widely used example.</p>
+<p>Because <span class="math notranslate nohighlight">\(\lambda_m &lt; 0\)</span>, equation <a class="reference internal" href="#equation-eq-erbetarep">(35.4)</a> asserts that</p>
+<ul class="simple">
+<li><p>assets whose returns are <strong>positively</strong> correlated with the stochastic discount factor (SDF) <span class="math notranslate nohighlight">\(m\)</span> have expected returns <strong>lower</strong> than the risk-free rate <span class="math notranslate nohighlight">\(R^f\)</span></p></li>
+<li><p>assets whose returns are <strong>negatively</strong> correlated with the SDF <span class="math notranslate nohighlight">\(m\)</span> have expected returns <strong>higher</strong> than the risk-free rate <span class="math notranslate nohighlight">\(R^f\)</span></p></li>
+</ul>
+<p>These patterns will be discussed more below.</p>
+<p>In particular, we’ll see that returns that are <strong>perfectly</strong> negatively correlated with the SDF <span class="math notranslate nohighlight">\(m\)</span> have a special
+status:</p>
+<ul class="simple">
+<li><p>they are on a <strong>mean-variance frontier</strong></p></li>
+</ul>
+<p>Before we dive into that more, we’ll pause to look at an example of an SDF.</p>
+<p>To interpret  representation <a class="reference internal" href="#equation-eq-erbetarep">(35.4)</a>, the following widely used example helps.</p>
 <p><strong>Example</strong></p>
-<p>Let <span class="math notranslate nohighlight">\(c_t\)</span> be the logarithm of the consumption of a <em>representative consumer</em> or just a single consumer for whom we have data.</p>
+<p>Let <span class="math notranslate nohighlight">\(c_t\)</span> be the logarithm of the consumption of a <em>representative consumer</em> or just a single consumer for whom we have consumption data.</p>
 <p>A popular model of <span class="math notranslate nohighlight">\(m\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+m_{t+1} = \beta \frac{U'(C_{t+1})}{U'(C_t)}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(C_t\)</span> is consumption at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(\beta = \exp(-\rho)\)</span> is a discount <strong>factor</strong> with <span class="math notranslate nohighlight">\(\rho\)</span> being
+the discount <strong>rate</strong>, and <span class="math notranslate nohighlight">\(U(\cdot)\)</span> is a concave, twice-diffential utility function.</p>
+<p>For a constant relative risk aversion (CRRA) utility function <span class="math notranslate nohighlight">\(U(C) = \frac{C^{1-\gamma}}{1-\gamma}\)</span> utility
+function <span class="math notranslate nohighlight">\(U'(C) = C^{-\gamma}\)</span>.</p>
+<p>In this case, letting <span class="math notranslate nohighlight">\(c_t = \log(C_t)\)</span>, we can write <span class="math notranslate nohighlight">\(m_{t+1}\)</span> as</p>
 <div class="math notranslate nohighlight">
 \[ 
 m_{t+1} = \exp(-\rho) \exp(- \gamma(c_{t+1} - c_t)) 
 \]</div>
-<p>where <span class="math notranslate nohighlight">\( \rho &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span>,  and the log of consumption growth is governed by</p>
+<p>where <span class="math notranslate nohighlight">\( \rho &gt; 0\)</span>, <span class="math notranslate nohighlight">\(\gamma &gt; 0\)</span>.</p>
+<p>A popular model  for the growth of  log of consumption  is</p>
 <div class="math notranslate nohighlight">
 \[ 
 c_{t+1} - c_t = \mu + \sigma_c \epsilon_{t+1} 
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\epsilon_{t+1} \sim {\mathcal N}(0,1)\)</span>.</p>
-<p>Here</p>
+<p>Here <span class="math notranslate nohighlight">\(\{c_t\}\)</span> is a random walk with drift <span class="math notranslate nohighlight">\(\mu\)</span>, a good approximation to US per capital consumption growth.</p>
+<p>Again here</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\gamma &gt;0\)</span> is a coefficient of relative risk aversion</p></li>
 <li><p><span class="math notranslate nohighlight">\(\rho &gt;0 \)</span> is a fixed intertemporal discount rate</p></li>
 </ul>
+<p>So we have</p>
 <div class="math notranslate nohighlight">
 \[ 
 m_{t+1} = \exp(-\rho) \exp( - \gamma \mu - \gamma \sigma_c \epsilon_{t+1}) 
@@ -411,23 +462,23 @@ E m_{t+1} = \exp(-\rho) \exp \left( - \gamma \mu + \frac{\sigma_c^2 \gamma^2}{2}
 <li><p>when consumption growth is <strong>high</strong>, <span class="math notranslate nohighlight">\(m\)</span> is <strong>low</strong></p></li>
 <li><p>when consumption growth is <strong>low</strong>, <span class="math notranslate nohighlight">\(m\)</span> is <strong>high</strong></p></li>
 </ul>
-<p>According to representation <a class="reference internal" href="#equation-eq-erbetarep">(35.4)</a>, an asset with a gross return  <span class="math notranslate nohighlight">\(R^i\)</span> that is expected to be <strong>high</strong> when consumption growth is <strong>low</strong>  has <span class="math notranslate nohighlight">\(\beta_i\)</span> positive and a <strong>low</strong> expected return.</p>
+<p>According to representation <a class="reference internal" href="#equation-eq-erbetarep">(35.4)</a>, an asset with a gross return  <span class="math notranslate nohighlight">\(R^i\)</span> that is expected to be <strong>high</strong> when consumption growth is <strong>low</strong>  has <span class="math notranslate nohighlight">\(\beta_{i,m}\)</span> positive and a <strong>low</strong> expected return.</p>
 <ul class="simple">
 <li><p>because it has a high gross return when consumption growth is low, it is a good hedge against consumption risk. That justifies its low average return.</p></li>
 </ul>
-<p>An asset with an <span class="math notranslate nohighlight">\(R^i\)</span> that is <strong>low</strong> when consumption growth is <strong>low</strong> has <span class="math notranslate nohighlight">\(\beta_i\)</span> negative and a <strong>high</strong> expected return.</p>
+<p>An asset with an <span class="math notranslate nohighlight">\(R^i\)</span> that is <strong>low</strong> when consumption growth is <strong>low</strong> has <span class="math notranslate nohighlight">\(\beta_{i,m}\)</span> negative and a <strong>high</strong> expected return.</p>
 <ul class="simple">
 <li><p>because it has a low gross return when consumption growth is low, it is a poor hedge against consumption risk. That  justifies its high average return.</p></li>
 </ul>
 </div>
 <div class="section" id="mean-variance-frontier">
-<h2><a class="toc-backref" href="#id17"><span class="section-number">35.5. </span>Mean-Variance Frontier</a><a class="headerlink" href="#mean-variance-frontier" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id20"><span class="section-number">35.5. </span>Mean-Variance Frontier</a><a class="headerlink" href="#mean-variance-frontier" title="Permalink to this headline">¶</a></h2>
 <p>Now we’ll derive the celebrated <strong>mean-variance frontier</strong>.</p>
 <p>We do this using a  method deployed by Lars Peter Hansen and Scott
-Richard <span id="id10">[<a class="reference internal" href="zreferences.html#id115" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">HR87</a>]</span>.</p>
+Richard <span id="id13">[<a class="reference internal" href="zreferences.html#id115" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">HR87</a>]</span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Methods of Hansen and Richard are described and used extensively by <span id="id11">[<a class="reference internal" href="zreferences.html#id19" title="John H. Cochrane. Asset Pricing: revised edition. Princeton University Press, Princeton, New Jersey, 2005.">Coc05</a>]</span>.</p>
+<p>Methods of Hansen and Richard are described and used extensively by <span id="id14">[<a class="reference internal" href="zreferences.html#id19" title="John H. Cochrane. Asset Pricing: revised edition. Princeton University Press, Princeton, New Jersey, 2005.">Coc05</a>]</span>.</p>
 </div>
 <p>Their  idea was rearrange the key equation  <a class="reference internal" href="#equation-eq-emr1">(35.1)</a>, namely,  <span class="math notranslate nohighlight">\(E m R^i = 1\)</span>, and then  to  apply a Cauchy-Schwarz inequality.</p>
 <p>A convenient way to remember the Cauchy-Schwartz inequality in our context is that it says that an  <span class="math notranslate nohighlight">\(R^2\)</span> in any regression has to be  less than or equal to <span class="math notranslate nohighlight">\(1\)</span>.</p>
@@ -442,7 +493,7 @@ Richard <span id="id10">[<a class="reference internal" href="zreferences.html#id
 \[ 
 \rho_{m, R^i} \equiv \frac{\operatorname{cov}\left(m, R^{i}\right)}{\sigma(m) \sigma\left(R^{i}\right)} 
 \]</div>
-<p>and where <span class="math notranslate nohighlight">\(\sigma\)</span> denotes the standard deviation of the variable in parentheses</p>
+<p>and where <span class="math notranslate nohighlight">\(\sigma(\cdot)\)</span> denotes the standard deviation of the variable in parentheses</p>
 <p>Equation <a class="reference internal" href="#equation-eq-emr5">(35.5)</a>  implies</p>
 <div class="math notranslate nohighlight">
 \[
@@ -465,14 +516,101 @@ E R^{i}=R^{f}-\rho_{m, R^i} \frac{\sigma(m)}{E(m)} \sigma\left(R^{i}\right)
 -1 &amp; \implies R^i \text { is on  an upper frontier }
 \end{array}\right.
 \end{split}\]</div>
-<p>The image below illustrates a mean-variance frontier.</p>
-<div class="figure align-default">
-<a class="reference internal image-reference" href="_images/AssetPricing_v1.jpg"><img alt="_images/AssetPricing_v1.jpg" src="_images/AssetPricing_v1.jpg" style="width: 591.0px; height: 357.0px;" /></a>
+<p>Now let’s use matplotlib to draw a mean variance frontier.</p>
+<p>In drawing a frontier, we’ll set <span class="math notranslate nohighlight">\(\sigma(m) = .25\)</span> and <span class="math notranslate nohighlight">\(E m = .99\)</span>, values roughly consistent with what many studies calibrate from quarterly US data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Define the function to plot</span>
+<span class="k">def</span> <span class="nf">y</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">alpha</span> <span class="o">+</span> <span class="n">beta</span><span class="o">*</span><span class="n">x</span>
+<span class="k">def</span> <span class="nf">z</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">alpha</span> <span class="o">-</span> <span class="n">beta</span><span class="o">*</span><span class="n">x</span>
+
+<span class="n">sigmam</span> <span class="o">=</span> <span class="mf">.25</span>
+<span class="n">Em</span> <span class="o">=</span> <span class="mf">.99</span>
+
+<span class="c1"># Set the values of alpha and beta</span>
+<span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">Em</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">sigmam</span><span class="o">/</span><span class="n">Em</span>
+
+<span class="c1"># Create a range of values for x</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.15</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># Calculate the values of y and z</span>
+<span class="n">y_values</span> <span class="o">=</span> <span class="n">y</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+<span class="n">z_values</span> <span class="o">=</span> <span class="n">z</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span>
+
+<span class="c1"># Create a figure and axes object</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="c1"># Plot y</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$R^f + \frac{\sigma(m)}{E(m)} \sigma(R^i)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">z_values</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$R^f - \frac{\sigma(m)}{E(m)} \sigma(R^i)$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;mean standard deviation frontier&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\sigma(R^i)$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$E (R^i) $&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">.053</span><span class="p">,</span> <span class="mf">1.015</span><span class="p">,</span> <span class="s2">&quot;(.05,1.015)&quot;</span><span class="p">)</span>  
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mf">.05</span><span class="p">,</span> <span class="mf">1.015</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$(\sigma(R^j), E R^j)$&quot;</span><span class="p">)</span>
+<span class="c1"># Add a legend and show the plot</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/asset_pricing_lph_1_0.png" src="_images/asset_pricing_lph_1_0.png" />
+</div>
+</div>
+<p>The figure shows two straight lines, the blue upper one being the locus of <span class="math notranslate nohighlight">\(( \sigma(R^i), E(R^i)\)</span> pairs that are on
+the <strong>mean-variance frontier</strong> or <strong>mean-standard-deviation frontier</strong>.</p>
+<p>The green dot refers to a return  <span class="math notranslate nohighlight">\(R^j\)</span> that is <strong>not</strong> on the frontier and that has moments
+<span class="math notranslate nohighlight">\((\sigma(R^j), E R^j) =  (.05, 1.015)\)</span>.</p>
+<p>It is described by the statistical model</p>
+<div class="math notranslate nohighlight">
+\[ 
+ R^j = R^i +  \epsilon^j
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(R^i\)</span> is a return that is on the frontier and  <span class="math notranslate nohighlight">\(\epsilon^j\)</span> is a random variable that has mean zero and that is orthogonal to <span class="math notranslate nohighlight">\(R^i\)</span>.</p>
+<p>Then <span class="math notranslate nohighlight">\( E R^j = E R^i\)</span> and, as a consequence of <span class="math notranslate nohighlight">\(R^j\)</span> not being on the frontier,</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma^2(R^j) = \sigma^2(R^i) + \sigma^2(\epsilon^j)
+\]</div>
+<p>The length of a horizontal line from the point <span class="math notranslate nohighlight">\(\sigma(R^j), E (R^j) = .05, 1.015\)</span> to
+the frontier   equals</p>
+<div class="math notranslate nohighlight">
+\[
+\sqrt{ \sigma^2(R^i) + \sigma^2( \epsilon^j)} - \sigma(R^i)
+\]</div>
+<p>This is a measure of the part of the risk in <span class="math notranslate nohighlight">\(R^j\)</span> that is not priced because it is  uncorrelated with the stochastic discount factor and so can be diversified away (i.e., averaged out to zero by holding a diversified portfolio).</p>
+</div>
+<div class="section" id="sharpe-ratios-and-the-price-of-risk">
+<h2><a class="toc-backref" href="#id21"><span class="section-number">35.6. </span>Sharpe Ratios and the Price of Risk</a><a class="headerlink" href="#sharpe-ratios-and-the-price-of-risk" title="Permalink to this headline">¶</a></h2>
+<p>An asset’s <strong>Sharpe ratio</strong> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+ \frac{E(R^i) - R^f}{\sigma(R^i)} 
+\]</div>
+<p>The above figure reminds us that all assets <span class="math notranslate nohighlight">\(R^i\)</span> whose returns are on the mean-standard deviation frontier
+satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{E(R^i) - R^f}{\sigma(R^i)}  = \frac{\sigma(m)}{E m} 
+\]</div>
+<p>The ratio <span class="math notranslate nohighlight">\(\frac{\sigma(m)}{E m} \)</span> is often called the <strong>market price of risk</strong>.</p>
+<p>Evidently it equals the maximum Sharpe ratio for any asset or portfolio of assets.</p>
+</div>
+<div class="section" id="mathematical-structure-of-frontier">
+<h2><a class="toc-backref" href="#id22"><span class="section-number">35.7. </span>Mathematical Structure of Frontier</a><a class="headerlink" href="#mathematical-structure-of-frontier" title="Permalink to this headline">¶</a></h2>
 <p>The mathematical  structure of the mean-variance frontier described by inequality <a class="reference internal" href="#equation-eq-erm6">(35.6)</a> implies
 that</p>
 <ul>
-<li><p>all returns on frontier are perfectly correlated.</p>
+<li><p>all returns on the frontier are perfectly correlated.</p>
 <p>Thus,</p>
 <ul class="simple">
 <li><p>Let <span class="math notranslate nohighlight">\(R^m, R^{mv}\)</span> be two returns on the frontier.</p></li>
@@ -480,9 +618,9 @@ that</p>
 <span class="math notranslate nohighlight">\(R^{m v}=R^{f}+a\left(R^{m}-R^{f}\right)\)</span> .  This is an <strong>exact</strong> equation with no <strong>residual</strong>.</p></li>
 </ul>
 </li>
-<li><p>each return <span class="math notranslate nohighlight">\(R^{mv}\)</span> that is on the mean-variance frontier is perfectly correlated with <span class="math notranslate nohighlight">\(m\)</span></p>
+<li><p>each return <span class="math notranslate nohighlight">\(R^{mv}\)</span> that is on the mean-variance frontier is perfectly (negatively) correlated with <span class="math notranslate nohighlight">\(m\)</span></p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\left(\rho_{m, R^{i}}=-1\right) \Rightarrow \begin{cases} m=a+b R^{m v} \\ R^{m v}=e+d  m  \end{cases}\)</span> for some scalars <span class="math notranslate nohighlight">\(a, b, e, d\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\left(\rho_{m, R^{mv}}=-1\right) \Rightarrow \begin{cases} m=a+b R^{m v} \\ R^{m v}=e+d  m  \end{cases}\)</span> for some scalars <span class="math notranslate nohighlight">\(a, b, e, d\)</span>,</p></li>
 </ul>
 <p>Therefore, <strong>any return on the mean-variance frontier is a legitimate stochastic discount factor</strong></p>
 </li>
@@ -493,37 +631,47 @@ that</p>
 E R^{i}=R^{f}+\beta_{i, R^{m v}}\left[E\left(R^{m v}\right)-R^{f}\right] 
 \]</div>
 <ul>
+<li><p>the regression coefficient <span class="math notranslate nohighlight">\(\beta_{i, R^{m v}}\)</span> is often called asset <span class="math notranslate nohighlight">\(i\)</span>’s <strong>beta</strong></p></li>
 <li><p>The special case of a single-beta representation <a class="reference internal" href="#equation-eq-emr7">(35.7)</a> with <span class="math notranslate nohighlight">\( R^{i}=R^{m v}\)</span>   is</p>
 <p><span class="math notranslate nohighlight">\(E R^{m v}=R^{f}+1 \cdot\left[E\left(R^{m v}\right)-R^{f}\right] \)</span></p>
 </li>
 </ul>
 </div>
-<div class="section" id="empirical-implementations">
-<h2><a class="toc-backref" href="#id18"><span class="section-number">35.6. </span>Empirical Implementations</a><a class="headerlink" href="#empirical-implementations" title="Permalink to this headline">¶</a></h2>
-<p>We briefly describe empirical implementations of multi-factor generalizations of the single-factor model described above.</p>
-<p>The single-beta representation  <a class="reference internal" href="#equation-eq-emr7">(35.7)</a> is a special case with there being just a single factor.</p>
-<p>Two representations are often used in empirical work.</p>
-<p>One is a  <strong>time-series regression</strong> of  gross return <span class="math notranslate nohighlight">\(R_t^i\)</span> on multiple
-risk factors <span class="math notranslate nohighlight">\(f_t^j, j = a, b, \ldots \)</span>.</p>
-<p>Such regressions are  designed to uncover exposures of return <span class="math notranslate nohighlight">\(R^i\)</span> to each of a set of  <strong>risk-factors</strong> <span class="math notranslate nohighlight">\(f_t^j, j = a, b, \ldots, \)</span>:</p>
+<div class="section" id="multi-factor-models">
+<h2><a class="toc-backref" href="#id23"><span class="section-number">35.8. </span>Multi-factor Models</a><a class="headerlink" href="#multi-factor-models" title="Permalink to this headline">¶</a></h2>
+<p>The single-beta representation  <a class="reference internal" href="#equation-eq-emr7">(35.7)</a> is a special case of the multi-factor model</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
+\[
+E R^{i}   =\gamma+\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\lambda_j\)</span> is the price of being exposed to risk factor <span class="math notranslate nohighlight">\(f_t^j\)</span>  and <span class="math notranslate nohighlight">\(\beta_{i,j}\)</span> is asset <span class="math notranslate nohighlight">\(i\)</span>’s exposure to that
+risk factor.</p>
+<p>To uncover the <span class="math notranslate nohighlight">\(\beta_{i,j}\)</span>’s, one  takes data on time series of the risk factors <span class="math notranslate nohighlight">\(f_t^j\)</span> that are being priced
+and specifies the following least squares regression</p>
+<div class="math notranslate nohighlight" id="equation-eq-timeseriesrep">
+<span class="eqno">(35.8)<a class="headerlink" href="#equation-eq-timeseriesrep" title="Permalink to this equation">¶</a></span>\[\begin{split}
 R_{t}^{i}=a_{i}+\beta_{i, a} f_{t}^{a}+\beta_{i, b} f_{t}^{b}+\ldots+\epsilon_{t}^{i}, \quad t=1,2, \ldots, T\\
 \epsilon_{t}^{i} \perp f_{t}^{j}, i=1,2, \ldots, I; j = a, b, \ldots 
 \end{split}\]</div>
-<p>For example:</p>
+<p>Special cases are:</p>
 <ul class="simple">
 <li><p>a popular <strong>single-factor</strong> model specifies the single factor  <span class="math notranslate nohighlight">\(f_t\)</span> to be the return on the market portfolio</p></li>
 <li><p>another popular <strong>single-factor</strong> model called the <strong>consumption-based model</strong> specifies the factor to be  <span class="math notranslate nohighlight">\( m_{t+1} = \beta \frac{u^{\prime}\left(c_{t+1}\right)}{u^{\prime}\left(c_{t}\right)}\)</span>, where <span class="math notranslate nohighlight">\(c_t\)</span> is a representative consumer’s time <span class="math notranslate nohighlight">\(t\)</span> consumption.</p></li>
 </ul>
-<p>Model objects are interpreted as follows:</p>
+<p>As a reminder, model objects are interpreted as follows:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\beta_{i,a}\)</span> is the  exposure of return <span class="math notranslate nohighlight">\(R^i\)</span> to factor <span class="math notranslate nohighlight">\(f_a\)</span> risk</p></li>
-<li><p><span class="math notranslate nohighlight">\(\lambda_{a}\)</span> is the  price of exposure to factor <span class="math notranslate nohighlight">\(f_a\)</span> risk</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_{i,a}\)</span> is the  exposure of return <span class="math notranslate nohighlight">\(R^i\)</span> to risk factor <span class="math notranslate nohighlight">\(f_a\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\lambda_{a}\)</span> is the  price of exposure to risk factor <span class="math notranslate nohighlight">\(f_a\)</span></p></li>
 </ul>
+</div>
+<div class="section" id="empirical-implementations">
+<h2><a class="toc-backref" href="#id24"><span class="section-number">35.9. </span>Empirical Implementations</a><a class="headerlink" href="#empirical-implementations" title="Permalink to this headline">¶</a></h2>
+<p>We briefly describe empirical implementations of multi-factor generalizations of the single-factor model described above.</p>
+<p>Two representations of a multi-factor model play importnt roles in empirical applications.</p>
+<p>One is the time series regression <a class="reference internal" href="#equation-eq-timeseriesrep">(35.8)</a></p>
 <p>The other representation entails  a <strong>cross-section regression</strong>  of <strong>average returns</strong> <span class="math notranslate nohighlight">\(E R^i\)</span> for  assets
 <span class="math notranslate nohighlight">\(i =1, 2, \ldots, I\)</span> on <strong>prices of risk</strong> <span class="math notranslate nohighlight">\(\lambda_j\)</span> for <span class="math notranslate nohighlight">\(j =a, b, c, \ldots\)</span></p>
-<p>Here is the regression specification:</p>
+<p>Here is the cross-section regression specification for a multi-factor model:</p>
 <div class="math notranslate nohighlight">
 \[
 E R^{i}   =\gamma+\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots
@@ -546,7 +694,7 @@ models.</p>
 \underbrace{E\left(R^{i}\right)}_{\text{average return over time series}}=\gamma+\underbrace{\beta_{i, a}}_{\text{regressor}\quad} \underbrace{\lambda_{a}}_{\text{regression}\text{coefficient}}+\underbrace{\beta_{i, b}}_{\text{regressor}\quad} \underbrace{\lambda_{b}}_{\text{regression}\text{coefficient}}+\cdots+\underbrace{\alpha_{i}}_{\text{pricing errors}}, i=1, \ldots, I; \quad \underbrace{\alpha_i \perp \beta_{i,j},j = a, b, \ldots}_{\text{least squares orthogonality condition}}
 \]</div>
 <ul class="simple">
-<li><p>Here <span class="math notranslate nohighlight">\(\perp\)</span> means __orthogonal to**</p></li>
+<li><p>Here <span class="math notranslate nohighlight">\(\perp\)</span> means <strong>orthogonal to</strong></p></li>
 <li><p>estimate <span class="math notranslate nohighlight">\(\gamma, \lambda_{a}, \lambda_{b}, \ldots\)</span> by an appropriate regression technique,  recognizing that the regressors have been generated by a step 1 regression.</p></li>
 </ul>
 <p>Note that presumably  the risk-free return <span class="math notranslate nohighlight">\(E R^{f}=\gamma\)</span>.</p>
@@ -555,13 +703,13 @@ models.</p>
 \[
 E R^{e i}=\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots+\alpha_{i}, i=1, \ldots, I
 \]</div>
-<p>In the  following exercises, we apply components of the theory.</p>
+<p>In the  following exercises, we illustrate aspects of these empirical strategies on artificial data.</p>
 <p>Our basic tools are random number generator that we shall use to create artificial samples that conform to the theory and
 least squares regressions that let us watch aspects of the theory at work.</p>
 <p>These exercises will further convince us that asset pricing theory is mostly about covariances and least squares regressions.</p>
 </div>
 <div class="section" id="exercises">
-<h2><a class="toc-backref" href="#id19"><span class="section-number">35.7. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id25"><span class="section-number">35.10. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p>Let’s start with some imports.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -773,7 +921,7 @@ E[(a + b R_t^m) R^f_t)] &amp;= 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2.000000000000003e-02, 3.123283175179055e-17)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.02000000000000003, 3.123283175179055e-17)
 </pre></div>
 </div>
 </div>
@@ -808,7 +956,7 @@ E[(a + b R_t^m) R^f_t)] &amp;= 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.05834957768263575, 0.0788184928672285)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.06302287024648721, 0.08178445686921211)
 </pre></div>
 </div>
 </div>
@@ -846,8 +994,8 @@ E[(a + b R_t^m) R^f_t)] &amp;= 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.20813131, 0.39563372, 0.6023522 , 0.79456394, 0.99103695]),
- array([0.03940263, 0.03968783, 0.04096609, 0.03975873, 0.03964609]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.19226266, 0.39805875, 0.59939641, 0.7994372 , 1.00406981]),
+ array([0.03913062, 0.04060062, 0.0394525 , 0.04049393, 0.04026443]))
 </pre></div>
 </div>
 </div>
@@ -955,7 +1103,7 @@ a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(86.79494252526028, -469.6252821464159, 53.85519983537058)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(89.11329275011468, -471.11467760619456, 55.89741512191402)
 </pre></div>
 </div>
 </div>

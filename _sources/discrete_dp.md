@@ -440,10 +440,10 @@ For $R$ we set $R[s, a] = u(s - a)$ if $a \leq s$ and $-\infty$ otherwise.
 
 For $Q$ we follow the rule in {eq}`ddp_def_ogq`.
 
-Note:
-
+```{note}
 * The feasibility constraint is embedded into $R$ by setting $R[s, a] = -\infty$ for $a \notin A(s)$.
 * Probability distributions for $(s, a)$ with $a \notin A(s)$ can be arbitrary.
+```
 
 The following code sets up these objects for us
 
