@@ -993,10 +993,12 @@ so no robustness to alternative distributions is acquired.
 
 As $\theta$ is lowered, more robustness is achieved.
 
-**Note:** The ${\sf T}$ operator is sometimes called a
+```{note}
+The ${\sf T}$ operator is sometimes called a
 *risk-sensitivity* operator.
+```
 
-We shall apply ${\sf T}$to the special case of a linear value
+We shall apply ${\sf T}$ to the special case of a linear value
 function $w'(\vec r - r_f 1)$
 where $\vec r - r_f 1 \sim {\mathcal N}(\mu,\Sigma)$ or
 $\vec r - r_f {\bf 1} = \mu + C \epsilon$ and

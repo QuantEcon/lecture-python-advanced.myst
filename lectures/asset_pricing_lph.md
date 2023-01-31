@@ -23,31 +23,42 @@ kernelspec:
 
 ## Overview
 
-This lecture summarizes the heart of applied asset-pricing theory.
+This lecture is about  some implications of  asset-pricing theories that are based on the equation
+$E m R = 1,$ where $R$ is the gross return on an asset, $m$ is  a stochastic discount factor, and $E$ is a mathematical expectation with respect to a joint probability distribution of $R$ and $m$.
 
-From a single equation, we'll derive 
+Instances of this equation occur in  many models. 
+
+```{note}
+Chapter 1 of {cite}`Ljungqvist2012` describes the role that this equation plays in a diverse set of
+models in macroeconomics, monetary economics, and public finance.
+```
+
+
+We aim to convey insights about empirical implications of this equation brought out in the work of Lars Peter Hansen {cite}`HansenRichard1987` and Lars Peter Hansen and Ravi Jagannathan {cite}`Hansen_Jagannathan_1991`. 
+
+By following their footsteps, from  that single equation  we'll derive 
 
 * a mean-variance frontier 
 
-* a single-factor model of excess returns on each member of a collection of assets
-
+* a single-factor model of  excess  returns  
 
 
 To do this, we use two ideas:
 
-  * an asset pricing equation
+  * the equation $E m R =1 $ that is  implied by an application of a *law of one price*
   
   * a Cauchy-Schwartz inequality
 
-In this way, we shall derive the basic **capital asset pricing model**, the celebrated CAPM. 
+In particular, we'll apply a Cauchy-Schwartz inequality to a population linear least squares regression equation that is
+implied by $E m R =1$.
 
-We'll describe the basic ways that practitioners have implemented the model using
+We'll also describe how  practitioners have implemented the model using
 
 * cross sections of returns on many assets
 * time series of returns on various assets
 
 
-For background and basic  concepts, see our lecture [orthogonal projections and their applications](https://python-advanced.quantecon.org/orth_proj.html).
+For background and basic  concepts about linear least squares projections, see our lecture [orthogonal projections and their applications](https://python-advanced.quantecon.org/orth_proj.html).
 
 As a sequel to the material here, please see our lecture [two modifications of mean-variance portfolio theory](https://python-advanced.quantecon.org/black_litterman.html).
 
@@ -70,20 +81,20 @@ E &\sim \text { mathematical expectation }
 \end{aligned}
 $$
 
-The random gross returns $R^i$ and the scalar stochastic discount factor $m$ 
+The random gross return $R^i$ for every asset $i$ and the scalar stochastic discount factor $m$ 
 live in a common probability space. 
 
 {cite}`HansenRichard1987` and {cite}`Hansen_Jagannathan_1991` explain how **existence** of a scalar stochastic discount factor that verifies  equation
 {eq}`eq:EMR1` is implied by a __law of one price__ that requires that all portfolios of assets 
-that end up having the same payouts must have the same price.
+that bring the  same payouts  have the same price.
 
 They also explain how the __absence of an arbitrage__ opportunity implies that the stochastic discount
 factor $m \geq 0$.
 
-To say something about the **uniqueness** of a stochastic discount factor would require that we impose more theoretical structure than we do in this
+In order to say something about the **uniqueness** of a stochastic discount factor, we  would have to impose more theoretical structure than we do in this
 lecture.   
 
-In **complete markets** models like those illustrated in this lecture [equilibrium capital structures with incomplete markets](https://python-advanced.quantecon.org/BCG_incomplete_mkts.html),
+For example, in **complete markets** models like those illustrated in this lecture [equilibrium capital structures with incomplete markets](https://python-advanced.quantecon.org/BCG_incomplete_mkts.html),
 the stochastic discount factor is unique.
 
 In **incomplete markets** models like those illustrated in this lecture [the Aiyagari model](https://python.quantecon.org/aiyagari.html), the stochastic discount factor is not unique.
@@ -96,12 +107,12 @@ We combine  key equation {eq}`eq:EMR1` with a  remark of Lars Peter Hansen that 
 
 ```{note}
 Lars Hansen's remark is a concise summary of ideas in {cite}`HansenRichard1987` and
-{cite}`Hansen_Jagannathan_1991`. For other important foundations of these ideas, see
+{cite}`Hansen_Jagannathan_1991`. Important foundations of these ideas were set down by
 {cite}`Ross_76`, {cite}`Ross_78`, {cite}`Harrison_Kreps_JET_79`, {cite}`Kreps_81`, and
 {cite}`Chamberlain_Rothschild`.
 ```
 
-This remark of Lars Hansen refers to the fact that interesting restrictions can be deduced by recognizing that $E m R^i$ is a component of the covariance between $m $ and $R^i$ and then using that fact to rearrange key equation  {eq}`eq:EMR1`.
+This remark of Lars Hansen refers to the fact that interesting restrictions can be deduced by recognizing that $E m R^i$ is a component of the covariance between $m $ and $R^i$ and then using that fact to rearrange  equation  {eq}`eq:EMR1`.
 
 
 Let's do this step by step.
@@ -116,7 +127,7 @@ E m R^i = E m E R^{i}+\operatorname{cov}\left(m, R^{i}\right)
 $$
 
 Substituting this result into 
-key equation {eq}`eq:EMR1` gives
+ equation {eq}`eq:EMR1` gives
 
 $$
 1 = E m E R^{i}+\operatorname{cov}\left(m, R^{i}\right) 
@@ -175,24 +186,57 @@ $$ (eq:ERbetarep)
 
 Here 
 
- * $\beta_{i,m}$ is a (population) least squares regression coefficient of gross return $R^i$ on stochastic discount factor $m$, an object that is often called asset $i$'s **beta**
+ * $\beta_{i,m}$ is a (population) least squares regression coefficient of gross return $R^i$ on stochastic discount factor $m$
  
- * $\lambda_m$ is minus the variance of $m$ divided by the mean of $m$, an object that is often called the **price of risk**.
+ * $\lambda_m$ is minus the variance of $m$ divided by the mean of $m$, an object that is sometimes called a **price of risk**.
+
+
+Because $\lambda_m < 0$, equation {eq}`eq:ERbetarep` asserts that 
+
+* assets whose returns are **positively** correlated with the stochastic discount factor (SDF) $m$ have expected returns **lower** than the risk-free rate $R^f$
+ * assets whose returns are **negatively** correlated with the SDF $m$ have expected returns **higher** than the risk-free rate $R^f$
+
+These patterns will be discussed more below.
+
+In particular, we'll see that returns that are **perfectly** negatively correlated with the SDF $m$ have a special
+status:
+
+* they are on a **mean-variance frontier**
+
+
+Before we dive into that more, we'll pause to look at an example of an SDF.
  
-To interpret this representation it helps to provide the following widely used example.
+To interpret  representation {eq}`eq:ERbetarep`, the following widely used example helps.
  
+
+
  
 **Example** 
 
-Let $c_t$ be the logarithm of the consumption of a _representative consumer_ or just a single consumer for whom we have data.
+Let $c_t$ be the logarithm of the consumption of a _representative consumer_ or just a single consumer for whom we have consumption data.
 
 A popular model of $m$ is
+
+
+$$
+m_{t+1} = \beta \frac{U'(C_{t+1})}{U'(C_t)}
+$$
+
+where $C_t$ is consumption at time $t$, $\beta = \exp(-\rho)$ is a discount **factor** with $\rho$ being
+the discount **rate**, and $U(\cdot)$ is a concave, twice-diffential utility function.
+
+For a constant relative risk aversion (CRRA) utility function $U(C) = \frac{C^{1-\gamma}}{1-\gamma}$ utility
+function $U'(C) = C^{-\gamma}$.
+
+In this case, letting $c_t = \log(C_t)$, we can write $m_{t+1}$ as
 
 $$ 
 m_{t+1} = \exp(-\rho) \exp(- \gamma(c_{t+1} - c_t)) 
 $$
 
-where $ \rho > 0$, $\gamma > 0$,  and the log of consumption growth is governed by
+where $ \rho > 0$, $\gamma > 0$.
+
+A popular model  for the growth of  log of consumption  is 
 
 $$ 
 c_{t+1} - c_t = \mu + \sigma_c \epsilon_{t+1} 
@@ -200,13 +244,15 @@ $$
 
 where $\epsilon_{t+1} \sim {\mathcal N}(0,1)$.
 
-Here 
+Here $\{c_t\}$ is a random walk with drift $\mu$, a good approximation to US per capital consumption growth.
+
+Again here 
 
   * $\gamma >0$ is a coefficient of relative risk aversion
   
   * $\rho >0 $ is a fixed intertemporal discount rate 
   
-
+So we have 
 
 $$ 
 m_{t+1} = \exp(-\rho) \exp( - \gamma \mu - \gamma \sigma_c \epsilon_{t+1}) 
@@ -230,11 +276,11 @@ When $\gamma >0$, it is true that
  
  * when consumption growth is **low**, $m$ is **high**
  
-According to representation {eq}`eq:ERbetarep`, an asset with a gross return  $R^i$ that is expected to be **high** when consumption growth is **low**  has $\beta_i$ positive and a **low** expected return.  
+According to representation {eq}`eq:ERbetarep`, an asset with a gross return  $R^i$ that is expected to be **high** when consumption growth is **low**  has $\beta_{i,m}$ positive and a **low** expected return.  
 
    * because it has a high gross return when consumption growth is low, it is a good hedge against consumption risk. That justifies its low average return.
 
-An asset with an $R^i$ that is **low** when consumption growth is **low** has $\beta_i$ negative and a **high** expected return.
+An asset with an $R^i$ that is **low** when consumption growth is **low** has $\beta_{i,m}$ negative and a **high** expected return.
 
   * because it has a low gross return when consumption growth is low, it is a poor hedge against consumption risk. That  justifies its high average return.
 
@@ -272,7 +318,7 @@ $$
 $$
 
 
-and where $\sigma$ denotes the standard deviation of the variable in parentheses
+and where $\sigma(\cdot)$ denotes the standard deviation of the variable in parentheses
 
 Equation {eq}`eq:EMR5`  implies
 
@@ -303,17 +349,110 @@ $$
 \end{array}\right.
 $$
 
-The image below illustrates a mean-variance frontier.
+Now let's use matplotlib to draw a mean variance frontier.
 
-```{figure} _static/lecture_specific/asset_pricing_lph/AssetPricing_v1.jpg
-:scale: 60%
+In drawing a frontier, we'll set $\sigma(m) = .25$ and $E m = .99$, values roughly consistent with what many studies calibrate from quarterly US data.
+
+```{code-cell} ipython3
+import matplotlib.pyplot as plt
+import numpy as np
+%matplotlib inline
+
+# Define the function to plot
+def y(x, alpha, beta):
+    return alpha + beta*x
+def z(x, alpha, beta):
+    return alpha - beta*x
+
+sigmam = .25
+Em = .99
+
+# Set the values of alpha and beta
+alpha = 1/Em
+beta = sigmam/Em
+
+# Create a range of values for x
+x = np.linspace(0, .15, 100)
+
+# Calculate the values of y and z
+y_values = y(x, alpha, beta)
+z_values = z(x, alpha, beta)
+
+# Create a figure and axes object
+fig, ax = plt.subplots()
+
+# Plot y
+ax.plot(x, y_values, label=r'$R^f + \frac{\sigma(m)}{E(m)} \sigma(R^i)$')
+ax.plot(x, z_values, label=r'$R^f - \frac{\sigma(m)}{E(m)} \sigma(R^i)$')
+
+plt.title('mean standard deviation frontier')
+plt.xlabel(r"$\sigma(R^i)$")
+plt.ylabel(r"$E (R^i) $")
+plt.text(.053, 1.015, "(.05,1.015)")  
+ax.plot(.05, 1.015, 'o', label="$(\sigma(R^j), E R^j)$")
+# Add a legend and show the plot
+ax.legend()
+plt.show()
 ```
+
+
+The figure shows two straight lines, the blue upper one being the locus of $( \sigma(R^i), E(R^i)$ pairs that are on 
+the **mean-variance frontier** or **mean-standard-deviation frontier**.  
+
+The green dot refers to a return  $R^j$ that is **not** on the frontier and that has moments
+$(\sigma(R^j), E R^j) =  (.05, 1.015)$.  
+
+It is described by the statistical model
+
+$$ 
+ R^j = R^i +  \epsilon^j
+$$
+
+where $R^i$ is a return that is on the frontier and  $\epsilon^j$ is a random variable that has mean zero and that is orthogonal to $R^i$.
+
+Then $ E R^j = E R^i$ and, as a consequence of $R^j$ not being on the frontier, 
+
+$$
+\sigma^2(R^j) = \sigma^2(R^i) + \sigma^2(\epsilon^j)
+$$
+
+The length of a horizontal line from the point $\sigma(R^j), E (R^j) = .05, 1.015$ to
+the frontier   equals
+
+$$
+\sqrt{ \sigma^2(R^i) + \sigma^2( \epsilon^j)} - \sigma(R^i)
+$$
+
+This is a measure of the part of the risk in $R^j$ that is not priced because it is  uncorrelated with the stochastic discount factor and so can be diversified away (i.e., averaged out to zero by holding a diversified portfolio).
+
+
+## Sharpe Ratios and the Price of Risk
+
+An asset's **Sharpe ratio** is defined as
+
+$$
+ \frac{E(R^i) - R^f}{\sigma(R^i)} 
+$$
+
+The above figure reminds us that all assets $R^i$ whose returns are on the mean-standard deviation frontier
+satisfy
+
+$$
+\frac{E(R^i) - R^f}{\sigma(R^i)}  = \frac{\sigma(m)}{E m} 
+$$
+
+The ratio $\frac{\sigma(m)}{E m} $ is often called the **market price of risk**.
+
+Evidently it equals the maximum Sharpe ratio for any asset or portfolio of assets.
+
+
+## Mathematical Structure of Frontier
 
 The mathematical  structure of the mean-variance frontier described by inequality {eq}`eq:ERM6` implies 
 that
 
 
-- all returns on frontier are perfectly correlated.
+- all returns on the frontier are perfectly correlated.
 
   Thus,
    
@@ -323,9 +462,9 @@ that
        $R^{m v}=R^{f}+a\left(R^{m}-R^{f}\right)$ .  This is an **exact** equation with no **residual**.
  
  
-- each return $R^{mv}$ that is on the mean-variance frontier is perfectly correlated with $m$ 
+- each return $R^{mv}$ that is on the mean-variance frontier is perfectly (negatively) correlated with $m$ 
   
-   *  $\left(\rho_{m, R^{i}}=-1\right) \Rightarrow \begin{cases} m=a+b R^{m v} \\ R^{m v}=e+d  m  \end{cases}$ for some scalars $a, b, e, d$, 
+   *  $\left(\rho_{m, R^{mv}}=-1\right) \Rightarrow \begin{cases} m=a+b R^{m v} \\ R^{m v}=e+d  m  \end{cases}$ for some scalars $a, b, e, d$, 
    
    Therefore, **any return on the mean-variance frontier is a legitimate stochastic discount factor**
 
@@ -335,6 +474,8 @@ that
 $$ 
 E R^{i}=R^{f}+\beta_{i, R^{m v}}\left[E\left(R^{m v}\right)-R^{f}\right] 
 $$ (eq:EMR7) 
+
+- the regression coefficient $\beta_{i, R^{m v}}$ is often called asset $i$'s **beta**
    
 - The special case of a single-beta representation {eq}`eq:EMR7` with $ R^{i}=R^{m v}$   is 
   
@@ -343,44 +484,53 @@ $$ (eq:EMR7)
 
 +++
 
-## Empirical Implementations
+## Multi-factor Models
+
+The single-beta representation  {eq}`eq:EMR7` is a special case of the multi-factor model 
 
 
-We briefly describe empirical implementations of multi-factor generalizations of the single-factor model described above.  
-
-The single-beta representation  {eq}`eq:EMR7` is a special case with there being just a single factor.
-
-Two representations are often used in empirical work.  
+$$
+E R^{i}   =\gamma+\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots
+$$
 
 
-One is a  **time-series regression** of  gross return $R_t^i$ on multiple
-risk factors $f_t^j, j = a, b, \ldots $.
+where $\lambda_j$ is the price of being exposed to risk factor $f_t^j$  and $\beta_{i,j}$ is asset $i$'s exposure to that
+risk factor.  
 
-Such regressions are  designed to uncover exposures of return $R^i$ to each of a set of  **risk-factors** $f_t^j, j = a, b, \ldots, $:
+To uncover the $\beta_{i,j}$'s, one  takes data on time series of the risk factors $f_t^j$ that are being priced
+and specifies the following least squares regression
+
 
 $$
 R_{t}^{i}=a_{i}+\beta_{i, a} f_{t}^{a}+\beta_{i, b} f_{t}^{b}+\ldots+\epsilon_{t}^{i}, \quad t=1,2, \ldots, T\\
 \epsilon_{t}^{i} \perp f_{t}^{j}, i=1,2, \ldots, I; j = a, b, \ldots 
-$$
+$$ (eq:timeseriesrep)
 
-For example:
+Special cases are:
 
    * a popular **single-factor** model specifies the single factor  $f_t$ to be the return on the market portfolio 
    
    * another popular **single-factor** model called the **consumption-based model** specifies the factor to be  $ m_{t+1} = \beta \frac{u^{\prime}\left(c_{t+1}\right)}{u^{\prime}\left(c_{t}\right)}$, where $c_t$ is a representative consumer's time $t$ consumption.
    
-Model objects are interpreted as follows:   
+
+As a reminder, model objects are interpreted as follows:   
  
-   * $\beta_{i,a}$ is the  exposure of return $R^i$ to factor $f_a$ risk
+   * $\beta_{i,a}$ is the  exposure of return $R^i$ to risk factor $f_a$ 
    
-   * $\lambda_{a}$ is the  price of exposure to factor $f_a$ risk
+   * $\lambda_{a}$ is the  price of exposure to risk factor $f_a$ 
    
-   
+## Empirical Implementations
+
+We briefly describe empirical implementations of multi-factor generalizations of the single-factor model described above.  
+
+Two representations of a multi-factor model play importnt roles in empirical applications.
+
+One is the time series regression {eq}`eq:timeseriesrep`
 
 The other representation entails  a **cross-section regression**  of **average returns** $E R^i$ for  assets
 $i =1, 2, \ldots, I$ on **prices of risk** $\lambda_j$ for $j =a, b, c, \ldots$ 
 
-Here is the regression specification:
+Here is the cross-section regression specification for a multi-factor model:
 
 
 $$
@@ -412,7 +562,7 @@ $$
 \underbrace{E\left(R^{i}\right)}_{\text{average return over time series}}=\gamma+\underbrace{\beta_{i, a}}_{\text{regressor}\quad} \underbrace{\lambda_{a}}_{\text{regression}\text{coefficient}}+\underbrace{\beta_{i, b}}_{\text{regressor}\quad} \underbrace{\lambda_{b}}_{\text{regression}\text{coefficient}}+\cdots+\underbrace{\alpha_{i}}_{\text{pricing errors}}, i=1, \ldots, I; \quad \underbrace{\alpha_i \perp \beta_{i,j},j = a, b, \ldots}_{\text{least squares orthogonality condition}}
 $$
 
-- Here $\perp$ means __orthogonal to**
+- Here $\perp$ means **orthogonal to**
 
 - estimate $\gamma, \lambda_{a}, \lambda_{b}, \ldots$ by an appropriate regression technique,  recognizing that the regressors have been generated by a step 1 regression.
 
@@ -425,7 +575,7 @@ E R^{e i}=\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots+\alpha_{i}, i
 $$
 
 
-In the  following exercises, we apply components of the theory.
+In the  following exercises, we illustrate aspects of these empirical strategies on artificial data. 
 
 Our basic tools are random number generator that we shall use to create artificial samples that conform to the theory and
 least squares regressions that let us watch aspects of the theory at work.

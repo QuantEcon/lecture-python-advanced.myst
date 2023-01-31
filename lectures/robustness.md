@@ -1186,5 +1186,7 @@ $$
 Although it involves a substantial amount of algebra, it can be shown that the
 latter is just $\hat P$.
 
-(Hint: Use the fact that $\hat P = \mathcal B( \mathcal D( \hat P))$)
+```{hint}
+Use the fact that $\hat P = \mathcal B( \mathcal D( \hat P))$
+```
 
