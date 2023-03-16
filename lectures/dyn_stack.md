@@ -1080,7 +1080,7 @@ axes[1].set(title=r'Follower control variable $x_{t}$', xlabel='t')
 
 axes[2].plot(range(n), vt_leader, 'bo', ms=2)
 axes[2].plot(range(n), vt_reset_leader, 'ro', ms=2)
-axes[2].set(title=r'Leader value function $v(y_{t})$', xlabel='t')
+axes[2].set(title=r'Leader value $v(y_{t})$', xlabel='t')
 
 plt.tight_layout()
 plt.show()
@@ -1371,13 +1371,13 @@ v2_direct_alt = - z[:, 0].T @ lq1.P @ z[:, 0] + lq1.d
 
 ## Comparing Markov Perfect Equilibrium and  Stackelberg Outcome
 
-It is enlightening to compare equilbrium quantities for firms 1 and 2 under two alternative 
+It is enlightening to compare equilbrium values for firms 1 and 2 under two alternative 
 settings:
   
   * A Markov perfect equilibrium like that described in [this lecture](https://python.quantecon.org/markov_perf.html)
   * A Stackelberg equilbrium 
 
-The following code performs the required computations.
+The following code performs the required computations, then plots the continuation values.
 
 
 ```{code-cell} python3
@@ -1392,7 +1392,7 @@ fig, ax = plt.subplots()
 ax.plot(vt_MPE, 'b', label='MPE')
 ax.plot(vt_leader, 'r', label='Stackelberg leader')
 ax.plot(vt_follower, 'g', label='Stackelberg follower')
-ax.set_title(r'MPE vs. Stackelberg Value Function')
+ax.set_title(r'Values for MPE duopolists and  Stackelberg firms')
 ax.set_xlabel('t')
 ax.legend(loc=(1.05, 0))
 plt.show()
