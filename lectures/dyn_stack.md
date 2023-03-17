@@ -35,7 +35,7 @@ tags: [hide-output]
 
 ## Overview
 
-This notebook formulates and computes a plan that a **Stackelberg
+This lecture formulates and computes a plan that a **Stackelberg
 leader** uses to manipulate forward-looking decisions of a **Stackelberg
 follower** that depend on continuation sequences of decisions made once
 and for all by the Stackelberg leader at time $0$.
@@ -77,13 +77,13 @@ $a_0$ and $a_1$ are both positive.
 $q_{10}, q_{20}$ are given numbers that serve as initial
 conditions at time $0$.
 
-By incurring a cost of change
+By incurring a cost equal to
 
 $$
-\gamma v_{it}^2
+\gamma v_{it}^2, \quad \gamma > 0 ,
 $$
 
-where $\gamma > 0$, firm $i$ can change its output according
+firm $i$ can change its output according
 to
 
 $$
@@ -217,8 +217,7 @@ $$
 where
 $c_0 = \frac{\beta a_0}{2 \gamma}, c_1 = \frac{\beta a_1}{\gamma}, c_2 = \frac{\beta a_1}{2 \gamma}$.
 
-This equation can in turn be rearranged to become the second-order
-difference equation
+This equation can in turn be rearranged to become 
 
 ```{math}
 :label: sstack1
@@ -272,7 +271,7 @@ $$
 Operating on both sides of equation {eq}`sstack2` with
 $\beta^{-1}$ times this inverse operator gives the follower's
 decision rule for setting $q_{1t+1}$ in the
-**feedback-feedforward** form.
+**feedback-feedforward** form
 
 ```{math}
 :label: sstack3
@@ -304,7 +303,7 @@ and formulate the following Lagrangian for the Stackelberg leader firm
 
 subject to initial conditions for $q_{1t}, q_{2t}$ at $t=0$.
 
-**Comments:** We have formulated the Stackelberg problem in a space of
+**Remarks:** We have formulated the Stackelberg problem in a space of
 sequences.
 
 The max-min problem associated with Lagrangian
@@ -314,11 +313,11 @@ future of its choices of $\{q_{1t+j}\}_{j=0}^\infty$.
 
 This renders a direct attack on the problem cumbersome.
 
-Therefore, below, we will formulate the Stackelberg leader's problem
+Therefore, below we will formulate the Stackelberg leader's problem
 recursively.
 
 We'll put our little duopoly model into a broader class of models with
-the same conceptual structure.
+the same  structure.
 
 ## Stackelberg Problem
 
@@ -342,7 +341,7 @@ of the Stackelberg **follower**.
 Let $u_t$ be a vector of decisions chosen by the Stackelberg leader
 at $t$.
 
-The $z_t$ vector is inherited physically from the past.
+The $z_t$ vector is inherited  from the past.
 
 But $x_t$ is a decision made by the Stackelberg follower at time
 $t$ that is the follower's best response to the choice of an
@@ -464,13 +463,13 @@ Subproblem 2 is solved by the **Stackelberg leader** at $t=0$.
 
 The two subproblems are designed
 
-- to respect the protocol in which the follower chooses
+- to respect the timing protocol in which the follower chooses
   $\vec q_1$ after seeing $\vec q_2$ chosen by the leader
 - to make the leader choose $\vec q_2$ while respecting that
   $\vec q_1$ will be the follower's best response to
   $\vec q_2$
 - to represent the leader's problem recursively by artfully choosing
-  the state variables confronting and the control variables available
+  the leader's state variables and the control variables available
   to the leader
 
 **Subproblem 1**
@@ -1012,8 +1011,9 @@ plt.show()
 
 We'll compute the present value earned by the Stackelberg leader.
 
-We'll compute it two ways (they give identical answers -- just a check
-on coding and thinking)
+We'll compute it two ways and get the same answer.  
+
+In addition to being a useful check on the accuracy of our coding, computing things in these two ways helps us think about the structure of the problem.  
 
 ```{code-cell} python3
 v_leader_forward = np.sum(βs * π_leader)
