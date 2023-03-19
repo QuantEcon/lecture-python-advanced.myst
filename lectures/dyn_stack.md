@@ -736,7 +736,7 @@ $$
             H^t_t & = \check A_{22}^{t-1}(\check A_{21} + \check A_{22} H^0_0 ) \end{aligned}
 $$
 
-An optimal decision rule for the Stackelberg's choice of $u_t$ is
+An optimal decision rule for the Stackelberg leader's choice of $u_t$ is
 
 $$
 u_t  = - F \check y_t \equiv - \begin{bmatrix} F_z & F_x \cr \end{bmatrix}
@@ -759,8 +759,7 @@ $\check z_t$ but on components of $\check z^{t-1}$.
 
 ### Comments and Interpretations
 
-After all, at the end of the day, it will turn out that because we set
-$\check z_0 = z_0$, it will be true that $z_t = \check z_t$
+Because we set $\check z_0 = z_0$, it will turn out that $z_t = \check z_t$
 for all $t \geq 0$.
 
 Then why did we distinguish $\check z_t$ from $z_t$?
@@ -850,7 +849,7 @@ q_{1t+1} \end{bmatrix} = \begin{bmatrix} A - BF & 0 \\
 q_{1t} \end{bmatrix} + \begin{bmatrix} 0 \cr 1 \end{bmatrix} x_t
 ```
 
-This specification assures that from the point of the view of a firm 1,
+This specification assures that from the point of the view of  firm 1,
 $q_{2t}$ is an exogenous process.
 
 Here
@@ -877,7 +876,7 @@ $$
 x_t = - \tilde F X_t
 $$
 
-and it's state evolves according to
+and its state evolves according to
 
 $$
 \tilde X_{t+1} = (\tilde A - \tilde B \tilde F) X_t
@@ -894,7 +893,7 @@ $$
 we recover
 
 $$
-x_0 = - \tilde F \tilde X_0
+x_0 = - \tilde F \tilde X_0 ,
 $$
 
 which will verify that we have properly set up a recursive
@@ -903,8 +902,8 @@ $\vec q_2$.
 
 ### Time Consistency of Follower's Plan
 
-Since the follower can solve its problem using dynamic programming its
-problem is recursive in what for it are the **natural state variables**,
+The follower can solve its problem using dynamic programming  because its
+problem is recursive in  **natural state variables**,
 namely
 
 $$
@@ -915,8 +914,8 @@ It follows that the follower's plan is time consistent.
 
 ## Computing  Stackelberg Plan
 
-Here is our code to compute a Stackelberg plan via a linear-quadratic
-dynamic program as outlined above
+Here is our code to compute a Stackelberg plan via the linear-quadratic
+dynamic program describe above
 
 ```{code-cell} python3
 # Parameters
@@ -989,7 +988,7 @@ print(f"F = {F}")
 
 ## Time Series for Price and Quantities
 
-The following code plots the price and quantities
+The following code plots the price and quantities produced by the Stackelberg leader and follower.
 
 ```{code-cell} python3
 q_leader = yt[1, :-1]
@@ -1140,8 +1139,8 @@ yt[:, 0][-1] - (yt_tilde[:, 1] - yt_tilde[:, 0])[-1] < tol0
 
 ### Explanation of Alignment
 
-If we inspect the coefficients in the decision rule $- \tilde F$,
-we can spot the reason that the follower chooses to set $x_t =
+If we inspect  coefficients in the decision rule $- \tilde F$,
+we should be able to  spot why the follower chooses to set $x_t =
 \tilde x_t$ when it sets $x_t = - \tilde F X_t$ in
 the recursive formulation of the follower problem.
 
