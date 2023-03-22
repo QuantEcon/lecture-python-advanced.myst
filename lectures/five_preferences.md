@@ -236,7 +236,7 @@ for i in range(π_hat_0_vals.size):  # Loop over all possible values for `π_hat
 ```{code-cell} ipython3
 ---
 tags: [hide-input]
-render:
+mystnb:
   figure:
     caption: |
       Figure 1

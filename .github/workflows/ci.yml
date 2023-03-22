@@ -15,6 +15,9 @@ jobs:
           python-version: 3.9
           environment-file: environment.yml
           activate-environment: quantecon
+      - name: Install docutils==0.17.1
+        run: |
+          pip install docutils==0.17.1
       - name: Install latex dependencies
         run: |
           sudo apt-get -qq update
