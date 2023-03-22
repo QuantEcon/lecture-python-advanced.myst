@@ -15,9 +15,6 @@ jobs:
           python-version: 3.9
           environment-file: environment.yml
           activate-environment: quantecon
-      - name: Install docutils==0.17.1
-        run: |
-          pip install docutils==0.17.1
       - name: Install latex dependencies
         run: |
           sudo apt-get -qq update
@@ -37,13 +34,13 @@ jobs:
       - name: Display Pip Versions
         shell: bash -l {0}
         run: pip list
-      - name: Download "build" folder (cache)
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: cache.yml
-          branch: main
-          name: build-cache
-          path: _build
+      # - name: Download "build" folder (cache)
+      #   uses: dawidd6/action-download-artifact@v2
+      #   with:
+      #     workflow: cache.yml
+      #     branch: main
+      #     name: build-cache
+      #     path: _build
       # Build Assets (Download Notebooks and PDF via LaTeX)
       - name: Build PDF from LaTeX
         shell: bash -l {0}
