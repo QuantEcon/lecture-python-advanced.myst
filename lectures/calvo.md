@@ -238,7 +238,7 @@ is:
 -s(\theta_t, \mu_t) \equiv - r(x_t,\mu_t) = \begin{bmatrix} 1 \\ \theta_t \end{bmatrix}' \begin{bmatrix} a_0 & -\frac{a_1 \alpha}{2} \\ -\frac{a_1 \alpha}{2} & -\frac{a_2 \alpha^2}{2} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_t \end{bmatrix} - \frac{c}{2} \mu_t^2 =  - x_t'Rx_t - Q \mu_t^2
 ```
 
-Household welfare is summarized by:
+A benevolent government's time $0$ value is 
 
 ```{math}
 :label: eq_old7
@@ -253,6 +253,12 @@ We can represent the dependence of  $v_0$ on $(\vec \theta, \vec \mu)$ recursive
 
 v_t = - s(\theta_t, \mu_t) + \beta v_{t+1}
 ```
+
+where the government's time $t$ continuation value $v_t$ satisfies
+
+$$
+v_t = - \sum_{j=0}^\infty \beta^j s(\theta_{t+j}, \mu_{t+j}) .
+$$
 
 ## Structure
 
@@ -362,7 +368,7 @@ and then solve the resulting LQ dynamic programming problem.
 In the second stage, we maximize over the initial inflation rate $\theta_0$.
 
 Define a feasible set of
-$(\overrightarrow x_1, \overrightarrow \mu_0)$ sequences:
+$(\overrightarrow x_1, \overrightarrow \mu_0)$ sequences, both of which must belong to $L^2$:
 
 $$
 \Omega(x_0) = \left \lbrace ( \overrightarrow x_1, \overrightarrow \mu_0) : x_{t+1}
@@ -421,6 +427,8 @@ The value of the Ramsey problem is
 $$
 V = \max_{x_0} J(x_0)
 $$
+
+where $V$ is the maximum value of $v_0$ defined in equation {eq}`eq_old7`.
 
 The value function
 
