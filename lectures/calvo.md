@@ -191,12 +191,11 @@ x_{t+1} = A x_t + B \mu_t
 ```
 
 We write the model in the state-space form {eq}`eq_old4` even though $\theta_0$ is to be determined by our  model and so is not an initial condition,
-as it ordinarily would be in the state-space model described in [Linear Quadratic Control](https://python-intro.quantecon.org/lqcontrol.html).
+as it ordinarily would be in the state-space model described in our lecture on  [Linear Quadratic Control](https://python-intro.quantecon.org/lqcontrol.html).
 
-We write the model in the form {eq}`eq_old4` because we want to apply an approach described in  {doc}`Stackelberg problems <dyn_stack>`.
+We write the model in the form {eq}`eq_old4` because we want to apply an approach described in  our lecture on {doc}`Stackelberg problems <dyn_stack>`.
 
-We assume that a benevolent government  believes that a representative household's utility of real balances at
-time $t$ is:
+We assume that a government  believes that a representative household's utility of real balances at time $t$ is:
 
 ```{math}
 :label: eq_old5
@@ -213,8 +212,8 @@ $$
 \theta_t = \theta^* = -\frac{a_1}{a_2 \alpha}
 $$
 
-Below, we introduce the discount factor $\beta \in (0,1)$ that a representative household and a benevolent government
-both use to discount future utilities.
+Below, we introduce the discount factor $\beta \in (0,1)$ that a government
+uses  to discount its  future utilities.
 
 (If we set parameters so that $\theta^* = \log(\beta)$, then we can
 regard a recommendation to set $\theta_t = \theta^*$ as a "poor
@@ -277,7 +276,7 @@ $$
 v_t = - s(\theta_t,\mu_t) + \beta v_{t+1}
 $$
 
-where we have called $s(\theta_t, \mu_t) = r(x_t, \mu_t)$ as
+where we have called $s(\theta_t, \mu_t) = r(x_t, \mu_t)$, as
 above.
 
 Thus,  a triple of sequences
@@ -287,7 +286,8 @@ sequence $\vec \mu \in L^2$.
 At this point $\vec \mu \in L^2$ is an arbitrary exogenous policy.
 
 A theory of government
-decisions will  make $\vec \mu$ endogenous, i.e., an output and not an input to a more complete theory.
+decisions will  make $\vec \mu$ endogenous, i.e., a theoretical **output** instead of an **input**.
+
 
 ## Intertemporal Structure 
 
@@ -297,8 +297,7 @@ structure:
 - Setting $\mu_t \neq 0$ imposes costs
   $\frac{c}{2} \mu_t^2$ at time $t$ and at no other times;
   but
-- The money growth rate $\mu_t$ affects the representative
-  household's one-period utilities at all dates
+- The money growth rate $\mu_t$ affects the government's  one-period utilities at all dates
   $s = 0, 1, \ldots, t$.
 
 
@@ -599,7 +598,7 @@ $$
 \bar \mu = - \frac{\alpha a_1}{\alpha^2 a_2 + (1+\alpha)c}
 $$
 
-## Equilibrium Outcomes for Three Models
+## Outcomes under Three Timing Protocols
 
 Below we compute sequences $\{ \theta_t,\mu_t \}$ under a Ramsey
 plan and compare these with the constant levels of $\theta$ and
@@ -964,7 +963,7 @@ This is a model in which
 - the government at each time $t$ understands how private agents'
   forecasts will respond to its choice of $\mu_t$.
 - at each $t$, the government chooses $\mu_t$ to maximize
-  a continuation discounted utility of a representative household.
+  a continuation discounted utility.
 
 ### A Theory of Government Decision Making
 
