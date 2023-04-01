@@ -1556,25 +1556,23 @@ Townsend argued that the more manageable model  could do a good job of
 approximating the intractable model in which the Markov component of the demand shock remains unobserved
 for ever.
 
-By applying technical machinery of [[PCL86](https://python-advanced.quantecon.org/zreferences.html#id23)],
-[[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] showed that there is a recursive
+By applying technical machinery of {cite}`PCL`, {cite}`Pearlman_Sargent2005` showed that there is a recursive
 representation of the equilibrium of the perpetually and symmetrically
 uninformed model that Townsend wanted to solve
-[[Tow83](https://python-advanced.quantecon.org/zreferences.html#id25)].
+{cite}`townsend`.
 
-A reader of [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] will notice that their representation of the equilibrium of
+A reader of {cite}`Pearlman_Sargent2005` will notice that their representation of the equilibrium of
 Townsend’s model exactly matches that of the  **pooling equilibrium** presented here.
 
 We have structured  our notation in  this lecture to faciliate comparison of the **pooling equilibrium**
-constructed here with the equilibrium of Townsend’s model reported in  [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)].
+constructed here with the equilibrium of Townsend’s model reported in {cite}`Pearlman_Sargent2005`.
 
-The computational method of [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] is recursive:
+The computational method of {cite}`Pearlman_Sargent2005` is recursive:
 it enlists the Kalman filter and invariant subspace methods for
 solving systems of Euler
 equations [^footnote1] .
 
-As {cite}`singleton87`,
-[[Kas00](https://python-advanced.quantecon.org/zreferences.html#id24)], and {cite}`sargent91_equilibrium` also
+As {cite}`singleton87`, {cite}`kasa`, and {cite}`sargent91_equilibrium` also
 found, the equilibrium is fully revealing: observed prices tell
 participants in industry $ i $ all of the information held by
 participants in market $ -i $ ($ -i $ means not $ i $).
@@ -1598,7 +1596,7 @@ those forecasts are the same as their own, they know them.
 Sargent {cite}`sargent91_equilibrium` proposed a way to compute an equilibrium
 without making Townsend’s approximation.
 
-Extending the reasoning of [[Mut60](https://python-advanced.quantecon.org/zreferences.html#id110)], Sargent noticed that it is possible to
+Extending the reasoning of {cite}`Muth1960`, Sargent noticed that it is possible to
 summarize the relevant history with a low dimensional object, namely, a
 small number of current and lagged forecasting errors.
 
@@ -1614,16 +1612,16 @@ appropriate orders of the autoregressive and moving average pieces of
 the equilibrium representation.
 
 By working in the frequency
-domain [[Kas00](https://python-advanced.quantecon.org/zreferences.html#id24)] showed how to discover the appropriate
+domain {cite}`kasa` showed how to discover the appropriate
 orders of the autoregressive and moving average parts, and also how to
 compute an equilibrium.
 
-The  [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)] recursive computational method, which stays in the time domain, also
+The  {cite}`Pearlman_Sargent2005` recursive computational method, which stays in the time domain, also
 discovered appropriate orders of the autoregressive and moving
 average pieces.
 
 In addition, by displaying equilibrium representations
-in the form of [[PCL86](https://python-advanced.quantecon.org/zreferences.html#id23)], [[PS05](https://python-advanced.quantecon.org/zreferences.html#id22)]
+in the form of {cite}`PCL`, {cite}`Pearlman_Sargent2005`
 showed how the moving average piece is linked to the innovation process
 of the hidden persistent component of the demand shock.
 
@@ -1632,25 +1630,25 @@ innovation process is the additional state variable contributed by the
 problem of extracting a signal from equilibrium prices that decision
 makers face in Townsend’s model.
 
-[^footnote0]: [PS05](zreferences.html#id22) verified this assertion using a different tactic, namely, by constructing
+[^footnote0]: {cite}`Pearlman_Sargent2005` verified this assertion using a different tactic, namely, by constructing
 analytic formulas for an equilibrium under the incomplete
 information structure and confirming that they match the pooling equilibrium formulas derived here.
 
-[^footnote3]: See [[Sar87](zreferences.html#id197)], especially
+[^footnote3]: See {cite}`Sargent1987`, especially
 chapters IX and XIV, for  principles  that guide solving some roots backwards and others forwards.
 
-[^footnote4]: As noted by [[Sar87](zreferences.html#id197)], this difference equation is the Euler equation for
+[^footnote4]: As noted by {cite}`Sargent1987`, this difference equation is the Euler equation for
 a planning problem   that maximizes the discounted sum of consumer plus
 producer surplus.
 
-[^footnote5]: [[PS05](zreferences.html#id22)] verify the same claim by applying   machinery of  [[PCL86](zreferences.html#id23)].
+[^footnote5]: [PS05](Pearlman_Sargent2005) verify the same claim by applying   machinery of  {cite}`PCL`.
 
-[^footnote1]: See [[AHMS96](zreferences.html#id135)] for an account of invariant subspace methods.
+[^footnote1]: See [AHMS96](ahms) for an account of invariant subspace methods.
 
-[^footnote2]: See [[AMS02](zreferences.html#id28)] for a discussion
+[^footnote2]: See [AMS02](ams) for a discussion
 of  information assumptions needed to create a situation
 in which higher order beliefs appear in equilibrium decision rules.  A way
-to read our findings in light of [[AMS02](zreferences.html#id28)] is that, relative
+to read our findings in light of [AMS02](ams) is that, relative
 to the number of signals agents observe,  Townsend’s
 section 8 model  has too few  random shocks  to get higher order beliefs to
 play a role.
