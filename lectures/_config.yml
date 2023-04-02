@@ -2,6 +2,8 @@ title: Advanced Quantitative Economics with Python
 author: Thomas J. Sargent & John Stachurski
 logo: _static/qe-logo-large.png
 description: This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.
+analytics:
+  google_analytics_id: UA-54984338-11
 
 parse:
   myst_enable_extensions:
@@ -34,6 +36,7 @@ sphinx:
   extra_extensions: [sphinx_multitoc_numbering, sphinxext.rediraffe, sphinx_tojupyter, sphinx_exercise, sphinx_togglebutton]
   config:
     nb_mime_priority_overrides: [
+       # HTML
        ['html', 'application/vnd.jupyter.widget-view+json', 10],
        ['html', 'application/javascript', 20],
        ['html', 'text/html', 30],
@@ -43,6 +46,7 @@ sphinx:
        ['html', 'image/jpeg', 70],
        ['html', 'text/markdown', 80],
        ['html', 'text/plain', 90],
+       # Jupyter Notebooks
        ['jupyter', 'application/vnd.jupyter.widget-view+json', 10],
        ['jupyter', 'application/javascript', 20],
        ['jupyter', 'text/html', 30],
@@ -52,6 +56,15 @@ sphinx:
        ['jupyter', 'image/jpeg', 70],
        ['jupyter', 'text/markdown', 80],
        ['jupyter', 'text/plain', 90],
+       # LaTeX
+       ['latex', 'text/latex', 10],
+       ['latex', 'application/pdf', 20],
+       ['latex', 'image/png', 30],
+       ['latex', 'image/jpeg', 40],
+       ['latex', 'text/markdown', 50],
+       ['latex', 'text/plain', 60],
+       ['latex', 'text/html', 70],
+       # Link Checker
        ['linkcheck', 'text/plain', 10],
      ]
     html_favicon: _static/lectures-favicon.ico
@@ -67,7 +80,6 @@ sphinx:
       og_logo_url: https://assets.quantecon.org/img/qe-og-logo.png
       description: This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.
       keywords: Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski
-      google_analytics_id: UA-54984338-11
       launch_buttons:
         colab_url             : https://colab.research.google.com
     mathjax3_config:
