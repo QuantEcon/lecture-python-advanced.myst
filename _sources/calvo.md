@@ -42,7 +42,7 @@ This lecture describes a linear-quadratic version of a model that Guillermo Calv
 used to illustrate the **time inconsistency** of optimal government
 plans.
 
-Like Chang {cite}`chang1998credible`, we use the model as a laboratory in which to explore consequences of
+Like Chang {cite}`chang1998credible`, we use the model as a laboratory in which to explore the consequences of
 different timing protocols for government decision making.
 
 The model focuses attention on intertemporal tradeoffs between
@@ -53,9 +53,9 @@ The model focuses attention on intertemporal tradeoffs between
 The model features
 
 - rational expectations
-- costly government actions at  dates $t \geq 1$ that increase household
-  utilities at all dates before $t$
-- two Bellman equations, one that expresses the private sector's  forecast of future inflation
+- costly government actions at all dates $t \geq 1$ that increase household
+  utilities at dates before $t$
+- two Bellman equations, one that expresses the private sector's  expectation of future inflation
   as a function of current and future government actions, another that
   describes  the value function of a  Ramsey planner
 
@@ -69,7 +69,7 @@ In addition, we'll use ideas from linear-quadratic dynamic programming
 described in  [Linear Quadratic Control](https://python-intro.quantecon.org/lqcontrol.html) as applied to Ramsey problems
 in {doc}`Stackelberg problems <dyn_stack>`.
 
-In particular, we have specified the model in a way that allows us to use
+We  specify the model in a way that allows us to use
 linear-quadratic dynamic programming to compute an optimal government
 plan under a timing protocol in which a government chooses an infinite
 sequence of money supply growth rates once and for all at time
@@ -110,9 +110,9 @@ Equation {eq}`eq_old1` asserts that the demand for real balances is inversely
 related to the public's expected rate of inflation, which here equals
 the actual rate of inflation.
 
-(When there is no uncertainty, an assumption of **rational expectations** simplifies to **perfect foresight**).
+(When there is no uncertainty, an assumption of **rational expectations** implies **perfect foresight**).
 
-(See {cite}`Sargent77hyper` for a rational expectations version of the model in which there is uncertainty)
+(See {cite}`Sargent77hyper` for a rational expectations version of the model when there is uncertainty.)
 
 Subtracting the demand function at time $t$ from the demand
 function at $t+1$ gives:
@@ -190,13 +190,12 @@ or
 x_{t+1} = A x_t + B \mu_t
 ```
 
-We write the model in the state-space form {eq}`eq_old4` even though $\theta_0$ is to be determined and so is not an initial condition
-as it ordinarily would be in the state-space model described in [Linear Quadratic Control](https://python-intro.quantecon.org/lqcontrol.html).
+We write the model in the state-space form {eq}`eq_old4` even though $\theta_0$ is to be determined by our  model and so is not an initial condition,
+as it ordinarily would be in the state-space model described in our lecture on  [Linear Quadratic Control](https://python-intro.quantecon.org/lqcontrol.html).
 
-We write the model in the form {eq}`eq_old4` because we want to apply an approach described in  {doc}`Stackelberg problems <dyn_stack>`.
+We write the model in the form {eq}`eq_old4` because we want to apply an approach described in  our lecture on {doc}`Stackelberg problems <dyn_stack>`.
 
-Assume that a representative household's utility of real balances at
-time $t$ is:
+We assume that a government  believes that a representative household's utility of real balances at time $t$ is:
 
 ```{math}
 :label: eq_old5
@@ -213,15 +212,15 @@ $$
 \theta_t = \theta^* = -\frac{a_1}{a_2 \alpha}
 $$
 
-Below, we introduce the discount factor $\beta \in (0,1)$ that a representative household and a benevolent government
-both use to discount future utilities.
+Below, we introduce the discount factor $\beta \in (0,1)$ that a government
+uses  to discount its  future utilities.
 
 (If we set parameters so that $\theta^* = \log(\beta)$, then we can
 regard a recommendation to set $\theta_t = \theta^*$ as a "poor
-man's Friedman rule" that attains Milton Friedman's **optimal quantity of money**)
+man's Friedman rule" that attains Milton Friedman's **optimal quantity of money**.)
 
 Via equation {eq}`eq_old3`, a government plan
-$\vec \mu = \{\mu_t \}_{t=0}^\infty$ leads to an equilibrium
+$\vec \mu = \{\mu_t \}_{t=0}^\infty$ leads to a
 sequence of inflation outcomes
 $\vec \theta = \{ \theta_t \}_{t=0}^\infty$.
 
@@ -238,7 +237,7 @@ is:
 -s(\theta_t, \mu_t) \equiv - r(x_t,\mu_t) = \begin{bmatrix} 1 \\ \theta_t \end{bmatrix}' \begin{bmatrix} a_0 & -\frac{a_1 \alpha}{2} \\ -\frac{a_1 \alpha}{2} & -\frac{a_2 \alpha^2}{2} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_t \end{bmatrix} - \frac{c}{2} \mu_t^2 =  - x_t'Rx_t - Q \mu_t^2
 ```
 
-Household welfare is summarized by:
+A benevolent government's time $0$ value is 
 
 ```{math}
 :label: eq_old7
@@ -246,7 +245,7 @@ Household welfare is summarized by:
 v_0 = - \sum_{t=0}^\infty \beta^t r(x_t,\mu_t) = - \sum_{t=0}^\infty \beta^t s(\theta_t,\mu_t)
 ```
 
-We can represent the dependence of  $v_0$ on $(\vec \theta, \vec \mu)$ recursively via the linear difference equation
+We can represent the dependence of  $v_0$ on $(\vec \theta, \vec \mu)$ recursively via the  difference equation
 
 ```{math}
 :label: eq_old8
@@ -254,11 +253,16 @@ We can represent the dependence of  $v_0$ on $(\vec \theta, \vec \mu)$ recursive
 v_t = - s(\theta_t, \mu_t) + \beta v_{t+1}
 ```
 
+where the government's time $t$ continuation value $v_t$ satisfies
+
+$$
+v_t = - \sum_{j=0}^\infty \beta^j s(\theta_{t+j}, \mu_{t+j}) .
+$$
+
 ## Structure
 
 The following structure is induced by private agents'
-behavior as summarized by the demand function for money {eq}`eq_old1` that leads to equation {eq}`eq_old3` that tells how future
-settings of $\mu$ affect the current value of $\theta$.
+behavior as summarized by the demand function for money {eq}`eq_old1` that leads to equation {eq}`eq_old3`, which  tells how future settings of $\mu$ affect the current value of $\theta$.
 
 Equation {eq}`eq_old3` maps a **policy** sequence of money growth rates
 $\vec \mu =\{\mu_t\}_{t=0}^\infty \in L^2$  into an inflation sequence
@@ -272,19 +276,20 @@ $$
 v_t = - s(\theta_t,\mu_t) + \beta v_{t+1}
 $$
 
-where we have called $s(\theta_t, \mu_t) = r(x_t, \mu_t)$ as
+where we have called $s(\theta_t, \mu_t) = r(x_t, \mu_t)$, as
 above.
 
-Thus, we have a triple of sequences
-$\vec \mu, \vec \theta, \vec v$ associated with a
-$\vec \mu \in L^2$.
+Thus,  a triple of sequences
+$(\vec \mu, \vec \theta, \vec v)$ depends on  a
+sequence $\vec \mu \in L^2$.
 
 At this point $\vec \mu \in L^2$ is an arbitrary exogenous policy.
 
-To make $\vec \mu$ endogenous, we require a theory of government
-decisions.
+A theory of government
+decisions will  make $\vec \mu$ endogenous, i.e., a theoretical **output** instead of an **input**.
 
-## Intertemporal Influences
+
+## Intertemporal Structure 
 
 Criterion function {eq}`eq_old7` and the constraint system {eq}`eq_old4` exhibit the following
 structure:
@@ -292,15 +297,14 @@ structure:
 - Setting $\mu_t \neq 0$ imposes costs
   $\frac{c}{2} \mu_t^2$ at time $t$ and at no other times;
   but
-- The money growth rate $\mu_t$ affects the representative
-  household's one-period utilities at all dates
+- The money growth rate $\mu_t$ affects the government's  one-period utilities at all dates
   $s = 0, 1, \ldots, t$.
 
-That settings of $\mu$ at one date affect household utilities at
-earlier dates sets the stage for the emergence of a time-inconsistent
-optimal government plan  under a Ramsey (also called a Stackelberg)  timing protocol.
 
-We'll study outcomes under a Ramsey timing protocol below.
+This structure  sets the stage for the emergence of a time-inconsistent
+optimal government plan  under a Ramsey   timing protocol, also called a Stackelberg timing protocol.
+
+We'll eventually study outcomes under a Ramsey timing protocol.
 
 But we'll also study the consequences of other timing protocols.
 
@@ -308,10 +312,9 @@ But we'll also study the consequences of other timing protocols.
 
 We consider four models of policymakers that  differ in
 
-- what a policymaker is allowed to choose, either a sequence
-  $\vec \mu$ or just a single period  $\mu_t$.
-- when a policymaker chooses, either at time $0$ or at times
-  $t \geq 0$.
+- what a  policymaker is allowed to choose, either a sequence
+  $\vec \mu$ or just   $\mu_t$ in a single period $t$.
+- when a  policymaker chooses, either once and for all at time $0$, or at some time or times  $t \geq 0$.
 - what a policymaker assumes about how its choice of $\mu_t$
   affects private agents' expectations about earlier and later
   inflation rates.
@@ -323,7 +326,7 @@ $\mu_t$ affects household one-period utilities at dates $s = 0, 1, \ldots, t-1$
 - these two models  thus employ a  **Ramsey** or **Stackelberg** timing protocol.
 
 In two other models, there is a sequence of policymakers, each of whom
-sets $\mu_t$ at one $t$ only
+sets $\mu_t$ at one $t$ only.
 
 - Each such policymaker ignores  effects that its choice of $\mu_t$ has on household one-period utilities at dates $s = 0, 1, \ldots, t-1$.
 
@@ -332,18 +335,23 @@ government choices, and government policymakers' beliefs about how their
 decisions affect private agents' beliefs about future government
 decisions.
 
-The models are
+The models are distinguished by having either 
 
 - A single Ramsey planner chooses a sequence
-  $\{\mu_t\}_{t=0}^\infty$ once and for all at time $0$.
+  $\{\mu_t\}_{t=0}^\infty$ once and for all at time $0$; or
 - A single Ramsey planner chooses a sequence
   $\{\mu_t\}_{t=0}^\infty$ once and for all at time $0$
   subject to the constraint that $\mu_t = \mu$ for all
-  $t \geq 0$.
+  $t \geq 0$; or
 - A sequence of separate policymakers chooses $\mu_t$ for $t =0, 1, 2, \ldots$
-    - a time $t$ policymaker chooses $\mu_t$ only and forecasts that future government decisions are unaffected by its choice.
+    - a time $t$ policymaker chooses $\mu_t$ only and forecasts that future government decisions are unaffected by its choice; or
 - A sequence of separate policymakers chooses $\mu_t$ for $t =0, 1, 2, \ldots$
     - a time $t$ policymaker chooses  only $\mu_t$ but believes that its choice of $\mu_t$  shapes private agents' beliefs about  future rates of money creation and inflation, and through them, future government actions.
+
+The relationship between  outcomes in  the first (Ramsey) timing protocol and the fourth timing protocol and belief structure is the subject of a literature on **sustainable** or **credible** public policies (Chari and Kehoe {cite}`chari1990sustainable`
+{cite}`stokey1989reputation`, and Stokey {cite}`Stokey1991`). 
+
+We'll discuss that topic later in this lecture.
 
 ## A Ramsey Planner
 
@@ -359,7 +367,7 @@ and then solve the resulting LQ dynamic programming problem.
 In the second stage, we maximize over the initial inflation rate $\theta_0$.
 
 Define a feasible set of
-$(\overrightarrow x_1, \overrightarrow \mu_0)$ sequences:
+$(\overrightarrow x_1, \overrightarrow \mu_0)$ sequences, both of which must belong to $L^2$:
 
 $$
 \Omega(x_0) = \left \lbrace ( \overrightarrow x_1, \overrightarrow \mu_0) : x_{t+1}
@@ -387,8 +395,7 @@ $$
 x' = Ax + B\mu
 $$
 
-As in {doc}`Stackelberg problems <dyn_stack>`, we map this problem into a linear-quadratic control problem and then carefully use the
-optimal value function associated with it.
+As in {doc}`Stackelberg problems <dyn_stack>`, we map this problem into a linear-quadratic control problem and deduce an optimal value function $J(x)$.
 
 Guessing that $J(x) = - x'Px$ and substituting into the Bellman
 equation gives rise to the algebraic matrix Riccati equation:
@@ -397,7 +404,7 @@ $$
 P = R + \beta A'PA - \beta^2 A'PB(Q + \beta B'PB)^{-1} B'PA
 $$
 
-and the optimal decision rule
+and an optimal decision rule
 
 $$
 \mu_t = - F x_t
@@ -419,6 +426,8 @@ The value of the Ramsey problem is
 $$
 V = \max_{x_0} J(x_0)
 $$
+
+where $V$ is the maximum value of $v_0$ defined in equation {eq}`eq_old7`.
 
 The value function
 
@@ -455,24 +464,25 @@ $\vec \mu$ recursively with the following system created in the spirit of Chang 
 
 To interpret this system, think of the  sequence
 $\{\theta_t\}_{t=0}^\infty$ as a sequence of
-synthetic **promised inflation rates** that are just computational devices for
-generating a sequence $\vec\mu$ of money growth rates that are to
-be substituted into equation {eq}`eq_old3` to form actual rates of inflation.
+synthetic **promised inflation rates**.
 
-It can be verified that if we substitute a plan
+At this point, we can think of these promised inflation rates  just as computational devices for
+generating a sequence $\vec\mu$ of money growth rates that are to
+be substituted into equation {eq}`eq_old3` to form **actual** rates of inflation.
+
+But it can be verified that if we substitute a plan
 $\vec \mu = \{\mu_t\}_{t=0}^\infty$ that satisfies these equations
 into equation {eq}`eq_old3`, we obtain the same sequence $\vec \theta$
 generated by the system {eq}`eq_old9`.
 
-(Here an application of the Big $K$, little $k$ trick could once again be enlightening)
+(Here an application of the Big $K$, little $k$ trick could once again be enlightening.)
 
 Thus, our construction of a Ramsey plan guarantees that **promised
 inflation** equals **actual inflation**.
 
 ### Multiple roles of $\theta_t$
 
-The inflation rate $\theta_t$ that appears in the system {eq}`eq_old9` and
-equation {eq}`eq_old3` plays three roles simultaneously:
+The inflation rate $\theta_t$ plays three roles simultaneously:
 
 - In equation {eq}`eq_old3`, $\theta_t$ is the actual rate of inflation
   between $t$ and $t+1$.
@@ -480,6 +490,10 @@ equation {eq}`eq_old3` plays three roles simultaneously:
   expected rate of inflation between $t$ and $t+1$.
 - In system {eq}`eq_old9`, $\theta_t$ is a promised rate of inflation
   chosen by the Ramsey planner at time $0$.
+
+That the same variable $\theta_t$ takes on these multiple roles brings insights about 
+  commitment and forward guidance, following versus leading the market, and
+dynamic or time inconsistency.
 
 ### Time Inconsistency
 
@@ -495,9 +509,9 @@ that alter either
 
 ## A Constrained-to-a-Constant-Growth-Rate Ramsey Government
 
-We now consider the following peculiar model of optimal government behavior.
+We now consider a peculiar model of optimal government behavior.
 
-We have created this model in order to highlight an aspect of an optimal government policy associated with its time inconsistency,
+We created this model in order to highlight an aspect of an optimal government policy associated with its time inconsistency,
 namely, the feature that optimal settings of the  policy instrument vary over time.
 
 Instead of allowing the Ramsey government to choose different settings of its instrument at different moments, we now assume that
@@ -525,14 +539,14 @@ $\mu_t$ as a telltale sign of  time inconsistency of a Ramsey plan.
 
 ## Markov Perfect Governments
 
-We now  change the timing protocol by considering a sequence of
+We now  alter the timing protocol by considering a sequence of
 government policymakers, the time $t$ representative of which
 chooses $\mu_t$ and expects all future governments to set
 $\mu_{t+j} = \bar \mu$.
 
 This assumption mirrors an assumption made in a different setting [Markov Perfect Equilibrium](https://python-intro.quantecon.org/markov_perf.html).
 
-Further, a government  policymaker at $t$ believes that $\bar \mu$ is
+A government  policymaker at $t$ believes that $\bar \mu$ is
 unaffected by its choice of $\mu_t$.
 
 The time $t$ rate of inflation is then:
@@ -584,7 +598,7 @@ $$
 \bar \mu = - \frac{\alpha a_1}{\alpha^2 a_2 + (1+\alpha)c}
 $$
 
-## Equilibrium Outcomes for Three Models of Government Policy Making
+## Outcomes under Three Timing Protocols
 
 Below we compute sequences $\{ \theta_t,\mu_t \}$ under a Ramsey
 plan and compare these with the constant levels of $\theta$ and
@@ -903,17 +917,15 @@ is a symptom of time inconsistency.
   past utilities and to reoptimize at date $t \geq 1$ would, if allowed, want
   to deviate from a Ramsey plan.
 
-```{note}
-A modified Ramsey plan constructed under the restriction that
+**Note:** A modified Ramsey plan constructed under the restriction that
 $\mu_t$ must be constant over time is time consistent (see
 $\check \mu$ and $\check \theta$ in the above graphs).
-```
 
 ### Meaning of Time Inconsistency
 
 In settings in which governments actually choose sequentially, many economists
-regard a time inconsistent plan implausible because of the incentives to
-deviate that occur along the plan.
+regard a time inconsistent plan as implausible because of the incentives to
+deviate that are presented  along the plan.
 
 A way to summarize this *defect* in a Ramsey plan is to say that it
 is not credible because there  endure incentives for policymakers
@@ -941,7 +953,7 @@ We turn to such theories of **sustainable plans** next.
 
 This is a model in which
 
-- The government chooses $\{\mu_t\}_{t=0}^\infty$ not once and
+- the government chooses $\{\mu_t\}_{t=0}^\infty$ not once and
   for all at $t=0$ but chooses to set $\mu_t$ at time $t$, not before.
 - private agents' forecasts of
   $\{\mu_{t+j+1}, \theta_{t+j+1}\}_{j=0}^\infty$ respond to
@@ -951,7 +963,7 @@ This is a model in which
 - the government at each time $t$ understands how private agents'
   forecasts will respond to its choice of $\mu_t$.
 - at each $t$, the government chooses $\mu_t$ to maximize
-  a continuation discounted utility of a representative household.
+  a continuation discounted utility.
 
 ### A Theory of Government Decision Making
 
@@ -1346,7 +1358,7 @@ These include
 
 The theory deployed  in this lecture is an application of what we  nickname **dynamic programming squared**.
 
-The nickname refers to the fact that a value satisfying one Bellman equation is itself an argument in a second Bellman equation.
+The nickname refers to the feature that a value satisfying one Bellman equation appears as an argument in a second Bellman equation.
 
 Thus, our models have involved two Bellman equations:
 

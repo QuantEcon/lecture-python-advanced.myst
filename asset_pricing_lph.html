@@ -1,10 +1,14 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>35. Elementary Asset Pricing Theory &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -47,47 +51,53 @@
         </script>
     
     
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -95,10 +105,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'asset_pricing_lph';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/asset_pricing_lph.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -152,58 +161,17 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   35.1. Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#key-equation">
-   35.2. Key Equation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#implications-of-key-equation">
-   35.3. Implications of Key Equation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#expected-return-beta-representation">
-   35.4. Expected Return - Beta Representation
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mean-variance-frontier">
-   35.5. Mean-Variance Frontier
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sharpe-ratios-and-the-price-of-risk">
-   35.6. Sharpe Ratios and the Price of Risk
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mathematical-structure-of-frontier">
-   35.7. Mathematical Structure of Frontier
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#multi-factor-models">
-   35.8. Multi-factor Models
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#empirical-implementations">
-   35.9. Empirical Implementations
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercises">
-   35.10. Exercises
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">35.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-equation">35.2. Key Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implications-of-key-equation">35.3. Implications of Key Equation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#expected-return-beta-representation">35.4. Expected Return - Beta Representation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-variance-frontier">35.5. Mean-Variance Frontier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sharpe-ratios-and-the-price-of-risk">35.6. Sharpe Ratios and the Price of Risk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-structure-of-frontier">35.7. Mathematical Structure of Frontier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-factor-models">35.8. Multi-factor Models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-implementations">35.9. Empirical Implementations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">35.10. Exercises</a></li>
 </ul>
-
                             <p class="logo">
                                 
                                     
@@ -247,8 +215,8 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <div class="tex2jax_ignore mathjax_ignore section" id="elementary-asset-pricing-theory">
-<h1><a class="toc-backref" href="#id15"><span class="section-number">35. </span>Elementary Asset Pricing Theory</a><a class="headerlink" href="#elementary-asset-pricing-theory" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="elementary-asset-pricing-theory">
+<h1><a class="toc-backref" href="#id15"><span class="section-number">35. </span>Elementary Asset Pricing Theory</a><a class="headerlink" href="#elementary-asset-pricing-theory" title="Permalink to this heading">#</a></h1>
 <div class="contents topic" id="contents">
 <span id="index-0"></span><p class="topic-title">Contents</p>
 <ul class="simple">
@@ -268,8 +236,8 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 </ul>
 </div>
-<div class="section" id="overview">
-<h2><a class="toc-backref" href="#id16"><span class="section-number">35.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<section id="overview">
+<h2><a class="toc-backref" href="#id16"><span class="section-number">35.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This lecture is about  some implications of  asset-pricing theories that are based on the equation
 <span class="math notranslate nohighlight">\(E m R = 1,\)</span> where <span class="math notranslate nohighlight">\(R\)</span> is the gross return on an asset, <span class="math notranslate nohighlight">\(m\)</span> is  a stochastic discount factor, and <span class="math notranslate nohighlight">\(E\)</span> is a mathematical expectation with respect to a joint probability distribution of <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(m\)</span>.</p>
 <p>Instances of this equation occur in  many models.</p>
@@ -298,12 +266,12 @@ implied by <span class="math notranslate nohighlight">\(E m R =1\)</span>.</p>
 </ul>
 <p>For background and basic  concepts about linear least squares projections, see our lecture <a class="reference external" href="https://python-advanced.quantecon.org/orth_proj.html">orthogonal projections and their applications</a>.</p>
 <p>As a sequel to the material here, please see our lecture <a class="reference external" href="https://python-advanced.quantecon.org/black_litterman.html">two modifications of mean-variance portfolio theory</a>.</p>
-</div>
-<div class="section" id="key-equation">
-<h2><a class="toc-backref" href="#id17"><span class="section-number">35.2. </span>Key Equation</a><a class="headerlink" href="#key-equation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="key-equation">
+<h2><a class="toc-backref" href="#id17"><span class="section-number">35.2. </span>Key Equation</a><a class="headerlink" href="#key-equation" title="Permalink to this heading">#</a></h2>
 <p>We  begin with a <strong>key asset pricing equation</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-emr1">
-<span class="eqno">(35.1)<a class="headerlink" href="#equation-eq-emr1" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(35.1)<a class="headerlink" href="#equation-eq-emr1" title="Permalink to this equation">#</a></span>\[
 E m R^i = 1  
 \]</div>
 <p>for <span class="math notranslate nohighlight">\(i=1, \ldots, I\)</span> and where</p>
@@ -327,9 +295,9 @@ lecture.</p>
 <p>For example, in <strong>complete markets</strong> models like those illustrated in this lecture <a class="reference external" href="https://python-advanced.quantecon.org/BCG_incomplete_mkts.html">equilibrium capital structures with incomplete markets</a>,
 the stochastic discount factor is unique.</p>
 <p>In <strong>incomplete markets</strong> models like those illustrated in this lecture <a class="reference external" href="https://python.quantecon.org/aiyagari.html">the Aiyagari model</a>, the stochastic discount factor is not unique.</p>
-</div>
-<div class="section" id="implications-of-key-equation">
-<h2><a class="toc-backref" href="#id18"><span class="section-number">35.3. </span>Implications of Key Equation</a><a class="headerlink" href="#implications-of-key-equation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="implications-of-key-equation">
+<h2><a class="toc-backref" href="#id18"><span class="section-number">35.3. </span>Implications of Key Equation</a><a class="headerlink" href="#implications-of-key-equation" title="Permalink to this heading">#</a></h2>
 <p>We combine  key equation <a class="reference internal" href="#equation-eq-emr1">(35.1)</a> with a  remark of Lars Peter Hansen that   “asset pricing theory is all about covariances”.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -351,7 +319,7 @@ E m R^i = E m E R^{i}+\operatorname{cov}\left(m, R^{i}\right)
 <p>Substituting this result into
 equation <a class="reference internal" href="#equation-eq-emr1">(35.1)</a> gives</p>
 <div class="math notranslate nohighlight" id="equation-eq-emr2">
-<span class="eqno">(35.2)<a class="headerlink" href="#equation-eq-emr2" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(35.2)<a class="headerlink" href="#equation-eq-emr2" title="Permalink to this equation">#</a></span>\[
 1 = E m E R^{i}+\operatorname{cov}\left(m, R^{i}\right) 
 \]</div>
 <p>Next note that for a risk-free asset with non-random gross return <span class="math notranslate nohighlight">\(R^f\)</span>, equation
@@ -378,13 +346,13 @@ E R^i = R^{f}-\operatorname{cov}\left(m, R^{i}\right) R^{f} .
 \]</div>
 <p>It follows that we can express an <strong>excess return</strong> <span class="math notranslate nohighlight">\(E R^{i}-R^{f}\)</span> on asset <span class="math notranslate nohighlight">\(i\)</span> relative to the risk-free rate as</p>
 <div class="math notranslate nohighlight" id="equation-eq-emr3">
-<span class="eqno">(35.3)<a class="headerlink" href="#equation-eq-emr3" title="Permalink to this equation">¶</a></span>\[ 
+<span class="eqno">(35.3)<a class="headerlink" href="#equation-eq-emr3" title="Permalink to this equation">#</a></span>\[ 
 E R^{i}-R^{f} = -\operatorname{cov}\left(m, R^{i}\right) R^{f} 
 \]</div>
 <p>Equation <a class="reference internal" href="#equation-eq-emr3">(35.3)</a> can be rearranged to display important parts of asset pricing theory.</p>
-</div>
-<div class="section" id="expected-return-beta-representation">
-<h2><a class="toc-backref" href="#id19"><span class="section-number">35.4. </span>Expected Return - Beta Representation</a><a class="headerlink" href="#expected-return-beta-representation" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="expected-return-beta-representation">
+<h2><a class="toc-backref" href="#id19"><span class="section-number">35.4. </span>Expected Return - Beta Representation</a><a class="headerlink" href="#expected-return-beta-representation" title="Permalink to this heading">#</a></h2>
 <p>We can obtain the celebrated <strong>expected-return-Beta -representation</strong> for gross return <span class="math notranslate nohighlight">\(R^i\)</span>  by simply  rearranging excess return equation <a class="reference internal" href="#equation-eq-emr3">(35.3)</a> to become</p>
 <div class="math notranslate nohighlight">
 \[
@@ -392,7 +360,7 @@ E R^{i}=R^{f}+\left(\underbrace{\frac{\operatorname{cov}\left(R^{i}, m\right)}{\
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-eq-erbetarep">
-<span class="eqno">(35.4)<a class="headerlink" href="#equation-eq-erbetarep" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(35.4)<a class="headerlink" href="#equation-eq-erbetarep" title="Permalink to this equation">#</a></span>\[
 E R^{i}=R^{f}+\beta_{i, m} \lambda_{m} 
 \]</div>
 <p>Here</p>
@@ -470,9 +438,9 @@ E m_{t+1} = \exp(-\rho) \exp \left( - \gamma \mu + \frac{\sigma_c^2 \gamma^2}{2}
 <ul class="simple">
 <li><p>because it has a low gross return when consumption growth is low, it is a poor hedge against consumption risk. That  justifies its high average return.</p></li>
 </ul>
-</div>
-<div class="section" id="mean-variance-frontier">
-<h2><a class="toc-backref" href="#id20"><span class="section-number">35.5. </span>Mean-Variance Frontier</a><a class="headerlink" href="#mean-variance-frontier" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="mean-variance-frontier">
+<h2><a class="toc-backref" href="#id20"><span class="section-number">35.5. </span>Mean-Variance Frontier</a><a class="headerlink" href="#mean-variance-frontier" title="Permalink to this heading">#</a></h2>
 <p>Now we’ll derive the celebrated <strong>mean-variance frontier</strong>.</p>
 <p>We do this using a  method deployed by Lars Peter Hansen and Scott
 Richard <span id="id13">[<a class="reference internal" href="zreferences.html#id115" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">HR87</a>]</span>.</p>
@@ -485,7 +453,7 @@ Richard <span id="id13">[<a class="reference internal" href="zreferences.html#id
 <p>(Please note that here <span class="math notranslate nohighlight">\(R^2\)</span> denotes the coefficient of determination in a regression, not a return on an asset!)</p>
 <p>Let’s apply that idea to deduce</p>
 <div class="math notranslate nohighlight" id="equation-eq-emr5">
-<span class="eqno">(35.5)<a class="headerlink" href="#equation-eq-emr5" title="Permalink to this equation">¶</a></span>\[ 
+<span class="eqno">(35.5)<a class="headerlink" href="#equation-eq-emr5" title="Permalink to this equation">#</a></span>\[ 
 1= E\left(m R^{i}\right)=E(m) E\left(R^{i}\right)+\rho_{m, R^{i}}\frac{\sigma(m)}{E(m)} \sigma\left(R^{i}\right) 
 \]</div>
 <p>where the correlation coefficient <span class="math notranslate nohighlight">\(\rho_{m, R^i}\)</span> is   defined as</p>
@@ -501,7 +469,7 @@ E R^{i}=R^{f}-\rho_{m, R^i} \frac{\sigma(m)}{E(m)} \sigma\left(R^{i}\right)
 \]</div>
 <p>Because <span class="math notranslate nohighlight">\(\rho_{m, R^i} \in [-1,1]\)</span>, it follows that  <span class="math notranslate nohighlight">\(|\rho_{m, R^i}| \leq 1\)</span> and that</p>
 <div class="math notranslate nohighlight" id="equation-eq-erm6">
-<span class="eqno">(35.6)<a class="headerlink" href="#equation-eq-erm6" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(35.6)<a class="headerlink" href="#equation-eq-erm6" title="Permalink to this equation">#</a></span>\[
 \left|E R^i-R^{f}\right| \leqslant \frac{\sigma(m)}{E(m)} \sigma\left(R^{i}\right) 
 \]</div>
 <p>Inequality <a class="reference internal" href="#equation-eq-erm6">(35.6)</a> delineates a <strong>mean-variance frontier</strong></p>
@@ -563,7 +531,7 @@ E R^{i}=R^{f}-\rho_{m, R^i} \frac{\sigma(m)}{E(m)} \sigma\left(R^{i}\right)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/asset_pricing_lph_1_0.png" src="_images/asset_pricing_lph_1_0.png" />
+<img alt="_images/e29311e28d66ccb53140e62430fbdedf95c761fa2d9dd92d18fc05fced83e205.png" src="_images/e29311e28d66ccb53140e62430fbdedf95c761fa2d9dd92d18fc05fced83e205.png" />
 </div>
 </div>
 <p>The figure shows two straight lines, the blue upper one being the locus of <span class="math notranslate nohighlight">\(( \sigma(R^i), E(R^i)\)</span> pairs that are on
@@ -588,9 +556,9 @@ the frontier   equals</p>
 \sqrt{ \sigma^2(R^i) + \sigma^2( \epsilon^j)} - \sigma(R^i)
 \]</div>
 <p>This is a measure of the part of the risk in <span class="math notranslate nohighlight">\(R^j\)</span> that is not priced because it is  uncorrelated with the stochastic discount factor and so can be diversified away (i.e., averaged out to zero by holding a diversified portfolio).</p>
-</div>
-<div class="section" id="sharpe-ratios-and-the-price-of-risk">
-<h2><a class="toc-backref" href="#id21"><span class="section-number">35.6. </span>Sharpe Ratios and the Price of Risk</a><a class="headerlink" href="#sharpe-ratios-and-the-price-of-risk" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="sharpe-ratios-and-the-price-of-risk">
+<h2><a class="toc-backref" href="#id21"><span class="section-number">35.6. </span>Sharpe Ratios and the Price of Risk</a><a class="headerlink" href="#sharpe-ratios-and-the-price-of-risk" title="Permalink to this heading">#</a></h2>
 <p>An asset’s <strong>Sharpe ratio</strong> is defined as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -604,9 +572,9 @@ satisfy</p>
 \]</div>
 <p>The ratio <span class="math notranslate nohighlight">\(\frac{\sigma(m)}{E m} \)</span> is often called the <strong>market price of risk</strong>.</p>
 <p>Evidently it equals the maximum Sharpe ratio for any asset or portfolio of assets.</p>
-</div>
-<div class="section" id="mathematical-structure-of-frontier">
-<h2><a class="toc-backref" href="#id22"><span class="section-number">35.7. </span>Mathematical Structure of Frontier</a><a class="headerlink" href="#mathematical-structure-of-frontier" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="mathematical-structure-of-frontier">
+<h2><a class="toc-backref" href="#id22"><span class="section-number">35.7. </span>Mathematical Structure of Frontier</a><a class="headerlink" href="#mathematical-structure-of-frontier" title="Permalink to this heading">#</a></h2>
 <p>The mathematical  structure of the mean-variance frontier described by inequality <a class="reference internal" href="#equation-eq-erm6">(35.6)</a> implies
 that</p>
 <ul>
@@ -627,7 +595,7 @@ that</p>
 <li><p>for any mean-variance-efficient return <span class="math notranslate nohighlight">\(R^{m v}\)</span> that is on the frontier but that is  <strong>not</strong> <span class="math notranslate nohighlight">\(R^{f}\)</span>, there exists  a <strong>single-beta representation</strong> for any return <span class="math notranslate nohighlight">\(R^i\)</span> that takes the form:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-emr7">
-<span class="eqno">(35.7)<a class="headerlink" href="#equation-eq-emr7" title="Permalink to this equation">¶</a></span>\[ 
+<span class="eqno">(35.7)<a class="headerlink" href="#equation-eq-emr7" title="Permalink to this equation">#</a></span>\[ 
 E R^{i}=R^{f}+\beta_{i, R^{m v}}\left[E\left(R^{m v}\right)-R^{f}\right] 
 \]</div>
 <ul>
@@ -636,9 +604,9 @@ E R^{i}=R^{f}+\beta_{i, R^{m v}}\left[E\left(R^{m v}\right)-R^{f}\right]
 <p><span class="math notranslate nohighlight">\(E R^{m v}=R^{f}+1 \cdot\left[E\left(R^{m v}\right)-R^{f}\right] \)</span></p>
 </li>
 </ul>
-</div>
-<div class="section" id="multi-factor-models">
-<h2><a class="toc-backref" href="#id23"><span class="section-number">35.8. </span>Multi-factor Models</a><a class="headerlink" href="#multi-factor-models" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="multi-factor-models">
+<h2><a class="toc-backref" href="#id23"><span class="section-number">35.8. </span>Multi-factor Models</a><a class="headerlink" href="#multi-factor-models" title="Permalink to this heading">#</a></h2>
 <p>The single-beta representation  <a class="reference internal" href="#equation-eq-emr7">(35.7)</a> is a special case of the multi-factor model</p>
 <div class="math notranslate nohighlight">
 \[
@@ -649,7 +617,7 @@ risk factor.</p>
 <p>To uncover the <span class="math notranslate nohighlight">\(\beta_{i,j}\)</span>’s, one  takes data on time series of the risk factors <span class="math notranslate nohighlight">\(f_t^j\)</span> that are being priced
 and specifies the following least squares regression</p>
 <div class="math notranslate nohighlight" id="equation-eq-timeseriesrep">
-<span class="eqno">(35.8)<a class="headerlink" href="#equation-eq-timeseriesrep" title="Permalink to this equation">¶</a></span>\[\begin{split}
+<span class="eqno">(35.8)<a class="headerlink" href="#equation-eq-timeseriesrep" title="Permalink to this equation">#</a></span>\[\begin{split}
 R_{t}^{i}=a_{i}+\beta_{i, a} f_{t}^{a}+\beta_{i, b} f_{t}^{b}+\ldots+\epsilon_{t}^{i}, \quad t=1,2, \ldots, T\\
 \epsilon_{t}^{i} \perp f_{t}^{j}, i=1,2, \ldots, I; j = a, b, \ldots 
 \end{split}\]</div>
@@ -663,9 +631,9 @@ R_{t}^{i}=a_{i}+\beta_{i, a} f_{t}^{a}+\beta_{i, b} f_{t}^{b}+\ldots+\epsilon_{t
 <li><p><span class="math notranslate nohighlight">\(\beta_{i,a}\)</span> is the  exposure of return <span class="math notranslate nohighlight">\(R^i\)</span> to risk factor <span class="math notranslate nohighlight">\(f_a\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\lambda_{a}\)</span> is the  price of exposure to risk factor <span class="math notranslate nohighlight">\(f_a\)</span></p></li>
 </ul>
-</div>
-<div class="section" id="empirical-implementations">
-<h2><a class="toc-backref" href="#id24"><span class="section-number">35.9. </span>Empirical Implementations</a><a class="headerlink" href="#empirical-implementations" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="empirical-implementations">
+<h2><a class="toc-backref" href="#id24"><span class="section-number">35.9. </span>Empirical Implementations</a><a class="headerlink" href="#empirical-implementations" title="Permalink to this heading">#</a></h2>
 <p>We briefly describe empirical implementations of multi-factor generalizations of the single-factor model described above.</p>
 <p>Two representations of a multi-factor model play importnt roles in empirical applications.</p>
 <p>One is the time series regression <a class="reference internal" href="#equation-eq-timeseriesrep">(35.8)</a></p>
@@ -707,9 +675,9 @@ E R^{e i}=\beta_{i, a} \lambda_{a}+\beta_{i, b} \lambda_{b}+\cdots+\alpha_{i}, i
 <p>Our basic tools are random number generator that we shall use to create artificial samples that conform to the theory and
 least squares regressions that let us watch aspects of the theory at work.</p>
 <p>These exercises will further convince us that asset pricing theory is mostly about covariances and least squares regressions.</p>
-</div>
-<div class="section" id="exercises">
-<h2><a class="toc-backref" href="#id25"><span class="section-number">35.10. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="exercises">
+<h2><a class="toc-backref" href="#id25"><span class="section-number">35.10. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p>Let’s start with some imports.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -746,20 +714,20 @@ least squares regressions that let us watch aspects of the theory at work.</p>
 <div class="exercise admonition" id="apl_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 35.1 </span></p>
-<div class="section" id="exercise-content">
+<section id="exercise-content">
 <p>Look at the equation,</p>
 <div class="math notranslate nohighlight">
 \[
 R^i_t - R^f = \beta_{i, R^m} (R^m_t - R^f) + \sigma_i \varepsilon_{i, t}.
 \]</div>
 <p>Verify that this equation is a regression equation.</p>
-</div>
+</section>
 </div>
 <div class="solution dropdown admonition" id="asset_pricing_lph-solution-1">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#apl_ex1"> Exercise 35.1</a></p>
-<div class="section" id="s">
-<span id="o"></span><span id="l"></span><span id="u"></span><span id="t"></span><span id="i"></span><span id="o"></span><span id="n"></span><span id="-"></span><span id="c"></span><span id="o"></span><span id="n"></span><span id="t"></span><span id="e"></span><span id="n"></span><span id="t"></span><p>To verify that it is a <strong>regression equation</strong> we must show that the residual is orthogonal to the regressor.</p>
+<section id="solution-content">
+<p>To verify that it is a <strong>regression equation</strong> we must show that the residual is orthogonal to the regressor.</p>
 <p>Our assumptions about mutual orthogonality imply that</p>
 <div class="math notranslate nohighlight">
 \[
@@ -774,30 +742,30 @@ E\left[\sigma_{i}\epsilon_{i,t}\left(R_{t}^{m}-R^{f}\right)\right]&amp;=E\left[\
 	&amp;=0
 \end{aligned}
 \end{split}\]</div>
-</div>
+</section>
 </div>
 <div class="exercise admonition" id="apl_ex2">
 
 <p class="admonition-title"><span class="caption-number">Exercise 35.2 </span></p>
-<div class="section" id="exercise-content">
+<section id="exercise-content">
 <p>Give a formula for the regression coefficient <span class="math notranslate nohighlight">\(\beta_{i, R^m}\)</span>.</p>
-</div>
+</section>
 </div>
 <div class="solution dropdown admonition" id="asset_pricing_lph-solution-3">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#apl_ex2"> Exercise 35.2</a></p>
-<div class="section" id="s">
-<span id="o"></span><span id="l"></span><span id="u"></span><span id="t"></span><span id="i"></span><span id="o"></span><span id="n"></span><span id="-"></span><span id="c"></span><span id="o"></span><span id="n"></span><span id="t"></span><span id="e"></span><span id="n"></span><span id="t"></span><p>The regression coefficient <span class="math notranslate nohighlight">\(\beta_{i, R^m}\)</span> is</p>
+<section id="solution-content">
+<p>The regression coefficient <span class="math notranslate nohighlight">\(\beta_{i, R^m}\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[
 \beta_{i,R^{m}}=\frac{Cov\left(R_{t}^{i}-R^{f},R_{t}^{m}-R^{f}\right)}{Var\left(R_{t}^{m}-R^{f}\right)}
 \]</div>
-</div>
+</section>
 </div>
 <div class="exercise admonition" id="apl_ex3">
 
 <p class="admonition-title"><span class="caption-number">Exercise 35.3 </span></p>
-<div class="section" id="exercise-content">
+<section id="exercise-content">
 <p>As in many sciences, it is useful to distinguish a  <strong>direct problem</strong> from  an <strong>inverse problem</strong>.</p>
 <ul class="simple">
 <li><p>A direct problem involves simulating a particular model with known parameter values.</p></li>
@@ -835,13 +803,13 @@ m_t = a + b R^m_t
 E[(a + b R_t^m) R^m_t)] &amp;= 1 \\
 E[(a + b R_t^m) R^f_t)] &amp;= 1
 \end{align*}\]</div>
-</div>
+</section>
 </div>
 <div class="solution dropdown admonition" id="asset_pricing_lph-solution-5">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#apl_ex3"> Exercise 35.3</a></p>
-<div class="section" id="s">
-<span id="o"></span><span id="l"></span><span id="u"></span><span id="t"></span><span id="i"></span><span id="o"></span><span id="n"></span><span id="-"></span><span id="c"></span><span id="o"></span><span id="n"></span><span id="t"></span><span id="e"></span><span id="n"></span><span id="t"></span><p><strong>Direct Problem:</strong></p>
+<section id="solution-content">
+<p><strong>Direct Problem:</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code for the direct problem</span>
@@ -904,7 +872,7 @@ E[(a + b R_t^m) R^f_t)] &amp;= 1
 </div>
 <p><strong>Inverse Problem:</strong></p>
 <p>We will solve the inverse problem by simple OLS regressions.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>estimate <span class="math notranslate nohighlight">\(E\left[R^f\right]\)</span> and <span class="math notranslate nohighlight">\(\sigma_f\)</span></p></li>
 </ol>
 <div class="cell docutils container">
@@ -939,7 +907,7 @@ E[(a + b R_t^m) R^f_t)] &amp;= 1
 </div>
 </div>
 </div>
-<ol class="simple">
+<ol class="arabic simple" start="2">
 <li><p><span class="math notranslate nohighlight">\(\xi\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span></p></li>
 </ol>
 <div class="cell docutils container">
@@ -956,7 +924,7 @@ E[(a + b R_t^m) R^f_t)] &amp;= 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.06302287024648721, 0.08178445686921211)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.05744998711267095, 0.07927488323266174)
 </pre></div>
 </div>
 </div>
@@ -973,7 +941,7 @@ E[(a + b R_t^m) R^f_t)] &amp;= 1
 </div>
 </div>
 </div>
-<ol class="simple">
+<ol class="arabic simple" start="3">
 <li><p><span class="math notranslate nohighlight">\(\beta_{i, R^m}\)</span> and <span class="math notranslate nohighlight">\(\sigma_i\)</span></p></li>
 </ol>
 <div class="cell docutils container">
@@ -994,8 +962,8 @@ E[(a + b R_t^m) R^f_t)] &amp;= 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.19226266, 0.39805875, 0.59939641, 0.7994372 , 1.00406981]),
- array([0.03913062, 0.04060062, 0.0394525 , 0.04049393, 0.04026443]))
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.19988838, 0.39775496, 0.61265053, 0.78984947, 1.01464376]),
+ array([0.03985216, 0.03936324, 0.03866444, 0.04072082, 0.04076213]))
 </pre></div>
 </div>
 </div>
@@ -1013,22 +981,22 @@ E[(a + b R_t^m) R^f_t)] &amp;= 1
 </div>
 </div>
 <p>Q: How close did your estimates come to the parameters we specified?</p>
-</div>
+</section>
 </div>
 <div class="exercise admonition" id="apl_ex4">
 
 <p class="admonition-title"><span class="caption-number">Exercise 35.4 </span></p>
-<div class="section" id="exercise-content">
+<section id="exercise-content">
 <p>Using the equations above, find a system of two <strong>linear</strong> equations that you can solve for <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> as functions of the parameters <span class="math notranslate nohighlight">\((\lambda, \xi, E[R_f])\)</span>.</p>
 <p>Write a function that can solve these equations.</p>
 <p>Please check the <strong>condition number</strong> of a key matrix that must be inverted to determine a, b</p>
-</div>
+</section>
 </div>
 <div class="solution dropdown admonition" id="asset_pricing_lph-solution-7">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#apl_ex4"> Exercise 35.4</a></p>
-<div class="section" id="s">
-<span id="o"></span><span id="l"></span><span id="u"></span><span id="t"></span><span id="i"></span><span id="o"></span><span id="n"></span><span id="-"></span><span id="c"></span><span id="o"></span><span id="n"></span><span id="t"></span><span id="e"></span><span id="n"></span><span id="t"></span><p>The system of two linear equations is shown below:</p>
+<section id="solution-content">
+<p>The system of two linear equations is shown below:</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -1075,20 +1043,20 @@ a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1
 </div>
 </div>
 </div>
-</div>
+</section>
 </div>
 <div class="exercise admonition" id="apl_ex5">
 
 <p class="admonition-title"><span class="caption-number">Exercise 35.5 </span></p>
-<div class="section" id="exercise-content">
+<section id="exercise-content">
 <p>Using the estimates of the parameters that you generated above, compute the implied stochastic discount factor.</p>
-</div>
+</section>
 </div>
 <div class="solution dropdown admonition" id="asset_pricing_lph-solution-9">
 
 <p class="admonition-title">Solution to<a class="reference internal" href="#apl_ex5"> Exercise 35.5</a></p>
-<div class="section" id="s">
-<span id="o"></span><span id="l"></span><span id="u"></span><span id="t"></span><span id="i"></span><span id="o"></span><span id="n"></span><span id="-"></span><span id="c"></span><span id="o"></span><span id="n"></span><span id="t"></span><span id="e"></span><span id="n"></span><span id="t"></span><p>Now let’s pass <span class="math notranslate nohighlight">\(\hat{E}(R^f), \hat{\sigma}^f, \hat{\lambda}, \hat{\xi}\)</span> to the function <code class="docutils literal notranslate"><span class="pre">solve_ab</span></code>.</p>
+<section id="solution-content">
+<p>Now let’s pass <span class="math notranslate nohighlight">\(\hat{E}(R^f), \hat{\sigma}^f, \hat{\lambda}, \hat{\xi}\)</span> to the function <code class="docutils literal notranslate"><span class="pre">solve_ab</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a_hat</span><span class="p">,</span> <span class="n">b_hat</span><span class="p">,</span> <span class="n">M_hat</span> <span class="o">=</span> <span class="n">solve_ab</span><span class="p">(</span><span class="n">ERf_hat</span><span class="p">,</span> <span class="n">σf_hat</span><span class="p">,</span> <span class="n">λ_hat</span><span class="p">,</span> <span class="n">ξ_hat</span><span class="p">)</span>
@@ -1103,15 +1071,15 @@ a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(89.11329275011468, -471.11467760619456, 55.89741512191402)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(85.40055474931684, -457.07631555596885, 52.10718929817333)
 </pre></div>
 </div>
 </div>
 </div>
+</section>
 </div>
-</div>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1125,7 +1093,7 @@ a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1496,7 +1464,7 @@ a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
                     <!-- <li class="btn__search">
                         <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
                             <i data-feather="search"></i>
                         </form>
                     </li> -->
@@ -1638,16 +1606,5 @@ a E(R^f) + b (E(R^f)^2 + \xi E(R^f) + \sigma_f ^ 2) &amp; = 1
         </div>
 
     </div> <!-- .wrapper-->
-    
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
-<script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-54984338-11', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
-
   </body>
 </html>

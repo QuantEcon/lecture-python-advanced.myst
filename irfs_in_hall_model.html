@@ -1,10 +1,14 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>19. IRFs in Hall Models &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -47,47 +51,53 @@
         </script>
     
     
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -95,10 +105,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'irfs_in_hall_model';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/irfs_in_hall_model.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -152,23 +161,10 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-1-hall-1978">
-   19.1. Example 1: Hall (1978)
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-2-higher-adjustment-costs">
-   19.2. Example 2: Higher Adjustment Costs
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#example-3-durable-consumption-goods">
-   19.3. Example 3: Durable Consumption Goods
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-hall-1978">19.1. Example 1: Hall (1978)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-higher-adjustment-costs">19.2. Example 2: Higher Adjustment Costs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-durable-consumption-goods">19.3. Example 3: Durable Consumption Goods</a></li>
 </ul>
-
                             <p class="logo">
                                 
                                     
@@ -216,8 +212,8 @@ const thebe_selector_output = ".output, .cell_output"
         <a href="https://quantecon.org/" title="quantecon.org">
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
-</div><div class="tex2jax_ignore mathjax_ignore section" id="irfs-in-hall-models">
-<span id="index-0"></span><h1><a class="toc-backref" href="#id3"><span class="section-number">19. </span>IRFs in Hall Models</a><a class="headerlink" href="#irfs-in-hall-models" title="Permalink to this headline">¶</a></h1>
+</div><section class="tex2jax_ignore mathjax_ignore" id="irfs-in-hall-models">
+<span id="index-0"></span><h1><a class="toc-backref" href="#id3"><span class="section-number">19. </span>IRFs in Hall Models</a><a class="headerlink" href="#irfs-in-hall-models" title="Permalink to this heading">#</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
@@ -234,32 +230,38 @@ const thebe_selector_output = ".output, .cell_output"
 <span id="id1">[<a class="reference internal" href="zreferences.html#id71" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">HS13</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
 <p>In addition to what’s in Anaconda, this lecture uses the quantecon library.</p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.6.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
+Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
 Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
 Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.22.4)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
-Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
 Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
 Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
 Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 </div>
+</details>
 </div>
 <p>We’ll make these imports:</p>
 <div class="cell docutils container">
@@ -278,8 +280,8 @@ response functions for three related economies, starting from
 Hall (1978) <span id="id2">[<a class="reference internal" href="zreferences.html#id152" title="Robert E Hall. Stochastic Implications of the Life Cycle-Permanent Income Hypothesis: Theory and Evidence. Journal of Political Economy, 86(6):971–987, 1978.">Hal78</a>]</span>.</p>
 <p>Knowledge of the basic economic environment is assumed.</p>
 <p>See the lecture “Growth in Dynamic Linear Economies” for more details.</p>
-<div class="section" id="example-1-hall-1978">
-<h2><a class="toc-backref" href="#id4"><span class="section-number">19.1. </span>Example 1: Hall (1978)</a><a class="headerlink" href="#example-1-hall-1978" title="Permalink to this headline">¶</a></h2>
+<section id="example-1-hall-1978">
+<h2><a class="toc-backref" href="#id4"><span class="section-number">19.1. </span>Example 1: Hall (1978)</a><a class="headerlink" href="#example-1-hall-1978" title="Permalink to this heading">#</a></h2>
 <p>First, we set parameters to make consumption (almost) follow a random
 walk.</p>
 <p>We set</p>
@@ -353,7 +355,7 @@ consumption and investment:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/irfs_in_hall_model_7_0.png" src="_images/irfs_in_hall_model_7_0.png" />
+<img alt="_images/47d06809a6a466d7094d7a585fad5fd60e428f89eb5bd1de96b9bb7fc18275a3.png" src="_images/47d06809a6a466d7094d7a585fad5fd60e428f89eb5bd1de96b9bb7fc18275a3.png" />
 </div>
 </div>
 <p>The DLE class can be used to create impulse response functions for each
@@ -375,7 +377,7 @@ model:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/irfs_in_hall_model_9_0.png" src="_images/irfs_in_hall_model_9_0.png" />
+<img alt="_images/fb2e5756d8038d4a9f11853e08b8c68985f3bd4701fa9e8eceffd0d34ffbe7e8.png" src="_images/fb2e5756d8038d4a9f11853e08b8c68985f3bd4701fa9e8eceffd0d34ffbe7e8.png" />
 </div>
 </div>
 <p>It can be seen that the endowment shock has permanent effects on the
@@ -383,9 +385,9 @@ level of both consumption and investment, consistent with the endogenous
 unit eigenvalue in this economy.</p>
 <p>Investment is much more responsive to the endowment shock at shorter time
 horizons.</p>
-</div>
-<div class="section" id="example-2-higher-adjustment-costs">
-<h2><a class="toc-backref" href="#id5"><span class="section-number">19.2. </span>Example 2: Higher Adjustment Costs</a><a class="headerlink" href="#example-2-higher-adjustment-costs" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="example-2-higher-adjustment-costs">
+<h2><a class="toc-backref" href="#id5"><span class="section-number">19.2. </span>Example 2: Higher Adjustment Costs</a><a class="headerlink" href="#example-2-higher-adjustment-costs" title="Permalink to this heading">#</a></h2>
 <p>We generate our next economy by making only one change to the parameters
 of Example 1: we raise the parameter associated with the cost of
 adjusting capital,<span class="math notranslate nohighlight">\(\phi_1\)</span>, from 0.00001 to 0.2.</p>
@@ -409,7 +411,7 @@ a value slightly below 1.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/irfs_in_hall_model_11_0.png" src="_images/irfs_in_hall_model_11_0.png" />
+<img alt="_images/ca8385e72f6eb3fce533a71fd9e32f102a5adf46777242634e7387cc00ad2761.png" src="_images/ca8385e72f6eb3fce533a71fd9e32f102a5adf46777242634e7387cc00ad2761.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -424,7 +426,7 @@ a value slightly below 1.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/irfs_in_hall_model_12_0.png" src="_images/irfs_in_hall_model_12_0.png" />
+<img alt="_images/7e75cf9098a0eed9f86e7eb9dfd86b27577aef6f85ecebe0646c5a282680f082.png" src="_images/7e75cf9098a0eed9f86e7eb9dfd86b27577aef6f85ecebe0646c5a282680f082.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -447,7 +449,7 @@ a value slightly below 1.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[5.]] [[1.38488458e-12]] [[2.76981205e-11]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[5.]] [[-1.81353183e-12]] [[-3.62707497e-11]]
 </pre></div>
 </div>
 </div>
@@ -464,9 +466,9 @@ economy heads only slowly towards these mean values.</p>
 <p>The impulse response functions now show that an endowment shock does not
 have a permanent effect on the levels of either consumption or
 investment.</p>
-</div>
-<div class="section" id="example-3-durable-consumption-goods">
-<h2><a class="toc-backref" href="#id6"><span class="section-number">19.3. </span>Example 3: Durable Consumption Goods</a><a class="headerlink" href="#example-3-durable-consumption-goods" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="example-3-durable-consumption-goods">
+<h2><a class="toc-backref" href="#id6"><span class="section-number">19.3. </span>Example 3: Durable Consumption Goods</a><a class="headerlink" href="#example-3-durable-consumption-goods" title="Permalink to this heading">#</a></h2>
 <p>We generate our third economy by raising <span class="math notranslate nohighlight">\(\phi_1\)</span> further, to 1.0.
 We also raise the production function parameter from 0.1 to 0.15 (which
 raises the non-stochastic steady state value of capital above zero).</p>
@@ -520,7 +522,7 @@ around its non-stochastic steady state.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/irfs_in_hall_model_16_0.png" src="_images/irfs_in_hall_model_16_0.png" />
+<img alt="_images/7432ec780389bf8302413e089c654c01491add687dac464c0c2d4cea14ef8ce2.png" src="_images/7432ec780389bf8302413e089c654c01491add687dac464c0c2d4cea14ef8ce2.png" />
 </div>
 </div>
 <p>In contrast to Hall’s original model of Example 1, it is now investment
@@ -539,7 +541,7 @@ strong consumption smoothing result that Hall obtained.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/irfs_in_hall_model_18_0.png" src="_images/irfs_in_hall_model_18_0.png" />
+<img alt="_images/6ece11423b3b4c476f0942cbe2611cd1a09d4dd8b46153039bb5ac2a6f30befa.png" src="_images/6ece11423b3b4c476f0942cbe2611cd1a09d4dd8b46153039bb5ac2a6f30befa.png" />
 </div>
 </div>
 <p>The impulse response functions confirm that consumption is now much more
@@ -547,8 +549,8 @@ responsive to an endowment shock (and investment less so) than in
 Example 1.</p>
 <p>As in Example 2, the endowment shock has permanent effects on
 neither variable.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -562,7 +564,7 @@ neither variable.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -933,7 +935,7 @@ neither variable.</p>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
                     <!-- <li class="btn__search">
                         <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
                             <i data-feather="search"></i>
                         </form>
                     </li> -->
@@ -1075,16 +1077,5 @@ neither variable.</p>
         </div>
 
     </div> <!-- .wrapper-->
-    
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
-<script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-54984338-11', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
-
   </body>
 </html>

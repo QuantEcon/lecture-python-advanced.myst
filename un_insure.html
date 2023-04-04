@@ -1,10 +1,14 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>39. Optimal Unemployment Insurance &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -47,47 +51,53 @@
         </script>
     
     
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -95,10 +105,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'un_insure';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/un_insure.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -152,84 +161,27 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   39.1. Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#shavell-and-weisss-model">
-   39.2. Shavell and Weiss’s Model
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#autarky">
-     39.2.1. Autarky
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#full-information">
-     39.2.2. Full Information
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#incentive-problem">
-     39.2.3. Incentive Problem
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#private-information">
-   39.3. Private Information
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#computational-details">
-     39.3.1. Computational Details
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#python-computations">
-     39.3.2. Python Computations
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameter-values">
-     39.3.3. Parameter Values
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#computation-under-private-information">
-     39.3.4. Computation under Private Information
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#algorithm">
-     39.3.5. Algorithm
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#outcomes">
-   39.4. Outcomes
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#replacement-ratios-and-continuation-values">
-     39.4.1. Replacement Ratios and Continuation Values
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpretations">
-     39.4.2. Interpretations
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">39.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shavell-and-weisss-model">39.2. Shavell and Weiss’s Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autarky">39.2.1. Autarky</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-information">39.2.2. Full Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#incentive-problem">39.2.3. Incentive Problem</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-information">39.3. Private Information</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-details">39.3.1. Computational Details</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-computations">39.3.2. Python Computations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-values">39.3.3. Parameter Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-under-private-information">39.3.4. Computation under Private Information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">39.3.5. Algorithm</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outcomes">39.4. Outcomes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replacement-ratios-and-continuation-values">39.4.1. Replacement Ratios and Continuation Values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretations">39.4.2. Interpretations</a></li>
+</ul>
+</li>
+</ul>
                             <p class="logo">
                                 
                                     
@@ -273,10 +225,10 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <div class="tex2jax_ignore mathjax_ignore section" id="optimal-unemployment-insurance">
-<h1><span class="section-number">39. </span>Optimal Unemployment Insurance<a class="headerlink" href="#optimal-unemployment-insurance" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="overview">
-<h2><span class="section-number">39.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="optimal-unemployment-insurance">
+<h1><span class="section-number">39. </span>Optimal Unemployment Insurance<a class="headerlink" href="#optimal-unemployment-insurance" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<h2><span class="section-number">39.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This lecture describes a model of optimal unemployment
 insurance created by  Shavell and Weiss (1979) <span id="id1">[<a class="reference internal" href="zreferences.html#id6" title="Steven Shavell and Laurence Weiss. The optimal payment of unemployment insurance benefits over time. Journal of political Economy, 87(6):1347-1362, 1979.">SW79</a>]</span>.</p>
 <p>We  use recursive techniques of
@@ -284,14 +236,14 @@ Hopenhayn and Nicolini (1997) <span id="id2">[<a class="reference internal" href
 compute optimal insurance plans for  Shavell and
 Weiss’s model.</p>
 <p>Hopenhayn and Nicolini’s model is a generalization of Shavell and Weiss’s along dimensions that we’ll soon describe.</p>
-</div>
-<div class="section" id="shavell-and-weisss-model">
-<h2><span class="section-number">39.2. </span>Shavell and Weiss’s Model<a class="headerlink" href="#shavell-and-weisss-model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="shavell-and-weisss-model">
+<h2><span class="section-number">39.2. </span>Shavell and Weiss’s Model<a class="headerlink" href="#shavell-and-weisss-model" title="Permalink to this heading">#</a></h2>
 <p>An unemployed worker orders stochastic processes of
 consumption and  search effort <span class="math notranslate nohighlight">\(\{c_t , a_t\}_{t=0}^\infty\)</span>
 according to</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo1">
-<span class="eqno">(39.1)<a class="headerlink" href="#equation-eq-hugo1" title="Permalink to this equation">¶</a></span>\[ 
+<span class="eqno">(39.1)<a class="headerlink" href="#equation-eq-hugo1" title="Permalink to this equation">#</a></span>\[ 
 E \sum_{t=0}^\infty \beta^t \left[ u(c_t) - a_t \right]  
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span> and <span class="math notranslate nohighlight">\(u(c)\)</span> is strictly increasing, twice differentiable,
@@ -326,8 +278,8 @@ a constant level of consumption.</p></li>
 a permanent per-period history-dependent tax on a previously
 unemployed but presently employed worker.</p></li>
 </ul>
-<div class="section" id="autarky">
-<h3><span class="section-number">39.2.1. </span>Autarky<a class="headerlink" href="#autarky" title="Permalink to this headline">¶</a></h3>
+<section id="autarky">
+<h3><span class="section-number">39.2.1. </span>Autarky<a class="headerlink" href="#autarky" title="Permalink to this heading">#</a></h3>
 <p>As a benchmark, we first study the fate of an unemployed worker
 who has no access to unemployment insurance.</p>
 <p>Because employment
@@ -338,7 +290,7 @@ state.</p>
 be <span class="math notranslate nohighlight">\(u(c)-a = u(w)\)</span> forever.</p>
 <p>Therefore,</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo2">
-<span class="eqno">(39.2)<a class="headerlink" href="#equation-eq-hugo2" title="Permalink to this equation">¶</a></span>\[  
+<span class="eqno">(39.2)<a class="headerlink" href="#equation-eq-hugo2" title="Permalink to this equation">#</a></span>\[  
 V^e = {u(w) \over (1-\beta)}  . 
 \]</div>
 <p>Now let <span class="math notranslate nohighlight">\(V^u\)</span> be the expected discounted present value of utility for an
@@ -346,13 +298,13 @@ unemployed worker who chooses  consumption, effort  pair <span class="math notra
 optimally.</p>
 <p>It satisfies the Bellman equation</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo3">
-<span class="eqno">(39.3)<a class="headerlink" href="#equation-eq-hugo3" title="Permalink to this equation">¶</a></span>\[ 
+<span class="eqno">(39.3)<a class="headerlink" href="#equation-eq-hugo3" title="Permalink to this equation">#</a></span>\[ 
 V^u = \max_{a \geq 0} \biggl\{ u(0) - a + \beta \left[
    p(a) V^e + (1-p(a)) V^u \right] \biggr\} .  
 \]</div>
 <p>The first-order condition for a maximum is</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo4">
-<span class="eqno">(39.4)<a class="headerlink" href="#equation-eq-hugo4" title="Permalink to this equation">¶</a></span>\[ 
+<span class="eqno">(39.4)<a class="headerlink" href="#equation-eq-hugo4" title="Permalink to this equation">#</a></span>\[ 
 \beta p'(a) \left[V^e - V^u \right] \leq 1 , 
 \]</div>
 <p>with equality if <span class="math notranslate nohighlight">\(a&gt;0\)</span>.</p>
@@ -375,9 +327,9 @@ for an estimate of effort  <span class="math notranslate nohighlight">\(a_j\)</s
 to compute <span class="math notranslate nohighlight">\(V^u_{j+1}\)</span>.</p></li>
 <li><p>Iterate to convergence.</p></li>
 </ul>
-</div>
-<div class="section" id="full-information">
-<h3><span class="section-number">39.2.2. </span>Full Information<a class="headerlink" href="#full-information" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="full-information">
+<h3><span class="section-number">39.2.2. </span>Full Information<a class="headerlink" href="#full-information" title="Permalink to this heading">#</a></h3>
 <p>Another benchmark model helps set the stage for the model with private information that we ultimately want to study.</p>
 <p>In this model, the unemployment agency has full information about the unemployed work.</p>
 <p>We study optimal provision of insurance with
@@ -405,12 +357,12 @@ and not find a job.</p>
 <p><span class="math notranslate nohighlight">\((c, a, V^u)\)</span> are chosen to be functions of <span class="math notranslate nohighlight">\(V\)</span> and to
 satisfy the Bellman equation</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo5">
-<span class="eqno">(39.5)<a class="headerlink" href="#equation-eq-hugo5" title="Permalink to this equation">¶</a></span>\[ 
+<span class="eqno">(39.5)<a class="headerlink" href="#equation-eq-hugo5" title="Permalink to this equation">#</a></span>\[ 
 C(V) = \min_{c, a, V^u} \biggl\{ c  + \beta [1 - p(a)] C(V^u) \biggr\} ,
 \]</div>
 <p>where  minimization is subject to the promise-keeping constraint</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo6">
-<span class="eqno">(39.6)<a class="headerlink" href="#equation-eq-hugo6" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(39.6)<a class="headerlink" href="#equation-eq-hugo6" title="Permalink to this equation">#</a></span>\[
 V \leq u(c) - a + \beta
 \left\{ p(a) V^e + [1-p(a)] V^u \right\}.
 \]</div>
@@ -429,7 +381,7 @@ on constraint <a class="reference internal" href="#equation-eq-hugo6">(39.6)</a>
 conditions with
 respect to <span class="math notranslate nohighlight">\(c, a\)</span>, and <span class="math notranslate nohighlight">\(V^u\)</span>, respectively, are</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo7">
-<span class="eqno">(39.7)<a class="headerlink" href="#equation-eq-hugo7" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(39.7)<a class="headerlink" href="#equation-eq-hugo7" title="Permalink to this equation">#</a></span>\[
 \begin{aligned} \theta &amp; = {1 \over u'(c)}\,,   \cr
              C(V^u) &amp; = \theta \left[ {1 \over \beta p'(a)} -
                            (V^e - V^u) \right]\,,    \cr
@@ -454,9 +406,9 @@ spell.</p>
 during the unemployment spell.</p>
 <p>But the worker’s consumption is not  smoothed across states of
 employment and unemployment unless <span class="math notranslate nohighlight">\(V=V^e\)</span>.</p>
-</div>
-<div class="section" id="incentive-problem">
-<h3><span class="section-number">39.2.3. </span>Incentive Problem<a class="headerlink" href="#incentive-problem" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="incentive-problem">
+<h3><span class="section-number">39.2.3. </span>Incentive Problem<a class="headerlink" href="#incentive-problem" title="Permalink to this heading">#</a></h3>
 <p>The preceding efficient insurance scheme requires that the insurance agency
 control both <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span>.</p>
 <p>It will not do for the insurance agency
@@ -501,10 +453,10 @@ effort below the socially optimal one.</p>
 <p>The efficient contract
 relies on  the agency’s ability to control <em>both</em> the unemployed
 worker’s consumption <em>and</em> his search effort.</p>
-</div>
-</div>
-<div class="section" id="private-information">
-<h2><span class="section-number">39.3. </span>Private Information<a class="headerlink" href="#private-information" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="private-information">
+<h2><span class="section-number">39.3. </span>Private Information<a class="headerlink" href="#private-information" title="Permalink to this heading">#</a></h2>
 <p>Following Shavell and Weiss (1979) <span id="id3">[<a class="reference internal" href="zreferences.html#id6" title="Steven Shavell and Laurence Weiss. The optimal payment of unemployment insurance benefits over time. Journal of political Economy, 87(6):1347-1362, 1979.">SW79</a>]</span> and
 Hopenhayn and Nicolini (1997) <span id="id4">[<a class="reference internal" href="zreferences.html#id5" title="Hugo A Hopenhayn and Juan Pablo Nicolini. Optimal Unemployment Insurance. Journal of Political Economy, 105(2):412-438, April 1997. URL: https://ideas.repec.org/a/ucp/jpolec/v105y1997i2p412-38.html, doi:10.1086/262078.">HN97</a>]</span>, now assume that  the unemployment insurance agency cannot
 observe or enforce <span class="math notranslate nohighlight">\(a\)</span>, though it can observe and control <span class="math notranslate nohighlight">\(c\)</span>.</p>
@@ -543,7 +495,7 @@ for exerting the proper search effort in earlier periods.</p>
 <p>At an interior solution,  first-order conditions with
 respect to <span class="math notranslate nohighlight">\(c, a\)</span>, and <span class="math notranslate nohighlight">\(V^u\)</span>, respectively, are</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo8">
-<span class="eqno">(39.8)<a class="headerlink" href="#equation-eq-hugo8" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(39.8)<a class="headerlink" href="#equation-eq-hugo8" title="Permalink to this equation">#</a></span>\[
 \begin{aligned} \theta &amp; = {1 \over u'(c)}\,,   \cr
  C(V^u)  &amp; = \theta \left[ {1 \over \beta p'(a)} - (V^e - V^u) \right]
             \,-\, \eta {p''(a) \over p'(a)} (V^e - V^u)                  \cr
@@ -580,8 +532,8 @@ raises the prospect of finding a job, i.e., that <span class="math notranslate n
 <p>Thus, when <span class="math notranslate nohighlight">\(p'(a) =0\)</span>, there is no reason for the
 planner to make consumption fall with the duration of
 unemployment.</p>
-<div class="section" id="computational-details">
-<h3><span class="section-number">39.3.1. </span>Computational Details<a class="headerlink" href="#computational-details" title="Permalink to this headline">¶</a></h3>
+<section id="computational-details">
+<h3><span class="section-number">39.3.1. </span>Computational Details<a class="headerlink" href="#computational-details" title="Permalink to this heading">#</a></h3>
 <p>It is useful to note that there
 are natural lower and upper bounds to the set
 of continuation values <span class="math notranslate nohighlight">\(V^u\)</span>.</p>
@@ -615,19 +567,19 @@ u(c) = V + a - \beta \{p(a) V^e +[1-p(a)] V^u \}
 \]</div>
 <p>so that  consumption is</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo21">
-<span class="eqno">(39.9)<a class="headerlink" href="#equation-eq-hugo21" title="Permalink to this equation">¶</a></span>\[ 
+<span class="eqno">(39.9)<a class="headerlink" href="#equation-eq-hugo21" title="Permalink to this equation">#</a></span>\[ 
 c = u^{-1}\left(
      V+a -\beta [p(a)V^e + (1-p(a))V^u] \right). 
 \]</div>
 <p>Similarly, solving the inequality <a class="reference internal" href="#equation-eq-hugo4">(39.4)</a>  for <span class="math notranslate nohighlight">\(a\)</span>  leads to</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo22a">
-<span class="eqno">(39.10)<a class="headerlink" href="#equation-eq-hugo22a" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(39.10)<a class="headerlink" href="#equation-eq-hugo22a" title="Permalink to this equation">#</a></span>\[
 a = \max\left\{0, p'^{-1} \left({ 1 \over \beta (V^e - V^u)  } \right) \right\}.
 \]</div>
 <p>When we specialize <a class="reference internal" href="#equation-eq-hugo22a">(39.10)</a> to the   functional
 form for <span class="math notranslate nohighlight">\(p(a)\)</span> used by Hopenhayn and Nicolini, we obtain</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo22">
-<span class="eqno">(39.11)<a class="headerlink" href="#equation-eq-hugo22" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(39.11)<a class="headerlink" href="#equation-eq-hugo22" title="Permalink to this equation">#</a></span>\[
 a = \max\left\{0, {\log[r \beta (V^e - V^u)] \over r } \right\}.
 \]</div>
 <p>Formulas <a class="reference internal" href="#equation-eq-hugo21">(39.9)</a>  and <a class="reference internal" href="#equation-eq-hugo22">(39.11)</a>  express <span class="math notranslate nohighlight">\((c,a)\)</span> as functions
@@ -635,13 +587,13 @@ of <span class="math notranslate nohighlight">\(V\)</span> and  the continuation
 <p>Using these functions
 allows us to write the Bellman equation in <span class="math notranslate nohighlight">\(C(V)\)</span> as</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo23">
-<span class="eqno">(39.12)<a class="headerlink" href="#equation-eq-hugo23" title="Permalink to this equation">¶</a></span>\[ 
+<span class="eqno">(39.12)<a class="headerlink" href="#equation-eq-hugo23" title="Permalink to this equation">#</a></span>\[ 
 C(V)  = \min_{V^u} \left\{ c + \beta [1 - p(a)] C(V^u) \right\} 
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> are given by equations <a class="reference internal" href="#equation-eq-hugo21">(39.9)</a>  and <a class="reference internal" href="#equation-eq-hugo22">(39.11)</a>.</p>
-</div>
-<div class="section" id="python-computations">
-<h3><span class="section-number">39.3.2. </span>Python Computations<a class="headerlink" href="#python-computations" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="python-computations">
+<h3><span class="section-number">39.3.2. </span>Python Computations<a class="headerlink" href="#python-computations" title="Permalink to this heading">#</a></h3>
 <p>We’ll approximate the planner’s optimal cost function  with cubic splines.</p>
 <p>To do this, we’ll load some useful modules</p>
 <div class="cell docutils container">
@@ -675,9 +627,9 @@ C(V)  = \min_{V^u} \left\{ c + \beta [1 - p(a)] C(V^u) \right\}
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="parameter-values">
-<h3><span class="section-number">39.3.3. </span>Parameter Values<a class="headerlink" href="#parameter-values" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="parameter-values">
+<h3><span class="section-number">39.3.3. </span>Parameter Values<a class="headerlink" href="#parameter-values" title="Permalink to this heading">#</a></h3>
 <p>For  the other parameters we have just loaded in the above Python code, we’ll set brate the net  interest rate <span class="math notranslate nohighlight">\(r\)</span> to match the hazard rate –  the probability of finding a job in one period –  in US data.</p>
 <p>In particular, we seek an <span class="math notranslate nohighlight">\(r\)</span> so that in  autarky <code class="docutils literal notranslate"><span class="pre">p(a(r))</span> <span class="pre">=</span> <span class="pre">0.1</span></code>, where <code class="docutils literal notranslate"><span class="pre">a</span></code> is the optimal search effort.</p>
 <p>First, we create some helper functions.</p>
@@ -706,17 +658,17 @@ C(V)  = \min_{V^u} \left\{ c + \beta [1 - p(a)] C(V^u) \right\}
 <p>Recall that under  autarky the value for an unemployed worker
 satisfies  the Bellman equation</p>
 <div class="math notranslate nohighlight" id="equation-eq-yad1">
-<span class="eqno">(39.13)<a class="headerlink" href="#equation-eq-yad1" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(39.13)<a class="headerlink" href="#equation-eq-yad1" title="Permalink to this equation">#</a></span>\[
 V^u = \max_{a} \{u(0) - a + \beta\left[p_{r}(a)V^e + (1-p_{r}(a))V^u\right]\} 
 \]</div>
 <p>At the optimal choice of <span class="math notranslate nohighlight">\(a\)</span>, we have the first order condition for this problem as:</p>
 <div class="math notranslate nohighlight" id="equation-eq-yad2">
-<span class="eqno">(39.14)<a class="headerlink" href="#equation-eq-yad2" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(39.14)<a class="headerlink" href="#equation-eq-yad2" title="Permalink to this equation">#</a></span>\[
 \beta p_{r}'(a)[V^e - V^u] \leq 1 
 \]</div>
 <p>with equality when a &gt;0.</p>
 <p>Given an interest rate <span class="math notranslate nohighlight">\(\bar{r}\)</span>, we can solve the autarky problem as follows:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Guess <span class="math notranslate nohighlight">\(V^u \in \mathbb{R}^{+}\)</span></p></li>
 <li><p>Given <span class="math notranslate nohighlight">\(V^u\)</span>, use the FOC <a class="reference internal" href="#equation-eq-yad2">(39.14)</a> to calculate the implied optimal search effort <span class="math notranslate nohighlight">\(a\)</span></p></li>
 <li><p>Evaluate the difference between the LHS and RHS of the Bellman equation <a class="reference internal" href="#equation-eq-yad1">(39.13)</a></p></li>
@@ -783,8 +735,8 @@ the function <code class="docutils literal notranslate"><span class="pre">Vu_err
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interest rate to match 0.1 hazard rate: r = 0.0003431409393866592
-Check p at r: 0.10000000000001996
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interest rate to match 0.1 hazard rate: r = 0.0003431409393866347
+Check p at r: 0.1000000000000173
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/scipy/optimize/minpack.py:175: RuntimeWarning: The iteration is not making good progress, as measured by the 
@@ -795,14 +747,14 @@ Check p at r: 0.10000000000001996
 </div>
 </div>
 <p>Now that we have calibrated our interest rate <span class="math notranslate nohighlight">\(r\)</span>, we can continue with solving the  model with private information.</p>
-</div>
-<div class="section" id="computation-under-private-information">
-<h3><span class="section-number">39.3.4. </span>Computation under Private Information<a class="headerlink" href="#computation-under-private-information" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="computation-under-private-information">
+<h3><span class="section-number">39.3.4. </span>Computation under Private Information<a class="headerlink" href="#computation-under-private-information" title="Permalink to this heading">#</a></h3>
 <p>Our approach to solving the full model is a variant on Judd (1998) <span id="id6">[<a class="reference internal" href="zreferences.html#id166" title="K L Judd. Numerical Methods in Economics. Scientific and Engineering. MIT Press, 1998.">Jud98</a>]</span>, who uses a polynomial to approximate the value function and a numerical optimizer to perform the optimization at each iteration.</p>
 <p>In contrast, we will use cubic splines to interpolate across a pre-set grid of points to approximate the value function. For further details of the Judd (1998) <span id="id7">[<a class="reference internal" href="zreferences.html#id166" title="K L Judd. Numerical Methods in Economics. Scientific and Engineering. MIT Press, 1998.">Jud98</a>]</span> method, see <span id="id8">[<a class="reference internal" href="zreferences.html#id173" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">LS18</a>]</span>, Section 5.7.</p>
 <p>Our strategy involves finding a function <span class="math notranslate nohighlight">\(C(V)\)</span> – the expected cost of giving the worker value <span class="math notranslate nohighlight">\(V\)</span> – that satisfies the Bellman equation:</p>
 <div class="math notranslate nohighlight" id="equation-eq-yad3">
-<span class="eqno">(39.15)<a class="headerlink" href="#equation-eq-yad3" title="Permalink to this equation">¶</a></span>\[
+<span class="eqno">(39.15)<a class="headerlink" href="#equation-eq-yad3" title="Permalink to this equation">#</a></span>\[
 C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 \]</div>
 <p>To solve this model, notice that in equations <a class="reference internal" href="#equation-eq-hugo21">(39.9)</a> and <a class="reference internal" href="#equation-eq-hugo22">(39.11)</a>, we have analytical solutions of <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> in terms of (at most) promised value <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(V^u\)</span> (and other parameters).</p>
@@ -810,7 +762,7 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Vu</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">a</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculates the optimal consumption choice coming from the constraint of the insurer&#39;s problem </span>
 <span class="sd">    (which is also a Bellman equation)</span>
 <span class="sd">    &#39;&#39;&#39;</span>    
@@ -820,7 +772,7 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
     <span class="k">return</span> <span class="n">c</span>
 
 <span class="k">def</span> <span class="nf">calc_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Vu</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculates the optimal effort choice coming from the worker&#39;s effort optimality condition.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -836,10 +788,10 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 <p>With these analytical solutions for optimal <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> in hand, we can reduce the minimization to  <a class="reference internal" href="#equation-eq-hugo23">(39.12)</a>  in the single variable
 <span class="math notranslate nohighlight">\(V^u\)</span>.</p>
 <p>With this in hand, we have our algorithm.</p>
-</div>
-<div class="section" id="algorithm">
-<h3><span class="section-number">39.3.5. </span>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h3>
-<ol class="simple">
+</section>
+<section id="algorithm">
+<h3><span class="section-number">39.3.5. </span>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
 <li><p>Fix a set of grid points <span class="math notranslate nohighlight">\(grid_V\)</span> for <span class="math notranslate nohighlight">\(V\)</span>   and <span class="math notranslate nohighlight">\(Vu_{grid}\)</span> for <span class="math notranslate nohighlight">\(V^u\)</span></p></li>
 <li><p>Guess a function <span class="math notranslate nohighlight">\(C_0(V)\)</span> that is evaluated at a grid <span class="math notranslate nohighlight">\(grid_V\)</span>.</p></li>
 <li><p>For each point in <span class="math notranslate nohighlight">\(grid_V\)</span> find the <span class="math notranslate nohighlight">\(V^u\)</span> that minimizes the expression on  right side  of <a class="reference internal" href="#equation-eq-hugo23">(39.12)</a>. We find the minimum by evaluating the right side of <a class="reference internal" href="#equation-eq-hugo23">(39.12)</a> at each point in <span class="math notranslate nohighlight">\(Vu_{grid}\)</span>  and then finding the minimum using cubic splines.</p></li>
@@ -853,7 +805,7 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Operator iterate_C that calculates the next iteration of the cost function.</span>
 <span class="k">def</span> <span class="nf">iterate_C</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">C_old</span><span class="p">,</span><span class="n">Vu_grid</span><span class="p">):</span>
 
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    We solve the model by minimising the value function across a grid of possible promised values.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">β</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">n_grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">n_grid</span>
@@ -922,10 +874,10 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="outcomes">
-<h2><span class="section-number">39.4. </span>Outcomes<a class="headerlink" href="#outcomes" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="outcomes">
+<h2><span class="section-number">39.4. </span>Outcomes<a class="headerlink" href="#outcomes" title="Permalink to this heading">#</a></h2>
 <p>Using the above functions, we create another instance of the parameters with the correctly calibrated interest rate, <span class="math notranslate nohighlight">\(r\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -952,13 +904,13 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 0, error:72.95964854907824
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 50, error:12.222761762478058
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 50, error:12.222761762498521
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 100, error:0.12875960366636718
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 100, error:0.12875960366955042
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 150, error:0.0009402349714946467
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 150, error:0.0009402349701304047
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 200, error:6.115461928857258e-06
@@ -966,8 +918,8 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 </div>
 </div>
 </div>
-<div class="section" id="replacement-ratios-and-continuation-values">
-<h3><span class="section-number">39.4.1. </span>Replacement Ratios and Continuation Values<a class="headerlink" href="#replacement-ratios-and-continuation-values" title="Permalink to this headline">¶</a></h3>
+<section id="replacement-ratios-and-continuation-values">
+<h3><span class="section-number">39.4.1. </span>Replacement Ratios and Continuation Values<a class="headerlink" href="#replacement-ratios-and-continuation-values" title="Permalink to this heading">#</a></h3>
 <p>We want to graph the  replacement ratio (<span class="math notranslate nohighlight">\(c/w\)</span>) and  search effort <span class="math notranslate nohighlight">\(a\)</span> as  functions of the duration of unemployment.</p>
 <p>We’ll do this for three levels of <span class="math notranslate nohighlight">\(V_0\)</span>, the lowest being the autarky value <span class="math notranslate nohighlight">\(V_{\rm aut}\)</span>.</p>
 <p>We accomplish this by using the optimal policy functions <code class="docutils literal notranslate"><span class="pre">V_star</span></code>, <code class="docutils literal notranslate"><span class="pre">cons_star</span></code> and <code class="docutils literal notranslate"><span class="pre">a_star</span></code> computed above as well the following  iterative procedure:</p>
@@ -1030,14 +982,14 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/un_insure_33_0.png" src="_images/un_insure_33_0.png" />
+<img alt="_images/e735a0271c9a83305bf7e0a4add42e603424dd66cd91efd8a3e113b3dbc70e32.png" src="_images/e735a0271c9a83305bf7e0a4add42e603424dd66cd91efd8a3e113b3dbc70e32.png" />
 </div>
 </div>
 <p>For an initial promised value <span class="math notranslate nohighlight">\(V^u = V_{\rm aut}\)</span>, the planner chooses the autarky level of <span class="math notranslate nohighlight">\(0\)</span> for the replacement ratio and instructs the worker to search at the autarky search intensity, regardless of the duration of unemployment</p>
 <p>But for <span class="math notranslate nohighlight">\(V^u &gt; V_{\rm aut}\)</span>, the planner makes the replacement ratio  decline and search effort increase  with the duration of unemployment.</p>
-</div>
-<div class="section" id="interpretations">
-<h3><span class="section-number">39.4.2. </span>Interpretations<a class="headerlink" href="#interpretations" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="interpretations">
+<h3><span class="section-number">39.4.2. </span>Interpretations<a class="headerlink" href="#interpretations" title="Permalink to this heading">#</a></h3>
 <p>The  downward slope of the replacement ratio when <span class="math notranslate nohighlight">\(V^u &gt; V_{\rm aut}\)</span> is a consequence of the
 the planner’s limited information about the worker’s search effort.</p>
 <p>By providing the worker with a duration-dependent schedule of replacement ratios, the planner induces the worker in effect to reveal
@@ -1073,9 +1025,9 @@ the way the planner expects.</p>
 search effort of the unlucky ones with long unemployment spells are
 simply  costs that have to be paid in order to  provide
 proper incentives.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1089,7 +1041,7 @@ proper incentives.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1460,7 +1412,7 @@ proper incentives.</p>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
                     <!-- <li class="btn__search">
                         <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
                             <i data-feather="search"></i>
                         </form>
                     </li> -->
@@ -1602,16 +1554,5 @@ proper incentives.</p>
         </div>
 
     </div> <!-- .wrapper-->
-    
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
-<script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-54984338-11', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
-
   </body>
 </html>

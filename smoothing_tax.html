@@ -1,10 +1,14 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>7. Tax Smoothing with Complete and Incomplete Markets &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -47,47 +51,53 @@
         </script>
     
     
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -95,10 +105,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'smoothing_tax';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/smoothing_tax.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -152,115 +161,38 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   7.1. Overview
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#isomorphism-between-consumption-and-tax-smoothing">
-     7.1.1. Isomorphism between Consumption and Tax Smoothing
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#link-to-history">
-       7.1.1.1. Link to History
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code">
-     7.1.2. Code
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#revisiting-the-consumption-smoothing-model">
-     7.1.3. Revisiting the consumption-smoothing model
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#relabeling-variables-to-create-tax-smoothing-models">
-       7.1.3.1. Relabeling variables to create tax-smoothing models
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#tax-smoothing-with-complete-markets">
-   7.2. Tax Smoothing with Complete Markets
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#returns-on-state-contingent-debt">
-   7.3. Returns on State-Contingent Debt
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#an-example-of-tax-smoothing">
-     7.3.1. An Example of Tax Smoothing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#explanation">
-     7.3.2. Explanation
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-finite-markov-chain-tax-smoothing-examples">
-   7.4. More Finite Markov Chain Tax-Smoothing Examples
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameters">
-     7.4.1. Parameters
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-1">
-     7.4.2. Example 1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-2">
-     7.4.3. Example 2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-3">
-     7.4.4. Example 3
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-4">
-     7.4.5. Example 4
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-5">
-     7.4.6. Example 5
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#continuous-state-gaussian-model">
-     7.4.7. Continuous-State Gaussian Model
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#related-lectures">
-       7.4.7.1. Related Lectures
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">7.1. Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#isomorphism-between-consumption-and-tax-smoothing">7.1.1. Isomorphism between Consumption and Tax Smoothing</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#link-to-history">7.1.1.1. Link to History</a></li>
 </ul>
-
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">7.1.2. Code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#revisiting-the-consumption-smoothing-model">7.1.3. Revisiting the consumption-smoothing model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#relabeling-variables-to-create-tax-smoothing-models">7.1.3.1. Relabeling variables to create tax-smoothing models</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tax-smoothing-with-complete-markets">7.2. Tax Smoothing with Complete Markets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#returns-on-state-contingent-debt">7.3. Returns on State-Contingent Debt</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-of-tax-smoothing">7.3.1. An Example of Tax Smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation">7.3.2. Explanation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-finite-markov-chain-tax-smoothing-examples">7.4. More Finite Markov Chain Tax-Smoothing Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">7.4.1. Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">7.4.2. Example 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">7.4.3. Example 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">7.4.4. Example 3</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-4">7.4.5. Example 4</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-5">7.4.6. Example 5</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-state-gaussian-model">7.4.7. Continuous-State Gaussian Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#related-lectures">7.4.7.1. Related Lectures</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
                             <p class="logo">
                                 
                                     
@@ -308,8 +240,8 @@ const thebe_selector_output = ".output, .cell_output"
         <a href="https://quantecon.org/" title="quantecon.org">
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
-</div><div class="tex2jax_ignore mathjax_ignore section" id="tax-smoothing-with-complete-and-incomplete-markets">
-<h1><a class="toc-backref" href="#id11"><span class="section-number">7. </span>Tax Smoothing with Complete and Incomplete Markets</a><a class="headerlink" href="#tax-smoothing-with-complete-and-incomplete-markets" title="Permalink to this headline">¶</a></h1>
+</div><section class="tex2jax_ignore mathjax_ignore" id="tax-smoothing-with-complete-and-incomplete-markets">
+<h1><a class="toc-backref" href="#id11"><span class="section-number">7. </span>Tax Smoothing with Complete and Incomplete Markets</a><a class="headerlink" href="#tax-smoothing-with-complete-and-incomplete-markets" title="Permalink to this heading">#</a></h1>
 <div class="contents topic" id="contents">
 <span id="index-0"></span><p class="topic-title">Contents</p>
 <ul class="simple">
@@ -325,24 +257,29 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>In addition to what’s in Anaconda, this lecture uses the  library:</p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.6.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.22.4)
+Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
 Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
-Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.21.5)
-Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.55.1)
+Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
 Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
-Requirement already satisfied: llvmlite&lt;0.39,&gt;=0.38.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.38.0)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
 Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
 </pre></div>
@@ -351,9 +288,10 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="section" id="overview">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">7.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<section id="overview">
+<h2><a class="toc-backref" href="#id12"><span class="section-number">7.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This lecture describes tax-smoothing models that are counterparts to consumption-smoothing models in <a class="reference internal" href="smoothing.html"><span class="doc">Consumption Smoothing with Complete and Incomplete Markets</span></a>.</p>
 <ul class="simple">
 <li><p>one is in the <strong>complete markets</strong> tradition of Lucas and Stokey <span id="id1">[<a class="reference internal" href="zreferences.html#id176" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">LS83</a>]</span>.</p></li>
@@ -375,8 +313,8 @@ consumption-smoothing model.</p>
 incomplete markets version of our model.</p>
 <p>In addition, we extend their assumption about the interest rate to an appropriate counterpart to create a “complete markets” model in the style of
 Lucas and Stokey <span id="id6">[<a class="reference internal" href="zreferences.html#id176" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">LS83</a>]</span>.</p>
-<div class="section" id="isomorphism-between-consumption-and-tax-smoothing">
-<h3><span class="section-number">7.1.1. </span>Isomorphism between Consumption and Tax Smoothing<a class="headerlink" href="#isomorphism-between-consumption-and-tax-smoothing" title="Permalink to this headline">¶</a></h3>
+<section id="isomorphism-between-consumption-and-tax-smoothing">
+<h3><span class="section-number">7.1.1. </span>Isomorphism between Consumption and Tax Smoothing<a class="headerlink" href="#isomorphism-between-consumption-and-tax-smoothing" title="Permalink to this heading">#</a></h3>
 <p>For each version of a consumption-smoothing model,  a tax-smoothing counterpart can be obtained simply by relabeling</p>
 <ul class="simple">
 <li><p>consumption as tax collections</p></li>
@@ -391,8 +329,8 @@ process, and <span class="math notranslate nohighlight">\(a_t\)</span> is the go
 <p>For elaborations on this theme, please see <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">Optimal Savings II: LQ Techniques</a> and later parts of this lecture.</p>
 <p>We’ll spend most of this lecture studying acquire finite-state Markov specification,
 but will also  treat the linear state space specification.</p>
-<div class="section" id="link-to-history">
-<h4><span class="section-number">7.1.1.1. </span>Link to History<a class="headerlink" href="#link-to-history" title="Permalink to this headline">¶</a></h4>
+<section id="link-to-history">
+<h4><span class="section-number">7.1.1.1. </span>Link to History<a class="headerlink" href="#link-to-history" title="Permalink to this heading">#</a></h4>
 <p>For those who love history, President Thomas Jefferson’s Secretary of Treasury Albert Gallatin (1807) <span id="id7">[<a class="reference internal" href="zreferences.html#id134" title="Albert Gallatin. Report on the finances**, november, 1807. In Reports of the Secretary of the Treasury of the United States, Vol 1. Government printing office, Washington, DC, 1837.">Gal37</a>]</span> seems to have prescribed policies that
 come from Barro’s model <span id="id8">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Bar79</a>]</span></p>
 <p>Let’s start with some standard imports:</p>
@@ -408,17 +346,17 @@ come from Barro’s model <span id="id8">[<a class="reference internal" href="zr
 </div>
 </div>
 <p>To exploit the isomorphism between consumption-smoothing and tax-smoothing models, we  simply use code from <a class="reference internal" href="smoothing.html"><span class="doc">Consumption Smoothing with Complete and Incomplete Markets</span></a></p>
-</div>
-</div>
-<div class="section" id="code">
-<h3><span class="section-number">7.1.2. </span>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="code">
+<h3><span class="section-number">7.1.2. </span>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h3>
 <p>Among other things, this code contains a function called <code class="docutils literal notranslate"><span class="pre">consumption_complete()</span></code>.</p>
 <p>This function computes <span class="math notranslate nohighlight">\(\{ b(i) \}_{i=1}^{N}, \bar c\)</span> as outcomes given a set of parameters for the general case with <span class="math notranslate nohighlight">\(N\)</span> Markov states
 under the assumption of complete markets</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ConsumptionProblem</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The data for a consumption problem, including some default values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -429,7 +367,7 @@ under the assumption of complete markets</p>
                  <span class="n">P</span><span class="o">=</span><span class="p">[[</span><span class="mf">.8</span><span class="p">,</span> <span class="mf">.2</span><span class="p">],</span>
                     <span class="p">[</span><span class="mf">.4</span><span class="p">,</span> <span class="mf">.6</span><span class="p">]],</span>
                  <span class="n">init</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 
@@ -446,7 +384,7 @@ under the assumption of complete markets</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">init</span> <span class="o">=</span> <span class="n">init</span>
 
     <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N_simul</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 
@@ -461,7 +399,7 @@ under the assumption of complete markets</p>
 
 
 <span class="k">def</span> <span class="nf">consumption_complete</span><span class="p">(</span><span class="n">cp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes endogenous values for the complete market case.</span>
 
 <span class="sd">    Parameters</span>
@@ -507,7 +445,7 @@ under the assumption of complete markets</p>
 
 
 <span class="k">def</span> <span class="nf">consumption_incomplete</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">s_path</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes endogenous values for the incomplete market case.</span>
 
 <span class="sd">    Parameters</span>
@@ -541,9 +479,9 @@ under the assumption of complete markets</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="revisiting-the-consumption-smoothing-model">
-<h3><span class="section-number">7.1.3. </span>Revisiting the consumption-smoothing model<a class="headerlink" href="#revisiting-the-consumption-smoothing-model" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="revisiting-the-consumption-smoothing-model">
+<h3><span class="section-number">7.1.3. </span>Revisiting the consumption-smoothing model<a class="headerlink" href="#revisiting-the-consumption-smoothing-model" title="Permalink to this heading">#</a></h3>
 <p>The code above also contains a function called <code class="docutils literal notranslate"><span class="pre">consumption_incomplete()</span></code> that uses <a class="reference internal" href="smoothing.html#equation-cs-12">(6.17)</a> and <a class="reference internal" href="smoothing.html#equation-cs-13">(6.18)</a> to</p>
 <ul class="simple">
 <li><p>simulate paths of <span class="math notranslate nohighlight">\(y_t, c_t, b_{t+1}\)</span></p></li>
@@ -582,7 +520,7 @@ under the assumption of complete markets</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/smoothing_tax_7_0.png" src="_images/smoothing_tax_7_0.png" />
+<img alt="_images/1525dd9d35d4a7863008fffe305df2bfba305be6e181b2c941b31f32699a1afc.png" src="_images/1525dd9d35d4a7863008fffe305df2bfba305be6e181b2c941b31f32699a1afc.png" />
 </div>
 </div>
 <p>In the graph on the left, for the same sample path of nonfinancial
@@ -594,8 +532,8 @@ income <span class="math notranslate nohighlight">\(y_t\)</span>, notice that</p
 of the Markov state in the complete markets model.</p></li>
 <li><p>the consumer’s debt  drifts because it contains a unit root in the incomplete markets economy.</p></li>
 </ul>
-<div class="section" id="relabeling-variables-to-create-tax-smoothing-models">
-<h4><span class="section-number">7.1.3.1. </span>Relabeling variables to create tax-smoothing models<a class="headerlink" href="#relabeling-variables-to-create-tax-smoothing-models" title="Permalink to this headline">¶</a></h4>
+<section id="relabeling-variables-to-create-tax-smoothing-models">
+<h4><span class="section-number">7.1.3.1. </span>Relabeling variables to create tax-smoothing models<a class="headerlink" href="#relabeling-variables-to-create-tax-smoothing-models" title="Permalink to this heading">#</a></h4>
 <p>As indicated above, we relabel variables to acquire tax-smoothing interpretations of the complete markets and incomplete markets consumption-smoothing models.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -622,14 +560,14 @@ of the Markov state in the complete markets model.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/smoothing_tax_9_0.png" src="_images/smoothing_tax_9_0.png" />
+<img alt="_images/958a04ba33d3655fea7b13d7be982832db31118b08128be803adcfd3bfcd5255.png" src="_images/958a04ba33d3655fea7b13d7be982832db31118b08128be803adcfd3bfcd5255.png" />
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="tax-smoothing-with-complete-markets">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">7.2. </span>Tax Smoothing with Complete Markets</a><a class="headerlink" href="#tax-smoothing-with-complete-markets" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+</section>
+<section id="tax-smoothing-with-complete-markets">
+<h2><a class="toc-backref" href="#id13"><span class="section-number">7.2. </span>Tax Smoothing with Complete Markets</a><a class="headerlink" href="#tax-smoothing-with-complete-markets" title="Permalink to this heading">#</a></h2>
 <p>It is instructive  to focus on a simple tax-smoothing example with complete markets.</p>
 <p>This example illustrates how, in a complete markets model like that of Lucas and Stokey <span id="id9">[<a class="reference internal" href="zreferences.html#id176" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">LS83</a>]</span>, the government purchases
 insurance from the private sector.</p>
@@ -660,9 +598,9 @@ T_i = G_i +  \left(\sum_j Q_{ij} b_j -   b_i\right)
 \]</div>
 <p>in which the term <span class="math notranslate nohighlight">\((\sum_j Q_{ij} b_j -   b_i)\)</span>   equals the net amount that the government spends to purchase one-period Arrow securities
 that will pay off next period in Markov states <span class="math notranslate nohighlight">\(j = 1, \ldots, N\)</span> after it has received payments <span class="math notranslate nohighlight">\(b_i\)</span> this period.</p>
-</div>
-<div class="section" id="returns-on-state-contingent-debt">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">7.3. </span>Returns on State-Contingent Debt</a><a class="headerlink" href="#returns-on-state-contingent-debt" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="returns-on-state-contingent-debt">
+<h2><a class="toc-backref" href="#id14"><span class="section-number">7.3. </span>Returns on State-Contingent Debt</a><a class="headerlink" href="#returns-on-state-contingent-debt" title="Permalink to this heading">#</a></h2>
 <p>Notice that <span class="math notranslate nohighlight">\(\sum_{j'=1}^N Q_{ij'} b(j')\)</span> is the amount that the government spends  in Markov state <span class="math notranslate nohighlight">\(i\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> to purchase
 one-period state-contingent claims that will pay off in Markov state <span class="math notranslate nohighlight">\(j'\)</span> at time <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
 <p>Then the <em>ex post</em> one-period gross return on the portfolio of government assets  held from state <span class="math notranslate nohighlight">\(i\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>
@@ -684,7 +622,7 @@ markets model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ex_post_gross_return</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">cp</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    calculate the ex post one-period gross return on the portfolio</span>
 <span class="sd">    of government assets, given b and Q.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -702,7 +640,7 @@ markets model.</p>
     <span class="k">return</span> <span class="n">R</span>
 
 <span class="k">def</span> <span class="nf">cumulative_return</span><span class="p">(</span><span class="n">s_path</span><span class="p">,</span> <span class="n">R</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    compute cumulative return from holding 1 unit market portfolio</span>
 <span class="sd">    of government bonds, given some simulated state path.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -717,8 +655,8 @@ markets model.</p>
 </div>
 </div>
 </div>
-<div class="section" id="an-example-of-tax-smoothing">
-<h3><span class="section-number">7.3.1. </span>An Example of Tax Smoothing<a class="headerlink" href="#an-example-of-tax-smoothing" title="Permalink to this headline">¶</a></h3>
+<section id="an-example-of-tax-smoothing">
+<h3><span class="section-number">7.3.1. </span>An Example of Tax Smoothing<a class="headerlink" href="#an-example-of-tax-smoothing" title="Permalink to this heading">#</a></h3>
 <p>We’ll study a tax-smoothing model with two Markov states.</p>
 <p>In Markov state <span class="math notranslate nohighlight">\(1\)</span>, there is peace and government expenditures are low.</p>
 <p>In Markov state <span class="math notranslate nohighlight">\(2\)</span>, there is war and government expenditures are high.</p>
@@ -850,9 +788,9 @@ The cumulative return earned from holding 1 unit market portfolio of government 
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="explanation">
-<h3><span class="section-number">7.3.2. </span>Explanation<a class="headerlink" href="#explanation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="explanation">
+<h3><span class="section-number">7.3.2. </span>Explanation<a class="headerlink" href="#explanation" title="Permalink to this heading">#</a></h3>
 <p>In this example, the government always purchase <span class="math notranslate nohighlight">\(1\)</span> units of the
 Arrow security that pays off in peace time (Markov state <span class="math notranslate nohighlight">\(1\)</span>).</p>
 <p>And it purchases a higher amount of the security that pays off in war
@@ -870,7 +808,7 @@ budget constraints in the two Markov states and staring.</p>
 <div class="exercise admonition" id="st_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 7.1 </span></p>
-<div class="section" id="exercise-content">
+<section id="exercise-content">
 <p>Try changing the Markov transition matrix so that</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -882,12 +820,12 @@ P = \begin{bmatrix}
 <p>Also, start the system in Markov state <span class="math notranslate nohighlight">\(2\)</span> (war) with initial
 government assets <span class="math notranslate nohighlight">\(- 10\)</span>, so that the government starts the
 war in debt and <span class="math notranslate nohighlight">\(b_2 = -10\)</span>.</p>
+</section>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="more-finite-markov-chain-tax-smoothing-examples">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">7.4. </span>More Finite Markov Chain Tax-Smoothing Examples</a><a class="headerlink" href="#more-finite-markov-chain-tax-smoothing-examples" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="more-finite-markov-chain-tax-smoothing-examples">
+<h2><a class="toc-backref" href="#id15"><span class="section-number">7.4. </span>More Finite Markov Chain Tax-Smoothing Examples</a><a class="headerlink" href="#more-finite-markov-chain-tax-smoothing-examples" title="Permalink to this heading">#</a></h2>
 <p>To interpret some episodes in the fiscal history of the United States, we find it interesting to study a few more examples.</p>
 <p>We compute examples  in an <span class="math notranslate nohighlight">\(N\)</span> state Markov setting under both complete and incomplete markets.</p>
 <p>These examples differ in how Markov states are jumping between peace and war.</p>
@@ -896,7 +834,7 @@ and displaying  results, we construct a Python class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">TaxSmoothingExample</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    construct a tax-smoothing example, by relabeling consumption problem class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">P</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">states</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">.96</span><span class="p">,</span>
@@ -992,7 +930,7 @@ and displaying  results, we construct a Python class.</p>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)):</span>
             <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">)):</span>
                 <span class="k">if</span> <span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  π(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  π(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">|</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">states</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="mi">1</span><span class="o">/</span><span class="n">Q</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">exant</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">cp</span><span class="o">.</span><span class="n">β</span>
@@ -1009,8 +947,8 @@ and displaying  results, we construct a Python class.</p>
 </div>
 </div>
 </div>
-<div class="section" id="parameters">
-<h3><span class="section-number">7.4.1. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h3>
+<section id="parameters">
+<h3><span class="section-number">7.4.1. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">γ</span> <span class="o">=</span> <span class="mf">.1</span>
@@ -1026,9 +964,9 @@ and displaying  results, we construct a Python class.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="example-1">
-<h3><span class="section-number">7.4.2. </span>Example 1<a class="headerlink" href="#example-1" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-1">
+<h3><span class="section-number">7.4.2. </span>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h3>
 <p>This example is designed to produce some stylized versions of tax, debt, and deficit paths followed by the United States during and
 after the Civil War and also during and after World War I.</p>
 <p>We set the Markov chain to have three states</p>
@@ -1066,9 +1004,9 @@ that exceeds its prewar level.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/smoothing_tax_20_0.png" src="_images/smoothing_tax_20_0.png" />
-<img alt="_images/smoothing_tax_20_1.png" src="_images/smoothing_tax_20_1.png" />
-<img alt="_images/smoothing_tax_20_2.png" src="_images/smoothing_tax_20_2.png" />
+<img alt="_images/5844a44b982d20d9ffde64b9c2c48f26c25ef0851d7796e302704a6f24a877e3.png" src="_images/5844a44b982d20d9ffde64b9c2c48f26c25ef0851d7796e302704a6f24a877e3.png" />
+<img alt="_images/4762ff3e01bef165866f9d4ef1c6227c332041572fdbd20d551a4f64321a33c5.png" src="_images/4762ff3e01bef165866f9d4ef1c6227c332041572fdbd20d551a4f64321a33c5.png" />
+<img alt="_images/5fb4c20f0790b4700110ad0c45d12caddcb752f6630043aa810ffe5bc77fd06c.png" src="_images/5fb4c20f0790b4700110ad0c45d12caddcb752f6630043aa810ffe5bc77fd06c.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
  [[0.9 0.1 0. ]
  [0.  0.9 0.1]
@@ -1084,12 +1022,12 @@ Govt debt in 3 states = [-1.         -4.07093426 -1.12975779]
 Government tax collections minus debt levels in peace, war, postwar
   T+b in peace = 1.754809688581315
   T+b in war = 4.825743944636679
-  T+b in postwar = 1.8845674740484437
+  T+b in postwar = 1.8845674740484433
 
 Total government spending in peace, war, postwar
   peace = 1.754809688581315
-  war = 4.825743944636679
-  postwar = 1.8845674740484437
+  war = 4.825743944636678
+  postwar = 1.8845674740484433
 
 Let&#39;s see ex-post and ex-ante returns on Arrow securities 
 
@@ -1108,7 +1046,7 @@ The Ex-post one-period gross return on the portfolio of government assets
  [0.         0.         1.04166667]]
 
 The cumulative return earned from holding 1 unit market portfolio of government bonds
-0.17908622141460384
+0.17908622141460423
 </pre></div>
 </div>
 </div>
@@ -1123,9 +1061,9 @@ The cumulative return earned from holding 1 unit market portfolio of government 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/smoothing_tax_21_0.png" src="_images/smoothing_tax_21_0.png" />
-<img alt="_images/smoothing_tax_21_1.png" src="_images/smoothing_tax_21_1.png" />
-<img alt="_images/smoothing_tax_21_2.png" src="_images/smoothing_tax_21_2.png" />
+<img alt="_images/ad90843211c52eb73166ee32663a0fba28b62f35cff48bb05bd32f16ac6666e6.png" src="_images/ad90843211c52eb73166ee32663a0fba28b62f35cff48bb05bd32f16ac6666e6.png" />
+<img alt="_images/dc03e23f18cb4686e6f8d3de5b8d9200eeae7257b71bbce457ab5a83f98c3371.png" src="_images/dc03e23f18cb4686e6f8d3de5b8d9200eeae7257b71bbce457ab5a83f98c3371.png" />
+<img alt="_images/a8172a37e8c445a7be95669d802db1c27db25ca2115344e827961be451487b42.png" src="_images/a8172a37e8c445a7be95669d802db1c27db25ca2115344e827961be451487b42.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
  [[0.9 0.1 0. ]
  [0.  0.9 0.1]
@@ -1141,12 +1079,12 @@ Govt debt in 3 states = [-1.         -4.07093426 -1.12975779]
 Government tax collections minus debt levels in peace, war, postwar
   T+b in peace = 1.754809688581315
   T+b in war = 4.825743944636679
-  T+b in postwar = 1.8845674740484437
+  T+b in postwar = 1.8845674740484433
 
 Total government spending in peace, war, postwar
   peace = 1.754809688581315
-  war = 4.825743944636679
-  postwar = 1.8845674740484437
+  war = 4.825743944636678
+  postwar = 1.8845674740484433
 
 Let&#39;s see ex-post and ex-ante returns on Arrow securities 
 
@@ -1165,14 +1103,14 @@ The Ex-post one-period gross return on the portfolio of government assets
  [0.         0.         1.04166667]]
 
 The cumulative return earned from holding 1 unit market portfolio of government bonds
-0.9045311615620274
+0.9045311615620272
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="example-2">
-<h3><span class="section-number">7.4.3. </span>Example 2<a class="headerlink" href="#example-2" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-2">
+<h3><span class="section-number">7.4.3. </span>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h3>
 <p>This example captures a peace followed by a war, eventually followed by a  permanent peace .</p>
 <p>Here we set</p>
 <div class="math notranslate nohighlight">
@@ -1206,9 +1144,9 @@ P =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/smoothing_tax_24_0.png" src="_images/smoothing_tax_24_0.png" />
-<img alt="_images/smoothing_tax_24_1.png" src="_images/smoothing_tax_24_1.png" />
-<img alt="_images/smoothing_tax_24_2.png" src="_images/smoothing_tax_24_2.png" />
+<img alt="_images/00a78534ffd0525f531a915024c96c692b7bd90477154e0241d1995151e30d22.png" src="_images/00a78534ffd0525f531a915024c96c692b7bd90477154e0241d1995151e30d22.png" />
+<img alt="_images/1b23adf8840e238f517a96d59b794cd209537a42859f2f0627d002fde95dd31a.png" src="_images/1b23adf8840e238f517a96d59b794cd209537a42859f2f0627d002fde95dd31a.png" />
+<img alt="_images/cf094e9c9aaa72b1ec2abc7323ac5d1ccc8117743bcdfa48feaf860f3d617719.png" src="_images/cf094e9c9aaa72b1ec2abc7323ac5d1ccc8117743bcdfa48feaf860f3d617719.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
  [[1.  0.  0. ]
  [0.  0.9 0.1]
@@ -1222,14 +1160,14 @@ Constant tax collections = 0.6053287197231834
 Govt debt in 3 states = [ 2.63321799 -1.         -2.51384083]
 
 Government tax collections minus debt levels in peace, temporary peace, war
-  T+b in peace = -2.027889273356399
+  T+b in peace = -2.0278892733563976
   T+b in temporary peace = 1.6053287197231834
-  T+b in war = 3.1191695501730106
+  T+b in war = 3.119169550173011
 
 Total government spending in peace, temporary peace, war
-  peace = -2.027889273356399
+  peace = -2.0278892733563976
   temporary peace = 1.6053287197231834
-  war = 3.119169550173011
+  war = 3.1191695501730115
 
 Let&#39;s see ex-post and ex-ante returns on Arrow securities 
 
@@ -1248,14 +1186,14 @@ The Ex-post one-period gross return on the portfolio of government assets
  [-1.37206116  0.          1.30985865]]
 
 The cumulative return earned from holding 1 unit market portfolio of government bonds
--9.3689917325942
+-9.368991732594196
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="example-3">
-<h3><span class="section-number">7.4.4. </span>Example 3<a class="headerlink" href="#example-3" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-3">
+<h3><span class="section-number">7.4.4. </span>Example 3<a class="headerlink" href="#example-3" title="Permalink to this heading">#</a></h3>
 <p>This example features a situation in which one of the states is a war state with no hope of peace next period, while another state
 is a war state with a positive probability of peace next period.</p>
 <p>The Markov chain is:</p>
@@ -1293,9 +1231,9 @@ P =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/smoothing_tax_27_0.png" src="_images/smoothing_tax_27_0.png" />
-<img alt="_images/smoothing_tax_27_1.png" src="_images/smoothing_tax_27_1.png" />
-<img alt="_images/smoothing_tax_27_2.png" src="_images/smoothing_tax_27_2.png" />
+<img alt="_images/e1585722f4919e6aa99a84cdb884134cc2af131aacc70d4955d9a7f680167871.png" src="_images/e1585722f4919e6aa99a84cdb884134cc2af131aacc70d4955d9a7f680167871.png" />
+<img alt="_images/8716e5afa4150c83f56b07aaf321fb27334db61ea489972b2670fe5f7e0930d1.png" src="_images/8716e5afa4150c83f56b07aaf321fb27334db61ea489972b2670fe5f7e0930d1.png" />
+<img alt="_images/5f0ee973e44168e14477f9f08dc24f8543376bf1f1fc8f69309161ec281346e8.png" src="_images/5f0ee973e44168e14477f9f08dc24f8543376bf1f1fc8f69309161ec281346e8.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
  [[0.9 0.1 0.  0. ]
  [0.  0.9 0.1 0. ]
@@ -1314,13 +1252,13 @@ Government tax collections minus debt levels in peace1, peace2, war1, war2
   T+b in peace1 = 1.6927944572748268
   T+b in peace2 = 4.117736720554273
   T+b in war1 = 7.553071593533488
-  T+b in war2 = 5.1281293302540405
+  T+b in war2 = 5.128129330254041
 
 Total government spending in peace1, peace2, war1, war2
   peace1 = 1.6927944572748268
   peace2 = 4.117736720554273
   war1 = 7.553071593533487
-  war2 = 5.1281293302540405
+  war2 = 5.128129330254041
 
 Let&#39;s see ex-post and ex-ante returns on Arrow securities 
 
@@ -1343,14 +1281,14 @@ The Ex-post one-period gross return on the portfolio of government assets
  [0.2545741  0.         0.         1.1291214 ]]
 
 The cumulative return earned from holding 1 unit market portfolio of government bonds
-0.02371440178864223
+0.02371440178864222
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="example-4">
-<h3><span class="section-number">7.4.5. </span>Example 4<a class="headerlink" href="#example-4" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-4">
+<h3><span class="section-number">7.4.5. </span>Example 4<a class="headerlink" href="#example-4" title="Permalink to this heading">#</a></h3>
 <p>Here the Markov chain is:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1388,9 +1326,9 @@ P =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/smoothing_tax_30_0.png" src="_images/smoothing_tax_30_0.png" />
-<img alt="_images/smoothing_tax_30_1.png" src="_images/smoothing_tax_30_1.png" />
-<img alt="_images/smoothing_tax_30_2.png" src="_images/smoothing_tax_30_2.png" />
+<img alt="_images/94a8542a54623b89bdfee6b8772a5333c906f399809ce9c1a26daa33ea4eaa80.png" src="_images/94a8542a54623b89bdfee6b8772a5333c906f399809ce9c1a26daa33ea4eaa80.png" />
+<img alt="_images/a1df66e0b0b6cf8450cd3a2994411258d440b54d7371a227d84ad331ed8d354b.png" src="_images/a1df66e0b0b6cf8450cd3a2994411258d440b54d7371a227d84ad331ed8d354b.png" />
+<img alt="_images/b3d147add6b262923ccb5b9447b089d526cc8cad1e81016104dba27f9863f4ef.png" src="_images/b3d147add6b262923ccb5b9447b089d526cc8cad1e81016104dba27f9863f4ef.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
  [[0.9 0.1 0.  0.  0. ]
  [0.  0.9 0.1 0.  0. ]
@@ -1404,22 +1342,22 @@ Q
  [0.    0.    0.    0.864 0.096]
  [0.    0.    0.    0.    0.96 ]]
 Govt expenditures in peace1, peace2, war1, war2, permanent peace = [0.5 0.5 1.2 1.2 0.5]
-Constant tax collections = 0.6349979047185738
+Constant tax collections = 0.6349979047185739
 Govt debt in 5 states = [-1.         -2.82289484 -5.4053292  -1.77211121  3.37494762]
 
 Government tax collections minus debt levels in peace1, peace2, war1, war2, permanent peace
-  T+b in peace1 = 1.6349979047185736
-  T+b in peace2 = 3.4578927455370505
-  T+b in war1 = 6.040327103363229
-  T+b in war2 = 2.407109110283644
-  T+b in permanent peace = -2.739949713245767
+  T+b in peace1 = 1.6349979047185739
+  T+b in peace2 = 3.457892745537052
+  T+b in war1 = 6.040327103363227
+  T+b in war2 = 2.4071091102836437
+  T+b in permanent peace = -2.7399497132457675
 
 Total government spending in peace1, peace2, war1, war2, permanent peace
-  peace1 = 1.6349979047185736
-  peace2 = 3.457892745537051
-  war1 = 6.040327103363228
-  war2 = 2.407109110283644
-  permanent peace = -2.739949713245767
+  peace1 = 1.6349979047185739
+  peace2 = 3.4578927455370514
+  war1 = 6.040327103363227
+  war2 = 2.4071091102836433
+  permanent peace = -2.739949713245768
 
 Let&#39;s see ex-post and ex-ante returns on Arrow securities 
 
@@ -1444,14 +1382,14 @@ The Ex-post one-period gross return on the portfolio of government assets
  [ 0.          0.          0.          0.          1.04166667]]
 
 The cumulative return earned from holding 1 unit market portfolio of government bonds
--11.132109773063592
+-11.132109773063576
 </pre></div>
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="example-5">
-<h3><span class="section-number">7.4.6. </span>Example 5<a class="headerlink" href="#example-5" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-5">
+<h3><span class="section-number">7.4.6. </span>Example 5<a class="headerlink" href="#example-5" title="Permalink to this heading">#</a></h3>
 <p>The  example captures a case when  the system follows a deterministic path from peace to war, and back to peace again.</p>
 <p>Since there is no randomness, the outcomes in complete markets setting should be the same as in incomplete markets setting.</p>
 <p>The Markov chain is:</p>
@@ -1495,9 +1433,9 @@ P =
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/smoothing_tax_33_0.png" src="_images/smoothing_tax_33_0.png" />
-<img alt="_images/smoothing_tax_33_1.png" src="_images/smoothing_tax_33_1.png" />
-<img alt="_images/smoothing_tax_33_2.png" src="_images/smoothing_tax_33_2.png" />
+<img alt="_images/ed33a3ec3833b12245f0bf5cc9438b3873e46575541b89f15302cf515468ceed.png" src="_images/ed33a3ec3833b12245f0bf5cc9438b3873e46575541b89f15302cf515468ceed.png" />
+<img alt="_images/9f78b213c7aeec836e71d91f77d7bbcd50858f566b792b9291465ae6f5e9faa5.png" src="_images/9f78b213c7aeec836e71d91f77d7bbcd50858f566b792b9291465ae6f5e9faa5.png" />
+<img alt="_images/3e3c00f152573e53c1da2e097a8ca33ef43ae277f748492cc198a3405fbb02a7.png" src="_images/3e3c00f152573e53c1da2e097a8ca33ef43ae277f748492cc198a3405fbb02a7.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>P 
  [[0 1 0 0 0 0 0]
  [0 0 1 0 0 0 0]
@@ -1522,18 +1460,18 @@ Govt debt in 6 states = [-1.         -1.10123911 -1.20669652 -0.58738132  0.0577
 Government tax collections minus debt levels in peace1, peace2, war1, war2, war3, permanent peace
   T+b in peace1 = 1.5571895472128001
   T+b in peace2 = 1.6584286588928006
-  T+b in war1 = 1.7638860668928005
+  T+b in war1 = 1.763886066892801
   T+b in war2 = 1.1445708668928007
-  T+b in war3 = 0.499450866892801
-  T+b in permanent peace = -0.1725491331071991
+  T+b in war3 = 0.4994508668928005
+  T+b in permanent peace = -0.17254913310719966
 
 Total government spending in peace1, peace2, war1, war2, war3, permanent peace
-  peace1 = 1.5571895472128003
-  peace2 = 1.6584286588928003
+  peace1 = 1.5571895472128001
+  peace2 = 1.6584286588928006
   war1 = 1.7638860668928005
-  war2 = 1.1445708668928007
-  war3 = 0.4994508668928006
-  permanent peace = -0.17254913310719933
+  war2 = 1.1445708668928003
+  war3 = 0.49945086689280005
+  permanent peace = -0.17254913310719977
 
 Let&#39;s see ex-post and ex-ante returns on Arrow securities 
 
@@ -1568,9 +1506,9 @@ The cumulative return earned from holding 1 unit market portfolio of government 
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="continuous-state-gaussian-model">
-<h3><span class="section-number">7.4.7. </span>Continuous-State Gaussian Model<a class="headerlink" href="#continuous-state-gaussian-model" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="continuous-state-gaussian-model">
+<h3><span class="section-number">7.4.7. </span>Continuous-State Gaussian Model<a class="headerlink" href="#continuous-state-gaussian-model" title="Permalink to this heading">#</a></h3>
 <p>To construct a tax-smoothing version of the  complete markets consumption-smoothing model with a continuous state space that we presented in
 the lecture <a class="reference internal" href="smoothing.html"><span class="doc">consumption smoothing with complete and incomplete markets</span></a>, we simply relabel variables.</p>
 <p>Thus,  a government  faces a sequence of budget constraints</p>
@@ -1604,8 +1542,8 @@ interpreted as tax-smoothing models.</p>
 \[
 R(x_{t+1} | x_t) = \frac{b(x_{t+1})}{\beta E b(x_{t+1})| x_t}
 \]</div>
-<div class="section" id="related-lectures">
-<h4><span class="section-number">7.4.7.1. </span>Related Lectures<a class="headerlink" href="#related-lectures" title="Permalink to this headline">¶</a></h4>
+<section id="related-lectures">
+<h4><span class="section-number">7.4.7.1. </span>Related Lectures<a class="headerlink" href="#related-lectures" title="Permalink to this heading">#</a></h4>
 <p>Throughout this lecture, we have taken one-period interest rates and Arrow security prices as exogenous objects determined outside the model
 and specified them in ways designed to align our models closely with the consumption smoothing model of Barro <span id="id10">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Bar79</a>]</span>.</p>
 <p>Other lectures make these objects endogenous and describe  how a government  optimally  manipulates prices of government debt, albeit indirectly via effects distorting
@@ -1617,10 +1555,10 @@ models in which the government recognizes that it can manipulate  Arrow securiti
 <p>In both <a class="reference internal" href="lqramsey.html"><span class="doc">Optimal Taxation in an LQ Economy</span></a> and <a class="reference internal" href="opt_tax_recur.html"><span class="doc">Optimal Taxation with State-Contingent Debt</span></a>, the government  recognizes that its decisions affect prices.</p>
 <p>In <a class="reference internal" href="amss.html"><span class="doc">optimal taxation with incomplete markets</span></a>, we study an <strong>incomplete-markets</strong> model in which the
 government also manipulates  prices of government debt.</p>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1634,7 +1572,7 @@ government also manipulates  prices of government debt.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -2005,7 +1943,7 @@ government also manipulates  prices of government debt.</p>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
                     <!-- <li class="btn__search">
                         <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
                             <i data-feather="search"></i>
                         </form>
                     </li> -->
@@ -2147,16 +2085,5 @@ government also manipulates  prices of government debt.</p>
         </div>
 
     </div> <!-- .wrapper-->
-    
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
-<script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-54984338-11', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
-
   </body>
 </html>

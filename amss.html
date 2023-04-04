@@ -1,10 +1,14 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>43. Optimal Taxation without State-Contingent Debt &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -47,47 +51,53 @@
         </script>
     
     
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -95,10 +105,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'amss';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/amss.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -152,108 +161,35 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   43.1. Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#competitive-equilibrium-with-distorting-taxes">
-   43.2. Competitive Equilibrium with Distorting Taxes
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#risk-free-one-period-debt-only">
-     43.2.1. Risk-free One-Period Debt Only
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#comparison-with-lucas-stokey-economy">
-     43.2.2. Comparison with Lucas-Stokey Economy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ramsey-problem-without-state-contingent-debt">
-     43.2.3. Ramsey Problem Without State-contingent Debt
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#lagrangian-formulation">
-       43.2.3.1. Lagrangian Formulation
-      </a>
-     </li>
-    </ul>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#some-calculations">
-     43.2.4. Some Calculations
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#recursive-version-of-amss-model">
-   43.3. Recursive Version of AMSS Model
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recasting-state-variables">
-     43.3.1. Recasting State Variables
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#measurability-constraints">
-     43.3.2. Measurability Constraints
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#two-bellman-equations">
-     43.3.3. Two Bellman Equations
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#martingale-supercedes-state-variable-degeneracy">
-     43.3.4. Martingale Supercedes State-Variable Degeneracy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#absence-of-state-variable-degeneracy">
-     43.3.5. Absence of State Variable Degeneracy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#digression-on-non-negative-transfers">
-     43.3.6. Digression on Non-negative Transfers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#code">
-     43.3.7. Code
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#examples">
-   43.4. Examples
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#anticipated-one-period-war">
-     43.4.1. Anticipated One-Period War
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#perpetual-war-alert">
-       43.4.1.1. Perpetual War Alert
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">43.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#competitive-equilibrium-with-distorting-taxes">43.2. Competitive Equilibrium with Distorting Taxes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-free-one-period-debt-only">43.2.1. Risk-free One-Period Debt Only</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-lucas-stokey-economy">43.2.2. Comparison with Lucas-Stokey Economy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ramsey-problem-without-state-contingent-debt">43.2.3. Ramsey Problem Without State-contingent Debt</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#lagrangian-formulation">43.2.3.1. Lagrangian Formulation</a></li>
 </ul>
-
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#some-calculations">43.2.4. Some Calculations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-version-of-amss-model">43.3. Recursive Version of AMSS Model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recasting-state-variables">43.3.1. Recasting State Variables</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#measurability-constraints">43.3.2. Measurability Constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-bellman-equations">43.3.3. Two Bellman Equations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#martingale-supercedes-state-variable-degeneracy">43.3.4. Martingale Supercedes State-Variable Degeneracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#absence-of-state-variable-degeneracy">43.3.5. Absence of State Variable Degeneracy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#digression-on-non-negative-transfers">43.3.6. Digression on Non-negative Transfers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#code">43.3.7. Code</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">43.4. Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#anticipated-one-period-war">43.4.1. Anticipated One-Period War</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#perpetual-war-alert">43.4.1.1. Perpetual War Alert</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
                             <p class="logo">
                                 
                                     
@@ -301,8 +237,8 @@ const thebe_selector_output = ".output, .cell_output"
         <a href="https://quantecon.org/" title="quantecon.org">
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
-</div><div class="tex2jax_ignore mathjax_ignore section" id="optimal-taxation-without-state-contingent-debt">
-<h1><a class="toc-backref" href="#id10"><span class="section-number">43. </span>Optimal Taxation without State-Contingent Debt</a><a class="headerlink" href="#optimal-taxation-without-state-contingent-debt" title="Permalink to this headline">¶</a></h1>
+</div><section class="tex2jax_ignore mathjax_ignore" id="optimal-taxation-without-state-contingent-debt">
+<h1><a class="toc-backref" href="#id10"><span class="section-number">43. </span>Optimal Taxation without State-Contingent Debt</a><a class="headerlink" href="#optimal-taxation-without-state-contingent-debt" title="Permalink to this heading">#</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
@@ -318,49 +254,53 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
-<span class="o">!</span>pip install interpolation
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>interpolation
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.6.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
-Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
-Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
 Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.22.4)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
+Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
+Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
+Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
 Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
 Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: interpolation in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (2.2.4)
-Requirement already satisfied: tempita&lt;0.6.0,&gt;=0.5.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from interpolation) (0.5.2)
 Requirement already satisfied: packaging&lt;22.0,&gt;=21.3 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from interpolation) (21.3)
-Requirement already satisfied: numba&gt;=0.47 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from interpolation) (0.56.4)
 Requirement already satisfied: numpy&lt;2.0.0,&gt;=1.22.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from interpolation) (1.22.4)
 Requirement already satisfied: scipy&lt;2.0.0,&gt;=1.4.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from interpolation) (1.7.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba&gt;=0.47-&gt;interpolation) (61.2.0)
+Requirement already satisfied: numba&gt;=0.47 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from interpolation) (0.56.4)
+Requirement already satisfied: tempita&lt;0.6.0,&gt;=0.5.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from interpolation) (0.5.2)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba&gt;=0.47-&gt;interpolation) (61.2.0)
 Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba&gt;=0.47-&gt;interpolation) (0.39.1)
 Requirement already satisfied: pyparsing!=3.0.5,&gt;=2.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from packaging&lt;22.0,&gt;=21.3-&gt;interpolation) (3.0.4)
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="section" id="overview">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">43.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<section id="overview">
+<h2><a class="toc-backref" href="#id11"><span class="section-number">43.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>Let’s start with following imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -391,9 +331,9 @@ studied optimal taxation in a model without state-contingent debt.</p>
 <li><p>compare outcomes with those in a corresponding complete-markets model</p></li>
 </ul>
 <p>We begin with an introduction to the model.</p>
-</div>
-<div class="section" id="competitive-equilibrium-with-distorting-taxes">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">43.2. </span>Competitive Equilibrium with Distorting Taxes</a><a class="headerlink" href="#competitive-equilibrium-with-distorting-taxes" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="competitive-equilibrium-with-distorting-taxes">
+<h2><a class="toc-backref" href="#id12"><span class="section-number">43.2. </span>Competitive Equilibrium with Distorting Taxes</a><a class="headerlink" href="#competitive-equilibrium-with-distorting-taxes" title="Permalink to this heading">#</a></h2>
 <p>Many but not all features of the economy are identical to those of <a class="reference internal" href="opt_tax_recur.html"><span class="doc">the Lucas-Stokey economy</span></a>.</p>
 <p>Let’s start with things that are identical.</p>
 <p>For <span class="math notranslate nohighlight">\(t \geq 0\)</span>, a history of the state is represented by <span class="math notranslate nohighlight">\(s^t = [s_t, s_{t-1}, \ldots, s_0]\)</span>.</p>
@@ -403,15 +343,15 @@ leisure, and labor supply, respectively, at history <span class="math notranslat
 <p>Each period a representative  household is endowed with one unit of time that can be divided between  leisure
 <span class="math notranslate nohighlight">\(\ell_t\)</span> and labor <span class="math notranslate nohighlight">\(n_t\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-feas1-amss">
-<span class="eqno">(43.1)<a class="headerlink" href="#equation-feas1-amss" title="Permalink to this equation">¶</a></span>\[n_t(s^t) + \ell_t(s^t) = 1\]</div>
+<span class="eqno">(43.1)<a class="headerlink" href="#equation-feas1-amss" title="Permalink to this equation">#</a></span>\[n_t(s^t) + \ell_t(s^t) = 1\]</div>
 <p>Output equals <span class="math notranslate nohighlight">\(n_t(s^t)\)</span> and can be divided between consumption <span class="math notranslate nohighlight">\(c_t(s^t)\)</span> and <span class="math notranslate nohighlight">\(g(s_t)\)</span></p>
 <div class="math notranslate nohighlight" id="equation-tss-techr-amss">
-<span class="eqno">(43.2)<a class="headerlink" href="#equation-tss-techr-amss" title="Permalink to this equation">¶</a></span>\[c_t(s^t) + g(s_t) = n_t(s^t)\]</div>
+<span class="eqno">(43.2)<a class="headerlink" href="#equation-tss-techr-amss" title="Permalink to this equation">#</a></span>\[c_t(s^t) + g(s_t) = n_t(s^t)\]</div>
 <p>Output is not storable.</p>
 <p>The technology pins down a pre-tax wage rate to unity for all <span class="math notranslate nohighlight">\(t, s^t\)</span>.</p>
 <p>A representative  household’s preferences over <span class="math notranslate nohighlight">\(\{c_t(s^t), \ell_t(s^t)\}_{t=0}^\infty\)</span> are ordered by</p>
 <div class="math notranslate nohighlight" id="equation-ts-prefr-amss">
-<span class="eqno">(43.3)<a class="headerlink" href="#equation-ts-prefr-amss" title="Permalink to this equation">¶</a></span>\[\sum_{t=0}^\infty \sum_{s^t} \beta^t \pi_t(s^t) u[c_t(s^t), \ell_t(s^t)]\]</div>
+<span class="eqno">(43.3)<a class="headerlink" href="#equation-ts-prefr-amss" title="Permalink to this equation">#</a></span>\[\sum_{t=0}^\infty \sum_{s^t} \beta^t \pi_t(s^t) u[c_t(s^t), \ell_t(s^t)]\]</div>
 <p>where</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\pi_t(s^t)\)</span> is a joint probability distribution over the sequence <span class="math notranslate nohighlight">\(s^t\)</span>, and</p></li>
@@ -422,8 +362,8 @@ leisure, and labor supply, respectively, at history <span class="math notranslat
 <p>It is at this point that AMSS <span id="id3">[<a class="reference internal" href="zreferences.html#id130" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">AMSSeppala02</a>]</span> modify the Lucas and Stokey economy.</p>
 <p>AMSS allow the government to issue only one-period risk-free debt each period.</p>
 <p>Ruling out complete markets in this way is a step in the direction of making total tax collections behave more like that prescribed in Robert Barro (1979) <span id="id4">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Bar79</a>]</span> than they do in Lucas and Stokey (1983) <span id="id5">[<a class="reference internal" href="zreferences.html#id176" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">LS83</a>]</span>.</p>
-<div class="section" id="risk-free-one-period-debt-only">
-<h3><span class="section-number">43.2.1. </span>Risk-free One-Period Debt Only<a class="headerlink" href="#risk-free-one-period-debt-only" title="Permalink to this headline">¶</a></h3>
+<section id="risk-free-one-period-debt-only">
+<h3><span class="section-number">43.2.1. </span>Risk-free One-Period Debt Only<a class="headerlink" href="#risk-free-one-period-debt-only" title="Permalink to this heading">#</a></h3>
 <p>In period <span class="math notranslate nohighlight">\(t\)</span> and history <span class="math notranslate nohighlight">\(s^t\)</span>, let</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(b_{t+1}(s^t)\)</span> be the amount of the time <span class="math notranslate nohighlight">\(t+1\)</span> consumption good that at time <span class="math notranslate nohighlight">\(t\)</span>, history <span class="math notranslate nohighlight">\(s^t\)</span> the government promised to pay</p></li>
@@ -434,7 +374,7 @@ leisure, and labor supply, respectively, at history <span class="math notranslat
 <p>The market value at time <span class="math notranslate nohighlight">\(t\)</span> of government debt maturing at time <span class="math notranslate nohighlight">\(t+1\)</span> equals <span class="math notranslate nohighlight">\(b_{t+1}(s^t)\)</span> divided by <span class="math notranslate nohighlight">\(R_t(s^t)\)</span>.</p>
 <p>The government’s budget constraint in period <span class="math notranslate nohighlight">\(t\)</span> at history <span class="math notranslate nohighlight">\(s^t\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-ts-gov-wo">
-<span class="eqno">(43.4)<a class="headerlink" href="#equation-ts-gov-wo" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(43.4)<a class="headerlink" href="#equation-ts-gov-wo" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
 b_t(s^{t-1})
     &amp; =    \tau^n_t(s^t) n_t(s^t) - g(s_t) - T_t(s^t) +
                    {b_{t+1}(s^t) \over R_t(s^t )}
@@ -454,7 +394,7 @@ with one-period gross interest rate <span class="math notranslate nohighlight">\
 <p>Substituting this expression into the government’s budget constraint <a class="reference internal" href="#equation-ts-gov-wo">(43.4)</a>
 yields:</p>
 <div class="math notranslate nohighlight" id="equation-ts-gov-wo2">
-<span class="eqno">(43.5)<a class="headerlink" href="#equation-ts-gov-wo2" title="Permalink to this equation">¶</a></span>\[b_t(s^{t-1}) =  z_t(s^t) + \beta  \sum_{s^{t+1}\vert s^t}  \pi_{t+1}(s^{t+1} | s^t)
+<span class="eqno">(43.5)<a class="headerlink" href="#equation-ts-gov-wo2" title="Permalink to this equation">#</a></span>\[b_t(s^{t-1}) =  z_t(s^t) + \beta  \sum_{s^{t+1}\vert s^t}  \pi_{t+1}(s^{t+1} | s^t)
                        { u_c(s^{t+1}) \over u_c(s^{t}) } \; b_{t+1}(s^t)\]</div>
 <p>Components of <span class="math notranslate nohighlight">\(z_t(s^t)\)</span> on the right side depend on <span class="math notranslate nohighlight">\(s^t\)</span>, but the left side is required to depend only
 on <span class="math notranslate nohighlight">\(s^{t-1}\)</span> .</p>
@@ -474,7 +414,7 @@ b_t(s^{t-1}) =  z_t(s^t) + \sum_{s^{t+1}\vert s^t} \beta  \pi_{t+1}(s^{t+1} | s^
 government indebtedness, and by invoking a natural debt limit, we
 arrive at:</p>
 <div class="math notranslate nohighlight" id="equation-ts-gov-wo3">
-<span class="eqno">(43.6)<a class="headerlink" href="#equation-ts-gov-wo3" title="Permalink to this equation">¶</a></span>\[\begin{aligned}
+<span class="eqno">(43.6)<a class="headerlink" href="#equation-ts-gov-wo3" title="Permalink to this equation">#</a></span>\[\begin{aligned}
 b_t(s^{t-1})
     &amp;=  \sum_{j=0}^\infty \sum_{s^{t+j} | s^t} \beta^j  \pi_{t+j}(s^{t+j} | s^t)
               { u_c(s^{t+j}) \over u_c(s^{t}) } \;z_{t+j}(s^{t+j})
@@ -488,7 +428,7 @@ b_t(s^{t-1})
 </ul>
 <p>so that we can express the net-of-interest government surplus <span class="math notranslate nohighlight">\(z_t(s^t)\)</span> as</p>
 <div class="math notranslate nohighlight" id="equation-amss-44-2">
-<span class="eqno">(43.7)<a class="headerlink" href="#equation-amss-44-2" title="Permalink to this equation">¶</a></span>\[z_t(s^t)
+<span class="eqno">(43.7)<a class="headerlink" href="#equation-amss-44-2" title="Permalink to this equation">#</a></span>\[z_t(s^t)
     = \left[1 - {u_{\ell}(s^t) \over u_c(s^t)}\right] \left[c_t(s^t)+g(s_t)\right]
         -g(s_t) - T_t(s^t)\,.\]</div>
 <p>If we substitute  appropriate versions of the right side of <a class="reference internal" href="#equation-amss-44-2">(43.7)</a> for <span class="math notranslate nohighlight">\(z_{t+j}(s^{t+j})\)</span> into equation <a class="reference internal" href="#equation-ts-gov-wo3">(43.6)</a>,
@@ -496,24 +436,24 @@ we obtain a sequence of <em>implementability constraints</em> on a Ramsey alloca
 <p>Expression <a class="reference internal" href="#equation-ts-gov-wo3">(43.6)</a> at time <span class="math notranslate nohighlight">\(t=0\)</span> and initial state <span class="math notranslate nohighlight">\(s^0\)</span>
 was also  an <em>implementability constraint</em> on a Ramsey allocation in a Lucas-Stokey economy:</p>
 <div class="math notranslate nohighlight" id="equation-ts-gov-wo4">
-<span class="eqno">(43.8)<a class="headerlink" href="#equation-ts-gov-wo4" title="Permalink to this equation">¶</a></span>\[b_0(s^{-1}) = \mathbb E_0 \sum_{j=0}^\infty \beta^j
+<span class="eqno">(43.8)<a class="headerlink" href="#equation-ts-gov-wo4" title="Permalink to this equation">#</a></span>\[b_0(s^{-1}) = \mathbb E_0 \sum_{j=0}^\infty \beta^j
                { u_c(s^{j}) \over u_c(s^{0}) } \;z_j(s^{j})\]</div>
 <p>Indeed, it was the <em>only</em> implementability constraint there.</p>
 <p>But now we also have a large number of additional implementability constraints</p>
 <div class="math notranslate nohighlight" id="equation-ts-gov-wo4a">
-<span class="eqno">(43.9)<a class="headerlink" href="#equation-ts-gov-wo4a" title="Permalink to this equation">¶</a></span>\[b_t(s^{t-1}) =  \mathbb E_t \sum_{j=0}^\infty \beta^j
+<span class="eqno">(43.9)<a class="headerlink" href="#equation-ts-gov-wo4a" title="Permalink to this equation">#</a></span>\[b_t(s^{t-1}) =  \mathbb E_t \sum_{j=0}^\infty \beta^j
               { u_c(s^{t+j}) \over u_c(s^{t}) } \;z_{t+j}(s^{t+j})\]</div>
 <p>Equation <a class="reference internal" href="#equation-ts-gov-wo4a">(43.9)</a> must hold for each <span class="math notranslate nohighlight">\(s^t\)</span> for each <span class="math notranslate nohighlight">\(t \geq 1\)</span>.</p>
-</div>
-<div class="section" id="comparison-with-lucas-stokey-economy">
-<h3><span class="section-number">43.2.2. </span>Comparison with Lucas-Stokey Economy<a class="headerlink" href="#comparison-with-lucas-stokey-economy" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="comparison-with-lucas-stokey-economy">
+<h3><span class="section-number">43.2.2. </span>Comparison with Lucas-Stokey Economy<a class="headerlink" href="#comparison-with-lucas-stokey-economy" title="Permalink to this heading">#</a></h3>
 <p>The expression on the right side of <a class="reference internal" href="#equation-ts-gov-wo4a">(43.9)</a> in the Lucas-Stokey (1983) economy would  equal the present value of a continuation stream of government net-of-interest surpluses evaluated at what would be competitive equilibrium Arrow-Debreu prices at date <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>In the Lucas-Stokey economy, that present value is measurable with respect to <span class="math notranslate nohighlight">\(s^t\)</span>.</p>
 <p>In the AMSS economy, the restriction that government debt be risk-free imposes that that same present value must be measurable with respect to <span class="math notranslate nohighlight">\(s^{t-1}\)</span>.</p>
 <p>In a language used in the literature on incomplete markets models, it can be said that the AMSS model requires that at each <span class="math notranslate nohighlight">\((t, s^t)\)</span> what would be the present value of continuation government net-of-interest surpluses in the Lucas-Stokey model must belong to  the <strong>marketable subspace</strong> of the AMSS model.</p>
-</div>
-<div class="section" id="ramsey-problem-without-state-contingent-debt">
-<h3><span class="section-number">43.2.3. </span>Ramsey Problem Without State-contingent Debt<a class="headerlink" href="#ramsey-problem-without-state-contingent-debt" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="ramsey-problem-without-state-contingent-debt">
+<h3><span class="section-number">43.2.3. </span>Ramsey Problem Without State-contingent Debt<a class="headerlink" href="#ramsey-problem-without-state-contingent-debt" title="Permalink to this heading">#</a></h3>
 <p>After we have substituted the resource constraint into the utility function, we can express the Ramsey problem as being to choose an allocation that solves</p>
 <div class="math notranslate nohighlight">
 \[
@@ -523,17 +463,17 @@ was also  an <em>implementability constraint</em> on a Ramsey allocation in a Lu
 \]</div>
 <p>where the maximization is subject to</p>
 <div class="math notranslate nohighlight" id="equation-amss-44">
-<span class="eqno">(43.10)<a class="headerlink" href="#equation-amss-44" title="Permalink to this equation">¶</a></span>\[\mathbb E_{0} \sum_{j=0}^\infty \beta^j
+<span class="eqno">(43.10)<a class="headerlink" href="#equation-amss-44" title="Permalink to this equation">#</a></span>\[\mathbb E_{0} \sum_{j=0}^\infty \beta^j
       { u_c(s^{j}) \over u_c(s^{0}) } \;z_j(s^{j}) \geq b_0(s^{-1})\]</div>
 <p>and</p>
 <div class="math notranslate nohighlight" id="equation-amss-46">
-<span class="eqno">(43.11)<a class="headerlink" href="#equation-amss-46" title="Permalink to this equation">¶</a></span>\[\mathbb E_{t} \sum_{j=0}^\infty \beta^j
+<span class="eqno">(43.11)<a class="headerlink" href="#equation-amss-46" title="Permalink to this equation">#</a></span>\[\mathbb E_{t} \sum_{j=0}^\infty \beta^j
     { u_c(s^{t+j}) \over u_c(s^{t}) } \;
     z_{t+j}(s^{t+j}) = b_t(s^{t-1})
       \quad \forall \, t,  s^t\]</div>
 <p>given <span class="math notranslate nohighlight">\(b_0(s^{-1})\)</span>.</p>
-<div class="section" id="lagrangian-formulation">
-<h4><span class="section-number">43.2.3.1. </span>Lagrangian Formulation<a class="headerlink" href="#lagrangian-formulation" title="Permalink to this headline">¶</a></h4>
+<section id="lagrangian-formulation">
+<h4><span class="section-number">43.2.3.1. </span>Lagrangian Formulation<a class="headerlink" href="#lagrangian-formulation" title="Permalink to this heading">#</a></h4>
 <p>Let <span class="math notranslate nohighlight">\(\gamma_0(s^0)\)</span> be a non-negative Lagrange multiplier on constraint <a class="reference internal" href="#equation-amss-44">(43.10)</a>.</p>
 <p>As in the Lucas-Stokey economy, this multiplier is strictly positive when the government must resort to
 distortionary taxation; otherwise it equals zero.</p>
@@ -555,15 +495,15 @@ relax constraint <a class="reference internal" href="#equation-amss-46">(43.11)<
 indebtedness for that particular realization of history <span class="math notranslate nohighlight">\(s^t\)</span>.</p>
 <p>That would let us reduce the beginning-of-period indebtedness for some other history <a class="footnote-reference brackets" href="#fn-b" id="id7">2</a>.</p>
 <p>These features flow from  the fact that the government cannot use state-contingent debt and therefore cannot allocate its indebtedness  efficiently across future states.</p>
-</div>
-</div>
-<div class="section" id="some-calculations">
-<h3><span class="section-number">43.2.4. </span>Some Calculations<a class="headerlink" href="#some-calculations" title="Permalink to this headline">¶</a></h3>
+</section>
+</section>
+<section id="some-calculations">
+<h3><span class="section-number">43.2.4. </span>Some Calculations<a class="headerlink" href="#some-calculations" title="Permalink to this heading">#</a></h3>
 <p>It is helpful to apply two transformations to the Lagrangian.</p>
 <p>Multiply constraint <a class="reference internal" href="#equation-amss-44">(43.10)</a> by <span class="math notranslate nohighlight">\(u_c(s^0)\)</span> and the constraints <a class="reference internal" href="#equation-amss-46">(43.11)</a> by <span class="math notranslate nohighlight">\(\beta^t u_c(s^{t})\)</span>.</p>
 <p>Then a Lagrangian for the Ramsey problem can  be represented as</p>
 <div class="math notranslate nohighlight" id="equation-amss-lagr-a">
-<span class="eqno">(43.12)<a class="headerlink" href="#equation-amss-lagr-a" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(43.12)<a class="headerlink" href="#equation-amss-lagr-a" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
    J &amp;= \mathbb E_{0} \sum_{t=0}^\infty \beta^t
                         \biggl\{ u\left(c_t(s^t), 1-c_t(s^t)-g(s_t)\right)\\
    &amp;  \qquad + \gamma_t(s^t) \Bigl[ \mathbb E_{t} \sum_{j=0}^\infty \beta^j
@@ -577,7 +517,7 @@ indebtedness for that particular realization of history <span class="math notran
 \end{aligned}\end{split}\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight" id="equation-amss-lagr">
-<span class="eqno">(43.13)<a class="headerlink" href="#equation-amss-lagr" title="Permalink to this equation">¶</a></span>\[\Psi_t(s^t)=\Psi_{t-1}(s^{t-1})+\gamma_t(s^t)
+<span class="eqno">(43.13)<a class="headerlink" href="#equation-amss-lagr" title="Permalink to this equation">#</a></span>\[\Psi_t(s^t)=\Psi_{t-1}(s^{t-1})+\gamma_t(s^t)
  \quad \text{and} \quad
 \Psi_{-1}(s^{-1})=0\]</div>
 <p>In <a class="reference internal" href="#equation-amss-lagr-a">(43.12)</a>,  the second equality uses  the law of iterated expectations
@@ -586,7 +526,7 @@ and Abel’s summation formula (also called <em>summation by parts</em>, see
 <p>First-order conditions with respect
 to <span class="math notranslate nohighlight">\(c_t(s^t)\)</span> can be expressed as</p>
 <div class="math notranslate nohighlight" id="equation-amss-foc-a">
-<span class="eqno">(43.14)<a class="headerlink" href="#equation-amss-foc-a" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(43.14)<a class="headerlink" href="#equation-amss-foc-a" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
   u_c(s^t)-u_{\ell}(s^t) &amp;+ \Psi_t(s^t)\left\{ \left[
     u_{cc}(s^t) - u_{c\ell}(s^{t})\right]z_t(s^{t}) +
     u_{c}(s^{t})\,z_c(s^{t}) \right\}
@@ -596,12 +536,12 @@ to <span class="math notranslate nohighlight">\(c_t(s^t)\)</span> can be express
 \end{aligned}\end{split}\]</div>
 <p>and with respect to <span class="math notranslate nohighlight">\(b_t(s^t)\)</span> as</p>
 <div class="math notranslate nohighlight" id="equation-amss-foc-b">
-<span class="eqno">(43.15)<a class="headerlink" href="#equation-amss-foc-b" title="Permalink to this equation">¶</a></span>\[\mathbb E_{t} \left[\gamma_{t+1}(s^{t+1})\,u_c(s^{t+1})\right] = 0\]</div>
+<span class="eqno">(43.15)<a class="headerlink" href="#equation-amss-foc-b" title="Permalink to this equation">#</a></span>\[\mathbb E_{t} \left[\gamma_{t+1}(s^{t+1})\,u_c(s^{t+1})\right] = 0\]</div>
 <p>If we substitute <span class="math notranslate nohighlight">\(z_t(s^t)\)</span> from <a class="reference internal" href="#equation-amss-44-2">(43.7)</a> and its derivative
 <span class="math notranslate nohighlight">\(z_c(s^t)\)</span> into the first-order condition <a class="reference internal" href="#equation-amss-foc-a">(43.14)</a>, we  find  two
 differences from the corresponding condition for the optimal allocation
 in a Lucas-Stokey economy with state-contingent government debt.</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The term involving <span class="math notranslate nohighlight">\(b_t(s^{t-1})\)</span> in the first-order condition
 <a class="reference internal" href="#equation-amss-foc-a">(43.14)</a> does not appear in the corresponding expression
 for the Lucas-Stokey economy.</p>
@@ -622,7 +562,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SequentialLS</span><span class="p">:</span>
 
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class that takes a preference object, state transition matrix,</span>
 <span class="sd">    and state contingent government expenditure plan as inputs, and</span>
 <span class="sd">    solves the sequential allocation problem described above.</span>
@@ -645,7 +585,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
         <span class="bp">self</span><span class="o">.</span><span class="n">find_first_best</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">FOC_first_best</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        First order conditions that characterize</span>
 <span class="sd">        the first best allocation.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -659,7 +599,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
         <span class="k">return</span> <span class="n">Uc</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="o">-</span> <span class="n">Ul</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">find_first_best</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Find the first best allocation</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">S</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span>
@@ -673,7 +613,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
         <span class="bp">self</span><span class="o">.</span><span class="n">nFB</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cFB</span> <span class="o">+</span> <span class="n">g</span>
 
     <span class="k">def</span> <span class="nf">FOC_time1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">Φ</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        First order conditions that characterize</span>
 <span class="sd">        optimal time 1 allocation problems.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -692,7 +632,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
         <span class="k">return</span> <span class="n">diff</span>
 
     <span class="k">def</span> <span class="nf">time1_allocation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Φ</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Computes optimal allocation for time t &gt;= 1 for a given Φ</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">pref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pref</span>
@@ -715,7 +655,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
         <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span>
 
     <span class="k">def</span> <span class="nf">FOC_time0</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c0</span><span class="p">,</span> <span class="n">Φ</span><span class="p">,</span> <span class="n">g0</span><span class="p">,</span> <span class="n">b0</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        First order conditions that characterize</span>
 <span class="sd">        time 0 allocation problem.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -732,7 +672,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
         <span class="k">return</span> <span class="n">diff</span>
 
     <span class="k">def</span> <span class="nf">implementability</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Φ</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">s0</span><span class="p">,</span> <span class="n">cn0_arr</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Compute the differences between the RHS and LHS</span>
 <span class="sd">        of the implementability constraint given Φ,</span>
 <span class="sd">        initial debt, and initial state.</span>
@@ -757,7 +697,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
         <span class="k">return</span> <span class="n">RHS</span> <span class="o">-</span> <span class="n">LHS</span>
 
     <span class="k">def</span> <span class="nf">time0_allocation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">s0</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Finds the optimal time 0 allocation given</span>
 <span class="sd">        initial government debt b0 and state s0</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -776,7 +716,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
         <span class="k">return</span> <span class="n">Φ</span><span class="p">,</span> <span class="n">c0</span><span class="p">,</span> <span class="n">n0</span>
 
     <span class="k">def</span> <span class="nf">τ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Computes τ given c, n</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">pref</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pref</span>
@@ -785,7 +725,7 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
         <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">Ul</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">Uc</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mi">1</span><span class="o">-</span><span class="n">n</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">s0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">sHist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Simulates planners policies for T periods</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">pref</span><span class="p">,</span> <span class="n">π</span><span class="p">,</span> <span class="n">β</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pref</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">π</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span>
@@ -824,10 +764,10 @@ on optimal taxation with state-contingent debt  sequential allocation implementa
 </div>
 <p>To analyze the AMSS model, we find it useful to adopt a recursive formulation
 using techniques like those in our lectures on <a class="reference internal" href="dyn_stack.html"><span class="doc">dynamic Stackelberg models</span></a> and <a class="reference internal" href="opt_tax_recur.html"><span class="doc">optimal taxation with state-contingent debt</span></a>.</p>
-</div>
-</div>
-<div class="section" id="recursive-version-of-amss-model">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">43.3. </span>Recursive Version of AMSS Model</a><a class="headerlink" href="#recursive-version-of-amss-model" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="recursive-version-of-amss-model">
+<h2><a class="toc-backref" href="#id13"><span class="section-number">43.3. </span>Recursive Version of AMSS Model</a><a class="headerlink" href="#recursive-version-of-amss-model" title="Permalink to this heading">#</a></h2>
 <p>We now describe a recursive formulation of the AMSS economy.</p>
 <p>We have noted that from the point of view of the Ramsey planner, the restriction
 to one-period risk-free securities</p>
@@ -840,8 +780,8 @@ allocations at each time and history</p></li>
 <p>We now explore how these constraints alter  Bellman equations for a time
 <span class="math notranslate nohighlight">\(0\)</span> Ramsey planner and for time <span class="math notranslate nohighlight">\(t \geq 1\)</span>, history <span class="math notranslate nohighlight">\(s^t\)</span>
 continuation Ramsey planners.</p>
-<div class="section" id="recasting-state-variables">
-<h3><span class="section-number">43.3.1. </span>Recasting State Variables<a class="headerlink" href="#recasting-state-variables" title="Permalink to this headline">¶</a></h3>
+<section id="recasting-state-variables">
+<h3><span class="section-number">43.3.1. </span>Recasting State Variables<a class="headerlink" href="#recasting-state-variables" title="Permalink to this heading">#</a></h3>
 <p>In the AMSS setting, the government faces a sequence of budget constraints</p>
 <div class="math notranslate nohighlight">
 \[
@@ -853,32 +793,32 @@ and <span class="math notranslate nohighlight">\(t+1\)</span> at history <span c
 to be non-negative).</p>
 <p>In this case, the household faces a sequence of budget constraints</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp1">
-<span class="eqno">(43.16)<a class="headerlink" href="#equation-eqn-amssapp1" title="Permalink to this equation">¶</a></span>\[b_t(s^{t-1}) + (1-\tau_t(s^t)) n_t(s^t) = c_t(s^t) + b_{t+1}(s^t)/R_t(s^t)\]</div>
+<span class="eqno">(43.16)<a class="headerlink" href="#equation-eqn-amssapp1" title="Permalink to this equation">#</a></span>\[b_t(s^{t-1}) + (1-\tau_t(s^t)) n_t(s^t) = c_t(s^t) + b_{t+1}(s^t)/R_t(s^t)\]</div>
 <p>The household’s first-order conditions are <span class="math notranslate nohighlight">\(u_{c,t} = \beta R_t \mathbb E_t u_{c,t+1}\)</span>
 and <span class="math notranslate nohighlight">\((1-\tau_t) u_{c,t} = u_{l,t}\)</span>.</p>
 <p>Using these to eliminate <span class="math notranslate nohighlight">\(R_t\)</span> and <span class="math notranslate nohighlight">\(\tau_t\)</span> from  budget constraint
 <a class="reference internal" href="#equation-eqn-amssapp1">(43.16)</a> gives</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp2a">
-<span class="eqno">(43.17)<a class="headerlink" href="#equation-eqn-amssapp2a" title="Permalink to this equation">¶</a></span>\[b_t(s^{t-1}) + \frac{u_{l,t}(s^t)}{u_{c,t}(s^t)} n_t(s^t)
+<span class="eqno">(43.17)<a class="headerlink" href="#equation-eqn-amssapp2a" title="Permalink to this equation">#</a></span>\[b_t(s^{t-1}) + \frac{u_{l,t}(s^t)}{u_{c,t}(s^t)} n_t(s^t)
 = c_t(s^t) + {\frac{\beta (\mathbb E_t u_{c,t+1}) b_{t+1}(s^t)}{u_{c,t}(s^t)}}\]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp2">
-<span class="eqno">(43.18)<a class="headerlink" href="#equation-eqn-amssapp2" title="Permalink to this equation">¶</a></span>\[u_{c,t}(s^t) b_t(s^{t-1}) + u_{l,t}(s^t) n_t(s^t)
+<span class="eqno">(43.18)<a class="headerlink" href="#equation-eqn-amssapp2" title="Permalink to this equation">#</a></span>\[u_{c,t}(s^t) b_t(s^{t-1}) + u_{l,t}(s^t) n_t(s^t)
 = u_{c,t}(s^t) c_t(s^t) + \beta (\mathbb E_t u_{c,t+1}) b_{t+1}(s^t)\]</div>
 <p>Now define</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp3">
-<span class="eqno">(43.19)<a class="headerlink" href="#equation-eqn-amssapp3" title="Permalink to this equation">¶</a></span>\[x_t \equiv \beta b_{t+1}(s^t) \mathbb E_t u_{c,t+1} = u_{c,t} (s^t) {\frac{b_{t+1}(s^t)}{R_t(s^t)}}\]</div>
+<span class="eqno">(43.19)<a class="headerlink" href="#equation-eqn-amssapp3" title="Permalink to this equation">#</a></span>\[x_t \equiv \beta b_{t+1}(s^t) \mathbb E_t u_{c,t+1} = u_{c,t} (s^t) {\frac{b_{t+1}(s^t)}{R_t(s^t)}}\]</div>
 <p>and represent the household’s budget constraint at time <span class="math notranslate nohighlight">\(t\)</span>,
 history <span class="math notranslate nohighlight">\(s^t\)</span> as</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp4">
-<span class="eqno">(43.20)<a class="headerlink" href="#equation-eqn-amssapp4" title="Permalink to this equation">¶</a></span>\[{\frac{u_{c,t} x_{t-1}}{\beta \mathbb E_{t-1} u_{c,t}}} = u_{c,t} c_t - u_{l,t} n_t + x_t\]</div>
+<span class="eqno">(43.20)<a class="headerlink" href="#equation-eqn-amssapp4" title="Permalink to this equation">#</a></span>\[{\frac{u_{c,t} x_{t-1}}{\beta \mathbb E_{t-1} u_{c,t}}} = u_{c,t} c_t - u_{l,t} n_t + x_t\]</div>
 <p>for <span class="math notranslate nohighlight">\(t \geq 1\)</span>.</p>
-</div>
-<div class="section" id="measurability-constraints">
-<h3><span class="section-number">43.3.2. </span>Measurability Constraints<a class="headerlink" href="#measurability-constraints" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="measurability-constraints">
+<h3><span class="section-number">43.3.2. </span>Measurability Constraints<a class="headerlink" href="#measurability-constraints" title="Permalink to this heading">#</a></h3>
 <p>Write equation <a class="reference internal" href="#equation-eqn-amssapp2">(43.18)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp2b">
-<span class="eqno">(43.21)<a class="headerlink" href="#equation-eqn-amssapp2b" title="Permalink to this equation">¶</a></span>\[b_t(s^{t-1})  = c_t(s^t) -  { \frac{u_{l,t}(s^t)}{u_{c,t}(s^t)}} n_t(s^t) +
+<span class="eqno">(43.21)<a class="headerlink" href="#equation-eqn-amssapp2b" title="Permalink to this equation">#</a></span>\[b_t(s^{t-1})  = c_t(s^t) -  { \frac{u_{l,t}(s^t)}{u_{c,t}(s^t)}} n_t(s^t) +
 {\frac{\beta (\mathbb E_t u_{c,t+1}) b_{t+1}(s^t)}{u_{c,t}}}\]</div>
 <p>The right side of equation <a class="reference internal" href="#equation-eqn-amssapp2b">(43.21)</a> expresses the time <span class="math notranslate nohighlight">\(t\)</span> value of government debt
 in terms of a linear combination of terms whose individual components
@@ -888,9 +828,9 @@ are measurable with respect to <span class="math notranslate nohighlight">\(s^t\
 <p>That implies that it has to be <em>measurable</em> with respect to <span class="math notranslate nohighlight">\(s^{t-1}\)</span>.</p>
 <p>Equations <a class="reference internal" href="#equation-eqn-amssapp2b">(43.21)</a> are the <em>measurability constraints</em> that the AMSS model adds to the single time <span class="math notranslate nohighlight">\(0\)</span> implementation
 constraint imposed in the Lucas and Stokey model.</p>
-</div>
-<div class="section" id="two-bellman-equations">
-<h3><span class="section-number">43.3.3. </span>Two Bellman Equations<a class="headerlink" href="#two-bellman-equations" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="two-bellman-equations">
+<h3><span class="section-number">43.3.3. </span>Two Bellman Equations<a class="headerlink" href="#two-bellman-equations" title="Permalink to this heading">#</a></h3>
 <p>Let <span class="math notranslate nohighlight">\(\Pi(s|s_-)\)</span> be a Markov transition matrix whose entries tell probabilities of moving from state <span class="math notranslate nohighlight">\(s_-\)</span> to state <span class="math notranslate nohighlight">\(s\)</span> in one period.</p>
 <p>Let</p>
 <ul class="simple">
@@ -903,12 +843,12 @@ Ramsey plan at <span class="math notranslate nohighlight">\(x_{t-1} = x_-, s_{t-
 <p>For <span class="math notranslate nohighlight">\(t \geq 1\)</span>, the value function for a <strong>continuation Ramsey planner</strong>
 satisfies the Bellman equation</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp5">
-<span class="eqno">(43.22)<a class="headerlink" href="#equation-eqn-amssapp5" title="Permalink to this equation">¶</a></span>\[V(x_-,s_-) = \max_{\{n(s), x(s)\}} \sum_s \Pi(s|s_-) \left[ u(n(s) -
+<span class="eqno">(43.22)<a class="headerlink" href="#equation-eqn-amssapp5" title="Permalink to this equation">#</a></span>\[V(x_-,s_-) = \max_{\{n(s), x(s)\}} \sum_s \Pi(s|s_-) \left[ u(n(s) -
 g(s), 1-n(s)) + \beta V(x(s),s) \right]\]</div>
 <p>subject to the following collection of implementability constraints, one
 for each <span class="math notranslate nohighlight">\(s \in {\cal S}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp6">
-<span class="eqno">(43.23)<a class="headerlink" href="#equation-eqn-amssapp6" title="Permalink to this equation">¶</a></span>\[{\frac{u_c(s) x_- }{\beta \sum_{\tilde s} \Pi(\tilde s|s_-) u_c(\tilde s) }}
+<span class="eqno">(43.23)<a class="headerlink" href="#equation-eqn-amssapp6" title="Permalink to this equation">#</a></span>\[{\frac{u_c(s) x_- }{\beta \sum_{\tilde s} \Pi(\tilde s|s_-) u_c(\tilde s) }}
 = u_c(s) (n(s) - g(s)) - u_l(s) n(s) + x(s)\]</div>
 <p>A continuation Ramsey planner at <span class="math notranslate nohighlight">\(t \geq 1\)</span> takes
 <span class="math notranslate nohighlight">\((x_{t-1}, s_{t-1}) = (x_-, s_-)\)</span> as given and before
@@ -918,26 +858,26 @@ for each <span class="math notranslate nohighlight">\(s \in {\cal S}\)</span>:</
 <p>The value function <span class="math notranslate nohighlight">\(W(b_0, s_0)\)</span>   for the time <span class="math notranslate nohighlight">\(t=0\)</span> Ramsey planner
 satisfies the Bellman equation</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp100">
-<span class="eqno">(43.24)<a class="headerlink" href="#equation-eqn-amssapp100" title="Permalink to this equation">¶</a></span>\[W(b_0, s_0) = \max_{n_0, x_0} u(n_0 - g_0, 1-n_0) + \beta V(x_0,s_0)\]</div>
+<span class="eqno">(43.24)<a class="headerlink" href="#equation-eqn-amssapp100" title="Permalink to this equation">#</a></span>\[W(b_0, s_0) = \max_{n_0, x_0} u(n_0 - g_0, 1-n_0) + \beta V(x_0,s_0)\]</div>
 <p>where maximization is subject to</p>
 <div class="math notranslate nohighlight" id="equation-eqn-ammssapp101">
-<span class="eqno">(43.25)<a class="headerlink" href="#equation-eqn-ammssapp101" title="Permalink to this equation">¶</a></span>\[u_{c,0} b_0 = u_{c,0} (n_0-g_0) - u_{l,0} n_0 + x_0\]</div>
-</div>
-<div class="section" id="martingale-supercedes-state-variable-degeneracy">
-<h3><span class="section-number">43.3.4. </span>Martingale Supercedes State-Variable Degeneracy<a class="headerlink" href="#martingale-supercedes-state-variable-degeneracy" title="Permalink to this headline">¶</a></h3>
+<span class="eqno">(43.25)<a class="headerlink" href="#equation-eqn-ammssapp101" title="Permalink to this equation">#</a></span>\[u_{c,0} b_0 = u_{c,0} (n_0-g_0) - u_{l,0} n_0 + x_0\]</div>
+</section>
+<section id="martingale-supercedes-state-variable-degeneracy">
+<h3><span class="section-number">43.3.4. </span>Martingale Supercedes State-Variable Degeneracy<a class="headerlink" href="#martingale-supercedes-state-variable-degeneracy" title="Permalink to this heading">#</a></h3>
 <p>Let <span class="math notranslate nohighlight">\(\mu(s|s_-) \Pi(s|s_-)\)</span> be a Lagrange multiplier on the constraint <a class="reference internal" href="#equation-eqn-amssapp6">(43.23)</a>
 for state <span class="math notranslate nohighlight">\(s\)</span>.</p>
 <p>After forming an appropriate Lagrangian, we find that the continuation Ramsey planner’s first-order
 condition with respect to <span class="math notranslate nohighlight">\(x(s)\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp7">
-<span class="eqno">(43.26)<a class="headerlink" href="#equation-eqn-amssapp7" title="Permalink to this equation">¶</a></span>\[\beta V_x(x(s),s) = \mu(s|s_-)\]</div>
+<span class="eqno">(43.26)<a class="headerlink" href="#equation-eqn-amssapp7" title="Permalink to this equation">#</a></span>\[\beta V_x(x(s),s) = \mu(s|s_-)\]</div>
 <p>Applying an envelope theorem to Bellman equation <a class="reference internal" href="#equation-eqn-amssapp5">(43.22)</a> gives</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp8">
-<span class="eqno">(43.27)<a class="headerlink" href="#equation-eqn-amssapp8" title="Permalink to this equation">¶</a></span>\[V_x(x_-,s_-) = \sum_s \Pi(s|s_-) \mu(s|s_-) {\frac{u_c(s)}{\beta \sum_{\tilde s}
+<span class="eqno">(43.27)<a class="headerlink" href="#equation-eqn-amssapp8" title="Permalink to this equation">#</a></span>\[V_x(x_-,s_-) = \sum_s \Pi(s|s_-) \mu(s|s_-) {\frac{u_c(s)}{\beta \sum_{\tilde s}
 \Pi(\tilde s|s_-) u_c(\tilde s) }}\]</div>
 <p>Equations <a class="reference internal" href="#equation-eqn-amssapp7">(43.26)</a> and <a class="reference internal" href="#equation-eqn-amssapp8">(43.27)</a> imply that</p>
 <div class="math notranslate nohighlight" id="equation-eqn-amssapp9">
-<span class="eqno">(43.28)<a class="headerlink" href="#equation-eqn-amssapp9" title="Permalink to this equation">¶</a></span>\[V_x(x_-, s_-) = \sum_{s} \left( \Pi(s|s_-) {\frac{u_c(s)}{\sum_{\tilde s}
+<span class="eqno">(43.28)<a class="headerlink" href="#equation-eqn-amssapp9" title="Permalink to this equation">#</a></span>\[V_x(x_-, s_-) = \sum_{s} \left( \Pi(s|s_-) {\frac{u_c(s)}{\sum_{\tilde s}
 \Pi(\tilde s| s_-) u_c(\tilde s)}} \right) V_x(x, s)\]</div>
 <p>Equation <a class="reference internal" href="#equation-eqn-amssapp9">(43.28)</a> states that <span class="math notranslate nohighlight">\(V_x(x, s)\)</span> is a <em>risk-adjusted martingale</em>.</p>
 <p>Saying that <span class="math notranslate nohighlight">\(V_x(x, s)\)</span> is a risk-adjusted martingale  means  that
@@ -951,15 +891,15 @@ over <span class="math notranslate nohighlight">\(s^t\)</span> sequences that ar
 <div class="exercise admonition" id="amss_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 43.1 </span></p>
-<div class="section" id="exercise-content">
+<section id="exercise-content">
 <p>Please verify that <span class="math notranslate nohighlight">\(\check \Pi(s|s_-)\)</span> is a valid Markov
 transition density, i.e., that its elements are all non-negative and
 that for each <span class="math notranslate nohighlight">\(s_-\)</span>, the sum over <span class="math notranslate nohighlight">\(s\)</span> equals unity.</p>
+</section>
 </div>
-</div>
-</div>
-<div class="section" id="absence-of-state-variable-degeneracy">
-<h3><span class="section-number">43.3.5. </span>Absence of State Variable Degeneracy<a class="headerlink" href="#absence-of-state-variable-degeneracy" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="absence-of-state-variable-degeneracy">
+<h3><span class="section-number">43.3.5. </span>Absence of State Variable Degeneracy<a class="headerlink" href="#absence-of-state-variable-degeneracy" title="Permalink to this heading">#</a></h3>
 <p>Along a Ramsey plan, the state variable <span class="math notranslate nohighlight">\(x_t = x_t(s^t, b_0)\)</span>
 becomes a function of the history <span class="math notranslate nohighlight">\(s^t\)</span> and initial
 government debt <span class="math notranslate nohighlight">\(b_0\)</span>.</p>
@@ -976,9 +916,9 @@ means that there is no state-variable degeneracy in the AMSS model.</p>
 <p>In the AMSS model, both <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(s\)</span> are needed to describe the state.</p>
 <p>This property of the AMSS model  transmits a twisted martingale
 component to consumption, employment, and the tax rate.</p>
-</div>
-<div class="section" id="digression-on-non-negative-transfers">
-<h3><span class="section-number">43.3.6. </span>Digression on Non-negative Transfers<a class="headerlink" href="#digression-on-non-negative-transfers" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="digression-on-non-negative-transfers">
+<h3><span class="section-number">43.3.6. </span>Digression on Non-negative Transfers<a class="headerlink" href="#digression-on-non-negative-transfers" title="Permalink to this heading">#</a></h3>
 <p>Throughout this lecture, we have imposed that transfers <span class="math notranslate nohighlight">\(T_t = 0\)</span>.</p>
 <p>AMSS <span id="id9">[<a class="reference internal" href="zreferences.html#id130" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">AMSSeppala02</a>]</span> instead imposed a nonnegativity
 constraint <span class="math notranslate nohighlight">\(T_t\geq 0\)</span> on transfers.</p>
@@ -999,9 +939,9 @@ random, <span class="math notranslate nohighlight">\(V_x(x, s)\)</span> almost s
 <p>Thus, in the limit, if <span class="math notranslate nohighlight">\(g_t\)</span> is perpetually random,  the government
 accumulates sufficient assets to finance all expenditures from earnings on those
 assets, returning any excess revenues to the household as non-negative lump-sum transfers.</p>
-</div>
-<div class="section" id="code">
-<h3><span class="section-number">43.3.7. </span>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="code">
+<h3><span class="section-number">43.3.7. </span>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h3>
 <p>The recursive formulation is implemented as follows</p>
 <div class="cell tag_collapse-30 docutils container">
 <div class="cell_input docutils container">
@@ -1221,13 +1161,13 @@ assets, returning any excess revenues to the household as non-negative lump-sum 
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="examples">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">43.4. </span>Examples</a><a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="examples">
+<h2><a class="toc-backref" href="#id14"><span class="section-number">43.4. </span>Examples</a><a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
 <p>We now turn to some examples.</p>
-<div class="section" id="anticipated-one-period-war">
-<h3><span class="section-number">43.4.1. </span>Anticipated One-Period War<a class="headerlink" href="#anticipated-one-period-war" title="Permalink to this headline">¶</a></h3>
+<section id="anticipated-one-period-war">
+<h3><span class="section-number">43.4.1. </span>Anticipated One-Period War<a class="headerlink" href="#anticipated-one-period-war" title="Permalink to this heading">#</a></h3>
 <p>In our lecture on <a class="reference internal" href="opt_tax_recur.html"><span class="doc">optimal taxation with state-contingent debt</span></a>
 we studied how the government manages uncertainty in a simple setting.</p>
 <p>As in that lecture, we assume the one-period utility function</p>
@@ -1468,8 +1408,8 @@ Solve time 0 problem
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Succesfully solved the time 0 problem.
-CPU times: user 4min 57s, sys: 314 ms, total: 4min 57s
-Wall time: 3min 1s
+CPU times: user 5min 15s, sys: 123 ms, total: 5min 15s
+Wall time: 3min 3s
 </pre></div>
 </div>
 </div>
@@ -1512,11 +1452,11 @@ Wall time: 3min 1s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_16879/2711255625.py:130: DeprecationWarning: setting an array element with a sequence. This was supported in some cases where the elements are arrays with a single element. For example `np.array([1, np.array([2])], dtype=int)`. In the future this will raise the same ValueError as `np.array([1, [2]], dtype=int)`.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11049/2711255625.py:130: DeprecationWarning: setting an array element with a sequence. This was supported in some cases where the elements are arrays with a single element. For example `np.array([1, np.array([2])], dtype=int)`. In the future this will raise the same ValueError as `np.array([1, [2]], dtype=int)`.
   cn0_arr[:] = c0, n0
 </pre></div>
 </div>
-<img alt="_images/amss_15_1.png" src="_images/amss_15_1.png" />
+<img alt="_images/bd87798f2d61700131b146fe4fda9b287d0b0015f514700e9d1fd6512da38e95.png" src="_images/bd87798f2d61700131b146fe4fda9b287d0b0015f514700e9d1fd6512da38e95.png" />
 </div>
 </div>
 <p>How a Ramsey planner responds to  war depends on the structure of the asset market.</p>
@@ -1546,8 +1486,8 @@ given the Lagrange multiplier on the implementability constraint</p></li>
 <li><p>A war at time <span class="math notranslate nohighlight">\(t=3\)</span> causes a permanent <strong>increase</strong> in the tax rate.</p></li>
 <li><p>Peace at time <span class="math notranslate nohighlight">\(t=3\)</span> causes a permanent <strong>reduction</strong> in the tax rate.</p></li>
 </ul>
-<div class="section" id="perpetual-war-alert">
-<h4><span class="section-number">43.4.1.1. </span>Perpetual War Alert<a class="headerlink" href="#perpetual-war-alert" title="Permalink to this headline">¶</a></h4>
+<section id="perpetual-war-alert">
+<h4><span class="section-number">43.4.1.1. </span>Perpetual War Alert<a class="headerlink" href="#perpetual-war-alert" title="Permalink to this heading">#</a></h4>
 <p>History dependence occurs more dramatically in a case in which the government
 perpetually faces the prospect  of war.</p>
 <p>This case was studied in the final example of the lecture on
@@ -1714,8 +1654,8 @@ Solve time 0 problem
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Succesfully solved the time 0 problem.
-CPU times: user 8min 1s, sys: 848 ms, total: 8min 2s
-Wall time: 4min 30s
+CPU times: user 8min 30s, sys: 284 ms, total: 8min 31s
+Wall time: 4min 37s
 </pre></div>
 </div>
 </div>
@@ -1755,11 +1695,11 @@ Wall time: 4min 30s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_16879/2711255625.py:130: DeprecationWarning: setting an array element with a sequence. This was supported in some cases where the elements are arrays with a single element. For example `np.array([1, np.array([2])], dtype=int)`. In the future this will raise the same ValueError as `np.array([1, [2]], dtype=int)`.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11049/2711255625.py:130: DeprecationWarning: setting an array element with a sequence. This was supported in some cases where the elements are arrays with a single element. For example `np.array([1, np.array([2])], dtype=int)`. In the future this will raise the same ValueError as `np.array([1, [2]], dtype=int)`.
   cn0_arr[:] = c0, n0
 </pre></div>
 </div>
-<img alt="_images/amss_22_1.png" src="_images/amss_22_1.png" />
+<img alt="_images/88d4808e6246e6983499f453b7865b73efb07e8596b9038bcbb572e98cfa3f74.png" src="_images/88d4808e6246e6983499f453b7865b73efb07e8596b9038bcbb572e98cfa3f74.png" />
 </div>
 </div>
 <p>When the government experiences a prolonged period of peace, it is able to reduce
@@ -1806,11 +1746,11 @@ the two policies over 200 periods.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_16879/2711255625.py:130: DeprecationWarning: setting an array element with a sequence. This was supported in some cases where the elements are arrays with a single element. For example `np.array([1, np.array([2])], dtype=int)`. In the future this will raise the same ValueError as `np.array([1, [2]], dtype=int)`.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11049/2711255625.py:130: DeprecationWarning: setting an array element with a sequence. This was supported in some cases where the elements are arrays with a single element. For example `np.array([1, np.array([2])], dtype=int)`. In the future this will raise the same ValueError as `np.array([1, [2]], dtype=int)`.
   cn0_arr[:] = c0, n0
 </pre></div>
 </div>
-<img alt="_images/amss_25_1.png" src="_images/amss_25_1.png" />
+<img alt="_images/038be7c2bafd582cb52aedfe0eca61585913aa1586815a4ad1bb782780773785.png" src="_images/038be7c2bafd582cb52aedfe0eca61585913aa1586815a4ad1bb782780773785.png" />
 </div>
 </div>
 <hr class="footnotes docutils" />
@@ -1832,10 +1772,10 @@ s^{t-1}\)</span>, but where the multiplier on constraint <a class="reference int
 <span class="math notranslate nohighlight">\(\gamma_t(\tilde s^t)&gt;0\)</span>.</p>
 </dd>
 </dl>
-</div>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1849,7 +1789,7 @@ s^{t-1}\)</span>, but where the multiplier on constraint <a class="reference int
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -2220,7 +2160,7 @@ s^{t-1}\)</span>, but where the multiplier on constraint <a class="reference int
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
                     <!-- <li class="btn__search">
                         <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
                             <i data-feather="search"></i>
                         </form>
                     </li> -->
@@ -2362,16 +2302,5 @@ s^{t-1}\)</span>, but where the multiplier on constraint <a class="reference int
         </div>
 
     </div> <!-- .wrapper-->
-    
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
-<script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-54984338-11', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
-
   </body>
 </html>

@@ -1,10 +1,14 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>41. Ramsey Plans, Time Inconsistency, Sustainable Plans &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -47,47 +51,53 @@
         </script>
     
     
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -95,10 +105,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'calvo';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/calvo.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -152,159 +161,43 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   41.1. Overview
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-model">
-   41.2. The Model
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#structure">
-   41.3. Structure
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#intertemporal-influences">
-   41.4. Intertemporal Influences
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#four-models-of-government-policy">
-   41.5. Four Models of Government Policy
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-ramsey-planner">
-   41.6. A Ramsey Planner
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#subproblem-1">
-     41.6.1. Subproblem 1
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#subproblem-2">
-     41.6.2. Subproblem 2
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#representation-of-ramsey-plan">
-     41.6.3. Representation of Ramsey Plan
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#multiple-roles-of-theta-t">
-     41.6.4. Multiple roles of
-     <span class="math notranslate nohighlight">
-      \(\theta_t\)
-     </span>
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#time-inconsistency">
-     41.6.5. Time Inconsistency
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-constrained-to-a-constant-growth-rate-ramsey-government">
-   41.7. A Constrained-to-a-Constant-Growth-Rate Ramsey Government
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#markov-perfect-governments">
-   41.8. Markov Perfect Governments
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#equilibrium-outcomes-for-three-models-of-government-policy-making">
-   41.9. Equilibrium Outcomes for Three Models of Government Policy Making
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#time-inconsistency-of-ramsey-plan">
-     41.9.1. Time Inconsistency of Ramsey Plan
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#meaning-of-time-inconsistency">
-     41.9.2. Meaning of Time Inconsistency
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ramsey-plans-strike-back">
-     41.9.3. Ramsey Plans Strike Back
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-fourth-model-of-government-decision-making">
-   41.10. A Fourth Model of Government Decision Making
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#a-theory-of-government-decision-making">
-     41.10.1. A Theory of Government Decision Making
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#temptation-to-deviate-from-plan">
-     41.10.2. Temptation to Deviate from Plan
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#sustainable-or-credible-plan">
-   41.11. Sustainable or Credible Plan
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#abreus-self-enforcing-plan">
-     41.11.1. Abreu’s Self-Enforcing Plan
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#abreu-carrot-stick-plan">
-     41.11.2. Abreu Carrot-Stick Plan
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-of-self-enforcing-plan">
-     41.11.3. Example of Self-Enforcing Plan
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#recursive-representation-of-a-sustainable-plan">
-     41.11.4. Recursive Representation of a Sustainable Plan
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#whose-credible-plan-is-it">
-   41.12. Whose Credible Plan is it?
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#comparison-of-equilibrium-values">
-   41.13. Comparison of Equilibrium Values
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#note-on-dynamic-programming-squared">
-   41.14. Note on Dynamic Programming Squared
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">41.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model">41.2. The Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure">41.3. Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intertemporal-structure">41.4. Intertemporal Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#four-models-of-government-policy">41.5. Four Models of Government Policy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-ramsey-planner">41.6. A Ramsey Planner</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subproblem-1">41.6.1. Subproblem 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subproblem-2">41.6.2. Subproblem 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-of-ramsey-plan">41.6.3. Representation of Ramsey Plan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-roles-of-theta-t">41.6.4. Multiple roles of <span class="math notranslate nohighlight">\(\theta_t\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-inconsistency">41.6.5. Time Inconsistency</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-constrained-to-a-constant-growth-rate-ramsey-government">41.7. A Constrained-to-a-Constant-Growth-Rate Ramsey Government</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-perfect-governments">41.8. Markov Perfect Governments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outcomes-under-three-timing-protocols">41.9. Outcomes under Three Timing Protocols</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-inconsistency-of-ramsey-plan">41.9.1. Time Inconsistency of Ramsey Plan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#meaning-of-time-inconsistency">41.9.2. Meaning of Time Inconsistency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ramsey-plans-strike-back">41.9.3. Ramsey Plans Strike Back</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-fourth-model-of-government-decision-making">41.10. A Fourth Model of Government Decision Making</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-theory-of-government-decision-making">41.10.1. A Theory of Government Decision Making</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temptation-to-deviate-from-plan">41.10.2. Temptation to Deviate from Plan</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sustainable-or-credible-plan">41.11. Sustainable or Credible Plan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abreus-self-enforcing-plan">41.11.1. Abreu’s Self-Enforcing Plan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#abreu-carrot-stick-plan">41.11.2. Abreu Carrot-Stick Plan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-of-self-enforcing-plan">41.11.3. Example of Self-Enforcing Plan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-representation-of-a-sustainable-plan">41.11.4. Recursive Representation of a Sustainable Plan</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#whose-credible-plan-is-it">41.12. Whose Credible Plan is it?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-of-equilibrium-values">41.13. Comparison of Equilibrium Values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#note-on-dynamic-programming-squared">41.14. Note on Dynamic Programming Squared</a></li>
+</ul>
                             <p class="logo">
                                 
                                     
@@ -352,66 +245,72 @@ const thebe_selector_output = ".output, .cell_output"
         <a href="https://quantecon.org/" title="quantecon.org">
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
-</div><div class="tex2jax_ignore mathjax_ignore section" id="ramsey-plans-time-inconsistency-sustainable-plans">
-<h1><a class="toc-backref" href="#id22"><span class="section-number">41. </span>Ramsey Plans, Time Inconsistency, Sustainable Plans</a><a class="headerlink" href="#ramsey-plans-time-inconsistency-sustainable-plans" title="Permalink to this headline">¶</a></h1>
+</div><section class="tex2jax_ignore mathjax_ignore" id="ramsey-plans-time-inconsistency-sustainable-plans">
+<h1><a class="toc-backref" href="#id25"><span class="section-number">41. </span>Ramsey Plans, Time Inconsistency, Sustainable Plans</a><a class="headerlink" href="#ramsey-plans-time-inconsistency-sustainable-plans" title="Permalink to this heading">#</a></h1>
 <div class="contents topic" id="contents">
 <span id="index-0"></span><p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#ramsey-plans-time-inconsistency-sustainable-plans" id="id22">Ramsey Plans, Time Inconsistency, Sustainable Plans</a></p>
+<li><p><a class="reference internal" href="#ramsey-plans-time-inconsistency-sustainable-plans" id="id25">Ramsey Plans, Time Inconsistency, Sustainable Plans</a></p>
 <ul>
-<li><p><a class="reference internal" href="#overview" id="id23">Overview</a></p></li>
-<li><p><a class="reference internal" href="#the-model" id="id24">The Model</a></p></li>
-<li><p><a class="reference internal" href="#structure" id="id25">Structure</a></p></li>
-<li><p><a class="reference internal" href="#intertemporal-influences" id="id26">Intertemporal Influences</a></p></li>
-<li><p><a class="reference internal" href="#four-models-of-government-policy" id="id27">Four Models of Government Policy</a></p></li>
-<li><p><a class="reference internal" href="#a-ramsey-planner" id="id28">A Ramsey Planner</a></p></li>
-<li><p><a class="reference internal" href="#a-constrained-to-a-constant-growth-rate-ramsey-government" id="id29">A Constrained-to-a-Constant-Growth-Rate Ramsey Government</a></p></li>
-<li><p><a class="reference internal" href="#markov-perfect-governments" id="id30">Markov Perfect Governments</a></p></li>
-<li><p><a class="reference internal" href="#equilibrium-outcomes-for-three-models-of-government-policy-making" id="id31">Equilibrium Outcomes for Three Models of Government Policy Making</a></p></li>
-<li><p><a class="reference internal" href="#a-fourth-model-of-government-decision-making" id="id32">A Fourth Model of Government Decision Making</a></p></li>
-<li><p><a class="reference internal" href="#sustainable-or-credible-plan" id="id33">Sustainable or Credible Plan</a></p></li>
-<li><p><a class="reference internal" href="#whose-credible-plan-is-it" id="id34">Whose Credible Plan is it?</a></p></li>
-<li><p><a class="reference internal" href="#comparison-of-equilibrium-values" id="id35">Comparison of Equilibrium Values</a></p></li>
-<li><p><a class="reference internal" href="#note-on-dynamic-programming-squared" id="id36">Note on Dynamic Programming Squared</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id26">Overview</a></p></li>
+<li><p><a class="reference internal" href="#the-model" id="id27">The Model</a></p></li>
+<li><p><a class="reference internal" href="#structure" id="id28">Structure</a></p></li>
+<li><p><a class="reference internal" href="#intertemporal-structure" id="id29">Intertemporal Structure</a></p></li>
+<li><p><a class="reference internal" href="#four-models-of-government-policy" id="id30">Four Models of Government Policy</a></p></li>
+<li><p><a class="reference internal" href="#a-ramsey-planner" id="id31">A Ramsey Planner</a></p></li>
+<li><p><a class="reference internal" href="#a-constrained-to-a-constant-growth-rate-ramsey-government" id="id32">A Constrained-to-a-Constant-Growth-Rate Ramsey Government</a></p></li>
+<li><p><a class="reference internal" href="#markov-perfect-governments" id="id33">Markov Perfect Governments</a></p></li>
+<li><p><a class="reference internal" href="#outcomes-under-three-timing-protocols" id="id34">Outcomes under Three Timing Protocols</a></p></li>
+<li><p><a class="reference internal" href="#a-fourth-model-of-government-decision-making" id="id35">A Fourth Model of Government Decision Making</a></p></li>
+<li><p><a class="reference internal" href="#sustainable-or-credible-plan" id="id36">Sustainable or Credible Plan</a></p></li>
+<li><p><a class="reference internal" href="#whose-credible-plan-is-it" id="id37">Whose Credible Plan is it?</a></p></li>
+<li><p><a class="reference internal" href="#comparison-of-equilibrium-values" id="id38">Comparison of Equilibrium Values</a></p></li>
+<li><p><a class="reference internal" href="#note-on-dynamic-programming-squared" id="id39">Note on Dynamic Programming Squared</a></p></li>
 </ul>
 </li>
 </ul>
 </div>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.6.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
-Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.21.5)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
+Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
 Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
-Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.55.1)
-Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
+Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.22.4)
+Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
 Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
-Requirement already satisfied: llvmlite&lt;0.39,&gt;=0.38.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.38.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
 Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="section" id="overview">
-<h2><a class="toc-backref" href="#id23"><span class="section-number">41.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<section id="overview">
+<h2><a class="toc-backref" href="#id26"><span class="section-number">41.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This lecture describes a linear-quadratic version of a model that Guillermo Calvo <span id="id1">[<a class="reference internal" href="zreferences.html#id139" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Cal78</a>]</span>
 used to illustrate the <strong>time inconsistency</strong> of optimal government
 plans.</p>
-<p>Like Chang <span id="id2">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Cha98</a>]</span>, we use the model as a laboratory in which to explore consequences of
+<p>Like Chang <span id="id2">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Cha98</a>]</span>, we use the model as a laboratory in which to explore the consequences of
 different timing protocols for government decision making.</p>
 <p>The model focuses attention on intertemporal tradeoffs between</p>
 <ul class="simple">
@@ -421,9 +320,9 @@ different timing protocols for government decision making.</p>
 <p>The model features</p>
 <ul class="simple">
 <li><p>rational expectations</p></li>
-<li><p>costly government actions at  dates <span class="math notranslate nohighlight">\(t \geq 1\)</span> that increase household
-utilities at all dates before <span class="math notranslate nohighlight">\(t\)</span></p></li>
-<li><p>two Bellman equations, one that expresses the private sector’s  forecast of future inflation
+<li><p>costly government actions at all dates <span class="math notranslate nohighlight">\(t \geq 1\)</span> that increase household
+utilities at dates before <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p>two Bellman equations, one that expresses the private sector’s  expectation of future inflation
 as a function of current and future government actions, another that
 describes  the value function of a  Ramsey planner</p></li>
 </ul>
@@ -434,7 +333,7 @@ well as from chapter 19 of <span id="id10">[<a class="reference internal" href="
 <p>In addition, we’ll use ideas from linear-quadratic dynamic programming
 described in  <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Control</a> as applied to Ramsey problems
 in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a>.</p>
-<p>In particular, we have specified the model in a way that allows us to use
+<p>We  specify the model in a way that allows us to use
 linear-quadratic dynamic programming to compute an optimal government
 plan under a timing protocol in which a government chooses an infinite
 sequence of money supply growth rates once and for all at time
@@ -450,9 +349,9 @@ sequence of money supply growth rates once and for all at time
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="the-model">
-<h2><a class="toc-backref" href="#id24"><span class="section-number">41.2. </span>The Model</a><a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="the-model">
+<h2><a class="toc-backref" href="#id27"><span class="section-number">41.2. </span>The Model</a><a class="headerlink" href="#the-model" title="Permalink to this heading">#</a></h2>
 <p>There is no uncertainty.</p>
 <p>Let:</p>
 <ul class="simple">
@@ -464,13 +363,13 @@ sequence of money supply growth rates once and for all at time
 <p>The demand for real balances is governed by a perfect foresight
 version of the Cagan <span id="id11">[<a class="reference internal" href="zreferences.html#id78" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cag56</a>]</span> demand function:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old1">
-<span class="eqno">(41.1)<a class="headerlink" href="#equation-eq-old1" title="Permalink to this equation">¶</a></span>\[m_t - p_t = -\alpha(p_{t+1} - p_t) \: , \: \alpha &gt; 0\]</div>
+<span class="eqno">(41.1)<a class="headerlink" href="#equation-eq-old1" title="Permalink to this equation">#</a></span>\[m_t - p_t = -\alpha(p_{t+1} - p_t) \: , \: \alpha &gt; 0\]</div>
 <p>for <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
 <p>Equation <a class="reference internal" href="#equation-eq-old1">(41.1)</a> asserts that the demand for real balances is inversely
 related to the public’s expected rate of inflation, which here equals
 the actual rate of inflation.</p>
-<p>(When there is no uncertainty, an assumption of <strong>rational expectations</strong> simplifies to <strong>perfect foresight</strong>).</p>
-<p>(See <span id="id12">[<a class="reference internal" href="zreferences.html#id79" title="Thomas J Sargent. The Demand for Money During Hyperinflations under Rational Expectations: I. International Economic Review, 18(1):59-82, February 1977.">Sar77</a>]</span> for a rational expectations version of the model in which there is uncertainty)</p>
+<p>(When there is no uncertainty, an assumption of <strong>rational expectations</strong> implies <strong>perfect foresight</strong>).</p>
+<p>(See <span id="id12">[<a class="reference internal" href="zreferences.html#id79" title="Thomas J Sargent. The Demand for Money During Hyperinflations under Rational Expectations: I. International Economic Review, 18(1):59-82, February 1977.">Sar77</a>]</span> for a rational expectations version of the model when there is uncertainty.)</p>
 <p>Subtracting the demand function at time <span class="math notranslate nohighlight">\(t\)</span> from the demand
 function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
 <div class="math notranslate nohighlight">
@@ -479,7 +378,7 @@ function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-eq-old2">
-<span class="eqno">(41.2)<a class="headerlink" href="#equation-eq-old2" title="Permalink to this equation">¶</a></span>\[\theta_t = \frac{\alpha}{1+\alpha} \theta_{t+1} + \frac{1}{1+\alpha} \mu_t\]</div>
+<span class="eqno">(41.2)<a class="headerlink" href="#equation-eq-old2" title="Permalink to this equation">#</a></span>\[\theta_t = \frac{\alpha}{1+\alpha} \theta_{t+1} + \frac{1}{1+\alpha} \mu_t\]</div>
 <p>Because <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>,  <span class="math notranslate nohighlight">\(0 &lt; \frac{\alpha}{1+\alpha} &lt; 1\)</span>.</p>
 <p><strong>Definition:</strong> For a scalar <span class="math notranslate nohighlight">\(x_t\)</span>, let <span class="math notranslate nohighlight">\(L^2\)</span> be the space of sequences
 <span class="math notranslate nohighlight">\(\{x_t\}_{t=0}^\infty\)</span> satisfying</p>
@@ -492,7 +391,7 @@ function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
 <span class="math notranslate nohighlight">\(\vec \theta = \{\theta_t\}_{t=0}^\infty\)</span> is square summable,
 the linear difference equation <a class="reference internal" href="#equation-eq-old2">(41.2)</a> can be solved forward to get:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old3">
-<span class="eqno">(41.3)<a class="headerlink" href="#equation-eq-old3" title="Permalink to this equation">¶</a></span>\[\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}\]</div>
+<span class="eqno">(41.3)<a class="headerlink" href="#equation-eq-old3" title="Permalink to this equation">#</a></span>\[\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}\]</div>
 <p><strong>Insight:</strong> In the spirit of Chang <span id="id13">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Cha98</a>]</span>, note that equations <a class="reference internal" href="#equation-eq-old1">(41.1)</a> and <a class="reference internal" href="#equation-eq-old3">(41.3)</a> show that <span class="math notranslate nohighlight">\(\theta_t\)</span> intermediates
 how choices of <span class="math notranslate nohighlight">\(\mu_{t+j}, \ j=0, 1, \ldots\)</span> impinge on time <span class="math notranslate nohighlight">\(t\)</span>
 real balances <span class="math notranslate nohighlight">\(m_t - p_t = -\alpha \theta_t\)</span>.</p>
@@ -523,14 +422,13 @@ matter.</p>
 \end{split}\]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-eq-old4">
-<span class="eqno">(41.4)<a class="headerlink" href="#equation-eq-old4" title="Permalink to this equation">¶</a></span>\[x_{t+1} = A x_t + B \mu_t\]</div>
-<p>We write the model in the state-space form <a class="reference internal" href="#equation-eq-old4">(41.4)</a> even though <span class="math notranslate nohighlight">\(\theta_0\)</span> is to be determined and so is not an initial condition
-as it ordinarily would be in the state-space model described in <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Control</a>.</p>
-<p>We write the model in the form <a class="reference internal" href="#equation-eq-old4">(41.4)</a> because we want to apply an approach described in  <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a>.</p>
-<p>Assume that a representative household’s utility of real balances at
-time <span class="math notranslate nohighlight">\(t\)</span> is:</p>
+<span class="eqno">(41.4)<a class="headerlink" href="#equation-eq-old4" title="Permalink to this equation">#</a></span>\[x_{t+1} = A x_t + B \mu_t\]</div>
+<p>We write the model in the state-space form <a class="reference internal" href="#equation-eq-old4">(41.4)</a> even though <span class="math notranslate nohighlight">\(\theta_0\)</span> is to be determined by our  model and so is not an initial condition,
+as it ordinarily would be in the state-space model described in our lecture on  <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Control</a>.</p>
+<p>We write the model in the form <a class="reference internal" href="#equation-eq-old4">(41.4)</a> because we want to apply an approach described in  our lecture on <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a>.</p>
+<p>We assume that a government  believes that a representative household’s utility of real balances at time <span class="math notranslate nohighlight">\(t\)</span> is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old5">
-<span class="eqno">(41.5)<a class="headerlink" href="#equation-eq-old5" title="Permalink to this equation">¶</a></span>\[U(m_t - p_t) = a_0 + a_1 (m_t - p_t) - \frac{a_2}{2} (m_t - p_t)^2, \quad a_0 &gt; 0, a_1 &gt; 0, a_2 &gt; 0\]</div>
+<span class="eqno">(41.5)<a class="headerlink" href="#equation-eq-old5" title="Permalink to this equation">#</a></span>\[U(m_t - p_t) = a_0 + a_1 (m_t - p_t) - \frac{a_2}{2} (m_t - p_t)^2, \quad a_0 &gt; 0, a_1 &gt; 0, a_2 &gt; 0\]</div>
 <p>The “bliss level” of real balances is then <span class="math notranslate nohighlight">\(\frac{a_1}{a_2}\)</span>.</p>
 <p>The money demand function <a class="reference internal" href="#equation-eq-old1">(41.1)</a> and the utility function <a class="reference internal" href="#equation-eq-old5">(41.5)</a>
 imply that utility maximizing or  bliss level of real balances is attained when:</p>
@@ -538,13 +436,13 @@ imply that utility maximizing or  bliss level of real balances is attained when:
 \[
 \theta_t = \theta^* = -\frac{a_1}{a_2 \alpha}
 \]</div>
-<p>Below, we introduce the discount factor <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span> that a representative household and a benevolent government
-both use to discount future utilities.</p>
+<p>Below, we introduce the discount factor <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span> that a government
+uses  to discount its  future utilities.</p>
 <p>(If we set parameters so that <span class="math notranslate nohighlight">\(\theta^* = \log(\beta)\)</span>, then we can
 regard a recommendation to set <span class="math notranslate nohighlight">\(\theta_t = \theta^*\)</span> as a “poor
-man’s Friedman rule” that attains Milton Friedman’s <strong>optimal quantity of money</strong>)</p>
+man’s Friedman rule” that attains Milton Friedman’s <strong>optimal quantity of money</strong>.)</p>
 <p>Via equation <a class="reference internal" href="#equation-eq-old3">(41.3)</a>, a government plan
-<span class="math notranslate nohighlight">\(\vec \mu = \{\mu_t \}_{t=0}^\infty\)</span> leads to an equilibrium
+<span class="math notranslate nohighlight">\(\vec \mu = \{\mu_t \}_{t=0}^\infty\)</span> leads to a
 sequence of inflation outcomes
 <span class="math notranslate nohighlight">\(\vec \theta = \{ \theta_t \}_{t=0}^\infty\)</span>.</p>
 <p>We assume that social costs <span class="math notranslate nohighlight">\(\frac{c}{2} \mu_t^2\)</span> are incurred at
@@ -553,19 +451,23 @@ balances at rate <span class="math notranslate nohighlight">\(\mu_t\)</span>.</p
 <p>Therefore, the one-period welfare function of a benevolent government
 is:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old6">
-<span class="eqno">(41.6)<a class="headerlink" href="#equation-eq-old6" title="Permalink to this equation">¶</a></span>\[\begin{split}-s(\theta_t, \mu_t) \equiv - r(x_t,\mu_t) = \begin{bmatrix} 1 \\ \theta_t \end{bmatrix}' \begin{bmatrix} a_0 &amp; -\frac{a_1 \alpha}{2} \\ -\frac{a_1 \alpha}{2} &amp; -\frac{a_2 \alpha^2}{2} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_t \end{bmatrix} - \frac{c}{2} \mu_t^2 =  - x_t'Rx_t - Q \mu_t^2\end{split}\]</div>
-<p>Household welfare is summarized by:</p>
+<span class="eqno">(41.6)<a class="headerlink" href="#equation-eq-old6" title="Permalink to this equation">#</a></span>\[\begin{split}-s(\theta_t, \mu_t) \equiv - r(x_t,\mu_t) = \begin{bmatrix} 1 \\ \theta_t \end{bmatrix}' \begin{bmatrix} a_0 &amp; -\frac{a_1 \alpha}{2} \\ -\frac{a_1 \alpha}{2} &amp; -\frac{a_2 \alpha^2}{2} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_t \end{bmatrix} - \frac{c}{2} \mu_t^2 =  - x_t'Rx_t - Q \mu_t^2\end{split}\]</div>
+<p>A benevolent government’s time <span class="math notranslate nohighlight">\(0\)</span> value is</p>
 <div class="math notranslate nohighlight" id="equation-eq-old7">
-<span class="eqno">(41.7)<a class="headerlink" href="#equation-eq-old7" title="Permalink to this equation">¶</a></span>\[v_0 = - \sum_{t=0}^\infty \beta^t r(x_t,\mu_t) = - \sum_{t=0}^\infty \beta^t s(\theta_t,\mu_t)\]</div>
-<p>We can represent the dependence of  <span class="math notranslate nohighlight">\(v_0\)</span> on <span class="math notranslate nohighlight">\((\vec \theta, \vec \mu)\)</span> recursively via the linear difference equation</p>
+<span class="eqno">(41.7)<a class="headerlink" href="#equation-eq-old7" title="Permalink to this equation">#</a></span>\[v_0 = - \sum_{t=0}^\infty \beta^t r(x_t,\mu_t) = - \sum_{t=0}^\infty \beta^t s(\theta_t,\mu_t)\]</div>
+<p>We can represent the dependence of  <span class="math notranslate nohighlight">\(v_0\)</span> on <span class="math notranslate nohighlight">\((\vec \theta, \vec \mu)\)</span> recursively via the  difference equation</p>
 <div class="math notranslate nohighlight" id="equation-eq-old8">
-<span class="eqno">(41.8)<a class="headerlink" href="#equation-eq-old8" title="Permalink to this equation">¶</a></span>\[v_t = - s(\theta_t, \mu_t) + \beta v_{t+1}\]</div>
-</div>
-<div class="section" id="structure">
-<h2><a class="toc-backref" href="#id25"><span class="section-number">41.3. </span>Structure</a><a class="headerlink" href="#structure" title="Permalink to this headline">¶</a></h2>
+<span class="eqno">(41.8)<a class="headerlink" href="#equation-eq-old8" title="Permalink to this equation">#</a></span>\[v_t = - s(\theta_t, \mu_t) + \beta v_{t+1}\]</div>
+<p>where the government’s time <span class="math notranslate nohighlight">\(t\)</span> continuation value <span class="math notranslate nohighlight">\(v_t\)</span> satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+v_t = - \sum_{j=0}^\infty \beta^j s(\theta_{t+j}, \mu_{t+j}) .
+\]</div>
+</section>
+<section id="structure">
+<h2><a class="toc-backref" href="#id28"><span class="section-number">41.3. </span>Structure</a><a class="headerlink" href="#structure" title="Permalink to this heading">#</a></h2>
 <p>The following structure is induced by private agents’
-behavior as summarized by the demand function for money <a class="reference internal" href="#equation-eq-old1">(41.1)</a> that leads to equation <a class="reference internal" href="#equation-eq-old3">(41.3)</a> that tells how future
-settings of <span class="math notranslate nohighlight">\(\mu\)</span> affect the current value of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+behavior as summarized by the demand function for money <a class="reference internal" href="#equation-eq-old1">(41.1)</a> that leads to equation <a class="reference internal" href="#equation-eq-old3">(41.3)</a>, which  tells how future settings of <span class="math notranslate nohighlight">\(\mu\)</span> affect the current value of <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
 <p>Equation <a class="reference internal" href="#equation-eq-old3">(41.3)</a> maps a <strong>policy</strong> sequence of money growth rates
 <span class="math notranslate nohighlight">\(\vec \mu =\{\mu_t\}_{t=0}^\infty \in L^2\)</span>  into an inflation sequence
 <span class="math notranslate nohighlight">\(\vec \theta = \{\theta_t\}_{t=0}^\infty \in L^2\)</span>.</p>
@@ -576,41 +478,38 @@ recursion</p>
 \[
 v_t = - s(\theta_t,\mu_t) + \beta v_{t+1}
 \]</div>
-<p>where we have called <span class="math notranslate nohighlight">\(s(\theta_t, \mu_t) = r(x_t, \mu_t)\)</span> as
+<p>where we have called <span class="math notranslate nohighlight">\(s(\theta_t, \mu_t) = r(x_t, \mu_t)\)</span>, as
 above.</p>
-<p>Thus, we have a triple of sequences
-<span class="math notranslate nohighlight">\(\vec \mu, \vec \theta, \vec v\)</span> associated with a
-<span class="math notranslate nohighlight">\(\vec \mu \in L^2\)</span>.</p>
+<p>Thus,  a triple of sequences
+<span class="math notranslate nohighlight">\((\vec \mu, \vec \theta, \vec v)\)</span> depends on  a
+sequence <span class="math notranslate nohighlight">\(\vec \mu \in L^2\)</span>.</p>
 <p>At this point <span class="math notranslate nohighlight">\(\vec \mu \in L^2\)</span> is an arbitrary exogenous policy.</p>
-<p>To make <span class="math notranslate nohighlight">\(\vec \mu\)</span> endogenous, we require a theory of government
-decisions.</p>
-</div>
-<div class="section" id="intertemporal-influences">
-<h2><a class="toc-backref" href="#id26"><span class="section-number">41.4. </span>Intertemporal Influences</a><a class="headerlink" href="#intertemporal-influences" title="Permalink to this headline">¶</a></h2>
+<p>A theory of government
+decisions will  make <span class="math notranslate nohighlight">\(\vec \mu\)</span> endogenous, i.e., a theoretical <strong>output</strong> instead of an <strong>input</strong>.</p>
+</section>
+<section id="intertemporal-structure">
+<h2><a class="toc-backref" href="#id29"><span class="section-number">41.4. </span>Intertemporal Structure</a><a class="headerlink" href="#intertemporal-structure" title="Permalink to this heading">#</a></h2>
 <p>Criterion function <a class="reference internal" href="#equation-eq-old7">(41.7)</a> and the constraint system <a class="reference internal" href="#equation-eq-old4">(41.4)</a> exhibit the following
 structure:</p>
 <ul class="simple">
 <li><p>Setting <span class="math notranslate nohighlight">\(\mu_t \neq 0\)</span> imposes costs
 <span class="math notranslate nohighlight">\(\frac{c}{2} \mu_t^2\)</span> at time <span class="math notranslate nohighlight">\(t\)</span> and at no other times;
 but</p></li>
-<li><p>The money growth rate <span class="math notranslate nohighlight">\(\mu_t\)</span> affects the representative
-household’s one-period utilities at all dates
+<li><p>The money growth rate <span class="math notranslate nohighlight">\(\mu_t\)</span> affects the government’s  one-period utilities at all dates
 <span class="math notranslate nohighlight">\(s = 0, 1, \ldots, t\)</span>.</p></li>
 </ul>
-<p>That settings of <span class="math notranslate nohighlight">\(\mu\)</span> at one date affect household utilities at
-earlier dates sets the stage for the emergence of a time-inconsistent
-optimal government plan  under a Ramsey (also called a Stackelberg)  timing protocol.</p>
-<p>We’ll study outcomes under a Ramsey timing protocol below.</p>
+<p>This structure  sets the stage for the emergence of a time-inconsistent
+optimal government plan  under a Ramsey   timing protocol, also called a Stackelberg timing protocol.</p>
+<p>We’ll eventually study outcomes under a Ramsey timing protocol.</p>
 <p>But we’ll also study the consequences of other timing protocols.</p>
-</div>
-<div class="section" id="four-models-of-government-policy">
-<h2><a class="toc-backref" href="#id27"><span class="section-number">41.5. </span>Four Models of Government Policy</a><a class="headerlink" href="#four-models-of-government-policy" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="four-models-of-government-policy">
+<h2><a class="toc-backref" href="#id30"><span class="section-number">41.5. </span>Four Models of Government Policy</a><a class="headerlink" href="#four-models-of-government-policy" title="Permalink to this heading">#</a></h2>
 <p>We consider four models of policymakers that  differ in</p>
 <ul class="simple">
-<li><p>what a policymaker is allowed to choose, either a sequence
-<span class="math notranslate nohighlight">\(\vec \mu\)</span> or just a single period  <span class="math notranslate nohighlight">\(\mu_t\)</span>.</p></li>
-<li><p>when a policymaker chooses, either at time <span class="math notranslate nohighlight">\(0\)</span> or at times
-<span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p></li>
+<li><p>what a  policymaker is allowed to choose, either a sequence
+<span class="math notranslate nohighlight">\(\vec \mu\)</span> or just   <span class="math notranslate nohighlight">\(\mu_t\)</span> in a single period <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>when a  policymaker chooses, either once and for all at time <span class="math notranslate nohighlight">\(0\)</span>, or at some time or times  <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p></li>
 <li><p>what a policymaker assumes about how its choice of <span class="math notranslate nohighlight">\(\mu_t\)</span>
 affects private agents’ expectations about earlier and later
 inflation rates.</p></li>
@@ -622,7 +521,7 @@ inflation rates.</p></li>
 <li><p>these two models  thus employ a  <strong>Ramsey</strong> or <strong>Stackelberg</strong> timing protocol.</p></li>
 </ul>
 <p>In two other models, there is a sequence of policymakers, each of whom
-sets <span class="math notranslate nohighlight">\(\mu_t\)</span> at one <span class="math notranslate nohighlight">\(t\)</span> only</p>
+sets <span class="math notranslate nohighlight">\(\mu_t\)</span> at one <span class="math notranslate nohighlight">\(t\)</span> only.</p>
 <ul class="simple">
 <li><p>Each such policymaker ignores  effects that its choice of <span class="math notranslate nohighlight">\(\mu_t\)</span> has on household one-period utilities at dates <span class="math notranslate nohighlight">\(s = 0, 1, \ldots, t-1\)</span>.</p></li>
 </ul>
@@ -630,17 +529,17 @@ sets <span class="math notranslate nohighlight">\(\mu_t\)</span> at one <span cl
 government choices, and government policymakers’ beliefs about how their
 decisions affect private agents’ beliefs about future government
 decisions.</p>
-<p>The models are</p>
+<p>The models are distinguished by having either</p>
 <ul class="simple">
 <li><p>A single Ramsey planner chooses a sequence
-<span class="math notranslate nohighlight">\(\{\mu_t\}_{t=0}^\infty\)</span> once and for all at time <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+<span class="math notranslate nohighlight">\(\{\mu_t\}_{t=0}^\infty\)</span> once and for all at time <span class="math notranslate nohighlight">\(0\)</span>; or</p></li>
 <li><p>A single Ramsey planner chooses a sequence
 <span class="math notranslate nohighlight">\(\{\mu_t\}_{t=0}^\infty\)</span> once and for all at time <span class="math notranslate nohighlight">\(0\)</span>
 subject to the constraint that <span class="math notranslate nohighlight">\(\mu_t = \mu\)</span> for all
-<span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p></li>
+<span class="math notranslate nohighlight">\(t \geq 0\)</span>; or</p></li>
 <li><p>A sequence of separate policymakers chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> for <span class="math notranslate nohighlight">\(t =0, 1, 2, \ldots\)</span></p>
 <ul>
-<li><p>a time <span class="math notranslate nohighlight">\(t\)</span> policymaker chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> only and forecasts that future government decisions are unaffected by its choice.</p></li>
+<li><p>a time <span class="math notranslate nohighlight">\(t\)</span> policymaker chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> only and forecasts that future government decisions are unaffected by its choice; or</p></li>
 </ul>
 </li>
 <li><p>A sequence of separate policymakers chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> for <span class="math notranslate nohighlight">\(t =0, 1, 2, \ldots\)</span></p>
@@ -649,25 +548,28 @@ subject to the constraint that <span class="math notranslate nohighlight">\(\mu_
 </ul>
 </li>
 </ul>
-</div>
-<div class="section" id="a-ramsey-planner">
-<h2><a class="toc-backref" href="#id28"><span class="section-number">41.6. </span>A Ramsey Planner</a><a class="headerlink" href="#a-ramsey-planner" title="Permalink to this headline">¶</a></h2>
+<p>The relationship between  outcomes in  the first (Ramsey) timing protocol and the fourth timing protocol and belief structure is the subject of a literature on <strong>sustainable</strong> or <strong>credible</strong> public policies (Chari and Kehoe <span id="id14">[<a class="reference internal" href="zreferences.html#id216" title="Varadarajan V Chari and Patrick J Kehoe. Sustainable plans. Journal of Political Economy, pages 783–802, 1990.">CK90</a>]</span>
+<span id="id15">[<a class="reference internal" href="zreferences.html#id223" title="Nancy L Stokey. Reputation and time consistency. The American Economic Review, pages 134–139, 1989.">Sto89</a>]</span>, and Stokey <span id="id16">[<a class="reference internal" href="zreferences.html#id75" title="Nancy L. Stokey. Credible public policy. Journal of Economic Dynamics and Control, 15(4):627-656, October 1991.">Sto91</a>]</span>).</p>
+<p>We’ll discuss that topic later in this lecture.</p>
+</section>
+<section id="a-ramsey-planner">
+<h2><a class="toc-backref" href="#id31"><span class="section-number">41.6. </span>A Ramsey Planner</a><a class="headerlink" href="#a-ramsey-planner" title="Permalink to this heading">#</a></h2>
 <p>First, we consider a Ramsey planner that  chooses
 <span class="math notranslate nohighlight">\(\{\mu_t, \theta_t\}_{t=0}^\infty\)</span> to maximize <a class="reference internal" href="#equation-eq-old7">(41.7)</a>
 subject to the law of motion <a class="reference internal" href="#equation-eq-old4">(41.4)</a>.</p>
-<p>We can split this problem into two stages, as in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a> and  <span id="id14">[<a class="reference internal" href="zreferences.html#id173" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">LS18</a>]</span> Chapter 19.</p>
+<p>We can split this problem into two stages, as in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a> and  <span id="id17">[<a class="reference internal" href="zreferences.html#id173" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">LS18</a>]</span> Chapter 19.</p>
 <p>In the first stage, we take the initial inflation rate <span class="math notranslate nohighlight">\(\theta_0\)</span> as given,
 and then solve the resulting LQ dynamic programming problem.</p>
 <p>In the second stage, we maximize over the initial inflation rate <span class="math notranslate nohighlight">\(\theta_0\)</span>.</p>
 <p>Define a feasible set of
-<span class="math notranslate nohighlight">\((\overrightarrow x_1, \overrightarrow \mu_0)\)</span> sequences:</p>
+<span class="math notranslate nohighlight">\((\overrightarrow x_1, \overrightarrow \mu_0)\)</span> sequences, both of which must belong to <span class="math notranslate nohighlight">\(L^2\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
 \Omega(x_0) = \left \lbrace ( \overrightarrow x_1, \overrightarrow \mu_0) : x_{t+1}
 = A x_t + B \mu_t \: , \: \forall t \geq 0 \right \rbrace
 \]</div>
-<div class="section" id="subproblem-1">
-<h3><span class="section-number">41.6.1. </span>Subproblem 1<a class="headerlink" href="#subproblem-1" title="Permalink to this headline">¶</a></h3>
+<section id="subproblem-1">
+<h3><span class="section-number">41.6.1. </span>Subproblem 1<a class="headerlink" href="#subproblem-1" title="Permalink to this heading">#</a></h3>
 <p>The value function</p>
 <div class="math notranslate nohighlight">
 \[
@@ -684,15 +586,14 @@ J(x) = \max_{\mu,x'}\{-r(x,\mu) + \beta J(x')\}
 \[
 x' = Ax + B\mu
 \]</div>
-<p>As in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a>, we map this problem into a linear-quadratic control problem and then carefully use the
-optimal value function associated with it.</p>
+<p>As in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a>, we map this problem into a linear-quadratic control problem and deduce an optimal value function <span class="math notranslate nohighlight">\(J(x)\)</span>.</p>
 <p>Guessing that <span class="math notranslate nohighlight">\(J(x) = - x'Px\)</span> and substituting into the Bellman
 equation gives rise to the algebraic matrix Riccati equation:</p>
 <div class="math notranslate nohighlight">
 \[
 P = R + \beta A'PA - \beta^2 A'PB(Q + \beta B'PB)^{-1} B'PA
 \]</div>
-<p>and the optimal decision rule</p>
+<p>and an optimal decision rule</p>
 <div class="math notranslate nohighlight">
 \[
 \mu_t = - F x_t
@@ -704,14 +605,15 @@ F = \beta (Q + \beta B'PB)^{-1} B'PA
 \]</div>
 <p>The QuantEcon <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqcontrol.py">LQ</a> class solves for <span class="math notranslate nohighlight">\(F\)</span> and <span class="math notranslate nohighlight">\(P\)</span> given inputs
 <span class="math notranslate nohighlight">\(Q, R, A, B\)</span>, and <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
-</div>
-<div class="section" id="subproblem-2">
-<h3><span class="section-number">41.6.2. </span>Subproblem 2<a class="headerlink" href="#subproblem-2" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="subproblem-2">
+<h3><span class="section-number">41.6.2. </span>Subproblem 2<a class="headerlink" href="#subproblem-2" title="Permalink to this heading">#</a></h3>
 <p>The value of the Ramsey problem is</p>
 <div class="math notranslate nohighlight">
 \[
 V = \max_{x_0} J(x_0)
 \]</div>
+<p>where <span class="math notranslate nohighlight">\(V\)</span> is the maximum value of <span class="math notranslate nohighlight">\(v_0\)</span> defined in equation <a class="reference internal" href="#equation-eq-old7">(41.7)</a>.</p>
 <p>The value function</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -727,34 +629,34 @@ J(x_0) = -\begin{bmatrix} 1 &amp; \theta_0 \end{bmatrix} \begin{bmatrix} P_{11} 
 \[
 \theta_0^* = - \frac{P_{21}}{P_{22}}
 \]</div>
-</div>
-<div class="section" id="representation-of-ramsey-plan">
-<h3><span class="section-number">41.6.3. </span>Representation of Ramsey Plan<a class="headerlink" href="#representation-of-ramsey-plan" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="representation-of-ramsey-plan">
+<h3><span class="section-number">41.6.3. </span>Representation of Ramsey Plan<a class="headerlink" href="#representation-of-ramsey-plan" title="Permalink to this heading">#</a></h3>
 <p>The preceding calculations indicate that we can represent a Ramsey plan
-<span class="math notranslate nohighlight">\(\vec \mu\)</span> recursively with the following system created in the spirit of Chang <span id="id15">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Cha98</a>]</span>:</p>
+<span class="math notranslate nohighlight">\(\vec \mu\)</span> recursively with the following system created in the spirit of Chang <span id="id18">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Cha98</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old9">
-<span class="eqno">(41.9)<a class="headerlink" href="#equation-eq-old9" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(41.9)<a class="headerlink" href="#equation-eq-old9" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
 \theta_0 &amp; = \theta_0^* \\
 \mu_t &amp;  = b_0 + b_1 \theta_t \\
 \theta_{t+1} &amp; = d_0 + d_1 \theta_t
 \end{aligned}\end{split}\]</div>
 <p>To interpret this system, think of the  sequence
 <span class="math notranslate nohighlight">\(\{\theta_t\}_{t=0}^\infty\)</span> as a sequence of
-synthetic <strong>promised inflation rates</strong> that are just computational devices for
+synthetic <strong>promised inflation rates</strong>.</p>
+<p>At this point, we can think of these promised inflation rates  just as computational devices for
 generating a sequence <span class="math notranslate nohighlight">\(\vec\mu\)</span> of money growth rates that are to
-be substituted into equation <a class="reference internal" href="#equation-eq-old3">(41.3)</a> to form actual rates of inflation.</p>
-<p>It can be verified that if we substitute a plan
+be substituted into equation <a class="reference internal" href="#equation-eq-old3">(41.3)</a> to form <strong>actual</strong> rates of inflation.</p>
+<p>But it can be verified that if we substitute a plan
 <span class="math notranslate nohighlight">\(\vec \mu = \{\mu_t\}_{t=0}^\infty\)</span> that satisfies these equations
 into equation <a class="reference internal" href="#equation-eq-old3">(41.3)</a>, we obtain the same sequence <span class="math notranslate nohighlight">\(\vec \theta\)</span>
 generated by the system <a class="reference internal" href="#equation-eq-old9">(41.9)</a>.</p>
-<p>(Here an application of the Big <span class="math notranslate nohighlight">\(K\)</span>, little <span class="math notranslate nohighlight">\(k\)</span> trick could once again be enlightening)</p>
+<p>(Here an application of the Big <span class="math notranslate nohighlight">\(K\)</span>, little <span class="math notranslate nohighlight">\(k\)</span> trick could once again be enlightening.)</p>
 <p>Thus, our construction of a Ramsey plan guarantees that <strong>promised
 inflation</strong> equals <strong>actual inflation</strong>.</p>
-</div>
-<div class="section" id="multiple-roles-of-theta-t">
-<h3><span class="section-number">41.6.4. </span>Multiple roles of <span class="math notranslate nohighlight">\(\theta_t\)</span><a class="headerlink" href="#multiple-roles-of-theta-t" title="Permalink to this headline">¶</a></h3>
-<p>The inflation rate <span class="math notranslate nohighlight">\(\theta_t\)</span> that appears in the system <a class="reference internal" href="#equation-eq-old9">(41.9)</a> and
-equation <a class="reference internal" href="#equation-eq-old3">(41.3)</a> plays three roles simultaneously:</p>
+</section>
+<section id="multiple-roles-of-theta-t">
+<h3><span class="section-number">41.6.4. </span>Multiple roles of <span class="math notranslate nohighlight">\(\theta_t\)</span><a class="headerlink" href="#multiple-roles-of-theta-t" title="Permalink to this heading">#</a></h3>
+<p>The inflation rate <span class="math notranslate nohighlight">\(\theta_t\)</span> plays three roles simultaneously:</p>
 <ul class="simple">
 <li><p>In equation <a class="reference internal" href="#equation-eq-old3">(41.3)</a>, <span class="math notranslate nohighlight">\(\theta_t\)</span> is the actual rate of inflation
 between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span>.</p></li>
@@ -763,9 +665,12 @@ expected rate of inflation between <span class="math notranslate nohighlight">\(
 <li><p>In system <a class="reference internal" href="#equation-eq-old9">(41.9)</a>, <span class="math notranslate nohighlight">\(\theta_t\)</span> is a promised rate of inflation
 chosen by the Ramsey planner at time <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
 </ul>
-</div>
-<div class="section" id="time-inconsistency">
-<h3><span class="section-number">41.6.5. </span>Time Inconsistency<a class="headerlink" href="#time-inconsistency" title="Permalink to this headline">¶</a></h3>
+<p>That the same variable <span class="math notranslate nohighlight">\(\theta_t\)</span> takes on these multiple roles brings insights about
+commitment and forward guidance, following versus leading the market, and
+dynamic or time inconsistency.</p>
+</section>
+<section id="time-inconsistency">
+<h3><span class="section-number">41.6.5. </span>Time Inconsistency<a class="headerlink" href="#time-inconsistency" title="Permalink to this heading">#</a></h3>
 <p>As discussed in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a> and <a class="reference internal" href="opt_tax_recur.html"><span class="doc">Optimal taxation with state-contingent debt</span></a>, a continuation Ramsey plan is not a Ramsey plan.</p>
 <p>This is a concise way of characterizing the time inconsistency of a Ramsey plan.</p>
 <p>The time inconsistency of a Ramsey plan has motivated other models of government decision making
@@ -774,12 +679,12 @@ that alter either</p>
 <li><p>the timing protocol and/or</p></li>
 <li><p>assumptions about how government decision makers think their decisions affect private agents’ beliefs about future government decisions</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="a-constrained-to-a-constant-growth-rate-ramsey-government">
-<h2><a class="toc-backref" href="#id29"><span class="section-number">41.7. </span>A Constrained-to-a-Constant-Growth-Rate Ramsey Government</a><a class="headerlink" href="#a-constrained-to-a-constant-growth-rate-ramsey-government" title="Permalink to this headline">¶</a></h2>
-<p>We now consider the following peculiar model of optimal government behavior.</p>
-<p>We have created this model in order to highlight an aspect of an optimal government policy associated with its time inconsistency,
+</section>
+</section>
+<section id="a-constrained-to-a-constant-growth-rate-ramsey-government">
+<h2><a class="toc-backref" href="#id32"><span class="section-number">41.7. </span>A Constrained-to-a-Constant-Growth-Rate Ramsey Government</a><a class="headerlink" href="#a-constrained-to-a-constant-growth-rate-ramsey-government" title="Permalink to this heading">#</a></h2>
+<p>We now consider a peculiar model of optimal government behavior.</p>
+<p>We created this model in order to highlight an aspect of an optimal government policy associated with its time inconsistency,
 namely, the feature that optimal settings of the  policy instrument vary over time.</p>
 <p>Instead of allowing the Ramsey government to choose different settings of its instrument at different moments, we now assume that
 at time <span class="math notranslate nohighlight">\(0\)</span>, a Ramsey  government at time <span class="math notranslate nohighlight">\(0\)</span> once and for all  chooses a <strong>constant</strong> sequence
@@ -800,15 +705,15 @@ maximizing <span class="math notranslate nohighlight">\(\bar \mu\)</span> is</p>
 <p><strong>Summary:</strong> We have  introduced the constrained-to-a-constant <span class="math notranslate nohighlight">\(\mu\)</span>
 government in order to highlight  time-variation of
 <span class="math notranslate nohighlight">\(\mu_t\)</span> as a telltale sign of  time inconsistency of a Ramsey plan.</p>
-</div>
-<div class="section" id="markov-perfect-governments">
-<h2><a class="toc-backref" href="#id30"><span class="section-number">41.8. </span>Markov Perfect Governments</a><a class="headerlink" href="#markov-perfect-governments" title="Permalink to this headline">¶</a></h2>
-<p>We now  change the timing protocol by considering a sequence of
+</section>
+<section id="markov-perfect-governments">
+<h2><a class="toc-backref" href="#id33"><span class="section-number">41.8. </span>Markov Perfect Governments</a><a class="headerlink" href="#markov-perfect-governments" title="Permalink to this heading">#</a></h2>
+<p>We now  alter the timing protocol by considering a sequence of
 government policymakers, the time <span class="math notranslate nohighlight">\(t\)</span> representative of which
 chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> and expects all future governments to set
 <span class="math notranslate nohighlight">\(\mu_{t+j} = \bar \mu\)</span>.</p>
 <p>This assumption mirrors an assumption made in a different setting <a class="reference external" href="https://python-intro.quantecon.org/markov_perf.html">Markov Perfect Equilibrium</a>.</p>
-<p>Further, a government  policymaker at <span class="math notranslate nohighlight">\(t\)</span> believes that <span class="math notranslate nohighlight">\(\bar \mu\)</span> is
+<p>A government  policymaker at <span class="math notranslate nohighlight">\(t\)</span> believes that <span class="math notranslate nohighlight">\(\bar \mu\)</span> is
 unaffected by its choice of <span class="math notranslate nohighlight">\(\mu_t\)</span>.</p>
 <p>The time <span class="math notranslate nohighlight">\(t\)</span> rate of inflation is then:</p>
 <div class="math notranslate nohighlight">
@@ -851,9 +756,9 @@ simplified to:</p>
 \[
 \bar \mu = - \frac{\alpha a_1}{\alpha^2 a_2 + (1+\alpha)c}
 \]</div>
-</div>
-<div class="section" id="equilibrium-outcomes-for-three-models-of-government-policy-making">
-<h2><a class="toc-backref" href="#id31"><span class="section-number">41.9. </span>Equilibrium Outcomes for Three Models of Government Policy Making</a><a class="headerlink" href="#equilibrium-outcomes-for-three-models-of-government-policy-making" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="outcomes-under-three-timing-protocols">
+<h2><a class="toc-backref" href="#id34"><span class="section-number">41.9. </span>Outcomes under Three Timing Protocols</a><a class="headerlink" href="#outcomes-under-three-timing-protocols" title="Permalink to this heading">#</a></h2>
 <p>Below we compute sequences <span class="math notranslate nohighlight">\(\{ \theta_t,\mu_t \}\)</span> under a Ramsey
 plan and compare these with the constant levels of <span class="math notranslate nohighlight">\(\theta\)</span> and
 <span class="math notranslate nohighlight">\(\mu\)</span> in a) a Markov Perfect Equilibrium, and b) a Ramsey plan
@@ -866,7 +771,7 @@ values as <span class="math notranslate nohighlight">\(\theta^{MPE}, \mu^{MPE}\)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ChangLQ</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to solve LQ Chang model</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">α0</span><span class="p">,</span> <span class="n">α1</span><span class="p">,</span> <span class="n">α2</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">θ_n</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
@@ -986,7 +891,7 @@ problem, which is maximized at <span class="math notranslate nohighlight">\(\the
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_value_function</span><span class="p">(</span><span class="n">clq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to plot the value function over the relevant range of θ</span>
 
 <span class="sd">    Here clq is an instance of ChangLQ</span>
@@ -1024,7 +929,7 @@ problem, which is maximized at <span class="math notranslate nohighlight">\(\the
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/calvo_9_0.png" src="_images/calvo_9_0.png" />
+<img alt="_images/7baa38886c15b8842753469ff95f2c6c62c6a6028d6a16597e370c0a24f5ce5f.png" src="_images/7baa38886c15b8842753469ff95f2c6c62c6a6028d6a16597e370c0a24f5ce5f.png" />
 </div>
 </div>
 <p>The next code generates a figure that plots the value function from the Ramsey Planner’s
@@ -1033,7 +938,7 @@ problem as well as that for a Ramsey planner that  must choose a constant
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compare_ramsey_check</span><span class="p">(</span><span class="n">clq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to compare values of Ramsey and Check</span>
 
 <span class="sd">    Here clq is an instance of ChangLQ</span>
@@ -1072,7 +977,7 @@ problem as well as that for a Ramsey planner that  must choose a constant
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/calvo_11_0.png" src="_images/calvo_11_0.png" />
+<img alt="_images/8cfbe4bba8abd6ecad3cd88f4f6cb3356e05cb9f2c1b2c64ac97eac3e282e7a6.png" src="_images/8cfbe4bba8abd6ecad3cd88f4f6cb3356e05cb9f2c1b2c64ac97eac3e282e7a6.png" />
 </div>
 </div>
 <p>The next code generates  figures that plot the policy functions for a continuation Ramsey
@@ -1084,7 +989,7 @@ continuation Ramsey planner who inherits <span class="math notranslate nohighlig
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_policy_functions</span><span class="p">(</span><span class="n">clq</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to plot the policy functions over the relevant range of θ</span>
 
 <span class="sd">    Here clq is an instance of ChangLQ</span>
@@ -1138,7 +1043,7 @@ continuation Ramsey planner who inherits <span class="math notranslate nohighlig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/calvo_13_0.png" src="_images/calvo_13_0.png" />
+<img alt="_images/fb8de66b4620da749089e1bc37f39f228af5651392c5481daa23de440b4afa51.png" src="_images/fb8de66b4620da749089e1bc37f39f228af5651392c5481daa23de440b4afa51.png" />
 </div>
 </div>
 <p>The following code generates a figure that plots sequences of <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\theta\)</span>
@@ -1148,7 +1053,7 @@ to a constant for all <span class="math notranslate nohighlight">\(t\)</span>.</
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_ramsey_MPE</span><span class="p">(</span><span class="n">clq</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">15</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Method to plot Ramsey plan against Markov Perfect Equilibrium</span>
 
 <span class="sd">    Here clq is an instance of ChangLQ</span>
@@ -1177,11 +1082,11 @@ to a constant for all <span class="math notranslate nohighlight">\(t\)</span>.</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/calvo_15_0.png" src="_images/calvo_15_0.png" />
+<img alt="_images/ea58115c7d3f32a98890d8b8e0b85e7e0c0ca7e206626fbacd636a4ae82ceb4a.png" src="_images/ea58115c7d3f32a98890d8b8e0b85e7e0c0ca7e206626fbacd636a4ae82ceb4a.png" />
 </div>
 </div>
-<div class="section" id="time-inconsistency-of-ramsey-plan">
-<h3><span class="section-number">41.9.1. </span>Time Inconsistency of Ramsey Plan<a class="headerlink" href="#time-inconsistency-of-ramsey-plan" title="Permalink to this headline">¶</a></h3>
+<section id="time-inconsistency-of-ramsey-plan">
+<h3><span class="section-number">41.9.1. </span>Time Inconsistency of Ramsey Plan<a class="headerlink" href="#time-inconsistency-of-ramsey-plan" title="Permalink to this heading">#</a></h3>
 <p>The variation over time in <span class="math notranslate nohighlight">\(\vec \mu\)</span> chosen by the Ramsey planner
 is a symptom of time inconsistency.</p>
 <ul class="simple">
@@ -1194,18 +1099,15 @@ equation <a class="reference internal" href="#equation-eq-old3">(41.3)</a>.</p><
 past utilities and to reoptimize at date <span class="math notranslate nohighlight">\(t \geq 1\)</span> would, if allowed, want
 to deviate from a Ramsey plan.</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>A modified Ramsey plan constructed under the restriction that
+<p><strong>Note:</strong> A modified Ramsey plan constructed under the restriction that
 <span class="math notranslate nohighlight">\(\mu_t\)</span> must be constant over time is time consistent (see
 <span class="math notranslate nohighlight">\(\check \mu\)</span> and <span class="math notranslate nohighlight">\(\check \theta\)</span> in the above graphs).</p>
-</div>
-</div>
-<div class="section" id="meaning-of-time-inconsistency">
-<h3><span class="section-number">41.9.2. </span>Meaning of Time Inconsistency<a class="headerlink" href="#meaning-of-time-inconsistency" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="meaning-of-time-inconsistency">
+<h3><span class="section-number">41.9.2. </span>Meaning of Time Inconsistency<a class="headerlink" href="#meaning-of-time-inconsistency" title="Permalink to this heading">#</a></h3>
 <p>In settings in which governments actually choose sequentially, many economists
-regard a time inconsistent plan implausible because of the incentives to
-deviate that occur along the plan.</p>
+regard a time inconsistent plan as implausible because of the incentives to
+deviate that are presented  along the plan.</p>
 <p>A way to summarize this <em>defect</em> in a Ramsey plan is to say that it
 is not credible because there  endure incentives for policymakers
 to deviate from it.</p>
@@ -1215,22 +1117,22 @@ economists.</p>
 <li><p>A Markov perfect equilibrium plan is constructed to insure that government policymakers who choose sequentially do not want to deviate from it.</p></li>
 </ul>
 <p>The <em>no incentive to deviate from the plan</em> property is what makes the Markov perfect equilibrium concept attractive.</p>
-</div>
-<div class="section" id="ramsey-plans-strike-back">
-<h3><span class="section-number">41.9.3. </span>Ramsey Plans Strike Back<a class="headerlink" href="#ramsey-plans-strike-back" title="Permalink to this headline">¶</a></h3>
-<p>Research by Abreu <span id="id16">[<a class="reference internal" href="zreferences.html#id74" title="Dilip Abreu. On the theory of infinitely repeated games with discounting. Econometrica, 56:383–396, 1988.">Abr88</a>]</span>,  Chari and Kehoe <span id="id17">[<a class="reference internal" href="zreferences.html#id216" title="Varadarajan V Chari and Patrick J Kehoe. Sustainable plans. Journal of Political Economy, pages 783–802, 1990.">CK90</a>]</span>
-<span id="id18">[<a class="reference internal" href="zreferences.html#id223" title="Nancy L Stokey. Reputation and time consistency. The American Economic Review, pages 134–139, 1989.">Sto89</a>]</span>, and Stokey <span id="id19">[<a class="reference internal" href="zreferences.html#id75" title="Nancy L. Stokey. Credible public policy. Journal of Economic Dynamics and Control, 15(4):627-656, October 1991.">Sto91</a>]</span> discovered conditions under which a Ramsey plan can be rescued from the complaint that it is not credible.</p>
+</section>
+<section id="ramsey-plans-strike-back">
+<h3><span class="section-number">41.9.3. </span>Ramsey Plans Strike Back<a class="headerlink" href="#ramsey-plans-strike-back" title="Permalink to this heading">#</a></h3>
+<p>Research by Abreu <span id="id19">[<a class="reference internal" href="zreferences.html#id74" title="Dilip Abreu. On the theory of infinitely repeated games with discounting. Econometrica, 56:383–396, 1988.">Abr88</a>]</span>,  Chari and Kehoe <span id="id20">[<a class="reference internal" href="zreferences.html#id216" title="Varadarajan V Chari and Patrick J Kehoe. Sustainable plans. Journal of Political Economy, pages 783–802, 1990.">CK90</a>]</span>
+<span id="id21">[<a class="reference internal" href="zreferences.html#id223" title="Nancy L Stokey. Reputation and time consistency. The American Economic Review, pages 134–139, 1989.">Sto89</a>]</span>, and Stokey <span id="id22">[<a class="reference internal" href="zreferences.html#id75" title="Nancy L. Stokey. Credible public policy. Journal of Economic Dynamics and Control, 15(4):627-656, October 1991.">Sto91</a>]</span> discovered conditions under which a Ramsey plan can be rescued from the complaint that it is not credible.</p>
 <p>They  accomplished this by expanding the
 description of a plan to include expectations about <strong>adverse consequences</strong> of deviating from
 it that can serve to deter deviations.</p>
 <p>We turn to such theories of <strong>sustainable plans</strong> next.</p>
-</div>
-</div>
-<div class="section" id="a-fourth-model-of-government-decision-making">
-<h2><a class="toc-backref" href="#id32"><span class="section-number">41.10. </span>A Fourth Model of Government Decision Making</a><a class="headerlink" href="#a-fourth-model-of-government-decision-making" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="a-fourth-model-of-government-decision-making">
+<h2><a class="toc-backref" href="#id35"><span class="section-number">41.10. </span>A Fourth Model of Government Decision Making</a><a class="headerlink" href="#a-fourth-model-of-government-decision-making" title="Permalink to this heading">#</a></h2>
 <p>This is a model in which</p>
 <ul class="simple">
-<li><p>The government chooses <span class="math notranslate nohighlight">\(\{\mu_t\}_{t=0}^\infty\)</span> not once and
+<li><p>the government chooses <span class="math notranslate nohighlight">\(\{\mu_t\}_{t=0}^\infty\)</span> not once and
 for all at <span class="math notranslate nohighlight">\(t=0\)</span> but chooses to set <span class="math notranslate nohighlight">\(\mu_t\)</span> at time <span class="math notranslate nohighlight">\(t\)</span>, not before.</p></li>
 <li><p>private agents’ forecasts of
 <span class="math notranslate nohighlight">\(\{\mu_{t+j+1}, \theta_{t+j+1}\}_{j=0}^\infty\)</span> respond to
@@ -1240,10 +1142,10 @@ period <span class="math notranslate nohighlight">\(t-1\)</span>.</p></li>
 <li><p>the government at each time <span class="math notranslate nohighlight">\(t\)</span> understands how private agents’
 forecasts will respond to its choice of <span class="math notranslate nohighlight">\(\mu_t\)</span>.</p></li>
 <li><p>at each <span class="math notranslate nohighlight">\(t\)</span>, the government chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> to maximize
-a continuation discounted utility of a representative household.</p></li>
+a continuation discounted utility.</p></li>
 </ul>
-<div class="section" id="a-theory-of-government-decision-making">
-<h3><span class="section-number">41.10.1. </span>A Theory of Government Decision Making<a class="headerlink" href="#a-theory-of-government-decision-making" title="Permalink to this headline">¶</a></h3>
+<section id="a-theory-of-government-decision-making">
+<h3><span class="section-number">41.10.1. </span>A Theory of Government Decision Making<a class="headerlink" href="#a-theory-of-government-decision-making" title="Permalink to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\vec \mu\)</span> is chosen by a sequence of government
 decision makers, one for each <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
 <p>We assume the following within-period and between-period timing protocol
@@ -1271,9 +1173,9 @@ continuation policy for <span class="math notranslate nohighlight">\(t+1\)</span
 expect an associated <span class="math notranslate nohighlight">\(\theta_0^A\)</span> for <span class="math notranslate nohighlight">\(t+1\)</span>. Here <span class="math notranslate nohighlight">\(\vec \mu^A = \{\mu_j^A \}_{j=0}^\infty\)</span> is
 an alternative government plan to be described below.</p></li>
 </ul>
-</div>
-<div class="section" id="temptation-to-deviate-from-plan">
-<h3><span class="section-number">41.10.2. </span>Temptation to Deviate from Plan<a class="headerlink" href="#temptation-to-deviate-from-plan" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="temptation-to-deviate-from-plan">
+<h3><span class="section-number">41.10.2. </span>Temptation to Deviate from Plan<a class="headerlink" href="#temptation-to-deviate-from-plan" title="Permalink to this heading">#</a></h3>
 <p>The government’s one-period return function <span class="math notranslate nohighlight">\(s(\theta,\mu)\)</span>
 described in equation <a class="reference internal" href="#equation-eq-old6">(41.6)</a> above has the property that for all
 <span class="math notranslate nohighlight">\(\theta\)</span></p>
@@ -1293,10 +1195,10 @@ deviate from a plan.</p>
 <p>If the government at <span class="math notranslate nohighlight">\(t\)</span> is to resist the temptation to raise its
 current payoff, it is only because it forecasts adverse  consequences that
 its setting of <span class="math notranslate nohighlight">\(\mu_t\)</span> would bring for continuation  government payoffs via  alterations  in the private sector’s expectations.</p>
-</div>
-</div>
-<div class="section" id="sustainable-or-credible-plan">
-<h2><a class="toc-backref" href="#id33"><span class="section-number">41.11. </span>Sustainable or Credible Plan</a><a class="headerlink" href="#sustainable-or-credible-plan" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="sustainable-or-credible-plan">
+<h2><a class="toc-backref" href="#id36"><span class="section-number">41.11. </span>Sustainable or Credible Plan</a><a class="headerlink" href="#sustainable-or-credible-plan" title="Permalink to this heading">#</a></h2>
 <p>We call a plan <span class="math notranslate nohighlight">\(\vec \mu\)</span> <strong>sustainable</strong> or <strong>credible</strong> if at
 each <span class="math notranslate nohighlight">\(t \geq 0\)</span> the government chooses to confirm private
 agents’ prior expectation of its setting for <span class="math notranslate nohighlight">\(\mu_t\)</span>.</p>
@@ -1325,8 +1227,8 @@ governments’ purposes.</p>
 </ul>
 <p>But Dilip Abreu showed how to render manageable the number of plans that must be kept track of.</p>
 <p>The key is an  object called a <strong>self-enforcing</strong> plan.</p>
-<div class="section" id="abreus-self-enforcing-plan">
-<h3><span class="section-number">41.11.1. </span>Abreu’s Self-Enforcing Plan<a class="headerlink" href="#abreus-self-enforcing-plan" title="Permalink to this headline">¶</a></h3>
+<section id="abreus-self-enforcing-plan">
+<h3><span class="section-number">41.11.1. </span>Abreu’s Self-Enforcing Plan<a class="headerlink" href="#abreus-self-enforcing-plan" title="Permalink to this heading">#</a></h3>
 <p>A plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> (here the superscipt <span class="math notranslate nohighlight">\(A\)</span> is for Abreu) is said to be <strong>self-enforcing</strong> if</p>
 <ul class="simple">
 <li><p>the consequence of disappointing private agents’ expectations at time
@@ -1337,7 +1239,7 @@ deviations from the plan</p></li>
 <p>More precisely, a government plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> with equilibrium inflation sequence <span class="math notranslate nohighlight">\(\vec \theta^A\)</span> is
 <strong>self-enforcing</strong> if</p>
 <div class="math notranslate nohighlight" id="equation-eq-old10">
-<span class="eqno">(41.10)<a class="headerlink" href="#equation-eq-old10" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(41.10)<a class="headerlink" href="#equation-eq-old10" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
 v_j^A &amp; = - s(\theta^A_j, \mu^A_j) + \beta v_{j+1}^A \\
 &amp; \geq - s(\theta^A_j, 0 ) + \beta v_0^A \equiv v_j^{A,D}, \quad j \geq 0
 \end{aligned}\end{split}\]</div>
@@ -1351,7 +1253,7 @@ credible.</p>
 <p>Thus, where <span class="math notranslate nohighlight">\(\vec v^A\)</span> is the value associated with a self-enforcing plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span>,
 a sufficient condition for another plan <span class="math notranslate nohighlight">\(\vec \mu\)</span> associated with inflation <span class="math notranslate nohighlight">\(\vec \theta\)</span> and value <span class="math notranslate nohighlight">\(\vec v\)</span>  to be <strong>credible</strong> is that</p>
 <div class="math notranslate nohighlight" id="equation-eq-old100a">
-<span class="eqno">(41.11)<a class="headerlink" href="#equation-eq-old100a" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(41.11)<a class="headerlink" href="#equation-eq-old100a" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
 v_j &amp; = - s( \theta_j, \mu_j) + \beta  v_{j+1} \\
 &amp; \geq  -s( \theta_j, 0) + \beta v_0^A \quad \forall j \geq 0
 \end{aligned}\end{split}\]</div>
@@ -1368,12 +1270,12 @@ self-enforcing plan that has a low time <span class="math notranslate nohighligh
 <p>The idea is to use the self-enforcing plan as a continuation plan whenever
 the government’s choice at time <span class="math notranslate nohighlight">\(t\)</span> fails to confirm private
 agents’ expectation.</p>
-<p>We shall use a construction featured in Abreu (<span id="id20">[<a class="reference internal" href="zreferences.html#id74" title="Dilip Abreu. On the theory of infinitely repeated games with discounting. Econometrica, 56:383–396, 1988.">Abr88</a>]</span>) to construct a
+<p>We shall use a construction featured in Abreu (<span id="id23">[<a class="reference internal" href="zreferences.html#id74" title="Dilip Abreu. On the theory of infinitely repeated games with discounting. Econometrica, 56:383–396, 1988.">Abr88</a>]</span>) to construct a
 self-enforcing plan with low time <span class="math notranslate nohighlight">\(0\)</span> value.</p>
-</div>
-<div class="section" id="abreu-carrot-stick-plan">
-<h3><span class="section-number">41.11.2. </span>Abreu Carrot-Stick Plan<a class="headerlink" href="#abreu-carrot-stick-plan" title="Permalink to this headline">¶</a></h3>
-<p>Abreu (<span id="id21">[<a class="reference internal" href="zreferences.html#id74" title="Dilip Abreu. On the theory of infinitely repeated games with discounting. Econometrica, 56:383–396, 1988.">Abr88</a>]</span>) invented a way to create a self-enforcing plan with a low
+</section>
+<section id="abreu-carrot-stick-plan">
+<h3><span class="section-number">41.11.2. </span>Abreu Carrot-Stick Plan<a class="headerlink" href="#abreu-carrot-stick-plan" title="Permalink to this heading">#</a></h3>
+<p>Abreu (<span id="id24">[<a class="reference internal" href="zreferences.html#id74" title="Dilip Abreu. On the theory of infinitely repeated games with discounting. Econometrica, 56:383–396, 1988.">Abr88</a>]</span>) invented a way to create a self-enforcing plan with a low
 initial value.</p>
 <p>Imitating his idea, we can construct a self-enforcing plan
 <span class="math notranslate nohighlight">\(\vec \mu\)</span> with a low time <span class="math notranslate nohighlight">\(0\)</span> value to the government by
@@ -1400,9 +1302,9 @@ number) for <span class="math notranslate nohighlight">\(T_A\)</span> periods, a
 v^A_0 =  - \sum_{t=0}^{T_A-1} \beta^t s(\theta_t^A,\mu_t^A) +\beta^{T_A} J(\theta^R_0)
 \]</div>
 <p>For an appropriate <span class="math notranslate nohighlight">\(T_A\)</span>, this plan can be verified to be self-enforcing and therefore credible.</p>
-</div>
-<div class="section" id="example-of-self-enforcing-plan">
-<h3><span class="section-number">41.11.3. </span>Example of Self-Enforcing Plan<a class="headerlink" href="#example-of-self-enforcing-plan" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-of-self-enforcing-plan">
+<h3><span class="section-number">41.11.3. </span>Example of Self-Enforcing Plan<a class="headerlink" href="#example-of-self-enforcing-plan" title="Permalink to this heading">#</a></h3>
 <p>The following example implements an Abreu stick-and-carrot plan.</p>
 <p>The government sets <span class="math notranslate nohighlight">\(\mu_t^A = 0.1\)</span> for <span class="math notranslate nohighlight">\(t=0, 1, \ldots, 9\)</span>
 and then starts the <strong>Ramsey plan</strong>.</p>
@@ -1469,7 +1371,7 @@ beginning, i.e., <span class="math notranslate nohighlight">\(\theta^A_{t+10} =\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/calvo_17_0.png" src="_images/calvo_17_0.png" />
+<img alt="_images/f1d18ad6d40212c91f317b3c9fc9222e68730e3471f61bbd4eb756d5bfba2f36.png" src="_images/f1d18ad6d40212c91f317b3c9fc9222e68730e3471f61bbd4eb756d5bfba2f36.png" />
 </div>
 </div>
 <p>To confirm that the plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> is <strong>self-enforcing</strong>,  we
@@ -1524,14 +1426,14 @@ v^R_t \geq - s(\theta^R_t,0) + \beta v^A_0 , \quad \forall t \geq 0
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="recursive-representation-of-a-sustainable-plan">
-<h3><span class="section-number">41.11.4. </span>Recursive Representation of a Sustainable Plan<a class="headerlink" href="#recursive-representation-of-a-sustainable-plan" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="recursive-representation-of-a-sustainable-plan">
+<h3><span class="section-number">41.11.4. </span>Recursive Representation of a Sustainable Plan<a class="headerlink" href="#recursive-representation-of-a-sustainable-plan" title="Permalink to this heading">#</a></h3>
 <p>We can represent a sustainable plan recursively by taking the
 continuation value <span class="math notranslate nohighlight">\(v_t\)</span> as a state variable.</p>
 <p>We form the following 3-tuple of functions:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old11">
-<span class="eqno">(41.12)<a class="headerlink" href="#equation-eq-old11" title="Permalink to this equation">¶</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(41.12)<a class="headerlink" href="#equation-eq-old11" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
 \hat \mu_t &amp; = \nu_\mu(v_t) \\
 \theta_t &amp; = \nu_\theta(v_t) \\
 v_{t+1} &amp; = \nu_v(v_t, \mu_t )
@@ -1546,10 +1448,10 @@ characterize a sustainable plan.</p>
 depends on whether the government at <span class="math notranslate nohighlight">\(t\)</span> confirms private agents’
 expectations by setting <span class="math notranslate nohighlight">\(\mu_t\)</span> equal to the recommended value
 <span class="math notranslate nohighlight">\(\hat \mu_t\)</span>, or whether it disappoints those expectations.</p>
-</div>
-</div>
-<div class="section" id="whose-credible-plan-is-it">
-<h2><a class="toc-backref" href="#id34"><span class="section-number">41.12. </span>Whose Credible Plan is it?</a><a class="headerlink" href="#whose-credible-plan-is-it" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="whose-credible-plan-is-it">
+<h2><a class="toc-backref" href="#id37"><span class="section-number">41.12. </span>Whose Credible Plan is it?</a><a class="headerlink" href="#whose-credible-plan-is-it" title="Permalink to this heading">#</a></h2>
 <p>A credible government plan <span class="math notranslate nohighlight">\(\vec \mu\)</span> plays multiple roles.</p>
 <ul class="simple">
 <li><p>It is a sequence of actions chosen by the government.</p></li>
@@ -1560,9 +1462,9 @@ expectations by setting <span class="math notranslate nohighlight">\(\mu_t\)</sp
 <p>An argument in favor of the <em>government chooses</em> interpretation comes from noting that the theory of credible plans builds in a theory that the government each period chooses
 the action that it wants.</p>
 <p>An argument in favor of the <em>simply confirm</em> interpretation is gathered from staring at the key inequality <a class="reference internal" href="#equation-eq-old100a">(41.11)</a> that defines a credible policy.</p>
-</div>
-<div class="section" id="comparison-of-equilibrium-values">
-<h2><a class="toc-backref" href="#id35"><span class="section-number">41.13. </span>Comparison of Equilibrium Values</a><a class="headerlink" href="#comparison-of-equilibrium-values" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="comparison-of-equilibrium-values">
+<h2><a class="toc-backref" href="#id38"><span class="section-number">41.13. </span>Comparison of Equilibrium Values</a><a class="headerlink" href="#comparison-of-equilibrium-values" title="Permalink to this heading">#</a></h2>
 <p>We have computed plans for</p>
 <ul class="simple">
 <li><p>an ordinary (unrestricted) Ramsey planner who chooses a sequence
@@ -1620,11 +1522,11 @@ of governments that choose sequentially.</p>
 <li><p>a better plan – possibly one that attains values associated with
 Ramsey plan – that is not self-enforcing.</p></li>
 </ul>
-</div>
-<div class="section" id="note-on-dynamic-programming-squared">
-<h2><a class="toc-backref" href="#id36"><span class="section-number">41.14. </span>Note on Dynamic Programming Squared</a><a class="headerlink" href="#note-on-dynamic-programming-squared" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="note-on-dynamic-programming-squared">
+<h2><a class="toc-backref" href="#id39"><span class="section-number">41.14. </span>Note on Dynamic Programming Squared</a><a class="headerlink" href="#note-on-dynamic-programming-squared" title="Permalink to this heading">#</a></h2>
 <p>The theory deployed  in this lecture is an application of what we  nickname <strong>dynamic programming squared</strong>.</p>
-<p>The nickname refers to the fact that a value satisfying one Bellman equation is itself an argument in a second Bellman equation.</p>
+<p>The nickname refers to the feature that a value satisfying one Bellman equation appears as an argument in a second Bellman equation.</p>
 <p>Thus, our models have involved two Bellman equations:</p>
 <ul class="simple">
 <li><p>equation <a class="reference internal" href="#equation-eq-old1">(41.1)</a> expresses how <span class="math notranslate nohighlight">\(\theta_t\)</span> depends on <span class="math notranslate nohighlight">\(\mu_t\)</span>
@@ -1633,8 +1535,8 @@ and <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span></p></li>
 <span class="math notranslate nohighlight">\((\mu_t, \theta_t)\)</span> and <span class="math notranslate nohighlight">\(v_{t+1}\)</span></p></li>
 </ul>
 <p>A value <span class="math notranslate nohighlight">\(\theta\)</span> from one Bellman equation appears as an argument of a second Bellman equation for another value <span class="math notranslate nohighlight">\(v\)</span>.</p>
-</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1648,7 +1550,7 @@ and <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span></p></li>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -2019,7 +1921,7 @@ and <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span></p></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
                     <!-- <li class="btn__search">
                         <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
                             <i data-feather="search"></i>
                         </form>
                     </li> -->
@@ -2161,16 +2063,5 @@ and <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span></p></li>
         </div>
 
     </div> <!-- .wrapper-->
-    
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
-<script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-54984338-11', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
-
   </body>
 </html>

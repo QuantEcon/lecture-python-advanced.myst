@@ -35,7 +35,7 @@ tags: [hide-output]
 
 ## Overview
 
-This notebook formulates and computes a plan that a **Stackelberg
+This lecture formulates and computes a plan that a **Stackelberg
 leader** uses to manipulate forward-looking decisions of a **Stackelberg
 follower** that depend on continuation sequences of decisions made once
 and for all by the Stackelberg leader at time $0$.
@@ -77,13 +77,13 @@ $a_0$ and $a_1$ are both positive.
 $q_{10}, q_{20}$ are given numbers that serve as initial
 conditions at time $0$.
 
-By incurring a cost of change
+By incurring a cost equal to
 
 $$
-\gamma v_{it}^2
+\gamma v_{it}^2, \quad \gamma > 0 ,
 $$
 
-where $\gamma > 0$, firm $i$ can change its output according
+firm $i$ can change its output according
 to
 
 $$
@@ -217,8 +217,7 @@ $$
 where
 $c_0 = \frac{\beta a_0}{2 \gamma}, c_1 = \frac{\beta a_1}{\gamma}, c_2 = \frac{\beta a_1}{2 \gamma}$.
 
-This equation can in turn be rearranged to become the second-order
-difference equation
+This equation can in turn be rearranged to become 
 
 ```{math}
 :label: sstack1
@@ -272,7 +271,7 @@ $$
 Operating on both sides of equation {eq}`sstack2` with
 $\beta^{-1}$ times this inverse operator gives the follower's
 decision rule for setting $q_{1t+1}$ in the
-**feedback-feedforward** form.
+**feedback-feedforward** form
 
 ```{math}
 :label: sstack3
@@ -304,7 +303,7 @@ and formulate the following Lagrangian for the Stackelberg leader firm
 
 subject to initial conditions for $q_{1t}, q_{2t}$ at $t=0$.
 
-**Comments:** We have formulated the Stackelberg problem in a space of
+**Remarks:** We have formulated the Stackelberg problem in a space of
 sequences.
 
 The max-min problem associated with Lagrangian
@@ -314,11 +313,11 @@ future of its choices of $\{q_{1t+j}\}_{j=0}^\infty$.
 
 This renders a direct attack on the problem cumbersome.
 
-Therefore, below, we will formulate the Stackelberg leader's problem
+Therefore, below we will formulate the Stackelberg leader's problem
 recursively.
 
 We'll put our little duopoly model into a broader class of models with
-the same conceptual structure.
+the same  structure.
 
 ## Stackelberg Problem
 
@@ -342,7 +341,7 @@ of the Stackelberg **follower**.
 Let $u_t$ be a vector of decisions chosen by the Stackelberg leader
 at $t$.
 
-The $z_t$ vector is inherited physically from the past.
+The $z_t$ vector is inherited  from the past.
 
 But $x_t$ is a decision made by the Stackelberg follower at time
 $t$ that is the follower's best response to the choice of an
@@ -464,13 +463,13 @@ Subproblem 2 is solved by the **Stackelberg leader** at $t=0$.
 
 The two subproblems are designed
 
-- to respect the protocol in which the follower chooses
+- to respect the timing protocol in which the follower chooses
   $\vec q_1$ after seeing $\vec q_2$ chosen by the leader
 - to make the leader choose $\vec q_2$ while respecting that
   $\vec q_1$ will be the follower's best response to
   $\vec q_2$
 - to represent the leader's problem recursively by artfully choosing
-  the state variables confronting and the control variables available
+  the leader's state variables and the control variables available
   to the leader
 
 **Subproblem 1**
@@ -737,7 +736,7 @@ $$
             H^t_t & = \check A_{22}^{t-1}(\check A_{21} + \check A_{22} H^0_0 ) \end{aligned}
 $$
 
-An optimal decision rule for the Stackelberg's choice of $u_t$ is
+An optimal decision rule for the Stackelberg leader's choice of $u_t$ is
 
 $$
 u_t  = - F \check y_t \equiv - \begin{bmatrix} F_z & F_x \cr \end{bmatrix}
@@ -760,8 +759,7 @@ $\check z_t$ but on components of $\check z^{t-1}$.
 
 ### Comments and Interpretations
 
-After all, at the end of the day, it will turn out that because we set
-$\check z_0 = z_0$, it will be true that $z_t = \check z_t$
+Because we set $\check z_0 = z_0$, it will turn out that $z_t = \check z_t$
 for all $t \geq 0$.
 
 Then why did we distinguish $\check z_t$ from $z_t$?
@@ -851,7 +849,7 @@ q_{1t+1} \end{bmatrix} = \begin{bmatrix} A - BF & 0 \\
 q_{1t} \end{bmatrix} + \begin{bmatrix} 0 \cr 1 \end{bmatrix} x_t
 ```
 
-This specification assures that from the point of the view of a firm 1,
+This specification assures that from the point of the view of  firm 1,
 $q_{2t}$ is an exogenous process.
 
 Here
@@ -878,7 +876,7 @@ $$
 x_t = - \tilde F X_t
 $$
 
-and it's state evolves according to
+and its state evolves according to
 
 $$
 \tilde X_{t+1} = (\tilde A - \tilde B \tilde F) X_t
@@ -895,7 +893,7 @@ $$
 we recover
 
 $$
-x_0 = - \tilde F \tilde X_0
+x_0 = - \tilde F \tilde X_0 ,
 $$
 
 which will verify that we have properly set up a recursive
@@ -904,8 +902,8 @@ $\vec q_2$.
 
 ### Time Consistency of Follower's Plan
 
-Since the follower can solve its problem using dynamic programming its
-problem is recursive in what for it are the **natural state variables**,
+The follower can solve its problem using dynamic programming  because its
+problem is recursive in  **natural state variables**,
 namely
 
 $$
@@ -916,8 +914,8 @@ It follows that the follower's plan is time consistent.
 
 ## Computing  Stackelberg Plan
 
-Here is our code to compute a Stackelberg plan via a linear-quadratic
-dynamic program as outlined above
+Here is our code to compute a Stackelberg plan via the linear-quadratic
+dynamic program describe above
 
 ```{code-cell} python3
 # Parameters
@@ -990,7 +988,7 @@ print(f"F = {F}")
 
 ## Time Series for Price and Quantities
 
-The following code plots the price and quantities
+The following code plots the price and quantities produced by the Stackelberg leader and follower.
 
 ```{code-cell} python3
 q_leader = yt[1, :-1]
@@ -1012,8 +1010,9 @@ plt.show()
 
 We'll compute the present value earned by the Stackelberg leader.
 
-We'll compute it two ways (they give identical answers -- just a check
-on coding and thinking)
+We'll compute it two ways and get the same answer.  
+
+In addition to being a useful check on the accuracy of our coding, computing things in these two ways helps us think about the structure of the problem.  
 
 ```{code-cell} python3
 v_leader_forward = np.sum(βs * π_leader)
@@ -1080,7 +1079,7 @@ axes[1].set(title=r'Follower control variable $x_{t}$', xlabel='t')
 
 axes[2].plot(range(n), vt_leader, 'bo', ms=2)
 axes[2].plot(range(n), vt_reset_leader, 'ro', ms=2)
-axes[2].set(title=r'Leader value function $v(y_{t})$', xlabel='t')
+axes[2].set(title=r'Leader value $v(y_{t})$', xlabel='t')
 
 plt.tight_layout()
 plt.show()
@@ -1140,8 +1139,8 @@ yt[:, 0][-1] - (yt_tilde[:, 1] - yt_tilde[:, 0])[-1] < tol0
 
 ### Explanation of Alignment
 
-If we inspect the coefficients in the decision rule $- \tilde F$,
-we can spot the reason that the follower chooses to set $x_t =
+If we inspect  coefficients in the decision rule $- \tilde F$,
+we should be able to  spot why the follower chooses to set $x_t =
 \tilde x_t$ when it sets $x_t = - \tilde F X_t$ in
 the recursive formulation of the follower problem.
 
@@ -1371,13 +1370,13 @@ v2_direct_alt = - z[:, 0].T @ lq1.P @ z[:, 0] + lq1.d
 
 ## Comparing Markov Perfect Equilibrium and  Stackelberg Outcome
 
-It is enlightening to compare equilbrium quantities for firms 1 and 2 under two alternative 
+It is enlightening to compare equilbrium values for firms 1 and 2 under two alternative 
 settings:
   
   * A Markov perfect equilibrium like that described in [this lecture](https://python.quantecon.org/markov_perf.html)
   * A Stackelberg equilbrium 
 
-The following code performs the required computations.
+The following code performs the required computations, then plots the continuation values.
 
 
 ```{code-cell} python3
@@ -1392,7 +1391,7 @@ fig, ax = plt.subplots()
 ax.plot(vt_MPE, 'b', label='MPE')
 ax.plot(vt_leader, 'r', label='Stackelberg leader')
 ax.plot(vt_follower, 'g', label='Stackelberg follower')
-ax.set_title(r'MPE vs. Stackelberg Value Function')
+ax.set_title(r'Values for MPE duopolists and  Stackelberg firms')
 ax.set_xlabel('t')
 ax.legend(loc=(1.05, 0))
 plt.show()

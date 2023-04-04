@@ -1,10 +1,14 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>50. Execution Statistics &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -47,47 +51,53 @@
         </script>
     
     
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -95,8 +105,7 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'status';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/status.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -189,8 +198,8 @@ const thebe_selector_output = ".output, .cell_output"
                     
                     <div>
                         
-  <div class="tex2jax_ignore mathjax_ignore section" id="execution-statistics">
-<h1><span class="section-number">50. </span>Execution Statistics<a class="headerlink" href="#execution-statistics" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="execution-statistics">
+<h1><span class="section-number">50. </span>Execution Statistics<a class="headerlink" href="#execution-statistics" title="Permalink to this heading">#</a></h1>
 <p>This table contains the latest execution statistics.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -202,317 +211,317 @@ const thebe_selector_output = ".output, .cell_output"
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>BCG_complete_mkts</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="BCG_complete_mkts.html"><span class="doc">BCG_complete_mkts</span></a></p></td>
+<td><p>2023-04-02 06:24</p></td>
 <td><p>cache</p></td>
-<td><p>51.04</p></td>
+<td><p>79.15</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>BCG_incomplete_mkts</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="BCG_incomplete_mkts.html"><span class="doc">BCG_incomplete_mkts</span></a></p></td>
+<td><p>2023-04-02 06:25</p></td>
 <td><p>cache</p></td>
-<td><p>166.06</p></td>
+<td><p>106.76</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>additive_functionals</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="additive_functionals.html"><span class="doc">additive_functionals</span></a></p></td>
+<td><p>2023-04-02 06:26</p></td>
 <td><p>cache</p></td>
-<td><p>26.03</p></td>
+<td><p>17.82</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>amss</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="amss.html"><span class="doc">amss</span></a></p></td>
+<td><p>2023-04-02 06:34</p></td>
 <td><p>cache</p></td>
-<td><p>472.14</p></td>
+<td><p>476.1</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>amss2</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="amss2.html"><span class="doc">amss2</span></a></p></td>
+<td><p>2023-04-02 06:35</p></td>
 <td><p>cache</p></td>
-<td><p>124.63</p></td>
+<td><p>82.43</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>amss3</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="amss3.html"><span class="doc">amss3</span></a></p></td>
+<td><p>2023-04-02 06:41</p></td>
 <td><p>cache</p></td>
-<td><p>557.14</p></td>
+<td><p>380.51</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>arellano</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="arellano.html"><span class="doc">arellano</span></a></p></td>
+<td><p>2023-04-02 06:50</p></td>
 <td><p>cache</p></td>
-<td><p>516.82</p></td>
+<td><p>532.1</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>arma</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="arma.html"><span class="doc">arma</span></a></p></td>
+<td><p>2023-04-02 06:51</p></td>
 <td><p>cache</p></td>
-<td><p>15.02</p></td>
+<td><p>9.8</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>asset_pricing_lph</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>4.61</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>black_litterman</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>104.54</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>calvo</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>9.83</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>cattle_cycles</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>8.69</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>chang_credible</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>847.2</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>chang_ramsey</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>1138.3</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>classical_filtering</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>3.02</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>coase</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>14.03</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>cons_news</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>10.02</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>discrete_dp</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>19.02</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>dyn_stack</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>12.02</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>entropy</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="asset_pricing_lph.html"><span class="doc">asset_pricing_lph</span></a></p></td>
+<td><p>2023-04-02 06:51</p></td>
 <td><p>cache</p></td>
 <td><p>4.02</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>estspec</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="black_litterman.html"><span class="doc">black_litterman</span></a></p></td>
+<td><p>2023-04-02 06:51</p></td>
 <td><p>cache</p></td>
-<td><p>11.02</p></td>
+<td><p>53.89</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>five_preferences</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="calvo.html"><span class="doc">calvo</span></a></p></td>
+<td><p>2023-04-02 06:52</p></td>
 <td><p>cache</p></td>
-<td><p>58.04</p></td>
+<td><p>8.02</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>growth_in_dles</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="cattle_cycles.html"><span class="doc">cattle_cycles</span></a></p></td>
+<td><p>2023-04-02 06:52</p></td>
 <td><p>cache</p></td>
-<td><p>8.98</p></td>
+<td><p>6.49</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>hs_invertibility_example</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="chang_credible.html"><span class="doc">chang_credible</span></a></p></td>
+<td><p>2023-04-02 07:01</p></td>
 <td><p>cache</p></td>
-<td><p>8.89</p></td>
+<td><p>533.85</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>hs_recursive_models</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="chang_ramsey.html"><span class="doc">chang_ramsey</span></a></p></td>
+<td><p>2023-04-02 07:13</p></td>
 <td><p>cache</p></td>
-<td><p>1.57</p></td>
+<td><p>767.69</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>intro</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="classical_filtering.html"><span class="doc">classical_filtering</span></a></p></td>
+<td><p>2023-04-02 07:13</p></td>
 <td><p>cache</p></td>
-<td><p>1.57</p></td>
+<td><p>1.58</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>irfs_in_hall_model</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="coase.html"><span class="doc">coase</span></a></p></td>
+<td><p>2023-04-02 07:14</p></td>
 <td><p>cache</p></td>
-<td><p>11.68</p></td>
+<td><p>9.97</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>knowing_forecasts_of_others</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="cons_news.html"><span class="doc">cons_news</span></a></p></td>
+<td><p>2023-04-02 07:14</p></td>
 <td><p>cache</p></td>
-<td><p>34.95</p></td>
+<td><p>6.67</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>lqramsey</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="discrete_dp.html"><span class="doc">discrete_dp</span></a></p></td>
+<td><p>2023-04-02 07:15</p></td>
 <td><p>cache</p></td>
-<td><p>11.62</p></td>
+<td><p>49.4</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>lu_tricks</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="dyn_stack.html"><span class="doc">dyn_stack</span></a></p></td>
+<td><p>2023-04-02 07:15</p></td>
 <td><p>cache</p></td>
-<td><p>7.03</p></td>
+<td><p>8.67</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>lucas_asset_pricing_dles</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="entropy.html"><span class="doc">entropy</span></a></p></td>
+<td><p>2023-04-02 07:15</p></td>
 <td><p>cache</p></td>
-<td><p>8.6</p></td>
+<td><p>1.28</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>lucas_model</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="estspec.html"><span class="doc">estspec</span></a></p></td>
+<td><p>2023-04-02 07:15</p></td>
 <td><p>cache</p></td>
-<td><p>13.64</p></td>
+<td><p>8.02</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>markov_jump_lq</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="five_preferences.html"><span class="doc">five_preferences</span></a></p></td>
+<td><p>2023-04-02 07:16</p></td>
 <td><p>cache</p></td>
-<td><p>172.5</p></td>
+<td><p>42.37</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>matsuyama</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="growth_in_dles.html"><span class="doc">growth_in_dles</span></a></p></td>
+<td><p>2023-04-02 07:16</p></td>
 <td><p>cache</p></td>
-<td><p>11.72</p></td>
+<td><p>6.3</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>muth_kalman</p></td>
-<td><p>2023-01-02 04:36</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="hs_invertibility_example.html"><span class="doc">hs_invertibility_example</span></a></p></td>
+<td><p>2023-04-02 07:16</p></td>
+<td><p>cache</p></td>
+<td><p>6.47</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="hs_recursive_models.html"><span class="doc">hs_recursive_models</span></a></p></td>
+<td><p>2023-04-02 07:16</p></td>
+<td><p>cache</p></td>
+<td><p>1.3</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="intro.html"><span class="doc">intro</span></a></p></td>
+<td><p>2023-04-02 07:16</p></td>
+<td><p>cache</p></td>
+<td><p>1.3</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="irfs_in_hall_model.html"><span class="doc">irfs_in_hall_model</span></a></p></td>
+<td><p>2023-04-02 07:16</p></td>
+<td><p>cache</p></td>
+<td><p>6.54</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="knowing_forecasts_of_others.html"><span class="doc">knowing_forecasts_of_others</span></a></p></td>
+<td><p>2023-04-02 07:17</p></td>
+<td><p>cache</p></td>
+<td><p>29.97</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="lqramsey.html"><span class="doc">lqramsey</span></a></p></td>
+<td><p>2023-04-02 07:17</p></td>
+<td><p>cache</p></td>
+<td><p>9.02</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="lu_tricks.html"><span class="doc">lu_tricks</span></a></p></td>
+<td><p>2023-04-02 07:17</p></td>
+<td><p>cache</p></td>
+<td><p>2.78</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="lucas_asset_pricing_dles.html"><span class="doc">lucas_asset_pricing_dles</span></a></p></td>
+<td><p>2023-04-02 07:17</p></td>
+<td><p>cache</p></td>
+<td><p>7.02</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="lucas_model.html"><span class="doc">lucas_model</span></a></p></td>
+<td><p>2023-04-02 07:17</p></td>
+<td><p>cache</p></td>
+<td><p>10.81</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="markov_jump_lq.html"><span class="doc">markov_jump_lq</span></a></p></td>
+<td><p>2023-04-02 07:19</p></td>
+<td><p>cache</p></td>
+<td><p>102.03</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="matsuyama.html"><span class="doc">matsuyama</span></a></p></td>
+<td><p>2023-04-02 07:19</p></td>
+<td><p>cache</p></td>
+<td><p>8.71</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="muth_kalman.html"><span class="doc">muth_kalman</span></a></p></td>
+<td><p>2023-04-02 07:19</p></td>
+<td><p>cache</p></td>
+<td><p>6.92</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="opt_tax_recur.html"><span class="doc">opt_tax_recur</span></a></p></td>
+<td><p>2023-04-02 07:20</p></td>
+<td><p>cache</p></td>
+<td><p>65.92</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="orth_proj.html"><span class="doc">orth_proj</span></a></p></td>
+<td><p>2023-04-02 07:20</p></td>
+<td><p>cache</p></td>
+<td><p>1.25</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="permanent_income_dles.html"><span class="doc">permanent_income_dles</span></a></p></td>
+<td><p>2023-04-02 07:20</p></td>
+<td><p>cache</p></td>
+<td><p>6.49</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="rob_markov_perf.html"><span class="doc">rob_markov_perf</span></a></p></td>
+<td><p>2023-04-02 07:20</p></td>
+<td><p>cache</p></td>
+<td><p>6.42</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="robustness.html"><span class="doc">robustness</span></a></p></td>
+<td><p>2023-04-02 07:21</p></td>
+<td><p>cache</p></td>
+<td><p>8.44</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="rosen_schooling_model.html"><span class="doc">rosen_schooling_model</span></a></p></td>
+<td><p>2023-04-02 07:21</p></td>
+<td><p>cache</p></td>
+<td><p>6.45</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="smoothing.html"><span class="doc">smoothing</span></a></p></td>
+<td><p>2023-04-02 07:21</p></td>
+<td><p>cache</p></td>
+<td><p>6.63</p></td>
+<td><p>✅</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="smoothing_tax.html"><span class="doc">smoothing_tax</span></a></p></td>
+<td><p>2023-04-02 07:21</p></td>
 <td><p>cache</p></td>
 <td><p>10.02</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>opt_tax_recur</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>85.04</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>orth_proj</p></td>
-<td><p>2023-01-02 04:36</p></td>
-<td><p>cache</p></td>
-<td><p>1.84</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>permanent_income_dles</p></td>
-<td><p>2023-01-02 04:37</p></td>
-<td><p>cache</p></td>
-<td><p>8.74</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>rob_markov_perf</p></td>
-<td><p>2023-01-02 04:37</p></td>
-<td><p>cache</p></td>
-<td><p>8.76</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>robustness</p></td>
-<td><p>2023-01-02 04:37</p></td>
-<td><p>cache</p></td>
-<td><p>12.63</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>rosen_schooling_model</p></td>
-<td><p>2023-01-02 04:37</p></td>
-<td><p>cache</p></td>
-<td><p>8.73</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-odd"><td><p>smoothing</p></td>
-<td><p>2023-01-02 04:37</p></td>
-<td><p>cache</p></td>
-<td><p>10.02</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>smoothing_tax</p></td>
-<td><p>2023-01-02 04:37</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="stationary_densities.html"><span class="doc">stationary_densities</span></a></p></td>
+<td><p>2023-04-02 07:21</p></td>
 <td><p>cache</p></td>
 <td><p>12.69</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>stationary_densities</p></td>
-<td><p>2023-01-02 04:37</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="#"><span class="doc">status</span></a></p></td>
+<td><p>2023-04-02 07:16</p></td>
 <td><p>cache</p></td>
-<td><p>18.78</p></td>
+<td><p>1.3</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>status</p></td>
-<td><p>2023-01-02 04:37</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="tax_smoothing_1.html"><span class="doc">tax_smoothing_1</span></a></p></td>
+<td><p>2023-04-02 07:21</p></td>
 <td><p>cache</p></td>
-<td><p>1.57</p></td>
+<td><p>14.98</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>tax_smoothing_1</p></td>
-<td><p>2023-01-02 04:37</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="tax_smoothing_2.html"><span class="doc">tax_smoothing_2</span></a></p></td>
+<td><p>2023-04-02 07:22</p></td>
 <td><p>cache</p></td>
-<td><p>19.72</p></td>
+<td><p>6.95</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>tax_smoothing_2</p></td>
-<td><p>2023-01-02 04:37</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="tax_smoothing_3.html"><span class="doc">tax_smoothing_3</span></a></p></td>
+<td><p>2023-04-02 07:22</p></td>
 <td><p>cache</p></td>
-<td><p>9.58</p></td>
+<td><p>8.02</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>tax_smoothing_3</p></td>
-<td><p>2023-01-02 04:37</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="troubleshooting.html"><span class="doc">troubleshooting</span></a></p></td>
+<td><p>2023-04-02 07:16</p></td>
 <td><p>cache</p></td>
-<td><p>9.67</p></td>
+<td><p>1.3</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-even"><td><p>troubleshooting</p></td>
-<td><p>2023-01-02 04:37</p></td>
+<tr class="row-odd"><td><p><a class="xref doc reference internal" href="un_insure.html"><span class="doc">un_insure</span></a></p></td>
+<td><p>2023-04-02 07:22</p></td>
 <td><p>cache</p></td>
-<td><p>1.57</p></td>
+<td><p>18.62</p></td>
 <td><p>✅</p></td>
 </tr>
-<tr class="row-odd"><td><p>un_insure</p></td>
-<td><p>2023-01-02 04:37</p></td>
+<tr class="row-even"><td><p><a class="xref doc reference internal" href="zreferences.html"><span class="doc">zreferences</span></a></p></td>
+<td><p>2023-04-02 07:16</p></td>
 <td><p>cache</p></td>
-<td><p>27.67</p></td>
-<td><p>✅</p></td>
-</tr>
-<tr class="row-even"><td><p>zreferences</p></td>
-<td><p>2023-01-02 04:37</p></td>
-<td><p>cache</p></td>
-<td><p>1.57</p></td>
+<td><p>1.3</p></td>
 <td><p>✅</p></td>
 </tr>
 </tbody>
 </table>
 <p>These lectures are built on <code class="docutils literal notranslate"><span class="pre">linux</span></code> instances through <code class="docutils literal notranslate"><span class="pre">github</span> <span class="pre">actions</span></code> so are
 executed using the following <a class="reference external" href="https://docs.github.com/en/actions/reference/specifications-for-github-hosted-runners#supported-runners-and-hardware-resources">hardware specifications</a></p>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -526,7 +535,7 @@ executed using the following <a class="reference external" href="https://docs.gi
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -897,7 +906,7 @@ executed using the following <a class="reference external" href="https://docs.gi
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
                     <!-- <li class="btn__search">
                         <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
                             <i data-feather="search"></i>
                         </form>
                     </li> -->
@@ -1039,16 +1048,5 @@ executed using the following <a class="reference external" href="https://docs.gi
         </div>
 
     </div> <!-- .wrapper-->
-    
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
-<script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-54984338-11', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
-
   </body>
 </html>

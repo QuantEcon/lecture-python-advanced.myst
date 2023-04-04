@@ -1,10 +1,14 @@
 
+
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>28. Covariance Stationary Processes &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
@@ -47,47 +51,53 @@
         </script>
     
     
-    
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.1ef59f8f4e91ec8319176e8479c6af4e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
     <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
@@ -95,10 +105,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-svg.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'arma';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/arma.html" />
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
@@ -152,131 +161,38 @@ const thebe_selector_output = ".output, .cell_output"
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#overview">
-   28.1. Overview
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#arma-processes">
-     28.1.1. ARMA Processes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#spectral-analysis">
-     28.1.2. Spectral Analysis
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#other-reading">
-     28.1.3. Other Reading
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#introduction">
-   28.2. Introduction
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#definitions">
-     28.2.1. Definitions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-1-white-noise">
-     28.2.2. Example 1: White Noise
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-2-general-linear-processes">
-     28.2.3. Example 2: General Linear Processes
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#wold-representation">
-     28.2.4. Wold Representation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#ar-and-ma">
-     28.2.5. AR and MA
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
-     28.2.6. ARMA Processes
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id12">
-   28.3. Spectral Analysis
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#complex-numbers">
-     28.3.1. Complex Numbers
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#spectral-densities">
-     28.3.2. Spectral Densities
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#arma-wnsd">
-     28.3.3. Example 1: White Noise
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#example-2-ar-and-ma-and-arma">
-     28.3.4. Example 2: AR and MA and ARMA
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpreting-the-spectral-density">
-     28.3.5. Interpreting the Spectral Density
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#inverting-the-transformation">
-     28.3.6. Inverting the Transformation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mathematical-theory">
-     28.3.7. Mathematical Theory
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#implementation">
-   28.4. Implementation
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#application">
-     28.4.1. Application
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#explanation">
-     28.4.2. Explanation
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#computing-the-autocovariance-function">
-     28.4.3. Computing the Autocovariance Function
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">28.1. Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arma-processes">28.1.1. ARMA Processes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-analysis">28.1.2. Spectral Analysis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#other-reading">28.1.3. Other Reading</a></li>
 </ul>
-
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">28.2. Introduction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#definitions">28.2.1. Definitions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-white-noise">28.2.2. Example 1: White Noise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-general-linear-processes">28.2.3. Example 2: General Linear Processes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#wold-representation">28.2.4. Wold Representation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ar-and-ma">28.2.5. AR and MA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">28.2.6. ARMA Processes</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">28.3. Spectral Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complex-numbers">28.3.1. Complex Numbers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#spectral-densities">28.3.2. Spectral Densities</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arma-wnsd">28.3.3. Example 1: White Noise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-ar-and-ma-and-arma">28.3.4. Example 2: AR and MA and ARMA</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-the-spectral-density">28.3.5. Interpreting the Spectral Density</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverting-the-transformation">28.3.6. Inverting the Transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-theory">28.3.7. Mathematical Theory</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">28.4. Implementation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#application">28.4.1. Application</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation">28.4.2. Explanation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-autocovariance-function">28.4.3. Computing the Autocovariance Function</a></li>
+</ul>
+</li>
+</ul>
                             <p class="logo">
                                 
                                     
@@ -324,8 +240,8 @@ const thebe_selector_output = ".output, .cell_output"
         <a href="https://quantecon.org/" title="quantecon.org">
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
-</div><div class="tex2jax_ignore mathjax_ignore section" id="covariance-stationary-processes">
-<h1><a class="toc-backref" href="#id19"><span class="section-number">28. </span><span class="target" id="index-0"></span>Covariance Stationary Processes</a><a class="headerlink" href="#covariance-stationary-processes" title="Permalink to this headline">¶</a></h1>
+</div><section class="tex2jax_ignore mathjax_ignore" id="covariance-stationary-processes">
+<h1><a class="toc-backref" href="#id19"><span class="section-number">28. </span><span class="target" id="index-0"></span>Covariance Stationary Processes</a><a class="headerlink" href="#covariance-stationary-processes" title="Permalink to this heading">#</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
@@ -341,52 +257,58 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
 </pre></div>
 </div>
 </div>
+<details class="hide below-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell output</span>
+<span class="expanded">Hide code cell output</span>
+</summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.6.0)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
-Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
 Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
-Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.55.1)
-Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.21.5)
-Requirement already satisfied: llvmlite&lt;0.39,&gt;=0.38.0rc1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.38.0)
+Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.22.4)
+Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
+Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
 Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
+Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 </div>
+</details>
 </div>
-<div class="section" id="overview">
-<h2><a class="toc-backref" href="#id20"><span class="section-number">28.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<section id="overview">
+<h2><a class="toc-backref" href="#id20"><span class="section-number">28.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>In this lecture we study covariance stationary linear stochastic processes, a
 class of models routinely used to study economic and financial time series.</p>
 <p>This class has the advantage of being</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>simple enough to be described by an elegant and comprehensive theory</p></li>
 <li><p>relatively broad in terms of the kinds of dynamics it can represent</p></li>
 </ol>
 <p>We consider these models in both the time and frequency domain.</p>
-<div class="section" id="arma-processes">
-<h3><span class="section-number">28.1.1. </span><span class="target" id="index-1"></span>ARMA Processes<a class="headerlink" href="#arma-processes" title="Permalink to this headline">¶</a></h3>
+<section id="arma-processes">
+<h3><span class="section-number">28.1.1. </span><span class="target" id="index-1"></span>ARMA Processes<a class="headerlink" href="#arma-processes" title="Permalink to this heading">#</a></h3>
 <p>We will focus much of our attention on linear covariance stationary models with a finite number of parameters.</p>
 <p>In particular, we will study stationary ARMA processes, which form a cornerstone of the standard theory of time series analysis.</p>
 <p>Every ARMA process can be represented in <a class="reference external" href="https://python-intro.quantecon.org/linear_models.html">linear state space</a> form.</p>
 <p>However, ARMA processes have some important structure that makes it valuable to study them separately.</p>
-</div>
-<div class="section" id="spectral-analysis">
-<h3><span class="section-number">28.1.2. </span><span class="target" id="index-2"></span>Spectral Analysis<a class="headerlink" href="#spectral-analysis" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="spectral-analysis">
+<h3><span class="section-number">28.1.2. </span><span class="target" id="index-2"></span>Spectral Analysis<a class="headerlink" href="#spectral-analysis" title="Permalink to this heading">#</a></h3>
 <p>Analysis in the frequency domain is also called spectral analysis.</p>
 <p>In essence, spectral analysis provides an alternative representation of the
 autocovariance function of a covariance stationary process.</p>
@@ -396,9 +318,9 @@ autocovariance function of a covariance stationary process.</p>
 <li><p>allows for a simpler, more tractable representation in some important cases</p></li>
 </ul>
 <p>The famous <em>Fourier transform</em> and its inverse are used to map between the two representations.</p>
-</div>
-<div class="section" id="other-reading">
-<h3><span class="section-number">28.1.3. </span>Other Reading<a class="headerlink" href="#other-reading" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="other-reading">
+<h3><span class="section-number">28.1.3. </span>Other Reading<a class="headerlink" href="#other-reading" title="Permalink to this heading">#</a></h3>
 <p>For supplementary reading, see</p>
 <p><a href=/_static/lecture_specific/arma/time_series_book.pdf download></a></p>
 <ul class="simple">
@@ -419,43 +341,43 @@ autocovariance function of a covariance stationary process.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="introduction">
-<h2><a class="toc-backref" href="#id21"><span class="section-number">28.2. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="introduction">
+<h2><a class="toc-backref" href="#id21"><span class="section-number">28.2. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>Consider a sequence of random variables <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> indexed by <span class="math notranslate nohighlight">\(t \in \mathbb Z\)</span> and taking values in <span class="math notranslate nohighlight">\(\mathbb R\)</span>.</p>
 <p>Thus, <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> begins in the infinite past and extends to the infinite future — a convenient and standard assumption.</p>
 <p>As in other fields, successful economic modeling typically assumes the existence of features that are constant over time.</p>
 <p>If these assumptions are correct, then each new observation <span class="math notranslate nohighlight">\(X_t, X_{t+1},\ldots\)</span> can provide additional information about the time-invariant features, allowing us to  learn from as data arrive.</p>
 <p>For this reason, we will focus in what follows on processes that are <em>stationary</em> — or become so after a transformation
 (see for example <a class="reference internal" href="additive_functionals.html"><span class="doc">this lecture</span></a>).</p>
-<div class="section" id="definitions">
-<span id="arma-defs"></span><h3><span class="section-number">28.2.1. </span>Definitions<a class="headerlink" href="#definitions" title="Permalink to this headline">¶</a></h3>
+<section id="definitions">
+<span id="arma-defs"></span><h3><span class="section-number">28.2.1. </span>Definitions<a class="headerlink" href="#definitions" title="Permalink to this heading">#</a></h3>
 <p id="index-3">A real-valued stochastic process <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> is called <em>covariance stationary</em> if</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Its mean <span class="math notranslate nohighlight">\(\mu := \mathbb E X_t\)</span> does not depend on <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
 <li><p>For all <span class="math notranslate nohighlight">\(k\)</span> in <span class="math notranslate nohighlight">\(\mathbb Z\)</span>, the <span class="math notranslate nohighlight">\(k\)</span>-th autocovariance <span class="math notranslate nohighlight">\(\gamma(k) := \mathbb E (X_t - \mu)(X_{t + k} - \mu)\)</span> is finite and depends only on <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
 </ol>
 <p>The function <span class="math notranslate nohighlight">\(\gamma \colon \mathbb Z \to \mathbb R\)</span> is called the <em>autocovariance function</em> of the process.</p>
 <p>Throughout this lecture, we will work exclusively with zero-mean (i.e., <span class="math notranslate nohighlight">\(\mu = 0\)</span>) covariance stationary processes.</p>
 <p>The zero-mean assumption costs nothing in terms of generality since working with non-zero-mean processes involves no more than adding a constant.</p>
-</div>
-<div class="section" id="example-1-white-noise">
-<h3><span class="section-number">28.2.2. </span>Example 1: <span class="target" id="index-4"></span>White Noise<a class="headerlink" href="#example-1-white-noise" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-1-white-noise">
+<h3><span class="section-number">28.2.2. </span>Example 1: <span class="target" id="index-4"></span>White Noise<a class="headerlink" href="#example-1-white-noise" title="Permalink to this heading">#</a></h3>
 <p>Perhaps the simplest class of covariance stationary processes is the white noise processes.</p>
 <p>A process <span class="math notranslate nohighlight">\(\{ \epsilon_t \}\)</span> is called a <em>white noise process</em> if</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(\mathbb E \epsilon_t = 0\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\gamma(k) = \sigma^2 \mathbf 1\{k = 0\}\)</span> for some <span class="math notranslate nohighlight">\(\sigma &gt; 0\)</span></p></li>
 </ol>
 <p>(Here <span class="math notranslate nohighlight">\(\mathbf 1\{k = 0\}\)</span> is defined to be 1 if <span class="math notranslate nohighlight">\(k = 0\)</span> and zero otherwise)</p>
 <p>White noise processes play the role of <strong>building blocks</strong> for processes with more complicated dynamics.</p>
-</div>
-<div class="section" id="example-2-general-linear-processes">
-<span id="generalized-lps"></span><h3><span class="section-number">28.2.3. </span>Example 2: <span class="target" id="index-5"></span>General Linear Processes<a class="headerlink" href="#example-2-general-linear-processes" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-2-general-linear-processes">
+<span id="generalized-lps"></span><h3><span class="section-number">28.2.3. </span>Example 2: <span class="target" id="index-5"></span>General Linear Processes<a class="headerlink" href="#example-2-general-linear-processes" title="Permalink to this heading">#</a></h3>
 <p>From the simple building block provided by white noise, we can construct a very flexible family of covariance stationary processes — the <em>general linear processes</em></p>
 <div class="math notranslate nohighlight" id="equation-ma-inf">
-<span class="eqno">(28.1)<a class="headerlink" href="#equation-ma-inf" title="Permalink to this equation">¶</a></span>\[X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j},
+<span class="eqno">(28.1)<a class="headerlink" href="#equation-ma-inf" title="Permalink to this equation">#</a></span>\[X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j},
 \qquad t \in \mathbb Z\]</div>
 <p>where</p>
 <ul class="simple">
@@ -466,12 +388,12 @@ autocovariance function of a covariance stationary process.</p>
 <p>Equation <a class="reference internal" href="#equation-ma-inf">(28.1)</a> is said to present  a <strong>moving average</strong> process or a moving average representation.</p>
 <p>With some manipulations, it is possible to confirm that the autocovariance function for <a class="reference internal" href="#equation-ma-inf">(28.1)</a> is</p>
 <div class="math notranslate nohighlight" id="equation-ma-inf-ac">
-<span class="eqno">(28.2)<a class="headerlink" href="#equation-ma-inf-ac" title="Permalink to this equation">¶</a></span>\[\gamma(k) = \sigma^2 \sum_{j=0}^{\infty} \psi_j \psi_{j+k}\]</div>
+<span class="eqno">(28.2)<a class="headerlink" href="#equation-ma-inf-ac" title="Permalink to this equation">#</a></span>\[\gamma(k) = \sigma^2 \sum_{j=0}^{\infty} \psi_j \psi_{j+k}\]</div>
 <p>By the <a class="reference external" href="https://en.wikipedia.org/wiki/Cauchy%E2%80%93Schwarz_inequality">Cauchy-Schwartz inequality</a>, one can show that <span class="math notranslate nohighlight">\(\gamma(k)\)</span> satisfies equation <a class="reference internal" href="#equation-ma-inf-ac">(28.2)</a>.</p>
 <p>Evidently, <span class="math notranslate nohighlight">\(\gamma(k)\)</span> does not depend on <span class="math notranslate nohighlight">\(t\)</span>.</p>
-</div>
-<div class="section" id="wold-representation">
-<h3><span class="section-number">28.2.4. </span><span class="target" id="index-6"></span>Wold Representation<a class="headerlink" href="#wold-representation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="wold-representation">
+<h3><span class="section-number">28.2.4. </span><span class="target" id="index-6"></span>Wold Representation<a class="headerlink" href="#wold-representation" title="Permalink to this heading">#</a></h3>
 <p>Remarkably, the class of general linear processes goes a long way towards
 describing the entire class of zero-mean covariance stationary processes.</p>
 <p>In particular, <a class="reference external" href="https://en.wikipedia.org/wiki/Wold%27s_theorem">Wold’s decomposition theorem</a> states that every
@@ -488,15 +410,15 @@ X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j} + \eta_t
 <li><p><span class="math notranslate nohighlight">\(\eta_t\)</span> can be expressed as a linear function of <span class="math notranslate nohighlight">\(X_{t-1}, X_{t-2},\ldots\)</span> and is perfectly predictable over arbitrarily long horizons</p></li>
 </ul>
 <p>For the method of constructing a Wold representation, intuition, and further discussion, see <span id="id9">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, p. 286.</p>
-</div>
-<div class="section" id="ar-and-ma">
-<h3><span class="section-number">28.2.5. </span>AR and MA<a class="headerlink" href="#ar-and-ma" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="ar-and-ma">
+<h3><span class="section-number">28.2.5. </span>AR and MA<a class="headerlink" href="#ar-and-ma" title="Permalink to this heading">#</a></h3>
 <span class="target" id="index-7"></span><p id="index-8">General linear processes are a very broad class of processes.</p>
 <p>It often pays to specialize to those for which there exists a representation having only finitely many parameters.</p>
 <p>(Experience and theory combine to indicate that models with a relatively small number of parameters typically perform better than larger models, especially for forecasting)</p>
 <p>One very simple example of such a model is the first-order autoregressive or AR(1) process</p>
 <div class="math notranslate nohighlight" id="equation-ar1-rep">
-<span class="eqno">(28.3)<a class="headerlink" href="#equation-ar1-rep" title="Permalink to this equation">¶</a></span>\[X_t = \phi X_{t-1} + \epsilon_t
+<span class="eqno">(28.3)<a class="headerlink" href="#equation-ar1-rep" title="Permalink to this equation">#</a></span>\[X_t = \phi X_{t-1} + \epsilon_t
 \quad \text{where} \quad
 | \phi | &lt; 1
 \quad \text{and } \{ \epsilon_t \} \text{ is white noise}\]</div>
@@ -504,7 +426,7 @@ X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j} + \eta_t
 <p>Hence <span class="math notranslate nohighlight">\(\{X_t\}\)</span> is a general linear process.</p>
 <p>Applying <a class="reference internal" href="#equation-ma-inf-ac">(28.2)</a> to the previous expression for <span class="math notranslate nohighlight">\(X_t\)</span>, we get the AR(1) autocovariance function</p>
 <div class="math notranslate nohighlight" id="equation-ar-acov">
-<span class="eqno">(28.4)<a class="headerlink" href="#equation-ar-acov" title="Permalink to this equation">¶</a></span>\[\gamma(k) = \phi^k \frac{\sigma^2}{1 - \phi^2},
+<span class="eqno">(28.4)<a class="headerlink" href="#equation-ar-acov" title="Permalink to this equation">#</a></span>\[\gamma(k) = \phi^k \frac{\sigma^2}{1 - \phi^2},
 \qquad k = 0, 1, \ldots\]</div>
 <p>The next figure plots an example of this function for <span class="math notranslate nohighlight">\(\phi = 0.8\)</span> and <span class="math notranslate nohighlight">\(\phi = -0.8\)</span> with <span class="math notranslate nohighlight">\(\sigma = 1\)</span>.</p>
 <div class="cell docutils container">
@@ -527,7 +449,7 @@ X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j} + \eta_t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/arma_5_0.png" src="_images/arma_5_0.png" />
+<img alt="_images/93c92e45ff4673c85fc979f90bb6fc914309563fc2b69a0918373a30c2a957f4.png" src="_images/93c92e45ff4673c85fc979f90bb6fc914309563fc2b69a0918373a30c2a957f4.png" />
 </div>
 </div>
 <p>Another very simple process is the MA(1) process (here MA means “moving average”)</p>
@@ -546,13 +468,13 @@ X_t = \epsilon_t + \theta \epsilon_{t-1}
 \]</div>
 <p>The AR(1) can be generalized to an AR(<span class="math notranslate nohighlight">\(p\)</span>) and likewise for the MA(1).</p>
 <p>Putting all of this together, we get the</p>
-</div>
-<div class="section" id="id10">
-<h3><span class="section-number">28.2.6. </span><span class="target" id="index-9"></span>ARMA Processes<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="id10">
+<h3><span class="section-number">28.2.6. </span><span class="target" id="index-9"></span>ARMA Processes<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
 <p>A stochastic process <span class="math notranslate nohighlight">\(\{X_t\}\)</span> is called an <em>autoregressive moving
 average process</em>, or ARMA(<span class="math notranslate nohighlight">\(p,q\)</span>), if it can be written as</p>
 <div class="math notranslate nohighlight" id="equation-arma">
-<span class="eqno">(28.5)<a class="headerlink" href="#equation-arma" title="Permalink to this equation">¶</a></span>\[X_t = \phi_1 X_{t-1} + \cdots + \phi_p X_{t-p} +
+<span class="eqno">(28.5)<a class="headerlink" href="#equation-arma" title="Permalink to this equation">#</a></span>\[X_t = \phi_1 X_{t-1} + \cdots + \phi_p X_{t-p} +
     \epsilon_t + \theta_1 \epsilon_{t-1} + \cdots + \theta_q \epsilon_{t-q}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{ \epsilon_t \}\)</span> is white noise.</p>
 <p>An alternative notation for ARMA processes uses the <em>lag operator</em> <span class="math notranslate nohighlight">\(L\)</span>.</p>
@@ -564,33 +486,33 @@ average process</em>, or ARMA(<span class="math notranslate nohighlight">\(p,q\)
 </ul>
 <p>Using <span class="math notranslate nohighlight">\(L\)</span>, we can rewrite <a class="reference internal" href="#equation-arma">(28.5)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-arma-lag">
-<span class="eqno">(28.6)<a class="headerlink" href="#equation-arma-lag" title="Permalink to this equation">¶</a></span>\[L^0 X_t - \phi_1 L^1 X_t - \cdots - \phi_p L^p X_t
+<span class="eqno">(28.6)<a class="headerlink" href="#equation-arma-lag" title="Permalink to this equation">#</a></span>\[L^0 X_t - \phi_1 L^1 X_t - \cdots - \phi_p L^p X_t
 = L^0 \epsilon_t + \theta_1 L^1 \epsilon_t + \cdots + \theta_q L^q \epsilon_t\]</div>
 <p>If we let <span class="math notranslate nohighlight">\(\phi(z)\)</span> and <span class="math notranslate nohighlight">\(\theta(z)\)</span> be the polynomials</p>
 <div class="math notranslate nohighlight" id="equation-arma-poly">
-<span class="eqno">(28.7)<a class="headerlink" href="#equation-arma-poly" title="Permalink to this equation">¶</a></span>\[\phi(z) := 1 - \phi_1 z - \cdots - \phi_p z^p
+<span class="eqno">(28.7)<a class="headerlink" href="#equation-arma-poly" title="Permalink to this equation">#</a></span>\[\phi(z) := 1 - \phi_1 z - \cdots - \phi_p z^p
 \quad \text{and} \quad
 \theta(z) := 1 + \theta_1 z + \cdots + \theta_q z^q\]</div>
 <p>then <a class="reference internal" href="#equation-arma-lag">(28.6)</a>  becomes</p>
 <div class="math notranslate nohighlight" id="equation-arma-lag1">
-<span class="eqno">(28.8)<a class="headerlink" href="#equation-arma-lag1" title="Permalink to this equation">¶</a></span>\[\phi(L) X_t = \theta(L) \epsilon_t\]</div>
+<span class="eqno">(28.8)<a class="headerlink" href="#equation-arma-lag1" title="Permalink to this equation">#</a></span>\[\phi(L) X_t = \theta(L) \epsilon_t\]</div>
 <p>In what follows we <strong>always assume</strong> that the roots of the polynomial <span class="math notranslate nohighlight">\(\phi(z)\)</span> lie outside the unit circle in the complex plane.</p>
 <p>This condition is sufficient to guarantee that the ARMA(<span class="math notranslate nohighlight">\(p,q\)</span>) process is covariance stationary.</p>
 <p>In fact, it implies that the process falls within the class of general linear processes <a class="reference internal" href="#generalized-lps"><span class="std std-ref">described above</span></a>.</p>
 <p>That is, given an ARMA(<span class="math notranslate nohighlight">\(p,q\)</span>) process <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> satisfying the unit circle condition, there exists a square summable sequence <span class="math notranslate nohighlight">\(\{\psi_t\}\)</span> with <span class="math notranslate nohighlight">\(X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j}\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>The sequence <span class="math notranslate nohighlight">\(\{\psi_t\}\)</span> can be obtained by a recursive procedure outlined on page 79 of <span id="id11">[<a class="reference internal" href="zreferences.html#id143" title="J. D. Cryer and K-S. Chan. Time Series Analysis. Springer, 2nd edition edition, 2008.">CC08</a>]</span>.</p>
 <p>The function <span class="math notranslate nohighlight">\(t \mapsto \psi_t\)</span> is often called the <em>impulse response function</em>.</p>
-</div>
-</div>
-<div class="section" id="id12">
-<h2><a class="toc-backref" href="#id22"><span class="section-number">28.3. </span><span class="target" id="index-10"></span>Spectral Analysis</a><a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="id12">
+<h2><a class="toc-backref" href="#id22"><span class="section-number">28.3. </span><span class="target" id="index-10"></span>Spectral Analysis</a><a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
 <p>Autocovariance functions provide a great deal of information about covariance stationary processes.</p>
 <p>In fact, for zero-mean Gaussian processes, the autocovariance function characterizes the entire joint distribution.</p>
 <p>Even for non-Gaussian processes, it provides a significant amount of information.</p>
 <p>It turns out that there is an alternative representation of the autocovariance function of a covariance stationary process, called the <em>spectral density</em>.</p>
 <p>At times, the spectral density is easier to derive, easier to manipulate, and provides additional intuition.</p>
-<div class="section" id="complex-numbers">
-<h3><span class="section-number">28.3.1. </span><span class="target" id="index-11"></span>Complex Numbers<a class="headerlink" href="#complex-numbers" title="Permalink to this headline">¶</a></h3>
+<section id="complex-numbers">
+<h3><span class="section-number">28.3.1. </span><span class="target" id="index-11"></span>Complex Numbers<a class="headerlink" href="#complex-numbers" title="Permalink to this heading">#</a></h3>
 <p>Before discussing the spectral density, we invite you to recall the main properties of complex numbers (or <a class="reference internal" href="#arma-specd"><span class="std std-ref">skip to the next section</span></a>).</p>
 <p>It can be helpful to remember that, in a formal sense, complex numbers are just points <span class="math notranslate nohighlight">\((x, y) \in \mathbb R^2\)</span> endowed with a specific notion of multiplication.</p>
 <p>When <span class="math notranslate nohighlight">\((x, y)\)</span> is regarded as a complex number, <span class="math notranslate nohighlight">\(x\)</span> is called the <em>real part</em> and <span class="math notranslate nohighlight">\(y\)</span> is called the <em>imaginary part</em>.</p>
@@ -610,9 +532,9 @@ average process</em>, or ARMA(<span class="math notranslate nohighlight">\(p,q\)
 r e^{i \omega} := r (\cos(\omega) + i \sin(\omega)) = x + i y
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(x = r \cos(\omega), y = r \sin(\omega)\)</span>, and <span class="math notranslate nohighlight">\(\omega = \arctan(y/z)\)</span> or <span class="math notranslate nohighlight">\(\tan(\omega) = y/x\)</span>.</p>
-</div>
-<div class="section" id="spectral-densities">
-<span id="arma-specd"></span><h3><span class="section-number">28.3.2. </span><span class="target" id="index-12"></span>Spectral Densities<a class="headerlink" href="#spectral-densities" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="spectral-densities">
+<span id="arma-specd"></span><h3><span class="section-number">28.3.2. </span><span class="target" id="index-12"></span>Spectral Densities<a class="headerlink" href="#spectral-densities" title="Permalink to this heading">#</a></h3>
 <p>Let <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> be a covariance stationary process with autocovariance function <span class="math notranslate nohighlight">\(\gamma\)</span>  satisfying <span class="math notranslate nohighlight">\(\sum_{k} \gamma(k)^2 &lt; \infty\)</span>.</p>
 <p>The <em>spectral density</em> <span class="math notranslate nohighlight">\(f\)</span> of <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> is defined as the <a class="reference external" href="https://en.wikipedia.org/wiki/Discrete-time_Fourier_transform">discrete time Fourier transform</a> of its autocovariance function <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
 <div class="math notranslate nohighlight">
@@ -623,7 +545,7 @@ f(\omega) := \sum_{k \in \mathbb Z} \gamma(k) e^{-i \omega k},
 <p>(Some authors normalize the expression on the right by constants such as <span class="math notranslate nohighlight">\(1/\pi\)</span> — the convention chosen  makes little difference provided you are consistent).</p>
 <p>Using the fact that <span class="math notranslate nohighlight">\(\gamma\)</span> is <em>even</em>, in the sense that <span class="math notranslate nohighlight">\(\gamma(t) = \gamma(-t)\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>, we can show that</p>
 <div class="math notranslate nohighlight" id="equation-arma-sd-cos">
-<span class="eqno">(28.9)<a class="headerlink" href="#equation-arma-sd-cos" title="Permalink to this equation">¶</a></span>\[f(\omega) = \gamma(0) + 2 \sum_{k \geq 1} \gamma(k) \cos(\omega k)\]</div>
+<span class="eqno">(28.9)<a class="headerlink" href="#equation-arma-sd-cos" title="Permalink to this equation">#</a></span>\[f(\omega) = \gamma(0) + 2 \sum_{k \geq 1} \gamma(k) \cos(\omega k)\]</div>
 <p>It is not difficult to confirm that <span class="math notranslate nohighlight">\(f\)</span> is</p>
 <ul class="simple">
 <li><p>real-valued</p></li>
@@ -633,27 +555,27 @@ f(\omega) := \sum_{k \in \mathbb Z} \gamma(k) e^{-i \omega k},
 <p>It follows that the values of <span class="math notranslate nohighlight">\(f\)</span> on <span class="math notranslate nohighlight">\([0, \pi]\)</span> determine the values of <span class="math notranslate nohighlight">\(f\)</span> on
 all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the proof is an exercise.</p>
 <p>For this reason, it is standard to plot the spectral density only on the interval <span class="math notranslate nohighlight">\([0, \pi]\)</span>.</p>
-</div>
-<div class="section" id="arma-wnsd">
-<span id="id13"></span><h3><span class="section-number">28.3.3. </span>Example 1: <span class="target" id="index-13"></span>White Noise<a class="headerlink" href="#arma-wnsd" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="arma-wnsd">
+<span id="id13"></span><h3><span class="section-number">28.3.3. </span>Example 1: <span class="target" id="index-13"></span>White Noise<a class="headerlink" href="#arma-wnsd" title="Permalink to this heading">#</a></h3>
 <p>Consider a white noise process <span class="math notranslate nohighlight">\(\{\epsilon_t\}\)</span> with standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <p>It is easy to check that in  this case <span class="math notranslate nohighlight">\(f(\omega) = \sigma^2\)</span>.  So <span class="math notranslate nohighlight">\(f\)</span> is a constant function.</p>
 <p>As we will see, this can be interpreted as meaning that “all frequencies are equally present”.</p>
 <p>(White light has this property when frequency refers to the visible spectrum, a connection that provides the origins of the term “white noise”)</p>
-</div>
-<div class="section" id="example-2-ar-and-ma-and-arma">
-<h3><span class="section-number">28.3.4. </span>Example 2: <span class="target" id="index-14"></span>AR and <span class="target" id="index-15"></span>MA and <span class="target" id="index-16"></span>ARMA<a class="headerlink" href="#example-2-ar-and-ma-and-arma" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="example-2-ar-and-ma-and-arma">
+<h3><span class="section-number">28.3.4. </span>Example 2: <span class="target" id="index-14"></span>AR and <span class="target" id="index-15"></span>MA and <span class="target" id="index-16"></span>ARMA<a class="headerlink" href="#example-2-ar-and-ma-and-arma" title="Permalink to this heading">#</a></h3>
 <p>It is an exercise to show that the MA(1) process <span class="math notranslate nohighlight">\(X_t = \theta \epsilon_{t-1} + \epsilon_t\)</span> has a spectral density</p>
 <div class="math notranslate nohighlight" id="equation-ma1-sd-ed">
-<span class="eqno">(28.10)<a class="headerlink" href="#equation-ma1-sd-ed" title="Permalink to this equation">¶</a></span>\[f(\omega)
+<span class="eqno">(28.10)<a class="headerlink" href="#equation-ma1-sd-ed" title="Permalink to this equation">#</a></span>\[f(\omega)
 = \sigma^2 ( 1 + 2 \theta \cos(\omega) + \theta^2 )\]</div>
 <p>With a bit more effort, it’s possible to show (see, e.g., p. 261 of <span id="id14">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>) that the spectral density of the AR(1) process <span class="math notranslate nohighlight">\(X_t = \phi X_{t-1} + \epsilon_t\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-ar1-sd-ed">
-<span class="eqno">(28.11)<a class="headerlink" href="#equation-ar1-sd-ed" title="Permalink to this equation">¶</a></span>\[f(\omega)
+<span class="eqno">(28.11)<a class="headerlink" href="#equation-ar1-sd-ed" title="Permalink to this equation">#</a></span>\[f(\omega)
 = \frac{\sigma^2}{ 1 - 2 \phi \cos(\omega) + \phi^2 }\]</div>
 <p>More generally, it can be shown that the spectral density of the ARMA process <a class="reference internal" href="#equation-arma">(28.5)</a> is</p>
 <div class="math notranslate nohighlight" id="equation-arma-sd">
-<span id="arma-spec-den"></span><span class="eqno">(28.12)<a class="headerlink" href="#equation-arma-sd" title="Permalink to this equation">¶</a></span>\[f(\omega) = \left| \frac{\theta(e^{i\omega})}{\phi(e^{i\omega})} \right|^2 \sigma^2\]</div>
+<span id="arma-spec-den"></span><span class="eqno">(28.12)<a class="headerlink" href="#equation-arma-sd" title="Permalink to this equation">#</a></span>\[f(\omega) = \left| \frac{\theta(e^{i\omega})}{\phi(e^{i\omega})} \right|^2 \sigma^2\]</div>
 <p>where</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\sigma\)</span> is the standard deviation of the white noise process <span class="math notranslate nohighlight">\(\{\epsilon_t\}\)</span>.</p></li>
@@ -662,9 +584,9 @@ all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the p
 <p>The derivation of <a class="reference internal" href="#equation-arma-sd">(28.12)</a> uses the fact that convolutions become products under Fourier transformations.</p>
 <p>The proof is elegant and can be found in many places — see, for example, <span id="id15">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, chapter 11, section 4.</p>
 <p>It’s a nice exercise to verify that <a class="reference internal" href="#equation-ma1-sd-ed">(28.10)</a> and <a class="reference internal" href="#equation-ar1-sd-ed">(28.11)</a> are indeed special cases of <a class="reference internal" href="#equation-arma-sd">(28.12)</a>.</p>
-</div>
-<div class="section" id="interpreting-the-spectral-density">
-<h3><span class="section-number">28.3.5. </span>Interpreting the <span class="target" id="index-17"></span>Spectral Density<a class="headerlink" href="#interpreting-the-spectral-density" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="interpreting-the-spectral-density">
+<h3><span class="section-number">28.3.5. </span>Interpreting the <span class="target" id="index-17"></span>Spectral Density<a class="headerlink" href="#interpreting-the-spectral-density" title="Permalink to this heading">#</a></h3>
 <p id="index-18">Plotting <a class="reference internal" href="#equation-ar1-sd-ed">(28.11)</a> reveals the shape of the spectral density for the AR(1) model when <span class="math notranslate nohighlight">\(\phi\)</span> takes the values 0.8 and -0.8 respectively.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -689,7 +611,7 @@ all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/arma_7_0.png" src="_images/arma_7_0.png" />
+<img alt="_images/572b8cc8bdb29a08fdc832766505bd17bb2c400029a3720579aa7056338faee0.png" src="_images/572b8cc8bdb29a08fdc832766505bd17bb2c400029a3720579aa7056338faee0.png" />
 </div>
 </div>
 <p>These spectral densities correspond to the autocovariance functions for the
@@ -699,7 +621,7 @@ the autocovariance function seems approximately to exhibit big damped cycles.</p
 <p>To see the idea, let’s consider why, in the lower panel of the preceding figure, the spectral density for the case <span class="math notranslate nohighlight">\(\phi = -0.8\)</span> is large at <span class="math notranslate nohighlight">\(\omega = \pi\)</span>.</p>
 <p>Recall that the spectral density can be expressed as</p>
 <div class="math notranslate nohighlight" id="equation-sumpr">
-<span class="eqno">(28.13)<a class="headerlink" href="#equation-sumpr" title="Permalink to this equation">¶</a></span>\[f(\omega)
+<span class="eqno">(28.13)<a class="headerlink" href="#equation-sumpr" title="Permalink to this equation">#</a></span>\[f(\omega)
 = \gamma(0) + 2 \sum_{k \geq 1} \gamma(k) \cos(\omega k)
 = \gamma(0) + 2 \sum_{k \geq 1} (-0.8)^k \cos(\omega k)\]</div>
 <p>When we evaluate this at <span class="math notranslate nohighlight">\(\omega = \pi\)</span>, we get a large number because
@@ -747,7 +669,7 @@ products on the right-hand side of <a class="reference internal" href="#equation
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/arma_9_0.png" src="_images/arma_9_0.png" />
+<img alt="_images/07eafe2f851963c2b6dc23bf1f5118ce09c34f0c61e1d0e81f64931795f6de52.png" src="_images/07eafe2f851963c2b6dc23bf1f5118ce09c34f0c61e1d0e81f64931795f6de52.png" />
 </div>
 </div>
 <p>On the other hand, if we evaluate <span class="math notranslate nohighlight">\(f(\omega)\)</span> at <span class="math notranslate nohighlight">\(\omega = \pi / 3\)</span>, then the cycles are
@@ -792,23 +714,23 @@ both positive and negative terms, and hence the sum of these terms is much small
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/arma_11_0.png" src="_images/arma_11_0.png" />
+<img alt="_images/4b17c94aefd2d96a94802ce08ffea594d54e916fee0fe007e3b52709a4a165ed.png" src="_images/4b17c94aefd2d96a94802ce08ffea594d54e916fee0fe007e3b52709a4a165ed.png" />
 </div>
 </div>
 <p>In summary, the spectral density is large at frequencies <span class="math notranslate nohighlight">\(\omega\)</span> where the autocovariance function exhibits damped cycles.</p>
-</div>
-<div class="section" id="inverting-the-transformation">
-<h3><span class="section-number">28.3.6. </span>Inverting the Transformation<a class="headerlink" href="#inverting-the-transformation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="inverting-the-transformation">
+<h3><span class="section-number">28.3.6. </span>Inverting the Transformation<a class="headerlink" href="#inverting-the-transformation" title="Permalink to this heading">#</a></h3>
 <p id="index-19">We have just seen that the spectral density is useful in the sense that it provides a frequency-based perspective on the autocovariance structure of a covariance stationary process.</p>
 <p>Another reason that the spectral density is useful is that it can be “inverted” to recover the autocovariance function via the <em>inverse Fourier transform</em>.</p>
 <p>In particular, for all <span class="math notranslate nohighlight">\(k \in \mathbb Z\)</span>, we have</p>
 <div class="math notranslate nohighlight" id="equation-ift">
-<span class="eqno">(28.14)<a class="headerlink" href="#equation-ift" title="Permalink to this equation">¶</a></span>\[\gamma(k) = \frac{1}{2 \pi} \int_{-\pi}^{\pi} f(\omega) e^{i \omega k} d\omega\]</div>
+<span class="eqno">(28.14)<a class="headerlink" href="#equation-ift" title="Permalink to this equation">#</a></span>\[\gamma(k) = \frac{1}{2 \pi} \int_{-\pi}^{\pi} f(\omega) e^{i \omega k} d\omega\]</div>
 <p>This is convenient in situations where the spectral density is easier to calculate and manipulate than the autocovariance function.</p>
 <p>(For example, the expression <a class="reference internal" href="#equation-arma-sd">(28.12)</a> for the ARMA spectral density is much easier to work with than the expression for the ARMA autocovariance)</p>
-</div>
-<div class="section" id="mathematical-theory">
-<h3><span class="section-number">28.3.7. </span>Mathematical Theory<a class="headerlink" href="#mathematical-theory" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="mathematical-theory">
+<h3><span class="section-number">28.3.7. </span>Mathematical Theory<a class="headerlink" href="#mathematical-theory" title="Permalink to this heading">#</a></h3>
 <p id="index-20">This section is loosely based on <span id="id16">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, p. 249-253, and included for those who</p>
 <ul class="simple">
 <li><p>would like a bit more insight into spectral densities</p></li>
@@ -818,7 +740,7 @@ both positive and negative terms, and hence the sum of these terms is much small
 <p>Recall that every <a class="reference external" href="https://en.wikipedia.org/wiki/Separable_space">separable</a> Hilbert space <span class="math notranslate nohighlight">\(H\)</span> has a countable orthonormal basis <span class="math notranslate nohighlight">\(\{ h_k \}\)</span>.</p>
 <p>The nice thing about such a basis is that every <span class="math notranslate nohighlight">\(f \in H\)</span> satisfies</p>
 <div class="math notranslate nohighlight" id="equation-arma-fc">
-<span class="eqno">(28.15)<a class="headerlink" href="#equation-arma-fc" title="Permalink to this equation">¶</a></span>\[f = \sum_k \alpha_k h_k
+<span class="eqno">(28.15)<a class="headerlink" href="#equation-arma-fc" title="Permalink to this equation">#</a></span>\[f = \sum_k \alpha_k h_k
 \quad \text{where} \quad
 \alpha_k := \langle f, h_k \rangle\]</div>
 <p>where <span class="math notranslate nohighlight">\(\langle \cdot, \cdot \rangle\)</span> denotes the inner product in <span class="math notranslate nohighlight">\(H\)</span>.</p>
@@ -849,7 +771,7 @@ h_k(\omega) = \frac{e^{i \omega k}}{\sqrt{2 \pi}},
 \]</div>
 <p>Using the definition of <span class="math notranslate nohighlight">\(T\)</span> from above and the fact that <span class="math notranslate nohighlight">\(f\)</span> is even, we now have</p>
 <div class="math notranslate nohighlight" id="equation-arma-it">
-<span class="eqno">(28.16)<a class="headerlink" href="#equation-arma-it" title="Permalink to this equation">¶</a></span>\[T \gamma
+<span class="eqno">(28.16)<a class="headerlink" href="#equation-arma-it" title="Permalink to this equation">#</a></span>\[T \gamma
 = \sum_{k \in \mathbb Z}
 \gamma(k) \frac{e^{i \omega k}}{\sqrt{2 \pi}} = \frac{1}{\sqrt{2 \pi}} f(\omega)\]</div>
 <p>In other words, apart from a scalar multiple, the spectral density is just a transformation of <span class="math notranslate nohighlight">\(\gamma \in \ell_2\)</span> under a certain linear isometry — a different way to view <span class="math notranslate nohighlight">\(\gamma\)</span>.</p>
@@ -858,22 +780,22 @@ h_k(\omega) = \frac{e^{i \omega k}}{\sqrt{2 \pi}},
 in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle T \gamma, h_k \rangle\)</span>.</p>
 <p>Transforming this inner product into its integral expression and using <a class="reference internal" href="#equation-arma-it">(28.16)</a> gives
 <a class="reference internal" href="#equation-ift">(28.14)</a>, justifying our earlier expression for the inverse transform.</p>
-</div>
-</div>
-<div class="section" id="implementation">
-<span id="arma-imp"></span><h2><a class="toc-backref" href="#id23"><span class="section-number">28.4. </span>Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="implementation">
+<span id="arma-imp"></span><h2><a class="toc-backref" href="#id23"><span class="section-number">28.4. </span>Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
 <p>Most code for working with covariance stationary models deals with ARMA models.</p>
 <p>Python code for studying ARMA models can be found in the <code class="docutils literal notranslate"><span class="pre">tsa</span></code> submodule of <a class="reference external" href="http://statsmodels.sourceforge.net/">statsmodels</a>.</p>
 <p>Since this code doesn’t quite cover our needs — particularly vis-a-vis spectral analysis — we’ve put together the module <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/arma.py">arma.py</a>, which is part of <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> package.</p>
 <p>The module provides functions for mapping ARMA(<span class="math notranslate nohighlight">\(p,q\)</span>) models into their</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>impulse response function</p></li>
 <li><p>simulated time series</p></li>
 <li><p>autocovariance function</p></li>
 <li><p>spectral density</p></li>
 </ol>
-<div class="section" id="application">
-<h3><span class="section-number">28.4.1. </span>Application<a class="headerlink" href="#application" title="Permalink to this headline">¶</a></h3>
+<section id="application">
+<h3><span class="section-number">28.4.1. </span>Application<a class="headerlink" href="#application" title="Permalink to this heading">#</a></h3>
 <p>Let’s use this code to replicate the plots on pages 68–69 of <span id="id17">[<a class="reference internal" href="zreferences.html#id173" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">LS18</a>]</span>.</p>
 <p>Here are some functions to generate the plots</p>
 <div class="cell docutils container">
@@ -914,7 +836,7 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
     <span class="k">return</span> <span class="n">ax</span>
 
 <span class="k">def</span> <span class="nf">quad_plot</span><span class="p">(</span><span class="n">arma</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots the impulse response, spectral_density, autocovariance,</span>
 <span class="sd">    and one realization of the process.</span>
 
@@ -947,14 +869,14 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/cbook/__init__.py:1298: ComplexWarning: Casting complex values to real discards the imaginary part
   return np.asarray(x, float)
-/tmp/ipykernel_10391/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
+/tmp/ipykernel_11548/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/transforms.py:1008: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/arma_15_1.png" src="_images/arma_15_1.png" />
+<img alt="_images/e2a9c10f726e4d7f5ec8ef54a0474979b735c4faa28019d5316d9dde798a43b4.png" src="_images/e2a9c10f726e4d7f5ec8ef54a0474979b735c4faa28019d5316d9dde798a43b4.png" />
 </div>
 </div>
 <p>If we look carefully, things look good: the spectrum is the flat line at <span class="math notranslate nohighlight">\(10^0\)</span> at the very top of the spectrum graphs,
@@ -980,14 +902,14 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/cbook/__init__.py:1298: ComplexWarning: Casting complex values to real discards the imaginary part
   return np.asarray(x, float)
-/tmp/ipykernel_10391/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
+/tmp/ipykernel_11548/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/transforms.py:1008: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/arma_17_1.png" src="_images/arma_17_1.png" />
+<img alt="_images/ae59cf1ff0e6651a00093a7508e9bef044ca388ecf205bc6ee5cb804175d8981.png" src="_images/ae59cf1ff0e6651a00093a7508e9bef044ca388ecf205bc6ee5cb804175d8981.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s second model is <span class="math notranslate nohighlight">\(X_t = .9 X_{t-1} + \epsilon_t\)</span></p>
@@ -1003,14 +925,14 @@ Invalid limit will be ignored.
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/cbook/__init__.py:1298: ComplexWarning: Casting complex values to real discards the imaginary part
   return np.asarray(x, float)
-/tmp/ipykernel_10391/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
+/tmp/ipykernel_11548/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/transforms.py:1008: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/arma_19_1.png" src="_images/arma_19_1.png" />
+<img alt="_images/b37b1e668665e3b6e4501748036fa4ca2d6f1d90efd4404e6773bf1c65edcf60.png" src="_images/b37b1e668665e3b6e4501748036fa4ca2d6f1d90efd4404e6773bf1c65edcf60.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s third  model is  <span class="math notranslate nohighlight">\(X_t = .8 X_{t-4} + \epsilon_t\)</span></p>
@@ -1026,14 +948,14 @@ Invalid limit will be ignored.
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/cbook/__init__.py:1298: ComplexWarning: Casting complex values to real discards the imaginary part
   return np.asarray(x, float)
-/tmp/ipykernel_10391/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
+/tmp/ipykernel_11548/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/transforms.py:1008: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/arma_21_1.png" src="_images/arma_21_1.png" />
+<img alt="_images/d1da111002f0ead2eabc1a7809653548b13434dafcb1000ff07bc103cc1cd3be.png" src="_images/d1da111002f0ead2eabc1a7809653548b13434dafcb1000ff07bc103cc1cd3be.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s fourth  model is  <span class="math notranslate nohighlight">\(X_t = .98 X_{t-1}  + \epsilon_t -.7 \epsilon_{t-1}\)</span></p>
@@ -1049,19 +971,19 @@ Invalid limit will be ignored.
 <div class="cell_output docutils container">
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/cbook/__init__.py:1298: ComplexWarning: Casting complex values to real discards the imaginary part
   return np.asarray(x, float)
-/tmp/ipykernel_10391/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
+/tmp/ipykernel_11548/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
 Invalid limit will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/transforms.py:1008: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/arma_23_1.png" src="_images/arma_23_1.png" />
+<img alt="_images/b52ea1d8ab95330efd8cb19bcb4601a675fb4f7e9fa58172804ebab73ff12ea6.png" src="_images/b52ea1d8ab95330efd8cb19bcb4601a675fb4f7e9fa58172804ebab73ff12ea6.png" />
 </div>
 </div>
-</div>
-<div class="section" id="explanation">
-<h3><span class="section-number">28.4.2. </span>Explanation<a class="headerlink" href="#explanation" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="explanation">
+<h3><span class="section-number">28.4.2. </span>Explanation<a class="headerlink" href="#explanation" title="Permalink to this heading">#</a></h3>
 <p>The call</p>
 <blockquote>
 <div><p><code class="docutils literal notranslate"><span class="pre">arma</span> <span class="pre">=</span> <span class="pre">ARMA(ϕ,</span> <span class="pre">θ,</span> <span class="pre">σ)</span></code></p>
@@ -1098,9 +1020,9 @@ X_t = \phi X_{t-1} + \epsilon_t + \theta \epsilon_{t-1}
 such as <code class="docutils literal notranslate"><span class="pre">arma.phi</span> <span class="pre">=</span> <span class="pre">(0.5,</span> <span class="pre">0.2)</span></code> or <code class="docutils literal notranslate"><span class="pre">arma.theta</span> <span class="pre">=</span> <span class="pre">(0,</span> <span class="pre">-0.1)</span></code>.</p>
 <p>then <code class="docutils literal notranslate"><span class="pre">ma_poly</span></code> and <code class="docutils literal notranslate"><span class="pre">ar_poly</span></code> should update automatically to reflect these new parameters.</p>
 <p>This is achieved in our implementation by using <a class="reference external" href="https://python-programming.quantecon.org/python_advanced_features.html#descriptors">descriptors</a>.</p>
-</div>
-<div class="section" id="computing-the-autocovariance-function">
-<h3><span class="section-number">28.4.3. </span>Computing the Autocovariance Function<a class="headerlink" href="#computing-the-autocovariance-function" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="computing-the-autocovariance-function">
+<h3><span class="section-number">28.4.3. </span>Computing the Autocovariance Function<a class="headerlink" href="#computing-the-autocovariance-function" title="Permalink to this heading">#</a></h3>
 <p>As discussed above, for ARMA processes the spectral density has a <a class="reference internal" href="#arma-spec-den"><span class="std std-ref">simple representation</span></a> that is relatively easy to calculate.</p>
 <p>Given this fact, the easiest way to obtain the autocovariance function is to recover it from the spectral
 density via the inverse Fourier transform.</p>
@@ -1130,9 +1052,9 @@ a_k
 \]</div>
 <p>(You can check the last equality)</p>
 <p>In view of <a class="reference internal" href="#equation-ift">(28.14)</a>, we have now shown that, for <span class="math notranslate nohighlight">\(n\)</span> sufficiently large, <span class="math notranslate nohighlight">\(a_k \approx \gamma(k)\)</span> — which is exactly what we want to compute.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1146,7 +1068,7 @@ a_k
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1517,7 +1439,7 @@ a_k
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
                     <!-- <li class="btn__search">
                         <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
                             <i data-feather="search"></i>
                         </form>
                     </li> -->
@@ -1659,16 +1581,5 @@ a_k
         </div>
 
     </div> <!-- .wrapper-->
-    
-<script async="" src="https://www.google-analytics.com/analytics.js"></script>
-<script>
-                        window.ga = window.ga || function () {
-                            (ga.q = ga.q || []).push(arguments) };
-                        ga.l = +new Date;
-                        ga('create', 'UA-54984338-11', 'auto');
-                        ga('set', 'anonymizeIp', true);
-                        ga('send', 'pageview');
-                    </script>
-
   </body>
 </html>
