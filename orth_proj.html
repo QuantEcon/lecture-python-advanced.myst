@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>1. Orthogonal Projections and Their Applications &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -248,8 +248,8 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="orthogonal-projections-and-their-applications">
-<h1><a class="toc-backref" href="#id2"><span class="section-number">1. </span>Orthogonal Projections and Their Applications</a><a class="headerlink" href="#orthogonal-projections-and-their-applications" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
+<h1><a class="toc-backref" href="#id2" role="doc-backlink"><span class="section-number">1. </span>Orthogonal Projections and Their Applications</a><a class="headerlink" href="#orthogonal-projections-and-their-applications" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
 <span id="index-0"></span><p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#orthogonal-projections-and-their-applications" id="id2">Orthogonal Projections and Their Applications</a></p>
@@ -265,9 +265,9 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <section id="overview">
-<h2><a class="toc-backref" href="#id3"><span class="section-number">1.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink"><span class="section-number">1.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>Orthogonal projection is a cornerstone of vector space methods, with many diverse applications.</p>
 <p>These include</p>
 <ul class="simple">
@@ -301,7 +301,7 @@ const thebe_selector_output = ".output, .cell_output"
 </section>
 </section>
 <section id="key-definitions">
-<h2><a class="toc-backref" href="#id4"><span class="section-number">1.2. </span>Key Definitions</a><a class="headerlink" href="#key-definitions" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink"><span class="section-number">1.2. </span>Key Definitions</a><a class="headerlink" href="#key-definitions" title="Permalink to this heading">#</a></h2>
 <p>Assume  <span class="math notranslate nohighlight">\(x, z \in \mathbb R^n\)</span>.</p>
 <p>Define <span class="math notranslate nohighlight">\(\langle x,  z\rangle = \sum_i x_i z_i\)</span>.</p>
 <p>Recall <span class="math notranslate nohighlight">\(\|x \|^2 = \langle x, x \rangle\)</span>.</p>
@@ -355,7 +355,7 @@ const thebe_selector_output = ".output, .cell_output"
 </section>
 </section>
 <section id="the-orthogonal-projection-theorem">
-<h2><a class="toc-backref" href="#id5"><span class="section-number">1.3. </span>The Orthogonal Projection Theorem</a><a class="headerlink" href="#the-orthogonal-projection-theorem" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink"><span class="section-number">1.3. </span>The Orthogonal Projection Theorem</a><a class="headerlink" href="#the-orthogonal-projection-theorem" title="Permalink to this heading">#</a></h2>
 <p>What vector within a linear subspace of <span class="math notranslate nohighlight">\(\mathbb R^n\)</span>  best approximates a given vector in <span class="math notranslate nohighlight">\(\mathbb R^n\)</span>?</p>
 <p>The next theorem answers this question.</p>
 <p><strong>Theorem</strong> (OPT) Given <span class="math notranslate nohighlight">\(y \in \mathbb R^n\)</span> and linear subspace <span class="math notranslate nohighlight">\(S \subset \mathbb R^n\)</span>,
@@ -448,7 +448,7 @@ y = P y + M y
 </section>
 </section>
 <section id="orthonormal-basis">
-<h2><a class="toc-backref" href="#id6"><span class="section-number">1.4. </span>Orthonormal Basis</a><a class="headerlink" href="#orthonormal-basis" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink"><span class="section-number">1.4. </span>Orthonormal Basis</a><a class="headerlink" href="#orthonormal-basis" title="Permalink to this heading">#</a></h2>
 <p>An orthogonal set of vectors <span class="math notranslate nohighlight">\(O \subset \mathbb R^n\)</span> is called an <strong>orthonormal set</strong> if <span class="math notranslate nohighlight">\(\| u \| = 1\)</span> for all <span class="math notranslate nohighlight">\(u \in O\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(S\)</span> be a linear subspace of <span class="math notranslate nohighlight">\(\mathbb R^n\)</span> and let <span class="math notranslate nohighlight">\(O \subset S\)</span>.</p>
 <p>If <span class="math notranslate nohighlight">\(O\)</span> is orthonormal and <span class="math notranslate nohighlight">\(\mathop{\mathrm{span}} O = S\)</span>, then <span class="math notranslate nohighlight">\(O\)</span> is called an <strong>orthonormal basis</strong> of <span class="math notranslate nohighlight">\(S\)</span>.</p>
@@ -497,7 +497,7 @@ scalars <span class="math notranslate nohighlight">\(\alpha_1, \ldots, \alpha_k\
 </section>
 </section>
 <section id="projection-via-matrix-algebra">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">1.5. </span>Projection Via Matrix Algebra</a><a class="headerlink" href="#projection-via-matrix-algebra" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink"><span class="section-number">1.5. </span>Projection Via Matrix Algebra</a><a class="headerlink" href="#projection-via-matrix-algebra" title="Permalink to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(S\)</span> be a linear subspace of <span class="math notranslate nohighlight">\(\mathbb R^n\)</span> and  let <span class="math notranslate nohighlight">\(y \in \mathbb R^n\)</span>.</p>
 <p>We want to compute the matrix <span class="math notranslate nohighlight">\(P\)</span> that verifies</p>
 <div class="math notranslate nohighlight">
@@ -616,7 +616,7 @@ P y
 </section>
 </section>
 <section id="least-squares-regression">
-<h2><a class="toc-backref" href="#id8"><span class="section-number">1.6. </span>Least Squares Regression</a><a class="headerlink" href="#least-squares-regression" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink"><span class="section-number">1.6. </span>Least Squares Regression</a><a class="headerlink" href="#least-squares-regression" title="Permalink to this heading">#</a></h2>
 <p>Let’s apply the theory of orthogonal projection to least squares regression.</p>
 <p>This approach provides insights about  many geometric  properties of linear regression.</p>
 <p>We treat only some examples.</p>
@@ -738,7 +738,7 @@ M := I - P
 </section>
 </section>
 <section id="orthogonalization-and-decomposition">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">1.7. </span>Orthogonalization and Decomposition</a><a class="headerlink" href="#orthogonalization-and-decomposition" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink"><span class="section-number">1.7. </span>Orthogonalization and Decomposition</a><a class="headerlink" href="#orthogonalization-and-decomposition" title="Permalink to this heading">#</a></h2>
 <p>Let’s return to the connection between linear independence and orthogonality touched on above.</p>
 <p>A result of much interest is a famous algorithm for constructing orthonormal sets from linearly independent sets.</p>
 <p>The next section gives details.</p>
@@ -805,7 +805,7 @@ equation system <span class="math notranslate nohighlight">\(y = X \beta\)</span
 </section>
 </section>
 <section id="exercises">
-<h2><a class="toc-backref" href="#id10"><span class="section-number">1.8. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">1.8. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="op_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 1.1 </span></p>
@@ -883,7 +883,7 @@ algorithm given in the lecture</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gram_schmidt</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implements Gram-Schmidt orthogonalization.</span>
 
 <span class="sd">    Parameters</span>

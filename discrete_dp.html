@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>4. Discrete State Dynamic Programming &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -259,8 +259,8 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="discrete-state-dynamic-programming">
-<h1><a class="toc-backref" href="#id11"><span class="section-number">4. </span><span class="target" id="index-0"></span>Discrete State Dynamic Programming</a><a class="headerlink" href="#discrete-state-dynamic-programming" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
+<h1><a class="toc-backref" href="#id11" role="doc-backlink"><span class="section-number">4. </span><span class="target" id="index-0"></span>Discrete State Dynamic Programming</a><a class="headerlink" href="#discrete-state-dynamic-programming" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#discrete-state-dynamic-programming" id="id11">Discrete State Dynamic Programming</a></p>
@@ -275,11 +275,11 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
 </pre></div>
 </div>
 </div>
@@ -289,30 +289,30 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.6.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (0.6.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
-Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.22.4)
-Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
-Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
-Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.11.1)
+Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.23.5)
+Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (2.28.1)
+Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (0.56.4)
+Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.10.0)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (65.6.3)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (0.39.1)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;3,&gt;=2 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (3.4)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2022.12.7)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (1.26.14)
+Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/mpmath-1.2.1-py3.10.egg (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 </div>
 </details>
 </div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">4.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id12" role="doc-backlink"><span class="section-number">4.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>In this lecture we discuss a family of dynamic programming problems with the following features:</p>
 <ol class="arabic simple">
 <li><p>a discrete state space and discrete choices (actions)</p></li>
@@ -387,7 +387,7 @@ seamlessly if you are using <a class="reference external" href="https://www.anac
 </section>
 </section>
 <section id="discrete-dps">
-<span id="id7"></span><h2><a class="toc-backref" href="#id13"><span class="section-number">4.2. </span>Discrete DPs</a><a class="headerlink" href="#discrete-dps" title="Permalink to this heading">#</a></h2>
+<span id="id7"></span><h2><a class="toc-backref" href="#id13" role="doc-backlink"><span class="section-number">4.2. </span>Discrete DPs</a><a class="headerlink" href="#discrete-dps" title="Permalink to this heading">#</a></h2>
 <p>Loosely speaking, a discrete DP is a maximization problem with an objective
 function of the form</p>
 <div class="math notranslate nohighlight" id="equation-dp-objective">
@@ -574,7 +574,7 @@ v(s) = \max_{a \in A(s)}
 </section>
 </section>
 <section id="solving-discrete-dps">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">4.3. </span>Solving Discrete DPs</a><a class="headerlink" href="#solving-discrete-dps" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id14" role="doc-backlink"><span class="section-number">4.3. </span>Solving Discrete DPs</a><a class="headerlink" href="#solving-discrete-dps" title="Permalink to this heading">#</a></h2>
 <p>Now that the theory has been set out, let’s turn to solution methods.</p>
 <p>The code for solving discrete DPs is available in <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/markov/ddp.py">ddp.py</a> from the <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> code library.</p>
 <p>It implements the three most important solution methods for discrete dynamic programs, namely</p>
@@ -614,7 +614,7 @@ v(s) = \max_{a \in A(s)}
 </section>
 </section>
 <section id="example-a-growth-model">
-<span id="ddp-eg-gm"></span><h2><a class="toc-backref" href="#id15"><span class="section-number">4.4. </span>Example: A Growth Model</a><a class="headerlink" href="#example-a-growth-model" title="Permalink to this heading">#</a></h2>
+<span id="ddp-eg-gm"></span><h2><a class="toc-backref" href="#id15" role="doc-backlink"><span class="section-number">4.4. </span>Example: A Growth Model</a><a class="headerlink" href="#example-a-growth-model" title="Permalink to this heading">#</a></h2>
 <p>Let’s consider a simple consumption-saving model.</p>
 <p>A single household either consumes or stores its own output of a single consumption good.</p>
 <p>The household starts each period with current stock <span class="math notranslate nohighlight">\(s\)</span>.</p>
@@ -684,7 +684,7 @@ the following information</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SimpleOG</span><span class="p">:</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set up R, Q and β, the three elements that define an instance of</span>
 <span class="sd">        the DiscreteDP class.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -703,7 +703,7 @@ the following information</p>
         <span class="k">return</span> <span class="n">c</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">α</span>
 
     <span class="k">def</span> <span class="nf">populate_R</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Populate the R matrix, with R[s, a] = -np.inf for infeasible</span>
 <span class="sd">        state-action pairs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -712,7 +712,7 @@ the following information</p>
                 <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">s</span> <span class="k">else</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
 
     <span class="k">def</span> <span class="nf">populate_Q</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Populate the Q matrix by setting</span>
 
 <span class="sd">            Q[s, a, s&#39;] = 1 / (1 + B) if a &lt;= s&#39; &lt;= a + B</span>
@@ -910,12 +910,12 @@ can easily simulate it, compute its stationary distribution and so on.</p>
 </section>
 </section>
 <section id="exercises">
-<h2><a class="toc-backref" href="#id16"><span class="section-number">4.5. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink"><span class="section-number">4.5. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <p>In the <a class="reference external" href="https://python-intro.quantecon.org/optgrowth.html">stochastic optimal growth lecture</a> from our introductory lecture series, we solve a benchmark model that has an analytical solution.</p>
 <p>The exercise is to replicate this solution using <code class="docutils literal notranslate"><span class="pre">DiscreteDP</span></code>.</p>
 </section>
 <section id="solutions">
-<h2><a class="toc-backref" href="#id17"><span class="section-number">4.6. </span>Solutions</a><a class="headerlink" href="#solutions" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink"><span class="section-number">4.6. </span>Solutions</a><a class="headerlink" href="#solutions" title="Permalink to this heading">#</a></h2>
 <section id="setup">
 <h3><span class="section-number">4.6.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h3>
 <p>Details of the model can be found in <a class="reference external" href="https://python-intro.quantecon.org/optgrowth.html">the lecture on optimal growth</a>.</p>
@@ -1088,7 +1088,7 @@ original continuous model</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cc73f75ed90014f3475c41199754323519f2ddb1d5e067d61fb5ab497d6d939a.png" src="_images/cc73f75ed90014f3475c41199754323519f2ddb1d5e067d61fb5ab497d6d939a.png" />
+<img alt="_images/87a456e2dc327d0424666075df459f115ce6c0389340a0d854f3b33807b7b9b4.png" src="_images/87a456e2dc327d0424666075df459f115ce6c0389340a0d854f3b33807b7b9b4.png" />
 </div>
 </div>
 <p>The outcomes appear very close to those of the continuous version.</p>
@@ -1100,7 +1100,7 @@ original continuous model</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>121.49819147053373
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>121.49819147053378
 </pre></div>
 </div>
 </div>
@@ -1256,13 +1256,13 @@ really monotone, but the decrements are quite small:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>162 ms ± 485 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>168 ms ± 118 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.7 ms ± 42 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>16 ms ± 56.8 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17.6 ms ± 13.1 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>18.8 ms ± 32.1 µs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
 </div>
@@ -1300,7 +1300,7 @@ a method of <code class="docutils literal notranslate"><span class="pre">Discret
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/506b599da9cc738dc170f0c0e4df2d868248ff39f2cb3627727a23373df017f7.png" src="_images/506b599da9cc738dc170f0c0e4df2d868248ff39f2cb3627727a23373df017f7.png" />
+<img alt="_images/e513af85583077475fb971c25439797081daf8a0ac94bdc59d4fd5f4a3c77845.png" src="_images/e513af85583077475fb971c25439797081daf8a0ac94bdc59d4fd5f4a3c77845.png" />
 </div>
 </div>
 <p>We next plot the consumption policies along with the value iteration</p>
@@ -1335,33 +1335,29 @@ a method of <code class="docutils literal notranslate"><span class="pre">Discret
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration    Distance       Elapsed (seconds)
 ---------------------------------------------
-1            5.518e+00      1.129e-03         
-2            4.070e+00      1.832e-03         
+1            5.518e+00      1.169e-03         
+2            4.070e+00      1.929e-03         
 Iteration    Distance       Elapsed (seconds)
 ---------------------------------------------
-1            5.518e+00      8.745e-04         
-2            4.070e+00      1.636e-03         
-3            3.866e+00      2.309e-03         
-4            3.673e+00      2.938e-03         
+1            5.518e+00      6.874e-04         
+2            4.070e+00      1.351e-03         
+3            3.866e+00      1.964e-03         
+4            3.673e+00      2.569e-03         
 Iteration    Distance       Elapsed (seconds)
 ---------------------------------------------
-1            5.518e+00      8.712e-04         
-2            4.070e+00      1.550e-03         
-3            3.866e+00      2.288e-03         
-4            3.673e+00      2.958e-03         
-5            3.489e+00      3.625e-03         
-6            3.315e+00      4.319e-03         
+1            5.518e+00      6.578e-04         
+2            4.070e+00      1.277e-03         
+3            3.866e+00      1.885e-03         
+4            3.673e+00      2.489e-03         
+5            3.489e+00      3.121e-03         
+6            3.315e+00      3.732e-03         
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/quantecon/_compute_fp.py:151: RuntimeWarning: max_iter attained before convergence in compute_fixed_point
-  warnings.warn(_non_convergence_msg, RuntimeWarning)
-/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/quantecon/_compute_fp.py:151: RuntimeWarning: max_iter attained before convergence in compute_fixed_point
-  warnings.warn(_non_convergence_msg, RuntimeWarning)
-/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/quantecon/_compute_fp.py:151: RuntimeWarning: max_iter attained before convergence in compute_fixed_point
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/quantecon/_compute_fp.py:151: RuntimeWarning: max_iter attained before convergence in compute_fixed_point
   warnings.warn(_non_convergence_msg, RuntimeWarning)
 </pre></div>
 </div>
-<img alt="_images/f47de85eda3728ea1b36a9cb130f89649bd66c97ad634cd56c39713811c40431.png" src="_images/f47de85eda3728ea1b36a9cb130f89649bd66c97ad634cd56c39713811c40431.png" />
+<img alt="_images/779fcaa30033fa38525b7acb8e016fcf3f09ed62a1b7ebcf8842a876621757fd.png" src="_images/779fcaa30033fa38525b7acb8e016fcf3f09ed62a1b7ebcf8842a876621757fd.png" />
 </div>
 </div>
 </section>
@@ -1403,14 +1399,14 @@ condition <span class="math notranslate nohighlight">\(k_0 = 0.1\)</span>.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4e675f0f20bedbcb682d0a6ea00fe591fd523032d9740589606311bcbbcde55f.png" src="_images/4e675f0f20bedbcb682d0a6ea00fe591fd523032d9740589606311bcbbcde55f.png" />
+<img alt="_images/9246eb7f4dedb401d866ba412d2fa705a80a9038335f71e690dcb09fec4778e5.png" src="_images/9246eb7f4dedb401d866ba412d2fa705a80a9038335f71e690dcb09fec4778e5.png" />
 </div>
 </div>
 </section>
 </section>
 </section>
 <section id="appendix-algorithms">
-<span id="ddp-algorithms"></span><h2><a class="toc-backref" href="#id18"><span class="section-number">4.7. </span>Appendix: Algorithms</a><a class="headerlink" href="#appendix-algorithms" title="Permalink to this heading">#</a></h2>
+<span id="ddp-algorithms"></span><h2><a class="toc-backref" href="#id18" role="doc-backlink"><span class="section-number">4.7. </span>Appendix: Algorithms</a><a class="headerlink" href="#appendix-algorithms" title="Permalink to this heading">#</a></h2>
 <p>This appendix covers the details of the solution algorithms implemented for <code class="docutils literal notranslate"><span class="pre">DiscreteDP</span></code>.</p>
 <p>We will make use of the following notions of approximate optimality:</p>
 <ul class="simple">

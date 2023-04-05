@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>28. Covariance Stationary Processes &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -241,8 +241,8 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="covariance-stationary-processes">
-<h1><a class="toc-backref" href="#id19"><span class="section-number">28. </span><span class="target" id="index-0"></span>Covariance Stationary Processes</a><a class="headerlink" href="#covariance-stationary-processes" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
+<h1><a class="toc-backref" href="#id19" role="doc-backlink"><span class="section-number">28. </span><span class="target" id="index-0"></span>Covariance Stationary Processes</a><a class="headerlink" href="#covariance-stationary-processes" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#covariance-stationary-processes" id="id19">Covariance Stationary Processes</a></p>
@@ -254,11 +254,11 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
 </pre></div>
 </div>
 </div>
@@ -268,30 +268,30 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.6.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (0.6.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
-Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
-Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.22.4)
-Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
-Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
-Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (2.28.1)
+Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.10.0)
+Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.23.5)
+Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.11.1)
+Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (0.56.4)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (0.39.1)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (65.6.3)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;3,&gt;=2 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2022.12.7)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (3.4)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (1.26.14)
+Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/mpmath-1.2.1-py3.10.egg (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 </div>
 </details>
 </div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id20"><span class="section-number">28.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id20" role="doc-backlink"><span class="section-number">28.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>In this lecture we study covariance stationary linear stochastic processes, a
 class of models routinely used to study economic and financial time series.</p>
 <p>This class has the advantage of being</p>
@@ -344,7 +344,7 @@ autocovariance function of a covariance stationary process.</p>
 </section>
 </section>
 <section id="introduction">
-<h2><a class="toc-backref" href="#id21"><span class="section-number">28.2. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id21" role="doc-backlink"><span class="section-number">28.2. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>Consider a sequence of random variables <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> indexed by <span class="math notranslate nohighlight">\(t \in \mathbb Z\)</span> and taking values in <span class="math notranslate nohighlight">\(\mathbb R\)</span>.</p>
 <p>Thus, <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> begins in the infinite past and extends to the infinite future — a convenient and standard assumption.</p>
 <p>As in other fields, successful economic modeling typically assumes the existence of features that are constant over time.</p>
@@ -449,7 +449,7 @@ X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j} + \eta_t
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/93c92e45ff4673c85fc979f90bb6fc914309563fc2b69a0918373a30c2a957f4.png" src="_images/93c92e45ff4673c85fc979f90bb6fc914309563fc2b69a0918373a30c2a957f4.png" />
+<img alt="_images/cfdba6d7bd367658b95c12cadab299578b4113ad89a71c4e7619c595a90d1885.png" src="_images/cfdba6d7bd367658b95c12cadab299578b4113ad89a71c4e7619c595a90d1885.png" />
 </div>
 </div>
 <p>Another very simple process is the MA(1) process (here MA means “moving average”)</p>
@@ -505,7 +505,7 @@ average process</em>, or ARMA(<span class="math notranslate nohighlight">\(p,q\)
 </section>
 </section>
 <section id="id12">
-<h2><a class="toc-backref" href="#id22"><span class="section-number">28.3. </span><span class="target" id="index-10"></span>Spectral Analysis</a><a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id22" role="doc-backlink"><span class="section-number">28.3. </span><span class="target" id="index-10"></span>Spectral Analysis</a><a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
 <p>Autocovariance functions provide a great deal of information about covariance stationary processes.</p>
 <p>In fact, for zero-mean Gaussian processes, the autocovariance function characterizes the entire joint distribution.</p>
 <p>Even for non-Gaussian processes, it provides a significant amount of information.</p>
@@ -611,7 +611,7 @@ all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the p
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/572b8cc8bdb29a08fdc832766505bd17bb2c400029a3720579aa7056338faee0.png" src="_images/572b8cc8bdb29a08fdc832766505bd17bb2c400029a3720579aa7056338faee0.png" />
+<img alt="_images/d1e94f51433856cc5b7158c65b0d22da01b349a889056cecd6b4a369cfbaa223.png" src="_images/d1e94f51433856cc5b7158c65b0d22da01b349a889056cecd6b4a369cfbaa223.png" />
 </div>
 </div>
 <p>These spectral densities correspond to the autocovariance functions for the
@@ -669,7 +669,7 @@ products on the right-hand side of <a class="reference internal" href="#equation
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/07eafe2f851963c2b6dc23bf1f5118ce09c34f0c61e1d0e81f64931795f6de52.png" src="_images/07eafe2f851963c2b6dc23bf1f5118ce09c34f0c61e1d0e81f64931795f6de52.png" />
+<img alt="_images/16c7b125032639e81f3a788192c2c146e93fb078e62a6ea4dacc2bf23851a4ed.png" src="_images/16c7b125032639e81f3a788192c2c146e93fb078e62a6ea4dacc2bf23851a4ed.png" />
 </div>
 </div>
 <p>On the other hand, if we evaluate <span class="math notranslate nohighlight">\(f(\omega)\)</span> at <span class="math notranslate nohighlight">\(\omega = \pi / 3\)</span>, then the cycles are
@@ -714,7 +714,7 @@ both positive and negative terms, and hence the sum of these terms is much small
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4b17c94aefd2d96a94802ce08ffea594d54e916fee0fe007e3b52709a4a165ed.png" src="_images/4b17c94aefd2d96a94802ce08ffea594d54e916fee0fe007e3b52709a4a165ed.png" />
+<img alt="_images/e4c308eda52cc52e3a09c92b9a9e970ab4e9ef436ede31a11a070403c8480013.png" src="_images/e4c308eda52cc52e3a09c92b9a9e970ab4e9ef436ede31a11a070403c8480013.png" />
 </div>
 </div>
 <p>In summary, the spectral density is large at frequencies <span class="math notranslate nohighlight">\(\omega\)</span> where the autocovariance function exhibits damped cycles.</p>
@@ -783,7 +783,7 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
 </section>
 </section>
 <section id="implementation">
-<span id="arma-imp"></span><h2><a class="toc-backref" href="#id23"><span class="section-number">28.4. </span>Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
+<span id="arma-imp"></span><h2><a class="toc-backref" href="#id23" role="doc-backlink"><span class="section-number">28.4. </span>Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
 <p>Most code for working with covariance stationary models deals with ARMA models.</p>
 <p>Python code for studying ARMA models can be found in the <code class="docutils literal notranslate"><span class="pre">tsa</span></code> submodule of <a class="reference external" href="http://statsmodels.sourceforge.net/">statsmodels</a>.</p>
 <p>Since this code doesn’t quite cover our needs — particularly vis-a-vis spectral analysis — we’ve put together the module <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/arma.py">arma.py</a>, which is part of <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> package.</p>
@@ -836,7 +836,7 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
     <span class="k">return</span> <span class="n">ax</span>
 
 <span class="k">def</span> <span class="nf">quad_plot</span><span class="p">(</span><span class="n">arma</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Plots the impulse response, spectral_density, autocovariance,</span>
 <span class="sd">    and one realization of the process.</span>
 
@@ -867,16 +867,15 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/cbook/__init__.py:1298: ComplexWarning: Casting complex values to real discards the imaginary part
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/matplotlib/cbook/__init__.py:1335: ComplexWarning: Casting complex values to real discards the imaginary part
   return np.asarray(x, float)
-/tmp/ipykernel_11548/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
-Invalid limit will be ignored.
+/tmp/ipykernel_11272/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
-/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/transforms.py:1008: ComplexWarning: Casting complex values to real discards the imaginary part
+/usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/matplotlib/transforms.py:995: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/e2a9c10f726e4d7f5ec8ef54a0474979b735c4faa28019d5316d9dde798a43b4.png" src="_images/e2a9c10f726e4d7f5ec8ef54a0474979b735c4faa28019d5316d9dde798a43b4.png" />
+<img alt="_images/a7d5289bda774e88a7ea2f00434d2153d1329892f98bf447b36a65331d4536b4.png" src="_images/a7d5289bda774e88a7ea2f00434d2153d1329892f98bf447b36a65331d4536b4.png" />
 </div>
 </div>
 <p>If we look carefully, things look good: the spectrum is the flat line at <span class="math notranslate nohighlight">\(10^0\)</span> at the very top of the spectrum graphs,
@@ -900,16 +899,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/cbook/__init__.py:1298: ComplexWarning: Casting complex values to real discards the imaginary part
-  return np.asarray(x, float)
-/tmp/ipykernel_11548/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
-Invalid limit will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11272/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
-/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/transforms.py:1008: ComplexWarning: Casting complex values to real discards the imaginary part
-  self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/ae59cf1ff0e6651a00093a7508e9bef044ca388ecf205bc6ee5cb804175d8981.png" src="_images/ae59cf1ff0e6651a00093a7508e9bef044ca388ecf205bc6ee5cb804175d8981.png" />
+<img alt="_images/48a3ca3f2f39d1ef6400797afad5644d28251ce594ff92b4b70981e349f56c5b.png" src="_images/48a3ca3f2f39d1ef6400797afad5644d28251ce594ff92b4b70981e349f56c5b.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s second model is <span class="math notranslate nohighlight">\(X_t = .9 X_{t-1} + \epsilon_t\)</span></p>
@@ -923,16 +917,11 @@ Invalid limit will be ignored.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/cbook/__init__.py:1298: ComplexWarning: Casting complex values to real discards the imaginary part
-  return np.asarray(x, float)
-/tmp/ipykernel_11548/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
-Invalid limit will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11272/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
-/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/transforms.py:1008: ComplexWarning: Casting complex values to real discards the imaginary part
-  self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/b37b1e668665e3b6e4501748036fa4ca2d6f1d90efd4404e6773bf1c65edcf60.png" src="_images/b37b1e668665e3b6e4501748036fa4ca2d6f1d90efd4404e6773bf1c65edcf60.png" />
+<img alt="_images/3e62f78164610c317a46dc713caaf5cde4d3752f6960b820dcfda32b02d82f77.png" src="_images/3e62f78164610c317a46dc713caaf5cde4d3752f6960b820dcfda32b02d82f77.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s third  model is  <span class="math notranslate nohighlight">\(X_t = .8 X_{t-4} + \epsilon_t\)</span></p>
@@ -946,16 +935,11 @@ Invalid limit will be ignored.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/cbook/__init__.py:1298: ComplexWarning: Casting complex values to real discards the imaginary part
-  return np.asarray(x, float)
-/tmp/ipykernel_11548/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
-Invalid limit will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11272/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
-/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/transforms.py:1008: ComplexWarning: Casting complex values to real discards the imaginary part
-  self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/d1da111002f0ead2eabc1a7809653548b13434dafcb1000ff07bc103cc1cd3be.png" src="_images/d1da111002f0ead2eabc1a7809653548b13434dafcb1000ff07bc103cc1cd3be.png" />
+<img alt="_images/fcf6c96c2194793337304280dbb41fc887e1222bceda9d4a9a191e1d95140d7d.png" src="_images/fcf6c96c2194793337304280dbb41fc887e1222bceda9d4a9a191e1d95140d7d.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s fourth  model is  <span class="math notranslate nohighlight">\(X_t = .98 X_{t-1}  + \epsilon_t -.7 \epsilon_{t-1}\)</span></p>
@@ -969,16 +953,11 @@ Invalid limit will be ignored.
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/cbook/__init__.py:1298: ComplexWarning: Casting complex values to real discards the imaginary part
-  return np.asarray(x, float)
-/tmp/ipykernel_11548/4271821819.py:15: UserWarning: Attempted to set non-positive bottom ylim on a log-scaled axis.
-Invalid limit will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11272/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
-/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/matplotlib/transforms.py:1008: ComplexWarning: Casting complex values to real discards the imaginary part
-  self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/b52ea1d8ab95330efd8cb19bcb4601a675fb4f7e9fa58172804ebab73ff12ea6.png" src="_images/b52ea1d8ab95330efd8cb19bcb4601a675fb4f7e9fa58172804ebab73ff12ea6.png" />
+<img alt="_images/946e718b3d8d9de661eedc8721321d2a67534c89edd7377d296ff9a42aa8c142.png" src="_images/946e718b3d8d9de661eedc8721321d2a67534c89edd7377d296ff9a42aa8c142.png" />
 </div>
 </div>
 </section>

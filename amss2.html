@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>44. Fluctuating Interest Rates Deliver Fiscal Insurance &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -231,8 +231,8 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="fluctuating-interest-rates-deliver-fiscal-insurance">
-<h1><a class="toc-backref" href="#id15"><span class="section-number">44. </span>Fluctuating Interest Rates Deliver Fiscal Insurance</a><a class="headerlink" href="#fluctuating-interest-rates-deliver-fiscal-insurance" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
+<h1><a class="toc-backref" href="#id15" role="doc-backlink"><span class="section-number">44. </span>Fluctuating Interest Rates Deliver Fiscal Insurance</a><a class="headerlink" href="#fluctuating-interest-rates-deliver-fiscal-insurance" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#fluctuating-interest-rates-deliver-fiscal-insurance" id="id15">Fluctuating Interest Rates Deliver Fiscal Insurance</a></p>
@@ -249,11 +249,11 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
 </pre></div>
 </div>
 </div>
@@ -263,30 +263,28 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.6.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (0.6.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
-Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
-Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
-Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.22.4)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.23.5)
+Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.11.1)
+Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (2.28.1)
+Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (0.56.4)
+Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.10.0)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (0.39.1)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (65.6.3)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (3.4)
+Requirement already satisfied: charset-normalizer&lt;3,&gt;=2 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (1.26.14)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2022.12.7)
+Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/mpmath-1.2.1-py3.10.egg (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 </div>
 </details>
 </div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id16"><span class="section-number">44.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink"><span class="section-number">44.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This lecture extends our investigations of how optimal policies for levying a flat-rate tax on labor income and  issuing government debt depend
 on whether there are complete  markets for debt.</p>
 <p>A Ramsey allocation and Ramsey policy in the AMSS <span id="id1">[<a class="reference internal" href="zreferences.html#id130" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">AMSSeppala02</a>]</span> model described in <a class="reference internal" href="amss.html"><span class="doc">optimal taxation without state-contingent debt</span></a> generally differs
@@ -352,7 +350,7 @@ rate provide the government with complete insurance against stochastically varyi
 </div>
 </section>
 <section id="forces-at-work">
-<h2><a class="toc-backref" href="#id17"><span class="section-number">44.2. </span>Forces at Work</a><a class="headerlink" href="#forces-at-work" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink"><span class="section-number">44.2. </span>Forces at Work</a><a class="headerlink" href="#forces-at-work" title="Permalink to this heading">#</a></h2>
 <p>The forces  driving asymptotic  outcomes here are examples of dynamics present in a more general class of incomplete markets models analyzed in <span id="id5">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">BEGS17</a>]</span> (BEGS).</p>
 <p>BEGS provide conditions under which government debt under a Ramsey plan converges to an invariant distribution.</p>
 <p>BEGS  construct approximations to that asymptotically invariant  distribution  of government debt under a  Ramsey plan.</p>
@@ -371,7 +369,7 @@ shutting down the stochastic component of debt dynamics.</p></li>
 </ul>
 </section>
 <section id="logical-flow-of-lecture">
-<h2><a class="toc-backref" href="#id18"><span class="section-number">44.3. </span>Logical Flow of Lecture</a><a class="headerlink" href="#logical-flow-of-lecture" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id18" role="doc-backlink"><span class="section-number">44.3. </span>Logical Flow of Lecture</a><a class="headerlink" href="#logical-flow-of-lecture" title="Permalink to this heading">#</a></h2>
 <p>We present ideas  in the following order</p>
 <ul class="simple">
 <li><p>We describe a two-state  AMSS economy and generate a long simulation starting from a positive  initial government debt.</p></li>
@@ -510,7 +508,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
 </section>
 </section>
 <section id="example-economy">
-<h2><a class="toc-backref" href="#id19"><span class="section-number">44.4. </span>Example Economy</a><a class="headerlink" href="#example-economy" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id19" role="doc-backlink"><span class="section-number">44.4. </span>Example Economy</a><a class="headerlink" href="#example-economy" title="Permalink to this heading">#</a></h2>
 <p>We set the following parameter values.</p>
 <p>The Markov state <span class="math notranslate nohighlight">\(s_t\)</span> takes two values, namely,  <span class="math notranslate nohighlight">\(0,1\)</span>.</p>
 <p>The initial Markov state is <span class="math notranslate nohighlight">\(0\)</span>.</p>
@@ -537,7 +535,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
 
 <span class="k">class</span> <span class="nc">SequentialAllocation</span><span class="p">:</span>
 
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Class that takes CESutility or BGPutility object as input returns</span>
 <span class="sd">    planner&#39;s allocation as a function of the multiplier on the</span>
 <span class="sd">    implementability constraint μ.</span>
@@ -555,7 +553,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="bp">self</span><span class="o">.</span><span class="n">find_first_best</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">find_first_best</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Find the first best allocation</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
@@ -580,7 +578,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="bp">self</span><span class="o">.</span><span class="n">zFB</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">cFB</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nFB</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ΞFB</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">time1_allocation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">μ</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Computes optimal allocation for time t &gt;= 1 for a given μ</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
@@ -611,7 +609,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">Ξ</span>
 
     <span class="k">def</span> <span class="nf">time0_allocation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">B_</span><span class="p">,</span> <span class="n">s_0</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Finds the optimal allocation given initial government debt B_ and</span>
 <span class="sd">        state s_0</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -639,7 +637,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
 
     <span class="k">def</span> <span class="nf">time1_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">μ</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Find the value associated with multiplier μ</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">c</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">Ξ</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">time1_allocation</span><span class="p">(</span><span class="n">μ</span><span class="p">)</span>
@@ -648,7 +646,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">V</span>
 
     <span class="k">def</span> <span class="nf">Τ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Computes Τ given c, n</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
@@ -657,7 +655,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">Un</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Θ</span> <span class="o">*</span> <span class="n">Uc</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">B_</span><span class="p">,</span> <span class="n">s_0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">sHist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Simulates planners policies for T periods</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">model</span><span class="p">,</span> <span class="n">π</span><span class="p">,</span> <span class="n">β</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">π</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span>
@@ -714,7 +712,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">time_0</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Bellman equation now solves time 0 problem</span>
 
     <span class="k">def</span> <span class="nf">solve_time1_bellman</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Solve the time  1 Bellman equation for calibration model and</span>
 <span class="sd">        initial grid μgrid0</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -769,7 +767,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="bp">self</span><span class="o">.</span><span class="n">T</span> <span class="o">=</span> <span class="n">T</span>
 
     <span class="k">def</span> <span class="nf">fit_policy_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">PF</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Fits the policy functions</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">S</span><span class="p">,</span> <span class="n">xgrid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">π</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">xgrid</span>
@@ -788,7 +786,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="k">return</span> <span class="n">Vf</span><span class="p">,</span> <span class="n">policies</span>
 
     <span class="k">def</span> <span class="nf">Τ</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Computes Τ given c and n</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
@@ -797,7 +795,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">Un</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Θ</span> <span class="o">*</span> <span class="n">Uc</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">time0_allocation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">B_</span><span class="p">,</span> <span class="n">s0</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Finds the optimal allocation given initial government debt B_ and</span>
 <span class="sd">        state s_0</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -807,7 +805,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="k">return</span> <span class="n">c0</span><span class="p">,</span> <span class="n">n0</span><span class="p">,</span> <span class="n">xprime0</span><span class="p">,</span> <span class="n">T0</span>
 
     <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">B_</span><span class="p">,</span> <span class="n">s_0</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">sHist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Simulates planners policies for T periods</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">model</span><span class="p">,</span> <span class="n">π</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">π</span>
@@ -842,7 +840,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
 
 
 <span class="k">class</span> <span class="nc">BellmanEquation</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Bellman equation for the continuation of the Lucas-Stokey Problem</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -869,7 +867,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="bp">self</span><span class="o">.</span><span class="n">find_first_best</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">find_first_best</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Find the first best allocation</span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span>
@@ -897,7 +895,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cFB</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">nFB</span><span class="p">[</span><span class="n">s</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">π</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">@</span> <span class="bp">self</span><span class="o">.</span><span class="n">xFB</span><span class="p">,</span> <span class="mf">0.</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Vf</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Given continuation value function next period return value function this</span>
 <span class="sd">        period return T(V) and optimal policies</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -908,7 +906,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="k">return</span> <span class="n">PF</span>
 
     <span class="k">def</span> <span class="nf">get_policies_time1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">s_</span><span class="p">,</span> <span class="n">Vf</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Finds the optimal policies </span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">model</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">Θ</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">S</span><span class="p">,</span> <span class="n">π</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Θ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">G</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">S</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">π</span>
@@ -963,7 +961,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="o">-</span><span class="n">fx</span><span class="p">,</span> <span class="n">out</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_policies_time0</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">B_</span><span class="p">,</span> <span class="n">s0</span><span class="p">,</span> <span class="n">Vf</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+        <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        Finds the optimal policies </span>
 <span class="sd">        &#39;&#39;&#39;</span>
         <span class="n">model</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">Θ</span><span class="p">,</span> <span class="n">G</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Θ</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">G</span>
@@ -1073,7 +1071,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
 </div>
 </section>
 <section id="reverse-engineering-strategy">
-<h2><a class="toc-backref" href="#id20"><span class="section-number">44.5. </span>Reverse Engineering Strategy</a><a class="headerlink" href="#reverse-engineering-strategy" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id20" role="doc-backlink"><span class="section-number">44.5. </span>Reverse Engineering Strategy</a><a class="headerlink" href="#reverse-engineering-strategy" title="Permalink to this heading">#</a></h2>
 <p>We can reverse engineer a value <span class="math notranslate nohighlight">\(b_0\)</span> of initial debt due   that renders the AMSS measurability constraints not binding from time <span class="math notranslate nohighlight">\(t =0\)</span> onward.</p>
 <p>We accomplish this by recognizing that if the AMSS measurability constraints never bind, then the AMSS allocation and Ramsey plan is equivalent
 with that for a Lucas-Stokey economy in which for each period <span class="math notranslate nohighlight">\(t \geq 0\)</span>, the government promises to pay the <strong>same</strong> state-contingent
@@ -1099,7 +1097,7 @@ state <span class="math notranslate nohighlight">\(s_t=s\)</span> from <span cla
 <a class="reference internal" href="#equation-amss2-ts-barg11">(44.5)</a> and <a class="reference internal" href="#equation-eqn-amss2-10">(44.3)</a> jointly for <span class="math notranslate nohighlight">\(c_0, b_0\)</span>.</p>
 </section>
 <section id="code-for-reverse-engineering">
-<h2><a class="toc-backref" href="#id21"><span class="section-number">44.6. </span>Code for Reverse Engineering</a><a class="headerlink" href="#code-for-reverse-engineering" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id21" role="doc-backlink"><span class="section-number">44.6. </span>Code for Reverse Engineering</a><a class="headerlink" href="#code-for-reverse-engineering" title="Permalink to this heading">#</a></h2>
 <p>Here is code to do the calculations for us.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1200,7 +1198,7 @@ set up a function that returns two simultaneous equations.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11238/2225675550.py:17: DeprecationWarning: setting an array element with a sequence. This was supported in some cases where the elements are arrays with a single element. For example `np.array([1, np.array([2])], dtype=int)`. In the future this will raise the same ValueError as `np.array([1, [2]], dtype=int)`.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11037/2225675550.py:17: DeprecationWarning: setting an array element with a sequence. This was supported in some cases where the elements are arrays with a single element. For example `np.array([1, np.array([2])], dtype=int)`. In the future this will raise the same ValueError as `np.array([1, [2]], dtype=int)`.
   return np.array([eq1, eq2], dtype=&#39;float64&#39;)
 </pre></div>
 </div>
@@ -1212,7 +1210,7 @@ set up a function that returns two simultaneous equations.</p>
 <p>Thus, we have reverse engineered an initial <span class="math notranslate nohighlight">\(b0 = -1.038698407551764\)</span> that ought to render the AMSS measurability constraints slack.</p>
 </section>
 <section id="short-simulation-for-reverse-engineered-initial-debt">
-<h2><a class="toc-backref" href="#id22"><span class="section-number">44.7. </span>Short Simulation for Reverse-engineered: Initial Debt</a><a class="headerlink" href="#short-simulation-for-reverse-engineered-initial-debt" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id22" role="doc-backlink"><span class="section-number">44.7. </span>Short Simulation for Reverse-engineered: Initial Debt</a><a class="headerlink" href="#short-simulation-for-reverse-engineered-initial-debt" title="Permalink to this heading">#</a></h2>
 <p>The following graph shows simulations of outcomes for both a Lucas-Stokey economy and for an AMSS economy starting from initial government
 debt equal to <span class="math notranslate nohighlight">\(b_0 = -1.038698407551764\)</span>.</p>
 <p>These graphs report outcomes for both the Lucas-Stokey economy with complete markets and the AMSS economy with one-period risk-free debt only.</p>
@@ -1260,17 +1258,17 @@ debt equal to <span class="math notranslate nohighlight">\(b_0 = -1.038698407551
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/scipy/optimize/optimize.py:282: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/scipy/optimize/_optimize.py:353: RuntimeWarning: Values in x were outside bounds during a minimize step, clipping to bounds
   warnings.warn(&quot;Values in x were outside bounds during a &quot;
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11238/108196118.py:24: RuntimeWarning: divide by zero encountered in reciprocal
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11037/108196118.py:24: RuntimeWarning: divide by zero encountered in reciprocal
   U = (c**(1 - σ) - 1) / (1 - σ)
-/tmp/ipykernel_11238/108196118.py:29: RuntimeWarning: divide by zero encountered in power
+/tmp/ipykernel_11037/108196118.py:29: RuntimeWarning: divide by zero encountered in power
   return c**(-self.σ)
-/tmp/ipykernel_11238/2721297386.py:249: RuntimeWarning: invalid value encountered in true_divide
+/tmp/ipykernel_11037/2721297386.py:249: RuntimeWarning: invalid value encountered in divide
   x * u_c / Eu_c - u_c * (c - T) - Un(c, n) * n - β * xprime,
-/tmp/ipykernel_11238/2721297386.py:249: RuntimeWarning: invalid value encountered in multiply
+/tmp/ipykernel_11037/2721297386.py:249: RuntimeWarning: invalid value encountered in multiply
   x * u_c / Eu_c - u_c * (c - T) - Un(c, n) * n - β * xprime,
 </pre></div>
 </div>
@@ -1736,11 +1734,11 @@ debt equal to <span class="math notranslate nohighlight">\(b_0 = -1.038698407551
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.530462934379308e-11
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11238/2980622608.py:158: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11037/2980622608.py:158: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
   return np.array([cHist, nHist, Bhist, ΤHist, sHist, μHist, RHist])
 </pre></div>
 </div>
-<img alt="_images/d2a9d3bddf35ba41dfecf99ed4e3ec7829be71291a39a25ca675161d71b34ba8.png" src="_images/d2a9d3bddf35ba41dfecf99ed4e3ec7829be71291a39a25ca675161d71b34ba8.png" />
+<img alt="_images/247af7205dca2e0490f6b863787593afb5bd6a081d84eb18be2caf3bda3d4894.png" src="_images/247af7205dca2e0490f6b863787593afb5bd6a081d84eb18be2caf3bda3d4894.png" />
 </div>
 </div>
 <p>The Ramsey allocations and Ramsey outcomes are <strong>identical</strong> for the Lucas-Stokey and AMSS economies.</p>
@@ -1749,7 +1747,7 @@ debt equal to <span class="math notranslate nohighlight">\(b_0 = -1.038698407551
 <p>However, output and labor supply are both nontrivial time-invariant functions of the Markov state.</p>
 </section>
 <section id="long-simulation">
-<h2><a class="toc-backref" href="#id23"><span class="section-number">44.8. </span>Long Simulation</a><a class="headerlink" href="#long-simulation" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id23" role="doc-backlink"><span class="section-number">44.8. </span>Long Simulation</a><a class="headerlink" href="#long-simulation" title="Permalink to this heading">#</a></h2>
 <p>The following graph shows the par value of government debt and the flat-rate tax on labor income  for a long simulation for our sample economy.</p>
 <p>For the <strong>same</strong> realization of a government expenditure path, the graph reports outcomes for two economies</p>
 <ul class="simple">
@@ -1795,11 +1793,11 @@ debt equal to <span class="math notranslate nohighlight">\(b_0 = -1.038698407551
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11238/2980622608.py:158: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_11037/2980622608.py:158: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify &#39;dtype=object&#39; when creating the ndarray.
   return np.array([cHist, nHist, Bhist, ΤHist, sHist, μHist, RHist])
 </pre></div>
 </div>
-<img alt="_images/926c1ae17366b18417b00e6223d40cf228a0253194a0258cec79132be583c3fb.png" src="_images/926c1ae17366b18417b00e6223d40cf228a0253194a0258cec79132be583c3fb.png" />
+<img alt="_images/d321bfb289ba7a69fc205aefcdcd2e8cba175cba2340eee7bb20fdbf55e1e436.png" src="_images/d321bfb289ba7a69fc205aefcdcd2e8cba175cba2340eee7bb20fdbf55e1e436.png" />
 </div>
 </div>
 <section id="remarks-about-long-simulation">
@@ -1817,7 +1815,7 @@ constant level of government debt <span class="math notranslate nohighlight">\(b
 </section>
 </section>
 <section id="begs-approximations-of-limiting-debt-and-convergence-rate">
-<h2><a class="toc-backref" href="#id24"><span class="section-number">44.9. </span>BEGS Approximations of Limiting Debt and Convergence Rate</a><a class="headerlink" href="#begs-approximations-of-limiting-debt-and-convergence-rate" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id24" role="doc-backlink"><span class="section-number">44.9. </span>BEGS Approximations of Limiting Debt and Convergence Rate</a><a class="headerlink" href="#begs-approximations-of-limiting-debt-and-convergence-rate" title="Permalink to this heading">#</a></h2>
 <p>It is useful to link the outcome of our reverse engineering exercise to limiting approximations constructed by BEGS <span id="id10">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">BEGS17</a>]</span>.</p>
 <p>BEGS <span id="id11">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">BEGS17</a>]</span> used a slightly different notation to represent a generalization of the AMSS model.</p>
 <p>We’ll introduce a version of their notation so that readers can quickly relate notation that appears in their key formulas to the notation
@@ -1895,7 +1893,7 @@ of equation <a class="reference internal" href="#equation-eq-fiscal-risk">(44.8)
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Returns mean for x given initial state&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;Returns mean for x given initial state&#39;&#39;&#39;</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">@</span> <span class="n">u</span><span class="o">.</span><span class="n">π</span><span class="p">[</span><span class="n">s</span><span class="p">]</span>
 

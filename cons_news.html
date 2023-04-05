@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>5. Information and Consumption Smoothing &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -225,8 +225,8 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="information-and-consumption-smoothing">
-<h1><a class="toc-backref" href="#id5"><span class="section-number">5. </span>Information and Consumption Smoothing</a><a class="headerlink" href="#information-and-consumption-smoothing" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
+<h1><a class="toc-backref" href="#id5" role="doc-backlink"><span class="section-number">5. </span>Information and Consumption Smoothing</a><a class="headerlink" href="#information-and-consumption-smoothing" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#information-and-consumption-smoothing" id="id5">Information and Consumption Smoothing</a></p>
@@ -246,11 +246,11 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <p>In addition to what’s in Anaconda, this lecture employs the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
 </pre></div>
 </div>
 </div>
@@ -260,30 +260,28 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.6.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (0.6.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
-Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
-Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.22.4)
-Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
-Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.10.0)
+Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.11.1)
+Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (0.56.4)
+Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (2.28.1)
+Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.23.5)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (0.39.1)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (65.6.3)
+Requirement already satisfied: charset-normalizer&lt;3,&gt;=2 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (1.26.14)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (3.4)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2022.12.7)
+Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/mpmath-1.2.1-py3.10.egg (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 </div>
 </details>
 </div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id6"><span class="section-number">5.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink"><span class="section-number">5.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>In the linear-quadratic
 permanent income of consumption smoothing model described in this
 <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">quantecon lecture</a>,
@@ -348,7 +346,7 @@ as in chapter 4  of <span id="id3">[<a class="reference internal" href="zreferen
 </section>
 </section>
 <section id="two-representations-of-one-nonfinancial-income-process">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">5.2. </span>Two Representations of  One Nonfinancial Income Process</a><a class="headerlink" href="#two-representations-of-one-nonfinancial-income-process" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink"><span class="section-number">5.2. </span>Two Representations of  One Nonfinancial Income Process</a><a class="headerlink" href="#two-representations-of-one-nonfinancial-income-process" title="Permalink to this heading">#</a></h2>
 <p>We study consequences of endowing a
 consumer with one of two alternative representations for the change
 in the consumer’s nonfinancial income <span class="math notranslate nohighlight">\(y_{t+1} - y_t\)</span>.</p>
@@ -445,7 +443,7 @@ formula <a class="reference internal" href="#equation-eqn-3">(5.3)</a> according
 \]</div>
 </section>
 <section id="application-of-kalman-filter">
-<h2><a class="toc-backref" href="#id8"><span class="section-number">5.3. </span>Application of Kalman filter</a><a class="headerlink" href="#application-of-kalman-filter" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink"><span class="section-number">5.3. </span>Application of Kalman filter</a><a class="headerlink" href="#application-of-kalman-filter" title="Permalink to this heading">#</a></h2>
 <p>We can also use the the <strong>Kalman filter</strong> to  obtain representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> from representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a>.</p>
 <p>Thus, from equations associated with the <strong>Kalman filter</strong>, it can be
 verified that the steady-state Kalman gain <span class="math notranslate nohighlight">\(K = \beta^2\)</span> and the
@@ -479,7 +477,7 @@ and <span class="math notranslate nohighlight">\(\Sigma = (1-\beta^2) \sigma_\ep
 described in <a class="reference internal" href="classical_filtering.html"><span class="doc">this lecture</span></a>.</p>
 </section>
 <section id="news-shocks-and-less-informative-shocks">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">5.4. </span>News Shocks and Less Informative Shocks</a><a class="headerlink" href="#news-shocks-and-less-informative-shocks" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink"><span class="section-number">5.4. </span>News Shocks and Less Informative Shocks</a><a class="headerlink" href="#news-shocks-and-less-informative-shocks" title="Permalink to this heading">#</a></h2>
 <p>Representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> is cast in terms of a <strong>news shock</strong>
 <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> that represents a shock to nonfinancial income
 coming from taxes, transfers, and other random sources of income changes
@@ -557,7 +555,7 @@ for representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a
 fact that will be important below.</p>
 </section>
 <section id="representation-of-epsilon-t-shock-in-terms-of-future-y-t">
-<h2><a class="toc-backref" href="#id10"><span class="section-number">5.5. </span>Representation of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> Shock in Terms of Future <span class="math notranslate nohighlight">\(y_t\)</span></a><a class="headerlink" href="#representation-of-epsilon-t-shock-in-terms-of-future-y-t" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">5.5. </span>Representation of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> Shock in Terms of Future <span class="math notranslate nohighlight">\(y_t\)</span></a><a class="headerlink" href="#representation-of-epsilon-t-shock-in-terms-of-future-y-t" title="Permalink to this heading">#</a></h2>
 <p>Notice that reprentation <a class="reference internal" href="#equation-eqn-1">(5.1)</a>, namely, <span class="math notranslate nohighlight">\(y_{t+1} - y_t = -\beta^{-1} \epsilon_t + \epsilon_{t+1}\)</span>
 implies the linear difference equation</p>
 <div class="math notranslate nohighlight">
@@ -580,7 +578,7 @@ E [ y_t | y^t_+] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1}
 <p>Thus, <span class="math notranslate nohighlight">\(\epsilon_t\)</span>  <strong>exactly</strong> reveals the gap between <span class="math notranslate nohighlight">\(y_t\)</span> and <span class="math notranslate nohighlight">\(E [ y_t | y^t_+]\)</span>.</p>
 </section>
 <section id="representation-in-terms-of-a-t-shocks">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">5.6. </span>Representation in Terms of <span class="math notranslate nohighlight">\(a_t\)</span> Shocks</a><a class="headerlink" href="#representation-in-terms-of-a-t-shocks" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink"><span class="section-number">5.6. </span>Representation in Terms of <span class="math notranslate nohighlight">\(a_t\)</span> Shocks</a><a class="headerlink" href="#representation-in-terms-of-a-t-shocks" title="Permalink to this heading">#</a></h2>
 <p>Next notice that representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, namely, <span class="math notranslate nohighlight">\(y_{t+1} - y_t = -
 \beta a_t + a_{t+1}\)</span> implies the linear difference
 equation</p>
@@ -601,7 +599,7 @@ E [ y_{t+1} | y^t ] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}
 \]</div>
 </section>
 <section id="permanent-income-consumption-smoothing-model">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">5.7. </span>Permanent Income Consumption-Smoothing Model</a><a class="headerlink" href="#permanent-income-consumption-smoothing-model" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id12" role="doc-backlink"><span class="section-number">5.7. </span>Permanent Income Consumption-Smoothing Model</a><a class="headerlink" href="#permanent-income-consumption-smoothing-model" title="Permalink to this heading">#</a></h2>
 <p>When we computed optimal consumption-saving policies for our  two
 representations <a class="reference internal" href="#equation-eqn-1">(5.1)</a> and <a class="reference internal" href="#equation-eqn-2">(5.2)</a> by using formulas obtained with the difference equation
 approach described in  <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">quantecon lecture</a>,
@@ -644,7 +642,7 @@ the temporary part.</p>
 Ricardian equivalence experiment.</p>
 </section>
 <section id="state-space-representations">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">5.8. </span>State Space Representations</a><a class="headerlink" href="#state-space-representations" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id13" role="doc-backlink"><span class="section-number">5.8. </span>State Space Representations</a><a class="headerlink" href="#state-space-representations" title="Permalink to this heading">#</a></h2>
 <p>We now cast our  representations <a class="reference internal" href="#equation-eqn-1">(5.1)</a> and <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, respectively,  in terms of the following two state
 space systems:</p>
 <div class="math notranslate nohighlight" id="equation-eqstsp1">
@@ -672,7 +670,7 @@ Equation Approach” in thid <a class="reference external" href="https://python-
 <p>All the code that we shall use below is presented in that lecture.</p>
 </section>
 <section id="computations">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">5.9. </span>Computations</a><a class="headerlink" href="#computations" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id14" role="doc-backlink"><span class="section-number">5.9. </span>Computations</a><a class="headerlink" href="#computations" title="Permalink to this heading">#</a></h2>
 <p>We shall use Python to form  two state-space
 representations <a class="reference internal" href="#equation-eqstsp1">(5.4)</a> and <a class="reference internal" href="#equation-eqstsp2">(5.5)</a>.</p>
 <p>We set the following parameter values
@@ -949,8 +947,8 @@ form <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, we can simp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1.99998906e-11, 1.89474022e-11, 1.78947664e-11, 1.68421418e-11,
-        1.57895060e-11]),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([1.99997796e-11, 1.89474007e-11, 1.78947650e-11, 1.68421292e-11,
+        1.57894935e-11]),
  array([ 0.        , -1.05263158, -1.05263158, -1.05263158, -1.05263158]))
 </pre></div>
 </div>
@@ -966,10 +964,10 @@ form <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, we can simp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb0999afe20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa9a0f44d60&gt;
 </pre></div>
 </div>
-<img alt="_images/61ee0597b5c2d530ae5949c30ceac461391cc9c4a1d88a96e3ec6c58df4e5025.png" src="_images/61ee0597b5c2d530ae5949c30ceac461391cc9c4a1d88a96e3ec6c58df4e5025.png" />
+<img alt="_images/d452c5f250cca1d6c5adf51658ea4dc4c9895325959d3ee9d3084d1edf4b328d.png" src="_images/d452c5f250cca1d6c5adf51658ea4dc4c9895325959d3ee9d3084d1edf4b328d.png" />
 </div>
 </div>
 <p>The above two impulse response functions show that when the consumer has
@@ -1003,10 +1001,10 @@ permanently <strong>decreases</strong> by <span class="math notranslate nohighli
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb08a059fa0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa9a0d03e80&gt;
 </pre></div>
 </div>
-<img alt="_images/a8d9ea39913d9f38c6075e725c02e59c1fdcab07912de8c4192d675e18f2ec79.png" src="_images/a8d9ea39913d9f38c6075e725c02e59c1fdcab07912de8c4192d675e18f2ec79.png" />
+<img alt="_images/d8a2d985b661341353b76de315fcad6cbde9f31b1ca76a9179c3e70ce3c6ee37.png" src="_images/d8a2d985b661341353b76de315fcad6cbde9f31b1ca76a9179c3e70ce3c6ee37.png" />
 </div>
 </div>
 <p>The above impulse responses show that when the consumer has only the
@@ -1042,10 +1040,10 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb089fcacd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa9a10e4d90&gt;
 </pre></div>
 </div>
-<img alt="_images/814a099debbf1fc0f13f1a555c0ff94a637d75b89add29c17fd30b3abd317a68.png" src="_images/814a099debbf1fc0f13f1a555c0ff94a637d75b89add29c17fd30b3abd317a68.png" />
+<img alt="_images/b954426b00004cd91a09516bde91a338c6219de4ea6240bd0410cf6e3117e6e0.png" src="_images/b954426b00004cd91a09516bde91a338c6219de4ea6240bd0410cf6e3117e6e0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1060,15 +1058,15 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb089c0e220&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa9a0813ac0&gt;
 </pre></div>
 </div>
-<img alt="_images/f81a467cfff1193b6d8526a0deba15816f3d77c5ebdfe83a6c951b54cddb07b1.png" src="_images/f81a467cfff1193b6d8526a0deba15816f3d77c5ebdfe83a6c951b54cddb07b1.png" />
+<img alt="_images/05ac99a2cf54ff32ec74f2a4dc01495669008e5fd6e0ac1eb7aabf547110c83f.png" src="_images/05ac99a2cf54ff32ec74f2a4dc01495669008e5fd6e0ac1eb7aabf547110c83f.png" />
 </div>
 </div>
 </section>
 <section id="simulating-income-process-and-two-associated-shock-processes">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">5.10. </span>Simulating  Income Process and Two Associated Shock Processes</a><a class="headerlink" href="#simulating-income-process-and-two-associated-shock-processes" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id15" role="doc-backlink"><span class="section-number">5.10. </span>Simulating  Income Process and Two Associated Shock Processes</a><a class="headerlink" href="#simulating-income-process-and-two-associated-shock-processes" title="Permalink to this heading">#</a></h2>
 <p>We now  form a <strong>single</strong> <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^T\)</span> realization
 that we will use to simulate decisions associated
 with our two types of consumer.</p>
@@ -1103,7 +1101,7 @@ two consumers having <strong>identical</strong> incomes at each date but at each
 having <strong>different</strong> information about their future incomes.</p>
 </section>
 <section id="calculating-innovations-in-another-way">
-<h2><a class="toc-backref" href="#id16"><span class="section-number">5.11. </span>Calculating Innovations in Another Way</a><a class="headerlink" href="#calculating-innovations-in-another-way" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink"><span class="section-number">5.11. </span>Calculating Innovations in Another Way</a><a class="headerlink" href="#calculating-innovations-in-another-way" title="Permalink to this heading">#</a></h2>
 <p>Here we use formula <a class="reference internal" href="#equation-eqn-3">(5.3)</a> above to compute <span class="math notranslate nohighlight">\(a_{t+1}\)</span> as a function
 of the history
 <span class="math notranslate nohighlight">\(\epsilon_{t+1}, \epsilon_t, \epsilon_{t-1}, \ldots\)</span></p>
@@ -1123,7 +1121,7 @@ a_{t+1} &amp;=\beta a_{t}+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
 computed earlier.</p>
 </section>
 <section id="another-invertibility-issue">
-<h2><a class="toc-backref" href="#id17"><span class="section-number">5.12. </span>Another Invertibility Issue</a><a class="headerlink" href="#another-invertibility-issue" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17" role="doc-backlink"><span class="section-number">5.12. </span>Another Invertibility Issue</a><a class="headerlink" href="#another-invertibility-issue" title="Permalink to this heading">#</a></h2>
 <p>This <a class="reference internal" href="hs_invertibility_example.html"><span class="doc">quantecon lecture</span></a> contains another example of a shock-invertibility issue that is endemic
 to the LQ permanent income or consumption smoothing model.</p>
 <p>The technical issue discussed there is ultimately the source of the shock-invertibility issues discussed by

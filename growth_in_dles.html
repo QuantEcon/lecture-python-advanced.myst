@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>17. Growth in Dynamic Linear Economies &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -220,8 +220,8 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="growth-in-dynamic-linear-economies">
-<span id="index-0"></span><h1><a class="toc-backref" href="#id3"><span class="section-number">17. </span>Growth in Dynamic Linear Economies</a><a class="headerlink" href="#growth-in-dynamic-linear-economies" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
+<span id="index-0"></span><h1><a class="toc-backref" href="#id3" role="doc-backlink"><span class="section-number">17. </span>Growth in Dynamic Linear Economies</a><a class="headerlink" href="#growth-in-dynamic-linear-economies" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#growth-in-dynamic-linear-economies" id="id3">Growth in Dynamic Linear Economies</a></p>
@@ -232,13 +232,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <p>This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
 <span id="id1">[<a class="reference internal" href="zreferences.html#id71" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">HS13</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
 <p>In addition to what’s included in  Anaconda, this lecture uses the quantecon library.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
 </pre></div>
 </div>
 </div>
@@ -248,23 +248,23 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.6.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (0.6.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
-Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
-Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.22.4)
-Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
-Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (0.56.4)
+Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (2.28.1)
+Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.10.0)
+Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.11.1)
+Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.23.5)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (0.39.1)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (65.6.3)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (1.26.14)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (3.4)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2022.12.7)
+Requirement already satisfied: charset-normalizer&lt;3,&gt;=2 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/mpmath-1.2.1-py3.10.egg (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 </div>
@@ -288,7 +288,7 @@ growth.</p>
 </div>
 </div>
 <section id="common-structure">
-<h2><a class="toc-backref" href="#id4"><span class="section-number">17.1. </span>Common Structure</a><a class="headerlink" href="#common-structure" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink"><span class="section-number">17.1. </span>Common Structure</a><a class="headerlink" href="#common-structure" title="Permalink to this heading">#</a></h2>
 <p>Our example economies have the following features</p>
 <ul>
 <li><p>Information flows are governed by an exogenous stochastic process
@@ -356,7 +356,7 @@ matrices</p>
 <p>and the scalar <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 </section>
 <section id="a-planning-problem">
-<h2><a class="toc-backref" href="#id5"><span class="section-number">17.2. </span>A Planning Problem</a><a class="headerlink" href="#a-planning-problem" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink"><span class="section-number">17.2. </span>A Planning Problem</a><a class="headerlink" href="#a-planning-problem" title="Permalink to this heading">#</a></h2>
 <p>The first welfare theorem asserts that a competitive equilibrium
 allocation solves the following planning problem.</p>
 <p>Choose <span class="math notranslate nohighlight">\(\{c_t, s_t, i_t, h_t, k_t, g_t\}_{t=0}^\infty\)</span> to maximize</p>
@@ -423,7 +423,7 @@ x_{t+1} = A^ox_t + Cw_{t+1}
 \]</div>
 </section>
 <section id="example-economies">
-<h2><a class="toc-backref" href="#id6"><span class="section-number">17.3. </span>Example Economies</a><a class="headerlink" href="#example-economies" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink"><span class="section-number">17.3. </span>Example Economies</a><a class="headerlink" href="#example-economies" title="Permalink to this heading">#</a></h2>
 <p>Each of the example economies shown here will share a number of
 components. In particular, for each we will consider preferences of the
 form</p>
@@ -588,7 +588,7 @@ consumption and investment</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d551e01dec297a9f8b18e1cd96ee7a4121c0fb7f04fe2e80172e8ede1f7a0345.png" src="_images/d551e01dec297a9f8b18e1cd96ee7a4121c0fb7f04fe2e80172e8ede1f7a0345.png" />
+<img alt="_images/5f566e8b4b4886293711dceb378cc1f741e14de159cf8e050e3793355e5e777d.png" src="_images/5f566e8b4b4886293711dceb378cc1f741e14de159cf8e050e3793355e5e777d.png" />
 </div>
 </div>
 <p>Inspection of the plot shows that the sample paths of consumption and
@@ -620,7 +620,7 @@ walk character of consumption in Hall’s model.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9999999999904766
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9999999999904767
 </pre></div>
 </div>
 </div>
@@ -637,7 +637,7 @@ steady state of consumption, investment and capital.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[5.]] [[0.]] [[0.001]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[4.999]] [[-0.001]] [[-0.021]]
 </pre></div>
 </div>
 </div>
@@ -706,7 +706,7 @@ consumption and investment</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/80117b22747920bf18925a910af61561a88dba6e8862574c04d7b258f2fbbd9e.png" src="_images/80117b22747920bf18925a910af61561a88dba6e8862574c04d7b258f2fbbd9e.png" />
+<img alt="_images/6e3da253ef52274c803372c0fba79f66ad1d761c80a16eb75a8a38fd2b195ba0.png" src="_images/6e3da253ef52274c803372c0fba79f66ad1d761c80a16eb75a8a38fd2b195ba0.png" />
 </div>
 </div>
 <p>Simulating our new economy shows that consumption grows quickly in the
@@ -802,7 +802,7 @@ define the new value of <span class="math notranslate nohighlight">\(\lambda\)</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5b615d5538df68b11b1f5fb2de3336aa9970848a2be74727a40485d2cafee369.png" src="_images/5b615d5538df68b11b1f5fb2de3336aa9970848a2be74727a40485d2cafee369.png" />
+<img alt="_images/218db665d4a2a28da5958fdf4855b77f5022db9f3a1a9a2fd62480e09f78c025.png" src="_images/218db665d4a2a28da5958fdf4855b77f5022db9f3a1a9a2fd62480e09f78c025.png" />
 </div>
 </div>
 <p>Thus, adding habit persistence to the Hall model of Example 1 is enough
@@ -847,7 +847,7 @@ consider the following experiments.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/43a64bfd1d5f3b9c489c07c87550d968a8d763d0beeb31a00dfe9d19c0c2a601.png" src="_images/43a64bfd1d5f3b9c489c07c87550d968a8d763d0beeb31a00dfe9d19c0c2a601.png" />
+<img alt="_images/8dbc1fd27da3509ca708936afcc60050eefe586906510f7113d34df1a65ebda9.png" src="_images/8dbc1fd27da3509ca708936afcc60050eefe586906510f7113d34df1a65ebda9.png" />
 </div>
 </div>
 <p>We no longer achieve sustained growth if <span class="math notranslate nohighlight">\(\lambda\)</span> is raised from -1 to -0.7.</p>
@@ -886,7 +886,7 @@ eigenvalues is now less than 1.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1d84a3f0d2814997ffd6f809e7730d13948de858e9cdb42876916e1b7c2bc8f7.png" src="_images/1d84a3f0d2814997ffd6f809e7730d13948de858e9cdb42876916e1b7c2bc8f7.png" />
+<img alt="_images/fa49839a936b9941e12de40125586066229eb911ccccbeaa13a1ad159029d2fd.png" src="_images/fa49839a936b9941e12de40125586066229eb911ccccbeaa13a1ad159029d2fd.png" />
 </div>
 </div>
 <p>Growth also fails if we lower <span class="math notranslate nohighlight">\(\beta\)</span>, since we now have

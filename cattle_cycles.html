@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>22. Cattle Cycles &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -217,8 +217,8 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="index-0">
-<span id="id1"></span><h1><a class="toc-backref" href="#id8"><span class="section-number">22. </span>Cattle Cycles</a><a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
+<span id="id1"></span><h1><a class="toc-backref" href="#id8" role="doc-backlink"><span class="section-number">22. </span>Cattle Cycles</a><a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h1>
+<nav class="contents" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#index-0" id="id8">Cattle Cycles</a></p>
@@ -228,13 +228,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <p>This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
 <span id="id2">[<a class="reference internal" href="zreferences.html#id71" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">HS13</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
 <p>In addition to what’s in Anaconda, this lecture uses the quantecon library.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
 </pre></div>
 </div>
 </div>
@@ -244,23 +244,21 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (0.6.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (0.6.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (2.27.1)
-Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.7.3)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.10.1)
-Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (1.22.4)
-Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from quantecon) (0.56.4)
-Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (0.39.1)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from numba-&gt;quantecon) (61.2.0)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (1.26.9)
-Requirement already satisfied: charset-normalizer~=2.0.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (3.3)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from requests-&gt;quantecon) (2021.10.8)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages (from sympy-&gt;quantecon) (1.2.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.11.1)
+Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.10.0)
+Requirement already satisfied: numba in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (0.56.4)
+Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (2.28.1)
+Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.23.5)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (0.39.1)
+Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba-&gt;quantecon) (65.6.3)
+Requirement already satisfied: charset-normalizer&lt;3,&gt;=2 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2022.12.7)
+Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (1.26.14)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (3.4)
+Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/mpmath-1.2.1-py3.10.egg (from sympy-&gt;quantecon) (1.2.1)
 </pre></div>
 </div>
 </div>
@@ -285,7 +283,7 @@ understand sources of recurrent cycles in US cattle stocks and prices.</p>
 </div>
 </div>
 <section id="the-model">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">22.1. </span>The Model</a><a class="headerlink" href="#the-model" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink"><span class="section-number">22.1. </span>The Model</a><a class="headerlink" href="#the-model" title="Permalink to this heading">#</a></h2>
 <p>The model features a static linear demand curve and a “time-to-grow”
 structure for cattle.</p>
 <p>Let <span class="math notranslate nohighlight">\(p_t\)</span> be the price of slaughtered beef, <span class="math notranslate nohighlight">\(m_t\)</span> the cost
@@ -330,7 +328,7 @@ where <span class="math notranslate nohighlight">\(\tilde d_t\)</span> is a stoc
 representing a demand shifter.</p>
 </section>
 <section id="mapping-into-hs2013-framework">
-<h2><a class="toc-backref" href="#id10"><span class="section-number">22.2. </span>Mapping into HS2013 Framework</a><a class="headerlink" href="#mapping-into-hs2013-framework" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">22.2. </span>Mapping into HS2013 Framework</a><a class="headerlink" href="#mapping-into-hs2013-framework" title="Permalink to this heading">#</a></h2>
 <section id="preferences">
 <h3><span class="section-number">22.2.1. </span>Preferences<a class="headerlink" href="#preferences" title="Permalink to this heading">#</a></h3>
 <p>We set
@@ -575,7 +573,7 @@ to generate cycles in quantities</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a47a03efb4f4384426653ac6a6b984a6d957e0b04c0da0779337c70a8f6e4029.png" src="_images/a47a03efb4f4384426653ac6a6b984a6d957e0b04c0da0779337c70a8f6e4029.png" />
+<img alt="_images/824b255ea07c4b53f925d52ccaee130238e8fc86ac2c30d8dbeacdbe4ca7dac4.png" src="_images/824b255ea07c4b53f925d52ccaee130238e8fc86ac2c30d8dbeacdbe4ca7dac4.png" />
 </div>
 </div>
 <p>In their Figure 3, <span id="id6">[<a class="reference internal" href="zreferences.html#id70" title="Sherwin Rosen, Kevin M Murphy, and Jose A Scheinkman. Cattle cycles. Journal of Political Economy, 102(3):468–492, 1994.">RMS94</a>]</span> plot the impulse response functions
@@ -607,7 +605,7 @@ of consumption and the breeding stock of cattle to the demand shock,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c6c4b57ec1005d4ba0844c77eb764d885c8270c704b72b0b6c1d98b33ff6be6b.png" src="_images/c6c4b57ec1005d4ba0844c77eb764d885c8270c704b72b0b6c1d98b33ff6be6b.png" />
+<img alt="_images/bc46536b2ae139ac642038e5cf869b5d9b6bfdc1d92e4d47ced7fd01994f05ab.png" src="_images/bc46536b2ae139ac642038e5cf869b5d9b6bfdc1d92e4d47ced7fd01994f05ab.png" />
 </div>
 </div>
 <p>The above figures show how consumption patterns differ markedly,
@@ -641,7 +639,7 @@ of the breeding stock <em>and</em> the total stock, for <span class="math notran
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5020d989d6450ed1a07a5783a9fdf7990014b5e779c0c698ef045ea6d1e43994.png" src="_images/5020d989d6450ed1a07a5783a9fdf7990014b5e779c0c698ef045ea6d1e43994.png" />
+<img alt="_images/3b6c0923e1ad84ecac59794f4d6088e3b8ffa8869d587149c1a3c9d956ecd2a1.png" src="_images/3b6c0923e1ad84ecac59794f4d6088e3b8ffa8869d587149c1a3c9d956ecd2a1.png" />
 </div>
 </div>
 <p>The fact that <span class="math notranslate nohighlight">\(y_t\)</span> is a weighted moving average of <span class="math notranslate nohighlight">\(x_t\)</span>

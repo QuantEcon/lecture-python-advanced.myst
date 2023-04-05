@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>39. Optimal Unemployment Insurance &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -735,11 +735,11 @@ the function <code class="docutils literal notranslate"><span class="pre">Vu_err
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interest rate to match 0.1 hazard rate: r = 0.0003431409393866347
-Check p at r: 0.1000000000000173
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Interest rate to match 0.1 hazard rate: r = 0.00034314093938667064
+Check p at r: 0.10000000000002074
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.9/site-packages/scipy/optimize/minpack.py:175: RuntimeWarning: The iteration is not making good progress, as measured by the 
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/scipy/optimize/_minpack_py.py:178: RuntimeWarning: The iteration is not making good progress, as measured by the 
   improvement from the last five Jacobian evaluations.
   warnings.warn(msg, RuntimeWarning)
 </pre></div>
@@ -762,7 +762,7 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Vu</span><span class="p">,</span><span class="n">V</span><span class="p">,</span><span class="n">a</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculates the optimal consumption choice coming from the constraint of the insurer&#39;s problem </span>
 <span class="sd">    (which is also a Bellman equation)</span>
 <span class="sd">    &#39;&#39;&#39;</span>    
@@ -772,7 +772,7 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
     <span class="k">return</span> <span class="n">c</span>
 
 <span class="k">def</span> <span class="nf">calc_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Vu</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Calculates the optimal effort choice coming from the worker&#39;s effort optimality condition.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -805,7 +805,7 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Operator iterate_C that calculates the next iteration of the cost function.</span>
 <span class="k">def</span> <span class="nf">iterate_C</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">C_old</span><span class="p">,</span><span class="n">Vu_grid</span><span class="p">):</span>
 
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+    <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    We solve the model by minimising the value function across a grid of possible promised values.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="n">β</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">n_grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">n_grid</span>
@@ -904,16 +904,16 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 0, error:72.95964854907824
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 50, error:12.222761762498521
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 50, error:12.222761762494429
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 100, error:0.12875960366955042
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 150, error:0.0009402349701304047
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 150, error:0.0009402349710398994
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 200, error:6.115461928857258e-06
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 200, error:6.115462838351959e-06
 </pre></div>
 </div>
 </div>
@@ -982,7 +982,7 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e735a0271c9a83305bf7e0a4add42e603424dd66cd91efd8a3e113b3dbc70e32.png" src="_images/e735a0271c9a83305bf7e0a4add42e603424dd66cd91efd8a3e113b3dbc70e32.png" />
+<img alt="_images/598c2912e5c552f57af7aea9669268ec2140b91152f638b6d5e6a24691703e17.png" src="_images/598c2912e5c552f57af7aea9669268ec2140b91152f638b6d5e6a24691703e17.png" />
 </div>
 </div>
 <p>For an initial promised value <span class="math notranslate nohighlight">\(V^u = V_{\rm aut}\)</span>, the planner chooses the autarky level of <span class="math notranslate nohighlight">\(0\)</span> for the replacement ratio and instructs the worker to search at the autarky search intensity, regardless of the duration of unemployment</p>
