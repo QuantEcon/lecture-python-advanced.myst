@@ -311,13 +311,13 @@ The max-min problem associated with firm 2's Lagrangian
 component of firm $2$'s payoff function depends on the entire
 future of its choices of $\{q_{2t+j}\}_{j=0}^\infty$.
 
-This renders a direct attack on the problem cumbersome.
+This renders a direct attack on the problem in the space of sequences cumbersome.
 
-Therefore, below we will formulate the Stackelberg leader's problem
+Therefore, below we will  formulate the Stackelberg leader's problem
 recursively.
 
-We'll put our little duopoly model into a broader class of models with
-the same  structure.
+We'll proceed by putting  our  duopoly model into a broader class of models with
+the same  general structure.
 
 ## Stackelberg Problem
 
@@ -440,14 +440,14 @@ $$
 \Omega(y_0) = \left\{ (\vec y_1, \vec u_0) :  y_{t+1} = A y_t + B u_t, \forall t \geq 0 \right\}
 $$
 
-Please remember that the follower's Euler equation is embedded in the
+Please remember that the follower's system of  Euler equations is embedded in the
 system of dynamic equations $y_{t+1} = A y_t + B u_t$.
 
-Note that in the definition of $\Omega(y_0)$, $y_0$
-is taken as given.
+Note that  the definition of $\Omega(y_0)$ treats  $y_0$
+as given.
 
 Although it is taken as given in $\Omega(y_0)$,
-eventually, the $x_0$ component of $y_0$ will be chosen by the
+eventually, the $x_0$ component of $y_0$ is to  be chosen by the
 Stackelberg leader.
 
 ### Two Subproblems
@@ -490,8 +490,7 @@ given.
 Subproblem 2 optimizes over $x_0$.
 
 The value function $w(z_0)$ tells the value of the Stackelberg plan
-as a function of the vector of natural state variables at time $0$,
-$z_0$.
+as a function of the vector of natural state variables $z_0$ at time $0$.
 
 ## Two Bellman Equations
 
@@ -554,20 +553,50 @@ which implies that
 
 $$
 x_0 = - P_{22}^{-1} P_{21} z_0
-$$
+$$ (eq:subprob2x0)
 
-## Stackelberg Plan
+## Stackelberg Plan for Duopoly
 
 Now let's map our duopoly model into the above setup.
 
-We will formulate a state space system
+We  formulate a state vector
 
 $$
 y_t = \begin{bmatrix} z_t \cr x_t \end{bmatrix}
 $$
 
-where in this instance $x_t = v_{1t}$, the time $t$ decision
-of the follower firm 1.
+where for our duopoly model
+
+$$
+z_t = \begin{bmatrix} 1 \cr q_{2t} \cr q_{1t} \end{bmatrix} , \quad x_t = v_{1t},
+$$
+
+
+where  $x_t = v_{1t}$ is  the time $t$ decision
+of the follower firm 1, $u_t$ is the time $t$ decision of the leader firm 2 and
+
+$$
+v_{1t} = q_{1t+1} - q_{1t}, \quad u_t = q_{2t+1} - q_{2t} .
+$$
+
+For our duopoly model, initial conditions for the natural state variables in $z_t$ are
+
+$$
+z_0 =  \begin{bmatrix} 1 \cr q_{20} \cr q_{10} \end{bmatrix}
+$$
+
+while $x_0 = v_{10} = q_{11} - q_{10}$  is a choice variable for the Stackelberg leader firm 2, one that will ultimately be chosen according an optimal rule prescribed by  {eq}`eq:subprob2x0` 
+for subproblem 2 above.
+
+That the Stackelberg leader firm 2 chooses $x_0 = v_{10}$ is subtle.  
+
+Of course,  $x_0 = v_{10}$ emerges from the feedback-feedforward solution {eq}`sstack3` of firm 1's system of Euler equations, so that it is actually
+firm 1 that sets $x_0$.
+
+But firm 2 manipulates firm 1's  choice through firm 2's choice of the sequence $\vec q_{2,1} = \{q_{2t+1}\}_{t=0}^\infty$.  
+
+
+
 
 ### Calculations to Prepare Duopoly Model
 
@@ -903,11 +932,11 @@ $\vec q_2$.
 ### Time Consistency of Follower's Plan
 
 The follower can solve its problem using dynamic programming  because its
-problem is recursive in  **natural state variables**,
+problem is recursive in what for it are the  **natural state variables**,
 namely
 
 $$
-\begin{bmatrix} 1 \cr q_{2t} \cr \tilde q_{10} \cr \tilde x_0   \end{bmatrix}
+\begin{bmatrix} 1 \cr q_{2t} \cr \tilde q_{1t} \cr \tilde x_t   \end{bmatrix}
 $$
 
 It follows that the follower's plan is time consistent.
@@ -915,7 +944,9 @@ It follows that the follower's plan is time consistent.
 ## Computing  Stackelberg Plan
 
 Here is our code to compute a Stackelberg plan via the linear-quadratic
-dynamic program describe above
+dynamic program describe above.
+
+Let's use it to compute the Stackelberg plan.
 
 ```{code-cell} python3
 # Parameters
@@ -982,13 +1013,15 @@ for t in range(n):
     π_leader[t] = -(yt[:, t].T @ π_matrix @ yt[:, t])
 
 # Display policies
-print("Computed policy for Stackelberg leader\n")
+print("Computed policy for Continuation Stackelberg leader\n")
 print(f"F = {F}")
 ```
 
 ## Time Series for Price and Quantities
 
-The following code plots the price and quantities produced by the Stackelberg leader and follower.
+Now let's use the code to compute and display outcomes as a Stackelberg plan unfolds.
+
+The following code plots  quantities chosen by the Stackelberg leader and follower, together with the equilibrium output price.
 
 ```{code-cell} python3
 q_leader = yt[1, :-1]
@@ -1008,7 +1041,7 @@ plt.show()
 
 ### Value of Stackelberg Leader
 
-We'll compute the present value earned by the Stackelberg leader.
+We'll compute the  value $w(x_0)$ attained  by the Stackelberg leader, where $x_0$ is given by the maximizer {eq}`eq:subprob2x0` of subproblem 2.
 
 We'll compute it two ways and get the same answer.  
 
@@ -1042,10 +1075,10 @@ v_expanded = -((y0.T @ R @ y0 + ut[:, 0].T @ Q @ ut[:, 0] +
 
 In the code below we compare two values
 
-- the continuation value $- y_t P y_t$ earned by a continuation
-  Stackelberg leader who inherits state $y_t$ at $t$
-- the value of a **reborn Stackelberg leader** who inherits state
-  $z_t$ at $t$ and is free to set $x_t = - P_{22}^{-1} P_{21}$
+- the continuation value $v(y_t) = - y_t' P y_t$ earned by a **continuation
+  Stackelberg leader** who inherits state $y_t$ at $t$
+- the value $w(\hat x_t)$ of a **reborn Stackelberg leader** who, at date $t$ along the Stackelberg plan, inherits state
+  $z_t$ at $t$ but who discards $x_t$ from the time $t$ continuation of the original Stackelberg plan  and  **resets** it to $ \hat x_t = - P_{22}^{-1} P_{21} z_t$
 
 The difference between these two values is a tell-tale sign of the time
 inconsistency of the Stackelberg plan
@@ -1069,17 +1102,17 @@ fig, axes = plt.subplots(3, 1, figsize=(10, 7))
 axes[0].plot(range(n+1), (- F @ yt).flatten(), 'bo',
     label='Stackelberg leader', ms=2)
 axes[0].plot(range(n+1), (- F @ yt_reset).flatten(), 'ro',
-    label='continuation leader at t', ms=2)
-axes[0].set(title=r'Leader control variable $u_{t}$', xlabel='t')
+    label='reborn  at t Stackelberg leader', ms=2)
+axes[0].set(title=r' $u_{t} = q_{2t+1} - q_t$', xlabel='t')
 axes[0].legend()
 
 axes[1].plot(range(n+1), yt[3, :], 'bo', ms=2)
 axes[1].plot(range(n+1), yt_reset[3, :], 'ro', ms=2)
-axes[1].set(title=r'Follower control variable $x_{t}$', xlabel='t')
+axes[1].set(title=r' $x_{t} = q_{1t+1} - q_{1t}$', xlabel='t')
 
 axes[2].plot(range(n), vt_leader, 'bo', ms=2)
 axes[2].plot(range(n), vt_reset_leader, 'ro', ms=2)
-axes[2].set(title=r'Leader value $v(y_{t})$', xlabel='t')
+axes[2].set(title=r'$v(y_{t})$ and $w(\hat x_t)$', xlabel='t')
 
 plt.tight_layout()
 plt.show()
