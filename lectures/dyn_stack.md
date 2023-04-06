@@ -222,7 +222,7 @@ This equation can in turn be rearranged to become
 ```{math}
 :label: sstack1
 
-q_{1t} + (1+\beta + c_1) q_{1t+1} - \beta q_{1t+2} = c_0 - c_2 q_{2t+1}
+- q_{1t} + (1+\beta + c_1) q_{1t+1} - \beta q_{1t+2} = c_0 - c_2 q_{2t+1}
 ```
 
 Equation {eq}`sstack1` is a second-order difference equation in the sequence
@@ -306,10 +306,10 @@ subject to initial conditions for $q_{1t}, q_{2t}$ at $t=0$.
 **Remarks:** We have formulated the Stackelberg problem in a space of
 sequences.
 
-The max-min problem associated with Lagrangian
+The max-min problem associated with firm 2's Lagrangian
 {eq}`sstack4` is unpleasant because the time $t$
-component of firm $1$'s payoff function depends on the entire
-future of its choices of $\{q_{1t+j}\}_{j=0}^\infty$.
+component of firm $2$'s payoff function depends on the entire
+future of its choices of $\{q_{2t+j}\}_{j=0}^\infty$.
 
 This renders a direct attack on the problem cumbersome.
 
@@ -723,7 +723,7 @@ condition $\check y_0 = \begin{bmatrix}\check z_0 \cr H^0_0 \check z_0\end{bmatr
 imply that for $t \geq 1$
 
 $$
-x_t = \sum_{j=1}^t H_j^t \check z_{t-j}
+\check x_t = \sum_{j=1}^t H_j^t \check z_{t-j}
 $$
 
 where
@@ -1045,7 +1045,7 @@ In the code below we compare two values
 - the continuation value $- y_t P y_t$ earned by a continuation
   Stackelberg leader who inherits state $y_t$ at $t$
 - the value of a **reborn Stackelberg leader** who inherits state
-  $z_t$ at $t$ and sets $x_t = - P_{22}^{-1} P_{21}$
+  $z_t$ at $t$ and is free to set $x_t = - P_{22}^{-1} P_{21}$
 
 The difference between these two values is a tell-tale sign of the time
 inconsistency of the Stackelberg plan
