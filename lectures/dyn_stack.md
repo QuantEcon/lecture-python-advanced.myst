@@ -1117,6 +1117,13 @@ axes[2].set(title=r'$v(y_{t})$ and $w(\hat x_t)$', xlabel='t')
 plt.tight_layout()
 plt.show()
 ```
+The figure above shows
+
+* in the third panel that for $t \geq 1$  the **reborn at $t$** Stackelberg leader's's value $w(\hat x_0)$  exceeds the continuation value $v(y_t)$ of the time $0$ Stackelberg leader
+* in the first panel that for $t \geq 1$  the **reborn at $t$** Stackelberg leader wants to reduce his output below that prescribed by the time $0$ Stackelberg leader
+* in the second panel that for $t \geq 1$  the **reborn at $t$** Stackelberg leader wants to increase the output of the follower firm 2 below that prescribed by the time $0$ Stackelberg leader
+
+Taken together, these outcomes express the time inconsistency of the original time $0$ Stackelberg leaders's plan.
 
 ## Recursive Formulation of Follower's Problem
 
