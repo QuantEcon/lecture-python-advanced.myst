@@ -131,11 +131,11 @@ or
 
 Because $\alpha > 0$,  $0 < \frac{\alpha}{1+\alpha} < 1$.
 
-**Definition:** For a scalar $x_t$, let $L^2$ be the space of sequences
-$\{x_t\}_{t=0}^\infty$ satisfying
+**Definition:** For a scalar $b_t$, let $L^2$ be the space of sequences
+$\{b_t\}_{t=0}^\infty$ satisfying
 
 $$
-\sum_{t=0}^\infty  x_t^2 < +\infty
+\sum_{t=0}^\infty  b_t^2 < +\infty
 $$
 
 We say that a sequence that belongs to $L^2$   is **square summable**.
