@@ -44,11 +44,9 @@ For example, outputs, prices, and dividends typically display  irregular but per
 
 Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.
 
-Are there ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process?
+But  there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
 
-The answer provided by Hansen  {cite}`Hansen_2012_Eca` is yes.
-
-He described  two classes of time series models that accommodate growth.
+Thus, {cite}`Hansen_2012_Eca`  described  two classes of time series models that accommodate growth.
 
 They are
 
