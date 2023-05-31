@@ -3,8 +3,10 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.14.5
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -29,10 +31,9 @@ kernelspec:
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
-```{code-cell} ipython
----
-tags: [hide-output]
----
+```{code-cell} ipython3
+:tags: [hide-output]
+
 !pip install --upgrade quantecon
 ```
 
@@ -79,7 +80,7 @@ In reading this lecture, please don't think that our decision-maker is paranoid 
 
 Let's start with some imports:
 
-```{code-cell} ipython
+```{code-cell} ipython3
 import pandas as pd
 import numpy as np
 from scipy.linalg import eig
@@ -941,7 +942,7 @@ We compute value-entropy correspondences for two policies
 
 The code for producing the graph shown above, with blue being for the robust policy, is as follows
 
-```{code-cell} python3
+```{code-cell} ipython3
 # Model parameters
 
 a_0 = 100
@@ -987,7 +988,7 @@ def evaluate_policy(θ, F):
     as well as the entropy level.
     """
 
-    rlq = qe.robustlq.RBLQ(Q, R, A, B, C, β, θ)
+    rlq = qe.RBLQ(Q, R, A, B, C, β, θ)
     K_F, P_F, d_F, O_F, o_F = rlq.evaluate_F(F)
     x0 = np.array([[1.], [0.], [0.]])
     value = - x0.T @ P_F @ x0 - d_F
@@ -1044,11 +1045,11 @@ def value_and_entropy(emax, F, bw, grid_size=1000):
 
 
 # Compute the optimal rule
-optimal_lq = qe.lqcontrol.LQ(Q, R, A, B, C, beta=β)
+optimal_lq = qe.LQ(Q, R, A, B, C, beta=β)
 Po, Fo, do = optimal_lq.stationary_values()
 
 # Compute a robust rule given θ
-baseline_robust = qe.robustlq.RBLQ(Q, R, A, B, C, β, θ)
+baseline_robust = qe.RBLQ(Q, R, A, B, C, β, θ)
 Fb, Kb, Pb = baseline_robust.robust_rule()
 
 # Check the positive definiteness of worst-case covariance matrix to
@@ -1189,4 +1190,3 @@ latter is just $\hat P$.
 ```{hint}
 Use the fact that $\hat P = \mathcal B( \mathcal D( \hat P))$
 ```
-
