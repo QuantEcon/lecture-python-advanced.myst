@@ -3,8 +3,10 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.14.5
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -29,10 +31,9 @@ kernelspec:
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
-```{code-cell} ipython
----
-tags: [hide-output]
----
+```{code-cell} ipython3
+:tags: [hide-output]
+
 !pip install --upgrade quantecon
 ```
 
@@ -72,7 +73,7 @@ More details about  these concepts and algorithms  can be found in Hansen  {cite
 
 Let's start with some imports:
 
-```{code-cell} ipython
+```{code-cell} ipython3
 import numpy as np
 import scipy as sp
 import scipy.linalg as la
@@ -243,7 +244,8 @@ This system also constructs the components of the decompositions of $y_t$ and of
 All of these objects are computed using the code below
 
 (amf_lss)=
-```{code-cell} python3
+
+```{code-cell} ipython3
 class AMF_LSS_VAR:
     """
     This class transforms an additive (multiplicative)
@@ -348,7 +350,7 @@ class AMF_LSS_VAR:
         # Build LSS type
         x0 = np.hstack([1, 0, nx0r, ny0r, ny0r])
         S0 = np.zeros((len(x0), len(x0)))
-        lss = qe.lss.LinearStateSpace(Abar, Bbar, Gbar, Hbar, mu_0=x0, Sigma_0=S0)
+        lss = qe.LinearStateSpace(Abar, Bbar, Gbar, Hbar, mu_0=x0, Sigma_0=S0)
 
         return lss
 
@@ -400,10 +402,9 @@ class AMF_LSS_VAR:
 
 The code below adds some functions that generate plots for instances of the `AMF_LSS_VAR` {ref}`class <amf_lss>`.
 
-```{code-cell} python3
----
-tags: [collapse-20]
----
+```{code-cell} ipython3
+:tags: [collapse-20]
+
 def plot_given_paths(amf, T, ypath, mpath, spath, tpath,
                     mbounds, sbounds, horline=0, show_trend=True):
 
@@ -682,7 +683,8 @@ def plot_martingales(amf, T, npaths=25):
 For now, we just plot $y_t$ and $x_t$, postponing until later a description of exactly how we compute them.
 
 (addfunc_egcode)=
-```{code-cell} python3
+
+```{code-cell} ipython3
 ϕ_1, ϕ_2, ϕ_3, ϕ_4 = 0.5, -0.2, 0, 0.5
 σ = 0.01
 ν = 0.01   # Growth rate
@@ -860,7 +862,7 @@ Let's use this code (embedded above) to explore the {ref}`example process descri
 If you run {ref}`the code that first simulated that example <addfunc_egcode>` again and then the method call
 you will generate (modulo randomness) the plot
 
-```{code-cell} python3
+```{code-cell} ipython3
 plot_additive(amf, T)
 plt.show()
 ```
@@ -916,7 +918,7 @@ Let's plot this multiplicative functional for our example.
 If you run {ref}`the code that first simulated that example <addfunc_egcode>` again and then the method call in the cell below you'll
 obtain the graph in the next cell.
 
-```{code-cell} python3
+```{code-cell} ipython3
 plot_multiplicative(amf, T)
 plt.show()
 ```
@@ -950,7 +952,7 @@ The second is a **peculiar property** noted and proved by Hansen and Sargent {ci
 
 The following simulation of many paths of $\widetilde M_t$ illustrates both properties
 
-```{code-cell} python3
+```{code-cell} ipython3
 np.random.seed(10021987)
 plot_martingales(amf, 12000)
 plt.show()
@@ -994,7 +996,7 @@ Let's write a program to simulate sample paths of $\{ x_t, y_{t} \}_{t=0}^{\inft
 
 We'll do this by formulating the additive functional as a linear state space model and putting the [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) class to work.
 
-```{code-cell} python3
+```{code-cell} ipython3
 class AMF_LSS_VAR:
     """
     This class is written to transform a scalar additive functional
@@ -1051,7 +1053,7 @@ class AMF_LSS_VAR:
         # Build LSS type
         x0 = np.hstack([1, 0, 0, 0, 0])
         S0 = np.zeros((5, 5))
-        lss = qe.lss.LinearStateSpace(Abar, Bbar, Gbar, Hbar,
+        lss = qe.LinearStateSpace(Abar, Bbar, Gbar, Hbar,
                                       mu_0=x0, Sigma_0=S0)
 
         return lss
@@ -1103,7 +1105,7 @@ The heavy lifting is done inside the `AMF_LSS_VAR` class.
 
 The following code adds some simple functions that make it straightforward to generate sample paths from an instance of `AMF_LSS_VAR`.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def simulate_xy(amf, T):
     "Simulate individual paths."
     foo, bar = amf.lss.simulate(T)
@@ -1149,7 +1151,7 @@ def population_means(amf, T=150):
 Now that we have these functions in our toolkit, let's apply them to run some
 simulations.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def simulate_martingale_components(amf, T=1000, I=5000):
     # Get the multiplicative decomposition
     ν, H, g = amf.multiplicative_decomp()
@@ -1204,7 +1206,7 @@ This is peculiar, so make sure you are careful in working with the log normal di
 
 Here is some code that tackles these tasks
 
-```{code-cell} python3
+```{code-cell} ipython3
 def Mtilde_t_density(amf, t, xmin=1e-8, xmax=5.0, npts=5000):
 
     # Pull out the multiplicative decomposition
@@ -1270,4 +1272,3 @@ A **likelihood ratio process** is  a  multiplicative  martingale with mean unity
 
 Likelihood ratio processes exhibit the peculiar property that naturally also appears
 [here](https://python.quantecon.org/likelihood_ratio_process.html).
-
