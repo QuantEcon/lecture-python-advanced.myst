@@ -1641,15 +1641,15 @@ chapters IX and XIV, for  principles  that guide solving some roots backwards an
 a planning problem   that maximizes the discounted sum of consumer plus
 producer surplus.
 
-[^footnote5]: [PS05](Pearlman_Sargent2005) verify the same claim by applying   machinery of  {cite}`PCL`.
+[^footnote5]: {cite}`Pearlman_Sargent2005` verify the same claim by applying   machinery of  {cite}`PCL`.
 
-[^footnote1]: See [AHMS96](ahms) for an account of invariant subspace methods.
+[^footnote1]: See {cite}`ahms` for an account of invariant subspace methods.
 
-[^footnote2]: See [AMS02](ams) for a discussion
+[^footnote2]: See {cite}`ams` for a discussion
 of  information assumptions needed to create a situation
 in which higher order beliefs appear in equilibrium decision rules.  A way
-to read our findings in light of [AMS02](ams) is that, relative
-to the number of signals agents observe,  Townsend’s
+to read our findings in light of {cite}`ams` is that, relative
+to the number of signals agents observe,  Townsend's
 section 8 model  has too few  random shocks  to get higher order beliefs to
 play a role.
 
