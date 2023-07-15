@@ -98,7 +98,6 @@ import numpy as np
 import quantecon as qe
 import matplotlib.pyplot as plt
 %matplotlib inline
-import scipy.linalg as la
 ```
 
 To exploit the isomorphism between consumption-smoothing and tax-smoothing models, we  simply use code from {doc}`Consumption Smoothing with Complete and Incomplete Markets <smoothing>`
@@ -936,4 +935,3 @@ In both {doc}`Optimal Taxation in an LQ Economy <lqramsey>` and {doc}`Optimal Ta
 
 In {doc}`optimal taxation with incomplete markets <amss>`, we study an **incomplete-markets** model in which the
 government also manipulates  prices of government debt.
-

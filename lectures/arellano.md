@@ -78,10 +78,8 @@ Let's start with some imports:
 import matplotlib.pyplot as plt
 import numpy as np
 import quantecon as qe
-import random
 
-from numba import njit, int64, float64, prange
-from numba.experimental import jitclass
+from numba import njit, prange
 %matplotlib inline
 ```
 

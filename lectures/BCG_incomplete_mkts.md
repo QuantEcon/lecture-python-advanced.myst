@@ -581,39 +581,39 @@ Here goes:
    $|\theta^1_h - \theta^1_l|$ is large:
     * Compute agent 1’s valuation of the equity claim with a
       fixed-point iteration:
-      
+
       $q_1 = \beta \int \frac{u^\prime(c^1_1(\epsilon))}{u^\prime(c^1_0)} d^e(k,b;\epsilon) g(\epsilon) \ d\epsilon$
-      
+
       where
-      
+
       $c^1_1(\epsilon) = w^1_1(\epsilon) + \theta^1 d^e(k,b;\epsilon)$
-      
+
       and
-      
+
       $c^1_0 = w^1_0 + \theta^1_0V - q_1\theta^1$
     * Compute agent 2’s valuation of the bond claim with a
       fixed-point iteration:
-      
+
       $p = \beta \int \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)} d^b(k,b;\epsilon) g(\epsilon) \ d\epsilon$
-      
+
       where
-      
+
       $c^2_1(\epsilon) = w^2_1(\epsilon) + \theta^2 d^e(k,b;\epsilon) + b$
-      
+
       and
-      
+
       $c^2_0 = w^2_0 + \theta^2_0 V - q_1 \theta^2 - pb$
     * Compute agent 2’s valuation of the equity claim with a
       fixed-point iteration:
-      
+
       $q_2 = \beta \int \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)} d^e(k,b;\epsilon) g(\epsilon) \ d\epsilon$
-      
+
       where
-      
+
       $c^2_1(\epsilon) = w^2_1(\epsilon) + \theta^2 d^e(k,b;\epsilon) + b$
-      
+
       and
-      
+
       $c^2_0 = w^2_0 + \theta^2_0 V - q_2 \theta^2 - pb$
     * If $q_1 > q_2$, Set $\theta_l = \theta^1$;
       otherwise, set $\theta_h = \theta^1$.
@@ -621,7 +621,7 @@ Here goes:
       $|\theta^1_h - \theta^1_l|$ is small.
 1. Set bond price as $p$ and equity price as  $q = \max(q_1,q_2)$.
 1. Compute optimal choices of consumption:
-   
+
    $$
    \begin{aligned}
    c^1_0 &= w^1_0 + \theta^1_0V - q\theta^1 \\
@@ -630,7 +630,7 @@ Here goes:
    c^2_1(\epsilon) &= w^2_1(\epsilon) + \theta^2 d^e(k,b;\epsilon) + b
    \end{aligned}
    $$
-   
+
 1. (Here we confess to abusing notation again, but now in a different
    way. In step 7, we interpret frozen $c^i$s as Big
    $C^i$. We do this to solve the firm’s problem.) Fixing the
@@ -638,13 +638,13 @@ Here goes:
    choices of capital $k$ and debt level $b$ using the
    firm’s first order necessary conditions.
 1. Compute deviations from the firm’s FONC for capital $k$ as:
-   
+
    $kfoc = \beta \alpha A k^{\alpha - 1} \left( \int \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)}  e^\epsilon g(\epsilon) \ d\epsilon \right) - 1$
     - If $kfoc > 0$, Set $k_l = k$; otherwise, set
       $k_h = k$.
     - Repeat steps 4 through 7A until $|k_h-k_l|$ is small.
 1. Compute deviations from the firm’s FONC for debt level $b$  as:
-   
+
    $bfoc = \beta \left[ \int_{\epsilon^*}^\infty \left( \frac{u^\prime(c^1_1(\epsilon))}{u^\prime(c^1_0)} \right) g(\epsilon) \ d\epsilon -  \int_{\epsilon^*}^\infty \left( \frac{u^\prime(c^2_1(\epsilon))}{u^\prime(c^2_0)} \right)  g(\epsilon) \ d\epsilon \right]$
     - If $bfoc > 0$, Set $b_h = b$; otherwise, set
       $b_l = b$.
@@ -652,7 +652,7 @@ Here goes:
 1. Given prices $q$ and $p$ from step 6, and the firm
    choices of $k$ and $b$ from step 7, compute the synthetic
    firm value:
-   
+
    $V_x = -k + q + pb$
     - If $V_x > V$, then set $V_l = V$; otherwise, set
       $V_h = V$.
@@ -705,12 +705,9 @@ Parameters include:
 - bound: Bound for truncated normal distribution. Default value is 3.
 
 ```{code-cell} ipython
-import pandas as pd
 import numpy as np
-from scipy.stats import norm
 from scipy.stats import truncnorm
 from scipy.integrate import quad
-from scipy.optimize import bisect
 from numba import njit
 from interpolation import interp
 ```
@@ -1943,4 +1940,3 @@ Agents of type 2 value bonds more highly (they want more hedging).
 
 Taken together with our earlier plot of equity holdings, these graphs confirm our earlier conjecture that while both type
 of agents hold equities, only agents of type 2 holds bonds.
-

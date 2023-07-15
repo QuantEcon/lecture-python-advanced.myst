@@ -41,11 +41,8 @@ Let's start with following imports:
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import root
-from interpolation.splines import eval_linear, UCGrid, nodes
-from quantecon import optimize, MarkovChain
-from numba import njit, prange, float64
-from numba.experimental import jitclass
+from interpolation.splines import UCGrid, nodes
+from quantecon import MarkovChain
 
 %matplotlib inline
 ```
@@ -1033,4 +1030,3 @@ problem, there exists another realization $\tilde s^t$ with
 the same history up until the previous period, i.e., $\tilde s^{t-1}=
 s^{t-1}$, but where the multiplier on constraint {eq}`AMSS_46` takes  a positive value, so
 $\gamma_t(\tilde s^t)>0$.
-

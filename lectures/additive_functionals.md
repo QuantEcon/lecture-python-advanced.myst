@@ -75,7 +75,6 @@ Let's start with some imports:
 
 ```{code-cell} ipython3
 import numpy as np
-import scipy as sp
 import scipy.linalg as la
 import quantecon as qe
 import matplotlib.pyplot as plt

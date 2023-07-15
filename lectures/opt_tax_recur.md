@@ -24,16 +24,6 @@ kernelspec:
 :depth: 2
 ```
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
-
-```{code-cell} ipython
----
-tags: [hide-output]
----
-!pip install --upgrade quantecon
-!pip install interpolation
-```
-
 ## Overview
 
 This lecture describes a celebrated model of optimal fiscal policy by Robert E.
@@ -71,12 +61,6 @@ Let's start with some standard imports:
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
-from scipy.optimize import root
-from quantecon import MarkovChain
-from quantecon.optimize.nelder_mead import nelder_mead
-from interpolation import interp
-from numba import njit, prange, float64
-from numba.experimental import jitclass
 ```
 
 ## A Competitive Equilibrium with Distorting Taxes
@@ -603,10 +587,10 @@ Here is a computational algorithm:
    of $\vec x$.
     * these depend on $\Phi$.
 1. Find a $\Phi$ that satisfies
-   
+
    ```{math}
    :label: Bellman2cons
-   
+
    u_{c,0} b_0 = u_{c,0} (n_0 - g_0) - u_{l,0} n_0  + \beta \sum_{s=1}^S \Pi(s | s_0) x(s)
    ```
    by gradually raising $\Phi$ if the left side of {eq}`Bellman2cons`
@@ -1420,4 +1404,3 @@ By comparing these recursive formulations, we shall glean a sense in which the
 dimension of the state is lower in the Lucas Stokey model.
 
 Accompanying that difference in dimension will be  different dynamics of government debt.
-
