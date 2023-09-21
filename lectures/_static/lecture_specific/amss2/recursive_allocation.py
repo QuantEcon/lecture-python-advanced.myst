@@ -142,7 +142,7 @@ class RecursiveAllocationAMSS:
 
             cHist[t], nHist[t], Bhist[t], ΤHist[t] = c[s], n[s], x / Eu_c, Τ
             xHist[t], THist[t] = xprime[s], T[s]
-        return np.array([cHist, nHist, Bhist, ΤHist, THist, μHist, sHist, xHist])
+        return [cHist, nHist, Bhist, ΤHist, THist, μHist, sHist, xHist]
 
 
 class BellmanEquation:
