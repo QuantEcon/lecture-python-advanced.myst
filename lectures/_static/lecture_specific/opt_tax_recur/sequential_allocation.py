@@ -127,7 +127,7 @@ class SequentialLS:
         n0 = c0 + g0
         l0 = 1 - n0
 
-        cn0_arr[:] = c0, n0
+        cn0_arr[:] = c0.item(), n0.item()
 
         LHS = Uc(c0, l0) * b0
         RHS = Uc(c0, l0) * c0 - Ul(c0, l0) * n0 + β * π[s0] @ x
