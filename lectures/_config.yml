@@ -33,6 +33,11 @@ latex:
 sphinx:
   extra_extensions: [sphinx_multitoc_numbering, sphinxext.rediraffe, sphinx_tojupyter, sphinx_exercise, sphinx_togglebutton]
   config:
+    linkcheck_ignore: ['https://doi.org/10.3982/ECTA8070',
+                       'https://doi.org/10.1086/261749',
+                       'https://doi.org/10.1086/262078',
+                       'https://keras.io/',
+                       'https://data.oecd.org/']
     nb_mime_priority_overrides: [
        # HTML
        ['html', 'application/vnd.jupyter.widget-view+json', 10],

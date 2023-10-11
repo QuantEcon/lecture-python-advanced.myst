@@ -415,7 +415,7 @@ In this case, the formula for computing $q(x_0)$ is known to be $q(x_0) = x_0' Q
 * $v = \text{trace} \, (C' Q C) \beta / (1 - \beta)$
 
 The first equation is known as a discrete Lyapunov equation and can be solved
-using [this function](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/matrix_eqn.py#L25).
+using [this function](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/_matrix_eqn.py).
 
 ### Finite State Markov Case
 

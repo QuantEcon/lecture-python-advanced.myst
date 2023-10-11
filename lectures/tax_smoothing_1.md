@@ -406,7 +406,7 @@ model using the `LQMarkov` class that solves Markov jump linear
 quandratic control problems as described above.
 
 The code for the class can be viewed
-[here](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqcontrol.py#L334).
+[here](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/_lqcontrol.py).
 
 The class takes lists of matrices that corresponds to $N$ Markov states.
 
