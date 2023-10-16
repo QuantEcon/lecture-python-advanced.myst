@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>15. Coase’s Theory of the Firm &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -60,18 +60,18 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=cb2d6eee9712fbd5cbf7cbc2d6baf81f7f9a9912" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -80,8 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -96,9 +97,9 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=b7d60282c7125f74e59bac03c2323864e0e32e1c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
-    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -241,8 +242,8 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="coase-s-theory-of-the-firm">
-<h1><a class="toc-backref" href="#id7" role="doc-backlink"><span class="section-number">15. </span><span class="target" id="index-0"></span>Coase’s Theory of the Firm</a><a class="headerlink" href="#coase-s-theory-of-the-firm" title="Permalink to this heading">#</a></h1>
-<nav class="contents" id="contents">
+<h1><a class="toc-backref" href="#id7"><span class="section-number">15. </span><span class="target" id="index-0"></span>Coase’s Theory of the Firm</a><a class="headerlink" href="#coase-s-theory-of-the-firm" title="Permalink to this heading">#</a></h1>
+<div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#coase-s-theory-of-the-firm" id="id7">Coase’s Theory of the Firm</a></p>
@@ -256,11 +257,11 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</nav>
+</div>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install interpolation
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>interpolation
 </pre></div>
 </div>
 </div>
@@ -270,22 +271,19 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: interpolation in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (2.2.4)
-Requirement already satisfied: numba&gt;=0.47 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from interpolation) (0.56.4)
-Requirement already satisfied: numpy&lt;2.0.0,&gt;=1.22.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from interpolation) (1.23.5)
-Requirement already satisfied: tempita&lt;0.6.0,&gt;=0.5.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from interpolation) (0.5.2)
-Requirement already satisfied: scipy&lt;2.0.0,&gt;=1.4.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from interpolation) (1.10.0)
-Requirement already satisfied: packaging&lt;22.0,&gt;=21.3 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from interpolation) (21.3)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba&gt;=0.47-&gt;interpolation) (65.6.3)
-Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba&gt;=0.47-&gt;interpolation) (0.39.1)
-Requirement already satisfied: pyparsing!=3.0.5,&gt;=2.0.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from packaging&lt;22.0,&gt;=21.3-&gt;interpolation) (3.0.9)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: interpolation in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (2.2.1)
+Requirement already satisfied: numba&gt;=0.47 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from interpolation) (0.57.1)
+Requirement already satisfied: numpy&gt;=1.18.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from interpolation) (1.24.3)
+Requirement already satisfied: scipy&gt;=1.4.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from interpolation) (1.11.1)
+Requirement already satisfied: tempita&gt;=0.5.2 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from interpolation) (0.5.2)
+Requirement already satisfied: llvmlite&lt;0.41,&gt;=0.40.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.47-&gt;interpolation) (0.40.0)
 </pre></div>
 </div>
 </div>
 </details>
 </div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink"><span class="section-number">15.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id8"><span class="section-number">15.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>In 1937, Ronald Coase wrote a brilliant essay on the nature of the firm <span id="id1">[<a class="reference internal" href="zreferences.html#id232" title="Ronald Harry Coase. The nature of the firm. economica, 4(16):386–405, 1937.">Coa37</a>]</span>.</p>
 <p>Coase was writing at a time when the Soviet Union was rising to become a significant industrial power.</p>
 <p>At the same time, many free-market economies were afflicted by a severe and painful depression.</p>
@@ -305,6 +303,12 @@ even in free-market economies, a great deal of top-down planning does in fact ta
 <span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fminbound</span>
 <span class="kn">from</span> <span class="nn">interpolation</span> <span class="kn">import</span> <span class="n">interp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages/numba/core/decorators.py:262: NumbaDeprecationWarning: <span class=" -Color -Color-Bold">numba.generated_jit is deprecated. Please see the documentation at: https://numba.readthedocs.io/en/stable/reference/deprecation.html#deprecation-of-generated-jit for more information and advice on a suitable replacement.</span>
+  warnings.warn(msg, NumbaDeprecationWarning)
 </pre></div>
 </div>
 </div>
@@ -368,7 +372,7 @@ proportional to the range of tasks.</p>
 </section>
 </section>
 <section id="the-model">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink"><span class="section-number">15.2. </span>The Model</a><a class="headerlink" href="#the-model" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9"><span class="section-number">15.2. </span>The Model</a><a class="headerlink" href="#the-model" title="Permalink to this heading">#</a></h2>
 <p>The model we study involves production of a single unit of a final good.</p>
 <p>Production requires a linearly ordered chain, requiring sequential completion
 of a large number of processing stages.</p>
@@ -420,7 +424,7 @@ decision problem as the firm above it in the chain, with the only difference bei
 </section>
 </section>
 <section id="equilibrium">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">15.3. </span>Equilibrium</a><a class="headerlink" href="#equilibrium" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10"><span class="section-number">15.3. </span>Equilibrium</a><a class="headerlink" href="#equilibrium" title="Permalink to this heading">#</a></h2>
 <p>We assume that all firms are <em>ex-ante</em> identical and act as price takers.</p>
 <p>As price takers, they face a price function <span class="math notranslate nohighlight">\(p\)</span>, which is a map from <span class="math notranslate nohighlight">\([0, 1]\)</span> to <span class="math notranslate nohighlight">\(\mathbb R_+\)</span>, with <span class="math notranslate nohighlight">\(p(t)\)</span> interpreted
 as the price of the good at processing stage <span class="math notranslate nohighlight">\(t\)</span>.</p>
@@ -473,7 +477,7 @@ filling the same role in the production chain.</p>
 </section>
 </section>
 <section id="existence-uniqueness-and-computation-of-equilibria">
-<h2><a class="toc-backref" href="#id11" role="doc-backlink"><span class="section-number">15.4. </span>Existence, Uniqueness and Computation of Equilibria</a><a class="headerlink" href="#existence-uniqueness-and-computation-of-equilibria" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id11"><span class="section-number">15.4. </span>Existence, Uniqueness and Computation of Equilibria</a><a class="headerlink" href="#existence-uniqueness-and-computation-of-equilibria" title="Permalink to this heading">#</a></h2>
 <p>We have defined an equilibrium but does one exist?  Is it unique?  And, if so, how can we compute it?</p>
 <section id="a-fixed-point-method">
 <h3><span class="section-number">15.4.1. </span>A Fixed Point Method<a class="headerlink" href="#a-fixed-point-method" title="Permalink to this heading">#</a></h3>
@@ -558,7 +562,7 @@ inter-firm efficiency by indicating how two costly forms of coordination (market
 </section>
 </section>
 <section id="implementation">
-<h2><a class="toc-backref" href="#id12" role="doc-backlink"><span class="section-number">15.5. </span>Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id12"><span class="section-number">15.5. </span>Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
 <p>For most specifications of primitives, there is no closed-form solution for the equilibrium as far as we are aware.</p>
 <p>However, we know that we can compute the equilibrium corresponding to a given transaction cost parameter <span class="math notranslate nohighlight">\(\delta\)</span>  and a cost function <span class="math notranslate nohighlight">\(c\)</span>
 by applying the results stated above.</p>
@@ -591,7 +595,7 @@ by applying the results stated above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_prices</span><span class="p">(</span><span class="n">pc</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute prices by iterating with T</span>
 
 <span class="sd">        * pc is an instance of ProductionChain</span>
@@ -628,7 +632,7 @@ task implemented for a firm face price function p_function and with downstream b
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">optimal_choices</span><span class="p">(</span><span class="n">pc</span><span class="p">,</span> <span class="n">p_function</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Takes p_func as the true function, minimizes on [0,s]</span>
 
 <span class="sd">    Returns optimal upstream boundary t_star and optimal size of</span>
@@ -689,7 +693,7 @@ boundaries of firms as vertical lines</p>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration converged in 2 steps
 </pre></div>
 </div>
-<img alt="_images/3f923d98602b85e7ced02429e9bf57195036564c4aee6661d13dc8ed09186c33.png" src="_images/3f923d98602b85e7ced02429e9bf57195036564c4aee6661d13dc8ed09186c33.png" />
+<img alt="_images/9162f9e3c4a7313317ba1600acee807bfc28173cc102d001baac29f4f9be5284.png" src="_images/9162f9e3c4a7313317ba1600acee807bfc28173cc102d001baac29f4f9be5284.png" />
 </div>
 </div>
 <p>Here’s the function <span class="math notranslate nohighlight">\(\ell^*\)</span>, which shows how large a firm with
@@ -709,13 +713,13 @@ downstream boundary <span class="math notranslate nohighlight">\(s\)</span> choo
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5fd3d01eadc854c647ffd54e157291e8bc6efa8dd1d831e9fbf405e33cd26876.png" src="_images/5fd3d01eadc854c647ffd54e157291e8bc6efa8dd1d831e9fbf405e33cd26876.png" />
+<img alt="_images/e1387171a985993fe48f24851b8ee5bdd05c8d1d3b6a981e9e3fef249989883f.png" src="_images/e1387171a985993fe48f24851b8ee5bdd05c8d1d3b6a981e9e3fef249989883f.png" />
 </div>
 </div>
 <p>Note that downstream firms choose to be larger, a point we return to below.</p>
 </section>
 <section id="exercises">
-<h2><a class="toc-backref" href="#id13" role="doc-backlink"><span class="section-number">15.6. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id13"><span class="section-number">15.6. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="coa_ex1">
 <span id="lucas-asset-exer1"></span>
 <p class="admonition-title"><span class="caption-number">Exercise 15.1 </span></p>
@@ -804,7 +808,7 @@ associated with diminishing returns to management — which induce convexity —
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration converged in 2 steps
 </pre></div>
 </div>
-<img alt="_images/b2aff22968bef1055e8fecaa6188963887684052b0aa5bcd100dc3403c9bf4df.png" src="_images/b2aff22968bef1055e8fecaa6188963887684052b0aa5bcd100dc3403c9bf4df.png" />
+<img alt="_images/bba70e269c36e40f4dd92be683ef253220c4d9868d70ff7ffd893ea5424ccdab.png" src="_images/bba70e269c36e40f4dd92be683ef253220c4d9868d70ff7ffd893ea5424ccdab.png" />
 </div>
 </div>
 </section>
@@ -1193,15 +1197,15 @@ associated with diminishing returns to management — which induce convexity —
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
-                    <!-- <li class="btn__search">
-                        <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
-                            <i data-feather="search"></i>
-                        </form>
-                    </li> -->
                 </ul>
 
                 <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
@@ -1209,7 +1213,7 @@ associated with diminishing returns to management — which induce convexity —
                     <li data-tippy-content="Download Notebook"><a href="/_notebooks/coase.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
-                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/coase.md" download><i data-feather="github"></i></a></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/coase.md" download><i data-feather="github"></i></a></li>
                 </ul>
 
             </div>
@@ -1238,8 +1242,6 @@ associated with diminishing returns to management — which induce convexity —
                 <span class="label">Public</span>
                 <select id="launcher-public-input">
                 
-                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/coase.ipynb">BinderHub</option>
-                
                     <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/master/coase.ipynb">Colab</option>
                 
                 </select>
@@ -1251,7 +1253,7 @@ associated with diminishing returns to management — which induce convexity —
                 <i class="fas fa-check-circle"></i>
             </li>
             </ul>
-            <p class="launch"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/coase.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/master/coase.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
             <script>
                 // QuantEcon Notebook Launcher
                 const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');

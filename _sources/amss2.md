@@ -412,7 +412,7 @@ def solve_cb(unknowns, Φ, b_bar, s=1):
            + Φ * (c0 * u.Ucc(c0, 1) + (c0 + g0) * u.Unn(1, c0 + g0)) \
            - Φ * u.Ucc(c0, 1) * b0
 
-    return np.array([eq1, eq2], dtype='float64')
+    return np.array([eq1, eq2.item()], dtype='float64')
 ```
 
 To solve the equations for $c_0, b_0$, we use SciPy's fsolve function

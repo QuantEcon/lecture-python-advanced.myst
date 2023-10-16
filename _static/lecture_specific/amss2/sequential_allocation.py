@@ -155,4 +155,4 @@ class SequentialAllocation:
             RHist[t - 1] = Uc(cHist[t - 1], nHist[t - 1]) / (β * Eu_c)
             μHist[t] = μ
 
-        return np.array([cHist, nHist, Bhist, ΤHist, sHist, μHist, RHist])
+        return [cHist, nHist, Bhist, ΤHist, sHist, μHist, RHist]

@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>24. Risk and Model Uncertainty &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -60,18 +60,18 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=cb2d6eee9712fbd5cbf7cbc2d6baf81f7f9a9912" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -80,8 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -96,9 +97,9 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=b7d60282c7125f74e59bac03c2323864e0e32e1c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
-    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -323,7 +324,7 @@ probability distribution to a decision maker.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Useful functions</span>
 <span class="nd">@njit</span>
 <span class="k">def</span> <span class="nf">ent</span><span class="p">(</span><span class="n">π</span><span class="p">,</span> <span class="n">π_hat</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the relative entropy of a probability vector `π_hat` with respect to `π`. JIT-compiled using Numba.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -333,12 +334,12 @@ probability distribution to a decision maker.</p>
 
 
 <span class="k">def</span> <span class="nf">T_θ_factory</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return an operator `T_θ` for a given penalty parameter `θ` and probability distribution vector `π`.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">T_θ</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>  
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Risk-sensitivity operator of Jacobson (1973) and Whittle (1981) taking a function `u` as argument.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -348,7 +349,7 @@ probability distribution to a decision maker.</p>
 
 
 <span class="k">def</span> <span class="nf">compute_change_measure</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the channge of measure given a utility function `u`, a consumption vector `c`,</span>
 <span class="sd">    a penalty parameter `θ` and a baseline probability vector `π` </span>
 <span class="sd">    </span>
@@ -360,7 +361,7 @@ probability distribution to a decision maker.</p>
 
 
 <span class="k">def</span> <span class="nf">utility_function_factory</span><span class="p">(</span><span class="n">α</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a CRRA utility function parametrized by `α` </span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -472,7 +473,7 @@ E m \log m  = \hat E \log m .
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="figure1">
-<img alt="_images/89de01b247b48b9a5a3d3c43ddcacffc692d0bcdcfd93d0e3b3e6e246e6e4c15.png" src="_images/89de01b247b48b9a5a3d3c43ddcacffc692d0bcdcfd93d0e3b3e6e246e6e4c15.png" />
+<img alt="_images/f5069c749bde85916d8a5cb7b52ac048c6a497987117f2ff4012944b71d8f400.png" src="_images/f5069c749bde85916d8a5cb7b52ac048c6a497987117f2ff4012944b71d8f400.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 24.1 </span><span class="caption-text">Figure 1</span><a class="headerlink" href="#figure1" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -531,7 +532,7 @@ E m \log m  = \hat E \log m .
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/73d503bac0a9c02cf18d28cb5d28c2d7d9504fab68ff4e8832e8f292a2b37402.png" src="_images/73d503bac0a9c02cf18d28cb5d28c2d7d9504fab68ff4e8832e8f292a2b37402.png" />
+<img alt="_images/0559db5bd4c5996c502349d518d5247148cd5397368fe39404ce150801147225.png" src="_images/0559db5bd4c5996c502349d518d5247148cd5397368fe39404ce150801147225.png" />
 </div>
 </div>
 <p>The next figure plots  the logarithm of entropy.</p>
@@ -575,11 +576,11 @@ E m \log m  = \hat E \log m .
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_12211/3759713737.py:2: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_13702/3759713737.py:2: RuntimeWarning: divide by zero encountered in log
   plt.pcolormesh(x, y, np.log(ent_vals_mat.T), shading=&#39;gouraud&#39;, cmap=&#39;seismic&#39;)
 </pre></div>
 </div>
-<img alt="_images/57902c2532e6568ea9d553c6a614b5e405322db391f7245a20558b94b0650c80.png" src="_images/57902c2532e6568ea9d553c6a614b5e405322db391f7245a20558b94b0650c80.png" />
+<img alt="_images/4726c9486fa5190d0a855a9bc8f04e274aade20e5328c7b9d7314099470ccda6.png" src="_images/4726c9486fa5190d0a855a9bc8f04e274aade20e5328c7b9d7314099470ccda6.png" />
 </div>
 </div>
 </section>
@@ -799,7 +800,7 @@ solve</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/d61ce618fb0a4a212e212a94773245ff13a22c234e2d65a79be319871c491f36.png" src="_images/d61ce618fb0a4a212e212a94773245ff13a22c234e2d65a79be319871c491f36.png" />
+<img alt="_images/a5d07770044e8b46f1227d49512a46fcc80f5d9baa3650c9cc537a39d343f2b2.png" src="_images/a5d07770044e8b46f1227d49512a46fcc80f5d9baa3650c9cc537a39d343f2b2.png" />
 </div>
 </div>
 <p>For large values of <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\({\sf T} u(c)\)</span> is approximately linear in the probability <span class="math notranslate nohighlight">\(\pi_1\)</span>, but for lower values of <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\({\sf T} u(c)\)</span> has considerable    curvature as a function of <span class="math notranslate nohighlight">\(\pi_1\)</span>.</p>
@@ -895,7 +896,7 @@ solve</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/96f10607645fc4ed6ae799add75a71796cd198a505f7f984e578b618e6d4952f.png" src="_images/96f10607645fc4ed6ae799add75a71796cd198a505f7f984e578b618e6d4952f.png" />
+<img alt="_images/9410a8bf96d4b23bbc13f4b96a3ad07f6f0a3792199116bcbc17edfeffbb2bde.png" src="_images/9410a8bf96d4b23bbc13f4b96a3ad07f6f0a3792199116bcbc17edfeffbb2bde.png" />
 </div>
 </div>
 <p>The panel on the right portrays how the transformation <span class="math notranslate nohighlight">\(\exp\left(\frac{-u\left(c\right)}{\theta}\right)\)</span> sends <span class="math notranslate nohighlight">\(u\left(c\right)\)</span> to a new function by  (i)  flipping the  sign,  and (ii) increasing curvature in proportion to <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
@@ -1017,7 +1018,7 @@ entropy curve lies below the horizontal dotted line at an entropy level of <span
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/5db9c5deb42dc12af14e16b545f7dcab21ce564b14560b246255e8a7d8eb8a5e.png" src="_images/5db9c5deb42dc12af14e16b545f7dcab21ce564b14560b246255e8a7d8eb8a5e.png" />
+<img alt="_images/92e9254a07f03830f73986191b43c98da4e82bd1fc04fee60b88bf74b0c25dd6.png" src="_images/92e9254a07f03830f73986191b43c98da4e82bd1fc04fee60b88bf74b0c25dd6.png" />
 </div>
 </div>
 <p>The next  figure shows the function <span class="math notranslate nohighlight">\(\sum_{i=1}^I \pi_i m_i [  u(c_i) + \theta \log m_i ]\)</span> that is to be
@@ -1092,7 +1093,7 @@ minimized in the multiplier problem.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/092e42aadab9ccb211e355e1de150bd07e520d326cfb9164bd1b1b1cc16a74ff.png" src="_images/092e42aadab9ccb211e355e1de150bd07e520d326cfb9164bd1b1b1cc16a74ff.png" />
+<img alt="_images/9f286b73bdf6da32213670bf35407cff1ebc16c7f538a47ae3dfd56a7e014b7f.png" src="_images/9f286b73bdf6da32213670bf35407cff1ebc16c7f538a47ae3dfd56a7e014b7f.png" />
 </div>
 </div>
 <p>Evidently, from this figure and also from formula <a class="reference internal" href="#equation-tom12">(24.12)</a>, lower values of <span class="math notranslate nohighlight">\(\theta\)</span> lead to lower,
@@ -1193,13 +1194,13 @@ point along the 45 degree line.</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">multiplier_criterion_factory</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a function to compute the multiplier preferences objective function parametrized </span>
 <span class="sd">    by a penalty parameter `θ`, a probability vector `π` and a utility function `u`</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">criterion</span><span class="p">(</span><span class="n">c_1</span><span class="p">,</span> <span class="n">c_2</span><span class="p">,</span> <span class="n">return_entropy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the multiplier preferences objective function and</span>
 <span class="sd">        associated entropy level if return_entropy=True for a</span>
 <span class="sd">        consumption bundle (c_1, c_2).</span>
@@ -1225,14 +1226,14 @@ point along the 45 degree line.</p>
 
 
 <span class="k">def</span> <span class="nf">constraint_criterion_factory</span><span class="p">(</span><span class="n">η</span><span class="p">,</span> <span class="n">π</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a function to compute the constraint preferences objective function parametrized </span>
 <span class="sd">    by a penalty parameter `η`, a probability vector `π` and a utility function `u`</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="nf">inner_root_problem</span><span class="p">(</span><span class="n">θ_tilde</span><span class="p">,</span> <span class="n">c_1</span><span class="p">,</span> <span class="n">c_2</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inner root problem associated with the constraint preferences objective function. </span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1277,7 +1278,7 @@ point along the 45 degree line.</p>
 
 
 <span class="k">def</span> <span class="nf">solve_root_problem</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">u_bar</span><span class="p">,</span> <span class="n">c_1_grid</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bisect&#39;</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solve root finding problem `problem` for all values in `c_1_grid` taking `u_bar` as</span>
 <span class="sd">    given and using `method`.</span>
 <span class="sd">    </span>
@@ -1386,7 +1387,7 @@ point along the 45 degree line.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/e4499ac638b956fdcf3e3471341b140daa1e7c7ed97f649e03efedf8c3961e28.png" src="_images/e4499ac638b956fdcf3e3471341b140daa1e7c7ed97f649e03efedf8c3961e28.png" />
+<img alt="_images/d12a7d36d24cd1699ab0a6e51dd9889c68fc129e3b4a2814b026e20fda10d8e9.png" src="_images/d12a7d36d24cd1699ab0a6e51dd9889c68fc129e3b4a2814b026e20fda10d8e9.png" />
 </div>
 </div>
 <p><strong>Kink at 45 degree line</strong></p>
@@ -1470,7 +1471,7 @@ preferences tangent.</p>
 <span class="n">cons_crit_bar</span> <span class="o">=</span> <span class="n">constraint_pref_crit</span><span class="p">(</span><span class="o">*</span><span class="n">c_bundle</span><span class="p">)</span>  <span class="c1"># Evaluate criterion at consumption bundle</span>
 <span class="n">constraint_pref_root_problem</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c_2</span><span class="p">,</span> <span class="n">c_1</span><span class="p">,</span> <span class="n">u_bar</span><span class="p">:</span> <span class="n">u_bar</span> <span class="o">-</span> <span class="n">constraint_pref_crit</span><span class="p">(</span><span class="n">c_1</span><span class="p">,</span> <span class="n">c_2</span><span class="p">)</span>  <span class="c1"># Formulate root problem</span>
 <span class="c1"># Solve root problem for all c_1 values</span>
-<span class="n">c_2_grid_cons</span> <span class="o">=</span> <span class="n">solve_root_problem</span><span class="p">(</span><span class="n">constraint_pref_root_problem</span><span class="p">,</span> <span class="n">cons_crit_bar</span><span class="p">,</span> <span class="n">c_1_grid</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bisect&#39;</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">4.4</span><span class="p">])</span>  
+<span class="n">c_2_grid_cons</span> <span class="o">=</span> <span class="n">solve_root_problem</span><span class="p">(</span><span class="n">constraint_pref_root_problem</span><span class="p">,</span> <span class="n">cons_crit_bar</span><span class="p">,</span> <span class="n">c_1_grid</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bisect&#39;</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="mf">0.47</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">])</span>  
 
 <span class="c1"># Compute associated η and θ values</span>
 <span class="n">ηs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">c_1_grid</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
@@ -1516,7 +1517,7 @@ preferences tangent.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/caf14177ccce9cc4cbd93223f7fee7f9ae9e4dd5a56f883a1e8c20c929a857a6.png" src="_images/caf14177ccce9cc4cbd93223f7fee7f9ae9e4dd5a56f883a1e8c20c929a857a6.png" />
+<img alt="_images/476ccd6548b672b214fd79ffec0815661b49afc245d84dad9e8e013ad099ef41.png" src="_images/476ccd6548b672b214fd79ffec0815661b49afc245d84dad9e8e013ad099ef41.png" />
 </div>
 </div>
 <p>Note that all three lines of the left graph intersect at (1, 3). While the intersection at (3, 1) is hard-coded, the intersection at (1,3) arises from the computation,  which confirms that the code seems to be
@@ -1623,7 +1624,7 @@ degree line), and <em>ex post</em> Bayesian (dotted lines) preferences.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/7ff67c568d4b7823ecad40ab72e77cf87c3d08a3cb035199356271c092b905b8.png" src="_images/7ff67c568d4b7823ecad40ab72e77cf87c3d08a3cb035199356271c092b905b8.png" />
+<img alt="_images/d7a4e87ee0a5e16bafd97a13b6000cbe89a8dd8c7217a42d7685345e2b56f01b.png" src="_images/d7a4e87ee0a5e16bafd97a13b6000cbe89a8dd8c7217a42d7685345e2b56f01b.png" />
 </div>
 </div>
 <p>Because budget constraints are linear, asset prices are identical under
@@ -1714,7 +1715,7 @@ equivalent point <span class="math notranslate nohighlight">\((c^*, c^*)\)</span
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/fb7b262cc6b107b3d599a2fa2de893869b005d10f4495607a3a0a25bd284d1b2.png" src="_images/fb7b262cc6b107b3d599a2fa2de893869b005d10f4495607a3a0a25bd284d1b2.png" />
+<img alt="_images/c04d91920ed7d40e075775ff8e54f9b172057da973618cf309262a22f2638270.png" src="_images/c04d91920ed7d40e075775ff8e54f9b172057da973618cf309262a22f2638270.png" />
 </div>
 </div>
 <p>The figure indicates that the certainty equivalent
@@ -1766,7 +1767,7 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting functions</span>
 <span class="k">def</span> <span class="nf">make_segments</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Create list of line segments from x and y coordinates, in the correct format for LineCollection:</span>
 <span class="sd">    an array of the form   numlines x (points per line) x 2 (x and y) array</span>
 <span class="sd">    &#39;&#39;&#39;</span>
@@ -1778,7 +1779,7 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 
 
 <span class="k">def</span> <span class="nf">colorline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;copper&#39;</span><span class="p">),</span> <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Plot a colored line with coordinates x and y</span>
 <span class="sd">    Optionally specify colors in the array z</span>
 <span class="sd">    Optionally specify a colormap, a norm function and a line width</span>
@@ -1823,7 +1824,7 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 
 
 <span class="k">def</span> <span class="nf">contour_plot</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">π_vals_nb</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">levels_nb</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">min_π_val</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a contour plot containing iso-utility and iso-entropy curves given utility</span>
 <span class="sd">    function parameter `α`.</span>
 <span class="sd">    </span>
@@ -1898,11 +1899,11 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_12211/3904427642.py:36: RuntimeWarning: invalid value encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_13702/3904427642.py:36: RuntimeWarning: invalid value encountered in divide
   m =  m_unnormalized / (π * m_unnormalized).sum()
 </pre></div>
 </div>
-<img alt="_images/13d82cd53e0db98303d2b26aec8d3f2a6b3553ba36b8063bdd56a9b638a2c761.png" src="_images/13d82cd53e0db98303d2b26aec8d3f2a6b3553ba36b8063bdd56a9b638a2c761.png" />
+<img alt="_images/b47ae064cd2178083d1be1c0c751775a14dfe3ae3ca22251cc9343e8e4960880.png" src="_images/b47ae064cd2178083d1be1c0c751775a14dfe3ae3ca22251cc9343e8e4960880.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1920,13 +1921,13 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_12211/3904427642.py:35: RuntimeWarning: overflow encountered in exp
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_13702/3904427642.py:35: RuntimeWarning: overflow encountered in exp
   m_unnormalized = np.exp(-u(c) / θ)
-/tmp/ipykernel_12211/3904427642.py:36: RuntimeWarning: invalid value encountered in divide
+/tmp/ipykernel_13702/3904427642.py:36: RuntimeWarning: invalid value encountered in divide
   m =  m_unnormalized / (π * m_unnormalized).sum()
 </pre></div>
 </div>
-<img alt="_images/9110bd880f7b16803679852ecd2ad1a2408449e29f95e7cafa9d8b070d62a23b.png" src="_images/9110bd880f7b16803679852ecd2ad1a2408449e29f95e7cafa9d8b070d62a23b.png" />
+<img alt="_images/b935d373950b3d04c6712d0f1d3484b3b1f032fce1d151e999f8c50e9041ca03.png" src="_images/b935d373950b3d04c6712d0f1d3484b3b1f032fce1d151e999f8c50e9041ca03.png" />
 </div>
 </div>
 </section>
@@ -1996,7 +1997,7 @@ entropy <span class="math notranslate nohighlight">\(\sum_{i=1}^I \pi_i m_i \log
 
 <span class="nd">@njit</span>
 <span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">m_0_and_1</span><span class="p">,</span> <span class="n">η</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute expected utility with respect to the distorted probability measure</span>
 <span class="sd">    given the first two values of the change of measure `m_0_and_1`. </span>
 <span class="sd">    </span>
@@ -2024,7 +2025,7 @@ entropy <span class="math notranslate nohighlight">\(\sum_{i=1}^I \pi_i m_i \log
 
 <span class="nd">@njit</span>
 <span class="k">def</span> <span class="nf">max_obj_wrapper</span><span class="p">(</span><span class="n">m_0_and_1</span><span class="p">,</span> <span class="n">η</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrap `objective` to make it suitable for maximization using minimization routines.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2102,7 +2103,7 @@ entropy <span class="math notranslate nohighlight">\(\sum_{i=1}^I \pi_i m_i \log
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/f8c9d68878da8e606830a666b0cd8494745335d532e1a27568f4a50a24e6ce4b.png" src="_images/f8c9d68878da8e606830a666b0cd8494745335d532e1a27568f4a50a24e6ce4b.png" />
+<img alt="_images/314f9dd838b2c00f2ad8628b7a8d5f9e680e9e154325e4a55cc725646633280d.png" src="_images/314f9dd838b2c00f2ad8628b7a8d5f9e680e9e154325e4a55cc725646633280d.png" />
 </div>
 </div>
 <p>In this figure, expected utility is on the co-ordinate axis
@@ -2251,7 +2252,7 @@ aversion associated with a logarithmic one-period utility function.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/1fa11cade8a191236d8c653ac675113d5b2bf1fc37be86c9198d1b644615407d.png" src="_images/1fa11cade8a191236d8c653ac675113d5b2bf1fc37be86c9198d1b644615407d.png" />
+<img alt="_images/a480a0dfde7f35815e0df1026234479f91f0550bdf4ce80cac8850e61bc5fd2f.png" src="_images/a480a0dfde7f35815e0df1026234479f91f0550bdf4ce80cac8850e61bc5fd2f.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -2671,15 +2672,15 @@ express ambiguity aversion.</p>
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
-                    <!-- <li class="btn__search">
-                        <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
-                            <i data-feather="search"></i>
-                        </form>
-                    </li> -->
                 </ul>
 
                 <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
@@ -2687,7 +2688,7 @@ express ambiguity aversion.</p>
                     <li data-tippy-content="Download Notebook"><a href="/_notebooks/five_preferences.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
-                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/five_preferences.md" download><i data-feather="github"></i></a></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/five_preferences.md" download><i data-feather="github"></i></a></li>
                 </ul>
 
             </div>
@@ -2716,8 +2717,6 @@ express ambiguity aversion.</p>
                 <span class="label">Public</span>
                 <select id="launcher-public-input">
                 
-                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/five_preferences.ipynb">BinderHub</option>
-                
                     <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/master/five_preferences.ipynb">Colab</option>
                 
                 </select>
@@ -2729,7 +2728,7 @@ express ambiguity aversion.</p>
                 <i class="fas fa-check-circle"></i>
             </li>
             </ul>
-            <p class="launch"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/five_preferences.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/master/five_preferences.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
             <script>
                 // QuantEcon Notebook Launcher
                 const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');

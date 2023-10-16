@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>33. Knowing the Forecasts of Others &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -60,18 +60,18 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=cb2d6eee9712fbd5cbf7cbc2d6baf81f7f9a9912" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -80,8 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -96,9 +97,9 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=b7d60282c7125f74e59bac03c2323864e0e32e1c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
-    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -254,8 +255,8 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="knowing-the-forecasts-of-others">
-<h1><a class="toc-backref" href="#id43" role="doc-backlink"><span class="section-number">33. </span>Knowing the Forecasts of Others</a><a class="headerlink" href="#knowing-the-forecasts-of-others" title="Permalink to this heading">#</a></h1>
-<nav class="contents" id="contents">
+<h1><a class="toc-backref" href="#id43"><span class="section-number">33. </span>Knowing the Forecasts of Others</a><a class="headerlink" href="#knowing-the-forecasts-of-others" title="Permalink to this heading">#</a></h1>
+<div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#knowing-the-forecasts-of-others" id="id43">Knowing the Forecasts of Others</a></p>
@@ -275,12 +276,12 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</nav>
+</div>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install --upgrade quantecon
-<span class="o">!</span>conda install -y -c plotly plotly plotly-orca
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
+<span class="o">!</span>conda<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-c<span class="w"> </span>plotly<span class="w"> </span>plotly<span class="w"> </span>plotly-orca
 </pre></div>
 </div>
 </div>
@@ -290,23 +291,22 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (0.7.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.7.1)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.23.5)
-Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.11.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.57.1)
+Requirement already satisfied: numpy&gt;=1.17.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.24.3)
+Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.31.0)
+Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.11.1)
+Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.11.1)
+Requirement already satisfied: llvmlite&lt;0.41,&gt;=0.40.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.40.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: scipy&gt;=1.5.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (1.10.0)
-Requirement already satisfied: requests in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (2.28.1)
-Requirement already satisfied: numba&gt;=0.49.0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from quantecon) (0.56.4)
-Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.39.1)
-Requirement already satisfied: setuptools in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (65.6.3)
-Requirement already satisfied: charset-normalizer&lt;3,&gt;=2 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2.0.4)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (3.4)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (2022.12.7)
-Requirement already satisfied: urllib3&lt;1.27,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages (from requests-&gt;quantecon) (1.26.14)
-Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.10/site-packages/mpmath-1.2.1-py3.10.egg (from sympy-&gt;quantecon) (1.2.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.4)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (1.26.16)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2023.7.22)
+Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from sympy-&gt;quantecon) (1.3.0)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting package metadata (current_repodata.json): - 
@@ -408,14 +408,50 @@ Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/qua
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>done
-Solving environment: | 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+Solving environment: - 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
@@ -473,6 +509,33 @@ Solving environment: |
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>done
@@ -485,7 +548,7 @@ Solving environment: |
 </details>
 </div>
 <section id="introduction">
-<h2><a class="toc-backref" href="#id44" role="doc-backlink"><span class="section-number">33.1. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id44"><span class="section-number">33.1. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>Robert E. Lucas, Jr. <span id="id1">[<a class="reference internal" href="zreferences.html#id21" title="Jr. Robert E. Lucas. An equilibrium model of the business cycle. Journal of Political Economy, 83:1113-1144, 1975.">REL75</a>]</span>, Kenneth Kasa  <span id="id2">[<a class="reference internal" href="zreferences.html#id24" title="Kenneth Kasa. Forecasting the forecasts of others in the frequency domain. Review of Economic Dynamics, 3:726–756, 2000.">Kas00</a>]</span>, and Robert Townsend
 <span id="id3">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span> showed that putting  decision makers into environments in which they want to infer persistent hidden  state
 variables from equilibrium prices and quantities can
@@ -556,7 +619,7 @@ in  <a class="reference external" href="https://python-intro.quantecon.org/kalma
 </section>
 </section>
 <section id="the-setting">
-<h2><a class="toc-backref" href="#id45" role="doc-backlink"><span class="section-number">33.2. </span>The Setting</a><a class="headerlink" href="#the-setting" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id45"><span class="section-number">33.2. </span>The Setting</a><a class="headerlink" href="#the-setting" title="Permalink to this heading">#</a></h2>
 <p>We cast all variables in terms of deviations from means.</p>
 <p>Therefore,  we omit constants from inverse demand curves
 and other functions.</p>
@@ -609,7 +672,7 @@ between <span class="math notranslate nohighlight">\(k_t^i\)</span> and <span cl
 optimization problem.</p>
 </section>
 <section id="tactics">
-<h2><a class="toc-backref" href="#id46" role="doc-backlink"><span class="section-number">33.3. </span>Tactics</a><a class="headerlink" href="#tactics" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id46"><span class="section-number">33.3. </span>Tactics</a><a class="headerlink" href="#tactics" title="Permalink to this heading">#</a></h2>
 <p>We shall  compute
 equilibrium laws of motion for capital in industry <span class="math notranslate nohighlight">\(i\)</span> under a
 sequence of assumptions about what a representative firm observes.</p>
@@ -684,10 +747,10 @@ their counterparts in a pooling equilibrium because
 firms in industry <span class="math notranslate nohighlight">\(i\)</span> are able to infer the noisy signal about the demand shock
 received by firms in industry <span class="math notranslate nohighlight">\(-i\)</span>.</p>
 <p>We shall verify this assertion  by using a guess and verify tactic that involves running a least
-squares regression and inspecting its <span class="math notranslate nohighlight">\(R^2\)</span>. <a class="footnote-reference brackets" href="#footnote0" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p>
+squares regression and inspecting its <span class="math notranslate nohighlight">\(R^2\)</span>. <a class="footnote-reference brackets" href="#footnote0" id="id13">1</a></p>
 </section>
 <section id="equilibrium-conditions">
-<h2><a class="toc-backref" href="#id47" role="doc-backlink"><span class="section-number">33.4. </span>Equilibrium Conditions</a><a class="headerlink" href="#equilibrium-conditions" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id47"><span class="section-number">33.4. </span>Equilibrium Conditions</a><a class="headerlink" href="#equilibrium-conditions" title="Permalink to this heading">#</a></h2>
 <p>It is convenient to solve a firm’s problem without
 uncertainty  by forming the Lagrangian:</p>
 <div class="math notranslate nohighlight">
@@ -750,10 +813,10 @@ g_{t+1,t}^i = \beta^{-1} (g_t^i - P_t^i) \end{aligned}
 <p>Our first step is to compute the equilibrium law of motion for
 <span class="math notranslate nohighlight">\(k_t^i\)</span> under perfect foresight.</p>
 <p>Let <span class="math notranslate nohighlight">\(L\)</span> be the lag
-operator. <a class="footnote-reference brackets" href="#footnote3" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+operator. <a class="footnote-reference brackets" href="#footnote3" id="id14">2</a></p>
 <p>Equations <a class="reference internal" href="#equation-pcl10">(33.7)</a> and <a class="reference internal" href="#equation-pcl11">(33.5)</a>
 imply the second order difference equation in
-<span class="math notranslate nohighlight">\(k_t^i\)</span>: <a class="footnote-reference brackets" href="#footnote4" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p>
+<span class="math notranslate nohighlight">\(k_t^i\)</span>: <a class="footnote-reference brackets" href="#footnote4" id="id15">3</a></p>
 <div class="math notranslate nohighlight" id="equation-euler1">
 <span class="eqno">(33.9)<a class="headerlink" href="#equation-euler1" title="Permalink to this equation">#</a></span>\[\begin{aligned}
   \left[ (L^{-1} - (1+b))(1-\beta L^{-1}) + b\right] k_t^i
@@ -803,7 +866,7 @@ firms in market <span class="math notranslate nohighlight">\(i\)</span>.</p>
 </section>
 </section>
 <section id="equilibrium-with-theta-t-stochastic-but-observed-at-t">
-<h2><a class="toc-backref" href="#id48" role="doc-backlink"><span class="section-number">33.5. </span>Equilibrium with <span class="math notranslate nohighlight">\(\theta_t\)</span> stochastic but observed at <span class="math notranslate nohighlight">\(t\)</span></a><a class="headerlink" href="#equilibrium-with-theta-t-stochastic-but-observed-at-t" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id48"><span class="section-number">33.5. </span>Equilibrium with <span class="math notranslate nohighlight">\(\theta_t\)</span> stochastic but observed at <span class="math notranslate nohighlight">\(t\)</span></a><a class="headerlink" href="#equilibrium-with-theta-t-stochastic-but-observed-at-t" title="Permalink to this heading">#</a></h2>
 <p>If future <span class="math notranslate nohighlight">\(\theta\)</span>’s are unknown at <span class="math notranslate nohighlight">\(t\)</span>, it is appropriate
 to replace all random variables on the right side of
 <a class="reference internal" href="#equation-town5">(33.10)</a> with their conditional expectations based on
@@ -1017,11 +1080,11 @@ k_{t+1}^i &amp; =  \tilde \lambda k_t^i + {1 \over \lambda - \rho}\hat \theta_{t
 \theta_{t+1} &amp; =  \rho \theta_t + v_t .
  \end{aligned}\end{split}\]</div>
 <p>Below, by using a guess-and-verify tactic,  we shall show that outcomes in this  <strong>pooling equilibrium</strong> equal those in an equilibrium under the alternative
-information structure that interested Townsend <span id="id16">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span> but that originally seemed too challenging to compute. <a class="footnote-reference brackets" href="#footnote5" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p>
+information structure that interested Townsend <span id="id16">[<a class="reference internal" href="zreferences.html#id25" title="Robert M. Townsend. Forecasting the forecasts of others. Journal of Political Economy, 91:546–588, 1983.">Tow83</a>]</span> but that originally seemed too challenging to compute. <a class="footnote-reference brackets" href="#footnote5" id="id17">4</a></p>
 </section>
 </section>
 <section id="guess-and-verify-tactic">
-<h2><a class="toc-backref" href="#id49" role="doc-backlink"><span class="section-number">33.6. </span>Guess-and-Verify Tactic</a><a class="headerlink" href="#guess-and-verify-tactic" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id49"><span class="section-number">33.6. </span>Guess-and-Verify Tactic</a><a class="headerlink" href="#guess-and-verify-tactic" title="Permalink to this heading">#</a></h2>
 <p>As a preliminary step we shall take our recursive representation <a class="reference internal" href="#equation-sol0a">(33.23)</a>
 of an equilibrium in industry <span class="math notranslate nohighlight">\(i\)</span> with one noisy signal
 on <span class="math notranslate nohighlight">\(\theta_t\)</span> and perform the following steps:</p>
@@ -1044,7 +1107,7 @@ structure.</p>
 <p>We proceed to analyze first the one-noisy-signal structure and then the two-noisy-signal structure.</p>
 </section>
 <section id="equilibrium-with-one-noisy-signal-on-theta-t">
-<h2><a class="toc-backref" href="#id50" role="doc-backlink"><span class="section-number">33.7. </span>Equilibrium with One Noisy Signal on <span class="math notranslate nohighlight">\(\theta_t\)</span></a><a class="headerlink" href="#equilibrium-with-one-noisy-signal-on-theta-t" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id50"><span class="section-number">33.7. </span>Equilibrium with One Noisy Signal on <span class="math notranslate nohighlight">\(\theta_t\)</span></a><a class="headerlink" href="#equilibrium-with-one-noisy-signal-on-theta-t" title="Permalink to this heading">#</a></h2>
 <section id="step-1-solve-for-tilde-lambda-and-lambda">
 <h3><span class="section-number">33.7.1. </span>Step 1: Solve for <span class="math notranslate nohighlight">\(\tilde{\lambda}\)</span> and <span class="math notranslate nohighlight">\(\lambda\)</span><a class="headerlink" href="#step-1-solve-for-tilde-lambda-and-lambda" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
@@ -1383,9 +1446,9 @@ coefficients.</p>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Regression coefficients (e_t on k_t, P_t, \tilde{\theta_t})
 ------------------------------
-k_t: -3.2755568452197705
-\tilde{\theta_t}: -0.964946117047546
-P_t: 0.9649461170475461
+k_t: -3.275556845219768
+\tilde{\theta_t}: -0.9649461170475454
+P_t: 0.9649461170475454
 </pre></div>
 </div>
 </div>
@@ -1399,7 +1462,7 @@ P_t: 0.9649461170475461
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9649461170475461
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9649461170475452
 </pre></div>
 </div>
 </div>
@@ -1450,7 +1513,7 @@ P_t: 0.9649461170475461
 </section>
 </section>
 <section id="equilibrium-with-two-noisy-signals-on-theta-t">
-<h2><a class="toc-backref" href="#id51" role="doc-backlink"><span class="section-number">33.8. </span>Equilibrium with Two Noisy Signals on <span class="math notranslate nohighlight">\(\theta_t\)</span></a><a class="headerlink" href="#equilibrium-with-two-noisy-signals-on-theta-t" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id51"><span class="section-number">33.8. </span>Equilibrium with Two Noisy Signals on <span class="math notranslate nohighlight">\(\theta_t\)</span></a><a class="headerlink" href="#equilibrium-with-two-noisy-signals-on-theta-t" title="Permalink to this heading">#</a></h2>
 <p>Steps 1, 4, and 5 are identical to those for the  one-noisy-signal structure.</p>
 <p>Step 2  requires a straightforward modification.</p>
 <p>For step 3, we  construct the  following state-space representation so that we can get our hands on
@@ -1769,7 +1832,7 @@ P^{2}_t: 0.9621171983721839
 </div>
 </section>
 <section id="key-step">
-<h2><a class="toc-backref" href="#id52" role="doc-backlink"><span class="section-number">33.9. </span>Key Step</a><a class="headerlink" href="#key-step" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id52"><span class="section-number">33.9. </span>Key Step</a><a class="headerlink" href="#key-step" title="Permalink to this heading">#</a></h2>
 <p>Now we come to the key step for verifying that equilibrium outcomes for prices and quantities are identical
 in the pooling equilibrium  original model that led Townsend to deduce an infinite-dimensional state space.</p>
 <p>We accomplish this by  computing a population linear least squares regression of the noisy signal that firms in the other
@@ -1813,7 +1876,7 @@ set in Townsend’s original model equals its information set in a pooling equil
 <p>Therefore, equilibrium prices and quantities in Townsend’s original model equal those in a pooling equilibrium.</p>
 </section>
 <section id="an-observed-common-shock-benchmark">
-<h2><a class="toc-backref" href="#id53" role="doc-backlink"><span class="section-number">33.10. </span>An observed common shock benchmark</a><a class="headerlink" href="#an-observed-common-shock-benchmark" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id53"><span class="section-number">33.10. </span>An observed common shock benchmark</a><a class="headerlink" href="#an-observed-common-shock-benchmark" title="Permalink to this heading">#</a></h2>
 <p>For purposes of comparison, it is  useful to construct a model in which demand disturbance in  both industries
 still both share  have a common persistent component <span class="math notranslate nohighlight">\(\theta_t\)</span>, but in which the persistent component <span class="math notranslate nohighlight">\(\theta\)</span> is observed each period.</p>
 <p>In this case, firms share the same information immediately and have no need to deploy signal-extraction techniques.</p>
@@ -1903,7 +1966,7 @@ y_t &amp; = G x_t + H w_{t+1}
 </div>
 </section>
 <section id="comparison-of-all-signal-structures">
-<h2><a class="toc-backref" href="#id54" role="doc-backlink"><span class="section-number">33.11. </span>Comparison of  All Signal Structures</a><a class="headerlink" href="#comparison-of-all-signal-structures" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id54"><span class="section-number">33.11. </span>Comparison of  All Signal Structures</a><a class="headerlink" href="#comparison-of-all-signal-structures" title="Permalink to this heading">#</a></h2>
 <p>It is enlightening side by side to  plot impulse response functions for capital for the two
 noisy-signal information structures and the  noiseless signal on <span class="math notranslate nohighlight">\(\theta\)</span> that we have just presented.</p>
 <p>Please remember that the two-signal structure corresponds to the <strong>pooling equilibrium</strong> and also
@@ -1950,8 +2013,8 @@ equilibrium hidden-state  reconstruction error variance in the two-signal model:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Latex</span><span class="p">(</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">textbf{Reconstruction error variances}$&#39;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Latex</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;One-noise structure: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">p_one</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Latex</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Two-noise structure: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">p_two</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Latex</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;One-noise structure: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">p_one</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Latex</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Two-noise structure: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">p_two</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1969,8 +2032,8 @@ structures are</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">Latex</span><span class="p">(</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">textbf{Kalman Gains}$&#39;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Latex</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;One noisy-signal structure: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">κ_one</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Latex</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Two noisy-signals structure: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">κ_two</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Latex</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;One noisy-signal structure: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">κ_one</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Latex</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Two noisy-signals structure: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">κ_two</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -1987,7 +2050,7 @@ structures are</p>
 <span class="math notranslate nohighlight">\(\epsilon_t^i\)</span> in industry <span class="math notranslate nohighlight">\(i\)</span> generates a response in <span class="math notranslate nohighlight">\(k_t^{-i}\)</span> in the two-noisy-signal structure, but not in the one-noisy-signal structure.</p>
 </section>
 <section id="notes-on-history-of-the-problem">
-<h2><a class="toc-backref" href="#id55" role="doc-backlink"><span class="section-number">33.12. </span>Notes on History of the Problem</a><a class="headerlink" href="#notes-on-history-of-the-problem" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id55"><span class="section-number">33.12. </span>Notes on History of the Problem</a><a class="headerlink" href="#notes-on-history-of-the-problem" title="Permalink to this heading">#</a></h2>
 <p>To truncate what he saw as an intractable, infinite dimensional  state space,
 Townsend constructed an approximating model in which the common hidden Markov demand shock
 is revealed to all firms  after a fixed number of periods.</p>
@@ -2015,7 +2078,7 @@ constructed here with the equilibrium of Townsend’s model reported in <span id
 <p>The computational method of <span id="id23">[<a class="reference internal" href="zreferences.html#id22" title="Joseph G. Pearlman and Thomas J. Sargent. Knowing the Forecasts of Others. Review of Economic Dynamics, 8(2):480-497, April 2005. URL: https://ideas.repec.org/a/red/issued/v8y2005i2p480-497.html, doi:10.1016/j.red.2004.10.011.">PS05</a>]</span> is recursive:
 it enlists the Kalman filter and invariant subspace methods for
 solving systems of Euler
-equations <a class="footnote-reference brackets" href="#footnote1" id="id24" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> .</p>
+equations <a class="footnote-reference brackets" href="#footnote1" id="id24">5</a> .</p>
 <p>As <span id="id25">[<a class="reference internal" href="zreferences.html#id27" title="Kenneth J. Singleton. Asset prices in a time-series model with disparately informed competitive traders. In William A. Barnett and Kenneth J. Singleton, editors, New Apprroaches to Monetary Economics. Cambridge University Press, 1987.">Sin87</a>]</span>, <span id="id26">[<a class="reference internal" href="zreferences.html#id24" title="Kenneth Kasa. Forecasting the forecasts of others in the frequency domain. Review of Economic Dynamics, 3:726–756, 2000.">Kas00</a>]</span>, and <span id="id27">[<a class="reference internal" href="zreferences.html#id26" title="Thomas J. Sargent. Equilibrium with signal extraction from endogenous variables. Journal of Economic Dynamics and Control, 15:245–273, 1991.">Sar91</a>]</span> also
 found, the equilibrium is fully revealing: observed prices tell
 participants in industry <span class="math notranslate nohighlight">\( i \)</span> all of the information held by
@@ -2023,7 +2086,7 @@ participants in market <span class="math notranslate nohighlight">\( -i \)</span
 <p>This
 means that higher-order beliefs play no role: observing equilibrium prices
 in effect lets decision makers pool their information
-sets <a class="footnote-reference brackets" href="#footnote2" id="id28" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> .</p>
+sets <a class="footnote-reference brackets" href="#footnote2" id="id28">6</a> .</p>
 <p>The disappearance of higher order beliefs means that
 decision makers in this model do not really face a problem of
 forecasting the forecasts of others.</p>
@@ -2061,41 +2124,37 @@ innovation process is the additional state variable contributed by the
 problem of extracting a signal from equilibrium prices that decision
 makers face in Townsend’s model.</p>
 <hr class="footnotes docutils" />
-<aside class="footnote brackets" id="footnote0" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">1</a><span class="fn-bracket">]</span></span>
-<p><span id="id35">[<a class="reference internal" href="zreferences.html#id22" title="Joseph G. Pearlman and Thomas J. Sargent. Knowing the Forecasts of Others. Review of Economic Dynamics, 8(2):480-497, April 2005. URL: https://ideas.repec.org/a/red/issued/v8y2005i2p480-497.html, doi:10.1016/j.red.2004.10.011.">PS05</a>]</span> verified this assertion using a different tactic, namely, by constructing
+<dl class="footnote brackets">
+<dt class="label" id="footnote0"><span class="brackets"><a class="fn-backref" href="#id13">1</a></span></dt>
+<dd><p><span id="id35">[<a class="reference internal" href="zreferences.html#id22" title="Joseph G. Pearlman and Thomas J. Sargent. Knowing the Forecasts of Others. Review of Economic Dynamics, 8(2):480-497, April 2005. URL: https://ideas.repec.org/a/red/issued/v8y2005i2p480-497.html, doi:10.1016/j.red.2004.10.011.">PS05</a>]</span> verified this assertion using a different tactic, namely, by constructing
 analytic formulas for an equilibrium under the incomplete
 information structure and confirming that they match the pooling equilibrium formulas derived here.</p>
-</aside>
-<aside class="footnote brackets" id="footnote3" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">2</a><span class="fn-bracket">]</span></span>
-<p>See <span id="id36">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, especially
+</dd>
+<dt class="label" id="footnote3"><span class="brackets"><a class="fn-backref" href="#id14">2</a></span></dt>
+<dd><p>See <span id="id36">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, especially
 chapters IX and XIV, for  principles  that guide solving some roots backwards and others forwards.</p>
-</aside>
-<aside class="footnote brackets" id="footnote4" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">3</a><span class="fn-bracket">]</span></span>
-<p>As noted by <span id="id37">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, this difference equation is the Euler equation for
+</dd>
+<dt class="label" id="footnote4"><span class="brackets"><a class="fn-backref" href="#id15">3</a></span></dt>
+<dd><p>As noted by <span id="id37">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, this difference equation is the Euler equation for
 a planning problem   that maximizes the discounted sum of consumer plus
 producer surplus.</p>
-</aside>
-<aside class="footnote brackets" id="footnote5" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">4</a><span class="fn-bracket">]</span></span>
-<p><span id="id38">[<a class="reference internal" href="zreferences.html#id22" title="Joseph G. Pearlman and Thomas J. Sargent. Knowing the Forecasts of Others. Review of Economic Dynamics, 8(2):480-497, April 2005. URL: https://ideas.repec.org/a/red/issued/v8y2005i2p480-497.html, doi:10.1016/j.red.2004.10.011.">PS05</a>]</span> verify the same claim by applying   machinery of  <span id="id39">[<a class="reference internal" href="zreferences.html#id23" title="Joseph Pearlman, David Currie, and Paul Levine. Rational Expectations Models with Private Information. Economic Modelling, 3(2):90–105, 1986.">PCL86</a>]</span>.</p>
-</aside>
-<aside class="footnote brackets" id="footnote1" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id24">5</a><span class="fn-bracket">]</span></span>
-<p>See <span id="id40">[<a class="reference internal" href="zreferences.html#id135" title="Evan Anderson, Lars Peter Hansen, Ellen R. McGrattan, and Thomas J. Sargent. Mechanics of forming and estimating dynamic linear economies. In Hans M. Amman, David A. Kendrick, and John Rust, editors, Handbook of computational economics, 171–252. Elsevier Science, North-Holland, 1996.">AHMS96</a>]</span> for an account of invariant subspace methods.</p>
-</aside>
-<aside class="footnote brackets" id="footnote2" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id28">6</a><span class="fn-bracket">]</span></span>
-<p>See <span id="id41">[<a class="reference internal" href="zreferences.html#id28" title="Franklin Allen, Stephen Morris, and Hyun Song Shin. Beauty contests, bubbles, and iterated expectations in asset markets. mimeo, 2002.">AMS02</a>]</span> for a discussion
+</dd>
+<dt class="label" id="footnote5"><span class="brackets"><a class="fn-backref" href="#id17">4</a></span></dt>
+<dd><p><span id="id38">[<a class="reference internal" href="zreferences.html#id22" title="Joseph G. Pearlman and Thomas J. Sargent. Knowing the Forecasts of Others. Review of Economic Dynamics, 8(2):480-497, April 2005. URL: https://ideas.repec.org/a/red/issued/v8y2005i2p480-497.html, doi:10.1016/j.red.2004.10.011.">PS05</a>]</span> verify the same claim by applying   machinery of  <span id="id39">[<a class="reference internal" href="zreferences.html#id23" title="Joseph Pearlman, David Currie, and Paul Levine. Rational Expectations Models with Private Information. Economic Modelling, 3(2):90–105, 1986.">PCL86</a>]</span>.</p>
+</dd>
+<dt class="label" id="footnote1"><span class="brackets"><a class="fn-backref" href="#id24">5</a></span></dt>
+<dd><p>See <span id="id40">[<a class="reference internal" href="zreferences.html#id135" title="Evan Anderson, Lars Peter Hansen, Ellen R. McGrattan, and Thomas J. Sargent. Mechanics of forming and estimating dynamic linear economies. In Hans M. Amman, David A. Kendrick, and John Rust, editors, Handbook of computational economics, 171–252. Elsevier Science, North-Holland, 1996.">AHMS96</a>]</span> for an account of invariant subspace methods.</p>
+</dd>
+<dt class="label" id="footnote2"><span class="brackets"><a class="fn-backref" href="#id28">6</a></span></dt>
+<dd><p>See <span id="id41">[<a class="reference internal" href="zreferences.html#id28" title="Franklin Allen, Stephen Morris, and Hyun Song Shin. Beauty contests, bubbles, and iterated expectations in asset markets. mimeo, 2002.">AMS02</a>]</span> for a discussion
 of  information assumptions needed to create a situation
 in which higher order beliefs appear in equilibrium decision rules.  A way
 to read our findings in light of <span id="id42">[<a class="reference internal" href="zreferences.html#id28" title="Franklin Allen, Stephen Morris, and Hyun Song Shin. Beauty contests, bubbles, and iterated expectations in asset markets. mimeo, 2002.">AMS02</a>]</span> is that, relative
 to the number of signals agents observe,  Townsend’s
 section 8 model  has too few  random shocks  to get higher order beliefs to
 play a role.</p>
-</aside>
+</dd>
+</dl>
 </section>
 </section>
 </section>
@@ -2481,15 +2540,15 @@ play a role.</p>
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
-                    <!-- <li class="btn__search">
-                        <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
-                            <i data-feather="search"></i>
-                        </form>
-                    </li> -->
                 </ul>
 
                 <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
@@ -2497,7 +2556,7 @@ play a role.</p>
                     <li data-tippy-content="Download Notebook"><a href="/_notebooks/knowing_forecasts_of_others.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
-                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/knowing_forecasts_of_others.md" download><i data-feather="github"></i></a></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/knowing_forecasts_of_others.md" download><i data-feather="github"></i></a></li>
                 </ul>
 
             </div>
@@ -2526,8 +2585,6 @@ play a role.</p>
                 <span class="label">Public</span>
                 <select id="launcher-public-input">
                 
-                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/knowing_forecasts_of_others.ipynb">BinderHub</option>
-                
                     <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/master/knowing_forecasts_of_others.ipynb">Colab</option>
                 
                 </select>
@@ -2539,7 +2596,7 @@ play a role.</p>
                 <i class="fas fa-check-circle"></i>
             </li>
             </ul>
-            <p class="launch"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/knowing_forecasts_of_others.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/master/knowing_forecasts_of_others.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
             <script>
                 // QuantEcon Notebook Launcher
                 const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');

@@ -1217,7 +1217,7 @@ constraint_pref_crit = constraint_criterion_factory(η, π, u)  # Create criteri
 cons_crit_bar = constraint_pref_crit(*c_bundle)  # Evaluate criterion at consumption bundle
 constraint_pref_root_problem = lambda c_2, c_1, u_bar: u_bar - constraint_pref_crit(c_1, c_2)  # Formulate root problem
 # Solve root problem for all c_1 values
-c_2_grid_cons = solve_root_problem(constraint_pref_root_problem, cons_crit_bar, c_1_grid, method='bisect', bracket=[0.3, 4.4])  
+c_2_grid_cons = solve_root_problem(constraint_pref_root_problem, cons_crit_bar, c_1_grid, method='bisect', bracket=[0.47, 4.5])  
 
 # Compute associated η and θ values
 ηs = np.empty(c_1_grid.size)

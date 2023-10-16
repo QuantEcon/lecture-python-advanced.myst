@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>32. Classical Prediction and Filtering With Linear Algebra &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -60,18 +60,18 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/quantecon-book-theme.279dae03c5caae754d20501e3fa00bbf.css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=cb2d6eee9712fbd5cbf7cbc2d6baf81f7f9a9912" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -80,8 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -96,9 +97,9 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=b7d60282c7125f74e59bac03c2323864e0e32e1c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
-    <script src="_static/quantecon-book-theme.15b0c36fffe88f468997fa7b698991d3.js"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -234,8 +235,8 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="classical-prediction-and-filtering-with-linear-algebra">
-<h1><a class="toc-backref" href="#id18" role="doc-backlink"><span class="section-number">32. </span>Classical Prediction and Filtering With Linear Algebra</a><a class="headerlink" href="#classical-prediction-and-filtering-with-linear-algebra" title="Permalink to this heading">#</a></h1>
-<nav class="contents" id="contents">
+<h1><a class="toc-backref" href="#id18"><span class="section-number">32. </span>Classical Prediction and Filtering With Linear Algebra</a><a class="headerlink" href="#classical-prediction-and-filtering-with-linear-algebra" title="Permalink to this heading">#</a></h1>
+<div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#classical-prediction-and-filtering-with-linear-algebra" id="id18">Classical Prediction and Filtering With Linear Algebra</a></p>
@@ -248,9 +249,9 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 </ul>
-</nav>
+</div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id19" role="doc-backlink"><span class="section-number">32.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id19"><span class="section-number">32.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This is a sequel to the earlier lecture <a class="reference internal" href="lu_tricks.html"><span class="doc">Classical Control with Linear Algebra</span></a>.</p>
 <p>That lecture used linear algebra – in particular,  the <a class="reference external" href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a>  – to formulate and solve a class of linear-quadratic optimal control problems.</p>
 <p>In this lecture, we’ll be using a closely related decomposition,
@@ -292,7 +293,7 @@ formulas and associated linear algebra.</p>
 </section>
 </section>
 <section id="finite-dimensional-prediction">
-<h2><a class="toc-backref" href="#id20" role="doc-backlink"><span class="section-number">32.2. </span>Finite Dimensional Prediction</a><a class="headerlink" href="#finite-dimensional-prediction" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id20"><span class="section-number">32.2. </span>Finite Dimensional Prediction</a><a class="headerlink" href="#finite-dimensional-prediction" title="Permalink to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\((x_1, x_2, \ldots, x_T)^\prime = x\)</span> be a <span class="math notranslate nohighlight">\(T \times 1\)</span> vector of random variables with mean <span class="math notranslate nohighlight">\(\mathbb{E} x = 0\)</span> and covariance matrix <span class="math notranslate nohighlight">\(\mathbb{E} xx^\prime = V\)</span>.</p>
 <p>Here <span class="math notranslate nohighlight">\(V\)</span> is a <span class="math notranslate nohighlight">\(T \times T\)</span> positive definite matrix.</p>
 <p>The <span class="math notranslate nohighlight">\(i,j\)</span> component <span class="math notranslate nohighlight">\(E x_i x_j\)</span> of <span class="math notranslate nohighlight">\(V\)</span> is the <strong>inner product</strong>   between <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span>.</p>
@@ -396,7 +397,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
 <span class="k">class</span> <span class="nc">LQFilter</span><span class="p">:</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">y_m</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">h_eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -471,7 +472,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
                                    <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">construct_W_and_Wm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This constructs the matrices W and W_m for a given number of periods N</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -523,7 +524,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
         <span class="k">return</span> <span class="n">W</span><span class="p">,</span> <span class="n">W_m</span>
 
     <span class="k">def</span> <span class="nf">roots_of_characteristic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function calculates z_0 and the 2m roots of the characteristic</span>
 <span class="sd">        equation associated with the Euler equation (1.7)</span>
 
@@ -549,7 +550,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
         <span class="k">return</span> <span class="n">z_1_to_m</span><span class="p">,</span> <span class="n">z_0</span><span class="p">,</span> <span class="n">λ</span>
 
     <span class="k">def</span> <span class="nf">coeffs_of_c</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This function computes the coefficients {c_j, j = 0, 1, ..., m} for</span>
 <span class="sd">                c(z) = sum_{j = 0}^{m} c_j z^j</span>
 
@@ -564,7 +565,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
         <span class="k">return</span> <span class="n">c_coeffs</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function calculates {λ_j, j=1,...,m} and {A_j, j=1,...,m}</span>
 <span class="sd">        of the expression (1.15)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -579,7 +580,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
         <span class="k">return</span> <span class="n">λ</span><span class="p">,</span> <span class="n">A</span>
 
     <span class="k">def</span> <span class="nf">construct_V</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-        <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This function constructs the covariance matrix for x^N (see section 6)</span>
 <span class="sd">        for a given period N</span>
 <span class="sd">        &#39;&#39;&#39;</span>
@@ -594,7 +595,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
         <span class="k">return</span> <span class="n">V</span>
 
     <span class="k">def</span> <span class="nf">simulate_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Assuming that the u&#39;s are normal, this method draws a random path</span>
 <span class="sd">        for x^N</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -604,7 +605,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
         <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_hist</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function implements the prediction formula discussed in section 6 (1.59)</span>
 <span class="sd">        It takes a realization for a^N, and the period in which the prediction is </span>
 <span class="sd">        formed</span>
@@ -624,7 +625,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
         <span class="k">return</span> <span class="n">Ea_hist</span>
 
     <span class="k">def</span> <span class="nf">optimal_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_hist</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        - if t is NOT given it takes a_hist (list or numpy.array) as a</span>
 <span class="sd">          deterministic a_t</span>
 <span class="sd">        - if t is given, it solves the combined control prediction problem </span>
@@ -801,11 +802,11 @@ autoregressive representation to be described below when we study infinite horiz
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.4472136  0.         0.         0.         0.        ]
- [0.19518001 0.48795004 0.         0.         0.        ]
- [0.09467621 0.23669053 0.49705012 0.         0.        ]
- [0.04698977 0.11747443 0.2466963  0.49926632 0.        ]
- [0.02345182 0.05862954 0.12312203 0.24917554 0.49981682]]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[ 0.4472136   0.          0.          0.          0.        ]
+ [ 0.19518001  0.48795004  0.          0.          0.        ]
+ [ 0.09467621  0.23669053  0.49705012  0.          0.        ]
+ [ 0.04698977  0.11747443  0.2466963   0.49926632 -0.        ]
+ [ 0.02345182  0.05862954  0.12312203  0.24917554  0.49981682]]
 </pre></div>
 </div>
 </div>
@@ -986,7 +987,7 @@ quickly on a computer.</p>
 </section>
 </section>
 <section id="combined-finite-dimensional-control-and-prediction">
-<span id="fdcp"></span><h2><a class="toc-backref" href="#id21" role="doc-backlink"><span class="section-number">32.3. </span>Combined Finite Dimensional Control and Prediction</a><a class="headerlink" href="#combined-finite-dimensional-control-and-prediction" title="Permalink to this heading">#</a></h2>
+<span id="fdcp"></span><h2><a class="toc-backref" href="#id21"><span class="section-number">32.3. </span>Combined Finite Dimensional Control and Prediction</a><a class="headerlink" href="#combined-finite-dimensional-control-and-prediction" title="Permalink to this heading">#</a></h2>
 <p>Consider the finite-dimensional control problem, maximize</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1058,7 +1059,7 @@ U \bar y = L^{-1} \tilde U^{-1}
 \end{split}\]</div>
 </section>
 <section id="infinite-horizon-prediction-and-filtering-problems">
-<h2><a class="toc-backref" href="#id22" role="doc-backlink"><span class="section-number">32.4. </span>Infinite Horizon Prediction and Filtering Problems</a><a class="headerlink" href="#infinite-horizon-prediction-and-filtering-problems" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id22"><span class="section-number">32.4. </span>Infinite Horizon Prediction and Filtering Problems</a><a class="headerlink" href="#infinite-horizon-prediction-and-filtering-problems" title="Permalink to this heading">#</a></h2>
 <p>It is instructive to compare the finite-horizon formulas based on linear algebra decompositions of finite-dimensional covariance matrices
 with classic formulas for infinite horizon and infinite history prediction and control problems.</p>
 <p>These classic infinite horizon formulas used the mathematics of <span class="math notranslate nohighlight">\(z\)</span>-transforms and lag operators.</p>
@@ -1335,7 +1336,7 @@ z_k\)</span> be the zeros of <span class="math notranslate nohighlight">\(\pi (z
 </section>
 </section>
 <section id="exercises">
-<h2><a class="toc-backref" href="#id23" role="doc-backlink"><span class="section-number">32.5. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id23"><span class="section-number">32.5. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="cf_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 32.1 </span></p>
@@ -1812,15 +1813,15 @@ be written</p>
                     <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
                     <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
                     <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
-                    <!-- <li class="btn__search">
-                        <form action="search.html" method="get">
-                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off">
-                            <i data-feather="search"></i>
-                        </form>
-                    </li> -->
                 </ul>
 
                 <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
                     <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
                     <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
                     <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
@@ -1828,7 +1829,7 @@ be written</p>
                     <li data-tippy-content="Download Notebook"><a href="/_notebooks/classical_filtering.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
-                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/tree/master/lectures/classical_filtering.md" download><i data-feather="github"></i></a></li>
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/classical_filtering.md" download><i data-feather="github"></i></a></li>
                 </ul>
 
             </div>
@@ -1857,8 +1858,6 @@ be written</p>
                 <span class="label">Public</span>
                 <select id="launcher-public-input">
                 
-                    <option value="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/classical_filtering.ipynb">BinderHub</option>
-                
                     <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/master/classical_filtering.ipynb">Colab</option>
                 
                 </select>
@@ -1870,7 +1869,7 @@ be written</p>
                 <i class="fas fa-check-circle"></i>
             </li>
             </ul>
-            <p class="launch"><a href="https://mybinder.org/v2/gh/QuantEcon/lecture-python-advanced.notebooks/master?urlpath=tree/classical_filtering.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/master/classical_filtering.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
             <script>
                 // QuantEcon Notebook Launcher
                 const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
