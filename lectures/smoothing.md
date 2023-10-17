@@ -606,7 +606,7 @@ of our model, we obtain the following striking results:
 * The consumer chooses to make consumption perfectly constant across
   time and across Markov states.
 * State-contingent debt purchases $b_{t+1}(s_{t+1} = j | s_t = i)$ depend only on $j$
-* If the initial Markov state is $s_0 =j$ and initial consumer debt is $b_0$, then debt in Markov state $j$ satisfied $b(j) = b_0$
+* If the initial Markov state is $s_0 =j$ and initial consumer debt is $b_0$, then debt in Markov state $j$ satisfies $b(j) = b_0$
 
 To summarize what we have achieved up to now, we have  computed the constant level of
 consumption $\bar c$ and indicated how that level depends on the underlying specifications of preferences, Arrow securities prices,  the stochastic process of exogenous nonfinancial income, and the initial debt level $b_0$
