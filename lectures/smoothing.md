@@ -558,10 +558,10 @@ $$
 $$
 
 These are $2$ equations in the $3$ unknowns
-$\bar c, b(1), b(2)$.
+$\bar c, b(1), b(2)$
 
-To get a third equation, we assume that at time $t=0$, $b_0$
-is the debt due; and we assume that at time $t=0$, the Markov
+To get a third equation, we assume that at time $t=0,$ $b_0$
+is debt due; and we assume that at time $t=0,$ the Markov
 state $s_0 =1$
 
 (We could instead have assumed that at time $t=0$ the Markov state $s_0 = 2$, which would affect our answer as we shall see)
