@@ -70,8 +70,7 @@ A more subtle version of a `Big K, little k`   features in  the   BCG incomplete
 We use it to convey the heart of what BCG call a **rational conjectures** equilibrium in which conjectures are about
 equilibrium pricing functions in regions of the state space that  an average consumer or firm does not visit in equilibrium.
 
-Note that the absence of complete markets means that we can compute competitive equilibrium prices and allocations by first solving
-the simple planning problem that we did in {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_complete_mkts>`.
+Note that the absence of complete markets means that now we cannot compute competitive equilibrium prices and allocations by first solving the simple planning problem that we did in {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_complete_mkts>`.
 
 Instead, we compute an equilibrium by solving a system of simultaneous inequalities.
 
@@ -1832,6 +1831,9 @@ p1list = []
 p2list = []
 
 # For loop: optimization for each endowment combination
+
+
+
 for i in range(10):
     print(i)
 
