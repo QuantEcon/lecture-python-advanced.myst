@@ -1210,6 +1210,7 @@ In the first example, we set up an instance of the BCG incomplete
 markets model with default parameter values.
 
 ```{code-cell} python3
+:tags: ["hide-output"]
 mdl = BCG_incomplete_markets()
 kss,bss,Vss,qss,pss,c10ss,c11ss,c20ss,c21ss,𝜃1ss = mdl.solve_eq(print_crit=False)
 ```
@@ -1817,6 +1818,8 @@ The function `valuations_by_agent` is used in calculating these
 valuations.
 
 ```{code-cell} python3
+:tags: ["hide-output"]
+
 # Lists for storage
 wlist = []
 klist = []
@@ -1831,9 +1834,6 @@ p1list = []
 p2list = []
 
 # For loop: optimization for each endowment combination
-
-
-
 for i in range(10):
     print(i)
 
