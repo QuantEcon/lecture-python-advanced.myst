@@ -1211,6 +1211,7 @@ markets model with default parameter values.
 
 ```{code-cell} python3
 :tags: ["hide-output"]
+
 mdl = BCG_incomplete_markets()
 kss,bss,Vss,qss,pss,c10ss,c11ss,c20ss,c21ss,𝜃1ss = mdl.solve_eq(print_crit=False)
 ```
