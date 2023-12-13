@@ -70,8 +70,7 @@ A more subtle version of a `Big K, little k`   features in  the   BCG incomplete
 We use it to convey the heart of what BCG call a **rational conjectures** equilibrium in which conjectures are about
 equilibrium pricing functions in regions of the state space that  an average consumer or firm does not visit in equilibrium.
 
-Note that the absence of complete markets means that we can compute competitive equilibrium prices and allocations by first solving
-the simple planning problem that we did in {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_complete_mkts>`.
+Note that the absence of complete markets means that now we cannot compute competitive equilibrium prices and allocations by first solving the simple planning problem that we did in {doc}`Irrelevance of Capital Structure with Complete Markets <BCG_complete_mkts>`.
 
 Instead, we compute an equilibrium by solving a system of simultaneous inequalities.
 
@@ -1208,6 +1207,8 @@ In the first example, we set up an instance of the BCG incomplete
 markets model with default parameter values.
 
 ```{code-cell} python3
+:tags: ["hide-output"]
+
 mdl = BCG_incomplete_markets()
 kss,bss,Vss,qss,pss,c10ss,c11ss,c20ss,c21ss,𝜃1ss = mdl.solve_eq(print_crit=False)
 ```
@@ -1815,6 +1816,8 @@ The function `valuations_by_agent` is used in calculating these
 valuations.
 
 ```{code-cell} python3
+:tags: ["hide-output"]
+
 # Lists for storage
 wlist = []
 klist = []
