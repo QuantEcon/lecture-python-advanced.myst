@@ -421,8 +421,7 @@ def compute_q(v_c, v_d, q, params, arrays):
     for B_idx in range(len(B_grid)):
         for y_idx in range(len(y_grid)):
             # Compute default probability and corresponding bond price
-            default_states = 1.0 * (v_c[B_idx, :] < v_d)
-            delta = np.dot(default_states, P[y_idx, :])
+            delta = P[y_idx, v_c[B_idx, :] < v_d].sum()
             q[B_idx, y_idx] = (1 - delta ) / (1 + r)
 ```
 
@@ -769,8 +768,7 @@ zz = np.empty_like(v_c)
 
 for B_idx in range(B_grid_size):
     for y_idx in range(y_grid_size):
-        default_states = 1.0 * (v_c[B_idx, :] < v_d)
-        zz[B_idx, y_idx] = np.dot(default_states, P[y_idx, :])
+        zz[B_idx, y_idx] = P[y_idx, v_c[B_idx, :] < v_d].sum()
 
 # Create figure
 fig, ax = plt.subplots(figsize=(10, 6.5))
