@@ -1368,7 +1368,7 @@ set in Townsend's original model equals its information set in a pooling equilib
 Therefore, equilibrium prices and quantities in Townsend's original model equal those in a pooling equilibrium.
 
 
-+++
+
 
 ## An observed common shock benchmark
 
@@ -1531,7 +1531,7 @@ display(Latex(f'Two noisy-signals structure: {round(κ_two, 6)}'))
 Another  lesson that comes from the preceding three-panel graph is that the presence of iid noise
 $\epsilon_t^i$ in industry $i$ generates a response in $k_t^{-i}$ in the two-noisy-signal structure, but not in the one-noisy-signal structure.
 
-+++
+
 
 ## Notes on History of the Problem
 
@@ -1587,7 +1587,7 @@ forecasting the forecasts of others.
 Because
 those forecasts are the same as their own, they know them.
 
-+++
+
 
 ### Further historical remarks
 
