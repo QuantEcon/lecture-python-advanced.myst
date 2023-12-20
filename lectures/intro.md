@@ -11,8 +11,7 @@ kernelspec:
 
 # Advanced Quantitative Economics with Python
 
-This website presents a set of advanced lectures on quantitative economic modeling, designed and written by
-[Thomas J. Sargent](http://www.tomsargent.com/) and [John Stachurski](http://johnstachurski.net/).
+This website presents a set of advanced lectures on quantitative economic modeling.
 
 ```{tableofcontents}
 ```
