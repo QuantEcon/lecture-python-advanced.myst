@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
@@ -60,18 +60,18 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=365ca57ee442770a23c6" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=cb2d6eee9712fbd5cbf7cbc2d6baf81f7f9a9912" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b09b2da44b9015b4fa76ea072fa2d8f7faee5492" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=365ca57ee442770a23c6" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=365ca57ee442770a23c6" />
-  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=365ca57ee442770a23c6"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -97,7 +97,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=b7d60282c7125f74e59bac03c2323864e0e32e1c"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=eed9c059a3ee152aae2353ec732f0a6d12e6aa07"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
@@ -175,7 +175,8 @@ const thebe_selector_output = ".output, .cell_output"
                             <p class="logo">
                                 
                                     
-                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo" alt="logo"></a>
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo logo-img" alt="logo"></a>
+                                    
                                     
                                 
                             </p>
@@ -203,8 +204,19 @@ const thebe_selector_output = ".output, .cell_output"
                         <p class="qe-page__header-subheading">Lucas Asset Pricing Using DLE</p>
 
                     </div>
+                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+                        <p class="qe-page__header-authors" font-size="18">
+                            
+                                
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>Thomas J. Sargent</span></a>
+                                
+                            
+                                
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>John Stachurski</span></a>
+                                
+                            
+                        </p>
 
-                    <p class="qe-page__header-authors">Thomas J. Sargent & John Stachurski</p>
 
                 </div> <!-- .page__header -->
 
@@ -258,7 +270,9 @@ Requirement already satisfied: sympy in /usr/share/miniconda3/envs/quantecon/lib
 Requirement already satisfied: llvmlite&lt;0.41,&gt;=0.40.0dev0 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.40.0)
 Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.4)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (1.26.16)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (1.26.16)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2023.7.22)
 Requirement already satisfied: mpmath&gt;=0.19 in /usr/share/miniconda3/envs/quantecon/lib/python3.11/site-packages (from sympy-&gt;quantecon) (1.3.0)
 </pre></div>
@@ -447,7 +461,7 @@ perpetual claim on the endowment process <span class="math notranslate nohighlig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/465273545778a390c86540b54cd541ad19c829cdf011afe8f93f247048c71131.png" src="_images/465273545778a390c86540b54cd541ad19c829cdf011afe8f93f247048c71131.png" />
+<img alt="_images/63742064c2c8d0cc8567fd5518ffebc2ad1037a8940d5eb0d32785fe4501aa0a.png" src="_images/63742064c2c8d0cc8567fd5518ffebc2ad1037a8940d5eb0d32785fe4501aa0a.png" />
 </div>
 </div>
 <p>The next plot displays the realized gross rate of return on this “Lucas
@@ -463,7 +477,7 @@ tree” as well as on a risk-free one-period bond:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/41f50aa086065aab4020265d8ec0172015eb66aef2a4bafd88df625531612a1d.png" src="_images/41f50aa086065aab4020265d8ec0172015eb66aef2a4bafd88df625531612a1d.png" />
+<img alt="_images/588f8ec7fd6c02a6384359b83fde3508ce086d761724fb8df27206181920c0aa.png" src="_images/588f8ec7fd6c02a6384359b83fde3508ce086d761724fb8df27206181920c0aa.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -473,8 +487,8 @@ tree” as well as on a risk-free one-period bond:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.41733214],
-       [-0.41733214,  1.        ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.48677256],
+       [-0.48677256,  1.        ]])
 </pre></div>
 </div>
 </div>
@@ -495,7 +509,7 @@ one-period and five-period risk-free bonds:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e70db0f90fc2ff087deb0423746280a98557b5b03c8d46f05ce0d0e6e0a7311c.png" src="_images/e70db0f90fc2ff087deb0423746280a98557b5b03c8d46f05ce0d0e6e0a7311c.png" />
+<img alt="_images/3faadfdcd6c5386f9570240827341635fad7de7401062e6db976bbb693dcdb66.png" src="_images/3faadfdcd6c5386f9570240827341635fad7de7401062e6db976bbb693dcdb66.png" />
 </div>
 </div>
 <p>From the above plot, we can see the tendency of the term structure to
@@ -530,7 +544,7 @@ the endowment process is reduced to 0.4:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/55974adabfaec491fbb1a3905359d52cd56ac363eaf88f8d43dae524dca3ea0b.png" src="_images/55974adabfaec491fbb1a3905359d52cd56ac363eaf88f8d43dae524dca3ea0b.png" />
+<img alt="_images/8164e01dab914c4903ea93c93e198577879e05ae2f507ad2eaecba2f6d2c865a.png" src="_images/8164e01dab914c4903ea93c93e198577879e05ae2f507ad2eaecba2f6d2c865a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -540,8 +554,8 @@ the endowment process is reduced to 0.4:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.       , -0.6448075],
-       [-0.6448075,  1.       ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.60464635],
+       [-0.60464635,  1.        ]])
 </pre></div>
 </div>
 </div>
@@ -560,7 +574,7 @@ five-period risk-free bonds:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c9016a425b6f5728d1cab555ece81e931214df1c1892db711a28d8bdb350dd9b.png" src="_images/c9016a425b6f5728d1cab555ece81e931214df1c1892db711a28d8bdb350dd9b.png" />
+<img alt="_images/8f486876095042ef4dd6c3bdf6bd8ff249ea931dc5aab05aa6e65325cb64cef5.png" src="_images/8f486876095042ef4dd6c3bdf6bd8ff249ea931dc5aab05aa6e65325cb64cef5.png" />
 </div>
 </div>
 <p>We can see the tendency of the term structure to slope up when rates are
