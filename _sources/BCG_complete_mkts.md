@@ -802,44 +802,44 @@ It consists of 4 functions that do the following things:
     - First, create a grid for capital.
     - Then for each value of capital stock in the grid, compute the left side of the planner's
       first-order necessary condition for  $k$, that is,
-      
+
       $$
       \beta \alpha A K^{\alpha -1} \int \left( \frac{w_1(\epsilon) + A K^\alpha e^\epsilon}{w_0 - K } \right)^{-\gamma} e^\epsilon g(\epsilon) d \epsilon  - 1 =0
       $$
-      
+
     - Find $k$ that solves this equation.
 * `q` computes Arrow security prices as a function of the productivity shock $\epsilon$ and capital $K$:
-  
+
   $$
   q(\epsilon;K) = \beta \left( \frac{u'\left( w_1(\epsilon) + A K^\alpha e^\epsilon\right)} {u'(w_0 - K )} \right)
   $$
-  
+
 * `V` solves for the firm value given capital $k$:
-  
+
   $$
   V = - k + \int A k^\alpha e^\epsilon q(\epsilon; K) d \epsilon
   $$
-  
+
 * `opt_c` computes optimal consumptions $c^i_0$, and $c^i(\epsilon)$:
     - The function first computes weight $\eta$ using the
       budget constraint for agent 1:
-      
+
       $$
       w_0^1 + \theta_0^1 V + \int w_1^1(\epsilon) q(\epsilon) d \epsilon
       = c_0^1 + \int c_1^1(\epsilon) q(\epsilon) d \epsilon
       = \eta \left( C_0 + \int C_1(\epsilon) q(\epsilon) d \epsilon \right)
       $$
       where
-      
+
       $$
       \begin{aligned}
       C_0 & = w_0 - K \cr
       C_1(\epsilon) & = w_1(\epsilon) + A K^\alpha e^\epsilon \cr
       \end{aligned}
       $$
-      
+
     - It computes consumption for each agent as
-    
+
       $$
       \begin{aligned}
       c_0^1 & = \eta C_0 \cr
@@ -848,7 +848,7 @@ It consists of 4 functions that do the following things:
       c_1^2 (\epsilon) & = (1 - \eta) C_1(\epsilon)
       \end{aligned}
       $$
-  
+
 
 The list of parameters includes:
 
@@ -868,7 +868,6 @@ The list of parameters includes:
   Gauss-Hermite quadrature: default value is 10
 
 ```{code-cell} ipython
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import norm
@@ -1205,4 +1204,3 @@ Image(fig.to_image(format="png"))
 # fig.show() will provide interactive plot when running
 # notebook locally
 ```
-

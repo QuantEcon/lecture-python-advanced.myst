@@ -69,7 +69,7 @@ Therefore, he constructed a more manageable approximating model in which a hidde
 a demand shock is
 revealed to all firms after a fixed,  finite number of periods.
 
-In this lecture, we illustrate again the theme that **finding the state is an art** by 
+In this lecture, we illustrate again the theme that **finding the state is an art** by
 showing how to formulate Townsend's original model in terms of a low-dimensional state space.
 
 We show that Townsend's model shares equilibrium prices and quantities with those   that
@@ -89,8 +89,8 @@ Rather than directly deploying the {cite}`PCL` machinery here, we shall instead 
   of the good produced by the other industry.
 * We compute a population linear least squares regression of the noisy signal at time $t$ that firms in the other
   industry would  receive in a pooling equilibrium on time $t$ information that a firm receives in Townsend's
-  original model. 
-* The $R^2$ in this regression equals $1$. 
+  original model.
+* The $R^2$ in this regression equals $1$.
 *  That verifies that a firm's information
   set in Townsend's original model equals its information set in a pooling equilibrium.
 * Therefore, equilibrium
@@ -99,7 +99,7 @@ Rather than directly deploying the {cite}`PCL` machinery here, we shall instead 
 ### A Sequence of Models
 
 We proceed by describing  a sequence of models of two industries that are linked in a
-single way: 
+single way:
 
 * shocks to the demand curves for their products have a common
 component.
@@ -248,7 +248,7 @@ This provides the equilibrium when $\theta_t$ is observed at
 $t$ but future $\theta_{t+j}$ and
 $\epsilon_{t+j}^i$ are not observed.
 
-To find an equilibrium when a history $w^t$ observations  of a **single** noise-ridden 
+To find an equilibrium when a history $w^t$ observations  of a **single** noise-ridden
  $\theta_t$ is observed, we again apply a
 certainty equivalence principle and replace future values of the random
 variables $\theta_s, \epsilon_{s}^i, s \geq t$ with their
@@ -291,7 +291,7 @@ their counterparts in a pooling equilibrium because
 firms in industry $i$ are able to infer the noisy signal about the demand shock
 received by firms in industry $-i$.
 
-We shall verify this assertion  by using a guess and verify tactic that involves running a least 
+We shall verify this assertion  by using a guess and verify tactic that involves running a least
 squares regression and inspecting its $R^2$. [^footnote0]
 
 ## Equilibrium Conditions
@@ -790,7 +790,7 @@ on $\theta_t$ and perform the following steps:
   using `quantecon.solve_discrete_riccati`
 - Add a *measurement equation* for
   $P_t^i = b k_t^i + \theta_t + e_t$, $\theta_t + e_t$,
-  and $e_t$ to system {eq}`sol0a`. 
+  and $e_t$ to system {eq}`sol0a`.
 - Write the resulting system
   in state-space form and encode it using `quantecon.LinearStateSpace`
 - Use methods of the `quantecon.LinearStateSpace` to compute impulse response
@@ -920,9 +920,7 @@ components of the state vector (step 5 above) by using the `stationary_distribut
 ```{code-cell} ipython
 import numpy as np
 import quantecon as qe
-from plotly.subplots import make_subplots
 import plotly.graph_objects as go
-import plotly.express as px
 import plotly.offline as pyo
 from statsmodels.regression.linear_model import OLS
 from IPython.display import display, Latex, Image
@@ -1339,7 +1337,7 @@ R_squared
 ## Key Step
 
 Now we come to the key step for verifying that equilibrium outcomes for prices and quantities are identical
-in the pooling equilibrium  original model that led Townsend to deduce an infinite-dimensional state space. 
+in the pooling equilibrium  original model that led Townsend to deduce an infinite-dimensional state space.
 
 We accomplish this by  computing a population linear least squares regression of the noisy signal that firms in the other
 industry receive in a pooling equilibrium on  time $t$ information that a firm  would  receive in Townsend's
@@ -1370,7 +1368,7 @@ set in Townsend's original model equals its information set in a pooling equilib
 Therefore, equilibrium prices and quantities in Townsend's original model equal those in a pooling equilibrium.
 
 
-+++
+
 
 ## An observed common shock benchmark
 
@@ -1385,24 +1383,24 @@ Thus, consider a version of our  model in which histories of both $\epsilon_t^i$
 In this case,  the firm's optimal decision rule is  described by
 
 $$
-k_{t+1}^i =  \tilde \lambda k_t^i + \frac{1}{\lambda - \rho} \hat \theta_{t+1} 
+k_{t+1}^i =  \tilde \lambda k_t^i + \frac{1}{\lambda - \rho} \hat \theta_{t+1}
 $$
 
 where $\hat \theta_{t+1} = E_t \theta_{t+1}$ is given by
 
 $$
-\hat \theta_{t+1} = \rho \theta_t 
+\hat \theta_{t+1} = \rho \theta_t
 $$
 
-Thus, the firm's decision rule can be expressed 
+Thus, the firm's decision rule can be expressed
 
 
 $$
-k_{t+1}^i = \tilde \lambda k_t^i + \frac{\rho}{\lambda - \rho} \theta_t  
+k_{t+1}^i = \tilde \lambda k_t^i + \frac{\rho}{\lambda - \rho} \theta_t
 $$
 
 
-Consequently, when a history  $\theta_s, s \leq t$ is observed without noise, 
+Consequently, when a history  $\theta_s, s \leq t$ is observed without noise,
 the following state space system prevails:
 
 $$
@@ -1410,10 +1408,10 @@ $$
 \begin{bmatrix} \theta_{t+1} \cr k_{t+1}^i \end{bmatrix} & =
 \begin{bmatrix} \rho & 0 \cr
        \frac{\rho}{\lambda -\rho} & \tilde \lambda \end{bmatrix}
-       \begin{bmatrix} \theta_t \cr k_t^i \end{bmatrix} 
+       \begin{bmatrix} \theta_t \cr k_t^i \end{bmatrix}
        + \begin{bmatrix} \sigma_v \cr 0 \end{bmatrix} z_{1,t+1} \cr
 \begin{bmatrix} \theta_t \cr  k_t^i \end{bmatrix} & =  \begin{bmatrix} 1 & 0 \cr 0 & 1 \end{bmatrix}
-\begin{bmatrix} \theta_t \cr k_t^i \end{bmatrix} + 
+\begin{bmatrix} \theta_t \cr k_t^i \end{bmatrix} +
 \begin{bmatrix} 0 \cr 0 \end{bmatrix} z_{1,t+1}
 \end{aligned}
 $$
@@ -1425,11 +1423,11 @@ As usual, the system can be written as
 $$
 \begin{aligned}
 x_{t+1} & = A x_t + C z_{t+1} \cr
-y_t & = G x_t + H w_{t+1} 
+y_t & = G x_t + H w_{t+1}
 \end{aligned}
 $$
 
-In order once again to use the  quantecon class `quantecon.LinearStateSpace`, let's form  pertinent state-space matrices 
+In order once again to use the  quantecon class `quantecon.LinearStateSpace`, let's form  pertinent state-space matrices
 
 ```{code-cell} ipython3
 Ao_lss = np.array([[ρ, 0.],
@@ -1493,19 +1491,19 @@ Image(fig_comb.to_image(format="png"))
 The three panels in the graph above show that
 
 -  responses of $ k_t^i $ to  shocks $ v_t $ to the hidden Markov demand state $ \theta_t $ process are   **largest** in   the no-noisy-signal structure in which the firm observes $\theta_t$ at time $t$
--  responses of $ k_t^i $ to  shocks $ v_t $ to the hidden Markov demand state $ \theta_t $ process are   **smaller** in   the two-noisy-signal structure 
--  responses of $ k_t^i $ to  shocks $ v_t $ to the hidden Markov demand state $ \theta_t $ process are   **smallest** in   the one-noisy-signal structure 
+-  responses of $ k_t^i $ to  shocks $ v_t $ to the hidden Markov demand state $ \theta_t $ process are   **smaller** in   the two-noisy-signal structure
+-  responses of $ k_t^i $ to  shocks $ v_t $ to the hidden Markov demand state $ \theta_t $ process are   **smallest** in   the one-noisy-signal structure
 
-With respect to the iid demand shocks $e_t$ the graphs show that 
+With respect to the iid demand shocks $e_t$ the graphs show that
 
 -  responses of $ k_t^i $ to  shocks $ e_t $ to the hidden Markov demand state $ \theta_t $ process are   **smallest** (i.e., nonexistent) in   the no-noisy-signal structure in which the firm observes $\theta_t$ at time $t$
--  responses of $ k_t^i $ to  shocks $ e_t $ to the hidden Markov demand state $ \theta_t $ process are   **larger** in   the two-noisy-signal structure  
-- responses of $ k_t^i $ to idiosyncratic *own-market*   noise-shocks $ e_t $ are **largest** in the one-noisy-signal structure 
+-  responses of $ k_t^i $ to  shocks $ e_t $ to the hidden Markov demand state $ \theta_t $ process are   **larger** in   the two-noisy-signal structure
+- responses of $ k_t^i $ to idiosyncratic *own-market*   noise-shocks $ e_t $ are **largest** in the one-noisy-signal structure
 
 
 
 
-Among other things,  these  findings indicate that time series correlations and coherences between outputs in the two industries are higher in the two-noisy-signals or **pooling** model than they are in the one-noisy signal model.  
+Among other things,  these  findings indicate that time series correlations and coherences between outputs in the two industries are higher in the two-noisy-signals or **pooling** model than they are in the one-noisy signal model.
 
 The enhanced influence of the shocks $ v_t $ to the hidden Markov demand state $ \theta_t $ process that
 emerges from the two-noisy-signal model relative to the one-noisy-signal model is a  symptom of a lower
@@ -1531,9 +1529,9 @@ display(Latex(f'Two noisy-signals structure: {round(κ_two, 6)}'))
 ```
 
 Another  lesson that comes from the preceding three-panel graph is that the presence of iid noise
-$\epsilon_t^i$ in industry $i$ generates a response in $k_t^{-i}$ in the two-noisy-signal structure, but not in the one-noisy-signal structure. 
+$\epsilon_t^i$ in industry $i$ generates a response in $k_t^{-i}$ in the two-noisy-signal structure, but not in the one-noisy-signal structure.
 
-+++
+
 
 ## Notes on History of the Problem
 
@@ -1545,11 +1543,11 @@ Thus,
 
 - Townsend wanted to assume that at time $ t $ firms in industry $ i $ observe
   $ k_t^i, Y_t^i, P_t^i, (P^{-i})^t $, where $ (P^{-i})^t $ is the history of prices in
-  the other market up to time $ t $.  
+  the other market up to time $ t $.
 - Because that turned out to be too challenging, Townsend made a sensible
   alternative assumption that eased his calculations: that after a large
   number $ S $ of periods, firms in industry $ i $ observe the
-  hidden Markov component of the demand shock $ \theta_{t-S} $.  
+  hidden Markov component of the demand shock $ \theta_{t-S} $.
 
 
 Townsend argued that the more manageable model  could do a good job of
@@ -1589,7 +1587,7 @@ forecasting the forecasts of others.
 Because
 those forecasts are the same as their own, they know them.
 
-+++
+
 
 ### Further historical remarks
 
@@ -1652,4 +1650,3 @@ to read our findings in light of {cite}`ams` is that, relative
 to the number of signals agents observe,  Townsend's
 section 8 model  has too few  random shocks  to get higher order beliefs to
 play a role.
-

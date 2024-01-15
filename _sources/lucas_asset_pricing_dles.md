@@ -55,7 +55,6 @@ We'll also need the following imports
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-from quantecon import LQ
 from quantecon import DLE
 %matplotlib inline
 ```
@@ -298,4 +297,3 @@ plt.show()
 We can see the tendency of the term structure to slope up when rates are
 low (and down when rates are high) has been accentuated relative to the
 first instance of our economy.
-

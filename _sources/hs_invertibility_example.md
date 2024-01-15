@@ -47,7 +47,6 @@ We'll make these imports:
 import numpy as np
 import quantecon as qe
 import matplotlib.pyplot as plt
-from quantecon import LQ
 from quantecon import DLE
 from math import sqrt
 %matplotlib inline
@@ -285,7 +284,7 @@ plt.show()
 ```
 
 The above figure displays the impulse response of consumption and the
-net-of-interest deficit to the innovations $w_t$ to the consumer's non-financial income 
+net-of-interest deficit to the innovations $w_t$ to the consumer's non-financial income
 or endowment process.
 
 Consumption displays the characteristic "random walk" response with
@@ -396,4 +395,3 @@ response to $w_{1t}$).
 
 Thus, the innovations to $(c_t - d_t)$ as revealed by the vector
 autoregression depend on what the economic agent views as "old news".
-

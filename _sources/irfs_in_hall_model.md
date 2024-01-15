@@ -45,7 +45,6 @@ We'll make these imports:
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
-from quantecon import LQ
 from quantecon import DLE
 ```
 
@@ -300,4 +299,3 @@ Example 1.
 
 As in Example 2, the endowment shock has permanent effects on
 neither variable.
-

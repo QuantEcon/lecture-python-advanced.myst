@@ -44,10 +44,8 @@ We'll also need the following imports:
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-from quantecon import LQ
 from collections import namedtuple
 from quantecon import DLE
-from math import sqrt
 %matplotlib inline
 ```
 
@@ -337,4 +335,3 @@ Increasing the number of periods of schooling lowers
 the number of new students in response to a demand shock.
 
 This occurs because  with longer required schooling, new students ultimately benefit less from the impact of that shock on wages.
-

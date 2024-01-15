@@ -53,7 +53,7 @@ We require the following imports
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
-from quantecon import LQ, DLE
+from quantecon import DLE
 ```
 
 ## Common Structure
@@ -62,24 +62,24 @@ Our example economies have the following features
 
 - Information flows are governed by an exogenous stochastic process
   $z_t$ that follows
-  
+
   $$
   z_{t+1} = A_{22}z_t + C_2w_{t+1}
   $$
   where $w_{t+1}$ is a martingale difference sequence.
 - Preference shocks $b_t$ and technology shocks $d_t$ are
   linear functions of $z_t$
-  
+
   $$
   b_t = U_bz_t
   $$
   $$
   d_t = U_dz_t
   $$
-  
+
 - Consumption and physical investment goods are produced using the
   following technology
-  
+
   $$
   \Phi_c c_t + \Phi_g g_t + \Phi_i i_t = \Gamma k_{t-1} + d_t
   $$
@@ -95,7 +95,7 @@ Our example economies have the following features
   $l_t$ is the amount of labor supplied by the representative
   household.
 - Preferences of a representative household are described by
-  
+
   $$
   -\frac{1}{2}\mathbb{E}\sum_{t=0}^\infty \beta^t [(s_t-b_t)\cdot(s_t - b_t) + l_t^2], 0 < \beta < 1
   $$
@@ -105,7 +105,7 @@ Our example economies have the following features
   $$
   h_t = \Delta_h h_{t-1} + \Theta_h c_t
   $$
-  
+
 
 where $s_t$ is a vector of consumption services, and
 $h_t$ is a vector of household capital stocks.
@@ -128,7 +128,7 @@ Choose $\{c_t, s_t, i_t, h_t, k_t, g_t\}_{t=0}^\infty$ to maximize
 
 $$
 -\frac{1}{2}\mathbb{E}\sum_{t=0}^\infty \beta^t [(s_t-b_t)\cdot(s_t - b_t) + g_t \cdot g_t]
-$$ 
+$$
 
 subject to the linear constraints
 
@@ -602,4 +602,3 @@ being larger than one.
 ```{code-cell} python3
 econ5.endo, econ5.exo
 ```
-
