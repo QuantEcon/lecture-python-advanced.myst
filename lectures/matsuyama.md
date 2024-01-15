@@ -46,8 +46,7 @@ Let's start with some imports:
 import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
-import seaborn as sns
-from numba import jit, vectorize
+from numba import jit
 from ipywidgets import interact
 ```
 

@@ -30,7 +30,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 ---
 tags: [hide-output]
 ---
-!pip install polytope quantecon
+!pip install polytope
 ```
 
 ## Overview
@@ -86,7 +86,6 @@ Let's start with some standard imports:
 
 ```{code-cell} ipython
 import numpy as np
-import quantecon as qe
 import polytope
 import matplotlib.pyplot as plt
 %matplotlib inline
@@ -363,7 +362,7 @@ Chang works with
   be a value associated with a particular competitive equilibrium.
 * A recursive representation of a credible government policy is a pair of
   initial conditions $(w_0, \theta_0)$ and a five-tuple of functions
-  
+
   $$
   h(w_t, \theta_t), m(h_t, w_t, \theta_t), x(h_t, w_t, \theta_t), \chi(h_t, w_t, \theta_t),\Psi(h_t, w_t, \theta_t)
   $$
@@ -372,10 +371,10 @@ Chang works with
 * Starting from an initial condition $(w_0, \theta_0)$, a credible
   government policy can be constructed by iterating on these functions in
   the following order that respects the within-period timing:
-  
+
   ```{math}
   :label: chang501
-  
+
   \begin{aligned}
   \hat h_t & = h(w_t,\theta_t) \\
   m_t & = m(h_t, w_t,\theta_t) \\
@@ -384,7 +383,7 @@ Chang works with
   \theta_{t+1}  & = \Psi(h_t, w_t,\theta_t)
   \end{aligned}
   ```
-  
+
 * Here it is to be understood that $\hat h_t$ is the action that the
   government policy instructs the government to take, while $h_t$
   possibly not equal to $\hat h_t$ is some other action that the
@@ -888,4 +887,3 @@ plot_equilibria(ch2)
 ```
 
 Evidently, the Ramsey plan is now sustainable.
-

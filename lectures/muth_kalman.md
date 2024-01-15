@@ -42,11 +42,9 @@ We'll also need the following imports:
 import matplotlib.pyplot as plt
 %matplotlib inline
 import numpy as np
-import scipy.linalg as la
 
 from quantecon import Kalman
 from quantecon import LinearStateSpace
-from scipy.stats import norm
 np.set_printoptions(linewidth=120, precision=4, suppress=True)
 ```
 
@@ -372,4 +370,3 @@ engineer
 ```{code-cell} python3
 print(f'decay parameter 1 - K1 = {1 - K1}')
 ```
-

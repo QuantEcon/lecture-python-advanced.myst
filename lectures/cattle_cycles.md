@@ -50,7 +50,6 @@ We make the following imports:
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-from quantecon import LQ
 from collections import namedtuple
 from quantecon import DLE
 from math import sqrt
@@ -406,4 +405,3 @@ The fact that $y_t$ is a weighted moving average of $x_t$
 creates a humped shape response of the total stock in response to demand
 shocks, contributing to the cyclicality seen in the first graph of this
 lecture.
-

@@ -54,9 +54,7 @@ Models of Dynamic Linear Economies" {cite}`HS2013`.
 We'll also require the following imports
 
 ```{code-cell} ipython
-import quantecon as qe
 import numpy as np
-import scipy.linalg as la
 import matplotlib.pyplot as plt
 %matplotlib inline
 from quantecon import DLE
@@ -298,4 +296,3 @@ ax2.plot(econ1.k[0], label='Debt', c='r')
 ax2.legend()
 plt.show()
 ```
-

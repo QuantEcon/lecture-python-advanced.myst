@@ -30,7 +30,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 ---
 tags: [hide-output]
 ---
-!pip install polytope quantecon
+!pip install polytope
 ```
 
 ## Overview
@@ -75,7 +75,6 @@ We'll start with some standard imports:
 ```{code-cell} ipython
 import numpy as np
 import polytope
-import quantecon as qe
 import matplotlib.pyplot as plt
 %matplotlib inline
 ```
@@ -373,10 +372,10 @@ Chang constructs the following objects
       mapping $\theta$ into this period’s $(h, m, x)$ and
       next period’s $\theta$, respectively.
     * A competitive equilibrium can be represented recursively by iterating on
-      
+
       ```{math}
       :label: Chang500
-      
+
       \begin{split}
       h_t & = h(\theta_t) \\
       m_t & = m(\theta_t) \\
@@ -385,7 +384,7 @@ Chang constructs the following objects
       \end{split}
       ```
       starting from $\theta_0$
-      
+
       The range and domain of $\Psi(\cdot)$ are both $\Omega$
 1. A recursive representation of a Ramsey plan
     * A recursive representation of a Ramsey plan is a recursive
@@ -488,11 +487,11 @@ two-step procedure to find at least the *value* of the Ramsey
 outcome to the representative household
 
 1. Find the indirect value function $w(\theta)$ defined as
-   
+
    $$
    w(\theta) = \max_{(\vec m, \vec x, \vec h) \in \Gamma(\theta)} \sum_{t=0}^\infty \beta^t \left[ u(f(x_t)) + v(m_t) \right]
    $$
-   
+
 1. Compute the value of the Ramsey outcome by solving $\max_{\theta \in \Omega} w(\theta)$.
 
 Thus, Chang states the following
@@ -1104,4 +1103,3 @@ sequentially, rather than once and for all at time $0$ will choose to implement 
 
 In the process of constructing them, we shall construct another,
 smaller set of competitive equilibria.
-
