@@ -24,6 +24,16 @@ kernelspec:
 :depth: 2
 ```
 
+In addition to what's in Anaconda, this lecture will need the following libraries:
+
+```{code-cell} ipython
+---
+tags: [hide-output]
+---
+!pip install --upgrade quantecon
+!pip install interpolation
+```
+
 ## Overview
 
 This lecture describes a celebrated model of optimal fiscal policy by Robert E.
@@ -60,7 +70,12 @@ Let's start with some standard imports:
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
+from scipy.optimize import root
+from quantecon import MarkovChain
+from quantecon.optimize.nelder_mead import nelder_mead
+from interpolation import interp
+from numba import njit, prange, float64
+from numba.experimental import jitclass
 ```
 
 ## A Competitive Equilibrium with Distorting Taxes

@@ -41,10 +41,11 @@ Let's start with following imports:
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-from interpolation.splines import UCGrid, nodes
-from quantecon import MarkovChain
-
-%matplotlib inline
+from scipy.optimize import root
+from interpolation.splines import eval_linear, UCGrid, nodes
+from quantecon import optimize, MarkovChain
+from numba import njit, prange, float64
+from numba.experimental import jitclass
 ```
 
 In {doc}`an earlier lecture <opt_tax_recur>`, we described a model of
