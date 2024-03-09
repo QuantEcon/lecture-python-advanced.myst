@@ -1942,7 +1942,3 @@ Agents of type 2 value bonds more highly (they want more hedging).
 
 Taken together with our earlier plot of equity holdings, these graphs confirm our earlier conjecture that while both type
 of agents hold equities, only agents of type 2 holds bonds.
-
-```{code-cell} ipython3
-
-```
