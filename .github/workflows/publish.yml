@@ -39,7 +39,7 @@ jobs:
         shell: bash -l {0}
         run: pip list
       - name: Download "build" folder (cache)
-        uses: dawidd6/action-download-artifact@v3
+        uses: dawidd6/action-download-artifact@v4
         with:
           workflow: cache.yml
           branch: main
@@ -79,7 +79,7 @@ jobs:
           publish_dir: _build/html/
           cname: python-advanced.quantecon.org
       - name: Upload "_build" folder (cache)
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: build-cache
           path: _build
