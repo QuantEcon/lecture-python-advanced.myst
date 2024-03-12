@@ -131,8 +131,8 @@ class RecursiveLS:
         # Time 1 onward
         for t in range(1, T):
             s, x = sHist[t], xHist[t-1]
-            cHist[t] = interp(self.x_grid, self.c1[:, s], x)
-            nHist[t] = interp(self.x_grid, self.n1[:, s], x)
+            cHist[t] = np.interp(x, self.x_grid, self.c1[:, s])
+            nHist[t] = np.interp(x, self.x_grid, self.n1[:, s])
 
             τHist[t] = self.τ(cHist[t], nHist[t])
 
@@ -140,8 +140,8 @@ class RecursiveLS:
 
             c, n = np.empty((2, self.S))
             for sprime in range(self.S):
-                c[sprime] = interp(x_grid, self.c1[:, sprime], x)
-                n[sprime] = interp(x_grid, self.n1[:, sprime], x)
+                c[sprime] = np.interp(x, x_grid, self.c1[:, sprime])
+                n[sprime] = np.interp(x, x_grid, self.n1[:, sprime])
             Euc = π[sHist[t-1]] @ Uc(c, 1-n)
             RHist[t-1] = Uc(cHist[t-1], 1-nHist[t-1]) / (self.pref.β * Euc)
 
@@ -150,7 +150,7 @@ class RecursiveLS:
             
             if t < T-1:
                 sprime = sHist[t+1]
-                xHist[t] = interp(self.x_grid, self.xprime1[:, s, sprime], x)
+                xHist[t] = np.interp(x, self.x_grid, self.xprime1[:, s, sprime])
 
         return [cHist, nHist, Bhist, τHist, gHist, yHist, xHist, RHist]
 
@@ -209,7 +209,7 @@ def obj_V(z_sub, x, s, V, pref, π, g, x_grid, b0=None):
     # prepare Vprime vector
     Vprime = np.empty(S)
     for sprime in range(S):
-        Vprime[sprime] = interp(x_grid, V[:, sprime], xprime[sprime])
+        Vprime[sprime] = np.interp(xprime[sprime], x_grid, V[:, sprime])
 
     # compute the objective value
     obj = U(c, l) + β * π[s] @ Vprime
