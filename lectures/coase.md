@@ -3,8 +3,10 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.1
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -22,15 +24,6 @@ kernelspec:
 
 ```{contents} Contents
 :depth: 2
-```
-
-In addition to what's in Anaconda, this lecture will need the following libraries:
-
-```{code-cell} ipython
----
-tags: [hide-output]
----
-!pip install interpolation
 ```
 
 ## Overview
@@ -57,12 +50,10 @@ Couldn't the associated within-firm planning be done more efficiently by the mar
 
 We'll use the following imports:
 
-```{code-cell} ipython
+```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 from scipy.optimize import fminbound
-from interpolation import interp
 ```
 
 ### Why Firms Exist
@@ -447,7 +438,7 @@ At each iterate, we will use continuous piecewise linear interpolation of functi
 
 To begin, here's a class to store primitives and a grid:
 
-```{code-cell} python3
+```{code-cell} ipython3
 class ProductionChain:
 
     def __init__(self,
@@ -464,7 +455,7 @@ Now let's implement and iterate with $T$ until convergence.
 Recalling that our initial condition must lie in $\mathcal P$, we set
 $p_0 = c$
 
-```{code-cell} python3
+```{code-cell} ipython3
 def compute_prices(pc, tol=1e-5, max_iter=5000):
     """
     Compute prices by iterating with T
@@ -481,7 +472,7 @@ def compute_prices(pc, tol=1e-5, max_iter=5000):
 
     while error > tol and i < max_iter:
         for j, s in enumerate(grid):
-            Tp = lambda t: delta * interp(grid, p, t) + c(s - t)
+            Tp = lambda t: delta * np.interp(t, grid, p) + c(s - t)
             new_p[j] = Tp(fminbound(Tp, 0, s))
         error = np.max(np.abs(p - new_p))
         p = new_p
@@ -492,14 +483,14 @@ def compute_prices(pc, tol=1e-5, max_iter=5000):
     else:
         print(f"Warning: iteration hit upper bound {max_iter}")
 
-    p_func = lambda x: interp(grid, p, x)
+    p_func = lambda x: np.interp(x, grid, p)
     return p_func
 ```
 
 The next function computes optimal choice of upstream boundary and range of
 task implemented for a firm face price function p_function and with downstream boundary $s$.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def optimal_choices(pc, p_function, s):
     """
     Takes p_func as the true function, minimizes on [0,s]
@@ -524,7 +515,7 @@ their respective upstream boundary, treating the previous firm's upstream bounda
 
 In doing so, we start with firm 1, who has downstream boundary $s=1$.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def compute_stages(pc, p_function):
     s = 1.0
     transaction_stages = [s]
@@ -539,7 +530,7 @@ Let's try this at the default parameters.
 The next figure shows the equilibrium price function, as well as the
 boundaries of firms as vertical lines
 
-```{code-cell} python3
+```{code-cell} ipython3
 pc = ProductionChain()
 p_star = compute_prices(pc)
 
@@ -558,7 +549,7 @@ plt.show()
 Here's the function $\ell^*$, which shows how large a firm with
 downstream boundary $s$ chooses to be
 
-```{code-cell} python3
+```{code-cell} ipython3
 ell_star = np.empty(pc.n)
 for i, s in enumerate(pc.grid):
     t, e = optimal_choices(pc, p_star, s)
@@ -590,9 +581,9 @@ Check your intuition by computing the number of firms at delta in (1.01, 1.05, 1
 ```{solution-start}  coa_ex1
 :class: dropdown
 ```
-Here is one solution 
+Here is one solution
 
-```{code-cell} python3
+```{code-cell} ipython3
 for delta in (1.01, 1.05, 1.1):
 
    pc = ProductionChain(delta=delta)
@@ -601,6 +592,7 @@ for delta in (1.01, 1.05, 1.1):
    num_firms = len(transaction_stages)
    print(f"When delta={delta} there are {num_firms} firms")
 ```
+
 ```{solution-end}
 ```
 
@@ -636,7 +628,7 @@ associated with diminishing returns to management --- which induce convexity ---
 
 Here's one way to compute and graph value added across firms
 
-```{code-cell} python3
+```{code-cell} ipython3
 pc = ProductionChain()
 p_star = compute_prices(pc)
 stages = compute_stages(pc, p_star)

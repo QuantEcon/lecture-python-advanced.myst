@@ -3,8 +3,10 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.1
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -27,15 +29,6 @@ kernelspec:
 :depth: 2
 ```
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
-
-```{code-cell} ipython
----
-tags: [hide-output]
----
-!pip install interpolation
-```
-
 ## Overview
 
 As stated in an [earlier lecture](https://python-intro.quantecon.org/markov_asset.html), an asset is a claim on a stream of prospective payments.
@@ -52,13 +45,11 @@ Another difference to our [first asset pricing lecture](https://python-intro.qua
 
 Let's start with some imports:
 
-```{code-cell} ipython
+```{code-cell} ipython3
 import numpy as np
-from interpolation import interp
 from numba import njit, prange
 from scipy.stats import lognorm
 import matplotlib.pyplot as plt
-%matplotlib inline
 ```
 
 ## The Lucas Model
@@ -401,7 +392,7 @@ Utility will take the isoelastic form $u(c) = c^{1-\gamma}/(1-\gamma)$, where $\
 
 We will set up a `LucasTree` class to hold parameters of the model
 
-```{code-cell} python3
+```{code-cell} ipython3
 class LucasTree:
     """
     Class to store parameters of the Lucas tree model.
@@ -436,7 +427,7 @@ class LucasTree:
 The following function takes an instance of the `LucasTree` and generates a
 jitted version of the Lucas operator
 
-```{code-cell} python3
+```{code-cell} ipython3
 def operator_factory(tree, parallel_flag=True):
 
     """
@@ -458,7 +449,7 @@ def operator_factory(tree, parallel_flag=True):
         """
 
         # Turn f into a function
-        Af = lambda x: interp(grid, f, x)
+        Af = lambda x: np.interp(x, grid, f)
 
         Tf = np.empty_like(f)
         # Apply the T operator to f using Monte Carlo integration
@@ -474,7 +465,7 @@ def operator_factory(tree, parallel_flag=True):
 To solve the model, we write a function that iterates using the Lucas operator
 to find the fixed point.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def solve_model(tree, tol=1e-6, max_iter=500):
     """
     Compute the equilibrium price function associated with Lucas
@@ -505,7 +496,7 @@ def solve_model(tree, tol=1e-6, max_iter=500):
 
 Solving the model and plotting the resulting price function
 
-```{code-cell} python3
+```{code-cell} ipython3
 tree = LucasTree()
 price_vals = solve_model(tree)
 
@@ -552,7 +543,8 @@ Replicate {ref}`the figure <mass_lt_cb>` to show how discount factors affect pri
 ```{solution-start} lucas_ex1
 :class: dropdown
 ```
-```{code-cell} python3
+
+```{code-cell} ipython3
 fig, ax = plt.subplots(figsize=(10, 6))
 
 for β in (.95, 0.98):
@@ -566,5 +558,6 @@ ax.legend(loc='upper left')
 ax.set(xlabel='$y$', ylabel='price', xlim=(min(grid), max(grid)))
 plt.show()
 ```
+
 ```{solution-end}
 ```

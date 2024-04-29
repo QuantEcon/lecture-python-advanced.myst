@@ -3,8 +3,10 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.1
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -26,12 +28,10 @@ kernelspec:
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
-```{code-cell} ipython
----
-tags: [hide-output]
----
+```{code-cell} ipython3
+:tags: [hide-output]
+
 !pip install --upgrade quantecon
-!pip install interpolation
 !conda install -y -c plotly plotly plotly-orca
 ```
 
@@ -703,15 +703,14 @@ Parameters include:
 - $\beta$: Discount factor. Default value is 0.96.
 - bound: Bound for truncated normal distribution. Default value is 3.
 
-```{code-cell} ipython
+```{code-cell} ipython3
 import numpy as np
 from scipy.stats import truncnorm
 from scipy.integrate import quad
 from numba import njit
-from interpolation import interp
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 class BCG_incomplete_markets:
 
     # init method or constructor
@@ -784,7 +783,7 @@ class BCG_incomplete_markets:
         rv = truncnorm(ta, tb, loc=𝜇, scale=𝜎)
         𝜖_range = np.linspace(ta, tb, 1000000)
         pdf_range = rv.pdf(𝜖_range)
-        self.g = njit(lambda 𝜖: interp(𝜖_range, pdf_range, 𝜖))
+        self.g = njit(lambda 𝜖: np.interp(𝜖, 𝜖_range, pdf_range))
 
 
     #*************************************************************
@@ -1206,14 +1205,14 @@ Below we show some examples computed with the class `BCG_incomplete markets`.
 In the first example, we set up an instance of the BCG incomplete
 markets model with default parameter values.
 
-```{code-cell} python3
-:tags: ["hide-output"]
+```{code-cell} ipython3
+:tags: [hide-output]
 
 mdl = BCG_incomplete_markets()
 kss,bss,Vss,qss,pss,c10ss,c11ss,c20ss,c21ss,𝜃1ss = mdl.solve_eq(print_crit=False)
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 print(-kss+qss+pss*bss)
 print(Vss)
 print(𝜃1ss)
@@ -1229,7 +1228,7 @@ Thus, let’s see if the firm is actually maximizing its firm value given
 the equilibrium pricing function $q(k,b)$ for equity and
 $p(k,b)$ for  bonds.
 
-```{code-cell} python3
+```{code-cell} ipython3
 kgrid, bgrid, Vgrid, Qgrid, Pgrid = mdl.eq_valuation(c10ss, c11ss, c20ss, c21ss,N=30)
 
 print('Maximum valuation of the firm value in the (k,B) grid: {:.5f}'.format(Vgrid.max()))
@@ -1246,7 +1245,7 @@ Below we will plot the firm’s value as a function of $k,b$.
 We’ll also plot the equilibrium price functions $q(k,b)$ and
 $p(k,b)$.
 
-```{code-cell} python3
+```{code-cell} ipython3
 from IPython.display import Image
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
@@ -1367,7 +1366,7 @@ $$
 
 The function also outputs agent 1’s bond holdings $\xi_1$.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def off_eq_check(mdl,kss,bss,e=0.1):
     # Big K and big B
     k = kss
@@ -1603,7 +1602,7 @@ structure for the firm.
 We first check the case in which $b^{**} = b^* - e$ where
 $e = 0.1$:
 
-```{code-cell} python3
+```{code-cell} ipython3
 #====================== Experiment 1 ======================#
 Ve1,ke1,be1,pe1,qe1,c10e1,c11e1,c20e1,c21e1,𝜉1e1 = off_eq_check(mdl,
                                                                 kss,
@@ -1655,7 +1654,7 @@ Therefore, $(k^*,b^{*}-e)$ would not be an equilibrium.
 
 Next, we check for $b^{**} = b^* + e$.
 
-```{code-cell} python3
+```{code-cell} ipython3
 #====================== Experiment 2 ======================#
 Ve2,ke2,be2,pe2,qe2,c10e2,c11e2,c20e2,c21e2,𝜉1e2 = off_eq_check(mdl,
                                                                 kss,
@@ -1708,7 +1707,7 @@ want to hold corporate debt.
 
 For example,  $\xi^1 > 0$:
 
-```{code-cell} python3
+```{code-cell} ipython3
 print('Bond holdings of agent 1: {:.3f}'.format(𝜉1e2))
 ```
 
@@ -1726,7 +1725,7 @@ It is also interesting to look at the equilibrium price functions
 $q(k,b)$ and $p(k,b)$ faced by firms in our rational
 expectations equilibrium.
 
-```{code-cell} python3
+```{code-cell} ipython3
 # Equity Valuation
 fig = go.Figure(data=[go.Scatter3d(x=[kss],
                                    y=[bss],
@@ -1756,7 +1755,7 @@ Image(fig.to_image(format="png"))
 # code locally
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 # Bond Valuation
 fig = go.Figure(data=[go.Scatter3d(x=[kss],
                                    y=[bss],
@@ -1815,8 +1814,8 @@ $$
 The function `valuations_by_agent` is used in calculating these
 valuations.
 
-```{code-cell} python3
-:tags: ["hide-output"]
+```{code-cell} ipython3
+:tags: [hide-output]
 
 # Lists for storage
 wlist = []
@@ -1864,7 +1863,7 @@ for i in range(10):
     p2list.append(P2)
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 # Plot
 fig, ax = plt.subplots(3,2,figsize=(12,12))
 ax[0,0].plot(wlist,klist)
@@ -1909,7 +1908,7 @@ Now let’s see how the two types of agents value bonds and equities,
 keeping in mind that the type that values the asset highest determines
 the equilibrium price (and thus the pertinent set of Big $C$’s).
 
-```{code-cell} python3
+```{code-cell} ipython3
 # Comparing the prices
 fig, ax = plt.subplots(1,3,figsize=(16,6))
 

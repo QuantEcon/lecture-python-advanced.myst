@@ -31,7 +31,6 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 tags: [hide-output]
 ---
 !pip install --upgrade quantecon
-!pip install interpolation
 ```
 
 ## Overview
@@ -73,7 +72,6 @@ import matplotlib.pyplot as plt
 from scipy.optimize import root
 from quantecon import MarkovChain
 from quantecon.optimize.nelder_mead import nelder_mead
-from interpolation import interp
 from numba import njit, prange, float64
 from numba.experimental import jitclass
 ```
