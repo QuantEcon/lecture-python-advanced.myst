@@ -607,14 +607,13 @@ class TaxSmoothingExample:
 
         fig, ax = plt.subplots()
         ax.set_title('Cumulative return path (complete markets)')
-        line1 = ax.plot(np.arange(N), self.RT_path)[0]
+        line1 = ax.plot(np.arange(N), self.RT_path, color='blue')[0]
         c1 = line1.get_color()
         ax.set_xlabel('Periods')
         ax.set_ylabel('Cumulative return', color=c1)
 
         ax_ = ax.twinx()
-        ax_._get_lines.prop_cycler = ax._get_lines.prop_cycler
-        line2 = ax_.plot(np.arange(N), self.g_path, ls='--')[0]
+        line2 = ax_.plot(np.arange(N), self.g_path, ls='--', color='green')[0]
         c2 = line2.get_color()
         ax_.set_ylabel('Government expenditures', color=c2)
 

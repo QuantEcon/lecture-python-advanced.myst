@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
       - name: Setup Anaconda
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@v3
         with:
           auto-update-conda: true
           auto-activate-base: true
@@ -39,7 +39,7 @@ jobs:
         shell: bash -l {0}
         run: pip list
       - name: Download "build" folder (cache)
-        uses: dawidd6/action-download-artifact@v2
+        uses: dawidd6/action-download-artifact@v4
         with:
           workflow: cache.yml
           branch: main
@@ -79,7 +79,7 @@ jobs:
           publish_dir: _build/html/
           cname: python-advanced.quantecon.org
       - name: Upload "_build" folder (cache)
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: build-cache
           path: _build
