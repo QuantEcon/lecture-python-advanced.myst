@@ -60,12 +60,12 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=bd9e20870c6007c4c509" rel="stylesheet" />
+  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
   <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=bd9e20870c6007c4c509" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=bd9e20870c6007c4c509" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=bd9e20870c6007c4c509"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -249,7 +249,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>This lecture describes and compares several notions of entropy.</p>
 <p>Among the senses of entropy, we’ll encounter these</p>
 <ul class="simple">
-<li><p>A measure of <strong>uncertainty</strong> of a random variable advanced by Claude Shannon <span id="id1">[<a class="reference internal" href="zreferences.html#id3" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">SW49</a>]</span></p></li>
+<li><p>A measure of <strong>uncertainty</strong> of a random variable advanced by Claude Shannon <span id="id1">[<a class="reference internal" href="zreferences.html#id3" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">Shannon and Weaver, 1949</a>]</span></p></li>
 <li><p>A key object governing thermodynamics</p></li>
 <li><p>Kullback and Leibler’s measure of the statistical divergence between two probability distributions</p></li>
 <li><p>A measure of the volatility of stochastic discount factors that appear in asset pricing theory</p></li>
@@ -261,11 +261,11 @@ const thebe_selector_output = ".output, .cell_output"
 <a class="reference external" href="https://python-advanced.quantecon.org/robustness.html">Robustness</a>.</p>
 <section id="information-theory">
 <h2><span class="section-number">25.1. </span>Information Theory<a class="headerlink" href="#information-theory" title="Permalink to this heading">#</a></h2>
-<p>In information theory <span id="id2">[<a class="reference internal" href="zreferences.html#id3" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">SW49</a>]</span>,  entropy is a measure of the unpredictability of a random variable.</p>
+<p>In information theory <span id="id2">[<a class="reference internal" href="zreferences.html#id3" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">Shannon and Weaver, 1949</a>]</span>,  entropy is a measure of the unpredictability of a random variable.</p>
 <p>To illustrate
 things, let <span class="math notranslate nohighlight">\(X\)</span> be a discrete random variable taking values <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>
 with probabilities <span class="math notranslate nohighlight">\(p_i = \textrm{Prob}(X = x_i) \geq 0, \sum_i p_i =1\)</span>.</p>
-<p>Claude Shannon’s <span id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">SW49</a>]</span> definition  of entropy is</p>
+<p>Claude Shannon’s <span id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">Shannon and Weaver, 1949</a>]</span> definition  of entropy is</p>
 <div class="math notranslate nohighlight" id="equation-eq-shannon1">
 <span class="eqno">(25.1)<a class="headerlink" href="#equation-eq-shannon1" title="Permalink to this equation">#</a></span>\[ 
 H(p) = \sum_i p_i \log_b (p_i^{-1}) = - \sum_i p_i \log_b (p_i) .
@@ -501,10 +501,10 @@ S = - \textrm{trace} (P \ln P)
 </section>
 <section id="backus-chernov-zin-entropy">
 <h2><span class="section-number">25.11. </span>Backus-Chernov-Zin Entropy<a class="headerlink" href="#backus-chernov-zin-entropy" title="Permalink to this heading">#</a></h2>
-<p>After flipping signs, <span id="id5">[<a class="reference internal" href="zreferences.html#id4" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">BCZ14</a>]</span>  use Kullback-Leibler relative entropy as a measure of volatility of stochastic discount factors that they
+<p>After flipping signs, <span id="id5">[<a class="reference internal" href="zreferences.html#id4" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">Backus <em>et al.</em>, 2014</a>]</span>  use Kullback-Leibler relative entropy as a measure of volatility of stochastic discount factors that they
 assert is useful for characterizing features of both the data and various theoretical models of stochastic discount factors.</p>
 <p>Where <span class="math notranslate nohighlight">\(p_{t+1}\)</span> is the physical or true measure, <span class="math notranslate nohighlight">\(p_{t+1}^*\)</span> is the risk-neutral measure, and <span class="math notranslate nohighlight">\(E_t\)</span> denotes conditional
-expectation under the <span class="math notranslate nohighlight">\(p_{t+1}\)</span> measure, <span id="id6">[<a class="reference internal" href="zreferences.html#id4" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">BCZ14</a>]</span> define entropy as</p>
+expectation under the <span class="math notranslate nohighlight">\(p_{t+1}\)</span> measure, <span id="id6">[<a class="reference internal" href="zreferences.html#id4" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">Backus <em>et al.</em>, 2014</a>]</span> define entropy as</p>
 <div class="math notranslate nohighlight" id="equation-eq-bcz1">
 <span class="eqno">(25.9)<a class="headerlink" href="#equation-eq-bcz1" title="Permalink to this equation">#</a></span>\[
 L_t (p_{t+1}^*/p_{t+1}) = - E_t \log( p_{t+1}^*/p_{t+1}).
@@ -522,7 +522,7 @@ Then</p>
 \[
 E_t (m_{t+1} r_{t+1}) = 1 
 \]</div>
-<p><span id="id7">[<a class="reference internal" href="zreferences.html#id4" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">BCZ14</a>]</span> note that a stochastic discount factor satisfies</p>
+<p><span id="id7">[<a class="reference internal" href="zreferences.html#id4" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">Backus <em>et al.</em>, 2014</a>]</span> note that a stochastic discount factor satisfies</p>
 <div class="math notranslate nohighlight">
 \[ 
 m_{t+1} = q_t^1 p_{t+1}^*/p_{t+1} .
@@ -532,7 +532,7 @@ m_{t+1} = q_t^1 p_{t+1}^*/p_{t+1} .
 \[
 E L_t (m_{t+1}) \geq E (\log r_{t+1} - \log r_{t+1}^1 )
 \]</div>
-<p>which they propose as a complement to a Hansen-Jagannathan <span id="id8">[<a class="reference internal" href="zreferences.html#id20" title="Lars Peter Hansen and Ravi Jagannathan. Implications of Security Market Data for Models of Dynamic Economies. Journal of Political Economy, 99(2):225-262, April 1991. URL: https://ideas.repec.org/a/ucp/jpolec/v99y1991i2p225-62.html, doi:10.1086/261749.">HJ91</a>]</span> bound.</p>
+<p>which they propose as a complement to a Hansen-Jagannathan <span id="id8">[<a class="reference internal" href="zreferences.html#id20" title="Lars Peter Hansen and Ravi Jagannathan. Implications of Security Market Data for Models of Dynamic Economies. Journal of Political Economy, 99(2):225-262, April 1991. URL: https://ideas.repec.org/a/ucp/jpolec/v99y1991i2p225-62.html, doi:10.1086/261749.">Hansen and Jagannathan, 1991</a>]</span> bound.</p>
 </section>
 <section id="wiener-kolmogorov-prediction-error-formula-as-entropy">
 <h2><span class="section-number">25.12. </span>Wiener-Kolmogorov Prediction Error Formula as Entropy<a class="headerlink" href="#wiener-kolmogorov-prediction-error-formula-as-entropy" title="Permalink to this heading">#</a></h2>
@@ -543,7 +543,7 @@ mean zero and spectral density <span class="math notranslate nohighlight">\(S_x(
 \[
 \sigma_x^2 =\left( \frac{1}{2\pi}\right) \int_{-\pi}^\pi  S_x (\omega) d \omega .
 \]</div>
-<p>As described  in chapter XIV of  <span id="id9">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sar87</a>]</span>, the Wiener-Kolmogorov formula for the one-period ahead prediction error is</p>
+<p>As described  in chapter XIV of  <span id="id9">[<a class="reference internal" href="zreferences.html#id197" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, the Wiener-Kolmogorov formula for the one-period ahead prediction error is</p>
 <div class="math notranslate nohighlight" id="equation-eq-shannon6">
 <span class="eqno">(25.11)<a class="headerlink" href="#equation-eq-shannon6" title="Permalink to this equation">#</a></span>\[
 \sigma_\epsilon^2 = \exp\left[\left( \frac{1}{2\pi}\right) \int_{-\pi}^\pi \log S_x (\omega) d \omega \right].
@@ -591,7 +591,7 @@ the left side of  <a class="reference internal" href="#equation-eq-shannon22">(2
 </section>
 <section id="frequency-domain-robust-control">
 <h2><span class="section-number">25.14. </span>Frequency Domain Robust Control<a class="headerlink" href="#frequency-domain-robust-control" title="Permalink to this heading">#</a></h2>
-<p>Chapter 8 of <span id="id10">[<a class="reference internal" href="zreferences.html#id105" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton University Press, 2008.">HS08b</a>]</span>  adapts work in the control theory literature to define a
+<p>Chapter 8 of <span id="id10">[<a class="reference internal" href="zreferences.html#id105" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton University Press, 2008.">Hansen and Sargent, 2008</a>]</span>  adapts work in the control theory literature to define a
 <strong>frequency domain entropy</strong> criterion for  robust control as</p>
 <div class="math notranslate nohighlight" id="equation-eq-shannon21">
 <span class="eqno">(25.13)<a class="headerlink" href="#equation-eq-shannon21" title="Permalink to this equation">#</a></span>\[
@@ -599,7 +599,7 @@ the left side of  <a class="reference internal" href="#equation-eq-shannon22">(2
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\theta \in (\underline \theta, +\infty)\)</span> is a positive robustness parameter and <span class="math notranslate nohighlight">\(G_F(\zeta)\)</span> is a <span class="math notranslate nohighlight">\(\zeta\)</span>-transform of the
 objective function.</p>
-<p>Hansen and Sargent <span id="id11">[<a class="reference internal" href="zreferences.html#id105" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton University Press, 2008.">HS08b</a>]</span> show that criterion <a class="reference internal" href="#equation-eq-shannon21">(25.13)</a>  can be represented as</p>
+<p>Hansen and Sargent <span id="id11">[<a class="reference internal" href="zreferences.html#id105" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton University Press, 2008.">Hansen and Sargent, 2008</a>]</span> show that criterion <a class="reference internal" href="#equation-eq-shannon21">(25.13)</a>  can be represented as</p>
 <div class="math notranslate nohighlight" id="equation-eq-shannon220">
 <span class="eqno">(25.14)<a class="headerlink" href="#equation-eq-shannon220" title="Permalink to this equation">#</a></span>\[ 
 \log \det [ D(0)' D(0)] = \int_\Gamma \log \det [ \theta I - G_F(\zeta)' G_F(\zeta) ] d \lambda(\zeta) ,
