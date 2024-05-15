@@ -308,7 +308,7 @@ Let's apply that idea to deduce
 
 
 $$
-1= E\left(m R^{i}\right)=E(m) E\left(R^{i}\right)+\rho_{m, R^{i}}\frac{\sigma(m)}{E(m)} \sigma\left(R^{i}\right)
+1= E\left(m R^{i}\right)=E(m) E\left(R^{i}\right)+\rho_{m, R^{i}}\sigma(m) \sigma\left(R^{i}\right)
 $$ (eq:EMR5)
 
 where the correlation coefficient $\rho_{m, R^i}$ is   defined as
