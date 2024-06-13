@@ -20,10 +20,6 @@ kernelspec:
 
 # Information and Consumption Smoothing
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture employs the following libraries:
 
 ```{code-cell} ipython
@@ -607,7 +603,6 @@ As usual, we start by importing packages.
 import numpy as np
 import quantecon as qe
 import matplotlib.pyplot as plt
-%matplotlib inline
 ```
 
 ```{code-cell} python3

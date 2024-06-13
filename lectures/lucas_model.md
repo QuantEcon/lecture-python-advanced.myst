@@ -25,10 +25,6 @@ kernelspec:
 ```{index} single: Models; Lucas Asset Pricing
 ```
 
-```{contents} Contents
-:depth: 2
-```
-
 ## Overview
 
 As stated in an [earlier lecture](https://python-intro.quantecon.org/markov_asset.html), an asset is a claim on a stream of prospective payments.

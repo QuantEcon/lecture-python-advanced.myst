@@ -23,10 +23,6 @@ kernelspec:
 
 # Markov Jump Linear Quadratic Dynamic Programming
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 ```{code-cell} ipython
@@ -253,8 +249,6 @@ import numpy as np
 import quantecon as qe
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
-
-%matplotlib inline
 ```
 
 ```{code-cell} python3

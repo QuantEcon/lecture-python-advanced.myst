@@ -23,10 +23,6 @@ kernelspec:
 
 # Rosen Schooling Model
 
-```{contents} Contents
-:depth: 2
-```
-
 This lecture is yet another part of a suite of lectures that use the quantecon DLE class to instantiate models within the
 {cite}`HS2013` class of models described in detail in {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
 
@@ -46,7 +42,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import namedtuple
 from quantecon import DLE
-%matplotlib inline
 ```
 
 ## A One-Occupation Model

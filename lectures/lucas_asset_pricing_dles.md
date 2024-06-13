@@ -23,10 +23,6 @@ kernelspec:
 
 # Lucas Asset Pricing Using DLE
 
-```{contents} Contents
-:depth: 2
-```
-
 This is one of a suite of lectures that use the quantecon DLE class to instantiate models within the
 {cite}`HS2013` class of models described in detail in {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
 
@@ -56,7 +52,6 @@ We'll also need the following imports
 import numpy as np
 import matplotlib.pyplot as plt
 from quantecon import DLE
-%matplotlib inline
 ```
 
 We use a linear-quadratic version of an economy that Lucas (1978) {cite}`Lucas1978` used

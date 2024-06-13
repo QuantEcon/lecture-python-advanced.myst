@@ -23,10 +23,6 @@ kernelspec:
 ```{index} single: Models; Additive functionals
 ```
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 ```{code-cell} ipython
@@ -81,7 +77,6 @@ We'll start with some imports:
 import numpy as np
 from quantecon import LQ
 import matplotlib.pyplot as plt
-%matplotlib inline
 ```
 
 ## The Model
