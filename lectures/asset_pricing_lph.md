@@ -17,10 +17,6 @@ kernelspec:
 ```{index} single: Elementary Asset Pricing
 ```
 
-```{contents} Contents
-:depth: 2
-```
-
 ## Overview
 
 This lecture is about  some implications of  asset-pricing theories that are based on the equation
@@ -356,7 +352,6 @@ In drawing a frontier, we'll set $\sigma(m) = .25$ and $E m = .99$, values rough
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
 import numpy as np
-%matplotlib inline
 
 # Define the function to plot
 def y(x, alpha, beta):
@@ -590,7 +585,6 @@ Let's start with some imports.
 import numpy as np
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
-%matplotlib inline
 ```
 
 Lots of our calculations will involve computing population and sample OLS regressions.

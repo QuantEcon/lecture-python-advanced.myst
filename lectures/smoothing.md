@@ -23,10 +23,6 @@ kernelspec:
 ```{index} single: Consumption; Tax
 ```
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture uses the  library:
 
 ```{code-cell} ipython
@@ -83,7 +79,6 @@ Let's start with some imports:
 import numpy as np
 import quantecon as qe
 import matplotlib.pyplot as plt
-%matplotlib inline
 import scipy.linalg as la
 ```
 

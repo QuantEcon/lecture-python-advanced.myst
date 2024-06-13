@@ -20,10 +20,6 @@ kernelspec:
 
 # Classical Control with Linear Algebra
 
-```{contents} Contents
-:depth: 2
-```
-
 ## Overview
 
 In an earlier lecture [Linear Quadratic Dynamic Programming Problems](https://python-intro.quantecon.org/lqcontrol.html), we have studied how to solve a special
@@ -59,7 +55,6 @@ Let's start with some standard imports:
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 ```
 
 ### References

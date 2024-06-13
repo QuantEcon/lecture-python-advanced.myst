@@ -23,10 +23,6 @@ kernelspec:
 
 # How to Pay for a War: Part 2
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture  deploys the quantecon library:
 
 ```{code-cell} ipython
@@ -79,7 +75,6 @@ Let's start with some standard imports:
 import quantecon as qe
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 ```
 
 ## Two example specifications
