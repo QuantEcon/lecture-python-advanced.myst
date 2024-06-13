@@ -3,8 +3,10 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.2
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -29,10 +31,9 @@ kernelspec:
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
-```{code-cell} ipython
----
-tags: [hide-output]
----
+```{code-cell} ipython3
+:tags: [hide-output]
+
 !pip install --upgrade quantecon
 ```
 
@@ -76,7 +77,7 @@ $0$.
 
 We'll start with some imports:
 
-```{code-cell} ipython
+```{code-cell} ipython3
 import numpy as np
 from quantecon import LQ
 import matplotlib.pyplot as plt
@@ -687,19 +688,16 @@ The bliss level of inflation is denoted by $\theta^*$.
 
 First, we will create a class ChangLQ that solves the models and stores their values
 
-```{code-cell} python3
+```{code-cell} ipython3
 class ChangLQ:
     """
     Class to solve LQ Chang model
     """
-    def __init__(self, α, α0, α1, α2, c, T=1000, θ_n=200):
+    def __init__(self, β, c, α=1, α0=1, α1=0.5, α2=3, T=1000, θ_n=200):
 
         # Record parameters
-        self.α, self.α0, self.α1 = α, α0, α1
-        self.α2, self.c, self.T, self.θ_n = α2, c, T, θ_n
-
-        # Create β using "Poor Man's Friedman Rule"
-        self.β = np.exp(-α1 / (α * α2))
+        self.α, self.α0, self.α1, self.α2 = α, α0, α1, α2
+        self.β, self.c, self.T, self.θ_n = β, c, T, θ_n
 
         # Solve the Ramsey Problem #
 
@@ -725,6 +723,7 @@ class ChangLQ:
                       * α2 + α**2 / (1 + α) * α2)
         self.θ_MPE = self.μ_MPE
         self.μ_check = -α * α1 / (α2 * α**2 + c)
+        self.θ_check = self.μ_check
 
         # Calculate value under MPE and Check economy
         self.J_MPE  = (α0 + α1 * (-α * self.μ_MPE) - α2 / 2
@@ -738,11 +737,11 @@ class ChangLQ:
         μ_series = np.zeros(T)
         J_series = np.zeros(T)
         θ_series[1, 0] = self.θ_R
-        μ_series[0] = -self.F.dot(θ_series[:, 0])
+        [μ_series[0]] = -self.F.dot(θ_series[:, 0])
         J_series[0] = -θ_series[:, 0] @ self.P @ θ_series[:, 0].T
         for i in range(1, T):
             θ_series[:, i] = (A - B @ self.F) @ θ_series[:, i-1]
-            μ_series[i] = -self.F @ θ_series[:, i]
+            [μ_series[i]] = -self.F @ θ_series[:, i]
             J_series[i] = -θ_series[:, i] @ self.P @ θ_series[:, i].T
 
         self.J_series = J_series
@@ -768,7 +767,7 @@ class ChangLQ:
         for i in range(200):
             J_space[i] = - np.array((1, θ_space[i])) \
                         @ self.P @ np.array((1, θ_space[i])).T
-            μ_space[i] = - self.F @ np.array((1, θ_space[i]))
+            [μ_space[i]] = - self.F @ np.array((1, θ_space[i]))
             x_prime = (A - B @ self.F) @ np.array((1, θ_space[i]))
             θ_prime[i] = x_prime[1]
             check_space[i] = (α0 + α1 * (-α * θ_space[i]) -
@@ -789,9 +788,8 @@ class ChangLQ:
 
 We will create an instance of ChangLQ with the following parameters
 
-```{code-cell} python3
-clq = ChangLQ(α=1, α0=1, α1=0.5, α2=3, c=2)
-clq.β
+```{code-cell} ipython3
+clq = ChangLQ(β=0.85, c=2)
 ```
 
 The following code generates a figure that plots the value function from the Ramsey Planner's
@@ -799,7 +797,7 @@ problem, which is maximized at $\theta^R_0$.
 
 The figure also shows the limiting value $\theta_\infty^R$ to which  the inflation rate $\theta_t$ converges under the Ramsey plan and compares it to the MPE value and the bliss value.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def plot_value_function(clq):
     """
     Method to plot the value function over the relevant range of θ
@@ -819,9 +817,10 @@ def plot_value_function(clq):
 
     t1 = clq.θ_space[np.argmax(clq.J_space)]
     tR = clq.θ_series[1, -1]
-    θ_points = [t1, tR, clq.θ_B, clq.θ_MPE]
+    θ_points = [t1, tR, clq.θ_B, clq.θ_MPE, clq.θ_check]
     labels = [r"$\theta_0^R$", r"$\theta_\infty^R$",
-              r"$\theta^*$", r"$\theta^{MPE}$"]
+              r"$\theta^*$", r"$\theta^{MPE}$",
+              r"$\theta^\check$"]
 
     # Add points for θs
     for θ, label in zip(θ_points, labels):
@@ -841,7 +840,7 @@ The next code generates a figure that plots the value function from the Ramsey P
 problem as well as that for a Ramsey planner that  must choose a constant
 $\mu$ (that in turn  equals an  implied constant $\theta$).
 
-```{code-cell} python3
+```{code-cell} ipython3
 def compare_ramsey_check(clq):
     """
     Method to compare values of Ramsey and Check
@@ -863,9 +862,12 @@ def compare_ramsey_check(clq):
             lw=2, label=r"$V^\check(\theta)$")
     plt.legend(fontsize=14, loc='upper left')
 
-    θ_points = [clq.θ_space[np.argmax(clq.J_space)],
-                    clq.μ_check]
-    labels = [r"$\theta_0^R$", r"$\theta^\check$"]
+    tR = clq.θ_series[1, -1]
+    θ_points = [tR,
+                clq.θ_space[np.argmax(clq.J_space)],
+                clq.μ_check]
+    labels = [r"$\theta_\infty^R$",
+              r"$\theta_0^R$", r"$\theta^\check$"]
 
     for θ, label in zip(θ_points, labels):
         ax.scatter(θ, check_LB + 0.02 * check_range, 60, 'k', 'v')
@@ -889,7 +891,7 @@ continuation Ramsey planner who inherits $\theta$.
 The right figure plots a continuation Ramsey planner's choice of
 $\mu$ as a function of an inherited $\theta$.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def plot_policy_functions(clq):
     """
     Method to plot the policy functions over the relevant range of θ
@@ -948,7 +950,7 @@ in the Ramsey plan and compares these to the constant levels in a MPE
 and in a Ramsey plan with a government restricted to set $\mu_t$
 to a constant for all $t$.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def plot_ramsey_MPE(clq, T=15):
     """
     Method to plot Ramsey plan against Markov Perfect Equilibrium
@@ -967,14 +969,30 @@ def plot_ramsey_MPE(clq, T=15):
         ax.plot(plot, label=r"$" + label + "^R$")
         ax.hlines(MPE, 0, T-1, 'orange', label=r"$" + label + "^{MPE}$")
         ax.hlines(clq.μ_check, 0, T, 'g', label=r"$" + label + "^\check$")
-        ax.set_xlabel(r"$t$", fontsize=16)
-        ax.set_ylabel(r"$" + label + "_t$", fontsize=18)
+        ax.set_xlabel(r"$t$", fontsize=14)
+        ax.set_ylabel(r"$" + label + "_t$", fontsize=16)
         ax.legend(loc='upper right')
-
-    plt.tight_layout()
+    fig.suptitle(f'β={clq.β}, c={clq.c}', fontsize=16)
+    plt.tight_layout(rect=[0, 0.1, 1, 1])  # Adjust layout to make space for the suptitle
     plt.show()
+```
 
-plot_ramsey_MPE(clq)
+```{code-cell} ipython3
+# Compare different β values
+β_values = [0.8, 0.85, 0.9]
+
+for β in β_values:
+    clq = ChangLQ(β=β, c=2)
+    plot_ramsey_MPE(clq)
+```
+
+```{code-cell} ipython3
+# Compare different c values
+c_values = [1, 4, 8]
+
+for c in c_values:
+    clq = ChangLQ(β=0.85, c=c)
+    plot_ramsey_MPE(clq)
 ```
 
 ### Time Inconsistency of Ramsey Plan
@@ -1252,7 +1270,7 @@ From the 10th period onwards, the inflation rate $\theta^A_t$
 associated with this **Abreu plan** starts the Ramsey plan from its
 beginning, i.e., $\theta^A_{t+10} =\theta^R_t \ \ \forall t \geq 0$.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def abreu_plan(clq, T=1000, T_A=10, μ_bar=0.1, T_Plot=20):
 
     # Append Ramsey μ series to stick μ series
@@ -1318,7 +1336,7 @@ In the above graph  $v_t^A > v_t^{A,D}$, which confirms that $\vec \mu^A$ is a s
 We can also verify the inequalities required for $\vec \mu^A$ to
 be self-confirming numerically as follows
 
-```{code-cell} python3
+```{code-cell} ipython3
 np.all(clq.V_A[0:20] > clq.V_dev[0:20])
 ```
 
@@ -1329,7 +1347,7 @@ $$
 v^R_t \geq - s(\theta^R_t,0) + \beta v^A_0 , \quad \forall t \geq 0
 $$
 
-```{code-cell} python3
+```{code-cell} ipython3
 def check_ramsey(clq, T=1000):
     # Make sure Ramsey plan is sustainable
     R_dev = np.zeros(T)
@@ -1407,15 +1425,15 @@ exceeds the value delivered by the restricted Ramsey planner which in
 turn exceeds the value delivered by the Markov perfect sequence of
 governments.
 
-```{code-cell} python3
+```{code-cell} ipython3
 clq.J_series[0]
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 clq.J_check
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 clq.J_MPE
 ```
 
@@ -1442,4 +1460,3 @@ Thus, our models have involved two Bellman equations:
   $(\mu_t, \theta_t)$ and $v_{t+1}$
 
 A value $\theta$ from one Bellman equation appears as an argument of a second Bellman equation for another value $v$.
-
