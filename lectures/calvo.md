@@ -865,7 +865,7 @@ def compare_ramsey_check(clq):
     tR = clq.θ_series[1, -1]
     θ_points = [tR,
                 clq.θ_space[np.argmax(clq.J_space)],
-                clq.μ_check]
+                clq.θ_check]
     labels = [r"$\theta_\infty^R$",
               r"$\theta_0^R$", r"$\theta^\check$"]
 
