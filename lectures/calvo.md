@@ -898,9 +898,11 @@ def plt_clqs(clqs, axes):
     scatter_labels = [marker.get_label() for marker in scatter_handles]
     
     fig.legend(handles=line_handles, labels=line_labels,
-               loc='upper center', ncol=2, bbox_to_anchor=(0.5, 1.1))
+               loc='upper center', ncol=2, bbox_to_anchor=(0.5, 1.1),
+               prop={'size': 12})
     fig.legend(handles=scatter_handles, labels=scatter_labels,
-               loc='lower center', ncol=5, bbox_to_anchor=(0.5, -0.1))
+               loc='lower center', ncol=5, bbox_to_anchor=(0.5, -0.1), 
+               prop={'size': 12})
     plt.tight_layout()
     plt.show()
 ```
@@ -1036,6 +1038,63 @@ c_values = [1, 4, 8]
 for c in c_values:
     clq = ChangLQ(β=0.85, c=c)
     plot_ramsey_MPE(clq)
+```
+
+The value function for a (continuation) Ramsey
+planner is
+
+$$ v_t = \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
+$$
+
+or
+
+$$
+v_t = - P_{11} - 2 P_{21}\theta_t - P_{22}\theta_t^2
+$$
+
+or
+
+$$ 
+v_t = g_0 + g_1 \theta_t + g_2 \theta_t^2
+$$
+
+where
+
+$$
+g_0 = - P_{11}, \quad g_1 = - 2 P_{21}, \quad g_2 =  - P_{22}
+$$
+
+We set $\check v$ as 
+
+$$
+\check v \equiv (1-\beta)^{-1} \left[ U (-\alpha \check \mu) - \frac{c}{2} \check \mu^2 \right]
+$$
+
+This is the value function of a **constrained to constant $\mu$** Ramsey planner.
+
+```{code-cell} ipython3
+clq = ChangLQ(β=0.85, c=c)
+
+# Define θ_ts and compute v_t
+θ_ts = clq.θ_space
+v_t = - clq.P[0,0] - 2 * clq.P[1,0] * clq.θ_space \
+      - clq.P[1,1] * clq.θ_space**2
+
+# Define the utility function
+U = lambda x: clq.α0 + clq.α1 * x - (clq.α / 2) * x**2
+
+# Compute v_check
+v_check = (1 - clq.β)**(-1) * U(clq.α * clq.μ_check) \
+        - (clq.c / 2) * clq.μ_check**2
+
+# Plot the results
+fig, ax = plt.subplots()
+ax.plot(clq.θ_space, v_t, lw=2, label=r"$v(\theta)$")
+ax.axhline(y=v_check, linestyle='--', color='black', alpha=0.5,
+          label=r"$v^\check$")
+ax.set_xlabel(r"$\theta$", fontsize=18)
+ax.legend()
+plt.show()
 ```
 
 ### Time Inconsistency of Ramsey Plan
