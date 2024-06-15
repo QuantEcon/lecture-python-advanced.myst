@@ -829,7 +829,7 @@ def plot_value_function(clq):
                     xy=(θ, clq.J_LB + 0.01 * clq.J_range),
                     xytext=(θ - 0.01 * clq.θ_range,
                     clq.J_LB + 0.08 * clq.J_range),
-                    fontsize=18)
+                    fontsize=14)
     plt.tight_layout()
     plt.show()
 
@@ -841,13 +841,12 @@ problem as well as that for a Ramsey planner that  must choose a constant
 $\mu$ (that in turn  equals an  implied constant $\theta$).
 
 ```{code-cell} ipython3
-def compare_ramsey_check(clq):
+def compare_ramsey_check(clq, ax):
     """
     Method to compare values of Ramsey and Check
 
     Here clq is an instance of ChangLQ
     """
-    fig, ax = plt.subplots()
     check_min = min(clq.check_space)
     check_max = max(clq.check_space)
     check_range = check_max - check_min
@@ -855,31 +854,73 @@ def compare_ramsey_check(clq):
     check_UB = check_max + 0.05 * check_range
     ax.set_xlim([clq.θ_LB, clq.θ_UB])
     ax.set_ylim([check_LB, check_UB])
-    ax.plot(clq.θ_space, clq.J_space, lw=2, label=r"$J(\theta)$")
+    J_line, = ax.plot(clq.θ_space, clq.J_space, 
+                     lw=2, label=r"$J(\theta)$")
 
-    plt.xlabel(r"$\theta$", fontsize=18)
-    ax.plot(clq.θ_space, clq.check_space,
-            lw=2, label=r"$V^\check(\theta)$")
-    plt.legend(fontsize=14, loc='upper left')
+    ax.set_xlabel(r"$\theta$", fontsize=18)
+    check_line, = ax.plot(clq.θ_space, clq.check_space, 
+                     lw=2, label=r"$V^\check(\theta)$")
 
+    t1 = clq.θ_space[np.argmax(clq.J_space)]
     tR = clq.θ_series[1, -1]
-    θ_points = [tR,
-                clq.θ_space[np.argmax(clq.J_space)],
-                clq.θ_check]
-    labels = [r"$\theta_\infty^R$",
-              r"$\theta_0^R$", r"$\theta^\check$"]
+    θ_points = [t1, tR, clq.θ_B, clq.θ_MPE, clq.θ_check]
+    labels = [r"$\theta_0^R$", r"$\theta_\infty^R$",
+              r"$\theta^*$", r"$\theta^{MPE}$",
+              r"$\theta^\check$"]
+    θ_colors = ['C0', 'C5', 'r', 'orange', 'g']
 
-    for θ, label in zip(θ_points, labels):
-        ax.scatter(θ, check_LB + 0.02 * check_range, 60, 'k', 'v')
-        ax.annotate(label,
-                    xy=(θ, check_LB + 0.01 * check_range),
-                    xytext=(θ - 0.02 * check_range,
-                            check_LB + 0.08 * check_range),
-                    fontsize=18)
+    markers = []
+    for θ, label, color in zip(θ_points, labels, θ_colors):
+        marker = ax.scatter(θ, check_LB + 0.02 * check_range, 60, 
+                            marker='v', label=label, color=color)
+        markers.append(marker)
+    return J_line, check_line, markers
+
+def plt_clqs(clqs, axes):
+    line_handles = {}
+    scatter_handles = {}
+    
+    for i, ax in enumerate(axes):
+        clq = clqs[i]
+        J_line, check_line, markers = compare_ramsey_check(clq, ax)
+        ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
+        ax.tick_params(axis='x', rotation=45)
+        line_handles[J_line.get_label()] = J_line
+        line_handles[check_line.get_label()] = check_line
+        for marker in markers:
+            scatter_handles[marker.get_label()] = marker
+
+    # Handling the legend for line and marks seperately
+    line_handles = list(line_handles.values())
+    scatter_handles = list(scatter_handles.values())
+    
+    line_labels = [line.get_label() for line in line_handles]
+    scatter_labels = [marker.get_label() for marker in scatter_handles]
+    
+    fig.legend(handles=line_handles, labels=line_labels,
+               loc='upper center', ncol=2, bbox_to_anchor=(0.5, 1.1))
+    fig.legend(handles=scatter_handles, labels=scatter_labels,
+               loc='lower center', ncol=5, bbox_to_anchor=(0.5, -0.1))
     plt.tight_layout()
     plt.show()
+```
 
-compare_ramsey_check(clq)
+```{code-cell} ipython3
+# Compare different β values
+fig, axes = plt.subplots(1, 3, figsize=(12, 5))
+β_values = [0.7, 0.85, 0.9]
+
+clqs = [ChangLQ(β=β, c=2) for β in β_values]
+plt_clqs(clqs, axes)
+```
+
+```{code-cell} ipython3
+# Compare different c values
+fig, axes = plt.subplots(1, 3, figsize=(12, 5))
+c_values = [1, 4, 8]
+
+clqs = [ChangLQ(β=0.85, c=c) for c in c_values]
+plt_clqs(clqs, axes)
 ```
 
 The next code generates  figures that plot  policy functions for a continuation Ramsey
@@ -899,27 +940,29 @@ def plot_policy_functions(clq):
     Here clq is an instance of ChangLQ
     """
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
-
-    labels = [r"$\theta_0^R$", r"$\theta_\infty^R$"]
+    t1 = clq.θ_space[np.argmax(clq.J_space)]
+    tR = clq.θ_series[1, -1]
+    θ_points = [t1, tR, clq.θ_B, clq.θ_MPE, clq.θ_check]
+    labels = [r"$\theta_0^R$", r"$\theta_\infty^R$",
+              r"$\theta^*$", r"$\theta^{MPE}$",
+              r"$\theta^\check$"]
 
     ax = axes[0]
     ax.set_ylim([clq.θ_LB, clq.θ_UB])
     ax.plot(clq.θ_space, clq.θ_prime,
-            label=r"$\theta'(\theta)$", lw=2)
+            label=r"$\theta'(\theta)$", lw=2,
+            alpha=0.7)
     x = np.linspace(clq.θ_LB, clq.θ_UB, 5)
     ax.plot(x, x, 'k--', lw=2, alpha=0.7)
     ax.set_ylabel(r"$\theta'$", fontsize=18)
-
-    θ_points = [clq.θ_space[np.argmax(clq.J_space)],
-                    clq.θ_series[1, -1]]
 
     for θ, label in zip(θ_points, labels):
         ax.scatter(θ, clq.θ_LB + 0.02 * clq.θ_range, 60, 'k', 'v')
         ax.annotate(label,
                     xy=(θ, clq.θ_LB + 0.01 * clq.θ_range),
-                    xytext=(θ - 0.02 * clq.θ_range,
+                    xytext=(θ - 0.012 * clq.θ_range,
                             clq.θ_LB + 0.08 * clq.θ_range),
-                    fontsize=18)
+                    fontsize=13)
 
     ax = axes[1]
     μ_min = min(clq.μ_space)
@@ -936,9 +979,9 @@ def plot_policy_functions(clq):
     for θ, label in zip(θ_points, labels):
         ax.scatter(θ, μ_min - 0.03 * μ_range, 60, 'black', 'v')
         ax.annotate(label, xy=(θ, μ_min - 0.03 * μ_range),
-                    xytext=(θ - 0.02 * clq.θ_range,
+                    xytext=(θ - 0.012 * clq.θ_range,
                             μ_min + 0.03 * μ_range),
-                    fontsize=18)
+                    fontsize=13)
     plt.tight_layout()
     plt.show()
 
@@ -972,7 +1015,7 @@ def plot_ramsey_MPE(clq, T=15):
         ax.set_xlabel(r"$t$", fontsize=14)
         ax.set_ylabel(r"$" + label + "_t$", fontsize=16)
         ax.legend(loc='upper right')
-    fig.suptitle(f'β={clq.β}, c={clq.c}', fontsize=16)
+    fig.suptitle(fr'$\beta$={clq.β}, $c$={clq.c}', fontsize=16)
     plt.tight_layout(rect=[0, 0.1, 1, 1])  # Adjust layout to make space for the suptitle
     plt.show()
 ```
