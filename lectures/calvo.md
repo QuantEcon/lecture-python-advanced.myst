@@ -82,6 +82,7 @@ import numpy as np
 from quantecon import LQ
 import matplotlib.pyplot as plt
 %matplotlib inline
+from matplotlib.ticker import FormatStrFormatter
 ```
 
 ## The Model
@@ -798,12 +799,28 @@ problem, which is maximized at $\theta^R_0$.
 The figure also shows the limiting value $\theta_\infty^R$ to which  the inflation rate $\theta_t$ converges under the Ramsey plan and compares it to the MPE value and the bliss value.
 
 ```{code-cell} ipython3
+def compute_θs(clq):
+    """
+    Method to compute θ and assign corresponding labels and colors 
+
+    Here clq is an instance of ChangLQ
+    """
+    θ_points = [clq.θ_B, clq.θ_series[1, -1], 
+                clq.θ_check, clq.θ_space[np.argmax(clq.J_space)], 
+                clq.θ_MPE]
+    labels = [r"$\theta^*$", r"$\theta_\infty^R$", 
+              r"$\theta^\check$", r"$\theta_0^R$", 
+              r"$\theta^{MPE}$"]
+    θ_colors = ['r', 'C5', 'g', 'C0', 'orange']
+
+    return θ_points, labels, θ_colors
+
+
 def plot_value_function(clq):
     """
     Method to plot the value function over the relevant range of θ
 
     Here clq is an instance of ChangLQ
-
     """
     fig, ax = plt.subplots()
 
@@ -822,6 +839,8 @@ def plot_value_function(clq):
               r"$\theta^*$", r"$\theta^{MPE}$",
               r"$\theta^\check$"]
 
+    θ_points, labels, _ = compute_θs(clq)
+    
     # Add points for θs
     for θ, label in zip(θ_points, labels):
         ax.scatter(θ, clq.J_LB + 0.02 * clq.J_range, 60, 'black', 'v')
@@ -847,62 +866,58 @@ def compare_ramsey_check(clq, ax):
 
     Here clq is an instance of ChangLQ
     """
-    check_min = min(clq.check_space)
-    check_max = max(clq.check_space)
+    # Calculate check space range and bounds
+    check_min, check_max = min(clq.check_space), max(clq.check_space)
     check_range = check_max - check_min
-    check_LB = check_min - 0.05 * check_range
-    check_UB = check_max + 0.05 * check_range
+    check_LB, check_UB = check_min - 0.05 * check_range, check_max + 0.05 * check_range
+
+    # Set axis limits
     ax.set_xlim([clq.θ_LB, clq.θ_UB])
     ax.set_ylim([check_LB, check_UB])
+
+    # Plot J(θ) and V^check(θ)
     J_line, = ax.plot(clq.θ_space, clq.J_space, 
-                     lw=2, label=r"$J(\theta)$")
-
-    ax.set_xlabel(r"$\theta$", fontsize=18)
+                      lw=2, label=r"$J(\theta)$")
     check_line, = ax.plot(clq.θ_space, clq.check_space, 
-                     lw=2, label=r"$V^\check(\theta)$")
+                          lw=2, label=r"$V^\check(\theta)$")
 
-    t1 = clq.θ_space[np.argmax(clq.J_space)]
-    tR = clq.θ_series[1, -1]
-    θ_points = [t1, tR, clq.θ_B, clq.θ_MPE, clq.θ_check]
-    labels = [r"$\theta_0^R$", r"$\theta_\infty^R$",
-              r"$\theta^*$", r"$\theta^{MPE}$",
-              r"$\theta^\check$"]
-    θ_colors = ['C0', 'C5', 'r', 'orange', 'g']
+    # Mark key points
+    θ_points, labels, θ_colors = compute_θs(clq)
+    
+    markers = [ax.scatter(θ, check_LB + 0.02 * check_range, 
+                          60, marker='v', label=label, color=color)
+               for θ, label, color in zip(θ_points, labels, θ_colors)]
 
-    markers = []
-    for θ, label, color in zip(θ_points, labels, θ_colors):
-        marker = ax.scatter(θ, check_LB + 0.02 * check_range, 60, 
-                            marker='v', label=label, color=color)
-        markers.append(marker)
     return J_line, check_line, markers
 
 def plt_clqs(clqs, axes):
-    line_handles = {}
-    scatter_handles = {}
-    
-    for i, ax in enumerate(axes):
-        clq = clqs[i]
+    line_handles, scatter_handles = {}, {}
+
+    for ax, clq in zip(axes, clqs):
         J_line, check_line, markers = compare_ramsey_check(clq, ax)
         ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
         ax.tick_params(axis='x', rotation=45)
+
         line_handles[J_line.get_label()] = J_line
         line_handles[check_line.get_label()] = check_line
         for marker in markers:
             scatter_handles[marker.get_label()] = marker
 
-    # Handling the legend for line and marks seperately
+    # Consolidate handles and labels
     line_handles = list(line_handles.values())
     scatter_handles = list(scatter_handles.values())
-    
     line_labels = [line.get_label() for line in line_handles]
     scatter_labels = [marker.get_label() for marker in scatter_handles]
+
+    # Create legends
+    fig = plt.gcf()
+    fig.legend(handles=line_handles, labels=line_labels, 
+               loc='upper center', ncol=2, 
+               bbox_to_anchor=(0.5, 1.1), prop={'size': 12})
+    fig.legend(handles=scatter_handles, labels=scatter_labels, 
+               loc='lower center', ncol=5, 
+               bbox_to_anchor=(0.5, -0.1), prop={'size': 12})
     
-    fig.legend(handles=line_handles, labels=line_labels,
-               loc='upper center', ncol=2, bbox_to_anchor=(0.5, 1.1),
-               prop={'size': 12})
-    fig.legend(handles=scatter_handles, labels=scatter_labels,
-               loc='lower center', ncol=5, bbox_to_anchor=(0.5, -0.1), 
-               prop={'size': 12})
     plt.tight_layout()
     plt.show()
 ```
@@ -942,12 +957,8 @@ def plot_policy_functions(clq):
     Here clq is an instance of ChangLQ
     """
     fig, axes = plt.subplots(1, 2, figsize=(12, 4))
-    t1 = clq.θ_space[np.argmax(clq.J_space)]
-    tR = clq.θ_series[1, -1]
-    θ_points = [t1, tR, clq.θ_B, clq.θ_MPE, clq.θ_check]
-    labels = [r"$\theta_0^R$", r"$\theta_\infty^R$",
-              r"$\theta^*$", r"$\theta^{MPE}$",
-              r"$\theta^\check$"]
+
+    θ_points, labels, θ_colors = compute_θs(clq)
 
     ax = axes[0]
     ax.set_ylim([clq.θ_LB, clq.θ_UB])
@@ -1040,10 +1051,9 @@ for c in c_values:
     plot_ramsey_MPE(clq)
 ```
 
-The value function for a (continuation) Ramsey
-planner is
+The value function for a (continuation) Ramsey planner is
 
-$$ v_t = \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
+$$ -v_t = \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
 $$
 
 or
@@ -1069,32 +1079,121 @@ We set $\check v$ as
 $$
 \check v \equiv (1-\beta)^{-1} \left[ U (-\alpha \check \mu) - \frac{c}{2} \check \mu^2 \right]
 $$
-
 This is the value function of a **constrained to constant $\mu$** Ramsey planner.
 
 ```{code-cell} ipython3
-clq = ChangLQ(β=0.85, c=c)
+def compute_v(clq, θs):
+    """
+    Compute v_t and v_check for given θ values.
 
-# Define θ_ts and compute v_t
-θ_ts = clq.θ_space
-v_t = - clq.P[0,0] - 2 * clq.P[1,0] * clq.θ_space \
-      - clq.P[1,1] * clq.θ_space**2
+    Here clq is an instance of ChangLQ.
+    """
+    # Compute v values for corresponding θ
+    v_t = -clq.P[0, 0] - 2 * clq.P[1, 0] * θs - clq.P[1, 1] * θs**2
+    
+    # Define the utility function
+    U = lambda x: clq.α0 + clq.α1 * x - (clq.α2 / 2) * x**2
+    
+    # Compute v_check
+    v_check = 1 / (1 - clq.β) * (U(-clq.α * clq.μ_check) 
+                                 - (clq.c / 2) * clq.μ_check**2)
 
-# Define the utility function
-U = lambda x: clq.α0 + clq.α1 * x - (clq.α / 2) * x**2
+    return v_t, v_check
 
-# Compute v_check
-v_check = (1 - clq.β)**(-1) * U(clq.α * clq.μ_check) \
-        - (clq.c / 2) * clq.μ_check**2
+def plot_J(clq, ax, add_legend=False):
+    """
+    Plot v(θ) and v^check with θ markers.
+    
+    Here clq is an instance of ChangLQ.
+    """
+    # Compute J(θ) and v_check
+    Jθ, v_check = compute_v(clq, clq.θ_space)
+    
+    # Plot J(θ)
+    v_line, = ax.plot(clq.θ_space, Jθ, lw=2, 
+                      label=r"$J(\theta)$", alpha=0.7)
+    
+    # Plot v^check as a horizontal line
+    check_line = ax.axhline(y=v_check, linestyle='--', 
+                            color='black', 
+                            alpha=0.5, label=r"$v^\check$")
+    
+    # Add markers
+    θ_points, labels, θ_colors = compute_θs(clq)
+    
+    markers = []
+    for θ, label, color in zip(θ_points, labels, θ_colors):
+        closest_index = np.argmin(np.abs(clq.θ_space - θ))
+        marker = ax.scatter(clq.θ_space[closest_index], 
+                            Jθ[closest_index], 
+                            60, marker='v', 
+                            label=label, color=color)
+        markers.append(marker)
+    
+    # Set axis labels and title
+    ax.set_xlabel(r"$\theta$", fontsize=18)
+    ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
+    
+    # Format y-axis
+    ax.tick_params(axis='x', rotation=45)
+    
+    if add_legend:
+        handles = [v_line, check_line] + markers
+        labels = [handle.get_label() for handle in handles]
+        ax.legend(handles, labels, loc='upper center', ncol=7, 
+               bbox_to_anchor=(1.7, 1.2), prop={'size': 14})
+```
 
-# Plot the results
-fig, ax = plt.subplots()
-ax.plot(clq.θ_space, v_t, lw=2, label=r"$v(\theta)$")
-ax.axhline(y=v_check, linestyle='--', color='black', alpha=0.5,
-          label=r"$v^\check$")
-ax.set_xlabel(r"$\theta$", fontsize=18)
-ax.legend()
+```{code-cell} ipython3
+fig, axes = plt.subplots(1, 3, figsize=(16, 6))
+for i, β in enumerate(β_values):
+    clq = ChangLQ(β=β, c=2)
+    plot_J(clq, axes[i], add_legend=(i==0))
 plt.show()
+```
+
+```{code-cell} ipython3
+fig, axes = plt.subplots(1, 3, figsize=(16,6))
+for i, c in enumerate(c_values):
+    clq = ChangLQ(β=0.85, c=c)
+    plot_J(clq, axes[i], add_legend=(i==0))
+plt.show()
+```
+
+```{code-cell} ipython3
+def plot_vt(clq, T, ax):
+    """
+    Plot v_t and v^check with θ markers 
+    """
+    
+    # Define θ_ts and compute v_t
+    θ_ts = clq.θ_series[1, 0:T]
+
+    v_t, v_check = compute_v(clq, θ_ts)
+
+    # Generate plots
+    ax.plot(v_t, lw=2, label=r"$v_t$")
+    ax.axhline(y=v_check, linestyle='--', 
+               color='black', alpha=0.5,
+               label=r"$v^\check$")
+    ax.set_xlabel(r"$t$", fontsize=18)
+    ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
+    ax.tick_params(axis='x', rotation=45)
+    ax.legend(fontsize=14)
+```
+
+```{code-cell} ipython3
+fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+for i, β in enumerate(β_values):
+    clq = ChangLQ(β=β, c=2)
+    plot_vt(clq, 10, axes[i])
+```
+
+```{code-cell} ipython3
+fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+for i, c in enumerate(c_values):
+    clq = ChangLQ(β=0.85, c=c)
+    plot_vt(clq, 10, axes[i])
 ```
 
 ### Time Inconsistency of Ramsey Plan
@@ -1390,8 +1489,10 @@ def abreu_plan(clq, T=1000, T_A=10, μ_bar=0.1, T_Plot=20):
     # Calculate utility of stick plan
     U_A = np.zeros(T)
     for t in range(T):
-        U_A[t] = clq.β**t * (clq.α0 + clq.α1 * (-clq.θ_A[t])
-                 - clq.α2 / 2 * (-clq.θ_A[t])**2 - clq.c * clq.μ_A[t]**2)
+        U_A[t] = clq.β**t \
+                 * (clq.α0 + clq.α1 * (-clq.θ_A[t])
+                 - clq.α2 / 2 * (-clq.θ_A[t])**2 
+                 - clq.c * clq.μ_A[t]**2)
 
     clq.V_A = np.zeros(T)
     for t in range(T):
