@@ -653,32 +653,67 @@ $$
 \mu_t = \bar \mu = \frac{-a_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} a_2 + \frac{\alpha^2}{1+\alpha} a_2}
 $$
 
-In light of results  presented in the previous section, this can be
-simplified to:
+This can be simplified to:
 
 $$
-\bar \mu = - \frac{\alpha a_1}{\alpha^2 a_2 + (1+\alpha)c}
-$$
+\mu^{MPE} \equiv \bar \mu = - \frac{\alpha a_1}{\alpha^2 a_2 + (1+\alpha)c}
+$$ (eq:Markovperfectmu)
 
-Under the  Markov perfect timing protocol it is important that we
+Under the  Markov perfect timing protocol 
 
- * assume that the government takes $\bar \mu$ as given when it chooses $\mu_t$
- * equate $\mu_t = \mu$ only **after** we have computed the time $t$ government's first-order condition for $\mu_t$.
+ * a government takes $\bar \mu$ as given when it chooses $\mu_t$
+ * we equate $\mu_t = \mu$ only **after** we have computed a time $t$ government's first-order condition for $\mu_t$.
 
 ## Outcomes under Three Timing Protocols
 
-We  compute sequences $\{ \theta_t,\mu_t \}$ under a Ramsey
-plan and compare these with the constant levels of $\theta$ and
-$\mu$ in a) a Markov Perfect Equilibrium, and b) a Ramsey plan
-in which the planner is restricted to choose $\mu_t = \check\mu$
+We  want to compare outcome sequences  $\{ \theta_t,\mu_t \}$ under three timing protocols associated with 
+
+  * a standard Ramsey plan with its time varying $\{ \theta_t,\mu_t \}$ sequences 
+  * a Markov perfect equilibrium 
+  * our nonstandard  Ramsey plan in which the planner is restricted to choose $\mu_t = \check\mu$
 for all $t \geq 0$.
 
-We denote the Ramsey sequence as $\theta^R, \mu^R$ and the MPE
-values as $\theta^{MPE}, \mu^{MPE}$.
+We have computed closed form formulas for several of these outcomes, which we find it convenient to repeat here.
 
-The bliss level of inflation is denoted by $\theta^*$.
+In particular, the constrained to constant inflation Ramsey inflation outcome is $\check \mu$,
+which according to equation {eq}`eq:muRamseyconstrained` is
 
-First, we will create a class ChangLQ that solves the models and stores their values
+$$
+\check \theta = - \frac{\alpha a_1}{\alpha^2 a_2 + c }
+$$ 
+
+Equation {eq}`eq:Markovperfectmu` implies that the Markov perfect constant inflation rate is 
+
+$$
+\theta^{MPE}  = - \frac{\alpha a_1}{\alpha^2 a_2 + (1+\alpha)c}
+$$ 
+
+According to equation {eq}`eq:Friedmantheta`, the bliss level of inflation that we associated with a Friedman rule is
+
+$$
+ \theta^* = -\frac{a_1}{a_2 \alpha}
+$$ 
+
+
+**Proposition 1:** When $c=0$,  $\theta^{MPE} = \check \theta = \theta^*$. In addition, when $c=0$,
+$\theta_0^R = \theta_\infty^R$. 
+
+The first two equalities follow from the preceding three equations. We'll illustrate the assertion in  the third equality that equates $\theta_0^R$ to $ \theta_\infty^R$ with some quantitative examples below.
+
+Proposition 1 draws attention to how   a positive tax distortion parameter $c$ alters  the prescription for an optimal rate of deflation that Milton Friedman financed  by imposing a lump sum tax.  
+
+We'll compute and display
+
+ *   $(\vec \theta^R, \vec \mu^R)$: the ordinary time-varying Ramsey sequences
+ *   $(\theta^{MPE}, \mu^{MPE})$: the MPE fixed values
+ *   $(\check \theta, \check \mu)$: the fixed values associate with  our nonstandard time-invariant 
+values Ramsey plan
+ *   $\theta^*$: the  bliss level of inflation prescribed by a Friedman rule
+
+
+
+
+We will create a class ChangLQ that solves the models and stores their values
 
 ```{code-cell} ipython3
 class ChangLQ:
@@ -708,7 +743,7 @@ class ChangLQ:
         self.θ_R = -self.P[0, 1] / self.P[1, 1]
 
         # Find bliss level of θ
-        self.θ_B = - α1 / (α2 * α)
+        self.θ_B = - α1 / (α2* α)
 
         # Solve the Markov Perfect Equilibrium
         self.μ_MPE = -α1 / ((1 + α) / α * c + α / (1 + α)
@@ -778,16 +813,18 @@ class ChangLQ:
         self.check_space = check_space
 ```
 
-We will create an instance of ChangLQ with the following parameters
+Let's create an instance of ChangLQ with the following parameters:
 
 ```{code-cell} ipython3
 clq = ChangLQ(β=0.85, c=2)
 ```
 
-The following code generates a figure that plots the value function from the Ramsey Planner's
-problem, which is maximized at $\theta^R_0$.
+The following code  plots the Ramsey planner's value function $J(\theta)$, which we know is maximized at   $\theta^R_0$, the promised inflation planner that the Ramsey planner chooses to set
+at time $t=0$.
 
-The figure also shows the limiting value $\theta_\infty^R$ to which  the inflation rate $\theta_t$ converges under the Ramsey plan and compares it to the MPE value and the bliss value.
+The figure also plots the limiting value $\theta_\infty^R$ to which  the promised  inflation rate $\theta_t$ converges under the Ramsey plan.
+
+In addition, the figure indicates  an MPE inflation rate $\check \theta$ and a bliss inflation $\theta^*$.
 
 ```{code-cell} ipython3
 def compute_θs(clq):
@@ -846,14 +883,30 @@ def plot_value_function(clq):
 plot_value_function(clq)
 ```
 
-The next code  plots the Ramsey Planner's value function $J(\theta)$ as well 
-problem as well the value function of a constrained  Ramsey planner who  must choose a constant
+The next code  plots the Ramsey Planner's value function $J(\theta)$  as well the value function
+of a constrained  Ramsey planner who  must choose a constant
 $\mu$.
 
 Since the model implies that a  constant $\mu$ implies a constant $\theta$, we take the liberty of
 labeling this value function $\check V(\theta)$.   
 
 We'll use the code to plot $J(\theta)$ and $\check V(\theta)$ for several values of the discount factor $\beta$ and  the cost of $\mu_t^2$ parameter $c$.
+
+In all of the graphs below, we disarm the Proposition 1 equivalence results by setting $c >0$.
+
+The graphs reveal interesting relationships among $\theta$'s associated with various timing protocols:
+
+ *  $\theta_0^R < \theta^{MPE} $: the initial Ramsey inflation rate exceeds the MPE inflation rate 
+ *  $\theta_\infty^R < \check \theta <\theta_0^R$: the initial Ramsey deflation rate, and the associated tax distortion cost $c \mu_0^2$ is less than the limiting Ramsey inflation rate $\theta_\infty^R$ and the associated tax distortion cost $\mu_\infty^2$  
+ *  $\theta^* < \theta^R_\infty$: the limiting Ramsey inflation rate exceeds the bliss level of inflation
+ *  $J(\theta) \geq \check V(\theta)$
+ *  $J(\theta_\infty^R) = \check V(\theta_\infty^R)$
+
+**Request to Humphrey**:
+
+Could we please add a line of code to check the guess in the last equality.  After we do that, I'll write an explanation of the forces that are generating it. 
+
+**End of June 19 request to Humphrey**
 
 ```{code-cell} ipython3
 def compare_ramsey_check(clq, ax):
