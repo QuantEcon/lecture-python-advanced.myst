@@ -791,14 +791,19 @@ class ChangLQ:
         check_space = np.zeros(200)
         μ_space = np.zeros(200)
         θ_prime = np.zeros(200)
+
+        self.J_θ = lambda θ: - np.array((1, θ)) \
+                    @ self.P @ np.array((1, θ)).T
+        self.V_θ = lambda θ: (α0 + α1 * (-α * θ)
+                    - α2/2 * (-α * θ)**2 - c/2 * θ**2) \
+                    / (1 - self.β)
+        
         for i in range(200):
-            J_space[i] = - np.array((1, θ_space[i])) \
-                        @ self.P @ np.array((1, θ_space[i])).T
+            J_space[i] = self.J_θ(θ_space[i])
             [μ_space[i]] = - self.F @ np.array((1, θ_space[i]))
             x_prime = (A - B @ self.F) @ np.array((1, θ_space[i]))
             θ_prime[i] = x_prime[1]
-            check_space[i] = (α0 + α1 * (-α * θ_space[i]) -
-            α2/2 * (-α * θ_space[i])**2 - c/2 * θ_space[i]**2) / (1 - self.β)
+            check_space[i] = self.V_θ(θ_space[i])
 
         J_LB = min(J_space)
         J_UB = max(J_space)
@@ -906,7 +911,15 @@ The graphs reveal interesting relationships among $\theta$'s associated with var
 
 Could we please add a line of code to check the guess in the last equality.  After we do that, I'll write an explanation of the forces that are generating it. 
 
+Humphrey: Checked!
+
 **End of June 19 request to Humphrey**
+
+```{code-cell} ipython3
+θ_inf = clq.θ_series[1, -1]
+np.allclose(clq.J_θ(θ_inf),
+            clq.V_θ(θ_inf))
+```
 
 ```{code-cell} ipython3
 def compare_ramsey_check(clq, ax):
