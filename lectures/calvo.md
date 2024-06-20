@@ -446,7 +446,7 @@ where
 
 $$
 F = \beta (Q + \beta B'PB)^{-1} B'PA
-$$
+$$ (eq:formulaF)
 
 The QuantEcon [LQ](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqcontrol.py) class solves for $F$ and $P$ given inputs
 $Q, R, A, B$, and $\beta$.
@@ -479,6 +479,56 @@ $$
 \theta_0 = \theta_0^R = - \frac{P_{21}}{P_{22}}
 $$
 
+
+The value function for a (continuation) Ramsey planner is
+
+$$ v_t = - \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
+$$
+
+or
+
+$$
+v_t = - P_{11} - 2 P_{21}\theta_t - P_{22}\theta_t^2
+$$
+
+or
+
+$$ 
+v_t = g_0 + g_1 \theta_t + g_2 \theta_t^2
+$$ (eq:continuationvfn)
+
+where
+
+$$
+g_0 = - P_{11}, \quad g_1 = - 2 P_{21}, \quad g_2 =  - P_{22}
+$$
+
+
+The optimal decision rule for $\mu_t$ is
+
+$$ 
+\mu_t = - \begin{bmatrix} F_1 & F_2 \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
+$$
+
+or 
+
+$$ 
+\mu_t = b_0 + b_1 \theta_t 
+$$ (eq:muRamseyrule)
+
+where $b_0 = -F_1, b_1 = - F_2$ and  $F$ satisfies equation {eq}`eq:formulaF`, 
+
+The Ramsey planner's  decision rule for $\theta_{t+1}$ is
+
+$$
+\theta_{t+1} = d_0 + d_1 \theta_t
+$$ (eq:thetaRamseyrule)
+
+where $\begin{bmatrix} d_0 & d_1 \end{bmatrix}$ is the second row of 
+the closed-loop matrix $A - BF$ for computed in subproblem 1 above.
+
+
+
 ### Representation of Ramsey Plan
 
 The preceding calculations indicate that we can represent a Ramsey plan
@@ -491,11 +541,15 @@ $\vec \mu$ recursively with the following system created in the spirit of Chang 
 \theta_0 & = \theta_0^R \\
 \mu_t &  = b_0 + b_1 \theta_t \\
 v_t & = g_0 +g_1\theta_t + g_2 \theta_t^2 \\
-\theta_{t+1} & = d_0 + d_1 \theta_t
+\theta_{t+1} & = d_0 + d_1 \theta_t , \quad  d_0 >0, d_1 \in (0,1) \\
 \end{aligned}
 ```
 
-To interpret this system, think of the  sequence
+where $b_0, b_1, g_0, g_1, g_2$ are positive parameters that we shall compute with Python code below.
+
+
+
+To interpret system {eq}`eq_old9`, think of the  sequence
 $\{\theta_t\}_{t=0}^\infty$ as a sequence of
 synthetic **promised inflation rates**.
 
@@ -526,9 +580,18 @@ $$
 $$ (eq:mutimeinconsist)
 
  
-Variation of  $ \vec \mu^R $ over time  is a symptom of time inconsistency.
+Variation of  $ \vec \mu^R, \vec \theta^R, \vec v^R $ over time  are  symptoms of time inconsistency.
 
-The Ramsey planner reaps immediate benefits from promising lower in the furture   inflation  by   later imposing costly distortions. 
+As our subsequent calculations will verify, $ \vec \mu^R, \vec \theta^R, \vec v^R $ are each monotone sequences that are bounded below and converge to limiting values.  
+
+Some authors are fond of focusing only on these limiting values.
+
+They justify that by saying that they are taking a **timeless perspective** that ignores that the
+Ramsey planner ignores the transient movements in $ \vec \mu^R, \vec \theta^R, \vec v^R $ that will eventually fade away as $\theta_t$ described by Ramsey plan system {eq}`eq_old9` eventually fade away.  
+
+   * the timeless perspective proceeds as if the Ramsey plan was actually solved long ago, and that we are stuck with it now.  
+
+The Ramsey planner reaps immediate benefits from promising lower in the future   inflation  by   later imposing costly distortions. 
 
 These benefits are intermediated by reductions in expected inflation
 that precede  reductions in  money creation rates that foreshadow  them, as indicated by equation {eq}`eq_old3`.  
@@ -594,6 +657,13 @@ $$
 \check \mu = - \frac{\alpha a_1}{\alpha^2 a_2 + c }
 $$ (eq:muRamseyconstrained)
 
+The value function of a **constrained to constant $\mu$** Ramsey planner is
+
+$$
+\check V \equiv (1-\beta)^{-1} \left[ U (-\alpha \check \mu) - \frac{c}{2} \check \mu^2 \right]
+$$ (eq:vcheckformula)
+
+
 **Summary:** We have  introduced the constrained-to-a-constant $\mu$
 government in order to highlight  time-variation of
 $\mu_t$ as a telltale sign of  time inconsistency of a Ramsey plan.
@@ -631,8 +701,8 @@ at $\bar \mu$.
 Substituting for $U$ and $\theta_t$ gives:
 
 $$
-W = a_0 + a_1(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t) - \frac{a_2}{2}(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t)^2 - \frac{c}{2} \mu_t^2 + \beta V(\bar \mu)
-$$
+V(\mu_t) = a_0 + a_1(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t) - \frac{a_2}{2}(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t)^2 - \frac{c}{2} \mu_t^2 + \beta V(\bar \mu)
+$$ (eq:Vmutemp)
 
 The first-order necessary condition for $\mu_t$ is then:
 
@@ -658,6 +728,14 @@ This can be simplified to:
 $$
 \mu^{MPE} \equiv \bar \mu = - \frac{\alpha a_1}{\alpha^2 a_2 + (1+\alpha)c}
 $$ (eq:Markovperfectmu)
+
+and the value of a Markov perfect equilibrium is 
+
+$$
+V^{MPE} = V(\mu_t) \vert_{\mu_t = \bar \mu}
+$$ (eq:VMPE)
+
+where $V(\mu_t)$ satisfies equation {eq}`eq:Vmutemp`.
 
 Under the  Markov perfect timing protocol 
 
@@ -695,7 +773,7 @@ $$
 $$ 
 
 
-**Proposition 1:** When $c=0$,  $\theta^{MPE} = \check \theta = \theta^*$. In addition, when $c=0$,
+**Proposition 1:** When $c=0$,  $\theta^{MPE} = \check \theta = \theta^*$ and 
 $\theta_0^R = \theta_\infty^R$. 
 
 The first two equalities follow from the preceding three equations. We'll illustrate the assertion in  the third equality that equates $\theta_0^R$ to $ \theta_\infty^R$ with some quantitative examples below.
@@ -892,7 +970,7 @@ The next code  plots the Ramsey Planner's value function $J(\theta)$  as well th
 of a constrained  Ramsey planner who  must choose a constant
 $\mu$.
 
-Since the model implies that a  constant $\mu$ implies a constant $\theta$, we take the liberty of
+A time-invariant $\mu$ implies a time-invariant $\theta$, we take the liberty of
 labeling this value function $\check V(\theta)$.   
 
 We'll use the code to plot $J(\theta)$ and $\check V(\theta)$ for several values of the discount factor $\beta$ and  the cost of $\mu_t^2$ parameter $c$.
@@ -907,19 +985,33 @@ The graphs reveal interesting relationships among $\theta$'s associated with var
  *  $J(\theta) \geq \check V(\theta)$
  *  $J(\theta_\infty^R) = \check V(\theta_\infty^R)$
 
-**Request to Humphrey**:
+Before doing anything else, let's write code to verify our claim that
+$J(\theta_\infty^R) = \check V(\theta_\infty^R)$.
 
-Could we please add a line of code to check the guess in the last equality.  After we do that, I'll write an explanation of the forces that are generating it. 
+Here is the code.
 
-Humphrey: Checked!
-
-**End of June 19 request to Humphrey**
 
 ```{code-cell} ipython3
 θ_inf = clq.θ_series[1, -1]
 np.allclose(clq.J_θ(θ_inf),
             clq.V_θ(θ_inf))
 ```
+So our claim is verified numerically.
+
+Since  $J(\theta_\infty^R) = \check V(\theta_\infty^R)$ occurs at a tangency point at which
+$J(\theta)$ is increasing in $\theta$, it follows that
+
+$$
+V(\theta_\infty^R) \leq J(\check \theta)
+$$ (eq:comparison2)
+
+with strict inequality when $c > 0$.  
+
+Thus, the limiting continuation value of continuation Ramsey planners is worse that the 
+constant value attained by a constrained-to-constant $\mu_t$ Ramsey planner.
+
+Now let's write some code to generate and plot outcomes under our three timing protocols.
+
 
 ```{code-cell} ipython3
 def compare_ramsey_check(clq, ax):
@@ -1010,6 +1102,16 @@ continuation Ramsey planner who inherits $\theta$.
 
 The right figure plots a continuation Ramsey planner's choice of
 $\mu$ as a function of an inherited $\theta$.
+
+**Request for Humphrey** Please consolidate the right figure into the left figure.  We'll just plot
+$\theta_{t+1}$ as function of  $\theta_t$, $\mu_t$ as a function of $\theta_t$, and the 45degree line
+all on the same graph. Something pretty will happen.  We'll have to relabel the legends so that it is clear what is being plotted. Can you please do this?
+
+When we are done with this beautiful new graph, I'll want to move it forward in the lecture. It should go before some of the above graphs -- it sets the stage for  the dynamics that are played out in those graphs.  
+
+Thanks!
+
+**end of request for Humphrey**
 
 ```{code-cell} ipython3
 def plot_policy_functions(clq):
@@ -1113,35 +1215,6 @@ for c in c_values:
     plot_ramsey_MPE(clq)
 ```
 
-The value function for a (continuation) Ramsey planner is
-
-$$ -v_t = \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
-$$
-
-or
-
-$$
-v_t = - P_{11} - 2 P_{21}\theta_t - P_{22}\theta_t^2
-$$
-
-or
-
-$$ 
-v_t = g_0 + g_1 \theta_t + g_2 \theta_t^2
-$$
-
-where
-
-$$
-g_0 = - P_{11}, \quad g_1 = - 2 P_{21}, \quad g_2 =  - P_{22}
-$$
-
-We set $\check v$ as 
-
-$$
-\check v \equiv (1-\beta)^{-1} \left[ U (-\alpha \check \mu) - \frac{c}{2} \check \mu^2 \right]
-$$
-This is the value function of a **constrained to constant $\mu$** Ramsey planner.
 
 ```{code-cell} ipython3
 def compute_v(clq, θs):
