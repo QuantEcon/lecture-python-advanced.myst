@@ -202,10 +202,10 @@ We assume that a government  believes that a representative household's utility 
 ```{math}
 :label: eq_old5
 
-U(m_t - p_t) = a_0 + a_1 (m_t - p_t) - \frac{a_2}{2} (m_t - p_t)^2, \quad a_0 > 0, a_1 > 0, a_2 > 0
+U(m_t - p_t) = u_0 + u_1 (m_t - p_t) - \frac{u_2}{2} (m_t - p_t)^2, \quad u_0 > 0, u_1 > 0, u_2 > 0
 ```
 
-The "bliss level" of real balances is then $\frac{a_1}{a_2}$.
+The "bliss level" of real balances is then $\frac{u_1}{u_2}$.
 
 ## Friedman's Optimal Rate of Deflation
 
@@ -213,7 +213,7 @@ The money demand function {eq}`eq_old1` % and the utility function {eq}`eq_old5`
 imply that inflation rate $\theta_t$ that maximizes {eq}`eq_old5` is 
 
 $$
-\theta_t = \theta^* = -\frac{a_1}{a_2 \alpha}
+\theta_t = \theta^* = -\frac{u_1}{u_2 \alpha}
 $$ (eq:Friedmantheta)
 
 According to Milton Friedman, the government should withdraw and destroy money at a rate 
@@ -261,7 +261,7 @@ is:
 ```{math}
 :label: eq_old6
 
--s(\theta_t, \mu_t) \equiv - r(x_t,\mu_t) = \begin{bmatrix} 1 \\ \theta_t \end{bmatrix}' \begin{bmatrix} a_0 & -\frac{a_1 \alpha}{2} \\ -\frac{a_1 \alpha}{2} & -\frac{a_2 \alpha^2}{2} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_t \end{bmatrix} - \frac{c}{2} \mu_t^2 =  - x_t'Rx_t - Q \mu_t^2
+-s(\theta_t, \mu_t) \equiv - r(x_t,\mu_t) = \begin{bmatrix} 1 \\ \theta_t \end{bmatrix}' \begin{bmatrix} u_0 & -\frac{u_1 \alpha}{2} \\ -\frac{u_1 \alpha}{2} & -\frac{u_2 \alpha^2}{2} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_t \end{bmatrix} - \frac{c}{2} \mu_t^2 =  - x_t'Rx_t - Q \mu_t^2
 ```
 
 The  government's time $0$ value is 
@@ -517,20 +517,18 @@ Subproblem 2 does that.
 
 ### Subproblem 2
 
-
-
 The value of the Ramsey problem is
 
 $$
-V = \max_{x_0} J(x_0)
+V^R = \max_{\theta} J(\theta)
 $$
 
-where $V$ is the maximum value of $v_0$ defined in equation {eq}`eq_old7`.
+where $V^R$ is the maximum value of $v_0$ defined in equation {eq}`eq_old7`.
 
 The value function
 
 $$
-J(x_0) = -\begin{bmatrix} 1 & \theta_0 \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \\ P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_0 \end{bmatrix} = -P_{11} - 2 P_{21} \theta_0 - P_{22} \theta_0^2
+J|_{\theta=\theta_0}(\theta_0) = J(\theta_0) = -\begin{bmatrix} 1 & \theta_0 \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \\ P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_0 \end{bmatrix} = -P_{11} - 2 P_{21} \theta_0 - P_{22} \theta_0^2
 $$
 
 Maximizing $J(x_0)$  with respect to $\theta_0$ yields the FOC:
@@ -544,9 +542,6 @@ which implies
 $$
 \theta_0 = \theta_0^R = - \frac{P_{21}}{P_{22}}
 $$
-
-
-
 
 ### Representation of Ramsey Plan
 
@@ -565,8 +560,6 @@ v_t & = g_0 +g_1\theta_t + g_2 \theta_t^2 \\
 ```
 
 where $b_0, b_1, g_0, g_1, g_2$ are positive parameters that we shall compute with Python code below.
-
-
 
 To interpret system {eq}`eq_old9`, think of the  sequence
 $\{\theta_t\}_{t=0}^\infty$ as a sequence of
@@ -618,9 +611,6 @@ that precede  reductions in  money creation rates that foreshadow  them, as indi
 A government decision maker offered an opportunity to ignore effects on
   past utilities and to re-optimize at date $ t \geq 1 $ would want to deviate from a Ramsey plan.
 
-
-
-
 ### Multiple roles of $\theta_t$
 
 The inflation rate $\theta_t$ plays three roles simultaneously:
@@ -656,31 +646,29 @@ We created this version of the model  to highlight an aspect of a Ramsey plan as
 
 Instead of allowing the government to choose different settings of its instrument at different moments, we now assume that
 at time $0$, a  government at time $0$ once and for all  chooses a **constant** sequence
-$\mu_t = \check \mu$ for all $t \geq 0$.
+$\mu_t = \mu^{CR}$ for all $t \geq 0$.
 
-We  assume that the government knows the perfect foresight outcome implied by equation {eq}`eq_old2` that $\theta_t = \check \mu$ when there is  a constant
+We  assume that the government knows the perfect foresight outcome implied by equation {eq}`eq_old2` that $\theta_t = \mu^{CR}$ when there is  a constant
 $\mu$ for all $t \geq 0$.
 
 The government chooses $\mu$  to maximize
 
 $$
-U(-\alpha \check \mu) - \frac{c}{2} \check \mu^2
+U(-\alpha \mu^{CR}) - \frac{c}{2} (\mu^{CR})^2
 $$
-
-
 
 With the quadratic form {eq}`eq_old5` for the utility function $U$, the
 maximizing $\bar \mu$ is
 
 $$
-\check \mu = - \frac{\alpha a_1}{\alpha^2 a_2 + c }
+\mu^{CR} = - \frac{\alpha u_1}{\alpha^2 u_2 + c }
 $$ (eq:muRamseyconstrained)
 
 The value function of a **constrained to constant $\mu$** Ramsey planner is
 
 $$
-\check V \equiv (1-\beta)^{-1} \left[ U (-\alpha \check \mu) - \frac{c}{2} \check \mu^2 \right]
-$$ (eq:vcheckformula)
+V^{CR} \equiv (1-\beta)^{-1} \left[ U (-\alpha \mu^{CR}) - \frac{c}{2} (\mu^{CR})^2 \right]
+$$ (eq:vcrformula)
 
 
 **Summary:** We have  introduced the constrained-to-a-constant $\mu$
@@ -710,10 +698,10 @@ The time $t$ government policymaker then chooses $\mu_t$ to
 maximize:
 
 $$
-W = U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2 + \beta V(\bar \mu)
+U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2 + \beta V^{\bar \mu}
 $$
 
-where $V(\bar \mu)$ is the time $0$ value $v_0$ of
+where $V^{\bar \mu}$ is the time $0$ value $v_0$ of
 recursion {eq}`eq_old8` under a money supply growth rate that is forever constant
 at $\bar \mu$.
 
@@ -721,34 +709,34 @@ Substituting for $U$ and $\theta_t$ gives:
 
 $$ 
 \begin{aligned}
-V(\mu_t) & = a_0 + a_1\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right) - \frac{a_2}{2}\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right)^2 - \frac{c}{2} \mu_t^2  \\ 
-& \quad \quad \quad + \beta V(\bar \mu)
+V(\mu_t) & = u_0 + u_1\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right) - \frac{u_2}{2}\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right)^2 - \frac{c}{2} \mu_t^2  \\ 
+& \quad \quad \quad + \beta V^{\bar \mu}
 \end{aligned}
 $$ (eq:Vmutemp)
 
 The first-order necessary condition for $\mu_t$ is then:
 
 $$
-- \frac{\alpha}{1+\alpha} a_1 - a_2(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t)(- \frac{\alpha}{1+\alpha}) - c \mu_t = 0
+- \frac{\alpha}{1+\alpha} u_1 - u_2(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t)(- \frac{\alpha}{1+\alpha}) - c \mu_t = 0
 $$
 
 Rearranging we get:
 
 $$
-\mu_t = \frac{- a_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha}a_2} - \frac{\alpha^2 a_2}{\left[ \frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} a_2 \right] (1+\alpha)}\bar \mu
+\mu_t = \frac{- u_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha}u_2} - \frac{\alpha^2 u_2}{\left[ \frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} u_2 \right] (1+\alpha)}\bar \mu
 $$
 
 A **Markov Perfect Equilibrium** (MPE) outcome sets
 $\mu_t = \bar \mu$:
 
 $$
-\mu_t = \bar \mu = \frac{-a_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} a_2 + \frac{\alpha^2}{1+\alpha} a_2}
+\mu_t = \bar \mu = \frac{-u_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} u_2 + \frac{\alpha^2}{1+\alpha} u_2}
 $$
 
 This can be simplified to:
 
 $$
-\mu^{MPE} \equiv \bar \mu = - \frac{\alpha a_1}{\alpha^2 a_2 + (1+\alpha)c}
+\mu^{MPE} \equiv \bar \mu = - \frac{\alpha u_1}{\alpha^2 u_2 + (1+\alpha)c}
 $$ (eq:Markovperfectmu)
 
 and the value of a Markov perfect equilibrium is 
@@ -770,32 +758,32 @@ We  want to compare outcome sequences  $\{ \theta_t,\mu_t \}$ under three timing
 
   * a standard Ramsey plan with its time varying $\{ \theta_t,\mu_t \}$ sequences 
   * a Markov perfect equilibrium 
-  * our nonstandard  Ramsey plan in which the planner is restricted to choose $\mu_t = \check\mu$
+  * our nonstandard  Ramsey plan in which the planner is restricted to choose $\mu_t = \mu^{CR}$
 for all $t \geq 0$.
 
 We have computed closed form formulas for several of these outcomes, which we find it convenient to repeat here.
 
-In particular, the constrained to constant inflation Ramsey inflation outcome is $\check \mu$,
+In particular, the constrained to constant inflation Ramsey inflation outcome is $\mu^{CR}$,
 which according to equation {eq}`eq:muRamseyconstrained` is
 
 $$
-\check \theta = - \frac{\alpha a_1}{\alpha^2 a_2 + c }
+\theta^{CR} = - \frac{\alpha u_1}{\alpha^2 u_2 + c }
 $$ 
 
 Equation {eq}`eq:Markovperfectmu` implies that the Markov perfect constant inflation rate is 
 
 $$
-\theta^{MPE}  = - \frac{\alpha a_1}{\alpha^2 a_2 + (1+\alpha)c}
+\theta^{MPE}  = - \frac{\alpha u_1}{\alpha^2 u_2 + (1+\alpha)c}
 $$ 
 
 According to equation {eq}`eq:Friedmantheta`, the bliss level of inflation that we associated with a Friedman rule is
 
 $$
- \theta^* = -\frac{a_1}{a_2 \alpha}
+ \theta^* = -\frac{u_1}{u_2 \alpha}
 $$ 
 
 
-**Proposition 1:** When $c=0$,  $\theta^{MPE} = \check \theta = \theta^*$ and 
+**Proposition 1:** When $c=0$,  $\theta^{MPE} = \theta^{CR} = \theta^*$ and 
 $\theta_0^R = \theta_\infty^R$. 
 
 The first two equalities follow from the preceding three equations. We'll illustrate the assertion in  the third equality that equates $\theta_0^R$ to $ \theta_\infty^R$ with some quantitative examples below.
@@ -806,7 +794,7 @@ We'll compute and display
 
  *   $(\vec \theta^R, \vec \mu^R)$: the ordinary time-varying Ramsey sequences
  *   $(\theta^{MPE}, \mu^{MPE})$: the MPE fixed values
- *   $(\check \theta, \check \mu)$: the fixed values associate with  our nonstandard time-invariant 
+ *   $(\theta^{CR}, \mu^{CR})$: the fixed values associate with  our nonstandard time-invariant 
 values Ramsey plan
  *   $\theta^*$: the  bliss level of inflation prescribed by a Friedman rule
 
@@ -849,14 +837,14 @@ class ChangLQ:
         self.μ_MPE = -α1 / ((1 + α) / α * c + α / (1 + α)
                       * α2 + α**2 / (1 + α) * α2)
         self.θ_MPE = self.μ_MPE
-        self.μ_check = -α * α1 / (α2 * α**2 + c)
-        self.θ_check = self.μ_check
+        self.μ_CR = -α * α1 / (α2 * α**2 + c)
+        self.θ_CR = self.μ_CR
 
-        # Calculate value under MPE and Check economy
+        # Calculate value under MPE and CR economy
         self.J_MPE  = (α0 + α1 * (-α * self.μ_MPE) - α2 / 2
                       * (-α * self.μ_MPE)**2 - c/2 * self.μ_MPE**2) / (1 - self.β)
-        self.J_check = (α0 + α1 * (-α * self.μ_check) - α2/2
-                        * (-α * self.μ_check)**2 - c / 2 * self.μ_check**2) \
+        self.J_CR = (α0 + α1 * (-α * self.μ_CR) - α2/2
+                        * (-α * self.μ_CR)**2 - c / 2 * self.μ_CR**2) \
                         / (1 - self.β)
 
         # Simulate Ramsey plan for large number of periods
@@ -888,7 +876,7 @@ class ChangLQ:
         # Find value function and policy functions over range of θ
         θ_space = np.linspace(self.θ_LB, self.θ_UB, 200)
         J_space = np.zeros(200)
-        check_space = np.zeros(200)
+        CR_space = np.zeros(200)
         μ_space = np.zeros(200)
         θ_prime = np.zeros(200)
 
@@ -903,7 +891,7 @@ class ChangLQ:
             [μ_space[i]] = - self.F @ np.array((1, θ_space[i]))
             x_prime = (A - B @ self.F) @ np.array((1, θ_space[i]))
             θ_prime[i] = x_prime[1]
-            check_space[i] = self.V_θ(θ_space[i])
+            CR_space[i] = self.V_θ(θ_space[i])
 
         J_LB = min(J_space)
         J_UB = max(J_space)
@@ -915,7 +903,7 @@ class ChangLQ:
         self.θ_space = θ_space
         self.μ_space = μ_space
         self.θ_prime = θ_prime
-        self.check_space = check_space
+        self.CR_space = CR_space
 ```
 
 Let's create an instance of ChangLQ with the following parameters:
@@ -929,7 +917,7 @@ at time $t=0$.
 
 The figure also plots the limiting value $\theta_\infty^R$ to which  the promised  inflation rate $\theta_t$ converges under the Ramsey plan.
 
-In addition, the figure indicates  an MPE inflation rate $\check \theta$ and a bliss inflation $\theta^*$.
+In addition, the figure indicates  an MPE inflation rate $\theta^{CR}$ and a bliss inflation $\theta^*$.
 
 ```{code-cell} ipython3
 def compute_θs(clq):
@@ -939,10 +927,10 @@ def compute_θs(clq):
     Here clq is an instance of ChangLQ
     """
     θ_points = [clq.θ_B, clq.θ_series[1, -1], 
-                clq.θ_check, clq.θ_space[np.argmax(clq.J_space)], 
+                clq.θ_CR, clq.θ_space[np.argmax(clq.J_space)], 
                 clq.θ_MPE]
     labels = [r"$\theta^*$", r"$\theta_\infty^R$", 
-              r"$\theta^\check$", r"$\theta_0^R$", 
+              r"$\theta^{CR}$", r"$\theta_0^R$", 
               r"$\theta^{MPE}$"]
     θ_colors = ['r', 'C5', 'g', 'C0', 'orange']
 
@@ -965,13 +953,6 @@ def plot_value_function(clq):
     plt.xlabel(r"$\theta$", fontsize=18)
     plt.ylabel(r"$J(\theta)$", fontsize=18)
 
-    t1 = clq.θ_space[np.argmax(clq.J_space)]
-    tR = clq.θ_series[1, -1]
-    θ_points = [t1, tR, clq.θ_B, clq.θ_MPE, clq.θ_check]
-    labels = [r"$\theta_0^R$", r"$\theta_\infty^R$",
-              r"$\theta^*$", r"$\theta^{MPE}$",
-              r"$\theta^\check$"]
-
     θ_points, labels, _ = compute_θs(clq)
     
     # Add points for θs
@@ -993,38 +974,38 @@ of a constrained  Ramsey planner who  must choose a constant
 $\mu$.
 
 A time-invariant $\mu$ implies a time-invariant $\theta$, we take the liberty of
-labeling this value function $\check V(\theta)$.   
+labeling this value function $V^{CR}(\theta)$.   
 
-We'll use the code to plot $J(\theta)$ and $\check V(\theta)$ for several values of the discount factor $\beta$ and  the cost of $\mu_t^2$ parameter $c$.
+We'll use the code to plot $J(\theta)$ and $V^{CR}(\theta)$ for several values of the discount factor $\beta$ and  the cost of $\mu_t^2$ parameter $c$.
 
 In all of the graphs below, we disarm the Proposition 1 equivalence results by setting $c >0$.
 
 The graphs reveal interesting relationships among $\theta$'s associated with various timing protocols:
 
  *  $\theta_0^R < \theta^{MPE} $: the initial Ramsey inflation rate exceeds the MPE inflation rate 
- *  $\theta_\infty^R < \check \theta <\theta_0^R$: the initial Ramsey deflation rate, and the associated tax distortion cost $c \mu_0^2$ is less than the limiting Ramsey inflation rate $\theta_\infty^R$ and the associated tax distortion cost $\mu_\infty^2$  
+ *  $\theta_\infty^R < \theta^{CR} <\theta_0^R$: the initial Ramsey deflation rate, and the associated tax distortion cost $c \mu_0^2$ is less than the limiting Ramsey inflation rate $\theta_\infty^R$ and the associated tax distortion cost $\mu_\infty^2$  
  *  $\theta^* < \theta^R_\infty$: the limiting Ramsey inflation rate exceeds the bliss level of inflation
- *  $J(\theta) \geq \check V(\theta)$
- *  $J(\theta_\infty^R) = \check V(\theta_\infty^R)$
+ *  $J(\theta) \geq V^{CR}(\theta)$
+ *  $J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$
 
 Before doing anything else, let's write code to verify our claim that
-$J(\theta_\infty^R) = \check V(\theta_\infty^R)$.
+$J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$.
 
 Here is the code.
-
 
 ```{code-cell} ipython3
 θ_inf = clq.θ_series[1, -1]
 np.allclose(clq.J_θ(θ_inf),
             clq.V_θ(θ_inf))
 ```
+
 So our claim is verified numerically.
 
-Since  $J(\theta_\infty^R) = \check V(\theta_\infty^R)$ occurs at a tangency point at which
+Since  $J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$ occurs at a tangency point at which
 $J(\theta)$ is increasing in $\theta$, it follows that
 
 $$
-V(\theta_\infty^R) \leq J(\check \theta)
+V(\theta_\infty^R) \leq J(\theta^{CR})
 $$ (eq:comparison2)
 
 with strict inequality when $c > 0$.  
@@ -1034,48 +1015,47 @@ constant value attained by a constrained-to-constant $\mu_t$ Ramsey planner.
 
 Now let's write some code to generate and plot outcomes under our three timing protocols.
 
-
 ```{code-cell} ipython3
-def compare_ramsey_check(clq, ax):
+def compare_ramsey_CR(clq, ax):
     """
-    Method to compare values of Ramsey and Check
+    Method to compare values of Ramsey and Constrained Ramsey (CR)
 
     Here clq is an instance of ChangLQ
     """
-    # Calculate check space range and bounds
-    check_min, check_max = min(clq.check_space), max(clq.check_space)
-    check_range = check_max - check_min
-    check_LB, check_UB = check_min - 0.05 * check_range, check_max + 0.05 * check_range
+    # Calculate CR space range and bounds
+    min_CR, max_CR = min(clq.CR_space), max(clq.CR_space)
+    range_CR = max_CR - min_CR
+    l_CR, u_CR = min_CR - 0.05 * range_CR, max_CR + 0.05 * range_CR
 
     # Set axis limits
     ax.set_xlim([clq.θ_LB, clq.θ_UB])
-    ax.set_ylim([check_LB, check_UB])
+    ax.set_ylim([l_CR, u_CR])
 
-    # Plot J(θ) and V^check(θ)
+    # Plot J(θ) and v^CR(θ)
     J_line, = ax.plot(clq.θ_space, clq.J_space, 
                       lw=2, label=r"$J(\theta)$")
-    check_line, = ax.plot(clq.θ_space, clq.check_space, 
-                          lw=2, label=r"$V^\check(\theta)$")
+    CR_line, = ax.plot(clq.θ_space, clq.CR_space, 
+                          lw=2, label=r"$V^{CR}(\theta)$")
 
     # Mark key points
     θ_points, labels, θ_colors = compute_θs(clq)
     
-    markers = [ax.scatter(θ, check_LB + 0.02 * check_range, 
+    markers = [ax.scatter(θ, l_CR + 0.02 * range_CR, 
                           60, marker='v', label=label, color=color)
                for θ, label, color in zip(θ_points, labels, θ_colors)]
 
-    return J_line, check_line, markers
+    return J_line, CR_line, markers
 
 def plt_clqs(clqs, axes):
     line_handles, scatter_handles = {}, {}
 
     for ax, clq in zip(axes, clqs):
-        J_line, check_line, markers = compare_ramsey_check(clq, ax)
+        J_line, CR_line, markers = compare_ramsey_CR(clq, ax)
         ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
         ax.tick_params(axis='x', rotation=45)
 
         line_handles[J_line.get_label()] = J_line
-        line_handles[check_line.get_label()] = check_line
+        line_handles[CR_line.get_label()] = CR_line
         for marker in markers:
             scatter_handles[marker.get_label()] = marker
 
@@ -1142,45 +1122,45 @@ def plot_policy_functions(clq):
 
     Here clq is an instance of ChangLQ
     """
-    fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+    fig, ax = plt.subplots(figsize=(10, 6))
 
     θ_points, labels, θ_colors = compute_θs(clq)
 
-    ax = axes[0]
-    ax.set_ylim([clq.θ_LB, clq.θ_UB])
-    ax.plot(clq.θ_space, clq.θ_prime,
-            label=r"$\theta'(\theta)$", lw=2,
-            alpha=0.7)
+    # Plot θ' function
+    ax.plot(clq.θ_space, clq.θ_prime, 
+            label=r"$\theta'(\theta)$", 
+            lw=2, alpha=0.5, color='blue')
     x = np.linspace(clq.θ_LB, clq.θ_UB, 5)
     ax.plot(x, x, 'k--', lw=2, alpha=0.7)
-    ax.set_ylabel(r"$\theta'$", fontsize=18)
+    
+    # Plot μ function
+    ax.plot(clq.θ_space, clq.μ_space, lw=2, 
+            label=r"$\mu(\theta)$", 
+            color='green', alpha=0.5)
 
-    for θ, label in zip(θ_points, labels):
-        ax.scatter(θ, clq.θ_LB + 0.02 * clq.θ_range, 60, 'k', 'v')
-        ax.annotate(label,
-                    xy=(θ, clq.θ_LB + 0.01 * clq.θ_range),
-                    xytext=(θ - 0.012 * clq.θ_range,
-                            clq.θ_LB + 0.08 * clq.θ_range),
-                    fontsize=13)
+    θ_points, labels, θ_colors = compute_θs(clq)
 
-    ax = axes[1]
+    # Plot labels and points for μ function
     μ_min = min(clq.μ_space)
     μ_max = max(clq.μ_space)
     μ_range = μ_max - μ_min
-    ax.set_ylim([μ_min - 0.05 * μ_range, μ_max + 0.05 * μ_range])
-    ax.plot(clq.θ_space, clq.μ_space, lw=2)
-    ax.set_ylabel(r"$\mu(\theta)$", fontsize=18)
-
-    for ax in axes:
-        ax.set_xlabel(r"$\theta$", fontsize=18)
-        ax.set_xlim([clq.θ_LB, clq.θ_UB])
-
     for θ, label in zip(θ_points, labels):
-        ax.scatter(θ, μ_min - 0.03 * μ_range, 60, 'black', 'v')
+        ax.scatter(θ, μ_min - 0.02 * μ_range, 
+                   60, 'black', 'v')
         ax.annotate(label, xy=(θ, μ_min - 0.03 * μ_range),
                     xytext=(θ - 0.012 * clq.θ_range,
                             μ_min + 0.03 * μ_range),
-                    fontsize=13)
+                    fontsize=14)
+
+    # Set labels and limits
+    ax.set_xlabel(r"$\theta$", fontsize=18)
+    ax.set_xlim([clq.θ_LB, clq.θ_UB])
+    ax.set_ylim([min(clq.θ_LB, μ_min) - 0.05 * clq.θ_range, 
+                 max(clq.θ_UB, μ_max) + 0.05 * clq.θ_range])
+    
+    # Add legend
+    ax.legend(fontsize=14)
+
     plt.tight_layout()
     plt.show()
 
@@ -1210,7 +1190,7 @@ def plot_ramsey_MPE(clq, T=15):
     for ax, plot, MPE, label in zip(axes, plots, MPEs, labels):
         ax.plot(plot, label=r"$" + label + "^R$")
         ax.hlines(MPE, 0, T-1, 'orange', label=r"$" + label + "^{MPE}$")
-        ax.hlines(clq.μ_check, 0, T, 'g', label=r"$" + label + "^\check$")
+        ax.hlines(clq.μ_CR, 0, T, 'g', label=r"$" + label + "^{CR}$")
         ax.set_xlabel(r"$t$", fontsize=14)
         ax.set_ylabel(r"$" + label + "_t$", fontsize=16)
         ax.legend(loc='upper right')
@@ -1237,11 +1217,10 @@ for c in c_values:
     plot_ramsey_MPE(clq)
 ```
 
-
 ```{code-cell} ipython3
 def compute_v(clq, θs):
     """
-    Compute v_t and v_check for given θ values.
+    Compute v_t and v_CR for given θ values.
 
     Here clq is an instance of ChangLQ.
     """
@@ -1251,29 +1230,29 @@ def compute_v(clq, θs):
     # Define the utility function
     U = lambda x: clq.α0 + clq.α1 * x - (clq.α2 / 2) * x**2
     
-    # Compute v_check
-    v_check = 1 / (1 - clq.β) * (U(-clq.α * clq.μ_check) 
-                                 - (clq.c / 2) * clq.μ_check**2)
+    # Compute v_CR
+    v_CR = 1 / (1 - clq.β) * (U(-clq.α * clq.μ_CR) 
+                                 - (clq.c / 2) * clq.μ_CR**2)
 
-    return v_t, v_check
+    return v_t, v_CR
 
 def plot_J(clq, ax, add_legend=False):
     """
-    Plot v(θ) and v^check with θ markers.
+    Plot v(θ) and v^CR with θ markers.
     
     Here clq is an instance of ChangLQ.
     """
-    # Compute J(θ) and v_check
-    Jθ, v_check = compute_v(clq, clq.θ_space)
+    # Compute J(θ) and v_CR
+    Jθ, v_CR = compute_v(clq, clq.θ_space)
     
     # Plot J(θ)
     v_line, = ax.plot(clq.θ_space, Jθ, lw=2, 
                       label=r"$J(\theta)$", alpha=0.7)
     
-    # Plot v^check as a horizontal line
-    check_line = ax.axhline(y=v_check, linestyle='--', 
+    # Plot v^CR as a horizontal line
+    CR_line = ax.axhline(y=v_CR, linestyle='--', 
                             color='black', 
-                            alpha=0.5, label=r"$v^\check$")
+                            alpha=0.5, label=r"$v^{CR}$")
     
     # Add markers
     θ_points, labels, θ_colors = compute_θs(clq)
@@ -1295,7 +1274,7 @@ def plot_J(clq, ax, add_legend=False):
     ax.tick_params(axis='x', rotation=45)
     
     if add_legend:
-        handles = [v_line, check_line] + markers
+        handles = [v_line, CR_line] + markers
         labels = [handle.get_label() for handle in handles]
         ax.legend(handles, labels, loc='upper center', ncol=7, 
                bbox_to_anchor=(1.7, 1.2), prop={'size': 14})
@@ -1320,19 +1299,19 @@ plt.show()
 ```{code-cell} ipython3
 def plot_vt(clq, T, ax):
     """
-    Plot v_t and v^check with θ markers 
+    Plot v_t and v^CR with θ markers 
     """
     
     # Define θ_ts and compute v_t
     θ_ts = clq.θ_series[1, 0:T]
 
-    v_t, v_check = compute_v(clq, θ_ts)
+    v_t, v_CR = compute_v(clq, θ_ts)
 
     # Generate plots
     ax.plot(v_t, lw=2, label=r"$v_t$")
-    ax.axhline(y=v_check, linestyle='--', 
+    ax.axhline(y=v_CR, linestyle='--', 
                color='black', alpha=0.5,
-               label=r"$v^\check$")
+               label=r"$v^{CR}$")
     ax.set_xlabel(r"$t$", fontsize=18)
     ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
     ax.tick_params(axis='x', rotation=45)
@@ -1369,7 +1348,7 @@ is a symptom of time inconsistency.
 
 **Note:** A modified Ramsey plan constructed under the restriction that
 $\mu_t$ must be constant over time is time consistent (see
-$\check \mu$ and $\check \theta$ in the above graphs).
+$\mu^{CR}$ and $\theta^{CR}$ in the above graphs).
 
 ### Meaning of Time Inconsistency
 
@@ -1790,7 +1769,7 @@ clq.J_series[0]
 ```
 
 ```{code-cell} ipython3
-clq.J_check
+clq.J_CR
 ```
 
 ```{code-cell} ipython3
