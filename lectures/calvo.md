@@ -1147,7 +1147,7 @@ def plot_policy_functions(clq):
     for θ, label in zip(θ_points, labels):
         ax.scatter(θ, μ_min - 0.02 * μ_range, 
                    60, 'black', 'v')
-        ax.annotate(label, xy=(θ, μ_min - 0.03 * μ_range),
+        ax.annotate(label, xy=(θ, μ_min - 0.02 * μ_range),
                     xytext=(θ - 0.012 * clq.θ_range,
                             μ_min + 0.03 * μ_range),
                     fontsize=14)
