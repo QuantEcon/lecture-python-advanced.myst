@@ -286,6 +286,17 @@ We can represent the dependence of  $v_0$ on $(\vec \theta, \vec \mu)$ recursive
 v_t = - s(\theta_t, \mu_t) + \beta v_{t+1}
 ```
 
+It is useful to evaluate {eq}`eq_old8` under a time invariant money growth rate $\mu_t = \bar \mu$
+that according to equation {eq}`eq_old3` would bring forth a constant inflation rate equal to $\bar \mu$.  
+
+Under that policy,
+
+$$
+v_t = v^{\bar \mu} \equiv  - \frac{s(\bar \mu, \bar \mu)}{1-\beta} 
+$$ (eq:barvdef)
+
+for all $t \geq 0$. 
+
 
 ## Structure
 
@@ -451,7 +462,62 @@ $$ (eq:formulaF)
 The QuantEcon [LQ](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lqcontrol.py) class solves for $F$ and $P$ given inputs
 $Q, R, A, B$, and $\beta$.
 
+
+The value function for a (continuation) Ramsey planner is
+
+$$ v_t = - \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
+$$
+
+or
+
+$$
+v_t = - P_{11} - 2 P_{21}\theta_t - P_{22}\theta_t^2
+$$
+
+or
+
+$$ 
+v_t = g_0 + g_1 \theta_t + g_2 \theta_t^2
+$$ (eq:continuationvfn)
+
+where
+
+$$
+g_0 = - P_{11}, \quad g_1 = - 2 P_{21}, \quad g_2 =  - P_{22}
+$$
+
+
+The Ramsey plan for setting $\mu_t$ is
+
+$$ 
+\mu_t = - \begin{bmatrix} F_1 & F_2 \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
+$$
+
+or 
+
+$$ 
+\mu_t = b_0 + b_1 \theta_t 
+$$ (eq:muRamseyrule)
+
+where $b_0 = -F_1, b_1 = - F_2$ and  $F$ satisfies equation {eq}`eq:formulaF`, 
+
+The Ramsey planner's  decision rule for updating $\theta_{t+1}$ is
+
+$$
+\theta_{t+1} = d_0 + d_1 \theta_t
+$$ (eq:thetaRamseyrule)
+
+where $\begin{bmatrix} d_0 & d_1 \end{bmatrix}$ is the second row of 
+the closed-loop matrix $A - BF$ for computed in subproblem 1 above.
+
+It remains for the Ramsey planner to set $\theta_0$.  
+
+Subproblem 2 does that.
+
+
 ### Subproblem 2
+
+
 
 The value of the Ramsey problem is
 
@@ -479,53 +545,6 @@ $$
 \theta_0 = \theta_0^R = - \frac{P_{21}}{P_{22}}
 $$
 
-
-The value function for a (continuation) Ramsey planner is
-
-$$ v_t = - \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
-$$
-
-or
-
-$$
-v_t = - P_{11} - 2 P_{21}\theta_t - P_{22}\theta_t^2
-$$
-
-or
-
-$$ 
-v_t = g_0 + g_1 \theta_t + g_2 \theta_t^2
-$$ (eq:continuationvfn)
-
-where
-
-$$
-g_0 = - P_{11}, \quad g_1 = - 2 P_{21}, \quad g_2 =  - P_{22}
-$$
-
-
-The optimal decision rule for $\mu_t$ is
-
-$$ 
-\mu_t = - \begin{bmatrix} F_1 & F_2 \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
-$$
-
-or 
-
-$$ 
-\mu_t = b_0 + b_1 \theta_t 
-$$ (eq:muRamseyrule)
-
-where $b_0 = -F_1, b_1 = - F_2$ and  $F$ satisfies equation {eq}`eq:formulaF`, 
-
-The Ramsey planner's  decision rule for $\theta_{t+1}$ is
-
-$$
-\theta_{t+1} = d_0 + d_1 \theta_t
-$$ (eq:thetaRamseyrule)
-
-where $\begin{bmatrix} d_0 & d_1 \end{bmatrix}$ is the second row of 
-the closed-loop matrix $A - BF$ for computed in subproblem 1 above.
 
 
 
@@ -700,8 +719,11 @@ at $\bar \mu$.
 
 Substituting for $U$ and $\theta_t$ gives:
 
-$$
-V(\mu_t) = a_0 + a_1(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t) - \frac{a_2}{2}(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t)^2 - \frac{c}{2} \mu_t^2 + \beta V(\bar \mu)
+$$ 
+\begin{aligned}
+V(\mu_t) & = a_0 + a_1\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right) - \frac{a_2}{2}\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right)^2 - \frac{c}{2} \mu_t^2  \\ 
+& \quad \quad \quad + \beta V(\bar \mu)
+\end{aligned}
 $$ (eq:Vmutemp)
 
 The first-order necessary condition for $\mu_t$ is then:
