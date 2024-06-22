@@ -209,7 +209,7 @@ The "bliss level" of real balances is then $\frac{u_1}{u_2}$.
 
 ## Friedman's Optimal Rate of Deflation
 
-The money demand function {eq}`eq_old1` % and the utility function {eq}`eq_old5`
+The money demand function {eq}`eq_old1` and the utility function {eq}`eq_old5`
 imply that inflation rate $\theta_t$ that maximizes {eq}`eq_old5` is 
 
 $$
@@ -292,8 +292,10 @@ that according to equation {eq}`eq_old3` would bring forth a constant inflation 
 Under that policy,
 
 $$
-v_t = V^{\bar \mu} \equiv  - \frac{s(\bar \mu, \bar \mu)}{1-\beta} 
+v_t = V(\bar \mu) = - \frac{s(\bar \mu, \bar \mu)}{1-\beta} 
 $$ (eq:barvdef)
+
+To Tom: Should we add a short sentence here to explain why we need $V(\bar \mu)$? I think we can reference the sections on CR and MPE below.
 
 for all $t \geq 0$. 
 
@@ -655,10 +657,10 @@ The government chooses $\bar \mu$  to maximize
 
 
 $$
-V^{CR}(\bar \mu) = V^{\bar \mu}
+V^{CR}(\bar \mu) = V(\bar \mu)
 $$
 
-where $V^{\bar \mu}$ is defined in equation {eq}`eq:barvdef`.
+where $V(\bar \mu)$ is defined in equation {eq}`eq:barvdef`.
 
 We can express $V^{CR}(\bar \mu)$ as
 
@@ -680,7 +682,7 @@ $$ (eq:muRamseyconstrained)
 The optimal value attained by a **constrained to constant $\mu$** Ramsey planner is
 
 $$
-V^{CR}(\mu^{CR})  = (1-\beta)^{-1} \left[ U (-\alpha \mu^{CR}) - \frac{c}{2} (\mu^{CR})^2 \right]
+V^{CR}(\mu^{CR}) = v^{CR} = (1-\beta)^{-1} \left[ U (-\alpha \mu^{CR}) - \frac{c}{2} (\mu^{CR})^2 \right]
 $$ (eq:vcrformula)
 
 
@@ -714,10 +716,10 @@ Given $\bar \mu$, the time $t$ government  chooses $\mu_t$ to
 maximize:
 
 $$
-Q(\mu_t, \bar \mu) = U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2 + \beta V^{\bar \mu}
+Q(\mu_t, \bar \mu) = U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2 + \beta V(\bar \mu)
 $$ (eq_Markov3)
 
-where $V^{\bar \mu}$ is given by formula  {eq}`eq:barvdef` for  the time $0$ value $v_0$ of
+where $V(\bar \mu)$ is given by formula  {eq}`eq:barvdef` for  the time $0$ value $v_0$ of
 recursion {eq}`eq_old8` under a money supply growth rate that is forever constant
 at $\bar \mu$. 
 
@@ -726,7 +728,7 @@ Substituting  {eq}`eq_Markov2` into {eq}`eq_Markov3` and expanding gives:
 $$ 
 \begin{aligned}
 Q(\mu_t, \bar \mu) & = u_0 + u_1\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right) - \frac{u_2}{2}\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right)^2 - \frac{c}{2} \mu_t^2  \\ 
-& \quad \quad \quad + \beta V^{\bar \mu}
+& \quad \quad \quad + \beta V(\bar \mu)
 \end{aligned}
 $$ (eq:Vmutemp)
 
@@ -1042,6 +1044,24 @@ constant value attained by a constrained-to-constant $\mu_t$ Ramsey planner.
 Now let's write some code to generate and plot outcomes under our three timing protocols.
 
 ```{code-cell} ipython3
+def compute_v(clq, θs):
+    """
+    Compute v_t and v_CR for given θ values.
+
+    Here clq is an instance of ChangLQ.
+    """
+    # Compute v values for corresponding θ
+    v_t = -clq.P[0, 0] - 2 * clq.P[1, 0] * θs - clq.P[1, 1] * θs**2
+    
+    # Define the utility function
+    U = lambda x: clq.α0 + clq.α1 * x - (clq.α2 / 2) * x**2
+    
+    # Compute v_CR
+    v_CR = 1 / (1 - clq.β) * (U(-clq.α * clq.μ_CR) 
+                                 - (clq.c / 2) * clq.μ_CR**2)
+
+    return v_t, v_CR
+
 def compare_ramsey_CR(clq, ax):
     """
     Method to compare values of Ramsey and Constrained Ramsey (CR)
@@ -1065,23 +1085,34 @@ def compare_ramsey_CR(clq, ax):
 
     # Mark key points
     θ_points, labels, θ_colors = compute_θs(clq)
-    
     markers = [ax.scatter(θ, l_CR + 0.02 * range_CR, 
                           60, marker='v', label=label, color=color)
                for θ, label, color in zip(θ_points, labels, θ_colors)]
 
-    return J_line, CR_line, markers
+    _, v_CR = compute_v(clq, clq.θ_space)
+
+    # Plot a vertical line at \theta_\infty^R
+    ax.axvline(θ_points[1], ymin=0.05, 
+               lw=1.5, linestyle='--', 
+               color=θ_colors[1])
+
+    vcr_line = ax.axhline(y=v_CR, linestyle='--', 
+                          lw=1.5, color='black', 
+                          alpha=0.7, label=r"$v^{CR}$")
+        
+    return J_line, CR_line, vcr_line, markers
 
 def plt_clqs(clqs, axes):
     line_handles, scatter_handles = {}, {}
 
     for ax, clq in zip(axes, clqs):
-        J_line, CR_line, markers = compare_ramsey_CR(clq, ax)
+        J_line, CR_line, vcr_line, markers = compare_ramsey_CR(clq, ax)
         ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
         ax.tick_params(axis='x', rotation=45)
 
         line_handles[J_line.get_label()] = J_line
         line_handles[CR_line.get_label()] = CR_line
+        line_handles[vcr_line.get_label()] = vcr_line
         for marker in markers:
             scatter_handles[marker.get_label()] = marker
 
@@ -1094,7 +1125,7 @@ def plt_clqs(clqs, axes):
     # Create legends
     fig = plt.gcf()
     fig.legend(handles=line_handles, labels=line_labels, 
-               loc='upper center', ncol=2, 
+               loc='upper center', ncol=4, 
                bbox_to_anchor=(0.5, 1.1), prop={'size': 12})
     fig.legend(handles=scatter_handles, labels=scatter_labels, 
                loc='lower center', ncol=5, 
@@ -1107,18 +1138,27 @@ def plt_clqs(clqs, axes):
 ```{code-cell} ipython3
 # Compare different β values
 fig, axes = plt.subplots(1, 3, figsize=(12, 5))
-β_values = [0.7, 0.85, 0.9]
+β_values = [0.85, 0.9, 0.99]
 
 clqs = [ChangLQ(β=β, c=2) for β in β_values]
 plt_clqs(clqs, axes)
 ```
 
 ```{code-cell} ipython3
-# Compare different c values
+# Increase c to 100
 fig, axes = plt.subplots(1, 3, figsize=(12, 5))
-c_values = [1, 4, 8]
+c_values = [1, 10, 100]
 
 clqs = [ChangLQ(β=0.85, c=c) for c in c_values]
+plt_clqs(clqs, axes)
+```
+
+```{code-cell} ipython3
+# Decrease c close towards 0
+fig, axes = plt.subplots(1, 3, figsize=(12, 5))
+c_limits = [1, 0.1, 0.01]
+
+clqs = [ChangLQ(β=0.85, c=c) for c in c_limits]
 plt_clqs(clqs, axes)
 ```
 
@@ -1134,7 +1174,6 @@ The green line shows a  continuation Ramsey planner's choice of
 $\mu$ as a function of an inherited $\theta$.
 
 The blue and green lines intersect each other and the 45 degree line at $\theta_{\infty}^R$.
-
 
 ```{code-cell} ipython3
 def plot_policy_functions(clq):
@@ -1222,41 +1261,26 @@ def plot_ramsey_MPE(clq, T=15):
 
 ```{code-cell} ipython3
 # Compare different β values
-β_values = [0.8, 0.85, 0.9]
-
 for β in β_values:
     clq = ChangLQ(β=β, c=2)
     plot_ramsey_MPE(clq)
 ```
 
 ```{code-cell} ipython3
-# Compare different c values
-c_values = [1, 4, 8]
-
+# Increase c to 100
 for c in c_values:
     clq = ChangLQ(β=0.85, c=c)
     plot_ramsey_MPE(clq)
 ```
 
 ```{code-cell} ipython3
-def compute_v(clq, θs):
-    """
-    Compute v_t and v_CR for given θ values.
+# Decrease c towards 0
+for c in c_limits:
+    clq = ChangLQ(β=0.85, c=c)
+    plot_ramsey_MPE(clq)
+```
 
-    Here clq is an instance of ChangLQ.
-    """
-    # Compute v values for corresponding θ
-    v_t = -clq.P[0, 0] - 2 * clq.P[1, 0] * θs - clq.P[1, 1] * θs**2
-    
-    # Define the utility function
-    U = lambda x: clq.α0 + clq.α1 * x - (clq.α2 / 2) * x**2
-    
-    # Compute v_CR
-    v_CR = 1 / (1 - clq.β) * (U(-clq.α * clq.μ_CR) 
-                                 - (clq.c / 2) * clq.μ_CR**2)
-
-    return v_t, v_CR
-
+```{code-cell} ipython3
 def plot_J(clq, ax, add_legend=False):
     """
     Plot v(θ) and v^CR with θ markers.
@@ -1302,6 +1326,7 @@ def plot_J(clq, ax, add_legend=False):
 ```
 
 ```{code-cell} ipython3
+# Changing βs
 fig, axes = plt.subplots(1, 3, figsize=(16, 6))
 for i, β in enumerate(β_values):
     clq = ChangLQ(β=β, c=2)
@@ -1310,6 +1335,7 @@ plt.show()
 ```
 
 ```{code-cell} ipython3
+# Increase c to 100
 fig, axes = plt.subplots(1, 3, figsize=(16,6))
 for i, c in enumerate(c_values):
     clq = ChangLQ(β=0.85, c=c)
@@ -1340,6 +1366,7 @@ def plot_vt(clq, T, ax):
 ```
 
 ```{code-cell} ipython3
+# Changing β
 fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 for i, β in enumerate(β_values):
     clq = ChangLQ(β=β, c=2)
@@ -1347,8 +1374,17 @@ for i, β in enumerate(β_values):
 ```
 
 ```{code-cell} ipython3
+# Increase c to 100
 fig, axes = plt.subplots(1, 3, figsize=(18, 6))
 for i, c in enumerate(c_values):
+    clq = ChangLQ(β=0.85, c=c)
+    plot_vt(clq, 10, axes[i])
+```
+
+```{code-cell} ipython3
+# Decrease c towards 0
+fig, axes = plt.subplots(1, 3, figsize=(18, 6))
+for i, c in enumerate(c_limits):
     clq = ChangLQ(β=0.85, c=c)
     plot_vt(clq, 10, axes[i])
 ```
