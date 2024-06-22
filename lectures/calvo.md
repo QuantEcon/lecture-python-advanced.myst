@@ -292,7 +292,7 @@ that according to equation {eq}`eq_old3` would bring forth a constant inflation 
 Under that policy,
 
 $$
-v_t = v^{\bar \mu} \equiv  - \frac{s(\bar \mu, \bar \mu)}{1-\beta} 
+v_t = V^{\bar \mu} \equiv  - \frac{s(\bar \mu, \bar \mu)}{1-\beta} 
 $$ (eq:barvdef)
 
 for all $t \geq 0$. 
@@ -313,7 +313,7 @@ recursion
 
 $$
 v_t = - s(\theta_t,\mu_t) + \beta v_{t+1}
-$$
+$$ (eq_new100)
 
 where we have called $s(\theta_t, \mu_t) = r(x_t, \mu_t)$, as
 in {eq}`eq_old7`.
@@ -646,16 +646,29 @@ We created this version of the model  to highlight an aspect of a Ramsey plan as
 
 Instead of allowing the government to choose different settings of its instrument at different moments, we now assume that
 at time $0$, a  government at time $0$ once and for all  chooses a **constant** sequence
-$\mu_t = \mu^{CR}$ for all $t \geq 0$.
+$\mu_t = \bar \mu$ for all $t \geq 0$.
 
-We  assume that the government knows the perfect foresight outcome implied by equation {eq}`eq_old2` that $\theta_t = \mu^{CR}$ when there is  a constant
-$\mu$ for all $t \geq 0$.
+We  assume that the government knows the perfect foresight outcome implied by equation {eq}`eq_old2` that $\theta_t = \bar  \mu$ when 
+$\mu_t = \bar \mu$ for all $t \geq 0$.
 
-The government chooses $\mu$  to maximize
+The government chooses $\bar \mu$  to maximize
+
 
 $$
-U(-\alpha \mu^{CR}) - \frac{c}{2} (\mu^{CR})^2
+V^{CR}(\bar \mu) = V^{\bar \mu}
 $$
+
+where $V^{\bar \mu}$ is defined in equation {eq}`eq:barvdef`.
+
+We can express $V^{CR}(\bar \mu)$ as
+
+
+$$
+V^{CR} (\bar \mu) = (1-\beta)^{-1} \left[ U (-\alpha \bar \mu) - \frac{c}{2} (\bar \mu)^2 \right]
+$$ (eq:vcrformula20)
+
+
+
 
 With the quadratic form {eq}`eq_old5` for the utility function $U$, the
 maximizing $\bar \mu$ is
@@ -664,10 +677,10 @@ $$
 \mu^{CR} = - \frac{\alpha u_1}{\alpha^2 u_2 + c }
 $$ (eq:muRamseyconstrained)
 
-The value function of a **constrained to constant $\mu$** Ramsey planner is
+The optimal value attained by a **constrained to constant $\mu$** Ramsey planner is
 
 $$
-V^{CR} \equiv (1-\beta)^{-1} \left[ U (-\alpha \mu^{CR}) - \frac{c}{2} (\mu^{CR})^2 \right]
+V^{CR}(\mu^{CR})  = (1-\beta)^{-1} \left[ U (-\alpha \mu^{CR}) - \frac{c}{2} (\mu^{CR})^2 \right]
 $$ (eq:vcrformula)
 
 
@@ -685,67 +698,80 @@ $\mu_{t+j} = \bar \mu$.
 
 This assumption mirrors an assumption made in a different setting  in this QuantEcon lecture:  [Markov Perfect Equilibrium](https://python-intro.quantecon.org/markov_perf.html).
 
-When it sets $\mu_t$ at time $t$, the  government   at $t$ believes that $\bar \mu$ is
+When it sets $\mu_t$, the  government   at $t$ believes that $\bar \mu$ is
 unaffected by its choice of $\mu_t$.
 
 The time $t$ rate of inflation is then:
 
 $$
-\theta_t = \frac{\alpha}{1+\alpha} \bar \mu + \frac{1}{1+\alpha} \mu_t
-$$
+\theta_t =  \frac{1}{1+\alpha} \mu_t + \frac{\alpha}{1+\alpha} \bar \mu, 
+$$ (eq_Markov2)
 
-The time $t$ government policymaker then chooses $\mu_t$ to
+which expresses inflation $\theta_t$ as a geometric weighted average of the money growth today
+$\mu_t$ and money growth from tomorrow onward $\bar \mu$.
+
+Given $\bar \mu$, the time $t$ government  chooses $\mu_t$ to
 maximize:
 
 $$
-U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2 + \beta V^{\bar \mu}
-$$
+Q(\mu_t, \bar \mu) = U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2 + \beta V^{\bar \mu}
+$$ (eq_Markov3)
 
-where $V^{\bar \mu}$ is the time $0$ value $v_0$ of
+where $V^{\bar \mu}$ is given by formula  {eq}`eq:barvdef` for  the time $0$ value $v_0$ of
 recursion {eq}`eq_old8` under a money supply growth rate that is forever constant
-at $\bar \mu$.
+at $\bar \mu$. 
 
-Substituting for $U$ and $\theta_t$ gives:
+Substituting  {eq}`eq_Markov2` into {eq}`eq_Markov3` and expanding gives:
 
 $$ 
 \begin{aligned}
-V(\mu_t) & = u_0 + u_1\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right) - \frac{u_2}{2}\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right)^2 - \frac{c}{2} \mu_t^2  \\ 
+Q(\mu_t, \bar \mu) & = u_0 + u_1\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right) - \frac{u_2}{2}\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right)^2 - \frac{c}{2} \mu_t^2  \\ 
 & \quad \quad \quad + \beta V^{\bar \mu}
 \end{aligned}
 $$ (eq:Vmutemp)
 
-The first-order necessary condition for $\mu_t$ is then:
+The first-order necessary condition for maximing $Q(\mu_t, \bar \mu)$ with respect to $\mu_t$ is:
 
 $$
 - \frac{\alpha}{1+\alpha} u_1 - u_2(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t)(- \frac{\alpha}{1+\alpha}) - c \mu_t = 0
 $$
 
-Rearranging we get:
+Rearranging we get the time $t$ government's best response map
 
 $$
-\mu_t = \frac{- u_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha}u_2} - \frac{\alpha^2 u_2}{\left[ \frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} u_2 \right] (1+\alpha)}\bar \mu
+\mu_t = f(\bar \mu)
 $$
 
-A **Markov Perfect Equilibrium** (MPE) outcome sets
-$\mu_t = \bar \mu$:
+where
 
 $$
-\mu_t = \bar \mu = \frac{-u_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} u_2 + \frac{\alpha^2}{1+\alpha} u_2}
+f(\bar \mu)= \frac{- u_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha}u_2} - \frac{\alpha^2 u_2}{\left[ \frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} u_2 \right] (1+\alpha)}\bar \mu
+$$
+
+A **Markov Perfect Equilibrium** (MPE) outcome $ \mu^{MPE}$ is a fixed point of the best response map:
+
+$$
+\mu^{MPE} = f(\mu^{MPE})
+$$
+
+Calculating $\mu^{MPE}$, we find
+
+$$
+\mu^{MPE} = \frac{-u_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} u_2 + \frac{\alpha^2}{1+\alpha} u_2}
 $$
 
 This can be simplified to:
 
 $$
-\mu^{MPE} \equiv \bar \mu = - \frac{\alpha u_1}{\alpha^2 u_2 + (1+\alpha)c}
+\mu^{MPE}  = - \frac{\alpha u_1}{\alpha^2 u_2 + (1+\alpha)c}
 $$ (eq:Markovperfectmu)
 
 and the value of a Markov perfect equilibrium is 
 
 $$
-V^{MPE} = V(\mu_t) \vert_{\mu_t = \bar \mu}
+V^{MPE} = -\frac{s(\mu^{MPE}, \mu^{MPE})}{1-\beta}
 $$ (eq:VMPE)
 
-where $V(\mu_t)$ satisfies equation {eq}`eq:Vmutemp`.
 
 Under the  Markov perfect timing protocol 
 
@@ -793,8 +819,8 @@ Proposition 1 draws attention to how   a positive tax distortion parameter $c$ a
 We'll compute and display
 
  *   $(\vec \theta^R, \vec \mu^R)$: the ordinary time-varying Ramsey sequences
- *   $(\theta^{MPE}, \mu^{MPE})$: the MPE fixed values
- *   $(\theta^{CR}, \mu^{CR})$: the fixed values associate with  our nonstandard time-invariant 
+ *   $(\theta^{MPE} = \mu^{MPE})$: the MPE fixed values
+ *   $(\theta^{CR} = \mu^{CR})$: the fixed values associate with  our nonstandard time-invariant 
 values Ramsey plan
  *   $\theta^*$: the  bliss level of inflation prescribed by a Friedman rule
 
@@ -1099,21 +1125,16 @@ plt_clqs(clqs, axes)
 The next code generates  figures that plot  policy functions for a continuation Ramsey
 planner.
 
-The left figure shows the choice of $\theta'$ chosen by a
+The dotted line is the 45 degree line.
+
+The blue line shows  the choice of $\theta'$ chosen by a
 continuation Ramsey planner who inherits $\theta$.
 
-The right figure plots a continuation Ramsey planner's choice of
+The green line shows a  continuation Ramsey planner's choice of
 $\mu$ as a function of an inherited $\theta$.
 
-**Request for Humphrey** Please consolidate the right figure into the left figure.  We'll just plot
-$\theta_{t+1}$ as function of  $\theta_t$, $\mu_t$ as a function of $\theta_t$, and the 45degree line
-all on the same graph. Something pretty will happen.  We'll have to relabel the legends so that it is clear what is being plotted. Can you please do this?
+The blue and green lines intersect each other and the 45 degree line at $\theta_{\infty}^R$.
 
-When we are done with this beautiful new graph, I'll want to move it forward in the lecture. It should go before some of the above graphs -- it sets the stage for  the dynamics that are played out in those graphs.  
-
-Thanks!
-
-**end of request for Humphrey**
 
 ```{code-cell} ipython3
 def plot_policy_functions(clq):
