@@ -871,17 +871,17 @@ class ChangLQ:
     """
     Class to solve LQ Chang model
     """
-    def __init__(self, β, c, α=1, α0=1, α1=0.5, α2=3, T=1000, θ_n=200):
+    def __init__(self, β, c, α=1, u0=1, u1=0.5, u2=3, T=1000, θ_n=200):
 
         # Record parameters
-        self.α, self.α0, self.α1, self.α2 = α, α0, α1, α2
+        self.α, self.u0, self.u1, self.u2 = α, u0, u1, u2
         self.β, self.c, self.T, self.θ_n = β, c, T, θ_n
 
         # Solve the Ramsey Problem #
 
         # LQ Matrices
-        R = -np.array([[α0,            -α1 * α / 2],
-                       [-α1 * α/2, -α2 * α**2 / 2]])
+        R = -np.array([[u0,            -u1 * α / 2],
+                       [-u1 * α/2, -u2 * α**2 / 2]])
         Q = -np.array([[-c / 2]])
         A = np.array([[1, 0], [0, (1 + α) / α]])
         B = np.array([[0], [-1 / α]])
@@ -894,19 +894,19 @@ class ChangLQ:
         self.θ_R = -self.P[0, 1] / self.P[1, 1]
 
         # Find bliss level of θ
-        self.θ_B = - α1 / (α2* α)
+        self.θ_B = - u1 / (u2 * α)
 
         # Solve the Markov Perfect Equilibrium
-        self.μ_MPE = -α1 / ((1 + α) / α * c + α / (1 + α)
-                      * α2 + α**2 / (1 + α) * α2)
+        self.μ_MPE = -u1 / ((1 + α) / α * c + α / (1 + α)
+                      * u2 + α**2 / (1 + α) * u2)
         self.θ_MPE = self.μ_MPE
-        self.μ_CR = -α * α1 / (α2 * α**2 + c)
+        self.μ_CR = -α * u1 / (u2 * α**2 + c)
         self.θ_CR = self.μ_CR
 
         # Calculate value under MPE and CR economy
-        self.J_MPE  = (α0 + α1 * (-α * self.μ_MPE) - α2 / 2
+        self.J_MPE  = (u0 + u1 * (-α * self.μ_MPE) - u2 / 2
                       * (-α * self.μ_MPE)**2 - c/2 * self.μ_MPE**2) / (1 - self.β)
-        self.J_CR = (α0 + α1 * (-α * self.μ_CR) - α2/2
+        self.J_CR = (u0 + u1 * (-α * self.μ_CR) - u2/2
                         * (-α * self.μ_CR)**2 - c / 2 * self.μ_CR**2) \
                         / (1 - self.β)
 
@@ -945,8 +945,8 @@ class ChangLQ:
 
         self.J_θ = lambda θ: - np.array((1, θ)) \
                     @ self.P @ np.array((1, θ)).T
-        self.V_θ = lambda θ: (α0 + α1 * (-α * θ)
-                    - α2/2 * (-α * θ)**2 - c/2 * θ**2) \
+        self.V_θ = lambda θ: (u0 + u1 * (-α * θ)
+                    - u2/2 * (-α * θ)**2 - c/2 * θ**2) \
                     / (1 - self.β)
         
         for i in range(200):
@@ -983,7 +983,7 @@ at time $t=0$.
 
 The figure also plots the limiting value $\theta_\infty^R$ to which  the promised  inflation rate $\theta_t$ converges under the Ramsey plan.
 
-In addition, the figure indicates  an MPE inflation rate $\theta^{CR}$ and a bliss inflation $\theta^*$.
+In addition, the figure indicates an MPE inflation rate $\theta^{CR}$ and a bliss inflation $\theta^*$.
 
 ```{code-cell} ipython3
 def compute_θs(clq):
@@ -1172,7 +1172,7 @@ def compute_v(clq, θs):
     v_t = -clq.P[0, 0] - 2 * clq.P[1, 0] * θs - clq.P[1, 1] * θs**2
     
     # Define the utility function
-    U = lambda x: clq.α0 + clq.α1 * x - (clq.α2 / 2) * x**2
+    U = lambda x: clq.u0 + clq.u1 * x - (clq.u2 / 2) * x**2
     
     # Compute v_CR
     v_CR = 1 / (1 - clq.β) * (U(-clq.α * clq.μ_CR) 
@@ -1272,7 +1272,7 @@ plt_clqs(clqs, axes)
 ```
 
 ```{code-cell} ipython3
-# Decrease c close towards 0
+# Decrease c towards 0
 fig, axes = plt.subplots(1, 3, figsize=(12, 5))
 c_limits = [1, 0.1, 0.01]
 
@@ -1280,6 +1280,34 @@ clqs = [ChangLQ(β=0.85, c=c) for c in c_limits]
 plt_clqs(clqs, axes)
 ```
 
+Here we repeat experiments above with $\alpha = 4$
+
+```{code-cell} ipython3
+# Compare different β values
+fig, axes = plt.subplots(1, 3, figsize=(12, 5))
+β_values = [0.85, 0.9, 0.99]
+
+clqs = [ChangLQ(α=4, β=β, c=2) for β in β_values]
+plt_clqs(clqs, axes)
+```
+
+```{code-cell} ipython3
+# Increase c to 100
+fig, axes = plt.subplots(1, 3, figsize=(12, 5))
+c_values = [1, 10, 100]
+
+clqs = [ChangLQ(α=4, β=0.85, c=c) for c in c_values]
+plt_clqs(clqs, axes)
+```
+
+```{code-cell} ipython3
+# Decrease c towards 0
+fig, axes = plt.subplots(1, 3, figsize=(12, 5))
+c_limits = [1, 0.1, 0.01]
+
+clqs = [ChangLQ(α=4, β=0.85, c=c) for c in c_limits]
+plt_clqs(clqs, axes)
+```
 
 The following code  plots sequences of $\mu$ and $\theta$
 in the Ramsey plan and compares these to the constant levels in a MPE
@@ -1333,6 +1361,30 @@ for c in c_limits:
     clq = ChangLQ(β=0.85, c=c)
     plot_ramsey_MPE(clq)
 ```
+
+Here we repeat experiments above with $\alpha = 4$.
+
+```{code-cell} ipython3
+# Compare different β values
+for β in β_values:
+    clq = ChangLQ(α=4, β=β, c=2)
+    plot_ramsey_MPE(clq)
+```
+
+```{code-cell} ipython3
+# Increase c to 100
+for c in c_values:
+    clq = ChangLQ(α=4, β=0.85, c=c)
+    plot_ramsey_MPE(clq)
+```
+
+```{code-cell} ipython3
+# Decrease c towards 0
+for c in c_limits:
+    clq = ChangLQ(α=4, β=0.85, c=c)
+    plot_ramsey_MPE(clq)
+```
+
 
 ```{code-cell} ipython3
 def plot_J(clq, ax, add_legend=False):
@@ -1737,8 +1789,8 @@ def abreu_plan(clq, T=1000, T_A=10, μ_bar=0.1, T_Plot=20):
     U_A = np.zeros(T)
     for t in range(T):
         U_A[t] = clq.β**t \
-                 * (clq.α0 + clq.α1 * (-clq.θ_A[t])
-                 - clq.α2 / 2 * (-clq.θ_A[t])**2 
+                 * (clq.u0 + clq.u1 * (-clq.θ_A[t])
+                 - clq.u2 / 2 * (-clq.θ_A[t])**2 
                  - clq.c * clq.μ_A[t]**2)
 
     clq.V_A = np.zeros(T)
@@ -1748,8 +1800,8 @@ def abreu_plan(clq, T=1000, T_A=10, μ_bar=0.1, T_Plot=20):
     # Make sure Abreu plan is self-enforcing
     clq.V_dev = np.zeros(T_Plot)
     for t in range(T_Plot):
-        clq.V_dev[t] = (clq.α0 + clq.α1 * (-clq.θ_A[t])
-                        - clq.α2 / 2 * (-clq.θ_A[t])**2) \
+        clq.V_dev[t] = (clq.u0 + clq.u1 * (-clq.θ_A[t])
+                        - clq.u2 / 2 * (-clq.θ_A[t])**2) \
                         + clq.β * clq.V_A[0]
 
     fig, axes = plt.subplots(3, 1, figsize=(8, 12))
@@ -1802,8 +1854,8 @@ def check_ramsey(clq, T=1000):
     # Make sure Ramsey plan is sustainable
     R_dev = np.zeros(T)
     for t in range(T):
-        R_dev[t] = (clq.α0 + clq.α1 * (-clq.θ_series[1, t])
-                    - clq.α2 / 2 * (-clq.θ_series[1, t])**2) \
+        R_dev[t] = (clq.u0 + clq.u1 * (-clq.θ_series[1, t])
+                    - clq.u2 / 2 * (-clq.θ_series[1, t])**2) \
                     + clq.β * clq.V_A[0]
 
     return np.all(clq.J_series > R_dev)
