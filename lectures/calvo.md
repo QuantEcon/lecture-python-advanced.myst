@@ -232,7 +232,7 @@ To deduce this recommendation, Milton Friedman assumed that the taxes that gover
 
   - for example, the government imposes lump sum taxes that distort no decisions by private agents
 
-## Calvo's Perturbing of Friedman's Optimal Quantity of Money
+## Calvo's Perturbation of Friedman's Optimal Deflation Rate
 
 The starting point of Calvo {cite}`Calvo1978` and  Chang {cite}`chang1998credible`
 is that such lump sum taxes are not available.
@@ -295,10 +295,14 @@ $$
 v_t = V(\bar \mu) = - \frac{s(\bar \mu, \bar \mu)}{1-\beta} 
 $$ (eq:barvdef)
 
-To Tom: Should we add a short sentence here to explain why we need $V(\bar \mu)$? I think we can reference the sections on CR and MPE below.
+for all $t \geq 0$.
 
-for all $t \geq 0$. 
+Values of $V(\bar \mu)$ computed according to formula {eq}`eq:barvdef` for three different  values of $\bar \mu$ will play important roles below.
 
+* $V(\mu^{MP})$ is the value of attained by the government in a **Markov perfect equilibrium** 
+* $V(\mu^{CR}$) is the value of attained by the government in a **constrained to constant $\mu$ equilibrium**
+* $V(\mu^R_\infty)$ is the limiting value attained by a continuation Ramsey planner under a Ramsey plan.
+    * We shall see that $V(\mu^R_\infty)$ is a worst continuation value attained along a Ramsey plan  
 
 ## Structure
 
@@ -391,6 +395,14 @@ The models are distinguished by their having  either
 - A sequence of separate policymakers  in which 
     - a time $t$ policymaker chooses  only $\mu_t$ but believes that its choice of $\mu_t$  shapes the representative agent's beliefs about  future rates of money creation and inflation, and through them, future government actions.
 
+The first model describes a **Ramsey plan** chosen by a **Ramsey planner**
+
+The second model describes a **Ramsey plan** chosen by a **Ramsey planner constrained to choose a time-invariant $\mu_t$**
+
+The third model deescribes a **Markov perfect equilibrium**
+
+The fourth model describes a **credible government policy** also known as a **sustainable plan**
+
 The relationship between  outcomes in  the first (Ramsey) timing protocol and the fourth timing protocol and belief structure is the subject of a literature on **sustainable** or **credible** public policies (Chari and Kehoe {cite}`chari1990sustainable`
 {cite}`stokey1989reputation`, and Stokey {cite}`Stokey1991`). 
 
@@ -426,7 +438,7 @@ The value function
 $$
 J(x_0) = \max_{(\overrightarrow x_1, \overrightarrow \mu_0) \in \Omega(x_0)}
 - \sum_{t=0}^\infty \beta^t r(x_t,\mu_t)
-$$
+$$ (eq:subprob1LQ)
 
 satisfies the Bellman equation
 
@@ -512,7 +524,19 @@ $$ (eq:thetaRamseyrule)
 where $\begin{bmatrix} d_0 & d_1 \end{bmatrix}$ is the second row of 
 the closed-loop matrix $A - BF$ for computed in subproblem 1 above.
 
-It remains for the Ramsey planner to set $\theta_0$.  
+The linear quadratic control problem {eq}`eq:subprob1LQ`  satisfies regularity conditions that
+guarantee that $A - BF $ is a stable matrix (i.e., its maximum eigenvalue is strictly less than
+$1$ in absolute value).
+
+Consequently, we are assured that
+
+$$ 
+| d_1 | < 1 ,
+$$ (eq:stabilityd1)
+
+a stability condition that will play an important role soon.
+
+It remains for us to describe how the Ramsey planner sets $\theta_0$.  
 
 Subproblem 2 does that.
 
@@ -563,6 +587,8 @@ v_t & = g_0 +g_1\theta_t + g_2 \theta_t^2 \\
 
 where $b_0, b_1, g_0, g_1, g_2$ are positive parameters that we shall compute with Python code below.
 
+From condition {eq}`eq:stabilityd1`, we know that $|d_1| < 1$. 
+
 To interpret system {eq}`eq_old9`, think of the  sequence
 $\{\theta_t\}_{t=0}^\infty$ as a sequence of
 synthetic **promised inflation rates**.
@@ -596,22 +622,23 @@ $$ (eq:mutimeinconsist)
  
 Variation of  $ \vec \mu^R, \vec \theta^R, \vec v^R $ over time  are  symptoms of time inconsistency.
 
-As our subsequent calculations will verify, $ \vec \mu^R, \vec \theta^R, \vec v^R $ are each monotone sequences that are bounded below and converge to limiting values.  
+- The Ramsey planner reaps immediate benefits from promising lower
+  inflation later to be achieved by costly distorting taxes.
+- These benefits are intermediated by reductions in expected inflation
+  that precede the  reductions in money creation rates that rationalize them, as indicated by
+  equation {eq}`eq_old3`.
+
+
+### Digression on So-Called Timeless Perspective
+
+As our subsequent calculations will verify, $ \vec \mu^R, \vec \theta^R, \vec v^R $ are each monotone sequences that are bounded below and converge from above  to limiting values.  
 
 Some authors are fond of focusing only on these limiting values.
 
-They justify that by saying that they are taking a **timeless perspective** that ignores that the
-Ramsey planner ignores the transient movements in $ \vec \mu^R, \vec \theta^R, \vec v^R $ that will eventually fade away as $\theta_t$ described by Ramsey plan system {eq}`eq_old9` eventually fade away.  
+They justify that by saying that they are taking a **timeless perspective** that ignores  the transient movements in $ \vec \mu^R, \vec \theta^R, \vec v^R $ that are destined  eventually to fade away as $\theta_t$ described by Ramsey plan system {eq}`eq_old9` converges from above.  
 
-   * the timeless perspective proceeds as if the Ramsey plan was actually solved long ago, and that we are stuck with it now.  
+   * the timeless perspective pretends that  Ramsey plan was actually solved long ago, and that we are stuck with it.  
 
-The Ramsey planner reaps immediate benefits from promising lower in the future   inflation  by   later imposing costly distortions. 
-
-These benefits are intermediated by reductions in expected inflation
-that precede  reductions in  money creation rates that foreshadow  them, as indicated by equation {eq}`eq_old3`.  
-
-A government decision maker offered an opportunity to ignore effects on
-  past utilities and to re-optimize at date $ t \geq 1 $ would want to deviate from a Ramsey plan.
 
 ### Multiple roles of $\theta_t$
 
@@ -640,18 +667,18 @@ that, relative to a Ramsey plan,  alter either
 - the timing protocol and/or
 - assumptions about how government decision makers think their decisions affect the representative agent's beliefs about future government decisions
 
-## A Constrained-to-a-Constant-Growth-Rate Ramsey Government
+## A Constrained-to-a-Constant-Growth-Rate Ramsey Plan
 
-We now consider a different model of optimal government behavior.
+We now describe a  model in which we restrict the Ramsey planner's choice set.
+
+Instead of choosing a sequence of money growth rates $\vec \mu \in {\bf R}^2$, we restrict the 
+government to choose a time invariant money growth rate $\bar \mu$. 
 
 We created this version of the model  to highlight an aspect of a Ramsey plan associated with its time inconsistency, namely, the feature that optimal settings of the  policy instrument vary over time.
 
-Instead of allowing the government to choose different settings of its instrument at different moments, we now assume that
-at time $0$, a  government at time $0$ once and for all  chooses a **constant** sequence
-$\mu_t = \bar \mu$ for all $t \geq 0$.
+Thus, instead of allowing the government at time $0$ to choose a different $\mu_t$ for each $t \geq 0$, we now assume that a  government at time $0$ once and for all  chooses a **constant** sequence $\mu_t = \bar \mu$ for all $t \geq 0$.
 
-We  assume that the government knows the perfect foresight outcome implied by equation {eq}`eq_old2` that $\theta_t = \bar  \mu$ when 
-$\mu_t = \bar \mu$ for all $t \geq 0$.
+We  assume that the government knows the perfect foresight outcome implied by equation {eq}`eq_old2` that $\theta_t = \bar  \mu$ when $\mu_t = \bar \mu$ for all $t \geq 0$.
 
 The government chooses $\bar \mu$  to maximize
 
@@ -686,14 +713,15 @@ V^{CR}(\mu^{CR}) = v^{CR} = (1-\beta)^{-1} \left[ U (-\alpha \mu^{CR}) - \frac{c
 $$ (eq:vcrformula)
 
 
-**Summary:** We have  introduced the constrained-to-a-constant $\mu$
-government in order to highlight  time-variation of
-$\mu_t$ as a telltale sign of  time inconsistency of a Ramsey plan.
+**Remark:** We have  introduced the constrained-to-a-constant $\mu$
+government in order eventually to discuss the   time-variation of
+$\mu_t$ under a Ramsey plan  as a telltale sign of it  **time inconsistency**.
 
 ## Markov Perfect Governments
 
-We now  alter the timing protocol by assuming  a sequence of
-government policymakers.
+We now describe yet another timing protocol.
+
+In this one, there is  sequence of government policymakers.
 
 A time $t$ government chooses $\mu_t$ and expects all future governments to set
 $\mu_{t+j} = \bar \mu$.
@@ -703,7 +731,7 @@ This assumption mirrors an assumption made in a different setting  in this Quant
 When it sets $\mu_t$, the  government   at $t$ believes that $\bar \mu$ is
 unaffected by its choice of $\mu_t$.
 
-The time $t$ rate of inflation is then:
+According to equation {eq}`eq_old3`,  the time $t$ rate of inflation is then 
 
 $$
 \theta_t =  \frac{1}{1+\alpha} \mu_t + \frac{\alpha}{1+\alpha} \bar \mu, 
@@ -727,8 +755,8 @@ Substituting  {eq}`eq_Markov2` into {eq}`eq_Markov3` and expanding gives:
 
 $$ 
 \begin{aligned}
-Q(\mu_t, \bar \mu) & = u_0 + u_1\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right) - \frac{u_2}{2}\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right)^2 - \frac{c}{2} \mu_t^2  \\ 
-& \quad \quad \quad + \beta V(\bar \mu)
+Q(\mu_t, \bar \mu) & = u_0 + u_1\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right) - \frac{u_2}{2}\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right)^2   \\ 
+& \quad \quad \quad - \frac{c}{2} \mu_t^2 + \beta V(\bar \mu)
 \end{aligned}
 $$ (eq:Vmutemp)
 
@@ -774,6 +802,14 @@ $$
 V^{MPE} = -\frac{s(\mu^{MPE}, \mu^{MPE})}{1-\beta}
 $$ (eq:VMPE)
 
+or 
+
+$$
+V^{MPE} = V(\mu^{MPE})
+$$
+
+where $V(\cdot)$ is given by formula {eq}`eq:barvdef`.
+
 
 Under the  Markov perfect timing protocol 
 
@@ -818,13 +854,12 @@ The first two equalities follow from the preceding three equations. We'll illust
 
 Proposition 1 draws attention to how   a positive tax distortion parameter $c$ alters  the prescription for an optimal rate of deflation that Milton Friedman financed  by imposing a lump sum tax.  
 
-We'll compute and display
+We'll compute 
 
- *   $(\vec \theta^R, \vec \mu^R)$: the ordinary time-varying Ramsey sequences
- *   $(\theta^{MPE} = \mu^{MPE})$: the MPE fixed values
- *   $(\theta^{CR} = \mu^{CR})$: the fixed values associate with  our nonstandard time-invariant 
-values Ramsey plan
- *   $\theta^*$: the  bliss level of inflation prescribed by a Friedman rule
+ *   $(\vec \theta^R, \vec \mu^R)$:  ordinary time-varying Ramsey sequences
+ *   $(\theta^{MPE} = \mu^{MPE})$:  MPE fixed values
+ *   $(\theta^{CR} = \mu^{CR})$:  fixed values associated with a constrained to time-invariant $\mu$ Ramsey plan
+ *   $\theta^*$:   bliss level of inflation prescribed by a Friedman rule
 
 
 
@@ -940,7 +975,10 @@ Let's create an instance of ChangLQ with the following parameters:
 clq = ChangLQ(β=0.85, c=2)
 ```
 
-The following code  plots the Ramsey planner's value function $J(\theta)$, which we know is maximized at   $\theta^R_0$, the promised inflation planner that the Ramsey planner chooses to set
+
+
+
+The following code  plots the Ramsey planner's value function $J(\theta)$, which we know is maximized at   $\theta^R_0$, the promised inflation that the Ramsey planner  sets
 at time $t=0$.
 
 The figure also plots the limiting value $\theta_\infty^R$ to which  the promised  inflation rate $\theta_t$ converges under the Ramsey plan.
@@ -997,6 +1035,86 @@ def plot_value_function(clq):
 plot_value_function(clq)
 ```
 
+
+
+The next code    plots  policy functions for a continuation Ramsey
+planner.
+
+
+```{code-cell} ipython3
+def plot_policy_functions(clq):
+    """
+    Method to plot the policy functions over the relevant range of θ
+
+    Here clq is an instance of ChangLQ
+    """
+    fig, ax = plt.subplots(figsize=(10, 6))
+
+    θ_points, labels, θ_colors = compute_θs(clq)
+
+    # Plot θ' function
+    ax.plot(clq.θ_space, clq.θ_prime, 
+            label=r"$\theta'(\theta)$", 
+            lw=2, alpha=0.5, color='blue')
+    x = np.linspace(clq.θ_LB, clq.θ_UB, 5)
+    ax.plot(x, x, 'k--', lw=2, alpha=0.7)
+    
+    # Plot μ function
+    ax.plot(clq.θ_space, clq.μ_space, lw=2, 
+            label=r"$\mu(\theta)$", 
+            color='green', alpha=0.5)
+
+    θ_points, labels, θ_colors = compute_θs(clq)
+
+    # Plot labels and points for μ function
+    μ_min = min(clq.μ_space)
+    μ_max = max(clq.μ_space)
+    μ_range = μ_max - μ_min
+    for θ, label in zip(θ_points, labels):
+        ax.scatter(θ, μ_min - 0.02 * μ_range, 
+                   60, 'black', 'v')
+        ax.annotate(label, xy=(θ, μ_min - 0.02 * μ_range),
+                    xytext=(θ - 0.012 * clq.θ_range,
+                            μ_min + 0.03 * μ_range),
+                    fontsize=14)
+
+    # Set labels and limits
+    ax.set_xlabel(r"$\theta$", fontsize=18)
+    ax.set_xlim([clq.θ_LB, clq.θ_UB])
+    ax.set_ylim([min(clq.θ_LB, μ_min) - 0.05 * clq.θ_range, 
+                 max(clq.θ_UB, μ_max) + 0.05 * clq.θ_range])
+    
+    # Add legend
+    ax.legend(fontsize=14)
+
+    plt.tight_layout()
+    plt.show()
+
+plot_policy_functions(clq)
+```
+
+The dotted line in the above graph is the 45 degree line.
+
+The blue line shows  the choice of $\theta_{t+1} = \theta'$ chosen by a
+continuation Ramsey planner who inherits $\theta_t = \theta$.
+
+The green line shows a  continuation Ramsey planner's choice of
+$\mu_t = \mu$ as a function of an inherited $\theta_t = \theta$.
+
+Dynamics under the Ramsey plan are confined to $\theta \in \left[ \theta_\infty^R, \theta_0^R \right]$.  
+
+The blue and green lines intersect each other and the 45 degree line at $\theta =\theta_{\infty}^R$.
+
+Notice that for  $\theta \in \left(\theta_\infty^R, \theta_0^R \right]$
+
+  * $\theta' < \theta$  because the blue line is below the 45 degree line
+  * $\mu > \theta $ because the green line is above the 45 degree line
+
+It follows that under the Ramsey plan  $\{\theta_t\}$ and $\{\mu_t\}$ both converge monotonically from above to $\theta_\infty^R$. 
+
+
+### Ramsey planner's value function 
+
 The next code  plots the Ramsey Planner's value function $J(\theta)$  as well the value function
 of a constrained  Ramsey planner who  must choose a constant
 $\mu$.
@@ -1041,7 +1159,7 @@ with strict inequality when $c > 0$.
 Thus, the limiting continuation value of continuation Ramsey planners is worse that the 
 constant value attained by a constrained-to-constant $\mu_t$ Ramsey planner.
 
-Now let's write some code to generate and plot outcomes under our three timing protocols.
+Now let's write some code to  plot outcomes under our three timing protocols.
 
 ```{code-cell} ipython3
 def compute_v(clq, θs):
@@ -1162,72 +1280,8 @@ clqs = [ChangLQ(β=0.85, c=c) for c in c_limits]
 plt_clqs(clqs, axes)
 ```
 
-The next code generates  figures that plot  policy functions for a continuation Ramsey
-planner.
 
-The dotted line is the 45 degree line.
-
-The blue line shows  the choice of $\theta'$ chosen by a
-continuation Ramsey planner who inherits $\theta$.
-
-The green line shows a  continuation Ramsey planner's choice of
-$\mu$ as a function of an inherited $\theta$.
-
-The blue and green lines intersect each other and the 45 degree line at $\theta_{\infty}^R$.
-
-```{code-cell} ipython3
-def plot_policy_functions(clq):
-    """
-    Method to plot the policy functions over the relevant range of θ
-
-    Here clq is an instance of ChangLQ
-    """
-    fig, ax = plt.subplots(figsize=(10, 6))
-
-    θ_points, labels, θ_colors = compute_θs(clq)
-
-    # Plot θ' function
-    ax.plot(clq.θ_space, clq.θ_prime, 
-            label=r"$\theta'(\theta)$", 
-            lw=2, alpha=0.5, color='blue')
-    x = np.linspace(clq.θ_LB, clq.θ_UB, 5)
-    ax.plot(x, x, 'k--', lw=2, alpha=0.7)
-    
-    # Plot μ function
-    ax.plot(clq.θ_space, clq.μ_space, lw=2, 
-            label=r"$\mu(\theta)$", 
-            color='green', alpha=0.5)
-
-    θ_points, labels, θ_colors = compute_θs(clq)
-
-    # Plot labels and points for μ function
-    μ_min = min(clq.μ_space)
-    μ_max = max(clq.μ_space)
-    μ_range = μ_max - μ_min
-    for θ, label in zip(θ_points, labels):
-        ax.scatter(θ, μ_min - 0.02 * μ_range, 
-                   60, 'black', 'v')
-        ax.annotate(label, xy=(θ, μ_min - 0.02 * μ_range),
-                    xytext=(θ - 0.012 * clq.θ_range,
-                            μ_min + 0.03 * μ_range),
-                    fontsize=14)
-
-    # Set labels and limits
-    ax.set_xlabel(r"$\theta$", fontsize=18)
-    ax.set_xlim([clq.θ_LB, clq.θ_UB])
-    ax.set_ylim([min(clq.θ_LB, μ_min) - 0.05 * clq.θ_range, 
-                 max(clq.θ_UB, μ_max) + 0.05 * clq.θ_range])
-    
-    # Add legend
-    ax.legend(fontsize=14)
-
-    plt.tight_layout()
-    plt.show()
-
-plot_policy_functions(clq)
-```
-
-The following code generates a figure that plots sequences of $\mu$ and $\theta$
+The following code  plots sequences of $\mu$ and $\theta$
 in the Ramsey plan and compares these to the constant levels in a MPE
 and in a Ramsey plan with a government restricted to set $\mu_t$
 to a constant for all $t$.
