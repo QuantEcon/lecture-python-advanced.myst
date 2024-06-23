@@ -195,9 +195,15 @@ x_{t+1} = A x_t + B \mu_t
 Even though $\theta_0$ is to be determined by our  model and so is not an initial condition,
 as it ordinarily would be in the state-space model described in our lecture on  [Linear Quadratic Control](https://python-intro.quantecon.org/lqcontrol.html), we nevertheless write the model in the state-space form {eq}`eq_old4`.
 
+ 
+
 We use  form {eq}`eq_old4` because we want to apply an approach described in  our lecture on {doc}`Stackelberg problems <dyn_stack>`.
 
-We assume that a government  believes that a representative household's utility of real balances at time $t$ is:
+Notice that $\frac{1+\alpha}{\alpha} > 1$ is an eigenvalue of transition matrix $A$ that threatens to destabilize the state-space system. 
+
+The Ramsey planner will choose  a decision rule for $\mu_t$ that succeeds in stabilizing  the system. 
+
+The  government  values  a representative household's utility of real balances at time $t$ according to the utility function
 
 ```{math}
 :label: eq_old5
@@ -205,12 +211,12 @@ We assume that a government  believes that a representative household's utility 
 U(m_t - p_t) = u_0 + u_1 (m_t - p_t) - \frac{u_2}{2} (m_t - p_t)^2, \quad u_0 > 0, u_1 > 0, u_2 > 0
 ```
 
-The "bliss level" of real balances is then $\frac{u_1}{u_2}$.
+The "bliss level" of real balances is  $\frac{u_1}{u_2}$.
 
 ## Friedman's Optimal Rate of Deflation
 
 The money demand function {eq}`eq_old1` and the utility function {eq}`eq_old5`
-imply that inflation rate $\theta_t$ that maximizes {eq}`eq_old5` is 
+imply that the  inflation rate $\theta_t$ that maximizes {eq}`eq_old5` is 
 
 $$
 \theta_t = \theta^* = -\frac{u_1}{u_2 \alpha}
@@ -271,6 +277,8 @@ The  government's time $0$ value is
 
 v_0 = - \sum_{t=0}^\infty \beta^t r(x_t,\mu_t) = - \sum_{t=0}^\infty \beta^t s(\theta_t,\mu_t)
 ```
+
+where $\beta \in (0,1)$ is a discount factor. 
 
 The government's time $t$ continuation value $v_t$ is 
 
@@ -359,7 +367,7 @@ We'll also study outcomes under other timing protocols.
 
 We consider four models of government policy making that  differ in
 
-- **what** a  policymaker is allowed to choose, either a sequence
+- **what** a  policymaker chooses, either a sequence
   $\vec \mu$ or just   $\mu_t$ in a single period $t$.
 - **when** a  policymaker chooses, either once and for all at time $0$, or at some time or times  $t \geq 0$.
 - what a policymaker **assumes** about how its choice of $\mu_t$
@@ -375,7 +383,7 @@ $\mu_t$ affects household one-period utilities at dates $s = 0, 1, \ldots, t-1$
 In two other models, there is a sequence of policymakers, each of whom
 sets $\mu_t$ at one $t$ only.
 
-- Each time $t$  policymaker ignores  effects that its choice of $\mu_t$ has on household one-period utilities at dates $s = 0, 1, \ldots, t-1$.
+- a time $t$  policymaker cares only about $v_t$ and  ignores  effects that its choice of $\mu_t$ has on $v_s$ at  dates $s = 0, 1, \ldots, t-1$.
 
 The four models differ with respect to timing protocols, constraints on
 government choices, and government policymakers' beliefs about how their
@@ -1145,7 +1153,7 @@ np.allclose(clq.J_θ(θ_inf),
             clq.V_θ(θ_inf))
 ```
 
-So our claim is verified numerically.
+So our claim that $J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$is verified numerically.
 
 Since  $J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$ occurs at a tangency point at which
 $J(\theta)$ is increasing in $\theta$, it follows that
@@ -1513,15 +1521,13 @@ is a symptom of time inconsistency.
 $\mu_t$ must be constant over time is time consistent (see
 $\mu^{CR}$ and $\theta^{CR}$ in the above graphs).
 
-### Meaning of Time Inconsistency
+### Implausibility of Ramsey Plan 
 
 In settings in which governments actually choose sequentially, many economists
 regard a time inconsistent plan as implausible because of the incentives to
 deviate that are presented  along the plan.
 
-A way to summarize this *defect* in a Ramsey plan is to say that it
-is not credible because there  endure incentives for policymakers
-to deviate from it.
+A way to state  this reaction   is to say that a Ramsey plan is not credible because there persist incentives for policymakers to deviate from it.
 
 For that reason, the Markov perfect equilibrium concept attracts many
 economists.
@@ -1543,14 +1549,15 @@ We turn to such theories of **sustainable plans** next.
 
 ## A Fourth Model of Government Decision Making
 
-This is a model in which
+In this model 
 
-- the government chooses $\{\mu_t\}_{t=0}^\infty$ not once and
-  for all at $t=0$ but chooses to set $\mu_t$ at time $t$, not before.
+- the government does not set $\{\mu_t\}_{t=0}^\infty$  once and
+  for all at $t=0$
+- instead it sets $\mu_t$ at time $t$ 
 - the representative agent's forecasts of
   $\{\mu_{t+j+1}, \theta_{t+j+1}\}_{j=0}^\infty$ respond to
   whether the government at $t$ **confirms** or **disappoints**
-  their forecasts of $\mu_t$ brought into period $t$ from
+  its forecasts of $\mu_t$ brought into period $t$ from
   period $t-1$.
 - the government at each time $t$ understands how the representative agent's
   forecasts will respond to its choice of $\mu_t$.
