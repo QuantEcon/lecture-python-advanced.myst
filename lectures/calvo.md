@@ -83,8 +83,8 @@ import numpy as np
 from quantecon import LQ
 import matplotlib.pyplot as plt
 from matplotlib.ticker import FormatStrFormatter
-from pandas import DataFrame
-from myst_nb import glue
+import pandas as pd
+from IPython.display import display, Math
 ```
 
 ## Model Components
@@ -1264,16 +1264,33 @@ def plt_clqs(clqs, axes):
     plt.tight_layout()
     plt.show()
 
-def generate_table(clqs, dig):
+def generate_table(clqs, dig=3):
     """
-    A function to generate a table of θ values
+    A function to generate a table of θ values and display it using LaTeX
 
     Here clq is an instance of ChangLQ and dig is the number of digits to round to
     """
     
-    label_maps = {rf'$\beta={clq.β}$, $c={clq.c}$': compute_θs(clq)[0] for clq in clqs}
+    label_maps = {rf'$\beta={clq.β}, c={clq.c}$': [f'{round(val, dig):.3f}' for val in compute_θs(clq)[0]] for clq in clqs}
     labels = compute_θs(clq)[1]
-    return DataFrame(label_maps, index=labels).round(dig)
+    data_frame = pd.DataFrame(label_maps, index=labels)
+
+    # Generate LaTeX table
+    columns = ' & '.join([f'\\text{{{col}}}' 
+                          for col in data_frame.columns])
+    rows = ' \\\\\n'.join([' & '.join([f'\\text{{{label}}}'] + [
+        f'{val}' for val in row]) for label, row in 
+        zip(data_frame.index, data_frame.values)])
+    
+    latex_code = r"""
+    \begin{array}{%s}
+    & %s \\
+    \hline
+    %s
+    \end{array}
+    """ % ('c' * (len(data_frame.columns) + 1), columns, rows)
+    
+    display(Math(latex_code))
 ```
 
 ```{code-cell} ipython3
@@ -1286,7 +1303,7 @@ plt_clqs(clqs, axes)
 ```
 
 ```{code-cell} ipython3
-generate_table(clqs, dig=4)
+generate_table(clqs, dig=3)
 ```
 
 ```{code-cell} ipython3
@@ -1344,18 +1361,34 @@ def plot_ramsey_MPE(clq, T=15):
 
 def generate_param_table(clq):
     """
-    Method to generate a table of parameters
+    Method to generate a table of parameters using LaTeX for symbolic representation.
 
     Here clq is an instance of ChangLQ
     """
     param_names = [fr'$g_0$', fr'$g_1$', fr'$g_2$', 
-               fr'$b_0$', fr'$b_1$', 
-               fr'$d_0$', fr'$d_1$']
+                   fr'$b_0$', fr'$b_1$', 
+                   fr'$d_0$', fr'$d_1$']
     params = [clq.g0, clq.g1, clq.g2, 
               clq.b0, clq.b1,
               clq.d0, clq.d1]
-    display(DataFrame({rf'$\beta={clq.β}$, $c={clq.c}$': params}, 
-                           index=param_names).round(2).T)
+
+    label = rf'$\beta={clq.β}, c={clq.c}$'
+    data_frame = pd.DataFrame({label: params}, index=param_names).round(2).T
+
+    # Generate LaTeX table
+    columns = ' & '.join([f'\\text{{{col}}}' for col in data_frame.columns])
+    rows = ' \\\\\n'.join([' & '.join([f'\\text{{{index}}}'] + [
+        f'{val}' for val in row]) for index, row in data_frame.iterrows()])
+    
+    latex_code = r"""
+    \begin{array}{%s}
+    & %s \\
+    \hline
+    %s
+    \end{array}
+    """ % ('c' * (len(data_frame.columns) + 1), columns, rows)
+    
+    display(Math(latex_code))
 ```
 
 ```{code-cell} ipython3
@@ -1863,103 +1896,3 @@ Thus, our models have involved two Bellman equations:
   $(\mu_t, \theta_t)$ and $v_{t+1}$
 
 A value $\theta$ from one Bellman equation appears as an argument of a second Bellman equation for another value $v$.
-
-
-## Exercises
-
-```{exercise-start}
-:label: calvo_ex1
-```
-
-In this exercise, compute different values of $v_t$ for a given $\mu_t$ and $\theta_t$.
-
-```{exercise-end}
-```
-
-```{solution-start} networks_ex3
-:class: dropdown
-```
-
-```{code-cell} ipython3
-def compute_v(clq, θs):
-    """
-    Compute v_t and v_CR for given θ values.
-
-    Here clq is an instance of ChangLQ.
-    """
-    # Compute v values for corresponding θ
-    v_t = -clq.P[0, 0] - 2 * clq.P[1, 0] * θs - clq.P[1, 1] * θs**2
-    
-    # Define the utility function
-    U = lambda x: clq.u0 + clq.u1 * x - (clq.u2 / 2) * x**2
-    
-    # Compute v_CR
-    v_CR = 1 / (1 - clq.β) * (U(-clq.α * clq.μ_CR) 
-                                - (clq.c / 2) * clq.μ_CR**2)
-
-    return v_t, v_CR
-
-def plot_J(clq, ax, add_legend=False):
-    """
-    Plot v(θ) and v^CR with θ markers.
-    
-    Here clq is an instance of ChangLQ.
-    """
-    # Compute J(θ) and v_CR
-    Jθ, v_CR = compute_v(clq, clq.θ_space)
-    
-    # Plot J(θ)
-    v_line, = ax.plot(clq.θ_space, Jθ, lw=2, 
-                      label=r"$J(\theta)$", alpha=0.7)
-    
-    # Plot v^CR as a horizontal line
-    CR_line = ax.axhline(y=v_CR, linestyle='--', 
-                            color='black', 
-                            alpha=0.5, label=r"$v^{CR}$")
-    
-    # Add markers
-    θ_points, labels, θ_colors = compute_θs(clq)
-    
-    markers = []
-    for θ, label, color in zip(θ_points, labels, θ_colors):
-        closest_index = np.argmin(np.abs(clq.θ_space - θ))
-        marker = ax.scatter(clq.θ_space[closest_index], 
-                            Jθ[closest_index], 
-                            60, marker='v', 
-                            label=label, color=color)
-        markers.append(marker)
-    
-    # Set axis labels and title
-    ax.set_xlabel(r"$\theta$", fontsize=18)
-    ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
-    
-    # Format y-axis
-    ax.tick_params(axis='x', rotation=45)
-    
-    if add_legend:
-        handles = [v_line, CR_line] + markers
-        labels = [handle.get_label() for handle in handles]
-        ax.legend(handles, labels, loc='upper center', ncol=7, 
-               bbox_to_anchor=(1.7, 1.2), prop={'size': 14})
-```
-
-```{code-cell} ipython3
-# Changing βs
-fig, axes = plt.subplots(1, 3, figsize=(16, 6))
-for i, β in enumerate(β_values):
-    clq = ChangLQ(β=β, c=2)
-    plot_J(clq, axes[i], add_legend=(i==0))
-plt.show()
-```
-
-```{code-cell} ipython3
-# Increase c to 100
-fig, axes = plt.subplots(1, 3, figsize=(16,6))
-for i, c in enumerate(c_values):
-    clq = ChangLQ(β=0.85, c=c)
-    plot_J(clq, axes[i], add_legend=(i==0))
-plt.show()
-```
-
-```{solution-end}
-```
