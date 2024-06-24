@@ -82,11 +82,14 @@ We'll start with some imports:
 import numpy as np
 from quantecon import LQ
 import matplotlib.pyplot as plt
-%matplotlib inline
 from matplotlib.ticker import FormatStrFormatter
+from pandas import DataFrame
+from myst_nb import glue
 ```
 
 ## Model Components
+
+To Tom: Could you please add a glossary of symbols? Thanks so much!
 
 There is no uncertainty.
 
@@ -308,7 +311,7 @@ for all $t \geq 0$.
 Values of $V(\bar \mu)$ computed according to formula {eq}`eq:barvdef` for three different  values of $\bar \mu$ will play important roles below.
 
 * $V(\mu^{MP})$ is the value of attained by the government in a **Markov perfect equilibrium** 
-* $V(\mu^{CR}$) is the value of attained by the government in a **constrained to constant $\mu$ equilibrium**
+* $V(\mu^{CR})$ is the value of attained by the government in a **constrained to constant $\mu$ equilibrium**
 * $V(\mu^R_\infty)$ is the limiting value attained by a continuation Ramsey planner under a Ramsey plan.
     * We shall see that $V(\mu^R_\infty)$ is a worst continuation value attained along a Ramsey plan  
 
@@ -521,7 +524,7 @@ $$
 \mu_t = b_0 + b_1 \theta_t 
 $$ (eq:muRamseyrule)
 
-where $b_0 = -F_1, b_1 = - F_2$ and  $F$ satisfies equation {eq}`eq:formulaF`, 
+where $b_0 = -F_1, b_1 = - F_2$ and  $F$ satisfies equation {eq}`eq:formulaF`,
 
 The Ramsey planner's  decision rule for updating $\theta_{t+1}$ is
 
@@ -621,6 +624,14 @@ $$
  \theta_t = d_0 \left(\frac{1 - d_1^t}{1 - d_1} \right)  + d_1^t \theta_0^R ,
 $$ (eq:thetatimeinconsist)
 
+Hence for $d_1 \in (0,1)$, as $t \to \infty$ we have 
+
+$$
+ \theta_\infty^R = \frac{d_0}{1 - d_1},
+$$ (eq:thetaasymptotic)
+
+To Tom: I have added the formula for $\theta_\infty^R$. Could you please add some text on the implications of this formula? Thanks so much! 
+
 while $\mu_t$ varies over time according to 
 
 $$
@@ -686,7 +697,7 @@ We created this version of the model  to highlight an aspect of a Ramsey plan as
 
 Thus, instead of allowing the government at time $0$ to choose a different $\mu_t$ for each $t \geq 0$, we now assume that a  government at time $0$ once and for all  chooses a **constant** sequence $\mu_t = \bar \mu$ for all $t \geq 0$.
 
-We  assume that the government knows the perfect foresight outcome implied by equation {eq}`eq_old2` that $\theta_t = \bar  \mu$ when $\mu_t = \bar \mu$ for all $t \geq 0$.
+We assume that the government knows the perfect foresight outcome implied by equation {eq}`eq_old2` that $\theta_t = \bar  \mu$ when $\mu_t = \bar \mu$ for all $t \geq 0$.
 
 The government chooses $\bar \mu$  to maximize
 
@@ -703,9 +714,6 @@ We can express $V^{CR}(\bar \mu)$ as
 $$
 V^{CR} (\bar \mu) = (1-\beta)^{-1} \left[ U (-\alpha \bar \mu) - \frac{c}{2} (\bar \mu)^2 \right]
 $$ (eq:vcrformula20)
-
-
-
 
 With the quadratic form {eq}`eq_old5` for the utility function $U$, the
 maximizing $\bar \mu$ is
@@ -854,7 +862,6 @@ $$
  \theta^* = -\frac{u_1}{u_2 \alpha}
 $$ 
 
-
 **Proposition 1:** When $c=0$,  $\theta^{MPE} = \theta^{CR} = \theta^*$ and 
 $\theta_0^R = \theta_\infty^R$. 
 
@@ -868,9 +875,6 @@ We'll compute
  *   $(\theta^{MPE} = \mu^{MPE})$:  MPE fixed values
  *   $(\theta^{CR} = \mu^{CR})$:  fixed values associated with a constrained to time-invariant $\mu$ Ramsey plan
  *   $\theta^*$:   bliss level of inflation prescribed by a Friedman rule
-
-
-
 
 We will create a class ChangLQ that solves the models and stores their values
 
@@ -897,6 +901,19 @@ class ChangLQ:
         # Solve LQ Problem (Subproblem 1)
         lq = LQ(Q, R, A, B, beta=self.β)
         self.P, self.F, self.d = lq.stationary_values()
+
+
+        # Compute g0, g1, and g2 (41.16)
+        [self.g0, self.g1, self.g2] = [-self.P[0, 0], 
+                                       -2 * self.P[1, 0], 
+                                       -self.P[1, 1]]
+
+        # Compute b0 and b1 (41.17)
+        [[self.b0, self.b1]] = self.F
+
+        # Compute d0 and d1 (41.18)
+        cl_mat = (A - B @ self.F) # Closed loop matrix
+        [[self.d0, self.d1]] = cl_mat[1:]
 
         # Solve Subproblem 2
         self.θ_R = -self.P[0, 1] / self.P[1, 1]
@@ -925,8 +942,9 @@ class ChangLQ:
         θ_series[1, 0] = self.θ_R
         [μ_series[0]] = -self.F.dot(θ_series[:, 0])
         J_series[0] = -θ_series[:, 0] @ self.P @ θ_series[:, 0].T
+        
         for i in range(1, T):
-            θ_series[:, i] = (A - B @ self.F) @ θ_series[:, i-1]
+            θ_series[:, i] = cl_mat @ θ_series[:, i-1]
             [μ_series[i]] = -self.F @ θ_series[:, i]
             J_series[i] = -θ_series[:, i] @ self.P @ θ_series[:, i].T
 
@@ -960,7 +978,7 @@ class ChangLQ:
         for i in range(200):
             J_space[i] = self.J_θ(θ_space[i])
             [μ_space[i]] = - self.F @ np.array((1, θ_space[i]))
-            x_prime = (A - B @ self.F) @ np.array((1, θ_space[i]))
+            x_prime = cl_mat @ np.array((1, θ_space[i]))
             θ_prime[i] = x_prime[1]
             CR_space[i] = self.V_θ(θ_space[i])
 
@@ -983,15 +1001,8 @@ Let's create an instance of ChangLQ with the following parameters:
 clq = ChangLQ(β=0.85, c=2)
 ```
 
-
-
-
-The following code  plots the Ramsey planner's value function $J(\theta)$, which we know is maximized at   $\theta^R_0$, the promised inflation that the Ramsey planner  sets
-at time $t=0$.
-
-The figure also plots the limiting value $\theta_\infty^R$ to which  the promised  inflation rate $\theta_t$ converges under the Ramsey plan.
-
-In addition, the figure indicates an MPE inflation rate $\theta^{CR}$ and a bliss inflation $\theta^*$.
+The following code  plots value functions for a continuation Ramsey
+planner.
 
 ```{code-cell} ipython3
 def compute_θs(clq):
@@ -1010,53 +1021,13 @@ def compute_θs(clq):
 
     return θ_points, labels, θ_colors
 
-
-def plot_value_function(clq):
-    """
-    Method to plot the value function over the relevant range of θ
-
-    Here clq is an instance of ChangLQ
-    """
-    fig, ax = plt.subplots()
-
-    ax.set_xlim([clq.θ_LB, clq.θ_UB])
-    ax.set_ylim([clq.J_LB, clq.J_UB])
-
-    # Plot value function
-    ax.plot(clq.θ_space, clq.J_space, lw=2)
-    plt.xlabel(r"$\theta$", fontsize=18)
-    plt.ylabel(r"$J(\theta)$", fontsize=18)
-
-    θ_points, labels, _ = compute_θs(clq)
-    
-    # Add points for θs
-    for θ, label in zip(θ_points, labels):
-        ax.scatter(θ, clq.J_LB + 0.02 * clq.J_range, 60, 'black', 'v')
-        ax.annotate(label,
-                    xy=(θ, clq.J_LB + 0.01 * clq.J_range),
-                    xytext=(θ - 0.01 * clq.θ_range,
-                    clq.J_LB + 0.08 * clq.J_range),
-                    fontsize=14)
-    plt.tight_layout()
-    plt.show()
-
-plot_value_function(clq)
-```
-
-
-
-The next code    plots  policy functions for a continuation Ramsey
-planner.
-
-
-```{code-cell} ipython3
 def plot_policy_functions(clq):
     """
     Method to plot the policy functions over the relevant range of θ
 
     Here clq is an instance of ChangLQ
     """
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(8, 6))
 
     θ_points, labels, θ_colors = compute_θs(clq)
 
@@ -1083,7 +1054,7 @@ def plot_policy_functions(clq):
                    60, 'black', 'v')
         ax.annotate(label, xy=(θ, μ_min - 0.02 * μ_range),
                     xytext=(θ - 0.012 * clq.θ_range,
-                            μ_min + 0.03 * μ_range),
+                            μ_min + 0.01 * μ_range),
                     fontsize=14)
 
     # Set labels and limits
@@ -1120,6 +1091,46 @@ Notice that for  $\theta \in \left(\theta_\infty^R, \theta_0^R \right]$
 
 It follows that under the Ramsey plan  $\{\theta_t\}$ and $\{\mu_t\}$ both converge monotonically from above to $\theta_\infty^R$. 
 
+
+The next code  plots the Ramsey planner's value function $J(\theta)$, which we know is maximized at   $\theta^R_0$, the promised inflation that the Ramsey planner  sets
+at time $t=0$.
+
+The figure also plots the limiting value $\theta_\infty^R$ to which  the promised  inflation rate $\theta_t$ converges under the Ramsey plan.
+
+In addition, the figure indicates an MPE inflation rate $\theta^{CR}$ and a bliss inflation $\theta^*$.
+
+```{code-cell} ipython3
+def plot_value_function(clq):
+    """
+    Method to plot the value function over the relevant range of θ
+
+    Here clq is an instance of ChangLQ
+    """
+    fig, ax = plt.subplots()
+
+    ax.set_xlim([clq.θ_LB, clq.θ_UB])
+    ax.set_ylim([clq.J_LB, clq.J_UB])
+
+    # Plot value function
+    ax.plot(clq.θ_space, clq.J_space, lw=2)
+    plt.xlabel(r"$\theta$", fontsize=18)
+    plt.ylabel(r"$J(\theta)$", fontsize=18)
+
+    θ_points, labels, _ = compute_θs(clq)
+    
+    # Add points for θs
+    for θ, label in zip(θ_points, labels):
+        ax.scatter(θ, clq.J_LB + 0.02 * clq.J_range, 60, 'black', 'v')
+        ax.annotate(label,
+                    xy=(θ, clq.J_LB + 0.01 * clq.J_range),
+                    xytext=(θ - 0.01 * clq.θ_range,
+                    clq.J_LB + 0.08 * clq.J_range),
+                    fontsize=14)
+    plt.tight_layout()
+    plt.show()
+
+plot_value_function(clq)
+```
 
 ### Ramsey planner's value function 
 
@@ -1170,24 +1181,6 @@ constant value attained by a constrained-to-constant $\mu_t$ Ramsey planner.
 Now let's write some code to  plot outcomes under our three timing protocols.
 
 ```{code-cell} ipython3
-def compute_v(clq, θs):
-    """
-    Compute v_t and v_CR for given θ values.
-
-    Here clq is an instance of ChangLQ.
-    """
-    # Compute v values for corresponding θ
-    v_t = -clq.P[0, 0] - 2 * clq.P[1, 0] * θs - clq.P[1, 1] * θs**2
-    
-    # Define the utility function
-    U = lambda x: clq.u0 + clq.u1 * x - (clq.u2 / 2) * x**2
-    
-    # Compute v_CR
-    v_CR = 1 / (1 - clq.β) * (U(-clq.α * clq.μ_CR) 
-                                 - (clq.c / 2) * clq.μ_CR**2)
-
-    return v_t, v_CR
-
 def compare_ramsey_CR(clq, ax):
     """
     Method to compare values of Ramsey and Constrained Ramsey (CR)
@@ -1207,7 +1200,7 @@ def compare_ramsey_CR(clq, ax):
     J_line, = ax.plot(clq.θ_space, clq.J_space, 
                       lw=2, label=r"$J(\theta)$")
     CR_line, = ax.plot(clq.θ_space, clq.CR_space, 
-                          lw=2, label=r"$V^{CR}(\theta)$")
+                      lw=2, label=r"$V^{CR}(\theta)$")
 
     # Mark key points
     θ_points, labels, θ_colors = compute_θs(clq)
@@ -1215,30 +1208,41 @@ def compare_ramsey_CR(clq, ax):
                           60, marker='v', label=label, color=color)
                for θ, label, color in zip(θ_points, labels, θ_colors)]
 
-    _, v_CR = compute_v(clq, clq.θ_space)
+    v_MPE = clq.V_θ(θ_points[-1])
+    v_CR = clq.V_θ(θ_points[2])
 
-    # Plot a vertical line at \theta_\infty^R
-    ax.axvline(θ_points[1], ymin=0.05, 
-               lw=1.5, linestyle='--', 
-               color=θ_colors[1])
-
+    # Plot lines at \theta_\infty^R, \theta^{CR}, and \theta^{MPE}
+    θ_idx = [1, 2, -1]
+    for i in θ_idx:
+        ax.axvline(θ_points[i], ymin=0.05, 
+                   lw=2, linestyle='--', 
+                   color=θ_colors[i])
+        vline = ax.axhline(y=clq.V_θ(θ_points[i]), 
+                      linestyle='dotted', 
+                      lw=1.5, color=θ_colors[i], 
+                      alpha=0.7)
+    
+    # Plot line at v^{CR}
     vcr_line = ax.axhline(y=v_CR, linestyle='--', 
                           lw=1.5, color='black', 
                           alpha=0.7, label=r"$v^{CR}$")
-        
-    return J_line, CR_line, vcr_line, markers
+    
+    return [J_line, CR_line, vcr_line], markers
 
 def plt_clqs(clqs, axes):
+    """
+    A helper function to plot two seperate legends on top and bottom
+
+    Here clq is an instance of ChangLQ and axes is a list of Matplotlib axes
+    """
     line_handles, scatter_handles = {}, {}
 
     for ax, clq in zip(axes, clqs):
-        J_line, CR_line, vcr_line, markers = compare_ramsey_CR(clq, ax)
+        lines, markers = compare_ramsey_CR(clq, ax)
         ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
         ax.tick_params(axis='x', rotation=45)
 
-        line_handles[J_line.get_label()] = J_line
-        line_handles[CR_line.get_label()] = CR_line
-        line_handles[vcr_line.get_label()] = vcr_line
+        line_handles = {line.get_label(): line for line in lines}
         for marker in markers:
             scatter_handles[marker.get_label()] = marker
 
@@ -1259,15 +1263,30 @@ def plt_clqs(clqs, axes):
     
     plt.tight_layout()
     plt.show()
+
+def generate_table(clqs, dig):
+    """
+    A function to generate a table of θ values
+
+    Here clq is an instance of ChangLQ and dig is the number of digits to round to
+    """
+    
+    label_maps = {rf'$\beta={clq.β}$, $c={clq.c}$': compute_θs(clq)[0] for clq in clqs}
+    labels = compute_θs(clq)[1]
+    return DataFrame(label_maps, index=labels).round(dig)
 ```
 
 ```{code-cell} ipython3
 # Compare different β values
 fig, axes = plt.subplots(1, 3, figsize=(12, 5))
-β_values = [0.85, 0.9, 0.99]
+β_values = [0.7, 0.8, 0.99]
 
 clqs = [ChangLQ(β=β, c=2) for β in β_values]
 plt_clqs(clqs, axes)
+```
+
+```{code-cell} ipython3
+generate_table(clqs, dig=4)
 ```
 
 ```{code-cell} ipython3
@@ -1280,40 +1299,15 @@ plt_clqs(clqs, axes)
 ```
 
 ```{code-cell} ipython3
+generate_table(clqs, dig=4)
+```
+
+```{code-cell} ipython3
 # Decrease c towards 0
 fig, axes = plt.subplots(1, 3, figsize=(12, 5))
 c_limits = [1, 0.1, 0.01]
 
 clqs = [ChangLQ(β=0.85, c=c) for c in c_limits]
-plt_clqs(clqs, axes)
-```
-
-Here we repeat experiments above with $\alpha = 4$
-
-```{code-cell} ipython3
-# Compare different β values
-fig, axes = plt.subplots(1, 3, figsize=(12, 5))
-β_values = [0.85, 0.9, 0.99]
-
-clqs = [ChangLQ(α=4, β=β, c=2) for β in β_values]
-plt_clqs(clqs, axes)
-```
-
-```{code-cell} ipython3
-# Increase c to 100
-fig, axes = plt.subplots(1, 3, figsize=(12, 5))
-c_values = [1, 10, 100]
-
-clqs = [ChangLQ(α=4, β=0.85, c=c) for c in c_values]
-plt_clqs(clqs, axes)
-```
-
-```{code-cell} ipython3
-# Decrease c towards 0
-fig, axes = plt.subplots(1, 3, figsize=(12, 5))
-c_limits = [1, 0.1, 0.01]
-
-clqs = [ChangLQ(α=4, β=0.85, c=c) for c in c_limits]
 plt_clqs(clqs, axes)
 ```
 
@@ -1347,12 +1341,27 @@ def plot_ramsey_MPE(clq, T=15):
     fig.suptitle(fr'$\beta$={clq.β}, $c$={clq.c}', fontsize=16)
     plt.tight_layout(rect=[0, 0.1, 1, 1])  # Adjust layout to make space for the suptitle
     plt.show()
+
+def generate_param_table(clq):
+    """
+    Method to generate a table of parameters
+
+    Here clq is an instance of ChangLQ
+    """
+    param_names = [fr'$g_0$', fr'$g_1$', fr'$g_2$', 
+               fr'$b_0$', fr'$b_1$', 
+               fr'$d_0$', fr'$d_1$']
+    params = [clq.g0, clq.g1, clq.g2, 
+              clq.b0, clq.b1,
+              clq.d0, clq.d1]
+    display(DataFrame({rf'$\beta={clq.β}$, $c={clq.c}$': params}, 
+                           index=param_names).round(2).T)
 ```
 
 ```{code-cell} ipython3
-# Compare different β values
 for β in β_values:
     clq = ChangLQ(β=β, c=2)
+    generate_param_table(clq)
     plot_ramsey_MPE(clq)
 ```
 
@@ -1360,147 +1369,32 @@ for β in β_values:
 # Increase c to 100
 for c in c_values:
     clq = ChangLQ(β=0.85, c=c)
+    generate_param_table(clq)
     plot_ramsey_MPE(clq)
 ```
+
+Note what happends if we change $\alpha=1$ to $\alpha=4$ in the case of the last two panels
+
+```{code-cell} ipython3
+# Increase c to 100
+for c in [10, 100]:
+    clq = ChangLQ(α=4, β=0.85, c=c)
+    generate_param_table(clq)
+    plot_ramsey_MPE(clq)
+```
+
+We find an interaction between $c$ and $\alpha$.
+
+To Tom: Dear Tom, Could you please add some explanations using the decay rate idea here?
+
+Next we show the changes when $c$ moves towards 0.
 
 ```{code-cell} ipython3
 # Decrease c towards 0
 for c in c_limits:
     clq = ChangLQ(β=0.85, c=c)
+    generate_param_table(clq)
     plot_ramsey_MPE(clq)
-```
-
-Here we repeat experiments above with $\alpha = 4$.
-
-```{code-cell} ipython3
-# Compare different β values
-for β in β_values:
-    clq = ChangLQ(α=4, β=β, c=2)
-    plot_ramsey_MPE(clq)
-```
-
-```{code-cell} ipython3
-# Increase c to 100
-for c in c_values:
-    clq = ChangLQ(α=4, β=0.85, c=c)
-    plot_ramsey_MPE(clq)
-```
-
-```{code-cell} ipython3
-# Decrease c towards 0
-for c in c_limits:
-    clq = ChangLQ(α=4, β=0.85, c=c)
-    plot_ramsey_MPE(clq)
-```
-
-
-```{code-cell} ipython3
-def plot_J(clq, ax, add_legend=False):
-    """
-    Plot v(θ) and v^CR with θ markers.
-    
-    Here clq is an instance of ChangLQ.
-    """
-    # Compute J(θ) and v_CR
-    Jθ, v_CR = compute_v(clq, clq.θ_space)
-    
-    # Plot J(θ)
-    v_line, = ax.plot(clq.θ_space, Jθ, lw=2, 
-                      label=r"$J(\theta)$", alpha=0.7)
-    
-    # Plot v^CR as a horizontal line
-    CR_line = ax.axhline(y=v_CR, linestyle='--', 
-                            color='black', 
-                            alpha=0.5, label=r"$v^{CR}$")
-    
-    # Add markers
-    θ_points, labels, θ_colors = compute_θs(clq)
-    
-    markers = []
-    for θ, label, color in zip(θ_points, labels, θ_colors):
-        closest_index = np.argmin(np.abs(clq.θ_space - θ))
-        marker = ax.scatter(clq.θ_space[closest_index], 
-                            Jθ[closest_index], 
-                            60, marker='v', 
-                            label=label, color=color)
-        markers.append(marker)
-    
-    # Set axis labels and title
-    ax.set_xlabel(r"$\theta$", fontsize=18)
-    ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
-    
-    # Format y-axis
-    ax.tick_params(axis='x', rotation=45)
-    
-    if add_legend:
-        handles = [v_line, CR_line] + markers
-        labels = [handle.get_label() for handle in handles]
-        ax.legend(handles, labels, loc='upper center', ncol=7, 
-               bbox_to_anchor=(1.7, 1.2), prop={'size': 14})
-```
-
-```{code-cell} ipython3
-# Changing βs
-fig, axes = plt.subplots(1, 3, figsize=(16, 6))
-for i, β in enumerate(β_values):
-    clq = ChangLQ(β=β, c=2)
-    plot_J(clq, axes[i], add_legend=(i==0))
-plt.show()
-```
-
-```{code-cell} ipython3
-# Increase c to 100
-fig, axes = plt.subplots(1, 3, figsize=(16,6))
-for i, c in enumerate(c_values):
-    clq = ChangLQ(β=0.85, c=c)
-    plot_J(clq, axes[i], add_legend=(i==0))
-plt.show()
-```
-
-```{code-cell} ipython3
-def plot_vt(clq, T, ax):
-    """
-    Plot v_t and v^CR with θ markers 
-    """
-    
-    # Define θ_ts and compute v_t
-    θ_ts = clq.θ_series[1, 0:T]
-
-    v_t, v_CR = compute_v(clq, θ_ts)
-
-    # Generate plots
-    ax.plot(v_t, lw=2, label=r"$v_t$")
-    ax.axhline(y=v_CR, linestyle='--', 
-               color='black', alpha=0.5,
-               label=r"$v^{CR}$")
-    ax.set_xlabel(r"$t$", fontsize=18)
-    ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
-    ax.tick_params(axis='x', rotation=45)
-    ax.legend(fontsize=14)
-```
-
-```{code-cell} ipython3
-# Changing β
-fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-for i, β in enumerate(β_values):
-    clq = ChangLQ(β=β, c=2)
-    plot_vt(clq, 10, axes[i])
-```
-
-```{code-cell} ipython3
-# Increase c to 100
-fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-for i, c in enumerate(c_values):
-    clq = ChangLQ(β=0.85, c=c)
-    plot_vt(clq, 10, axes[i])
-```
-
-```{code-cell} ipython3
-# Decrease c towards 0
-fig, axes = plt.subplots(1, 3, figsize=(18, 6))
-for i, c in enumerate(c_limits):
-    clq = ChangLQ(β=0.85, c=c)
-    plot_vt(clq, 10, axes[i])
 ```
 
 ### Time Inconsistency of Ramsey Plan
@@ -1969,3 +1863,103 @@ Thus, our models have involved two Bellman equations:
   $(\mu_t, \theta_t)$ and $v_{t+1}$
 
 A value $\theta$ from one Bellman equation appears as an argument of a second Bellman equation for another value $v$.
+
+
+## Exercises
+
+```{exercise-start}
+:label: calvo_ex1
+```
+
+In this exercise, compute different values of $v_t$ for a given $\mu_t$ and $\theta_t$.
+
+```{exercise-end}
+```
+
+```{solution-start} networks_ex3
+:class: dropdown
+```
+
+```{code-cell} ipython3
+def compute_v(clq, θs):
+    """
+    Compute v_t and v_CR for given θ values.
+
+    Here clq is an instance of ChangLQ.
+    """
+    # Compute v values for corresponding θ
+    v_t = -clq.P[0, 0] - 2 * clq.P[1, 0] * θs - clq.P[1, 1] * θs**2
+    
+    # Define the utility function
+    U = lambda x: clq.u0 + clq.u1 * x - (clq.u2 / 2) * x**2
+    
+    # Compute v_CR
+    v_CR = 1 / (1 - clq.β) * (U(-clq.α * clq.μ_CR) 
+                                - (clq.c / 2) * clq.μ_CR**2)
+
+    return v_t, v_CR
+
+def plot_J(clq, ax, add_legend=False):
+    """
+    Plot v(θ) and v^CR with θ markers.
+    
+    Here clq is an instance of ChangLQ.
+    """
+    # Compute J(θ) and v_CR
+    Jθ, v_CR = compute_v(clq, clq.θ_space)
+    
+    # Plot J(θ)
+    v_line, = ax.plot(clq.θ_space, Jθ, lw=2, 
+                      label=r"$J(\theta)$", alpha=0.7)
+    
+    # Plot v^CR as a horizontal line
+    CR_line = ax.axhline(y=v_CR, linestyle='--', 
+                            color='black', 
+                            alpha=0.5, label=r"$v^{CR}$")
+    
+    # Add markers
+    θ_points, labels, θ_colors = compute_θs(clq)
+    
+    markers = []
+    for θ, label, color in zip(θ_points, labels, θ_colors):
+        closest_index = np.argmin(np.abs(clq.θ_space - θ))
+        marker = ax.scatter(clq.θ_space[closest_index], 
+                            Jθ[closest_index], 
+                            60, marker='v', 
+                            label=label, color=color)
+        markers.append(marker)
+    
+    # Set axis labels and title
+    ax.set_xlabel(r"$\theta$", fontsize=18)
+    ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
+    
+    # Format y-axis
+    ax.tick_params(axis='x', rotation=45)
+    
+    if add_legend:
+        handles = [v_line, CR_line] + markers
+        labels = [handle.get_label() for handle in handles]
+        ax.legend(handles, labels, loc='upper center', ncol=7, 
+               bbox_to_anchor=(1.7, 1.2), prop={'size': 14})
+```
+
+```{code-cell} ipython3
+# Changing βs
+fig, axes = plt.subplots(1, 3, figsize=(16, 6))
+for i, β in enumerate(β_values):
+    clq = ChangLQ(β=β, c=2)
+    plot_J(clq, axes[i], add_legend=(i==0))
+plt.show()
+```
+
+```{code-cell} ipython3
+# Increase c to 100
+fig, axes = plt.subplots(1, 3, figsize=(16,6))
+for i, c in enumerate(c_values):
+    clq = ChangLQ(β=0.85, c=c)
+    plot_J(clq, axes[i], add_legend=(i==0))
+plt.show()
+```
+
+```{solution-end}
+```
