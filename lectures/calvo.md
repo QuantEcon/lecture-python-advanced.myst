@@ -241,7 +241,7 @@ To deduce this recommendation, Milton Friedman assumed that the taxes that gover
 
   - for example, the government imposes lump sum taxes that distort no decisions by private agents
 
-## Calvo's Perturbation of Friedman's Optimal Deflation Rate
+## Calvo's Perturbation of Optimal Deflation Rate
 
 The starting point of Calvo {cite}`Calvo1978` and  Chang {cite}`chang1998credible`
 is that such lump sum taxes are not available.
@@ -545,7 +545,7 @@ $$
 | d_1 | < 1 ,
 $$ (eq:stabilityd1)
 
-a stability condition that will play an important role soon.
+a stability condition that will play an important role.
 
 It remains for us to describe how the Ramsey planner sets $\theta_0$.  
 
@@ -562,13 +562,17 @@ $$
 
 where $V^R$ is the maximum value of $v_0$ defined in equation {eq}`eq_old7`.
 
-The value function
+We have taken the liberty of abusing notation slightly by writing $J(x)$ as $J(\theta)$
+
+  * notice that $x = \begin{bmatrix} 1 \cr \theta \end{bmatrix}$, so $\theta$ is the only component of $x$ that can possibly vary
+
+Value function $J(\theta_0)$ satisfies
 
 $$
-J|_{\theta=\theta_0}(\theta_0) = J(\theta_0) = -\begin{bmatrix} 1 & \theta_0 \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \\ P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_0 \end{bmatrix} = -P_{11} - 2 P_{21} \theta_0 - P_{22} \theta_0^2
+ J(\theta_0) = -\begin{bmatrix} 1 & \theta_0 \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \\ P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_0 \end{bmatrix} = -P_{11} - 2 P_{21} \theta_0 - P_{22} \theta_0^2
 $$
 
-Maximizing $J(x_0)$  with respect to $\theta_0$ yields the FOC:
+Maximizing $J(\theta_0)$  with respect to $\theta_0$ yields the FOC:
 
 $$
 - 2 P_{21} - 2 P_{22} \theta_0 =0
@@ -624,15 +628,15 @@ $$
  \theta_t = d_0 \left(\frac{1 - d_1^t}{1 - d_1} \right)  + d_1^t \theta_0^R ,
 $$ (eq:thetatimeinconsist)
 
-Hence for $d_1 \in (0,1)$, as $t \to \infty$ we have 
+Because $d_1 \in (0,1)$, it follows  from {eq}`eq:thetatimeinconsist` that  as $t \to \infty$ $\theta_t^R $ converges to
 
 $$
- \theta_\infty^R = \frac{d_0}{1 - d_1},
+\lim_{t \rightarrow +\infty} \theta_t^R =  \theta_\infty^R = \frac{d_0}{1 - d_1}.  
 $$ (eq:thetaasymptotic)
 
-To Tom: I have added the formula for $\theta_\infty^R$. Could you please add some text on the implications of this formula? Thanks so much! 
+Furthermore, we shall see that  $\theta_t^R$ converges to $\theta_\infty^R$ from above.   
 
-while $\mu_t$ varies over time according to 
+Meanwhile,  $\mu_t$ varies over time according to 
 
 $$
  \mu_t = b_0 + b_1 d_0 \left(\frac{1 - d_1^t}{1 - d_1} \right)  + b_1 d_1^t \theta_0^R.
@@ -648,7 +652,7 @@ Variation of  $ \vec \mu^R, \vec \theta^R, \vec v^R $ over time  are  symptoms o
   equation {eq}`eq_old3`.
 
 
-### Digression on So-Called Timeless Perspective
+### Digression on Timeless Perspective
 
 As our subsequent calculations will verify, $ \vec \mu^R, \vec \theta^R, \vec v^R $ are each monotone sequences that are bounded below and converge from above  to limiting values.  
 
@@ -686,7 +690,7 @@ that, relative to a Ramsey plan,  alter either
 - the timing protocol and/or
 - assumptions about how government decision makers think their decisions affect the representative agent's beliefs about future government decisions
 
-## A Constrained-to-a-Constant-Growth-Rate Ramsey Plan
+## Constrained-to-Constant-Growth-Rate Ramsey Plan
 
 We now describe a  model in which we restrict the Ramsey planner's choice set.
 
@@ -729,9 +733,9 @@ V^{CR}(\mu^{CR}) = v^{CR} = (1-\beta)^{-1} \left[ U (-\alpha \mu^{CR}) - \frac{c
 $$ (eq:vcrformula)
 
 
-**Remark:** We have  introduced the constrained-to-a-constant $\mu$
-government in order eventually to discuss the   time-variation of
-$\mu_t$ under a Ramsey plan  as a telltale sign of it  **time inconsistency**.
+**Remark:** We have  introduced the constrained-to-constant $\mu$
+government in order eventually to highlight the   time-variation of
+$\mu_t$   that is a telltale sign of a Ramsey plan's  **time inconsistency**.
 
 ## Markov Perfect Governments
 
@@ -742,7 +746,7 @@ In this one, there is  sequence of government policymakers.
 A time $t$ government chooses $\mu_t$ and expects all future governments to set
 $\mu_{t+j} = \bar \mu$.
 
-This assumption mirrors an assumption made in a different setting  in this QuantEcon lecture:  [Markov Perfect Equilibrium](https://python-intro.quantecon.org/markov_perf.html).
+This assumption mirrors an assumption made   in this QuantEcon lecture:  [Markov Perfect Equilibrium](https://python-intro.quantecon.org/markov_perf.html).
 
 When it sets $\mu_t$, the  government   at $t$ believes that $\bar \mu$ is
 unaffected by its choice of $\mu_t$.
@@ -806,13 +810,13 @@ $$
 \mu^{MPE} = \frac{-u_1}{\frac{1+\alpha}{\alpha}c + \frac{\alpha}{1+\alpha} u_2 + \frac{\alpha^2}{1+\alpha} u_2}
 $$
 
-This can be simplified to:
+This can be simplified to
 
 $$
-\mu^{MPE}  = - \frac{\alpha u_1}{\alpha^2 u_2 + (1+\alpha)c}
+\mu^{MPE}  = - \frac{\alpha u_1}{\alpha^2 u_2 + (1+\alpha)c} .
 $$ (eq:Markovperfectmu)
 
-and the value of a Markov perfect equilibrium is 
+The value of a Markov perfect equilibrium is 
 
 $$
 V^{MPE} = -\frac{s(\mu^{MPE}, \mu^{MPE})}{1-\beta}
@@ -838,8 +842,7 @@ We  want to compare outcome sequences  $\{ \theta_t,\mu_t \}$ under three timing
 
   * a standard Ramsey plan with its time varying $\{ \theta_t,\mu_t \}$ sequences 
   * a Markov perfect equilibrium 
-  * our nonstandard  Ramsey plan in which the planner is restricted to choose $\mu_t = \mu^{CR}$
-for all $t \geq 0$.
+  * our nonstandard  Ramsey plan in which the planner is restricted to choose a time invariant  $\mu_t = \mu$ for all $t \geq 0$.
 
 We have computed closed form formulas for several of these outcomes, which we find it convenient to repeat here.
 
@@ -865,14 +868,16 @@ $$
 **Proposition 1:** When $c=0$,  $\theta^{MPE} = \theta^{CR} = \theta^*$ and 
 $\theta_0^R = \theta_\infty^R$. 
 
-The first two equalities follow from the preceding three equations. We'll illustrate the assertion in  the third equality that equates $\theta_0^R$ to $ \theta_\infty^R$ with some quantitative examples below.
+The first two equalities follow from the preceding three equations. 
 
-Proposition 1 draws attention to how   a positive tax distortion parameter $c$ alters  the prescription for an optimal rate of deflation that Milton Friedman financed  by imposing a lump sum tax.  
+We'll illustrate  the third equality that equates $\theta_0^R$ to $ \theta_\infty^R$ with some quantitative examples below.
+
+Proposition 1 draws attention to how   a positive tax distortion parameter $c$ alters  the  optimal rate of deflation that Milton Friedman financed  by imposing a lump sum tax.  
 
 We'll compute 
 
  *   $(\vec \theta^R, \vec \mu^R)$:  ordinary time-varying Ramsey sequences
- *   $(\theta^{MPE} = \mu^{MPE})$:  MPE fixed values
+ *   $(\theta^{MPE} = \mu^{MPE})$:  Markov perfect equilibirum (MPE) fixed values
  *   $(\theta^{CR} = \mu^{CR})$:  fixed values associated with a constrained to time-invariant $\mu$ Ramsey plan
  *   $\theta^*$:   bliss level of inflation prescribed by a Friedman rule
 
@@ -1132,6 +1137,11 @@ def plot_value_function(clq):
 plot_value_function(clq)
 ```
 
+In the above graph, notice that $\theta^* < \theta_\infty^R < \theta^{CR} < \theta_0^R < \theta^{MPE} .$
+
+In some subsequent calculations, we'll use our Python code to study how gaps between
+these outcome varies depend on parameters such as the cost parameter $c$ and the discount factor $\beta$. 
+
 ### Ramsey planner's value function 
 
 The next code  plots the Ramsey Planner's value function $J(\theta)$  as well the value function
@@ -1179,6 +1189,8 @@ Thus, the limiting continuation value of continuation Ramsey planners is worse t
 constant value attained by a constrained-to-constant $\mu_t$ Ramsey planner.
 
 Now let's write some code to  plot outcomes under our three timing protocols.
+
+Then we'll use the code to explore how key parameters affect outcomes.
 
 ```{code-cell} ipython3
 def compare_ramsey_CR(clq, ax):
@@ -1305,6 +1317,32 @@ plt_clqs(clqs, axes)
 ```{code-cell} ipython3
 generate_table(clqs, dig=3)
 ```
+The above graphs and table convey many useful things.
+
+The horizontal dotted lines indicate values 
+ $V(\mu_\infty^R), V(\mu^{CR}), V(\mu^{MPE}) $ of time invariant money
+growth rates $\mu_\infty^R, \mu^{CR}$ and $\mu_{MPE}$, respectfully. 
+
+Notice how $J(\theta)$ and $V^{CR}(\theta)$ are tangent and increasing at
+ $\theta = \theta_\infty^R$, which implies that $\theta^{CR} > \theta_\infty^R$
+ and $J(\theta^{CR}) > J(\theta_\infty^R)$. 
+
+ Notice how changes in $\beta$ alter $\theta_\infty^R$
+ and $\theta_0^R$ but neither $\theta^*, \theta^{CR}$, nor $\theta^{MPE}$, in accord with formulas
+ {eq}`eq:Friedmantheta`,  {eq}`eq:muRamseyconstrained`, and {eq}`eq:Markovperfectmu`, which imply that
+
+$$
+\begin{aligned}
+\theta^{CR} & = - \frac{\alpha u_1}{\alpha^2 u_2 + c } \\
+\theta^{MPE} &  = - \frac{\alpha u_1}{\alpha^2 u_2 + (1+\alpha)c} \\
+\theta^{MPE} & = - \frac{\alpha u_1}{\alpha^2 u_2 + (1+\alpha)c}
+\end{aligned}
+$$
+
+
+ But let's see what happens when we change $c$.
+
+
 
 ```{code-cell} ipython3
 # Increase c to 100
@@ -1319,6 +1357,18 @@ plt_clqs(clqs, axes)
 generate_table(clqs, dig=4)
 ```
 
+The above table and figures show how 
+  changes in $c$ alter $\theta_\infty^R$
+ and $\theta_0^R$ as well as  $\theta^{CR}$ and  $\theta^{MPE}$, but not
+ $\theta^*$, again  in accord with formulas
+ {eq}`eq:Friedmantheta`,  {eq}`eq:muRamseyconstrained`, and {eq}`eq:Markovperfectmu`. 
+
+Notice that as $c $ gets larger and larger,   $\theta_\infty^R, \theta_0^R$ 
+and $\theta^{CR}$ all converge to $\theta^{MPE}$. 
+
+Now let's watch what happens when we drive $c$ toward zero.
+
+
 ```{code-cell} ipython3
 # Decrease c towards 0
 fig, axes = plt.subplots(1, 3, figsize=(12, 5))
@@ -1328,10 +1378,23 @@ clqs = [ChangLQ(β=0.85, c=c) for c in c_limits]
 plt_clqs(clqs, axes)
 ```
 
-The following code  plots sequences of $\mu$ and $\theta$
-in the Ramsey plan and compares these to the constant levels in a MPE
-and in a Ramsey plan with a government restricted to set $\mu_t$
-to a constant for all $t$.
+The above graphs indicate that as $c$ approaches zero, $\theta_\infty^R, \theta_0^R, \theta^{CR}$,
+and $\theta^{MPE}$ all approach $\theta^*$.
+
+This makes sense, because it was by adding costs of distorting taxes that Calvo {cite}`Calvo1978` drove a wedge between Friedman's optimal deflation rate and the inflation rates chosen by a Ramsey planner. 
+
+The following code  plots sequences  $\vec \mu$ and $\vec theta$ prescribed by a  Ramsey plan as well as the constant levels $\mu^{CR}$ and $\mu^{MPE}$.
+
+The following graphs report values for the value function parameters $g_0, g_1, g_2$,
+and the Ramsey policy function parameters $b_0, b_1, d_0, d_1$ associated with the indicated
+parameter pair $\beta, c$.  
+
+We'll vary $\beta$ while keeping a small $c$.
+
+After that we'll study consequences of raising $c$. 
+
+We'll watch how the decay rate $d_1$ governing the dynamics of $\theta_t^R$ is affected by alterations in the parameters $\beta, c$.
+
 
 ```{code-cell} ipython3
 def plot_ramsey_MPE(clq, T=15):
@@ -1398,6 +1461,10 @@ for β in β_values:
     plot_ramsey_MPE(clq)
 ```
 
+Notice how $d_1$ changes as we raise the discount factor parameter $\beta$.
+
+Now let's study how increasing $c$ affects $\vec \theta, \vec \mu$ outcomes. 
+
 ```{code-cell} ipython3
 # Increase c to 100
 for c in c_values:
@@ -1406,7 +1473,12 @@ for c in c_values:
     plot_ramsey_MPE(clq)
 ```
 
-Note what happends if we change $\alpha=1$ to $\alpha=4$ in the case of the last two panels
+Evidently, increasing $c$ causes the decay factor $d_1$ to increase.
+
+
+Next, let's look at consequences of increasing the demand for real balances parameter
+$\alpha$ from its default value  $\alpha=1$ to $\alpha=4$.
+
 
 ```{code-cell} ipython3
 # Increase c to 100
@@ -1415,20 +1487,10 @@ for c in [10, 100]:
     generate_param_table(clq)
     plot_ramsey_MPE(clq)
 ```
+The above panels for an $\alpha = 4$ setting indicate that $\alpha$ and $c$ affect outcomes 
+in interesting ways. 
 
-We find an interaction between $c$ and $\alpha$.
-
-To Tom: Dear Tom, Could you please add some explanations using the decay rate idea here?
-
-Next we show the changes when $c$ moves towards 0.
-
-```{code-cell} ipython3
-# Decrease c towards 0
-for c in c_limits:
-    clq = ChangLQ(β=0.85, c=c)
-    generate_param_table(clq)
-    plot_ramsey_MPE(clq)
-```
+We leave it to the reader to explore consequences of other constellation of parameter values.
 
 ### Time Inconsistency of Ramsey Plan
 
@@ -1444,9 +1506,7 @@ is a symptom of time inconsistency.
   past utilities and to reoptimize at date $t \geq 1$ would, if allowed, want
   to deviate from a Ramsey plan.
 
-**Note:** A modified Ramsey plan constructed under the restriction that
-$\mu_t$ must be constant over time is time consistent (see
-$\mu^{CR}$ and $\theta^{CR}$ in the above graphs).
+**Note:** A constrained-to-constant-$\mu$  Ramsey plan  is  time consistent by construction. So is a Markov perfect plan.
 
 ### Implausibility of Ramsey Plan 
 
