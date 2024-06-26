@@ -29,13 +29,6 @@ kernelspec:
 :depth: 2
 ```
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
-
-```{code-cell} ipython3
-:tags: [hide-output]
-
-!pip install --upgrade quantecon
-```
 
 ## Overview
 
@@ -76,6 +69,10 @@ linear-quadratic discounted dynamic programming to compute an optimal government
 plan under each of our timing protocols. 
 
 
+
+
+
+
 We'll start with some imports:
 
 ```{code-cell} ipython3
@@ -87,9 +84,7 @@ import pandas as pd
 from IPython.display import display, Math
 ```
 
-## Model Components
-
-To Tom: Could you please add a glossary of symbols? Thanks so much!
+## Model components
 
 There is no uncertainty.
 
@@ -115,7 +110,7 @@ Equation {eq}`eq_old1` asserts that the demand for real balances is inversely
 related to the public's expected rate of inflation, which  equals
 the actual rate of inflation because there is no uncertainty here.
 
-(When there is no uncertainty, an assumption of **rational expectations** implies **perfect foresight**).
+(When there is no uncertainty, an assumption of **rational expectations** that becomes equivalent to  **perfect foresight**).
 
 (See {cite}`Sargent77hyper` for a rational expectations version of the model when there is uncertainty.)
 
@@ -204,7 +199,7 @@ We use  form {eq}`eq_old4` because we want to apply an approach described in  ou
 
 Notice that $\frac{1+\alpha}{\alpha} > 1$ is an eigenvalue of transition matrix $A$ that threatens to destabilize the state-space system. 
 
-The Ramsey planner will choose  a decision rule for $\mu_t$ that succeeds in stabilizing  the system. 
+The Ramsey planner will design   a decision rule for $\mu_t$ that  stabilizes  the system. 
 
 The  government  values  a representative household's utility of real balances at time $t$ according to the utility function
 
@@ -214,18 +209,25 @@ The  government  values  a representative household's utility of real balances a
 U(m_t - p_t) = u_0 + u_1 (m_t - p_t) - \frac{u_2}{2} (m_t - p_t)^2, \quad u_0 > 0, u_1 > 0, u_2 > 0
 ```
 
-The "bliss level" of real balances is  $\frac{u_1}{u_2}$.
+The money demand function {eq}`eq_old1` and the utility function {eq}`eq_old5` imply that 
 
-## Friedman's Optimal Rate of Deflation
+$$
+U(-\alpha \theta_t) = u_1 + u_2 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
+$$ (eq_old5a)
 
-The money demand function {eq}`eq_old1` and the utility function {eq}`eq_old5`
-imply that the  inflation rate $\theta_t$ that maximizes {eq}`eq_old5` is 
+The "bliss level" of real balances is  $\frac{u_1}{u_2}$ and the inflation rate that attains
+it is $-\frac{u_1}{u_2 \alpha}$.
+
+## Friedman's optimal rate of deflation
+
+According to {eq}`eq_old5a`, the "bliss level" of real balances is  $\frac{u_1}{u_2}$ and the inflation rate that attains it is
+
 
 $$
 \theta_t = \theta^* = -\frac{u_1}{u_2 \alpha}
 $$ (eq:Friedmantheta)
 
-According to Milton Friedman, the government should withdraw and destroy money at a rate 
+Milton Friedman recommended that  the government  withdraw and destroy money at a rate 
 that implies an inflation rate given by  {eq}`eq:Friedmantheta`.
 
 In our setting, that could be accomplished by setting 
@@ -241,7 +243,7 @@ To deduce this recommendation, Milton Friedman assumed that the taxes that gover
 
   - for example, the government imposes lump sum taxes that distort no decisions by private agents
 
-## Calvo's Perturbation of Optimal Deflation Rate
+## Calvo's perturbation of optimal deflation rate
 
 The starting point of Calvo {cite}`Calvo1978` and  Chang {cite}`chang1998credible`
 is that such lump sum taxes are not available.
@@ -345,7 +347,7 @@ A theory of government
 decisions will  make $\vec \mu$ endogenous, i.e., a theoretical **output** instead of an **input**.
 
 
-## Intertemporal Structure 
+## Intertemporal structure 
 
 Criterion function {eq}`eq_old7` and the constraint system {eq}`eq_old4` exhibit the following
 structure:
@@ -366,7 +368,7 @@ We'll  study outcomes under a Ramsey timing protocol.
 
 We'll also study outcomes under other timing protocols.
 
-## Four Timing Protocols
+## Four timing protocols
 
 We consider four models of government policy making that  differ in
 
@@ -421,7 +423,7 @@ We'll discuss that topic later in this lecture.
 
 We'll begin with the timing protocol associated with a Ramsey plan.
 
-## A Ramsey Planner
+## A Ramsey planner
 
 Here  we consider a Ramsey planner that  chooses
 $\{\mu_t, \theta_t\}_{t=0}^\infty$ to maximize {eq}`eq_old7`
@@ -584,7 +586,7 @@ $$
 \theta_0 = \theta_0^R = - \frac{P_{21}}{P_{22}}
 $$
 
-### Representation of Ramsey Plan
+### Representation of Ramsey plan
 
 The preceding calculations indicate that we can represent a Ramsey plan
 $\vec \mu$ recursively with the following system created in the spirit of Chang {cite}`chang1998credible`:
@@ -652,7 +654,7 @@ Variation of  $ \vec \mu^R, \vec \theta^R, \vec v^R $ over time  are  symptoms o
   equation {eq}`eq_old3`.
 
 
-### Digression on Timeless Perspective
+### Digression on timeless perspective
 
 As our subsequent calculations will verify, $ \vec \mu^R, \vec \theta^R, \vec v^R $ are each monotone sequences that are bounded below and converge from above  to limiting values.  
 
@@ -678,7 +680,7 @@ That the same variable $\theta_t$ takes on these multiple roles brings insights 
   commitment and forward guidance, about whether the government  follows  or   leads the market, and
 about dynamic or time inconsistency.
 
-### Time Inconsistency
+### Time inconsistency
 
 As discussed in {doc}`Stackelberg problems <dyn_stack>` and {doc}`Optimal taxation with state-contingent debt <opt_tax_recur>`, a continuation Ramsey plan is not a Ramsey plan.
 
@@ -690,7 +692,7 @@ that, relative to a Ramsey plan,  alter either
 - the timing protocol and/or
 - assumptions about how government decision makers think their decisions affect the representative agent's beliefs about future government decisions
 
-## Constrained-to-Constant-Growth-Rate Ramsey Plan
+## Constrained-to-constant-growth-rate Ramsey plan
 
 We now describe a  model in which we restrict the Ramsey planner's choice set.
 
@@ -737,7 +739,7 @@ $$ (eq:vcrformula)
 government in order eventually to highlight the   time-variation of
 $\mu_t$   that is a telltale sign of a Ramsey plan's  **time inconsistency**.
 
-## Markov Perfect Governments
+## Markov perfect governments
 
 We now describe yet another timing protocol.
 
@@ -836,7 +838,7 @@ Under the  Markov perfect timing protocol
  * a government takes $\bar \mu$ as given when it chooses $\mu_t$
  * we equate $\mu_t = \mu$ only **after** we have computed a time $t$ government's first-order condition for $\mu_t$.
 
-## Outcomes under Three Timing Protocols
+## Outcomes under three timing protocols
 
 We  want to compare outcome sequences  $\{ \theta_t,\mu_t \}$ under three timing protocols associated with 
 
@@ -1492,7 +1494,7 @@ in interesting ways.
 
 We leave it to the reader to explore consequences of other constellation of parameter values.
 
-### Time Inconsistency of Ramsey Plan
+### Time inconsistency of Ramsey plan
 
 The variation over time in $\vec \mu$ chosen by the Ramsey planner
 is a symptom of time inconsistency.
@@ -1508,7 +1510,7 @@ is a symptom of time inconsistency.
 
 **Note:** A constrained-to-constant-$\mu$  Ramsey plan  is  time consistent by construction. So is a Markov perfect plan.
 
-### Implausibility of Ramsey Plan 
+### Implausibility of Ramsey plan 
 
 In settings in which governments actually choose sequentially, many economists
 regard a time inconsistent plan as implausible because of the incentives to
@@ -1523,7 +1525,7 @@ economists.
 
 The *no incentive to deviate from the plan* property is what makes the Markov perfect equilibrium concept attractive.
 
-### Ramsey Plans Strike Back
+### Ramsey plan strikes back
 
 Research by Abreu {cite}`Abreu`,  Chari and Kehoe {cite}`chari1990sustainable`
 {cite}`stokey1989reputation`, and Stokey {cite}`Stokey1991` discovered conditions under which a Ramsey plan can be rescued from the complaint that it is not credible.
@@ -1534,7 +1536,7 @@ it that can serve to deter deviations.
 
 We turn to such theories of **sustainable plans** next.
 
-## A Fourth Model of Government Decision Making
+## A fourth model of government decision making
 
 In this model 
 
@@ -1551,7 +1553,7 @@ In this model
 - at each $t$, the government chooses $\mu_t$ to maximize
   a continuation discounted utility.
 
-### A Theory of Government Decision Making
+### Government decisions
 
 $\vec \mu$ is chosen by a sequence of government
 decision makers, one for each $t \geq 0$.
@@ -1581,7 +1583,7 @@ for each $t \geq 0$:
   expect an associated $\theta_0^A$ for $t+1$. Here $\vec \mu^A = \{\mu_j^A \}_{j=0}^\infty$ is
   an alternative government plan to be described below.
 
-### Temptation to Deviate from Plan
+### Temptation to deviate from plan
 
 The government's one-period return function $s(\theta,\mu)$
 described in equation {eq}`eq_old6` above has the property that for all
@@ -1607,7 +1609,7 @@ If the government at $t$ is to resist the temptation to raise its
 current payoff, it is only because it forecasts adverse  consequences that
 its setting of $\mu_t$ would bring for continuation  government payoffs via  alterations  in the private sector's expectations.
 
-## Sustainable or Credible Plan
+## Sustainable or credible plan
 
 We call a plan $\vec \mu$ **sustainable** or **credible** if at
 each $t \geq 0$ the government chooses to confirm private
@@ -1642,7 +1644,7 @@ But Dilip Abreu showed how to render manageable the number of plans that must be
 
 The key is an  object called a **self-enforcing** plan.
 
-### Abreu's Self-Enforcing Plan
+### Abreu's self-enforcing plan
 
 A plan $\vec \mu^A$ (here the superscipt $A$ is for Abreu) is said to be **self-enforcing** if
 
@@ -1707,7 +1709,7 @@ agents' expectation.
 We shall use a construction featured in Abreu ({cite}`Abreu`) to construct a
 self-enforcing plan with low time $0$ value.
 
-### Abreu Carrot-Stick Plan
+### Abreu's carrot-stick plan
 
 Abreu ({cite}`Abreu`) invented a way to create a self-enforcing plan with a low
 initial value.
@@ -1742,7 +1744,7 @@ $$
 
 For an appropriate $T_A$, this plan can be verified to be self-enforcing and therefore credible.
 
-### Example of Self-Enforcing Plan
+### Example of self-enforcing plan
 
 The following example implements an Abreu stick-and-carrot plan.
 
@@ -1857,7 +1859,7 @@ def check_ramsey(clq, T=1000):
 check_ramsey(clq)
 ```
 
-### Recursive Representation of a Sustainable Plan
+### Recursive representation of a sustainable plan
 
 We can represent a sustainable plan recursively by taking the
 continuation value $v_t$ as a state variable.
@@ -1888,7 +1890,7 @@ depends on whether the government at $t$ confirms the representative agent's
 expectations by setting $\mu_t$ equal to the recommended value
 $\hat \mu_t$, or whether it disappoints those expectations.
 
-## Whose Credible Plan is it?
+## Whose  plan is it?
 
 A credible government plan $\vec \mu$ plays multiple roles.
 
@@ -1904,7 +1906,7 @@ the action that it wants.
 
 An argument in favor of the *simply confirm* interpretation is gathered from staring at the key inequality {eq}`eq_old100a` that defines a credible policy.
 
-## Comparison of Equilibrium Values
+## Comparison of equilibrium values
 
 We have computed plans for
 
@@ -1942,7 +1944,7 @@ These include
 - a better plan -- possibly one that attains values associated with
   Ramsey plan -- that is not self-enforcing.
 
-## Note on Dynamic Programming Squared
+## Note on dynamic programming squared
 
 The theory deployed  in this lecture is an application of what we  nickname **dynamic programming squared**.
 
