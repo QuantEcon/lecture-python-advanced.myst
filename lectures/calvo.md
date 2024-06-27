@@ -27,10 +27,9 @@ kernelspec:
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
-```{code-cell} ipython
----
-tags: [hide-output]
----
+```{code-cell} ipython3
+:tags: [hide-output]
+
 !pip install --upgrade quantecon
 ```
 
@@ -76,6 +75,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 
 ```{code-cell} ipython3
 :tags: [hide-output]
+
 !pip install --upgrade quantecon
 ```
 
@@ -897,110 +897,114 @@ class ChangLQ:
     Class to solve LQ Chang model
     """
     def __init__(self, β, c, α=1, u0=1, u1=0.5, u2=3, T=1000, θ_n=200):
-
         # Record parameters
         self.α, self.u0, self.u1, self.u2 = α, u0, u1, u2
         self.β, self.c, self.T, self.θ_n = β, c, T, θ_n
 
-        # Solve the Ramsey Problem #
+        self.setup_LQ_matrices()
+        self.solve_LQ_problem()
+        self.compute_policy_functions()
+        self.simulate_ramsey_plan()
+        self.compute_θ_range()
+        self.compute_value_and_policy()
 
+    def setup_LQ_matrices(self):
         # LQ Matrices
-        R = -np.array([[u0,            -u1 * α / 2],
-                       [-u1 * α/2, -u2 * α**2 / 2]])
-        Q = -np.array([[-c / 2]])
-        A = np.array([[1, 0], [0, (1 + α) / α]])
-        B = np.array([[0], [-1 / α]])
+        self.R = -np.array([[self.u0, -self.u1 * self.α / 2],
+                            [-self.u1 * self.α / 2, 
+                             -self.u2 * self.α**2 / 2]])
+        self.Q = -np.array([[-self.c / 2]])
+        self.A = np.array([[1, 0], [0, (1 + self.α) / self.α]])
+        self.B = np.array([[0], [-1 / self.α]])
 
+    def solve_LQ_problem(self):
         # Solve LQ Problem (Subproblem 1)
-        lq = LQ(Q, R, A, B, beta=self.β)
+        lq = LQ(self.Q, self.R, self.A, self.B, beta=self.β)
         self.P, self.F, self.d = lq.stationary_values()
 
-
         # Compute g0, g1, and g2 (41.16)
-        [self.g0, self.g1, self.g2] = [-self.P[0, 0], 
-                                       -2 * self.P[1, 0], 
-                                       -self.P[1, 1]]
-
+        self.g0, self.g1, self.g2 = [-self.P[0, 0], 
+                                     -2 * self.P[1, 0], -self.P[1, 1]]
+        
         # Compute b0 and b1 (41.17)
         [[self.b0, self.b1]] = self.F
 
         # Compute d0 and d1 (41.18)
-        cl_mat = (A - B @ self.F) # Closed loop matrix
-        [[self.d0, self.d1]] = cl_mat[1:]
+        self.cl_mat = (self.A - self.B @ self.F)  # Closed loop matrix
+        [[self.d0, self.d1]] = self.cl_mat[1:]
 
         # Solve Subproblem 2
         self.θ_R = -self.P[0, 1] / self.P[1, 1]
-
+        
         # Find bliss level of θ
-        self.θ_B = - u1 / (u2 * α)
+        self.θ_B = -self.u1 / (self.u2 * self.α)
 
+    def compute_policy_functions(self):
         # Solve the Markov Perfect Equilibrium
-        self.μ_MPE = -u1 / ((1 + α) / α * c + α / (1 + α)
-                      * u2 + α**2 / (1 + α) * u2)
+        self.μ_MPE = -self.u1 / ((1 + self.α) / self.α * self.c 
+                                 + self.α / (1 + self.α)
+                                 * self.u2 + self.α**2 
+                                 / (1 + self.α) * self.u2)
         self.θ_MPE = self.μ_MPE
-        self.μ_CR = -α * u1 / (u2 * α**2 + c)
+        self.μ_CR = -self.α * self.u1 / (self.u2 * self.α**2 + self.c)
         self.θ_CR = self.μ_CR
 
         # Calculate value under MPE and CR economy
-        self.J_MPE  = (u0 + u1 * (-α * self.μ_MPE) - u2 / 2
-                      * (-α * self.μ_MPE)**2 - c/2 * self.μ_MPE**2) / (1 - self.β)
-        self.J_CR = (u0 + u1 * (-α * self.μ_CR) - u2/2
-                        * (-α * self.μ_CR)**2 - c / 2 * self.μ_CR**2) \
-                        / (1 - self.β)
+        self.J_θ = lambda θ_array: - np.array([1, θ_array]) \
+                                   @ self.P @ np.array([1, θ_array]).T
+        self.V_θ = lambda θ: (self.u0 + self.u1 * (-self.α * θ)
+                              - self.u2 / 2 * (-self.α * θ)**2 
+                              - self.c / 2 * θ**2) / (1 - self.β)
+        
+        self.J_MPE = self.V_θ(self.μ_MPE)
+        self.J_CR = self.V_θ(self.μ_CR)
 
+    def simulate_ramsey_plan(self):
         # Simulate Ramsey plan for large number of periods
-        θ_series = np.vstack((np.ones((1, T)), np.zeros((1, T))))
-        μ_series = np.zeros(T)
-        J_series = np.zeros(T)
+        θ_series = np.vstack((np.ones((1, self.T)), np.zeros((1, self.T))))
+        μ_series = np.zeros(self.T)
+        J_series = np.zeros(self.T)
         θ_series[1, 0] = self.θ_R
         [μ_series[0]] = -self.F.dot(θ_series[:, 0])
-        J_series[0] = -θ_series[:, 0] @ self.P @ θ_series[:, 0].T
-        
-        for i in range(1, T):
-            θ_series[:, i] = cl_mat @ θ_series[:, i-1]
+        J_series[0] = self.J_θ(θ_series[1, 0])
+
+        for i in range(1, self.T):
+            θ_series[:, i] = self.cl_mat @ θ_series[:, i-1]
             [μ_series[i]] = -self.F @ θ_series[:, i]
-            J_series[i] = -θ_series[:, i] @ self.P @ θ_series[:, i].T
+            J_series[i] = self.J_θ(θ_series[1, i])
 
         self.J_series = J_series
         self.μ_series = μ_series
         self.θ_series = θ_series
 
+    def compute_θ_range(self):
         # Find the range of θ in Ramsey plan
-        θ_LB = min(θ_series[1, :])
-        θ_LB = min(θ_LB, self.θ_B)
-        θ_UB = max(θ_series[1, :])
-        θ_UB = max(θ_UB, self.θ_MPE)
+        θ_LB = min(min(self.θ_series[1, :]), self.θ_B)
+        θ_UB = max(max(self.θ_series[1, :]), self.θ_MPE)
         θ_range = θ_UB - θ_LB
         self.θ_LB = θ_LB - 0.05 * θ_range
         self.θ_UB = θ_UB + 0.05 * θ_range
         self.θ_range = θ_range
 
+    def compute_value_and_policy(self):
         # Find value function and policy functions over range of θ
         θ_space = np.linspace(self.θ_LB, self.θ_UB, 200)
         J_space = np.zeros(200)
         CR_space = np.zeros(200)
         μ_space = np.zeros(200)
         θ_prime = np.zeros(200)
-
-        self.J_θ = lambda θ: - np.array((1, θ)) \
-                    @ self.P @ np.array((1, θ)).T
-        self.V_θ = lambda θ: (u0 + u1 * (-α * θ)
-                    - u2/2 * (-α * θ)**2 - c/2 * θ**2) \
-                    / (1 - self.β)
         
         for i in range(200):
-            J_space[i] = self.J_θ(θ_space[i])
-            [μ_space[i]] = - self.F @ np.array((1, θ_space[i]))
-            x_prime = cl_mat @ np.array((1, θ_space[i]))
+            θ_array = θ_space[i]
+            J_space[i] = self.J_θ(θ_array)
+            [μ_space[i]] = - self.F @ np.array([1, θ_array])
+            x_prime = self.cl_mat @ np.array([1, θ_array])
             θ_prime[i] = x_prime[1]
-            CR_space[i] = self.V_θ(θ_space[i])
+            CR_space[i] = self.V_θ(θ_array)
 
-        J_LB = min(J_space)
-        J_UB = max(J_space)
-        J_range = J_UB - J_LB
-        self.J_LB = J_LB - 0.05 * J_range
-        self.J_UB = J_UB + 0.05 * J_range
-        self.J_range = J_range
+        self.J_range = max(J_space) - min(J_space)
+        self.J_LB = min(J_space) - 0.05 * self.J_range
+        self.J_UB = max(J_space) + 0.05 * self.J_range
         self.J_space = J_space
         self.θ_space = θ_space
         self.μ_space = μ_space
@@ -1018,7 +1022,7 @@ The following code  plots value functions for a continuation Ramsey
 planner.
 
 ```{code-cell} ipython3
-:tags: [hide-output]
+:tags: [hide-input]
 
 def compute_θs(clq):
     """
@@ -1050,26 +1054,21 @@ def plot_policy_functions(clq):
     ax.plot(clq.θ_space, clq.θ_prime, 
             label=r"$\theta'(\theta)$", 
             lw=2, alpha=0.5, color='blue')
-    x = np.linspace(clq.θ_LB, clq.θ_UB, 5)
-    ax.plot(x, x, 'k--', lw=2, alpha=0.7)
+    ax.plot(clq.θ_space, clq.θ_space, 'k--', lw=2, alpha=0.7)  # Identity line
     
     # Plot μ function
     ax.plot(clq.θ_space, clq.μ_space, lw=2, 
             label=r"$\mu(\theta)$", 
             color='green', alpha=0.5)
 
-    θ_points, labels, θ_colors = compute_θs(clq)
-
     # Plot labels and points for μ function
-    μ_min = min(clq.μ_space)
-    μ_max = max(clq.μ_space)
+    μ_min, μ_max = min(clq.μ_space), max(clq.μ_space)
     μ_range = μ_max - μ_min
+    offset = 0.02 * μ_range
     for θ, label in zip(θ_points, labels):
-        ax.scatter(θ, μ_min - 0.02 * μ_range, 
-                   60, 'black', 'v')
-        ax.annotate(label, xy=(θ, μ_min - 0.02 * μ_range),
-                    xytext=(θ - 0.012 * clq.θ_range,
-                            μ_min + 0.01 * μ_range),
+        ax.scatter(θ, μ_min - offset, 60, color='black', marker='v')
+        ax.annotate(label, xy=(θ, μ_min - offset),
+                    xytext=(θ - 0.012 * clq.θ_range, μ_min + 0.01 * μ_range),
                     fontsize=14)
 
     # Set labels and limits
@@ -1132,18 +1131,19 @@ def plot_value_function(clq):
     plt.ylabel(r"$J(\theta)$", fontsize=18)
 
     θ_points, labels, _ = compute_θs(clq)
-    
+
     # Add points for θs
     for θ, label in zip(θ_points, labels):
-        ax.scatter(θ, clq.J_LB + 0.02 * clq.J_range, 60, 'black', 'v')
+        ax.scatter(θ, clq.J_LB + 0.02 * clq.J_range, 
+                   60, color='black', marker='v')
         ax.annotate(label,
                     xy=(θ, clq.J_LB + 0.01 * clq.J_range),
-                    xytext=(θ - 0.01 * clq.θ_range,
-                    clq.J_LB + 0.08 * clq.J_range),
+                    xytext=(θ - 0.01 * clq.θ_range, 
+                            clq.J_LB + 0.08 * clq.J_range),
                     fontsize=14)
     plt.tight_layout()
     plt.show()
-
+    
 plot_value_function(clq)
 ```
 
@@ -1203,7 +1203,7 @@ Now let's write some code to  plot outcomes under our three timing protocols.
 Then we'll use the code to explore how key parameters affect outcomes.
 
 ```{code-cell} ipython3
-:tags: [hide-output]
+:tags: [hide-input]
 
 def compare_ramsey_CR(clq, ax):
     """
@@ -1211,53 +1211,45 @@ def compare_ramsey_CR(clq, ax):
 
     Here clq is an instance of ChangLQ
     """
+    
     # Calculate CR space range and bounds
     min_CR, max_CR = min(clq.CR_space), max(clq.CR_space)
     range_CR = max_CR - min_CR
     l_CR, u_CR = min_CR - 0.05 * range_CR, max_CR + 0.05 * range_CR
-
+    
     # Set axis limits
     ax.set_xlim([clq.θ_LB, clq.θ_UB])
     ax.set_ylim([l_CR, u_CR])
 
     # Plot J(θ) and v^CR(θ)
-    J_line, = ax.plot(clq.θ_space, clq.J_space, 
-                      lw=2, label=r"$J(\theta)$")
-    CR_line, = ax.plot(clq.θ_space, clq.CR_space, 
-                      lw=2, label=r"$V^{CR}(\theta)$")
+    J_line, = ax.plot(clq.θ_space, clq.J_space, lw=2, label=r"$J(\theta)$")
+    CR_line, = ax.plot(clq.θ_space, clq.CR_space, lw=2, label=r"$V^{CR}(\theta)$")
 
     # Mark key points
     θ_points, labels, θ_colors = compute_θs(clq)
-    markers = [ax.scatter(θ, l_CR + 0.02 * range_CR, 
-                          60, marker='v', label=label, color=color)
+    markers = [ax.scatter(θ, l_CR + 0.02 * range_CR, 60, 
+                          marker='v', label=label, color=color)
                for θ, label, color in zip(θ_points, labels, θ_colors)]
-
-    v_MPE = clq.V_θ(θ_points[-1])
-    v_CR = clq.V_θ(θ_points[2])
-
+    
     # Plot lines at \theta_\infty^R, \theta^{CR}, and \theta^{MPE}
-    θ_idx = [1, 2, -1]
-    for i in θ_idx:
-        ax.axvline(θ_points[i], ymin=0.05, 
-                   lw=2, linestyle='--', 
-                   color=θ_colors[i])
-        vline = ax.axhline(y=clq.V_θ(θ_points[i]), 
-                      linestyle='dotted', 
-                      lw=1.5, color=θ_colors[i], 
-                      alpha=0.7)
-    
-    # Plot line at v^{CR}
-    vcr_line = ax.axhline(y=v_CR, linestyle='--', 
-                          lw=1.5, color='black', 
-                          alpha=0.7, label=r"$v^{CR}$")
-    
+    for i in [1, 2, -1]:
+        ax.axvline(θ_points[i], ymin=0.05, lw=2, 
+                   linestyle='--', color=θ_colors[i])
+        ax.axhline(y=clq.V_θ(θ_points[i]), linestyle='dotted', 
+                   lw=1.5, color=θ_colors[i], alpha=0.7)
+
+    v_CR = clq.V_θ(θ_points[2])
+    vcr_line = ax.axhline(y=v_CR, linestyle='--', lw=1.5, 
+                          color='black', alpha=0.7, label=r"$v^{CR}$")
+
     return [J_line, CR_line, vcr_line], markers
 
 def plt_clqs(clqs, axes):
     """
-    A helper function to plot two seperate legends on top and bottom
+    A helper function to plot two separate legends on top and bottom
 
-    Here clq is an instance of ChangLQ and axes is a list of Matplotlib axes
+    Here clqs is a list of ChangLQ instances 
+    axes is a list of Matplotlib axes
     """
     line_handles, scatter_handles = {}, {}
 
@@ -1266,22 +1258,21 @@ def plt_clqs(clqs, axes):
         ax.set_title(fr'$\beta$={clq.β}, $c$={clq.c}')
         ax.tick_params(axis='x', rotation=45)
 
-        line_handles = {line.get_label(): line for line in lines}
-        for marker in markers:
-            scatter_handles[marker.get_label()] = marker
+        line_handles.update({line.get_label(): line for line in lines})
+        scatter_handles.update({marker.get_label(): marker for marker in markers})
 
-    # Consolidate handles and labels
+    # Collect handles and labels
     line_handles = list(line_handles.values())
     scatter_handles = list(scatter_handles.values())
-    line_labels = [line.get_label() for line in line_handles]
-    scatter_labels = [marker.get_label() for marker in scatter_handles]
 
     # Create legends
     fig = plt.gcf()
-    fig.legend(handles=line_handles, labels=line_labels, 
+    fig.legend(handles=line_handles, 
+               labels=[line.get_label() for line in line_handles],
                loc='upper center', ncol=4, 
                bbox_to_anchor=(0.5, 1.1), prop={'size': 12})
-    fig.legend(handles=scatter_handles, labels=scatter_labels, 
+    fig.legend(handles=scatter_handles, 
+               labels=[marker.get_label() for marker in scatter_handles],
                loc='lower center', ncol=5, 
                bbox_to_anchor=(0.5, -0.1), prop={'size': 12})
     
@@ -1292,27 +1283,29 @@ def generate_table(clqs, dig=3):
     """
     A function to generate a table of θ values and display it using LaTeX
 
-    Here clq is an instance of ChangLQ and dig is the number of digits to round to
+    Here clqs is a list of ChangLQ instances and 
+    dig is the number of digits to round to
     """
-    
-    label_maps = {rf'$\beta={clq.β}, c={clq.c}$': [f'{round(val, dig):.3f}' for val in compute_θs(clq)[0]] for clq in clqs}
-    labels = compute_θs(clq)[1]
+
+    # Collect data
+    label_maps = {rf'$\beta={clq.β}, c={clq.c}$': 
+                  [f'{round(val, dig):.3f}' for val in compute_θs(clq)[0]] for clq in clqs}
+    labels = compute_θs(clqs[0])[1]
     data_frame = pd.DataFrame(label_maps, index=labels)
 
-    # Generate LaTeX table
-    columns = ' & '.join([f'\\text{{{col}}}' 
-                          for col in data_frame.columns])
-    rows = ' \\\\\n'.join([' & '.join([f'\\text{{{label}}}'] + [
-        f'{val}' for val in row]) for label, row in 
-        zip(data_frame.index, data_frame.values)])
-    
-    latex_code = r"""
-    \begin{array}{%s}
-    & %s \\
+    # Generate table
+    columns = ' & '.join([f'\\text{{{col}}}' for col in data_frame.columns])
+    rows = ' \\\\\n'.join(
+        [' & '.join([f'\\text{{{label}}}'] + [f'{val}' for val in row]) 
+         for label, row in zip(data_frame.index, data_frame.values)])
+
+    latex_code = rf"""
+    \begin{{array}}{{{'c' * (len(data_frame.columns) + 1)}}}
+    & {columns} \\
     \hline
-    %s
-    \end{array}
-    """ % ('c' * (len(data_frame.columns) + 1), columns, rows)
+    {rows}
+    \end{{array}}
+    """
     
     display(Math(latex_code))
 ```
@@ -1329,6 +1322,7 @@ plt_clqs(clqs, axes)
 ```{code-cell} ipython3
 generate_table(clqs, dig=3)
 ```
+
 The above graphs and table convey many useful things.
 
 The horizontal dotted lines indicate values 
@@ -1354,8 +1348,6 @@ $$
 
  But let's see what happens when we change $c$.
 
-
-
 ```{code-cell} ipython3
 # Increase c to 100
 fig, axes = plt.subplots(1, 3, figsize=(12, 5))
@@ -1379,7 +1371,6 @@ Notice that as $c $ gets larger and larger,   $\theta_\infty^R, \theta_0^R$
 and $\theta^{CR}$ all converge to $\theta^{MPE}$. 
 
 Now let's watch what happens when we drive $c$ toward zero.
-
 
 ```{code-cell} ipython3
 # Decrease c towards 0
@@ -1407,9 +1398,8 @@ After that we'll study consequences of raising $c$.
 
 We'll watch how the decay rate $d_1$ governing the dynamics of $\theta_t^R$ is affected by alterations in the parameters $\beta, c$.
 
-
 ```{code-cell} ipython3
-:tags: [hide-output]
+:tags: [hide-input]
 
 def plot_ramsey_MPE(clq, T=15):
     """
@@ -1423,47 +1413,48 @@ def plot_ramsey_MPE(clq, T=15):
     MPEs = [clq.θ_MPE, clq.μ_MPE]
     labels = [r"\theta", r"\mu"]
 
-    axes[0].hlines(clq.θ_B, 0, T-1, 'r', label=r"$\theta^*$")
-
     for ax, plot, MPE, label in zip(axes, plots, MPEs, labels):
-        ax.plot(plot, label=r"$" + label + "^R$")
-        ax.hlines(MPE, 0, T-1, 'orange', label=r"$" + label + "^{MPE}$")
-        ax.hlines(clq.μ_CR, 0, T, 'g', label=r"$" + label + "^{CR}$")
+        ax.plot(plot, label=fr"${label}^R$")
+        ax.hlines(MPE, 0, T-1, colors='orange', label=fr"${label}^{{MPE}}$")
+        if label == r"\theta":
+            ax.hlines(clq.θ_B, 0, T-1, colors='r', label=r"$\theta^*$")
+        ax.hlines(clq.μ_CR, 0, T-1, colors='g', label=fr"${label}^{{CR}}$")
         ax.set_xlabel(r"$t$", fontsize=14)
-        ax.set_ylabel(r"$" + label + "_t$", fontsize=16)
+        ax.set_ylabel(fr"${label}_t$", fontsize=16)
         ax.legend(loc='upper right')
+
     fig.suptitle(fr'$\beta$={clq.β}, $c$={clq.c}', fontsize=16)
-    plt.tight_layout(rect=[0, 0.1, 1, 1])  # Adjust layout to make space for the suptitle
+    plt.tight_layout(rect=[0, 0.1, 1, 1])
     plt.show()
 
 def generate_param_table(clq):
     """
-    Method to generate a table of parameters using LaTeX for symbolic representation.
+    Method to generate a table of parameters
 
     Here clq is an instance of ChangLQ
     """
-    param_names = [fr'$g_0$', fr'$g_1$', fr'$g_2$', 
-                   fr'$b_0$', fr'$b_1$', 
-                   fr'$d_0$', fr'$d_1$']
-    params = [clq.g0, clq.g1, clq.g2, 
-              clq.b0, clq.b1,
-              clq.d0, clq.d1]
 
+    # Collect data
+    param_names = [r'$g_0$', r'$g_1$', r'$g_2$', 
+                   r'$b_0$', r'$b_1$', r'$d_0$', r'$d_1$']
+    params = [clq.g0, clq.g1, clq.g2, 
+              clq.b0, clq.b1, clq.d0, clq.d1]
+
+    # Generate table
     label = rf'$\beta={clq.β}, c={clq.c}$'
     data_frame = pd.DataFrame({label: params}, index=param_names).round(2).T
 
-    # Generate LaTeX table
     columns = ' & '.join([f'\\text{{{col}}}' for col in data_frame.columns])
     rows = ' \\\\\n'.join([' & '.join([f'\\text{{{index}}}'] + [
         f'{val}' for val in row]) for index, row in data_frame.iterrows()])
     
-    latex_code = r"""
-    \begin{array}{%s}
-    & %s \\
+    latex_code = rf"""
+    \begin{{array}}{{{'c' * (len(data_frame.columns) + 1)}}}
+    & {columns} \\
     \hline
-    %s
-    \end{array}
-    """ % ('c' * (len(data_frame.columns) + 1), columns, rows)
+    {rows}
+    \end{{array}}
+    """
     
     display(Math(latex_code))
 ```
@@ -1477,7 +1468,7 @@ for β in β_values:
 
 Notice how $d_1$ changes as we raise the discount factor parameter $\beta$.
 
-Now let's study how increasing $c$ affects $\vec \theta, \vec \mu$ outcomes. 
+Now let's study how increasing $c$ affects $\vec \theta, \vec \mu$ outcomes.
 
 ```{code-cell} ipython3
 # Increase c to 100
@@ -1493,7 +1484,6 @@ Evidently, increasing $c$ causes the decay factor $d_1$ to increase.
 Next, let's look at consequences of increasing the demand for real balances parameter
 $\alpha$ from its default value  $\alpha=1$ to $\alpha=4$.
 
-
 ```{code-cell} ipython3
 # Increase c to 100
 for c in [10, 100]:
@@ -1501,6 +1491,7 @@ for c in [10, 100]:
     generate_param_table(clq)
     plot_ramsey_MPE(clq)
 ```
+
 The above panels for an $\alpha = 4$ setting indicate that $\alpha$ and $c$ affect outcomes 
 in interesting ways. 
 
@@ -1780,47 +1771,46 @@ beginning, i.e., $\theta^A_{t+10} =\theta^R_t \ \ \forall t \geq 0$.
 
 ```{code-cell} ipython3
 def abreu_plan(clq, T=1000, T_A=10, μ_bar=0.1, T_Plot=20):
+    """
+    Compute and plot the Abreu plan for the given ChangLQ instance.
 
+    Here clq is an instance of ChangLQ.
+    """
     # Append Ramsey μ series to stick μ series
     clq.μ_A = np.append(np.full(T_A, μ_bar), clq.μ_series[:-T_A])
 
     # Calculate implied stick θ series
-    clq.θ_A = np.zeros(T)
-    discount = np.zeros(T)
-    for t in range(T):
-        discount[t] = (clq.α / (1 + clq.α))**t
-    for t in range(T):
-        length = clq.μ_A[t:].shape[0]
-        clq.θ_A[t] = 1 / (clq.α + 1) * sum(clq.μ_A[t:] * discount[0:length])
+    discount = (clq.α / (1 + clq.α)) ** np.arange(T)
+    clq.θ_A = np.array([
+        1 / (clq.α + 1) * np.sum(clq.μ_A[t:] * discount[:T - t])
+        for t in range(T)
+    ])
 
     # Calculate utility of stick plan
-    U_A = np.zeros(T)
-    for t in range(T):
-        U_A[t] = clq.β**t \
-                 * (clq.u0 + clq.u1 * (-clq.θ_A[t])
-                 - clq.u2 / 2 * (-clq.θ_A[t])**2 
-                 - clq.c * clq.μ_A[t]**2)
+    U_A = clq.β ** np.arange(T) * (
+        clq.u0 + clq.u1 * (-clq.θ_A) - clq.u2 / 2 
+        * (-clq.θ_A) ** 2 - clq.c * clq.μ_A ** 2
+    )
 
-    clq.V_A = np.zeros(T)
-    for t in range(T):
-        clq.V_A[t] = sum(U_A[t:] / clq.β**t)
+    clq.V_A = np.array([np.sum(U_A[t:] / clq.β ** t) for t in range(T)])
 
     # Make sure Abreu plan is self-enforcing
-    clq.V_dev = np.zeros(T_Plot)
-    for t in range(T_Plot):
-        clq.V_dev[t] = (clq.u0 + clq.u1 * (-clq.θ_A[t])
-                        - clq.u2 / 2 * (-clq.θ_A[t])**2) \
-                        + clq.β * clq.V_A[0]
+    clq.V_dev = np.array([
+        (clq.u0 + clq.u1 * (-clq.θ_A[t]) - clq.u2 / 2 
+         * (-clq.θ_A[t]) ** 2) + clq.β * clq.V_A[0]
+        for t in range(T_Plot)
+    ])
 
+    # Plot the results
     fig, axes = plt.subplots(3, 1, figsize=(8, 12))
 
-    axes[2].plot(clq.V_dev[0:T_Plot], label="$V^{A, D}_t$", c="orange")
+    axes[2].plot(clq.V_dev[:T_Plot], label="$V^{A, D}_t$", c="orange")
 
     plots = [clq.θ_A, clq.μ_A, clq.V_A]
     labels = [r"$\theta_t^A$", r"$\mu_t^A$", r"$V^A_t$"]
 
     for plot, ax, label in zip(plots, axes, labels):
-        ax.plot(plot[0:T_Plot], label=label)
+        ax.plot(plot[:T_Plot], label=label)
         ax.set(xlabel="$t$", ylabel=label)
         ax.legend()
 
