@@ -23,10 +23,6 @@ kernelspec:
 
 # Two Modifications of Mean-Variance Portfolio Theory
 
-```{contents} Contents
-:depth: 2
-```
-
 ## Overview
 
 This lecture describes extensions to the classical mean-variance portfolio theory summarized in our lecture [Elementary Asset Pricing Theory](https://python-advanced.quantecon.org/asset_pricing_lph.html).
@@ -87,7 +83,6 @@ Let's start with some imports:
 import numpy as np
 import scipy.stats as stat
 import matplotlib.pyplot as plt
-%matplotlib inline
 from ipywidgets import interact, FloatSlider
 ```
 

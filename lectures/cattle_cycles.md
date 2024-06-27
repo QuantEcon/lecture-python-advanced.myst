@@ -23,10 +23,6 @@ kernelspec:
 
 # Cattle Cycles
 
-```{contents} Contents
-:depth: 2
-```
-
 This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
 {cite}`HS2013` class of models described in detail in {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
 
@@ -53,7 +49,6 @@ import matplotlib.pyplot as plt
 from collections import namedtuple
 from quantecon import DLE
 from math import sqrt
-%matplotlib inline
 ```
 
 ## The Model

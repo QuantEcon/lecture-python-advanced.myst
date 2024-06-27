@@ -23,10 +23,6 @@ kernelspec:
 
 # How to Pay for a War: Part 1
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture will deploy quantecon:
 
 ```{code-cell} ipython
@@ -44,7 +40,6 @@ Let's start with some standard imports:
 import quantecon as qe
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 ```
 
 This lecture uses the method of   **Markov jump linear quadratic dynamic programming** that is described in lecture

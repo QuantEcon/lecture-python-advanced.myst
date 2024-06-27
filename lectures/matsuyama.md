@@ -20,10 +20,6 @@ kernelspec:
 
 # Globalization and Cycles
 
-```{contents} Contents
-:depth: 2
-```
-
 ## Overview
 
 In this lecture, we review the paper [Globalization and Synchronization of Innovation Cycles](http://www.centreformacroeconomics.ac.uk/Discussion-Papers/2015/CFMDP2015-27-Paper.pdf) by [Kiminori Matsuyama](http://faculty.wcas.northwestern.edu/~kmatsu/), [Laura Gardini](http://www.mdef.it/index.php?id=32) and [Iryna Sushko](http://irynasushko.altervista.org/).
@@ -45,7 +41,6 @@ Let's start with some imports:
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 from numba import jit
 from ipywidgets import interact
 ```

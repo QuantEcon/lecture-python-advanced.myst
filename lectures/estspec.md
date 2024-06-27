@@ -18,13 +18,9 @@ kernelspec:
 </div>
 ```
 
-# Estimation of {index}`Spectra <single: Spectra>`
+# Estimation of Spectra
 
 ```{index} single: Spectra; Estimation
-```
-
-```{contents} Contents
-:depth: 2
 ```
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
@@ -59,7 +55,6 @@ Let's start with some standard imports:
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 from quantecon import ARMA, periodogram, ar_periodogram
 ```
 

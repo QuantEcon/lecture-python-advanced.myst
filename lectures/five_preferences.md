@@ -36,8 +36,8 @@ The preference orderings are
 This labeling  scheme is taken from {cite}`HansenSargent2001`.
 
 
-Constraint and multiplier preferences express  aversion to not knowing a unique probabiity distribution
-that desribes random outcomes.
+Constraint and multiplier preferences express  aversion to not knowing a unique probability distribution
+that describes random outcomes.
 
 Expected utility, risk-sensitive, and ex post Bayesian expected utility preferences all attribute a unique known
 probability distribution to a decision maker.
@@ -59,7 +59,6 @@ We begin with some that we'll use to create some graphs.
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-plt.rcParams["figure.figsize"] = (11, 5)
 from matplotlib import rc, cm
 from mpl_toolkits.mplot3d import Axes3D
 from scipy import optimize, stats
@@ -73,7 +72,6 @@ from numba import njit
 :tags: [hide-input]
 
 # Plotting parameters
-%matplotlib inline
 %config InlineBackend.figure_format='retina'
 
 plt.rc('text', usetex=True)

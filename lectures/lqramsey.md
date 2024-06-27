@@ -18,13 +18,9 @@ kernelspec:
 </div>
 ```
 
-# {index}`Optimal Taxation in an LQ Economy <single: Optimal Taxation in an LQ Economy>`
+# Optimal Taxation in an LQ Economy
 
 ```{index} single: Ramsey Problem; Optimal Taxation
-```
-
-```{contents} Contents
-:depth: 2
 ```
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
@@ -81,7 +77,6 @@ We'll need the following imports:
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 from numpy import sqrt, eye, zeros, cumsum
 from numpy.random import randn
 import scipy.linalg

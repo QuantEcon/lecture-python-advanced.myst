@@ -23,10 +23,6 @@ kernelspec:
 
 # Growth in Dynamic Linear Economies
 
-```{contents} Contents
-:depth: 2
-```
-
 This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
 {cite}`HS2013` class of models described in detail in {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
 
@@ -52,7 +48,6 @@ We require the following imports
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 from quantecon import DLE
 ```
 

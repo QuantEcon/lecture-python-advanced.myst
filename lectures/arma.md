@@ -20,10 +20,6 @@ kernelspec:
 
 # {index}`Covariance Stationary Processes <single: Covariance Stationary Processes>`
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 ```{code-cell} ipython
@@ -95,7 +91,6 @@ Let's start with some imports:
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 import quantecon as qe
 ```
 
