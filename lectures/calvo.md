@@ -68,10 +68,12 @@ We  specify model fundamentals  in  ways that allow us to use
 linear-quadratic discounted dynamic programming to compute an optimal government
 plan under each of our timing protocols. 
 
+In addition to what's in Anaconda, this lecture will need the following libraries:
 
-
-
-
+```{code-cell} ipython3
+:tags: [hide-output]
+!pip install --upgrade quantecon
+```
 
 We'll start with some imports:
 
@@ -1012,6 +1014,8 @@ The following code  plots value functions for a continuation Ramsey
 planner.
 
 ```{code-cell} ipython3
+:tags: [hide-output]
+
 def compute_θs(clq):
     """
     Method to compute θ and assign corresponding labels and colors 
@@ -1195,6 +1199,8 @@ Now let's write some code to  plot outcomes under our three timing protocols.
 Then we'll use the code to explore how key parameters affect outcomes.
 
 ```{code-cell} ipython3
+:tags: [hide-output]
+
 def compare_ramsey_CR(clq, ax):
     """
     Method to compare values of Ramsey and Constrained Ramsey (CR)
@@ -1399,6 +1405,8 @@ We'll watch how the decay rate $d_1$ governing the dynamics of $\theta_t^R$ is a
 
 
 ```{code-cell} ipython3
+:tags: [hide-output]
+
 def plot_ramsey_MPE(clq, T=15):
     """
     Method to plot Ramsey plan against Markov Perfect Equilibrium
