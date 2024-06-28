@@ -986,30 +986,23 @@ class ChangLQ:
         self.θ_UB = θ_UB + 0.05 * θ_range
         self.θ_range = θ_range
 
-    def compute_value_and_policy(self):
-        # Find value function and policy functions over range of θ
-        θ_space = np.linspace(self.θ_LB, self.θ_UB, 200)
-        J_space = np.zeros(200)
-        CR_space = np.zeros(200)
-        μ_space = np.zeros(200)
-        θ_prime = np.zeros(200)
+    def compute_value_and_policy(self):        
+        # Create the θ_space
+        self.θ_space = np.linspace(self.θ_LB, self.θ_UB, 200)
         
-        for i in range(200):
-            θ_array = θ_space[i]
-            J_space[i] = self.J_θ(θ_array)
-            [μ_space[i]] = - self.F @ np.array([1, θ_array])
-            x_prime = self.cl_mat @ np.array([1, θ_array])
-            θ_prime[i] = x_prime[1]
-            CR_space[i] = self.V_θ(θ_array)
-
-        self.J_range = max(J_space) - min(J_space)
-        self.J_LB = min(J_space) - 0.05 * self.J_range
-        self.J_UB = max(J_space) + 0.05 * self.J_range
-        self.J_space = J_space
-        self.θ_space = θ_space
-        self.μ_space = μ_space
-        self.θ_prime = θ_prime
-        self.CR_space = CR_space
+        # Find value function and policy functions over range of θ
+        self.J_space = np.array([self.J_θ(θ) for θ in self.θ_space])
+        self.μ_space = -self.F @ np.vstack((np.ones(200), self.θ_space))
+        x_prime = self.cl_mat @ np.vstack((np.ones(200), self.θ_space))
+        self.θ_prime = x_prime[1, :]
+        self.CR_space = np.array([self.V_θ(θ) for θ in self.θ_space])
+        
+        self.μ_space = self.μ_space[0, :]
+        
+        # Calculate J_range, J_LB, and J_UB
+        self.J_range = np.ptp(self.J_space)
+        self.J_LB = np.min(self.J_space) - 0.05 * self.J_range
+        self.J_UB = np.max(self.J_space) + 0.05 * self.J_range
 ```
 
 Let's create an instance of ChangLQ with the following parameters:
@@ -1114,6 +1107,8 @@ The figure also plots the limiting value $\theta_\infty^R$ to which  the promise
 In addition, the figure indicates an MPE inflation rate $\theta^{CR}$ and a bliss inflation $\theta^*$.
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 def plot_value_function(clq):
     """
     Method to plot the value function over the relevant range of θ
@@ -1770,6 +1765,8 @@ associated with this **Abreu plan** starts the Ramsey plan from its
 beginning, i.e., $\theta^A_{t+10} =\theta^R_t \ \ \forall t \geq 0$.
 
 ```{code-cell} ipython3
+:tags: [hide-input]
+
 def abreu_plan(clq, T=1000, T_A=10, μ_bar=0.1, T_Plot=20):
     """
     Compute and plot the Abreu plan for the given ChangLQ instance.
