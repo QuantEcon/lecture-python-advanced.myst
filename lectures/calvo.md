@@ -245,7 +245,7 @@ $$ (eq:Friedmanrule)
 
 where $\theta^*$ is given by equation {eq}`eq:Friedmantheta`.
 
-To deduce this recommendation, Milton Friedman assumed that the taxes that government must impose in order acquire money at rate $\mu_t$ do not distort economic decisions.
+To deduce this recommendation, Milton Friedman assumed that the taxes that government must impose in order to acquire money at rate $\mu_t$ do not distort economic decisions.
 
   - for example, the government imposes lump sum taxes that distort no decisions by private agents
 
@@ -258,7 +258,7 @@ Instead, the government acquires money by levying taxes that distort decisions a
 
 In the models of  Calvo {cite}`Calvo1978` and  Chang {cite}`chang1998credible`, the government takes those costs tax-distortion costs into account.
 
-It balances the costs of imposing the distorting taxes needed to acquire the money that it destroys in order to generate deflation against the benefits that expected deflation generates by raising the representative households holdings of real balances.  
+It balances the costs of imposing the distorting taxes needed to acquire the money that it destroys in order to generate deflation against the benefits that expected deflation generates by raising the representative households' holdings of real balances.  
 
 Let's see how the government does that in our version of the models of  Calvo {cite}`Calvo1978` and  Chang {cite}`chang1998credible`. 
 
@@ -305,7 +305,7 @@ We can represent the dependence of  $v_0$ on $(\vec \theta, \vec \mu)$ recursive
 v_t = - s(\theta_t, \mu_t) + \beta v_{t+1}
 ```
 
-It is useful to evaluate {eq}`eq_old8` under a time invariant money growth rate $\mu_t = \bar \mu$
+It is useful to evaluate {eq}`eq_old8` under a time-invariant money growth rate $\mu_t = \bar \mu$
 that according to equation {eq}`eq_old3` would bring forth a constant inflation rate equal to $\bar \mu$.  
 
 Under that policy,
@@ -350,7 +350,7 @@ sequence $\vec \mu \in L^2$.
 At this point $\vec \mu \in L^2$ is an arbitrary exogenous policy.
 
 A theory of government
-decisions will  make $\vec \mu$ endogenous, i.e., a theoretical **output** instead of an **input**.
+decisions will  make $\vec \mu$ endogenous, i.e., a theoretical *output* instead of an *input*.
 
 
 ## Intertemporal structure 
@@ -378,10 +378,10 @@ We'll also study outcomes under other timing protocols.
 
 We consider four models of government policy making that  differ in
 
-- **what** a  policymaker chooses, either a sequence
+- *what* a  policymaker chooses, either a sequence
   $\vec \mu$ or just   $\mu_t$ in a single period $t$.
-- **when** a  policymaker chooses, either once and for all at time $0$, or at some time or times  $t \geq 0$.
-- what a policymaker **assumes** about how its choice of $\mu_t$
+- *when* a  policymaker chooses, either once and for all at time $0$, or at some time or times  $t \geq 0$.
+- what a policymaker *assumes* about how its choice of $\mu_t$
   affects the representative  agent's expectations about earlier and later
   inflation rates.
 
@@ -416,9 +416,9 @@ The models are distinguished by their having  either
 
 The first model describes a **Ramsey plan** chosen by a **Ramsey planner**
 
-The second model describes a **Ramsey plan** chosen by a **Ramsey planner constrained to choose a time-invariant $\mu_t$**
+The second model describes a **Ramsey plan** chosen by a *Ramsey planner constrained to choose a time-invariant $\mu_t$*
 
-The third model deescribes a **Markov perfect equilibrium**
+The third model describes a **Markov perfect equilibrium**
 
 The fourth model describes a **credible government policy** also known as a **sustainable plan**
 
@@ -617,7 +617,7 @@ $\{\theta_t\}_{t=0}^\infty$ as a sequence of
 synthetic **promised inflation rates**.
 
 For some purposes, we can think of these promised inflation rates  just as computational devices for
-generating a sequence $\vec\mu$ of money growth rates that when  substituted into equation {eq}`eq_old3` generate  **actual** rates of inflation.
+generating a sequence $\vec\mu$ of money growth rates that when  substituted into equation {eq}`eq_old3` generate  *actual* rates of inflation.
 
 It can be verified that if we substitute a plan
 $\vec \mu = \{\mu_t\}_{t=0}^\infty$ that satisfies these equations
@@ -703,11 +703,11 @@ that, relative to a Ramsey plan,  alter either
 We now describe a  model in which we restrict the Ramsey planner's choice set.
 
 Instead of choosing a sequence of money growth rates $\vec \mu \in {\bf R}^2$, we restrict the 
-government to choose a time invariant money growth rate $\bar \mu$. 
+government to choose a time-invariant money growth rate $\bar \mu$. 
 
 We created this version of the model  to highlight an aspect of a Ramsey plan associated with its time inconsistency, namely, the feature that optimal settings of the  policy instrument vary over time.
 
-Thus, instead of allowing the government at time $0$ to choose a different $\mu_t$ for each $t \geq 0$, we now assume that a  government at time $0$ once and for all  chooses a **constant** sequence $\mu_t = \bar \mu$ for all $t \geq 0$.
+Thus, instead of allowing the government at time $0$ to choose a different $\mu_t$ for each $t \geq 0$, we now assume that a  government at time $0$ once and for all  chooses a *constant* sequence $\mu_t = \bar \mu$ for all $t \geq 0$.
 
 We assume that the government knows the perfect foresight outcome implied by equation {eq}`eq_old2` that $\theta_t = \bar  \mu$ when $\mu_t = \bar \mu$ for all $t \geq 0$.
 
@@ -734,7 +734,7 @@ $$
 \mu^{CR} = - \frac{\alpha u_1}{\alpha^2 u_2 + c }
 $$ (eq:muRamseyconstrained)
 
-The optimal value attained by a **constrained to constant $\mu$** Ramsey planner is
+The optimal value attained by a *constrained to constant $\mu$* Ramsey planner is
 
 $$
 V^{CR}(\mu^{CR}) = v^{CR} = (1-\beta)^{-1} \left[ U (-\alpha \mu^{CR}) - \frac{c}{2} (\mu^{CR})^2 \right]
@@ -749,7 +749,7 @@ $\mu_t$   that is a telltale sign of a Ramsey plan's  **time inconsistency**.
 
 We now describe yet another timing protocol.
 
-In this one, there is  sequence of government policymakers.
+In this one, there is a sequence of government policymakers.
 
 A time $t$ government chooses $\mu_t$ and expects all future governments to set
 $\mu_{t+j} = \bar \mu$.
@@ -842,7 +842,7 @@ where $V(\cdot)$ is given by formula {eq}`eq:barvdef`.
 Under the  Markov perfect timing protocol 
 
  * a government takes $\bar \mu$ as given when it chooses $\mu_t$
- * we equate $\mu_t = \mu$ only **after** we have computed a time $t$ government's first-order condition for $\mu_t$.
+ * we equate $\mu_t = \mu$ only *after* we have computed a time $t$ government's first-order condition for $\mu_t$.
 
 ## Outcomes under three timing protocols
 
@@ -850,7 +850,7 @@ We  want to compare outcome sequences  $\{ \theta_t,\mu_t \}$ under three timing
 
   * a standard Ramsey plan with its time varying $\{ \theta_t,\mu_t \}$ sequences 
   * a Markov perfect equilibrium 
-  * our nonstandard  Ramsey plan in which the planner is restricted to choose a time invariant  $\mu_t = \mu$ for all $t \geq 0$.
+  * our nonstandard  Ramsey plan in which the planner is restricted to choose a time-invariant  $\mu_t = \mu$ for all $t \geq 0$.
 
 We have computed closed form formulas for several of these outcomes, which we find it convenient to repeat here.
 
@@ -885,7 +885,7 @@ Proposition 1 draws attention to how   a positive tax distortion parameter $c$ a
 We'll compute 
 
  *   $(\vec \theta^R, \vec \mu^R)$:  ordinary time-varying Ramsey sequences
- *   $(\theta^{MPE} = \mu^{MPE})$:  Markov perfect equilibirum (MPE) fixed values
+ *   $(\theta^{MPE} = \mu^{MPE})$:  Markov perfect equilibrium (MPE) fixed values
  *   $(\theta^{CR} = \mu^{CR})$:  fixed values associated with a constrained to time-invariant $\mu$ Ramsey plan
  *   $\theta^*$:   bliss level of inflation prescribed by a Friedman rule
 
@@ -936,7 +936,7 @@ class ChangLQ:
         # Solve Subproblem 2
         self.θ_R = -self.P[0, 1] / self.P[1, 1]
         
-        # Find bliss level of θ
+        # Find the bliss level of θ
         self.θ_B = -self.u1 / (self.u2 * self.α)
 
     def compute_policy_functions(self):
@@ -1079,7 +1079,7 @@ def plot_policy_functions(clq):
 plot_policy_functions(clq)
 ```
 
-The dotted line in the above graph is the 45 degree line.
+The dotted line in the above graph is the 45-degree line.
 
 The blue line shows  the choice of $\theta_{t+1} = \theta'$ chosen by a
 continuation Ramsey planner who inherits $\theta_t = \theta$.
@@ -1089,12 +1089,12 @@ $\mu_t = \mu$ as a function of an inherited $\theta_t = \theta$.
 
 Dynamics under the Ramsey plan are confined to $\theta \in \left[ \theta_\infty^R, \theta_0^R \right]$.  
 
-The blue and green lines intersect each other and the 45 degree line at $\theta =\theta_{\infty}^R$.
+The blue and green lines intersect each other and the 45-degree line at $\theta =\theta_{\infty}^R$.
 
 Notice that for  $\theta \in \left(\theta_\infty^R, \theta_0^R \right]$
 
-  * $\theta' < \theta$  because the blue line is below the 45 degree line
-  * $\mu > \theta $ because the green line is above the 45 degree line
+  * $\theta' < \theta$  because the blue line is below the 45-degree line
+  * $\mu > \theta $ because the green line is above the 45-degree line
 
 It follows that under the Ramsey plan  $\{\theta_t\}$ and $\{\mu_t\}$ both converge monotonically from above to $\theta_\infty^R$. 
 
@@ -1145,11 +1145,11 @@ plot_value_function(clq)
 In the above graph, notice that $\theta^* < \theta_\infty^R < \theta^{CR} < \theta_0^R < \theta^{MPE} .$
 
 In some subsequent calculations, we'll use our Python code to study how gaps between
-these outcome varies depend on parameters such as the cost parameter $c$ and the discount factor $\beta$. 
+these outcome vary depending on parameters such as the cost parameter $c$ and the discount factor $\beta$. 
 
 ### Ramsey planner's value function 
 
-The next code  plots the Ramsey Planner's value function $J(\theta)$  as well the value function
+The next code  plots the Ramsey Planner's value function $J(\theta)$  as well as the value function
 of a constrained  Ramsey planner who  must choose a constant
 $\mu$.
 
@@ -1321,7 +1321,7 @@ generate_table(clqs, dig=3)
 The above graphs and table convey many useful things.
 
 The horizontal dotted lines indicate values 
- $V(\mu_\infty^R), V(\mu^{CR}), V(\mu^{MPE}) $ of time invariant money
+ $V(\mu_\infty^R), V(\mu^{CR}), V(\mu^{MPE}) $ of time-invariant money
 growth rates $\mu_\infty^R, \mu^{CR}$ and $\mu_{MPE}$, respectfully. 
 
 Notice how $J(\theta)$ and $V^{CR}(\theta)$ are tangent and increasing at
@@ -1381,7 +1381,7 @@ and $\theta^{MPE}$ all approach $\theta^*$.
 
 This makes sense, because it was by adding costs of distorting taxes that Calvo {cite}`Calvo1978` drove a wedge between Friedman's optimal deflation rate and the inflation rates chosen by a Ramsey planner. 
 
-The following code  plots sequences  $\vec \mu$ and $\vec theta$ prescribed by a  Ramsey plan as well as the constant levels $\mu^{CR}$ and $\mu^{MPE}$.
+The following code  plots sequences  $\vec \mu$ and $\vec \theta$ prescribed by a Ramsey plan as well as the constant levels $\mu^{CR}$ and $\mu^{MPE}$.
 
 The following graphs report values for the value function parameters $g_0, g_1, g_2$,
 and the Ramsey policy function parameters $b_0, b_1, d_0, d_1$ associated with the indicated
@@ -1490,7 +1490,7 @@ for c in [10, 100]:
 The above panels for an $\alpha = 4$ setting indicate that $\alpha$ and $c$ affect outcomes 
 in interesting ways. 
 
-We leave it to the reader to explore consequences of other constellation of parameter values.
+We leave it to the reader to explore consequences of other constellations of parameter values.
 
 ### Time inconsistency of Ramsey plan
 
@@ -1506,7 +1506,9 @@ is a symptom of time inconsistency.
   past utilities and to reoptimize at date $t \geq 1$ would, if allowed, want
   to deviate from a Ramsey plan.
 
-**Note:** A constrained-to-constant-$\mu$  Ramsey plan  is  time consistent by construction. So is a Markov perfect plan.
+```{note}
+A constrained-to-constant-$\mu$  Ramsey plan  is  time consistent by construction. So is a Markov perfect plan.
+```
 
 ### Implausibility of Ramsey plan 
 
@@ -1514,7 +1516,7 @@ In settings in which governments actually choose sequentially, many economists
 regard a time inconsistent plan as implausible because of the incentives to
 deviate that are presented  along the plan.
 
-A way to state  this reaction   is to say that a Ramsey plan is not credible because there persist incentives for policymakers to deviate from it.
+A way to state  this reaction   is to say that a Ramsey plan is not credible because there are persistent incentives for policymakers to deviate from it.
 
 For that reason, the Markov perfect equilibrium concept attracts many
 economists.
@@ -1529,10 +1531,10 @@ Research by Abreu {cite}`Abreu`,  Chari and Kehoe {cite}`chari1990sustainable`
 {cite}`stokey1989reputation`, and Stokey {cite}`Stokey1991` discovered conditions under which a Ramsey plan can be rescued from the complaint that it is not credible.
 
 They  accomplished this by expanding the
-description of a plan to include expectations about **adverse consequences** of deviating from
+description of a plan to include expectations about *adverse consequences* of deviating from
 it that can serve to deter deviations.
 
-We turn to such theories of **sustainable plans** next.
+We turn to such theories of *sustainable plans* next.
 
 ## A fourth model of government decision making
 
@@ -1543,7 +1545,7 @@ In this model
 - instead it sets $\mu_t$ at time $t$ 
 - the representative agent's forecasts of
   $\{\mu_{t+j+1}, \theta_{t+j+1}\}_{j=0}^\infty$ respond to
-  whether the government at $t$ **confirms** or **disappoints**
+  whether the government at $t$ *confirms* or *disappoints*
   its forecasts of $\mu_t$ brought into period $t$ from
   period $t-1$.
 - the government at each time $t$ understands how the representative agent's
@@ -1568,12 +1570,12 @@ for each $t \geq 0$:
   $t$.
 - Given those expectations and an associated $\theta_t = \tilde \theta_t$, at
   $t$ a government is free to set $\mu_t \in {\bf R}$.
-- If the government at $t$ **confirms** the representative agent's
+- If the government at $t$ *confirms* the representative agent's
   expectations by setting $\mu_t = \tilde \mu_t$ at time
   $t$, private agents expect the continuation government policy
   $\{\tilde \mu_{t+j+1}\}_{j=0}^\infty$ and therefore bring
   expectation $\tilde \theta_{t+1}$ into period $t+1$.
-- If the government at $t$ **disappoints** private agents by setting
+- If the government at $t$ *disappoints* private agents by setting
   $\mu_t \neq \tilde \mu_t$, private agents expect
   $\{\mu^A_j\}_{j=0}^\infty$ as the
   continuation policy for $t+1$, i.e.,
@@ -1596,11 +1598,11 @@ government to set $\mu \neq 0$, the government could raise its
 one-period payoff by setting $\mu =0$.
 
 Disappointing private sector expectations in that way would increase the
-government's **current** payoff but would have adverse consequences for
-**subsequent** government payoffs because the private sector would alter
+government's *current* payoff but would have adverse consequences for
+*subsequent* government payoffs because the private sector would alter
 its expectations about future settings of $\mu$.
 
-The **temporary** gain constitutes the government's temptation to
+The *temporary* gain constitutes the government's temptation to
 deviate from a plan.
 
 If the government at $t$ is to resist the temptation to raise its
@@ -1614,11 +1616,11 @@ each $t \geq 0$ the government chooses to confirm private
 agents' prior expectation of its setting for $\mu_t$.
 
 The government will choose to confirm prior expectations only if the
-long-term **loss** from disappointing private sector expectations --
+long-term *loss* from disappointing private sector expectations --
 coming from the government's understanding of the way the private sector
 adjusts its  expectations in response to having its prior
 expectations at $t$ disappointed -- outweigh the short-term
-**gain** from disappointing those expectations.
+*gain* from disappointing those expectations.
 
 The theory of sustainable or credible plans assumes throughout that private sector
 expectations about what future governments will do are based on the
@@ -1626,12 +1628,12 @@ assumption that governments at times $t \geq 0$ always act to
 maximize the continuation discounted utilities that describe those
 governments' purposes.
 
-This aspect of the theory means that credible plans always come in **pairs**:
+This aspect of the theory means that credible plans always come in *pairs*:
 
 - a credible (continuation) plan to be followed if the government at
-  $t$ **confirms** private sector expectations
+  $t$ *confirms* private sector expectations
 - a credible plan to be followed if the government at $t$
-  **disappoints** private sector expectations
+  *disappoints* private sector expectations
 
 That credible plans come in pairs threaten to bring an explosion of plans to keep track of
 
@@ -1647,7 +1649,7 @@ The key is an  object called a **self-enforcing** plan.
 A plan $\vec \mu^A$ (here the superscipt $A$ is for Abreu) is said to be **self-enforcing** if
 
 - the consequence of disappointing the representative agent's expectations at time
-  $j$ is to **restart**  plan $\vec \mu^A$  at time $j+1$
+  $j$ is to *restart*  plan $\vec \mu^A$  at time $j+1$
 - the consequence of restarting the plan is sufficiently adverse that it forever deters all
   deviations from the plan
 
@@ -1692,7 +1694,7 @@ $$
 -s( \theta_j, 0) - ( - s( \theta_j, \mu_j) )  <  \beta ( v_{j+1} - v_0^A )
 $$
 
-The left side of the above inequality is the government's **gain** from deviating from the plan, while the right side is the government's **loss** from deviating
+The left side of the above inequality is the government's *gain* from deviating from the plan, while the right side is the government's *loss* from deviating
 from the plan.
 
 A government never wants to deviate from a credible plan.
@@ -1718,8 +1720,8 @@ insisting that future government decision makers set $\mu_t$ to a value yielding
 one-period utilities to the household for a long time, after which
 government  decisions thereafter  yield high one-period utilities.
 
-- Low one-period utilities early are a **stick**
-- High one-period utilities later are a **carrot**
+- Low one-period utilities early are a *stick*
+- High one-period utilities later are a *carrot*
 
 Consider a candidate plan $\vec \mu^A$ that sets
 $\mu_t^A = \bar \mu$ (a high positive
