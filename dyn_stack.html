@@ -56,19 +56,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b09b2da44b9015b4fa76ea072fa2d8f7faee5492" type="text/css" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -270,29 +270,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="stackelberg-plans">
-<h1><a class="toc-backref" href="#id4"><span class="section-number">40. </span>Stackelberg Plans</a><a class="headerlink" href="#stackelberg-plans" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#stackelberg-plans" id="id4">Stackelberg Plans</a></p>
-<ul>
-<li><p><a class="reference internal" href="#overview" id="id5">Overview</a></p></li>
-<li><p><a class="reference internal" href="#duopoly" id="id6">Duopoly</a></p></li>
-<li><p><a class="reference internal" href="#stackelberg-problem" id="id7">Stackelberg Problem</a></p></li>
-<li><p><a class="reference internal" href="#two-bellman-equations" id="id8">Two Bellman Equations</a></p></li>
-<li><p><a class="reference internal" href="#stackelberg-plan-for-duopoly" id="id9">Stackelberg Plan for Duopoly</a></p></li>
-<li><p><a class="reference internal" href="#recursive-representation-of-stackelberg-plan" id="id10">Recursive Representation of Stackelberg Plan</a></p></li>
-<li><p><a class="reference internal" href="#dynamic-programming-and-time-consistency-of-followers-problem" id="id11">Dynamic Programming and Time Consistency of Follower’s Problem</a></p></li>
-<li><p><a class="reference internal" href="#computing-stackelberg-plan" id="id12">Computing  Stackelberg Plan</a></p></li>
-<li><p><a class="reference internal" href="#time-series-for-price-and-quantities" id="id13">Time Series for Price and Quantities</a></p></li>
-<li><p><a class="reference internal" href="#time-inconsistency-of-stackelberg-plan" id="id14">Time Inconsistency of Stackelberg Plan</a></p></li>
-<li><p><a class="reference internal" href="#recursive-formulation-of-followers-problem" id="id15">Recursive Formulation of Follower’s Problem</a></p></li>
-<li><p><a class="reference internal" href="#markov-perfect-equilibrium" id="id16">Markov Perfect Equilibrium</a></p></li>
-<li><p><a class="reference internal" href="#comparing-markov-perfect-equilibrium-and-stackelberg-outcome" id="id17">Comparing Markov Perfect Equilibrium and  Stackelberg Outcome</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
+<h1><span class="section-number">40. </span>Stackelberg Plans<a class="headerlink" href="#stackelberg-plans" title="Permalink to this heading">#</a></h1>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -328,7 +306,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </details>
 </div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id5"><span class="section-number">40.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This lecture formulates and computes a plan that a <strong>Stackelberg
 leader</strong> uses to manipulate forward-looking decisions of a <strong>Stackelberg
 follower</strong> that depend on continuation sequences of decisions made once
@@ -347,14 +325,13 @@ actions of other firms that influence future prices.</p>
 <span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
 <span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">LQ</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="duopoly">
-<h2><a class="toc-backref" href="#id6"><span class="section-number">40.2. </span>Duopoly</a><a class="headerlink" href="#duopoly" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.2. </span>Duopoly<a class="headerlink" href="#duopoly" title="Permalink to this heading">#</a></h2>
 <p>Time is discrete and is indexed by <span class="math notranslate nohighlight">\(t = 0, 1, \ldots\)</span>.</p>
 <p>Two firms produce a single good whose demand is governed by the linear
 inverse demand curve</p>
@@ -551,7 +528,7 @@ the same  general structure.</p>
 </section>
 </section>
 <section id="stackelberg-problem">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">40.3. </span>Stackelberg Problem</a><a class="headerlink" href="#stackelberg-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.3. </span>Stackelberg Problem<a class="headerlink" href="#stackelberg-problem" title="Permalink to this heading">#</a></h2>
 <p>We formulate a class of linear-quadratic Stackelberg leader-follower
 problems of which our duopoly model is an instance.</p>
 <p>We use the optimal linear regulator (a.k.a. the linear-quadratic dynamic
@@ -676,7 +653,7 @@ as a function of the vector of natural state variables <span class="math notrans
 </section>
 </section>
 <section id="two-bellman-equations">
-<h2><a class="toc-backref" href="#id8"><span class="section-number">40.4. </span>Two Bellman Equations</a><a class="headerlink" href="#two-bellman-equations" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.4. </span>Two Bellman Equations<a class="headerlink" href="#two-bellman-equations" title="Permalink to this heading">#</a></h2>
 <p>We now describe Bellman equations for <span class="math notranslate nohighlight">\(v(y)\)</span> and <span class="math notranslate nohighlight">\(w(z_0)\)</span>.</p>
 <p><strong>Subproblem 1</strong></p>
 <p>The value function <span class="math notranslate nohighlight">\(v(y)\)</span> in subproblem 1 satisfies the Bellman
@@ -724,7 +701,7 @@ x_0 = - P_{22}^{-1} P_{21} z_0
 \]</div>
 </section>
 <section id="stackelberg-plan-for-duopoly">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">40.5. </span>Stackelberg Plan for Duopoly</a><a class="headerlink" href="#stackelberg-plan-for-duopoly" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.5. </span>Stackelberg Plan for Duopoly<a class="headerlink" href="#stackelberg-plan-for-duopoly" title="Permalink to this heading">#</a></h2>
 <p>Now let’s map our duopoly model into the above setup.</p>
 <p>We  formulate a state vector</p>
 <div class="math notranslate nohighlight">
@@ -845,7 +822,7 @@ choice of <span class="math notranslate nohighlight">\(\vec q_2\)</span> for our
 </section>
 </section>
 <section id="recursive-representation-of-stackelberg-plan">
-<h2><a class="toc-backref" href="#id10"><span class="section-number">40.6. </span>Recursive Representation of Stackelberg Plan</a><a class="headerlink" href="#recursive-representation-of-stackelberg-plan" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.6. </span>Recursive Representation of Stackelberg Plan<a class="headerlink" href="#recursive-representation-of-stackelberg-plan" title="Permalink to this heading">#</a></h2>
 <p>In order to attain an appropriate representation of the Stackelberg
 leader’s history-dependent plan, we will employ what amounts to a
 version of the <strong>Big K, little k</strong> device often used in
@@ -926,7 +903,7 @@ terms of <span class="math notranslate nohighlight">\(z^t\)</span>.</p>
 </section>
 </section>
 <section id="dynamic-programming-and-time-consistency-of-followers-problem">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">40.7. </span>Dynamic Programming and Time Consistency of Follower’s Problem</a><a class="headerlink" href="#dynamic-programming-and-time-consistency-of-followers-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.7. </span>Dynamic Programming and Time Consistency of Follower’s Problem<a class="headerlink" href="#dynamic-programming-and-time-consistency-of-followers-problem" title="Permalink to this heading">#</a></h2>
 <p>Given the sequence <span class="math notranslate nohighlight">\(\vec q_2\)</span> chosen by the Stackelberg leader in
 our duopoly model, it turns out that the Stackelberg <strong>follower’s</strong>
 problem is recursive in the <em>natural</em> state variables that confront a
@@ -1043,7 +1020,7 @@ namely</p>
 </section>
 </section>
 <section id="computing-stackelberg-plan">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">40.8. </span>Computing  Stackelberg Plan</a><a class="headerlink" href="#computing-stackelberg-plan" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.8. </span>Computing  Stackelberg Plan<a class="headerlink" href="#computing-stackelberg-plan" title="Permalink to this heading">#</a></h2>
 <p>Here is our code to compute a Stackelberg plan via the linear-quadratic
 dynamic program describe above.</p>
 <p>Let’s use it to compute the Stackelberg plan.</p>
@@ -1131,7 +1108,7 @@ F = [[-1.58004454  0.29461313  0.67480938  6.53970594]]
 </div>
 </section>
 <section id="time-series-for-price-and-quantities">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">40.9. </span>Time Series for Price and Quantities</a><a class="headerlink" href="#time-series-for-price-and-quantities" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.9. </span>Time Series for Price and Quantities<a class="headerlink" href="#time-series-for-price-and-quantities" title="Permalink to this heading">#</a></h2>
 <p>Now let’s use the code to compute and display outcomes as a Stackelberg plan unfolds.</p>
 <p>The following code plots  quantities chosen by the Stackelberg leader and follower, together with the equilibrium output price.</p>
 <div class="cell docutils container">
@@ -1215,7 +1192,7 @@ v_leader_direct (direct) = 150.0324
 </section>
 </section>
 <section id="time-inconsistency-of-stackelberg-plan">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">40.10. </span>Time Inconsistency of Stackelberg Plan</a><a class="headerlink" href="#time-inconsistency-of-stackelberg-plan" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.10. </span>Time Inconsistency of Stackelberg Plan<a class="headerlink" href="#time-inconsistency-of-stackelberg-plan" title="Permalink to this heading">#</a></h2>
 <p>In the code below we compare two values</p>
 <ul class="simple">
 <li><p>the continuation value <span class="math notranslate nohighlight">\(v(y_t) = - y_t' P y_t\)</span> earned by a <strong>continuation
@@ -1278,7 +1255,7 @@ inconsistency of the Stackelberg plan</p>
 <p>Taken together, these outcomes express the time inconsistency of the original time <span class="math notranslate nohighlight">\(0\)</span> Stackelberg leaders’s plan.</p>
 </section>
 <section id="recursive-formulation-of-followers-problem">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">40.11. </span>Recursive Formulation of Follower’s Problem</a><a class="headerlink" href="#recursive-formulation-of-followers-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.11. </span>Recursive Formulation of Follower’s Problem<a class="headerlink" href="#recursive-formulation-of-followers-problem" title="Permalink to this heading">#</a></h2>
 <p>We now formulate and compute the recursive version of the follower’s
 problem.</p>
 <p>We check that the recursive <strong>Big</strong> <span class="math notranslate nohighlight">\(K\)</span> <strong>, little</strong> <span class="math notranslate nohighlight">\(k\)</span> formulation of the follower’s problem produces the same output path
@@ -1544,7 +1521,7 @@ the recursive formulation of the follower problem.</p>
 </section>
 </section>
 <section id="markov-perfect-equilibrium">
-<h2><a class="toc-backref" href="#id16"><span class="section-number">40.12. </span>Markov Perfect Equilibrium</a><a class="headerlink" href="#markov-perfect-equilibrium" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.12. </span>Markov Perfect Equilibrium<a class="headerlink" href="#markov-perfect-equilibrium" title="Permalink to this heading">#</a></h2>
 <p>The <strong>state</strong> vector is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1703,7 +1680,7 @@ v2 (forward sim) = 133.3303; v2 (direct) = 133.3296
 </div>
 </section>
 <section id="comparing-markov-perfect-equilibrium-and-stackelberg-outcome">
-<h2><a class="toc-backref" href="#id17"><span class="section-number">40.13. </span>Comparing Markov Perfect Equilibrium and  Stackelberg Outcome</a><a class="headerlink" href="#comparing-markov-perfect-equilibrium-and-stackelberg-outcome" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">40.13. </span>Comparing Markov Perfect Equilibrium and  Stackelberg Outcome<a class="headerlink" href="#comparing-markov-perfect-equilibrium-and-stackelberg-outcome" title="Permalink to this heading">#</a></h2>
 <p>It is enlightening to compare equilbrium values for firms 1 and 2 under two alternative
 settings:</p>
 <ul class="simple">

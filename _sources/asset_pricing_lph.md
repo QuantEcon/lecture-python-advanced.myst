@@ -17,10 +17,6 @@ kernelspec:
 ```{index} single: Elementary Asset Pricing
 ```
 
-```{contents} Contents
-:depth: 2
-```
-
 ## Overview
 
 This lecture is about  some implications of  asset-pricing theories that are based on the equation
@@ -308,7 +304,7 @@ Let's apply that idea to deduce
 
 
 $$
-1= E\left(m R^{i}\right)=E(m) E\left(R^{i}\right)+\rho_{m, R^{i}}\frac{\sigma(m)}{E(m)} \sigma\left(R^{i}\right)
+1= E\left(m R^{i}\right)=E(m) E\left(R^{i}\right)+\rho_{m, R^{i}}\sigma(m) \sigma\left(R^{i}\right)
 $$ (eq:EMR5)
 
 where the correlation coefficient $\rho_{m, R^i}$ is   defined as
@@ -356,7 +352,6 @@ In drawing a frontier, we'll set $\sigma(m) = .25$ and $E m = .99$, values rough
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
 import numpy as np
-%matplotlib inline
 
 # Define the function to plot
 def y(x, alpha, beta):
@@ -590,7 +585,6 @@ Let's start with some imports.
 import numpy as np
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
-%matplotlib inline
 ```
 
 Lots of our calculations will involve computing population and sample OLS regressions.

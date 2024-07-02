@@ -23,10 +23,6 @@ kernelspec:
 
 # Permanent Income Model using the DLE Class
 
-```{contents} Contents
-:depth: 2
-```
-
 This lecture is part of a suite of lectures that use the quantecon DLE class to instantiate models within the
 {cite}`HS2013` class of models described in detail in {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
 
@@ -56,7 +52,6 @@ We'll also require the following imports
 ```{code-cell} ipython
 import numpy as np
 import matplotlib.pyplot as plt
-%matplotlib inline
 from quantecon import DLE
 
 np.set_printoptions(suppress=True, precision=4)

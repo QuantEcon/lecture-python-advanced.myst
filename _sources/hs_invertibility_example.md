@@ -23,10 +23,6 @@ kernelspec:
 
 # Shock Non Invertibility
 
-```{contents} Contents
-:depth: 2
-```
-
 ## Overview
 
 This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
@@ -49,7 +45,6 @@ import quantecon as qe
 import matplotlib.pyplot as plt
 from quantecon import DLE
 from math import sqrt
-%matplotlib inline
 ```
 
 This lecture describes  an early contribution to what is now often called

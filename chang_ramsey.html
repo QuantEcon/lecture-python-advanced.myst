@@ -56,19 +56,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b09b2da44b9015b4fa76ea072fa2d8f7faee5492" type="text/css" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -252,23 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="competitive-equilibria-of-a-model-of-chang">
-<h1><a class="toc-backref" href="#id13"><span class="section-number">46. </span>Competitive Equilibria of a Model of Chang</a><a class="headerlink" href="#competitive-equilibria-of-a-model-of-chang" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#competitive-equilibria-of-a-model-of-chang" id="id13">Competitive Equilibria of a Model of Chang</a></p>
-<ul>
-<li><p><a class="reference internal" href="#overview" id="id14">Overview</a></p></li>
-<li><p><a class="reference internal" href="#setting" id="id15">Setting</a></p></li>
-<li><p><a class="reference internal" href="#competitive-equilibrium" id="id16">Competitive Equilibrium</a></p></li>
-<li><p><a class="reference internal" href="#inventory-of-objects-in-play" id="id17">Inventory of Objects in Play</a></p></li>
-<li><p><a class="reference internal" href="#analysis" id="id18">Analysis</a></p></li>
-<li><p><a class="reference internal" href="#calculating-all-promise-value-pairs-in-ce" id="id19">Calculating all Promise-Value Pairs in CE</a></p></li>
-<li><p><a class="reference internal" href="#solving-a-continuation-ramsey-planners-bellman-equation" id="id20">Solving a Continuation Ramsey Planner’s Bellman Equation</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
+<h1><span class="section-number">46. </span>Competitive Equilibria of a Model of Chang<a class="headerlink" href="#competitive-equilibria-of-a-model-of-chang" title="Permalink to this heading">#</a></h1>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -284,7 +268,9 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: polytope in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.2.5)
 Requirement already satisfied: networkx&gt;=3.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from polytope) (3.1)
-Requirement already satisfied: numpy&gt;=1.24.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from polytope) (1.26.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.24.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from polytope) (1.26.4)
 Requirement already satisfied: scipy&gt;=1.10.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from polytope) (1.11.4)
 </pre></div>
 </div>
@@ -292,7 +278,7 @@ Requirement already satisfied: scipy&gt;=1.10.0 in /home/runner/miniconda3/envs/
 </details>
 </div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">46.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">46.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This lecture describes how Chang <span id="id1">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>
 analyzed <strong>competitive equilibria</strong> and a best competitive equilibrium called a  <strong>Ramsey plan</strong>.</p>
 <p>He did this by</p>
@@ -328,7 +314,6 @@ and other lectures.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">polytope</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -385,7 +370,7 @@ effects into account in designing a plan of government actions for
 </section>
 </section>
 <section id="setting">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">46.2. </span>Setting</a><a class="headerlink" href="#setting" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">46.2. </span>Setting<a class="headerlink" href="#setting" title="Permalink to this heading">#</a></h2>
 <section id="the-households-problem">
 <h3><span class="section-number">46.2.1. </span>The Household’s Problem<a class="headerlink" href="#the-households-problem" title="Permalink to this heading">#</a></h3>
 <p>A representative household faces a nonnegative value of money sequence
@@ -533,7 +518,7 @@ in lecture  <a class="reference internal" href="dyn_stack.html"><span class="doc
 </section>
 </section>
 <section id="competitive-equilibrium">
-<h2><a class="toc-backref" href="#id16"><span class="section-number">46.3. </span>Competitive Equilibrium</a><a class="headerlink" href="#competitive-equilibrium" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">46.3. </span>Competitive Equilibrium<a class="headerlink" href="#competitive-equilibrium" title="Permalink to this heading">#</a></h2>
 <p><strong>Definition:</strong></p>
 <ul class="simple">
 <li><p>A <em>government policy</em> is a pair of sequences <span class="math notranslate nohighlight">\((\vec h,\vec x)\)</span> where <span class="math notranslate nohighlight">\(h_t \in \Pi  \ \forall t \geq 0\)</span>.</p></li>
@@ -551,7 +536,7 @@ in lecture  <a class="reference internal" href="dyn_stack.html"><span class="doc
 </ul>
 </section>
 <section id="inventory-of-objects-in-play">
-<h2><a class="toc-backref" href="#id17"><span class="section-number">46.4. </span>Inventory of Objects in Play</a><a class="headerlink" href="#inventory-of-objects-in-play" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">46.4. </span>Inventory of Objects in Play<a class="headerlink" href="#inventory-of-objects-in-play" title="Permalink to this heading">#</a></h2>
 <p>Chang constructs the following objects</p>
 <ol class="arabic">
 <li><p>A set <span class="math notranslate nohighlight">\(\Omega\)</span> of initial marginal utilities of money <span class="math notranslate nohighlight">\(\theta_0\)</span></p>
@@ -617,7 +602,7 @@ decisions for <span class="math notranslate nohighlight">\(s = 0, \ldots, t-1\)<
 </ol>
 </section>
 <section id="analysis">
-<h2><a class="toc-backref" href="#id18"><span class="section-number">46.5. </span>Analysis</a><a class="headerlink" href="#analysis" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">46.5. </span>Analysis<a class="headerlink" href="#analysis" title="Permalink to this heading">#</a></h2>
 <p>A competitive equilibrium is a triple of sequences
 <span class="math notranslate nohighlight">\((\vec m, \vec x, \vec h)  \in E^\infty\)</span> that satisfies
 <a class="reference internal" href="#equation-eqn-chang-ramsey2">(46.2)</a>, <a class="reference internal" href="#equation-eqn-chang-ramsey3">(46.3)</a>,  and <a class="reference internal" href="#equation-eqn-chang-ramsey4">(46.6)</a>.</p>
@@ -842,7 +827,7 @@ point <span class="math notranslate nohighlight">\(S = D(S)\)</span> also produc
 </section>
 </section>
 <section id="calculating-all-promise-value-pairs-in-ce">
-<h2><a class="toc-backref" href="#id19"><span class="section-number">46.6. </span>Calculating all Promise-Value Pairs in CE</a><a class="headerlink" href="#calculating-all-promise-value-pairs-in-ce" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">46.6. </span>Calculating all Promise-Value Pairs in CE<a class="headerlink" href="#calculating-all-promise-value-pairs-in-ce" title="Permalink to this heading">#</a></h2>
 <p>Above we have defined the <span class="math notranslate nohighlight">\(D(Z)\)</span> operator as:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1531,7 +1516,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 16 iterations and 41.6             seconds
+Convergence achieved after 16 iterations and 41.95             seconds
 </pre></div>
 </div>
 </div>
@@ -1709,7 +1694,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 40 iterations and 119.8             seconds
+Convergence achieved after 40 iterations and 121.35             seconds
 </pre></div>
 </div>
 </div>
@@ -1726,7 +1711,7 @@ Convergence achieved after 40 iterations and 119.8             seconds
 </div>
 </section>
 <section id="solving-a-continuation-ramsey-planners-bellman-equation">
-<h2><a class="toc-backref" href="#id20"><span class="section-number">46.7. </span>Solving a Continuation Ramsey Planner’s Bellman Equation</a><a class="headerlink" href="#solving-a-continuation-ramsey-planners-bellman-equation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">46.7. </span>Solving a Continuation Ramsey Planner’s Bellman Equation<a class="headerlink" href="#solving-a-continuation-ramsey-planners-bellman-equation" title="Permalink to this heading">#</a></h2>
 <p>In this section we solve the Bellman equation confronting a <strong>continuation Ramsey planner</strong>.</p>
 <p>The construction of a Ramsey plan is decomposed into a two subproblems in <a class="reference internal" href="calvo.html"><span class="doc">Ramsey plans, time inconsistency, sustainable plans</span></a>
 and <a class="reference internal" href="dyn_stack.html"><span class="doc">dynamic Stackelberg problems</span></a>.</p>
@@ -1780,7 +1765,7 @@ differ only in the level of <span class="math notranslate nohighlight">\(\beta\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6102/1608401414.py:33: RuntimeWarning: invalid value encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6672/1608401414.py:33: RuntimeWarning: invalid value encountered in log
   uc = lambda c: np.log(c)
 </pre></div>
 </div>
@@ -1794,22 +1779,22 @@ differ only in the level of <span class="math notranslate nohighlight">\(\beta\)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6102/1608401414.py:382: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6672/1608401414.py:382: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
   p_iter1[i] = -p_fun(res.x)
-/tmp/ipykernel_6102/1608401414.py:309: RuntimeWarning: invalid value encountered in log
+/tmp/ipykernel_6672/1608401414.py:309: RuntimeWarning: invalid value encountered in log
   uc = lambda c: np.log(c)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Convergence achieved after 15 iterations
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6102/1608401414.py:427: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6672/1608401414.py:427: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
   p_grid[i] = p
-/tmp/ipykernel_6102/1608401414.py:444: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+/tmp/ipykernel_6672/1608401414.py:444: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
   resid_grid[i] = np.dot(cheb.chebvander(scale, order-1), c) - p
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6102/1608401414.py:468: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6672/1608401414.py:468: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
   θ_series[0] = res.x
 </pre></div>
 </div>

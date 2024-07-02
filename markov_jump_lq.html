@@ -56,19 +56,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b09b2da44b9015b4fa76ea072fa2d8f7faee5492" type="text/css" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -237,23 +237,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="markov-jump-linear-quadratic-dynamic-programming">
-<span id="index-0"></span><h1><a class="toc-backref" href="#id6"><span class="section-number">8. </span>Markov Jump Linear Quadratic Dynamic Programming</a><a class="headerlink" href="#markov-jump-linear-quadratic-dynamic-programming" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#markov-jump-linear-quadratic-dynamic-programming" id="id6">Markov Jump Linear Quadratic Dynamic Programming</a></p>
-<ul>
-<li><p><a class="reference internal" href="#overview" id="id7">Overview</a></p></li>
-<li><p><a class="reference internal" href="#review-of-useful-lq-dynamic-programming-formulas" id="id8">Review of useful LQ dynamic programming formulas</a></p></li>
-<li><p><a class="reference internal" href="#linked-riccati-equations-for-markov-lq-dynamic-programming" id="id9">Linked Riccati equations for Markov LQ dynamic programming</a></p></li>
-<li><p><a class="reference internal" href="#applications" id="id10">Applications</a></p></li>
-<li><p><a class="reference internal" href="#example-1" id="id11">Example 1</a></p></li>
-<li><p><a class="reference internal" href="#example-2" id="id12">Example 2</a></p></li>
-<li><p><a class="reference internal" href="#more-examples" id="id13">More examples</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
+<span id="index-0"></span><h1><span class="section-number">8. </span>Markov Jump Linear Quadratic Dynamic Programming<a class="headerlink" href="#markov-jump-linear-quadratic-dynamic-programming" title="Permalink to this heading">#</a></h1>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -276,20 +260,20 @@ Requirement already satisfied: requests in /home/runner/miniconda3/envs/quanteco
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.11.4)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.12)
 Requirement already satisfied: llvmlite&lt;0.43,&gt;=0.42.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.42.0)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.4)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.7)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2024.2.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from sympy-&gt;quantecon) (1.3.0)
+Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from sympy-&gt;quantecon) (1.3.0)
 </pre></div>
 </div>
 </div>
 </details>
 </div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">8.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This lecture describes <strong>Markov jump linear quadratic dynamic programming</strong>, an extension of the method described in the <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">first LQ control lecture</a>.</p>
 <p>Markov jump linear quadratic dynamic programming is described and analyzed in <span id="id1">[<a class="reference internal" href="zreferences.html#id233" title="JBR Do Val, JC Geromel, and OLV Costa. Solutions for the linear-quadratic control problem of markov jump linear systems. Journal of Optimization Theory and Applications, 103(2):283–311, 1999.">Do Val <em>et al.</em>, 1999</a>]</span> and the references cited there.</p>
 <p>The method has been applied to problems in macroeconomics and monetary economics by <span id="id2">[<a class="reference internal" href="zreferences.html#id234" title="Lars EO Svensson, Noah Williams, and others. Optimal monetary policy under uncertainty: a markov jump-linear-quadratic approach. Federal Reserve Bank of St. Louis Review, 90(4):275–293, 2008.">Svensson <em>et al.</em>, 2008</a>]</span> and <span id="id3">[<a class="reference internal" href="zreferences.html#id235" title="Lars E.O. Svensson and Noah Williams. Optimal Monetary Policy under Uncertainty in DSGE Models: A Markov Jump-Linear-Quadratic Approach. In Klaus Schmidt-Hebbel, Carl E. Walsh, Norman Loayza (Series Editor), and Klaus Schmidt-Hebbel (Series, editors, Monetary Policy under Uncertainty and Learning, volume 13 of Central Banking, Analysis, and Economic Policies Book Series, chapter 3, pages 077-114. Central Bank of Chile, edition, March 2009.">Svensson and Williams, 2009</a>]</span>.</p>
@@ -314,7 +298,7 @@ functions and <span class="math notranslate nohighlight">\(N\)</span> linear dec
 for state <span class="math notranslate nohighlight">\(j\)</span> prevails.</p>
 </section>
 <section id="review-of-useful-lq-dynamic-programming-formulas">
-<h2><a class="toc-backref" href="#id8"><span class="section-number">8.2. </span>Review of useful LQ dynamic programming formulas</a><a class="headerlink" href="#review-of-useful-lq-dynamic-programming-formulas" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.2. </span>Review of useful LQ dynamic programming formulas<a class="headerlink" href="#review-of-useful-lq-dynamic-programming-formulas" title="Permalink to this heading">#</a></h2>
 <p>To begin, it is handy to have the following reminder in mind.</p>
 <p>A <strong>linear quadratic dynamic programming problem</strong> consists of a scalar
 discount factor <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>, an <span class="math notranslate nohighlight">\(n\times 1\)</span> state
@@ -373,7 +357,7 @@ F = (Q + \beta  B' P B)^{-1} (\beta (B' P A )+ W)
 <p>With the preceding formulas in mind, we are ready to approach Markov Jump linear quadratic dynamic programming.</p>
 </section>
 <section id="linked-riccati-equations-for-markov-lq-dynamic-programming">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">8.3. </span>Linked Riccati equations for Markov LQ dynamic programming</a><a class="headerlink" href="#linked-riccati-equations-for-markov-lq-dynamic-programming" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.3. </span>Linked Riccati equations for Markov LQ dynamic programming<a class="headerlink" href="#linked-riccati-equations-for-markov-lq-dynamic-programming" title="Permalink to this heading">#</a></h2>
 <p>The key idea is to make the matrices <span class="math notranslate nohighlight">\(A, B, C, R, Q, W\)</span> fixed
 functions of a finite state <span class="math notranslate nohighlight">\(s\)</span> that is governed by an <span class="math notranslate nohighlight">\(N\)</span>
 state Markov chain.</p>
@@ -465,7 +449,7 @@ F_i = (Q_i + \beta \sum_j \Pi_{ij} B_i' P_j B_i)^{-1}
 \]</div>
 </section>
 <section id="applications">
-<h2><a class="toc-backref" href="#id10"><span class="section-number">8.4. </span>Applications</a><a class="headerlink" href="#applications" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.4. </span>Applications<a class="headerlink" href="#applications" title="Permalink to this heading">#</a></h2>
 <p>We now describe some Python code and a few examples that put the code to work.</p>
 <p>To begin, we import these Python modules</p>
 <div class="cell docutils container">
@@ -474,8 +458,6 @@ F_i = (Q_i + \beta \sum_j \Pi_{ij} B_i' P_j B_i)^{-1}
 <span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
-
-<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -490,7 +472,7 @@ F_i = (Q_i + \beta \sum_j \Pi_{ij} B_i' P_j B_i)^{-1}
 </div>
 </section>
 <section id="example-1">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">8.5. </span>Example 1</a><a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.5. </span>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h2>
 <p>This example is a version of a classic problem of optimally adjusting a variable <span class="math notranslate nohighlight">\(k_t\)</span> to a target level in the face of costly adjustment.</p>
 <p>This provides a model of gradual adjustment.</p>
 <p>Given <span class="math notranslate nohighlight">\(k_{0}\)</span>, the objective function is</p>
@@ -1114,7 +1096,7 @@ f_{2,1} = 0.5, f_{2,2} = 1
 </div>
 </section>
 <section id="example-2">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">8.6. </span>Example 2</a><a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.6. </span>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h2>
 <p>We now add to the example 1 setup another state variable <span class="math notranslate nohighlight">\(w_t\)</span>
 that follows the evolution law</p>
 <div class="math notranslate nohighlight">
@@ -1359,7 +1341,7 @@ w_{t+1}
 </div>
 </section>
 <section id="more-examples">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">8.7. </span>More examples</a><a class="headerlink" href="#more-examples" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">8.7. </span>More examples<a class="headerlink" href="#more-examples" title="Permalink to this heading">#</a></h2>
 <p>The following lectures describe how Markov jump linear quadratic dynamic programming can be used to extend the <span id="id5">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model
 of optimal tax-smoothing and government debt in several interesting directions</p>
 <ol class="arabic simple">

@@ -56,19 +56,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b09b2da44b9015b4fa76ea072fa2d8f7faee5492" type="text/css" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -264,23 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="equilibrium-capital-structures-with-incomplete-markets">
-<h1><a class="toc-backref" href="#id5"><span class="section-number">38. </span>Equilibrium Capital Structures with Incomplete Markets</a><a class="headerlink" href="#equilibrium-capital-structures-with-incomplete-markets" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#equilibrium-capital-structures-with-incomplete-markets" id="id5">Equilibrium Capital Structures with Incomplete Markets</a></p>
-<ul>
-<li><p><a class="reference internal" href="#introduction" id="id6">Introduction</a></p></li>
-<li><p><a class="reference internal" href="#asset-markets" id="id7">Asset Markets</a></p></li>
-<li><p><a class="reference internal" href="#equilibrium-verification" id="id8">Equilibrium verification</a></p></li>
-<li><p><a class="reference internal" href="#pseudo-code" id="id9">Pseudo Code</a></p></li>
-<li><p><a class="reference internal" href="#code" id="id10">Code</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id11">Examples</a></p></li>
-<li><p><a class="reference internal" href="#a-picture-worth-a-thousand-words" id="id12">A picture worth a thousand words</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
+<h1><span class="section-number">38. </span>Equilibrium Capital Structures with Incomplete Markets<a class="headerlink" href="#equilibrium-capital-structures-with-incomplete-markets" title="Permalink to this heading">#</a></h1>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -298,7 +282,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.7.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.31.0)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.11.4)
@@ -379,20 +363,8 @@ Collecting package metadata (repodata.json): -
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
-</pre></div>
-</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>done
-Solving environment: / 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
+Solving environment: | 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
@@ -423,15 +395,6 @@ Solving environment: /
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>- 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\ 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>| 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/ 
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>done
@@ -444,7 +407,7 @@ Solving environment: /
 </details>
 </div>
 <section id="introduction">
-<h2><a class="toc-backref" href="#id6"><span class="section-number">38.1. </span>Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">38.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
 <p>This is an extension of an earlier lecture <a class="reference internal" href="BCG_complete_mkts.html"><span class="doc">Irrelevance of Capital Structure with Complete Markets</span></a> about a <strong>complete markets</strong>
 model.</p>
 <p>In contrast to that lecture, this one  describes an instance of a model authored by Bisin, Clementi, and Gottardi <span id="id1">[<a class="reference internal" href="zreferences.html#id29" title="Alberto Bisin, Gian Luca Clementi, and Piero Gottardi. Capital and hedging demand with incomplete markets. Technical Report, NYU and EUI, 2018.">Bisin <em>et al.</em>, 2018</a>]</span>
@@ -632,7 +595,7 @@ trade.</p>
 </section>
 </section>
 <section id="asset-markets">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">38.2. </span>Asset Markets</a><a class="headerlink" href="#asset-markets" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">38.2. </span>Asset Markets<a class="headerlink" href="#asset-markets" title="Permalink to this heading">#</a></h2>
 <p>Markets are incomplete: <em>ex cathedra</em> we the model builders declare that only equities and bonds issued by representative
 firms can be traded.</p>
 <p>Let <span class="math notranslate nohighlight">\(\theta^i\)</span> and <span class="math notranslate nohighlight">\(\xi^i\)</span> be a consumer of type
@@ -863,7 +826,7 @@ that we want to solve for the firm’s optimal decisions <span class="math notra
 </section>
 </section>
 <section id="equilibrium-verification">
-<h2><a class="toc-backref" href="#id8"><span class="section-number">38.3. </span>Equilibrium verification</a><a class="headerlink" href="#equilibrium-verification" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">38.3. </span>Equilibrium verification<a class="headerlink" href="#equilibrium-verification" title="Permalink to this heading">#</a></h2>
 <p>On page 5 of BCG (2018), the authors say</p>
 <p><em>If the price conjectures corresponding to the plan chosen by firms in
 equilibrium are correct, that is equal to the market prices</em> <span class="math notranslate nohighlight">\(\check q\)</span> <em>and</em> <span class="math notranslate nohighlight">\(\check p\)</span>, <em>it is immediate to verify that
@@ -883,7 +846,7 @@ satisfied.</p></li>
 </ul>
 </section>
 <section id="pseudo-code">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">38.4. </span>Pseudo Code</a><a class="headerlink" href="#pseudo-code" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">38.4. </span>Pseudo Code<a class="headerlink" href="#pseudo-code" title="Permalink to this heading">#</a></h2>
 <p>Before displaying our Python code for computing a BCG incomplete markets equilibrium,
 we’ll sketch some pseudo code that describes its logical flow.</p>
 <p>Here goes:</p>
@@ -995,7 +958,7 @@ the following equilibrium values:</p>
 </ol>
 </section>
 <section id="code">
-<h2><a class="toc-backref" href="#id10"><span class="section-number">38.5. </span>Code</a><a class="headerlink" href="#code" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">38.5. </span>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h2>
 <p>We create a Python class <code class="docutils literal notranslate"><span class="pre">BCG_incomplete_markets</span></code> to compute the
 equilibrium allocations of the incomplete market BCG model, given a set
 of parameter values.</p>
@@ -1539,7 +1502,7 @@ shock distribution. Default values are respectively -0.025 and 0.4</p></li>
 </div>
 </section>
 <section id="examples">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">38.6. </span>Examples</a><a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">38.6. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
 <p>Below we show some examples computed with the class <code class="docutils literal notranslate"><span class="pre">BCG_incomplete</span> <span class="pre">markets</span></code>.</p>
 <section id="first-example">
 <h3><span class="section-number">38.6.1. </span>First example<a class="headerlink" href="#first-example" title="Permalink to this heading">#</a></h3>
@@ -2763,7 +2726,7 @@ finished
 </section>
 </section>
 <section id="a-picture-worth-a-thousand-words">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">38.7. </span>A picture worth a thousand words</a><a class="headerlink" href="#a-picture-worth-a-thousand-words" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">38.7. </span>A picture worth a thousand words<a class="headerlink" href="#a-picture-worth-a-thousand-words" title="Permalink to this heading">#</a></h2>
 <p>Please stare at the above panels.</p>
 <p>They describe how equilibrium prices and quantities respond to
 alterations in the structure of society’s <em>hedging desires</em> across

@@ -23,10 +23,6 @@ kernelspec:
 
 # Recursive Models of Dynamic Linear Economies
 
-```{contents} Contents
-:depth: 2
-```
-
 ```{epigraph}
 "Mathematics is the art of giving the same name to different things" -- Henri Poincare
 ```

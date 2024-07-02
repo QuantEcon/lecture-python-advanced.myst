@@ -56,19 +56,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b09b2da44b9015b4fa76ea072fa2d8f7faee5492" type="text/css" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -239,22 +239,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="reverse-engineering-a-la-muth">
-<span id="index-0"></span><h1><a class="toc-backref" href="#id5"><span class="section-number">3. </span>Reverse Engineering a la Muth</a><a class="headerlink" href="#reverse-engineering-a-la-muth" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#reverse-engineering-a-la-muth" id="id5">Reverse Engineering a la Muth</a></p>
-<ul>
-<li><p><a class="reference internal" href="#friedman-1956-and-muth-1960" id="id6">Friedman (1956) and Muth (1960)</a></p></li>
-<li><p><a class="reference internal" href="#a-process-for-which-adaptive-expectations-are-optimal" id="id7">A Process for Which Adaptive Expectations are Optimal</a></p></li>
-<li><p><a class="reference internal" href="#some-useful-state-space-math" id="id8">Some Useful State-Space Math</a></p></li>
-<li><p><a class="reference internal" href="#estimates-of-unobservables" id="id9">Estimates of Unobservables</a></p></li>
-<li><p><a class="reference internal" href="#relationship-of-unobservables-to-observables" id="id10">Relationship of Unobservables to Observables</a></p></li>
-<li><p><a class="reference internal" href="#ma-and-ar-representations" id="id11">MA and AR Representations</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
+<span id="index-0"></span><h1><span class="section-number">3. </span>Reverse Engineering a la Muth<a class="headerlink" href="#reverse-engineering-a-la-muth" title="Permalink to this heading">#</a></h1>
 <p>In addition to what’s in Anaconda, this lecture uses the quantecon library.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -291,7 +276,6 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">Kalman</span>
@@ -307,7 +291,7 @@ paper <span id="id1">[<a class="reference internal" href="zreferences.html#id110
 stochastic process that renders optimal Milton Friedman’s <span id="id2">[<a class="reference internal" href="zreferences.html#id151" title="M. Friedman. A Theory of the Consumption Function. Princeton University Press, 1956.">Friedman, 1956</a>]</span> “adaptive
 expectations” scheme.</p>
 <section id="friedman-1956-and-muth-1960">
-<h2><a class="toc-backref" href="#id6"><span class="section-number">3.1. </span>Friedman (1956) and Muth (1960)</a><a class="headerlink" href="#friedman-1956-and-muth-1960" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.1. </span>Friedman (1956) and Muth (1960)<a class="headerlink" href="#friedman-1956-and-muth-1960" title="Permalink to this heading">#</a></h2>
 <p>Milton Friedman <span id="id3">[<a class="reference internal" href="zreferences.html#id151" title="M. Friedman. A Theory of the Consumption Function. Princeton University Press, 1956.">Friedman, 1956</a>]</span> (1956) posited that
 consumer’s forecast their future disposable income with the adaptive
 expectations scheme</p>
@@ -338,7 +322,7 @@ Kalman filter to express the heart of Muth’s analysis concisely.</p>
 <p>We’ll use limiting versions of the Kalman filter corresponding to what are called <strong>stationary values</strong> in that lecture.</p>
 </section>
 <section id="a-process-for-which-adaptive-expectations-are-optimal">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">3.2. </span>A Process for Which Adaptive Expectations are Optimal</a><a class="headerlink" href="#a-process-for-which-adaptive-expectations-are-optimal" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.2. </span>A Process for Which Adaptive Expectations are Optimal<a class="headerlink" href="#a-process-for-which-adaptive-expectations-are-optimal" title="Permalink to this heading">#</a></h2>
 <p>Suppose that an observable <span class="math notranslate nohighlight">\(y_t\)</span> is the sum of an unobserved
 random walk <span class="math notranslate nohighlight">\(x_t\)</span> and an IID shock <span class="math notranslate nohighlight">\(\epsilon_{2,t}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-state-space">
@@ -412,7 +396,7 @@ apply the quantecon <code class="docutils literal notranslate"><span class="pre"
 </div>
 </section>
 <section id="some-useful-state-space-math">
-<h2><a class="toc-backref" href="#id8"><span class="section-number">3.3. </span>Some Useful State-Space Math</a><a class="headerlink" href="#some-useful-state-space-math" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.3. </span>Some Useful State-Space Math<a class="headerlink" href="#some-useful-state-space-math" title="Permalink to this heading">#</a></h2>
 <p>Now we want to map the time-invariant innovations representation <a class="reference internal" href="#equation-innovations">(3.3)</a> and
 the original state-space system <a class="reference internal" href="#equation-state-space">(3.2)</a> into a convenient form for deducing
 the impulse responses from the original shocks to the <span class="math notranslate nohighlight">\(x_t\)</span> and
@@ -494,7 +478,7 @@ Conditional variance = 5.524937810560442
 variables are related by plotting some key objects.</p>
 </section>
 <section id="estimates-of-unobservables">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">3.4. </span>Estimates of Unobservables</a><a class="headerlink" href="#estimates-of-unobservables" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.4. </span>Estimates of Unobservables<a class="headerlink" href="#estimates-of-unobservables" title="Permalink to this heading">#</a></h2>
 <p>First, let’s plot the hidden state <span class="math notranslate nohighlight">\(x_t\)</span> and the filtered version
 <span class="math notranslate nohighlight">\(\hat x_t\)</span> that is linear-least squares projection of <span class="math notranslate nohighlight">\(x_t\)</span>
 on the history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \ldots\)</span></p>
@@ -511,7 +495,7 @@ on the history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3cbd9e6fb2e1227bcbc9d88a3be1d019000cee84cf9498f6cf3f074dadbd3473.png" src="_images/3cbd9e6fb2e1227bcbc9d88a3be1d019000cee84cf9498f6cf3f074dadbd3473.png" />
+<img alt="_images/3d315b8eecbe78c89972e2bbfb27b59c7cad01cd9527a2c6d16773c5a7f6b6cd.png" src="_images/3d315b8eecbe78c89972e2bbfb27b59c7cad01cd9527a2c6d16773c5a7f6b6cd.png" />
 </div>
 </div>
 <p>Note how <span class="math notranslate nohighlight">\(x_t\)</span> and <span class="math notranslate nohighlight">\(\hat{x_t}\)</span> differ.</p>
@@ -519,7 +503,7 @@ on the history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \l
 idea about her/his <em>permanent income</em>.</p>
 </section>
 <section id="relationship-of-unobservables-to-observables">
-<h2><a class="toc-backref" href="#id10"><span class="section-number">3.5. </span>Relationship of Unobservables to Observables</a><a class="headerlink" href="#relationship-of-unobservables-to-observables" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.5. </span>Relationship of Unobservables to Observables<a class="headerlink" href="#relationship-of-unobservables-to-observables" title="Permalink to this heading">#</a></h2>
 <p>Now let’s plot <span class="math notranslate nohighlight">\(x_t\)</span> and <span class="math notranslate nohighlight">\(y_t\)</span>.</p>
 <p>Recall that <span class="math notranslate nohighlight">\(y_t\)</span> is just <span class="math notranslate nohighlight">\(x_t\)</span> plus white noise</p>
 <div class="cell docutils container">
@@ -535,7 +519,7 @@ idea about her/his <em>permanent income</em>.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/9a71df8c5994e00a9b23d07070455fc0270d9d5372d37b0aa1bfedce30427165.png" src="_images/9a71df8c5994e00a9b23d07070455fc0270d9d5372d37b0aa1bfedce30427165.png" />
+<img alt="_images/e9f5d474a4f65d421f0f626b141a1c0720036c6ccf9f62eb380b3b0d9f4d5054.png" src="_images/e9f5d474a4f65d421f0f626b141a1c0720036c6ccf9f62eb380b3b0d9f4d5054.png" />
 </div>
 </div>
 <p>We see above that <span class="math notranslate nohighlight">\(y\)</span> seems to look like white noise around the
@@ -556,13 +540,13 @@ values of <span class="math notranslate nohighlight">\(x\)</span>.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d84e862406bf56c3d04722d676bf6af1414768f3c09c4a28e21402f48b455035.png" src="_images/d84e862406bf56c3d04722d676bf6af1414768f3c09c4a28e21402f48b455035.png" />
+<img alt="_images/0df8b1e819e2bde877bf15cce5e3933ac5e8b108e9609b96cd52532bcfe9d6a6.png" src="_images/0df8b1e819e2bde877bf15cce5e3933ac5e8b108e9609b96cd52532bcfe9d6a6.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="ma-and-ar-representations">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">3.6. </span>MA and AR Representations</a><a class="headerlink" href="#ma-and-ar-representations" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.6. </span>MA and AR Representations<a class="headerlink" href="#ma-and-ar-representations" title="Permalink to this heading">#</a></h2>
 <p>Now we shall extract from the <code class="docutils literal notranslate"><span class="pre">Kalman</span></code> instance <code class="docutils literal notranslate"><span class="pre">kmuth</span></code> coefficients of</p>
 <ul class="simple">
 <li><p>a fundamental moving average representation that represents

@@ -23,10 +23,6 @@ kernelspec:
 ```{index} single: Orthogonal Projection
 ```
 
-```{contents} Contents
-:depth: 2
-```
-
 ## Overview
 
 Orthogonal projection is a cornerstone of vector space methods, with many diverse applications.

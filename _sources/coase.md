@@ -22,10 +22,6 @@ kernelspec:
 
 # {index}`Coase's Theory of the Firm <single: Coase's Theory of the Firm>`
 
-```{contents} Contents
-:depth: 2
-```
-
 ## Overview
 
 In 1937, Ronald Coase wrote a brilliant essay on the nature of the firm {cite}`coase1937nature`.

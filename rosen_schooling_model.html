@@ -56,19 +56,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b09b2da44b9015b4fa76ea072fa2d8f7faee5492" type="text/css" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -238,18 +238,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="index-0">
-<span id="id1"></span><h1><a class="toc-backref" href="#id6"><span class="section-number">21. </span>Rosen Schooling Model</a><a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#index-0" id="id6">Rosen Schooling Model</a></p>
-<ul>
-<li><p><a class="reference internal" href="#a-one-occupation-model" id="id7">A One-Occupation Model</a></p></li>
-<li><p><a class="reference internal" href="#mapping-into-hs2013-framework" id="id8">Mapping into HS2013 Framework</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
+<span id="id1"></span><h1><span class="section-number">21. </span>Rosen Schooling Model<a class="headerlink" href="#index-0" title="Permalink to this heading">#</a></h1>
 <p>This lecture is yet another part of a suite of lectures that use the quantecon DLE class to instantiate models within the
 <span id="id2">[<a class="reference internal" href="zreferences.html#id71" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
 <p>In addition to what’s included in  Anaconda, this lecture uses the quantecon library</p>
@@ -293,13 +282,12 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 <span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">DLE</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
 </div>
 <section id="a-one-occupation-model">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">21.1. </span>A One-Occupation Model</a><a class="headerlink" href="#a-one-occupation-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.1. </span>A One-Occupation Model<a class="headerlink" href="#a-one-occupation-model" title="Permalink to this heading">#</a></h2>
 <p>Ryoo and Rosen’s (2004) <span id="id3">[<a class="reference internal" href="zreferences.html#id69" title="Jaewoo Ryoo and Sherwin Rosen. The engineering labor market. Journal of political economy, 112(S1):S110–S140, 2004.">Ryoo and Rosen, 2004</a>]</span> partial equilibrium model determines</p>
 <ul class="simple">
 <li><p>a stock of “Engineers” <span class="math notranslate nohighlight">\(N_t\)</span></p></li>
@@ -339,7 +327,7 @@ n_t = \alpha_s v_t + \epsilon_{st}
 \]</div>
 </section>
 <section id="mapping-into-hs2013-framework">
-<h2><a class="toc-backref" href="#id8"><span class="section-number">21.2. </span>Mapping into HS2013 Framework</a><a class="headerlink" href="#mapping-into-hs2013-framework" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.2. </span>Mapping into HS2013 Framework<a class="headerlink" href="#mapping-into-hs2013-framework" title="Permalink to this heading">#</a></h2>
 <p>We represent this model in the <span id="id4">[<a class="reference internal" href="zreferences.html#id71" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> framework by</p>
 <ul class="simple">
 <li><p>sweeping the time-to-build structure and the demand for engineers

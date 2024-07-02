@@ -22,10 +22,6 @@ kernelspec:
 
 # Equilibrium Capital Structures with Incomplete Markets
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 ```{code-cell} ipython3

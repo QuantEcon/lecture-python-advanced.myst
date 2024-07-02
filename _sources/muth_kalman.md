@@ -23,10 +23,6 @@ kernelspec:
 
 # Reverse Engineering a la Muth
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture uses the quantecon library.
 
 ```{code-cell} ipython
@@ -40,7 +36,6 @@ We'll also need the following imports:
 
 ```{code-cell} ipython
 import matplotlib.pyplot as plt
-%matplotlib inline
 import numpy as np
 
 from quantecon import Kalman

@@ -56,19 +56,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b09b2da44b9015b4fa76ea072fa2d8f7faee5492" type="text/css" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -257,25 +257,9 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="classical-control-with-linear-algebra">
-<h1><a class="toc-backref" href="#id11"><span class="section-number">31. </span>Classical Control with Linear Algebra</a><a class="headerlink" href="#classical-control-with-linear-algebra" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#classical-control-with-linear-algebra" id="id11">Classical Control with Linear Algebra</a></p>
-<ul>
-<li><p><a class="reference internal" href="#overview" id="id12">Overview</a></p></li>
-<li><p><a class="reference internal" href="#a-control-problem" id="id13">A Control Problem</a></p></li>
-<li><p><a class="reference internal" href="#finite-horizon-theory" id="id14">Finite Horizon Theory</a></p></li>
-<li><p><a class="reference internal" href="#infinite-horizon-limit" id="id15">Infinite Horizon Limit</a></p></li>
-<li><p><a class="reference internal" href="#undiscounted-problems" id="id16">Undiscounted Problems</a></p></li>
-<li><p><a class="reference internal" href="#implementation" id="id17">Implementation</a></p></li>
-<li><p><a class="reference internal" href="#exercises" id="id18">Exercises</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
+<h1><span class="section-number">31. </span>Classical Control with Linear Algebra<a class="headerlink" href="#classical-control-with-linear-algebra" title="Permalink to this heading">#</a></h1>
 <section id="overview">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">31.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>In an earlier lecture <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Dynamic Programming Problems</a>, we have studied how to solve a special
 class of dynamic optimization and prediction problems by applying the method of dynamic programming. In this class of problems</p>
 <ul class="simple">
@@ -301,7 +285,6 @@ class of dynamic optimization and prediction problems by applying the method of 
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
@@ -312,7 +295,7 @@ class of dynamic optimization and prediction problems by applying the method of 
 </section>
 </section>
 <section id="a-control-problem">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">31.2. </span>A Control Problem</a><a class="headerlink" href="#a-control-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.2. </span>A Control Problem<a class="headerlink" href="#a-control-problem" title="Permalink to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(L\)</span> be the <strong>lag operator</strong>, so that, for sequence <span class="math notranslate nohighlight">\(\{x_t\}\)</span> we have <span class="math notranslate nohighlight">\(L x_t = x_{t-1}\)</span>.</p>
 <p>More generally, let <span class="math notranslate nohighlight">\(L^k x_t = x_{t-k}\)</span> with <span class="math notranslate nohighlight">\(L^0 x_t = x_t\)</span> and</p>
 <div class="math notranslate nohighlight">
@@ -366,7 +349,7 @@ p_t = \alpha_0 - \alpha_1 q_t + d_t
 </section>
 </section>
 <section id="finite-horizon-theory">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">31.3. </span>Finite Horizon Theory</a><a class="headerlink" href="#finite-horizon-theory" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.3. </span>Finite Horizon Theory<a class="headerlink" href="#finite-horizon-theory" title="Permalink to this heading">#</a></h2>
 <p>We first study a finite <span class="math notranslate nohighlight">\(N\)</span> version of the problem.</p>
 <p>Later we will study an infinite horizon problem solution as a limiting version of a finite horizon problem.</p>
 <p>(This will require being careful because the limits as <span class="math notranslate nohighlight">\(N \to \infty\)</span> of the necessary and sufficient conditions for maximizing finite <span class="math notranslate nohighlight">\(N\)</span> versions of <a class="reference internal" href="#equation-oneone">(31.1)</a>
@@ -689,7 +672,7 @@ to <span class="math notranslate nohighlight">\(c(L)\)</span> and <span class="m
 </section>
 </section>
 <section id="infinite-horizon-limit">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">31.4. </span>Infinite Horizon Limit</a><a class="headerlink" href="#infinite-horizon-limit" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.4. </span>Infinite Horizon Limit<a class="headerlink" href="#infinite-horizon-limit" title="Permalink to this heading">#</a></h2>
 <p>For the infinite horizon problem, we propose to discover first-order
 necessary conditions by taking the limits of <a class="reference internal" href="#equation-onefour">(31.4)</a> and <a class="reference internal" href="#equation-onefive">(31.5)</a> as
 <span class="math notranslate nohighlight">\(N \to \infty\)</span>.</p>
@@ -834,7 +817,7 @@ condition <a class="reference internal" href="#equation-onesix">(31.12)</a> is s
 <p>Therefore it is easy to dominate a path that violates <a class="reference internal" href="#equation-onesix">(31.12)</a>.</p>
 </section>
 <section id="undiscounted-problems">
-<h2><a class="toc-backref" href="#id16"><span class="section-number">31.5. </span>Undiscounted Problems</a><a class="headerlink" href="#undiscounted-problems" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.5. </span>Undiscounted Problems<a class="headerlink" href="#undiscounted-problems" title="Permalink to this heading">#</a></h2>
 <p>It is worthwhile focusing on a special case of the LQ problems above:
 the undiscounted problem that emerges when <span class="math notranslate nohighlight">\(\beta = 1\)</span>.</p>
 <p>In this case, the Euler equation is</p>
@@ -917,7 +900,7 @@ solving a related undiscounted problem.</p>
 </section>
 </section>
 <section id="implementation">
-<h2><a class="toc-backref" href="#id17"><span class="section-number">31.6. </span>Implementation</a><a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.6. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
 <p>Here’s the code that computes solutions to the LQ problem using the methods described
 above.</p>
 <div class="cell docutils container">
@@ -1313,7 +1296,7 @@ track the <span class="math notranslate nohighlight">\(\{a_t\}\)</span> process.
 </section>
 </section>
 <section id="exercises">
-<h2><a class="toc-backref" href="#id18"><span class="section-number">31.7. </span>Exercises</a><a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
 <div class="exercise admonition" id="lu_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 31.1 </span></p>

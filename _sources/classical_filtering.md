@@ -20,10 +20,6 @@ kernelspec:
 
 # Classical Prediction and Filtering With Linear Algebra
 
-```{contents} Contents
-:depth: 2
-```
-
 ## Overview
 
 This is a sequel to the earlier lecture {doc}`Classical Control with Linear Algebra <lu_tricks>`.

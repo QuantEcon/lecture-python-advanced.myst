@@ -56,19 +56,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b09b2da44b9015b4fa76ea072fa2d8f7faee5492" type="text/css" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -264,20 +264,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="optimal-taxation-with-state-contingent-debt">
-<h1><a class="toc-backref" href="#id5"><span class="section-number">42. </span>Optimal Taxation with State-Contingent Debt</a><a class="headerlink" href="#optimal-taxation-with-state-contingent-debt" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#optimal-taxation-with-state-contingent-debt" id="id5">Optimal Taxation with State-Contingent Debt</a></p>
-<ul>
-<li><p><a class="reference internal" href="#overview" id="id6">Overview</a></p></li>
-<li><p><a class="reference internal" href="#a-competitive-equilibrium-with-distorting-taxes" id="id7">A Competitive Equilibrium with Distorting Taxes</a></p></li>
-<li><p><a class="reference internal" href="#recursive-formulation-of-the-ramsey-problem" id="id8">Recursive Formulation of the Ramsey Problem</a></p></li>
-<li><p><a class="reference internal" href="#examples" id="id9">Examples</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
+<h1><span class="section-number">42. </span>Optimal Taxation with State-Contingent Debt<a class="headerlink" href="#optimal-taxation-with-state-contingent-debt" title="Permalink to this heading">#</a></h1>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -313,7 +300,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </details>
 </div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id6"><span class="section-number">42.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This lecture describes a celebrated model of optimal fiscal policy by Robert E.
 Lucas, Jr., and Nancy Stokey  <span id="id1">[<a class="reference internal" href="zreferences.html#id176" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span>.</p>
 <p>The model revisits classic issues about how to pay for a war.</p>
@@ -355,7 +342,7 @@ responses of private agents to a Ramsey plan.</p>
 </div>
 </section>
 <section id="a-competitive-equilibrium-with-distorting-taxes">
-<h2><a class="toc-backref" href="#id7"><span class="section-number">42.2. </span>A Competitive Equilibrium with Distorting Taxes</a><a class="headerlink" href="#a-competitive-equilibrium-with-distorting-taxes" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.2. </span>A Competitive Equilibrium with Distorting Taxes<a class="headerlink" href="#a-competitive-equilibrium-with-distorting-taxes" title="Permalink to this heading">#</a></h2>
 <p>At time <span class="math notranslate nohighlight">\(t \geq 0\)</span> a random variable <span class="math notranslate nohighlight">\(s_t\)</span> belongs to a time-invariant
 set <span class="math notranslate nohighlight">\({\cal S} = [1, 2, \ldots, S]\)</span>.</p>
 <p>For <span class="math notranslate nohighlight">\(t \geq 0\)</span>, a history <span class="math notranslate nohighlight">\(s^t = [s_t, s_{t-1}, \ldots, s_0]\)</span> of an
@@ -1000,7 +987,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
 </section>
 </section>
 <section id="recursive-formulation-of-the-ramsey-problem">
-<h2><a class="toc-backref" href="#id8"><span class="section-number">42.3. </span>Recursive Formulation of the Ramsey Problem</a><a class="headerlink" href="#recursive-formulation-of-the-ramsey-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.3. </span>Recursive Formulation of the Ramsey Problem<a class="headerlink" href="#recursive-formulation-of-the-ramsey-problem" title="Permalink to this heading">#</a></h2>
 <p>We now temporarily revert to Lucas and Stokey’s specification.</p>
 <p>We start by noting that <span class="math notranslate nohighlight">\(x_t(s^t) = u_c(s^t) b_t(s_t | s^{t-1})\)</span> in equation <a class="reference internal" href="#equation-lsa-budget">(42.21)</a>
 appears to be a purely “forward-looking” variable.</p>
@@ -1462,7 +1449,7 @@ through them, the value of initial government debt <span class="math notranslate
 </section>
 </section>
 <section id="examples">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">42.4. </span>Examples</a><a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.4. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
 <p>We return to the setup with CRRA preferences described above.</p>
 <section id="anticipated-one-period-war">
 <h3><span class="section-number">42.4.1. </span>Anticipated One-Period War<a class="headerlink" href="#anticipated-one-period-war" title="Permalink to this heading">#</a></h3>

@@ -23,10 +23,6 @@ kernelspec:
 ```{index} single: Smoothing; Tax
 ```
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture uses the  library:
 
 ```{code-cell} ipython
@@ -97,7 +93,6 @@ Let's start with some standard imports:
 import numpy as np
 import quantecon as qe
 import matplotlib.pyplot as plt
-%matplotlib inline
 ```
 
 To exploit the isomorphism between consumption-smoothing and tax-smoothing models, we  simply use code from {doc}`Consumption Smoothing with Complete and Incomplete Markets <smoothing>`

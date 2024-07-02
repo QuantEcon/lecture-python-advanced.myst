@@ -20,10 +20,6 @@ kernelspec:
 
 # Irrelevance of Capital Structures with Complete Markets
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 ```{code-cell} ipython
@@ -872,7 +868,6 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm
 from numba import njit, prange
 from quantecon.optimize import root_finding
-%matplotlib inline
 ```
 
 ```{code-cell} python3

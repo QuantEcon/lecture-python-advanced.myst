@@ -56,19 +56,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b09b2da44b9015b4fa76ea072fa2d8f7faee5492" type="text/css" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -254,22 +254,8 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="additive-and-multiplicative-functionals">
-<h1><a class="toc-backref" href="#id11"><span class="section-number">30. </span>Additive and Multiplicative Functionals</a><a class="headerlink" href="#additive-and-multiplicative-functionals" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
-<span id="index-0"></span><p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#additive-and-multiplicative-functionals" id="id11">Additive and Multiplicative Functionals</a></p>
-<ul>
-<li><p><a class="reference internal" href="#overview" id="id12">Overview</a></p></li>
-<li><p><a class="reference internal" href="#a-particular-additive-functional" id="id13">A Particular Additive Functional</a></p></li>
-<li><p><a class="reference internal" href="#dynamics" id="id14">Dynamics</a></p></li>
-<li><p><a class="reference internal" href="#code" id="id15">Code</a></p></li>
-<li><p><a class="reference internal" href="#more-about-the-multiplicative-martingale" id="id16">More About the Multiplicative Martingale</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
-<p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
+<h1><span class="section-number">30. </span>Additive and Multiplicative Functionals<a class="headerlink" href="#additive-and-multiplicative-functionals" title="Permalink to this heading">#</a></h1>
+<p id="index-0">In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>quantecon
@@ -285,7 +271,7 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.7.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.31.0)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.11.4)
@@ -304,7 +290,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </details>
 </div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">30.1. </span>Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>Many economic time series display persistent growth that prevents them from being  asymptotically stationary and ergodic.</p>
 <p>For example, outputs, prices, and dividends typically display  irregular but persistent growth.</p>
 <p>Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.</p>
@@ -334,7 +320,6 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 <span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
 <span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
 <span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">lognorm</span>
 </pre></div>
 </div>
@@ -342,7 +327,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </div>
 </section>
 <section id="a-particular-additive-functional">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">30.2. </span>A Particular Additive Functional</a><a class="headerlink" href="#a-particular-additive-functional" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.2. </span>A Particular Additive Functional<a class="headerlink" href="#a-particular-additive-functional" title="Permalink to this heading">#</a></h2>
 <p><span id="id4">[<a class="reference internal" href="zreferences.html#id240" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span> describes a general class of additive functionals.</p>
 <p>This lecture focuses on a subclass of these: a scalar process <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> whose increments are driven by a Gaussian vector autoregression.</p>
 <p>Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
@@ -433,7 +418,7 @@ z_{t+1}
 </section>
 </section>
 <section id="dynamics">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">30.3. </span>Dynamics</a><a class="headerlink" href="#dynamics" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.3. </span>Dynamics<a class="headerlink" href="#dynamics" title="Permalink to this heading">#</a></h2>
 <p>Let’s run some simulations to build intuition.</p>
 <p id="addfunc-eg1">In doing so we’ll assume that <span class="math notranslate nohighlight">\(z_{t+1}\)</span> is scalar and that <span class="math notranslate nohighlight">\(\tilde x_t\)</span> follows a 4th-order scalar autoregression.</p>
 <div class="math notranslate nohighlight" id="equation-ftaf">
@@ -938,7 +923,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/26db903385abc774df22de88d691297fc1ea0596f76051c76b82774929bb0445.png" src="_images/26db903385abc774df22de88d691297fc1ea0596f76051c76b82774929bb0445.png" />
+<img alt="_images/73c45097f33db4971b5a1c62443bbb7c39cae5532f19dc589d75aaf454b225e3.png" src="_images/73c45097f33db4971b5a1c62443bbb7c39cae5532f19dc589d75aaf454b225e3.png" />
 </div>
 </div>
 <p>Notice the irregular but persistent growth in <span class="math notranslate nohighlight">\(y_t\)</span>.</p>
@@ -1064,7 +1049,7 @@ interest.</p>
 </section>
 </section>
 <section id="code">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">30.4. </span>Code</a><a class="headerlink" href="#code" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.4. </span>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h2>
 <p>The class <code class="docutils literal notranslate"><span class="pre">AMF_LSS_VAR</span></code> mentioned <a class="reference internal" href="#amf-lss"><span class="std std-ref">above</span></a> does all that we want to study our additive functional.</p>
 <p>In fact, <code class="docutils literal notranslate"><span class="pre">AMF_LSS_VAR</span></code> does more
 because it allows us to study  an associated multiplicative functional as well.</p>
@@ -1082,7 +1067,7 @@ you will generate (modulo randomness) the plot</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7432c09c8cd29a723c3aa5423341d541aa9f21c150f8be77592c653eab39d6c5.png" src="_images/7432c09c8cd29a723c3aa5423341d541aa9f21c150f8be77592c653eab39d6c5.png" />
+<img alt="_images/b6acb01aced24bf4ae21980cd7381488aad164886523c9cf9936852f05c9cfdc.png" src="_images/b6acb01aced24bf4ae21980cd7381488aad164886523c9cf9936852f05c9cfdc.png" />
 </div>
 </div>
 <p>When we plot multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plot the population 95% probability coverage sets computed using the LinearStateSpace class.</p>
@@ -1133,7 +1118,7 @@ obtain the graph in the next cell.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b6c7cec1119134012a16e9cf256210e60fbff184048eaa4cbd1c4dde7cb0efa5.png" src="_images/b6c7cec1119134012a16e9cf256210e60fbff184048eaa4cbd1c4dde7cb0efa5.png" />
+<img alt="_images/d7686bd95d9270862c74c1493526d84f1c61f26c1de2c797dd66a56f3b0e126d.png" src="_images/d7686bd95d9270862c74c1493526d84f1c61f26c1de2c797dd66a56f3b0e126d.png" />
 </div>
 </div>
 <p>As before, when we plotted multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plotted population 95% confidence bands computed using the LinearStateSpace class.</p>
@@ -1176,7 +1161,7 @@ zero almost surely</p></li>
 </section>
 </section>
 <section id="more-about-the-multiplicative-martingale">
-<h2><a class="toc-backref" href="#id16"><span class="section-number">30.5. </span>More About the Multiplicative Martingale</a><a class="headerlink" href="#more-about-the-multiplicative-martingale" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.5. </span>More About the Multiplicative Martingale<a class="headerlink" href="#more-about-the-multiplicative-martingale" title="Permalink to this heading">#</a></h2>
 <p>Let’s drill down and study probability distribution of the multiplicative martingale  <span class="math notranslate nohighlight">\(\{\widetilde M_t\}_{t=0}^\infty\)</span>  in
 more detail.</p>
 <p>As we  have seen, it has representation</p>

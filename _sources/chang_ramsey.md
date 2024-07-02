@@ -20,10 +20,6 @@ kernelspec:
 
 # Competitive Equilibria of a Model of Chang
 
-```{contents} Contents
-:depth: 2
-```
-
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 ```{code-cell} ipython
@@ -76,7 +72,6 @@ We'll start with some standard imports:
 import numpy as np
 import polytope
 import matplotlib.pyplot as plt
-%matplotlib inline
 ```
 
 ### The Setting

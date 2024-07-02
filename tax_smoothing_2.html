@@ -56,19 +56,19 @@
   
   <script data-cfasync="false">
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
-    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
   
-  <link href="_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b09b2da44b9015b4fa76ea072fa2d8f7faee5492" type="text/css" />
@@ -80,9 +80,9 @@
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
-  <script src="_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -240,23 +240,7 @@ const thebe_selector_output = ".output, .cell_output"
                 <img style="width:250px;display:inline;" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="how-to-pay-for-a-war-part-2">
-<span id="index-0"></span><h1><a class="toc-backref" href="#id8"><span class="section-number">10. </span>How to Pay for a War: Part 2</a><a class="headerlink" href="#how-to-pay-for-a-war-part-2" title="Permalink to this heading">#</a></h1>
-<div class="contents topic" id="contents">
-<p class="topic-title">Contents</p>
-<ul class="simple">
-<li><p><a class="reference internal" href="#how-to-pay-for-a-war-part-2" id="id8">How to Pay for a War: Part 2</a></p>
-<ul>
-<li><p><a class="reference internal" href="#an-application-of-markov-jump-linear-quadratic-dynamic-programming" id="id9">An Application of Markov Jump Linear Quadratic Dynamic Programming</a></p></li>
-<li><p><a class="reference internal" href="#two-example-specifications" id="id10">Two example specifications</a></p></li>
-<li><p><a class="reference internal" href="#one-and-two-period-bonds-but-no-restructuring" id="id11">One- and Two-period Bonds but No Restructuring</a></p></li>
-<li><p><a class="reference internal" href="#mapping-into-an-lq-markov-jump-problem" id="id12">Mapping into an LQ Markov Jump Problem</a></p></li>
-<li><p><a class="reference internal" href="#penalty-on-different-issuance-across-maturities" id="id13">Penalty on Different Issuance Across Maturities</a></p></li>
-<li><p><a class="reference internal" href="#a-model-with-restructuring" id="id14">A Model with Restructuring</a></p></li>
-<li><p><a class="reference internal" href="#restructuring-as-a-markov-jump-linear-quadratic-control-problem" id="id15">Restructuring as a Markov Jump Linear Quadratic Control Problem</a></p></li>
-</ul>
-</li>
-</ul>
-</div>
+<span id="index-0"></span><h1><span class="section-number">10. </span>How to Pay for a War: Part 2<a class="headerlink" href="#how-to-pay-for-a-war-part-2" title="Permalink to this heading">#</a></h1>
 <p>In addition to what’s in Anaconda, this lecture  deploys the quantecon library:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -292,7 +276,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </details>
 </div>
 <section id="an-application-of-markov-jump-linear-quadratic-dynamic-programming">
-<h2><a class="toc-backref" href="#id9"><span class="section-number">10.1. </span>An Application of Markov Jump Linear Quadratic Dynamic Programming</a><a class="headerlink" href="#an-application-of-markov-jump-linear-quadratic-dynamic-programming" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.1. </span>An Application of Markov Jump Linear Quadratic Dynamic Programming<a class="headerlink" href="#an-application-of-markov-jump-linear-quadratic-dynamic-programming" title="Permalink to this heading">#</a></h2>
 <p>This is a <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">sequel to an earlier lecture</span></a>.</p>
 <p>We use a method introduced in lecture <a class="reference internal" href="markov_jump_lq.html"><span class="doc">Markov Jump LQ dynamic programming</span></a> to
 implement suggestions by Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id236" title="Robert J Barro. Determinants of democracy. Journal of Political economy, 107(S6):S158–S183, 1999.">Barro, 1999</a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id237" title="Robert J Barro and Rachel McCleary. Religion and economic growth. Technical Report, National Bureau of Economic Research, 2003.">Barro and McCleary, 2003</a>]</span>) for extending his
@@ -326,14 +310,13 @@ governed by a jointly stationary stochastic process.</p></li>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="two-example-specifications">
-<h2><a class="toc-backref" href="#id10"><span class="section-number">10.2. </span>Two example specifications</a><a class="headerlink" href="#two-example-specifications" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.2. </span>Two example specifications<a class="headerlink" href="#two-example-specifications" title="Permalink to this heading">#</a></h2>
 <p>We’ll describe two possible specifications</p>
 <ul class="simple">
 <li><p>In one, each period the government issues zero-coupon
@@ -345,7 +328,7 @@ structure of the debt each period.</p></li>
 </ul>
 </section>
 <section id="one-and-two-period-bonds-but-no-restructuring">
-<h2><a class="toc-backref" href="#id11"><span class="section-number">10.3. </span>One- and Two-period Bonds but No Restructuring</a><a class="headerlink" href="#one-and-two-period-bonds-but-no-restructuring" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.3. </span>One- and Two-period Bonds but No Restructuring<a class="headerlink" href="#one-and-two-period-bonds-but-no-restructuring" title="Permalink to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(T_t\)</span> denote tax collections, <span class="math notranslate nohighlight">\(\beta\)</span> a discount factor,
 <span class="math notranslate nohighlight">\(b_{t,t+1}\)</span> time <span class="math notranslate nohighlight">\(t+1\)</span> goods that the government promises to
 pay at <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(b_{t,t+2}\)</span> time <span class="math notranslate nohighlight">\(t+2\)</span> goods that the
@@ -402,7 +385,7 @@ government debt, we can also in principle allow the matrices
 intermediated through the Markov state <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
 </section>
 <section id="mapping-into-an-lq-markov-jump-problem">
-<h2><a class="toc-backref" href="#id12"><span class="section-number">10.4. </span>Mapping into an LQ Markov Jump Problem</a><a class="headerlink" href="#mapping-into-an-lq-markov-jump-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.4. </span>Mapping into an LQ Markov Jump Problem<a class="headerlink" href="#mapping-into-an-lq-markov-jump-problem" title="Permalink to this heading">#</a></h2>
 <p>First, define</p>
 <div class="math notranslate nohighlight">
 \[
@@ -604,7 +587,7 @@ jump LQ problem.</p></li>
 </ol>
 </section>
 <section id="penalty-on-different-issuance-across-maturities">
-<h2><a class="toc-backref" href="#id13"><span class="section-number">10.5. </span>Penalty on Different Issuance Across Maturities</a><a class="headerlink" href="#penalty-on-different-issuance-across-maturities" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.5. </span>Penalty on Different Issuance Across Maturities<a class="headerlink" href="#penalty-on-different-issuance-across-maturities" title="Permalink to this heading">#</a></h2>
 <p>To implement a simple example of the two-period model, we assume that
 <span class="math notranslate nohighlight">\(G_t\)</span> follows an AR(1) process:</p>
 <div class="math notranslate nohighlight">
@@ -691,7 +674,7 @@ moving from one to the other.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/858ac0f4cbcfde34205976ec87ed7e3928e798c6c7fe9b1d94abdf374953be99.png" src="_images/858ac0f4cbcfde34205976ec87ed7e3928e798c6c7fe9b1d94abdf374953be99.png" />
+<img alt="_images/eddab3c3b3b7eb74558d19e301b7d5c63e8d33d50e6b38905a74de838820efe8.png" src="_images/eddab3c3b3b7eb74558d19e301b7d5c63e8d33d50e6b38905a74de838820efe8.png" />
 </div>
 </div>
 <p>The above simulations show that when no penalty is imposed on different
@@ -741,12 +724,12 @@ two-period debt:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3fc310875325adb1d072ee95c96ad612fcf7a6d02bdc3f92cb08808ea6fe094d.png" src="_images/3fc310875325adb1d072ee95c96ad612fcf7a6d02bdc3f92cb08808ea6fe094d.png" />
+<img alt="_images/69ad9d3f451678628db74aad60a39d20a2ecf564e21d6e26f20096d46d90e6f0.png" src="_images/69ad9d3f451678628db74aad60a39d20a2ecf564e21d6e26f20096d46d90e6f0.png" />
 </div>
 </div>
 </section>
 <section id="a-model-with-restructuring">
-<h2><a class="toc-backref" href="#id14"><span class="section-number">10.6. </span>A Model with Restructuring</a><a class="headerlink" href="#a-model-with-restructuring" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.6. </span>A Model with Restructuring<a class="headerlink" href="#a-model-with-restructuring" title="Permalink to this heading">#</a></h2>
 <p>This model alters two features of the previous model:</p>
 <ol class="arabic simple">
 <li><p>The maximum horizon of government debt is now extended to a general
@@ -887,7 +870,7 @@ A_t = \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; A_{22,t} \end{bmatrix} , \hspace{5mm}
 <p>This completes the mapping into a Markov jump LQ problem.</p>
 </section>
 <section id="restructuring-as-a-markov-jump-linear-quadratic-control-problem">
-<h2><a class="toc-backref" href="#id15"><span class="section-number">10.7. </span>Restructuring as a Markov Jump Linear Quadratic Control Problem</a><a class="headerlink" href="#restructuring-as-a-markov-jump-linear-quadratic-control-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">10.7. </span>Restructuring as a Markov Jump Linear Quadratic Control Problem<a class="headerlink" href="#restructuring-as-a-markov-jump-linear-quadratic-control-problem" title="Permalink to this heading">#</a></h2>
 <p>As with the previous model, we can use a function to map the primitives
 of the model with restructuring into the matrices that the <code class="docutils literal notranslate"><span class="pre">LQMarkov</span></code>
 class requires:</p>
@@ -1024,7 +1007,7 @@ above</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4c7a448d455dda1be96ff2c4116b87c6a2985acadc027b7064ab0530665169c5.png" src="_images/4c7a448d455dda1be96ff2c4116b87c6a2985acadc027b7064ab0530665169c5.png" />
+<img alt="_images/2f4ed293dc3a19a822548b86637a86d04732d0605df1dbbfd0ccaf79416a2034.png" src="_images/2f4ed293dc3a19a822548b86637a86d04732d0605df1dbbfd0ccaf79416a2034.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1040,7 +1023,7 @@ above</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/daaeb196265488fd2b87d9361322b152931c47051b55fd3bb1317db28c510a1d.png" src="_images/daaeb196265488fd2b87d9361322b152931c47051b55fd3bb1317db28c510a1d.png" />
+<img alt="_images/9ffffd3d82449f73ba6fbc6b917093bf6aeab11648be76549454992af94cb678.png" src="_images/9ffffd3d82449f73ba6fbc6b917093bf6aeab11648be76549454992af94cb678.png" />
 </div>
 </div>
 </section>
