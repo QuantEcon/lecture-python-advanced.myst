@@ -19,7 +19,7 @@ a "machine learning" approach.
 We want to compute a vector of money growth rates $(\mu_0, \mu_1, \ldots, \mu_{T-1}, \bar \mu)$ 
 to maximize the function $\tilde V$ below.
 
-### Parameters and variables
+## Parameters and variables
 
 We'll start by setting them at the default values from {doc}`calvo`.
 
@@ -43,9 +43,6 @@ Variables are
 Truncation parameter $T >0$
 
   * Positive integer $T$  is a new parameter that we'll use in our approximation algorithm below
-
-
-
 
 ### Basic objects
 
@@ -92,8 +89,6 @@ $$
 \lambda = \frac{\alpha}{1+\alpha}
 $$
 
-
-
 ## Approximations
 
 We will approximate $\vec \mu$ by a truncated  vector
@@ -108,7 +103,6 @@ and we'll approximate $\vec \theta$ with a truncated vector in which
 $$
 \theta_t = \bar \theta \quad \forall t \geq T
 $$
-
 
 ### Comment
 
@@ -407,7 +401,11 @@ grad_V = jax.grad(lambda μ: -compute_V(μ, β=0.85, c=2))
 # Optimize μ
 optimized_μ = adam_optimizer(grad_V, μ)
 
-print(f"optimized μ = {optimized_μ}")
+print(f"optimized μ = \n{optimized_μ}")
+```
+
+```{code-cell} ipython3
+print(f"original μ = \n{clq.μ_series}")
 ```
 
 ```{code-cell} ipython3
