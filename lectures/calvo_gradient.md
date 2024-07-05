@@ -179,6 +179,8 @@ import jax.numpy as jnp
 from jax import jit
 import jax
 import optax
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
 ```
 
 First we copy the class `ChangLQ` to solve the LQ Chang model in {doc}`calvo`.
@@ -299,7 +301,6 @@ class ChangLQ:
         self.J_range = np.ptp(self.J_space)
         self.J_LB = np.min(self.J_space) - 0.05 * self.J_range
         self.J_UB = np.max(self.J_space) + 0.05 * self.J_range
-
 ```
 
 Now we compute the value of $V$ under this setup, and compare it against those obtained in {ref}`compute_lq`.
@@ -390,6 +391,7 @@ def adam_optimizer(grad_func, init_params,
 
 ```{code-cell} ipython3
 :tags: [scroll-output]
+
 %%time
 
 # Initial guess for μ
@@ -415,4 +417,59 @@ print(f'deviation = {np.linalg.norm(optimized_μ - clq.μ_series)}')
 ```{code-cell} ipython3
 compute_V(optimized_μ, β=0.85, c=2) \
 > compute_V(clq.μ_series, β=0.85, c=2)
+```
+
+## Regressing $\vec \theta_t$ and $\vec \mu_t$
+
+```{code-cell} ipython3
+# Compute θ using optimized_μ
+θs = np.array(compute_θ(optimized_μ))
+μs = np.array(optimized_μ)
+
+# First regression: μ_t on a constant and θ_t
+X1_θ = sm.add_constant(θs)  # Add a constant term for the intercept
+model1 = sm.OLS(μs, X1_θ)
+results1 = model1.fit()
+
+# Print regression summary
+print("Regression of μ_t on a constant and θ_t:")
+print(results1.summary())
+```
+
+```{code-cell} ipython3
+results1.predict(X_θ)
+```
+
+```{code-cell} ipython3
+# Plot for the first regression
+plt.scatter(θs, μs, label='Data')
+plt.plot(θs, results1.predict(X1_θ), 'C1', label='$\hat \mu_t$', linestyle='--')
+plt.xlabel(r'$\theta_t$')
+plt.ylabel(r'$\mu_t$')
+plt.legend()
+plt.show()
+```
+
+```{code-cell} ipython3
+# Second regression: θ_{t+1} on a constant and θ_t
+θ_t = np.array(computed_θ[:-1])  # θ_t
+θ_t1 = np.array(computed_θ[1:])  # θ_{t+1}
+X2_θ = sm.add_constant(θ_t)  # Add a constant term for the intercept
+model2 = sm.OLS(θ_t1, X2_θ)
+results2 = model2.fit()
+
+# Print regression summary
+print("\nRegression of \theta_{t+1} on a constant and \theta_t:")
+print(results2.summary())
+```
+
+```{code-cell} ipython3
+plt.scatter(θ_t, θ_t1, label='Data')
+plt.plot(θ_t, results2.predict(X2_θ), color='C1', label='$\hat θ_t$')
+plt.xlabel(r'$\theta_t$')
+plt.ylabel(r'$\theta_{t+1}$')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
 ```
