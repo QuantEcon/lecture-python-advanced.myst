@@ -70,11 +70,11 @@ $$
 To make them match, set
 
 $$
-\begin{aligned*}
+\begin{aligned}
 h_0 & = u_0 \cr
 h_1 & = -\alpha u_1 \cr
 h_2 & = - \frac{u_2 \alpha^2}{2}
-\end{aligned*}
+\end{aligned}
 $$
 
 The inflation rate $\theta_t$ is determined by
