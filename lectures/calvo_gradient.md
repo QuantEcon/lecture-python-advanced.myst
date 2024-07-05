@@ -129,7 +129,7 @@ $$
 where $\theta_t$ satisfies
 
 $$
-\theta_t = (1-\lambda) \sum_{j=0}^{T-1-t} \lambda^j \mu_{t+j} + \lambda^{T-t} \bar \mu  \tag{1}
+\theta_t = (1-\lambda) \sum_{j=0}^{T-1-t} \lambda^j \mu_{t+j} + \lambda^{T-t} \bar \mu 
 $$ 
 
 for $t=0, 1, \ldots, T-1$ and $\bar \theta = \bar \mu$.
@@ -170,6 +170,7 @@ We use the following imports in this lecture
 
 !pip install --upgrade quantecon
 !pip install --upgrade optax
+!pip install --upgrade statsmodels
 ```
 
 ```{code-cell} ipython3
@@ -427,7 +428,7 @@ compute_V(optimized_μ, β=0.85, c=2) \
 μs = np.array(optimized_μ)
 
 # First regression: μ_t on a constant and θ_t
-X1_θ = sm.add_constant(θs)  # Add a constant term for the intercept
+X1_θ = sm.add_constant(θs)
 model1 = sm.OLS(μs, X1_θ)
 results1 = model1.fit()
 
@@ -437,11 +438,6 @@ print(results1.summary())
 ```
 
 ```{code-cell} ipython3
-results1.predict(X_θ)
-```
-
-```{code-cell} ipython3
-# Plot for the first regression
 plt.scatter(θs, μs, label='Data')
 plt.plot(θs, results1.predict(X1_θ), 'C1', label='$\hat \mu_t$', linestyle='--')
 plt.xlabel(r'$\theta_t$')
@@ -452,8 +448,8 @@ plt.show()
 
 ```{code-cell} ipython3
 # Second regression: θ_{t+1} on a constant and θ_t
-θ_t = np.array(computed_θ[:-1])  # θ_t
-θ_t1 = np.array(computed_θ[1:])  # θ_{t+1}
+θ_t = np.array(θs[:-1])  # θ_t
+θ_t1 = np.array(θs[1:])  # θ_{t+1}
 X2_θ = sm.add_constant(θ_t)  # Add a constant term for the intercept
 model2 = sm.OLS(θ_t1, X2_θ)
 results2 = model2.fit()
