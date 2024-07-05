@@ -434,11 +434,11 @@ results1 = model1.fit()
 
 # Print regression summary
 print("Regression of μ_t on a constant and θ_t:")
-print(results1.summary())
+print(results1.summary(slim=True))
 ```
 
 ```{code-cell} ipython3
-plt.scatter(θs, μs, label='Data')
+plt.scatter(θs, μs)
 plt.plot(θs, results1.predict(X1_θ), 'C1', label='$\hat \mu_t$', linestyle='--')
 plt.xlabel(r'$\theta_t$')
 plt.ylabel(r'$\mu_t$')
@@ -455,17 +455,111 @@ model2 = sm.OLS(θ_t1, X2_θ)
 results2 = model2.fit()
 
 # Print regression summary
-print("\nRegression of \theta_{t+1} on a constant and \theta_t:")
-print(results2.summary())
+print("\nRegression of θ_{t+1} on a constant and θ_t:")
+print(results2.summary(slim=True))
 ```
 
 ```{code-cell} ipython3
-plt.scatter(θ_t, θ_t1, label='Data')
-plt.plot(θ_t, results2.predict(X2_θ), color='C1', label='$\hat θ_t$')
+plt.scatter(θ_t, θ_t1)
+plt.plot(θ_t, results2.predict(X2_θ), color='C1', label='$\hat θ_t$', linestyle='--')
 plt.xlabel(r'$\theta_t$')
 plt.ylabel(r'$\theta_{t+1}$')
 plt.legend()
 
 plt.tight_layout()
 plt.show()
+```
+
+## Regress $V$ and $\vec\theta_t$
+
++++
+
+First, we modified the function `compute_V_t` to return a sequence of $\vec v_t$.
+
+```{code-cell} ipython3
+def compute_V_t(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
+    θ = compute_θ(μ, α)
+    
+    h0 = u0
+    h1 = -u1 * α
+    h2 = -0.5 * u2 * α**2
+    
+    T = len(μ)
+    V_t = jnp.zeros(T)
+    
+    for t in range(T - 1):
+        V_t = V_t.at[t].set(β**t * (h0 + h1 * θ[t] + h2 * θ[t]**2 - 0.5 * c * μ[t]**2))
+    
+    # Terminal condition
+    V_t = V_t.at[T-1].set((β**(T-1) / (1 - β)) * (h0 + h1 * μ[-1] + h2 * μ[-1]**2 - 0.5 * c * μ[-1]**2))
+    
+    return V_t
+```
+
+```{code-cell} ipython3
+# Compute v_t
+v_ts = np.array(compute_V_t(optimized_μ, β=0.85, c=2))
+
+# Initialize arrays for discounted sum of θ_t, θ_t^2, μ_t^2
+βθ_t = np.zeros(T)
+βθ_t2 = np.zeros(T)
+βμ_t2 = np.zeros(T)
+
+# Compute discounted sum of θ_t, θ_t^2, μ_t^2
+for ts in range(T):
+    βθ_t[ts] = sum(clq.β**t * θs[t] 
+                   for t in range(ts + 1))
+    βθ_t2[ts] = sum(clq.β**t * θs[t]**2 
+                    for t in range(ts + 1))
+    βμ_t2[ts] = sum(clq.β**t * μs[t]**2 
+                    for t in range(ts + 1))
+
+X = np.column_stack((βθ_t, βθ_t2, βμ_t2))
+X_vt = sm.add_constant(X)
+
+# Fit the model
+model3 = sm.OLS(v_ts, X_vt).fit()
+```
+
+```{code-cell} ipython3
+plt.figure()
+plt.scatter(θs, v_ts)
+plt.plot(θs, model3.predict(X_vt), color='C1', label='$\hat v_t$', linestyle='--')
+plt.xlabel('$θ_t$')
+plt.ylabel('$v_t$')
+plt.legend()
+plt.show()
+```
+
+## Restriction to $\mu_t = \bar \mu$
+
++++
+
+In this case, we restrict $\mu_t = \bar \mu \text{ for } \forall t$
+
+```{code-cell} ipython3
+# Initial guess for single μ
+μ = jnp.zeros(1)
+
+# Maximization instead of minimization
+grad_V = jax.grad(lambda μ: -compute_V(μ, β=0.85, c=2)) 
+
+# Optimize μ
+optimized_μ_CR = adam_optimizer(grad_V, μ)
+
+print(f"optimized μ = \n{optimized_μ_CR}")
+```
+
+Compare it to $\mu^{CR}$ in {doc}`calvo`, we again obtained a close estimate.
+
+```{code-cell} ipython3
+np.linalg.norm(clq.μ_CR - optimized_μ_CR)
+```
+
+```{code-cell} ipython3
+compute_V(jnp.array([clq.μ_CR]), β=0.85, c=2)
+```
+
+```{code-cell} ipython3
+compute_V(optimized_μ_CR, β=0.85, c=2)
 ```
