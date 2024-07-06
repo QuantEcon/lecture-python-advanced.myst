@@ -11,7 +11,148 @@ kernelspec:
   name: python3
 ---
 
-# Solving Ramsey Plans with Gradient Method
+
+# A Model of Calvo
+
+This lecture describes a  linear-quadratic versions of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government
+plans.
+
+
+The model focuses attention on intertemporal tradeoffs between
+
+- welfare benefits that anticipations of future  deflation generate  by decreasing  costs of holding real money balances and thereby increasing a representative agent's *liquidity*, as measured by his or her holdings of real money balances, and
+- costs associated with the  distorting taxes that the government must levy in order to acquire the paper money that it will  destroy  in order to generate anticipated deflation
+
+The model features
+
+- rational expectations
+- costly government actions at all dates $t \geq 1$ that increase household utilities at dates before $t$
+
+
+We'll use ideas from  papers by Cagan {cite}`Cagan` and  Calvo {cite}`Calvo1978`
+
+
+
+## Model components
+
+There is no uncertainty.
+
+Let:
+
+- $p_t$ be the log of the price level
+- $m_t$ be the log of nominal money balances
+- $\theta_t = p_{t+1} - p_t$ be the net rate of inflation between $t$ and $t+1$
+- $\mu_t = m_{t+1} - m_t$ be the net rate of growth of nominal balances
+
+The demand for real balances is governed by a perfect foresight
+version of a Cagan {cite}`Cagan` demand function for real balances:
+
+```{math}
+:label: eq_old1
+
+m_t - p_t = -\alpha(p_{t+1} - p_t) \: , \: \alpha > 0
+```
+
+for $t \geq 0$.
+
+Equation {eq}`eq_old1` asserts that the demand for real balances is inversely
+related to the public's expected rate of inflation, which  equals
+the actual rate of inflation because there is no uncertainty here.
+
+(When there is no uncertainty, an assumption of **rational expectations** that becomes equivalent to  **perfect foresight**).
+
+
+Subtracting the demand function {eq}`eq_old1` at time $t$ from the demand
+function at $t+1$ gives:
+
+$$
+\mu_t - \theta_t = -\alpha \theta_{t+1} + \alpha \theta_t
+$$
+
+or
+
+```{math}
+:label: eq_old2
+
+\theta_t = \frac{\alpha}{1+\alpha} \theta_{t+1} + \frac{1}{1+\alpha} \mu_t
+```
+
+Because $\alpha > 0$,  $0 < \frac{\alpha}{1+\alpha} < 1$.
+
+**Definition:** For  scalar $b_t$, let $L^2$ be the space of sequences
+$\{b_t\}_{t=0}^\infty$ satisfying
+
+$$
+\sum_{t=0}^\infty  b_t^2 < +\infty
+$$
+
+We say that a sequence that belongs to $L^2$   is **square summable**.
+
+When we assume that the sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ is square summable and we require that the sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$ is square summable,
+the linear difference equation {eq}`eq_old2` can be solved forward to get:
+
+```{math}
+:label: eq_old3
+
+\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}
+```
+
+```{note}
+Equations {eq}`eq_old1` and {eq}`eq_old3` show that $\theta_t$ intermediates
+how choices of $\mu_{t+j}, \ j=0, 1, \ldots$ impinge on time $t$
+real balances $m_t - p_t = -\alpha \theta_t$.  Chang {cite}`chang1998credible` exploits this
+fact extensively.
+``` 
+
+An equivalence class of continuation money growth sequences $\{\mu_{t+j}\}_{j=0}^\infty$ deliver the same $\theta_t$.
+
+
+
+The  government  values  a representative household's utility of real balances at time $t$ according to the utility function
+
+```{math}
+:label: eq_old5
+
+U(m_t - p_t) = u_0 + u_1 (m_t - p_t) - \frac{u_2}{2} (m_t - p_t)^2, \quad u_0 > 0, u_1 > 0, u_2 > 0
+```
+
+The money demand function {eq}`eq_old1` and the utility function {eq}`eq_old5` imply that 
+
+$$
+U(-\alpha \theta_t) = u_1 + u_2 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
+$$ (eq_old5a)
+
+
+```{note}
+The "bliss level" of real balances is  $\frac{u_1}{u_2}$ and the inflation rate that attains
+it is $-\frac{u_1}{u_2 \alpha}$.
+```
+
+Via equation {eq}`eq_old3`, a government plan
+$\vec \mu = \{\mu_t \}_{t=0}^\infty$ leads to a
+sequence of inflation outcomes
+$\vec \theta = \{ \theta_t \}_{t=0}^\infty$.
+
+We assume that the government incurs  social costs $\frac{c}{2} \mu_t^2$ at
+$t$ when it  changes the stock of nominal money
+balances at rate $\mu_t$.
+
+Therefore, the one-period welfare function of a benevolent government
+is:
+
+$$
+v_0 = \sum_{t=0}^\infty \beta^t s(\theta_t, \mu_t) 
+$$
+
+where $\beta \in (0,1)$ is a discount factor and  the goverment's  one-period welfare function is  
+
+$$
+s(\theta_t,\mu_t) = U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2  .
+$$
+
+
+
+## A Machine Learning approach
 
 This notebook describes non Pythonic, Tom style pseudo code for  solving Calvo's Ramsey problem using 
 a "machine learning" approach.
