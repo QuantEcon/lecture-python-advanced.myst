@@ -11,7 +11,6 @@ kernelspec:
   name: python3
 ---
 
-
 # A Model of Calvo
 
 This lecture describes a  linear-quadratic versions of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government
@@ -318,8 +317,7 @@ We use the following imports in this lecture
 from quantecon import LQ
 import numpy as np
 import jax.numpy as jnp
-from jax import jit
-import jax
+from jax import jit, grad
 import optax
 import statsmodels.api as sm
 import matplotlib.pyplot as plt
@@ -449,7 +447,7 @@ Now we compute the value of $V$ under this setup, and compare it against those o
 
 ```{code-cell} ipython3
 # Assume β=0.85, c=2, T=40.
-T=40
+T = 40
 clq = ChangLQ(β=0.85, c=2, T=T)
 ```
 
@@ -459,15 +457,22 @@ def compute_θ(μ, α=1):
     λ = α / (1 + α)
     T = len(μ) - 1
     μbar = μ[-1]
-    θ = jnp.zeros(len(μ))
-
-    for t in range(T):
-        temp = sum(λ**j * μ[t + j] for j in range(T - t))
-        θ = θ.at[t].set((1 - λ) * temp + λ**(T - t) * μbar)
-        
-    θ = θ.at[-1].set(μbar)
+    
+    # Create an array of powers for λ
+    λ_powers = λ ** jnp.arange(T + 1)
+    
+    # Compute the weighted sums for all t
+    weighted_sums = jnp.array(
+        [jnp.sum(λ_powers[:T-t] * μ[t:T]) for t in range(T)])
+    
+    # Compute θ values except for the last element
+    θ = (1 - λ) * weighted_sums + λ**(T - jnp.arange(T)) * μbar
+    
+    # Set the last element
+    θ = jnp.append(θ, μbar)
+    
     return θ
-
+    
 @jit
 def compute_V(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     θ = compute_θ(μ, α)
@@ -475,14 +480,17 @@ def compute_V(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     h0 = u0
     h1 = -u1 * α
     h2 = -0.5 * u2 * α**2
-       
+    
     T = len(μ) - 1
-    V = 0
+    t = np.arange(T)
     
-    for t in range(T):
-        V += β**t * (h0 + h1 * θ[t] + h2 * θ[t]**2 - 0.5 * c * μ[t]**2)
+    # Compute sum except for the last element
+    V_sum = np.sum(β**t * (h0 + h1 * θ[:T] + h2 * θ[:T]**2 - 0.5 * c * μ[:T]**2))
     
-    V += (β**T / (1 - β)) * (h0 + h1 * μ[-1] + h2 * μ[-1]**2 - 0.5 * c * μ[-1]**2)
+    # Compute the final term
+    V_final = (β**T / (1 - β)) * (h0 + h1 * μ[-1] + h2 * μ[-1]**2 - 0.5 * c * μ[-1]**2)
+    
+    V = V_sum + V_final
     
     return V
 ```
@@ -501,7 +509,7 @@ We will use the [`optax.adam`](https://optax.readthedocs.io/en/latest/api/optimi
 ```{code-cell} ipython3
 def adam_optimizer(grad_func, init_params, 
                    lr=0.1, 
-                   max_iter=1_000, 
+                   max_iter=10_000, 
                    error_tol=1e-7):
 
     # Set initial parameters and optimizer
@@ -531,7 +539,7 @@ def adam_optimizer(grad_func, init_params,
     return params
 ```
 
-Here we use automatic differentiation functionality in JAX with `jax.grad`.
+Here we use automatic differentiation functionality in JAX with `grad`.
 
 ```{code-cell} ipython3
 :tags: [scroll-output]
@@ -540,7 +548,7 @@ Here we use automatic differentiation functionality in JAX with `jax.grad`.
 μ_init = jnp.zeros(T)
 
 # Maximization instead of minimization
-grad_V = jit(jax.grad(
+grad_V = jit(grad(
     lambda μ: -compute_V(μ, β=0.85, c=2)))
 ```
 
@@ -691,7 +699,7 @@ In this case, we restrict $\mu_t = \bar \mu \text{ for } \forall t$
 μ_init = jnp.zeros(1)
 
 # Maximization instead of minimization
-grad_V = jit(jax.grad(
+grad_V = jit(grad(
     lambda μ: -compute_V(μ, β=0.85, c=2)))
 
 # Optimize μ
