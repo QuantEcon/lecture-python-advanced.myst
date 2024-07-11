@@ -47,21 +47,21 @@ The demand for real balances is governed by a perfect foresight
 version of a Cagan {cite}`Cagan` demand function for real balances:
 
 ```{math}
-:label: eq_old1
+:label: eq_grad_old1
 
 m_t - p_t = -\alpha(p_{t+1} - p_t) \: , \: \alpha > 0
 ```
 
 for $t \geq 0$.
 
-Equation {eq}`eq_old1` asserts that the demand for real balances is inversely
+Equation {eq}`eq_grad_old1` asserts that the demand for real balances is inversely
 related to the public's expected rate of inflation, which  equals
 the actual rate of inflation because there is no uncertainty here.
 
 (When there is no uncertainty, an assumption of **rational expectations** that becomes equivalent to  **perfect foresight**).
 
 
-Subtracting the demand function {eq}`eq_old1` at time $t$ from the demand
+Subtracting the demand function {eq}`eq_grad_old1` at time $t$ from the demand
 function at $t+1$ gives:
 
 $$
@@ -71,7 +71,7 @@ $$
 or
 
 ```{math}
-:label: eq_old2
+:label: eq_grad_old2
 
 \theta_t = \frac{\alpha}{1+\alpha} \theta_{t+1} + \frac{1}{1+\alpha} \mu_t
 ```
@@ -88,16 +88,16 @@ $$
 We say that a sequence that belongs to $L^2$   is **square summable**.
 
 When we assume that the sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ is square summable and we require that the sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$ is square summable,
-the linear difference equation {eq}`eq_old2` can be solved forward to get:
+the linear difference equation {eq}`eq_grad_old2` can be solved forward to get:
 
 ```{math}
-:label: eq_old3
+:label: eq_grad_old3
 
 \theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}
 ```
 
 ```{note}
-Equations {eq}`eq_old1` and {eq}`eq_old3` show that $\theta_t$ intermediates
+Equations {eq}`eq_grad_old1` and {eq}`eq_grad_old3` show that $\theta_t$ intermediates
 how choices of $\mu_{t+j}, \ j=0, 1, \ldots$ impinge on time $t$
 real balances $m_t - p_t = -\alpha \theta_t$.  Chang {cite}`chang1998credible` exploits this
 fact extensively.
@@ -110,16 +110,16 @@ An equivalence class of continuation money growth sequences $\{\mu_{t+j}\}_{j=0}
 The  government  values  a representative household's utility of real balances at time $t$ according to the utility function
 
 ```{math}
-:label: eq_old5
+:label: eq_grad_old5
 
 U(m_t - p_t) = u_0 + u_1 (m_t - p_t) - \frac{u_2}{2} (m_t - p_t)^2, \quad u_0 > 0, u_1 > 0, u_2 > 0
 ```
 
-The money demand function {eq}`eq_old1` and the utility function {eq}`eq_old5` imply that 
+The money demand function {eq}`eq_grad_old1` and the utility function {eq}`eq_grad_old5` imply that 
 
 $$
 U(-\alpha \theta_t) = u_1 + u_2 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
-$$ (eq_old5a)
+$$ (eq_grad_old5a)
 
 
 ```{note}
@@ -127,7 +127,7 @@ The "bliss level" of real balances is  $\frac{u_1}{u_2}$ and the inflation rate 
 it is $-\frac{u_1}{u_2 \alpha}$.
 ```
 
-Via equation {eq}`eq_old3`, a government plan
+Via equation {eq}`eq_grad_old3`, a government plan
 $\vec \mu = \{\mu_t \}_{t=0}^\infty$ leads to a
 sequence of inflation outcomes
 $\vec \theta = \{ \theta_t \}_{t=0}^\infty$.
