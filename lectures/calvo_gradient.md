@@ -11,7 +11,7 @@ kernelspec:
   name: python3
 ---
 
-# A Model of Calvo
+# Machine Learning a Model of Calvo
 
 This lecture describes a  linear-quadratic versions of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government
 plans.
@@ -28,7 +28,14 @@ The model features
 - costly government actions at all dates $t \geq 1$ that increase household utilities at dates before $t$
 
 
-We'll use ideas from  papers by Cagan {cite}`Cagan` and  Calvo {cite}`Calvo1978`
+We'll use ideas from  papers by Cagan {cite}`Cagan` and  Calvo {cite}`Calvo1978`.
+
+## A Machine Learning approach
+
+XXXX
+solving Calvo's Ramsey problem using 
+a "machine learning" approach.
+
 
 
 
@@ -97,13 +104,13 @@ the linear difference equation {eq}`eq_grad_old2` can be solved forward to get:
 ```
 
 ```{note}
-Equations {eq}`eq_grad_old1` and {eq}`eq_grad_old3` show that $\theta_t$ intermediates
+Equation {eq}`eq_grad_old3` shows that an equivalence class of continuation money growth sequences $\{\mu_{t+j}\}_{j=0}^\infty$ deliver the same $\theta_t$. Consequently, equations {eq}`eq_grad_old1` and {eq}`eq_grad_old3` show that $\theta_t$ intermediates
 how choices of $\mu_{t+j}, \ j=0, 1, \ldots$ impinge on time $t$
 real balances $m_t - p_t = -\alpha \theta_t$.  Chang {cite}`chang1998credible` exploits this
 fact extensively.
 ``` 
 
-An equivalence class of continuation money growth sequences $\{\mu_{t+j}\}_{j=0}^\infty$ deliver the same $\theta_t$.
+
 
 
 
@@ -151,51 +158,58 @@ $$
 
 
 
-## A Machine Learning approach
 
-This notebook describes non Pythonic, Tom style pseudo code for  solving Calvo's Ramsey problem using 
-a "machine learning" approach.
+
+
+## Parameters and variables
 
 We want to compute a vector of money growth rates $(\mu_0, \mu_1, \ldots, \mu_{T-1}, \bar \mu)$ 
 to maximize the function $\tilde V$ below.
 
-## Parameters and variables
-
 We'll start by setting them at the default values from {doc}`calvo`.
 
-Parameters are
+**Parameters**  are
 
-Demand for money: $\alpha > 0$, default $\alpha = 1$
+* Demand for money: $\alpha > 0$, default $\alpha = 1$
 
    * Induced demand function for money parameter $\lambda = \frac{\alpha}{1+\alpha}$
 
-Utility function $u_0, u_1, u_2 $ and $\beta \in (0,1)$
+ * Utility function $u_0, u_1, u_2 $ and $\beta \in (0,1)$
 
-Cost parameter of tax distortions associated with setting $\mu_t \neq 0$ is $c$
+ * Cost parameter of tax distortions associated with setting $\mu_t \neq 0$ is $c$
+ 
+ * Truncation parameter: a positive integer $T >0$
 
-Variables are
+  
+
+
+**Variables** are
 
  * $\theta_t = p_{t+1} - p_t$ where $p_t$ is log of price level
  
  * $\mu_t = m_{t+1} - m_t $ where $m_t$ is log of money supply
 
 
-Truncation parameter $T >0$
-
-  * Positive integer $T$  is a new parameter that we'll use in our approximation algorithm below
 
 ### Basic objects
 
+To prepare the way for our calculations, we'll remind ourselves of the key mathematical objects
+in play.
+
+* sequences of inflation rates and money creation rates:
+
 $$
 (\vec \theta, \vec \mu) = \{\theta_t, \mu_t\}_{t=0}^\infty
-$$
+$$ 
+
+* A planner's value function
 
 $$
 V = \sum_{t=0}^\infty \beta^t (h_0 + h_1 \theta_t + h_2 \theta_t^2 -
 \frac{c}{2} \mu_t^2 )
-$$
+$$ (eq:Ramseyvalue)
 
-where $h_0, h_1, h_2$ are chosen to make
+where we set  $h_0, h_1, h_2$  to make
 
 $$
 u_0 + u_1(-\alpha \theta_t) - \frac{u_2}{2} (-\alpha \theta_t)^2
@@ -207,7 +221,7 @@ $$
 h_0 + h_1 \theta_t + h_2 \theta_t^2 
 $$
 
-To make them match, set
+To make them match, we should  set
 
 $$
 \begin{aligned}
@@ -220,8 +234,8 @@ $$
 The inflation rate $\theta_t$ is determined by
 
 $$
-\theta_t = (1-\lambda) \sum_{j=0}^\infty \lambda^j \mu_{t+j}
-$$
+\theta_t = (1-\lambda) \sum_{j=0}^\infty \lambda^j \mu_{t+j}, \quad t \geq 0
+$$ (eq:inflation101)
 
 where 
 
@@ -229,36 +243,48 @@ $$
 \lambda = \frac{\alpha}{1+\alpha}
 $$
 
+A Ramsey planner chooses $\vec \mu$ to maximize the government's value function {eq}`eq:Ramseyvalue`
+subject to equation  {eq}`eq:inflation101`.
+
+The solution $\vec \mu$ of this problem is called a **Ramsey plan**.  
+
+
+
 ## Approximations
 
-We will approximate $\vec \mu$ by a truncated  vector
+We anticipate that under a Ramsey plan $\{\theta_t\}$ and $\{\mu_t\}$ will each converge to stationary values. 
+
+Thus, we guess that 
+ under the optimal policy
+$ \lim_{t \rightarrow + \infty} \mu_t = \bar \mu$.
+
+Convergence of $\mu_t$ to $\bar \mu$ together with formula {eq}`eq:inflation101` for the inflation rate then implies that  $ \lim_{t \rightarrow + \infty} \theta_t = \bar \mu$ as well.
+
+Consequently, we'll assume that we can guess a time $T$ large enough that $\mu_t$ has gotten 
+very close to the limit $\bar \mu$ and 
+we'll approximate $\vec \mu$ by a truncated  vector
 in which
 
 $$
 \mu_t = \bar \mu \quad \forall t \geq T
 $$
 
-and we'll approximate $\vec \theta$ with a truncated vector in which
+We'll approximate $\vec \theta$ with a truncated vector in which
 
 $$
 \theta_t = \bar \theta \quad \forall t \geq T
 $$
 
-### Comment
+**Formula for truncated $\vec \theta$ **
 
-We anticipate that under a Ramsey plan $\{\theta_t\}$ and $\{\mu_t\}$ will each converge to stationary values. That guess underlies the form of our approximating sequences.
-
-
-## Formula for $\theta_t$
-
-We want to write a function that takes 
+In light of our approximation, we now seek a  function that takes 
 
 $$
 \tilde \mu = \begin{bmatrix}\mu_0 & \mu_1 & \cdots & \mu_{T-1} & \bar \mu
 \end{bmatrix}
 $$
 
-as an input and give as an output
+as an input and  as an output gives
 
 
 $$
@@ -270,13 +296,13 @@ where $\theta_t$ satisfies
 
 $$
 \theta_t = (1-\lambda) \sum_{j=0}^{T-1-t} \lambda^j \mu_{t+j} + \lambda^{T-t} \bar \mu 
-$$ 
+$$ (eq:thetaformula102)
 
 for $t=0, 1, \ldots, T-1$ and $\bar \theta = \bar \mu$.
 
-## Approximation for $V$
+**Formula  for $V$**
 
-After we have computed the vectors $\tilde \mu$ and $\tilde \theta$
+Having computed the truncated vectors $\tilde \mu$ and $\tilde \theta$
 as described above, we want to write a function that computes
 
 $$
@@ -296,9 +322,11 @@ where $\tilde \theta_t, \ t = 0, 1, \ldots , T-1$ satisfies formula (1).
 
 ## A gradient algorithm
 
-We want to write code to maximize the criterion function by choice of the truncated vector  $\tilde \mu$.
+We now describe  code that  maximizes the criterion function {eq}`eq:Ramseyvalue` by choice of the truncated vector  $\tilde \mu$.
 
-We hope that answers will agree with those found in {doc}`calvo`.
+We use a brute force or ``machine learning`` approach that just hands our problem off to code that minimizes $V$ with respect to the components of $\tilde \mu$ by using gradient descent. 
+
+We hope that answers will agree with those found obtained by other more structured methods in this quantecon lecture {doc}`calvo`.
 
 ### Implementation
 
@@ -324,9 +352,9 @@ import statsmodels.api as sm
 import matplotlib.pyplot as plt
 ```
 
-First we copy the class `ChangLQ` to solve the LQ Chang model in {doc}`calvo`.
+First, because we'll want to compare the results we obtain here with those obtained with another, more structured, approach,  we copy the class `ChangLQ` to solve the LQ Chang model in this quantecon lecture {doc}`calvo`.
 
-We hide this cell because we would like readers to refer to the previous lecture for the details of the class.
+We hide the cell that copies the class, but readers can find details of the class in this quantecon lecture {doc}`calvo`..
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -578,7 +606,10 @@ compute_V(optimized_μ, β=0.85, c=2)
 compute_V(clq.μ_series, β=0.85, c=2)
 ```
 
-### Regressing $\vec \theta_t$ and $\vec \mu_t$
+### Some regressions
+
+In the interest of looking for some parameters that might help us learn about the structure of
+the Ramsey plan, we shall some least squares linear regressions of various components of $\vec \theta$ and $\vec \mu$ on others.  
 
 ```{code-cell} ipython3
 # Compute θ using optimized_μ
@@ -628,7 +659,10 @@ plt.tight_layout()
 plt.show()
 ```
 
-### Regress $V$ and $\vec\theta_t$
+Now to learn about the structure of the optimal value $V$ as a function of $\vec \mu, \vec \theta$,
+we'll run some more regressions.
+
+
 
 +++
 
@@ -689,11 +723,45 @@ plt.legend()
 plt.show()
 ```
 
-### Restriction to $\mu_t = \bar \mu$
+
+Using a different and more structured computational strategy, this quantecon lecture {doc}`calvo` represented
+a Ramsey plan recursively via the following system of linear equations:
+
+
+
+```{math}
+:label: eq_old9101
+
+\begin{aligned}
+\theta_0 & = \theta_0^R \\
+\mu_t &  = b_0 + b_1 \theta_t \\
+v_t & = g_0 +g_1\theta_t + g_2 \theta_t^2 \\
+\theta_{t+1} & = d_0 + d_1 \theta_t , \quad  d_0 >0, d_1 \in (0,1) \\
+\end{aligned}
+```
+
+where $b_0, b_1, g_0, g_1, g_2$ were positive parameters that the lecture computed with Python code.
+
+By running regressions on the outcomes $\vec \mu^R, \vec \theta^R$ that we have computed with the brute force gradient descent method in this lecture, we have recovered the same representation.
+
+However, in this lecture we have more or less discovered the representation by brute force -- i.e., 
+just by running some regressions and staring at the result, noticing that the $R^2$ of unity tell us
+that the fits are perfect.  
+
+### Restricting  $\mu_t = \bar \mu$ for all $t$
+
+We make a brief digression to solve a different problem than the Ramsey problem defined above.
+
+First, recall that a Ramsey planner chooses $\vec \mu$ to maximize the government's value function {eq}`eq:Ramseyvalue`subject to equation  {eq}`eq:inflation101`.
+
+We now define a distinct problem in which the planner chooses $\vec \mu$ to maximize the government's value function {eq}`eq:Ramseyvalue`subject to equation  {eq}`eq:inflation101` and
+the additional restriction that  $\mu_t = \bar \mu$ for all $t$.  
+
+The solution of this problem is a single $\mu$ that this quantecon lecture  {doc}`calvo` calls $\mu^{CR}$.  
 
 +++
 
-In this case, we restrict $\mu_t = \bar \mu \text{ for } \forall t$
+
 
 ```{code-cell} ipython3
 # Initial guess for single μ
@@ -723,13 +791,15 @@ compute_V(optimized_μ_CR, β=0.85, c=2)
 compute_V(jnp.array([clq.μ_CR]), β=0.85, c=2)
 ```
 
-## A more structured algorithm
+## A more structured ML algorithm
 
-The idea is that by thinking a little harder about the structure of the Ramsey problem and using linear algebra, we can pose a quadratic optimum problem that determines $\vec \mu$ and $\vec \theta$
+By thinking a little harder about the mathematical structure of the Ramsey problem and using some linear algebra, we can simplify the problem that we hand over to a ``machine learning`` algorithm. 
 
-After we have those, we could compute the regressions that you compute in Calvo gradient and use them to discover the structure of the Ramsey plan that we exploit more directly in the original Calvo lecture that uses dynamic programming squared.
+The idea here is that the Ramsey problem that chooses  $\vec \mu$ to maximize the government's value function {eq}`eq:Ramseyvalue`subject to equation  {eq}`eq:inflation101` is actually a quadratic optimum problem whose solution is characterized by a set of simultaneous linear equations in $\vec \mu$.
 
-We assume that 
+We'll apply this approach here and compare answers with what we obtained above with the gradient descent approach.
+
+To remind us of the setting, remember that we have assumed that 
 
 $$ 
 \mu_t = \mu_T \  \forall t \geq T
@@ -742,7 +812,7 @@ $$
 $$
 
 
-Define
+Again, define
 
 $$
 \vec \theta = \begin{bmatrix} \theta_0 \cr
@@ -759,8 +829,8 @@ $$
 
 +++
 
-Write the  system of $T+1$ equations XXX
-that relate  $\vec \theta$ to a choice of $\vec \mu$   as a single matrix equation
+Write the  system of $T+1$ equations {eq}`eq:thetaformula102`
+that relate  $\vec \theta$ to a choice of $\vec \mu$   as the single matrix equation
 
 $$
 \begin{bmatrix} 1 & -\lambda & 0 & 0 & \cdots & 0 & 0 \cr
@@ -794,7 +864,7 @@ $$
 B = (1-\lambda) A^{-1}
 $$
 
-We check the claim above using out results in the previous section
+Let's check this equation by using it and then comparing outcomes with our earlier results. 
 
 ```{code-cell} ipython3
 λ = clq.α / (1 + clq.α)
@@ -817,7 +887,7 @@ B = (1-λ) * np.linalg.inv(A)
 θs, B @ μ_vec
 ```
 
-As in the Calvo gradient lecture, the planner's criterion is
+As before, the Ramsey planner's criterion is
 
 
 $$
@@ -825,9 +895,8 @@ V = \sum_{t=0}^\infty \beta^t (h_0 + h_1 \theta_t + h_2 \theta_t^2 -
 \frac{c}{2} \mu_t^2 )
 $$
 
-where the $h_i$'s are defined in the Calvo gradient lecture.
 
-Write this criterion as
+Write  criterion $V$ as
 
 $$
 \begin{align*}
@@ -841,16 +910,18 @@ $$
 To help us write $V$ as a quadratic plus affine form, define
 
 $$
-\vec e = \begin{bmatrix} 1 \cr 1 \cr \vdots \cr 1 \cr (\frac{1}{1-\beta})^{\frac{1}{2}} \end{bmatrix}, \quad \vec \beta = \begin{bmatrix} 1 \cr \beta^\frac{1}{2}  \cr \vdots \cr \beta^\frac{T-1}{2} \cr \frac{\beta^\frac{T-1}{2}}{({1-\beta})^\frac{1}{2}} \end{bmatrix} 
+ \vec \beta = \begin{bmatrix} 1 \cr \beta^\frac{1}{2}  \cr \vdots \cr \beta^\frac{T-1}{2} \cr \frac{\beta^\frac{T}{2}}{({1-\beta})^\frac{1}{2}} \end{bmatrix} 
 $$
 
-**Note to Tom: should the last element in $\vec \beta$ be $\frac{\beta^\frac{T-1}{2}}{({1-\beta})^\frac{1}{2}}$ be $\frac{\beta^\frac{T}{2}}{({1-\beta})^\frac{1}{2}}$**
 
-We'll use these peculiar vectors to do the discounting for us in the matrix formulas below.
+
+We'll use this peculiar vectors to do the discounting for us in the matrix formulas below.
 
 Below we'll use element by element multiplication of some vectors.
 
-We'll denote element by element multiplication by $\cdot$ -- in Python it is just $*$.
+We'll denote element by element multiplication by $\cdot$ 
+
+ * remember that in Python it is just $*$
 
 We'll denote matrix multiplication by $@$, just as it  is  in Python.
 
@@ -859,17 +930,12 @@ Let $\vec x \cdot \vec y$ denote element by element multiplication of components
 
 Notice that
 
-**Note to Tom: I think $\vec \beta \cdot \vec \beta = \begin{bmatrix} 1 \cr \beta  \cr \vdots \cr \beta^{T-1} \cr \frac{\beta^{T}}{({1-\beta})} \end{bmatrix} $ would be enough to compute V and J below. Please kindly let me know if I am wrong.**
+
 
 $$
-\sum_{t=0}^\infty \beta^t \theta_t = (B \cdot \vec \beta \cdot \vec \beta \cdot \vec e) @ \vec \mu \equiv f_1^T \vec \mu
+\sum_{t=0}^\infty \beta^t \theta_t = \mathbf{1}_{1 \times T} (\vec \beta \cdot \vec \beta) \cdot (B @ \vec \mu) \equiv f_1^T \vec \mu
 $$
 
-**Note to Tom: Should it be  
-$$
-\sum_{t=0}^\infty \beta^t \theta_t = \mathbf{1}_{1 \times T} (\vec \beta \cdot \vec \beta) \cdot (B @ \vec \mu)
-$$
-as it provides the correct result? Please kindly let me know if I am wrong.**
 
 and
 
@@ -883,23 +949,20 @@ $$
 $$
 in the code.**
 
+**Response note to Humphrey**  Shouldn't it instead be $ \vec \beta \cdot \beta \cdot (\vec \mu @ B)^T(\vec \mu @ B)$? 
+
 and
 
-$$
-\sum_{t=0}^\infty  \beta^t \mu_t^2 =  
-\vec \mu ^T \left(\vec \beta \cdot \vec \beta \cdot I_{T \times T} \right) \vec \mu
-\equiv \vec \mu^T F_2 \vec \mu  
-$$
 
-**Note to Tom: I changed it to  
+
 $$
 \sum_{t=0}^\infty  \beta^t \mu_t^2 =  
 \vec \mu ^T \left(\vec \beta \cdot \vec \beta \right) \vec \mu
 \equiv \vec \mu^T F_2 \vec \mu  
 $$
-in the code.**
 
-**Note to Humphrey:** I had to write out some of things to verify that the matrix formulations do indeed represent the discounted sums that we want.  But don't trust me!
+
+
 
 It follows that
 
@@ -942,7 +1005,7 @@ $$
 \vec \theta^{R} = B \vec \mu^R
 $$
 
-**Note to Humphrey:** Don't trust me on signs.
+
 
 ```{code-cell} ipython3
 def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
@@ -1007,11 +1070,3 @@ compute_V(optimized_μ, β=0.85, c=2)
 ```{code-cell} ipython3
 compute_V(clq.μ_series, β=0.85, c=2)
 ```
-
-## Next steps
-
-After checking the above formulas, please implement them in Python and check that they recover $\vec \mu^R, \vec \theta^R$.
-
-After that, we can put this material into a second chapter of the Calvo gradient lecture. 
-
-I can write why we regard this as ML -- i.e., sort of brute force, but less brute force than than the earlier gradient method because here we recognize more about the mathematical structure of $V$.
