@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.2
+    jupytext_version: 1.16.1
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -293,13 +293,14 @@ $$
 $$
 
 where $\tilde \theta_t, \ t = 0, 1, \ldots , T-1$ satisfies formula (1).
-## Code to write
+
+## A gradient algorithm
 
 We want to write code to maximize the criterion function by choice of the truncated vector  $\tilde \mu$.
 
 We hope that answers will agree with those found in {doc}`calvo`.
 
-## Implementation
+### Implementation
 
 We will implement the above in Python using JAX and Optax libraries.
 
@@ -499,7 +500,7 @@ def compute_V(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
 V_val = compute_V(clq.μ_series, β=0.85, c=2)
 
 # Check the result with the ChangLQ class in previous lecture
-print(f'deviation = {np.linalg.norm(V_val - clq.J_series[0])}') # good!
+print(f'deviation = {np.abs(V_val - clq.J_series[0])}') # good!
 ```
 
 Now we want to maximize the function $V$ by choice of $\mu$.
@@ -577,7 +578,7 @@ compute_V(optimized_μ, β=0.85, c=2)
 compute_V(clq.μ_series, β=0.85, c=2)
 ```
 
-## Regressing $\vec \theta_t$ and $\vec \mu_t$
+### Regressing $\vec \theta_t$ and $\vec \mu_t$
 
 ```{code-cell} ipython3
 # Compute θ using optimized_μ
@@ -627,7 +628,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Regress $V$ and $\vec\theta_t$
+### Regress $V$ and $\vec\theta_t$
 
 +++
 
@@ -688,7 +689,7 @@ plt.legend()
 plt.show()
 ```
 
-## Restriction to $\mu_t = \bar \mu$
+### Restriction to $\mu_t = \bar \mu$
 
 +++
 
@@ -720,4 +721,390 @@ compute_V(optimized_μ_CR, β=0.85, c=2)
 
 ```{code-cell} ipython3
 compute_V(jnp.array([clq.μ_CR]), β=0.85, c=2)
+```
+
+## A more structured algorithm
+
+The idea is that by thinking a little harder about the structure of the Ramsey problem and using linear algebra, we can pose a quadratic optimum problem that determines $\vec \mu$ and $\vec \theta$
+
+After we have those, we could compute the regressions that you compute in Calvo gradient and use them to discover the structure of the Ramsey plan that we exploit more directly in the original Calvo lecture that uses dynamic programming squared.
+
+We assume that 
+
+$$ 
+\mu_t = \mu_T \  \forall t \geq T
+$$
+
+and that
+
+$$ 
+\theta_t = \theta_T = \mu_T \ \forall t \geq T
+$$
+
+
+Define
+
+$$
+\vec \theta = \begin{bmatrix} \theta_0 \cr
+           \theta_1 \cr
+           \vdots \cr
+           \theta_{T-1} \cr
+           \theta_T \end{bmatrix} , \quad
+\vec \mu = \begin{bmatrix} \mu_0 \cr
+           \mu_1 \cr
+           \vdots \cr
+           \mu_{T-1} \cr
+           \mu_T \end{bmatrix}
+$$
+
++++
+
+Write the  system of $T+1$ equations XXX
+that relate  $\vec \theta$ to a choice of $\vec \mu$   as a single matrix equation
+
+$$
+\begin{bmatrix} 1 & -\lambda & 0 & 0 & \cdots & 0 & 0 \cr
+                0 & 1 & -\lambda & 0 & \cdots & 0 & 0 \cr
+                0 & 0 & 1 & -\lambda & \cdots & 0 & 0 \cr
+                \vdots & \vdots & \vdots & \vdots & \vdots & -\lambda & 0 \cr
+                0 & 0 & 0 & 0 & \cdots & 1 & -\lambda \cr
+                0 & 0 & 0 & 0 & \cdots & 0 & 1 \end{bmatrix}
+\begin{bmatrix} \theta_0 \cr \theta_1 \cr \theta_2 \cr \vdots \cr \theta_{T-1} \cr \theta_T 
+\end{bmatrix} 
+= (1 - \lambda) \begin{bmatrix} 
+\mu_0 \cr \mu_1 \cr \mu_2 \cr \vdots \cr \mu_{T-1} \cr \frac{\mu_T}{1 -\lambda}
+\end{bmatrix}
+$$ 
+
+or 
+
+$$
+A \vec \theta = (1-\lambda) \vec \mu
+$$
+
+or
+
+$$
+\vec \theta = B \vec \mu 
+$$
+
+where 
+
+$$ 
+B = (1-\lambda) A^{-1}
+$$
+
+We check the claim above using out results in the previous section
+
+```{code-cell} ipython3
+λ = clq.α / (1 + clq.α)
+
+A = np.eye(T, T) - λ*np.eye(T, T, k=1)
+
+A
+```
+
+```{code-cell} ipython3
+μ_vec = μs.copy()
+μ_vec[-1] = μs[-1]/(1-λ)
+```
+
+```{code-cell} ipython3
+B = (1-λ) * np.linalg.inv(A)
+```
+
+```{code-cell} ipython3
+θs, B @ μ_vec
+```
+
+As in the Calvo gradient lecture, the planner's criterion is
+
+
+$$
+V = \sum_{t=0}^\infty \beta^t (h_0 + h_1 \theta_t + h_2 \theta_t^2 -
+\frac{c}{2} \mu_t^2 )
+$$
+
+where the $h_i$'s are defined in the Calvo gradient lecture.
+
+Write this criterion as
+
+$$
+\begin{align*}
+V & = \sum_{t=0}^{T-1} \beta^t (h_0 + h_1 \theta_t + h_2 \theta_t^2 -
+\frac{c}{2} \mu_t^2 ) \cr 
+& + \frac{\beta^T}{1-\beta} (h_0 + h_1 \theta_T + h_2 \theta_T^2 -
+\frac{c}{2} \mu_T^2 )
+\end{align*}
+$$
+
+To help us write $V$ as a quadratic plus affine form, define
+
+$$
+\vec e = \begin{bmatrix} 1 \cr 1 \cr \vdots \cr 1 \cr (\frac{1}{1-\beta})^{\frac{1}{2}} \end{bmatrix}, \quad \vec \beta = \begin{bmatrix} 1 \cr \beta^\frac{1}{2}  \cr \vdots \cr \beta^\frac{T-1}{2} \cr \frac{\beta^\frac{T-1}{2}}{({1-\beta})^\frac{1}{2}} \end{bmatrix} 
+$$
+
+**Note to Tom: should the last element in $\vec \beta$ be $\frac{\beta^\frac{T-1}{2}}{({1-\beta})^\frac{1}{2}}$ be $\frac{\beta^\frac{T}{2}}{({1-\beta})^\frac{1}{2}}$**
+
+We'll use these peculiar vectors to do the discounting for us in the matrix formulas below.
+
+Below we'll use element by element multiplication of some vectors.
+
+We'll denote element by element multiplication by $\cdot$ -- in Python it is just $*$.
+
+We'll denote matrix multiplication by $@$, just as it  is  in Python.
+
+
+Let $\vec x \cdot \vec y$ denote element by element multiplication of components of vectors $\vec x, \vec y$.
+
+Notice that
+
+**Note to Tom: I think $\vec \beta \cdot \vec \beta = \begin{bmatrix} 1 \cr \beta  \cr \vdots \cr \beta^{T-1} \cr \frac{\beta^{T}}{({1-\beta})} \end{bmatrix} $ would be enough to compute V and J below. Please kindly let me know if I am wrong.**
+
+$$
+\sum_{t=0}^\infty \beta^t \theta_t = (B \cdot \vec \beta \cdot \vec \beta \cdot \vec e) @ \vec \mu \equiv f_1^T \vec \mu
+$$
+
+**Note to Tom: Should it be  
+$$
+\sum_{t=0}^\infty \beta^t \theta_t = \mathbf{1}_{1 \times T} (\vec \beta \cdot \vec \beta) \cdot (B @ \vec \mu)
+$$
+as it provides the correct result? Please kindly let me know if I am wrong.**
+
+and
+
+$$ 
+\sum_{t=0}^\infty  \beta^t\theta_t^2 = \vec \mu^T (\vec \beta \cdot  B)^T(\vec \beta \cdot B) \vec \mu \equiv \vec \mu^T F_1 \vec \mu 
+$$
+
+**Note to Tom: I changed it to  
+$$
+\sum_{t=0}^\infty  \beta^t\theta_t^2 = \vec \beta \cdot (\vec \mu @ B)^T(\vec \mu @ B)
+$$
+in the code.**
+
+and
+
+$$
+\sum_{t=0}^\infty  \beta^t \mu_t^2 =  
+\vec \mu ^T \left(\vec \beta \cdot \vec \beta \cdot I_{T \times T} \right) \vec \mu
+\equiv \vec \mu^T F_2 \vec \mu  
+$$
+
+**Note to Tom: I changed it to  
+$$
+\sum_{t=0}^\infty  \beta^t \mu_t^2 =  
+\vec \mu ^T \left(\vec \beta \cdot \vec \beta \right) \vec \mu
+\equiv \vec \mu^T F_2 \vec \mu  
+$$
+in the code.**
+
+**Note to Humphrey:** I had to write out some of things to verify that the matrix formulations do indeed represent the discounted sums that we want.  But don't trust me!
+
+It follows that
+
+$$
+V - h_0 =  
+ \sum_{t=0}^\infty \beta^t ( h_1 \theta_t + h_2 \theta_t^2 -
+\frac{c}{2} \mu_t^2 ) = h_1 f_1^T \vec \mu
++ \vec \mu^T\left(h_2 F_2 - \left(\frac{c}{2}\right) I_{T \times T} \right)  \vec \mu
+$$ 
+
+or
+
+$$
+J = V - h_0 =  
+ \sum_{t=0}^\infty \beta^t ( h_1 \theta_t + h_2 \theta_t^2 -
+\frac{c}{2} \mu_t^2 ) = g_1 ^T \vec \mu
++ \vec \mu^T(G_2 ) \vec \mu
+$$ 
+
+where
+
+$$
+g_1 = h_1 f_1 , \quad   G_2 = h_2 F_2 -\left(\frac{c}{2}\right) I_{T \times T} 
+$$
+
+
+To compute the optimal government plan we want to maximize $J$ with respect to $\vec \mu$.
+
+We use linear algebra formulas for differentiating linear and quadratic forms to compute the gradient of $J$ with respect to $\vec \mu$ and equate it to zero.
+
+The maximizing $\mu$ is
+
+$$
+\vec \mu^R = -\frac{1}{2} G_2^{-1}  g_1
+$$
+
+The associated optimal inflation sequence is
+
+$$
+\vec \theta^{R} = B \vec \mu^R
+$$
+
+**Note to Humphrey:** Don't trust me on signs.
+
+```{code-cell} ipython3
+def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
+    T = len(μ) - 1
+    
+    h0 = u0
+    h1 = -u1 * α
+    h2 = -0.5 * u2 * α**2
+    λ = α / (1 + α)
+    
+    μ_vec = μ.at[-1].set(μ[-1]/(1-λ))
+    
+    A = np.eye(T+1, T+1) - λ*np.eye(T+1, T+1, k=1)
+    B = (1-λ) * np.linalg.inv(A)
+
+    e_vec = np.hstack([np.repeat(1.0, T), 
+                       1/(1-β)])
+    β_vec = np.hstack([np.array([β**(t) for t in range(T)]),
+                       (β**T / (1 - β))])
+    
+    βθ_sum = np.sum((β_vec * h1) * (B @ μ_vec))
+    βθ_square_sum = β_vec * h2 * (B @ μ_vec).T @ (B @ μ_vec)
+    βμ_square_sum = 0.5 * c * β_vec * μ.T @ μ
+    
+    return βθ_sum + βθ_square_sum - βμ_square_sum
+```
+
+```{code-cell} ipython3
+# Initial guess for μ
+μ_init = jnp.zeros(T)
+
+# Maximization instead of minimization
+grad_J = jit(grad(
+    lambda μ: -compute_J(μ, β=0.85, c=2)))
+```
+
+```{code-cell} ipython3
+
+```
+
+```{code-cell} ipython3
+%%time
+
+# Optimize μ
+optimized_μ = adam_optimizer(grad_J, μ_init)
+
+print(f"optimized μ = \n{optimized_μ}")
+```
+
+```{code-cell} ipython3
+print(f"original μ = \n{clq.μ_series}")
+```
+
+```{code-cell} ipython3
+print(f'deviation = {np.linalg.norm(optimized_μ - clq.μ_series)}')
+```
+
+```{code-cell} ipython3
+compute_V(optimized_μ, β=0.85, c=2)
+```
+
+```{code-cell} ipython3
+compute_V(clq.μ_series, β=0.85, c=2)
+```
+
+## Next steps
+
+After checking the above formulas, please implement them in Python and check that they recover $\vec \mu^R, \vec \theta^R$.
+
+After that, we can put this material into a second chapter of the Calvo gradient lecture. 
+
+I can write why we regard this as ML -- i.e., sort of brute force, but less brute force than than the earlier gradient method because here we recognize more about the mathematical structure of $V$.
+
+```{code-cell} ipython3
+import numpy as np
+import jax.numpy as jnp
+from jax import grad, jit
+import optax
+
+@jit
+def compute_V(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
+    θ = compute_θ(μ, α)
+    
+    h0 = u0
+    h1 = -u1 * α
+    h2 = -0.5 * u2 * α**2
+    
+    T = len(μ) - 1
+    t = np.arange(T)
+    
+    # Compute sum except for the last element
+    V_sum = np.sum(β**t * (h0 + h1 * θ[:T] + h2 * θ[:T]**2 - 0.5 * c * μ[:T]**2))
+    
+    # Compute the final term
+    V_final = (β**T / (1 - β)) * (h0 + h1 * μ[-1] + h2 * μ[-1]**2 - 0.5 * c * μ[-1]**2)
+    
+    V = V_sum + V_final
+    
+    return V
+
+
+def compute_θ(μ, α=1):
+    λ = α / (1 + α)
+    T = len(μ) - 1
+    μbar = μ[-1]
+    
+    # Create an array of powers for λ
+    λ_powers = λ ** jnp.arange(T + 1)
+    
+    # Compute the weighted sums for all t
+    weighted_sums = jnp.array(
+        [jnp.sum(λ_powers[:T-t] * μ[t:T]) for t in range(T)])
+    
+    # Compute θ values except for the last element
+    θ = (1 - λ) * weighted_sums + λ**(T - jnp.arange(T)) * μbar
+    
+    # Set the last element
+    θ = jnp.append(θ, μbar)
+    
+    return θ
+
+def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
+    θ = compute_θ(μ, α)
+    T = len(μ)
+    
+    h0 = u0
+    h1 = -u1 * α
+    h2 = -0.5 * u2 * α**2
+    
+    λ = α / (1 + α)
+    A = jnp.eye(T, T) - λ * jnp.eye(T, T, k=1)
+    B = (1 - λ) * np.linalg.inv(A)
+
+    e_vec = jnp.hstack([jnp.ones(T-1), jnp.sqrt(1/(1-β))])
+    β_vec = jnp.hstack([jnp.array([β**(t/2) for t in range(T-1)]), jnp.sqrt(β**(T-1)/(1-β))])
+    
+    β_vec_sq = β_vec**2
+    f1 = (B * β_vec * e_vec)
+    
+    disc_B = β_vec * B
+    F1 = (disc_B).T @ (disc_B)
+    F2 = jnp.diag(β_vec_sq)
+    
+    g1 = h1 * f1
+    G2 = h2 * F1 - (c/2) * F2
+    
+    return h0 + jnp.dot(g1, μ) + jnp.dot(μ, jnp.dot(G2, μ))
+
+# Parameters
+T = 40
+β = 0.85
+c = 2
+α = 1
+u0 = 1
+u1 = 0.5
+u2 = 3
+
+# Initial guess for μ
+μ_init = jnp.zeros(T)
+
+# Calculate values using both functions
+V_val = compute_V(μ_init, β, c, α, u0, u1, u2)
+J_val = compute_J(μ_init, β, c, α, u0, u1, u2)
+V_val, J_val
 ```
