@@ -944,22 +944,22 @@ in the code.**
 
 **Response note to Humphrey**  Shouldn't it instead be $ \vec \beta \cdot \beta \cdot (\vec \mu @ B)^T(\vec \mu @ B)$? 
 
-**Response note to Tom**: Thanks so much for pointing this out, you are right! That is what in my code. Sorry for the typo. I think in every case, we have $\vec{\beta} \cdot \vec{\beta}$. Perhaps we can just define:
+**Response note to Tom**: Thanks so much for pointing this out. You are right! That is what is in my code. Sorry for the typo. I think in every case, we have $\vec{\beta} \cdot \vec{\beta}$. Perhaps we can just define:
 
 $$
-\vec{\beta} = \begin{bmatrix} 1 \\ \beta \\ \vdots \\ \beta^{T-1} \\ \frac{\beta^{T}}{(1-\beta)} \end{bmatrix} 
+\vec{\beta} = \begin{bmatrix} 1 \\ \beta \\ \vdots \\ \beta^{T-1} \\ \frac{\beta^T}{1-\beta} \end{bmatrix}
 $$
 
 Then we have:
 
 $$
-\sum_{t=0}^\infty \beta^t \theta_t = \vec{\mathbf{1}} @ (\vec{\beta} \cdot (B @ \vec{\mu}))
+\sum_{t=0}^\infty \beta^t \theta_t = \vec{\mathbf{1}}(\vec{\beta} \cdot (B \cdot \vec{\mu}))
 $$
 
 and
 
-$$ 
-\sum_{t=0}^\infty \beta^t \theta_t^2 = \vec{\beta} \cdot (\vec{\mu}^T B^T)(B \vec{\mu})
+$$
+\sum_{t=0}^\infty \beta^t \theta_t^2 = \vec{\beta} \cdot (\vec{\mu}^T B^T) \cdot (B \vec{\mu})
 $$
 
 and 
@@ -971,9 +971,7 @@ $$
 It follows that
 
 $$
-\begin{aligned}
-J = V - h_0 = \sum_{t=0}^\infty \beta^t (h_1 \theta_t + h_2 \theta_t^2 - \frac{c}{2} \mu_t^2) = h_1 \cdot \vec{\mathbf{1}} @ (\vec{\beta} \cdot (B @ \vec{\mu})) + h_2 \cdot \vec{\beta} \cdot (\vec{\mu}^T B^T)(B \vec{\mu}) - \frac{c}{2} \vec{\mu}^T \vec{\beta} \vec{\mu}
-\end{aligned}
+J = V - h_0 = \sum_{t=0}^\infty \beta^t (h_1 \theta_t + h_2 \theta_t^2 - \frac{c}{2} \mu_t^2) = h_1 \cdot \vec{\mathbf{1}} (\vec{\beta} \cdot (B \cdot \vec{\mu})) + h_2 \cdot \vec{\beta} \cdot (\vec{\mu}^T B^T) \cdot (B \vec{\mu}) - \frac{c}{2} \cdot \vec{\mu}^T \vec{\beta} \vec{\mu}
 $$
 
 So
@@ -983,22 +981,31 @@ $$
 $$
 
 $$
-\frac{\partial}{\partial \vec{\mu}} \left( h_2 \vec{\beta} \cdot (\vec{\mu}^T M \vec{\mu}) \right) = h_2 \vec{\beta} \cdot 2M \vec{\mu} = 2 h_2 (\vec{\beta} \cdot M \vec{\mu}) \; \text{where } M = B^T B
+\frac{\partial}{\partial \vec{\mu}} \left( h_2 \vec{\beta} \cdot (\vec{\mu}^T M \vec{\mu}) \right) = h_2 \vec{\beta} \cdot 2M \vec{\mu} = 2 h_2 (\vec{\beta} \cdot M \vec{\mu}) \quad \text{where } M = B^T B
 $$
 
 $$
 \frac{\partial}{\partial \vec{\mu}} \left( -\frac{c}{2} \vec{\mu}^T \vec{\beta} \vec{\mu} \right) = -\frac{c}{2} (2 \vec{\beta} \vec{\mu}) = -c \vec{\beta} \vec{\mu}
 $$
 
-It follows that 
+Then we have
 
 $$
 \frac{\partial J}{\partial \vec{\mu}} = h_1 B^T \vec{\beta} + 2 h_2 (\vec{\beta} \cdot B^T B \vec{\mu}) - c \vec{\beta} \vec{\mu}
 $$
 
-But I think it is safe to ask `JAX` to compute the gradient of $J$ with respect to $\vec \mu$, so we can avoid the manual computation above.
+Hence 
 
-Please kindly let me know your thoughts.
+$$
+\vec{\mu}^R = \left(2h_2 B^T \operatorname{diag}(\vec{\beta}) B - c \operatorname{diag}(\vec{\beta})\right)^{-1} \left(-h_1 B^T \vec{\beta}\right) \; \text{where } \operatorname{diag}(\vec{\beta}) = \vec{\beta} \cdot \mathbf{I}
+$$
+
+The function `compute_μ` tries to implement this analytical solution, but the result agrees with our original method at first, then differs at the last few values (please find the function below).
+
+I am not yet sure where this discrepancy comes from, but I think it is safe to ask `JAX` to compute the gradient of $J$ with respect to $\vec{\mu}$ because it agrees with our previous lecture and generates the same $V$ value. Hence, it helps us avoid the manual computation above.
+
+Please kindly let me know your thoughts on this.
+
 
 
 **End of Humphrey's note**
@@ -1082,6 +1089,27 @@ def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     βμ_square_sum = 0.5 * c * β_vec * μ.T @ μ
     
     return βθ_sum + βθ_square_sum - βμ_square_sum
+
+def compute_μ(β, c, T, α=1, u0=1, u1=0.5, u2=3):    
+    h0 = u0
+    h1 = -u1 * α
+    h2 = -0.5 * u2 * α**2
+    λ = α / (1 + α)
+    
+    A = jnp.eye(T+1) - λ*jnp.eye(T+1, k=1)
+    B = (1-λ) * jnp.linalg.inv(A)
+    
+    β_vec = jnp.hstack([β**jnp.arange(T),
+                       (β**T/(1-β))])
+    
+    A = 2 * h2 * (B.T @ jnp.diag(β_vec) @ B) - c * jnp.diag(β_vec)
+    b = - h1 * (B.T @ β_vec)
+    
+    return jnp.linalg.solve(A, b)
+
+print('\n', compute_μ(β=0.85, c=2, T=39))
+
+compute_V(compute_μ(β=0.85, c=2, T=39), β=0.85, c=2)
 ```
 
 ```{code-cell} ipython3
