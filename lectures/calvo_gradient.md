@@ -953,25 +953,25 @@ $$
 Then we have:
 
 $$
-\sum_{t=0}^\infty \beta^t \theta_t = \vec{\mathbf{1}}(\vec{\beta} \cdot (B \cdot \vec{\mu}))
+\sum_{t=0}^\infty \beta^t \theta_t = \vec{\mathbf{1}}(\vec{\beta} \cdot (B \vec{\mu}))
 $$
 
 and
 
 $$
-\sum_{t=0}^\infty \beta^t \theta_t^2 = \vec{\beta} \cdot (\vec{\mu}^T B^T) \cdot (B \vec{\mu})
+\sum_{t=0}^\infty \beta^t \theta_t^2 = \vec{\beta} \cdot (\vec{\mu}^T B^T) (B \vec{\mu})
 $$
 
 and 
 
 $$
-\sum_{t=0}^\infty \beta^t \mu_t^2 = \vec{\mu}^T \vec{\beta} \vec{\mu}
+\sum_{t=0}^\infty \beta^t \mu_t^2 = \vec{\beta} \cdot \vec{\mu}^T \vec{\mu}
 $$
 
 It follows that
 
 $$
-J = V - h_0 = \sum_{t=0}^\infty \beta^t (h_1 \theta_t + h_2 \theta_t^2 - \frac{c}{2} \mu_t^2) = h_1 \cdot \vec{\mathbf{1}} (\vec{\beta} \cdot (B \cdot \vec{\mu})) + h_2 \cdot \vec{\beta} \cdot (\vec{\mu}^T B^T) \cdot (B \vec{\mu}) - \frac{c}{2} \cdot \vec{\mu}^T \vec{\beta} \vec{\mu}
+J = V - h_0 = \sum_{t=0}^\infty \beta^t (h_1 \theta_t + h_2 \theta_t^2 - \frac{c}{2} \mu_t^2) = h_1 \cdot \vec{\mathbf{1}} (\vec{\beta} \cdot (B \vec{\mu})) + h_2 \cdot \vec{\beta} \cdot (\vec{\mu}^T B^T)(B \vec{\mu}) - \frac{c}{2} \cdot \vec{\beta} \cdot \vec{\mu}^T \vec{\mu}
 $$
 
 So
