@@ -609,7 +609,7 @@ compute_V(clq.μ_series, β=0.85, c=2)
 ### Some regressions
 
 In the interest of looking for some parameters that might help us learn about the structure of
-the Ramsey plan, we shall some least squares linear regressions of various components of $\vec \theta$ and $\vec \mu$ on others.  
+the Ramsey plan, we shall some least squares linear regressions of various components of $\vec \theta$ and $\vec \mu$ on others.
 
 ```{code-cell} ipython3
 # Compute θ using optimized_μ
@@ -661,8 +661,6 @@ plt.show()
 
 Now to learn about the structure of the optimal value $V$ as a function of $\vec \mu, \vec \theta$,
 we'll run some more regressions.
-
-
 
 +++
 
@@ -723,7 +721,6 @@ plt.legend()
 plt.show()
 ```
 
-
 Using a different and more structured computational strategy, this quantecon lecture {doc}`calvo` represented
 a Ramsey plan recursively via the following system of linear equations:
 
@@ -757,11 +754,7 @@ First, recall that a Ramsey planner chooses $\vec \mu$ to maximize the governmen
 We now define a distinct problem in which the planner chooses $\vec \mu$ to maximize the government's value function {eq}`eq:Ramseyvalue`subject to equation  {eq}`eq:inflation101` and
 the additional restriction that  $\mu_t = \bar \mu$ for all $t$.  
 
-The solution of this problem is a single $\mu$ that this quantecon lecture  {doc}`calvo` calls $\mu^{CR}$.  
-
-+++
-
-
+The solution of this problem is a single $\mu$ that this quantecon lecture  {doc}`calvo` calls $\mu^{CR}$.
 
 ```{code-cell} ipython3
 # Initial guess for single μ
@@ -864,7 +857,7 @@ $$
 B = (1-\lambda) A^{-1}
 $$
 
-Let's check this equation by using it and then comparing outcomes with our earlier results. 
+Let's check this equation by using it and then comparing outcomes with our earlier results.
 
 ```{code-cell} ipython3
 λ = clq.α / (1 + clq.α)
@@ -951,6 +944,66 @@ in the code.**
 
 **Response note to Humphrey**  Shouldn't it instead be $ \vec \beta \cdot \beta \cdot (\vec \mu @ B)^T(\vec \mu @ B)$? 
 
+**Response note to Tom**: Thanks so much for pointing this out, you are right! That is what in my code. Sorry for the typo. I think in every case, we have $\vec{\beta} \cdot \vec{\beta}$. Perhaps we can just define:
+
+$$
+\vec{\beta} = \begin{bmatrix} 1 \\ \beta \\ \vdots \\ \beta^{T-1} \\ \frac{\beta^{T}}{(1-\beta)} \end{bmatrix} 
+$$
+
+Then we have:
+
+$$
+\sum_{t=0}^\infty \beta^t \theta_t = \vec{\mathbf{1}} @ (\vec{\beta} \cdot (B @ \vec{\mu}))
+$$
+
+and
+
+$$ 
+\sum_{t=0}^\infty \beta^t \theta_t^2 = \vec{\beta} \cdot (\vec{\mu}^T B^T)(B \vec{\mu})
+$$
+
+and 
+
+$$
+\sum_{t=0}^\infty \beta^t \mu_t^2 = \vec{\mu}^T \vec{\beta} \vec{\mu}
+$$
+
+It follows that
+
+$$
+\begin{aligned}
+J = V - h_0 = \sum_{t=0}^\infty \beta^t (h_1 \theta_t + h_2 \theta_t^2 - \frac{c}{2} \mu_t^2) = h_1 \cdot \vec{\mathbf{1}} @ (\vec{\beta} \cdot (B @ \vec{\mu})) + h_2 \cdot \vec{\beta} \cdot (\vec{\mu}^T B^T)(B \vec{\mu}) - \frac{c}{2} \vec{\mu}^T \vec{\beta} \vec{\mu}
+\end{aligned}
+$$
+
+So
+
+$$
+\frac{\partial}{\partial \vec{\mu}} \left( h_1 \sum_{i=1}^{T} \beta_i (B \vec{\mu})_i \right) = h_1 \sum_{i=1}^{T} \beta_i B_{i, \cdot} = h_1 B^T \vec{\beta}
+$$
+
+$$
+\frac{\partial}{\partial \vec{\mu}} \left( h_2 \vec{\beta} \cdot (\vec{\mu}^T M \vec{\mu}) \right) = h_2 \vec{\beta} \cdot 2M \vec{\mu} = 2 h_2 (\vec{\beta} \cdot M \vec{\mu}) \; \text{where } M = B^T B
+$$
+
+$$
+\frac{\partial}{\partial \vec{\mu}} \left( -\frac{c}{2} \vec{\mu}^T \vec{\beta} \vec{\mu} \right) = -\frac{c}{2} (2 \vec{\beta} \vec{\mu}) = -c \vec{\beta} \vec{\mu}
+$$
+
+It follows that 
+
+$$
+\frac{\partial J}{\partial \vec{\mu}} = h_1 B^T \vec{\beta} + 2 h_2 (\vec{\beta} \cdot B^T B \vec{\mu}) - c \vec{\beta} \vec{\mu}
+$$
+
+But I think it is safe to ask `JAX` to compute the gradient of $J$ with respect to $\vec \mu$, so we can avoid the manual computation above.
+
+Please kindly let me know your thoughts.
+
+
+**End of Humphrey's note**
+
+
 and
 
 
@@ -1005,9 +1058,8 @@ $$
 \vec \theta^{R} = B \vec \mu^R
 $$
 
-
-
 ```{code-cell} ipython3
+@jit
 def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     T = len(μ) - 1
     
@@ -1018,16 +1070,15 @@ def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     
     μ_vec = μ.at[-1].set(μ[-1]/(1-λ))
     
-    A = np.eye(T+1, T+1) - λ*np.eye(T+1, T+1, k=1)
-    B = (1-λ) * np.linalg.inv(A)
-
-    e_vec = np.hstack([np.repeat(1.0, T), 
-                       1/(1-β)])
-    β_vec = np.hstack([np.array([β**(t) for t in range(T)]),
-                       (β**T / (1 - β))])
+    A = jnp.eye(T+1) - λ*jnp.eye(T+1, k=1)
+    B = (1-λ) * jnp.linalg.inv(A)
     
-    βθ_sum = np.sum((β_vec * h1) * (B @ μ_vec))
-    βθ_square_sum = β_vec * h2 * (B @ μ_vec).T @ (B @ μ_vec)
+    β_vec = jnp.hstack([β**jnp.arange(T),
+                       (β**T/(1-β))])
+    
+    θ = B @ μ_vec
+    βθ_sum = jnp.sum((β_vec * h1) * θ)
+    βθ_square_sum = β_vec * h2 * θ.T @ θ
     βμ_square_sum = 0.5 * c * β_vec * μ.T @ μ
     
     return βθ_sum + βθ_square_sum - βμ_square_sum
@@ -1040,10 +1091,6 @@ def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
 # Maximization instead of minimization
 grad_J = jit(grad(
     lambda μ: -compute_J(μ, β=0.85, c=2)))
-```
-
-```{code-cell} ipython3
-
 ```
 
 ```{code-cell} ipython3
