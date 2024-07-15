@@ -869,7 +869,7 @@ A
 
 ```{code-cell} ipython3
 μ_vec = μs.copy()
-μ_vec[-1] = μs[-1]/(1-λ)
+# μ_vec[-1] = μs[-1]/(1-λ)
 ```
 
 ```{code-cell} ipython3
@@ -1090,11 +1090,52 @@ def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     
     return βθ_sum + βθ_square_sum - βμ_square_sum
 
-def compute_μ(β, c, T, α=1, u0=1, u1=0.5, u2=3):    
+def compute_μ(μ, β, c, T, α=1, u0=1, u1=0.5, u2=3):    
     h0 = u0
     h1 = -u1 * α
     h2 = -0.5 * u2 * α**2
     λ = α / (1 + α)
+    e = jnp.hstack([np.ones(T),
+                    1/(1 - λ)])
+    A = jnp.eye(T+1) - λ*jnp.eye(T+1, k=1)
+    B = (1-λ) * jnp.linalg.inv(A) 
+    
+    β_vec = jnp.hstack([β**jnp.arange(T),
+                       (β**T/(1-β))])
+    
+    b = - h1 * (B.T @ β_vec) * e
+    E = jnp.diag(e)
+    M = E @ (2 * β_vec * h2 * B.T @ B)
+    G = c * jnp.diag(β_vec) @ jnp.linalg.inv(E)
+    A = M - G
+    return jnp.linalg.solve(A, b)
+
+μ_vec_closed = compute_μ(jnp.ones(T), β=0.85, c=2, T=39)
+e = jnp.hstack([np.ones(T-1),
+                1/(1 - λ)])
+μ_closed = μ_vec_closed / e
+print(f"closed formed μ = \n{μ_closed}")
+```
+
+```{code-cell} ipython3
+print(f'deviation = {np.linalg.norm(μ_closed - clq.μ_series)}')
+```
+
+```{code-cell} ipython3
+compute_V(μ_closed, β=0.85, c=2)
+```
+
+```{code-cell} ipython3
+@jit
+def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
+    T = len(μ) - 1
+    
+    h0 = u0
+    h1 = -u1 * α
+    h2 = -0.5 * u2 * α**2
+    λ = α / (1 + α)
+    
+    μ_vec = μ.at[-1].set(μ[-1]/(1-λ))
     
     A = jnp.eye(T+1) - λ*jnp.eye(T+1, k=1)
     B = (1-λ) * jnp.linalg.inv(A)
@@ -1102,14 +1143,11 @@ def compute_μ(β, c, T, α=1, u0=1, u1=0.5, u2=3):
     β_vec = jnp.hstack([β**jnp.arange(T),
                        (β**T/(1-β))])
     
-    A = 2 * h2 * (B.T @ jnp.diag(β_vec) @ B) - c * jnp.diag(β_vec)
-    b = - h1 * (B.T @ β_vec)
-    
-    return jnp.linalg.solve(A, b)
-
-print('\n', compute_μ(β=0.85, c=2, T=39))
-
-compute_V(compute_μ(β=0.85, c=2, T=39), β=0.85, c=2)
+    θ = B @ μ_vec
+    βθ_sum = jnp.sum((β_vec * h1) * θ)
+    βθ_square_sum = β_vec * h2 * θ.T @ θ
+    βμ_square_sum = 0.5 * c * β_vec * μ.T @ μ
+    return βθ_sum + βθ_square_sum - βμ_square_sum
 ```
 
 ```{code-cell} ipython3
@@ -1128,6 +1166,10 @@ grad_J = jit(grad(
 optimized_μ = adam_optimizer(grad_J, μ_init)
 
 print(f"optimized μ = \n{optimized_μ}")
+```
+
+```{code-cell} ipython3
+grad_J(optimized_μ)
 ```
 
 ```{code-cell} ipython3
