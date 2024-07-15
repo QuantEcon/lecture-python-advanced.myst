@@ -1090,7 +1090,7 @@ def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     
     return βθ_sum + βθ_square_sum - βμ_square_sum
 
-def compute_μ(μ, β, c, T, α=1, u0=1, u1=0.5, u2=3):    
+def compute_μ(β, c, T, α=1, u0=1, u1=0.5, u2=3):    
     h0 = u0
     h1 = -u1 * α
     h2 = -0.5 * u2 * α**2
@@ -1110,7 +1110,7 @@ def compute_μ(μ, β, c, T, α=1, u0=1, u1=0.5, u2=3):
     A = M - G
     return jnp.linalg.solve(A, b)
 
-μ_vec_closed = compute_μ(jnp.ones(T), β=0.85, c=2, T=39)
+μ_vec_closed = compute_μ(β=0.85, c=2, T=39)
 e = jnp.hstack([np.ones(T-1),
                 1/(1 - λ)])
 μ_closed = μ_vec_closed / e
