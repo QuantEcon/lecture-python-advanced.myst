@@ -11,7 +11,7 @@ kernelspec:
   name: python3
 ---
 
-# A Model of Calvo
+# A Model of Calvo (Old)
 
 This lecture describes a  linear-quadratic versions of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government
 plans.
