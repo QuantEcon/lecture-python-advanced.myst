@@ -794,8 +794,9 @@ We'll apply this approach here and compare answers with what we obtained above w
 
 To remind us of the setting, remember that we have assumed that 
 
+
 $$ 
-\mu_t = \mu_T \  \forall t \geq T
+\mu_t = \mu_T \;  \forall t \geq T
 $$
 
 and that
@@ -820,29 +821,28 @@ $$
            \mu_T \end{bmatrix}
 $$
 
-+++
-
 Write the  system of $T+1$ equations {eq}`eq:thetaformula102`
 that relate  $\vec \theta$ to a choice of $\vec \mu$   as the single matrix equation
 
 $$
+\frac{1}{(1 - \lambda)}
 \begin{bmatrix} 1 & -\lambda & 0 & 0 & \cdots & 0 & 0 \cr
                 0 & 1 & -\lambda & 0 & \cdots & 0 & 0 \cr
                 0 & 0 & 1 & -\lambda & \cdots & 0 & 0 \cr
                 \vdots & \vdots & \vdots & \vdots & \vdots & -\lambda & 0 \cr
                 0 & 0 & 0 & 0 & \cdots & 1 & -\lambda \cr
-                0 & 0 & 0 & 0 & \cdots & 0 & 1 \end{bmatrix}
+                0 & 0 & 0 & 0 & \cdots & 0 & 1-\lambda \end{bmatrix}
 \begin{bmatrix} \theta_0 \cr \theta_1 \cr \theta_2 \cr \vdots \cr \theta_{T-1} \cr \theta_T 
 \end{bmatrix} 
-= (1 - \lambda) \begin{bmatrix} 
-\mu_0 \cr \mu_1 \cr \mu_2 \cr \vdots \cr \mu_{T-1} \cr \frac{\mu_T}{1 -\lambda}
+= \begin{bmatrix} 
+\mu_0 \cr \mu_1 \cr \mu_2 \cr \vdots \cr \mu_{T-1} \cr \mu_T
 \end{bmatrix}
 $$ 
 
 or 
 
 $$
-A \vec \theta = (1-\lambda) \vec \mu
+A \vec \theta = \vec \mu
 $$
 
 or
@@ -854,30 +854,28 @@ $$
 where 
 
 $$ 
-B = (1-\lambda) A^{-1}
+B = A^{-1}
 $$
 
-Let's check this equation by using it and then comparing outcomes with our earlier results.
-
 ```{code-cell} ipython3
-λ = clq.α / (1 + clq.α)
+def construct_B(α, T):
+    λ = α / (1 + α)
+    
+    A = (jnp.eye(T, T) - λ*jnp.eye(T, T, k=1))/(1-λ)
+    A = A.at[-1, -1].set(A[-1, -1]*(1-λ))
 
-A = np.eye(T, T) - λ*np.eye(T, T, k=1)
-
-A
+    B = jnp.linalg.inv(A)
+    return A, B
 ```
 
 ```{code-cell} ipython3
-μ_vec = μs.copy()
-# μ_vec[-1] = μs[-1]/(1-λ)
+A, B = construct_B(α=clq.α, T=T)
+
+print(f'A = \n {A}')
 ```
 
 ```{code-cell} ipython3
-B = (1-λ) * np.linalg.inv(A)
-```
-
-```{code-cell} ipython3
-θs, B @ μ_vec
+np.allclose(θs, B @ clq.μ_series)
 ```
 
 As before, the Ramsey planner's criterion is
@@ -888,8 +886,7 @@ V = \sum_{t=0}^\infty \beta^t (h_0 + h_1 \theta_t + h_2 \theta_t^2 -
 \frac{c}{2} \mu_t^2 )
 $$
 
-
-Write  criterion $V$ as
+With out assumption above, criterion $V$ can be rewritten as
 
 $$
 \begin{align*}
@@ -903,160 +900,63 @@ $$
 To help us write $V$ as a quadratic plus affine form, define
 
 $$
- \vec \beta = \begin{bmatrix} 1 \cr \beta^\frac{1}{2}  \cr \vdots \cr \beta^\frac{T-1}{2} \cr \frac{\beta^\frac{T}{2}}{({1-\beta})^\frac{1}{2}} \end{bmatrix} 
-$$
-
-
-
-We'll use this peculiar vectors to do the discounting for us in the matrix formulas below.
-
-Below we'll use element by element multiplication of some vectors.
-
-We'll denote element by element multiplication by $\cdot$ 
-
- * remember that in Python it is just $*$
-
-We'll denote matrix multiplication by $@$, just as it  is  in Python.
-
-
-Let $\vec x \cdot \vec y$ denote element by element multiplication of components of vectors $\vec x, \vec y$.
-
-Notice that
-
-
-
-$$
-\sum_{t=0}^\infty \beta^t \theta_t = \mathbf{1}_{1 \times T} (\vec \beta \cdot \vec \beta) \cdot (B @ \vec \mu) \equiv f_1^T \vec \mu
-$$
-
-
-and
-
-$$ 
-\sum_{t=0}^\infty  \beta^t\theta_t^2 = \vec \mu^T (\vec \beta \cdot  B)^T(\vec \beta \cdot B) \vec \mu \equiv \vec \mu^T F_1 \vec \mu 
-$$
-
-**Note to Tom: I changed it to  
-$$
-\sum_{t=0}^\infty  \beta^t\theta_t^2 = \vec \beta \cdot (\vec \mu @ B)^T(\vec \mu @ B)
-$$
-in the code.**
-
-**Response note to Humphrey**  Shouldn't it instead be $ \vec \beta \cdot \beta \cdot (\vec \mu @ B)^T(\vec \mu @ B)$? 
-
-**Response note to Tom**: Thanks so much for pointing this out. You are right! That is what is in my code. Sorry for the typo. I think in every case, we have $\vec{\beta} \cdot \vec{\beta}$. Perhaps we can just define:
-
-$$
-\vec{\beta} = \begin{bmatrix} 1 \\ \beta \\ \vdots \\ \beta^{T-1} \\ \frac{\beta^T}{1-\beta} \end{bmatrix}
+\vec{\beta} = \begin{bmatrix} 1 \\ 
+              \beta \\ \vdots \\ 
+              \beta^{T-1} \\ 
+              \frac{\beta^T}{1-\beta} \end{bmatrix}
 $$
 
 Then we have:
 
 $$
-\sum_{t=0}^\infty \beta^t \theta_t = \vec{\mathbf{1}}(\vec{\beta} \cdot (B \vec{\mu}))
+h_1 \sum_{t=0}^\infty \beta^t \theta_t = h_1 \cdot \vec{\beta}^T \vec{\theta} = (h_1 \cdot B^T \vec{\beta})^T \vec{\mu} = g^T \vec{\mu}
 $$
-
-and
-
-$$
-\sum_{t=0}^\infty \beta^t \theta_t^2 = \vec{\beta} \cdot (\vec{\mu}^T B^T) (B \vec{\mu})
-$$
-
-and 
+where $g = h_1 \cdot B^T \vec{\beta}$ is a $(T+1) \times 1$ vector,
 
 $$
-\sum_{t=0}^\infty \beta^t \mu_t^2 = \vec{\beta} \cdot \vec{\mu}^T \vec{\mu}
+h_2 \sum_{t=0}^\infty \beta^t \theta_t^2 = \vec{\mu}^T (B^T (h_2 \cdot \vec{\beta} \cdot \mathbf{I}) B) \vec{\mu} = \vec{\mu}^T M \vec{\mu}
 $$
+where $M = B^T (h_2 \cdot \vec{\beta} \cdot \mathbf{I}) B$ is a $(T+1) \times (T+1)$ matrix,
+
+$$
+\frac{c}{2} \sum_{t=0}^\infty \beta^t \mu_t^2 =  \vec{\mu}^T (\frac{c}{2} \cdot \vec{\beta} \cdot \mathbf{I}) \vec{\mu} = \vec{\mu}^T F \vec{\mu}
+$$
+where $F = \frac{c}{2} \cdot \vec{\beta} \cdot \mathbf{I}$ is a $(T+1) \times (T+1)$ matrix
 
 It follows that
 
 $$
-J = V - h_0 = \sum_{t=0}^\infty \beta^t (h_1 \theta_t + h_2 \theta_t^2 - \frac{c}{2} \mu_t^2) = h_1 \cdot \vec{\mathbf{1}} (\vec{\beta} \cdot (B \vec{\mu})) + h_2 \cdot \vec{\beta} \cdot (\vec{\mu}^T B^T)(B \vec{\mu}) - \frac{c}{2} \cdot \vec{\beta} \cdot \vec{\mu}^T \vec{\mu}
+J = V - h_0 = \sum_{t=0}^\infty \beta^t (h_1 \theta_t + h_2 \theta_t^2 - \frac{c}{2} \mu_t^2) = g^T \vec{\mu} + \vec{\mu}^T M \vec{\mu} - \vec{\mu}^T F \vec{\mu}
 $$
 
 So
 
 $$
-\frac{\partial}{\partial \vec{\mu}} \left( h_1 \sum_{i=1}^{T} \beta_i (B \vec{\mu})_i \right) = h_1 \sum_{i=1}^{T} \beta_i B_{i, \cdot} = h_1 B^T \vec{\beta}
+\frac{\partial}{\partial \vec{\mu}} g^T \vec{\mu} = g
 $$
 
 $$
-\frac{\partial}{\partial \vec{\mu}} \left( h_2 \vec{\beta} \cdot (\vec{\mu}^T M \vec{\mu}) \right) = h_2 \vec{\beta} \cdot 2M \vec{\mu} = 2 h_2 (\vec{\beta} \cdot M \vec{\mu}) \quad \text{where } M = B^T B
+\frac{\partial}{\partial \vec{\mu}} \vec{\mu}^T M \vec{\mu} = 2 M \vec{\mu}
 $$
 
 $$
-\frac{\partial}{\partial \vec{\mu}} \left( -\frac{c}{2} \vec{\mu}^T \vec{\beta} \vec{\mu} \right) = -\frac{c}{2} (2 \vec{\beta} \vec{\mu}) = -c \vec{\beta} \vec{\mu}
+\frac{\partial}{\partial \vec{\mu}} \vec{\mu}^T F \vec{\mu} = 2 F \vec{\mu}
 $$
 
 Then we have
 
 $$
-\frac{\partial J}{\partial \vec{\mu}} = h_1 B^T \vec{\beta} + 2 h_2 (\vec{\beta} \cdot B^T B \vec{\mu}) - c \vec{\beta} \vec{\mu}
+\frac{\partial J}{\partial \vec{\mu}} = g + 2 (M + F) \vec{\mu}
 $$
-
-Hence 
-
-$$
-\vec{\mu}^R = \left(2h_2 B^T \operatorname{diag}(\vec{\beta}) B - c \operatorname{diag}(\vec{\beta})\right)^{-1} \left(-h_1 B^T \vec{\beta}\right) \; \text{where } \operatorname{diag}(\vec{\beta}) = \vec{\beta} \cdot \mathbf{I}
-$$
-
-The function `compute_μ` tries to implement this analytical solution, but the result agrees with our original method at first, then differs at the last few values (please find the function below).
-
-I am not yet sure where this discrepancy comes from, but I think it is safe to ask `JAX` to compute the gradient of $J$ with respect to $\vec{\mu}$ because it agrees with our previous lecture and generates the same $V$ value. Hence, it helps us avoid the manual computation above.
-
-Please kindly let me know your thoughts on this.
-
-
-
-**End of Humphrey's note**
-
-
-and
-
-
-
-$$
-\sum_{t=0}^\infty  \beta^t \mu_t^2 =  
-\vec \mu ^T \left(\vec \beta \cdot \vec \beta \right) \vec \mu
-\equiv \vec \mu^T F_2 \vec \mu  
-$$
-
-
-
-
-It follows that
-
-$$
-V - h_0 =  
- \sum_{t=0}^\infty \beta^t ( h_1 \theta_t + h_2 \theta_t^2 -
-\frac{c}{2} \mu_t^2 ) = h_1 f_1^T \vec \mu
-+ \vec \mu^T\left(h_2 F_2 - \left(\frac{c}{2}\right) I_{T \times T} \right)  \vec \mu
-$$ 
-
-or
-
-$$
-J = V - h_0 =  
- \sum_{t=0}^\infty \beta^t ( h_1 \theta_t + h_2 \theta_t^2 -
-\frac{c}{2} \mu_t^2 ) = g_1 ^T \vec \mu
-+ \vec \mu^T(G_2 ) \vec \mu
-$$ 
-
-where
-
-$$
-g_1 = h_1 f_1 , \quad   G_2 = h_2 F_2 -\left(\frac{c}{2}\right) I_{T \times T} 
-$$
-
 
 To compute the optimal government plan we want to maximize $J$ with respect to $\vec \mu$.
 
 We use linear algebra formulas for differentiating linear and quadratic forms to compute the gradient of $J$ with respect to $\vec \mu$ and equate it to zero.
 
-The maximizing $\mu$ is
+Let $G = 2 (M + F)$ The maximizing $\mu$ is
 
 $$
-\vec \mu^R = -\frac{1}{2} G_2^{-1}  g_1
+\vec \mu^R = -G^{-1}  g
 $$
 
 The associated optimal inflation sequence is
@@ -1065,8 +965,11 @@ $$
 \vec \theta^{R} = B \vec \mu^R
 $$
 
+### Two implementations
+
+With the more structured approach, we can update our gradient descent exercise with `compute_J`
+
 ```{code-cell} ipython3
-@jit
 def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     T = len(μ) - 1
     
@@ -1075,78 +978,16 @@ def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     h2 = -0.5 * u2 * α**2
     λ = α / (1 + α)
     
-    μ_vec = μ.at[-1].set(μ[-1]/(1-λ))
-    
-    A = jnp.eye(T+1) - λ*jnp.eye(T+1, k=1)
-    B = (1-λ) * jnp.linalg.inv(A)
+    _, B = construct_B(α, T+1)
     
     β_vec = jnp.hstack([β**jnp.arange(T),
                        (β**T/(1-β))])
     
-    θ = B @ μ_vec
+    θ = B @ μ
     βθ_sum = jnp.sum((β_vec * h1) * θ)
     βθ_square_sum = β_vec * h2 * θ.T @ θ
     βμ_square_sum = 0.5 * c * β_vec * μ.T @ μ
     
-    return βθ_sum + βθ_square_sum - βμ_square_sum
-
-def compute_μ(β, c, T, α=1, u0=1, u1=0.5, u2=3):    
-    h0 = u0
-    h1 = -u1 * α
-    h2 = -0.5 * u2 * α**2
-    λ = α / (1 + α)
-    e = jnp.hstack([np.ones(T),
-                    1/(1 - λ)])
-    A = jnp.eye(T+1) - λ*jnp.eye(T+1, k=1)
-    B = (1-λ) * jnp.linalg.inv(A) 
-    
-    β_vec = jnp.hstack([β**jnp.arange(T),
-                       (β**T/(1-β))])
-    
-    b = - h1 * (B.T @ β_vec) * e
-    E = jnp.diag(e)
-    M = E @ (2 * β_vec * h2 * B.T @ B)
-    G = c * jnp.diag(β_vec) @ jnp.linalg.inv(E)
-    A = M - G
-    return jnp.linalg.solve(A, b)
-
-μ_vec_closed = compute_μ(β=0.85, c=2, T=39)
-e = jnp.hstack([np.ones(T-1),
-                1/(1 - λ)])
-μ_closed = μ_vec_closed / e
-print(f"closed formed μ = \n{μ_closed}")
-```
-
-```{code-cell} ipython3
-print(f'deviation = {np.linalg.norm(μ_closed - clq.μ_series)}')
-```
-
-```{code-cell} ipython3
-compute_V(μ_closed, β=0.85, c=2)
-```
-
-```{code-cell} ipython3
-@jit
-def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
-    T = len(μ) - 1
-    
-    h0 = u0
-    h1 = -u1 * α
-    h2 = -0.5 * u2 * α**2
-    λ = α / (1 + α)
-    
-    μ_vec = μ.at[-1].set(μ[-1]/(1-λ))
-    
-    A = jnp.eye(T+1) - λ*jnp.eye(T+1, k=1)
-    B = (1-λ) * jnp.linalg.inv(A)
-    
-    β_vec = jnp.hstack([β**jnp.arange(T),
-                       (β**T/(1-β))])
-    
-    θ = B @ μ_vec
-    βθ_sum = jnp.sum((β_vec * h1) * θ)
-    βθ_square_sum = β_vec * h2 * θ.T @ θ
-    βμ_square_sum = 0.5 * c * β_vec * μ.T @ μ
     return βθ_sum + βθ_square_sum - βμ_square_sum
 ```
 
@@ -1169,10 +1010,6 @@ print(f"optimized μ = \n{optimized_μ}")
 ```
 
 ```{code-cell} ipython3
-grad_J(optimized_μ)
-```
-
-```{code-cell} ipython3
 print(f"original μ = \n{clq.μ_series}")
 ```
 
@@ -1184,6 +1021,73 @@ print(f'deviation = {np.linalg.norm(optimized_μ - clq.μ_series)}')
 compute_V(optimized_μ, β=0.85, c=2)
 ```
 
+We find, with a simple understanding of the structure of the problem, we can speed up our computation significantly.
+
+We can also derive closed-form solution for $\vec \mu$ 
+
 ```{code-cell} ipython3
-compute_V(clq.μ_series, β=0.85, c=2)
+def compute_μ(β, c, T, α=1, u0=1, u1=0.5, u2=3):    
+    h0 = u0
+    h1 = -u1 * α
+    h2 = -0.5 * u2 * α**2
+    
+    _, B = construct_B(α, T+1)
+    
+    β_vec = jnp.hstack([β**jnp.arange(T),
+                       (β**T/(1-β))])
+    
+    g = h1 * B.T @ β_vec
+    M = B.T @ (h2 * jnp.diag(β_vec)) @ B
+    F = c/2 * jnp.diag(β_vec)
+    return jnp.linalg.solve(2*(M - F), -g)
+
+μ_closed = compute_μ(β=0.85, c=2, T=T-1)
+print(f'closed-form μ = \n{μ_closed}')
+```
+
+```{code-cell} ipython3
+print(f'deviation = {np.linalg.norm(μ_closed - clq.μ_series)}')
+```
+
+```{code-cell} ipython3
+compute_V(μ_closed, β=0.85, c=2)
+```
+
+```{code-cell} ipython3
+print(f'deviation = {np.linalg.norm(B @ μ_closed - θs)}')
+```
+
+We can check the gradient of the analytical solution and the `JAX` computed version
+
+```{code-cell} ipython3
+def compute_grad(μ, β, c, α=1, u0=1, u1=0.5, u2=3):    
+    T = len(μ) - 1
+    
+    h0 = u0
+    h1 = -u1 * α
+    h2 = -0.5 * u2 * α**2
+    
+    _, B = construct_B(α, T+1)
+    
+    β_vec = jnp.hstack([β**jnp.arange(T),
+                       (β**T/(1-β))])
+    
+    g = h1 * B.T @ β_vec
+    M = (h2 * B.T @ jnp.diag(β_vec) @ B)
+    F = c/2 * jnp.diag(β_vec)
+    return g + (2*(M - F) @ μ)
+
+closed_grad = compute_grad(jnp.ones(T), β=0.85, c=2)
+```
+
+```{code-cell} ipython3
+closed_grad
+```
+
+```{code-cell} ipython3
+- grad_J(jnp.ones(T))
+```
+
+```{code-cell} ipython3
+print(f'deviation = {np.linalg.norm(closed_grad - (- grad_J(jnp.ones(T))))}')
 ```
