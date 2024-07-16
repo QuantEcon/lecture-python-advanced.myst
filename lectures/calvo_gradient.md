@@ -11,16 +11,58 @@ kernelspec:
   name: python3
 ---
 
-# Machine Learning a Model of Calvo
+# Machine Learning a Ramsey Plan
 
-This lecture describes a  linear-quadratic versions of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government
+
+In this lecture, we'll study the same   Ramsey problem that we also study in this quantecon lecture
+{doc}`calvo`.  
+
+In that lecture, we an analytic approach based on ``dynamic programming squared`` to guide computation of a Ramsey plan.  
+
+Dynamic programming squared provided us with much useful  information about mathematical  objects that represent a Ramsey plan recursively and how to compute it efficiently.  
+
+Included in that information are descriptions of
+
+  * the **state** variable confronting a continuation Ramsey planner
+  * two Bellman equations
+    * one that describes the behavior of the representative agent
+    * another that describes the decision problems of a Ramsey planner and of a continuation Ramsey planner
+
+
+In this lecture, we approach the Ramsey planner in a less sophisticated way that proceeds not knowing any of the structure imparted by dynamic programming squared.
+
+Instead, we use a brute force **machine learning** approach that naively states the Ramsey problem
+in terms of a pair of infinite sequences of real numbers that the Ramsey planner chooses
+ * a sequence $\vec \theta$ of inflation rates 
+ * a sequence $\vec \mu$ of money growh rates
+
+We'll actually deploy two machine learning approaches, one more naive than the other.
+
+ * the first is really lazy. 
+    * it just hands a Python function that computes the Ramsey planner's objective over to a gradient descent algorithm
+ * the second is less lazy.
+     * it exerts the effort required to express the Ramsey planner's criterion as an affine quadratic form in $\vec \mu$, computes first-order conditions for an optimum, and solves  the resulting system of simultaneous linear  equations for $\vec \mu$ and then $\vec \theta$.
+
+While these machine learning (ML) approaches succeed in recovering the same Ramsey plan computed in 
+this quantecon lecture {doc}`calvo`, they don't  reveal the structure that is exploited in that
+lecture's application of dynamic programming squared.
+
+But that structure is lurking in the answers provided by our ML approach, if only we ask exactly the right questions.
+
+Those questions can be answered by running particular linear  regressions on components of
+$\vec \mu, \vec \theta$, as we show at the end of this lecture.  
+ 
+
+## The Model
+
+The basic model is  linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government
 plans.
 
 
 The model focuses attention on intertemporal tradeoffs between
 
-- welfare benefits that anticipations of future  deflation generate  by decreasing  costs of holding real money balances and thereby increasing a representative agent's *liquidity*, as measured by his or her holdings of real money balances, and
-- costs associated with the  distorting taxes that the government must levy in order to acquire the paper money that it will  destroy  in order to generate anticipated deflation
+- welfare benefits that a representative  agent's anticipations of future  deflation generate  by decreasing  costs of holding real money balances and thereby increasing a representative agent's *liquidity*, as measured by  holdings of real money balances, and
+- costs associated with the  distorting taxes that the government  levies  to acquire the paper money that it  destroys  in order to generate anticipated deflation
 
 The model features
 
@@ -28,13 +70,7 @@ The model features
 - costly government actions at all dates $t \geq 1$ that increase household utilities at dates before $t$
 
 
-We'll use ideas from  papers by Cagan {cite}`Cagan` and  Calvo {cite}`Calvo1978`.
-
-## A Machine Learning approach
-
-XXXX
-solving Calvo's Ramsey problem using 
-a "machine learning" approach.
+The model combines ideas from  papers by Cagan {cite}`Cagan` and  Calvo {cite}`Calvo1978`.
 
 
 
@@ -252,7 +288,7 @@ The solution $\vec \mu$ of this problem is called a **Ramsey plan**.
 
 ## Approximations
 
-We anticipate that under a Ramsey plan $\{\theta_t\}$ and $\{\mu_t\}$ will each converge to stationary values. 
+We anticipate that under a Ramsey plan $\{\theta_t\}$ and $\{\mu_t\}$  each converge to stationary values. 
 
 Thus, we guess that 
  under the optimal policy
