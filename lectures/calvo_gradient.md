@@ -926,37 +926,28 @@ where $F = \frac{c}{2} \cdot \vec{\beta} \cdot \mathbf{I}$ is a $(T+1) \times (T
 It follows that
 
 $$
-J = V - h_0 = \sum_{t=0}^\infty \beta^t (h_1 \theta_t + h_2 \theta_t^2 - \frac{c}{2} \mu_t^2) = g^T \vec{\mu} + \vec{\mu}^T M \vec{\mu} - \vec{\mu}^T F \vec{\mu}
+\begin{aligned}
+J = V - h_0 &= \sum_{t=0}^\infty \beta^t (h_1 \theta_t + h_2 \theta_t^2 - \frac{c}{2} \mu_t^2) \\
+            &= g^T \vec{\mu} + \vec{\mu}^T M \vec{\mu} - \vec{\mu}^T F \vec{\mu} \\ 
+            &= g^T \vec{\mu} + \vec{\mu}^T (M - F) \vec{\mu} \\
+            &= g^T \vec{\mu} + \vec{\mu}^T G \vec{\mu}
+\end{aligned}
 $$
 
-So
-
-$$
-\frac{\partial}{\partial \vec{\mu}} g^T \vec{\mu} = g
-$$
-
-$$
-\frac{\partial}{\partial \vec{\mu}} \vec{\mu}^T M \vec{\mu} = 2 M \vec{\mu}
-$$
-
-$$
-\frac{\partial}{\partial \vec{\mu}} \vec{\mu}^T F \vec{\mu} = 2 F \vec{\mu}
-$$
-
-Then we have
-
-$$
-\frac{\partial J}{\partial \vec{\mu}} = g + 2 (M + F) \vec{\mu}
-$$
+where $G = M - F$.
 
 To compute the optimal government plan we want to maximize $J$ with respect to $\vec \mu$.
 
-We use linear algebra formulas for differentiating linear and quadratic forms to compute the gradient of $J$ with respect to $\vec \mu$ and equate it to zero.
-
-Let $G = 2 (M + F)$ The maximizing $\mu$ is
+We use linear algebra formulas for differentiating linear and quadratic forms to compute the gradient of $J$ with respect to $\vec \mu$
 
 $$
-\vec \mu^R = -G^{-1}  g
+\frac{\partial}{\partial \vec{\mu}} J = g + 2 G \vec{\mu}.
+$$
+
+Setting $\frac{\partial}{\partial \vec{\mu}} J = 0$, the maximizing $\mu$ is
+
+$$
+\vec \mu^R = -\frac{1}{2}G^{-1}  g
 $$
 
 The associated optimal inflation sequence is
@@ -1021,9 +1012,9 @@ print(f'deviation = {np.linalg.norm(optimized_μ - clq.μ_series)}')
 compute_V(optimized_μ, β=0.85, c=2)
 ```
 
-We find, with a simple understanding of the structure of the problem, we can speed up our computation significantly.
+We find that, with a simple understanding of the structure of the problem, we can significantly speed up our computation.
 
-We can also derive closed-form solution for $\vec \mu$ 
+We can also derive a closed-form solution for $\vec \mu$
 
 ```{code-cell} ipython3
 def compute_μ(β, c, T, α=1, u0=1, u1=0.5, u2=3):    
@@ -1039,7 +1030,8 @@ def compute_μ(β, c, T, α=1, u0=1, u1=0.5, u2=3):
     g = h1 * B.T @ β_vec
     M = B.T @ (h2 * jnp.diag(β_vec)) @ B
     F = c/2 * jnp.diag(β_vec)
-    return jnp.linalg.solve(2*(M - F), -g)
+    G = M - F
+    return jnp.linalg.solve(2*G, -g)
 
 μ_closed = compute_μ(β=0.85, c=2, T=T-1)
 print(f'closed-form μ = \n{μ_closed}')
@@ -1057,7 +1049,7 @@ compute_V(μ_closed, β=0.85, c=2)
 print(f'deviation = {np.linalg.norm(B @ μ_closed - θs)}')
 ```
 
-We can check the gradient of the analytical solution and the `JAX` computed version
+We can check the gradient of the analytical solution against the `JAX` computed version
 
 ```{code-cell} ipython3
 def compute_grad(μ, β, c, α=1, u0=1, u1=0.5, u2=3):    
@@ -1075,7 +1067,8 @@ def compute_grad(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     g = h1 * B.T @ β_vec
     M = (h2 * B.T @ jnp.diag(β_vec) @ B)
     F = c/2 * jnp.diag(β_vec)
-    return g + (2*(M - F) @ μ)
+    G = M - F
+    return g + (2*G @ μ)
 
 closed_grad = compute_grad(jnp.ones(T), β=0.85, c=2)
 ```
