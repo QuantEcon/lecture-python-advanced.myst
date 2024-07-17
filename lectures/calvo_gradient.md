@@ -14,55 +14,68 @@ kernelspec:
 # Machine Learning a Ramsey Plan
 
 
-In this lecture, we'll study the same   Ramsey problem that we also study in this quantecon lecture
+## Introduction
+
+This  lecture  studies a problem that we also study in another  quantecon lecture
 {doc}`calvo`.  
 
-In that lecture, we an analytic approach based on ``dynamic programming squared`` to guide computation of a Ramsey plan.  
+That lecture  used  an analytic approach based on ``dynamic programming squared`` to guide computation of a Ramsey plan  in a version of a model of Calvo {cite}`Calvo1978`.  
 
-Dynamic programming squared provided us with much useful  information about mathematical  objects that represent a Ramsey plan recursively and how to compute it efficiently.  
+Dynamic programming squared guided the  calculations in that lecture  by providing  much useful  information about mathematical  objects in terms of which the Ramsey plan can be represented recursively.
 
-Included in that information are descriptions of
+That paved the way to computing the  Ramsey plan efficiently.  
 
-  * the **state** variable confronting a continuation Ramsey planner
+Included in the structural information  that dynamic programming squared provided  in quantecon lecture {doc}`calvo`  are descriptions of
+
+  * a **state** variable confronting a continuation Ramsey planner, and 
   * two Bellman equations
     * one that describes the behavior of the representative agent
     * another that describes the decision problems of a Ramsey planner and of a continuation Ramsey planner
 
 
-In this lecture, we approach the Ramsey planner in a less sophisticated way that proceeds not knowing any of the structure imparted by dynamic programming squared.
+In this lecture, we approach the Ramsey planner in a much less sophisticated way that proceeds without knowing the structure imparted by dynamic programming squared.
 
-Instead, we use a brute force **machine learning** approach that naively states the Ramsey problem
+Instead, we use a brute force approach that naively states the Ramsey problem
 in terms of a pair of infinite sequences of real numbers that the Ramsey planner chooses
  * a sequence $\vec \theta$ of inflation rates 
  * a sequence $\vec \mu$ of money growh rates
 
+We take the liberty of calling this a **machine learning** approach because of how it fails to take advantage of the structure exploited by dynamic programming squared, at the cost of proliferating parameters.
+
+This is what many machine learning algorithms do.  
+
+Comparing the calculations in this lecture with those in our sister lecture {doc}`calvo` provides us
+with good laboratory to help appreciate the promises and limits of machine learning approaches
+more generally. 
+
 We'll actually deploy two machine learning approaches, one more naive than the other.
 
- * the first is really lazy. 
-    * it just hands a Python function that computes the Ramsey planner's objective over to a gradient descent algorithm
- * the second is less lazy.
-     * it exerts the effort required to express the Ramsey planner's criterion as an affine quadratic form in $\vec \mu$, computes first-order conditions for an optimum, and solves  the resulting system of simultaneous linear  equations for $\vec \mu$ and then $\vec \theta$.
+ * the first is really lazy 
+    * it just writes  a Python function to  computes the Ramsey planner's objective as a function of a money growth rate sequence and then hands it over to a gradient descent optimizer
+ * the second is less lazy
+     * it exerts the effort required to express the Ramsey planner's objective as an affine quadratic form in $\vec \mu$, computes first-order conditions for an optimum, and solves  the resulting system of simultaneous linear  equations for $\vec \mu$ and then $\vec \theta$.
 
-While these machine learning (ML) approaches succeed in recovering the same Ramsey plan computed in 
-this quantecon lecture {doc}`calvo`, they don't  reveal the structure that is exploited in that
-lecture's application of dynamic programming squared.
+While both of these machine learning (ML) approaches succeed in recovering the  Ramsey plan computed in via dynamic programming squared in  quantecon lecture {doc}`calvo`, they don't  reveal the structure that is exploited in that lecture.
 
-But that structure is lurking in the answers provided by our ML approach, if only we ask exactly the right questions.
+That structure lies hidden with  the answers provided by our ML approach
 
-Those questions can be answered by running particular linear  regressions on components of
-$\vec \mu, \vec \theta$, as we show at the end of this lecture.  
+We can ferret out that structure  if only we ask  the right questions.
+
+At the end of this lecture we show what those questions are and how they  can be answered by running particular linear  regressions on components of
+$\vec \mu, \vec \theta$.  
+
+Application of human intelligence, not the artificial intelligence exhibited in our machine learning approaches, is a key input into figuring out what regressions to run. 
  
 
 ## The Model
 
-The basic model is  linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government
-plans.
+We study a   linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government plans.
 
 
 The model focuses attention on intertemporal tradeoffs between
 
-- welfare benefits that a representative  agent's anticipations of future  deflation generate  by decreasing  costs of holding real money balances and thereby increasing a representative agent's *liquidity*, as measured by  holdings of real money balances, and
-- costs associated with the  distorting taxes that the government  levies  to acquire the paper money that it  destroys  in order to generate anticipated deflation
+- utility that a representative  agent's anticipations of future  deflation generate  by decreasing  costs of holding real money balances and thereby increasing the  agent's *liquidity*, as measured by  holdings of real money balances, and
+- social costs associated with the  distorting taxes that the government  levies  to acquire the paper money that it  destroys  in order to generate anticipated deflation
 
 The model features
 
@@ -136,7 +149,7 @@ the linear difference equation {eq}`eq_grad_old2` can be solved forward to get:
 ```{math}
 :label: eq_grad_old3
 
-\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}
+\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}, \quad t \geq 0
 ```
 
 ```{note}
@@ -180,17 +193,25 @@ $t$ when it  changes the stock of nominal money
 balances at rate $\mu_t$.
 
 Therefore, the one-period welfare function of a benevolent government
-is:
+is
 
-$$
-v_0 = \sum_{t=0}^\infty \beta^t s(\theta_t, \mu_t) 
-$$
-
-where $\beta \in (0,1)$ is a discount factor and  the goverment's  one-period welfare function is  
 
 $$
 s(\theta_t,\mu_t) = U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2  .
 $$
+
+The Ramsey planner's criterion is 
+
+$$
+V = \sum_{t=0}^\infty \beta^t s(\theta_t, \mu_t) 
+$$ (eq:RamseyV)
+
+where $\beta \in (0,1)$ is a discount factor.  
+
+The Ramsey planner chooses 
+ a vector of money growth rates $\vec \mu$ 
+to maximize criterion {eq}`eq:Ramsey` subject to equations {eq}`eq_grad_old3`.
+
 
 
 
@@ -199,10 +220,6 @@ $$
 
 ## Parameters and variables
 
-We want to compute a vector of money growth rates $(\mu_0, \mu_1, \ldots, \mu_{T-1}, \bar \mu)$ 
-to maximize the function $\tilde V$ below.
-
-We'll start by setting them at the default values from {doc}`calvo`.
 
 **Parameters**  are
 
@@ -229,7 +246,7 @@ We'll start by setting them at the default values from {doc}`calvo`.
 
 ### Basic objects
 
-To prepare the way for our calculations, we'll remind ourselves of the key mathematical objects
+To prepare the way for our calculations, we'll remind ourselves of the  mathematical objects
 in play.
 
 * sequences of inflation rates and money creation rates:
@@ -311,9 +328,9 @@ $$
 \theta_t = \bar \theta \quad \forall t \geq T
 $$
 
-**Formula for truncated $\vec \theta$ **
+**Formula for truncated $\vec \theta$**
 
-In light of our approximation, we now seek a  function that takes 
+In light of our approximation that $\mu_t = \bar \mu$ for all $t \geq T$, we now seek a  function that takes 
 
 $$
 \tilde \mu = \begin{bmatrix}\mu_0 & \mu_1 & \cdots & \mu_{T-1} & \bar \mu
@@ -652,7 +669,7 @@ First, recall that a Ramsey planner chooses $\vec \mu$ to maximize the governmen
 We now define a distinct problem in which the planner chooses $\vec \mu$ to maximize the government's value function {eq}`eq:Ramseyvalue`subject to equation  {eq}`eq:inflation101` and
 the additional restriction that  $\mu_t = \bar \mu$ for all $t$.  
 
-The solution of this problem is a single $\mu$ that this quantecon lecture  {doc}`calvo` calls $\mu^{CR}$.
+The solution of this problem is a time-invariant $\mu_t$ that this quantecon lecture  {doc}`calvo` calls $\mu^{CR}$.
 
 ```{code-cell} ipython3
 # Initial guess for single μ
@@ -790,7 +807,7 @@ V = \sum_{t=0}^\infty \beta^t (h_0 + h_1 \theta_t + h_2 \theta_t^2 -
 \frac{c}{2} \mu_t^2 )
 $$
 
-With out assumption above, criterion $V$ can be rewritten as
+With our assumption above, criterion $V$ can be rewritten as
 
 $$
 \begin{align*}
@@ -916,7 +933,7 @@ print(f'deviation = {np.linalg.norm(optimized_μ - clq.μ_series)}')
 compute_V(optimized_μ, β=0.85, c=2)
 ```
 
-We find that, with a simple understanding of the structure of the problem, we can significantly speed up our computation.
+We find that by exploiting more knowledge about  the structure of the problem, we can significantly speed up our computation.
 
 We can also derive a closed-form solution for $\vec \mu$
 
@@ -989,10 +1006,29 @@ closed_grad
 print(f'deviation = {np.linalg.norm(closed_grad - (- grad_J(jnp.ones(T))))}')
 ```
 
-### Some regressions
+## Informative  regressions
 
 In the interest of looking for some parameters that might help us learn about the structure of
-the Ramsey plan, we shall some least squares linear regressions of various components of $\vec \theta$ and $\vec \mu$ on others.
+the Ramsey plan, we shall compute some least squares linear regressions of particular components of $\vec \theta$ and $\vec \mu$ on others.
+
+These regressions will reveal structure that is hidden within the $\vec \mu^R, \vec \theta^R$ sequences associated with the Ramsey plan.
+
+It is worth pausing here and noting  the roles played by  human intelligence and artificial intelligence (ML) here.  
+
+AI (a.k.a. ML) is running the regressions for us.
+
+But you can regress anything on anything else.
+
+Human intelligence is telling us which regressions to run. 
+
+And when we have those regressions in hand, considerably more human intelligence is required fully to
+appreciate what they reveal about the structure of the Ramsey plan. 
+
+```{note}
+At this point, an advanced reader might want to read Chang {cite}`chang1998credible` and think about why he Chang takes
+$\theta_t$ as a key state variable. 
+```
+
 
 ```{code-cell} ipython3
 # Compute θ using optimized_μ
@@ -1124,6 +1160,5 @@ where $b_0, b_1, g_0, g_1, g_2$ were positive parameters that the lecture comput
 
 By running regressions on the outcomes $\vec \mu^R, \vec \theta^R$ that we have computed with the brute force gradient descent method in this lecture, we have recovered the same representation.
 
-However, in this lecture we have more or less discovered the representation by brute force -- i.e., 
-just by running some regressions and staring at the result, noticing that the $R^2$ of unity tell us
-that the fits are perfect. 
+However, in this lecture we have  discovered the representation partly by brute force -- i.e., 
+just by running some well chosen  regressions and staring at the results, noticing that the $R^2$ of unity tell us that the fits are perfect. 
