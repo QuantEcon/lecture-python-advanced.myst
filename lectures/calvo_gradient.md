@@ -641,145 +641,7 @@ compute_V(optimized_μ, β=0.85, c=2)
 ```{code-cell} ipython3
 compute_V(clq.μ_series, β=0.85, c=2)
 ```
-
-### Some regressions
-
-In the interest of looking for some parameters that might help us learn about the structure of
-the Ramsey plan, we shall some least squares linear regressions of various components of $\vec \theta$ and $\vec \mu$ on others.
-
-```{code-cell} ipython3
-# Compute θ using optimized_μ
-θs = np.array(compute_θ(optimized_μ))
-μs = np.array(optimized_μ)
-
-# First regression: μ_t on a constant and θ_t
-X1_θ = sm.add_constant(θs)
-model1 = sm.OLS(μs, X1_θ)
-results1 = model1.fit()
-
-# Print regression summary
-print("Regression of μ_t on a constant and θ_t:")
-print(results1.summary(slim=True))
-```
-
-```{code-cell} ipython3
-plt.scatter(θs, μs)
-plt.plot(θs, results1.predict(X1_θ), 'C1', label='$\hat \mu_t$', linestyle='--')
-plt.xlabel(r'$\theta_t$')
-plt.ylabel(r'$\mu_t$')
-plt.legend()
-plt.show()
-```
-
-```{code-cell} ipython3
-# Second regression: θ_{t+1} on a constant and θ_t
-θ_t = np.array(θs[:-1])  # θ_t
-θ_t1 = np.array(θs[1:])  # θ_{t+1}
-X2_θ = sm.add_constant(θ_t)  # Add a constant term for the intercept
-model2 = sm.OLS(θ_t1, X2_θ)
-results2 = model2.fit()
-
-# Print regression summary
-print("\nRegression of θ_{t+1} on a constant and θ_t:")
-print(results2.summary(slim=True))
-```
-
-```{code-cell} ipython3
-plt.scatter(θ_t, θ_t1)
-plt.plot(θ_t, results2.predict(X2_θ), color='C1', label='$\hat θ_t$', linestyle='--')
-plt.xlabel(r'$\theta_t$')
-plt.ylabel(r'$\theta_{t+1}$')
-plt.legend()
-
-plt.tight_layout()
-plt.show()
-```
-
-Now to learn about the structure of the optimal value $V$ as a function of $\vec \mu, \vec \theta$,
-we'll run some more regressions.
-
-+++
-
-First, we modified the function `compute_V_t` to return a sequence of $\vec v_t$.
-
-```{code-cell} ipython3
-def compute_V_t(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
-    θ = compute_θ(μ, α)
-    
-    h0 = u0
-    h1 = -u1 * α
-    h2 = -0.5 * u2 * α**2
-    
-    T = len(μ)
-    V_t = jnp.zeros(T)
-    
-    for t in range(T - 1):
-        V_t = V_t.at[t].set(β**t * (h0 + h1 * θ[t] + h2 * θ[t]**2 - 0.5 * c * μ[t]**2))
-    
-    # Terminal condition
-    V_t = V_t.at[T-1].set((β**(T-1) / (1 - β)) * (h0 + h1 * μ[-1] + h2 * μ[-1]**2 - 0.5 * c * μ[-1]**2))
-    
-    return V_t
-```
-
-```{code-cell} ipython3
-# Compute v_t
-v_ts = np.array(compute_V_t(optimized_μ, β=0.85, c=2))
-
-# Initialize arrays for discounted sum of θ_t, θ_t^2, μ_t^2
-βθ_t = np.zeros(T)
-βθ_t2 = np.zeros(T)
-βμ_t2 = np.zeros(T)
-
-# Compute discounted sum of θ_t, θ_t^2, μ_t^2
-for ts in range(T):
-    βθ_t[ts] = sum(clq.β**t * θs[t] 
-                   for t in range(ts + 1))
-    βθ_t2[ts] = sum(clq.β**t * θs[t]**2 
-                    for t in range(ts + 1))
-    βμ_t2[ts] = sum(clq.β**t * μs[t]**2 
-                    for t in range(ts + 1))
-
-X = np.column_stack((βθ_t, βθ_t2, βμ_t2))
-X_vt = sm.add_constant(X)
-
-# Fit the model
-model3 = sm.OLS(v_ts, X_vt).fit()
-```
-
-```{code-cell} ipython3
-plt.figure()
-plt.scatter(θs, v_ts)
-plt.plot(θs, model3.predict(X_vt), color='C1', label='$\hat v_t$', linestyle='--')
-plt.xlabel('$θ_t$')
-plt.ylabel('$v_t$')
-plt.legend()
-plt.show()
-```
-
-Using a different and more structured computational strategy, this quantecon lecture {doc}`calvo` represented
-a Ramsey plan recursively via the following system of linear equations:
-
-
-
-```{math}
-:label: eq_old9101
-
-\begin{aligned}
-\theta_0 & = \theta_0^R \\
-\mu_t &  = b_0 + b_1 \theta_t \\
-v_t & = g_0 +g_1\theta_t + g_2 \theta_t^2 \\
-\theta_{t+1} & = d_0 + d_1 \theta_t , \quad  d_0 >0, d_1 \in (0,1) \\
-\end{aligned}
-```
-
-where $b_0, b_1, g_0, g_1, g_2$ were positive parameters that the lecture computed with Python code.
-
-By running regressions on the outcomes $\vec \mu^R, \vec \theta^R$ that we have computed with the brute force gradient descent method in this lecture, we have recovered the same representation.
-
-However, in this lecture we have more or less discovered the representation by brute force -- i.e., 
-just by running some regressions and staring at the result, noticing that the $R^2$ of unity tell us
-that the fits are perfect.  
+ 
 
 ### Restricting  $\mu_t = \bar \mu$ for all $t$
 
@@ -908,6 +770,12 @@ def construct_B(α, T):
 A, B = construct_B(α=clq.α, T=T)
 
 print(f'A = \n {A}')
+```
+
+```{code-cell} ipython3
+# Compute θ using optimized_μ
+θs = np.array(compute_θ(optimized_μ))
+μs = np.array(optimized_μ)
 ```
 
 ```{code-cell} ipython3
@@ -1120,3 +988,142 @@ closed_grad
 ```{code-cell} ipython3
 print(f'deviation = {np.linalg.norm(closed_grad - (- grad_J(jnp.ones(T))))}')
 ```
+
+### Some regressions
+
+In the interest of looking for some parameters that might help us learn about the structure of
+the Ramsey plan, we shall some least squares linear regressions of various components of $\vec \theta$ and $\vec \mu$ on others.
+
+```{code-cell} ipython3
+# Compute θ using optimized_μ
+θs = np.array(compute_θ(optimized_μ))
+μs = np.array(optimized_μ)
+
+# First regression: μ_t on a constant and θ_t
+X1_θ = sm.add_constant(θs)
+model1 = sm.OLS(μs, X1_θ)
+results1 = model1.fit()
+
+# Print regression summary
+print("Regression of μ_t on a constant and θ_t:")
+print(results1.summary(slim=True))
+```
+
+```{code-cell} ipython3
+plt.scatter(θs, μs)
+plt.plot(θs, results1.predict(X1_θ), 'C1', label='$\hat \mu_t$', linestyle='--')
+plt.xlabel(r'$\theta_t$')
+plt.ylabel(r'$\mu_t$')
+plt.legend()
+plt.show()
+```
+
+```{code-cell} ipython3
+# Second regression: θ_{t+1} on a constant and θ_t
+θ_t = np.array(θs[:-1])  # θ_t
+θ_t1 = np.array(θs[1:])  # θ_{t+1}
+X2_θ = sm.add_constant(θ_t)  # Add a constant term for the intercept
+model2 = sm.OLS(θ_t1, X2_θ)
+results2 = model2.fit()
+
+# Print regression summary
+print("\nRegression of θ_{t+1} on a constant and θ_t:")
+print(results2.summary(slim=True))
+```
+
+```{code-cell} ipython3
+plt.scatter(θ_t, θ_t1)
+plt.plot(θ_t, results2.predict(X2_θ), color='C1', label='$\hat θ_t$', linestyle='--')
+plt.xlabel(r'$\theta_t$')
+plt.ylabel(r'$\theta_{t+1}$')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+Now to learn about the structure of the optimal value $V$ as a function of $\vec \mu, \vec \theta$,
+we'll run some more regressions.
+
++++
+
+First, we modified the function `compute_V_t` to return a sequence of $\vec v_t$.
+
+```{code-cell} ipython3
+def compute_V_t(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
+    θ = compute_θ(μ, α)
+    
+    h0 = u0
+    h1 = -u1 * α
+    h2 = -0.5 * u2 * α**2
+    
+    T = len(μ)
+    V_t = jnp.zeros(T)
+    
+    for t in range(T - 1):
+        V_t = V_t.at[t].set(β**t * (h0 + h1 * θ[t] + h2 * θ[t]**2 - 0.5 * c * μ[t]**2))
+    
+    # Terminal condition
+    V_t = V_t.at[T-1].set((β**(T-1) / (1 - β)) * (h0 + h1 * μ[-1] + h2 * μ[-1]**2 - 0.5 * c * μ[-1]**2))
+    
+    return V_t
+```
+
+```{code-cell} ipython3
+# Compute v_t
+v_ts = np.array(compute_V_t(optimized_μ, β=0.85, c=2))
+
+# Initialize arrays for discounted sum of θ_t, θ_t^2, μ_t^2
+βθ_t = np.zeros(T)
+βθ_t2 = np.zeros(T)
+βμ_t2 = np.zeros(T)
+
+# Compute discounted sum of θ_t, θ_t^2, μ_t^2
+for ts in range(T):
+    βθ_t[ts] = sum(clq.β**t * θs[t] 
+                   for t in range(ts + 1))
+    βθ_t2[ts] = sum(clq.β**t * θs[t]**2 
+                    for t in range(ts + 1))
+    βμ_t2[ts] = sum(clq.β**t * μs[t]**2 
+                    for t in range(ts + 1))
+
+X = np.column_stack((βθ_t, βθ_t2, βμ_t2))
+X_vt = sm.add_constant(X)
+
+# Fit the model
+model3 = sm.OLS(v_ts, X_vt).fit()
+```
+
+```{code-cell} ipython3
+plt.figure()
+plt.scatter(θs, v_ts)
+plt.plot(θs, model3.predict(X_vt), color='C1', label='$\hat v_t$', linestyle='--')
+plt.xlabel('$θ_t$')
+plt.ylabel('$v_t$')
+plt.legend()
+plt.show()
+```
+
+Using a different and more structured computational strategy, this quantecon lecture {doc}`calvo` represented
+a Ramsey plan recursively via the following system of linear equations:
+
+
+
+```{math}
+:label: eq_old9101
+
+\begin{aligned}
+\theta_0 & = \theta_0^R \\
+\mu_t &  = b_0 + b_1 \theta_t \\
+v_t & = g_0 +g_1\theta_t + g_2 \theta_t^2 \\
+\theta_{t+1} & = d_0 + d_1 \theta_t , \quad  d_0 >0, d_1 \in (0,1) \\
+\end{aligned}
+```
+
+where $b_0, b_1, g_0, g_1, g_2$ were positive parameters that the lecture computed with Python code.
+
+By running regressions on the outcomes $\vec \mu^R, \vec \theta^R$ that we have computed with the brute force gradient descent method in this lecture, we have recovered the same representation.
+
+However, in this lecture we have more or less discovered the representation by brute force -- i.e., 
+just by running some regressions and staring at the result, noticing that the $R^2$ of unity tell us
+that the fits are perfect. 
