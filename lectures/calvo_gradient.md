@@ -362,7 +362,7 @@ $$
 \tilde V = \sum_{t=0}^\infty \beta^t (
 h_0 + h_1 \tilde\theta_t + h_2 \tilde\theta_t^2 -
 \frac{c}{2} \mu_t^2 )
-$$
+$$ (eq:valueformula101)
 
 or more precisely 
 
@@ -1008,27 +1008,42 @@ print(f'deviation = {np.linalg.norm(closed_grad - (- grad_J(jnp.ones(T))))}')
 
 ## Informative  regressions
 
-In the interest of looking for some parameters that might help us learn about the structure of
-the Ramsey plan, we shall compute some least squares linear regressions of particular components of $\vec \theta$ and $\vec \mu$ on others.
+To  help us learn about the structure of the Ramsey plan, we shall compute some least squares linear regressions of particular components of $\vec \theta$ and $\vec \mu$ on others.
 
-These regressions will reveal structure that is hidden within the $\vec \mu^R, \vec \theta^R$ sequences associated with the Ramsey plan.
+Our hope is that these regressions will reveal structure  hidden within the $\vec \mu^R, \vec \theta^R$ sequences associated with a Ramsey plan.
 
-It is worth pausing here and noting  the roles played by  human intelligence and artificial intelligence (ML) here.  
+It is worth pausing here to think about  roles played by  **human** intelligence and **artificial** intelligence  here.  
 
-AI (a.k.a. ML) is running the regressions for us.
+Artificial intelligence (AI a.k.a. ML) is running the regressions.
 
 But you can regress anything on anything else.
 
-Human intelligence is telling us which regressions to run. 
+Human intelligence tell us which regressions to run. 
 
-And when we have those regressions in hand, considerably more human intelligence is required fully to
-appreciate what they reveal about the structure of the Ramsey plan. 
+Furthermore, once we have those regressions in hand, considerably more human intelligence is required fully to appreciate what they reveal about the structure of the Ramsey plan. 
 
 ```{note}
-At this point, an advanced reader might want to read Chang {cite}`chang1998credible` and think about why he Chang takes
-$\theta_t$ as a key state variable. 
+At this point, it is worthwhile to read how Chang {cite}`chang1998credible` chose
+$\theta_t$ as his key state variable. 
 ```
 
+
+**REQUEST FOR HUMPHREY, JULY 18**
+
+Please simply plot $\mu_t$ and $\theta_t$ for $t =0, \ldots, T$  against $t$ in the same graph with
+$t$ on the $x$ axis. These are the data that we'll be running the regressions on. 
+
+
+**END OF REQUEST FOR HUMPHREY, JULY 18**
+
+
+
+
+We begin by regressing $\mu_t$ on $\theta_t$. 
+
+This might seem strange because, first of all, equation {eq}`eq_grad_old3` asserts that inflation at time $t$  is determined $\{\mu_s\}_{s=t}^\infty$
+
+Nevertheless, we'll run this regression anyway and provide a justification later.  
 
 ```{code-cell} ipython3
 # Compute θ using optimized_μ
@@ -1044,6 +1059,18 @@ results1 = model1.fit()
 print("Regression of μ_t on a constant and θ_t:")
 print(results1.summary(slim=True))
 ```
+Our regression tells us that along the Ramsey outcome $\vec \mu, \vec \theta$ the linear function
+
+$$
+\mu_t = .0645 + 1.5995 \theta_t
+$$
+
+fits perfectly.
+
+Let's plot this function and the points $(\theta_t, \mu_t)$ that lie on it for $t=0, \ldots, T$.
+
+
+
 
 ```{code-cell} ipython3
 plt.scatter(θs, μs)
@@ -1053,6 +1080,15 @@ plt.ylabel(r'$\mu_t$')
 plt.legend()
 plt.show()
 ```
+
+The  time $0$ pair  $\theta_0, \mu_0$ appears as the point on the upper right.  
+
+Points for succeeding times appear further and further to the lower left and eventually converge to
+$\bar \mu, \bar \mu$.
+
+Next, we'll run a linear regression of $\theta_{t+1}$ against $\theta_t$. 
+
+We'll include a constant. 
 
 ```{code-cell} ipython3
 # Second regression: θ_{t+1} on a constant and θ_t
@@ -1066,6 +1102,15 @@ results2 = model2.fit()
 print("\nRegression of θ_{t+1} on a constant and θ_t:")
 print(results2.summary(slim=True))
 ```
+We find that the regression line fits perfectly and thus discover the affine relationship
+
+$$
+\theta_{t+1} = - .0645 + .4005 \theta_t 
+$$
+
+that prevails along the Ramsey outcome for inflation.
+
+Let's plot $\theta_t$ for $t =0, 1, \ldots, T$ along the line.
 
 ```{code-cell} ipython3
 plt.scatter(θ_t, θ_t1)
@@ -1078,12 +1123,32 @@ plt.tight_layout()
 plt.show()
 ```
 
-Now to learn about the structure of the optimal value $V$ as a function of $\vec \mu, \vec \theta$,
-we'll run some more regressions.
+Points for succeeding times appear further and further to the lower left and eventually converge to
+$\bar \mu, \bar \mu$.
+
+### Continuation values
+
+
+We first define the following generalization of formula 
+{eq}`eq:valueformula101` for the value of the Ramsey planner.
+
+Formula tells the Ramsey planner's value at time $0$, the time at which the Ramsey planner 
+chooses the sequence $\vec \mu$ once and for all.
+
+We define the Ramsey planner's **continuation value** at time $s \in [0, \ldots, T-1]$ as
+
+
+$$ 
+v_t = \sum_{s=t}^{T-1} \beta^t (h_0 + h_1 \tilde\theta_s + h_2 \tilde\theta_t^s -
+\frac{c}{2} \mu_s^2 ) + \frac{\beta^{T-t}}{1-\beta} (h_0 + h_1 \bar \mu + h_2 \bar \mu^2 - \frac{c}{2} \bar \mu^2 )
+$$
+
+To learn about the  structure of the continuation values and how they relate to $\theta_t$,
+we'll run  regressions.
 
 +++
 
-First, we modified the function `compute_V_t` to return a sequence of $\vec v_t$.
+First, we modify the function `compute_V_t` to return a sequence of continuation values  $\vec v_t$.
 
 ```{code-cell} ipython3
 def compute_V_t(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
@@ -1104,6 +1169,7 @@ def compute_V_t(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     
     return V_t
 ```
+Now let's run a regression of $v_t$ on a constant, $\theta_t$, and $\theta_t^2$ and see how it fits.
 
 ```{code-cell} ipython3
 # Compute v_t
@@ -1130,6 +1196,23 @@ X_vt = sm.add_constant(X)
 model3 = sm.OLS(v_ts, X_vt).fit()
 ```
 
+
+**REQUEST FOR HUMPHREY**
+
+please write out a cell to print out the regression results -- i.e., the quadratic affine function coefficients, as you did earlier.
+
+
+**END OF REQUEST FOR HUMPHREY**
+
+We discover that the fit is perfect and that continuation values and inflation rates satisfy
+the following relationship along a Ramsey outcome path:
+
+$$
+v_t = XXX + XXXX \theta_t + XXXX \theta_t^2
+$$
+
+Let's plot continuation values as a function of $\theta_t$ for $t =0, 1, \ldots, T$.
+
 ```{code-cell} ipython3
 plt.figure()
 plt.scatter(θs, v_ts)
@@ -1139,9 +1222,13 @@ plt.ylabel('$v_t$')
 plt.legend()
 plt.show()
 ```
+In this graph, $\theta_t, v_t$ pairs start at the upper right at $t=0$ and move along downward along the smooth curve until they converge to $\bar \mu, v_T$ at $t=0$.
 
-Using a different and more structured computational strategy, this quantecon lecture {doc}`calvo` represented
-a Ramsey plan recursively via the following system of linear equations:
+### What has machine learning taught us?
+
+Assembling our regression findings, we have discovered by somehow guessing useful regressions to
+run for our single Ramsey outcome path $\vec \mu^R, \vec \theta^R$ that along that path
+the following relationships prevail:
 
 
 
@@ -1151,14 +1238,28 @@ a Ramsey plan recursively via the following system of linear equations:
 \begin{aligned}
 \theta_0 & = \theta_0^R \\
 \mu_t &  = b_0 + b_1 \theta_t \\
+\theta_{t+1} & = d_0 + d_1 \theta_t  \\
 v_t & = g_0 +g_1\theta_t + g_2 \theta_t^2 \\
-\theta_{t+1} & = d_0 + d_1 \theta_t , \quad  d_0 >0, d_1 \in (0,1) \\
 \end{aligned}
 ```
 
-where $b_0, b_1, g_0, g_1, g_2$ were positive parameters that the lecture computed with Python code.
+where the initial value $\theta_0^R$ was computed along with other components of $\vec \mu^R, \vec \theta^R$ when we computed the Ramsey plan, and where $b_0, b_1, g_0, g_1, g_2$ are  parameters whose values we estimated with our regressions.
 
-By running regressions on the outcomes $\vec \mu^R, \vec \theta^R$ that we have computed with the brute force gradient descent method in this lecture, we have recovered the same representation.
 
-However, in this lecture we have  discovered the representation partly by brute force -- i.e., 
-just by running some well chosen  regressions and staring at the results, noticing that the $R^2$ of unity tell us that the fits are perfect. 
+We have  discovered this  representation by running some carefully chosen  regressions and staring at the results, noticing that the $R^2$ of unity tell us that the fits are perfect. 
+
+We have learned something about the structure of the Ramsey problem, but it is challenging to say more using the ideas that we have deployed in this lecture.  
+
+There are many other linear regressions among components of $\vec \mu^R, \theta^R$ that would also have given us perfect fits.
+
+For example, we could have regressed $\theta_t$ on $\mu_t$ and gotten the same $R^2$ value.  
+
+Wouldn't that  direction of fit have made  more sense? 
+
+To answer that question, we'll have to  deploy more economic theory.
+
+We do that in this quantecon lecture {doc}`calvo`.
+
+There, we'll discover that system {eq}`eq_old9101` is actually a very good way to represent 
+a Ramsey plan because it reveals many things about its structure.
+
