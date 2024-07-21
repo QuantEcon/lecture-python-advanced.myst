@@ -1069,16 +1069,6 @@ print("Regression of μ_t on a constant and θ_t:")
 print(results1.summary(slim=True))
 ```
 
-```{code-cell} ipython3
-X1_θ = sm.add_constant(θs[:4])
-model1 = sm.OLS(μs[:4], X1_θ)
-results1 = model1.fit()
-
-# Print regression summary
-print("Regression of μ_t on a constant and θ_t:")
-print(results1.summary(slim=True))
-```
-
 Our regression tells us that along the Ramsey outcome $\vec \mu, \vec \theta$ the linear function
 
 $$
@@ -1118,32 +1108,6 @@ results2 = model2.fit()
 # Print regression summary
 print("\nRegression of θ_{t+1} on a constant and θ_t:")
 print(results2.summary(slim=True))
-```
-
-```{code-cell} ipython3
-X1_θ = sm.add_constant(θ_t[:4])
-model1 = sm.OLS(θ_t1[:4], X1_θ)
-results1 = model1.fit()
-
-# Print regression summary
-print("Regression of μ_t on a constant and θ_t:")
-print(results1.summary(slim=True))
-```
-
-```{code-cell} ipython3
-clq.F
-```
-
-```{code-cell} ipython3
-clq.θ_space, clq.μ_space
-
-X1_θ = sm.add_constant(clq.θ_space)
-model1 = sm.OLS(clq.μ_space, X1_θ)
-results1 = model1.fit()
-
-# Print regression summary
-print("Regression of μ_t on a constant and θ_t:")
-print(results1.summary(slim=True))
 ```
 
 We find that the regression line fits perfectly and thus discover the affine relationship
@@ -1219,25 +1183,6 @@ Now let's run a regression of $v_t$ on a constant, $\theta_t$, and $\theta_t^2$ 
 ```{code-cell} ipython3
 # Compute v_t
 v_ts = np.array(compute_V_t(optimized_μ, β=0.85, c=2))
-
-# Initialize arrays for discounted sum of θ_t, θ_t^2
-βθ_t = np.zeros(T)
-
-# Compute discounted sum of θ_t, θ_t^2
-for ts in range(T):
-    βθ_t[ts] = sum(clq.β**t * θs[t] 
-                   for t in range(ts + 1))
-
-X_vt = sm.add_constant(βθ_t)
-
-# Fit the model
-model3 = sm.OLS(v_ts, X_vt)
-results3  = model3.fit()
-print("\nRegression of v_{t} on a constant and discounted sums of θ_t and θ^2_t:")
-print(results3.summary(slim=True))
-```
-
-```{code-cell} ipython3
 X = np.column_stack((θs, θs**2))
 X_vt = sm.add_constant(X)
 
@@ -1263,289 +1208,78 @@ plt.legend()
 plt.show()
 ```
 
-**REQUEST FOR HUMPHREY**
-
-please write out a cell to print out the regression results -- i.e., the quadratic affine function coefficients, as you did earlier.
-
-**END OF REQUEST FOR HUMPHREY**
+##### In this graph, $\theta_t, v_t$ pairs start at the upper right at $t=0$ and move along downward along the smooth curve until they converge to $\bar \mu, v_T$ at $t=0$.
 
 **NOTE TO TOM**
+> In this graph, $\theta_t, v_t$ pairs start at the upper right at $t=0$ and move along downward along the smooth curve until they converge to $\bar \mu, v_T$ at $t=0$.
 
-Dear Tom,
-
-Just a quick reminder that the regression above is run with $v_t$ against the sequence of **discounted sum** for $\theta_t$ and $\theta^2_t$ ($\left\{ \sum_{t=0}^{n} \left(\beta^t \cdot \theta_t \right) \right\}_{n=0}^{T}$ and $\left\{ \sum_{t=0}^{n} \left(\beta^t \cdot \theta_t^2 \right) \right\}_{n=0}^{T}$).
-
-I dropped sums with $\mu^2_t$ because there is a multicollinearity issue as $\theta$ and $\mu$ are linearly dependent.
-
-Below is what I went through before.
-
-First I ran regression on $v_t$ against $\theta_t$ and $\theta^2_t$. Here we cannot get good results
+Were you refering to this graph below?
 
 ```{code-cell} ipython3
-θs_d = np.array([clq.β**t * θs[t] for t in range(ts + 1)])
-```
+θs = np.array(compute_θ(optimized_μ))
+μs = np.array(optimized_μ)
 
-```{code-cell} ipython3
-θs_d2 = np.array([clq.β**t * θs[t]**2 for t in range(ts + 1)])
-```
+# Plot the two sequences
+Ts = np.arange(T)
 
-```{code-cell} ipython3
-X = np.column_stack((θs_d, θs_d2))
-X_vθ = sm.add_constant(X)  # Add a constant term for the intercept
-model_vθ = sm.OLS(v_ts, X_vθ)
-results = model_vθ.fit()
-
-# Print regression summary
-print("\nRegression of θ_{t+1} on a constant and θ_t:")
-print(results.summary(slim=True))
-```
-
-```{code-cell} ipython3
-np.corrcoef(θs_d, θs_d2)
-```
-
-```{code-cell} ipython3
-θs_d = np.cumsum([clq.β**t * θs[t] for t in range(ts + 1)])
-θs_d2 = np.cumsum([clq.β**t * θs[t]**2 for t in range(ts + 1)])
-
-X = np.column_stack((θs_d, θs_d2))
-X_vθ = sm.add_constant(X)  # Add a constant term for the intercept
-model_vθ = sm.OLS(v_ts, X_vθ)
-results = model_vθ.fit()
-
-# Print regression summary
-print("\nRegression of θ_{t+1} on a constant and θ_t:")
-print(results.summary(slim=True))
-```
-
-```{code-cell} ipython3
-np.corrcoef(θs_d, θs_d2)
-```
-
-Next I ran regression on discounted sum terms. The model in my mind is 
-
-$$
-v_t = \beta_0 + \beta_1 \sum_{s=t}^{T} \beta^s \theta_s + \beta_2 \sum_{s=t}^{T} \beta^s \theta_s^2 + \beta_3 \sum_{s=t}^{T} \beta^s \mu_s^2 + \epsilon_t
-$$
-
-```{code-cell} ipython3
-# Compute v_t
-v_ts = np.array(compute_V_t(optimized_μ, β=0.85, c=2))
-
-# Initialize arrays for discounted sum of θ_t, θ_t^2, μ_t^2
-βθ_t = np.zeros(T)
-βθ_t2 = np.zeros(T)
-βμ_t2 = np.zeros(T)
-
-# Compute discounted sum of θ_t, θ_t^2, μ_t^2
-for ts in range(T):
-    βθ_t[ts] = sum(clq.β**t * θs[t] 
-                   for t in range(ts + 1))
-    βθ_t2[ts] = sum(clq.β**t * θs[t]**2 
-                    for t in range(ts + 1))
-    βμ_t2[ts] = sum(clq.β**t * μs[t]**2 
-                    for t in range(ts + 1))
-    
-X = np.column_stack((βθ_t, βθ_t2, βμ_t2))
-X_vt = sm.add_constant(X)
-
-# Fit the model
-model3 = sm.OLS(v_ts, X_vt)
-results3  = model3.fit()
-print("\nRegression of v_{t} on a constant and discounted sums:")
-print(results3.summary(slim=True))
-```
-
-```{code-cell} ipython3
-np.corrcoef([βθ_t, βθ_t2, βμ_t2])
-```
-
-There are strong multicollinearity problems caused by $\sum_{s=t}^{T} \beta^s \theta_s^2$ and $\sum_{s=t}^{T} \beta^s \mu_s^2$. Actually we can get the same $R^2$ by fitting only $$v_t = \beta_0 + \beta_1 \sum_{s=t}^{T} \beta^s \theta_s + \epsilon_t$$
-
-```{code-cell} ipython3
-X_vt = sm.add_constant(βθ_t)
-
-# Fit the model
-model3 = sm.OLS(v_ts, X_vt)
-results3  = model3.fit()
-print("\nRegression of v_{t} on a constant and discounted sums of θ_t:")
-print(results3.summary(slim=True))
-```
-
-I think it is not obvious but for someone running linear regression, they might stop at $$v_t = \beta_0 + \beta_1 \sum_{s=t}^{T} \beta^s \theta_s + \epsilon_t$$ and reach the conclusion that $\hat v_t = 1.1488 + 1.6991 \sum_{s=t}^{T} \beta^s \theta_s$ without being able to explore the deeper structure.
-
-```{code-cell} ipython3
-from scipy.optimize import minimize
-
-# Define the model function
-def model(params, data):
-    beta0, beta1, beta2, beta3 = params
-    βθ_t, βθ_t2, βμ_t2 = data.T
-    return beta0 + beta1 * βθ_t + beta2 * βθ_t2 + beta3 * βμ_t2
-
-def obj_func(params, data, v_t):
-    pred = model(params, data)
-    residuals = v_t - pred
-    return np.sum(residuals**2)
-
-# Initial guess for parameters
-initial_params = np.ones(4)
-
-# Prepare data for optimization
-data = np.column_stack((βθ_t, βθ_t2, βμ_t2))
-
-# Optimize the parameters
-result = minimize(obj_func, initial_params, args=(data, v_ts))
-optimized_params = result.x
-print("Optimized Parameters:", optimized_params)
-
-# Evaluate the model with the optimized parameters
-fitted_values = model(optimized_params, data)
-
-ols_model = sm.OLS(v_ts, sm.add_constant(fitted_values))
-ols_results = ols_model.fit()
-
-# Print the summary
-print(ols_results.summary(slim=True))
-```
-
-$$
-v_t = \beta_0 + \beta_1 \left\{ \sum_{t=0}^{n} \left( \beta^t \theta_t \right) \right\}_{n=0}^{T} + \beta_2 \left\{ \sum_{t=0}^{n} \left( \beta^t \theta_t^2 \right) \right\}_{n=0}^{T} + \beta_3 \left\{ \sum_{t=0}^{n} \left( \beta^t \mu_t^2 \right) \right\}_{n=0}^{T} + \beta_4 \beta^{T-t} \bar{\mu} + \beta_5 \beta^{T-t} \bar{\mu}^2 + \epsilon_t
-$$
-
-where:
-
-$$
-\beta_0 = h_0 \left( \sum_{s=t}^{T-1} \beta^t + \frac{\beta^{T-t}}{1-\beta} \right)
-$$
-
-$$
-\beta_1 = h_1
-$$
-
-$$
-\beta_2 = h_2
-$$
-
-$$
-\beta_3 = -\frac{c}{2}
-$$
-
-$$
-\beta_4 = \frac{h_1}{1-\beta}
-$$
-
-$$
-\beta_5 = \frac{h_2}{1-\beta} - \frac{c}{2(1-\beta)}
-$$
-
-```{code-cell} ipython3
-def theo_coefs(β, c, α=1, u0=1, u1=0.5, u2=3):
-    h0 = u0
-    h1 = -u1 * α
-    h2 = -0.5 * u2 * α**2
-    
-    β_0 = h0 * (sum(β ** t for t in range(t, T)) + (β ** (T - t)) / (1 - β))
-    β_1 = h1
-    β_2 = h2
-    β_3 = -c / 2
-    β_4 = h1 / (1 - β)
-    β_5 = h2 / (1 - β) - (c / 2) / (1 - β)
-    
-    return β_0, β_1, β_2, β_3, β_4, β_5
-```
-
-```{code-cell} ipython3
-# Compute v_t
-v_ts = np.array(compute_V_t(optimized_μ, β=0.85, c=2))
-
-# Initialize arrays for discounted sum of θ_t, θ_t^2, μ_t^2
-βθ_t = np.zeros(T)
-βθ_t2 = np.zeros(T)
-βμ_t2 = np.zeros(T)
-βμ_bar = np.zeros(T)
-βμ_bar2 = np.zeros(T)
-
-# Compute discounted sum of θ_t, θ_t^2, μ_t^2
-for ts in range(T):
-    βθ_t[ts] = sum(clq.β**t * θs[t] 
-                   for t in range(ts + 1))
-    βθ_t2[ts] = sum(clq.β**t * θs[t]**2 
-                    for t in range(ts + 1))
-    βμ_t2[ts] = sum(clq.β**t * μs[t]**2 
-                    for t in range(ts + 1))
-    βμ_bar[ts] = clq.β**(T-ts)*μs[-1]
-    βμ_bar2[ts] = clq.β**(T-ts)*μs[-1]**2
-    
-X = np.column_stack((βθ_t, βθ_t2, βμ_t2, βμ_bar, βμ_bar2))
-X_vt = sm.add_constant(X)
-
-# Fit the model
-model3 = sm.OLS(v_ts, X_vt)
-results3  = model3.fit()
-print("\nRegression of v_{t} on a constant and discounted sums:")
-print(results3.summary(slim=True))
-```
-
-```{code-cell} ipython3
-from scipy.optimize import minimize
-
-# Define the model function
-def model(params, data):
-    beta0, beta1, beta2, beta3, beta4, beta5 = params
-    βθ_t, βθ_t2, βμ_t2, βμ_bar, βμ_bar2 = data.T
-    return beta0 + beta1 * βθ_t + beta2 * βθ_t2 + beta3 * βμ_t2 + beta4 * βμ_bar + beta5 * βμ_bar2
-
-def obj_func(params, data, v_t):
-    pred = model(params, data)
-    residuals = v_t - pred
-    return np.sum(residuals**2)
-
-# Initial guess for parameters
-initial_params = np.ones(6)
-
-# Prepare data for optimization
-data = np.column_stack((βθ_t, βθ_t2, βμ_t2, βμ_bar, βμ_bar2))
-
-# Optimize the parameters
-result = minimize(obj_func, initial_params, args=(data, v_ts))
-optimized_params = result.x
-print("Optimized Parameters:", optimized_params)
-
-# Evaluate the model with the optimized parameters
-fitted_values = model(optimized_params, data)
-
-ols_model = sm.OLS(v_ts, sm.add_constant(fitted_values))
-ols_results = ols_model.fit()
-
-# Print the summary
-print(ols_results.summary(slim=True))
+plt.plot(Ts, v_ts, label=r'$v_t$')
+plt.plot(Ts, θs, label=r'$\theta_t$')
+plt.xlabel(r'$t$')
+plt.legend()
+plt.show()
 ```
 
 **END OF NOTE TO TOM**
 
 +++
 
+From {doc}`calvo`, we can derive the coefficient above using the formula 
+
+$$ 
+v_t = - \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
+$$
+
+```{code-cell} ipython3
+v_t = np.vectorize(lambda θ: - np.array([1, θ])
+                    @ clq.P @ np.array([1, θ]).T)
+```
+
+```{code-cell} ipython3
+# Compute v_t
+v_ts = v_t(θs)
+X = np.column_stack((θs, θs**2))
+X_vt = sm.add_constant(X)
+
+# Fit the model
+model3 = sm.OLS(v_ts, X_vt)
+results3  = model3.fit()
+print("\nRegression of v_t(θ_t) on a constant and θ_t and θ^2_t:")
+print(results3.summary(slim=True))
+```
+
+```{code-cell} ipython3
+clq.g0, clq.g1, clq.g2
+```
+
 We discover that the fit is perfect and that continuation values and inflation rates satisfy
 the following relationship along a Ramsey outcome path:
 
 $$
-v_t = XXX + XXXX \theta_t + XXXX \theta_t^2
+v_t = 6.8052 + -0.7580 \theta_t + -4.6991 \theta_t^2
 $$
 
 Let's plot continuation values as a function of $\theta_t$ for $t =0, 1, \ldots, T$.
 
 ```{code-cell} ipython3
 plt.figure()
-plt.scatter(θs, v_ts)
-plt.plot(θs, results3.predict(X_vt), color='C1', label='$\hat v_t$', linestyle='--')
+v_space = v_t(clq.θ_space)
+plt.scatter(θs, results3.predict(X_vt), color='C1', label='$v_t$', linestyle='--')
+plt.plot(clq.θ_space, v_space, label=r'$v_t(\theta)$', linestyle='--')
 plt.xlabel('$θ_t$')
 plt.ylabel('$v_t$')
 plt.legend()
 plt.show()
 ```
-
-In this graph, $\theta_t, v_t$ pairs start at the upper right at $t=0$ and move along downward along the smooth curve until they converge to $\bar \mu, v_T$ at $t=0$.
 
 ### What has machine learning taught us?
 
