@@ -1218,17 +1218,17 @@ clq = ChangLQ(β=0.85, c=2, T=T)
 Now let's print out the decision rule for $\mu_t$ uncovered by applying dynamic programming squared.
 
 ```{code-cell} ipython3
-print("decision rule for mu")
-print("-(b_0, b_1) =  ", -clq.b0, -clq.b1)
+print("decision rule for μ")
+print(f'-(b_0, b_1) = ({-clq.b0:.6f}, {-clq.b1:.6f})')
 ```
-
 
 Now let's print out the decision rule for $\theta_{t+1} $ uncovered by applying dynamic programming squared.
 
 ```{code-cell} ipython3
-print("decision rule for theta(t+1) as function of theta(t)")
-print("(d_0, d_1) = ", clq.d0, clq.d1)
+print("decision rule for θ(t+1) as function of θ(t)")
+print(f'(d_0, d_1) =  ({clq.d0:.6f}, {clq.d1:.6f})')
 ```
+
 Evidently, these agree with the relationships that we discovered by running regressions on the Ramsey outcomes $\vec \mu^R, \vec \theta^R$ that we constructed with either of our machine learning algorithms.
 
 We have set the stage for diving into this quantecon lecture {doc}`calvo`.
