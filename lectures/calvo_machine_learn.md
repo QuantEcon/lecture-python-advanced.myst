@@ -13,7 +13,6 @@ kernelspec:
 
 # Machine Learning a Ramsey Plan
 
-
 ## Introduction
 
 This  lecture  studies a problem that we also study in another  quantecon lecture
@@ -37,8 +36,9 @@ In this lecture, we approach the Ramsey planner in a much less sophisticated way
 
 Instead, we use a brute force approach that naively states the Ramsey problem
 in terms of a pair of infinite sequences of real numbers that the Ramsey planner chooses
- * a sequence $\vec \theta$ of inflation rates 
- * a sequence $\vec \mu$ of money growh rates
+
+* a sequence $\vec \theta$ of inflation rates 
+* a sequence $\vec \mu$ of money growh rates
 
 We take the liberty of calling this a **machine learning** approach because of how it fails to take advantage of the structure exploited by dynamic programming squared, at the cost of proliferating parameters.
 
@@ -811,12 +811,12 @@ $$
 With our assumption above, criterion $V$ can be rewritten as
 
 $$
-\begin{align*}
+\begin{aligned}
 V & = \sum_{t=0}^{T-1} \beta^t (h_0 + h_1 \theta_t + h_2 \theta_t^2 -
 \frac{c}{2} \mu_t^2 ) \cr 
 & + \frac{\beta^T}{1-\beta} (h_0 + h_1 \theta_T + h_2 \theta_T^2 -
 \frac{c}{2} \mu_T^2 )
-\end{align*}
+\end{aligned}
 $$
 
 To help us write $V$ as a quadratic plus affine form, define
@@ -1147,9 +1147,7 @@ $$
 \mu_t = .0645 + 1.5995 \theta_t
 $$
 
-fits perfectly and that so does 
-
- the regression line 
+fits perfectly and that so does the regression line 
 
 $$
 \theta_{t+1} = - .0645 + .4005 \theta_t .
@@ -1230,5 +1228,3 @@ print("(d_0, d_1) = ", clq.d0, clq.d1)
 Evidently, these agree with the relationships that we discovered by running regressions on the Ramsey outcomes $\vec \mu^R, \vec \theta^R$ that we constructed with either of our machine learning algorithms.
 
 We have set the stage for diving into this quantecon lecture {doc}`calvo`.
-
-
