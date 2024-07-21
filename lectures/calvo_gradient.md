@@ -1233,16 +1233,27 @@ plt.show()
 
 +++
 
-From {doc}`calvo`, we can derive the coefficient above using the formula 
+From {doc}`calvo`, we can derive $v_t$ using the formula 
 
 $$ 
 v_t = - \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
-$$
+$$(eq:cont_vfn)
 
 ```{code-cell} ipython3
 v_t = np.vectorize(lambda θ: - np.array([1, θ])
                     @ clq.P @ np.array([1, θ]).T)
 ```
+
+**NOTE TO TOM**
+
+To run the regression below, we have to calculate $v_t$ for a given $\theta_t \in \vec{\theta}$ using the formula above.
+
+My hesitation is that there is no machine learning involved in this regression, as we use the formula to derive $v_t$.
+
+We already know that the coefficients will be $-P_{11}$, $-2P_{21}$, and $-P_{22}$ before running it.
+
+
+**END OF NOTE TO TOM**
 
 ```{code-cell} ipython3
 # Compute v_t
@@ -1256,6 +1267,8 @@ results3  = model3.fit()
 print("\nRegression of v_t(θ_t) on a constant and θ_t and θ^2_t:")
 print(results3.summary(slim=True))
 ```
+
+{eq}`eq:cont_vfn` tells us the true regression coefficients are
 
 ```{code-cell} ipython3
 clq.g0, clq.g1, clq.g2
