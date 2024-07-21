@@ -64,7 +64,7 @@ We can ferret out that structure  if only we ask  the right questions.
 At the end of this lecture we show what those questions are and how they  can be answered by running particular linear  regressions on components of
 $\vec \mu, \vec \theta$.  
 
-Application of human intelligence, not the artificial intelligence exhibited in our machine learning approaches, is a key input into figuring out what regressions to run. 
+Human intelligence, not the artificial intelligence deployed in our machine learning approaches, is a key input into choosing which regressions to run. 
  
 
 ## The Model
@@ -210,7 +210,7 @@ where $\beta \in (0,1)$ is a discount factor.
 
 The Ramsey planner chooses 
  a vector of money growth rates $\vec \mu$ 
-to maximize criterion {eq}`eq:Ramsey` subject to equations {eq}`eq_grad_old3`.
+to maximize criterion {eq}`eq:RamseyV` subject to equations {eq}`eq_grad_old3`.
 
 
 
@@ -407,7 +407,7 @@ import matplotlib.pyplot as plt
 
 First, because we'll want to compare the results we obtain here with those obtained with another, more structured, approach,  we copy the class `ChangLQ` to solve the LQ Chang model in this quantecon lecture {doc}`calvo`.
 
-We hide the cell that copies the class, but readers can find details of the class in this quantecon lecture {doc}`calvo`..
+We hide the cell that copies the class, but readers can find details of the class in this quantecon lecture {doc}`calvo`.
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -1007,7 +1007,7 @@ closed_grad
 print(f'deviation = {np.linalg.norm(closed_grad - (- grad_J(jnp.ones(T))))}')
 ```
 
-## Informative  regressions
+## Some   Regressions
 
 To  help us learn about the structure of the Ramsey plan, we shall compute some least squares linear regressions of particular components of $\vec \theta$ and $\vec \mu$ on others.
 
@@ -1021,7 +1021,7 @@ But you can regress anything on anything else.
 
 Human intelligence tell us which regressions to run. 
 
-Furthermore, once we have those regressions in hand, considerably more human intelligence is required fully to appreciate what they reveal about the structure of the Ramsey plan. 
+Even  more human intelligence is required fully to appreciate what they reveal about the structure of the Ramsey plan. 
 
 ```{note}
 At this point, it is worthwhile to read how Chang {cite}`chang1998credible` chose
@@ -1029,13 +1029,10 @@ $\theta_t$ as his key state variable.
 ```
 
 
-**REQUEST FOR HUMPHREY, JULY 18**
+We'll begin by  simply plotting the Ramsey plan's $\mu_t$ and $\theta_t$ for $t =0, \ldots, T$  against $t$ in  a  graph with $t$ on the ordinate  axis. 
 
-Please simply plot $\mu_t$ and $\theta_t$ for $t =0, \ldots, T$  against $t$ in the same graph with
-$t$ on the $x$ axis. These are the data that we'll be running the regressions on. 
+These are the data that we'll be running some linear least squares regressions on. 
 
-
-**END OF REQUEST FOR HUMPHREY, JULY 18**
 
 ```{code-cell} ipython3
 # Compute θ using optimized_μ
@@ -1052,7 +1049,12 @@ plt.legend()
 plt.show()
 ```
 
-We begin by regressing $\mu_t$ on $\theta_t$. 
+We notice that $\theta_t$  is less than $\mu_t$for low $t$'s but that it eventually converges to
+the same limit that $\mu_t$ does.
+
+This pattern reflects how formula {eq}`eq_grad_old3` for low $t$'s makes $\theta_t$ makes a weighted average of future $\mu_t$'s.
+
+We begin by regressing $\mu_t$ on a constant and $\theta_t$. 
 
 This might seem strange because, first of all, equation {eq}`eq_grad_old3` asserts that inflation at time $t$  is determined $\{\mu_s\}_{s=t}^\infty$
 
@@ -1092,6 +1094,7 @@ The  time $0$ pair  $\theta_0, \mu_0$ appears as the point on the upper right.
 
 Points for succeeding times appear further and further to the lower left and eventually converge to
 $\bar \mu, \bar \mu$.
+
 
 Next, we'll run a linear regression of $\theta_{t+1}$ against $\theta_t$. 
 
@@ -1134,171 +1137,28 @@ plt.show()
 Points for succeeding times appear further and further to the lower left and eventually converge to
 $\bar \mu, \bar \mu$.
 
-### Continuation values
-
-
-We first define the following generalization of formula 
-{eq}`eq:valueformula101` for the value of the Ramsey planner.
-
-Formula tells the Ramsey planner's value at time $0$, the time at which the Ramsey planner 
-chooses the sequence $\vec \mu$ once and for all.
-
-We define the Ramsey planner's **continuation value** at time $s \in [0, \ldots, T-1]$ as
-
-
-$$ 
-v_t = \sum_{s=t}^{T-1} \beta^t (h_0 + h_1 \tilde\theta_s + h_2 \tilde\theta_s^2 -
-\frac{c}{2} \mu_s^2 ) + \frac{\beta^{T-t}}{1-\beta} (h_0 + h_1 \bar \mu + h_2 \bar \mu^2 - \frac{c}{2} \bar \mu^2 )
-$$
-
-To learn about the  structure of the continuation values and how they relate to $\theta_t$,
-we'll run  regressions.
-
-+++
-
-First, we modify the function `compute_V_t` to return a sequence of continuation values  $\vec v_t$.
-
-```{code-cell} ipython3
-def compute_V_t(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
-    θ = compute_θ(μ, α)
-    
-    h0 = u0
-    h1 = -u1 * α
-    h2 = -0.5 * u2 * α**2
-    
-    T = len(μ)
-    V_t = jnp.zeros(T)
-    
-    for t in range(T - 1):
-        V_t = V_t.at[t].set(β**t * (h0 + h1 * θ[t] + h2 * θ[t]**2 - 0.5 * c * μ[t]**2))
-    
-    # Terminal condition
-    V_t = V_t.at[T-1].set((β**(T-1) / (1 - β)) * (h0 + h1 * μ[-1] + h2 * μ[-1]**2 - 0.5 * c * μ[-1]**2))
-    
-    return V_t
-```
-
-Now let's run a regression of $v_t$ on a constant, $\theta_t$, and $\theta_t^2$ and see how it fits.
-
-```{code-cell} ipython3
-# Compute v_t
-v_ts = np.array(compute_V_t(optimized_μ, β=0.85, c=2))
-X = np.column_stack((θs, θs**2))
-X_vt = sm.add_constant(X)
-
-# Fit the model
-model3 = sm.OLS(v_ts, X_vt)
-results3  = model3.fit()
-print("\nRegression of v_{t} on a constant and θ_t and θ^2_t:")
-print(results3.summary(slim=True))
-```
-
-```{code-cell} ipython3
-np.corrcoef(θs, θs**2)
-```
-
-```{code-cell} ipython3
-plt.figure()
-plt.scatter(θs, v_ts)
-plt.scatter(θs, results3.predict(X_vt), color='C1', label='$\hat v_t$', linestyle='--')
-plt.plot(θs, v_ts, label='True $v_t$', linestyle='--')
-plt.xlabel('$θ_t$')
-plt.ylabel('$v_t$')
-plt.legend()
-plt.show()
-```
-
-##### In this graph, $\theta_t, v_t$ pairs start at the upper right at $t=0$ and move along downward along the smooth curve until they converge to $\bar \mu, v_T$ at $t=0$.
-
-**NOTE TO TOM**
-> In this graph, $\theta_t, v_t$ pairs start at the upper right at $t=0$ and move along downward along the smooth curve until they converge to $\bar \mu, v_T$ at $t=0$.
-
-Were you refering to this graph below?
-
-```{code-cell} ipython3
-θs = np.array(compute_θ(optimized_μ))
-μs = np.array(optimized_μ)
-
-# Plot the two sequences
-Ts = np.arange(T)
-
-plt.plot(Ts, v_ts, label=r'$v_t$')
-plt.plot(Ts, θs, label=r'$\theta_t$')
-plt.xlabel(r'$t$')
-plt.legend()
-plt.show()
-```
-
-**END OF NOTE TO TOM**
-
-+++
-
-From {doc}`calvo`, we can derive $v_t$ using the formula 
-
-$$ 
-v_t = - \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
-$$(eq:cont_vfn)
-
-```{code-cell} ipython3
-v_t = np.vectorize(lambda θ: - np.array([1, θ])
-                    @ clq.P @ np.array([1, θ]).T)
-```
-
-**NOTE TO TOM**
-
-To run the regression below, we have to calculate $v_t$ for a given $\theta_t \in \vec{\theta}$ using the formula above.
-
-My hesitation is that there is no machine learning involved in this regression, as we use the formula to derive $v_t$.
-
-We already know that the coefficients will be $-P_{11}$, $-2P_{21}$, and $-P_{22}$ before running it.
-
-
-**END OF NOTE TO TOM**
-
-```{code-cell} ipython3
-# Compute v_t
-v_ts = v_t(θs)
-X = np.column_stack((θs, θs**2))
-X_vt = sm.add_constant(X)
-
-# Fit the model
-model3 = sm.OLS(v_ts, X_vt)
-results3  = model3.fit()
-print("\nRegression of v_t(θ_t) on a constant and θ_t and θ^2_t:")
-print(results3.summary(slim=True))
-```
-
-{eq}`eq:cont_vfn` tells us the true regression coefficients are
-
-```{code-cell} ipython3
-clq.g0, clq.g1, clq.g2
-```
-
-We discover that the fit is perfect and that continuation values and inflation rates satisfy
-the following relationship along a Ramsey outcome path:
-
-$$
-v_t = 6.8052 + -0.7580 \theta_t + -4.6991 \theta_t^2
-$$
-
-Let's plot continuation values as a function of $\theta_t$ for $t =0, 1, \ldots, T$.
-
-```{code-cell} ipython3
-plt.figure()
-v_space = v_t(clq.θ_space)
-plt.scatter(θs, results3.predict(X_vt), color='C1', label='$v_t$', linestyle='--')
-plt.plot(clq.θ_space, v_space, label=r'$v_t(\theta)$', linestyle='--')
-plt.xlabel('$θ_t$')
-plt.ylabel('$v_t$')
-plt.legend()
-plt.show()
-```
 
 ### What has machine learning taught us?
 
-Assembling our regression findings, we have discovered by somehow guessing useful regressions to
-run for our single Ramsey outcome path $\vec \mu^R, \vec \theta^R$ that along that path
-the following relationships prevail:
+
+Our regressions tells us that along the Ramsey outcome $\vec \mu^R, \vec \theta^R$, the linear function
+
+$$
+\mu_t = .0645 + 1.5995 \theta_t
+$$
+
+fits perfectly and that so does 
+
+ the regression line 
+
+$$
+\theta_{t+1} = - .0645 + .4005 \theta_t .
+$$
+
+
+Assembling these  regressions, we have discovered 
+run for our single Ramsey outcome path $\vec \mu^R, \vec \theta^R$ 
+that along a Ramsey plan, the following relationships prevail:
 
 
 
@@ -1309,26 +1169,66 @@ the following relationships prevail:
 \theta_0 & = \theta_0^R \\
 \mu_t &  = b_0 + b_1 \theta_t \\
 \theta_{t+1} & = d_0 + d_1 \theta_t  \\
-v_t & = g_0 +g_1\theta_t + g_2 \theta_t^2 \\
 \end{aligned}
 ```
 
-where the initial value $\theta_0^R$ was computed along with other components of $\vec \mu^R, \vec \theta^R$ when we computed the Ramsey plan, and where $b_0, b_1, g_0, g_1, g_2$ are  parameters whose values we estimated with our regressions.
+where the initial value $\theta_0^R$ was computed along with other components of $\vec \mu^R, \vec \theta^R$ when we computed the Ramsey plan, and where $b_0, b_1, d_0, d_1$ are  parameters whose values we estimated with our regressions.
 
 
-We have  discovered this  representation by running some carefully chosen  regressions and staring at the results, noticing that the $R^2$ of unity tell us that the fits are perfect. 
+We  discovered this  representation by running some carefully chosen  regressions and staring at the results, noticing that the $R^2$ of unity tell us that the fits are perfect. 
 
-We have learned something about the structure of the Ramsey problem, but it is challenging to say more using the ideas that we have deployed in this lecture.  
+We have learned something about the structure of the Ramsey problem.
+
+But it is challenging to say more just by using the methods and ideas that we have deployed in this lecture.  
 
 There are many other linear regressions among components of $\vec \mu^R, \theta^R$ that would also have given us perfect fits.
 
-For example, we could have regressed $\theta_t$ on $\mu_t$ and gotten the same $R^2$ value.  
+For example, we could have regressed $\theta_t$ on $\mu_t$ and obtained the same $R^2$ value.  
 
-Wouldn't that  direction of fit have made  more sense? 
+Actually, wouldn't that  direction of fit have made  more sense? 
 
-To answer that question, we'll have to  deploy more economic theory.
+After all, the Ramsey planner is **choosing** $\vec \mu$ while $\vec \theta$ is the outcome.
+
+Which is **cause** and which is **effect**?
+
+To answer such questions, we'll have to  deploy more economic theory.
 
 We do that in this quantecon lecture {doc}`calvo`.
 
 There, we'll discover that system {eq}`eq_old9101` is actually a very good way to represent 
 a Ramsey plan because it reveals many things about its structure.
+
+Indeed, in that lecture, we show how to compute the Ramsey plan using **dynamic programming squared** and provide a Python class ``ChangLQ`` that performs the calculations.
+
+We have deployed ``ChangLQ`` earlier in this lecture to compute a baseline Ramsey plan to which we have compared outcomes from our application of the cruder machine learning approaches studied here. 
+
+Let's use the code to compute the parameters $d_0, d_1$ for the decision rule for $\mu_t$
+and the parameters $d_0, d_1$ in the updating rule for $\theta_{t+1}$ in representation
+{eq}`eq_old9101`.
+
+First, we'll again use ``ChangLQ`` to compute these objects (along with a number of others).
+
+
+```{code-cell} ipython3
+clq = ChangLQ(β=0.85, c=2, T=T)
+```
+
+Now let's print out the decision rule for $\mu_t$ uncovered by applying dynamic programming squared.
+
+```{code-cell} ipython3
+print("decision rule for mu")
+print("-(b_0, b_1) =  ", -clq.b0, -clq.b1)
+```
+
+
+Now let's print out the decision rule for $\theta_{t+1} $ uncovered by applying dynamic programming squared.
+
+```{code-cell} ipython3
+print("decision rule for theta(t+1) as function of theta(t)")
+print("(d_0, d_1) = ", clq.d0, clq.d1)
+```
+Evidently, these agree with the relationships that we discovered by running regressions on the Ramsey outcomes $\vec \mu^R, \vec \theta^R$ that we constructed with either of our machine learning algorithms.
+
+We have set the stage for diving into this quantecon lecture {doc}`calvo`.
+
+
