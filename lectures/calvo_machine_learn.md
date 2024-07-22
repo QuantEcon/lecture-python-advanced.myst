@@ -558,14 +558,20 @@ def compute_θ(μ, α=1):
     θ = jnp.append(θ, μbar)
     
     return θ
+
+@jit
+def compute_hs(u0, u1, u2, α):
+    h0 = u0
+    h1 = -u1 * α
+    h2 = -0.5 * u2 * α**2
+    
+    return h0, h1, h2
     
 @jit
 def compute_V(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     θ = compute_θ(μ, α)
     
-    h0 = u0
-    h1 = -u1 * α
-    h2 = -0.5 * u2 * α**2
+    h0, h1, h2 = compute_hs(u0, u1, u2, α)
     
     T = len(μ) - 1
     t = np.arange(T)
@@ -890,9 +896,7 @@ With the more structured approach, we can update our gradient descent exercise w
 def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     T = len(μ) - 1
     
-    h0 = u0
-    h1 = -u1 * α
-    h2 = -0.5 * u2 * α**2
+    h0, h1, h2 = compute_hs(u0, u1, u2, α)
     λ = α / (1 + α)
     
     _, B = construct_B(α, T+1)
@@ -944,9 +948,7 @@ We can also derive a closed-form solution for $\vec \mu$
 
 ```{code-cell} ipython3
 def compute_μ(β, c, T, α=1, u0=1, u1=0.5, u2=3):    
-    h0 = u0
-    h1 = -u1 * α
-    h2 = -0.5 * u2 * α**2
+    h0, h1, h2 = compute_hs(u0, u1, u2, α)
     
     _, B = construct_B(α, T+1)
     
@@ -981,9 +983,7 @@ We can check the gradient of the analytical solution against the `JAX` computed 
 def compute_grad(μ, β, c, α=1, u0=1, u1=0.5, u2=3):    
     T = len(μ) - 1
     
-    h0 = u0
-    h1 = -u1 * α
-    h2 = -0.5 * u2 * α**2
+    h0, h1, h2 = compute_hs(u0, u1, u2, α)
     
     _, B = construct_B(α, T+1)
     
