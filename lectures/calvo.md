@@ -844,6 +844,7 @@ Under the  Markov perfect timing protocol
  * a government takes $\bar \mu$ as given when it chooses $\mu_t$
  * we equate $\mu_t = \mu$ only *after* we have computed a time $t$ government's first-order condition for $\mu_t$.
 
+(compute_lq)=
 ## Outcomes under three timing protocols
 
 We  want to compare outcome sequences  $\{ \theta_t,\mu_t \}$ under three timing protocols associated with 
