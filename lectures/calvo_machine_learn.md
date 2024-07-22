@@ -414,7 +414,7 @@ First, because we'll want to compare the results we obtain here with those obtai
 We hide the cell that copies the class, but readers can find details of the class in this quantecon lecture {doc}`calvo`.
 
 ```{code-cell} ipython3
-:tags: [hide-output]
+:tags: [hide-input]
 
 class ChangLQ:
     """
