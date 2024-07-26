@@ -77,6 +77,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -276,15 +277,13 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.7.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.60.0)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.31.0)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.11.4)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.12)
-Requirement already satisfied: llvmlite&lt;0.43,&gt;=0.42.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.42.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
+Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.4)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.7)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2024.2.2)
@@ -1020,7 +1019,7 @@ g_{t+1} - \mu_g = \rho (g_t - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/30452af2bfaab7d4b2c7ab3975cebee1311cac2b9b90507d52b6012bb1f353a3.png" src="_images/30452af2bfaab7d4b2c7ab3975cebee1311cac2b9b90507d52b6012bb1f353a3.png" />
+<img alt="_images/88cae7c7874a7842a96cb3337ab3993826c3d10b563aab4fec68a60270b297b0.png" src="_images/88cae7c7874a7842a96cb3337ab3993826c3d10b563aab4fec68a60270b297b0.png" />
 </div>
 </div>
 <p>The legends on the figures indicate the variables being tracked.</p>
@@ -1033,7 +1032,7 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0e0675b8d03c4f47f020c1a416390a45aef83e5b89877101b5e9f41bd6959b29.png" src="_images/0e0675b8d03c4f47f020c1a416390a45aef83e5b89877101b5e9f41bd6959b29.png" />
+<img alt="_images/cfec461b2ef739310da6b0150c1d9dd1a3b50c1963b392d26d5f31f0bf5646c2.png" src="_images/cfec461b2ef739310da6b0150c1d9dd1a3b50c1963b392d26d5f31f0bf5646c2.png" />
 </div>
 </div>
 <p>See the original <a href=_static/lecture_specific/lqramsey/firenze.pdf download>manuscript</a> for comments and interpretation.</p>
@@ -1072,11 +1071,11 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7648/2748685684.py:111: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7813/2748685684.py:111: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
   a0, b0 = float(a0), float(b0)
 </pre></div>
 </div>
-<img alt="_images/107a88c8058a57b491fe0c244f7410656aa0682f5883e776e0894210cda97ca2.png" src="_images/107a88c8058a57b491fe0c244f7410656aa0682f5883e776e0894210cda97ca2.png" />
+<img alt="_images/50a73f46f20b62e4b4df95c3316b681e55cd494663b87f9b266c7c73831f04a3.png" src="_images/50a73f46f20b62e4b4df95c3316b681e55cd494663b87f9b266c7c73831f04a3.png" />
 </div>
 </div>
 <p>The call <code class="docutils literal notranslate"><span class="pre">gen_fig_2(path)</span></code> generates</p>
@@ -1087,7 +1086,7 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f3e6c2ceb15ec961dc3609cf4b5b0da6ee40c84cd9ec8b6222a6f81d8b10f5ec.png" src="_images/f3e6c2ceb15ec961dc3609cf4b5b0da6ee40c84cd9ec8b6222a6f81d8b10f5ec.png" />
+<img alt="_images/3391f64e28d3519d495518892d1be2e2d73dadbbe2d45541d6ef5179aa27ab53.png" src="_images/3391f64e28d3519d495518892d1be2e2d73dadbbe2d45541d6ef5179aa27ab53.png" />
 </div>
 </div>
 <p>See the original <a href=_static/lecture_specific/lqramsey/firenze.pdf download>manuscript</a> for comments and interpretation.</p>
@@ -1141,7 +1140,7 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5cb91f5c196a3e4921cead5131933551f653f5df73699c3c3d028ef5e7be296a.png" src="_images/5cb91f5c196a3e4921cead5131933551f653f5df73699c3c3d028ef5e7be296a.png" />
+<img alt="_images/0e5a322181e33ffa4a023db43dc57965ab5f95f82e48925acf7c3b0309b1efd9.png" src="_images/0e5a322181e33ffa4a023db43dc57965ab5f95f82e48925acf7c3b0309b1efd9.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1151,7 +1150,7 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b690eca52733b6939483bf9478ef2235b362a1c96697366951fcabaed947f731.png" src="_images/b690eca52733b6939483bf9478ef2235b362a1c96697366951fcabaed947f731.png" />
+<img alt="_images/dcb647c05b9726f21d019594c3c827db4b773515d9e6e996e2443545b48aae2c.png" src="_images/dcb647c05b9726f21d019594c3c827db4b773515d9e6e996e2443545b48aae2c.png" />
 </div>
 </div>
 </section>
@@ -1464,38 +1463,43 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="calvo_machine_learn.html">
+   41. Machine Learning a Ramsey Plan
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   41. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   42. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   42. Optimal Taxation with State-Contingent Debt
+   43. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   43. Optimal Taxation without State-Contingent Debt
+   44. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   44. Fluctuating Interest Rates Deliver Fiscal Insurance
+   45. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   45. Fiscal Risk and Government Debt
+   46. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   46. Competitive Equilibria of a Model of Chang
+   47. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   47. Credible Government Policies in a Model of Chang
+   48. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1507,17 +1511,17 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   48. Troubleshooting
+   49. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   49. References
+   50. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   50. Execution Statistics
+   51. Execution Statistics
   </a>
  </li>
 </ul>

@@ -77,6 +77,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
     <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -256,12 +257,12 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.7.2)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.59.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.60.0)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.31.0)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.11.4)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.12)
-Requirement already satisfied: llvmlite&lt;0.43,&gt;=0.42.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.42.0)
+Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
 Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.4)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.7)
@@ -495,7 +496,7 @@ on the history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3d315b8eecbe78c89972e2bbfb27b59c7cad01cd9527a2c6d16773c5a7f6b6cd.png" src="_images/3d315b8eecbe78c89972e2bbfb27b59c7cad01cd9527a2c6d16773c5a7f6b6cd.png" />
+<img alt="_images/da2693e6809b43cbc60b78fd241839dabaedd40f6e6906d8a3814f75f5dd8239.png" src="_images/da2693e6809b43cbc60b78fd241839dabaedd40f6e6906d8a3814f75f5dd8239.png" />
 </div>
 </div>
 <p>Note how <span class="math notranslate nohighlight">\(x_t\)</span> and <span class="math notranslate nohighlight">\(\hat{x_t}\)</span> differ.</p>
@@ -519,7 +520,7 @@ idea about her/his <em>permanent income</em>.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e9f5d474a4f65d421f0f626b141a1c0720036c6ccf9f62eb380b3b0d9f4d5054.png" src="_images/e9f5d474a4f65d421f0f626b141a1c0720036c6ccf9f62eb380b3b0d9f4d5054.png" />
+<img alt="_images/dd12a2a0f793ff51793cbf0e660a7fc62ae589a17c29dcb68a5a4e9441042c73.png" src="_images/dd12a2a0f793ff51793cbf0e660a7fc62ae589a17c29dcb68a5a4e9441042c73.png" />
 </div>
 </div>
 <p>We see above that <span class="math notranslate nohighlight">\(y\)</span> seems to look like white noise around the
@@ -540,7 +541,7 @@ values of <span class="math notranslate nohighlight">\(x\)</span>.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0df8b1e819e2bde877bf15cce5e3933ac5e8b108e9609b96cd52532bcfe9d6a6.png" src="_images/0df8b1e819e2bde877bf15cce5e3933ac5e8b108e9609b96cd52532bcfe9d6a6.png" />
+<img alt="_images/e1a71229b438c985aa20c9c2410069790fa09fc13fd237bddf06b9112e46beb7.png" src="_images/e1a71229b438c985aa20c9c2410069790fa09fc13fd237bddf06b9112e46beb7.png" />
 </div>
 </div>
 </section>
@@ -909,38 +910,43 @@ engineer</p>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="calvo_machine_learn.html">
+   41. Machine Learning a Ramsey Plan
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   41. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   42. Ramsey Plans, Time Inconsistency, Sustainable Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   42. Optimal Taxation with State-Contingent Debt
+   43. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   43. Optimal Taxation without State-Contingent Debt
+   44. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   44. Fluctuating Interest Rates Deliver Fiscal Insurance
+   45. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   45. Fiscal Risk and Government Debt
+   46. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   46. Competitive Equilibria of a Model of Chang
+   47. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   47. Credible Government Policies in a Model of Chang
+   48. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -952,17 +958,17 @@ engineer</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   48. Troubleshooting
+   49. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   49. References
+   50. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   50. Execution Statistics
+   51. Execution Statistics
   </a>
  </li>
 </ul>
