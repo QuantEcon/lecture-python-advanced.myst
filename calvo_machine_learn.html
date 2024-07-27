@@ -357,13 +357,6 @@ function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
 the linear difference equation <a class="reference internal" href="#equation-eq-grad-old2">(41.2)</a> can be solved forward to get:</p>
 <div class="math notranslate nohighlight" id="equation-eq-grad-old3">
 <span class="eqno">(41.3)<a class="headerlink" href="#equation-eq-grad-old3" title="Permalink to this equation">#</a></span>\[\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}, \quad t \geq 0\]</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Equation <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> shows that an equivalence class of continuation money growth sequences <span class="math notranslate nohighlight">\(\{\mu_{t+j}\}_{j=0}^\infty\)</span> deliver the same <span class="math notranslate nohighlight">\(\theta_t\)</span>. Consequently, equations <a class="reference internal" href="#equation-eq-grad-old1">(41.1)</a> and <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> show that <span class="math notranslate nohighlight">\(\theta_t\)</span> intermediates
-how choices of <span class="math notranslate nohighlight">\(\mu_{t+j}, \ j=0, 1, \ldots\)</span> impinge on time <span class="math notranslate nohighlight">\(t\)</span>
-real balances <span class="math notranslate nohighlight">\(m_t - p_t = -\alpha \theta_t\)</span>.  Chang <span id="id6">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> exploits this
-fact extensively.</p>
-</div>
 <p>The  government  values  a representative household’s utility of real balances at time <span class="math notranslate nohighlight">\(t\)</span> according to the utility function</p>
 <div class="math notranslate nohighlight" id="equation-eq-grad-old5">
 <span class="eqno">(41.4)<a class="headerlink" href="#equation-eq-grad-old5" title="Permalink to this equation">#</a></span>\[U(m_t - p_t) = u_0 + u_1 (m_t - p_t) - \frac{u_2}{2} (m_t - p_t)^2, \quad u_0 &gt; 0, u_1 &gt; 0, u_2 &gt; 0\]</div>
@@ -1637,7 +1630,7 @@ Wall time: 201 ms
 <p>Even  more human intelligence is required fully to appreciate what they reveal about the structure of the Ramsey plan.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>At this point, it is worthwhile to read how Chang <span id="id7">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> chose
+<p>At this point, it is worthwhile to read how Chang <span id="id6">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> chose
 <span class="math notranslate nohighlight">\(\theta_t\)</span> as his key state variable.</p>
 </div>
 <p>We’ll begin by  simply plotting the Ramsey plan’s <span class="math notranslate nohighlight">\(\mu_t\)</span> and <span class="math notranslate nohighlight">\(\theta_t\)</span> for <span class="math notranslate nohighlight">\(t =0, \ldots, T\)</span>  against <span class="math notranslate nohighlight">\(t\)</span> in  a  graph with <span class="math notranslate nohighlight">\(t\)</span> on the ordinate  axis.</p>
@@ -1820,8 +1813,8 @@ that along a Ramsey plan, the following relationships prevail:</p>
 <p>There are many other linear regressions among components of <span class="math notranslate nohighlight">\(\vec \mu^R, \theta^R\)</span> that would also have given us perfect fits.</p>
 <p>For example, we could have regressed <span class="math notranslate nohighlight">\(\theta_t\)</span> on <span class="math notranslate nohighlight">\(\mu_t\)</span> and obtained the same <span class="math notranslate nohighlight">\(R^2\)</span> value.</p>
 <p>Actually, wouldn’t that  direction of fit have made  more sense?</p>
-<p>After all, the Ramsey planner is <strong>choosing</strong> <span class="math notranslate nohighlight">\(\vec \mu\)</span> while <span class="math notranslate nohighlight">\(\vec \theta\)</span> is the outcome.</p>
-<p>Which is <strong>cause</strong> and which is <strong>effect</strong>?</p>
+<p>After all, the Ramsey planner  chooses <span class="math notranslate nohighlight">\(\vec \mu\)</span>,  while <span class="math notranslate nohighlight">\(\vec \theta\)</span> is an  outcome that reflects the represenative agent’s response to the Ramsey planner’s  choice of <span class="math notranslate nohighlight">\(\vec \mu\)</span>.</p>
+<p>Isn’t it more natural then to expect that we’d learn more about the structure of the Ramsey  problem from a regression of components of <span class="math notranslate nohighlight">\(\vec \theta\)</span> on components of <span class="math notranslate nohighlight">\(\vec \mu\)</span>?</p>
 <p>To answer such questions, we’ll have to  deploy more economic theory.</p>
 <p>We do that in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
 <p>There, we’ll discover that system <a class="reference internal" href="#equation-eq-old9101">(41.11)</a> is actually a very good way to represent
@@ -1870,7 +1863,14 @@ and the parameters <span class="math notranslate nohighlight">\(d_0, d_1\)</span
 </div>
 </div>
 <p>Evidently, these agree with the relationships that we discovered by running regressions on the Ramsey outcomes <span class="math notranslate nohighlight">\(\vec \mu^R, \vec \theta^R\)</span> that we constructed with either of our machine learning algorithms.</p>
-<p>We have set the stage for diving into this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+<p>We have set the stage for this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+<p>We close this lecture by giving a hint about an insight of Chang <span id="id7">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> that
+underlies much of quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+<p>Chang noticed how equation <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> shows that an equivalence class of continuation money growth sequences <span class="math notranslate nohighlight">\(\{\mu_{t+j}\}_{j=0}^\infty\)</span> deliver the same <span class="math notranslate nohighlight">\(\theta_t\)</span>.</p>
+<p>Consequently, equations <a class="reference internal" href="#equation-eq-grad-old1">(41.1)</a> and <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> indicate that <span class="math notranslate nohighlight">\(\theta_t\)</span> intermediates how the government’s choices of <span class="math notranslate nohighlight">\(\mu_{t+j}, \ j=0, 1, \ldots\)</span> impinge on time <span class="math notranslate nohighlight">\(t\)</span>
+real balances <span class="math notranslate nohighlight">\(m_t - p_t = -\alpha \theta_t\)</span>.</p>
+<p>In lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>, we’ll see how  Chang <span id="id8">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> exploits this
+insight.</p>
 </section>
 </section>
 </section>
