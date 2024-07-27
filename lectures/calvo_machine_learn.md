@@ -156,12 +156,6 @@ the linear difference equation {eq}`eq_grad_old2` can be solved forward to get:
 \theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}, \quad t \geq 0
 ```
 
-```{note}
-Equation {eq}`eq_grad_old3` shows that an equivalence class of continuation money growth sequences $\{\mu_{t+j}\}_{j=0}^\infty$ deliver the same $\theta_t$. Consequently, equations {eq}`eq_grad_old1` and {eq}`eq_grad_old3` show that $\theta_t$ intermediates
-how choices of $\mu_{t+j}, \ j=0, 1, \ldots$ impinge on time $t$
-real balances $m_t - p_t = -\alpha \theta_t$.  Chang {cite}`chang1998credible` exploits this
-fact extensively.
-``` 
 
 
 
@@ -1189,9 +1183,9 @@ For example, we could have regressed $\theta_t$ on $\mu_t$ and obtained the same
 
 Actually, wouldn't that  direction of fit have made  more sense? 
 
-After all, the Ramsey planner is **choosing** $\vec \mu$ while $\vec \theta$ is the outcome.
+After all, the Ramsey planner  chooses $\vec \mu$,  while $\vec \theta$ is an  outcome that reflects the represenative agent's response to the Ramsey planner's  choice of $\vec \mu$.
 
-Which is **cause** and which is **effect**?
+Isn't it more natural then to expect that we'd learn more about the structure of the Ramsey  problem from a regression of components of $\vec \theta$ on components of $\vec \mu$?
 
 To answer such questions, we'll have to  deploy more economic theory.
 
@@ -1231,4 +1225,15 @@ print(f'(d_0, d_1) =  ({clq.d0:.6f}, {clq.d1:.6f})')
 
 Evidently, these agree with the relationships that we discovered by running regressions on the Ramsey outcomes $\vec \mu^R, \vec \theta^R$ that we constructed with either of our machine learning algorithms.
 
-We have set the stage for diving into this quantecon lecture {doc}`calvo`.
+We have set the stage for this quantecon lecture {doc}`calvo`.
+
+We close this lecture by giving a hint about an insight of Chang {cite}`chang1998credible` that 
+underlies much of quantecon lecture {doc}`calvo`.
+
+Chang noticed how equation {eq}`eq_grad_old3` shows that an equivalence class of continuation money growth sequences $\{\mu_{t+j}\}_{j=0}^\infty$ deliver the same $\theta_t$.
+
+Consequently, equations {eq}`eq_grad_old1` and {eq}`eq_grad_old3` indicate that $\theta_t$ intermediates how the government's choices of $\mu_{t+j}, \ j=0, 1, \ldots$ impinge on time $t$
+real balances $m_t - p_t = -\alpha \theta_t$.  
+
+In lecture {doc}`calvo`, we'll see how  Chang {cite}`chang1998credible` exploits this
+insight.
