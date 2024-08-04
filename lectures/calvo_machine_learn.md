@@ -1029,8 +1029,7 @@ $\theta_t$ as his key state variable.
 
 We'll begin by  simply plotting the Ramsey plan's $\mu_t$ and $\theta_t$ for $t =0, \ldots, T$  against $t$ in  a  graph with $t$ on the ordinate  axis. 
 
-These are the data that we'll be running some linear least squares regressions on. 
-
+These are the data that we'll be running some linear least squares regressions on.
 
 ```{code-cell} ipython3
 # Compute θ using optimized_μ
@@ -1135,6 +1134,98 @@ plt.show()
 Points for succeeding times appear further and further to the lower left and eventually converge to
 $\bar \mu, \bar \mu$.
 
+Now we proceed to the third regression. 
+
+First we compute a sequence $\{v_t\}_{t=0}^T$ backward from $v_T$
+
+$$
+v_T = \frac{1}{1-\beta} s(\bar \mu, \bar \mu).
+$$
+
+Then starting from $t=T-1$, iterate backwards on the recursion
+
+$$
+v_t = s(\theta_t, \mu_t) + \beta v_{t+1}
+$$
+
+for $t=0, \ldots, T-1$ to compute the sequence $\{v_t\}_{t=0}^T.$
+
+```{code-cell} ipython3
+# Define function for s and U in section 41.3
+def s(θ, μ, u0, u1, u2, α, c):
+    U = lambda x: u0 + u1 * x - (u2 / 2) * x**2
+    return U(-α*θ) - (c / 2) * μ**2
+
+# Calculate v_t sequence backward
+def compute_vt(θ, μ, β, c, u0=1, u1=0.5, u2=3, α=1):
+    T = len(μs)
+    v_t = np.zeros(T)
+    μ_bar = μs[-1]
+    
+    # Reduce parameters
+    s_p = lambda θ, μ: s(θ, μ, 
+                       u0=u0, u1=u1, u2=u2, α=α, c=c)
+    
+    # Define v_T
+    v_t[T-1] = (1 / (1 - β)) * s_p(μ_bar, μ_bar)
+    
+    # Backward iteration
+    for t in reversed(range(T-1)):
+        v_t[t] = s_p(θ[t], μ[t]) + β * v_t[t+1]
+        
+    return v_t
+
+v_t = compute_vt(θs, μs, β=0.85, c=2)
+```
+
+Now we can run regression 
+
+$$
+v_t = g_0 + g_1 \theta_t + g_2 \theta_t^2 . 
+$$
+
+```{code-cell} ipython3
+# Third regression: v_t on a constant, θ_t and θ^2_t
+X3_θ = np.column_stack((np.ones(T), θs, θs**2))
+model3 = sm.OLS(v_t, X3_θ)
+results3 = model3.fit()
+
+
+# Print regression summary
+print("\nRegression of v_t on a constant, θ_t and θ^2_t:")
+print(results3.summary(slim=True))
+```
+
+**NOTE TO TOM**
+
+We find that $\theta_t$ and $\theta_t^2$ are highly "linearly" correlated
+
+```{code-cell} ipython3
+np.corrcoef(θs, θs**2)
+```
+
+So the condition number is large.
+
+**END OF NOTE TO TOM**
+
++++
+
+Now we plot $v_t$ against $\theta_t$
+
+```{code-cell} ipython3
+θ_grid = np.linspace(min(θs), max(θs), 100)
+X3_grid = np.column_stack((np.ones(len(θ_grid)), θ_grid, θ_grid**2))
+
+plt.scatter(θs, v_t)
+plt.plot(θ_grid, results3.predict(X3_grid), color='C1', 
+         label='$\hat v_t$', linestyle='--')
+plt.xlabel(r'$\theta_{t}$')
+plt.ylabel(r'$v_t$')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+```
 
 ### What has machine learning taught us?
 
@@ -1203,7 +1294,6 @@ and the parameters $d_0, d_1$ in the updating rule for $\theta_{t+1}$ in represe
 {eq}`eq_old9101`.
 
 First, we'll again use ``ChangLQ`` to compute these objects (along with a number of others).
-
 
 ```{code-cell} ipython3
 clq = ChangLQ(β=0.85, c=2, T=T)
