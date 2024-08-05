@@ -1094,7 +1094,7 @@ Let's plot the regression line $\mu_t = .0645 + 1.5995 \theta_t$  and the points
 
 ```{code-cell} ipython3
 plt.scatter(θs, μs, label=r'$\mu_t$')
-plt.plot(θs, results1.predict(X1_θ), 'C1', label='$\hat \mu_t$', linestyle='--')
+plt.plot(θs, results1.predict(X1_θ), 'grey', label='$\hat \mu_t$', linestyle='--')
 plt.xlabel(r'$\theta_t$')
 plt.ylabel(r'$\mu_t$')
 plt.legend()
@@ -1135,7 +1135,7 @@ Let's plot $\theta_t$ for $t =0, 1, \ldots, T$ along the line.
 
 ```{code-cell} ipython3
 plt.scatter(θ_t, θ_t1, label=r'$\theta_{t+1}$')
-plt.plot(θ_t, results2.predict(X2_θ), color='C1', label='$\hat θ_{t+1}$', linestyle='--')
+plt.plot(θ_t, results2.predict(X2_θ), color='grey', label='$\hat θ_{t+1}$', linestyle='--')
 plt.xlabel(r'$\theta_t$')
 plt.ylabel(r'$\theta_{t+1}$')
 plt.legend()
@@ -1211,15 +1211,23 @@ We can also verify approximate equality  by inspecting a graph of $v_t$ against 
 ---
 mystnb:
   figure:
-    caption: "Continuation values"
+    caption: Continuation values
     name: continuation_values
 ---
+# Plot the scatter plot
 plt.scatter(Ts, v_t, label='$v_t$')
-plt.axhline(V_R, color='C2', linestyle='--', label='$V^R$')
-plt.axhline(V_CR, color='C1', linestyle='--', label='$V^{CR}$')
+
+# Plot horizontal lines
+plt.axhline(V_CR, color='C1', alpha=0.5)
+plt.axhline(V_R, color='C2', alpha=0.5)
+
+# Add labels
+plt.text(max(Ts) + max(Ts)*0.07, V_CR, '$V^{CR}$', color='C1', 
+         va='center', clip_on=False, fontsize=15)
+plt.text(max(Ts) + max(Ts)*0.07, V_R, '$V^R$', color='C2', 
+         va='center', clip_on=False, fontsize=15)
 plt.xlabel(r'$t$')
 plt.ylabel(r'$v_t$')
-plt.legend()
 
 plt.tight_layout()
 plt.show()
@@ -1275,8 +1283,13 @@ Let's  plot $v_t$ against $\theta_t$ along with the nonlinear regression line.
 X3_grid = np.column_stack((np.ones(len(θ_grid)), θ_grid, θ_grid**2))
 
 plt.scatter(θs, v_t)
-plt.plot(θ_grid, results3.predict(X3_grid), color='C1', 
+plt.plot(θ_grid, results3.predict(X3_grid), color='grey', 
          label='$\hat v_t$', linestyle='--')
+plt.axhline(V_CR, color='C1', alpha=0.5)
+
+plt.text(max(θ_grid) - max(θ_grid)*0.025, V_CR, '$V^{CR}$', color='C1', 
+         va='center', clip_on=False, fontsize=15)
+
 plt.xlabel(r'$\theta_{t}$')
 plt.ylabel(r'$v_t$')
 plt.legend()
