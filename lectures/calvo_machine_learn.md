@@ -697,7 +697,8 @@ np.linalg.norm(clq.μ_CR - optimized_μ_CR)
 ```
 
 ```{code-cell} ipython3
-compute_V(optimized_μ_CR, β=0.85, c=2)
+V_CR = compute_V(optimized_μ_CR, β=0.85, c=2)
+V_CR
 ```
 
 ```{code-cell} ipython3
@@ -933,7 +934,8 @@ print(f'deviation = {np.linalg.norm(optimized_μ - clq.μ_series)}')
 ```
 
 ```{code-cell} ipython3
-compute_V(optimized_μ, β=0.85, c=2)
+V_R = compute_V(optimized_μ, β=0.85, c=2)
+V_R
 ```
 
 We find that by exploiting more knowledge about  the structure of the problem, we can significantly speed up our computation.
@@ -1039,8 +1041,8 @@ These are the data that we'll be running some linear least squares regressions o
 # Plot the two sequences
 Ts = np.arange(T)
 
-plt.plot(Ts, μs, label=r'$\mu_t$')
-plt.plot(Ts, θs, label=r'$\theta_t$')
+plt.scatter(Ts, μs, label=r'$\mu_t$', alpha=0.7)
+plt.scatter(Ts, θs, label=r'$\theta_t$', alpha=0.7)
 plt.xlabel(r'$t$')
 plt.legend()
 plt.show()
@@ -1079,7 +1081,7 @@ fits perfectly.
 Let's plot this function and the points $(\theta_t, \mu_t)$ that lie on it for $t=0, \ldots, T$.
 
 ```{code-cell} ipython3
-plt.scatter(θs, μs)
+plt.scatter(θs, μs, label=r'$\mu_t$')
 plt.plot(θs, results1.predict(X1_θ), 'C1', label='$\hat \mu_t$', linestyle='--')
 plt.xlabel(r'$\theta_t$')
 plt.ylabel(r'$\mu_t$')
@@ -1121,8 +1123,8 @@ that prevails along the Ramsey outcome for inflation.
 Let's plot $\theta_t$ for $t =0, 1, \ldots, T$ along the line.
 
 ```{code-cell} ipython3
-plt.scatter(θ_t, θ_t1)
-plt.plot(θ_t, results2.predict(X2_θ), color='C1', label='$\hat θ_t$', linestyle='--')
+plt.scatter(θ_t, θ_t1, label=r'$\theta_{t+1}$')
+plt.plot(θ_t, results2.predict(X2_θ), color='C1', label='$\hat θ_{t+1}$', linestyle='--')
 plt.xlabel(r'$\theta_t$')
 plt.ylabel(r'$\theta_{t+1}$')
 plt.legend()
@@ -1148,8 +1150,7 @@ $$
 v_t = s(\theta_t, \mu_t) + \beta v_{t+1}
 $$
 
-for $t= T-1, T-2, \ldots, 0.$ 
-
+for $t= T-1, T-2, \ldots, 0.$
 
 ```{code-cell} ipython3
 # Define function for s and U in section 41.3
@@ -1158,8 +1159,10 @@ def s(θ, μ, u0, u1, u2, α, c):
     return U(-α*θ) - (c / 2) * μ**2
 
 # Calculate v_t sequence backward
-def compute_vt(θ, μ, β, c, u0=1, u1=0.5, u2=3, α=1):
+def compute_vt(μ, β, c, u0=1, u1=0.5, u2=3, α=1):
     T = len(μs)
+    θ = compute_θ(μ, α)
+    
     v_t = np.zeros(T)
     μ_bar = μs[-1]
     
@@ -1176,10 +1179,8 @@ def compute_vt(θ, μ, β, c, u0=1, u1=0.5, u2=3, α=1):
         
     return v_t
 
-v_t = compute_vt(θs, μs, β=0.85, c=2)
-print("continuation value sequence = ", v_t)
+v_t = compute_vt(μs, β=0.85, c=2)
 ```
-
 
 The initial continuation  value $v_0$ should equals the optimized value of the Ramsey planner's criterion $V$ defined
 in equation {eq}`eq:RamseyV`.  
@@ -1194,6 +1195,26 @@ that line where I printed out the sequence.
 Also, please add a graph of $v_t$ against $t$ for $t=0, \ldots, T$.
 
 **End of note to Humphrey**
+
+Indeed, we find that the deviation is very small
+
+```{code-cell} ipython3
+print(f'deviation = {np.linalg.norm(v_t[0] - V_R)}')
+```
+
+We can also verify this by inspecting a graph of $v_t$ against $t$ for $t=0, \ldots, T$ along with the value attained by a restricted Ramsey planner $V^{CR}$ and the optimized value of the ordinary Ramsey planner's criterion $V$
+
+```{code-cell} ipython3
+plt.scatter(Ts, v_t, label='$v_t$')
+plt.axhline(V_R, color='C2', linestyle='--', label='$V$')
+plt.axhline(V_CR, color='C1', linestyle='--', label='$V^{CR}$')
+plt.xlabel(r'$t$')
+plt.ylabel(r'$v_t$')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+```
 
 Next we ask Python to  regress $v_t$ against a constant, $\theta_t$, and $\theta_t^2$.  
 
@@ -1240,6 +1261,7 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 ```
+
 The highest continuation value $v_0$ at  $t=0$ appears at the peak of the graph.
 
 Subsequent values of $v_t$ for $t \geq 1$ appear to the left and converge  monotonically from above to $v_T$ at time $T$.  
