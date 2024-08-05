@@ -709,7 +709,14 @@ compute_V(jnp.array([clq.μ_CR]), β=0.85, c=2)
 
 By thinking a little harder about the mathematical structure of the Ramsey problem and using some linear algebra, we can simplify the problem that we hand over to a ``machine learning`` algorithm. 
 
-The idea here is that the Ramsey problem that chooses  $\vec \mu$ to maximize the government's value function {eq}`eq:Ramseyvalue`subject to equation  {eq}`eq:inflation101` is actually a quadratic optimum problem whose solution is characterized by a set of simultaneous linear equations in $\vec \mu$.
+We start by recalling that  the Ramsey problem that chooses  $\vec \mu$ to maximize the government's value function {eq}`eq:Ramseyvalue`subject to equation  {eq}`eq:inflation101`.
+
+This  is actually an optimization  problem with a quadratic objective function and linear constraints.
+
+First-order conditions for this problem are a set of simultaneous linear equations in $\vec \mu$.
+
+If we trust that the second-order conditions for a maximum are also satisfied (they are in our problem),
+we can compute the Ramsey plan by solving these equations for $\vec \mu$.
 
 We'll apply this approach here and compare answers with what we obtained above with the gradient descent approach.
 
@@ -1007,24 +1014,24 @@ closed_grad
 print(f'deviation = {np.linalg.norm(closed_grad - (- grad_J(jnp.ones(T))))}')
 ```
 
-## Some   Regressions
+## Some  Exploratory Regressions
 
 To  help us learn about the structure of the Ramsey plan, we shall compute some least squares linear regressions of particular components of $\vec \theta$ and $\vec \mu$ on others.
 
 Our hope is that these regressions will reveal structure  hidden within the $\vec \mu^R, \vec \theta^R$ sequences associated with a Ramsey plan.
 
-It is worth pausing here to think about  roles played by  **human** intelligence and **artificial** intelligence  here.  
+It is worth pausing here to think about  roles being  played by  **human** intelligence and **artificial** intelligence.  
 
-Artificial intelligence, in this case meaning a computer,  is running the regressions for us.
+Artificial intelligence, i.e., some Python code and  a computer,  is running the regressions for us.
 
 But we are free to  regress anything on anything else.
 
-Human intelligence tells us which regressions to run. 
+Human intelligence tells us what regressions to run. 
 
 Additional inputs of  human intelligence will be  required fully to appreciate what those regressions  reveal about the structure of a Ramsey plan. 
 
 ```{note}
-At this point, it is worthwhile to read how Chang {cite}`chang1998credible` chose
+When we eventually get around to trying to understand the regressions below, it will  worthwhile to study  the reasoning that let  Chang {cite}`chang1998credible` to choose
 $\theta_t$ as his key state variable. 
 ```
 
@@ -1049,15 +1056,15 @@ plt.show()
 ```
 
 We notice that $\theta_t$  is less than $\mu_t$for low $t$'s but that it eventually converges to
-the same limit that $\mu_t$ does.
+the same limit $\bar \mu$ that $\mu_t$ does.
 
-This pattern reflects how formula {eq}`eq_grad_old3` for low $t$'s makes $\theta_t$ makes a weighted average of future $\mu_t$'s.
+This pattern reflects how formula {eq}`eq_grad_old3`  makes $\theta_t$ be a weighted average of future $\mu_t$'s.
 
 We begin by regressing $\mu_t$ on a constant and $\theta_t$. 
 
-This might seem strange because, first of all, equation {eq}`eq_grad_old3` asserts that inflation at time $t$  is determined $\{\mu_s\}_{s=t}^\infty$
+This might seem strange because, after all, equation {eq}`eq_grad_old3` asserts that inflation at time $t$  is determined $\{\mu_s\}_{s=t}^\infty$
 
-Nevertheless, we'll run this regression anyway and provide a justification later.
+Nevertheless, we'll run this regression anyway.
 
 ```{code-cell} ipython3
 # First regression: μ_t on a constant and θ_t
@@ -1078,7 +1085,12 @@ $$
 
 fits perfectly.
 
-Let's plot this function and the points $(\theta_t, \mu_t)$ that lie on it for $t=0, \ldots, T$.
+
+```{note}
+Of course, this means that a regression of $\theta_t$ on $\mu_t$ and a constant would also fit perfectly. 
+```
+
+Let's plot the regression line $\mu_t = .0645 + 1.5995 \theta_t$  and the points $(\theta_t, \mu_t)$ that lie on it for $t=0, \ldots, T$.
 
 ```{code-cell} ipython3
 plt.scatter(θs, μs, label=r'$\mu_t$')
@@ -1089,10 +1101,9 @@ plt.legend()
 plt.show()
 ```
 
-The  time $0$ pair  $\theta_0, \mu_0$ appears as the point on the upper right.  
+The  time $0$ pair  $(\theta_0, \mu_0)$ appears as the point on the upper right.  
 
-Points for succeeding times appear further and further to the lower left and eventually converge to
-$\bar \mu, \bar \mu$.
+Points $(\theta_t, \mu_t)$  for succeeding times appear further and further to the lower left and eventually converge to $(\bar \mu, \bar \mu)$.
 
 
 Next, we'll run a linear regression of $\theta_{t+1}$ against $\theta_t$. 
@@ -1135,6 +1146,8 @@ plt.show()
 
 Points for succeeding times appear further and further to the lower left and eventually converge to
 $\bar \mu, \bar \mu$.
+
+### Continuation Values
 
 Next, we'll compute a sequence $\{v_t\}_{t=0}^T$ of  what we'll call "continuation values" along a Ramsey plan.
 
@@ -1185,26 +1198,22 @@ v_t = compute_vt(μs, β=0.85, c=2)
 The initial continuation  value $v_0$ should equals the optimized value of the Ramsey planner's criterion $V$ defined
 in equation {eq}`eq:RamseyV`.  
 
-**Note to Humphrey**
 
-Let's add a line of code to check this equality.
-
-I printed out the sequence and it looks good.  But I suspect you will want to clean up 
-that line where I printed out the sequence. 
-
-Also, please add a graph of $v_t$ against $t$ for $t=0, \ldots, T$.
-
-**End of note to Humphrey**
-
-Indeed, we find that the deviation is very small
+Indeed, we find that the deviation is very small:
 
 ```{code-cell} ipython3
 print(f'deviation = {np.linalg.norm(v_t[0] - V_R)}')
 ```
 
-We can also verify this by inspecting a graph of $v_t$ against $t$ for $t=0, \ldots, T$ along with the value attained by a restricted Ramsey planner $V^{CR}$ and the optimized value of the ordinary Ramsey planner $V^R$
+We can also verify approximate equality  by inspecting a graph of $v_t$ against $t$ for $t=0, \ldots, T$ along with the value attained by a restricted Ramsey planner $V^{CR}$ and the optimized value of the ordinary Ramsey planner $V^R$
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: "Continuation values"
+    name: continuation_values
+---
 plt.scatter(Ts, v_t, label='$v_t$')
 plt.axhline(V_R, color='C2', linestyle='--', label='$V^R$')
 plt.axhline(V_CR, color='C1', linestyle='--', label='$V^{CR}$')
@@ -1215,6 +1224,20 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 ```
+
+Figure {numref}`continuation_values` shows several striking patterns:
+
+  * The sequence of continuation values $\{v_t\}_{t=0}^T$ is monotonically decreasing
+  * Evidently,  $v_0 >  V^{CR} > v_T$ so that
+      * the value $v_0$ of the ordinary Ramsey plan exceeds the value $V^{CR}$ of the special Ramsey plan in which the planner is constrained to set $\mu_t = \mu^{CR}$ for all $t$.
+      * the continuation value $v_T$ of the ordinary Ramsey plan for $t \geq T$ is constant and is less than the value $V^{CR}$ of the special Ramsey plan in which the planner is constrained to set $\mu_t = \mu^{CR}$ for all $t$
+
+
+```{note}
+The continuation value $v_T$ is what some researchers call the "value of a Ramsey plan under a
+time-less perspective." A more descriptive phrase is "the value of the worst continuation Ramsey plan."
+```
+
 
 Next we ask Python to  regress $v_t$ against a constant, $\theta_t$, and $\theta_t^2$.  
 
@@ -1266,10 +1289,18 @@ The highest continuation value $v_0$ at  $t=0$ appears at the peak of the graph.
 
 Subsequent values of $v_t$ for $t \geq 1$ appear to the left and converge  monotonically from above to $v_T$ at time $T$.  
 
+**Aug 5 Request for Humphrey**
+
+Please add a horizontal line labeled $V^{CR}$ to the above graph. 
+It will make it even more of a killer graph!
+Thanks.
+
+**End of Request for Humphrey**
 
 
 
-## What has machine learning taught us?
+
+## What has Machine Learning Taught Us?
 
 
 Our regressions tells us that along the Ramsey outcome $\vec \mu^R, \vec \theta^R$, the linear function
