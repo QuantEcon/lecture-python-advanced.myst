@@ -1202,11 +1202,11 @@ Indeed, we find that the deviation is very small
 print(f'deviation = {np.linalg.norm(v_t[0] - V_R)}')
 ```
 
-We can also verify this by inspecting a graph of $v_t$ against $t$ for $t=0, \ldots, T$ along with the value attained by a restricted Ramsey planner $V^{CR}$ and the optimized value of the ordinary Ramsey planner's criterion $V$
+We can also verify this by inspecting a graph of $v_t$ against $t$ for $t=0, \ldots, T$ along with the value attained by a restricted Ramsey planner $V^{CR}$ and the optimized value of the ordinary Ramsey planner $V^R$
 
 ```{code-cell} ipython3
 plt.scatter(Ts, v_t, label='$v_t$')
-plt.axhline(V_R, color='C2', linestyle='--', label='$V$')
+plt.axhline(V_R, color='C2', linestyle='--', label='$V^R$')
 plt.axhline(V_CR, color='C1', linestyle='--', label='$V^{CR}$')
 plt.xlabel(r'$t$')
 plt.ylabel(r'$v_t$')
