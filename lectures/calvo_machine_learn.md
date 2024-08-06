@@ -1298,17 +1298,18 @@ plt.tight_layout()
 plt.show()
 ```
 
-The highest continuation value $v_0$ at  $t=0$ appears at the peak of the graph.
+The highest continuation value $v_0$ at  $t=0$ appears at the peak of the function quadratic function
+$g_0 + g_1 \theta_t + g_2 \theta_t^2$.
 
-Subsequent values of $v_t$ for $t \geq 1$ appear to the left and converge  monotonically from above to $v_T$ at time $T$.  
 
-**Aug 5 Request for Humphrey**
+Subsequent values of $v_t$ for $t \geq 1$ appear to the lower left of the pair $(\theta_0, v_0)$ and converge  monotonically from above to $v_T$ at time $T$.
 
-Please add a horizontal line labeled $V^{CR}$ to the above graph. 
-It will make it even more of a killer graph!
-Thanks.
+The value $V^{CR}$ attained by the Ramsey plan that is  restricted to be  a constant $\mu_t = \mu^{CR}$ sequence appears as a horizontal line.
 
-**End of Request for Humphrey**
+Evidently, continuation values $v_t > V^{CR}$ for $t=0, 1, 2$ while $v_t < V^{CR}$ for $t \geq 3$. 
+
+
+  
 
 
 
@@ -1358,7 +1359,7 @@ v_t = g_0 + g_1 \theta_t + g_2 \theta_t^2
 $$
 
 
-We  discovered these relationships  by running some carefully chosen  regressions and staring at the results, noticing that the $R^2$ of unity tell us that the fits are perfect. 
+We  discovered these relationships  by running some carefully chosen  regressions and staring at the results, noticing that the $R^2$'s of unity tell us that the fits are perfect. 
 
 We have learned something about the structure of the Ramsey problem.
 
