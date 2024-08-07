@@ -187,10 +187,11 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-implementations">41.7.1. Two implementations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-regressions">41.8. Some   Regressions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-has-machine-learning-taught-us">41.8.1. What has machine learning taught us?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-exploratory-regressions">41.8. Some  Exploratory Regressions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#continuation-values">41.8.1. Continuation Values</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-has-machine-learning-taught-us">41.9. What has Machine Learning Taught Us?</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -251,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
 <h1><span class="section-number">41. </span>Machine Learning a Ramsey Plan<a class="headerlink" href="#machine-learning-a-ramsey-plan" title="Permalink to this heading">#</a></h1>
 <section id="introduction">
 <h2><span class="section-number">41.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
-<p>This  lecture  studies a problem that we also study in another  quantecon lecture
+<p>This  lecture  studies a problem that we shall  study from another angle  in another  quantecon lecture
 <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
 <p>That lecture  used  an analytic approach based on <code class="docutils literal notranslate"><span class="pre">dynamic</span> <span class="pre">programming</span> <span class="pre">squared</span></code> to guide computation of a Ramsey plan  in a version of a model of Calvo <span id="id1">[<a class="reference internal" href="zreferences.html#id139" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span>.</p>
 <p>Dynamic programming squared guided the  calculations in that lecture  by providing  much useful  information about mathematical  objects in terms of which the Ramsey plan can be represented recursively.</p>
@@ -363,7 +364,7 @@ the linear difference equation <a class="reference internal" href="#equation-eq-
 <p>The money demand function <a class="reference internal" href="#equation-eq-grad-old1">(41.1)</a> and the utility function <a class="reference internal" href="#equation-eq-grad-old5">(41.4)</a> imply that</p>
 <div class="math notranslate nohighlight" id="equation-eq-grad-old5a">
 <span class="eqno">(41.5)<a class="headerlink" href="#equation-eq-grad-old5a" title="Permalink to this equation">#</a></span>\[
-U(-\alpha \theta_t) = u_1 + u_2 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
+U(-\alpha \theta_t) = u_0 + u_1 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
 \]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -563,20 +564,20 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading optax-0.2.3-py3-none-any.whl.metadata (8.3 kB)
+Collecting absl-py&gt;=0.7.1 (from optax)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting absl-py&gt;=0.7.1 (from optax)
-  Downloading absl_py-2.1.0-py3-none-any.whl.metadata (2.3 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading absl_py-2.1.0-py3-none-any.whl.metadata (2.3 kB)
 Collecting chex&gt;=0.1.86 (from optax)
   Downloading chex-0.1.86-py3-none-any.whl.metadata (17 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting jax&gt;=0.4.27 (from optax)
-  Downloading jax-0.4.30-py3-none-any.whl.metadata (22 kB)
+  Downloading jax-0.4.31-py3-none-any.whl.metadata (22 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting jaxlib&gt;=0.4.27 (from optax)
-  Downloading jaxlib-0.4.30-cp311-cp311-manylinux2014_x86_64.whl.metadata (1.0 kB)
+  Downloading jaxlib-0.4.31-cp311-cp311-manylinux2014_x86_64.whl.metadata (983 bytes)
 Requirement already satisfied: numpy&gt;=1.18.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from optax) (1.26.4)
 </pre></div>
 </div>
@@ -588,90 +589,96 @@ Requirement already satisfied: toolz&gt;=0.9.0 in /home/runner/miniconda3/envs/q
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ml-dtypes&gt;=0.2.0 (from jax&gt;=0.4.27-&gt;optax)
   Downloading ml_dtypes-0.4.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
-Collecting opt-einsum (from jax&gt;=0.4.27-&gt;optax)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading opt_einsum-3.3.0-py3-none-any.whl.metadata (6.5 kB)
-Requirement already satisfied: scipy&gt;=1.9 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from jax&gt;=0.4.27-&gt;optax) (1.11.4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting opt-einsum (from jax&gt;=0.4.27-&gt;optax)
+  Downloading opt_einsum-3.3.0-py3-none-any.whl.metadata (6.5 kB)
+Requirement already satisfied: scipy&gt;=1.10 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from jax&gt;=0.4.27-&gt;optax) (1.11.4)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading optax-0.2.3-py3-none-any.whl (289 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/289.6 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">289.6/289.6 kB</span> <span class=" -Color -Color-Red">20.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25h
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading absl_py-2.1.0-py3-none-any.whl (133 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">289.6/289.6 kB</span> <span class=" -Color -Color-Red">17.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading absl_py-2.1.0-py3-none-any.whl (133 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/133.7 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">133.7/133.7 kB</span> <span class=" -Color -Color-Red">38.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">133.7/133.7 kB</span> <span class=" -Color -Color-Red">32.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading chex-0.1.86-py3-none-any.whl (98 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/98.2 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">98.2/98.2 kB</span> <span class=" -Color -Color-Red">36.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25hDownloading jax-0.4.30-py3-none-any.whl (2.0 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/2.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.0/2.0 MB</span> <span class=" -Color -Color-Red">98.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25hDownloading jaxlib-0.4.30-cp311-cp311-manylinux2014_x86_64.whl (79.6 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/79.6 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">7.2/79.6 MB</span> <span class=" -Color -Color-Red">215.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">14.4/79.6 MB</span> <span class=" -Color -Color-Red">210.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">21.7/79.6 MB</span> <span class=" -Color -Color-Red">211.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">28.9/79.6 MB</span> <span class=" -Color -Color-Red">213.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">36.2/79.6 MB</span> <span class=" -Color -Color-Red">210.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">43.3/79.6 MB</span> <span class=" -Color -Color-Red">208.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">50.5/79.6 MB</span> <span class=" -Color -Color-Red">210.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━ <span class=" -Color -Color-Green">57.8/79.6 MB</span> <span class=" -Color -Color-Red">212.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━ <span class=" -Color -Color-Green">64.8/79.6 MB</span> <span class=" -Color -Color-Red">206.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━ <span class=" -Color -Color-Green">71.9/79.6 MB</span> <span class=" -Color -Color-Red">204.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">79.2/79.6 MB</span> <span class=" -Color -Color-Red">209.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">79.6/79.6 MB</span> <span class=" -Color -Color-Red">205.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">79.6/79.6 MB</span> <span class=" -Color -Color-Red">205.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">79.6/79.6 MB</span> <span class=" -Color -Color-Red">205.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">79.6/79.6 MB</span> <span class=" -Color -Color-Red">205.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">79.6/79.6 MB</span> <span class=" -Color -Color-Red">205.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">79.6/79.6 MB</span> <span class=" -Color -Color-Red">45.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25hDownloading ml_dtypes-0.4.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.2 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/2.2 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.2/2.2 MB</span> <span class=" -Color -Color-Red">100.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">98.2/98.2 kB</span> <span class=" -Color -Color-Red">32.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading etils-1.9.2-py3-none-any.whl (161 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading jax-0.4.31-py3-none-any.whl (2.0 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/2.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.0/2.0 MB</span> <span class=" -Color -Color-Red">84.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading jaxlib-0.4.31-cp311-cp311-manylinux2014_x86_64.whl (88.1 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/88.1 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">5.8/88.1 MB</span> <span class=" -Color -Color-Red">174.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">12.5/88.1 MB</span> <span class=" -Color -Color-Red">189.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">18.9/88.1 MB</span> <span class=" -Color -Color-Red">191.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">25.2/88.1 MB</span> <span class=" -Color -Color-Red">185.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">30.7/88.1 MB</span> <span class=" -Color -Color-Red">171.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">35.8/88.1 MB</span> <span class=" -Color -Color-Red">166.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">42.2/88.1 MB</span> <span class=" -Color -Color-Red">167.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">48.7/88.1 MB</span> <span class=" -Color -Color-Red">189.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">55.4/88.1 MB</span> <span class=" -Color -Color-Red">196.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━ <span class=" -Color -Color-Green">61.4/88.1 MB</span> <span class=" -Color -Color-Red">184.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">66.6/88.1 MB</span> <span class=" -Color -Color-Red">167.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━ <span class=" -Color -Color-Green">72.8/88.1 MB</span> <span class=" -Color -Color-Red">170.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━ <span class=" -Color -Color-Green">79.3/88.1 MB</span> <span class=" -Color -Color-Red">184.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━ <span class=" -Color -Color-Green">85.9/88.1 MB</span> <span class=" -Color -Color-Red">192.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">193.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">193.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">193.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">193.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">193.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">41.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading ml_dtypes-0.4.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.2 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/2.2 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.2/2.2 MB</span> <span class=" -Color -Color-Red">115.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading etils-1.9.2-py3-none-any.whl (161 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/161.5 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">161.5/161.5 kB</span> <span class=" -Color -Color-Red">50.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">161.5/161.5 kB</span> <span class=" -Color -Color-Red">40.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading opt_einsum-3.3.0-py3-none-any.whl (65 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/65.5 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">65.5/65.5 kB</span> <span class=" -Color -Color-Red">23.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">65.5/65.5 kB</span> <span class=" -Color -Color-Red">19.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: opt-einsum, ml-dtypes, etils, absl-py, jaxlib, jax, chex, optax
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed absl-py-2.1.0 chex-0.1.86 etils-1.9.2 jax-0.4.30 jaxlib-0.4.30 ml-dtypes-0.4.0 opt-einsum-3.3.0 optax-0.2.3
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed absl-py-2.1.0 chex-0.1.86 etils-1.9.2 jax-0.4.31 jaxlib-0.4.31 ml-dtypes-0.4.0 opt-einsum-3.3.0 optax-0.2.3
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: statsmodels in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.14.0)
@@ -699,35 +706,23 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading statsmodels-0.14.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.7 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/10.7 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.6/10.7 MB</span> <span class=" -Color -Color-Red">18.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.6/10.7 MB</span> <span class=" -Color -Color-Red">24.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.2/10.7 MB</span> <span class=" -Color -Color-Red">64.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━ <span class=" -Color -Color-Green">9.4/10.7 MB</span> <span class=" -Color -Color-Red">137.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.7/10.7 MB</span> <span class=" -Color -Color-Red">26.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.4/10.7 MB</span> <span class=" -Color -Color-Red">32.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.8/10.7 MB</span> <span class=" -Color -Color-Red">39.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━ <span class=" -Color -Color-Green">9.5/10.7 MB</span> <span class=" -Color -Color-Red">46.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">10.7/10.7 MB</span> <span class=" -Color -Color-Red">54.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">10.7/10.7 MB</span> <span class=" -Color -Color-Red">47.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">10.7/10.7 MB</span> <span class=" -Color -Color-Red">187.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">10.7/10.7 MB</span> <span class=" -Color -Color-Red">123.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading patsy-0.5.6-py2.py3-none-any.whl (233 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/233.9 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">233.9/233.9 kB</span> <span class=" -Color -Color-Red">58.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">233.9/233.9 kB</span> <span class=" -Color -Color-Red">55.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: patsy, statsmodels
   Attempting uninstall: patsy
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Found existing installation: patsy 0.5.3
+    Found existing installation: patsy 0.5.3
     Uninstalling patsy-0.5.3:
 </pre></div>
 </div>
@@ -741,7 +736,9 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Uninstalling statsmodels-0.14.0:
-      Successfully uninstalled statsmodels-0.14.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      Successfully uninstalled statsmodels-0.14.0
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed patsy-0.5.6 statsmodels-0.14.2
@@ -1041,8 +1038,8 @@ optimized μ =
  -0.1075949  -0.10759487 -0.10759488 -0.10759488 -0.10759488 -0.10759489
  -0.10759491 -0.10759493 -0.10759494 -0.10759497 -0.10759497 -0.10759496
  -0.10759496 -0.10759495 -0.10759496 -0.10759499]
-CPU times: user 517 ms, sys: 72.6 ms, total: 589 ms
-Wall time: 580 ms
+CPU times: user 532 ms, sys: 123 ms, total: 656 ms
+Wall time: 650 ms
 </pre></div>
 </div>
 </div>
@@ -1128,7 +1125,9 @@ the additional restriction that  <span class="math notranslate nohighlight">\(\m
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 0, grad norm: 3.333333969116211
-Iteration 100, grad norm: 0.004979133605957031
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration 100, grad norm: 0.004979133605957031
 Iteration 200, grad norm: 6.818771362304688e-05
 Converged after 282 iterations.
 optimized μ = 
@@ -1152,7 +1151,8 @@ optimized μ =
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_V</span><span class="p">(</span><span class="n">optimized_μ_CR</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">V_CR</span> <span class="o">=</span> <span class="n">compute_V</span><span class="p">(</span><span class="n">optimized_μ_CR</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">V_CR</span>
 </pre></div>
 </div>
 </div>
@@ -1179,7 +1179,11 @@ optimized μ =
 <section id="a-more-structured-ml-algorithm">
 <h2><span class="section-number">41.7. </span>A more structured ML algorithm<a class="headerlink" href="#a-more-structured-ml-algorithm" title="Permalink to this heading">#</a></h2>
 <p>By thinking a little harder about the mathematical structure of the Ramsey problem and using some linear algebra, we can simplify the problem that we hand over to a <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> algorithm.</p>
-<p>The idea here is that the Ramsey problem that chooses  <span class="math notranslate nohighlight">\(\vec \mu\)</span> to maximize the government’s value function <a class="reference internal" href="#equation-eq-ramseyvalue">(41.7)</a>subject to equation  <a class="reference internal" href="#equation-eq-inflation101">(41.8)</a> is actually a quadratic optimum problem whose solution is characterized by a set of simultaneous linear equations in <span class="math notranslate nohighlight">\(\vec \mu\)</span>.</p>
+<p>We start by recalling that  the Ramsey problem that chooses  <span class="math notranslate nohighlight">\(\vec \mu\)</span> to maximize the government’s value function <a class="reference internal" href="#equation-eq-ramseyvalue">(41.7)</a>subject to equation  <a class="reference internal" href="#equation-eq-inflation101">(41.8)</a>.</p>
+<p>This  is actually an optimization  problem with a quadratic objective function and linear constraints.</p>
+<p>First-order conditions for this problem are a set of simultaneous linear equations in <span class="math notranslate nohighlight">\(\vec \mu\)</span>.</p>
+<p>If we trust that the second-order conditions for a maximum are also satisfied (they are in our problem),
+we can compute the Ramsey plan by solving these equations for <span class="math notranslate nohighlight">\(\vec \mu\)</span>.</p>
 <p>We’ll apply this approach here and compare answers with what we obtained above with the gradient descent approach.</p>
 <p>To remind us of the setting, remember that we have assumed that</p>
 <div class="math notranslate nohighlight">
@@ -1422,8 +1426,8 @@ optimized μ =
  -0.10759497 -0.10759498 -0.107595   -0.10759494 -0.10759496 -0.10759496
  -0.10759494 -0.10759493 -0.10759493 -0.10759494 -0.10759494 -0.10759495
  -0.10759497 -0.107595   -0.10759497 -0.10759495]
-CPU times: user 222 ms, sys: 8.62 ms, total: 231 ms
-Wall time: 201 ms
+CPU times: user 207 ms, sys: 8.26 ms, total: 216 ms
+Wall time: 186 ms
 </pre></div>
 </div>
 </div>
@@ -1461,7 +1465,8 @@ Wall time: 201 ms
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">compute_V</span><span class="p">(</span><span class="n">optimized_μ</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">V_R</span> <span class="o">=</span> <span class="n">compute_V</span><span class="p">(</span><span class="n">optimized_μ</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">V_R</span>
 </pre></div>
 </div>
 </div>
@@ -1619,18 +1624,18 @@ Wall time: 201 ms
 </div>
 </section>
 </section>
-<section id="some-regressions">
-<h2><span class="section-number">41.8. </span>Some   Regressions<a class="headerlink" href="#some-regressions" title="Permalink to this heading">#</a></h2>
+<section id="some-exploratory-regressions">
+<h2><span class="section-number">41.8. </span>Some  Exploratory Regressions<a class="headerlink" href="#some-exploratory-regressions" title="Permalink to this heading">#</a></h2>
 <p>To  help us learn about the structure of the Ramsey plan, we shall compute some least squares linear regressions of particular components of <span class="math notranslate nohighlight">\(\vec \theta\)</span> and <span class="math notranslate nohighlight">\(\vec \mu\)</span> on others.</p>
 <p>Our hope is that these regressions will reveal structure  hidden within the <span class="math notranslate nohighlight">\(\vec \mu^R, \vec \theta^R\)</span> sequences associated with a Ramsey plan.</p>
-<p>It is worth pausing here to think about  roles played by  <strong>human</strong> intelligence and <strong>artificial</strong> intelligence  here.</p>
-<p>Artificial intelligence (AI a.k.a. ML) is running the regressions.</p>
-<p>But you can regress anything on anything else.</p>
-<p>Human intelligence tell us which regressions to run.</p>
-<p>Even  more human intelligence is required fully to appreciate what they reveal about the structure of the Ramsey plan.</p>
+<p>It is worth pausing here to think about  roles being  played by  <strong>human</strong> intelligence and <strong>artificial</strong> intelligence.</p>
+<p>Artificial intelligence, i.e., some Python code and  a computer,  is running the regressions for us.</p>
+<p>But we are free to  regress anything on anything else.</p>
+<p>Human intelligence tells us what regressions to run.</p>
+<p>Additional inputs of  human intelligence will be  required fully to appreciate what those regressions  reveal about the structure of a Ramsey plan.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>At this point, it is worthwhile to read how Chang <span id="id6">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> chose
+<p>When we eventually get around to trying to understand the regressions below, it will  worthwhile to study  the reasoning that let  Chang <span id="id6">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> to choose
 <span class="math notranslate nohighlight">\(\theta_t\)</span> as his key state variable.</p>
 </div>
 <p>We’ll begin by  simply plotting the Ramsey plan’s <span class="math notranslate nohighlight">\(\mu_t\)</span> and <span class="math notranslate nohighlight">\(\theta_t\)</span> for <span class="math notranslate nohighlight">\(t =0, \ldots, T\)</span>  against <span class="math notranslate nohighlight">\(t\)</span> in  a  graph with <span class="math notranslate nohighlight">\(t\)</span> on the ordinate  axis.</p>
@@ -1644,8 +1649,8 @@ Wall time: 201 ms
 <span class="c1"># Plot the two sequences</span>
 <span class="n">Ts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">μs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu_t$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">θs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\theta_t$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">μs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu_t$&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">θs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\theta_t$&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1653,15 +1658,15 @@ Wall time: 201 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b3329229dd8f5639aca5651927180fc48c79e2ffdc7837ea12da2bc862af1e2f.png" src="_images/b3329229dd8f5639aca5651927180fc48c79e2ffdc7837ea12da2bc862af1e2f.png" />
+<img alt="_images/fc4aeb1a86f5778056e138a0ef81fa81a7fe97c2b5cb2e624d9e0a5f521c3c38.png" src="_images/fc4aeb1a86f5778056e138a0ef81fa81a7fe97c2b5cb2e624d9e0a5f521c3c38.png" />
 </div>
 </div>
 <p>We notice that <span class="math notranslate nohighlight">\(\theta_t\)</span>  is less than <span class="math notranslate nohighlight">\(\mu_t\)</span>for low <span class="math notranslate nohighlight">\(t\)</span>’s but that it eventually converges to
-the same limit that <span class="math notranslate nohighlight">\(\mu_t\)</span> does.</p>
-<p>This pattern reflects how formula <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> for low <span class="math notranslate nohighlight">\(t\)</span>’s makes <span class="math notranslate nohighlight">\(\theta_t\)</span> makes a weighted average of future <span class="math notranslate nohighlight">\(\mu_t\)</span>’s.</p>
+the same limit <span class="math notranslate nohighlight">\(\bar \mu\)</span> that <span class="math notranslate nohighlight">\(\mu_t\)</span> does.</p>
+<p>This pattern reflects how formula <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a>  makes <span class="math notranslate nohighlight">\(\theta_t\)</span> be a weighted average of future <span class="math notranslate nohighlight">\(\mu_t\)</span>’s.</p>
 <p>We begin by regressing <span class="math notranslate nohighlight">\(\mu_t\)</span> on a constant and <span class="math notranslate nohighlight">\(\theta_t\)</span>.</p>
-<p>This might seem strange because, first of all, equation <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> asserts that inflation at time <span class="math notranslate nohighlight">\(t\)</span>  is determined <span class="math notranslate nohighlight">\(\{\mu_s\}_{s=t}^\infty\)</span></p>
-<p>Nevertheless, we’ll run this regression anyway and provide a justification later.</p>
+<p>This might seem strange because, after all, equation <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> asserts that inflation at time <span class="math notranslate nohighlight">\(t\)</span>  is determined <span class="math notranslate nohighlight">\(\{\mu_s\}_{s=t}^\infty\)</span></p>
+<p>Nevertheless, we’ll run this regression anyway.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># First regression: μ_t on a constant and θ_t</span>
@@ -1702,11 +1707,15 @@ Notes:
 \mu_t = .0645 + 1.5995 \theta_t
 \]</div>
 <p>fits perfectly.</p>
-<p>Let’s plot this function and the points <span class="math notranslate nohighlight">\((\theta_t, \mu_t)\)</span> that lie on it for <span class="math notranslate nohighlight">\(t=0, \ldots, T\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Of course, this means that a regression of <span class="math notranslate nohighlight">\(\theta_t\)</span> on <span class="math notranslate nohighlight">\(\mu_t\)</span> and a constant would also fit perfectly.</p>
+</div>
+<p>Let’s plot the regression line <span class="math notranslate nohighlight">\(\mu_t = .0645 + 1.5995 \theta_t\)</span>  and the points <span class="math notranslate nohighlight">\((\theta_t, \mu_t)\)</span> that lie on it for <span class="math notranslate nohighlight">\(t=0, \ldots, T\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">θs</span><span class="p">,</span> <span class="n">μs</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">θs</span><span class="p">,</span> <span class="n">results1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X1_θ</span><span class="p">),</span> <span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\hat \mu_t$&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">θs</span><span class="p">,</span> <span class="n">μs</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu_t$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">θs</span><span class="p">,</span> <span class="n">results1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X1_θ</span><span class="p">),</span> <span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\hat \mu_t$&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta_t$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mu_t$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -1715,12 +1724,11 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ba9bc28a9cfd1f14f8f6b6f81c5e7909979cbcf0c17bdf247c9d8cea91705423.png" src="_images/ba9bc28a9cfd1f14f8f6b6f81c5e7909979cbcf0c17bdf247c9d8cea91705423.png" />
+<img alt="_images/f4f198b6f25ec767699ac37acce57083e3db0016eeb611843d7302e0181ad8fb.png" src="_images/f4f198b6f25ec767699ac37acce57083e3db0016eeb611843d7302e0181ad8fb.png" />
 </div>
 </div>
-<p>The  time <span class="math notranslate nohighlight">\(0\)</span> pair  <span class="math notranslate nohighlight">\(\theta_0, \mu_0\)</span> appears as the point on the upper right.</p>
-<p>Points for succeeding times appear further and further to the lower left and eventually converge to
-<span class="math notranslate nohighlight">\(\bar \mu, \bar \mu\)</span>.</p>
+<p>The  time <span class="math notranslate nohighlight">\(0\)</span> pair  <span class="math notranslate nohighlight">\((\theta_0, \mu_0)\)</span> appears as the point on the upper right.</p>
+<p>Points <span class="math notranslate nohighlight">\((\theta_t, \mu_t)\)</span>  for succeeding times appear further and further to the lower left and eventually converge to <span class="math notranslate nohighlight">\((\bar \mu, \bar \mu)\)</span>.</p>
 <p>Next, we’ll run a linear regression of <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span> against <span class="math notranslate nohighlight">\(\theta_t\)</span>.</p>
 <p>We’ll include a constant.</p>
 <div class="cell docutils container">
@@ -1768,8 +1776,8 @@ Notes:
 <p>Let’s plot <span class="math notranslate nohighlight">\(\theta_t\)</span> for <span class="math notranslate nohighlight">\(t =0, 1, \ldots, T\)</span> along the line.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">θ_t</span><span class="p">,</span> <span class="n">θ_t1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">θ_t</span><span class="p">,</span> <span class="n">results2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X2_θ</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\hat θ_t$&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">θ_t</span><span class="p">,</span> <span class="n">θ_t1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\theta_{t+1}$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">θ_t</span><span class="p">,</span> <span class="n">results2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X2_θ</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\hat θ_{t+1}$&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta_t$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta_{t+1}$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -1780,22 +1788,229 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/10c71b7c06ce6f089099f2ce1f36f58c9e408c168733a6783454986d14ec411a.png" src="_images/10c71b7c06ce6f089099f2ce1f36f58c9e408c168733a6783454986d14ec411a.png" />
+<img alt="_images/b21fe4916b9ec3dc5a1db347dd1140525f867b4d3317633f006b8eac4be5c05e.png" src="_images/b21fe4916b9ec3dc5a1db347dd1140525f867b4d3317633f006b8eac4be5c05e.png" />
 </div>
 </div>
 <p>Points for succeeding times appear further and further to the lower left and eventually converge to
 <span class="math notranslate nohighlight">\(\bar \mu, \bar \mu\)</span>.</p>
+<section id="continuation-values">
+<h3><span class="section-number">41.8.1. </span>Continuation Values<a class="headerlink" href="#continuation-values" title="Permalink to this heading">#</a></h3>
+<p>Next, we’ll compute a sequence <span class="math notranslate nohighlight">\(\{v_t\}_{t=0}^T\)</span> of  what we’ll call “continuation values” along a Ramsey plan.</p>
+<p>To do so, we’ll start at date <span class="math notranslate nohighlight">\(T\)</span> and compute</p>
+<div class="math notranslate nohighlight">
+\[
+v_T = \frac{1}{1-\beta} s(\bar \mu, \bar \mu).
+\]</div>
+<p>Then starting from <span class="math notranslate nohighlight">\(t=T-1\)</span>, we’ll iterate backwards on the recursion</p>
+<div class="math notranslate nohighlight">
+\[
+v_t = s(\theta_t, \mu_t) + \beta v_{t+1}
+\]</div>
+<p>for <span class="math notranslate nohighlight">\(t= T-1, T-2, \ldots, 0.\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define function for s and U in section 41.3</span>
+<span class="k">def</span> <span class="nf">s</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="n">U</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">u0</span> <span class="o">+</span> <span class="n">u1</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">u2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">U</span><span class="p">(</span><span class="o">-</span><span class="n">α</span><span class="o">*</span><span class="n">θ</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">c</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">μ</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="c1"># Calculate v_t sequence backward</span>
+<span class="k">def</span> <span class="nf">compute_vt</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">μs</span><span class="p">)</span>
+    <span class="n">θ</span> <span class="o">=</span> <span class="n">compute_θ</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">α</span><span class="p">)</span>
+    
+    <span class="n">v_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">μ_bar</span> <span class="o">=</span> <span class="n">μs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Reduce parameters</span>
+    <span class="n">s_p</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">θ</span><span class="p">,</span> <span class="n">μ</span><span class="p">:</span> <span class="n">s</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> 
+                       <span class="n">u0</span><span class="o">=</span><span class="n">u0</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="n">u2</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="n">α</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">)</span>
+    
+    <span class="c1"># Define v_T</span>
+    <span class="n">v_t</span><span class="p">[</span><span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">β</span><span class="p">))</span> <span class="o">*</span> <span class="n">s_p</span><span class="p">(</span><span class="n">μ_bar</span><span class="p">,</span> <span class="n">μ_bar</span><span class="p">)</span>
+    
+    <span class="c1"># Backward iteration</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="mi">1</span><span class="p">)):</span>
+        <span class="n">v_t</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">s_p</span><span class="p">(</span><span class="n">θ</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="n">μ</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">+</span> <span class="n">β</span> <span class="o">*</span> <span class="n">v_t</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+        
+    <span class="k">return</span> <span class="n">v_t</span>
+
+<span class="n">v_t</span> <span class="o">=</span> <span class="n">compute_vt</span><span class="p">(</span><span class="n">μs</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The initial continuation  value <span class="math notranslate nohighlight">\(v_0\)</span> should equals the optimized value of the Ramsey planner’s criterion <span class="math notranslate nohighlight">\(V\)</span> defined
+in equation <a class="reference internal" href="#equation-eq-ramseyv">(41.6)</a>.</p>
+<p>Indeed, we find that the deviation is very small:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;deviation = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">v_t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">V_R</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>deviation = 4.76837158203125e-07
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also verify approximate equality  by inspecting a graph of <span class="math notranslate nohighlight">\(v_t\)</span> against <span class="math notranslate nohighlight">\(t\)</span> for <span class="math notranslate nohighlight">\(t=0, \ldots, T\)</span> along with the value attained by a restricted Ramsey planner <span class="math notranslate nohighlight">\(V^{CR}\)</span> and the optimized value of the ordinary Ramsey planner <span class="math notranslate nohighlight">\(V^R\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the scatter plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Ts</span><span class="p">,</span> <span class="n">v_t</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$v_t$&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot horizontal lines</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">V_CR</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">V_R</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Add labels</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">Ts</span><span class="p">)</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">Ts</span><span class="p">)</span><span class="o">*</span><span class="mf">0.07</span><span class="p">,</span> <span class="n">V_CR</span><span class="p">,</span> <span class="s1">&#39;$V^</span><span class="si">{CR}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> 
+         <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">Ts</span><span class="p">)</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">Ts</span><span class="p">)</span><span class="o">*</span><span class="mf">0.07</span><span class="p">,</span> <span class="n">V_R</span><span class="p">,</span> <span class="s1">&#39;$V^R$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C2&#39;</span><span class="p">,</span> 
+         <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$v_t$&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="id7">
+<img alt="_images/7ee8b82f426f312462ac4609dd9b0d1e9916c46f295dbd34f0facbeaf979d331.png" src="_images/7ee8b82f426f312462ac4609dd9b0d1e9916c46f295dbd34f0facbeaf979d331.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 41.1 </span><span class="caption-text">Continuation values</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Figure <a class="reference internal" href="#id7"><span class="std std-numref">Fig. 41.1</span></a> shows several striking patterns:</p>
+<ul class="simple">
+<li><p>The sequence of continuation values <span class="math notranslate nohighlight">\(\{v_t\}_{t=0}^T\)</span> is monotonically decreasing</p></li>
+<li><p>Evidently,  <span class="math notranslate nohighlight">\(v_0 &gt;  V^{CR} &gt; v_T\)</span> so that</p>
+<ul>
+<li><p>the value <span class="math notranslate nohighlight">\(v_0\)</span> of the ordinary Ramsey plan exceeds the value <span class="math notranslate nohighlight">\(V^{CR}\)</span> of the special Ramsey plan in which the planner is constrained to set <span class="math notranslate nohighlight">\(\mu_t = \mu^{CR}\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>the continuation value <span class="math notranslate nohighlight">\(v_T\)</span> of the ordinary Ramsey plan for <span class="math notranslate nohighlight">\(t \geq T\)</span> is constant and is less than the value <span class="math notranslate nohighlight">\(V^{CR}\)</span> of the special Ramsey plan in which the planner is constrained to set <span class="math notranslate nohighlight">\(\mu_t = \mu^{CR}\)</span> for all <span class="math notranslate nohighlight">\(t\)</span></p></li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The continuation value <span class="math notranslate nohighlight">\(v_T\)</span> is what some researchers call the “value of a Ramsey plan under a
+time-less perspective.” A more descriptive phrase is “the value of the worst continuation Ramsey plan.”</p>
+</div>
+<p>Next we ask Python to  regress <span class="math notranslate nohighlight">\(v_t\)</span> against a constant, <span class="math notranslate nohighlight">\(\theta_t\)</span>, and <span class="math notranslate nohighlight">\(\theta_t^2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+v_t = g_0 + g_1 \theta_t + g_2 \theta_t^2 . 
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Third regression: v_t on a constant, θ_t and θ^2_t</span>
+<span class="n">X3_θ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">T</span><span class="p">),</span> <span class="n">θs</span><span class="p">,</span> <span class="n">θs</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">model3</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">v_t</span><span class="p">,</span> <span class="n">X3_θ</span><span class="p">)</span>
+<span class="n">results3</span> <span class="o">=</span> <span class="n">model3</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+
+<span class="c1"># Print regression summary</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Regression of v_t on a constant, θ_t and θ^2_t:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">results3</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">slim</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Regression of v_t on a constant, θ_t and θ^2_t:
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       1.000
+Model:                            OLS   Adj. R-squared:                  1.000
+No. Observations:                  40   F-statistic:                 5.474e+08
+Covariance Type:            nonrobust   Prob (F-statistic):          6.09e-139
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+const          6.8052   5.91e-06   1.15e+06      0.000       6.805       6.805
+x1            -0.7581      0.000  -6028.976      0.000      -0.758      -0.758
+x2            -4.6996      0.001  -7131.888      0.000      -4.701      -4.698
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 3.5e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The regression has an <span class="math notranslate nohighlight">\(R^2\)</span> equal to <span class="math notranslate nohighlight">\(1\)</span> and so fits perfectly.</p>
+<p>However, notice the warning about the high condition number.</p>
+<p>As indicated in the printout, this is a consequence of
+<span class="math notranslate nohighlight">\(\theta_t\)</span> and <span class="math notranslate nohighlight">\(\theta_t^2\)</span> being  highly  correlated along the Ramsey plan.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">θs</span><span class="p">,</span> <span class="n">θs</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.99942156],
+       [-0.99942156,  1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s  plot <span class="math notranslate nohighlight">\(v_t\)</span> against <span class="math notranslate nohighlight">\(\theta_t\)</span> along with the nonlinear regression line.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">θ_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">θs</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">θs</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">X3_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">θ_grid</span><span class="p">)),</span> <span class="n">θ_grid</span><span class="p">,</span> <span class="n">θ_grid</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">θs</span><span class="p">,</span> <span class="n">v_t</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">θ_grid</span><span class="p">,</span> <span class="n">results3</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X3_grid</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">,</span> 
+         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\hat v_t$&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">V_CR</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">θ_grid</span><span class="p">)</span> <span class="o">-</span> <span class="nb">max</span><span class="p">(</span><span class="n">θ_grid</span><span class="p">)</span><span class="o">*</span><span class="mf">0.025</span><span class="p">,</span> <span class="n">V_CR</span><span class="p">,</span> <span class="s1">&#39;$V^</span><span class="si">{CR}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C1&#39;</span><span class="p">,</span> 
+         <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">clip_on</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta_</span><span class="si">{t}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$v_t$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/416ee286592c3f58bacde0a62d2ff3bfacf9574cb62328009f31c41f7c8a2301.png" src="_images/416ee286592c3f58bacde0a62d2ff3bfacf9574cb62328009f31c41f7c8a2301.png" />
+</div>
+</div>
+<p>The highest continuation value <span class="math notranslate nohighlight">\(v_0\)</span> at  <span class="math notranslate nohighlight">\(t=0\)</span> appears at the peak of the function quadratic function
+<span class="math notranslate nohighlight">\(g_0 + g_1 \theta_t + g_2 \theta_t^2\)</span>.</p>
+<p>Subsequent values of <span class="math notranslate nohighlight">\(v_t\)</span> for <span class="math notranslate nohighlight">\(t \geq 1\)</span> appear to the lower left of the pair <span class="math notranslate nohighlight">\((\theta_0, v_0)\)</span> and converge  monotonically from above to <span class="math notranslate nohighlight">\(v_T\)</span> at time <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>The value <span class="math notranslate nohighlight">\(V^{CR}\)</span> attained by the Ramsey plan that is  restricted to be  a constant <span class="math notranslate nohighlight">\(\mu_t = \mu^{CR}\)</span> sequence appears as a horizontal line.</p>
+<p>Evidently, continuation values <span class="math notranslate nohighlight">\(v_t &gt; V^{CR}\)</span> for <span class="math notranslate nohighlight">\(t=0, 1, 2\)</span> while <span class="math notranslate nohighlight">\(v_t &lt; V^{CR}\)</span> for <span class="math notranslate nohighlight">\(t \geq 3\)</span>.</p>
+</section>
+</section>
 <section id="what-has-machine-learning-taught-us">
-<h3><span class="section-number">41.8.1. </span>What has machine learning taught us?<a class="headerlink" href="#what-has-machine-learning-taught-us" title="Permalink to this heading">#</a></h3>
+<h2><span class="section-number">41.9. </span>What has Machine Learning Taught Us?<a class="headerlink" href="#what-has-machine-learning-taught-us" title="Permalink to this heading">#</a></h2>
 <p>Our regressions tells us that along the Ramsey outcome <span class="math notranslate nohighlight">\(\vec \mu^R, \vec \theta^R\)</span>, the linear function</p>
 <div class="math notranslate nohighlight">
 \[
 \mu_t = .0645 + 1.5995 \theta_t
 \]</div>
-<p>fits perfectly and that so does the regression line</p>
+<p>fits perfectly and that so do the regression lines</p>
 <div class="math notranslate nohighlight">
 \[
-\theta_{t+1} = - .0645 + .4005 \theta_t .
+\theta_{t+1} = - .0645 + .4005 \theta_t 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+v_t = 6.8052 - .7580 \theta_t - 4.6991 \theta_t^2. 
 \]</div>
 <p>Assembling these  regressions, we have discovered
 run for our single Ramsey outcome path <span class="math notranslate nohighlight">\(\vec \mu^R, \vec \theta^R\)</span>
@@ -1807,15 +2022,20 @@ that along a Ramsey plan, the following relationships prevail:</p>
 \theta_{t+1} &amp; = d_0 + d_1 \theta_t  \\
 \end{aligned}\end{split}\]</div>
 <p>where the initial value <span class="math notranslate nohighlight">\(\theta_0^R\)</span> was computed along with other components of <span class="math notranslate nohighlight">\(\vec \mu^R, \vec \theta^R\)</span> when we computed the Ramsey plan, and where <span class="math notranslate nohighlight">\(b_0, b_1, d_0, d_1\)</span> are  parameters whose values we estimated with our regressions.</p>
-<p>We  discovered this  representation by running some carefully chosen  regressions and staring at the results, noticing that the <span class="math notranslate nohighlight">\(R^2\)</span> of unity tell us that the fits are perfect.</p>
+<p>In addition, we learned that  continuation values are described by the quadratic function</p>
+<div class="math notranslate nohighlight">
+\[
+v_t = g_0 + g_1 \theta_t + g_2 \theta_t^2
+\]</div>
+<p>We  discovered these relationships  by running some carefully chosen  regressions and staring at the results, noticing that the <span class="math notranslate nohighlight">\(R^2\)</span>’s of unity tell us that the fits are perfect.</p>
 <p>We have learned something about the structure of the Ramsey problem.</p>
-<p>But it is challenging to say more just by using the methods and ideas that we have deployed in this lecture.</p>
+<p>However,  it is challenging to say more just by using the methods and ideas that we have deployed in this lecture.</p>
 <p>There are many other linear regressions among components of <span class="math notranslate nohighlight">\(\vec \mu^R, \theta^R\)</span> that would also have given us perfect fits.</p>
 <p>For example, we could have regressed <span class="math notranslate nohighlight">\(\theta_t\)</span> on <span class="math notranslate nohighlight">\(\mu_t\)</span> and obtained the same <span class="math notranslate nohighlight">\(R^2\)</span> value.</p>
 <p>Actually, wouldn’t that  direction of fit have made  more sense?</p>
 <p>After all, the Ramsey planner  chooses <span class="math notranslate nohighlight">\(\vec \mu\)</span>,  while <span class="math notranslate nohighlight">\(\vec \theta\)</span> is an  outcome that reflects the represenative agent’s response to the Ramsey planner’s  choice of <span class="math notranslate nohighlight">\(\vec \mu\)</span>.</p>
 <p>Isn’t it more natural then to expect that we’d learn more about the structure of the Ramsey  problem from a regression of components of <span class="math notranslate nohighlight">\(\vec \theta\)</span> on components of <span class="math notranslate nohighlight">\(\vec \mu\)</span>?</p>
-<p>To answer such questions, we’ll have to  deploy more economic theory.</p>
+<p>To answer these  questions, we’ll have to  deploy more economic theory.</p>
 <p>We do that in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
 <p>There, we’ll discover that system <a class="reference internal" href="#equation-eq-old9101">(41.11)</a> is actually a very good way to represent
 a Ramsey plan because it reveals many things about its structure.</p>
@@ -1864,14 +2084,13 @@ and the parameters <span class="math notranslate nohighlight">\(d_0, d_1\)</span
 </div>
 <p>Evidently, these agree with the relationships that we discovered by running regressions on the Ramsey outcomes <span class="math notranslate nohighlight">\(\vec \mu^R, \vec \theta^R\)</span> that we constructed with either of our machine learning algorithms.</p>
 <p>We have set the stage for this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
-<p>We close this lecture by giving a hint about an insight of Chang <span id="id7">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> that
+<p>We close this lecture by giving a hint about an insight of Chang <span id="id8">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> that
 underlies much of quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
 <p>Chang noticed how equation <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> shows that an equivalence class of continuation money growth sequences <span class="math notranslate nohighlight">\(\{\mu_{t+j}\}_{j=0}^\infty\)</span> deliver the same <span class="math notranslate nohighlight">\(\theta_t\)</span>.</p>
 <p>Consequently, equations <a class="reference internal" href="#equation-eq-grad-old1">(41.1)</a> and <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> indicate that <span class="math notranslate nohighlight">\(\theta_t\)</span> intermediates how the government’s choices of <span class="math notranslate nohighlight">\(\mu_{t+j}, \ j=0, 1, \ldots\)</span> impinge on time <span class="math notranslate nohighlight">\(t\)</span>
 real balances <span class="math notranslate nohighlight">\(m_t - p_t = -\alpha \theta_t\)</span>.</p>
-<p>In lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>, we’ll see how  Chang <span id="id8">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> exploits this
+<p>In lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>, we’ll see how  Chang <span id="id9">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> exploits this
 insight.</p>
-</section>
 </section>
 </section>
 
