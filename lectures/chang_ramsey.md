@@ -125,7 +125,7 @@ time $0$ Ramsey planner  takes these
 effects into account in designing a plan of government actions for
 $t \geq 0$.
 
-## Setting
+## Decisions
 
 ### The Household’s Problem
 
@@ -133,7 +133,7 @@ A representative household faces a nonnegative value of money sequence
 $\vec q$ and sequences $\vec y, \vec x$ of income and total
 tax collections, respectively.
 
-The household chooses nonnegative
+Facing vector $\vec q$ as a price taker, the representative  household chooses nonnegative
 sequences $\vec c, \vec M$ of consumption and nominal balances,
 respectively, to maximize
 
@@ -174,8 +174,8 @@ The household carries real balances out of a period equal to $m_t = q_t M_t$.
 Inequality {eq}`eqn_chang_ramsey2` is the household’s time $t$ budget constraint.
 
 It tells how real balances $q_t M_t$ carried out of period $t$ depend
-on income, consumption, taxes, and real balances $q_t M_{t-1}$
-carried into the period.
+on real balances $q_t M_{t-1}$
+carried into period $t$, income, consumption, taxes.
 
 Equation {eq}`eqn_chang_ramsey3` imposes an exogenous upper bound
 $\bar m$ on the household's choice of real balances, where
@@ -189,12 +189,34 @@ $h_t \equiv {M_{t-1}\over M_t} \in \Pi \equiv
 [ \underline \pi, \overline \pi]$, where
 $0 < \underline \pi < 1 < { 1 \over \beta } \leq \overline \pi$.
 
-The government faces a sequence of budget constraints with time
-$t$ component
+The government purchases no goods.
+
+It taxes only to acquire paper currency that it will withdraw from circulation (e.g., by burning it).
+
+Let $p_t $ be the price level at time $t$, measured as time $t$ dollars per unit of the consumption good.
+
+Evidently, the value of paper currency meassured in units of the consumption good at time $t$ is 
+
+$$
+q_t = \frac{1}{p_t} .
+$$
+
+The government faces a sequence of budget constraints with time $t$ component 
+
+$$
+x_t + \frac{M_{t} - M_{t-1}}{p_t} = 0,
+$$
+
+where $x_t$ is the real value of revenue that the government raises from taxes and $\frac{M_{t} - M_{t-1}}{p_t}$ is
+the real value of revenue that the government raises by printing new paper currency. 
+
+Evidently, this budget constraint  can be rewritten as
+
+
 
 $$
 -x_t = q_t (M_t - M_{t-1})
-$$
+$$ 
 
 which by using the definitions of $m_t$ and $h_t$ can also
 be expressed as
@@ -205,7 +227,8 @@ be expressed as
 -x_t = m_t (1-h_t)
 ```
 
-The  restrictions $m_t \in [0, \bar m]$ and $h_t \in \Pi$ evidently
+
+The  restrictions $m_t \in [0, \bar m]$ and $h_t \in \Pi = [\underline \pi, \overline \pi]$ evidently
 imply that $x_t \in X \equiv [(\underline  \pi -1)\bar m,
 (\overline \pi -1) \bar m]$.
 
@@ -221,10 +244,27 @@ assumption about outcomes for per capita output:
 y_t = f(x_t),
 ```
 
-where $f: \mathbb{R}\rightarrow \mathbb{R}$ satisfies $f(x)  > 0$,
-is twice continuously differentiable, $f''(x) < 0$, and
-$f(x) = f(-x)$ for all $x \in
-\mathbb{R}$, so that subsidies and taxes are equally distorting.
+where $f: \mathbb{R}\rightarrow \mathbb{R}$ satisfies $f(x)  > 0$, $f(x)$
+is twice continuously differentiable, $f''(x) < 0$,  $f'(0) = 0$, and
+$f(x) = f(-x)$ for all $x \in \mathbb{R}$, so that subsidies and taxes are equally distorting.
+
+**Example parameterizations**
+
+In some of our Python code deployed later in this lecture, we'll assume the following functional forms:
+
+$$
+u(c) = \log(c)
+$$
+
+$$
+v(m) = \frac{1}{500}(m \bar m - 0.5m^2)^{0.5}
+$$
+
+$$
+f(x) = 180 - (0.4x)^2
+$$
+
+**The tax distortion function** 
 
 Calvo's and Chang's  purpose is not to model the causes of tax distortions in
 any detail but simply to summarize
@@ -855,7 +895,7 @@ We have created a Python class that solves the model assuming the
 following functional forms:
 
 $$
-u(c) = log(c)
+u(c) = \log(c)
 $$
 
 $$
