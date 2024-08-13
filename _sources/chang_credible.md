@@ -226,11 +226,9 @@ assumption about outcomes for per capita output:
 
 y_t = f(x_t)
 ```
-
-where $f: \mathbb{R}\rightarrow \mathbb{R}$ satisfies $f(x)  > 0$,
-is twice continuously differentiable, $f''(x) < 0$, and
-$f(x) = f(-x)$ for all $x \in
-\mathbb{R}$, so that subsidies and taxes are equally distorting.
+where $f: \mathbb{R}\rightarrow \mathbb{R}$ satisfies $f(x)  > 0$, $f(x)$
+is twice continuously differentiable, $f''(x) < 0$,  $f'(0) = 0$, and
+$f(x) = f(-x)$ for all $x \in \mathbb{R}$, so that subsidies and taxes are equally distorting.
 
 The purpose is not to model the causes of tax distortions in any detail but simply to summarize
 the *outcome* of those distortions via the function $f(x)$.
@@ -777,7 +775,7 @@ We have created a Python class that solves the model assuming the
 following functional forms:
 
 $$
-u(c) = log(c)
+u(c) = \log(c)
 $$
 
 $$

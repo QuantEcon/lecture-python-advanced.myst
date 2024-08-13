@@ -261,11 +261,11 @@ const thebe_selector_output = ".output, .cell_output"
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting polytope
-  Downloading polytope-0.2.5.tar.gz (54 kB)
-?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/54.9 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">54.9/54.9 kB</span> <span class=" -Color -Color-Red">4.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading polytope-0.2.5.tar.gz (54 kB)
+?25l     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/54.9 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">54.9/54.9 kB</span> <span class=" -Color -Color-Red">6.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -286,7 +286,7 @@ Building wheels for collected packages: polytope
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
-?25h  Created wheel for polytope: filename=polytope-0.2.5-py3-none-any.whl size=47765 sha256=82de03bf4efacc75485ec6b445e64cd2b3e4554a35e1b9aa61b3aa3099d41f52
+?25h  Created wheel for polytope: filename=polytope-0.2.5-py3-none-any.whl size=47765 sha256=5fe49608a089f69cebd6252f0143c8ddec2e101ccf9df6ad731408a515f5ee1c
   Stored in directory: /home/runner/.cache/pip/wheels/0a/dc/7c/19db8e9a73e1a551591347b185108f137877f9638ee8f8e3cc
 Successfully built polytope
 </pre></div>
@@ -455,10 +455,9 @@ require that <span class="math notranslate nohighlight">\((m, h, x) \in E\)</spa
 assumption about outcomes for per capita output:</p>
 <div class="math notranslate nohighlight" id="equation-eqn-chang3a">
 <span class="eqno">(48.5)<a class="headerlink" href="#equation-eqn-chang3a" title="Permalink to this equation">#</a></span>\[y_t = f(x_t)\]</div>
-<p>where <span class="math notranslate nohighlight">\(f: \mathbb{R}\rightarrow \mathbb{R}\)</span> satisfies <span class="math notranslate nohighlight">\(f(x)  &gt; 0\)</span>,
-is twice continuously differentiable, <span class="math notranslate nohighlight">\(f''(x) &lt; 0\)</span>, and
-<span class="math notranslate nohighlight">\(f(x) = f(-x)\)</span> for all <span class="math notranslate nohighlight">\(x \in
-\mathbb{R}\)</span>, so that subsidies and taxes are equally distorting.</p>
+<p>where <span class="math notranslate nohighlight">\(f: \mathbb{R}\rightarrow \mathbb{R}\)</span> satisfies <span class="math notranslate nohighlight">\(f(x)  &gt; 0\)</span>, <span class="math notranslate nohighlight">\(f(x)\)</span>
+is twice continuously differentiable, <span class="math notranslate nohighlight">\(f''(x) &lt; 0\)</span>,  <span class="math notranslate nohighlight">\(f'(0) = 0\)</span>, and
+<span class="math notranslate nohighlight">\(f(x) = f(-x)\)</span> for all <span class="math notranslate nohighlight">\(x \in \mathbb{R}\)</span>, so that subsidies and taxes are equally distorting.</p>
 <p>The purpose is not to model the causes of tax distortions in any detail but simply to summarize
 the <em>outcome</em> of those distortions via the function <span class="math notranslate nohighlight">\(f(x)\)</span>.</p>
 <p>A key part of the specification is that tax distortions are increasing in the
@@ -904,7 +903,7 @@ small enough.</p>
 following functional forms:</p>
 <div class="math notranslate nohighlight">
 \[
-u(c) = log(c)
+u(c) = \log(c)
 \]</div>
 <div class="math notranslate nohighlight">
 \[
@@ -1500,7 +1499,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 16 iterations and 42.8             seconds
+Convergence achieved after 16 iterations and 41.76             seconds
 </pre></div>
 </div>
 </div>
@@ -1690,7 +1689,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 40 iterations and 123.3             seconds
+Convergence achieved after 40 iterations and 120.27             seconds
 </pre></div>
 </div>
 </div>
