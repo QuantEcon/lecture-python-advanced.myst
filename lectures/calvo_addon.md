@@ -58,6 +58,21 @@ This function will be an input into solving for a Ramsey plan using a version of
 
 I'll move on to describe that function implicitly as a system of constraints. 
 
+```{code-cell} ipython3
+!pip install jaxopt
+```
+
+```{code-cell} ipython3
+from quantecon import LQ
+import numpy as np
+import jax.numpy as jnp
+from jax import jit, grad, lax
+import optax
+from jaxopt import Broyden
+import statsmodels.api as sm
+import matplotlib.pyplot as plt
+from collections import namedtuple
+```
 
 ## More details
 
@@ -71,6 +86,12 @@ where $T$ is a positive integer greater than $1$.
 
 We'll set $T$ in our  code. 
 
+```{code-cell} ipython3
+def create_ChangML(T=40, β=0.95, c=2, α=0.5):
+    ChangML = namedtuple('ChangML', ['T', 'β', 'c', 'α'])
+
+    return ChangML(T=T, β=β, c=c, α=α)
+```
 
 Our code will be cast in terms of three vectors
 
@@ -121,8 +142,68 @@ A possible  algorithm is
  * given $\bar x$, solve (3) for $\bar \mu$
  * given $\vec x, m_0$, solve the system of   equations (2) and  (5) for $\vec \mu, \vec \theta$ 
 
+```{code-cell} ipython3
+def newton(f, x_0, tol=1e-5, max_iter=100):
+    f_prime = grad(f)
+    
+    def q(x):
+        return x - f(x) / f_prime(x)
+    
+    def body_fn(carry, _):
+        x, error = carry
+        y = q(x)
+        error = jnp.abs(x - y)
+        return (y, error), None
 
+    init_carry = (x_0, tol + 1)
+    
+    (x, error), _ = lax.scan(body_fn, init_carry, None, length=max_iter)
+    # print(f"Newton Results: x = {x}, error = {error}")
+    return x
 
+def compute_bar_μ(bar_x, α, init):
+    def solve_μ(μ):
+        return jnp.exp(μ * (1 - α)) - jnp.exp(-α * μ) + bar_x
+    
+    return newton(solve_μ, init)
+
+def solve_mp(x, m0, model):
+    α, T = model.α, model.T
+    init = 1.0
+    m = jnp.zeros(T + 1)
+    p = jnp.zeros(T + 1)
+    m = m.at[0].set(m0)
+
+    λ = α / (1 + α)
+    
+    def solve_μ(μ):
+        return jnp.exp(μ * (1 - α)) - jnp.exp(-α * μ) + x[-1]
+    
+    bar_μ = newton(solve_μ, init)
+    
+    for t in range(T):
+        # Equation (2)
+        m_next = jnp.log(jnp.exp(m[t]) - x[t] * jnp.exp(p[t]))
+        m = m.at[t + 1].set(m_next)
+
+        # Equation (5) 
+        θ_t = (1 - λ) * jnp.sum(jnp.array([(m[t + j + 1] - m[t + j]) * λ ** j for j in range(T - t)])) + λ ** (T - t) * bar_μ
+        p = p.at[t].set(m[t] + α * θ_t)
+        
+    p = p.at[-1].set(m[T] + α * bar_μ)
+    return m, p
+
+model = create_ChangML()
+
+x = np.full(model.T, 1)  # Tax revenue series
+m0 = np.log(100)  # Initial log money supply
+
+# Compute m_t and p_t
+ms, ps = solve_mp(x, m0, model)
+
+print("m_t:\n", ms)
+print("p_t:\n", ps)
+```
 
 ## Calvo's Objective Function
 
@@ -161,121 +242,34 @@ $$
 
 subject to  constraints (1), (2), and (5).  
 
+(Humphrey's Note:
+
+So the planner's problem is 
+
+$$
+\max_{\vec x} \sum_{t=0}^\infty \beta^t [ u(c_t) + j(m_t-p_t)]
+$$
+
+with constraints
+
+$$
+m_{t} - p_t = -\alpha (p_{t+1} - p_t)
+$$ 
+
+$$ 
+\exp(m_{t+1}) - \exp(m_t) = -x_t \exp(p_t)
+$$ 
+
+$$
+m_t - p_t = -\alpha \Bigl[ (1-\lambda) \sum_{j=0}^{T-1-j} ( m_{t+j+1} - m_{t+j} ) + \lambda ^{T-t} \bar \mu \Bigr]$$)
+
+
+
+
 One way to do this would be to maximize (6) with penalties
 on deviations of $\vec x, \vec \mu, \vec \theta$ from the constraints (1), (2), (5). 
 
 This is the kind of things done in the ML literature that Zejin is relyng on.
-
-
-
-## Proposal to Humphrey
-
-I'd like to take big parts of the code that you used for the ``gradient`` method only -- the first method you created -- and adapt it to compute a Ramsey plan for this non LQ version of the Calvo's model.
-
-  * it is quite close to the version in the main part of Calvo's 1978 classic paper
-  
-And it would be great if you could also compute the Ramsey plan restricted to a constant $\vec \mu$ sequence so that we could get our hands on that plan to plot and compare with the ordinary Ramsey plan. 
-
-
-After you've computed the Ramsey plan, I'd like to ask you to plot the pretty graphs of $\vec \theta, \vec \mu$ and also $\vec v$ where (recycling notation) here $\vec v$ is a sequence of continuation values.
-
-Qualitatively, these graphs should look a lot like the ones plotted in the ``calvo_machine_learning`` lecture.  
-
-Later, after those plots are done, I'd like to describe some **nonlinear** regressions to run that we'll use to try to discover a recursive represenation of a Ramsey plan.  
-
-  * this will be fun -- we might want to use some neural nets to approximate these functions -- then we'll **really** be doing machine learning. 
-  
-
-## Excuses and Apologies
-For  now, let's just proceed as best we can with notation that makes it easiest to take
-the ``calvo_machine_learning`` code and apply it with minimal changes. 
-
-Thanks!
-
-
-
-
-
-
-
-```{code-cell} ipython3
-from quantecon import LQ
-import numpy as np
-import jax.numpy as jnp
-from jax import jit, grad
-import optax
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
-```
-
-```{code-cell} ipython3
-from collections import namedtuple
-
-def create_ChangML(T=40, β=0.3, c=2, α=1, mbar=30.0):
-    ChangML = namedtuple('ChangML', ['T', 'β', 'c', 'α', 
-                                     'mbar'])
-
-    return ChangML(T=T, β=β, c=c, α=α, mbar=mbar)
-
-
-model = create_ChangML()
-```
-
-```{code-cell} ipython3
-@jit
-def compute_θ(μ, α):
-    λ = α / (1 + α)
-    T = len(μ) - 1
-    μbar = μ[-1]
-    
-    # Create an array of powers for λ
-    λ_powers = λ ** jnp.arange(T + 1)
-    
-    # Compute the weighted sums for all t
-    weighted_sums = jnp.array(
-        [jnp.sum(λ_powers[:T-t] * μ[t:T]) for t in range(T)])
-    
-    # Compute θ values except for the last element
-    θ = (1 - λ) * weighted_sums + λ**(T - jnp.arange(T)) * μbar
-    
-    # Set the last element
-    θ = jnp.append(θ, μbar)
-    
-    return θ
-
-def compute_V(μ, model):
-    β, c, α, mbar,= model.β, model.c, model.α, model.mbar
-    θ = compute_θ(μ, α)
-    
-    T = len(μ) - 1
-    t = jnp.arange(T)
-    
-    def u(μ, m, mbar): 
-        # print('μ', μ)
-        f_μ = 180 - (0.4 * μ)**2
-        # print('f_μ', f_μ)
-        # print('m, mbar:', m, mbar, (mbar * m - 0.5 * m**2))
-        v_m = 1 / 500 * jnp.sqrt(jnp.maximum(1e-16, mbar * m - 0.5 * m**2))
-        # print('v_μ', v_m)
-        return jnp.log(f_μ) + v_m
-    
-    # Compute sum except for the last element
-    
-    # TO TOM: -α*θ is causing trouble in utility calculation (u) above
-    # As it makes mbar * m - 0.5 * m**2 < 0 and sqrt of negative
-    # values returns NA
-    V_sum = jnp.sum(β**t * u(μ[:T], -α*θ[:T], mbar))
-    # print('V_sum', V_sum)
-    
-    # Compute the final term
-    V_final = (β**T / (1 - β)) * u(μ[-1], -α*θ[-1], mbar)
-    # print('V_final', V_final)
-    V = V_sum + V_final
-    
-    return V
-
-# compute_V(jnp.array([1.0, 1.0, 1.0]), model)
-```
 
 ```{code-cell} ipython3
 def adam_optimizer(grad_func, init_params, 
@@ -311,45 +305,51 @@ def adam_optimizer(grad_func, init_params,
 ```
 
 ```{code-cell} ipython3
-T = 40 
+f = lambda x: 180 - (0.4 * x)**2
 
-# Initial guess for μ
-μ_init = jnp.ones(T)
+def u(x):
+    return jnp.log(f(x))
 
-# Maximization instead of minimization
-grad_V = jit(grad(
-    lambda μ: -compute_V(μ, model)))
+def j(x, j0=2.0, j1=0.8, j2=0.5):
+    return j0 + j1 * x - (j2 / 2) * x**2
+
+def objective(x, m0, model):
+    β, T = model.β, model.T
+    m, p = solve_mp(x, m0, model)
+    return -jnp.sum(β**jnp.arange(T+1) * (u(f(x)) + j(m - p)))
+
+grad_objective = grad(lambda x: objective(x, m0=jnp.log(100), model=model))
+x_init = jnp.ones(model.T+1)  # Initial guess for x
+optimized_x = adam_optimizer(grad_objective, x_init)
+
+# Compute the optimized m_t and p_t
+optimized_m, optimized_p = solve_mp(optimized_x, m0=jnp.log(100), model=model)
+
+print("Optimized x_t:", optimized_x)
+print("Optimized m_t:", optimized_m)
+print("Optimized p_t:", optimized_p)
 ```
 
-```{code-cell} ipython3
-%%time
+## Proposal to Humphrey
 
-# Optimize μ
-optimized_μ = adam_optimizer(grad_V, μ_init)
+I'd like to take big parts of the code that you used for the ``gradient`` method only -- the first method you created -- and adapt it to compute a Ramsey plan for this non LQ version of the Calvo's model.
 
-print(f"optimized μ = \n{optimized_μ}")
-```
+  * it is quite close to the version in the main part of Calvo's 1978 classic paper
+  
+And it would be great if you could also compute the Ramsey plan restricted to a constant $\vec \mu$ sequence so that we could get our hands on that plan to plot and compare with the ordinary Ramsey plan. 
 
-```{code-cell} ipython3
-compute_V(optimized_μ, model)
-```
 
-```{code-cell} ipython3
-model = create_ChangML(β=0.8)
+After you've computed the Ramsey plan, I'd like to ask you to plot the pretty graphs of $\vec \theta, \vec \mu$ and also $\vec v$ where (recycling notation) here $\vec v$ is a sequence of continuation values.
 
-grad_V = jit(grad(
-    lambda μ: -compute_V(μ, model)))
-```
+Qualitatively, these graphs should look a lot like the ones plotted in the ``calvo_machine_learning`` lecture.  
 
-```{code-cell} ipython3
-%%time
+Later, after those plots are done, I'd like to describe some **nonlinear** regressions to run that we'll use to try to discover a recursive represenation of a Ramsey plan.  
 
-# Optimize μ
-optimized_μ = adam_optimizer(grad_V, μ_init)
+  * this will be fun -- we might want to use some neural nets to approximate these functions -- then we'll **really** be doing machine learning. 
+  
 
-print(f"optimized μ = \n{optimized_μ}")
-```
+## Excuses and Apologies
+For  now, let's just proceed as best we can with notation that makes it easiest to take
+the ``calvo_machine_learning`` code and apply it with minimal changes. 
 
-```{code-cell} ipython3
-compute_V(optimized_μ, model)
-```
+Thanks!
