@@ -13,75 +13,159 @@ kernelspec:
 
 # Another Look at Machine Learning a Ramsey Plan
 
-I'd like  you  to use your gradient code to compute a Ramsey plan for a versionof Calvo's original model.
 
-That model was not LQ.
+I'd like  you  to use your gradient code to compute a Ramsey plan for a version of Calvo's original model.
 
-But your code can be tweaked to compute the Ramsey plan I suspect.
+Calvo's 78 Econometrica  model was not LQ.
+
+But I suspect  your code can be adapted to compute the Ramsey plan in Calvo's model.
 
 I sketch the main idea here.
 
-## Calvo's setup
+We will use a variation on the  non-linear-quadratic model  presented in  intro series quantecon lecture **Inflation Rate Laffer Curves** 
 
-The Ramsey planner's one-period social utility function
-is 
+   <https://intro.quantecon.org/money_inflation_nonlinear.html>
+
+(Some of the timing here is different than in that lecture)
+
+Let  
+
+* $m_t$ be the log of the money supply at the beginning of time $t$
+* $p_t$ be the log of the price level at time $t$
+  
+The demand function for money is 
 
 $$
-u(c) + v(m) \equiv u(f(x)) + v(m)
-$$
+m_{t} - p_t = -\alpha (p_{t+1} - p_t) \tag{1}
+$$ 
 
-where  in our notation Calvo or Chang's objects  become
+where $\alpha \geq 0$.  
+
+The law of motion for the money supply is
 
 $$ 
+\exp(m_{t+1}) - \exp(m_t) = -x_t \exp(p_t) \tag{2}
+$$ 
+
+where 
+
+* $x_t$ is tax revenues used to withdraw money 
+
+Given a sequence $\{x_t\}_{t=0}^\infty$ and an initial log money supply $m_0$, we want a function that solves
+(1) and (2) for $\{m_{t+1}, p_t\}_{t=0}^\infty$.
+
+This function will be an input into solving for a Ramsey plan using a version of the gradient algorithm. 
+
+I'll move on to describe that function implicitly as a system of constraints. 
+
+
+## More details
+
+We'll impose a truncated $\vec x$ series in which
+
+$$
+x_t = \bar x \quad \forall t \geq T
+$$
+
+where $T$ is a positive integer greater than $1$.
+
+We'll set $T$ in our  code. 
+
+
+Our code will be cast in terms of three vectors
+
+$$
+\begin{align*} 
+\vec x & = \{x_t\}_{t=0}^T \cr
+\vec \mu & =  \{\mu_t\}_{t=0}^T \cr
+\vec \theta & =  \{\theta_t\}_{t=0}^T 
+\end{align*}
+$$
+
+We'll assume that 
+
+$$
 \begin{align*}
-x & = \mu \cr 
-m & = -\alpha \theta \cr 
-u(c) & = u(f(x)) = u(f(\mu)) \cr 
-v(m) & = v (-\alpha \theta)
+\mu_t & = \bar \mu  \quad \forall t \geq T \cr 
+\theta_t & =  \bar \mu \quad \forall t \geq T
 \end{align*}
 $$
 
 
-In the quantecon lecture about the Chang-Calvo model, we deployed the following functional forms:
+It follows that 
 
-$$
-u(c) = \log(c)
-$$
-
-$$
-v(m) = \frac{1}{500}(m \bar m - 0.5m^2)^{0.5}
+$$ 
+m_t = p_t - \alpha \bar \mu \quad \forall t \geq T
 $$
 
-$$
-f(x) = 180 - (0.4x)^2
-$$
-
-where $\bar m$ is a parameter set somewhere in the quantecon code.
-
-So with this parameterization of Calvo and Chang's functions, components of  our one-period criterion  become
+After a few lines of algebra, we can deduce from equation (2) that
 
 $$
-u(c_t) = \log (180 - (0.4 \mu_t)^2) 
+ \exp(\bar \mu(1-\alpha)) - \exp(-\alpha \bar \mu) = - \bar x  \tag {3}
 $$
 
-and
+From a formula that appears in the ``calvo_machine_learning`` lecture, we know that
 
 $$
-v(m_t - p_t) = \frac{1}{500}((-\alpha \theta_t)  \bar m - 0.5(-\alpha \theta_t)^2)^{0.5}
-$$
+\theta_t = (1-\lambda) \sum_{j=0}^{T-1-j} \mu_{t+j} + \lambda ^{T-t} \bar \mu ,\quad t = 0, 1, \ldots, T-1 \tag{4}
+$$ 
 
-As in our ``calvo_machine_learning`` lecture, the Ramsey planner maximizes the criterion
-
-$$
-\sum_{t=0}^\infty \beta^t [ u(c_t) + v(m_t)] \tag{1}
-$$
-
-subject to the constraint 
-
+It follows from (1) and (4) that 
 
 $$
-\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}, \quad t \geq 0 \tag{2}
+m_t - p_t = -\alpha \Bigl[ (1-\lambda) \sum_{j=0}^{T-1-j} ( m_{t+j+1} - m_{t+j} ) + \lambda ^{T-t} \bar \mu \Bigr]
+\tag{5} $$
+
+A possible  algorithm is 
+
+ * given $\bar x$, solve (3) for $\bar \mu$
+ * given $\vec x, m_0$, solve the system of   equations (2) and  (5) for $\vec \mu, \vec \theta$ 
+
+
+
+
+## Calvo's Objective Function
+
+The Ramsey planner's one-period social utility function
+in our notation is 
+
 $$
+u(c) + j(m-p) \equiv u(f(x)) + j(m - p)
+$$
+
+where  
+
+$$ 
+\begin{align*}
+m - p & = -\alpha \theta \cr 
+u(c) & = u(f(x)) \cr 
+j(m-p) & = j_0 + j_1 (m-p) - \frac{j_2}{2} (m-p)^2
+\end{align*}
+$$
+
+
+where $f: \mathbb{R} \rightarrow \mathbb{R}$ satisfies
+$f(x) >0$, $f(x)$ is twice continuously differentiable, f(0) = 0, f''(x) < 0 , f(x) = f(-x) for all $x$ in  $\mathbb{R}$.
+
+We can assume 
+
+ * some smooth single peaked $f$ function, e.g., a quadratic one 
+ * the $j$ function can be just like our $u$ quadratic function in our machine learning lecture, or else some other monotone smooth function
+ * 
+
+As in our ``calvo_machine_learning`` lecture, given $m_0$, the Ramsey planner maximizes chooses $\vec x$ to maximize the criterion
+
+$$
+\sum_{t=0}^\infty \beta^t [ u(c_t) + j(m_t-p_t)] \tag{6}
+$$
+
+subject to  constraints (1), (2), and (5).  
+
+One way to do this would be to maximize (6) with penalties
+on deviations of $\vec x, \vec \mu, \vec \theta$ from the constraints (1), (2), (5). 
+
+This is the kind of things done in the ML literature that Zejin is relyng on.
+
 
 
 ## Proposal to Humphrey
@@ -90,8 +174,6 @@ I'd like to take big parts of the code that you used for the ``gradient`` method
 
   * it is quite close to the version in the main part of Calvo's 1978 classic paper
   
-I'd like you to use exactly the same assumptions about the $\{\mu_t\}_{t=0}^\infty$ process that is in the code, which means that you'll only have to compute a truncated sequence $\{\mu_t\}_{t=0}^T$ parameterized by   $T$ and $\bar \mu$ as in the code.
-
 And it would be great if you could also compute the Ramsey plan restricted to a constant $\vec \mu$ sequence so that we could get our hands on that plan to plot and compare with the ordinary Ramsey plan. 
 
 
@@ -105,15 +187,16 @@ Later, after those plots are done, I'd like to describe some **nonlinear** regre
   
 
 ## Excuses and Apologies
-
-I have recycled some notation -- e.g., $v$ and $v_t$.  And Calvo uses $m$ for what we call $m_t - p_t$ and so on. 
-
-Later we can do some notation policing and cleaning up.
-
-But right now, let's just proceed as best we can with notation that makes it easiest to take
+For  now, let's just proceed as best we can with notation that makes it easiest to take
 the ``calvo_machine_learning`` code and apply it with minimal changes. 
 
 Thanks!
+
+
+
+
+
+
 
 ```{code-cell} ipython3
 from quantecon import LQ
