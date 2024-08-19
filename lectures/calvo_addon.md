@@ -56,7 +56,7 @@ Given a sequence $\{x_t\}_{t=0}^\infty$ and an initial log money supply $m_0$, w
 
 This function will be an input into solving for a Ramsey plan using a version of the gradient algorithm. 
 
-I'll move on to describe that function implicitly as a system of constraints. 
+I'll move on to describe that function implicitly as a system of constraints.
 
 ```{code-cell} ipython3
 !pip install jaxopt
@@ -84,13 +84,13 @@ $$
 
 where $T$ is a positive integer greater than $1$.
 
-We'll set $T$ in our  code. 
+We'll set $T$ in our  code.
 
 ```{code-cell} ipython3
-def create_ChangML(T=40, β=0.95, c=2, α=0.5):
-    ChangML = namedtuple('ChangML', ['T', 'β', 'c', 'α'])
+def create_ChangML(T=40, β=0.95, c=2, α=0.5, Λ=np.ones(3)):
+    ChangML = namedtuple('ChangML', ['T', 'β', 'c', 'α', 'Λ'])
 
-    return ChangML(T=T, β=β, c=c, α=α)
+    return ChangML(T=T, β=β, c=c, α=α, Λ=Λ)
 ```
 
 Our code will be cast in terms of three vectors
@@ -137,60 +137,61 @@ $$
 m_t - p_t = -\alpha \Bigl[ (1-\lambda) \sum_{j=0}^{T-1-j} ( m_{t+j+1} - m_{t+j} ) + \lambda ^{T-t} \bar \mu \Bigr]
 \tag{5} $$
 
+(Humphrey's Note: Should this be
+
+$$
+m_t - p_t = -\alpha \Bigl[ (1-\lambda) \sum_{j=0}^{T-1-t} ( m_{t+j+1} - m_{t+j} ) + \lambda ^{T-t} \bar \mu \Bigr]
+\tag{5} $$
+)
+
 A possible  algorithm is 
 
  * given $\bar x$, solve (3) for $\bar \mu$
- * given $\vec x, m_0$, solve the system of   equations (2) and  (5) for $\vec \mu, \vec \theta$ 
+ * given $\vec x, m_0$, solve the system of   equations (2) and  (5) for $\vec \mu, \vec \theta$
 
 ```{code-cell} ipython3
 def newton(f, x_0, tol=1e-5, max_iter=100):
     f_prime = grad(f)
-    
+
     def q(x):
         return x - f(x) / f_prime(x)
-    
-    def body_fn(carry, _):
-        x, error = carry
-        y = q(x)
-        error = jnp.abs(x - y)
-        return (y, error), None
 
-    init_carry = (x_0, tol + 1)
-    
-    (x, error), _ = lax.scan(body_fn, init_carry, None, length=max_iter)
-    # print(f"Newton Results: x = {x}, error = {error}")
-    return x
+    def body_fn(i, carry):
+        x, error, converged = carry
+        x_next = q(x)
+        error = jnp.abs(x - x_next)
+        converged = jnp.where(error < tol, True, converged)
+        return x_next, error, converged
 
-def compute_bar_μ(bar_x, α, init):
-    def solve_μ(μ):
-        return jnp.exp(μ * (1 - α)) - jnp.exp(-α * μ) + bar_x
+    init_carry = (x_0, tol + 1, False)
+    final_carry = lax.fori_loop(0, max_iter, body_fn, init_carry)
     
-    return newton(solve_μ, init)
+    x, _, converged = final_carry
+    return x, converged
 
 def solve_mp(x, m0, model):
     α, T = model.α, model.T
-    init = 1.0
-    m = jnp.zeros(T + 1)
-    p = jnp.zeros(T + 1)
-    m = m.at[0].set(m0)
-
     λ = α / (1 + α)
+    m = jnp.zeros(T + 1).at[0].set(m0)
+    p = jnp.zeros(T + 1)
     
     def solve_μ(μ):
         return jnp.exp(μ * (1 - α)) - jnp.exp(-α * μ) + x[-1]
     
-    bar_μ = newton(solve_μ, init)
+    bar_μ, _ = newton(solve_μ, 1.0)
     
     for t in range(T):
-        # Equation (2)
         m_next = jnp.log(jnp.exp(m[t]) - x[t] * jnp.exp(p[t]))
         m = m.at[t + 1].set(m_next)
 
-        # Equation (5) 
-        θ_t = (1 - λ) * jnp.sum(jnp.array([(m[t + j + 1] - m[t + j]) * λ ** j for j in range(T - t)])) + λ ** (T - t) * bar_μ
+        θ_t = (1 - λ) * jnp.sum(
+            (m[t + 1:T + 1] - m[t:T]) * λ ** jnp.arange(T - t)
+        ) + λ ** (T - t) * bar_μ
+        
         p = p.at[t].set(m[t] + α * θ_t)
         
     p = p.at[-1].set(m[T] + α * bar_μ)
+    
     return m, p
 
 model = create_ChangML()
@@ -272,6 +273,11 @@ on deviations of $\vec x, \vec \mu, \vec \theta$ from the constraints (1), (2), 
 This is the kind of things done in the ML literature that Zejin is relyng on.
 
 ```{code-cell} ipython3
+T=40
+ms[:T] - ps[:T] + model.α*(ps[1:] - ps[:T])
+```
+
+```{code-cell} ipython3
 def adam_optimizer(grad_func, init_params, 
                    lr=0.1, 
                    max_iter=10_000, 
@@ -318,8 +324,13 @@ def objective(x, m0, model):
     m, p = solve_mp(x, m0, model)
     return -jnp.sum(β**jnp.arange(T+1) * (u(f(x)) + j(m - p)))
 
+def penality(x, m0, model):
+    β, T = model.β, model.T
+    m, p = solve_mp(x, m0, model)
+    return -jnp.sum(β**jnp.arange(T+1) * (u(f(x)) + j(m - p)))
+
 grad_objective = grad(lambda x: objective(x, m0=jnp.log(100), model=model))
-x_init = jnp.ones(model.T+1)  # Initial guess for x
+x_init = jnp.ones(model.T+1)# Initial guess for x
 optimized_x = adam_optimizer(grad_objective, x_init)
 
 # Compute the optimized m_t and p_t
@@ -328,6 +339,49 @@ optimized_m, optimized_p = solve_mp(optimized_x, m0=jnp.log(100), model=model)
 print("Optimized x_t:", optimized_x)
 print("Optimized m_t:", optimized_m)
 print("Optimized p_t:", optimized_p)
+```
+
+$$
+P(\vec x, \vec m, \vec p) = \lambda_1 \sum_{t=0}^\infty \beta^t \left( m_{t} - p_t + \alpha (p_{t+1} - p_t) \right)^2 
++ \lambda_2 \sum_{t=0}^\infty \beta^t \left( \exp(m_{t+1}) - \exp(m_t) + x_t \exp(p_t) \right)^2 
++ \lambda_3 \sum_{t=0}^\infty \beta^t \left( m_t - p_t + \alpha \left[ (1-\lambda) \sum_{j=0}^{T-1-j} ( m_{t+j+1} - m_{t+j} ) + \lambda ^{T-t} \bar \mu \right] \right)^2
+$$
+
+```{code-cell} ipython3
+def penalty(m, p, x, model):
+    α, β = model.α, model.β
+    T, Λ = model.T, model.Λ
+    
+    λ = α / (1 + α)
+    λ1, λ2, λ3 = Λ
+    
+    # Calculate bar_μ using the final values of p and m
+    bar_μ = (p[-1] - m[-1]) / α
+    
+
+    penalty_1 = λ1 * jnp.sum(β ** jnp.arange(T) * (m[:-1] - p[:-1] + α * (p[1:] - p[:-1])) ** 2)
+    print(m[:-1] - p[:-1] + α * (p[1:] - p[:-1]))
+    
+
+    penalty_2 = λ2 * jnp.sum(β ** jnp.arange(T) * 
+                             (jnp.exp(m[1:]) - jnp.exp(m[:-1]) 
+                              + x[:-1] * jnp.exp(p[:-1])) ** 2)
+    print(jnp.exp(m[1:]) - jnp.exp(m[:-1]) 
+                              + x[:-1] * jnp.exp(p[:-1]))
+
+    penalty_3 = 0
+    for t in range(T):
+        sum_terms = jnp.sum(m[t+1:T] - m[t:T-1])
+        penalty_3 += (m[t] - p[t] + α * ((1 - λ) * sum_terms + λ ** (T - t) * bar_μ)) ** 2
+    print((m[t] - p[t] + α * ((1 - λ) * sum_terms + λ ** (T - t) * bar_μ)))
+    penalty_3 = λ3 * jnp.sum(β ** jnp.arange(T) * penalty_3)
+    
+
+    total_penalty = penalty_1 + penalty_2 + penalty_3
+    
+    return total_penalty
+
+penalty(optimized_m, optimized_p, optimized_x, model)
 ```
 
 ## Proposal to Humphrey
