@@ -59,10 +59,6 @@ This function will be an input into solving for a Ramsey plan using a version of
 I'll move on to describe that function implicitly as a system of constraints.
 
 ```{code-cell} ipython3
-!pip install jaxopt
-```
-
-```{code-cell} ipython3
 from quantecon import LQ
 import numpy as np
 import jax.numpy as jnp
@@ -324,11 +320,6 @@ def objective(x, m0, model):
     m, p = solve_mp(x, m0, model)
     return -jnp.sum(β**jnp.arange(T+1) * (u(f(x)) + j(m - p)))
 
-def penality(x, m0, model):
-    β, T = model.β, model.T
-    m, p = solve_mp(x, m0, model)
-    return -jnp.sum(β**jnp.arange(T+1) * (u(f(x)) + j(m - p)))
-
 grad_objective = grad(lambda x: objective(x, m0=jnp.log(100), model=model))
 x_init = jnp.ones(model.T+1)# Initial guess for x
 optimized_x = adam_optimizer(grad_objective, x_init)
@@ -339,6 +330,10 @@ optimized_m, optimized_p = solve_mp(optimized_x, m0=jnp.log(100), model=model)
 print("Optimized x_t:", optimized_x)
 print("Optimized m_t:", optimized_m)
 print("Optimized p_t:", optimized_p)
+```
+
+```{code-cell} ipython3
+xs = np.linespace(0, 100, 1)
 ```
 
 $$
