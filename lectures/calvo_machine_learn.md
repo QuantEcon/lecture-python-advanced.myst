@@ -18,34 +18,39 @@ kernelspec:
 This  lecture  studies a problem that we shall  study from another angle  in another  quantecon lecture
 {doc}`calvo`.  
 
-That lecture  used  an analytic approach based on ``dynamic programming squared`` to guide computation of a Ramsey plan  in a version of a model of Calvo {cite}`Calvo1978`.  
+Both of these lectures compute a Ramsey plan  for  a version of a model of Calvo {cite}`Calvo1978`.  
 
-Dynamic programming squared guided the  calculations in that lecture  by providing  much useful  information about mathematical  objects in terms of which the Ramsey plan can be represented recursively.
 
-That paved the way to computing the  Ramsey plan efficiently.  
+The {doc}`calvo` lecture  uses  an analytic approach based on ``dynamic programming squared`` to guide computations.
 
-Included in the structural information  that dynamic programming squared provided  in quantecon lecture {doc}`calvo`  are descriptions of
 
-  * a **state** variable confronting a continuation Ramsey planner, and 
+Dynamic programming squared provides  much useful  information about mathematical  objects in terms of which the Ramsey plan can be represented recursively.
+
+That paves the way to computing the  Ramsey plan efficiently.  
+
+Included in the structural information  that dynamic programming squared provides  in quantecon lecture {doc}`calvo`  are descriptions of
+
+  * a **state** variable that confronts a continuation Ramsey planner, and 
   * two Bellman equations
     * one that describes the behavior of the representative agent
-    * another that describes the decision problems of a Ramsey planner and of a continuation Ramsey planner
+    * another that describes  decision problems of a Ramsey planner and of a continuation Ramsey planner  
 
 
-In this lecture, we approach the Ramsey planner in a much less sophisticated way that proceeds without knowing the structure imparted by dynamic programming squared.
+In this lecture, we approach the Ramsey planner in a much less sophisticated way.
 
-Instead, we use a brute force approach that naively states the Ramsey problem
-in terms of a pair of infinite sequences of real numbers that the Ramsey planner chooses
+It  proceeds without knowing much of the  structure imparted by dynamic programming squared.
+
+Instead, we use a brute force approach that simply chooses a pair of infinite sequences of real numbers that maximize the Ramsey planner's objective function: 
 
 * a sequence $\vec \theta$ of inflation rates 
 * a sequence $\vec \mu$ of money growh rates
 
-We take the liberty of calling this a **machine learning** approach because of how it fails to take advantage of the structure exploited by dynamic programming squared, at the cost of proliferating parameters.
+Because it fails to take advantage of the structure exploited by dynamic programming squared at the cost of proliferating parameters, we take the liberty of calling this a **machine learning** approach.
 
 This is what many machine learning algorithms do.  
 
 Comparing the calculations in this lecture with those in our sister lecture {doc}`calvo` provides us
-with good laboratory to help appreciate the promises and limits of machine learning approaches
+with a laboratory that can  help us  appreciate promises and limits of machine learning approaches
 more generally. 
 
 We'll actually deploy two machine learning approaches, one more naive than the other.
@@ -57,9 +62,9 @@ We'll actually deploy two machine learning approaches, one more naive than the o
 
 While both of these machine learning (ML) approaches succeed in recovering the  Ramsey plan computed in via dynamic programming squared in  quantecon lecture {doc}`calvo`, they don't  reveal the structure that is exploited in that lecture.
 
-That structure lies hidden with  the answers provided by our ML approach
+That structure lies hidden within   some of the objects calculated  by our ML approach.
 
-We can ferret out that structure  if only we ask  the right questions.
+We can ferret out some of that structure  if we ask  the right questions.
 
 At the end of this lecture we show what those questions are and how they  can be answered by running particular linear  regressions on components of
 $\vec \mu, \vec \theta$.  
@@ -74,8 +79,8 @@ We study a   linear-quadratic version of a model that Guillermo Calvo {cite}`Cal
 
 The model focuses attention on intertemporal tradeoffs between
 
-- utility that a representative  agent's anticipations of future  deflation generate  by decreasing  costs of holding real money balances and thereby increasing the  agent's *liquidity*, as measured by  holdings of real money balances, and
-- social costs associated with the  distorting taxes that the government  levies  to acquire the paper money that it  destroys  in order to generate anticipated deflation
+- utility that a representative  agent's anticipations of future  deflation generate  by lowering the  costs of holding real money balances and thereby increasing the  agent's *liquidity*, as measured by  holdings of real money balances, and
+- social costs associated with the  distorting taxes that a government  levies  to acquire the paper money that it must  destroy  in order to generate anticipated deflation
 
 The model features
 
@@ -114,7 +119,7 @@ Equation {eq}`eq_grad_old1` asserts that the demand for real balances is inverse
 related to the public's expected rate of inflation, which  equals
 the actual rate of inflation because there is no uncertainty here.
 
-(When there is no uncertainty, an assumption of **rational expectations** that becomes equivalent to  **perfect foresight**).
+(When there is no uncertainty, an assumption of **rational expectations**  becomes equivalent to  **perfect foresight**).
 
 
 Subtracting the demand function {eq}`eq_grad_old1` at time $t$ from the demand
@@ -138,7 +143,7 @@ Because $\alpha > 0$,  $0 < \frac{\alpha}{1+\alpha} < 1$.
 :label: square-summable
 
 For  scalar $b_t$, let $L^2$ be the space of sequences
-$\{b_t\}_{t=0}^\infty$ satisfying
+$\{b_t\}_{t=0}^\infty$ that satisfy 
 
 $$
 \sum_{t=0}^\infty  b_t^2 < +\infty
@@ -177,7 +182,7 @@ $$ (eq_grad_old5a)
 
 
 ```{note}
-The "bliss level" of real balances is  $\frac{u_1}{u_2}$ and the inflation rate that attains
+The "bliss level" of real balances is  $\frac{u_1}{u_2}$;  the inflation rate that attains
 it is $-\frac{u_1}{u_2 \alpha}$.
 ```
 
@@ -221,11 +226,11 @@ to maximize criterion {eq}`eq:RamseyV` subject to equations {eq}`eq_grad_old3`.
 
 **Parameters**  are
 
-* Demand for money: $\alpha > 0$, default $\alpha = 1$
+* Demand for money parameter: $\alpha > 0$; we set its default value $\alpha = 1$
 
    * Induced demand function for money parameter $\lambda = \frac{\alpha}{1+\alpha}$
 
- * Utility function $u_0, u_1, u_2 $ and $\beta \in (0,1)$
+ * Utility function parameters:  $u_0, u_1, u_2 $ and $\beta \in (0,1)$
 
  * Cost parameter of tax distortions associated with setting $\mu_t \neq 0$ is $c$
  
@@ -282,7 +287,7 @@ h_2 & = - \frac{u_2 \alpha^2}{2}
 \end{aligned}
 $$
 
-The inflation rate $\theta_t$ is determined by
+The inflation rate $\theta_t$ satisfies
 
 $$
 \theta_t = (1-\lambda) \sum_{j=0}^\infty \lambda^j \mu_{t+j}, \quad t \geq 0
