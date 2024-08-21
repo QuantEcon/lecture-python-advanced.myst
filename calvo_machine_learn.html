@@ -172,18 +172,18 @@ const thebe_selector_output = ".output, .cell_output"
                             <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">41.1. Introduction</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model">41.2. The Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-components">41.3. Model components</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-and-variables">41.4. Parameters and variables</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-objects">41.4.1. Basic objects</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-components">41.3. Model Components</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters-and-variables">41.4. Parameters and Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-objects">41.4.1. Basic Objects</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#approximations">41.5. Approximations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-gradient-algorithm">41.6. A gradient algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-gradient-descent-algorithm">41.6. A Gradient Descent Algorithm</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation">41.6.1. Implementation</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#restricting-mu-t-bar-mu-for-all-t">41.6.2. Restricting  <span class="math notranslate nohighlight">\(\mu_t = \bar \mu\)</span> for all <span class="math notranslate nohighlight">\(t\)</span></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-structured-ml-algorithm">41.7. A more structured ML algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-more-structured-ml-algorithm">41.7. A More Structured ML Algorithm</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-implementations">41.7.1. Two implementations</a></li>
 </ul>
 </li>
@@ -252,34 +252,36 @@ const thebe_selector_output = ".output, .cell_output"
 <h1><span class="section-number">41. </span>Machine Learning a Ramsey Plan<a class="headerlink" href="#machine-learning-a-ramsey-plan" title="Permalink to this heading">#</a></h1>
 <section id="introduction">
 <h2><span class="section-number">41.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
-<p>This  lecture  studies a problem that we shall  study from another angle  in another  quantecon lecture
+<p>This  lecture  studies a problem that we  study from another angle  in this quantecon lecture
 <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
-<p>That lecture  used  an analytic approach based on <code class="docutils literal notranslate"><span class="pre">dynamic</span> <span class="pre">programming</span> <span class="pre">squared</span></code> to guide computation of a Ramsey plan  in a version of a model of Calvo <span id="id1">[<a class="reference internal" href="zreferences.html#id139" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span>.</p>
-<p>Dynamic programming squared guided the  calculations in that lecture  by providing  much useful  information about mathematical  objects in terms of which the Ramsey plan can be represented recursively.</p>
-<p>That paved the way to computing the  Ramsey plan efficiently.</p>
-<p>Included in the structural information  that dynamic programming squared provided  in quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>  are descriptions of</p>
+<p>Both lectures compute a Ramsey plan  for  a version of a model of Calvo <span id="id1">[<a class="reference internal" href="zreferences.html#id139" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span>.</p>
+<p>The <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a> lecture  uses  an analytic approach based on <code class="docutils literal notranslate"><span class="pre">dynamic</span> <span class="pre">programming</span> <span class="pre">squared</span></code> to guide computations.</p>
+<p>Dynamic programming squared provides  information about the structure of  mathematical  objects in terms of which a Ramsey plan can be represented recursively.</p>
+<p>That paves the way to computing a  Ramsey plan efficiently.</p>
+<p>Included in the structural information  that dynamic programming squared provides  in quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>  are descriptions of</p>
 <ul class="simple">
-<li><p>a <strong>state</strong> variable confronting a continuation Ramsey planner, and</p></li>
-<li><p>two Bellman equations</p>
+<li><p>a <strong>state</strong> variable that confronts a continuation Ramsey planner, and</p></li>
+<li><p>two <strong>Bellman equations</strong></p>
 <ul>
 <li><p>one that describes the behavior of the representative agent</p></li>
-<li><p>another that describes the decision problems of a Ramsey planner and of a continuation Ramsey planner</p></li>
+<li><p>another that describes  decision problems of a Ramsey planner and of a continuation Ramsey planner</p></li>
 </ul>
 </li>
 </ul>
-<p>In this lecture, we approach the Ramsey planner in a much less sophisticated way that proceeds without knowing the structure imparted by dynamic programming squared.</p>
-<p>Instead, we use a brute force approach that naively states the Ramsey problem
-in terms of a pair of infinite sequences of real numbers that the Ramsey planner chooses</p>
+<p>In this lecture, we approach the Ramsey planner in a less sophisticated way.</p>
+<p>We  proceed without knowing the mathematical  structure imparted by dynamic programming squared.</p>
+<p>Instead, we use a brute force approach that simply chooses a pair of infinite sequences of real numbers that maximizes a Ramsey planner’s objective function.</p>
+<p>The pair  consists of</p>
 <ul class="simple">
 <li><p>a sequence <span class="math notranslate nohighlight">\(\vec \theta\)</span> of inflation rates</p></li>
 <li><p>a sequence <span class="math notranslate nohighlight">\(\vec \mu\)</span> of money growh rates</p></li>
 </ul>
-<p>We take the liberty of calling this a <strong>machine learning</strong> approach because of how it fails to take advantage of the structure exploited by dynamic programming squared, at the cost of proliferating parameters.</p>
-<p>This is what many machine learning algorithms do.</p>
+<p>Because it fails to take advantage of the structure recognized by dynamic programming squared and instead  proliferates parameters, we take the liberty of calling this a <strong>machine learning</strong> approach.</p>
+<p>This is similar to what other machine learning algorithms also do.</p>
 <p>Comparing the calculations in this lecture with those in our sister lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a> provides us
-with good laboratory to help appreciate the promises and limits of machine learning approaches
+with a laboratory that can  help us  appreciate promises and limits of machine learning approaches
 more generally.</p>
-<p>We’ll actually deploy two machine learning approaches, one more naive than the other.</p>
+<p>We’ll actually deploy two machine learning approaches.</p>
 <ul class="simple">
 <li><p>the first is really lazy</p>
 <ul>
@@ -288,24 +290,24 @@ more generally.</p>
 </li>
 <li><p>the second is less lazy</p>
 <ul>
-<li><p>it exerts the effort required to express the Ramsey planner’s objective as an affine quadratic form in <span class="math notranslate nohighlight">\(\vec \mu\)</span>, computes first-order conditions for an optimum, and solves  the resulting system of simultaneous linear  equations for <span class="math notranslate nohighlight">\(\vec \mu\)</span> and then <span class="math notranslate nohighlight">\(\vec \theta\)</span>.</p></li>
+<li><p>it exerts the effort required to express the Ramsey planner’s objective as an affine quadratic form in <span class="math notranslate nohighlight">\(\vec \mu\)</span>, computes first-order conditions for an optimum, arranges them into a system of simultaneous linear  equations for <span class="math notranslate nohighlight">\(\vec \mu\)</span> and then <span class="math notranslate nohighlight">\(\vec \theta\)</span>, then solves them.</p></li>
 </ul>
 </li>
 </ul>
-<p>While both of these machine learning (ML) approaches succeed in recovering the  Ramsey plan computed in via dynamic programming squared in  quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>, they don’t  reveal the structure that is exploited in that lecture.</p>
-<p>That structure lies hidden with  the answers provided by our ML approach</p>
-<p>We can ferret out that structure  if only we ask  the right questions.</p>
-<p>At the end of this lecture we show what those questions are and how they  can be answered by running particular linear  regressions on components of
+<p>While both of these machine learning (ML) approaches succeed in recovering the  Ramsey plan that we also compute  in  quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a> by using dynamic programming squared, they don’t  reveal the recursive structure of the Ramsey plan described in that lecture.</p>
+<p>That recursive  structure lies hidden within   some of the objects calculated  by our ML approach.</p>
+<p>We can ferret out some of that structure  if we ask  the right questions.</p>
+<p>At the end of this lecture we describe some of  those questions are and how they  can be answered by running particular linear  regressions on components of
 <span class="math notranslate nohighlight">\(\vec \mu, \vec \theta\)</span>.</p>
-<p>Human intelligence, not the artificial intelligence deployed in our machine learning approaches, is a key input into choosing which regressions to run.</p>
+<p>Human intelligence, not the artificial intelligence deployed in our machine learning approach, is a key input into choosing which regressions to run.</p>
 </section>
 <section id="the-model">
 <h2><span class="section-number">41.2. </span>The Model<a class="headerlink" href="#the-model" title="Permalink to this heading">#</a></h2>
 <p>We study a   linear-quadratic version of a model that Guillermo Calvo <span id="id2">[<a class="reference internal" href="zreferences.html#id139" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span> used to illustrate the <strong>time inconsistency</strong> of optimal government plans.</p>
 <p>The model focuses attention on intertemporal tradeoffs between</p>
 <ul class="simple">
-<li><p>utility that a representative  agent’s anticipations of future  deflation generate  by decreasing  costs of holding real money balances and thereby increasing the  agent’s <em>liquidity</em>, as measured by  holdings of real money balances, and</p></li>
-<li><p>social costs associated with the  distorting taxes that the government  levies  to acquire the paper money that it  destroys  in order to generate anticipated deflation</p></li>
+<li><p>utility that a representative  agent’s anticipations of future  deflation generate  by lowering the  costs of holding real money balances and thereby increasing the  agent’s <em>liquidity</em>, as measured by  holdings of real money balances, and</p></li>
+<li><p>social costs associated with the  distorting taxes that a government  levies  to acquire the paper money that it   destroys  in order to generate anticipated deflation</p></li>
 </ul>
 <p>The model features</p>
 <ul class="simple">
@@ -315,7 +317,7 @@ more generally.</p>
 <p>The model combines ideas from  papers by Cagan <span id="id3">[<a class="reference internal" href="zreferences.html#id78" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span> and  Calvo <span id="id4">[<a class="reference internal" href="zreferences.html#id139" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span>.</p>
 </section>
 <section id="model-components">
-<h2><span class="section-number">41.3. </span>Model components<a class="headerlink" href="#model-components" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.3. </span>Model Components<a class="headerlink" href="#model-components" title="Permalink to this heading">#</a></h2>
 <p>There is no uncertainty.</p>
 <p>Let:</p>
 <ul class="simple">
@@ -329,10 +331,10 @@ version of a Cagan <span id="id5">[<a class="reference internal" href="zreferenc
 <div class="math notranslate nohighlight" id="equation-eq-grad-old1">
 <span class="eqno">(41.1)<a class="headerlink" href="#equation-eq-grad-old1" title="Permalink to this equation">#</a></span>\[m_t - p_t = -\alpha(p_{t+1} - p_t) \: , \: \alpha &gt; 0\]</div>
 <p>for <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
-<p>Equation <a class="reference internal" href="#equation-eq-grad-old1">(41.1)</a> asserts that the demand for real balances is inversely
-related to the public’s expected rate of inflation, which  equals
+<p>Equation <a class="reference internal" href="#equation-eq-grad-old1">(41.1)</a> asserts that the representative agent’s demand for real balances is inversely
+related to the representative agent’s expected rate of inflation, which  equals
 the actual rate of inflation because there is no uncertainty here.</p>
-<p>(When there is no uncertainty, an assumption of <strong>rational expectations</strong> that becomes equivalent to  <strong>perfect foresight</strong>).</p>
+<p>(When there is no uncertainty, an assumption of <strong>rational expectations</strong>  becomes equivalent to  <strong>perfect foresight</strong>).</p>
 <p>Subtracting the demand function <a class="reference internal" href="#equation-eq-grad-old1">(41.1)</a> at time <span class="math notranslate nohighlight">\(t\)</span> from the demand
 function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
 <div class="math notranslate nohighlight">
@@ -347,7 +349,7 @@ function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
 <p class="admonition-title"><span class="caption-number">Definition 41.1 </span></p>
 <section class="definition-content" id="proof-content">
 <p>For  scalar <span class="math notranslate nohighlight">\(b_t\)</span>, let <span class="math notranslate nohighlight">\(L^2\)</span> be the space of sequences
-<span class="math notranslate nohighlight">\(\{b_t\}_{t=0}^\infty\)</span> satisfying</p>
+<span class="math notranslate nohighlight">\(\{b_t\}_{t=0}^\infty\)</span> that satisfy</p>
 <div class="math notranslate nohighlight">
 \[
 \sum_{t=0}^\infty  b_t^2 &lt; +\infty
@@ -368,7 +370,7 @@ U(-\alpha \theta_t) = u_0 + u_1 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta
 \]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The “bliss level” of real balances is  <span class="math notranslate nohighlight">\(\frac{u_1}{u_2}\)</span> and the inflation rate that attains
+<p>The “bliss level” of real balances is  <span class="math notranslate nohighlight">\(\frac{u_1}{u_2}\)</span>;  the inflation rate that attains
 it is <span class="math notranslate nohighlight">\(-\frac{u_1}{u_2 \alpha}\)</span>.</p>
 </div>
 <p>Via equation <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a>, a government plan
@@ -395,15 +397,15 @@ a vector of money growth rates <span class="math notranslate nohighlight">\(\vec
 to maximize criterion <a class="reference internal" href="#equation-eq-ramseyv">(41.6)</a> subject to equations <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a>.</p>
 </section>
 <section id="parameters-and-variables">
-<h2><span class="section-number">41.4. </span>Parameters and variables<a class="headerlink" href="#parameters-and-variables" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.4. </span>Parameters and Variables<a class="headerlink" href="#parameters-and-variables" title="Permalink to this heading">#</a></h2>
 <p><strong>Parameters</strong>  are</p>
 <ul class="simple">
-<li><p>Demand for money: <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>, default <span class="math notranslate nohighlight">\(\alpha = 1\)</span></p>
+<li><p>Demand for money parameter is <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>; we set its default value <span class="math notranslate nohighlight">\(\alpha = 1\)</span></p>
 <ul>
-<li><p>Induced demand function for money parameter <span class="math notranslate nohighlight">\(\lambda = \frac{\alpha}{1+\alpha}\)</span></p></li>
+<li><p>Induced demand function for money parameter is  <span class="math notranslate nohighlight">\(\lambda = \frac{\alpha}{1+\alpha}\)</span></p></li>
 </ul>
 </li>
-<li><p>Utility function <span class="math notranslate nohighlight">\(u_0, u_1, u_2 \)</span> and <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span></p></li>
+<li><p>Utility function parameters are   <span class="math notranslate nohighlight">\(u_0, u_1, u_2 \)</span> and <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span></p></li>
 <li><p>Cost parameter of tax distortions associated with setting <span class="math notranslate nohighlight">\(\mu_t \neq 0\)</span> is <span class="math notranslate nohighlight">\(c\)</span></p></li>
 <li><p>Truncation parameter: a positive integer <span class="math notranslate nohighlight">\(T &gt;0\)</span></p></li>
 </ul>
@@ -413,7 +415,7 @@ to maximize criterion <a class="reference internal" href="#equation-eq-ramseyv">
 <li><p><span class="math notranslate nohighlight">\(\mu_t = m_{t+1} - m_t \)</span> where <span class="math notranslate nohighlight">\(m_t\)</span> is log of money supply</p></li>
 </ul>
 <section id="basic-objects">
-<h3><span class="section-number">41.4.1. </span>Basic objects<a class="headerlink" href="#basic-objects" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.4.1. </span>Basic Objects<a class="headerlink" href="#basic-objects" title="Permalink to this heading">#</a></h3>
 <p>To prepare the way for our calculations, we’ll remind ourselves of the  mathematical objects
 in play.</p>
 <ul class="simple">
@@ -431,17 +433,17 @@ in play.</p>
 V = \sum_{t=0}^\infty \beta^t (h_0 + h_1 \theta_t + h_2 \theta_t^2 -
 \frac{c}{2} \mu_t^2 )
 \]</div>
-<p>where we set  <span class="math notranslate nohighlight">\(h_0, h_1, h_2\)</span>  to make</p>
+<p>where we set  <span class="math notranslate nohighlight">\(h_0, h_1, h_2\)</span>  to match</p>
 <div class="math notranslate nohighlight">
 \[
 u_0 + u_1(-\alpha \theta_t) - \frac{u_2}{2} (-\alpha \theta_t)^2
 \]</div>
-<p>match</p>
+<p>with</p>
 <div class="math notranslate nohighlight">
 \[
 h_0 + h_1 \theta_t + h_2 \theta_t^2 
 \]</div>
-<p>To make them match, we should  set</p>
+<p>To make them match, we   set</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -450,7 +452,7 @@ h_1 &amp; = -\alpha u_1 \cr
 h_2 &amp; = - \frac{u_2 \alpha^2}{2}
 \end{aligned}
 \]</div>
-<p>The inflation rate <span class="math notranslate nohighlight">\(\theta_t\)</span> is determined by</p>
+<p>The inflation rate <span class="math notranslate nohighlight">\(\theta_t\)</span> satisfies</p>
 <div class="math notranslate nohighlight" id="equation-eq-inflation101">
 <span class="eqno">(41.8)<a class="headerlink" href="#equation-eq-inflation101" title="Permalink to this equation">#</a></span>\[
 \theta_t = (1-\lambda) \sum_{j=0}^\infty \lambda^j \mu_{t+j}, \quad t \geq 0
@@ -462,25 +464,25 @@ h_2 &amp; = - \frac{u_2 \alpha^2}{2}
 \]</div>
 <p>A Ramsey planner chooses <span class="math notranslate nohighlight">\(\vec \mu\)</span> to maximize the government’s value function <a class="reference internal" href="#equation-eq-ramseyvalue">(41.7)</a>
 subject to equation  <a class="reference internal" href="#equation-eq-inflation101">(41.8)</a>.</p>
-<p>The solution <span class="math notranslate nohighlight">\(\vec \mu\)</span> of this problem is called a <strong>Ramsey plan</strong>.</p>
+<p>A  solution <span class="math notranslate nohighlight">\(\vec \mu\)</span> of this problem is called a <strong>Ramsey plan</strong>.</p>
 </section>
 </section>
 <section id="approximations">
 <h2><span class="section-number">41.5. </span>Approximations<a class="headerlink" href="#approximations" title="Permalink to this heading">#</a></h2>
-<p>We anticipate that under a Ramsey plan <span class="math notranslate nohighlight">\(\{\theta_t\}\)</span> and <span class="math notranslate nohighlight">\(\{\mu_t\}\)</span>  each converge to stationary values.</p>
+<p>We anticipate that under a Ramsey plan the sequences  <span class="math notranslate nohighlight">\(\{\theta_t\}\)</span> and <span class="math notranslate nohighlight">\(\{\mu_t\}\)</span>  both converge to stationary values.</p>
 <p>Thus, we guess that
 under the optimal policy
 <span class="math notranslate nohighlight">\( \lim_{t \rightarrow + \infty} \mu_t = \bar \mu\)</span>.</p>
 <p>Convergence of <span class="math notranslate nohighlight">\(\mu_t\)</span> to <span class="math notranslate nohighlight">\(\bar \mu\)</span> together with formula <a class="reference internal" href="#equation-eq-inflation101">(41.8)</a> for the inflation rate then implies that  <span class="math notranslate nohighlight">\( \lim_{t \rightarrow + \infty} \theta_t = \bar \mu\)</span> as well.</p>
-<p>Consequently, we’ll assume that we can guess a time <span class="math notranslate nohighlight">\(T\)</span> large enough that <span class="math notranslate nohighlight">\(\mu_t\)</span> has gotten
-very close to the limit <span class="math notranslate nohighlight">\(\bar \mu\)</span> and
-we’ll approximate <span class="math notranslate nohighlight">\(\vec \mu\)</span> by a truncated  vector
-in which</p>
+<p>Consequently, we’ll  guess a time <span class="math notranslate nohighlight">\(T\)</span> large enough that <span class="math notranslate nohighlight">\(\mu_t\)</span> has gotten
+very close to the limit <span class="math notranslate nohighlight">\(\bar \mu\)</span>.</p>
+<p>Then we’ll approximate <span class="math notranslate nohighlight">\(\vec \mu\)</span> by a truncated  vector
+with the property that</p>
 <div class="math notranslate nohighlight">
 \[
 \mu_t = \bar \mu \quad \forall t \geq T
 \]</div>
-<p>We’ll approximate <span class="math notranslate nohighlight">\(\vec \theta\)</span> with a truncated vector in which</p>
+<p>We’ll approximate <span class="math notranslate nohighlight">\(\vec \theta\)</span> with a truncated vector with the property that</p>
 <div class="math notranslate nohighlight">
 \[
 \theta_t = \bar \theta \quad \forall t \geq T
@@ -521,8 +523,8 @@ h_0 + h_1 \tilde\theta_t + h_2 \tilde\theta_t^2 -
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\tilde \theta_t, \ t = 0, 1, \ldots , T-1\)</span> satisfies formula (1).</p>
 </section>
-<section id="a-gradient-algorithm">
-<h2><span class="section-number">41.6. </span>A gradient algorithm<a class="headerlink" href="#a-gradient-algorithm" title="Permalink to this heading">#</a></h2>
+<section id="a-gradient-descent-algorithm">
+<h2><span class="section-number">41.6. </span>A Gradient Descent Algorithm<a class="headerlink" href="#a-gradient-descent-algorithm" title="Permalink to this heading">#</a></h2>
 <p>We now describe  code that  maximizes the criterion function <a class="reference internal" href="#equation-eq-ramseyvalue">(41.7)</a> by choice of the truncated vector  <span class="math notranslate nohighlight">\(\tilde \mu\)</span>.</p>
 <p>We use a brute force or <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> approach that just hands our problem off to code that minimizes <span class="math notranslate nohighlight">\(V\)</span> with respect to the components of <span class="math notranslate nohighlight">\(\tilde \mu\)</span> by using gradient descent.</p>
 <p>We hope that answers will agree with those found obtained by other more structured methods in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
@@ -583,96 +585,100 @@ Collecting chex&gt;=0.1.86 (from optax)
 Requirement already satisfied: numpy&gt;=1.18.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from optax) (1.26.4)
 Collecting etils[epy] (from optax)
   Downloading etils-1.9.2-py3-none-any.whl.metadata (6.4 kB)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: typing-extensions&gt;=4.2.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from chex&gt;=0.1.86-&gt;optax) (4.9.0)
+Requirement already satisfied: typing-extensions&gt;=4.2.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from chex&gt;=0.1.86-&gt;optax) (4.9.0)
 Requirement already satisfied: toolz&gt;=0.9.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from chex&gt;=0.1.86-&gt;optax) (0.12.0)
-Collecting ml-dtypes&gt;=0.2.0 (from jax&gt;=0.4.27-&gt;optax)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading ml_dtypes-0.4.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
-Collecting opt-einsum (from jax&gt;=0.4.27-&gt;optax)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting ml-dtypes&gt;=0.2.0 (from jax&gt;=0.4.27-&gt;optax)
+  Downloading ml_dtypes-0.4.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (20 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting opt-einsum (from jax&gt;=0.4.27-&gt;optax)
   Downloading opt_einsum-3.3.0-py3-none-any.whl.metadata (6.5 kB)
 Requirement already satisfied: scipy&gt;=1.10 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from jax&gt;=0.4.27-&gt;optax) (1.11.4)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading optax-0.2.3-py3-none-any.whl (289 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/289.6 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">289.6/289.6 kB</span> <span class=" -Color -Color-Red">52.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">289.6/289.6 kB</span> <span class=" -Color -Color-Red">34.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading absl_py-2.1.0-py3-none-any.whl (133 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/133.7 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">133.7/133.7 kB</span> <span class=" -Color -Color-Red">44.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">133.7/133.7 kB</span> <span class=" -Color -Color-Red">42.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading chex-0.1.86-py3-none-any.whl (98 kB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/98.2 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">98.2/98.2 kB</span> <span class=" -Color -Color-Red">34.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading chex-0.1.86-py3-none-any.whl (98 kB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/98.2 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">98.2/98.2 kB</span> <span class=" -Color -Color-Red">38.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25hDownloading jax-0.4.31-py3-none-any.whl (2.0 MB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading jax-0.4.31-py3-none-any.whl (2.0 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/2.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.0/2.0 MB</span> <span class=" -Color -Color-Red">113.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.0/2.0 MB</span> <span class=" -Color -Color-Red">98.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading jaxlib-0.4.31-cp311-cp311-manylinux2014_x86_64.whl (88.1 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/88.1 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.2/88.1 MB</span> <span class=" -Color -Color-Red">187.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.8/88.1 MB</span> <span class=" -Color -Color-Red">144.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">12.8/88.1 MB</span> <span class=" -Color -Color-Red">189.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">19.2/88.1 MB</span> <span class=" -Color -Color-Red">189.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">10.4/88.1 MB</span> <span class=" -Color -Color-Red">153.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">16.6/88.1 MB</span> <span class=" -Color -Color-Red">175.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">25.3/88.1 MB</span> <span class=" -Color -Color-Red">181.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">22.0/88.1 MB</span> <span class=" -Color -Color-Red">182.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">31.4/88.1 MB</span> <span class=" -Color -Color-Red">177.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">37.2/88.1 MB</span> <span class=" -Color -Color-Red">174.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">22.3/88.1 MB</span> <span class=" -Color -Color-Red">108.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">28.1/88.1 MB</span> <span class=" -Color -Color-Red">106.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">43.0/88.1 MB</span> <span class=" -Color -Color-Red">170.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">34.3/88.1 MB</span> <span class=" -Color -Color-Red">173.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">48.8/88.1 MB</span> <span class=" -Color -Color-Red">170.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">54.7/88.1 MB</span> <span class=" -Color -Color-Red">170.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">40.2/88.1 MB</span> <span class=" -Color -Color-Red">179.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">46.0/88.1 MB</span> <span class=" -Color -Color-Red">173.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━ <span class=" -Color -Color-Green">60.5/88.1 MB</span> <span class=" -Color -Color-Red">172.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">51.6/88.1 MB</span> <span class=" -Color -Color-Red">165.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">66.3/88.1 MB</span> <span class=" -Color -Color-Red">171.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━ <span class=" -Color -Color-Green">57.6/88.1 MB</span> <span class=" -Color -Color-Red">171.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">63.5/88.1 MB</span> <span class=" -Color -Color-Red">173.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━ <span class=" -Color -Color-Green">72.1/88.1 MB</span> <span class=" -Color -Color-Red">170.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━ <span class=" -Color -Color-Green">77.9/88.1 MB</span> <span class=" -Color -Color-Red">170.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━ <span class=" -Color -Color-Green">68.9/88.1 MB</span> <span class=" -Color -Color-Red">166.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━ <span class=" -Color -Color-Green">83.7/88.1 MB</span> <span class=" -Color -Color-Red">169.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━ <span class=" -Color -Color-Green">74.6/88.1 MB</span> <span class=" -Color -Color-Red">163.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">184.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">184.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━ <span class=" -Color -Color-Green">80.5/88.1 MB</span> <span class=" -Color -Color-Red">171.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">87.2/88.1 MB</span> <span class=" -Color -Color-Red">187.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">184.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">186.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">184.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">184.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">186.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">186.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">42.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">186.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">186.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">88.1/88.1 MB</span> <span class=" -Color -Color-Red">42.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading ml_dtypes-0.4.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.2 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/2.2 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.2/2.2 MB</span> <span class=" -Color -Color-Red">121.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.2/2.2 MB</span> <span class=" -Color -Color-Red">125.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading etils-1.9.2-py3-none-any.whl (161 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/161.5 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">161.5/161.5 kB</span> <span class=" -Color -Color-Red">54.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">161.5/161.5 kB</span> <span class=" -Color -Color-Red">45.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading opt_einsum-3.3.0-py3-none-any.whl (65 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/65.5 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">65.5/65.5 kB</span> <span class=" -Color -Color-Red">28.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">65.5/65.5 kB</span> <span class=" -Color -Color-Red">17.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -694,10 +700,10 @@ Requirement already satisfied: scipy!=1.9.2,&gt;=1.8 in /home/runner/miniconda3/
 Requirement already satisfied: pandas!=2.1.0,&gt;=1.4 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from statsmodels) (2.1.4)
 Collecting patsy&gt;=0.5.6 (from statsmodels)
   Downloading patsy-0.5.6-py2.py3-none-any.whl.metadata (3.5 kB)
-Requirement already satisfied: packaging&gt;=21.3 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from statsmodels) (23.1)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas!=2.1.0,&gt;=1.4-&gt;statsmodels) (2.8.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: packaging&gt;=21.3 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from statsmodels) (23.1)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas!=2.1.0,&gt;=1.4-&gt;statsmodels) (2.8.2)
 Requirement already satisfied: pytz&gt;=2020.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas!=2.1.0,&gt;=1.4-&gt;statsmodels) (2023.3.post1)
 Requirement already satisfied: tzdata&gt;=2022.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas!=2.1.0,&gt;=1.4-&gt;statsmodels) (2023.3)
 Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from patsy&gt;=0.5.6-&gt;statsmodels) (1.16.0)
@@ -705,17 +711,16 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading statsmodels-0.14.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.7 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/10.7 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.0/10.7 MB</span> <span class=" -Color -Color-Red">90.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━ <span class=" -Color -Color-Green">8.0/10.7 MB</span> <span class=" -Color -Color-Red">118.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.9/10.7 MB</span> <span class=" -Color -Color-Red">118.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">10.7/10.7 MB</span> <span class=" -Color -Color-Red">204.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">10.7/10.7 MB</span> <span class=" -Color -Color-Red">147.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">10.7/10.7 MB</span> <span class=" -Color -Color-Red">104.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">10.7/10.7 MB</span> <span class=" -Color -Color-Red">134.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading patsy-0.5.6-py2.py3-none-any.whl (233 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/233.9 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">233.9/233.9 kB</span> <span class=" -Color -Color-Red">67.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">233.9/233.9 kB</span> <span class=" -Color -Color-Red">25.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -729,11 +734,15 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Attempting uninstall: statsmodels
-    Found existing installation: statsmodels 0.14.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Found existing installation: statsmodels 0.14.0
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Uninstalling statsmodels-0.14.0:
-      Successfully uninstalled statsmodels-0.14.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      Successfully uninstalled statsmodels-0.14.0
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed patsy-0.5.6 statsmodels-0.14.2
@@ -755,7 +764,8 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 </div>
 </div>
 </div>
-<p>First, because we’ll want to compare the results we obtain here with those obtained with another, more structured, approach,  we copy the class <code class="docutils literal notranslate"><span class="pre">ChangLQ</span></code> to solve the LQ Chang model in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+<p>We’ll eventually  want to compare the results we obtain  here to those that we obtain in  those obtained in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+<p>To enable us to do that, we  copy the class <code class="docutils literal notranslate"><span class="pre">ChangLQ</span></code> that we used in that lecture.</p>
 <p>We hide the cell that copies the class, but readers can find details of the class in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
@@ -880,7 +890,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 </div>
 </details>
 </div>
-<p>Now we compute the value of <span class="math notranslate nohighlight">\(V\)</span> under this setup, and compare it against those obtained in <a class="reference internal" href="calvo.html#compute-lq"><span class="std std-ref">Outcomes under three timing protocols</span></a>.</p>
+<p>Now we compute the value of <span class="math notranslate nohighlight">\(V\)</span> under this setup, and compare it against those obtained in this section <a class="reference internal" href="calvo.html#compute-lq"><span class="std std-ref">Outcomes under Three Timing Protocols</span></a> of the sister quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assume β=0.85, c=2, T=40.</span>
@@ -1033,8 +1043,8 @@ optimized μ =
  -0.1075949  -0.10759487 -0.10759488 -0.10759488 -0.10759488 -0.10759489
  -0.10759491 -0.10759493 -0.10759494 -0.10759497 -0.10759497 -0.10759496
  -0.10759496 -0.10759495 -0.10759496 -0.10759499]
-CPU times: user 509 ms, sys: 99.8 ms, total: 609 ms
-Wall time: 601 ms
+CPU times: user 521 ms, sys: 115 ms, total: 636 ms
+Wall time: 628 ms
 </pre></div>
 </div>
 </div>
@@ -1097,7 +1107,7 @@ Wall time: 601 ms
 </section>
 <section id="restricting-mu-t-bar-mu-for-all-t">
 <h3><span class="section-number">41.6.2. </span>Restricting  <span class="math notranslate nohighlight">\(\mu_t = \bar \mu\)</span> for all <span class="math notranslate nohighlight">\(t\)</span><a class="headerlink" href="#restricting-mu-t-bar-mu-for-all-t" title="Permalink to this heading">#</a></h3>
-<p>We make a brief digression to solve a different problem than the Ramsey problem defined above.</p>
+<p>We take  a brief detour to solve a restricted version of  the Ramsey problem defined above.</p>
 <p>First, recall that a Ramsey planner chooses <span class="math notranslate nohighlight">\(\vec \mu\)</span> to maximize the government’s value function <a class="reference internal" href="#equation-eq-ramseyvalue">(41.7)</a>subject to equation  <a class="reference internal" href="#equation-eq-inflation101">(41.8)</a>.</p>
 <p>We now define a distinct problem in which the planner chooses <span class="math notranslate nohighlight">\(\vec \mu\)</span> to maximize the government’s value function <a class="reference internal" href="#equation-eq-ramseyvalue">(41.7)</a>subject to equation  <a class="reference internal" href="#equation-eq-inflation101">(41.8)</a> and
 the additional restriction that  <span class="math notranslate nohighlight">\(\mu_t = \bar \mu\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
@@ -1129,7 +1139,7 @@ optimized μ =
 </div>
 </div>
 </div>
-<p>Compare it to <span class="math notranslate nohighlight">\(\mu^{CR}\)</span> in <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>, we again obtained a close estimate.</p>
+<p>Compare it to <span class="math notranslate nohighlight">\(\mu^{CR}\)</span> in <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>, we again obtained very close answers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">μ_CR</span> <span class="o">-</span> <span class="n">optimized_μ_CR</span><span class="p">)</span>
@@ -1170,7 +1180,7 @@ optimized μ =
 </section>
 </section>
 <section id="a-more-structured-ml-algorithm">
-<h2><span class="section-number">41.7. </span>A more structured ML algorithm<a class="headerlink" href="#a-more-structured-ml-algorithm" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.7. </span>A More Structured ML Algorithm<a class="headerlink" href="#a-more-structured-ml-algorithm" title="Permalink to this heading">#</a></h2>
 <p>By thinking a little harder about the mathematical structure of the Ramsey problem and using some linear algebra, we can simplify the problem that we hand over to a <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> algorithm.</p>
 <p>We start by recalling that  the Ramsey problem that chooses  <span class="math notranslate nohighlight">\(\vec \mu\)</span> to maximize the government’s value function <a class="reference internal" href="#equation-eq-ramseyvalue">(41.7)</a>subject to equation  <a class="reference internal" href="#equation-eq-inflation101">(41.8)</a>.</p>
 <p>This  is actually an optimization  problem with a quadratic objective function and linear constraints.</p>
@@ -1419,8 +1429,8 @@ optimized μ =
  -0.10759497 -0.10759498 -0.107595   -0.10759494 -0.10759496 -0.10759496
  -0.10759494 -0.10759493 -0.10759493 -0.10759494 -0.10759494 -0.10759495
  -0.10759497 -0.107595   -0.10759497 -0.10759495]
-CPU times: user 213 ms, sys: 5.02 ms, total: 218 ms
-Wall time: 185 ms
+CPU times: user 214 ms, sys: 3.62 ms, total: 217 ms
+Wall time: 187 ms
 </pre></div>
 </div>
 </div>
@@ -1619,10 +1629,10 @@ Wall time: 185 ms
 </section>
 <section id="some-exploratory-regressions">
 <h2><span class="section-number">41.8. </span>Some  Exploratory Regressions<a class="headerlink" href="#some-exploratory-regressions" title="Permalink to this heading">#</a></h2>
-<p>To  help us learn about the structure of the Ramsey plan, we shall compute some least squares linear regressions of particular components of <span class="math notranslate nohighlight">\(\vec \theta\)</span> and <span class="math notranslate nohighlight">\(\vec \mu\)</span> on others.</p>
+<p>To  help us learn something about the structure of the Ramsey plan, we  compute some least squares linear regressions of some  components of <span class="math notranslate nohighlight">\(\vec \theta\)</span> and <span class="math notranslate nohighlight">\(\vec \mu\)</span> on others.</p>
 <p>Our hope is that these regressions will reveal structure  hidden within the <span class="math notranslate nohighlight">\(\vec \mu^R, \vec \theta^R\)</span> sequences associated with a Ramsey plan.</p>
-<p>It is worth pausing here to think about  roles being  played by  <strong>human</strong> intelligence and <strong>artificial</strong> intelligence.</p>
-<p>Artificial intelligence, i.e., some Python code and  a computer,  is running the regressions for us.</p>
+<p>It is worth pausing  to think about  roles being  played here by  <strong>human</strong> intelligence and <strong>artificial</strong> intelligence.</p>
+<p>Artificial intelligence in the form of some Python code and  a computer  is running the regressions for us.</p>
 <p>But we are free to  regress anything on anything else.</p>
 <p>Human intelligence tells us what regressions to run.</p>
 <p>Additional inputs of  human intelligence will be  required fully to appreciate what those regressions  reveal about the structure of a Ramsey plan.</p>
@@ -1631,8 +1641,8 @@ Wall time: 185 ms
 <p>When we eventually get around to trying to understand the regressions below, it will  worthwhile to study  the reasoning that let  Chang <span id="id6">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> to choose
 <span class="math notranslate nohighlight">\(\theta_t\)</span> as his key state variable.</p>
 </div>
-<p>We’ll begin by  simply plotting the Ramsey plan’s <span class="math notranslate nohighlight">\(\mu_t\)</span> and <span class="math notranslate nohighlight">\(\theta_t\)</span> for <span class="math notranslate nohighlight">\(t =0, \ldots, T\)</span>  against <span class="math notranslate nohighlight">\(t\)</span> in  a  graph with <span class="math notranslate nohighlight">\(t\)</span> on the ordinate  axis.</p>
-<p>These are the data that we’ll be running some linear least squares regressions on.</p>
+<p>We’ll begin by  simply plotting the Ramsey plan’s <span class="math notranslate nohighlight">\(\mu_t\)</span> and <span class="math notranslate nohighlight">\(\theta_t\)</span> for <span class="math notranslate nohighlight">\(t =0, \ldots, T\)</span>  against <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>These are the data on which we’ll be running some linear least squares regressions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute θ using optimized_μ</span>
@@ -1654,7 +1664,7 @@ Wall time: 185 ms
 <img alt="_images/fc4aeb1a86f5778056e138a0ef81fa81a7fe97c2b5cb2e624d9e0a5f521c3c38.png" src="_images/fc4aeb1a86f5778056e138a0ef81fa81a7fe97c2b5cb2e624d9e0a5f521c3c38.png" />
 </div>
 </div>
-<p>We notice that <span class="math notranslate nohighlight">\(\theta_t\)</span>  is less than <span class="math notranslate nohighlight">\(\mu_t\)</span>for low <span class="math notranslate nohighlight">\(t\)</span>’s but that it eventually converges to
+<p>Note that <span class="math notranslate nohighlight">\(\theta_t\)</span>  is less than <span class="math notranslate nohighlight">\(\mu_t\)</span>for low <span class="math notranslate nohighlight">\(t\)</span>’s, but that it eventually converges to
 the same limit <span class="math notranslate nohighlight">\(\bar \mu\)</span> that <span class="math notranslate nohighlight">\(\mu_t\)</span> does.</p>
 <p>This pattern reflects how formula <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a>  makes <span class="math notranslate nohighlight">\(\theta_t\)</span> be a weighted average of future <span class="math notranslate nohighlight">\(\mu_t\)</span>’s.</p>
 <p>We begin by regressing <span class="math notranslate nohighlight">\(\mu_t\)</span> on a constant and <span class="math notranslate nohighlight">\(\theta_t\)</span>.</p>
@@ -1722,8 +1732,7 @@ Notes:
 </div>
 <p>The  time <span class="math notranslate nohighlight">\(0\)</span> pair  <span class="math notranslate nohighlight">\((\theta_0, \mu_0)\)</span> appears as the point on the upper right.</p>
 <p>Points <span class="math notranslate nohighlight">\((\theta_t, \mu_t)\)</span>  for succeeding times appear further and further to the lower left and eventually converge to <span class="math notranslate nohighlight">\((\bar \mu, \bar \mu)\)</span>.</p>
-<p>Next, we’ll run a linear regression of <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span> against <span class="math notranslate nohighlight">\(\theta_t\)</span>.</p>
-<p>We’ll include a constant.</p>
+<p>Next, we’ll run a linear regression of <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span> against <span class="math notranslate nohighlight">\(\theta_t\)</span> and a constant.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Second regression: θ_{t+1} on a constant and θ_t</span>
@@ -1880,7 +1889,7 @@ in equation <a class="reference internal" href="#equation-eq-ramseyv">(41.6)</a>
 </figure>
 </div>
 </div>
-<p>Figure <a class="reference internal" href="#id7"><span class="std std-numref">Fig. 41.1</span></a> shows several striking patterns:</p>
+<p>Figure <a class="reference internal" href="#id7"><span class="std std-numref">Fig. 41.1</span></a> shows several interesting patterns:</p>
 <ul class="simple">
 <li><p>The sequence of continuation values <span class="math notranslate nohighlight">\(\{v_t\}_{t=0}^T\)</span> is monotonically decreasing</p></li>
 <li><p>Evidently,  <span class="math notranslate nohighlight">\(v_0 &gt;  V^{CR} &gt; v_T\)</span> so that</p>
@@ -2082,8 +2091,8 @@ underlies much of quantecon lecture <a class="reference internal" href="calvo.ht
 <p>Chang noticed how equation <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> shows that an equivalence class of continuation money growth sequences <span class="math notranslate nohighlight">\(\{\mu_{t+j}\}_{j=0}^\infty\)</span> deliver the same <span class="math notranslate nohighlight">\(\theta_t\)</span>.</p>
 <p>Consequently, equations <a class="reference internal" href="#equation-eq-grad-old1">(41.1)</a> and <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> indicate that <span class="math notranslate nohighlight">\(\theta_t\)</span> intermediates how the government’s choices of <span class="math notranslate nohighlight">\(\mu_{t+j}, \ j=0, 1, \ldots\)</span> impinge on time <span class="math notranslate nohighlight">\(t\)</span>
 real balances <span class="math notranslate nohighlight">\(m_t - p_t = -\alpha \theta_t\)</span>.</p>
-<p>In lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>, we’ll see how  Chang <span id="id9">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> exploits this
-insight.</p>
+<p>In lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>, we’ll see how  Chang <span id="id9">[<a class="reference internal" href="zreferences.html#id215" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> put  this
+insight to work.</p>
 </section>
 </section>
 
