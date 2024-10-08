@@ -273,14 +273,16 @@ const thebe_selector_output = ".output, .cell_output"
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.7.2)
-Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.60.0)
-Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.31.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.60.0)
+Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
+Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.31.0)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.11.4)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.12)
-Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
 Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.4)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.7)
@@ -294,7 +296,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 <section id="overview">
 <h2><span class="section-number">46.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>This lecture studies government debt in an AMSS
-economy <span id="id1">[<a class="reference internal" href="zreferences.html#id130" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span> of the type described in <a class="reference internal" href="amss.html"><span class="doc">Optimal Taxation without State-Contingent Debt</span></a>.</p>
+economy <span id="id1">[<a class="reference internal" href="zreferences.html#id131" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span> of the type described in <a class="reference internal" href="amss.html"><span class="doc">Optimal Taxation without State-Contingent Debt</span></a>.</p>
 <p>We study the behavior of government debt  as time <span class="math notranslate nohighlight">\(t \rightarrow + \infty\)</span>.</p>
 <p>We use these techniques</p>
 <ul class="simple">
@@ -305,8 +307,8 @@ a fiscal-risk minimization  problem</p></li>
 <li><p>an approximation  to the <strong>rate of convergence</strong> to an ergodic distribution of government debt</p></li>
 </ul>
 <p>We apply tools that are applicable to  more general incomplete markets economies that are presented on pages 648 - 650 in section III.D
-of <span id="id2">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> (BEGS).</p>
-<p>We study an AMSS economy <span id="id3">[<a class="reference internal" href="zreferences.html#id130" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span>  with  three Markov states driving government expenditures.</p>
+of <span id="id2">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> (BEGS).</p>
+<p>We study an AMSS economy <span id="id3">[<a class="reference internal" href="zreferences.html#id131" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span>  with  three Markov states driving government expenditures.</p>
 <ul class="simple">
 <li><p>In a <a class="reference internal" href="amss2.html"><span class="doc">previous lecture</span></a>, we showed that with only two Markov states, it is possible that  endogenous
 interest rate fluctuations eventually can support complete markets allocations and Ramsey outcomes.</p></li>
@@ -315,12 +317,12 @@ interest rate fluctuations eventually can support complete markets allocations a
 </ul>
 <p>The lack of full spanning means that the ergodic distribution of the par value of government debt is nontrivial, in contrast to the situation
 in <a class="reference internal" href="amss2.html"><span class="doc">Fiscal Insurance via Fluctuating Interest Rates</span></a>  in which the ergodic distribution of the par value of government debt is concentrated on one point.</p>
-<p>Nevertheless,   <span id="id4">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> (BEGS) establish that, for general settings that include ours, the Ramsey
+<p>Nevertheless,   <span id="id4">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> (BEGS) establish that, for general settings that include ours, the Ramsey
 planner steers government assets to a level that comes
 <strong>as close as possible</strong> to providing full spanning in a precise a sense defined by
 BEGS that we describe below.</p>
 <p>We use code constructed in <a class="reference internal" href="amss2.html"><span class="doc">Fluctuating Interest Rates Deliver Fiscal Insurance</span></a>.</p>
-<p><strong>Warning:</strong> Key equations in  <span id="id5">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> section III.D carry  typos  that we correct below.</p>
+<p><strong>Warning:</strong> Key equations in  <span id="id5">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> section III.D carry  typos  that we correct below.</p>
 <p>Let’s start with some imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1020,15 +1022,15 @@ government debt equal to <span class="math notranslate nohighlight">\(-.5\)</spa
   warnings.warn(&quot;Values in x were outside bounds during a &quot;
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5600/108196118.py:24: RuntimeWarning: divide by zero encountered in reciprocal
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5977/108196118.py:24: RuntimeWarning: divide by zero encountered in reciprocal
   U = (c**(1 - σ) - 1) / (1 - σ)
-/tmp/ipykernel_5600/108196118.py:29: RuntimeWarning: divide by zero encountered in power
+/tmp/ipykernel_5977/108196118.py:29: RuntimeWarning: divide by zero encountered in power
   return c**(-self.σ)
-/tmp/ipykernel_5600/1277371586.py:249: RuntimeWarning: invalid value encountered in divide
+/tmp/ipykernel_5977/1277371586.py:249: RuntimeWarning: invalid value encountered in divide
   x * u_c / Eu_c - u_c * (c - T) - Un(c, n) * n - β * xprime,
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5600/1277371586.py:249: RuntimeWarning: invalid value encountered in multiply
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5977/1277371586.py:249: RuntimeWarning: invalid value encountered in multiply
   x * u_c / Eu_c - u_c * (c - T) - Un(c, n) * n - β * xprime,
 </pre></div>
 </div>
@@ -1491,7 +1493,7 @@ government debt equal to <span class="math notranslate nohighlight">\(-.5\)</spa
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.047094182757221e-11
 </pre></div>
 </div>
-<img alt="_images/117098ac0c7ee0152a3d7b1b3ea1c0bb25ca80d105c35f2cceab5b93f1e4491d.png" src="_images/117098ac0c7ee0152a3d7b1b3ea1c0bb25ca80d105c35f2cceab5b93f1e4491d.png" />
+<img alt="_images/f8ed7ba633a0e84ee2cb3c642cab027ec685e33b193d406ad66b8fa1efb1161c.png" src="_images/f8ed7ba633a0e84ee2cb3c642cab027ec685e33b193d406ad66b8fa1efb1161c.png" />
 </div>
 </div>
 <figure class="align-default">
@@ -1499,7 +1501,7 @@ government debt equal to <span class="math notranslate nohighlight">\(-.5\)</spa
 </figure>
 <p>The long simulation apparently  indicates eventual convergence to an ergodic distribution.</p>
 <p>It takes about 1000 periods to reach the ergodic distribution – an outcome that is forecast by
-approximations to rates of convergence that appear in BEGS <span id="id6">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> and that we discuss in <a class="reference internal" href="amss2.html"><span class="doc">Fluctuating Interest Rates Deliver Fiscal Insurance</span></a>.</p>
+approximations to rates of convergence that appear in BEGS <span id="id6">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> and that we discuss in <a class="reference internal" href="amss2.html"><span class="doc">Fluctuating Interest Rates Deliver Fiscal Insurance</span></a>.</p>
 <p>Let’s discard the first 2000 observations of the simulation and construct the histogram of
 the par value of government debt.</p>
 <p>We obtain the following graph for the histogram of the last 100,000 observations on the par value of government debt.</p>
@@ -1508,7 +1510,7 @@ the par value of government debt.</p>
 </figure>
 <p>The  black vertical line denotes the sample mean for the last 100,000 observations included in the histogram; the  green vertical line denotes the
 value of <span class="math notranslate nohighlight">\(\frac{ {\mathcal B}^*}{E u_c}\)</span>, associated with a sample from our approximation to
-the ergodic distribution where <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> is a regression coefficient to be described below;  the red vertical line denotes an approximation by <span id="id7">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> to the mean of the ergodic
+the ergodic distribution where <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> is a regression coefficient to be described below;  the red vertical line denotes an approximation by <span id="id7">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> to the mean of the ergodic
 distribution that can be computed <strong>before</strong>  the ergodic distribution has been approximated, as described below.</p>
 <p>Before moving on to discuss the histogram and the vertical lines approximating the ergodic  mean of government debt in more detail, the following graphs show
 government debt and taxes early in the simulation, for periods 1-100 and 101 to 200
@@ -1537,7 +1539,7 @@ respectively.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/280e996a015f485daa2589b7e923e48424d005bdb12b5f5f7514745009d4199c.png" src="_images/280e996a015f485daa2589b7e923e48424d005bdb12b5f5f7514745009d4199c.png" />
+<img alt="_images/85856251c57dc56b34135f24a97afd8527d8072b25521632d0e3f2e69b3876da.png" src="_images/85856251c57dc56b34135f24a97afd8527d8072b25521632d0e3f2e69b3876da.png" />
 </div>
 </div>
 <figure class="align-default">
@@ -1553,16 +1555,16 @@ these early observations</p>
 </section>
 <section id="asymptotic-mean-and-rate-of-convergence">
 <h2><span class="section-number">46.4. </span>Asymptotic Mean and Rate of Convergence<a class="headerlink" href="#asymptotic-mean-and-rate-of-convergence" title="Permalink to this heading">#</a></h2>
-<p>We apply the results of BEGS <span id="id8">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> to interpret</p>
+<p>We apply the results of BEGS <span id="id8">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> to interpret</p>
 <ul class="simple">
 <li><p>the mean of the ergodic distribution of government debt</p></li>
 <li><p>the rate of convergence  to the ergodic distribution from an arbitrary initial government debt</p></li>
 </ul>
 <p>We begin by computing  objects required by the theory of section III.i
-of BEGS <span id="id9">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
-<p>As in <a class="reference internal" href="amss2.html"><span class="doc">Fiscal Insurance via Fluctuating Interest Rates</span></a>, we recall  that  BEGS <span id="id10">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> used a particular
+of BEGS <span id="id9">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
+<p>As in <a class="reference internal" href="amss2.html"><span class="doc">Fiscal Insurance via Fluctuating Interest Rates</span></a>, we recall  that  BEGS <span id="id10">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> used a particular
 notation to represent what we can regard as their  generalization of an AMSS model.</p>
-<p>We introduce some of the  <span id="id11">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> notation so that readers can quickly relate notation that appears in key BEGS formulas to the notation
+<p>We introduce some of the  <span id="id11">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> notation so that readers can quickly relate notation that appears in key BEGS formulas to the notation
 that we have used in previous lectures <a class="reference internal" href="amss.html"><span class="doc">here</span></a> and <a class="reference internal" href="amss2.html"><span class="doc">here</span></a>.</p>
 <p>BEGS work with objects <span class="math notranslate nohighlight">\(B_t, {\mathcal B}_t, {\mathcal R}_t, {\mathcal X}_t\)</span> that are related to  notation that we used in
 earlier lectures by</p>
@@ -1576,8 +1578,8 @@ b_t(s^{t-1}) &amp; = {\mathcal R}_{t-1} B_{t-1} \\
 {\mathcal X}_t &amp; = u_{c,t} [g_t - \tau_t n_t]
 \end{aligned}
 \end{split}\]</div>
-<p>BEGS <span id="id12">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> call <span class="math notranslate nohighlight">\({\mathcal X}_t\)</span> the <strong>effective</strong> government deficit and <span class="math notranslate nohighlight">\({\mathcal B}_t\)</span> the <strong>effective</strong> government debt.</p>
-<p>Equation (44) of <span id="id13">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> expresses the time <span class="math notranslate nohighlight">\(t\)</span> state <span class="math notranslate nohighlight">\(s\)</span> government budget constraint as</p>
+<p>BEGS <span id="id12">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> call <span class="math notranslate nohighlight">\({\mathcal X}_t\)</span> the <strong>effective</strong> government deficit and <span class="math notranslate nohighlight">\({\mathcal B}_t\)</span> the <strong>effective</strong> government debt.</p>
+<p>Equation (44) of <span id="id13">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> expresses the time <span class="math notranslate nohighlight">\(t\)</span> state <span class="math notranslate nohighlight">\(s\)</span> government budget constraint as</p>
 <div class="math notranslate nohighlight" id="equation-eq-fiscal-risk-1">
 <span class="eqno">(46.1)<a class="headerlink" href="#equation-eq-fiscal-risk-1" title="Permalink to this equation">#</a></span>\[{\mathcal B}(s) = {\mathcal R}_\tau(s, s_{-}) {\mathcal B}_{-} + {\mathcal X}_{\tau} (s)\]</div>
 <p>where the dependence on <span class="math notranslate nohighlight">\(\tau\)</span> is meant to remind us that these objects depend on the tax rate;  <span class="math notranslate nohighlight">\(s_{-}\)</span> is last period’s Markov state.</p>
@@ -1613,11 +1615,11 @@ AMSS model should be approximately</p>
 <div><div class="math notranslate nohighlight" id="equation-rate-of-convergence-1">
 <span class="eqno">(46.5)<a class="headerlink" href="#equation-rate-of-convergence-1" title="Permalink to this equation">#</a></span>\[\frac{ E_t  ( {\mathcal B}_{t+1} - {\mathcal B}^{*} )} { ( {\mathcal B}_{t} - {\mathcal B}^{*} )} \approx \frac{1}{1 + \beta^2 {\rm var}^\infty ({\mathcal R} )}\]</div>
 </div></blockquote>
-<p>(See the equation above equation (47) in BEGS <span id="id14">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>)</p>
+<p>(See the equation above equation (47) in BEGS <span id="id14">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>)</p>
 </section>
 <section id="more-advanced-topic">
 <h3><span class="section-number">46.4.3. </span>More Advanced Topic<a class="headerlink" href="#more-advanced-topic" title="Permalink to this heading">#</a></h3>
-<p>The remainder of this lecture is about  technical material based on  formulas from BEGS <span id="id15">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
+<p>The remainder of this lecture is about  technical material based on  formulas from BEGS <span id="id15">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
 <p>The topic involves interpreting  and extending formula <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(46.3)</a> for the ergodic mean <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span>.</p>
 </section>
 <section id="chicken-and-egg">
@@ -1639,17 +1641,17 @@ the ergodic distribution solves a <strong>fiscal-risk minimization problem</stro
 </section>
 <section id="approximating-the-ergodic-mean">
 <h3><span class="section-number">46.4.5. </span>Approximating the Ergodic Mean<a class="headerlink" href="#approximating-the-ergodic-mean" title="Permalink to this heading">#</a></h3>
-<p>BEGS also <span id="id16">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> propose  an approximation to  <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> that can be computed <strong>without</strong> first approximating  the
+<p>BEGS also <span id="id16">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> propose  an approximation to  <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> that can be computed <strong>without</strong> first approximating  the
 ergodic distribution.</p>
 <p>To  construct the BEGS  approximation to <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span>, we just follow steps set forth on pages 648 - 650 of section III.D of
-<span id="id17">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span></p>
+<span id="id17">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span></p>
 <ul class="simple">
 <li><p>notation in BEGS might be confusing at first sight, so
 it is important to stare and digest before computing</p></li>
-<li><p>there are also some sign errors in the <span id="id18">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> text that we’ll want
+<li><p>there are also some sign errors in the <span id="id18">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> text that we’ll want
 to correct here</p></li>
 </ul>
-<p>Here is a step-by-step description of the BEGS <span id="id19">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> approximation procedure.</p>
+<p>Here is a step-by-step description of the BEGS <span id="id19">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> approximation procedure.</p>
 </section>
 <section id="step-by-step">
 <h3><span class="section-number">46.4.6. </span>Step by Step<a class="headerlink" href="#step-by-step" title="Permalink to this heading">#</a></h3>
@@ -1664,7 +1666,7 @@ values <span class="math notranslate nohighlight">\(c_\tau(s), s= 1, 2, \ldots, 
 <p><span class="math notranslate nohighlight">\(S=3\)</span> in our case, but we’ll write code for a general integer
 <span class="math notranslate nohighlight">\(S\)</span>.</p>
 <p><strong>Typo alert:</strong> Please note that there is a sign error in equation (42)
-of BEGS <span id="id20">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> – it should be a <strong>minus</strong> rather than a <strong>plus</strong> in the middle.</p>
+of BEGS <span id="id20">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> – it should be a <strong>minus</strong> rather than a <strong>plus</strong> in the middle.</p>
 <ul class="simple">
 <li><p>We have made the appropriate correction in the above equation.</p></li>
 </ul>
@@ -1691,7 +1693,7 @@ the <strong>effective return</strong> on risk-free debt and they call
 \]</div>
 <p>This equation says that at a constant discount factor <span class="math notranslate nohighlight">\(\beta\)</span>,  equivalent government debt <span class="math notranslate nohighlight">\({\mathcal B}\)</span> equals the
 present value of the mean effective government <strong>surplus</strong>.</p>
-<p><strong>Another typo alert</strong>: there is a sign error in equation (46) of BEGS <span id="id21">[<a class="reference internal" href="zreferences.html#id228" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> –the left
+<p><strong>Another typo alert</strong>: there is a sign error in equation (46) of BEGS <span id="id21">[<a class="reference internal" href="zreferences.html#id229" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> –the left
 side should be multiplied by <span class="math notranslate nohighlight">\(-1\)</span>.</p>
 <ul class="simple">
 <li><p>We have made this correction in the above equation.</p></li>

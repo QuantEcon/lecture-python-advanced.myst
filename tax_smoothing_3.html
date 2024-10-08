@@ -253,13 +253,13 @@ const thebe_selector_output = ".output, .cell_output"
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.60.0)
-Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.31.0)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.11.4)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.12)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
+Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
 Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.4)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.7)
@@ -274,12 +274,12 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 <h2><span class="section-number">11.1. </span>Another Application of Markov Jump Linear Quadratic Dynamic Programming<a class="headerlink" href="#another-application-of-markov-jump-linear-quadratic-dynamic-programming" title="Permalink to this heading">#</a></h2>
 <p>This is another <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">sequel to an earlier lecture</span></a>.</p>
 <p>We again use a method introduced in lecture <a class="reference internal" href="markov_jump_lq.html"><span class="doc">Markov Jump LQ dynamic programming</span></a>
-to implement some ideas Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id236" title="Robert J Barro. Determinants of democracy. Journal of Political economy, 107(S6):S158–S183, 1999.">Barro, 1999</a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id237" title="Robert J Barro and Rachel McCleary. Religion and economic growth. Technical Report, National Bureau of Economic Research, 2003.">Barro and McCleary, 2003</a>]</span>) that
-extend his classic 1979 <span id="id3">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model of tax smoothing.</p>
-<p>Barro’s 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model is about a government that borrows and lends in order
+to implement some ideas Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id237" title="Robert J Barro. Determinants of democracy. Journal of Political economy, 107(S6):S158–S183, 1999.">Barro, 1999</a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id238" title="Robert J Barro and Rachel McCleary. Religion and economic growth. Technical Report, National Bureau of Economic Research, 2003.">Barro and McCleary, 2003</a>]</span>) that
+extend his classic 1979 <span id="id3">[<a class="reference internal" href="zreferences.html#id137" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model of tax smoothing.</p>
+<p>Barro’s 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id137" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model is about a government that borrows and lends in order
 to help it minimize an intertemporal measure of distortions caused by
 taxes.</p>
-<p>Technically, Barro’s 1979 <span id="id5">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model looks a lot like a consumption-smoothing model.</p>
+<p>Technically, Barro’s 1979 <span id="id5">[<a class="reference internal" href="zreferences.html#id137" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model looks a lot like a consumption-smoothing model.</p>
 <p>Our generalizations of his 1979 model will also look
 like souped-up consumption-smoothing models.</p>
 <p>In this lecture, we describe a  tax-smoothing problem of a
@@ -488,7 +488,7 @@ government uses those assets to lower taxation today.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d1487af903298f5a0e31086d26e9412fd17cc7d1143f1c1ec17b9596992740c1.png" src="_images/d1487af903298f5a0e31086d26e9412fd17cc7d1143f1c1ec17b9596992740c1.png" />
+<img alt="_images/06ea24837ac0d582b2c7df73872772a4fa0a62faaf413a74a78aa87f5e803879.png" src="_images/06ea24837ac0d582b2c7df73872772a4fa0a62faaf413a74a78aa87f5e803879.png" />
 </div>
 </div>
 <p>We can adjust the model so that, rather than having debt fluctuate
@@ -533,7 +533,7 @@ borrow.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ff8d3cde3a0574a69f2f1f8bbc1329c03a4f291c09794a107bea19bfb3ba5549.png" src="_images/ff8d3cde3a0574a69f2f1f8bbc1329c03a4f291c09794a107bea19bfb3ba5549.png" />
+<img alt="_images/1d9efbd378fce8147f256a32379622cfbb7723d5e4dfa5e288786fba74afaac0.png" src="_images/1d9efbd378fce8147f256a32379622cfbb7723d5e4dfa5e288786fba74afaac0.png" />
 </div>
 </div>
 <p>With a lower interest rate, the government has an incentive to

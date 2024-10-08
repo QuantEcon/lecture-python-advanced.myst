@@ -262,11 +262,13 @@ const thebe_selector_output = ".output, .cell_output"
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (0.7.2)
-Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.60.0)
-Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.31.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (0.60.0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
+Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.31.0)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.11.4)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.12)
 Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
@@ -282,7 +284,7 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </div>
 <section id="overview">
 <h2><span class="section-number">13.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>This lecture computes versions of  Arellano’s  <span id="id1">[<a class="reference internal" href="zreferences.html#id126" title="Cristina Arellano. Default risk and income fluctuations in emerging economies. The American Economic Review, pages 690–712, 2008.">Arellano, 2008</a>]</span>
+<p>This lecture computes versions of  Arellano’s  <span id="id1">[<a class="reference internal" href="zreferences.html#id127" title="Cristina Arellano. Default risk and income fluctuations in emerging economies. The American Economic Review, pages 690–712, 2008.">Arellano, 2008</a>]</span>
 model of sovereign default.</p>
 <p>The model describes interactions among default risk, output, and an
 equilibrium interest rate that includes a premium for endogenous default risk.</p>
@@ -530,7 +532,7 @@ default decision rule, and the pricing function <span class="math notranslate no
 <p>After that we’ll perform some additional simulations.</p>
 <p>We use a slightly modified version of the algorithm recommended by Arellano.</p>
 <ul class="simple">
-<li><p>The appendix to <span id="id2">[<a class="reference internal" href="zreferences.html#id126" title="Cristina Arellano. Default risk and income fluctuations in emerging economies. The American Economic Review, pages 690–712, 2008.">Arellano, 2008</a>]</span> recommends value function iteration until
+<li><p>The appendix to <span id="id2">[<a class="reference internal" href="zreferences.html#id127" title="Cristina Arellano. Default risk and income fluctuations in emerging economies. The American Economic Review, pages 690–712, 2008.">Arellano, 2008</a>]</span> recommends value function iteration until
 convergence, updating the price, and then repeating.</p></li>
 <li><p>Instead, we update the bond price at every value function iteration step.</p></li>
 </ul>
@@ -836,7 +838,7 @@ we have the policy functions</p>
 <section id="results">
 <h2><span class="section-number">13.5. </span>Results<a class="headerlink" href="#results" title="Permalink to this heading">#</a></h2>
 <p>Let’s start by trying to replicate the results obtained in
-<span id="id3">[<a class="reference internal" href="zreferences.html#id126" title="Cristina Arellano. Default risk and income fluctuations in emerging economies. The American Economic Review, pages 690–712, 2008.">Arellano, 2008</a>]</span>.</p>
+<span id="id3">[<a class="reference internal" href="zreferences.html#id127" title="Cristina Arellano. Default risk and income fluctuations in emerging economies. The American Economic Review, pages 690–712, 2008.">Arellano, 2008</a>]</span>.</p>
 <p>In what follows, all results are computed using Arellano’s parameter values.</p>
 <p>The values can be seen in the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method of the <code class="docutils literal notranslate"><span class="pre">Arellano_Economy</span></code>
 shown above.</p>
@@ -863,7 +865,7 @@ correspond to higher interest rates.</p></li>
 of default.</p></li>
 </ul>
 <p>The next figure plots value functions and replicates the right hand panel of Figure 4 of
-<span id="id4">[<a class="reference internal" href="zreferences.html#id126" title="Cristina Arellano. Default risk and income fluctuations in emerging economies. The American Economic Review, pages 690–712, 2008.">Arellano, 2008</a>]</span>.</p>
+<span id="id4">[<a class="reference internal" href="zreferences.html#id127" title="Cristina Arellano. Default risk and income fluctuations in emerging economies. The American Economic Review, pages 690–712, 2008.">Arellano, 2008</a>]</span>.</p>
 <figure class="align-default">
 <img alt="_images/arellano_value_funcs.png" src="_images/arellano_value_funcs.png" />
 </figure>

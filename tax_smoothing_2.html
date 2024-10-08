@@ -280,15 +280,15 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 <h2><span class="section-number">10.1. </span>An Application of Markov Jump Linear Quadratic Dynamic Programming<a class="headerlink" href="#an-application-of-markov-jump-linear-quadratic-dynamic-programming" title="Permalink to this heading">#</a></h2>
 <p>This is a <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">sequel to an earlier lecture</span></a>.</p>
 <p>We use a method introduced in lecture <a class="reference internal" href="markov_jump_lq.html"><span class="doc">Markov Jump LQ dynamic programming</span></a> to
-implement suggestions by Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id236" title="Robert J Barro. Determinants of democracy. Journal of Political economy, 107(S6):S158–S183, 1999.">Barro, 1999</a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id237" title="Robert J Barro and Rachel McCleary. Religion and economic growth. Technical Report, National Bureau of Economic Research, 2003.">Barro and McCleary, 2003</a>]</span>) for extending his
+implement suggestions by Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id237" title="Robert J Barro. Determinants of democracy. Journal of Political economy, 107(S6):S158–S183, 1999.">Barro, 1999</a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id238" title="Robert J Barro and Rachel McCleary. Religion and economic growth. Technical Report, National Bureau of Economic Research, 2003.">Barro and McCleary, 2003</a>]</span>) for extending his
 classic 1979 model of tax smoothing.</p>
-<p>Barro’s 1979 <span id="id3">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model is about a government that borrows and lends in order
+<p>Barro’s 1979 <span id="id3">[<a class="reference internal" href="zreferences.html#id137" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model is about a government that borrows and lends in order
 to help it minimize an intertemporal measure of distortions caused by
 taxes.</p>
-<p>Technically, Barro’s 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model looks a lot like a consumption-smoothing model.</p>
-<p>Our generalizations of his 1979 <span id="id5">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model will also look
+<p>Technically, Barro’s 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id137" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model looks a lot like a consumption-smoothing model.</p>
+<p>Our generalizations of his 1979 <span id="id5">[<a class="reference internal" href="zreferences.html#id137" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model will also look
 like souped-up consumption-smoothing models.</p>
-<p>Wanting tractability induced Barro in 1979 <span id="id6">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> to assume that</p>
+<p>Wanting tractability induced Barro in 1979 <span id="id6">[<a class="reference internal" href="zreferences.html#id137" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> to assume that</p>
 <ul class="simple">
 <li><p>the government trades only one-period risk-free debt, and</p></li>
 <li><p>the one-period risk-free interest rate is constant</p></li>
@@ -339,7 +339,7 @@ per time <span class="math notranslate nohighlight">\(t+1\)</span> goods promise
 time <span class="math notranslate nohighlight">\(t\)</span> goods received per time <span class="math notranslate nohighlight">\(t+2\)</span> goods promised.</p>
 <p>Evidently, <span class="math notranslate nohighlight">\(p_{t, t+1}, p_{t,t+2}\)</span> are inversely related to
 appropriate corresponding gross interest rates on government debt.</p>
-<p>In the spirit of Barro (1979) <span id="id7">[<a class="reference internal" href="zreferences.html#id136" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span>, government
+<p>In the spirit of Barro (1979) <span id="id7">[<a class="reference internal" href="zreferences.html#id137" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span>, government
 expenditures are governed by an exogenous stochastic process.</p>
 <p>Given initial conditions <span class="math notranslate nohighlight">\(b_{-2,0}, b_{-1,0}, z_0, i_0\)</span>, where
 <span class="math notranslate nohighlight">\(i_0\)</span> is the initial Markov state, the government chooses a
@@ -675,7 +675,7 @@ moving from one to the other.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/dafea4a131056c20d5fc4107ef383f0b292aa7d8335baf7ef8542efeea444d84.png" src="_images/dafea4a131056c20d5fc4107ef383f0b292aa7d8335baf7ef8542efeea444d84.png" />
+<img alt="_images/f05e4770afd59d1a24f82efbf0ceb6ecde1b224941ba069ab31da85726643f62.png" src="_images/f05e4770afd59d1a24f82efbf0ceb6ecde1b224941ba069ab31da85726643f62.png" />
 </div>
 </div>
 <p>The above simulations show that when no penalty is imposed on different
@@ -725,7 +725,7 @@ two-period debt:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f199b9ba742b48a490f173fe24ceaa8a4d4c55d1c4e387f55ba4436079f8211f.png" src="_images/f199b9ba742b48a490f173fe24ceaa8a4d4c55d1c4e387f55ba4436079f8211f.png" />
+<img alt="_images/c23984703cbaa77a735cb1b14d47c89a3db4d133f2959dad214fa8fca9365d43.png" src="_images/c23984703cbaa77a735cb1b14d47c89a3db4d133f2959dad214fa8fca9365d43.png" />
 </div>
 </div>
 </section>
@@ -1008,7 +1008,7 @@ above</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/aa953538d05043be14bdfe45703848f1873a653b9d53ffc86e8574cb02717957.png" src="_images/aa953538d05043be14bdfe45703848f1873a653b9d53ffc86e8574cb02717957.png" />
+<img alt="_images/a7d18d2c8894b906fc6f485234cd932e901739baa012dffc282538faa0fdf11a.png" src="_images/a7d18d2c8894b906fc6f485234cd932e901739baa012dffc282538faa0fdf11a.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1024,7 +1024,7 @@ above</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ef8f6b5c81bd93352a8dddf2a08bafb4d5869a44053d2a02cd3eb2315cfb07a2.png" src="_images/ef8f6b5c81bd93352a8dddf2a08bafb4d5869a44053d2a02cd3eb2315cfb07a2.png" />
+<img alt="_images/79e2769bb199c5b6225201b2545f7822c17ff2c4a47ebb6058d7920bdca0f2dc.png" src="_images/79e2769bb199c5b6225201b2545f7822c17ff2c4a47ebb6058d7920bdca0f2dc.png" />
 </div>
 </div>
 </section>
