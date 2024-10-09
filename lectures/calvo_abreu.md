@@ -25,51 +25,26 @@ kernelspec:
 ```{index} single: Models; Additive functionals
 ```
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
 
-```{code-cell} ipython3
-:tags: [hide-output]
-
-!pip install --upgrade quantecon
-```
 
 ## Overview
 
 
 This lecture is a sequel to this  quantecon lecture {doc}`calvo`.
 
-It describes outcomes under yet another timing protocol for a  linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government plans.
+That lecture studied a linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of an optimal government plan  under a particular timing protocol.
 
-In that lecture, a government chooses  a sequence 
-$\vec \mu = \{\mu_t\}_{t=0}^\infty$ of gross rates of growth in the supply of money.
+In particular, at time $0$ a ``Stackelberg`` government  (a.k.a~ ``Ramsey planner``) at time $0$ once and for all chooses  a sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ of gross rates of growth in the supply of money.
 
-An outcome is  the sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$  of gross rates of increase in the price level, which we call inflation rates.  
+A consequence of that choice is a (rational expectations equilibrium)  sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$  of gross rates of increase in the price level that  we call inflation rates. 
 
+{cite}`Calvo1978` showed that  the  Ramsey plan for his model is fragile in the sense that it would
+not prevail under alternative timing protocols and particular supplementary assumptions about what government authorities who set $\mu_t$ at time $t$ believe how future government authorities who set $\mu_{t+j}$ for $j >0$ will respond to their decisions.  
 
-A theme of that lecture was that  timing protocols affect  outcomes.
-
-Thus, we studied  three  models of government policy making that  differ in
-
-- *what* a  policymaker chooses, either a sequence
-  $\vec \mu$ or just   $\mu_t$ in a single period $t$.
-- *when* a  policymaker chooses, either once and for all at time $0$, or at some time or times  $t \geq 0$.
-- what a policymaker *assumes* about how its choice of $\mu_t$
-  affects the representative  agent's expectations about earlier and later
-  inflation rates.
-
-In two of our models, a single policymaker  chooses a sequence
-$\{\mu_t\}_{t=0}^\infty$ once and for all, knowing  how
-$\mu_t$ affects inflation rates  at dates $s = 0, 1, \ldots, t-1$
-
-- these two models  thus employ a  **Ramsey** or **Stackelberg** timing protocol.
-
-In a third  model, there is a sequence of policymakers, each of whom
-sets $\mu_t$ at one $t$ only.
-
-- a time $t$  policymaker cares only about $v_t$ and  ignores  effects that its choice of $\mu_t$ has on $v_s$ at  dates $s = 0, 1, \ldots, t-1$.
+In this lecture, we explore another set of assumptions about what government authorities who set $\mu_t$ at time $t$ believe how future government authorities who set $\mu_{t+j}$ for $j >0$ will respond to their decisions.
 
 
-By way of contrast, in this lecture there is  sequence of separate policymakers;  a time $t$ policymaker chooses  only $\mu_t$,  but now  believes that its choice of $\mu_t$  shapes the representative agent's beliefs about  future rates of money creation and inflation, and through them, future government actions.
+We shall assume that there is  sequence of separate policymakers;  a time $t$ policymaker chooses  only $\mu_t$,  but now  believes that its choice of $\mu_t$  shapes the representative agent's beliefs about  future rates of money creation and inflation, and through them, future government actions.
 
 This timing protocol and belief structure leads to a  model of a  **credible government policy** also known as a **sustainable plan**
 
@@ -81,25 +56,6 @@ the new   timing protocol.
 
 
 
-
-In addition to what's in Anaconda, this lecture will use  the following libraries:
-
-```{code-cell} ipython3
-:tags: [hide-output]
-
-!pip install --upgrade quantecon
-```
-
-We'll start with some imports:
-
-```{code-cell} ipython3
-import numpy as np
-from quantecon import LQ
-import matplotlib.pyplot as plt
-from matplotlib.ticker import FormatStrFormatter
-import pandas as pd
-from IPython.display import display, Math
-```
 
 ## Model Components
 
@@ -187,11 +143,11 @@ The Quantecon lecture {doc}`calvo`  considered three  models of government polic
   $\vec \mu$ or just   $\mu_t$ in a single period $t$.
 - *when* a  policymaker chooses, either once and for all at time $0$, or at some time or times  $t \geq 0$.
 - what a policymaker *assumes* about how its choice of $\mu_t$
-  affects the representative  agent's expectations about earlier and later
+  affects the representative  agent's expectations about 
   inflation rates.
 
 In this lecture,  there is a sequence of policymakers, each of whom
-sets $\mu_t$ at one $t$ only.
+sets $\mu_t$ at  $t$ only.
 
 To set the stage, recall that in a **Markov perfect equilibrium** 
 
@@ -320,6 +276,29 @@ That credible plans come in pairs threaten to bring an explosion of plans to kee
 But Dilip Abreu showed how to render manageable the number of plans that must be kept track of.
 
 The key is an  object called a **self-enforcing** plan.
+
+We'll proceed to compute one.
+
+
+
+In addition to what's in Anaconda, this lecture will use  the following libraries:
+
+```{code-cell} ipython3
+:tags: [hide-output]
+
+!pip install --upgrade quantecon
+```
+
+We'll start with some imports:
+
+```{code-cell} ipython3
+import numpy as np
+from quantecon import LQ
+import matplotlib.pyplot as plt
+from matplotlib.ticker import FormatStrFormatter
+import pandas as pd
+from IPython.display import display, Math
+```
 
 ### Abreu's Self-Enforcing Plan
 
