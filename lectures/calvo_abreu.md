@@ -38,15 +38,48 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 
 This lecture is a sequel to this  quantecon lecture {doc}`calvo`.
 
-It describes outcomes under yet another timing protocol for a  linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government
-plans.
+It describes outcomes under yet another timing protocol for a  linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government plans.
+
+In that lecture, a government chooses  a sequence 
+$\vec \mu = \{\mu_t\}_{t=0}^\infty$ of gross rates of growth in the supply of money.
+
+An outcome is  the sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$  of gross rates of increase in the price level, which we call inflation rates.  
 
 
 A theme of that lecture was that  timing protocols affect  outcomes.
 
-In additional to the the ideas from  papers by Cagan {cite}`Cagan`, Calvo {cite}`Calvo1978`, and  Chang {cite}`chang1998credible`that we used in that lecture, in this lecture we'll use ideas from Stokey {cite}`stokey1989reputation`, {cite}`Stokey1991`,
+Thus, we studied  three  models of government policy making that  differ in
+
+- *what* a  policymaker chooses, either a sequence
+  $\vec \mu$ or just   $\mu_t$ in a single period $t$.
+- *when* a  policymaker chooses, either once and for all at time $0$, or at some time or times  $t \geq 0$.
+- what a policymaker *assumes* about how its choice of $\mu_t$
+  affects the representative  agent's expectations about earlier and later
+  inflation rates.
+
+In two of our models, a single policymaker  chooses a sequence
+$\{\mu_t\}_{t=0}^\infty$ once and for all, knowing  how
+$\mu_t$ affects inflation rates  at dates $s = 0, 1, \ldots, t-1$
+
+- these two models  thus employ a  **Ramsey** or **Stackelberg** timing protocol.
+
+In a third  model, there is a sequence of policymakers, each of whom
+sets $\mu_t$ at one $t$ only.
+
+- a time $t$  policymaker cares only about $v_t$ and  ignores  effects that its choice of $\mu_t$ has on $v_s$ at  dates $s = 0, 1, \ldots, t-1$.
+
+
+By way of contrast, in this lecture there is  sequence of separate policymakers;  a time $t$ policymaker chooses  only $\mu_t$,  but now  believes that its choice of $\mu_t$  shapes the representative agent's beliefs about  future rates of money creation and inflation, and through them, future government actions.
+
+This timing protocol and belief structure leads to a  model of a  **credible government policy** also known as a **sustainable plan**
+
+In  quantecon lecture {doc}`calvo`  we used  ideas from  papers by Cagan {cite}`Cagan`, Calvo {cite}`Calvo1978`, and  Chang {cite}`chang1998credible`.
+
+In addition to those ideas, in this lecture we'll also use ideas from Stokey {cite}`stokey1989reputation`, {cite}`Stokey1991`,
 Chari and Kehoe {cite}`chari1990sustainable`, and Abreu {cite}`Abreu` to study outcomes under 
-another timing protocol.
+the new   timing protocol.
+
+
 
 
 In addition to what's in Anaconda, this lecture will use  the following libraries:
@@ -85,21 +118,21 @@ The demand for real balances is governed by a perfect foresight
 version of a Cagan {cite}`Cagan` demand function for real balances:
 
 ```{math}
-:label: eq_old1
+:label: eq_old1_new
 
 m_t - p_t = -\alpha(p_{t+1} - p_t) \: , \: \alpha > 0
 ```
 
 for $t \geq 0$.
 
-Equation {eq}`eq_old1` asserts that the demand for real balances is inversely
+Equation {eq}`eq_old1_new` asserts that the demand for real balances is inversely
 related to the public's expected rate of inflation, which  equals
 the actual rate of inflation because there is no uncertainty here.
 
 (When there is no uncertainty, an assumption of **rational expectations** that becomes equivalent to  **perfect foresight**).
 
 
-Subtracting the demand function {eq}`eq_old1` at time $t$ from the demand
+Subtracting the demand function {eq}`eq_old1_new` at time $t$ from the demand
 function at $t+1$ gives:
 
 $$
@@ -109,7 +142,7 @@ $$
 or
 
 ```{math}
-:label: eq_old2
+:label: eq_old2_new
 
 \theta_t = \frac{\alpha}{1+\alpha} \theta_{t+1} + \frac{1}{1+\alpha} \mu_t
 ```
@@ -126,15 +159,15 @@ $$
 We say that a sequence that belongs to $L^2$   is **square summable**.
 
 When we assume that the sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ is square summable and we require that the sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$ is square summable,
-the linear difference equation {eq}`eq_old2` can be solved forward to get:
+the linear difference equation {eq}`eq_old2_new` can be solved forward to get:
 
 ```{math}
-:label: eq_old3
+:label: eq_old3_new
 
 \theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}
 ```
 
-**Insight:** In the spirit of Chang {cite}`chang1998credible`,  equations {eq}`eq_old1` and {eq}`eq_old3` show that $\theta_t$ intermediates
+**Insight:** In the spirit of Chang {cite}`chang1998credible`,  equations {eq}`eq_old1_new` and {eq}`eq_old3_new` show that $\theta_t$ intermediates
 how choices of $\mu_{t+j}, \ j=0, 1, \ldots$ impinge on time $t$
 real balances $m_t - p_t = -\alpha \theta_t$.
 
