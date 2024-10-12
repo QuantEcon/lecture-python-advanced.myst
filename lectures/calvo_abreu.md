@@ -30,29 +30,27 @@ kernelspec:
 ## Overview
 
 
-This lecture is a sequel to this  quantecon lecture {doc}`calvo`.
+This is a sequel to this  quantecon lecture {doc}`calvo`.
 
-That lecture studied a linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of an optimal government plan  under a particular timing protocol.
-
-In particular, at time $0$ a ``Stackelberg`` government  (a.k.a~ ``Ramsey planner``) at time $0$ once and for all chooses  a sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ of gross rates of growth in the supply of money.
+That lecture studied a linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to study  the **time inconsistency** of the optimal government plan that emerges when  a ``Stackelberg`` government  (a.k.a.~ a ``Ramsey planner``) at time $0$ once and for all chooses  a sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ of gross rates of growth in the supply of money.
 
 A consequence of that choice is a (rational expectations equilibrium)  sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$  of gross rates of increase in the price level that  we call inflation rates. 
 
-{cite}`Calvo1978` showed that  the  Ramsey plan for his model is fragile in the sense that it would
-not prevail under alternative timing protocols and particular supplementary assumptions about what government authorities who set $\mu_t$ at time $t$ believe how future government authorities who set $\mu_{t+j}$ for $j >0$ will respond to their decisions.  
+{cite}`Calvo1978` showed that  a  Ramsey plan  would
+not emerge from  alternative timing protocols and associated supplementary assumptions about what government authorities who set $\mu_t$ at time $t$ believe how future government authorities who set $\mu_{t+j}$ for $j >0$ will respond to their decisions.  
 
 In this lecture, we explore another set of assumptions about what government authorities who set $\mu_t$ at time $t$ believe how future government authorities who set $\mu_{t+j}$ for $j >0$ will respond to their decisions.
 
 
 We shall assume that there is  sequence of separate policymakers;  a time $t$ policymaker chooses  only $\mu_t$,  but now  believes that its choice of $\mu_t$  shapes the representative agent's beliefs about  future rates of money creation and inflation, and through them, future government actions.
 
-This timing protocol and belief structure leads to a  model of a  **credible government policy** also known as a **sustainable plan**
+This timing protocol and belief structure leads to a  model of a  **credible government policy**, also known as a **sustainable plan**.
 
 In  quantecon lecture {doc}`calvo`  we used  ideas from  papers by Cagan {cite}`Cagan`, Calvo {cite}`Calvo1978`, and  Chang {cite}`chang1998credible`.
 
-In addition to those ideas, in this lecture we'll also use ideas from Stokey {cite}`stokey1989reputation`, {cite}`Stokey1991`,
-Chari and Kehoe {cite}`chari1990sustainable`, and Abreu {cite}`Abreu` to study outcomes under 
-the new   timing protocol.
+In addition to those ideas,  we'll also use ideas from Abreu {cite}`Abreu`, Stokey {cite}`stokey1989reputation`, {cite}`Stokey1991`, and 
+Chari and Kehoe {cite}`chari1990sustainable` to study outcomes under 
+our    timing protocol.
 
 
 
@@ -132,7 +130,7 @@ An equivalence class of continuation money growth sequences $\{\mu_{t+j}\}_{j=0}
 That future rates of money creation influence earlier rates of inflation
 makes  timing protocols matter for modeling optimal government policies.
 
-Quantecon lecture {doc}`calvo` used this  insight to help us simplify our  analysis of alternative  government policy problems.
+Quantecon lecture {doc}`calvo` used this  insight to  simplify   analysis of alternative  government policy problems.
 
 
 ## Another  Timing Protocol
@@ -155,7 +153,7 @@ To set the stage, recall that in a **Markov perfect equilibrium**
 
 In particular, in a Markov perfect equilibrium, there is a sequence indexed by $t =0, 1, 2, \ldots$ of separate policymakers;  a time $t$ policymaker chooses $\mu_t$ only and forecasts that future government decisions are unaffected by its choice.
 
-By way of contrast, in this lecture there is  sequence of separate policymakers;  a time $t$ policymaker chooses  only $\mu_t$,  but now  believes that its choice of $\mu_t$  shapes the representative agent's beliefs about  future rates of money creation and inflation, and through them, future government actions.
+By way of contrast, in this lecture there is  sequence of distinct policymakers;  a time $t$ policymaker chooses  only $\mu_t$,  but now  believes that its choice of $\mu_t$  shapes the representative agent's beliefs about  future rates of money creation and inflation, and through them, future government actions.
 
 This timing protocol and belief structure leads to a  model of a  **credible government policy** also known as a **sustainable plan**
 
