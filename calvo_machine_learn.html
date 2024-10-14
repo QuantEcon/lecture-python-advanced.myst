@@ -121,7 +121,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="42. Ramsey Plans, Time Inconsistency, Sustainable Plans" href="calvo.html" />
+    <link rel="next" title="42. Time Inconsistency of Ramsey Plans" href="calvo.html" />
     <link rel="prev" title="40. Stackelberg Plans" href="dyn_stack.html" />
 
 <!-- Normal Meta Tags -->
@@ -255,11 +255,11 @@ const thebe_selector_output = ".output, .cell_output"
 <p>This  lecture  uses what we call a <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> approach to
 compute a Ramsey plan  for  a version of a model of Calvo <span id="id1">[<a class="reference internal" href="zreferences.html#id140" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span>.</p>
 <p>We use another approach to compute a  Ramsey plan for Calvo’s model  in another quantecon lecture
-<a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
-<p>The <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a> lecture  uses  an analytic approach based on <code class="docutils literal notranslate"><span class="pre">dynamic</span> <span class="pre">programming</span> <span class="pre">squared</span></code> to guide computations.</p>
+<a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>.</p>
+<p>The <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a> lecture  uses  an analytic approach based on <code class="docutils literal notranslate"><span class="pre">dynamic</span> <span class="pre">programming</span> <span class="pre">squared</span></code> to guide computations.</p>
 <p>Dynamic programming squared provides  information about the structure of  mathematical  objects in terms of which a Ramsey plan can be represented recursively.</p>
 <p>Using that information  paves the way to computing a  Ramsey plan efficiently.</p>
-<p>Included in the structural information  that dynamic programming squared provides  in quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>  are</p>
+<p>Included in the structural information  that dynamic programming squared provides  in quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>  are</p>
 <ul class="simple">
 <li><p>a <strong>state</strong> variable that confronts a continuation Ramsey planner, and</p></li>
 <li><p>two <strong>Bellman equations</strong></p>
@@ -278,7 +278,7 @@ compute a Ramsey plan  for  a version of a model of Calvo <span id="id1">[<a cla
 </ul>
 <p>Because it fails to take advantage of the structure recognized by dynamic programming squared and, relative to the dynamic programming squared approach, proliferates parameters, we take the liberty of calling this a <strong>machine learning</strong> approach.</p>
 <p>This is similar to what other machine learning algorithms also do.</p>
-<p>Comparing the calculations in this lecture with those in our sister lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a> provides us
+<p>Comparing the calculations in this lecture with those in our sister lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a> provides us
 with a laboratory that can  help us  appreciate promises and limits of machine learning approaches
 more generally.</p>
 <p>In this lecture, we’ll actually deploy two machine learning approaches.</p>
@@ -294,7 +294,7 @@ more generally.</p>
 </ul>
 </li>
 </ul>
-<p>Each of  these machine learning (ML) approaches  recovers the same  Ramsey plan that shall compute  in  quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a> by using dynamic programming squared.</p>
+<p>Each of  these machine learning (ML) approaches  recovers the same  Ramsey plan that shall compute  in  quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a> by using dynamic programming squared.</p>
 <p>However,  they conceal  the recursive structure of the Ramsey plan.</p>
 <p>That recursive  structure lies hidden within   some of the objects calculated  by our ML approaches.</p>
 <p>Nevertheless, we can ferret out some of that structure  by asking   the right questions.</p>
@@ -534,7 +534,7 @@ h_0 + h_1 \tilde\theta_t + h_2 \tilde\theta_t^2 -
 <h2><span class="section-number">41.6. </span>A Gradient Descent Algorithm<a class="headerlink" href="#a-gradient-descent-algorithm" title="Permalink to this heading">#</a></h2>
 <p>We now describe  code that  maximizes the criterion function <a class="reference internal" href="#equation-eq-ramseyvalue">(41.9)</a> subject to equations <a class="reference internal" href="#equation-eq-inflation101">(41.8)</a> by choice of the truncated vector  <span class="math notranslate nohighlight">\(\tilde \mu\)</span>.</p>
 <p>We use a brute force or <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> approach that just hands our problem off to code that minimizes <span class="math notranslate nohighlight">\(V\)</span> with respect to the components of <span class="math notranslate nohighlight">\(\tilde \mu\)</span> by using gradient descent.</p>
-<p>We hope that answers will agree with those found obtained by other more structured methods in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+<p>We hope that answers will agree with those found obtained by other more structured methods in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>.</p>
 <section id="implementation">
 <h3><span class="section-number">41.6.1. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h3>
 <p>We will implement the above in Python using JAX and Optax libraries.</p>
@@ -560,11 +560,11 @@ h_0 + h_1 \tilde\theta_t + h_2 \tilde\theta_t^2 -
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (2.31.0)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.11.4)
-Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.12)
-Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from quantecon) (1.12)
+Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.4)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (3.4)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2.0.7)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from requests-&gt;quantecon) (2024.2.2)
@@ -590,10 +590,10 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting jaxlib&gt;=0.4.27 (from optax)
+  Downloading jaxlib-0.4.34-cp311-cp311-manylinux2014_x86_64.whl.metadata (983 bytes)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading jaxlib-0.4.34-cp311-cp311-manylinux2014_x86_64.whl.metadata (983 bytes)
-Requirement already satisfied: numpy&gt;=1.18.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from optax) (1.26.4)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numpy&gt;=1.18.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from optax) (1.26.4)
 Collecting etils[epy] (from optax)
   Downloading etils-1.9.4-py3-none-any.whl.metadata (6.4 kB)
 </pre></div>
@@ -615,84 +615,100 @@ Requirement already satisfied: scipy&gt;=1.10 in /home/runner/miniconda3/envs/qu
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/289.6 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">153.6/289.6 kB</span> <span class=" -Color -Color-Red">4.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">163.8/289.6 kB</span> <span class=" -Color -Color-Red">4.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">289.6/289.6 kB</span> <span class=" -Color -Color-Red">6.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25h
+?25hDownloading absl_py-2.1.0-py3-none-any.whl (133 kB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/133.7 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading absl_py-2.1.0-py3-none-any.whl (133 kB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/133.7 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">133.7/133.7 kB</span> <span class=" -Color -Color-Red">41.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">133.7/133.7 kB</span> <span class=" -Color -Color-Red">39.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading chex-0.1.87-py3-none-any.whl (99 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/99.4 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">99.4/99.4 kB</span> <span class=" -Color -Color-Red">35.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25h
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading jax-0.4.34-py3-none-any.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">99.4/99.4 kB</span> <span class=" -Color -Color-Red">30.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading jax-0.4.34-py3-none-any.whl (2.1 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/2.1 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.0/2.1 MB</span> <span class=" -Color -Color-Red">35.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.1/2.1 MB</span> <span class=" -Color -Color-Red">41.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.0/2.1 MB</span> <span class=" -Color -Color-Red">36.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.1/2.1 MB</span> <span class=" -Color -Color-Red">41.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading jaxlib-0.4.34-cp311-cp311-manylinux2014_x86_64.whl (86.1 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/86.1 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.5/86.1 MB</span> <span class=" -Color -Color-Red">201.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">14.1/86.1 MB</span> <span class=" -Color -Color-Red">232.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.9/86.1 MB</span> <span class=" -Color -Color-Red">170.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">10.0/86.1 MB</span> <span class=" -Color -Color-Red">159.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">21.8/86.1 MB</span> <span class=" -Color -Color-Red">236.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">15.3/86.1 MB</span> <span class=" -Color -Color-Red">163.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">29.7/86.1 MB</span> <span class=" -Color -Color-Red">235.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">37.9/86.1 MB</span> <span class=" -Color -Color-Red">239.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">20.7/86.1 MB</span> <span class=" -Color -Color-Red">163.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">25.8/86.1 MB</span> <span class=" -Color -Color-Red">155.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">45.7/86.1 MB</span> <span class=" -Color -Color-Red">237.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">30.7/86.1 MB</span> <span class=" -Color -Color-Red">140.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">53.6/86.1 MB</span> <span class=" -Color -Color-Red">235.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━ <span class=" -Color -Color-Green">60.6/86.1 MB</span> <span class=" -Color -Color-Red">225.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">35.5/86.1 MB</span> <span class=" -Color -Color-Red">141.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">40.5/86.1 MB</span> <span class=" -Color -Color-Red">143.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━ <span class=" -Color -Color-Green">68.1/86.1 MB</span> <span class=" -Color -Color-Red">229.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">45.6/86.1 MB</span> <span class=" -Color -Color-Red">146.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━ <span class=" -Color -Color-Green">75.8/86.1 MB</span> <span class=" -Color -Color-Red">232.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">50.6/86.1 MB</span> <span class=" -Color -Color-Red">147.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">55.8/86.1 MB</span> <span class=" -Color -Color-Red">147.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━ <span class=" -Color -Color-Green">83.6/86.1 MB</span> <span class=" -Color -Color-Red">234.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">234.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━ <span class=" -Color -Color-Green">60.9/86.1 MB</span> <span class=" -Color -Color-Red">152.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">234.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━ <span class=" -Color -Color-Green">66.2/86.1 MB</span> <span class=" -Color -Color-Red">152.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━ <span class=" -Color -Color-Green">71.6/86.1 MB</span> <span class=" -Color -Color-Red">154.8 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">234.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">234.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━ <span class=" -Color -Color-Green">77.1/86.1 MB</span> <span class=" -Color -Color-Red">157.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">51.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━ <span class=" -Color -Color-Green">82.6/86.1 MB</span> <span class=" -Color -Color-Red">159.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">154.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">154.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">154.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">154.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">154.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">154.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">154.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">86.1/86.1 MB</span> <span class=" -Color -Color-Red">35.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25hDownloading ml_dtypes-0.5.0-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.5 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/4.5 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━ <span class=" -Color -Color-Green">4.2/4.5 MB</span> <span class=" -Color -Color-Red">126.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.5/4.5 MB</span> <span class=" -Color -Color-Red">95.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.9/4.5 MB</span> <span class=" -Color -Color-Red">144.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">4.5/4.5 MB</span> <span class=" -Color -Color-Red">93.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.5/4.5 MB</span> <span class=" -Color -Color-Red">61.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+?25hDownloading etils-1.9.4-py3-none-any.whl (164 kB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/164.3 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">164.3/164.3 kB</span> <span class=" -Color -Color-Red">30.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading etils-1.9.4-py3-none-any.whl (164 kB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/164.3 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">164.3/164.3 kB</span> <span class=" -Color -Color-Red">46.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
-?25hDownloading opt_einsum-3.4.0-py3-none-any.whl (71 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading opt_einsum-3.4.0-py3-none-any.whl (71 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/71.9 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">71.7/71.9 kB</span> <span class=" -Color -Color-Red">247.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">71.9/71.9 kB</span> <span class=" -Color -Color-Red">924.5 kB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">71.9/71.9 kB</span> <span class=" -Color -Color-Red">24.7 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -717,42 +733,37 @@ Collecting patsy&gt;=0.5.6 (from statsmodels)
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading patsy-0.5.6-py2.py3-none-any.whl.metadata (3.5 kB)
 Requirement already satisfied: packaging&gt;=21.3 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from statsmodels) (23.1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas!=2.1.0,&gt;=1.4-&gt;statsmodels) (2.8.2)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas!=2.1.0,&gt;=1.4-&gt;statsmodels) (2.8.2)
 Requirement already satisfied: pytz&gt;=2020.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas!=2.1.0,&gt;=1.4-&gt;statsmodels) (2023.3.post1)
-Requirement already satisfied: tzdata&gt;=2022.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas!=2.1.0,&gt;=1.4-&gt;statsmodels) (2023.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: tzdata&gt;=2022.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from pandas!=2.1.0,&gt;=1.4-&gt;statsmodels) (2023.3)
 Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib/python3.11/site-packages (from patsy&gt;=0.5.6-&gt;statsmodels) (1.16.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading statsmodels-0.14.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.8 MB)
+Downloading statsmodels-0.14.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (10.8 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/10.8 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.1/10.8 MB</span> <span class=" -Color -Color-Red">3.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:04</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.5/10.8 MB</span> <span class=" -Color -Color-Red">8.2 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:02</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.2/10.8 MB</span> <span class=" -Color -Color-Red">6.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:02</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2.2/10.8 MB</span> <span class=" -Color -Color-Red">21.9 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━ <span class=" -Color -Color-Green">7.4/10.8 MB</span> <span class=" -Color -Color-Red">55.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.8/10.8 MB</span> <span class=" -Color -Color-Red">26.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━ <span class=" -Color -Color-Green">7.7/10.8 MB</span> <span class=" -Color -Color-Red">75.1 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">10.8/10.8 MB</span> <span class=" -Color -Color-Red">119.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">10.8/10.8 MB</span> <span class=" -Color -Color-Red">94.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">10.8/10.8 MB</span> <span class=" -Color -Color-Red">147.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">10.8/10.8 MB</span> <span class=" -Color -Color-Red">106.3 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading patsy-0.5.6-py2.py3-none-any.whl (233 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/233.9 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">233.9/233.9 kB</span> <span class=" -Color -Color-Red">62.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">233.9/233.9 kB</span> <span class=" -Color -Color-Red">58.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:00</span>
 ?25h
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: patsy, statsmodels
   Attempting uninstall: patsy
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Found existing installation: patsy 0.5.3
+    Found existing installation: patsy 0.5.3
     Uninstalling patsy-0.5.3:
 </pre></div>
 </div>
@@ -760,13 +771,13 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Attempting uninstall: statsmodels
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Found existing installation: statsmodels 0.14.0
+    Found existing installation: statsmodels 0.14.0
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    Uninstalling statsmodels-0.14.0:
-      Successfully uninstalled statsmodels-0.14.0
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      Successfully uninstalled statsmodels-0.14.0
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed patsy-0.5.6 statsmodels-0.14.4
@@ -788,9 +799,9 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 </div>
 </div>
 </div>
-<p>We’ll eventually  want to compare the results we obtain  here to those that we obtain in  those obtained in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+<p>We’ll eventually  want to compare the results we obtain  here to those that we obtain in  those obtained in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>.</p>
 <p>To enable us to do that, we  copy the class <code class="docutils literal notranslate"><span class="pre">ChangLQ</span></code>  used in that lecture.</p>
-<p>We hide the cell that copies the class, but readers can find details of the class in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+<p>We hide the cell that copies the class, but readers can find details of the class in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -914,7 +925,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 </div>
 </details>
 </div>
-<p>Now we compute the value of <span class="math notranslate nohighlight">\(V\)</span> under this setup, and compare it against those obtained in this section <a class="reference internal" href="calvo.html#compute-lq"><span class="std std-ref">Outcomes under Three Timing Protocols</span></a> of the sister quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+<p>Now we compute the value of <span class="math notranslate nohighlight">\(V\)</span> under this setup, and compare it against those obtained in this section <a class="reference internal" href="calvo.html#compute-lq"><span class="std std-ref">Outcomes under Three Timing Protocols</span></a> of the sister quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assume β=0.85, c=2, T=40.</span>
@@ -1067,8 +1078,8 @@ optimized μ =
  -0.1075949  -0.10759487 -0.10759488 -0.10759488 -0.10759488 -0.10759489
  -0.10759491 -0.10759493 -0.10759494 -0.10759497 -0.10759497 -0.10759496
  -0.10759496 -0.10759495 -0.10759496 -0.10759499]
-CPU times: user 710 ms, sys: 132 ms, total: 842 ms
-Wall time: 628 ms
+CPU times: user 685 ms, sys: 155 ms, total: 840 ms
+Wall time: 634 ms
 </pre></div>
 </div>
 </div>
@@ -1135,7 +1146,7 @@ Wall time: 628 ms
 <p>First, recall that a Ramsey planner chooses <span class="math notranslate nohighlight">\(\vec \mu\)</span> to maximize the government’s value function <a class="reference internal" href="#equation-eq-ramseyvalue">(41.9)</a> subject to equations  <a class="reference internal" href="#equation-eq-inflation101">(41.8)</a>.</p>
 <p>We now define a distinct problem in which the planner chooses <span class="math notranslate nohighlight">\(\vec \mu\)</span> to maximize the government’s value function <a class="reference internal" href="#equation-eq-ramseyvalue">(41.9)</a> subject to equation  <a class="reference internal" href="#equation-eq-inflation101">(41.8)</a> and
 the additional restriction that  <span class="math notranslate nohighlight">\(\mu_t = \bar \mu\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p>The solution of this problem is a time-invariant <span class="math notranslate nohighlight">\(\mu_t\)</span> that this quantecon lecture  <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a> calls <span class="math notranslate nohighlight">\(\mu^{CR}\)</span>.</p>
+<p>The solution of this problem is a time-invariant <span class="math notranslate nohighlight">\(\mu_t\)</span> that this quantecon lecture  <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a> calls <span class="math notranslate nohighlight">\(\mu^{CR}\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initial guess for single μ</span>
@@ -1163,7 +1174,7 @@ optimized μ =
 </div>
 </div>
 </div>
-<p>Comparing it to <span class="math notranslate nohighlight">\(\mu^{CR}\)</span> in <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>, we again obtained very close answers.</p>
+<p>Comparing it to <span class="math notranslate nohighlight">\(\mu^{CR}\)</span> in <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>, we again obtained very close answers.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">clq</span><span class="o">.</span><span class="n">μ_CR</span> <span class="o">-</span> <span class="n">optimized_μ_CR</span><span class="p">)</span>
@@ -1453,8 +1464,8 @@ optimized μ =
  -0.10759497 -0.10759498 -0.107595   -0.10759494 -0.10759496 -0.10759496
  -0.10759494 -0.10759493 -0.10759493 -0.10759494 -0.10759494 -0.10759495
  -0.10759497 -0.107595   -0.10759497 -0.10759495]
-CPU times: user 394 ms, sys: 206 ms, total: 601 ms
-Wall time: 230 ms
+CPU times: user 359 ms, sys: 184 ms, total: 543 ms
+Wall time: 210 ms
 </pre></div>
 </div>
 </div>
@@ -2062,7 +2073,7 @@ v_t = g_0 + g_1 \theta_t + g_2 \theta_t^2
 <p>After all, the Ramsey planner  chooses <span class="math notranslate nohighlight">\(\vec \mu\)</span>,  while <span class="math notranslate nohighlight">\(\vec \theta\)</span> is an  outcome that reflects the represenative agent’s response to the Ramsey planner’s  choice of <span class="math notranslate nohighlight">\(\vec \mu\)</span>.</p>
 <p>Isn’t it more natural then to expect that we’d learn more about the structure of the Ramsey  problem from a regression of components of <span class="math notranslate nohighlight">\(\vec \theta\)</span> on components of <span class="math notranslate nohighlight">\(\vec \mu\)</span>?</p>
 <p>To answer these  questions, we’ll have to  deploy more economic theory.</p>
-<p>We do that in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+<p>We do that in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>.</p>
 <p>There, we’ll discover that system <a class="reference internal" href="#equation-eq-old9101">(41.12)</a> is actually a very good way to represent
 a Ramsey plan because it reveals many things about its structure.</p>
 <p>Indeed, in that lecture, we show how to compute the Ramsey plan using <strong>dynamic programming squared</strong> and provide a Python class <code class="docutils literal notranslate"><span class="pre">ChangLQ</span></code> that performs the calculations.</p>
@@ -2109,13 +2120,13 @@ and the parameters <span class="math notranslate nohighlight">\(d_0, d_1\)</span
 </div>
 </div>
 <p>Evidently, these agree with the relationships that we discovered by running regressions on the Ramsey outcomes <span class="math notranslate nohighlight">\(\vec \mu^R, \vec \theta^R\)</span> that we constructed with either of our machine learning algorithms.</p>
-<p>We have set the stage for this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+<p>We have set the stage for this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>.</p>
 <p>We close this lecture by giving a hint about an insight of Chang <span id="id9">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> that
-underlies much of quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>.</p>
+underlies much of quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>.</p>
 <p>Chang noticed how equation <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> shows that an equivalence class of continuation money growth sequences <span class="math notranslate nohighlight">\(\{\mu_{t+j}\}_{j=0}^\infty\)</span> deliver the same <span class="math notranslate nohighlight">\(\theta_t\)</span>.</p>
 <p>Consequently, equations <a class="reference internal" href="#equation-eq-grad-old1">(41.1)</a> and <a class="reference internal" href="#equation-eq-grad-old3">(41.3)</a> indicate that <span class="math notranslate nohighlight">\(\theta_t\)</span> intermediates how the government’s choices of <span class="math notranslate nohighlight">\(\mu_{t+j}, \ j=0, 1, \ldots\)</span> impinge on time <span class="math notranslate nohighlight">\(t\)</span>
 real balances <span class="math notranslate nohighlight">\(m_t - p_t = -\alpha \theta_t\)</span>.</p>
-<p>In lecture <a class="reference internal" href="calvo.html"><span class="doc">Ramsey Plans, Time Inconsistency, Sustainable Plans</span></a>, we’ll see how  Chang <span id="id10">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> put  this
+<p>In lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>, we’ll see how  Chang <span id="id10">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> put  this
 insight to work.</p>
 </section>
 </section>
@@ -2431,37 +2442,42 @@ insight to work.</p>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   42. Ramsey Plans, Time Inconsistency, Sustainable Plans
+   42. Time Inconsistency of Ramsey Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo_abreu.html">
+   43. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   43. Optimal Taxation with State-Contingent Debt
+   44. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   44. Optimal Taxation without State-Contingent Debt
+   45. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   45. Fluctuating Interest Rates Deliver Fiscal Insurance
+   46. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   46. Fiscal Risk and Government Debt
+   47. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   47. Competitive Equilibria of a Model of Chang
+   48. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   48. Credible Government Policies in a Model of Chang
+   49. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -2473,17 +2489,17 @@ insight to work.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   49. Troubleshooting
+   50. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   50. References
+   51. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   51. Execution Statistics
+   52. Execution Statistics
   </a>
  </li>
 </ul>

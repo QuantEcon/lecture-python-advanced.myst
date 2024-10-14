@@ -20,7 +20,7 @@ kernelspec:
 </div>
 ```
 
-# Ramsey Plans, Time Inconsistency, Sustainable Plans
+# Time Inconsistency of Ramsey Plans
 
 ```{index} single: Models; Additive functionals
 ```
@@ -60,8 +60,7 @@ The models feature
 
 A theme of this lecture is that  timing protocols affect  outcomes.
 
-We'll use ideas from  papers by Cagan {cite}`Cagan`, Calvo {cite}`Calvo1978`, Stokey {cite}`stokey1989reputation`, {cite}`Stokey1991`,
-Chari and Kehoe {cite}`chari1990sustainable`, Chang {cite}`chang1998credible`, and Abreu {cite}`Abreu` as
+We'll use ideas from  papers by Cagan {cite}`Cagan`, Calvo {cite}`Calvo1978`, and  Chang {cite}`chang1998credible` as
 well as from chapter 19 of {cite}`Ljungqvist2012`.
 
 In addition, we'll use ideas from linear-quadratic dynamic programming
@@ -225,7 +224,7 @@ $$
 U(-\alpha \theta_t) = u_1 + u_2 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
 $$ (eq_old5a)
 
-The "bliss level" of real balances is  $\frac{u_1}{u_2}$ and the inflation rate that attains
+The``bliss level`` of real balances is  $\frac{u_1}{u_2}$ and the inflation rate that attains
 it is $-\frac{u_1}{u_2 \alpha}$.
 
 ## Friedman's Optimal Rate of Deflation
@@ -253,7 +252,7 @@ To deduce this recommendation, Milton Friedman assumed that the taxes that gover
 
   - for example, perhaps the government can impose lump sum taxes that distort no decisions by private agents
 
-## Calvo's Distortion of Friedman's optimal Deflation Rate
+## Calvo's Distortion 
 
 The starting point of Calvo {cite}`Calvo1978` and  Chang {cite}`chang1998credible`
 is that such lump sum taxes are not available.
@@ -301,7 +300,7 @@ $$
 v_t = - \sum_{j=0}^\infty \beta^j s(\theta_{t+j}, \mu_{t+j}) .
 $$
 
-We can represent the dependence of  $v_0$ on $(\vec \theta, \vec \mu)$ recursively via the  difference equation
+We can represent  dependence of  $v_0$ on $(\vec \theta, \vec \mu)$ recursively via the  difference equation
 
 ```{math}
 :label: eq_old8
@@ -357,7 +356,7 @@ A theory of government
 decisions will  make $\vec \mu$ endogenous, i.e., a theoretical *output* instead of an *input*.
 
 
-## Intertemporal Structure 
+### Intertemporal Aspects 
 
 Criterion function {eq}`eq_old7` and the constraint system {eq}`eq_old4` exhibit the following
 structure:
@@ -378,9 +377,9 @@ We'll  study outcomes under a Ramsey timing protocol.
 
 We'll also study outcomes under other timing protocols.
 
-## Four Timing Protocols
+## Three Timing Protocols
 
-We consider four models of government policy making that  differ in
+We consider three  models of government policy making that  differ in
 
 - *what* a  policymaker chooses, either a sequence
   $\vec \mu$ or just   $\mu_t$ in a single period $t$.
@@ -395,12 +394,12 @@ $\mu_t$ affects household one-period utilities at dates $s = 0, 1, \ldots, t-1$
 
 - these two models  thus employ a  **Ramsey** or **Stackelberg** timing protocol.
 
-In two other models, there is a sequence of policymakers, each of whom
+In a third  model, there is a sequence of policymakers, each of whom
 sets $\mu_t$ at one $t$ only.
 
 - a time $t$  policymaker cares only about $v_t$ and  ignores  effects that its choice of $\mu_t$ has on $v_s$ at  dates $s = 0, 1, \ldots, t-1$.
 
-The four models differ with respect to timing protocols, constraints on
+The three models differ with respect to timing protocols, constraints on
 government choices, and government policymakers' beliefs about how their
 decisions affect the representative agent's beliefs about future government
 decisions.
@@ -414,9 +413,8 @@ The models are distinguished by their having  either
   subject to the constraint that $\mu_t = \mu$ for all
   $t \geq 0$; or
 - A sequence indexed by $t =0, 1, 2, \ldots$ of separate policymakers 
-    - a time $t$ policymaker chooses $\mu_t$ only and forecasts that future government decisions are unaffected by its choice; or
-- A sequence of separate policymakers  in which 
-    - a time $t$ policymaker chooses  only $\mu_t$ but believes that its choice of $\mu_t$  shapes the representative agent's beliefs about  future rates of money creation and inflation, and through them, future government actions.
+    - a time $t$ policymaker chooses $\mu_t$ only and forecasts that future government decisions are unaffected by its choice.
+
 
 The first model describes a **Ramsey plan** chosen by a **Ramsey planner**
 
@@ -424,14 +422,32 @@ The second model describes a **Ramsey plan** chosen by a *Ramsey planner constra
 
 The third model describes a **Markov perfect equilibrium**
 
-The fourth model describes a **credible government policy** also known as a **sustainable plan**
 
-The relationship between  outcomes in  the first (Ramsey) timing protocol and the fourth timing protocol and belief structure is the subject of a literature on **sustainable** or **credible** public policies (Chari and Kehoe {cite}`chari1990sustainable`
+```{note}
+ In the  quantecon lecture {doc}`calvo_abreu`, we'll study outcomes under another timing protocol in where there is a sequence of separate policymakers and  a time $t$ policymaker chooses  only $\mu_t$ but believes that its choice of $\mu_t$  shapes the representative agent's beliefs about  future rates of money creation and inflation, and through them, future government actions.
+ This is a model of  a **credible government policy** also known as a **sustainable plan**.
+The relationship between  outcomes in  the first (Ramsey) timing protocol and the {doc}`calvo_abreu` timing protocol and belief structure is the subject of a literature on **sustainable** or **credible** public policies (Chari and Kehoe {cite}`chari1990sustainable`
 {cite}`stokey1989reputation`, and Stokey {cite}`Stokey1991`). 
+```
 
-We'll discuss that topic later in this lecture.
 
-We'll begin with the timing protocol associated with a Ramsey plan.
+## Note on Dynamic Programming Squared
+
+We'll begin with the timing protocol associated with a Ramsey plan and deploy 
+an application of what we  nickname **dynamic programming squared**.
+
+The nickname refers to the feature that a value satisfying one Bellman equation appears as an argument in a second Bellman equation.
+
+Thus, our models have involved two Bellman equations:
+
+- equation {eq}`eq_old1` expresses how $\theta_t$ depends on $\mu_t$
+  and $\theta_{t+1}$
+- equation {eq}`eq_old4` expresses how value $v_t$ depends on
+  $(\mu_t, \theta_t)$ and $v_{t+1}$
+
+A value $\theta$ from one Bellman equation appears as an argument of a second Bellman equation for another value $v$.
+
+.
 
 ## A Ramsey Planner
 
@@ -664,18 +680,8 @@ Variation of  $ \vec \mu^R, \vec \theta^R, \vec v^R $ over time  are  symptoms o
   equation {eq}`eq_old3`.
 
 
-## Digression on Timeless Perspective
 
-As our subsequent calculations will verify, $ \vec \mu^R, \vec \theta^R, \vec v^R $ are each monotone sequences that are bounded below and converge from above  to limiting values.  
-
-Some authors are fond of focusing only on these limiting values.
-
-They justify that by saying that they are taking a **timeless perspective** that ignores  the transient movements in $ \vec \mu^R, \vec \theta^R, \vec v^R $ that are destined  eventually to fade away as $\theta_t$ described by Ramsey plan system {eq}`eq_old9` converges from above.  
-
-   * the timeless perspective pretends that  Ramsey plan was actually solved long ago, and that we are stuck with it.  
-
-
-### Multiple roles of $\theta_t$
+## Multiple roles of $\theta_t$
 
 The inflation rate $\theta_t$ plays three roles simultaneously:
 
@@ -690,7 +696,7 @@ That the same variable $\theta_t$ takes on these multiple roles brings insights 
   commitment and forward guidance, about whether the government  follows  or   leads the market, and
 about dynamic or time inconsistency.
 
-### Time inconsistency
+## Time inconsistency
 
 As discussed in {doc}`Stackelberg problems <dyn_stack>` and {doc}`Optimal taxation with state-contingent debt <opt_tax_recur>`, a continuation Ramsey plan is not a Ramsey plan.
 
@@ -701,6 +707,10 @@ that, relative to a Ramsey plan,  alter either
 
 - the timing protocol and/or
 - assumptions about how government decision makers think their decisions affect the representative agent's beliefs about future government decisions
+
+
+
+
 
 ## Constrained-to-Constant-Growth-Rate Ramsey Plan
 
@@ -1152,7 +1162,7 @@ In the above graph, notice that $\theta^* < \theta_\infty^R < \theta^{CR} < \the
 In some subsequent calculations, we'll use our Python code to study how gaps between
 these outcome vary depending on parameters such as the cost parameter $c$ and the discount factor $\beta$. 
 
-### Ramsey Planner's Value Function 
+## Ramsey Planner's Value Function 
 
 The next code  plots the Ramsey Planner's value function $J(\theta)$  as well as the value function
 of a constrained  Ramsey planner who  must choose a constant
@@ -1530,387 +1540,6 @@ economists.
 
 The *no incentive to deviate from the plan* property is what makes the Markov perfect equilibrium concept attractive.
 
-### Ramsey Plan Strikes Back
-
-Research by Abreu {cite}`Abreu`,  Chari and Kehoe {cite}`chari1990sustainable`
-{cite}`stokey1989reputation`, and Stokey {cite}`Stokey1991` discovered conditions under which a Ramsey plan can be rescued from the complaint that it is not credible.
-
-They  accomplished this by expanding the
-description of a plan to include expectations about *adverse consequences* of deviating from
-it that can serve to deter deviations.
-
-We turn to such theories of *sustainable plans* next.
-
-## A Fourth Model of Government Decision Making
-
-In this model 
-
-- the government does not set $\{\mu_t\}_{t=0}^\infty$  once and
-  for all at $t=0$
-- instead it sets $\mu_t$ at time $t$ 
-- the representative agent's forecasts of
-  $\{\mu_{t+j+1}, \theta_{t+j+1}\}_{j=0}^\infty$ respond to
-  whether the government at $t$ *confirms* or *disappoints*
-  its forecasts of $\mu_t$ brought into period $t$ from
-  period $t-1$.
-- the government at each time $t$ understands how the representative agent's
-  forecasts will respond to its choice of $\mu_t$.
-- at each $t$, the government chooses $\mu_t$ to maximize
-  a continuation discounted utility.
-
-### Government Decisions
-
-$\vec \mu$ is chosen by a sequence of government
-decision makers, one for each $t \geq 0$.
-
-We assume the following within-period and between-period timing protocol
-for each $t \geq 0$:
-
-- at time $t-1$, private agents expect  that the government will set
-  $\mu_t = \tilde \mu_t$, and more generally that it will set
-  $\mu_{t+j} = \tilde \mu_{t+j}$ for all $j \geq 0$.
-- The forecasts $\{\tilde \mu_{t+j}\}_{j \geq 0}$ determine a
-  $\theta_t = \tilde \theta_t$ and an associated log
-  of real balances $m_t - p_t = -\alpha\tilde \theta_t$ at
-  $t$.
-- Given those expectations and an associated $\theta_t = \tilde \theta_t$, at
-  $t$ a government is free to set $\mu_t \in {\bf R}$.
-- If the government at $t$ *confirms* the representative agent's
-  expectations by setting $\mu_t = \tilde \mu_t$ at time
-  $t$, private agents expect the continuation government policy
-  $\{\tilde \mu_{t+j+1}\}_{j=0}^\infty$ and therefore bring
-  expectation $\tilde \theta_{t+1}$ into period $t+1$.
-- If the government at $t$ *disappoints* private agents by setting
-  $\mu_t \neq \tilde \mu_t$, private agents expect
-  $\{\mu^A_j\}_{j=0}^\infty$ as the
-  continuation policy for $t+1$, i.e.,
-  $\{\mu_{t+j+1}\} = \{\mu_j^A \}_{j=0}^\infty$ and therefore
-  expect an associated $\theta_0^A$ for $t+1$. Here $\vec \mu^A = \{\mu_j^A \}_{j=0}^\infty$ is
-  an alternative government plan to be described below.
-
-### Temptation to Deviate from Plan
-
-The government's one-period return function $s(\theta,\mu)$
-described in equation {eq}`eq_old6` above has the property that for all
-$\theta$
-
-$$
-- s(\theta, 0 ) \geq  - s(\theta, \mu) \quad
-$$
-
-This inequality implies that whenever the policy calls for the
-government to set $\mu \neq 0$, the government could raise its
-one-period payoff by setting $\mu =0$.
-
-Disappointing private sector expectations in that way would increase the
-government's *current* payoff but would have adverse consequences for
-*subsequent* government payoffs because the private sector would alter
-its expectations about future settings of $\mu$.
-
-The *temporary* gain constitutes the government's temptation to
-deviate from a plan.
-
-If the government at $t$ is to resist the temptation to raise its
-current payoff, it is only because it forecasts adverse  consequences that
-its setting of $\mu_t$ would bring for continuation  government payoffs via  alterations  in the private sector's expectations.
-
-## Sustainable or Credible Plan
-
-We call a plan $\vec \mu$ **sustainable** or **credible** if at
-each $t \geq 0$ the government chooses to confirm private
-agents' prior expectation of its setting for $\mu_t$.
-
-The government will choose to confirm prior expectations only if the
-long-term *loss* from disappointing private sector expectations --
-coming from the government's understanding of the way the private sector
-adjusts its  expectations in response to having its prior
-expectations at $t$ disappointed -- outweigh the short-term
-*gain* from disappointing those expectations.
-
-The theory of sustainable or credible plans assumes throughout that private sector
-expectations about what future governments will do are based on the
-assumption that governments at times $t \geq 0$ always act to
-maximize the continuation discounted utilities that describe those
-governments' purposes.
-
-This aspect of the theory means that credible plans always come in *pairs*:
-
-- a credible (continuation) plan to be followed if the government at
-  $t$ *confirms* private sector expectations
-- a credible plan to be followed if the government at $t$
-  *disappoints* private sector expectations
-
-That credible plans come in pairs threaten to bring an explosion of plans to keep track of
-
-* each credible plan itself consists of two credible plans
-* therefore, the number of plans underlying one plan is unbounded
-
-But Dilip Abreu showed how to render manageable the number of plans that must be kept track of.
-
-The key is an  object called a **self-enforcing** plan.
-
-### Abreu's Self-Enforcing Plan
-
-A plan $\vec \mu^A$ (here the superscipt $A$ is for Abreu) is said to be **self-enforcing** if
-
-- the consequence of disappointing the representative agent's expectations at time
-  $j$ is to *restart*  plan $\vec \mu^A$  at time $j+1$
-- the consequence of restarting the plan is sufficiently adverse that it forever deters all
-  deviations from the plan
-
-More precisely, a government plan $\vec \mu^A$ with equilibrium inflation sequence $\vec \theta^A$ is
-**self-enforcing** if
-
-```{math}
-:label: eq_old10
-
-\begin{aligned}
-v_j^A & = - s(\theta^A_j, \mu^A_j) + \beta v_{j+1}^A \\
-& \geq - s(\theta^A_j, 0 ) + \beta v_0^A \equiv v_j^{A,D}, \quad j \geq 0
-\end{aligned}
-```
-
-(Here it is useful to recall that setting $\mu=0$ is the maximizing choice for the government's one-period return function)
-
-The first line tells the consequences of confirming the representative agent's
-expectations by following the plan, while the second line tells the consequences of
-disappointing the representative agent's expectations by deviating from the plan.
-
-A consequence of the inequality stated in the  definition is that a self-enforcing plan is
-credible.
-
-Self-enforcing plans can be used to construct other credible plans, including ones with better values.
-
-Thus, where $\vec v^A$ is the value associated with a self-enforcing plan $\vec \mu^A$,
-a sufficient condition for another plan $\vec \mu$ associated with inflation $\vec \theta$ and value $\vec v$  to be **credible** is that
-
-```{math}
-:label: eq_old100a
-
-\begin{aligned}
-v_j & = - s( \theta_j, \mu_j) + \beta  v_{j+1} \\
-& \geq  -s( \theta_j, 0) + \beta v_0^A \quad \forall j \geq 0
-\end{aligned}
-```
-
-For this condition to be satisfied it is necessary and sufficient that
-
-$$
--s( \theta_j, 0) - ( - s( \theta_j, \mu_j) )  <  \beta ( v_{j+1} - v_0^A )
-$$
-
-The left side of the above inequality is the government's *gain* from deviating from the plan, while the right side is the government's *loss* from deviating
-from the plan.
-
-A government never wants to deviate from a credible plan.
-
-Abreu taught us that  key step in constructing a credible plan is first constructing a
-self-enforcing plan that has a low time $0$ value.
-
-The idea is to use the self-enforcing plan as a continuation plan whenever
-the government's choice at time $t$ fails to confirm private
-agents' expectation.
-
-We shall use a construction featured in Abreu ({cite}`Abreu`) to construct a
-self-enforcing plan with low time $0$ value.
-
-### Abreu's Carrot-Stick Plan
-
-Abreu ({cite}`Abreu`) invented a way to create a self-enforcing plan with a low
-initial value.
-
-Imitating his idea, we can construct a self-enforcing plan
-$\vec \mu$ with a low time $0$ value to the government by
-insisting that future government decision makers set $\mu_t$ to a value yielding low
-one-period utilities to the household for a long time, after which
-government  decisions thereafter  yield high one-period utilities.
-
-- Low one-period utilities early are a *stick*
-- High one-period utilities later are a *carrot*
-
-Consider a candidate plan $\vec \mu^A$ that sets
-$\mu_t^A = \bar \mu$ (a high positive
-number) for $T_A$ periods, and then reverts to the Ramsey plan.
-
-Denote this sequence by $\{\mu_t^A\}_{t=0}^\infty$.
-
-The sequence of inflation rates implied by this plan,
-$\{\theta_t^A\}_{t=0}^\infty$, can be calculated using:
-
-$$
-\theta_t^A = \frac{1}{1+\alpha} \sum_{j=0}^{\infty} \left(\frac{\alpha}{1+\alpha}\right)^j \mu^A_{t+j}
-$$
-
-The value of $\{\theta_t^A,\mu_t^A \}_{t=0}^\infty$ at time $0$ is
-
-$$
-v^A_0 =  - \sum_{t=0}^{T_A-1} \beta^t s(\theta_t^A,\mu_t^A) +\beta^{T_A} J(\theta^R_0)
-$$
-
-For an appropriate $T_A$, this plan can be verified to be self-enforcing and therefore credible.
-
-### Example of Self-Enforcing Plan
-
-The following example implements an Abreu stick-and-carrot plan.
-
-The government sets $\mu_t^A = 0.1$ for $t=0, 1, \ldots, 9$
-and then starts the **Ramsey plan**.
-
-We have computed outcomes for this plan.
-
-For this plan, we plot the $\theta^A$, $\mu^A$ sequences as
-well as the implied $v^A$ sequence.
-
-Notice that because the government sets money supply growth high for 10
-periods, inflation starts high.
-
-Inflation gradually slowly declines  because people  expect the government to lower the money growth rate after period
-$10$.
-
-From the 10th period onwards, the inflation rate $\theta^A_t$
-associated with this **Abreu plan** starts the Ramsey plan from its
-beginning, i.e., $\theta^A_{t+10} =\theta^R_t \ \ \forall t \geq 0$.
-
-```{code-cell} ipython3
-:tags: [hide-input]
-
-def abreu_plan(clq, T=1000, T_A=10, μ_bar=0.1, T_Plot=20):
-    """
-    Compute and plot the Abreu plan for the given ChangLQ instance.
-
-    Here clq is an instance of ChangLQ.
-    """
-    # Append Ramsey μ series to stick μ series
-    clq.μ_A = np.append(np.full(T_A, μ_bar), clq.μ_series[:-T_A])
-
-    # Calculate implied stick θ series
-    discount = (clq.α / (1 + clq.α)) ** np.arange(T)
-    clq.θ_A = np.array([
-        1 / (clq.α + 1) * np.sum(clq.μ_A[t:] * discount[:T - t])
-        for t in range(T)
-    ])
-
-    # Calculate utility of stick plan
-    U_A = clq.β ** np.arange(T) * (
-        clq.u0 + clq.u1 * (-clq.θ_A) - clq.u2 / 2 
-        * (-clq.θ_A) ** 2 - clq.c * clq.μ_A ** 2
-    )
-
-    clq.V_A = np.array([np.sum(U_A[t:] / clq.β ** t) for t in range(T)])
-
-    # Make sure Abreu plan is self-enforcing
-    clq.V_dev = np.array([
-        (clq.u0 + clq.u1 * (-clq.θ_A[t]) - clq.u2 / 2 
-         * (-clq.θ_A[t]) ** 2) + clq.β * clq.V_A[0]
-        for t in range(T_Plot)
-    ])
-
-    # Plot the results
-    fig, axes = plt.subplots(3, 1, figsize=(8, 12))
-
-    axes[2].plot(clq.V_dev[:T_Plot], label="$V^{A, D}_t$", c="orange")
-
-    plots = [clq.θ_A, clq.μ_A, clq.V_A]
-    labels = [r"$\theta_t^A$", r"$\mu_t^A$", r"$V^A_t$"]
-
-    for plot, ax, label in zip(plots, axes, labels):
-        ax.plot(plot[:T_Plot], label=label)
-        ax.set(xlabel="$t$", ylabel=label)
-        ax.legend()
-
-    plt.tight_layout()
-    plt.show()
-
-abreu_plan(clq)
-```
-
-To confirm that the plan $\vec \mu^A$ is **self-enforcing**,  we
-plot an object that we call $V_t^{A,D}$, defined in the key inequality in the second line of equation {eq}`eq_old10` above.
-
-$V_t^{A,D}$ is the value at $t$ of deviating from the
-self-enforcing plan $\vec \mu^A$ by setting $\mu_t = 0$ and
-then restarting the plan at $v^A_0$ at $t+1$:
-
-$$
-v_t^{A,D} = -s( \theta_j, 0) + \beta v_0^A
-$$
-
-In the above graph  $v_t^A > v_t^{A,D}$, which confirms that $\vec \mu^A$ is a self-enforcing plan.
-
-We can also verify the inequalities required for $\vec \mu^A$ to
-be self-confirming numerically as follows
-
-```{code-cell} ipython3
-np.all(clq.V_A[0:20] > clq.V_dev[0:20])
-```
-
-Given that plan $\vec \mu^A$ is self-enforcing, we can check that
-the Ramsey plan $\vec \mu^R$ is credible by verifying that:
-
-$$
-v^R_t \geq - s(\theta^R_t,0) + \beta v^A_0 , \quad \forall t \geq 0
-$$
-
-```{code-cell} ipython3
-def check_ramsey(clq, T=1000):
-    # Make sure Ramsey plan is sustainable
-    R_dev = np.zeros(T)
-    for t in range(T):
-        R_dev[t] = (clq.u0 + clq.u1 * (-clq.θ_series[1, t])
-                    - clq.u2 / 2 * (-clq.θ_series[1, t])**2) \
-                    + clq.β * clq.V_A[0]
-
-    return np.all(clq.J_series > R_dev)
-
-check_ramsey(clq)
-```
-
-### Recursive Representation of a Sustainable Plan
-
-We can represent a sustainable plan recursively by taking the
-continuation value $v_t$ as a state variable.
-
-We form the following 3-tuple of functions:
-
-```{math}
-:label: eq_old11
-
-\begin{aligned}
-\hat \mu_t & = \nu_\mu(v_t) \\
-\theta_t & = \nu_\theta(v_t) \\
-v_{t+1} & = \nu_v(v_t, \mu_t )
-\end{aligned}
-```
-
-In addition to these equations, we need an initial value $v_0$ to
-characterize a sustainable plan.
-
-The first equation of {eq}`eq_old11` tells the recommended value of
-$\hat \mu_t$ as a function of the promised value $v_t$.
-
-The second equation of {eq}`eq_old11`  tells the inflation rate as a function of
-$v_t$.
-
-The third equation of {eq}`eq_old11`  updates the continuation value in a way that
-depends on whether the government at $t$ confirms the representative agent's
-expectations by setting $\mu_t$ equal to the recommended value
-$\hat \mu_t$, or whether it disappoints those expectations.
-
-## Whose  Plan is It?
-
-A credible government plan $\vec \mu$ plays multiple roles.
-
-* It is a sequence of actions chosen by the government.
-* It is a sequence of the representative agent's forecasts of government actions.
-
-Thus, $\vec \mu$ is both a government policy and a collection of the representative agent's forecasts of  government policy.
-
-Does the government *choose*  policy actions or does it simply *confirm* prior private sector forecasts of those actions?
-
-An argument in favor of the *government chooses* interpretation comes from noting that the theory of credible plans builds in a theory that the government each period chooses
-the action that it wants.
-
-An argument in favor of the *simply confirm* interpretation is gathered from staring at the key inequality {eq}`eq_old100a` that defines a credible policy.
 
 ## Comparison of Equilibrium Values
 
@@ -1941,26 +1570,25 @@ clq.J_CR
 clq.J_MPE
 ```
 
-We have also computed **credible plans** for a government or sequence
-of governments that choose sequentially.
+## Digression on Timeless Perspective
 
-These include
+Our calculations have confirmed that  $ \vec \mu^R, \vec \theta^R, \vec v^R $ are each monotone sequences that are bounded below and converge from above  to limiting values.  
 
-- a **self-enforcing** plan that gives a low initial value $v_0$.
-- a better plan -- possibly one that attains values associated with
-  Ramsey plan -- that is not self-enforcing.
+Some authors are fond of focusing only on these limiting values.
 
-## Note on Dynamic Programming Squared
+They justify that by saying that they are taking a **timeless perspective** that ignores  the transient movements in $ \vec \mu^R, \vec \theta^R, \vec v^R $ that are destined  eventually to fade away as $\theta_t$ described by Ramsey plan system {eq}`eq_old9` converges from above.  
 
-The theory deployed  in this lecture is an application of what we  nickname **dynamic programming squared**.
+   * the timeless perspective pretends that  Ramsey plan was actually solved long ago, and that we are stuck with it.  
 
-The nickname refers to the feature that a value satisfying one Bellman equation appears as an argument in a second Bellman equation.
 
-Thus, our models have involved two Bellman equations:
 
-- equation {eq}`eq_old1` expresses how $\theta_t$ depends on $\mu_t$
-  and $\theta_{t+1}$
-- equation {eq}`eq_old4` expresses how value $v_t$ depends on
-  $(\mu_t, \theta_t)$ and $v_{t+1}$
+### Ramsey Plan Strikes Back
 
-A value $\theta$ from one Bellman equation appears as an argument of a second Bellman equation for another value $v$.
+Research by Abreu {cite}`Abreu`,  Chari and Kehoe {cite}`chari1990sustainable`
+{cite}`stokey1989reputation`, and Stokey {cite}`Stokey1991` discovered conditions under which a Ramsey plan can be rescued from the complaint that it is not credible.
+
+They  accomplished this by expanding the
+description of a plan to include expectations about *adverse consequences* of deviating from
+it that can serve to deter deviations.
+
+We turn to such theories in this  quantecon lecture {doc}`calvo_abreu`.
