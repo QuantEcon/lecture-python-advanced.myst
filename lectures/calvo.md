@@ -164,7 +164,7 @@ real balances $m_t - p_t = -\alpha \theta_t$.
 
 An equivalence class of continuation money growth sequences $\{\mu_{t+j}\}_{j=0}^\infty$ deliver the same $\theta_t$.
 
-We shall use this insight to help us simplify our  analsis of alternative  government policy problems.
+We shall use this insight to help us simplify our analysis of alternative  government policy problems.
 
 That future rates of money creation influence earlier rates of inflation
 makes  timing protocols matter for modeling optimal government policies.
@@ -221,11 +221,13 @@ U(m_t - p_t) = u_0 + u_1 (m_t - p_t) - \frac{u_2}{2} (m_t - p_t)^2, \quad u_0 > 
 The money demand function {eq}`eq_old1` and the utility function {eq}`eq_old5` imply that 
 
 $$
-U(-\alpha \theta_t) = u_1 + u_2 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
+U(-\alpha \theta_t) = u_0 + u_1 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
 $$ (eq_old5a)
 
-The``bliss level`` of real balances is  $\frac{u_1}{u_2}$ and the inflation rate that attains
+The ``bliss level`` of real balances is  $\frac{u_1}{u_2}$ and the inflation rate that attains
 it is $-\frac{u_1}{u_2 \alpha}$.
+
+(TO TOM: the first sentece in the next section is very similar to the sentence above.)
 
 ## Friedman's Optimal Rate of Deflation
 
@@ -446,8 +448,6 @@ Thus, our models have involved two Bellman equations:
   $(\mu_t, \theta_t)$ and $v_{t+1}$
 
 A value $\theta$ from one Bellman equation appears as an argument of a second Bellman equation for another value $v$.
-
-.
 
 ## A Ramsey Planner
 
@@ -716,7 +716,7 @@ that, relative to a Ramsey plan,  alter either
 
 We now describe a  model in which we restrict the Ramsey planner's choice set.
 
-Instead of choosing a sequence of money growth rates $\vec \mu \in {\bf R}^2$, we restrict the 
+Instead of choosing a sequence of money growth rates $\vec \mu \in {\bf L}^2$, we restrict the 
 government to choose a time-invariant money growth rate $\bar \mu$. 
 
 We created this version of the model  to highlight an aspect of a Ramsey plan associated with its time inconsistency, namely, the feature that optimal settings of the  policy instrument vary over time.
@@ -1119,7 +1119,7 @@ at time $t=0$.
 
 The figure also plots the limiting value $\theta_\infty^R$ to which  the promised  inflation rate $\theta_t$ converges under the Ramsey plan.
 
-In addition, the figure indicates an MPE inflation rate $\theta^{CR}$ and a bliss inflation $\theta^*$.
+In addition, the figure indicates an MPE inflation rate $\theta^{MPE}$, $\theta^{CR}$, and a bliss inflation $\theta^*$.
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -1194,7 +1194,7 @@ np.allclose(clq.J_θ(θ_inf),
             clq.V_θ(θ_inf))
 ```
 
-So our claim that $J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$is verified numerically.
+So our claim that $J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$ is verified numerically.
 
 Since  $J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$ occurs at a tangency point at which
 $J(\theta)$ is increasing in $\theta$, it follows that
@@ -1337,7 +1337,7 @@ The above graphs and table convey many useful things.
 
 The horizontal dotted lines indicate values 
  $V(\mu_\infty^R), V(\mu^{CR}), V(\mu^{MPE}) $ of time-invariant money
-growth rates $\mu_\infty^R, \mu^{CR}$ and $\mu_{MPE}$, respectfully. 
+growth rates $\mu_\infty^R, \mu^{CR}$ and $\mu^{MPE}$, respectfully. 
 
 Notice how $J(\theta)$ and $V^{CR}(\theta)$ are tangent and increasing at
  $\theta = \theta_\infty^R$, which implies that $\theta^{CR} > \theta_\infty^R$
@@ -1354,6 +1354,8 @@ $$
 \theta^{MPE} & = - \frac{\alpha u_1}{\alpha^2 u_2 + (1+\alpha)c}
 \end{aligned}
 $$
+
+(TO TOM: $\theta^{MPE}$ is repeated in the above equations. Should one of them be $\theta^*$?)
 
 
  But let's see what happens when we change $c$.
@@ -1530,6 +1532,8 @@ A constrained-to-constant-$\mu$  Ramsey plan  is  time consistent by constructio
 In settings in which governments actually choose sequentially, many economists
 regard a time inconsistent plan as implausible because of the incentives to
 deviate that are presented  along the plan.
+
+(TO TOM: In our meeting, you suggested that we can improve the sentence above.)
 
 A way to state  this reaction   is to say that a Ramsey plan is not credible because there are persistent incentives for policymakers to deviate from it.
 
