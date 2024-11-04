@@ -322,7 +322,7 @@ plans.</p>
 <p>We’ll use ideas from  papers by Cagan <span id="id3">[<a class="reference internal" href="zreferences.html#id79" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span>, Calvo <span id="id4">[<a class="reference internal" href="zreferences.html#id140" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span>, and  Chang <span id="id5">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span> as
 well as from chapter 19 of <span id="id6">[<a class="reference internal" href="zreferences.html#id174" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">Ljungqvist and Sargent, 2018</a>]</span>.</p>
 <p>In addition, we’ll use ideas from linear-quadratic dynamic programming
-described in  <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Control</a> as applied to Ramsey problems in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a>.</p>
+described in  <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Control</a> as applied to Ramsey problems in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg plans</span></a>.</p>
 <p>We  specify model fundamentals  in  ways that allow us to use
 linear-quadratic discounted dynamic programming to compute an optimal government
 plan under each of our timing protocols.</p>
@@ -386,16 +386,15 @@ Requirement already satisfied: mpmath&gt;=0.19 in /home/runner/miniconda3/envs/q
 <li><p><span class="math notranslate nohighlight">\(\theta_t = p_{t+1} - p_t\)</span> be the net rate of inflation between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\mu_t = m_{t+1} - m_t\)</span> be the net rate of growth of nominal balances</p></li>
 </ul>
-<p>The demand for real balances is governed by a perfect foresight
-version of a Cagan <span id="id8">[<a class="reference internal" href="zreferences.html#id79" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span> demand function for real balances:</p>
+<p>The demand for real balances is governed by a discrete time version of Sargent and Wallace’s <span id="id8">[<a class="reference internal" href="zreferences.html#id3" title="Thomas J Sargent and Neil Wallace. The stability of models of money and growth with perfect foresight. Econometrica: Journal of the Econometric Society, pages 1043–1048, 1973.">Sargent and Wallace, 1973</a>]</span> perfect foresight version of a Cagan <span id="id9">[<a class="reference internal" href="zreferences.html#id79" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span> demand function for real balances:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old1">
 <span class="eqno">(42.1)<a class="headerlink" href="#equation-eq-old1" title="Permalink to this equation">#</a></span>\[m_t - p_t = -\alpha(p_{t+1} - p_t) \: , \: \alpha &gt; 0\]</div>
 <p>for <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
 <p>Equation <a class="reference internal" href="#equation-eq-old1">(42.1)</a> asserts that the demand for real balances is inversely
 related to the public’s expected rate of inflation, which  equals
 the actual rate of inflation because there is no uncertainty here.</p>
-<p>(When there is no uncertainty, an assumption of <strong>rational expectations</strong> that becomes equivalent to  <strong>perfect foresight</strong>).</p>
-<p>(See <span id="id9">[<a class="reference internal" href="zreferences.html#id80" title="Thomas J Sargent. The Demand for Money During Hyperinflations under Rational Expectations: I. International Economic Review, 18(1):59-82, February 1977.">Sargent, 1977</a>]</span> for a rational expectations version of the model when there is uncertainty.)</p>
+<p>(When there is no uncertainty, an assumption of <strong>rational expectations</strong>  becomes equivalent to  <strong>perfect foresight</strong>).</p>
+<p>(<span id="id10">[<a class="reference internal" href="zreferences.html#id80" title="Thomas J Sargent. The Demand for Money During Hyperinflations under Rational Expectations: I. International Economic Review, 18(1):59-82, February 1977.">Sargent, 1977</a>]</span> presents  a rational expectations version of the model when there is uncertainty.)</p>
 <p>Subtracting the demand function <a class="reference internal" href="#equation-eq-old1">(42.1)</a> at time <span class="math notranslate nohighlight">\(t\)</span> from the demand
 function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
 <div class="math notranslate nohighlight">
@@ -417,11 +416,11 @@ function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
 the linear difference equation <a class="reference internal" href="#equation-eq-old2">(42.2)</a> can be solved forward to get:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old3">
 <span class="eqno">(42.3)<a class="headerlink" href="#equation-eq-old3" title="Permalink to this equation">#</a></span>\[\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}\]</div>
-<p><strong>Insight:</strong> In the spirit of Chang <span id="id10">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>,  equations <a class="reference internal" href="#equation-eq-old1">(42.1)</a> and <a class="reference internal" href="#equation-eq-old3">(42.3)</a> show that <span class="math notranslate nohighlight">\(\theta_t\)</span> intermediates
+<p><strong>Insight:</strong> In the spirit of Chang <span id="id11">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>,  equations <a class="reference internal" href="#equation-eq-old1">(42.1)</a> and <a class="reference internal" href="#equation-eq-old3">(42.3)</a> show that <span class="math notranslate nohighlight">\(\theta_t\)</span> intermediates
 how choices of <span class="math notranslate nohighlight">\(\mu_{t+j}, \ j=0, 1, \ldots\)</span> impinge on time <span class="math notranslate nohighlight">\(t\)</span>
 real balances <span class="math notranslate nohighlight">\(m_t - p_t = -\alpha \theta_t\)</span>.</p>
 <p>An equivalence class of continuation money growth sequences <span class="math notranslate nohighlight">\(\{\mu_{t+j}\}_{j=0}^\infty\)</span> deliver the same <span class="math notranslate nohighlight">\(\theta_t\)</span>.</p>
-<p>We shall use this insight to help us simplify our  analsis of alternative  government policy problems.</p>
+<p>We shall use this insight to help us simplify our analysis of alternative  government policy problems.</p>
 <p>That future rates of money creation influence earlier rates of inflation
 makes  timing protocols matter for modeling optimal government policies.</p>
 <p>When <span class="math notranslate nohighlight">\(\vec \theta = \{\theta_t\}_{t=0}^\infty\)</span> is square summable, we can  represent restriction <a class="reference internal" href="#equation-eq-old3">(42.3)</a>  as</p>
@@ -450,7 +449,7 @@ makes  timing protocols matter for modeling optimal government policies.</p>
 <span class="eqno">(42.5)<a class="headerlink" href="#equation-eq-old4" title="Permalink to this equation">#</a></span>\[x_{t+1} = A x_t + B \mu_t\]</div>
 <p>Even though <span class="math notranslate nohighlight">\(\theta_0\)</span> is to be determined by our  model and so is not an initial condition,
 as it ordinarily would be in the state-space model described in our lecture on  <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Control</a>, we nevertheless write the model in the state-space form <a class="reference internal" href="#equation-eq-old4">(42.5)</a>.</p>
-<p>We use  form <a class="reference internal" href="#equation-eq-old4">(42.5)</a> because we want to apply an approach described in  our lecture on <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a>.</p>
+<p>We use  form <a class="reference internal" href="#equation-eq-old4">(42.5)</a> because we want to apply an approach described in  our lecture on <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg plans</span></a>.</p>
 <p>Notice that <span class="math notranslate nohighlight">\(\frac{1+\alpha}{\alpha} &gt; 1\)</span> is an eigenvalue of transition matrix <span class="math notranslate nohighlight">\(A\)</span> that threatens to destabilize the state-space system.</p>
 <p>The Ramsey planner will design   a decision rule for <span class="math notranslate nohighlight">\(\mu_t\)</span> that  stabilizes  the system.</p>
 <p>The  government  values  a representative household’s utility of real balances at time <span class="math notranslate nohighlight">\(t\)</span> according to the utility function</p>
@@ -459,14 +458,12 @@ as it ordinarily would be in the state-space model described in our lecture on  
 <p>The money demand function <a class="reference internal" href="#equation-eq-old1">(42.1)</a> and the utility function <a class="reference internal" href="#equation-eq-old5">(42.6)</a> imply that</p>
 <div class="math notranslate nohighlight" id="equation-eq-old5a">
 <span class="eqno">(42.7)<a class="headerlink" href="#equation-eq-old5a" title="Permalink to this equation">#</a></span>\[
-U(-\alpha \theta_t) = u_1 + u_2 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
+U(-\alpha \theta_t) = u_0 + u_1 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
 \]</div>
-<p>The<code class="docutils literal notranslate"><span class="pre">bliss</span> <span class="pre">level</span></code> of real balances is  <span class="math notranslate nohighlight">\(\frac{u_1}{u_2}\)</span> and the inflation rate that attains
-it is <span class="math notranslate nohighlight">\(-\frac{u_1}{u_2 \alpha}\)</span>.</p>
 </section>
 <section id="friedmans-optimal-rate-of-deflation">
 <h2><span class="section-number">42.3. </span>Friedman’s Optimal Rate of Deflation<a class="headerlink" href="#friedmans-optimal-rate-of-deflation" title="Permalink to this heading">#</a></h2>
-<p>According to <a class="reference internal" href="#equation-eq-old5a">(42.7)</a>, the “bliss level” of real balances is  <span class="math notranslate nohighlight">\(\frac{u_1}{u_2}\)</span> and the inflation rate that attains it is</p>
+<p>According to <a class="reference internal" href="#equation-eq-old5a">(42.7)</a>, the <code class="docutils literal notranslate"><span class="pre">bliss</span> <span class="pre">level</span></code> of real balances is  <span class="math notranslate nohighlight">\(\frac{u_1}{u_2}\)</span> and the inflation rate that attains it is</p>
 <div class="math notranslate nohighlight" id="equation-eq-friedmantheta">
 <span class="eqno">(42.8)<a class="headerlink" href="#equation-eq-friedmantheta" title="Permalink to this equation">#</a></span>\[
 \theta_t = \theta^* = -\frac{u_1}{u_2 \alpha}
@@ -486,12 +483,12 @@ that implies an inflation rate given by  <a class="reference internal" href="#eq
 </section>
 <section id="calvos-distortion">
 <h2><span class="section-number">42.4. </span>Calvo’s Distortion<a class="headerlink" href="#calvos-distortion" title="Permalink to this heading">#</a></h2>
-<p>The starting point of Calvo <span id="id11">[<a class="reference internal" href="zreferences.html#id140" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span> and  Chang <span id="id12">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>
+<p>The starting point of Calvo <span id="id12">[<a class="reference internal" href="zreferences.html#id140" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span> and  Chang <span id="id13">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>
 is that such lump sum taxes are not available.</p>
 <p>Instead, the government acquires money by levying taxes that distort decisions and thereby impose costs on the representative consumer.</p>
-<p>In the models of  Calvo <span id="id13">[<a class="reference internal" href="zreferences.html#id140" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span> and  Chang <span id="id14">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>, the government takes those costs tax-distortion costs into account.</p>
+<p>In the models of  Calvo <span id="id14">[<a class="reference internal" href="zreferences.html#id140" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span> and  Chang <span id="id15">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>, the government takes those costs tax-distortion costs into account.</p>
 <p>It balances the costs of imposing the distorting taxes needed to acquire the money that it destroys in order to generate deflation against the benefits that expected deflation generates by raising the representative households’ holdings of real balances.</p>
-<p>Let’s see how the government does that in our version of the models of  Calvo <span id="id15">[<a class="reference internal" href="zreferences.html#id140" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span> and  Chang <span id="id16">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>.</p>
+<p>Let’s see how the government does that in our version of the models of  Calvo <span id="id16">[<a class="reference internal" href="zreferences.html#id140" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span> and  Chang <span id="id17">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>.</p>
 <p>Via equation <a class="reference internal" href="#equation-eq-old3">(42.3)</a>, a government plan
 <span class="math notranslate nohighlight">\(\vec \mu = \{\mu_t \}_{t=0}^\infty\)</span> leads to a
 sequence of inflation outcomes
@@ -526,12 +523,12 @@ v_t = V(\bar \mu) = - \frac{s(\bar \mu, \bar \mu)}{1-\beta}
 <p>Values of <span class="math notranslate nohighlight">\(V(\bar \mu)\)</span> computed according to formula <a class="reference internal" href="#equation-eq-barvdef">(42.13)</a> for three different  values of <span class="math notranslate nohighlight">\(\bar \mu\)</span> will play important roles below.</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(V(\mu^{MP})\)</span> is the value of attained by the government in a <strong>Markov perfect equilibrium</strong></p></li>
-<li><p><span class="math notranslate nohighlight">\(V(\mu^{CR})\)</span> is the value of attained by the government in a <strong>constrained to constant <span class="math notranslate nohighlight">\(\mu\)</span> equilibrium</strong></p></li>
-<li><p><span class="math notranslate nohighlight">\(V(\mu^R_\infty)\)</span> is the limiting value attained by a continuation Ramsey planner under a Ramsey plan.</p>
+<li><p><span class="math notranslate nohighlight">\(V(\mu^R_\infty)\)</span> is the  value that  a continuation Ramsey planner attains at  <span class="math notranslate nohighlight">\(t \rightarrow +\infty\)</span></p>
 <ul>
-<li><p>We shall see that <span class="math notranslate nohighlight">\(V(\mu^R_\infty)\)</span> is a worst continuation value attained along a Ramsey plan</p></li>
+<li><p>We shall discover that <span class="math notranslate nohighlight">\(V(\mu^R_\infty)\)</span> is the worst continuation value attained along a Ramsey plan</p></li>
 </ul>
 </li>
+<li><p><span class="math notranslate nohighlight">\(V(\mu^{CR})\)</span> is the value of attained by the government in a <strong>constrained to constant <span class="math notranslate nohighlight">\(\mu\)</span> equilibrium</strong></p></li>
 </ul>
 </section>
 <section id="structure">
@@ -610,7 +607,7 @@ decisions.</p>
 <span class="math notranslate nohighlight">\(\{\mu_t\}_{t=0}^\infty\)</span> once and for all at time <span class="math notranslate nohighlight">\(0\)</span>
 subject to the constraint that <span class="math notranslate nohighlight">\(\mu_t = \mu\)</span> for all
 <span class="math notranslate nohighlight">\(t \geq 0\)</span>; or</p></li>
-<li><p>A sequence indexed by <span class="math notranslate nohighlight">\(t =0, 1, 2, \ldots\)</span> of separate policymakers</p>
+<li><p>A sequence of distinct  policymakers indexed by <span class="math notranslate nohighlight">\(t =0, 1, 2, \ldots\)</span></p>
 <ul>
 <li><p>a time <span class="math notranslate nohighlight">\(t\)</span> policymaker chooses <span class="math notranslate nohighlight">\(\mu_t\)</span> only and forecasts that future government decisions are unaffected by its choice.</p></li>
 </ul>
@@ -623,15 +620,15 @@ subject to the constraint that <span class="math notranslate nohighlight">\(\mu_
 <p class="admonition-title">Note</p>
 <p>In the  quantecon lecture <a class="reference internal" href="calvo_abreu.html"><span class="doc">Sustainable Plans for a Calvo Model</span></a>, we’ll study outcomes under another timing protocol in where there is a sequence of separate policymakers and  a time <span class="math notranslate nohighlight">\(t\)</span> policymaker chooses  only <span class="math notranslate nohighlight">\(\mu_t\)</span> but believes that its choice of <span class="math notranslate nohighlight">\(\mu_t\)</span>  shapes the representative agent’s beliefs about  future rates of money creation and inflation, and through them, future government actions.
 This is a model of  a <strong>credible government policy</strong> also known as a <strong>sustainable plan</strong>.
-The relationship between  outcomes in  the first (Ramsey) timing protocol and the <a class="reference internal" href="calvo_abreu.html"><span class="doc">Sustainable Plans for a Calvo Model</span></a> timing protocol and belief structure is the subject of a literature on <strong>sustainable</strong> or <strong>credible</strong> public policies (Chari and Kehoe <span id="id17">[<a class="reference internal" href="zreferences.html#id217" title="Varadarajan V Chari and Patrick J Kehoe. Sustainable plans. Journal of Political Economy, pages 783–802, 1990.">Chari and Kehoe, 1990</a>]</span>
-<span id="id18">[<a class="reference internal" href="zreferences.html#id224" title="Nancy L Stokey. Reputation and time consistency. The American Economic Review, pages 134–139, 1989.">Stokey, 1989</a>]</span>, and Stokey <span id="id19">[<a class="reference internal" href="zreferences.html#id76" title="Nancy L. Stokey. Credible public policy. Journal of Economic Dynamics and Control, 15(4):627-656, October 1991.">Stokey, 1991</a>]</span>).</p>
+The relationship between  outcomes in  the first (Ramsey) timing protocol and the <a class="reference internal" href="calvo_abreu.html"><span class="doc">Sustainable Plans for a Calvo Model</span></a> timing protocol and belief structure is the subject of a literature on <strong>sustainable</strong> or <strong>credible</strong> public policies (Chari and Kehoe <span id="id18">[<a class="reference internal" href="zreferences.html#id217" title="Varadarajan V Chari and Patrick J Kehoe. Sustainable plans. Journal of Political Economy, pages 783–802, 1990.">Chari and Kehoe, 1990</a>]</span>
+<span id="id19">[<a class="reference internal" href="zreferences.html#id224" title="Nancy L Stokey. Reputation and time consistency. The American Economic Review, pages 134–139, 1989.">Stokey, 1989</a>]</span>, and Stokey <span id="id20">[<a class="reference internal" href="zreferences.html#id76" title="Nancy L. Stokey. Credible public policy. Journal of Economic Dynamics and Control, 15(4):627-656, October 1991.">Stokey, 1991</a>]</span>).</p>
 </div>
 </section>
 <section id="note-on-dynamic-programming-squared">
 <h2><span class="section-number">42.7. </span>Note on Dynamic Programming Squared<a class="headerlink" href="#note-on-dynamic-programming-squared" title="Permalink to this heading">#</a></h2>
 <p>We’ll begin with the timing protocol associated with a Ramsey plan and deploy
 an application of what we  nickname <strong>dynamic programming squared</strong>.</p>
-<p>The nickname refers to the feature that a value satisfying one Bellman equation appears as an argument in a second Bellman equation.</p>
+<p>The nickname refers to the feature that a value satisfying one Bellman equation appears as an argument in a  value function associated with a  second Bellman equation.</p>
 <p>Thus, our models have involved two Bellman equations:</p>
 <ul class="simple">
 <li><p>equation <a class="reference internal" href="#equation-eq-old1">(42.1)</a> expresses how <span class="math notranslate nohighlight">\(\theta_t\)</span> depends on <span class="math notranslate nohighlight">\(\mu_t\)</span>
@@ -640,14 +637,13 @@ and <span class="math notranslate nohighlight">\(\theta_{t+1}\)</span></p></li>
 <span class="math notranslate nohighlight">\((\mu_t, \theta_t)\)</span> and <span class="math notranslate nohighlight">\(v_{t+1}\)</span></p></li>
 </ul>
 <p>A value <span class="math notranslate nohighlight">\(\theta\)</span> from one Bellman equation appears as an argument of a second Bellman equation for another value <span class="math notranslate nohighlight">\(v\)</span>.</p>
-<p>.</p>
 </section>
 <section id="a-ramsey-planner">
 <h2><span class="section-number">42.8. </span>A Ramsey Planner<a class="headerlink" href="#a-ramsey-planner" title="Permalink to this heading">#</a></h2>
 <p>Here  we consider a Ramsey planner that  chooses
 <span class="math notranslate nohighlight">\(\{\mu_t, \theta_t\}_{t=0}^\infty\)</span> to maximize <a class="reference internal" href="#equation-eq-old7">(42.11)</a>
 subject to the law of motion <a class="reference internal" href="#equation-eq-old4">(42.5)</a>.</p>
-<p>We can split this problem into two stages, as in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a> and  <span id="id20">[<a class="reference internal" href="zreferences.html#id174" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">Ljungqvist and Sargent, 2018</a>]</span> Chapter 19.</p>
+<p>We can split this problem into two stages, as in the lecture  <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg plans</span></a> and  <span id="id21">[<a class="reference internal" href="zreferences.html#id174" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">Ljungqvist and Sargent, 2018</a>]</span> Chapter 19.</p>
 <p>In the first stage, we take the initial inflation rate <span class="math notranslate nohighlight">\(\theta_0\)</span> as given
 and solve what looks like an ordinary  LQ discounted dynamic programming problem.</p>
 <p>In the second stage, we choose an optimal  initial inflation rate <span class="math notranslate nohighlight">\(\theta_0\)</span>.</p>
@@ -676,7 +672,7 @@ J(x) = \max_{\mu,x'}\{-r(x,\mu) + \beta J(x')\}
 \[
 x' = Ax + B\mu
 \]</div>
-<p>As in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a>, we can map this problem into a linear-quadratic control problem and deduce an optimal value function <span class="math notranslate nohighlight">\(J(x)\)</span>.</p>
+<p>As in the lecture <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg plans</span></a>, we can map this problem into a linear-quadratic control problem and deduce an optimal value function <span class="math notranslate nohighlight">\(J(x)\)</span>.</p>
 <p>Guessing that <span class="math notranslate nohighlight">\(J(x) = - x'Px\)</span> and substituting into the Bellman
 equation gives rise to the algebraic matrix Riccati equation:</p>
 <div class="math notranslate nohighlight">
@@ -776,7 +772,7 @@ V^R = \max_{\theta} J(\theta)
 <section id="representation-of-ramsey-plan">
 <h2><span class="section-number">42.9. </span>Representation of Ramsey Plan<a class="headerlink" href="#representation-of-ramsey-plan" title="Permalink to this heading">#</a></h2>
 <p>The preceding calculations indicate that we can represent a Ramsey plan
-<span class="math notranslate nohighlight">\(\vec \mu\)</span> recursively with the following system created in the spirit of Chang <span id="id21">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>:</p>
+<span class="math notranslate nohighlight">\(\vec \mu\)</span> recursively with the following system created in the spirit of Chang <span id="id22">[<a class="reference internal" href="zreferences.html#id216" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old9">
 <span class="eqno">(42.21)<a class="headerlink" href="#equation-eq-old9" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
 \theta_0 &amp; = \theta_0^R \\
@@ -840,7 +836,7 @@ about dynamic or time inconsistency.</p>
 </section>
 <section id="time-inconsistency">
 <h2><span class="section-number">42.11. </span>Time inconsistency<a class="headerlink" href="#time-inconsistency" title="Permalink to this heading">#</a></h2>
-<p>As discussed in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg problems</span></a> and <a class="reference internal" href="opt_tax_recur.html"><span class="doc">Optimal taxation with state-contingent debt</span></a>, a continuation Ramsey plan is not a Ramsey plan.</p>
+<p>As discussed in <a class="reference internal" href="dyn_stack.html"><span class="doc">Stackelberg plans</span></a> and <a class="reference internal" href="opt_tax_recur.html"><span class="doc">Optimal taxation with state-contingent debt</span></a>, a continuation Ramsey plan is not a Ramsey plan.</p>
 <p>This is a concise way of characterizing the time inconsistency of a Ramsey plan.</p>
 <p>The time inconsistency of a Ramsey plan has motivated other models of government decision making
 that, relative to a Ramsey plan,  alter either</p>
@@ -852,7 +848,7 @@ that, relative to a Ramsey plan,  alter either</p>
 <section id="constrained-to-constant-growth-rate-ramsey-plan">
 <h2><span class="section-number">42.12. </span>Constrained-to-Constant-Growth-Rate Ramsey Plan<a class="headerlink" href="#constrained-to-constant-growth-rate-ramsey-plan" title="Permalink to this heading">#</a></h2>
 <p>We now describe a  model in which we restrict the Ramsey planner’s choice set.</p>
-<p>Instead of choosing a sequence of money growth rates <span class="math notranslate nohighlight">\(\vec \mu \in {\bf R}^2\)</span>, we restrict the
+<p>Instead of choosing a sequence of money growth rates <span class="math notranslate nohighlight">\(\vec \mu \in {\bf L}^2\)</span>, we restrict the
 government to choose a time-invariant money growth rate <span class="math notranslate nohighlight">\(\bar \mu\)</span>.</p>
 <p>We created this version of the model  to highlight an aspect of a Ramsey plan associated with its time inconsistency, namely, the feature that optimal settings of the  policy instrument vary over time.</p>
 <p>Thus, instead of allowing the government at time <span class="math notranslate nohighlight">\(0\)</span> to choose a different <span class="math notranslate nohighlight">\(\mu_t\)</span> for each <span class="math notranslate nohighlight">\(t \geq 0\)</span>, we now assume that a  government at time <span class="math notranslate nohighlight">\(0\)</span> once and for all  chooses a <em>constant</em> sequence <span class="math notranslate nohighlight">\(\mu_t = \bar \mu\)</span> for all <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
@@ -1219,7 +1215,7 @@ continuation Ramsey planner who inherits <span class="math notranslate nohighlig
 <p>The next code  plots the Ramsey planner’s value function <span class="math notranslate nohighlight">\(J(\theta)\)</span>, which we know is maximized at   <span class="math notranslate nohighlight">\(\theta^R_0\)</span>, the promised inflation that the Ramsey planner  sets
 at time <span class="math notranslate nohighlight">\(t=0\)</span>.</p>
 <p>The figure also plots the limiting value <span class="math notranslate nohighlight">\(\theta_\infty^R\)</span> to which  the promised  inflation rate <span class="math notranslate nohighlight">\(\theta_t\)</span> converges under the Ramsey plan.</p>
-<p>In addition, the figure indicates an MPE inflation rate <span class="math notranslate nohighlight">\(\theta^{CR}\)</span> and a bliss inflation <span class="math notranslate nohighlight">\(\theta^*\)</span>.</p>
+<p>In addition, the figure indicates an MPE inflation rate <span class="math notranslate nohighlight">\(\theta^{MPE}\)</span>, <span class="math notranslate nohighlight">\(\theta^{CR}\)</span>, and a bliss inflation <span class="math notranslate nohighlight">\(\theta^*\)</span>.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1304,7 +1300,7 @@ labeling this value function <span class="math notranslate nohighlight">\(V^{CR}
 </div>
 </div>
 </div>
-<p>So our claim that <span class="math notranslate nohighlight">\(J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)\)</span>is verified numerically.</p>
+<p>So our claim that <span class="math notranslate nohighlight">\(J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)\)</span> is verified numerically.</p>
 <p>Since  <span class="math notranslate nohighlight">\(J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)\)</span> occurs at a tangency point at which
 <span class="math notranslate nohighlight">\(J(\theta)\)</span> is increasing in <span class="math notranslate nohighlight">\(\theta\)</span>, it follows that</p>
 <div class="math notranslate nohighlight" id="equation-eq-comparison2">
@@ -1470,7 +1466,7 @@ constant value attained by a constrained-to-constant <span class="math notransla
 <p>The above graphs and table convey many useful things.</p>
 <p>The horizontal dotted lines indicate values
 <span class="math notranslate nohighlight">\(V(\mu_\infty^R), V(\mu^{CR}), V(\mu^{MPE}) \)</span> of time-invariant money
-growth rates <span class="math notranslate nohighlight">\(\mu_\infty^R, \mu^{CR}\)</span> and <span class="math notranslate nohighlight">\(\mu_{MPE}\)</span>, respectfully.</p>
+growth rates <span class="math notranslate nohighlight">\(\mu_\infty^R, \mu^{CR}\)</span> and <span class="math notranslate nohighlight">\(\mu^{MPE}\)</span>, respectfully.</p>
 <p>Notice how <span class="math notranslate nohighlight">\(J(\theta)\)</span> and <span class="math notranslate nohighlight">\(V^{CR}(\theta)\)</span> are tangent and increasing at
 <span class="math notranslate nohighlight">\(\theta = \theta_\infty^R\)</span>, which implies that <span class="math notranslate nohighlight">\(\theta^{CR} &gt; \theta_\infty^R\)</span>
 and <span class="math notranslate nohighlight">\(J(\theta^{CR}) &gt; J(\theta_\infty^R)\)</span>.</p>
@@ -1482,7 +1478,7 @@ and <span class="math notranslate nohighlight">\(\theta_0^R\)</span> but neither
 \begin{aligned}
 \theta^{CR} &amp; = - \frac{\alpha u_1}{\alpha^2 u_2 + c } \\
 \theta^{MPE} &amp;  = - \frac{\alpha u_1}{\alpha^2 u_2 + (1+\alpha)c} \\
-\theta^{MPE} &amp; = - \frac{\alpha u_1}{\alpha^2 u_2 + (1+\alpha)c}
+\theta^{*} &amp;  = -\frac{u_1}{u_2 \alpha}
 \end{aligned}
 \end{split}\]</div>
 <p>But let’s see what happens when we change <span class="math notranslate nohighlight">\(c\)</span>.</p>
@@ -1525,7 +1521,7 @@ and <span class="math notranslate nohighlight">\(\theta_0^R\)</span> but neither
 <p>The above table and figures show how
 changes in <span class="math notranslate nohighlight">\(c\)</span> alter <span class="math notranslate nohighlight">\(\theta_\infty^R\)</span>
 and <span class="math notranslate nohighlight">\(\theta_0^R\)</span> as well as  <span class="math notranslate nohighlight">\(\theta^{CR}\)</span> and  <span class="math notranslate nohighlight">\(\theta^{MPE}\)</span>, but not
-<span class="math notranslate nohighlight">\(\theta^*\)</span>, again  in accord with formulas
+<span class="math notranslate nohighlight">\(\theta^*,\)</span> again  in accord with formulas
 <a class="reference internal" href="#equation-eq-friedmantheta">(42.8)</a>,  <a class="reference internal" href="#equation-eq-muramseyconstrained">(42.26)</a>, and <a class="reference internal" href="#equation-eq-markovperfectmu">(42.31)</a>.</p>
 <p>Notice that as <span class="math notranslate nohighlight">\(c \)</span> gets larger and larger,   <span class="math notranslate nohighlight">\(\theta_\infty^R, \theta_0^R\)</span>
 and <span class="math notranslate nohighlight">\(\theta^{CR}\)</span> all converge to <span class="math notranslate nohighlight">\(\theta^{MPE}\)</span>.</p>
@@ -1547,7 +1543,7 @@ and <span class="math notranslate nohighlight">\(\theta^{CR}\)</span> all conver
 </div>
 <p>The above graphs indicate that as <span class="math notranslate nohighlight">\(c\)</span> approaches zero, <span class="math notranslate nohighlight">\(\theta_\infty^R, \theta_0^R, \theta^{CR}\)</span>,
 and <span class="math notranslate nohighlight">\(\theta^{MPE}\)</span> all approach <span class="math notranslate nohighlight">\(\theta^*\)</span>.</p>
-<p>This makes sense, because it was by adding costs of distorting taxes that Calvo <span id="id22">[<a class="reference internal" href="zreferences.html#id140" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span> drove a wedge between Friedman’s optimal deflation rate and the inflation rates chosen by a Ramsey planner.</p>
+<p>This makes sense, because it was by adding costs of distorting taxes that Calvo <span id="id23">[<a class="reference internal" href="zreferences.html#id140" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span> drove a wedge between Friedman’s optimal deflation rate and the inflation rates chosen by a Ramsey planner.</p>
 <p>The following code  plots sequences  <span class="math notranslate nohighlight">\(\vec \mu\)</span> and <span class="math notranslate nohighlight">\(\vec \theta\)</span> prescribed by a Ramsey plan as well as the constant levels <span class="math notranslate nohighlight">\(\mu^{CR}\)</span> and <span class="math notranslate nohighlight">\(\mu^{MPE}\)</span>.</p>
 <p>The following graphs report values for the value function parameters <span class="math notranslate nohighlight">\(g_0, g_1, g_2\)</span>,
 and the Ramsey policy function parameters <span class="math notranslate nohighlight">\(b_0, b_1, d_0, d_1\)</span> associated with the indicated
@@ -1762,16 +1758,14 @@ to deviate from a Ramsey plan.</p></li>
 </section>
 <section id="implausibility-of-ramsey-plan">
 <h3><span class="section-number">42.15.2. </span>Implausibility of Ramsey Plan<a class="headerlink" href="#implausibility-of-ramsey-plan" title="Permalink to this heading">#</a></h3>
-<p>In settings in which governments actually choose sequentially, many economists
-regard a time inconsistent plan as implausible because of the incentives to
-deviate that are presented  along the plan.</p>
-<p>A way to state  this reaction   is to say that a Ramsey plan is not credible because there are persistent incentives for policymakers to deviate from it.</p>
+<p>Many economists regard a time inconsistent plan as implausible because they question the plausibility of  timing protocol in
+which a plan for setting a sequence of policy variables is chosen once-and-for-all at time <span class="math notranslate nohighlight">\(0\)</span>.</p>
 <p>For that reason, the Markov perfect equilibrium concept attracts many
 economists.</p>
 <ul class="simple">
-<li><p>A Markov perfect equilibrium plan is constructed to insure that government policymakers who choose sequentially do not want to deviate from it.</p></li>
+<li><p>A Markov perfect equilibrium plan is constructed to insure that a sequence of  government policymakers who choose sequentially do not want to deviate from it.</p></li>
 </ul>
-<p>The <em>no incentive to deviate from the plan</em> property is what makes the Markov perfect equilibrium concept attractive.</p>
+<p>The  property of a Markov perfect equilibrium that there is <em>no incentive to deviate from the plan</em>   makes it  attractive.</p>
 </section>
 </section>
 <section id="comparison-of-equilibrium-values">
@@ -1836,8 +1830,8 @@ governments.</p>
 </ul>
 <section id="ramsey-plan-strikes-back">
 <h3><span class="section-number">42.17.1. </span>Ramsey Plan Strikes Back<a class="headerlink" href="#ramsey-plan-strikes-back" title="Permalink to this heading">#</a></h3>
-<p>Research by Abreu <span id="id23">[<a class="reference internal" href="zreferences.html#id75" title="Dilip Abreu. On the theory of infinitely repeated games with discounting. Econometrica, 56:383–396, 1988.">Abreu, 1988</a>]</span>,  Chari and Kehoe <span id="id24">[<a class="reference internal" href="zreferences.html#id217" title="Varadarajan V Chari and Patrick J Kehoe. Sustainable plans. Journal of Political Economy, pages 783–802, 1990.">Chari and Kehoe, 1990</a>]</span>
-<span id="id25">[<a class="reference internal" href="zreferences.html#id224" title="Nancy L Stokey. Reputation and time consistency. The American Economic Review, pages 134–139, 1989.">Stokey, 1989</a>]</span>, and Stokey <span id="id26">[<a class="reference internal" href="zreferences.html#id76" title="Nancy L. Stokey. Credible public policy. Journal of Economic Dynamics and Control, 15(4):627-656, October 1991.">Stokey, 1991</a>]</span> discovered conditions under which a Ramsey plan can be rescued from the complaint that it is not credible.</p>
+<p>Research by Abreu <span id="id24">[<a class="reference internal" href="zreferences.html#id75" title="Dilip Abreu. On the theory of infinitely repeated games with discounting. Econometrica, 56:383–396, 1988.">Abreu, 1988</a>]</span>,  Chari and Kehoe <span id="id25">[<a class="reference internal" href="zreferences.html#id217" title="Varadarajan V Chari and Patrick J Kehoe. Sustainable plans. Journal of Political Economy, pages 783–802, 1990.">Chari and Kehoe, 1990</a>]</span>
+<span id="id26">[<a class="reference internal" href="zreferences.html#id224" title="Nancy L Stokey. Reputation and time consistency. The American Economic Review, pages 134–139, 1989.">Stokey, 1989</a>]</span>, and Stokey <span id="id27">[<a class="reference internal" href="zreferences.html#id76" title="Nancy L. Stokey. Credible public policy. Journal of Economic Dynamics and Control, 15(4):627-656, October 1991.">Stokey, 1991</a>]</span> discovered conditions under which a Ramsey plan can be rescued from the complaint that it is not credible.</p>
 <p>They  accomplished this by expanding the
 description of a plan to include expectations about <em>adverse consequences</em> of deviating from
 it that can serve to deter deviations.</p>

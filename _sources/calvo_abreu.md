@@ -32,7 +32,7 @@ kernelspec:
 
 This is a sequel to this  quantecon lecture {doc}`calvo`.
 
-That lecture studied a linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to study  the **time inconsistency** of the optimal government plan that emerges when  a ``Stackelberg`` government  (a.k.a.~ a ``Ramsey planner``) at time $0$ once and for all chooses  a sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ of gross rates of growth in the supply of money.
+That lecture studied a linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to study  the **time inconsistency** of the optimal government plan that emerges when  a **Stackelberg** government  (a.k.a. a **Ramsey planner**) at time $0$ once and for all chooses  a sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ of gross rates of growth in the supply of money.
 
 A consequence of that choice is a (rational expectations equilibrium)  sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$  of gross rates of increase in the price level that  we call inflation rates. 
 
@@ -277,8 +277,6 @@ The key is an  object called a **self-enforcing** plan.
 
 We'll proceed to compute one.
 
-
-
 In addition to what's in Anaconda, this lecture will use  the following libraries:
 
 ```{code-cell} ipython3
@@ -293,9 +291,7 @@ We'll start with some imports:
 import numpy as np
 from quantecon import LQ
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FormatStrFormatter
 import pandas as pd
-from IPython.display import display, Math
 ```
 
 ### Abreu's Self-Enforcing Plan
