@@ -3,8 +3,10 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.4
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -38,11 +40,10 @@ In particular, as trade costs fall and international competition increases, inno
 
 Let's start with some imports:
 
-```{code-cell} ipython
+```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 from numba import jit
-from ipywidgets import interact
 ```
 
 ### Background
@@ -335,7 +336,7 @@ These are the `@jit` statements that you see below (review [this lecture](https:
 
 Here's the main body of code
 
-```{code-cell} python3
+```{code-cell} ipython3
 @jit(nopython=True)
 def _hj(j, nk, s1, s2, θ, δ, ρ):
     """
@@ -651,9 +652,9 @@ The time series share parameters but differ in their initial condition.
 
 Here's the function
 
-```{code-cell} python3
+```{code-cell} ipython3
 def plot_timeseries(n1_0, n2_0, s1=0.5, θ=2.5,
-        δ=0.7, ρ=0.2, ax=None, title=''):
+                    δ=0.7, ρ=0.2, ax=None, title=''):
     """
     Plot a single time series with initial conditions
     """
@@ -735,7 +736,8 @@ Replicate the figure {ref}`shown above <matsrep>` by coloring initial conditions
 ```{solution-start} matsuyama_ex1
 :class: dropdown
 ```
-```{code-cell} python3
+
+```{code-cell} ipython3
 def plot_attraction_basis(s1=0.5, θ=2.5, δ=0.7, ρ=0.2, npts=250, ax=None):
     if ax is None:
         fig, ax = plt.subplots()
@@ -784,36 +786,5 @@ fig.suptitle("Synchronized versus Asynchronized 2-cycles",
 plt.show()
 ```
 
-Additionally, instead of just seeing 4 plots at once, we might want to
-manually be able to change $\rho$ and see how it affects the plot
-in real-time. Below we use an interactive plot to do this.
-
-Note, interactive plotting requires the [ipywidgets](https://github.com/jupyter-widgets/ipywidgets) module to be installed and enabled.
-
-```{code-cell} python3
-def interact_attraction_basis(ρ=0.2, maxiter=250, npts=250):
-    # Create the figure and axis that we will plot on
-    fig, ax = plt.subplots(figsize=(12, 10))
-
-    # Create model and attraction basis
-    s1, θ, δ = 0.5, 2.5, 0.75
-    model = MSGSync(s1, θ, δ, ρ)
-    ab = model.create_attraction_basis(maxiter=maxiter, npts=npts)
-
-    # Color map with colormesh
-    unitrange = np.linspace(0, 1, npts)
-    cf = ax.pcolormesh(unitrange, unitrange, ab, cmap="viridis")
-    cbar_ax = fig.add_axes([0.95, 0.15, 0.05, 0.7])
-    plt.colorbar(cf, cax=cbar_ax)
-    plt.show()
-    return None
-```
-
-```{code-cell} python3
-fig = interact(interact_attraction_basis,
-               ρ=(0.0, 1.0, 0.05),
-               maxiter=(50, 5000, 50),
-               npts=(25, 750, 25))
-```
 ```{solution-end}
 ```
