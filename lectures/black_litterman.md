@@ -86,7 +86,6 @@ import numpy as np
 import scipy.stats as stat
 import matplotlib.pyplot as plt
 from numba import jit
-from ipywidgets import interact, FloatSlider
 ```
 
 ## Mean-Variance Portfolio Choice
@@ -404,10 +403,9 @@ def black_litterman(λ, μ1, μ2, Σ1, Σ2):
 
 # The Black-Litterman recommendation for the portfolio weights
 w_tilde = np.linalg.solve(δ * Σ_est, μ_tilde)
+```
 
-τ_slider = FloatSlider(min=0.05, max=10, step=0.5, value=τ)
-
-@interact(τ=τ_slider)
+```{code-cell} ipython3
 def BL_plot(τ):
     μ_tilde = black_litterman(1, μ_m, μ_est, Σ_est, τ * Σ_est)
     w_tilde = np.linalg.solve(δ * Σ_est, μ_tilde)
@@ -441,6 +439,8 @@ def BL_plot(τ):
     ax[1].xaxis.set_ticks(np.arange(1, N+1, 1))
     ax[1].legend(numpoints=1)
     plt.show()
+
+BL_plot(τ)
 ```
 
 ## Bayesian Interpretation
@@ -643,9 +643,10 @@ r2 = np.linspace(-0.02, .15, N_r2)
 curve = np.asarray([black_litterman(λ, μ_m, μ_est, Σ_est,
                                     τ * Σ_est).flatten() for λ in λ_grid])
 
-λ_slider = FloatSlider(min=.1, max=7, step=.5, value=1)
+λ = 1
+```
 
-@interact(λ=λ_slider)
+```{code-cell} ipython3
 def decolletage(λ):
     dist_r_BL = stat.multivariate_normal(μ_m.squeeze(), Σ_est)
     dist_r_hat = stat.multivariate_normal(μ_est.squeeze(), τ * Σ_est)
@@ -674,6 +675,8 @@ def decolletage(λ):
     ax.text(μ_est[0] + 0.003, μ_est[1], r'$\hat{\mu}$')
     ax.text(μ_m[0] + 0.003, μ_m[1] + 0.005, r'$\mu_{BL}$')
     plt.show()
+
+decolletage(λ)
 ```
 
 Note that the line that connects the two points
@@ -694,10 +697,10 @@ and $\mu_{BL}$ are bending
 λ_grid = np.linspace(.001, 20000, 1000)
 curve = np.asarray([black_litterman(λ, μ_m, μ_est, Σ_est,
                                     τ * np.eye(N)).flatten() for λ in λ_grid])
+λ = 200
+```
 
-λ_slider = FloatSlider(min=5, max=1500, step=100, value=200)
-
-@interact(λ=λ_slider)
+```{code-cell} ipython3
 def decolletage(λ):
     dist_r_BL = stat.multivariate_normal(μ_m.squeeze(), Σ_est)
     dist_r_hat = stat.multivariate_normal(μ_est.squeeze(), τ * np.eye(N))
@@ -727,6 +730,8 @@ def decolletage(λ):
     ax.text(μ_est[0] + 0.003, μ_est[1], r'$\hat{\mu}$')
     ax.text(μ_m[0] + 0.003, μ_m[1] + 0.005, r'$\mu_{BL}$')
     plt.show()
+
+decolletage(λ)
 ```
 
 ## Black-Litterman Recommendation as Regularization
