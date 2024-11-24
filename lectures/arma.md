@@ -479,7 +479,7 @@ for i, ϕ in enumerate((0.8, -0.8)):
     ax = axes[i]
     sd = ar1_sd(ϕ, ωs)
     ax.plot(ωs, sd, 'b-', alpha=0.6, lw=2,
-            label='spectral density, $\phi = {ϕ:.2}$')
+            label=f'spectral density, $\phi = {ϕ:.2}$')
     ax.legend(loc='upper center')
     ax.set(xlabel='frequency', xlim=(0, np.pi))
 plt.show()
