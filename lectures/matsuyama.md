@@ -799,7 +799,7 @@ In order to use this, we recommend to run this notebook locally.
 ```
 
 ```{code-cell} ipython3
-:class: no-execute
+:tags: [skip-execution]
 
 def interact_attraction_basis(ρ=0.2, maxiter=250, npts=250):
     # Create the figure and axis that we will plot on
@@ -818,7 +818,7 @@ def interact_attraction_basis(ρ=0.2, maxiter=250, npts=250):
 ```
 
 ```{code-cell} ipython3
-:class: no-execute
+:tags: [skip-execution]
 
 fig = interact(interact_attraction_basis,
                ρ=(0.0, 1.0, 0.05),
