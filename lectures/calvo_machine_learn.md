@@ -318,7 +318,7 @@ Following Calvo {cite}`Calvo1978`, we assume that the  government chooses the mo
 
 An optimal  government plan under this timing protocol is an example of what is  often called a **Ramsey plan**.
 
-Notice that while the government is in effect choosing a bivariate **time series** $(\vec mu, \vec \theta)$, the government's problem is **static** in the sense that it chooses treats that time-series as a single object to be chosen at a single point in time. 
+Notice that while the government is in effect choosing a bivariate **time series** $(\vec \mu, \vec \theta)$, the government's problem is **static** in the sense that it chooses treats that time-series as a single object to be chosen at a single point in time. 
 
 
 ## Approximation and Truncation parameter $T$
