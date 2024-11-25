@@ -58,18 +58,16 @@ In this lecture, we'll actually deploy two machine learning approaches.
  * the first is really lazy 
     * it  writes  a Python function that   computes the Ramsey planner's objective as a function of a money growth rate sequence and  hands it over to a ``gradient descent`` optimizer
  * the second is less lazy
-     * it exerts the mental effort required to express the Ramsey planner's objective as an affine quadratic form in $\vec \mu$, computes first-order conditions for an optimum, arranges them into a system of simultaneous linear  equations for $\vec \mu$ and then $\vec \theta$, then solves them.
+     * it exerts enough  mental effort required to express the Ramsey planner's objective as an affine quadratic form in $\vec \mu$, computes first-order conditions for an optimum, arranges them into a system of simultaneous linear  equations for $\vec \mu$ and then $\vec \theta$, then solves them.
 
-Each of  these machine learning (ML) approaches  recovers the same  Ramsey plan that shall compute  in  quantecon lecture {doc}`calvo` by using dynamic programming squared.
+Each of  these machine learning (ML) approaches  recovers the same  Ramsey plan that we compute  in  quantecon lecture {doc}`calvo` by using dynamic programming squared.
 
-However,  they conceal  the recursive structure of the Ramsey plan.
+However,   the recursive structure of the Ramsey plan lies hidden within   some of the objects calculated  by our ML approaches.
 
-That recursive  structure lies hidden within   some of the objects calculated  by our ML approaches.
-
-Nevertheless, we can ferret out some of that structure  by asking   the right questions.
+To  ferret out that structure, we have to ask   the right questions.
 
  
-We pose   those questions at the end of this lecture and  answer them  by running particulars some  linear  regressions on components of $\vec \mu, \vec \theta$.  
+We pose  some of  those questions at the end of this lecture and  answer them  by running  some  linear  regressions on components of $\vec \mu, \vec \theta,$ and another vector that we'll define later.   
 
 Human intelligence, not the ``artificial intelligence`` deployed in our machine learning approach, is a key input into choosing which regressions to run. 
  
@@ -79,15 +77,15 @@ Human intelligence, not the ``artificial intelligence`` deployed in our machine 
 We study a   linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government plans.
 
 
-The model focuses  on intertemporal tradeoffs between
+Calvo's model focuses  on intertemporal tradeoffs between
 
-- utility that a representative  agent's anticipations of future  deflation delivered   by lowering the agent's  cost of holding real money balances and thereby increasing the  agent's *liquidity*, as ultimately measured by the agent's   holdings of real money balances, and
+- utility accruing from  a representative  agent's anticipations of future  deflation that lower the agent's  cost of holding real money balances and prompt him to  increase his   *liquidity*, as  measured by his   stock  of real money balances, and
 - social costs associated with the  distorting taxes that a government  levies  to acquire the paper money that it   destroys  in order to generate prospective deflation
 
 The model features
 
 - rational expectations
-- costly government actions at all dates $t \geq 1$ that increase household utilities at dates before $t$
+- costly government actions at all dates $t \geq 1$ that increase the representative agent's  utilities at dates before $t$
 
 
 The model combines ideas from  papers by Cagan {cite}`Cagan`, {cite}`sargent1973stability`,  and  Calvo {cite}`Calvo1978`.
@@ -154,7 +152,7 @@ $$
 We say that a sequence that belongs to $L^2$ is **square summable**.
 ```
 
-When we assume that the sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ is square summable and we require that the sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$ is square summable,
+When we assume that the sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ is square summable and also require that the sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$ is square summable,
 the linear difference equation {eq}`eq_grad_old2` can be solved forward to get:
 
 ```{math}
@@ -193,9 +191,8 @@ $\vec \mu = \{\mu_t \}_{t=0}^\infty$ leads to a
 sequence of inflation rates
 $\vec \theta = \{ \theta_t \}_{t=0}^\infty$.
 
-We assume that the government incurs  social costs $\frac{c}{2} \mu_t^2$ at
-$t$ when it  changes the stock of nominal money
-balances at rate $\mu_t$.
+We assume that the government incurs  social costs $\frac{c}{2} \mu_t^2$ when it  changes the stock of nominal money
+balances at rate $\mu_t$  at time $t$.
 
 Therefore, the one-period welfare function of a benevolent government
 is
@@ -215,14 +212,13 @@ where $\beta \in (0,1)$ is a discount factor.
 
 The Ramsey planner chooses 
  a vector of money growth rates $\vec \mu$ 
-to maximize criterion {eq}`eq:RamseyV` subject to equations {eq}`eq_grad_old3` and a restriction
-requiring that 
+to maximize criterion {eq}`eq:RamseyV` subject to equations {eq}`eq_grad_old3` and that  restriction
 
 $$ 
 \vec \theta \in L^2 
 $$ (eq:thetainL2)
 
-Notice  equations {eq}`eq_grad_old3` and {eq}`eq:thetainL2` imply that $\vec \theta$ is a function 
+Equations {eq}`eq_grad_old3` and {eq}`eq:thetainL2` imply that $\vec \theta$ is a function 
 of $\vec \mu$.  
 
 In particular, the inflation rate $\theta_t$ satisfies
@@ -256,7 +252,7 @@ $$
 
  * Cost parameter of tax distortions associated with setting $\mu_t \neq 0$ is $c$
  
- * Truncation parameter: a positive integer $T >0$
+ * A horizon truncation parameter: a positive integer $T >0$
 
   
 
@@ -299,7 +295,7 @@ $$
 h_0 + h_1 \theta_t + h_2 \theta_t^2 
 $$
 
-To make them match, we   set
+To make our parameters  match as we want, we   set
 
 $$
 \begin{aligned}
@@ -316,8 +312,16 @@ subject to equations  {eq}`eq:inflation101`.
 A  solution $\vec \mu$ of this problem is called a **Ramsey plan**.  
 
 
+### Timing protocol
 
-## Approximations
+Following Calvo {cite}`Calvo1978`, we assume that the  government chooses the money growth  sequence $\vec \mu$ once and for all at, or before, time $0$.  
+
+An optimal  government plan under this timing protocol is an example of what is  often called a **Ramsey plan**.
+
+Notice that while the government is in effect choosing a bivariate **time series** $(\vec mu, \vec \theta)$, the government's problem is **static** in the sense that it chooses treats that time-series as a single object to be chosen at a single point in time. 
+
+
+## Approximation and Truncation parameter $T$
 
 We anticipate that under a Ramsey plan the sequences  $\{\theta_t\}$ and $\{\mu_t\}$  both converge to stationary values. 
 
@@ -327,7 +331,7 @@ $ \lim_{t \rightarrow + \infty} \mu_t = \bar \mu$.
 
 Convergence of $\mu_t$ to $\bar \mu$ together with formula {eq}`eq:inflation101` for the inflation rate then implies that  $ \lim_{t \rightarrow + \infty} \theta_t = \bar \mu$ as well.
 
-Consequently, we'll  guess a time $T$ large enough that $\mu_t$ has gotten 
+We'll  guess a time $T$ large enough that $\mu_t$ has gotten 
 very close to the limit $\bar \mu$.
 
 Then we'll approximate $\vec \mu$ by a truncated  vector
@@ -345,7 +349,7 @@ $$
 
 **Formula for truncated $\vec \theta$**
 
-In light of our approximation that $\mu_t = \bar \mu$ for all $t \geq T$, we now seek a  function that takes 
+In light of our approximation that $\mu_t = \bar \mu$ for all $t \geq T$, we  seek a  function that takes 
 
 $$
 \tilde \mu = \begin{bmatrix}\mu_0 & \mu_1 & \cdots & \mu_{T-1} & \bar \mu
@@ -360,18 +364,18 @@ $$
 \end{bmatrix}
 $$
 
-where $\theta_t$ satisfies
+where   $\bar \theta = \bar \mu$ and $\theta_t$ satisfies
 
 $$
 \theta_t = (1-\lambda) \sum_{j=0}^{T-1-t} \lambda^j \mu_{t+j} + \lambda^{T-t} \bar \mu 
 $$ (eq:thetaformula102)
 
-for $t=0, 1, \ldots, T-1$ and $\bar \theta = \bar \mu$.
+for $t=0, 1, \ldots, T-1$.
 
 **Formula  for $V$**
 
 Having specified a  truncated vector $\tilde \mu$ and and having computed  $\tilde \theta$
-by using formula {eq}`eq:thetaformula102`, we want to  write a Python  function that computes
+by using formula {eq}`eq:thetaformula102`, we shall   write a Python  function that computes
 
 $$
 \tilde V = \sum_{t=0}^\infty \beta^t (
@@ -731,7 +735,7 @@ By thinking  about the mathematical structure of the Ramsey problem and using so
 
 We start by recalling that  the Ramsey problem that chooses  $\vec \mu$ to maximize the government's value function {eq}`eq:Ramseyvalue`subject to equation  {eq}`eq:inflation101`.
 
-This  is actually an optimization  problem with a quadratic objective function and linear constraints.
+This  turns out to be  an optimization  problem with a quadratic objective function and linear constraints.
 
 First-order conditions for this problem are a set of simultaneous linear equations in $\vec \mu$.
 
@@ -1034,31 +1038,9 @@ closed_grad
 print(f'deviation = {np.linalg.norm(closed_grad - (- grad_J(jnp.ones(T))))}')
 ```
 
-## Some  Exploratory Regressions
-
-We  compute some least squares linear regressions of some  components of $\vec \theta$ and $\vec \mu$ on others.
-
-We hope that these regressions will reveal structure  hidden within the $\vec \mu^R, \vec \theta^R$ sequences associated with a Ramsey plan.
-
-It is worth pausing  to think about  roles being  played here by  **human** intelligence and **artificial** intelligence.  
-
-Artificial intelligence in the form of some Python code and  a computer  is running the regressions for us.
-
-But we are free to  regress anything on anything else.
-
-Human intelligence tells us what regressions to run. 
-
-Additional inputs of  human intelligence will be  required fully to appreciate what those regressions  reveal about the structure of a Ramsey plan. 
-
-```{note}
-When we eventually get around to trying to understand the regressions below, it will  worthwhile to study  the reasoning that let  Chang {cite}`chang1998credible` to choose
-$\theta_t$ as his key state variable. 
-```
+Let's  plot the Ramsey plan's $\mu_t$ and $\theta_t$ for $t =0, \ldots, T$  against $t$.
 
 
-We'll begin by  simply plotting the Ramsey plan's $\mu_t$ and $\theta_t$ for $t =0, \ldots, T$  against $t$.
-
-These are the data on which we'll be running some linear least squares regressions.
 
 ```{code-cell} ipython3
 # Compute θ using optimized_μ
@@ -1080,96 +1062,10 @@ the  limit $\bar \mu$ of  $\mu_t$ as $t \rightarrow +\infty$.
 
 This pattern reflects how formula {eq}`eq_grad_old3`  makes $\theta_t$ be a weighted average of future $\mu_t$'s.
 
-We begin by regressing $\mu_t$ on a constant and $\theta_t$. 
 
-This might seem strange because, after all, equation {eq}`eq_grad_old3` asserts that inflation at time $t$  is determined $\{\mu_s\}_{s=t}^\infty$
+## Continuation Values
 
-Nevertheless, we'll run this regression anyway.
-
-```{code-cell} ipython3
-# First regression: μ_t on a constant and θ_t
-X1_θ = sm.add_constant(θs)
-model1 = sm.OLS(μs, X1_θ)
-results1 = model1.fit()
-
-# Print regression summary
-print("Regression of μ_t on a constant and θ_t:")
-print(results1.summary(slim=True))
-```
-
-Our regression tells us that the affine function
-
-$$
-\mu_t = .0645 + 1.5995 \theta_t
-$$
-
-fits perfectly  along the Ramsey outcome $\vec \mu, \vec \theta$.
-
-
-```{note}
-Of course, this means that a regression of $\theta_t$ on $\mu_t$ and a constant would also fit perfectly. 
-```
-
-Let's plot the regression line $\mu_t = .0645 + 1.5995 \theta_t$  and the points $(\theta_t, \mu_t)$ that lie on it for $t=0, \ldots, T$.
-
-```{code-cell} ipython3
-plt.scatter(θs, μs, label=r'$\mu_t$')
-plt.plot(θs, results1.predict(X1_θ), 'grey', label='$\hat \mu_t$', linestyle='--')
-plt.xlabel(r'$\theta_t$')
-plt.ylabel(r'$\mu_t$')
-plt.legend()
-plt.show()
-```
-
-The  time $0$ pair  $(\theta_0, \mu_0)$ appears as the point on the upper right.  
-
-Points $(\theta_t, \mu_t)$  for succeeding times appear further and further to the lower left and eventually converge to $(\bar \mu, \bar \mu)$.
-
-
-Next, we'll run a linear regression of $\theta_{t+1}$ against $\theta_t$ and a constant. 
-
-
-
-```{code-cell} ipython3
-# Second regression: θ_{t+1} on a constant and θ_t
-θ_t = np.array(θs[:-1])  # θ_t
-θ_t1 = np.array(θs[1:])  # θ_{t+1}
-X2_θ = sm.add_constant(θ_t)  # Add a constant term for the intercept
-model2 = sm.OLS(θ_t1, X2_θ)
-results2 = model2.fit()
-
-# Print regression summary
-print("\nRegression of θ_{t+1} on a constant and θ_t:")
-print(results2.summary(slim=True))
-```
-
-We find that the regression line fits perfectly and thus discover the affine relationship
-
-$$
-\theta_{t+1} = - .0645 + .4005 \theta_t 
-$$
-
-that prevails along the Ramsey outcome for inflation.
-
-Let's plot $\theta_t$ for $t =0, 1, \ldots, T$ along the line.
-
-```{code-cell} ipython3
-plt.scatter(θ_t, θ_t1, label=r'$\theta_{t+1}$')
-plt.plot(θ_t, results2.predict(X2_θ), color='grey', label='$\hat θ_{t+1}$', linestyle='--')
-plt.xlabel(r'$\theta_t$')
-plt.ylabel(r'$\theta_{t+1}$')
-plt.legend()
-
-plt.tight_layout()
-plt.show()
-```
-
-Points for succeeding times appear further and further to the lower left and eventually converge to
-$\bar \mu, \bar \mu$.
-
-### Continuation Values
-
-Next, we'll compute a sequence $\{v_t\}_{t=0}^T$ of  what we'll call ``continuation values`` along a Ramsey plan.
+For subsquent analysis, it will be useful to  compute a sequence $\{v_t\}_{t=0}^T$ of  what we'll call ``continuation values`` along a Ramsey plan.
 
 To do so, we'll start at date $T$ and compute
 
@@ -1267,7 +1163,128 @@ time-less perspective." A more descriptive phrase is "the value of the worst con
 ```
 
 
-Next we ask Python to  regress $v_t$ against a constant, $\theta_t$, and $\theta_t^2$.  
+## Adding Some Human Intelligence 
+
+We have used our machine learning algorithms to compute a Ramsey plan.
+
+By plotting it, we learned that the Ramsey planner makes  $\vec \mu$ and $\vec \theta$ both vary over time. 
+
+ *  $\vec \theta$ and $\vec \mu$ both decline monotonically
+ *  both of them converge from above to the same constant $\vec \mu$
+  
+Hidden from view, there  is a recursive structure in the $\vec \mu, \vec \theta$ chosen by the Ramsey planner that we want to bring out. 
+
+To do so, we'll have to add some **human intelligence** to the **artificial intelligence** embodied in our machine learning approach. 
+
+To proceed, we'll   compute  least squares linear regressions of some  components of $\vec \theta$ and $\vec \mu$ on others.
+
+We hope that these regressions will reveal structure  hidden within the $\vec \mu^R, \vec \theta^R$ sequences associated with a Ramsey plan.
+
+It is worth pausing  to think about  roles being  played here by  **human** intelligence and **artificial** intelligence.  
+
+Artificial intelligence in the form of some Python code and  a computer  is running the regressions for us.
+
+But we are free to  regress anything on anything else.
+
+Human intelligence tells us what regressions to run. 
+
+Additional inputs of  human intelligence will be  required fully to appreciate what those regressions  reveal about the structure of a Ramsey plan. 
+
+```{note}
+When we eventually get around to trying to understand the regressions below, it will  worthwhile to study  the reasoning that let  Chang {cite}`chang1998credible` to choose
+$\theta_t$ as his key state variable. 
+```
+
+
+We begin by regressing $\mu_t$ on a constant and $\theta_t$. 
+
+This might seem strange because, after all, equation {eq}`eq_grad_old3` asserts that inflation at time $t$  is determined $\{\mu_s\}_{s=t}^\infty$
+
+Nevertheless, we'll run this regression anyway.
+
+```{code-cell} ipython3
+# First regression: μ_t on a constant and θ_t
+X1_θ = sm.add_constant(θs)
+model1 = sm.OLS(μs, X1_θ)
+results1 = model1.fit()
+
+# Print regression summary
+print("Regression of μ_t on a constant and θ_t:")
+print(results1.summary(slim=True))
+```
+
+Our regression tells us that the affine function
+
+$$
+\mu_t = .0645 + 1.5995 \theta_t
+$$
+
+fits perfectly  along the Ramsey outcome $\vec \mu, \vec \theta$.
+
+
+```{note}
+Of course, this means that a regression of $\theta_t$ on $\mu_t$ and a constant would also fit perfectly. 
+```
+
+Let's plot the regression line $\mu_t = .0645 + 1.5995 \theta_t$  and the points $(\theta_t, \mu_t)$ that lie on it for $t=0, \ldots, T$.
+
+```{code-cell} ipython3
+plt.scatter(θs, μs, label=r'$\mu_t$')
+plt.plot(θs, results1.predict(X1_θ), 'grey', label='$\hat \mu_t$', linestyle='--')
+plt.xlabel(r'$\theta_t$')
+plt.ylabel(r'$\mu_t$')
+plt.legend()
+plt.show()
+```
+
+The  time $0$ pair  $(\theta_0, \mu_0)$ appears as the point on the upper right.  
+
+Points $(\theta_t, \mu_t)$  for succeeding times appear further and further to the lower left and eventually converge to $(\bar \mu, \bar \mu)$.
+
+
+Next, we'll run a linear regression of $\theta_{t+1}$ against $\theta_t$ and a constant. 
+
+
+
+```{code-cell} ipython3
+# Second regression: θ_{t+1} on a constant and θ_t
+θ_t = np.array(θs[:-1])  # θ_t
+θ_t1 = np.array(θs[1:])  # θ_{t+1}
+X2_θ = sm.add_constant(θ_t)  # Add a constant term for the intercept
+model2 = sm.OLS(θ_t1, X2_θ)
+results2 = model2.fit()
+
+# Print regression summary
+print("\nRegression of θ_{t+1} on a constant and θ_t:")
+print(results2.summary(slim=True))
+```
+
+We find that the regression line fits perfectly and thus discover the affine relationship
+
+$$
+\theta_{t+1} = - .0645 + .4005 \theta_t 
+$$
+
+that prevails along the Ramsey outcome for inflation.
+
+Let's plot $\theta_t$ for $t =0, 1, \ldots, T$ along the line.
+
+```{code-cell} ipython3
+plt.scatter(θ_t, θ_t1, label=r'$\theta_{t+1}$')
+plt.plot(θ_t, results2.predict(X2_θ), color='grey', label='$\hat θ_{t+1}$', linestyle='--')
+plt.xlabel(r'$\theta_t$')
+plt.ylabel(r'$\theta_{t+1}$')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+Points for succeeding times appear further and further to the lower left and eventually converge to
+$\bar \mu, \bar \mu$.
+
+
+Next we ask Python to  regress  continuation value $v_t$ against a constant, $\theta_t$, and $\theta_t^2$.  
 
 $$
 v_t = g_0 + g_1 \theta_t + g_2 \theta_t^2 . 

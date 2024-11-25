@@ -3,8 +3,10 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.4
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -79,14 +81,12 @@ adjust investors' subjective beliefs about mean returns in order to render more 
 
 Let's start with some imports:
 
-```{code-cell} ipython
+```{code-cell} ipython3
 import numpy as np
 import scipy.stats as stat
 import matplotlib.pyplot as plt
-from ipywidgets import interact, FloatSlider
+from numba import jit
 ```
-
-
 
 ## Mean-Variance Portfolio Choice
 
@@ -169,7 +169,7 @@ $w$'s with **extreme long and short positions**.
 A common reaction to these outcomes is that they are so implausible that a portfolio
 manager cannot recommend them to a customer.
 
-```{code-cell} python3
+```{code-cell} ipython3
 np.random.seed(12)
 
 N = 10                                           # Number of assets
@@ -300,7 +300,7 @@ The starting point of the Black-Litterman portfolio choice model is thus
 a pair $(\delta_m, \mu_m)$ that tells the customer to hold the
 market portfolio.
 
-```{code-cell} python3
+```{code-cell} ipython3
 # Observed mean excess market return
 r_m = w_m @ μ_est
 
@@ -316,11 +316,12 @@ d_m = r_m / σ_m
 # Derive "view" which would induce the market portfolio
 μ_m = (d_m * Σ_est @ w_m).reshape(N, 1)
 
+x = np.arange(N) + 1
 fig, ax = plt.subplots(figsize=(8, 5))
 ax.set_title(r'Difference between $\hat{\mu}$ (estimate) and $\mu_{BL}$ (market implied)')
-ax.plot(np.arange(N)+1, μ_est, 'o', c='k', label='$\hat{\mu}$')
-ax.plot(np.arange(N)+1, μ_m, 'o', c='r', label='$\mu_{BL}$')
-ax.vlines(np.arange(N) + 1, μ_m, μ_est, lw=1)
+ax.plot(x, μ_est, 'o', c='k', label='$\hat{\mu}$')
+ax.plot(x, μ_m, 'o', c='r', label='$\mu_{BL}$')
+ax.vlines(x, μ_m, μ_est, lw=1)
 ax.axhline(0, c='k', ls='--')
 ax.set_xlabel('Assets')
 ax.xaxis.set_ticks(np.arange(1, N+1, 1))
@@ -384,7 +385,7 @@ If $\hat \mu$ is the maximum likelihood estimator
 and $\tau$ is chosen heavily to weight this view, then the
 customer's portfolio will involve big short-long positions.
 
-```{code-cell} python3
+```{code-cell} ipython3
 def black_litterman(λ, μ1, μ2, Σ1, Σ2):
     """
     This function calculates the Black-Litterman mixture
@@ -402,10 +403,9 @@ def black_litterman(λ, μ1, μ2, Σ1, Σ2):
 
 # The Black-Litterman recommendation for the portfolio weights
 w_tilde = np.linalg.solve(δ * Σ_est, μ_tilde)
+```
 
-τ_slider = FloatSlider(min=0.05, max=10, step=0.5, value=τ)
-
-@interact(τ=τ_slider)
+```{code-cell} ipython3
 def BL_plot(τ):
     μ_tilde = black_litterman(1, μ_m, μ_est, Σ_est, τ * Σ_est)
     w_tilde = np.linalg.solve(δ * Σ_est, μ_tilde)
@@ -439,6 +439,8 @@ def BL_plot(τ):
     ax[1].xaxis.set_ticks(np.arange(1, N+1, 1))
     ax[1].legend(numpoints=1)
     plt.show()
+
+BL_plot(τ)
 ```
 
 ## Bayesian Interpretation
@@ -607,7 +609,7 @@ $\bar d_2$ on the RHS of the constraint, by varying
 $\bar d_2$ (or $\lambda$ ), we can trace out the whole curve
 as the figure below illustrates.
 
-```{code-cell} python3
+```{code-cell} ipython3
 np.random.seed(1987102)
 
 N = 2                                           # Number of assets
@@ -641,21 +643,18 @@ r2 = np.linspace(-0.02, .15, N_r2)
 curve = np.asarray([black_litterman(λ, μ_m, μ_est, Σ_est,
                                     τ * Σ_est).flatten() for λ in λ_grid])
 
-λ_slider = FloatSlider(min=.1, max=7, step=.5, value=1)
+λ = 1
+```
 
-@interact(λ=λ_slider)
+```{code-cell} ipython3
 def decolletage(λ):
     dist_r_BL = stat.multivariate_normal(μ_m.squeeze(), Σ_est)
     dist_r_hat = stat.multivariate_normal(μ_est.squeeze(), τ * Σ_est)
 
     X, Y = np.meshgrid(r1, r2)
-    Z_BL = np.zeros((N_r1, N_r2))
-    Z_hat = np.zeros((N_r1, N_r2))
-
-    for i in range(N_r1):
-        for j in range(N_r2):
-            Z_BL[i, j] = dist_r_BL.pdf(np.hstack([X[i, j], Y[i, j]]))
-            Z_hat[i, j] = dist_r_hat.pdf(np.hstack([X[i, j], Y[i, j]]))
+    XY = np.stack((X, Y), axis=-1)
+    Z_BL = dist_r_BL.pdf(XY) 
+    Z_hat = dist_r_hat.pdf(XY)
 
     μ_tilde = black_litterman(λ, μ_m, μ_est, Σ_est, τ * Σ_est).flatten()
 
@@ -676,6 +675,8 @@ def decolletage(λ):
     ax.text(μ_est[0] + 0.003, μ_est[1], r'$\hat{\mu}$')
     ax.text(μ_m[0] + 0.003, μ_m[1] + 0.005, r'$\mu_{BL}$')
     plt.show()
+
+decolletage(λ)
 ```
 
 Note that the line that connects the two points
@@ -692,26 +693,22 @@ This leads to the
 following figure, on which the curve connecting $\hat \mu$
 and $\mu_{BL}$ are bending
 
-```{code-cell} python3
+```{code-cell} ipython3
 λ_grid = np.linspace(.001, 20000, 1000)
 curve = np.asarray([black_litterman(λ, μ_m, μ_est, Σ_est,
                                     τ * np.eye(N)).flatten() for λ in λ_grid])
+λ = 200
+```
 
-λ_slider = FloatSlider(min=5, max=1500, step=100, value=200)
-
-@interact(λ=λ_slider)
+```{code-cell} ipython3
 def decolletage(λ):
     dist_r_BL = stat.multivariate_normal(μ_m.squeeze(), Σ_est)
     dist_r_hat = stat.multivariate_normal(μ_est.squeeze(), τ * np.eye(N))
 
     X, Y = np.meshgrid(r1, r2)
-    Z_BL = np.zeros((N_r1, N_r2))
-    Z_hat = np.zeros((N_r1, N_r2))
-
-    for i in range(N_r1):
-        for j in range(N_r2):
-            Z_BL[i, j] = dist_r_BL.pdf(np.hstack([X[i, j], Y[i, j]]))
-            Z_hat[i, j] = dist_r_hat.pdf(np.hstack([X[i, j], Y[i, j]]))
+    XY = np.stack((X, Y), axis=-1)
+    Z_BL = dist_r_BL.pdf(XY) 
+    Z_hat = dist_r_hat.pdf(XY)
 
     μ_tilde = black_litterman(λ, μ_m, μ_est, Σ_est, τ * np.eye(N)).flatten()
 
@@ -733,6 +730,8 @@ def decolletage(λ):
     ax.text(μ_est[0] + 0.003, μ_est[1], r'$\hat{\mu}$')
     ax.text(μ_m[0] + 0.003, μ_m[1] + 0.005, r'$\mu_{BL}$')
     plt.show()
+
+decolletage(λ)
 ```
 
 ## Black-Litterman Recommendation as Regularization
@@ -1247,7 +1246,7 @@ observations is related to the sampling frequency
 
 - Moreover, for a fixed lag length, $n$, the dependence vanishes as the sampling frequency goes to infinity. In fact, letting $h$ go to $\infty$ gives back the case of IID data.
 
-```{code-cell} python3
+```{code-cell} ipython3
 μ = .0
 κ = .1
 σ = .5
@@ -1346,7 +1345,8 @@ thus getting an idea about how the asymptotic relative MSEs changes in
 the sampling frequency $h$ relative to the IID case that we
 compute in closed form.
 
-```{code-cell} python3
+```{code-cell} ipython3
+@jit
 def sample_generator(h, N, M):
     ϕ = (1 - np.exp(-κ * h)) * μ
     ρ = np.exp(-κ * h)
@@ -1355,10 +1355,10 @@ def sample_generator(h, N, M):
     mean_uncond = μ
     std_uncond = np.sqrt(σ**2 / (2 * κ))
 
-    ε_path = stat.norm(0, np.sqrt(s)).rvs((M, N))
+    ε_path = np.random.normal(0, np.sqrt(s), (M, N))
 
     y_path = np.zeros((M, N + 1))
-    y_path[:, 0] = stat.norm(mean_uncond, std_uncond).rvs(M)
+    y_path[:, 0] = np.random.normal(mean_uncond, std_uncond, M)
 
     for i in range(N):
         y_path[:, i + 1] = ϕ + ρ * y_path[:, i] + ε_path[:, i]
@@ -1366,7 +1366,7 @@ def sample_generator(h, N, M):
     return y_path
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 # Generate large sample for different frequencies
 N_app, M_app = 1000, 30000        # Sample size, number of simulations
 h_grid = np.linspace(.1, 80, 30)
