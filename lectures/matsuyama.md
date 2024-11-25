@@ -786,5 +786,44 @@ fig.suptitle("Synchronized versus Asynchronized 2-cycles",
 plt.show()
 ```
 
+Additionally, instead of just seeing 4 plots at once, we might want to
+manually be able to change $\rho$ and see how it affects the plot
+in real-time. Below we use an interactive plot to do this.
+
+Note, interactive plotting requires the [ipywidgets](https://github.com/jupyter-widgets/ipywidgets) module to be installed and enabled.
+
+```{note}
+This interactive plot is disabled on this static webpage.
+In order to use this, we recommend to run this notebook locally.
+```
+
+```{code-cell} python3
+:class: no-execute
+
+def interact_attraction_basis(ρ=0.2, maxiter=250, npts=250):
+    # Create the figure and axis that we will plot on
+    fig, ax = plt.subplots(figsize=(12, 10))
+    # Create model and attraction basis
+    s1, θ, δ = 0.5, 2.5, 0.75
+    model = MSGSync(s1, θ, δ, ρ)
+    ab = model.create_attraction_basis(maxiter=maxiter, npts=npts)
+    # Color map with colormesh
+    unitrange = np.linspace(0, 1, npts)
+    cf = ax.pcolormesh(unitrange, unitrange, ab, cmap="viridis")
+    cbar_ax = fig.add_axes([0.95, 0.15, 0.05, 0.7])
+    plt.colorbar(cf, cax=cbar_ax)
+    plt.show()
+    return None
+```
+
+```{code-cell} python3
+:class: no-execute
+
+fig = interact(interact_attraction_basis,
+               ρ=(0.0, 1.0, 0.05),
+               maxiter=(50, 5000, 50),
+               npts=(25, 750, 25))
+```
+
 ```{solution-end}
 ```
