@@ -44,6 +44,7 @@ Let's start with some imports:
 import numpy as np
 import matplotlib.pyplot as plt
 from numba import jit
+from ipywidgets import interact
 ```
 
 ### Background
@@ -797,7 +798,7 @@ This interactive plot is disabled on this static webpage.
 In order to use this, we recommend to run this notebook locally.
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 :class: no-execute
 
 def interact_attraction_basis(ρ=0.2, maxiter=250, npts=250):
@@ -816,7 +817,7 @@ def interact_attraction_basis(ρ=0.2, maxiter=250, npts=250):
     return None
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 :class: no-execute
 
 fig = interact(interact_attraction_basis,
