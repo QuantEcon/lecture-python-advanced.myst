@@ -71,14 +71,14 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=f77998adf44a3f900caaca31caf410c810f6f245" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -91,14 +91,15 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/clipboard.min.js"></script>
     <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=eed9c059a3ee152aae2353ec732f0a6d12e6aa07"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
@@ -108,11 +109,7 @@
                 gtag('js', new Date());
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -261,9 +258,7 @@ Requirement already satisfied: requests in /home/runner/miniconda3/envs/quanteco
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.1)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.2)
 Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
+Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
@@ -710,9 +705,9 @@ each Markov state</p>
 &lt;&gt;:10: SyntaxWarning: invalid escape sequence &#39;\o&#39;
 &lt;&gt;:9: SyntaxWarning: invalid escape sequence &#39;\o&#39;
 &lt;&gt;:10: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-/tmp/ipykernel_7283/454231666.py:9: SyntaxWarning: invalid escape sequence &#39;\o&#39;
+/tmp/ipykernel_7126/454231666.py:9: SyntaxWarning: invalid escape sequence &#39;\o&#39;
   ax.plot(k_grid, k_grid + u1_star, label=&quot;$\overline{s}_1$ (high)&quot;)
-/tmp/ipykernel_7283/454231666.py:10: SyntaxWarning: invalid escape sequence &#39;\o&#39;
+/tmp/ipykernel_7126/454231666.py:10: SyntaxWarning: invalid escape sequence &#39;\o&#39;
   ax.plot(k_grid, k_grid + u2_star, label=&quot;$\overline{s}_2$ (low)&quot;)
 </pre></div>
 </div>
@@ -750,7 +745,7 @@ the Markov state <span class="math notranslate nohighlight">\(s_t\)</span> takes
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/dcd86c9f0abf7f2796c3e3ce84ce04dfefcfbb92b133518c1a7aa12f0968dc39.png" src="_images/dcd86c9f0abf7f2796c3e3ce84ce04dfefcfbb92b133518c1a7aa12f0968dc39.png" />
+<img alt="_images/4b43323bd819f1842fed2a3c8c9ae26ca510e0dd64829abfa27276cce3522202.png" src="_images/4b43323bd819f1842fed2a3c8c9ae26ca510e0dd64829abfa27276cce3522202.png" />
 </div>
 </div>
 <p>Now we’ll depart from the preceding transition matrix that made the
@@ -845,11 +840,11 @@ Markov state be strictly periodic.</p>
 &lt;&gt;:3: SyntaxWarning: invalid escape sequence &#39;\o&#39;
 &lt;&gt;:4: SyntaxWarning: invalid escape sequence &#39;\o&#39;
 &lt;&gt;:6: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-/tmp/ipykernel_7283/1661029301.py:3: SyntaxWarning: invalid escape sequence &#39;\o&#39;
+/tmp/ipykernel_7126/1661029301.py:3: SyntaxWarning: invalid escape sequence &#39;\o&#39;
   ax.plot(λ_vals, F1[:, i], label=&quot;$\overline{s}_1$&quot;, color=&quot;b&quot;)
-/tmp/ipykernel_7283/1661029301.py:4: SyntaxWarning: invalid escape sequence &#39;\o&#39;
+/tmp/ipykernel_7126/1661029301.py:4: SyntaxWarning: invalid escape sequence &#39;\o&#39;
   ax.plot(λ_vals, F2[:, i], label=&quot;$\overline{s}_2$&quot;, color=&quot;r&quot;)
-/tmp/ipykernel_7283/1661029301.py:6: SyntaxWarning: invalid escape sequence &#39;\l&#39;
+/tmp/ipykernel_7126/1661029301.py:6: SyntaxWarning: invalid escape sequence &#39;\l&#39;
   ax.set_xlabel(&quot;$\lambda$&quot;)
 </pre></div>
 </div>
@@ -941,9 +936,9 @@ is only temporarily a more favorable time to invest.</p>
 &lt;&gt;:9: SyntaxWarning: invalid escape sequence &#39;\d&#39;
 &lt;&gt;:8: SyntaxWarning: invalid escape sequence &#39;\l&#39;
 &lt;&gt;:9: SyntaxWarning: invalid escape sequence &#39;\d&#39;
-/tmp/ipykernel_7283/3823440905.py:8: SyntaxWarning: invalid escape sequence &#39;\l&#39;
+/tmp/ipykernel_7126/3823440905.py:8: SyntaxWarning: invalid escape sequence &#39;\l&#39;
   ax.set_xlabel(&quot;$\lambda$&quot;)
-/tmp/ipykernel_7283/3823440905.py:9: SyntaxWarning: invalid escape sequence &#39;\d&#39;
+/tmp/ipykernel_7126/3823440905.py:9: SyntaxWarning: invalid escape sequence &#39;\d&#39;
   ax.set_ylabel(&quot;$\delta$&quot;)
 </pre></div>
 </div>
@@ -1072,27 +1067,27 @@ decision rules for cases with different Markov transition matrices</p>
 &lt;&gt;:87: SyntaxWarning: invalid escape sequence &#39;\l&#39;
 &lt;&gt;:88: SyntaxWarning: invalid escape sequence &#39;\d&#39;
 &lt;&gt;:89: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-/tmp/ipykernel_7283/3965109342.py:29: SyntaxWarning: invalid escape sequence &#39;\o&#39;
+/tmp/ipykernel_7126/3965109342.py:29: SyntaxWarning: invalid escape sequence &#39;\o&#39;
   ax.plot(λ_vals, F1[:, i], label=&quot;$\overline{s}_1$&quot;, color=&quot;b&quot;)
-/tmp/ipykernel_7283/3965109342.py:30: SyntaxWarning: invalid escape sequence &#39;\o&#39;
+/tmp/ipykernel_7126/3965109342.py:30: SyntaxWarning: invalid escape sequence &#39;\o&#39;
   ax.plot(λ_vals, F2[:, i], label=&quot;$\overline{s}_2$&quot;, color=&quot;r&quot;)
-/tmp/ipykernel_7283/3965109342.py:32: SyntaxWarning: invalid escape sequence &#39;\l&#39;
+/tmp/ipykernel_7126/3965109342.py:32: SyntaxWarning: invalid escape sequence &#39;\l&#39;
   ax.set_xlabel(&quot;$\lambda$&quot;)
-/tmp/ipykernel_7283/3965109342.py:33: SyntaxWarning: invalid escape sequence &#39;\o&#39;
+/tmp/ipykernel_7126/3965109342.py:33: SyntaxWarning: invalid escape sequence &#39;\o&#39;
   ax.set_ylabel(&quot;$F(\overline{s}_t)$&quot;)
-/tmp/ipykernel_7283/3965109342.py:47: SyntaxWarning: invalid escape sequence &#39;\o&#39;
+/tmp/ipykernel_7126/3965109342.py:47: SyntaxWarning: invalid escape sequence &#39;\o&#39;
   color=c, label=&quot;$k^*(\overline{s}_&quot;+str(i+1)+&quot;)$&quot;)
-/tmp/ipykernel_7283/3965109342.py:49: SyntaxWarning: invalid escape sequence &#39;\o&#39;
+/tmp/ipykernel_7126/3965109342.py:49: SyntaxWarning: invalid escape sequence &#39;\o&#39;
   label=&quot;$k^{target}(\overline{s}_&quot;+str(i+1)+&quot;)$&quot;)
-/tmp/ipykernel_7283/3965109342.py:54: SyntaxWarning: invalid escape sequence &#39;\l&#39;
+/tmp/ipykernel_7126/3965109342.py:54: SyntaxWarning: invalid escape sequence &#39;\l&#39;
   ax.set_xlabel(&quot;$\lambda$&quot;)
-/tmp/ipykernel_7283/3965109342.py:57: SyntaxWarning: invalid escape sequence &#39;\l&#39;
+/tmp/ipykernel_7126/3965109342.py:57: SyntaxWarning: invalid escape sequence &#39;\l&#39;
   ax.text(0.5, min(k_star)+(max(k_star)-min(k_star))/20, &quot;$\lambda=0.5$&quot;)
-/tmp/ipykernel_7283/3965109342.py:87: SyntaxWarning: invalid escape sequence &#39;\l&#39;
+/tmp/ipykernel_7126/3965109342.py:87: SyntaxWarning: invalid escape sequence &#39;\l&#39;
   ax.set_xlabel(&quot;$\lambda$&quot;)
-/tmp/ipykernel_7283/3965109342.py:88: SyntaxWarning: invalid escape sequence &#39;\d&#39;
+/tmp/ipykernel_7126/3965109342.py:88: SyntaxWarning: invalid escape sequence &#39;\d&#39;
   ax.set_ylabel(&quot;$\delta$&quot;)
-/tmp/ipykernel_7283/3965109342.py:89: SyntaxWarning: invalid escape sequence &#39;\o&#39;
+/tmp/ipykernel_7126/3965109342.py:89: SyntaxWarning: invalid escape sequence &#39;\o&#39;
   ax.set_zlabel(&quot;$F(\overline{s}_t)$&quot;)
 </pre></div>
 </div>
@@ -1842,7 +1837,11 @@ of optimal tax-smoothing and government debt in several interesting directions</
                     <li data-tippy-content="Download Notebook"><a href="/_notebooks/markov_jump_lq.ipynb" download><i data-feather="download-cloud"></i></a></li>
                     <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
                         <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
+                    <!--
+                    # Enable if looking for link to specific document hosted on GitHub
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/markov_jump_lq.md" download><i data-feather="github"></i></a></li>
+                    -->
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst" download><i data-feather="github"></i></a></li>
                 </ul>
 
             </div>
