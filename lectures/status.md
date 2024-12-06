@@ -16,5 +16,19 @@ This table contains the latest execution statistics.
 ```{nb-exec-table}
 ```
 
-These lectures are built on `linux` instances through `github actions` so are
-executed using the following [hardware specifications](https://docs.github.com/en/actions/reference/specifications-for-github-hosted-runners#supported-runners-and-hardware-resources)
+(status:machine-details)=
+
+These lectures are built on `linux` instances through `github actions`. 
+
+These lectures are using the following python version
+
+```{code-cell} ipython
+!python --version
+```
+
+and the following package versions
+
+```{code-cell} ipython
+:tags: [hide-output]
+!conda list
+```

@@ -2,9 +2,6 @@ name: Link Checker [Anaconda, Linux]
 on:
   pull_request:
     types: [opened, reopened]
-  schedule:
-    # UTC 12:00 is early morning in Australia
-    - cron:  '0 12 * * *'
 jobs:
   link-check-linux:
     name: Link Checking (${{ matrix.python-version }}, ${{ matrix.os }})
