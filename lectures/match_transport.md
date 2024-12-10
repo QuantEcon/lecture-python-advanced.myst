@@ -6,33 +6,37 @@ jupytext:
     format_version: 0.13
     jupytext_version: 1.16.4
 kernelspec:
-  display_name: quantecon
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
 
 # Composite Sorting
 
++++
+
+## Introduction
+
+This lecture presents  Python code for solving **composite sorting** problems of the kind
+studied in  *Composite Sorting* by Job Boerma, Aleh Tsyvinski, Ruodo Wang,
+and Zhenyuan Zhang  {cite}`boerma2023composite`.
+
+In this lecture, we will use the following imports
+
 ```{code-cell} ipython3
 import numpy as np
-
 from scipy.optimize import linprog
 from itertools import chain
+import pandas as pd
+from collections import namedtuple
+
+
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from matplotlib.ticker import MaxNLocator
 from matplotlib import cm
 from matplotlib.colors import Normalize
-import pandas as pd
 ```
-
-+++ {"user_expressions": []}
-
-## Introduction
-
-This notebook presents  Python code for solving **composite sorting** problems of the kind
-studied in  *Composite Sorting* by Job Boerma, Aleh Tsyvinski, Ruodo Wang,
-and Zhenyuan Zhang  {cite}`boerma2023composite`.  
 
 +++ {"user_expressions": []}
 
@@ -109,16 +113,16 @@ $$
 The following class takes as inputs sets of types $X,Y \subset \mathbb{R},$ marginals $n, m $ with positive integer entries such that $\sum_{x \in X} n_x = \sum_{y \in Y} m_y $ and cost parameter $\zeta>1$.
 
 
-The cost function is stored as an $|X| \times |Y|$ matrix with $(x,y)$-entry equal to $|x-y|^{1/\zeta},$ i.e., the cost of matching an agent of type $x \in X$ with an agent of type $y \in Y.$ 
+The cost function is stored as an $|X| \times |Y|$ matrix with $(x,y)$-entry equal to $|x-y|^{1/\zeta},$ i.e., the cost of matching an agent of type $x \in X$ with an agent of type $y \in Y.$
 
 ```{code-cell} ipython3
 class ConcaveCostOT():
-    def __init__(self, X_types = None, Y_types = None, n_x  = None, m_y = None, zeta = 2):
+    def __init__(self, X_types=None, Y_types=None, n_x =None, m_y=None, zeta=2):
         
-        ### Sets of types 
+        # Sets of types 
         self.X_types, self.Y_types = X_types, Y_types
         
-        ### Marginals
+        # Marginals
         if X_types is not None and Y_types is not None:
             non_empty_types = True
             self.n_x = np.ones(len(X_types), dtype=int) if n_x is None else n_x
@@ -127,10 +131,11 @@ class ConcaveCostOT():
             non_empty_types = False
             self.n_x, self.m_y = n_x, m_y
 
-        ### Cost function: |X|x|Y| matrix
+        # Cost function: |X|x|Y| matrix
         self.zeta = zeta
         if non_empty_types:
-            self.cost_x_y = np.abs(X_types[:, None] - Y_types[None, :]) ** (1 / zeta)
+            self.cost_x_y = np.abs(X_types[:, None] - Y_types[None, :]) \
+            ** (1 / zeta)
         else:
             self.cost_x_y = None 
 ```
@@ -150,16 +155,18 @@ N_agents_per_side = 60
 
 np.random.seed(1)
 
-### Genetate random types
+## Genetate random types
 # generate random support for distributions of types
 support_size = 50
-random_support = np.unique(np.random.uniform(0,200, size = support_size ))
+random_support = np.unique(np.random.uniform(0,200, size=support_size))
 
 # generate types
-X_types_example = np.random.choice(random_support, size = number_of_x_types, replace= False)
-Y_types_example = np.random.choice(random_support, size = number_of_y_types, replace= False)
+X_types_example = np.random.choice(random_support, 
+                    size=number_of_x_types, replace=False)
+Y_types_example = np.random.choice(random_support, 
+                    size=number_of_y_types, replace=False)
 
-### Generate random integer types quantities summing to N_agents_per_side
+## Generate random integer types quantities summing to N_agents_per_side
 
 # generate integer vectors of lenght n_types summing to n_agents
 def random_marginal(n_types, n_agents):
@@ -176,9 +183,9 @@ def assign_random_marginals(self,random_seed):
 
 ConcaveCostOT.assign_random_marginals = assign_random_marginals
 
-### Create an instance of our class and generate random marginals
-example_pb = ConcaveCostOT(X_types_example, Y_types_example, zeta = 2)
-example_pb.assign_random_marginals(random_seed = 1)
+# Create an instance of our class and generate random marginals
+example_pb = ConcaveCostOT(X_types_example, Y_types_example, zeta=2)
+example_pb.assign_random_marginals(random_seed=1)
 ```
 
 +++ {"user_expressions": []}
@@ -204,26 +211,26 @@ The following method plots the marginals on the real line
 Note that there are possible overlaps between $X$ and $Y.$
 
 ```{code-cell} ipython3
-def plot_marginals(self, figsize=(15, 8), title = 'Distributions of types'):
+def plot_marginals(self, figsize=(15, 8), title='Distributions of types'):
 
-    plt.figure(figsize = figsize)
+    plt.figure(figsize=figsize)
     
-    ### Scatter plot n_x
+    # Scatter plot n_x
     plt.scatter(self.X_types, self.n_x, color='blue', label='n_x')
     plt.vlines(self.X_types, ymin=0, ymax= self.n_x, 
                color='blue', linestyles='dashed')
     
-    ### Scatter plot m_y
+    # Scatter plot m_y
     plt.scatter(self.Y_types, - self.m_y, color='red', label='m_y')
     plt.vlines(self.Y_types, ymin=0, ymax=- self.m_y, 
                color='red', linestyles='dashed')
 
-    ### Add grid and y=0 axis
+    # Add grid and y=0 axis
     plt.grid(True)
     plt.axhline(0, color='black', linewidth=1)
     plt.gca().spines['bottom'].set_position(('data', 0))
 
-    ### Labeling the axes and the title
+    # Labeling the axes and the title
     plt.ylabel('frequency')
     plt.title(title)
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
@@ -271,23 +278,24 @@ We can then repeat the operation for any other analogous pair of matches involvi
 
 Viewing the matching $\mu$ as a measure on $X \times Y$ with marginals $n$ and $m$, this property says that in any optimal $\mu$ we have $\mu_{zz} = n_z \wedge m_z$ for $(z,z)$ in the diagonal $\{(x,y) \in X \times Y: x=y\}$ of $\mathbb{R} \times \mathbb{R}$. 
 
-The following method finds perfect pairs and returns the on-diagonal matchings as well as the residual off-diagonal marginals. 
+The following method finds perfect pairs and returns the on-diagonal matchings as well as the residual off-diagonal marginals.
 
 ```{code-cell} ipython3
 def match_perfect_pairs(self):
 
-    ### Find pairs on diagonal and related mass
-    perfect_pairs_x, perfect_pairs_y = np.where(self.X_types[:,None] == self.Y_types[None,:])
+    # Find pairs on diagonal and related mass
+    perfect_pairs_x, perfect_pairs_y = np.where(
+                        self.X_types[:,None] == self.Y_types[None,:])
     Δ_q = np.minimum(self.n_x[perfect_pairs_x] ,self.m_y[perfect_pairs_y])
 
-    ### Compute off-diagonal residual masses for each side
+    # Compute off-diagonal residual masses for each side
     n_x_off_diag = self.n_x.copy()
     n_x_off_diag[perfect_pairs_x]-= Δ_q
 
     m_y_off_diag = self.m_y.copy()
     m_y_off_diag[perfect_pairs_y] -= Δ_q
 
-    ### Compute on-diagonal matching
+    # Compute on-diagonal matching
     matching_diag = np.zeros((len(self.X_types), len(self.Y_types)), dtype= int)
     matching_diag[perfect_pairs_x, perfect_pairs_y] = Δ_q
     
@@ -334,10 +342,10 @@ class OffDiagonal(ConcaveCostOT):
     def __init__(self, X_types, Y_types, n_x, m_y, zeta):
         super().__init__(X_types, Y_types, n_x, m_y, zeta)
 
-        ### Types (unsorted)
+        # Types (unsorted)
         self.types_list = np.concatenate((X_types,Y_types))
 
-        ### Cost function: |Z|x|Z| matrix 
+        # Cost function: |Z|x|Z| matrix 
         self.cost_z_z = np.ones((len(self.types_list),len(self.types_list))) * np.inf
 
         # upper-right block
@@ -346,7 +354,7 @@ class OffDiagonal(ConcaveCostOT):
         # lower-left block
         self.cost_z_z[len(self.X_types):, :len(self.X_types)] = self.cost_x_y.T
 
-        ### Distributions of types
+        ## Distributions of types
         # sorted types and index identifier for each z in support
         self.type_z = np.argsort(self.types_list)
         self.support_z = self.types_list[self.type_z]
@@ -354,7 +362,7 @@ class OffDiagonal(ConcaveCostOT):
         # signed quantity for each type z
         self.q_z = np.concatenate([n_x, - m_y])[self.type_z] 
 
-    ### Mathod that adds to matching matrix a pair (i,j) identified with indices from [|Z|]
+    # Mathod that adds to matching matrix a pair (i,j) identified with indices from [|Z|]
     def add_pair_to_matching(self, pair_ids, matching):
         if pair_ids[0] < pair_ids[1]:
             # the pair of indices correspond to a pair (x,y)
@@ -371,24 +379,24 @@ We add a function that returns an instance of the off-diagonal subclass as well 
 These indices will come handy for adding the off-diagonal matching matrix to the diagonal matching matrix we just found, since the former will have a smaller size if there are perfect pairs in the original problem.
 
 ```{code-cell} ipython3
-def generate_offD_self_and_onD_matching(self):
-    ### Match perfect pairs and compute on-diagonal matching
+def generate_offD_onD_matching(self):
+    # Match perfect pairs and compute on-diagonal matching
     n_x_off_diag, m_y_off_diag , matching_diag = self.match_perfect_pairs()
 
-    ### Find indices of residual non-zero quantities for each side
+    # Find indices of residual non-zero quantities for each side
     nonzero_id_x = np.flatnonzero(n_x_off_diag)
     nonzero_id_y = np.flatnonzero(m_y_off_diag)
 
-    ### Create new instance with off-diagonal types
-    off_diagonal_self = OffDiagonal(self.X_types[nonzero_id_x], 
+    # Create new instance with off-diagonal types
+    off_diagonal = OffDiagonal(self.X_types[nonzero_id_x], 
                                     self.Y_types[nonzero_id_y], 
                                     n_x_off_diag[nonzero_id_x], 
                                     m_y_off_diag[nonzero_id_y], 
                                     self.zeta)
         
-    return off_diagonal_self, (nonzero_id_x, nonzero_id_y, matching_diag)
+    return off_diagonal, (nonzero_id_x, nonzero_id_y, matching_diag)
 
-ConcaveCostOT.generate_offD_self_and_onD_matching = generate_offD_self_and_onD_matching
+ConcaveCostOT.generate_offD_onD_matching = generate_offD_onD_matching
 ```
 
 +++ {"user_expressions": []}
@@ -396,7 +404,7 @@ ConcaveCostOT.generate_offD_self_and_onD_matching = generate_offD_self_and_onD_m
 We apply it to our example:
 
 ```{code-cell} ipython3
-example_off_diag, _ = example_pb.generate_offD_self_and_onD_matching()
+example_off_diag, _ = example_pb.generate_offD_onD_matching()
 ```
 
 +++ {"user_expressions": []}
@@ -465,7 +473,7 @@ Finally, it remains to argue that in both cases  *uncrossing* operations do not 
 
 It can indeed be shown on a case-by-case basis that, in both of the above cases, for any other matched pair $(x'',y'')$ the number of intersections between pairs $(x,y), (x',y')$ and the pair $(x'',y'')$ (i.e., after uncrossing) is not larger than the number of intersections between pairs $(x,y'), (x',y)$ and the pair $(x'',y'')$ (i.e., before uncrossing), hence the uncrossing operations above reduce the number of intersections. 
 
-We conclude that if a matching features intersecting pairs, it can be modified via a sequence of uncrossing operations into a matching without intersecting pairs while improving on the value. 
+We conclude that if a matching features intersecting pairs, it can be modified via a sequence of uncrossing operations into a matching without intersecting pairs while improving on the value.
 
 +++ {"user_expressions": []}
 
@@ -516,12 +524,12 @@ Returning to our general (integer) discrete setting, let's plot $H$.
 Notice that $H$ is right-continuous (being the difference of right-continuous functions) and that upward (resp. downward) jumps correspond to point masses of agents with types from $X$ (resp. $Y$).
 
 ```{code-cell} ipython3
-def plot_H_z(self, figsize=(15, 8), range_x_axis = None, scatter = True):
-    ### Determine H(z) = F(z) - G(z)
+def plot_H_z(self, figsize=(15, 8), range_x_axis=None, scatter=True):
+    # Determine H(z) = F(z) - G(z)
     H_z = np.cumsum(self.q_z)
     
-    ### Plot H(z)
-    plt.figure(figsize = figsize)
+    # Plot H(z)
+    plt.figure(figsize=figsize)
     plt.axhline(0, color='black', linewidth=1)
     
     # determine the step points for horizontal lines
@@ -536,7 +544,8 @@ def plot_H_z(self, figsize=(15, 8), range_x_axis = None, scatter = True):
     
     # draw dashed vertical lines for the step function
     for i in range(1, len(step) - 1):
-        plt.plot([step[i], step[i]], [height[i-1], height[i]], color='black', linestyle='--')
+        plt.plot([step[i], step[i]], [height[i-1], height[i]], 
+                color='black', linestyle='--')
     
     # plot discontinuities points of H(z)
     if scatter:
@@ -546,7 +555,7 @@ def plot_H_z(self, figsize=(15, 8), range_x_axis = None, scatter = True):
     if range_x_axis is not None:
         plt.xlim(range_x_axis)
 
-    ### Add labels and title
+    # Add labels and title
     plt.title('Underqualification Measure (Off-Diagonal)')
     plt.xlabel('$z$')
     plt.ylabel('$H(z)$')
@@ -600,16 +609,16 @@ In addition, using indices will let us  extract the cost function within a layer
 
 ```{code-cell} ipython3
 def find_layers(self):
-    ### Compute H(z) on the joint support
+    # Compute H(z) on the joint support
     H_z = np.concatenate([[0], np.cumsum(self.q_z)])
 
-    ### Compute the range of H, i.e. H(R), stored in ascending order
+    # Compute the range of H, i.e. H(R), stored in ascending order
     layers_height = np.unique(H_z)
     
-    ### Compute the mass of each layer
+    # Compute the mass of each layer
     layers_mass = np.diff(layers_height)
 
-    ### Compute layers
+    # Compute layers
     # the following |H(R)|x|Z| matrix has entry (z,l) equal to 1 iff type z belongs to layer l
     layers_01 = ((H_z[None, :-1] <= layers_height[:-1, None]) * (layers_height[1:, None] <= H_z[None, 1:]) |
                 (H_z[None, 1:] <= layers_height[:-1, None]) * (layers_height[1:, None] <= H_z[None, :-1]))
@@ -617,13 +626,13 @@ def find_layers(self):
     # each layer is reshaped as a list of indices correponding to types
     layers = [self.type_z[layers_01[ell]] for ell in range(len(layers_height)-1)]
 
-    return layers, layers_mass ,layers_height, H_z
+    return layers, layers_mass, layers_height, H_z
 
 OffDiagonal.find_layers = find_layers
 ```
 
 ```{code-cell} ipython3
-layers_list_example, layers_mass_example ,_, _ = example_off_diag.find_layers()
+layers_list_example, layers_mass_example, _, _ = example_off_diag.find_layers()
 print(layers_list_example)
 ```
 
@@ -639,32 +648,32 @@ From the  picture it is easy to spot  two key features described  above:
 
 ```{code-cell} ipython3
 def plot_layers(self, figsize=(15, 8)):
-    ### Find layers
+    # Find layers
     layers, layers_mass , layers_height, H_z = self.find_layers()
     
-    plt.figure(figsize = figsize)
+    plt.figure(figsize=figsize)
 
-    ### Plot H(z)
+    # Plot H(z)
     step = np.concatenate(([self.support_z.min() - .05 * self.support_z.ptp()],
                            self.support_z,
                            [self.support_z.max() + .05 * self.support_z.ptp()]))
     height = np.concatenate((H_z, [0]))
-    plt.step(step, height, where='post', color='black', label='CDF', zorder = 1)
+    plt.step(step, height, where='post', color='black', label='CDF', zorder=1)
     
-    ### Plot layers
+    # Plot layers
     colors = cm.viridis(np.linspace(0, 1, len(layers))) 
     for  ell, layer  in enumerate(layers):
         plt.vlines(self.types_list[layer], layers_height[ell] , 
                    layers_height[ell] + layers_mass[ell], 
-                   color = colors[ell], linewidth=2)
+                   color=colors[ell], linewidth=2)
         plt.scatter(self.types_list[layer], 
                     np.ones(len(layer)) * layers_height[ell] +.5 * layers_mass[ell], 
-                    color = colors[ell], s= 50)
+                    color=colors[ell], s=50)
         
-        plt.axhline(layers_height[ell], color = colors[ell], 
+        plt.axhline(layers_height[ell], color=colors[ell], 
                     linestyle=':', linewidth=1.5, zorder=0)
 
-    ### Add labels and title
+    # Add labels and title
     plt.xlabel('$z$')
     plt.title('Layers')
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
@@ -698,36 +707,37 @@ Hence we can solve the problem with unit masses and later rescale the solution b
 Let us select a layer from the example above (we pick the one with maximum number of types) and plot the types on the real line
 
 ```{code-cell} ipython3
-### Pick layer with maximum number of types
-layer_id_example = max(enumerate(layers_list_example), key = lambda x: len(x[1]))[0]
+# Pick layer with maximum number of types
+layer_id_example = max(enumerate(layers_list_example), 
+                    key = lambda x: len(x[1]))[0]
 layer_example = layers_list_example[layer_id_example]
 
 
-### Plot layer types
-def plot_layer_types(self,layer, mass, figsize=(15, 3)):
+# Plot layer types
+def plot_layer_types(self, layer, mass, figsize=(15, 3)):
 
-    plt.figure(figsize = figsize)
+    plt.figure(figsize=figsize)
     
-    ### Scatter plot n_x
+    # Scatter plot n_x
     x_layer = layer[layer < len(self.X_types)]
     y_layer = layer[layer >= len(self.X_types)] - len(self.X_types)
     M_ell = np.ones(len(x_layer))* mass
 
-    plt.scatter(self.X_types[x_layer],M_ell, color='blue', label='X types')
+    plt.scatter(self.X_types[x_layer], M_ell, color='blue', label='X types')
     plt.vlines(self.X_types[x_layer], ymin=0, ymax= M_ell, 
                color='blue', linestyles='dashed')
     
-    ### Scatter plot m_y
+    # Scatter plot m_y
     plt.scatter(self.Y_types[y_layer], - M_ell, color='red', label='Y types')
     plt.vlines(self.Y_types[y_layer], ymin=0, ymax=- M_ell,
                color='red', linestyles='dashed')
 
-    ### Add grid and y=0 axis
+    # Add grid and y=0 axis
     # plt.grid(True)
     plt.axhline(0, color='black', linewidth=1)
     plt.gca().spines['bottom'].set_position(('data', 0))
 
-    ### Labeling the axes and the title
+    # Labeling the axes and the title
     plt.ylabel('mass')
     plt.title('Distributions of types in the layer')
     plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
@@ -742,8 +752,6 @@ example_off_diag.plot_layer_types(layer_example, layers_mass_example[layer_id_ex
 ```
 
 +++ {"user_expressions": []}
-
-
 
 Given the structure of a layer and the *no intersecting pairs* property, the optimal matching and value of the layer can be found recursively. 
 
@@ -771,33 +779,34 @@ We set the boundary conditions at $t=-1$: $V_{i+1,i} = 0$ for each $i \in [N_\el
 
 The following method takes as input the layer types indices and computes the value function as a matrix $[V_{ij}]_{ i \in [N_\ell+1], j \in [N_\ell ]}$.
 
-In order to  distinguish  entries that  are relevant for our computations from those that  are never accessed, we initialize this matrix as full of  NaN values. 
+In order to  distinguish  entries that  are relevant for our computations from those that  are never accessed, we initialize this matrix as full of  NaN values.
 
 ```{code-cell} ipython3
 def solve_bellman_eqs(self,layer):
-    ### Recover cost function within the layer
+    # Recover cost function within the layer
     cost_i_j = self.cost_z_z[layer[:,None],layer[None,:]]
 
-    ### Initialize value function
+    # Initialize value function
     V_i_j = np.full((len(layer)+1,len(layer)), np.nan)
 
-    ### Add boundary conditions
+    # Add boundary conditions
     i_bdry = np.arange(len(layer))
     V_i_j[i_bdry+1, i_bdry] = 0
 
     t = 1
     while t < len(layer):
-        ### Select agents i in [n_L-t] (with potential partners j's in [t,n_L])
+        # Select agents i in [n_L-t] (with potential partners j's in [t,n_L])
         i_t = np.arange(len(layer)-t)
 
-        ### For each i, select each k with |k-i| <= t (potential partners of i within segment)
-        index_ik =  i_t[:,None] + np.arange(1,t+1,2)[None,:]
+        # For each i, select each k with |k-i| <= t 
+        # (potential partners of i within segment)
+        index_ik =  i_t[:,None] + np.arange(1, t+1, 2)[None,:]
 
-        ### Compute optimal value for pairs with |i-j| = t 
+        # Compute optimal value for pairs with |i-j| = t 
         V_i_j[i_t, i_t + t] = (cost_i_j[i_t[:,None], index_ik] + 
                                 V_i_j[i_t[:,None] + 1, index_ik - 1] + 
                                 V_i_j[index_ik + 1, i_t[:,None] + t]).min(1)
-        ### Go to next odd integer
+        # Go to next odd integer
         t += 2
 
     return V_i_j
@@ -812,7 +821,7 @@ Let's compute values for the layer from our example.
 Only non-NaN entries are actually used in the computations.
 
 ```{code-cell} ipython3
-### Compute layer value function
+# Compute layer value function
 V_i_j = example_off_diag.solve_bellman_eqs(layer_example)
 
 print(f"Type indices in the layer: {layer_example}")
@@ -835,37 +844,37 @@ In general, given a segment $[i,j],$ we match $i$ with $k$ that achieves the min
 The algorithm proceeds until there are no segments left.
 
 ```{code-cell} ipython3
-def find_layer_matching(self,V_i_j,layer):
-    ### Initialize
+def find_layer_matching(self, V_i_j, layer):
+    # Initialize
     segments_to_process  = [np.arange(len(layer))]
     matching = np.zeros((len(self.X_types),len(self.Y_types)), bool)
 
     while segments_to_process:
-        ### Pick i, first agent of the segment 
+        # Pick i, first agent of the segment 
         # and potential partners i+1,i+3,..., in the segment
         segment = segments_to_process[0]
         i_0 = segment[0]
         potential_matches = np.arange(i_0, segment[-1], 2) + 1
 
-        ### Compute optimal partner j_i 
+        # Compute optimal partner j_i 
         obj = (self.cost_z_z[layer[i_0],layer[potential_matches]] + 
                 V_i_j[i_0 +1, potential_matches -1] +
                 V_i_j[potential_matches +1,segment[-1]])
         
         j_i_0 = np.argmin(obj)*2 + (i_0 + 1)
      
-        ### Add matched pair (i,j_i)
+        # Add matched pair (i,j_i)
         self.add_pair_to_matching(layer[[i_0,j_i_0]], matching)
 
-        ### Update segments to process: 
+        # Update segments to process: 
         # remove current segment
         segments_to_process = segments_to_process[1:]
         
         # add [i+1,j-1] and [j+1,last agent of the segment]
         if j_i_0 > i_0 + 1:
-            segments_to_process.append(np.arange(i_0 +1, j_i_0))
+            segments_to_process.append(np.arange(i_0 + 1, j_i_0))
         if j_i_0 < segment[-1]:
-            segments_to_process.append(np.arange(j_i_0 +1, segment[-1] +1))
+            segments_to_process.append(np.arange(j_i_0 + 1, segment[-1] + 1))
     
     return matching 
 
@@ -893,28 +902,32 @@ We apply it to the layer from our example.
 
 ```{code-cell} ipython3
 def plot_layer_matching(self, layer, matching_layer):
-    ### Create the figure and axis
+    # Create the figure and axis
     fig, ax = plt.subplots(figsize=(15, 15))
 
-    ### Plot the points on the x-axis
+    # Plot the points on the x-axis
     X_types_layer = self.X_types[layer[layer < len(self.X_types)]]
-    Y_types_layer = self.Y_types[layer[layer >= len(self.X_types)] - len(self.X_types)]
-    ax.scatter(X_types_layer, np.zeros_like(X_types_layer), color='blue', s = 20 ,zorder=5)
-    ax.scatter(Y_types_layer, np.zeros_like(Y_types_layer), color='red', s = 20, zorder=5)
+    Y_types_layer = self.Y_types[layer[layer >= len(self.X_types)] 
+                    - len(self.X_types)]
+    ax.scatter(X_types_layer, np.zeros_like(X_types_layer), color='blue', 
+                s = 20, zorder=5)
+    ax.scatter(Y_types_layer, np.zeros_like(Y_types_layer), color='red', 
+                s = 20, zorder=5)
 
-    ### Draw semicircles for each row in matchings
+    # Draw semicircles for each row in matchings
     matched_types = np.where(matching_layer >0)
     matched_types_x = self.X_types[matched_types[0]]
     matched_types_y = self.Y_types[matched_types[1]]
     
     for iter in range(len(matched_types_x)):
-        width = abs(matched_types_x[iter]-matched_types_y[iter])
-        center = (matched_types_x[iter]+matched_types_y[iter]) / 2        
+        width = abs(matched_types_x[iter] - matched_types_y[iter])
+        center = (matched_types_x[iter] + matched_types_y[iter]) / 2        
         height = width 
-        semicircle = patches.Arc((center, 0), width, height, theta1=0, theta2=180, lw = 3)
+        semicircle = patches.Arc((center, 0), width, height, theta1=0, 
+                    theta2=180, lw=3)
         ax.add_patch(semicircle)
 
-    ### Add title and layout settings
+    # Add title and layout settings
     plt.title('Optimal Layer Matching' )
     ax.set_aspect('equal')
     plt.gca().spines['bottom'].set_position(('data', 0))
@@ -922,7 +935,7 @@ def plot_layer_matching(self, layer, matching_layer):
     ax.spines['top'].set_color('none') 
     ax.spines['right'].set_color('none')  
     ax.yaxis.set_ticks([])
-    ax.set_ylim(bottom= -self.support_z.ptp()/100)
+    ax.set_ylim(bottom= -self.support_z.ptp() / 100)
 
     plt.show()
 
@@ -969,30 +982,32 @@ $$
 
 for $i,j \in [N_\ell],$ $j-i$ odd, with boundary conditions $V_{i+1,i}= 0$ for $i \in [0,N_\ell ]$ and $V_{i+2, i-1} = - c_{i,i+1}$ for $i \in [N_\ell -1]$ .
 
-The following method uses these equations to compute the value function that  is stored as a matrix $[V_{ij}]_{ i \in [N_\ell+1], j \in [N_\ell +1]}.$ 
+The following method uses these equations to compute the value function that  is stored as a matrix $[V_{ij}]_{ i \in [N_\ell+1], j \in [N_\ell +1]}.$
 
 ```{code-cell} ipython3
 def solve_bellman_eqs_DSS(self,layer):
-    ### Recover cost function within the layer
+    # Recover cost function within the layer
     cost_i_j = self.cost_z_z[layer[:,None],layer[None,:]]
 
-    ### Initialize value function
+    # Initialize value function
     V_i_j = np.full((len(layer)+1,len(layer)+1), np.nan)
     
-    ### Add boundary conditions
+    # Add boundary conditions
     V_i_j[np.arange(len(layer)+1), np.arange(len(layer)+1)] = 0
     i_bdry = np.arange(len(layer)-1)
     V_i_j[i_bdry+2,i_bdry] = - cost_i_j[i_bdry, i_bdry+1]
 
     t = 1
     while t < len(layer):
-        ### Select agents i in [n_l-t] and potential partner j=i+t for each i
+        # Select agents i in [n_l-t] and potential partner j=i+t for each i
         i_t = np.arange(len(layer)-t)
         j_t = i_t + t +1       
 
-        ### Compute optimal values for ij with j-i = t 
-        V_i_j[i_t, j_t] = np.minimum(cost_i_j[i_t, j_t-1] + V_i_j[i_t + 1, j_t - 1],
-                        V_i_j[i_t, j_t - 2] + V_i_j[i_t + 2, j_t] - V_i_j[i_t + 2, j_t - 2])
+        # Compute optimal values for ij with j-i = t 
+        V_i_j[i_t, j_t] = np.minimum(cost_i_j[i_t, j_t-1] 
+                        + V_i_j[i_t + 1, j_t - 1],
+                        V_i_j[i_t, j_t - 2] + V_i_j[i_t + 2, j_t] 
+                        - V_i_j[i_t + 2, j_t - 2])
         
         ## Go to next odd integer
         t += 2
@@ -1017,7 +1032,8 @@ print(V_i_j_DSS.round(2)[:min(10, V_i_j_DSS.shape[0]),
                          :min(10, V_i_j_DSS.shape[1])])
 
 print('##########################')
-print(f"Difference with previous Bellman equations: {(V_i_j_DSS[:,1:] - V_i_j)[V_i_j >= 0].sum()}")
+print(f"Difference with previous Bellman equations: \
+      {(V_i_j_DSS[:,1:] - V_i_j)[V_i_j >= 0].sum()}")
 ```
 
 +++ {"user_expressions": []}
@@ -1044,21 +1060,21 @@ To gain understanding, note that this situation happens  when the left branch is
 
 ```{code-cell} ipython3
 def find_layer_matching_DSS(self,layer):
-    ### Recover cost function within the layer
+    # Recover cost function within the layer
     cost_i_j = self.cost_z_z[layer[:,None],layer[None,:]]
     
-    ### Add boundary conditions
+    # Add boundary conditions
     V_i_j = np.zeros((len(layer)+1,len(layer)+1))
     i_bdry = np.arange(len(layer)-1)
     V_i_j[i_bdry+2,i_bdry] = - cost_i_j[i_bdry, i_bdry+1]
 
-    ### Initialize matching and list of to-match agents
+    # Initialize matching and list of to-match agents
     unmatched = np.ones(len(layer), dtype = bool)
     matching = np.zeros((len(self.X_types),len(self.Y_types)), bool)
 
     t = 1
     while t < len(layer):
-        ### Compute optimal value for pairs with |i-j| = t 
+        # Compute optimal value for pairs with |i-j| = t 
         i_t = np.arange(len(layer)-t)
         j_t = i_t + t + 1
         
@@ -1066,26 +1082,35 @@ def find_layer_matching_DSS(self,layer):
         V_i_j[i_t, j_t] = np.minimum(left_branch, V_i_j[i_t, j_t - 2] + 
                                      V_i_j[i_t + 2, j_t] - V_i_j[i_t + 2, j_t - 2])
         
-        ### Select each i for which left branch achieves minimum in the V_{i,i+t} equation
+        # Select each i for which left branch achieves minimum in the V_{i,i+t}
         left_branch_achieved = i_t[left_branch == V_i_j[i_t, j_t]]
         
-        ### Update matching
+        # Update matching
         for i in left_branch_achieved:
-            for k in np.arange(i+1,i+t)[unmatched[range(i+1,i+t)]]:      # for each agent k in [i+1,i+t-1]
-                if unmatched[k] == True:                                 # if k is unmatched
-                    j_k = np.arange(k+1,len(layer))[unmatched[k+1:]][0]  # find unmatched right neighbour
-                    self.add_pair_to_matching(layer[[k, j_k]], matching) # add pair to matching
-                    unmatched[[k, j_k]] = False                          # remove pair from unmatched agents list
+            # for each agent k in [i+1,i+t-1]
+            for k in np.arange(i+1,i+t)[unmatched[range(i+1,i+t)]]:   
+                # if k is unmatched
+                if unmatched[k] == True:                               
+                    # find unmatched right neighbour  
+                    j_k = np.arange(k+1,len(layer))[unmatched[k+1:]][0]
+                    # add pair to matching
+                    self.add_pair_to_matching(layer[[k, j_k]], matching) 
+                    # remove pair from unmatched agents list
+                    unmatched[[k, j_k]] = False                         
                     
-        ### go to next odd integer
+        # go to next odd integer
         t += 2
     
-    ### Each umatched agent is matched with next unmatched agent
-    for i in np.arange(len(layer))[unmatched]:                   # for each unmatched agent i
-        if unmatched[i] == True:                                 # if i is unmatched
-            j_i = np.arange(i+1,len(layer))[unmatched[i+1:]][0]  # find unmatched right neighbour
-            self.add_pair_to_matching(layer[[i, j_i]], matching) # add pair to matching
-            unmatched[[i, j_i]] = False                          # remove pair from unmatched agents list 
+    # Each umatched agent is matched with next unmatched agent
+    for i in np.arange(len(layer))[unmatched]:                  
+        # if i is unmatched
+        if unmatched[i] == True:                                 
+            # find unmatched right neighbour
+            j_i = np.arange(i+1,len(layer))[unmatched[i+1:]][0]  
+            # add pair to matching
+            self.add_pair_to_matching(layer[[i, j_i]], matching) 
+            # remove pair from unmatched agents list 
+            unmatched[[i, j_i]] = False                          
 
     return matching
 
@@ -1094,8 +1119,10 @@ OffDiagonal.find_layer_matching_DSS = find_layer_matching_DSS
 
 ```{code-cell} ipython3
 matching_layer_DSS = example_off_diag.find_layer_matching_DSS(layer_example)
-print(f" Value of layer with DSS recursive equations {(matching_layer_DSS * example_off_diag.cost_x_y).sum()}")
-print(f" Value of layer with Bellman equations {(matching_layer * example_off_diag.cost_x_y).sum()}")
+print(f" Value of layer with DSS recursive equations \
+{(matching_layer_DSS * example_off_diag.cost_x_y).sum()}")
+print(f" Value of layer with Bellman equations \
+{(matching_layer * example_off_diag.cost_x_y).sum()}")
 ```
 
 ```{code-cell} ipython3
@@ -1116,34 +1143,36 @@ Then, we compute the set of layers of the residual distributions.
 
 Finally, we solve each layer and put together  matchings within each layer with the on-diagonal matchings. 
 
-We then return the full matching, the off-diagonal matching, and the off-diagonal instance. 
+We then return the full matching, the off-diagonal matching, and the off-diagonal instance.
 
 ```{code-cell} ipython3
 def solve_primal_pb(self):
-    ### Match perfect pairs to compute on-diagonal matching, create new instance with resitual types
-    off_diag_self, (nonzero_id_x, nonzero_id_y , matching_diag) = self.generate_offD_self_and_onD_matching()
+    # Compute on-diagonal matching, create new instance with resitual types
+    off_diagoff_diagonal, match_tuple = self.generate_offD_onD_matching()
+    nonzero_id_x, nonzero_id_y, matching_diag = match_tuple
+    
+    # Compute layers
+    layers_list, layers_mass, _, _ = off_diagoff_diagonal.find_layers()
 
-    ### Compute layers
-    layers_list, layers_mass, _, _ = off_diag_self.find_layers()
-
-    ### Solve layers to compute off-diagonal matching
-    matching_off_diag = np.zeros_like(off_diag_self.cost_x_y, dtype= int)
+    # Solve layers to compute off-diagonal matching
+    matching_off_diag = np.zeros_like(off_diagoff_diagonal.cost_x_y, dtype=int)
 
     for ell, layer  in enumerate(layers_list):
-        V_i_j = off_diag_self.solve_bellman_eqs(layer)
-        matching_off_diag += layers_mass[ell] * off_diag_self.find_layer_matching(V_i_j,layer)
+        V_i_j = off_diagoff_diagonal.solve_bellman_eqs(layer)
+        matching_off_diag += layers_mass[ell] \
+                          * off_diagoff_diagonal.find_layer_matching(V_i_j, layer)
 
-    ### Add together on- and off-diagonal matchings
+    # Add together on- and off-diagonal matchings
     matching = matching_diag.copy()
     matching[np.ix_(nonzero_id_x, nonzero_id_y)] += matching_off_diag
 
-    return matching, matching_off_diag, off_diag_self
+    return matching, matching_off_diag, off_diagoff_diagonal
 
 ConcaveCostOT.solve_primal_pb = solve_primal_pb
 ```
 
 ```{code-cell} ipython3
-matching, matching_off_diag, off_diag_self = example_pb.solve_primal_pb()
+matching, matching_off_diag, off_diagoff_diagonal = example_pb.solve_primal_pb()
 ```
 
 +++ {"user_expressions": []}
@@ -1152,29 +1181,32 @@ We implement a similar method that  adopts the DSS algorithm
 
 ```{code-cell} ipython3
 def solve_primal_DSS(self):
-    ### Match perfect pairs to compute on-diagonal matching, create new instance with resitual types
-    off_diag_self, (nonzero_id_x, nonzero_id_y , matching_diag) = self.generate_offD_self_and_onD_matching()
+    # Compute on-diagonal matching, create new instance with resitual types
+    off_diagoff_diagonal, match_tuple = self.generate_offD_onD_matching()
+    nonzero_id_x, nonzero_id_y, matching_diag = match_tuple
 
-    ### Find layers
-    layers, layers_mass, _, _ = off_diag_self.find_layers()
+    # Find layers
+    layers, layers_mass, _, _ = off_diagoff_diagonal.find_layers()
 
-    ### Solve layers to compute off-diagonal matching
-    matching_off_diag = np.zeros_like(off_diag_self.cost_x_y, dtype= int)
+    # Solve layers to compute off-diagonal matching
+    matching_off_diag = np.zeros_like(off_diagoff_diagonal.cost_x_y, dtype=int)
 
     for ell, layer  in enumerate(layers):
-        matching_off_diag += layers_mass[ell] * off_diag_self.find_layer_matching_DSS(layer)
+        matching_off_diag += layers_mass[ell] \
+                          * off_diagoff_diagonal.find_layer_matching_DSS(layer)
 
-    ### Add together on- and off-diagonal matchings
+    # Add together on- and off-diagonal matchings
     matching = matching_diag.copy()
     matching[np.ix_(nonzero_id_x, nonzero_id_y)] += matching_off_diag
 
-    return matching, matching_off_diag, off_diag_self
+    return matching, matching_off_diag, off_diagoff_diagonal
 
 ConcaveCostOT.solve_primal_DSS = solve_primal_DSS
 ```
 
 ```{code-cell} ipython3
-matching_DSS, matching_off_diag_DSS, off_diag_self_DSS = example_pb.solve_primal_DSS()
+DSS_tuple = example_pb.solve_primal_DSS()
+matching_DSS, matching_off_diag_DSS, off_diagoff_diagonal_DSS = DSS_tuple
 ```
 
 +++ {"user_expressions": []}
@@ -1184,17 +1216,19 @@ By drawing semicircles joining the matched agents (with distinct types), we can 
 In the following figure,  widths and colors of  semicirles indicate relative numbers of agents that  are "transported" along an  arc.
 
 ```{code-cell} ipython3
-def plot_matching(self, matching_off_diag, title, figsize=(15, 15), add_labels=False, plot_H_z=False, scatter = True):
+def plot_matching(self, matching_off_diag, title, figsize=(15, 15), add_labels=False, plot_H_z=False, scatter=True):
     
-    ### Create the figure and axis
+    # Create the figure and axis
     fig, ax = plt.subplots(figsize=figsize)
 
-    ### Plot types on the real line
+    # Plot types on the real line
     if scatter:
-        ax.scatter(self.X_types, np.zeros_like(self.X_types), color='blue', s=20, zorder=5)
-        ax.scatter(self.Y_types, np.zeros_like(self.Y_types), color='red', s=20, zorder=5)
+        ax.scatter(self.X_types, np.zeros_like(self.X_types), color='blue', 
+                    s=20, zorder=5)
+        ax.scatter(self.Y_types, np.zeros_like(self.Y_types), color='red', 
+                    s=20, zorder=5)
 
-    ### Add labels for X_types and Y_types if add_labels is True
+    # Add labels for X_types and Y_types if add_labels is True
     if add_labels:
         # Remove x-axis ticks
         ax.set_xticks([])
@@ -1207,7 +1241,7 @@ def plot_matching(self, matching_off_diag, title, figsize=(15, 15), add_labels=F
             ax.annotate(f'$y_{{{j }}}$', (y, 0), textcoords="offset points", 
                         xytext=(0, -15), ha='center', color='red', fontsize=12)
             
-    ### Draw semicircles for each pair of matched types
+    # Draw semicircles for each pair of matched types
     matched_types = np.where(matching_off_diag > 0)
     matched_types_x = self.X_types[matched_types[0]]
     matched_types_y = self.Y_types[matched_types[1]]
@@ -1221,10 +1255,11 @@ def plot_matching(self, matching_off_diag, title, figsize=(15, 15), add_labels=F
         height = width 
         max_height = max(max_height, height)
         semicircle = patches.Arc((center, 0), width, height, theta1=0, theta2=180, 
-                                 color=colors[count[iter]], lw=count[iter] * (2.2 / count.max()))
+                                 color=colors[count[iter]], 
+                                 lw=count[iter] * (2.2 / count.max()))
         ax.add_patch(semicircle)
 
-    ### Title and layout settings for the main plot
+    # Title and layout settings for the main plot
     plt.title(title)
     ax.set_aspect('equal')
     plt.axhline(0, color='black', linewidth=1)
@@ -1233,9 +1268,10 @@ def plot_matching(self, matching_off_diag, title, figsize=(15, 15), add_labels=F
     ax.spines['top'].set_color('none')
     ax.spines['right'].set_color('none')
     ax.yaxis.set_ticks([])
-    ax.set_ylim(- self.X_types.ptp() / 10, (max_height / 2) + self.X_types.ptp()  *.01 )  
+    ax.set_ylim(- self.X_types.ptp() / 10, 
+                (max_height / 2) + self.X_types.ptp()*.01)  
 
-    ### Plot H_z on the main axis if enabled
+    # Plot H_z on the main axis if enabled
     if plot_H_z:
         H_z = np.cumsum(self.q_z)  
 
@@ -1250,7 +1286,8 @@ def plot_matching(self, matching_off_diag, title, figsize=(15, 15), add_labels=F
         ax.step(step, height, color='green', lw=2, label='$H_z$', where='post')
         
         # Set the y-limit to keep H_z and maximum circle size in the plot
-        ax.set_ylim( np.min(H_z) - H_z.ptp() *.01 ,np.maximum(np.max(H_z) ,max_height / 2) + H_z.ptp() *.01) 
+        ax.set_ylim(np.min(H_z) - H_z.ptp() *.01,
+                    np.maximum(np.max(H_z), max_height / 2) + H_z.ptp() *.01) 
 
         # Add label and legend for H_z
         ax.legend(loc="upper right")
@@ -1261,8 +1298,10 @@ ConcaveCostOT.plot_matching = plot_matching
 ```
 
 ```{code-cell} ipython3
-off_diag_self.plot_matching(matching_off_diag, title= 'Optimal Matching (off-diagonal)', plot_H_z = True)
-off_diag_self_DSS.plot_matching(matching_off_diag_DSS, title= 'Optimal Matching (off-diagonal) with DSS algorithm')
+off_diagoff_diagonal.plot_matching(matching_off_diag, 
+            title='Optimal Matching (off-diagonal)', plot_H_z=True)
+off_diagoff_diagonal_DSS.plot_matching(matching_off_diag_DSS, 
+            title='Optimal Matching (off-diagonal) with DSS algorithm')
 ```
 
 +++ {"user_expressions": []}
@@ -1274,7 +1313,7 @@ off_diag_self_DSS.plot_matching(matching_off_diag_DSS, title= 'Optimal Matching 
 Let's verify some of the proceeding findings using linear programming.
 
 ```{code-cell} ipython3
-def solve_1to1(c_i_j, n_x, m_y, return_dual = False):
+def solve_1to1(c_i_j, n_x, m_y, return_dual=False):
     n, m = np.shape(c_i_j)
 
     # Constraint matrix 
@@ -1284,10 +1323,12 @@ def solve_1to1(c_i_j, n_x, m_y, return_dual = False):
     q = np.concatenate((n_x, m_y))
     
     # Solve the linear programming problem using linprog from scipy
-    result = linprog(c_i_j.flatten(), A_eq=M_z_a, b_eq=q, bounds=(0, None), method='highs')
+    result = linprog(c_i_j.flatten(), A_eq=M_z_a, b_eq=q, 
+                        bounds=(0, None), method='highs')
 
     if return_dual:
-        return np.round(result.x).astype(int).reshape([n, m]), result.eqlin.marginals
+        return (np.round(result.x).astype(int).reshape([n, m]), 
+                result.eqlin.marginals)
     else:
         return np.round(result.x).astype(int).reshape([n, m])
 ```
@@ -1300,6 +1341,7 @@ print(f"Value of LP (scipy): {(mu_x_y_LP * example_pb.cost_x_y).sum()}")
 print(f"Value (plain Bellman equations): {(matching * example_pb.cost_x_y).sum()}")
 print(f"Value (DSS): {(matching_DSS * example_pb.cost_x_y).sum()}")
 ```
+
 +++ {"user_expressions": []}
 
 ## Examples
@@ -1357,13 +1399,13 @@ N = 2
 p = 2
 zeta = 2
 
-### Solve composite sorting problem
+# Solve composite sorting problem
 example_1 = ConcaveCostOT(np.array([0,5]), 
                           np.array([4,10]),
-                          zeta = zeta)
+                          zeta=zeta)
 matching_CS, _ ,_ = example_1.solve_primal_DSS()
 
-### Solve PAM and NAM
+# Solve PAM and NAM
 # I use the linear programs to compute PAM and NAM,
 # but of course they can be computed directly
 
@@ -1375,10 +1417,12 @@ matching_PAM = solve_1to1(convex_cost, example_1.n_x, example_1.m_y)
 #NAM: -|x-y|^p , p>1
 matching_NAM = solve_1to1(-convex_cost, example_1.n_x, example_1.m_y)
 
-### Plot the matchings
-example_1.plot_matching(matching_CS, title = f'Composite Sorting: $|x-y|^{{1/{zeta}}}$', figsize = (5,5), add_labels = True)
-example_1.plot_matching(matching_PAM, title = 'PAM', figsize = (5,5), add_labels = True)
-# example_1.plot_matching(matching_NAM, title = 'NAM', figsize = (5,5))
+# Plot the matchings
+example_1.plot_matching(matching_CS, 
+                title=f'Composite Sorting: $|x-y|^{{1/{zeta}}}$', 
+                figsize=(5,5), add_labels=True)
+example_1.plot_matching(matching_PAM, title='PAM', 
+                figsize=(5,5), add_labels=True)
 ```
 
 +++ {"user_expressions": []}
@@ -1387,29 +1431,33 @@ To explore the coincidental resemblence to a NAM outcome,  let's  shift left typ
 
 PAM and NAM are invariant to any such shift. 
 
-However, for a large enough shift, composite sorting now coindices with PAM. 
+However, for a large enough shift, composite sorting now coindices with PAM.
 
 ```{code-cell} ipython3
 N = 2
 zeta = 2
 p = 2
 
-### Solve composite sorting problem
+# Solve composite sorting problem
 example_1 = ConcaveCostOT(np.array([0,5]), 
                           np.array([1,10]) ,
                            zeta = zeta)
 matching_CS, _ ,_ = example_1.solve_primal_DSS()
 
-### Solve PAM and NAM
+# Solve PAM and NAM
 convex_cost = np.abs(example_1.X_types[:,None] - example_1.Y_types[None,:])**p
 
 matching_PAM = solve_1to1(convex_cost, example_1.n_x, example_1.m_y)
 matching_NAM = solve_1to1(-convex_cost, example_1.n_x, example_1.m_y)
 
-### Plot the matchings
-example_1.plot_matching(matching_CS, title = f'Composite Sorting: $|x-y|^{{1/{zeta}}}$', figsize = (5,5), add_labels = True)
-example_1.plot_matching(matching_PAM, title = 'PAM', figsize = (5,5), add_labels = True)
-example_1.plot_matching(matching_NAM, title = 'NAM', figsize = (5,5), add_labels = True)
+# Plot the matchings
+example_1.plot_matching(matching_CS, 
+        title = f'Composite Sorting: $|x-y|^{{1/{zeta}}}$', 
+        figsize = (5,5), add_labels = True)
+example_1.plot_matching(matching_PAM, title = 'PAM', 
+        figsize = (5,5), add_labels = True)
+example_1.plot_matching(matching_NAM, title = 'NAM', 
+        figsize = (5,5), add_labels = True)
 ```
 
 +++ {"user_expressions": []}
@@ -1431,27 +1479,29 @@ np.random.seed(1)
 X_types = np.random.uniform(0,10, size = N)
 Y_types = np.random.uniform(0,10, size = N)
 
-### Solve composite sorting problem
+# Solve composite sorting problem
 example_1 = ConcaveCostOT(X_types, Y_types, zeta = zeta)
 
 matching_CS, _ ,_ = example_1.solve_primal_DSS()
 
-### Solve PAM and NAM
+# Solve PAM and NAM
 convex_cost = np.abs(X_types[:,None] - Y_types[None,:])** p
 
 matching_PAM = solve_1to1(convex_cost, example_1.n_x, example_1.m_y)
 matching_NAM = solve_1to1(-convex_cost, example_1.n_x, example_1.m_y)
 
 
-example_1.plot_matching(matching_CS, title = f'Composite Sorting: $|x-y|^{{1/{zeta}}}$', figsize = (5,5))
-example_1.plot_matching(matching_PAM, title = 'PAM', figsize = (5,5)) 
-# example_1.plot_matching(matching_NAM, title = 'NAM', figsize = (5,5), add_labels= True)
+example_1.plot_matching(matching_CS, 
+            title=f'Composite Sorting: $|x-y|^{{1/{zeta}}}$', figsize=(5,5))
+example_1.plot_matching(matching_PAM, title = 'PAM', figsize=(5,5)) 
 
-
+monge_cost_comp = (matching_CS * np.abs(X_types[:,None] - Y_types[None,:])).sum()
+monge_cost_PAM = (matching_PAM * np.abs(example_1.X_types[:,None] 
+                               - example_1.Y_types[None,:])).sum()
 print("Monge cost of the composite matching assignment:")
-print((matching_CS *np.abs(example_1.X_types[:,None] - example_1.Y_types[None,:])).sum() )
+print(monge_cost_comp)
 print("Monge cost of PAM:")
-print((matching_PAM *np.abs(example_1.X_types[:,None] - example_1.Y_types[None,:])).sum())   
+print(monge_cost_PAM)   
 ```
 
 +++ {"user_expressions": []}
@@ -1486,21 +1536,24 @@ p = 2
 X_types_example_2 = np.array([-2,0,2,9, 15])
 Y_types_example_2 = np.array([3,6,10,12, 14]) 
 
-### Solve composite sorting problem
-example_2 = ConcaveCostOT(X_types_example_2, Y_types_example_2, zeta = zeta)
+# Solve composite sorting problem
+example_2 = ConcaveCostOT(X_types_example_2, Y_types_example_2, zeta=zeta)
 
 matching_CS, _ ,_ = example_2.solve_primal_DSS()
 
-### Solve PAM and NAM
+# Solve PAM and NAM
 convex_cost = np.abs(X_types_example_2[:,None] - Y_types_example_2[None,:])** p
 
 matching_PAM = solve_1to1(convex_cost, example_2.n_x, example_2.m_y)
 matching_NAM = solve_1to1(-convex_cost, example_2.n_x, example_2.m_y)
 
 
-example_2.plot_matching(matching_CS, title = 'Composite Sorting: $|x-y|^{1/2}$', figsize = (5,5), add_labels= True)
-example_2.plot_matching(matching_PAM, title = 'PAM', figsize = (5,5), add_labels= True) 
-example_2.plot_matching(matching_NAM, title = 'NAM', figsize = (5,5), add_labels= True)
+example_2.plot_matching(matching_CS, title = 'Composite Sorting: $|x-y|^{1/2}$', 
+                        figsize = (5,5), add_labels=True)
+example_2.plot_matching(matching_PAM, title = 'PAM', 
+                        figsize = (5,5), add_labels=True) 
+example_2.plot_matching(matching_NAM, title = 'NAM', 
+                        figsize = (5,5), add_labels=True)
 ```
 
 +++ {"user_expressions": []}
@@ -1531,7 +1584,7 @@ In the case of positive assortative matching (PAM), the two agents with lowest v
 
 Similarly, the agents with highest value $\textcolor{red}{y_2} $ are matched with the highest valued types on the other side, $\textcolor{blue}{x_1}$ and $\textcolor{blue}{x_2}. $
 
-Composite sorting features both negative and positive sorting patterns: agents of type $\textcolor{blue}{x_0}$ are matched with both the bottom $\textcolor{red}{y_0}$ and the top $\textcolor{red}{y_2}$ of the distribution.    
+Composite sorting features both negative and positive sorting patterns: agents of type $\textcolor{blue}{x_0}$ are matched with both the bottom $\textcolor{red}{y_0}$ and the top $\textcolor{red}{y_2}$ of the distribution.
 
 ```{code-cell} ipython3
 matching_CS, _ ,_ = example_3.solve_primal_DSS()
@@ -1540,9 +1593,12 @@ convex_cost = np.abs(example_3.X_types[:,None] - example_3.Y_types[None,:])**2
 matching_PAM = solve_1to1(convex_cost, example_3.n_x, example_3.m_y)
 matching_NAM = solve_1to1(-convex_cost, example_3.n_x, example_3.m_y)
 
-example_3.plot_matching(matching_PAM, title = 'PAM', figsize = (5,5), add_labels= True)
-example_3.plot_matching(matching_CS, title = 'Composite Sorting', figsize = (5,5), add_labels= True)
-example_3.plot_matching(matching_NAM, title = 'NAM', figsize = (5,5), add_labels= True)
+example_3.plot_matching(matching_PAM, title = 'PAM', 
+                        figsize = (5,5), add_labels= True)
+example_3.plot_matching(matching_CS, title = 'Composite Sorting', 
+                        figsize = (5,5), add_labels= True)
+example_3.plot_matching(matching_NAM, title = 'NAM', 
+                        figsize = (5,5), add_labels= True)
 ```
 
 +++ {"user_expressions": []}
@@ -1615,19 +1671,20 @@ num_agents = 8
 
 np.random.seed(1)
 
-X_types_assignment_pb = np.random.uniform(0,10, size = num_agents )
-Y_types_assignment_pb = np.random.uniform(0,10, size = num_agents )
+X_types_assignment_pb = np.random.uniform(0, 10, size=num_agents)
+Y_types_assignment_pb = np.random.uniform(0, 10, size=num_agents)
 
 
 # Create instance of the problem
-example_assignment = ConcaveCostOT(X_types_assignment_pb, Y_types_assignment_pb)
+exam_assign = ConcaveCostOT(X_types_assignment_pb, Y_types_assignment_pb)
 
 # Solve primal problem
-assignment, assignment_OD ,example_assignment_OD = example_assignment.solve_primal_DSS()
+assignment, assignment_OD, exam_assign_OD = exam_assign.solve_primal_DSS()
 
 # Plot matching
 add_labels = True if num_agents < 16 else False
-example_assignment_OD.plot_matching(assignment_OD, title = f'Composite Sorting', figsize = (10,10), add_labels= add_labels)
+exam_assign_OD.plot_matching(assignment_OD, title = f'Composite Sorting', 
+                            figsize=(10,10), add_labels=add_labels)
 ```
 
 +++ {"user_expressions": []}
@@ -1638,7 +1695,7 @@ The following method computes the subpairs of the optimal matching of the off-di
 
 The output of this method is a dictionary with keys corresponding to matched pairs and an "artificial pair" which collects all arcs which are visible from above. 
 
-Values of each key $(x_0,y_0)$ are the subpairs ordered so that the first subpair is the subpair with the $x$ type closest to $x_0$ and the last subpair is the subpair with the $y$ type closest to $y_0.$ 
+Values of each key $(x_0,y_0)$ are the subpairs ordered so that the first subpair is the subpair with the $x$ type closest to $x_0$ and the last subpair is the subpair with the $y$ type closest to $y_0.$
 
 ```{code-cell} ipython3
 def sort_subpairs(self, subpairs, x_smaller_y=True ):
@@ -1649,7 +1706,8 @@ def sort_subpairs(self, subpairs, x_smaller_y=True ):
     first_pair = x_key(subpairs, key=lambda pair: self.X_types[pair[0]])
     last_pair = y_key(subpairs, key=lambda pair: self.Y_types[pair[1]])
 
-    intermediate_pairs = [pair for pair in subpairs if pair != first_pair and pair != last_pair]
+    intermediate_pairs = [pair for pair in subpairs 
+                            if pair != first_pair and pair != last_pair]
 
     return [first_pair] + intermediate_pairs + [last_pair]
 
@@ -1657,36 +1715,35 @@ ConcaveCostOT.sort_subpairs = sort_subpairs
 
 def find_subpairs(self, matching, return_pairs_between = False):
         
-    ### Create set of matched pairs of types and add an artificial pair 
+    # Create set of matched pairs of types and add an artificial pair 
     matched_pairs = set( zip(* np.where(matching > 0))) 
 
-    ### Initialize dictionary to store subpairs
+    # Initialize dictionary to store subpairs
     subpairs = {} 
     pairs_between = {}
 
-    ### Find subpairs (both nested and non-nested) for each matched pair 
+    # Find subpairs (both nested and non-nested) for each matched pair 
     for matched_pair in matched_pairs | {'artificial_pair'}:
         # Determine the interval of the matched pair
         if matched_pair != 'artificial_pair':
-            min_type, max_type = sorted([self.X_types[matched_pair[0]], self.Y_types[matched_pair[1]]]) 
+            min_type, max_type = sorted([self.X_types[matched_pair[0]], 
+                                         self.Y_types[matched_pair[1]]]) 
         else:
             min_type, max_type = (-np.inf, np.inf)
             
         # Add all pairs in the interval to the list of nested_subpairs
         pairs_between[matched_pair] = {
-                                pair for pair in matched_pairs if pair != matched_pair and
-                                min_type <= self.X_types[pair[0]] <= max_type and
-                                min_type <= self.Y_types[pair[1]] <= max_type
-                                }
-        # if len(pairs_between[matched_pair]) > 5:
-        #     print(pairs_between[matched_pair])
+                    pair for pair in matched_pairs if pair != matched_pair and
+                    min_type <= self.X_types[pair[0]] <= max_type and
+                    min_type <= self.Y_types[pair[1]] <= max_type}
     
     subpairs = {key: value.copy() for key, value in pairs_between.items()}
 
-    ### Remove nested pairs
+    # Remove nested pairs
     for matched_pair in matched_pairs | {'artificial_pair'}:
         # Compute all nested subpairs 
-        nested_subpairs = set(chain.from_iterable(subpairs[pair] for pair in subpairs[matched_pair])) 
+        nested_subpairs = set(chain.from_iterable(subpairs[pair] 
+                                for pair in subpairs[matched_pair])) 
         # Remove nested pairs from subpairs[matched_pair]
         subpairs[matched_pair] -= nested_subpairs
         # subpairs[matched_pair].discard(matched_pair)
@@ -1694,8 +1751,10 @@ def find_subpairs(self, matching, return_pairs_between = False):
 
         # Order the subpairs: the first (last) pair should have x (y) close to pair_x (pair_y)
         if matched_pair != 'artificial_pair' and len(subpairs[matched_pair]) > 1:
-            subpairs[matched_pair] = self.sort_subpairs(subpairs[matched_pair], 
-                                                     x_smaller_y = self.X_types[matched_pair[0]] < self.Y_types[matched_pair[1]] )
+            subpairs[matched_pair] = self.sort_subpairs(
+                subpairs[matched_pair], 
+                x_smaller_y=self.X_types[matched_pair[0]] 
+                            < self.Y_types[matched_pair[1]])
 
     if return_pairs_between:
         return subpairs, pairs_between
@@ -1705,7 +1764,8 @@ OffDiagonal.find_subpairs = find_subpairs
 ```
 
 ```{code-cell} ipython3
-subpairs , pairs_between = example_assignment_OD.find_subpairs(assignment, return_pairs_between = True)
+subpairs, pairs_between = exam_assign_OD.find_subpairs(assignment, 
+                                                return_pairs_between = True)
 subpairs
 ```
 
@@ -1716,7 +1776,7 @@ The algorithm to compute the dual variables has a hierarchical structure: it sta
 We can visualize the hierarchical structure by computing the order in which he pairs will be processed and plotting the matching with color of the arcs corresponding the hierarchy.
 
 ```{code-cell} ipython3
-### Compute Hierarchies
+## Compute Hierarchies
 
 def find_hierarchies(subpairs):  
     
@@ -1725,7 +1785,8 @@ def find_hierarchies(subpairs):
     processed_pairs = set()  # Pairs that have been processed
 
     # Initialize ready_to_process with pairs that have no subpairs
-    ready_to_process = {pair for pair, sublist in subpairs.items() if len(sublist) == 0}
+    ready_to_process = {pair for pair, sublist in subpairs.items() 
+                        if len(sublist) == 0}
 
     # Initialize hierarchies with the first level
     hierarchies = [list(ready_to_process)]
@@ -1740,50 +1801,56 @@ def find_hierarchies(subpairs):
 
         # Find new ready_to_process pairs that have all their subpairs processed
         ready_to_process = {
-                            pair for pair in pairs_to_process
-                            if all(subpair in processed_pairs for subpair in subpairs[pair])
-                            }
+            pair for pair in pairs_to_process
+            if all(subpair in processed_pairs for subpair in subpairs[pair])}
 
         # Append the new ready_to_process to hierarchies
         hierarchies.append(list(ready_to_process))
 
     return hierarchies
 
-### Plot Hierarchies
+## Plot Hierarchies
 
-def plot_hierarchies(self, subpairs, scatter = True, range_x_axis = None):
-    ### Compute hierarchies
+def plot_hierarchies(self, subpairs, scatter=True, range_x_axis=None):
+    # Compute hierarchies
     hierarchies = find_hierarchies(subpairs)
 
-    ### Create the figure and axis
+    # Create the figure and axis
     fig, ax = plt.subplots(figsize=(15, 15))
 
-    ### Plot types on the real line (blue for X_types, red for Y_types)
+    # Plot types on the real line (blue for X_types, red for Y_types)
     size_marker = 20 if scatter else 0
-    ax.scatter(self.X_types, np.zeros_like(self.X_types), color='blue', s=size_marker, zorder=5, label='X_types')
-    ax.scatter(self.Y_types, np.zeros_like(self.Y_types), color='red', s=size_marker, zorder=5, label='Y_types')
+    ax.scatter(self.X_types, np.zeros_like(self.X_types), color='blue', 
+                    s=size_marker, zorder=5, label='X_types')
+    ax.scatter(self.Y_types, np.zeros_like(self.Y_types), color='red', 
+                    s=size_marker, zorder=5, label='Y_types')
 
-    ### Plot arcs
+    # Plot arcs
     # Create a colormap ('viridis' or 'coolwarm', 'plasma')
     cmap = plt.colormaps['plasma'] 
     for level, hierarchy in enumerate(hierarchies):
-        color = cmap(level / (len(hierarchies) - 1)) if len(hierarchies) > 1 else cmap(0)  
+        color = (cmap(level / (len(hierarchies) - 1)) 
+                        if len(hierarchies) > 1 else cmap(0))
         for pair in hierarchy:
             if pair == 'artificial_pair':
                 continue  
 
-            min_type, max_type = sorted([self.X_types[pair[0]], self.Y_types[pair[1]]])
+            min_type, max_type = sorted([self.X_types[pair[0]], 
+                                         self.Y_types[pair[1]]])
             width = max_type - min_type
             center = (max_type + min_type) / 2
-            height = width  # Semicircle height can be the same as the width for a perfect arc
-            semicircle = patches.Arc((center, 0), width, height, theta1= 0, theta2= 180, color=color, lw = 3)
+            # Semicircle height can be the same as the width for a perfect arc
+            height = width  
+            semicircle = patches.Arc((center, 0), width, height, theta1=0, theta2=180, 
+                            color=color, lw = 3)
             ax.add_patch(semicircle)
 
     if range_x_axis is not None:
         ax.set_xlim(range_x_axis)
-        ax.set_ylim(- self.X_types.ptp() / 10, (range_x_axis[1] - range_x_axis[0]) / 2 )
+        ax.set_ylim(- self.X_types.ptp() / 10, 
+                    (range_x_axis[1] - range_x_axis[0]) / 2 )
 
-    ### Title and layout settings for the main plot
+    # Title and layout settings for the main plot
     plt.title('Hierarchies of the optimal matching (off-diagonal)')
     ax.set_aspect('equal')
     plt.axhline(0, color='black', linewidth=1)
@@ -1793,8 +1860,9 @@ def plot_hierarchies(self, subpairs, scatter = True, range_x_axis = None):
     ax.spines['right'].set_color('none')
     ax.yaxis.set_ticks([])  # Hide the y-axis ticks
 
-    ### Add a colorbar to represent hierarchy levels
-    sm = cm.ScalarMappable(cmap=cmap, norm=Normalize(vmin=0, vmax= len(hierarchies) - 1))
+    # Add a colorbar to represent hierarchy levels
+    sm = cm.ScalarMappable(cmap=cmap, 
+                    norm=Normalize(vmin=0, vmax= len(hierarchies) - 1))
     sm.set_array([])  # ScalarMappable requires an array, even if we don't use it
     cbar = plt.colorbar(sm, ax=ax, orientation='vertical', pad=0.1, shrink=0.2)    
     cbar.set_ticks([0, len(hierarchies) - 1])  # Show only min and max levels
@@ -1806,7 +1874,7 @@ OffDiagonal.plot_hierarchies = plot_hierarchies
 ```
 
 ```{code-cell} ipython3
-example_assignment_OD.plot_hierarchies(subpairs)
+exam_assign_OD.plot_hierarchies(subpairs)
 ```
 
 +++ {"user_expressions": []}
@@ -1861,29 +1929,34 @@ The following method computes the solution $\beta$ of the linear system of inequ
 def compute_betas(self, pair, subpairs):
     types_subpairs = np.array(subpairs)
 
-    ### Define the bounds of the linear inequality system
+    # Define the bounds of the linear inequality system
     if pair == 'artificial_pair':
-        bounds = (- self.cost_x_y[types_subpairs[:,0][:,None], types_subpairs[:,1][None,:]]
+        bounds = (- self.cost_x_y[types_subpairs[:,0][:,None], 
+                types_subpairs[:,1][None,:]]
                 + self.cost_x_y[types_subpairs[:,0], types_subpairs[:,1]][None,:])
     else:
         bounds = (np.maximum(self.cost_x_y[pair]  
                             - self.cost_x_y[pair[0], types_subpairs[:,1]][None,:] 
                             - self.cost_x_y[types_subpairs[:,0],pair[1]][:,None],
-                    
-                            - self.cost_x_y[types_subpairs[:,0][:,None], types_subpairs[:,1][None,:]])
+                            - self.cost_x_y[types_subpairs[:,0][:,None], 
+                            types_subpairs[:,1][None,:]])
                 + self.cost_x_y[types_subpairs[:,0], types_subpairs[:,1]][None,:])
     
     
     
-    ### Define linear inequality system 
+    # Define linear inequality system 
     num_subpairs = len(types_subpairs)
-    sum_tensor = ((np.arange(num_subpairs)[:, None, None] >= np.arange(num_subpairs)[None, None, :] ) 
-                    & (np.arange(num_subpairs)[None, None, :] > np.arange(num_subpairs)[ None,:, None])).astype(int)
+    c_1 = (np.arange(num_subpairs)[:, None, None] 
+            >= np.arange(num_subpairs)[None, None, :])
+    c_2 = (np.arange(num_subpairs)[None, None, :] 
+            > np.arange(num_subpairs)[ None,:, None])
+    sum_tensor = (c_1 & c_2).astype(int)
 
     sum_tensor -= sum_tensor.transpose(1, 0, 2) 
     
-    ### Solve the system of linear inequalities
-    result = linprog(c = np.zeros(num_subpairs), A_ub= - sum_tensor.reshape(num_subpairs ** 2, num_subpairs), 
+    # Solve the system of linear inequalities
+    result = linprog(c = np.zeros(num_subpairs), 
+                    A_ub= - sum_tensor.reshape(num_subpairs ** 2, num_subpairs), 
                     b_ub= - bounds.flatten(), 
                     bounds=(None,None), 
                     method='highs')
@@ -1904,27 +1977,28 @@ The following method iteratively processes the matched pairs of the off-diagonal
 def compute_dual_off_diagonal(self, subpairs, pairs_between):
 
     # Initialize dual variables
-    phi_x = np.zeros(len(self.X_types))
-    psi_y = np.zeros(len(self.Y_types))
+    ϕ_x = np.zeros(len(self.X_types))
+    ψ_y = np.zeros(len(self.Y_types))
 
     # Initialize sets for faster membership checks
     pairs_to_process = set(subpairs.keys())  # All pairs to process
     processed_pairs = set()  # Pairs that have been processed
 
     # Initialize ready_to_process with pairs that have no subpairs
-    ready_to_process = {pair for pair, sublist in subpairs.items() if len(sublist) == 0}
+    ready_to_process = {pair for pair, sublist in subpairs.items() 
+                        if len(sublist) == 0}
 
     while len(processed_pairs) < len(subpairs): 
         
-        ### 1. Pick any subpair which is ready to process 
+        # 1. Pick any subpair which is ready to process 
         for pair in ready_to_process:
 
-            ### 2. If there are no subpairs, φ_x = c_{xy} and ψ_y = 0
+            # 2. If there are no subpairs, φ_x = c_{xy} and ψ_y = 0
             if len(subpairs[pair]) == 0:
-                phi_x[pair[0]] = self.cost_x_y[pair]
-                psi_y[pair[1]] = 0
+                ϕ_x[pair[0]] = self.cost_x_y[pair]
+                ψ_y[pair[1]] = 0
 
-            ### 3. If there are subpairs:
+            # 3. If there are subpairs:
             else:
                 # (a) compute betas
                 beta = self.compute_betas(pair, subpairs[pair])
@@ -1932,14 +2006,15 @@ def compute_dual_off_diagonal(self, subpairs, pairs_between):
                 # (b) adjust potentials of types between each subpair of the pair
                 for i, subpair in enumerate(subpairs[pair]):
                     # update potentials of these types
-                    types_between_subpair = np.array(list(pairs_between[subpair] ) + [subpair])
+                    types_between_subpair = np.array(
+                                list(pairs_between[subpair]) + [subpair])
 
                     Δ_subpair = (beta[np.arange(i+1,len(subpairs[pair]))].sum() 
-                                 + phi_x[subpairs[pair][-1][0]] 
-                                 - phi_x[subpair[0]])
+                                 + ϕ_x[subpairs[pair][-1][0]] 
+                                 - ϕ_x[subpair[0]])
              
-                    phi_x[ types_between_subpair[:,0]] += Δ_subpair
-                    psi_y[ types_between_subpair[:,1] ] -= Δ_subpair
+                    ϕ_x[ types_between_subpair[:,0]] += Δ_subpair
+                    ψ_y[ types_between_subpair[:,1]] -= Δ_subpair
       
                 # (c) compute potentials of the pair
                 subpairs_x = np.array(subpairs[pair])[:,0]
@@ -1947,12 +2022,14 @@ def compute_dual_off_diagonal(self, subpairs, pairs_between):
                 
                 if pair != 'artificial_pair':
                     if pair[0] == subpairs_x[0]:
-                        psi_y[pair[1]] = np.min( self.cost_x_y[pair[0], subpairs_y] - psi_y[subpairs_y] ) + self.cost_x_y[pair]
+                        ψ_y[pair[1]] = np.min(self.cost_x_y[pair[0], subpairs_y] 
+                                        - ψ_y[subpairs_y] ) + self.cost_x_y[pair]
                     else:
-                        psi_y[pair[1]] = np.min(self.cost_x_y[subpairs_x, pair[1]] - phi_x[subpairs_x] )
+                        ψ_y[pair[1]] = np.min(self.cost_x_y[subpairs_x, 
+                                         pair[1]] - ϕ_x[subpairs_x] )
 
 
-                    phi_x[pair[0]] =  self.cost_x_y[pair] - psi_y[pair[1]] 
+                    ϕ_x[pair[0]] =  self.cost_x_y[pair] - ψ_y[pair[1]] 
 
             # Add pair to processed pairs
             processed_pairs.add(pair)
@@ -1961,9 +2038,10 @@ def compute_dual_off_diagonal(self, subpairs, pairs_between):
         pairs_to_process -= ready_to_process
 
         # Add to ready_to_process pairs for which all subpairs are in processed_pairs
-        ready_to_process = {pair for pair in pairs_to_process if all(subpair in processed_pairs for subpair in subpairs[pair])}
+        ready_to_process = {pair for pair in pairs_to_process 
+            if all(subpair in processed_pairs for subpair in subpairs[pair])}
 
-    return phi_x, psi_y
+    return ϕ_x, ψ_y
 
 OffDiagonal.compute_dual_off_diagonal = compute_dual_off_diagonal
 ```
@@ -1973,23 +2051,27 @@ OffDiagonal.compute_dual_off_diagonal = compute_dual_off_diagonal
 We apply the algorithm to our example and check that dual feasibility ($\phi_x + \psi_y \leq c_{xy}$ for all $x \in X$ and $y \in Y$) as well as strong duality ($V_P = V_D$) are satisfied.
 
 ```{code-cell} ipython3
-phi_x , psi_y = example_assignment_OD.compute_dual_off_diagonal(subpairs, pairs_between)
+ϕ_x , ψ_y = exam_assign_OD.compute_dual_off_diagonal(subpairs, pairs_between)
 
 # Check dual feasibility
-dual_feasibility_i_j = phi_x[:,None] + psi_y[None,:] - example_assignment_OD.cost_x_y 
+dual_feasibility_i_j = ϕ_x[:,None] + ψ_y[None,:] - exam_assign_OD.cost_x_y 
 print('Violations of dual feasibility:' , np.sum(dual_feasibility_i_j > 1e-10))
 
+dual_sol = (exam_assign_OD.n_x * ϕ_x).sum() + (exam_assign_OD.m_y* ψ_y).sum()
+primal_sol = (assignment_OD * exam_assign_OD.cost_x_y).sum()
+
 # Check strong duality
-print('Value of dual solution: ', (example_assignment_OD.n_x * phi_x).sum() + (example_assignment_OD.m_y* psi_y).sum())
-print('Value of primal solution: ', (assignment_OD * example_assignment_OD.cost_x_y).sum())
+print('Value of dual solution: ', dual_sol)
+print('Value of primal solution: ', primal_sol)
 
 # # Check the value of the primal problem
-if len(example_assignment_OD.n_x) * len(example_assignment_OD.m_y) < 1000:
-    mu_x_y , p_z= solve_1to1(example_assignment_OD.cost_x_y,
-                            example_assignment_OD.n_x,
-                            example_assignment_OD.m_y,
+if len(exam_assign_OD.n_x) * len(exam_assign_OD.m_y) < 1000:
+    mu_x_y , p_z= solve_1to1(exam_assign_OD.cost_x_y,
+                            exam_assign_OD.n_x,
+                            exam_assign_OD.m_y,
                             return_dual = True)
-    print('Value of primal solution (scipy)' ,(mu_x_y * example_assignment_OD.cost_x_y).sum())
+    print('Value of primal solution (scipy)', 
+    (mu_x_y * exam_assign_OD.cost_x_y).sum())
 ```
 
 +++ {"user_expressions": []}
@@ -2011,33 +2093,38 @@ The following method computes the full dual solution from the primal solution.
 ```{code-cell} ipython3
 def compute_dual_solution(self, matching_off_diag):
 
-    ### Compute the dual solution for the off-diagonal types
-    self_off_diag,  (nonzero_id_x, nonzero_id_y, matching_diag) = self.generate_offD_self_and_onD_matching()
-    subpairs, pairs_between = self_off_diag.find_subpairs(matching_off_diag, return_pairs_between = True)
-    phi_x_off_diag, psi_x_off_diag = self_off_diag.compute_dual_off_diagonal(subpairs,pairs_between)
-    
-    ### Compute the dual solution for the on-diagonal types
-    phi_x = np.ones(len(self.X_types)) * np.inf
-    psi_y = np.ones(len(self.Y_types)) * np.inf
+    # Compute the dual solution for the off-diagonal types
+    off_diag, match_tuple = self.generate_offD_onD_matching()
+    nonzero_id_x, nonzero_id_y, matching_diag = match_tuple
 
-    phi_x[nonzero_id_x] = phi_x_off_diag
-    psi_y[nonzero_id_y] = psi_x_off_diag
+    subpairs, pairs_between = off_diag.find_subpairs(matching_off_diag, 
+                                                return_pairs_between = True)
+    ϕ_x_off_diag, ψ_x_off_diag = off_diag.compute_dual_off_diagonal(
+                                        subpairs,pairs_between)
     
-    phi_x = np.min( self.cost_x_y - psi_y[None,:] , axis = 1)
-    psi_y = np.min( self.cost_x_y - phi_x[:,None] , axis = 0)
+    # Compute the dual solution for the on-diagonal types
+    ϕ_x = np.ones(len(self.X_types)) * np.inf
+    ψ_y = np.ones(len(self.Y_types)) * np.inf
 
-    return phi_x, psi_y
+    ϕ_x[nonzero_id_x] = ϕ_x_off_diag
+    ψ_y[nonzero_id_y] = ψ_x_off_diag
+    
+    ϕ_x = np.min( self.cost_x_y - ψ_y[None,:] , axis = 1)
+    ψ_y = np.min( self.cost_x_y - ϕ_x[:,None] , axis = 0)
+
+    return ϕ_x, ψ_y
 
 ConcaveCostOT.compute_dual_solution = compute_dual_solution
 ```
 
 ```{code-cell} ipython3
-phi_x, psi_y = example_assignment.compute_dual_solution(assignment_OD)
+ϕ_x, ψ_y = exam_assign.compute_dual_solution(assignment_OD)
 
-dual_feasibility_i_j = phi_x[:,None] + psi_y[None,:] - example_assignment.cost_x_y 
+dual_feasibility_i_j = ϕ_x[:,None] + ψ_y[None,:] - exam_assign.cost_x_y 
 print('Violations of dual feasibility:' , np.sum(dual_feasibility_i_j > 1e-10))
-print('Value of dual solution: ', (example_assignment.n_x * phi_x).sum() + (example_assignment.m_y * psi_y).sum())
-print('Value of primal solution: ', (assignment * example_assignment.cost_x_y).sum())
+print('Value of dual solution: ', (exam_assign.n_x * ϕ_x).sum() 
+                                + (exam_assign.m_y * ψ_y).sum())
+print('Value of primal solution: ', (assignment * exam_assign.cost_x_y).sum())
 ```
 
 +++ {"user_expressions": []}
@@ -2072,7 +2159,16 @@ occupation_df = pd.read_csv(data_path + 'acs_data_summary.csv')
 We plot the wage standard deviation for the sorted occupations.
 
 ```{code-cell} ipython3
-### Scatter plot wage dispersion for each occupation
+---
+mystnb:
+  figure:
+    caption: "Average wage for each Standard Occupational Classification (SOC) code.
+    The codes are sorted by average wage on the horizontal axis. In red,
+    a polynomial of degree 5 is fitted to the data. The size of the marker is 
+    proportional to the number of individuals in the occupation."
+---
+
+# Scatter plot wage dispersion for each occupation
 plt.figure(figsize=(10, 6))
 
 # Scatter plot with marker size proportional to count
@@ -2094,14 +2190,6 @@ plt.plot(x, p(x), color='red')
 # Add labels and title
 plt.xlabel("Occupations", fontsize=12)
 plt.ylabel("Wage Dispersion", fontsize=12)
-
-caption = (
-    "Standard deviation of wages for each Standard Occupational Classification (SOC) code. "
-    "The codes are sorted by average wage on the horizontal axis. In red, "
-    f"a polynomial of degree {degree} is fitted to the data. The size of the marker is "
-    "proportional to the number of individuals in the occupation."
-    )
-plt.figtext(0.1, -.05, caption, wrap=True, horizontalalignment='left', fontsize=10)
 plt.xticks([], fontsize=8)
 
 plt.show()
@@ -2112,16 +2200,21 @@ plt.show()
 We also plot the average wages for each occupation (SOC code). Again, occupations are ordered by increasing average wage.
 
 ```{code-cell} ipython3
-### Scatter plot average wage for each occupation
+---
+mystnb:
+  figure:
+    caption: "Average wage for each Standard Occupational Classification (SOC) code.
+    The codes are sorted by average wage on the horizontal axis. In red,
+    a polynomial of degree 5 is fitted to the data."
+---
+
+# Scatter plot average wage for each occupation
 plt.figure(figsize=(10, 6))
 
 # Scatter plot with marker size proportional to count
 plt.scatter(
     occupation_df.index,
     occupation_df['mean_Earnings'],
-    # s = 1 * (occupation_df['count'] / occupation_df['count'].max()), # marker_sizes
-    # edgecolors='blue',  # Set the contour color
-    # facecolors='none',  # No fill color
     alpha = 0.5, # transparency
     label = 'Occupations'
 )
@@ -2136,14 +2229,6 @@ plt.plot(x, p(x), color='red')
 # Add labels and title
 plt.xlabel("Occupations", fontsize=12)
 plt.ylabel("Average Wage", fontsize=12)
-
-caption = (
-    "Average wage for each Standard Occupational Classification (SOC) code. "
-    "The codes are sorted by average wage on the horizontal axis. In red, "
-    f"a polynomial of degree {degree} is fitted to the data. The size of the marker is "
-    "proportional to the number of individuals in the occupation."
-    )
-plt.figtext(0.1, -.05, caption, wrap=True, horizontalalignment='left', fontsize=10)
 plt.xticks([], fontsize=8)
 
 plt.show()
@@ -2154,35 +2239,33 @@ plt.show()
 ### Model
 
 ```{code-cell} ipython3
-num_agents = 1500
+parameters_1980 = namedtuple('Params_Jobs', [
+    'mean_1', 'var_1', 'mean_2', 'var_2', 'mixing_weight', 'var_workers'
+])(
+    mean_1=0.38,
+    var_1=0.06,
+    mean_2=0.0,
+    var_2=0.75,
+    mixing_weight=0.36,
+    var_workers=0.2
+)
 
-mean_jobs_1 = .38
-var_jobs_1 =  .06
-
-mean_jobs_2 = 0
-var_jobs_2 = .75
-
-mixing_weight = 0.36
-
-var_workers = .2
-
-parameters_1980 = ( mean_jobs_1, var_jobs_1,
-              mean_jobs_2, var_jobs_2, mixing_weight, 
-              var_workers)
+num_agents=1500
 ```
 
 ```{code-cell} ipython3
-def generate_types_application(self, num_agents,  mean_jobs_1, var_jobs_1, 
-                               mean_jobs_2, var_jobs_2, mixing_weight, 
-                               var_workers ,random_seed = 1):
+def generate_types_application(self, num_agents, params, random_seed=1):
+
+    mean_1, var_1, mean_2, var_2, mixing_weight, var_workers = params
 
     np.random.seed(random_seed)
-    ### Job types
-    job_types = np.where(np.random.rand(num_agents) < mixing_weight, 
-                     np.random.lognormal(mean_jobs_1, var_jobs_1, num_agents), 
-                     np.random.lognormal(mean_jobs_2, var_jobs_2, num_agents))
 
-    ### Worker types
+    # Job types
+    job_types = np.where(np.random.rand(num_agents) < mixing_weight, 
+                     np.random.lognormal(mean_1, var_1, num_agents), 
+                     np.random.lognormal(mean_2, var_2, num_agents))
+
+    # Worker types
     mean_workers = - var_workers/ 2
     worker_types = np.random.lognormal(mean_workers, var_workers, num_agents)
 
@@ -2199,13 +2282,14 @@ def generate_types_application(self, num_agents,  mean_jobs_1, var_jobs_1,
     self.m_y = np.ones(num_agents, dtype=int)
 
     # Assign cost matrix
-    self.cost_x_y = np.abs(worker_types[:, None] - job_types[None, :]) ** (1/self.zeta)
+    self.cost_x_y = np.abs(worker_types[:, None] \
+                    - job_types[None, :]) ** (1/self.zeta)
 
 ConcaveCostOT.generate_types_application = generate_types_application
 
-### Create an instance of ConcaveCostOT class and generate types
+# Create an instance of ConcaveCostOT class and generate types
 model_1980 = ConcaveCostOT()
-model_1980.generate_types_application(num_agents, * parameters_1980)
+model_1980.generate_types_application(num_agents, parameters_1980)
 ```
 
 +++ {"user_expressions": []}
@@ -2213,7 +2297,8 @@ model_1980.generate_types_application(num_agents, * parameters_1980)
 Since we will consider examples with a large number of agents, it will be convenient to visualize the distributions as histograms approximating the pdfs.
 
 ```{code-cell} ipython3
-def plot_marginals_pdf(self, bins, figsize=(15, 8), range_x_axis = None , title='Distributions of types'):
+def plot_marginals_pdf(self, bins, figsize=(15, 8), 
+                        range_x_axis=None, title='Distributions of types'):
 
     plt.figure(figsize=figsize)
 
@@ -2222,7 +2307,8 @@ def plot_marginals_pdf(self, bins, figsize=(15, 8), range_x_axis = None , title=
              label='PDF of worker types', edgecolor='blue', range = range_x_axis)
 
     # Plotting histogram for Y_types (approximating PDF), reflected below the x-axis
-    counts, edges = np.histogram(self.Y_types, bins=bins, density=True, range= range_x_axis)
+    counts, edges = np.histogram(self.Y_types, bins=bins, 
+                                density=True, range=range_x_axis)
     plt.bar(edges[:-1], -counts, width=np.diff(edges), color='red', alpha=0.7, 
             label='PDF of job types ', align='edge', edgecolor='red')
 
@@ -2252,18 +2338,19 @@ ConcaveCostOT.plot_marginals_pdf = plot_marginals_pdf
 We plot the hystograms and the measure of underqualification for the worker types and job types. We then compute the primal solution and plot the matching.
 
 ```{code-cell} ipython3
-### Plot pdf
+# Plot pdf
 range_x_axis =(0, 4)
-model_1980.plot_marginals_pdf(figsize = (8,5), bins = 300, range_x_axis = range_x_axis)
+model_1980.plot_marginals_pdf(figsize=(8, 5), bins=300, range_x_axis=range_x_axis)
 
-### Plot H_z
-model_OD_1980 , _ = model_1980.generate_offD_self_and_onD_matching()
-model_OD_1980.plot_H_z(figsize = (8,5), range_x_axis =  range_x_axis , scatter = False)
+# Plot H_z
+model_OD_1980 , _ = model_1980.generate_offD_onD_matching()
+model_OD_1980.plot_H_z(figsize=(8, 5), range_x_axis=range_x_axis , scatter=False)
 
-### Compute optimal matching and plot off diagonal matching
+# Compute optimal matching and plot off diagonal matching
 matching_1980, matching_OD_1980, model_OD_1980 = model_1980.solve_primal_DSS()
-model_OD_1980.plot_matching(matching_OD_1980, title = 'Optimal Matching (off-diagonal)', 
-                             figsize = (10,10), plot_H_z = True, scatter = False)
+model_OD_1980.plot_matching(matching_OD_1980, 
+                            title = 'Optimal Matching (off-diagonal)', 
+                            figsize=(10, 10), plot_H_z=True, scatter=False)
 ```
 
 +++ {"user_expressions": []}
@@ -2271,23 +2358,31 @@ model_OD_1980.plot_matching(matching_OD_1980, title = 'Optimal Matching (off-dia
 From the optimal matching we compute and visualize the hierarchies. Then, we find the dual solution $(\phi,\psi)$ and compute the wages as $w_x = g(x) - \phi_x,$ assuming that the type-specific productivity of type $x$ is $g(x) = x$.
 
 ```{code-cell} ipython3
-### Find subpairs and plot hierarchies
-subpairs, pairs_between = model_OD_1980.find_subpairs(matching_OD_1980, return_pairs_between = True)
-model_OD_1980.plot_hierarchies(subpairs, scatter = False, range_x_axis =range_x_axis)
+# Find subpairs and plot hierarchies
+subpairs, pairs_between = model_OD_1980.find_subpairs(matching_OD_1980, 
+                                        return_pairs_between = True)
+model_OD_1980.plot_hierarchies(subpairs, scatter=False, 
+                                        range_x_axis=range_x_axis)
 
-### Compute dual solution: φ_x and ψ_y
-# phi_worker_x_1980 , psi_firm_y_1980 =  model_1980.compute_dual_solution(matching_OD_1980)
-phi_worker_x_1980 , psi_firm_y_1980 =  model_OD_1980.compute_dual_off_diagonal(subpairs, pairs_between)
+# Compute dual solution: φ_x and ψ_y
+ϕ_worker_x_1980 , ψ_firm_y_1980 = model_OD_1980.compute_dual_off_diagonal(
+                                        subpairs, pairs_between)
 
 # Check dual feasibility
-dual_feasibility_i_j = phi_worker_x_1980[:,None] + psi_firm_y_1980[None,:] - model_OD_1980.cost_x_y 
+dual_feasibility_i_j = ϕ_worker_x_1980[:,None] + ψ_firm_y_1980[None,:] \
+                       - model_OD_1980.cost_x_y 
 print('Dual feasibility violation:', dual_feasibility_i_j.max())
-# Check strong duality
-print('Value of dual solution: ', (model_1980.n_x * phi_worker_x_1980).sum() + (model_1980.m_y* psi_firm_y_1980).sum())
-print('Value of primal solution: ', (matching_OD_1980 * model_OD_1980.cost_x_y).sum())
 
-### Compute wages: wage_x = x - φ_x 
-wage_worker_x_1980 = model_1980.X_types - phi_worker_x_1980
+# Check strong duality
+dual_sol = (model_OD_1980.n_x * ϕ_worker_x_1980).sum() \
+            + (model_OD_1980.m_y * ψ_firm_y_1980).sum()
+primal_sol = (matching_OD_1980 * model_OD_1980.cost_x_y).sum()
+
+print('Value of dual solution: ', dual_sol)
+print('Value of primal solution: ', primal_sol)
+
+# Compute wages: wage_x = x - φ_x 
+wage_worker_x_1980 = model_1980.X_types - ϕ_worker_x_1980
 ```
 
 +++ {"user_expressions": []}
@@ -2298,14 +2393,15 @@ Let us plot the average wages and wage dispersion generated by the model.
 def plot_wages_application(wages):
 
     plt.figure(figsize=(10, 6))
-    plt.plot(np.sort(wages), label = 'Wages')
+    plt.plot(np.sort(wages), label='Wages')
     plt.xlabel("Occupations", fontsize=12)
     plt.ylabel("Wages", fontsize=12)
     plt.grid(True)
     plt.show()
 
 
-def plot_wage_dispersion_model(wage_worker_x, bins=100, title='Wage Dispersion', figsize=(10, 6)):
+def plot_wage_dispersion_model(wage_worker_x, bins=100, 
+                                title='Wage Dispersion', figsize=(10, 6)):
     # Compute the percentiles 
     percentiles = np.linspace(0, 100, bins + 1)
     bin_edges = np.percentile(wage_worker_x, percentiles)
@@ -2314,7 +2410,8 @@ def plot_wage_dispersion_model(wage_worker_x, bins=100, title='Wage Dispersion',
     stds = []
     for i in range(bins):
         # Compute the standard deviation for the current bin 
-        bin_data = wage_worker_x[(wage_worker_x >= bin_edges[i]) & (wage_worker_x < bin_edges[i + 1])]
+        bin_data = wage_worker_x[
+        (wage_worker_x >= bin_edges[i]) & (wage_worker_x < bin_edges[i + 1])]
         if len(bin_data) > 1:
             stds.append(np.std(bin_data))
         else:
@@ -2322,7 +2419,8 @@ def plot_wage_dispersion_model(wage_worker_x, bins=100, title='Wage Dispersion',
     
     # Plot the standard deviations for each percentile as bars
     plt.figure(figsize=figsize)
-    plt.bar(range(bins), stds, width=1.0, color='grey', alpha=0.7, edgecolor='white')
+    plt.bar(range(bins), stds, width=1.0, color='grey', 
+                            alpha=0.7, edgecolor='white')
     plt.xlabel('Percentile', fontsize=12)
     plt.ylabel('Standard Deviation', fontsize=12)
     plt.title(title, fontsize=14)
