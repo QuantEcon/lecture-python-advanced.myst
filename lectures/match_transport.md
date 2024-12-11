@@ -31,8 +31,8 @@ import pandas as pd
 ## Introduction
 
 This notebook presents  Python code for solving **composite sorting** problems of the kind
-studied in  *Composite Sorting* by Job Boerma, Aleh Tsyvinski, Ruodo Wang,
-and Zhenyuan Zhang  {cite}`boerma2023composite`.  
+studied in the August 2023 paper *Composite Sorting* by Job Boerma, Aleh Tsyvinski, Ruodo Wang,
+and Zhenyuan Zhang.  
 
 +++ {"user_expressions": []}
 
@@ -487,11 +487,7 @@ Suppose that agents $i$ of type $z_i$ and $j$ of type $z_j$, with $z_i < z_j,$ a
 Then there is an equal number of agents from each side in $\{i+1, \dots, j-1\},$ if this set is not empty. 
 
 Indeed, if this were not the case, then some agent $k \in \{i+1,j-1\}$ would be  matched with some agent $\ell$ with $\ell \notin \{i,\dots, j\},$ i.e., there would be  types
-
-$$
-z_i < z_k < z_j < z_\ell
-$$
-
+$$z_i < z_k < z_j < z_\ell$$
 with matches $(z_i,z_j)$ and $(z_k, z_\ell),$ violating the no intersecting pairs property.
 
 We conclude that we can define a binary relation on $[N]$ such that $i \sim j$ if there is an equal number of agents of each side in $\{i,i+1,\dots, j\}$ (or if this set is empty). 
@@ -941,7 +937,8 @@ example_off_diag.plot_layer_matching(layer_example, matching_layer)
 
 We will now present two key results in the context of OT with concave type costs.
 
-We refer {cite}`boerma2023composite` and {\cite}`delon2011minimum` for proofs. 
+We refer to the original papers XXXX (can cite both Boerma et al (2023) and [Delon, Salomon, Sobolevski (2011)](https://link.springer.com/article/10.1007/s10958-012-0714-6))
+XXXX  for proofs. 
 
 
 Consider the problem faced within a layer, i.e., types from $Y \sqcup X$
@@ -1606,7 +1603,7 @@ The dual solutions of $V_D$ and $W_D$ are related by $u_x = \alpha_x - \phi_x$ a
 
 The dual solution $(u,v)$ of $W_D$ can be interpreted as equilibrium utilities of the agents, which include the individual specific amenities and equilibrium shadow costs.
 
-{cite}`boerma2023composite` propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.
+The authors propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.
 
 Let's generate an instance and compute the optimal matching.
 
@@ -2050,7 +2047,7 @@ print('Value of primal solution: ', (assignment * example_assignment.cost_x_y).s
 
 +++ {"user_expressions": []}
 
-We now replicate the empirical analysis carried out by {cite}`boerma2023composite`.
+We now replicate the empirical analysis carried out by the authors.
 
 The dataset is obtained from the American Community Survey and contains individual level data on income, age and occupation. 
 
