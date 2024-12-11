@@ -941,7 +941,7 @@ example_off_diag.plot_layer_matching(layer_example, matching_layer)
 
 We will now present two key results in the context of OT with concave type costs.
 
-We refer {cite}`boerma2023composite` and {\cite}`delon2011minimum` for proofs. 
+We refer {cite}`boerma2023composite` and {cite}`delon2011minimum` for proofs. 
 
 
 Consider the problem faced within a layer, i.e., types from $Y \sqcup X$
