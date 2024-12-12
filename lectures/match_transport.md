@@ -117,7 +117,7 @@ The cost function is stored as an $|X| \times |Y|$ matrix with $(x,y)$-entry equ
 
 ```{code-cell} ipython3
 class ConcaveCostOT():
-    def __init__(self, X_types=None, Y_types=None, n_x =None, m_y=None, zeta=2):
+    def __init__(self, X_types=None, Y_types=None, n_x =None, m_y=None, ζ=2):
         
         # Sets of types 
         self.X_types, self.Y_types = X_types, Y_types
@@ -132,10 +132,10 @@ class ConcaveCostOT():
             self.n_x, self.m_y = n_x, m_y
 
         # Cost function: |X|x|Y| matrix
-        self.zeta = zeta
+        self.ζ = ζ
         if non_empty_types:
             self.cost_x_y = np.abs(X_types[:, None] - Y_types[None, :]) \
-            ** (1 / zeta)
+            ** (1 / ζ)
         else:
             self.cost_x_y = None 
 ```
@@ -184,7 +184,7 @@ def assign_random_marginals(self,random_seed):
 ConcaveCostOT.assign_random_marginals = assign_random_marginals
 
 # Create an instance of our class and generate random marginals
-example_pb = ConcaveCostOT(X_types_example, Y_types_example, zeta=2)
+example_pb = ConcaveCostOT(X_types_example, Y_types_example, ζ=2)
 example_pb.assign_random_marginals(random_seed=1)
 ```
 
@@ -296,7 +296,7 @@ def match_perfect_pairs(self):
     m_y_off_diag[perfect_pairs_y] -= Δ_q
 
     # Compute on-diagonal matching
-    matching_diag = np.zeros((len(self.X_types), len(self.Y_types)), dtype= int)
+    matching_diag = np.zeros((len(self.X_types), len(self.Y_types)), dtype=int)
     matching_diag[perfect_pairs_x, perfect_pairs_y] = Δ_q
     
     return n_x_off_diag, m_y_off_diag , matching_diag
@@ -339,14 +339,15 @@ Finally, we add a method to flexibly add a pair $(i,j)$ with $i \in \{0, \dots,|
 
 ```{code-cell} ipython3
 class OffDiagonal(ConcaveCostOT):
-    def __init__(self, X_types, Y_types, n_x, m_y, zeta):
-        super().__init__(X_types, Y_types, n_x, m_y, zeta)
+    def __init__(self, X_types, Y_types, n_x, m_y, ζ):
+        super().__init__(X_types, Y_types, n_x, m_y, ζ)
 
         # Types (unsorted)
         self.types_list = np.concatenate((X_types,Y_types))
 
         # Cost function: |Z|x|Z| matrix 
-        self.cost_z_z = np.ones((len(self.types_list),len(self.types_list))) * np.inf
+        self.cost_z_z = np.ones((len(self.types_list),
+                                 len(self.types_list))) * np.inf
 
         # upper-right block
         self.cost_z_z[:len(self.X_types), len(self.X_types):] = self.cost_x_y 
@@ -362,7 +363,7 @@ class OffDiagonal(ConcaveCostOT):
         # signed quantity for each type z
         self.q_z = np.concatenate([n_x, - m_y])[self.type_z] 
 
-    # Mathod that adds to matching matrix a pair (i,j) identified with indices from [|Z|]
+    # Mathod that adds to matching matrix a pair (i,j)
     def add_pair_to_matching(self, pair_ids, matching):
         if pair_ids[0] < pair_ids[1]:
             # the pair of indices correspond to a pair (x,y)
@@ -392,7 +393,7 @@ def generate_offD_onD_matching(self):
                                     self.Y_types[nonzero_id_y], 
                                     n_x_off_diag[nonzero_id_x], 
                                     m_y_off_diag[nonzero_id_y], 
-                                    self.zeta)
+                                    self.ζ)
         
     return off_diagonal, (nonzero_id_x, nonzero_id_y, matching_diag)
 
@@ -620,11 +621,14 @@ def find_layers(self):
 
     # Compute layers
     # the following |H(R)|x|Z| matrix has entry (z,l) equal to 1 iff type z belongs to layer l
-    layers_01 = ((H_z[None, :-1] <= layers_height[:-1, None]) * (layers_height[1:, None] <= H_z[None, 1:]) |
-                (H_z[None, 1:] <= layers_height[:-1, None]) * (layers_height[1:, None] <= H_z[None, :-1]))
+    layers_01 = ((H_z[None, :-1] <= layers_height[:-1, None]) 
+                 * (layers_height[1:, None] <= H_z[None, 1:]) |
+                (H_z[None, 1:] <= layers_height[:-1, None]) 
+                 * (layers_height[1:, None] <= H_z[None, :-1]))
     
     # each layer is reshaped as a list of indices correponding to types
-    layers = [self.type_z[layers_01[ell]] for ell in range(len(layers_height)-1)]
+    layers = [self.type_z[layers_01[ell]] 
+                for ell in range(len(layers_height)-1)]
 
     return layers, layers_mass, layers_height, H_z
 
@@ -667,7 +671,8 @@ def plot_layers(self, figsize=(15, 8)):
                    layers_height[ell] + layers_mass[ell], 
                    color=colors[ell], linewidth=2)
         plt.scatter(self.types_list[layer], 
-                    np.ones(len(layer)) * layers_height[ell] +.5 * layers_mass[ell], 
+                    np.ones(len(layer)) * layers_height[ell] 
+                    +.5 * layers_mass[ell], 
                     color=colors[ell], s=50)
         
         plt.axhline(layers_height[ell], color=colors[ell], 
@@ -748,7 +753,8 @@ def plot_layer_types(self, layer, mass, figsize=(15, 3)):
     
 ConcaveCostOT.plot_layer_types = plot_layer_types
 
-example_off_diag.plot_layer_types(layer_example, layers_mass_example[layer_id_example])
+example_off_diag.plot_layer_types(layer_example, 
+                                layers_mass_example[layer_id_example])
 ```
 
 +++ {"user_expressions": []}
@@ -954,7 +960,7 @@ example_off_diag.plot_layer_matching(layer_example, matching_layer)
 
 We will now present two key results in the context of OT with concave type costs.
 
-We refer {cite}`boerma2023composite` and {\cite}`delon2011minimum` for proofs. 
+We refer {cite}`boerma2023composite` and {cite}`delon2011minimum` for proofs. 
 
 
 Consider the problem faced within a layer, i.e., types from $Y \sqcup X$
@@ -1079,8 +1085,8 @@ def find_layer_matching_DSS(self,layer):
         j_t = i_t + t + 1
         
         left_branch = cost_i_j[i_t, j_t-1] + V_i_j[i_t + 1, j_t - 1]
-        V_i_j[i_t, j_t] = np.minimum(left_branch, V_i_j[i_t, j_t - 2] + 
-                                     V_i_j[i_t + 2, j_t] - V_i_j[i_t + 2, j_t - 2])
+        V_i_j[i_t, j_t] = np.minimum(left_branch, V_i_j[i_t, j_t - 2] 
+                        + V_i_j[i_t + 2, j_t] - V_i_j[i_t + 2, j_t - 2])
         
         # Select each i for which left branch achieves minimum in the V_{i,i+t}
         left_branch_achieved = i_t[left_branch == V_i_j[i_t, j_t]]
@@ -1160,7 +1166,7 @@ def solve_primal_pb(self):
     for ell, layer  in enumerate(layers_list):
         V_i_j = off_diagoff_diagonal.solve_bellman_eqs(layer)
         matching_off_diag += layers_mass[ell] \
-                          * off_diagoff_diagonal.find_layer_matching(V_i_j, layer)
+                    * off_diagoff_diagonal.find_layer_matching(V_i_j, layer)
 
     # Add together on- and off-diagonal matchings
     matching = matching_diag.copy()
@@ -1216,7 +1222,8 @@ By drawing semicircles joining the matched agents (with distinct types), we can 
 In the following figure,  widths and colors of  semicirles indicate relative numbers of agents that  are "transported" along an  arc.
 
 ```{code-cell} ipython3
-def plot_matching(self, matching_off_diag, title, figsize=(15, 15), add_labels=False, plot_H_z=False, scatter=True):
+def plot_matching(self, matching_off_diag, title, figsize=(15, 15), 
+                    add_labels=False, plot_H_z=False, scatter=True):
     
     # Create the figure and axis
     fig, ax = plt.subplots(figsize=figsize)
@@ -1254,7 +1261,8 @@ def plot_matching(self, matching_off_diag, title, figsize=(15, 15), add_labels=F
         center = (matched_types_x[iter] + matched_types_y[iter]) / 2        
         height = width 
         max_height = max(max_height, height)
-        semicircle = patches.Arc((center, 0), width, height, theta1=0, theta2=180, 
+        semicircle = patches.Arc((center, 0), width, height, 
+                                 theta1=0, theta2=180, 
                                  color=colors[count[iter]], 
                                  lw=count[iter] * (2.2 / count.max()))
         ax.add_patch(semicircle)
@@ -1275,15 +1283,18 @@ def plot_matching(self, matching_off_diag, title, figsize=(15, 15), add_labels=F
     if plot_H_z:
         H_z = np.cumsum(self.q_z)  
 
-        step = np.concatenate(([self.support_z.min() - .02 * self.support_z.ptp()],
+        step = np.concatenate(([self.support_z.min() 
+                                - .02 * self.support_z.ptp()],
                                 self.support_z,
-                                [self.support_z.max() + .02 * self.support_z.ptp()]))
+                                [self.support_z.max() 
+                                + .02 * self.support_z.ptp()]))
 
         H_z = H_z/H_z.ptp() * self.support_z.ptp() /2
         height = np.concatenate(([0], H_z, [0]))
 
         # Plot the compressed H_z on the same main x-axis
-        ax.step(step, height, color='green', lw=2, label='$H_z$', where='post')
+        ax.step(step, height, color='green', lw=2, 
+                                label='$H_z$', where='post')
         
         # Set the y-limit to keep H_z and maximum circle size in the plot
         ax.set_ylim(np.min(H_z) - H_z.ptp() *.01,
@@ -1397,12 +1408,12 @@ In this example, composite sorting ends up coinciding  with NAM, but this is som
 ```{code-cell} ipython3
 N = 2
 p = 2
-zeta = 2
+ζ = 2
 
 # Solve composite sorting problem
 example_1 = ConcaveCostOT(np.array([0,5]), 
                           np.array([4,10]),
-                          zeta=zeta)
+                          ζ=ζ)
 matching_CS, _ ,_ = example_1.solve_primal_DSS()
 
 # Solve PAM and NAM
@@ -1419,7 +1430,7 @@ matching_NAM = solve_1to1(-convex_cost, example_1.n_x, example_1.m_y)
 
 # Plot the matchings
 example_1.plot_matching(matching_CS, 
-                title=f'Composite Sorting: $|x-y|^{{1/{zeta}}}$', 
+                title=f'Composite Sorting: $|x-y|^{{1/{ζ}}}$', 
                 figsize=(5,5), add_labels=True)
 example_1.plot_matching(matching_PAM, title='PAM', 
                 figsize=(5,5), add_labels=True)
@@ -1435,13 +1446,13 @@ However, for a large enough shift, composite sorting now coindices with PAM.
 
 ```{code-cell} ipython3
 N = 2
-zeta = 2
+ζ = 2
 p = 2
 
 # Solve composite sorting problem
 example_1 = ConcaveCostOT(np.array([0,5]), 
                           np.array([1,10]) ,
-                           zeta = zeta)
+                           ζ = ζ)
 matching_CS, _ ,_ = example_1.solve_primal_DSS()
 
 # Solve PAM and NAM
@@ -1452,7 +1463,7 @@ matching_NAM = solve_1to1(-convex_cost, example_1.n_x, example_1.m_y)
 
 # Plot the matchings
 example_1.plot_matching(matching_CS, 
-        title = f'Composite Sorting: $|x-y|^{{1/{zeta}}}$', 
+        title = f'Composite Sorting: $|x-y|^{{1/{ζ}}}$', 
         figsize = (5,5), add_labels = True)
 example_1.plot_matching(matching_PAM, title = 'PAM', 
         figsize = (5,5), add_labels = True)
@@ -1473,14 +1484,14 @@ Consequently, it is optimal for the Monge problem.
 ```{code-cell} ipython3
 N = 10
 
-zeta = 1.01
+ζ = 1.01
 p = 2
 np.random.seed(1)
-X_types = np.random.uniform(0,10, size = N)
-Y_types = np.random.uniform(0,10, size = N)
+X_types = np.random.uniform(0,10, size=N)
+Y_types = np.random.uniform(0,10, size=N)
 
 # Solve composite sorting problem
-example_1 = ConcaveCostOT(X_types, Y_types, zeta = zeta)
+example_1 = ConcaveCostOT(X_types, Y_types, ζ=ζ)
 
 matching_CS, _ ,_ = example_1.solve_primal_DSS()
 
@@ -1492,7 +1503,7 @@ matching_NAM = solve_1to1(-convex_cost, example_1.n_x, example_1.m_y)
 
 
 example_1.plot_matching(matching_CS, 
-            title=f'Composite Sorting: $|x-y|^{{1/{zeta}}}$', figsize=(5,5))
+            title=f'Composite Sorting: $|x-y|^{{1/{ζ}}}$', figsize=(5,5))
 example_1.plot_matching(matching_PAM, title = 'PAM', figsize=(5,5)) 
 
 monge_cost_comp = (matching_CS * np.abs(X_types[:,None] - Y_types[None,:])).sum()
@@ -1530,14 +1541,14 @@ Another distinct feature of composite matching  stands out from the figures:
 
 ```{code-cell} ipython3
 N = 5
-zeta = 2
+ζ = 2
 p = 2
 
 X_types_example_2 = np.array([-2,0,2,9, 15])
 Y_types_example_2 = np.array([3,6,10,12, 14]) 
 
 # Solve composite sorting problem
-example_2 = ConcaveCostOT(X_types_example_2, Y_types_example_2, zeta=zeta)
+example_2 = ConcaveCostOT(X_types_example_2, Y_types_example_2, ζ=ζ)
 
 matching_CS, _ ,_ = example_2.solve_primal_DSS()
 
@@ -1574,7 +1585,7 @@ m_y_example_3 =  np.array([1,1,2], dtype= int)
 
 
 example_3 = ConcaveCostOT(X_types_example_3, Y_types_example_3, 
-                          n_x_example_3, m_y_example_3, zeta = 2)
+                          n_x_example_3, m_y_example_3, ζ = 2)
 example_3.plot_marginals(figsize = (5,5))
 ```
 
@@ -1749,7 +1760,8 @@ def find_subpairs(self, matching, return_pairs_between = False):
         # subpairs[matched_pair].discard(matched_pair)
         subpairs[matched_pair] = list(subpairs[matched_pair])
 
-        # Order the subpairs: the first (last) pair should have x (y) close to pair_x (pair_y)
+        # Order the subpairs: 
+        # the first (last) pair should have x (y) close to pair_x (pair_y)
         if matched_pair != 'artificial_pair' and len(subpairs[matched_pair]) > 1:
             subpairs[matched_pair] = self.sort_subpairs(
                 subpairs[matched_pair], 
@@ -1841,7 +1853,8 @@ def plot_hierarchies(self, subpairs, scatter=True, range_x_axis=None):
             center = (max_type + min_type) / 2
             # Semicircle height can be the same as the width for a perfect arc
             height = width  
-            semicircle = patches.Arc((center, 0), width, height, theta1=0, theta2=180, 
+            semicircle = patches.Arc((center, 0), width, height, 
+                            theta1=0, theta2=180, 
                             color=color, lw = 3)
             ax.add_patch(semicircle)
 
@@ -1863,10 +1876,12 @@ def plot_hierarchies(self, subpairs, scatter=True, range_x_axis=None):
     # Add a colorbar to represent hierarchy levels
     sm = cm.ScalarMappable(cmap=cmap, 
                     norm=Normalize(vmin=0, vmax= len(hierarchies) - 1))
-    sm.set_array([])  # ScalarMappable requires an array, even if we don't use it
-    cbar = plt.colorbar(sm, ax=ax, orientation='vertical', pad=0.1, shrink=0.2)    
-    cbar.set_ticks([0, len(hierarchies) - 1])  # Show only min and max levels
-    cbar.set_ticklabels(['Lowest', 'Highest'])  # Label the ticks for clarity
+    sm.set_array([])
+    cbar = plt.colorbar(sm, ax=ax, orientation='vertical', pad=0.1, shrink=0.2)   
+    # Show only min and max levels 
+    cbar.set_ticks([0, len(hierarchies) - 1])
+    # Label the ticks for clarity
+    cbar.set_ticklabels(['Lowest', 'Highest']) 
 
     plt.show()
 
@@ -1933,16 +1948,17 @@ def compute_betas(self, pair, subpairs):
     if pair == 'artificial_pair':
         bounds = (- self.cost_x_y[types_subpairs[:,0][:,None], 
                 types_subpairs[:,1][None,:]]
-                + self.cost_x_y[types_subpairs[:,0], types_subpairs[:,1]][None,:])
+                + self.cost_x_y[types_subpairs[:,0], 
+                                types_subpairs[:,1]][None,:])
     else:
-        bounds = (np.maximum(self.cost_x_y[pair]  
-                            - self.cost_x_y[pair[0], types_subpairs[:,1]][None,:] 
-                            - self.cost_x_y[types_subpairs[:,0],pair[1]][:,None],
-                            - self.cost_x_y[types_subpairs[:,0][:,None], 
-                            types_subpairs[:,1][None,:]])
-                + self.cost_x_y[types_subpairs[:,0], types_subpairs[:,1]][None,:])
-    
-    
+        bounds = (np.maximum(
+        self.cost_x_y[pair]  
+        - self.cost_x_y[pair[0], types_subpairs[:,1]][None,:] 
+        - self.cost_x_y[types_subpairs[:,0],pair[1]][:,None],
+        - self.cost_x_y[types_subpairs[:,0][:,None], 
+        types_subpairs[:,1][None,:]]
+        )
+        + self.cost_x_y[types_subpairs[:,0], types_subpairs[:,1]][None,:])
     
     # Define linear inequality system 
     num_subpairs = len(types_subpairs)
@@ -1956,7 +1972,7 @@ def compute_betas(self, pair, subpairs):
     
     # Solve the system of linear inequalities
     result = linprog(c = np.zeros(num_subpairs), 
-                    A_ub= - sum_tensor.reshape(num_subpairs ** 2, num_subpairs), 
+                    A_ub= - sum_tensor.reshape(num_subpairs**2, num_subpairs), 
                     b_ub= - bounds.flatten(), 
                     bounds=(None,None), 
                     method='highs')
@@ -2023,7 +2039,7 @@ def compute_dual_off_diagonal(self, subpairs, pairs_between):
                 if pair != 'artificial_pair':
                     if pair[0] == subpairs_x[0]:
                         ψ_y[pair[1]] = np.min(self.cost_x_y[pair[0], subpairs_y] 
-                                        - ψ_y[subpairs_y] ) + self.cost_x_y[pair]
+                                    - ψ_y[subpairs_y]) + self.cost_x_y[pair]
                     else:
                         ψ_y[pair[1]] = np.min(self.cost_x_y[subpairs_x, 
                                          pair[1]] - ϕ_x[subpairs_x] )
@@ -2175,8 +2191,10 @@ plt.figure(figsize=(10, 6))
 plt.scatter(
     occupation_df.index,
     occupation_df['std_Earnings'],
-    s = 1000 * (occupation_df['count'] / occupation_df['count'].max()), # marker_sizes
-    alpha = 0.5, # transparency
+    # marker_sizes
+    s = 1000 * (occupation_df['count'] / occupation_df['count'].max()), 
+    # transparency
+    alpha = 0.5, 
     label = 'Occupations'
 )
 
@@ -2283,7 +2301,7 @@ def generate_types_application(self, num_agents, params, random_seed=1):
 
     # Assign cost matrix
     self.cost_x_y = np.abs(worker_types[:, None] \
-                    - job_types[None, :]) ** (1/self.zeta)
+                    - job_types[None, :]) ** (1/self.ζ)
 
 ConcaveCostOT.generate_types_application = generate_types_application
 
@@ -2304,9 +2322,10 @@ def plot_marginals_pdf(self, bins, figsize=(15, 8),
 
     # Plotting histogram for X_types (approximating PDF)
     plt.hist(self.X_types, bins=bins, density=True, color='blue', alpha=0.7, 
-             label='PDF of worker types', edgecolor='blue', range = range_x_axis)
+             label='PDF of worker types', 
+             edgecolor='blue', range = range_x_axis)
 
-    # Plotting histogram for Y_types (approximating PDF), reflected below the x-axis
+    # Plotting histogram for Y_types (approximating PDF)
     counts, edges = np.histogram(self.Y_types, bins=bins, 
                                 density=True, range=range_x_axis)
     plt.bar(edges[:-1], -counts, width=np.diff(edges), color='red', alpha=0.7, 
@@ -2340,11 +2359,12 @@ We plot the hystograms and the measure of underqualification for the worker type
 ```{code-cell} ipython3
 # Plot pdf
 range_x_axis =(0, 4)
-model_1980.plot_marginals_pdf(figsize=(8, 5), bins=300, range_x_axis=range_x_axis)
+model_1980.plot_marginals_pdf(figsize=(8, 5), 
+                              bins=300, range_x_axis=range_x_axis)
 
 # Plot H_z
 model_OD_1980 , _ = model_1980.generate_offD_onD_matching()
-model_OD_1980.plot_H_z(figsize=(8, 5), range_x_axis=range_x_axis , scatter=False)
+model_OD_1980.plot_H_z(figsize=(8, 5), range_x_axis=range_x_axis, scatter=False)
 
 # Compute optimal matching and plot off diagonal matching
 matching_1980, matching_OD_1980, model_OD_1980 = model_1980.solve_primal_DSS()
@@ -2360,7 +2380,7 @@ From the optimal matching we compute and visualize the hierarchies. Then, we fin
 ```{code-cell} ipython3
 # Find subpairs and plot hierarchies
 subpairs, pairs_between = model_OD_1980.find_subpairs(matching_OD_1980, 
-                                        return_pairs_between = True)
+                                        return_pairs_between=True)
 model_OD_1980.plot_hierarchies(subpairs, scatter=False, 
                                         range_x_axis=range_x_axis)
 
