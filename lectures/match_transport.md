@@ -64,7 +64,7 @@ Given a *cost function* $c:X \times Y \rightarrow \mathbb{R}$, the (discrete) *o
 
 $$
 \begin{aligned}
-\min_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy}\\
+\min_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy} \\
 \text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
 & \sum_{y \in Y} \mu_{xy} = m_y 
 \end{aligned}
@@ -106,7 +106,7 @@ Hence, our problem is
 
 $$
 \begin{aligned}
-\min_{\mu \in \mathbb{Z}_+^{X \times Y}}& \sum_{(x,y) \in X \times Y} \mu_{xy}|x-y|^{1/\zeta}\\
+\min_{\mu \in \mathbb{Z}_+^{X \times Y}}& \sum_{(x,y) \in X \times Y} \mu_{xy}|x-y|^{1/\zeta} \\
 \text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
 & \sum_{y \in Y} \mu_{xy} = m_y 
 \end{aligned}
@@ -1625,8 +1625,8 @@ example_3.plot_matching(matching_NAM, title = 'NAM',
 Let us recall our formulation
 
 $$
- \begin{aligned}
-V_P = \min_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy}\\
+\begin{aligned}
+V_P = \min_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy} \\
 \text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
 & \sum_{y \in Y} \mu_{xy} = m_y 
 \end{aligned}
@@ -1637,8 +1637,8 @@ The *dual problem* is
 
 $$
 \begin{aligned}
-V_D = \max_{\phi,\psi}& \sum_{x \in X }n_x \phi_x + \sum_{y \in Y} m_y \psi_y\\
-\text{s.t. }&  \phi_x + \psi_y \leq c_{xy} \\
+V_D = \max_{\phi,\psi}& \sum_{x \in X }n_x \phi_x + \sum_{y \in Y} m_y \psi_y \\
+\text{s.t. }&  \phi_x + \psi_y \leq c_{xy}
 \end{aligned}
 $$
 
@@ -1651,7 +1651,7 @@ Assume now that $y_{xy} = \alpha_x + \gamma_y - c_{xy}$ is the output generated 
 
 $$
  \begin{aligned}
-W_P = \max_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy}\\
+W_P = \max_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 \text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
 & \sum_{y \in Y} \mu_{xy} = m_y 
 \end{aligned}
@@ -1659,8 +1659,8 @@ $$
 
 $$
 \begin{aligned}
- W_D = \min_{u,v}& \sum_{x \in X }n_x u_x + \sum_{y \in Y} m_y v_y\\
-\text{s.t. }&  u_x + v_y \geq y_{xy} \\
+ W_D = \min_{u,v}& \sum_{x \in X }n_x u_x + \sum_{y \in Y} m_y v_y \\
+\text{s.t. }&  u_x + v_y \geq y_{xy}
 \end{aligned}
 $$
 
@@ -2099,8 +2099,8 @@ Having computed the dual variables of the off-diagonal types, we compute the dua
 
 $$
 \begin{aligned}
-\phi_{x} = \min_{y \in Y^{OD}} \{  c_{xy} -\psi_{y} \} \\
-\psi_{y}  = \min_{x \in X^{OD}} \{  c_{xy} -\phi_{x}\}
+\phi_{x} = \min_{y \in Y^{OD}} \{ c_{xy} -\psi_{y} \} \\
+\psi_{y} = \min_{x \in X^{OD}} \{ c_{xy} -\phi_{x} \}
 \end{aligned}
 $$
 
