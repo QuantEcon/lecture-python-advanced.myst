@@ -2361,14 +2361,18 @@ We plot the hystograms and the measure of underqualification for the worker type
 
 ```{code-cell} ipython3
 # Plot pdf
-range_x_axis =(0, 4)
+range_x_axis = (0, 4)
 model_1980.plot_marginals_pdf(figsize=(8, 5), 
                               bins=300, range_x_axis=range_x_axis)
+```
 
+```{code-cell} ipython3
 # Plot H_z
 model_OD_1980 , _ = model_1980.generate_offD_onD_matching()
 model_OD_1980.plot_H_z(figsize=(8, 5), range_x_axis=range_x_axis, scatter=False)
+```
 
+```{code-cell} ipython3
 # Compute optimal matching and plot off diagonal matching
 matching_1980, matching_OD_1980, model_OD_1980 = model_1980.solve_primal_DSS()
 model_OD_1980.plot_matching(matching_OD_1980, 
@@ -2451,5 +2455,8 @@ def plot_wage_dispersion_model(wage_worker_x, bins=100,
     
 
 plot_wages_application(wage_worker_x_1980)
+```
+
+```{code-cell} ipython3
 plot_wage_dispersion_model(wage_worker_x_1980, bins=100)
 ```
