@@ -53,7 +53,9 @@ We will refer to these two measures as *marginals*.
 
 We assume that 
 
-$$\sum_{x \in X} n_x = \sum_{y \in Y} m_y  =: N$$ 
+$$
+\sum_{x \in X} n_x = \sum_{y \in Y} m_y  =: N
+$$ 
 
 so that  the matching  problem is *balanced*. 
 
@@ -700,7 +702,7 @@ example_off_diag.plot_layers()
 Recall that layer $L_\ell$ consists of a list of distinct types from $Y \sqcup X$
 
 $$
-    z_1 < z_2\dots < z_{N_\ell-1} < z_{N_\ell}, 
+z_1 < z_2\dots < z_{N_\ell-1} < z_{N_\ell}, 
 $$
     
 which is alternating. 
@@ -1387,7 +1389,9 @@ The following example shows that composite matching can feature both positive an
 
 Suppose that  there are two agents per side and types  
 
-$$ \textcolor{blue}{x_0} <  \textcolor{red}{y_0} <  \textcolor{blue}{x_1} <  \textcolor{red}{y_1}$$
+$$ 
+\textcolor{blue}{x_0} <  \textcolor{red}{y_0} <  \textcolor{blue}{x_1} <  \textcolor{red}{y_1}
+$$
 
 There are  two feasible matchings, one corresponding  to PAM, the other to  NAM. 
 
@@ -1632,12 +1636,10 @@ The *dual problem* is
 
 
 $$
- 
 \begin{aligned}
 V_D = \max_{\phi,\psi}& \sum_{x \in X }n_x \phi_x + \sum_{y \in Y} m_y \psi_y\\
 \text{s.t. }&  \phi_x + \psi_y \leq c_{xy} \\
 \end{aligned}
-
 $$
 
 where $(\phi , \psi) $ are dual variables, which can be interpreted as shadow cost of agents in $X$ and $Y$, respectively. 
@@ -1909,6 +1911,7 @@ Indeed, for any subpair $(x_1,y_1)$ of $(x_0,y_0)$, the dual variables of all th
 But dual feasibility is not satisfied globally in general, for instance it might not be satisfied for two subpairs $(x_1,y_1)$ and  $(x_2,y_2)$ of $(x_0,y_0).$ 
 
 Therefore, letting  $(x_1,y_1), \dots,  (x_p,y_p)$ be the subpairs of $(x_0,y_0),$ we compute the solution $(\beta_2, \dots, \beta_p) $ of the linear system
+
 $$
 \max (c_{x_0 y_0} - c_{x_0 y_i} - c_{x_j y_0} , - c_{x_j y_i}) + c_{x_i y_i} 
 \leq \sum_{k=i+1}^{j} \beta_k 
