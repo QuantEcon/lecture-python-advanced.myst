@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>17. Growth in Dynamic Linear Economies &#8212; Advanced Quantitative Economics with Python</title>
+    <title>18. Growth in Dynamic Linear Economies &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
@@ -118,8 +118,8 @@
     <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="18. Lucas Asset Pricing Using DLE" href="lucas_asset_pricing_dles.html" />
-    <link rel="prev" title="16. Recursive Models of Dynamic Linear Economies" href="hs_recursive_models.html" />
+    <link rel="next" title="19. Lucas Asset Pricing Using DLE" href="lucas_asset_pricing_dles.html" />
+    <link rel="prev" title="17. Recursive Models of Dynamic Linear Economies" href="hs_recursive_models.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -167,14 +167,14 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-structure">17.1. Common Structure</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-planning-problem">17.2. A Planning Problem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-economies">17.3. Example Economies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-hall-1978">17.3.1. Example 1: Hall (1978)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-altered-growth-condition">17.3.2. Example 2: Altered Growth Condition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-a-jones-manuelli-1990-economy">17.3.3. Example 3: A Jones-Manuelli (1990) Economy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-1-varying-sensitivity">17.3.4. Example 3.1: Varying Sensitivity</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-2-more-impatience">17.3.5. Example 3.2: More Impatience</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-structure">18.1. Common Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-planning-problem">18.2. A Planning Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-economies">18.3. Example Economies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1-hall-1978">18.3.1. Example 1: Hall (1978)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2-altered-growth-condition">18.3.2. Example 2: Altered Growth Condition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-a-jones-manuelli-1990-economy">18.3.3. Example 3: A Jones-Manuelli (1990) Economy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-1-varying-sensitivity">18.3.4. Example 3.1: Varying Sensitivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-2-more-impatience">18.3.5. Example 3.2: More Impatience</a></li>
 </ul>
 </li>
 </ul>
@@ -238,9 +238,9 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="growth-in-dynamic-linear-economies">
-<span id="index-0"></span><h1><span class="section-number">17. </span>Growth in Dynamic Linear Economies<a class="headerlink" href="#growth-in-dynamic-linear-economies" title="Permalink to this heading">#</a></h1>
+<span id="index-0"></span><h1><span class="section-number">18. </span>Growth in Dynamic Linear Economies<a class="headerlink" href="#growth-in-dynamic-linear-economies" title="Permalink to this heading">#</a></h1>
 <p>This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
-<span id="id1">[<a class="reference internal" href="zreferences.html#id72" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
+<span id="id1">[<a class="reference internal" href="zreferences.html#id74" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
 <p>In addition to what’s included in  Anaconda, this lecture uses the quantecon library.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -263,7 +263,9 @@ Requirement already satisfied: requests in /home/runner/miniconda3/envs/quanteco
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.1)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.2)
 Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
@@ -290,7 +292,7 @@ growth.</p>
 </div>
 </div>
 <section id="common-structure">
-<h2><span class="section-number">17.1. </span>Common Structure<a class="headerlink" href="#common-structure" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.1. </span>Common Structure<a class="headerlink" href="#common-structure" title="Permalink to this heading">#</a></h2>
 <p>Our example economies have the following features</p>
 <ul>
 <li><p>Information flows are governed by an exogenous stochastic process
@@ -358,7 +360,7 @@ matrices</p>
 <p>and the scalar <span class="math notranslate nohighlight">\(\beta\)</span>.</p>
 </section>
 <section id="a-planning-problem">
-<h2><span class="section-number">17.2. </span>A Planning Problem<a class="headerlink" href="#a-planning-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.2. </span>A Planning Problem<a class="headerlink" href="#a-planning-problem" title="Permalink to this heading">#</a></h2>
 <p>The first welfare theorem asserts that a competitive equilibrium
 allocation solves the following planning problem.</p>
 <p>Choose <span class="math notranslate nohighlight">\(\{c_t, s_t, i_t, h_t, k_t, g_t\}_{t=0}^\infty\)</span> to maximize</p>
@@ -398,7 +400,7 @@ d_t = U_dz_t
 \]</div>
 <p>The DLE class in Python maps this planning problem into a linear-quadratic dynamic programming problem and then solves it by using
 QuantEcon’s LQ class.</p>
-<p>(See Section 5.5 of Hansen &amp; Sargent (2013) <span id="id2">[<a class="reference internal" href="zreferences.html#id72" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> for a full
+<p>(See Section 5.5 of Hansen &amp; Sargent (2013) <span id="id2">[<a class="reference internal" href="zreferences.html#id74" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> for a full
 description of how to map these economies into an LQ setting, and how to
 use the solution to the LQ problem to construct the output matrices in
 order to simulate the economies)</p>
@@ -425,7 +427,7 @@ x_{t+1} = A^ox_t + Cw_{t+1}
 \]</div>
 </section>
 <section id="example-economies">
-<h2><span class="section-number">17.3. </span>Example Economies<a class="headerlink" href="#example-economies" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">18.3. </span>Example Economies<a class="headerlink" href="#example-economies" title="Permalink to this heading">#</a></h2>
 <p>Each of the example economies shown here will share a number of
 components. In particular, for each we will consider preferences of the
 form</p>
@@ -500,7 +502,7 @@ U_d =
 <span class="math notranslate nohighlight">\(\{\lambda, \pi, \delta_h, \theta_h, \gamma_1, \delta_k, \phi_1\}\)</span>
 and the initial state <span class="math notranslate nohighlight">\(x_0\)</span> across the three economies.</p>
 <section id="example-1-hall-1978">
-<h3><span class="section-number">17.3.1. </span>Example 1: Hall (1978)<a class="headerlink" href="#example-1-hall-1978" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.1. </span>Example 1: Hall (1978)<a class="headerlink" href="#example-1-hall-1978" title="Permalink to this heading">#</a></h3>
 <p>First, we set parameters such that consumption follows a random walk. In
 particular, we set</p>
 <div class="math notranslate nohighlight">
@@ -590,7 +592,7 @@ consumption and investment</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/33fe914aa7f94436da7749fcdf82c46ad482c5e99eb15b0e6b2fd6e2a2ee2d7e.png" src="_images/33fe914aa7f94436da7749fcdf82c46ad482c5e99eb15b0e6b2fd6e2a2ee2d7e.png" />
+<img alt="_images/3a17eafbc6999e417174005b877b2668df547bb8468b32f6c96ee802e8402353.png" src="_images/3a17eafbc6999e417174005b877b2668df547bb8468b32f6c96ee802e8402353.png" />
 </div>
 </div>
 <p>Inspection of the plot shows that the sample paths of consumption and
@@ -648,7 +650,7 @@ steady state of consumption, investment and capital.</p>
 state values are of little relevance.</p>
 </section>
 <section id="example-2-altered-growth-condition">
-<h3><span class="section-number">17.3.2. </span>Example 2: Altered Growth Condition<a class="headerlink" href="#example-2-altered-growth-condition" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.2. </span>Example 2: Altered Growth Condition<a class="headerlink" href="#example-2-altered-growth-condition" title="Permalink to this heading">#</a></h3>
 <p>We generate our next economy by making two alterations to the parameters
 of Example 1.</p>
 <ul class="simple">
@@ -708,7 +710,7 @@ consumption and investment</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/48f9b9f5e9901c1c406de8ea7e217a51d5a0764f5d5525eb6e12e4d0d59fab29.png" src="_images/48f9b9f5e9901c1c406de8ea7e217a51d5a0764f5d5525eb6e12e4d0d59fab29.png" />
+<img alt="_images/bdace7bdf487e2f632bc72e7491cd716aeba501a8aea1df4b6f57db8e7edf06d.png" src="_images/bdace7bdf487e2f632bc72e7491cd716aeba501a8aea1df4b6f57db8e7edf06d.png" />
 </div>
 </div>
 <p>Simulating our new economy shows that consumption grows quickly in the
@@ -745,7 +747,7 @@ than 1.</p>
 </div>
 </section>
 <section id="example-3-a-jones-manuelli-1990-economy">
-<h3><span class="section-number">17.3.3. </span>Example 3: A Jones-Manuelli (1990) Economy<a class="headerlink" href="#example-3-a-jones-manuelli-1990-economy" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.3. </span>Example 3: A Jones-Manuelli (1990) Economy<a class="headerlink" href="#example-3-a-jones-manuelli-1990-economy" title="Permalink to this heading">#</a></h3>
 <p>For our third economy, we choose parameter values with the aim of
 generating <em>sustained</em> growth in consumption, investment and capital.</p>
 <p>To do this, we set parameters so that Jones and Manuelli’s “growth
@@ -804,7 +806,7 @@ define the new value of <span class="math notranslate nohighlight">\(\lambda\)</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1c21884fdca4319448ae63c54af7c28c0064e6b1dc877ad2557d745c9542db90.png" src="_images/1c21884fdca4319448ae63c54af7c28c0064e6b1dc877ad2557d745c9542db90.png" />
+<img alt="_images/9777b3158b712b8431d999e6be034485caff5cc36788f18e4d8cef006cf4472f.png" src="_images/9777b3158b712b8431d999e6be034485caff5cc36788f18e4d8cef006cf4472f.png" />
 </div>
 </div>
 <p>Thus, adding habit persistence to the Hall model of Example 1 is enough
@@ -830,7 +832,7 @@ the growth condition (as in Example 1).</p>
 consider the following experiments.</p>
 </section>
 <section id="example-3-1-varying-sensitivity">
-<h3><span class="section-number">17.3.4. </span>Example 3.1: Varying Sensitivity<a class="headerlink" href="#example-3-1-varying-sensitivity" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.4. </span>Example 3.1: Varying Sensitivity<a class="headerlink" href="#example-3-1-varying-sensitivity" title="Permalink to this heading">#</a></h3>
 <p>Next we raise <span class="math notranslate nohighlight">\(\lambda\)</span> to -0.7</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -849,7 +851,7 @@ consider the following experiments.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8b5c7318ca4a501d2c38c38c3b73ac1b4a50aa474e19946341065542773ab3df.png" src="_images/8b5c7318ca4a501d2c38c38c3b73ac1b4a50aa474e19946341065542773ab3df.png" />
+<img alt="_images/1529ef9766535260f579184444417df43a57b526bbbd584e95c94733d86fa0fd.png" src="_images/1529ef9766535260f579184444417df43a57b526bbbd584e95c94733d86fa0fd.png" />
 </div>
 </div>
 <p>We no longer achieve sustained growth if <span class="math notranslate nohighlight">\(\lambda\)</span> is raised from -1 to -0.7.</p>
@@ -869,7 +871,7 @@ eigenvalues is now less than 1.</p>
 </div>
 </section>
 <section id="example-3-2-more-impatience">
-<h3><span class="section-number">17.3.5. </span>Example 3.2: More Impatience<a class="headerlink" href="#example-3-2-more-impatience" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">18.3.5. </span>Example 3.2: More Impatience<a class="headerlink" href="#example-3-2-more-impatience" title="Permalink to this heading">#</a></h3>
 <p>Next let’s lower <span class="math notranslate nohighlight">\(\beta\)</span> to 0.94</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -888,7 +890,7 @@ eigenvalues is now less than 1.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/82d7dc2790ed39d9138bb7e769a8dcc5839bc41ad0f6f91014ec197ba41bf95b.png" src="_images/82d7dc2790ed39d9138bb7e769a8dcc5839bc41ad0f6f91014ec197ba41bf95b.png" />
+<img alt="_images/04bcfda8eeb1272e75cdc996db037f15f66a445caf237f845b3d30c4d7e171e7.png" src="_images/04bcfda8eeb1272e75cdc996db037f15f66a445caf237f845b3d30c4d7e171e7.png" />
 </div>
 </div>
 <p>Growth also fails if we lower <span class="math notranslate nohighlight">\(\beta\)</span>, since we now have
@@ -1058,6 +1060,11 @@ being larger than one.</p>
    15. Coase’s Theory of the Firm
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="match_transport.html">
+   16. Composite Sorting
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -1067,42 +1074,42 @@ being larger than one.</p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   16. Recursive Models of Dynamic Linear Economies
+   17. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   17. Growth in Dynamic Linear Economies
+   18. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   18. Lucas Asset Pricing Using DLE
+   19. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   19. IRFs in Hall Models
+   20. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   20. Permanent Income Model using the DLE Class
+   21. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   21. Rosen Schooling Model
+   22. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   22. Cattle Cycles
+   23. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   23. Shock Non Invertibility
+   24. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -1114,22 +1121,22 @@ being larger than one.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   24. Risk and Model Uncertainty
+   25. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   25. Etymology of Entropy
+   26. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   26. Robustness
+   27. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   27. Robust Markov Perfect Equilibrium
+   28. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1141,32 +1148,32 @@ being larger than one.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   28. Covariance Stationary Processes
+   29. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   29. Estimation of Spectra
+   30. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   30. Additive and Multiplicative Functionals
+   31. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   31. Classical Control with Linear Algebra
+   32. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   32. Classical Prediction and Filtering With Linear Algebra
+   33. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   33. Knowing the Forecasts of Others
+   34. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -1178,27 +1185,27 @@ being larger than one.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   34. Asset Pricing II: The Lucas Asset Pricing Model
+   35. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   35. Elementary Asset Pricing Theory
+   36. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   36. Two Modifications of Mean-Variance Portfolio Theory
+   37. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   37. Irrelevance of Capital Structures with Complete Markets
+   38. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   38. Equilibrium Capital Structures with Incomplete Markets
+   39. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1210,57 +1217,57 @@ being larger than one.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   39. Optimal Unemployment Insurance
+   40. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   40. Stackelberg Plans
+   41. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   41. Machine Learning a Ramsey Plan
+   42. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   42. Time Inconsistency of Ramsey Plans
+   43. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   43. Sustainable Plans for a Calvo Model
+   44. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   44. Optimal Taxation with State-Contingent Debt
+   45. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   45. Optimal Taxation without State-Contingent Debt
+   46. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   46. Fluctuating Interest Rates Deliver Fiscal Insurance
+   47. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   47. Fiscal Risk and Government Debt
+   48. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   48. Competitive Equilibria of a Model of Chang
+   49. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   49. Credible Government Policies in a Model of Chang
+   50. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1272,17 +1279,17 @@ being larger than one.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. Troubleshooting
+   51. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. References
+   52. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. Execution Statistics
+   53. Execution Statistics
   </a>
  </li>
 </ul>

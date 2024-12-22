@@ -272,15 +272,15 @@
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.7.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
+Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (2.32.3)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.1)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.2)
 Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
@@ -293,18 +293,18 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <section id="overview">
 <h2><span class="section-number">12.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
 <p>In this lecture, we study optimal fiscal policy in a linear quadratic setting.</p>
-<p>We modify a model of Robert Lucas and Nancy Stokey <span id="id1">[<a class="reference internal" href="zreferences.html#id177" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> so that convenient formulas for
+<p>We modify a model of Robert Lucas and Nancy Stokey <span id="id1">[<a class="reference internal" href="zreferences.html#id179" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> so that convenient formulas for
 solving linear-quadratic models can be applied.</p>
 <p>The economy consists of a representative household and a benevolent government.</p>
 <p>The government finances an exogenous stream of government purchases with state-contingent loans and a linear tax on labor income.</p>
 <p>A linear tax is sometimes called a flat-rate tax.</p>
 <p>The household maximizes utility by choosing paths for consumption and labor, taking prices and the government’s tax rate and borrowing plans as given.</p>
 <p>Maximum attainable utility for the household depends on the government’s tax and borrowing plans.</p>
-<p>The <em>Ramsey problem</em> <span id="id2">[<a class="reference internal" href="zreferences.html#id195" title="F. P. Ramsey. A Contribution to the theory of taxation. Economic Journal, 37(145):47–61, 1927.">Ramsey, 1927</a>]</span> is  to choose tax and borrowing plans that maximize the household’s welfare, taking the household’s optimizing behavior as given.</p>
+<p>The <em>Ramsey problem</em> <span id="id2">[<a class="reference internal" href="zreferences.html#id197" title="F. P. Ramsey. A Contribution to the theory of taxation. Economic Journal, 37(145):47–61, 1927.">Ramsey, 1927</a>]</span> is  to choose tax and borrowing plans that maximize the household’s welfare, taking the household’s optimizing behavior as given.</p>
 <p>There is a large number of competitive equilibria indexed by different government fiscal policies.</p>
 <p>The Ramsey planner chooses the best competitive equilibrium.</p>
 <p>We want to study  the dynamics of tax rates,  tax revenues, government debt under a Ramsey plan.</p>
-<p>Because the Lucas and Stokey model features state-contingent government debt, the government debt dynamics differ substantially from those in a model of Robert Barro <span id="id3">[<a class="reference internal" href="zreferences.html#id137" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span>.</p>
+<p>Because the Lucas and Stokey model features state-contingent government debt, the government debt dynamics differ substantially from those in a model of Robert Barro <span id="id3">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span>.</p>
 <p>The treatment given here closely follows <a href=_static/lecture_specific/lqramsey/firenze.pdf download>this manuscript</a>, prepared
 by Thomas J. Sargent and Francois R. Velde.</p>
 <p>We cover only the key features of the problem in this lecture, leaving you to refer to that source for additional results and intuition.</p>
@@ -681,7 +681,7 @@ m^t_{t+1} = \frac{p^t_{t+1}}{E_t p^t_{t+1}}
 \]</div>
 <p>which asserts that <span class="math notranslate nohighlight">\(\{\pi_{t+1}\}\)</span> is a martingale difference sequence under the distorted probability measure, and
 that  <span class="math notranslate nohighlight">\(\{\Pi_t\}\)</span> is a martingale under the distorted probability measure.</p>
-<p>In the tax-smoothing model of Robert Barro <span id="id4">[<a class="reference internal" href="zreferences.html#id137" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span>, government debt is a random walk.</p>
+<p>In the tax-smoothing model of Robert Barro <span id="id4">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span>, government debt is a random walk.</p>
 <p>In the current model, government debt <span class="math notranslate nohighlight">\(\{B_t\}\)</span> is not a random walk, but the <code class="docutils literal notranslate"><span class="pre">excess</span> <span class="pre">payoff</span></code> <span class="math notranslate nohighlight">\(\{\Pi_t\}\)</span> on it is.</p>
 </section>
 </section>
@@ -1016,7 +1016,7 @@ g_{t+1} - \mu_g = \rho (g_t - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f10ae63f04f063a948200b94ce5b24f6cd476b08fef923a3dcacaaf87de57cc1.png" src="_images/f10ae63f04f063a948200b94ce5b24f6cd476b08fef923a3dcacaaf87de57cc1.png" />
+<img alt="_images/e20393e285deed90f3735218e8c811ab8afd788fb99fe8cb8229c05cb0592ed9.png" src="_images/e20393e285deed90f3735218e8c811ab8afd788fb99fe8cb8229c05cb0592ed9.png" />
 </div>
 </div>
 <p>The legends on the figures indicate the variables being tracked.</p>
@@ -1029,7 +1029,7 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cdabd303467086c246e366358cbbb74b5c617051d0ac8bc8bd54323731aa937e.png" src="_images/cdabd303467086c246e366358cbbb74b5c617051d0ac8bc8bd54323731aa937e.png" />
+<img alt="_images/a130d7792250094435e2e8e66546bd82e6365ac9c52cf20d323a16b36250368c.png" src="_images/a130d7792250094435e2e8e66546bd82e6365ac9c52cf20d323a16b36250368c.png" />
 </div>
 </div>
 <p>See the original <a href=_static/lecture_specific/lqramsey/firenze.pdf download>manuscript</a> for comments and interpretation.</p>
@@ -1068,11 +1068,11 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7017/2748685684.py:111: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7063/2748685684.py:111: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
   a0, b0 = float(a0), float(b0)
 </pre></div>
 </div>
-<img alt="_images/a0bd8a6cb9554410b6728dd8f9205d197f7abe794a68878f168934d983d5c105.png" src="_images/a0bd8a6cb9554410b6728dd8f9205d197f7abe794a68878f168934d983d5c105.png" />
+<img alt="_images/d7ea3a60653b3b190fb2043b54ee08cfcb765c74f3d36174c41cef2d5b1c7c91.png" src="_images/d7ea3a60653b3b190fb2043b54ee08cfcb765c74f3d36174c41cef2d5b1c7c91.png" />
 </div>
 </div>
 <p>The call <code class="docutils literal notranslate"><span class="pre">gen_fig_2(path)</span></code> generates</p>
@@ -1083,7 +1083,7 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ad545fb5b2ddc43f9205fde9a0574e6de9b1ef41bb775701ccba2b71c174780d.png" src="_images/ad545fb5b2ddc43f9205fde9a0574e6de9b1ef41bb775701ccba2b71c174780d.png" />
+<img alt="_images/fb6e3119323401d958bdce3e99f091d644c3c2fe94b209dd3baac75ded5482d1.png" src="_images/fb6e3119323401d958bdce3e99f091d644c3c2fe94b209dd3baac75ded5482d1.png" />
 </div>
 </div>
 <p>See the original <a href=_static/lecture_specific/lqramsey/firenze.pdf download>manuscript</a> for comments and interpretation.</p>
@@ -1137,7 +1137,7 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/fb0850812798c963e194c4ab8f4e0ca48f34267e822bbd2cffacc740e1901c65.png" src="_images/fb0850812798c963e194c4ab8f4e0ca48f34267e822bbd2cffacc740e1901c65.png" />
+<img alt="_images/1cbb89a636cfa56ee331188b4f8e041eb5e4e3f8ad750be1421cf7db2a171b2b.png" src="_images/1cbb89a636cfa56ee331188b4f8e041eb5e4e3f8ad750be1421cf7db2a171b2b.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1147,7 +1147,7 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/33ef4cb11926a6c67086c295e6cf1c031c9fa14bcb0a18845f0681bb8964372d.png" src="_images/33ef4cb11926a6c67086c295e6cf1c031c9fa14bcb0a18845f0681bb8964372d.png" />
+<img alt="_images/1f75b6353b21de847d15512d60ad1f12c49bfd9ea2ed832e9078c936c42efebc.png" src="_images/1f75b6353b21de847d15512d60ad1f12c49bfd9ea2ed832e9078c936c42efebc.png" />
 </div>
 </div>
 </section>
@@ -1299,6 +1299,11 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
    15. Coase’s Theory of the Firm
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="match_transport.html">
+   16. Composite Sorting
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -1308,42 +1313,42 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   16. Recursive Models of Dynamic Linear Economies
+   17. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   17. Growth in Dynamic Linear Economies
+   18. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   18. Lucas Asset Pricing Using DLE
+   19. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   19. IRFs in Hall Models
+   20. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   20. Permanent Income Model using the DLE Class
+   21. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   21. Rosen Schooling Model
+   22. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   22. Cattle Cycles
+   23. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   23. Shock Non Invertibility
+   24. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -1355,22 +1360,22 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   24. Risk and Model Uncertainty
+   25. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   25. Etymology of Entropy
+   26. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   26. Robustness
+   27. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   27. Robust Markov Perfect Equilibrium
+   28. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1382,32 +1387,32 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   28. Covariance Stationary Processes
+   29. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   29. Estimation of Spectra
+   30. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   30. Additive and Multiplicative Functionals
+   31. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   31. Classical Control with Linear Algebra
+   32. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   32. Classical Prediction and Filtering With Linear Algebra
+   33. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   33. Knowing the Forecasts of Others
+   34. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -1419,27 +1424,27 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   34. Asset Pricing II: The Lucas Asset Pricing Model
+   35. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   35. Elementary Asset Pricing Theory
+   36. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   36. Two Modifications of Mean-Variance Portfolio Theory
+   37. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   37. Irrelevance of Capital Structures with Complete Markets
+   38. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   38. Equilibrium Capital Structures with Incomplete Markets
+   39. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1451,57 +1456,57 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   39. Optimal Unemployment Insurance
+   40. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   40. Stackelberg Plans
+   41. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   41. Machine Learning a Ramsey Plan
+   42. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   42. Time Inconsistency of Ramsey Plans
+   43. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   43. Sustainable Plans for a Calvo Model
+   44. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   44. Optimal Taxation with State-Contingent Debt
+   45. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   45. Optimal Taxation without State-Contingent Debt
+   46. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   46. Fluctuating Interest Rates Deliver Fiscal Insurance
+   47. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   47. Fiscal Risk and Government Debt
+   48. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   48. Competitive Equilibria of a Model of Chang
+   49. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   49. Credible Government Policies in a Model of Chang
+   50. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1513,17 +1518,17 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   50. Troubleshooting
+   51. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   51. References
+   52. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   52. Execution Statistics
+   53. Execution Statistics
   </a>
  </li>
 </ul>
