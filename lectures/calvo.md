@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.16.2
+    jupytext_version: 1.16.6
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -1205,8 +1205,6 @@ constant value attained by a constrained-to-constant $\mu_t$ Ramsey planner.
 
 Now let's write some code to  plot outcomes under our three timing protocols.
 
-Then we'll use the code to explore how key parameters affect outcomes.
-
 ```{code-cell} ipython3
 :tags: [hide-input]
 
@@ -1218,21 +1216,21 @@ def compare_ramsey_CR(clq, ax):
     """
     
     # Calculate CR space range and bounds
-    min_CR, max_CR = min(clq.CR_space), max(clq.CR_space)
-    range_CR = max_CR - min_CR
-    l_CR, u_CR = min_CR - 0.05 * range_CR, max_CR + 0.05 * range_CR
+    min_J, max_J = min(clq.J_space), max(clq.J_space)
+    range_J = max_J - min_J
+    l_J, u_J = min_J - 0.05 * range_J, max_J + 0.05 * range_J
     
     # Set axis limits
     ax.set_xlim([clq.θ_LB, clq.θ_UB])
-    ax.set_ylim([l_CR, u_CR])
+    ax.set_ylim([l_J, u_J])
 
     # Plot J(θ) and v^CR(θ)
-    J_line, = ax.plot(clq.θ_space, clq.J_space, lw=2, label=r"$J(\theta)$")
     CR_line, = ax.plot(clq.θ_space, clq.CR_space, lw=2, label=r"$V^{CR}(\theta)$")
-
+    J_line, = ax.plot(clq.θ_space, clq.J_space, lw=2, label=r"$J(\theta)$")
+    
     # Mark key points
     θ_points, labels, θ_colors = compute_θs(clq)
-    markers = [ax.scatter(θ, l_CR + 0.02 * range_CR, 60, 
+    markers = [ax.scatter(θ, l_J + 0.02 * range_J, 60, 
                           marker='v', label=label, color=color)
                for θ, label, color in zip(θ_points, labels, θ_colors)]
     
@@ -1257,6 +1255,8 @@ def plt_clqs(clqs, axes):
     axes is a list of Matplotlib axes
     """
     line_handles, scatter_handles = {}, {}
+    
+    if not isinstance(clqs, list): clqs, axes = [clqs], [axes]
 
     for ax, clq in zip(axes, clqs):
         lines, markers = compare_ramsey_CR(clq, ax)
@@ -1314,6 +1314,15 @@ def generate_table(clqs, dig=3):
     
     display(Math(latex_code))
 ```
+
+The figure below confirms the key points we discussed above
+
+```{code-cell} ipython3
+fig, ax = plt.subplots()
+plt_clqs(ChangLQ(β=0.8, c=2), ax)
+```
+
+Now we experiment with different $\beta$ values and check how the graph changes
 
 ```{code-cell} ipython3
 # Compare different β values
