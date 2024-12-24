@@ -277,7 +277,7 @@ is:
 ```{math}
 :label: eq_old6
 
--s(\theta_t, \mu_t) \equiv - r(x_t,\mu_t) = \begin{bmatrix} 1 \\ \theta_t \end{bmatrix}' \begin{bmatrix} u_0 & -\frac{u_1 \alpha}{2} \\ -\frac{u_1 \alpha}{2} & -\frac{u_2 \alpha^2}{2} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_t \end{bmatrix} - \frac{c}{2} \mu_t^2 =  - x_t'Rx_t - Q \mu_t^2
+s(\theta_t, \mu_t) \equiv - r(x_t,\mu_t) = \begin{bmatrix} 1 \\ \theta_t \end{bmatrix}' \begin{bmatrix} u_0 & -\frac{u_1 \alpha}{2} \\ -\frac{u_1 \alpha}{2} & -\frac{u_2 \alpha^2}{2} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_t \end{bmatrix} - \frac{c}{2} \mu_t^2 =  - x_t'Rx_t - Q \mu_t^2
 ```
 
 The  government's time $0$ value is 
@@ -285,7 +285,7 @@ The  government's time $0$ value is
 ```{math}
 :label: eq_old7
 
-v_0 = - \sum_{t=0}^\infty \beta^t r(x_t,\mu_t) = - \sum_{t=0}^\infty \beta^t s(\theta_t,\mu_t)
+v_0 = - \sum_{t=0}^\infty \beta^t r(x_t,\mu_t) =  \sum_{t=0}^\infty \beta^t s(\theta_t,\mu_t)
 ```
 
 where $\beta \in (0,1)$ is a discount factor. 
@@ -293,10 +293,10 @@ where $\beta \in (0,1)$ is a discount factor.
 The government's time $t$ continuation value $v_t$ is 
 
 $$
-v_t = - \sum_{j=0}^\infty \beta^j s(\theta_{t+j}, \mu_{t+j}) .
+v_t =  \sum_{j=0}^\infty \beta^j s(\theta_{t+j}, \mu_{t+j}) .
 $$
 
-We can represent  dependence of  $v_0$ on $(\vec \theta, \vec \mu)$ recursively via the  difference equation
+We can represent  dependence of  $v_0$ on $(\vec \theta, \vec \mu)$ recursively via the  difference equatin
 
 ```{math}
 :label: eq_old8
@@ -310,7 +310,7 @@ that according to equation {eq}`eq_old3` would bring forth a constant inflation 
 Under that policy,
 
 $$
-v_t = V(\bar \mu) = - \frac{s(\bar \mu, \bar \mu)}{1-\beta} 
+v_t = V(\bar \mu) =  \frac{s(\bar \mu, \bar \mu)}{1-\beta} 
 $$ (eq:barvdef)
 
 for all $t \geq 0$.
@@ -337,7 +337,7 @@ $\vec v = \{v_t\}_{t=0}^\infty \in L^2$ that satisfies the
 recursion
 
 $$
-v_t = - s(\theta_t,\mu_t) + \beta v_{t+1}
+v_t =  s(\theta_t,\mu_t) + \beta v_{t+1}
 $$ (eq_new100)
 
 where we have called $s(\theta_t, \mu_t) = r(x_t, \mu_t)$, as
@@ -580,14 +580,21 @@ Subproblem 2 does that.
 The value of the Ramsey problem is
 
 $$
-V^R = \max_{\theta} J(\theta)
+V^R = \max_{x_0} J(x_0)
 $$
 
-where $V^R$ is the maximum value of $v_0$ defined in equation {eq}`eq_old7`.
 
-We have taken the liberty of abusing notation slightly by writing $J(x)$ as $J(\theta)$
 
-  * notice that $x = \begin{bmatrix} 1 \cr \theta \end{bmatrix}$, so $\theta$ is the only component of $x$ that can possibly vary
+We abuse  notation slightly by writing $J(x)$ as $J(\theta)$ and rewrite the above equation as
+```{note}
+ Since  $x = \begin{bmatrix} 1 \cr \theta \end{bmatrix}$, it follows that $\theta$ is the only component of $x$ that can possibly vary.
+ ```
+
+$$
+V^R = \max_{\theta_0} J(\theta_0)
+$$
+
+Evidently,  $V^R$ is the maximum value of $v_0$ defined in equation {eq}`eq_old7`. 
 
 Value function $J(\theta_0)$ satisfies
 
@@ -595,7 +602,7 @@ $$
  J(\theta_0) = -\begin{bmatrix} 1 & \theta_0 \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \\ P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \\ \theta_0 \end{bmatrix} = -P_{11} - 2 P_{21} \theta_0 - P_{22} \theta_0^2
 $$
 
-Maximizing $J(\theta_0)$  with respect to $\theta_0$ yields the FOC:
+The first-order necessary condition for maximizing $J(\theta_0)$  with respect to $\theta_0$ is 
 
 $$
 - 2 P_{21} - 2 P_{22} \theta_0 =0
@@ -678,7 +685,7 @@ Variation of  $ \vec \mu^R, \vec \theta^R, \vec v^R $ over time  are  symptoms o
 
 ## Multiple roles of $\theta_t$
 
-The inflation rate $\theta_t$ plays three roles simultaneously:
+The inflation rate $\theta_t$ plays three roles:
 
 - In equation {eq}`eq_old3`, $\theta_t$ is the actual rate of inflation
   between $t$ and $t+1$.
@@ -709,44 +716,44 @@ that, relative to a Ramsey plan,  alter either
 
 ## Constrained-to-Constant-Growth-Rate Ramsey Plan
 
-We now describe a  model in which we restrict the Ramsey planner's choice set.
 
-Instead of choosing a sequence of money growth rates $\vec \mu \in {\bf L}^2$, we restrict the 
-government to choose a time-invariant money growth rate $\bar \mu$. 
+In order to highlight an aspect of a Ramsey plan associated with its time inconsistency, i.e.,  the feature that optimal settings of the  policy instrument vary over time, we now study the consequences of arbitrarily restricting    the Ramsey planner to   choose a time-invariant money growth rate $\bar \mu$ so that 
 
-We created this version of the model  to highlight an aspect of a Ramsey plan associated with its time inconsistency, namely, the feature that optimal settings of the  policy instrument vary over time.
+$$
+\mu_t = \bar \mu, \quad \forall t \geq 0.
+$$
 
-Thus, instead of allowing the government at time $0$ to choose a different $\mu_t$ for each $t \geq 0$, we now assume that a  government at time $0$ once and for all  chooses a *constant* sequence $\mu_t = \bar \mu$ for all $t \geq 0$.
 
 We assume that the government knows the perfect foresight outcome implied by equation {eq}`eq_old2` that $\theta_t = \bar  \mu$ when $\mu_t = \bar \mu$ for all $t \geq 0$.
 
-The government chooses $\bar \mu$  to maximize
+It follows that the value of such a plan is given by $V(\bar \mu)$ defined above inequation {eq}`eq:barvdef`.  
+
+
+
+Then our restricted Ramsey planner  chooses $\bar \mu$  to maximize $V(\bar \mu)$.
+
+
+
+
+
+We can express $V(\bar \mu)$ as
 
 
 $$
-V^{CR}(\bar \mu) = V(\bar \mu)
-$$
-
-where $V(\bar \mu)$ is defined in equation {eq}`eq:barvdef`.
-
-We can express $V^{CR}(\bar \mu)$ as
-
-
-$$
-V^{CR} (\bar \mu) = (1-\beta)^{-1} \left[ U (-\alpha \bar \mu) - \frac{c}{2} (\bar \mu)^2 \right]
+V (\bar \mu) = (1-\beta)^{-1} \left[ U (-\alpha \bar \mu) - \frac{c}{2} (\bar \mu)^2 \right]
 $$ (eq:vcrformula20)
 
 With the quadratic form {eq}`eq_old5` for the utility function $U$, the
 maximizing $\bar \mu$ is
 
 $$
-\mu^{CR} = - \frac{\alpha u_1}{\alpha^2 u_2 + c }
+\mu^{CR} = \max_{\bar \mu} V (\bar \mu) =  - \frac{\alpha u_1}{\alpha^2 u_2 + c }
 $$ (eq:muRamseyconstrained)
 
 The optimal value attained by a *constrained to constant $\mu$* Ramsey planner is
 
 $$
-V^{CR}(\mu^{CR}) = v^{CR} = (1-\beta)^{-1} \left[ U (-\alpha \mu^{CR}) - \frac{c}{2} (\mu^{CR})^2 \right]
+V(\mu^{CR}) \equiv V^{CR} = (1-\beta)^{-1} \left[ U (-\alpha \mu^{CR}) - \frac{c}{2} (\mu^{CR})^2 \right]
 $$ (eq:vcrformula)
 
 
@@ -781,7 +788,7 @@ Given $\bar \mu$, the time $t$ government  chooses $\mu_t$ to
 maximize:
 
 $$
-Q(\mu_t, \bar \mu) = U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2 + \beta V(\bar \mu)
+H(\mu_t, \bar \mu) = U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2 + \beta V(\bar \mu)
 $$ (eq_Markov3)
 
 where $V(\bar \mu)$ is given by formula  {eq}`eq:barvdef` for  the time $0$ value $v_0$ of
@@ -792,12 +799,12 @@ Substituting  {eq}`eq_Markov2` into {eq}`eq_Markov3` and expanding gives:
 
 $$ 
 \begin{aligned}
-Q(\mu_t, \bar \mu) & = u_0 + u_1\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right) - \frac{u_2}{2}\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right)^2   \\ 
+H(\mu_t, \bar \mu) & = u_0 + u_1\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right) - \frac{u_2}{2}\left(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t\right)^2   \\ 
 & \quad \quad \quad - \frac{c}{2} \mu_t^2 + \beta V(\bar \mu)
 \end{aligned}
 $$ (eq:Vmutemp)
 
-The first-order necessary condition for maximing $Q(\mu_t, \bar \mu)$ with respect to $\mu_t$ is:
+The first-order necessary condition for maximizing $H(\mu_t, \bar \mu)$ with respect to $\mu_t$ is:
 
 $$
 - \frac{\alpha}{1+\alpha} u_1 - u_2(-\frac{\alpha^2}{1+\alpha} \bar \mu - \frac{\alpha}{1+\alpha} \mu_t)(- \frac{\alpha}{1+\alpha}) - c \mu_t = 0
@@ -836,7 +843,7 @@ $$ (eq:Markovperfectmu)
 The value of a Markov perfect equilibrium is 
 
 $$
-V^{MPE} = -\frac{s(\mu^{MPE}, \mu^{MPE})}{1-\beta}
+V^{MPE} = \frac{s(\mu^{MPE}, \mu^{MPE})}{1-\beta}
 $$ (eq:VMPE)
 
 or 
@@ -1109,12 +1116,13 @@ Notice that for  $\theta \in \left(\theta_\infty^R, \theta_0^R \right]$
 It follows that under the Ramsey plan  $\{\theta_t\}$ and $\{\mu_t\}$ both converge monotonically from above to $\theta_\infty^R$. 
 
 
-The next code  plots the Ramsey planner's value function $J(\theta)$, which we know is maximized at   $\theta^R_0$, the promised inflation that the Ramsey planner  sets
-at time $t=0$.
+The next code  plots the Ramsey planner's value function $J(\theta)$.
 
-The figure also plots the limiting value $\theta_\infty^R$ to which  the promised  inflation rate $\theta_t$ converges under the Ramsey plan.
+We  know  that $J (\theta)$ is maximized at   $\theta^R_0$, the best time $0$  promised inflation rate. 
 
-In addition, the figure indicates an MPE inflation rate $\theta^{MPE}$, $\theta^{CR}$, and a bliss inflation $\theta^*$.
+The figure also plots the limiting value $\theta_\infty^R$, the limiting value of  promised  inflation rate $\theta_t$  under the Ramsey plan as $t \rightarrow +\infty$.
+
+The figure also  indicates an MPE inflation rate $\theta^{MPE}$, the inflation $\theta^{CR}$ under a Ramsey plan constrained to a constant money creation rate,  and a bliss inflation $\theta^*$.
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -1164,9 +1172,9 @@ of a constrained  Ramsey planner who  must choose a constant
 $\mu$.
 
 A time-invariant $\mu$ implies a time-invariant $\theta$, we take the liberty of
-labeling this value function $V^{CR}(\theta)$.   
+labeling this value function $V(\theta)$.   
 
-We'll use the code to plot $J(\theta)$ and $V^{CR}(\theta)$ for several values of the discount factor $\beta$ and  the cost of $\mu_t^2$ parameter $c$.
+We'll use the code to plot $J(\theta)$ and $V(\theta)$ for several values of the discount factor $\beta$ and  the cost parameter $c$ that multiplies    $\mu_t^2$ in the Ramsey planner's one-period payoff function.
 
 In all of the graphs below, we disarm the Proposition 1 equivalence results by setting $c >0$.
 
@@ -1175,11 +1183,11 @@ The graphs reveal interesting relationships among $\theta$'s associated with var
  *  $\theta_0^R < \theta^{MPE} $: the initial Ramsey inflation rate exceeds the MPE inflation rate 
  *  $\theta_\infty^R < \theta^{CR} <\theta_0^R$: the initial Ramsey deflation rate, and the associated tax distortion cost $c \mu_0^2$ is less than the limiting Ramsey inflation rate $\theta_\infty^R$ and the associated tax distortion cost $\mu_\infty^2$  
  *  $\theta^* < \theta^R_\infty$: the limiting Ramsey inflation rate exceeds the bliss level of inflation
- *  $J(\theta) \geq V^{CR}(\theta)$
- *  $J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$
+ *  $J(\theta) \geq V(\theta)$
+ *  $J(\theta_\infty^R) = V(\theta_\infty^R)$
 
 Before doing anything else, let's write code to verify our claim that
-$J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$.
+$J(\theta_\infty^R) = V(\theta_\infty^R)$.
 
 Here is the code.
 
@@ -1189,9 +1197,9 @@ np.allclose(clq.J_θ(θ_inf),
             clq.V_θ(θ_inf))
 ```
 
-So our claim that $J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$ is verified numerically.
+So we have verified our  claim that $J(\theta_\infty^R) = V(\theta_\infty^R)$.
 
-Since  $J(\theta_\infty^R) = V^{CR}(\theta_\infty^R)$ occurs at a tangency point at which
+Since  $J(\theta_\infty^R) = V(\theta_\infty^R)$ occurs at a tangency point at which
 $J(\theta)$ is increasing in $\theta$, it follows that
 
 $$
@@ -1200,8 +1208,8 @@ $$ (eq:comparison2)
 
 with strict inequality when $c > 0$.  
 
-Thus, the limiting continuation value of continuation Ramsey planners is worse that the 
-constant value attained by a constrained-to-constant $\mu_t$ Ramsey planner.
+Thus, the value of the plan that sets the money growth rate $\mu_t = \theta_\infty^R$ for all $t \geq 0$    is worse than the 
+value attained by a  Ramsey planner who is  constrained to set a constant $\mu_t$.
 
 Now let's write some code to  plot outcomes under our three timing protocols.
 
@@ -1225,7 +1233,7 @@ def compare_ramsey_CR(clq, ax):
     ax.set_ylim([l_J, u_J])
 
     # Plot J(θ) and v^CR(θ)
-    CR_line, = ax.plot(clq.θ_space, clq.CR_space, lw=2, label=r"$V^{CR}(\theta)$")
+    CR_line, = ax.plot(clq.θ_space, clq.CR_space, lw=2, label=r"$V(\theta)$")
     J_line, = ax.plot(clq.θ_space, clq.J_space, lw=2, label=r"$J(\theta)$")
     
     # Mark key points
@@ -1315,14 +1323,27 @@ def generate_table(clqs, dig=3):
     display(Math(latex_code))
 ```
 
-The figure below confirms the key points we discussed above
+For some default parameter values,  the next  figure plots the Ramsey planner's
+continuation value function $J(\theta)$ (orange curve)  and the restricted-to-constant-$\mu$  Ramsey
+planner's value function $V(\theta)$ (blue curve).
+
+The figure uses colored arrows to indicate locations of $\theta^*, \theta_\infty^R,
+\theta^{CR}, \theta_0^R$, and $\theta^{MPE}$, ordered as they are from 
+left to right, on the $\theta$ axis. 
+
+   * the maximizer $\theta_0^R$  of $J(\theta)$   occurs at the top of the orange curve
+   * the maximizer $\theta^{CR}$ of $V(\theta)$ occurs at the top of the blue curve
+   * the "timeless perspective"  inflation and money creation  rate $\theta_\infty^R$ occurs where $J(\theta)$ is tangent to $V(\theta)$
+   * the Markov perfect inflation and money creation  rate $\theta^{MPE}$ exceeds $\theta_0^R$.
+
+
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
 plt_clqs(ChangLQ(β=0.8, c=2), ax)
 ```
 
-Now we experiment with different $\beta$ values and check how the graph changes
+Now we experiment with different $\beta$ values and check how outcomes change
 
 ```{code-cell} ipython3
 # Compare different β values
@@ -1343,7 +1364,7 @@ The horizontal dotted lines indicate values
  $V(\mu_\infty^R), V(\mu^{CR}), V(\mu^{MPE}) $ of time-invariant money
 growth rates $\mu_\infty^R, \mu^{CR}$ and $\mu^{MPE}$, respectfully. 
 
-Notice how $J(\theta)$ and $V^{CR}(\theta)$ are tangent and increasing at
+Notice how $J(\theta)$ and $V(\theta)$ are tangent and increasing at
  $\theta = \theta_\infty^R$, which implies that $\theta^{CR} > \theta_\infty^R$
  and $J(\theta^{CR}) > J(\theta_\infty^R)$. 
 
