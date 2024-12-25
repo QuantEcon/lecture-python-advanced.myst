@@ -300,12 +300,12 @@ $$
 v_t =  \sum_{j=0}^\infty \beta^j s(\theta_{t+j}, \mu_{t+j}) .
 $$
 
-We can represent  dependence of  $v_0$ on $(\vec \theta, \vec \mu)$ recursively via the  difference equation
+We can represent dependence of $v_t$ on $(\vec \theta, \vec \mu)$ recursively via the difference equation
 
 ```{math}
 :label: eq_old8
 
-v_t = - s(\theta_t, \mu_t) + \beta v_{t+1}
+v_t = s(\theta_t, \mu_t) + \beta v_{t+1}
 ```
 
 It is useful to evaluate {eq}`eq_old8` under a time-invariant money growth rate $\mu_t = \bar \mu$
@@ -481,7 +481,7 @@ $$ (eq:subprob1LQ)
 satisfies the Bellman equation
 
 $$
-J(x) = \max_{\mu,x'}\{-r(x,\mu) + \beta J(x')\}
+J(x) = \max_{\mu,x'}\{s(x,\mu) + \beta J(x')\}
 $$
 
 subject to:
