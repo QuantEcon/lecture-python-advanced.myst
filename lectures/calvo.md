@@ -291,7 +291,7 @@ where $\beta \in (0,1)$ is a discount factor.
 
 ```{note}
 We define $ r(x_t,\mu_t) := - s(\theta_t, \mu_t) $ as we do  in order to represent  the government's **maximum** problem in terms of our Python code for solving linear quadratic discounted dynamic programs.
-In earlier quantecon lectures, we formulated these as **loss minimization** problems.
+In [first LQ control lecture](https://python-intro.quantecon.org/lqcontrol.html) and some other  quantecon lectures, we formulated these as **loss minimization** problems.
 ```
 
 The government's time $t$ continuation value $v_t$ is 
