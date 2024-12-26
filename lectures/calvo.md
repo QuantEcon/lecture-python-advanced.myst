@@ -45,7 +45,7 @@ The model focuses  on intertemporal tradeoffs between
  - benefits that anticipations of future  deflation generate  by decreasing  costs of holding real money balances and thereby increasing a representative agent's *liquidity*, as measured by his or her holdings of real money balances, and
  - costs associated with the  distorting taxes that the government must levy in order to acquire the paper money that it will  destroy  in order to generate anticipated deflation
 
-Model  features include
+Model features include
 
 - rational expectations
 - alternative possible  timing protocols for government choices of a sequence of money growth rates
@@ -138,7 +138,7 @@ or
 
 Because $\alpha > 0$,  $0 < \frac{\alpha}{1+\alpha} < 1$.
 
-**Definition:** For  scalar $b_t$, let $L^2$ be the space of sequences
+**Definition:** For scalar $b_t$, let $L^2$ be the space of sequences
 $\{b_t\}_{t=0}^\infty$ satisfying
 
 $$
@@ -291,7 +291,7 @@ v_0 = - \sum_{t=0}^\infty \beta^t r(x_t,\mu_t) =  \sum_{t=0}^\infty \beta^t s(\t
 where $\beta \in (0,1)$ is a discount factor. 
 
 ```{note}
-We define $ r(x_t,\mu_t) := - s(\theta_t, \mu_t) $   in order to represent  the government's **maximum** problem in terms of our Python code for solving linear quadratic discounted dynamic programs.
+We define $ r(x_t,\mu_t) := - s(\theta_t, \mu_t) $   in order to represent  the government's **maximization** problem in terms of our Python code for solving linear quadratic discounted dynamic programs.
 In [first LQ control lecture](https://python-intro.quantecon.org/lqcontrol.html) and some other  quantecon lectures, we formulated these as **loss minimization** problems.
 ```
 
@@ -301,7 +301,7 @@ $$
 v_t =  \sum_{j=0}^\infty \beta^j s(\theta_{t+j}, \mu_{t+j}) .
 $$ (eq:contnvalue)
 
-We can represent dependence of $v_t$ on $(\vec \theta, \vec \mu)$ recursively via the difference equation
+We can represent dependence of $v_0$ on $(\vec \theta, \vec \mu)$ recursively via the difference equation
 
 ```{math}
 :label: eq_old8
@@ -457,7 +457,7 @@ and pose an  ordinary discounted dynamic programming problem that in our setting
 In the second stage, we choose an optimal  initial inflation rate $\theta_0$.
 
 Define a feasible set of 
-$\{x_{t+1}, \mu_t \}_{t=0}^\infty$ sequences, with each sequence   belonging to $L^2$:
+$\{x_{t+1}, \mu_t \}_{t=0}^\infty$ sequences, with each sequence belonging to $L^2$:
 
 $$
 \Omega(x_0) =  \{x_{t+1}, \mu_t \}_{t=0}^\infty : x_{t+1}
@@ -472,7 +472,7 @@ The value function
 
 $$
 J(x_0) = \max_{\{x_{t+1}, \mu_t \}_{t=0}^\infty \in \Omega(x_0)}
-- \sum_{t=0}^\infty \beta^t r(x_t,\mu_t)
+\sum_{t=0}^\infty \beta^t s(x_t,\mu_t)
 $$ (eq:subprob1LQ)
 
 satisfies the Bellman equation
@@ -514,7 +514,8 @@ $Q, R, A, B$, and $\beta$.
 
 The value function for a (continuation) Ramsey planner is
 
-$$ v_t = - \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
+$$ 
+v_t = - \begin{bmatrix} 1 & \theta_t \end{bmatrix} \begin{bmatrix} P_{11} & P_{12} \cr P_{21} & P_{22} \end{bmatrix} \begin{bmatrix} 1 \cr \theta_t \end{bmatrix}
 $$
 
 or
@@ -556,7 +557,7 @@ $$
 \theta_{t+1} = d_0 + d_1 \theta_t
 $$ (eq:thetaRamseyrule)
 
-where $\begin{bmatrix} d_0 & d_1 \end{bmatrix}$ is the second row of 
+where $\big[\ d_0 \ \ d_1 \ \big]$ is the second row of 
 the closed-loop matrix $A - BF$ for computed in subproblem 1 above.
 
 The linear quadratic control problem {eq}`eq:subprob1LQ`  satisfies regularity conditions that
@@ -711,13 +712,8 @@ In the present context, a symptom of time inconsistency is that the Ramsey plann
 chooses to make $\mu_t$ a non-constant function of time $t$ despite the fact that, other than
 time itself, there is no other state variable.
 
-
-
 Thus, in our context, time-variation of $\vec \mu$ chosen by a Ramsey planner 
  is the telltale sign of the Ramsey plan's  **time inconsistency**.
-
-
-
 
 
 ## Constrained-to-Constant-Growth-Rate Ramsey Plan
@@ -731,21 +727,13 @@ $$
 \mu_t = \bar \mu, \quad \forall t \geq 0.
 $$
 
-
 We assume that the government knows the perfect foresight outcome implied by equation {eq}`eq_old2` that $\theta_t = \bar  \mu$ when $\mu_t = \bar \mu$ for all $t \geq 0$.
 
 It follows that the value of such a plan is given by $V(\bar \mu)$ defined inequation {eq}`eq:barvdef`.  
 
-
-
 Then our restricted Ramsey planner  chooses $\bar \mu$  to maximize $V(\bar \mu)$.
 
-
-
-
-
 We can express $V(\bar \mu)$ as
-
 
 $$
 V (\bar \mu) = (1-\beta)^{-1} \left[ U (-\alpha \bar \mu) - \frac{c}{2} (\bar \mu)^2 \right]
@@ -874,7 +862,7 @@ Under the  Markov perfect timing protocol
 (compute_lq)=
 ## Outcomes under Three Timing Protocols
 
-We  want to compare outcome sequences  $\{ \theta_t,\mu_t \}$ under three timing protocols associated with 
+We want to compare outcome sequences  $\{ \theta_t,\mu_t \}$ under three timing protocols associated with 
 
   * a standard Ramsey plan with its time-varying $\{ \theta_t,\mu_t \}$ sequences 
   * a Markov perfect equilibrium, with  its time-invariant  $\{ \theta_t,\mu_t \}$ sequences
@@ -908,7 +896,7 @@ The first two equalities follow from the preceding three equations.
 
 We'll illustrate  the third equality that equates $\theta_0^R$ to $ \theta_\infty^R$ with some quantitative examples below.
 
-Proposition 1 draws attention to how   a positive tax distortion parameter $c$ alters  the  optimal rate of deflation that Milton Friedman financed  by imposing a lump sum tax.  
+Proposition 1 draws attention to how a positive tax distortion parameter $c$ alters  the  optimal rate of deflation that Milton Friedman financed  by imposing a lump sum tax.  
 
 We'll compute 
 
@@ -1039,7 +1027,7 @@ Let's create an instance of ChangLQ with the following parameters:
 clq = ChangLQ(β=0.85, c=2)
 ```
 
-The following code  plots value functions for a continuation Ramsey
+The following code plots policy functions for a continuation Ramsey
 planner.
 
 ```{code-cell} ipython3
@@ -1129,7 +1117,7 @@ It follows that under the Ramsey plan  $\{\theta_t\}$ and $\{\mu_t\}$ both conve
 
 The next code  plots the Ramsey planner's value function $J(\theta)$.
 
-We  know  that $J (\theta)$ is maximized at   $\theta^R_0$, the best time $0$  promised inflation rate. 
+We know that $J (\theta)$ is maximized at $\theta^R_0$, the best time $0$  promised inflation rate. 
 
 The figure also plots the limiting value $\theta_\infty^R$, the limiting value of  promised  inflation rate $\theta_t$  under the Ramsey plan as $t \rightarrow +\infty$.
 
@@ -1567,11 +1555,6 @@ For that reason, the Markov perfect equilibrium concept attracts many
 economists.
 
 * A Markov perfect equilibrium plan is constructed to insure that a sequence of  government policymakers who choose sequentially do not want to deviate from it.
-
-
-
-
-
 
 ### Ramsey Plan Strikes Back
 
