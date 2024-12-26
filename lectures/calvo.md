@@ -414,7 +414,7 @@ The models are distinguished by their having  either
 
 The first model describes a **Ramsey plan** chosen by a **Ramsey planner**
 
-The second model describes a **Ramsey plan** chosen by a **Ramsey planner constrained to choose a time-invariant $\mu_t$**
+The second model describes a **Ramsey plan** chosen by a **Ramsey planner constrained to choose a time-invariant $\mu$**
 
 The third model describes a **Markov perfect equilibrium**
 
@@ -1159,7 +1159,11 @@ def plot_value_function(clq):
 plot_value_function(clq)
 ```
 
-In the above graph, notice that $\theta^* < \theta_\infty^R < \theta^{CR} < \theta_0^R < \theta^{MPE} .$
+In the above graph, notice that $\theta^* < \theta_\infty^R < \theta^{CR} < \theta_0^R < \theta^{MPE}$:
+
+ *  $\theta_0^R < \theta^{MPE} $: the initial Ramsey inflation rate exceeds the MPE inflation rate 
+ *  $\theta_\infty^R < \theta^{CR} <\theta_0^R$: the initial Ramsey deflation rate, and the associated tax distortion cost $c \mu_0^2$ is less than the limiting Ramsey inflation rate $\theta_\infty^R$ and the associated tax distortion cost $\mu_\infty^2$  
+ *  $\theta^* < \theta^R_\infty$: the limiting Ramsey inflation rate exceeds the bliss level of inflation
 
 In some subsequent calculations, we'll use our Python code to study how gaps between
 these outcome vary depending on parameters such as the cost parameter $c$ and the discount factor $\beta$. 
@@ -1178,10 +1182,6 @@ We'll use the code to plot $J(\theta)$ and $V(\theta)$ for several values of the
 In all of the graphs below, we disarm the Proposition 1 equivalence results by setting $c >0$.
 
 The graphs reveal interesting relationships among $\theta$'s associated with various timing protocols:
-
- *  $\theta_0^R < \theta^{MPE} $: the initial Ramsey inflation rate exceeds the MPE inflation rate 
- *  $\theta_\infty^R < \theta^{CR} <\theta_0^R$: the initial Ramsey deflation rate, and the associated tax distortion cost $c \mu_0^2$ is less than the limiting Ramsey inflation rate $\theta_\infty^R$ and the associated tax distortion cost $\mu_\infty^2$  
- *  $\theta^* < \theta^R_\infty$: the limiting Ramsey inflation rate exceeds the bliss level of inflation
  *  $J(\theta) \geq V(\theta)$
  *  $J(\theta_\infty^R) = V(\theta_\infty^R)$
 
@@ -1362,10 +1362,6 @@ fig, axes = plt.subplots(1, 3, figsize=(12, 5))
 clqs = [ChangLQ(β=β, c=2) for β in β_values]
 plt_clqs(clqs, axes)
 ```
-
-
-
-
 
 The horizontal dotted lines indicate values 
  $V(\mu_\infty^R), V(\mu^{CR}), V(\mu^{MPE}) $ of time-invariant money
