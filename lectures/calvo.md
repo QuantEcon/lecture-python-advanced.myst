@@ -710,10 +710,8 @@ This is a concise way of characterizing the time inconsistency of a Ramsey plan.
 In the present context, a symptom of time inconsistency is that the Ramsey plannner 
 chooses to make $\mu_t$ a non-constant function of time $t$ despite the fact that, other than
 time itself, there is no other state variable.
-```{note}
-Macroeconomists might say that in our model there is no ``natural'' state variable other than
-time.
-```
+
+
 
 Thus, in our context, time-variation of $\vec \mu$ chosen by a Ramsey planner 
  is the telltale sign of the Ramsey plan's  **time inconsistency**.
@@ -725,7 +723,7 @@ Thus, in our context, time-variation of $\vec \mu$ chosen by a Ramsey planner
 ## Constrained-to-Constant-Growth-Rate Ramsey Plan
 
 
-We use brute forceTo create a government plan that **is** time consistent, i.e., that is a time-invariant function of time.
+We can use brute force to create a government plan that **is** time consistent, i.e., that is a time-invariant function of time.
 
 We simply constrain  a planner to   choose a time-invariant money growth rate $\bar \mu$ so that 
 
@@ -1344,24 +1342,31 @@ The figure uses colored arrows to indicate locations of $\theta^*, \theta_\infty
 \theta^{CR}, \theta_0^R$, and $\theta^{MPE}$, ordered as they are from 
 left to right, on the $\theta$ axis. 
    
+
+```{code-cell} ipython3
+:tags: [hide-input]
+fig, ax = plt.subplots()
+plt_clqs(ChangLQ(β=0.8, c=2), ax)
+```
+
+In the above figure, notice that  
+
    * the orange $J$ value function lies above the blue $V$ value function except at $\theta = \theta_\infty^R$
    * the maximizer $\theta_0^R$  of $J(\theta)$   occurs at the top of the orange curve
    * the maximizer $\theta^{CR}$ of $V(\theta)$ occurs at the top of the blue curve
    * the "timeless perspective"  inflation and money creation  rate $\theta_\infty^R$ occurs where $J(\theta)$ is tangent to $V(\theta)$
    * the Markov perfect inflation and money creation  rate $\theta^{MPE}$ exceeds $\theta_0^R$.
+   * the value $V(\theta^{MPE})$ of the Markov perfect rate of money creation rate $\theta^{MPE}$ is less than the value $V(\theta_\infty^R)$ of the worst continuation Ramsey plan
+   *  the continuation  value $J(\theta^{MPE})$ of the Markov perfect rate of money creation rate $\theta^{MPE}$ is greater  than the value $V(\theta_\infty^R)$ and of the continuation value  $J(\theta_\infty^R)$ of the worst continuation Ramsey plan
 
 
-
-```{code-cell} ipython3
-fig, ax = plt.subplots()
-plt_clqs(ChangLQ(β=0.8, c=2), ax)
-```
 
 ## Perturbing Model Parameters
 
-To start, let's watch  how outcomes change when we assume   different values of  $\beta$ 
+Now  let's present some graphs that teach us   how outcomes change when we assume   different values of  $\beta$ 
 
 ```{code-cell} ipython3
+:tags: [hide-input]
 # Compare different β values
 fig, axes = plt.subplots(1, 3, figsize=(12, 5))
 β_values = [0.7, 0.8, 0.99]
@@ -1370,11 +1375,9 @@ clqs = [ChangLQ(β=β, c=2) for β in β_values]
 plt_clqs(clqs, axes)
 ```
 
-```{code-cell} ipython3
-generate_table(clqs, dig=3)
-```
 
-We summarize outcomes in the above graphs and the tables below. 
+
+
 
 The horizontal dotted lines indicate values 
  $V(\mu_\infty^R), V(\mu^{CR}), V(\mu^{MPE}) $ of time-invariant money
@@ -1396,7 +1399,12 @@ $$
 \end{aligned}
 $$
 
+The following table summarizes some outcomes.
 
+```{code-cell} ipython3
+:tags: [hide-input]
+generate_table(clqs, dig=3)
+```
 
  But let's see what happens when we change $c$.
 
@@ -1549,28 +1557,10 @@ in interesting ways.
 
 We leave it to the reader to explore consequences of other constellations of parameter values.
 
-### Time Inconsistency of Ramsey Plan
-
-The variation over time in $\vec \mu$ chosen by the Ramsey planner
-is a symptom of time inconsistency.
-
-- The Ramsey planner reaps immediate benefits from promising lower
-  inflation later to be achieved by costly distorting taxes.
-- These benefits are intermediated by reductions in expected inflation
-  that precede the  reductions in money creation rates that rationalize them, as indicated by
-  equation {eq}`eq_old3`.
-- A government authority offered the opportunity to ignore effects on
-  past utilities and to reoptimize at date $t \geq 1$ would, if allowed, want
-  to deviate from a Ramsey plan.
-
-```{note}
-A constrained-to-constant-$\mu$  Ramsey plan  is  time consistent by construction. So is a Markov perfect plan.
-```
 
 ### Implausibility of Ramsey Plan 
 
-Many economists regard a time inconsistent plan as implausible because they question the plausibility of  timing protocol in 
-which a plan for setting a sequence of policy variables is chosen once-and-for-all at time $0$.
+Many economists regard a time inconsistent plan as implausible because they question the plausibility of  timing protocol in which a plan for setting a sequence of policy variables is chosen once-and-for-all at time $0$.
 
 
 For that reason, the Markov perfect equilibrium concept attracts many
@@ -1578,47 +1568,8 @@ economists.
 
 * A Markov perfect equilibrium plan is constructed to insure that a sequence of  government policymakers who choose sequentially do not want to deviate from it.
 
-The  property of a Markov perfect equilibrium that there is *no incentive to deviate from the plan*   makes it  attractive.
 
 
-## Comparison of Equilibrium Values
-
-We have computed plans for
-
-- an ordinary (unrestricted) Ramsey planner who chooses a sequence
-  $\{\mu_t\}_{t=0}^\infty$ at time $0$
-- a Ramsey planner restricted to choose a constant $\mu$ for all
-  $t \geq 0$
-- a Markov perfect sequence of governments
-
-Below we compare equilibrium time zero values for these three.
-
-We confirm that the value delivered by the unrestricted Ramsey planner
-exceeds the value delivered by the restricted Ramsey planner which in
-turn exceeds the value delivered by the Markov perfect sequence of
-governments.
-
-```{code-cell} ipython3
-clq.J_series[0]
-```
-
-```{code-cell} ipython3
-clq.J_CR
-```
-
-```{code-cell} ipython3
-clq.J_MPE
-```
-
-## Digression on Timeless Perspective
-
-Our calculations have confirmed that  $ \vec \mu^R, \vec \theta^R, \vec v^R $ are each monotone sequences that are bounded below and converge from above  to limiting values.  
-
-Some authors are fond of focusing only on these limiting values.
-
-They justify that by saying that they are taking a **timeless perspective** that ignores  the transient movements in $ \vec \mu^R, \vec \theta^R, \vec v^R $ that are destined  eventually to fade away as $\theta_t$ described by Ramsey plan system {eq}`eq_old9` converges from above.  
-
-   * the timeless perspective pretends that  Ramsey plan was actually solved long ago, and that we are stuck with it.  
 
 
 
