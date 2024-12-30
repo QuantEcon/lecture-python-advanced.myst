@@ -17,6 +17,11 @@ kernelspec:
 
 ## Overview 
 
+Optimal transport theory is studies how one (marginal) probabilty measure can be related to another (marginal) probability measure in an ideal way.  
+
+The output of such a theory is a **coupling** of the two probability measures, i.e., a joint probabilty
+measure having those two  marginal probability measures.  
+
 This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodo Wang,
 and Zhenyuan Zhang  {cite}`boerma2023composite` used optimal transport theory to formulate and solve an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.  
 
@@ -25,7 +30,7 @@ that costs of mismatch can be concave.
 
 That means that it possible that equilibrium there is neither **positive assortive** nor **negative assorting**  matching, an outcome that   {cite}`boerma2023composite` call **composite assortive** matching.
 
-In such an equilibrium with composite matching, for example, identical workers can sort into different occupations, some positively and some negatively.  
+For example, in  an equilibrium with composite matching,  identical **workers** can sort into different **occupations**, some positively and some negatively.  
 
  {cite}`boerma2023composite`
 show how this can generate distinct distributions  of labor earnings  within and across occupations.  
@@ -33,9 +38,9 @@ show how this can generate distinct distributions  of labor earnings  within and
 
 This lecture describes the {cite}`boerma2023composite` model and  presents  Python code for computing equilibria.
 
-It then applies the code to their model of labor markets. 
+The lecture  applies the code to the {cite}`boerma2023composite` model of labor markets. 
 
-As with our earlier lecture on optimal transport (https://python.quantecon.org/opt_transport.html), a key tool will be **linear programming**.
+As with an earlier QuantEcon lecture on optimal transport (https://python.quantecon.org/opt_transport.html), a key tool will be **linear programming**.
 
 
 
