@@ -167,7 +167,7 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">16.1. Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">16.1. Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">16.2. Setup</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characterization-of-primal-solution">16.3. Characterization of primal solution</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-properties-of-an-optimal-solution">16.3.1. Three properties of an optimal solution</a></li>
@@ -184,11 +184,11 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">16.5. Examples</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">16.5.1. Example 1</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">16.5.2. Example 2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3-from-the-paper">16.5.3. Example 3 : from the paper</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">16.5.3. Example 3</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dual-solution">16.6. Dual Solution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#empirical-application">16.7. Empirical application</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application">16.7. Application</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">16.7.1. Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">16.7.2. Model</a></li>
 </ul>
@@ -251,37 +251,29 @@
                         
   <section class="tex2jax_ignore mathjax_ignore" id="composite-sorting">
 <h1><span class="section-number">16. </span>Composite Sorting<a class="headerlink" href="#composite-sorting" title="Permalink to this heading">#</a></h1>
-<section id="introduction">
-<h2><span class="section-number">16.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
-<p>This lecture presents  Python code for solving <strong>composite sorting</strong> problems of the kind
-studied in  <em>Composite Sorting</em> by Job Boerma, Aleh Tsyvinski, Ruodo Wang,
-and Zhenyuan Zhang  <span id="id1">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, National Bureau of Economic Research, 2023.">Boerma <em>et al.</em>, 2023</a>]</span>.</p>
-<p>In this lecture, we will use the following imports</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">linprog</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
-
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">patches</span>
-<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">MaxNLocator</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
-<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">Normalize</span>
-</pre></div>
-</div>
-</div>
-</div>
+<section id="overview">
+<h2><span class="section-number">16.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>Optimal transport theory is studies how one (marginal) probabilty measure can be related to another (marginal) probability measure in an ideal way.</p>
+<p>The output of such a theory is a <strong>coupling</strong> of the two probability measures, i.e., a joint probabilty
+measure having those two  marginal probability measures.</p>
+<p>This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodo Wang,
+and Zhenyuan Zhang  <span id="id1">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> used optimal transport theory to formulate and solve an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.</p>
+<p>Production technologies allow firms to affect  shape costs of mismatch with the consequence
+that costs of mismatch can be concave.</p>
+<p>That means that it possible that equilibrium there is neither <strong>positive assortive</strong> nor <strong>negative assorting</strong>  matching, an outcome that   <span id="id2">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> call <strong>composite assortive</strong> matching.</p>
+<p>For example, in  an equilibrium with composite matching,  identical <strong>workers</strong> can sort into different <strong>occupations</strong>, some positively and some negatively.</p>
+<p><span id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>
+show how this can generate distinct distributions  of labor earnings  within and across occupations.</p>
+<p>This lecture describes the <span id="id4">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model and  presents  Python code for computing equilibria.</p>
+<p>The lecture  applies the code to the <span id="id5">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model of labor markets.</p>
+<p>As with an earlier QuantEcon lecture on optimal transport (<a class="reference external" href="https://python.quantecon.org/opt_transport.html">https://python.quantecon.org/opt_transport.html</a>), a key tool will be <strong>linear programming</strong>.</p>
 </section>
 <section id="setup">
 <h2><span class="section-number">16.2. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are finite sets that represent two distinct types of people to be matched.</p>
 <p>For each <span class="math notranslate nohighlight">\(x \in X,\)</span> let a positive integer <span class="math notranslate nohighlight">\(n_x\)</span> be the number  of agents of type <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <p>Similarly, let a positive integer <span class="math notranslate nohighlight">\(m_y\)</span> be the agents of agents of type <span class="math notranslate nohighlight">\(y \in Y\)</span>.</p>
-<p>We will refer to these two measures as <em>marginals</em>.</p>
+<p>We refer to these two measures as <em>marginals</em>.</p>
 <p>We assume that</p>
 <div class="math notranslate nohighlight">
 \[
@@ -298,13 +290,13 @@ and Zhenyuan Zhang  <span id="id1">[<a class="reference internal" href="zreferen
 \end{aligned}
 \end{split}\]</div>
 <p>Given our discreteness  assumptions about <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span>, the problem admits an integer solution <span class="math notranslate nohighlight">\(\mu \in \mathbb{Z}_+^{X \times Y}\)</span>, i.e. <span class="math notranslate nohighlight">\(\mu_{xy}\)</span> is a non-negative integer for each <span class="math notranslate nohighlight">\(x\in X, y\in Y\)</span>.</p>
-<p>In this notebook, we will focus on integer solutions of the problem.</p>
-<p>Two points on the integer assumption are worth mentioning:</p>
+<p>We will study integer solutions.</p>
+<p>Two points about restricting ourselves to integer solutions are worth mentioning:</p>
 <ul class="simple">
 <li><p>it is without loss of generality for computational purposes, since every problem with float marginals can be transformed into an equivalent problem with integer marginals;</p></li>
-<li><p>arguments below work for arbitrary real marginals from a mathematical standpoint, but some of the implementations will fail to work with float arithmetic.</p></li>
+<li><p>although the mathematical structure that we present actually   wors for arbitrary real marginals, some of our Python  implementations would  fail to work with float arithmetic.</p></li>
 </ul>
-<p>Our  focus in this notebook is a specific instance of the optimal transport problem:</p>
+<p>We focus on  a specific instance of an  optimal transport problem:</p>
 <p>We assume that <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are finite subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and that the cost function satisfies <span class="math notranslate nohighlight">\(c_{xy} = h(|x - y|)\)</span> for all <span class="math notranslate nohighlight">\(x,y \in \mathbb{R},\)</span> for an <span class="math notranslate nohighlight">\(h: \mathbb{R}_+ \rightarrow \mathbb{R}_+\)</span> that  is <strong>strictly concave</strong> and <strong>strictly increasing</strong> and <strong>grounded</strong> (i.e., <span class="math notranslate nohighlight">\(h(0)=0\)</span>).</p>
 <p>Such an  <span class="math notranslate nohighlight">\(h\)</span> satisfies the following</p>
 <p><strong>Lemma.</strong> Let <span class="math notranslate nohighlight">\(h: \mathbb{R}_+ \rightarrow \mathbb{R}_+\)</span> be <strong>strictly concave</strong> and <strong>grounded</strong>. Then <span class="math notranslate nohighlight">\(h\)</span> is strictly subadditive, i.e. for all <span class="math notranslate nohighlight">\(x,y\in \mathbb{R}_+, 0&lt; x &lt; y,\)</span> we have</p>
@@ -324,7 +316,27 @@ h(x+y) &lt; h(x) + h(y)
 &amp; \sum_{y \in Y} \mu_{xy} = m_y 
 \end{aligned}
 \end{split}\]</div>
-<p>The following class takes as inputs sets of types <span class="math notranslate nohighlight">\(X,Y \subset \mathbb{R},\)</span> marginals <span class="math notranslate nohighlight">\(n, m \)</span> with positive integer entries such that <span class="math notranslate nohighlight">\(\sum_{x \in X} n_x = \sum_{y \in Y} m_y \)</span> and cost parameter <span class="math notranslate nohighlight">\(\zeta&gt;1\)</span>.</p>
+<p>Let’s start setting up some Python code.</p>
+<p>We  use the following imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">linprog</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">patches</span>
+<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">MaxNLocator</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">Normalize</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following Python class takes as inputs sets of types <span class="math notranslate nohighlight">\(X,Y \subset \mathbb{R},\)</span> marginals <span class="math notranslate nohighlight">\(n, m \)</span> with positive integer entries such that <span class="math notranslate nohighlight">\(\sum_{x \in X} n_x = \sum_{y \in Y} m_y \)</span> and cost parameter <span class="math notranslate nohighlight">\(\zeta&gt;1\)</span>.</p>
 <p>The cost function is stored as an <span class="math notranslate nohighlight">\(|X| \times |Y|\)</span> matrix with <span class="math notranslate nohighlight">\((x,y)\)</span>-entry equal to <span class="math notranslate nohighlight">\(|x-y|^{1/\zeta},\)</span> i.e., the cost of matching an agent of type <span class="math notranslate nohighlight">\(x \in X\)</span> with an agent of type <span class="math notranslate nohighlight">\(y \in Y.\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1015,7 +1027,7 @@ Section of the Value function of the layer:
 </div>
 </div>
 <p>Having computed the value function, we can proceed to compute the optimal matching as the <em>policy</em> that attains the value function that solves the  Bellman equation (<em>policy evaluation</em>).</p>
-<p>Specifically, we start from agent <span class="math notranslate nohighlight">\(1\)</span> and match it with the <span class="math notranslate nohighlight">\(k\)</span> that achieves the minimum in the equation associated with <span class="math notranslate nohighlight">\(V_{1,2N_\ell};\)</span></p>
+<p>We start from agent <span class="math notranslate nohighlight">\(1\)</span> and match it with the <span class="math notranslate nohighlight">\(k\)</span> that achieves the minimum in the equation associated with <span class="math notranslate nohighlight">\(V_{1,2N_\ell}.\)</span></p>
 <p>Then we store  segments <span class="math notranslate nohighlight">\([2,k-1]\)</span> and <span class="math notranslate nohighlight">\([k+1,2N_\ell]\)</span> (if not empty).</p>
 <p>In general, given a segment <span class="math notranslate nohighlight">\([i,j],\)</span> we match <span class="math notranslate nohighlight">\(i\)</span> with <span class="math notranslate nohighlight">\(k\)</span> that achieves the minimum in the equation associated with  <span class="math notranslate nohighlight">\(V_{ij}\)</span> and store the segments <span class="math notranslate nohighlight">\([i,k-1]\)</span> and <span class="math notranslate nohighlight">\([k+1,j]\)</span> (if not empty).</p>
 <p>The algorithm proceeds until there are no segments left.</p>
@@ -1137,8 +1149,8 @@ Value of the layer (scaled by the mass = 1): 24.764959193288938
 </div>
 <section id="solving-a-layer-in-a-smarter-way">
 <h4><span class="section-number">16.3.2.1. </span>Solving a layer in a smarter way<a class="headerlink" href="#solving-a-layer-in-a-smarter-way" title="Permalink to this heading">#</a></h4>
-<p>We will now present two key results in the context of OT with concave type costs.</p>
-<p>We refer <span id="id2">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, National Bureau of Economic Research, 2023.">Boerma <em>et al.</em>, 2023</a>]</span> and <span id="id3">[<a class="reference internal" href="zreferences.html#id4" title="Julie Delon, Julien Salomon, and Andrei Sobolevski. Minimum-weight perfect matching for non-intrinsic distances on the line. arXiv preprint arXiv:1102.1558, 2011.">Delon <em>et al.</em>, 2011</a>]</span> for proofs.</p>
+<p>We  now present two key results in the context of OT with concave type costs.</p>
+<p>We refer <span id="id6">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> and <span id="id7">[<a class="reference internal" href="zreferences.html#id4" title="Julie Delon, Julien Salomon, and Andrei Sobolevski. Minimum-weight perfect matching for non-intrinsic distances on the line. arXiv preprint arXiv:1102.1558, 2011.">Delon <em>et al.</em>, 2011</a>]</span> for proofs.</p>
 <p>Consider the problem faced within a layer, i.e., types from <span class="math notranslate nohighlight">\(Y \sqcup X\)</span></p>
 <div class="math notranslate nohighlight">
 \[ 
@@ -1230,7 +1242,7 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 </div>
 </div>
 </div>
-<p>Thanks to the results in this section, we can actually compute the optimal matching within the layer cuncurrently to the computation of the value function, rather than afterwards.</p>
+<p>We can actually compute the optimal matching within the layer simultaneously with computing the value function, rather than sequentially.</p>
 <p>The key idea is that, if at some step of the computation of the values the left branch of the minimum above achieves the minimum, say <span class="math notranslate nohighlight">\(V_{ij}= c_{ij} + V_{i+1,j-1},\)</span> then <span class="math notranslate nohighlight">\((i,j)\)</span> are optimally matched on <span class="math notranslate nohighlight">\([i,j]\)</span> and by the theorem above we get that a matching on <span class="math notranslate nohighlight">\([i+1,j-1]\)</span> which achieves <span class="math notranslate nohighlight">\( V_{i+1,j-1}\)</span> belongs to an optimal matching on the whole layer (since it is covered by the arc <span class="math notranslate nohighlight">\((i,j)\)</span> in <span class="math notranslate nohighlight">\([i,j]\)</span>).</p>
 <p>We can therefore proceed as follows</p>
 <p>We initialize an empty matching and a list with all the agents in the layer (representing the agents which are not matched yet).</p>
@@ -1335,7 +1347,7 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 <h2><span class="section-number">16.4. </span>Solving primal problem<a class="headerlink" href="#solving-primal-problem" title="Permalink to this heading">#</a></h2>
 <p>The following method assembles  our components in order to solve the primal problem.</p>
 <p>First, if matches are perfect pairs, we store the on-diagonal matching and create an off-diagonal instance with the residual marginals.</p>
-<p>Then, we compute the set of layers of the residual distributions.</p>
+<p>Then we compute the set of layers of the residual distributions.</p>
 <p>Finally, we solve each layer and put together  matchings within each layer with the on-diagonal matchings.</p>
 <p>We then return the full matching, the off-diagonal matching, and the off-diagonal instance.</p>
 <div class="cell docutils container">
@@ -1569,7 +1581,7 @@ Value (DSS): 143.45490363125705
 <h2><span class="section-number">16.5. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
 <section id="example-1">
 <h3><span class="section-number">16.5.1. </span>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h3>
-<p>In this notebook we study optimal transport problems on the real line with cost <span class="math notranslate nohighlight">\(c(x,y)= h(|x-y|)\)</span> for a strictly concave and increasing function <span class="math notranslate nohighlight">\(h: \mathbb{R}_+ \rightarrow \mathbb{R}_+.\)</span></p>
+<p>We study optimal transport problems on the real line with cost <span class="math notranslate nohighlight">\(c(x,y)= h(|x-y|)\)</span> for a strictly concave and increasing function <span class="math notranslate nohighlight">\(h: \mathbb{R}_+ \rightarrow \mathbb{R}_+.\)</span></p>
 <p>The outcome  is called <em>composite sorting</em>.</p>
 <p>Here, we  will focus on <span class="math notranslate nohighlight">\(c(x,y)=|x-y|^{\frac{1}{\zeta}}\)</span> for <span class="math notranslate nohighlight">\(\zeta&gt;1\)</span></p>
 <p>To appreciate  differences with <em>positive assortative matching</em> (PAM) note that the latter is induced by a cost of the form <span class="math notranslate nohighlight">\( h(x-y)\)</span> for some strictly convex <span class="math notranslate nohighlight">\(h: \mathbb{R} \rightarrow \mathbb{R}_+.\)</span></p>
@@ -1677,7 +1689,7 @@ Value (DSS): 143.45490363125705
 <img alt="_images/7aee87acf03be858b26b895b5cd91766c2818a25fcac7930c2026fa3716189a8.png" src="_images/7aee87acf03be858b26b895b5cd91766c2818a25fcac7930c2026fa3716189a8.png" />
 </div>
 </div>
-<p>Finally, notice that the the <strong>Monge problem</strong>  cost function <span class="math notranslate nohighlight">\(|x-y|\)</span>  equals the limit of composite sorting cost <span class="math notranslate nohighlight">\(|x-y|^{1/\zeta}\)</span> as <span class="math notranslate nohighlight">\(\zeta \downarrow 1\)</span> and also  the limit of <span class="math notranslate nohighlight">\(|x-y|^p\)</span> as <span class="math notranslate nohighlight">\(p \downarrow 1.\)</span></p>
+<p>Finally, notice that the  <strong>Monge problem</strong>  cost function <span class="math notranslate nohighlight">\(|x-y|\)</span>  equals the limit of the  composite sorting cost <span class="math notranslate nohighlight">\(|x-y|^{1/\zeta}\)</span> as <span class="math notranslate nohighlight">\(\zeta \downarrow 1\)</span> and also  the limit of <span class="math notranslate nohighlight">\(|x-y|^p\)</span> as <span class="math notranslate nohighlight">\(p \downarrow 1.\)</span></p>
 <p>Evidently, the Monge problem is solved by both the PAM and the composite sorting assignment that arises for <span class="math notranslate nohighlight">\(\zeta \downarrow 1.\)</span></p>
 <p>In the following example, the Monge cost of the composite sorting assignment equals the Monge cost of PAM.</p>
 <p>Consequently, it is optimal for the Monge problem.</p>
@@ -1782,9 +1794,9 @@ Monge cost of PAM:
 </div>
 </div>
 </section>
-<section id="example-3-from-the-paper">
-<h3><span class="section-number">16.5.3. </span>Example 3 : from the paper<a class="headerlink" href="#example-3-from-the-paper" title="Permalink to this heading">#</a></h3>
-<p>Boerma et al. provide the following  example.</p>
+<section id="example-3">
+<h3><span class="section-number">16.5.3. </span>Example 3<a class="headerlink" href="#example-3" title="Permalink to this heading">#</a></h3>
+<p><span id="id8">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> provide the following  example.</p>
 <p>There are four agents per side and three types per side (so the problem is not unitary, as opposed to the examples above).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1834,7 +1846,7 @@ Monge cost of PAM:
 </section>
 <section id="dual-solution">
 <h2><span class="section-number">16.6. </span>Dual Solution<a class="headerlink" href="#dual-solution" title="Permalink to this heading">#</a></h2>
-<p>Let us recall our formulation</p>
+<p>Let’s recall the formulation</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -1853,7 +1865,9 @@ V_D = \max_{\phi,\psi}&amp; \sum_{x \in X }n_x \phi_x + \sum_{y \in Y} m_y \psi_
 \end{split}\]</div>
 <p>where <span class="math notranslate nohighlight">\((\phi , \psi) \)</span> are dual variables, which can be interpreted as shadow cost of agents in <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, respectively.</p>
 <p>Since the dual is feasible and bounded,  <span class="math notranslate nohighlight">\(V_P = V_D\)</span> (<em>strong duality</em> prevails).</p>
-<p>Assume now that <span class="math notranslate nohighlight">\(y_{xy} = \alpha_x + \gamma_y - c_{xy}\)</span> is the output generated by matching <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y.\)</span> It includes the sum of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> specific amenities/outputs minus the cost <span class="math notranslate nohighlight">\(c_{xy}.\)</span> Then, we have can formulate the following problem and its dual</p>
+<p>Assume now that <span class="math notranslate nohighlight">\(y_{xy} = \alpha_x + \gamma_y - c_{xy}\)</span> is the output generated by matching <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y.\)</span></p>
+<p>It includes the sum of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> specific amenities/outputs minus the cost <span class="math notranslate nohighlight">\(c_{xy}.\)</span></p>
+<p>Then we  can formulate the following problem and its dual</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
  \begin{aligned}
@@ -1873,7 +1887,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <p>The values are related by <span class="math notranslate nohighlight">\(W_P =  \sum_{x \in X}n_x \alpha_x +  \sum_{y \in Y}m_y \gamma_y - V_P.\)</span></p>
 <p>The dual solutions of <span class="math notranslate nohighlight">\(V_D\)</span> and <span class="math notranslate nohighlight">\(W_D\)</span> are related by <span class="math notranslate nohighlight">\(u_x = \alpha_x - \phi_x\)</span> and <span class="math notranslate nohighlight">\(v_y = \gamma_y - \psi_y.\)</span></p>
 <p>The dual solution <span class="math notranslate nohighlight">\((u,v)\)</span> of <span class="math notranslate nohighlight">\(W_D\)</span> can be interpreted as equilibrium utilities of the agents, which include the individual specific amenities and equilibrium shadow costs.</p>
-<p><span id="id4">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, National Bureau of Economic Research, 2023.">Boerma <em>et al.</em>, 2023</a>]</span> propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.</p>
+<p><span id="id9">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.</p>
 <p>Let’s generate an instance and compute the optimal matching.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2116,7 +2130,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 </div>
 <p>We proceed to describe and implement the algorithm to compute the dual solution.</p>
 <p>As already mentioned, the algorithm starts from the matched pairs <span class="math notranslate nohighlight">\((x_0,y_0)\)</span> with no subpairs and assigns the (temporary) values <span class="math notranslate nohighlight">\(\psi_{x_0} = c_{x_0 y_0}\)</span> and <span class="math notranslate nohighlight">\(\psi_{y_0} = 0,\)</span> i.e. the <span class="math notranslate nohighlight">\(x\)</span> type sustains the whole cost of matching.</p>
-<p>Then, the algorithm proceeds iterarively by processing any matched pair whose subpairs have already been processed.</p>
+<p>The algorithm then proceeds sequentially  by processing any matched pair whose subpairs have already been processed.</p>
 <p>After picking any such matched pair <span class="math notranslate nohighlight">\((x_0,y_0)\)</span>, the dual variables already computed for the processed subpairs need to be made “comparable”.</p>
 <p>Indeed, for any subpair <span class="math notranslate nohighlight">\((x_1,y_1)\)</span> of <span class="math notranslate nohighlight">\((x_0,y_0)\)</span>, the dual variables of all the types between the <span class="math notranslate nohighlight">\(x_1\)</span> and <span class="math notranslate nohighlight">\(y_1\)</span> satisfy dual feasibility and complementary slackness <em>locally</em>, i.e. <span class="math notranslate nohighlight">\(\phi_x + \psi_y \leq c_{xy}\)</span> with equality if <span class="math notranslate nohighlight">\((x,y)\)</span> is a matched pair for all types <span class="math notranslate nohighlight">\(x,y\)</span> between  <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0.\)</span></p>
 <p>But dual feasibility is not satisfied globally in general, for instance it might not be satisfied for two subpairs <span class="math notranslate nohighlight">\((x_1,y_1)\)</span> and  <span class="math notranslate nohighlight">\((x_2,y_2)\)</span> of <span class="math notranslate nohighlight">\((x_0,y_0).\)</span></p>
@@ -2368,15 +2382,17 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 </section>
-<section id="empirical-application">
-<h2><span class="section-number">16.7. </span>Empirical application<a class="headerlink" href="#empirical-application" title="Permalink to this heading">#</a></h2>
+<section id="application">
+<h2><span class="section-number">16.7. </span>Application<a class="headerlink" href="#application" title="Permalink to this heading">#</a></h2>
 <section id="data">
 <h3><span class="section-number">16.7.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h3>
-<p>We now replicate the empirical analysis carried out by <span id="id5">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, National Bureau of Economic Research, 2023.">Boerma <em>et al.</em>, 2023</a>]</span>.</p>
+<p>We now replicate the empirical analysis carried out by <span id="id10">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>.</p>
 <p>The dataset is obtained from the American Community Survey and contains individual level data on income, age and occupation.</p>
 <p>The occupation of each individual consists of a Standard Occupational Classification (SOC) code.</p>
 <p>There are 497 codes in total.</p>
-<p>We consider only employed (civilian) individuals with ages between 25 and 60 from 2010 to 2017. To visualize log-wage dispersion, we group the individuals by occupation and compute the mean and standard deviation of the wages within each occupation. Then, we sort the occupations by average log-earnings within each occupation.</p>
+<p>We consider only employed (civilian) individuals with ages between 25 and 60 from 2010 to 2017.</p>
+<p>To visualize log-wage dispersion, we group the individuals by occupation and compute the mean and standard deviation of the wages within each occupation.</p>
+<p>Then we sort  occupations by average log-earnings within each occupation.</p>
 <p>The resulting dataset is included in the dataset <code class="docutils literal notranslate"><span class="pre">acs_data_summary.csv</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2420,10 +2436,10 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<figure class="align-default" id="id6">
+<figure class="align-default" id="id11">
 <img alt="_images/138fa8c86135daed058ae556cb6c69b9780dccc6dae62ecdf38b087acf83cbd0.png" src="_images/138fa8c86135daed058ae556cb6c69b9780dccc6dae62ecdf38b087acf83cbd0.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data. The size of the marker is proportional to the number of individuals in the occupation.</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data. The size of the marker is proportional to the number of individuals in the occupation.</span><a class="headerlink" href="#id11" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -2459,10 +2475,10 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<figure class="align-default" id="id7">
+<figure class="align-default" id="id12">
 <img alt="_images/ca4abb66441ba706f4ce30c50442f91e4eda1befc656e52a2c7f12a8db02785a.png" src="_images/ca4abb66441ba706f4ce30c50442f91e4eda1befc656e52a2c7f12a8db02785a.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data.</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data.</span><a class="headerlink" href="#id12" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -2612,7 +2628,8 @@ Value of primal solution:  9.03369035213102
 <img alt="_images/c7e4fea982375eea52e81a73a5c62d31a150442d5a6db372b3e31244d155f725.png" src="_images/c7e4fea982375eea52e81a73a5c62d31a150442d5a6db372b3e31244d155f725.png" />
 </div>
 </div>
-<p>From the optimal matching we compute and visualize the hierarchies. Then, we find the dual solution <span class="math notranslate nohighlight">\((\phi,\psi)\)</span> and compute the wages as <span class="math notranslate nohighlight">\(w_x = g(x) - \phi_x,\)</span> assuming that the type-specific productivity of type <span class="math notranslate nohighlight">\(x\)</span> is <span class="math notranslate nohighlight">\(g(x) = x\)</span>.</p>
+<p>From the optimal matching we compute and visualize the hierarchies.</p>
+<p>We then find the dual solution <span class="math notranslate nohighlight">\((\phi,\psi)\)</span> and compute the wages as <span class="math notranslate nohighlight">\(w_x = g(x) - \phi_x,\)</span> assuming that the type-specific productivity of type <span class="math notranslate nohighlight">\(x\)</span> is <span class="math notranslate nohighlight">\(g(x) = x\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find subpairs and plot hierarchies</span>
@@ -2652,7 +2669,7 @@ Value of primal solution:  825.8167029184157
 </div>
 </div>
 </div>
-<p>Let us plot the average wages and wage dispersion generated by the model.</p>
+<p>Let’s plot  average wages and wage dispersion generated by the model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_wages_application</span><span class="p">(</span><span class="n">wages</span><span class="p">):</span>
