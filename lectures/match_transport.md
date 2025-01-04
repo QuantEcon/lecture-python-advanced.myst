@@ -15,30 +15,35 @@ kernelspec:
 
 +++
 
-## Introduction
+## Overview 
 
-This lecture presents  Python code for solving **composite sorting** problems of the kind
-studied in  *Composite Sorting* by Job Boerma, Aleh Tsyvinski, Ruodo Wang,
-and Zhenyuan Zhang  {cite}`boerma2023composite`.
+Optimal transport theory is studies how one (marginal) probabilty measure can be related to another (marginal) probability measure in an ideal way.  
 
-In this lecture, we will use the following imports
+The output of such a theory is a **coupling** of the two probability measures, i.e., a joint probabilty
+measure having those two  marginal probability measures.  
 
-```{code-cell} ipython3
-import numpy as np
-from scipy.optimize import linprog
-from itertools import chain
-import pandas as pd
-from collections import namedtuple
+This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodo Wang,
+and Zhenyuan Zhang  {cite}`boerma2023composite` used optimal transport theory to formulate and solve an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.  
+
+Production technologies allow firms to affect  shape costs of mismatch with the consequence
+that costs of mismatch can be concave.   
+
+That means that it possible that equilibrium there is neither **positive assortive** nor **negative assorting**  matching, an outcome that   {cite}`boerma2023composite` call **composite assortive** matching.
+
+For example, in  an equilibrium with composite matching,  identical **workers** can sort into different **occupations**, some positively and some negatively.  
+
+ {cite}`boerma2023composite`
+show how this can generate distinct distributions  of labor earnings  within and across occupations.  
 
 
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-from matplotlib.ticker import MaxNLocator
-from matplotlib import cm
-from matplotlib.colors import Normalize
-```
+This lecture describes the {cite}`boerma2023composite` model and  presents  Python code for computing equilibria.
 
-+++ {"user_expressions": []}
+The lecture  applies the code to the {cite}`boerma2023composite` model of labor markets. 
+
+As with an earlier QuantEcon lecture on optimal transport (https://python.quantecon.org/opt_transport.html), a key tool will be **linear programming**.
+
+
+
 
 ## Setup
 
@@ -49,7 +54,7 @@ For each $x \in X,$ let a positive integer $n_x$ be the number  of agents of typ
 
 Similarly, let a positive integer $m_y$ be the agents of agents of type $y \in Y$. 
 
-We will refer to these two measures as *marginals*.
+We refer to these two measures as *marginals*.
 
 We assume that 
 
@@ -73,15 +78,15 @@ $$
 Given our discreteness  assumptions about $n$ and $m$, the problem admits an integer solution $\mu \in \mathbb{Z}_+^{X \times Y}$, i.e. $\mu_{xy}$ is a non-negative integer for each $x\in X, y\in Y$.
 
 
-In this notebook, we will focus on integer solutions of the problem.
+We will study integer solutions.
 
-Two points on the integer assumption are worth mentioning: 
+Two points about restricting ourselves to integer solutions are worth mentioning: 
 
  * it is without loss of generality for computational purposes, since every problem with float marginals can be transformed into an equivalent problem with integer marginals;
- * arguments below work for arbitrary real marginals from a mathematical standpoint, but some of the implementations will fail to work with float arithmetic. 
+ * although the mathematical structure that we present actually   wors for arbitrary real marginals, some of our Python  implementations would  fail to work with float arithmetic. 
 
 
-Our  focus in this notebook is a specific instance of the optimal transport problem: 
+We focus on  a specific instance of an  optimal transport problem: 
 
 We assume that $X$ and $Y$ are finite subsets of $\mathbb{R}$ and that the cost function satisfies $c_{xy} = h(|x - y|)$ for all $x,y \in \mathbb{R},$ for an $h: \mathbb{R}_+ \rightarrow \mathbb{R}_+$ that  is **strictly concave** and **strictly increasing** and **grounded** (i.e., $h(0)=0$). 
 
@@ -112,7 +117,29 @@ $$
 \end{aligned}
 $$
 
-The following class takes as inputs sets of types $X,Y \subset \mathbb{R},$ marginals $n, m $ with positive integer entries such that $\sum_{x \in X} n_x = \sum_{y \in Y} m_y $ and cost parameter $\zeta>1$.
+
+Let's start setting up some Python code. 
+
+We  use the following imports:
+
+```{code-cell} ipython3
+import numpy as np
+from scipy.optimize import linprog
+from itertools import chain
+import pandas as pd
+from collections import namedtuple
+
+
+import matplotlib.pyplot as plt
+import matplotlib.patches as patches
+from matplotlib.ticker import MaxNLocator
+from matplotlib import cm
+from matplotlib.colors import Normalize
+```
+
++++ {"user_expressions": []}
+
+The following Python class takes as inputs sets of types $X,Y \subset \mathbb{R},$ marginals $n, m $ with positive integer entries such that $\sum_{x \in X} n_x = \sum_{y \in Y} m_y $ and cost parameter $\zeta>1$.
 
 
 The cost function is stored as an $|X| \times |Y|$ matrix with $(x,y)$-entry equal to $|x-y|^{1/\zeta},$ i.e., the cost of matching an agent of type $x \in X$ with an agent of type $y \in Y.$
@@ -843,7 +870,7 @@ print(V_i_j.round(2)[:min(10, V_i_j.shape[0]),
 
 Having computed the value function, we can proceed to compute the optimal matching as the *policy* that attains the value function that solves the  Bellman equation (*policy evaluation*). 
 
-Specifically, we start from agent $1$ and match it with the $k$ that achieves the minimum in the equation associated with $V_{1,2N_\ell};$
+We start from agent $1$ and match it with the $k$ that achieves the minimum in the equation associated with $V_{1,2N_\ell}.$
 
 Then we store  segments $[2,k-1]$ and $[k+1,2N_\ell]$ (if not empty). 
 
@@ -960,7 +987,7 @@ example_off_diag.plot_layer_matching(layer_example, matching_layer)
 
 +++ {"user_expressions": []}
 
-We will now present two key results in the context of OT with concave type costs.
+We  now present two key results in the context of OT with concave type costs.
 
 We refer {cite}`boerma2023composite` and {cite}`delon2011minimum` for proofs. 
 
@@ -1046,7 +1073,7 @@ print(f"Difference with previous Bellman equations: \
 
 +++ {"user_expressions": []}
 
-Thanks to the results in this section, we can actually compute the optimal matching within the layer cuncurrently to the computation of the value function, rather than afterwards. 
+We can actually compute the optimal matching within the layer simultaneously with computing the value function, rather than sequentially. 
 
 The key idea is that, if at some step of the computation of the values the left branch of the minimum above achieves the minimum, say $V_{ij}= c_{ij} + V_{i+1,j-1},$ then $(i,j)$ are optimally matched on $[i,j]$ and by the theorem above we get that a matching on $[i+1,j-1]$ which achieves $ V_{i+1,j-1}$ belongs to an optimal matching on the whole layer (since it is covered by the arc $(i,j)$ in $[i,j]$). 
 
@@ -1147,7 +1174,7 @@ The following method assembles  our components in order to solve the primal prob
 
 First, if matches are perfect pairs, we store the on-diagonal matching and create an off-diagonal instance with the residual marginals.
 
-Then, we compute the set of layers of the residual distributions. 
+Then we compute the set of layers of the residual distributions. 
 
 Finally, we solve each layer and put together  matchings within each layer with the on-diagonal matchings. 
 
@@ -1360,7 +1387,7 @@ print(f"Value (DSS): {(matching_DSS * example_pb.cost_x_y).sum()}")
 ## Examples
 ### Example 1
 
-In this notebook we study optimal transport problems on the real line with cost $c(x,y)= h(|x-y|)$ for a strictly concave and increasing function $h: \mathbb{R}_+ \rightarrow \mathbb{R}_+.$ 
+We study optimal transport problems on the real line with cost $c(x,y)= h(|x-y|)$ for a strictly concave and increasing function $h: \mathbb{R}_+ \rightarrow \mathbb{R}_+.$ 
 
 The outcome  is called *composite sorting*. 
 
@@ -1477,7 +1504,7 @@ example_1.plot_matching(matching_NAM, title = 'NAM',
 
 +++ {"user_expressions": []}
 
-Finally, notice that the the **Monge problem**  cost function $|x-y|$  equals the limit of composite sorting cost $|x-y|^{1/\zeta}$ as $\zeta \downarrow 1$ and also  the limit of $|x-y|^p$ as $p \downarrow 1.$ 
+Finally, notice that the  **Monge problem**  cost function $|x-y|$  equals the limit of the  composite sorting cost $|x-y|^{1/\zeta}$ as $\zeta \downarrow 1$ and also  the limit of $|x-y|^p$ as $p \downarrow 1.$ 
 
 Evidently, the Monge problem is solved by both the PAM and the composite sorting assignment that arises for $\zeta \downarrow 1.$ 
 
@@ -1573,11 +1600,11 @@ example_2.plot_matching(matching_NAM, title = 'NAM',
 
 +++ {"user_expressions": []}
 
-### Example 3 : from the paper
+### Example 3 
 
 +++ {"user_expressions": []}
 
-Boerma et al. provide the following  example.
+{cite}`boerma2023composite` provide the following  example.
 
 There are four agents per side and three types per side (so the problem is not unitary, as opposed to the examples above).
 
@@ -1622,7 +1649,7 @@ example_3.plot_matching(matching_NAM, title = 'NAM',
 
 +++ {"user_expressions": []}
 
-Let us recall our formulation
+Let's recall the formulation
 
 $$
 \begin{aligned}
@@ -1647,7 +1674,11 @@ where $(\phi , \psi) $ are dual variables, which can be interpreted as shadow co
 Since the dual is feasible and bounded,  $V_P = V_D$ (*strong duality* prevails).
 
 
-Assume now that $y_{xy} = \alpha_x + \gamma_y - c_{xy}$ is the output generated by matching $x$ and $y.$ It includes the sum of $x$ and $y$ specific amenities/outputs minus the cost $c_{xy}.$ Then, we have can formulate the following problem and its dual
+Assume now that $y_{xy} = \alpha_x + \gamma_y - c_{xy}$ is the output generated by matching $x$ and $y.$ 
+
+It includes the sum of $x$ and $y$ specific amenities/outputs minus the cost $c_{xy}.$ 
+
+Then we  can formulate the following problem and its dual
 
 $$
  \begin{aligned}
@@ -1902,7 +1933,7 @@ As already mentioned, the algorithm starts from the matched pairs $(x_0,y_0)$ wi
 
 
 
-Then, the algorithm proceeds iterarively by processing any matched pair whose subpairs have already been processed.
+The algorithm then proceeds sequentially  by processing any matched pair whose subpairs have already been processed.
 
 After picking any such matched pair $(x_0,y_0)$, the dual variables already computed for the processed subpairs need to be made "comparable". 
 
@@ -2148,7 +2179,7 @@ print('Value of primal solution: ', (assignment * exam_assign.cost_x_y).sum())
 
 +++ {"user_expressions": []}
 
-## Empirical application
+## Application
 
 +++ {"user_expressions": []}
 
@@ -2164,7 +2195,11 @@ The occupation of each individual consists of a Standard Occupational Classifica
 
 There are 497 codes in total.
 
-We consider only employed (civilian) individuals with ages between 25 and 60 from 2010 to 2017. To visualize log-wage dispersion, we group the individuals by occupation and compute the mean and standard deviation of the wages within each occupation. Then, we sort the occupations by average log-earnings within each occupation.
+We consider only employed (civilian) individuals with ages between 25 and 60 from 2010 to 2017.
+
+To visualize log-wage dispersion, we group the individuals by occupation and compute the mean and standard deviation of the wages within each occupation. 
+
+Then we sort  occupations by average log-earnings within each occupation.
 
 The resulting dataset is included in the dataset `acs_data_summary.csv`
 
@@ -2382,7 +2417,9 @@ model_OD_1980.plot_matching(matching_OD_1980,
 
 +++ {"user_expressions": []}
 
-From the optimal matching we compute and visualize the hierarchies. Then, we find the dual solution $(\phi,\psi)$ and compute the wages as $w_x = g(x) - \phi_x,$ assuming that the type-specific productivity of type $x$ is $g(x) = x$.
+From the optimal matching we compute and visualize the hierarchies.
+
+We then find the dual solution $(\phi,\psi)$ and compute the wages as $w_x = g(x) - \phi_x,$ assuming that the type-specific productivity of type $x$ is $g(x) = x$.
 
 ```{code-cell} ipython3
 # Find subpairs and plot hierarchies
@@ -2414,7 +2451,7 @@ wage_worker_x_1980 = model_1980.X_types - ϕ_worker_x_1980
 
 +++ {"user_expressions": []}
 
-Let us plot the average wages and wage dispersion generated by the model.
+Let's plot  average wages and wage dispersion generated by the model.
 
 ```{code-cell} ipython3
 def plot_wages_application(wages):
