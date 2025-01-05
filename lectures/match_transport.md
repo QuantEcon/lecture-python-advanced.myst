@@ -28,25 +28,22 @@ and Zhenyuan Zhang  {cite}`boerma2023composite` used optimal transport theory to
 Production technologies allow firms to affect  shape costs of mismatch with the consequence
 that costs of mismatch can be concave.   
 
-That means that it possible that equilibrium there is neither **positive assortive** nor **negative assorting**  matching, an outcome that   {cite}`boerma2023composite` call **composite assortive** matching.
+That means that it is possible that equilibrium there is neither **positive assortive** nor **negative assorting**  matching, an outcome that   {cite}`boerma2023composite` call **composite assortive** matching.
 
-For example, in  an equilibrium with composite matching,  identical **workers** can sort into different **occupations**, some positively and some negatively.  
+For example, in  an equilibrium with composite matching,  identical *workers* can sort into different *occupations*, some positively and some negatively.  
 
- {cite}`boerma2023composite`
-show how this can generate distinct distributions  of labor earnings  within and across occupations.  
+{cite}`boerma2023composite` show how this can generate distinct distributions  of labor earnings  within and across occupations.  
 
 
 This lecture describes the {cite}`boerma2023composite` model and  presents  Python code for computing equilibria.
 
 The lecture  applies the code to the {cite}`boerma2023composite` model of labor markets. 
 
-As with an earlier QuantEcon lecture on optimal transport (https://python.quantecon.org/opt_transport.html), a key tool will be **linear programming**.
-
+As with an [earlier QuantEcon lecture on optimal transport](https://python.quantecon.org/opt_transport.html), a key tool will be [linear programming](https://intro.quantecon.org/lp_intro.html).
 
 
 
 ## Setup
-
 
 $X$ and $Y$ are finite sets that represent two distinct types of people to be matched. 
 
@@ -64,18 +61,18 @@ $$
 
 so that  the matching  problem is *balanced*. 
 
-Given a *cost function* $c:X \times Y \rightarrow \mathbb{R}$, the (discrete) *optimal transport problem* is 
+Given a **cost function** $c \colon X \times Y \rightarrow \mathbb{R}$, the (discrete) **optimal transport problem** is 
 
 
 $$
-\begin{aligned}
-\min_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy} \\
-\text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
-& \sum_{y \in Y} \mu_{xy} = m_y 
-\end{aligned}
+    \begin{aligned}
+        \min_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy} \\
+        \text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
+        & \sum_{y \in Y} \mu_{xy} = m_y 
+    \end{aligned}
 $$
 
-Given our discreteness  assumptions about $n$ and $m$, the problem admits an integer solution $\mu \in \mathbb{Z}_+^{X \times Y}$, i.e. $\mu_{xy}$ is a non-negative integer for each $x\in X, y\in Y$.
+Given our discreteness  assumptions about $X$ and $Y$, the problem admits an integer solution $\mu \in \mathbb{Z}_+^{X \times Y}$, i.e., $\mu_{xy}$ is a non-negative integer for each $x\in X, y\in Y$.
 
 
 We will study integer solutions.
@@ -83,23 +80,23 @@ We will study integer solutions.
 Two points about restricting ourselves to integer solutions are worth mentioning: 
 
  * it is without loss of generality for computational purposes, since every problem with float marginals can be transformed into an equivalent problem with integer marginals;
- * although the mathematical structure that we present actually   wors for arbitrary real marginals, some of our Python  implementations would  fail to work with float arithmetic. 
+ * although the mathematical structure that we present actually  works for arbitrary real marginals, some of our Python  implementations would  fail to work with float arithmetic. 
 
 
 We focus on  a specific instance of an  optimal transport problem: 
 
-We assume that $X$ and $Y$ are finite subsets of $\mathbb{R}$ and that the cost function satisfies $c_{xy} = h(|x - y|)$ for all $x,y \in \mathbb{R},$ for an $h: \mathbb{R}_+ \rightarrow \mathbb{R}_+$ that  is **strictly concave** and **strictly increasing** and **grounded** (i.e., $h(0)=0$). 
+We assume that $X$ and $Y$ are finite subsets of $\mathbb{R}$ and that the cost function satisfies $c_{xy} = h(|x - y|)$ for all $x,y \in \mathbb{R},$ for an $h: \mathbb{R}_+ \rightarrow \mathbb{R}_+$ that  is *strictly concave* and *strictly increasing* and *grounded* (i.e., $h(0)=0$). 
 
 Such an  $h$ satisfies the following
 
 
-**Lemma.** Let $h: \mathbb{R}_+ \rightarrow \mathbb{R}_+$ be **strictly concave** and **grounded**. Then $h$ is strictly subadditive, i.e. for all $x,y\in \mathbb{R}_+, 0< x < y,$ we have
+**Lemma.** If $h \colon \mathbb{R}_+ \rightarrow \mathbb{R}_+$ is strictly concave and grounded, then $h$ is strictly subadditive, i.e. for all $x,y\in \mathbb{R}_+, 0< x < y,$ we have
 
 $$
-h(x+y) < h(x) + h(y)
+    h(x+y) < h(x) + h(y)
 $$
 
-*Proof.* For $\alpha \in (0,1)$ and $x >0$ we have, by strict concavity and groundedness, $h(\alpha x) > \alpha h(x) + (1-\alpha) h(0)=\alpha h(x). $ 
+*Proof.* For $\alpha \in (0,1)$ and $x >0$ we have, by strict concavity and groundedness, $h(\alpha x) > \alpha h(x) + (1-\alpha) h(0)=\alpha h(x)$. 
 
 Now fix $x,y\in \mathbb{R}_+, 0< x < y,$ and let $\alpha = \frac{x}{x+y};$ the previous observation gives $h(x) = h(\alpha (x+y)) > \alpha h(x+y)$ and $h(y) = h((1-\alpha) (x+y)) > (1-\alpha) h(x+y) $;  summing  these inequality delivers the result. $\square$
 
@@ -512,7 +509,7 @@ We conclude that if a matching features intersecting pairs, it can be modified v
 When we introduce the off diagonal matching, to stress that the types sets are disjoint now.
 
 
-To simplify our explanation  of this property, assume for now that each agent has its own distinct type (i.e., |X|=|Y| =N and $n=m= \mathbf{1}_N$), in which case the optimal transport problem is also referred to as *assignment problem*.
+To simplify our explanation  of this property, assume for now that each agent has its own distinct type (i.e., $|X| = |Y| =N$ and $n=m= \mathbf{1}_N$), in which case the optimal transport problem is also referred to as *assignment problem*.
 
 Let's index  agents according to their types: 
 
