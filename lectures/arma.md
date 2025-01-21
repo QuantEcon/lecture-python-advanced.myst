@@ -241,7 +241,7 @@ for i, ϕ in enumerate((0.8, -0.8)):
     times = list(range(16))
     acov = [ϕ**k / (1 - ϕ**2) for k in times]
     ax.plot(times, acov, 'bo-', alpha=0.6,
-            label=f'autocovariance, $\phi = {ϕ:.2}$')
+            label=fr'autocovariance, $\phi = {ϕ:.2}$')
     ax.legend(loc='upper right')
     ax.set(xlabel='time', xlim=(0, 15))
     ax.hlines(0, 0, 15, linestyle='--', alpha=0.5)
@@ -479,7 +479,7 @@ for i, ϕ in enumerate((0.8, -0.8)):
     ax = axes[i]
     sd = ar1_sd(ϕ, ωs)
     ax.plot(ωs, sd, 'b-', alpha=0.6, lw=2,
-            label='spectral density, $\phi = {ϕ:.2}$')
+            label=fr'spectral density, $\phi = {ϕ:.2}$')
     ax.legend(loc='upper center')
     ax.set(xlabel='frequency', xlim=(0, np.pi))
 plt.show()
@@ -525,21 +525,21 @@ plt.subplots_adjust(hspace=0.25)
 
 # Autocovariance when ϕ = -0.8
 ax = axes[0]
-ax.plot(times, y1, 'bo-', alpha=0.6, label='$\gamma(k)$')
+ax.plot(times, y1, 'bo-', alpha=0.6, label=r'$\gamma(k)$')
 ax.legend(loc='upper right')
 ax.set(xlim=(0, 15), yticks=(-2, 0, 2))
 ax.hlines(0, 0, 15, linestyle='--', alpha=0.5)
 
 # Cycles at frequency π
 ax = axes[1]
-ax.plot(times, y2, 'bo-', alpha=0.6, label='$\cos(\pi k)$')
+ax.plot(times, y2, 'bo-', alpha=0.6, label=r'$\cos(\pi k)$')
 ax.legend(loc='upper right')
 ax.set(xlim=(0, 15), yticks=(-1, 0, 1))
 ax.hlines(0, 0, 15, linestyle='--', alpha=0.5)
 
 # Product
 ax = axes[2]
-ax.stem(times, y3, label='$\gamma(k) \cos(\pi k)$')
+ax.stem(times, y3, label=r'$\gamma(k) \cos(\pi k)$')
 ax.legend(loc='upper right')
 ax.set(xlim=(0, 15), ylim=(-3, 3), yticks=(-1, 0, 1, 2, 3))
 ax.hlines(0, 0, 15, linestyle='--', alpha=0.5)
@@ -565,21 +565,21 @@ plt.subplots_adjust(hspace=0.25)
 
 # Autocovariance when phi = -0.8
 ax = axes[0]
-ax.plot(times, y1, 'bo-', alpha=0.6, label='$\gamma(k)$')
+ax.plot(times, y1, 'bo-', alpha=0.6, label=r'$\gamma(k)$')
 ax.legend(loc='upper right')
 ax.set(xlim=(0, 15), yticks=(-2, 0, 2))
 ax.hlines(0, 0, 15, linestyle='--', alpha=0.5)
 
 # Cycles at frequency π
 ax = axes[1]
-ax.plot(times, y2, 'bo-', alpha=0.6, label='$\cos(\pi k/3)$')
+ax.plot(times, y2, 'bo-', alpha=0.6, label=r'$\cos(\pi k/3)$')
 ax.legend(loc='upper right')
 ax.set(xlim=(0, 15), yticks=(-1, 0, 1))
 ax.hlines(0, 0, 15, linestyle='--', alpha=0.5)
 
 # Product
 ax = axes[2]
-ax.stem(times, y3, label='$\gamma(k) \cos(\pi k/3)$')
+ax.stem(times, y3, label=r'$\gamma(k) \cos(\pi k/3)$')
 ax.legend(loc='upper right')
 ax.set(xlim=(0, 15), ylim=(-3, 3), yticks=(-1, 0, 1, 2, 3))
 ax.hlines(0, 0, 15, linestyle='--', alpha=0.5)

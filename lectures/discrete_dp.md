@@ -935,7 +935,7 @@ for beta in discount_factors:
     res0 = ddp0.solve()
     k_path_ind = res0.mc.simulate(init=k_init_ind, ts_length=sample_size)
     k_path = grid[k_path_ind]
-    ax.plot(k_path, 'o-', lw=2, alpha=0.75, label=f'$\\beta = {beta}$')
+    ax.plot(k_path, 'o-', lw=2, alpha=0.75, label=fr'$\beta = {beta}$')
 
 ax.legend(loc='lower right')
 plt.show()
