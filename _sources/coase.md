@@ -552,7 +552,7 @@ for i, s in enumerate(pc.grid):
     ell_star[i] = e
 
 fig, ax = plt.subplots()
-ax.plot(pc.grid, ell_star, label="$\ell^*$")
+ax.plot(pc.grid, ell_star, label=r"$\ell^*$")
 ax.legend(fontsize=14)
 plt.show()
 ```

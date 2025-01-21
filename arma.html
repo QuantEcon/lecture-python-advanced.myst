@@ -441,7 +441,7 @@ X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j} + \eta_t
     <span class="n">times</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
     <span class="n">acov</span> <span class="o">=</span> <span class="p">[</span><span class="n">ϕ</span><span class="o">**</span><span class="n">k</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ϕ</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">times</span><span class="p">]</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">acov</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;autocovariance, $\phi = </span><span class="si">{</span><span class="n">ϕ</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s1">&#39;autocovariance, $\phi = </span><span class="si">{</span><span class="n">ϕ</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
@@ -450,12 +450,6 @@ X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j} + \eta_t
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:10: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-&lt;&gt;:10: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-/tmp/ipykernel_5724/2909956102.py:10: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-  label=f&#39;autocovariance, $\phi = {ϕ:.2}$&#39;)
-</pre></div>
-</div>
 <img alt="_images/89af1698bfd1d4ba7c46ad27f515c5706bf05eeaae4a5153ea5595d8d2f29144.png" src="_images/89af1698bfd1d4ba7c46ad27f515c5706bf05eeaae4a5153ea5595d8d2f29144.png" />
 </div>
 </div>
@@ -610,7 +604,7 @@ all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the p
     <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="n">sd</span> <span class="o">=</span> <span class="n">ar1_sd</span><span class="p">(</span><span class="n">ϕ</span><span class="p">,</span> <span class="n">ωs</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ωs</span><span class="p">,</span> <span class="n">sd</span><span class="p">,</span> <span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
-            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;spectral density, $\phi = </span><span class="si">{ϕ:.2}</span><span class="s1">$&#39;</span><span class="p">)</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s1">&#39;spectral density, $\phi = </span><span class="si">{</span><span class="n">ϕ</span><span class="si">:</span><span class="s1">.2</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">&#39;frequency&#39;</span><span class="p">,</span> <span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -618,13 +612,7 @@ all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the p
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:14: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-&lt;&gt;:14: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-/tmp/ipykernel_5724/3837575121.py:14: SyntaxWarning: invalid escape sequence &#39;\p&#39;
-  label=&#39;spectral density, $\phi = {ϕ:.2}$&#39;)
-</pre></div>
-</div>
-<img alt="_images/91c6b8e67e3b0070b39ef21fe4b4342461e4de61bec6e65d389c8e49a2e50e05.png" src="_images/91c6b8e67e3b0070b39ef21fe4b4342461e4de61bec6e65d389c8e49a2e50e05.png" />
+<img alt="_images/1569ada11c8e893a343e616b712f4324075586bb966eae0795eba866607b6656.png" src="_images/1569ada11c8e893a343e616b712f4324075586bb966eae0795eba866607b6656.png" />
 </div>
 </div>
 <p>These spectral densities correspond to the autocovariance functions for the
@@ -657,21 +645,21 @@ products on the right-hand side of <a class="reference internal" href="#equation
 
 <span class="c1"># Autocovariance when ϕ = -0.8</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\gamma(k)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\gamma(k)$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
 <span class="c1"># Cycles at frequency π</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\cos(\pi k)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\cos(\pi k)$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
 <span class="c1"># Product</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\gamma(k) \cos(\pi k)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\gamma(k) \cos(\pi k)$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
@@ -682,20 +670,6 @@ products on the right-hand side of <a class="reference internal" href="#equation
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:13: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-&lt;&gt;:20: SyntaxWarning: invalid escape sequence &#39;\c&#39;
-&lt;&gt;:27: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-&lt;&gt;:13: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-&lt;&gt;:20: SyntaxWarning: invalid escape sequence &#39;\c&#39;
-&lt;&gt;:27: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-/tmp/ipykernel_5724/210307316.py:13: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-  ax.plot(times, y1, &#39;bo-&#39;, alpha=0.6, label=&#39;$\gamma(k)$&#39;)
-/tmp/ipykernel_5724/210307316.py:20: SyntaxWarning: invalid escape sequence &#39;\c&#39;
-  ax.plot(times, y2, &#39;bo-&#39;, alpha=0.6, label=&#39;$\cos(\pi k)$&#39;)
-/tmp/ipykernel_5724/210307316.py:27: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-  ax.stem(times, y3, label=&#39;$\gamma(k) \cos(\pi k)$&#39;)
-</pre></div>
-</div>
 <img alt="_images/7f769f91a65e0c09f4043fc9f229553772b6abafc74122f8f0d73a56b1387a02.png" src="_images/7f769f91a65e0c09f4043fc9f229553772b6abafc74122f8f0d73a56b1387a02.png" />
 </div>
 </div>
@@ -716,21 +690,21 @@ both positive and negative terms, and hence the sum of these terms is much small
 
 <span class="c1"># Autocovariance when phi = -0.8</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\gamma(k)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\gamma(k)$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
 <span class="c1"># Cycles at frequency π</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\cos(\pi k/3)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;bo-&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\cos(\pi k/3)$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 
 <span class="c1"># Product</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\gamma(k) \cos(\pi k/3)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\gamma(k) \cos(\pi k/3)$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">ylim</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">yticks</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
@@ -741,20 +715,6 @@ both positive and negative terms, and hence the sum of these terms is much small
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:13: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-&lt;&gt;:20: SyntaxWarning: invalid escape sequence &#39;\c&#39;
-&lt;&gt;:27: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-&lt;&gt;:13: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-&lt;&gt;:20: SyntaxWarning: invalid escape sequence &#39;\c&#39;
-&lt;&gt;:27: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-/tmp/ipykernel_5724/2230990144.py:13: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-  ax.plot(times, y1, &#39;bo-&#39;, alpha=0.6, label=&#39;$\gamma(k)$&#39;)
-/tmp/ipykernel_5724/2230990144.py:20: SyntaxWarning: invalid escape sequence &#39;\c&#39;
-  ax.plot(times, y2, &#39;bo-&#39;, alpha=0.6, label=&#39;$\cos(\pi k/3)$&#39;)
-/tmp/ipykernel_5724/2230990144.py:27: SyntaxWarning: invalid escape sequence &#39;\g&#39;
-  ax.stem(times, y3, label=&#39;$\gamma(k) \cos(\pi k/3)$&#39;)
-</pre></div>
-</div>
 <img alt="_images/7d97cc2fb75bfb3a2152ecfd8bb0e00485195b56343b621c7a291058d243a74c.png" src="_images/7d97cc2fb75bfb3a2152ecfd8bb0e00485195b56343b621c7a291058d243a74c.png" />
 </div>
 </div>
@@ -912,13 +872,13 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
   return math.isfinite(val)
 /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/matplotlib/cbook.py:1398: ComplexWarning: Casting complex values to real discards the imaginary part
   return np.asarray(x, float)
-/tmp/ipykernel_5724/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+/tmp/ipykernel_6479/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/matplotlib/transforms.py:993: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/cc003ceb1e4cc5a15b72a5ae109c4b296378dd4a42d9b6462bae6aafb06a4979.png" src="_images/cc003ceb1e4cc5a15b72a5ae109c4b296378dd4a42d9b6462bae6aafb06a4979.png" />
+<img alt="_images/ac35f277e33067ce7f6bf86a37f66d6d708857fd698a4a04ba384c9cb4eb8a2e.png" src="_images/ac35f277e33067ce7f6bf86a37f66d6d708857fd698a4a04ba384c9cb4eb8a2e.png" />
 </div>
 </div>
 <p>If we look carefully, things look good: the spectrum is the flat line at <span class="math notranslate nohighlight">\(10^0\)</span> at the very top of the spectrum graphs,
@@ -942,11 +902,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5724/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6479/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/2e1787439b8cebd5ba7d841bec00b5c1cc2856fe3ce6e0679a8a1169365d8151.png" src="_images/2e1787439b8cebd5ba7d841bec00b5c1cc2856fe3ce6e0679a8a1169365d8151.png" />
+<img alt="_images/bd3530c8e3ea70a82c82d46afe636656c65b20f422b26cd36569c0f54061803c.png" src="_images/bd3530c8e3ea70a82c82d46afe636656c65b20f422b26cd36569c0f54061803c.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s second model is <span class="math notranslate nohighlight">\(X_t = .9 X_{t-1} + \epsilon_t\)</span></p>
@@ -960,11 +920,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5724/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6479/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/1411ad681f115c6f649c7316b89a022523454f138018d5169317d6a492726304.png" src="_images/1411ad681f115c6f649c7316b89a022523454f138018d5169317d6a492726304.png" />
+<img alt="_images/fea044380d0f17811521304c76fd7309132a8bef810cea3443bcdebf33a5f885.png" src="_images/fea044380d0f17811521304c76fd7309132a8bef810cea3443bcdebf33a5f885.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s third  model is  <span class="math notranslate nohighlight">\(X_t = .8 X_{t-4} + \epsilon_t\)</span></p>
@@ -978,11 +938,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5724/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6479/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/bf7cf6dab6daa79d59af291d7428dd7865dafe3e6cc31e790f975087069f6b73.png" src="_images/bf7cf6dab6daa79d59af291d7428dd7865dafe3e6cc31e790f975087069f6b73.png" />
+<img alt="_images/4f003b78affc7955636249e5f85448df10b0a292c8c369e119dee652336f416c.png" src="_images/4f003b78affc7955636249e5f85448df10b0a292c8c369e119dee652336f416c.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s fourth  model is  <span class="math notranslate nohighlight">\(X_t = .98 X_{t-1}  + \epsilon_t -.7 \epsilon_{t-1}\)</span></p>
@@ -996,11 +956,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_5724/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6479/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/9d9c759b65cb5fc42ce19394553fcbe0493a98d838a1d793b96c321492dc7f3b.png" src="_images/9d9c759b65cb5fc42ce19394553fcbe0493a98d838a1d793b96c321492dc7f3b.png" />
+<img alt="_images/b4136e47a0fa37355fc637ba0b340e0c764c20ebba135dea894b59b83ccb4d44.png" src="_images/b4136e47a0fa37355fc637ba0b340e0c764c20ebba135dea894b59b83ccb4d44.png" />
 </div>
 </div>
 </section>

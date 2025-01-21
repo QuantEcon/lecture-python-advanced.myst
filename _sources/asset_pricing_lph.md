@@ -384,7 +384,7 @@ plt.title('mean standard deviation frontier')
 plt.xlabel(r"$\sigma(R^i)$")
 plt.ylabel(r"$E (R^i) $")
 plt.text(.053, 1.015, "(.05,1.015)")
-ax.plot(.05, 1.015, 'o', label="$(\sigma(R^j), E R^j)$")
+ax.plot(.05, 1.015, 'o', label=r"$(\sigma(R^j), E R^j)$")
 # Add a legend and show the plot
 ax.legend()
 plt.show()

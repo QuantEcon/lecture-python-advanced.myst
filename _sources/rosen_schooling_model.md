@@ -291,13 +291,13 @@ shock on $N_t$ is larger
 
 ```{code-cell} python3
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 4))
-ax1.plot(econ1.c_irf,label='$\\alpha_d = 0.1$')
-ax1.plot(econ2.c_irf,label='$\\alpha_d = 2$')
+ax1.plot(econ1.c_irf,label=r'$\alpha_d = 0.1$')
+ax1.plot(econ2.c_irf,label=r'$\alpha_d = 2$')
 ax1.legend()
 ax1.set_title('Response of $n_t$ to a demand shock')
 
-ax2.plot(econ1.h_irf[:, 0], label='$\\alpha_d = 0.1$')
-ax2.plot(econ2.h_irf[:, 0], label='$\\alpha_d = 24$')
+ax2.plot(econ1.h_irf[:, 0], label=r'$\alpha_d = 0.1$')
+ax2.plot(econ2.h_irf[:, 0], label=r'$\alpha_d = 24$')
 ax2.legend()
 ax2.set_title('Response of $N_t$ to a demand shock')
 plt.show()

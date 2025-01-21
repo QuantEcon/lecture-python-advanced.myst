@@ -1254,13 +1254,13 @@ really monotone, but the decrements are quite small:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>91.8 ms ± 142 μs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>93.9 ms ± 409 μs per loop (mean ± std. dev. of 7 runs, 10 loops each)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.15 ms ± 24.8 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>9.54 ms ± 139 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11 ms ± 19 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11.2 ms ± 25.6 μs per loop (mean ± std. dev. of 7 runs, 100 loops each)
 </pre></div>
 </div>
 </div>
@@ -1333,22 +1333,22 @@ a method of <code class="docutils literal notranslate"><span class="pre">Discret
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration    Distance       Elapsed (seconds)
 ---------------------------------------------
-1            5.518e+00      5.426e-04         
-2            4.070e+00      9.053e-04         
+1            5.518e+00      5.097e-04         
+2            4.070e+00      8.862e-04         
 Iteration    Distance       Elapsed (seconds)
 ---------------------------------------------
-1            5.518e+00      3.710e-04         
-2            4.070e+00      7.241e-04         
-3            3.866e+00      1.068e-03         
-4            3.673e+00      1.409e-03         
+1            5.518e+00      3.815e-04         
+2            4.070e+00      7.319e-04         
+3            3.866e+00      1.071e-03         
+4            3.673e+00      1.434e-03         
 Iteration    Distance       Elapsed (seconds)
 ---------------------------------------------
-1            5.518e+00      3.672e-04         
-2            4.070e+00      7.160e-04         
-3            3.866e+00      1.064e-03         
-4            3.673e+00      1.405e-03         
-5            3.489e+00      1.742e-03         
-6            3.315e+00      2.079e-03         
+1            5.518e+00      3.631e-04         
+2            4.070e+00      7.265e-04         
+3            3.866e+00      1.069e-03         
+4            3.673e+00      1.406e-03         
+5            3.489e+00      1.755e-03         
+6            3.315e+00      2.094e-03         
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages/quantecon/_compute_fp.py:152: RuntimeWarning: max_iter attained before convergence in compute_fixed_point
@@ -1389,7 +1389,7 @@ condition <span class="math notranslate nohighlight">\(k_0 = 0.1\)</span>.</p>
     <span class="n">res0</span> <span class="o">=</span> <span class="n">ddp0</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
     <span class="n">k_path_ind</span> <span class="o">=</span> <span class="n">res0</span><span class="o">.</span><span class="n">mc</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="n">k_init_ind</span><span class="p">,</span> <span class="n">ts_length</span><span class="o">=</span><span class="n">sample_size</span><span class="p">)</span>
     <span class="n">k_path</span> <span class="o">=</span> <span class="n">grid</span><span class="p">[</span><span class="n">k_path_ind</span><span class="p">]</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_path</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">beta = </span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_path</span><span class="p">,</span> <span class="s1">&#39;o-&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s1">&#39;$\beta = </span><span class="si">{</span><span class="n">beta</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>

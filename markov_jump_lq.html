@@ -683,8 +683,8 @@ each Markov state</p>
 <span class="n">u2_star</span> <span class="o">=</span> <span class="o">-</span> <span class="n">ex1_a</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">ex1_a</span><span class="o">.</span><span class="n">Fs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_grid</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">k_grid</span> <span class="o">+</span> <span class="n">u1_star</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_1$ (high)&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">k_grid</span> <span class="o">+</span> <span class="n">u2_star</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_2$ (low)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">k_grid</span> <span class="o">+</span> <span class="n">u1_star</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_1$ (high)&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">k_grid</span><span class="p">,</span> <span class="n">k_grid</span> <span class="o">+</span> <span class="n">u2_star</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_2$ (low)&quot;</span><span class="p">)</span>
 
 <span class="c1"># The optimal k*</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
@@ -701,16 +701,6 @@ each Markov state</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:9: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:10: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:9: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:10: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-/tmp/ipykernel_7180/454231666.py:9: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-  ax.plot(k_grid, k_grid + u1_star, label=&quot;$\overline{s}_1$ (high)&quot;)
-/tmp/ipykernel_7180/454231666.py:10: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-  ax.plot(k_grid, k_grid + u2_star, label=&quot;$\overline{s}_2$ (low)&quot;)
-</pre></div>
-</div>
 <img alt="_images/361fde00e13229ed65fd01d8a70391dcd2804d8ddd5f3832edc2ba3014fa66a5.png" src="_images/361fde00e13229ed65fd01d8a70391dcd2804d8ddd5f3832edc2ba3014fa66a5.png" />
 </div>
 </div>
@@ -822,10 +812,10 @@ Markov state be strictly periodic.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">state_var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_vec1</span><span class="p">):</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_1$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F2</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_2$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_1$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F2</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_2$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
 
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$F_</span><span class="si">{s_t}</span><span class="s2">$&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coefficient on </span><span class="si">{</span><span class="n">state_var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -834,20 +824,6 @@ Markov state be strictly periodic.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:3: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:4: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:6: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-&lt;&gt;:3: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:4: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:6: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-/tmp/ipykernel_7180/1661029301.py:3: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-  ax.plot(λ_vals, F1[:, i], label=&quot;$\overline{s}_1$&quot;, color=&quot;b&quot;)
-/tmp/ipykernel_7180/1661029301.py:4: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-  ax.plot(λ_vals, F2[:, i], label=&quot;$\overline{s}_2$&quot;, color=&quot;r&quot;)
-/tmp/ipykernel_7180/1661029301.py:6: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-  ax.set_xlabel(&quot;$\lambda$&quot;)
-</pre></div>
-</div>
 <img alt="_images/134d58e5bb9a5d4e1a501f0b0e9104df807eb9232bf73275f91ee53a199a0da3.png" src="_images/134d58e5bb9a5d4e1a501f0b0e9104df807eb9232bf73275f91ee53a199a0da3.png" />
 <img alt="_images/17fe63c322edb97e4678b7500109320bc7d33c667bd3e9f546f3e531925dd653.png" src="_images/17fe63c322edb97e4678b7500109320bc7d33c667bd3e9f546f3e531925dd653.png" />
 </div>
@@ -923,8 +899,8 @@ is only temporarily a more favorable time to invest.</p>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">λ_grid</span><span class="p">,</span> <span class="n">δ_grid</span><span class="p">,</span> <span class="n">F1_grid</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
     <span class="c1"># low adjustment cost, red surface</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">λ_grid</span><span class="p">,</span> <span class="n">δ_grid</span><span class="p">,</span> <span class="n">F2_grid</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$\delta$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\delta$&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">&quot;$F_</span><span class="si">{s_t}</span><span class="s2">$&quot;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coefficient on </span><span class="si">{</span><span class="n">state_var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -932,16 +908,6 @@ is only temporarily a more favorable time to invest.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:8: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-&lt;&gt;:9: SyntaxWarning: invalid escape sequence &#39;\d&#39;
-&lt;&gt;:8: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-&lt;&gt;:9: SyntaxWarning: invalid escape sequence &#39;\d&#39;
-/tmp/ipykernel_7180/3823440905.py:8: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-  ax.set_xlabel(&quot;$\lambda$&quot;)
-/tmp/ipykernel_7180/3823440905.py:9: SyntaxWarning: invalid escape sequence &#39;\d&#39;
-  ax.set_ylabel(&quot;$\delta$&quot;)
-</pre></div>
-</div>
 <img alt="_images/6283cc4a9ca060dfd811bf113d5ac3ab8f42321239197c842fd9f5ac2eaa9578.png" src="_images/6283cc4a9ca060dfd811bf113d5ac3ab8f42321239197c842fd9f5ac2eaa9578.png" />
 <img alt="_images/f62a64f689b13d1772f094d1f87edb4d4be70bad77bc89a933427bb267a1e4bc.png" src="_images/f62a64f689b13d1772f094d1f87edb4d4be70bad77bc89a933427bb267a1e4bc.png" />
 </div>
@@ -978,11 +944,11 @@ decision rules for cases with different Markov transition matrices</p>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">state_var</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_vec</span><span class="p">):</span>
         <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
         <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_1$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F2</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_2$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F1</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_1$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="n">F2</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\overline</span><span class="si">{s}</span><span class="s2">_2$&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
 
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$F(\overline</span><span class="si">{s}</span><span class="s2">_t)$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$F(\overline</span><span class="si">{s}</span><span class="s2">_t)$&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coefficient on </span><span class="si">{</span><span class="n">state_var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -996,17 +962,17 @@ decision rules for cases with different Markov transition matrices</p>
             <span class="n">F</span> <span class="o">=</span> <span class="p">[</span><span class="n">F1</span><span class="p">,</span> <span class="n">F2</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
             <span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="n">k_star</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">k_star</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span>
-                    <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$k^*(\overline</span><span class="si">{s}</span><span class="s2">_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;)$&quot;</span><span class="p">)</span>
+                    <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$k^*(\overline</span><span class="si">{s}</span><span class="s2">_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;)$&quot;</span><span class="p">)</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">λ_vals</span><span class="p">,</span> <span class="o">-</span> <span class="n">F</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">F</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">c</span><span class="p">,</span>
-                    <span class="n">label</span><span class="o">=</span><span class="s2">&quot;$k^</span><span class="si">{target}</span><span class="s2">(\overline</span><span class="si">{s}</span><span class="s2">_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;)$&quot;</span><span class="p">)</span>
+                    <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$k^</span><span class="si">{target}</span><span class="s2">(\overline</span><span class="si">{s}</span><span class="s2">_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;)$&quot;</span><span class="p">)</span>
 
         <span class="c1"># Plot a vertical line at λ=0.5</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">k_star</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">k_star</span><span class="p">)],</span> <span class="s2">&quot;-.&quot;</span><span class="p">)</span>
 
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$k$&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Optimal k levels and k targets&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">k_star</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">k_star</span><span class="p">)</span><span class="o">-</span><span class="nb">min</span><span class="p">(</span><span class="n">k_star</span><span class="p">))</span><span class="o">/</span><span class="mi">20</span><span class="p">,</span> <span class="s2">&quot;$\lambda=0.5$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">k_star</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">k_star</span><span class="p">)</span><span class="o">-</span><span class="nb">min</span><span class="p">(</span><span class="n">k_star</span><span class="p">))</span><span class="o">/</span><span class="mi">20</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;$\lambda=0.5$&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
@@ -1036,59 +1002,11 @@ decision rules for cases with different Markov transition matrices</p>
         <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">λ_grid</span><span class="p">,</span> <span class="n">δ_grid</span><span class="p">,</span> <span class="n">F1_grid</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">λ_grid</span><span class="p">,</span> <span class="n">δ_grid</span><span class="p">,</span> <span class="n">F2_grid</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;$\delta$&quot;</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s2">&quot;$F(\overline</span><span class="si">{s}</span><span class="s2">_t)$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\delta$&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$F(\overline</span><span class="si">{s}</span><span class="s2">_t)$&quot;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;coefficient on </span><span class="si">{</span><span class="n">state_var</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:29: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:30: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:32: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-&lt;&gt;:33: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:47: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:49: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:54: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-&lt;&gt;:57: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-&lt;&gt;:87: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-&lt;&gt;:88: SyntaxWarning: invalid escape sequence &#39;\d&#39;
-&lt;&gt;:89: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:29: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:30: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:32: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-&lt;&gt;:33: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:47: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:49: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-&lt;&gt;:54: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-&lt;&gt;:57: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-&lt;&gt;:87: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-&lt;&gt;:88: SyntaxWarning: invalid escape sequence &#39;\d&#39;
-&lt;&gt;:89: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-/tmp/ipykernel_7180/3965109342.py:29: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-  ax.plot(λ_vals, F1[:, i], label=&quot;$\overline{s}_1$&quot;, color=&quot;b&quot;)
-/tmp/ipykernel_7180/3965109342.py:30: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-  ax.plot(λ_vals, F2[:, i], label=&quot;$\overline{s}_2$&quot;, color=&quot;r&quot;)
-/tmp/ipykernel_7180/3965109342.py:32: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-  ax.set_xlabel(&quot;$\lambda$&quot;)
-/tmp/ipykernel_7180/3965109342.py:33: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-  ax.set_ylabel(&quot;$F(\overline{s}_t)$&quot;)
-/tmp/ipykernel_7180/3965109342.py:47: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-  color=c, label=&quot;$k^*(\overline{s}_&quot;+str(i+1)+&quot;)$&quot;)
-/tmp/ipykernel_7180/3965109342.py:49: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-  label=&quot;$k^{target}(\overline{s}_&quot;+str(i+1)+&quot;)$&quot;)
-/tmp/ipykernel_7180/3965109342.py:54: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-  ax.set_xlabel(&quot;$\lambda$&quot;)
-/tmp/ipykernel_7180/3965109342.py:57: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-  ax.text(0.5, min(k_star)+(max(k_star)-min(k_star))/20, &quot;$\lambda=0.5$&quot;)
-/tmp/ipykernel_7180/3965109342.py:87: SyntaxWarning: invalid escape sequence &#39;\l&#39;
-  ax.set_xlabel(&quot;$\lambda$&quot;)
-/tmp/ipykernel_7180/3965109342.py:88: SyntaxWarning: invalid escape sequence &#39;\d&#39;
-  ax.set_ylabel(&quot;$\delta$&quot;)
-/tmp/ipykernel_7180/3965109342.py:89: SyntaxWarning: invalid escape sequence &#39;\o&#39;
-  ax.set_zlabel(&quot;$F(\overline{s}_t)$&quot;)
 </pre></div>
 </div>
 </div>

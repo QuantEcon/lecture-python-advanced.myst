@@ -502,8 +502,8 @@ market portfolio.</p>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Difference between $\hat{\mu}$ (estimate) and $\mu_</span><span class="si">{BL}</span><span class="s1">$ (market implied)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">μ_est</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\hat{\mu}$&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">μ_m</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$\mu_</span><span class="si">{BL}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">μ_est</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat{\mu}$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">μ_m</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\mu_</span><span class="si">{BL}</span><span class="s1">$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">μ_m</span><span class="p">,</span> <span class="n">μ_est</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Assets&#39;</span><span class="p">)</span>
@@ -514,16 +514,6 @@ market portfolio.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;&gt;:19: SyntaxWarning: invalid escape sequence &#39;\h&#39;
-&lt;&gt;:20: SyntaxWarning: invalid escape sequence &#39;\m&#39;
-&lt;&gt;:19: SyntaxWarning: invalid escape sequence &#39;\h&#39;
-&lt;&gt;:20: SyntaxWarning: invalid escape sequence &#39;\m&#39;
-/tmp/ipykernel_5780/3330849901.py:19: SyntaxWarning: invalid escape sequence &#39;\h&#39;
-  ax.plot(x, μ_est, &#39;o&#39;, c=&#39;k&#39;, label=&#39;$\hat{\mu}$&#39;)
-/tmp/ipykernel_5780/3330849901.py:20: SyntaxWarning: invalid escape sequence &#39;\m&#39;
-  ax.plot(x, μ_m, &#39;o&#39;, c=&#39;r&#39;, label=&#39;$\mu_{BL}$&#39;)
-</pre></div>
-</div>
 <img alt="_images/3e205a23a991c2bb81a3a26b3c7dbe7eaa19ad58d66526e84fbf20e5f28663bb.png" src="_images/3e205a23a991c2bb81a3a26b3c7dbe7eaa19ad58d66526e84fbf20e5f28663bb.png" />
 </div>
 </div>
@@ -1485,7 +1475,7 @@ compute in closed form.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/eaea8a8429643505a8dc475b5309ebfc23055b8658b9918d248237e93c61f3e2.png" src="_images/eaea8a8429643505a8dc475b5309ebfc23055b8658b9918d248237e93c61f3e2.png" />
+<img alt="_images/e0c7dee2478df636a1384d5b4c1d3605d84cb7420f2f8f47f1771aa65c7c2054.png" src="_images/e0c7dee2478df636a1384d5b4c1d3605d84cb7420f2f8f47f1771aa65c7c2054.png" />
 </div>
 </div>
 <p>The above figure illustrates the relationship between the asymptotic
