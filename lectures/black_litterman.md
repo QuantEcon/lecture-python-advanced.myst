@@ -319,8 +319,8 @@ d_m = r_m / σ_m
 x = np.arange(N) + 1
 fig, ax = plt.subplots(figsize=(8, 5))
 ax.set_title(r'Difference between $\hat{\mu}$ (estimate) and $\mu_{BL}$ (market implied)')
-ax.plot(x, μ_est, 'o', c='k', label='$\hat{\mu}$')
-ax.plot(x, μ_m, 'o', c='r', label='$\mu_{BL}$')
+ax.plot(x, μ_est, 'o', c='k', label=r'$\hat{\mu}$')
+ax.plot(x, μ_m, 'o', c='r', label=r'$\mu_{BL}$')
 ax.vlines(x, μ_m, μ_est, lw=1)
 ax.axhline(0, c='k', ls='--')
 ax.set_xlabel('Assets')

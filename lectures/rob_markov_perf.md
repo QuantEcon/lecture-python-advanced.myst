@@ -469,7 +469,7 @@ The function's code is as follows
 def nnash_robust(A, C, B1, B2, R1, R2, Q1, Q2, S1, S2, W1, W2, M1, M2,
                  θ1, θ2, beta=1.0, tol=1e-8, max_iter=1000):
 
-    """
+    r"""
     Compute the limit of a Nash linear quadratic dynamic game with
     robustness concern.
 
