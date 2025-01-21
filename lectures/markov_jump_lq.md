@@ -549,7 +549,7 @@ for i, state_var in enumerate(state_vec1):
     ax.plot(λ_vals, F1[:, i], label=r"$\overline{s}_1$", color="b")
     ax.plot(λ_vals, F2[:, i], label=r"$\overline{s}_2$", color="r")
 
-    ax.set_xlabel("$\lambda$")
+    ax.set_xlabel(r"$\lambda$")
     ax.set_ylabel("$F_{s_t}$")
     ax.set_title(f"Coefficient on {state_var}")
     ax.legend()
@@ -617,8 +617,8 @@ for i, state_var in enumerate(state_vec1):
     ax.plot_surface(λ_grid, δ_grid, F1_grid[:, :, i], color="b")
     # low adjustment cost, red surface
     ax.plot_surface(λ_grid, δ_grid, F2_grid[:, :, i], color="r")
-    ax.set_xlabel("$\lambda$")
-    ax.set_ylabel("$\delta$")
+    ax.set_xlabel(r"$\lambda$")
+    ax.set_ylabel(r"$\delta$")
     ax.set_zlabel("$F_{s_t}$")
     ax.set_title(f"coefficient on {state_var}")
     plt.show()
@@ -659,8 +659,8 @@ def run(construct_func, vals_dict, state_vec):
         ax.plot(λ_vals, F1[:, i], label=r"$\overline{s}_1$", color="b")
         ax.plot(λ_vals, F2[:, i], label=r"$\overline{s}_2$", color="r")
 
-        ax.set_xlabel("$\lambda$")
-        ax.set_ylabel("$F(\overline{s}_t)$")
+        ax.set_xlabel(r"$\lambda$")
+        ax.set_ylabel(r"$F(\overline{s}_t)$")
         ax.set_title(f"coefficient on {state_var}")
         ax.legend()
         plt.show()
@@ -681,10 +681,10 @@ def run(construct_func, vals_dict, state_vec):
         # Plot a vertical line at λ=0.5
         ax.plot([0.5, 0.5], [min(k_star), max(k_star)], "-.")
 
-        ax.set_xlabel("$\lambda$")
+        ax.set_xlabel(r"$\lambda$")
         ax.set_ylabel("$k$")
         ax.set_title("Optimal k levels and k targets")
-        ax.text(0.5, min(k_star)+(max(k_star)-min(k_star))/20, "$\lambda=0.5$")
+        ax.text(0.5, min(k_star)+(max(k_star)-min(k_star))/20, r"$\lambda=0.5$")
         ax.legend(bbox_to_anchor=(1., 1.))
         plt.show()
 
@@ -714,9 +714,9 @@ def run(construct_func, vals_dict, state_vec):
         ax = fig.add_subplot(111, projection='3d')
         ax.plot_surface(λ_grid, δ_grid, F1_grid[:, :, i], color="b")
         ax.plot_surface(λ_grid, δ_grid, F2_grid[:, :, i], color="r")
-        ax.set_xlabel("$\lambda$")
-        ax.set_ylabel("$\delta$")
-        ax.set_zlabel("$F(\overline{s}_t)$")
+        ax.set_xlabel(r"$\lambda$")
+        ax.set_ylabel(r"$\delta$")
+        ax.set_zlabel(r"$F(\overline{s}_t)$")
         ax.set_title(f"coefficient on {state_var}")
         plt.show()
 ```

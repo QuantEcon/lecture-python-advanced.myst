@@ -1242,7 +1242,7 @@ for ax, title, plot in zip(axes, titles, [tax_policy, interest_rate]):
     ax.set(title=title, xlim=(min(gov_debt), max(gov_debt)))
     ax.grid()
 
-axes[0].legend(('Time $t=0$', 'Time $t \geq 1$'))
+axes[0].legend(('Time $t=0$', r'Time $t \geq 1$'))
 axes[1].set_xlabel('Initial Government Debt')
 
 fig.tight_layout()
