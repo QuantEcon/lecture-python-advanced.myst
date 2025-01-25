@@ -659,8 +659,10 @@ rates $h=h_0$, each of which is consistent with the existence of a
 sequence of money growth rates $\vec h$ starting from $h_0$
 in the initial period and for which a competitive equilibrium exists.
 
-**Remark:** $CE_\pi^0 = \{h \in \Pi: \text{ there is } \ (m,\theta') \in [0, \bar m] \times \Omega \ \text{ such that } \
-m u'[ f((h-1)m) - v'(m)]  \leq \beta \theta' \ \text{ with equality if } \  m < \bar m \}$.
+**Remark:** 
+
+$$CE_\pi^0 = \{h \in \Pi: \text{ there is } \ (m,\theta') \in [0, \bar m] \times \Omega \ \text{ such that } \ u'[ f((h-1)m) - v'(m)]  \leq \beta \theta' \
+ \text{ with equality if } \  m < \bar m \}.$$
 
 **Definition:**
 An *allocation rule* is a sequence of functions

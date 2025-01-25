@@ -260,13 +260,12 @@ measure having those two  marginal probability measures.</p>
 and Zhenyuan Zhang  <span id="id1">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> used optimal transport theory to formulate and solve an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.</p>
 <p>Production technologies allow firms to affect  shape costs of mismatch with the consequence
 that costs of mismatch can be concave.</p>
-<p>That means that it possible that equilibrium there is neither <strong>positive assortive</strong> nor <strong>negative assorting</strong>  matching, an outcome that   <span id="id2">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> call <strong>composite assortive</strong> matching.</p>
-<p>For example, in  an equilibrium with composite matching,  identical <strong>workers</strong> can sort into different <strong>occupations</strong>, some positively and some negatively.</p>
-<p><span id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>
-show how this can generate distinct distributions  of labor earnings  within and across occupations.</p>
+<p>That means that it is possible that equilibrium there is neither <strong>positive assortive</strong> nor <strong>negative assorting</strong>  matching, an outcome that   <span id="id2">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> call <strong>composite assortive</strong> matching.</p>
+<p>For example, in  an equilibrium with composite matching,  identical <em>workers</em> can sort into different <em>occupations</em>, some positively and some negatively.</p>
+<p><span id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> show how this can generate distinct distributions  of labor earnings  within and across occupations.</p>
 <p>This lecture describes the <span id="id4">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model and  presents  Python code for computing equilibria.</p>
 <p>The lecture  applies the code to the <span id="id5">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model of labor markets.</p>
-<p>As with an earlier QuantEcon lecture on optimal transport (<a class="reference external" href="https://python.quantecon.org/opt_transport.html">https://python.quantecon.org/opt_transport.html</a>), a key tool will be <strong>linear programming</strong>.</p>
+<p>As with an <a class="reference external" href="https://python.quantecon.org/opt_transport.html">earlier QuantEcon lecture on optimal transport</a>, a key tool will be <a class="reference external" href="https://intro.quantecon.org/lp_intro.html">linear programming</a>.</p>
 </section>
 <section id="setup">
 <h2><span class="section-number">16.2. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
@@ -280,31 +279,31 @@ show how this can generate distinct distributions  of labor earnings  within and
 \sum_{x \in X} n_x = \sum_{y \in Y} m_y  =: N
 \]</div>
 <p>so that  the matching  problem is <em>balanced</em>.</p>
-<p>Given a <em>cost function</em> <span class="math notranslate nohighlight">\(c:X \times Y \rightarrow \mathbb{R}\)</span>, the (discrete) <em>optimal transport problem</em> is</p>
+<p>Given a <strong>cost function</strong> <span class="math notranslate nohighlight">\(c \colon X \times Y \rightarrow \mathbb{R}\)</span>, the (discrete) <strong>optimal transport problem</strong> is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-\begin{aligned}
-\min_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy} \\
-\text{s.t. }&amp; \sum_{x \in X} \mu_{xy} = n_x \\
-&amp; \sum_{y \in Y} \mu_{xy} = m_y 
-\end{aligned}
+    \begin{aligned}
+        \min_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy} \\
+        \text{s.t. }&amp; \sum_{x \in X} \mu_{xy} = n_x \\
+        &amp; \sum_{y \in Y} \mu_{xy} = m_y 
+    \end{aligned}
 \end{split}\]</div>
-<p>Given our discreteness  assumptions about <span class="math notranslate nohighlight">\(n\)</span> and <span class="math notranslate nohighlight">\(m\)</span>, the problem admits an integer solution <span class="math notranslate nohighlight">\(\mu \in \mathbb{Z}_+^{X \times Y}\)</span>, i.e. <span class="math notranslate nohighlight">\(\mu_{xy}\)</span> is a non-negative integer for each <span class="math notranslate nohighlight">\(x\in X, y\in Y\)</span>.</p>
+<p>Given our discreteness  assumptions about <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, the problem admits an integer solution <span class="math notranslate nohighlight">\(\mu \in \mathbb{Z}_+^{X \times Y}\)</span>, i.e., <span class="math notranslate nohighlight">\(\mu_{xy}\)</span> is a non-negative integer for each <span class="math notranslate nohighlight">\(x\in X, y\in Y\)</span>.</p>
 <p>We will study integer solutions.</p>
 <p>Two points about restricting ourselves to integer solutions are worth mentioning:</p>
 <ul class="simple">
 <li><p>it is without loss of generality for computational purposes, since every problem with float marginals can be transformed into an equivalent problem with integer marginals;</p></li>
-<li><p>although the mathematical structure that we present actually   wors for arbitrary real marginals, some of our Python  implementations would  fail to work with float arithmetic.</p></li>
+<li><p>although the mathematical structure that we present actually  works for arbitrary real marginals, some of our Python  implementations would  fail to work with float arithmetic.</p></li>
 </ul>
 <p>We focus on  a specific instance of an  optimal transport problem:</p>
-<p>We assume that <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are finite subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and that the cost function satisfies <span class="math notranslate nohighlight">\(c_{xy} = h(|x - y|)\)</span> for all <span class="math notranslate nohighlight">\(x,y \in \mathbb{R},\)</span> for an <span class="math notranslate nohighlight">\(h: \mathbb{R}_+ \rightarrow \mathbb{R}_+\)</span> that  is <strong>strictly concave</strong> and <strong>strictly increasing</strong> and <strong>grounded</strong> (i.e., <span class="math notranslate nohighlight">\(h(0)=0\)</span>).</p>
+<p>We assume that <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are finite subsets of <span class="math notranslate nohighlight">\(\mathbb{R}\)</span> and that the cost function satisfies <span class="math notranslate nohighlight">\(c_{xy} = h(|x - y|)\)</span> for all <span class="math notranslate nohighlight">\(x,y \in \mathbb{R},\)</span> for an <span class="math notranslate nohighlight">\(h: \mathbb{R}_+ \rightarrow \mathbb{R}_+\)</span> that  is <em>strictly concave</em> and <em>strictly increasing</em> and <em>grounded</em> (i.e., <span class="math notranslate nohighlight">\(h(0)=0\)</span>).</p>
 <p>Such an  <span class="math notranslate nohighlight">\(h\)</span> satisfies the following</p>
-<p><strong>Lemma.</strong> Let <span class="math notranslate nohighlight">\(h: \mathbb{R}_+ \rightarrow \mathbb{R}_+\)</span> be <strong>strictly concave</strong> and <strong>grounded</strong>. Then <span class="math notranslate nohighlight">\(h\)</span> is strictly subadditive, i.e. for all <span class="math notranslate nohighlight">\(x,y\in \mathbb{R}_+, 0&lt; x &lt; y,\)</span> we have</p>
+<p><strong>Lemma.</strong> If <span class="math notranslate nohighlight">\(h \colon \mathbb{R}_+ \rightarrow \mathbb{R}_+\)</span> is strictly concave and grounded, then <span class="math notranslate nohighlight">\(h\)</span> is strictly subadditive, i.e. for all <span class="math notranslate nohighlight">\(x,y\in \mathbb{R}_+, 0&lt; x &lt; y,\)</span> we have</p>
 <div class="math notranslate nohighlight">
 \[
-h(x+y) &lt; h(x) + h(y)
+    h(x+y) &lt; h(x) + h(y)
 \]</div>
-<p><em>Proof.</em> For <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> and <span class="math notranslate nohighlight">\(x &gt;0\)</span> we have, by strict concavity and groundedness, <span class="math notranslate nohighlight">\(h(\alpha x) &gt; \alpha h(x) + (1-\alpha) h(0)=\alpha h(x). \)</span></p>
+<p><em>Proof.</em> For <span class="math notranslate nohighlight">\(\alpha \in (0,1)\)</span> and <span class="math notranslate nohighlight">\(x &gt;0\)</span> we have, by strict concavity and groundedness, <span class="math notranslate nohighlight">\(h(\alpha x) &gt; \alpha h(x) + (1-\alpha) h(0)=\alpha h(x)\)</span>.</p>
 <p>Now fix <span class="math notranslate nohighlight">\(x,y\in \mathbb{R}_+, 0&lt; x &lt; y,\)</span> and let <span class="math notranslate nohighlight">\(\alpha = \frac{x}{x+y};\)</span> the previous observation gives <span class="math notranslate nohighlight">\(h(x) = h(\alpha (x+y)) &gt; \alpha h(x+y)\)</span> and <span class="math notranslate nohighlight">\(h(y) = h((1-\alpha) (x+y)) &gt; (1-\alpha) h(x+y) \)</span>;  summing  these inequality delivers the result. <span class="math notranslate nohighlight">\(\square\)</span></p>
 <p>In the following implementation we assume that the cost function is <span class="math notranslate nohighlight">\(c_{xy} = |x-y|^{1/\zeta}\)</span> for <span class="math notranslate nohighlight">\(\zeta&gt;1,\)</span> i.e. <span class="math notranslate nohighlight">\(h(z) =  z^{1/\zeta}\)</span> for <span class="math notranslate nohighlight">\(z \in \mathbb{R}_+.\)</span></p>
 <p>Hence, our problem is</p>
@@ -676,7 +675,7 @@ h(|x-y|)+ h(|x'-y'|) &lt;\alpha h(|x - y'|) +(1-\alpha) h(|x' - y|) +  (1-\alpha
 <p>We conclude that if a matching features intersecting pairs, it can be modified via a sequence of uncrossing operations into a matching without intersecting pairs while improving on the value.</p>
 <p><strong>(Layering)</strong> Recall that there are <span class="math notranslate nohighlight">\(2N\)</span> individual agents, each agent <span class="math notranslate nohighlight">\(i\)</span> having type <span class="math notranslate nohighlight">\(z_i \in X \sqcup Y.\)</span></p>
 <p>When we introduce the off diagonal matching, to stress that the types sets are disjoint now.</p>
-<p>To simplify our explanation  of this property, assume for now that each agent has its own distinct type (i.e., |X|=|Y| =N and <span class="math notranslate nohighlight">\(n=m= \mathbf{1}_N\)</span>), in which case the optimal transport problem is also referred to as <em>assignment problem</em>.</p>
+<p>To simplify our explanation  of this property, assume for now that each agent has its own distinct type (i.e., <span class="math notranslate nohighlight">\(|X| = |Y| =N\)</span> and <span class="math notranslate nohighlight">\(n=m= \mathbf{1}_N\)</span>), in which case the optimal transport problem is also referred to as <em>assignment problem</em>.</p>
 <p>Let’s index  agents according to their types:</p>
 <div class="math notranslate nohighlight">
 \[
