@@ -91,7 +91,7 @@ jobs:
           cp _build/jupyter/*.ipynb _build/lecture-python-advanced.notebooks
           ls -a _build/lecture-python-advanced.notebooks
       - name: Commit latest notebooks to lecture-python-advanced.notebooks
-        uses: cpina/github-action-push-to-another-repository
+        uses: cpina/github-action-push-to-another-repository@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.QUANTECON_SERVICES_PAT }}
         with:
