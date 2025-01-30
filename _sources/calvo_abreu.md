@@ -221,7 +221,7 @@ described in equation {eq}`eq_old6` in quantecon lecture {cite}`Calvo1978`  has 
 $\theta$
 
 $$
-- s(\theta, 0 ) \geq  - s(\theta, \mu) \quad
+s(\theta, 0) \geq  s(\theta, \mu) \quad
 $$
 
 This inequality implies that whenever the policy calls for the
@@ -310,8 +310,8 @@ More precisely, a government plan $\vec \mu^A$ with equilibrium inflation sequen
 :label: eq_old10
 
 \begin{aligned}
-v_j^A & = - s(\theta^A_j, \mu^A_j) + \beta v_{j+1}^A \\
-& \geq - s(\theta^A_j, 0 ) + \beta v_0^A \equiv v_j^{A,D}, \quad j \geq 0
+v_j^A & = s(\theta^A_j, \mu^A_j) + \beta v_{j+1}^A \\
+& \geq s(\theta^A_j, 0 ) + \beta v_0^A \equiv v_j^{A,D}, \quad j \geq 0
 \end{aligned}
 ```
 
@@ -333,15 +333,15 @@ a sufficient condition for another plan $\vec \mu$ associated with inflation $\v
 :label: eq_old100a
 
 \begin{aligned}
-v_j & = - s( \theta_j, \mu_j) + \beta  v_{j+1} \\
-& \geq  -s( \theta_j, 0) + \beta v_0^A \quad \forall j \geq 0
+v_j & = s( \theta_j, \mu_j) + \beta  v_{j+1} \\
+& \geq  s( \theta_j, 0) + \beta v_0^A \quad \forall j \geq 0
 \end{aligned}
 ```
 
 For this condition to be satisfied it is necessary and sufficient that
 
 $$
--s( \theta_j, 0) - ( - s( \theta_j, \mu_j) )  <  \beta ( v_{j+1} - v_0^A )
+s( \theta_j, 0) - s( \theta_j, \mu_j)  <  \beta ( v_{j+1} - v_0^A )
 $$
 
 The left side of the above inequality is the government's *gain* from deviating from the plan, while the right side is the government's *loss* from deviating
@@ -389,7 +389,7 @@ $$
 The value of $\{\theta_t^A,\mu_t^A \}_{t=0}^\infty$ at time $0$ is
 
 $$
-v^A_0 =  - \sum_{t=0}^{T_A-1} \beta^t s(\theta_t^A,\mu_t^A) +\beta^{T_A} J(\theta^R_0)
+v^A_0 =  \sum_{t=0}^{T_A-1} \beta^t s(\theta_t^A,\mu_t^A) +\beta^{T_A} J(\theta^R_0)
 $$
 
 For an appropriate $T_A$, this plan can be verified to be self-enforcing and therefore credible.
@@ -562,7 +562,7 @@ def abreu_plan(clq, T=1000, T_A=10, μ_bar=0.1, T_Plot=20):
     # Calculate utility of stick plan
     U_A = clq.β ** np.arange(T) * (
         clq.u0 + clq.u1 * (-clq.θ_A) - clq.u2 / 2 
-        * (-clq.θ_A) ** 2 - clq.c * clq.μ_A ** 2
+        * (-clq.θ_A) ** 2 - clq.c / 2 * clq.μ_A ** 2
     )
 
     clq.V_A = np.array([np.sum(U_A[t:] / clq.β ** t) for t in range(T)])
@@ -601,7 +601,7 @@ self-enforcing plan $\vec \mu^A$ by setting $\mu_t = 0$ and
 then restarting the plan at $v^A_0$ at $t+1$:
 
 $$
-v_t^{A,D} = -s( \theta_j, 0) + \beta v_0^A
+v_t^{A,D} = s( \theta_j, 0) + \beta v_0^A
 $$
 
 In the above graph  $v_t^A > v_t^{A,D}$, which confirms that $\vec \mu^A$ is a self-enforcing plan.
@@ -617,7 +617,7 @@ Given that plan $\vec \mu^A$ is self-enforcing, we can check that
 the Ramsey plan $\vec \mu^R$ is credible by verifying that:
 
 $$
-v^R_t \geq - s(\theta^R_t,0) + \beta v^A_0 , \quad \forall t \geq 0
+v^R_t \geq s(\theta^R_t,0) + \beta v^A_0 , \quad \forall t \geq 0
 $$
 
 ```{code-cell} ipython3

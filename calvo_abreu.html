@@ -387,7 +387,7 @@ described in equation <a class="reference internal" href="calvo.html#equation-eq
 <span class="math notranslate nohighlight">\(\theta\)</span></p>
 <div class="math notranslate nohighlight">
 \[
-- s(\theta, 0 ) \geq  - s(\theta, \mu) \quad
+s(\theta, 0) \geq  s(\theta, \mu) \quad
 \]</div>
 <p>This inequality implies that whenever the policy calls for the
 government to set <span class="math notranslate nohighlight">\(\mu \neq 0\)</span>, the government could raise its
@@ -447,10 +447,11 @@ governments’ purposes.</p>
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.7.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting quantecon
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading quantecon-0.7.2-py3-none-any.whl.metadata (4.9 kB)
+Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (2.32.3)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.1)
@@ -460,9 +461,16 @@ Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/mi
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
+Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from sympy-&gt;quantecon) (1.3.0)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from sympy-&gt;quantecon) (1.3.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading quantecon-0.7.2-py3-none-any.whl (215 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: quantecon
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed quantecon-0.7.2
 </pre></div>
 </div>
 </div>
@@ -492,8 +500,8 @@ deviations from the plan</p></li>
 <strong>self-enforcing</strong> if</p>
 <div class="math notranslate nohighlight" id="equation-eq-old10">
 <span class="eqno">(44.4)<a class="headerlink" href="#equation-eq-old10" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
-v_j^A &amp; = - s(\theta^A_j, \mu^A_j) + \beta v_{j+1}^A \\
-&amp; \geq - s(\theta^A_j, 0 ) + \beta v_0^A \equiv v_j^{A,D}, \quad j \geq 0
+v_j^A &amp; = s(\theta^A_j, \mu^A_j) + \beta v_{j+1}^A \\
+&amp; \geq s(\theta^A_j, 0 ) + \beta v_0^A \equiv v_j^{A,D}, \quad j \geq 0
 \end{aligned}\end{split}\]</div>
 <p>(Here it is useful to recall that setting <span class="math notranslate nohighlight">\(\mu=0\)</span> is the maximizing choice for the government’s one-period return function)</p>
 <p>The first line tells the consequences of confirming the representative agent’s
@@ -506,13 +514,13 @@ credible.</p>
 a sufficient condition for another plan <span class="math notranslate nohighlight">\(\vec \mu\)</span> associated with inflation <span class="math notranslate nohighlight">\(\vec \theta\)</span> and value <span class="math notranslate nohighlight">\(\vec v\)</span>  to be <strong>credible</strong> is that</p>
 <div class="math notranslate nohighlight" id="equation-eq-old100a">
 <span class="eqno">(44.5)<a class="headerlink" href="#equation-eq-old100a" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
-v_j &amp; = - s( \theta_j, \mu_j) + \beta  v_{j+1} \\
-&amp; \geq  -s( \theta_j, 0) + \beta v_0^A \quad \forall j \geq 0
+v_j &amp; = s( \theta_j, \mu_j) + \beta  v_{j+1} \\
+&amp; \geq  s( \theta_j, 0) + \beta v_0^A \quad \forall j \geq 0
 \end{aligned}\end{split}\]</div>
 <p>For this condition to be satisfied it is necessary and sufficient that</p>
 <div class="math notranslate nohighlight">
 \[
--s( \theta_j, 0) - ( - s( \theta_j, \mu_j) )  &lt;  \beta ( v_{j+1} - v_0^A )
+s( \theta_j, 0) - s( \theta_j, \mu_j)  &lt;  \beta ( v_{j+1} - v_0^A )
 \]</div>
 <p>The left side of the above inequality is the government’s <em>gain</em> from deviating from the plan, while the right side is the government’s <em>loss</em> from deviating
 from the plan.</p>
@@ -551,7 +559,7 @@ number) for <span class="math notranslate nohighlight">\(T_A\)</span> periods, a
 <p>The value of <span class="math notranslate nohighlight">\(\{\theta_t^A,\mu_t^A \}_{t=0}^\infty\)</span> at time <span class="math notranslate nohighlight">\(0\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[
-v^A_0 =  - \sum_{t=0}^{T_A-1} \beta^t s(\theta_t^A,\mu_t^A) +\beta^{T_A} J(\theta^R_0)
+v^A_0 =  \sum_{t=0}^{T_A-1} \beta^t s(\theta_t^A,\mu_t^A) +\beta^{T_A} J(\theta^R_0)
 \]</div>
 <p>For an appropriate <span class="math notranslate nohighlight">\(T_A\)</span>, this plan can be verified to be self-enforcing and therefore credible.</p>
 <p>From quantecon lecture  <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>, we’ll again bring in the Python  class ChangLQ that constructs equilibria under timing protocols studied in that lecture.</p>
@@ -722,7 +730,7 @@ beginning, i.e., <span class="math notranslate nohighlight">\(\theta^A_{t+10} =\
     <span class="c1"># Calculate utility of stick plan</span>
     <span class="n">U_A</span> <span class="o">=</span> <span class="n">clq</span><span class="o">.</span><span class="n">β</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span>
         <span class="n">clq</span><span class="o">.</span><span class="n">u0</span> <span class="o">+</span> <span class="n">clq</span><span class="o">.</span><span class="n">u1</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_A</span><span class="p">)</span> <span class="o">-</span> <span class="n">clq</span><span class="o">.</span><span class="n">u2</span> <span class="o">/</span> <span class="mi">2</span> 
-        <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_A</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">clq</span><span class="o">.</span><span class="n">c</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">μ_A</span> <span class="o">**</span> <span class="mi">2</span>
+        <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">clq</span><span class="o">.</span><span class="n">θ_A</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">clq</span><span class="o">.</span><span class="n">c</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">clq</span><span class="o">.</span><span class="n">μ_A</span> <span class="o">**</span> <span class="mi">2</span>
     <span class="p">)</span>
 
     <span class="n">clq</span><span class="o">.</span><span class="n">V_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">U_A</span><span class="p">[</span><span class="n">t</span><span class="p">:]</span> <span class="o">/</span> <span class="n">clq</span><span class="o">.</span><span class="n">β</span> <span class="o">**</span> <span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">T</span><span class="p">)])</span>
@@ -756,7 +764,7 @@ beginning, i.e., <span class="math notranslate nohighlight">\(\theta^A_{t+10} =\
 </div>
 </details>
 <div class="cell_output docutils container">
-<img alt="_images/db0e76ac6854c0a7c986a4de65a07cc7855ee5caca7d312255818ab32f541da6.png" src="_images/db0e76ac6854c0a7c986a4de65a07cc7855ee5caca7d312255818ab32f541da6.png" />
+<img alt="_images/82ece591888c6775a546e9721644acdf56e89cd3277d226976892f731c8aedd7.png" src="_images/82ece591888c6775a546e9721644acdf56e89cd3277d226976892f731c8aedd7.png" />
 </div>
 </div>
 <p>To confirm that the plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> is <strong>self-enforcing</strong>,  we
@@ -766,7 +774,7 @@ self-enforcing plan <span class="math notranslate nohighlight">\(\vec \mu^A\)</s
 then restarting the plan at <span class="math notranslate nohighlight">\(v^A_0\)</span> at <span class="math notranslate nohighlight">\(t+1\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
-v_t^{A,D} = -s( \theta_j, 0) + \beta v_0^A
+v_t^{A,D} = s( \theta_j, 0) + \beta v_0^A
 \]</div>
 <p>In the above graph  <span class="math notranslate nohighlight">\(v_t^A &gt; v_t^{A,D}\)</span>, which confirms that <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> is a self-enforcing plan.</p>
 <p>We can also verify the inequalities required for <span class="math notranslate nohighlight">\(\vec \mu^A\)</span> to
@@ -787,7 +795,7 @@ be self-confirming numerically as follows</p>
 the Ramsey plan <span class="math notranslate nohighlight">\(\vec \mu^R\)</span> is credible by verifying that:</p>
 <div class="math notranslate nohighlight">
 \[
-v^R_t \geq - s(\theta^R_t,0) + \beta v^A_0 , \quad \forall t \geq 0
+v^R_t \geq s(\theta^R_t,0) + \beta v^A_0 , \quad \forall t \geq 0
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
