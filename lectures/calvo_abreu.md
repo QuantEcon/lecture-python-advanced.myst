@@ -562,7 +562,7 @@ def abreu_plan(clq, T=1000, T_A=10, μ_bar=0.1, T_Plot=20):
     # Calculate utility of stick plan
     U_A = clq.β ** np.arange(T) * (
         clq.u0 + clq.u1 * (-clq.θ_A) - clq.u2 / 2 
-        * (-clq.θ_A) ** 2 - clq.c * clq.μ_A ** 2
+        * (-clq.θ_A) ** 2 - clq.c / 2 * clq.μ_A ** 2
     )
 
     clq.V_A = np.array([np.sum(U_A[t:] / clq.β ** t) for t in range(T)])
