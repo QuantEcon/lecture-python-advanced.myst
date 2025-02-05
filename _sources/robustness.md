@@ -44,11 +44,11 @@ His specification doubts make the decision-maker want a *robust* decision rule.
 
 *Robust* means insensitive to misspecification of transition dynamics.
 
-The decision-maker has a single *approximating model*.
+The decision-maker has a single *approximating model* of the transition dynamics.
 
 He calls it *approximating* to acknowledge that he doesn't completely trust it.
 
-He fears that outcomes will actually be determined by another model that he cannot describe explicitly.
+He fears that transition dynamics are  actually  determined by another model that he cannot describe explicitly.
 
 All that he knows is that the actual data-generating model is in some (uncountable) set of models that surrounds his approximating model.
 
@@ -91,7 +91,7 @@ Our "robust" decision-maker wants to know how well a given rule will work when h
 
 $\ldots$ he wants to know  *sets* of values that will be attained by a given decision rule $F$ under a *set* of transition laws.
 
-Ultimately, he wants to design a decision rule $F$ that shapes these *sets* of values in ways that he prefers.
+Ultimately, he wants to design a decision rule $F$ that shapes the *set* of values in ways that he prefers.
 
 With this in mind, consider the following graph, which relates to a particular decision problem to be explained below
 
@@ -108,7 +108,7 @@ Here
 * *Value* refers to a sum of discounted rewards obtained by applying the decision rule $F$ when the state starts at some fixed initial state $x_0$.
 * *Entropy* is a non-negative number that measures the size of a set of models surrounding the decision-maker's approximating model.
     * Entropy is zero when the set includes only the approximating model, indicating that the decision-maker completely trusts the approximating model.
-    * Entropy is bigger, and the set of surrounding models is bigger, the less the decision-maker trusts the approximating model.
+    * Entropy is bigger, and the set of surrounding models is bigger, the less the decision-maker trusts the approximating model of the transition dynamics.
 
 The shaded region indicates that for **all** models having entropy less than or equal to the number on the horizontal axis, the value obtained will be somewhere within the indicated set of values.
 
@@ -196,15 +196,23 @@ We also allow for *model uncertainty* on the part of the agent solving this opti
 
 In particular, the agent takes $w_t = 0$ for all $t \geq 0$ as a benchmark model but admits the possibility that this model might be wrong.
 
-As a consequence, she also considers a set of alternative models expressed in terms of  sequences $\{ w_t \}$ that are "close" to the zero sequence.
+As a consequence, she also considers a set of alternative models expressed in terms of  sequences $\{ w_t \}$ that are more or less "close" to the zero sequence.
 
 She seeks a policy that will do well enough for a set of alternative models whose members are pinned down by  sequences $\{ w_t \}$.
 
-Soon we'll quantify the quality of a model specification in terms of the maximal size of the expression $\sum_{t=0}^{\infty} \beta^{t+1}w_{t+1}' w_{t+1}$.
+A sequence $\{ w_t \}$ might represent
+
+  * nonlinearities absent from the approximating model
+  * time variations in parameters of the approximating model
+  * omitted state variables in the approximating model
+  * neglected history dependencies $\ldots$
+  * and other potential sources of misspecification
+
+Soon we'll quantify the quality of a model specification in terms of the maximal size of the discounted sum $\sum_{t=0}^{\infty} \beta^{t+1}w_{t+1}' w_{t+1}$.
 
 ## Constructing More Robust Policies
 
-If our agent takes $\{ w_t \}$ as a given deterministic sequence, then, drawing on intuition from earlier lectures on dynamic programming, we can anticipate Bellman equations such as
+If our agent takes $\{ w_t \}$ as a given deterministic sequence, then, drawing on ideas in  earlier lectures on dynamic programming, we can anticipate Bellman equations such as
 
 $$
 J_{t-1} (x)
@@ -221,7 +229,7 @@ Our tool for studying robustness is to construct a rule that works well even if 
 
 In our framework, "adverse" means "loss increasing".
 
-As we'll see, this will eventually lead us to construct the Bellman equation
+As we'll see, this will eventually lead us to construct a Bellman equation
 
 ```{math}
 :label: rb_wcb0
@@ -456,7 +464,7 @@ The remaining step for agent 2's problem is to set $\theta$ to enforce the const
 Here $x_t$ is given by {eq}`rob_lomf` --- which in this case becomes $x_{t+1} = (A - B F + CK(F, \theta)) x_t$.
 
 (rb_a1)=
-### Using Agent 2's Problem to Construct Bounds on the Value Sets
+### Using Agent 2's Problem to Construct Bounds on  Value Sets
 
 #### The Lower Bound
 

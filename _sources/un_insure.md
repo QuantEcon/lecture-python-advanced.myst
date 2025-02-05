@@ -38,6 +38,7 @@ $$ (eq:hugo1)
 where $\beta \in (0,1)$ and $u(c)$ is strictly increasing, twice differentiable,
 and strictly concave.
 
+
 We assume that $u(0)$ is well defined.
 
 We require that $c_t \geq 0$ and $ a_t \geq 0$.
@@ -54,17 +55,27 @@ Furthermore, $a=0$ when the worker is
 employed.
 
 The probability
-of finding a job  is $p(a)$ where $p$ is an increasing, strictly concave,
+of finding a job  is $p(a)$.
+
+$p$ is an increasing, strictly concave,
 and twice differentiable function of $a$ that satisfies
 $p(a)   \in [0,1]$ for  $a \geq 0$, $p(0)=0$.
+
+
+```{note}
+When we compute examples below, we'll use assume the same  $p(a)$ function as 
+{cite}`Hopenhayn_Nicolini_97`, namely, $p(a) = 1 - \exp(- r a)$, where $r$ is a parameter
+that we'll calibrate to hit the same target that {cite}`Hopenhayn_Nicolini_97` did, namely,
+an empirical hazard rate of leaving unemployment.  
+```
 
 The consumption good is nonstorable.
 
 An unemployed worker has no savings and cannot borrow or lend.
 
 
-An **insurance agency** or **planner** is the unemployed worker's only source of consumption
-smoothing over time and across states.
+The unemployed worker's only source of consumption
+smoothing over time and across states is an **insurance agency** or **planner**.
 
 
 Once a worker has found a job, he is beyond the planner's grasp.
@@ -104,7 +115,7 @@ Now let $V^u$ be the expected discounted present value of utility for an
 unemployed worker who chooses  consumption, effort  pair $(c,a)$
 optimally.
 
-It satisfies the Bellman equation
+Value $V^u$ satisfies the Bellman equation
 
 $$
 V^u = \max_{a \geq 0} \biggl\{ u(0) - a + \beta \left[
@@ -147,21 +158,15 @@ to compute $V^u_{j+1}$.
 
 Another benchmark model helps set the stage for the model with private information that we ultimately want to study.
 
-In this model, the unemployment agency has full information about the unemployed work.
+We temporarily assume that an unemployment insurance agency has full information about the unemployed worker.
 
-We study optimal provision of insurance with
-full information.
+We assume that the  insurance agency can control both the consumption and the search effort of an unemployed worker.
 
-An insurance agency can set both
-the  consumption and search effort of an unemployed person.
-
-The
-agency wants to design an unemployment insurance contract to give
+The agency wants to design an unemployment insurance contract to give
 the unemployed worker expected discounted utility $V > V_{\rm aut}$.
 
-The planner wants to deliver value $V$ efficiently,
-meaning in a  way that minimizes expected
- discounted cost, using $\beta$ as the discount factor.
+The agency, i.e., the  planner, wants to deliver value $V$ efficiently,
+meaning in a  way that minimizes an expected  present value  discounted costs, using $\beta$ as the discount factor.
 
 We formulate the optimal insurance problem
 recursively.
@@ -177,11 +182,11 @@ only at an increasing marginal cost in terms of the consumption good.
 
 
 Given $V$, the planner assigns first-period pair   $(c,a)$ and promised
-continuation value $V^u$, should  the worker  be unlucky
-and not find a job.
+continuation value $V^u$ next period if   the worker  is  unlucky
+and does not find a job this period.
 
-$(c, a, V^u)$ are chosen to be functions of $V$ and to
-satisfy the Bellman equation
+The planner sets $(c, a, V^u)$ as functions of $V$ and to
+satisfy the following  Bellman equation for associated cost function $C(V)$:
 
 $$
 C(V) = \min_{c, a, V^u} \biggl\{ c  + \beta [1 - p(a)] C(V^u) \biggr\} ,
@@ -211,7 +216,7 @@ at least $V$.
 Let $\theta$ be a Lagrange multiplier
 on constraint {eq}`eq:hugo6`.
 
-At an interior solution, the first-order
+At an interior solution,  first-order
 conditions with
 respect to $c, a$, and $V^u$, respectively, are
 
@@ -227,7 +232,7 @@ The envelope condition   $C'(V) = \theta$ and the third equation
 of {eq}`eq:hugo7`  imply that $C'(V^u) =C'(V)$.
 
 Strict convexity of $C$ then
-implies that $V^u =V$
+implies that $V^u =V$.
 
 Applied repeatedly over time,
 $V^u=V$ makes
@@ -250,11 +255,10 @@ employment and unemployment unless $V=V^e$.
 
 ### Incentive Problem
 
-The preceding efficient insurance scheme requires that the insurance agency
-control both $c$ and $a$.
+The preceding efficient insurance scheme assumes  that the insurance agency
+controls both $c$ and $a$.
 
-It will not do for the insurance agency
-simply to announce $c$ and then allow the worker to choose $a$.
+The insurance agency cannot simply  provide $c$ and then allow the worker to choose $a$.
 
 Here is why.
 
@@ -264,7 +268,7 @@ the autarky value $V_{\rm aut}$ by doing two things.
 It **increases** the unemployed worker's consumption $c$ and **decreases** his search
 effort $a$.
 
-But the prescribed
+The prescribed
 search effort is **higher** than what the worker would choose
 if he were to be guaranteed consumption level $c$ while he
 remains unemployed.
@@ -273,23 +277,22 @@ This follows from the first two equations of {eq}`eq:hugo7` and the
 fact that the insurance scheme is costly, $C(V^u)>0$, which imply
 $[ \beta p'(a) ]^{-1} > (V^e - V^u)$.
 
-But look at the worker's
+Now look at the worker's
 first-order condition {eq}`eq:hugo4`  under autarky.
 
 It implies that if search effort $a>0$, then
 $[\beta p'(a)]^{-1} = [V^e - V^u]$, which is inconsistent
-with the preceding inequality
-$[ \beta p'(a) ]^{-1} > (V^e - V^u)$ that prevails when $a >0$ under
-the social
-insurance arrangement.
+with the  inequality
+$[ \beta p'(a) ]^{-1} > (V^e - V^u)$ that prevails when $a >0$ when the agency controls
+both $a$ and $c$.
 
 If he were free to choose $a$, the worker would therefore want to
 fulfill {eq}`eq:hugo4`, either at equality so long as $a >0$, or by setting
 $a=0$ otherwise.
 
 Starting from the  $a$ associated with
-the social insurance scheme,
-he  would establish the desired equality
+the full-information social insurance scheme in which the agency controls both $c$ and $a$,
+the worker  would establish the desired equality
 in {eq}`eq:hugo4` by *lowering* $a$, thereby decreasing
 the term $[ \beta p'(a) ]^{-1}$ (which also lowers $(V^e - V^u)$
 when the value of being
@@ -303,17 +306,17 @@ payment, set $a=0$,  and  never work again.
 
 Thus, since the worker does not take the
 cost of the insurance scheme into account, he would choose a search
-effort below the socially optimal one.
+effort below the socially optimal, full-information level.
 
-The efficient contract
+The full-information  contract thus 
 relies on  the agency's ability to control *both* the unemployed
 worker's consumption *and* his search effort.
 
 ## Private Information
 
-Following Shavell and Weiss (1979) {cite}`Shavell_Weiss_79` and
-Hopenhayn and Nicolini (1997) {cite}`Hopenhayn_Nicolini_97`, now assume that  the unemployment insurance agency cannot
-observe or enforce $a$, though it can observe and control $c$.
+Following  {cite}`Shavell_Weiss_79` and
+ {cite}`Hopenhayn_Nicolini_97`, now assume that  the unemployment insurance agency cannot
+observe or control $a$, though it can observe and control $c$.
 
 The worker is free to choose $a$, which puts expression {eq}`eq:hugo4`, the worker's first-order condition under autarky,
 back in the picture.
@@ -326,30 +329,30 @@ an instance of the so-called first-order approach to incentive problems.
 Given a contract, the individual will choose search effort according to
 first-order condition {eq}`eq:hugo4`.
 
-This fact leads the insurance agency
-to design the unemployment insurance contract to respect this restriction.
+This fact motivates the insurance agency
+to design an unemployment insurance contract that respects this restriction.
 
-Thus, the recursive contract design problem is now to minimize the right side of equation
+Thus, the  contract design problem is now to minimize the right side of equation
 {eq}`eq:hugo5` subject to expression {eq}`eq:hugo6` and the incentive constraint {eq}`eq:hugo4`.
 
 Since the restrictions {eq}`eq:hugo4` and {eq}`eq:hugo6` are not linear
-and generally do not define a convex set, it becomes difficult
+and generally do not define a convex set, it becomes challenging
 to provide conditions under which the solution to the dynamic
 programming problem results in a convex function $C(V)$.
 
 * Sometimes this complication can be handled by convexifying
-the constraint set through the introduction of lotteries.
+the constraint set by  introducing lotteries.
 * A common finding is that optimal plans do not involve
 lotteries, because convexity of the constraint set is a sufficient
 but not necessary condition for convexity of the cost function.
-* Following Hopenhayn and Nicolini (1997) {cite}`Hopenhayn_Nicolini_97`, we therefore proceed under the assumption that $C(V)$ is strictly convex in order to characterize the optimal solution.
+*  In order to characterize the optimal solution, we follow Hopenhayn and Nicolini (1997) {cite}`Hopenhayn_Nicolini_97` by hopefully proceeding under the   assumption that $C(V)$ is strictly convex.
 
 Let $\eta$ be the multiplier on constraint {eq}`eq:hugo4`, while
 $\theta$ continues to denote the multiplier on constraint {eq}`eq:hugo6`.
 
 But now we replace the weak inequality in {eq}`eq:hugo6` by an equality.
 
-The unemployment insurance agency cannot award a higher utility than
+  * We do this because the unemployment insurance agency cannot award a higher utility than
 $V$ because that might violate an incentive-compatibility constraint
 for exerting the proper search effort in earlier periods.
 
@@ -369,7 +372,7 @@ where the second equality in the second equation in {eq}`eq:hugo8`  follows from
 of the incentive constraint {eq}`eq:hugo4` when $a>0$.
 
 As long as the
-insurance scheme is associated with costs, so that $C(V^u)>0$, first-order
+insurance scheme is associated with costs, so that $C(V^u)>0$, the first-order
 condition in the second equation of {eq}`eq:hugo8` implies that the multiplier $\eta$ is strictly
 positive.
 
@@ -389,10 +392,10 @@ It also follows from {eq}`eq:hugo4` at equality that
 search effort $a$ rises as $V^u$ falls, i.e., it rises with the duration
 of unemployment.
 
-The duration dependence of benefits is  designed to provide
-incentives to search.
+The  of benefits on the duration of unemployment is  designed to provide the worker an 
+incentive to search.
 
-To see this, from  the third equation of {eq}`eq:hugo8`, notice how
+To understand this, from  the third equation of {eq}`eq:hugo8`, notice how
 the conclusion that consumption falls with the duration of
 unemployment depends on the assumption that more search effort
 raises the prospect of finding a job, i.e., that $p'(a) > 0$.
@@ -422,7 +425,7 @@ The lower bound is
 the expected lifetime utility in autarky,
 $V_{\rm aut}$.
 
-To compute the upper bound,
+To compute an upper bound,
 represent condition {eq}`eq:hugo4` as
 
 $$
@@ -524,7 +527,8 @@ class params_instance:
 ### Parameter Values
 
 
-For  the other parameters we have just loaded in the above Python code, we'll set brate the net  interest rate $r$ to match the hazard rate --  the probability of finding a job in one period --  in US data.
+For  the other parameters appearing in  the above Python code, we'll calibrate parameter $r$ 
+that pins down the function $p(a) = 1 - \exp(- r a)$ to match an observerd hazard rate --  the probability that an unemployed worker finds a job each  --  in US data.
 
 In particular, we seek an $r$ so that in  autarky `p(a(r)) = 0.1`, where `a` is the optimal search effort.
 
@@ -533,7 +537,7 @@ In particular, we seek an $r$ so that in  autarky `p(a(r)) = 0.1`, where `a` is 
 First, we create some helper functions.
 
 ```{code-cell} ipython3
-# The probability of finding a job given search effort, a and interest rate r.
+# The probability of finding a job given search effort, a and parameter r.
 def p(a,r):
     return 1-np.exp(-r*a)
 
@@ -558,7 +562,7 @@ $$
 V^u = \max_{a} \{u(0) - a + \beta\left[p_{r}(a)V^e + (1-p_{r}(a))V^u\right]\}
 $$ (eq:yad1)
 
-At the optimal choice of $a$, we have the first order condition for this problem as:
+At the optimal choice of $a$, we have first-order necessary condition:
 
 $$
 \beta p_{r}'(a)[V^e - V^u] \leq 1
@@ -566,7 +570,7 @@ $$ (eq:yad2)
 
 with equality when a >0.
 
-Given an interest rate $\bar{r}$, we can solve the autarky problem as follows:
+Given a value of parameter  $\bar{r}$, we can solve the autarky problem as follows:
 
 1. Guess $V^u \in \mathbb{R}^{+}$
 2. Given $V^u$, use the FOC {eq}`eq:yad2` to calculate the implied optimal search effort $a$
@@ -590,11 +594,11 @@ def Vu_error(self,Vu,r):
     return error
 ```
 
-Since the calibration exercise is to match the hazard rate under autarky to the data, we must find an interest rate $r$ to match `p(a,r) = 0.1`.
+Since the calibration exercise is to match the hazard rate under autarky to the data, we must find a parameter  $r$ to match `p(a,r) = 0.1`.
 
 The function below `r_error` calculates, for a given guess of $r$ the difference between the model implied equilibrium hazard rate and 0.1.
 
-This will be used to solve for the a calibrated $r^*$.
+We'll use this to compute   a calibrated $r^*$.
 
 ```{code-cell} ipython3
 # The error of our p(a^*) relative to our calibration target
@@ -622,7 +626,7 @@ To do so, we will use a bisection strategy.
 
 ```{code-cell} ipython3
 r_calibrated = sp.optimize.brentq(r_error_Λ,1e-10,1-1e-10)
-print(f"Interest rate to match 0.1 hazard rate: r = {r_calibrated}")
+print(f"Parameter to match 0.1 hazard rate: r = {r_calibrated}")
 
 Vu_aut = sp.optimize.fsolve(Vu_error_Λ,15000,args = (r_calibrated))[0]
 a_aut = invp_prime(1/(params.β*(params.Ve-Vu_aut)),r_calibrated)
@@ -630,7 +634,7 @@ a_aut = invp_prime(1/(params.β*(params.Ve-Vu_aut)),r_calibrated)
 print(f"Check p at r: {p(a_aut,r_calibrated)}")
 ```
 
-Now that we have calibrated our interest rate $r$, we can continue with solving the  model with private information.
+Now that we have calibrated our the parameter $r$, we can continue with solving the  model with private information.
 
 +++
 
@@ -638,9 +642,13 @@ Now that we have calibrated our interest rate $r$, we can continue with solving 
 
 +++
 
-Our approach to solving the full model is a variant on Judd (1998) {cite}`Judd1998`, who uses a polynomial to approximate the value function and a numerical optimizer to perform the optimization at each iteration.
+Our approach to solving the full model follows ideas of  Judd (1998) {cite}`Judd1998`, who uses a polynomial to approximate the value function and a numerical optimizer to perform the optimization at each iteration.
 
-In contrast, we will use cubic splines to interpolate across a pre-set grid of points to approximate the value function. For further details of the Judd (1998) {cite}`Judd1998` method, see {cite}`Ljungqvist2012`, Section 5.7.
+```{note}
+For further details of the Judd (1998) {cite}`Judd1998` method, see {cite}`Ljungqvist2012`, Section 5.7.
+```
+
+We will use cubic splines to interpolate across a pre-set grid of points to approximate the value function. 
 
 +++
 
@@ -650,9 +658,9 @@ $$
 C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 $$ (eq:yad3)
 
-To solve this model, notice that in equations {eq}`eq:hugo21` and {eq}`eq:hugo22`, we have analytical solutions of $c$ and $a$ in terms of (at most) promised value $V$ and $V^u$ (and other parameters).
+Notice that in equations {eq}`eq:hugo21` and {eq}`eq:hugo22`, we have analytical solutions of $c$ and $a$ in terms of  promised value $V$ and $V^u$ (and other parameters).
 
-We can substitute these equations for $c$ and $a$ and obtain the functional equation {eq}`eq:hugo23` that we want to solve.
+We can substitute these equations for $c$ and $a$ and obtain the functional equation {eq}`eq:hugo23`.
 
 
 ```{code-cell} ipython3
@@ -740,7 +748,7 @@ def iterate_C(self,C_old,Vu_grid):
     return C_new,V_star,cons_star,a_star
 ```
 
-The below code executes steps 4 and 5 in the Algorithm  until convergence to a function $C^*(V)$.
+The following code executes steps 4 and 5 in the Algorithm  until convergence to a function $C^*(V)$.
 
 ```{code-cell} ipython3
 def solve_incomplete_info_model(self,Vu_grid,Vu_aut,tol = 1e-6,max_iter = 10000):
@@ -767,7 +775,7 @@ def solve_incomplete_info_model(self,Vu_grid,Vu_aut,tol = 1e-6,max_iter = 10000)
 
 +++
 
-Using the above functions, we create another instance of the parameters with the correctly calibrated interest rate, $r$.
+Using the above functions, we create another instance of the parameters with our calibrated parameter $r$.
 
 ```{code-cell} ipython3
 ##? Create another instance with the correct r now
@@ -792,7 +800,7 @@ V_star_interp = sp.interpolate.interp1d(Vu_grid,V_star)
 
 +++
 
-We want to graph the  replacement ratio ($c/w$) and  search effort $a$ as  functions of the duration of unemployment.
+Let's graph the  replacement ratio ($c/w$) and  search effort $a$ as  functions of the duration of unemployment.
 
 We'll do this for three levels of $V_0$, the lowest being the autarky value $V_{\rm aut}$.
 
@@ -857,7 +865,7 @@ But for $V^u > V_{\rm aut}$, the planner makes the replacement ratio  decline an
 ### Interpretations
 
 The  downward slope of the replacement ratio when $V^u > V_{\rm aut}$ is a consequence of the
- the planner's limited information about the worker's search effort.
+planner's limited information about the worker's search effort.
 
 By providing the worker with a duration-dependent schedule of replacement ratios, the planner induces the worker in effect to reveal
 his/her search effort to the planner.
@@ -891,7 +899,7 @@ unemployed worker with proper incentives, not to punish an unlucky worker
 who has been unemployed for a long time.
 
 The planner believes that a worker who has been unemployed a long time is unlucky, not that he has
-done anything wrong (i.e., has not lived up to the contract).
+done anything wrong (e.g.,that he has not lived up to the contract).
 
 Indeed, the
 contract is designed to induce the unemployed workers to search in
