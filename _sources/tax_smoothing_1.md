@@ -23,24 +23,9 @@ kernelspec:
 
 # How to Pay for a War: Part 1
 
-In addition to what's in Anaconda, this lecture will deploy quantecon:
 
-```{code-cell} ipython
----
-tags: [hide-output]
----
-!pip install --upgrade quantecon
-```
+## Overview 
 
-## Reader's Guide
-
-Let's start with some standard imports:
-
-```{code-cell} ipython
-import quantecon as qe
-import numpy as np
-import matplotlib.pyplot as plt
-```
 
 This lecture uses the method of   **Markov jump linear quadratic dynamic programming** that is described in lecture
 {doc}`Markov Jump LQ dynamic programming <markov_jump_lq>`
@@ -169,6 +154,23 @@ This lecture describes:
 A {doc}`sequel to this lecture <tax_smoothing_2>`
 describes applies Markov LQ control to settings in which a government
 issues risk-free debt of different maturities.
+
+
+
+```{code-cell} ipython
+---
+tags: [hide-output]
+---
+!pip install --upgrade quantecon
+```
+
+Let's start with some standard imports:
+
+```{code-cell} ipython
+import quantecon as qe
+import numpy as np
+import matplotlib.pyplot as plt
+```
 
 ## Barro (1979) Model
 
@@ -362,9 +364,8 @@ which holds in this case:
 S - M @ F, (S - M @ F) @ (A - B @ F)
 ```
 
-This explains the  fanning out of the conditional empirical  distribution of  taxation across time, computing
-by simulation the
-Barro model a large number of times:
+This explains the  fanning out of the conditional empirical  distribution of  taxation across time, computed by simulating  the
+Barro model many  times and averaging over simulated paths:
 
 ```{code-cell} python3
 T = 500
@@ -410,13 +411,17 @@ equations.
 
 Optimal  $P_s,F_s,d_s$  are stored as attributes.
 
-The class also contains a “method” for simulating the model.
+The class also contains a method that  simulates a model.
 
 ## Barro Model with a Time-varying Interest Rate
 
 We can use the above class to implement a version of the Barro model
-with a time-varying interest rate. The simplest way to extend the model
-is to allow the interest rate to take two possible values. We set:
+with a time-varying interest rate. 
+
+A simple way to extend the model
+is to allow the interest rate to take two possible values.
+
+We set:
 
 $$
 p^1_{t,t+1} = \beta + 0.02 = 0.97
@@ -426,10 +431,10 @@ $$
 p^2_{t,t+1} = \beta - 0.017 = 0.933
 $$
 
-Thus, the first Markov state  has a low interest rate, and the
+Thus, the first Markov state  has a low interest rate and the
 second Markov state has a high interest rate.
 
-We also need to specify a transition matrix for the Markov state.
+We must also  specify a transition matrix for the Markov state.
 
 We use:
 
@@ -437,8 +442,8 @@ $$
 \Pi = \begin{bmatrix} 0.8 & 0.2 \\ 0.2 & 0.8 \end{bmatrix}
 $$
 
-(so each Markov state is persistent, and there is an equal chance
-of moving from one state to the other)
+Here,  each Markov state is persistent, and there is are equal chances
+of moving from one state to the other.
 
 The choice of parameters means that the unconditional expectation of
 $p_{t,t+1}$ is 0.9515, higher than $\beta (=0.95)$.

@@ -23,18 +23,11 @@ kernelspec:
 
 # How to Pay for a War: Part 2
 
-In addition to what's in Anaconda, this lecture  deploys the quantecon library:
 
-```{code-cell} ipython
----
-tags: [hide-output]
----
-!pip install --upgrade quantecon
-```
+## Overview
 
-## An Application of Markov Jump Linear Quadratic Dynamic Programming
+This lecture presents another application of Markov jump linear quadratic dynamic programming and constitutes a  {doc}`sequel to an earlier lecture <tax_smoothing_1>`.
 
-This is a {doc}`sequel to an earlier lecture <tax_smoothing_1>`.
 
 We use a method introduced in lecture {doc}`Markov Jump LQ dynamic programming <markov_jump_lq>` to
 implement suggestions by Barro (1999 {cite}`barro1999determinants`, 2003 {cite}`barro2003religion`) for extending his
@@ -69,6 +62,17 @@ We assume
 - that interest rates on those bonds are time-varying and in particular are
   governed by a jointly stationary stochastic process.
 
+
+
+In addition to what's in Anaconda, this lecture  deploys the quantecon library:
+
+```{code-cell} ipython
+---
+tags: [hide-output]
+---
+!pip install --upgrade quantecon
+```
+
 Let's start with some standard imports:
 
 ```{code-cell} ipython
@@ -90,12 +94,18 @@ We’ll describe two possible specifications
 
 ## One- and Two-period Bonds but No Restructuring
 
-Let $T_t$ denote tax collections, $\beta$ a discount factor,
-$b_{t,t+1}$ time $t+1$ goods that the government promises to
-pay at $t$, $b_{t,t+2}$ time $t+2$ goods that the
-government promises to pay at time $t$, $G_t$ government
-purchases, $p_{t,t+1}$ the number of time $t$ goods received
-per time $t+1$ goods promised, and $p_{t,t+2}$ the number of
+Let
+ * $T_t$ denote tax collections 
+ *  $\beta$ be a discount factor
+ * $b_{t,t+1}$ be time $t+1$ goods that the government promises to
+pay at $t$
+ * $b_{t,t+2}$ betime $t+2$ goods that the
+government promises to pay at time $t$
+ *  $G_t$ be government
+purchases
+ *  $p_{t,t+1}$ be the number of time $t$ goods received
+per time $t+1$ goods promised
+ *  $p_{t,t+2}$ be the number of
 time $t$ goods received per time $t+2$ goods promised.
 
 Evidently, $p_{t, t+1}, p_{t,t+2}$ are inversely related to
@@ -129,23 +139,24 @@ T_t & = G_t + b_{t-2,t} + b_{t-1,t} - p_{t,t+2} b_{t,t+2} - p_{t,t+1} b_{t,t+1} 
   \end{bmatrix} & \sim \textrm{functions of Markov state with transition matrix } \Pi \end{aligned}
 $$
 
-Here $w_{t+1} \sim {\cal N}(0,I)$ and $\Pi_{ij}$ is
+Here 
+ * $w_{t+1} \sim {\cal N}(0,I)$ and $\Pi_{ij}$ is
 the probability that the Markov state moves from state $i$ to
-state $j$ in one period.
-
-The variables
-$T_t, b_{t, t+1}, b_{t,t+2}$ are *control* variables chosen at
-$t$, while the variables $b_{t-1,t}, b_{t-2,t}$ are
-endogenous state variables inherited from the past at time $t$ and
-$p_{t,t+1}, p_{t,t+2}$ are exogenous state variables at time
-$t$.
+state $j$ in one period
+  * $T_t, b_{t, t+1}, b_{t,t+2}$ are *control* variables chosen at time 
+$t$
+ *  variables $b_{t-1,t}, b_{t-2,t}$ are
+endogenous state variables inherited from the past at time $t$
+ * $p_{t,t+1}, p_{t,t+2}$ are exogenous state variables at time $t$
 
 The parameter $c_1$ imposes a penalty on the government’s issuing
 different quantities of one and two-period debt.
 
 This penalty deters the
 government from taking large “long-short” positions in debt of different
-maturities. An example below will show this in action.
+maturities. 
+
+An example below will show the penalty in action.
 
 As well as extending the model to allow for a maturity decision for
 government debt, we can also in principle allow the matrices
@@ -174,7 +185,7 @@ $$
 \end{bmatrix}
 $$
 
-and the complete state
+and the complete state vector
 
 $$
 x_t = \begin{bmatrix} \bar b_t \cr
@@ -277,7 +288,9 @@ $$
 T_t^2 + c_1( b_{t,t+1} - b_{t,t+2})^2 = x_t'R_t x_t + u_t' Q_t u_t + 2 u_t' W_t x_t +  c_1 u_t'Q^c u_t
 $$
 
-where $Q^c = \begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix}$. Therefore, the overall $Q$ matrix for the Markov jump LQ problem is:
+where $Q^c = \begin{bmatrix} 1 & -1 \\ -1 & 1 \end{bmatrix}$. 
+
+Therefore, the appropriate $Q$ matrix in  the Markov jump LQ problem is:
 
 $$
 Q_t^c = Q_t + c_1Q^c
@@ -306,9 +319,9 @@ $$
 Thus, in this problem all the matrices apart from $B$ may depend
 on the Markov state at time $t$.
 
-As shown in the {doc}`previous lecture <tax_smoothing_1>`,
-the `LQMarkov` class can solve Markov jump LQ problems when provided with the
-$A, B, C, R, Q, W$ matrices for each Markov state.
+As shown in the {doc}`previous lecture <tax_smoothing_1>`,  when provided with appropriate
+$A, B, C, R, Q, W$ matrices for each Markov state
+the `LQMarkov` class can solve Markov jump LQ problems.
 
 The function below maps the primitive matrices and parameters from the above
 two-period model into the matrices that the `LQMarkov` class requires:
@@ -375,7 +388,7 @@ With the above function, we can proceed to solve the model in two steps:
 1. Use the `LQMarkov` class to solve the resulting n-state Markov
    jump LQ problem.
 
-## Penalty on Different Issuance Across Maturities
+## Penalty on Different Issues Across Maturities
 
 To implement a simple example of the two-period model, we assume that
 $G_t$ follows an AR(1) process:
@@ -395,8 +408,9 @@ Therefore, in this example, $A_{22}, C_2$ and $U_g$ are not
 time-varying.
 
 We will assume that there are two Markov states, one with a
-flatter yield curve, and one with a steeper yield curve. In state 1,
-prices are:
+flatter yield curve, and one with a steeper yield curve. 
+
+In state 1, prices are:
 
 $$
 p^1_{t,t+1} = \beta \hspace{2mm} , \hspace{2mm} p^1_{t,t+2} = \beta^2 - 0.02
@@ -411,8 +425,8 @@ $$
 We first solve the model with no penalty parameter on different issuance
 across maturities, i.e. $c_1 = 0$.
 
-We also need to specify a
-transition matrix for the Markov state, we use:
+We specify that the 
+transition matrix for the Markov state is 
 
 $$
 \Pi = \begin{bmatrix} 0.9 & 0.1 \\ 0.1 & 0.9 \end{bmatrix}
@@ -472,10 +486,10 @@ The above simulations show that when no penalty is imposed on different
 issuances across maturities, the government has an incentive to take
 large “long-short” positions in debt of different maturities.
 
-To prevent such an outcome, we now set $c_1 = 0.01$.
+To prevent such outcomes, we  set $c_1 = 0.01$.
 
-This penalty is enough
-to ensure that the government issues positive quantities of both one and
+This penalty is big  enough
+to motivate  the government to issue positive quantities of both one- and
 two-period debt:
 
 ```{code-cell} python3
@@ -517,7 +531,7 @@ plt.show()
 
 ## A Model with Restructuring
 
-This model alters two features of the previous model:
+We now  alter two features of the previous model:
 
 1. The maximum horizon of government debt is now extended to a general
    *H* periods.
@@ -585,7 +599,8 @@ In terms of dimensions, the first two matrices defined above are $(H-1) \times H
 The last is $1 \times H$
 
 We can now write the government’s budget constraint in matrix notation.
-Rearranging the government budget constraint gives:
+
+We can rearrange the government budget constraint to become 
 
 $$
 T_t = b_t^{t-1} + \sum_{j=1}^{H-1} p_{t+j}^t b_{t+j}^{t-1} + G_t - \sum_{j=1}^H p_{t+j}^t b_{t+j}^t
@@ -597,7 +612,7 @@ $$
 T_t = \tilde S_x \bar b_t + (S_s p_t) \cdot (S_x \bar b_t) + U_g z_t - p_t \cdot u_t
 $$
 
-If we want to write this in terms of the full state, we have:
+To express $T_t$ as a function of the full state, let
 
 $$
 T_t = \begin{bmatrix}  (\tilde S_x + p_t'S_s'S_x) & Ug \end{bmatrix} x_t - p_t' u_t
@@ -626,7 +641,7 @@ $$
 where to economize on notation we adopt the convention that for the linear state matrices
 $R_t \equiv R_{s_t}, Q_t \equiv W_{s_t}$ and so on.
 
-We'll continue to use this convention also for the linear state matrices $A, B, W$ and so on below.
+We'll  use this convention  for the linear state matrices $A, B, W$ and so on below.
 
 Because the payoff function also includes the penalty parameter for
 rescheduling, we have:
@@ -687,9 +702,9 @@ This completes the mapping into a Markov jump LQ problem.
 
 ## Restructuring as a Markov Jump Linear Quadratic Control Problem
 
-As with the previous model, we can use a function to map the primitives
-of the model with restructuring into the matrices that the `LQMarkov`
-class requires:
+We can define a function that maps the primitives
+of the model with restructuring into the matrices required by  the `LQMarkov`
+class:
 
 ```{code-cell} python3
 def LQ_markov_mapping_restruct(A22, C2, Ug, T, p_t, c=0):
@@ -741,11 +756,10 @@ def LQ_markov_mapping_restruct(A22, C2, Ug, T, p_t, c=0):
 
 ### Example with Restructuring
 
-As an example of the model with restructuring, consider this model
-where $H = 3$.
+As an example let $H = 3$.
 
-We will assume that there are two Markov states, one with a
-flatter yield curve, and one with a steeper yield curve.
+Assume that there are two Markov states, one with a
+flatter yield curve,  the other  with a steeper yield curve.
 
 In state 1,
 prices are:
@@ -760,8 +774,8 @@ $$
 p^2_{t,t+1} = 0.9295 \hspace{2mm} , \hspace{2mm} p^2_{t,t+2} = 0.902 \hspace{2mm} , \hspace{2mm} p^2_{t,t+3} = 0.8769
 $$
 
-We will assume the same transition matrix and $G_t$ process as
-above
+We specify  the same transition matrix and $G_t$ process that we used earlier.
+
 
 ```{code-cell} python3
 # New model parameters

@@ -167,7 +167,7 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-application-of-markov-jump-linear-quadratic-dynamic-programming">11.1. Another Application of Markov Jump Linear Quadratic Dynamic Programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">11.1. Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roll-over-risk">11.2. Roll-Over Risk</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-dead-end">11.3. A Dead End</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#better-representation-of-roll-over-risk">11.4. Better Representation of Roll-Over Risk</a></li>
@@ -233,6 +233,20 @@
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="how-to-pay-for-a-war-part-3">
 <span id="index-0"></span><h1><span class="section-number">11. </span>How to Pay for a War: Part 3<a class="headerlink" href="#how-to-pay-for-a-war-part-3" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<h2><span class="section-number">11.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>This lecture presents another application of Markov jump linear quadratic dynamic programming and constitutes a  <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">sequel to an earlier lecture</span></a>.</p>
+<p>We again use a method introduced in lecture <a class="reference internal" href="markov_jump_lq.html"><span class="doc">Markov Jump LQ dynamic programming</span></a>
+to implement some ideas Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id239" title="Robert J Barro. Determinants of democracy. Journal of Political economy, 107(S6):S158–S183, 1999.">Barro, 1999</a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id240" title="Robert J Barro and Rachel McCleary. Religion and economic growth. Technical Report, National Bureau of Economic Research, 2003.">Barro and McCleary, 2003</a>]</span>) that
+extend his classic 1979 <span id="id3">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model of tax smoothing.</p>
+<p>Barro’s 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model is about a government that borrows and lends in order
+to help it minimize an intertemporal measure of distortions caused by
+taxes.</p>
+<p>Technically, Barro’s 1979 <span id="id5">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model looks a lot like a consumption-smoothing model.</p>
+<p>Our generalizations of his 1979 model will also look
+like souped-up consumption-smoothing models.</p>
+<p>In this lecture, we describe a  tax-smoothing problem of a
+government that faces <strong>roll-over risk</strong>.</p>
 <p>In addition to what’s in Anaconda, this lecture deploys the quantecon library:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -265,20 +279,6 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </div>
 </details>
 </div>
-<section id="another-application-of-markov-jump-linear-quadratic-dynamic-programming">
-<h2><span class="section-number">11.1. </span>Another Application of Markov Jump Linear Quadratic Dynamic Programming<a class="headerlink" href="#another-application-of-markov-jump-linear-quadratic-dynamic-programming" title="Permalink to this heading">#</a></h2>
-<p>This is another <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">sequel to an earlier lecture</span></a>.</p>
-<p>We again use a method introduced in lecture <a class="reference internal" href="markov_jump_lq.html"><span class="doc">Markov Jump LQ dynamic programming</span></a>
-to implement some ideas Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id239" title="Robert J Barro. Determinants of democracy. Journal of Political economy, 107(S6):S158–S183, 1999.">Barro, 1999</a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id240" title="Robert J Barro and Rachel McCleary. Religion and economic growth. Technical Report, National Bureau of Economic Research, 2003.">Barro and McCleary, 2003</a>]</span>) that
-extend his classic 1979 <span id="id3">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model of tax smoothing.</p>
-<p>Barro’s 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model is about a government that borrows and lends in order
-to help it minimize an intertemporal measure of distortions caused by
-taxes.</p>
-<p>Technically, Barro’s 1979 <span id="id5">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model looks a lot like a consumption-smoothing model.</p>
-<p>Our generalizations of his 1979 model will also look
-like souped-up consumption-smoothing models.</p>
-<p>In this lecture, we describe a  tax-smoothing problem of a
-government that faces <strong>roll-over risk</strong>.</p>
 <p>Let’s start with some standard imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -318,11 +318,14 @@ G_t = U_{g,t} z_t
 \[
 z_{t+1} = A_{22,t} z_t + C_{2,t} w_{t+1}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(w_{t+1} \sim {\cal N}(0,I)\)</span>. The variables
-<span class="math notranslate nohighlight">\(T_t, b_{t, t+1}\)</span> are <em>control</em> variables chosen at <span class="math notranslate nohighlight">\(t\)</span>,
-while <span class="math notranslate nohighlight">\(b_{t-1,t}\)</span> is an endogenous state variable inherited from
-the past at time <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(p^t_{t+1}\)</span> is an exogenous state
-variable at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>where <span class="math notranslate nohighlight">\(w_{t+1} \sim {\cal N}(0,I)\)</span>.</p>
+<p>Let</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T_t, b_{t, t+1}\)</span> be <em>controls</em>  chosen at <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b_{t-1,t}\)</span> be  an endogenous state variable inherited from
+the past at time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p^t_{t+1}\)</span> be  an exogenous price at time <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+</ul>
 <p>This is the same set-up as used <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">in this lecture</span></a>.</p>
 <p>We will consider a situation in which the government faces “roll-over
 risk”.</p>
@@ -352,7 +355,10 @@ outcome we want to express <em>roll-over</em> risk in period <span class="math n
 <p>Instead, the government would have an incentive to set <span class="math notranslate nohighlight">\(b_{t,t+1}\)</span>
 to a large negative number in state 2 – it would accumulate large
 amounts of <em>assets</em> to bring into period <span class="math notranslate nohighlight">\(t+1\)</span> because that is
-cheap (Our Riccati equations will discover this for us!).</p>
+cheap</p>
+<ul class="simple">
+<li><p>Riccati equations will tell us this</p></li>
+</ul>
 <p>Thus, we must represent “roll-over risk” some other way.</p>
 </section>
 <section id="better-representation-of-roll-over-risk">
@@ -448,14 +454,16 @@ example, from state 3 to state 1.</p>
 </div>
 </div>
 </div>
-<p>This model is simulated below, using the same process for <span class="math notranslate nohighlight">\(G_t\)</span> as
-in <a class="reference internal" href="tax_smoothing_2.html"><span class="doc">this lecture</span></a>.</p>
+<p>Using the same process for <span class="math notranslate nohighlight">\(G_t\)</span> as
+in <a class="reference internal" href="tax_smoothing_2.html"><span class="doc">this lecture</span></a>, we shall simulate our model with roll-over risk.</p>
 <p>When <span class="math notranslate nohighlight">\(p^t_{t+1} = \beta\)</span>
 government debt fluctuates around zero.</p>
-<p>The spikes in the series for
-taxation show periods when the government is unable to access financial
-markets: positive spikes occur when debt is positive, and the government
-must raise taxes in the current period.</p>
+<p>The spikes in the tax collection  series indicate  periods when the government is unable to access financial
+markets:</p>
+<ul class="simple">
+<li><p>positive spikes occur when debt is positive and the government
+must urgently raise tax revenues now</p></li>
+</ul>
 <p>Negative spikes occur when the government has positive asset holdings.</p>
 <p>An inability to use financial markets in the next period means that the
 government uses those assets to lower taxation today.</p>
@@ -486,9 +494,8 @@ government uses those assets to lower taxation today.</p>
 <img alt="_images/bdae789c01b282846e2700fe0537e2e28f65da6f7c6d76cc505f57ebc7e24d34.png" src="_images/bdae789c01b282846e2700fe0537e2e28f65da6f7c6d76cc505f57ebc7e24d34.png" />
 </div>
 </div>
-<p>We can adjust the model so that, rather than having debt fluctuate
-around zero, the government is a debtor in every period we allow it to
-borrow.</p>
+<p>We can adjust parameters  so that, rather than  debt fluctuating
+around zero, the government is a debtor in every period that it can borrow.</p>
 <p>To accomplish this, we simply raise <span class="math notranslate nohighlight">\(p^t_{t+1}\)</span> to
 <span class="math notranslate nohighlight">\(\beta + 0.02 = 0.97\)</span>.</p>
 <div class="cell docutils container">
@@ -534,10 +541,8 @@ borrow.</p>
 <p>With a lower interest rate, the government has an incentive to
 increase debt over time.</p>
 <p>However, with “roll-over risk”, debt is
-recurrently reset to zero and taxes spike up.</p>
-<p>Consequently, the
-government is wary of letting debt get too high, due to the high costs of
-a “sudden stop”.</p>
+recurrently reset to zero and tax collections spike up.</p>
+<p>In this model, high costs of a “sudden stop” make the government  wary about  letting its debt get too high.</p>
 </section>
 </section>
 

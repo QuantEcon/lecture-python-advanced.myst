@@ -276,10 +276,11 @@
 <span class="expanded">Hide code cell output</span>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.7.2)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting quantecon
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading quantecon-0.7.2-py3-none-any.whl.metadata (4.9 kB)
+Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.26.4)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (2.32.3)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.1)
@@ -290,6 +291,13 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/env
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
 Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from sympy-&gt;quantecon) (1.3.0)
+Downloading quantecon-0.7.2-py3-none-any.whl (215 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Installing collected packages: quantecon
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Successfully installed quantecon-0.7.2
 </pre></div>
 </div>
 </div>
@@ -435,7 +443,7 @@ J_{t-1} (x)
 = \min_u
 \{
     x' R x + u' Q u + \beta \,
-    J_t (Ax + B u + C w_t)
+    J_t (Ax + B u + C w)
 \}
 \]</div>
 <p>(Here <span class="math notranslate nohighlight">\(J\)</span> depends on <span class="math notranslate nohighlight">\(t\)</span> because the sequence <span class="math notranslate nohighlight">\(\{w_t\}\)</span> is not recursive)</p>
@@ -960,7 +968,7 @@ loss minimizer.</p></li>
 <span class="n">c</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">γ</span> <span class="o">=</span> <span class="mf">50.0</span>
 
-<span class="n">θ</span> <span class="o">=</span> <span class="mf">0.002</span>
+<span class="n">θ</span> <span class="o">=</span> <span class="mf">0.02</span>
 <span class="n">ac</span> <span class="o">=</span> <span class="p">(</span><span class="n">a_0</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
 
 <span class="c1"># Define LQ matrices</span>
@@ -1121,25 +1129,25 @@ loss minimizer.</p></li>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_9072/154157873.py:51: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6407/3234817930.py:51: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
   return list(map(float, (value, entropy)))
-/tmp/ipykernel_9072/154157873.py:51: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+/tmp/ipykernel_6407/3234817930.py:51: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
   return list(map(float, (value, entropy)))
-/tmp/ipykernel_9072/154157873.py:51: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
-  return list(map(float, (value, entropy)))
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_9072/154157873.py:51: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+/tmp/ipykernel_6407/3234817930.py:51: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
   return list(map(float, (value, entropy)))
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7fe1336fa2a0&gt;]
-[&lt;matplotlib.lines.Line2D object at 0x7fe131156360&gt;]
-[&lt;matplotlib.lines.Line2D object at 0x7fe131156900&gt;]
-[&lt;matplotlib.lines.Line2D object at 0x7fe131156de0&gt;]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6407/3234817930.py:51: DeprecationWarning: Conversion of an array with ndim &gt; 0 to a scalar is deprecated, and will error in future. Ensure you extract a single element from your array before performing this operation. (Deprecated NumPy 1.25.)
+  return list(map(float, (value, entropy)))
 </pre></div>
 </div>
-<img alt="_images/7691c82b60cfc1c3d354f1e3763aeaf72d14f624579cfd39804e05f2a33488e3.png" src="_images/7691c82b60cfc1c3d354f1e3763aeaf72d14f624579cfd39804e05f2a33488e3.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D object at 0x7f29b4317ec0&gt;]
+[&lt;matplotlib.lines.Line2D object at 0x7f29b43275c0&gt;]
+[&lt;matplotlib.lines.Line2D object at 0x7f29b4326cf0&gt;]
+[&lt;matplotlib.lines.Line2D object at 0x7f29b4327230&gt;]
+</pre></div>
+</div>
+<img alt="_images/ccf81841b846058be9871ccdbf7a8389eecae0f0fdbf289c66e7ecbf34a0cb6e.png" src="_images/ccf81841b846058be9871ccdbf7a8389eecae0f0fdbf289c66e7ecbf34a0cb6e.png" />
 </div>
 </div>
 <p>Here’s another such figure, with <span class="math notranslate nohighlight">\(\theta = 0.002\)</span> instead of <span class="math notranslate nohighlight">\(0.02\)</span></p>

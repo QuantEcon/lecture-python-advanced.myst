@@ -167,11 +167,11 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-application-of-markov-jump-linear-quadratic-dynamic-programming">10.1. An Application of Markov Jump Linear Quadratic Dynamic Programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">10.1. Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-example-specifications">10.2. Two example specifications</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-and-two-period-bonds-but-no-restructuring">10.3. One- and Two-period Bonds but No Restructuring</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-into-an-lq-markov-jump-problem">10.4. Mapping into an LQ Markov Jump Problem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penalty-on-different-issuance-across-maturities">10.5. Penalty on Different Issuance Across Maturities</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penalty-on-different-issues-across-maturities">10.5. Penalty on Different Issues Across Maturities</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-model-with-restructuring">10.6. A Model with Restructuring</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#restructuring-as-a-markov-jump-linear-quadratic-control-problem">10.7. Restructuring as a Markov Jump Linear Quadratic Control Problem</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-with-restructuring">10.7.1. Example with Restructuring</a></li>
@@ -239,6 +239,35 @@
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="how-to-pay-for-a-war-part-2">
 <span id="index-0"></span><h1><span class="section-number">10. </span>How to Pay for a War: Part 2<a class="headerlink" href="#how-to-pay-for-a-war-part-2" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<h2><span class="section-number">10.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>This lecture presents another application of Markov jump linear quadratic dynamic programming and constitutes a  <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">sequel to an earlier lecture</span></a>.</p>
+<p>We use a method introduced in lecture <a class="reference internal" href="markov_jump_lq.html"><span class="doc">Markov Jump LQ dynamic programming</span></a> to
+implement suggestions by Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id239" title="Robert J Barro. Determinants of democracy. Journal of Political economy, 107(S6):S158–S183, 1999.">Barro, 1999</a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id240" title="Robert J Barro and Rachel McCleary. Religion and economic growth. Technical Report, National Bureau of Economic Research, 2003.">Barro and McCleary, 2003</a>]</span>) for extending his
+classic 1979 model of tax smoothing.</p>
+<p>Barro’s 1979 <span id="id3">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model is about a government that borrows and lends in order
+to help it minimize an intertemporal measure of distortions caused by
+taxes.</p>
+<p>Technically, Barro’s 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model looks a lot like a consumption-smoothing model.</p>
+<p>Our generalizations of his 1979 <span id="id5">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model will also look
+like souped-up consumption-smoothing models.</p>
+<p>Wanting tractability induced Barro in 1979 <span id="id6">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> to assume that</p>
+<ul class="simple">
+<li><p>the government trades only one-period risk-free debt, and</p></li>
+<li><p>the one-period risk-free interest rate is constant</p></li>
+</ul>
+<p>In our <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">earlier lecture</span></a>, we relaxed the second of these assumptions but not the first.</p>
+<p>In particular, we used <em>Markov jump linear quadratic dynamic programming</em>
+to allow the exogenous interest rate to vary over time.</p>
+<p>In this lecture, we add a maturity composition decision to the
+government’s problem by expanding the dimension of the state.</p>
+<p>We assume</p>
+<ul class="simple">
+<li><p>that the government borrows or saves in the form of risk-free bonds
+of maturities <span class="math notranslate nohighlight">\(1, 2, \ldots , H\)</span>.</p></li>
+<li><p>that interest rates on those bonds are time-varying and in particular are
+governed by a jointly stationary stochastic process.</p></li>
+</ul>
 <p>In addition to what’s in Anaconda, this lecture  deploys the quantecon library:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -271,35 +300,6 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </div>
 </details>
 </div>
-<section id="an-application-of-markov-jump-linear-quadratic-dynamic-programming">
-<h2><span class="section-number">10.1. </span>An Application of Markov Jump Linear Quadratic Dynamic Programming<a class="headerlink" href="#an-application-of-markov-jump-linear-quadratic-dynamic-programming" title="Permalink to this heading">#</a></h2>
-<p>This is a <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">sequel to an earlier lecture</span></a>.</p>
-<p>We use a method introduced in lecture <a class="reference internal" href="markov_jump_lq.html"><span class="doc">Markov Jump LQ dynamic programming</span></a> to
-implement suggestions by Barro (1999 <span id="id1">[<a class="reference internal" href="zreferences.html#id239" title="Robert J Barro. Determinants of democracy. Journal of Political economy, 107(S6):S158–S183, 1999.">Barro, 1999</a>]</span>, 2003 <span id="id2">[<a class="reference internal" href="zreferences.html#id240" title="Robert J Barro and Rachel McCleary. Religion and economic growth. Technical Report, National Bureau of Economic Research, 2003.">Barro and McCleary, 2003</a>]</span>) for extending his
-classic 1979 model of tax smoothing.</p>
-<p>Barro’s 1979 <span id="id3">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model is about a government that borrows and lends in order
-to help it minimize an intertemporal measure of distortions caused by
-taxes.</p>
-<p>Technically, Barro’s 1979 <span id="id4">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model looks a lot like a consumption-smoothing model.</p>
-<p>Our generalizations of his 1979 <span id="id5">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> model will also look
-like souped-up consumption-smoothing models.</p>
-<p>Wanting tractability induced Barro in 1979 <span id="id6">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> to assume that</p>
-<ul class="simple">
-<li><p>the government trades only one-period risk-free debt, and</p></li>
-<li><p>the one-period risk-free interest rate is constant</p></li>
-</ul>
-<p>In our <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">earlier lecture</span></a>, we relaxed the second of these assumptions but not the first.</p>
-<p>In particular, we used <em>Markov jump linear quadratic dynamic programming</em>
-to allow the exogenous interest rate to vary over time.</p>
-<p>In this lecture, we add a maturity composition decision to the
-government’s problem by expanding the dimension of the state.</p>
-<p>We assume</p>
-<ul class="simple">
-<li><p>that the government borrows or saves in the form of risk-free bonds
-of maturities <span class="math notranslate nohighlight">\(1, 2, \ldots , H\)</span>.</p></li>
-<li><p>that interest rates on those bonds are time-varying and in particular are
-governed by a jointly stationary stochastic process.</p></li>
-</ul>
 <p>Let’s start with some standard imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -325,13 +325,21 @@ structure of the debt each period.</p></li>
 </section>
 <section id="one-and-two-period-bonds-but-no-restructuring">
 <h2><span class="section-number">10.3. </span>One- and Two-period Bonds but No Restructuring<a class="headerlink" href="#one-and-two-period-bonds-but-no-restructuring" title="Permalink to this heading">#</a></h2>
-<p>Let <span class="math notranslate nohighlight">\(T_t\)</span> denote tax collections, <span class="math notranslate nohighlight">\(\beta\)</span> a discount factor,
-<span class="math notranslate nohighlight">\(b_{t,t+1}\)</span> time <span class="math notranslate nohighlight">\(t+1\)</span> goods that the government promises to
-pay at <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(b_{t,t+2}\)</span> time <span class="math notranslate nohighlight">\(t+2\)</span> goods that the
-government promises to pay at time <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(G_t\)</span> government
-purchases, <span class="math notranslate nohighlight">\(p_{t,t+1}\)</span> the number of time <span class="math notranslate nohighlight">\(t\)</span> goods received
-per time <span class="math notranslate nohighlight">\(t+1\)</span> goods promised, and <span class="math notranslate nohighlight">\(p_{t,t+2}\)</span> the number of
-time <span class="math notranslate nohighlight">\(t\)</span> goods received per time <span class="math notranslate nohighlight">\(t+2\)</span> goods promised.</p>
+<p>Let</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T_t\)</span> denote tax collections</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta\)</span> be a discount factor</p></li>
+<li><p><span class="math notranslate nohighlight">\(b_{t,t+1}\)</span> be time <span class="math notranslate nohighlight">\(t+1\)</span> goods that the government promises to
+pay at <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b_{t,t+2}\)</span> betime <span class="math notranslate nohighlight">\(t+2\)</span> goods that the
+government promises to pay at time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(G_t\)</span> be government
+purchases</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{t,t+1}\)</span> be the number of time <span class="math notranslate nohighlight">\(t\)</span> goods received
+per time <span class="math notranslate nohighlight">\(t+1\)</span> goods promised</p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{t,t+2}\)</span> be the number of
+time <span class="math notranslate nohighlight">\(t\)</span> goods received per time <span class="math notranslate nohighlight">\(t+2\)</span> goods promised.</p></li>
+</ul>
 <p>Evidently, <span class="math notranslate nohighlight">\(p_{t, t+1}, p_{t,t+2}\)</span> are inversely related to
 appropriate corresponding gross interest rates on government debt.</p>
 <p>In the spirit of Barro (1979) <span id="id7">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span>, government
@@ -359,20 +367,23 @@ T_t &amp; = G_t + b_{t-2,t} + b_{t-1,t} - p_{t,t+2} b_{t,t+2} - p_{t,t+1} b_{t,t
    C_{2,s_t}
   \end{bmatrix} &amp; \sim \textrm{functions of Markov state with transition matrix } \Pi \end{aligned}
 \]</div>
-<p>Here <span class="math notranslate nohighlight">\(w_{t+1} \sim {\cal N}(0,I)\)</span> and <span class="math notranslate nohighlight">\(\Pi_{ij}\)</span> is
+<p>Here</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_{t+1} \sim {\cal N}(0,I)\)</span> and <span class="math notranslate nohighlight">\(\Pi_{ij}\)</span> is
 the probability that the Markov state moves from state <span class="math notranslate nohighlight">\(i\)</span> to
-state <span class="math notranslate nohighlight">\(j\)</span> in one period.</p>
-<p>The variables
-<span class="math notranslate nohighlight">\(T_t, b_{t, t+1}, b_{t,t+2}\)</span> are <em>control</em> variables chosen at
-<span class="math notranslate nohighlight">\(t\)</span>, while the variables <span class="math notranslate nohighlight">\(b_{t-1,t}, b_{t-2,t}\)</span> are
-endogenous state variables inherited from the past at time <span class="math notranslate nohighlight">\(t\)</span> and
-<span class="math notranslate nohighlight">\(p_{t,t+1}, p_{t,t+2}\)</span> are exogenous state variables at time
-<span class="math notranslate nohighlight">\(t\)</span>.</p>
+state <span class="math notranslate nohighlight">\(j\)</span> in one period</p></li>
+<li><p><span class="math notranslate nohighlight">\(T_t, b_{t, t+1}, b_{t,t+2}\)</span> are <em>control</em> variables chosen at time
+<span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p>variables <span class="math notranslate nohighlight">\(b_{t-1,t}, b_{t-2,t}\)</span> are
+endogenous state variables inherited from the past at time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(p_{t,t+1}, p_{t,t+2}\)</span> are exogenous state variables at time <span class="math notranslate nohighlight">\(t\)</span></p></li>
+</ul>
 <p>The parameter <span class="math notranslate nohighlight">\(c_1\)</span> imposes a penalty on the government’s issuing
 different quantities of one and two-period debt.</p>
 <p>This penalty deters the
 government from taking large “long-short” positions in debt of different
-maturities. An example below will show this in action.</p>
+maturities.</p>
+<p>An example below will show the penalty in action.</p>
 <p>As well as extending the model to allow for a maturity decision for
 government debt, we can also in principle allow the matrices
 <span class="math notranslate nohighlight">\(U_{g,s_t}, A_{22,s_t}, C_{2,s_t}\)</span> to depend on the Markov state <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
@@ -396,7 +407,7 @@ intermediated through the Markov state <span class="math notranslate nohighlight
    b_{t-1,t+1}
 \end{bmatrix}
 \]</div>
-<p>and the complete state</p>
+<p>and the complete state vector</p>
 <div class="math notranslate nohighlight">
 \[
 x_t = \begin{bmatrix} \bar b_t \cr
@@ -486,7 +497,8 @@ issuing debt of different maturities, we have:</p>
 \[
 T_t^2 + c_1( b_{t,t+1} - b_{t,t+2})^2 = x_t'R_t x_t + u_t' Q_t u_t + 2 u_t' W_t x_t +  c_1 u_t'Q^c u_t
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(Q^c = \begin{bmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{bmatrix}\)</span>. Therefore, the overall <span class="math notranslate nohighlight">\(Q\)</span> matrix for the Markov jump LQ problem is:</p>
+<p>where <span class="math notranslate nohighlight">\(Q^c = \begin{bmatrix} 1 &amp; -1 \\ -1 &amp; 1 \end{bmatrix}\)</span>.</p>
+<p>Therefore, the appropriate <span class="math notranslate nohighlight">\(Q\)</span> matrix in  the Markov jump LQ problem is:</p>
 <div class="math notranslate nohighlight">
 \[
 Q_t^c = Q_t + c_1Q^c
@@ -511,9 +523,9 @@ A_t = \begin{bmatrix}  A_{11} &amp; 0 \cr
 \]</div>
 <p>Thus, in this problem all the matrices apart from <span class="math notranslate nohighlight">\(B\)</span> may depend
 on the Markov state at time <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p>As shown in the <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">previous lecture</span></a>,
-the <code class="docutils literal notranslate"><span class="pre">LQMarkov</span></code> class can solve Markov jump LQ problems when provided with the
-<span class="math notranslate nohighlight">\(A, B, C, R, Q, W\)</span> matrices for each Markov state.</p>
+<p>As shown in the <a class="reference internal" href="tax_smoothing_1.html"><span class="doc">previous lecture</span></a>,  when provided with appropriate
+<span class="math notranslate nohighlight">\(A, B, C, R, Q, W\)</span> matrices for each Markov state
+the <code class="docutils literal notranslate"><span class="pre">LQMarkov</span></code> class can solve Markov jump LQ problems.</p>
 <p>The function below maps the primitive matrices and parameters from the above
 two-period model into the matrices that the <code class="docutils literal notranslate"><span class="pre">LQMarkov</span></code> class requires:</p>
 <div class="cell docutils container">
@@ -582,8 +594,8 @@ two-period model into the matrices that the <code class="docutils literal notran
 jump LQ problem.</p></li>
 </ol>
 </section>
-<section id="penalty-on-different-issuance-across-maturities">
-<h2><span class="section-number">10.5. </span>Penalty on Different Issuance Across Maturities<a class="headerlink" href="#penalty-on-different-issuance-across-maturities" title="Permalink to this heading">#</a></h2>
+<section id="penalty-on-different-issues-across-maturities">
+<h2><span class="section-number">10.5. </span>Penalty on Different Issues Across Maturities<a class="headerlink" href="#penalty-on-different-issues-across-maturities" title="Permalink to this heading">#</a></h2>
 <p>To implement a simple example of the two-period model, we assume that
 <span class="math notranslate nohighlight">\(G_t\)</span> follows an AR(1) process:</p>
 <div class="math notranslate nohighlight">
@@ -599,8 +611,8 @@ A_{22} = \begin{bmatrix} 1 &amp; 0 \\ \bar G &amp; \rho \end{bmatrix} \hspace{2m
 <p>Therefore, in this example, <span class="math notranslate nohighlight">\(A_{22}, C_2\)</span> and <span class="math notranslate nohighlight">\(U_g\)</span> are not
 time-varying.</p>
 <p>We will assume that there are two Markov states, one with a
-flatter yield curve, and one with a steeper yield curve. In state 1,
-prices are:</p>
+flatter yield curve, and one with a steeper yield curve.</p>
+<p>In state 1, prices are:</p>
 <div class="math notranslate nohighlight">
 \[
 p^1_{t,t+1} = \beta \hspace{2mm} , \hspace{2mm} p^1_{t,t+2} = \beta^2 - 0.02
@@ -612,8 +624,8 @@ p^2_{t,t+1} = \beta \hspace{2mm} , \hspace{2mm}  p^2_{t,t+2} = \beta^2 + 0.02
 \]</div>
 <p>We first solve the model with no penalty parameter on different issuance
 across maturities, i.e. <span class="math notranslate nohighlight">\(c_1 = 0\)</span>.</p>
-<p>We also need to specify a
-transition matrix for the Markov state, we use:</p>
+<p>We specify that the
+transition matrix for the Markov state is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \Pi = \begin{bmatrix} 0.9 &amp; 0.1 \\ 0.1 &amp; 0.9 \end{bmatrix}
@@ -676,9 +688,9 @@ moving from one to the other.</p>
 <p>The above simulations show that when no penalty is imposed on different
 issuances across maturities, the government has an incentive to take
 large “long-short” positions in debt of different maturities.</p>
-<p>To prevent such an outcome, we now set <span class="math notranslate nohighlight">\(c_1 = 0.01\)</span>.</p>
-<p>This penalty is enough
-to ensure that the government issues positive quantities of both one and
+<p>To prevent such outcomes, we  set <span class="math notranslate nohighlight">\(c_1 = 0.01\)</span>.</p>
+<p>This penalty is big  enough
+to motivate  the government to issue positive quantities of both one- and
 two-period debt:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -726,7 +738,7 @@ two-period debt:</p>
 </section>
 <section id="a-model-with-restructuring">
 <h2><span class="section-number">10.6. </span>A Model with Restructuring<a class="headerlink" href="#a-model-with-restructuring" title="Permalink to this heading">#</a></h2>
-<p>This model alters two features of the previous model:</p>
+<p>We now  alter two features of the previous model:</p>
 <ol class="arabic simple">
 <li><p>The maximum horizon of government debt is now extended to a general
 <em>H</em> periods.</p></li>
@@ -782,8 +794,8 @@ b^{t-1}_t = \tilde S_x \bar b_t \text{ where } \tilde S_x = \begin{bmatrix} 1 &a
 \]</div>
 <p>In terms of dimensions, the first two matrices defined above are <span class="math notranslate nohighlight">\((H-1) \times H\)</span>.</p>
 <p>The last is <span class="math notranslate nohighlight">\(1 \times H\)</span></p>
-<p>We can now write the government’s budget constraint in matrix notation.
-Rearranging the government budget constraint gives:</p>
+<p>We can now write the government’s budget constraint in matrix notation.</p>
+<p>We can rearrange the government budget constraint to become</p>
 <div class="math notranslate nohighlight">
 \[
 T_t = b_t^{t-1} + \sum_{j=1}^{H-1} p_{t+j}^t b_{t+j}^{t-1} + G_t - \sum_{j=1}^H p_{t+j}^t b_{t+j}^t
@@ -793,7 +805,7 @@ T_t = b_t^{t-1} + \sum_{j=1}^{H-1} p_{t+j}^t b_{t+j}^{t-1} + G_t - \sum_{j=1}^H 
 \[
 T_t = \tilde S_x \bar b_t + (S_s p_t) \cdot (S_x \bar b_t) + U_g z_t - p_t \cdot u_t
 \]</div>
-<p>If we want to write this in terms of the full state, we have:</p>
+<p>To express <span class="math notranslate nohighlight">\(T_t\)</span> as a function of the full state, let</p>
 <div class="math notranslate nohighlight">
 \[
 T_t = \begin{bmatrix}  (\tilde S_x + p_t'S_s'S_x) &amp; Ug \end{bmatrix} x_t - p_t' u_t
@@ -816,7 +828,7 @@ R_t = S_t'S_t , \hspace{5mm} Q_t = p_t p_t' , \hspace{5mm} W_t = -p_t S_t
 \]</div>
 <p>where to economize on notation we adopt the convention that for the linear state matrices
 <span class="math notranslate nohighlight">\(R_t \equiv R_{s_t}, Q_t \equiv W_{s_t}\)</span> and so on.</p>
-<p>We’ll continue to use this convention also for the linear state matrices <span class="math notranslate nohighlight">\(A, B, W\)</span> and so on below.</p>
+<p>We’ll  use this convention  for the linear state matrices <span class="math notranslate nohighlight">\(A, B, W\)</span> and so on below.</p>
 <p>Because the payoff function also includes the penalty parameter for
 rescheduling, we have:</p>
 <div class="math notranslate nohighlight">
@@ -867,9 +879,9 @@ A_t = \begin{bmatrix} 0 &amp; 0 \\ 0 &amp; A_{22,t} \end{bmatrix} , \hspace{5mm}
 </section>
 <section id="restructuring-as-a-markov-jump-linear-quadratic-control-problem">
 <h2><span class="section-number">10.7. </span>Restructuring as a Markov Jump Linear Quadratic Control Problem<a class="headerlink" href="#restructuring-as-a-markov-jump-linear-quadratic-control-problem" title="Permalink to this heading">#</a></h2>
-<p>As with the previous model, we can use a function to map the primitives
-of the model with restructuring into the matrices that the <code class="docutils literal notranslate"><span class="pre">LQMarkov</span></code>
-class requires:</p>
+<p>We can define a function that maps the primitives
+of the model with restructuring into the matrices required by  the <code class="docutils literal notranslate"><span class="pre">LQMarkov</span></code>
+class:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">LQ_markov_mapping_restruct</span><span class="p">(</span><span class="n">A22</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">Ug</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">p_t</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
@@ -923,10 +935,9 @@ class requires:</p>
 </div>
 <section id="example-with-restructuring">
 <h3><span class="section-number">10.7.1. </span>Example with Restructuring<a class="headerlink" href="#example-with-restructuring" title="Permalink to this heading">#</a></h3>
-<p>As an example of the model with restructuring, consider this model
-where <span class="math notranslate nohighlight">\(H = 3\)</span>.</p>
-<p>We will assume that there are two Markov states, one with a
-flatter yield curve, and one with a steeper yield curve.</p>
+<p>As an example let <span class="math notranslate nohighlight">\(H = 3\)</span>.</p>
+<p>Assume that there are two Markov states, one with a
+flatter yield curve,  the other  with a steeper yield curve.</p>
 <p>In state 1,
 prices are:</p>
 <div class="math notranslate nohighlight">
@@ -938,8 +949,7 @@ p^1_{t,t+1} = 0.9695 \hspace{2mm} , \hspace{2mm} p^1_{t,t+2} = 0.902 \hspace{2mm
 \[
 p^2_{t,t+1} = 0.9295 \hspace{2mm} , \hspace{2mm} p^2_{t,t+2} = 0.902 \hspace{2mm} , \hspace{2mm} p^2_{t,t+3} = 0.8769
 \]</div>
-<p>We will assume the same transition matrix and <span class="math notranslate nohighlight">\(G_t\)</span> process as
-above</p>
+<p>We specify  the same transition matrix and <span class="math notranslate nohighlight">\(G_t\)</span> process that we used earlier.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># New model parameters</span>
