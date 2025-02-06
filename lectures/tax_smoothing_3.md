@@ -23,18 +23,10 @@ kernelspec:
 
 # How to Pay for a War: Part 3
 
-In addition to what's in Anaconda, this lecture deploys the quantecon library:
 
-```{code-cell} ipython
----
-tags: [hide-output]
----
-!pip install --upgrade quantecon
-```
+## Overview
 
-## Another Application of Markov Jump Linear Quadratic Dynamic Programming
-
-This is another {doc}`sequel to an earlier lecture <tax_smoothing_1>`.
+This lecture presents another application of Markov jump linear quadratic dynamic programming and constitutes a  {doc}`sequel to an earlier lecture <tax_smoothing_1>`.
 
 We again use a method introduced in lecture {doc}`Markov Jump LQ dynamic programming <markov_jump_lq>`
 to implement some ideas Barro (1999 {cite}`barro1999determinants`, 2003 {cite}`barro2003religion`) that
@@ -51,6 +43,16 @@ like souped-up consumption-smoothing models.
 
 In this lecture, we describe a  tax-smoothing problem of a
 government that faces **roll-over risk**.
+
+
+In addition to what's in Anaconda, this lecture deploys the quantecon library:
+
+```{code-cell} ipython
+---
+tags: [hide-output]
+---
+!pip install --upgrade quantecon
+```
 
 Let's start with some standard imports:
 
@@ -92,11 +94,13 @@ $$
 z_{t+1} = A_{22,t} z_t + C_{2,t} w_{t+1}
 $$
 
-where $w_{t+1} \sim {\cal N}(0,I)$. The variables
-$T_t, b_{t, t+1}$ are *control* variables chosen at $t$,
-while $b_{t-1,t}$ is an endogenous state variable inherited from
-the past at time $t$ and $p^t_{t+1}$ is an exogenous state
-variable at time $t$.
+where $w_{t+1} \sim {\cal N}(0,I)$. 
+
+Let 
+ * $T_t, b_{t, t+1}$ be *controls*  chosen at $t$
+ * $b_{t-1,t}$ be  an endogenous state variable inherited from
+the past at time $t$
+ * $p^t_{t+1}$ be  an exogenous price at time $t$.
 
 This is the same set-up as used {doc}`in this lecture <tax_smoothing_1>`.
 
@@ -134,7 +138,9 @@ outcome we want to express *roll-over* risk in period $t$.
 Instead, the government would have an incentive to set $b_{t,t+1}$
 to a large negative number in state 2 – it would accumulate large
 amounts of *assets* to bring into period $t+1$ because that is
-cheap (Our Riccati equations will discover this for us!).
+cheap 
+
+ *  Riccati equations will tell us this
 
 Thus, we must represent “roll-over risk” some other way.
 
@@ -237,16 +243,16 @@ lqm = qe.LQMarkov(Π, Qs, Rs, As, Bs, Cs=Cs, Ns=Ws, beta=β)
 lqm.stationary_values();
 ```
 
-This model is simulated below, using the same process for $G_t$ as
-in {doc}`this lecture <tax_smoothing_2>`.
+Using the same process for $G_t$ as
+in {doc}`this lecture <tax_smoothing_2>`, we shall simulate our model with roll-over risk.
 
 When $p^t_{t+1} = \beta$
 government debt fluctuates around zero.
 
-The spikes in the series for
-taxation show periods when the government is unable to access financial
-markets: positive spikes occur when debt is positive, and the government
-must raise taxes in the current period.
+The spikes in the tax collection  series indicate  periods when the government is unable to access financial
+markets: 
+  * positive spikes occur when debt is positive and the government
+must urgently raise tax revenues now 
 
 Negative spikes occur when the government has positive asset holdings.
 
@@ -274,9 +280,9 @@ ax2.set_xlabel('Time')
 plt.show()
 ```
 
-We can adjust the model so that, rather than having debt fluctuate
-around zero, the government is a debtor in every period we allow it to
-borrow.
+We can adjust parameters  so that, rather than  debt fluctuating
+around zero, the government is a debtor in every period that it can borrow.
+ 
 
 To accomplish this, we simply raise $p^t_{t+1}$ to
 $\beta + 0.02 = 0.97$.
@@ -319,9 +325,7 @@ With a lower interest rate, the government has an incentive to
 increase debt over time.
 
 However, with “roll-over risk”, debt is
-recurrently reset to zero and taxes spike up.
+recurrently reset to zero and tax collections spike up.
 
-Consequently, the
-government is wary of letting debt get too high, due to the high costs of
-a “sudden stop”.
+In this model, high costs of a “sudden stop” make the government  wary about  letting its debt get too high.
 
