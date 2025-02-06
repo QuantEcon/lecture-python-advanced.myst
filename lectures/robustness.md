@@ -219,7 +219,7 @@ J_{t-1} (x)
 = \min_u
 \{
     x' R x + u' Q u + \beta \,
-    J_t (Ax + B u + C w_t)
+    J_t (Ax + B u + C w)
 \}
 $$
 
@@ -956,7 +956,7 @@ a_1 = 0.5
 c = 2
 γ = 50.0
 
-θ = 0.002
+θ = 0.02
 ac = (a_0 - c) / 2.0
 
 # Define LQ matrices
