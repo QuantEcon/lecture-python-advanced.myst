@@ -201,16 +201,12 @@ The optimal value functions $- x' P_i x - \rho_i$ for
 $i = 1, \ldots, n$ satisfy the $N$ interrelated Bellman equations
 
 $$
-
 \begin{aligned}
 -x' P_i x - \rho_i & = \max_u -
-  \\
-    
      x'R_i x  & + u' Q_i u + 2 u' W_i x +
              \beta \sum_j \Pi_{ij}E ((A_i x + B_i u + C_i w)' P_j
              (A_i x + B_i u + C_i w) x + \rho_j)  
 \end{aligned}
-
 $$
 
 The matrices $P_{s_t} = P_i$ and the scalars
