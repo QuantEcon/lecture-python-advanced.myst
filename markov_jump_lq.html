@@ -286,8 +286,7 @@ interesting patterns of random variation.</p></li>
 with <span class="math notranslate nohighlight">\(N\)</span> sets of matrices that are fixed functions of
 the state of an <span class="math notranslate nohighlight">\(N\)</span> state Markov chain.</p>
 <p>The state of the Markov chain together with   the continuous <span class="math notranslate nohighlight">\(n \times 1\)</span> state vector <span class="math notranslate nohighlight">\(x_t\)</span> form the state of the system.</p>
-<p>For the class of infinite horizon problems being studied in this lecture, we obtain  <span class="math notranslate nohighlight">\(N\)</span> interrelated
-matrix Riccati equations that determine <span class="math notranslate nohighlight">\(N\)</span> optimal value
+<p>For the class of infinite horizon problems being studied in this lecture, we obtain  <span class="math notranslate nohighlight">\(N\)</span> interrelated matrix Riccati equations that determine <span class="math notranslate nohighlight">\(N\)</span> optimal value
 functions and <span class="math notranslate nohighlight">\(N\)</span> linear decision rules.</p>
 <p>One of these value functions and one of these decision rules apply in each of the <span class="math notranslate nohighlight">\(N\)</span> Markov states.</p>
 <p>That is,  when the Markov state is in state <span class="math notranslate nohighlight">\(j\)</span>, the value function and the decision rule
@@ -407,21 +406,16 @@ u_t = - F_{s_t} x_t
 -x_t' P_i x_t - \rho_i
 \]</div>
 <p>The optimal value functions <span class="math notranslate nohighlight">\(- x' P_i x - \rho_i\)</span> for
-<span class="math notranslate nohighlight">\(i = 1, \ldots, n\)</span> satisfy the <span class="math notranslate nohighlight">\(N\)</span>
-interrelated Bellman equations</p>
+<span class="math notranslate nohighlight">\(i = 1, \ldots, n\)</span> satisfy the <span class="math notranslate nohighlight">\(N\)</span> interrelated Bellman equations</p>
 <div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{split}
+\[
+\begin{aligned}
 -x' P_i x - \rho_i &amp; = \max_u -
-  \\
-  &amp;
-   \left[
-     x'R_i x + u' Q_i u + 2 u' W_i x +
+     x'R_i x  &amp; + u' Q_i u + 2 u' W_i x +
              \beta \sum_j \Pi_{ij}E ((A_i x + B_i u + C_i w)' P_j
-             (A_i x + B_i u + C_i w) x + \rho_j)
-   \right]
-\end{split}
-\end{split}\]</div>
+             (A_i x + B_i u + C_i w) x + \rho_j)  
+\end{aligned}
+\]</div>
 <p>The matrices <span class="math notranslate nohighlight">\(P_{s_t} = P_i\)</span> and the scalars
 <span class="math notranslate nohighlight">\(\rho_{s_t} = \rho_i, i = 1, \ldots\)</span>, n satisfy the following stacked system of
 <strong>algebraic matrix Riccati</strong> equations:</p>
@@ -437,7 +431,7 @@ P_i = R_i + \beta \sum_j A_i' P_j A_i
 \rho_i = \beta
  \sum_j \Pi_{ij} ( \rho_j + {\rm trace}(P_j C_i C_i') )
 \]</div>
-<p>and the <span class="math notranslate nohighlight">\(F_i\)</span> in the optimal decision rules are</p>
+<p>and the <span class="math notranslate nohighlight">\(F_i\)</span> matrices in the optimal decision rules are</p>
 <div class="math notranslate nohighlight">
 \[
 F_i = (Q_i + \beta \sum_j \Pi_{ij} B_i' P_j B_i)^{-1}
@@ -446,7 +440,7 @@ F_i = (Q_i + \beta \sum_j \Pi_{ij} B_i' P_j B_i)^{-1}
 </section>
 <section id="applications">
 <h2><span class="section-number">8.4. </span>Applications<a class="headerlink" href="#applications" title="Permalink to this heading">#</a></h2>
-<p>We now describe some Python code and a few examples that put the code to work.</p>
+<p>We now describe Python code and some examples.</p>
 <p>To begin, we import these Python modules</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -499,7 +493,7 @@ k_{t+1}-k_{t}=u_{t}
 \]</div>
 <p>Let <span class="math notranslate nohighlight">\(x_{t}=\begin{bmatrix} k_{t}\\ 1 \end{bmatrix}\)</span></p>
 <p>We can represent the one-period payoff function
-<span class="math notranslate nohighlight">\(r\left(s_{t},k_{t}\right)\)</span> and the state-transition law as</p>
+<span class="math notranslate nohighlight">\(r\left(s_{t},k_{t}\right)\)</span>  as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -510,6 +504,7 @@ f_{2,s_t} &amp; -\frac{f_{1,s_t}}{2}\\
 \end{bmatrix}}}x_{t}+\underset{\equiv Q\left(s_{t}\right)}{\underbrace{d_{s_t}}}u_{t}{}^{2}
  \end{aligned}
 \end{split}\]</div>
+<p>and the state-transition law as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 x_{t+1}=\begin{bmatrix}
@@ -1111,7 +1106,7 @@ r(s_{t},k_{t},w_{t})=f_{1,s_{t}} k_{t}-f_{2, s_{t}} k_{t}^{2}-d_{s_{t}} (k_{t+1}
 <span class="math notranslate nohighlight">\(x_{t}=\begin{bmatrix} k_{t}\\ 1\\ w_{t} \end{bmatrix}\)</span>
 and continue to set the control <span class="math notranslate nohighlight">\(u_{t}=k_{t+1}-k_{t}\)</span>.</p>
 <p>We can write the one-period payoff function
-<span class="math notranslate nohighlight">\(r\left(s_{t},k_{t},w_{t}\right)\)</span> and the state-transition law as</p>
+<span class="math notranslate nohighlight">\(r\left(s_{t},k_{t},w_{t}\right)\)</span> as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -1127,7 +1122,7 @@ x_{t}+
 \underset{\equiv Q\left(s_{t}\right)}{\underbrace{d\left(s_{t}\right)}}u_{t}^{2}\right),
 \end{aligned}
 \end{split}\]</div>
-<p>and</p>
+<p>and the state-transition law as</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 x_{t+1}=\begin{bmatrix}

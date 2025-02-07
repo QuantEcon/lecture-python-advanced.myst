@@ -29,17 +29,17 @@ kernelspec:
 This lecture presents another application of Markov jump linear quadratic dynamic programming and constitutes a  {doc}`sequel to an earlier lecture <tax_smoothing_1>`.
 
 We again use a method introduced in lecture {doc}`Markov Jump LQ dynamic programming <markov_jump_lq>`
-to implement some ideas Barro (1999 {cite}`barro1999determinants`, 2003 {cite}`barro2003religion`) that
-extend his classic 1979 {cite}`Barro1979` model of tax smoothing.
+to implement some ideas of  {cite}`barro1999determinants` and  {cite}`barro2003religion`) that
+extend the  classic  {cite}`Barro1979` model of tax smoothing.
 
-Barro’s 1979 {cite}`Barro1979` model is about a government that borrows and lends in order
+{cite}`Barro1979`  is about a government that borrows and lends in order
 to help it minimize an intertemporal measure of distortions caused by
 taxes.
 
-Technically, Barro’s 1979 {cite}`Barro1979` model looks a lot like a consumption-smoothing model.
+Technically,  {cite}`Barro1979`  looks a lot like a consumption-smoothing model.
 
-Our generalizations of his 1979 model will also look
-like souped-up consumption-smoothing models.
+Our generalization  will also look
+like a souped-up consumption-smoothing model.
 
 In this lecture, we describe a  tax-smoothing problem of a
 government that faces **roll-over risk**.

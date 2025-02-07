@@ -56,8 +56,7 @@ the state of an $N$ state Markov chain.
 
 The state of the Markov chain together with   the continuous $n \times 1$ state vector $x_t$ form the state of the system.
 
-For the class of infinite horizon problems being studied in this lecture, we obtain  $N$ interrelated
-matrix Riccati equations that determine $N$ optimal value
+For the class of infinite horizon problems being studied in this lecture, we obtain  $N$ interrelated matrix Riccati equations that determine $N$ optimal value
 functions and $N$ linear decision rules.
 
 One of these value functions and one of these decision rules apply in each of the $N$ Markov states.
@@ -199,20 +198,15 @@ $$
 $$
 
 The optimal value functions $- x' P_i x - \rho_i$ for
-$i = 1, \ldots, n$ satisfy the $N$
-interrelated Bellman equations
+$i = 1, \ldots, n$ satisfy the $N$ interrelated Bellman equations
 
 $$
-\begin{split}
+\begin{aligned}
 -x' P_i x - \rho_i & = \max_u -
-  \\
-  &
-   \left[
-     x'R_i x + u' Q_i u + 2 u' W_i x +
+     x'R_i x  & + u' Q_i u + 2 u' W_i x +
              \beta \sum_j \Pi_{ij}E ((A_i x + B_i u + C_i w)' P_j
-             (A_i x + B_i u + C_i w) x + \rho_j)
-   \right]
-\end{split}
+             (A_i x + B_i u + C_i w) x + \rho_j)  
+\end{aligned}
 $$
 
 The matrices $P_{s_t} = P_i$ and the scalars
@@ -231,7 +225,7 @@ $$
  \sum_j \Pi_{ij} ( \rho_j + {\rm trace}(P_j C_i C_i') )
 $$
 
-and the $F_i$ in the optimal decision rules are
+and the $F_i$ matrices in the optimal decision rules are
 
 $$
 F_i = (Q_i + \beta \sum_j \Pi_{ij} B_i' P_j B_i)^{-1}
@@ -240,7 +234,7 @@ $$
 
 ## Applications
 
-We now describe some Python code and a few examples that put the code to work.
+We now describe Python code and some examples.
 
 To begin, we import these Python modules
 
@@ -297,7 +291,7 @@ $$
 Let $x_{t}=\begin{bmatrix} k_{t}\\ 1 \end{bmatrix}$
 
 We can represent the one-period payoff function
-$r\left(s_{t},k_{t}\right)$ and the state-transition law as
+$r\left(s_{t},k_{t}\right)$  as
 
 $$
 \begin{aligned}
@@ -308,6 +302,8 @@ f_{2,s_t} & -\frac{f_{1,s_t}}{2}\\
 \end{bmatrix}}}x_{t}+\underset{\equiv Q\left(s_{t}\right)}{\underbrace{d_{s_t}}}u_{t}{}^{2}
  \end{aligned}
 $$
+
+and the state-transition law as
 
 $$
 x_{t+1}=\begin{bmatrix}
@@ -804,7 +800,7 @@ $x_{t}=\begin{bmatrix} k_{t}\\ 1\\ w_{t} \end{bmatrix}$
 and continue to set the control $u_{t}=k_{t+1}-k_{t}$.
 
 We can write the one-period payoff function
-$r\left(s_{t},k_{t},w_{t}\right)$ and the state-transition law as
+$r\left(s_{t},k_{t},w_{t}\right)$ as  
 
 $$
 \begin{aligned}
@@ -821,7 +817,8 @@ x_{t}+
 \end{aligned}
 $$
 
-and
+and the state-transition law as
+
 
 $$
 x_{t+1}=\begin{bmatrix}

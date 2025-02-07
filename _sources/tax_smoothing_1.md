@@ -38,13 +38,13 @@ This lecture has two sequels that offer further extensions of the Barro model
 1. {doc}`How to Pay for a War: Part 3 <tax_smoothing_3>`
 
 The extensions are modified versions of
-his 1979 model later suggested by Barro (1999 {cite}`barro1999determinants`, 2003 {cite}`barro2003religion`).
+his 1979 model  suggested by  {cite}`barro1999determinants` and  {cite}`barro2003religion`).
 
-Barro’s original 1979 {cite}`Barro1979` model is about a government that borrows and lends
+{cite}`Barro1979` m is about a government that borrows and lends
 in order to minimize an intertemporal measure of distortions
 caused by taxes.
 
-Technical tractability induced Barro {cite}`Barro1979` to assume that
+Technical tractability induced  {cite}`Barro1979` to assume that
 
 - the government trades only one-period risk-free debt, and
 - the one-period risk-free interest rate is constant
@@ -57,17 +57,17 @@ Also, by expanding the dimension of the
 state, we can add a maturity composition decision to the government’s
 problem.
 
-It is by doing these two things that we extend Barro’s 1979 {cite}`Barro1979`
-model along lines he suggested in Barro (1999 {cite}`barro1999determinants`, 2003 {cite}`barro2003religion`).
+By doing these two things we extend  {cite}`Barro1979`
+along lines he suggested in  {cite}`barro1999determinants` and  {cite}`barro2003religion`).
 
-Barro (1979) {cite}`Barro1979` assumed
+{cite}`Barro1979` assumed
 
 - that a government faces an **exogenous sequence** of expenditures
   that it must finance by a tax collection sequence whose expected
   present value equals the initial debt it owes plus the expected
   present value of those expenditures.
-- that the government wants to minimize the following measure of tax
-  distortions: $E_0 \sum_{t=0}^{\infty} \beta^t T_t^2$, where $T_t$ are total tax collections and $E_0$
+- that the government wants to minimize a measure of tax
+  distortions that is proportional to $E_0 \sum_{t=0}^{\infty} \beta^t T_t^2$, where $T_t$ are total tax collections and $E_0$
   is a mathematical expectation conditioned on time $0$
   information.
 - that the government trades only one asset, a risk-free one-period
@@ -79,9 +79,8 @@ Barro (1979) {cite}`Barro1979` assumed
 Barro’s model can be mapped into a discounted linear quadratic dynamic
 programming problem.
 
-Partly inspired by Barro
-(1999) {cite}`barro1999determinants` and Barro (2003) {cite}`barro2003religion`,
-our generalizations of Barro’s (1979) {cite}`Barro1979` model assume
+Partly inspired by  {cite}`barro1999determinants` and  {cite}`barro2003religion`,
+our generalizations of  {cite}`Barro1979`,  assume
 
 - that the government borrows or saves in the form of risk-free bonds
   of maturities $1, 2, \ldots , H$.
@@ -121,7 +120,7 @@ states.
 
 ## Public Finance Questions
 
-Barro’s 1979 {cite}`Barro1979` model is designed to answer questions such as
+{cite}`Barro1979`  is designed to answer questions such as
 
 - Should a government finance an exogenous surge in government
   expenditures by raising taxes or borrowing?
@@ -130,8 +129,7 @@ Barro’s 1979 {cite}`Barro1979` model is designed to answer questions such as
   whether the surge in government expenditures can be expected to be
   temporary or permanent?
 
-Barro’s 1999 {cite}`barro1999determinants` and 2003 {cite}`barro2003religion`
-models are designed to answer more fine-grained
+{cite}`barro1999determinants` and {cite}`barro2003religion` are designed to answer more fine-grained
 questions such as
 
 - What determines whether a government wants to issue short-term or
@@ -174,23 +172,27 @@ import matplotlib.pyplot as plt
 
 ## Barro (1979) Model
 
-We begin by solving a version of the Barro (1979) {cite}`Barro1979` model by mapping it
+We begin by solving a version of  {cite}`Barro1979`  by mapping it
 into the original LQ framework.
 
 As mentioned [in this lecture](https://python-intro.quantecon.org/perm_income_cons.html), the
 Barro model is mathematically isomorphic with the LQ permanent income
 model.
 
-Let $T_t$ denote tax collections, $\beta$ a discount factor,
-$b_{t,t+1}$ time $t+1$ goods that the government promises to
-pay at $t$, $G_t$ government purchases, $p_{t,t+1}$
-the number of time $t$ goods received per time $t+1$ goods
-promised.
+Let 
+ 
+ * $T_t$ denote tax collections
+ *  $\beta$ be a discount factor
+ * $b_{t,t+1}$ be time $t+1$ goods that at $t$ the government promises to
+deliver to time $t$ buyers of  one-period   government bonds 
+ * $G_t$ be government purchases
+ *  $p_{t,t+1}$ the number of time $t$ goods received per time $t+1$ goods
+promised to one-period bond purchasers.
 
 Evidently, $p_{t, t+1}$ is inversely related to
 appropriate corresponding gross interest rates on government debt.
 
-In the spirit of Barro (1979) {cite}`Barro1979`, the stochastic process of government
+In the spirit of  {cite}`Barro1979`, the stochastic process of government
 expenditures is exogenous.
 
 The government’s problem is to choose a plan
