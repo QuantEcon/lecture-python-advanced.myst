@@ -29,20 +29,19 @@ kernelspec:
 This lecture presents another application of Markov jump linear quadratic dynamic programming and constitutes a  {doc}`sequel to an earlier lecture <tax_smoothing_1>`.
 
 
-We use a method introduced in lecture {doc}`Markov Jump LQ dynamic programming <markov_jump_lq>` to
-implement suggestions by Barro (1999 {cite}`barro1999determinants`, 2003 {cite}`barro2003religion`) for extending his
+We use a method introduced in lecture {doc}`Markov Jump LQ dynamic programming <markov_jump_lq>` toimplement suggestions by  {cite}`barro1999determinants` and  {cite}`barro2003religion`) for extending his
 classic 1979 model of tax smoothing.
 
-Barro’s 1979 {cite}`Barro1979` model is about a government that borrows and lends in order
+ {cite}`Barro1979` model is about a government that borrows and lends in order
 to help it minimize an intertemporal measure of distortions caused by
 taxes.
 
-Technically, Barro’s 1979 {cite}`Barro1979` model looks a lot like a consumption-smoothing model.
+Technically, {cite}`Barro1979` model looks a lot like a consumption-smoothing model.
 
-Our generalizations of his 1979 {cite}`Barro1979` model will also look
+Our generalizations of  {cite}`Barro1979`  will also look
 like souped-up consumption-smoothing models.
 
-Wanting tractability induced Barro in 1979 {cite}`Barro1979` to assume that
+Wanting tractability induced  {cite}`Barro1979` to assume that
 
 - the government trades only one-period risk-free debt, and
 - the one-period risk-free interest rate is constant
@@ -111,7 +110,7 @@ time $t$ goods received per time $t+2$ goods promised.
 Evidently, $p_{t, t+1}, p_{t,t+2}$ are inversely related to
 appropriate corresponding gross interest rates on government debt.
 
-In the spirit of Barro (1979) {cite}`Barro1979`, government
+In the spirit of {cite}`Barro1979`, government
 expenditures are governed by an exogenous stochastic process.
 
 Given initial conditions $b_{-2,0}, b_{-1,0}, z_0, i_0$, where
