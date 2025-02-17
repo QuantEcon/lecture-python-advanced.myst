@@ -1089,11 +1089,11 @@ def s(θ, μ, u0, u1, u2, α, c):
 
 # Calculate v_t sequence backward
 def compute_vt(μ, β, c, u0=1, u1=0.5, u2=3, α=1):
-    T = len(μs)
+    T = len(μ)
     θ = compute_θ(μ, α)
     
     v_t = np.zeros(T)
-    μ_bar = μs[-1]
+    μ_bar = μ[-1]
     
     # Reduce parameters
     s_p = lambda θ, μ: s(θ, μ, 
