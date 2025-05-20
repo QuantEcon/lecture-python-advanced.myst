@@ -253,19 +253,24 @@
 <h1><span class="section-number">16. </span>Composite Sorting<a class="headerlink" href="#composite-sorting" title="Permalink to this heading">#</a></h1>
 <section id="overview">
 <h2><span class="section-number">16.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>Optimal transport theory is studies how one (marginal) probabilty measure can be related to another (marginal) probability measure in an ideal way.</p>
+<p>Optimal transport theory studies how a marginal probabilty measure  can  be related to another marginal probability measure in an ideal way.</p>
+<ul class="simple">
+<li><p>here ideal means to minimize some  cost criterion.</p></li>
+</ul>
 <p>The output of such a theory is a <strong>coupling</strong> of the two probability measures, i.e., a joint probabilty
 measure having those two  marginal probability measures.</p>
 <p>This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodo Wang,
-and Zhenyuan Zhang  <span id="id1">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> used optimal transport theory to formulate and solve an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.</p>
-<p>Production technologies allow firms to affect  shape costs of mismatch with the consequence
-that costs of mismatch can be concave.</p>
-<p>That means that it is possible that equilibrium there is neither <strong>positive assortive</strong> nor <strong>negative assorting</strong>  matching, an outcome that   <span id="id2">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> call <strong>composite assortive</strong> matching.</p>
-<p>For example, in  an equilibrium with composite matching,  identical <em>workers</em> can sort into different <em>occupations</em>, some positively and some negatively.</p>
-<p><span id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> show how this can generate distinct distributions  of labor earnings  within and across occupations.</p>
+and Zhenyuan Zhang  <span id="id1">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> used optimal transport theory to formulate and compute  an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.</p>
+<p>Production technologies allow firms to   reshape costs of mismatch so that they become concave.</p>
+<p>It is then possible that in  equilibrium there is neither <strong>positive assortive</strong> nor <strong>negative assorting</strong>  matching, an outcome that   <span id="id2">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> call <strong>composite assortive</strong> matching.</p>
+<p>For example, with composite matching in  an equilibrium model with workers of different types,  ex ante   identical <em>workers</em> can sort into different <em>occupations</em>, some positively and some negatively.</p>
+<p><span id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> show how composite matching  can generate distinct non-trivial frequency  distributions  of labor earnings  within and across occupations.</p>
 <p>This lecture describes the <span id="id4">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model and  presents  Python code for computing equilibria.</p>
-<p>The lecture  applies the code to the <span id="id5">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model of labor markets.</p>
+<p>The lecture then  applies the code to the <span id="id5">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model of labor markets.</p>
 <p>As with an <a class="reference external" href="https://python.quantecon.org/opt_transport.html">earlier QuantEcon lecture on optimal transport</a>, a key tool will be <a class="reference external" href="https://intro.quantecon.org/lp_intro.html">linear programming</a>.</p>
+<p>As we’ll see, <span id="id6">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> also deploy dynamic programming in creative ways at important points in
+their analysis.  So as you read this lecture, please watch  for Bellman equations that might remind
+you of ideas  encountered in this  <a class="reference external" href="https://python.quantecon.org/mccall_model.html">earlier QuantEcon lecture</a> and this <a class="reference external" href="https://dp.quantecon.org">QuantEcon book</a>.</p>
 </section>
 <section id="setup">
 <h2><span class="section-number">16.2. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
@@ -477,7 +482,7 @@ Thus, $f(x) =\frac{n_x}{N} \mathbb{1}\{n_x > 0\} $ and $g(y) =\frac{m_y}{N} \mat
 <li><p>No intersecting pairs</p></li>
 <li><p>Layering</p></li>
 </ol>
-<p><strong>(Maximal number of perfect pairs)</strong></p>
+<p><strong>Maximal number of perfect pairs</strong></p>
 <p>If <span class="math notranslate nohighlight">\((z,z) \in X \times Y\)</span> for some <span class="math notranslate nohighlight">\(z \in \mathbb{R}\)</span> then in each optimal solution there are <span class="math notranslate nohighlight">\(\min\{n_z,m_z\}\)</span> matches between type <span class="math notranslate nohighlight">\(z \in X\)</span> and <span class="math notranslate nohighlight">\(z \in Y\)</span>.</p>
 <p>Indeed, assume by contradiction that at an optimal solution we have <span class="math notranslate nohighlight">\((z,y)\)</span> and <span class="math notranslate nohighlight">\((x,z)\)</span> matched in positive amounts for <span class="math notranslate nohighlight">\(y,x \neq z\)</span>.</p>
 <p>We can verify that reassigning the minimum of such quantities to the pairs <span class="math notranslate nohighlight">\((z,z)\)</span> and <span class="math notranslate nohighlight">\((x,y)\)</span> improves upon the current matching since</p>
@@ -634,12 +639,13 @@ Residual types in Y: 16
 <img alt="_images/3b71bec78f1535d6eafac6d37c0c51311f6fea73b835d3dbb20fa111e7c3f214.png" src="_images/3b71bec78f1535d6eafac6d37c0c51311f6fea73b835d3dbb20fa111e7c3f214.png" />
 </div>
 </div>
-<p><strong>(No intersecting pairs)</strong> This  property summarizes  the following fact:</p>
+<p>To prepare the way for the second property,  represent both types  on the real line and draw    semicirles that  join <span class="math notranslate nohighlight">\((x,y)\)</span> for all pairs <span class="math notranslate nohighlight">\((x,y) \in X \times Y\)</span> that are matched in a solution.</p>
+<p>In terms of these semicircles we assert the</p>
+<p><strong>No intersecting pairs property</strong></p>
 <ul class="simple">
-<li><p>represent both types  on the real line and draw a semicirle joining <span class="math notranslate nohighlight">\((x,y)\)</span> for all pairs <span class="math notranslate nohighlight">\((x,y) \in X \times Y\)</span> that are matched in a solution</p></li>
-<li><p>these semicirles do not intersect (unless they share one of the endpoints).</p></li>
+<li><p>unless they share one of the endpoints, the semicirles do not intersect.</p></li>
 </ul>
-<p>A proof proceeds by contradiction.</p>
+<p>To prove the property, we reason  by contradiction.</p>
 <p>Let’s consider types <span class="math notranslate nohighlight">\(x,x' \in X\)</span> and <span class="math notranslate nohighlight">\(y,y' \in Y.\)</span></p>
 <p>Matched pairs cain “intersect” (or be  tangent).</p>
 <p>We will show that in both cases the partial matching among types <span class="math notranslate nohighlight">\(x,x',y,y'\)</span> can be improved by <em>uncrossing</em>, i.e. reassigning the quantities while improving on the solution and reducing the number of intersecting pairs.</p>
@@ -673,7 +679,9 @@ h(|x-y|)+ h(|x'-y'|) &lt;\alpha h(|x - y'|) +(1-\alpha) h(|x' - y|) +  (1-\alpha
 <p>Finally, it remains to argue that in both cases  <em>uncrossing</em> operations do not increase the number of intersections with other matched pairs.</p>
 <p>It can indeed be shown on a case-by-case basis that, in both of the above cases, for any other matched pair <span class="math notranslate nohighlight">\((x'',y'')\)</span> the number of intersections between pairs <span class="math notranslate nohighlight">\((x,y), (x',y')\)</span> and the pair <span class="math notranslate nohighlight">\((x'',y'')\)</span> (i.e., after uncrossing) is not larger than the number of intersections between pairs <span class="math notranslate nohighlight">\((x,y'), (x',y)\)</span> and the pair <span class="math notranslate nohighlight">\((x'',y'')\)</span> (i.e., before uncrossing), hence the uncrossing operations above reduce the number of intersections.</p>
 <p>We conclude that if a matching features intersecting pairs, it can be modified via a sequence of uncrossing operations into a matching without intersecting pairs while improving on the value.</p>
-<p><strong>(Layering)</strong> Recall that there are <span class="math notranslate nohighlight">\(2N\)</span> individual agents, each agent <span class="math notranslate nohighlight">\(i\)</span> having type <span class="math notranslate nohighlight">\(z_i \in X \sqcup Y.\)</span></p>
+<p>We now consider the third property.</p>
+<p><strong>Layering</strong></p>
+<p>Recall that there are <span class="math notranslate nohighlight">\(2N\)</span> individual agents, each agent <span class="math notranslate nohighlight">\(i\)</span> having type <span class="math notranslate nohighlight">\(z_i \in X \sqcup Y.\)</span></p>
 <p>When we introduce the off diagonal matching, to stress that the types sets are disjoint now.</p>
 <p>To simplify our explanation  of this property, assume for now that each agent has its own distinct type (i.e., <span class="math notranslate nohighlight">\(|X| = |Y| =N\)</span> and <span class="math notranslate nohighlight">\(n=m= \mathbf{1}_N\)</span>), in which case the optimal transport problem is also referred to as <em>assignment problem</em>.</p>
 <p>Let’s index  agents according to their types:</p>
@@ -821,7 +829,7 @@ H(z) \leq h_{\ell -1} &lt; h_{\ell } \leq H(z-),
 </div>
 </div>
 </div>
-<p>The following method gives a graphical representation of the layers.</p>
+<p>The following method provides a graphical representation of the layers.</p>
 <p>From the  picture it is easy to spot  two key features described  above:</p>
 <ul class="simple">
 <li><p>types are alternating</p></li>
@@ -947,13 +955,13 @@ z_1 &lt; z_2\dots &lt; z_{N_\ell-1} &lt; z_{N_\ell},
 <p>Since <span class="math notranslate nohighlight">\([z_2,z_{j-1}]\)</span> (as well as <span class="math notranslate nohighlight">\([z_{j+1},z_{N_\ell}]\)</span>) is alternating, we can reason recursively.</p>
 <p>Let <span class="math notranslate nohighlight">\(V_{ij}\)</span> be the optimal value of matching agents in <span class="math notranslate nohighlight">\([i,j]\)</span> with  <span class="math notranslate nohighlight">\(i,j \in [N_\ell],\)</span> <span class="math notranslate nohighlight">\(j -i \in \{1,3,\dots,N_\ell-1\}\)</span>.</p>
 <p>Suppose that we computed the value <span class="math notranslate nohighlight">\(V_{ij}\)</span> for all <span class="math notranslate nohighlight">\(i,j \in [N_\ell]\)</span> with <span class="math notranslate nohighlight">\(i-j \in \{1,3,\dots,t-2\}\)</span> for some odd natural number <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p>Then, for <span class="math notranslate nohighlight">\(i,j \in [N_\ell]\)</span> with <span class="math notranslate nohighlight">\(i-j= t\)</span> we have</p>
-<div class="math notranslate nohighlight">
-\[
+<p>Then for <span class="math notranslate nohighlight">\(i,j \in [N_\ell]\)</span> with <span class="math notranslate nohighlight">\(i-j= t\)</span></p>
+<div class="math notranslate nohighlight" id="equation-eq-bellman101">
+<span class="eqno">(16.1)<a class="headerlink" href="#equation-eq-bellman101" title="Permalink to this equation">#</a></span>\[
 V_{ij} = \min_{k \in \{i+1,i+3,\dots,j\}} \left\{ c_{ik} + V_{i+1,k-1} + V_{k+1,j}\right\}
 \]</div>
 <p>with the RHS depending only on previously computed values.</p>
-<p>We set the boundary conditions at <span class="math notranslate nohighlight">\(t=-1\)</span>: <span class="math notranslate nohighlight">\(V_{i+1,i} = 0\)</span> for each <span class="math notranslate nohighlight">\(i \in [N_\ell],\)</span> so that we can apply the same Bellman equation at <span class="math notranslate nohighlight">\(t =1.\)</span></p>
+<p>We set the boundary conditions at <span class="math notranslate nohighlight">\(t=-1\)</span>: <span class="math notranslate nohighlight">\(V_{i+1,i} = 0\)</span> for each <span class="math notranslate nohighlight">\(i \in [N_\ell],\)</span> so that we can apply the same Bellman equation <a class="reference internal" href="#equation-eq-bellman101">(16.1)</a> at <span class="math notranslate nohighlight">\(t =1.\)</span></p>
 <p>The following method takes as input the layer types indices and computes the value function as a matrix <span class="math notranslate nohighlight">\([V_{ij}]_{ i \in [N_\ell+1], j \in [N_\ell ]}\)</span>.</p>
 <p>In order to  distinguish  entries that  are relevant for our computations from those that  are never accessed, we initialize this matrix as full of  NaN values.</p>
 <div class="cell docutils container">
@@ -1025,7 +1033,8 @@ Section of the Value function of the layer:
 </div>
 </div>
 </div>
-<p>Having computed the value function, we can proceed to compute the optimal matching as the <em>policy</em> that attains the value function that solves the  Bellman equation (<em>policy evaluation</em>).</p>
+<p><strong>Policy evaluation</strong></p>
+<p>Having computed the value function, we can proceed to compute the optimal matching as the <em>policy</em> that attains the value function that solves the  Bellman equation  <a class="reference internal" href="#equation-eq-bellman101">(16.1)</a>.</p>
 <p>We start from agent <span class="math notranslate nohighlight">\(1\)</span> and match it with the <span class="math notranslate nohighlight">\(k\)</span> that achieves the minimum in the equation associated with <span class="math notranslate nohighlight">\(V_{1,2N_\ell}.\)</span></p>
 <p>Then we store  segments <span class="math notranslate nohighlight">\([2,k-1]\)</span> and <span class="math notranslate nohighlight">\([k+1,2N_\ell]\)</span> (if not empty).</p>
 <p>In general, given a segment <span class="math notranslate nohighlight">\([i,j],\)</span> we match <span class="math notranslate nohighlight">\(i\)</span> with <span class="math notranslate nohighlight">\(k\)</span> that achieves the minimum in the equation associated with  <span class="math notranslate nohighlight">\(V_{ij}\)</span> and store the segments <span class="math notranslate nohighlight">\([i,k-1]\)</span> and <span class="math notranslate nohighlight">\([k+1,j]\)</span> (if not empty).</p>
@@ -1149,7 +1158,7 @@ Value of the layer (scaled by the mass = 1): 24.764959193288938
 <section id="solving-a-layer-in-a-smarter-way">
 <h4><span class="section-number">16.3.2.1. </span>Solving a layer in a smarter way<a class="headerlink" href="#solving-a-layer-in-a-smarter-way" title="Permalink to this heading">#</a></h4>
 <p>We  now present two key results in the context of OT with concave type costs.</p>
-<p>We refer <span id="id6">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> and <span id="id7">[<a class="reference internal" href="zreferences.html#id4" title="Julie Delon, Julien Salomon, and Andrei Sobolevski. Minimum-weight perfect matching for non-intrinsic distances on the line. arXiv preprint arXiv:1102.1558, 2011.">Delon <em>et al.</em>, 2011</a>]</span> for proofs.</p>
+<p>We refer <span id="id7">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> and <span id="id8">[<a class="reference internal" href="zreferences.html#id4" title="Julie Delon, Julien Salomon, and Andrei Sobolevski. Minimum-weight perfect matching for non-intrinsic distances on the line. arXiv preprint arXiv:1102.1558, 2011.">Delon <em>et al.</em>, 2011</a>]</span> for proofs.</p>
 <p>Consider the problem faced within a layer, i.e., types from <span class="math notranslate nohighlight">\(Y \sqcup X\)</span></p>
 <div class="math notranslate nohighlight">
 \[ 
@@ -1160,7 +1169,7 @@ z_1 &lt; z_2\dots &lt; z_{N_\ell-1} &lt; z_{N_\ell}, \quad N_\ell \in 2 \mathbb{
 <p>Visually, the arc joining <span class="math notranslate nohighlight">\((i',j')\)</span> surmounts the arc joining <span class="math notranslate nohighlight">\((i,j).\)</span></p>
 <p><strong>Theorem (DSS)</strong> Given an optimal matching on <span class="math notranslate nohighlight">\([1,k],\)</span> if <span class="math notranslate nohighlight">\((i,j)\)</span> is hidden in this matching, then the pair <span class="math notranslate nohighlight">\((i,j)\)</span> belongs to every optimal matching on <span class="math notranslate nohighlight">\([1, 2 N_\ell]\)</span> and is hidden in this matching too.</p>
 <p>As a consequence, there exists a more efficient way to compute the value function within a layer.</p>
-<p>It can be shown that the solving the following second-order difference  equations delivers the same result as the Bellman equations above:</p>
+<p>It can be shown that the solving the following second-order difference  equations delivers the same result as the Bellman equations <a class="reference internal" href="#equation-eq-bellman101">(16.1)</a> presented above:</p>
 <div class="math notranslate nohighlight">
 \[ 
 V_{ij} = \min \{ c_{ij} + V_{i+1,j-1}, V_{i+2,j} + V_{i,j-2} - V_{i+2,j-2}\}
@@ -1795,7 +1804,7 @@ Monge cost of PAM:
 </section>
 <section id="example-3">
 <h3><span class="section-number">16.5.3. </span>Example 3<a class="headerlink" href="#example-3" title="Permalink to this heading">#</a></h3>
-<p><span id="id8">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> provide the following  example.</p>
+<p><span id="id9">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> provide the following  example.</p>
 <p>There are four agents per side and three types per side (so the problem is not unitary, as opposed to the examples above).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1886,7 +1895,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <p>The values are related by <span class="math notranslate nohighlight">\(W_P =  \sum_{x \in X}n_x \alpha_x +  \sum_{y \in Y}m_y \gamma_y - V_P.\)</span></p>
 <p>The dual solutions of <span class="math notranslate nohighlight">\(V_D\)</span> and <span class="math notranslate nohighlight">\(W_D\)</span> are related by <span class="math notranslate nohighlight">\(u_x = \alpha_x - \phi_x\)</span> and <span class="math notranslate nohighlight">\(v_y = \gamma_y - \psi_y.\)</span></p>
 <p>The dual solution <span class="math notranslate nohighlight">\((u,v)\)</span> of <span class="math notranslate nohighlight">\(W_D\)</span> can be interpreted as equilibrium utilities of the agents, which include the individual specific amenities and equilibrium shadow costs.</p>
-<p><span id="id9">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.</p>
+<p><span id="id10">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.</p>
 <p>Let’s generate an instance and compute the optimal matching.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2000,11 +2009,11 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{(5, 5): [(4, 7), (1, 3)],
  (3, 1): [(7, 0), (0, 2)],
- &#39;artificial_pair&#39;: [(5, 5), (2, 6)],
  (7, 0): [],
  (6, 4): [],
  (0, 2): [],
  (2, 6): [],
+ &#39;artificial_pair&#39;: [(5, 5), (2, 6)],
  (1, 3): [],
  (4, 7): [(6, 4), (3, 1)]}
 </pre></div>
@@ -2385,7 +2394,7 @@ Value of primal solution:  9.03369035213102
 <h2><span class="section-number">16.7. </span>Application<a class="headerlink" href="#application" title="Permalink to this heading">#</a></h2>
 <section id="data">
 <h3><span class="section-number">16.7.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h3>
-<p>We now replicate the empirical analysis carried out by <span id="id10">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>.</p>
+<p>We now replicate the empirical analysis carried out by <span id="id11">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>.</p>
 <p>The dataset is obtained from the American Community Survey and contains individual level data on income, age and occupation.</p>
 <p>The occupation of each individual consists of a Standard Occupational Classification (SOC) code.</p>
 <p>There are 497 codes in total.</p>
@@ -2435,10 +2444,10 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<figure class="align-default" id="id11">
+<figure class="align-default" id="id12">
 <img alt="_images/138fa8c86135daed058ae556cb6c69b9780dccc6dae62ecdf38b087acf83cbd0.png" src="_images/138fa8c86135daed058ae556cb6c69b9780dccc6dae62ecdf38b087acf83cbd0.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data. The size of the marker is proportional to the number of individuals in the occupation.</span><a class="headerlink" href="#id11" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data. The size of the marker is proportional to the number of individuals in the occupation.</span><a class="headerlink" href="#id12" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -2474,10 +2483,10 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<figure class="align-default" id="id12">
+<figure class="align-default" id="id13">
 <img alt="_images/ca4abb66441ba706f4ce30c50442f91e4eda1befc656e52a2c7f12a8db02785a.png" src="_images/ca4abb66441ba706f4ce30c50442f91e4eda1befc656e52a2c7f12a8db02785a.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data.</span><a class="headerlink" href="#id12" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data.</span><a class="headerlink" href="#id13" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </div>

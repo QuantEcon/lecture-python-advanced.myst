@@ -3,8 +3,10 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.16.7
 kernelspec:
-  display_name: Python 3
+  display_name: Python 3 (ipykernel)
   language: python
   name: python3
 ---
@@ -25,10 +27,9 @@ kernelspec:
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
-```{code-cell} ipython
----
-tags: [hide-output]
----
+```{code-cell} ipython3
+:tags: [hide-output]
+
 !pip install --upgrade quantecon
 ```
 
@@ -73,7 +74,7 @@ We cover only the key features of the problem in this lecture, leaving you to re
 
 We'll need the following imports:
 
-```{code-cell} ipython
+```{code-cell} ipython3
 import sys
 import numpy as np
 import matplotlib.pyplot as plt
@@ -583,7 +584,7 @@ The following code provides functions for
 
 Description and clarifications are given below
 
-```{code-cell} python3
+```{code-cell} ipython3
 # Set up a namedtuple to store data on the model economy
 Economy = namedtuple('economy',
                     ('β',         # Discount factor
@@ -694,7 +695,7 @@ def compute_paths(T, econ):
         a0 = 0.5 * (F @ (x_vals.T @ Sm.T)**2)[0]
         H = ((Sb - Sd + Sg) @ x_vals) * ((Sg - Ss) @ x_vals)
         b0 = 0.5 * (F @ H.T)[0]
-        a0, b0 = float(a0), float(b0)
+        a0, b0 = float(a0[0]), float(b0[0])
     else:
         H = Sm.T @ Sm
         a0 = 0.5 * var_quadratic_sum(A, C, H, β, x0)
@@ -889,7 +890,7 @@ with $\rho = 0.7$, $\mu_g = 0.35$ and $C_g = \mu_g \sqrt{1 - \rho^2} / 10$.
 
 Here's the code
 
-```{code-cell} python3
+```{code-cell} ipython3
 # == Parameters == #
 β = 1 / 1.05
 ρ, mg = .7, .35
@@ -915,7 +916,7 @@ The legends on the figures indicate the variables being tracked.
 Most obvious from the figure is tax smoothing in the sense that tax revenue is
 much less variable than government expenditure.
 
-```{code-cell} python3
+```{code-cell} ipython3
 gen_fig_2(path)
 ```
 
@@ -931,7 +932,7 @@ See the original [manuscript](https://lectures.quantecon.org/_downloads/firenze.
 
 Our second example adopts a discrete Markov specification for the exogenous process
 
-```{code-cell} python3
+```{code-cell} ipython3
 # == Parameters == #
 β = 1 / 1.05
 P = np.array([[0.8, 0.2, 0.0],
@@ -961,7 +962,7 @@ gen_fig_1(path)
 
 The call `gen_fig_2(path)` generates
 
-```{code-cell} python3
+```{code-cell} ipython3
 gen_fig_2(path)
 ```
 
@@ -997,7 +998,7 @@ Produce the corresponding figures.
 :class: dropdown
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 # == Parameters == #
 β = 1 / 1.05
 ρ, mg = .95, .35
@@ -1023,10 +1024,11 @@ path = compute_paths(T, economy)
 gen_fig_1(path)
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 gen_fig_2(path)
 ```
 
 ```{solution-end}
 ```
+
 

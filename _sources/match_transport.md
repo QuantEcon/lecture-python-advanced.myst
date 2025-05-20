@@ -17,30 +17,33 @@ kernelspec:
 
 ## Overview 
 
-Optimal transport theory is studies how one (marginal) probabilty measure can be related to another (marginal) probability measure in an ideal way.  
+Optimal transport theory studies how a marginal probabilty measure  can  be related to another marginal probability measure in an ideal way.
+
+  * here ideal means to minimize some  cost criterion. 
 
 The output of such a theory is a **coupling** of the two probability measures, i.e., a joint probabilty
 measure having those two  marginal probability measures.  
 
 This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodo Wang,
-and Zhenyuan Zhang  {cite}`boerma2023composite` used optimal transport theory to formulate and solve an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.  
+and Zhenyuan Zhang  {cite}`boerma2023composite` used optimal transport theory to formulate and compute  an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.  
 
-Production technologies allow firms to affect  shape costs of mismatch with the consequence
-that costs of mismatch can be concave.   
+Production technologies allow firms to   reshape costs of mismatch so that they become concave.   
 
-That means that it is possible that equilibrium there is neither **positive assortive** nor **negative assorting**  matching, an outcome that   {cite}`boerma2023composite` call **composite assortive** matching.
+It is then possible that in  equilibrium there is neither **positive assortive** nor **negative assorting**  matching, an outcome that   {cite}`boerma2023composite` call **composite assortive** matching.
 
-For example, in  an equilibrium with composite matching,  identical *workers* can sort into different *occupations*, some positively and some negatively.  
+For example, with composite matching in  an equilibrium model with workers of different types,  ex ante   identical *workers* can sort into different *occupations*, some positively and some negatively.  
 
-{cite}`boerma2023composite` show how this can generate distinct distributions  of labor earnings  within and across occupations.  
-
+{cite}`boerma2023composite` show how composite matching  can generate distinct non-trivial frequency  distributions  of labor earnings  within and across occupations.  
 
 This lecture describes the {cite}`boerma2023composite` model and  presents  Python code for computing equilibria.
 
-The lecture  applies the code to the {cite}`boerma2023composite` model of labor markets. 
+The lecture then  applies the code to the {cite}`boerma2023composite` model of labor markets. 
 
 As with an [earlier QuantEcon lecture on optimal transport](https://python.quantecon.org/opt_transport.html), a key tool will be [linear programming](https://intro.quantecon.org/lp_intro.html).
 
+As we'll see, {cite}`boerma2023composite` also deploy dynamic programming in creative ways at important points in
+their analysis.  So as you read this lecture, please watch  for Bellman equations that might remind
+you of ideas  encountered in this  [earlier QuantEcon lecture](https://python.quantecon.org/mccall_model.html) and this [QuantEcon book](https://dp.quantecon.org).
 
 
 ## Setup
@@ -286,7 +289,7 @@ We now indicate important properties that  are satisfied by an optimal solution.
 
 +++ {"user_expressions": []}
 
-**(Maximal number of perfect pairs)** 
+**Maximal number of perfect pairs** 
 
 If $(z,z) \in X \times Y$ for some $z \in \mathbb{R}$ then in each optimal solution there are $\min\{n_z,m_z\}$ matches between type $z \in X$ and $z \in Y$. 
 
@@ -444,13 +447,21 @@ example_off_diag.plot_marginals(title='Distributions of types: off-diagonal')
 
 +++ {"user_expressions": []}
 
-**(No intersecting pairs)** This  property summarizes  the following fact:
+To prepare the way for the second property,  represent both types  on the real line and draw    semicirles that  join $(x,y)$ for all pairs $(x,y) \in X \times Y$ that are matched in a solution.
 
-  * represent both types  on the real line and draw a semicirle joining $(x,y)$ for all pairs $(x,y) \in X \times Y$ that are matched in a solution 
+In terms of these semicircles we assert the  
 
-  * these semicirles do not intersect (unless they share one of the endpoints). 
 
-A proof proceeds by contradiction.
+
+**No intersecting pairs property** 
+
+ 
+
+  * unless they share one of the endpoints, the semicirles do not intersect.
+
+
+
+To prove the property, we reason  by contradiction.
 
 Let's consider types $x,x' \in X$ and $y,y' \in Y.$ 
 
@@ -504,7 +515,11 @@ We conclude that if a matching features intersecting pairs, it can be modified v
 
 +++ {"user_expressions": []}
 
-**(Layering)** Recall that there are $2N$ individual agents, each agent $i$ having type $z_i \in X \sqcup Y.$ 
+We now consider the third property.
+
+**Layering** 
+
+Recall that there are $2N$ individual agents, each agent $i$ having type $z_i \in X \sqcup Y.$ 
 
 When we introduce the off diagonal matching, to stress that the types sets are disjoint now.
 
@@ -668,7 +683,7 @@ print(layers_list_example)
 
 +++ {"user_expressions": []}
 
-The following method gives a graphical representation of the layers. 
+The following method provides a graphical representation of the layers. 
 
 From the  picture it is easy to spot  two key features described  above:
 
@@ -799,15 +814,15 @@ Let $V_{ij}$ be the optimal value of matching agents in $[i,j]$ with  $i,j \in [
 
 Suppose that we computed the value $V_{ij}$ for all $i,j \in [N_\ell]$ with $i-j \in \{1,3,\dots,t-2\}$ for some odd natural number $t$.
 
-Then, for $i,j \in [N_\ell]$ with $i-j= t$ we have
+Then for $i,j \in [N_\ell]$ with $i-j= t$ 
 
 $$
 V_{ij} = \min_{k \in \{i+1,i+3,\dots,j\}} \left\{ c_{ik} + V_{i+1,k-1} + V_{k+1,j}\right\}
-$$ 
+$$ (eq:Bellman101)
 
 with the RHS depending only on previously computed values.
 
-We set the boundary conditions at $t=-1$: $V_{i+1,i} = 0$ for each $i \in [N_\ell],$ so that we can apply the same Bellman equation at $t =1.$
+We set the boundary conditions at $t=-1$: $V_{i+1,i} = 0$ for each $i \in [N_\ell],$ so that we can apply the same Bellman equation {eq}`eq:Bellman101` at $t =1.$
 
 The following method takes as input the layer types indices and computes the value function as a matrix $[V_{ij}]_{ i \in [N_\ell+1], j \in [N_\ell ]}$.
 
@@ -865,7 +880,9 @@ print(V_i_j.round(2)[:min(10, V_i_j.shape[0]),
 
 +++ {"user_expressions": []}
 
-Having computed the value function, we can proceed to compute the optimal matching as the *policy* that attains the value function that solves the  Bellman equation (*policy evaluation*). 
+**Policy evaluation**
+
+Having computed the value function, we can proceed to compute the optimal matching as the *policy* that attains the value function that solves the  Bellman equation  {eq}`eq:Bellman101`. 
 
 We start from agent $1$ and match it with the $k$ that achieves the minimum in the equation associated with $V_{1,2N_\ell}.$
 
@@ -1006,7 +1023,7 @@ Visually, the arc joining $(i',j')$ surmounts the arc joining $(i,j).$
 
 As a consequence, there exists a more efficient way to compute the value function within a layer. 
 
-It can be shown that the solving the following second-order difference  equations delivers the same result as the Bellman equations above:
+It can be shown that the solving the following second-order difference  equations delivers the same result as the Bellman equations {eq}`eq:Bellman101` presented above:
 
 $$ 
 V_{ij} = \min \{ c_{ij} + V_{i+1,j-1}, V_{i+2,j} + V_{i,j-2} - V_{i+2,j-2}\}
