@@ -369,16 +369,18 @@ class ChangModel:
             p_iter1 = np.zeros(order)
             for i in range(order):
                 θ = s[i]
+                x0 = np.clip(lb1 + (ub1-lb1)/2, lb1, ub1)
                 res = minimize(p_fun,
-                               lb1 + (ub1-lb1) / 2,
+                               x0,
                                method='SLSQP',
                                bounds=bnds1,
                                constraints=cons1,
                                tol=1e-10)
                 if res.success == True:
                     p_iter1[i] = -p_fun(res.x)
+                x0 = np.clip(lb2 + (ub2-lb2)/2, lb2, ub2)
                 res = minimize(p_fun2,
-                               lb2 + (ub2-lb2) / 2,
+                               x0,
                                method='SLSQP',
                                bounds=bnds2,
                                constraints=cons2,
