@@ -4,12 +4,9 @@ parameterizations of the Chang (1998) model.
 """
 
 import numpy as np
-import quantecon as qe
 import time
 
-from scipy.spatial import ConvexHull
-from scipy.optimize import linprog, minimize, minimize_scalar
-from scipy.interpolate import UnivariateSpline
+from scipy.optimize import linprog, minimize
 import numpy.polynomial.chebyshev as cheb
 
 
@@ -30,7 +27,7 @@ class ChangModel:
         self.N_a = self.n_h*self.n_m
 
         # Utility and production functions
-        uc = lambda c: np.log(c)
+        uc = lambda c: np.log(np.maximum(c, 1e-10))  # Clip to 1e-10 to avoid log(0) or log(-ve)
         uc_p = lambda c: 1/c
         v = lambda m: 1/500 * (mbar * m - 0.5 * m**2)**0.5
         v_p = lambda m: 0.5/500 * (mbar * m - 0.5 * m**2)**(-0.5) * (mbar - m)
@@ -306,7 +303,7 @@ class ChangModel:
         mbar = self.mbar
 
         # Utility and production functions
-        uc = lambda c: np.log(c)
+        uc = lambda c: np.log(np.maximum(c, 1e-10))  # Clip to 1e-10 to avoid log(0) or log(-ve)
         uc_p = lambda c: 1 / c
         v = lambda m: 1 / 500 * (mbar * m - 0.5 * m**2)**0.5
         v_p = lambda m: 0.5/500 * (mbar*m - 0.5 * m**2)**(-0.5) * (mbar - m)
@@ -343,13 +340,13 @@ class ChangModel:
             scale = -1 + 2 * (x[2] - θ_min)/(θ_max - θ_min)
             p_fun = - (u(x[0], x[1]) \
                 + self.β * np.dot(cheb.chebvander(scale, order - 1), c))
-            return p_fun
+            return p_fun.item()
 
         def p_fun2(x):
             scale = -1 + 2*(x[1] - θ_min)/(θ_max - θ_min)
             p_fun = - (u(x[0],mbar) \
                 + self.β * np.dot(cheb.chebvander(scale, order - 1), c))
-            return p_fun
+            return p_fun.item()
 
         cons1 = ({'type': 'eq',   'fun': lambda x: uc_p(f(x[0], x[1])) * x[1]
                     * (x[0] - 1) + v_p(x[1]) * x[1] + self.β * x[2] - θ},
@@ -416,8 +413,9 @@ class ChangModel:
         h_grid = np.zeros(100)
         for i in range(100):
             θ = θ_grid_fine[i]
+            x0 = np.clip(lb1 + (ub1-lb1)/2, lb1, ub1)
             res = minimize(p_fun,
-                           lb1 + (ub1-lb1) / 2,
+                           x0,
                            method='SLSQP',
                            bounds=bnds1,
                            constraints=cons1,
@@ -428,8 +426,9 @@ class ChangModel:
                 θ_prime_grid[i] = res.x[2]
                 h_grid[i] = res.x[0]
                 m_grid[i] = res.x[1]
+            x0 = np.clip(lb2 + (ub2-lb2)/2, lb2, ub2)
             res = minimize(p_fun2,
-                           lb2 + (ub2-lb2)/2,
+                           x0,
                            method='SLSQP',
                            bounds=bnds2,
                            constraints=cons2,
@@ -441,7 +440,8 @@ class ChangModel:
                 h_grid[i] = res.x[0]
                 m_grid[i] = self.mbar
             scale = -1 + 2 * (θ - θ_min)/(θ_max - θ_min)
-            resid_grid[i] = np.dot(cheb.chebvander(scale, order-1), c) - p
+            resid_grid_val = np.dot(cheb.chebvander(scale, order-1), c) - p
+            resid_grid[i] = resid_grid_val.item()
 
         self.resid_grid = resid_grid
         self.θ_grid_fine = θ_grid_fine
@@ -465,13 +465,14 @@ class ChangModel:
         res = minimize(ValFun,
                       (θ_min + θ_max)/2,
                       bounds=[(θ_min, θ_max)])
-        θ_series[0] = res.x
+        θ_series[0] = res.x.item()
 
         # Simulate
         for i in range(30):
             θ = θ_series[i]
+            x0 = np.clip(lb1 + (ub1-lb1)/2, lb1, ub1)
             res = minimize(p_fun,
-                           lb1 + (ub1-lb1)/2,
+                           x0,
                            method='SLSQP',
                            bounds=bnds1,
                            constraints=cons1,
@@ -481,8 +482,9 @@ class ChangModel:
                 h_series[i] = res.x[0]
                 m_series[i] = res.x[1]
                 θ_series[i+1] = res.x[2]
+            x0 = np.clip(lb2 + (ub2-lb2)/2, lb2, ub2)
             res2 = minimize(p_fun2,
-                            lb2 + (ub2-lb2)/2,
+                            x0,
                             method='SLSQP',
                             bounds=bnds2,
                             constraints=cons2,
