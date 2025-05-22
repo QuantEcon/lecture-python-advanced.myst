@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.14.5
+    jupytext_version: 1.16.7
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -996,7 +996,7 @@ def evaluate_policy(θ, F):
     x0 = np.array([[1.], [0.], [0.]])
     value = - x0.T @ P_F @ x0 - d_F
     entropy = x0.T @ O_F @ x0 + o_F
-    return list(map(float, (value, entropy)))
+    return list(map(float, (value.item(), entropy.item())))
 
 
 def value_and_entropy(emax, F, bw, grid_size=1000):
