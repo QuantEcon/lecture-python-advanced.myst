@@ -26,7 +26,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 ---
 tags: [hide-output]
 ---
-!pip install polytope
+!pip install polytope cvxopt
 ```
 
 ## Overview
@@ -947,7 +947,7 @@ def plot_competitive(ChangModel):
     # Add point showing Ramsey Plan
     idx_Ramsey = np.where(ext_C[:, 0] == max(ext_C[:, 0]))[0][0]
     R = ext_C[idx_Ramsey, :]
-    ax.scatter(R[0], R[1], 150, 'black', 'o', zorder=1)
+    ax.scatter(R[0], R[1], 150, 'black', marker='o', zorder=1)
     w_min = min(ext_C[:, 0])
 
     # Label Ramsey Plan slightly to the right of the point
