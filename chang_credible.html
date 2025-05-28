@@ -258,9 +258,7 @@
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting polytope
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading polytope-0.2.5.tar.gz (54 kB)
+  Downloading polytope-0.2.5.tar.gz (54 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Preparing metadata (setup.py) ... ?25l-
@@ -283,7 +281,7 @@ Building wheels for collected packages: polytope
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
-?25h  Created wheel for polytope: filename=polytope-0.2.5-py3-none-any.whl size=47767 sha256=c223c17283a8df102575062037c15044806fe46cc699fd37ec73ee29628b445a
+?25h  Created wheel for polytope: filename=polytope-0.2.5-py3-none-any.whl size=47767 sha256=f35c33b39506f08fb1cf4a8e51fdaee48358d919497f2f3e1d5b5db24adb4360
   Stored in directory: /home/runner/.cache/pip/wheels/c3/14/f0/8e91005638fd4ee508e126998cd8f6e2070497cfc7bacfa922
 Successfully built polytope
 </pre></div>
@@ -927,12 +925,9 @@ code for now. We can increase accuracy by increasing the number of subgradients)
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
-<span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="kn">import</span> <span class="n">ConvexHull</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">linprog</span><span class="p">,</span> <span class="n">minimize</span><span class="p">,</span> <span class="n">minimize_scalar</span>
-<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">UnivariateSpline</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">linprog</span><span class="p">,</span> <span class="n">minimize</span>
 <span class="kn">import</span> <span class="nn">numpy.polynomial.chebyshev</span> <span class="k">as</span> <span class="nn">cheb</span>
 
 
@@ -953,7 +948,7 @@ code for now. We can increase accuracy by increasing the number of subgradients)
         <span class="bp">self</span><span class="o">.</span><span class="n">N_a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">n_h</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">n_m</span>
 
         <span class="c1"># Utility and production functions</span>
-        <span class="n">uc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">uc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">))</span>  <span class="c1"># Clip to 1e-10 to avoid log(0) or log(-ve)</span>
         <span class="n">uc_p</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="n">c</span>
         <span class="n">v</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">500</span> <span class="o">*</span> <span class="p">(</span><span class="n">mbar</span> <span class="o">*</span> <span class="n">m</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">m</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
         <span class="n">v_p</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="mf">0.5</span><span class="o">/</span><span class="mi">500</span> <span class="o">*</span> <span class="p">(</span><span class="n">mbar</span> <span class="o">*</span> <span class="n">m</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">m</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">mbar</span> <span class="o">-</span> <span class="n">m</span><span class="p">)</span>
@@ -1229,7 +1224,7 @@ code for now. We can increase accuracy by increasing the number of subgradients)
         <span class="n">mbar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mbar</span>
 
         <span class="c1"># Utility and production functions</span>
-        <span class="n">uc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+        <span class="n">uc</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mf">1e-10</span><span class="p">))</span>  <span class="c1"># Clip to 1e-10 to avoid log(0) or log(-ve)</span>
         <span class="n">uc_p</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">c</span>
         <span class="n">v</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">500</span> <span class="o">*</span> <span class="p">(</span><span class="n">mbar</span> <span class="o">*</span> <span class="n">m</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">m</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
         <span class="n">v_p</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="mf">0.5</span><span class="o">/</span><span class="mi">500</span> <span class="o">*</span> <span class="p">(</span><span class="n">mbar</span><span class="o">*</span><span class="n">m</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">m</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">mbar</span> <span class="o">-</span> <span class="n">m</span><span class="p">)</span>
@@ -1266,13 +1261,13 @@ code for now. We can increase accuracy by increasing the number of subgradients)
             <span class="n">scale</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">θ_min</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">θ_max</span> <span class="o">-</span> <span class="n">θ_min</span><span class="p">)</span>
             <span class="n">p_fun</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> \
                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cheb</span><span class="o">.</span><span class="n">chebvander</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">c</span><span class="p">))</span>
-            <span class="k">return</span> <span class="n">p_fun</span>
+            <span class="k">return</span> <span class="n">p_fun</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 
         <span class="k">def</span> <span class="nf">p_fun2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
             <span class="n">scale</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">θ_min</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">θ_max</span> <span class="o">-</span> <span class="n">θ_min</span><span class="p">)</span>
             <span class="n">p_fun</span> <span class="o">=</span> <span class="o">-</span> <span class="p">(</span><span class="n">u</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">mbar</span><span class="p">)</span> \
                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cheb</span><span class="o">.</span><span class="n">chebvander</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">order</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">c</span><span class="p">))</span>
-            <span class="k">return</span> <span class="n">p_fun</span>
+            <span class="k">return</span> <span class="n">p_fun</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 
         <span class="n">cons1</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span>   <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">uc_p</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
                     <span class="o">*</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">v_p</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">β</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">θ</span><span class="p">},</span>
@@ -1295,16 +1290,18 @@ code for now. We can increase accuracy by increasing the number of subgradients)
             <span class="n">p_iter1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
                 <span class="n">θ</span> <span class="o">=</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lb1</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub1</span><span class="o">-</span><span class="n">lb1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">lb1</span><span class="p">,</span> <span class="n">ub1</span><span class="p">)</span>
                 <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">p_fun</span><span class="p">,</span>
-                               <span class="n">lb1</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub1</span><span class="o">-</span><span class="n">lb1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                               <span class="n">x0</span><span class="p">,</span>
                                <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>
                                <span class="n">bounds</span><span class="o">=</span><span class="n">bnds1</span><span class="p">,</span>
                                <span class="n">constraints</span><span class="o">=</span><span class="n">cons1</span><span class="p">,</span>
                                <span class="n">tol</span><span class="o">=</span><span class="mf">1e-10</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">success</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
                     <span class="n">p_iter1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">p_fun</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lb2</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub2</span><span class="o">-</span><span class="n">lb2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">lb2</span><span class="p">,</span> <span class="n">ub2</span><span class="p">)</span>
                 <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">p_fun2</span><span class="p">,</span>
-                               <span class="n">lb2</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub2</span><span class="o">-</span><span class="n">lb2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                               <span class="n">x0</span><span class="p">,</span>
                                <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>
                                <span class="n">bounds</span><span class="o">=</span><span class="n">bnds2</span><span class="p">,</span>
                                <span class="n">constraints</span><span class="o">=</span><span class="n">cons2</span><span class="p">,</span>
@@ -1339,8 +1336,9 @@ code for now. We can increase accuracy by increasing the number of subgradients)
         <span class="n">h_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
             <span class="n">θ</span> <span class="o">=</span> <span class="n">θ_grid_fine</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lb1</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub1</span><span class="o">-</span><span class="n">lb1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">lb1</span><span class="p">,</span> <span class="n">ub1</span><span class="p">)</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">p_fun</span><span class="p">,</span>
-                           <span class="n">lb1</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub1</span><span class="o">-</span><span class="n">lb1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+                           <span class="n">x0</span><span class="p">,</span>
                            <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>
                            <span class="n">bounds</span><span class="o">=</span><span class="n">bnds1</span><span class="p">,</span>
                            <span class="n">constraints</span><span class="o">=</span><span class="n">cons1</span><span class="p">,</span>
@@ -1351,8 +1349,9 @@ code for now. We can increase accuracy by increasing the number of subgradients)
                 <span class="n">θ_prime_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
                 <span class="n">h_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">m_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lb2</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub2</span><span class="o">-</span><span class="n">lb2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">lb2</span><span class="p">,</span> <span class="n">ub2</span><span class="p">)</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">p_fun2</span><span class="p">,</span>
-                           <span class="n">lb2</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub2</span><span class="o">-</span><span class="n">lb2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                           <span class="n">x0</span><span class="p">,</span>
                            <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>
                            <span class="n">bounds</span><span class="o">=</span><span class="n">bnds2</span><span class="p">,</span>
                            <span class="n">constraints</span><span class="o">=</span><span class="n">cons2</span><span class="p">,</span>
@@ -1364,7 +1363,8 @@ code for now. We can increase accuracy by increasing the number of subgradients)
                 <span class="n">h_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">m_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mbar</span>
             <span class="n">scale</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">θ</span> <span class="o">-</span> <span class="n">θ_min</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">θ_max</span> <span class="o">-</span> <span class="n">θ_min</span><span class="p">)</span>
-            <span class="n">resid_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cheb</span><span class="o">.</span><span class="n">chebvander</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="n">p</span>
+            <span class="n">resid_grid_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">cheb</span><span class="o">.</span><span class="n">chebvander</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">c</span><span class="p">)</span> <span class="o">-</span> <span class="n">p</span>
+            <span class="n">resid_grid</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">resid_grid_val</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">resid_grid</span> <span class="o">=</span> <span class="n">resid_grid</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">θ_grid_fine</span> <span class="o">=</span> <span class="n">θ_grid_fine</span>
@@ -1388,13 +1388,14 @@ code for now. We can increase accuracy by increasing the number of subgradients)
         <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">ValFun</span><span class="p">,</span>
                       <span class="p">(</span><span class="n">θ_min</span> <span class="o">+</span> <span class="n">θ_max</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
                       <span class="n">bounds</span><span class="o">=</span><span class="p">[(</span><span class="n">θ_min</span><span class="p">,</span> <span class="n">θ_max</span><span class="p">)])</span>
-        <span class="n">θ_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+        <span class="n">θ_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
 
         <span class="c1"># Simulate</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
             <span class="n">θ</span> <span class="o">=</span> <span class="n">θ_series</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lb1</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub1</span><span class="o">-</span><span class="n">lb1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">lb1</span><span class="p">,</span> <span class="n">ub1</span><span class="p">)</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">p_fun</span><span class="p">,</span>
-                           <span class="n">lb1</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub1</span><span class="o">-</span><span class="n">lb1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                           <span class="n">x0</span><span class="p">,</span>
                            <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>
                            <span class="n">bounds</span><span class="o">=</span><span class="n">bnds1</span><span class="p">,</span>
                            <span class="n">constraints</span><span class="o">=</span><span class="n">cons1</span><span class="p">,</span>
@@ -1404,8 +1405,9 @@ code for now. We can increase accuracy by increasing the number of subgradients)
                 <span class="n">h_series</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">m_series</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
                 <span class="n">θ_series</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">lb2</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub2</span><span class="o">-</span><span class="n">lb2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">lb2</span><span class="p">,</span> <span class="n">ub2</span><span class="p">)</span>
             <span class="n">res2</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">p_fun2</span><span class="p">,</span>
-                            <span class="n">lb2</span> <span class="o">+</span> <span class="p">(</span><span class="n">ub2</span><span class="o">-</span><span class="n">lb2</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span>
+                            <span class="n">x0</span><span class="p">,</span>
                             <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>
                             <span class="n">bounds</span><span class="o">=</span><span class="n">bnds2</span><span class="p">,</span>
                             <span class="n">constraints</span><span class="o">=</span><span class="n">cons2</span><span class="p">,</span>
@@ -1496,7 +1498,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 16 iterations and 38.25             seconds
+Convergence achieved after 16 iterations and 38.36             seconds
 </pre></div>
 </div>
 </div>
@@ -1686,7 +1688,7 @@ Maximum difference when updating hyperplane levels:
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.00001]
-Convergence achieved after 40 iterations and 112.86             seconds
+Convergence achieved after 40 iterations and 112.74             seconds
 </pre></div>
 </div>
 </div>
