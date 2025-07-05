@@ -1043,7 +1043,7 @@ We'll compute it two ways and get the same answer.
 In addition to being a useful check on the accuracy of our coding, computing things in these two ways helps us think about the structure of the problem.  
 
 ```{code-cell} python3
-v_leader_forward = np.sum(βs * π_leader)
+v_leader_forward = βs @ π_leader
 v_leader_direct = -yt[:, 0].T @ P @ yt[:, 0]
 
 # Display values
@@ -1380,8 +1380,8 @@ u2 = (- F2 @ z).flatten()
 π_1 = p * q1 - γ * (u1) ** 2
 π_2 = p * q2 - γ * (u2) ** 2
 
-v1_forward = np.sum(βs * π_1)
-v2_forward = np.sum(βs * π_2)
+v1_forward = βs @ π_1
+v2_forward = βs @ π_2
 
 v1_direct = (- z[:, 0].T @ P1 @ z[:, 0])
 v2_direct = (- z[:, 0].T @ P2 @ z[:, 0])
