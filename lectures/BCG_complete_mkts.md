@@ -985,7 +985,7 @@ class BCG_complete_markets:
         weights = self.weights
         integ = lambda 𝜖: np.exp(𝜖) * fk * q(𝜖, k)
 
-        return -k + np.sum(weights * integ(self.points_integral)) / np.sqrt(np.pi)
+        return -k + (weights @ integ(self.points_integral)) / np.sqrt(np.pi)
 
     #=========== Optimal c ===========#
     # Function: Compute optimal consumption choices c
@@ -1007,10 +1007,10 @@ class BCG_complete_markets:
         fk = self.f(k)
 
         c1 = lambda 𝜖: (w1(𝜖) + np.exp(𝜖)*fk)*q(𝜖,k)
-        denom = np.sum(weights * c1(self.points_integral)) / np.sqrt(np.pi) + (w0 - k)
+        denom = (weights @ c1(self.points_integral)) / np.sqrt(np.pi) + (w0 - k)
 
         w11q = lambda 𝜖: w11(𝜖)*q(𝜖,k)
-        num = w10 + 𝜃10 * V(k) + np.sum(weights * w11q(self.points_integral)) / np.sqrt(np.pi)
+        num = w10 + 𝜃10 * V(k) + (weights @ w11q(self.points_integral)) / np.sqrt(np.pi)
 
         𝜂 = num / denom
 
@@ -1048,7 +1048,7 @@ def k_foc_factory(model):
 
     @njit
     def k_foc(k, 𝜒1, 𝜒2):
-        int_k = np.sum(weights * integrand(points_integral, 𝜒1, 𝜒2, k=k)) / np.sqrt(np.pi)
+        int_k = (weights @ integrand(points_integral, 𝜒1, 𝜒2, k=k)) / np.sqrt(np.pi)
 
         mul = 𝛽 * 𝛼 * A * k ** (𝛼 - 1) / ((w0 - k) ** (-𝜓))
         val = mul * int_k - 1
