@@ -785,7 +785,7 @@ In doing so, set $\theta = 0.8$ and $n = 500$.
 The next figure shows the result of such a computation
 
 ```{image} /_static/lecture_specific/stationary_densities/solution_statd_ex1.png
-:align: centre
+:align: center
 ```
 
 The additional density (black line) is a [nonparametric kernel density estimate](https://en.wikipedia.org/wiki/Kernel_density_estimation), added to the solution for illustration.
