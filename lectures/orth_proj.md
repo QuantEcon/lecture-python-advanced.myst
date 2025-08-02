@@ -131,7 +131,10 @@ What vector within a linear subspace of $\mathbb R^n$  best approximates a given
 
 The next theorem answers this question.
 
-**Theorem** (OPT) Given $y \in \mathbb R^n$ and linear subspace $S \subset \mathbb R^n$,
+```{prf:theorem} Orthogonal Projection Theorem
+:label: opt
+
+Given $y \in \mathbb R^n$ and linear subspace $S \subset \mathbb R^n$,
 there exists a unique solution to the minimization problem
 
 $$
@@ -144,6 +147,7 @@ The minimizer $\hat y$ is the unique vector in $\mathbb R^n$ that satisfies
 * $y - \hat y \perp S$
 
 The vector $\hat y$ is called the **orthogonal projection** of $y$ onto $S$.
+```
 
 The next figure provides some intuition
 
@@ -179,7 +183,7 @@ $$
 y \in Y\; \mapsto \text{ its orthogonal projection } \hat y \in S
 $$
 
-By the OPT, this is a well-defined mapping  or *operator* from $\mathbb R^n$ to $\mathbb R^n$.
+By the {prf:ref}`opt`, this is a well-defined mapping  or *operator* from $\mathbb R^n$ to $\mathbb R^n$.
 
 In what follows we denote this operator by a matrix $P$
 
@@ -192,7 +196,7 @@ The operator $P$ is called the **orthogonal projection mapping onto** $S$.
 
 ```
 
-It is immediate from the OPT that for any $y \in \mathbb R^n$
+It is immediate from the {prf:ref}`opt` that for any $y \in \mathbb R^n$
 
 1. $P y \in S$ and
 1. $y - P y \perp S$
@@ -224,9 +228,12 @@ such that $y = x_1 + x_2$.
 
 Moreover, $x_1 = \hat E_S y$ and $x_2 = y - \hat E_S y$.
 
-This amounts to another version of the OPT:
+This amounts to another version of the {prf:ref}`opt`:
 
-**Theorem**.  If $S$ is a linear subspace of $\mathbb R^n$, $\hat E_S y = P y$ and $\hat E_{S^{\perp}} y = M y$, then
+```{prf:theorem} Orthogonal Projection Theorem (another version)
+:label: opt_another
+
+If $S$ is a linear subspace of $\mathbb R^n$, $\hat E_S y = P y$ and $\hat E_{S^{\perp}} y = M y$, then
 
 $$
 P y \perp M y
@@ -234,6 +241,7 @@ P y \perp M y
 y = P y + M y
  \quad \text{for all } \, y \in \mathbb R^n
 $$
+```
 
 The next figure illustrates
 
@@ -285,7 +293,7 @@ Combining this result with {eq}`pob` verifies the claim.
 
 When a subspace onto which we project is orthonormal, computing the projection simplifies:
 
-**Theorem** If $\{u_1, \ldots, u_k\}$ is an orthonormal basis for $S$, then
+```{prf:theorem} If $\{u_1, \ldots, u_k\}$ is an orthonormal basis for $S$, then
 
 ```{math}
 :label: exp_for_op
@@ -294,8 +302,9 @@ P y = \sum_{i=1}^k \langle y, u_i \rangle u_i,
 \quad
 \forall \; y \in \mathbb R^n
 ```
+```
 
-Proof: Fix $y \in \mathbb R^n$ and let $P y$ be  defined as in {eq}`exp_for_op`.
+```{prf:proof} Fix $y \in \mathbb R^n$ and let $P y$ be  defined as in {eq}`exp_for_op`.
 
 Clearly, $P y \in S$.
 
@@ -312,6 +321,7 @@ $$
 $$
 
 (Why is this sufficient to establish the claim that $y - P y \perp S$?)
+```
 
 ## Projection Via Matrix Algebra
 
@@ -327,13 +337,17 @@ Evidently  $Py$ is a linear function from $y \in \mathbb R^n$ to $P y \in \mathb
 
 [This reference](https://en.wikipedia.org/wiki/Linear_map#Matrices) is useful.
 
-**Theorem.** Let the columns of $n \times k$ matrix $X$ form a basis of $S$.  Then
+```{prf:theorem} 
+:label: proj_matrix
+
+Let the columns of $n \times k$ matrix $X$ form a basis of $S$.  Then
 
 $$
 P = X (X'X)^{-1} X'
 $$
+```
 
-Proof: Given arbitrary $y \in \mathbb R^n$ and $P = X (X'X)^{-1} X'$, our claim is that
+```{prf:proof} Given arbitrary $y \in \mathbb R^n$ and $P = X (X'X)^{-1} X'$, our claim is that
 
 1. $P y \in S$, and
 2. $y - P y \perp S$
@@ -367,6 +381,7 @@ y]
 $$
 
 The proof is now complete.
+```
 
 ### Starting with the Basis
 
@@ -378,7 +393,7 @@ $$
 
 Then the columns of $X$ form a basis of $S$.
 
-From the preceding theorem, $P = X (X' X)^{-1} X' y$ projects $y$ onto $S$.
+From the {prf:ref}`proj_matrix`, $P = X (X' X)^{-1} X' y$ projects $y$ onto $S$.
 
 In this context, $P$ is often called the **projection matrix**
 
@@ -428,15 +443,16 @@ By approximate solution, we mean a $b \in \mathbb R^k$ such that $X b$ is  close
 
 The next theorem shows that a best approximation is well defined and unique.
 
-The proof uses the OPT.
+The proof uses the {prf:ref}`opt`.
 
-**Theorem** The unique minimizer of  $\| y - X b \|$ over $b \in \mathbb R^K$ is
+```{prf:theorem} The unique minimizer of  $\| y - X b \|$ over $b \in \mathbb R^K$ is
 
 $$
 \hat \beta := (X' X)^{-1} X' y
 $$
+```
 
-Proof:  Note that
+```{prf:proof}  Note that
 
 $$
 X \hat \beta = X (X' X)^{-1} X' y =
@@ -458,6 +474,7 @@ $$
 $$
 
 This is what we aimed to show.
+```
 
 ## Least Squares Regression
 
@@ -594,9 +611,9 @@ Here are some more standard definitions:
 
 > TSS = ESS + SSR
 
-We can prove this easily using the OPT.
+We can prove this easily using the {prf:ref}`opt`.
 
-From the OPT we have $y =  \hat y + \hat u$ and $\hat u \perp \hat y$.
+From the {prf:ref}`opt` we have $y =  \hat y + \hat u$ and $\hat u \perp \hat y$.
 
 Applying the Pythagorean law completes the proof.
 
@@ -611,7 +628,7 @@ The next section gives details.
 (gram_schmidt)=
 ### Gram-Schmidt Orthogonalization
 
-**Theorem** For each linearly independent set $\{x_1, \ldots, x_k\} \subset \mathbb R^n$, there exists an
+```{prf:theorem} For each linearly independent set $\{x_1, \ldots, x_k\} \subset \mathbb R^n$, there exists an
 orthonormal set $\{u_1, \ldots, u_k\}$ with
 
 $$
@@ -620,6 +637,7 @@ $$
 \quad \text{for} \quad
 i = 1, \ldots, k
 $$
+```
 
 The **Gram-Schmidt orthogonalization** procedure constructs an orthogonal set $\{ u_1, u_2, \ldots, u_n\}$.
 
@@ -639,12 +657,13 @@ In some exercises below, you are asked to implement this algorithm and test it u
 
 The following result uses the preceding algorithm to produce a useful decomposition.
 
-**Theorem** If $X$ is $n \times k$ with linearly independent columns, then there exists a factorization $X = Q R$ where
+```{prf:theorem} If $X$ is $n \times k$ with linearly independent columns, then there exists a factorization $X = Q R$ where
 
 * $R$ is $k \times k$, upper triangular, and nonsingular
 * $Q$ is $n \times k$ with orthonormal columns
+```
 
-Proof sketch: Let
+```{prf:proof} Let
 
 * $x_j := \col_j (X)$
 * $\{u_1, \ldots, u_k\}$ be orthonormal with the same span as $\{x_1, \ldots, x_k\}$ (to be constructed using Gram--Schmidt)
@@ -658,6 +677,7 @@ x_j = \sum_{i=1}^j \langle u_i, x_j  \rangle u_i
 $$
 
 Some rearranging gives $X = Q R$.
+```
 
 ### Linear Regression via QR Decomposition
 
