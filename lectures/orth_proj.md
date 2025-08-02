@@ -310,7 +310,7 @@ Clearly, $P y \in S$.
 
 We claim that $y - P y \perp S$ also holds.
 
-It sufficies to show that $y - P y \perp$ any basis vector $u_i$.
+It suffices to show that $y - P y \perp$ any basis vector $u_i$.
 
 This is true because
 
