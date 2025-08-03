@@ -388,7 +388,7 @@ The proof is now complete.
 It is common in applications to start with $n \times k$ matrix $X$  with linearly independent columns and let
 
 $$
-S := \mathop{\mathrm{span}} X := \mathop{\mathrm{span}} \{\col_1 X, \ldots, \col_k X \}
+S := \mathop{\mathrm{span}} X := \mathop{\mathrm{span}} \{\mathop{\mathrm{col}}_i X, \ldots, \mathop{\mathrm{col}}_k X \}
 $$
 
 Then the columns of $X$ form a basis of $S$.
@@ -403,7 +403,7 @@ In this context, $P$ is often called the **projection matrix**
 
 Suppose that $U$ is $n \times k$ with orthonormal columns.
 
-Let $u_i := \mathop{\mathrm{col}} U_i$ for each $i$, let $S := \mathop{\mathrm{span}} U$ and let $y \in \mathbb R^n$.
+Let $u_i := \mathop{\mathrm{col}}_i U$ for each $i$, let $S := \mathop{\mathrm{span}} U$ and let $y \in \mathbb R^n$.
 
 We know that the projection of $y$ onto $S$ is
 
@@ -665,9 +665,9 @@ The following result uses the preceding algorithm to produce a useful decomposit
 
 ```{prf:proof} Let
 
-* $x_j := \col_j (X)$
+* $x_j := \mathop{\mathrm{col}}_j (X)$
 * $\{u_1, \ldots, u_k\}$ be orthonormal with the same span as $\{x_1, \ldots, x_k\}$ (to be constructed using Gram--Schmidt)
-* $Q$ be formed from cols $u_i$
+* $Q$ be formed from columns $u_i$
 
 Since $x_j \in \mathop{\mathrm{span}}\{u_1, \ldots, u_j\}$, we have
 
@@ -808,7 +808,7 @@ def gram_schmidt(X):
     U = np.empty((n, k))
     I = np.eye(n)
 
-    # The first col of U is just the normalized first col of X
+    # The first columns of U is just the normalized first columns of X
     v1 = X[:,0]
     U[:, 0] = v1 / np.sqrt(np.sum(v1 * v1))
 
@@ -817,7 +817,7 @@ def gram_schmidt(X):
         b = X[:, i]       # The vector we're going to project
         Z = X[:, 0:i]     # First i-1 columns of X
 
-        # Project onto the orthogonal complement of the col span of Z
+        # Project onto the orthogonal complement of the columns span of Z
         M = I - Z @ np.linalg.inv(Z.T @ Z) @ Z.T
         u = M @ b
 
