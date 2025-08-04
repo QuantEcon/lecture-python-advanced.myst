@@ -306,7 +306,7 @@ P y = \sum_{i=1}^k \langle y, u_i \rangle u_i,
 ```
 ```
 
-```{prf:proof}  Fix $y \in \mathbb R^n$ and let $P y$ be  defined as in.
+```{prf:proof}  Fix $y \in \mathbb{R}^n$ and let $P y$ be  defined as in {eq}`exp_for_op`.
 
 Clearly, $P y \in S$.
 
@@ -321,10 +321,10 @@ $$
 = \langle y, u_j \rangle  - \sum_{i=1}^k \langle y, u_i \rangle
 \langle u_i, u_j  \rangle = 0
 $$
+```
 
 (Why is this sufficient to establish the claim that $y - P y \perp S$?)
 
-```
 
 ## Projection Via Matrix Algebra
 
