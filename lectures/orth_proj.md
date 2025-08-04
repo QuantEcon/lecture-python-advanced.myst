@@ -306,7 +306,7 @@ P y = \sum_{i=1}^k \langle y, u_i \rangle u_i,
 ```
 ```
 
-```{prf:proof}  Fix $y \in \mathbb R^n$ and let $P y$ be  defined as in {eq}`exp_for_op`.
+```{prf:proof}  Fix $y \in \mathbb R^n$ and let $P y$ be  defined as in.
 
 Clearly, $P y \in S$.
 
