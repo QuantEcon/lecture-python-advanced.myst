@@ -60,7 +60,7 @@ For an advanced treatment of projection in the context of least squares predicti
 
 ## Key Definitions
 
-Assume  $x, z \in \mathbb R^n$.
+Assume $x, z \in \mathbb R^n$.
 
 Define $\langle x,  z\rangle = \sum_i x_i z_i$.
 
@@ -86,7 +86,7 @@ The **orthogonal complement** of linear subspace $S \subset \mathbb R^n$ is the 
 
 ```
 
-$S^\perp$ is  a linear subspace of $\mathbb R^n$
+$S^\perp$ is a linear subspace of $\mathbb R^n$
 
 * To see this, fix $x, y \in S^{\perp}$ and $\alpha, \beta \in \mathbb R$.
 * Observe that if $z \in S$, then
@@ -312,7 +312,7 @@ Clearly, $P y \in S$.
 
 We claim that $y - P y \perp S$ also holds.
 
-It suffices to show that $y - P y \perp$ any basis vector $u_i$.
+It suffices to show that $y - P y \perp u_i$ for any basis vector $u_i$.
 
 This is true because
 
@@ -336,7 +336,7 @@ $$
 \hat E_S y = P y
 $$
 
-Evidently  $Py$ is a linear function from $y \in \mathbb R^n$ to $P y \in \mathbb R^n$.
+Evidently $Py$ is a linear function from $y \in \mathbb R^n$ to $P y \in \mathbb R^n$.
 
 [This reference](https://en.wikipedia.org/wiki/Linear_map#Matrices) is useful.
 
@@ -391,7 +391,7 @@ The proof is now complete.
 It is common in applications to start with $n \times k$ matrix $X$  with linearly independent columns and let
 
 $$
-S := \mathop{\mathrm{span}} X := \mathop{\mathrm{span}} \{\mathop{\mathrm{col}}_i X, \ldots, \mathop{\mathrm{col}}_k X \}
+S := \mathop{\mathrm{span}} X := \mathop{\mathrm{span}} \{\mathop{\mathrm{col}}_1 X, \ldots, \mathop{\mathrm{col}}_k X \}
 $$
 
 Then the columns of $X$ form a basis of $S$.
@@ -433,7 +433,7 @@ Let $y \in \mathbb R^n$ and let $X$ be $n \times k$ with linearly independent co
 
 Given $X$ and $y$, we seek $b \in \mathbb R^k$ that  satisfies the system of linear equations $X b = y$.
 
-If $n > k$ (more equations than unknowns), then $b$ is said to be **overdetermined**.
+If $n > k$ (more equations than unknowns), then the system is said to be **overdetermined**.
 
 Intuitively, we may not be able to find a $b$ that satisfies all $n$ equations.
 
@@ -450,7 +450,7 @@ The proof uses the {prf:ref}`opt`.
 
 ```{prf:theorem} 
 
-The unique minimizer of  $\| y - X b \|$ over $b \in \mathbb R^K$ is
+The unique minimizer of  $\| y - X b \|$ over $b \in \mathbb R^k$ is
 
 $$
 \hat \beta := (X' X)^{-1} X' y
@@ -475,7 +475,7 @@ Because $Xb \in \mathop{\mathrm{span}}(X)$
 
 $$
 \| y - X \hat \beta \|
-\leq \| y - X b \| \text{ for any } b \in \mathbb R^K
+\leq \| y - X b \| \text{ for any } b \in \mathbb R^k
 $$
 
 This is what we aimed to show.
@@ -485,7 +485,7 @@ This is what we aimed to show.
 
 Let's apply the theory of orthogonal projection to least squares regression.
 
-This approach provides insights about  many geometric  properties of linear regression.
+This approach provides insights about many geometric properties of linear regression.
 
 We treat only some examples.
 
@@ -700,10 +700,11 @@ $$
     \hat \beta
     & = (R'Q' Q R)^{-1} R' Q' y \\
     & = (R' R)^{-1} R' Q' y \\
-    & = R^{-1} (R')^{-1} R' Q' y
-        = R^{-1} Q' y
+    & = R^{-1} Q' y
 \end{aligned}
 $$
+
+where the last step uses the fact that $(R' R)^{-1} R' = R^{-1}$ since $R$ is nonsingular.
 
 Numerical routines would in this case use the alternative form $R \hat \beta = Q' y$ and back substitution.
 
@@ -817,14 +818,14 @@ def gram_schmidt(X):
     U = np.empty((n, k))
     I = np.eye(n)
 
-    # The first columns of U is just the normalized first columns of X
-    v1 = X[:,0]
+    # The first column of U is just the normalized first column of X
+    v1 = X[:, 0]
     U[:, 0] = v1 / np.sqrt(np.sum(v1 * v1))
 
     for i in range(1, k):
         # Set up
         b = X[:, i]       # The vector we're going to project
-        Z = X[:, 0:i]     # First i-1 columns of X
+        Z = X[:, :i]      # First i-1 columns of X
 
         # Project onto the orthogonal complement of the columns span of Z
         M = I - Z @ np.linalg.inv(Z.T @ Z) @ Z.T
