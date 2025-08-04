@@ -293,7 +293,9 @@ Combining this result with {eq}`pob` verifies the claim.
 
 When a subspace onto which we project is orthonormal, computing the projection simplifies:
 
-```{prf:theorem} If $\{u_1, \ldots, u_k\}$ is an orthonormal basis for $S$, then
+```{prf:theorem} 
+
+If $\{u_1, \ldots, u_k\}$ is an orthonormal basis for $S$, then
 
 ```{math}
 :label: exp_for_op
@@ -304,7 +306,9 @@ P y = \sum_{i=1}^k \langle y, u_i \rangle u_i,
 ```
 ```
 
-```{prf:proof} Fix $y \in \mathbb R^n$ and let $P y$ be  defined as in {eq}`exp_for_op`.
+```{prf:proof} 
+
+Fix $y \in \mathbb R^n$ and let $P y$ be  defined as in {eq}`exp_for_op`.
 
 Clearly, $P y \in S$.
 
@@ -445,7 +449,9 @@ The next theorem shows that a best approximation is well defined and unique.
 
 The proof uses the {prf:ref}`opt`.
 
-```{prf:theorem} The unique minimizer of  $\| y - X b \|$ over $b \in \mathbb R^K$ is
+```{prf:theorem} 
+
+The unique minimizer of  $\| y - X b \|$ over $b \in \mathbb R^K$ is
 
 $$
 \hat \beta := (X' X)^{-1} X' y
@@ -628,7 +634,9 @@ The next section gives details.
 (gram_schmidt)=
 ### Gram-Schmidt Orthogonalization
 
-```{prf:theorem} For each linearly independent set $\{x_1, \ldots, x_k\} \subset \mathbb R^n$, there exists an
+```{prf:theorem} 
+
+For each linearly independent set $\{x_1, \ldots, x_k\} \subset \mathbb R^n$, there exists an
 orthonormal set $\{u_1, \ldots, u_k\}$ with
 
 $$
@@ -657,7 +665,9 @@ In some exercises below, you are asked to implement this algorithm and test it u
 
 The following result uses the preceding algorithm to produce a useful decomposition.
 
-```{prf:theorem} If $X$ is $n \times k$ with linearly independent columns, then there exists a factorization $X = Q R$ where
+```{prf:theorem} 
+
+If $X$ is $n \times k$ with linearly independent columns, then there exists a factorization $X = Q R$ where
 
 * $R$ is $k \times k$, upper triangular, and nonsingular
 * $Q$ is $n \times k$ with orthonormal columns
