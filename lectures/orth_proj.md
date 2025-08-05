@@ -790,7 +790,7 @@ def gram_schmidt(X):
 
     # The first col of U is just the normalized first col of X
     v1 = X[:,0]
-    U[:, 0] = v1 / np.sqrt(np.sum(v1 * v1))
+    U[:, 0] = v1 / np.sqrt(v1 @ v1)
 
     for i in range(1, k):
         # Set up
@@ -802,7 +802,7 @@ def gram_schmidt(X):
         u = M @ b
 
         # Normalize
-        U[:, i] = u / np.sqrt(np.sum(u * u))
+        U[:, i] = u / np.sqrt(u @ u)
 
     return U
 ```
