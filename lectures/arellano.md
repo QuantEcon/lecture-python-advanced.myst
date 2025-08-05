@@ -432,7 +432,7 @@ def T_d(y_idx, v_c, v_d, params, arrays):
 
     current_utility = u(def_y[y_idx], γ)
     v = np.maximum(v_c[B0_idx, :], v_d)
-    cont_value = np.sum((θ * v + (1 - θ) * v_d) * P[y_idx, :])
+    cont_value = (θ * v + (1 - θ) * v_d) @ P[y_idx, :]
 
     return current_utility + β * cont_value
 
@@ -457,7 +457,7 @@ def T_c(B_idx, y_idx, v_c, v_d, q, params, arrays):
         c = y + B - q[Bp_idx, y_idx] * Bp
         if c > 0:
             v = np.maximum(v_c[Bp_idx, :], v_d)
-            val = u(c, γ) + β * np.sum(v * P[y_idx, :])
+            val = u(c, γ) + β * (v @ P[y_idx, :])
             if val > current_max:
                 current_max = val
                 Bp_star_idx = Bp_idx
