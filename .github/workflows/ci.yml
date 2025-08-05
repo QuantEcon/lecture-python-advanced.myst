@@ -1,5 +1,7 @@
-name: Build HTML [using jupyter-book]
-on: [push]
+name: CI - Build HTML [using jupyter-book]
+on:
+  pull_request:
+  workflow_dispatch:
 jobs:
   tests:
     runs-on: ubuntu-latest
