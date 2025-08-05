@@ -100,7 +100,7 @@ def ent(π, π_hat):
     Compute the relative entropy of a probability vector `π_hat` with respect to `π`. JIT-compiled using Numba.
     
     """
-    ent_val = -np.sum(π_hat * (np.log(π) - np.log(π_hat)))
+    ent_val = -π_hat @ (np.log(π) - np.log(π_hat))
     
     return ent_val
 
@@ -115,7 +115,7 @@ def T_θ_factory(θ, π):
         Risk-sensitivity operator of Jacobson (1973) and Whittle (1981) taking a function `u` as argument.
         
         """
-        return lambda c: -θ * np.log(np.sum(π * np.exp(-u(c) / θ)))
+        return lambda c: -θ * np.log(π @ np.exp(-u(c) / θ))
     
     return T_θ
 
@@ -128,7 +128,7 @@ def compute_change_measure(u, c, θ, π):
     """
     
     m_unnormalized = np.exp(-u(c) / θ)
-    m =  m_unnormalized / (π * m_unnormalized).sum()
+    m =  m_unnormalized / (π @ m_unnormalized)
     return m
 
 
