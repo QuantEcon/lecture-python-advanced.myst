@@ -555,7 +555,7 @@ def abreu_plan(clq, T=1000, T_A=10, μ_bar=0.1, T_Plot=20):
     # Calculate implied stick θ series
     discount = (clq.α / (1 + clq.α)) ** np.arange(T)
     clq.θ_A = np.array([
-        1 / (clq.α + 1) * np.sum(clq.μ_A[t:] * discount[:T - t])
+        1 / (clq.α + 1) * (clq.μ_A[t:] @ discount[:T - t])
         for t in range(T)
     ])
 
