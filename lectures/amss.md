@@ -27,7 +27,6 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 tags: [hide-output]
 ---
 !pip install --upgrade quantecon
-!pip install interpolation
 ```
 
 ## Overview
@@ -38,10 +37,28 @@ Let's start with following imports:
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import root
-from interpolation.splines import eval_linear, UCGrid, nodes
 from quantecon import optimize, MarkovChain
 from numba import njit, prange, float64
 from numba.experimental import jitclass
+
+# NumPy-based replacements for interpolation package functions
+def UCGrid(bounds):
+    """Uniform coordinate grid."""
+    return (bounds,)
+
+def nodes(x_grid):
+    """Extract grid nodes."""
+    x_min, x_max, x_num = x_grid[0]
+    grid_points = np.linspace(x_min, x_max, int(x_num))
+    return grid_points.reshape(-1, 1)
+
+@njit  
+def eval_linear(x_grid, y_values, x_points):
+    """Linear interpolation using numpy."""
+    x_min, x_max, x_num = x_grid[0]
+    grid_points = np.linspace(x_min, x_max, int(x_num))
+    result = np.interp(x_points, grid_points, y_values)
+    return result[0]
 ```
 
 In {doc}`an earlier lecture <opt_tax_recur>`, we described a model of
