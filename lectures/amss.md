@@ -105,8 +105,6 @@ def linear_interp_1d(x_grid, y_values, x_query):
     return linear_interp_1d_scalar(x_min, x_max, x_num, y_values, x_query[0])
 ```
 
-Let's start with following imports:
-
 In {doc}`an earlier lecture <opt_tax_recur>`, we described a model of
 optimal taxation with state-contingent debt due to
 Robert E. Lucas, Jr.,  and Nancy Stokey  {cite}`LucasStokey1983`.
