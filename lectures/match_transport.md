@@ -575,9 +575,9 @@ def plot_H_z(self, figsize=(15, 8), range_x_axis=None, scatter=True):
     plt.axhline(0, color='black', linewidth=1)
     
     # determine the step points for horizontal lines
-    step = np.concatenate(([self.support_z.min() - .05 * self.support_z.ptp()],
+    step = np.concatenate(([self.support_z.min() - .05 * np.ptp(self.support_z)],
                             self.support_z,
-                           [self.support_z.max() + .05 * self.support_z.ptp()]))
+                           [self.support_z.max() + .05 * np.ptp(self.support_z)]))
     height = np.concatenate(([0], H_z, [0]))
     
     # plot the horizontal lines of the step function
@@ -699,9 +699,9 @@ def plot_layers(self, figsize=(15, 8)):
     plt.figure(figsize=figsize)
 
     # Plot H(z)
-    step = np.concatenate(([self.support_z.min() - .05 * self.support_z.ptp()],
+    step = np.concatenate(([self.support_z.min() - .05 * np.ptp(self.support_z)],
                            self.support_z,
-                           [self.support_z.max() + .05 * self.support_z.ptp()]))
+                           [self.support_z.max() + .05 * np.ptp(self.support_z)]))
     height = np.concatenate((H_z, [0]))
     plt.step(step, height, where='post', color='black', label='CDF', zorder=1)
     
@@ -984,7 +984,7 @@ def plot_layer_matching(self, layer, matching_layer):
     ax.spines['top'].set_color('none') 
     ax.spines['right'].set_color('none')  
     ax.yaxis.set_ticks([])
-    ax.set_ylim(bottom= -self.support_z.ptp() / 100)
+    ax.set_ylim(bottom= -np.ptp(self.support_z) / 100)
 
     plt.show()
 
@@ -1319,20 +1319,20 @@ def plot_matching(self, matching_off_diag, title, figsize=(15, 15),
     ax.spines['top'].set_color('none')
     ax.spines['right'].set_color('none')
     ax.yaxis.set_ticks([])
-    ax.set_ylim(- self.X_types.ptp() / 10, 
-                (max_height / 2) + self.X_types.ptp()*.01)  
+    ax.set_ylim(- np.ptp(self.X_types) / 10, 
+                (max_height / 2) + np.ptp(self.X_types)*.01)  
 
     # Plot H_z on the main axis if enabled
     if plot_H_z:
         H_z = np.cumsum(self.q_z)  
 
         step = np.concatenate(([self.support_z.min() 
-                                - .02 * self.support_z.ptp()],
+                                - .02 * np.ptp(self.support_z)],
                                 self.support_z,
                                 [self.support_z.max() 
-                                + .02 * self.support_z.ptp()]))
+                                + .02 * np.ptp(self.support_z)]))
 
-        H_z = H_z/H_z.ptp() * self.support_z.ptp() /2
+        H_z = H_z/np.ptp(H_z) * np.ptp(self.support_z) /2
         height = np.concatenate(([0], H_z, [0]))
 
         # Plot the compressed H_z on the same main x-axis
@@ -1340,8 +1340,8 @@ def plot_matching(self, matching_off_diag, title, figsize=(15, 15),
                                 label='$H_z$', where='post')
         
         # Set the y-limit to keep H_z and maximum circle size in the plot
-        ax.set_ylim(np.min(H_z) - H_z.ptp() *.01,
-                    np.maximum(np.max(H_z), max_height / 2) + H_z.ptp() *.01) 
+        ax.set_ylim(np.min(H_z) - np.ptp(H_z) *.01,
+                    np.maximum(np.max(H_z), max_height / 2) + np.ptp(H_z) *.01) 
 
         # Add label and legend for H_z
         ax.legend(loc="upper right")
@@ -1907,7 +1907,7 @@ def plot_hierarchies(self, subpairs, scatter=True, range_x_axis=None):
 
     if range_x_axis is not None:
         ax.set_xlim(range_x_axis)
-        ax.set_ylim(- self.X_types.ptp() / 10, 
+        ax.set_ylim(- np.ptp(self.X_types) / 10, 
                     (range_x_axis[1] - range_x_axis[0]) / 2 )
 
     # Title and layout settings for the main plot
