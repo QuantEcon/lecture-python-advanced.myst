@@ -48,7 +48,7 @@ In {doc}`an earlier lecture <opt_tax_recur>`, we described a model of
 optimal taxation with state-contingent debt due to
 Robert E. Lucas, Jr., and Nancy Stokey {cite}`LucasStokey1983`.
 
-Aiyagari, Marcet, Sargent, and Seppälä {cite}`aiyagari2002optimal`  (hereafter, AMSS)
+Aiyagari, Marcet, Sargent, and Seppälä {cite}`aiyagari2002optimal` (hereafter, AMSS)
 studied optimal taxation in a model without state-contingent debt.
 
 In this lecture, we
@@ -71,7 +71,7 @@ For $t \geq 0$, a history of the state is represented by $s^t = [s_t, s_{t-1}, \
 
 Government purchases $g(s)$ are an exact time-invariant function of $s$.
 
-Let $c_t(s^t)$,  $\ell_t(s^t)$, and $n_t(s^t)$ denote consumption,
+Let $c_t(s^t)$, $\ell_t(s^t)$, and $n_t(s^t)$ denote consumption,
 leisure, and labor supply, respectively, at history $s^t$ at time $t$.
 
 Each period, a representative household is endowed with one unit of time that can be divided between leisure
@@ -106,7 +106,7 @@ The representative household's preferences over $\{c_t(s^t), \ell_t(s^t)\}_{t=0}
 where
 
 * $\pi_t(s^t)$ is a joint probability distribution over the sequence $s^t$, and
-* the utility function $u$ is  increasing, strictly concave, and three times  continuously differentiable in both arguments.
+* the utility function $u$ is increasing, strictly concave, and three times continuously differentiable in both arguments.
 
 The government imposes a flat-rate tax $\tau_t(s^t)$ on labor income at time $t$, history $s^t$.
 
@@ -138,9 +138,9 @@ The government’s budget constraint in period $t$ at history $s^t$ is
 \begin{aligned}
 b_t(s^{t-1})
     & =    \tau^n_t(s^t) n_t(s^t) - g(s_t) - T_t(s^t) +
-                   {b_{t+1}(s^t) \over R_t(s^t )}
+                   {b_{t+1}(s^t) \over R_t(s^t)}
     \\
-    & \equiv z_t(s^t) + {b_{t+1}(s^t) \over R_t(s^t )},
+    & \equiv z_t(s^t) + {b_{t+1}(s^t) \over R_t(s^t)},
 \end{aligned}
 ```
 
@@ -380,7 +380,7 @@ and with respect to $b_t(s^t)$ as
 ```
 
 If we substitute $z_t(s^t)$ from {eq}`AMSS_44_2` and its derivative
-$z_c(s^t)$ into the first-order condition {eq}`AMSS_foc;a`, we  find  two
+$z_c(s^t)$ into the first-order condition {eq}`AMSS_foc;a`, we find two
 differences from the corresponding condition for the optimal allocation
 in a Lucas-Stokey economy with state-contingent government debt.
 
@@ -663,7 +663,7 @@ random, $V_x(x, s)$ almost surely converges to zero.
 For quasi-linear preferences, the first-order condition for maximizing {eq}`eqn:AMSSapp5` subject to  {eq}`eqn:AMSSapp6` with respect to $n(s)$ becomes
 
 $$
-(1-\mu(s|s_-) ) (1 - u_l(s)) + \mu(s|s_-) n(s) u_{ll}(s) =0
+(1-\mu(s|s_-)) (1 - u_l(s)) + \mu(s|s_-) n(s) u_{ll}(s) =0
 $$
 
 When $\mu(s|s_-) = \beta V_x(x(s),x)$ converges to zero, in the limit
@@ -702,7 +702,7 @@ For convenience in  matching our computer code, we have expressed
 utility as a function of $n$ rather than leisure $l$.
 ```
 
-We first consider a government expenditure process that we  studied earlier in a lecture on
+We first consider a government expenditure process that we studied earlier in a lecture on
 {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
 
 Government expenditures are known for sure in all periods except one.
