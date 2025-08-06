@@ -74,7 +74,7 @@ Government purchases $g(s)$ are an exact time-invariant function of $s$.
 Let $c_t(s^t)$,  $\ell_t(s^t)$, and $n_t(s^t)$ denote consumption,
 leisure, and labor supply, respectively, at history $s^t$ at time $t$.
 
-Each period a representative  household is endowed with one unit of time that can be divided between  leisure
+In each period, a representative household is endowed with one unit of time that can be divided between leisure
 $\ell_t$ and labor $n_t$:
 
 ```{math}
@@ -93,7 +93,7 @@ c_t(s^t) + g(s_t) = n_t(s^t)
 
 Output is not storable.
 
-The technology pins down a pre-tax wage rate to unity for all $t, s^t$.
+The technology pins down a pre-tax wage rate equal to unity for all $t, s^t$.
 
 A representative  household’s preferences over $\{c_t(s^t), \ell_t(s^t)\}_{t=0}^\infty$ are ordered by
 
@@ -110,7 +110,7 @@ where
 
 The government imposes a flat rate tax $\tau_t(s^t)$ on labor income at time $t$, history $s^t$.
 
-Lucas and Stokey assumed that there are complete markets in one-period Arrow securities; also see {doc}`smoothing models <smoothing>`.
+Lucas and Stokey assumed that there are complete markets in one-period Arrow securities (also see {doc}`smoothing models <smoothing>`).
 
 It is at this point that AMSS {cite}`aiyagari2002optimal` modify the Lucas and Stokey economy.
 
@@ -168,7 +168,7 @@ b_t(s^{t-1}) =  z_t(s^t) + \beta  \sum_{s^{t+1}\vert s^t}  \pi_{t+1}(s^{t+1} | s
 ```
 
 Components of $z_t(s^t)$ on the right side depend on $s^t$, but the left side is required to depend only
-on $s^{t-1}$ .
+on $s^{t-1}$.
 
 **This is what it means for one-period government debt to be risk-free**.
 
@@ -203,7 +203,7 @@ b_t(s^{t-1})
 Notice how the conditioning sets in equation {eq}`TS_gov_wo3` differ: they are $s^{t-1}$ on the left side and
 $s^t$ on the right side.
 
-Now let's
+Now let us
 
 * substitute the resource constraint into the net-of-interest government surplus, and
 * use the household’s first-order condition $1-\tau^n_t(s^t)= u_{\ell}(s^t) /u_c(s^t)$ to eliminate the labor tax rate
@@ -246,13 +246,15 @@ Equation {eq}`TS_gov_wo4a` must hold for each $s^t$ for each $t \geq 1$.
 
 ### Comparison with Lucas-Stokey Economy
 
-The expression on the right side of {eq}`TS_gov_wo4a` in the Lucas-Stokey (1983) economy would  equal the present value of a continuation stream of government net-of-interest surpluses evaluated at what would be competitive equilibrium Arrow-Debreu prices at date $t$.
+The expression on the right side of {eq}`TS_gov_wo4a` in the Lucas-Stokey (1983) economy would equal the present value of a continuation stream of government net-of-interest surpluses.
+This present value would be evaluated at what would be competitive equilibrium Arrow-Debreu prices at date $t$.
 
 In the Lucas-Stokey economy, that present value is measurable with respect to $s^t$.
 
 In the AMSS economy, the restriction that government debt be risk-free imposes that that same present value must be measurable with respect to $s^{t-1}$.
 
-In a language used in the literature on incomplete markets models, it can be said that the AMSS model requires that at each $(t, s^t)$ what would be the present value of continuation government net-of-interest surpluses in the Lucas-Stokey model must belong to  the **marketable subspace** of the AMSS model.
+In the language used in the literature on incomplete markets models, the AMSS model requires the following.
+At each $(t, s^t)$, what would be the present value of continuation government net-of-interest surpluses in the Lucas-Stokey model must belong to the **marketable subspace** of the AMSS model.
 
 ### Ramsey Problem Without State-contingent Debt
 
@@ -312,7 +314,7 @@ A negative multiplier $\gamma_t(s^t)<0$ means that if we could
 relax constraint {eq}`AMSS_46`, we would like to *increase* the beginning-of-period
 indebtedness for that particular realization of history $s^t$.
 
-That would let us reduce the beginning-of-period indebtedness for some other history [^fn_b].
+This would allow us to reduce the beginning-of-period indebtedness for some other history [^fn_b].
 
 These features flow from  the fact that the government cannot use state-contingent debt and therefore cannot allocate its indebtedness  efficiently across future states.
 
@@ -435,8 +437,8 @@ $$
 where $R_t(s^t)$ is the gross risk-free rate of interest between $t$
 and $t+1$ at history $s^t$ and $T_t(s^t)$ are non-negative transfers.
 
-Throughout this lecture, we shall set transfers to zero (for some issues about the limiting behavior of debt, this is  possibly an important  difference from AMSS {cite}`aiyagari2002optimal`, who restricted transfers
-to be non-negative).
+Throughout this lecture, we shall set transfers to zero.
+(For some issues about the limiting behavior of debt, this is possibly an important difference from AMSS {cite}`aiyagari2002optimal`, who restricted transfers to be non-negative).
 
 In this case, the household faces a sequence of budget constraints
 
@@ -512,7 +514,7 @@ constraint imposed in the Lucas and Stokey model.
 
 ### Two Bellman Equations
 
-Let $\Pi(s|s_-)$ be a Markov transition matrix whose entries tell probabilities of moving from state $s_-$ to state $s$ in one period.
+Let $\Pi(s|s_-)$ be a Markov transition matrix whose entries give probabilities of moving from state $s_-$ to state $s$ in one period.
 
 Let
 
@@ -544,8 +546,8 @@ for each $s \in {\cal S}$:
 ```
 
 A continuation Ramsey planner at $t \geq 1$ takes
-$(x_{t-1}, s_{t-1}) = (x_-, s_-)$ as given and before
-$s$ is realized chooses
+$(x_{t-1}, s_{t-1}) = (x_-, s_-)$ as given.
+Before $s$ is realized, the planner chooses
 $(n_t(s_t), x_t(s_t)) = (n(s), x(s))$ for $s \in  {\cal S}$.
 
 The **Ramsey planner** takes $(b_0, s_0)$ as given and chooses $(n_0, x_0)$.
@@ -669,9 +671,8 @@ $$
 When $\mu(s|s_-) = \beta V_x(x(s),x)$ converges to zero, in the limit
 $u_l(s)= 1 =u_c(s)$, so that $\tau(x(s),s) =0$.
 
-Thus, in the limit, if $g_t$ is perpetually random,  the government
-accumulates sufficient assets to finance all expenditures from earnings on those
-assets, returning any excess revenues to the household as non-negative lump-sum transfers.
+Thus, in the limit, if $g_t$ is perpetually random, the government accumulates sufficient assets to finance all expenditures from earnings on those assets.
+It returns any excess revenues to the household as non-negative lump-sum transfers.
 
 ### Code
 
@@ -705,7 +706,7 @@ utility as a function of $n$ rather than leisure $l$.
 We first consider a government expenditure process that we  studied earlier in a lecture on
 {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
 
-Government expenditures are known for sure in all periods except one.
+Government expenditures are known with certainty in all periods except one.
 
 * For $t<3$ or $t > 3$ we assume that $g_t = g_l = 0.1$.
 * At $t = 3$ a war occurs with probability 0.5.
@@ -844,13 +845,13 @@ If it is able to trade state-contingent debt, then at time $t=2$
 
 * the government **purchases** an Arrow security that pays off when $g_3 = g_h$
 * the government **sells** an Arrow security that  pays off when $g_3 = g_l$
-* the Ramsey planner designs these purchases and sales  designed so  that, regardless of whether or not there is a war at $t=3$, the government  begins  period $t=4$ with the *same* government debt
+* the Ramsey planner designs these purchases and sales so that, regardless of whether or not there is a war at $t=3$, the government  begins  period $t=4$ with the *same* government debt
 
-This pattern facilities smoothing tax rates across  states.
+This pattern facilitates smoothing tax rates across states.
 
 The government without state-contingent debt cannot do this.
 
-Instead, it must enter   time $t=3$ with the same level of debt falling due whether there is peace or war at $t=3$.
+Instead, the government must enter time $t=3$ with the same level of debt falling due, regardless of whether there is peace or war at $t=3$.
 
 The risk-free rate between time $2$ and time $3$ is unusually **low** because at time $2$ consumption at time $3$ is expected to be unusually **low**.
 
@@ -877,7 +878,7 @@ Without state-contingent debt, the optimal tax rate is history dependent.
 #### Perpetual War Alert
 
 History dependence occurs more dramatically in a case in which the government
-perpetually faces the prospect  of war.
+perpetually faces the possibility of war.
 
 This case was studied in the final example of the lecture on
 {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
@@ -973,7 +974,7 @@ plt.show()
 When the government experiences a prolonged period of peace, it is able to reduce
 government debt and set persistently lower tax rates.
 
-However, the government  finances a long war by borrowing and raising taxes.
+However, when faced with a long war, the government finances it by borrowing and raising taxes.
 
 This results in a drift away from  policies with state-contingent debt that
 depends on the history of shocks.
