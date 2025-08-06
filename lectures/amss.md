@@ -63,9 +63,9 @@ We begin with an introduction to the model.
 
 ## Competitive Equilibrium with Distorting Taxes
 
-Many but not all features of the economy are identical to those of {doc}`the Lucas-Stokey economy <opt_tax_recur>`.
+Many features of the economy are identical to those of {doc}`the Lucas-Stokey economy <opt_tax_recur>`, though not all.
 
-Let's start with things that are identical.
+Let us start with things that are identical.
 
 For $t \geq 0$, a history of the state is represented by $s^t = [s_t, s_{t-1}, \ldots, s_0]$.
 
@@ -116,7 +116,8 @@ It is at this point that AMSS {cite}`aiyagari2002optimal` modify the Lucas and S
 
 AMSS allow the government to issue only one-period risk-free debt each period.
 
-Ruling out complete markets in this way is a step in the direction of making total tax collections behave more like that prescribed in Robert Barro (1979) {cite}`Barro1979` than they do in Lucas and Stokey (1983) {cite}`LucasStokey1983`.
+Ruling out complete markets in this way is a step in the direction of making total tax collections behave more like that prescribed in Robert Barro (1979) {cite}`Barro1979`.
+This is in contrast to the behavior they exhibit in Lucas and Stokey (1983) {cite}`LucasStokey1983`.
 
 ### Risk-free One-Period Debt Only
 
@@ -251,7 +252,7 @@ This present value would be evaluated at what would be competitive equilibrium A
 
 In the Lucas-Stokey economy, that present value is measurable with respect to $s^t$.
 
-In the AMSS economy, the restriction that government debt be risk-free imposes that that same present value must be measurable with respect to $s^{t-1}$.
+In the AMSS economy, the restriction that government debt be risk-free imposes that the same present value must be measurable with respect to $s^{t-1}$.
 
 In the language used in the literature on incomplete markets models, the AMSS model requires the following.
 At each $(t, s^t)$, what would be the present value of continuation government net-of-interest surpluses in the Lucas-Stokey model must belong to the **marketable subspace** of the AMSS model.
@@ -324,7 +325,7 @@ It is helpful to apply two transformations to the Lagrangian.
 
 Multiply constraint {eq}`AMSS_44` by $u_c(s^0)$ and the constraints {eq}`AMSS_46` by $\beta^t u_c(s^{t})$.
 
-Then a Lagrangian for the Ramsey problem can  be represented as
+Then a Lagrangian for the Ramsey problem can be represented as
 
 ```{math}
 :label: AMSS_lagr;a
@@ -1004,8 +1005,7 @@ titles = ['Consumption', 'Labor Supply', 'Government Debt',
 
 fig, axes = plt.subplots(3, 2, figsize=(14, 10))
 
-for ax, title, ls, amss in zip(axes.flatten(), titles, sim_ls, \
-        sim_amss):
+for ax, title, ls, amss in zip(axes.flatten(), titles, sim_ls, sim_amss):
     ax.plot(ls, '-k', amss, '-.b', alpha=0.5)
     ax.set(title=title)
     ax.grid()
