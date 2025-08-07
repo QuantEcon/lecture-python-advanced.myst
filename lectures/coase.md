@@ -52,7 +52,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import fminbound
 ```
 
-### Why Firms Exist
+### Why firms exist
 
 On top of asking a deep and fascinating question, Coase also supplied an illuminating answer: firms exist because of transaction costs.
 
@@ -78,7 +78,7 @@ Making this agreement is much easier than trying to map every task out in advanc
 
 So agent A decides to hire agent B and a firm of nontrivial size appears, due to transaction costs.
 
-### A Trade-Off
+### A trade-off
 
 Actually, we haven't yet come to the heart of Coase's investigation.
 
@@ -116,7 +116,7 @@ Here's a summary of our discussion:
 * But as they get large, in-house operations become costly due to diminishing returns to management.
 * The size of firms is determined by balancing these effects, thereby equalizing the marginal costs of each form of operation.
 
-### A Quantitative Interpretation
+### A quantitative interpretation
 
 Coases ideas were expressed verbally, without any mathematics.
 
@@ -128,7 +128,7 @@ In doing so we'll add a bit more structure than Coase did, but this price will b
 
 Our exposition is based on {cite}`kikuchi2018span`.
 
-## The Model
+## The model
 
 The model we study involves production of a single unit of a final good.
 
@@ -216,7 +216,7 @@ filling the same role in the production chain.
 
 Profits are never negative in equilibrium because firms can freely exit.
 
-### Informal Definition of Equilibrium
+### Informal definition of equilibrium
 
 An equilibrium in this setting is an allocation of firms and a price function such that
 
@@ -224,7 +224,7 @@ An equilibrium in this setting is an allocation of firms and a price function su
 1. no firm in the production chain has an incentive to deviate, and
 1. no inactive firms can enter and extract positive profits
 
-### Formal Definition of Equilibrium
+### Formal definition of equilibrium
 
 Let's make this definition more formal.
 
@@ -273,11 +273,11 @@ This price-allocation pair is called an **equilibrium** for the production chain
 
 The rationale behind these conditions was given in our informal definition of equilibrium above.
 
-## Existence, Uniqueness and Computation of Equilibria
+## Existence, uniqueness and computation of equilibria
 
 We have defined an equilibrium but does one exist?  Is it unique?  And, if so, how can we compute it?
 
-### A Fixed Point Method
+### A fixed point method
 
 To address these questions, we introduce the operator $T$ mapping a nonnegative function $p$ on $[0, 1]$ to $Tp$ via
 
@@ -370,7 +370,7 @@ p^*(s) =
 
 From this equation, it is clear that so profits are zero for all incumbent firms.
 
-### Marginal Conditions
+### Marginal conditions
 
 We can develop some additional insights on the behavior of firms by examining marginal conditions associated with the equilibrium.
 
