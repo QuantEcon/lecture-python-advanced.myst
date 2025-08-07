@@ -352,7 +352,8 @@ P = X (X'X)^{-1} X'
 $$
 ```
 
-```{prf:proof} Given arbitrary $y \in \mathbb R^n$ and $P = X (X'X)^{-1} X'$, our claim is that
+```{prf:proof} 
+Given arbitrary $y \in \mathbb R^n$ and $P = X (X'X)^{-1} X'$, our claim is that
 
 1. $P y \in S$, and
 2. $y - P y \perp S$
