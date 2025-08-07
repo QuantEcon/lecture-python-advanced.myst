@@ -92,7 +92,7 @@ Rather than directly deploying the {cite}`PCL` machinery here, we shall instead 
 * Therefore, equilibrium
   prices and quantities in Townsend's original model equal those in a pooling equilibrium.
 
-### A Sequence of Models
+### A sequence of models
 
 We proceed by describing  a sequence of models of two industries that are linked in a
 single way:
@@ -118,7 +118,7 @@ Technically, this lecture deploys concepts and tools that appear
 in  [First Look at Kalman Filter](https://python-intro.quantecon.org/kalman.html) and
 [Rational Expectations Equilibrium](https://python-intro.quantecon.org/rational_expectations.html).
 
-## The Setting
+## The setting
 
 We cast all variables in terms of deviations from means.
 
@@ -290,7 +290,7 @@ received by firms in industry $-i$.
 We shall verify this assertion  by using a guess and verify tactic that involves running a least
 squares regression and inspecting its $R^2$. [^footnote0]
 
-## Equilibrium Conditions
+## Equilibrium conditions
 
 It is convenient to solve a firm’s problem without
 uncertainty  by forming the Lagrangian:
@@ -687,7 +687,7 @@ k_{t+1}^i & =  \tilde \lambda k_t^i + {1 \over \lambda - \rho}   \hat \theta_{t+
 \theta_{t+1} & =  \rho \theta_t + v_t .  \end{aligned}
 ```
 
-### Two Noisy Signals
+### Two noisy signals
 
 We now construct a **pooling equilibrium** by assuming that at time $t$ a firm in
 industry $i$ receives a vector $w_t$ of *two* noisy signals
@@ -774,7 +774,7 @@ k_{t+1}^i & =  \tilde \lambda k_t^i + {1 \over \lambda - \rho}\hat \theta_{t+1} 
 Below, by using a guess-and-verify tactic,  we shall show that outcomes in this  **pooling equilibrium** equal those in an equilibrium under the alternative
 information structure that interested Townsend {cite}`townsend` but that originally seemed too challenging to compute. [^footnote5]
 
-## Guess-and-Verify Tactic
+## Guess-and-verify tactic
 
 As a preliminary step we shall take our recursive representation {eq}`sol0a`
 of an equilibrium in industry $i$ with one noisy signal
@@ -798,9 +798,9 @@ structure.
 
 We proceed to analyze first the one-noisy-signal structure and then the two-noisy-signal structure.
 
-## Equilibrium with One Noisy Signal on $\theta_t$
+## Equilibrium with one noisy signal on $\theta_t$
 
-### Step 1: Solve for $\tilde{\lambda}$ and $\lambda$
+### Step 1: solve for $\tilde{\lambda}$ and $\lambda$
 
 1. Cast
    $\left(\lambda-1\right)\left(\lambda-\frac{1}{\beta}\right)=b\lambda$
@@ -812,7 +812,7 @@ We proceed to analyze first the one-noisy-signal structure and then the two-nois
 Note that
 $p\left(\lambda\right)=\lambda^{2}-\left(1+b+\frac{1}{\beta}\right)\lambda+\frac{1}{\beta}$.
 
-### Step 2: Solve for $p$
+### Step 2: solve for $p$
 
 1. Cast
    $p=\sigma_{v}^{2}+\frac{p\rho^{2}\sigma_{e}^{2}}{2p+\sigma_{e}^{2}}$
@@ -838,7 +838,7 @@ $$
 \end{aligned}
 $$
 
-### Step 3: Represent the system using `quantecon.LinearStateSpace`
+### Step 3: represent the system using `quantecon.LinearStateSpace`
 
 We use the following representation for constructing the
 `quantecon.LinearStateSpace` instance.
@@ -1004,7 +1004,7 @@ x, y = lss.simulate(ts_length, random_state=1)
 np.max(np.abs(np.array([[1., b, 0., 0., 1., 0.]]) @ x - x[3])) < 1e-12
 ```
 
-### Step 4: Compute impulse response functions
+### Step 4: compute impulse response functions
 
 To compute impulse response functions of $k_t^i$, we use the `impulse_response` method of the
 `quantecon.LinearStateSpace` class and plot outcomes.
@@ -1025,7 +1025,7 @@ Image(fig1.to_image(format="png"))
 # notebook locally
 ```
 
-### Step 5: Compute stationary covariance matrices and population regressions
+### Step 5: compute stationary covariance matrices and population regressions
 
 We compute stationary covariance matrices  by
 calling the `stationary_distributions` method of
@@ -1094,7 +1094,7 @@ reg_res = model.fit()
 np.abs(reg_res.rsquared - 1.) < 1e-6
 ```
 
-## Equilibrium with Two Noisy Signals on $\theta_t$
+## Equilibrium with two noisy signals on $\theta_t$
 
 Steps 1, 4, and 5 are identical to those for the  one-noisy-signal structure.
 
@@ -1330,7 +1330,7 @@ R_squared = reg_coeffs @ Σ_x[2:6, 2:6] @ reg_coeffs  / Σ_x[1, 1]
 R_squared
 ```
 
-## Key Step
+## Key step
 
 Now we come to the key step for verifying that equilibrium outcomes for prices and quantities are identical
 in the pooling equilibrium  original model that led Townsend to deduce an infinite-dimensional state space.
@@ -1457,7 +1457,7 @@ Image(fig3.to_image(format="png"))
 # notebook locally
 ```
 
-## Comparison of  All Signal Structures
+## Comparison of all signal structures
 
 It is enlightening side by side to  plot impulse response functions for capital for the two
  noisy-signal information structures and the  noiseless signal on $\theta$ that we have just presented.
@@ -1529,7 +1529,7 @@ $\epsilon_t^i$ in industry $i$ generates a response in $k_t^{-i}$ in the two-noi
 
 
 
-## Notes on History of the Problem
+## Notes on history of the problem
 
 To truncate what he saw as an intractable, infinite dimensional  state space,
 Townsend constructed an approximating model in which the common hidden Markov demand shock
