@@ -56,7 +56,7 @@ from scipy.linalg import solve
 import matplotlib.pyplot as plt
 ```
 
-### Basic Setup
+### Basic setup
 
 Decisions of two agents affect the motion of a  state vector
 that appears as an argument of   payoff functions of both agents.
@@ -82,7 +82,7 @@ A Markov perfect equilibrium with robust agents will be characterized by
 Below, we'll construct a robust firms version of the classic duopoly model with
 adjustment costs analyzed in [Markov perfect equilibrium](https://python-intro.quantecon.org/markov_perf.html).
 
-## Linear Markov Perfect Equilibria with Robust Agents
+## Linear Markov perfect equilibria with robust agents
 
 ```{index} single: Linear Markov Perfect Equilibria
 ```
@@ -92,7 +92,7 @@ leads us to an interrelated pair of Bellman equations.
 
 In linear quadratic dynamic games, these "stacked Bellman equations" become "stacked Riccati equations" with a tractable mathematical structure.
 
-### Modified Coupled Linear Regulator Problems
+### Modified coupled linear regulator problems
 
 We consider a general linear quadratic regulator game with two players, each of whom fears model misspecifications.
 
@@ -160,7 +160,7 @@ agent $i$'s mind charges for distorting the law of motion in a way that harms ag
 * the imaginary loss-maximizing  agent helps the loss-minimizing agent by helping him construct bounds on the behavior of his decision rule over a
   large **set** of alternative models of state transition dynamics.
 
-### Computing Equilibrium
+### Computing equilibrium
 
 We formulate a linear robust Markov perfect equilibrium as follows.
 
@@ -268,7 +268,7 @@ Moreover, since
 
 we need to solve these $k_1 + k_2$ equations simultaneously.
 
-### Key Insight
+### Key insight
 
 As in [Markov perfect equilibrium](https://python-intro.quantecon.org/markov_perf.html), a key insight here  is that  equations  {eq}`rmp-orig-3` and {eq}`rmp-orig-5` are linear in $F_{1t}$ and $F_{2t}$.
 
@@ -282,7 +282,7 @@ However, in the Markov perfect equilibrium of this game, each agent is assumed t
 
 After these equations have been solved, we can also deduce associated sequences of worst-case shocks.
 
-### Worst-case Shocks
+### Worst-case shocks
 
 For agent $i$ the maximizing or worst-case shock $v_{it}$ is
 
@@ -296,7 +296,7 @@ $$
 K_{it} = \theta_i^{-1} (I - \theta_i^{-1} C' P_{i,t+1} C)^{-1} C' P_{i,t+1} (A - B_1 F_{it} - B_2 F_{2t})
 $$
 
-### Infinite Horizon
+### Infinite horizon
 
 We often want to compute the solutions of such games for infinite horizons, in the hope that the decision rules $F_{it}$ settle down to be time-invariant as $t_1 \rightarrow +\infty$.
 
@@ -315,7 +315,7 @@ game with robust planers in the manner described above.
 ```{index} single: Markov Perfect Equilibrium; Applications
 ```
 
-### A Duopoly Model
+### A duopoly model
 
 Without concerns for robustness, the model is identical to the duopoly model from the [Markov perfect equilibrium](https://python-intro.quantecon.org/markov_perf.html) lecture.
 
@@ -438,7 +438,7 @@ A robust  decision rule of firm $i$ will take the form $u_{it} = - F_i x_t$, ind
 x_{t+1} = (A - B_1 F_1 -B_1 F_2 ) x_t
 ```
 
-### Parameters and Solution
+### Parameters and solution
 
 Consider the  duopoly model with parameter values of:
 
@@ -453,7 +453,7 @@ From these, we computed the infinite horizon MPE without robustness using the co
 :load: _static/lecture_specific/markov_perf/duopoly_mpe.py
 ```
 
-#### Markov Perfect Equilibrium with Robustness
+#### Markov perfect equilibrium with robustness
 
 We add robustness concerns to the Markov Perfect Equilibrium model by
 extending the function `qe.nnash`
@@ -630,7 +630,7 @@ def nnash_robust(A, C, B1, B2, R1, R2, Q1, Q2, S1, S2, W1, W2, M1, M2,
     return F1, F2, P1, P2
 ```
 
-### Some Details
+### Some details
 
 Firm  $i$ wants to minimize
 
@@ -723,7 +723,7 @@ Q1 = Q2 = γ
 S1 = S2 = W1 = W2 = M1 = M2 = 0.0
 ```
 
-#### Consistency Check
+#### Consistency check
 
 We first conduct a comparison test to check if `nnash_robust` agrees
 with `qe.nnash` in the non-robustness case in which each $\theta_i \approx +\infty$
@@ -747,7 +747,7 @@ print('P2 and P2r should be the same: ', np.allclose(P1, P1r))
 
 We can see that the results are consistent across the two functions.
 
-#### Comparative Dynamics under Baseline Transition Dynamics
+#### Comparative dynamics under baseline transition dynamics
 
 We want to compare the dynamics of price and output under the baseline
 MPE model with those under the baseline model under the robust decision rules within the robust MPE.
@@ -912,7 +912,7 @@ To explore this, we study next how *ex-post* the two firms' beliefs about state 
 
 (by *ex-post* we mean *after* extremization of each firm's intertemporal objective)
 
-#### Heterogeneous Beliefs
+#### Heterogeneous beliefs
 
 As before, let $A^o = A - B\_1 F\_1^r - B\_2 F\_2^r$, where in a robust MPE, $F_i^r$ is a robust decision rule for firm $i$.
 
