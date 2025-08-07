@@ -51,7 +51,7 @@ from quantecon import DLE
 from math import sqrt
 ```
 
-## The Model
+## The model
 
 The model features a static linear demand curve and a "time-to-grow"
 structure for cattle.
@@ -107,7 +107,7 @@ Demand for beef is government by $c_t = a_0 - a_1p_t + \tilde d_t$
 where $\tilde d_t$ is a stochastic process with mean zero,
 representing a demand shifter.
 
-## Mapping into HS2013 Framework
+## Mapping into HS2013 framework
 
 ### Preferences
 

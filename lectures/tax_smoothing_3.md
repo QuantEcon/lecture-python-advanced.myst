@@ -62,7 +62,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-## Roll-Over Risk
+## Roll-over risk
 
 Let $T_t$ denote tax collections, $\beta$ a discount factor,
 $b_{t,t+1}$ time $t+1$ goods that the government promises to
@@ -110,7 +110,7 @@ risk”.
 Specifically, we shut down the government’s ability to borrow in
 one of the Markov states.
 
-## A Dead End
+## A dead end
 
 A first thought for how to implement this might be to allow
 $p^t_{t+1}$ to vary over time with:
@@ -144,7 +144,7 @@ cheap
 
 Thus, we must represent “roll-over risk” some other way.
 
-## Better Representation of Roll-Over Risk
+## Better representation of roll-over risk
 
 To force the government to set $b_{t,t+1} = 0$, we can instead
 extend the model to have four Markov states:

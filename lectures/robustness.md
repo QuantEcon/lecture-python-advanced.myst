@@ -85,7 +85,7 @@ import quantecon as qe
 ```
 
 (rb_vec)=
-### Sets of Models Imply Sets Of Values
+### Sets of models imply sets of values
 
 Our "robust" decision-maker wants to know how well a given rule will work when he does not *know* a single transition law  $\ldots$.
 
@@ -144,18 +144,18 @@ We will also describe how to choose $F$ to shape the sets of values.
 
 This will involve crafting a *skinnier* set at the cost of  a lower *level* (at least for low values of entropy).
 
-### Inspiring Video
+### Inspiring video
 
 If you want to understand more about why one serious quantitative researcher is interested in this approach, we recommend [Lars Peter Hansen's Nobel lecture](https://www.nobelprize.org/prizes/economic-sciences/2013/hansen/lecture/).
 
-### Other References
+### Other references
 
 Our discussion in this lecture is based on
 
 * {cite}`HansenSargent2000`
 * {cite}`HansenSargent2008`
 
-## The Model
+## The model
 
 For simplicity, we present ideas in the context of a class of problems with linear transition laws and quadratic objective functions.
 
@@ -210,7 +210,7 @@ A sequence $\{ w_t \}$ might represent
 
 Soon we'll quantify the quality of a model specification in terms of the maximal size of the discounted sum $\sum_{t=0}^{\infty} \beta^{t+1}w_{t+1}' w_{t+1}$.
 
-## Constructing More Robust Policies
+## Constructing more robust policies
 
 If our agent takes $\{ w_t \}$ as a given deterministic sequence, then, drawing on ideas in  earlier lectures on dynamic programming, we can anticipate Bellman equations such as
 
@@ -253,7 +253,7 @@ By raising $\theta$ more and more, we more and more limit the ability of maximiz
 
 So bigger $\theta$ is implicitly associated with smaller distortion sequences $\{w_t \}$.
 
-### Analyzing the Bellman Equation
+### Analyzing the Bellman equation
 
 So what does $J$ in {eq}`rb_wcb0` look like?
 
@@ -353,7 +353,7 @@ Furthermore, when $\theta$ is large, $\hat K$ is approximately equal to zero.
 
 Conversely, smaller $\theta$ is associated with greater fear of model misspecification and greater concern for robustness.
 
-## Robustness as Outcome of a Two-Person Zero-Sum Game
+## Robustness as outcome of a two-person zero-sum game
 
 What we have done above can be interpreted in terms of  a two-person zero-sum game in which $\hat F, \hat K$ are Nash equilibrium objects.
 
@@ -366,7 +366,7 @@ Agent 2's malevolence helps the original agent to compute bounds on his value fu
 We begin with agent 2's problem.
 
 (rb_a2)=
-### Agent 2's Problem
+### Agent 2's problem
 
 Agent 2
 
@@ -464,9 +464,9 @@ The remaining step for agent 2's problem is to set $\theta$ to enforce the const
 Here $x_t$ is given by {eq}`rob_lomf` --- which in this case becomes $x_{t+1} = (A - B F + CK(F, \theta)) x_t$.
 
 (rb_a1)=
-### Using Agent 2's Problem to Construct Bounds on  Value Sets
+### Using Agent 2's problem to construct bounds on value sets
 
-#### The Lower Bound
+#### The lower bound
 
 Define the minimized object on the right side of problem {eq}`rb_a2o` as $R_\theta(x_0, F)$.
 
@@ -518,7 +518,7 @@ To construct the *lower bound* on the set of values associated with all perturba
 This procedure  sweeps  out a set of separating hyperplanes indexed by different values for  the Lagrange multiplier $\theta$.
 ```
 
-#### The Upper Bound
+#### The upper bound
 
 To construct an *upper bound* we use a very similar procedure.
 
@@ -575,11 +575,11 @@ To construct the *upper bound* on the set of values associated all perturbations
 * Compute the upper bound on the value function $V_{\tilde \theta}(x_0, F) + \tilde \theta \ {\rm ent}$ and plot it against ${\rm ent}$.
 * Repeat the preceding three steps  for a range of values of $\tilde \theta$ to trace out the upper bound.
 
-#### Reshaping the Set of Values
+#### Reshaping the set of values
 
 Now in the interest of *reshaping* these sets of values by choosing $F$, we turn to agent 1's problem.
 
-### Agent 1's Problem
+### Agent 1's problem
 
 Now we turn to agent 1, who solves
 
@@ -618,7 +618,7 @@ Once again, the expression for the optimal policy can be found [here](https://py
 it by $\tilde F$.
 
 (rb_eq)=
-### Nash Equilibrium
+### Nash equilibrium
 
 Clearly, the $\tilde F$ we have obtained depends on $K$, which, in agent 2's problem,
 depended on an initial policy $F$.
@@ -644,7 +644,7 @@ In particular, for any given $\theta$,
 
 A sketch of the proof is given in {ref}`the appendix <rb_appendix>`.
 
-## The Stochastic Case
+## The stochastic case
 
 Now we turn to the stochastic case, where the sequence $\{w_t\}$ is treated as an IID sequence of random vectors.
 
@@ -687,7 +687,7 @@ The distribution $\phi$ is chosen as the least desirable conditional distributio
 
 This penalty term plays a role analogous to the one played by the deterministic penalty $\theta w'w$ in {eq}`rb_wcb0`, since it discourages large deviations from the benchmark.
 
-### Solving the Model
+### Solving the model
 
 The maximization problem in {eq}`rb_wcb1` appears highly nontrivial --- after all,
 we are maximizing over an infinite dimensional space consisting of the entire set of densities.
@@ -777,11 +777,11 @@ where $\hat K$ is given by {eq}`rb_kd`.
 Note that the mean of the worst-case shock distribution is equal to the same  worst-case $w_{t+1}$ as in the earlier deterministic setting.
 
 (rb_coq)=
-### Computing Other Quantities
+### Computing other quantities
 
 Before turning to implementation, we briefly outline how to compute several other quantities of interest.
 
-#### Worst-Case Value of a Policy
+#### Worst-case value of a policy
 
 One thing we will be interested in doing is holding a policy fixed and
 computing the discounted loss associated with that policy.

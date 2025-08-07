@@ -85,14 +85,14 @@ from collections import namedtuple
 from quantecon import nullspace, mc_sample_path, var_quadratic_sum
 ```
 
-### Model Features
+### Model features
 
 * Linear quadratic (LQ) model
 * Representative household
 * Stochastic dynamic programming over an infinite horizon
 * Distortionary taxation
 
-## The Ramsey Problem
+## The Ramsey problem
 
 We begin by outlining the key assumptions regarding technology, households and the government sector.
 
@@ -165,7 +165,7 @@ Given government tax and borrowing plans, we can construct a competitive equilib
 
 Among all such competitive equilibria, the Ramsey plan is the one that maximizes the welfare of the representative consumer.
 
-### Exogenous Variables
+### Exogenous variables
 
 Endowments, government expenditure, the preference shock process $b_t$, and
 promised coupon payments on initial government debt $s_t$ are all exogenous, and given by
@@ -196,7 +196,7 @@ c_t + g_t = d_t + \ell_t
 
 A labor-consumption process $\{\ell_t, c_t\}$ is called *feasible* if {eq}`lq_feasible` holds for all $t$.
 
-### Government Budget Constraint
+### Government budget constraint
 
 Where $p_t^0$ is again a scaled Arrow-Debreu price, the time zero government budget constraint is
 
@@ -347,7 +347,7 @@ Although it might not be clear yet, we are nearly there because:
 * Once we have the allocations, prices and the tax system can be derived from
   {eq}`lq_hfoc`.
 
-### Computing the Quadratic Term
+### Computing the quadratic term
 
 Let's consider how to obtain the term $\nu$ in {eq}`lq_gc22`.
 
@@ -413,7 +413,7 @@ In this case, the formula for computing $q(x_0)$ is known to be $q(x_0) = x_0' Q
 The first equation is known as a discrete Lyapunov equation and can be solved
 using [this function](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/_matrix_eqn.py).
 
-### Finite State Markov Case
+### Finite state Markov case
 
 Next, suppose that $\{x_t\}$ is the discrete Markov process described {ref}`above <lq_twospec>`.
 
@@ -448,7 +448,7 @@ the vector $(I - \beta P)^{-1} h$.
 
 This last fact is applied in the calculations below.
 
-### Other Variables
+### Other variables
 
 We are interested in tracking several other variables besides the ones
 described above.
@@ -516,7 +516,7 @@ R^{-1}_{t} := \mathbb E_t \beta^j p^t_{t+1}
 $R_{t}$ is the gross $1$-period risk-free rate for loans
 between $t$ and $t+1$.
 
-### A Martingale
+### A martingale
 
 We now want to study the following two objects, namely,
 
@@ -845,7 +845,7 @@ def gen_fig_2(path):
     plt.show()
 ```
 
-### Comments on the Code
+### Comments on the code
 
 The function `var_quadratic_sum` imported from `quadsums` is for computing the value of {eq}`lq_eqs`
 when the exogenous process $\{ x_t \}$ is of the VAR type described {ref}`above <lq_twospec>`.
@@ -871,7 +871,7 @@ Other than that, our code is long but relatively straightforward.
 Let's look at two examples of usage.
 
 (lq_cc)=
-### The Continuous Case
+### The continuous case
 
 Our first example adopts the VAR specification described {ref}`above <lq_twospec>`.
 
@@ -928,7 +928,7 @@ See the original <a href=_static/lecture_specific/lqramsey/firenze.pdf download>
 See the original [manuscript](https://lectures.quantecon.org/_downloads/firenze.pdf) for comments and interpretation.
 ```
 
-### The Discrete Case
+### The discrete case
 
 Our second example adopts a discrete Markov specification for the exogenous process
 
