@@ -35,7 +35,7 @@ The concept of entropy plays an important role in robust control formulations de
 
 
 
-## Information Theory
+## Information theory
 
 In information theory {cite}`Shannon_1949`,  entropy is a measure of the unpredictability of a random variable. 
 
@@ -70,7 +70,7 @@ Shannon typically used base $2$.
 
 
 
-## A Measure of Unpredictability
+## A measure of unpredictability
 
 
 
@@ -139,7 +139,7 @@ For $n=3$, $\log_2(3) = 1.585$.
 
 
 
-## Mathematical Properties of Entropy
+## Mathematical properties of entropy
 
 For a discrete random variable with probability vector $p$, entropy $H(p)$ is
 a function that satisfies
@@ -151,7 +151,7 @@ $ H(\frac{1}{n}, \ldots, \frac{1}{n} ) \leq H(\frac{1}{n+1} , \ldots, \frac{1}{n
 * Entropy is not affected by events zero probability.
 
 
-## Conditional Entropy
+## Conditional entropy
 
 Let $(X,Y)$ be a bivariate discrete random vector with  outcomes $x_1, \ldots, x_n$ and $y_1, \ldots, y_m$, respectively,
 occurring with probability density $p(x_i, y_i)$.
@@ -165,7 +165,7 @@ $$ (eq:Shannon2)
 
 Here $\frac{p(y_j)}{p(x_i,y_j)}$, the reciprocal of the conditional probability of $x_i$ given $y_j$, can be defined as the **conditional surprisal**.
 
-## Independence as Maximum Conditional Entropy 
+## Independence as maximum conditional entropy
 
 Let $m=n$ and $[x_1, \ldots, x_n ] = [y_1, \ldots, y_n]$. 
 
@@ -209,7 +209,7 @@ The second law of thermodynamics states that the entropy of a closed physical sy
 
 
 
-## Statistical  Divergence
+## Statistical divergence
 
 Let $X$ be a discrete state space $x_1, \ldots, x_n$ and let $p$ and $q$ be  two discrete probability
 distributions on $X$.  
@@ -331,7 +331,7 @@ D(N_0|N_1) = \frac{1}{2} \left(\mathrm {trace} (\Sigma_1^{-1} \Sigma_0)
    - k \right).
 $$ (eq:Shannon5)
 
-## Von Neumann Entropy
+## Von Neumann entropy
 
 Let $P$ and $Q$ be two positive-definite symmetric matrices.
 
@@ -353,7 +353,7 @@ $$
 
 
 
-## Backus-Chernov-Zin Entropy
+## Backus-Chernov-Zin entropy
 
 
 After flipping signs, {cite}`Backus_Chernov_Zin`  use Kullback-Leibler relative entropy as a measure of volatility of stochastic discount factors that they
@@ -396,7 +396,7 @@ $$
 
 which they propose as a complement to a Hansen-Jagannathan {cite}`Hansen_Jagannathan_1991` bound.
 
-## Wiener-Kolmogorov Prediction Error Formula as Entropy
+## Wiener-Kolmogorov prediction error formula as entropy
 
 Let $\{x_t\}_{t=-\infty}^\infty$ be a covariance stationary stochastic process with
 mean zero and spectral density $S_x(\omega)$.
@@ -435,7 +435,7 @@ all univariate covariance stationary processes with variance $\sigma_x^2$, a pro
 This no-patterns-across-time outcome for a temporally dependent process resembles the no-pattern-across-states outcome for the static entropy maximizing coin or die  in the classic information theoretic
 analysis described above.
 
-## Multivariate Processes
+## Multivariate processes
 
 Let $y_t$ be an $n \times 1$ covariance stationary stochastic process with mean $0$ with
 matrix covariogram $C_y(j) = E y_t y_{t-j}' $ and spectral density matrix
@@ -466,7 +466,7 @@ Being a  measure of the unpredictability of an $n \times 1$ vector covariance st
 the left side of  {eq}`eq:Shannon22`  is sometimes called entropy.
 
 
-## Frequency Domain Robust Control
+## Frequency domain robust control
 
 Chapter 8 of {cite}`hansen2008robustness`  adapts work in the control theory literature to define a
 **frequency domain entropy** criterion for  robust control as
@@ -490,7 +490,7 @@ This explains the
 moniker **maximum entropy** robust control for decision rules $F$ designed to maximize  criterion {eq}`eq:Shannon21`.
 
 
-## Relative Entropy for a Continuous Random Variable
+## Relative entropy for a continuous random variable
 
 Let $x$ be  a continuous random variable with density $\phi(x)$, and let $g(x) $ be a nonnegative random variable satisfying $\int g(x) \phi(x) dx =1$.
 
