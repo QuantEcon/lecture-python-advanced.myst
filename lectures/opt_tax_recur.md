@@ -72,7 +72,7 @@ from numba import njit, prange, float64
 from numba.experimental import jitclass
 ```
 
-## A Competitive Equilibrium with Distorting Taxes
+## A competitive equilibrium with distorting taxes
 
 At time $t \geq 0$ a random variable $s_t$ belongs to a time-invariant
 set ${\cal S} = [1, 2, \ldots, S]$.
@@ -181,7 +181,7 @@ They are indexed by different government policies.
 The **Ramsey problem** or **optimal taxation problem** is to choose a competitive
 equilibrium with distorting taxes that maximizes {eq}`TS_prefr_opt_tax`.
 
-### Arrow-Debreu Version of Price System
+### Arrow-Debreu version of price system
 
 We find it convenient sometimes to work with the Arrow-Debreu price system that is
 implied by a sequence of Arrow securities prices.
@@ -203,7 +203,7 @@ Arrow-Debreu prices are useful when we want to compress a sequence of budget
 constraints into a single intertemporal budget constraint, as we shall find it
 convenient to do below.
 
-### Primal Approach
+### Primal approach
 
 We apply a popular approach to solving a Ramsey problem, called the *primal approach*.
 
@@ -229,7 +229,7 @@ The primal approach uses four steps:
 1. Use the Ramsey  allocation together with the formulas from step 1 to find
    taxes and prices.
 
-### The Implementability Constraint
+### The implementability constraint
 
 By sequential substitution of one one-period budget constraint {eq}`TS_bcr` into
 another, we can obtain the household's present-value budget constraint:
@@ -299,7 +299,7 @@ The **Ramsey problem** is to choose a feasible  allocation  that maximizes
 
 subject to  {eq}`TSs_cham1`.
 
-### Solution Details
+### Solution details
 
 First, define a "pseudo utility function"
 
@@ -435,7 +435,7 @@ The proposition asserts that the optimal allocation is a function of the
 currently realized quantity of government purchases $g$ only and does
 *not* depend on the specific history that preceded that realization of $g$.
 
-### The Ramsey Allocation for a Given Multiplier
+### The Ramsey allocation for a given multiplier
 
 Temporarily take  $\Phi$ as given.
 
@@ -465,7 +465,7 @@ the household and the government’s budget constraints are both
 satisfied at a candidate Ramsey allocation and price system associated
 with that $\Phi$.
 
-### Further Specialization
+### Further specialization
 
 At this point, it is useful to specialize the model in the following ways.
 
@@ -481,7 +481,7 @@ $g(s)$ of $s$.
 
 We maintain these assumptions throughout the remainder of this lecture.
 
-### Determining the Lagrange Multiplier
+### Determining the Lagrange multiplier
 
 We complete the Ramsey plan by computing the Lagrange multiplier $\Phi$
 on the implementability constraint {eq}`TSs_cham1`.
@@ -613,7 +613,7 @@ $s_t$, a Ramsey plan can be constructed by solving $3S +3$
 equations for $S$ components each of $\vec c$, $\vec n$, and
 $\vec x$ together with $n_0, c_0$, and $\Phi$.
 
-### Time Inconsistency
+### Time inconsistency
 
 Let $\{\tau_t(s^t)\}_{t=0}^\infty, \{b_{t+1}(s_{t+1}| s^t)\}_{t=0}^\infty$
 be a time $0$, state $s_0$ Ramsey plan.
@@ -638,7 +638,7 @@ $b_t(s_t|s^{t-1})$.
 
 We shall discuss this more below.
 
-### Specification with CRRA Utility
+### Specification with CRRA utility
 
 In our calculations below and in a {doc}`subsequent lecture <amss>` based on an *extension* of the Lucas-Stokey model
 by  Aiyagari, Marcet, Sargent, and Seppälä (2002) {cite}`aiyagari2002optimal`, we shall modify the one-period utility function assumed above.
@@ -717,7 +717,7 @@ $$
 \end{aligned}
 $$
 
-### Sequence Implementation
+### Sequence implementation
 
 The above steps are implemented in a class called SequentialLS
 
@@ -725,7 +725,7 @@ The above steps are implemented in a class called SequentialLS
 :load: _static/lecture_specific/opt_tax_recur/sequential_allocation.py
 ```
 
-## Recursive Formulation of the Ramsey Problem
+## Recursive formulation of the Ramsey problem
 
 We now temporarily revert to Lucas and Stokey's specification.
 
@@ -736,7 +736,7 @@ But $x_t(s^t)$ is  a  natural candidate for a state variable in
 a recursive formulation of the Ramsey problem, one that records history-dependence and so is
 `backward-looking`.
 
-### Intertemporal Delegation
+### Intertemporal delegation
 
 To express a Ramsey plan recursively, we imagine that a time $0$
 Ramsey planner is followed by a sequence of continuation Ramsey planners
@@ -779,7 +779,7 @@ responsibilities across time express the continuation Ramsey planners’
 obligations to implement their parts of an original Ramsey plan that had been
 designed once-and-for-all at time $0$.
 
-### Two Bellman Equations
+### Two Bellman equations
 
 After $s_t$ has been realized at time $t \geq 1$, the state
 variables confronting the time $t$ **continuation Ramsey planner** are
@@ -791,7 +791,7 @@ $(x_t, s_t)$.
 We work backward by preparing a Bellman equation for
 $V(x,s)$ first, then a Bellman equation for $W(b,s)$.
 
-### The Continuation Ramsey Problem
+### The continuation Ramsey problem
 
 The Bellman equation for a time $t \geq 1$ continuation Ramsey
 planner is
@@ -830,7 +830,7 @@ are $S+1$ time-invariant policy functions
 \end{aligned}
 ```
 
-### The Ramsey Problem
+### The Ramsey problem
 
 The Bellman equation of  the time $0$ Ramsey planner is
 
@@ -877,7 +877,7 @@ $E_t \sum_{\tau = t}^\infty \beta^{\tau - t} u(c_\tau, l_\tau)$, where
 consumption and leisure processes are evaluated along the original
 time $0$ Ramsey plan.
 
-### First-Order Conditions
+### First-order conditions
 
 Attach a Lagrange multiplier $\Phi_1(x,s)$ to constraint {eq}`LSA_Bellman1cons` and a
 Lagrange multiplier $\Phi_0$ to constraint {eq}`Bellman2cons`.
@@ -954,7 +954,7 @@ Naturally, the first-order conditions in this recursive formulation of the
 Ramsey problem agree with the first-order conditions derived when we first
 formulated the Ramsey plan in the space of sequences.
 
-### State Variable Degeneracy
+### State variable degeneracy
 
 Equations {eq}`LSAenv` and {eq}`LSAx0` imply that $\Phi_0 = \Phi_1$
 and that
@@ -976,7 +976,7 @@ can be expressed as a vector $\vec x$ that solves equation {eq}`Bellman2cons2`
 for $n$ and $c$ as functions of $g$ that are associated
 with $\Phi = \Phi_0$.
 
-### Manifestations of Time Inconsistency
+### Manifestations of time inconsistency
 
 While the marginal utility adjusted level of government debt $x_t$
 is a key state variable for the continuation Ramsey planners at
@@ -1019,7 +1019,7 @@ time $0$ and time $t \geq 1$ objects reflect
 the Ramsey planner’s incentive to manipulate Arrow security prices and,
 through them, the value of initial government debt $b_0$.
 
-### Recursive Implementation
+### Recursive implementation
 
 The above steps are implemented in a class called `RecursiveLS`.
 
@@ -1031,7 +1031,7 @@ The above steps are implemented in a class called `RecursiveLS`.
 
 We return to the setup with CRRA preferences described above.
 
-### Anticipated One-Period War
+### Anticipated one-period war
 
 This example illustrates in a simple setting how a Ramsey planner manages risk.
 
@@ -1170,7 +1170,7 @@ ax.grid()
 plt.show()
 ```
 
-### Government Saving
+### Government saving
 
 At time  $t=0$ the government evidently *dissaves* since $b_1> b_0$.
 
@@ -1197,7 +1197,7 @@ At times $t \geq 4$ the government rolls over its debt, knowing that the
 tax rate is set at a level that raises enough revenue to pay for government purchases and interest payments
 on its debt.
 
-### Time 0 Manipulation of Interest Rate
+### Time 0 manipulation of interest rate
 
 We have seen that when $b_0>0$, the Ramsey plan sets the time $t=0$
 tax rate partly with an eye toward lowering a risk-free interest
@@ -1209,7 +1209,7 @@ relative to consumption goods at later times.
 By doing this, it lowers the value of time $t=0$ debt that it has inherited
 and must finance.
 
-### Time 0 and Time-Inconsistency
+### Time 0 and time-inconsistency
 
 In the  preceding  example,  the Ramsey tax rate at time 0 differs from its value  at time 1.
 
@@ -1316,7 +1316,7 @@ plt.show()
 
 The tax rates in the figure are equal  for only two values of initial government debt.
 
-### Tax Smoothing and non-CRRA Preferences
+### Tax smoothing and non-CRRA preferences
 
 The complete tax smoothing for $t \geq 1$ in the preceding example is a
 consequence of our having assumed CRRA preferences.
@@ -1399,7 +1399,7 @@ Unlike outcomes with CRRA preferences, the tax rate is not perfectly smoothed.
 
 Instead, the government raises the tax rate when $g_t$ is high.
 
-### Further Comments
+### Further comments
 
 A {doc}`related lecture <amss>` describes an extension of the Lucas-Stokey model
 by  Aiyagari, Marcet, Sargent, and Seppälä (2002) {cite}`aiyagari2002optimal`.
