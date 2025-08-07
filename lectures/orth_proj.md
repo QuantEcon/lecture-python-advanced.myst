@@ -832,7 +832,7 @@ def gram_schmidt(X):
         u = M @ b
 
         # Normalize
-        U[:, i] = u / np.sqrt(np.sum(u * u))
+        U[:, i] = u / np.sqrt(u @ u)
 
     return U
 ```
