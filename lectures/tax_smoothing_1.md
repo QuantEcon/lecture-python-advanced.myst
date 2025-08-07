@@ -170,7 +170,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-## Barro (1979) Model
+## Barro (1979) model
 
 We begin by solving a version of  {cite}`Barro1979`  by mapping it
 into the original LQ framework.
