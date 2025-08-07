@@ -460,7 +460,8 @@ $$
 $$
 ```
 
-```{prf:proof}  Note that
+```{prf:proof}  
+Note that
 
 $$
 X \hat \beta = X (X' X)^{-1} X' y =
