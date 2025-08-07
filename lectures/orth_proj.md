@@ -293,7 +293,7 @@ Combining this result with {eq}`pob` verifies the claim.
 
 When a subspace onto which we project is orthonormal, computing the projection simplifies:
 
-```{prf:theorem} 
+````{prf:theorem} 
 
 If $\{u_1, \ldots, u_k\}$ is an orthonormal basis for $S$, then
 
@@ -304,7 +304,7 @@ P y = \sum_{i=1}^k \langle y, u_i \rangle u_i,
 \quad
 \forall \; y \in \mathbb R^n
 ```
-```
+````
 
 ```{prf:proof}  
 Fix $y \in \mathbb{R}^n$ and let $P y$ be  defined as in {eq}`exp_for_op`.
