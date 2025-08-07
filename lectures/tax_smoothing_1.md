@@ -118,7 +118,7 @@ matrix Riccati equations that pin down $N$ value functions and
 $N$ linear decision rules, applying to the $N$ Markov
 states.
 
-## Public Finance Questions
+## Public finance questions
 
 {cite}`Barro1979`  is designed to answer questions such as
 
@@ -392,7 +392,7 @@ plt.ylabel('Govt Debt')
 plt.show()
 ```
 
-## Python Class to Solve Markov Jump Linear Quadratic Control Problems
+## Python class to solve Markov jump linear quadratic control problems
 
 To implement the extension to the Barro model in which $p_{t,t+1}$
 varies over time, we must allow the M matrix to be time-varying.
@@ -415,7 +415,7 @@ Optimal  $P_s,F_s,d_s$  are stored as attributes.
 
 The class also contains a method that  simulates a model.
 
-## Barro Model with a Time-varying Interest Rate
+## Barro model with a time-varying interest rate
 
 We can use the above class to implement a version of the Barro model
 with a time-varying interest rate. 
