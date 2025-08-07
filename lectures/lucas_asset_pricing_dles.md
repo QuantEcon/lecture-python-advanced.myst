@@ -132,7 +132,7 @@ x_0 =
    \right]'
 $$
 
-## Asset Pricing Equations
+## Asset pricing equations
 
 {cite}`HS2013` show that the time t value of a permanent claim to a stream
 $y_s = U_ax_s \, , s \geq t$ is:
@@ -160,7 +160,7 @@ $$
 The use of $\bar e _1$ indicates that the first consumption good
 is the numeraire.
 
-## Asset Pricing Simulations
+## Asset pricing simulations
 
 ```{code-cell} python3
 gam = 0
