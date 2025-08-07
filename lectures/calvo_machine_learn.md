@@ -567,7 +567,7 @@ def compute_θ(μ, α=1):
     
     # Compute the weighted sums for all t
     weighted_sums = jnp.array(
-        [jnp.sum(λ_powers[:T-t] * μ[t:T]) for t in range(T)])
+        [(λ_powers[:T-t] @ μ[t:T]) for t in range(T)])
     
     # Compute θ values except for the last element
     θ = (1 - λ) * weighted_sums + λ**(T - jnp.arange(T)) * μbar
@@ -595,7 +595,7 @@ def compute_V(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
     t = np.arange(T)
     
     # Compute sum except for the last element
-    V_sum = np.sum(β**t * (h0 + h1 * θ[:T] + h2 * θ[:T]**2 - 0.5 * c * μ[:T]**2))
+    V_sum = (β**t) @ (h0 + h1 * θ[:T] + h2 * θ[:T]**2 - 0.5 * c * μ[:T]**2)
     
     # Compute the final term
     V_final = (β**T / (1 - β)) * (h0 + h1 * μ[-1] + h2 * μ[-1]**2 - 0.5 * c * μ[-1]**2)
@@ -931,7 +931,7 @@ def compute_J(μ, β, c, α=1, u0=1, u1=0.5, u2=3):
                        (β**T/(1-β))])
     
     θ = B @ μ
-    βθ_sum = jnp.sum((β_vec * h1) * θ)
+    βθ_sum = (β_vec * h1) @ θ
     βθ_square_sum = β_vec * h2 * θ.T @ θ
     βμ_square_sum = 0.5 * c * β_vec * μ.T @ μ
     
