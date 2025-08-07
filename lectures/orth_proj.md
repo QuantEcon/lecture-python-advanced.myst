@@ -193,6 +193,7 @@ In what follows we denote this operator by a matrix $P$
 The operator $P$ is called the **orthogonal projection mapping onto** $S$.
 
 ```{figure} /_static/lecture_specific/orth_proj/orth_proj_thm2.png
+:scale: 75%
 
 ```
 
@@ -615,7 +616,9 @@ Here are some more standard definitions:
 * The **sum of squared residuals** is $:= \| \hat u \|^2$.
 * The **explained sum of squares** is $:= \| \hat y \|^2$.
 
-> TSS = ESS + SSR
+$$
+\text{TSS} = \text{ESS} + \text{SSR}
+$$
 
 We can prove this easily using the {prf:ref}`opt`.
 
