@@ -48,7 +48,7 @@ import numpy as np
 from scipy.linalg import qr
 ```
 
-### Further Reading
+### Further reading
 
 For background and foundational concepts, see our lecture [on linear algebra](https://python-intro.quantecon.org/linear_algebra.html).
 
@@ -58,7 +58,7 @@ For a complete set of proofs in a general setting, see, for example, {cite}`Roma
 
 For an advanced treatment of projection in the context of least squares prediction, see [this book chapter](http://www.tomsargent.com/books/TOMchpt.2.pdf).
 
-## Key Definitions
+## Key definitions
 
 Assume $x, z \in \mathbb R^n$.
 
@@ -117,7 +117,7 @@ $$
  = \| x_1 \|^2 + \| x_2 \|^2
 $$
 
-### Linear Independence vs Orthogonality
+### Linear independence vs orthogonality
 
 If $X \subset \mathbb R^n$ is an orthogonal set and $0 \notin X$, then $X$ is linearly independent.
 
@@ -125,7 +125,7 @@ Proving this is a nice exercise.
 
 While the converse is not true, a kind of partial converse holds, as we'll {ref}`see below <gram_schmidt>`.
 
-## The Orthogonal Projection Theorem
+## The orthogonal projection theorem
 
 What vector within a linear subspace of $\mathbb R^n$  best approximates a given vector in $\mathbb R^n$?
 
@@ -155,7 +155,7 @@ The next figure provides some intuition
 
 ```
 
-### Proof of Sufficiency
+### Proof of sufficiency
 
 We'll omit the full proof.
 
@@ -175,7 +175,7 @@ $$
 
 Hence $\| y - z \| \geq \| y - \hat y \|$, which completes the proof.
 
-### Orthogonal Projection as a Mapping
+### Orthogonal projection as a mapping
 
 For a linear space $Y$ and a fixed linear subspace $S$, we have a functional relationship
 
@@ -209,7 +209,7 @@ From this, we can deduce additional useful properties, such as
 
 For example, to prove 1, observe that $y  = P y  + y - P y$ and apply the Pythagorean law.
 
-#### Orthogonal Complement
+#### Orthogonal complement
 
 Let $S \subset \mathbb R^n$.
 
@@ -250,7 +250,7 @@ The next figure illustrates
 
 ```
 
-## Orthonormal Basis
+## Orthonormal basis
 
 An orthogonal set of vectors $O \subset \mathbb R^n$ is called an **orthonormal set** if $\| u \| = 1$ for all $u \in O$.
 
@@ -290,7 +290,7 @@ $$
 
 Combining this result with {eq}`pob` verifies the claim.
 
-### Projection onto an Orthonormal Basis
+### Projection onto an orthonormal basis
 
 When a subspace onto which we project is orthonormal, computing the projection simplifies:
 
@@ -328,7 +328,7 @@ $$
 (Why is this sufficient to establish the claim that $y - P y \perp S$?)
 
 
-## Projection Via Matrix Algebra
+## Projection via matrix algebra
 
 Let $S$ be a linear subspace of $\mathbb R^n$ and  let $y \in \mathbb R^n$.
 
@@ -389,7 +389,7 @@ $$
 The proof is now complete.
 ```
 
-### Starting with the Basis
+### Starting with the basis
 
 It is common in applications to start with $n \times k$ matrix $X$  with linearly independent columns and let
 
@@ -405,7 +405,7 @@ In this context, $P$ is often called the **projection matrix**
 
 * The matrix $M = I - P$ satisfies $M y = \hat E_{S^{\perp}} y$ and is sometimes called the **annihilator matrix**.
 
-### The Orthonormal Case
+### The orthonormal case
 
 Suppose that $U$ is $n \times k$ with orthonormal columns.
 
@@ -430,7 +430,7 @@ $$
 We have recovered our earlier result about projecting onto the span of an orthonormal
 basis.
 
-### Application: Overdetermined Systems of Equations
+### Application: overdetermined systems of equations
 
 Let $y \in \mathbb R^n$ and let $X$ be $n \times k$ with linearly independent columns.
 
@@ -485,7 +485,7 @@ $$
 This is what we aimed to show.
 ```
 
-## Least Squares Regression
+## Least squares regression
 
 Let's apply the theory of orthogonal projection to least squares regression.
 
@@ -493,7 +493,7 @@ This approach provides insights about many geometric properties of linear regres
 
 We treat only some examples.
 
-### Squared Risk Measures
+### Squared risk measures
 
 Given pairs $(x, y) \in \mathbb R^K \times \mathbb R$, consider choosing $f \colon \mathbb R^K \to \mathbb R$ to minimize
 the **risk**
@@ -628,7 +628,7 @@ From the {prf:ref}`opt` we have $y =  \hat y + \hat u$ and $\hat u \perp \hat y$
 
 Applying the Pythagorean law completes the proof.
 
-## Orthogonalization and Decomposition
+## Orthogonalization and decomposition
 
 Let's return to the connection between linear independence and orthogonality touched on above.
 
@@ -637,7 +637,7 @@ A result of much interest is a famous algorithm for constructing orthonormal set
 The next section gives details.
 
 (gram_schmidt)=
-### Gram-Schmidt Orthogonalization
+### Gram-Schmidt orthogonalization
 
 ```{prf:theorem} 
 
@@ -666,7 +666,7 @@ A Gram-Schmidt orthogonalization construction is a key idea behind the Kalman fi
 
 In some exercises below, you are asked to implement this algorithm and test it using projection.
 
-### QR Decomposition
+### QR decomposition
 
 The following result uses the preceding algorithm to produce a useful decomposition.
 
@@ -694,7 +694,7 @@ $$
 Some rearranging gives $X = Q R$.
 ```
 
-### Linear Regression via QR Decomposition
+### Linear regression via QR decomposition
 
 For matrices $X$ and $y$ that overdetermine $\beta$ in the linear
 equation system $y = X \beta$, we found  the least squares approximator $\hat \beta = (X' X)^{-1} X' y$.
@@ -749,9 +749,13 @@ intuition as to why they should be idempotent?
 ```
 
 Symmetry and idempotence of $M$ and $P$ can be established
-using standard rules for matrix algebra. The intuition behind
+using standard rules for matrix algebra. 
+
+The intuition behind
 idempotence of $M$ and $P$ is that both are orthogonal
-projections. After a point is projected into a given subspace, applying
+projections. 
+
+After a point is projected into a given subspace, applying
 the projection again makes no difference (A point inside the subspace
 is not shifted by orthogonal projection onto that space because it is
 already the closest point in the subspace to itself).
