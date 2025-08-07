@@ -74,7 +74,7 @@ import polytope
 import matplotlib.pyplot as plt
 ```
 
-### The Setting
+### The setting
 
 First, we introduce some notation.
 
@@ -127,7 +127,7 @@ $t \geq 0$.
 
 ## Decisions
 
-### The Household’s Problem
+### The household's problem
 
 A representative household faces a nonnegative value of money sequence
 $\vec q$ and sequences $\vec y, \vec x$ of income and total
@@ -306,7 +306,7 @@ large distorting tax collections.
 To promote the welfare increasing effects of high real balances, the
 government wants to induce  *gradual deflation*.
 
-### Household’s Problem
+### Household's problem
 
 Given $M_{-1}$ and $\{q_t\}_{t=0}^\infty$, the household’s problem is
 
@@ -372,7 +372,7 @@ in constructing a class of competitive equilibria that have a recursive represen
 A closely related observation pervaded the analysis of Stackelberg plans
 in lecture  {doc}`dynamic Stackelberg problems <dyn_stack>`.
 
-## Competitive Equilibrium
+## Competitive equilibrium
 
 **Definition:**
 
@@ -391,7 +391,7 @@ $(\vec c, \vec m, \vec y)$ are said to be a *competitive equilibrium* if
 * The government budget constraint is satisfied.
 * Given $\vec q, \vec x, \vec y$, $(\vec c, \vec m)$ solves the household’s problem.
 
-## Inventory of Objects in Play
+## Inventory of objects in play
 
 Chang constructs the following objects
 
@@ -616,7 +616,7 @@ This property allows Chang to compute $\Omega$ as the
 limit of iterations on $B$ provided that iterations begin from a
 sufficiently large initial set.
 
-### Some Useful Notation
+### Some useful notation
 
 Let $\vec h^t = (h_0, h_1, \ldots, h_t)$ denote a history of
 inverse money creation rates with time $t$ component
@@ -679,7 +679,7 @@ $h_t \in CE_\pi^0$, the continuations of $\sigma$ and
 $\alpha$ after $(\vec h^{t-1},h_t)$ induce a competitive
 equilibrium sequence.
 
-### Another Operator
+### Another operator
 
 At this point it is convenient to introduce another operator that can be
 used to compute a Ramsey plan.
@@ -773,7 +773,7 @@ As a very useful by-product, the algorithm that finds the largest fixed
 point $S = D(S)$ also produces the Ramsey plan, its value
 $w$, and the associated competitive equilibrium.
 
-## Calculating all Promise-Value Pairs in CE
+## Calculating all promise-value pairs in CE
 
 Above we have defined the $D(Z)$ operator as:
 
@@ -970,7 +970,7 @@ ch2.solve_sustainable()
 plot_competitive(ch2)
 ```
 
-## Solving a Continuation Ramsey Planner's Bellman Equation
+## Solving a continuation Ramsey planner's Bellman equation
 
 In this section we solve the Bellman equation confronting a **continuation Ramsey planner**.
 
@@ -1131,7 +1131,7 @@ for model in (ch1, ch2):
     plt.show()
 ```
 
-### Next Steps
+### Next steps
 
 In {doc}`Credible Government Policies in Chang Model <chang_credible>` we shall find
 a subset of competitive equilibria that are **sustainable**
