@@ -6,12 +6,9 @@ Shows key JAX concepts: NamedTuple, JIT, grad, vmap.
 import jax.numpy as jnp
 from jax import jit, grad, vmap
 from typing import NamedTuple
-try:
-    from .jax_utilities import *
-    from .jax_interpolation import *
-except ImportError:
-    from jax_utilities import *
-    from jax_interpolation import *
+
+# Note: jax_utilities and jax_interpolation are loaded via :load: directives 
+# before this file, so their functions are available in the global namespace
 
 
 class AMSSSimpleParams(NamedTuple):
