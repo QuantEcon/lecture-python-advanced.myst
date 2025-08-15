@@ -94,6 +94,16 @@ class AMSSModelParams(NamedTuple):
     bounds_v: jnp.ndarray  # Bounds for value function optimization
 
 
+class AMSSParams(NamedTuple):
+    """Parameters for AMSS model."""
+    β: float                    # Discount factor
+    Π: jnp.ndarray             # Markov transition matrix  
+    g: jnp.ndarray             # Government spending by state
+    x_grid: tuple              # Grid parameters (x_min, x_max, x_num)
+    bounds_v: jnp.ndarray      # Bounds for optimization
+    utility: 'UtilityFunctions'  # Utility functions
+
+
 class UtilityFunctions(NamedTuple):
     """Collection of utility functions and their derivatives."""
     U: callable       # Utility function U(c, l, params)
