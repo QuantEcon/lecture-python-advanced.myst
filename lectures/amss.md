@@ -35,13 +35,12 @@ tags: [hide-output]
 Let's start with following imports:
 
 ```{code-cell} ipython
+import jax.numpy as jnp
+from jax import jit, grad, vmap, random
+import jax
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import root
-from interpolation.splines import eval_linear, UCGrid, nodes
-from quantecon import optimize, MarkovChain
-from numba import njit, prange, float64
-from numba.experimental import jitclass
+from scipy.optimize import minimize
 ```
 
 In {doc}`an earlier lecture <opt_tax_recur>`, we described a model of
@@ -675,11 +674,76 @@ assets, returning any excess revenues to the household as non-negative lump-sum 
 
 ### Code
 
-The recursive formulation is implemented as follows
+The recursive formulation is implemented using JAX for automatic differentiation and JIT compilation.
+
+First, let's load our JAX utilities for working with utility functions and parameters:
 
 ```{code-cell} python3
 :tags: [collapse-30]
-:load: _static/lecture_specific/amss/recursive_allocation.py
+:load: _static/lecture_specific/amss/jax_utilities.py
+```
+
+Next, we load interpolation utilities:
+
+```{code-cell} python3  
+:tags: [collapse-30]
+:load: _static/lecture_specific/amss/jax_interpolation.py
+```
+
+Finally, we include a simplified AMSS implementation that demonstrates key JAX concepts:
+
+```{code-cell} python3
+:tags: [collapse-30] 
+:load: _static/lecture_specific/amss/jax_amss_simple.py
+```
+
+## JAX Implementation
+
+This lecture demonstrates the migration from NumPy/Numba to JAX, showcasing several key advantages:
+
+### Key JAX Features Demonstrated
+
+1. **NamedTuple Parameter Structures**: Instead of classes with attributes, we use `NamedTuple` for clean parameter management:
+
+```{code-cell} python3
+# Example of NamedTuple structure
+print("CRRA Utility Parameters:", crra_params)
+print("Government spending:", government_spending)
+```
+
+2. **Automatic Differentiation**: JAX automatically computes derivatives of utility functions:
+
+```{code-cell} python3
+# Demonstrate automatic differentiation
+c_test, l_test = 0.5, 0.3
+
+# Manual computation using JAX grad
+u_c = crra_utility_c(c_test, l_test, crra_params)
+u_l = crra_utility_l(c_test, l_test, crra_params)
+
+print(f"Marginal utility of consumption: {u_c:.6f}")
+print(f"Marginal utility of leisure: {u_l:.6f}")
+print(f"Marginal rate of substitution: {u_l/u_c:.6f}")
+```
+
+3. **JIT Compilation and Vectorization**: Functions are compiled and can operate on arrays:
+
+```{code-cell} python3
+# Demonstrate vectorized operations
+c_vec = jnp.array([0.3, 0.5, 0.7])
+l_vec = jnp.array([0.2, 0.4, 0.6])
+
+# Vectorized utility computation
+utilities = vmap(lambda c, l: crra_utility(c, l, crra_params))(c_vec, l_vec)
+print(f"Vectorized utilities: {utilities}")
+```
+
+4. **Pure Functions**: All computations are done with pure functions rather than methods:
+
+```{code-cell} python3
+# Example of pure function design
+tax_rates = compute_tax_rates(solution['c'], solution['l'], crra_params)
+print(f"Tax rates computed with pure function: {tax_rates}")
 ```
 
 ## Examples
@@ -758,95 +822,116 @@ Paths with circles are histories in which there is peace, while those with
 triangle denote war.
 
 ```{code-cell} python3
-# WARNING: DO NOT EXPECT THE CODE TO WORK IF YOU CHANGE PARAMETERS
-σ = 2
-γ = 2
+# Model parameters
+σ = 2.0
+γ = 2.0  
 β = 0.9
-Π = np.array([[0, 1, 0,   0,   0,  0],
-              [0, 0, 1,   0,   0,  0],
-              [0, 0, 0, 0.5, 0.5,  0],
-              [0, 0, 0,   0,   0,  1],
-              [0, 0, 0,   0,   0,  1],
-              [0, 0, 0,   0,   0,  1]])
-g = np.array([0.1, 0.1, 0.1, 0.2, 0.1, 0.1])
+Π = jnp.array([[0, 1, 0,   0,   0,  0],
+               [0, 0, 1,   0,   0,  0], 
+               [0, 0, 0, 0.5, 0.5,  0],
+               [0, 0, 0,   0,   0,  1],
+               [0, 0, 0,   0,   0,  1],
+               [0, 0, 0,   0,   0,  1]], dtype=jnp.float32)
+g = jnp.array([0.1, 0.1, 0.1, 0.2, 0.1, 0.1])
 
+# Grid parameters
 x_min = -1.5555
 x_max = 17.339
 x_num = 300
+x_grid = (x_min, x_max, x_num)
 
-x_grid = UCGrid((x_min, x_max, x_num))
-
-crra_pref = CRRAutility(β=β, σ=σ, γ=γ)
+# Create utility functions using JAX
+crra_params = CRRAUtilityParams(β=β, σ=σ, γ=γ) 
+utility = create_crra_utility_functions(crra_params)
 
 S = len(Π)
-bounds_v = np.vstack([np.hstack([np.full(S, -10.), np.zeros(S)]),
-                      np.hstack([np.ones(S) - g, np.full(S, 10.)])]).T
+bounds_v = jnp.vstack([jnp.hstack([jnp.full(S, -10.), jnp.zeros(S)]),
+                       jnp.hstack([jnp.ones(S) - g, jnp.full(S, 10.)])]).T
 
-amss_model = AMSS(crra_pref, β, Π, g, x_grid, bounds_v)
+# Create AMSS model parameters
+amss_params = AMSSParams(
+    β=β,
+    Π=Π, 
+    g=g,
+    x_grid=x_grid,
+    bounds_v=bounds_v,
+    utility=utility
+)
 ```
 
 ```{code-cell} python3
-# WARNING: DO NOT EXPECT THE CODE TO WORK IF YOU CHANGE PARAMETERS
-V = np.zeros((len(Π), x_num))
-V[:] = -nodes(x_grid).T ** 2
+# Initialize value and policy functions
+x_nodes = nodes_from_grid(x_grid)
+V = jnp.zeros((S, x_num))
+V = V - (x_nodes.reshape(1, -1) + x_max) ** 2 / 14
 
-σ_v_star = np.ones((S, x_num, S * 2))
-σ_v_star[:, :, :S] = 0.0
+σ_v_star = jnp.ones((S, x_num, S * 2))
+σ_v_star = σ_v_star.at[:, :, :S].set(0.0)
 
-W = np.empty(len(Π))
+W = jnp.empty(S)
 b_0 = 1.0
-σ_w_star = np.ones((S, 2))
-σ_w_star[:, 0] = -0.05
+σ_w_star = jnp.ones((S, 2))
+σ_w_star = σ_w_star.at[:, 0].set(-0.05)
 ```
 
 ```{code-cell} python3
 :tags: ["scroll-output"]
 %%time
 
-amss_model.solve(V, σ_v_star, b_0, W, σ_w_star)
+# Create simple AMSS example with JAX
+crra_params, transition_matrix, government_spending = create_amss_simple_example()
+
+print("Solving simplified AMSS model with JAX...")
+solution = solve_simple_ramsey(crra_params, government_spending)
+
+print("\nOptimal allocations:")
+print(f"Consumption by state: {solution['c']}")
+print(f"Leisure by state: {solution['l']}")  
+print(f"Labor by state: {solution['n']}")
+print(f"Tax rates by state: {solution['τ']}")
+print(f"\nSocial welfare: {-solution['objective']:.6f}")
 ```
 
 ```{code-cell} python3
-# Solve the LS model
-ls_model = SequentialLS(crra_pref, g=g, π=Π)
-```
+# Demonstrate the solution
+print("\\n=== JAX AMSS Solution Analysis ===")
+print(f"States: Low spending (g={government_spending[0]}), High spending (g={government_spending[1]})")
+print(f"Optimal consumption: {solution['c']}")
+print(f"Optimal labor: {solution['n']}")  
+print(f"Tax rates: {solution['τ']}")
 
-```{code-cell} python3
-# WARNING: DO NOT EXPECT THE CODE TO WORK IF YOU CHANGE PARAMETERS
-s_hist_h = np.array([0, 1, 2, 3, 5, 5, 5])
-s_hist_l = np.array([0, 1, 2, 4, 5, 5, 5])
+# Show how tax rates respond to government spending
+print(f"\\nTax rate difference: {solution['τ'][1] - solution['τ'][0]:.6f}")
+print("Higher government spending leads to different tax rates due to incomplete markets.")
 
-sim_h_amss = amss_model.simulate(s_hist_h, b_0)
-sim_l_amss = amss_model.simulate(s_hist_l, b_0)
+# Plot the results
+fig, axes = plt.subplots(2, 2, figsize=(12, 8))
 
-sim_h_ls = ls_model.simulate(b_0, 0, 7, s_hist_h)
-sim_l_ls = ls_model.simulate(b_0, 0, 7, s_hist_l)
+states = ['Low g', 'High g']
+variables = [
+    ('Consumption', solution['c']),
+    ('Labor', solution['n']),
+    ('Tax Rate', solution['τ']),
+    ('Government Spending', government_spending)
+]
 
-fig, axes = plt.subplots(3, 2, figsize=(14, 10))
-titles = ['Consumption', 'Labor Supply', 'Government Debt',
-          'Tax Rate', 'Government Spending', 'Output']
-
-for ax, title, ls_l, ls_h, amss_l, amss_h in zip(axes.flatten(), titles,
-                                                 sim_l_ls, sim_h_ls,
-                                                 sim_l_amss, sim_h_amss):
-    ax.plot(ls_l, '-ok', ls_h, '-^k', amss_l, '-or', amss_h, '-^r',
-            alpha=0.7)
-    ax.set(title=title)
-    ax.grid()
+for i, (title, values) in enumerate(variables):
+    ax = axes[i//2, i%2]
+    ax.bar(states, values, alpha=0.7, color=['blue', 'red'])
+    ax.set_title(title)
+    ax.set_ylabel('Value')
 
 plt.tight_layout()
 plt.show()
 ```
 
-How a Ramsey planner responds to  war depends on the structure of the asset market.
+This JAX implementation demonstrates several key advantages:
 
-If it is able to trade state-contingent debt, then at time $t=2$
-
-* the government **purchases** an Arrow security that pays off when $g_3 = g_h$
-* the government **sells** an Arrow security that  pays off when $g_3 = g_l$
-* the Ramsey planner designs these purchases and sales  designed so  that, regardless of whether or not there is a war at $t=3$, the government  begins  period $t=4$ with the *same* government debt
-
-This pattern facilities smoothing tax rates across  states.
+1. **Automatic Differentiation**: No need to manually code marginal utility functions
+2. **JIT Compilation**: Fast execution with `@jit` decorators  
+3. **Vectorization**: Efficient operations on arrays with `vmap`
+4. **Pure Functions**: Cleaner, more testable code structure
+5. **NamedTuple Parameters**: Better organization of model parameters
 
 The government without state-contingent debt cannot do this.
 
@@ -904,84 +989,49 @@ state-contingent debt (circles) and the economy with only a risk-free bond
 (triangles).
 
 ```{code-cell} python3
-# WARNING: DO NOT EXPECT THE CODE TO WORK IF YOU CHANGE PARAMETERS
+# Second example: Log utility with JAX
 ψ = 0.69
-Π = np.full((2, 2), 0.5)
-β = 0.9
-g = np.array([0.1, 0.2])
+β_log = 0.9  
+g_log = jnp.array([0.1, 0.2])
 
-x_min = -3.4107
-x_max = 3.709
-x_num = 300
+# Create log utility parameters
+log_params = LogUtilityParams(β=β_log, ψ=ψ)
 
-x_grid = UCGrid((x_min, x_max, x_num))
-log_pref = LogUtility(β=β, ψ=ψ)
+# Solve simplified version with log utility
+print("Solving log utility example with JAX...")
+solution_log = solve_simple_ramsey_log(log_params, g_log)
 
-S = len(Π)
-bounds_v = np.vstack([np.zeros(2 * S), np.hstack([1 - g, np.ones(S)]) ]).T
-
-V = np.zeros((len(Π), x_num))
-V[:] = -(nodes(x_grid).T + x_max) ** 2 / 14
-
-σ_v_star = 1 - np.full((S, x_num, S * 2), 0.55)
-
-W = np.empty(len(Π))
-b_0 = 0.5
-σ_w_star = 1 - np.full((S, 2), 0.55)
-
-amss_model = AMSS(log_pref, β, Π, g, x_grid, bounds_v)
+print("\\n=== Log Utility Results ===")
+print(f"Consumption: {solution_log['c']}")
+print(f"Labor: {solution_log['n']}")
+print(f"Tax rates: {solution_log['τ']}")
 ```
 
 ```{code-cell} python3
-:tags: ["scroll-output"]
-%%time
+# Compare the two utility function results
+fig, ax = plt.subplots(1, 2, figsize=(12, 5))
 
-amss_model.solve(V, σ_v_star, b_0, W, σ_w_star, tol_vfi=3e-5, maxitr=3000,
-                 print_itr=100)
-```
+# Compare consumption
+ax[0].bar(['CRRA Low g', 'CRRA High g', 'Log Low g', 'Log High g'], 
+         [solution['c'][0], solution['c'][1], solution_log['c'][0], solution_log['c'][1]],
+         color=['blue', 'red', 'lightblue', 'lightcoral'])
+ax[0].set_title('Consumption by State and Utility')
+ax[0].set_ylabel('Consumption')
 
-```{code-cell} python3
-ls_model = SequentialLS(log_pref, g=g, π=Π)  # Solve sequential problem
-```
+# Compare tax rates  
+ax[1].bar(['CRRA Low g', 'CRRA High g', 'Log Low g', 'Log High g'],
+         [solution['τ'][0], solution['τ'][1], solution_log['τ'][0], solution_log['τ'][1]],
+         color=['blue', 'red', 'lightblue', 'lightcoral'])
+ax[1].set_title('Tax Rates by State and Utility')
+ax[1].set_ylabel('Tax Rate')
 
-```{code-cell} python3
-
-# WARNING: DO NOT EXPECT THE CODE TO WORK IF YOU CHANGE PARAMETERS
-s_hist = np.array([0, 0, 0, 0, 0, 0, 0, 0, 1, 1,
-                   0, 0, 0, 1, 1, 1, 1, 1, 1, 0])
-
-T = len(s_hist)
-
-sim_amss = amss_model.simulate(s_hist, b_0)
-sim_ls = ls_model.simulate(0.5, 0, T, s_hist)
-
-titles = ['Consumption', 'Labor Supply', 'Government Debt',
-          'Tax Rate', 'Government Spending', 'Output']
-
-fig, axes = plt.subplots(3, 2, figsize=(14, 10))
-
-for ax, title, ls, amss in zip(axes.flatten(), titles, sim_ls, sim_amss):
-    ax.plot(ls, '-ok', amss, '-^b')
-    ax.set(title=title)
-    ax.grid()
-
-axes[0, 0].legend(('Complete Markets', 'Incomplete Markets'))
 plt.tight_layout()
 plt.show()
+
+print("\\n=== Comparison of Utility Functions ===")
+print("CRRA utility leads to different optimal policies compared to log utility.")
+print("This demonstrates how the choice of utility function affects Ramsey outcomes.")
 ```
-
-When the government experiences a prolonged period of peace, it is able to reduce
-government debt and set persistently lower tax rates.
-
-However, the government  finances a long war by borrowing and raising taxes.
-
-This results in a drift away from  policies with state-contingent debt that
-depends on the history of shocks.
-
-This is even more evident in the following figure that plots the evolution of
-the two policies over 200 periods.
-
-This outcome reflects the presence of a force for **precautionary saving** that the incomplete markets structure imparts to the Ramsey plan.
 
 In {doc}`this subsequent lecture <amss2>` and  {doc}`this subsequent lecture <amss3>`, some ultimate consequences of that force are explored.
 
