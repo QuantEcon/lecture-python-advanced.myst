@@ -706,6 +706,9 @@ This lecture demonstrates the migration from NumPy/Numba to JAX, showcasing seve
 1. **NamedTuple Parameter Structures**: Instead of classes with attributes, we use `NamedTuple` for clean parameter management:
 
 ```{code-cell} python3
+# Create example variables for demonstration
+crra_params, transition_matrix, government_spending = create_amss_simple_example()
+
 # Example of NamedTuple structure
 print("CRRA Utility Parameters:", crra_params)
 print("Government spending:", government_spending)
