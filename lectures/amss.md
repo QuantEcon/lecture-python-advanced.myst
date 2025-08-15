@@ -27,7 +27,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 tags: [hide-output]
 ---
 !pip install --upgrade quantecon
-!pip install interpolation
+!pip install -U jax
 ```
 
 ## Overview
