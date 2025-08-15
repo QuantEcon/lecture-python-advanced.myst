@@ -229,6 +229,87 @@ def solve_simple_ramsey_log(log_params: LogUtilityParams, g, initial_guess=None)
         'budget_constraint': log_budget_constraint(allocations),
         'feasibility_constraint': log_feasibility_constraint(allocations)
     }
+
+
+def solve_simple_ramsey_original(crra_params: CRRAUtilityParams, g, initial_guess=None):
+    """
+    Solve simplified Ramsey problem using constrained optimization.
+    
+    Parameters
+    ----------
+    crra_params : CRRAUtilityParams
+        Utility parameters
+    g : array
+        Government spending by state
+    initial_guess : array, optional
+        Initial guess for allocations
+        
+    Returns
+    -------
+    dict
+        Solution with optimal allocations and tax rates
+    """
+    S = len(g)
+    
+    if initial_guess is None:
+        # Simple initial guess
+        c_guess = 0.5 * jnp.ones(S)
+        l_guess = 0.5 * jnp.ones(S) 
+        initial_guess = jnp.concatenate([c_guess, l_guess])
+    
+    # For simplicity, use a penalty method approach
+    @jit
+    def penalized_objective(allocations, penalty=1000.0):
+        obj = ramsey_objective(allocations, crra_params, g)
+        
+        # Add penalties for constraint violations
+        budget_viol = budget_constraint(allocations, crra_params, g)
+        feasibility_viol = feasibility_constraint(allocations, g)
+        
+        penalty_term = (penalty * jnp.sum(jnp.maximum(0, -budget_viol)**2) +  # Budget surplus penalty
+                       penalty * jnp.sum(jnp.maximum(0, feasibility_viol)**2))  # Feasibility penalty
+        
+        return obj + penalty_term
+    
+    # Simple gradient descent (demonstrative)
+    learning_rate = 0.01
+    num_iterations = 1000
+    
+    allocations = initial_guess
+    
+    grad_fn = jit(grad(penalized_objective))
+    
+    for i in range(num_iterations):
+        grads = grad_fn(allocations)
+        allocations = allocations - learning_rate * grads
+        
+        # Clip to reasonable bounds
+        allocations = jnp.clip(allocations, 0.01, 0.99)
+        
+        if i % 200 == 0:
+            obj_val = penalized_objective(allocations)
+            print(f"Iteration {i}: Objective = {obj_val:.6f}")
+    
+    # Extract results
+    c_opt = allocations[:S]
+    l_opt = allocations[S:]
+    τ_opt = compute_tax_rates(c_opt, l_opt, crra_params)
+    
+    return {
+        'c': c_opt,
+        'l': l_opt,
+        'n': 1 - l_opt,
+        'τ': τ_opt,
+        'objective': ramsey_objective(allocations, crra_params, g),
+        'budget_constraint': budget_constraint(allocations, crra_params, g),
+        'feasibility_constraint': feasibility_constraint(allocations, g)
+    }
+
+
+# Aliases for different utility functions
+def solve_simple_ramsey(crra_params: CRRAUtilityParams, g, initial_guess=None):
+    """Solve Ramsey problem with CRRA utility."""
+    return solve_simple_ramsey_original(crra_params, g, initial_guess)
     """
     Solve simplified Ramsey problem using constrained optimization.
     
