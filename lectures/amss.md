@@ -744,8 +744,10 @@ print(f"Vectorized utilities: {utilities}")
 4. **Pure Functions**: All computations are done with pure functions rather than methods:
 
 ```{code-cell} python3
-# Example of pure function design
-tax_rates = compute_tax_rates(solution['c'], solution['l'], crra_params)
+# Example of pure function design with example values
+c_example = jnp.array([0.5, 0.4])  # Example consumption values
+l_example = jnp.array([0.3, 0.4])  # Example leisure values
+tax_rates = compute_tax_rates(c_example, l_example, crra_params)
 print(f"Tax rates computed with pure function: {tax_rates}")
 ```
 
@@ -1038,33 +1040,11 @@ print("This demonstrates how the choice of utility function affects Ramsey outco
 
 In {doc}`this subsequent lecture <amss2>` and  {doc}`this subsequent lecture <amss3>`, some ultimate consequences of that force are explored.
 
-```{code-cell} python3
-T = 200
-s_0 = 0
-mc = MarkovChain(Π)
-
-s_hist_long = mc.simulate(T, init=s_0, random_state=5)
-```
-
-```{code-cell} python3
-sim_amss = amss_model.simulate(s_hist_long, b_0)
-sim_ls = ls_model.simulate(0.5, 0, T, s_hist_long)
-
-titles = ['Consumption', 'Labor Supply', 'Government Debt',
-          'Tax Rate', 'Government Spending', 'Output']
-
-
-fig, axes = plt.subplots(3, 2, figsize=(14, 10))
-
-for ax, title, ls, amss in zip(axes.flatten(), titles, sim_ls, \
-        sim_amss):
-    ax.plot(ls, '-k', amss, '-.b', alpha=0.5)
-    ax.set(title=title)
-    ax.grid()
-
-axes[0, 0].legend(('Complete Markets','Incomplete Markets'))
-plt.tight_layout()
-plt.show()
+```{note}
+The simulation comparison between complete and incomplete markets models 
+is demonstrated in the subsequent AMSS lectures. The JAX implementation 
+focuses on demonstrating the core concepts of automatic differentiation, 
+JIT compilation, and functional programming approaches to optimal taxation.
 ```
 
 [^fn_a]: In an allocation that solves the Ramsey problem and that levies distorting
