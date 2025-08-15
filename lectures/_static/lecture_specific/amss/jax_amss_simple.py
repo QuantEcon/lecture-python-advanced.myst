@@ -402,17 +402,4 @@ def create_amss_simple_example():
     return crra_params, Π, g
 
 
-# Example usage
-if __name__ == "__main__":
-    # Create and solve simple AMSS model
-    crra_params, Π, g = create_amss_simple_example()
-    
-    print("Solving simplified AMSS model...")
-    solution = solve_simple_ramsey(crra_params, g)
-    
-    print("\nOptimal allocations:")
-    print(f"Consumption: {solution['c']}")
-    print(f"Leisure: {solution['l']}")  
-    print(f"Labor: {solution['n']}")
-    print(f"Tax rates: {solution['τ']}")
-    print(f"\nObjective value: {solution['objective']:.6f}")
+# Example usage is now handled in the main lecture file
