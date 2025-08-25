@@ -21,6 +21,8 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           fail: false
+          # Exclude webpack-macros.html as it contains unprocessed Jinja2 template variables
+          # like {{ pathto() }} which cause false positives in link checking
           args: --accept 403,503 --exclude-path "_static/webpack-macros.html" **/*.html
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
