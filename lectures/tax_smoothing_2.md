@@ -91,7 +91,7 @@ We’ll describe two possible specifications
 - In the second, the government redesigns the maturity
   structure of the debt each period.
 
-## One- and Two-period Bonds but No Restructuring
+## One- and two-period bonds but no restructuring
 
 Let
  * $T_t$ denote tax collections 
@@ -165,7 +165,7 @@ Below, we will often adopt the convention that for matrices appearing in a linea
 $A_t \equiv A_{s_t}, C_t \equiv C_{s_t}$ and so on, so that dependence on $t$ is always
 intermediated through the Markov state $s_t$.
 
-## Mapping into an LQ Markov Jump Problem
+## Mapping into an LQ Markov jump problem
 
 First, define
 
@@ -387,7 +387,7 @@ With the above function, we can proceed to solve the model in two steps:
 1. Use the `LQMarkov` class to solve the resulting n-state Markov
    jump LQ problem.
 
-## Penalty on Different Issues Across Maturities
+## Penalty on different issues across maturities
 
 To implement a simple example of the two-period model, we assume that
 $G_t$ follows an AR(1) process:
@@ -528,7 +528,7 @@ ax2.set_xlabel('Time')
 plt.show()
 ```
 
-## A Model with Restructuring
+## A model with restructuring
 
 We now  alter two features of the previous model:
 
@@ -699,7 +699,7 @@ $$
 
 This completes the mapping into a Markov jump LQ problem.
 
-## Restructuring as a Markov Jump Linear Quadratic Control Problem
+## Restructuring as a Markov jump linear quadratic control problem
 
 We can define a function that maps the primitives
 of the model with restructuring into the matrices required by  the `LQMarkov`
@@ -753,7 +753,7 @@ def LQ_markov_mapping_restruct(A22, C2, Ug, T, p_t, c=0):
     return A, B, C, R_c, Q_c, W_c
 ```
 
-### Example with Restructuring
+### Example with restructuring
 
 As an example let $H = 3$.
 

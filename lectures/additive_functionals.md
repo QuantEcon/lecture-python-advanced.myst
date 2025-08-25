@@ -77,7 +77,7 @@ import matplotlib.pyplot as plt
 from scipy.stats import norm, lognorm
 ```
 
-## A Particular Additive Functional
+## A particular additive functional
 
 {cite}`Hansen_2012_Eca` describes a general class of additive functionals.
 
@@ -123,7 +123,7 @@ initial condition for $y$.
 The nonstationary random process $\{y_t\}_{t=0}^\infty$ displays
 systematic but random *arithmetic growth*.
 
-### Linear State-Space Representation
+### Linear state-space representation
 
 A convenient way to represent our additive functional is to use a [linear state space system](https://python-intro.quantecon.org/linear_models.html).
 
@@ -872,7 +872,7 @@ Notice tell-tale signs of these probability coverage shaded areas
 * the green one for the stationary component $s_t$ converges to a
   constant band
 
-### Associated Multiplicative Functional
+### Associated multiplicative functional
 
 Where $\{y_t\}$ is our additive functional, let $M_t = \exp(y_t)$.
 
@@ -929,7 +929,7 @@ It is interesting to how the martingale behaves as $T \rightarrow +\infty$.
 
 Let's see what happens when we set $T = 12000$ instead of $150$.
 
-### Peculiar Large Sample Property
+### Peculiar large sample property
 
 Hansen and Sargent {cite}`Hans_Sarg_book` (ch. 8) describe the following two properties of the  martingale component
 $\widetilde M_t$ of the multiplicative decomposition
@@ -958,7 +958,7 @@ It remains constant at unity, illustrating the first property.
 
 The purple 95 percent frequency coverage interval collapses around zero, illustrating the second property.
 
-## More About the Multiplicative Martingale
+## More about the multiplicative martingale
 
 Let's drill down and study probability distribution of the multiplicative martingale  $\{\widetilde M_t\}_{t=0}^\infty$  in
 more detail.
@@ -973,7 +973,7 @@ where $H =  [F + D(I-A)^{-1} B]$.
 
 It follows that $\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2}, t H \cdot H )$ and that consequently ${\widetilde M}_t$ is log normal.
 
-### Simulating a Multiplicative Martingale Again
+### Simulating a multiplicative martingale again
 
 Next, we want a program to simulate the likelihood ratio process $\{ \tilde{M}_t \}_{t=0}^\infty$.
 
@@ -984,7 +984,7 @@ After accomplishing this, we want to display and study histograms of $\tilde{M}_
 
 Here is code that accomplishes these tasks.
 
-### Sample Paths
+### Sample paths
 
 Let's write a program to simulate sample paths of $\{ x_t, y_{t} \}_{t=0}^{\infty}$.
 
@@ -1257,7 +1257,7 @@ These probability density functions help us understand mechanics underlying the 
 * Enough mass moves toward the right tail to keep $E \widetilde M_T = 1$
   even as most mass in the distribution of $\widetilde M_T$ collapses around $0$.
 
-### Multiplicative Martingale as Likelihood Ratio Process
+### Multiplicative martingale as likelihood ratio process
 
 [This lecture](https://python.quantecon.org/likelihood_ratio_process.html) studies **likelihood processes**
 and **likelihood ratio processes**.

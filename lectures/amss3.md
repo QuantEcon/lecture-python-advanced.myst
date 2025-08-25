@@ -73,7 +73,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 ```
 
-## The Economy
+## The economy
 
 As in {doc}`Optimal Taxation without State-Contingent Debt <amss>` and {doc}`Optimal Taxation with State-Contingent Debt <opt_tax_recur>`,
 we assume that the  representative agent has  utility function
@@ -115,7 +115,7 @@ The following Python code sets up the economy
 :load: _static/lecture_specific/amss2/crra_utility.py
 ```
 
-### First and Second Moments
+### First and second moments
 
 We'll want  first and second moments of some key random variables below.
 
@@ -136,7 +136,7 @@ def covariance(x, y, s):
     return x * y @ u.π[s] - mean(x, s) * mean(y, s)
 ```
 
-## Long Simulation
+## Long simulation
 
 To generate a long simulation we use the following code.
 
@@ -263,7 +263,7 @@ these early observations
 * early observations are more influenced by the initial value of the par value of government debt than by the ergodic mean of the par value of government debt
 * much later observations are more influenced by the ergodic mean and are independent of the par value of initial government debt
 
-## Asymptotic Mean and Rate of Convergence
+## Asymptotic mean and rate of convergence
 
 We apply the results of BEGS {cite}`BEGS1` to interpret
 
@@ -310,7 +310,7 @@ BEGS interpret random variations in the right side of {eq}`eq_fiscal_risk_1`  as
   ${\mathcal R}_\tau(s, s_{-}) {\mathcal B}_{-}$,  and
 - fluctuations in the effective government deficit ${\mathcal X}_t$
 
-### Asymptotic Mean
+### Asymptotic mean
 
 BEGS give conditions under which the ergodic mean of ${\mathcal B}_t$ is approximated by
 
@@ -347,7 +347,7 @@ AMSS model should be approximately
 
 where mathematical expectations are taken with respect to the ergodic distribution.
 
-### Rate of Convergence
+### Rate of convergence
 
 BEGS also derive the following  approximation to the rate of convergence to ${\mathcal B}^{*}$ from an arbitrary initial condition.
 
@@ -361,13 +361,13 @@ BEGS also derive the following  approximation to the rate of convergence to ${\m
 
 (See the equation above equation (47) in BEGS {cite}`BEGS1`)
 
-### More Advanced Topic
+### More advanced topic
 
 The remainder of this lecture is about  technical material based on  formulas from BEGS {cite}`BEGS1`.
 
 The topic involves interpreting  and extending formula {eq}`eq_criterion_fiscal_1` for the ergodic mean ${\mathcal B}^*$.
 
-### Chicken and Egg
+### Chicken and egg
 
 Notice how attributes of the ergodic distribution for ${\mathcal B}_t$  appear
 on the right side of  formula {eq}`eq_criterion_fiscal_1` for approximating  the ergodic mean via ${\mathcal B}^*$.
@@ -385,7 +385,7 @@ As an example, notice how we used the formula for the mean of ${\mathcal B}$ in 
 * **first** we computed the ergodic distribution using a reverse-engineering construction
 * **then** we verified that ${\mathcal B}^*$  agrees with the mean of that distribution
 
-### Approximating the Ergodic Mean
+### Approximating the ergodic mean
 
 BEGS also {cite}`BEGS1` propose  an approximation to  ${\mathcal B}^*$ that can be computed **without** first approximating  the
 ergodic distribution.
@@ -400,7 +400,7 @@ To  construct the BEGS  approximation to ${\mathcal B}^*$, we just follow steps 
 
 Here is a step-by-step description of the BEGS {cite}`BEGS1` approximation procedure.
 
-### Step by Step
+### Step by step
 
 **Step 1:** For a given $\tau$ we  compute a vector of
 values $c_\tau(s), s= 1, 2, \ldots, S$ that satisfy
@@ -559,7 +559,7 @@ root(solve_c, np.ones(S), args=(τ, u))
 n = c + u.G   # Compute labor supply
 ```
 
-### Note about Code
+### Note about code
 
 Remember that in our code $\pi$ is a $3 \times 3$ transition
 matrix.
