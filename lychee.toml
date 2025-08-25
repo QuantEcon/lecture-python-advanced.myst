@@ -1,0 +1,10 @@
+# Lychee link checker configuration
+# For more configuration options, see: https://github.com/lycheeverse/lychee
+
+# Accept specific HTTP status codes that are normally treated as errors
+accept = [403, 503]
+
+# Exclude paths from checking
+# This excludes the webpack-macros.html file which contains unprocessed Jinja2 template variables
+# like {{ pathto() }} that cause false positives in link checking
+exclude_path = ["_static/webpack-macros.html"]
