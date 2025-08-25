@@ -13,6 +13,7 @@ jobs:
       - name: Run style guide checker
         uses: QuantEcon/meta/.github/actions/style-guide-checker@copilot/fix-204
         with:
+          style-guide: 'https://github.com/QuantEcon/meta/blob/main/.github/copilot-qe-style-guide.md'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           docs: 'lectures'
