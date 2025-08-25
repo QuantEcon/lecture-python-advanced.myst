@@ -32,7 +32,7 @@ tags: [hide-output]
 
 ## Overview
 
-Let's start with following imports:
+Let's start with the following imports:
 
 ```{code-cell} ipython
 import numpy as np
@@ -46,9 +46,9 @@ from numba.experimental import jitclass
 
 In {doc}`an earlier lecture <opt_tax_recur>`, we described a model of
 optimal taxation with state-contingent debt due to
-Robert E. Lucas, Jr.,  and Nancy Stokey  {cite}`LucasStokey1983`.
+Robert E. Lucas, Jr., and Nancy Stokey {cite}`LucasStokey1983`.
 
-Aiyagari, Marcet, Sargent, and Seppälä {cite}`aiyagari2002optimal`  (hereafter, AMSS)
+Aiyagari, Marcet, Sargent, and Seppälä {cite}`aiyagari2002optimal` (hereafter, AMSS)
 studied optimal taxation in a model without state-contingent debt.
 
 In this lecture, we
@@ -65,16 +65,16 @@ We begin with an introduction to the model.
 
 Many but not all features of the economy are identical to those of {doc}`the Lucas-Stokey economy <opt_tax_recur>`.
 
-Let's start with things that are identical.
+We start with things that are identical.
 
 For $t \geq 0$, a history of the state is represented by $s^t = [s_t, s_{t-1}, \ldots, s_0]$.
 
 Government purchases $g(s)$ are an exact time-invariant function of $s$.
 
-Let $c_t(s^t)$,  $\ell_t(s^t)$, and $n_t(s^t)$ denote consumption,
+Let $c_t(s^t)$, $\ell_t(s^t)$, and $n_t(s^t)$ denote consumption,
 leisure, and labor supply, respectively, at history $s^t$ at time $t$.
 
-Each period a representative  household is endowed with one unit of time that can be divided between  leisure
+Each period, a representative household is endowed with one unit of time that can be divided between leisure
 $\ell_t$ and labor $n_t$:
 
 ```{math}
@@ -93,9 +93,9 @@ c_t(s^t) + g(s_t) = n_t(s^t)
 
 Output is not storable.
 
-The technology pins down a pre-tax wage rate to unity for all $t, s^t$.
+The technology pins down the pre-tax wage rate to unity for all $t, s^t$.
 
-A representative  household’s preferences over $\{c_t(s^t), \ell_t(s^t)\}_{t=0}^\infty$ are ordered by
+The representative household's preferences over $\{c_t(s^t), \ell_t(s^t)\}_{t=0}^\infty$ are ordered by
 
 ```{math}
 :label: TS_prefr_amss
@@ -106,15 +106,15 @@ A representative  household’s preferences over $\{c_t(s^t), \ell_t(s^t)\}_{t=0
 where
 
 * $\pi_t(s^t)$ is a joint probability distribution over the sequence $s^t$, and
-* the utility function $u$ is  increasing, strictly concave, and three times  continuously differentiable in both arguments.
+* the utility function $u$ is increasing, strictly concave, and three times continuously differentiable in both arguments.
 
-The government imposes a flat rate tax $\tau_t(s^t)$ on labor income at time $t$, history $s^t$.
+The government imposes a flat-rate tax $\tau_t(s^t)$ on labor income at time $t$, history $s^t$.
 
 Lucas and Stokey assumed that there are complete markets in one-period Arrow securities; also see {doc}`smoothing models <smoothing>`.
 
 It is at this point that AMSS {cite}`aiyagari2002optimal` modify the Lucas and Stokey economy.
 
-AMSS allow the government to issue only one-period risk-free debt each period.
+AMSS allows the government to issue only one-period risk-free debt each period.
 
 Ruling out complete markets in this way is a step in the direction of making total tax collections behave more like that prescribed in Robert Barro (1979) {cite}`Barro1979` than they do in Lucas and Stokey (1983) {cite}`LucasStokey1983`.
 
@@ -122,8 +122,8 @@ Ruling out complete markets in this way is a step in the direction of making tot
 
 In period $t$ and history $s^t$, let
 
-* $b_{t+1}(s^t)$ be the amount of the time $t+1$ consumption good that at time $t$, history $s^t$ the government promised to pay
-* $R_t(s^t)$ be the gross interest rate on  risk-free one-period debt between periods $t$ and $t+1$
+* $b_{t+1}(s^t)$ be the amount of the time $t+1$ consumption good that at time $t$ and history $s^t$ the government promised to pay
+* $R_t(s^t)$ be the gross interest rate on risk-free one-period debt between periods $t$ and $t+1$
 * $T_t(s^t)$ be a non-negative lump-sum *transfer* to the representative household [^fn_a]
 
 That $b_{t+1}(s^t)$ is the same for all realizations of $s_{t+1}$ captures its *risk-free* character.
@@ -138,9 +138,9 @@ The government’s budget constraint in period $t$ at history $s^t$ is
 \begin{aligned}
 b_t(s^{t-1})
     & =    \tau^n_t(s^t) n_t(s^t) - g(s_t) - T_t(s^t) +
-                   {b_{t+1}(s^t) \over R_t(s^t )}
+                   {b_{t+1}(s^t) \over R_t(s^t)}
     \\
-    & \equiv z_t(s^t) + {b_{t+1}(s^t) \over R_t(s^t )},
+    & \equiv z_t(s^t) + {b_{t+1}(s^t) \over R_t(s^t)},
 \end{aligned}
 ```
 
@@ -149,7 +149,7 @@ where $z_t(s^t)$ is the net-of-interest government surplus.
 To rule out Ponzi schemes, we assume that the government is subject to a **natural debt limit** (to be discussed in a forthcoming lecture).
 
 The consumption Euler equation for a representative household able to trade only one-period risk-free debt
-with one-period gross interest rate $R_t(s^t)$ is
+with a one-period gross interest rate $R_t(s^t)$ is
 
 $$
 {1 \over R_t(s^t)}
@@ -168,7 +168,7 @@ b_t(s^{t-1}) =  z_t(s^t) + \beta  \sum_{s^{t+1}\vert s^t}  \pi_{t+1}(s^{t+1} | s
 ```
 
 Components of $z_t(s^t)$ on the right side depend on $s^t$, but the left side is required to depend only
-on $s^{t-1}$ .
+on $s^{t-1}$.
 
 **This is what it means for one-period government debt to be risk-free**.
 
@@ -203,7 +203,7 @@ b_t(s^{t-1})
 Notice how the conditioning sets in equation {eq}`TS_gov_wo3` differ: they are $s^{t-1}$ on the left side and
 $s^t$ on the right side.
 
-Now let's
+Now we
 
 * substitute the resource constraint into the net-of-interest government surplus, and
 * use the household’s first-order condition $1-\tau^n_t(s^t)= u_{\ell}(s^t) /u_c(s^t)$ to eliminate the labor tax rate
@@ -222,7 +222,7 @@ If we substitute  appropriate versions of the right side of {eq}`AMSS_44_2` for 
 we obtain a sequence of *implementability constraints* on a Ramsey allocation in an AMSS economy.
 
 Expression {eq}`TS_gov_wo3` at time $t=0$ and initial state $s^0$
-was also  an *implementability constraint* on a Ramsey allocation in a Lucas-Stokey economy:
+is also an *implementability constraint* on a Ramsey allocation in a Lucas-Stokey economy:
 
 ```{math}
 :label: TS_gov_wo4
@@ -322,7 +322,7 @@ It is helpful to apply two transformations to the Lagrangian.
 
 Multiply constraint {eq}`AMSS_44` by $u_c(s^0)$ and the constraints {eq}`AMSS_46` by $\beta^t u_c(s^{t})$.
 
-Then a Lagrangian for the Ramsey problem can  be represented as
+Then a Lagrangian for the Ramsey problem can be represented as
 
 ```{math}
 :label: AMSS_lagr;a
@@ -380,7 +380,7 @@ and with respect to $b_t(s^t)$ as
 ```
 
 If we substitute $z_t(s^t)$ from {eq}`AMSS_44_2` and its derivative
-$z_c(s^t)$ into the first-order condition {eq}`AMSS_foc;a`, we  find  two
+$z_c(s^t)$ into the first-order condition {eq}`AMSS_foc;a`, we find two
 differences from the corresponding condition for the optimal allocation
 in a Lucas-Stokey economy with state-contingent government debt.
 
@@ -435,7 +435,7 @@ $$
 where $R_t(s^t)$ is the gross risk-free rate of interest between $t$
 and $t+1$ at history $s^t$ and $T_t(s^t)$ are non-negative transfers.
 
-Throughout this lecture, we shall set transfers to zero (for some issues about the limiting behavior of debt, this is  possibly an important  difference from AMSS {cite}`aiyagari2002optimal`, who restricted transfers
+Throughout this lecture, we shall set transfers to zero (for some issues about the limiting behavior of debt, this is possibly an important difference from AMSS {cite}`aiyagari2002optimal`, who restricted transfers
 to be non-negative).
 
 In this case, the household faces a sequence of budget constraints
@@ -502,7 +502,7 @@ The right side of equation {eq}`eqn:AMSSapp2b` expresses the time $t$ value of g
 in terms of a linear combination of terms whose individual components
 are measurable with respect to $s^t$.
 
-The sum  of terms on the right side  of equation {eq}`eqn:AMSSapp2b` must equal
+The sum of terms on the right side of equation {eq}`eqn:AMSSapp2b` must equal
 $b_t(s^{t-1})$.
 
 That implies that it has to be *measurable* with respect to $s^{t-1}$.
@@ -512,7 +512,7 @@ constraint imposed in the Lucas and Stokey model.
 
 ### Two Bellman Equations
 
-Let $\Pi(s|s_-)$ be a Markov transition matrix whose entries tell probabilities of moving from state $s_-$ to state $s$ in one period.
+Let $\Pi(s|s_-)$ be a Markov transition matrix whose entries give probabilities of moving from state $s_-$ to state $s$ in one period.
 
 Let
 
@@ -639,12 +639,12 @@ means that there is no state-variable degeneracy in the AMSS model.
 
 In the AMSS model, both $x$ and $s$ are needed to describe the state.
 
-This property of the AMSS model  transmits a twisted martingale
+This property of the AMSS model transmits a twisted martingale
 component to consumption, employment, and the tax rate.
 
 ### Digression on Non-negative Transfers
 
-Throughout this lecture, we have imposed that transfers $T_t = 0$.
+Throughout this lecture, we have set transfers to zero, i.e., $T_t = 0$.
 
 AMSS {cite}`aiyagari2002optimal` instead imposed a nonnegativity
 constraint $T_t\geq 0$ on transfers.
@@ -663,7 +663,7 @@ random, $V_x(x, s)$ almost surely converges to zero.
 For quasi-linear preferences, the first-order condition for maximizing {eq}`eqn:AMSSapp5` subject to  {eq}`eqn:AMSSapp6` with respect to $n(s)$ becomes
 
 $$
-(1-\mu(s|s_-) ) (1 - u_l(s)) + \mu(s|s_-) n(s) u_{ll}(s) =0
+(1-\mu(s|s_-)) (1 - u_l(s)) + \mu(s|s_-) n(s) u_{ll}(s) =0
 $$
 
 When $\mu(s|s_-) = \beta V_x(x(s),x)$ converges to zero, in the limit
@@ -702,7 +702,7 @@ For convenience in  matching our computer code, we have expressed
 utility as a function of $n$ rather than leisure $l$.
 ```
 
-We first consider a government expenditure process that we  studied earlier in a lecture on
+We first consider a government expenditure process that we studied earlier in a lecture on
 {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
 
 Government expenditures are known for sure in all periods except one.
@@ -846,7 +846,7 @@ If it is able to trade state-contingent debt, then at time $t=2$
 * the government **sells** an Arrow security that  pays off when $g_3 = g_l$
 * the Ramsey planner designs these purchases and sales  designed so  that, regardless of whether or not there is a war at $t=3$, the government  begins  period $t=4$ with the *same* government debt
 
-This pattern facilities smoothing tax rates across  states.
+This pattern facilitates smoothing tax rates across states.
 
 The government without state-contingent debt cannot do this.
 
@@ -973,9 +973,9 @@ plt.show()
 When the government experiences a prolonged period of peace, it is able to reduce
 government debt and set persistently lower tax rates.
 
-However, the government  finances a long war by borrowing and raising taxes.
+However, the government finances a long war by borrowing and raising taxes.
 
-This results in a drift away from  policies with state-contingent debt that
+This results in a drift away from policies with state-contingent debt that
 depends on the history of shocks.
 
 This is even more evident in the following figure that plots the evolution of
