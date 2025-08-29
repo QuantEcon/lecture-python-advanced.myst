@@ -81,7 +81,7 @@ from numba import njit, prange
 
 In this section we describe the main features of the model.
 
-### Output, Consumption and Debt
+### Output, consumption and debt
 
 A small open economy is endowed with an exogenous stochastically fluctuating potential output
 stream $\{y_t\}$.
@@ -116,7 +116,7 @@ The government is the only domestic actor with access to foreign credit.
 Because household are averse to consumption fluctuations, the government will try to smooth
 consumption by borrowing from (and lending to) foreign creditors.
 
-### Asset Markets
+### Asset markets
 
 The only credit instrument available to the government is a one-period bond traded in international credit markets.
 
@@ -151,7 +151,7 @@ To rule out Ponzi schemes, we also require that $B \geq -Z$ in every period.
 
 * $Z$ is chosen to be sufficiently large that the constraint never binds in equilibrium.
 
-### Financial Markets
+### Financial markets
 
 Foreign creditors
 
@@ -176,7 +176,7 @@ q = \frac{1 - \delta}{1 + r}
 
 Next we turn to how the government in effect chooses the default probability $\delta$.
 
-### Government's Decisions
+### Government's decisions
 
 At each point in time $t$, the government chooses between
 
@@ -195,7 +195,7 @@ But a sovereign default has two consequences:
       markets.
 1. The country loses access to foreign credit markets.
 
-### Reentering International Credit Market
+### Reentering international credit market
 
 While in a state of default, the economy regains access to foreign credit in each subsequent
 period with probability $\theta$.
@@ -283,7 +283,7 @@ to pin down the bond price function:
 q(B', y) = \frac{1 - \delta(B', y)}{1 + r}
 ```
 
-### Definition of Equilibrium
+### Definition of equilibrium
 
 An *equilibrium* is
 

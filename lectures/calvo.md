@@ -93,7 +93,7 @@ import pandas as pd
 from IPython.display import display, Math
 ```
 
-## Model Components
+## Model components
 
 There is no uncertainty.
 
@@ -222,7 +222,7 @@ $$
 U(-\alpha \theta_t) = u_0 + u_1 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
 $$ (eq_old5a)
 
-## Friedman's Optimal Rate of Deflation
+## Friedman's optimal rate of deflation
 
 According to {eq}`eq_old5a`, the ``bliss level`` of real balances is  $\frac{u_1}{u_2}$ and the inflation rate that attains it is
 
@@ -246,7 +246,7 @@ where $\theta^*$ is given by equation {eq}`eq:Friedmantheta`.
 Milton Friedman assumed that the taxes that government imposes to collect money at rate $\mu_t$ do not distort economic decisions, e.g., they are  lump-sum taxes.
 
 
-## Calvo's Distortion 
+## Calvo's distortion 
 
 The starting point of Calvo {cite}`Calvo1978` and  Chang {cite}`chang1998credible`
 is that  lump sum taxes are not available.
@@ -352,7 +352,7 @@ A theory of government
 decisions will  make $\vec \mu$ endogenous, i.e., a theoretical **output** instead of an **input**.
 
 
-### Intertemporal Aspects 
+### Intertemporal aspects 
 
 Criterion function {eq}`eq_old7` and the constraint system {eq}`eq_old4` exhibit the following
 structure:
@@ -373,7 +373,7 @@ We'll  study outcomes under a Ramsey timing protocol.
 
 We'll also study outcomes under other timing protocols.
 
-## Three Timing Protocols
+## Three timing protocols
 
 We consider three  models of government policy making that  differ in
 
@@ -427,7 +427,7 @@ The relationship between  outcomes in  the first (Ramsey) timing protocol and th
 ```
 
 
-## Note on Dynamic Programming Squared
+## Note on dynamic programming squared
 
 We'll begin with the timing protocol associated with a Ramsey plan and deploy 
 an application of what we  nickname **dynamic programming squared**.
@@ -443,7 +443,7 @@ Thus,  two Bellman equations appear:
 
 A value $\theta$ from one Bellman equation appears as an argument of a second Bellman equation for another value $v$.
 
-## A Ramsey Planner
+## A Ramsey planner
 
 A Ramsey planner  chooses
 $\{\mu_t, \theta_t\}_{t=0}^\infty$ to maximize {eq}`eq_old7`
@@ -616,7 +616,7 @@ $$
 \theta_0 = \theta_0^R = - \frac{P_{21}}{P_{22}}
 $$
 
-## Representation of Ramsey Plan
+## Representation of Ramsey plan
 
 The preceding calculations indicate that we can represent a Ramsey plan
 $\vec \mu$ recursively with the following system created in the spirit of Chang {cite}`chang1998credible`:
@@ -716,7 +716,7 @@ Thus, in our context, time-variation of $\vec \mu$ chosen by a Ramsey planner
  is the telltale sign of the Ramsey plan's  **time inconsistency**.
 
 
-## Constrained-to-Constant-Growth-Rate Ramsey Plan
+## Constrained to constant growth rate Ramsey plan
 
 
 We can use brute force to create a government plan that **is** time consistent, i.e., that is a time-invariant function of time.
@@ -759,7 +759,7 @@ Time-variation of $\vec \mu$ chosen by a Ramsey planner
 Obviously, our constrained-to-constant $\mu$
 Ramsey planner **must** must  choose  a plan that is time consistent.  
 
-## Markov Perfect Governments
+## Markov perfect governments
 
 To generate an alternative model of time-consistent  government decision making,
 we assume  another timing protocol.
@@ -860,7 +860,7 @@ Under the  Markov perfect timing protocol
  * we equate $\mu_t = \mu$ only *after* we have computed a time $t$ government's first-order condition for $\mu_t$.
 
 (compute_lq)=
-## Outcomes under Three Timing Protocols
+## Outcomes under three timing protocols
 
 We want to compare outcome sequences  $\{ \theta_t,\mu_t \}$ under three timing protocols associated with 
 
@@ -1168,7 +1168,7 @@ In the above graph, notice that $\theta^* < \theta_\infty^R < \theta^{CR} < \the
 In some subsequent calculations, we'll use our Python code to study how gaps between
 these outcome vary depending on parameters such as the cost parameter $c$ and the discount factor $\beta$. 
 
-## Ramsey Planner's Value Function 
+## Ramsey planner's value function 
 
 The next code  plots the Ramsey Planner's value function $J(\theta)$  as well as the value function
 of a constrained  Ramsey planner who  must choose a constant
@@ -1349,7 +1349,7 @@ In the above figure, notice that
 
 
 
-## Perturbing Model Parameters
+## Perturbing model parameters
 
 Now  let's present some graphs that teach us   how outcomes change when we assume   different values of  $\beta$ 
 
@@ -1542,7 +1542,7 @@ in interesting ways.
 We leave it to the reader to explore consequences of other constellations of parameter values.
 
 
-### Implausibility of Ramsey Plan 
+### Implausibility of Ramsey plan 
 
 Many economists regard a time inconsistent plan as implausible because they question the plausibility of  timing protocol in which a plan for setting a sequence of policy variables is chosen once-and-for-all at time $0$.
 
@@ -1552,7 +1552,7 @@ economists.
 
 * A Markov perfect equilibrium plan is constructed to insure that a sequence of  government policymakers who choose sequentially do not want to deviate from it.
 
-### Ramsey Plan Strikes Back
+### Ramsey plan strikes back
 
 Research by Abreu {cite}`Abreu`,  Chari and Kehoe {cite}`chari1990sustainable`
 {cite}`stokey1989reputation`, and Stokey {cite}`Stokey1991` described  conditions under which a Ramsey plan can be rescued from the complaint that it is not credible.

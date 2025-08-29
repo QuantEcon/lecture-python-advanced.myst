@@ -453,7 +453,7 @@ $$ (tom10)
 where the last term is $\tilde \theta$ times the entropy of the worst-case probability distribution. 
 
 
-## Multiplier preferences 
+## Multiplier preferences
 
 A decision maker is said to have **multiplier preferences** when he ranks consumption plans $c$    according to
 
@@ -502,7 +502,7 @@ $$
 -  \theta \log \left(\sum_{j=1}^I \exp(- \theta^{-1} u(c_j) ) \pi_j \right) .
 $$ (tom13)
 
-## Risk-sensitive preferences 
+## Risk-sensitive preferences
 
 Substituting $\hat m_i$ into $\sum_{i=1}^I \pi_i \hat m_i [  u(c_i) + \theta \log \hat m_i ]$ gives the indirect utility function
 
@@ -701,7 +701,7 @@ which becomes expected utility $\mu_u$ when $\theta^{-1} = 0$.
 
 The right side of equation {eq}`tom200` is a special case of **stochastic differential utility** preferences in which consumption plans are ranked not just by their expected utilities $\mu_u$ but also the variances $\sigma_u^2$  of their expected utilities.
 
-## Ex post Bayesian preferences 
+## Ex post Bayesian preferences
 
 A decision maker is said to have **ex post Bayesian preferences** when he ranks consumption plans according to the expected utility function    
 

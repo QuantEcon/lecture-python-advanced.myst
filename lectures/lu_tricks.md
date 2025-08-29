@@ -61,7 +61,7 @@ import matplotlib.pyplot as plt
 
 Useful references include {cite}`Whittle1963`, {cite}`HanSar1980`, {cite}`Orfanidisoptimum1988`, {cite}`Athanasios1991`, and {cite}`Muth1960`.
 
-## A Control Problem
+## A control problem
 
 Let $L$ be the **lag operator**, so that, for sequence $\{x_t\}$ we have $L x_t = x_{t-1}$.
 
@@ -130,7 +130,7 @@ You will be able to confirm that the objective function can be rewritten as {eq}
 
 Further examples of this problem for factor demand, economic growth, and government policy problems are given in ch. IX of {cite}`Sargent1987`.
 
-## Finite Horizon Theory
+## Finite horizon theory
 
 We first study a finite $N$ version of the problem.
 
@@ -251,11 +251,11 @@ by concavity of the objective function.
 Next, we describe how to obtain the solution using matrix methods.
 
 (fdlq)=
-### Matrix Methods
+### Matrix methods
 
 Let's look at how linear algebra can be used to tackle and shed light on the finite horizon LQ control problem.
 
-#### A Single Lag Term
+#### A single lag term
 
 Let's begin with the special case in which $m=1$.
 
@@ -347,7 +347,7 @@ which represents each element $y_t$ of $\bar y$ as a function of the entire vect
 
 That is, $y_t$ is a function of past, present, and future values of $a$'s, as well as of the initial condition $y_{-1}$.
 
-#### An Alternative Representation
+#### An alternative representation
 
 An alternative way to express the solution to {eq}`onefourfive` or
 {eq}`onefoursix` is in so-called **feedback-feedforward** form.
@@ -431,7 +431,7 @@ where $L^{-1}_{ij}$ is the $(i,j)$ element of $L^{-1}$ and $U_{ij}$ is the $(i,j
 
 Note how the left side for a given $t$ involves  $y_t$ and one lagged value $y_{t-1}$ while the right side involves all future values of the forcing process $a_t, a_{t+1}, \ldots, a_N$.
 
-#### Additional Lag Terms
+#### Additional lag terms
 
 We briefly indicate how this approach extends to the problem with
 $m > 1$.
@@ -544,7 +544,7 @@ For now, we note that by creating the matrix $W$ for large
 $N$ and factoring it into the $LU$ form, good approximations
 to $c(L)$ and $c(\beta L^{-1})^{-1}$ can be obtained.
 
-## Infinite Horizon Limit
+## Infinite horizon limit
 
 For the infinite horizon problem, we propose to discover first-order
 necessary conditions by taking the limits of {eq}`onefour` and {eq}`onefive` as
@@ -767,7 +767,7 @@ $hy^2_t$ and $[d(L)y_t]^2$, and so yields a finite value of
 
 Therefore it is easy to dominate a path that violates {eq}`onesix`.
 
-## Undiscounted Problems
+## Undiscounted problems
 
 It is worthwhile focusing on a special case of the LQ problems above:
 the undiscounted problem that emerges when $\beta = 1$.
@@ -803,7 +803,7 @@ $$
 \sum^\infty_{k=0} \lambda^k_j a_{t+k}
 $$
 
-### Transforming Discounted to Undiscounted Problem
+### Transforming discounted to undiscounted problem
 
 Discounted problems can always be converted into undiscounted problems via a simple transformation.
 

@@ -48,7 +48,7 @@ from scipy.stats import lognorm
 import matplotlib.pyplot as plt
 ```
 
-## The Lucas Model
+## The Lucas model
 
 ```{index} single: Lucas Model
 ```
@@ -64,7 +64,7 @@ Either way, the assumption of a representative agent means that prices adjust to
 
 This makes it very easy to compute competitive equilibrium prices.
 
-### Basic Setup
+### Basic setup
 
 Let's review the setup.
 
@@ -112,7 +112,7 @@ Here
 * $u$ is a strictly increasing, strictly concave, continuously differentiable period utility function.
 * $\mathbb{E}$ is a mathematical expectation.
 
-### Pricing a Lucas Tree
+### Pricing a Lucas tree
 
 ```{index} single: Lucas Model; Pricing
 ```
@@ -145,7 +145,7 @@ The decision to hold share $\pi_t$ is actually made at time $t-1$.
 
 But this value is inherited as a state variable at time $t$, which explains the choice of subscript.
 
-#### The Dynamic Program
+#### The dynamic program
 
 ```{index} single: Lucas Model; Dynamic Program
 ```
@@ -197,7 +197,7 @@ The solution to this dynamic programming problem is an optimal policy expressing
 
 * Each one determines the other, since $c(\pi, y) = \pi (y + p(y))- \pi' (\pi, y) p(y)$
 
-#### Next Steps
+#### Next steps
 
 What we need to do now is determine equilibrium prices.
 
@@ -209,7 +209,7 @@ It seems that to obtain these, we will have to
 
 However, as Lucas showed, there is a related but more straightforward way to do this.
 
-#### Equilibrium Constraints
+#### Equilibrium constraints
 
 ```{index} single: Lucas Model; Equilibrium Constraints
 ```
@@ -223,7 +223,7 @@ In particular, the representative consumer owns the whole tree in every period, 
 
 Prices must adjust to satisfy these two constraints.
 
-#### The Equilibrium Price Function
+#### The equilibrium price function
 
 ```{index} single: Lucas Model; Equilibrium Price Function
 ```
@@ -264,7 +264,7 @@ This is the famous consumption-based asset pricing equation.
 
 Before discussing it further we want to solve out for prices.
 
-### Solving the Model
+### Solving the model
 
 ```{index} single: Lucas Model; Solving
 ```
@@ -275,7 +275,7 @@ The solution is an equilibrium price function $p^*$.
 
 Let's look at how to obtain it.
 
-#### Setting up the Problem
+#### Setting up the problem
 
 Instead of solving for it directly we'll follow Lucas' indirect approach, first setting
 
@@ -319,7 +319,7 @@ In other words, a solution is a *fixed point* of $T$.
 
 This means that we can use fixed point theory to obtain and compute the solution.
 
-#### A Little Fixed Point Theory
+#### A little fixed point theory
 
 ```{index} single: Fixed Point Theory
 ```
@@ -373,7 +373,7 @@ Since the right-hand side is an upper bound, taking the sup over all $y$
 on the left-hand side gives {eq}`ltbc` with $\alpha := \beta$.
 
 (lt_comp_eg)=
-### Computation -- An Example
+### Computation -- an example
 
 ```{index} single: Lucas Model; Computation
 ```

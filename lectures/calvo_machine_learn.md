@@ -72,7 +72,7 @@ We pose  some of  those questions at the end of this lecture and  answer them  b
 Human intelligence, not the ``artificial intelligence`` deployed in our machine learning approach, is a key input into choosing which regressions to run. 
  
 
-## The Model
+## The model
 
 We study a   linear-quadratic version of a model that Guillermo Calvo {cite}`Calvo1978` used to illustrate the **time inconsistency** of optimal government plans.
 
@@ -93,7 +93,7 @@ The model combines ideas from  papers by Cagan {cite}`Cagan`, {cite}`sargent1973
 
 
 
-## Model Components
+## Model components
 
 There is no uncertainty.
 
@@ -239,7 +239,7 @@ $$
 
 
 
-## Parameters and Variables
+## Parameters and variables
 
 
 **Parameters:**  
@@ -265,7 +265,7 @@ $$
 
 
 
-### Basic Objects
+### Basic objects
 
 To prepare the way for our calculations, we'll remind ourselves of the  mathematical objects
 in play.
@@ -321,7 +321,7 @@ An optimal  government plan under this timing protocol is an example of what is 
 Notice that while the government is in effect choosing a bivariate **time series** $(\vec mu, \vec \theta)$, the government's problem is **static** in the sense that it chooses treats that time-series as a single object to be chosen at a single point in time. 
 
 
-## Approximation and Truncation parameter $T$
+## Approximation and truncation parameter $T$
 
 We anticipate that under a Ramsey plan the sequences  $\{\theta_t\}$ and $\{\mu_t\}$  both converge to stationary values. 
 
@@ -392,7 +392,7 @@ $$
 
 where $\tilde \theta_t, \ t = 0, 1, \ldots , T-1$ satisfies formula (1).
 
-## A Gradient Descent Algorithm
+## A gradient descent algorithm
 
 We now describe  code that  maximizes the criterion function {eq}`eq:Ramseyvalue` subject to equations {eq}`eq:inflation101` by choice of the truncated vector  $\tilde \mu$.
 
@@ -689,7 +689,7 @@ compute_V(clq.μ_series, β=0.85, c=2)
 
  
 
-### Restricting  $\mu_t = \bar \mu$ for all $t$
+### Restricting $\mu_t = \bar \mu$ for all $t$
 
 We take  a brief detour to solve a restricted version of  the Ramsey problem defined above.
 
@@ -729,7 +729,7 @@ V_CR
 compute_V(jnp.array([clq.μ_CR]), β=0.85, c=2)
 ```
 
-## A More Structured ML Algorithm
+## A more structured ML algorithm
 
 By thinking  about the mathematical structure of the Ramsey problem and using some linear algebra, we can simplify the problem that we hand over to a ``machine learning`` algorithm. 
 
@@ -1063,7 +1063,7 @@ the  limit $\bar \mu$ of  $\mu_t$ as $t \rightarrow +\infty$.
 This pattern reflects how formula {eq}`eq_grad_old3`  makes $\theta_t$ be a weighted average of future $\mu_t$'s.
 
 
-## Continuation Values
+## Continuation values
 
 For subsquent analysis, it will be useful to  compute a sequence $\{v_t\}_{t=0}^T$ of  what we'll call ``continuation values`` along a Ramsey plan.
 
@@ -1163,7 +1163,7 @@ time-less perspective." A more descriptive phrase is "the value of the worst con
 ```
 
 
-## Adding Some Human Intelligence 
+## Adding some human intelligence 
 
 We have used our machine learning algorithms to compute a Ramsey plan.
 
@@ -1351,7 +1351,7 @@ Evidently, continuation values $v_t > V^{CR}$ for $t=0, 1, 2$ while $v_t < V^{CR
 
 
 
-## What has Machine Learning Taught Us?
+## What has machine learning taught us?
 
 
 Our regressions tells us that along the Ramsey outcome $\vec \mu^R, \vec \theta^R$, the linear function

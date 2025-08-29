@@ -82,7 +82,7 @@ import matplotlib.pyplot as plt
 import scipy.linalg as la
 ```
 
-### Relationship to Other Lectures
+### Relationship to other lectures
 
 This lecture can be viewed as a followup to [Optimal Savings II: LQ Techniques](https://python-intro.quantecon.org/perm_income_cons.html)
 
@@ -115,7 +115,7 @@ These state-contingent securities are commonly called Arrow securities, after [K
 In the **incomplete markets version**, the consumer can buy and sell only one security each period, a risk-free one-period bond with gross
 one-period return $\beta^{-1}$.
 
-## Linear State Space Version of Complete Markets Model
+## Linear state space version of complete markets model
 
 We'll study a complete markets model adapted to  a setting with a continuous Markov state like that
 in the [first lecture on the permanent income model](https://python-intro.quantecon.org/perm_income.html).
@@ -344,7 +344,7 @@ ax[1].set_xlabel('Periods')
 plt.show()
 ```
 
-### Interpretation of Graph
+### Interpretation of graph
 
 In the above graph, please note that:
 
@@ -356,14 +356,14 @@ In the above graph, please note that:
   (meaning linear plus a constant) of the consumer's nonfinancial
   income.
 
-### Incomplete Markets Version
+### Incomplete markets version
 
 The incomplete markets version of the model with nonfinancial income being governed by a linear state space system
 is described in  [permanent income model](https://python-intro.quantecon.org/perm_income_cons.html).
 
 In that incomplete markerts setting, consumption follows a random walk and the consumer's debt follows a process with a unit root.
 
-### Finite State Markov Income Process
+### Finite state Markov income process
 
 We now turn to a finite-state Markov version of the model in which the consumer's  nonfinancial income is an exact function of a Markov state that
 takes one of $N$ values.
@@ -408,7 +408,7 @@ u(c_t) = - (c_t -\gamma)^2
 
 Here $\gamma >0$ is a bliss level of consumption
 
-### Market Structure
+### Market structure
 
 Our complete and incomplete markets models  differ in how thoroughly the market structure allows a
 consumer to transfer resources across time and Markov states, there
@@ -421,7 +421,7 @@ Watch how these differences in opportunities affect
 - how the consumer chooses to make his levels of indebtedness behave
   over time and across Markov states
 
-## Model 1 (Complete Markets)
+## Model 1 (complete markets)
 
 At each date $t \geq 0$, the consumer trades a full array of **one-period ahead
 Arrow securities**.
@@ -593,7 +593,7 @@ an equation that we can solve for the unknown $b(2)$.
 
 Knowing $b(1)$ and $b(2)$, we can solve equation {eq}`cs_5`  for the constant level of consumption $\bar c$.
 
-### Key Outcomes
+### Key outcomes
 
 The preceding calculations indicate that in the complete markets version
 of our model, we obtain the following striking results:
@@ -756,7 +756,7 @@ Below, we'll take the outcomes produced by this code -- in particular the implie
 consumption and debt paths -- and compare them with outcomes
 from an incomplete markets model in the spirit of Hall {cite}`Hall1978`
 
-## Model 2 (One-Period Risk-Free Debt Only)
+## Model 2 (one-period risk-free debt only)
 
 This is a version of the original model of Hall (1978)
 in which the consumer's ability to substitute intertemporally is
@@ -879,7 +879,7 @@ and the increment to debt is
 b_{t+1} - b_t = \beta^{-1} [ (1- \beta) v(i) - y(i) ]
 ```
 
-### Summary of Outcomes
+### Summary of outcomes
 
 In contrast to outcomes in the complete markets model, in the incomplete
 markets model
@@ -895,7 +895,7 @@ markets model
   current consumption on today's debt level account for the drift over
   time in consumption.
 
-### The Incomplete Markets Model
+### The incomplete markets model
 
 The code above also contains a function called `consumption_incomplete()` that uses {eq}`cs_12` and {eq}`cs_13` to
 
