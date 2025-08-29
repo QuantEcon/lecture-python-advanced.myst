@@ -716,7 +716,7 @@ Thus, in our context, time-variation of $\vec \mu$ chosen by a Ramsey planner
  is the telltale sign of the Ramsey plan's  **time inconsistency**.
 
 
-## Constrained-to-constant-growth-rate Ramsey plan
+## Constrained to constant growth rate Ramsey plan
 
 
 We can use brute force to create a government plan that **is** time consistent, i.e., that is a time-invariant function of time.
