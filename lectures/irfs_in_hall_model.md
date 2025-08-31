@@ -155,7 +155,7 @@ unit eigenvalue in this economy.
 Investment is much more responsive to the endowment shock at shorter time
 horizons.
 
-## Example 2: Higher Adjustment Costs
+## Example 2: higher adjustment costs
 
 We generate our next economy by making only one change to the parameters
 of Example 1: we raise the parameter associated with the cost of
@@ -214,7 +214,7 @@ The impulse response functions now show that an endowment shock does not
 have a permanent effect on the levels of either consumption or
 investment.
 
-## Example 3: Durable Consumption Goods
+## Example 3: durable consumption goods
 
 We generate our third economy by raising $\phi_1$ further, to 1.0.
 We also raise the production function parameter from 0.1 to 0.15 (which

@@ -242,7 +242,7 @@ show up in differences in the two types of consumers’ demands for a
 typical firm’s bonds and equity, the only two assets that agents can now
 trade.
 
-## Asset Markets
+## Asset markets
 
 Markets are incomplete: *ex cathedra* we the model builders declare that only equities and bonds issued by representative
 firms can be traded.
@@ -548,7 +548,7 @@ $C$’s that appear in the pricing functions, then
 - $\check q = q(K,B)$ and
   $\check p = p(K,B)$.
 
-## Pseudo Code
+## Pseudo code
 
 Before displaying our Python code for computing a BCG incomplete markets equilibrium,
 we’ll sketch some pseudo code that describes its logical flow.

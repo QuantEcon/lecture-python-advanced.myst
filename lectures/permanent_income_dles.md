@@ -57,7 +57,7 @@ from quantecon import DLE
 np.set_printoptions(suppress=True, precision=4)
 ```
 
-## The Permanent Income Model
+## The permanent income model
 
 The LQ permanent income model is an example of a **savings problem**.
 
@@ -151,7 +151,7 @@ $$
 y_{t+1} = \alpha + \rho_1 y_t + \rho_2 y_{t-1} + \sigma w_{t+1}
 $$
 
-### Solution with the DLE Class
+### Solution with the DLE class
 
 One way of solving this model is to map the problem into the framework
 outlined in Section 4.8 of {cite}`HS2013` by setting up our technology,
