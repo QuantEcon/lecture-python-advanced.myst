@@ -1,0 +1,70 @@
+name: QuantEcon Style Guide Check
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  style-check:
+    if: contains(github.event.comment.body, '@qe-style-check')
+    runs-on: ubuntu-latest
+    name: Process style guide check request
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.issue.pull_request && github.event.pull_request.head.ref || github.sha }}
+
+      - name: Check if user has permissions
+        id: check-permissions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: permissions } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.payload.comment.user.login
+            });
+            
+            const hasPermissions = ['write', 'admin', 'maintain'].includes(permissions.permission);
+            
+            if (!hasPermissions) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: '⚠️ Sorry, only collaborators with write access can trigger style guide checks.'
+              });
+              core.setFailed('User does not have sufficient permissions');
+              return;
+            }
+            
+            core.setOutput('has-permissions', 'true');
+
+      - name: React to comment
+        if: steps.check-permissions.outputs.has-permissions == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.reactions.createForIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment.id,
+              content: 'eyes'
+            });
+
+      - name: Run style guide check
+        if: steps.check-permissions.outputs.has-permissions == 'true'
+        id: style-check
+        uses: QuantEcon/meta/.github/actions/qe-style-guide@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          style-guide: '.github/copilot-qe-style-guide.md'
+          docs: 'lectures/'  # Adjust this to your content directory
+          extensions: 'md'   # Adjust file extensions as needed
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
+          model: 'gpt-4'
+          max-suggestions: '20'
+          confidence-threshold: '0.8'
