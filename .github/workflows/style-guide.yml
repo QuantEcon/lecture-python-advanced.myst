@@ -58,7 +58,7 @@ jobs:
       - name: Run style guide check
         if: steps.check-permissions.outputs.has-permissions == 'true'
         id: style-check
-        uses: QuantEcon/meta/.github/actions/qe-style-guide@main
+        uses: QuantEcon/meta/.github/actions/qe-style-guide@copilot/fix-228
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           style-guide: '.github/copilot-qe-style-guide.md'
