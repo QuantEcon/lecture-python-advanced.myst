@@ -74,7 +74,7 @@
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -168,14 +168,14 @@
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#friedman-1956-and-muth-1960">3.1. Friedman (1956) and Muth (1960)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-process-for-which-adaptive-expectations-are-optimal">3.2. A Process for Which Adaptive Expectations are Optimal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-state-space-math">3.3. Some Useful State-Space Math</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimates-of-unobservables">3.4. Estimates of Unobservables</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-of-unobservables-to-observables">3.5. Relationship of Unobservables to Observables</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-process-for-which-adaptive-expectations-are-optimal">3.2. A process for which adaptive expectations are optimal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-useful-state-space-math">3.3. Some useful state-space math</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimates-of-unobservables">3.4. Estimates of unobservables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relationship-of-unobservables-to-observables">3.5. Relationship of unobservables to observables</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#innovations">3.5.1. Innovations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ma-and-ar-representations">3.6. MA and AR Representations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ma-and-ar-representations">3.6. MA and AR representations</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -245,13 +245,13 @@
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
+<details class="admonition hide below-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.8.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.10.1)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
@@ -264,9 +264,7 @@ Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/mi
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from sympy-&gt;quantecon) (1.3.0)
+Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from sympy-&gt;quantecon) (1.3.0)
 </pre></div>
 </div>
 </div>
@@ -322,7 +320,7 @@ Kalman filter to express the heart of Muth’s analysis concisely.</p>
 <p>We’ll use limiting versions of the Kalman filter corresponding to what are called <strong>stationary values</strong> in that lecture.</p>
 </section>
 <section id="a-process-for-which-adaptive-expectations-are-optimal">
-<h2><span class="section-number">3.2. </span>A Process for Which Adaptive Expectations are Optimal<a class="headerlink" href="#a-process-for-which-adaptive-expectations-are-optimal" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.2. </span>A process for which adaptive expectations are optimal<a class="headerlink" href="#a-process-for-which-adaptive-expectations-are-optimal" title="Permalink to this heading">#</a></h2>
 <p>Suppose that an observable <span class="math notranslate nohighlight">\(y_t\)</span> is the sum of an unobserved
 random walk <span class="math notranslate nohighlight">\(x_t\)</span> and an IID shock <span class="math notranslate nohighlight">\(\epsilon_{2,t}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-state-space">
@@ -396,7 +394,7 @@ apply the quantecon <code class="docutils literal notranslate"><span class="pre"
 </div>
 </section>
 <section id="some-useful-state-space-math">
-<h2><span class="section-number">3.3. </span>Some Useful State-Space Math<a class="headerlink" href="#some-useful-state-space-math" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.3. </span>Some useful state-space math<a class="headerlink" href="#some-useful-state-space-math" title="Permalink to this heading">#</a></h2>
 <p>Now we want to map the time-invariant innovations representation <a class="reference internal" href="#equation-innovations">(3.3)</a> and
 the original state-space system <a class="reference internal" href="#equation-state-space">(3.2)</a> into a convenient form for deducing
 the impulse responses from the original shocks to the <span class="math notranslate nohighlight">\(x_t\)</span> and
@@ -478,7 +476,7 @@ Conditional variance = 5.524937810560442
 variables are related by plotting some key objects.</p>
 </section>
 <section id="estimates-of-unobservables">
-<h2><span class="section-number">3.4. </span>Estimates of Unobservables<a class="headerlink" href="#estimates-of-unobservables" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.4. </span>Estimates of unobservables<a class="headerlink" href="#estimates-of-unobservables" title="Permalink to this heading">#</a></h2>
 <p>First, let’s plot the hidden state <span class="math notranslate nohighlight">\(x_t\)</span> and the filtered version
 <span class="math notranslate nohighlight">\(\hat x_t\)</span> that is linear-least squares projection of <span class="math notranslate nohighlight">\(x_t\)</span>
 on the history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \ldots\)</span></p>
@@ -495,7 +493,7 @@ on the history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b56babd5b99d386e616d33aa9af6906e4d939f48bacd4b2bd578509131475d97.png" src="_images/b56babd5b99d386e616d33aa9af6906e4d939f48bacd4b2bd578509131475d97.png" />
+<img alt="_images/924e3bc77b34b7b3a084e72f5dabefd6a8165ac19952f0fad343ff26d6417835.png" src="_images/924e3bc77b34b7b3a084e72f5dabefd6a8165ac19952f0fad343ff26d6417835.png" />
 </div>
 </div>
 <p>Note how <span class="math notranslate nohighlight">\(x_t\)</span> and <span class="math notranslate nohighlight">\(\hat{x_t}\)</span> differ.</p>
@@ -503,7 +501,7 @@ on the history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \l
 idea about her/his <em>permanent income</em>.</p>
 </section>
 <section id="relationship-of-unobservables-to-observables">
-<h2><span class="section-number">3.5. </span>Relationship of Unobservables to Observables<a class="headerlink" href="#relationship-of-unobservables-to-observables" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.5. </span>Relationship of unobservables to observables<a class="headerlink" href="#relationship-of-unobservables-to-observables" title="Permalink to this heading">#</a></h2>
 <p>Now let’s plot <span class="math notranslate nohighlight">\(x_t\)</span> and <span class="math notranslate nohighlight">\(y_t\)</span>.</p>
 <p>Recall that <span class="math notranslate nohighlight">\(y_t\)</span> is just <span class="math notranslate nohighlight">\(x_t\)</span> plus white noise</p>
 <div class="cell docutils container">
@@ -519,7 +517,7 @@ idea about her/his <em>permanent income</em>.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7fe745056787c6f92fec336801817500945571567864fe8b4f4b71f0c0ad46f0.png" src="_images/7fe745056787c6f92fec336801817500945571567864fe8b4f4b71f0c0ad46f0.png" />
+<img alt="_images/f5cc78ae9c76895f0a69f6d228ec2f68d6b8c6c69c6ad490f182add7ebbac0db.png" src="_images/f5cc78ae9c76895f0a69f6d228ec2f68d6b8c6c69c6ad490f182add7ebbac0db.png" />
 </div>
 </div>
 <p>We see above that <span class="math notranslate nohighlight">\(y\)</span> seems to look like white noise around the
@@ -540,13 +538,13 @@ values of <span class="math notranslate nohighlight">\(x\)</span>.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0738fef8a825b5d198e530c882e94647c43ecba1bc1ad913fff5fd2f099c8cdb.png" src="_images/0738fef8a825b5d198e530c882e94647c43ecba1bc1ad913fff5fd2f099c8cdb.png" />
+<img alt="_images/cca76bf3d27d5130bb41a6c9a00dad966b70c737b8a3b3685d43c2b859c17905.png" src="_images/cca76bf3d27d5130bb41a6c9a00dad966b70c737b8a3b3685d43c2b859c17905.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="ma-and-ar-representations">
-<h2><span class="section-number">3.6. </span>MA and AR Representations<a class="headerlink" href="#ma-and-ar-representations" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.6. </span>MA and AR representations<a class="headerlink" href="#ma-and-ar-representations" title="Permalink to this heading">#</a></h2>
 <p>Now we shall extract from the <code class="docutils literal notranslate"><span class="pre">Kalman</span></code> instance <code class="docutils literal notranslate"><span class="pre">kmuth</span></code> coefficients of</p>
 <ul class="simple">
 <li><p>a fundamental moving average representation that represents

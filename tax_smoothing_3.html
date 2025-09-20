@@ -74,7 +74,7 @@
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -168,9 +168,9 @@
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">11.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roll-over-risk">11.2. Roll-Over Risk</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-dead-end">11.3. A Dead End</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#better-representation-of-roll-over-risk">11.4. Better Representation of Roll-Over Risk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roll-over-risk">11.2. Roll-over risk</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-dead-end">11.3. A dead end</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#better-representation-of-roll-over-risk">11.4. Better representation of roll-over risk</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -254,13 +254,13 @@ government that faces <strong>roll-over risk</strong>.</p>
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
+<details class="admonition hide below-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.8.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.10.1)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
@@ -291,7 +291,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </div>
 </section>
 <section id="roll-over-risk">
-<h2><span class="section-number">11.2. </span>Roll-Over Risk<a class="headerlink" href="#roll-over-risk" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.2. </span>Roll-over risk<a class="headerlink" href="#roll-over-risk" title="Permalink to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(T_t\)</span> denote tax collections, <span class="math notranslate nohighlight">\(\beta\)</span> a discount factor,
 <span class="math notranslate nohighlight">\(b_{t,t+1}\)</span> time <span class="math notranslate nohighlight">\(t+1\)</span> goods that the government promises to
 pay at <span class="math notranslate nohighlight">\(t\)</span>, <span class="math notranslate nohighlight">\(G_t\)</span> government purchases, <span class="math notranslate nohighlight">\(p^t_{t+1}\)</span>
@@ -333,7 +333,7 @@ risk”.</p>
 one of the Markov states.</p>
 </section>
 <section id="a-dead-end">
-<h2><span class="section-number">11.3. </span>A Dead End<a class="headerlink" href="#a-dead-end" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.3. </span>A dead end<a class="headerlink" href="#a-dead-end" title="Permalink to this heading">#</a></h2>
 <p>A first thought for how to implement this might be to allow
 <span class="math notranslate nohighlight">\(p^t_{t+1}\)</span> to vary over time with:</p>
 <div class="math notranslate nohighlight">
@@ -362,7 +362,7 @@ cheap</p>
 <p>Thus, we must represent “roll-over risk” some other way.</p>
 </section>
 <section id="better-representation-of-roll-over-risk">
-<h2><span class="section-number">11.4. </span>Better Representation of Roll-Over Risk<a class="headerlink" href="#better-representation-of-roll-over-risk" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">11.4. </span>Better representation of roll-over risk<a class="headerlink" href="#better-representation-of-roll-over-risk" title="Permalink to this heading">#</a></h2>
 <p>To force the government to set <span class="math notranslate nohighlight">\(b_{t,t+1} = 0\)</span>, we can instead
 extend the model to have four Markov states:</p>
 <ol class="arabic simple">
@@ -491,7 +491,7 @@ government uses those assets to lower taxation today.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/31be12872cfe39c78fe667b745f90a35001ef814c6ca91b20df411440f376d1e.png" src="_images/31be12872cfe39c78fe667b745f90a35001ef814c6ca91b20df411440f376d1e.png" />
+<img alt="_images/4bbe08f13c5c71cba398dbdf9dc66940d8ff651207f8a37d57a126d6ca3d36e5.png" src="_images/4bbe08f13c5c71cba398dbdf9dc66940d8ff651207f8a37d57a126d6ca3d36e5.png" />
 </div>
 </div>
 <p>We can adjust parameters  so that, rather than  debt fluctuating
@@ -535,7 +535,7 @@ around zero, the government is a debtor in every period that it can borrow.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/57700816181f374ece39dd67113219fc2b5e8bb165943b768cec72312a2b9c58.png" src="_images/57700816181f374ece39dd67113219fc2b5e8bb165943b768cec72312a2b9c58.png" />
+<img alt="_images/efbaa2b2bf5daa5eec2f8ff3e32ed10812e7d4da787230ca1f69a0040fdd67db.png" src="_images/efbaa2b2bf5daa5eec2f8ff3e32ed10812e7d4da787230ca1f69a0040fdd67db.png" />
 </div>
 </div>
 <p>With a lower interest rate, the government has an incentive to

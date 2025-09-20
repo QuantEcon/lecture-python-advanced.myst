@@ -24,7 +24,7 @@ Weiss's model.
 
 Hopenhayn and Nicolini's model is a generalization of Shavell and Weiss's along dimensions that we'll soon describe.
 
-## Shavell and Weiss's Model
+## Shavell and Weiss's model
 
 An unemployed worker orders stochastic processes of
 consumption and  search effort $\{c_t , a_t\}_{t=0}^\infty$
@@ -154,7 +154,7 @@ to compute $V^u_{j+1}$.
 
 * Iterate to convergence.
 
-### Full Information
+### Full information
 
 Another benchmark model helps set the stage for the model with private information that we ultimately want to study.
 
@@ -253,7 +253,7 @@ during the unemployment spell.
 But the worker's consumption is not  smoothed across states of
 employment and unemployment unless $V=V^e$.
 
-### Incentive Problem
+### Incentive problem
 
 The preceding efficient insurance scheme assumes  that the insurance agency
 controls both $c$ and $a$.
@@ -312,7 +312,7 @@ The full-information  contract thus
 relies on  the agency's ability to control *both* the unemployed
 worker's consumption *and* his search effort.
 
-## Private Information
+## Private information
 
 Following  {cite}`Shavell_Weiss_79` and
  {cite}`Hopenhayn_Nicolini_97`, now assume that  the unemployment insurance agency cannot
@@ -415,7 +415,7 @@ unemployment.
 
 
 
-### Computational Details
+### Computational details
 
 It is useful to note that there
 are natural lower and upper bounds to the set
@@ -494,7 +494,7 @@ where $c$ and $a$ are given by equations {eq}`eq:hugo21`  and {eq}`eq:hugo22`.
 
 
 
-### Python Computations
+### Python computations
 
 We'll approximate the planner's optimal cost function  with cubic splines.
 
@@ -524,7 +524,7 @@ class params_instance:
         self.Ve = uw/(1-β)
 ```
 
-### Parameter Values
+### Parameter values
 
 
 For  the other parameters appearing in  the above Python code, we'll calibrate parameter $r$ 
@@ -638,7 +638,7 @@ Now that we have calibrated our the parameter $r$, we can continue with solving 
 
 +++
 
-### Computation under Private Information
+### Computation under private information
 
 +++
 
@@ -796,7 +796,7 @@ a_star_interp = sp.interpolate.interp1d(Vu_grid,a_star)
 V_star_interp = sp.interpolate.interp1d(Vu_grid,V_star)
 ```
 
-### Replacement Ratios and Continuation Values
+### Replacement ratios and continuation values
 
 +++
 

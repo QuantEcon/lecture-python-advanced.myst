@@ -61,7 +61,7 @@ In this lecture, we
 
 We begin with an introduction to the model.
 
-## Competitive Equilibrium with Distorting Taxes
+## Competitive equilibrium with distorting taxes
 
 Many but not all features of the economy are identical to those of {doc}`the Lucas-Stokey economy <opt_tax_recur>`.
 
@@ -118,7 +118,7 @@ AMSS allow the government to issue only one-period risk-free debt each period.
 
 Ruling out complete markets in this way is a step in the direction of making total tax collections behave more like that prescribed in Robert Barro (1979) {cite}`Barro1979` than they do in Lucas and Stokey (1983) {cite}`LucasStokey1983`.
 
-### Risk-free One-Period Debt Only
+### Risk-free one-period debt only
 
 In period $t$ and history $s^t$, let
 
@@ -244,7 +244,7 @@ b_t(s^{t-1}) =  \mathbb E_t \sum_{j=0}^\infty \beta^j
 
 Equation {eq}`TS_gov_wo4a` must hold for each $s^t$ for each $t \geq 1$.
 
-### Comparison with Lucas-Stokey Economy
+### Comparison with Lucas-Stokey economy
 
 The expression on the right side of {eq}`TS_gov_wo4a` in the Lucas-Stokey (1983) economy would  equal the present value of a continuation stream of government net-of-interest surpluses evaluated at what would be competitive equilibrium Arrow-Debreu prices at date $t$.
 
@@ -254,7 +254,7 @@ In the AMSS economy, the restriction that government debt be risk-free imposes t
 
 In a language used in the literature on incomplete markets models, it can be said that the AMSS model requires that at each $(t, s^t)$ what would be the present value of continuation government net-of-interest surpluses in the Lucas-Stokey model must belong to  the **marketable subspace** of the AMSS model.
 
-### Ramsey Problem Without State-contingent Debt
+### Ramsey problem without state-contingent debt
 
 After we have substituted the resource constraint into the utility function, we can express the Ramsey problem as being to choose an allocation that solves
 
@@ -286,7 +286,7 @@ and
 
 given $b_0(s^{-1})$.
 
-#### Lagrangian Formulation
+#### Lagrangian formulation
 
 Let $\gamma_0(s^0)$ be a non-negative Lagrange multiplier on constraint {eq}`AMSS_44`.
 
@@ -316,7 +316,7 @@ That would let us reduce the beginning-of-period indebtedness for some other his
 
 These features flow from  the fact that the government cannot use state-contingent debt and therefore cannot allocate its indebtedness  efficiently across future states.
 
-### Some Calculations
+### Some calculations
 
 It is helpful to apply two transformations to the Lagrangian.
 
@@ -408,7 +408,7 @@ tags: [collapse-20]
 To analyze the AMSS model, we find it useful to adopt a recursive formulation
 using techniques like those in our lectures on {doc}`dynamic Stackelberg models <dyn_stack>` and {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
 
-## Recursive Version of AMSS Model
+## Recursive version of AMSS model
 
 We now describe a recursive formulation of the AMSS economy.
 
@@ -424,7 +424,7 @@ We now explore how these constraints alter  Bellman equations for a time
 $0$ Ramsey planner and for time $t \geq 1$, history $s^t$
 continuation Ramsey planners.
 
-### Recasting State Variables
+### Recasting state variables
 
 In the AMSS setting, the government faces a sequence of budget constraints
 
@@ -487,7 +487,7 @@ history $s^t$ as
 
 for $t \geq 1$.
 
-### Measurability Constraints
+### Measurability constraints
 
 Write equation {eq}`eqn:AMSSapp2` as
 
@@ -510,7 +510,7 @@ That implies that it has to be *measurable* with respect to $s^{t-1}$.
 Equations {eq}`eqn:AMSSapp2b` are the *measurability constraints* that the AMSS model adds to the single time $0$ implementation
 constraint imposed in the Lucas and Stokey model.
 
-### Two Bellman Equations
+### Two Bellman equations
 
 Let $\Pi(s|s_-)$ be a Markov transition matrix whose entries tell probabilities of moving from state $s_-$ to state $s$ in one period.
 
@@ -567,7 +567,7 @@ where maximization is subject to
 u_{c,0} b_0 = u_{c,0} (n_0-g_0) - u_{l,0} n_0 + x_0
 ```
 
-### Martingale Supercedes State-Variable Degeneracy
+### Martingale supercedes state-variable degeneracy
 
 Let $\mu(s|s_-) \Pi(s|s_-)$ be a Lagrange multiplier on the constraint {eq}`eqn:AMSSapp6`
 for state $s$.
@@ -620,7 +620,7 @@ that for each $s_-$, the sum over $s$ equals unity.
 ```{exercise-end}
 ```
 
-### Absence of State Variable Degeneracy
+### Absence of state variable degeneracy
 
 Along a Ramsey plan, the state variable $x_t = x_t(s^t, b_0)$
 becomes a function of the history $s^t$ and initial
@@ -642,7 +642,7 @@ In the AMSS model, both $x$ and $s$ are needed to describe the state.
 This property of the AMSS model  transmits a twisted martingale
 component to consumption, employment, and the tax rate.
 
-### Digression on Non-negative Transfers
+### Digression on non-negative transfers
 
 Throughout this lecture, we have imposed that transfers $T_t = 0$.
 
@@ -686,7 +686,7 @@ The recursive formulation is implemented as follows
 
 We now turn to some examples.
 
-### Anticipated One-Period War
+### Anticipated one-period war
 
 In our lecture on {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`
 we studied how the government manages uncertainty in a simple setting.
@@ -874,7 +874,7 @@ Without state-contingent debt, the optimal tax rate is history dependent.
 * A war at time $t=3$ causes a permanent **increase** in the tax rate.
 * Peace at time $t=3$ causes a permanent **reduction** in the tax rate.
 
-#### Perpetual War Alert
+#### Perpetual war alert
 
 History dependence occurs more dramatically in a case in which the government
 perpetually faces the prospect  of war.

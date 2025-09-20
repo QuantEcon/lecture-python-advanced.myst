@@ -74,7 +74,7 @@
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -187,7 +187,7 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">16.5.3. Example 3</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dual-solution">16.6. Dual Solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dual-solution">16.6. Dual solution</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application">16.7. Application</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">16.7.1. Data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">16.7.2. Model</a></li>
@@ -381,7 +381,7 @@ you of ideas  encountered in this  <a class="reference external" href="https://p
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="c1">## Genetate random types</span>
+<span class="c1">## Generate random types</span>
 <span class="c1"># generate random support for distributions of types</span>
 <span class="n">support_size</span> <span class="o">=</span> <span class="mi">50</span>
 <span class="n">random_support</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">200</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">support_size</span><span class="p">))</span>
@@ -1853,7 +1853,7 @@ Monge cost of PAM:
 </section>
 </section>
 <section id="dual-solution">
-<h2><span class="section-number">16.6. </span>Dual Solution<a class="headerlink" href="#dual-solution" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.6. </span>Dual solution<a class="headerlink" href="#dual-solution" title="Permalink to this heading">#</a></h2>
 <p>Let’s recall the formulation</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -2008,8 +2008,8 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{(5, 5): [(4, 7), (1, 3)],
- (3, 1): [(7, 0), (0, 2)],
  &#39;artificial_pair&#39;: [(5, 5), (2, 6)],
+ (3, 1): [(7, 0), (0, 2)],
  (7, 0): [],
  (6, 4): [],
  (0, 2): [],
@@ -2024,7 +2024,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <p>We can visualize the hierarchical structure by computing the order in which he pairs will be processed and plotting the matching with color of the arcs corresponding the hierarchy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Compute Hierarchies</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Compute hierarchies</span>
 
 <span class="k">def</span> <span class="nf">find_hierarchies</span><span class="p">(</span><span class="n">subpairs</span><span class="p">):</span>  
     
@@ -2057,7 +2057,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 
     <span class="k">return</span> <span class="n">hierarchies</span>
 
-<span class="c1">## Plot Hierarchies</span>
+<span class="c1">## Plot hierarchies</span>
 
 <span class="k">def</span> <span class="nf">plot_hierarchies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subpairs</span><span class="p">,</span> <span class="n">scatter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">range_x_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># Compute hierarchies</span>

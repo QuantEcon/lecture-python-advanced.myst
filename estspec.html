@@ -74,7 +74,7 @@
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -174,9 +174,9 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smoothing">30.3. Smoothing</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-with-smoothing">30.3.1. Estimation with Smoothing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-filtering-and-smoothing">30.3.2. Pre-Filtering and Smoothing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ar-1-setting">30.3.3. The AR(1) Setting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimation-with-smoothing">30.3.1. Estimation with smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-filtering-and-smoothing">30.3.2. Pre-filtering and smoothing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ar-1-setting">30.3.3. The AR(1) setting</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">30.4. Exercises</a></li>
@@ -249,13 +249,13 @@
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
+<details class="admonition hide below-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.8.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.10.1)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
@@ -263,9 +263,7 @@ Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (2.32.3)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.1)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
+Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
 Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
@@ -436,7 +434,7 @@ A_j := \sum_{t=0}^{n-1} a_t \exp \left\{ i 2 \pi \frac{tj}{n} \right\},
   return np.asarray(x, float)
 </pre></div>
 </div>
-<img alt="_images/b7d2bfe2320549b355b66eb73eb015148c34d784da283cc5894862d7861000d8.png" src="_images/b7d2bfe2320549b355b66eb73eb015148c34d784da283cc5894862d7861000d8.png" />
+<img alt="_images/4463504868119c09e7385ff665b2a75467431f23f418c83a8853ae21c2e0ccac.png" src="_images/4463504868119c09e7385ff665b2a75467431f23f418c83a8853ae21c2e0ccac.png" />
 </div>
 </div>
 <p>This estimate looks rather disappointing, but the data size is only 40, so
@@ -497,7 +495,7 @@ this below.</p>
 </div>
 </div>
 <section id="estimation-with-smoothing">
-<h3><span class="section-number">30.3.1. </span>Estimation with Smoothing<a class="headerlink" href="#estimation-with-smoothing" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.3.1. </span>Estimation with smoothing<a class="headerlink" href="#estimation-with-smoothing" title="Permalink to this heading">#</a></h3>
 <p id="index-8">Our next step is to provide code that will not only estimate the periodogram but also provide smoothing as required.</p>
 <p>Such functions have been written in  <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/estspec.py">estspec.py</a> and are available once you’ve installed <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a>.</p>
 <p>The <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/estspec.py">GitHub listing</a> displays three functions,  <code class="docutils literal notranslate"><span class="pre">smooth()</span></code>, <code class="docutils literal notranslate"><span class="pre">periodogram()</span></code>, <code class="docutils literal notranslate"><span class="pre">ar_periodogram()</span></code>. We will discuss the first two here and the third one <a class="reference internal" href="#ar-periodograms"><span class="std std-ref">below</span></a>.</p>
@@ -519,7 +517,7 @@ and the choice of appropriate smoothing will have to be made based on
 judgement/priors or some other theory.</p>
 </section>
 <section id="pre-filtering-and-smoothing">
-<span id="estspec-pfas"></span><h3><span class="section-number">30.3.2. </span>Pre-Filtering and Smoothing<a class="headerlink" href="#pre-filtering-and-smoothing" title="Permalink to this heading">#</a></h3>
+<span id="estspec-pfas"></span><h3><span class="section-number">30.3.2. </span>Pre-filtering and smoothing<a class="headerlink" href="#pre-filtering-and-smoothing" title="Permalink to this heading">#</a></h3>
 <span class="target" id="index-9"></span><p id="index-10">In the <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/estspec.py">code listing</a>, we showed three functions from the file <code class="docutils literal notranslate"><span class="pre">estspec.py</span></code>.</p>
 <p>The third function in the file (<code class="docutils literal notranslate"><span class="pre">ar_periodogram()</span></code>) adds a pre-processing step to periodogram smoothing.</p>
 <p>First, we describe the basic idea, and after that we give the code.</p>
@@ -546,7 +544,7 @@ provided the maximum possible amount of information about the value <span class=
 <p>Another way to put this is that if <span class="math notranslate nohighlight">\(I\)</span> is relatively constant, then we can use a large amount of smoothing without introducing too much bias.</p>
 </section>
 <section id="the-ar-1-setting">
-<span id="ar-periodograms"></span><h3><span class="section-number">30.3.3. </span>The AR(1) Setting<a class="headerlink" href="#the-ar-1-setting" title="Permalink to this heading">#</a></h3>
+<span id="ar-periodograms"></span><h3><span class="section-number">30.3.3. </span>The AR(1) setting<a class="headerlink" href="#the-ar-1-setting" title="Permalink to this heading">#</a></h3>
 <p id="index-11">Let’s examine this idea more carefully in a particular setting — where
 the data are assumed to be generated by an  AR(1) process.</p>
 <p>(More general ARMA settings can be handled using similar techniques to those described below)</p>
@@ -633,7 +631,7 @@ of being closer to the true spectral density.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/438f49b5c76c7ebf2d1f35fdf18409ca2e329d0a4d4bfb969aed1bd0405d7108.png" src="_images/438f49b5c76c7ebf2d1f35fdf18409ca2e329d0a4d4bfb969aed1bd0405d7108.png" />
+<img alt="_images/91dc3a5da6e8bfdda9323d5a95c9a32349cd35849a866d6cf7430484842ab749.png" src="_images/91dc3a5da6e8bfdda9323d5a95c9a32349cd35849a866d6cf7430484842ab749.png" />
 </div>
 </div>
 </section>
@@ -682,7 +680,7 @@ and 150 observations in each time series.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5febe4d0e4e8dbdefd99673e431b9fa59e76c645cb48a5d56156b36520e4b8aa.png" src="_images/5febe4d0e4e8dbdefd99673e431b9fa59e76c645cb48a5d56156b36520e4b8aa.png" />
+<img alt="_images/3bc4197da0eae1cd3f209606815a512f7ae3d3b1665432559106836800c3c6f8.png" src="_images/3bc4197da0eae1cd3f209606815a512f7ae3d3b1665432559106836800c3c6f8.png" />
 </div>
 </div>
 </section>

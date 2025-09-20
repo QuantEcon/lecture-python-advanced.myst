@@ -48,7 +48,7 @@ import numpy as np
 from scipy.linalg import qr
 ```
 
-### Further Reading
+### Further reading
 
 For background and foundational concepts, see our lecture [on linear algebra](https://python-intro.quantecon.org/linear_algebra.html).
 
@@ -58,9 +58,9 @@ For a complete set of proofs in a general setting, see, for example, {cite}`Roma
 
 For an advanced treatment of projection in the context of least squares prediction, see [this book chapter](http://www.tomsargent.com/books/TOMchpt.2.pdf).
 
-## Key Definitions
+## Key definitions
 
-Assume  $x, z \in \mathbb R^n$.
+Assume $x, z \in \mathbb R^n$.
 
 Define $\langle x,  z\rangle = \sum_i x_i z_i$.
 
@@ -86,7 +86,7 @@ The **orthogonal complement** of linear subspace $S \subset \mathbb R^n$ is the 
 
 ```
 
-$S^\perp$ is  a linear subspace of $\mathbb R^n$
+$S^\perp$ is a linear subspace of $\mathbb R^n$
 
 * To see this, fix $x, y \in S^{\perp}$ and $\alpha, \beta \in \mathbb R$.
 * Observe that if $z \in S$, then
@@ -117,7 +117,7 @@ $$
  = \| x_1 \|^2 + \| x_2 \|^2
 $$
 
-### Linear Independence vs Orthogonality
+### Linear independence vs orthogonality
 
 If $X \subset \mathbb R^n$ is an orthogonal set and $0 \notin X$, then $X$ is linearly independent.
 
@@ -125,13 +125,16 @@ Proving this is a nice exercise.
 
 While the converse is not true, a kind of partial converse holds, as we'll {ref}`see below <gram_schmidt>`.
 
-## The Orthogonal Projection Theorem
+## The orthogonal projection theorem
 
 What vector within a linear subspace of $\mathbb R^n$  best approximates a given vector in $\mathbb R^n$?
 
 The next theorem answers this question.
 
-**Theorem** (OPT) Given $y \in \mathbb R^n$ and linear subspace $S \subset \mathbb R^n$,
+```{prf:theorem} Orthogonal Projection Theorem
+:label: opt
+
+Given $y \in \mathbb R^n$ and linear subspace $S \subset \mathbb R^n$,
 there exists a unique solution to the minimization problem
 
 $$
@@ -144,6 +147,7 @@ The minimizer $\hat y$ is the unique vector in $\mathbb R^n$ that satisfies
 * $y - \hat y \perp S$
 
 The vector $\hat y$ is called the **orthogonal projection** of $y$ onto $S$.
+```
 
 The next figure provides some intuition
 
@@ -151,7 +155,7 @@ The next figure provides some intuition
 
 ```
 
-### Proof of Sufficiency
+### Proof of sufficiency
 
 We'll omit the full proof.
 
@@ -171,7 +175,7 @@ $$
 
 Hence $\| y - z \| \geq \| y - \hat y \|$, which completes the proof.
 
-### Orthogonal Projection as a Mapping
+### Orthogonal projection as a mapping
 
 For a linear space $Y$ and a fixed linear subspace $S$, we have a functional relationship
 
@@ -179,7 +183,7 @@ $$
 y \in Y\; \mapsto \text{ its orthogonal projection } \hat y \in S
 $$
 
-By the OPT, this is a well-defined mapping  or *operator* from $\mathbb R^n$ to $\mathbb R^n$.
+By the {prf:ref}`opt`, this is a well-defined mapping  or *operator* from $\mathbb R^n$ to $\mathbb R^n$.
 
 In what follows we denote this operator by a matrix $P$
 
@@ -189,10 +193,11 @@ In what follows we denote this operator by a matrix $P$
 The operator $P$ is called the **orthogonal projection mapping onto** $S$.
 
 ```{figure} /_static/lecture_specific/orth_proj/orth_proj_thm2.png
+:scale: 65%
 
 ```
 
-It is immediate from the OPT that for any $y \in \mathbb R^n$
+It is immediate from the {prf:ref}`opt` that for any $y \in \mathbb R^n$
 
 1. $P y \in S$ and
 1. $y - P y \perp S$
@@ -204,7 +209,7 @@ From this, we can deduce additional useful properties, such as
 
 For example, to prove 1, observe that $y  = P y  + y - P y$ and apply the Pythagorean law.
 
-#### Orthogonal Complement
+#### Orthogonal complement
 
 Let $S \subset \mathbb R^n$.
 
@@ -224,9 +229,12 @@ such that $y = x_1 + x_2$.
 
 Moreover, $x_1 = \hat E_S y$ and $x_2 = y - \hat E_S y$.
 
-This amounts to another version of the OPT:
+This amounts to another version of the {prf:ref}`opt`:
 
-**Theorem**.  If $S$ is a linear subspace of $\mathbb R^n$, $\hat E_S y = P y$ and $\hat E_{S^{\perp}} y = M y$, then
+```{prf:theorem} Orthogonal Projection Theorem (another version)
+:label: opt_another
+
+If $S$ is a linear subspace of $\mathbb R^n$, $\hat E_S y = P y$ and $\hat E_{S^{\perp}} y = M y$, then
 
 $$
 P y \perp M y
@@ -234,6 +242,7 @@ P y \perp M y
 y = P y + M y
  \quad \text{for all } \, y \in \mathbb R^n
 $$
+```
 
 The next figure illustrates
 
@@ -241,7 +250,7 @@ The next figure illustrates
 
 ```
 
-## Orthonormal Basis
+## Orthonormal basis
 
 An orthogonal set of vectors $O \subset \mathbb R^n$ is called an **orthonormal set** if $\| u \| = 1$ for all $u \in O$.
 
@@ -281,11 +290,13 @@ $$
 
 Combining this result with {eq}`pob` verifies the claim.
 
-### Projection onto an Orthonormal Basis
+### Projection onto an orthonormal basis
 
 When a subspace onto which we project is orthonormal, computing the projection simplifies:
 
-**Theorem** If $\{u_1, \ldots, u_k\}$ is an orthonormal basis for $S$, then
+````{prf:theorem} 
+
+If $\{u_1, \ldots, u_k\}$ is an orthonormal basis for $S$, then
 
 ```{math}
 :label: exp_for_op
@@ -294,14 +305,16 @@ P y = \sum_{i=1}^k \langle y, u_i \rangle u_i,
 \quad
 \forall \; y \in \mathbb R^n
 ```
+````
 
-Proof: Fix $y \in \mathbb R^n$ and let $P y$ be  defined as in {eq}`exp_for_op`.
+```{prf:proof}  
+Fix $y \in \mathbb{R}^n$ and let $P y$ be  defined as in {eq}`exp_for_op`.
 
 Clearly, $P y \in S$.
 
 We claim that $y - P y \perp S$ also holds.
 
-It sufficies to show that $y - P y \perp$ any basis vector $u_i$.
+It suffices to show that $y - P y \perp u_i$ for any basis vector $u_i$.
 
 This is true because
 
@@ -310,10 +323,12 @@ $$
 = \langle y, u_j \rangle  - \sum_{i=1}^k \langle y, u_i \rangle
 \langle u_i, u_j  \rangle = 0
 $$
+```
 
 (Why is this sufficient to establish the claim that $y - P y \perp S$?)
 
-## Projection Via Matrix Algebra
+
+## Projection via matrix algebra
 
 Let $S$ be a linear subspace of $\mathbb R^n$ and  let $y \in \mathbb R^n$.
 
@@ -323,17 +338,22 @@ $$
 \hat E_S y = P y
 $$
 
-Evidently  $Py$ is a linear function from $y \in \mathbb R^n$ to $P y \in \mathbb R^n$.
+Evidently $Py$ is a linear function from $y \in \mathbb R^n$ to $P y \in \mathbb R^n$.
 
 [This reference](https://en.wikipedia.org/wiki/Linear_map#Matrices) is useful.
 
-**Theorem.** Let the columns of $n \times k$ matrix $X$ form a basis of $S$.  Then
+```{prf:theorem} 
+:label: proj_matrix
+
+Let the columns of $n \times k$ matrix $X$ form a basis of $S$.  Then
 
 $$
 P = X (X'X)^{-1} X'
 $$
+```
 
-Proof: Given arbitrary $y \in \mathbb R^n$ and $P = X (X'X)^{-1} X'$, our claim is that
+```{prf:proof} 
+Given arbitrary $y \in \mathbb R^n$ and $P = X (X'X)^{-1} X'$, our claim is that
 
 1. $P y \in S$, and
 2. $y - P y \perp S$
@@ -367,28 +387,29 @@ y]
 $$
 
 The proof is now complete.
+```
 
-### Starting with the Basis
+### Starting with the basis
 
 It is common in applications to start with $n \times k$ matrix $X$  with linearly independent columns and let
 
 $$
-S := \mathop{\mathrm{span}} X := \mathop{\mathrm{span}} \{\col_1 X, \ldots, \col_k X \}
+S := \mathop{\mathrm{span}} X := \mathop{\mathrm{span}} \{\mathop{\mathrm{col}}_1 X, \ldots, \mathop{\mathrm{col}}_k X \}
 $$
 
 Then the columns of $X$ form a basis of $S$.
 
-From the preceding theorem, $P = X (X' X)^{-1} X' y$ projects $y$ onto $S$.
+From the {prf:ref}`proj_matrix`, $P = X (X' X)^{-1} X' y$ projects $y$ onto $S$.
 
 In this context, $P$ is often called the **projection matrix**
 
 * The matrix $M = I - P$ satisfies $M y = \hat E_{S^{\perp}} y$ and is sometimes called the **annihilator matrix**.
 
-### The Orthonormal Case
+### The orthonormal case
 
 Suppose that $U$ is $n \times k$ with orthonormal columns.
 
-Let $u_i := \mathop{\mathrm{col}} U_i$ for each $i$, let $S := \mathop{\mathrm{span}} U$ and let $y \in \mathbb R^n$.
+Let $u_i := \mathop{\mathrm{col}}_i U$ for each $i$, let $S := \mathop{\mathrm{span}} U$ and let $y \in \mathbb R^n$.
 
 We know that the projection of $y$ onto $S$ is
 
@@ -409,13 +430,13 @@ $$
 We have recovered our earlier result about projecting onto the span of an orthonormal
 basis.
 
-### Application: Overdetermined Systems of Equations
+### Application: overdetermined systems of equations
 
 Let $y \in \mathbb R^n$ and let $X$ be $n \times k$ with linearly independent columns.
 
 Given $X$ and $y$, we seek $b \in \mathbb R^k$ that  satisfies the system of linear equations $X b = y$.
 
-If $n > k$ (more equations than unknowns), then $b$ is said to be **overdetermined**.
+If $n > k$ (more equations than unknowns), then the system is said to be **overdetermined**.
 
 Intuitively, we may not be able to find a $b$ that satisfies all $n$ equations.
 
@@ -428,15 +449,19 @@ By approximate solution, we mean a $b \in \mathbb R^k$ such that $X b$ is  close
 
 The next theorem shows that a best approximation is well defined and unique.
 
-The proof uses the OPT.
+The proof uses the {prf:ref}`opt`.
 
-**Theorem** The unique minimizer of  $\| y - X b \|$ over $b \in \mathbb R^K$ is
+```{prf:theorem} 
+
+The unique minimizer of  $\| y - X b \|$ over $b \in \mathbb R^k$ is
 
 $$
 \hat \beta := (X' X)^{-1} X' y
 $$
+```
 
-Proof:  Note that
+```{prf:proof}  
+Note that
 
 $$
 X \hat \beta = X (X' X)^{-1} X' y =
@@ -454,20 +479,21 @@ Because $Xb \in \mathop{\mathrm{span}}(X)$
 
 $$
 \| y - X \hat \beta \|
-\leq \| y - X b \| \text{ for any } b \in \mathbb R^K
+\leq \| y - X b \| \text{ for any } b \in \mathbb R^k
 $$
 
 This is what we aimed to show.
+```
 
-## Least Squares Regression
+## Least squares regression
 
 Let's apply the theory of orthogonal projection to least squares regression.
 
-This approach provides insights about  many geometric  properties of linear regression.
+This approach provides insights about many geometric properties of linear regression.
 
 We treat only some examples.
 
-### Squared Risk Measures
+### Squared risk measures
 
 Given pairs $(x, y) \in \mathbb R^K \times \mathbb R$, consider choosing $f \colon \mathbb R^K \to \mathbb R$ to minimize
 the **risk**
@@ -592,15 +618,17 @@ Here are some more standard definitions:
 * The **sum of squared residuals** is $:= \| \hat u \|^2$.
 * The **explained sum of squares** is $:= \| \hat y \|^2$.
 
-> TSS = ESS + SSR
+$$
+\text{TSS} = \text{ESS} + \text{SSR}
+$$
 
-We can prove this easily using the OPT.
+We can prove this easily using the {prf:ref}`opt`.
 
-From the OPT we have $y =  \hat y + \hat u$ and $\hat u \perp \hat y$.
+From the {prf:ref}`opt` we have $y =  \hat y + \hat u$ and $\hat u \perp \hat y$.
 
 Applying the Pythagorean law completes the proof.
 
-## Orthogonalization and Decomposition
+## Orthogonalization and decomposition
 
 Let's return to the connection between linear independence and orthogonality touched on above.
 
@@ -609,9 +637,11 @@ A result of much interest is a famous algorithm for constructing orthonormal set
 The next section gives details.
 
 (gram_schmidt)=
-### Gram-Schmidt Orthogonalization
+### Gram-Schmidt orthogonalization
 
-**Theorem** For each linearly independent set $\{x_1, \ldots, x_k\} \subset \mathbb R^n$, there exists an
+```{prf:theorem} 
+
+For each linearly independent set $\{x_1, \ldots, x_k\} \subset \mathbb R^n$, there exists an
 orthonormal set $\{u_1, \ldots, u_k\}$ with
 
 $$
@@ -620,6 +650,7 @@ $$
 \quad \text{for} \quad
 i = 1, \ldots, k
 $$
+```
 
 The **Gram-Schmidt orthogonalization** procedure constructs an orthogonal set $\{ u_1, u_2, \ldots, u_n\}$.
 
@@ -635,20 +666,23 @@ A Gram-Schmidt orthogonalization construction is a key idea behind the Kalman fi
 
 In some exercises below, you are asked to implement this algorithm and test it using projection.
 
-### QR Decomposition
+### QR decomposition
 
 The following result uses the preceding algorithm to produce a useful decomposition.
 
-**Theorem** If $X$ is $n \times k$ with linearly independent columns, then there exists a factorization $X = Q R$ where
+```{prf:theorem} 
+
+If $X$ is $n \times k$ with linearly independent columns, then there exists a factorization $X = Q R$ where
 
 * $R$ is $k \times k$, upper triangular, and nonsingular
 * $Q$ is $n \times k$ with orthonormal columns
+```
 
-Proof sketch: Let
+```{prf:proof} Let
 
-* $x_j := \col_j (X)$
+* $x_j := \mathop{\mathrm{col}}_j (X)$
 * $\{u_1, \ldots, u_k\}$ be orthonormal with the same span as $\{x_1, \ldots, x_k\}$ (to be constructed using Gram--Schmidt)
-* $Q$ be formed from cols $u_i$
+* $Q$ be formed from columns $u_i$
 
 Since $x_j \in \mathop{\mathrm{span}}\{u_1, \ldots, u_j\}$, we have
 
@@ -658,8 +692,9 @@ x_j = \sum_{i=1}^j \langle u_i, x_j  \rangle u_i
 $$
 
 Some rearranging gives $X = Q R$.
+```
 
-### Linear Regression via QR Decomposition
+### Linear regression via QR decomposition
 
 For matrices $X$ and $y$ that overdetermine $\beta$ in the linear
 equation system $y = X \beta$, we found  the least squares approximator $\hat \beta = (X' X)^{-1} X' y$.
@@ -671,10 +706,11 @@ $$
     \hat \beta
     & = (R'Q' Q R)^{-1} R' Q' y \\
     & = (R' R)^{-1} R' Q' y \\
-    & = R^{-1} (R')^{-1} R' Q' y
-        = R^{-1} Q' y
+    & = R^{-1} Q' y
 \end{aligned}
 $$
+
+where the last step uses the fact that $(R' R)^{-1} R' = R^{-1}$ since $R$ is nonsingular.
 
 Numerical routines would in this case use the alternative form $R \hat \beta = Q' y$ and back substitution.
 
@@ -713,9 +749,13 @@ intuition as to why they should be idempotent?
 ```
 
 Symmetry and idempotence of $M$ and $P$ can be established
-using standard rules for matrix algebra. The intuition behind
+using standard rules for matrix algebra. 
+
+The intuition behind
 idempotence of $M$ and $P$ is that both are orthogonal
-projections. After a point is projected into a given subspace, applying
+projections. 
+
+After a point is projected into a given subspace, applying
 the projection again makes no difference (A point inside the subspace
 is not shifted by orthogonal projection onto that space because it is
 already the closest point in the subspace to itself).
@@ -788,21 +828,21 @@ def gram_schmidt(X):
     U = np.empty((n, k))
     I = np.eye(n)
 
-    # The first col of U is just the normalized first col of X
-    v1 = X[:,0]
+    # The first column of U is just the normalized first column of X
+    v1 = X[:, 0]
     U[:, 0] = v1 / np.sqrt(np.sum(v1 * v1))
 
     for i in range(1, k):
         # Set up
         b = X[:, i]       # The vector we're going to project
-        Z = X[:, 0:i]     # First i-1 columns of X
+        Z = X[:, :i]      # First i-1 columns of X
 
-        # Project onto the orthogonal complement of the col span of Z
+        # Project onto the orthogonal complement of the columns span of Z
         M = I - Z @ np.linalg.inv(Z.T @ Z) @ Z.T
         u = M @ b
 
         # Normalize
-        U[:, i] = u / np.sqrt(np.sum(u * u))
+        U[:, i] = u / np.sqrt(u @ u)
 
     return U
 ```

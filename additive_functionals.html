@@ -74,7 +74,7 @@
     <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
     <link rel="stylesheet" type="text/css" href="_static/proof.css" />
@@ -168,8 +168,8 @@
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">31.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-particular-additive-functional">31.2. A Particular Additive Functional</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-state-space-representation">31.2.1. Linear State-Space Representation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-particular-additive-functional">31.2. A particular additive functional</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-state-space-representation">31.2.1. Linear state-space representation</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamics">31.3. Dynamics</a><ul class="nav section-nav flex-column">
@@ -181,14 +181,14 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">31.4. Code</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#associated-multiplicative-functional">31.4.1. Associated Multiplicative Functional</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#peculiar-large-sample-property">31.4.2. Peculiar Large Sample Property</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#associated-multiplicative-functional">31.4.1. Associated multiplicative functional</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#peculiar-large-sample-property">31.4.2. Peculiar large sample property</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-about-the-multiplicative-martingale">31.5. More About the Multiplicative Martingale</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-multiplicative-martingale-again">31.5.1. Simulating a Multiplicative Martingale Again</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-paths">31.5.2. Sample Paths</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplicative-martingale-as-likelihood-ratio-process">31.5.3. Multiplicative Martingale as Likelihood Ratio Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-about-the-multiplicative-martingale">31.5. More about the multiplicative martingale</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-multiplicative-martingale-again">31.5.1. Simulating a multiplicative martingale again</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-paths">31.5.2. Sample paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplicative-martingale-as-likelihood-ratio-process">31.5.3. Multiplicative martingale as likelihood ratio process</a></li>
 </ul>
 </li>
 </ul>
@@ -260,13 +260,13 @@
 </pre></div>
 </div>
 </div>
-<details class="hide below-input">
+<details class="admonition hide below-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell output</span>
-<span class="expanded">Hide code cell output</span>
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.8.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (0.10.1)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (0.60.0)
@@ -274,12 +274,12 @@ Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (2.32.3)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.1)
 Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from quantecon) (1.13.2)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
+Requirement already satisfied: llvmlite&lt;0.44,&gt;=0.43.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.43.0)
 Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.3.2)
 Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (3.7)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2.2.3)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from requests-&gt;quantecon) (2024.8.30)
 Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.12/site-packages (from sympy-&gt;quantecon) (1.3.0)
 </pre></div>
@@ -325,7 +325,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </div>
 </section>
 <section id="a-particular-additive-functional">
-<h2><span class="section-number">31.2. </span>A Particular Additive Functional<a class="headerlink" href="#a-particular-additive-functional" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.2. </span>A particular additive functional<a class="headerlink" href="#a-particular-additive-functional" title="Permalink to this heading">#</a></h2>
 <p><span id="id4">[<a class="reference internal" href="zreferences.html#id243" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span> describes a general class of additive functionals.</p>
 <p>This lecture focuses on a subclass of these: a scalar process <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> whose increments are driven by a Gaussian vector autoregression.</p>
 <p>Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
@@ -356,7 +356,7 @@ initial condition for <span class="math notranslate nohighlight">\(y\)</span>.</
 <p>The nonstationary random process <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> displays
 systematic but random <em>arithmetic growth</em>.</p>
 <section id="linear-state-space-representation">
-<h3><span class="section-number">31.2.1. </span>Linear State-Space Representation<a class="headerlink" href="#linear-state-space-representation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">31.2.1. </span>Linear state-space representation<a class="headerlink" href="#linear-state-space-representation" title="Permalink to this heading">#</a></h3>
 <p>A convenient way to represent our additive functional is to use a <a class="reference external" href="https://python-intro.quantecon.org/linear_models.html">linear state space system</a>.</p>
 <p>To do this, we set up state and observation vectors</p>
 <div class="math notranslate nohighlight">
@@ -921,7 +921,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/76aef2f6d05f33ecaf2b0b14de8aefee9b809849ad6009cb778cb29843a6ec5e.png" src="_images/76aef2f6d05f33ecaf2b0b14de8aefee9b809849ad6009cb778cb29843a6ec5e.png" />
+<img alt="_images/82b7f5475f52c3bf00c9041f04e2f0bf27aea6f72b9ab478a5eed4c49e4de1c2.png" src="_images/82b7f5475f52c3bf00c9041f04e2f0bf27aea6f72b9ab478a5eed4c49e4de1c2.png" />
 </div>
 </div>
 <p>Notice the irregular but persistent growth in <span class="math notranslate nohighlight">\(y_t\)</span>.</p>
@@ -1065,7 +1065,7 @@ you will generate (modulo randomness) the plot</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5f3f265296b2a5900712c2eee576e7df388c3d04858d53246183b8aae575a05d.png" src="_images/5f3f265296b2a5900712c2eee576e7df388c3d04858d53246183b8aae575a05d.png" />
+<img alt="_images/8b2c414085a43781897bbcdeeb83f9591f25790a13dbd25baf769a6cea20a197.png" src="_images/8b2c414085a43781897bbcdeeb83f9591f25790a13dbd25baf769a6cea20a197.png" />
 </div>
 </div>
 <p>When we plot multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plot the population 95% probability coverage sets computed using the LinearStateSpace class.</p>
@@ -1078,7 +1078,7 @@ you will generate (modulo randomness) the plot</p>
 constant band</p></li>
 </ul>
 <section id="associated-multiplicative-functional">
-<h3><span class="section-number">31.4.1. </span>Associated Multiplicative Functional<a class="headerlink" href="#associated-multiplicative-functional" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">31.4.1. </span>Associated multiplicative functional<a class="headerlink" href="#associated-multiplicative-functional" title="Permalink to this heading">#</a></h3>
 <p>Where <span class="math notranslate nohighlight">\(\{y_t\}\)</span> is our additive functional, let <span class="math notranslate nohighlight">\(M_t = \exp(y_t)\)</span>.</p>
 <p>As mentioned above, the process <span class="math notranslate nohighlight">\(\{M_t\}\)</span> is called a <strong>multiplicative functional</strong>.</p>
 <p>Corresponding to the additive decomposition described above we have a multiplicative decomposition of  <span class="math notranslate nohighlight">\(M_t\)</span></p>
@@ -1116,7 +1116,7 @@ obtain the graph in the next cell.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ec0f26f79c6b18b0ecfffefbab02ba282d78ed5c9eebb5243c65d4749e3a3cf3.png" src="_images/ec0f26f79c6b18b0ecfffefbab02ba282d78ed5c9eebb5243c65d4749e3a3cf3.png" />
+<img alt="_images/c6a634a16700ae9df166747b73e4cc557d3c2d112400c129094a5aa21b1454f1.png" src="_images/c6a634a16700ae9df166747b73e4cc557d3c2d112400c129094a5aa21b1454f1.png" />
 </div>
 </div>
 <p>As before, when we plotted multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plotted population 95% confidence bands computed using the LinearStateSpace class.</p>
@@ -1128,7 +1128,7 @@ for a limited horizon <span class="math notranslate nohighlight">\(T\)</span>.</
 <p>Let’s see what happens when we set <span class="math notranslate nohighlight">\(T = 12000\)</span> instead of <span class="math notranslate nohighlight">\(150\)</span>.</p>
 </section>
 <section id="peculiar-large-sample-property">
-<h3><span class="section-number">31.4.2. </span>Peculiar Large Sample Property<a class="headerlink" href="#peculiar-large-sample-property" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">31.4.2. </span>Peculiar large sample property<a class="headerlink" href="#peculiar-large-sample-property" title="Permalink to this heading">#</a></h3>
 <p>Hansen and Sargent <span id="id9">[<a class="reference internal" href="zreferences.html#id244" title="Lars Peter Hansen and Thomas J. Sargent. Risk, uncertainty, and value. University of Chicago and NYU manuscript, 2024.">Hansen and Sargent, 2024</a>]</span> (ch. 8) describe the following two properties of the  martingale component
 <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> of the multiplicative decomposition</p>
 <ul class="simple">
@@ -1159,7 +1159,7 @@ zero almost surely</p></li>
 </section>
 </section>
 <section id="more-about-the-multiplicative-martingale">
-<h2><span class="section-number">31.5. </span>More About the Multiplicative Martingale<a class="headerlink" href="#more-about-the-multiplicative-martingale" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">31.5. </span>More about the multiplicative martingale<a class="headerlink" href="#more-about-the-multiplicative-martingale" title="Permalink to this heading">#</a></h2>
 <p>Let’s drill down and study probability distribution of the multiplicative martingale  <span class="math notranslate nohighlight">\(\{\widetilde M_t\}_{t=0}^\infty\)</span>  in
 more detail.</p>
 <p>As we  have seen, it has representation</p>
@@ -1170,7 +1170,7 @@ more detail.</p>
 <p>where <span class="math notranslate nohighlight">\(H =  [F + D(I-A)^{-1} B]\)</span>.</p>
 <p>It follows that <span class="math notranslate nohighlight">\(\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2}, t H \cdot H )\)</span> and that consequently <span class="math notranslate nohighlight">\({\widetilde M}_t\)</span> is log normal.</p>
 <section id="simulating-a-multiplicative-martingale-again">
-<h3><span class="section-number">31.5.1. </span>Simulating a Multiplicative Martingale Again<a class="headerlink" href="#simulating-a-multiplicative-martingale-again" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">31.5.1. </span>Simulating a multiplicative martingale again<a class="headerlink" href="#simulating-a-multiplicative-martingale-again" title="Permalink to this heading">#</a></h3>
 <p>Next, we want a program to simulate the likelihood ratio process <span class="math notranslate nohighlight">\(\{ \tilde{M}_t \}_{t=0}^\infty\)</span>.</p>
 <p>In particular, we want to simulate 5000 sample paths of length <span class="math notranslate nohighlight">\(T\)</span> for the case in which <span class="math notranslate nohighlight">\(x\)</span> is a scalar and
 <span class="math notranslate nohighlight">\([A, B, D, F] = [0.8, 0.001, 1.0, 0.01]\)</span> and <span class="math notranslate nohighlight">\(\nu = 0.005\)</span>.</p>
@@ -1178,7 +1178,7 @@ more detail.</p>
 <p>Here is code that accomplishes these tasks.</p>
 </section>
 <section id="sample-paths">
-<h3><span class="section-number">31.5.2. </span>Sample Paths<a class="headerlink" href="#sample-paths" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">31.5.2. </span>Sample paths<a class="headerlink" href="#sample-paths" title="Permalink to this heading">#</a></h3>
 <p>Let’s write a program to simulate sample paths of <span class="math notranslate nohighlight">\(\{ x_t, y_{t} \}_{t=0}^{\infty}\)</span>.</p>
 <p>We’ll do this by formulating the additive functional as a linear state space model and putting the <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py">LinearStateSpace</a> class to work.</p>
 <div class="cell docutils container">
@@ -1466,7 +1466,7 @@ even as most mass in the distribution of <span class="math notranslate nohighlig
 </ul>
 </section>
 <section id="multiplicative-martingale-as-likelihood-ratio-process">
-<h3><span class="section-number">31.5.3. </span>Multiplicative Martingale as Likelihood Ratio Process<a class="headerlink" href="#multiplicative-martingale-as-likelihood-ratio-process" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">31.5.3. </span>Multiplicative martingale as likelihood ratio process<a class="headerlink" href="#multiplicative-martingale-as-likelihood-ratio-process" title="Permalink to this heading">#</a></h3>
 <p><a class="reference external" href="https://python.quantecon.org/likelihood_ratio_process.html">This lecture</a> studies <strong>likelihood processes</strong>
 and <strong>likelihood ratio processes</strong>.</p>
 <p>A <strong>likelihood ratio process</strong> is  a  multiplicative  martingale with mean unity.</p>
