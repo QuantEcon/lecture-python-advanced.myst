@@ -68,7 +68,7 @@ from quantecon import compute_fixed_point
 from quantecon.markov import DiscreteDP
 ```
 
-### How to Read this Lecture
+### How to read this lecture
 
 We use dynamic programming many applied lectures, such as
 
@@ -157,7 +157,7 @@ The aim is to find an optimal policy, in the sense of one that maximizes {eq}`dp
 
 Let's now step through these ideas more carefully.
 
-### Formal Definition
+### Formal definition
 
 Formally, a discrete dynamic program consists of the following components:
 
@@ -212,7 +212,7 @@ Notice that we're not really distinguishing between functions from $S$ to $\math
 
 This is natural because they are in one to one correspondence.
 
-### Value and Optimality
+### Value and optimality
 
 Let $v_{\sigma}(s)$ denote the discounted sum of expected reward flows from policy $\sigma$
 when the initial state is $s$.
@@ -251,7 +251,7 @@ $$
 
 As discussed in detail below, optimal policies are precisely those that are $v^*$-greedy.
 
-### Two Operators
+### Two operators
 
 It is useful to define the following operators:
 
@@ -293,7 +293,7 @@ For any policy $\sigma$, its value $v_{\sigma}$ is the unique fixed point of $T_
 
 For proofs of these results and those in the next section, see, for example, [EDTC](http://johnstachurski.net/edtc.html), chapter 10.
 
-### The Bellman Equation and the Principle of Optimality
+### The Bellman equation and the principle of optimality
 
 The main principle of the theory of dynamic programming is that
 
@@ -321,7 +321,7 @@ $$
 \qquad (s \in S)
 $$
 
-## Solving Discrete DPs
+## Solving discrete DPs
 
 Now that the theory has been set out, let's turn to solution methods.
 
@@ -335,7 +335,7 @@ It implements the three most important solution methods for discrete dynamic pro
 
 Let's briefly review these algorithms and their implementation.
 
-### Value Function Iteration
+### Value function iteration
 
 Perhaps the most familiar method for solving all manner of dynamic programs is value function iteration.
 
@@ -345,7 +345,7 @@ Hence, iterative application of $T$ to any initial function $v^0 \colon S \to \m
 
 The details of the algorithm can be found in {ref}`the appendix <ddp_algorithms>`.
 
-### Policy Function Iteration
+### Policy function iteration
 
 This routine, also known as Howard's policy improvement algorithm, exploits more closely the particular structure of a discrete DP problem.
 
@@ -360,7 +360,7 @@ In the current setting, policy iteration computes an exact optimal policy in fin
 
 The details of the algorithm can be found in {ref}`the appendix <ddp_algorithms>`.
 
-### Modified Policy Function Iteration
+### Modified policy function iteration
 
 Modified policy iteration replaces the policy evaluation step in policy iteration with "partial policy evaluation".
 
@@ -371,7 +371,7 @@ This approach can be useful when the state space is very large and the linear sy
 The details of the algorithm can be found in {ref}`the appendix <ddp_algorithms>`.
 
 (ddp_eg_gm)=
-## Example: A Growth Model
+## Example: A growth model
 
 Let's consider a simple consumption-saving model.
 
@@ -396,7 +396,7 @@ $$
 
 The discount factor is $\beta \in [0, 1)$.
 
-### Discrete DP Representation
+### Discrete DP representation
 
 We want to represent this model in the format of a discrete dynamic program.
 
@@ -422,7 +422,7 @@ Q(s, a, s') :=
 \end{cases}
 ```
 
-### Defining a DiscreteDP Instance
+### Defining a DiscreteDP instance
 
 This information will be used to create an instance of DiscreteDP by passing
 the following information
@@ -567,7 +567,7 @@ If we look at the bar graph we can see the rightward shift in probability mass
 :scale: 70%
 ```
 
-### State-Action Pair Formulation
+### State-action pair formulation
 
 The `DiscreteDP` class in fact, provides a second interface to set up an instance.
 
@@ -714,7 +714,7 @@ Here we intensively vectorized the operations on arrays to simplify the code.
 
 As [noted](https://python-programming.quantecon.org/need_for_speed.html#numba-p-c-vectorization), however, vectorization is memory consumptive, and it can be prohibitively so for grids with large size.
 
-### Solving the Model
+### Solving the model
 
 Solve the dynamic optimization problem:
 
@@ -810,11 +810,11 @@ The value function is monotone:
 (np.diff(v) > 0).all()
 ```
 
-### Comparison of the Solution Methods
+### Comparison of the solution methods
 
 Let us solve the problem with the other two methods.
 
-#### Value Iteration
+#### Value iteration
 
 ```{code-cell} python3
 ddp.epsilon = 1e-4
@@ -827,7 +827,7 @@ res1.num_iter
 np.array_equal(σ, res1.sigma)
 ```
 
-#### Modified Policy Iteration
+#### Modified policy iteration
 
 ```{code-cell} python3
 res2 = ddp.solve(method='modified_policy_iteration')
@@ -838,7 +838,7 @@ res2.num_iter
 np.array_equal(σ, res2.sigma)
 ```
 
-#### Speed Comparison
+#### Speed comparison
 
 ```{code-cell} python3
 %timeit ddp.solve(method='value_iteration')
@@ -849,11 +849,11 @@ np.array_equal(σ, res2.sigma)
 As is often the case, policy iteration and modified policy iteration are
 much faster than value iteration.
 
-### Replication of the Figures
+### Replication of the figures
 
 Using `DiscreteDP` we replicate the figures shown in the lecture.
 
-#### Convergence of Value Iteration
+#### Convergence of value iteration
 
 Let us first visualize the convergence of the value iteration algorithm
 as in the lecture, where we use `ddp.bellman_operator` implemented as
@@ -905,7 +905,7 @@ for i, n in enumerate((2, 4, 6)):
 plt.show()
 ```
 
-#### Dynamics of the Capital Stock
+#### Dynamics of the capital stock
 
 Finally, let us work on [Exercise
 2](https://python.quantecon.org/optgrowth.html#exercises), where we plot
@@ -942,7 +942,7 @@ plt.show()
 ```
 
 (ddp_algorithms)=
-## Appendix: Algorithms
+## Appendix: algorithms
 
 This appendix covers the details of the solution algorithms implemented for `DiscreteDP`.
 
@@ -951,7 +951,7 @@ We will make use of the following notions of approximate optimality:
 * For $\varepsilon > 0$, $v$ is called an  $\varepsilon$-approximation of $v^*$ if $\lVert v - v^*\rVert < \varepsilon$.
 * A policy $\sigma \in \Sigma$ is called $\varepsilon$-optimal if $v_{\sigma}$ is an $\varepsilon$-approximation of $v^*$.
 
-### Value Iteration
+### Value iteration
 
 The `DiscreteDP` value iteration method implements value function iteration as
 follows
@@ -970,7 +970,7 @@ Given $\varepsilon > 0$, the value iteration algorithm
 (While not explicit, in the actual implementation each algorithm is
 terminated if the number of iterations reaches `iter_max`)
 
-### Policy Iteration
+### Policy iteration
 
 The `DiscreteDP` policy iteration method runs as follows
 
@@ -989,7 +989,7 @@ iterations.
 
 It returns an optimal value function and an optimal policy function (unless `iter_max` is reached).
 
-### Modified Policy Iteration
+### Modified policy iteration
 
 The `DiscreteDP` modified policy iteration method runs as follows:
 

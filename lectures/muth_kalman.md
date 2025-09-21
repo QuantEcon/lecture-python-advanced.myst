@@ -95,7 +95,7 @@ The lecture [First Look at Kalman Filter](https://python-intro.quantecon.org/kal
 
 We'll use limiting versions of the Kalman filter corresponding to what are called **stationary values** in that lecture.
 
-## A Process for Which Adaptive Expectations are Optimal
+## A process for which adaptive expectations are optimal
 
 Suppose that an observable $y_t$ is the sum of an unobserved
 random walk $x_t$ and an IID shock $\epsilon_{2,t}$:
@@ -184,7 +184,7 @@ Ak, Ck, Gk, Hk = A, K1, G, 1
 ssk = LinearStateSpace(Ak, Ck, Gk, Hk, mu_0=x_hat_0)
 ```
 
-## Some Useful State-Space Math
+## Some useful state-space math
 
 Now we want to map the time-invariant innovations representation {eq}`innovations` and
 the original state-space system {eq}`state-space` into a convenient form for deducing
@@ -266,7 +266,7 @@ $\hat{x_t}$, and $y_t$.
 We can now investigate how these
 variables are related by plotting some key objects.
 
-## Estimates of Unobservables
+## Estimates of unobservables
 
 First, let’s plot the hidden state $x_t$ and the filtered version
 $\hat x_t$ that is linear-least squares projection of $x_t$
@@ -287,7 +287,7 @@ Note how $x_t$ and $\hat{x_t}$ differ.
 For Friedman, $\hat x_t$ and not $x_t$ is the consumer’s
 idea about her/his *permanent income*.
 
-## Relationship of Unobservables to Observables
+## Relationship of unobservables to observables
 
 Now let’s plot $x_t$ and $y_t$.
 
@@ -320,7 +320,7 @@ ax.set_xlabel("Time")
 plt.show()
 ```
 
-## MA and AR Representations
+## MA and AR representations
 
 Now we shall extract from the `Kalman` instance `kmuth` coefficients of
 

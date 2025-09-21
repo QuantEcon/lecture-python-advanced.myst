@@ -55,7 +55,7 @@ our    timing protocol.
 
 
 
-## Model Components
+## Model components
 
 We'll start with a brief review of the setup.  
 
@@ -133,7 +133,7 @@ makes  timing protocols matter for modeling optimal government policies.
 Quantecon lecture {doc}`calvo` used this  insight to  simplify   analysis of alternative  government policy problems.
 
 
-## Another  Timing Protocol
+## Another timing protocol
 
 The Quantecon lecture {doc}`calvo`  considered three  models of government policy making that  differ in
 
@@ -182,7 +182,7 @@ In this version of our model
 - at each $t$, the government chooses $\mu_t$ to maximize
   a continuation discounted utility.
 
-### Government Decisions
+### Government decisions
 
 $\vec \mu$ is chosen by a sequence of government
 decision makers, one for each $t \geq 0$.
@@ -214,7 +214,7 @@ for each $t \geq 0$:
   expect an associated $\theta_0^A$ for $t+1$. Here $\vec \mu^A = \{\mu_j^A \}_{j=0}^\infty$ is
   an alternative government plan to be described below.
 
-### Temptation to Deviate from Plan
+### Temptation to deviate from plan
 
 The government's one-period return function $s(\theta,\mu)$
 described in equation {eq}`eq_old6` in quantecon lecture {cite}`Calvo1978`  has the property that for all
@@ -240,7 +240,7 @@ If the government at $t$ is to resist the temptation to raise its
 current payoff, it is only because it forecasts adverse  consequences that
 its setting of $\mu_t$ would bring for continuation  government payoffs via  alterations  in the private sector's expectations.
 
-## Sustainable or Credible Plan
+## Sustainable or credible plan
 
 We call a plan $\vec \mu$ **sustainable** or **credible** if at
 each $t \geq 0$ the government chooses to confirm private
@@ -294,7 +294,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 ```
 
-### Abreu's Self-Enforcing Plan
+### Abreu's self-enforcing plan
 
 A plan $\vec \mu^A$ (here the superscipt $A$ is for Abreu) is said to be **self-enforcing** if
 
@@ -359,7 +359,7 @@ agents' expectation.
 We shall use a construction featured in Abreu ({cite}`Abreu`) to construct a
 self-enforcing plan with low time $0$ value.
 
-### Abreu's Carrot-Stick Plan
+### Abreu's carrot-stick plan
 
 {cite}`Abreu` invented a way to create a self-enforcing plan with a low
 initial value.
@@ -518,7 +518,7 @@ Let's create an instance of ChangLQ with the following parameters:
 clq = ChangLQ(β=0.85, c=2)
 ```
 
-### Example of Self-Enforcing Plan
+### Example of self-enforcing plan
 
 The following example implements an Abreu stick-and-carrot plan.
 
@@ -634,7 +634,7 @@ def check_ramsey(clq, T=1000):
 check_ramsey(clq)
 ```
 
-### Recursive Representation of a Sustainable Plan
+### Recursive representation of a sustainable plan
 
 We can represent a sustainable plan recursively by taking the
 continuation value $v_t$ as a state variable.
@@ -665,7 +665,7 @@ depends on whether the government at $t$ confirms the representative agent's
 expectations by setting $\mu_t$ equal to the recommended value
 $\hat \mu_t$, or whether it disappoints those expectations.
 
-## Whose  Plan is It?
+## Whose plan is it?
 
 A credible government plan $\vec \mu$ plays multiple roles.
 

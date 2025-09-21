@@ -58,7 +58,7 @@ For background and basic  concepts about linear least squares projections, see o
 
 As a sequel to the material here, please see our lecture [two modifications of mean-variance portfolio theory](https://python-advanced.quantecon.org/black_litterman.html).
 
-## Key Equation
+## Key equation
 
 We  begin with a **key asset pricing equation**:
 
@@ -96,7 +96,7 @@ the stochastic discount factor is unique.
 In **incomplete markets** models like those illustrated in this lecture [the Aiyagari model](https://python.quantecon.org/aiyagari.html), the stochastic discount factor is not unique.
 
 
-## Implications of Key Equation
+## Implications of key equation
 
 
 We combine  key equation {eq}`eq:EMR1` with a  remark of Lars Peter Hansen that   "asset pricing theory is all about covariances".
@@ -166,7 +166,7 @@ $$ (eq:EMR3)
 Equation {eq}`eq:EMR3` can be rearranged to display important parts of asset pricing theory.
 
 
-## Expected Return - Beta Representation
+## Expected return - beta representation
 
 We can obtain the celebrated **expected-return-Beta -representation** for gross return $R^i$  by simply  rearranging excess return equation {eq}`eq:EMR3` to become
 
@@ -283,7 +283,7 @@ An asset with an $R^i$ that is **low** when consumption growth is **low** has $\
 
 
 
-## Mean-Variance Frontier
+## Mean-variance frontier
 
 Now we'll derive the celebrated **mean-variance frontier**.
 
@@ -421,7 +421,7 @@ $$
 This is a measure of the part of the risk in $R^j$ that is not priced because it is  uncorrelated with the stochastic discount factor and so can be diversified away (i.e., averaged out to zero by holding a diversified portfolio).
 
 
-## Sharpe Ratios and the Price of Risk
+## Sharpe ratios and the price of risk
 
 An asset's **Sharpe ratio** is defined as
 
@@ -441,7 +441,7 @@ The ratio $\frac{\sigma(m)}{E m} $ is often called the **market price of risk**.
 Evidently it equals the maximum Sharpe ratio for any asset or portfolio of assets.
 
 
-## Mathematical Structure of Frontier
+## Mathematical structure of frontier
 
 The mathematical  structure of the mean-variance frontier described by inequality {eq}`eq:ERM6` implies
 that
@@ -479,7 +479,7 @@ $$ (eq:EMR7)
 
 +++
 
-## Multi-factor Models
+## Multi-factor models
 
 The single-beta representation  {eq}`eq:EMR7` is a special case of the multi-factor model
 
@@ -514,7 +514,7 @@ As a reminder, model objects are interpreted as follows:
 
    * $\lambda_{a}$ is the  price of exposure to risk factor $f_a$
 
-## Empirical Implementations
+## Empirical implementations
 
 We briefly describe empirical implementations of multi-factor generalizations of the single-factor model described above.
 

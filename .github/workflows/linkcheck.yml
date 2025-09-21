@@ -13,7 +13,7 @@ jobs:
     steps:
       # Checkout the live site (html)
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: gh-pages
       - name: Link Checker
@@ -21,7 +21,8 @@ jobs:
         uses: lycheeverse/lychee-action@v2
         with:
           fail: false
-          args: --accept 403,503 **/*.html
+          # Configuration is now specified in lychee.toml file
+          args: **/*.html
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0
         uses: peter-evans/create-issue-from-file@v5

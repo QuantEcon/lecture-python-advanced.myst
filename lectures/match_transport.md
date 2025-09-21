@@ -182,7 +182,7 @@ N_agents_per_side = 60
 
 np.random.seed(1)
 
-## Genetate random types
+## Generate random types
 # generate random support for distributions of types
 support_size = 50
 random_support = np.unique(np.random.uniform(0,200, size=support_size))
@@ -1657,7 +1657,7 @@ example_3.plot_matching(matching_NAM, title = 'NAM',
 
 +++ {"user_expressions": []}
 
-## Dual Solution
+## Dual solution
 
 +++ {"user_expressions": []}
 
@@ -1833,7 +1833,7 @@ The algorithm to compute the dual variables has a hierarchical structure: it sta
 We can visualize the hierarchical structure by computing the order in which he pairs will be processed and plotting the matching with color of the arcs corresponding the hierarchy.
 
 ```{code-cell} ipython3
-## Compute Hierarchies
+## Compute hierarchies
 
 def find_hierarchies(subpairs):  
     
@@ -1866,7 +1866,7 @@ def find_hierarchies(subpairs):
 
     return hierarchies
 
-## Plot Hierarchies
+## Plot hierarchies
 
 def plot_hierarchies(self, subpairs, scatter=True, range_x_axis=None):
     # Compute hierarchies

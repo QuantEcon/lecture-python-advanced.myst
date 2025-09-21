@@ -51,7 +51,7 @@ Every ARMA process can be represented in [linear state space](https://python-int
 
 However, ARMA processes have some important structure that makes it valuable to study them separately.
 
-### {index}`Spectral Analysis <single: Spectral Analysis>`
+### {index}`Spectral analysis <single: Spectral Analysis>`
 
 Analysis in the frequency domain is also called spectral analysis.
 
@@ -65,7 +65,7 @@ Having a second representation of this important object
 
 The famous *Fourier transform* and its inverse are used to map between the two representations.
 
-### Other Reading
+### Other reading
 
 For supplementary reading, see
 
@@ -124,7 +124,7 @@ Throughout this lecture, we will work exclusively with zero-mean (i.e., $\mu = 0
 
 The zero-mean assumption costs nothing in terms of generality since working with non-zero-mean processes involves no more than adding a constant.
 
-### Example 1: {index}`White Noise <single: White Noise>`
+### Example 1: {index}`White noise <single: White Noise>`
 
 Perhaps the simplest class of covariance stationary processes is the white noise processes.
 
@@ -138,7 +138,7 @@ A process $\{ \epsilon_t \}$ is called a *white noise process* if
 White noise processes play the role of **building blocks** for processes with more complicated dynamics.
 
 (generalized_lps)=
-### Example 2: {index}`General Linear Processes <single: General Linear Processes>`
+### Example 2: {index}`General linear processes <single: General Linear Processes>`
 
 From the simple building block provided by white noise, we can construct a very flexible family of covariance stationary processes --- the *general linear processes*
 
@@ -170,7 +170,7 @@ By the [Cauchy-Schwartz inequality](https://en.wikipedia.org/wiki/Cauchy%E2%80%9
 
 Evidently, $\gamma(k)$ does not depend on $t$.
 
-### {index}`Wold Representation <single: Wold Representation>`
+### {index}`Wold representation <single: Wold Representation>`
 
 Remarkably, the class of general linear processes goes a long way towards
 describing the entire class of zero-mean covariance stationary processes.
@@ -268,7 +268,7 @@ The AR(1) can be generalized to an AR($p$) and likewise for the MA(1).
 
 Putting all of this together, we get the
 
-### {index}`ARMA <single: ARMA>` Processes
+### {index}`ARMA <single: ARMA>` processes
 
 A stochastic process $\{X_t\}$ is called an *autoregressive moving
 average process*, or ARMA($p,q$), if it can be written as
@@ -330,7 +330,7 @@ The sequence $\{\psi_t\}$ can be obtained by a recursive procedure outlined on p
 
 The function $t \mapsto \psi_t$ is often called the *impulse response function*.
 
-## {index}`Spectral Analysis <single: Spectral Analysis>`
+## {index}`Spectral analysis <single: Spectral Analysis>`
 
 Autocovariance functions provide a great deal of information about covariance stationary processes.
 
@@ -342,7 +342,7 @@ It turns out that there is an alternative representation of the autocovariance f
 
 At times, the spectral density is easier to derive, easier to manipulate, and provides additional intuition.
 
-### {index}`Complex Numbers <single: Complex Numbers>`
+### {index}`Complex numbers <single: Complex Numbers>`
 
 Before discussing the spectral density, we invite you to recall the main properties of complex numbers (or {ref}`skip to the next section <arma_specd>`).
 
@@ -375,7 +375,7 @@ $$
 where $x = r \cos(\omega), y = r \sin(\omega)$, and $\omega = \arctan(y/z)$ or $\tan(\omega) = y/x$.
 
 (arma_specd)=
-### {index}`Spectral Densities <single: Spectral Densities>`
+### {index}`Spectral densities <single: Spectral Densities>`
 
 Let $\{ X_t \}$ be a covariance stationary process with autocovariance function $\gamma$  satisfying $\sum_{k} \gamma(k)^2 < \infty$.
 
@@ -408,7 +408,7 @@ all of $\mathbb R$ --- the proof is an exercise.
 For this reason, it is standard to plot the spectral density only on the interval $[0, \pi]$.
 
 (arma_wnsd)=
-### Example 1: {index}`White Noise <single: White Noise>`
+### Example 1: {index}`White noise <single: White Noise>`
 
 Consider a white noise process $\{\epsilon_t\}$ with standard deviation $\sigma$.
 
@@ -458,7 +458,7 @@ The proof is elegant and can be found in many places --- see, for example, {cite
 
 It's a nice exercise to verify that {eq}`ma1_sd_ed` and {eq}`ar1_sd_ed` are indeed special cases of {eq}`arma_sd`.
 
-### Interpreting the {index}`Spectral Density <single: Spectral Density>`
+### Interpreting the {index}`spectral density <single: Spectral Density>`
 
 ```{index} single: Spectral Density; interpretation
 ```
@@ -590,7 +590,7 @@ plt.show()
 
 In summary, the spectral density is large at frequencies $\omega$ where the autocovariance function exhibits damped cycles.
 
-### Inverting the Transformation
+### Inverting the transformation
 
 ```{index} single: Spectral Density; Inverting the Transformation
 ```
@@ -611,7 +611,7 @@ This is convenient in situations where the spectral density is easier to calcula
 
 (For example, the expression {eq}`arma_sd` for the ARMA spectral density is much easier to work with than the expression for the ARMA autocovariance)
 
-### Mathematical Theory
+### Mathematical theory
 
 ```{index} single: Spectral Density; Mathematical Theory
 ```
@@ -873,7 +873,7 @@ then `ma_poly` and `ar_poly` should update automatically to reflect these new pa
 
 This is achieved in our implementation by using [descriptors](https://python-programming.quantecon.org/python_advanced_features.html#descriptors).
 
-### Computing the Autocovariance Function
+### Computing the autocovariance function
 
 As discussed above, for ARMA processes the spectral density has a {ref}`simple representation <arma_spec_den>` that is relatively easy to calculate.
 
