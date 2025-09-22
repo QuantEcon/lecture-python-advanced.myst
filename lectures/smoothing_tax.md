@@ -63,7 +63,7 @@ incomplete markets version of our model.
 In addition, we extend their assumption about the interest rate to an appropriate counterpart to create a "complete markets" model in the style of
 Lucas and Stokey {cite}`LucasStokey1983`.
 
-### Isomorphism between Consumption and Tax Smoothing
+### Isomorphism between consumption and tax smoothing
 
 For each version of a consumption-smoothing model,  a tax-smoothing counterpart can be obtained simply by relabeling
 
@@ -82,7 +82,7 @@ For elaborations on this theme, please see [Optimal Savings II: LQ Techniques](h
 We'll spend most of this lecture studying acquire finite-state Markov specification,
 but will also  treat the linear state space specification.
 
-#### Link to History
+#### Link to history
 
 For those who love history, President Thomas Jefferson's Secretary of Treasury Albert Gallatin (1807) {cite}`Gallatin` seems to have prescribed policies that
 come from Barro's model {cite}`Barro1979`
@@ -300,7 +300,7 @@ ax[1].set_xlabel('Periods')
 plt.show()
 ```
 
-## Tax Smoothing with Complete Markets
+## Tax smoothing with complete markets
 
 It is instructive  to focus on a simple tax-smoothing example with complete markets.
 
@@ -345,7 +345,7 @@ $$
 in which the term $(\sum_j Q_{ij} b_j -   b_i)$   equals the net amount that the government spends to purchase one-period Arrow securities
 that will pay off next period in Markov states $j = 1, \ldots, N$ after it has received payments $b_i$ this period.
 
-## Returns on State-Contingent Debt
+## Returns on state-contingent debt
 
 Notice that $\sum_{j'=1}^N Q_{ij'} b(j')$ is the amount that the government spends  in Markov state $i$ at time $t$ to purchase
 one-period state-contingent claims that will pay off in Markov state $j'$ at time $t+1$.
@@ -403,7 +403,7 @@ def cumulative_return(s_path, R):
     return RT_path
 ```
 
-### An Example of Tax Smoothing
+### An example of tax smoothing
 
 We'll study a tax-smoothing model with two Markov states.
 
@@ -534,7 +534,7 @@ war in debt and $b_2 = -10$.
 ```{exercise-end}
 ```
 
-## More Finite Markov Chain Tax-Smoothing Examples
+## More finite Markov chain tax-smoothing examples
 
 To interpret some episodes in the fiscal history of the United States, we find it interesting to study a few more examples.
 
@@ -866,7 +866,7 @@ ts_ex5 = TaxSmoothingExample(g_ex5, P_ex5, b0_ex5, states_ex5, N_simul=7, random
 ts_ex5.display()
 ```
 
-### Continuous-State Gaussian Model
+### Continuous-state Gaussian model
 
 To construct a tax-smoothing version of the  complete markets consumption-smoothing model with a continuous state space that we presented in
 the lecture {doc}`consumption smoothing with complete and incomplete markets <smoothing>`, we simply relabel variables.
@@ -910,7 +910,7 @@ $$
 R(x_{t+1} | x_t) = \frac{b(x_{t+1})}{\beta E b(x_{t+1})| x_t}
 $$
 
-#### Related Lectures
+#### Related lectures
 
 Throughout this lecture, we have taken one-period interest rates and Arrow security prices as exogenous objects determined outside the model
 and specified them in ways designed to align our models closely with the consumption smoothing model of Barro {cite}`Barro1979`.

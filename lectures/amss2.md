@@ -88,7 +88,7 @@ import matplotlib.pyplot as plt
 from scipy.optimize import fsolve, fmin
 ```
 
-## Forces at Work
+## Forces at work
 
 The forces  driving asymptotic  outcomes here are examples of dynamics present in a more general class of incomplete markets models analyzed in {cite}`BEGS1` (BEGS).
 
@@ -112,7 +112,7 @@ rates  rather than fluctuations in  par values of debt to insure against shocks 
   shutting down the stochastic component of debt dynamics.
 - At that point, the tail of the par value of government debt becomes a trivial martingale: it is constant over time.
 
-## Logical Flow of Lecture
+## Logical flow of lecture
 
 We present ideas  in the following order
 
@@ -126,7 +126,7 @@ We present ideas  in the following order
     - we verify that the LS Ramsey planner chooses to purchase **identical** claims to time $t+1$ consumption for all Markov states tomorrow for each Markov state today.
 * We compute the BEGS approximations to check how accurately they describe the dynamics of the long-simulation.
 
-### Equations from Lucas-Stokey (1983) Model
+### Equations from Lucas-Stokey (1983) model
 
 Although we are studying an AMSS {cite}`aiyagari2002optimal` economy,  a Lucas-Stokey {cite}`LucasStokey1983` economy plays
 an important  role in the reverse-engineering calculation to be described below.
@@ -189,7 +189,7 @@ $$
 It is useful to transform  some of the above equations to forms that are more natural for analyzing the
 case of a CRRA utility specification that we shall use in our example economies.
 
-### Specification with CRRA Utility
+### Specification with CRRA utility
 
 As in lectures {doc}`optimal taxation without state-contingent debt <amss>` and {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`,
 we assume that the representative agent has utility function
@@ -244,7 +244,7 @@ The CRRA utility function is represented in the following class.
 :load: _static/lecture_specific/amss2/crra_utility.py
 ```
 
-## Example Economy
+## Example economy
 
 We set the following parameter values.
 
@@ -292,7 +292,7 @@ tags: [collapse-20]
 ---
 ```
 
-## Reverse Engineering Strategy
+## Reverse engineering strategy
 
 We can reverse engineer a value $b_0$ of initial debt due   that renders the AMSS measurability constraints not binding from time $t =0$ onward.
 
@@ -337,7 +337,7 @@ state $s_t=s$ from $b(s) = {\frac{x(s)}{u_c(s)}}$ or the matrix equation
 **Step 7:** At the value of $\Phi$ and the value of $\bar b$ that emerged from step 6, solve equations
 {eq}`amss2_TS_barg11` and {eq}`eqn_AMSS2_10` jointly for $c_0, b_0$.
 
-## Code for Reverse Engineering
+## Code for reverse engineering
 
 Here is code to do the calculations for us.
 
@@ -420,7 +420,7 @@ c0, b0
 
 Thus, we have reverse engineered an initial $b0 = -1.038698407551764$ that ought to render the AMSS measurability constraints slack.
 
-## Short Simulation for Reverse-engineered: Initial Debt
+## Short simulation for reverse-engineered: initial debt
 
 The following graph shows simulations of outcomes for both a Lucas-Stokey economy and for an AMSS economy starting from initial government
 debt equal to $b_0 = -1.038698407551764$.
@@ -477,7 +477,7 @@ Notice how for $t \geq 1$, the tax rate is a constant - so is the par value of g
 
 However, output and labor supply are both nontrivial time-invariant functions of the Markov state.
 
-## Long Simulation
+## Long simulation
 
 The following graph shows the par value of government debt and the flat-rate tax on labor income  for a long simulation for our sample economy.
 
@@ -523,7 +523,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-### Remarks about Long Simulation
+### Remarks about long simulation
 
 As remarked above, after $b_{t+1}(s^t)$ has converged to a constant, the measurability constraints in the AMSS model cease to bind
 
@@ -536,7 +536,7 @@ This leads us to seek an initial value of government debt $b_0$ that renders the
 
 We  now describe how to find such an initial level of government debt.
 
-## BEGS Approximations of Limiting Debt and Convergence Rate
+## BEGS approximations of limiting debt and convergence rate
 
 It is useful to link the outcome of our reverse engineering exercise to limiting approximations constructed by BEGS {cite}`BEGS1`.
 
@@ -573,7 +573,7 @@ BEGS interpret random variations in the right side of {eq}`eq_fiscal_risk` as a 
   ${\mathcal R}_\tau(s, s_{-}) {\mathcal B}_{-}$,  and
 - fluctuations in the effective government deficit ${\mathcal X}_t$
 
-### Asymptotic Mean
+### Asymptotic mean
 
 BEGS give conditions under which the ergodic mean of ${\mathcal B}_t$ is
 
@@ -607,7 +607,7 @@ Expressing formula {eq}`prelim_formula` in terms of  our notation tells us that 
 \hat b = \frac{\mathcal B^*}{\beta E_t u_{c,t+1}}
 ```
 
-### Rate of Convergence
+### Rate of convergence
 
 BEGS also derive the following  approximation to the rate of convergence to ${\mathcal B}^{*}$ from an arbitrary initial condition.
 
@@ -619,7 +619,7 @@ BEGS also derive the following  approximation to the rate of convergence to ${\m
 
 (See the equation above equation (47) in {cite}`BEGS1`)
 
-### Formulas and Code Details
+### Formulas and code details
 
 For our example, we describe some code that we use to compute the steady state mean and the rate of convergence to it.
 

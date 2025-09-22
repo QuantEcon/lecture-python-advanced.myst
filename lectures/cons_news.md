@@ -102,7 +102,7 @@ This lecture can be regarded as an introduction to   **invertibility** issues th
 the analysis of **fiscal foresight** by Eric Leeper, Todd Walker, and Susan Yang {cite}`Leeper_Walker_Yang`, as well
 as in chapter 4  of {cite}`sargent1991observable`. 
 
-## Two Representations of  One Nonfinancial Income Process
+## Two representations of one nonfinancial income process
 
 We study consequences of endowing a
 consumer with one of two alternative representations for the change
@@ -264,7 +264,7 @@ and $\Sigma = (1-\beta^2) \sigma_\epsilon^2$.
 Alternatively, we can  obtain these formulas via the classical filtering theory
 described in {doc}`this lecture <classical_filtering>`.
 
-## News Shocks and Less Informative Shocks
+## News shocks and less informative shocks
 
 Representation {eq}`eqn_1` is cast in terms of a **news shock**
 $\epsilon_{t+1}$ that represents a shock to nonfinancial income
@@ -356,7 +356,7 @@ for representation {eq}`eqn_2` is
 $d_a(\beta) = \frac{1 -\beta^2}{1 -\beta } = (1 + \beta)$, another
 fact that will be important below.
 
-## Representation of $\epsilon_t$ Shock in Terms of Future $y_t$
+## Representation of $\epsilon_t$ shock in terms of future $y_t$
 
 Notice that reprentation {eq}`eqn_1`, namely, $y_{t+1} - y_t = -\beta^{-1} \epsilon_t + \epsilon_{t+1}$
 implies the linear difference equation
@@ -382,7 +382,7 @@ $$
 
 Thus, $\epsilon_t$  **exactly** reveals the gap between $y_t$ and $E [ y_t | y^t_+]$. 
 
-## Representation in Terms of $a_t$ Shocks
+## Representation in terms of $a_t$ shocks
 
 Next notice that representation {eq}`eqn_2`, namely, $y_{t+1} - y_t = -
 \beta a_t + a_{t+1}$ implies the linear difference
@@ -405,7 +405,7 @@ $$
 E [ y_{t+1} | y^t ] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}
 $$
 
-## Permanent Income Consumption-Smoothing Model
+## Permanent income consumption-smoothing model
 
 When we computed optimal consumption-saving policies for our  two
 representations {eq}`eqn_1` and {eq}`eqn_2` by using formulas obtained with the difference equation
@@ -455,7 +455,7 @@ the temporary part.
 The behavior of the  better informed consumer  sharply illustrates the behavior predicted in a classic
 Ricardian equivalence experiment.
 
-## State Space Representations
+## State space representations
 
 We now cast our  representations {eq}`eqn_1` and {eq}`eqn_2`, respectively,  in terms of the following two state
 space systems:
@@ -811,7 +811,7 @@ plt.title("innovations representation")
 plt.legend()
 ```
 
-## Simulating  Income Process and Two Associated Shock Processes
+## Simulating income process and two associated shock processes
 
 We now  form a **single** $\{y_t\}_{t=0}^T$ realization
 that we will use to simulate decisions associated
@@ -847,7 +847,7 @@ The above steps implement the experiment of comparing decisions made by
 two consumers having **identical** incomes at each date but at each date
 having **different** information about their future incomes.
 
-## Calculating Innovations in Another Way
+## Calculating innovations in another way
 
 Here we use formula {eq}`eqn_3` above to compute $a_{t+1}$ as a function
 of the history
@@ -869,7 +869,7 @@ $$
 We can verify that we recover the same $\{a_t\}$ sequence
 computed earlier.
 
-## Another Invertibility Issue
+## Another invertibility issue
 
 This {doc}`quantecon lecture <hs_invertibility_example>` contains another example of a shock-invertibility issue that is endemic
 to the LQ permanent income or consumption smoothing model.

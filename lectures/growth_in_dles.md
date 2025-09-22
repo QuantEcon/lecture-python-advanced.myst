@@ -51,7 +51,7 @@ import matplotlib.pyplot as plt
 from quantecon import DLE
 ```
 
-## Common Structure
+## Common structure
 
 Our example economies have the following features
 
@@ -114,7 +114,7 @@ $$
 
 and the scalar $\beta$.
 
-## A Planning Problem
+## A planning problem
 
 The first welfare theorem asserts that a competitive equilibrium
 allocation solves the following planning problem.
@@ -191,7 +191,7 @@ $$
 x_{t+1} = A^ox_t + Cw_{t+1}
 $$
 
-## Example Economies
+## Example economies
 
 Each of the example economies shown here will share a number of
 components. In particular, for each we will consider preferences of the
@@ -389,7 +389,7 @@ print(econ1.css, econ1.iss, econ1.kss)
 However, the near-unity endogenous eigenvalue means that these steady
 state values are of little relevance.
 
-### Example 2: Altered Growth Condition
+### Example 2: altered growth condition
 
 We generate our next economy by making two alterations to the parameters
 of Example 1.
@@ -460,7 +460,7 @@ than 1.
 econ2.endo, econ2.exo
 ```
 
-### Example 3: A Jones-Manuelli (1990) Economy
+### Example 3: a Jones-Manuelli (1990) economy
 
 For our third economy, we choose parameter values with the aim of
 generating *sustained* growth in consumption, investment and capital.
@@ -539,7 +539,7 @@ The other unit eigenvalue results from setting $\lambda = -1$.
 To show the importance of both of these for generating growth, we
 consider the following experiments.
 
-### Example 3.1: Varying Sensitivity
+### Example 3.1: varying sensitivity
 
 Next we raise $\lambda$ to -0.7
 
@@ -566,7 +566,7 @@ eigenvalues is now less than 1.
 econ4.endo, econ4.exo
 ```
 
-### Example 3.2: More Impatience
+### Example 3.2: more impatience
 
 Next let's lower $\beta$ to 0.94
 

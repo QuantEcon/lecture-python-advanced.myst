@@ -57,11 +57,11 @@ As we will see, coupled oscillators arise endogenously within the model.
 
 Below we review the model and replicate some of the results on synchronization of innovation across countries.
 
-## Key Ideas
+## Key ideas
 
 It is helpful to begin with an overview of the mechanism.
 
-### Innovation Cycles
+### Innovation cycles
 
 As discussed above, two countries produce and trade with each other.
 
@@ -218,7 +218,7 @@ $$
 
 The symbols $N_{j, t}^c$ and $N_{j, t}^m$ will denote the measures of $\Omega^c$ and $\Omega^m$ respectively.
 
-### New Varieties
+### New varieties
 
 To introduce a new variety, a firm must hire $f$ units of labor per variety in each country.
 
@@ -244,7 +244,7 @@ N_{j,t}^m = \theta(M_{j,t} - N_{j,t}^c) \geq 0,
 \leq f
 $$
 
-### Law of Motion
+### Law of motion
 
 With $\delta$ as the exogenous probability of a variety becoming obsolete,
 the dynamic equation for the measure of firms becomes
@@ -643,7 +643,7 @@ class MSGSync:
         return ab
 ```
 
-### Time Series of Firm Measures
+### Time series of firm measures
 
 We write a short function below that exploits the preceding code and plots two time series.
 
@@ -691,7 +691,7 @@ In the first case, innovation in the two countries does not synchronize.
 In the second case, different initial conditions are chosen, and the cycles
 become synchronized.
 
-### Basin of Attraction
+### Basin of attraction
 
 Next, let's study the initial conditions that lead to synchronized cycles more
 systematically.

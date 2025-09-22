@@ -311,7 +311,7 @@ ax.set_xlabel("Position in sequence of weights")
 plt.show()
 ```
 
-### Estimation with Smoothing
+### Estimation with smoothing
 
 ```{index} single: Spectra, Estimation; Smoothing
 ```
@@ -350,7 +350,7 @@ and the choice of appropriate smoothing will have to be made based on
 judgement/priors or some other theory.
 
 (estspec_pfas)=
-### Pre-Filtering and Smoothing
+### Pre-filtering and smoothing
 
 ```{index} single: Spectra, Estimation; Pre-Filtering
 ```
@@ -395,7 +395,7 @@ provided the maximum possible amount of information about the value $I(\omega)$.
 Another way to put this is that if $I$ is relatively constant, then we can use a large amount of smoothing without introducing too much bias.
 
 (ar_periodograms)=
-### The AR(1) Setting
+### The AR(1) setting
 
 ```{index} single: Spectra, Estimation; AR(1) Setting
 ```

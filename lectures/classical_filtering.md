@@ -72,7 +72,7 @@ import numpy as np
 
 Useful references include {cite}`Whittle1963`, {cite}`HanSar1980`, {cite}`Orfanidisoptimum1988`, {cite}`Athanasios1991`, and {cite}`Muth1960`.
 
-## Finite Dimensional Prediction
+## Finite dimensional prediction
 
 Let $(x_1, x_2, \ldots, x_T)^\prime = x$ be a $T \times 1$ vector of random variables with mean $\mathbb{E} x = 0$ and covariance matrix $\mathbb{E} xx^\prime = V$.
 
@@ -414,7 +414,7 @@ The last row of $L^{-1}$ gives the approximate Wold moving average coefficients.
 This method can readily be generalized to multivariate systems.
 
 (fdcp)=
-## Combined Finite Dimensional Control and Prediction
+## Combined finite dimensional control and prediction
 
 Consider the finite-dimensional control problem, maximize
 
@@ -496,7 +496,7 @@ U \bar y = L^{-1} \tilde U^{-1}
     \right]
 $$
 
-## Infinite Horizon Prediction and Filtering Problems
+## Infinite horizon prediction and filtering problems
 
 It is instructive to compare the finite-horizon formulas based on linear algebra decompositions of finite-dimensional covariance matrices
 with classic formulas for infinite horizon and infinite history prediction and control problems.
@@ -556,7 +556,7 @@ The **linear least squares filtering problem** is to find a $b\,(L) = \sum^\inft
 
 Interesting versions of these problems related to the permanent income theory were studied by {cite}`Muth1960`.
 
-### Problem Formulation
+### Problem formulation
 
 These problems are solved as follows.
 
