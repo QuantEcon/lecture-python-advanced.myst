@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>25. Risk and Model Uncertainty &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'five_preferences';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/five_preferences.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="26. Etymology of Entropy" href="entropy.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -202,7 +209,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -249,9 +256,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="risk-and-model-uncertainty">
-<h1><span class="section-number">25. </span>Risk and Model Uncertainty<a class="headerlink" href="#risk-and-model-uncertainty" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">25. </span>Risk and Model Uncertainty<a class="headerlink" href="#risk-and-model-uncertainty" title="Link to this heading">#</a></h1>
 <section id="overview">
-<h2><span class="section-number">25.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>As an introduction to one possible approach to modeling <strong>Knightian  uncertainty</strong>,
 this lecture describes static representations of five classes of preferences over risky prospects.</p>
 <p>These preference specifications  allow  us to distinguish <strong>risk</strong> from <strong>uncertainty</strong> along lines proposed by
@@ -279,16 +286,16 @@ probability distribution to a decision maker.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Package imports</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rc</span><span class="p">,</span> <span class="n">cm</span>
-<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span><span class="p">,</span> <span class="n">stats</span>
-<span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">loadmat</span>
-<span class="kn">from</span> <span class="nn">matplotlib.collections</span> <span class="kn">import</span> <span class="n">LineCollection</span>
-<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">ListedColormap</span><span class="p">,</span> <span class="n">BoundaryNorm</span>
-<span class="kn">from</span> <span class="nn">numba</span> <span class="kn">import</span> <span class="n">njit</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rc</span><span class="p">,</span> <span class="n">cm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimize</span><span class="p">,</span> <span class="n">stats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">loadmat</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">LineCollection</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">ListedColormap</span><span class="p">,</span> <span class="n">BoundaryNorm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
 </pre></div>
 </div>
 </div>
@@ -331,7 +338,7 @@ probability distribution to a decision maker.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Useful functions</span>
 <span class="nd">@njit</span>
-<span class="k">def</span> <span class="nf">ent</span><span class="p">(</span><span class="n">π</span><span class="p">,</span> <span class="n">π_hat</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ent</span><span class="p">(</span><span class="n">π</span><span class="p">,</span> <span class="n">π_hat</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the relative entropy of a probability vector `π_hat` with respect to `π`. JIT-compiled using Numba.</span>
 <span class="sd">    </span>
@@ -341,12 +348,12 @@ probability distribution to a decision maker.</p>
     <span class="k">return</span> <span class="n">ent_val</span>
 
 
-<span class="k">def</span> <span class="nf">T_θ_factory</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">T_θ_factory</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return an operator `T_θ` for a given penalty parameter `θ` and probability distribution vector `π`.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">T_θ</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>  
+    <span class="k">def</span><span class="w"> </span><span class="nf">T_θ</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>  
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Risk-sensitivity operator of Jacobson (1973) and Whittle (1981) taking a function `u` as argument.</span>
 <span class="sd">        </span>
@@ -356,7 +363,7 @@ probability distribution to a decision maker.</p>
     <span class="k">return</span> <span class="n">T_θ</span>
 
 
-<span class="k">def</span> <span class="nf">compute_change_measure</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_change_measure</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the channge of measure given a utility function `u`, a consumption vector `c`,</span>
 <span class="sd">    a penalty parameter `θ` and a baseline probability vector `π` </span>
@@ -368,7 +375,7 @@ probability distribution to a decision maker.</p>
     <span class="k">return</span> <span class="n">m</span>
 
 
-<span class="k">def</span> <span class="nf">utility_function_factory</span><span class="p">(</span><span class="n">α</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">utility_function_factory</span><span class="p">(</span><span class="n">α</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a CRRA utility function parametrized by `α` </span>
 <span class="sd">    </span>
@@ -384,7 +391,7 @@ probability distribution to a decision maker.</p>
 </div>
 </section>
 <section id="basic-objects">
-<h2><span class="section-number">25.2. </span>Basic objects<a class="headerlink" href="#basic-objects" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.2. </span>Basic objects<a class="headerlink" href="#basic-objects" title="Link to this heading">#</a></h2>
 <p>Basic ingredients are</p>
 <ul class="simple">
 <li><p>a set of states of the world</p></li>
@@ -481,9 +488,10 @@ E m \log m  = \hat E \log m .
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="figure1">
-<a class="reference internal image-reference" href="_images/3a2cdf738571b345ca09cad0efdb6f994825c3b2b6a425275a88886fc44b4dec.png"><img alt="_images/3a2cdf738571b345ca09cad0efdb6f994825c3b2b6a425275a88886fc44b4dec.png" src="_images/3a2cdf738571b345ca09cad0efdb6f994825c3b2b6a425275a88886fc44b4dec.png" style="width: 486px; height: 313px;" /></a>
+<a class="reference internal image-reference" href="_images/3a2cdf738571b345ca09cad0efdb6f994825c3b2b6a425275a88886fc44b4dec.png"><img alt="_images/3a2cdf738571b345ca09cad0efdb6f994825c3b2b6a425275a88886fc44b4dec.png" src="_images/3a2cdf738571b345ca09cad0efdb6f994825c3b2b6a425275a88886fc44b4dec.png" style="width: 486px; height: 313px;" />
+</a>
 <figcaption>
-<p><span class="caption-number">Fig. 25.1 </span><span class="caption-text">Figure 1</span><a class="headerlink" href="#figure1" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 25.1 </span><span class="caption-text">Figure 1</span><a class="headerlink" href="#figure1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -540,7 +548,8 @@ E m \log m  = \hat E \log m .
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/6522c60c4ae522ab73c3566828a97c6d6174ea8dc006e1221ee386b9ceda5271.png"><img alt="_images/6522c60c4ae522ab73c3566828a97c6d6174ea8dc006e1221ee386b9ceda5271.png" src="_images/6522c60c4ae522ab73c3566828a97c6d6174ea8dc006e1221ee386b9ceda5271.png" style="width: 800px; height: 729px;" /></a>
+<a class="reference internal image-reference" href="_images/6522c60c4ae522ab73c3566828a97c6d6174ea8dc006e1221ee386b9ceda5271.png"><img alt="_images/6522c60c4ae522ab73c3566828a97c6d6174ea8dc006e1221ee386b9ceda5271.png" src="_images/6522c60c4ae522ab73c3566828a97c6d6174ea8dc006e1221ee386b9ceda5271.png" style="width: 800px; height: 729px;" />
+</a>
 </div>
 </div>
 <p>The next figure plots  the logarithm of entropy.</p>
@@ -588,12 +597,13 @@ E m \log m  = \hat E \log m .
   plt.pcolormesh(x, y, np.log(ent_vals_mat.T), shading=&#39;gouraud&#39;, cmap=&#39;seismic&#39;)
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/93f07f674fe061d97b86e0fd29b6dd74f17aa4db62fb0711f5d903a794909c6a.png"><img alt="_images/93f07f674fe061d97b86e0fd29b6dd74f17aa4db62fb0711f5d903a794909c6a.png" src="_images/93f07f674fe061d97b86e0fd29b6dd74f17aa4db62fb0711f5d903a794909c6a.png" style="width: 819px; height: 729px;" /></a>
+<a class="reference internal image-reference" href="_images/93f07f674fe061d97b86e0fd29b6dd74f17aa4db62fb0711f5d903a794909c6a.png"><img alt="_images/93f07f674fe061d97b86e0fd29b6dd74f17aa4db62fb0711f5d903a794909c6a.png" src="_images/93f07f674fe061d97b86e0fd29b6dd74f17aa4db62fb0711f5d903a794909c6a.png" style="width: 819px; height: 729px;" />
+</a>
 </div>
 </div>
 </section>
 <section id="five-preference-specifications">
-<h2><span class="section-number">25.3. </span>Five preference specifications<a class="headerlink" href="#five-preference-specifications" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.3. </span>Five preference specifications<a class="headerlink" href="#five-preference-specifications" title="Link to this heading">#</a></h2>
 <p>We describe five types of preferences over plans.</p>
 <ul class="simple">
 <li><p>Expected utility preferences</p></li>
@@ -611,10 +621,10 @@ concerns about model misppecification, i.e., model uncertainty;  both are cast  
 </ul>
 </section>
 <section id="expected-utility">
-<h2><span class="section-number">25.4. </span>Expected utility<a class="headerlink" href="#expected-utility" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.4. </span>Expected utility<a class="headerlink" href="#expected-utility" title="Link to this heading">#</a></h2>
 <p>A decision maker is said to have <strong>expected utility preferences</strong> when he ranks plans <span class="math notranslate nohighlight">\(c\)</span> by their expected utilities</p>
 <div class="math notranslate nohighlight" id="equation-tom1">
-<span class="eqno">(25.1)<a class="headerlink" href="#equation-tom1" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.1)<a class="headerlink" href="#equation-tom1" title="Link to this equation">#</a></span>\[
 \sum_{i=1}^I u(c_i) \pi_i, 
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(u\)</span> is a unique utility function and <span class="math notranslate nohighlight">\(\pi\)</span> is a unique probability measure over states.</p>
@@ -625,20 +635,20 @@ risk aversion.</p></li>
 </ul>
 </section>
 <section id="constraint-preferences">
-<h2><span class="section-number">25.5. </span>Constraint preferences<a class="headerlink" href="#constraint-preferences" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.5. </span>Constraint preferences<a class="headerlink" href="#constraint-preferences" title="Link to this heading">#</a></h2>
 <p>A decision maker is said to have <strong>constraint preferences</strong> when he ranks plans <span class="math notranslate nohighlight">\(c\)</span> according to</p>
 <div class="math notranslate nohighlight" id="equation-tom2">
-<span class="eqno">(25.2)<a class="headerlink" href="#equation-tom2" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.2)<a class="headerlink" href="#equation-tom2" title="Link to this equation">#</a></span>\[
 \min_{\{m_i \geq 0\}_{i=1}^I}  \sum_{i=1}^I m_i\pi_i  u(c_i)
 \]</div>
 <p>subject to</p>
 <div class="math notranslate nohighlight" id="equation-tom3">
-<span class="eqno">(25.3)<a class="headerlink" href="#equation-tom3" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.3)<a class="headerlink" href="#equation-tom3" title="Link to this equation">#</a></span>\[
 \sum_{i=1}^I \pi_i m_i \log m_i \leq \eta
 \]</div>
 <p>and</p>
 <div class="math notranslate nohighlight" id="equation-tom4">
-<span class="eqno">(25.4)<a class="headerlink" href="#equation-tom4" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.4)<a class="headerlink" href="#equation-tom4" title="Link to this equation">#</a></span>\[
 \sum_{i=1}^I \pi_i m_i = 1 .
 \]</div>
 <p>In <a class="reference internal" href="#equation-tom3">(25.3)</a>,  <span class="math notranslate nohighlight">\(\eta \geq 0\)</span> defines an  entropy ball of probability distributions <span class="math notranslate nohighlight">\(\hat \pi = m \pi\)</span>  that surround a baseline distribution <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
@@ -647,14 +657,14 @@ risk aversion.</p></li>
 <p>Following <span id="id3">[<a class="reference internal" href="zreferences.html#id62" title="Lars Peter Hansen and Thomas J. Sargent. Robust control and model uncertainty. American Economic Review, 91(2):60-66, 2001.">Hansen and Sargent, 2001</a>]</span> and <span id="id4">[<a class="reference internal" href="zreferences.html#id160" title="L P Hansen and T J Sargent. Robustness. Princeton University Press, 2008.">Hansen and Sargent, 2008</a>]</span>, we call minimization problem  <a class="reference internal" href="#equation-tom2">(25.2)</a> subject to <a class="reference internal" href="#equation-tom3">(25.3)</a> and<a class="reference internal" href="#equation-tom4">(25.4)</a> a <strong>constraint problem</strong>.</p>
 <p>To find  minimizing probabilities, we form a Lagrangian</p>
 <div class="math notranslate nohighlight" id="equation-tom5">
-<span class="eqno">(25.5)<a class="headerlink" href="#equation-tom5" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.5)<a class="headerlink" href="#equation-tom5" title="Link to this equation">#</a></span>\[
 L = \sum_{i=1}^I m_i \pi_i u(c_i) +  \tilde \theta\bigl[\sum_{i=1}^I \pi_i m_i \log m_i - \eta \bigr]
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\tilde \theta \geq 0\)</span> is a Lagrange multiplier associated     with the entropy constraint.</p>
 <p>Subject to the additional constraint that <span class="math notranslate nohighlight">\(\sum_{i=1}^I m_i  \pi_i =1\)</span>, we want to minimize <a class="reference internal" href="#equation-tom5">(25.5)</a> with respect to     <span class="math notranslate nohighlight">\(\{m_i\}_{i=1}^I\)</span> and to maximize it with respect to   <span class="math notranslate nohighlight">\(\tilde \theta\)</span>.</p>
 <p>The minimizing probability distortions (likelihood ratios) are</p>
 <div class="math notranslate nohighlight" id="equation-tom6">
-<span class="eqno">(25.6)<a class="headerlink" href="#equation-tom6" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.6)<a class="headerlink" href="#equation-tom6" title="Link to this equation">#</a></span>\[
 \tilde m_i(c;\tilde \theta)
 = \frac{ \exp \bigl(- u(c_i)/\tilde \theta\bigr)}{\sum_j \pi_j \exp \bigl(- u(c_j) /\tilde \theta\bigr) } .
 \]</div>
@@ -666,7 +676,7 @@ solve</p>
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-tom7">
-<span class="eqno">(25.7)<a class="headerlink" href="#equation-tom7" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.7)<a class="headerlink" href="#equation-tom7" title="Link to this equation">#</a></span>\[
 \sum_i \pi_i \frac{ \exp \bigl(- u(c_i)/\tilde \theta\bigr)}{\sum_j \pi_j \exp \bigl(- u(c_j)/\tilde \theta\bigr) }
 \log \biggl[\frac{ \exp \bigl(- u(c_i)/\tilde \theta\bigr)}{\sum_j \pi_j \exp \bigl(- u(c_j)/\tilde \theta\bigr) }
 \biggr] = \eta
@@ -676,14 +686,14 @@ solve</p>
 <p>With <span class="math notranslate nohighlight">\(\tilde \theta(c;\eta)\)</span> in hand we can obtain worst-case  probabilities as functions <span class="math notranslate nohighlight">\(\pi_i\tilde m_i(c;\eta)\)</span> of <span class="math notranslate nohighlight">\(\eta\)</span>.</p>
 <p>The <strong>indirect (expected) utility function</strong> under constraint preferences is</p>
 <div class="math notranslate nohighlight" id="equation-tom8">
-<span class="eqno">(25.8)<a class="headerlink" href="#equation-tom8" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.8)<a class="headerlink" href="#equation-tom8" title="Link to this equation">#</a></span>\[
 \sum_{i=1}^I   \pi_i \tilde m_i(c_i;\eta) u(c_i) = \sum_{i=1}^I  \pi_i \left[\frac{\exp(-\tilde \theta^{-1} u(c_i))}
     {\sum_{j=1}^I \exp(-\tilde \theta^{-1} u(c_j) ) \pi_j } \right]    u(c_i) .
 \]</div>
 <p>Entropy evaluated at the minimizing probability distortion
 <a class="reference internal" href="#equation-tom6">(25.6)</a> equals <span class="math notranslate nohighlight">\(E \tilde m \log \tilde m\)</span> or</p>
 <div class="math notranslate nohighlight" id="equation-tom9">
-<span class="eqno">(25.9)<a class="headerlink" href="#equation-tom9" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.9)<a class="headerlink" href="#equation-tom9" title="Link to this equation">#</a></span>\[
 \begin{aligned}
 &amp; &amp; \sum_{i=1}^I   \left[\frac{\exp(-\tilde \theta^{-1} u(c_i))}
     {\sum_{j=1}^I \exp(-\tilde \theta^{-1} u(c_j) ) \pi_j } \right]  \times \cr
@@ -696,7 +706,7 @@ solve</p>
 \]</div>
 <p>Expression <a class="reference internal" href="#equation-tom9">(25.9)</a> implies that</p>
 <div class="math notranslate nohighlight" id="equation-tom10">
-<span class="eqno">(25.10)<a class="headerlink" href="#equation-tom10" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.10)<a class="headerlink" href="#equation-tom10" title="Link to this equation">#</a></span>\[
 \begin{aligned} 
     - \tilde \theta \log \left(\sum_{j=1}^I \exp(-\tilde \theta^{-1} u(c_j) ) \pi_j \right) &amp; = &amp;
     \sum_{i=1}^I  \pi_i \left[\frac{\exp(-\tilde \theta^{-1} u(c_i))}
@@ -707,10 +717,10 @@ solve</p>
 <p>where the last term is <span class="math notranslate nohighlight">\(\tilde \theta\)</span> times the entropy of the worst-case probability distribution.</p>
 </section>
 <section id="multiplier-preferences">
-<h2><span class="section-number">25.6. </span>Multiplier preferences<a class="headerlink" href="#multiplier-preferences" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.6. </span>Multiplier preferences<a class="headerlink" href="#multiplier-preferences" title="Link to this heading">#</a></h2>
 <p>A decision maker is said to have <strong>multiplier preferences</strong> when he ranks consumption plans <span class="math notranslate nohighlight">\(c\)</span>    according to</p>
 <div class="math notranslate nohighlight" id="equation-tom11">
-<span class="eqno">(25.11)<a class="headerlink" href="#equation-tom11" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.11)<a class="headerlink" href="#equation-tom11" title="Link to this equation">#</a></span>\[
 {\sf T}u(c) \doteq \min_{\{m_i \geq 0\}_{i=1}^I}  \sum_{i=1}^I \pi_i m_i [  u(c_i) + \theta \log m_i ]
 \]</div>
 <p>where minimization is subject to</p>
@@ -723,12 +733,12 @@ solve</p>
 <p>Following <span id="id5">[<a class="reference internal" href="zreferences.html#id62" title="Lars Peter Hansen and Thomas J. Sargent. Robust control and model uncertainty. American Economic Review, 91(2):60-66, 2001.">Hansen and Sargent, 2001</a>]</span> and <span id="id6">[<a class="reference internal" href="zreferences.html#id160" title="L P Hansen and T J Sargent. Robustness. Princeton University Press, 2008.">Hansen and Sargent, 2008</a>]</span>, we call the minimization problem on the right side of <a class="reference internal" href="#equation-tom11">(25.11)</a> a <strong>multiplier problem</strong>.</p>
 <p>The minimizing probability distortion that solves the multiplier problem is</p>
 <div class="math notranslate nohighlight" id="equation-tom12">
-<span class="eqno">(25.12)<a class="headerlink" href="#equation-tom12" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.12)<a class="headerlink" href="#equation-tom12" title="Link to this equation">#</a></span>\[
 \hat m_i(c; \theta) = \frac{ \exp \bigl(- u(c_i)/\theta\bigr)}{\sum_j \pi_j \exp \bigl(- u(c_j)/\theta\bigr) } .
 \]</div>
 <p>We can solve</p>
 <div class="math notranslate nohighlight" id="equation-tom20">
-<span class="eqno">(25.13)<a class="headerlink" href="#equation-tom20" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.13)<a class="headerlink" href="#equation-tom20" title="Link to this equation">#</a></span>\[
 \sum_i \pi_i \frac{ \exp \bigl(- u(c_i)/ \theta\bigr)}{\sum_j \pi_j \exp \bigl(- u(c_j)/ \theta\bigr) }
 \log \biggl[\frac{ \exp \bigl(- u(c_i)/\theta\bigr)}{\sum_j \pi_j \exp \bigl(- u(c_j)/\theta\bigr) }
 \biggr] = \tilde \eta
@@ -740,15 +750,15 @@ solve</p>
 <p>If we add <span class="math notranslate nohighlight">\(\theta\)</span> times entropy under the worst-case model to expected utility under the worst-case model, we find that the
 <strong>indirect expected utility function</strong> under multiplier preferences is</p>
 <div class="math notranslate nohighlight" id="equation-tom13">
-<span class="eqno">(25.14)<a class="headerlink" href="#equation-tom13" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.14)<a class="headerlink" href="#equation-tom13" title="Link to this equation">#</a></span>\[
 -  \theta \log \left(\sum_{j=1}^I \exp(- \theta^{-1} u(c_j) ) \pi_j \right) .
 \]</div>
 </section>
 <section id="risk-sensitive-preferences">
-<h2><span class="section-number">25.7. </span>Risk-sensitive preferences<a class="headerlink" href="#risk-sensitive-preferences" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.7. </span>Risk-sensitive preferences<a class="headerlink" href="#risk-sensitive-preferences" title="Link to this heading">#</a></h2>
 <p>Substituting <span class="math notranslate nohighlight">\(\hat m_i\)</span> into <span class="math notranslate nohighlight">\(\sum_{i=1}^I \pi_i \hat m_i [  u(c_i) + \theta \log \hat m_i ]\)</span> gives the indirect utility function</p>
 <div class="math notranslate nohighlight" id="equation-tom14">
-<span class="eqno">(25.15)<a class="headerlink" href="#equation-tom14" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.15)<a class="headerlink" href="#equation-tom14" title="Link to this equation">#</a></span>\[
 {\sf T} u(c) \doteq - \theta \log \sum_{i=1}^I \pi_i \exp\bigl(- u(c_i)/\theta  \bigr).
 \]</div>
 <p>Here <span class="math notranslate nohighlight">\({\sf T} u\)</span> in    <a class="reference internal" href="#equation-tom14">(25.15)</a> is the <strong>risk-sensitivity</strong> operator of  <span id="id7">[<a class="reference internal" href="zreferences.html#id245" title="D. H. Jacobson. Optimal stochastic linear systems with exponential performance criteria and their relation to differential games. IEEE Transactions on Automatic Control, 18(2):124-131, 1973.">Jacobson, 1973</a>]</span>, <span id="id8">[<a class="reference internal" href="zreferences.html#id87" title="Peter Whittle. Risk-sensitive linear/quadratic/gaussian control. Advances in Applied Probability, 13(4):764-777, 1981.">Whittle, 1981</a>]</span>,  and <span id="id9">[<a class="reference internal" href="zreferences.html#id89" title="Peter Whittle. Risk-Sensitive Optimal Control. Wiley, New York, 1990.">Whittle, 1990</a>]</span>.</p>
@@ -808,7 +818,8 @@ solve</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f52ee7543085ab13751c2ead5bf3d3d8a075ee29098b3173dd4792b0c66170d6.png"><img alt="_images/f52ee7543085ab13751c2ead5bf3d3d8a075ee29098b3173dd4792b0c66170d6.png" src="_images/f52ee7543085ab13751c2ead5bf3d3d8a075ee29098b3173dd4792b0c66170d6.png" style="width: 867px; height: 698px;" /></a>
+<a class="reference internal image-reference" href="_images/f52ee7543085ab13751c2ead5bf3d3d8a075ee29098b3173dd4792b0c66170d6.png"><img alt="_images/f52ee7543085ab13751c2ead5bf3d3d8a075ee29098b3173dd4792b0c66170d6.png" src="_images/f52ee7543085ab13751c2ead5bf3d3d8a075ee29098b3173dd4792b0c66170d6.png" style="width: 867px; height: 698px;" />
+</a>
 </div>
 </div>
 <p>For large values of <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\({\sf T} u(c)\)</span> is approximately linear in the probability <span class="math notranslate nohighlight">\(\pi_1\)</span>, but for lower values of <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\({\sf T} u(c)\)</span> has considerable    curvature as a function of <span class="math notranslate nohighlight">\(\pi_1\)</span>.</p>
@@ -904,7 +915,8 @@ solve</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/76d079783c24f8e60d49eabb0b51447607c149e47c2c69106565364633718855.png"><img alt="_images/76d079783c24f8e60d49eabb0b51447607c149e47c2c69106565364633718855.png" src="_images/76d079783c24f8e60d49eabb0b51447607c149e47c2c69106565364633718855.png" style="width: 1318px; height: 575px;" /></a>
+<a class="reference internal image-reference" href="_images/76d079783c24f8e60d49eabb0b51447607c149e47c2c69106565364633718855.png"><img alt="_images/76d079783c24f8e60d49eabb0b51447607c149e47c2c69106565364633718855.png" src="_images/76d079783c24f8e60d49eabb0b51447607c149e47c2c69106565364633718855.png" style="width: 1318px; height: 575px;" />
+</a>
 </div>
 </div>
 <p>The panel on the right portrays how the transformation <span class="math notranslate nohighlight">\(\exp\left(\frac{-u\left(c\right)}{\theta}\right)\)</span> sends <span class="math notranslate nohighlight">\(u\left(c\right)\)</span> to a new function by  (i)  flipping the  sign,  and (ii) increasing curvature in proportion to <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
@@ -917,7 +929,7 @@ when <span class="math notranslate nohighlight">\(\pi = .5\)</span>.</p>
 <p>The gap between the green dot and the red line on the left panel measures the additional adjustment for risk
 that risk-sensitive preferences make relative to plain vanilla expected utility preferences.</p>
 <section id="digression-on-moment-generating-functions">
-<h3><span class="section-number">25.7.1. </span>Digression on moment generating functions<a class="headerlink" href="#digression-on-moment-generating-functions" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">25.7.1. </span>Digression on moment generating functions<a class="headerlink" href="#digression-on-moment-generating-functions" title="Link to this heading">#</a></h3>
 <p>The risk-sensitivity operator <span class="math notranslate nohighlight">\({\sf T}\)</span> is intimately connected to a moment generating function.</p>
 <p>In particular, a principal constinuent of the <span class="math notranslate nohighlight">\({\sf T}\)</span> operator, namely,</p>
 <div class="math notranslate nohighlight">
@@ -944,7 +956,7 @@ g(\theta^{-1}) = \sum_{j=1}^\infty \kappa_j \frac{{(-\theta^{-1})}^{j}}{j!}.
 <p>These statements extend to cases with continuous probability distributions for <span class="math notranslate nohighlight">\(c\)</span> and therefore for <span class="math notranslate nohighlight">\(u(c)\)</span>.</p>
 <p>For the special case <span class="math notranslate nohighlight">\(u(c) \sim {\mathcal N}(\mu_u, \sigma_u^2)\)</span>, <span class="math notranslate nohighlight">\(\kappa_1 = \mu_u, \kappa_2 = \sigma_u^2,\)</span>  and <span class="math notranslate nohighlight">\(\kappa_j = 0 \ \forall j \geq 3\)</span>, so</p>
 <div class="math notranslate nohighlight" id="equation-tom200">
-<span class="eqno">(25.16)<a class="headerlink" href="#equation-tom200" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.16)<a class="headerlink" href="#equation-tom200" title="Link to this equation">#</a></span>\[
  {\sf T} u(c) = \mu_u - \frac{1}{2 \theta} \sigma_u^2, 
 \]</div>
 <p>which becomes expected utility <span class="math notranslate nohighlight">\(\mu_u\)</span> when <span class="math notranslate nohighlight">\(\theta^{-1} = 0\)</span>.</p>
@@ -952,17 +964,17 @@ g(\theta^{-1}) = \sum_{j=1}^\infty \kappa_j \frac{{(-\theta^{-1})}^{j}}{j!}.
 </section>
 </section>
 <section id="ex-post-bayesian-preferences">
-<h2><span class="section-number">25.8. </span>Ex post Bayesian preferences<a class="headerlink" href="#ex-post-bayesian-preferences" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.8. </span>Ex post Bayesian preferences<a class="headerlink" href="#ex-post-bayesian-preferences" title="Link to this heading">#</a></h2>
 <p>A decision maker is said to have <strong>ex post Bayesian preferences</strong> when he ranks consumption plans according to the expected utility function</p>
 <div class="math notranslate nohighlight" id="equation-tom15">
-<span class="eqno">(25.17)<a class="headerlink" href="#equation-tom15" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.17)<a class="headerlink" href="#equation-tom15" title="Link to this equation">#</a></span>\[
 \sum_i \hat \pi_i (c^*) u(c_i)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat \pi(c^*)\)</span> is the worst-case probability distribution associated with multiplier or constraint preferences evaluated at a particular consumption plan <span class="math notranslate nohighlight">\(c^* = \{c_i^*\}_{i=1}^I\)</span>.</p>
 <p>At <span class="math notranslate nohighlight">\(c^*\)</span>, an ex post Bayesian’s indifference curves are tangent to those for multiplier and constraint preferences with appropriately chosen <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\eta\)</span>, respectively.</p>
 </section>
 <section id="comparing-preferences">
-<h2><span class="section-number">25.9. </span>Comparing preferences<a class="headerlink" href="#comparing-preferences" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.9. </span>Comparing preferences<a class="headerlink" href="#comparing-preferences" title="Link to this heading">#</a></h2>
 <p>For the special case in which <span class="math notranslate nohighlight">\(I=2\)</span>, <span class="math notranslate nohighlight">\(c_1=2, c_2=1\)</span>, <span class="math notranslate nohighlight">\(u(c) = \ln c\)</span>, and
 <span class="math notranslate nohighlight">\(\pi_1 =.5\)</span>, the following two figures depict how worst-case
 probabilities are determined under  constraint and multiplier preferences, respectively.</p>
@@ -1026,7 +1038,8 @@ entropy curve lies below the horizontal dotted line at an entropy level of <span
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/1f4ad98f201bcd0c50c0835d2e8f74b9c8974c563d497f94fae7d89f25d1c108.png"><img alt="_images/1f4ad98f201bcd0c50c0835d2e8f74b9c8974c563d497f94fae7d89f25d1c108.png" src="_images/1f4ad98f201bcd0c50c0835d2e8f74b9c8974c563d497f94fae7d89f25d1c108.png" style="width: 989px; height: 698px;" /></a>
+<a class="reference internal image-reference" href="_images/1f4ad98f201bcd0c50c0835d2e8f74b9c8974c563d497f94fae7d89f25d1c108.png"><img alt="_images/1f4ad98f201bcd0c50c0835d2e8f74b9c8974c563d497f94fae7d89f25d1c108.png" src="_images/1f4ad98f201bcd0c50c0835d2e8f74b9c8974c563d497f94fae7d89f25d1c108.png" style="width: 989px; height: 698px;" />
+</a>
 </div>
 </div>
 <p>The next  figure shows the function <span class="math notranslate nohighlight">\(\sum_{i=1}^I \pi_i m_i [  u(c_i) + \theta \log m_i ]\)</span> that is to be
@@ -1101,7 +1114,8 @@ minimized in the multiplier problem.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c3c28ef98de8c8f2f3eb8d68286aaa867888f19b84000498aea7e817238e03b9.png"><img alt="_images/c3c28ef98de8c8f2f3eb8d68286aaa867888f19b84000498aea7e817238e03b9.png" src="_images/c3c28ef98de8c8f2f3eb8d68286aaa867888f19b84000498aea7e817238e03b9.png" style="width: 989px; height: 698px;" /></a>
+<a class="reference internal image-reference" href="_images/c3c28ef98de8c8f2f3eb8d68286aaa867888f19b84000498aea7e817238e03b9.png"><img alt="_images/c3c28ef98de8c8f2f3eb8d68286aaa867888f19b84000498aea7e817238e03b9.png" src="_images/c3c28ef98de8c8f2f3eb8d68286aaa867888f19b84000498aea7e817238e03b9.png" style="width: 989px; height: 698px;" />
+</a>
 </div>
 </div>
 <p>Evidently, from this figure and also from formula <a class="reference internal" href="#equation-tom12">(25.12)</a>, lower values of <span class="math notranslate nohighlight">\(\theta\)</span> lead to lower,
@@ -1124,7 +1138,7 @@ and the entropy constraint dashed vertical
 line.</p>
 </section>
 <section id="risk-aversion-and-misspecification-aversion">
-<h2><span class="section-number">25.10. </span>Risk aversion and misspecification aversion<a class="headerlink" href="#risk-aversion-and-misspecification-aversion" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.10. </span>Risk aversion and misspecification aversion<a class="headerlink" href="#risk-aversion-and-misspecification-aversion" title="Link to this heading">#</a></h2>
 <p>All five types of preferences use curvature of <span class="math notranslate nohighlight">\(u\)</span> to express risk
 aversion.</p>
 <p>Constraint preferences express <strong>concern about misspecification</strong> or <strong>ambiguity</strong> for short with a positive
@@ -1157,7 +1171,7 @@ which it is optimal.</p>
 decision rules are undominated and therefore admissible.</p>
 </section>
 <section id="indifference-curves">
-<h2><span class="section-number">25.11. </span>Indifference curves<a class="headerlink" href="#indifference-curves" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.11. </span>Indifference curves<a class="headerlink" href="#indifference-curves" title="Link to this heading">#</a></h2>
 <p>Indifference curves illuminate how concerns about robustness affect
 asset pricing and utility costs of fluctuations. For <span class="math notranslate nohighlight">\(I=2\)</span>, the slopes
 of the indifference curves for our five preference specifications are</p>
@@ -1201,13 +1215,13 @@ point along the 45 degree line.</p>
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">multiplier_criterion_factory</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">multiplier_criterion_factory</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a function to compute the multiplier preferences objective function parametrized </span>
 <span class="sd">    by a penalty parameter `θ`, a probability vector `π` and a utility function `u`</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">criterion</span><span class="p">(</span><span class="n">c_1</span><span class="p">,</span> <span class="n">c_2</span><span class="p">,</span> <span class="n">return_entropy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">criterion</span><span class="p">(</span><span class="n">c_1</span><span class="p">,</span> <span class="n">c_2</span><span class="p">,</span> <span class="n">return_entropy</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute the multiplier preferences objective function and</span>
 <span class="sd">        associated entropy level if return_entropy=True for a</span>
@@ -1233,14 +1247,14 @@ point along the 45 degree line.</p>
     <span class="k">return</span> <span class="n">criterion</span>
 
 
-<span class="k">def</span> <span class="nf">constraint_criterion_factory</span><span class="p">(</span><span class="n">η</span><span class="p">,</span> <span class="n">π</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">constraint_criterion_factory</span><span class="p">(</span><span class="n">η</span><span class="p">,</span> <span class="n">π</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a function to compute the constraint preferences objective function parametrized </span>
 <span class="sd">    by a penalty parameter `η`, a probability vector `π` and a utility function `u`</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="nf">inner_root_problem</span><span class="p">(</span><span class="n">θ_tilde</span><span class="p">,</span> <span class="n">c_1</span><span class="p">,</span> <span class="n">c_2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner_root_problem</span><span class="p">(</span><span class="n">θ_tilde</span><span class="p">,</span> <span class="n">c_1</span><span class="p">,</span> <span class="n">c_2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inner root problem associated with the constraint preferences objective function. </span>
 <span class="sd">        </span>
@@ -1257,7 +1271,7 @@ point along the 45 degree line.</p>
         
         <span class="k">return</span> <span class="n">ent_val</span> <span class="o">-</span> <span class="n">η</span>
     
-    <span class="k">def</span> <span class="nf">criterion</span><span class="p">(</span><span class="n">c_1</span><span class="p">,</span> <span class="n">c_2</span><span class="p">,</span> <span class="n">return_θ_tilde</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">criterion</span><span class="p">(</span><span class="n">c_1</span><span class="p">,</span> <span class="n">c_2</span><span class="p">,</span> <span class="n">return_θ_tilde</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># Solve for the Lagrange multiplier</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">optimize</span><span class="o">.</span><span class="n">root_scalar</span><span class="p">(</span><span class="n">inner_root_problem</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">c_1</span><span class="p">,</span> <span class="n">c_2</span><span class="p">),</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="mf">3e-3</span><span class="p">,</span> <span class="mf">10.</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bisect&#39;</span><span class="p">)</span>
@@ -1285,7 +1299,7 @@ point along the 45 degree line.</p>
     <span class="k">return</span> <span class="n">criterion</span>
 
 
-<span class="k">def</span> <span class="nf">solve_root_problem</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">u_bar</span><span class="p">,</span> <span class="n">c_1_grid</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bisect&#39;</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_root_problem</span><span class="p">(</span><span class="n">problem</span><span class="p">,</span> <span class="n">u_bar</span><span class="p">,</span> <span class="n">c_1_grid</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;bisect&#39;</span><span class="p">,</span> <span class="n">bracket</span><span class="o">=</span><span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Solve root finding problem `problem` for all values in `c_1_grid` taking `u_bar` as</span>
 <span class="sd">    given and using `method`.</span>
@@ -1395,7 +1409,8 @@ point along the 45 degree line.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ec34277d3a4b952b0de8340454b7d3e91d345e7bbd65b22c30006e4c193b5d01.png"><img alt="_images/ec34277d3a4b952b0de8340454b7d3e91d345e7bbd65b22c30006e4c193b5d01.png" src="_images/ec34277d3a4b952b0de8340454b7d3e91d345e7bbd65b22c30006e4c193b5d01.png" style="width: 1350px; height: 706px;" /></a>
+<a class="reference internal image-reference" href="_images/ec34277d3a4b952b0de8340454b7d3e91d345e7bbd65b22c30006e4c193b5d01.png"><img alt="_images/ec34277d3a4b952b0de8340454b7d3e91d345e7bbd65b22c30006e4c193b5d01.png" src="_images/ec34277d3a4b952b0de8340454b7d3e91d345e7bbd65b22c30006e4c193b5d01.png" style="width: 1350px; height: 706px;" />
+</a>
 </div>
 </div>
 <p><strong>Kink at 45 degree line</strong></p>
@@ -1525,7 +1540,8 @@ preferences tangent.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/4750eea1bfd7e4c4b02a7e8b1cf2c29ab6cd5a06b14535ec7cb7651b09e08cca.png"><img alt="_images/4750eea1bfd7e4c4b02a7e8b1cf2c29ab6cd5a06b14535ec7cb7651b09e08cca.png" src="_images/4750eea1bfd7e4c4b02a7e8b1cf2c29ab6cd5a06b14535ec7cb7651b09e08cca.png" style="width: 1344px; height: 706px;" /></a>
+<a class="reference internal image-reference" href="_images/4750eea1bfd7e4c4b02a7e8b1cf2c29ab6cd5a06b14535ec7cb7651b09e08cca.png"><img alt="_images/4750eea1bfd7e4c4b02a7e8b1cf2c29ab6cd5a06b14535ec7cb7651b09e08cca.png" src="_images/4750eea1bfd7e4c4b02a7e8b1cf2c29ab6cd5a06b14535ec7cb7651b09e08cca.png" style="width: 1344px; height: 706px;" />
+</a>
 </div>
 </div>
 <p>Note that all three lines of the left graph intersect at (1, 3). While the intersection at (3, 1) is hard-coded, the intersection at (1,3) arises from the computation,  which confirms that the code seems to be
@@ -1554,7 +1570,7 @@ Bayesian (dotted lines) preferences. The worst-case probability
 <span class="math notranslate nohighlight">\(c_1=1 &lt; c_2 = 3\)</span>.</p>
 </section>
 <section id="state-price-deflators">
-<h2><span class="section-number">25.12. </span>State price deflators<a class="headerlink" href="#state-price-deflators" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.12. </span>State price deflators<a class="headerlink" href="#state-price-deflators" title="Link to this heading">#</a></h2>
 <p>Concerns about model uncertainty boost prices of risk that are embedded
 in state-price deflators. With complete markets, let <span class="math notranslate nohighlight">\(q_i\)</span> be the price
 of consumption in state <span class="math notranslate nohighlight">\(i\)</span>.</p>
@@ -1563,7 +1579,7 @@ having endowment <span class="math notranslate nohighlight">\(\bar c = \{\bar c_
 <span class="math notranslate nohighlight">\(\sum_{i}^I q_i (c_i - \bar c_i) \leq 0\)</span>.</p>
 <p>When a representative consumer has multiplier preferences, the state prices are</p>
 <div class="math notranslate nohighlight" id="equation-eqn-state-price">
-<span class="eqno">(25.18)<a class="headerlink" href="#equation-eqn-state-price" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.18)<a class="headerlink" href="#equation-eqn-state-price" title="Link to this equation">#</a></span>\[
 q_i = \pi_i \hat m_i u'(\bar c_i) = \pi_i \Biggl(\frac{\exp(-u(\bar c_i)/\theta)}{\sum_j  \pi_j \exp(-u(\bar c_j)/\theta)}\Biggr) u'(\bar c_i) .
 \]</div>
 <p>The worst-case likelihood ratio <span class="math notranslate nohighlight">\(\hat m_i\)</span> operates to increase prices
@@ -1632,7 +1648,8 @@ degree line), and <em>ex post</em> Bayesian (dotted lines) preferences.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/f23ea25f308474f195a9856cb853585e3104f832406ac06632144137c1894847.png"><img alt="_images/f23ea25f308474f195a9856cb853585e3104f832406ac06632144137c1894847.png" src="_images/f23ea25f308474f195a9856cb853585e3104f832406ac06632144137c1894847.png" style="width: 879px; height: 706px;" /></a>
+<a class="reference internal image-reference" href="_images/f23ea25f308474f195a9856cb853585e3104f832406ac06632144137c1894847.png"><img alt="_images/f23ea25f308474f195a9856cb853585e3104f832406ac06632144137c1894847.png" src="_images/f23ea25f308474f195a9856cb853585e3104f832406ac06632144137c1894847.png" style="width: 879px; height: 706px;" />
+</a>
 </div>
 </div>
 <p>Because budget constraints are linear, asset prices are identical under
@@ -1646,7 +1663,7 @@ consumption compensations of the kind that <span id="id13">[<a class="reference 
 <span id="id14">[<a class="reference internal" href="zreferences.html#id16" title="Lars Peter Hansen, Thomas J. Sargent, and Thomas D. Tallarini. Robust Permanent Income and Pricing. Review of Economic Studies, 66(4):873-907, 1999. URL: https://ideas.repec.org/a/oup/restud/v66y1999i4p873-907..html, doi:.">Hansen <em>et al.</em>, 1999</a>]</span>, <span id="id15">[<a class="reference internal" href="zreferences.html#id104" title="Thomas D Tallarini. Risk-sensitive real business cycles. Journal of Monetary Economics, 45(3):507-532, June 2000.">Tallarini, 2000</a>]</span>, and <span id="id16">[<a class="reference internal" href="zreferences.html#id15" title="Francisco Barillas, Lars Peter Hansen, and Thomas J. Sargent. Doubts or variability? Journal of Economic Theory, 144(6):2388-2418, November 2009. URL: https://ideas.repec.org/a/eee/jetheo/v144y2009i6p2388-2418.html, doi:.">Barillas <em>et al.</em>, 2009</a>]</span> used to measure the costs of
 business cycles must differ.</p>
 <section id="consumption-equivalent-measures-of-uncertainty-aversion">
-<h3><span class="section-number">25.12.1. </span>Consumption-equivalent measures of uncertainty aversion<a class="headerlink" href="#consumption-equivalent-measures-of-uncertainty-aversion" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">25.12.1. </span>Consumption-equivalent measures of uncertainty aversion<a class="headerlink" href="#consumption-equivalent-measures-of-uncertainty-aversion" title="Link to this heading">#</a></h3>
 <p>For each of our five types of preferences, the following figure allows us to construct a certainty
 equivalent point <span class="math notranslate nohighlight">\((c^*, c^*)\)</span> on the 45 degree line that renders the consumer indifferent between it and the risky point
 <span class="math notranslate nohighlight">\((c(1), c(2)) = (3,1)\)</span>.</p>
@@ -1723,7 +1740,8 @@ equivalent point <span class="math notranslate nohighlight">\((c^*, c^*)\)</span
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/9e34a0cdb9be432518f5332ada39ce81562fce14cf9963253dbcc05199b949a6.png"><img alt="_images/9e34a0cdb9be432518f5332ada39ce81562fce14cf9963253dbcc05199b949a6.png" src="_images/9e34a0cdb9be432518f5332ada39ce81562fce14cf9963253dbcc05199b949a6.png" style="width: 724px; height: 706px;" /></a>
+<a class="reference internal image-reference" href="_images/9e34a0cdb9be432518f5332ada39ce81562fce14cf9963253dbcc05199b949a6.png"><img alt="_images/9e34a0cdb9be432518f5332ada39ce81562fce14cf9963253dbcc05199b949a6.png" src="_images/9e34a0cdb9be432518f5332ada39ce81562fce14cf9963253dbcc05199b949a6.png" style="width: 724px; height: 706px;" />
+</a>
 </div>
 </div>
 <p>The figure indicates that the certainty equivalent
@@ -1746,7 +1764,7 @@ model uncertainty.</p>
 </section>
 </section>
 <section id="iso-utility-and-iso-entropy-curves-and-expansion-paths">
-<h2><span class="section-number">25.13. </span>Iso-utility and iso-entropy curves and expansion paths<a class="headerlink" href="#iso-utility-and-iso-entropy-curves-and-expansion-paths" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.13. </span>Iso-utility and iso-entropy curves and expansion paths<a class="headerlink" href="#iso-utility-and-iso-entropy-curves-and-expansion-paths" title="Link to this heading">#</a></h2>
 <p>The following figures show iso-entropy and iso-utility lines for the special case in which <span class="math notranslate nohighlight">\(I = 3\)</span>, <span class="math notranslate nohighlight">\(\pi_1 = .3, \pi_2 = .4\)</span>, and the utility function is <span class="math notranslate nohighlight">\(u(c)= \frac{c^{1-\alpha}}{1-\alpha}\)</span> with <span class="math notranslate nohighlight">\(\alpha =0\)</span> and <span class="math notranslate nohighlight">\(\alpha =3\)</span>, respectively, for the fixed plan <span class="math notranslate nohighlight">\(c(1) = 1, c(2) =2 , c(3) =3\)</span>.</p>
 <p>The iso-utility lines are the level curves of</p>
 <div class="math notranslate nohighlight">
@@ -1774,7 +1792,7 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting functions</span>
-<span class="k">def</span> <span class="nf">make_segments</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_segments</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Create list of line segments from x and y coordinates, in the correct format for LineCollection:</span>
 <span class="sd">    an array of the form   numlines x (points per line) x 2 (x and y) array</span>
@@ -1786,7 +1804,7 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
     <span class="k">return</span> <span class="n">segments</span>
 
 
-<span class="k">def</span> <span class="nf">colorline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;copper&#39;</span><span class="p">),</span> <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">colorline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;copper&#39;</span><span class="p">),</span> <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Plot a colored line with coordinates x and y</span>
 <span class="sd">    Optionally specify colors in the array z</span>
@@ -1831,7 +1849,7 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 <span class="n">c_bundle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">])</span>
 
 
-<span class="k">def</span> <span class="nf">contour_plot</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">π_vals_nb</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">levels_nb</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">min_π_val</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">contour_plot</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">π_vals_nb</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">levels_nb</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">min_π_val</span><span class="o">=</span><span class="mf">1e-8</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a contour plot containing iso-utility and iso-entropy curves given utility</span>
 <span class="sd">    function parameter `α`.</span>
@@ -1911,7 +1929,8 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
   m =  m_unnormalized / (π @ m_unnormalized)
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/e19112f84ac44a199811bff3abcaadd11cc362b0fd936a188bdf24d56ea577cf.png"><img alt="_images/e19112f84ac44a199811bff3abcaadd11cc362b0fd936a188bdf24d56ea577cf.png" src="_images/e19112f84ac44a199811bff3abcaadd11cc362b0fd936a188bdf24d56ea577cf.png" style="width: 1074px; height: 552px;" /></a>
+<a class="reference internal image-reference" href="_images/e19112f84ac44a199811bff3abcaadd11cc362b0fd936a188bdf24d56ea577cf.png"><img alt="_images/e19112f84ac44a199811bff3abcaadd11cc362b0fd936a188bdf24d56ea577cf.png" src="_images/e19112f84ac44a199811bff3abcaadd11cc362b0fd936a188bdf24d56ea577cf.png" style="width: 1074px; height: 552px;" />
+</a>
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -1935,12 +1954,13 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
   m =  m_unnormalized / (π @ m_unnormalized)
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/6d73a57fab475f450e1f85eca528effd58d25c799cb96eddde319dc465178e19.png"><img alt="_images/6d73a57fab475f450e1f85eca528effd58d25c799cb96eddde319dc465178e19.png" src="_images/6d73a57fab475f450e1f85eca528effd58d25c799cb96eddde319dc465178e19.png" style="width: 1104px; height: 552px;" /></a>
+<a class="reference internal image-reference" href="_images/6d73a57fab475f450e1f85eca528effd58d25c799cb96eddde319dc465178e19.png"><img alt="_images/6d73a57fab475f450e1f85eca528effd58d25c799cb96eddde319dc465178e19.png" src="_images/6d73a57fab475f450e1f85eca528effd58d25c799cb96eddde319dc465178e19.png" style="width: 1104px; height: 552px;" />
+</a>
 </div>
 </div>
 </section>
 <section id="bounds-on-expected-utility">
-<h2><span class="section-number">25.14. </span>Bounds on expected utility<a class="headerlink" href="#bounds-on-expected-utility" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.14. </span>Bounds on expected utility<a class="headerlink" href="#bounds-on-expected-utility" title="Link to this heading">#</a></h2>
 <p>Suppose that a decision maker wants a lower bound on expected utility
 <span class="math notranslate nohighlight">\(\sum_{i=1}^I  \hat \pi_i u(c_i)\)</span> that is satisfied for <strong>any</strong>
 distribution <span class="math notranslate nohighlight">\(\hat \pi\)</span> with relative entropy less than or equal to
@@ -1962,7 +1982,7 @@ worst-case distortions to probabilities.</p>
 <p>The inequality in the last line just asserts that minimizers minimize.</p>
 <p>Therefore, we have the following useful bound:</p>
 <div class="math notranslate nohighlight" id="equation-eqn-bound1">
-<span class="eqno">(25.19)<a class="headerlink" href="#equation-eqn-bound1" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(25.19)<a class="headerlink" href="#equation-eqn-bound1" title="Link to this equation">#</a></span>\[
 \sum_{i=1}^I m_i \pi_i u(c_i ) \geq {\sf T}_\theta u(c) - \theta \sum_{i=1}^I \pi_i m_i \log m_i .
 \]</div>
 <p>The left side is expected utility under the probability distribution <span class="math notranslate nohighlight">\(\{ m_i \pi_i\}\)</span>.</p>
@@ -2004,7 +2024,7 @@ entropy <span class="math notranslate nohighlight">\(\sum_{i=1}^I \pi_i m_i \log
 
 
 <span class="nd">@njit</span>
-<span class="k">def</span> <span class="nf">objective</span><span class="p">(</span><span class="n">m_0_and_1</span><span class="p">,</span> <span class="n">η</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">objective</span><span class="p">(</span><span class="n">m_0_and_1</span><span class="p">,</span> <span class="n">η</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute expected utility with respect to the distorted probability measure</span>
 <span class="sd">    given the first two values of the change of measure `m_0_and_1`. </span>
@@ -2032,7 +2052,7 @@ entropy <span class="math notranslate nohighlight">\(\sum_{i=1}^I \pi_i m_i \log
 
 
 <span class="nd">@njit</span>
-<span class="k">def</span> <span class="nf">max_obj_wrapper</span><span class="p">(</span><span class="n">m_0_and_1</span><span class="p">,</span> <span class="n">η</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">max_obj_wrapper</span><span class="p">(</span><span class="n">m_0_and_1</span><span class="p">,</span> <span class="n">η</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Wrap `objective` to make it suitable for maximization using minimization routines.</span>
 <span class="sd">    </span>
@@ -2111,7 +2131,8 @@ entropy <span class="math notranslate nohighlight">\(\sum_{i=1}^I \pi_i m_i \log
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/73de14c7a33eda42476442919d1ffa2866dc198fb4fcd809cd0008c4110989cf.png"><img alt="_images/73de14c7a33eda42476442919d1ffa2866dc198fb4fcd809cd0008c4110989cf.png" src="_images/73de14c7a33eda42476442919d1ffa2866dc198fb4fcd809cd0008c4110989cf.png" style="width: 754px; height: 544px;" /></a>
+<a class="reference internal image-reference" href="_images/73de14c7a33eda42476442919d1ffa2866dc198fb4fcd809cd0008c4110989cf.png"><img alt="_images/73de14c7a33eda42476442919d1ffa2866dc198fb4fcd809cd0008c4110989cf.png" src="_images/73de14c7a33eda42476442919d1ffa2866dc198fb4fcd809cd0008c4110989cf.png" style="width: 754px; height: 544px;" />
+</a>
 </div>
 </div>
 <p>In this figure, expected utility is on the co-ordinate axis
@@ -2149,7 +2170,7 @@ the entropy constraint in the constraint problem .</p>
 <p>This is an application of the envelope theorem.</p>
 </section>
 <section id="why-entropy">
-<h2><span class="section-number">25.15. </span>Why entropy?<a class="headerlink" href="#why-entropy" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">25.15. </span>Why entropy?<a class="headerlink" href="#why-entropy" title="Link to this heading">#</a></h2>
 <p>Beyond the helpful mathematical fact that it leads directly to
 convenient exponential twisting formulas <a class="reference internal" href="#equation-tom6">(25.6)</a> and
 <a class="reference internal" href="#equation-tom12">(25.12)</a> for worst-case probability distortions,
@@ -2158,7 +2179,7 @@ discrepancies between probability distribution.</p>
 <p>One arises from the role of entropy in statistical tests for discriminating between models.</p>
 <p>The other comes from axioms.</p>
 <section id="entropy-and-statistical-detection">
-<h3><span class="section-number">25.15.1. </span>Entropy and statistical detection<a class="headerlink" href="#entropy-and-statistical-detection" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">25.15.1. </span>Entropy and statistical detection<a class="headerlink" href="#entropy-and-statistical-detection" title="Link to this heading">#</a></h3>
 <p>Robust control theory starts with a decision maker who has constructed a
 good baseline approximating model whose free parameters he has estimated
 to fit historical data well.</p>
@@ -2260,7 +2281,8 @@ aversion associated with a logarithmic one-period utility function.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/b7bb0276418c80bd4ccee001d7ed638dda8030a15bef8afd55b0d2341a85504f.png"><img alt="_images/b7bb0276418c80bd4ccee001d7ed638dda8030a15bef8afd55b0d2341a85504f.png" src="_images/b7bb0276418c80bd4ccee001d7ed638dda8030a15bef8afd55b0d2341a85504f.png" style="width: 860px; height: 676px;" /></a>
+<a class="reference internal image-reference" href="_images/b7bb0276418c80bd4ccee001d7ed638dda8030a15bef8afd55b0d2341a85504f.png"><img alt="_images/b7bb0276418c80bd4ccee001d7ed638dda8030a15bef8afd55b0d2341a85504f.png" src="_images/b7bb0276418c80bd4ccee001d7ed638dda8030a15bef8afd55b0d2341a85504f.png" style="width: 860px; height: 676px;" />
+</a>
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -2289,7 +2311,7 @@ probability to <span class="math notranslate nohighlight">\(.05\)</span>.</p>
 <p>The worst-case model appears to fit the histogram nearly as well as the approximating model.</p>
 </section>
 <section id="axiomatic-justifications">
-<h3><span class="section-number">25.15.2. </span>Axiomatic justifications<a class="headerlink" href="#axiomatic-justifications" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">25.15.2. </span>Axiomatic justifications<a class="headerlink" href="#axiomatic-justifications" title="Link to this heading">#</a></h3>
 <p>Multiplier and constraint preferences are both special cases of what
 <span id="id24">[<a class="reference internal" href="zreferences.html#id12" title="Fabio Maccheroni, Massimo Marinacci, and Aldo Rustichini. Ambiguity Aversion, Robustness, and the Variational Representation of Preferences. Econometrica, 74(6):1147–1498, 2006.">Maccheroni <em>et al.</em>, 2006</a>]</span> call variational preferences.</p>
 <p>They provide an axiomatic foundation for variational preferences and describe how they
@@ -2330,6 +2352,8 @@ express ambiguity aversion.</p>
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -2812,7 +2836,7 @@ express ambiguity aversion.</p>
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

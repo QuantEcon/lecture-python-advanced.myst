@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>16. Composite Sorting &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'match_transport';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/match_transport.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="17. Recursive Models of Dynamic Linear Economies" href="hs_recursive_models.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -203,7 +210,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -250,9 +257,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="composite-sorting">
-<h1><span class="section-number">16. </span>Composite Sorting<a class="headerlink" href="#composite-sorting" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">16. </span>Composite Sorting<a class="headerlink" href="#composite-sorting" title="Link to this heading">#</a></h1>
 <section id="overview">
-<h2><span class="section-number">16.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>Optimal transport theory studies how a marginal probabilty measure  can  be related to another marginal probability measure in an ideal way.</p>
 <ul class="simple">
 <li><p>here ideal means to minimize some  cost criterion.</p></li>
@@ -273,7 +280,7 @@ their analysis.  So as you read this lecture, please watch  for Bellman equation
 you of ideas  encountered in this  <a class="reference external" href="https://python.quantecon.org/mccall_model.html">earlier QuantEcon lecture</a> and this <a class="reference external" href="https://dp.quantecon.org">QuantEcon book</a>.</p>
 </section>
 <section id="setup">
-<h2><span class="section-number">16.2. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.2. </span>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are finite sets that represent two distinct types of people to be matched.</p>
 <p>For each <span class="math notranslate nohighlight">\(x \in X,\)</span> let a positive integer <span class="math notranslate nohighlight">\(n_x\)</span> be the number  of agents of type <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <p>Similarly, let a positive integer <span class="math notranslate nohighlight">\(m_y\)</span> be the agents of agents of type <span class="math notranslate nohighlight">\(y \in Y\)</span>.</p>
@@ -324,18 +331,18 @@ you of ideas  encountered in this  <a class="reference external" href="https://p
 <p>We  use the following imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">linprog</span>
-<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">linprog</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">namedtuple</span>
 
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">matplotlib.patches</span> <span class="k">as</span> <span class="nn">patches</span>
-<span class="kn">from</span> <span class="nn">matplotlib.ticker</span> <span class="kn">import</span> <span class="n">MaxNLocator</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">cm</span>
-<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">Normalize</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">patches</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.ticker</span><span class="w"> </span><span class="kn">import</span> <span class="n">MaxNLocator</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">cm</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">Normalize</span>
 </pre></div>
 </div>
 </div>
@@ -344,8 +351,8 @@ you of ideas  encountered in this  <a class="reference external" href="https://p
 <p>The cost function is stored as an <span class="math notranslate nohighlight">\(|X| \times |Y|\)</span> matrix with <span class="math notranslate nohighlight">\((x,y)\)</span>-entry equal to <span class="math notranslate nohighlight">\(|x-y|^{1/\zeta},\)</span> i.e., the cost of matching an agent of type <span class="math notranslate nohighlight">\(x \in X\)</span> with an agent of type <span class="math notranslate nohighlight">\(y \in Y.\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ConcaveCostOT</span><span class="p">():</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Y_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_x</span> <span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">m_y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ζ</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ConcaveCostOT</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Y_types</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_x</span> <span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">m_y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ζ</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
         
         <span class="c1"># Sets of types </span>
         <span class="bp">self</span><span class="o">.</span><span class="n">X_types</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y_types</span> <span class="o">=</span> <span class="n">X_types</span><span class="p">,</span> <span class="n">Y_types</span>
@@ -395,14 +402,14 @@ you of ideas  encountered in this  <a class="reference external" href="https://p
 <span class="c1">## Generate random integer types quantities summing to N_agents_per_side</span>
 
 <span class="c1"># generate integer vectors of lenght n_types summing to n_agents</span>
-<span class="k">def</span> <span class="nf">random_marginal</span><span class="p">(</span><span class="n">n_types</span><span class="p">,</span> <span class="n">n_agents</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">random_marginal</span><span class="p">(</span><span class="n">n_types</span><span class="p">,</span> <span class="n">n_agents</span><span class="p">):</span>
     <span class="n">cuts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n_agents</span><span class="p">),</span> 
                                     <span class="n">size</span><span class="o">=</span> <span class="n">n_types</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
     <span class="n">segments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">cuts</span><span class="p">,</span> <span class="p">[</span><span class="n">n_agents</span><span class="p">])))</span>
     <span class="k">return</span> <span class="n">segments</span>
 
 <span class="c1"># Create a method to assign random marginals to our class</span>
-<span class="k">def</span> <span class="nf">assign_random_marginals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">random_seed</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">assign_random_marginals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">random_seed</span><span class="p">):</span>
     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">random_seed</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">n_x</span> <span class="o">=</span> <span class="n">random_marginal</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_types</span><span class="p">),</span> <span class="n">N_agents_per_side</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">m_y</span> <span class="o">=</span> <span class="n">random_marginal</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Y_types</span><span class="p">),</span> <span class="n">N_agents_per_side</span><span class="p">)</span>
@@ -430,7 +437,7 @@ Thus, $f(x) =\frac{n_x}{N} \mathbb{1}\{n_x > 0\} $ and $g(y) =\frac{m_y}{N} \mat
 <p>Note that there are possible overlaps between <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y.\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_marginals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distributions of types&#39;</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_marginals</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distributions of types&#39;</span><span class="p">):</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
     
@@ -468,14 +475,14 @@ Thus, $f(x) =\frac{n_x}{N} \mathbb{1}\{n_x > 0\} $ and $g(y) =\frac{m_y}{N} \mat
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ec2594a380867b53dec7102ebf60b2f9d59730f3934493e31115afe5070dcdf7.png" src="_images/ec2594a380867b53dec7102ebf60b2f9d59730f3934493e31115afe5070dcdf7.png" />
+<img alt="_images/5a35df64ca7ff585a74115d55a1a458da103efda46abd89dd8b757b6acff2d48.png" src="_images/5a35df64ca7ff585a74115d55a1a458da103efda46abd89dd8b757b6acff2d48.png" />
 </div>
 </div>
 </section>
 <section id="characterization-of-primal-solution">
-<h2><span class="section-number">16.3. </span>Characterization of primal solution<a class="headerlink" href="#characterization-of-primal-solution" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.3. </span>Characterization of primal solution<a class="headerlink" href="#characterization-of-primal-solution" title="Link to this heading">#</a></h2>
 <section id="three-properties-of-an-optimal-solution">
-<h3><span class="section-number">16.3.1. </span>Three properties of an optimal solution<a class="headerlink" href="#three-properties-of-an-optimal-solution" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.3.1. </span>Three properties of an optimal solution<a class="headerlink" href="#three-properties-of-an-optimal-solution" title="Link to this heading">#</a></h3>
 <p>We now indicate important properties that  are satisfied by an optimal solution.</p>
 <ol class="arabic simple">
 <li><p>Maximal number of perfect pairs</p></li>
@@ -496,7 +503,7 @@ h(|x-y|) \leq h(|x-z| +|z - y|) &lt; h(|x-z|)+ h(|z - y|)
 <p>The following method finds perfect pairs and returns the on-diagonal matchings as well as the residual off-diagonal marginals.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">match_perfect_pairs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">match_perfect_pairs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
     <span class="c1"># Find pairs on diagonal and related mass</span>
     <span class="n">perfect_pairs_x</span><span class="p">,</span> <span class="n">perfect_pairs_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
@@ -557,8 +564,8 @@ Residual types in Y: 16
 <p>Finally, we add a method to flexibly add a pair <span class="math notranslate nohighlight">\((i,j)\)</span> with <span class="math notranslate nohighlight">\(i \in \{0, \dots,|X|-1\},j \in \{|X|, \dots,|X| + |Y|-1\}\)</span> or <span class="math notranslate nohighlight">\(j \in \{0, \dots,|X|-1\},i \in \{|X|, \dots,|X| + |Y|-1\}\)</span> to a matching matrix of size <span class="math notranslate nohighlight">\(|X| \times |Y|\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">OffDiagonal</span><span class="p">(</span><span class="n">ConcaveCostOT</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_types</span><span class="p">,</span> <span class="n">Y_types</span><span class="p">,</span> <span class="n">n_x</span><span class="p">,</span> <span class="n">m_y</span><span class="p">,</span> <span class="n">ζ</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">OffDiagonal</span><span class="p">(</span><span class="n">ConcaveCostOT</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X_types</span><span class="p">,</span> <span class="n">Y_types</span><span class="p">,</span> <span class="n">n_x</span><span class="p">,</span> <span class="n">m_y</span><span class="p">,</span> <span class="n">ζ</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">X_types</span><span class="p">,</span> <span class="n">Y_types</span><span class="p">,</span> <span class="n">n_x</span><span class="p">,</span> <span class="n">m_y</span><span class="p">,</span> <span class="n">ζ</span><span class="p">)</span>
 
         <span class="c1"># Types (unsorted)</span>
@@ -583,7 +590,7 @@ Residual types in Y: 16
         <span class="bp">self</span><span class="o">.</span><span class="n">q_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">n_x</span><span class="p">,</span> <span class="o">-</span> <span class="n">m_y</span><span class="p">])[</span><span class="bp">self</span><span class="o">.</span><span class="n">type_z</span><span class="p">]</span> 
 
     <span class="c1"># Mathod that adds to matching matrix a pair (i,j)</span>
-    <span class="k">def</span> <span class="nf">add_pair_to_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pair_ids</span><span class="p">,</span> <span class="n">matching</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_pair_to_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pair_ids</span><span class="p">,</span> <span class="n">matching</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">pair_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">pair_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
             <span class="c1"># the pair of indices correspond to a pair (x,y)</span>
             <span class="n">matching</span><span class="p">[</span><span class="n">pair_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pair_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_types</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">1</span>
@@ -598,7 +605,7 @@ Residual types in Y: 16
 <p>These indices will come handy for adding the off-diagonal matching matrix to the diagonal matching matrix we just found, since the former will have a smaller size if there are perfect pairs in the original problem.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_offD_onD_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_offD_onD_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="c1"># Match perfect pairs and compute on-diagonal matching</span>
     <span class="n">n_x_off_diag</span><span class="p">,</span> <span class="n">m_y_off_diag</span> <span class="p">,</span> <span class="n">matching_diag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">match_perfect_pairs</span><span class="p">()</span>
 
@@ -636,7 +643,7 @@ Residual types in Y: 16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3b71bec78f1535d6eafac6d37c0c51311f6fea73b835d3dbb20fa111e7c3f214.png" src="_images/3b71bec78f1535d6eafac6d37c0c51311f6fea73b835d3dbb20fa111e7c3f214.png" />
+<img alt="_images/b5fe98847e1a9a2f99c1164ff9c55a4274d1e792545ff4a75694bcbea93f8f4c.png" src="_images/b5fe98847e1a9a2f99c1164ff9c55a4274d1e792545ff4a75694bcbea93f8f4c.png" />
 </div>
 </div>
 <p>To prepare the way for the second property,  represent both types  on the real line and draw    semicirles that  join <span class="math notranslate nohighlight">\((x,y)\)</span> for all pairs <span class="math notranslate nohighlight">\((x,y) \in X \times Y\)</span> that are matched in a solution.</p>
@@ -711,7 +718,7 @@ H(z) := F(z) - G(z), \text{ for } z \in \mathbb{R}.
 <p>Notice that <span class="math notranslate nohighlight">\(H\)</span> is right-continuous (being the difference of right-continuous functions) and that upward (resp. downward) jumps correspond to point masses of agents with types from <span class="math notranslate nohighlight">\(X\)</span> (resp. <span class="math notranslate nohighlight">\(Y\)</span>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_H_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">range_x_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scatter</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_H_z</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> <span class="n">range_x_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scatter</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="c1"># Determine H(z) = F(z) - G(z)</span>
     <span class="n">H_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q_z</span><span class="p">)</span>
     
@@ -720,9 +727,9 @@ H(z) := F(z) - G(z), \text{ for } z \in \mathbb{R}.
     <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     
     <span class="c1"># determine the step points for horizontal lines</span>
-    <span class="n">step</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mf">.05</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">ptp</span><span class="p">()],</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mf">.05</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="p">)],</span>
                             <span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="p">,</span>
-                           <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">.05</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">ptp</span><span class="p">()]))</span>
+                           <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">.05</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="p">)]))</span>
     <span class="n">height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">H_z</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
     
     <span class="c1"># plot the horizontal lines of the step function</span>
@@ -762,7 +769,7 @@ H(z) := F(z) - G(z), \text{ for } z \in \mathbb{R}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f2bbf44a7b907b7c6be536f7047734e7a2e8da6cbd2f2b21fd25367c283e583d.png" src="_images/f2bbf44a7b907b7c6be536f7047734e7a2e8da6cbd2f2b21fd25367c283e583d.png" />
+<img alt="_images/e99cd5ce796e2d9450ae3996a444f1b0bc08da11eccad1b8a3b0f0b1a32413b8.png" src="_images/e99cd5ce796e2d9450ae3996a444f1b0bc08da11eccad1b8a3b0f0b1a32413b8.png" />
 </div>
 </div>
 <p>The layering property extends to the general discrete setting.</p>
@@ -788,7 +795,7 @@ H(z) \leq h_{\ell -1} &lt; h_{\ell } \leq H(z-),
 <p>In addition, using indices will let us  extract the cost function within a layer from the cost function <span class="math notranslate nohighlight">\(c_{zz'}\)</span> computed offline.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">find_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="c1"># Compute H(z) on the joint support</span>
     <span class="n">H_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q_z</span><span class="p">)])</span>
 
@@ -837,16 +844,16 @@ H(z) \leq h_{\ell -1} &lt; h_{\ell } \leq H(z-),
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">)):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_layers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">)):</span>
     <span class="c1"># Find layers</span>
     <span class="n">layers</span><span class="p">,</span> <span class="n">layers_mass</span> <span class="p">,</span> <span class="n">layers_height</span><span class="p">,</span> <span class="n">H_z</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_layers</span><span class="p">()</span>
     
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
 
     <span class="c1"># Plot H(z)</span>
-    <span class="n">step</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mf">.05</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">ptp</span><span class="p">()],</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mf">.05</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="p">)],</span>
                            <span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="p">,</span>
-                           <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">.05</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">ptp</span><span class="p">()]))</span>
+                           <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">.05</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="p">)]))</span>
     <span class="n">height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">H_z</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">height</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;CDF&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     
@@ -882,12 +889,12 @@ H(z) \leq h_{\ell -1} &lt; h_{\ell } \leq H(z-),
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3e8d34383549c2f97c034bccd5623269621d8249fbeafeee96a1216ddbed93ad.png" src="_images/3e8d34383549c2f97c034bccd5623269621d8249fbeafeee96a1216ddbed93ad.png" />
+<img alt="_images/7ebe71dbefd537592a99fdea495d4e441460c4b6551b488d659ccabfcb4d1d03.png" src="_images/7ebe71dbefd537592a99fdea495d4e441460c4b6551b488d659ccabfcb4d1d03.png" />
 </div>
 </div>
 </section>
 <section id="solving-a-layer">
-<h3><span class="section-number">16.3.2. </span>Solving a layer<a class="headerlink" href="#solving-a-layer" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.3.2. </span>Solving a layer<a class="headerlink" href="#solving-a-layer" title="Link to this heading">#</a></h3>
 <p>Recall that layer <span class="math notranslate nohighlight">\(L_\ell\)</span> consists of a list of distinct types from <span class="math notranslate nohighlight">\(Y \sqcup X\)</span></p>
 <div class="math notranslate nohighlight">
 \[
@@ -906,7 +913,7 @@ z_1 &lt; z_2\dots &lt; z_{N_\ell-1} &lt; z_{N_\ell},
 
 
 <span class="c1"># Plot layer types</span>
-<span class="k">def</span> <span class="nf">plot_layer_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">mass</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">)):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_layer_types</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">mass</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">)):</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
     
@@ -946,7 +953,7 @@ z_1 &lt; z_2\dots &lt; z_{N_\ell-1} &lt; z_{N_\ell},
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0f676e54e4d0d75bcd0e0e29d618f48247cad56b6018b4f9c454d618070aa1a8.png" src="_images/0f676e54e4d0d75bcd0e0e29d618f48247cad56b6018b4f9c454d618070aa1a8.png" />
+<img alt="_images/a6759864c449eab377371907ac81aa530c6877727ce77f60faeb3cdc99684bfd.png" src="_images/a6759864c449eab377371907ac81aa530c6877727ce77f60faeb3cdc99684bfd.png" />
 </div>
 </div>
 <p>Given the structure of a layer and the <em>no intersecting pairs</em> property, the optimal matching and value of the layer can be found recursively.</p>
@@ -957,7 +964,7 @@ z_1 &lt; z_2\dots &lt; z_{N_\ell-1} &lt; z_{N_\ell},
 <p>Suppose that we computed the value <span class="math notranslate nohighlight">\(V_{ij}\)</span> for all <span class="math notranslate nohighlight">\(i,j \in [N_\ell]\)</span> with <span class="math notranslate nohighlight">\(i-j \in \{1,3,\dots,t-2\}\)</span> for some odd natural number <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>Then for <span class="math notranslate nohighlight">\(i,j \in [N_\ell]\)</span> with <span class="math notranslate nohighlight">\(i-j= t\)</span></p>
 <div class="math notranslate nohighlight" id="equation-eq-bellman101">
-<span class="eqno">(16.1)<a class="headerlink" href="#equation-eq-bellman101" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(16.1)<a class="headerlink" href="#equation-eq-bellman101" title="Link to this equation">#</a></span>\[
 V_{ij} = \min_{k \in \{i+1,i+3,\dots,j\}} \left\{ c_{ik} + V_{i+1,k-1} + V_{k+1,j}\right\}
 \]</div>
 <p>with the RHS depending only on previously computed values.</p>
@@ -966,7 +973,7 @@ V_{ij} = \min_{k \in \{i+1,i+3,\dots,j\}} \left\{ c_{ik} + V_{i+1,k-1} + V_{k+1,
 <p>In order to  distinguish  entries that  are relevant for our computations from those that  are never accessed, we initialize this matrix as full of  NaN values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_bellman_eqs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">layer</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_bellman_eqs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">layer</span><span class="p">):</span>
     <span class="c1"># Recover cost function within the layer</span>
     <span class="n">cost_i_j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cost_z_z</span><span class="p">[</span><span class="n">layer</span><span class="p">[:,</span><span class="kc">None</span><span class="p">],</span><span class="n">layer</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]]</span>
 
@@ -1041,7 +1048,7 @@ Section of the Value function of the layer:
 <p>The algorithm proceeds until there are no segments left.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_layer_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">V_i_j</span><span class="p">,</span> <span class="n">layer</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">find_layer_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">V_i_j</span><span class="p">,</span> <span class="n">layer</span><span class="p">):</span>
     <span class="c1"># Initialize</span>
     <span class="n">segments_to_process</span>  <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">layer</span><span class="p">))]</span>
     <span class="n">matching</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_types</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Y_types</span><span class="p">)),</span> <span class="nb">bool</span><span class="p">)</span>
@@ -1102,7 +1109,7 @@ Value of the layer (scaled by the mass = 1): 24.764959193288938
 <p>We apply it to the layer from our example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_layer_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">matching_layer</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_layer_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layer</span><span class="p">,</span> <span class="n">matching_layer</span><span class="p">):</span>
     <span class="c1"># Create the figure and axis</span>
     <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span>
 
@@ -1136,7 +1143,7 @@ Value of the layer (scaled by the mass = 1): 24.764959193288938
     <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span> 
     <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>  
     <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">([])</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">ptp</span><span class="p">()</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="p">)</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
@@ -1152,11 +1159,11 @@ Value of the layer (scaled by the mass = 1): 24.764959193288938
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d6b976828288c53dd860c8414bbd52e1b7542ab840aa9bcee38714f7649d3922.png" src="_images/d6b976828288c53dd860c8414bbd52e1b7542ab840aa9bcee38714f7649d3922.png" />
+<img alt="_images/f29f18032aa48d246a682cc229faecb1a69275bc841d5b06dff0dd1bb6714c75.png" src="_images/f29f18032aa48d246a682cc229faecb1a69275bc841d5b06dff0dd1bb6714c75.png" />
 </div>
 </div>
 <section id="solving-a-layer-in-a-smarter-way">
-<h4><span class="section-number">16.3.2.1. </span>Solving a layer in a smarter way<a class="headerlink" href="#solving-a-layer-in-a-smarter-way" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">16.3.2.1. </span>Solving a layer in a smarter way<a class="headerlink" href="#solving-a-layer-in-a-smarter-way" title="Link to this heading">#</a></h4>
 <p>We  now present two key results in the context of OT with concave type costs.</p>
 <p>We refer <span id="id7">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> and <span id="id8">[<a class="reference internal" href="zreferences.html#id4" title="Julie Delon, Julien Salomon, and Andrei Sobolevski. Minimum-weight perfect matching for non-intrinsic distances on the line. arXiv preprint arXiv:1102.1558, 2011.">Delon <em>et al.</em>, 2011</a>]</span> for proofs.</p>
 <p>Consider the problem faced within a layer, i.e., types from <span class="math notranslate nohighlight">\(Y \sqcup X\)</span></p>
@@ -1178,7 +1185,7 @@ V_{ij} = \min \{ c_{ij} + V_{i+1,j-1}, V_{i+2,j} + V_{i,j-2} - V_{i+2,j-2}\}
 <p>The following method uses these equations to compute the value function that  is stored as a matrix <span class="math notranslate nohighlight">\([V_{ij}]_{ i \in [N_\ell+1], j \in [N_\ell +1]}.\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_bellman_eqs_DSS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">layer</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_bellman_eqs_DSS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">layer</span><span class="p">):</span>
     <span class="c1"># Recover cost function within the layer</span>
     <span class="n">cost_i_j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cost_z_z</span><span class="p">[</span><span class="n">layer</span><span class="p">[:,</span><span class="kc">None</span><span class="p">],</span><span class="n">layer</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]]</span>
 
@@ -1261,7 +1268,7 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 <p>To gain understanding, note that this situation happens  when the left branch is achieved only for pairs <span class="math notranslate nohighlight">\(i,j\)</span> with <span class="math notranslate nohighlight">\(|i-j|=1,\)</span> which leads to the optimal matching <span class="math notranslate nohighlight">\((1,2), (2,3), \dots, (n_\ell -1, n_\ell).\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">find_layer_matching_DSS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">layer</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">find_layer_matching_DSS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">layer</span><span class="p">):</span>
     <span class="c1"># Recover cost function within the layer</span>
     <span class="n">cost_i_j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cost_z_z</span><span class="p">[</span><span class="n">layer</span><span class="p">[:,</span><span class="kc">None</span><span class="p">],</span><span class="n">layer</span><span class="p">[</span><span class="kc">None</span><span class="p">,:]]</span>
     
@@ -1345,14 +1352,14 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d6b976828288c53dd860c8414bbd52e1b7542ab840aa9bcee38714f7649d3922.png" src="_images/d6b976828288c53dd860c8414bbd52e1b7542ab840aa9bcee38714f7649d3922.png" />
+<img alt="_images/f29f18032aa48d246a682cc229faecb1a69275bc841d5b06dff0dd1bb6714c75.png" src="_images/f29f18032aa48d246a682cc229faecb1a69275bc841d5b06dff0dd1bb6714c75.png" />
 </div>
 </div>
 </section>
 </section>
 </section>
 <section id="solving-primal-problem">
-<h2><span class="section-number">16.4. </span>Solving primal problem<a class="headerlink" href="#solving-primal-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.4. </span>Solving primal problem<a class="headerlink" href="#solving-primal-problem" title="Link to this heading">#</a></h2>
 <p>The following method assembles  our components in order to solve the primal problem.</p>
 <p>First, if matches are perfect pairs, we store the on-diagonal matching and create an off-diagonal instance with the residual marginals.</p>
 <p>Then we compute the set of layers of the residual distributions.</p>
@@ -1360,7 +1367,7 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 <p>We then return the full matching, the off-diagonal matching, and the off-diagonal instance.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_primal_pb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_primal_pb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="c1"># Compute on-diagonal matching, create new instance with resitual types</span>
     <span class="n">off_diagoff_diagonal</span><span class="p">,</span> <span class="n">match_tuple</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_offD_onD_matching</span><span class="p">()</span>
     <span class="n">nonzero_id_x</span><span class="p">,</span> <span class="n">nonzero_id_y</span><span class="p">,</span> <span class="n">matching_diag</span> <span class="o">=</span> <span class="n">match_tuple</span>
@@ -1397,7 +1404,7 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 <p>We implement a similar method that  adopts the DSS algorithm</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_primal_DSS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_primal_DSS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="c1"># Compute on-diagonal matching, create new instance with resitual types</span>
     <span class="n">off_diagoff_diagonal</span><span class="p">,</span> <span class="n">match_tuple</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_offD_onD_matching</span><span class="p">()</span>
     <span class="n">nonzero_id_x</span><span class="p">,</span> <span class="n">nonzero_id_y</span><span class="p">,</span> <span class="n">matching_diag</span> <span class="o">=</span> <span class="n">match_tuple</span>
@@ -1435,7 +1442,7 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 <p>In the following figure,  widths and colors of  semicirles indicate relative numbers of agents that  are “transported” along an  arc.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matching_off_diag</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matching_off_diag</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> 
                     <span class="n">add_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plot_H_z</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">scatter</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     
     <span class="c1"># Create the figure and axis</span>
@@ -1489,20 +1496,20 @@ Difference with previous Bellman equations:       4.440892098500626e-14
     <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">([])</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_types</span><span class="o">.</span><span class="n">ptp</span><span class="p">()</span> <span class="o">/</span> <span class="mi">10</span><span class="p">,</span> 
-                <span class="p">(</span><span class="n">max_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_types</span><span class="o">.</span><span class="n">ptp</span><span class="p">()</span><span class="o">*</span><span class="mf">.01</span><span class="p">)</span>  
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_types</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">,</span> 
+                <span class="p">(</span><span class="n">max_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_types</span><span class="p">)</span><span class="o">*</span><span class="mf">.01</span><span class="p">)</span>  
 
     <span class="c1"># Plot H_z on the main axis if enabled</span>
     <span class="k">if</span> <span class="n">plot_H_z</span><span class="p">:</span>
         <span class="n">H_z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">q_z</span><span class="p">)</span>  
 
         <span class="n">step</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> 
-                                <span class="o">-</span> <span class="mf">.02</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">ptp</span><span class="p">()],</span>
+                                <span class="o">-</span> <span class="mf">.02</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="p">)],</span>
                                 <span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="p">,</span>
                                 <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> 
-                                <span class="o">+</span> <span class="mf">.02</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">ptp</span><span class="p">()]))</span>
+                                <span class="o">+</span> <span class="mf">.02</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="p">)]))</span>
 
-        <span class="n">H_z</span> <span class="o">=</span> <span class="n">H_z</span><span class="o">/</span><span class="n">H_z</span><span class="o">.</span><span class="n">ptp</span><span class="p">()</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="o">.</span><span class="n">ptp</span><span class="p">()</span> <span class="o">/</span><span class="mi">2</span>
+        <span class="n">H_z</span> <span class="o">=</span> <span class="n">H_z</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="n">H_z</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">support_z</span><span class="p">)</span> <span class="o">/</span><span class="mi">2</span>
         <span class="n">height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">H_z</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
         <span class="c1"># Plot the compressed H_z on the same main x-axis</span>
@@ -1510,8 +1517,8 @@ Difference with previous Bellman equations:       4.440892098500626e-14
                                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$H_z$&#39;</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="s1">&#39;post&#39;</span><span class="p">)</span>
         
         <span class="c1"># Set the y-limit to keep H_z and maximum circle size in the plot</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">H_z</span><span class="p">)</span> <span class="o">-</span> <span class="n">H_z</span><span class="o">.</span><span class="n">ptp</span><span class="p">()</span> <span class="o">*</span><span class="mf">.01</span><span class="p">,</span>
-                    <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">H_z</span><span class="p">),</span> <span class="n">max_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">H_z</span><span class="o">.</span><span class="n">ptp</span><span class="p">()</span> <span class="o">*</span><span class="mf">.01</span><span class="p">)</span> 
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">H_z</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="n">H_z</span><span class="p">)</span> <span class="o">*</span><span class="mf">.01</span><span class="p">,</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">H_z</span><span class="p">),</span> <span class="n">max_height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="n">H_z</span><span class="p">)</span> <span class="o">*</span><span class="mf">.01</span><span class="p">)</span> 
 
         <span class="c1"># Add label and legend for H_z</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
@@ -1533,16 +1540,16 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8d7abc00a2ae3cb85be3f1d7994d683522e5c9fa78299aa11ffbd4b1404edb01.png" src="_images/8d7abc00a2ae3cb85be3f1d7994d683522e5c9fa78299aa11ffbd4b1404edb01.png" />
-<img alt="_images/f2bb710585e5c6948ca3b41c24bb00005ec785eba4f9b9c40d1b1f2a11102afc.png" src="_images/f2bb710585e5c6948ca3b41c24bb00005ec785eba4f9b9c40d1b1f2a11102afc.png" />
+<img alt="_images/8bbd7fd53b2f5d48448ec5c3713bcb312d2a57c9236abddf6a07f22dc64159d7.png" src="_images/8bbd7fd53b2f5d48448ec5c3713bcb312d2a57c9236abddf6a07f22dc64159d7.png" />
+<img alt="_images/cce57ca2988772eefbd15b39e25df60f3429e82c7b8721729a43ba073f679dd9.png" src="_images/cce57ca2988772eefbd15b39e25df60f3429e82c7b8721729a43ba073f679dd9.png" />
 </div>
 </div>
 <section id="verify-with-linear-programming">
-<h3><span class="section-number">16.4.1. </span>Verify with linear programming<a class="headerlink" href="#verify-with-linear-programming" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.4.1. </span>Verify with linear programming<a class="headerlink" href="#verify-with-linear-programming" title="Link to this heading">#</a></h3>
 <p>Let’s verify some of the proceeding findings using linear programming.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve_1to1</span><span class="p">(</span><span class="n">c_i_j</span><span class="p">,</span> <span class="n">n_x</span><span class="p">,</span> <span class="n">m_y</span><span class="p">,</span> <span class="n">return_dual</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_1to1</span><span class="p">(</span><span class="n">c_i_j</span><span class="p">,</span> <span class="n">n_x</span><span class="p">,</span> <span class="n">m_y</span><span class="p">,</span> <span class="n">return_dual</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">n</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">shape</span><span class="p">(</span><span class="n">c_i_j</span><span class="p">)</span>
 
     <span class="c1"># Constraint matrix </span>
@@ -1586,9 +1593,9 @@ Value (DSS): 143.45490363125705
 </section>
 </section>
 <section id="examples">
-<h2><span class="section-number">16.5. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.5. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <section id="example-1">
-<h3><span class="section-number">16.5.1. </span>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.5.1. </span>Example 1<a class="headerlink" href="#example-1" title="Link to this heading">#</a></h3>
 <p>We study optimal transport problems on the real line with cost <span class="math notranslate nohighlight">\(c(x,y)= h(|x-y|)\)</span> for a strictly concave and increasing function <span class="math notranslate nohighlight">\(h: \mathbb{R}_+ \rightarrow \mathbb{R}_+.\)</span></p>
 <p>The outcome  is called <em>composite sorting</em>.</p>
 <p>Here, we  will focus on <span class="math notranslate nohighlight">\(c(x,y)=|x-y|^{\frac{1}{\zeta}}\)</span> for <span class="math notranslate nohighlight">\(\zeta&gt;1\)</span></p>
@@ -1655,8 +1662,8 @@ Value (DSS): 143.45490363125705
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/76bf4acd5ff4b3e8cedc4ec296981b25d0f8d0b30cd19e153602e3db2e20283c.png" src="_images/76bf4acd5ff4b3e8cedc4ec296981b25d0f8d0b30cd19e153602e3db2e20283c.png" />
-<img alt="_images/314cbae0b10533b6264267e73ac8ccba96334b0f461df62d13f95616fd0bb3be.png" src="_images/314cbae0b10533b6264267e73ac8ccba96334b0f461df62d13f95616fd0bb3be.png" />
+<img alt="_images/a4753a0b07dbd4656b6a9bbcc7bd7f25835ad2126f6b95c55e58c1b577af4685.png" src="_images/a4753a0b07dbd4656b6a9bbcc7bd7f25835ad2126f6b95c55e58c1b577af4685.png" />
+<img alt="_images/dbd91ddaa3ee4d6af8f5e5947f04de34ae590a0f3a668b646a6698a21b129b6a.png" src="_images/dbd91ddaa3ee4d6af8f5e5947f04de34ae590a0f3a668b646a6698a21b129b6a.png" />
 </div>
 </div>
 <p>To explore the coincidental resemblence to a NAM outcome,  let’s  shift left type <span class="math notranslate nohighlight">\(\textcolor{red}{y_0} \)</span> while  keeping it in between <span class="math notranslate nohighlight">\(\textcolor{blue}{x_0}\)</span> and <span class="math notranslate nohighlight">\(\textcolor{blue}{x_1}\)</span>.</p>
@@ -1692,9 +1699,9 @@ Value (DSS): 143.45490363125705
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c6696acbfc993514ee068bb9c5e24f96aed376b2948546a9ee661b38b7ffe32c.png" src="_images/c6696acbfc993514ee068bb9c5e24f96aed376b2948546a9ee661b38b7ffe32c.png" />
-<img alt="_images/3884e2cab5aa87af6deace4a68ef3da68694851464f05a010a8f63460afa5786.png" src="_images/3884e2cab5aa87af6deace4a68ef3da68694851464f05a010a8f63460afa5786.png" />
-<img alt="_images/7aee87acf03be858b26b895b5cd91766c2818a25fcac7930c2026fa3716189a8.png" src="_images/7aee87acf03be858b26b895b5cd91766c2818a25fcac7930c2026fa3716189a8.png" />
+<img alt="_images/bd2e963eeb989ed4963c55d0b39c8b5607c664ac27e16fa3052a10f23dc3ec83.png" src="_images/bd2e963eeb989ed4963c55d0b39c8b5607c664ac27e16fa3052a10f23dc3ec83.png" />
+<img alt="_images/e32b19a2a977a26effbe925874f1e4744d591370c05c7e102e6db6d2df0b1534.png" src="_images/e32b19a2a977a26effbe925874f1e4744d591370c05c7e102e6db6d2df0b1534.png" />
+<img alt="_images/f36d92e267202512c9af2c668e78952037bf4972e0ba3a9c43ead67218fb1eb2.png" src="_images/f36d92e267202512c9af2c668e78952037bf4972e0ba3a9c43ead67218fb1eb2.png" />
 </div>
 </div>
 <p>Finally, notice that the  <strong>Monge problem</strong>  cost function <span class="math notranslate nohighlight">\(|x-y|\)</span>  equals the limit of the  composite sorting cost <span class="math notranslate nohighlight">\(|x-y|^{1/\zeta}\)</span> as <span class="math notranslate nohighlight">\(\zeta \downarrow 1\)</span> and also  the limit of <span class="math notranslate nohighlight">\(|x-y|^p\)</span> as <span class="math notranslate nohighlight">\(p \downarrow 1.\)</span></p>
@@ -1744,13 +1751,13 @@ Monge cost of PAM:
 10.530287849572636
 </pre></div>
 </div>
-<img alt="_images/d73de004a7920eccb27d6272817847e29711048cbe3ced7538b3c43cc9b36c2e.png" src="_images/d73de004a7920eccb27d6272817847e29711048cbe3ced7538b3c43cc9b36c2e.png" />
-<img alt="_images/7dcbcdcafcc8e7724bd1e2786cdac93374ed7a5b361669bcdac7649fbef31d4e.png" src="_images/7dcbcdcafcc8e7724bd1e2786cdac93374ed7a5b361669bcdac7649fbef31d4e.png" />
+<img alt="_images/211fd61fa90a4e1f7d3f2a185d87231ebce37ebe5d1760e09947d5e4e2de873c.png" src="_images/211fd61fa90a4e1f7d3f2a185d87231ebce37ebe5d1760e09947d5e4e2de873c.png" />
+<img alt="_images/fdafd26cd36b4b7b26259f55d484fc7c31053c1d3c62a5019b90dcf46614176c.png" src="_images/fdafd26cd36b4b7b26259f55d484fc7c31053c1d3c62a5019b90dcf46614176c.png" />
 </div>
 </div>
 </section>
 <section id="example-2">
-<h3><span class="section-number">16.5.2. </span>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.5.2. </span>Example 2<a class="headerlink" href="#example-2" title="Link to this heading">#</a></h3>
 <p>The following example has five agents per side.</p>
 <p>The composite sorting assignment differs from both PAM and NAM.</p>
 <p>Composite sorting features a hierarchical structure, with each hierarchy positively sorted.</p>
@@ -1796,14 +1803,14 @@ Monge cost of PAM:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d94cc60246babf16b0e0cade6f6121b3218fd11309756cd5b418ae445e611658.png" src="_images/d94cc60246babf16b0e0cade6f6121b3218fd11309756cd5b418ae445e611658.png" />
-<img alt="_images/3200301a590109f4ba8a0899200daf7e0ab6f1ee2e9179fe032846198bb8c342.png" src="_images/3200301a590109f4ba8a0899200daf7e0ab6f1ee2e9179fe032846198bb8c342.png" />
-<img alt="_images/6cceae42a95739b2de88292355efaea0ae41290df3feed086e8ad8ff10e20ff7.png" src="_images/6cceae42a95739b2de88292355efaea0ae41290df3feed086e8ad8ff10e20ff7.png" />
+<img alt="_images/7e08249bfb33c97bd8ee8f23cdb59c9065491551f5e642295511f5e96ab0645c.png" src="_images/7e08249bfb33c97bd8ee8f23cdb59c9065491551f5e642295511f5e96ab0645c.png" />
+<img alt="_images/8dfb291593ec4e3f1fb922de9eecae702986632387704ed275fc8cf381bdf4cd.png" src="_images/8dfb291593ec4e3f1fb922de9eecae702986632387704ed275fc8cf381bdf4cd.png" />
+<img alt="_images/54eece7d1ffd750cda1232071599a589c717fa22369886c26c6ef9ec34b3f541.png" src="_images/54eece7d1ffd750cda1232071599a589c717fa22369886c26c6ef9ec34b3f541.png" />
 </div>
 </div>
 </section>
 <section id="example-3">
-<h3><span class="section-number">16.5.3. </span>Example 3<a class="headerlink" href="#example-3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.5.3. </span>Example 3<a class="headerlink" href="#example-3" title="Link to this heading">#</a></h3>
 <p><span id="id9">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> provide the following  example.</p>
 <p>There are four agents per side and three types per side (so the problem is not unitary, as opposed to the examples above).</p>
 <div class="cell docutils container">
@@ -1821,7 +1828,7 @@ Monge cost of PAM:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7b79f32bc467531da1a68950eefde53aaa7553190552253a4c33b25e9e019f33.png" src="_images/7b79f32bc467531da1a68950eefde53aaa7553190552253a4c33b25e9e019f33.png" />
+<img alt="_images/dcc33b0ce1307b8d7ea665739a9a2ce07d8bc259ed95be59030d071005163005.png" src="_images/dcc33b0ce1307b8d7ea665739a9a2ce07d8bc259ed95be59030d071005163005.png" />
 </div>
 </div>
 <p>In the case of positive assortative matching (PAM), the two agents with lowest value <span class="math notranslate nohighlight">\(\textcolor{blue}{x_0} \)</span> are matched with the lowest valued agents on the other side <span class="math notranslate nohighlight">\(\textcolor{red}{y_0},\textcolor{red}{y_1}.\)</span></p>
@@ -1845,15 +1852,15 @@ Monge cost of PAM:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/43cc8a6e16d22f455158729f36460b893c3e8e4493120a46e31ce8d4972faa37.png" src="_images/43cc8a6e16d22f455158729f36460b893c3e8e4493120a46e31ce8d4972faa37.png" />
-<img alt="_images/89292f595c87ba67b74e5ea6add5cee6b31520a17cd4ca6e36f9441d6fc41a4f.png" src="_images/89292f595c87ba67b74e5ea6add5cee6b31520a17cd4ca6e36f9441d6fc41a4f.png" />
-<img alt="_images/07cc70c415acd249dbff07bc3042db5e4936ec2a2dae8cbc37401399b925b907.png" src="_images/07cc70c415acd249dbff07bc3042db5e4936ec2a2dae8cbc37401399b925b907.png" />
+<img alt="_images/2fb07c9c0ff2fd18e3b284a3dcb6f0d89994ca6e1304b259a343fd4481d77af8.png" src="_images/2fb07c9c0ff2fd18e3b284a3dcb6f0d89994ca6e1304b259a343fd4481d77af8.png" />
+<img alt="_images/2254928d7d0d91a248dc820d760b25730e438181a05bc44d6c09df8aeb883eb3.png" src="_images/2254928d7d0d91a248dc820d760b25730e438181a05bc44d6c09df8aeb883eb3.png" />
+<img alt="_images/c30ddd76d4841c02f93a7403860a5990db2844dea83c0f302818dbb605b1fa75.png" src="_images/c30ddd76d4841c02f93a7403860a5990db2844dea83c0f302818dbb605b1fa75.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="dual-solution">
-<h2><span class="section-number">16.6. </span>Dual solution<a class="headerlink" href="#dual-solution" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.6. </span>Dual solution<a class="headerlink" href="#dual-solution" title="Link to this heading">#</a></h2>
 <p>Let’s recall the formulation</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1921,7 +1928,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/91be4c65f54a004d6da535a7ae877529974e5a7e97a44de71d8d36338fe7969d.png" src="_images/91be4c65f54a004d6da535a7ae877529974e5a7e97a44de71d8d36338fe7969d.png" />
+<img alt="_images/73dbf1a82a51754832e542c718f3cc36443f26873831ae11031fbd0260f8c0a0.png" src="_images/73dbf1a82a51754832e542c718f3cc36443f26873831ae11031fbd0260f8c0a0.png" />
 </div>
 </div>
 <p>Having computed the optimal matching, we say that a pair <span class="math notranslate nohighlight">\((x_0,y_0)\)</span> is a <em>subpair</em> of a matched pair <span class="math notranslate nohighlight">\((x,y)\)</span> if <span class="math notranslate nohighlight">\(x_0,y_0\)</span> are in the open interval between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> and the pair <span class="math notranslate nohighlight">\((x_0,y_0)\)</span> is not nested.</p>
@@ -1930,7 +1937,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <p>Values of each key <span class="math notranslate nohighlight">\((x_0,y_0)\)</span> are the subpairs ordered so that the first subpair is the subpair with the <span class="math notranslate nohighlight">\(x\)</span> type closest to <span class="math notranslate nohighlight">\(x_0\)</span> and the last subpair is the subpair with the <span class="math notranslate nohighlight">\(y\)</span> type closest to <span class="math notranslate nohighlight">\(y_0.\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sort_subpairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subpairs</span><span class="p">,</span> <span class="n">x_smaller_y</span><span class="o">=</span><span class="kc">True</span> <span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sort_subpairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subpairs</span><span class="p">,</span> <span class="n">x_smaller_y</span><span class="o">=</span><span class="kc">True</span> <span class="p">):</span>
 
     <span class="n">x_key</span> <span class="o">=</span> <span class="nb">min</span> <span class="k">if</span> <span class="n">x_smaller_y</span> <span class="k">else</span> <span class="nb">max</span>
     <span class="n">y_key</span> <span class="o">=</span> <span class="nb">max</span> <span class="k">if</span> <span class="n">x_smaller_y</span> <span class="k">else</span> <span class="nb">min</span>
@@ -1945,7 +1952,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 
 <span class="n">ConcaveCostOT</span><span class="o">.</span><span class="n">sort_subpairs</span> <span class="o">=</span> <span class="n">sort_subpairs</span>
 
-<span class="k">def</span> <span class="nf">find_subpairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matching</span><span class="p">,</span> <span class="n">return_pairs_between</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">find_subpairs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matching</span><span class="p">,</span> <span class="n">return_pairs_between</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         
     <span class="c1"># Create set of matched pairs of types and add an artificial pair </span>
     <span class="n">matched_pairs</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">matching</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)))</span> 
@@ -2007,15 +2014,18 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{(5, 5): [(4, 7), (1, 3)],
- &#39;artificial_pair&#39;: [(5, 5), (2, 6)],
- (3, 1): [(7, 0), (0, 2)],
- (7, 0): [],
- (6, 4): [],
- (0, 2): [],
- (2, 6): [],
- (1, 3): [],
- (4, 7): [(6, 4), (3, 1)]}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{(np.int64(5), np.int64(5)): [(np.int64(4), np.int64(7)),
+  (np.int64(1), np.int64(3))],
+ (np.int64(3), np.int64(1)): [(np.int64(7), np.int64(0)),
+  (np.int64(0), np.int64(2))],
+ (np.int64(7), np.int64(0)): [],
+ (np.int64(6), np.int64(4)): [],
+ &#39;artificial_pair&#39;: [(np.int64(5), np.int64(5)), (np.int64(2), np.int64(6))],
+ (np.int64(0), np.int64(2)): [],
+ (np.int64(2), np.int64(6)): [],
+ (np.int64(1), np.int64(3)): [],
+ (np.int64(4), np.int64(7)): [(np.int64(6), np.int64(4)),
+  (np.int64(3), np.int64(1))]}
 </pre></div>
 </div>
 </div>
@@ -2026,7 +2036,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## Compute hierarchies</span>
 
-<span class="k">def</span> <span class="nf">find_hierarchies</span><span class="p">(</span><span class="n">subpairs</span><span class="p">):</span>  
+<span class="k">def</span><span class="w"> </span><span class="nf">find_hierarchies</span><span class="p">(</span><span class="n">subpairs</span><span class="p">):</span>  
     
     <span class="c1"># Initialize sets for faster membership checks</span>
     <span class="n">pairs_to_process</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">subpairs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>  <span class="c1"># All pairs to process</span>
@@ -2059,7 +2069,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 
 <span class="c1">## Plot hierarchies</span>
 
-<span class="k">def</span> <span class="nf">plot_hierarchies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subpairs</span><span class="p">,</span> <span class="n">scatter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">range_x_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_hierarchies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subpairs</span><span class="p">,</span> <span class="n">scatter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">range_x_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># Compute hierarchies</span>
     <span class="n">hierarchies</span> <span class="o">=</span> <span class="n">find_hierarchies</span><span class="p">(</span><span class="n">subpairs</span><span class="p">)</span>
 
@@ -2096,7 +2106,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 
     <span class="k">if</span> <span class="n">range_x_axis</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">range_x_axis</span><span class="p">)</span>
-        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">X_types</span><span class="o">.</span><span class="n">ptp</span><span class="p">()</span> <span class="o">/</span> <span class="mi">10</span><span class="p">,</span> 
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">ptp</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_types</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span><span class="p">,</span> 
                     <span class="p">(</span><span class="n">range_x_axis</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">range_x_axis</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">)</span>
 
     <span class="c1"># Title and layout settings for the main plot</span>
@@ -2133,7 +2143,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2dd40c6110ada9f6645dbf4e3406f0a8df601e58182af423bdd8248cc2efc6c1.png" src="_images/2dd40c6110ada9f6645dbf4e3406f0a8df601e58182af423bdd8248cc2efc6c1.png" />
+<img alt="_images/f19c832b0f80d6385d8ce2bb1fc2a7f099c64132320484a40bfdf84d0b2a2503.png" src="_images/f19c832b0f80d6385d8ce2bb1fc2a7f099c64132320484a40bfdf84d0b2a2503.png" />
 </div>
 </div>
 <p>We proceed to describe and implement the algorithm to compute the dual solution.</p>
@@ -2170,7 +2180,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <p>The following method computes the solution <span class="math notranslate nohighlight">\(\beta\)</span> of the linear system of inequalities above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_betas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pair</span><span class="p">,</span> <span class="n">subpairs</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_betas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pair</span><span class="p">,</span> <span class="n">subpairs</span><span class="p">):</span>
     <span class="n">types_subpairs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">subpairs</span><span class="p">)</span>
 
     <span class="c1"># Define the bounds of the linear inequality system</span>
@@ -2219,7 +2229,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <p>The following method iteratively processes the matched pairs of the off-diagonal matching as explained above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_dual_off_diagonal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subpairs</span><span class="p">,</span> <span class="n">pairs_between</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_dual_off_diagonal</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subpairs</span><span class="p">,</span> <span class="n">pairs_between</span><span class="p">):</span>
 
     <span class="c1"># Initialize dual variables</span>
     <span class="n">ϕ_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">X_types</span><span class="p">))</span>
@@ -2341,7 +2351,7 @@ Value of primal solution (scipy) 9.03369035213102
 <p>The following method computes the full dual solution from the primal solution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_dual_solution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matching_off_diag</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_dual_solution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matching_off_diag</span><span class="p">):</span>
 
     <span class="c1"># Compute the dual solution for the off-diagonal types</span>
     <span class="n">off_diag</span><span class="p">,</span> <span class="n">match_tuple</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_offD_onD_matching</span><span class="p">()</span>
@@ -2391,9 +2401,9 @@ Value of primal solution:  9.03369035213102
 </div>
 </section>
 <section id="application">
-<h2><span class="section-number">16.7. </span>Application<a class="headerlink" href="#application" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">16.7. </span>Application<a class="headerlink" href="#application" title="Link to this heading">#</a></h2>
 <section id="data">
-<h3><span class="section-number">16.7.1. </span>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.7.1. </span>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
 <p>We now replicate the empirical analysis carried out by <span id="id11">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>.</p>
 <p>The dataset is obtained from the American Community Survey and contains individual level data on income, age and occupation.</p>
 <p>The occupation of each individual consists of a Standard Occupational Classification (SOC) code.</p>
@@ -2445,9 +2455,9 @@ Value of primal solution:  9.03369035213102
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="id12">
-<img alt="_images/138fa8c86135daed058ae556cb6c69b9780dccc6dae62ecdf38b087acf83cbd0.png" src="_images/138fa8c86135daed058ae556cb6c69b9780dccc6dae62ecdf38b087acf83cbd0.png" />
+<img alt="_images/c53b80f0978cbb8769498f84f445bec8f3adc62894f55d40d5b1a05db88f9b7a.png" src="_images/c53b80f0978cbb8769498f84f445bec8f3adc62894f55d40d5b1a05db88f9b7a.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data. The size of the marker is proportional to the number of individuals in the occupation.</span><a class="headerlink" href="#id12" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data. The size of the marker is proportional to the number of individuals in the occupation.</span><a class="headerlink" href="#id12" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -2484,16 +2494,16 @@ Value of primal solution:  9.03369035213102
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="id13">
-<img alt="_images/ca4abb66441ba706f4ce30c50442f91e4eda1befc656e52a2c7f12a8db02785a.png" src="_images/ca4abb66441ba706f4ce30c50442f91e4eda1befc656e52a2c7f12a8db02785a.png" />
+<img alt="_images/a14fec8cae2e2663183979a78143312b9066dfa9d415dfbf0192627399e73490.png" src="_images/a14fec8cae2e2663183979a78143312b9066dfa9d415dfbf0192627399e73490.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data.</span><a class="headerlink" href="#id13" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data.</span><a class="headerlink" href="#id13" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
 <section id="model">
-<h3><span class="section-number">16.7.2. </span>Model<a class="headerlink" href="#model" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">16.7.2. </span>Model<a class="headerlink" href="#model" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parameters_1980</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Params_Jobs&#39;</span><span class="p">,</span> <span class="p">[</span>
@@ -2514,7 +2524,7 @@ Value of primal solution:  9.03369035213102
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">generate_types_application</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_agents</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_types_application</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_agents</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 
     <span class="n">mean_1</span><span class="p">,</span> <span class="n">var_1</span><span class="p">,</span> <span class="n">mean_2</span><span class="p">,</span> <span class="n">var_2</span><span class="p">,</span> <span class="n">mixing_weight</span><span class="p">,</span> <span class="n">var_workers</span> <span class="o">=</span> <span class="n">params</span>
 
@@ -2557,7 +2567,7 @@ Value of primal solution:  9.03369035213102
 <p>Since we will consider examples with a large number of agents, it will be convenient to visualize the distributions as histograms approximating the pdfs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_marginals_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_marginals_pdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bins</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span> 
                         <span class="n">range_x_axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Distributions of types&#39;</span><span class="p">):</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="n">figsize</span><span class="p">)</span>
@@ -2607,7 +2617,7 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/59f58eb373632725c1607f64950edec7972413b16d674d836942fdd41e9defb1.png" src="_images/59f58eb373632725c1607f64950edec7972413b16d674d836942fdd41e9defb1.png" />
+<img alt="_images/58cbd89446827805ef533c1832228eb6386c53dec0b1c21780a8ceb31d9d914f.png" src="_images/58cbd89446827805ef533c1832228eb6386c53dec0b1c21780a8ceb31d9d914f.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2619,7 +2629,7 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/79a4b4e2ff6257864370bde1819c87de24eb7692f1d119e8a8c15ceac591541a.png" src="_images/79a4b4e2ff6257864370bde1819c87de24eb7692f1d119e8a8c15ceac591541a.png" />
+<img alt="_images/d12722d2942cfb221a11195988cf58f6aae67ad3a130bc54ebf2f43927565cf3.png" src="_images/d12722d2942cfb221a11195988cf58f6aae67ad3a130bc54ebf2f43927565cf3.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2633,7 +2643,7 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c7e4fea982375eea52e81a73a5c62d31a150442d5a6db372b3e31244d155f725.png" src="_images/c7e4fea982375eea52e81a73a5c62d31a150442d5a6db372b3e31244d155f725.png" />
+<img alt="_images/0f834a8561c70712d96759af9223f35f68e6d395f3b992988dab74b96c8acd87.png" src="_images/0f834a8561c70712d96759af9223f35f68e6d395f3b992988dab74b96c8acd87.png" />
 </div>
 </div>
 <p>From the optimal matching we compute and visualize the hierarchies.</p>
@@ -2669,9 +2679,9 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/31aaf6fa9cb4becb4fc973594dd0ac0dd4178c6fc7b5361e4ba35218d09d2679.png" src="_images/31aaf6fa9cb4becb4fc973594dd0ac0dd4178c6fc7b5361e4ba35218d09d2679.png" />
+<img alt="_images/51da80287e81833724df61e53245a55b286ca32736fee80d69db6623cf08e2ed.png" src="_images/51da80287e81833724df61e53245a55b286ca32736fee80d69db6623cf08e2ed.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dual feasibility violation: 4.322138159526534e-08
-Value of dual solution:  825.8167029184153
+Value of dual solution:  825.8167029184152
 Value of primal solution:  825.8167029184157
 </pre></div>
 </div>
@@ -2680,7 +2690,7 @@ Value of primal solution:  825.8167029184157
 <p>Let’s plot  average wages and wage dispersion generated by the model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_wages_application</span><span class="p">(</span><span class="n">wages</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plot_wages_application</span><span class="p">(</span><span class="n">wages</span><span class="p">):</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">wages</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Wages&#39;</span><span class="p">)</span>
@@ -2690,7 +2700,7 @@ Value of primal solution:  825.8167029184157
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 
-<span class="k">def</span> <span class="nf">plot_wage_dispersion_model</span><span class="p">(</span><span class="n">wage_worker_x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_wage_dispersion_model</span><span class="p">(</span><span class="n">wage_worker_x</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> 
                                 <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Wage Dispersion&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">)):</span>
     <span class="c1"># Compute the percentiles </span>
     <span class="n">percentiles</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">bins</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
@@ -2722,7 +2732,7 @@ Value of primal solution:  825.8167029184157
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b2575ce01ad3b3d2f658188ca29e0d9ddc78b8c26c612966b894a432dbaf7ee8.png" src="_images/b2575ce01ad3b3d2f658188ca29e0d9ddc78b8c26c612966b894a432dbaf7ee8.png" />
+<img alt="_images/18ee5ca24581e2a04f953122e50355a81cb515a66474b26bfd2cac6aa6b9d0f2.png" src="_images/18ee5ca24581e2a04f953122e50355a81cb515a66474b26bfd2cac6aa6b9d0f2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2732,7 +2742,7 @@ Value of primal solution:  825.8167029184157
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/45517133f05de0be7e2c7913339e19cce0ece1f876bacda05911b3396e3279e8.png" src="_images/45517133f05de0be7e2c7913339e19cce0ece1f876bacda05911b3396e3279e8.png" />
+<img alt="_images/ff27bc6b33d89a1d8cc11756232ef7aca26104553959c71383fdcbb855305642.png" src="_images/ff27bc6b33d89a1d8cc11756232ef7aca26104553959c71383fdcbb855305642.png" />
 </div>
 </div>
 </section>
@@ -2770,6 +2780,8 @@ Value of primal solution:  825.8167029184157
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -3252,7 +3264,7 @@ Value of primal solution:  825.8167029184157
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

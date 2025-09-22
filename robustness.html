@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>27. Robustness &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'robustness';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/robustness.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="28. Robust Markov Perfect Equilibrium" href="rob_markov_perf.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -211,7 +218,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -262,7 +269,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="robustness">
-<h1><span class="section-number">27. </span>Robustness<a class="headerlink" href="#robustness" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">27. </span>Robustness<a class="headerlink" href="#robustness" title="Link to this heading">#</a></h1>
 <p id="index-0">In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -296,7 +303,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </details>
 </div>
 <section id="overview">
-<h2><span class="section-number">27.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">27.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p id="index-1">This lecture modifies a Bellman equation to express a decision-maker’s doubts about  transition dynamics.</p>
 <p>His specification doubts make the decision-maker want a <em>robust</em> decision rule.</p>
 <p><em>Robust</em> means insensitive to misspecification of transition dynamics.</p>
@@ -320,17 +327,17 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <p>Let’s start with some imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">eig</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">eig</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qe</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="sets-of-models-imply-sets-of-values">
-<span id="rb-vec"></span><h3><span class="section-number">27.1.1. </span>Sets of models imply sets of values<a class="headerlink" href="#sets-of-models-imply-sets-of-values" title="Permalink to this heading">#</a></h3>
+<span id="rb-vec"></span><h3><span class="section-number">27.1.1. </span>Sets of models imply sets of values<a class="headerlink" href="#sets-of-models-imply-sets-of-values" title="Link to this heading">#</a></h3>
 <p>Our “robust” decision-maker wants to know how well a given rule will work when he does not <em>know</em> a single transition law  <span class="math notranslate nohighlight">\(\ldots\)</span>.</p>
 <p><span class="math notranslate nohighlight">\(\ldots\)</span> he wants to know  <em>sets</em> of values that will be attained by a given decision rule <span class="math notranslate nohighlight">\(F\)</span> under a <em>set</em> of transition laws.</p>
 <p>Ultimately, he wants to design a decision rule <span class="math notranslate nohighlight">\(F\)</span> that shapes the <em>set</em> of values in ways that he prefers.</p>
@@ -377,11 +384,11 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <p>This will involve crafting a <em>skinnier</em> set at the cost of  a lower <em>level</em> (at least for low values of entropy).</p>
 </section>
 <section id="inspiring-video">
-<h3><span class="section-number">27.1.2. </span>Inspiring video<a class="headerlink" href="#inspiring-video" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">27.1.2. </span>Inspiring video<a class="headerlink" href="#inspiring-video" title="Link to this heading">#</a></h3>
 <p>If you want to understand more about why one serious quantitative researcher is interested in this approach, we recommend <a class="reference external" href="https://www.nobelprize.org/prizes/economic-sciences/2013/hansen/lecture/">Lars Peter Hansen’s Nobel lecture</a>.</p>
 </section>
 <section id="other-references">
-<h3><span class="section-number">27.1.3. </span>Other references<a class="headerlink" href="#other-references" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">27.1.3. </span>Other references<a class="headerlink" href="#other-references" title="Link to this heading">#</a></h3>
 <p>Our discussion in this lecture is based on</p>
 <ul class="simple">
 <li><p><span id="id1">[<a class="reference internal" href="zreferences.html#id161" title="Lars Peter Hansen and Thomas J Sargent. Wanting robustness in macroeconomics. Manuscript, Department of Economics, Stanford University., 2000.">Hansen and Sargent, 2000</a>]</span></p></li>
@@ -390,18 +397,18 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </section>
 </section>
 <section id="the-model">
-<h2><span class="section-number">27.2. </span>The model<a class="headerlink" href="#the-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">27.2. </span>The model<a class="headerlink" href="#the-model" title="Link to this heading">#</a></h2>
 <p>For simplicity, we present ideas in the context of a class of problems with linear transition laws and quadratic objective functions.</p>
 <p>To fit in with <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">our earlier lecture on LQ control</a>, we will treat loss minimization rather than value maximization.</p>
 <p>To begin, recall the <a class="reference external" href="https://python.quantecon.org/lqcontrol.html#infinite-horizon">infinite horizon LQ problem</a>, where an agent chooses a sequence of controls <span class="math notranslate nohighlight">\(\{u_t\}\)</span> to minimize</p>
 <div class="math notranslate nohighlight" id="equation-rob-sih">
-<span class="eqno">(27.1)<a class="headerlink" href="#equation-rob-sih" title="Permalink to this equation">#</a></span>\[\sum_{t=0}^{\infty} \beta^t
+<span class="eqno">(27.1)<a class="headerlink" href="#equation-rob-sih" title="Link to this equation">#</a></span>\[\sum_{t=0}^{\infty} \beta^t
    \left\{
        x_t' R x_t +  u_t' Q u_t
    \right\}\]</div>
 <p>subject to the linear law of motion</p>
 <div class="math notranslate nohighlight" id="equation-rob-lom">
-<span class="eqno">(27.2)<a class="headerlink" href="#equation-rob-lom" title="Permalink to this equation">#</a></span>\[x_{t+1} = A x_t + B u_t + C w_{t+1},
+<span class="eqno">(27.2)<a class="headerlink" href="#equation-rob-lom" title="Link to this equation">#</a></span>\[x_{t+1} = A x_t + B u_t + C w_{t+1},
 \qquad t = 0, 1, 2, \ldots\]</div>
 <p>As before,</p>
 <ul class="simple">
@@ -427,7 +434,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <p>Soon we’ll quantify the quality of a model specification in terms of the maximal size of the discounted sum <span class="math notranslate nohighlight">\(\sum_{t=0}^{\infty} \beta^{t+1}w_{t+1}' w_{t+1}\)</span>.</p>
 </section>
 <section id="constructing-more-robust-policies">
-<h2><span class="section-number">27.3. </span>Constructing more robust policies<a class="headerlink" href="#constructing-more-robust-policies" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">27.3. </span>Constructing more robust policies<a class="headerlink" href="#constructing-more-robust-policies" title="Link to this heading">#</a></h2>
 <p>If our agent takes <span class="math notranslate nohighlight">\(\{ w_t \}\)</span> as a given deterministic sequence, then, drawing on ideas in  earlier lectures on dynamic programming, we can anticipate Bellman equations such as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -443,7 +450,7 @@ J_{t-1} (x)
 <p>In our framework, “adverse” means “loss increasing”.</p>
 <p>As we’ll see, this will eventually lead us to construct a Bellman equation</p>
 <div class="math notranslate nohighlight" id="equation-rb-wcb0">
-<span class="eqno">(27.3)<a class="headerlink" href="#equation-rb-wcb0" title="Permalink to this equation">#</a></span>\[J (x) =
+<span class="eqno">(27.3)<a class="headerlink" href="#equation-rb-wcb0" title="Link to this equation">#</a></span>\[J (x) =
 \min_u
 \max_w
 \{
@@ -456,14 +463,14 @@ J_{t-1} (x)
 <p>By raising <span class="math notranslate nohighlight">\(\theta\)</span> more and more, we more and more limit the ability of maximizing agent to distort outcomes relative to the approximating model.</p>
 <p>So bigger <span class="math notranslate nohighlight">\(\theta\)</span> is implicitly associated with smaller distortion sequences <span class="math notranslate nohighlight">\(\{w_t \}\)</span>.</p>
 <section id="analyzing-the-bellman-equation">
-<h3><span class="section-number">27.3.1. </span>Analyzing the Bellman equation<a class="headerlink" href="#analyzing-the-bellman-equation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">27.3.1. </span>Analyzing the Bellman equation<a class="headerlink" href="#analyzing-the-bellman-equation" title="Link to this heading">#</a></h3>
 <p>So what does <span class="math notranslate nohighlight">\(J\)</span> in <a class="reference internal" href="#equation-rb-wcb0">(27.3)</a> look like?</p>
 <p>As with the <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">ordinary LQ control model</a>, <span class="math notranslate nohighlight">\(J\)</span> takes the form <span class="math notranslate nohighlight">\(J(x) = x' P x\)</span> for some symmetric positive definite matrix <span class="math notranslate nohighlight">\(P\)</span>.</p>
 <p>One of our main tasks will be to analyze and compute the matrix <span class="math notranslate nohighlight">\(P\)</span>.</p>
 <p>Related tasks will be to study associated feedback rules for <span class="math notranslate nohighlight">\(u_t\)</span> and <span class="math notranslate nohighlight">\(w_{t+1}\)</span>.</p>
 <p>First, using <a class="reference external" href="https://python-intro.quantecon.org/linear_algebra.html#la-mcalc">matrix calculus</a>, you will be able to verify that</p>
 <div class="math notranslate nohighlight" id="equation-rb-mp0">
-<span class="eqno">(27.4)<a class="headerlink" href="#equation-rb-mp0" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(27.4)<a class="headerlink" href="#equation-rb-mp0" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
 \max_w
 &amp;\{
     (Ax + B u + C w)' P (Ax + B u + C w) - \theta w'w
@@ -473,10 +480,10 @@ J_{t-1} (x)
 \end{aligned}\end{split}\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight" id="equation-rb-d">
-<span class="eqno">(27.5)<a class="headerlink" href="#equation-rb-d" title="Permalink to this equation">#</a></span>\[\mathcal D(P) := P + PC (\theta I - C' P C)^{-1} C' P\]</div>
+<span class="eqno">(27.5)<a class="headerlink" href="#equation-rb-d" title="Link to this equation">#</a></span>\[\mathcal D(P) := P + PC (\theta I - C' P C)^{-1} C' P\]</div>
 <p>and <span class="math notranslate nohighlight">\(I\)</span> is a <span class="math notranslate nohighlight">\(j \times j\)</span> identity matrix.  Substituting this expression for the maximum into <a class="reference internal" href="#equation-rb-wcb0">(27.3)</a> yields</p>
 <div class="math notranslate nohighlight" id="equation-rb-owb">
-<span class="eqno">(27.6)<a class="headerlink" href="#equation-rb-owb" title="Permalink to this equation">#</a></span>\[x'Px =
+<span class="eqno">(27.6)<a class="headerlink" href="#equation-rb-owb" title="Link to this equation">#</a></span>\[x'Px =
 \min_u
 \{
     x' R x + u' Q u + \beta \,
@@ -501,11 +508,11 @@ Bellman equation — see <a class="reference external" href="https://python.quan
 has a unique positive definite fixed point, which we denote below by <span class="math notranslate nohighlight">\(\hat P\)</span>.</p>
 <p>A robust policy, indexed by <span class="math notranslate nohighlight">\(\theta\)</span>, is <span class="math notranslate nohighlight">\(u  = - \hat F x\)</span> where</p>
 <div class="math notranslate nohighlight" id="equation-rb-oc-ih">
-<span class="eqno">(27.7)<a class="headerlink" href="#equation-rb-oc-ih" title="Permalink to this equation">#</a></span>\[\hat F
+<span class="eqno">(27.7)<a class="headerlink" href="#equation-rb-oc-ih" title="Link to this equation">#</a></span>\[\hat F
 := (Q + \beta B' \mathcal D (\hat P) B)^{-1} \beta B' \mathcal D(\hat P) A\]</div>
 <p>We also define</p>
 <div class="math notranslate nohighlight" id="equation-rb-kd">
-<span class="eqno">(27.8)<a class="headerlink" href="#equation-rb-kd" title="Permalink to this equation">#</a></span>\[\hat K
+<span class="eqno">(27.8)<a class="headerlink" href="#equation-rb-kd" title="Link to this equation">#</a></span>\[\hat K
 := (\theta I - C' \hat PC)^{-1} C'  \hat P (A - B \hat F)\]</div>
 <p>The interpretation of <span class="math notranslate nohighlight">\(\hat K\)</span> is that <span class="math notranslate nohighlight">\(w_{t+1} = \hat K x_t\)</span> on the worst-case path of <span class="math notranslate nohighlight">\(\{x_t \}\)</span>, in the sense that this vector is the maximizer of <a class="reference internal" href="#equation-rb-mp0">(27.4)</a> evaluated at the fixed rule <span class="math notranslate nohighlight">\(u  = - \hat F x\)</span>.</p>
 <p>Note that <span class="math notranslate nohighlight">\(\hat P, \hat F, \hat K\)</span> are all determined by the
@@ -518,14 +525,14 @@ approximately equal to the identity mapping.</p>
 </section>
 </section>
 <section id="robustness-as-outcome-of-a-two-person-zero-sum-game">
-<h2><span class="section-number">27.4. </span>Robustness as outcome of a two-person zero-sum game<a class="headerlink" href="#robustness-as-outcome-of-a-two-person-zero-sum-game" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">27.4. </span>Robustness as outcome of a two-person zero-sum game<a class="headerlink" href="#robustness-as-outcome-of-a-two-person-zero-sum-game" title="Link to this heading">#</a></h2>
 <p>What we have done above can be interpreted in terms of  a two-person zero-sum game in which <span class="math notranslate nohighlight">\(\hat F, \hat K\)</span> are Nash equilibrium objects.</p>
 <p>Agent 1 is our original agent, who seeks to minimize loss in the LQ program while admitting the possibility of misspecification.</p>
 <p>Agent 2 is an imaginary malevolent player.</p>
 <p>Agent 2’s malevolence helps the original agent to compute bounds on his value function across a set of models.</p>
 <p>We begin with agent 2’s problem.</p>
 <section id="agent-2s-problem">
-<span id="rb-a2"></span><h3><span class="section-number">27.4.1. </span>Agent 2’s problem<a class="headerlink" href="#agent-2s-problem" title="Permalink to this heading">#</a></h3>
+<span id="rb-a2"></span><h3><span class="section-number">27.4.1. </span>Agent 2’s problem<a class="headerlink" href="#agent-2s-problem" title="Link to this heading">#</a></h3>
 <p>Agent 2</p>
 <ol class="arabic simple">
 <li><p>knows a fixed policy <span class="math notranslate nohighlight">\(F\)</span> specifying the behavior of agent 1, in the sense that <span class="math notranslate nohighlight">\(u_t = - F x_t\)</span> for all <span class="math notranslate nohighlight">\(t\)</span></p></li>
@@ -536,18 +543,18 @@ summed inner product <span class="math notranslate nohighlight">\(\sum_{t=1}^{\i
 <p>However, to obtain a time-invariant recursive formulation, it turns out to be convenient to
 restrict a  discounted inner product</p>
 <div class="math notranslate nohighlight" id="equation-rb-dec">
-<span class="eqno">(27.9)<a class="headerlink" href="#equation-rb-dec" title="Permalink to this equation">#</a></span>\[\sum_{t=1}^{\infty} \beta^t w_t' w_t \leq \eta\]</div>
+<span class="eqno">(27.9)<a class="headerlink" href="#equation-rb-dec" title="Link to this equation">#</a></span>\[\sum_{t=1}^{\infty} \beta^t w_t' w_t \leq \eta\]</div>
 <p>Now let <span class="math notranslate nohighlight">\(F\)</span> be a fixed policy, and let <span class="math notranslate nohighlight">\(J_F(x_0, \mathbf w)\)</span> be the
 present-value cost of that policy given sequence <span class="math notranslate nohighlight">\(\mathbf w := \{w_t\}\)</span>
 and initial condition <span class="math notranslate nohighlight">\(x_0 \in \mathbb R^n\)</span>.</p>
 <p>Substituting <span class="math notranslate nohighlight">\(-F x_t\)</span> for <span class="math notranslate nohighlight">\(u_t\)</span> in <a class="reference internal" href="#equation-rob-sih">(27.1)</a>, this value can be written as</p>
 <div class="math notranslate nohighlight" id="equation-rob-fpv">
-<span class="eqno">(27.10)<a class="headerlink" href="#equation-rob-fpv" title="Permalink to this equation">#</a></span>\[J_F(x_0, \mathbf w) :=
+<span class="eqno">(27.10)<a class="headerlink" href="#equation-rob-fpv" title="Link to this equation">#</a></span>\[J_F(x_0, \mathbf w) :=
     \sum_{t=0}^{\infty} \beta^t
     x_t' (R + F' Q F) x_t\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight" id="equation-rob-lomf">
-<span class="eqno">(27.11)<a class="headerlink" href="#equation-rob-lomf" title="Permalink to this equation">#</a></span>\[x_{t+1} = (A - B F) x_t + C w_{t+1}\]</div>
+<span class="eqno">(27.11)<a class="headerlink" href="#equation-rob-lomf" title="Link to this equation">#</a></span>\[x_{t+1} = (A - B F) x_t + C w_{t+1}\]</div>
 <p>and the initial condition <span class="math notranslate nohighlight">\(x_0\)</span> is as specified in the left side of <a class="reference internal" href="#equation-rob-fpv">(27.10)</a>.</p>
 <p>Agent 2 chooses <span class="math notranslate nohighlight">\({\mathbf w}\)</span> to maximize agent 1’s loss <span class="math notranslate nohighlight">\(J_F(x_0, \mathbf w)\)</span> subject to <a class="reference internal" href="#equation-rb-dec">(27.9)</a>.</p>
 <p>Using a Lagrangian formulation, we can express this problem as</p>
@@ -571,7 +578,7 @@ and initial condition <span class="math notranslate nohighlight">\(x_0 \in \math
 \]</div>
 <p>or, equivalently,</p>
 <div class="math notranslate nohighlight" id="equation-rb-a2o">
-<span class="eqno">(27.12)<a class="headerlink" href="#equation-rb-a2o" title="Permalink to this equation">#</a></span>\[\min_{\mathbf w}
+<span class="eqno">(27.12)<a class="headerlink" href="#equation-rb-a2o" title="Link to this equation">#</a></span>\[\min_{\mathbf w}
 \sum_{t=0}^{\infty} \beta^t
 \left\{
     -x_t' (R + F' Q F) x_t + \beta \theta w_{t+1}' w_{t+1}
@@ -582,13 +589,13 @@ and initial condition <span class="math notranslate nohighlight">\(x_0 \in \math
 <p>We denote it by <span class="math notranslate nohighlight">\(K(F, \theta)\)</span>, with the interpretation <span class="math notranslate nohighlight">\(w_{t+1} = K(F, \theta) x_t\)</span>.</p>
 <p>The remaining step for agent 2’s problem is to set <span class="math notranslate nohighlight">\(\theta\)</span> to enforce the constraint <a class="reference internal" href="#equation-rb-dec">(27.9)</a>, which can be done by choosing <span class="math notranslate nohighlight">\(\theta = \theta_{\eta}\)</span> such that</p>
 <div class="math notranslate nohighlight" id="equation-rb-pdt">
-<span class="eqno">(27.13)<a class="headerlink" href="#equation-rb-pdt" title="Permalink to this equation">#</a></span>\[\beta \sum_{t=0}^{\infty} \beta^t x_t' K(F, \theta_\eta)' K(F, \theta_\eta) x_t = \eta\]</div>
+<span class="eqno">(27.13)<a class="headerlink" href="#equation-rb-pdt" title="Link to this equation">#</a></span>\[\beta \sum_{t=0}^{\infty} \beta^t x_t' K(F, \theta_\eta)' K(F, \theta_\eta) x_t = \eta\]</div>
 <p>Here <span class="math notranslate nohighlight">\(x_t\)</span> is given by <a class="reference internal" href="#equation-rob-lomf">(27.11)</a> — which in this case becomes <span class="math notranslate nohighlight">\(x_{t+1} = (A - B F + CK(F, \theta)) x_t\)</span>.</p>
 </section>
 <section id="using-agent-2s-problem-to-construct-bounds-on-value-sets">
-<span id="rb-a1"></span><h3><span class="section-number">27.4.2. </span>Using Agent 2’s problem to construct bounds on value sets<a class="headerlink" href="#using-agent-2s-problem-to-construct-bounds-on-value-sets" title="Permalink to this heading">#</a></h3>
+<span id="rb-a1"></span><h3><span class="section-number">27.4.2. </span>Using Agent 2’s problem to construct bounds on value sets<a class="headerlink" href="#using-agent-2s-problem-to-construct-bounds-on-value-sets" title="Link to this heading">#</a></h3>
 <section id="the-lower-bound">
-<h4><span class="section-number">27.4.2.1. </span>The lower bound<a class="headerlink" href="#the-lower-bound" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">27.4.2.1. </span>The lower bound<a class="headerlink" href="#the-lower-bound" title="Link to this heading">#</a></h4>
 <p>Define the minimized object on the right side of problem <a class="reference internal" href="#equation-rb-a2o">(27.12)</a> as <span class="math notranslate nohighlight">\(R_\theta(x_0, F)\)</span>.</p>
 <p>Because “minimizers minimize” we have</p>
 <div class="math notranslate nohighlight">
@@ -598,7 +605,7 @@ R_\theta(x_0, F) \leq \sum_{t=0}^\infty \beta^t \left\{  - x_t' (R + F' Q F) x_t
 <p>where <span class="math notranslate nohighlight">\(x_{t+1} = (A - B F + CK(F, \theta)) x_t\)</span> and <span class="math notranslate nohighlight">\(x_0\)</span> is a given initial condition.</p>
 <p>This inequality in turn implies the inequality</p>
 <div class="math notranslate nohighlight" id="equation-rob-bound">
-<span class="eqno">(27.14)<a class="headerlink" href="#equation-rob-bound" title="Permalink to this equation">#</a></span>\[R_\theta(x_0, F) - \theta \ {\rm ent}
+<span class="eqno">(27.14)<a class="headerlink" href="#equation-rob-bound" title="Link to this equation">#</a></span>\[R_\theta(x_0, F) - \theta \ {\rm ent}
 \leq \sum_{t=0}^\infty \beta^t \left\{  - x_t' (R + F' Q F) x_t \right\}\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight">
@@ -610,7 +617,7 @@ R_\theta(x_0, F) \leq \sum_{t=0}^\infty \beta^t \left\{  - x_t' (R + F' Q F) x_t
 <p>At a particular value of entropy, the line is tangent to the lower bound of values  as a function of entropy.</p>
 <p>In particular, the lower bound on the left side of <a class="reference internal" href="#equation-rob-bound">(27.14)</a> is attained when</p>
 <div class="math notranslate nohighlight" id="equation-rb-pdt22">
-<span class="eqno">(27.15)<a class="headerlink" href="#equation-rb-pdt22" title="Permalink to this equation">#</a></span>\[{\rm ent} =  \beta \sum_{t=0}^{\infty} \beta^t x_t' K(F, \theta)' K(F, \theta) x_t\]</div>
+<span class="eqno">(27.15)<a class="headerlink" href="#equation-rb-pdt22" title="Link to this equation">#</a></span>\[{\rm ent} =  \beta \sum_{t=0}^{\infty} \beta^t x_t' K(F, \theta)' K(F, \theta) x_t\]</div>
 <p>To construct the <em>lower bound</em> on the set of values associated with all perturbations <span class="math notranslate nohighlight">\({\mathbf w}\)</span> satisfying the entropy constraint <a class="reference internal" href="#equation-rb-dec">(27.9)</a> at a  given entropy level, we proceed as follows:</p>
 <ul class="simple">
 <li><p>For a given <span class="math notranslate nohighlight">\(\theta\)</span>, solve the minimization problem <a class="reference internal" href="#equation-rb-a2o">(27.12)</a>.</p></li>
@@ -624,11 +631,11 @@ R_\theta(x_0, F) \leq \sum_{t=0}^\infty \beta^t \left\{  - x_t' (R + F' Q F) x_t
 </div>
 </section>
 <section id="the-upper-bound">
-<h4><span class="section-number">27.4.2.2. </span>The upper bound<a class="headerlink" href="#the-upper-bound" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">27.4.2.2. </span>The upper bound<a class="headerlink" href="#the-upper-bound" title="Link to this heading">#</a></h4>
 <p>To construct an <em>upper bound</em> we use a very similar procedure.</p>
 <p>We simply replace the <em>minimization</em> problem <a class="reference internal" href="#equation-rb-a2o">(27.12)</a> with the <em>maximization</em> problem</p>
 <div class="math notranslate nohighlight" id="equation-rba2omax">
-<span class="eqno">(27.16)<a class="headerlink" href="#equation-rba2omax" title="Permalink to this equation">#</a></span>\[V_{\tilde \theta}(x_0, F) =  \max_{\mathbf w}
+<span class="eqno">(27.16)<a class="headerlink" href="#equation-rba2omax" title="Link to this equation">#</a></span>\[V_{\tilde \theta}(x_0, F) =  \max_{\mathbf w}
   \sum_{t=0}^{\infty} \beta^t
   \left\{
       -x_t' (R + F' Q F) x_t - \beta \tilde \theta w_{t+1}' w_{t+1}
@@ -642,7 +649,7 @@ V_{\tilde \theta}(x_0, F) \geq \sum_{t=0}^\infty \beta^t \left\{  - x_t' (R + F'
 \]</div>
 <p>which in turn implies the inequality</p>
 <div class="math notranslate nohighlight" id="equation-robboundmax">
-<span class="eqno">(27.17)<a class="headerlink" href="#equation-robboundmax" title="Permalink to this equation">#</a></span>\[V_{\tilde \theta}(x_0, F) + \tilde \theta \ {\rm ent} \geq \sum_{t=0}^\infty \beta^t \left\{  - x_t' (R + F' Q F) x_t \right\}\]</div>
+<span class="eqno">(27.17)<a class="headerlink" href="#equation-robboundmax" title="Link to this equation">#</a></span>\[V_{\tilde \theta}(x_0, F) + \tilde \theta \ {\rm ent} \geq \sum_{t=0}^\infty \beta^t \left\{  - x_t' (R + F' Q F) x_t \right\}\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight">
 \[
@@ -651,7 +658,7 @@ V_{\tilde \theta}(x_0, F) \geq \sum_{t=0}^\infty \beta^t \left\{  - x_t' (R + F'
 <p>The left side of inequality <a class="reference internal" href="#equation-robboundmax">(27.17)</a> is a straight line with slope <span class="math notranslate nohighlight">\(\tilde \theta\)</span>.</p>
 <p>The upper bound on the left side of <a class="reference internal" href="#equation-robboundmax">(27.17)</a> is attained when</p>
 <div class="math notranslate nohighlight" id="equation-rbpdt223">
-<span class="eqno">(27.18)<a class="headerlink" href="#equation-rbpdt223" title="Permalink to this equation">#</a></span>\[{\rm ent} =  \beta \sum_{t=0}^{\infty} \beta^t x_t' K(F, \tilde \theta)' K(F, \tilde \theta) x_t\]</div>
+<span class="eqno">(27.18)<a class="headerlink" href="#equation-rbpdt223" title="Link to this equation">#</a></span>\[{\rm ent} =  \beta \sum_{t=0}^{\infty} \beta^t x_t' K(F, \tilde \theta)' K(F, \tilde \theta) x_t\]</div>
 <p>To construct the <em>upper bound</em> on the set of values associated all perturbations <span class="math notranslate nohighlight">\({\mathbf w}\)</span> with a given entropy we proceed much as we did for the lower bound</p>
 <ul class="simple">
 <li><p>For a given <span class="math notranslate nohighlight">\(\tilde \theta\)</span>, solve the maximization problem <a class="reference internal" href="#equation-rba2omax">(27.16)</a>.</p></li>
@@ -661,15 +668,15 @@ V_{\tilde \theta}(x_0, F) \geq \sum_{t=0}^\infty \beta^t \left\{  - x_t' (R + F'
 </ul>
 </section>
 <section id="reshaping-the-set-of-values">
-<h4><span class="section-number">27.4.2.3. </span>Reshaping the set of values<a class="headerlink" href="#reshaping-the-set-of-values" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">27.4.2.3. </span>Reshaping the set of values<a class="headerlink" href="#reshaping-the-set-of-values" title="Link to this heading">#</a></h4>
 <p>Now in the interest of <em>reshaping</em> these sets of values by choosing <span class="math notranslate nohighlight">\(F\)</span>, we turn to agent 1’s problem.</p>
 </section>
 </section>
 <section id="agent-1s-problem">
-<h3><span class="section-number">27.4.3. </span>Agent 1’s problem<a class="headerlink" href="#agent-1s-problem" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">27.4.3. </span>Agent 1’s problem<a class="headerlink" href="#agent-1s-problem" title="Link to this heading">#</a></h3>
 <p>Now we turn to agent 1, who solves</p>
 <div class="math notranslate nohighlight" id="equation-rob-sihk">
-<span class="eqno">(27.19)<a class="headerlink" href="#equation-rob-sihk" title="Permalink to this equation">#</a></span>\[\min_{\{u_t\}}
+<span class="eqno">(27.19)<a class="headerlink" href="#equation-rob-sihk" title="Link to this equation">#</a></span>\[\min_{\{u_t\}}
     \sum_{t=0}^{\infty} \beta^t
     \left\{
         x_t' R x_t + u_t' Q u_t - \beta \theta w_{t+1}' w_{t+1}
@@ -677,18 +684,18 @@ V_{\tilde \theta}(x_0, F) \geq \sum_{t=0}^\infty \beta^t \left\{  - x_t' (R + F'
 <p>where  <span class="math notranslate nohighlight">\(\{ w_{t+1} \}\)</span>  satisfies <span class="math notranslate nohighlight">\(w_{t+1} = K x_t\)</span>.</p>
 <p>In other words, agent 1 minimizes</p>
 <div class="math notranslate nohighlight" id="equation-rob-sihk2">
-<span class="eqno">(27.20)<a class="headerlink" href="#equation-rob-sihk2" title="Permalink to this equation">#</a></span>\[\sum_{t=0}^{\infty} \beta^t
+<span class="eqno">(27.20)<a class="headerlink" href="#equation-rob-sihk2" title="Link to this equation">#</a></span>\[\sum_{t=0}^{\infty} \beta^t
     \left\{
         x_t' (R - \beta \theta K' K ) x_t + u_t' Q u_t
     \right\}\]</div>
 <p>subject to</p>
 <div class="math notranslate nohighlight" id="equation-rob-lomk">
-<span class="eqno">(27.21)<a class="headerlink" href="#equation-rob-lomk" title="Permalink to this equation">#</a></span>\[x_{t+1} = (A + C K) x_t + B u_t\]</div>
+<span class="eqno">(27.21)<a class="headerlink" href="#equation-rob-lomk" title="Link to this equation">#</a></span>\[x_{t+1} = (A + C K) x_t + B u_t\]</div>
 <p>Once again, the expression for the optimal policy can be found <a class="reference external" href="https://python.quantecon.org/lqcontrol.html#infinite-horizon">here</a> — we denote
 it by <span class="math notranslate nohighlight">\(\tilde F\)</span>.</p>
 </section>
 <section id="nash-equilibrium">
-<span id="rb-eq"></span><h3><span class="section-number">27.4.4. </span>Nash equilibrium<a class="headerlink" href="#nash-equilibrium" title="Permalink to this heading">#</a></h3>
+<span id="rb-eq"></span><h3><span class="section-number">27.4.4. </span>Nash equilibrium<a class="headerlink" href="#nash-equilibrium" title="Link to this heading">#</a></h3>
 <p>Clearly, the <span class="math notranslate nohighlight">\(\tilde F\)</span> we have obtained depends on <span class="math notranslate nohighlight">\(K\)</span>, which, in agent 2’s problem,
 depended on an initial policy <span class="math notranslate nohighlight">\(F\)</span>.</p>
 <p>Holding all other parameters fixed, we can represent this relationship as a mapping <span class="math notranslate nohighlight">\(\Phi\)</span>, where</p>
@@ -712,7 +719,7 @@ depended on an initial policy <span class="math notranslate nohighlight">\(F\)</
 </section>
 </section>
 <section id="the-stochastic-case">
-<h2><span class="section-number">27.5. </span>The stochastic case<a class="headerlink" href="#the-stochastic-case" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">27.5. </span>The stochastic case<a class="headerlink" href="#the-stochastic-case" title="Link to this heading">#</a></h2>
 <p>Now we turn to the stochastic case, where the sequence <span class="math notranslate nohighlight">\(\{w_t\}\)</span> is treated as an IID sequence of random vectors.</p>
 <p>In this setting, we suppose that our agent is uncertain about the <em>conditional probability distribution</em> of <span class="math notranslate nohighlight">\(w_{t+1}\)</span>.</p>
 <p>The agent takes the standard normal distribution <span class="math notranslate nohighlight">\(N(0, I)\)</span> as the baseline conditional distribution, while admitting the possibility that other “nearby” distributions prevail.</p>
@@ -727,7 +734,7 @@ D_{KL} (p, q) := \int \ln \left[ \frac{p(x)}{q(x)} \right] p(x) \, dx
 \]</div>
 <p>Using this notation, we replace <a class="reference internal" href="#equation-rb-wcb0">(27.3)</a> with the stochastic analog</p>
 <div class="math notranslate nohighlight" id="equation-rb-wcb1">
-<span class="eqno">(27.22)<a class="headerlink" href="#equation-rb-wcb1" title="Permalink to this equation">#</a></span>\[J (x) =
+<span class="eqno">(27.22)<a class="headerlink" href="#equation-rb-wcb1" title="Link to this equation">#</a></span>\[J (x) =
 \min_u
 \max_{\psi \in \mathcal P}
 \left\{
@@ -740,14 +747,14 @@ D_{KL} (p, q) := \int \ln \left[ \frac{p(x)}{q(x)} \right] p(x) \, dx
 <p>The distribution <span class="math notranslate nohighlight">\(\phi\)</span> is chosen as the least desirable conditional distribution in terms of next period outcomes, while taking into account the penalty term <span class="math notranslate nohighlight">\(\theta D_{KL}(\psi, \phi)\)</span>.</p>
 <p>This penalty term plays a role analogous to the one played by the deterministic penalty <span class="math notranslate nohighlight">\(\theta w'w\)</span> in <a class="reference internal" href="#equation-rb-wcb0">(27.3)</a>, since it discourages large deviations from the benchmark.</p>
 <section id="solving-the-model">
-<h3><span class="section-number">27.5.1. </span>Solving the model<a class="headerlink" href="#solving-the-model" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">27.5.1. </span>Solving the model<a class="headerlink" href="#solving-the-model" title="Link to this heading">#</a></h3>
 <p>The maximization problem in <a class="reference internal" href="#equation-rb-wcb1">(27.22)</a> appears highly nontrivial — after all,
 we are maximizing over an infinite dimensional space consisting of the entire set of densities.</p>
 <p>However, it turns out that the solution is  tractable, and in fact also falls within the class of normal distributions.</p>
 <p>First, we note that <span class="math notranslate nohighlight">\(J\)</span> has the form <span class="math notranslate nohighlight">\(J(x) = x' P x + d\)</span> for some positive definite matrix <span class="math notranslate nohighlight">\(P\)</span> and constant real number <span class="math notranslate nohighlight">\(d\)</span>.</p>
 <p>Moreover, it turns out that if <span class="math notranslate nohighlight">\((I - \theta^{-1} C' P C)^{-1}\)</span> is nonsingular, then</p>
 <div class="math notranslate nohighlight" id="equation-rb-mls">
-<span class="eqno">(27.23)<a class="headerlink" href="#equation-rb-mls" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(27.23)<a class="headerlink" href="#equation-rb-mls" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
 \max_{\psi \in \mathcal P}
 &amp;\left\{
     \int (Ax + B u + C w)' P (Ax + B u + C w) \, \psi(dw) - \theta D_{KL}(\psi, \phi)
@@ -762,14 +769,14 @@ we are maximizing over an infinite dimensional space consisting of the entire se
 \]</div>
 <p>and the maximizer is the Gaussian distribution</p>
 <div class="math notranslate nohighlight" id="equation-rb-md">
-<span class="eqno">(27.24)<a class="headerlink" href="#equation-rb-md" title="Permalink to this equation">#</a></span>\[\psi = N
+<span class="eqno">(27.24)<a class="headerlink" href="#equation-rb-md" title="Link to this equation">#</a></span>\[\psi = N
 \left(
     (\theta I -  C' P C)^{-1} C' P (Ax + Bu), (I - \theta^{-1} C' P C)^{-1}
 \right)\]</div>
 <p>Substituting the expression for the maximum into  Bellman equation
 <a class="reference internal" href="#equation-rb-wcb1">(27.22)</a> and using <span class="math notranslate nohighlight">\(J(x) = x'Px + d\)</span> gives</p>
 <div class="math notranslate nohighlight" id="equation-rb-wcb2">
-<span class="eqno">(27.25)<a class="headerlink" href="#equation-rb-wcb2" title="Permalink to this equation">#</a></span>\[x' P x + d =
+<span class="eqno">(27.25)<a class="headerlink" href="#equation-rb-wcb2" title="Link to this equation">#</a></span>\[x' P x + d =
 \min_u
 \left\{
     x' R x + u' Q u + \beta \,
@@ -786,7 +793,7 @@ x' P x + d
 <span class="math notranslate nohighlight">\(\mathcal B \circ \mathcal D\)</span>.</p>
 <p>In addition, we take <span class="math notranslate nohighlight">\(\hat d\)</span> as the real number solving <span class="math notranslate nohighlight">\(d = \beta \, [d + \kappa(\theta, P)]\)</span>, which is</p>
 <div class="math notranslate nohighlight" id="equation-rb-hatd">
-<span class="eqno">(27.26)<a class="headerlink" href="#equation-rb-hatd" title="Permalink to this equation">#</a></span>\[\hat d := \frac{\beta}{1 - \beta} \kappa(\theta, P)\]</div>
+<span class="eqno">(27.26)<a class="headerlink" href="#equation-rb-hatd" title="Link to this equation">#</a></span>\[\hat d := \frac{\beta}{1 - \beta} \kappa(\theta, P)\]</div>
 <p>The robust policy in this stochastic case is the minimizer in
 <a class="reference internal" href="#equation-rb-wcb2">(27.25)</a>, which is once again <span class="math notranslate nohighlight">\(u  = - \hat F x\)</span> for <span class="math notranslate nohighlight">\(\hat F\)</span> given by <a class="reference internal" href="#equation-rb-oc-ih">(27.7)</a>.</p>
 <p>Substituting the robust policy into <a class="reference internal" href="#equation-rb-md">(27.24)</a> we obtain the worst-case shock
@@ -800,10 +807,10 @@ N( \hat K x_t, (I - \theta^{-1} C' \hat PC)^{-1} )
 <p>Note that the mean of the worst-case shock distribution is equal to the same  worst-case <span class="math notranslate nohighlight">\(w_{t+1}\)</span> as in the earlier deterministic setting.</p>
 </section>
 <section id="computing-other-quantities">
-<span id="rb-coq"></span><h3><span class="section-number">27.5.2. </span>Computing other quantities<a class="headerlink" href="#computing-other-quantities" title="Permalink to this heading">#</a></h3>
+<span id="rb-coq"></span><h3><span class="section-number">27.5.2. </span>Computing other quantities<a class="headerlink" href="#computing-other-quantities" title="Link to this heading">#</a></h3>
 <p>Before turning to implementation, we briefly outline how to compute several other quantities of interest.</p>
 <section id="worst-case-value-of-a-policy">
-<h4><span class="section-number">27.5.2.1. </span>Worst-case value of a policy<a class="headerlink" href="#worst-case-value-of-a-policy" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">27.5.2.1. </span>Worst-case value of a policy<a class="headerlink" href="#worst-case-value-of-a-policy" title="Link to this heading">#</a></h4>
 <p>One thing we will be interested in doing is holding a policy fixed and
 computing the discounted loss associated with that policy.</p>
 <p>So let <span class="math notranslate nohighlight">\(F\)</span> be a given policy and let <span class="math notranslate nohighlight">\(J_F(x)\)</span> be
@@ -836,7 +843,7 @@ P_F = R + F'QF + \beta (A - BF)' \mathcal D(P_F) (A - BF)
 \]</div>
 <p>and</p>
 <div class="math notranslate nohighlight" id="equation-rb-hatd2">
-<span class="eqno">(27.27)<a class="headerlink" href="#equation-rb-hatd2" title="Permalink to this equation">#</a></span>\[d_F
+<span class="eqno">(27.27)<a class="headerlink" href="#equation-rb-hatd2" title="Link to this equation">#</a></span>\[d_F
 := \frac{\beta}{1 - \beta} \kappa(\theta, P_F)
 = \frac{\beta}{1 - \beta}
  \theta \ln [ \det(I - \theta^{-1} C' P_F C)^{-1} ]\]</div>
@@ -848,7 +855,7 @@ computations.</p>
 </section>
 </section>
 <section id="implementation">
-<h2><span class="section-number">27.6. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">27.6. </span>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
 <p>The <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> package provides a class called <code class="docutils literal notranslate"><span class="pre">RBLQ</span></code> for implementation of robust LQ optimal control.</p>
 <p>The code can be found <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/robustlq.py">on GitHub</a>.</p>
 <p>Here is a brief description of the methods of the class</p>
@@ -870,7 +877,7 @@ policy — see <a class="reference internal" href="#rb-coq"><span class="std std
 </ul>
 </section>
 <section id="application">
-<h2><span class="section-number">27.7. </span>Application<a class="headerlink" href="#application" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">27.7. </span>Application<a class="headerlink" href="#application" title="Link to this heading">#</a></h2>
 <p>Let us consider a monopolist similar to <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html#lqc-mwac">this one</a>, but now facing model uncertainty.</p>
 <p>The inverse demand function is <span class="math notranslate nohighlight">\(p_t = a_0 - a_1 y_t + d_t\)</span>.</p>
 <p>where</p>
@@ -987,7 +994,7 @@ loss minimizer.</p></li>
 <span class="c1"># ----------------------------------------------------------------------- #</span>
 
 
-<span class="k">def</span> <span class="nf">evaluate_policy</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">F</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_policy</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">F</span><span class="p">):</span>
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Given θ (scalar, dtype=float) and policy F (array_like), returns the</span>
@@ -1003,7 +1010,7 @@ loss minimizer.</p></li>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">entropy</span><span class="o">.</span><span class="n">item</span><span class="p">())))</span>
 
 
-<span class="k">def</span> <span class="nf">value_and_entropy</span><span class="p">(</span><span class="n">emax</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">bw</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">value_and_entropy</span><span class="p">(</span><span class="n">emax</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">bw</span><span class="p">,</span> <span class="n">grid_size</span><span class="o">=</span><span class="mi">1000</span><span class="p">):</span>
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the value function and entropy levels for a θ path</span>
@@ -1091,12 +1098,12 @@ loss minimizer.</p></li>
             <span class="p">(</span><span class="n">robust_best_case</span><span class="p">,</span> <span class="n">robust_worst_case</span><span class="p">))</span>
 
 
-<span class="k">class</span> <span class="nc">Curve</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Curve</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
 
 
@@ -1137,17 +1144,17 @@ loss minimizer.</p></li>
 <p>Can you explain the different shape of the value-entropy correspondence for the robust policy?</p>
 </section>
 <section id="appendix">
-<span id="rb-appendix"></span><h2><span class="section-number">27.8. </span>Appendix<a class="headerlink" href="#appendix" title="Permalink to this heading">#</a></h2>
+<span id="rb-appendix"></span><h2><span class="section-number">27.8. </span>Appendix<a class="headerlink" href="#appendix" title="Link to this heading">#</a></h2>
 <p>We sketch the proof only of the first claim in <a class="reference internal" href="#rb-eq"><span class="std std-ref">this section</span></a>,
 which is that, for any given <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\(K(\hat F, \theta) = \hat K\)</span>,
 where <span class="math notranslate nohighlight">\(\hat K\)</span> is as given in <a class="reference internal" href="#equation-rb-kd">(27.8)</a>.</p>
 <p>This is the content of the next lemma.</p>
 <p><strong>Lemma.</strong> If <span class="math notranslate nohighlight">\(\hat P\)</span> is the fixed point of the map <span class="math notranslate nohighlight">\(\mathcal B \circ \mathcal D\)</span> and <span class="math notranslate nohighlight">\(\hat F\)</span> is the robust policy as given in <a class="reference internal" href="#equation-rb-oc-ih">(27.7)</a>, then</p>
 <div class="math notranslate nohighlight" id="equation-rb-kft">
-<span class="eqno">(27.28)<a class="headerlink" href="#equation-rb-kft" title="Permalink to this equation">#</a></span>\[K(\hat F, \theta) = (\theta I - C'\hat P C)^{-1} C' \hat P  (A - B \hat F)\]</div>
+<span class="eqno">(27.28)<a class="headerlink" href="#equation-rb-kft" title="Link to this equation">#</a></span>\[K(\hat F, \theta) = (\theta I - C'\hat P C)^{-1} C' \hat P  (A - B \hat F)\]</div>
 <p><em>Proof:</em> As a first step, observe that when <span class="math notranslate nohighlight">\(F = \hat F\)</span>, the Bellman equation associated with the LQ problem  <a class="reference internal" href="#equation-rob-lomf">(27.11)</a> – <a class="reference internal" href="#equation-rb-a2o">(27.12)</a> is</p>
 <div class="math notranslate nohighlight" id="equation-rb-a2be">
-<span class="eqno">(27.29)<a class="headerlink" href="#equation-rb-a2be" title="Permalink to this equation">#</a></span>\[\tilde P = -R - \hat F' Q \hat F -
+<span class="eqno">(27.29)<a class="headerlink" href="#equation-rb-a2be" title="Link to this equation">#</a></span>\[\tilde P = -R - \hat F' Q \hat F -
 \beta^2 (A - B \hat F)' \tilde P C
 (\beta \theta I + \beta C' \tilde P C)^{-1} C' \tilde P (A - B \hat F) +
 \beta (A - B \hat F)' \tilde P (A - B \hat F)\]</div>
@@ -1221,6 +1228,8 @@ latter is just <span class="math notranslate nohighlight">\(\hat P\)</span>.</p>
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -1703,7 +1712,7 @@ latter is just <span class="math notranslate nohighlight">\(\hat P\)</span>.</p>
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>21. Permanent Income Model using the DLE Class &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'permanent_income_dles';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/permanent_income_dles.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="22. Rosen Schooling Model" href="rosen_schooling_model.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -181,7 +188,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -232,7 +239,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="permanent-income-model-using-the-dle-class">
-<span id="index-0"></span><h1><span class="section-number">21. </span>Permanent Income Model using the DLE Class<a class="headerlink" href="#permanent-income-model-using-the-dle-class" title="Permalink to this heading">#</a></h1>
+<span id="index-0"></span><h1><span class="section-number">21. </span>Permanent Income Model using the DLE Class<a class="headerlink" href="#permanent-income-model-using-the-dle-class" title="Link to this heading">#</a></h1>
 <p>This lecture is part of a suite of lectures that use the quantecon DLE class to instantiate models within the
 <span id="id1">[<a class="reference internal" href="zreferences.html#id74" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
 <p>In addition to what’s included in  Anaconda, this lecture uses the quantecon library.</p>
@@ -279,9 +286,9 @@ Models of Dynamic Linear Economies” <span id="id2">[<a class="reference intern
 <p>We’ll also require the following imports</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">DLE</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="kn">import</span> <span class="n">DLE</span>
 
 <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 </pre></div>
@@ -289,12 +296,12 @@ Models of Dynamic Linear Economies” <span id="id2">[<a class="reference intern
 </div>
 </div>
 <section id="the-permanent-income-model">
-<h2><span class="section-number">21.1. </span>The permanent income model<a class="headerlink" href="#the-permanent-income-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">21.1. </span>The permanent income model<a class="headerlink" href="#the-permanent-income-model" title="Link to this heading">#</a></h2>
 <p>The LQ permanent income model is an example of a <strong>savings problem</strong>.</p>
 <p>A consumer has preferences over consumption streams that are ordered by
 the utility functional</p>
 <div class="math notranslate nohighlight" id="equation-perm-utility">
-<span class="eqno">(21.1)<a class="headerlink" href="#equation-perm-utility" title="Permalink to this equation">#</a></span>\[E_0 \sum_{t=0}^\infty \beta^t u(c_t)\]</div>
+<span class="eqno">(21.1)<a class="headerlink" href="#equation-perm-utility" title="Link to this equation">#</a></span>\[E_0 \sum_{t=0}^\infty \beta^t u(c_t)\]</div>
 <p>where <span class="math notranslate nohighlight">\(E_t\)</span> is the mathematical expectation conditioned on the
 consumer’s time <span class="math notranslate nohighlight">\(t\)</span> information, <span class="math notranslate nohighlight">\(c_t\)</span> is time <span class="math notranslate nohighlight">\(t\)</span>
 consumption, <span class="math notranslate nohighlight">\(u(c)\)</span> is a strictly concave one-period utility
@@ -310,7 +317,7 @@ u(c) = -.5(c - \gamma)^2
 consumption, borrowing plan <span class="math notranslate nohighlight">\(\{c_t, b_{t+1}\}_{t=0}^\infty\)</span>
 subject to the sequence of budget constraints</p>
 <div class="math notranslate nohighlight" id="equation-max-utility">
-<span class="eqno">(21.2)<a class="headerlink" href="#equation-max-utility" title="Permalink to this equation">#</a></span>\[c_t + b_t = R^{-1} b_{t+1}  + y_t, t \geq 0\]</div>
+<span class="eqno">(21.2)<a class="headerlink" href="#equation-max-utility" title="Link to this equation">#</a></span>\[c_t + b_t = R^{-1} b_{t+1}  + y_t, t \geq 0\]</div>
 <p>where <span class="math notranslate nohighlight">\(y_t\)</span> is an exogenous stationary endowment process,
 <span class="math notranslate nohighlight">\(R\)</span> is a constant gross risk-free interest rate, <span class="math notranslate nohighlight">\(b_t\)</span> is
 one-period risk-free debt maturing at <span class="math notranslate nohighlight">\(t\)</span>, and <span class="math notranslate nohighlight">\(b_0\)</span> is a
@@ -321,7 +328,7 @@ given initial condition.</p>
 <p>In particular, we assume that the endowment process has the state-space
 representation</p>
 <div class="math notranslate nohighlight" id="equation-endowment">
-<span class="eqno">(21.3)<a class="headerlink" href="#equation-endowment" title="Permalink to this equation">#</a></span>\[\begin{aligned} z_{t+1} &amp; = A_{22} z_t + C_2 w_{t+1}  \cr
+<span class="eqno">(21.3)<a class="headerlink" href="#equation-endowment" title="Link to this equation">#</a></span>\[\begin{aligned} z_{t+1} &amp; = A_{22} z_t + C_2 w_{t+1}  \cr
               y_t &amp; = U_y  z_t  \cr \end{aligned}\]</div>
 <p>where <span class="math notranslate nohighlight">\(w_{t+1}\)</span> is an IID process with mean zero and identity
 contemporaneous covariance matrix, <span class="math notranslate nohighlight">\(A_{22}\)</span> is a stable matrix,
@@ -330,7 +337,7 @@ is a selection vector that identifies <span class="math notranslate nohighlight"
 combination of the <span class="math notranslate nohighlight">\(z_t\)</span>.</p>
 <p>We impose the following condition on the consumption, borrowing plan:</p>
 <div class="math notranslate nohighlight" id="equation-contraint">
-<span class="eqno">(21.4)<a class="headerlink" href="#equation-contraint" title="Permalink to this equation">#</a></span>\[E_0 \sum_{t=0}^\infty \beta^t b_t^2 &lt; +\infty\]</div>
+<span class="eqno">(21.4)<a class="headerlink" href="#equation-contraint" title="Link to this equation">#</a></span>\[E_0 \sum_{t=0}^\infty \beta^t b_t^2 &lt; +\infty\]</div>
 <p>This condition suffices to rule out Ponzi schemes.</p>
 <p>(We impose this condition to rule out a borrow-more-and-more plan that
 would allow the household to enjoy bliss consumption forever)</p>
@@ -349,7 +356,7 @@ autoregressive process:</p>
 y_{t+1} = \alpha + \rho_1 y_t + \rho_2 y_{t-1} + \sigma w_{t+1}
 \]</div>
 <section id="solution-with-the-dle-class">
-<h3><span class="section-number">21.1.1. </span>Solution with the DLE class<a class="headerlink" href="#solution-with-the-dle-class" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">21.1.1. </span>Solution with the DLE class<a class="headerlink" href="#solution-with-the-dle-class" title="Link to this heading">#</a></h3>
 <p>One way of solving this model is to map the problem into the framework
 outlined in Section 4.8 of <span id="id3">[<a class="reference internal" href="zreferences.html#id74" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> by setting up our technology,
 information and preference matrices as follows:</p>
@@ -523,6 +530,8 @@ that lecture and that  notebook to confirm that the solutions are the same</p>
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -1005,7 +1014,7 @@ that lecture and that  notebook to confirm that the solutions are the same</p>
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

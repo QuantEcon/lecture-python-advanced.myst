@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>2. Continuous State Markov Chains &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'stationary_densities';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/stationary_densities.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="3. Reverse Engineering a la Muth" href="muth_kalman.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -200,7 +207,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -251,7 +258,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="continuous-state-markov-chains">
-<h1><span class="section-number">2. </span>Continuous State Markov Chains<a class="headerlink" href="#continuous-state-markov-chains" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">2. </span>Continuous State Markov Chains<a class="headerlink" href="#continuous-state-markov-chains" title="Link to this heading">#</a></h1>
 <p id="index-0">In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -285,7 +292,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </details>
 </div>
 <section id="overview">
-<h2><span class="section-number">2.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>In a <a class="reference external" href="https://python-intro.quantecon.org/finite_markov.html">previous lecture</a>, we learned about finite Markov chains, a relatively elementary class of stochastic dynamic models.</p>
 <p>The present lecture extends this analysis to continuous (i.e., uncountable) state Markov chains.</p>
 <p>Most stochastic dynamic models studied by economists either fit directly into this class or can be represented as continuous state Markov chains after minor modifications.</p>
@@ -321,18 +328,18 @@ Markov process.</p>
 <p>Let’s begin with some imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">lognorm</span><span class="p">,</span> <span class="n">beta</span>
-<span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">LAE</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">gaussian_kde</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">lognorm</span><span class="p">,</span> <span class="n">beta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="kn">import</span> <span class="n">LAE</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">norm</span><span class="p">,</span> <span class="n">gaussian_kde</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="the-density-case">
-<span id="statd-density-case"></span><h2><span class="section-number">2.2. </span>The density case<a class="headerlink" href="#the-density-case" title="Permalink to this heading">#</a></h2>
+<span id="statd-density-case"></span><h2><span class="section-number">2.2. </span>The density case<a class="headerlink" href="#the-density-case" title="Link to this heading">#</a></h2>
 <p>You are probably aware that some distributions can be represented by densities
 and some cannot.</p>
 <p>(For example, distributions on the real numbers <span class="math notranslate nohighlight">\(\mathbb R\)</span> that put positive probability
@@ -341,7 +348,7 @@ on individual points have no density representation)</p>
 <p>The benefit is that the density case offers a very direct parallel to the finite case in terms of notation and intuition.</p>
 <p>Once we’ve built some intuition we’ll cover the general case.</p>
 <section id="definitions-and-basic-properties">
-<h3><span class="section-number">2.2.1. </span>Definitions and basic properties<a class="headerlink" href="#definitions-and-basic-properties" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.1. </span>Definitions and basic properties<a class="headerlink" href="#definitions-and-basic-properties" title="Link to this heading">#</a></h3>
 <p>In our <a class="reference external" href="https://python-intro.quantecon.org/finite_markov.html">lecture on finite Markov chains</a>, we studied discrete-time Markov chains that evolve on a finite state space <span class="math notranslate nohighlight">\(S\)</span>.</p>
 <p>In this setting, the dynamics of the model are described by a stochastic matrix — a nonnegative square matrix <span class="math notranslate nohighlight">\(P = P[i, j]\)</span> such that each row <span class="math notranslate nohighlight">\(P[i, \cdot]\)</span> sums to one.</p>
 <p>The interpretation of <span class="math notranslate nohighlight">\(P\)</span> is that <span class="math notranslate nohighlight">\(P[i, j]\)</span> represents the
@@ -375,11 +382,11 @@ unit of time.</p>
 <p>For example, let <span class="math notranslate nohighlight">\(S = \mathbb R\)</span> and consider the particular stochastic
 kernel <span class="math notranslate nohighlight">\(p_w\)</span> defined by</p>
 <div class="math notranslate nohighlight" id="equation-statd-rwsk">
-<span class="eqno">(2.1)<a class="headerlink" href="#equation-statd-rwsk" title="Permalink to this equation">#</a></span>\[p_w(x, y) := \frac{1}{\sqrt{2 \pi}} \exp \left\{ - \frac{(y - x)^2}{2} \right\}\]</div>
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-statd-rwsk" title="Link to this equation">#</a></span>\[p_w(x, y) := \frac{1}{\sqrt{2 \pi}} \exp \left\{ - \frac{(y - x)^2}{2} \right\}\]</div>
 <p>What kind of model does <span class="math notranslate nohighlight">\(p_w\)</span> represent?</p>
 <p>The answer is, the (normally distributed) random walk</p>
 <div class="math notranslate nohighlight" id="equation-statd-rw">
-<span class="eqno">(2.2)<a class="headerlink" href="#equation-statd-rw" title="Permalink to this equation">#</a></span>\[X_{t+1} = X_t + \xi_{t+1}
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-statd-rw" title="Link to this equation">#</a></span>\[X_{t+1} = X_t + \xi_{t+1}
 \quad \text{where} \quad
 \{ \xi_t \} \stackrel {\textrm{ IID }} {\sim} N(0, 1)\]</div>
 <p>To see this, let’s find the stochastic kernel <span class="math notranslate nohighlight">\(p\)</span> corresponding to <a class="reference internal" href="#equation-statd-rw">(2.2)</a>.</p>
@@ -388,14 +395,14 @@ kernel <span class="math notranslate nohighlight">\(p_w\)</span> defined by</p>
 <p>In other words, <span class="math notranslate nohighlight">\(p\)</span> is exactly <span class="math notranslate nohighlight">\(p_w\)</span>, as defined in <a class="reference internal" href="#equation-statd-rwsk">(2.1)</a>.</p>
 </section>
 <section id="connection-to-stochastic-difference-equations">
-<h3><span class="section-number">2.2.2. </span>Connection to stochastic difference equations<a class="headerlink" href="#connection-to-stochastic-difference-equations" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.2. </span>Connection to stochastic difference equations<a class="headerlink" href="#connection-to-stochastic-difference-equations" title="Link to this heading">#</a></h3>
 <p>In the previous section, we made the connection between stochastic difference
 equation <a class="reference internal" href="#equation-statd-rw">(2.2)</a> and stochastic kernel <a class="reference internal" href="#equation-statd-rwsk">(2.1)</a>.</p>
 <p>In economics and time-series analysis we meet stochastic difference equations of all different shapes and sizes.</p>
 <p>It will be useful for us if we have some systematic methods for converting stochastic difference equations into stochastic kernels.</p>
 <p>To this end, consider the generic (scalar) stochastic difference equation given by</p>
 <div class="math notranslate nohighlight" id="equation-statd-srs">
-<span class="eqno">(2.3)<a class="headerlink" href="#equation-statd-srs" title="Permalink to this equation">#</a></span>\[X_{t+1} = \mu(X_t) + \sigma(X_t) \, \xi_{t+1}\]</div>
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-statd-srs" title="Link to this equation">#</a></span>\[X_{t+1} = \mu(X_t) + \sigma(X_t) \, \xi_{t+1}\]</div>
 <p>Here we assume that</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\{ \xi_t \} \stackrel {\textrm{ IID }} {\sim} \phi\)</span>, where <span class="math notranslate nohighlight">\(\phi\)</span> is a given density on <span class="math notranslate nohighlight">\(\mathbb R\)</span></p></li>
@@ -411,11 +418,11 @@ X_{t+1} = \alpha X_t + \sigma_t \,  \xi_{t+1},
 \]</div>
 <p>Alternatively, we can write the model as</p>
 <div class="math notranslate nohighlight" id="equation-statd-arch">
-<span class="eqno">(2.4)<a class="headerlink" href="#equation-statd-arch" title="Permalink to this equation">#</a></span>\[X_{t+1} = \alpha X_t + (\beta + \gamma X_t^2)^{1/2} \xi_{t+1}\]</div>
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-statd-arch" title="Link to this equation">#</a></span>\[X_{t+1} = \alpha X_t + (\beta + \gamma X_t^2)^{1/2} \xi_{t+1}\]</div>
 <p>This is a special case of <a class="reference internal" href="#equation-statd-srs">(2.3)</a> with <span class="math notranslate nohighlight">\(\mu(x) = \alpha x\)</span> and <span class="math notranslate nohighlight">\(\sigma(x) = (\beta + \gamma x^2)^{1/2}\)</span>.</p>
 <p id="solow-swan"><strong>Example 3:</strong> With stochastic production and a constant savings rate, the one-sector neoclassical growth model leads to a law of motion for capital per worker such as</p>
 <div class="math notranslate nohighlight" id="equation-statd-ss">
-<span class="eqno">(2.5)<a class="headerlink" href="#equation-statd-ss" title="Permalink to this equation">#</a></span>\[k_{t+1} = s  A_{t+1} f(k_t) + (1 - \delta) k_t\]</div>
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-statd-ss" title="Link to this equation">#</a></span>\[k_{t+1} = s  A_{t+1} f(k_t) + (1 - \delta) k_t\]</div>
 <p>Here</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(s\)</span> is the rate of savings</p></li>
@@ -435,7 +442,7 @@ X_{t+1} = \alpha X_t + \sigma_t \,  \xi_{t+1},
 density <span class="math notranslate nohighlight">\(f_U\)</span>, and <span class="math notranslate nohighlight">\(V = a + b U\)</span> for some constants <span class="math notranslate nohighlight">\(a,b\)</span>
 with <span class="math notranslate nohighlight">\(b &gt; 0\)</span>, then the density of <span class="math notranslate nohighlight">\(V\)</span> is given by</p>
 <div class="math notranslate nohighlight" id="equation-statd-dv">
-<span class="eqno">(2.6)<a class="headerlink" href="#equation-statd-dv" title="Permalink to this equation">#</a></span>\[f_V(v)
+<span class="eqno">(2.6)<a class="headerlink" href="#equation-statd-dv" title="Link to this equation">#</a></span>\[f_V(v)
 = \frac{1}{b}
 f_U \left( \frac{v - a}{b} \right)\]</div>
 <p>(The proof is <a class="reference internal" href="#statd-appendix"><span class="std std-ref">below</span></a>.  For a multidimensional version
@@ -447,12 +454,12 @@ obtain the stochastic kernel <span class="math notranslate nohighlight">\(p\)</s
 <p>In the present case, this is equivalent to stating that <span class="math notranslate nohighlight">\(p(x, \cdot)\)</span> is the density of <span class="math notranslate nohighlight">\(Y := \mu(x) + \sigma(x) \, \xi_{t+1}\)</span> when <span class="math notranslate nohighlight">\(\xi_{t+1} \sim \phi\)</span>.</p>
 <p>Hence, by <a class="reference internal" href="#equation-statd-dv">(2.6)</a>,</p>
 <div class="math notranslate nohighlight" id="equation-statd-srssk">
-<span class="eqno">(2.7)<a class="headerlink" href="#equation-statd-srssk" title="Permalink to this equation">#</a></span>\[p(x, y)
+<span class="eqno">(2.7)<a class="headerlink" href="#equation-statd-srssk" title="Link to this equation">#</a></span>\[p(x, y)
 = \frac{1}{\sigma(x)}
 \phi \left( \frac{y - \mu(x)}{\sigma(x)} \right)\]</div>
 <p>For example, the growth model in <a class="reference internal" href="#equation-statd-ss">(2.5)</a> has stochastic kernel</p>
 <div class="math notranslate nohighlight" id="equation-statd-sssk">
-<span class="eqno">(2.8)<a class="headerlink" href="#equation-statd-sssk" title="Permalink to this equation">#</a></span>\[p(x, y)
+<span class="eqno">(2.8)<a class="headerlink" href="#equation-statd-sssk" title="Link to this equation">#</a></span>\[p(x, y)
 = \frac{1}{sf(x)}
 \phi \left( \frac{y - (1 - \delta) x}{s f(x)} \right)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi\)</span> is the density of <span class="math notranslate nohighlight">\(A_{t+1}\)</span>.</p>
@@ -460,7 +467,7 @@ obtain the stochastic kernel <span class="math notranslate nohighlight">\(p\)</s
 <span class="math notranslate nohighlight">\(\sigma(x) = s f(x)\)</span> is strictly positive for all <span class="math notranslate nohighlight">\(s\)</span> as required)</p>
 </section>
 <section id="distribution-dynamics">
-<h3><span class="section-number">2.2.3. </span>Distribution dynamics<a class="headerlink" href="#distribution-dynamics" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.3. </span>Distribution dynamics<a class="headerlink" href="#distribution-dynamics" title="Link to this heading">#</a></h3>
 <p>In <a class="reference external" href="https://python.quantecon.org/finite_markov.html#marginal-distributions">this section</a> of our lecture on <strong>finite</strong> Markov chains, we
 asked the following question: If</p>
 <ol class="arabic simple">
@@ -480,7 +487,7 @@ tomorrow is the probability of visiting <span class="math notranslate nohighligh
 <p>In the density case, we just replace the sum with an integral and probability
 mass functions with densities, yielding</p>
 <div class="math notranslate nohighlight" id="equation-statd-fdd">
-<span class="eqno">(2.9)<a class="headerlink" href="#equation-statd-fdd" title="Permalink to this equation">#</a></span>\[\psi_{t+1}(y) = \int p(x,y) \psi_t(x) \, dx,
+<span class="eqno">(2.9)<a class="headerlink" href="#equation-statd-fdd" title="Link to this equation">#</a></span>\[\psi_{t+1}(y) = \int p(x,y) \psi_t(x) \, dx,
 \qquad \forall y \in S\]</div>
 <p>It is convenient to think of this updating process in terms of an operator.</p>
 <p>(An operator is just a function, but the term is usually reserved for a function that sends functions into functions)</p>
@@ -489,7 +496,7 @@ mass functions with densities, yielding</p>
 <span class="math notranslate nohighlight">\(\psi\)</span> and sends it into new density <span class="math notranslate nohighlight">\(\psi P\)</span>, where the latter is
 defined by</p>
 <div class="math notranslate nohighlight" id="equation-def-dmo">
-<span class="eqno">(2.10)<a class="headerlink" href="#equation-def-dmo" title="Permalink to this equation">#</a></span>\[(\psi P)(y) = \int p(x,y) \psi(x) dx\]</div>
+<span class="eqno">(2.10)<a class="headerlink" href="#equation-def-dmo" title="Link to this equation">#</a></span>\[(\psi P)(y) = \int p(x,y) \psi(x) dx\]</div>
 <p>This operator is usually called the <em>Markov operator</em> corresponding to <span class="math notranslate nohighlight">\(p\)</span></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -500,7 +507,7 @@ parallel with the finite case — see <a class="reference external" href="https:
 </div>
 <p>With this notation, we can write <a class="reference internal" href="#equation-statd-fdd">(2.9)</a> more succinctly as <span class="math notranslate nohighlight">\(\psi_{t+1}(y) = (\psi_t P)(y)\)</span> for all <span class="math notranslate nohighlight">\(y\)</span>, or, dropping the <span class="math notranslate nohighlight">\(y\)</span> and letting “<span class="math notranslate nohighlight">\(=\)</span>” indicate equality of functions,</p>
 <div class="math notranslate nohighlight" id="equation-statd-p">
-<span class="eqno">(2.11)<a class="headerlink" href="#equation-statd-p" title="Permalink to this equation">#</a></span>\[\psi_{t+1} = \psi_t P\]</div>
+<span class="eqno">(2.11)<a class="headerlink" href="#equation-statd-p" title="Link to this equation">#</a></span>\[\psi_{t+1} = \psi_t P\]</div>
 <p>Equation <a class="reference internal" href="#equation-statd-p">(2.11)</a> tells us that if we specify a distribution for <span class="math notranslate nohighlight">\(\psi_0\)</span>, then the entire sequence
 of future distributions can be obtained by iterating with <span class="math notranslate nohighlight">\(P\)</span>.</p>
 <p>It’s interesting to note that <a class="reference internal" href="#equation-statd-p">(2.11)</a> is a deterministic difference equation.</p>
@@ -517,7 +524,7 @@ the <a class="reference external" href="https://en.wikipedia.org/wiki/Counting_m
 </div>
 </section>
 <section id="computation">
-<h3><span class="section-number">2.2.4. </span>Computation<a class="headerlink" href="#computation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.4. </span>Computation<a class="headerlink" href="#computation" title="Link to this heading">#</a></h3>
 <p>To learn about the dynamics of a given process, it’s useful to compute and study the sequences of densities generated by the model.</p>
 <p>One way to do this is to try to implement the iteration described by <a class="reference internal" href="#equation-def-dmo">(2.10)</a> and <a class="reference internal" href="#equation-statd-p">(2.11)</a> using numerical integration.</p>
 <p>However, to produce <span class="math notranslate nohighlight">\(\psi P\)</span> from <span class="math notranslate nohighlight">\(\psi\)</span> via <a class="reference internal" href="#equation-def-dmo">(2.10)</a>, you
@@ -527,7 +534,7 @@ would need to integrate at every <span class="math notranslate nohighlight">\(y\
 <p>A nicer alternative in the present setting is to combine simulation with an elegant estimator called the <em>look-ahead</em> estimator.</p>
 <p>Let’s go over the ideas with reference to the growth model <a class="reference internal" href="#solow-swan"><span class="std std-ref">discussed above</span></a>, the dynamics of which we repeat here for convenience:</p>
 <div class="math notranslate nohighlight" id="equation-statd-ss2">
-<span class="eqno">(2.12)<a class="headerlink" href="#equation-statd-ss2" title="Permalink to this equation">#</a></span>\[k_{t+1} = s  A_{t+1} f(k_t) + (1 - \delta) k_t\]</div>
+<span class="eqno">(2.12)<a class="headerlink" href="#equation-statd-ss2" title="Link to this equation">#</a></span>\[k_{t+1} = s  A_{t+1} f(k_t) + (1 - \delta) k_t\]</div>
 <p>Our aim is to compute the sequence <span class="math notranslate nohighlight">\(\{ \psi_t \}\)</span> associated with this model and fixed initial condition <span class="math notranslate nohighlight">\(\psi_0\)</span>.</p>
 <p>To approximate <span class="math notranslate nohighlight">\(\psi_t\)</span> by simulation, recall that, by definition, <span class="math notranslate nohighlight">\(\psi_t\)</span> is the density of <span class="math notranslate nohighlight">\(k_t\)</span> given <span class="math notranslate nohighlight">\(k_0 \sim \psi_0\)</span>.</p>
 <p>If we wish to generate observations of this random variable,  all we need to do is</p>
@@ -545,7 +552,7 @@ actually generate <span class="math notranslate nohighlight">\(n\)</span> observ
 <p>Now we take these <span class="math notranslate nohighlight">\(n\)</span> observations <span class="math notranslate nohighlight">\(k_{t-1}^1, \ldots,
 k_{t-1}^n\)</span> and form the estimate</p>
 <div class="math notranslate nohighlight" id="equation-statd-lae1">
-<span class="eqno">(2.13)<a class="headerlink" href="#equation-statd-lae1" title="Permalink to this equation">#</a></span>\[\psi_t^n(y) = \frac{1}{n} \sum_{i=1}^n p(k_{t-1}^i, y)\]</div>
+<span class="eqno">(2.13)<a class="headerlink" href="#equation-statd-lae1" title="Link to this equation">#</a></span>\[\psi_t^n(y) = \frac{1}{n} \sum_{i=1}^n p(k_{t-1}^i, y)\]</div>
 <p>where <span class="math notranslate nohighlight">\(p\)</span> is the growth model stochastic kernel in <a class="reference internal" href="#equation-statd-sssk">(2.8)</a>.</p>
 <p>What is the justification for this slightly surprising estimator?</p>
 <p>The idea is that, by the strong <a class="reference external" href="https://python-intro.quantecon.org/lln_clt.html#lln-ksl">law of large numbers</a>,</p>
@@ -565,7 +572,7 @@ converges almost surely to <span class="math notranslate nohighlight">\(\psi_t(y
 <p>In fact, much stronger convergence results are true (see, for example, <a href=/_static/lecture_specific/stationary_densities/ECTA6180.pdf download>this paper</a>).</p>
 </section>
 <section id="implementation">
-<h3><span class="section-number">2.2.5. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.5. </span>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h3>
 <p>A class called <code class="docutils literal notranslate"><span class="pre">LAE</span></code> for estimating densities by this technique can be found in <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lae.py">lae.py</a>.</p>
 <p>Given our use of the <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method, an instance  of <code class="docutils literal notranslate"><span class="pre">LAE</span></code> acts as a callable object, which is essentially a function that can store its own data  (see <a class="reference external" href="https://python-programming.quantecon.org/python_oop.html#call-method">this discussion</a>).</p>
 <p>This function returns the right-hand side of <a class="reference internal" href="#equation-statd-lae1">(2.13)</a> using</p>
@@ -579,7 +586,7 @@ converges almost surely to <span class="math notranslate nohighlight">\(\psi_t(y
 would be in C or Fortran.</p>
 </section>
 <section id="example">
-<h3><span class="section-number">2.2.6. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.6. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
 <p>The following code is an example of usage for the stochastic growth model <a class="reference internal" href="#solow-swan"><span class="std std-ref">described above</span></a></p>
 <div class="cell docutils container" id="stoch-growth">
 <div class="cell_input docutils container">
@@ -592,7 +599,7 @@ would be in C or Fortran.</p>
 <span class="n">ϕ</span> <span class="o">=</span> <span class="n">lognorm</span><span class="p">(</span><span class="n">a_σ</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">p</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">p</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Stochastic kernel for the growth model with Cobb-Douglas production.</span>
 <span class="sd">    Both x and y must be strictly positive.</span>
@@ -639,7 +646,7 @@ as a cross-sectional distribution (recall <a class="reference external" href="ht
 </section>
 </section>
 <section id="beyond-densities">
-<h2><span class="section-number">2.3. </span>Beyond densities<a class="headerlink" href="#beyond-densities" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.3. </span>Beyond densities<a class="headerlink" href="#beyond-densities" title="Link to this heading">#</a></h2>
 <p>Up until now, we have focused exclusively on continuous state Markov chains
 where all conditional distributions <span class="math notranslate nohighlight">\(p(x, \cdot)\)</span> are densities.</p>
 <p>As discussed above, not all distributions can be represented as densities.</p>
@@ -650,7 +657,7 @@ different theory.</p>
 be familiar with measure theory.</p>
 <p>We can, however, construct a fairly general theory using distribution functions.</p>
 <section id="example-and-definitions">
-<h3><span class="section-number">2.3.1. </span>Example and definitions<a class="headerlink" href="#example-and-definitions" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.3.1. </span>Example and definitions<a class="headerlink" href="#example-and-definitions" title="Link to this heading">#</a></h3>
 <p>To illustrate the issues, recall that Hopenhayn and Rogerson <span id="id3">[<a class="reference internal" href="zreferences.html#id165" title="Hugo A Hopenhayn and Richard Rogerson. Job Turnover and Policy Evaluation: A General Equilibrium Analysis. Journal of Political Economy, 101(5):915–938, 1993.">Hopenhayn and Rogerson, 1993</a>]</span> study a model of firm dynamics where individual firm productivity follows the exogenous process</p>
 <div class="math notranslate nohighlight">
 \[
@@ -681,12 +688,12 @@ G(x, y) := \mathbb P \{ h(a + \rho x + \xi_{t+1}) \leq y \}
 <p>This family of cdfs <span class="math notranslate nohighlight">\(G(x, \cdot)\)</span> plays a role analogous to the stochastic kernel in the density case.</p>
 <p>The distribution dynamics in <a class="reference internal" href="#equation-statd-fdd">(2.9)</a> are then replaced by</p>
 <div class="math notranslate nohighlight" id="equation-statd-fddc">
-<span class="eqno">(2.14)<a class="headerlink" href="#equation-statd-fddc" title="Permalink to this equation">#</a></span>\[F_{t+1}(y) = \int G(x,y) F_t(dx)\]</div>
+<span class="eqno">(2.14)<a class="headerlink" href="#equation-statd-fddc" title="Link to this equation">#</a></span>\[F_{t+1}(y) = \int G(x,y) F_t(dx)\]</div>
 <p>Here <span class="math notranslate nohighlight">\(F_t\)</span> and <span class="math notranslate nohighlight">\(F_{t+1}\)</span> are cdfs representing the distribution of the current state and next period state.</p>
 <p>The intuition behind <a class="reference internal" href="#equation-statd-fddc">(2.14)</a> is essentially the same as for <a class="reference internal" href="#equation-statd-fdd">(2.9)</a>.</p>
 </section>
 <section id="id4">
-<h3><span class="section-number">2.3.2. </span>Computation<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.3.2. </span>Computation<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>If you wish to compute these cdfs, you cannot use the look-ahead estimator as before.</p>
 <p>Indeed, you should not use any density estimator, since the objects you are
 estimating/computing are not densities.</p>
@@ -694,19 +701,19 @@ estimating/computing are not densities.</p>
 </section>
 </section>
 <section id="stability">
-<h2><span class="section-number">2.4. </span>Stability<a class="headerlink" href="#stability" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.4. </span>Stability<a class="headerlink" href="#stability" title="Link to this heading">#</a></h2>
 <p>In our <a class="reference external" href="https://python-intro.quantecon.org/finite_markov.html">lecture</a> on finite Markov chains, we also studied stationarity, stability and ergodicity.</p>
 <p>Here we will cover the same topics for the continuous case.</p>
 <p>We will, however, treat only the density case (as in <a class="reference internal" href="#statd-density-case"><span class="std std-ref">this section</span></a>), where the stochastic kernel is a family of densities.</p>
 <p>The general case is relatively similar — references are given below.</p>
 <section id="theoretical-results">
-<h3><span class="section-number">2.4.1. </span>Theoretical results<a class="headerlink" href="#theoretical-results" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.4.1. </span>Theoretical results<a class="headerlink" href="#theoretical-results" title="Link to this heading">#</a></h3>
 <p>Analogous to <a class="reference external" href="https://python.quantecon.org/finite_markov.html#stationary-distributions">the finite case</a>, given a stochastic kernel <span class="math notranslate nohighlight">\(p\)</span> and corresponding Markov operator as
 defined in <a class="reference internal" href="#equation-def-dmo">(2.10)</a>, a density <span class="math notranslate nohighlight">\(\psi^*\)</span> on <span class="math notranslate nohighlight">\(S\)</span> is called
 <em>stationary</em> for <span class="math notranslate nohighlight">\(P\)</span> if it is a fixed point of the operator <span class="math notranslate nohighlight">\(P\)</span>.</p>
 <p>In other words,</p>
 <div class="math notranslate nohighlight" id="equation-statd-dsd">
-<span class="eqno">(2.15)<a class="headerlink" href="#equation-statd-dsd" title="Permalink to this equation">#</a></span>\[\psi^*(y) = \int p(x,y) \psi^*(x) \, dx,
+<span class="eqno">(2.15)<a class="headerlink" href="#equation-statd-dsd" title="Link to this equation">#</a></span>\[\psi^*(y) = \int p(x,y) \psi^*(x) \, dx,
 \qquad \forall y \in S\]</div>
 <p>As with the finite case, if <span class="math notranslate nohighlight">\(\psi^*\)</span> is stationary for <span class="math notranslate nohighlight">\(P\)</span>, and
 the distribution of <span class="math notranslate nohighlight">\(X_0\)</span> is <span class="math notranslate nohighlight">\(\psi^*\)</span>, then, in view of
@@ -719,13 +726,13 @@ the distribution of <span class="math notranslate nohighlight">\(X_0\)</span> is
 <p>However, there are well-known conditions under which a stationary density <span class="math notranslate nohighlight">\(\psi^*\)</span> exists.</p>
 <p>With additional conditions, we can also get a unique stationary density (<span class="math notranslate nohighlight">\(\psi \in \mathscr D \text{ and } \psi = \psi P \implies \psi = \psi^*\)</span>),  and also global convergence in the sense that</p>
 <div class="math notranslate nohighlight" id="equation-statd-dca">
-<span class="eqno">(2.16)<a class="headerlink" href="#equation-statd-dca" title="Permalink to this equation">#</a></span>\[\forall \, \psi \in \mathscr D, \quad \psi P^t \to \psi^*
+<span class="eqno">(2.16)<a class="headerlink" href="#equation-statd-dca" title="Link to this equation">#</a></span>\[\forall \, \psi \in \mathscr D, \quad \psi P^t \to \psi^*
     \quad \text{as} \quad t \to \infty\]</div>
 <p>This combination of existence, uniqueness and global convergence in the sense
 of <a class="reference internal" href="#equation-statd-dca">(2.16)</a> is often referred to as <em>global stability</em>.</p>
 <p>Under very similar conditions, we get <em>ergodicity</em>, which means that</p>
 <div class="math notranslate nohighlight" id="equation-statd-lln">
-<span class="eqno">(2.17)<a class="headerlink" href="#equation-statd-lln" title="Permalink to this equation">#</a></span>\[\frac{1}{n} \sum_{t = 1}^n h(X_t)  \to \int h(x) \psi^*(x) dx
+<span class="eqno">(2.17)<a class="headerlink" href="#equation-statd-lln" title="Link to this equation">#</a></span>\[\frac{1}{n} \sum_{t = 1}^n h(X_t)  \to \int h(x) \psi^*(x) dx
     \quad \text{as } n \to \infty\]</div>
 <p>for any (<a class="reference external" href="https://en.wikipedia.org/wiki/Measurable_function">measurable</a>) function <span class="math notranslate nohighlight">\(h \colon S \to \mathbb R\)</span>  such that the right-hand side is finite.</p>
 <p>Note that the convergence in <a class="reference internal" href="#equation-statd-lln">(2.17)</a> does not depend on the distribution (or value) of <span class="math notranslate nohighlight">\(X_0\)</span>.</p>
@@ -748,7 +755,7 @@ lecture.</p></li>
 </ul>
 </section>
 <section id="an-example-of-stability">
-<h3><span class="section-number">2.4.2. </span>An example of stability<a class="headerlink" href="#an-example-of-stability" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.4.2. </span>An example of stability<a class="headerlink" href="#an-example-of-stability" title="Link to this heading">#</a></h3>
 <p>As stated above, the <a class="reference internal" href="#solow-swan"><span class="std std-ref">growth model treated here</span></a> is stable under mild conditions
 on the primitives.</p>
 <ul class="simple">
@@ -763,7 +770,7 @@ on the primitives.</p>
 <p>The details regarding initial conditions and so on are given in <a class="reference internal" href="#statd-ex2"><span class="std std-ref">this exercise</span></a>, where you are asked to replicate the figure.</p>
 </section>
 <section id="computing-stationary-densities">
-<h3><span class="section-number">2.4.3. </span>Computing stationary densities<a class="headerlink" href="#computing-stationary-densities" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.4.3. </span>Computing stationary densities<a class="headerlink" href="#computing-stationary-densities" title="Link to this heading">#</a></h3>
 <p>In the preceding figure, each sequence of densities is converging towards the unique stationary density <span class="math notranslate nohighlight">\(\psi^*\)</span>.</p>
 <p>Even from this figure, we can get a fair idea what <span class="math notranslate nohighlight">\(\psi^*\)</span> looks like, and where its mass is located.</p>
 <p>However, there is a much more direct way to estimate the stationary density,
@@ -774,7 +781,7 @@ ergodic.</p>
 <p>To approximate the stationary density <span class="math notranslate nohighlight">\(\psi^*\)</span>, we can simply generate a
 long time-series <span class="math notranslate nohighlight">\(X_0, X_1, \ldots, X_n\)</span> and estimate <span class="math notranslate nohighlight">\(\psi^*\)</span> via</p>
 <div class="math notranslate nohighlight" id="equation-statd-lae2">
-<span class="eqno">(2.18)<a class="headerlink" href="#equation-statd-lae2" title="Permalink to this equation">#</a></span>\[\psi_n^*(y) = \frac{1}{n} \sum_{t=1}^n p(X_t, y)\]</div>
+<span class="eqno">(2.18)<a class="headerlink" href="#equation-statd-lae2" title="Link to this equation">#</a></span>\[\psi_n^*(y) = \frac{1}{n} \sum_{t=1}^n p(X_t, y)\]</div>
 <p>This is essentially the same as the look-ahead estimator <a class="reference internal" href="#equation-statd-lae1">(2.13)</a>,
 except that now the observations we generate are a single time-series, rather
 than a cross-section.</p>
@@ -795,14 +802,14 @@ for the look-ahead estimator is very good.</p>
 </section>
 </section>
 <section id="exercises">
-<h2><span class="section-number">2.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.5. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="sd_ex1">
 <span id="statd-ex1"></span>
 <p class="admonition-title"><span class="caption-number">Exercise 2.1 </span></p>
 <section id="exercise-content">
 <p>Consider the simple threshold autoregressive model</p>
 <div class="math notranslate nohighlight" id="equation-statd-tar">
-<span class="eqno">(2.19)<a class="headerlink" href="#equation-statd-tar" title="Permalink to this equation">#</a></span>\[X_{t+1} = \theta |X_t| + (1- \theta^2)^{1/2} \xi_{t+1}
+<span class="eqno">(2.19)<a class="headerlink" href="#equation-statd-tar" title="Link to this equation">#</a></span>\[X_{t+1} = \theta |X_t| + (1- \theta^2)^{1/2} \xi_{t+1}
 \qquad \text{where} \quad
 \{ \xi_t \} \stackrel {\textrm{ IID }} {\sim} N(0, 1)\]</div>
 <p>This is one of those rare nonlinear stochastic models where an analytical
@@ -810,7 +817,7 @@ expression for the stationary density is available.</p>
 <p>In particular, provided that <span class="math notranslate nohighlight">\(|\theta| &lt; 1\)</span>, there is a unique
 stationary density <span class="math notranslate nohighlight">\(\psi^*\)</span> given by</p>
 <div class="math notranslate nohighlight" id="equation-statd-tar-ts">
-<span class="eqno">(2.20)<a class="headerlink" href="#equation-statd-tar-ts" title="Permalink to this equation">#</a></span>\[\psi^*(y) = 2 \, \phi(y) \, \Phi
+<span class="eqno">(2.20)<a class="headerlink" href="#equation-statd-tar-ts" title="Link to this equation">#</a></span>\[\psi^*(y) = 2 \, \phi(y) \, \Phi
 \left[
     \frac{\theta y}{(1 - \theta^2)^{1/2}}
 \right]\]</div>
@@ -820,9 +827,7 @@ in <a class="reference internal" href="#equation-statd-lae2">(2.18)</a>, and com
 are indeed close for large <span class="math notranslate nohighlight">\(n\)</span>.</p>
 <p>In doing so, set <span class="math notranslate nohighlight">\(\theta = 0.8\)</span> and <span class="math notranslate nohighlight">\(n = 500\)</span>.</p>
 <p>The next figure shows the result of such a computation</p>
-<figure class="align-default">
-<img alt="_images/solution_statd_ex1.png" src="_images/solution_statd_ex1.png" />
-</figure>
+<img alt="_images/solution_statd_ex1.png" class="align-center" src="_images/solution_statd_ex1.png" />
 <p>The additional density (black line) is a <a class="reference external" href="https://en.wikipedia.org/wiki/Kernel_density_estimation">nonparametric kernel density estimate</a>, added to the solution for illustration.</p>
 <p>(You can try to replicate it before looking at the solution if you want to)</p>
 <p>As you can see, the look-ahead estimator is a much tighter fit than the kernel
@@ -851,11 +856,11 @@ X_{t+1} = \theta |X_t| + (1 - \theta^2)^{1/2} \xi_{t+1}
 <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">θ</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">δ</span> <span class="o">=</span> <span class="n">θ</span> <span class="o">/</span> <span class="n">d</span>
 
-<span class="k">def</span> <span class="nf">ψ_star</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ψ_star</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
     <span class="s2">&quot;True stationary density of the TAR Model&quot;</span>
     <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="n">δ</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">p</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">p</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="s2">&quot;Stochastic kernel for the TAR model.&quot;</span>
     <span class="k">return</span> <span class="n">ϕ</span><span class="o">.</span><span class="n">pdf</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">θ</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">/</span> <span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="n">d</span>
 
@@ -911,7 +916,7 @@ X_{t+1} = \theta |X_t| + (1 - \theta^2)^{1/2} \xi_{t+1}
 
 <span class="n">ϕ</span> <span class="o">=</span> <span class="n">lognorm</span><span class="p">(</span><span class="n">a_σ</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">p</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">p</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="s2">&quot;Stochastic kernel, vectorized in x.  Both x and y must be positive.&quot;</span>
     <span class="n">d</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="n">α</span>
     <span class="k">return</span> <span class="n">ϕ</span><span class="o">.</span><span class="n">pdf</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">δ</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="n">d</span>
@@ -1057,7 +1062,7 @@ series for one boxplot all at once</p>
 </div>
 </section>
 <section id="appendix">
-<h2><span class="section-number">2.6. </span>Appendix<a class="headerlink" href="#appendix" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.6. </span>Appendix<a class="headerlink" href="#appendix" title="Link to this heading">#</a></h2>
 <p id="statd-appendix">Here’s the proof of <a class="reference internal" href="#equation-statd-dv">(2.6)</a>.</p>
 <p>Let <span class="math notranslate nohighlight">\(F_U\)</span> and <span class="math notranslate nohighlight">\(F_V\)</span> be the cumulative distributions of <span class="math notranslate nohighlight">\(U\)</span> and <span class="math notranslate nohighlight">\(V\)</span> respectively.</p>
 <p>By the definition of <span class="math notranslate nohighlight">\(V\)</span>, we have <span class="math notranslate nohighlight">\(F_V(v) = \mathbb P \{ a + b U \leq v \} = \mathbb P \{ U \leq (v - a) / b \}\)</span>.</p>
@@ -1097,6 +1102,8 @@ series for one boxplot all at once</p>
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -1579,7 +1586,7 @@ series for one boxplot all at once</p>
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

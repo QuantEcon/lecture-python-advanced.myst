@@ -27,7 +27,6 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 tags: [hide-output]
 ---
 !pip install --upgrade quantecon
-!pip install interpolation
 ```
 
 ## Overview
@@ -38,11 +37,79 @@ Let's start with following imports:
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import root
-from interpolation.splines import eval_linear, UCGrid, nodes
 from quantecon import optimize, MarkovChain
 from numba import njit, prange, float64
 from numba.experimental import jitclass
 ```
+
+Now let's define numba-compatible interpolation functions for this lecture.
+
+We will soon use the following interpolation functions to interpolate the value function and the policy functions
+
+```{code-cell} ipython
+:tags: [collapse-40]
+
+@njit
+def get_grid_nodes(grid):
+    """
+    Get the actual grid points from a grid tuple.
+    """
+    x_min, x_max, x_num = grid
+    return np.linspace(x_min, x_max, x_num)
+
+@njit
+def linear_interp_1d_scalar(x_min, x_max, x_num, y_values, x_val):
+    """Helper function for scalar interpolation"""
+    x_nodes = np.linspace(x_min, x_max, x_num)
+    
+    # Extrapolation with linear extension
+    if x_val <= x_nodes[0]:
+        # Linear extrapolation using first two points
+        if x_num >= 2:
+            slope = (y_values[1] - y_values[0]) \
+              / (x_nodes[1] - x_nodes[0])
+            return y_values[0] + slope * (x_val - x_nodes[0])
+        else:
+            return y_values[0]
+    
+    if x_val >= x_nodes[-1]:
+        # Linear extrapolation using last two points
+        if x_num >= 2:
+            slope = (y_values[-1] - y_values[-2]) \
+              / (x_nodes[-1] - x_nodes[-2])
+            return y_values[-1] + slope * (x_val - x_nodes[-1])
+        else:
+            return y_values[-1]
+    
+    # Binary search for the right interval
+    left = 0
+    right = x_num - 1
+    while right - left > 1:
+        mid = (left + right) // 2
+        if x_nodes[mid] <= x_val:
+            left = mid
+        else:
+            right = mid
+    
+    # Linear interpolation
+    x_left = x_nodes[left]
+    x_right = x_nodes[right]
+    y_left = y_values[left]
+    y_right = y_values[right]
+    
+    weight = (x_val - x_left) / (x_right - x_left)
+    return y_left * (1 - weight) + y_right * weight
+
+@njit
+def linear_interp_1d(x_grid, y_values, x_query):
+    """
+    Perform 1D linear interpolation.
+    """
+    x_min, x_max, x_num = x_grid
+    return linear_interp_1d_scalar(x_min, x_max, x_num, y_values, x_query[0])
+```
+
+Let's start with following imports:
 
 In {doc}`an earlier lecture <opt_tax_recur>`, we described a model of
 optimal taxation with state-contingent debt due to
@@ -774,7 +841,7 @@ x_min = -1.5555
 x_max = 17.339
 x_num = 300
 
-x_grid = UCGrid((x_min, x_max, x_num))
+x_grid = [(x_min, x_max, x_num)]
 
 crra_pref = CRRAutility(β=β, σ=σ, γ=γ)
 
@@ -788,7 +855,7 @@ amss_model = AMSS(crra_pref, β, Π, g, x_grid, bounds_v)
 ```{code-cell} python3
 # WARNING: DO NOT EXPECT THE CODE TO WORK IF YOU CHANGE PARAMETERS
 V = np.zeros((len(Π), x_num))
-V[:] = -nodes(x_grid).T ** 2
+V[:] = -get_grid_nodes(x_grid[0]) ** 2
 
 σ_v_star = np.ones((S, x_num, S * 2))
 σ_v_star[:, :, :S] = 0.0
@@ -914,14 +981,14 @@ x_min = -3.4107
 x_max = 3.709
 x_num = 300
 
-x_grid = UCGrid((x_min, x_max, x_num))
+x_grid = [(x_min, x_max, x_num)]
 log_pref = LogUtility(β=β, ψ=ψ)
 
 S = len(Π)
 bounds_v = np.vstack([np.zeros(2 * S), np.hstack([1 - g, np.ones(S)]) ]).T
 
 V = np.zeros((len(Π), x_num))
-V[:] = -(nodes(x_grid).T + x_max) ** 2 / 14
+V[:] = -(get_grid_nodes(x_grid[0]) + x_max) ** 2 / 14
 
 σ_v_star = 1 - np.full((S, x_num, S * 2), 0.55)
 

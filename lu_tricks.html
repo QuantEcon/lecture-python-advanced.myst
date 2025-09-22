@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>32. Classical Control with Linear Algebra &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'lu_tricks';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/lu_tricks.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="33. Classical Prediction and Filtering With Linear Algebra" href="classical_filtering.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -204,7 +211,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -255,9 +262,9 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="classical-control-with-linear-algebra">
-<h1><span class="section-number">32. </span>Classical Control with Linear Algebra<a class="headerlink" href="#classical-control-with-linear-algebra" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">32. </span>Classical Control with Linear Algebra<a class="headerlink" href="#classical-control-with-linear-algebra" title="Link to this heading">#</a></h1>
 <section id="overview">
-<h2><span class="section-number">32.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>In an earlier lecture <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">Linear Quadratic Dynamic Programming Problems</a>, we have studied how to solve a special
 class of dynamic optimization and prediction problems by applying the method of dynamic programming. In this class of problems</p>
 <ul class="simple">
@@ -281,19 +288,19 @@ class of dynamic optimization and prediction problems by applying the method of 
 <p>Let’s start with some standard imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="references">
-<h3><span class="section-number">32.1.1. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.1.1. </span>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
 <p>Useful references include <span id="id1">[<a class="reference internal" href="zreferences.html#id109" title="Peter Whittle. Prediction and regulation by linear least-square methods. English Univ. Press, 1963.">Whittle, 1963</a>]</span>, <span id="id2">[<a class="reference internal" href="zreferences.html#id110" title="Lars Peter Hansen and Thomas J Sargent. Formulating and estimating dynamic linear rational expectations models. Journal of Economic Dynamics and control, 2:7–46, 1980.">Hansen and Sargent, 1980</a>]</span>, <span id="id3">[<a class="reference internal" href="zreferences.html#id111" title="Sophocles J Orfanidis. Optimum Signal Processing: An Introduction. McGraw Hill Publishing, New York, New York, 1988.">Orfanidis, 1988</a>]</span>, <span id="id4">[<a class="reference internal" href="zreferences.html#id112" title="Papoulis Athanasios and S Unnikrishna Pillai. Probability, random variables, and stochastic processes. Mc-Graw Hill, 1991.">Athanasios and Pillai, 1991</a>]</span>, and <span id="id5">[<a class="reference internal" href="zreferences.html#id113" title="John F Muth. Optimal properties of exponentially weighted forecasts. Journal of the american statistical association, 55(290):299–306, 1960.">Muth, 1960</a>]</span>.</p>
 </section>
 </section>
 <section id="a-control-problem">
-<h2><span class="section-number">32.2. </span>A control problem<a class="headerlink" href="#a-control-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.2. </span>A control problem<a class="headerlink" href="#a-control-problem" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(L\)</span> be the <strong>lag operator</strong>, so that, for sequence <span class="math notranslate nohighlight">\(\{x_t\}\)</span> we have <span class="math notranslate nohighlight">\(L x_t = x_{t-1}\)</span>.</p>
 <p>More generally, let <span class="math notranslate nohighlight">\(L^k x_t = x_{t-k}\)</span> with <span class="math notranslate nohighlight">\(L^0 x_t = x_t\)</span> and</p>
 <div class="math notranslate nohighlight">
@@ -303,7 +310,7 @@ d(L) = d_0 + d_1 L+ \ldots + d_m L^m
 <p>where <span class="math notranslate nohighlight">\(d_0, d_1, \ldots, d_m\)</span> is a given scalar sequence.</p>
 <p>Consider the discrete-time control problem</p>
 <div class="math notranslate nohighlight" id="equation-oneone">
-<span class="eqno">(32.1)<a class="headerlink" href="#equation-oneone" title="Permalink to this equation">#</a></span>\[\max_{\{y_t\}}
+<span class="eqno">(32.1)<a class="headerlink" href="#equation-oneone" title="Link to this equation">#</a></span>\[\max_{\{y_t\}}
 \lim_{N \to \infty} \sum^N_{t=0} \beta^t\,
 \left\{
      a_t y_t - {1 \over 2}\, hy^2_t - {1 \over 2} \,
@@ -317,7 +324,7 @@ d(L) = d_0 + d_1 L+ \ldots + d_m L^m
 <p>Maximization in <a class="reference internal" href="#equation-oneone">(32.1)</a> is subject to  initial conditions for <span class="math notranslate nohighlight">\(y_{-1}, y_{-2} \ldots, y_{-m}\)</span>.</p>
 <p>Maximization is over infinite sequences <span class="math notranslate nohighlight">\(\{y_t\}_{t \geq 0}\)</span>.</p>
 <section id="example">
-<h3><span class="section-number">32.2.1. </span>Example<a class="headerlink" href="#example" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.2.1. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
 <p>The formulation of the LQ problem given above is broad enough to encompass
 many useful models.</p>
 <p>As a simple illustration, recall that in <a class="reference external" href="https://python-intro.quantecon.org/lqcontrol.html">LQ Control: Foundations</a> we consider a monopolist facing stochastic demand
@@ -347,7 +354,7 @@ p_t = \alpha_0 - \alpha_1 q_t + d_t
 </section>
 </section>
 <section id="finite-horizon-theory">
-<h2><span class="section-number">32.3. </span>Finite horizon theory<a class="headerlink" href="#finite-horizon-theory" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.3. </span>Finite horizon theory<a class="headerlink" href="#finite-horizon-theory" title="Link to this heading">#</a></h2>
 <p>We first study a finite <span class="math notranslate nohighlight">\(N\)</span> version of the problem.</p>
 <p>Later we will study an infinite horizon problem solution as a limiting version of a finite horizon problem.</p>
 <p>(This will require being careful because the limits as <span class="math notranslate nohighlight">\(N \to \infty\)</span> of the necessary and sufficient conditions for maximizing finite <span class="math notranslate nohighlight">\(N\)</span> versions of <a class="reference internal" href="#equation-oneone">(32.1)</a>
@@ -389,11 +396,11 @@ J
 \end{split}\]</div>
 <p>We can write this more succinctly as</p>
 <div class="math notranslate nohighlight" id="equation-onetwo">
-<span class="eqno">(32.2)<a class="headerlink" href="#equation-onetwo" title="Permalink to this equation">#</a></span>\[{\partial {J} \over \partial y_t}
+<span class="eqno">(32.2)<a class="headerlink" href="#equation-onetwo" title="Link to this equation">#</a></span>\[{\partial {J} \over \partial y_t}
     = 2 \beta^t \, d(\beta L^{-1}) \, d (L) y_t\]</div>
 <p>Differentiating <span class="math notranslate nohighlight">\(J\)</span> with respect to <span class="math notranslate nohighlight">\(y_t\)</span> for <span class="math notranslate nohighlight">\(t = N-m + 1, \ldots, N\)</span> gives</p>
 <div class="math notranslate nohighlight" id="equation-onethree">
-<span class="eqno">(32.3)<a class="headerlink" href="#equation-onethree" title="Permalink to this equation">#</a></span>\[\begin{aligned}
+<span class="eqno">(32.3)<a class="headerlink" href="#equation-onethree" title="Link to this equation">#</a></span>\[\begin{aligned}
  {\partial J \over \partial y_N}
  &amp;= 2 \beta^N\, d_0 \, d(L) y_N \cr
    {\partial J \over \partial y_{N-1}}
@@ -408,13 +415,13 @@ J
 <p>With these preliminaries under our belts, we are ready to differentiate <a class="reference internal" href="#equation-oneone">(32.1)</a>.</p>
 <p>Differentiating <a class="reference internal" href="#equation-oneone">(32.1)</a> with respect to <span class="math notranslate nohighlight">\(y_t\)</span> for <span class="math notranslate nohighlight">\(t=0, \ldots, N-m\)</span> gives the Euler equations</p>
 <div class="math notranslate nohighlight" id="equation-onefour">
-<span class="eqno">(32.4)<a class="headerlink" href="#equation-onefour" title="Permalink to this equation">#</a></span>\[\bigl[h+d\,(\beta L^{-1})\,d(L)\bigr] y_t = a_t,
+<span class="eqno">(32.4)<a class="headerlink" href="#equation-onefour" title="Link to this equation">#</a></span>\[\bigl[h+d\,(\beta L^{-1})\,d(L)\bigr] y_t = a_t,
 \quad t=0,\, 1,\, \ldots, N-m\]</div>
 <p>The system of equations <a class="reference internal" href="#equation-onefour">(32.4)</a> forms  a  <span class="math notranslate nohighlight">\(2 \times m\)</span> order linear <em>difference
 equation</em> that must hold for the values of <span class="math notranslate nohighlight">\(t\)</span> indicated.</p>
 <p>Differentiating <a class="reference internal" href="#equation-oneone">(32.1)</a> with respect to <span class="math notranslate nohighlight">\(y_t\)</span> for <span class="math notranslate nohighlight">\(t = N-m + 1, \ldots, N\)</span> gives the terminal conditions</p>
 <div class="math notranslate nohighlight" id="equation-onefive">
-<span class="eqno">(32.5)<a class="headerlink" href="#equation-onefive" title="Permalink to this equation">#</a></span>\[\begin{aligned}
+<span class="eqno">(32.5)<a class="headerlink" href="#equation-onefive" title="Link to this equation">#</a></span>\[\begin{aligned}
 \beta^N  (a_N - hy_N - d_0\,d(L)y_N)
 &amp;= 0  \cr
   \beta^{N-1} \left(a_{N-1}-hy_{N-1}-\Bigl(d_0 + \beta \, d_1\,
@@ -434,14 +441,14 @@ conditions <a class="reference internal" href="#equation-onefour">(32.4)</a> and
 by concavity of the objective function.</p>
 <p>Next, we describe how to obtain the solution using matrix methods.</p>
 <section id="matrix-methods">
-<span id="fdlq"></span><h3><span class="section-number">32.3.1. </span>Matrix methods<a class="headerlink" href="#matrix-methods" title="Permalink to this heading">#</a></h3>
+<span id="fdlq"></span><h3><span class="section-number">32.3.1. </span>Matrix methods<a class="headerlink" href="#matrix-methods" title="Link to this heading">#</a></h3>
 <p>Let’s look at how linear algebra can be used to tackle and shed light on the finite horizon LQ control problem.</p>
 <section id="a-single-lag-term">
-<h4><span class="section-number">32.3.1.1. </span>A single lag term<a class="headerlink" href="#a-single-lag-term" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">32.3.1.1. </span>A single lag term<a class="headerlink" href="#a-single-lag-term" title="Link to this heading">#</a></h4>
 <p>Let’s begin with the special case in which <span class="math notranslate nohighlight">\(m=1\)</span>.</p>
 <p>We want to solve the system of <span class="math notranslate nohighlight">\(N+1\)</span> linear equations</p>
 <div class="math notranslate nohighlight" id="equation-oneff">
-<span class="eqno">(32.6)<a class="headerlink" href="#equation-oneff" title="Permalink to this equation">#</a></span>\[\begin{aligned}
+<span class="eqno">(32.6)<a class="headerlink" href="#equation-oneff" title="Link to this equation">#</a></span>\[\begin{aligned}
 \bigl[h &amp; + d\, (\beta L^{-1})\, d\, (L) ] y_t = a_t, \quad
 t = 0,\ 1,\ \ldots,\, N-1\cr
 \beta^N &amp; \bigl[a_N-h\, y_N-d_0\, d\, (L) y_N\bigr] = 0
@@ -460,7 +467,7 @@ t = 0,\ 1,\ \ldots,\, N-1\cr
 \]</div>
 <p>Then we can represent <a class="reference internal" href="#equation-oneff">(32.6)</a> as the matrix equation</p>
 <div class="math notranslate nohighlight" id="equation-onefourfive">
-<span class="eqno">(32.7)<a class="headerlink" href="#equation-onefourfive" title="Permalink to this equation">#</a></span>\[\left[
+<span class="eqno">(32.7)<a class="headerlink" href="#equation-onefourfive" title="Link to this equation">#</a></span>\[\left[
     \begin{matrix}
         (\phi_0-d_1^2) &amp; \phi_1 &amp; 0 &amp; 0 &amp; \ldots &amp; \ldots &amp; 0 \cr
         \beta \phi_1 &amp; \phi_0 &amp; \phi_1 &amp; 0 &amp; \ldots &amp; \dots &amp; 0 \cr
@@ -484,7 +491,7 @@ t = 0,\ 1,\ \ldots,\, N-1\cr
 \right]\]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-onefoursix">
-<span class="eqno">(32.8)<a class="headerlink" href="#equation-onefoursix" title="Permalink to this equation">#</a></span>\[W\bar y = \bar a\]</div>
+<span class="eqno">(32.8)<a class="headerlink" href="#equation-onefoursix" title="Link to this equation">#</a></span>\[W\bar y = \bar a\]</div>
 <p>Notice how we have chosen to arrange the <span class="math notranslate nohighlight">\(y_t\)</span>’s in reverse
 time order.</p>
 <p>The matrix <span class="math notranslate nohighlight">\(W\)</span> on the left side of <a class="reference internal" href="#equation-onefourfive">(32.7)</a> is “almost” a
@@ -497,12 +504,12 @@ descending diagonal is constant).</p>
 </ol>
 <p>The solution of <a class="reference internal" href="#equation-onefoursix">(32.8)</a> can be expressed in the form</p>
 <div class="math notranslate nohighlight" id="equation-onefourseven">
-<span class="eqno">(32.9)<a class="headerlink" href="#equation-onefourseven" title="Permalink to this equation">#</a></span>\[\bar y = W^{-1} \bar a\]</div>
+<span class="eqno">(32.9)<a class="headerlink" href="#equation-onefourseven" title="Link to this equation">#</a></span>\[\bar y = W^{-1} \bar a\]</div>
 <p>which represents each element <span class="math notranslate nohighlight">\(y_t\)</span> of <span class="math notranslate nohighlight">\(\bar y\)</span> as a function of the entire vector <span class="math notranslate nohighlight">\(\bar a\)</span>.</p>
 <p>That is, <span class="math notranslate nohighlight">\(y_t\)</span> is a function of past, present, and future values of <span class="math notranslate nohighlight">\(a\)</span>’s, as well as of the initial condition <span class="math notranslate nohighlight">\(y_{-1}\)</span>.</p>
 </section>
 <section id="an-alternative-representation">
-<h4><span class="section-number">32.3.1.2. </span>An alternative representation<a class="headerlink" href="#an-alternative-representation" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">32.3.1.2. </span>An alternative representation<a class="headerlink" href="#an-alternative-representation" title="Link to this heading">#</a></h4>
 <p>An alternative way to express the solution to <a class="reference internal" href="#equation-onefourfive">(32.7)</a> or
 <a class="reference internal" href="#equation-onefoursix">(32.8)</a> is in so-called <strong>feedback-feedforward</strong> form.</p>
 <p>The idea here is to find a solution expressing <span class="math notranslate nohighlight">\(y_t\)</span> as a function of <em>past</em> <span class="math notranslate nohighlight">\(y\)</span>’s and <em>current</em> and <em>future</em> <span class="math notranslate nohighlight">\(a\)</span>’s.</p>
@@ -516,7 +523,7 @@ where</p>
 <p>The factorization can be normalized so that the diagonal elements of <span class="math notranslate nohighlight">\(U\)</span> are unity.</p>
 <p>Using the LU representation in <a class="reference internal" href="#equation-onefourseven">(32.9)</a>, we obtain</p>
 <div class="math notranslate nohighlight" id="equation-onefournine">
-<span class="eqno">(32.10)<a class="headerlink" href="#equation-onefournine" title="Permalink to this equation">#</a></span>\[U \bar y = L^{-1} \bar a\]</div>
+<span class="eqno">(32.10)<a class="headerlink" href="#equation-onefournine" title="Link to this equation">#</a></span>\[U \bar y = L^{-1} \bar a\]</div>
 <p>Since <span class="math notranslate nohighlight">\(L^{-1}\)</span> is lower triangular, this representation expresses
 <span class="math notranslate nohighlight">\(y_t\)</span> as a function of</p>
 <ul class="simple">
@@ -575,7 +582,7 @@ sub-diagonal, the <span class="math notranslate nohighlight">\(LU\)</span> decom
 <p>Note how the left side for a given <span class="math notranslate nohighlight">\(t\)</span> involves  <span class="math notranslate nohighlight">\(y_t\)</span> and one lagged value <span class="math notranslate nohighlight">\(y_{t-1}\)</span> while the right side involves all future values of the forcing process <span class="math notranslate nohighlight">\(a_t, a_{t+1}, \ldots, a_N\)</span>.</p>
 </section>
 <section id="additional-lag-terms">
-<h4><span class="section-number">32.3.1.3. </span>Additional lag terms<a class="headerlink" href="#additional-lag-terms" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">32.3.1.3. </span>Additional lag terms<a class="headerlink" href="#additional-lag-terms" title="Link to this heading">#</a></h4>
 <p>We briefly indicate how this approach extends to the problem with
 <span class="math notranslate nohighlight">\(m &gt; 1\)</span>.</p>
 <p>Assume that <span class="math notranslate nohighlight">\(\beta = 1\)</span> and  let <span class="math notranslate nohighlight">\(D_{m+1}\)</span> be the
@@ -637,7 +644,7 @@ exception being the leading <span class="math notranslate nohighlight">\(m \time
 left-hand corner.</p>
 <p>We can represent the solution in feedback-feedforward form by obtaining a decomposition <span class="math notranslate nohighlight">\(LU = W\)</span>, and obtain</p>
 <div class="math notranslate nohighlight" id="equation-onefivetwo">
-<span class="eqno">(32.11)<a class="headerlink" href="#equation-onefivetwo" title="Permalink to this equation">#</a></span>\[U \bar y = L^{-1} \bar a\]</div>
+<span class="eqno">(32.11)<a class="headerlink" href="#equation-onefivetwo" title="Link to this equation">#</a></span>\[U \bar y = L^{-1} \bar a\]</div>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned} \sum^t_{j=0}\, U_{-t+N+1,\,-t+N+j+1}\,y_{t-j} &amp;= \sum^{N-t}_{j=0}\,
@@ -670,7 +677,7 @@ to <span class="math notranslate nohighlight">\(c(L)\)</span> and <span class="m
 </section>
 </section>
 <section id="infinite-horizon-limit">
-<h2><span class="section-number">32.4. </span>Infinite horizon limit<a class="headerlink" href="#infinite-horizon-limit" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.4. </span>Infinite horizon limit<a class="headerlink" href="#infinite-horizon-limit" title="Link to this heading">#</a></h2>
 <p>For the infinite horizon problem, we propose to discover first-order
 necessary conditions by taking the limits of <a class="reference internal" href="#equation-onefour">(32.4)</a> and <a class="reference internal" href="#equation-onefive">(32.5)</a> as
 <span class="math notranslate nohighlight">\(N \to \infty\)</span>.</p>
@@ -679,14 +686,14 @@ necessary conditions by taking the limits of <a class="reference internal" href=
 <p>That is, the limits of <a class="reference internal" href="#equation-onefive">(32.5)</a> do not provide enough information uniquely to determine the solution of the Euler equation <a class="reference internal" href="#equation-onefour">(32.4)</a> that maximizes <a class="reference internal" href="#equation-oneone">(32.1)</a>.</p>
 <p>As we shall see below, a side condition on the path of <span class="math notranslate nohighlight">\(y_t\)</span> that together with <a class="reference internal" href="#equation-onefour">(32.4)</a> is sufficient for an optimum is</p>
 <div class="math notranslate nohighlight" id="equation-onesix">
-<span class="eqno">(32.12)<a class="headerlink" href="#equation-onesix" title="Permalink to this equation">#</a></span>\[\sum^\infty_{t=0}\ \beta^t\, hy^2_t &lt; \infty\]</div>
+<span class="eqno">(32.12)<a class="headerlink" href="#equation-onesix" title="Link to this equation">#</a></span>\[\sum^\infty_{t=0}\ \beta^t\, hy^2_t &lt; \infty\]</div>
 <p>All paths that satisfy the Euler equations, except the one that we shall
 select below, violate this condition and, therefore, evidently lead to
 (much) lower values of <a class="reference internal" href="#equation-oneone">(32.1)</a> than does the
 optimal path selected by the solution procedure below.</p>
 <p>Consider the <em>characteristic equation</em> associated with the Euler equation</p>
 <div class="math notranslate nohighlight" id="equation-oneseven">
-<span class="eqno">(32.13)<a class="headerlink" href="#equation-oneseven" title="Permalink to this equation">#</a></span>\[h+d \, (\beta z^{-1})\, d \, (z) = 0\]</div>
+<span class="eqno">(32.13)<a class="headerlink" href="#equation-oneseven" title="Link to this equation">#</a></span>\[h+d \, (\beta z^{-1})\, d \, (z) = 0\]</div>
 <p>Notice that if <span class="math notranslate nohighlight">\(\tilde z\)</span> is a root of equation <a class="reference internal" href="#equation-oneseven">(32.13)</a>, then so is <span class="math notranslate nohighlight">\(\beta \tilde z^{-1}\)</span>.</p>
 <p>Thus, the roots of <a class="reference internal" href="#equation-oneseven">(32.13)</a> come in “<span class="math notranslate nohighlight">\(\beta\)</span>-reciprocal” pairs.</p>
 <p>Assume that the roots of <a class="reference internal" href="#equation-oneseven">(32.13)</a> are distinct.</p>
@@ -697,7 +704,7 @@ roots, it follows that <span class="math notranslate nohighlight">\(\vert z_j \v
 <p>It also follows that <span class="math notranslate nohighlight">\(z_{2m-j} = \beta z^{-1}_{j+1}, j=0, 1, \ldots, m-1\)</span>.</p>
 <p>Therefore, the characteristic polynomial on the left side of <a class="reference internal" href="#equation-oneseven">(32.13)</a> can be expressed as</p>
 <div class="math notranslate nohighlight" id="equation-oneeight">
-<span class="eqno">(32.14)<a class="headerlink" href="#equation-oneeight" title="Permalink to this equation">#</a></span>\[\begin{aligned}
+<span class="eqno">(32.14)<a class="headerlink" href="#equation-oneeight" title="Link to this equation">#</a></span>\[\begin{aligned}
 h+d(\beta z^{-1})d(z)
 &amp;= z^{-m} z_0(z-z_1)\cdots
 (z-z_m)(z-z_{m+1}) \cdots (z-z_{2m}) \cr
@@ -716,14 +723,14 @@ h+d(\beta z^{-1})d(z)
 \]</div>
 <p>Now define <span class="math notranslate nohighlight">\(c(z) = \sum^m_{j=0} c_j \, z^j\)</span> as</p>
 <div class="math notranslate nohighlight" id="equation-onenine">
-<span class="eqno">(32.15)<a class="headerlink" href="#equation-onenine" title="Permalink to this equation">#</a></span>\[c\,(z)=\Bigl[(-1)^m z_0\, z_1 \cdots z_m\Bigr]^{1/2} (1-{z\over z_1}) \,
+<span class="eqno">(32.15)<a class="headerlink" href="#equation-onenine" title="Link to this equation">#</a></span>\[c\,(z)=\Bigl[(-1)^m z_0\, z_1 \cdots z_m\Bigr]^{1/2} (1-{z\over z_1}) \,
 (1-{z\over z_2}) \cdots (1- {z\over z_m})\]</div>
 <p>Notice that <a class="reference internal" href="#equation-oneeight">(32.14)</a> can be written</p>
 <div class="math notranslate nohighlight" id="equation-oneten">
-<span class="eqno">(32.16)<a class="headerlink" href="#equation-oneten" title="Permalink to this equation">#</a></span>\[h + d \ (\beta z^{-1})\ d\ (z) = c\,(\beta z^{-1})\,c\,(z)\]</div>
+<span class="eqno">(32.16)<a class="headerlink" href="#equation-oneten" title="Link to this equation">#</a></span>\[h + d \ (\beta z^{-1})\ d\ (z) = c\,(\beta z^{-1})\,c\,(z)\]</div>
 <p>It is useful to write <a class="reference internal" href="#equation-onenine">(32.15)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-oneeleven">
-<span class="eqno">(32.17)<a class="headerlink" href="#equation-oneeleven" title="Permalink to this equation">#</a></span>\[c(z) = c_0(1-\lambda_1\, z) \ldots (1-\lambda_m z)\]</div>
+<span class="eqno">(32.17)<a class="headerlink" href="#equation-oneeleven" title="Link to this equation">#</a></span>\[c(z) = c_0(1-\lambda_1\, z) \ldots (1-\lambda_m z)\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight">
 \[
@@ -753,14 +760,14 @@ c(\beta L^{-1})\,c\,(L)\, y_t = a_t
 <p>The unique solution of the Euler equation that satisfies condition <a class="reference internal" href="#equation-onesix">(32.12)</a>
 is</p>
 <div class="math notranslate nohighlight" id="equation-onethirteen">
-<span class="eqno">(32.18)<a class="headerlink" href="#equation-onethirteen" title="Permalink to this equation">#</a></span>\[c(L)\,y_t = c\,(\beta L^{-1})^{-1}a_t\]</div>
+<span class="eqno">(32.18)<a class="headerlink" href="#equation-onethirteen" title="Link to this equation">#</a></span>\[c(L)\,y_t = c\,(\beta L^{-1})^{-1}a_t\]</div>
 <p>This can be established by using an argument paralleling that in
 chapter IX of <span id="id7">[<a class="reference internal" href="zreferences.html#id200" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>.</p>
 <p>To exhibit the solution in a form
 paralleling that of <span id="id8">[<a class="reference internal" href="zreferences.html#id200" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, we use <a class="reference internal" href="#equation-oneeleven">(32.17)</a> to write
 <a class="reference internal" href="#equation-onethirteen">(32.18)</a> as</p>
 <div class="math notranslate nohighlight" id="equation-junk">
-<span class="eqno">(32.19)<a class="headerlink" href="#equation-junk" title="Permalink to this equation">#</a></span>\[(1-\lambda_1 L) \cdots (1 - \lambda_mL)y_t = {c^{-2}_0 a_t \over (1-\beta \lambda_1 L^{-1}) \cdots (1 - \beta \lambda_m L^{-1})}\]</div>
+<span class="eqno">(32.19)<a class="headerlink" href="#equation-junk" title="Link to this equation">#</a></span>\[(1-\lambda_1 L) \cdots (1 - \lambda_mL)y_t = {c^{-2}_0 a_t \over (1-\beta \lambda_1 L^{-1}) \cdots (1 - \beta \lambda_m L^{-1})}\]</div>
 <p>Using <a class="reference external" href="https://en.wikipedia.org/wiki/Partial_fraction_decomposition">partial fractions</a>, we can write the characteristic polynomial on
 the right side of <a class="reference internal" href="#equation-junk">(32.19)</a> as</p>
 <div class="math notranslate nohighlight">
@@ -777,7 +784,7 @@ A_j := {c^{-2}_0 \over \prod_{i \not= j}(1-{\lambda_i \over \lambda_j})}
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-onefifteen">
-<span class="eqno">(32.20)<a class="headerlink" href="#equation-onefifteen" title="Permalink to this equation">#</a></span>\[(1 - \lambda_1 L) \cdots (1 - \lambda_m L) y_t = \sum^m_{j=1}\, A_j
+<span class="eqno">(32.20)<a class="headerlink" href="#equation-onefifteen" title="Link to this equation">#</a></span>\[(1 - \lambda_1 L) \cdots (1 - \lambda_m L) y_t = \sum^m_{j=1}\, A_j
 \sum^\infty_{k=0}\, (\lambda_j\beta)^k\, a_{t+k}\]</div>
 <p>Equation <a class="reference internal" href="#equation-onefifteen">(32.20)</a> expresses the optimum sequence for <span class="math notranslate nohighlight">\(y_t\)</span> in terms
 of <span class="math notranslate nohighlight">\(m\)</span> lagged <span class="math notranslate nohighlight">\(y\)</span>’s, and <span class="math notranslate nohighlight">\(m\)</span> weighted infinite
@@ -815,7 +822,7 @@ condition <a class="reference internal" href="#equation-onesix">(32.12)</a> is s
 <p>Therefore it is easy to dominate a path that violates <a class="reference internal" href="#equation-onesix">(32.12)</a>.</p>
 </section>
 <section id="undiscounted-problems">
-<h2><span class="section-number">32.5. </span>Undiscounted problems<a class="headerlink" href="#undiscounted-problems" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.5. </span>Undiscounted problems<a class="headerlink" href="#undiscounted-problems" title="Link to this heading">#</a></h2>
 <p>It is worthwhile focusing on a special case of the LQ problems above:
 the undiscounted problem that emerges when <span class="math notranslate nohighlight">\(\beta = 1\)</span>.</p>
 <p>In this case, the Euler equation is</p>
@@ -846,18 +853,18 @@ z_0 &amp;= \hbox{ constant}
 \sum^\infty_{k=0} \lambda^k_j a_{t+k}
 \]</div>
 <section id="transforming-discounted-to-undiscounted-problem">
-<h3><span class="section-number">32.5.1. </span>Transforming discounted to undiscounted problem<a class="headerlink" href="#transforming-discounted-to-undiscounted-problem" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.5.1. </span>Transforming discounted to undiscounted problem<a class="headerlink" href="#transforming-discounted-to-undiscounted-problem" title="Link to this heading">#</a></h3>
 <p>Discounted problems can always be converted into undiscounted problems via a simple transformation.</p>
 <p>Consider problem <a class="reference internal" href="#equation-oneone">(32.1)</a> with <span class="math notranslate nohighlight">\(0 &lt; \beta &lt; 1\)</span>.</p>
 <p>Define the transformed variables</p>
 <div class="math notranslate nohighlight" id="equation-onetwenty">
-<span class="eqno">(32.21)<a class="headerlink" href="#equation-onetwenty" title="Permalink to this equation">#</a></span>\[\tilde a_t = \beta^{t/2} a_t,\ \tilde y_t = \beta^{t/2} y_t\]</div>
+<span class="eqno">(32.21)<a class="headerlink" href="#equation-onetwenty" title="Link to this equation">#</a></span>\[\tilde a_t = \beta^{t/2} a_t,\ \tilde y_t = \beta^{t/2} y_t\]</div>
 <p>Then notice that <span class="math notranslate nohighlight">\(\beta^t\,[d\, (L) y_t ]^2=[\tilde d\,(L)\tilde y_t]^2\)</span> with
 <span class="math notranslate nohighlight">\(\tilde d \,(L)=\sum^m_{j=0} \tilde d_j\, L^j\)</span> and <span class="math notranslate nohighlight">\(\tilde d_j = \beta^{j/2}
 d_j\)</span>.</p>
 <p>Then the original criterion function <a class="reference internal" href="#equation-oneone">(32.1)</a> is equivalent to</p>
 <div class="math notranslate nohighlight" id="equation-oneoneprime">
-<span class="eqno">(32.22)<a class="headerlink" href="#equation-oneoneprime" title="Permalink to this equation">#</a></span>\[\lim_{N \rightarrow \infty}
+<span class="eqno">(32.22)<a class="headerlink" href="#equation-oneoneprime" title="Link to this equation">#</a></span>\[\lim_{N \rightarrow \infty}
 \sum^N_{t=0}
 \{\tilde a_t\, \tilde y_t - {1 \over 2} h\,\tilde y^2_t - {1\over 2}
 [ \tilde d\,(L)\, \tilde y_t]^2 \}\]</div>
@@ -872,7 +879,7 @@ d_j\)</span>.</p>
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-onetwentyone">
-<span class="eqno">(32.23)<a class="headerlink" href="#equation-onetwentyone" title="Permalink to this equation">#</a></span>\[\tilde y_t = \tilde f_1 \, \tilde y_{t-1} + \cdots + \tilde f_m\,
+<span class="eqno">(32.23)<a class="headerlink" href="#equation-onetwentyone" title="Link to this equation">#</a></span>\[\tilde y_t = \tilde f_1 \, \tilde y_{t-1} + \cdots + \tilde f_m\,
 \tilde y_{t-m} + \sum^m_{j=1} \tilde A_j \sum^\infty_{k=0} \tilde \lambda^k_j
 \, \tilde a_{t+k},\]</div>
 <p>where <span class="math notranslate nohighlight">\(\tilde c \,(z^{-1}) \tilde c\,(z) = h + \tilde d\,(z^{-1}) \tilde d \,(z)\)</span>, and where</p>
@@ -890,7 +897,7 @@ y_t = f_1\, y_{t-1} + \cdots + f_m\, y_{t-m} + \sum^m_{j=1} A_j
 \]</div>
 <p>where</p>
 <div class="math notranslate nohighlight" id="equation-onetwentythree">
-<span class="eqno">(32.24)<a class="headerlink" href="#equation-onetwentythree" title="Permalink to this equation">#</a></span>\[f_j = \tilde f_j\, \beta^{-j/2},\  A_j = \tilde A_j,\  \lambda_j = \tilde
+<span class="eqno">(32.24)<a class="headerlink" href="#equation-onetwentythree" title="Link to this equation">#</a></span>\[f_j = \tilde f_j\, \beta^{-j/2},\  A_j = \tilde A_j,\  \lambda_j = \tilde
 \lambda_j \, \beta^{-1/2}\]</div>
 <p>The transformations <a class="reference internal" href="#equation-onetwenty">(32.21)</a> and the inverse formulas
 <a class="reference internal" href="#equation-onetwentythree">(32.24)</a> allow us to solve a discounted problem by first
@@ -898,18 +905,18 @@ solving a related undiscounted problem.</p>
 </section>
 </section>
 <section id="implementation">
-<h2><span class="section-number">32.6. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.6. </span>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h2>
 <p>Here’s the code that computes solutions to the LQ problem using the methods described
 above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">spst</span>
-<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">spst</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">la</span>
 
-<span class="k">class</span> <span class="nc">LQFilter</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LQFilter</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">y_m</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">h_eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">y_m</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">h_eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Parameters</span>
@@ -984,7 +991,7 @@ above.</p>
             <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="o">**</span><span class="p">(</span><span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span> \
                                    <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">construct_W_and_Wm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct_W_and_Wm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This constructs the matrices W and W_m for a given number of periods N</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1036,7 +1043,7 @@ above.</p>
 
         <span class="k">return</span> <span class="n">W</span><span class="p">,</span> <span class="n">W_m</span>
 
-    <span class="k">def</span> <span class="nf">roots_of_characteristic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">roots_of_characteristic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function calculates z_0 and the 2m roots of the characteristic</span>
 <span class="sd">        equation associated with the Euler equation (1.7)</span>
@@ -1062,7 +1069,7 @@ above.</p>
 
         <span class="k">return</span> <span class="n">z_1_to_m</span><span class="p">,</span> <span class="n">z_0</span><span class="p">,</span> <span class="n">λ</span>
 
-    <span class="k">def</span> <span class="nf">coeffs_of_c</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">coeffs_of_c</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This function computes the coefficients {c_j, j = 0, 1, ..., m} for</span>
 <span class="sd">                c(z) = sum_{j = 0}^{m} c_j z^j</span>
@@ -1077,7 +1084,7 @@ above.</p>
 
         <span class="k">return</span> <span class="n">c_coeffs</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function calculates {λ_j, j=1,...,m} and {A_j, j=1,...,m}</span>
 <span class="sd">        of the expression (1.15)</span>
@@ -1092,7 +1099,7 @@ above.</p>
 
         <span class="k">return</span> <span class="n">λ</span><span class="p">,</span> <span class="n">A</span>
 
-    <span class="k">def</span> <span class="nf">construct_V</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct_V</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This function constructs the covariance matrix for x^N (see section 6)</span>
 <span class="sd">        for a given period N</span>
@@ -1107,7 +1114,7 @@ above.</p>
 
         <span class="k">return</span> <span class="n">V</span>
 
-    <span class="k">def</span> <span class="nf">simulate_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Assuming that the u&#39;s are normal, this method draws a random path</span>
 <span class="sd">        for x^N</span>
@@ -1117,7 +1124,7 @@ above.</p>
 
         <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_hist</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_hist</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function implements the prediction formula discussed in section 6 (1.59)</span>
 <span class="sd">        It takes a realization for a^N, and the period in which the prediction is </span>
@@ -1137,7 +1144,7 @@ above.</p>
 
         <span class="k">return</span> <span class="n">Ea_hist</span>
 
-    <span class="k">def</span> <span class="nf">optimal_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_hist</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">optimal_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_hist</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        - if t is NOT given it takes a_hist (list or numpy.array) as a</span>
 <span class="sd">          deterministic a_t</span>
@@ -1214,7 +1221,7 @@ above.</p>
 </div>
 </div>
 <section id="id10">
-<h3><span class="section-number">32.6.1. </span>Example<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">32.6.1. </span>Example<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <p>In this application, we’ll have one lag, with</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1237,7 +1244,7 @@ track the <span class="math notranslate nohighlight">\(\{a_t\}\)</span> process.
 <span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">a_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">plot_simulation</span><span class="p">(</span><span class="n">γ</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_m</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_simulation</span><span class="p">(</span><span class="n">γ</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y_m</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 
     <span class="n">d</span> <span class="o">=</span> <span class="n">γ</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
     <span class="n">y_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">y_m</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -1294,7 +1301,7 @@ track the <span class="math notranslate nohighlight">\(\{a_t\}\)</span> process.
 </section>
 </section>
 <section id="exercises">
-<h2><span class="section-number">32.7. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">32.7. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="lu_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 32.1 </span></p>
@@ -1310,7 +1317,7 @@ track the <span class="math notranslate nohighlight">\(\{a_t\}\)</span> process.
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-estar">
-<span class="eqno">(32.25)<a class="headerlink" href="#equation-estar" title="Permalink to this equation">#</a></span>\[\tilde y_t = \tilde f_1 \tilde y_{t-1} + \cdots + \tilde f_m \tilde y_{t-m} +
+<span class="eqno">(32.25)<a class="headerlink" href="#equation-estar" title="Link to this equation">#</a></span>\[\tilde y_t = \tilde f_1 \tilde y_{t-1} + \cdots + \tilde f_m \tilde y_{t-m} +
 \sum^m_{j=1} \tilde A_j \sum^\infty_{k=0} \tilde \lambda^k_j \tilde a_{t+k}\]</div>
 <p>Here</p>
 <ul class="simple">
@@ -1411,6 +1418,8 @@ is not optimal.</p>
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -1893,7 +1902,7 @@ is not optimal.</p>
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

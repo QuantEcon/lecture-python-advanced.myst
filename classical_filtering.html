@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>33. Classical Prediction and Filtering With Linear Algebra &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'classical_filtering';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/classical_filtering.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="34. Knowing the Forecasts of Others" href="knowing_forecasts_of_others.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -194,7 +201,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -245,9 +252,9 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="classical-prediction-and-filtering-with-linear-algebra">
-<h1><span class="section-number">33. </span>Classical Prediction and Filtering With Linear Algebra<a class="headerlink" href="#classical-prediction-and-filtering-with-linear-algebra" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">33. </span>Classical Prediction and Filtering With Linear Algebra<a class="headerlink" href="#classical-prediction-and-filtering-with-linear-algebra" title="Link to this heading">#</a></h1>
 <section id="overview">
-<h2><span class="section-number">33.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">33.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This is a sequel to the earlier lecture <a class="reference internal" href="lu_tricks.html"><span class="doc">Classical Control with Linear Algebra</span></a>.</p>
 <p>That lecture used linear algebra – in particular,  the <a class="reference external" href="https://en.wikipedia.org/wiki/LU_decomposition">LU decomposition</a>  – to formulate and solve a class of linear-quadratic optimal control problems.</p>
 <p>In this lecture, we’ll be using a closely related decomposition,
@@ -278,18 +285,18 @@ formulas and associated linear algebra.</p>
 <p>We’ll start with the following standard import:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="references">
-<h3><span class="section-number">33.1.1. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">33.1.1. </span>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
 <p>Useful references include <span id="id3">[<a class="reference internal" href="zreferences.html#id109" title="Peter Whittle. Prediction and regulation by linear least-square methods. English Univ. Press, 1963.">Whittle, 1963</a>]</span>, <span id="id4">[<a class="reference internal" href="zreferences.html#id110" title="Lars Peter Hansen and Thomas J Sargent. Formulating and estimating dynamic linear rational expectations models. Journal of Economic Dynamics and control, 2:7–46, 1980.">Hansen and Sargent, 1980</a>]</span>, <span id="id5">[<a class="reference internal" href="zreferences.html#id111" title="Sophocles J Orfanidis. Optimum Signal Processing: An Introduction. McGraw Hill Publishing, New York, New York, 1988.">Orfanidis, 1988</a>]</span>, <span id="id6">[<a class="reference internal" href="zreferences.html#id112" title="Papoulis Athanasios and S Unnikrishna Pillai. Probability, random variables, and stochastic processes. Mc-Graw Hill, 1991.">Athanasios and Pillai, 1991</a>]</span>, and <span id="id7">[<a class="reference internal" href="zreferences.html#id113" title="John F Muth. Optimal properties of exponentially weighted forecasts. Journal of the american statistical association, 55(290):299–306, 1960.">Muth, 1960</a>]</span>.</p>
 </section>
 </section>
 <section id="finite-dimensional-prediction">
-<h2><span class="section-number">33.2. </span>Finite dimensional prediction<a class="headerlink" href="#finite-dimensional-prediction" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">33.2. </span>Finite dimensional prediction<a class="headerlink" href="#finite-dimensional-prediction" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\((x_1, x_2, \ldots, x_T)^\prime = x\)</span> be a <span class="math notranslate nohighlight">\(T \times 1\)</span> vector of random variables with mean <span class="math notranslate nohighlight">\(\mathbb{E} x = 0\)</span> and covariance matrix <span class="math notranslate nohighlight">\(\mathbb{E} xx^\prime = V\)</span>.</p>
 <p>Here <span class="math notranslate nohighlight">\(V\)</span> is a <span class="math notranslate nohighlight">\(T \times T\)</span> positive definite matrix.</p>
 <p>The <span class="math notranslate nohighlight">\(i,j\)</span> component <span class="math notranslate nohighlight">\(E x_i x_j\)</span> of <span class="math notranslate nohighlight">\(V\)</span> is the <strong>inner product</strong>   between <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_j\)</span>.</p>
@@ -334,24 +341,24 @@ L \, V \, L^\prime = I
 <p>It is enlightening  to write out and interpret the equations <span class="math notranslate nohighlight">\(Lx = \varepsilon\)</span> and <span class="math notranslate nohighlight">\(L^{-1} \varepsilon = x\)</span>.</p>
 <p>First, we’ll write <span class="math notranslate nohighlight">\(Lx = \varepsilon\)</span></p>
 <div class="math notranslate nohighlight" id="equation-eq-53">
-<span class="eqno">(33.1)<a class="headerlink" href="#equation-eq-53" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.1)<a class="headerlink" href="#equation-eq-53" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
     L_{11} x_1 &amp;= \varepsilon_1 \\
     L_{21}x_1 + L_{22} x_2 &amp;= \varepsilon_2 \\ \, \vdots \\
     L_{T1} \, x_1 \, \ldots \, + L_{TT} x_T &amp;= \varepsilon_T
 \end{aligned}\end{split}\]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-eq-54">
-<span class="eqno">(33.2)<a class="headerlink" href="#equation-eq-54" title="Permalink to this equation">#</a></span>\[\sum^{t-1}_{j=0} L_{t,t-j}\, x_{t-j} = \varepsilon_t, \quad t = 1, \, 2, \ldots T\]</div>
+<span class="eqno">(33.2)<a class="headerlink" href="#equation-eq-54" title="Link to this equation">#</a></span>\[\sum^{t-1}_{j=0} L_{t,t-j}\, x_{t-j} = \varepsilon_t, \quad t = 1, \, 2, \ldots T\]</div>
 <p>Next, we write <span class="math notranslate nohighlight">\(L^{-1} \varepsilon = x\)</span></p>
 <div class="math notranslate nohighlight" id="equation-eq-55a">
-<span class="eqno">(33.3)<a class="headerlink" href="#equation-eq-55a" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.3)<a class="headerlink" href="#equation-eq-55a" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
      x_1 &amp;= L_{11}^{-1} \varepsilon_1 \\
      x_2 &amp;= L_{22}^{-1} \varepsilon_2 + L_{21}^{-1} \varepsilon_1  \\ \, \vdots \\
      x_T &amp;=  L_{TT}^{-1} \varepsilon_T + L_{T,T-1}^{-1} \varepsilon_{T-1} \, \ldots \, + L_{T,1}^{-1} \varepsilon_1
 \end{aligned},\end{split}\]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-eq-55">
-<span class="eqno">(33.4)<a class="headerlink" href="#equation-eq-55" title="Permalink to this equation">#</a></span>\[x_t = \sum^{t-1}_{j=0} L^{-1}_{t,t-j}\, \varepsilon_{t-j}\]</div>
+<span class="eqno">(33.4)<a class="headerlink" href="#equation-eq-55" title="Link to this equation">#</a></span>\[x_t = \sum^{t-1}_{j=0} L^{-1}_{t,t-j}\, \varepsilon_{t-j}\]</div>
 <p>where <span class="math notranslate nohighlight">\(L^{-1}_{i,j}\)</span> denotes the <span class="math notranslate nohighlight">\(i,j\)</span> element of <span class="math notranslate nohighlight">\(L^{-1}\)</span>.</p>
 <p>From <a class="reference internal" href="#equation-eq-54">(33.2)</a>, it follows that <span class="math notranslate nohighlight">\(\varepsilon_t\)</span> is in the linear subspace spanned by <span class="math notranslate nohighlight">\(x_t,\, x_{t-1}, \ldots,\, x_1\)</span>.</p>
 <p>From <a class="reference internal" href="#equation-eq-55">(33.4)</a> it follows that  that <span class="math notranslate nohighlight">\(x_t\)</span> is in the linear subspace spanned by
@@ -364,14 +371,14 @@ of <span class="math notranslate nohighlight">\(L^{-1}\)</span>).</p>
 <p>The equivalence of the subspaces spanned by <span class="math notranslate nohighlight">\(\varepsilon_t, \ldots, \varepsilon_1\)</span> and <span class="math notranslate nohighlight">\(x_t, \ldots, x_1\)</span> means that
 for <span class="math notranslate nohighlight">\(t-1\geq m \geq 1\)</span></p>
 <div class="math notranslate nohighlight" id="equation-eq-56">
-<span class="eqno">(33.5)<a class="headerlink" href="#equation-eq-56" title="Permalink to this equation">#</a></span>\[\mathbb{\hat E}
+<span class="eqno">(33.5)<a class="headerlink" href="#equation-eq-56" title="Link to this equation">#</a></span>\[\mathbb{\hat E}
 [ x_t \mid x_{t-m},\, x_{t-m-1}, \ldots, x_1 ] =
 \mathbb{\hat E}
 [x_t \mid \varepsilon_{t-m}, \varepsilon_{t-m-1},\ldots, \varepsilon_1]\]</div>
 <p>To proceed, it is useful to drill down and note that for <span class="math notranslate nohighlight">\(t-1 \geq m \geq 1\)</span> we can  rewrite <a class="reference internal" href="#equation-eq-55">(33.4)</a>  in the form of the
 <strong>moving average representation</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-57">
-<span class="eqno">(33.6)<a class="headerlink" href="#equation-eq-57" title="Permalink to this equation">#</a></span>\[x_t = \sum^{m-1}_{j=0} L_{t,t-j}^{-1}\, \varepsilon_{t-j} + \sum^{t-1}_{j=m}
+<span class="eqno">(33.6)<a class="headerlink" href="#equation-eq-57" title="Link to this equation">#</a></span>\[x_t = \sum^{m-1}_{j=0} L_{t,t-j}^{-1}\, \varepsilon_{t-j} + \sum^{t-1}_{j=m}
 L^{-1}_{t, t-j}\, \varepsilon_{t-j}\]</div>
 <p>Representation <a class="reference internal" href="#equation-eq-57">(33.6)</a>  is an orthogonal decomposition of <span class="math notranslate nohighlight">\(x_t\)</span> into a part <span class="math notranslate nohighlight">\(\sum^{t-1}_{j=m} L_{t, t-j}^{-1}\, \varepsilon_{t-j}\)</span>
 that lies in the space spanned by <span class="math notranslate nohighlight">\([x_{t-m},\, x_{t-m+1},\, \ldots, x_1]\)</span> and an orthogonal component
@@ -382,17 +389,17 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
 \mathbb{\hat E}  [ x_t \mid x_{t-m},\, x_{t-m-1}, \ldots, x_1 ] =  \sum^{m-1}_{j=0} L_{t,t-j}^{-1}\, \varepsilon_{t-j}
 \]</div>
 <section id="implementation">
-<h3><span class="section-number">33.2.1. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">33.2.1. </span>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h3>
 <p>Here’s the code that computes solutions to LQ control and filtering problems using the methods described here and in <a class="reference internal" href="lu_tricks.html"><span class="doc">Classical Control with Linear Algebra</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">spst</span>
-<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">spst</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">la</span>
 
-<span class="k">class</span> <span class="nc">LQFilter</span><span class="p">:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LQFilter</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">y_m</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">h_eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">y_m</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">h_eps</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Parameters</span>
@@ -467,7 +474,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
             <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_m</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="o">**</span><span class="p">(</span><span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span> \
                                    <span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">construct_W_and_Wm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct_W_and_Wm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This constructs the matrices W and W_m for a given number of periods N</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -519,7 +526,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
 
         <span class="k">return</span> <span class="n">W</span><span class="p">,</span> <span class="n">W_m</span>
 
-    <span class="k">def</span> <span class="nf">roots_of_characteristic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">roots_of_characteristic</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function calculates z_0 and the 2m roots of the characteristic</span>
 <span class="sd">        equation associated with the Euler equation (1.7)</span>
@@ -545,7 +552,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
 
         <span class="k">return</span> <span class="n">z_1_to_m</span><span class="p">,</span> <span class="n">z_0</span><span class="p">,</span> <span class="n">λ</span>
 
-    <span class="k">def</span> <span class="nf">coeffs_of_c</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">coeffs_of_c</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This function computes the coefficients {c_j, j = 0, 1, ..., m} for</span>
 <span class="sd">                c(z) = sum_{j = 0}^{m} c_j z^j</span>
@@ -560,7 +567,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
 
         <span class="k">return</span> <span class="n">c_coeffs</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="k">def</span> <span class="nf">solution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solution</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function calculates {λ_j, j=1,...,m} and {A_j, j=1,...,m}</span>
 <span class="sd">        of the expression (1.15)</span>
@@ -575,7 +582,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
 
         <span class="k">return</span> <span class="n">λ</span><span class="p">,</span> <span class="n">A</span>
 
-    <span class="k">def</span> <span class="nf">construct_V</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">construct_V</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">        This function constructs the covariance matrix for x^N (see section 6)</span>
 <span class="sd">        for a given period N</span>
@@ -590,7 +597,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
 
         <span class="k">return</span> <span class="n">V</span>
 
-    <span class="k">def</span> <span class="nf">simulate_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_a</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Assuming that the u&#39;s are normal, this method draws a random path</span>
 <span class="sd">        for x^N</span>
@@ -600,7 +607,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
 
         <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">rvs</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_hist</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_hist</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function implements the prediction formula discussed in section 6 (1.59)</span>
 <span class="sd">        It takes a realization for a^N, and the period in which the prediction is </span>
@@ -620,7 +627,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
 
         <span class="k">return</span> <span class="n">Ea_hist</span>
 
-    <span class="k">def</span> <span class="nf">optimal_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_hist</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">optimal_y</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a_hist</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        - if t is NOT given it takes a_hist (list or numpy.array) as a</span>
 <span class="sd">          deterministic a_t</span>
@@ -699,7 +706,7 @@ that lies in the space spanned by <span class="math notranslate nohighlight">\([
 <p>Let’s use this code to tackle two interesting examples.</p>
 </section>
 <section id="example-1">
-<h3><span class="section-number">33.2.2. </span>Example 1<a class="headerlink" href="#example-1" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">33.2.2. </span>Example 1<a class="headerlink" href="#example-1" title="Link to this heading">#</a></h3>
 <p>Consider a stochastic process with moving average representation</p>
 <div class="math notranslate nohighlight">
 \[
@@ -809,7 +816,7 @@ autoregressive representation to be described below when we study infinite horiz
 </div>
 </section>
 <section id="example-2">
-<h3><span class="section-number">33.2.3. </span>Example 2<a class="headerlink" href="#example-2" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">33.2.3. </span>Example 2<a class="headerlink" href="#example-2" title="Link to this heading">#</a></h3>
 <p>Consider a stochastic process <span class="math notranslate nohighlight">\(X_t\)</span> with moving average
 representation</p>
 <div class="math notranslate nohighlight">
@@ -931,10 +938,10 @@ detail below.</p>
 </div>
 </section>
 <section id="prediction">
-<h3><span class="section-number">33.2.4. </span>Prediction<a class="headerlink" href="#prediction" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">33.2.4. </span>Prediction<a class="headerlink" href="#prediction" title="Link to this heading">#</a></h3>
 <p>It immediately follows from the “orthogonality principle” of least squares (see <span id="id8">[<a class="reference internal" href="zreferences.html#id112" title="Papoulis Athanasios and S Unnikrishna Pillai. Probability, random variables, and stochastic processes. Mc-Graw Hill, 1991.">Athanasios and Pillai, 1991</a>]</span> or <span id="id9">[<a class="reference internal" href="zreferences.html#id200" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span> [ch. X]) that</p>
 <div class="math notranslate nohighlight" id="equation-eq-58">
-<span class="eqno">(33.7)<a class="headerlink" href="#equation-eq-58" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.7)<a class="headerlink" href="#equation-eq-58" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
     \mathbb{\hat E} &amp; [x_t \mid x_{t-m},\, x_{t-m+1}, \ldots x_1]
                     = \sum^{t-1}_{j=m} L^{-1}_{t,t-j}\, \varepsilon_{t-j} \\
                &amp; = [L_{t, 1}^{-1}\, L^{-1}_{t,2},\, \ldots, L^{-1}_{t,t-m}\ 0 \ 0 \ldots 0] L \, x
@@ -945,7 +952,7 @@ the vector <span class="math notranslate nohighlight">\(x\)</span> conditioned o
 <span class="math notranslate nohighlight">\([x_s, x_{s-1} \ldots, x_1]\)</span>.</p>
 <p>We have</p>
 <div class="math notranslate nohighlight" id="equation-eq-59">
-<span class="eqno">(33.8)<a class="headerlink" href="#equation-eq-59" title="Permalink to this equation">#</a></span>\[\begin{split}\mathbb{\hat E}[x \mid x_s, x_{s-1}, \ldots, x_1]
+<span class="eqno">(33.8)<a class="headerlink" href="#equation-eq-59" title="Link to this equation">#</a></span>\[\begin{split}\mathbb{\hat E}[x \mid x_s, x_{s-1}, \ldots, x_1]
 = L^{-1}
 \left[
     \begin{matrix}
@@ -983,7 +990,7 @@ quickly on a computer.</p>
 </section>
 </section>
 <section id="combined-finite-dimensional-control-and-prediction">
-<span id="fdcp"></span><h2><span class="section-number">33.3. </span>Combined finite dimensional control and prediction<a class="headerlink" href="#combined-finite-dimensional-control-and-prediction" title="Permalink to this heading">#</a></h2>
+<span id="fdcp"></span><h2><span class="section-number">33.3. </span>Combined finite dimensional control and prediction<a class="headerlink" href="#combined-finite-dimensional-control-and-prediction" title="Link to this heading">#</a></h2>
 <p>Consider the finite-dimensional control problem, maximize</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1055,7 +1062,7 @@ U \bar y = L^{-1} \tilde U^{-1}
 \end{split}\]</div>
 </section>
 <section id="infinite-horizon-prediction-and-filtering-problems">
-<h2><span class="section-number">33.4. </span>Infinite horizon prediction and filtering problems<a class="headerlink" href="#infinite-horizon-prediction-and-filtering-problems" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">33.4. </span>Infinite horizon prediction and filtering problems<a class="headerlink" href="#infinite-horizon-prediction-and-filtering-problems" title="Link to this heading">#</a></h2>
 <p>It is instructive to compare the finite-horizon formulas based on linear algebra decompositions of finite-dimensional covariance matrices
 with classic formulas for infinite horizon and infinite history prediction and control problems.</p>
 <p>These classic infinite horizon formulas used the mathematics of <span class="math notranslate nohighlight">\(z\)</span>-transforms and lag operators.</p>
@@ -1063,10 +1070,10 @@ with classic formulas for infinite horizon and infinite history prediction and c
 <p>We pose two related prediction and filtering problems.</p>
 <p>We let <span class="math notranslate nohighlight">\(Y_t\)</span> be a univariate <span class="math notranslate nohighlight">\(m^{\rm th}\)</span> order moving average, covariance stationary stochastic process,</p>
 <div class="math notranslate nohighlight" id="equation-eq-24">
-<span class="eqno">(33.9)<a class="headerlink" href="#equation-eq-24" title="Permalink to this equation">#</a></span>\[Y_t = d(L) u_t\]</div>
+<span class="eqno">(33.9)<a class="headerlink" href="#equation-eq-24" title="Link to this equation">#</a></span>\[Y_t = d(L) u_t\]</div>
 <p>where <span class="math notranslate nohighlight">\(d(L) = \sum^m_{j=0} d_j L^j\)</span>, and <span class="math notranslate nohighlight">\(u_t\)</span> is a serially uncorrelated stationary random process satisfying</p>
 <div class="math notranslate nohighlight" id="equation-eq-25">
-<span class="eqno">(33.10)<a class="headerlink" href="#equation-eq-25" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.10)<a class="headerlink" href="#equation-eq-25" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
     \mathbb{E} u_t &amp;= 0\\
     \mathbb{E} u_t u_s &amp;=
     \begin{cases}
@@ -1077,7 +1084,7 @@ with classic formulas for infinite horizon and infinite history prediction and c
 <p>We impose no conditions on the zeros of <span class="math notranslate nohighlight">\(d(z)\)</span>.</p>
 <p>A second covariance stationary process is <span class="math notranslate nohighlight">\(X_t\)</span> given by</p>
 <div class="math notranslate nohighlight" id="equation-eq-26">
-<span class="eqno">(33.11)<a class="headerlink" href="#equation-eq-26" title="Permalink to this equation">#</a></span>\[X_t = Y_t + \varepsilon_t\]</div>
+<span class="eqno">(33.11)<a class="headerlink" href="#equation-eq-26" title="Link to this equation">#</a></span>\[X_t = Y_t + \varepsilon_t\]</div>
 <p>where <span class="math notranslate nohighlight">\(\varepsilon_t\)</span> is a serially uncorrelated stationary
 random process with <span class="math notranslate nohighlight">\(\mathbb{E} \varepsilon_t = 0\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E} \varepsilon_t \varepsilon_s\)</span> = <span class="math notranslate nohighlight">\(0\)</span> for all distinct <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(s\)</span>.</p>
 <p>We also assume that <span class="math notranslate nohighlight">\(\mathbb{E} \varepsilon_t u_s = 0\)</span> for all <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(s\)</span>.</p>
@@ -1089,18 +1096,18 @@ random variable <span class="math notranslate nohighlight">\(\hat X_{t+j}\)</spa
 <p>The <strong>linear least squares filtering problem</strong> is to find a <span class="math notranslate nohighlight">\(b\,(L) = \sum^\infty_{j=0} b_j\, L^j\)</span> such that <span class="math notranslate nohighlight">\(\sum^\infty_{j=0}\vert b_j \vert^2 &lt; \infty\)</span> and <span class="math notranslate nohighlight">\(\mathbb{E} [b\, (L) X_t -Y_t ]^2\)</span> is minimized.</p>
 <p>Interesting versions of these problems related to the permanent income theory were studied by <span id="id10">[<a class="reference internal" href="zreferences.html#id113" title="John F Muth. Optimal properties of exponentially weighted forecasts. Journal of the american statistical association, 55(290):299–306, 1960.">Muth, 1960</a>]</span>.</p>
 <section id="problem-formulation">
-<h3><span class="section-number">33.4.1. </span>Problem formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">33.4.1. </span>Problem formulation<a class="headerlink" href="#problem-formulation" title="Link to this heading">#</a></h3>
 <p>These problems are solved as follows.</p>
 <p>The covariograms of <span class="math notranslate nohighlight">\(Y\)</span> and <span class="math notranslate nohighlight">\(X\)</span> and their cross covariogram are, respectively,</p>
 <div class="math notranslate nohighlight" id="equation-eq-27">
-<span class="eqno">(33.12)<a class="headerlink" href="#equation-eq-27" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.12)<a class="headerlink" href="#equation-eq-27" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
     C_X (\tau) &amp;= \mathbb{E}X_t X_{t-\tau} \\
     C_Y (\tau) &amp;= \mathbb{E}Y_t Y_{t-\tau}  \qquad \tau = 0, \pm 1, \pm 2, \ldots \\
     C_{Y,X} (\tau) &amp;= \mathbb{E}Y_t X_{t-\tau}
 \end{aligned}\end{split}\]</div>
 <p>The covariance and cross-covariance generating functions are defined as</p>
 <div class="math notranslate nohighlight" id="equation-eq-28">
-<span class="eqno">(33.13)<a class="headerlink" href="#equation-eq-28" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.13)<a class="headerlink" href="#equation-eq-28" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
     g_X(z) &amp;= \sum^\infty_{\tau = - \infty} C_X (\tau) z^\tau \\
     g_Y(z) &amp;= \sum^\infty_{\tau = - \infty} C_Y (\tau) z^\tau \\
     g_{YX} (z) &amp;= \sum^\infty_{\tau = - \infty} C_{YX} (\tau) z^\tau
@@ -1118,14 +1125,14 @@ random variable <span class="math notranslate nohighlight">\(\hat X_{t+j}\)</spa
 \end{split}\]</div>
 <p>Then, as shown for example in <span id="id11">[<a class="reference internal" href="zreferences.html#id200" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span> [ch. XI], it is true that</p>
 <div class="math notranslate nohighlight" id="equation-eq-29">
-<span class="eqno">(33.14)<a class="headerlink" href="#equation-eq-29" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.14)<a class="headerlink" href="#equation-eq-29" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
     g_y(z) &amp;= A(z) A(z^{-1}) + B (z) B(z^{-1}) \\
     g_x (z) &amp;= C(z) C(z^{-1}) + D(z) D(z^{-1}) \\
     g_{yx} (z) &amp;= A(z) C(z^{-1}) + B(z) D(z^{-1})
 \end{aligned}\end{split}\]</div>
 <p>Applying these formulas to <a class="reference internal" href="#equation-eq-24">(33.9)</a> – <a class="reference internal" href="#equation-eq-27">(33.12)</a>, we have</p>
 <div class="math notranslate nohighlight" id="equation-eq-30">
-<span class="eqno">(33.15)<a class="headerlink" href="#equation-eq-30" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(33.15)<a class="headerlink" href="#equation-eq-30" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
     g_Y(z) &amp;= d(z)d(z^{-1}) \\
     g_X(z) &amp;= d(z)d(z^{-1}) + h\\
     g_{YX} (z) &amp;= d(z) d(z^{-1})
@@ -1134,10 +1141,10 @@ random variable <span class="math notranslate nohighlight">\(\hat X_{t+j}\)</spa
 <p>The solutions of our problems are given by formulas due to Wiener and Kolmogorov.</p>
 <p>These formulas utilize the Wold moving average representation of the <span class="math notranslate nohighlight">\(X_t\)</span> process,</p>
 <div class="math notranslate nohighlight" id="equation-eq-31">
-<span class="eqno">(33.16)<a class="headerlink" href="#equation-eq-31" title="Permalink to this equation">#</a></span>\[X_t = c\,(L)\,\eta_t\]</div>
+<span class="eqno">(33.16)<a class="headerlink" href="#equation-eq-31" title="Link to this equation">#</a></span>\[X_t = c\,(L)\,\eta_t\]</div>
 <p>where <span class="math notranslate nohighlight">\(c(L) = \sum^m_{j=0} c_j\, L^j\)</span>, with</p>
 <div class="math notranslate nohighlight" id="equation-eq-32">
-<span class="eqno">(33.17)<a class="headerlink" href="#equation-eq-32" title="Permalink to this equation">#</a></span>\[c_0 \eta_t
+<span class="eqno">(33.17)<a class="headerlink" href="#equation-eq-32" title="Link to this equation">#</a></span>\[c_0 \eta_t
 = X_t - \mathbb{\hat E} [X_t \vert X_{t-1}, X_{t-2}, \ldots]\]</div>
 <p>Here <span class="math notranslate nohighlight">\(\mathbb{\hat E}\)</span> is the linear least squares projection operator.</p>
 <p>Equation <a class="reference internal" href="#equation-eq-32">(33.17)</a>  is the condition that <span class="math notranslate nohighlight">\(c_0 \eta_t\)</span> can be the one-step-ahead error in predicting <span class="math notranslate nohighlight">\(X_t\)</span> from its own past values.</p>
@@ -1151,15 +1158,15 @@ that <span class="math notranslate nohighlight">\(\mathbb{E}\eta_t^2 = 1\)</span
 that the covariance generating function of <span class="math notranslate nohighlight">\(X_t\)</span> can be expressed
 as</p>
 <div class="math notranslate nohighlight" id="equation-eq-33">
-<span class="eqno">(33.18)<a class="headerlink" href="#equation-eq-33" title="Permalink to this equation">#</a></span>\[g_X(z) = c\,(z)\,c\,(z^{-1})\]</div>
+<span class="eqno">(33.18)<a class="headerlink" href="#equation-eq-33" title="Link to this equation">#</a></span>\[g_X(z) = c\,(z)\,c\,(z^{-1})\]</div>
 <p>It remains to discuss how <span class="math notranslate nohighlight">\(c(L)\)</span> is to be computed.</p>
 <p>Combining <a class="reference internal" href="#equation-eq-29">(33.14)</a>  and <a class="reference internal" href="#equation-eq-33">(33.18)</a>  gives</p>
 <div class="math notranslate nohighlight" id="equation-eq-34">
-<span class="eqno">(33.19)<a class="headerlink" href="#equation-eq-34" title="Permalink to this equation">#</a></span>\[d(z) \,d(z^{-1}) + h = c \, (z) \,c\,(z^{-1})\]</div>
+<span class="eqno">(33.19)<a class="headerlink" href="#equation-eq-34" title="Link to this equation">#</a></span>\[d(z) \,d(z^{-1}) + h = c \, (z) \,c\,(z^{-1})\]</div>
 <p>Therefore, we have already shown constructively how to factor the covariance generating function <span class="math notranslate nohighlight">\(g_X(z) = d(z)\,d\,(z^{-1}) + h\)</span>.</p>
 <p>We now introduce the <strong>annihilation operator</strong>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-35">
-<span class="eqno">(33.20)<a class="headerlink" href="#equation-eq-35" title="Permalink to this equation">#</a></span>\[\left[
+<span class="eqno">(33.20)<a class="headerlink" href="#equation-eq-35" title="Link to this equation">#</a></span>\[\left[
     \sum^\infty_{j= - \infty} f_j\, L^j
 \right]_+
 \equiv \sum^\infty_{j=0} f_j\,L^j\]</div>
@@ -1167,7 +1174,7 @@ as</p>
 <p>We have defined the solution of the prediction problem as <span class="math notranslate nohighlight">\(\mathbb{\hat E} [X_{t+j} \vert X_t,\, X_{t-1}, \ldots] = \gamma_j\, (L) X_t\)</span>.</p>
 <p>Assuming that the roots of <span class="math notranslate nohighlight">\(c(z) = 0\)</span> all lie outside the unit circle, the Wiener-Kolmogorov formula for <span class="math notranslate nohighlight">\(\gamma_j (L)\)</span> holds:</p>
 <div class="math notranslate nohighlight" id="equation-eq-36">
-<span class="eqno">(33.21)<a class="headerlink" href="#equation-eq-36" title="Permalink to this equation">#</a></span>\[\gamma_j\, (L) =
+<span class="eqno">(33.21)<a class="headerlink" href="#equation-eq-36" title="Link to this equation">#</a></span>\[\gamma_j\, (L) =
 \left[
     {c (L) \over L^j}
 \right]_+ c\,(L)^{-1}\]</div>
@@ -1179,7 +1186,7 @@ b(L) = \left[{g_{YX} (L) \over c(L^{-1})}\right]_+ c(L)^{-1}
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-eq-37">
-<span class="eqno">(33.22)<a class="headerlink" href="#equation-eq-37" title="Permalink to this equation">#</a></span>\[b(L) = \left[ {d(L)d(L^{-1}) \over c(L^{-1})} \right]_+ c(L)^{-1}\]</div>
+<span class="eqno">(33.22)<a class="headerlink" href="#equation-eq-37" title="Link to this equation">#</a></span>\[b(L) = \left[ {d(L)d(L^{-1}) \over c(L^{-1})} \right]_+ c(L)^{-1}\]</div>
 <p>Formulas <a class="reference internal" href="#equation-eq-36">(33.21)</a> and <a class="reference internal" href="#equation-eq-37">(33.22)</a>  are discussed in detail in  <span id="id12">[<a class="reference internal" href="zreferences.html#id88" title="Peter Whittle. Prediction and Regulation by Linear Least Squares Methods. University of Minnesota Press, Minneapolis, Minnesota, 2nd edition, 1983.">Whittle, 1983</a>]</span> and <span id="id13">[<a class="reference internal" href="zreferences.html#id200" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>.</p>
 <p>The interested reader can there find several examples of the use of these formulas in economics
 Some classic examples using these formulas are due to <span id="id14">[<a class="reference internal" href="zreferences.html#id113" title="John F Muth. Optimal properties of exponentially weighted forecasts. Journal of the american statistical association, 55(290):299–306, 1960.">Muth, 1960</a>]</span>.</p>
@@ -1207,7 +1214,7 @@ X_t
 \end{split}\]</div>
 <p>Then <a class="reference internal" href="#equation-eq-37">(33.22)</a>  becomes</p>
 <div class="math notranslate nohighlight" id="equation-eq-38">
-<span class="eqno">(33.23)<a class="headerlink" href="#equation-eq-38" title="Permalink to this equation">#</a></span>\[b(L)=\left[{c(L)\over 1-\delta L^{-1}}\right]_+ c(L)^{-1}\]</div>
+<span class="eqno">(33.23)<a class="headerlink" href="#equation-eq-38" title="Link to this equation">#</a></span>\[b(L)=\left[{c(L)\over 1-\delta L^{-1}}\right]_+ c(L)^{-1}\]</div>
 <p>In order to evaluate the term in the annihilation operator, we use the following result from <span id="id15">[<a class="reference internal" href="zreferences.html#id110" title="Lars Peter Hansen and Thomas J Sargent. Formulating and estimating dynamic linear rational expectations models. Journal of Economic Dynamics and control, 2:7–46, 1980.">Hansen and Sargent, 1980</a>]</span>.</p>
 <p><strong>Proposition</strong> Let</p>
 <ul class="simple">
@@ -1216,12 +1223,12 @@ X_t
 </ul>
 <p>Then</p>
 <div class="math notranslate nohighlight" id="equation-eq-39">
-<span class="eqno">(33.24)<a class="headerlink" href="#equation-eq-39" title="Permalink to this equation">#</a></span>\[\left[{g(z)\over h(z^{-1})}\right]_+ = {g(z)\over h(z^{-1})} - \sum^n_{j=1}
+<span class="eqno">(33.24)<a class="headerlink" href="#equation-eq-39" title="Link to this equation">#</a></span>\[\left[{g(z)\over h(z^{-1})}\right]_+ = {g(z)\over h(z^{-1})} - \sum^n_{j=1}
 \ {\delta_j g (\delta_j) \over \prod^n_{k=1 \atop k \not = j} (\delta_j -
 \delta_k)} \ \left({1 \over z- \delta_j}\right)\]</div>
 <p>and, alternatively,</p>
 <div class="math notranslate nohighlight" id="equation-eq-40">
-<span class="eqno">(33.25)<a class="headerlink" href="#equation-eq-40" title="Permalink to this equation">#</a></span>\[\left[
+<span class="eqno">(33.25)<a class="headerlink" href="#equation-eq-40" title="Link to this equation">#</a></span>\[\left[
     {g(z)\over h(z^{-1})}
 \right]_+
 =\sum^n_{j=1} B_j
@@ -1244,7 +1251,7 @@ b(L) =
 \]</div>
 <p>Thus, we have</p>
 <div class="math notranslate nohighlight" id="equation-eq-41">
-<span class="eqno">(33.26)<a class="headerlink" href="#equation-eq-41" title="Permalink to this equation">#</a></span>\[\mathbb{\hat E}
+<span class="eqno">(33.26)<a class="headerlink" href="#equation-eq-41" title="Link to this equation">#</a></span>\[\mathbb{\hat E}
 \left[
     \sum^\infty_{j=0} \delta^j X_{t+j}\vert X_t,\, x_{t-1},
     \ldots
@@ -1257,7 +1264,7 @@ b(L) =
 process.</p>
 <p>The problem is to maximize</p>
 <div class="math notranslate nohighlight" id="equation-eq-42">
-<span class="eqno">(33.27)<a class="headerlink" href="#equation-eq-42" title="Permalink to this equation">#</a></span>\[\mathbb{E}_0
+<span class="eqno">(33.27)<a class="headerlink" href="#equation-eq-42" title="Link to this equation">#</a></span>\[\mathbb{E}_0
 \lim_{N \rightarrow \infty}\
 \sum^N_{t-0} \beta^t
 \left[
@@ -1294,7 +1301,7 @@ c(L) y_t = c(\beta L^{-1})^{-1} a_t
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-eq-43">
-<span class="eqno">(33.28)<a class="headerlink" href="#equation-eq-43" title="Permalink to this equation">#</a></span>\[(1-\lambda_1 L) \ldots (1 - \lambda_m L) y_t
+<span class="eqno">(33.28)<a class="headerlink" href="#equation-eq-43" title="Link to this equation">#</a></span>\[(1-\lambda_1 L) \ldots (1 - \lambda_m L) y_t
 = \sum^m_{j=1} A_j
 \sum^\infty_{k=0} (\lambda_j \beta)^k\, a_{t+k}\]</div>
 <p>Second, the solution of the problem under uncertainty is obtained by
@@ -1332,7 +1339,7 @@ z_k\)</span> be the zeros of <span class="math notranslate nohighlight">\(\pi (z
 </section>
 </section>
 <section id="exercises">
-<h2><span class="section-number">33.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">33.5. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="cf_ex1">
 
 <p class="admonition-title"><span class="caption-number">Exercise 33.1 </span></p>
@@ -1459,6 +1466,8 @@ be written</p>
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -1941,7 +1950,7 @@ be written</p>
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

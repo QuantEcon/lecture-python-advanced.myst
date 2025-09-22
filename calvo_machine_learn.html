@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>42. Machine Learning a Ramsey Plan &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'calvo_machine_learn';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/calvo_machine_learn.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="43. Time Inconsistency of Ramsey Plans" href="calvo.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -198,7 +205,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -245,9 +252,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="machine-learning-a-ramsey-plan">
-<h1><span class="section-number">42. </span>Machine Learning a Ramsey Plan<a class="headerlink" href="#machine-learning-a-ramsey-plan" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">42. </span>Machine Learning a Ramsey Plan<a class="headerlink" href="#machine-learning-a-ramsey-plan" title="Link to this heading">#</a></h1>
 <section id="introduction">
-<h2><span class="section-number">42.1. </span>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>This  lecture  uses what we call a <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> approach to
 compute a Ramsey plan  for  a version of a model of Calvo <span id="id1">[<a class="reference internal" href="zreferences.html#id142" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span>.</p>
 <p>We use another approach to compute a  Ramsey plan for Calvo’s model  in another quantecon lecture
@@ -297,7 +304,7 @@ more generally.</p>
 <p>Human intelligence, not the <code class="docutils literal notranslate"><span class="pre">artificial</span> <span class="pre">intelligence</span></code> deployed in our machine learning approach, is a key input into choosing which regressions to run.</p>
 </section>
 <section id="the-model">
-<h2><span class="section-number">42.2. </span>The model<a class="headerlink" href="#the-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.2. </span>The model<a class="headerlink" href="#the-model" title="Link to this heading">#</a></h2>
 <p>We study a   linear-quadratic version of a model that Guillermo Calvo <span id="id2">[<a class="reference internal" href="zreferences.html#id142" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span> used to illustrate the <strong>time inconsistency</strong> of optimal government plans.</p>
 <p>Calvo’s model focuses  on intertemporal tradeoffs between</p>
 <ul class="simple">
@@ -312,7 +319,7 @@ more generally.</p>
 <p>The model combines ideas from  papers by Cagan <span id="id3">[<a class="reference internal" href="zreferences.html#id81" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span>, <span id="id4">[<a class="reference internal" href="zreferences.html#id5" title="Thomas J Sargent and Neil Wallace. The stability of models of money and growth with perfect foresight. Econometrica: Journal of the Econometric Society, pages 1043–1048, 1973.">Sargent and Wallace, 1973</a>]</span>,  and  Calvo <span id="id5">[<a class="reference internal" href="zreferences.html#id142" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span>.</p>
 </section>
 <section id="model-components">
-<h2><span class="section-number">42.3. </span>Model components<a class="headerlink" href="#model-components" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.3. </span>Model components<a class="headerlink" href="#model-components" title="Link to this heading">#</a></h2>
 <p>There is no uncertainty.</p>
 <p>Let:</p>
 <ul class="simple">
@@ -324,7 +331,7 @@ more generally.</p>
 <p>The demand for real balances is governed by a perfect foresight
 version of a Cagan <span id="id6">[<a class="reference internal" href="zreferences.html#id81" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span> demand function for real balances:</p>
 <div class="math notranslate nohighlight" id="equation-eq-grad-old1">
-<span class="eqno">(42.1)<a class="headerlink" href="#equation-eq-grad-old1" title="Permalink to this equation">#</a></span>\[m_t - p_t = -\alpha(p_{t+1} - p_t) \: , \: \alpha &gt; 0\]</div>
+<span class="eqno">(42.1)<a class="headerlink" href="#equation-eq-grad-old1" title="Link to this equation">#</a></span>\[m_t - p_t = -\alpha(p_{t+1} - p_t) \: , \: \alpha &gt; 0\]</div>
 <p>for <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
 <p>Equation <a class="reference internal" href="#equation-eq-grad-old1">(42.1)</a> asserts that the representative agent’s demand for real balances is inversely
 related to the representative agent’s expected rate of inflation, which  equals
@@ -338,7 +345,7 @@ function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-eq-grad-old2">
-<span class="eqno">(42.2)<a class="headerlink" href="#equation-eq-grad-old2" title="Permalink to this equation">#</a></span>\[\theta_t = \frac{\alpha}{1+\alpha} \theta_{t+1} + \frac{1}{1+\alpha} \mu_t\]</div>
+<span class="eqno">(42.2)<a class="headerlink" href="#equation-eq-grad-old2" title="Link to this equation">#</a></span>\[\theta_t = \frac{\alpha}{1+\alpha} \theta_{t+1} + \frac{1}{1+\alpha} \mu_t\]</div>
 <p>Because <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>,  <span class="math notranslate nohighlight">\(0 &lt; \frac{\alpha}{1+\alpha} &lt; 1\)</span>.</p>
 <div class="proof definition admonition" id="square-summable">
 <p class="admonition-title"><span class="caption-number">Definition 42.1 </span></p>
@@ -354,13 +361,13 @@ function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
 </div><p>When we assume that the sequence <span class="math notranslate nohighlight">\(\vec \mu = \{\mu_t\}_{t=0}^\infty\)</span> is square summable and also require that the sequence <span class="math notranslate nohighlight">\(\vec \theta = \{\theta_t\}_{t=0}^\infty\)</span> is square summable,
 the linear difference equation <a class="reference internal" href="#equation-eq-grad-old2">(42.2)</a> can be solved forward to get:</p>
 <div class="math notranslate nohighlight" id="equation-eq-grad-old3">
-<span class="eqno">(42.3)<a class="headerlink" href="#equation-eq-grad-old3" title="Permalink to this equation">#</a></span>\[\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}, \quad t \geq 0\]</div>
+<span class="eqno">(42.3)<a class="headerlink" href="#equation-eq-grad-old3" title="Link to this equation">#</a></span>\[\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}, \quad t \geq 0\]</div>
 <p>The  government  values  a representative household’s utility of real balances at time <span class="math notranslate nohighlight">\(t\)</span> according to the utility function</p>
 <div class="math notranslate nohighlight" id="equation-eq-grad-old5">
-<span class="eqno">(42.4)<a class="headerlink" href="#equation-eq-grad-old5" title="Permalink to this equation">#</a></span>\[U(m_t - p_t) = u_0 + u_1 (m_t - p_t) - \frac{u_2}{2} (m_t - p_t)^2, \quad u_0 &gt; 0, u_1 &gt; 0, u_2 &gt; 0\]</div>
+<span class="eqno">(42.4)<a class="headerlink" href="#equation-eq-grad-old5" title="Link to this equation">#</a></span>\[U(m_t - p_t) = u_0 + u_1 (m_t - p_t) - \frac{u_2}{2} (m_t - p_t)^2, \quad u_0 &gt; 0, u_1 &gt; 0, u_2 &gt; 0\]</div>
 <p>The money demand function <a class="reference internal" href="#equation-eq-grad-old1">(42.1)</a> and the utility function <a class="reference internal" href="#equation-eq-grad-old5">(42.4)</a> imply that</p>
 <div class="math notranslate nohighlight" id="equation-eq-grad-old5a">
-<span class="eqno">(42.5)<a class="headerlink" href="#equation-eq-grad-old5a" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(42.5)<a class="headerlink" href="#equation-eq-grad-old5a" title="Link to this equation">#</a></span>\[
 U(-\alpha \theta_t) = u_0 + u_1 (-\alpha \theta_t) -\frac{u_2}{2}(-\alpha \theta_t)^2 . 
 \]</div>
 <div class="admonition note">
@@ -382,7 +389,7 @@ s(\theta_t,\mu_t) = U(-\alpha \theta_t) - \frac{c}{2} \mu_t^2  .
 \]</div>
 <p>The Ramsey planner’s criterion is</p>
 <div class="math notranslate nohighlight" id="equation-eq-ramseyv">
-<span class="eqno">(42.6)<a class="headerlink" href="#equation-eq-ramseyv" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(42.6)<a class="headerlink" href="#equation-eq-ramseyv" title="Link to this equation">#</a></span>\[
 V = \sum_{t=0}^\infty \beta^t s(\theta_t, \mu_t) 
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span> is a discount factor.</p>
@@ -390,14 +397,14 @@ V = \sum_{t=0}^\infty \beta^t s(\theta_t, \mu_t)
 a vector of money growth rates <span class="math notranslate nohighlight">\(\vec \mu\)</span>
 to maximize criterion <a class="reference internal" href="#equation-eq-ramseyv">(42.6)</a> subject to equations <a class="reference internal" href="#equation-eq-grad-old3">(42.3)</a> and that  restriction</p>
 <div class="math notranslate nohighlight" id="equation-eq-thetainl2">
-<span class="eqno">(42.7)<a class="headerlink" href="#equation-eq-thetainl2" title="Permalink to this equation">#</a></span>\[ 
+<span class="eqno">(42.7)<a class="headerlink" href="#equation-eq-thetainl2" title="Link to this equation">#</a></span>\[ 
 \vec \theta \in L^2 
 \]</div>
 <p>Equations <a class="reference internal" href="#equation-eq-grad-old3">(42.3)</a> and <a class="reference internal" href="#equation-eq-thetainl2">(42.7)</a> imply that <span class="math notranslate nohighlight">\(\vec \theta\)</span> is a function
 of <span class="math notranslate nohighlight">\(\vec \mu\)</span>.</p>
 <p>In particular, the inflation rate <span class="math notranslate nohighlight">\(\theta_t\)</span> satisfies</p>
 <div class="math notranslate nohighlight" id="equation-eq-inflation101">
-<span class="eqno">(42.8)<a class="headerlink" href="#equation-eq-inflation101" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(42.8)<a class="headerlink" href="#equation-eq-inflation101" title="Link to this equation">#</a></span>\[
 \theta_t = (1-\lambda) \sum_{j=0}^\infty \lambda^j \mu_{t+j}, \quad t \geq 0
 \]</div>
 <p>where</p>
@@ -407,7 +414,7 @@ of <span class="math notranslate nohighlight">\(\vec \mu\)</span>.</p>
 \]</div>
 </section>
 <section id="parameters-and-variables">
-<h2><span class="section-number">42.4. </span>Parameters and variables<a class="headerlink" href="#parameters-and-variables" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.4. </span>Parameters and variables<a class="headerlink" href="#parameters-and-variables" title="Link to this heading">#</a></h2>
 <p><strong>Parameters:</strong></p>
 <ul class="simple">
 <li><p>Demand for money parameter is <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>; we set its default value <span class="math notranslate nohighlight">\(\alpha = 1\)</span></p>
@@ -425,7 +432,7 @@ of <span class="math notranslate nohighlight">\(\vec \mu\)</span>.</p>
 <li><p><span class="math notranslate nohighlight">\(\mu_t = m_{t+1} - m_t \)</span> where <span class="math notranslate nohighlight">\(m_t\)</span> is log of money supply</p></li>
 </ul>
 <section id="basic-objects">
-<h3><span class="section-number">42.4.1. </span>Basic objects<a class="headerlink" href="#basic-objects" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">42.4.1. </span>Basic objects<a class="headerlink" href="#basic-objects" title="Link to this heading">#</a></h3>
 <p>To prepare the way for our calculations, we’ll remind ourselves of the  mathematical objects
 in play.</p>
 <ul class="simple">
@@ -439,7 +446,7 @@ in play.</p>
 <li><p>A planner’s value function</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-ramseyvalue">
-<span class="eqno">(42.9)<a class="headerlink" href="#equation-eq-ramseyvalue" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(42.9)<a class="headerlink" href="#equation-eq-ramseyvalue" title="Link to this equation">#</a></span>\[
 V = \sum_{t=0}^\infty \beta^t (h_0 + h_1 \theta_t + h_2 \theta_t^2 -
 \frac{c}{2} \mu_t^2 )
 \]</div>
@@ -467,14 +474,14 @@ subject to equations  <a class="reference internal" href="#equation-eq-inflation
 <p>A  solution <span class="math notranslate nohighlight">\(\vec \mu\)</span> of this problem is called a <strong>Ramsey plan</strong>.</p>
 </section>
 <section id="timing-protocol">
-<h3><span class="section-number">42.4.2. </span>Timing protocol<a class="headerlink" href="#timing-protocol" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">42.4.2. </span>Timing protocol<a class="headerlink" href="#timing-protocol" title="Link to this heading">#</a></h3>
 <p>Following Calvo <span id="id7">[<a class="reference internal" href="zreferences.html#id142" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">Calvo, 1978</a>]</span>, we assume that the  government chooses the money growth  sequence <span class="math notranslate nohighlight">\(\vec \mu\)</span> once and for all at, or before, time <span class="math notranslate nohighlight">\(0\)</span>.</p>
 <p>An optimal  government plan under this timing protocol is an example of what is  often called a <strong>Ramsey plan</strong>.</p>
 <p>Notice that while the government is in effect choosing a bivariate <strong>time series</strong> <span class="math notranslate nohighlight">\((\vec mu, \vec \theta)\)</span>, the government’s problem is <strong>static</strong> in the sense that it chooses treats that time-series as a single object to be chosen at a single point in time.</p>
 </section>
 </section>
 <section id="approximation-and-truncation-parameter-t">
-<h2><span class="section-number">42.5. </span>Approximation and truncation parameter <span class="math notranslate nohighlight">\(T\)</span><a class="headerlink" href="#approximation-and-truncation-parameter-t" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.5. </span>Approximation and truncation parameter <span class="math notranslate nohighlight">\(T\)</span><a class="headerlink" href="#approximation-and-truncation-parameter-t" title="Link to this heading">#</a></h2>
 <p>We anticipate that under a Ramsey plan the sequences  <span class="math notranslate nohighlight">\(\{\theta_t\}\)</span> and <span class="math notranslate nohighlight">\(\{\mu_t\}\)</span>  both converge to stationary values.</p>
 <p>Thus, we guess that
 under the optimal policy
@@ -508,7 +515,7 @@ with the property that</p>
 \]</div>
 <p>where   <span class="math notranslate nohighlight">\(\bar \theta = \bar \mu\)</span> and <span class="math notranslate nohighlight">\(\theta_t\)</span> satisfies</p>
 <div class="math notranslate nohighlight" id="equation-eq-thetaformula102">
-<span class="eqno">(42.10)<a class="headerlink" href="#equation-eq-thetaformula102" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(42.10)<a class="headerlink" href="#equation-eq-thetaformula102" title="Link to this equation">#</a></span>\[
 \theta_t = (1-\lambda) \sum_{j=0}^{T-1-t} \lambda^j \mu_{t+j} + \lambda^{T-t} \bar \mu 
 \]</div>
 <p>for <span class="math notranslate nohighlight">\(t=0, 1, \ldots, T-1\)</span>.</p>
@@ -516,7 +523,7 @@ with the property that</p>
 <p>Having specified a  truncated vector <span class="math notranslate nohighlight">\(\tilde \mu\)</span> and and having computed  <span class="math notranslate nohighlight">\(\tilde \theta\)</span>
 by using formula <a class="reference internal" href="#equation-eq-thetaformula102">(42.10)</a>, we shall   write a Python  function that computes</p>
 <div class="math notranslate nohighlight" id="equation-eq-valueformula101">
-<span class="eqno">(42.11)<a class="headerlink" href="#equation-eq-valueformula101" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(42.11)<a class="headerlink" href="#equation-eq-valueformula101" title="Link to this equation">#</a></span>\[
 \tilde V = \sum_{t=0}^\infty \beta^t (
 h_0 + h_1 \tilde\theta_t + h_2 \tilde\theta_t^2 -
 \frac{c}{2} \mu_t^2 )
@@ -530,12 +537,12 @@ h_0 + h_1 \tilde\theta_t + h_2 \tilde\theta_t^2 -
 <p>where <span class="math notranslate nohighlight">\(\tilde \theta_t, \ t = 0, 1, \ldots , T-1\)</span> satisfies formula (1).</p>
 </section>
 <section id="a-gradient-descent-algorithm">
-<h2><span class="section-number">42.6. </span>A gradient descent algorithm<a class="headerlink" href="#a-gradient-descent-algorithm" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.6. </span>A gradient descent algorithm<a class="headerlink" href="#a-gradient-descent-algorithm" title="Link to this heading">#</a></h2>
 <p>We now describe  code that  maximizes the criterion function <a class="reference internal" href="#equation-eq-ramseyvalue">(42.9)</a> subject to equations <a class="reference internal" href="#equation-eq-inflation101">(42.8)</a> by choice of the truncated vector  <span class="math notranslate nohighlight">\(\tilde \mu\)</span>.</p>
 <p>We use a brute force or <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> approach that just hands our problem off to code that minimizes <span class="math notranslate nohighlight">\(V\)</span> with respect to the components of <span class="math notranslate nohighlight">\(\tilde \mu\)</span> by using gradient descent.</p>
 <p>We hope that answers will agree with those found obtained by other more structured methods in this quantecon lecture <a class="reference internal" href="calvo.html"><span class="doc">Time Inconsistency of Ramsey Plans</span></a>.</p>
 <section id="implementation">
-<h3><span class="section-number">42.6.1. </span>Implementation<a class="headerlink" href="#implementation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">42.6.1. </span>Implementation<a class="headerlink" href="#implementation" title="Link to this heading">#</a></h3>
 <p>We will implement the above in Python using JAX and Optax libraries.</p>
 <p>We use the following imports in this lecture</p>
 <div class="cell tag_hide-output docutils container">
@@ -697,13 +704,13 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">LQ</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">jax.numpy</span> <span class="k">as</span> <span class="nn">jnp</span>
-<span class="kn">from</span> <span class="nn">jax</span> <span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">grad</span>
-<span class="kn">import</span> <span class="nn">optax</span>
-<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="kn">import</span> <span class="n">LQ</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax</span><span class="w"> </span><span class="kn">import</span> <span class="n">jit</span><span class="p">,</span> <span class="n">grad</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">optax</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">statsmodels.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sm</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
@@ -718,11 +725,11 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ChangLQ</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ChangLQ</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Class to solve LQ Chang model</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">θ_n</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">θ_n</span><span class="o">=</span><span class="mi">200</span><span class="p">):</span>
         <span class="c1"># Record parameters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">u0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">u1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">u2</span> <span class="o">=</span> <span class="n">α</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">θ_n</span> <span class="o">=</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">θ_n</span>
@@ -734,7 +741,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
         <span class="bp">self</span><span class="o">.</span><span class="n">compute_θ_range</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">compute_value_and_policy</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">setup_LQ_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_LQ_matrices</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># LQ Matrices</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">R</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="bp">self</span><span class="o">.</span><span class="n">u0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">u1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span> <span class="o">/</span> <span class="mi">2</span><span class="p">],</span>
                             <span class="p">[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">u1</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> 
@@ -743,7 +750,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
         <span class="bp">self</span><span class="o">.</span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">]])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mi">1</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">]])</span>
 
-    <span class="k">def</span> <span class="nf">solve_LQ_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">solve_LQ_problem</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Solve LQ Problem (Subproblem 1)</span>
         <span class="n">lq</span> <span class="o">=</span> <span class="n">LQ</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Q</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">β</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">P</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">d</span> <span class="o">=</span> <span class="n">lq</span><span class="o">.</span><span class="n">stationary_values</span><span class="p">()</span>
@@ -765,7 +772,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
         <span class="c1"># Find the bliss level of θ</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">θ_B</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">u1</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">u2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">compute_policy_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_policy_functions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Solve the Markov Perfect Equilibrium</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">μ_MPE</span> <span class="o">=</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">u1</span> <span class="o">/</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">c</span> 
                                  <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">α</span><span class="p">)</span>
@@ -785,7 +792,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
         <span class="bp">self</span><span class="o">.</span><span class="n">J_MPE</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">V_θ</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">μ_MPE</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">J_CR</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">V_θ</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">μ_CR</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">simulate_ramsey_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate_ramsey_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Simulate Ramsey plan for large number of periods</span>
         <span class="n">θ_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">))))</span>
         <span class="n">μ_series</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
@@ -803,7 +810,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
         <span class="bp">self</span><span class="o">.</span><span class="n">μ_series</span> <span class="o">=</span> <span class="n">μ_series</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">θ_series</span> <span class="o">=</span> <span class="n">θ_series</span>
 
-    <span class="k">def</span> <span class="nf">compute_θ_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_θ_range</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Find the range of θ in Ramsey plan</span>
         <span class="n">θ_LB</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">θ_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">θ_B</span><span class="p">)</span>
         <span class="n">θ_UB</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">θ_series</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]),</span> <span class="bp">self</span><span class="o">.</span><span class="n">θ_MPE</span><span class="p">)</span>
@@ -812,7 +819,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
         <span class="bp">self</span><span class="o">.</span><span class="n">θ_UB</span> <span class="o">=</span> <span class="n">θ_UB</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">*</span> <span class="n">θ_range</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">θ_range</span> <span class="o">=</span> <span class="n">θ_range</span>
 
-    <span class="k">def</span> <span class="nf">compute_value_and_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>        
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_value_and_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>        
         <span class="c1"># Create the θ_space</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">θ_space</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">θ_LB</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">θ_UB</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
         
@@ -847,7 +854,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@jit</span>
-<span class="k">def</span> <span class="nf">compute_θ</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_θ</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">λ</span> <span class="o">=</span> <span class="n">α</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">α</span><span class="p">)</span>
     <span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">μ</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">μbar</span> <span class="o">=</span> <span class="n">μ</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -868,7 +875,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
     <span class="k">return</span> <span class="n">θ</span>
 
 <span class="nd">@jit</span>
-<span class="k">def</span> <span class="nf">compute_hs</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">α</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_hs</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">α</span><span class="p">):</span>
     <span class="n">h0</span> <span class="o">=</span> <span class="n">u0</span>
     <span class="n">h1</span> <span class="o">=</span> <span class="o">-</span><span class="n">u1</span> <span class="o">*</span> <span class="n">α</span>
     <span class="n">h2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">u2</span> <span class="o">*</span> <span class="n">α</span><span class="o">**</span><span class="mi">2</span>
@@ -876,7 +883,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
     <span class="k">return</span> <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span>
     
 <span class="nd">@jit</span>
-<span class="k">def</span> <span class="nf">compute_V</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_V</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
     <span class="n">θ</span> <span class="o">=</span> <span class="n">compute_θ</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">α</span><span class="p">)</span>
     
     <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">compute_hs</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">α</span><span class="p">)</span>
@@ -916,7 +923,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 <p>We will use the <a class="reference external" href="https://optax.readthedocs.io/en/latest/api/optimizers.html#optax.adam"><code class="docutils literal notranslate"><span class="pre">optax.adam</span></code></a> from the <code class="docutils literal notranslate"><span class="pre">optax</span></code> library.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">adam_optimizer</span><span class="p">(</span><span class="n">grad_func</span><span class="p">,</span> <span class="n">init_params</span><span class="p">,</span> 
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">adam_optimizer</span><span class="p">(</span><span class="n">grad_func</span><span class="p">,</span> <span class="n">init_params</span><span class="p">,</span> 
                    <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> 
                    <span class="n">max_iter</span><span class="o">=</span><span class="mi">10_000</span><span class="p">,</span> 
                    <span class="n">error_tol</span><span class="o">=</span><span class="mf">1e-7</span><span class="p">):</span>
@@ -928,7 +935,7 @@ Requirement already satisfied: six in /home/runner/miniconda3/envs/quantecon/lib
 
     <span class="c1"># Update parameters and gradients</span>
     <span class="nd">@jit</span>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">):</span>
         <span class="n">grads</span> <span class="o">=</span> <span class="n">grad_func</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
         <span class="n">updates</span><span class="p">,</span> <span class="n">opt_state</span> <span class="o">=</span> <span class="n">optimizer</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">grads</span><span class="p">,</span> <span class="n">opt_state</span><span class="p">)</span>
         <span class="n">params</span> <span class="o">=</span> <span class="n">optax</span><span class="o">.</span><span class="n">apply_updates</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">updates</span><span class="p">)</span>
@@ -1050,7 +1057,7 @@ Wall time: 654 ms
 </div>
 </section>
 <section id="restricting-mu-t-bar-mu-for-all-t">
-<h3><span class="section-number">42.6.2. </span>Restricting <span class="math notranslate nohighlight">\(\mu_t = \bar \mu\)</span> for all <span class="math notranslate nohighlight">\(t\)</span><a class="headerlink" href="#restricting-mu-t-bar-mu-for-all-t" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">42.6.2. </span>Restricting <span class="math notranslate nohighlight">\(\mu_t = \bar \mu\)</span> for all <span class="math notranslate nohighlight">\(t\)</span><a class="headerlink" href="#restricting-mu-t-bar-mu-for-all-t" title="Link to this heading">#</a></h3>
 <p>We take  a brief detour to solve a restricted version of  the Ramsey problem defined above.</p>
 <p>First, recall that a Ramsey planner chooses <span class="math notranslate nohighlight">\(\vec \mu\)</span> to maximize the government’s value function <a class="reference internal" href="#equation-eq-ramseyvalue">(42.9)</a> subject to equations  <a class="reference internal" href="#equation-eq-inflation101">(42.8)</a>.</p>
 <p>We now define a distinct problem in which the planner chooses <span class="math notranslate nohighlight">\(\vec \mu\)</span> to maximize the government’s value function <a class="reference internal" href="#equation-eq-ramseyvalue">(42.9)</a> subject to equation  <a class="reference internal" href="#equation-eq-inflation101">(42.8)</a> and
@@ -1124,7 +1131,7 @@ optimized μ =
 </section>
 </section>
 <section id="a-more-structured-ml-algorithm">
-<h2><span class="section-number">42.7. </span>A more structured ML algorithm<a class="headerlink" href="#a-more-structured-ml-algorithm" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.7. </span>A more structured ML algorithm<a class="headerlink" href="#a-more-structured-ml-algorithm" title="Link to this heading">#</a></h2>
 <p>By thinking  about the mathematical structure of the Ramsey problem and using some linear algebra, we can simplify the problem that we hand over to a <code class="docutils literal notranslate"><span class="pre">machine</span> <span class="pre">learning</span></code> algorithm.</p>
 <p>We start by recalling that  the Ramsey problem that chooses  <span class="math notranslate nohighlight">\(\vec \mu\)</span> to maximize the government’s value function <a class="reference internal" href="#equation-eq-ramseyvalue">(42.9)</a>subject to equation  <a class="reference internal" href="#equation-eq-inflation101">(42.8)</a>.</p>
 <p>This  turns out to be  an optimization  problem with a quadratic objective function and linear constraints.</p>
@@ -1190,7 +1197,7 @@ B = A^{-1}
 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">construct_B</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">construct_B</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">T</span><span class="p">):</span>
     <span class="n">λ</span> <span class="o">=</span> <span class="n">α</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">α</span><span class="p">)</span>
     
     <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span> <span class="o">-</span> <span class="n">λ</span><span class="o">*</span><span class="n">jnp</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">λ</span><span class="p">)</span>
@@ -1312,11 +1319,11 @@ J = V - h_0 &amp;= \sum_{t=0}^\infty \beta^t (h_1 \theta_t + h_2 \theta_t^2 - \f
 \vec \theta^{R} = B \vec \mu^R
 \]</div>
 <section id="two-implementations">
-<h3><span class="section-number">42.7.1. </span>Two implementations<a class="headerlink" href="#two-implementations" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">42.7.1. </span>Two implementations<a class="headerlink" href="#two-implementations" title="Link to this heading">#</a></h3>
 <p>With the more structured approach, we can update our gradient descent exercise with <code class="docutils literal notranslate"><span class="pre">compute_J</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_J</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_J</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>
     <span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">μ</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     
     <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">compute_hs</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">α</span><span class="p">)</span>
@@ -1427,7 +1434,7 @@ Wall time: 286 ms
 <p>We can also derive a closed-form solution for <span class="math notranslate nohighlight">\(\vec \mu\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_μ</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>    
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_μ</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>    
     <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">compute_hs</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">α</span><span class="p">)</span>
     
     <span class="n">_</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="n">construct_B</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">T</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
@@ -1498,7 +1505,7 @@ Wall time: 286 ms
 <p>We can check the gradient of the analytical solution against the <code class="docutils literal notranslate"><span class="pre">JAX</span></code> computed version</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_grad</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>    
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_grad</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">):</span>    
     <span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">μ</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     
     <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">compute_hs</span><span class="p">(</span><span class="n">u0</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">α</span><span class="p">)</span>
@@ -1597,7 +1604,7 @@ the  limit <span class="math notranslate nohighlight">\(\bar \mu\)</span> of  <s
 </section>
 </section>
 <section id="continuation-values">
-<h2><span class="section-number">42.8. </span>Continuation values<a class="headerlink" href="#continuation-values" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.8. </span>Continuation values<a class="headerlink" href="#continuation-values" title="Link to this heading">#</a></h2>
 <p>For subsquent analysis, it will be useful to  compute a sequence <span class="math notranslate nohighlight">\(\{v_t\}_{t=0}^T\)</span> of  what we’ll call <code class="docutils literal notranslate"><span class="pre">continuation</span> <span class="pre">values</span></code> along a Ramsey plan.</p>
 <p>To do so, we’ll start at date <span class="math notranslate nohighlight">\(T\)</span> and compute</p>
 <div class="math notranslate nohighlight">
@@ -1613,12 +1620,12 @@ v_t = s(\theta_t, \mu_t) + \beta v_{t+1}
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define function for s and U in section 41.3</span>
-<span class="k">def</span> <span class="nf">s</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">s</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">μ</span><span class="p">,</span> <span class="n">u0</span><span class="p">,</span> <span class="n">u1</span><span class="p">,</span> <span class="n">u2</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
     <span class="n">U</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">u0</span> <span class="o">+</span> <span class="n">u1</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="p">(</span><span class="n">u2</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
     <span class="k">return</span> <span class="n">U</span><span class="p">(</span><span class="o">-</span><span class="n">α</span><span class="o">*</span><span class="n">θ</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">c</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">μ</span><span class="o">**</span><span class="mi">2</span>
 
 <span class="c1"># Calculate v_t sequence backward</span>
-<span class="k">def</span> <span class="nf">compute_vt</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_vt</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">β</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">u0</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">u1</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">u2</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">μ</span><span class="p">)</span>
     <span class="n">θ</span> <span class="o">=</span> <span class="n">compute_θ</span><span class="p">(</span><span class="n">μ</span><span class="p">,</span> <span class="n">α</span><span class="p">)</span>
     
@@ -1685,7 +1692,7 @@ in equation <a class="reference internal" href="#equation-eq-ramseyv">(42.6)</a>
 <figure class="align-default" id="id8">
 <img alt="_images/db60b95af40a9f06acaf60adbfc155cf6932e558b3c7e3b205547732b15db2fb.png" src="_images/db60b95af40a9f06acaf60adbfc155cf6932e558b3c7e3b205547732b15db2fb.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 42.1 </span><span class="caption-text">Continuation values</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 42.1 </span><span class="caption-text">Continuation values</span><a class="headerlink" href="#id8" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1707,7 +1714,7 @@ time-less perspective.” A more descriptive phrase is “the value of the worst
 </div>
 </section>
 <section id="adding-some-human-intelligence">
-<h2><span class="section-number">42.9. </span>Adding some human intelligence<a class="headerlink" href="#adding-some-human-intelligence" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.9. </span>Adding some human intelligence<a class="headerlink" href="#adding-some-human-intelligence" title="Link to this heading">#</a></h2>
 <p>We have used our machine learning algorithms to compute a Ramsey plan.</p>
 <p>By plotting it, we learned that the Ramsey planner makes  <span class="math notranslate nohighlight">\(\vec \mu\)</span> and <span class="math notranslate nohighlight">\(\vec \theta\)</span> both vary over time.</p>
 <ul class="simple">
@@ -1950,7 +1957,7 @@ strong multicollinearity or other numerical problems.
 <p>Evidently, continuation values <span class="math notranslate nohighlight">\(v_t &gt; V^{CR}\)</span> for <span class="math notranslate nohighlight">\(t=0, 1, 2\)</span> while <span class="math notranslate nohighlight">\(v_t &lt; V^{CR}\)</span> for <span class="math notranslate nohighlight">\(t \geq 3\)</span>.</p>
 </section>
 <section id="what-has-machine-learning-taught-us">
-<h2><span class="section-number">42.10. </span>What has machine learning taught us?<a class="headerlink" href="#what-has-machine-learning-taught-us" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">42.10. </span>What has machine learning taught us?<a class="headerlink" href="#what-has-machine-learning-taught-us" title="Link to this heading">#</a></h2>
 <p>Our regressions tells us that along the Ramsey outcome <span class="math notranslate nohighlight">\(\vec \mu^R, \vec \theta^R\)</span>, the linear function</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1969,7 +1976,7 @@ v_t = 6.8052 - .7580 \theta_t - 4.6991 \theta_t^2.
 run for our single Ramsey outcome path <span class="math notranslate nohighlight">\(\vec \mu^R, \vec \theta^R\)</span>
 that along a Ramsey plan, the following relationships prevail:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old9101">
-<span class="eqno">(42.12)<a class="headerlink" href="#equation-eq-old9101" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(42.12)<a class="headerlink" href="#equation-eq-old9101" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
 \theta_0 &amp; = \theta_0^R \\
 \mu_t &amp;  = b_0 + b_1 \theta_t \\
 \theta_{t+1} &amp; = d_0 + d_1 \theta_t  \\
@@ -2078,6 +2085,8 @@ insight to work.</p>
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -2560,7 +2569,7 @@ insight to work.</p>
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

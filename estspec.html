@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>30. Estimation of Spectra &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'estspec';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/estspec.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="31. Additive and Multiplicative Functionals" href="additive_functionals.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -190,7 +197,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -241,7 +248,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="estimation-of-spectra">
-<h1><span class="section-number">30. </span>Estimation of Spectra<a class="headerlink" href="#estimation-of-spectra" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">30. </span>Estimation of Spectra<a class="headerlink" href="#estimation-of-spectra" title="Link to this heading">#</a></h1>
 <p id="index-0">In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -275,7 +282,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </details>
 </div>
 <section id="overview">
-<h2><span class="section-number">30.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>In a <a class="reference internal" href="arma.html#arma"><span class="std std-ref">previous lecture</span></a>, we covered some fundamental properties of covariance stationary linear stochastic processes.</p>
 <p>One objective for that lecture was to introduce spectral densities — a standard and very useful technique for analyzing such processes.</p>
 <p>In this lecture, we turn to the problem of estimating spectral densities and other related quantities from data.</p>
@@ -286,16 +293,16 @@ turn is computed via the famous <a class="reference external" href="https://en.w
 <p>Let’s start with some standard imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">ARMA</span><span class="p">,</span> <span class="n">periodogram</span><span class="p">,</span> <span class="n">ar_periodogram</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="kn">import</span> <span class="n">ARMA</span><span class="p">,</span> <span class="n">periodogram</span><span class="p">,</span> <span class="n">ar_periodogram</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="periodograms">
-<span id="id3"></span><h2><span class="section-number">30.2. </span><span class="target" id="index-2"></span>Periodograms<a class="headerlink" href="#periodograms" title="Permalink to this heading">#</a></h2>
+<span id="id3"></span><h2><span class="section-number">30.2. </span><span class="target" id="index-2"></span>Periodograms<a class="headerlink" href="#periodograms" title="Link to this heading">#</a></h2>
 <p><a class="reference internal" href="arma.html#arma-specd"><span class="std std-ref">Recall that</span></a> the spectral density <span class="math notranslate nohighlight">\(f\)</span> of a covariance stationary process with
 autocorrelation function <span class="math notranslate nohighlight">\(\gamma\)</span> can be written</p>
 <div class="math notranslate nohighlight">
@@ -307,7 +314,7 @@ f(\omega) = \gamma(0) + 2 \sum_{k \geq 1} \gamma(k) \cos(\omega k),
 <p>In particular, let <span class="math notranslate nohighlight">\(X_0, \ldots, X_{n-1}\)</span> be <span class="math notranslate nohighlight">\(n\)</span> consecutive observations of a single time series that is assumed to be covariance stationary.</p>
 <p>The most common estimator of the spectral density of this process is the <em>periodogram</em> of <span class="math notranslate nohighlight">\(X_0, \ldots, X_{n-1}\)</span>, which is defined as</p>
 <div class="math notranslate nohighlight" id="equation-estspec-p">
-<span class="eqno">(30.1)<a class="headerlink" href="#equation-estspec-p" title="Permalink to this equation">#</a></span>\[I(\omega)
+<span class="eqno">(30.1)<a class="headerlink" href="#equation-estspec-p" title="Link to this equation">#</a></span>\[I(\omega)
 := \frac{1}{n} \left| \sum_{t=0}^{n-1} X_t e^{i t \omega} \right|^2,
 \qquad \omega \in \mathbb R\]</div>
 <p>(Recall that <span class="math notranslate nohighlight">\(|z|\)</span> denotes the modulus of complex number <span class="math notranslate nohighlight">\(z\)</span>)</p>
@@ -329,7 +336,7 @@ I(\omega)
 <span class="math notranslate nohighlight">\(\mathbb R\)</span>.</p>
 <p>The next section helps to explain the connection between the periodogram and the spectral density.</p>
 <section id="interpretation">
-<h3><span class="section-number">30.2.1. </span>Interpretation<a class="headerlink" href="#interpretation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.2.1. </span>Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading">#</a></h3>
 <p id="index-3">To interpret the periodogram, it is convenient to focus on its values at the <em>Fourier frequencies</em></p>
 <div class="math notranslate nohighlight">
 \[
@@ -378,7 +385,7 @@ I(\omega_j) = \hat \gamma(0) +
 we see that <span class="math notranslate nohighlight">\(I(\omega_j)\)</span> is just a sample analog of <span class="math notranslate nohighlight">\(f(\omega_j)\)</span>.</p>
 </section>
 <section id="calculation">
-<h3><span class="section-number">30.2.2. </span>Calculation<a class="headerlink" href="#calculation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.2.2. </span>Calculation<a class="headerlink" href="#calculation" title="Link to this heading">#</a></h3>
 <p id="index-4">Let’s now consider how to compute the periodogram as defined in <a class="reference internal" href="#equation-estspec-p">(30.1)</a>.</p>
 <p>There are already functions available that will do this for us
 — an example is <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa.stattools.periodogram</span></code> in the <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> package.</p>
@@ -408,7 +415,7 @@ A_j := \sum_{t=0}^{n-1} a_t \exp \left\{ i 2 \pi \frac{tj}{n} \right\},
 <p>Let’s generate some data for this function using the <code class="docutils literal notranslate"><span class="pre">ARMA</span></code> class from <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py">QuantEcon.py</a> (see the <a class="reference internal" href="arma.html#arma"><span class="std std-ref">lecture on linear processes</span></a> for more details).</p>
 <p>Here’s a code snippet that, once the preceding code has been run, generates data from the process</p>
 <div class="math notranslate nohighlight" id="equation-esp-arma">
-<span class="eqno">(30.2)<a class="headerlink" href="#equation-esp-arma" title="Permalink to this equation">#</a></span>\[X_t = 0.5 X_{t-1} + \epsilon_t - 0.8 \epsilon_{t-2}\]</div>
+<span class="eqno">(30.2)<a class="headerlink" href="#equation-esp-arma" title="Link to this equation">#</a></span>\[X_t = 0.5 X_{t-1} + \epsilon_t - 0.8 \epsilon_{t-2}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\{ \epsilon_t \}\)</span> is white noise with unit variance, and compares the periodogram to the actual spectral density</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -448,7 +455,7 @@ perhaps it’s not surprising that the estimate is poor.</p>
 </section>
 </section>
 <section id="smoothing">
-<h2><span class="section-number">30.3. </span><span class="target" id="index-5"></span>Smoothing<a class="headerlink" href="#smoothing" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.3. </span><span class="target" id="index-5"></span>Smoothing<a class="headerlink" href="#smoothing" title="Link to this heading">#</a></h2>
 <p id="index-6">There are two related issues here.</p>
 <p>One is that, given the way the fast Fourier transform is implemented, the
 number of points <span class="math notranslate nohighlight">\(\omega\)</span> at which <span class="math notranslate nohighlight">\(I(\omega)\)</span> is estimated
@@ -466,7 +473,7 @@ I(\omega_{j-p}), I(\omega_{j-p+1}), \ldots, I(\omega_j), \ldots, I(\omega_{j+p})
 \]</div>
 <p>This weighted average can be written as</p>
 <div class="math notranslate nohighlight" id="equation-estspec-ws">
-<span class="eqno">(30.3)<a class="headerlink" href="#equation-estspec-ws" title="Permalink to this equation">#</a></span>\[I_S(\omega_j) := \sum_{\ell = -p}^{p} w(\ell) I(\omega_{j+\ell})\]</div>
+<span class="eqno">(30.3)<a class="headerlink" href="#equation-estspec-ws" title="Link to this equation">#</a></span>\[I_S(\omega_j) := \sum_{\ell = -p}^{p} w(\ell) I(\omega_{j+\ell})\]</div>
 <p>where the weights <span class="math notranslate nohighlight">\(w(-p), \ldots, w(p)\)</span> are a sequence of <span class="math notranslate nohighlight">\(2p + 1\)</span> nonnegative
 values summing to one.</p>
 <p>In general, larger values of <span class="math notranslate nohighlight">\(p\)</span> indicate more smoothing — more on
@@ -475,7 +482,7 @@ this below.</p>
 <p>Note the smaller weights towards the edges and larger weights in the center, so that more distant values from <span class="math notranslate nohighlight">\(I(\omega_j)\)</span> have less weight than closer ones in the sum <a class="reference internal" href="#equation-estspec-ws">(30.3)</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hanning_window</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">hanning_window</span><span class="p">(</span><span class="n">M</span><span class="p">):</span>
     <span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.5</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">n</span><span class="o">/</span><span class="p">(</span><span class="n">M</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">M</span><span class="p">)]</span>
     <span class="k">return</span> <span class="n">w</span>
 
@@ -495,7 +502,7 @@ this below.</p>
 </div>
 </div>
 <section id="estimation-with-smoothing">
-<h3><span class="section-number">30.3.1. </span>Estimation with smoothing<a class="headerlink" href="#estimation-with-smoothing" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">30.3.1. </span>Estimation with smoothing<a class="headerlink" href="#estimation-with-smoothing" title="Link to this heading">#</a></h3>
 <p id="index-8">Our next step is to provide code that will not only estimate the periodogram but also provide smoothing as required.</p>
 <p>Such functions have been written in  <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/estspec.py">estspec.py</a> and are available once you’ve installed <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a>.</p>
 <p>The <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/estspec.py">GitHub listing</a> displays three functions,  <code class="docutils literal notranslate"><span class="pre">smooth()</span></code>, <code class="docutils literal notranslate"><span class="pre">periodogram()</span></code>, <code class="docutils literal notranslate"><span class="pre">ar_periodogram()</span></code>. We will discuss the first two here and the third one <a class="reference internal" href="#ar-periodograms"><span class="std std-ref">below</span></a>.</p>
@@ -517,8 +524,8 @@ and the choice of appropriate smoothing will have to be made based on
 judgement/priors or some other theory.</p>
 </section>
 <section id="pre-filtering-and-smoothing">
-<span id="estspec-pfas"></span><h3><span class="section-number">30.3.2. </span>Pre-filtering and smoothing<a class="headerlink" href="#pre-filtering-and-smoothing" title="Permalink to this heading">#</a></h3>
-<span class="target" id="index-9"></span><p id="index-10">In the <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/estspec.py">code listing</a>, we showed three functions from the file <code class="docutils literal notranslate"><span class="pre">estspec.py</span></code>.</p>
+<span id="estspec-pfas"></span><h3><span class="section-number">30.3.2. </span>Pre-filtering and smoothing<a class="headerlink" href="#pre-filtering-and-smoothing" title="Link to this heading">#</a></h3>
+<p id="index-10"><span id="index-9"></span>In the <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/estspec.py">code listing</a>, we showed three functions from the file <code class="docutils literal notranslate"><span class="pre">estspec.py</span></code>.</p>
 <p>The third function in the file (<code class="docutils literal notranslate"><span class="pre">ar_periodogram()</span></code>) adds a pre-processing step to periodogram smoothing.</p>
 <p>First, we describe the basic idea, and after that we give the code.</p>
 <p>The essential idea is to</p>
@@ -544,14 +551,14 @@ provided the maximum possible amount of information about the value <span class=
 <p>Another way to put this is that if <span class="math notranslate nohighlight">\(I\)</span> is relatively constant, then we can use a large amount of smoothing without introducing too much bias.</p>
 </section>
 <section id="the-ar-1-setting">
-<span id="ar-periodograms"></span><h3><span class="section-number">30.3.3. </span>The AR(1) setting<a class="headerlink" href="#the-ar-1-setting" title="Permalink to this heading">#</a></h3>
+<span id="ar-periodograms"></span><h3><span class="section-number">30.3.3. </span>The AR(1) setting<a class="headerlink" href="#the-ar-1-setting" title="Link to this heading">#</a></h3>
 <p id="index-11">Let’s examine this idea more carefully in a particular setting — where
 the data are assumed to be generated by an  AR(1) process.</p>
 <p>(More general ARMA settings can be handled using similar techniques to those described below)</p>
 <p>Suppose in particular that <span class="math notranslate nohighlight">\(\{X_t\}\)</span> is covariance stationary and AR(1),
 with</p>
 <div class="math notranslate nohighlight" id="equation-estspec-ar-dgp">
-<span class="eqno">(30.4)<a class="headerlink" href="#equation-estspec-ar-dgp" title="Permalink to this equation">#</a></span>\[X_{t+1} = \mu + \phi X_t + \epsilon_{t+1}\]</div>
+<span class="eqno">(30.4)<a class="headerlink" href="#equation-estspec-ar-dgp" title="Link to this equation">#</a></span>\[X_{t+1} = \mu + \phi X_t + \epsilon_{t+1}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\phi \in (-1, 1)\)</span> are unknown parameters and <span class="math notranslate nohighlight">\(\{ \epsilon_t \}\)</span> is white noise.</p>
 <p>It follows that if we regress <span class="math notranslate nohighlight">\(X_{t+1}\)</span> on <span class="math notranslate nohighlight">\(X_t\)</span> and an intercept, the residuals
 will approximate white noise.</p>
@@ -563,7 +570,7 @@ will approximate white noise.</p>
 </ul>
 <p>In view of <a class="reference internal" href="arma.html#arma-spec-den"><span class="std std-ref">an earlier result</span></a> we obtained while discussing ARMA processes, <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are related by</p>
 <div class="math notranslate nohighlight" id="equation-ar-sdsc">
-<span class="eqno">(30.5)<a class="headerlink" href="#equation-ar-sdsc" title="Permalink to this equation">#</a></span>\[f(\omega) = \left| \frac{1}{1 - \phi e^{i\omega}} \right|^2 g(\omega)\]</div>
+<span class="eqno">(30.5)<a class="headerlink" href="#equation-ar-sdsc" title="Link to this equation">#</a></span>\[f(\omega) = \left| \frac{1}{1 - \phi e^{i\omega}} \right|^2 g(\omega)\]</div>
 <p>This suggests that the recoloring step, which constructs an estimate <span class="math notranslate nohighlight">\(I\)</span> of <span class="math notranslate nohighlight">\(f\)</span> from <span class="math notranslate nohighlight">\(I_0\)</span>, should set</p>
 <div class="math notranslate nohighlight">
 \[
@@ -588,7 +595,7 @@ of being closer to the true spectral density.</p>
 </section>
 </section>
 <section id="exercises">
-<h2><span class="section-number">30.4. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">30.4. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="est_ex1">
 <span id="estspec-ex1"></span>
 <p class="admonition-title"><span class="caption-number">Exercise 30.1 </span></p>
@@ -719,6 +726,8 @@ and 150 observations in each time series.</p>
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -1201,7 +1210,7 @@ and 150 observations in each time series.</p>
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>41. Stackelberg Plans &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'dyn_stack';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/dyn_stack.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="42. Machine Learning a Ramsey Plan" href="calvo_machine_learn.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -217,7 +224,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -268,7 +275,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="stackelberg-plans">
-<h1><span class="section-number">41. </span>Stackelberg Plans<a class="headerlink" href="#stackelberg-plans" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">41. </span>Stackelberg Plans<a class="headerlink" href="#stackelberg-plans" title="Link to this heading">#</a></h1>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -302,7 +309,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </details>
 </div>
 <section id="overview">
-<h2><span class="section-number">41.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This lecture formulates and computes a plan that a <strong>Stackelberg
 leader</strong> uses to manipulate forward-looking decisions of a <strong>Stackelberg
 follower</strong> that depend on continuation sequences of decisions made once
@@ -316,18 +323,18 @@ actions of other firms that influence future prices.</p>
 <p>Let’s start with some standard imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
-<span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
-<span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">LQ</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy.linalg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">la</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qe</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="kn">import</span> <span class="n">LQ</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="duopoly">
-<h2><span class="section-number">41.2. </span>Duopoly<a class="headerlink" href="#duopoly" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.2. </span>Duopoly<a class="headerlink" href="#duopoly" title="Link to this heading">#</a></h2>
 <p>Time is discrete and is indexed by <span class="math notranslate nohighlight">\(t = 0, 1, \ldots\)</span>.</p>
 <p>Two firms produce a single good whose demand is governed by the linear
 inverse demand curve</p>
@@ -362,7 +369,7 @@ q_{it+1} = q_{it} + v_{it}
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span> is a time discount factor.</p>
 <section id="stackelberg-leader-and-follower">
-<h3><span class="section-number">41.2.1. </span>Stackelberg leader and follower<a class="headerlink" href="#stackelberg-leader-and-follower" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.2.1. </span>Stackelberg leader and follower<a class="headerlink" href="#stackelberg-leader-and-follower" title="Link to this heading">#</a></h3>
 <p>Each firm <span class="math notranslate nohighlight">\(i=1,2\)</span> chooses a sequence
 <span class="math notranslate nohighlight">\(\vec q_i \equiv \{q_{it+1}\}_{t=0}^\infty\)</span> once and for all at
 time <span class="math notranslate nohighlight">\(0\)</span>.</p>
@@ -378,7 +385,7 @@ base its choice of <span class="math notranslate nohighlight">\(\vec q_1\)</span
 <span class="math notranslate nohighlight">\(\vec q_2\)</span>.</p>
 </section>
 <section id="statement-of-leaders-and-followers-problems">
-<h3><span class="section-number">41.2.2. </span>Statement of leader’s and follower’s problems<a class="headerlink" href="#statement-of-leaders-and-followers-problems" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.2.2. </span>Statement of leader’s and follower’s problems<a class="headerlink" href="#statement-of-leaders-and-followers-problems" title="Link to this heading">#</a></h3>
 <p>We can express firm 1’s problem as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -416,7 +423,7 @@ follower’s best response to it.</p>
 <p>To gain insights about these things, we study them in more detail.</p>
 </section>
 <section id="firms-problems">
-<h3><span class="section-number">41.2.3. </span>Firms’ problems<a class="headerlink" href="#firms-problems" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.2.3. </span>Firms’ problems<a class="headerlink" href="#firms-problems" title="Link to this heading">#</a></h3>
 <p>Firm 1 acts as if firm 2’s sequence <span class="math notranslate nohighlight">\(\{q_{2t+1}\}_{t=0}^\infty\)</span> is
 given and beyond its control.</p>
 <p>Firm 2 knows that firm 1 chooses second and takes this into account in
@@ -455,7 +462,7 @@ L=\sum_{t=0}^{\infty}\beta^{t}\{a_{0}q_{1t}-a_{1}q_{1t}^{2}-a_{1}q_{1t}q_{2t}-\g
 <span class="math notranslate nohighlight">\(c_0 = \frac{\beta a_0}{2 \gamma}, c_1 = \frac{\beta a_1}{\gamma}, c_2 = \frac{\beta a_1}{2 \gamma}\)</span>.</p>
 <p>This equation can in turn be rearranged to become</p>
 <div class="math notranslate nohighlight" id="equation-sstack1">
-<span class="eqno">(41.1)<a class="headerlink" href="#equation-sstack1" title="Permalink to this equation">#</a></span>\[- q_{1t} + (1+\beta + c_1) q_{1t+1} - \beta q_{1t+2} = c_0 - c_2 q_{2t+1}\]</div>
+<span class="eqno">(41.1)<a class="headerlink" href="#equation-sstack1" title="Link to this equation">#</a></span>\[- q_{1t} + (1+\beta + c_1) q_{1t+1} - \beta q_{1t+2} = c_0 - c_2 q_{2t+1}\]</div>
 <p>Equation <a class="reference internal" href="#equation-sstack1">(41.1)</a> is a second-order difference equation in the sequence
 <span class="math notranslate nohighlight">\(\vec q_1\)</span> whose solution we want.</p>
 <p>It satisfies <strong>two boundary conditions:</strong></p>
@@ -473,7 +480,7 @@ L=\sum_{t=0}^{\infty}\beta^{t}\{a_{0}q_{1t}-a_{1}q_{1t}^{2}-a_{1}q_{1t}q_{2t}-\g
 <p>The polynomial in the lag operator on the left side can be <strong>factored</strong>
 as</p>
 <div class="math notranslate nohighlight" id="equation-sstack2">
-<span class="eqno">(41.2)<a class="headerlink" href="#equation-sstack2" title="Permalink to this equation">#</a></span>\[(1 - \frac{1+\beta + c_1}{\beta} L + \beta^{-1} L^2 )  = ( 1 - \delta_1 L ) (1 - \delta_2 L)\]</div>
+<span class="eqno">(41.2)<a class="headerlink" href="#equation-sstack2" title="Link to this equation">#</a></span>\[(1 - \frac{1+\beta + c_1}{\beta} L + \beta^{-1} L^2 )  = ( 1 - \delta_1 L ) (1 - \delta_2 L)\]</div>
 <p>where <span class="math notranslate nohighlight">\(0 &lt; \delta_1 &lt; 1 &lt; \frac{1}{\sqrt{\beta}} &lt; \delta_2\)</span>.</p>
 <p>Because <span class="math notranslate nohighlight">\(\delta_2 &gt; \frac{1}{\sqrt{\beta}}\)</span> the operator
 <span class="math notranslate nohighlight">\((1 - \delta_2 L)\)</span> contributes an <strong>unstable</strong> component if solved
@@ -493,7 +500,7 @@ as</p>
 decision rule for setting <span class="math notranslate nohighlight">\(q_{1t+1}\)</span> in the
 <strong>feedback-feedforward</strong> form</p>
 <div class="math notranslate nohighlight" id="equation-sstack3">
-<span class="eqno">(41.3)<a class="headerlink" href="#equation-sstack3" title="Permalink to this equation">#</a></span>\[q_{1t+1} = \delta_1 q_{1t} - c_0 \delta_2^{-1} \beta^{-1}  \frac{1}{1 -\delta_2^{-1}}  + c_2 \delta_2^{-1} \beta^{-1} \sum_{j=0}^\infty \delta_2^j q_{2t+j+1} ,  \quad t \geq 0\]</div>
+<span class="eqno">(41.3)<a class="headerlink" href="#equation-sstack3" title="Link to this equation">#</a></span>\[q_{1t+1} = \delta_1 q_{1t} - c_0 \delta_2^{-1} \beta^{-1}  \frac{1}{1 -\delta_2^{-1}}  + c_2 \delta_2^{-1} \beta^{-1} \sum_{j=0}^\infty \delta_2^j q_{2t+j+1} ,  \quad t \geq 0\]</div>
 <p>The problem of the Stackelberg leader firm 2 is to choose the sequence
 <span class="math notranslate nohighlight">\(\{q_{2t+1}\}_{t=0}^\infty\)</span> to maximize its discounted profits</p>
 <div class="math notranslate nohighlight">
@@ -506,7 +513,7 @@ multipliers on the sequence of equations <a class="reference internal" href="#eq
 and formulate the following Lagrangian for the Stackelberg leader firm
 2’s problem</p>
 <div class="math notranslate nohighlight" id="equation-sstack4">
-<span class="eqno">(41.4)<a class="headerlink" href="#equation-sstack4" title="Permalink to this equation">#</a></span>\[\begin{aligned} \tilde L &amp; = \sum_{t=0}^\infty  \beta^t\{ (a_0 -  a_1 (q_{1t} + q_{2t}) ) q_{2t} - \gamma (q_{2t+1} - q_{2t})^2 \} \cr
+<span class="eqno">(41.4)<a class="headerlink" href="#equation-sstack4" title="Link to this equation">#</a></span>\[\begin{aligned} \tilde L &amp; = \sum_{t=0}^\infty  \beta^t\{ (a_0 -  a_1 (q_{1t} + q_{2t}) ) q_{2t} - \gamma (q_{2t+1} - q_{2t})^2 \} \cr
  &amp;  + \sum_{t=0}^\infty \beta^t \theta_t \{ \delta_1 q_{1t} -  c_0 \delta_2^{-1} \beta^{-1}  \frac{1}{1 -\delta_2^{-1}} +  c_2 \delta_2^{-1} \beta^{-1}
    \sum_{j=0}^\infty \delta_2^{-j} q_{2t+j+1} - q_{1t+1} \} \end{aligned}\]</div>
 <p>subject to initial conditions for <span class="math notranslate nohighlight">\(q_{1t}, q_{2t}\)</span> at <span class="math notranslate nohighlight">\(t=0\)</span>.</p>
@@ -524,7 +531,7 @@ the same  general structure.</p>
 </section>
 </section>
 <section id="stackelberg-problem">
-<h2><span class="section-number">41.3. </span>Stackelberg problem<a class="headerlink" href="#stackelberg-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.3. </span>Stackelberg problem<a class="headerlink" href="#stackelberg-problem" title="Link to this heading">#</a></h2>
 <p>We formulate a class of linear-quadratic Stackelberg leader-follower
 problems of which our duopoly model is an instance.</p>
 <p>We use the optimal linear regulator (a.k.a. the linear-quadratic dynamic
@@ -557,10 +564,10 @@ r(y, u)  =  y' R y  + u' Q u
 <p>Subject to an initial condition for <span class="math notranslate nohighlight">\(z_0\)</span>, but not for <span class="math notranslate nohighlight">\(x_0\)</span>, the
 Stackelberg leader wants to maximize</p>
 <div class="math notranslate nohighlight" id="equation-maxeq">
-<span class="eqno">(41.5)<a class="headerlink" href="#equation-maxeq" title="Permalink to this equation">#</a></span>\[-\sum_{t=0}^\infty \beta^t r(y_t, u_t)\]</div>
+<span class="eqno">(41.5)<a class="headerlink" href="#equation-maxeq" title="Link to this equation">#</a></span>\[-\sum_{t=0}^\infty \beta^t r(y_t, u_t)\]</div>
 <p>The Stackelberg leader faces the model</p>
 <div class="math notranslate nohighlight" id="equation-new2">
-<span class="eqno">(41.6)<a class="headerlink" href="#equation-new2" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{bmatrix} I &amp; 0 \\ G_{21} &amp; G_{22} \end{bmatrix}
+<span class="eqno">(41.6)<a class="headerlink" href="#equation-new2" title="Link to this equation">#</a></span>\[\begin{split}\begin{bmatrix} I &amp; 0 \\ G_{21} &amp; G_{22} \end{bmatrix}
 \begin{bmatrix}    z_{t+1} \\  x_{t+1} \end{bmatrix}
 = \begin{bmatrix}  \hat A_{11}  &amp;  \hat A_{12} \\ \hat A_{21} &amp; \hat A_{22}  \end{bmatrix} \begin{bmatrix}  z_t \\ x_t \end{bmatrix} + \hat B u_t\end{split}\]</div>
 <p>We assume that the matrix
@@ -568,14 +575,14 @@ Stackelberg leader wants to maximize</p>
 left side of equation <a class="reference internal" href="#equation-new2">(41.6)</a> is invertible, so that we
 can multiply both sides by its inverse to obtain</p>
 <div class="math notranslate nohighlight" id="equation-new3">
-<span class="eqno">(41.7)<a class="headerlink" href="#equation-new3" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{bmatrix}    z_{t+1} \\  x_{t+1} \end{bmatrix}
+<span class="eqno">(41.7)<a class="headerlink" href="#equation-new3" title="Link to this equation">#</a></span>\[\begin{split}\begin{bmatrix}    z_{t+1} \\  x_{t+1} \end{bmatrix}
 = \begin{bmatrix}  A_{11}  &amp;   A_{12} \\ A_{21} &amp;  A_{22}  \end{bmatrix}
 \begin{bmatrix}  z_t \\ x_t \end{bmatrix} +  B u_t\end{split}\]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-constrainteq">
-<span class="eqno">(41.8)<a class="headerlink" href="#equation-constrainteq" title="Permalink to this equation">#</a></span>\[y_{t+1} = A y_t + B u_t\]</div>
+<span class="eqno">(41.8)<a class="headerlink" href="#equation-constrainteq" title="Link to this equation">#</a></span>\[y_{t+1} = A y_t + B u_t\]</div>
 <section id="interpretation-of-second-block-of-equations">
-<h3><span class="section-number">41.3.1. </span>Interpretation of second block of equations<a class="headerlink" href="#interpretation-of-second-block-of-equations" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.3.1. </span>Interpretation of second block of equations<a class="headerlink" href="#interpretation-of-second-block-of-equations" title="Link to this heading">#</a></h3>
 <p>The Stackelberg follower’s best response mapping is summarized by the
 second block of equations of <a class="reference internal" href="#equation-new3">(41.7)</a>.</p>
 <p>In particular, these equations are the first-order conditions of the
@@ -597,7 +604,7 @@ restricted by <a class="reference internal" href="#equation-constrainteq">(41.8)
 decisions.</p>
 </section>
 <section id="more-mechanical-details">
-<h3><span class="section-number">41.3.2. </span>More mechanical details<a class="headerlink" href="#more-mechanical-details" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.3.2. </span>More mechanical details<a class="headerlink" href="#more-mechanical-details" title="Link to this heading">#</a></h3>
 <p>For any vector <span class="math notranslate nohighlight">\(a_t\)</span>, define <span class="math notranslate nohighlight">\(\vec a_t = [a_t,
 a_{t+1} \ldots ]\)</span>.</p>
 <p>Define a feasible set of <span class="math notranslate nohighlight">\((\vec y_1, \vec u_0)\)</span> sequences</p>
@@ -614,7 +621,7 @@ eventually, the <span class="math notranslate nohighlight">\(x_0\)</span> compon
 Stackelberg leader.</p>
 </section>
 <section id="two-subproblems">
-<h3><span class="section-number">41.3.3. </span>Two subproblems<a class="headerlink" href="#two-subproblems" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.3.3. </span>Two subproblems<a class="headerlink" href="#two-subproblems" title="Link to this heading">#</a></h3>
 <p>Once again we use backward induction.</p>
 <p>We express the Stackelberg problem in terms of <strong>two subproblems</strong>.</p>
 <p>Subproblem 1 is solved by a <strong>continuation Stackelberg leader</strong> at each
@@ -649,13 +656,13 @@ as a function of the vector of natural state variables <span class="math notrans
 </section>
 </section>
 <section id="two-bellman-equations">
-<h2><span class="section-number">41.4. </span>Two Bellman equations<a class="headerlink" href="#two-bellman-equations" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.4. </span>Two Bellman equations<a class="headerlink" href="#two-bellman-equations" title="Link to this heading">#</a></h2>
 <p>We now describe Bellman equations for <span class="math notranslate nohighlight">\(v(y)\)</span> and <span class="math notranslate nohighlight">\(w(z_0)\)</span>.</p>
 <p><strong>Subproblem 1</strong></p>
 <p>The value function <span class="math notranslate nohighlight">\(v(y)\)</span> in subproblem 1 satisfies the Bellman
 equation</p>
 <div class="math notranslate nohighlight" id="equation-bellman-stack">
-<span class="eqno">(41.9)<a class="headerlink" href="#equation-bellman-stack" title="Permalink to this equation">#</a></span>\[v(y) = \max_{u, y^*}  \left\{ - r(y,u) + \beta v(y^*) \right\}\]</div>
+<span class="eqno">(41.9)<a class="headerlink" href="#equation-bellman-stack" title="Link to this equation">#</a></span>\[v(y) = \max_{u, y^*}  \left\{ - r(y,u) + \beta v(y^*) \right\}\]</div>
 <p>where the maximization is subject to</p>
 <div class="math notranslate nohighlight">
 \[
@@ -692,12 +699,12 @@ with respect to <span class="math notranslate nohighlight">\(x_0\)</span>:</p>
 \]</div>
 <p>which implies that</p>
 <div class="math notranslate nohighlight" id="equation-eq-subprob2x0">
-<span class="eqno">(41.10)<a class="headerlink" href="#equation-eq-subprob2x0" title="Permalink to this equation">#</a></span>\[
+<span class="eqno">(41.10)<a class="headerlink" href="#equation-eq-subprob2x0" title="Link to this equation">#</a></span>\[
 x_0 = - P_{22}^{-1} P_{21} z_0
 \]</div>
 </section>
 <section id="stackelberg-plan-for-duopoly">
-<h2><span class="section-number">41.5. </span>Stackelberg plan for duopoly<a class="headerlink" href="#stackelberg-plan-for-duopoly" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.5. </span>Stackelberg plan for duopoly<a class="headerlink" href="#stackelberg-plan-for-duopoly" title="Link to this heading">#</a></h2>
 <p>Now let’s map our duopoly model into the above setup.</p>
 <p>We  formulate a state vector</p>
 <div class="math notranslate nohighlight">
@@ -727,7 +734,7 @@ for subproblem 2 above.</p>
 firm 1 that sets <span class="math notranslate nohighlight">\(x_0\)</span>.</p>
 <p>But firm 2 manipulates firm 1’s  choice through firm 2’s choice of the sequence <span class="math notranslate nohighlight">\(\vec q_{2,1} = \{q_{2t+1}\}_{t=0}^\infty\)</span>.</p>
 <section id="calculations-to-prepare-duopoly-model">
-<h3><span class="section-number">41.5.1. </span>Calculations to prepare duopoly model<a class="headerlink" href="#calculations-to-prepare-duopoly-model" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.5.1. </span>Calculations to prepare duopoly model<a class="headerlink" href="#calculations-to-prepare-duopoly-model" title="Link to this heading">#</a></h3>
 <p>Now we’ll proceed to cast our duopoly model within the framework of the
 more general linear-quadratic structure described above.</p>
 <p>That will allow us to compute a Stackelberg plan simply by enlisting a
@@ -737,7 +744,7 @@ Riccati equation to solve a linear-quadratic dynamic program.</p>
 control.</p>
 </section>
 <section id="firm-1s-problem">
-<h3><span class="section-number">41.5.2. </span>Firm 1’s problem<a class="headerlink" href="#firm-1s-problem" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.5.2. </span>Firm 1’s problem<a class="headerlink" href="#firm-1s-problem" title="Link to this heading">#</a></h3>
 <p>We again formulate firm 1’s optimum problem in terms of the Lagrangian</p>
 <div class="math notranslate nohighlight">
 \[
@@ -818,7 +825,7 @@ choice of <span class="math notranslate nohighlight">\(\vec q_2\)</span> for our
 </section>
 </section>
 <section id="recursive-representation-of-stackelberg-plan">
-<h2><span class="section-number">41.6. </span>Recursive representation of Stackelberg plan<a class="headerlink" href="#recursive-representation-of-stackelberg-plan" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.6. </span>Recursive representation of Stackelberg plan<a class="headerlink" href="#recursive-representation-of-stackelberg-plan" title="Link to this heading">#</a></h2>
 <p>In order to attain an appropriate representation of the Stackelberg
 leader’s history-dependent plan, we will employ what amounts to a
 version of the <strong>Big K, little k</strong> device often used in
@@ -879,14 +886,14 @@ u_t  = - F \check y_t \equiv - \begin{bmatrix} F_z &amp; F_x \cr \end{bmatrix}
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-finalrule">
-<span class="eqno">(41.11)<a class="headerlink" href="#equation-finalrule" title="Permalink to this equation">#</a></span>\[u_t  = - F_z \check z_t - F_x \sum_{j=1}^t H^t_j z_{t-j} = \sigma_t(\check z^t)\]</div>
+<span class="eqno">(41.11)<a class="headerlink" href="#equation-finalrule" title="Link to this equation">#</a></span>\[u_t  = - F_z \check z_t - F_x \sum_{j=1}^t H^t_j z_{t-j} = \sigma_t(\check z^t)\]</div>
 <p>Representation <a class="reference internal" href="#equation-finalrule">(41.11)</a> confirms that whenever
 <span class="math notranslate nohighlight">\(F_x \neq 0\)</span>, the typical situation, the time <span class="math notranslate nohighlight">\(t\)</span> component
 <span class="math notranslate nohighlight">\(\sigma_t\)</span> of a Stackelberg plan is <strong>history-dependent</strong>, meaning
 that the Stackelberg leader’s choice <span class="math notranslate nohighlight">\(u_t\)</span> depends not just on
 <span class="math notranslate nohighlight">\(\check z_t\)</span> but on components of <span class="math notranslate nohighlight">\(\check z^{t-1}\)</span>.</p>
 <section id="comments-and-interpretations">
-<h3><span class="section-number">41.6.1. </span>Comments and interpretations<a class="headerlink" href="#comments-and-interpretations" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.6.1. </span>Comments and interpretations<a class="headerlink" href="#comments-and-interpretations" title="Link to this heading">#</a></h3>
 <p>Because we set <span class="math notranslate nohighlight">\(\check z_0 = z_0\)</span>, it will turn out that <span class="math notranslate nohighlight">\(z_t = \check z_t\)</span>
 for all <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p>
 <p>Then why did we distinguish <span class="math notranslate nohighlight">\(\check z_t\)</span> from <span class="math notranslate nohighlight">\(z_t\)</span>?</p>
@@ -899,7 +906,7 @@ terms of <span class="math notranslate nohighlight">\(z^t\)</span>.</p>
 </section>
 </section>
 <section id="dynamic-programming-and-time-consistency-of-followers-problem">
-<h2><span class="section-number">41.7. </span>Dynamic programming and time consistency of follower’s problem<a class="headerlink" href="#dynamic-programming-and-time-consistency-of-followers-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.7. </span>Dynamic programming and time consistency of follower’s problem<a class="headerlink" href="#dynamic-programming-and-time-consistency-of-followers-problem" title="Link to this heading">#</a></h2>
 <p>Given the sequence <span class="math notranslate nohighlight">\(\vec q_2\)</span> chosen by the Stackelberg leader in
 our duopoly model, it turns out that the Stackelberg <strong>follower’s</strong>
 problem is recursive in the <em>natural</em> state variables that confront a
@@ -909,7 +916,7 @@ follower at any time <span class="math notranslate nohighlight">\(t \geq 0\)</sp
 follower’s problem that builds on our recursive representation of the
 Stackelberg leader’s plan and our use of the <strong>Big K, little k</strong> idea.</p>
 <section id="recursive-formulation-of-a-followers-problem">
-<h3><span class="section-number">41.7.1. </span>Recursive formulation of a follower’s problem<a class="headerlink" href="#recursive-formulation-of-a-followers-problem" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.7.1. </span>Recursive formulation of a follower’s problem<a class="headerlink" href="#recursive-formulation-of-a-followers-problem" title="Link to this heading">#</a></h3>
 <p>We now use what amounts to another “Big <span class="math notranslate nohighlight">\(K\)</span>, little <span class="math notranslate nohighlight">\(k\)</span>” trick (see
 <a class="reference external" href="https://python-intro.quantecon.org/rational_expectations.html">rational expectations equilibrium</a>)
 to formulate a recursive version of a follower’s problem cast in terms
@@ -955,7 +962,7 @@ X_t = \begin{bmatrix} \tilde y_t \cr q_{1t}  \end{bmatrix}
 \]</div>
 <p>It follows that the follower firm 1 faces law of motion</p>
 <div class="math notranslate nohighlight" id="equation-law-motion">
-<span class="eqno">(41.12)<a class="headerlink" href="#equation-law-motion" title="Permalink to this equation">#</a></span>\[\begin{split}\begin{bmatrix} \tilde y_{t+1} \\
+<span class="eqno">(41.12)<a class="headerlink" href="#equation-law-motion" title="Link to this equation">#</a></span>\[\begin{split}\begin{bmatrix} \tilde y_{t+1} \\
 q_{1t+1} \end{bmatrix} = \begin{bmatrix} A - BF &amp; 0 \\
 0  &amp; 1 \end{bmatrix}  \begin{bmatrix} \tilde y_{t} \\
 q_{1t} \end{bmatrix} + \begin{bmatrix} 0 \cr 1 \end{bmatrix} x_t\end{split}\]</div>
@@ -1004,7 +1011,7 @@ representation of the follower’s problem facing the Stackelberg leader’s
 <span class="math notranslate nohighlight">\(\vec q_2\)</span>.</p>
 </section>
 <section id="time-consistency-of-followers-plan">
-<h3><span class="section-number">41.7.2. </span>Time consistency of follower’s plan<a class="headerlink" href="#time-consistency-of-followers-plan" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.7.2. </span>Time consistency of follower’s plan<a class="headerlink" href="#time-consistency-of-followers-plan" title="Link to this heading">#</a></h3>
 <p>The follower can solve its problem using dynamic programming  because its
 problem is recursive in what for it are the  <strong>natural state variables</strong>,
 namely</p>
@@ -1016,7 +1023,7 @@ namely</p>
 </section>
 </section>
 <section id="computing-stackelberg-plan">
-<h2><span class="section-number">41.8. </span>Computing Stackelberg plan<a class="headerlink" href="#computing-stackelberg-plan" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.8. </span>Computing Stackelberg plan<a class="headerlink" href="#computing-stackelberg-plan" title="Link to this heading">#</a></h2>
 <p>Here is our code to compute a Stackelberg plan via the linear-quadratic
 dynamic program describe above.</p>
 <p>Let’s use it to compute the Stackelberg plan.</p>
@@ -1104,7 +1111,7 @@ F = [[-1.58004454  0.29461313  0.67480938  6.53970594]]
 </div>
 </section>
 <section id="time-series-for-price-and-quantities">
-<h2><span class="section-number">41.9. </span>Time series for price and quantities<a class="headerlink" href="#time-series-for-price-and-quantities" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.9. </span>Time series for price and quantities<a class="headerlink" href="#time-series-for-price-and-quantities" title="Link to this heading">#</a></h2>
 <p>Now let’s use the code to compute and display outcomes as a Stackelberg plan unfolds.</p>
 <p>The following code plots  quantities chosen by the Stackelberg leader and follower, together with the equilibrium output price.</p>
 <div class="cell docutils container">
@@ -1130,7 +1137,7 @@ F = [[-1.58004454  0.29461313  0.67480938  6.53970594]]
 </div>
 </div>
 <section id="value-of-stackelberg-leader">
-<h3><span class="section-number">41.9.1. </span>Value of Stackelberg leader<a class="headerlink" href="#value-of-stackelberg-leader" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.9.1. </span>Value of Stackelberg leader<a class="headerlink" href="#value-of-stackelberg-leader" title="Link to this heading">#</a></h3>
 <p>We’ll compute the  value <span class="math notranslate nohighlight">\(w(x_0)\)</span> attained  by the Stackelberg leader, where <span class="math notranslate nohighlight">\(x_0\)</span> is given by the maximizer <a class="reference internal" href="#equation-eq-subprob2x0">(41.10)</a> of subproblem 2.</p>
 <p>We’ll compute it two ways and get the same answer.</p>
 <p>In addition to being a useful check on the accuracy of our coding, computing things in these two ways helps us think about the structure of the problem.</p>
@@ -1188,7 +1195,7 @@ v_leader_direct (direct) = 150.0324
 </section>
 </section>
 <section id="time-inconsistency-of-stackelberg-plan">
-<h2><span class="section-number">41.10. </span>Time inconsistency of Stackelberg plan<a class="headerlink" href="#time-inconsistency-of-stackelberg-plan" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.10. </span>Time inconsistency of Stackelberg plan<a class="headerlink" href="#time-inconsistency-of-stackelberg-plan" title="Link to this heading">#</a></h2>
 <p>In the code below we compare two values</p>
 <ul class="simple">
 <li><p>the continuation value <span class="math notranslate nohighlight">\(v(y_t) = - y_t' P y_t\)</span> earned by a <strong>continuation
@@ -1251,7 +1258,7 @@ inconsistency of the Stackelberg plan</p>
 <p>Taken together, these outcomes express the time inconsistency of the original time <span class="math notranslate nohighlight">\(0\)</span> Stackelberg leaders’s plan.</p>
 </section>
 <section id="recursive-formulation-of-followers-problem">
-<h2><span class="section-number">41.11. </span>Recursive formulation of follower’s problem<a class="headerlink" href="#recursive-formulation-of-followers-problem" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.11. </span>Recursive formulation of follower’s problem<a class="headerlink" href="#recursive-formulation-of-followers-problem" title="Link to this heading">#</a></h2>
 <p>We now formulate and compute the recursive version of the follower’s
 problem.</p>
 <p>We check that the recursive <strong>Big</strong> <span class="math notranslate nohighlight">\(K\)</span> <strong>, little</strong> <span class="math notranslate nohighlight">\(k\)</span> formulation of the follower’s problem produces the same output path
@@ -1325,7 +1332,7 @@ problem – those without are from the Stackelberg problem</p>
 </div>
 </div>
 <section id="explanation-of-alignment">
-<h3><span class="section-number">41.11.1. </span>Explanation of alignment<a class="headerlink" href="#explanation-of-alignment" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">41.11.1. </span>Explanation of alignment<a class="headerlink" href="#explanation-of-alignment" title="Link to this heading">#</a></h3>
 <p>If we inspect  coefficients in the decision rule <span class="math notranslate nohighlight">\(- \tilde F\)</span>,
 we should be able to  spot why the follower chooses to set <span class="math notranslate nohighlight">\(x_t =
 \tilde x_t\)</span> when it sets <span class="math notranslate nohighlight">\(x_t = - \tilde F X_t\)</span> in
@@ -1517,7 +1524,7 @@ the recursive formulation of the follower problem.</p>
 </section>
 </section>
 <section id="markov-perfect-equilibrium">
-<h2><span class="section-number">41.12. </span>Markov perfect equilibrium<a class="headerlink" href="#markov-perfect-equilibrium" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.12. </span>Markov perfect equilibrium<a class="headerlink" href="#markov-perfect-equilibrium" title="Link to this heading">#</a></h2>
 <p>The <strong>state</strong> vector is</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1676,7 +1683,7 @@ v2 (forward sim) = 133.3303; v2 (direct) = 133.3296
 </div>
 </section>
 <section id="comparing-markov-perfect-equilibrium-and-stackelberg-outcome">
-<h2><span class="section-number">41.13. </span>Comparing Markov perfect equilibrium and Stackelberg outcome<a class="headerlink" href="#comparing-markov-perfect-equilibrium-and-stackelberg-outcome" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">41.13. </span>Comparing Markov perfect equilibrium and Stackelberg outcome<a class="headerlink" href="#comparing-markov-perfect-equilibrium-and-stackelberg-outcome" title="Link to this heading">#</a></h2>
 <p>It is enlightening to compare equilbrium values for firms 1 and 2 under two alternative
 settings:</p>
 <ul class="simple">
@@ -1775,6 +1782,8 @@ vt_MPE(y0) = 133.3296
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -2257,7 +2266,7 @@ vt_MPE(y0) = 133.3296
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>6. Consumption Smoothing with Complete and Incomplete Markets &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'smoothing';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/smoothing.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="7. Tax Smoothing with Complete and Incomplete Markets" href="smoothing_tax.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -200,7 +207,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -251,7 +258,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="consumption-smoothing-with-complete-and-incomplete-markets">
-<h1><span class="section-number">6. </span>Consumption Smoothing with Complete and Incomplete Markets<a class="headerlink" href="#consumption-smoothing-with-complete-and-incomplete-markets" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Consumption Smoothing with Complete and Incomplete Markets<a class="headerlink" href="#consumption-smoothing-with-complete-and-incomplete-markets" title="Link to this heading">#</a></h1>
 <p id="index-0">In addition to what’s in Anaconda, this lecture uses the  library:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -285,7 +292,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </details>
 </div>
 <section id="overview">
-<h2><span class="section-number">6.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This lecture describes two types of consumption-smoothing models.</p>
 <ul class="simple">
 <li><p>one is in the <strong>complete markets</strong> tradition of <a class="reference external" href="https://en.wikipedia.org/wiki/Kenneth_Arrow">Kenneth Arrow</a></p></li>
@@ -319,22 +326,22 @@ is so closely linked to earlier lectures.</p>
 <p>Let’s start with some imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qe</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">la</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="relationship-to-other-lectures">
-<h3><span class="section-number">6.1.1. </span>Relationship to other lectures<a class="headerlink" href="#relationship-to-other-lectures" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.1.1. </span>Relationship to other lectures<a class="headerlink" href="#relationship-to-other-lectures" title="Link to this heading">#</a></h3>
 <p>This lecture can be viewed as a followup to <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">Optimal Savings II: LQ Techniques</a></p>
 <p>This lecture is also a prologomenon to a lecture on tax-smoothing <a class="reference internal" href="smoothing_tax.html"><span class="doc">Tax Smoothing with Complete and Incomplete Markets</span></a></p>
 </section>
 </section>
 <section id="background">
-<h2><span class="section-number">6.2. </span>Background<a class="headerlink" href="#background" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h2>
 <p>Outcomes in consumption-smoothing  models emerge from two
 sources:</p>
 <ul class="simple">
@@ -360,7 +367,7 @@ payoffs depend on next period’s realization of the Markov state.</p>
 one-period return <span class="math notranslate nohighlight">\(\beta^{-1}\)</span>.</p>
 </section>
 <section id="linear-state-space-version-of-complete-markets-model">
-<h2><span class="section-number">6.3. </span>Linear state space version of complete markets model<a class="headerlink" href="#linear-state-space-version-of-complete-markets-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.3. </span>Linear state space version of complete markets model<a class="headerlink" href="#linear-state-space-version-of-complete-markets-model" title="Link to this heading">#</a></h2>
 <p>We’ll study a complete markets model adapted to  a setting with a continuous Markov state like that
 in the <a class="reference external" href="https://python-intro.quantecon.org/perm_income.html">first lecture on the permanent income model</a>.</p>
 <p>In that model</p>
@@ -384,7 +391,7 @@ gross interest rate is <span class="math notranslate nohighlight">\(\beta^{-1}\)
 <p>We make the good guess that   prices
 of one-period ahead Arrow securities are described by the <strong>pricing kernel</strong></p>
 <div class="math notranslate nohighlight" id="equation-cs-14">
-<span class="eqno">(6.1)<a class="headerlink" href="#equation-cs-14" title="Permalink to this equation">#</a></span>\[q_{t+1}(x_{t+1} \,|\, x_t) = \beta \phi(x_{t+1} \,|\, A x_t, CC')\]</div>
+<span class="eqno">(6.1)<a class="headerlink" href="#equation-cs-14" title="Link to this equation">#</a></span>\[q_{t+1}(x_{t+1} \,|\, x_t) = \beta \phi(x_{t+1} \,|\, A x_t, CC')\]</div>
 <p>where <span class="math notranslate nohighlight">\(\phi(\cdot \,|\, \mu, \Sigma)\)</span> is a multivariate Gaussian
 distribution with mean vector <span class="math notranslate nohighlight">\(\mu\)</span> and covariance matrix
 <span class="math notranslate nohighlight">\(\Sigma\)</span>.</p>
@@ -455,10 +462,10 @@ b_t = \mathbb E_t \sum_{j=0}^\infty \beta^j (y_{t+j} - \bar c)
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-cs-15">
-<span class="eqno">(6.2)<a class="headerlink" href="#equation-cs-15" title="Permalink to this equation">#</a></span>\[b_t = S_y (I - \beta A)^{-1} x_t - \frac{1}{1-\beta} \bar c\]</div>
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-cs-15" title="Link to this equation">#</a></span>\[b_t = S_y (I - \beta A)^{-1} x_t - \frac{1}{1-\beta} \bar c\]</div>
 <p>where <span class="math notranslate nohighlight">\(\bar c\)</span> satisfies</p>
 <div class="math notranslate nohighlight" id="equation-cs-16">
-<span class="eqno">(6.3)<a class="headerlink" href="#equation-cs-16" title="Permalink to this equation">#</a></span>\[\bar b_0 = S_y (I - \beta A)^{-1} x_0 - \frac{1}{1 - \beta } \bar c\]</div>
+<span class="eqno">(6.3)<a class="headerlink" href="#equation-cs-16" title="Link to this equation">#</a></span>\[\bar b_0 = S_y (I - \beta A)^{-1} x_0 - \frac{1}{1 - \beta } \bar c\]</div>
 <p>where <span class="math notranslate nohighlight">\(\bar b_0\)</span> is an initial level of the consumer’s debt due at time <span class="math notranslate nohighlight">\(t=0\)</span>, specified
 as a parameter of the problem.</p>
 <p>Thus, in the complete markets version of the consumption-smoothing
@@ -472,7 +479,7 @@ the state <span class="math notranslate nohighlight">\(x_t\)</span> described by
 allows the consumer completely to smooth consumption across time and across states of the world</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">complete_ss</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">S_y</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">complete_ss</span><span class="p">(</span><span class="n">β</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">C</span><span class="p">,</span> <span class="n">S_y</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="mi">12</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes the path of consumption and debt for the previously described</span>
 <span class="sd">    complete markets model where exogenous income follows a linear</span>
@@ -553,7 +560,7 @@ allows the consumer completely to smooth consumption across time and across stat
 </div>
 </div>
 <section id="interpretation-of-graph">
-<h3><span class="section-number">6.3.1. </span>Interpretation of graph<a class="headerlink" href="#interpretation-of-graph" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.3.1. </span>Interpretation of graph<a class="headerlink" href="#interpretation-of-graph" title="Link to this heading">#</a></h3>
 <p>In the above graph, please note that:</p>
 <ul class="simple">
 <li><p>nonfinancial income fluctuates in a stationary manner.</p></li>
@@ -566,13 +573,13 @@ income.</p></li>
 </ul>
 </section>
 <section id="incomplete-markets-version">
-<h3><span class="section-number">6.3.2. </span>Incomplete markets version<a class="headerlink" href="#incomplete-markets-version" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.3.2. </span>Incomplete markets version<a class="headerlink" href="#incomplete-markets-version" title="Link to this heading">#</a></h3>
 <p>The incomplete markets version of the model with nonfinancial income being governed by a linear state space system
 is described in  <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">permanent income model</a>.</p>
 <p>In that incomplete markerts setting, consumption follows a random walk and the consumer’s debt follows a process with a unit root.</p>
 </section>
 <section id="finite-state-markov-income-process">
-<h3><span class="section-number">6.3.3. </span>Finite state Markov income process<a class="headerlink" href="#finite-state-markov-income-process" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.3.3. </span>Finite state Markov income process<a class="headerlink" href="#finite-state-markov-income-process" title="Link to this heading">#</a></h3>
 <p>We now turn to a finite-state Markov version of the model in which the consumer’s  nonfinancial income is an exact function of a Markov state that
 takes one of <span class="math notranslate nohighlight">\(N\)</span> values.</p>
 <p>We’ll start with a setting in which in each version of our consumption-smoothing model, nonfinancial income is governed by a two-state Markov chain
@@ -595,7 +602,7 @@ y_t =
 \end{split}\]</div>
 <p>A consumer wishes to maximize</p>
 <div class="math notranslate nohighlight" id="equation-cs-1">
-<span class="eqno">(6.4)<a class="headerlink" href="#equation-cs-1" title="Permalink to this equation">#</a></span>\[\mathbb E
+<span class="eqno">(6.4)<a class="headerlink" href="#equation-cs-1" title="Link to this equation">#</a></span>\[\mathbb E
 \left[
     \sum_{t=0}^\infty \beta^t u(c_t)
 \right]
@@ -607,7 +614,7 @@ u(c_t) = - (c_t -\gamma)^2
 <p>Here <span class="math notranslate nohighlight">\(\gamma &gt;0\)</span> is a bliss level of consumption</p>
 </section>
 <section id="market-structure">
-<h3><span class="section-number">6.3.4. </span>Market structure<a class="headerlink" href="#market-structure" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.3.4. </span>Market structure<a class="headerlink" href="#market-structure" title="Link to this heading">#</a></h3>
 <p>Our complete and incomplete markets models  differ in how thoroughly the market structure allows a
 consumer to transfer resources across time and Markov states, there
 being more transfer opportunities in the complete markets setting than
@@ -621,7 +628,7 @@ over time and across Markov states</p></li>
 </section>
 </section>
 <section id="model-1-complete-markets">
-<h2><span class="section-number">6.4. </span>Model 1 (complete markets)<a class="headerlink" href="#model-1-complete-markets" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.4. </span>Model 1 (complete markets)<a class="headerlink" href="#model-1-complete-markets" title="Link to this heading">#</a></h2>
 <p>At each date <span class="math notranslate nohighlight">\(t \geq 0\)</span>, the consumer trades a full array of <strong>one-period ahead
 Arrow securities</strong>.</p>
 <p>We assume that prices of these securities are exogenous to the consumer.</p>
@@ -635,7 +642,7 @@ goods.</p>
 <p>The consumer’s budget constraint at <span class="math notranslate nohighlight">\(t \geq 0\)</span> in Markov
 state <span class="math notranslate nohighlight">\(s_t\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-cs-budget1">
-<span class="eqno">(6.5)<a class="headerlink" href="#equation-cs-budget1" title="Permalink to this equation">#</a></span>\[c_t + b_t
+<span class="eqno">(6.5)<a class="headerlink" href="#equation-cs-budget1" title="Link to this equation">#</a></span>\[c_t + b_t
 \leq y(s_t) +
 \sum_j  q(j \,|\, s_t ) \, b_{t+1}( j \,|\, s_t)\]</div>
 <p>where <span class="math notranslate nohighlight">\(b_t\)</span> is the consumer’s one-period debt that falls due at time <span class="math notranslate nohighlight">\(t\)</span> and  <span class="math notranslate nohighlight">\(b_{t+1}(j\,|\, s_t)\)</span> are the consumer’s time
@@ -651,7 +658,7 @@ We shall discuss such debt limits in another lecture.</p>
 <p>A natural analog of Hall’s assumption that the one-period risk-free gross
 interest rate is <span class="math notranslate nohighlight">\(\beta^{-1}\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-cs-2">
-<span class="eqno">(6.6)<a class="headerlink" href="#equation-cs-2" title="Permalink to this equation">#</a></span>\[q(j \,|\, i) = \beta P_{ij}\]</div>
+<span class="eqno">(6.6)<a class="headerlink" href="#equation-cs-2" title="Link to this equation">#</a></span>\[q(j \,|\, i) = \beta P_{ij}\]</div>
 <p>To understand how this is a natural analogue, observe that in state <span class="math notranslate nohighlight">\(i\)</span> it costs <span class="math notranslate nohighlight">\(\sum_j q(j \,|\, i)\)</span>  to purchase one unit of consumption next period <em>for sure</em>, i.e., meaning no matter what
 Markov state <span class="math notranslate nohighlight">\(j\)</span> occurs at <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
 <p>Hence the <strong>implied price</strong> of a risk-free claim on one unit of consumption next
@@ -672,19 +679,19 @@ one unit of consumption tomorrow.</p>
 \]</div>
 <p>for all <span class="math notranslate nohighlight">\(s_t, s_{t+1}\)</span> or, under our assumption <a class="reference internal" href="#equation-cs-2">(6.6)</a> about  Arrow security prices,</p>
 <div class="math notranslate nohighlight" id="equation-cs-3">
-<span class="eqno">(6.7)<a class="headerlink" href="#equation-cs-3" title="Permalink to this equation">#</a></span>\[c_{t+1} = c_t\]</div>
+<span class="eqno">(6.7)<a class="headerlink" href="#equation-cs-3" title="Link to this equation">#</a></span>\[c_{t+1} = c_t\]</div>
 <p>Thus, our consumer sets <span class="math notranslate nohighlight">\(c_t = \bar c\)</span> for all <span class="math notranslate nohighlight">\(t \geq 0\)</span> for some value <span class="math notranslate nohighlight">\(\bar c\)</span> that it is our job now to determine along with
 values for <span class="math notranslate nohighlight">\(b_{t+1}(j | s_t = i)\)</span> for <span class="math notranslate nohighlight">\(i=1,2\)</span> and <span class="math notranslate nohighlight">\(j = 1,2\)</span>.</p>
 <p>We’ll use a <em>guess and verify</em> method to determine these objects</p>
 <p><strong>Guess:</strong> We’ll make the plausible guess that</p>
 <div class="math notranslate nohighlight" id="equation-eq-guess">
-<span class="eqno">(6.8)<a class="headerlink" href="#equation-eq-guess" title="Permalink to this equation">#</a></span>\[b_{t+1}(s_{t+1} = j \,|\, s_t = i) = b(j) ,
+<span class="eqno">(6.8)<a class="headerlink" href="#equation-eq-guess" title="Link to this equation">#</a></span>\[b_{t+1}(s_{t+1} = j \,|\, s_t = i) = b(j) ,
         \quad i=1,2; \;\; j= 1,2\]</div>
 <p>so that the amount borrowed today depends only on <em>tomorrow’s</em> Markov state. (Why is this is a plausible guess?)</p>
 <p>To determine <span class="math notranslate nohighlight">\(\bar c\)</span>, we shall deduce implications of the consumer’s budget constraints in each Markov state today and  our guess <a class="reference internal" href="#equation-eq-guess">(6.8)</a> about the consumer’s debt level choices.</p>
 <p>For <span class="math notranslate nohighlight">\(t \geq 1\)</span>, these imply</p>
 <div class="math notranslate nohighlight" id="equation-cs-4a">
-<span class="eqno">(6.9)<a class="headerlink" href="#equation-cs-4a" title="Permalink to this equation">#</a></span>\[\begin{aligned}
+<span class="eqno">(6.9)<a class="headerlink" href="#equation-cs-4a" title="Link to this equation">#</a></span>\[\begin{aligned}
     \bar c + b(1) &amp; = y(1) + q(1\,|\, 1) b(1) + q(2 \,|\, 1)  b(2) \cr
     \bar c + b(2) &amp; = y(2) + q(1\,|\, 2) b(1) + q(2 \,|\, 2) b(2)
 \end{aligned}\]</div>
@@ -716,20 +723,20 @@ state <span class="math notranslate nohighlight">\(s_0 =1\)</span></p>
 <p>(We could instead have assumed that at time <span class="math notranslate nohighlight">\(t=0\)</span> the Markov state <span class="math notranslate nohighlight">\(s_0 = 2\)</span>, which would affect our answer as we shall see)</p>
 <p>Since we have  assumed that <span class="math notranslate nohighlight">\(s_0 = 1\)</span>,  the budget constraint at time <span class="math notranslate nohighlight">\(t=0\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-cs-5">
-<span class="eqno">(6.10)<a class="headerlink" href="#equation-cs-5" title="Permalink to this equation">#</a></span>\[\bar c + b_0 = y(1) + q(1 \,|\, 1) b(1) + q(2\,|\,1) b(2)\]</div>
+<span class="eqno">(6.10)<a class="headerlink" href="#equation-cs-5" title="Link to this equation">#</a></span>\[\bar c + b_0 = y(1) + q(1 \,|\, 1) b(1) + q(2\,|\,1) b(2)\]</div>
 <p>where <span class="math notranslate nohighlight">\(b_0\)</span> is the (exogenous) debt the consumer is assumed to bring into period <span class="math notranslate nohighlight">\(0\)</span></p>
 <p>If we substitute  <a class="reference internal" href="#equation-cs-5">(6.10)</a> into the first equation of <a class="reference internal" href="#equation-cs-4a">(6.9)</a> and rearrange, we
 discover that</p>
 <div class="math notranslate nohighlight" id="equation-cs-6">
-<span class="eqno">(6.11)<a class="headerlink" href="#equation-cs-6" title="Permalink to this equation">#</a></span>\[b(1) = b_0\]</div>
+<span class="eqno">(6.11)<a class="headerlink" href="#equation-cs-6" title="Link to this equation">#</a></span>\[b(1) = b_0\]</div>
 <p>We can then use the second equation of <a class="reference internal" href="#equation-cs-4a">(6.9)</a>  to deduce the restriction</p>
 <div class="math notranslate nohighlight" id="equation-cs-7">
-<span class="eqno">(6.12)<a class="headerlink" href="#equation-cs-7" title="Permalink to this equation">#</a></span>\[y(1) - y(2) + [q(1\,|\, 1) - q(1\,|\, 2) - 1 ] b_0 +
+<span class="eqno">(6.12)<a class="headerlink" href="#equation-cs-7" title="Link to this equation">#</a></span>\[y(1) - y(2) + [q(1\,|\, 1) - q(1\,|\, 2) - 1 ] b_0 +
 [q(2\,|\,1) + 1 - q(2 \,|\, 2) ] b(2) = 0 ,\]</div>
 <p>an equation that we can solve for the unknown <span class="math notranslate nohighlight">\(b(2)\)</span>.</p>
 <p>Knowing <span class="math notranslate nohighlight">\(b(1)\)</span> and <span class="math notranslate nohighlight">\(b(2)\)</span>, we can solve equation <a class="reference internal" href="#equation-cs-5">(6.10)</a>  for the constant level of consumption <span class="math notranslate nohighlight">\(\bar c\)</span>.</p>
 <section id="key-outcomes">
-<h3><span class="section-number">6.4.1. </span>Key outcomes<a class="headerlink" href="#key-outcomes" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.4.1. </span>Key outcomes<a class="headerlink" href="#key-outcomes" title="Link to this heading">#</a></h3>
 <p>The preceding calculations indicate that in the complete markets version
 of our model, we obtain the following striking results:</p>
 <ul class="simple">
@@ -751,18 +758,18 @@ values.</p></li>
 </ul>
 </section>
 <section id="code">
-<h3><span class="section-number">6.4.2. </span>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.4.2. </span>Code<a class="headerlink" href="#code" title="Link to this heading">#</a></h3>
 <p>Here’s some code that, among other things, contains a function called <code class="docutils literal notranslate"><span class="pre">consumption_complete()</span></code>.</p>
 <p>This function computes <span class="math notranslate nohighlight">\(\{ b(i) \}_{i=1}^{N}, \bar c\)</span> as outcomes given a set of parameters for the general case with <span class="math notranslate nohighlight">\(N\)</span> Markov states
 under the assumption of complete markets</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ConsumptionProblem</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ConsumptionProblem</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The data for a consumption problem, including some default values.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">β</span><span class="o">=</span><span class="mf">.96</span><span class="p">,</span>
                  <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
                  <span class="n">b0</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
@@ -785,7 +792,7 @@ under the assumption of complete markets</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">init</span> <span class="o">=</span> <span class="n">init</span>
 
-    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N_simul</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N_simul</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -800,7 +807,7 @@ under the assumption of complete markets</p>
         <span class="k">return</span> <span class="n">s_path</span>
 
 
-<span class="k">def</span> <span class="nf">consumption_complete</span><span class="p">(</span><span class="n">cp</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">consumption_complete</span><span class="p">(</span><span class="n">cp</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes endogenous values for the complete market case.</span>
 
@@ -846,7 +853,7 @@ under the assumption of complete markets</p>
     <span class="k">return</span> <span class="n">c_bar</span><span class="p">,</span> <span class="n">b</span>
 
 
-<span class="k">def</span> <span class="nf">consumption_incomplete</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">s_path</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">consumption_incomplete</span><span class="p">(</span><span class="n">cp</span><span class="p">,</span> <span class="n">s_path</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computes endogenous values for the incomplete market case.</span>
 
@@ -902,7 +909,7 @@ from an incomplete markets model in the spirit of Hall <span id="id3">[<a class=
 </section>
 </section>
 <section id="model-2-one-period-risk-free-debt-only">
-<h2><span class="section-number">6.5. </span>Model 2 (one-period risk-free debt only)<a class="headerlink" href="#model-2-one-period-risk-free-debt-only" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">6.5. </span>Model 2 (one-period risk-free debt only)<a class="headerlink" href="#model-2-one-period-risk-free-debt-only" title="Link to this heading">#</a></h2>
 <p>This is a version of the original model of Hall (1978)
 in which the consumer’s ability to substitute intertemporally is
 constrained by his ability to buy or sell only one security, a risk-free
@@ -923,15 +930,15 @@ on one unit of time consumption at time <span class="math notranslate nohighligh
 \]</div>
 <p>For our assumed quadratic utility function this implies</p>
 <div class="math notranslate nohighlight" id="equation-cs-8">
-<span class="eqno">(6.13)<a class="headerlink" href="#equation-cs-8" title="Permalink to this equation">#</a></span>\[\sum_j c_{t+1,j} P_{ij} = c_{t,i}\]</div>
+<span class="eqno">(6.13)<a class="headerlink" href="#equation-cs-8" title="Link to this equation">#</a></span>\[\sum_j c_{t+1,j} P_{ij} = c_{t,i}\]</div>
 <p>which for our finite-state Markov setting is Hall’s (1978) conclusion that consumption follows a random walk.</p>
 <p>As we saw in  our <a class="reference external" href="https://python-intro.quantecon.org/perm_income.html">first lecture on the permanent income model</a>,
 this leads to</p>
 <div class="math notranslate nohighlight" id="equation-cs-9">
-<span class="eqno">(6.14)<a class="headerlink" href="#equation-cs-9" title="Permalink to this equation">#</a></span>\[b_t = \mathbb E_t \sum_{j=0}^\infty \beta^j y_{t+j} - (1 -\beta)^{-1} c_t\]</div>
+<span class="eqno">(6.14)<a class="headerlink" href="#equation-cs-9" title="Link to this equation">#</a></span>\[b_t = \mathbb E_t \sum_{j=0}^\infty \beta^j y_{t+j} - (1 -\beta)^{-1} c_t\]</div>
 <p>and</p>
 <div class="math notranslate nohighlight" id="equation-cs-10">
-<span class="eqno">(6.15)<a class="headerlink" href="#equation-cs-10" title="Permalink to this equation">#</a></span>\[c_t = (1-\beta)
+<span class="eqno">(6.15)<a class="headerlink" href="#equation-cs-10" title="Link to this equation">#</a></span>\[c_t = (1-\beta)
     \left[
         \mathbb E_t \sum_{j=0}^\infty \beta^j y_{t+j} - b_t
     \right]\]</div>
@@ -939,7 +946,7 @@ this leads to</p>
 of the expected present value of nonfinancial income <span class="math notranslate nohighlight">\(\mathbb E_t \sum_{j=0}^\infty \beta^j y_{t+j}\)</span> and financial wealth <span class="math notranslate nohighlight">\(-b_t\)</span>.</p>
 <p>Substituting <a class="reference internal" href="#equation-cs-10">(6.15)</a>  into the one-period budget constraint and rearranging leads to</p>
 <div class="math notranslate nohighlight" id="equation-cs-11">
-<span class="eqno">(6.16)<a class="headerlink" href="#equation-cs-11" title="Permalink to this equation">#</a></span>\[b_{t+1} - b_t
+<span class="eqno">(6.16)<a class="headerlink" href="#equation-cs-11" title="Link to this equation">#</a></span>\[b_{t+1} - b_t
 = \beta^{-1} \left[ (1-\beta)
 \mathbb E_t \sum_{j=0}^\infty\beta^j y_{t+j} - y_t    \right]\]</div>
 <p>Now let’s calculate the key term <span class="math notranslate nohighlight">\(\mathbb E_t \sum_{j=0}^\infty\beta^j y_{t+j}\)</span> in our finite Markov chain setting.</p>
@@ -976,12 +983,12 @@ v_t :=  y_t + \beta \mathbb E_t v_{t+1}
 \]</div>
 <p>In our finite Markov chain setting, from expression  <a class="reference internal" href="#equation-cs-10">(6.15)</a>,  consumption at date <span class="math notranslate nohighlight">\(t\)</span> when debt is <span class="math notranslate nohighlight">\(b_t\)</span> and the Markov state today is <span class="math notranslate nohighlight">\(s_t = i\)</span> is evidently</p>
 <div class="math notranslate nohighlight" id="equation-cs-12">
-<span class="eqno">(6.17)<a class="headerlink" href="#equation-cs-12" title="Permalink to this equation">#</a></span>\[c(b_t, i) =  (1 - \beta) \left( [(I - \beta P)^{-1} \vec y]_i - b_t \right)\]</div>
+<span class="eqno">(6.17)<a class="headerlink" href="#equation-cs-12" title="Link to this equation">#</a></span>\[c(b_t, i) =  (1 - \beta) \left( [(I - \beta P)^{-1} \vec y]_i - b_t \right)\]</div>
 <p>and the increment to debt is</p>
 <div class="math notranslate nohighlight" id="equation-cs-13">
-<span class="eqno">(6.18)<a class="headerlink" href="#equation-cs-13" title="Permalink to this equation">#</a></span>\[b_{t+1} - b_t = \beta^{-1} [ (1- \beta) v(i) - y(i) ]\]</div>
+<span class="eqno">(6.18)<a class="headerlink" href="#equation-cs-13" title="Link to this equation">#</a></span>\[b_{t+1} - b_t = \beta^{-1} [ (1- \beta) v(i) - y(i) ]\]</div>
 <section id="summary-of-outcomes">
-<h3><span class="section-number">6.5.1. </span>Summary of outcomes<a class="headerlink" href="#summary-of-outcomes" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.5.1. </span>Summary of outcomes<a class="headerlink" href="#summary-of-outcomes" title="Link to this heading">#</a></h3>
 <p>In contrast to outcomes in the complete markets model, in the incomplete
 markets model</p>
 <ul class="simple">
@@ -998,7 +1005,7 @@ time in consumption.</p></li>
 </ul>
 </section>
 <section id="the-incomplete-markets-model">
-<h3><span class="section-number">6.5.2. </span>The incomplete markets model<a class="headerlink" href="#the-incomplete-markets-model" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.5.2. </span>The incomplete markets model<a class="headerlink" href="#the-incomplete-markets-model" title="Link to this heading">#</a></h3>
 <p>The code above also contains a function called <code class="docutils literal notranslate"><span class="pre">consumption_incomplete()</span></code> that uses <a class="reference internal" href="#equation-cs-12">(6.17)</a> and <a class="reference internal" href="#equation-cs-13">(6.18)</a> to</p>
 <ul class="simple">
 <li><p>simulate paths of <span class="math notranslate nohighlight">\(y_t, c_t, b_{t+1}\)</span></p></li>
@@ -1053,7 +1060,7 @@ markets economy.</p></li>
 </ul>
 </section>
 <section id="a-sequel">
-<h3><span class="section-number">6.5.3. </span>A sequel<a class="headerlink" href="#a-sequel" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">6.5.3. </span>A sequel<a class="headerlink" href="#a-sequel" title="Link to this heading">#</a></h3>
 <p>In <a class="reference internal" href="smoothing_tax.html"><span class="doc">tax smoothing with complete and incomplete markets</span></a>, we reinterpret the mathematics and Python code presented in this lecture in order
 to construct tax-smoothing models in the incomplete markets tradition of Barro <span id="id4">[<a class="reference internal" href="zreferences.html#id139" title="Robert J Barro. On the Determination of the Public Debt. Journal of Political Economy, 87(5):940–971, 1979.">Barro, 1979</a>]</span> as well as in the complete markets tradition of Lucas and Stokey <span id="id5">[<a class="reference internal" href="zreferences.html#id179" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span>.</p>
 </section>
@@ -1091,6 +1098,8 @@ to construct tax-smoothing models in the incomplete markets tradition of Barro <
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -1573,7 +1582,7 @@ to construct tax-smoothing models in the incomplete markets tradition of Barro <
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

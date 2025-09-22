@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>4. Discrete State Dynamic Programming &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'discrete_dp';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/discrete_dp.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="5. Information and Consumption Smoothing" href="cons_news.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -226,7 +233,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -277,7 +284,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="discrete-state-dynamic-programming">
-<h1><span class="section-number">4. </span><span class="target" id="index-0"></span>Discrete State Dynamic Programming<a class="headerlink" href="#discrete-state-dynamic-programming" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">4. </span><span class="target" id="index-0"></span>Discrete State Dynamic Programming<a class="headerlink" href="#discrete-state-dynamic-programming" title="Link to this heading">#</a></h1>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -311,7 +318,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </details>
 </div>
 <section id="overview">
-<h2><span class="section-number">4.1. </span>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>In this lecture we discuss a family of dynamic programming problems with the following features:</p>
 <ol class="arabic simple">
 <li><p>a discrete state space and discrete choices (actions)</p></li>
@@ -339,18 +346,18 @@ applications</p></li>
 <p>Let’s start with some imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">quantecon</span> <span class="k">as</span> <span class="nn">qe</span>
-<span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">sparse</span>
-<span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">compute_fixed_point</span>
-<span class="kn">from</span> <span class="nn">quantecon.markov</span> <span class="kn">import</span> <span class="n">DiscreteDP</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">qe</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sparse</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="kn">import</span> <span class="n">compute_fixed_point</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quantecon.markov</span><span class="w"> </span><span class="kn">import</span> <span class="n">DiscreteDP</span>
 </pre></div>
 </div>
 </div>
 </div>
 <section id="how-to-read-this-lecture">
-<h3><span class="section-number">4.1.1. </span>How to read this lecture<a class="headerlink" href="#how-to-read-this-lecture" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.1.1. </span>How to read this lecture<a class="headerlink" href="#how-to-read-this-lecture" title="Link to this heading">#</a></h3>
 <p>We use dynamic programming many applied lectures, such as</p>
 <ul class="simple">
 <li><p>The <a class="reference external" href="https://python-intro.quantecon.org/short_path.html">shortest path lecture</a></p></li>
@@ -359,7 +366,7 @@ applications</p></li>
 <p>The objective of this lecture is to provide a more systematic and theoretical treatment, including algorithms and implementation while focusing on the discrete case.</p>
 </section>
 <section id="code">
-<h3><span class="section-number">4.1.2. </span>Code<a class="headerlink" href="#code" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.1.2. </span>Code<a class="headerlink" href="#code" title="Link to this heading">#</a></h3>
 <p>Among other things, it offers</p>
 <ul class="simple">
 <li><p>a flexible, well-designed interface</p></li>
@@ -371,7 +378,7 @@ applications</p></li>
 seamlessly if you are using <a class="reference external" href="https://www.anaconda.com/download/">Anaconda</a> as <a class="reference external" href="https://python-programming.quantecon.org/getting_started.html">suggested</a>.</p>
 </section>
 <section id="references">
-<h3><span class="section-number">4.1.3. </span>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.1.3. </span>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h3>
 <p>For background reading on dynamic programming and additional applications, see, for example,</p>
 <ul class="simple">
 <li><p><span id="id1">[<a class="reference internal" href="zreferences.html#id176" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">Ljungqvist and Sargent, 2018</a>]</span></p></li>
@@ -385,11 +392,11 @@ seamlessly if you are using <a class="reference external" href="https://www.anac
 </section>
 </section>
 <section id="discrete-dps">
-<span id="id7"></span><h2><span class="section-number">4.2. </span>Discrete DPs<a class="headerlink" href="#discrete-dps" title="Permalink to this heading">#</a></h2>
+<span id="id7"></span><h2><span class="section-number">4.2. </span>Discrete DPs<a class="headerlink" href="#discrete-dps" title="Link to this heading">#</a></h2>
 <p>Loosely speaking, a discrete DP is a maximization problem with an objective
 function of the form</p>
 <div class="math notranslate nohighlight" id="equation-dp-objective">
-<span class="eqno">(4.1)<a class="headerlink" href="#equation-dp-objective" title="Permalink to this equation">#</a></span>\[\mathbb{E}
+<span class="eqno">(4.1)<a class="headerlink" href="#equation-dp-objective" title="Link to this equation">#</a></span>\[\mathbb{E}
 \sum_{t = 0}^{\infty} \beta^t r(s_t, a_t)\]</div>
 <p>where</p>
 <ul class="simple">
@@ -409,7 +416,7 @@ vs favorable positioning of the future state (modulo randomness).</p>
 <li><p>exercising an option now vs waiting</p></li>
 </ul>
 <section id="policies">
-<h3><span class="section-number">4.2.1. </span>Policies<a class="headerlink" href="#policies" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.2.1. </span>Policies<a class="headerlink" href="#policies" title="Link to this heading">#</a></h3>
 <p>The most fruitful way to think about solutions to discrete DP problems is to compare <em>policies</em>.</p>
 <p>In general, a policy is a randomized map from past actions and states to
 current action.</p>
@@ -427,7 +434,7 @@ current action.</p>
 <p>Let’s now step through these ideas more carefully.</p>
 </section>
 <section id="formal-definition">
-<h3><span class="section-number">4.2.2. </span>Formal definition<a class="headerlink" href="#formal-definition" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.2.2. </span>Formal definition<a class="headerlink" href="#formal-definition" title="Link to this heading">#</a></h3>
 <p>Formally, a discrete dynamic program consists of the following components:</p>
 <ol class="arabic">
 <li><p>A finite set of <em>states</em> <span class="math notranslate nohighlight">\(S = \{0, \ldots, n-1\}\)</span>.</p></li>
@@ -459,7 +466,7 @@ current action.</p>
 <p>It gives transition probabilities of the <em>controlled chain</em> when we follow policy <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
 <p>If we think of <span class="math notranslate nohighlight">\(r_\sigma\)</span> as a column vector, then so is <span class="math notranslate nohighlight">\(Q_\sigma^t r_\sigma\)</span>, and the <span class="math notranslate nohighlight">\(s\)</span>-th row of the latter has the interpretation</p>
 <div class="math notranslate nohighlight" id="equation-ddp-expec">
-<span class="eqno">(4.2)<a class="headerlink" href="#equation-ddp-expec" title="Permalink to this equation">#</a></span>\[(Q_\sigma^t r_\sigma)(s) = \mathbb E [ r(s_t, \sigma(s_t)) \mid s_0 = s ]
+<span class="eqno">(4.2)<a class="headerlink" href="#equation-ddp-expec" title="Link to this equation">#</a></span>\[(Q_\sigma^t r_\sigma)(s) = \mathbb E [ r(s_t, \sigma(s_t)) \mid s_0 = s ]
 \quad \text{when } \{s_t\} \sim Q_\sigma\]</div>
 <p>Comments</p>
 <ul class="simple">
@@ -470,7 +477,7 @@ current action.</p>
 <p>This is natural because they are in one to one correspondence.</p>
 </section>
 <section id="value-and-optimality">
-<h3><span class="section-number">4.2.3. </span>Value and optimality<a class="headerlink" href="#value-and-optimality" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.2.3. </span>Value and optimality<a class="headerlink" href="#value-and-optimality" title="Link to this heading">#</a></h3>
 <p>Let <span class="math notranslate nohighlight">\(v_{\sigma}(s)\)</span> denote the discounted sum of expected reward flows from policy <span class="math notranslate nohighlight">\(\sigma\)</span>
 when the initial state is <span class="math notranslate nohighlight">\(s\)</span>.</p>
 <p>To calculate this quantity we pass the expectation through the sum in
@@ -502,7 +509,7 @@ v^*(s) = \max_{\sigma \in \Sigma} v_{\sigma}(s)
 <p>As discussed in detail below, optimal policies are precisely those that are <span class="math notranslate nohighlight">\(v^*\)</span>-greedy.</p>
 </section>
 <section id="two-operators">
-<h3><span class="section-number">4.2.4. </span>Two operators<a class="headerlink" href="#two-operators" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.2.4. </span>Two operators<a class="headerlink" href="#two-operators" title="Link to this heading">#</a></h3>
 <p>It is useful to define the following operators:</p>
 <ul class="simple">
 <li><p>The <em>Bellman operator</em> <span class="math notranslate nohighlight">\(T\colon \mathbb{R}^S \to \mathbb{R}^S\)</span>
@@ -543,7 +550,7 @@ similarly for <span class="math notranslate nohighlight">\(T_\sigma\)</span></p>
 <p>For proofs of these results and those in the next section, see, for example, <a class="reference external" href="http://johnstachurski.net/edtc.html">EDTC</a>, chapter 10.</p>
 </section>
 <section id="the-bellman-equation-and-the-principle-of-optimality">
-<h3><span class="section-number">4.2.5. </span>The Bellman equation and the principle of optimality<a class="headerlink" href="#the-bellman-equation-and-the-principle-of-optimality" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.2.5. </span>The Bellman equation and the principle of optimality<a class="headerlink" href="#the-bellman-equation-and-the-principle-of-optimality" title="Link to this heading">#</a></h3>
 <p>The main principle of the theory of dynamic programming is that</p>
 <ul class="simple">
 <li><p>the optimal value function <span class="math notranslate nohighlight">\(v^*\)</span> is a unique solution to the <em>Bellman equation</em></p></li>
@@ -572,7 +579,7 @@ v(s) = \max_{a \in A(s)}
 </section>
 </section>
 <section id="solving-discrete-dps">
-<h2><span class="section-number">4.3. </span>Solving discrete DPs<a class="headerlink" href="#solving-discrete-dps" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.3. </span>Solving discrete DPs<a class="headerlink" href="#solving-discrete-dps" title="Link to this heading">#</a></h2>
 <p>Now that the theory has been set out, let’s turn to solution methods.</p>
 <p>The code for solving discrete DPs is available in <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/markov/ddp.py">ddp.py</a> from the <a class="reference external" href="http://quantecon.org/quantecon-py">QuantEcon.py</a> code library.</p>
 <p>It implements the three most important solution methods for discrete dynamic programs, namely</p>
@@ -583,14 +590,14 @@ v(s) = \max_{a \in A(s)}
 </ul>
 <p>Let’s briefly review these algorithms and their implementation.</p>
 <section id="value-function-iteration">
-<h3><span class="section-number">4.3.1. </span>Value function iteration<a class="headerlink" href="#value-function-iteration" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.3.1. </span>Value function iteration<a class="headerlink" href="#value-function-iteration" title="Link to this heading">#</a></h3>
 <p>Perhaps the most familiar method for solving all manner of dynamic programs is value function iteration.</p>
 <p>This algorithm uses the fact that the Bellman operator <span class="math notranslate nohighlight">\(T\)</span> is a contraction mapping with fixed point <span class="math notranslate nohighlight">\(v^*\)</span>.</p>
 <p>Hence, iterative application of <span class="math notranslate nohighlight">\(T\)</span> to any initial function <span class="math notranslate nohighlight">\(v^0 \colon S \to \mathbb R\)</span> converges to <span class="math notranslate nohighlight">\(v^*\)</span>.</p>
 <p>The details of the algorithm can be found in <a class="reference internal" href="#ddp-algorithms"><span class="std std-ref">the appendix</span></a>.</p>
 </section>
 <section id="policy-function-iteration">
-<h3><span class="section-number">4.3.2. </span>Policy function iteration<a class="headerlink" href="#policy-function-iteration" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.3.2. </span>Policy function iteration<a class="headerlink" href="#policy-function-iteration" title="Link to this heading">#</a></h3>
 <p>This routine, also known as Howard’s policy improvement algorithm, exploits more closely the particular structure of a discrete DP problem.</p>
 <p>Each iteration consists of</p>
 <ol class="arabic simple">
@@ -604,7 +611,7 @@ v(s) = \max_{a \in A(s)}
 <p>The details of the algorithm can be found in <a class="reference internal" href="#ddp-algorithms"><span class="std std-ref">the appendix</span></a>.</p>
 </section>
 <section id="modified-policy-function-iteration">
-<h3><span class="section-number">4.3.3. </span>Modified policy function iteration<a class="headerlink" href="#modified-policy-function-iteration" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.3.3. </span>Modified policy function iteration<a class="headerlink" href="#modified-policy-function-iteration" title="Link to this heading">#</a></h3>
 <p>Modified policy iteration replaces the policy evaluation step in policy iteration with “partial policy evaluation”.</p>
 <p>The latter computes an approximation to the value of a policy <span class="math notranslate nohighlight">\(\sigma\)</span> by iterating <span class="math notranslate nohighlight">\(T_{\sigma}\)</span> for a specified number of times.</p>
 <p>This approach can be useful when the state space is very large and the linear system in the policy evaluation step of policy iteration is correspondingly difficult to solve.</p>
@@ -612,7 +619,7 @@ v(s) = \max_{a \in A(s)}
 </section>
 </section>
 <section id="example-a-growth-model">
-<span id="ddp-eg-gm"></span><h2><span class="section-number">4.4. </span>Example: A growth model<a class="headerlink" href="#example-a-growth-model" title="Permalink to this heading">#</a></h2>
+<span id="ddp-eg-gm"></span><h2><span class="section-number">4.4. </span>Example: A growth model<a class="headerlink" href="#example-a-growth-model" title="Link to this heading">#</a></h2>
 <p>Let’s consider a simple consumption-saving model.</p>
 <p>A single household either consumes or stores its own output of a single consumption good.</p>
 <p>The household starts each period with current stock <span class="math notranslate nohighlight">\(s\)</span>.</p>
@@ -631,7 +638,7 @@ U \sim U[0, \ldots, B]
 \]</div>
 <p>The discount factor is <span class="math notranslate nohighlight">\(\beta \in [0, 1)\)</span>.</p>
 <section id="discrete-dp-representation">
-<h3><span class="section-number">4.4.1. </span>Discrete DP representation<a class="headerlink" href="#discrete-dp-representation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.4.1. </span>Discrete DP representation<a class="headerlink" href="#discrete-dp-representation" title="Link to this heading">#</a></h3>
 <p>We want to represent this model in the format of a discrete dynamic program.</p>
 <p>To this end, we take</p>
 <ul class="simple">
@@ -651,7 +658,7 @@ U \sim U[0, \ldots, B]
 <li><p>the transition probabilities to be</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-ddp-def-ogq">
-<span class="eqno">(4.3)<a class="headerlink" href="#equation-ddp-def-ogq" title="Permalink to this equation">#</a></span>\[\begin{split}Q(s, a, s') :=
+<span class="eqno">(4.3)<a class="headerlink" href="#equation-ddp-def-ogq" title="Link to this equation">#</a></span>\[\begin{split}Q(s, a, s') :=
 \begin{cases}
     \frac{1}{B + 1} &amp; \text{if } a \leq s' \leq a + B
     \\
@@ -659,7 +666,7 @@ U \sim U[0, \ldots, B]
 \end{cases}\end{split}\]</div>
 </section>
 <section id="defining-a-discretedp-instance">
-<h3><span class="section-number">4.4.2. </span>Defining a DiscreteDP instance<a class="headerlink" href="#defining-a-discretedp-instance" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.4.2. </span>Defining a DiscreteDP instance<a class="headerlink" href="#defining-a-discretedp-instance" title="Link to this heading">#</a></h3>
 <p>This information will be used to create an instance of DiscreteDP by passing
 the following information</p>
 <ol class="arabic simple">
@@ -679,9 +686,9 @@ the following information</p>
 <p>The following code sets up these objects for us</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SimpleOG</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">SimpleOG</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">α</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">β</span><span class="o">=</span><span class="mf">0.9</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set up R, Q and β, the three elements that define an instance of</span>
 <span class="sd">        the DiscreteDP class.</span>
@@ -697,10 +704,10 @@ the following information</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">populate_Q</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">populate_R</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">u</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">u</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">c</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">α</span>
 
-    <span class="k">def</span> <span class="nf">populate_R</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">populate_R</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Populate the R matrix, with R[s, a] = -np.inf for infeasible</span>
 <span class="sd">        state-action pairs.</span>
@@ -709,7 +716,7 @@ the following information</p>
             <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">R</span><span class="p">[</span><span class="n">s</span><span class="p">,</span> <span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">u</span><span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="n">a</span><span class="p">)</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;=</span> <span class="n">s</span> <span class="k">else</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span>
 
-    <span class="k">def</span> <span class="nf">populate_Q</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">populate_Q</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Populate the Q matrix by setting</span>
 
@@ -838,7 +845,8 @@ can easily simulate it, compute its stationary distribution and so on.</p>
 </div>
 <p>Here’s the same information in a bar graph</p>
 <figure class="align-default">
-<a class="reference internal image-reference" href="_images/finite_dp_simple_og.png"><img alt="_images/finite_dp_simple_og.png" src="_images/finite_dp_simple_og.png" style="width: 637.6999999999999px; height: 338.09999999999997px;" /></a>
+<a class="reference internal image-reference" href="_images/finite_dp_simple_og.png"><img alt="_images/finite_dp_simple_og.png" src="_images/finite_dp_simple_og.png" style="width: 637.6999999999999px; height: 338.09999999999997px;" />
+</a>
 </figure>
 <p>What happens if the agent is more patient?</p>
 <div class="cell docutils container">
@@ -860,11 +868,12 @@ can easily simulate it, compute its stationary distribution and so on.</p>
 </div>
 <p>If we look at the bar graph we can see the rightward shift in probability mass</p>
 <figure class="align-default">
-<a class="reference internal image-reference" href="_images/finite_dp_simple_og2.png"><img alt="_images/finite_dp_simple_og2.png" src="_images/finite_dp_simple_og2.png" style="width: 631.4px; height: 361.2px;" /></a>
+<a class="reference internal image-reference" href="_images/finite_dp_simple_og2.png"><img alt="_images/finite_dp_simple_og2.png" src="_images/finite_dp_simple_og2.png" style="width: 631.4px; height: 361.2px;" />
+</a>
 </figure>
 </section>
 <section id="state-action-pair-formulation">
-<h3><span class="section-number">4.4.3. </span>State-action pair formulation<a class="headerlink" href="#state-action-pair-formulation" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.4.3. </span>State-action pair formulation<a class="headerlink" href="#state-action-pair-formulation" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">DiscreteDP</span></code> class in fact, provides a second interface to set up an instance.</p>
 <p>One of the advantages of this alternative set up is that it permits the use of a sparse matrix for <code class="docutils literal notranslate"><span class="pre">Q</span></code>.</p>
 <p>(An example of using sparse matrices is given in the exercises below)</p>
@@ -881,7 +890,7 @@ can easily simulate it, compute its stationary distribution and so on.</p>
 <span class="n">n</span> <span class="o">=</span> <span class="n">B</span> <span class="o">+</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span>
 <span class="n">m</span> <span class="o">=</span> <span class="n">M</span> <span class="o">+</span> <span class="mi">1</span>
 
-<span class="k">def</span> <span class="nf">u</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">u</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">c</span><span class="o">**</span><span class="n">α</span>
 
 <span class="n">s_indices</span> <span class="o">=</span> <span class="p">[]</span>
@@ -908,14 +917,14 @@ can easily simulate it, compute its stationary distribution and so on.</p>
 </section>
 </section>
 <section id="exercises">
-<h2><span class="section-number">4.5. </span>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.5. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>In the <a class="reference external" href="https://python-intro.quantecon.org/optgrowth.html">stochastic optimal growth lecture</a> from our introductory lecture series, we solve a benchmark model that has an analytical solution.</p>
 <p>The exercise is to replicate this solution using <code class="docutils literal notranslate"><span class="pre">DiscreteDP</span></code>.</p>
 </section>
 <section id="solutions">
-<h2><span class="section-number">4.6. </span>Solutions<a class="headerlink" href="#solutions" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">4.6. </span>Solutions<a class="headerlink" href="#solutions" title="Link to this heading">#</a></h2>
 <section id="setup">
-<h3><span class="section-number">4.6.1. </span>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.6.1. </span>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h3>
 <p>Details of the model can be found in <a class="reference external" href="https://python-intro.quantecon.org/optgrowth.html">the lecture on optimal growth</a>.</p>
 <p>We let <span class="math notranslate nohighlight">\(f(k) = k^{\alpha}\)</span> with <span class="math notranslate nohighlight">\(\alpha = 0.65\)</span>, <span class="math notranslate nohighlight">\(u(c) =
 \log c\)</span>, and <span class="math notranslate nohighlight">\(\beta = 0.95\)</span></p>
@@ -1021,7 +1030,7 @@ the current case)</p>
 <p>As <a class="reference external" href="https://python-programming.quantecon.org/need_for_speed.html#numba-p-c-vectorization">noted</a>, however, vectorization is memory consumptive, and it can be prohibitively so for grids with large size.</p>
 </section>
 <section id="solving-the-model">
-<h3><span class="section-number">4.6.2. </span>Solving the model<a class="headerlink" href="#solving-the-model" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.6.2. </span>Solving the model<a class="headerlink" href="#solving-the-model" title="Link to this heading">#</a></h3>
 <p>Solve the dynamic optimization problem:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1050,10 +1059,10 @@ to the corresponding consumption vector.</p>
 <span class="n">c1</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ab</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ab</span><span class="p">)</span> <span class="o">*</span> <span class="n">ab</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ab</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">β</span><span class="p">)</span>
 <span class="n">c2</span> <span class="o">=</span> <span class="n">α</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ab</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">v_star</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">v_star</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">c1</span> <span class="o">+</span> <span class="n">c2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">c_star</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">c_star</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ab</span><span class="p">)</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">α</span>
 </pre></div>
 </div>
@@ -1183,10 +1192,10 @@ really monotone, but the decrements are quite small:</p>
 </div>
 </section>
 <section id="comparison-of-the-solution-methods">
-<h3><span class="section-number">4.6.3. </span>Comparison of the solution methods<a class="headerlink" href="#comparison-of-the-solution-methods" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.6.3. </span>Comparison of the solution methods<a class="headerlink" href="#comparison-of-the-solution-methods" title="Link to this heading">#</a></h3>
 <p>Let us solve the problem with the other two methods.</p>
 <section id="value-iteration">
-<h4><span class="section-number">4.6.3.1. </span>Value iteration<a class="headerlink" href="#value-iteration" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">4.6.3.1. </span>Value iteration<a class="headerlink" href="#value-iteration" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ddp</span><span class="o">.</span><span class="n">epsilon</span> <span class="o">=</span> <span class="mf">1e-4</span>
@@ -1216,7 +1225,7 @@ really monotone, but the decrements are quite small:</p>
 </div>
 </section>
 <section id="modified-policy-iteration">
-<h4><span class="section-number">4.6.3.2. </span>Modified policy iteration<a class="headerlink" href="#modified-policy-iteration" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">4.6.3.2. </span>Modified policy iteration<a class="headerlink" href="#modified-policy-iteration" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">res2</span> <span class="o">=</span> <span class="n">ddp</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;modified_policy_iteration&#39;</span><span class="p">)</span>
@@ -1244,7 +1253,7 @@ really monotone, but the decrements are quite small:</p>
 </div>
 </section>
 <section id="speed-comparison">
-<h4><span class="section-number">4.6.3.3. </span>Speed comparison<a class="headerlink" href="#speed-comparison" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">4.6.3.3. </span>Speed comparison<a class="headerlink" href="#speed-comparison" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">timeit</span> ddp.solve(method=&#39;value_iteration&#39;)
@@ -1270,10 +1279,10 @@ much faster than value iteration.</p>
 </section>
 </section>
 <section id="replication-of-the-figures">
-<h3><span class="section-number">4.6.4. </span>Replication of the figures<a class="headerlink" href="#replication-of-the-figures" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.6.4. </span>Replication of the figures<a class="headerlink" href="#replication-of-the-figures" title="Link to this heading">#</a></h3>
 <p>Using <code class="docutils literal notranslate"><span class="pre">DiscreteDP</span></code> we replicate the figures shown in the lecture.</p>
 <section id="convergence-of-value-iteration">
-<h4><span class="section-number">4.6.4.1. </span>Convergence of value iteration<a class="headerlink" href="#convergence-of-value-iteration" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">4.6.4.1. </span>Convergence of value iteration<a class="headerlink" href="#convergence-of-value-iteration" title="Link to this heading">#</a></h4>
 <p>Let us first visualize the convergence of the value iteration algorithm
 as in the lecture, where we use <code class="docutils literal notranslate"><span class="pre">ddp.bellman_operator</span></code> implemented as
 a method of <code class="docutils literal notranslate"><span class="pre">DiscreteDP</span></code></p>
@@ -1360,7 +1369,7 @@ Iteration    Distance       Elapsed (seconds)
 </div>
 </section>
 <section id="dynamics-of-the-capital-stock">
-<h4><span class="section-number">4.6.4.2. </span>Dynamics of the capital stock<a class="headerlink" href="#dynamics-of-the-capital-stock" title="Permalink to this heading">#</a></h4>
+<h4><span class="section-number">4.6.4.2. </span>Dynamics of the capital stock<a class="headerlink" href="#dynamics-of-the-capital-stock" title="Link to this heading">#</a></h4>
 <p>Finally, let us work on <a class="reference external" href="https://python.quantecon.org/optgrowth.html#exercises">Exercise
 2</a>, where we plot
 the trajectories of the capital stock for three different discount
@@ -1404,7 +1413,7 @@ condition <span class="math notranslate nohighlight">\(k_0 = 0.1\)</span>.</p>
 </section>
 </section>
 <section id="appendix-algorithms">
-<span id="ddp-algorithms"></span><h2><span class="section-number">4.7. </span>Appendix: algorithms<a class="headerlink" href="#appendix-algorithms" title="Permalink to this heading">#</a></h2>
+<span id="ddp-algorithms"></span><h2><span class="section-number">4.7. </span>Appendix: algorithms<a class="headerlink" href="#appendix-algorithms" title="Link to this heading">#</a></h2>
 <p>This appendix covers the details of the solution algorithms implemented for <code class="docutils literal notranslate"><span class="pre">DiscreteDP</span></code>.</p>
 <p>We will make use of the following notions of approximate optimality:</p>
 <ul class="simple">
@@ -1412,7 +1421,7 @@ condition <span class="math notranslate nohighlight">\(k_0 = 0.1\)</span>.</p>
 <li><p>A policy <span class="math notranslate nohighlight">\(\sigma \in \Sigma\)</span> is called <span class="math notranslate nohighlight">\(\varepsilon\)</span>-optimal if <span class="math notranslate nohighlight">\(v_{\sigma}\)</span> is an <span class="math notranslate nohighlight">\(\varepsilon\)</span>-approximation of <span class="math notranslate nohighlight">\(v^*\)</span>.</p></li>
 </ul>
 <section id="id9">
-<h3><span class="section-number">4.7.1. </span>Value iteration<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.7.1. </span>Value iteration<a class="headerlink" href="#id9" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">DiscreteDP</span></code> value iteration method implements value function iteration as
 follows</p>
 <ol class="arabic simple">
@@ -1431,7 +1440,7 @@ then go to step 4; otherwise, set <span class="math notranslate nohighlight">\(i
 terminated if the number of iterations reaches <code class="docutils literal notranslate"><span class="pre">iter_max</span></code>)</p>
 </section>
 <section id="policy-iteration">
-<h3><span class="section-number">4.7.2. </span>Policy iteration<a class="headerlink" href="#policy-iteration" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.7.2. </span>Policy iteration<a class="headerlink" href="#policy-iteration" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">DiscreteDP</span></code> policy iteration method runs as follows</p>
 <ol class="arabic simple">
 <li><p>Choose any <span class="math notranslate nohighlight">\(v^0 \in \mathbb{R}^n\)</span> and compute a <span class="math notranslate nohighlight">\(v^0\)</span>-greedy policy <span class="math notranslate nohighlight">\(\sigma^0\)</span>; set <span class="math notranslate nohighlight">\(i = 0\)</span>.</p></li>
@@ -1449,7 +1458,7 @@ iterations.</p>
 <p>It returns an optimal value function and an optimal policy function (unless <code class="docutils literal notranslate"><span class="pre">iter_max</span></code> is reached).</p>
 </section>
 <section id="id10">
-<h3><span class="section-number">4.7.3. </span>Modified policy iteration<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">4.7.3. </span>Modified policy iteration<a class="headerlink" href="#id10" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">DiscreteDP</span></code> modified policy iteration method runs as follows:</p>
 <ol class="arabic simple">
 <li><p>Choose any <span class="math notranslate nohighlight">\(v^0 \in \mathbb{R}^n\)</span>, and specify <span class="math notranslate nohighlight">\(\varepsilon &gt; 0\)</span> and <span class="math notranslate nohighlight">\(k \geq 0\)</span>; set <span class="math notranslate nohighlight">\(i = 0\)</span>.</p></li>
@@ -1502,6 +1511,8 @@ terminates in a finite number of iterations.</p>
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -1984,7 +1995,7 @@ terminates in a finite number of iterations.</p>
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")

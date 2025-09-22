@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="./" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>3. Reverse Engineering a la Muth &#8212; Advanced Quantitative Economics with Python</title>
     <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -70,15 +69,15 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=bd0785fbb14d8d2bd4d9ae501d79ed8d3bc089ec" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/exercise.css" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=3bd9fcddbe64f63e07c8604843d1cc622a07b430" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -86,22 +85,21 @@
   <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/sphinx_highlight.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
     <script src="_static/scripts/sphinx-book-theme.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=d6d86bce9979111653c4c495e33499e1796e172a"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=30f7c850c5b005eca2ad6e48893cd350a6c6c4c2"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
     <script>
                 window.dataLayer = window.dataLayer || [];
@@ -110,12 +108,20 @@
                 gtag('config', 'G-KZLV7PM9LL');
             </script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'muth_kalman';</script>
     <link rel="canonical" href="https://python-advanced.quantecon.org/muth_kalman.html" />
-    <link rel="shortcut icon" href="_static/lectures-favicon.ico"/>
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="4. Discrete State Dynamic Programming" href="discrete_dp.html" />
@@ -146,6 +152,7 @@
   </head>
 <body>
 
+<!-- Override QuantEcon theme colors -->
 
     <span id="top"></span>
 
@@ -186,7 +193,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -237,7 +244,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="reverse-engineering-a-la-muth">
-<span id="index-0"></span><h1><span class="section-number">3. </span>Reverse Engineering a la Muth<a class="headerlink" href="#reverse-engineering-a-la-muth" title="Permalink to this heading">#</a></h1>
+<span id="index-0"></span><h1><span class="section-number">3. </span>Reverse Engineering a la Muth<a class="headerlink" href="#reverse-engineering-a-la-muth" title="Link to this heading">#</a></h1>
 <p>In addition to what’s in Anaconda, this lecture uses the quantecon library.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -273,11 +280,11 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <p>We’ll also need the following imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">Kalman</span>
-<span class="kn">from</span> <span class="nn">quantecon</span> <span class="kn">import</span> <span class="n">LinearStateSpace</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="kn">import</span> <span class="n">Kalman</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">quantecon</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearStateSpace</span>
 <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -289,12 +296,12 @@ paper <span id="id1">[<a class="reference internal" href="zreferences.html#id113
 stochastic process that renders optimal Milton Friedman’s <span id="id2">[<a class="reference internal" href="zreferences.html#id154" title="M. Friedman. A Theory of the Consumption Function. Princeton University Press, 1956.">Friedman, 1956</a>]</span> “adaptive
 expectations” scheme.</p>
 <section id="friedman-1956-and-muth-1960">
-<h2><span class="section-number">3.1. </span>Friedman (1956) and Muth (1960)<a class="headerlink" href="#friedman-1956-and-muth-1960" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.1. </span>Friedman (1956) and Muth (1960)<a class="headerlink" href="#friedman-1956-and-muth-1960" title="Link to this heading">#</a></h2>
 <p>Milton Friedman <span id="id3">[<a class="reference internal" href="zreferences.html#id154" title="M. Friedman. A Theory of the Consumption Function. Princeton University Press, 1956.">Friedman, 1956</a>]</span> (1956) posited that
 consumer’s forecast their future disposable income with the adaptive
 expectations scheme</p>
 <div class="math notranslate nohighlight" id="equation-expectations">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-expectations" title="Permalink to this equation">#</a></span>\[y_{t+i,t}^* = K \sum_{j=0}^\infty (1 - K)^j y_{t-j}\]</div>
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-expectations" title="Link to this equation">#</a></span>\[y_{t+i,t}^* = K \sum_{j=0}^\infty (1 - K)^j y_{t-j}\]</div>
 <p>where <span class="math notranslate nohighlight">\(K \in (0,1)\)</span> and <span class="math notranslate nohighlight">\(y_{t+i,t}^*\)</span> is a forecast of
 future <span class="math notranslate nohighlight">\(y\)</span> over horizon <span class="math notranslate nohighlight">\(i\)</span>.</p>
 <p>Milton Friedman justified the <strong>exponential smoothing</strong> forecasting
@@ -320,11 +327,11 @@ Kalman filter to express the heart of Muth’s analysis concisely.</p>
 <p>We’ll use limiting versions of the Kalman filter corresponding to what are called <strong>stationary values</strong> in that lecture.</p>
 </section>
 <section id="a-process-for-which-adaptive-expectations-are-optimal">
-<h2><span class="section-number">3.2. </span>A process for which adaptive expectations are optimal<a class="headerlink" href="#a-process-for-which-adaptive-expectations-are-optimal" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.2. </span>A process for which adaptive expectations are optimal<a class="headerlink" href="#a-process-for-which-adaptive-expectations-are-optimal" title="Link to this heading">#</a></h2>
 <p>Suppose that an observable <span class="math notranslate nohighlight">\(y_t\)</span> is the sum of an unobserved
 random walk <span class="math notranslate nohighlight">\(x_t\)</span> and an IID shock <span class="math notranslate nohighlight">\(\epsilon_{2,t}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-state-space">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-state-space" title="Permalink to this equation">#</a></span>\[\begin{aligned} x_{t+1} &amp; = x_t + \sigma_x \epsilon_{1,t+1} \cr
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-state-space" title="Link to this equation">#</a></span>\[\begin{aligned} x_{t+1} &amp; = x_t + \sigma_x \epsilon_{1,t+1} \cr
           y_t &amp; = x_t + \sigma_y \epsilon_{2,t} \end{aligned}\]</div>
 <p>where</p>
 <div class="math notranslate nohighlight">
@@ -347,7 +354,7 @@ in <span class="math notranslate nohighlight">\(y_t, y_{t-1}, \ldots\)</span>.</
 the one-step-ahead conditional state covariance matrix to compute a
 time-invariant <em>innovations representation</em></p>
 <div class="math notranslate nohighlight" id="equation-innovations">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-innovations" title="Permalink to this equation">#</a></span>\[\begin{aligned} \hat x_{t+1} &amp; = \hat x_t + K a_t  \cr
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-innovations" title="Link to this equation">#</a></span>\[\begin{aligned} \hat x_{t+1} &amp; = \hat x_t + K a_t  \cr
            y_t &amp; = \hat x_t + a_t \end{aligned}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\hat x_t = E [x_t | y_{t-1}, y_{t-2}, \ldots ]\)</span> and
 <span class="math notranslate nohighlight">\(a_t = y_t - E[y_t |y_{t-1}, y_{t-2}, \ldots ]\)</span>.</p>
@@ -394,7 +401,7 @@ apply the quantecon <code class="docutils literal notranslate"><span class="pre"
 </div>
 </section>
 <section id="some-useful-state-space-math">
-<h2><span class="section-number">3.3. </span>Some useful state-space math<a class="headerlink" href="#some-useful-state-space-math" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.3. </span>Some useful state-space math<a class="headerlink" href="#some-useful-state-space-math" title="Link to this heading">#</a></h2>
 <p>Now we want to map the time-invariant innovations representation <a class="reference internal" href="#equation-innovations">(3.3)</a> and
 the original state-space system <a class="reference internal" href="#equation-state-space">(3.2)</a> into a convenient form for deducing
 the impulse responses from the original shocks to the <span class="math notranslate nohighlight">\(x_t\)</span> and
@@ -476,7 +483,7 @@ Conditional variance = 5.524937810560442
 variables are related by plotting some key objects.</p>
 </section>
 <section id="estimates-of-unobservables">
-<h2><span class="section-number">3.4. </span>Estimates of unobservables<a class="headerlink" href="#estimates-of-unobservables" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.4. </span>Estimates of unobservables<a class="headerlink" href="#estimates-of-unobservables" title="Link to this heading">#</a></h2>
 <p>First, let’s plot the hidden state <span class="math notranslate nohighlight">\(x_t\)</span> and the filtered version
 <span class="math notranslate nohighlight">\(\hat x_t\)</span> that is linear-least squares projection of <span class="math notranslate nohighlight">\(x_t\)</span>
 on the history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \ldots\)</span></p>
@@ -501,7 +508,7 @@ on the history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \l
 idea about her/his <em>permanent income</em>.</p>
 </section>
 <section id="relationship-of-unobservables-to-observables">
-<h2><span class="section-number">3.5. </span>Relationship of unobservables to observables<a class="headerlink" href="#relationship-of-unobservables-to-observables" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.5. </span>Relationship of unobservables to observables<a class="headerlink" href="#relationship-of-unobservables-to-observables" title="Link to this heading">#</a></h2>
 <p>Now let’s plot <span class="math notranslate nohighlight">\(x_t\)</span> and <span class="math notranslate nohighlight">\(y_t\)</span>.</p>
 <p>Recall that <span class="math notranslate nohighlight">\(y_t\)</span> is just <span class="math notranslate nohighlight">\(x_t\)</span> plus white noise</p>
 <div class="cell docutils container">
@@ -523,7 +530,7 @@ idea about her/his <em>permanent income</em>.</p>
 <p>We see above that <span class="math notranslate nohighlight">\(y\)</span> seems to look like white noise around the
 values of <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <section id="innovations">
-<h3><span class="section-number">3.5.1. </span>Innovations<a class="headerlink" href="#innovations" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">3.5.1. </span>Innovations<a class="headerlink" href="#innovations" title="Link to this heading">#</a></h3>
 <p>Recall that we wrote down the innovation representation that depended on
 <span class="math notranslate nohighlight">\(a_t\)</span>. We now plot the innovations <span class="math notranslate nohighlight">\(\{a_t\}\)</span>:</p>
 <div class="cell docutils container">
@@ -544,7 +551,7 @@ values of <span class="math notranslate nohighlight">\(x\)</span>.</p>
 </section>
 </section>
 <section id="ma-and-ar-representations">
-<h2><span class="section-number">3.6. </span>MA and AR representations<a class="headerlink" href="#ma-and-ar-representations" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">3.6. </span>MA and AR representations<a class="headerlink" href="#ma-and-ar-representations" title="Link to this heading">#</a></h2>
 <p>Now we shall extract from the <code class="docutils literal notranslate"><span class="pre">Kalman</span></code> instance <code class="docutils literal notranslate"><span class="pre">kmuth</span></code> coefficients of</p>
 <ul class="simple">
 <li><p>a fundamental moving average representation that represents
@@ -633,6 +640,8 @@ engineer</p>
                     <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
 
                     <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
 
                 </footer> <!-- .page__footer -->
 
@@ -1115,7 +1124,7 @@ engineer</p>
                 function setLaunchServer() {
                   launchNotebookLink.removeAttribute("style")
                   if ( localStorage.launcherType == 'launcher-private' ) {
-                    let repoPrefix = "/jupyter/hub/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
                     launcherPrivateValue = launcherPrivate.value
                     if (!launcherPrivateValue) {
                         launchNotebookLink.removeAttribute("href")
