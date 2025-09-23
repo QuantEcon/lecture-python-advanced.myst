@@ -80,7 +80,7 @@ from scipy.stats import norm, gaussian_kde
 ```
 
 (statd_density_case)=
-## The Density Case
+## The density case
 
 You are probably aware that some distributions can be represented by densities
 and some cannot.
@@ -94,7 +94,7 @@ The benefit is that the density case offers a very direct parallel to the finite
 
 Once we've built some intuition we'll cover the general case.
 
-### Definitions and Basic Properties
+### Definitions and basic properties
 
 In our [lecture on finite Markov chains](https://python-intro.quantecon.org/finite_markov.html), we studied discrete-time Markov chains that evolve on a finite state space $S$.
 
@@ -163,7 +163,7 @@ Letting $X_t = x$ in {eq}`statd_rw` and considering the distribution of $X_{t+1}
 
 In other words, $p$ is exactly $p_w$, as defined in {eq}`statd_rwsk`.
 
-### Connection to Stochastic Difference Equations
+### Connection to stochastic difference equations
 
 In the previous section, we made the connection between stochastic difference
 equation {eq}`statd_rw` and stochastic kernel {eq}`statd_rwsk`.
@@ -276,7 +276,7 @@ where $\phi$ is the density of $A_{t+1}$.
 (Regarding the state space $S$ for this model, a natural choice is $(0, \infty)$ --- in which case
 $\sigma(x) = s f(x)$ is strictly positive for all $s$ as required)
 
-### Distribution Dynamics
+### Distribution dynamics
 
 In [this section](https://python.quantecon.org/finite_markov.html#marginal-distributions) of our lecture on **finite** Markov chains, we
 asked the following question: If
@@ -513,7 +513,7 @@ converging --- more on this in just a moment.
 Another quick comment is that each of these distributions could be interpreted
 as a cross-sectional distribution (recall [this discussion](https://python.quantecon.org/finite_markov.html#example-2-cross-sectional-distributions)).
 
-## Beyond Densities
+## Beyond densities
 
 Up until now, we have focused exclusively on continuous state Markov chains
 where all conditional distributions $p(x, \cdot)$ are densities.
@@ -529,7 +529,7 @@ be familiar with measure theory.
 
 We can, however, construct a fairly general theory using distribution functions.
 
-### Example and Definitions
+### Example and definitions
 
 To illustrate the issues, recall that Hopenhayn and Rogerson {cite}`HopenhaynRogerson1993` study a model of firm dynamics where individual firm productivity follows the exogenous process
 
@@ -599,7 +599,7 @@ We will, however, treat only the density case (as in {ref}`this section <statd_d
 
 The general case is relatively similar --- references are given below.
 
-### Theoretical Results
+### Theoretical results
 
 Analogous to [the finite case](https://python.quantecon.org/finite_markov.html#stationary-distributions), given a stochastic kernel $p$ and corresponding Markov operator as
 defined in {eq}`def_dmo`, a density $\psi^*$ on $S$ is called
@@ -675,7 +675,7 @@ In addition
   provides a specific treatment for the growth model we considered in this
   lecture.
 
-### An Example of Stability
+### An example of stability
 
 As stated above, the {ref}`growth model treated here <solow_swan>` is stable under mild conditions
 on the primitives.
@@ -695,7 +695,7 @@ All sequences are converging towards the same limit, regardless of their initial
 
 The details regarding initial conditions and so on are given in {ref}`this exercise <statd_ex2>`, where you are asked to replicate the figure.
 
-### Computing Stationary Densities
+### Computing stationary densities
 
 In the preceding figure, each sequence of densities is converging towards the unique stationary density $\psi^*$.
 
@@ -784,8 +784,8 @@ In doing so, set $\theta = 0.8$ and $n = 500$.
 
 The next figure shows the result of such a computation
 
-```{figure} /_static/lecture_specific/stationary_densities/solution_statd_ex1.png
-
+```{image} /_static/lecture_specific/stationary_densities/solution_statd_ex1.png
+:align: center
 ```
 
 The additional density (black line) is a [nonparametric kernel density estimate](https://en.wikipedia.org/wiki/Kernel_density_estimation), added to the solution for illustration.

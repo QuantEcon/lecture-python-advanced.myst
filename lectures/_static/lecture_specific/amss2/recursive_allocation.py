@@ -230,7 +230,7 @@ class BellmanEquation:
         def objf_prime(x):
 
             epsilon = 1e-7
-            x0 = np.asfarray(x)
+            x0 = np.asarray(x, dtype=float)
             f0 = np.atleast_1d(objf(x0))
             jac = np.zeros([len(x0), len(f0)])
             dx = np.zeros(len(x0))

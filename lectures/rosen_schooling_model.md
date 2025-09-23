@@ -44,7 +44,7 @@ from collections import namedtuple
 from quantecon import DLE
 ```
 
-## A One-Occupation Model
+## A one-occupation model
 
 Ryoo and Rosen's (2004) {cite}`ryoo2004engineering` partial equilibrium model determines
 
@@ -81,7 +81,7 @@ $$
 n_t = \alpha_s v_t + \epsilon_{st}
 $$
 
-## Mapping into HS2013 Framework
+## Mapping into HS2013 framework
 
 We represent this model in the {cite}`HS2013` framework by
 
@@ -163,7 +163,7 @@ Technology = namedtuple('Technology', ['ϕ_c', 'ϕ_g', 'ϕ_i', 'γ', 'δ_k', 'θ
 Preferences = namedtuple('Preferences', ['β', 'l_λ', 'π_h', 'δ_h', 'θ_h'])
 ```
 
-### Effects of Changes in Education Technology and Demand
+### Effects of changes in education technology and demand
 
 We now study how changing
 

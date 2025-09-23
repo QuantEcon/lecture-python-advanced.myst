@@ -86,7 +86,7 @@ import polytope
 import matplotlib.pyplot as plt
 ```
 
-## The Setting
+## The setting
 
 We begin by reviewing the set up deployed in  {doc}`competitive equilibria in the Chang model <chang_ramsey>`.
 
@@ -134,7 +134,7 @@ In competitive equilibrium, the price of money sequence $\vec q$ clears
 markets, thereby reconciling  decisions of the government and the
 representative household.
 
-### The Household’s Problem
+### The household's problem
 
 A representative household faces a nonnegative value of money sequence
 $\vec q$ and sequences $\vec y, \vec x$ of income and total
@@ -239,7 +239,7 @@ absolute value of tax revenues.
 The government chooses a competitive equilibrium that
 maximizes {eq}`eqn_chang1`.
 
-### Within-period Timing Protocol
+### Within-period timing protocol
 
 For the results in this lecture, the *timing* of actions within a period is
 important because of the incentives that it activates.
@@ -262,7 +262,7 @@ This timing will shape the incentives confronting the government at each
 history that are to be incorporated in the construction of the $\tilde D$
 operator below.
 
-### Household’s Problem
+### Household's problem
 
 Given $M_{-1}$ and $\{q_t\}_{t=0}^\infty$, the household’s problem is
 
@@ -323,7 +323,7 @@ in constructing a class of competitive equilibria that have a recursive represen
 A closely related observation pervaded the analysis of Stackelberg plans in
 {doc}`dynamic Stackelberg problems <dyn_stack>` and {doc}`the Calvo model <calvo>`.
 
-### Competitive Equilibrium
+### Competitive equilibrium
 
 **Definition:**
 
@@ -342,7 +342,7 @@ $(\vec c, \vec m, \vec y)$ are said to be a *competitive equilibrium* if
 * The government budget constraint is satisfied.
 * Given $\vec q, \vec x, \vec y$, $(\vec c, \vec m)$ solves the household’s problem.
 
-### A Credible Government Policy
+### A credible government policy
 
 Chang works with
 
@@ -423,7 +423,7 @@ the private sector.
 For a credible government plan, we the two-dimensional state vector
 $(w_t, \theta_t)$ encodes  history dependence.
 
-### Sustainable Plans
+### Sustainable plans
 
 A government strategy $\sigma$ and an allocation rule
 $\alpha$ are said to constitute a *sustainable plan* (SP) if.
@@ -591,7 +591,7 @@ sustainable outcome:
    \end{aligned}
    $$
 
-## Calculating the Set of Sustainable Promise-Value Pairs
+## Calculating the set of sustainable promise-value pairs
 
 Above we defined the $\tilde D(Z)$ operator as {eq}`chang_operator`.
 
@@ -806,7 +806,7 @@ tags: [collapse-20]
 ---
 ```
 
-### Comparison of Sets
+### Comparison of sets
 
 The set of $(w, \theta)$ associated with  sustainable plans is  smaller than the set of $(w, \theta)$
 pairs associated with competitive equilibria, since the additional
