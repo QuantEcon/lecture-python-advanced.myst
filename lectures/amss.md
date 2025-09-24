@@ -47,7 +47,7 @@ Now let's define numba-compatible interpolation functions for this lecture.
 We will soon use the following interpolation functions to interpolate the value function and the policy functions
 
 ```{code-cell} ipython
-:tags: [collapse-40]
+:tags: [collapse-20]
 
 @njit
 def get_grid_nodes(grid):
@@ -745,7 +745,7 @@ assets, returning any excess revenues to the household as non-negative lump-sum 
 The recursive formulation is implemented as follows
 
 ```{code-cell} python3
-:tags: [collapse-30]
+:tags: [collapse-20]
 :load: _static/lecture_specific/amss/recursive_allocation.py
 ```
 
