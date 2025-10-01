@@ -1,0 +1,20 @@
+name: Style Guide Checker
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  review:
+    if: contains(github.event.comment.body, '@quantecon-style-guide')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: read
+    steps:
+      - uses: QuantEcon/action-style-guide@v0.1.0
+        with:
+          mode: 'single'
+          anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          comment-body: ${{ github.event.comment.body }}
