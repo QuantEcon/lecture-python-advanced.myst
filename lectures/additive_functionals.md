@@ -83,8 +83,7 @@ from scipy.stats import norm, lognorm
 
 This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a Gaussian vector autoregression.
 
-Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
-by using linear state-space tools.
+Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze by using linear state-space tools.
 
 We construct our  additive functional from two pieces, the first of which is a **first-order vector autoregression** (VAR)
 
@@ -98,7 +97,7 @@ Here
 
 * $x_t$ is an $n \times 1$ vector,
 * $A$ is an $n \times n$ stable matrix (all eigenvalues lie within the open unit circle),
-* $z_{t+1} \sim {\cal N}(0,I)$ is an $m \times 1$ IID shock,
+* $z_{t+1} \sim {\cal N}(0,I)$ is an $m \times 1$ IID shock, where $I$ is the identity matrix,
 * $B$ is an $n \times m$ matrix, and
 * $x_0 \sim {\cal N}(\mu_0, \Sigma_0)$ is a random initial condition for $x$
 
@@ -125,7 +124,7 @@ systematic but random *arithmetic growth*.
 
 ### Linear state-space representation
 
-A convenient way to represent our additive functional is to use a [linear state space system](https://python-intro.quantecon.org/linear_models.html).
+A convenient way to represent our additive functional is to use a {doc}`linear state space system <intro:linear_models>`.
 
 To do this, we set up state and observation vectors
 
@@ -184,7 +183,7 @@ $$
 
 which is a standard linear state space system.
 
-To study it, we could map it into an instance of [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
+To study it, we could map it into an instance of `LinearStateSpace` from QuantEcon.py.
 
 But here we will use a different set of code for simulation, for reasons described below.
 
@@ -223,7 +222,7 @@ with an initial condition for $y_0$.
 
 While {eq}`ftaf` is not a first order system like {eq}`old1_additive_functionals`, we know that it can be mapped  into a first order system.
 
-* For an example of such a mapping, see [this example](https://python.quantecon.org/linear_models.html#second-order-difference-equation).
+* For an example of such a mapping, see {doc}`this example <advanced:linear_models.html#second-order-difference-equation>`.
 
 In fact, this whole model can be mapped into the additive functional system definition in {eq}`old1_additive_functionals` -- {eq}`old2_additive_functionals`  by appropriate selection of the matrices $A, B, D, F$.
 
@@ -240,156 +239,225 @@ All of these objects are computed using the code below
 (amf_lss)=
 
 ```{code-cell} ipython3
-class AMF_LSS_VAR:
+from typing import NamedTuple
+import jax.numpy as jnp
+
+class AMFParams(NamedTuple):
+    """Parameters for additive/multiplicative functional model."""
+    A: jnp.ndarray
+    B: jnp.ndarray
+    D: jnp.ndarray
+    F: jnp.ndarray
+    ν: jnp.ndarray
+    nx: int
+    nk: int
+    nm: int
+
+def create_amf_params(A, B, D, F=None, ν=None):
     """
-    This class transforms an additive (multiplicative)
-    functional into a QuantEcon linear state space system.
+    Factory function to create and validate AMF parameters.
+    
+    Parameters
+    ----------
+    A : array_like
+        Transition matrix for state vector
+    B : array_like
+        Shock loading matrix
+    D : array_like
+        Observation matrix for additive functional
+    F : array_like, optional
+        Direct shock loading for additive functional
+    ν : float or array_like, optional
+        Drift parameter
+        
+    Returns
+    -------
+    AMFParams
+        Validated parameter tuple
     """
+    A = jnp.asarray(A)
+    B = jnp.asarray(B)
+    
+    nx, nk = B.shape
+    
+    # Process D
+    D = jnp.asarray(D)
+    if len(D.shape) > 1 and D.shape[0] != 1:
+        nm = D.shape[0]
+    elif len(D.shape) > 1 and D.shape[0] == 1:
+        nm = 1
+    else:
+        nm = 1
+        D = jnp.expand_dims(D, 0)
+    
+    # Process F
+    if F is None:
+        F = jnp.zeros((nk, 1))
+    else:
+        F = jnp.asarray(F)
+    
+    # Process ν
+    if ν is None:
+        ν = jnp.zeros((nm, 1))
+    elif isinstance(ν, float):
+        ν = jnp.asarray([[ν]])
+    else:
+        ν = jnp.asarray(ν)
+        if len(ν.shape) == 1:
+            ν = jnp.expand_dims(ν, 1)
+    
+    if ν.shape[0] != D.shape[0]:
+        raise ValueError("The dimension of ν is inconsistent with D!")
+    
+    return AMFParams(A=A, B=B, D=D, F=F, ν=ν, nx=nx, nk=nk, nm=nm)
 
-    def __init__(self, A, B, D, F=None, ν=None):
-        # Unpack required elements
-        self.nx, self.nk = B.shape
-        self.A, self.B = A, B
+def construct_ss(params):
+    """
+    Create state space representation from AMF parameters.
+    
+    Parameters
+    ----------
+    params : AMFParams
+        Model parameters
+        
+    Returns
+    -------
+    LinearStateSpace
+        State space system
+    """
+    nx, nk, nm = params.nx, params.nk, params.nm
+    A, B, D, F, ν = params.A, params.B, params.D, params.F, params.ν
+    
+    ν_decomp, H, g = additive_decomp(params)
+    
+    # Auxiliary blocks with 0's and 1's to fill out the lss matrices
+    nx0c = jnp.zeros((nx, 1))
+    nx0r = jnp.zeros(nx)
+    nk0 = jnp.zeros(nk)
+    ny0c = jnp.zeros((nm, 1))
+    ny0r = jnp.zeros(nm)
+    ny1m = jnp.eye(nm)
+    ny0m = jnp.zeros((nm, nm))
+    nyx0m = jnp.zeros_like(D)
+    
+    # Build A matrix for LSS
+    A1 = jnp.hstack([jnp.array([1, 0]), nx0r, ny0r, ny0r])
+    A2 = jnp.hstack([jnp.array([1, 1]), nx0r, ny0r, ny0r])
+    A3 = jnp.hstack([nx0c, nx0c, A, nyx0m.T, nyx0m.T])
+    A4 = jnp.hstack([ν_decomp, ny0c, D, ny1m, ny0m])
+    A5 = jnp.hstack([ny0c, ny0c, nyx0m, ny0m, ny1m])
+    Abar = jnp.vstack([A1, A2, A3, A4, A5])
+    
+    # Build B matrix for LSS
+    Bbar = jnp.vstack([nk0, nk0, B, F, H])
+    
+    # Build G matrix for LSS
+    G1 = jnp.hstack([nx0c, nx0c, jnp.eye(nx), nyx0m.T, nyx0m.T])
+    G2 = jnp.hstack([ny0c, ny0c, nyx0m, ny1m, ny0m])
+    G3 = jnp.hstack([ny0c, ny0c, nyx0m, ny0m, ny1m])
+    G4 = jnp.hstack([ny0c, ny0c, -g, ny0m, ny0m])
+    G5 = jnp.hstack([ny0c, ν_decomp, nyx0m, ny0m, ny0m])
+    Gbar = jnp.vstack([G1, G2, G3, G4, G5])
+    
+    # Build H matrix for LSS
+    Hbar = jnp.zeros((Gbar.shape[0], nk))
+    
+    # Build LSS type
+    x0 = jnp.hstack([jnp.array([1, 0]), nx0r, ny0r, ny0r])
+    S0 = jnp.zeros((len(x0), len(x0)))
+    lss = qe.LinearStateSpace(Abar, Bbar, Gbar, Hbar, mu_0=x0, Sigma_0=S0)
+    
+    return lss
 
-        # Checking the dimension of D (extended from the scalar case)
-        if len(D.shape) > 1 and D.shape[0] != 1:
-            self.nm = D.shape[0]
-            self.D = D
-        elif len(D.shape) > 1 and D.shape[0] == 1:
-            self.nm = 1
-            self.D = D
-        else:
-            self.nm = 1
-            self.D = np.expand_dims(D, 0)
+def additive_decomp(params):
+    """
+    Compute additive decomposition components.
+    
+    Parameters
+    ----------
+    params : AMFParams
+        Model parameters
+        
+    Returns
+    -------
+    tuple
+        (ν, H, g) decomposition components
+    """
+    I = jnp.identity(params.nx)
+    A_res = jnp.linalg.solve(I - params.A, I)
+    g = params.D @ A_res
+    H = params.F + params.D @ A_res @ params.B
+    
+    return params.ν, H, g
 
-        # Create space for additive decomposition
-        self.add_decomp = None
-        self.mult_decomp = None
+def multiplicative_decomp(params):
+    """
+    Compute multiplicative decomposition components.
+    
+    Parameters
+    ----------
+    params : AMFParams
+        Model parameters
+        
+    Returns
+    -------
+    tuple
+        (ν_tilde, H, g) decomposition components
+    """
+    ν, H, g = additive_decomp(params)
+    ν_tilde = ν + 0.5 * jnp.expand_dims(jnp.diag(H @ H.T), 1)
+    
+    return ν_tilde, H, g
 
-        # Set F
-        if not np.any(F):
-            self.F = np.zeros((self.nk, 1))
-        else:
-            self.F = F
+def loglikelihood_path(params, x, y):
+    """
+    Compute log-likelihood path.
+    
+    Parameters
+    ----------
+    params : AMFParams
+        Model parameters
+    x : array_like
+        State path
+    y : array_like
+        Observation path
+        
+    Returns
+    -------
+    array_like
+        Log-likelihood path
+    """
+    A, B, D, F = params.A, params.B, params.D, params.F
+    k, T = y.shape
+    FF = F @ F.T
+    FFinv = jnp.linalg.inv(FF)
+    temp = y[:, 1:] - y[:, :-1] - D @ x[:, :-1]
+    obs = temp * FFinv * temp
+    obssum = jnp.cumsum(obs)
+    scalar = (jnp.log(jnp.linalg.det(FF)) + k * jnp.log(2 * jnp.pi)) * jnp.arange(1, T)
+    
+    return -0.5 * (obssum + scalar)
 
-        # Set ν
-        if not np.any(ν):
-            self.ν = np.zeros((self.nm, 1))
-        elif type(ν) == float:
-            self.ν = np.asarray([[ν]])
-        elif len(ν.shape) == 1:
-            self.ν = np.expand_dims(ν, 1)
-        else:
-            self.ν = ν
-
-        if self.ν.shape[0] != self.D.shape[0]:
-            raise ValueError("The dimension of ν is inconsistent with D!")
-
-        # Construct BIG state space representation
-        self.lss = self.construct_ss()
-
-    def construct_ss(self):
-        """
-        This creates the state space representation that can be passed
-        into the quantecon LSS class.
-        """
-        # Pull out useful info
-        nx, nk, nm = self.nx, self.nk, self.nm
-        A, B, D, F, ν = self.A, self.B, self.D, self.F, self.ν
-        if self.add_decomp:
-            ν, H, g = self.add_decomp
-        else:
-            ν, H, g = self.additive_decomp()
-
-        # Auxiliary blocks with 0's and 1's to fill out the lss matrices
-        nx0c = np.zeros((nx, 1))
-        nx0r = np.zeros(nx)
-        nx1 = np.ones(nx)
-        nk0 = np.zeros(nk)
-        ny0c = np.zeros((nm, 1))
-        ny0r = np.zeros(nm)
-        ny1m = np.eye(nm)
-        ny0m = np.zeros((nm, nm))
-        nyx0m = np.zeros_like(D)
-
-        # Build A matrix for LSS
-        # Order of states is: [1, t, xt, yt, mt]
-        A1 = np.hstack([1, 0, nx0r, ny0r, ny0r])         # Transition for 1
-        A2 = np.hstack([1, 1, nx0r, ny0r, ny0r])         # Transition for t
-        # Transition for x_{t+1}
-        A3 = np.hstack([nx0c, nx0c, A, nyx0m.T, nyx0m.T])
-        # Transition for y_{t+1}
-        A4 = np.hstack([ν, ny0c, D, ny1m, ny0m])
-        # Transition for m_{t+1}
-        A5 = np.hstack([ny0c, ny0c, nyx0m, ny0m, ny1m])
-        Abar = np.vstack([A1, A2, A3, A4, A5])
-
-        # Build B matrix for LSS
-        Bbar = np.vstack([nk0, nk0, B, F, H])
-
-        # Build G matrix for LSS
-        # Order of observation is: [xt, yt, mt, st, tt]
-        # Selector for x_{t}
-        G1 = np.hstack([nx0c, nx0c, np.eye(nx), nyx0m.T, nyx0m.T])
-        G2 = np.hstack([ny0c, ny0c, nyx0m, ny1m, ny0m])   # Selector for y_{t}
-        # Selector for martingale
-        G3 = np.hstack([ny0c, ny0c, nyx0m, ny0m, ny1m])
-        G4 = np.hstack([ny0c, ny0c, -g, ny0m, ny0m])  # Selector for stationary
-        G5 = np.hstack([ny0c, ν, nyx0m, ny0m, ny0m])  # Selector for trend
-        Gbar = np.vstack([G1, G2, G3, G4, G5])
-
-        # Build H matrix for LSS
-        Hbar = np.zeros((Gbar.shape[0], nk))
-
-        # Build LSS type
-        x0 = np.hstack([1, 0, nx0r, ny0r, ny0r])
-        S0 = np.zeros((len(x0), len(x0)))
-        lss = qe.LinearStateSpace(Abar, Bbar, Gbar, Hbar, mu_0=x0, Sigma_0=S0)
-
-        return lss
-
-    def additive_decomp(self):
-        """
-        Return values for the martingale decomposition
-            - ν     : unconditional mean difference in Y
-            - H     : coefficient for the (linear) martingale component (κ_a)
-            - g     : coefficient for the stationary component g(x)
-            - Y_0   : it should be the function of X_0 (for now set it to 0.0)
-        """
-        I = np.identity(self.nx)
-        A_res = la.solve(I - self.A, I)
-        g = self.D @ A_res
-        H = self.F + self.D @ A_res @ self.B
-
-        return self.ν, H, g
-
-    def multiplicative_decomp(self):
-        """
-        Return values for the multiplicative decomposition (Example 5.4.4.)
-            - ν_tilde  : eigenvalue
-            - H        : vector for the Jensen term
-        """
-        ν, H, g = self.additive_decomp()
-        ν_tilde = ν + (.5)*np.expand_dims(np.diag(H @ H.T), 1)
-
-        return ν_tilde, H, g
-
-    def loglikelihood_path(self, x, y):
-        A, B, D, F = self.A, self.B, self.D, self.F
-        k, T = y.shape
-        FF = F @ F.T
-        FFinv = la.inv(FF)
-        temp = y[:, 1:] - y[:, :-1] - D @ x[:, :-1]
-        obs =  temp * FFinv * temp
-        obssum = np.cumsum(obs)
-        scalar = (np.log(la.det(FF)) + k*np.log(2*np.pi))*np.arange(1, T)
-
-        return -(.5)*(obssum + scalar)
-
-    def loglikelihood(self, x, y):
-        llh = self.loglikelihood_path(x, y)
-
-        return llh[-1]
+def loglikelihood(params, x, y):
+    """
+    Compute total log-likelihood.
+    
+    Parameters
+    ----------
+    params : AMFParams
+        Model parameters
+    x : array_like
+        State path
+    y : array_like
+        Observation path
+        
+    Returns
+    -------
+    float
+        Total log-likelihood
+    """
+    llh = loglikelihood_path(params, x, y)
+    return llh[-1]
 ```
 
 #### Plotting
@@ -714,8 +782,7 @@ Notice the irregular but persistent growth in $y_t$.
 
 ### Decomposition
 
-Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of
-an additive functional into four parts:
+Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of an additive functional into four parts:
 
 - a constant inherited from initial values $x_0$ and $y_0$
 - a linear trend
@@ -755,9 +822,9 @@ It is convenient for us to introduce the following notation:
 
 We want to characterize and simulate components $\tau_t, m_t, s_t$ of the decomposition.
 
-A convenient way to do this is to construct an appropriate instance of a [linear state space system](https://python-intro.quantecon.org/linear_models.html) by using [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
+A convenient way to do this is to construct an appropriate instance of a {doc}`linear state space system <intro:linear_models>` by using `LinearStateSpace` from QuantEcon.py.
 
-This will allow us to use the routines in [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) to study dynamics.
+This will allow us to use the routines in `LinearStateSpace` to study dynamics.
 
 To start, observe that, under the dynamics in {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals` and with the
 definitions just given,
@@ -844,8 +911,7 @@ interest.
 
 The class `AMF_LSS_VAR` mentioned {ref}`above <amf_lss>` does all that we want to study our additive functional.
 
-In fact, `AMF_LSS_VAR` does more
-because it allows us to study  an associated multiplicative functional as well.
+In fact, `AMF_LSS_VAR` does more because it allows us to study  an associated multiplicative functional as well.
 
 (A hint that it does more is the name of the class -- here AMF stands for
 "additive and multiplicative functional" -- the code computes and displays objects associated with
@@ -867,10 +933,8 @@ We have chosen to simulate many paths, all starting from the *same* non-random i
 
 Notice tell-tale signs of these probability coverage shaded areas
 
-* the purple one for the martingale component $m_t$ grows with
-  $\sqrt{t}$
-* the green one for the stationary component $s_t$ converges to a
-  constant band
+* the purple one for the martingale component $m_t$ grows with $\sqrt{t}$
+* the green one for the stationary component $s_t$ converges to a constant band
 
 ### Associated multiplicative functional
 
@@ -919,11 +983,9 @@ plt.show()
 
 As before, when we plotted multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plotted population 95% confidence bands computed using the LinearStateSpace class.
 
-Comparing this figure and the last also helps show how geometric growth differs from
-arithmetic growth.
+Comparing this figure and the last also helps show how geometric growth differs from arithmetic growth.
 
-The top right panel of the above graph shows a panel of martingales associated with the panel of $M_t = \exp(y_t)$ that we have generated
-for a limited horizon $T$.
+The top right panel of the above graph shows a panel of martingales associated with the panel of $M_t = \exp(y_t)$ that we have generated for a limited horizon $T$.
 
 It is interesting to how the martingale behaves as $T \rightarrow +\infty$.
 
@@ -931,13 +993,10 @@ Let's see what happens when we set $T = 12000$ instead of $150$.
 
 ### Peculiar large sample property
 
-Hansen and Sargent {cite}`Hans_Sarg_book` (ch. 8) describe the following two properties of the  martingale component
-$\widetilde M_t$ of the multiplicative decomposition
+Hansen and Sargent {cite}`Hans_Sarg_book` (ch. 8) describe the following two properties of the  martingale component $\widetilde M_t$ of the multiplicative decomposition
 
-* while $E_0 \widetilde M_t = 1$ for all $t \geq 0$,
-  nevertheless $\ldots$
-* as $t \rightarrow +\infty$, $\widetilde M_t$ converges to
-  zero almost surely
+* while $E_0 \widetilde M_t = 1$ for all $t \geq 0$, nevertheless $\ldots$
+* as $t \rightarrow +\infty$, $\widetilde M_t$ converges to zero almost surely
 
 The first property follows from the fact that $\widetilde M_t$ is a multiplicative martingale with initial condition
 $\widetilde M_0 = 1$.
@@ -960,8 +1019,7 @@ The purple 95 percent frequency coverage interval collapses around zero, illustr
 
 ## More about the multiplicative martingale
 
-Let's drill down and study probability distribution of the multiplicative martingale  $\{\widetilde M_t\}_{t=0}^\infty$  in
-more detail.
+Let's drill down and study probability distribution of the multiplicative martingale  $\{\widetilde M_t\}_{t=0}^\infty$  in more detail.
 
 As we  have seen, it has representation
 
@@ -977,8 +1035,7 @@ It follows that $\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2
 
 Next, we want a program to simulate the likelihood ratio process $\{ \tilde{M}_t \}_{t=0}^\infty$.
 
-In particular, we want to simulate 5000 sample paths of length $T$ for the case in which $x$ is a scalar and
-$[A, B, D, F] = [0.8, 0.001, 1.0, 0.01]$ and $\nu = 0.005$.
+In particular, we want to simulate 5000 sample paths of length $T$ for the case in which $x$ is a scalar and $[A, B, D, F] = [0.8, 0.001, 1.0, 0.01]$ and $\nu = 0.005$.
 
 After accomplishing this, we want to display and study histograms of $\tilde{M}_T^i$ for various values of  $T$.
 
@@ -991,108 +1048,176 @@ Let's write a program to simulate sample paths of $\{ x_t, y_{t} \}_{t=0}^{\inft
 We'll do this by formulating the additive functional as a linear state space model and putting the [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) class to work.
 
 ```{code-cell} ipython3
-class AMF_LSS_VAR:
+from typing import NamedTuple
+import jax.numpy as jnp
+
+class AMFScalarParams(NamedTuple):
+    """Parameters for scalar additive/multiplicative functional model."""
+    A: float
+    B: float
+    D: float
+    F: float
+    ν: float
+
+def create_amf_scalar_params(A, B, D, F=0.0, ν=0.0):
     """
-    This class is written to transform a scalar additive functional
-    into a linear state space system.
+    Factory function to create and validate scalar AMF parameters.
+    
+    Parameters
+    ----------
+    A : float
+        Scalar transition parameter
+    B : float
+        Scalar shock loading parameter
+    D : float
+        Scalar observation parameter
+    F : float, optional
+        Direct shock loading for additive functional (default: 0.0)
+    ν : float, optional
+        Drift parameter (default: 0.0)
+        
+    Returns
+    -------
+    AMFScalarParams
+        Validated parameter tuple
     """
-    def __init__(self, A, B, D, F=0.0, ν=0.0):
-        # Unpack required elements
-        self.A, self.B, self.D, self.F, self.ν = A, B, D, F, ν
+    return AMFScalarParams(A=float(A), B=float(B), D=float(D), 
+                          F=float(F), ν=float(ν))
 
-        # Create space for additive decomposition
-        self.add_decomp = None
-        self.mult_decomp = None
+def construct_ss_scalar(params):
+    """
+    Create state space representation from scalar AMF parameters.
+    
+    Parameters
+    ----------
+    params : AMFScalarParams
+        Model parameters
+        
+    Returns
+    -------
+    LinearStateSpace
+        State space system
+    """
+    A, B, D, F, ν = params.A, params.B, params.D, params.F, params.ν
+    ν_decomp, H, g = additive_decomp_scalar(params)
+    
+    # Build A matrix for LSS
+    A1 = jnp.array([1, 0, 0, 0, 0])
+    A2 = jnp.array([1, 1, 0, 0, 0])
+    A3 = jnp.array([0, 0, A, 0, 0])
+    A4 = jnp.array([ν_decomp, 0, D, 1, 0])
+    A5 = jnp.array([0, 0, 0, 0, 1])
+    Abar = jnp.vstack([A1, A2, A3, A4, A5])
+    
+    # Build B matrix for LSS
+    Bbar = jnp.array([[0], [0], [B], [F], [H]])
+    
+    # Build G matrix for LSS
+    G1 = jnp.array([0, 0, 1, 0, 0])
+    G2 = jnp.array([0, 0, 0, 1, 0])
+    G3 = jnp.array([0, 0, 0, 0, 1])
+    G4 = jnp.array([0, 0, -g, 0, 0])
+    G5 = jnp.array([0, ν_decomp, 0, 0, 0])
+    Gbar = jnp.vstack([G1, G2, G3, G4, G5])
+    
+    # Build H matrix for LSS
+    Hbar = jnp.zeros((1, 1))
+    
+    # Build LSS type
+    x0 = jnp.array([1, 0, 0, 0, 0])
+    S0 = jnp.zeros((5, 5))
+    lss = qe.LinearStateSpace(Abar, Bbar, Gbar, Hbar, mu_0=x0, Sigma_0=S0)
+    
+    return lss
 
-        # Construct BIG state space representation
-        self.lss = self.construct_ss()
+def additive_decomp_scalar(params):
+    """
+    Compute additive decomposition for scalar model.
+    
+    Parameters
+    ----------
+    params : AMFScalarParams
+        Model parameters
+        
+    Returns
+    -------
+    tuple
+        (ν, H, g) decomposition components
+    """
+    A_res = 1.0 / (1.0 - params.A)
+    g = params.D * A_res
+    H = params.F + params.D * A_res * params.B
+    
+    return params.ν, H, g
 
-    def construct_ss(self):
-        """
-        This creates the state space representation that can be passed
-        into the quantecon LSS class.
-        """
-        # Pull out useful info
-        A, B, D, F, ν = self.A, self.B, self.D, self.F, self.ν
-        nx, nk, nm = 1, 1, 1
-        if self.add_decomp:
-            ν, H, g = self.add_decomp
-        else:
-            ν, H, g = self.additive_decomp()
+def multiplicative_decomp_scalar(params):
+    """
+    Compute multiplicative decomposition for scalar model.
+    
+    Parameters
+    ----------
+    params : AMFScalarParams
+        Model parameters
+        
+    Returns
+    -------
+    tuple
+        (ν_tilde, H, g) decomposition components
+    """
+    ν, H, g = additive_decomp_scalar(params)
+    ν_tilde = ν + 0.5 * H**2
+    
+    return ν_tilde, H, g
 
-        # Build A matrix for LSS
-        # Order of states is: [1, t, xt, yt, mt]
-        A1 = np.hstack([1, 0, 0, 0, 0])       # Transition for 1
-        A2 = np.hstack([1, 1, 0, 0, 0])       # Transition for t
-        A3 = np.hstack([0, 0, A, 0, 0])       # Transition for x_{t+1}
-        A4 = np.hstack([ν, 0, D, 1, 0])       # Transition for y_{t+1}
-        A5 = np.hstack([0, 0, 0, 0, 1])       # Transition for m_{t+1}
-        Abar = np.vstack([A1, A2, A3, A4, A5])
+def loglikelihood_path_scalar(params, x, y):
+    """
+    Compute log-likelihood path for scalar model.
+    
+    Parameters
+    ----------
+    params : AMFScalarParams
+        Model parameters
+    x : array_like
+        State path
+    y : array_like
+        Observation path
+        
+    Returns
+    -------
+    array_like
+        Log-likelihood path
+    """
+    A, B, D, F = params.A, params.B, params.D, params.F
+    T = y.size
+    FF = F**2
+    FFinv = 1.0 / FF
+    temp = y[1:] - y[:-1] - D * x[:-1]
+    obs = temp * FFinv * temp
+    obssum = jnp.cumsum(obs)
+    scalar = (jnp.log(FF) + jnp.log(2 * jnp.pi)) * jnp.arange(1, T)
+    
+    return -0.5 * (obssum + scalar)
 
-        # Build B matrix for LSS
-        Bbar = np.vstack([0, 0, B, F, H])
-
-        # Build G matrix for LSS
-        # Order of observation is: [xt, yt, mt, st, tt]
-        G1 = np.hstack([0, 0, 1, 0, 0])            # Selector for x_{t}
-        G2 = np.hstack([0, 0, 0, 1, 0])            # Selector for y_{t}
-        G3 = np.hstack([0, 0, 0, 0, 1])            # Selector for martingale
-        G4 = np.hstack([0, 0, -g, 0, 0])           # Selector for stationary
-        G5 = np.hstack([0, ν, 0, 0, 0])            # Selector for trend
-        Gbar = np.vstack([G1, G2, G3, G4, G5])
-
-        # Build H matrix for LSS
-        Hbar = np.zeros((1, 1))
-
-        # Build LSS type
-        x0 = np.hstack([1, 0, 0, 0, 0])
-        S0 = np.zeros((5, 5))
-        lss = qe.LinearStateSpace(Abar, Bbar, Gbar, Hbar,
-                                      mu_0=x0, Sigma_0=S0)
-
-        return lss
-
-    def additive_decomp(self):
-        """
-        Return values for the martingale decomposition (Proposition 4.3.3.)
-           - ν     : unconditional mean difference in Y
-           - H     : coefficient for the (linear) martingale component (kappa_a)
-           - g     : coefficient for the stationary component g(x)
-           - Y_0   : it should be the function of X_0 (for now set it to 0.0)
-        """
-        A_res = 1 / (1 - self.A)
-        g = self.D * A_res
-        H = self.F + self.D * A_res * self.B
-
-        return self.ν, H, g
-
-    def multiplicative_decomp(self):
-        """
-        Return values for the multiplicative decomposition (Example 5.4.4.)
-            - ν_tilde  : eigenvalue
-            - H        : vector for the Jensen term
-        """
-        ν, H, g = self.additive_decomp()
-        ν_tilde = ν + (.5) * H**2
-
-        return ν_tilde, H, g
-
-    def loglikelihood_path(self, x, y):
-        A, B, D, F = self.A, self.B, self.D, self.F
-        T = y.T.size
-        FF = F**2
-        FFinv = 1 / FF
-        temp = y[1:] - y[:-1] - D * x[:-1]
-        obs = temp * FFinv * temp
-        obssum = np.cumsum(obs)
-        scalar = (np.log(FF) + np.log(2 * np.pi)) * np.arange(1, T)
-
-        return (-0.5) * (obssum + scalar)
-
-    def loglikelihood(self, x, y):
-        llh = self.loglikelihood_path(x, y)
-
-        return llh[-1]
+def loglikelihood_scalar(params, x, y):
+    """
+    Compute total log-likelihood for scalar model.
+    
+    Parameters
+    ----------
+    params : AMFScalarParams
+        Model parameters
+    x : array_like
+        State path
+    y : array_like
+        Observation path
+        
+    Returns
+    -------
+    float
+        Total log-likelihood
+    """
+    llh = loglikelihood_path_scalar(params, x, y)
+    return llh[-1]
 ```
 
 The heavy lifting is done inside the `AMF_LSS_VAR` class.
@@ -1142,8 +1267,7 @@ def population_means(amf, T=150):
     return xmean, ymean
 ```
 
-Now that we have these functions in our toolkit, let's apply them to run some
-simulations.
+Now that we have these functions in our toolkit, let's apply them to run some simulations.
 
 ```{code-cell} ipython3
 def simulate_martingale_components(amf, T=1000, I=5000):
@@ -1181,8 +1305,7 @@ in period T is")
 print(f"\t ({np.min(mmcT)}, {np.mean(mmcT)}, {np.max(mmcT)})")
 ```
 
-Let's plot the probability density functions for $\log {\widetilde M}_t$ for
-$t=100, 500, 1000, 10000, 100000$.
+Let's plot the probability density functions for $\log {\widetilde M}_t$ for $t=100, 500, 1000, 10000, 100000$.
 
 Then let's use the plots to  investigate how these densities evolve through time.
 
@@ -1251,11 +1374,9 @@ plt.show()
 These probability density functions help us understand mechanics underlying the  **peculiar property** of our multiplicative martingale
 
 * As $T$ grows, most of the probability mass shifts leftward toward zero.
-* For example, note that most  mass is near $1$ for $T =10$ or $T = 100$ but
-  most of it is near $0$ for $T = 5000$.
+* For example, note that most  mass is near $1$ for $T =10$ or $T = 100$ but most of it is near $0$ for $T = 5000$.
 * As $T$ grows, the tail of the density of $\widetilde M_T$ lengthens toward the right.
-* Enough mass moves toward the right tail to keep $E \widetilde M_T = 1$
-  even as most mass in the distribution of $\widetilde M_T$ collapses around $0$.
+* Enough mass moves toward the right tail to keep $E \widetilde M_T = 1$ even as most mass in the distribution of $\widetilde M_T$ collapses around $0$.
 
 ### Multiplicative martingale as likelihood ratio process
 
