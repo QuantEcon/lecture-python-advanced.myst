@@ -39,13 +39,13 @@ Many economic time series display persistent growth that prevents them from bein
 
 For example, outputs, prices, and dividends typically display  irregular but persistent growth.
 
-Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.
+Asymptotic stationarity and ergodicity are key assumptions for statistical learning.
 
-But  there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
+But there are good ways to model time series with persistent growth while enabling statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
 
-Thus, {cite}`Hansen_2012_Eca`  described  two classes of time series models that accommodate growth.
+Thus, {cite}`Hansen_2012_Eca` described two classes of time series models that accommodate growth.
 
-They are
+They are:
 
 1. **additive functionals** that display random "arithmetic growth"
 1. **multiplicative functionals** that display random "geometric growth"
@@ -63,9 +63,9 @@ We also describe and compute decompositions of additive and multiplicative proce
 1. an asymptotically **stationary** component
 1. a **martingale**
 
-We describe how to construct,  simulate,  and interpret these components.
+We describe how to construct, simulate, and interpret these components.
 
-More details about  these concepts and algorithms  can be found in Hansen  {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
+More details about these concepts and algorithms can be found in Hansen {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
 
 Let's start with some imports:
 
@@ -83,10 +83,9 @@ from scipy.stats import norm, lognorm
 
 This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a Gaussian vector autoregression.
 
-Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
-by using linear state-space tools.
+Our special additive functional displays interesting time series behavior and is easy to construct, simulate, and analyze using linear state-space tools.
 
-We construct our  additive functional from two pieces, the first of which is a **first-order vector autoregression** (VAR)
+We construct our  additive functional from two pieces, the first of which is a **first-order vector autoregression** (VAR).
 
 ```{math}
 :label: old1_additive_functionals
@@ -120,8 +119,7 @@ y_{t+1} - y_{t} = \nu + D x_{t} + F z_{t+1}
 Here $y_0 \sim {\cal N}(\mu_{y0}, \Sigma_{y0})$ is a random
 initial condition for $y$.
 
-The nonstationary random process $\{y_t\}_{t=0}^\infty$ displays
-systematic but random *arithmetic growth*.
+The nonstationary random process $\{y_t\}_{t=0}^\infty$ exhibits systematic random *arithmetic growth*.
 
 ### Linear state-space representation
 
@@ -192,7 +190,6 @@ But here we will use a different set of code for simulation, for reasons describ
 
 Let's run some simulations to build intuition.
 
-(addfunc_eg1)=
 In doing so we'll assume that $z_{t+1}$ is scalar and that $\tilde x_t$ follows a 4th-order scalar autoregression.
 
 ```{math}
@@ -203,7 +200,7 @@ In doing so we'll assume that $z_{t+1}$ is scalar and that $\tilde x_t$ follows 
 \phi_4 \tilde x_{t-3} + \sigma z_{t+1}
 ```
 
-in which the zeros $z$  of the polynomial
+where the zeros $z$ of the polynomial
 
 $$
 \phi(z) = ( 1 - \phi_1 z - \phi_2 z^2 - \phi_3 z^3 - \phi_4 z^4 )
@@ -223,9 +220,9 @@ with an initial condition for $y_0$.
 
 While {eq}`ftaf` is not a first order system like {eq}`old1_additive_functionals`, we know that it can be mapped  into a first order system.
 
-* For an example of such a mapping, see [this example](https://python.quantecon.org/linear_models.html#second-order-difference-equation).
+See [this example](https://python.quantecon.org/linear_models.html#second-order-difference-equation) for such a mapping.
 
-In fact, this whole model can be mapped into the additive functional system definition in {eq}`old1_additive_functionals` -- {eq}`old2_additive_functionals`  by appropriate selection of the matrices $A, B, D, F$.
+This model can be mapped into the additive functional system in {eq}`old1_additive_functionals` -- {eq}`old2_additive_functionals` by appropriately selecting matrices $A, B, D, F$.
 
 You can try writing these matrices down now as an exercise --- correct expressions appear in the code below.
 
@@ -285,7 +282,7 @@ class AMF_LSS_VAR:
         if self.ν.shape[0] != self.D.shape[0]:
             raise ValueError("The dimension of ν is inconsistent with D!")
 
-        # Construct BIG state space representation
+        # Construct big state space representation
         self.lss = self.construct_ss()
 
     def construct_ss(self):
@@ -418,14 +415,14 @@ def plot_given_paths(amf, T, ypath, mpath, spath, tpath,
     ax[0, 0].set_title("One Path of All Variables")
     ax[0, 0].legend(loc="upper left")
 
-    # Plot Martingale Component
+    # Plot martingale component
     ax[0, 1].plot(trange, mpath[0, :], "m")
     ax[0, 1].plot(trange, mpath.T, alpha=0.45, color="m")
     ub = mbounds[1, :]
     lb = mbounds[0, :]
 
     ax[0, 1].fill_between(trange, lb, ub, alpha=0.25, color="m")
-    ax[0, 1].set_title("Martingale Components for Many Paths")
+    ax[0, 1].set_title("Martingale components for many paths")
     ax[0, 1].axhline(horline, color="k", linestyle="-.")
 
     # Plot Stationary Component
@@ -435,12 +432,12 @@ def plot_given_paths(amf, T, ypath, mpath, spath, tpath,
     lb = sbounds[0, :]
     ax[1, 0].fill_between(trange, lb, ub, alpha=0.25, color="g")
     ax[1, 0].axhline(horline, color="k", linestyle="-.")
-    ax[1, 0].set_title("Stationary Components for Many Paths")
+    ax[1, 0].set_title("Stationary components for many paths")
 
     # Plot Trend Component
     if show_trend:
         ax[1, 1].plot(tpath.T, color="r")
-    ax[1, 1].set_title("Trend Components for Many Paths")
+    ax[1, 1].set_title("Trend components for many paths")
     ax[1, 1].axhline(horline, color="k", linestyle="-.")
 
     return fig
@@ -745,7 +742,7 @@ $$
 \end{aligned}
 $$
 
-At this stage, you should pause and verify that $y_{t+1} - y_t$ satisfies {eq}`old2_additive_functionals`.
+Verify that $y_{t+1} - y_t$ satisfies {eq}`old2_additive_functionals`.
 
 It is convenient for us to introduce the following notation:
 
@@ -755,12 +752,11 @@ It is convenient for us to introduce the following notation:
 
 We want to characterize and simulate components $\tau_t, m_t, s_t$ of the decomposition.
 
-A convenient way to do this is to construct an appropriate instance of a [linear state space system](https://python-intro.quantecon.org/linear_models.html) by using [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
+We construct an appropriate [linear state space system](https://python-intro.quantecon.org/linear_models.html) using [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
 
 This will allow us to use the routines in [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) to study dynamics.
 
-To start, observe that, under the dynamics in {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals` and with the
-definitions just given,
+Under the dynamics in {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals` and with the definitions above,
 
 $$
 \begin{bmatrix}
@@ -842,10 +838,9 @@ interest.
 
 ## Code
 
-The class `AMF_LSS_VAR` mentioned {ref}`above <amf_lss>` does all that we want to study our additive functional.
+The class `AMF_LSS_VAR` {ref}`above <amf_lss>` does everything needed to study our additive functional.
 
-In fact, `AMF_LSS_VAR` does more
-because it allows us to study  an associated multiplicative functional as well.
+`AMF_LSS_VAR` also allows us to study an associated multiplicative functional.
 
 (A hint that it does more is the name of the class -- here AMF stands for
 "additive and multiplicative functional" -- the code computes and displays objects associated with
@@ -853,8 +848,7 @@ multiplicative functionals too.)
 
 Let's use this code (embedded above) to explore the {ref}`example process described above <addfunc_eg1>`.
 
-If you run {ref}`the code that first simulated that example <addfunc_egcode>` again and then the method call
-you will generate (modulo randomness) the plot
+If you run {ref}`the code that first simulated that example <addfunc_egcode>` again and then the method call, you will generate (modulo randomness) the plot.
 
 ```{code-cell} ipython3
 plot_additive(amf, T)
@@ -867,10 +861,9 @@ We have chosen to simulate many paths, all starting from the *same* non-random i
 
 Notice tell-tale signs of these probability coverage shaded areas
 
-* the purple one for the martingale component $m_t$ grows with
-  $\sqrt{t}$
-* the green one for the stationary component $s_t$ converges to a
-  constant band
+The purple one for the martingale component $m_t$ grows with $\sqrt{t}$.
+
+The green one for the stationary component $s_t$ converges to a constant band.
 
 ### Associated multiplicative functional
 
@@ -909,8 +902,7 @@ An instance of class `AMF_LSS_VAR` ({ref}`above <amf_lss>`)  includes this assoc
 
 Let's plot this multiplicative functional for our example.
 
-If you run {ref}`the code that first simulated that example <addfunc_egcode>` again and then the method call in the cell below you'll
-obtain the graph in the next cell.
+If you run {ref}`the code that first simulated that example <addfunc_egcode>` again and then the method call in the cell below, you'll obtain the graph in the next cell.
 
 ```{code-cell} ipython3
 plot_multiplicative(amf, T)
@@ -922,22 +914,17 @@ As before, when we plotted multiple realizations of a component in the 2nd, 3rd,
 Comparing this figure and the last also helps show how geometric growth differs from
 arithmetic growth.
 
-The top right panel of the above graph shows a panel of martingales associated with the panel of $M_t = \exp(y_t)$ that we have generated
-for a limited horizon $T$.
+The top right panel of the above graph shows a panel of martingales associated with the panel of $M_t = \exp(y_t)$ that we have generated for a limited horizon $T$.
 
-It is interesting to how the martingale behaves as $T \rightarrow +\infty$.
+It is interesting to see how the martingale behaves as $T \rightarrow +\infty$.
 
 Let's see what happens when we set $T = 12000$ instead of $150$.
 
 ### Peculiar large sample property
 
-Hansen and Sargent {cite}`Hans_Sarg_book` (ch. 8) describe the following two properties of the  martingale component
-$\widetilde M_t$ of the multiplicative decomposition
+Hansen and Sargent {cite}`Hans_Sarg_book` (ch. 8) describe the following two properties of the  martingale component $\widetilde M_t$ of the multiplicative decomposition:
 
-* while $E_0 \widetilde M_t = 1$ for all $t \geq 0$,
-  nevertheless $\ldots$
-* as $t \rightarrow +\infty$, $\widetilde M_t$ converges to
-  zero almost surely
+While $E_0 \widetilde M_t = 1$ for all $t \geq 0$, nevertheless $\widetilde M_t$ converges to zero almost surely as $t \rightarrow +\infty$.
 
 The first property follows from the fact that $\widetilde M_t$ is a multiplicative martingale with initial condition
 $\widetilde M_0 = 1$.
@@ -960,10 +947,9 @@ The purple 95 percent frequency coverage interval collapses around zero, illustr
 
 ## More about the multiplicative martingale
 
-Let's drill down and study probability distribution of the multiplicative martingale  $\{\widetilde M_t\}_{t=0}^\infty$  in
-more detail.
+Let's drill down and study the probability distribution of the multiplicative martingale $\{\widetilde M_t\}_{t=0}^\infty$ in more detail.
 
-As we  have seen, it has representation
+As we have seen, it has the representation
 
 $$
 \widetilde M_t = \exp \biggl( \sum_{j=1}^t \biggl(H \cdot z_j -\frac{ H \cdot H }{2} \biggr) \biggr),  \quad \widetilde M_0 =1
@@ -971,14 +957,15 @@ $$
 
 where $H =  [F + D(I-A)^{-1} B]$.
 
-It follows that $\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2}, t H \cdot H )$ and that consequently ${\widetilde M}_t$ is log normal.
+It follows that $\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2}, t H \cdot H )$.
+
+Consequently, ${\widetilde M}_t$ is log normal.
 
 ### Simulating a multiplicative martingale again
 
 Next, we want a program to simulate the likelihood ratio process $\{ \tilde{M}_t \}_{t=0}^\infty$.
 
-In particular, we want to simulate 5000 sample paths of length $T$ for the case in which $x$ is a scalar and
-$[A, B, D, F] = [0.8, 0.001, 1.0, 0.01]$ and $\nu = 0.005$.
+In particular, we want to simulate 5000 sample paths of length $T$ for the case in which $x$ is a scalar and $[A, B, D, F] = [0.8, 0.001, 1.0, 0.01]$ and $\nu = 0.005$.
 
 After accomplishing this, we want to display and study histograms of $\tilde{M}_T^i$ for various values of  $T$.
 
@@ -1022,11 +1009,11 @@ class AMF_LSS_VAR:
 
         # Build A matrix for LSS
         # Order of states is: [1, t, xt, yt, mt]
-        A1 = np.hstack([1, 0, 0, 0, 0])       # Transition for 1
-        A2 = np.hstack([1, 1, 0, 0, 0])       # Transition for t
-        A3 = np.hstack([0, 0, A, 0, 0])       # Transition for x_{t+1}
-        A4 = np.hstack([ν, 0, D, 1, 0])       # Transition for y_{t+1}
-        A5 = np.hstack([0, 0, 0, 0, 1])       # Transition for m_{t+1}
+        A1 = np.hstack([1, 0, 0, 0, 0])       # transition for 1
+        A2 = np.hstack([1, 1, 0, 0, 0])       # transition for t
+        A3 = np.hstack([0, 0, A, 0, 0])       # transition for x_{t+1}
+        A4 = np.hstack([ν, 0, D, 1, 0])       # transition for y_{t+1}
+        A5 = np.hstack([0, 0, 0, 0, 1])       # transition for m_{t+1}
         Abar = np.vstack([A1, A2, A3, A4, A5])
 
         # Build B matrix for LSS
@@ -1034,7 +1021,7 @@ class AMF_LSS_VAR:
 
         # Build G matrix for LSS
         # Order of observation is: [xt, yt, mt, st, tt]
-        G1 = np.hstack([0, 0, 1, 0, 0])            # Selector for x_{t}
+        G1 = np.hstack([0, 0, 1, 0, 0])            # selector for x_{t}
         G2 = np.hstack([0, 0, 0, 1, 0])            # Selector for y_{t}
         G3 = np.hstack([0, 0, 0, 0, 1])            # Selector for martingale
         G4 = np.hstack([0, 0, -g, 0, 0])           # Selector for stationary
@@ -1176,24 +1163,20 @@ mmcT = mmc[:, -1]
 print("The (min, mean, max) of additive Martingale component in period T is")
 print(f"\t ({np.min(amcT)}, {np.mean(amcT)}, {np.max(amcT)})")
 
-print("The (min, mean, max) of multiplicative Martingale component \
-in period T is")
+print("The (min, mean, max) of multiplicative Martingale component in period T is")
 print(f"\t ({np.min(mmcT)}, {np.mean(mmcT)}, {np.max(mmcT)})")
 ```
 
-Let's plot the probability density functions for $\log {\widetilde M}_t$ for
-$t=100, 500, 1000, 10000, 100000$.
+Let's plot the probability density functions for $\log {\widetilde M}_t$ for $t=100, 500, 1000, 10000, 100000$.
 
-Then let's use the plots to  investigate how these densities evolve through time.
+Then let's use the plots to investigate how these densities evolve through time.
 
 We will plot the densities of $\log {\widetilde M}_t$ for different values of $t$.
 
 ```{note}
-`scipy.stats.lognorm` expects you to pass the standard deviation
-first $(tH \cdot H)$ and then the exponent of the mean as a
-keyword argument `scale` (`scale=np.exp(-t * H2 / 2)`).
+`scipy.stats.lognorm` expects you to pass the standard deviation first $(tH \cdot H)$ and then the exponent of the mean as a keyword argument `scale` (`scale=np.exp(-t * H2 / 2)`).
 
-* See the documentation [here](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html#scipy.stats.lognorm).
+See the documentation [here](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html#scipy.stats.lognorm).
 
 This is peculiar, so make sure you are careful in working with the log normal distribution.
 ```
@@ -1248,21 +1231,21 @@ plt.tight_layout()
 plt.show()
 ```
 
-These probability density functions help us understand mechanics underlying the  **peculiar property** of our multiplicative martingale
+These probability density functions help us understand mechanics underlying the **peculiar property** of our multiplicative martingale:
 
-* As $T$ grows, most of the probability mass shifts leftward toward zero.
-* For example, note that most  mass is near $1$ for $T =10$ or $T = 100$ but
-  most of it is near $0$ for $T = 5000$.
-* As $T$ grows, the tail of the density of $\widetilde M_T$ lengthens toward the right.
-* Enough mass moves toward the right tail to keep $E \widetilde M_T = 1$
-  even as most mass in the distribution of $\widetilde M_T$ collapses around $0$.
+As $T$ grows, most of the probability mass shifts leftward toward zero.
+
+For example, note that most mass is near $1$ for $T =10$ or $T = 100$ but most of it is near $0$ for $T = 5000$.
+
+As $T$ grows, the tail of the density of $\widetilde M_T$ lengthens toward the right.
+
+Enough mass moves toward the right tail to keep $E \widetilde M_T = 1$ even as most mass in the distribution of $\widetilde M_T$ collapses around $0$.
 
 ### Multiplicative martingale as likelihood ratio process
 
-[This lecture](https://python.quantecon.org/likelihood_ratio_process.html) studies **likelihood processes**
-and **likelihood ratio processes**.
+[This lecture](https://python.quantecon.org/likelihood_ratio_process.html) studies **likelihood processes** and **likelihood ratio processes**.
 
-A **likelihood ratio process** is  a  multiplicative  martingale with mean unity.
+A **likelihood ratio process** is a multiplicative martingale with mean unity.
 
 Likelihood ratio processes exhibit the peculiar property that naturally also appears
 [here](https://python.quantecon.org/likelihood_ratio_process.html).
