@@ -20,7 +20,7 @@ kernelspec:
 </div>
 ```
 
-# Additive and Multiplicative Functionals
+# Additive and multiplicative functionals
 
 ```{index} single: Models; Additive functionals
 ```
@@ -30,7 +30,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-!pip install --upgrade quantecon
+!pip install --upgrade quantecon --quiet
 ```
 
 ## Overview
@@ -41,9 +41,9 @@ For example, outputs, prices, and dividends typically display  irregular but per
 
 Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.
 
-But  there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
+But we can model time series with persistent growth while still enabling statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
 
-Thus, {cite}`Hansen_2012_Eca`  described  two classes of time series models that accommodate growth.
+Thus, {cite}`Hansen_2012_Eca` described two classes of time series models that accommodate growth.
 
 They are
 
@@ -65,13 +65,15 @@ We also describe and compute decompositions of additive and multiplicative proce
 
 We describe how to construct,  simulate,  and interpret these components.
 
-More details about  these concepts and algorithms  can be found in Hansen  {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
+More details about these concepts and algorithms can be found in Hansen {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
 
 Let's start with some imports:
 
 ```{code-cell} ipython3
-import numpy as np
-import scipy.linalg as la
+import jax.numpy as jnp
+import jax.numpy as jnp
+import jax.scipy.linalg as jla
+from jax import jit, vmap
 import quantecon as qe
 import matplotlib.pyplot as plt
 from scipy.stats import norm, lognorm
@@ -83,8 +85,7 @@ from scipy.stats import norm, lognorm
 
 This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a Gaussian vector autoregression.
 
-Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
-by using linear state-space tools.
+Our additive functional displays interesting time series behavior and is easy to construct, simulate, and analyze using linear state-space tools.
 
 We construct our  additive functional from two pieces, the first of which is a **first-order vector autoregression** (VAR)
 
@@ -114,7 +115,7 @@ In particular,
 ```{math}
 :label: old2_additive_functionals
 
-y_{t+1} - y_{t} = \nu + D x_{t} + F z_{t+1}
+y_{t+1} - y_t = \nu + D x_t + F z_{t+1}
 ```
 
 Here $y_0 \sim {\cal N}(\mu_{y0}, \Sigma_{y0})$ is a random
@@ -125,7 +126,7 @@ systematic but random *arithmetic growth*.
 
 ### Linear state-space representation
 
-A convenient way to represent our additive functional is to use a [linear state space system](https://python-intro.quantecon.org/linear_models.html).
+We represent our additive functional as a [linear state space system](https://python-intro.quantecon.org/linear_models.html).
 
 To do this, we set up state and observation vectors
 
@@ -184,16 +185,14 @@ $$
 
 which is a standard linear state space system.
 
-To study it, we could map it into an instance of [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
-
-But here we will use a different set of code for simulation, for reasons described below.
+We could use [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py), but we will use different code for simulation, for reasons described below.
 
 ## Dynamics
 
 Let's run some simulations to build intuition.
 
 (addfunc_eg1)=
-In doing so we'll assume that $z_{t+1}$ is scalar and that $\tilde x_t$ follows a 4th-order scalar autoregression.
+We assume that $z_{t+1}$ is scalar. We also assume that $\tilde x_t$ follows a 4th-order scalar autoregression.
 
 ```{math}
 :label: ftaf
@@ -211,7 +210,7 @@ $$
 
 are strictly greater than unity in absolute value.
 
-(Being a zero of $\phi(z)$ means that $\phi(z) = 0$)
+A zero of $\phi(z)$ satisfies $\phi(z) = 0$.
 
 Let the increment in $\{y_t\}$ obey
 
@@ -221,9 +220,9 @@ $$
 
 with an initial condition for $y_0$.
 
-While {eq}`ftaf` is not a first order system like {eq}`old1_additive_functionals`, we know that it can be mapped  into a first order system.
+While {eq}`ftaf` is not a first-order system like {eq}`old1_additive_functionals`, it can be mapped into one.
 
-* For an example of such a mapping, see [this example](https://python.quantecon.org/linear_models.html#second-order-difference-equation).
+* For an example of such a mapping, see {doc}`this example <intro:linear_models>`.
 
 In fact, this whole model can be mapped into the additive functional system definition in {eq}`old1_additive_functionals` -- {eq}`old2_additive_functionals`  by appropriate selection of the matrices $A, B, D, F$.
 
@@ -233,7 +232,7 @@ You can try writing these matrices down now as an exercise --- correct expressio
 
 When simulating we embed our variables into a bigger system.
 
-This system also constructs the components of the decompositions of $y_t$ and of $\exp(y_t)$ proposed by Hansen {cite}`Hansen_2012_Eca`.
+This system also constructs the decomposition components of $y_t$ and $\exp(y_t)$ proposed by Hansen (2012).
 
 All of these objects are computed using the code below
 
@@ -302,10 +301,10 @@ class AMF_LSS_VAR:
             ν, H, g = self.additive_decomp()
 
         # Auxiliary blocks with 0's and 1's to fill out the lss matrices
-        nx0c = np.zeros((nx, 1))
-        nx0r = np.zeros(nx)
-        nx1 = np.ones(nx)
-        nk0 = np.zeros(nk)
+        nx0c = jnp.zeros((nx, 1))
+        nx0r = jnp.zeros(nx)
+        nx1 = jnp.ones(nx)
+        nk0 = jnp.zeros(nk)
         ny0c = np.zeros((nm, 1))
         ny0r = np.zeros(nm)
         ny1m = np.eye(nm)
@@ -313,13 +312,11 @@ class AMF_LSS_VAR:
         nyx0m = np.zeros_like(D)
 
         # Build A matrix for LSS
-        # Order of states is: [1, t, xt, yt, mt]
-        A1 = np.hstack([1, 0, nx0r, ny0r, ny0r])         # Transition for 1
-        A2 = np.hstack([1, 1, nx0r, ny0r, ny0r])         # Transition for t
-        # Transition for x_{t+1}
-        A3 = np.hstack([nx0c, nx0c, A, nyx0m.T, nyx0m.T])
-        # Transition for y_{t+1}
-        A4 = np.hstack([ν, ny0c, D, ny1m, ny0m])
+        # Order of states is: [1, t, x_t, y_t, m_t]
+        A1 = np.hstack([1, 0, nx0r, ny0r, ny0r])  # Transition for 1
+        A2 = np.hstack([1, 1, nx0r, ny0r, ny0r])  # Transition for t
+        A3 = np.hstack([nx0c, nx0c, A, nyx0m.T, nyx0m.T])  # Transition for x_{t+1}
+        A4 = np.hstack([ν, ny0c, D, ny1m, ny0m])  # Transition for y_{t+1}
         # Transition for m_{t+1}
         A5 = np.hstack([ny0c, ny0c, nyx0m, ny0m, ny1m])
         Abar = np.vstack([A1, A2, A3, A4, A5])
@@ -328,12 +325,10 @@ class AMF_LSS_VAR:
         Bbar = np.vstack([nk0, nk0, B, F, H])
 
         # Build G matrix for LSS
-        # Order of observation is: [xt, yt, mt, st, tt]
-        # Selector for x_{t}
-        G1 = np.hstack([nx0c, nx0c, np.eye(nx), nyx0m.T, nyx0m.T])
-        G2 = np.hstack([ny0c, ny0c, nyx0m, ny1m, ny0m])   # Selector for y_{t}
-        # Selector for martingale
-        G3 = np.hstack([ny0c, ny0c, nyx0m, ny0m, ny1m])
+        # Order of observation is: [x_t, y_t, m_t, s_t, t_t]
+        G1 = np.hstack([nx0c, nx0c, np.eye(nx), nyx0m.T, nyx0m.T])  # Selector for x_t
+        G2 = np.hstack([ny0c, ny0c, nyx0m, ny1m, ny0m])  # Selector for y_t
+        G3 = np.hstack([ny0c, ny0c, nyx0m, ny0m, ny1m])  # Selector for martingale
         G4 = np.hstack([ny0c, ny0c, -g, ny0m, ny0m])  # Selector for stationary
         G5 = np.hstack([ny0c, ν, nyx0m, ny0m, ny0m])  # Selector for trend
         Gbar = np.vstack([G1, G2, G3, G4, G5])
@@ -370,7 +365,7 @@ class AMF_LSS_VAR:
             - H        : vector for the Jensen term
         """
         ν, H, g = self.additive_decomp()
-        ν_tilde = ν + (.5)*np.expand_dims(np.diag(H @ H.T), 1)
+        ν_tilde = ν + 0.5 * np.expand_dims(np.diag(H @ H.T), 1)
 
         return ν_tilde, H, g
 
@@ -546,15 +541,15 @@ def plot_multiplicative(amf, T, npaths=25, show_trend=True):
         # Lower and upper bounds - for each multiplicative functional
         for ii in range(nm):
             li, ui = ii*2, (ii+1)*2
-            Mdist = lognorm(np.sqrt(yvar[nx+nm+ii, nx+nm+ii]).item(),
-                            scale=np.exp(ymeans[nx+nm+ii] \
-                                                    - t * (.5)
-                                                    * np.expand_dims(
-                                                        np.diag(H @ H.T),
-                                                        1
-                                                        )[ii]
-                                                    ).item()
-                                                )
+            scale_val = np.exp(
+                ymeans[nx+nm+ii] - t * 0.5 * np.expand_dims(
+                    np.diag(H @ H.T), 1
+                )[ii]
+            ).item()
+            Mdist = lognorm(
+                np.sqrt(yvar[nx+nm+ii, nx+nm+ii]).item(),
+                scale=scale_val
+            )
             Sdist = lognorm(np.sqrt(yvar[nx+2*nm+ii, nx+2*nm+ii]).item(),
                             scale = np.exp(-ymeans[nx+2*nm+ii]).item())
             mbounds_mult[li:ui, t] = Mdist.ppf([.01, .99])
@@ -844,12 +839,9 @@ interest.
 
 The class `AMF_LSS_VAR` mentioned {ref}`above <amf_lss>` does all that we want to study our additive functional.
 
-In fact, `AMF_LSS_VAR` does more
-because it allows us to study  an associated multiplicative functional as well.
+In fact, `AMF_LSS_VAR` does more because it allows us to study  an associated multiplicative functional as well.
 
-(A hint that it does more is the name of the class -- here AMF stands for
-"additive and multiplicative functional" -- the code computes and displays objects associated with
-multiplicative functionals too.)
+(A hint that it does more is the name of the class -- here AMF stands for "additive and multiplicative functional" -- the code computes and displays objects associated with multiplicative functionals too.)
 
 Let's use this code (embedded above) to explore the {ref}`example process described above <addfunc_eg1>`.
 
@@ -1100,9 +1092,9 @@ The heavy lifting is done inside the `AMF_LSS_VAR` class.
 The following code adds some simple functions that make it straightforward to generate sample paths from an instance of `AMF_LSS_VAR`.
 
 ```{code-cell} ipython3
-def simulate_xy(amf, T):
+def simulate_xy(amf, T, key):
     "Simulate individual paths."
-    foo, bar = amf.lss.simulate(T)
+    foo, bar = amf.lss.simulate(T, key=key)
     x = bar[0, :]
     y = bar[1, :]
 
