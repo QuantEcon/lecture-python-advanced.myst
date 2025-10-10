@@ -35,15 +35,15 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 
 ## Overview
 
-Many economic time series display persistent growth that prevents them from being  asymptotically stationary and ergodic.
+Many economic time series display persistent growth that prevents them from being asymptotically stationary and ergodic.
 
-For example, outputs, prices, and dividends typically display  irregular but persistent growth.
+For example, outputs, prices, and dividends typically display irregular but persistent growth.
 
 Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.
 
-But  there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
+But there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
 
-Thus, {cite}`Hansen_2012_Eca`  described  two classes of time series models that accommodate growth.
+Thus, {cite}`Hansen_2012_Eca` described two classes of time series models that accommodate growth.
 
 They are
 
@@ -63,9 +63,9 @@ We also describe and compute decompositions of additive and multiplicative proce
 1. an asymptotically **stationary** component
 1. a **martingale**
 
-We describe how to construct,  simulate,  and interpret these components.
+We describe how to construct, simulate, and interpret these components.
 
-More details about  these concepts and algorithms  can be found in Hansen  {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
+More details about these concepts and algorithms can be found in Hansen {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
 
 Let's start with some imports:
 
@@ -81,12 +81,12 @@ from scipy.stats import norm, lognorm
 
 {cite}`Hansen_2012_Eca` describes a general class of additive functionals.
 
-This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a Gaussian vector autoregression.
+This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a gaussian vector autoregression.
 
 Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
 by using linear state-space tools.
 
-We construct our  additive functional from two pieces, the first of which is a **first-order vector autoregression** (VAR)
+We construct our additive functional from two pieces, the first of which is a **first-order vector autoregression** (VAR)
 
 ```{math}
 :label: old1_additive_functionals
@@ -107,7 +107,7 @@ of $\{y_t\}_{t=0}^\infty$ as linear functions of
 
 * a scalar constant $\nu$,
 * the vector $x_t$, and
-* the same Gaussian vector $z_{t+1}$ that appears in the VAR {eq}`old1_additive_functionals`
+* the same gaussian vector $z_{t+1}$ that appears in the VAR {eq}`old1_additive_functionals`
 
 In particular,
 
@@ -117,8 +117,7 @@ In particular,
 y_{t+1} - y_{t} = \nu + D x_{t} + F z_{t+1}
 ```
 
-Here $y_0 \sim {\cal N}(\mu_{y0}, \Sigma_{y0})$ is a random
-initial condition for $y$.
+Here $y_0 \sim {\cal N}(\mu_{y0}, \Sigma_{y0})$ is a random initial condition for $y$.
 
 The nonstationary random process $\{y_t\}_{t=0}^\infty$ displays
 systematic but random *arithmetic growth*.
@@ -714,16 +713,14 @@ Notice the irregular but persistent growth in $y_t$.
 
 ### Decomposition
 
-Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of
-an additive functional into four parts:
+Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of an additive functional into four parts:
 
 - a constant inherited from initial values $x_0$ and $y_0$
 - a linear trend
 - a martingale
 - an (asymptotically) stationary component
 
-To attain this decomposition for the particular class of additive
-functionals defined by {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals`, we first construct the matrices
+To attain this decomposition for the additive functionals defined by {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals`, we first construct the matrices
 
 $$
 \begin{aligned}
@@ -759,8 +756,7 @@ A convenient way to do this is to construct an appropriate instance of a [linear
 
 This will allow us to use the routines in [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) to study dynamics.
 
-To start, observe that, under the dynamics in {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals` and with the
-definitions just given,
+To start, observe that, under the dynamics in {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals` and with the definitions just given,
 
 $$
 \begin{bmatrix}
@@ -844,8 +840,7 @@ interest.
 
 The class `AMF_LSS_VAR` mentioned {ref}`above <amf_lss>` does all that we want to study our additive functional.
 
-In fact, `AMF_LSS_VAR` does more
-because it allows us to study  an associated multiplicative functional as well.
+In fact, `AMF_LSS_VAR` does more because it allows us to study an associated multiplicative functional as well.
 
 (A hint that it does more is the name of the class -- here AMF stands for
 "additive and multiplicative functional" -- the code computes and displays objects associated with
