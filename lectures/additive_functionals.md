@@ -35,13 +35,13 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 
 ## Overview
 
-Many economic time series display persistent growth that prevents them from being  asymptotically stationary and ergodic.
+Many economic time series display persistent growth that prevents them from being asymptotically stationary and ergodic.
 
-For example, outputs, prices, and dividends typically display  irregular but persistent growth.
+For example, outputs, prices, and dividends typically display irregular but persistent growth.
 
 Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.
 
-But  there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
+But there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
 
 Thus, {cite}`Hansen_2012_Eca`  described  two classes of time series models that accommodate growth.
 
@@ -63,7 +63,7 @@ We also describe and compute decompositions of additive and multiplicative proce
 1. an asymptotically **stationary** component
 1. a **martingale**
 
-We describe how to construct,  simulate,  and interpret these components.
+We describe how to construct, simulate, and interpret these components.
 
 More details about  these concepts and algorithms  can be found in Hansen  {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
 
@@ -81,7 +81,7 @@ from scipy.stats import norm, lognorm
 
 {cite}`Hansen_2012_Eca` describes a general class of additive functionals.
 
-This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a Gaussian vector autoregression.
+This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a gaussian vector autoregression.
 
 Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
 by using linear state-space tools.
@@ -98,7 +98,7 @@ Here
 
 * $x_t$ is an $n \times 1$ vector,
 * $A$ is an $n \times n$ stable matrix (all eigenvalues lie within the open unit circle),
-* $z_{t+1} \sim {\cal N}(0,I)$ is an $m \times 1$ IID shock,
+* $z_{t+1} \sim {\cal N}(0,I)$ is an $m \times 1$ iid shock,
 * $B$ is an $n \times m$ matrix, and
 * $x_0 \sim {\cal N}(\mu_0, \Sigma_0)$ is a random initial condition for $x$
 
@@ -107,7 +107,7 @@ of $\{y_t\}_{t=0}^\infty$ as linear functions of
 
 * a scalar constant $\nu$,
 * the vector $x_t$, and
-* the same Gaussian vector $z_{t+1}$ that appears in the VAR {eq}`old1_additive_functionals`
+* the same gaussian vector $z_{t+1}$ that appears in the VAR {eq}`old1_additive_functionals`
 
 In particular,
 
@@ -117,8 +117,7 @@ In particular,
 y_{t+1} - y_{t} = \nu + D x_{t} + F z_{t+1}
 ```
 
-Here $y_0 \sim {\cal N}(\mu_{y0}, \Sigma_{y0})$ is a random
-initial condition for $y$.
+Here $y_0 \sim {\cal N}(\mu_{y0}, \Sigma_{y0})$ is a random initial condition for $y$.
 
 The nonstationary random process $\{y_t\}_{t=0}^\infty$ displays
 systematic but random *arithmetic growth*.
@@ -211,7 +210,7 @@ $$
 
 are strictly greater than unity in absolute value.
 
-(Being a zero of $\phi(z)$ means that $\phi(z) = 0$)
+A zero of $\phi(z)$ satisfies $\phi(z) = 0$.
 
 Let the increment in $\{y_t\}$ obey
 
@@ -221,7 +220,7 @@ $$
 
 with an initial condition for $y_0$.
 
-While {eq}`ftaf` is not a first order system like {eq}`old1_additive_functionals`, we know that it can be mapped  into a first order system.
+While {eq}`ftaf` is not a first order system like {eq}`old1_additive_functionals`, it can be mapped into a first order system.
 
 * For an example of such a mapping, see [this example](https://python.quantecon.org/linear_models.html#second-order-difference-equation).
 
@@ -231,9 +230,9 @@ You can try writing these matrices down now as an exercise --- correct expressio
 
 ### Simulation
 
-When simulating we embed our variables into a bigger system.
+When simulating, we embed our variables into a larger system.
 
-This system also constructs the components of the decompositions of $y_t$ and of $\exp(y_t)$ proposed by Hansen {cite}`Hansen_2012_Eca`.
+This system constructs the decomposition components of $y_t$ and $\exp(y_t)$ proposed by Hansen {cite}`Hansen_2012_Eca`.
 
 All of these objects are computed using the code below
 
@@ -714,8 +713,7 @@ Notice the irregular but persistent growth in $y_t$.
 
 ### Decomposition
 
-Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of
-an additive functional into four parts:
+Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of an additive functional into four parts:
 
 - a constant inherited from initial values $x_0$ and $y_0$
 - a linear trend
@@ -753,9 +751,9 @@ It is convenient for us to introduce the following notation:
 - $m_t = \sum_{j=1}^t H z_j$, a martingale with time $t+1$ increment $H z_{t+1}$
 - $s_t = g x_t$, an (asymptotically) stationary component
 
-We want to characterize and simulate components $\tau_t, m_t, s_t$ of the decomposition.
+We characterize and simulate the decomposition components $\tau_t$, $m_t$, and $s_t$.
 
-A convenient way to do this is to construct an appropriate instance of a [linear state space system](https://python-intro.quantecon.org/linear_models.html) by using [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
+To characterize and simulate these components, we construct an appropriate instance of a [linear state space system](https://python-intro.quantecon.org/linear_models.html) using [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
 
 This will allow us to use the routines in [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) to study dynamics.
 
@@ -842,30 +840,26 @@ interest.
 
 ## Code
 
-The class `AMF_LSS_VAR` mentioned {ref}`above <amf_lss>` does all that we want to study our additive functional.
+The `AMF_LSS_VAR` class {ref}`mentioned above <amf_lss>` enables us to study our additive functional.
 
-In fact, `AMF_LSS_VAR` does more
-because it allows us to study  an associated multiplicative functional as well.
+In fact, `AMF_LSS_VAR` does more because it allows us to study an associated multiplicative functional as well.
 
-(A hint that it does more is the name of the class -- here AMF stands for
-"additive and multiplicative functional" -- the code computes and displays objects associated with
-multiplicative functionals too.)
+A hint that it does more is the name of the class -- here AMF stands for "additive and multiplicative functional" -- the code computes and displays objects associated with multiplicative functionals too.
 
 Let's use this code (embedded above) to explore the {ref}`example process described above <addfunc_eg1>`.
 
-If you run {ref}`the code that first simulated that example <addfunc_egcode>` again and then the method call
-you will generate (modulo randomness) the plot
+Running {ref}`the code that first simulated that example <addfunc_egcode>` again and then the method call generates (modulo randomness) the plot below.
 
 ```{code-cell} ipython3
 plot_additive(amf, T)
 plt.show()
 ```
 
-When we plot multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plot the population 95% probability coverage sets computed using the LinearStateSpace class.
+When we plot multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plot the population 95% probability coverage sets computed using the `LinearStateSpace` class.
 
 We have chosen to simulate many paths, all starting from the *same* non-random initial conditions $x_0, y_0$ (you can tell this from the shape of the 95% probability coverage shaded areas).
 
-Notice tell-tale signs of these probability coverage shaded areas
+Notice the tell-tale signs of these probability coverage shaded areas:
 
 * the purple one for the martingale component $m_t$ grows with
   $\sqrt{t}$
@@ -874,11 +868,11 @@ Notice tell-tale signs of these probability coverage shaded areas
 
 ### Associated multiplicative functional
 
-Where $\{y_t\}$ is our additive functional, let $M_t = \exp(y_t)$.
+Let $M_t = \exp(y_t)$, where $\{y_t\}$ is our additive functional.
 
 As mentioned above, the process $\{M_t\}$ is called a **multiplicative functional**.
 
-Corresponding to the additive decomposition described above we have a multiplicative decomposition of  $M_t$
+Corresponding to the additive decomposition described above, we have a multiplicative decomposition of $M_t$:
 
 $$
 \frac{M_t}{M_0}
@@ -909,8 +903,7 @@ An instance of class `AMF_LSS_VAR` ({ref}`above <amf_lss>`)  includes this assoc
 
 Let's plot this multiplicative functional for our example.
 
-If you run {ref}`the code that first simulated that example <addfunc_egcode>` again and then the method call in the cell below you'll
-obtain the graph in the next cell.
+Running {ref}`the code that first simulated that example <addfunc_egcode>` again and then executing the method call in the cell below produces the graph in the next cell.
 
 ```{code-cell} ipython3
 plot_multiplicative(amf, T)
@@ -925,7 +918,7 @@ arithmetic growth.
 The top right panel of the above graph shows a panel of martingales associated with the panel of $M_t = \exp(y_t)$ that we have generated
 for a limited horizon $T$.
 
-It is interesting to how the martingale behaves as $T \rightarrow +\infty$.
+It is interesting to see how the martingale behaves as $T \rightarrow +\infty$.
 
 Let's see what happens when we set $T = 12000$ instead of $150$.
 
