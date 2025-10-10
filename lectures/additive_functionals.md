@@ -43,9 +43,9 @@ Asymptotic stationarity and ergodicity are key assumptions needed to make it pos
 
 But  there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
 
-Thus, {cite}`Hansen_2012_Eca`  described  two classes of time series models that accommodate growth.
+Thus, {cite}`Hansen_2012_Eca` described two classes of time series models that accommodate growth.
 
-They are
+They are:
 
 1. **additive functionals** that display random "arithmetic growth"
 1. **multiplicative functionals** that display random "geometric growth"
@@ -184,7 +184,7 @@ $$
 
 which is a standard linear state space system.
 
-To study it, we could map it into an instance of [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
+To study it, we could map it into an instance of [linear state space](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
 
 But here we will use a different set of code for simulation, for reasons described below.
 
@@ -211,7 +211,7 @@ $$
 
 are strictly greater than unity in absolute value.
 
-(Being a zero of $\phi(z)$ means that $\phi(z) = 0$)
+A zero of $\phi(z)$ satisfies $\phi(z) = 0$.
 
 Let the increment in $\{y_t\}$ obey
 
@@ -221,11 +221,11 @@ $$
 
 with an initial condition for $y_0$.
 
-While {eq}`ftaf` is not a first order system like {eq}`old1_additive_functionals`, we know that it can be mapped  into a first order system.
+While {eq}`ftaf` is not a first order system like {eq}`old1_additive_functionals`, we know that it can be mapped into a first order system.
 
 * For an example of such a mapping, see [this example](https://python.quantecon.org/linear_models.html#second-order-difference-equation).
 
-In fact, this whole model can be mapped into the additive functional system definition in {eq}`old1_additive_functionals` -- {eq}`old2_additive_functionals`  by appropriate selection of the matrices $A, B, D, F$.
+In fact, this whole model can be mapped into the additive functional system definition in {eq}`old1_additive_functionals` -- {eq}`old2_additive_functionals` by appropriate selection of the matrices $A, B, D, F$.
 
 You can try writing these matrices down now as an exercise --- correct expressions appear in the code below.
 
@@ -755,9 +755,9 @@ It is convenient for us to introduce the following notation:
 
 We want to characterize and simulate components $\tau_t, m_t, s_t$ of the decomposition.
 
-A convenient way to do this is to construct an appropriate instance of a [linear state space system](https://python-intro.quantecon.org/linear_models.html) by using [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
+A convenient way to do this is to construct an appropriate instance of a [linear state space system](https://python-intro.quantecon.org/linear_models.html) by using the [linear state space](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) class from [QuantEcon.py](http://quantecon.org/quantecon-py).
 
-This will allow us to use the routines in [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) to study dynamics.
+This will allow us to use the routines in the [linear state space class](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) to study dynamics.
 
 To start, observe that, under the dynamics in {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals` and with the
 definitions just given,
@@ -971,7 +971,9 @@ $$
 
 where $H =  [F + D(I-A)^{-1} B]$.
 
-It follows that $\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2}, t H \cdot H )$ and that consequently ${\widetilde M}_t$ is log normal.
+It follows that $\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2}, t H \cdot H )$.
+
+Consequently, ${\widetilde M}_t$ is log normal.
 
 ### Simulating a multiplicative martingale again
 
@@ -980,7 +982,7 @@ Next, we want a program to simulate the likelihood ratio process $\{ \tilde{M}_t
 In particular, we want to simulate 5000 sample paths of length $T$ for the case in which $x$ is a scalar and
 $[A, B, D, F] = [0.8, 0.001, 1.0, 0.01]$ and $\nu = 0.005$.
 
-After accomplishing this, we want to display and study histograms of $\tilde{M}_T^i$ for various values of  $T$.
+After accomplishing this, we want to display and study histograms of $\tilde{M}_T^i$ for various values of $T$.
 
 Here is code that accomplishes these tasks.
 
