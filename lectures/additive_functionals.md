@@ -41,11 +41,11 @@ For example, outputs, prices, and dividends typically display  irregular but per
 
 Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.
 
-But  there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
+But there are good ways to model time series with persistent growth while still enabling statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
 
-Thus, {cite}`Hansen_2012_Eca`  described  two classes of time series models that accommodate growth.
+Thus, {cite}`Hansen_2012_Eca` described two classes of time series models that accommodate growth.
 
-They are
+They are:
 
 1. **additive functionals** that display random "arithmetic growth"
 1. **multiplicative functionals** that display random "geometric growth"
@@ -63,9 +63,9 @@ We also describe and compute decompositions of additive and multiplicative proce
 1. an asymptotically **stationary** component
 1. a **martingale**
 
-We describe how to construct,  simulate,  and interpret these components.
+We describe how to construct, simulate, and interpret these components.
 
-More details about  these concepts and algorithms  can be found in Hansen  {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
+For more details, see Hansen {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
 
 Let's start with some imports:
 
@@ -83,10 +83,9 @@ from scipy.stats import norm, lognorm
 
 This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a Gaussian vector autoregression.
 
-Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
-by using linear state-space tools.
+Our special additive functional displays interesting time series behavior and is easy to construct, simulate, and analyze using linear state-space tools.
 
-We construct our  additive functional from two pieces, the first of which is a **first-order vector autoregression** (VAR)
+We construct our additive functional from two pieces. The first is a *first-order vector autoregression* (VAR)
 
 ```{math}
 :label: old1_additive_functionals
@@ -117,8 +116,7 @@ In particular,
 y_{t+1} - y_{t} = \nu + D x_{t} + F z_{t+1}
 ```
 
-Here $y_0 \sim {\cal N}(\mu_{y0}, \Sigma_{y0})$ is a random
-initial condition for $y$.
+Here $y_0 \sim {\cal N}(\mu_{y0}, \Sigma_{y0})$ is the random initial condition for $y$.
 
 The nonstationary random process $\{y_t\}_{t=0}^\infty$ displays
 systematic but random *arithmetic growth*.
@@ -190,10 +188,10 @@ But here we will use a different set of code for simulation, for reasons describ
 
 ## Dynamics
 
-Let's run some simulations to build intuition.
+We run simulations to build intuition.
 
 (addfunc_eg1)=
-In doing so we'll assume that $z_{t+1}$ is scalar and that $\tilde x_t$ follows a 4th-order scalar autoregression.
+We assume that $z_{t+1}$ is scalar and that $\tilde x_t$ follows a 4th-order scalar autoregression.
 
 ```{math}
 :label: ftaf
@@ -203,7 +201,7 @@ In doing so we'll assume that $z_{t+1}$ is scalar and that $\tilde x_t$ follows 
 \phi_4 \tilde x_{t-3} + \sigma z_{t+1}
 ```
 
-in which the zeros $z$  of the polynomial
+in which the zeros $z$ of the polynomial
 
 $$
 \phi(z) = ( 1 - \phi_1 z - \phi_2 z^2 - \phi_3 z^3 - \phi_4 z^4 )
@@ -225,9 +223,9 @@ While {eq}`ftaf` is not a first order system like {eq}`old1_additive_functionals
 
 * For an example of such a mapping, see [this example](https://python.quantecon.org/linear_models.html#second-order-difference-equation).
 
-In fact, this whole model can be mapped into the additive functional system definition in {eq}`old1_additive_functionals` -- {eq}`old2_additive_functionals`  by appropriate selection of the matrices $A, B, D, F$.
+This model can be mapped into the additive functional system in {eq}`old1_additive_functionals` -- {eq}`old2_additive_functionals` by selecting appropriate matrices $A, B, D, F$.
 
-You can try writing these matrices down now as an exercise --- correct expressions appear in the code below.
+As an exercise, try writing these matrices down---correct expressions appear in the code below.
 
 ### Simulation
 
@@ -466,7 +464,7 @@ def plot_additive(amf, T, npaths=25, show_trend=True):
     # Simulate for as long as we wanted
     moment_generator = amf.lss.moment_sequence()
     # Pull out population moments
-    for t in range (T):
+    for t in range(T):
         tmoms = next(moment_generator)
         ymeans = tmoms[1]
         yvar = tmoms[3]
@@ -714,16 +712,14 @@ Notice the irregular but persistent growth in $y_t$.
 
 ### Decomposition
 
-Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of
-an additive functional into four parts:
+Hansen and Sargent {cite}`Hans_Sarg_book` decompose an additive functional into four parts:
 
 - a constant inherited from initial values $x_0$ and $y_0$
 - a linear trend
 - a martingale
 - an (asymptotically) stationary component
 
-To attain this decomposition for the particular class of additive
-functionals defined by {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals`, we first construct the matrices
+For the additive functionals defined by {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals`, we first construct the matrices
 
 $$
 \begin{aligned}
@@ -739,28 +735,27 @@ $$
 \begin{aligned}
   y_t
   &= \underbrace{t \nu}_{\text{trend component}} +
-     \overbrace{\sum_{j=1}^t H z_j}^{\text{Martingale component}} -
+     \overbrace{\sum_{j=1}^t H z_j}^{\text{martingale component}} -
      \underbrace{g x_t}_{\text{stationary component}} +
      \overbrace{g x_0 + y_0}^{\text{initial conditions}}
 \end{aligned}
 $$
 
-At this stage, you should pause and verify that $y_{t+1} - y_t$ satisfies {eq}`old2_additive_functionals`.
+Verify that $y_{t+1} - y_t$ satisfies {eq}`old2_additive_functionals`.
 
-It is convenient for us to introduce the following notation:
+We introduce the following notation:
 
 - $\tau_t = \nu t$ , a linear, deterministic trend
 - $m_t = \sum_{j=1}^t H z_j$, a martingale with time $t+1$ increment $H z_{t+1}$
 - $s_t = g x_t$, an (asymptotically) stationary component
 
-We want to characterize and simulate components $\tau_t, m_t, s_t$ of the decomposition.
+We characterize and simulate components $\tau_t, m_t, s_t$ of the decomposition.
 
-A convenient way to do this is to construct an appropriate instance of a [linear state space system](https://python-intro.quantecon.org/linear_models.html) by using [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
+We construct an appropriate instance of a [linear state space system](https://python-intro.quantecon.org/linear_models.html) using [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) from [QuantEcon.py](http://quantecon.org/quantecon-py).
 
 This will allow us to use the routines in [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) to study dynamics.
 
-To start, observe that, under the dynamics in {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals` and with the
-definitions just given,
+Under the dynamics in {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals` and with the definitions just given,
 
 $$
 \begin{bmatrix}
@@ -837,33 +832,28 @@ $$
 \end{aligned}
 $$
 
-By picking out components of $\tilde y_t$, we can track all variables of
-interest.
+By selecting components of $\tilde y_t$, we can track all variables of interest.
 
 ## Code
 
-The class `AMF_LSS_VAR` mentioned {ref}`above <amf_lss>` does all that we want to study our additive functional.
+The class `AMF_LSS_VAR` {ref}`above <amf_lss>` enables us to study our additive functional.
 
-In fact, `AMF_LSS_VAR` does more
-because it allows us to study  an associated multiplicative functional as well.
+`AMF_LSS_VAR` also allows us to study an associated multiplicative functional.
 
-(A hint that it does more is the name of the class -- here AMF stands for
-"additive and multiplicative functional" -- the code computes and displays objects associated with
-multiplicative functionals too.)
+The class name hints at this: AMF stands for "additive and multiplicative functional."
 
 Let's use this code (embedded above) to explore the {ref}`example process described above <addfunc_eg1>`.
 
-If you run {ref}`the code that first simulated that example <addfunc_egcode>` again and then the method call
-you will generate (modulo randomness) the plot
+Running {ref}`the code <addfunc_egcode>` again and then the method call generates (modulo randomness) the plot
 
 ```{code-cell} ipython3
 plot_additive(amf, T)
 plt.show()
 ```
 
-When we plot multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plot the population 95% probability coverage sets computed using the LinearStateSpace class.
+In the 2nd, 3rd, and 4th panels, we plot multiple realizations of a component along with the population 95% probability coverage sets computed using the LinearStateSpace class.
 
-We have chosen to simulate many paths, all starting from the *same* non-random initial conditions $x_0, y_0$ (you can tell this from the shape of the 95% probability coverage shaded areas).
+We simulate many paths, all starting from the *same* non-random initial conditions $x_0, y_0$. The shape of the 95% probability coverage shaded areas reveals this.
 
 Notice tell-tale signs of these probability coverage shaded areas
 
@@ -1157,7 +1147,7 @@ def simulate_martingale_components(amf, T=1000, I=5000):
     for i in range(I):
         foo, bar = amf.lss.simulate(T)
 
-        # Martingale component is third component
+        # martingale component is third component
         add_mart_comp[i, :] = bar[2, :]
 
     mul_mart_comp = np.exp(add_mart_comp - (np.arange(T) * H**2)/2)
