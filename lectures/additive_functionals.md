@@ -43,7 +43,7 @@ Asymptotic stationarity and ergodicity are key assumptions needed to make it pos
 
 But  there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
 
-Thus, {cite}`Hansen_2012_Eca`  described  two classes of time series models that accommodate growth.
+Thus, {cite}`Hansen_2012_Eca` described two classes of time series models that accommodate growth.
 
 They are
 
@@ -65,7 +65,7 @@ We also describe and compute decompositions of additive and multiplicative proce
 
 We describe how to construct,  simulate,  and interpret these components.
 
-More details about  these concepts and algorithms  can be found in Hansen  {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
+More details about these concepts and algorithms can be found in Hansen {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
 
 Let's start with some imports:
 
@@ -83,10 +83,9 @@ from scipy.stats import norm, lognorm
 
 This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a Gaussian vector autoregression.
 
-Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
-by using linear state-space tools.
+Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze by using linear state-space tools.
 
-We construct our  additive functional from two pieces, the first of which is a **first-order vector autoregression** (VAR)
+We construct our additive functional from two pieces, the first of which is a **first-order vector autoregression** (VAR)
 
 ```{math}
 :label: old1_additive_functionals
@@ -102,8 +101,7 @@ Here
 * $B$ is an $n \times m$ matrix, and
 * $x_0 \sim {\cal N}(\mu_0, \Sigma_0)$ is a random initial condition for $x$
 
-The second piece is an equation that expresses increments
-of $\{y_t\}_{t=0}^\infty$ as linear functions of
+The second piece is an equation that expresses increments of $\{y_t\}_{t=0}^\infty$ as linear functions of
 
 * a scalar constant $\nu$,
 * the vector $x_t$, and
@@ -418,14 +416,14 @@ def plot_given_paths(amf, T, ypath, mpath, spath, tpath,
     ax[0, 0].set_title("One Path of All Variables")
     ax[0, 0].legend(loc="upper left")
 
-    # Plot Martingale Component
+    # Plot martingale component
     ax[0, 1].plot(trange, mpath[0, :], "m")
     ax[0, 1].plot(trange, mpath.T, alpha=0.45, color="m")
     ub = mbounds[1, :]
     lb = mbounds[0, :]
 
     ax[0, 1].fill_between(trange, lb, ub, alpha=0.25, color="m")
-    ax[0, 1].set_title("Martingale Components for Many Paths")
+    ax[0, 1].set_title("Martingale components for many paths")
     ax[0, 1].axhline(horline, color="k", linestyle="-.")
 
     # Plot Stationary Component
@@ -435,12 +433,12 @@ def plot_given_paths(amf, T, ypath, mpath, spath, tpath,
     lb = sbounds[0, :]
     ax[1, 0].fill_between(trange, lb, ub, alpha=0.25, color="g")
     ax[1, 0].axhline(horline, color="k", linestyle="-.")
-    ax[1, 0].set_title("Stationary Components for Many Paths")
+    ax[1, 0].set_title("Stationary components for many paths")
 
     # Plot Trend Component
     if show_trend:
         ax[1, 1].plot(tpath.T, color="r")
-    ax[1, 1].set_title("Trend Components for Many Paths")
+    ax[1, 1].set_title("Trend components for many paths")
     ax[1, 1].axhline(horline, color="k", linestyle="-.")
 
     return fig
@@ -714,16 +712,14 @@ Notice the irregular but persistent growth in $y_t$.
 
 ### Decomposition
 
-Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of
-an additive functional into four parts:
+Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of an additive functional into four parts:
 
 - a constant inherited from initial values $x_0$ and $y_0$
 - a linear trend
 - a martingale
 - an (asymptotically) stationary component
 
-To attain this decomposition for the particular class of additive
-functionals defined by {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals`, we first construct the matrices
+To attain this decomposition for the particular class of additive functionals defined by {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals`, we first construct the matrices
 
 $$
 \begin{aligned}
@@ -759,8 +755,7 @@ A convenient way to do this is to construct an appropriate instance of a [linear
 
 This will allow us to use the routines in [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) to study dynamics.
 
-To start, observe that, under the dynamics in {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals` and with the
-definitions just given,
+To start, observe that, under the dynamics in {eq}`old1_additive_functionals` and {eq}`old2_additive_functionals` and with the definitions just given,
 
 $$
 \begin{bmatrix}
@@ -1126,7 +1121,7 @@ def simulate_paths(amf, T=150, I=5000):
     return storeX, storeY
 
 def population_means(amf, T=150):
-    # Allocate Space
+    # Allocate space
     xmean = np.empty(T)
     ymean = np.empty(T)
 
@@ -1173,10 +1168,10 @@ amc, mmc = simulate_martingale_components(amf_2, 1000, 5000)
 amcT = amc[:, -1]
 mmcT = mmc[:, -1]
 
-print("The (min, mean, max) of additive Martingale component in period T is")
+print("The (min, mean, max) of additive martingale component in period T is")
 print(f"\t ({np.min(amcT)}, {np.mean(amcT)}, {np.max(amcT)})")
 
-print("The (min, mean, max) of multiplicative Martingale component \
+print("The (min, mean, max) of multiplicative martingale component \
 in period T is")
 print(f"\t ({np.min(mmcT)}, {np.mean(mmcT)}, {np.max(mmcT)})")
 ```
