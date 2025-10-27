@@ -693,7 +693,7 @@ def compute_paths(T, econ):
         ns = P.shape[0]
         F = scipy.linalg.inv(eye(ns) - β * P)
         a0 = 0.5 * (F @ (x_vals.T @ Sm.T)**2)[0]
-        H = ((Sb - Sd + Sg) @ x_vals) * ((Sg - Ss) @ x_vals)
+        H = ((Sb - Sd + Sg) @ x_vals) * ((Sg + Ss) @ x_vals)
         b0 = 0.5 * (F @ H.T)[0]
         a0, b0 = float(a0[0]), float(b0[0])
     else:
