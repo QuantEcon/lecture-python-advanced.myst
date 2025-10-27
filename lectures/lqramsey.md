@@ -510,7 +510,7 @@ Define
 ```{math}
 :label: lq_rfr
 
-R^{-1}_{t} := \mathbb E_t \beta^j p^t_{t+1}
+R^{-1}_{t} := \mathbb E_t \beta p^t_{t+1}
 ```
 
 $R_{t}$ is the gross $1$-period risk-free rate for loans
@@ -527,7 +527,7 @@ $$
 and the cumulation of $\pi_t$
 
 $$
-\Pi_t := \sum_{s=0}^t \pi_t
+\Pi_t := \sum_{s=0}^t \pi_s
 $$
 
 The term $\pi_{t+1}$ is the difference between two quantities:
