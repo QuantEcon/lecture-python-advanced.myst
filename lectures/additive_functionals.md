@@ -37,13 +37,13 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 
 Many economic time series display persistent growth that prevents them from being  asymptotically stationary and ergodic.
 
-For example, outputs, prices, and dividends typically display  irregular but persistent growth.
+For example, outputs, prices, and dividends typically display irregular but persistent growth.
 
 Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.
 
 But  there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
 
-Thus, {cite}`Hansen_2012_Eca`  described  two classes of time series models that accommodate growth.
+Thus, {cite}`Hansen_2012_Eca` described two classes of time series models that accommodate growth.
 
 They are
 
@@ -193,6 +193,7 @@ But here we will use a different set of code for simulation, for reasons describ
 Let's run some simulations to build intuition.
 
 (addfunc_eg1)=
+
 In doing so we'll assume that $z_{t+1}$ is scalar and that $\tilde x_t$ follows a 4th-order scalar autoregression.
 
 ```{math}
@@ -415,7 +416,7 @@ def plot_given_paths(amf, T, ypath, mpath, spath, tpath,
     if show_trend:
         ax[0, 0].plot(trange, tpath[0, :], label="$t_t$", color="r")
     ax[0, 0].axhline(horline, color="k", linestyle="-.")
-    ax[0, 0].set_title("One Path of All Variables")
+    ax[0, 0].set_title("One path of all variables")
     ax[0, 0].legend(loc="upper left")
 
     # Plot Martingale Component
@@ -425,7 +426,7 @@ def plot_given_paths(amf, T, ypath, mpath, spath, tpath,
     lb = mbounds[0, :]
 
     ax[0, 1].fill_between(trange, lb, ub, alpha=0.25, color="m")
-    ax[0, 1].set_title("Martingale Components for Many Paths")
+    ax[0, 1].set_title("Martingale components for many paths")
     ax[0, 1].axhline(horline, color="k", linestyle="-.")
 
     # Plot Stationary Component
@@ -435,12 +436,12 @@ def plot_given_paths(amf, T, ypath, mpath, spath, tpath,
     lb = sbounds[0, :]
     ax[1, 0].fill_between(trange, lb, ub, alpha=0.25, color="g")
     ax[1, 0].axhline(horline, color="k", linestyle="-.")
-    ax[1, 0].set_title("Stationary Components for Many Paths")
+    ax[1, 0].set_title("Stationary components for many paths")
 
     # Plot Trend Component
     if show_trend:
         ax[1, 1].plot(tpath.T, color="r")
-    ax[1, 1].set_title("Trend Components for Many Paths")
+    ax[1, 1].set_title("Trend components for many paths")
     ax[1, 1].axhline(horline, color="k", linestyle="-.")
 
     return fig
@@ -960,7 +961,7 @@ The purple 95 percent frequency coverage interval collapses around zero, illustr
 
 ## More about the multiplicative martingale
 
-Let's drill down and study probability distribution of the multiplicative martingale  $\{\widetilde M_t\}_{t=0}^\infty$  in
+Let's drill down and study probability distribution of the multiplicative martingale $\{\widetilde M_t\}_{t=0}^\infty$ in
 more detail.
 
 As we  have seen, it has representation
@@ -1262,7 +1263,7 @@ These probability density functions help us understand mechanics underlying the 
 [This lecture](https://python.quantecon.org/likelihood_ratio_process.html) studies **likelihood processes**
 and **likelihood ratio processes**.
 
-A **likelihood ratio process** is  a  multiplicative  martingale with mean unity.
+A **likelihood ratio process** is a multiplicative martingale with mean unity.
 
 Likelihood ratio processes exhibit the peculiar property that naturally also appears
 [here](https://python.quantecon.org/likelihood_ratio_process.html).
