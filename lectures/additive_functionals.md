@@ -41,20 +41,20 @@ For example, outputs, prices, and dividends typically display  irregular but per
 
 Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.
 
-But  there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
+But there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.
 
-Thus, {cite}`Hansen_2012_Eca`  described  two classes of time series models that accommodate growth.
+Thus, {cite}`Hansen_2012_Eca` described two classes of time series models that accommodate growth.
 
 They are
 
-1. **additive functionals** that display random "arithmetic growth"
-1. **multiplicative functionals** that display random "geometric growth"
+1. **additive functionals** that display random **arithmetic growth**
+1. **multiplicative functionals** that display random **geometric growth**
 
 These two classes of processes are closely connected.
 
 If a process $\{y_t\}$ is an additive functional and $\phi_t = \exp(y_t)$, then $\{\phi_t\}$ is a multiplicative functional.
 
-In this lecture, we describe both  additive functionals and multiplicative functionals.
+In this lecture, we describe both additive functionals and multiplicative functionals.
 
 We also describe and compute decompositions of additive and multiplicative processes into four components:
 
@@ -65,7 +65,7 @@ We also describe and compute decompositions of additive and multiplicative proce
 
 We describe how to construct,  simulate,  and interpret these components.
 
-More details about  these concepts and algorithms  can be found in Hansen  {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
+More details about these concepts and algorithms can be found in Hansen {cite}`Hansen_2012_Eca` and Hansen and Sargent {cite}`Hans_Sarg_book`.
 
 Let's start with some imports:
 
@@ -83,10 +83,9 @@ from scipy.stats import norm, lognorm
 
 This lecture focuses on a subclass of these: a scalar process $\{y_t\}_{t=0}^\infty$ whose increments are driven by a Gaussian vector autoregression.
 
-Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
-by using linear state-space tools.
+Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze by using linear state-space tools.
 
-We construct our  additive functional from two pieces, the first of which is a **first-order vector autoregression** (VAR)
+We construct our  additive functional from two pieces, the first of which is a **first-order vector autoregression (VAR)**
 
 ```{math}
 :label: old1_additive_functionals
@@ -102,8 +101,7 @@ Here
 * $B$ is an $n \times m$ matrix, and
 * $x_0 \sim {\cal N}(\mu_0, \Sigma_0)$ is a random initial condition for $x$
 
-The second piece is an equation that expresses increments
-of $\{y_t\}_{t=0}^\infty$ as linear functions of
+The second piece is an equation that expresses increments of $\{y_t\}_{t=0}^\infty$ as linear functions of
 
 * a scalar constant $\nu$,
 * the vector $x_t$, and
@@ -117,15 +115,13 @@ In particular,
 y_{t+1} - y_{t} = \nu + D x_{t} + F z_{t+1}
 ```
 
-Here $y_0 \sim {\cal N}(\mu_{y0}, \Sigma_{y0})$ is a random
-initial condition for $y$.
+Here $y_0 \sim {\cal N}(\mu_{y0}, \Sigma_{y0})$ is a random initial condition for $y$.
 
-The nonstationary random process $\{y_t\}_{t=0}^\infty$ displays
-systematic but random *arithmetic growth*.
+The nonstationary random process $\{y_t\}_{t=0}^\infty$ displays systematic but random *arithmetic growth*.
 
 ### Linear state-space representation
 
-A convenient way to represent our additive functional is to use a [linear state space system](https://python-intro.quantecon.org/linear_models.html).
+A convenient way to represent our additive functional is to use a **[linear state space system](https://python-intro.quantecon.org/linear_models.html)**.
 
 To do this, we set up state and observation vectors
 
@@ -714,8 +710,7 @@ Notice the irregular but persistent growth in $y_t$.
 
 ### Decomposition
 
-Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of
-an additive functional into four parts:
+Hansen and Sargent {cite}`Hans_Sarg_book` describe how to construct a decomposition of an additive functional into four parts:
 
 - a constant inherited from initial values $x_0$ and $y_0$
 - a linear trend
@@ -749,7 +744,7 @@ At this stage, you should pause and verify that $y_{t+1} - y_t$ satisfies {eq}`o
 
 It is convenient for us to introduce the following notation:
 
-- $\tau_t = \nu t$ , a linear, deterministic trend
+- $\tau_t = \nu t$, a linear, deterministic trend
 - $m_t = \sum_{j=1}^t H z_j$, a martingale with time $t+1$ increment $H z_{t+1}$
 - $s_t = g x_t$, an (asymptotically) stationary component
 
@@ -844,12 +839,9 @@ interest.
 
 The class `AMF_LSS_VAR` mentioned {ref}`above <amf_lss>` does all that we want to study our additive functional.
 
-In fact, `AMF_LSS_VAR` does more
-because it allows us to study  an associated multiplicative functional as well.
+In fact, `AMF_LSS_VAR` does more because it allows us to study  an associated multiplicative functional as well.
 
-(A hint that it does more is the name of the class -- here AMF stands for
-"additive and multiplicative functional" -- the code computes and displays objects associated with
-multiplicative functionals too.)
+(A hint that it does more is the name of the class -- here AMF stands for "additive and multiplicative functional" -- the code computes and displays objects associated with multiplicative functionals too.)
 
 Let's use this code (embedded above) to explore the {ref}`example process described above <addfunc_eg1>`.
 
@@ -867,10 +859,8 @@ We have chosen to simulate many paths, all starting from the *same* non-random i
 
 Notice tell-tale signs of these probability coverage shaded areas
 
-* the purple one for the martingale component $m_t$ grows with
-  $\sqrt{t}$
-* the green one for the stationary component $s_t$ converges to a
-  constant band
+* the purple one for the martingale component $m_t$ grows with $\sqrt{t}$
+* the green one for the stationary component $s_t$ converges to a constant band
 
 ### Associated multiplicative functional
 
@@ -931,13 +921,10 @@ Let's see what happens when we set $T = 12000$ instead of $150$.
 
 ### Peculiar large sample property
 
-Hansen and Sargent {cite}`Hans_Sarg_book` (ch. 8) describe the following two properties of the  martingale component
-$\widetilde M_t$ of the multiplicative decomposition
+Hansen and Sargent {cite}`Hans_Sarg_book` (ch. 8) describe the following two properties of the  martingale component $\widetilde M_t$ of the multiplicative decomposition
 
-* while $E_0 \widetilde M_t = 1$ for all $t \geq 0$,
-  nevertheless $\ldots$
-* as $t \rightarrow +\infty$, $\widetilde M_t$ converges to
-  zero almost surely
+* while $E_0 \widetilde M_t = 1$ for all $t \geq 0$, nevertheless $\ldots$
+* as $t \rightarrow +\infty$, $\widetilde M_t$ converges to zero almost surely
 
 The first property follows from the fact that $\widetilde M_t$ is a multiplicative martingale with initial condition
 $\widetilde M_0 = 1$.
@@ -960,10 +947,10 @@ The purple 95 percent frequency coverage interval collapses around zero, illustr
 
 ## More about the multiplicative martingale
 
-Let's drill down and study probability distribution of the multiplicative martingale  $\{\widetilde M_t\}_{t=0}^\infty$  in
+Let's drill down and study probability distribution of the multiplicative martingale $\{\widetilde M_t\}_{t=0}^\infty$ in
 more detail.
 
-As we  have seen, it has representation
+As we have seen, it has representation
 
 $$
 \widetilde M_t = \exp \biggl( \sum_{j=1}^t \biggl(H \cdot z_j -\frac{ H \cdot H }{2} \biggr) \biggr),  \quad \widetilde M_0 =1
@@ -971,14 +958,13 @@ $$
 
 where $H =  [F + D(I-A)^{-1} B]$.
 
-It follows that $\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2}, t H \cdot H )$ and that consequently ${\widetilde M}_t$ is log normal.
+It follows that $\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2}, t H \cdot H )$ and that consequently ${\widetilde M}_t$ is **log normal**.
 
 ### Simulating a multiplicative martingale again
 
 Next, we want a program to simulate the likelihood ratio process $\{ \tilde{M}_t \}_{t=0}^\infty$.
 
-In particular, we want to simulate 5000 sample paths of length $T$ for the case in which $x$ is a scalar and
-$[A, B, D, F] = [0.8, 0.001, 1.0, 0.01]$ and $\nu = 0.005$.
+In particular, we want to simulate 5000 sample paths of length $T$ for the case in which $x$ is a scalar and $[A, B, D, F] = [0.8, 0.001, 1.0, 0.01]$ and $\nu = 0.005$.
 
 After accomplishing this, we want to display and study histograms of $\tilde{M}_T^i$ for various values of  $T$.
 
@@ -1184,7 +1170,7 @@ print(f"\t ({np.min(mmcT)}, {np.mean(mmcT)}, {np.max(mmcT)})")
 Let's plot the probability density functions for $\log {\widetilde M}_t$ for
 $t=100, 500, 1000, 10000, 100000$.
 
-Then let's use the plots to  investigate how these densities evolve through time.
+Then let's use the plots to investigate how these densities evolve through time.
 
 We will plot the densities of $\log {\widetilde M}_t$ for different values of $t$.
 
@@ -1259,10 +1245,8 @@ These probability density functions help us understand mechanics underlying the 
 
 ### Multiplicative martingale as likelihood ratio process
 
-[This lecture](https://python.quantecon.org/likelihood_ratio_process.html) studies **likelihood processes**
-and **likelihood ratio processes**.
+[This lecture](https://python.quantecon.org/likelihood_ratio_process.html) studies **likelihood processes** and **likelihood ratio processes**.
 
-A **likelihood ratio process** is  a  multiplicative  martingale with mean unity.
+A **likelihood ratio process** is a **multiplicative martingale** with mean unity.
 
-Likelihood ratio processes exhibit the peculiar property that naturally also appears
-[here](https://python.quantecon.org/likelihood_ratio_process.html).
+Likelihood ratio processes exhibit the peculiar property that naturally also appears [here](https://python.quantecon.org/likelihood_ratio_process.html).
