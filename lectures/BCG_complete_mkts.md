@@ -1194,7 +1194,7 @@ fig.update_layout(width=500,
 fig.update_layout(scene_camera=dict(eye=dict(x=2, y=-2, z=1.5)))
 
 # Export to PNG file
-Image(fig.to_image(format="png"))
+Image(fig.to_image(format="png", engine="kaleido"))
 # fig.show() will provide interactive plot when running
 # notebook locally
 ```
