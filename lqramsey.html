@@ -643,7 +643,7 @@ B_t = (\tau_t \ell_t - g_t) + E_t \sum_{j=1}^\infty p^t_{t+j} (\tau_{t+j} \ell_{
 <span class="eqno">(12.14)<a class="headerlink" href="#equation-lq-cb22" title="Link to this equation">#</a></span>\[B_t =   (\tau_t \ell_t - g_t) + \beta E_t p^t_{t+1} B_{t+1}\]</div>
 <p>Define</p>
 <div class="math notranslate nohighlight" id="equation-lq-rfr">
-<span class="eqno">(12.15)<a class="headerlink" href="#equation-lq-rfr" title="Link to this equation">#</a></span>\[R^{-1}_{t} := \mathbb E_t \beta^j p^t_{t+1}\]</div>
+<span class="eqno">(12.15)<a class="headerlink" href="#equation-lq-rfr" title="Link to this equation">#</a></span>\[R^{-1}_{t} := \mathbb E_t \beta p^t_{t+1}\]</div>
 <p><span class="math notranslate nohighlight">\(R_{t}\)</span> is the gross <span class="math notranslate nohighlight">\(1\)</span>-period risk-free rate for loans
 between <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
 </section>
@@ -657,7 +657,7 @@ between <span class="math notranslate nohighlight">\(t\)</span> and <span class=
 <p>and the cumulation of <span class="math notranslate nohighlight">\(\pi_t\)</span></p>
 <div class="math notranslate nohighlight">
 \[
-\Pi_t := \sum_{s=0}^t \pi_t
+\Pi_t := \sum_{s=0}^t \pi_s
 \]</div>
 <p>The term <span class="math notranslate nohighlight">\(\pi_{t+1}\)</span> is the difference between two quantities:</p>
 <ul class="simple">
@@ -810,7 +810,7 @@ that  <span class="math notranslate nohighlight">\(\{\Pi_t\}\)</span> is a marti
         <span class="n">ns</span> <span class="o">=</span> <span class="n">P</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">F</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">eye</span><span class="p">(</span><span class="n">ns</span><span class="p">)</span> <span class="o">-</span> <span class="n">β</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span>
         <span class="n">a0</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">F</span> <span class="o">@</span> <span class="p">(</span><span class="n">x_vals</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">Sm</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">H</span> <span class="o">=</span> <span class="p">((</span><span class="n">Sb</span> <span class="o">-</span> <span class="n">Sd</span> <span class="o">+</span> <span class="n">Sg</span><span class="p">)</span> <span class="o">@</span> <span class="n">x_vals</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">Sg</span> <span class="o">-</span> <span class="n">Ss</span><span class="p">)</span> <span class="o">@</span> <span class="n">x_vals</span><span class="p">)</span>
+        <span class="n">H</span> <span class="o">=</span> <span class="p">((</span><span class="n">Sb</span> <span class="o">-</span> <span class="n">Sd</span> <span class="o">+</span> <span class="n">Sg</span><span class="p">)</span> <span class="o">@</span> <span class="n">x_vals</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">Sg</span> <span class="o">+</span> <span class="n">Ss</span><span class="p">)</span> <span class="o">@</span> <span class="n">x_vals</span><span class="p">)</span>
         <span class="n">b0</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">F</span> <span class="o">@</span> <span class="n">H</span><span class="o">.</span><span class="n">T</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">a0</span><span class="p">,</span> <span class="n">b0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">a0</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">b0</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1023,7 +1023,7 @@ g_{t+1} - \mu_g = \rho (g_t - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ad3591ba9563a86571dd3e5e3dc395568e1a72ed141823aa7b0bbd5998944477.png" src="_images/ad3591ba9563a86571dd3e5e3dc395568e1a72ed141823aa7b0bbd5998944477.png" />
+<img alt="_images/e81b99b2f4dd97358a13846e9f4405865894e12f3479845108f02b4e38dafccc.png" src="_images/e81b99b2f4dd97358a13846e9f4405865894e12f3479845108f02b4e38dafccc.png" />
 </div>
 </div>
 <p>The legends on the figures indicate the variables being tracked.</p>
@@ -1036,7 +1036,7 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/80f8356480421659a672be401f2cfb8cac0e79f0d21472919780c90207f06f77.png" src="_images/80f8356480421659a672be401f2cfb8cac0e79f0d21472919780c90207f06f77.png" />
+<img alt="_images/39dd6031d1732cfe3519cbc3923a8b7b6366e093f63ad02fec3e8c7656543470.png" src="_images/39dd6031d1732cfe3519cbc3923a8b7b6366e093f63ad02fec3e8c7656543470.png" />
 </div>
 </div>
 <p>See the original <a href=_static/lecture_specific/lqramsey/firenze.pdf download>manuscript</a> for comments and interpretation.</p>
@@ -1075,7 +1075,7 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ae0faddb92af1d70a30155978cb827fbc5bc468f8c9d35c45e3edb609a42c627.png" src="_images/ae0faddb92af1d70a30155978cb827fbc5bc468f8c9d35c45e3edb609a42c627.png" />
+<img alt="_images/179cc8669ccf0ee451171b1016e6bbf7699e81c1db134b65e086605ecb0e828b.png" src="_images/179cc8669ccf0ee451171b1016e6bbf7699e81c1db134b65e086605ecb0e828b.png" />
 </div>
 </div>
 <p>The call <code class="docutils literal notranslate"><span class="pre">gen_fig_2(path)</span></code> generates</p>
@@ -1086,7 +1086,7 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1ca9e5d48d5b23590224827d07fe69e9912427489bd22d04efd1d67cc7535e3f.png" src="_images/1ca9e5d48d5b23590224827d07fe69e9912427489bd22d04efd1d67cc7535e3f.png" />
+<img alt="_images/8cf51f1491857e5cd91331e61844d296da87fd222427ce00bb28689acb8d2c61.png" src="_images/8cf51f1491857e5cd91331e61844d296da87fd222427ce00bb28689acb8d2c61.png" />
 </div>
 </div>
 <p>See the original <a href=_static/lecture_specific/lqramsey/firenze.pdf download>manuscript</a> for comments and interpretation.</p>
@@ -1140,7 +1140,7 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/05d32b1a67a80bc469b2b395d3aa15cba4c0e71f9499899833a8ac3122885b07.png" src="_images/05d32b1a67a80bc469b2b395d3aa15cba4c0e71f9499899833a8ac3122885b07.png" />
+<img alt="_images/d6e642ae117f6302137ce580339d53f0249980477267aba564009e0acfb68391.png" src="_images/d6e642ae117f6302137ce580339d53f0249980477267aba564009e0acfb68391.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1150,7 +1150,7 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/99fd88e4fa10ac60d08d3c36f29916209fa28ddc4d245dff503c100656d3c672.png" src="_images/99fd88e4fa10ac60d08d3c36f29916209fa28ddc4d245dff503c100656d3c672.png" />
+<img alt="_images/f9f8ab5a6c1f75351259d665d9804954896363843a538b62f7cd2baf9ad04656.png" src="_images/f9f8ab5a6c1f75351259d665d9804954896363843a538b62f7cd2baf9ad04656.png" />
 </div>
 </div>
 </section>

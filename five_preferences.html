@@ -365,7 +365,7 @@ probability distribution to a decision maker.</p>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_change_measure</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute the channge of measure given a utility function `u`, a consumption vector `c`,</span>
+<span class="sd">    Compute the change of measure given a utility function `u`, a consumption vector `c`,</span>
 <span class="sd">    a penalty parameter `θ` and a baseline probability vector `π` </span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -593,7 +593,7 @@ E m \log m  = \hat E \log m .
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7967/3759713737.py:2: RuntimeWarning: divide by zero encountered in log
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7535/3759713737.py:2: RuntimeWarning: divide by zero encountered in log
   plt.pcolormesh(x, y, np.log(ent_vals_mat.T), shading=&#39;gouraud&#39;, cmap=&#39;seismic&#39;)
 </pre></div>
 </div>
@@ -612,8 +612,8 @@ E m \log m  = \hat E \log m .
 <li><p>Risk-sensitive preferences</p></li>
 <li><p>Ex post Bayesian expected utility preferences</p></li>
 </ul>
-<p>Expected utility, risk-sensitive, and ex post Bayesian prefernces are  each cast in terms of a unique probability distribution, so they can express risk-aversion, but not model ambiguity aversion.</p>
-<p>Multiplier and constraint prefernces both  express aversion to
+<p>Expected utility, risk-sensitive, and ex post Bayesian preferences are  each cast in terms of a unique probability distribution, so they can express risk-aversion, but not model ambiguity aversion.</p>
+<p>Multiplier and constraint preferences both  express aversion to
 concerns about model misppecification, i.e., model uncertainty;  both are cast  in terms of a set or sets  of probability distributions.</p>
 <ul class="simple">
 <li><p>The set of distributions expresses the decision maker’s ambiguity about the probability model.</p></li>
@@ -651,7 +651,7 @@ risk aversion.</p></li>
 <span class="eqno">(25.4)<a class="headerlink" href="#equation-tom4" title="Link to this equation">#</a></span>\[
 \sum_{i=1}^I \pi_i m_i = 1 .
 \]</div>
-<p>In <a class="reference internal" href="#equation-tom3">(25.3)</a>,  <span class="math notranslate nohighlight">\(\eta \geq 0\)</span> defines an  entropy ball of probability distributions <span class="math notranslate nohighlight">\(\hat \pi = m \pi\)</span>  that surround a baseline distribution <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>In <a class="reference internal" href="#equation-tom3">(25.3)</a>,  <span class="math notranslate nohighlight">\(\eta \geq 0\)</span> determines an  entropy ball of probability distributions <span class="math notranslate nohighlight">\(\hat \pi = m \pi\)</span>  that surround a baseline distribution <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
 <p>As noted earlier,     <span class="math notranslate nohighlight">\(\sum_{i=1}^I m_i\pi_i  u(c_i)\)</span> is the expected value of <span class="math notranslate nohighlight">\(u(c)\)</span> under a twisted probability distribution <span class="math notranslate nohighlight">\(\{\hat \pi_i\}_{i=1}^I = \{m_i \pi_i\}_{i=1}^I\)</span>.</p>
 <p>Larger values of the entropy constraint <span class="math notranslate nohighlight">\(\eta\)</span> indicate more apprehension about the baseline probability distribution <span class="math notranslate nohighlight">\(\{\pi_i\}_{i=1}^I\)</span>.</p>
 <p>Following <span id="id3">[<a class="reference internal" href="zreferences.html#id62" title="Lars Peter Hansen and Thomas J. Sargent. Robust control and model uncertainty. American Economic Review, 91(2):60-66, 2001.">Hansen and Sargent, 2001</a>]</span> and <span id="id4">[<a class="reference internal" href="zreferences.html#id160" title="L P Hansen and T J Sargent. Robustness. Princeton University Press, 2008.">Hansen and Sargent, 2008</a>]</span>, we call minimization problem  <a class="reference internal" href="#equation-tom2">(25.2)</a> subject to <a class="reference internal" href="#equation-tom3">(25.3)</a> and<a class="reference internal" href="#equation-tom4">(25.4)</a> a <strong>constraint problem</strong>.</p>
@@ -825,7 +825,7 @@ solve</p>
 <p>For large values of <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\({\sf T} u(c)\)</span> is approximately linear in the probability <span class="math notranslate nohighlight">\(\pi_1\)</span>, but for lower values of <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\({\sf T} u(c)\)</span> has considerable    curvature as a function of <span class="math notranslate nohighlight">\(\pi_1\)</span>.</p>
 <p>Under expected utility, i.e., <span class="math notranslate nohighlight">\(\theta =+\infty\)</span>, <span class="math notranslate nohighlight">\({\sf T}u(c)\)</span> is linear in <span class="math notranslate nohighlight">\(\pi_1\)</span>, but it is convex as a function of <span class="math notranslate nohighlight">\(\pi_1\)</span> when <span class="math notranslate nohighlight">\(\theta&lt; + \infty\)</span>.</p>
 <p>The two  panels in the next  figure below  can help us to visualize the extra adjustment for risk that the risk-sensitive operator entails.</p>
-<p>This will help us understand  how the <span class="math notranslate nohighlight">\(\mathbf{T}\)</span> transformation works by envisioning  what function is being averaged.</p>
+<p>This will help us understand  how the <span class="math notranslate nohighlight">\(\sf{T}\)</span> transformation works by envisioning  what function is being averaged.</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1143,7 +1143,7 @@ line.</p>
 aversion.</p>
 <p>Constraint preferences express <strong>concern about misspecification</strong> or <strong>ambiguity</strong> for short with a positive
 <span class="math notranslate nohighlight">\(\eta\)</span> that circumscribes an entropy ball around an approximating
-probability distribution <span class="math notranslate nohighlight">\(\pi\)</span>, and <em>aversion aversion to model misspecification</em> through
+probability distribution <span class="math notranslate nohighlight">\(\pi\)</span>, and <em>aversion to model misspecification</em> through
 minimization with respect to a likelihood ratio <span class="math notranslate nohighlight">\(m\)</span>.</p>
 <p>Multiplier preferences express misspecification concerns with a parameter <span class="math notranslate nohighlight">\(\theta&lt;+\infty\)</span> that
 penalizes deviations from the approximating model as measured by
@@ -1344,7 +1344,7 @@ point along the 45 degree line.</p>
 <span class="n">η</span> <span class="o">=</span> <span class="mf">0.12</span>
 
 
-<span class="c1"># Conustruct grid for c_1</span>
+<span class="c1"># Constuct grid for c_1</span>
 <span class="n">c_1_grid_nb</span> <span class="o">=</span> <span class="mi">102</span>
 <span class="n">c_1_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">c_1_grid_nb</span><span class="p">)</span>
 
@@ -1451,7 +1451,7 @@ point along the 45 degree line.</p>
 <p><strong>Conjecture:</strong> when our numerical  method fails it  because the derivative of the objective doesn’t exist for our choice of  parameters.</p>
 <p><strong>Remark:</strong> It is tricky to get the algorithm  to work properly for all values of <span class="math notranslate nohighlight">\(c_{1}\)</span>. In particular, parameters were chosen with <a class="reference external" href="https://sciencedryad.wordpress.com/2014/01/25/grad-student-descent/">graduate student descent</a>.</p>
 <p><strong>Tangent indifference curves off 45 degree line</strong></p>
-<p>For a given <span class="math notranslate nohighlight">\(\eta\)</span> and a given allocatin <span class="math notranslate nohighlight">\((c_1, c_2)\)</span> off the 45 degree line, by solving
+<p>For a given <span class="math notranslate nohighlight">\(\eta\)</span> and a given allocation <span class="math notranslate nohighlight">\((c_1, c_2)\)</span> off the 45 degree line, by solving
 equations <a class="reference internal" href="#equation-tom7">(25.7)</a> and <a class="reference internal" href="#equation-tom20">(25.13)</a>, we can find <span class="math notranslate nohighlight">\(\tilde \theta (\eta, c)\)</span>
 and <span class="math notranslate nohighlight">\(\tilde \eta(\theta,c)\)</span> that make indifference curves for
 multiplier and constraint preferences be tangent to one another.</p>
@@ -1925,7 +1925,7 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7967/3709970291.py:36: RuntimeWarning: invalid value encountered in divide
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7535/2351647651.py:36: RuntimeWarning: invalid value encountered in divide
   m =  m_unnormalized / (π @ m_unnormalized)
 </pre></div>
 </div>
@@ -1948,9 +1948,9 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7967/3709970291.py:35: RuntimeWarning: overflow encountered in exp
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7535/2351647651.py:35: RuntimeWarning: overflow encountered in exp
   m_unnormalized = np.exp(-u(c) / θ)
-/tmp/ipykernel_7967/3709970291.py:36: RuntimeWarning: invalid value encountered in divide
+/tmp/ipykernel_7535/2351647651.py:36: RuntimeWarning: invalid value encountered in divide
   m =  m_unnormalized / (π @ m_unnormalized)
 </pre></div>
 </div>
