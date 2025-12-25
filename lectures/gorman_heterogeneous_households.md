@@ -379,6 +379,8 @@ $$
 \left[(s_t - b_t)^\top(s_t - b_t) + g_t^\top g_t\right]
 $$ (eq:planner_objective)
 
+where $g_t = \sum_j \ell_{jt}$ is the aggregate "intermediate good" that represents total labor supply in the DLE formulation.
+
 subject to technology constraints
 
 $$
@@ -685,7 +687,9 @@ At time zero, household $j$ executes the following trades:
 2. Household $j$ purchases $\mu_j$ shares of all securities (equivalently, $\mu_j$ shares of a mutual fund holding the aggregate endowment).
 3. Household $j$ takes position $\hat{k}_{j0}$ in the one-period bond.
 
-After this initial rebalancing, household $j$ holds the portfolio forever.
+After this initial rebalancing, household $j$ maintains a constant risky portfolio share $\mu_j$ forever, while using the one-period bond for dynamic rebalancing. 
+
+The bond position $\hat{k}_{jt}$ evolves each period according to the recursion derived below.
 
 
 The portfolio weight $\mu_j$ is not arbitrary: it is the unique weight that allows the limited-markets portfolio to replicate the Arrow-Debreu consumption allocation.
@@ -710,13 +714,17 @@ which is the aggregate endowment.
 
 If household $j$ holds fraction $\theta_j$ of this fund, it receives $\theta_j d_t$ in dividends.
 
-The proportional part of consumption $\mu_j c_t$ must be financed by the mutual fund and capital holdings. Since the aggregate resource constraint is
+The proportional part of consumption $\mu_j c_t$ must be financed by the mutual fund and capital holdings. 
+
+Using our calibration ($\Phi_c = \Phi_i = \theta_k = 1$, $\Gamma = \gamma_1$), the resource constraint becomes $c_t + i_t = \gamma_1 k_{t-1} + d_t$ and capital accumulation is $k_t = \delta_k k_{t-1} + i_t$. 
+
+Substituting $i_t = k_t - \delta_k k_{t-1}$ into the resource constraint gives:
 
 $$
-c_t + i_t = (\delta_k + \gamma_1) k_{t-1} + d_t,
+c_t + k_t = (\delta_k + \gamma_1) k_{t-1} + d_t.
 $$
 
-holding $\theta_j$ shares of aggregate output (capital income plus endowments) delivers $\theta_j [(\delta_k + \gamma_1)k_{t-1} + d_t]$. 
+Holding $\theta_j$ shares of aggregate wealth (capital plus claims to endowments) delivers $\theta_j [(\delta_k + \gamma_1)k_{t-1} + d_t] = \theta_j (c_t + k_t)$.
 
 For this to finance $\mu_j c_t$ plus reinvestment $\mu_j k_t$, we need $\theta_j = \mu_j$. 
 
@@ -735,6 +743,10 @@ $$
 $$
 
 where $R := \delta_k + \gamma_1$ is the gross return.
+
+```{note}
+The constant gross return $R = \delta_k + \gamma_1$ arises from our specific calibration ($\Phi_c = \Phi_i = \Theta_k = 1$, $\Gamma = \gamma_1$).
+```
 
 Substituting the sharing rule by replacing $c_{jt}$ with $\mu_j c_t + \tilde{\chi}_{jt}$ gives:
 
@@ -924,6 +936,8 @@ def compute_household_paths(econ, U_b_list, U_d_list, x0, x_path, γ_1, Λ, h0i=
 
         η = np.zeros((n_h, T + 1))
         η[:, 0] = np.asarray(h0i).reshape(-1)
+        # At t=0, assume η_{-1} = 0
+        χ_tilde[j, 0] = (Π_inv @ b_tilde[:, 0]).squeeze()
         for t in range(1, T):
             χ_tilde[j, t] = (-Π_inv @ Λ @ η[:, t - 1] + Π_inv @ b_tilde[:, t]).squeeze()
             η[:, t] = (A_h @ η[:, t - 1] + B_h @ b_tilde[:, t]).squeeze()
@@ -939,13 +953,20 @@ def compute_household_paths(econ, U_b_list, U_d_list, x0, x_path, γ_1, Λ, h0i=
         # Capital share in mutual fund
         k_share[j] = (μ[j] * k[0]).squeeze()
 
-        # Solving initial bond position and path
+        # Solve for bond path by backward iteration from terminal condition.
         if abs(R - 1.0) >= 1e-14:
             k_hat[j, -1] = χ_tilde[j, -1] / (R - 1.0)
             for t in range(T - 1, 0, -1):
                 k_hat[j, t - 1] = (k_hat[j, t] + χ_tilde[j, t]) / R
 
         a_total[j] = k_share[j] + k_hat[j]
+
+    # Validate that Gorman weights sum to 1 (required for sharing rule consistency)
+    μ_sum = np.sum(μ)
+    if abs(μ_sum - 1.0) > 1e-6:
+        import warnings
+        warnings.warn(f"Gorman weights μ sum to {μ_sum:.6f}, not 1.0. "
+                      "This may indicate calibration issues.")
 
     return {
         "μ": μ,
@@ -1519,8 +1540,13 @@ G = np.vstack([
     econ.Ss,
 ])
 
+# Extract dimensions for proper slicing
+n_h = np.atleast_2d(econ.thetah).shape[0]
+n_k = np.atleast_2d(econ.thetak).shape[0]
+n_endo = n_h + n_k  # endogenous state dimension
+
 print(f"Shapes: A0 {A0.shape}, C {C.shape}, G {G.shape}")
-print(f"max |A0[2:,2:] - A22| = {np.max(np.abs(A0[2:, 2:] - A22)):.2e}")
+print(f"max |A0[{n_endo}:,{n_endo}:] - A22| = {np.max(np.abs(A0[n_endo:, n_endo:] - A22)):.2e}")
 ```
 
 With the state space representation, we can compute impulse responses to show how shocks propagate through the economy. 
@@ -1801,14 +1827,15 @@ def allocation_from_weights(paths, econ, U_b_list, weights, γ_1, Λ, h0i=None):
 
         η = np.zeros((n_h, T + 1))
         η[:, 0] = np.asarray(h0i).reshape(-1)
-
+        # At t=0, assume η_{-1} = 0 
+        χ_tilde[j, 0] = (Π_inv @ b_tilde[:, 0]).squeeze()
         for t in range(1, T):
             χ_tilde[j, t] = (-Π_inv @ Λ @ η[:, t - 1] + Π_inv @ b_tilde[:, t]).squeeze()
             η[:, t] = (A_h @ η[:, t - 1] + B_h @ b_tilde[:, t]).squeeze()
 
         c_j[j] = (weights[j] * c_agg[0] + χ_tilde[j]).squeeze()
 
-        # Compute bond position
+        # Solve for bond path by backward iteration from terminal condition.
         if abs(R - 1.0) >= 1e-14:
             k_hat[j, -1] = χ_tilde[j, -1] / (R - 1.0)
             for t in range(T - 1, 0, -1):
