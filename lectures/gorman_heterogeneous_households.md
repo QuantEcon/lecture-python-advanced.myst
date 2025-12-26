@@ -23,13 +23,44 @@ kernelspec:
 ```{index} single: python
 ```
 
-# Gorman Heterogeneous Households and Limited Markets
+# Gorman Aggregation 
 
-This lecture implements the Gorman heterogeneous-household economy in Chapter 12 of {cite:t}`HansenSargent2013` using the `quantecon.DLE` class.
+{cite:t}`gorman1953community` described a class of preferences with the useful  property that there exists a 'representative household' 
+in the sense that competitive equilibrium allocations can be computed by following recursive procedure:
 
-It complements {doc}`hs_recursive_models`, {doc}`growth_in_dles`, and {doc}`irfs_in_hall_model` by focusing on how to recover household allocations and portfolios from an aggregate DLE solution.
+* take the heterogenous  preferences of a diverse collection of households and from them synthesize the preferences of a single hypothetical 'representative household'
+* collect the endowments of all households and give them to the representative household
+* construct a competitive equilibrium allocation and price system for the representative agent economy
+* at the  competitive equilibrium price system, compute the wealth -- i.e., the present value -- of each household's initial endowment 
+* find a consumption plan for each household that maximizes its utility functional subject to the wealth that you computed in the previous step
 
-The headline result is that a complete-markets allocation can be implemented with a mutual fund and a one-period bond when Gorman aggregation holds.
+
+This procedure allows us to compute the competitive equilibrium price system  for our heterogeneous household economy **prior** to computing the
+competitive equilibrium allocation.  
+
+That substantially simplifies calculating a competitive equilibrium.
+
+```{note}
+In general, computing a competitive equilibrium requires solving for the price system and the allocation simultaneously, not recursively.
+```
+
+
+
+
+
+This lecture uses  the `quantecon.DLE` class to study economies that satisfy necessary conditions for Gorman 
+aggregation of preferences.  
+
+Chapter 12 of {cite:t}`HansenSargent2013` described how to adapt  the preference specifications of {cite:t}`gorman1953community`
+to the linear-quadratic class of environments assumed in their book. 
+
+The first step in implementing the above recursive algorithm will be to form a representative agent economy and then apply our DLE tools to compute its competitive equilibrium.
+
+Thus, this lecture builds on tools and Python code described in  {doc}`hs_recursive_models`, {doc}`growth_in_dles`, and {doc}`irfs_in_hall_model`
+
+ 
+
+
 
 In addition to what's in Anaconda, this lecture uses the `quantecon` library
 
@@ -51,47 +82,55 @@ import matplotlib.pyplot as plt
 
 ## Overview
 
-Gorman aggregation lets us solve heterogeneous-household economies in two steps: solve a representative-agent linear-quadratic planning problem for aggregates, then recover household allocations via a "sharing rule" with household-specific deviation terms.
+When conditions for Gorman aggregation of preferences are satisfied, we can compute a competitive equilibrium of  heterogeneous-household economy in two steps: solve a representative-agent linear-quadratic planning problem for aggregates, then recover household allocations via a sharing-formula that makes each  household's consumption a household-specific constant share of aggregate consumption.
 
-The key is that Gorman conditions ensure all consumers have parallel Engel curves, so aggregate allocations and prices can be determined independently of distribution.
+* a household's share parameter will depend on the implicit Pareto weight implied by the initial distribution of endowment.
 
-This eliminates the standard problem where the utility possibility frontier shifts with endowment changes, making it impossible to rank allocations without specifying distributional weights.
+The key is that the Gorman-aggregation  conditions ensure all households have parallel Engel curves.
+
+That feature is what lets us determine the aggregate allocations and price sytem before we compute the distribution of the aggregate allocation among individual households.  
+
+This eliminates the usual  feature that  the utility possibility frontier shifts with endowment changes, making it impossible to rank allocations without specifying distributional weights.
 
 ```{note}
 Computing a competitive equilibrium typically entails solving a fixed point problem.
 
 {cite:t}`negishi1960welfare` described a social welfare function that is maximized, subject to resource and technological constraints, by a competitive equilibrium allocation.
 
-For Negishi, that social welfare function is a "linear combination of the individual utility functions of consumers, with the weights in the combination in inverse proportion to the marginal utilities of income."
+For Negishi, that social welfare function is a "linear combination of the individual utility functions of households, with the weights in the combination in inverse proportion to the marginal utilities of income."
 
 Because Negishi's weights depend on the allocation through the marginal utilities of income, computing a competitive equilibrium via constrained maximization of a Negishi-style welfare function requires finding a fixed point in the weights.
 
 When they apply, the beauty of Gorman's aggregation conditions is that time series aggregates and market prices can be computed *without* resorting to Negishi's fixed point approach.
 ```
 
-With the help of this powerful result, we proceed in three steps in this lecture:
+With the help of this powerful result, we proceed in two steps:
 
 1. Solve the planner's problem and compute selection matrices that map the aggregate state into allocations and prices.
 2. Compute household-specific policies and the Gorman sharing rule.
-3. Implement the same Arrow-Debreu allocation using only a mutual fund (aggregate stock) and a one-period bond.
 
-We then simulate examples with two and many households.
 
-Before looking into those details, we first introduce Gorman aggregation in a static economy.
+For the  special  Section 12.6  {cite:t}`HansenSargent2013` case in which preference shocks are inactive, we can also
+
+3. Implement the  Arrow-Debreu allocation using only a mutual fund (aggregate stock) and a one-period bond.
+
+We shall provide examples of these steps in economies with  two and many households.
+
+Before studying these things in the context of the DLE class,  we first introduce Gorman aggregation in a static economy.
 
 ### Gorman aggregation in a static economy
 
-To see where the sharing rule comes from, start with a static economy with $n$ goods, price vector $p$, and consumers $j = 1, \ldots, J$.
+To see where the sharing rule comes from, start with a static economy with $n$ goods, price vector $p$, and households $j = 1, \ldots, J$.
 
-Let $c^a$ denote the aggregate amount of consumption to be allocated among consumers.
+Let $c^a$ denote the aggregate amount of consumption to be allocated among households.
 
 Associated with $c^a$ is an Edgeworth box and a set of Pareto optimal allocations.
 
-From the Pareto optimal allocations, one can construct utility allocation surfaces that describe the frontier of alternative feasible utility assignments to individual consumers.
+From the Pareto optimal allocations, one can construct utility allocation surfaces that describe the frontier of alternative feasible utility assignments to individual households.
 
 Imagine moving from the aggregate vector $c^a$ to some other vector $\tilde{c}^a$ and hence to a new Edgeworth box.
 
-If neither the original box nor the new box contains the other, then it is possible that the utility allocation surfaces for the two boxes may *cross*, in which case there exists no ordering of aggregate consumption that is independent of the utility weights assigned to individual consumers.
+If neither the original box nor the new box contains the other, then it is possible that the utility allocation surfaces for the two boxes may *cross*, in which case there exists no ordering of aggregate consumption that is independent of the utility weights assigned to individual households.
 
 Here is an example showing when aggregation fails.
 
@@ -254,10 +293,12 @@ In the dynamic setting, we set the utility index $u^j$ equal to household $j$'s 
 
 The ratio $\mu_{0j}^w / \mu_{0a}^w$ (where $\mu_{0a}^w = \sum_j \mu_{0j}^w$) then serves as the time-invariant Gorman weight that determines household $j$'s share of aggregate consumption in excess of baseline.
 
-Without spoiling further, we now introduce the basic setup for the dynamic heterogeneous-household economy.
 
 
-## Set up
+
+## Dynamic, Stochastic Economy
+
+We now introduce our basic setup for our dynamic heterogeneous-household economy.
 
 Time is discrete, $t = 0,1,2,\dots$.
 
@@ -329,11 +370,11 @@ Shadow-price mappings $M_c, M_k, \ldots$ are used to value streams and recover e
 
 ### The individual household problem
 
-Recall that we operate in an economy with $J$ consumers indexed by $j = 1, 2, \ldots, J$.
+Recall that we operate in an economy with $J$ households indexed by $j = 1, 2, \ldots, J$.
 
-Consumers differ in preferences and endowments but share a common information set.
+Households differ in preferences and endowments but share a common information set.
 
-Consumer $j$ maximizes
+Household $j$ maximizes
 
 $$
 -\frac{1}{2} \mathbb{E}_0 \sum_{t=0}^\infty \beta^t \left[(s_{jt} - b_{jt})^\top (s_{jt} - b_{jt}) + \ell_{jt}^\top \ell_{jt}\right]
@@ -369,7 +410,7 @@ These prices are determined in equilibrium.
 
 In the DLE implementation below, these time-0 prices are recovered from the aggregate solution and encoded in the pricing objects `M_c`, `M_d`, `M_g`, and `M_k`.
 
-This specification confines heterogeneity among consumers to four sources:
+This specification confines heterogeneity among households to four sources:
 
 1. Differences in the preference processes $\{b_{jt}\}$, represented by different selections of $U_b^j$.
 
@@ -402,7 +443,7 @@ $$ (eq:agg_preference_aggregates)
 
 Aggregates are economy-wide totals: $c_t := \sum_j c_{jt}$, $b_t := \sum_j b_{jt}$, $d_t := \sum_j d_{jt}$, and similarly for $(i_t, k_t, h_t, s_t, g_t)$.
 
-The planner maximizes
+The planner maximizes the utility functional of the representative household 
 
 $$
 -\frac{1}{2} \mathbb{E}_0 \sum_{t=0}^\infty \beta^t
@@ -451,7 +492,7 @@ These shadow prices correspond to competitive equilibrium prices.
 (sharing_rules)=
 ### Consumption sharing rules
 
-This section presents the Gorman consumption sharing rules that's in the headline of this lecture.
+This section presents  Gorman consumption sharing rules.
 
 Our preference specification is an infinite-dimensional generalization of the static Gorman setup described above, where goods are indexed by both dates and states of the world.
 
@@ -465,7 +506,7 @@ $$
 
 The ratio $\mu_{0j}^w / \mu_{0a}^w$ is time-invariant and depends only on information available at time zero.
 
-For notational convenience, we write
+For  convenience, we write
 
 $$
 \mu_j := \frac{\mu_{0j}^w}{\mu_{0a}^w},
@@ -500,9 +541,9 @@ The beauty of this representation is that the weight $\mu_j$ is time-invariant.
 
 Nonseparabilities in preferences (over time or across goods) affect only the construction of the baseline process $\{\chi_{jt}\}$ and the calculation of the weight $\mu_j$ implied by the distribution of wealth.
 
-#### Service allocation rule
+#### Household services allocation rule
 
-The first-order conditions for consumption services give
+First-order necessary conditions for consumption services imply
 
 $$
 s_{jt} - b_{jt} = \mu_{0j}^w \rho_{0t},
@@ -522,7 +563,7 @@ This representation does not involve prices directly.
 
 #### Inverse canonical representation
 
-Given $\rho_{0t}$ from the aggregate solution, we can solve {eq}`eq:foc_services` for $s_{jt}$, then use the inverse canonical representation to compute $c_{jt}$ and $h_{jt}$:
+Given $\rho_{0t}$ from the aggregate solution, we can solve {eq}`eq:foc_services` for $s_{jt}$, then use the {cite:t}`HansenSargent2013` chapter 9  inverse canonical representation to compute $c_{jt}$ and $h_{jt}$:
 
 $$
 \begin{aligned}
@@ -535,7 +576,7 @@ with $h_{j,-1}$ given.
 
 This recursion requires a canonical household technology with square, invertible $\Pi_h$.
 
-#### Deviation form
+#### Computational details
 
 Define deviation processes $\tilde{y}_{jt} := y_{jt} - \mu_j y_t$ for any variable $y$.
 
@@ -552,7 +593,7 @@ $$ (eq:inverse_canonical_dev)
 
 with $\tilde{h}_{j,-1} = h_{j,-1} - \mu_j h_{-1}$ given.
 
-Associated with $\tilde{s}_{jt}$ is a synthetic consumption process $\tilde{\chi}_{jt}$ such that $\tilde{c}_{jt} = \tilde{\chi}_{jt}$ is the optimal sharing rule.
+Associated with $\tilde{s}_{jt}$ is a synthetic consumption process $\tilde{\chi}_{jt}$ that makes $\tilde{c}_{jt} = \tilde{\chi}_{jt}$ be the optimal sharing rule.
 
 To construct $\tilde{\chi}_{jt}$, we substitute $\tilde{s}_{jt} = \tilde{b}_{jt}$ into the inverse canonical representation:
 
@@ -577,13 +618,13 @@ we can append the recursion for $c_t$ from the aggregate problem to obtain a rec
 
 #### Labor allocation rule
 
-The allocation rule for household $j$'s labor (the "intermediate good" $g_{jt} = \ell_{jt}$) is
+The allocation rule for household $j$'s labor (i.e., the "intermediate good" $g_{jt} = \ell_{jt}$) is
 
 $$
 \ell_{jt} = \mu_j \, g_t,
 $$ (eq:labor_allocation)
 
-where $g_t = \sum_j \ell_{jt}$ is aggregate labor.
+where $g_t = \sum_j \ell_{jt}$ is aggregate the aggregate intermediate good.
 
 #### Risk sharing
 
@@ -599,13 +640,13 @@ For a fixed Lagrange multiplier $\mu_{0j}^w$ on the household's budget constrain
 
 One could compute individual allocations by iterating to find the multiplier $\mu_{0j}^w$ that satisfies the budget constraint.
 
-But there is a more elegant approach using Gorman's allocation rules.
+But there is a more elegant approach that uses our  Gorman allocation rules.
 
 ### Computing household allocations
 
-We apply the consumption sharing rules {eq}`eq:sharing_rule` and {eq}`eq:sharing_rule_baseline` developed above in two steps.
+We apply our consumption sharing rules {eq}`eq:sharing_rule` and {eq}`eq:sharing_rule_baseline`  in two steps.
 
-#### Compute deviation consumption
+#### Step 1: compute deviation consumption
 
 Using the inverse canonical representation {eq}`eq:inverse_canonical`, we compute the deviation consumption process $\{\tilde{\chi}_{jt}\}$ from household $j$'s deviation bliss points $\{\tilde{b}_{jt}\}$ and initial deviation state $\tilde{\eta}_{j,-1} = h_{j,-1} - \mu_j h_{-1}$.
 
@@ -613,7 +654,7 @@ When preferences include durables or habits ($\Lambda \neq 0$), the deviation co
 
 The code solves this as a linear-quadratic control problem using a scaling trick: multiplying the transition matrices by $\sqrt{\beta}$ converts the discounted problem into an undiscounted one that can be solved with a standard discrete algebraic Riccati equation.
 
-#### Compute the Gorman weight
+#### Step 2: compute each Gorman weight
 
 We compute the Gorman weight $\mu_j$ using household $j$'s budget constraint.
 
@@ -625,7 +666,7 @@ We compute five present values:
 - $W_{c2}$: present value of the deviation consumption stream $\{\tilde{\chi}_{jt}\}$
 - $W_g$: present value of the intermediate good stream $\{g_t\}$
 
-Formally (suppressing state indices inside the dot products),
+Formally, (suppressing state indices inside the dot products),
 
 $$
 \begin{aligned}
@@ -637,7 +678,7 @@ W_g   &= \mathbb{E}_0 \sum_{t=0}^\infty \beta^t \, w_{0t} \, g_t.
 \end{aligned}
 $$
 
-Each present value is computed using `doublej2` below to sum infinite series.
+We compute each present value by  using `doublej2`  to sum infinite series.
 
 The budget constraint {eq}`eq:hh_budget` requires that the present value of consumption equals wealth:
 
@@ -663,9 +704,9 @@ $$
 \mu_j = \frac{W_k + W_d - W_{c2}}{W_{c1} - W_g}.
 $$
 
-The numerator is household $j$'s wealth (initial capital plus present value of endowments minus the cost of the deviation consumption stream). 
+The numerator is household $j$'s wealth -- i.e., initial capital plus present value of endowments minus the cost of the deviation consumption stream. 
 
-The denominator is the net cost of consuming one unit of aggregate consumption (consumption value minus intermediate good value).
+The denominator is the net cost of consuming one unit of aggregate consumption, i.e., the value of consumption value minus the value of the intermediate good supplied.
 
 Finally, the code constructs selection matrices $S_{ci}, S_{hi}, S_{si}$ that map the augmented state $X_t = [h_{j,t-1}^\top, x_t^\top]^\top$ into household $j$'s allocations:
 
@@ -673,7 +714,7 @@ $$
 c_{jt} = S_{ci} X_t, \quad h_{jt} = S_{hi} X_t, \quad s_{jt} = S_{si} X_t.
 $$
 
-The augmented state includes household $j$'s own lagged durable stock $h_{j,t-1}$ because the deviation term $\tilde{\chi}_{jt}$ depends on it through the inverse canonical representation.
+ Because the deviation term $\tilde{\chi}_{jt}$ depends on it through the inverse canonical representation, the augmented state includes household $j$'s own lagged durable stock $h_{j,t-1}$.
 
 ```{code-cell} ipython3
 def doublej2(A1, B1, A2, B2, tol=1e-15, max_iter=10_000):
@@ -870,7 +911,11 @@ def heter(
 
 ## Limited markets
 
-This section implements a key result: the Arrow-Debreu allocation can be replicated using only a mutual fund and a one-period bond, rather than a complete set of contingent claims.
+
+
+This section studies a   special  Section 12.6  {cite:t}`HansenSargent2013` case in which the Arrow-Debreu allocation can be implemented by opening competitive markets  only in  a mutual fund and a one-period bond.
+
+   * so in our setting, we don't literally require that markets in  a complete set of contingent claims be present.
 
 To match the implementation result in Chapter 12.6 of {cite:t}`HansenSargent2013`, we specialize to the one-good, constant-return case
 
@@ -880,11 +925,11 @@ k_t = \delta_k k_{t-1} + i_t, \qquad
 \beta = \frac{1}{\gamma_1 + \delta_k}.
 $$
 
-In this case the one-period riskless gross return is constant, $R = \gamma_1 + \delta_k = 1/\beta$.
+In this case, the one-period riskless gross return is constant, $R = \gamma_1 + \delta_k = 1/\beta$.
 
-We also impose the Chapter 12.6 measurability restriction that the deviation baseline $\{\tilde{\chi}_{jt}\}$ is $\mathcal{J}_0$-measurable (for example, the preference-shock processes $\{b_{jt}\}$ are deterministic).
+We also impose the Chapter 12.6 {cite:t}`HansenSargent2013` measurability restriction that the deviation baseline $\{\tilde{\chi}_{jt}\}$ is $\mathcal{J}_0$-measurable (for example, the preference-shock processes $\{b_{jt}\}$ are deterministic).
 
-### The trading mechanism
+### The trading arrangement
 
 Consider again an economy where each household $j$ initially owns claims to its own endowment stream $\{d_{jt}\}$. 
 
@@ -906,7 +951,7 @@ The bond position $\hat{k}_{jt}$ evolves each period according to the recursion 
 
 The portfolio weight $\mu_j$ is not arbitrary: it is the unique weight that allows the limited-markets portfolio to replicate the Arrow-Debreu consumption allocation.
 
-Under Gorman aggregation, household $j$'s equilibrium consumption satisfies
+With Gorman aggregation, household $j$'s equilibrium consumption satisfies
 
 $$
 c_{jt} = \mu_j c_t + \tilde{\chi}_{jt}.
@@ -978,9 +1023,9 @@ $$
 \hat{k}_{jt} = R \hat{k}_{j,t-1} - \tilde{\chi}_{jt}.
 $$ (eq:bond-recursion)
 
-This says that the bond position grows at rate $R$ but is drawn down by the deviation consumption $\tilde{\chi}_{jt}$. 
+Equation {eq}`eq:bond-recursion` says that the bond position grows at rate $R$ but is drawn down by the deviation consumption $\tilde{\chi}_{jt}$. 
 
-When $\tilde{\chi}_{jt} > 0$ (household $j$ consumes more than its share), it finances this by running down its bond holdings.
+When $\tilde{\chi}_{jt} > 0$ (i.e., household $j$ consumes more than its share), it finances this by running down its bond holdings.
 
 The household's total asset position is hence $a_{jt} = \mu_j k_t + \hat{k}_{jt}$.
 
@@ -1000,7 +1045,9 @@ $$
 \end{aligned}
 $$
 
-For the budget constraint to hold with equality, we apply transversality and require $\lim_{T \to \infty} R^{-T} \hat{k}_{jT} = 0$. Dividing by $R^T$:
+For the budget constraint to hold with equality, we apply transversality and require $\lim_{T \to \infty} R^{-T} \hat{k}_{jT} = 0$.
+
+Dividing by $R^T$:
 
 $$
 R^{-T} \hat{k}_{jT} = \hat{k}_{j0} - \sum_{t=1}^T R^{-t} \tilde{\chi}_{jt}
@@ -1024,18 +1071,18 @@ Under the measurability restriction ($\tilde{\chi}_{jt} \in \mathcal{J}_0$), thi
 
 ```{note}
 
-This construction displays a multiperiod counterpart to an aggregation result for security markets derived by {cite:t}`rubinstein1974aggregation`.
+This construction embodies a multiperiod counterpart to an aggregation result for security markets derived by {cite:t}`rubinstein1974aggregation`.
 
-In a two-period model, Rubinstein provided sufficient conditions on preferences of consumers and asset market payoffs for the implementation of an Arrow-Debreu contingent claims allocation with incomplete security markets.
+In a two-period model, Rubinstein provided sufficient conditions on preferences of households and asset market payoffs that  implement a complete-markets  Arrow-Debreu contingent claims allocation with incomplete security markets.
 
-In Rubinstein's implementation, all consumers hold the same portfolio of risky assets.
+In Rubinstein's implementation, all households hold the same portfolio of risky assets.
 
-In our construction, consumers also hold the same portfolio of risky assets, and portfolio weights do not vary over time.
+In our construction, households also hold the same portfolio of risky assets, and portfolio weights do not vary over time.
 
 All changes over time in portfolio composition take place through transactions in the bond market.
 ```
 
-Below is the code that computes household allocations and limited-markets portfolios along a fixed aggregate path according to the mechanism described above
+The code below  computes household allocations and limited-markets portfolios  according to the market structure we have just  described.
 
 ```{code-cell} ipython3
 def compute_household_paths(
@@ -1189,10 +1236,10 @@ def compute_household_paths(
     }
 ```
 
-The next function collects everything to solve the planner's problem and compute household paths 
+The next function collects objects required to  solve the planner's problem and compute household paths 
 into one function.
 
-We first use the `DLE` class to set up the representative-agent DLE problem.
+First we use the `DLE` class to set up the representative-agent DLE problem.
 
 Then we build the full initial state by stacking zeros for lagged durables and capital with the initial exogenous state.
 
@@ -1233,7 +1280,7 @@ def solve_model(info, tech, pref, U_b_list, U_d_list, γ_1, Λ, z0, ts_length=20
 (gorman_twohh)=
 ## Example: two-household economy
 
-We reproduce the two-household example from Chapter 12.6 of {cite:t}`HansenSargent2013`.
+We now reproduce a two-household example from Chapter 12.6 of {cite:t}`HansenSargent2013`.
 
 There are two households, each with preferences
 
@@ -1372,7 +1419,7 @@ ax.legend()
 plt.show()
 ```
 
-The final check is to verify that the bond positions sum to zero at all times, confirming that the limited-markets implementation is self-financing
+Our final check is to verify that the bond positions sum to zero at all times, confirming that the limited-markets implementation is self-financing
 
 ```{code-cell} ipython3
 np.max(np.abs(paths["k_hat"].sum(axis=0)))
@@ -1440,13 +1487,13 @@ $$
 \sum_{j=1}^J d_{j,t} = \sum_{j=1}^J \alpha_j + d_{a,t}.
 $$
 
-Preference shocks are muted to simplify experiments:
+To activate the assumptions behind our limited-markets arrangement for implementing an Arrow-Debreu allocation, we silence preference shocks by setting:
 
 $$
 b_{jt} = \bar{b} + \xi_{j,t}, \quad j = 1, \ldots, J,
 $$
 
-where the $\xi_{j,t}$ processes are taken to be small (and can be shut off entirely by setting their innovation loadings to zero).
+where the $\xi_{j,t}$ processes  can be shut silenced by setting their innovation loadings to zero.
 
 To complete the specification, we let the idiosyncratic states follow AR(1) laws of motion
 (all innovations are components of the i.i.d. vector $w_{t+1}$ in $z_{t+1} = A_{22} z_t + C_2 w_{t+1}$):
@@ -1593,11 +1640,11 @@ def build_reverse_engineered_gorman_extended(
     return A22, C2, Ub, Ud, Ub_per_house, Ud_per_house, x0
 ```
 
-### 100-household reverse engineered economy
+### 100-household  economy
 
-We now instantiate a 100-household economy using the setup above.
+We now instantiate a 100-household version of the preceding economy.
 
-We use the same technology and preference parameters as the two-household example.
+We use the same technology and preference parameters.
 
 ```{code-cell} ipython3
 # Technology and preference parameters
@@ -1839,7 +1886,7 @@ plt.show()
 
 The aggregate endowment shock $d_{a,t}$ follows an AR(1) process with $\rho_1 = 0.95$, so after the initial impact it decays monotonically toward zero as $0.95^t$. 
 
-Capital, by contrast, is an endogenous stock that accumulates when the planner smooths consumption. 
+By contrast, capital  is an endogenous stock that accumulates when the planner smooths consumption. 
 
 The positive endowment shock increases resources temporarily, but Hall-style preferences imply the planner saves part of the windfall rather than consuming it immediately. 
 
@@ -1890,9 +1937,15 @@ plt.show()
 Indeed, the average of individual household endowments tracks the aggregate endowment process, confirming that the construction of the idiosyncratic shocks and absorbing households works as intended.
 
 
-## Redistribution via Pareto weight reallocation
+## Redistributing by adjusting  Pareto weights
 
-This section analyzes tax-and-transfer schemes by reinterpreting competitive equilibrium allocations in terms of Pareto weights, then considering alternative weight distributions that redistribute consumption while preserving aggregate dynamics.
+This section analyzes Pareto-efficient tax-and-transfer schemes by simply taking  competitive equilibrium allocations and then use 
+a set of nonnegative Pareto weights that sum to one.
+
+```{note}
+There are various   schemes that would deliver such efficient efficient redistributions, but in terms of what interests us in this example,
+they are all equivalent. 
+```
 
 ### Redistribution via Pareto weights
 
@@ -1913,7 +1966,7 @@ $$
 y_{j,t}(\omega) = \omega_j d_t + (R-1) a_{j,t-1}.
 $$
 
-In this section, we compare pre- and post-redistribution consumption and income.
+We want to  compare pre- and post-redistribution consumption and income.
 
 Let $\mu := \{\mu_j\}_{j=1}^J$ denote the original competitive equilibrium Pareto weights, and let $\lambda^* := \{\lambda_j^*\}_{j=1}^J$ denote the redistributed weights.
 
@@ -1926,7 +1979,7 @@ To implement a redistribution from $\mu$ to $\lambda^*$, we construct new Pareto
 3. Leave middle-$j$ types relatively unaffected
 4. Preserve the constraint $\sum_{j=1}^J \lambda_j^* = 1$
 
-We implement this using a smooth transformation. 
+We choose to implement these steps by  using a smooth transformation. 
 
 Let $\{\lambda_j\}_{j=1}^J$ denote the original competitive equilibrium Pareto weights (sorted in descending order). Define the redistribution function:
 
@@ -1941,7 +1994,7 @@ where:
 - $\alpha > 0$ controls the overall magnitude of redistribution
 - $\beta$ controls the progressivity (higher $\beta$ concentrates redistribution more strongly in the tails)
 
-The redistributed Pareto weights are:
+Post-redistribution Pareto weights are:
 
 $$
 \tilde{\lambda}_j = \lambda_j + \tau(j; J, \alpha, \beta) \cdot (\bar{\lambda} - \lambda_j),
@@ -1949,7 +2002,7 @@ $$
 
 where $\bar{\lambda} = J^{-1}$ is the equal-weight benchmark.
 
-To ensure the weights sum to unity, we normalize:
+To ensure that our  weights sum to unity, we normalize:
 
 $$
 \lambda_j^* = \frac{\tilde{\lambda}_j}{\sum_{k=1}^J \tilde{\lambda}_k}.
@@ -2161,8 +2214,8 @@ plt.tight_layout()
 plt.show()
 ```
 
-The figures shows a clear reduction in income and consumption inequality after redistribution via Pareto weights.
+The figures reveal a striking  reduction in income and consumption inequality after redistribution.
 
-We also see how insurance smooths consumption relative to income, especially for lower-percentile households.
+Also, notice how insurance smooths consumption relative to income, especially for lower-percentile households.
 
 The post-tax-and-transfer income path exhibits less volatility for the lower percentiles compared to the pre-tax-and-transfer income.
