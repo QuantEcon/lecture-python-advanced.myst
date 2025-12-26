@@ -53,7 +53,7 @@ import matplotlib.pyplot as plt
 
 Gorman aggregation lets us solve heterogeneous-household economies in two steps: solve a representative-agent linear-quadratic planning problem for aggregates, then recover household allocations via a "sharing rule" with household-specific deviation terms.
 
-Gorman conditions ensure all consumers have parallel Engel curves, so aggregate allocations and prices can be determined independently of distribution.
+The key is that Gorman conditions ensure all consumers have parallel Engel curves, so aggregate allocations and prices can be determined independently of distribution.
 
 This eliminates the standard problem where the utility possibility frontier shifts with endowment changes, making it impossible to rank allocations without specifying distributional weights.
 
@@ -254,6 +254,8 @@ In the dynamic setting, we set the utility index $u^j$ equal to household $j$'s 
 
 The ratio $\mu_{0j}^w / \mu_{0a}^w$ (where $\mu_{0a}^w = \sum_j \mu_{0j}^w$) then serves as the time-invariant Gorman weight that determines household $j$'s share of aggregate consumption in excess of baseline.
 
+Without spoiling further, we now introduce the basic setup for the dynamic heterogeneous-household economy.
+
 
 ## Set up
 
@@ -289,6 +291,8 @@ The vector $z_t$ typically contains three types of components.
 
 The selection matrices $U_b$ and $U_d$ pick out which components of $z_t$ affect
 household preferences (bliss points) and endowments.
+
+This structure allows us to model both aggregate and idiosyncratic shocks within a unified framework at a later stage.
 
 ### Technologies
 
@@ -946,7 +950,11 @@ This transforms heterogeneous endowment risk into proportional shares of aggrega
 
 We now derive the law of motion for the bond position $\hat{k}_{jt}$.
 
-First, write the budget constraint. Household $j$'s time-$t$ resources equal uses:
+First, write the budget constraint. 
+
+Household $j$'s time-$t$ resources are its mutual fund dividend $\mu_j d_t$ plus the return on its bond position $R(\mu_j k_{t-1} + \hat{k}_{j,t-1})$.
+
+Its uses of funds are consumption $c_{jt}$ plus the new bond position $(\mu_j k_t + \hat{k}_{jt})$:
 
 $$
 \underbrace{\mu_j d_t}_{\text{mutual fund dividend}} + \underbrace{R(\mu_j k_{t-1} + \hat{k}_{j,t-1})}_{\text{bond return}} = \underbrace{c_{jt}}_{\text{consumption}} + \underbrace{(\mu_j k_t + \hat{k}_{jt})}_{\text{new bonds}}
@@ -1012,7 +1020,7 @@ $$
 
 This is the present value of future deviation consumption. 
 
-Under the Chapter 12.6 measurability restriction ($\tilde{\chi}_{jt} \in \mathcal{J}_0$), this sum is known at date zero and can be used to set the initial bond position.
+Under the measurability restriction ($\tilde{\chi}_{jt} \in \mathcal{J}_0$), this sum is known at date zero and can be used to set the initial bond position.
 
 ```{note}
 
@@ -1030,7 +1038,9 @@ All changes over time in portfolio composition take place through transactions i
 Below is the code that computes household allocations and limited-markets portfolios along a fixed aggregate path according to the mechanism described above
 
 ```{code-cell} ipython3
-def compute_household_paths(econ, U_b_list, U_d_list, x0, x_path, γ_1, Λ, h0i=None, k0i=None):
+def compute_household_paths(
+            econ, U_b_list, U_d_list, x0, x_path, 
+            γ_1, Λ, h0i=None, k0i=None):
     """
     Compute household allocations and limited-markets portfolios
     along a fixed aggregate path.
@@ -1131,7 +1141,8 @@ def compute_household_paths(econ, U_b_list, U_d_list, x0, x_path, γ_1, Λ, h0i=
         # At t=0, assume η_{-1} = 0
         χ_tilde[j, 0] = (Π_inv @ b_tilde[:, 0]).squeeze()
         for t in range(1, T):
-            χ_tilde[j, t] = (-Π_inv @ Λ @ η[:, t - 1] + Π_inv @ b_tilde[:, t]).squeeze()
+            χ_tilde[j, t] = (
+            -Π_inv @ Λ @ η[:, t - 1] + Π_inv @ b_tilde[:, t]).squeeze()
             η[:, t] = (A_h @ η[:, t - 1] + B_h @ b_tilde[:, t]).squeeze()
 
         c_j[j] = (μ[j] * c[0] + χ_tilde[j]).squeeze()
@@ -1179,7 +1190,15 @@ def compute_household_paths(econ, U_b_list, U_d_list, x0, x_path, γ_1, Λ, h0i=
 ```
 
 The next function collects everything to solve the planner's problem and compute household paths 
-into one function
+into one function.
+
+We first use the `DLE` class to set up the representative-agent DLE problem.
+
+Then we build the full initial state by stacking zeros for lagged durables and capital with the initial exogenous state.
+
+Using the `LQ` class, we solve the LQ problem and simulate paths for the full state.
+
+Finally, we call `compute_household_paths` to get household allocations and limited-markets portfolios along the simulated path
 
 ```{code-cell} ipython3
 def solve_model(info, tech, pref, U_b_list, U_d_list, γ_1, Λ, z0, ts_length=2000):
@@ -1462,14 +1481,16 @@ def build_reverse_engineered_gorman_extended(
     allowing the full heterogeneous dynamics to be captured.
 
     The state vector is:
-    z_t = [1, d_{a,t}, d_{a,t-1}, eta_{n_absorb+1,t}, ..., eta_{n,t}, xi_{1,t}, ..., xi_{n,t}]
+    z_t = [1, d_{a,t}, d_{a,t-1}, eta_{n_absorb+1,t}, 
+            ..., eta_{n,t}, xi_{1,t}, ..., xi_{n,t}]
 
-    The first n_absorb households absorb the negative sum of all idiosyncratic shocks
-    to ensure shocks sum to zero:
-        sum_{j=1}^{n_absorb} (-1/n_absorb * sum_{k>n_absorb} eta_k) + sum_{k>n_absorb} eta_k = 0
+    The first n_absorb households absorb the negative sum 
+    of all idiosyncratic shocks to ensure shocks sum to zero:
+    sum_{j=1}^{n_absorb} (-1/n_absorb * sum_{k>n_absorb} eta_k) 
+    + sum_{k>n_absorb} eta_k = 0
 
-    Each household k > n_absorb has its own idiosyncratic endowment shock eta_{k,t}
-    following an AR(1):
+    Each household k > n_absorb has its own idiosyncratic endowment shock 
+    eta_{k,t} following an AR(1):
 
         eta_{k,t+1} = rho_idio[k] * eta_{k,t} + sigma_k * w_{k,t+1}
 
@@ -1492,13 +1513,7 @@ def build_reverse_engineered_gorman_extended(
     if n_absorb < 1 or n_absorb >= n:
         raise ValueError(f"n_absorb must be in [1, n-1], got {n_absorb} with n={n}")
 
-    # State vector: 
-    # z_t = [1, d_{a,t}, d_{a,t-1}, eta_{n_absorb+1,t}, ..., eta_{n,t}, xi_{1,t}, ..., xi_{n,t}]
-    # where eta_{j,t} are idiosyncratic endowment shocks (j=n_absorb+1..n)
-    # and xi_{j,t} are preference shocks (j=1..n)
-    # First n_absorb households absorb -1/n_absorb * sum(eta_j) to ensure shocks sum to zero
-    # Dimension: 3 + (n - n_absorb) + n = 2n + 3 - n_absorb
-
+    # Dimensions
     n_idio = n - n_absorb       # eta_{n_absorb+1}, ..., eta_n
     n_pref = n                  # xi_1, ..., xi_n
     nz = 3 + n_idio + n_pref
@@ -1580,7 +1595,7 @@ def build_reverse_engineered_gorman_extended(
 
 ### 100-household reverse engineered economy
 
-We now instantiate a 100-household economy using the reverse-engineered Gorman specification.
+We now instantiate a 100-household economy using the setup above.
 
 We use the same technology and preference parameters as the two-household example.
 
@@ -1679,7 +1694,7 @@ paths, econ = solve_model(info_ar1, tech_ar1, pref_ar1,
 ```{code-cell} ipython3
 print(f"State dimension: {A22.shape[0]}, shock dimension: {C2.shape[1]}")
 print(f"Aggregate: ρ_1={ρ1:.3f}, ρ_2={ρ2:.3f}, σ_a={σ_a:.2f}")
-print(f"Endowments: α in [{np.min(αs):.2f}, {np.max(αs):.2f}], Σφ={np.sum(φs):.6f}")
+print(f"Endowments: α in [{np.min(αs):.2f}, {np.max(αs):.2f}]")
 ```
 
 The next plots show household consumption and dividend paths after discarding the initial burn-in period.
@@ -1705,7 +1720,9 @@ plt.show()
 
 ### Closed-loop state-space system
 
-The DLE framework represents the economy as a linear state-space system. After solving the optimal control problem and substituting the policy rule, we obtain a closed-loop system:
+The DLE framework represents the economy as a linear state-space system. 
+
+After solving the optimal control problem and substituting the policy rule, we obtain a closed-loop system:
 
 $$
 x_{t+1} = A_0 x_t + C w_{t+1},
@@ -1762,9 +1779,6 @@ G = np.vstack([
 n_h = np.atleast_2d(econ.thetah).shape[0]
 n_k = np.atleast_2d(econ.thetak).shape[0]
 n_endo = n_h + n_k  # endogenous state dimension
-
-print(f"Shapes: A0 {A0.shape}, C {C.shape}, G {G.shape}")
-print(f"max |A0[{n_endo}:,{n_endo}:] - A22| = {np.max(np.abs(A0[n_endo:, n_endo:] - A22)):.2e}")
 ```
 
 With the state space representation, we can compute impulse responses to show how shocks propagate through the economy. 
@@ -1834,7 +1848,6 @@ This causes capital to rise as $d_{a,t}$ falls — this is permanent income logi
 Next, we examine if the household consumption and endowment paths generated by the simulation obey the Gorman sharing rule
 
 ```{code-cell} ipython3
-# Now stack the household consumption panel with household endowments and rerun DMD.
 c_j_t0 = paths["c_j"][..., t0:]
 d_j_t0 = paths["d_share"][..., t0:]
 
@@ -1854,15 +1867,16 @@ n_to_plot = 1
 fig, axes = plt.subplots(2, 1, figsize=(14, 8))
 
 # Top panel: Aggregate endowment
-axes[0].plot(time_idx, d_agg[:T_plot], linewidth=2.5, color='C0', label='Aggregate endowment $d_t$')
+axes[0].plot(time_idx, d_agg[:T_plot], linewidth=2.5, color='C0', 
+        label='Aggregate endowment $d_t$')
 axes[0].set_ylabel('Endowment')
-axes[0].set_title('Aggregate Endowment (contains ghost AR(2) process)')
+axes[0].set_title('Aggregate Endowment')
 axes[0].legend()
 
 # Also plot the mean across households
 d_mean = d_households[:, :T_plot].mean(axis=0)
 axes[1].plot(time_idx, d_mean, linewidth=2.5, color='black', linestyle='--',
-             label=f'Mean across {d_households.shape[0]} households', alpha=0.8)
+            label=f'Mean across {d_households.shape[0]} households', alpha=0.8)
 
 axes[1].set_xlabel('Time (after burn-in)')
 axes[1].set_ylabel('Endowment')
@@ -1912,7 +1926,9 @@ To implement a redistribution from $\mu$ to $\lambda^*$, we construct new Pareto
 3. Leave middle-$j$ types relatively unaffected
 4. Preserve the constraint $\sum_{j=1}^J \lambda_j^* = 1$
 
-We implement this using a smooth transformation. Let $\{\lambda_j\}_{j=1}^J$ denote the original competitive equilibrium Pareto weights (sorted in descending order). Define the redistribution function:
+We implement this using a smooth transformation. 
+
+Let $\{\lambda_j\}_{j=1}^J$ denote the original competitive equilibrium Pareto weights (sorted in descending order). Define the redistribution function:
 
 $$
 f(j; J) = \frac{j-1}{J-1}, \qquad
@@ -1922,8 +1938,8 @@ $$
 
 where:
 - $j \in \{1, \ldots, J\}$ is the household index
-- $\alpha > 0$ controls the overall magnitude of redistribution (with $\tau$ maximized at the extremes)
-- $\beta > 1$ controls the progressivity (higher $\beta$ concentrates redistribution more strongly in the tails)
+- $\alpha > 0$ controls the overall magnitude of redistribution
+- $\beta$ controls the progressivity (higher $\beta$ concentrates redistribution more strongly in the tails)
 
 The redistributed Pareto weights are:
 
@@ -1951,7 +1967,7 @@ def create_redistributed_weights(λ_orig, α=0.5, β=2.0):
     λ_bar = 1.0 / J
     j_indices = np.arange(J)
     f_j = j_indices / (J - 1)
-    dist_from_median = np.abs(f_j - 0.5) / 0.5  # in [0, 1], smallest near the median
+    dist_from_median = np.abs(f_j - 0.5) / 0.5
     τ_j = np.clip(α * (dist_from_median ** β), 0.0, 1.0)
     λ_tilde = λ_orig + τ_j * (λ_bar - λ_orig)
     λ_star = λ_tilde / λ_tilde.sum()
@@ -1977,10 +1993,12 @@ red_β = 0.0
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 n_plot = len(λ_orig_sorted)
-axes[0].plot(λ_orig_sorted[:n_plot], 'o-', label=r'original $\lambda_j$', alpha=0.7, lw=2)
-axes[0].plot(λ_star_sorted[:n_plot], 's-', label=r'redistributed $\lambda_j^*$', alpha=0.7, lw=2)
+axes[0].plot(λ_orig_sorted[:n_plot], 'o-', 
+            label=r'original $\lambda_j$', alpha=0.7, lw=2)
+axes[0].plot(λ_star_sorted[:n_plot], 's-', 
+            label=r'redistributed $\lambda_j^*$', alpha=0.7, lw=2)
 axes[0].axhline(1.0 / len(λ_orig_sorted), color='k', linestyle='--',
-                label=f'equal weight (1/{len(λ_orig_sorted)})', alpha=0.5, lw=2)
+            label=f'equal weight (1/{len(λ_orig_sorted)})', alpha=0.5, lw=2)
 axes[0].set_xlabel(r'household index $j$ (sorted by $\lambda$)')
 axes[0].set_ylabel('Pareto weight')
 axes[0].legend()
@@ -2050,7 +2068,8 @@ def allocation_from_weights(paths, econ, U_b_list, weights, γ_1, Λ, h0i=None):
         # At t=0, assume η_{-1} = 0 
         χ_tilde[j, 0] = (Π_inv @ b_tilde[:, 0]).squeeze()
         for t in range(1, T):
-            χ_tilde[j, t] = (-Π_inv @ Λ @ η[:, t - 1] + Π_inv @ b_tilde[:, t]).squeeze()
+            χ_tilde[j, t] = (
+                -Π_inv @ Λ @ η[:, t - 1] + Π_inv @ b_tilde[:, t]).squeeze()
             η[:, t] = (A_h @ η[:, t - 1] + B_h @ b_tilde[:, t]).squeeze()
 
         c_j[j] = (weights[j] * c_agg[0] + χ_tilde[j]).squeeze()
@@ -2071,7 +2090,9 @@ def allocation_from_weights(paths, econ, U_b_list, weights, γ_1, Λ, h0i=None):
     # Net income: dividend share + asset return
     y_net = weights[:, None] * d_agg[0, :] + (R - 1) * a_lag
 
-    return {"c": c_j, "y_net": y_net, "χ_tilde": χ_tilde, "k_hat": k_hat, "a_total": a_total}
+    return {"c": c_j, "y_net": y_net, 
+            "χ_tilde": χ_tilde, "k_hat": k_hat, 
+            "a_total": a_total}
 ```
 
 ```{code-cell} ipython3
@@ -2090,14 +2111,12 @@ idx_sorted = np.argsort(-μ_values)
 λ_star = np.empty_like(μ_values, dtype=float)
 λ_star[idx_sorted] = λ_star_sorted
 
-print(f"Weight redistribution:")
-print(f"  std(μ): {np.std(μ_values):.4f} → std(λ*): {np.std(λ_star):.4f}")
-print(f"  p90/p10: {np.percentile(μ_values, 90)/np.percentile(μ_values, 10):.2f} → {np.percentile(λ_star, 90)/np.percentile(λ_star, 10):.2f}")
-
 h0i_alloc = np.array([[0.0]])
 
-pre = allocation_from_weights(paths, econ, Ub_list, μ_values, γ_1, Λ, h0i_alloc)
-post = allocation_from_weights(paths, econ, Ub_list, λ_star, γ_1, Λ, h0i_alloc)
+pre = allocation_from_weights(paths, econ, 
+                Ub_list, μ_values, γ_1, Λ, h0i_alloc)
+post = allocation_from_weights(paths, econ, 
+                Ub_list, λ_star, γ_1, Λ, h0i_alloc)
 
 c_pre = pre["c"][:, t0:]
 y_pre = pre["y_net"][:, t0:]
