@@ -31,7 +31,7 @@ It complements {doc}`hs_recursive_models`, {doc}`growth_in_dles`, and {doc}`irfs
 
 The headline result is that a complete-markets allocation can be implemented with a mutual fund and a one-period bond when Gorman aggregation holds.
 
-In addition to what's in Anaconda, this lecture uses the `quantecon` library.
+In addition to what's in Anaconda, this lecture uses the `quantecon` library
 
 ```{code-cell} ipython3
 :tags: [hide-output]
@@ -39,7 +39,7 @@ In addition to what's in Anaconda, this lecture uses the `quantecon` library.
 !pip install --upgrade quantecon
 ```
 
-We make the following imports.
+We make the following imports
 
 ```{code-cell} ipython3
 import numpy as np
@@ -51,9 +51,9 @@ import matplotlib.pyplot as plt
 
 ## Overview
 
-Gorman aggregation lets us solve heterogeneous-household economies in two steps: solve a representative-agent linear-quadratic planning problem for aggregates, then recover household allocations via a wealth-share rule with household-specific deviation terms.
+Gorman aggregation lets us solve heterogeneous-household economies in two steps: solve a representative-agent linear-quadratic planning problem for aggregates, then recover household allocations via a "sharing rule" with household-specific deviation terms.
 
-The key insight is that Gorman conditions ensure all consumers have parallel Engel curves, so aggregate allocations and prices can be determined independently of distribution.
+Gorman conditions ensure all consumers have parallel Engel curves, so aggregate allocations and prices can be determined independently of distribution.
 
 This eliminates the standard problem where the utility possibility frontier shifts with endowment changes, making it impossible to rank allocations without specifying distributional weights.
 
@@ -76,6 +76,8 @@ With the help of this powerful result, we proceed in three steps in this lecture
 3. Implement the same Arrow-Debreu allocation using only a mutual fund (aggregate stock) and a one-period bond.
 
 We then simulate examples with two and many households.
+
+Before looking into those details, we first introduce Gorman aggregation in a static economy.
 
 ### Gorman aggregation in a static economy
 
@@ -103,33 +105,97 @@ This means that for a given aggregate endowment, the competitive equilibrium pri
 
 It follows that for this economy, one cannot determine equilibrium prices independently of the equilibrium allocation.
 
+The crossing of the utility possibility frontiers can be seen by plotting the efficient utility pairs for each aggregate endowment
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: utility possibility frontiers cross when aggregation fails
+    name: fig-gorman-utility-frontier-crossing
+---
+def frontier(X_total, Y_total, grid_size=500):
+    """
+    Compute a utility possibility frontier by tracing the contract curve.
+
+    Preferences:
+      U^A = X_A^(1/3) Y_A^(2/3)
+      U^B = X_B^(2/3) Y_B^(1/3)
+    """
+    xA = np.linspace(1e-6, X_total - 1e-6, grid_size)
+    yA = (4 * xA * Y_total) / (X_total + 3 * xA)  # contract curve
+    xB, yB = X_total - xA, Y_total - yA
+
+    UA = (xA ** (1 / 3)) * (yA ** (2 / 3))
+    UB = (xB ** (2 / 3)) * (yB ** (1 / 3))
+    return UA, UB
+
+
+UA1, UB1 = frontier(8.0, 3.0)
+UA2, UB2 = frontier(3.0, 8.0)
+
+fig, ax = plt.subplots()
+ax.plot(UA1, UB1, lw=2, label=r"$E=(8,3)$")
+ax.plot(UA2, UB2, lw=2, label=r"$E=(3,8)$")
+ax.set_xlabel("utility of agent A")
+ax.set_ylabel("utility of agent B")
+ax.legend()
+plt.show()
+```
+
 {cite:t}`gorman1953community` described restrictions on preferences under which it *is* possible to obtain a community preference ordering.
 
 Whenever Gorman's conditions are satisfied, there occur substantial simplifications in solving multiple-consumer optimal resource allocation problems: in intertemporal contexts, it becomes possible first to determine the optimal allocation of aggregate resources over time, and then allocate aggregate consumption among consumers by assigning utility levels to each person.
 
-Gorman's aggregation conditions amount to assuming each consumer's compensated demand can be written as an affine function of a *scalar* utility index:
+There is flexibility in the choice of monotonic transformations that we can use to represent utility levels.
+
+We restrict the utility index to be either nonnegative or nonpositive.
+
+In both cases, we define consumer-specific baseline indifference curves $\psi_j(p)$ associated with a utility level of zero.
+
+The functions $\psi_j$ are gradients of concave functions that are positively homogeneous of degree one.
+
+To represent a common departure for all consumers from their baseline indifference curves, we introduce a function $\psi_c(p)$.
+
+This lets the compensated demand function for consumer $j$ be represented as
 
 $$
 c^j = \psi_j(p) + u^j \psi_c(p),
 $$
 
-where $\psi_c(p)$ is common across consumers and $\psi_j(p)$ is consumer-specific.
+where $u^j$ is a scalar utility index for consumer $j$.
 
-Aggregating over consumers gives a representative-consumer demand system
+The function $\psi_c$ is the gradient of a positively homogeneous of degree one function that is concave when the utility indices are restricted to be nonnegative and convex when they are restricted to be nonpositive.
+
+It follows that $\psi_j$ and $\psi_c$ are homogeneous of degree zero in prices, which means that the implied indifference curves depend only on ratios of prices to an arbitrarily chosen numeraire.
+
+The baseline indifference curves are either the highest or lowest indifference curves, corresponding respectively to cases in which the utility indices $u^j$ are restricted to be nonpositive or nonnegative.
+
+As noted by Gorman, when preferences are of this form, there is a well-defined compensated demand function for a fictitious representative consumer obtained by aggregating individual demands:
 
 $$
 c^a = \psi_a(p) + u^a \psi_c(p),
-\qquad
-u^a = \sum_{j=1}^J u^j,
-\qquad
-\psi_a(p) = \sum_{j=1}^J \psi_j(p).
 $$
 
-The baseline functions $\psi_j$ and the common function $\psi_c$ are the derivatives of concave functions that are positively homogeneous of degree 1.
+where
 
-Hence these functions are homogeneous of degree zero in prices, so indifference curve slopes depend only on price *ratios*.
+$$
+u^a = \sum_{j=1}^J u^j \quad \text{and} \quad \psi_a(p) = \sum_{j=1}^J \psi_j(p).
+$$ (eq:agg_demand)
 
-This homogeneity allows us to invert $c^a = \psi_a(p) + u^a \psi_c(p)$ for the gradient vector $p$ (determined up to scale) and then allocate utility among consumers while respecting adding-up constraints.
+In this case, optimal resource allocation in a heterogeneous consumer economy simplifies as follows.
+
+Preferences for aggregate consumption define a community preference ordering.
+
+This preference ordering can be combined with a specification of the technology for producing consumption goods to determine the optimal allocation of aggregate consumption.
+
+The mapping $c^a = \psi_a(p) + u^a \psi_c(p)$ can be inverted to obtain a gradient vector $p$ that is independent of how utilities are allocated across consumers.
+
+Since $\psi_c$ and $\psi_a$ are homogeneous of degree zero, gradients are determined only up to a scalar multiple.
+
+Armed with $p$, we can then allocate utility among $J$ consumers while respecting the adding-up constraint {eq}`eq:agg_demand`.
+
+The allocation of aggregate consumption across goods and the associated gradient are determined independently of how aggregate utility is divided among consumers.
 
 A decentralized version of this analysis proceeds as follows.
 
@@ -156,9 +222,23 @@ Notice that the coefficient on $W^j$ is the same for all $j$ since $\psi_c(p)/(p
 
 The individual allocations can be determined from the Engel curves by substituting for $p$ the gradient vector obtained from the representative consumer's optimal allocation problem.
 
-In the quadratic specifications used in this lecture (and in {cite}`HansenSargent2013`), the baseline components are degenerate in the sense that $\psi_j(p) = \chi^j$ is independent of $p$, where $\chi^j$ is a consumer-specific bliss point represented by a vector with the same dimension as $c^j$.
+In the quadratic specifications used in this lecture (and in {cite:t}`HansenSargent2013`), the baseline components are degenerate in the sense that $\psi_j(p) = \chi^j$ is independent of $p$, where $\chi^j$ is a consumer-specific bliss point represented by a vector with the same dimension as $c^j$.
 
-In that case, the static sharing rule reduces to
+In that case, the demand functions simplify to
+
+$$
+c^j = \chi^j + u^j \psi_c(p), \qquad c^a = \chi^a + u^a \psi_c(p),
+$$
+
+where $\chi^a = \sum_j \chi^j$. 
+
+Solving the aggregate equation for the common term $\psi_c(p) = (c^a - \chi^a)/u^a$ and substituting into the individual equation gives
+
+$$
+c^j = \chi^j + u^j \cdot \frac{c^a - \chi^a}{u^a},
+$$
+
+which rearranges to the static sharing rule
 
 $$
 c^j - \chi^j = \frac{u^j}{u^a}\,(c^a - \chi^a),
@@ -168,11 +248,18 @@ so that there is a common scale factor $(u^j/u^a)$ across all goods for person $
 
 Hence the fraction of total utility assigned to consumer $j$ determines his fraction of the vector $(c^a - \chi^a)$.
 
-This is exactly the form we use below, except that goods are indexed by both dates and states.
+This is exactly the form we will see in {eq}`eq:sharing_rule` below, except that goods are indexed by both dates and states in subscripts.
+
+In the dynamic setting, we set the utility index $u^j$ equal to household $j$'s time-zero marginal utility of wealth $\mu_{0j}^w$, the Lagrange multiplier on the intertemporal budget constraint.
+
+The ratio $\mu_{0j}^w / \mu_{0a}^w$ (where $\mu_{0a}^w = \sum_j \mu_{0j}^w$) then serves as the time-invariant Gorman weight that determines household $j$'s share of aggregate consumption in excess of baseline.
+
 
 ## Set up
 
 Time is discrete, $t = 0,1,2,\dots$.
+
+All households share a common discount factor $\beta \in (0,1)$.
 
 Households are indexed by $j = 1, \ldots, J$, where $J$ denotes the total number of households in the economy.
 
@@ -186,6 +273,8 @@ $$
 
 where $A_{22}$ governs persistence and $C_2$ maps i.i.d. shocks $w_{t+1}$ into the state.
 
+Here we take $\mathbb{E}[w_{t+1}] = 0$ and $\mathbb{E}[w_{t+1} w_{t+1}^\top] = I$.
+
 The vector $z_t$ typically contains three types of components.
 
 1. Constant: The first element is set to 1 and remains constant.
@@ -198,58 +287,8 @@ The vector $z_t$ typically contains three types of components.
 
     - These generate cross-sectional heterogeneity while preserving aggregate resource constraints.
 
-The selection matrices $U_b$ and $U_d$ pick out which components of $z_t$ affect 
+The selection matrices $U_b$ and $U_d$ pick out which components of $z_t$ affect
 household preferences (bliss points) and endowments.
-
-### Aggregate planner state
-
-The aggregate planner state stacks lagged endogenous stocks and current exogenous variables:
-
-$$
-x_t = [h_{t-1}^\top, k_{t-1}^\top, z_t^\top]^\top.
-$$
-
-Here $h_{t-1}$ is the lagged household durable stock (habits or durables affecting utility), $k_{t-1}$ is lagged physical capital, and $z_t$ is the current exogenous state. 
-
-Together, $x_t$ contains everything the planner needs to make decisions at time $t$. 
-
-Aggregates are economy-wide totals summed across households: consumption $c_t$, investment $i_t$, capital $k_t$, household stock $h_t$, service flow $s_t$, intermediate good $g_t$, bliss $b_t$, and endowment $d_t$.
-
-### Gorman weight
-
-Let $\mu_{0j}^w$ denote household $j$'s *time-zero marginal utility of wealth*, the Lagrange multiplier on its intertemporal budget constraint. 
-
-Define the aggregate multiplier as
-
-$$
-\mu_{0a}^w := \sum_{j=1}^J \mu_{0j}^w.
-$$
-
-The ratio $\mu_{0j}^w / \mu_{0a}^w$ serves as household $j$'s Gorman weight. 
-
-For notational convenience, we write
-
-$$
-\mu_j := \frac{\mu_{0j}^w}{\mu_{0a}^w},
-$$
-
-so that $\sum_j \mu_j = 1$.
-
-The sharing rule can be written either in the "baseline" form,
-
-$$
-c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t),
-$$
-
-or, equivalently, in the deviation form used in this lecture,
-
-$$
-c_{jt} = \mu_j c_t + \tilde{\chi}_{jt}, \qquad \tilde{\chi}_{jt} := \chi_{jt} - \mu_j \chi_t.
-$$ (eq:sharing_rule)
-
-Here $\mu_j c_t$ is household $j$'s proportional share and $\tilde{\chi}_{jt}$ captures deviations due to preference heterogeneity and initial conditions.
-
-These deviations sum to zero: $\sum_j \tilde{\chi}_{jt} = 0$.
 
 ### Technologies
 
@@ -268,6 +307,16 @@ s_t = \Lambda h_{t-1} + \Pi_h c_t, \quad
 b_t = U_b z_t, \quad
 d_t = U_d z_t.
 $$
+
+Here $h_t$ is the aggregate household service, 
+$s_t$ is the aggregate service flow derived from household capital, 
+$c_t$ is aggregate consumption, $i_t$ is investment, $k_t$ is the aggregate physical capital stock, $d_t$ is the aggregate endowment (or dividend) stream, and $g_t$ is the aggregate "intermediate good" (interpreted as total labor supply in this lecture).
+
+The matrices $\Phi_c, \Phi_g, \Phi_i$ and $\Gamma$ allow for multiple goods and a general linear mapping from stocks and endowments into resources.
+
+In the one-good case used in the limited-markets section, these reduce to scalars and the resource constraint becomes $c_t + i_t = \gamma_1 k_{t-1} + d_t$.
+
+We write $\Pi_h$ for the household service-technology matrix $\Pi$ in {cite:t}`HansenSargent2013`.
 
 Selection matrices such as $S_{(q)}$ map the aggregate state $x_t$ into aggregate quantities such as $q_t = S_{(q)} x_t$
 for $q = c, i, k, h, s, g, b, d$.
@@ -299,10 +348,13 @@ and the intertemporal budget constraint
 
 $$
 \mathbb{E}_0 \sum_{t=0}^\infty \beta^t p_{0t} \cdot c_{jt}
-= \mathbb{E}_0 \sum_{t=0}^\infty \beta^t (w_{0t} \ell_{jt} + p_{0t} \cdot d_{jt}) + v_0 \cdot k_{j,-1},
+= \mathbb{E}_0 \sum_{t=0}^\infty \beta^t (w_{0t} \ell_{jt} + \alpha_{0t} \cdot d_{jt}) + v_0 \cdot k_{j,-1},
 $$ (eq:hh_budget)
 
-where $b_{jt} = U_b^j z_t$ is household $j$'s preference shock, $d_{jt} = U_d^j z_t$ is household $j$'s endowment stream, $h_{j,-1}$ and $k_{j,-1}$ are given initial household stocks, and $\ell_{jt}$ is household labor supply.
+where $b_{jt} = U_b^j z_t$ is household $j$'s preference shock, $d_{jt} = U_d^j z_t$ is household $j$'s endowment stream, $h_{j,-1}$ and $k_{j,-1}$ are given initial capital stocks, and $\ell_{jt}$ is household labor supply.
+
+Here $\mathbb{E}_0$ is expectation conditional on time-zero information $\mathcal{J}_0$.
+
 
 The prices are:
 - $p_{0t}$: the time-0 Arrow-Debreu price vector for date-$t$ consumption goods (across states), so $p_{0t} \cdot c_{jt}$ is the time-0 value of date-$t$ consumption
@@ -310,6 +362,8 @@ The prices are:
 - $v_0$: the time-0 value of initial capital
 
 These prices are determined in equilibrium.
+
+In the DLE implementation below, these time-0 prices are recovered from the aggregate solution and encoded in the pricing objects `M_c`, `M_d`, `M_g`, and `M_k`.
 
 This specification confines heterogeneity among consumers to four sources:
 
@@ -323,40 +377,17 @@ This specification confines heterogeneity among consumers to four sources:
 
 The matrices $\Lambda, \Pi_h, \Delta_h, \Theta_h$ do *not* depend on $j$.
 
-Because the technology matrices are common across households, every household's demand system has the same functional form. The four sources of heterogeneity listed above determine each household's effective wealth, which in turn determines the Lagrange multiplier $\mu_j$ on the budget constraint. 
+Because the technology matrices are common across households, every household's demand system has the same functional form. 
 
-This multiplier appears as the household's share of aggregate consumption in the sharing rule {eq}`eq:sharing_rule`.
-
-All households observe the same aggregate information $\mathcal{J}_t = [w_t, x_0]$.
+All households observe the same aggregate information set $\{\mathcal{J}_t\}$; in our Markov setting we can take $\mathcal{J}_t$ to be generated by the current aggregate state $x_t$.
 
 These restrictions enable Gorman aggregation by ensuring that household demands are affine in wealth.
 
-#### From individual problems to the aggregate problem
-
-Under Gorman's restrictions, the competitive equilibrium allocation solves a social planner's problem with Pareto weights $\mu_j = \mu_{0j}^w / \mu_{0a}^w$.
-
-Equilibrium prices emerge as the shadow prices from this problem.
-
-Next, we formulate the aggregate planning problem.
+This will allow us to solve for aggregate allocations and prices without knowing the distribution of wealth across households as we shall see in {ref}`sharing_rules`.
 
 ### The aggregate planning problem
 
-Summing the household budget constraints across $j = 1,\ldots,J$ gives
-
-$$
-\mathbb{E}_0 \sum_{t=0}^\infty \beta^t p_{0t} \cdot \left(\sum_j c_{jt}\right)
-= \mathbb{E}_0 \sum_{t=0}^\infty \beta^t \left(w_{0t} \sum_j \ell_{jt} + p_{0t} \cdot \sum_j d_{jt}\right) + v_0 \cdot \sum_j k_{j,-1}.
-$$ (eq:agg_budget_sum)
-
-In equilibrium, aggregate consumption $c_t = \sum_j c_{jt}$ must satisfy the economy's resource constraint
-
-$$
-\Phi_c c_t + \Phi_g g_t + \Phi_i i_t = \Gamma k_{t-1} + d_t,
-$$ (eq:agg_resource_constraint)
-
-where aggregate endowment is $d_t = \sum_j d_{jt} = U_d z_t$ with $U_d = \sum_j U_d^j$.
-
-We construct the representative consumer's preferences by summing
+We construct aggregates by summing across households:
 
 $$
 h_{-1} = \sum_j h_{j,-1}, \quad
@@ -365,16 +396,16 @@ U_b = \sum_j U_b^j, \quad
 U_d = \sum_j U_d^j.
 $$ (eq:agg_preference_aggregates)
 
-With these aggregates, the planner maximizes
+Aggregates are economy-wide totals: $c_t := \sum_j c_{jt}$, $b_t := \sum_j b_{jt}$, $d_t := \sum_j d_{jt}$, and similarly for $(i_t, k_t, h_t, s_t, g_t)$.
+
+The planner maximizes
 
 $$
 -\frac{1}{2} \mathbb{E}_0 \sum_{t=0}^\infty \beta^t
 \left[(s_t - b_t)^\top(s_t - b_t) + g_t^\top g_t\right]
 $$ (eq:planner_objective)
 
-where $g_t = \sum_j \ell_{jt}$ is the aggregate "intermediate good" that represents total labor supply in the DLE formulation.
-
-subject to technology constraints
+where $g_t = \sum_j \ell_{jt}$ is aggregate labor supply, subject to technology constraints
 
 $$
 \begin{aligned}
@@ -393,11 +424,168 @@ b_t = U_b z_t, \quad
 d_t = U_d z_t.
 $$ (eq:exogenous_process)
 
-Solving this aggregate planning problem yields aggregate allocations $(c_t, i_t, k_t, h_t, s_t, g_t)$ as functions of the aggregate state $x_t$.
+Note that the constraints involve lagged stocks $(h_{t-1}, k_{t-1})$ and the current exogenous state $z_t$. These predetermined variables form the planner's state:
 
-The first-order conditions give shadow prices $(M^c_t, M^k_t, M^h_t, M^s_t)$ associated with each constraint.
+$$
+x_t = [h_{t-1}^\top, k_{t-1}^\top, z_t^\top]^\top.
+$$
+
+The solution expresses each aggregate quantity as a linear function of the state via selection matrices:
+
+$$
+q_t = S_q x_t \quad \text{for } q \in \{c, i, k, h, s, g, b, d\}.
+$$
+
+Similarly, shadow prices are linear in $x_t$:
+
+$$
+M_q x_t \quad \text{for } q \in \{c, k, h, s\}.
+$$
 
 These shadow prices correspond to competitive equilibrium prices.
+
+(sharing_rules)=
+### Consumption sharing rules
+
+This section presents the Gorman consumption sharing rules that's in the headline of this lecture.
+
+Our preference specification is an infinite-dimensional generalization of the static Gorman setup described above, where goods are indexed by both dates and states of the world.
+
+Let $\mu_{0j}^w$ denote household $j$'s *time-zero marginal utility of wealth*, the Lagrange multiplier on its intertemporal budget constraint.
+
+Define the aggregate multiplier as
+
+$$
+\mu_{0a}^w := \sum_{j=1}^J \mu_{0j}^w.
+$$
+
+The ratio $\mu_{0j}^w / \mu_{0a}^w$ is time-invariant and depends only on information available at time zero.
+
+For notational convenience, we write
+
+$$
+\mu_j := \frac{\mu_{0j}^w}{\mu_{0a}^w},
+$$
+
+so that $\sum_j \mu_j = 1$. 
+
+This is household $j$'s **Gorman weight**.
+
+The allocation rule for consumption has the form
+
+$$
+c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t),
+$$ (eq:sharing_rule_baseline)
+
+or equivalently,
+
+$$
+c_{jt} = \mu_j c_t + \tilde{\chi}_{jt}, \qquad \tilde{\chi}_{jt} := \chi_{jt} - \mu_j \chi_t.
+$$ (eq:sharing_rule)
+
+Here $\mu_j c_t$ is household $j$'s proportional share of aggregate consumption and $\tilde{\chi}_{jt}$ is the *deviation* from this proportional share.
+
+These deviations sum to zero: $\sum_j \tilde{\chi}_{jt} = 0$.
+
+The baseline term $\chi_{jt}$ is determined by the preference shock process $\{b_{jt}\}$ and initial household capital $h_{j,-1}$.
+
+We write the aggregate baseline as $\chi_t := \sum_{j=1}^J \chi_{jt}$.
+
+
+The beauty of this representation is that the weight $\mu_j$ is time-invariant.
+
+Nonseparabilities in preferences (over time or across goods) affect only the construction of the baseline process $\{\chi_{jt}\}$ and the calculation of the weight $\mu_j$ implied by the distribution of wealth.
+
+#### Service allocation rule
+
+The first-order conditions for consumption services give
+
+$$
+s_{jt} - b_{jt} = \mu_{0j}^w \rho_{0t},
+$$ (eq:foc_services)
+
+where $\rho_{0t}$ is the time-0 shadow price for date-$t$ services from the aggregate problem.
+
+Since the aggregate first-order condition is $s_t - b_t = \mu_{0a}^w \rho_{0t}$, we can eliminate $\rho_{0t}$ to obtain:
+
+$$
+s_{jt} - b_{jt} = \mu_j (s_t - b_t),
+$$ (eq:service_allocation)
+
+or equivalently $\tilde{s}_{jt} = \tilde{b}_{jt}$, where $\tilde{y}_{jt} := y_{jt} - \mu_j y_t$ for any variable $y$.
+
+This representation does not involve prices directly.
+
+#### Inverse canonical representation
+
+Given $\rho_{0t}$ from the aggregate solution, we can solve {eq}`eq:foc_services` for $s_{jt}$, then use the inverse canonical representation to compute $c_{jt}$ and $h_{jt}$:
+
+$$
+\begin{aligned}
+c_{jt} &= -\Pi_h^{-1} \Lambda h_{j,t-1} + \Pi_h^{-1} s_{jt}, \\
+h_{jt} &= (\Delta_h - \Theta_h \Pi_h^{-1} \Lambda) h_{j,t-1} + \Theta_h \Pi_h^{-1} s_{jt},
+\end{aligned}
+$$ (eq:inverse_canonical_full)
+
+with $h_{j,-1}$ given.
+
+This recursion requires a canonical household technology with square, invertible $\Pi_h$.
+
+#### Deviation form
+
+Define deviation processes $\tilde{y}_{jt} := y_{jt} - \mu_j y_t$ for any variable $y$.
+
+In particular, the deviation durable stock is $\tilde{h}_{jt} := h_{jt} - \mu_j h_t$.
+
+The deviation form of the inverse canonical representation {eq}`eq:inverse_canonical_full` is
+
+$$
+\begin{aligned}
+\tilde{c}_{jt} &= -\Pi_h^{-1} \Lambda \tilde{h}_{j,t-1} + \Pi_h^{-1} \tilde{s}_{jt}, \\
+\tilde{h}_{jt} &= (\Delta_h - \Theta_h \Pi_h^{-1} \Lambda) \tilde{h}_{j,t-1} + \Theta_h \Pi_h^{-1} \tilde{s}_{jt},
+\end{aligned}
+$$ (eq:inverse_canonical_dev)
+
+with $\tilde{h}_{j,-1} = h_{j,-1} - \mu_j h_{-1}$ given.
+
+Associated with $\tilde{s}_{jt}$ is a synthetic consumption process $\tilde{\chi}_{jt}$ such that $\tilde{c}_{jt} = \tilde{\chi}_{jt}$ is the optimal sharing rule.
+
+To construct $\tilde{\chi}_{jt}$, we substitute $\tilde{s}_{jt} = \tilde{b}_{jt}$ into the inverse canonical representation:
+
+$$
+\begin{aligned}
+\tilde{\chi}_{jt} &= -\Pi_h^{-1} \Lambda \tilde{\eta}_{j,t-1} + \Pi_h^{-1} \tilde{b}_{jt}, \\
+\tilde{\eta}_{jt} &= (\Delta_h - \Theta_h \Pi_h^{-1} \Lambda) \tilde{\eta}_{j,t-1} + \Theta_h \Pi_h^{-1} \tilde{b}_{jt},
+\end{aligned}
+$$ (eq:inverse_canonical)
+
+with $\tilde{\eta}_{j,-1} = \tilde{h}_{j,-1}$.
+
+Since $\tilde{s}_{jt} = \tilde{b}_{jt}$ and $\tilde{\eta}_{j,-1} = \tilde{h}_{j,-1}$, it follows from {eq}`eq:inverse_canonical_dev` and {eq}`eq:inverse_canonical` that $\tilde{c}_{jt} = \tilde{\chi}_{jt}$.
+
+Since the allocation rule for consumption can be expressed as
+
+$$
+c_{jt} = \mu_j c_t + \tilde{\chi}_{jt},
+$$ (eq:cjt_recursion)
+
+we can append the recursion for $c_t$ from the aggregate problem to obtain a recursion generating $c_{jt}$.
+
+#### Labor allocation rule
+
+The allocation rule for household $j$'s labor (the "intermediate good" $g_{jt} = \ell_{jt}$) is
+
+$$
+\ell_{jt} = \mu_j \, g_t,
+$$ (eq:labor_allocation)
+
+where $g_t = \sum_j \ell_{jt}$ is aggregate labor.
+
+#### Risk sharing
+
+Because the coefficient $\mu_j$ is invariant over time and across goods, allocation rule {eq}`eq:sharing_rule_baseline` implies a form of risk pooling in the deviation process $\{c_{jt} - \chi_{jt}\}$.
+
+In the special case where the preference shock processes $\{b_{jt}\}$ are deterministic (in the sense that they reside in the information set $\mathcal{J}_0$), individual consumption goods will be perfectly correlated with their aggregate counterparts.
 
 ## Household allocations
 
@@ -409,56 +597,21 @@ One could compute individual allocations by iterating to find the multiplier $\m
 
 But there is a more elegant approach using Gorman's allocation rules.
 
-### Allocation rules
+### Computing household allocations
 
-The allocation rule for household $j$'s labor (the "intermediate good" $g_{jt} = \ell_{jt}$) is
+We apply the consumption sharing rules {eq}`eq:sharing_rule` and {eq}`eq:sharing_rule_baseline` developed above in two steps.
 
-$$
-\ell_{jt} = \mu_j \, \ell_t,
-$$ (eq:labor_allocation)
+#### Compute deviation consumption
 
-where $\ell_t = \sum_i \ell_{it}$ is aggregate labor and $\mu_j = \mu_{0j}^w / \mu_{0a}^w$ is the Gorman weight.
-
-The first-order conditions for consumption services give
-
-$$
-s_{jt} - b_{jt} = \mu_{0j}^w \rho_t^0,
-$$ (eq:foc_services)
-
-where $\rho_t^0$ is the shadow price of services from the aggregate problem.
-
-Since the aggregate first-order condition is $s_t - b_t = \mu_{0a}^w \rho_t^0$, we can eliminate the price $\rho_t^0$ to obtain the service allocation rule in deviation form:
-
-$$
-s_{jt} - b_{jt} = \mu_j (s_t - b_t),
-$$ (eq:service_allocation)
-
-or equivalently $\tilde{s}_{jt} = \tilde{b}_{jt}$, where $\tilde{y}_{jt} := y_{jt} - \mu_j y_t$ for any variable $y$.
-
-The beauty of this representation is that it does not involve prices directly.
-
-### Deviation consumption
-
-Given the sharing rule {eq}`eq:sharing_rule` introduced above, we now solve for household $j$'s deviation term $\tilde{\chi}_{jt}$ as a function of its deviation state $\tilde{\eta}_{jt} = h_{j,t-1} - \mu_j h_{t-1}$. 
-
-The "deviation" consumption $\tilde{\chi}_{jt}$ satisfies the inverse canonical representation
-
-$$
-\begin{aligned}
-\tilde{\chi}_{jt} &= -\Pi_h^{-1} \Lambda \tilde{\eta}_{j,t-1} + \Pi_h^{-1} \tilde{b}_{jt}, \\
-\tilde{\eta}_{jt} &= (\Delta_h - \Theta_h \Pi_h^{-1} \Lambda) \tilde{\eta}_{j,t-1} + \Theta_h \Pi_h^{-1} \tilde{b}_{jt},
-\end{aligned}
-$$
-
-where $\tilde{b}_{jt} = b_{jt} - \mu_j b_t$ is the deviation of household $j$'s bliss point from its share of the aggregate, and $\tilde{\eta}_{j,-1} = h_{j,-1} - \mu_j h_{-1}$.
-
-This recursion comes from inverting the household service technology. 
+Using the inverse canonical representation {eq}`eq:inverse_canonical`, we compute the deviation consumption process $\{\tilde{\chi}_{jt}\}$ from household $j$'s deviation bliss points $\{\tilde{b}_{jt}\}$ and initial deviation state $\tilde{\eta}_{j,-1} = h_{j,-1} - \mu_j h_{-1}$.
 
 When preferences include durables or habits ($\Lambda \neq 0$), the deviation consumption depends on the lagged deviation state $\tilde{\eta}_{j,t-1}$.
 
 The code solves this as a linear-quadratic control problem using a scaling trick: multiplying the transition matrices by $\sqrt{\beta}$ converts the discounted problem into an undiscounted one that can be solved with a standard discrete algebraic Riccati equation.
 
-Step two is to compute the Gorman weight $\mu_j$ using household $j$'s budget constraint.
+#### Compute the Gorman weight
+
+We compute the Gorman weight $\mu_j$ using household $j$'s budget constraint.
 
 We compute five present values:
 
@@ -468,17 +621,39 @@ We compute five present values:
 - $W_{c2}$: present value of the deviation consumption stream $\{\tilde{\chi}_{jt}\}$
 - $W_g$: present value of the intermediate good stream $\{g_t\}$
 
+Formally (suppressing state indices inside the dot products),
+
+$$
+\begin{aligned}
+W_d   &= \mathbb{E}_0 \sum_{t=0}^\infty \beta^t \, \alpha_{0t} \cdot d_{jt}, \\
+W_k   &= v_0 \cdot k_{j,-1}, \\
+W_{c1} &= \mathbb{E}_0 \sum_{t=0}^\infty \beta^t \, p_{0t} \cdot c_t, \\
+W_{c2} &= \mathbb{E}_0 \sum_{t=0}^\infty \beta^t \, p_{0t} \cdot \tilde{\chi}_{jt}, \\
+W_g   &= \mathbb{E}_0 \sum_{t=0}^\infty \beta^t \, w_{0t} \, g_t.
+\end{aligned}
+$$
+
 Each present value is computed using `doublej2` below to sum infinite series.
 
-The budget constraint requires that the present value of consumption equals wealth. 
-
-Substituting $c_{jt} = \mu_j c_t + \tilde{\chi}_{jt}$ gives
+The budget constraint {eq}`eq:hh_budget` requires that the present value of consumption equals wealth:
 
 $$
-\mu_j W_{c1} + W_{c2} = W_k + W_d + \mu_j W_g,
+\underbrace{\mathbb{E}_0 \sum_{t=0}^\infty \beta^t p_{0t} \cdot c_{jt}}_{\text{consumption expenditure}} = \underbrace{v_0 \cdot k_{j,-1}}_{W_k} + \underbrace{\mathbb{E}_0 \sum_{t=0}^\infty \beta^t \alpha_{0t} \cdot d_{jt}}_{W_d} + \underbrace{\mathbb{E}_0 \sum_{t=0}^\infty \beta^t w_{0t} \ell_{jt}}_{\text{labor income}}.
 $$
 
-where $\mu_j W_g$ is household $j$'s share of intermediate good value. Solving for $\mu_j$:
+From the Gorman allocation rule $\ell_{jt} = \mu_j g_t$, the present value of labor income is
+
+$$
+\mathbb{E}_0 \sum_{t=0}^\infty \beta^t w_{0t} \ell_{jt} = \mu_j \underbrace{\mathbb{E}_0 \sum_{t=0}^\infty \beta^t w_{0t} g_t}_{W_g} = \mu_j W_g.
+$$
+
+Substituting the sharing rule $c_{jt} = \mu_j c_t + \tilde{\chi}_{jt}$ into the left side gives
+
+$$
+\mu_j W_{c1} + W_{c2} = W_k + W_d + \mu_j W_g.
+$$
+
+Solving for $\mu_j$:
 
 $$
 \mu_j = \frac{W_k + W_d - W_{c2}}{W_{c1} - W_g}.
@@ -693,6 +868,18 @@ def heter(
 
 This section implements a key result: the Arrow-Debreu allocation can be replicated using only a mutual fund and a one-period bond, rather than a complete set of contingent claims.
 
+To match the implementation result in Chapter 12.6 of {cite:t}`HansenSargent2013`, we specialize to the one-good, constant-return case
+
+$$
+c_t + i_t = \gamma_1 k_{t-1} + d_t, \qquad
+k_t = \delta_k k_{t-1} + i_t, \qquad
+\beta = \frac{1}{\gamma_1 + \delta_k}.
+$$
+
+In this case the one-period riskless gross return is constant, $R = \gamma_1 + \delta_k = 1/\beta$.
+
+We also impose the Chapter 12.6 measurability restriction that the deviation baseline $\{\tilde{\chi}_{jt}\}$ is $\mathcal{J}_0$-measurable (for example, the preference-shock processes $\{b_{jt}\}$ are deterministic).
+
 ### The trading mechanism
 
 Consider again an economy where each household $j$ initially owns claims to its own endowment stream $\{d_{jt}\}$. 
@@ -733,25 +920,27 @@ $$
 
 which is the aggregate endowment. 
 
-If household $j$ holds fraction $\theta_j$ of this fund, it receives $\theta_j d_t$ in dividends.
+If household $j$ holds fraction $\mu_j$ of this fund, it receives $\mu_j d_t$ in dividends.
 
-The proportional part of consumption $\mu_j c_t$ must be financed by the mutual fund and capital holdings. 
+The proportional part of consumption $\mu_j c_t$ must be financed by the mutual fund and by holding a proportional share of aggregate capital.
 
-Using our calibration ($\Phi_c = \Phi_i = \theta_k = 1$, $\Gamma = \gamma_1$), the resource constraint becomes $c_t + i_t = \gamma_1 k_{t-1} + d_t$ and capital accumulation is $k_t = \delta_k k_{t-1} + i_t$. 
-
-Substituting $i_t = k_t - \delta_k k_{t-1}$ into the resource constraint gives:
+Combining the resource constraint and capital accumulation gives
 
 $$
-c_t + k_t = (\delta_k + \gamma_1) k_{t-1} + d_t.
+c_t + k_t = R k_{t-1} + d_t.
 $$
 
-Holding $\theta_j$ shares of aggregate wealth (capital plus claims to endowments) delivers $\theta_j [(\delta_k + \gamma_1)k_{t-1} + d_t] = \theta_j (c_t + k_t)$.
+Multiplying by $\mu_j$ yields
 
-For this to finance $\mu_j c_t$ plus reinvestment $\mu_j k_t$, we need $\theta_j = \mu_j$. 
+$$
+\mu_j c_t + \mu_j k_t = R (\mu_j k_{t-1}) + \mu_j d_t,
+$$
 
-The remaining term $\tilde{\chi}_{jt}$ is financed by adjusting the bond position according to the recursion derived below.
+so mutual-fund dividends $\mu_j d_t$ and the return on a proportional capital position $\mu_j k_{t-1}$ finance household $j$'s proportional claim $\mu_j c_t$ plus the reinvestment needed to maintain its share $\mu_j k_t$.
 
-Setting $\theta_j = \mu_j$ thus ensures that the mutual fund finances exactly the proportional share $\mu_j c_t$, while the bond handles the deviation $\tilde{\chi}_{jt}$. 
+The remaining term $\tilde{\chi}_{jt}$ is financed by adjusting an *additional* bond position $\hat{k}_{jt}$ according to the recursion derived below.
+
+Holding $\mu_j$ shares of the mutual fund thus finances exactly the proportional component $\mu_j c_t$ (together with rolling over the proportional capital position), while the bond handles the deviation $\tilde{\chi}_{jt}$.
 
 This transforms heterogeneous endowment risk into proportional shares of aggregate risk.
 
@@ -760,34 +949,16 @@ We now derive the law of motion for the bond position $\hat{k}_{jt}$.
 First, write the budget constraint. Household $j$'s time-$t$ resources equal uses:
 
 $$
-\underbrace{\mu_j [(\delta_k + \gamma_1) k_{t-1} + d_t]}_{\text{mutual fund income}} + \underbrace{R \hat{k}_{j,t-1}}_{\text{bond return}} = \underbrace{c_{jt}}_{\text{consumption}} + \underbrace{\mu_j k_t}_{\text{new fund shares}} + \underbrace{\hat{k}_{jt}}_{\text{new bonds}}
+\underbrace{\mu_j d_t}_{\text{mutual fund dividend}} + \underbrace{R(\mu_j k_{t-1} + \hat{k}_{j,t-1})}_{\text{bond return}} = \underbrace{c_{jt}}_{\text{consumption}} + \underbrace{(\mu_j k_t + \hat{k}_{jt})}_{\text{new bonds}}
 $$
-
-where $R := \delta_k + \gamma_1$ is the gross return.
-
-```{note}
-The constant gross return $R = \delta_k + \gamma_1$ arises from our specific calibration ($\Phi_c = \Phi_i = \Theta_k = 1$, $\Gamma = \gamma_1$).
-```
 
 Substituting the sharing rule by replacing $c_{jt}$ with $\mu_j c_t + \tilde{\chi}_{jt}$ gives:
 
 $$
-\mu_j [(\delta_k + \gamma_1) k_{t-1} + d_t] + R \hat{k}_{j,t-1} = \mu_j c_t + \tilde{\chi}_{jt} + \mu_j k_t + \hat{k}_{jt}
+\mu_j d_t + R(\mu_j k_{t-1} + \hat{k}_{j,t-1}) = \mu_j c_t + \tilde{\chi}_{jt} + (\mu_j k_t + \hat{k}_{jt})
 $$
 
-The aggregate economy satisfies $c_t + k_t = (\delta_k + \gamma_1) k_{t-1} + d_t$, so:
-
-$$
-(\delta_k + \gamma_1) k_{t-1} + d_t = c_t + k_t
-$$
-
-Substituting into the left-hand side:
-
-$$
-\mu_j (c_t + k_t) + R \hat{k}_{j,t-1} = \mu_j c_t + \tilde{\chi}_{jt} + \mu_j k_t + \hat{k}_{jt}
-$$
-
-The $\mu_j c_t$ and $\mu_j k_t$ terms cancel:
+Using $\mu_j c_t + \mu_j k_t = R(\mu_j k_{t-1}) + \mu_j d_t$, the proportional terms cancel and we obtain
 
 $$
 R \hat{k}_{j,t-1} = \tilde{\chi}_{jt} + \hat{k}_{jt}
@@ -836,14 +1007,14 @@ $$
 Solving for the initial position gives:
 
 $$
-\hat{k}_{j0} = \sum_{t=1}^\infty R^{-t} \tilde{\chi}_{jt}.
+\hat{k}_{j0} = \sum_{t=1}^\infty R^{-t} \tilde{\chi}_{jt} = \sum_{t=1}^\infty \beta^t \tilde{\chi}_{jt}.
 $$
 
 This is the present value of future deviation consumption. 
 
-Since $\tilde{\chi}_{jt}$ depends only on the deterministic deviation between household $j$'s preference shocks and its share of aggregate preference shocks, this sum is in the time-zero information set and can be computed at date zero.
+Under the Chapter 12.6 measurability restriction ($\tilde{\chi}_{jt} \in \mathcal{J}_0$), this sum is known at date zero and can be used to set the initial bond position.
 
-```{note} Connection to Rubinstein's two-fund theorem
+```{note}
 
 This construction displays a multiperiod counterpart to an aggregation result for security markets derived by {cite:t}`rubinstein1974aggregation`.
 
@@ -1048,7 +1219,7 @@ We reproduce the two-household example from Chapter 12.6 of {cite:t}`HansenSarge
 There are two households, each with preferences
 
 $$
--\frac{1}{2} \mathbb{E} \sum_{t=0}^{\infty} \beta^t \left[(c^i_t - b^i_t)^2 + \ell^{i\,2}_t\right] \mid \mathcal{J}_0, \quad i = 1, 2.
+-\frac{1}{2} \mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t \left[(c^i_t - b^i_t)^2 + \ell^{i\,2}_t\right], \quad i = 1, 2.
 $$
 
 We set $b^i_t = 15$ for $i = 1, 2$, so the aggregate preference shock is $b_t = \sum_i b^i_t = 30$. The endowment processes are
@@ -1066,23 +1237,22 @@ $$
 
 with $w^2_t$ Gaussian white noise with variance $(0.25)^2$.
 
-```{code-cell} ipython3
-ϕ_1 = 1e-5
-γ_1 = 0.1
-δ_k = 0.95
-β = 1.0 / (γ_1 + δ_k)
+Here $w^1_t$ and $w^2_t$ are components of the exogenous innovation vector driving $z_t$ and should not be confused with the wage-price sequence $w_{0t}$ in the household budget constraint.
 
-θ_k = 1.0
-δ_h = 0.0
-θ_h = 0.0
-Λ = 0.0
-Π_h = 1.0
+```{code-cell} ipython3
+# Technology: c + i = γ_1 * k_{t-1} + d, with β = 1/(γ_1 + δ_k)
+# No habits/durables (Λ = δ_h = θ_h = 0), so services = consumption
+ϕ_1, γ_1, δ_k = 1e-5, 0.1, 0.95
+β = 1.0 / (γ_1 + δ_k)
+θ_k, δ_h, θ_h, Λ, Π_h = 1.0, 0.0, 0.0, 0.0, 1.0
 
 Φ_c = np.array([[1.0], [0.0]])
 Φ_g = np.array([[0.0], [1.0]])
 Φ_i = np.array([[1.0], [-ϕ_1]])
 Γ = np.array([[γ_1], [0.0]])
 
+# Exogenous state z_t = [1, d_2_t, d_2_{t-1}, ε_1_t, ε_2_t]'
+# AR(2) aggregate shock in components 2-3; i.i.d. idiosyncratic in 4-5
 A_22 = np.array([
     [1.0, 0.0, 0.0, 0.0, 0.0],
     [0.0, 1.2, -0.22, 0.0, 0.0],
@@ -1099,10 +1269,13 @@ C_2 = np.array([
     [0.0, 1.0],
 ], dtype=float)
 
+# Both households: constant bliss point b = 15
 U_b1 = np.array([[15.0, 0.0, 0.0, 0.0, 0.0]])
 U_b2 = np.array([[15.0, 0.0, 0.0, 0.0, 0.0]])
 U_b = U_b1 + U_b2
 
+# HH1: d_1 = 4 + 0.2ε_2 (idiosyncratic); 
+# HH2: d_2 = 3 + d_tilde2 (aggregate AR(2))
 U_d1 = np.array([[4.0, 0.0, 0.0, 0.2, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0]])
 U_d2 = np.array([[3.0, 1.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0]])
 U_d = U_d1 + U_d2
@@ -1160,20 +1333,6 @@ ax.legend()
 plt.show()
 ```
 
-### Risk sharing
-
-The Gorman sharing rule has strong implications for risk sharing across households.
-
-Because the coefficient $\mu_j = \mu_{0j}^w / \mu_{0a}^w$ is invariant over time and across goods, allocation rule {eq}`eq:sharing_rule` implies a form of risk pooling in the deviation process $\{c_{jt} - \chi_{jt}\}$.
-
-All households share aggregate consumption risk in fixed proportions determined at date zero.
-
-Non-separabilities in preferences (either over time or across goods) affect only the construction of the baseline process $\{\chi_{jt}\}$ and the calculation of the risk-sharing coefficient $\mu_j$ implied by the distribution of wealth.
-
-They do not break the proportional sharing of aggregate risk.
-
-In the special case where the preference shock processes $\{b_{jt}\}$ are deterministic in the sense that they reside in the information set $\mathcal{J}_0$, individual consumption goods will be perfectly correlated with their aggregate counterparts (conditioned on $\mathcal{J}_0$).
-
 The next figure plots the limited-markets bond adjustment and confirms that the adjustments sum to approximately zero.
 
 ```{code-cell} ipython3
@@ -1209,50 +1368,84 @@ We now extend the two-household example to an economy with many households.
 The exogenous state vector is
 
 $$
-z_t = \begin{bmatrix} 1 \\ d_{a,t} \\ d_{a,t-1} \\ w_{2,t} \\ \vdots \\ w_{n,t} \\ w_{n+1,t} \\ \vdots \\ w_{2n,t} \end{bmatrix},
+z_t =
+\begin{bmatrix}
+1 \\
+d_{a,t} \\
+d_{a,t-1} \\
+\eta_{J_a+1,t} \\
+\vdots \\
+\eta_{J,t} \\
+\xi_{1,t} \\
+\vdots \\
+\xi_{J,t}
+\end{bmatrix},
 $$
 
-where the first three components track a constant and the "ghost" aggregate endowment process, and the remaining components are i.i.d. shocks for individual endowments ($w_{2,t}, \ldots, w_{n,t}$) and preference shocks ($w_{n+1,t}, \ldots, w_{2n,t}$).
+where $J$ is the number of households and $J_a$ is the number of "absorbing" households (defined below).
+
+The first three components track a constant and the "ghost" aggregate endowment process.
+The components $\{\eta_{j,t}\}_{j=J_a+1}^J$ are idiosyncratic endowment states for the non-absorbing households.
+The components $\{\xi_{j,t}\}_{j=1}^J$ are idiosyncratic preference-shock states (often set to zero in experiments).
 
 The aggregate endowment follows an AR(2) process:
 
 $$
-d_{a,t} = \rho_1 d_{a,t-1} + \rho_2 d_{a,t-2} + \sigma_a w_{1,t},
+d_{a,t+1} = \rho_1 d_{a,t} + \rho_2 d_{a,t-1} + \sigma_a w_{1,t+1},
 $$
 
-where we can set the $\rho_j$'s to capture persistent aggregate fluctuations.
+where $w_{1,t+1}$ is the aggregate innovation (the first component of $w_{t+1}$) and we can set the $\rho_j$'s to capture persistent aggregate fluctuations.
 
-Let $n_a$ denote the number of "absorbing" households. For households $j > n_a$, individual endowments are
-
-$$
-d_{jt} = \alpha_j + \phi_j d_{a,t} + \sigma_j w_{j,t}, \quad j = n_a + 1, \ldots, n.
-$$
-
-The first $n_a$ households absorb the negative of all idiosyncratic shocks to ensure aggregation:
+Let $J_a$ denote the number of "absorbing" households.
+For households $j > J_a$, individual endowments are
 
 $$
-d_{jt} = \alpha_j + \phi_j d_{a,t} - \frac{1}{n_a} \sum_{k=n_a+1}^n \sigma_k w_{k,t}, \quad j = 1, \ldots, n_a.
+d_{jt} = \alpha_j + \phi_j d_{a,t} + \eta_{j,t}, \quad j = J_a + 1, \ldots, J.
+$$
+
+The first $J_a$ households absorb the negative of all idiosyncratic endowment shocks to ensure aggregation:
+
+$$
+d_{jt} = \alpha_j + \phi_j d_{a,t} - \frac{1}{J_a} \sum_{k=J_a+1}^J \eta_{k,t}, \quad j = 1, \ldots, J_a.
 $$
 
 This construction ensures that
 
 $$
-\sum_{j=1}^n d_{j,t} = \sum_{j=1}^n \alpha_j + \left(\sum_{j=1}^n \phi_j\right) d_{a,t}.
+\sum_{j=1}^J d_{j,t} = \sum_{j=1}^J \alpha_j + \left(\sum_{j=1}^J \phi_j\right) d_{a,t}.
 $$
 
-Imposing $\sum_{j=1}^n \phi_j = 1$ gives
+Imposing $\sum_{j=1}^J \phi_j = 1$ gives
 
 $$
-\sum_{j=1}^n d_{j,t} = \sum_{j=1}^n \alpha_j + d_{a,t}.
+\sum_{j=1}^J d_{j,t} = \sum_{j=1}^J \alpha_j + d_{a,t}.
 $$
 
 Preference shocks are muted to simplify experiments:
 
 $$
-b_{jt} = \bar{b} + \gamma_j w_{n+j,t}, \quad j = 1, \ldots, n,
+b_{jt} = \bar{b} + \xi_{j,t}, \quad j = 1, \ldots, J,
 $$
 
-where the $\gamma_j$'s are small.
+where the $\xi_{j,t}$ processes are taken to be small (and can be shut off entirely by setting their innovation loadings to zero).
+
+To complete the specification, we let the idiosyncratic states follow AR(1) laws of motion
+(all innovations are components of the i.i.d. vector $w_{t+1}$ in $z_{t+1} = A_{22} z_t + C_2 w_{t+1}$):
+
+$$
+\eta_{j,t+1} = \rho^{d}_j \eta_{j,t} + \sigma_j \varepsilon^{d}_{j,t+1},
+\qquad j = J_a + 1, \ldots, J,
+$$
+
+and
+
+$$
+\xi_{j,t+1} = \rho^{b}_j \xi_{j,t} + \gamma_j \varepsilon^{b}_{j,t+1},
+\qquad j = 1, \ldots, J.
+$$
+
+Here $\varepsilon^{d}_{j,t+1}$ and $\varepsilon^{b}_{j,t+1}$ are mean-zero, unit-variance innovations (components of $w_{t+1}$).
+Setting $\rho^{d}_j = 0$ (or $\rho^{b}_j = 0$) recovers i.i.d. shocks.
 
 ```{code-cell} ipython3
 def build_reverse_engineered_gorman_extended(
@@ -1348,7 +1541,7 @@ def build_reverse_engineered_gorman_extended(
 
     # Ud_per_house: endowment loading
     # First n_absorb households: 
-    # d_{jt} = alpha_j + phi_j * d_{a,t} - (1/n_absorb) * sum_{k>n_absorb} eta_{k,t}
+    # d_{jt} = alpha_j + phi_j * d_{a,t} - (1/n_ab) * sum_{k>n_ab} eta_{k,t}
     # Remaining households k > n_absorb: 
     # d_{kt} = alpha_k + phi_k * d_{a,t} + eta_{k,t}
     Ud_per_house = []
@@ -1465,8 +1658,6 @@ A22, C2, Ub, Ud, Ub_list, Ud_list, x0 = build_reverse_engineered_gorman_extended
     n_absorb=n_absorb,
 )
 
-print(f"State dimension nz = {A22.shape[0]}")
-print(f"Shock dimension nw = {C2.shape[1]}")
 print(f"sum(φs) = {np.sum(φs):.6f} (should be 1.0)")
 ```
 
@@ -1487,8 +1678,8 @@ paths, econ = solve_model(info_ar1, tech_ar1, pref_ar1,
 
 ```{code-cell} ipython3
 print(f"State dimension: {A22.shape[0]}, shock dimension: {C2.shape[1]}")
-print(f"Aggregate: ρ₁={ρ1:.3f}, ρ₂={ρ2:.3f}, σₐ={σ_a:.2f}")
-print(f"Endowments: α ∈ [{np.min(αs):.2f}, {np.max(αs):.2f}], Σφ={np.sum(φs):.6f}")
+print(f"Aggregate: ρ_1={ρ1:.3f}, ρ_2={ρ2:.3f}, σ_a={σ_a:.2f}")
+print(f"Endowments: α in [{np.min(αs):.2f}, {np.max(αs):.2f}], Σφ={np.sum(φs):.6f}")
 ```
 
 The next plots show household consumption and dividend paths after discarding the initial burn-in period.
@@ -1625,7 +1816,7 @@ axes[0].set_ylabel('capital')
 
 axes[1].plot(da_irf, lw=2)
 axes[1].set_xlabel('time')
-axes[1].set_ylabel(r'$d_{a,t}$ (aggregate endowment shock)')
+axes[1].set_ylabel(r'$d_{a,t}$')
 
 
 plt.tight_layout()
@@ -1699,12 +1890,10 @@ Consider redistributing consumption by choosing new weights $\{\lambda_j^*\}$ sa
 
 The new allocation $c_{jt} - \chi_{jt} = \lambda_j^* (c_t - \chi_t)$ preserves aggregate dynamics $(c_t, k_t)$ while reallocating consumption across households.
 
-### Post-tax-and-transfer consumption and income
-
 Let $R := \delta_k + \gamma_1$. 
 
 For a given Pareto-weight vector $\omega$, 
-household $j$'s assets are $a_{j,t} \equiv \omega_j k_t + \hat{k}_{j,t}$ and income is
+household $j$'s assets are $a_{j,t} := \omega_j k_t + \hat{k}_{j,t}$ and income is
 
 $$
 y_{j,t}(\omega) = \omega_j d_t + (R-1) a_{j,t-1}.
@@ -1926,10 +2115,6 @@ y_post_pct = _pct(y_post[:, :T_ts])
 c_pre_pct = _pct(c_pre[:, :T_ts])
 c_post_pct = _pct(c_post[:, :T_ts])
 
-print(f"\nRedistribution effects:")
-print(f"  income dispersion: {np.std(y_pre):.3f} → {np.std(y_post):.3f}")
-print(f"  consumption dispersion: {np.std(c_pre):.3f} → {np.std(c_post):.3f}")
-
 fig, ax = plt.subplots(1, 3, figsize=(14, 4), sharey=True)
 
 ax[0].plot(t, y_pre_pct[0], label="p90", lw=2)
@@ -1956,3 +2141,9 @@ ax[2].legend()
 plt.tight_layout()
 plt.show()
 ```
+
+The figures shows a clear reduction in income and consumption inequality after redistribution via Pareto weights.
+
+We also see how insurance smooths consumption relative to income, especially for lower-percentile households.
+
+The post-tax-and-transfer income path exhibits less volatility for the lower percentiles compared to the pre-tax-and-transfer income.
