@@ -25,8 +25,9 @@ kernelspec:
 
 # Gorman Aggregation 
 
-{cite:t}`gorman1953community` described a class of preferences with the useful  property that there exists a "representative household" 
-in the sense that competitive equilibrium allocations can be computed by following a recursive procedure:
+## Overview
+
+{cite:t}`gorman1953community` described a class of environments  models with preferences having the useful  property that there exists a "representative household" in the sense that competitive equilibrium allocations can be computed in the following way:
 
 * take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single hypothetical "representative household"
 * collect the endowments of all households and give them to the representative household
@@ -45,44 +46,30 @@ In general, computing a competitive equilibrium requires solving for the price s
 ```
 
 
-
+Chapter 12 of {cite:t}`HansenSargent2013` described how to adapt  the preference specifications of {cite:t}`gorman1953community`
+to a linear-quadratic class of environments.
 
 
 This lecture uses  the `quantecon.DLE` class to study economies that satisfy necessary conditions for Gorman 
 aggregation of preferences.  
 
-Chapter 12 of {cite:t}`HansenSargent2013` described how to adapt  the preference specifications of {cite:t}`gorman1953community`
-to the linear-quadratic class of environments assumed in their book. 
+ 
 
-The first step in implementing the above recursive algorithm will be to form a representative agent economy and then apply our DLE tools to compute its competitive equilibrium.
+To compute a competitive equilibrium, our first step  will be to form a representative agent.
 
+
+After that, we can use some of our DLE tools to compute  competitive equilibrium
+
+* prices without knowing the allocation of consumption to individual households
+* households' individual wealth levels
+* households' consumption levels
+* 
 Thus, this lecture builds on tools and Python code described in  {doc}`hs_recursive_models`, {doc}`growth_in_dles`, and {doc}`irfs_in_hall_model`.
 
  
 
 
-
-In addition to what's in Anaconda, this lecture uses the `quantecon` library
-
-```{code-cell} ipython3
-:tags: [hide-output]
-
-!pip install --upgrade quantecon
-```
-
-We make the following imports
-
-```{code-cell} ipython3
-import numpy as np
-from scipy.linalg import solve_discrete_are
-from quantecon import DLE
-from quantecon import LQ
-import matplotlib.pyplot as plt
-```
-
-## Overview
-
-When conditions for Gorman aggregation of preferences are satisfied, we can compute a competitive equilibrium of  heterogeneous-household economy in two steps: solve a representative-agent linear-quadratic planning problem for aggregates, then recover household allocations via a sharing-formula that makes each  household's consumption a household-specific constant share of aggregate consumption.
+In a little more detail, when conditions for Gorman aggregation of preferences are satisfied, we can compute a competitive equilibrium of  heterogeneous-household economy in two steps: solve a representative-agent linear-quadratic planning problem for aggregates, then recover household allocations via a sharing-formula that makes each  household's consumption a household-specific constant share of aggregate consumption.
 
 * a household's share parameter will depend on the implicit Pareto weight implied by the initial distribution of endowment.
 
@@ -110,18 +97,39 @@ With the help of this powerful result, we proceed in two steps:
 2. Compute household-specific policies and the Gorman sharing rule.
 
 
-For the special case in Section 12.6 of {cite:t}`HansenSargent2013`, where preference shocks are inactive, we can also
+For a special case described  in Section 12.6 of {cite:t}`HansenSargent2013`, where preference shocks are inactive, we can also
 
-3. Implement the  Arrow-Debreu allocation using only a mutual fund (aggregate stock) and a one-period bond.
+3. Implement the  Arrow-Debreu allocation by allowing households to trade  a risk-free one-period bond and a single mutual fund that owns all of the economy's physical capital.
 
-We shall provide examples of these steps in economies with  two and many households.
+We shall provide examples of these steps in economies with  two and then with many households.
 
-Before studying these things in the context of the DLE class,  we first introduce Gorman aggregation in a static economy.
+Before studying these things in the context of the DLE class,  we'll first introduce Gorman aggregation in a static economy.
+
+
+
+In addition to what's in Anaconda, this lecture uses the `quantecon` library
+
+```{code-cell} ipython3
+:tags: [hide-output]
+
+!pip install --upgrade quantecon
+```
+
+We make the following imports
+
+```{code-cell} ipython3
+import numpy as np
+from scipy.linalg import solve_discrete_are
+from quantecon import DLE
+from quantecon import LQ
+import matplotlib.pyplot as plt
+```
+
 
 (static_gorman)=
 ### Gorman aggregation in a static economy
 
-To see where the sharing rule comes from, start with a static economy with $n$ goods, price vector $p$, and households $j = 1, \ldots, J$.
+To indicate  where our competitive equilibrium  sharing rule originates, we start with a static economy with $n$ goods, price vector $p$, and households $j = 1, \ldots, J$.
 
 Let $c^a$ denote the aggregate amount of consumption to be allocated among households.
 
@@ -425,7 +433,7 @@ All households observe the same aggregate information set $\{\mathcal{J}_t\}$; i
 
 These restrictions enable Gorman aggregation by ensuring that household demands are affine in wealth.
 
-This will allow us to solve for aggregate allocations and prices without knowing the distribution of wealth across households as we shall see in {ref}`sharing_rules`.
+This will allow us to solve for aggregate allocations and prices without knowing the distribution of wealth across households,  as we shall see in {ref}`sharing_rules`.
 
 ### The representative agent problem
 
@@ -440,11 +448,13 @@ $$ (eq:agg_preference_aggregates)
 
 Aggregates are economy-wide totals: $c_t := \sum_j c_{jt}$, $b_t := \sum_j b_{jt}$, $d_t := \sum_j d_{jt}$, and similarly for $(i_t, k_t, h_t, s_t, g_t)$.
 
-Under the Gorman/LQ restrictions, we can compute equilibrium prices and aggregate quantities by synthesizing a fictitious *representative agent* whose first-order conditions reproduce the competitive equilibrium conditions for aggregates.
+Under the Gorman/LQ restrictions, we can compute equilibrium prices and aggregate quantities by synthesizing a fictitious *representative agent* whose first-order conditions generate    equations that determine correct equilibrium prices and a correct *aggregate* consumption allocation and aggregate capital process.  
 
-This representative problem is an aggregation device: it is chosen to deliver the correct *aggregate* allocation and prices.
+* these equations will not be sufficient to determine the allocation of aggregate consumption among individual households. 
 
-The representative agent maximizes
+Posing a social planning problem for a representative problem is thus a   device for computing the correct *aggregate* allocation along with correct  competitive equilibrium prices.
+
+The social planner in our representative agent economy maximizes
 
 $$
 -\frac{1}{2} \mathbb{E}_0 \sum_{t=0}^\infty \beta^t
@@ -909,7 +919,7 @@ def heter(
 
 
 
-This section studies the special case from Section 12.6 of {cite:t}`HansenSargent2013` in which the Arrow-Debreu allocation can be implemented by opening competitive markets only in a mutual fund and a one-period bond.
+This section studies a special case from Section 12.6 of {cite:t}`HansenSargent2013` in which the Arrow-Debreu allocation can be implemented by opening competitive markets only in a mutual fund and a one-period bond.
 
    * So in our setting, we don't literally require that markets in  a complete set of contingent claims be present.
 
@@ -995,7 +1005,7 @@ First, write the budget constraint.
 
 Household $j$'s time-$t$ resources are its mutual fund dividend $\mu_j d_t$ plus the return on its bond position $R(\mu_j k_{t-1} + \hat{k}_{j,t-1})$.
 
-Its uses of funds are consumption $c_{jt}$ plus the new bond position $(\mu_j k_t + \hat{k}_{jt})$:
+Its uses of funds are consumption $c_{jt}$ plus the new bond position $(\mu_j k_t + \hat{k}_{jt})$, so
 
 $$
 \underbrace{\mu_j d_t}_{\text{mutual fund dividend}} + \underbrace{R(\mu_j k_{t-1} + \hat{k}_{j,t-1})}_{\text{bond return}} = \underbrace{c_{jt}}_{\text{consumption}} + \underbrace{(\mu_j k_t + \hat{k}_{jt})}_{\text{new bonds}}
@@ -1401,7 +1411,7 @@ The next figure plots the limited-markets bond adjustment and confirms that the 
 ---
 mystnb:
   figure:
-    caption: bond adjustment positions
+    caption: bond position adjustments
     name: fig-gorman-bond-adjustment
 ---
 fig, ax = plt.subplots()
@@ -1755,9 +1765,7 @@ plt.show()
 
 ### Closed-loop state-space system
 
-The DLE framework represents the economy as a linear state-space system. 
-
-After solving the optimal control problem and substituting the policy rule, we obtain a closed-loop system:
+We can use our DLE tools first to solve the representative-household social planning problem and represent equilibrium quantities as a linear closed-loop  state-space system that takes the usual Chapter 5 {cite:t}`HansenSargent2013` form 
 
 $$
 x_{t+1} = A_0 x_t + C w_{t+1},
@@ -1774,7 +1782,7 @@ z_t
 \end{bmatrix},
 $$
 
-with $h_{t-1}$ the household service stock, $k_{t-1}$ the capital stock, and $z_t$ the exogenous state (constant, aggregate endowment states, and idiosyncratic shock states).
+with $h_{t-1}$ the aggregate household service stock, $k_{t-1}$ the aggregate  capital stock, and $z_t$ the exogenous state (constant, aggregate endowment states, and idiosyncratic shock states).
 
 Any equilibrium quantity is a linear function of the state. 
 
@@ -1816,7 +1824,7 @@ n_k = np.atleast_2d(econ.thetak).shape[0]
 n_endo = n_h + n_k  # endogenous state dimension
 ```
 
-With the state-space representation, we can compute impulse responses to show how shocks propagate through the economy. 
+With the state-space representation, we can compute impulse responses to show how shocks propagate. 
 
 To trace the impulse response to shock $j$, we set `shock_idx=j` which selects column $j$ of the loading matrix $C$. 
 
@@ -1927,12 +1935,11 @@ Indeed, the average of individual household endowments tracks the aggregate endo
 
 ## Redistributing by adjusting  Pareto weights
 
-This section analyzes Pareto-efficient tax-and-transfer schemes by simply taking  competitive equilibrium allocations and then using
+This section analyzes Pareto-efficient tax-and-transfer schemes by starting with   competitive equilibrium allocations and  using a specific 
 a set of nonnegative Pareto weights that sum to one.
 
 ```{note}
-There are various   schemes that would deliver such efficient redistributions, but in terms of what interests us in this example,
-they are all equivalent. 
+There are various tax-and-transfer   schemes that would deliver such efficient redistributions, but in terms of what interests us in this example, they are all equivalent. 
 ```
 
 ### Redistribution via Pareto weights
