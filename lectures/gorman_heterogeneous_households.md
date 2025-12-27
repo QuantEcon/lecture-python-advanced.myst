@@ -4,7 +4,7 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.17.1
+    jupytext_version: 1.17.3
 kernelspec:
   display_name: Python 3 (ipykernel)
   language: python
@@ -25,17 +25,17 @@ kernelspec:
 
 # Gorman Aggregation 
 
-{cite:t}`gorman1953community` described a class of preferences with the useful  property that there exists a 'representative household' 
+{cite:t}`gorman1953community` described a class of preferences with the useful  property that there exists a "representative household" 
 in the sense that competitive equilibrium allocations can be computed by following a recursive procedure:
 
-* take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single hypothetical 'representative household'
+* take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single hypothetical "representative household"
 * collect the endowments of all households and give them to the representative household
 * construct a competitive equilibrium allocation and price system for the representative agent economy
 * at the  competitive equilibrium price system, compute the wealth -- i.e., the present value -- of each household's initial endowment 
 * find a consumption plan for each household that maximizes its utility functional subject to the wealth that you computed in the previous step
 
 
-This procedure allows us to compute the competitive equilibrium price system  for our heterogeneous household economy **prior** to computing the
+This procedure allows us to compute the competitive equilibrium price system  for our heterogeneous household economy *prior* to computing the
 competitive equilibrium allocation.  
 
 That substantially simplifies calculating a competitive equilibrium.
@@ -118,6 +118,7 @@ We shall provide examples of these steps in economies with  two and many househo
 
 Before studying these things in the context of the DLE class,  we first introduce Gorman aggregation in a static economy.
 
+(static_gorman)=
 ### Gorman aggregation in a static economy
 
 To see where the sharing rule comes from, start with a static economy with $n$ goods, price vector $p$, and households $j = 1, \ldots, J$.
@@ -210,7 +211,7 @@ It follows that $\psi_j$ and $\psi_c$ are homogeneous of degree zero in prices, 
 
 The baseline indifference curves are either the highest or lowest indifference curves, corresponding respectively to cases in which the utility indices $u^j$ are restricted to be nonpositive or nonnegative.
 
-As noted by Gorman, when preferences are of this form, there is a well-defined compensated demand function for a fictitious representative consumer obtained by aggregating individual demands:
+As noted by Gorman, when preferences are of this form, there is a well-defined compensated demand function for a fictitious representative agent obtained by aggregating individual demands:
 
 $$
 c^a = \psi_a(p) + u^a \psi_c(p),
@@ -259,7 +260,7 @@ $$
 
 Notice that the coefficient on $W^j$ is the same for all $j$ since $\psi_c(p)/(p \cdot \psi_c(p))$ is a function only of the price vector $p$.
 
-The individual allocations can be determined from the Engel curves by substituting for $p$ the gradient vector obtained from the representative consumer's optimal allocation problem.
+The individual allocations can be determined from the Engel curves by substituting for $p$ the gradient vector obtained from the representative agent's optimal allocation problem.
 
 In the quadratic specifications used in this lecture (and in {cite:t}`HansenSargent2013`), the baseline components are degenerate in the sense that $\psi_j(p) = \chi^j$ is independent of $p$, where $\chi^j$ is a consumer-specific bliss point represented by a vector with the same dimension as $c^j$.
 
@@ -312,7 +313,7 @@ The exogenous state $z_t$ follows a first-order vector autoregression
 
 $$
 z_{t+1} = A_{22} z_t + C_2 w_{t+1},
-$$
+$$ (eq:exogenous_var)
 
 where $A_{22}$ governs persistence and $C_2$ maps i.i.d. shocks $w_{t+1}$ into the state.
 
@@ -342,7 +343,7 @@ The economy's resource constraint is
 $$
 \Phi_c c_t + \Phi_g g_t + \Phi_i i_t = \Gamma k_{t-1} + d_t, \quad
 k_t = \Delta_k k_{t-1} + \Theta_k i_t,
-$$
+$$ (eq:resource_constraint)
 
 and
 
@@ -351,7 +352,7 @@ h_t = \Delta_h h_{t-1} + \Theta_h c_t, \quad
 s_t = \Lambda h_{t-1} + \Pi_h c_t, \quad
 b_t = U_b z_t, \quad
 d_t = U_d z_t.
-$$
+$$ (eq:household_service_tech)
 
 Here $h_t$ is the aggregate household service, 
 $s_t$ is the aggregate service flow derived from household capital, 
@@ -362,11 +363,6 @@ The matrices $\Phi_c, \Phi_g, \Phi_i$ and $\Gamma$ allow for multiple goods and 
 In the one-good case used in the limited-markets section, these reduce to scalars and the resource constraint becomes $c_t + i_t = \gamma_1 k_{t-1} + d_t$.
 
 We write $\Pi_h$ for the household service-technology matrix $\Pi$ in {cite:t}`HansenSargent2013`.
-
-Selection matrices such as $S_{(q)}$ map the aggregate state $x_t$ into aggregate quantities such as $q_t = S_{(q)} x_t$
-for $q = c, i, k, h, s, g, b, d$.
-
-Shadow-price mappings $M_c, M_k, \ldots$ are used to value streams and recover equilibrium prices.
 
 ### The individual household problem
 
@@ -430,7 +426,7 @@ These restrictions enable Gorman aggregation by ensuring that household demands 
 
 This will allow us to solve for aggregate allocations and prices without knowing the distribution of wealth across households as we shall see in {ref}`sharing_rules`.
 
-### The aggregate planning problem
+### The representative agent problem
 
 We construct aggregates by summing across households:
 
@@ -443,33 +439,30 @@ $$ (eq:agg_preference_aggregates)
 
 Aggregates are economy-wide totals: $c_t := \sum_j c_{jt}$, $b_t := \sum_j b_{jt}$, $d_t := \sum_j d_{jt}$, and similarly for $(i_t, k_t, h_t, s_t, g_t)$.
 
-The planner maximizes the utility functional of the representative household 
+Under the Gorman/LQ restrictions, we can compute equilibrium prices and aggregate quantities by synthesizing a fictitious *representative agent* whose first-order conditions reproduce the competitive equilibrium conditions for aggregates.
+
+This representative problem is an aggregation device: it is chosen to deliver the correct *aggregate* allocation and prices.
+
+The representative agent maximizes
 
 $$
 -\frac{1}{2} \mathbb{E}_0 \sum_{t=0}^\infty \beta^t
 \left[(s_t - b_t)^\top(s_t - b_t) + g_t^\top g_t\right]
 $$ (eq:planner_objective)
 
-where $g_t = \sum_j \ell_{jt}$ is aggregate labor supply, subject to technology constraints
+subject to the technology constraints {eq}`eq:resource_constraint` and {eq}`eq:household_service_tech`, and the exogenous state process {eq}`eq:exogenous_var`.
 
-$$
-\begin{aligned}
-\Phi_c c_t + \Phi_g g_t + \Phi_i i_t &= \Gamma k_{t-1} + d_t, \\
-k_t &= \Delta_k k_{t-1} + \Theta_k i_t, \\
-h_t &= \Delta_h h_{t-1} + \Theta_h c_t, \\
-s_t &= \Lambda h_{t-1} + \Pi_h c_t,
-\end{aligned}
-$$ (eq:planner_constraints)
+The variable $g_t$ is the aggregate intermediate good.
 
-and exogenous processes
+With quadratic labor costs and linear budget terms, household $j$'s intratemporal first-order condition implies $\ell_{jt} = \mu^w_{0j} w_{0t}$, where $\mu^w_{0j}$ is household $j$'s time-zero marginal utility of wealth.
 
-$$
-z_{t+1} = A_{22} z_t + C_2 w_{t+1}, \quad
-b_t = U_b z_t, \quad
-d_t = U_d z_t.
-$$ (eq:exogenous_process)
+Aggregating gives $g_t := \sum_j \ell_{jt} = \mu^w_{0a} w_{0t}$, where $\mu^w_{0a}=\sum_j \mu^w_{0j}$.
 
-Note that the constraints involve lagged stocks $(h_{t-1}, k_{t-1})$ and the current exogenous state $z_t$. These predetermined variables form the planner's state:
+Hence, the representative agent is constructed so that its first-order condition delivers the same aggregate relation $g_t=\mu^w_{0a} w_{0t}$.
+
+Note that constraints above involve lagged stocks $(h_{t-1}, k_{t-1})$ and the current exogenous state $z_t$. 
+
+These predetermined variables form the planner's state:
 
 $$
 x_t = [h_{t-1}^\top, k_{t-1}^\top, z_t^\top]^\top.
@@ -494,7 +487,7 @@ These shadow prices correspond to competitive equilibrium prices.
 
 This section presents  Gorman consumption sharing rules.
 
-Our preference specification is an infinite-dimensional generalization of the static Gorman setup described above, where goods are indexed by both dates and states of the world.
+Our preference specification is an infinite-dimensional generalization of the static Gorman setup described in {ref}`static_gorman`, where goods are indexed by both dates and states of the world.
 
 Let $\mu_{0j}^w$ denote household $j$'s *time-zero marginal utility of wealth*, the Lagrange multiplier on its intertemporal budget constraint.
 
@@ -618,13 +611,15 @@ we can append the recursion for $c_t$ from the aggregate problem to obtain a rec
 
 #### Labor allocation rule
 
-The allocation rule for household $j$'s labor (i.e., the "intermediate good" $g_{jt} = \ell_{jt}$) is
+Once the aggregate allocation and prices are obtained from the representative problem, individual labor allocations follow from the ratio of individual to aggregate marginal utilities of wealth:
 
 $$
-\ell_{jt} = \mu_j \, g_t,
+\ell_{jt} = \frac{\mu_{0j}^w}{\mu_{0a}^w} \, g_t \equiv \mu_j \, g_t,
 $$ (eq:labor_allocation)
 
-where $g_t = \sum_j \ell_{jt}$ is the aggregate intermediate good.
+where $g_t$ is the aggregate intermediate good determined by the representative agent's first-order condition.
+
+This step recovers household labor supplies consistent with the competitive equilibrium.
 
 #### Risk sharing
 
@@ -1340,7 +1335,7 @@ U_b1 = np.array([[15.0, 0.0, 0.0, 0.0, 0.0]])
 U_b2 = np.array([[15.0, 0.0, 0.0, 0.0, 0.0]])
 U_b = U_b1 + U_b2
 
-# HH1: d_1 = 4 + 0.2ε_2 (idiosyncratic); 
+# HH1: d_1 = 4 + 0.2ε_1 (idiosyncratic); 
 # HH2: d_2 = 3 + d_tilde2 (aggregate AR(2))
 U_d1 = np.array([[4.0, 0.0, 0.0, 0.2, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0]])
 U_d2 = np.array([[3.0, 1.0, 0.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0, 0.0]])
@@ -1514,7 +1509,7 @@ Here $\varepsilon^{d}_{j,t+1}$ and $\varepsilon^{b}_{j,t+1}$ are mean-zero, unit
 Setting $\rho^{d}_j = 0$ (or $\rho^{b}_j = 0$) recovers i.i.d. shocks.
 
 ```{code-cell} ipython3
-def build_reverse_engineered_gorman_extended(
+def build_gorman_extended(
     n,
     rho1, rho2, sigma_a,
     alphas, phis, sigmas,
@@ -1696,22 +1691,14 @@ n_absorb = 50
 ρ_idio_min, ρ_idio_max = 0.0, 0.98
 ρ_idio = ρ_idio_min + (ρ_idio_max - ρ_idio_min) * (poorness[n_absorb:] ** 1.0)
 
-# Preference shocks (disabled by default)
+# Preference shocks are muted
 b_bar = 5.0
-enable_pref_shocks = False
-pref_shock_scale = 0.5
-pref_shock_persistence = 0.7
-
-if enable_pref_shocks:
-    γs_pref = pref_shock_scale * np.ones(N)
-    ρ_pref = pref_shock_persistence
-else:
-    γs_pref = np.zeros(N)
-    ρ_pref = 0.0
+γs_pref = np.zeros(N)
+ρ_pref = 0.0
 
 t0 = 200
 
-A22, C2, Ub, Ud, Ub_list, Ud_list, x0 = build_reverse_engineered_gorman_extended(
+A22, C2, Ub, Ud, Ub_list, Ud_list, x0 = build_gorman_extended(
     n=N,
     rho1=ρ1, rho2=ρ2, sigma_a=σ_a,
     alphas=αs, phis=φs, sigmas=σs,
@@ -1949,7 +1936,7 @@ they are all equivalent.
 
 ### Redistribution via Pareto weights
 
-The sharing rule {eq}`eq:sharing_rule` can be written as $c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t)$, where $\mu_j$ is household $j$'s wealth share. 
+The sharing rule {eq}`eq:sharing_rule` can be written as $c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t)$, where $\mu_j$ is household $j$'s Gorman weight.
 
 Define the Pareto weight $\lambda_j := \mu_j$, with $\sum_{j=1}^J \lambda_j = 1$.
 
