@@ -27,7 +27,7 @@ kernelspec:
 
 ## Overview
 
-{cite:t}`gorman1953community` described a class of environments  models with preferences having the useful  property that there exists a "representative household" in the sense that competitive equilibrium allocations can be computed in the following way:
+{cite:t}`gorman1953community` described a class of models with preferences having the useful property that there exists a "representative household" in the sense that competitive equilibrium allocations can be computed in the following way:
 
 * take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single hypothetical "representative household"
 * collect the endowments of all households and give them to the representative household
@@ -63,13 +63,13 @@ After that, we can use some of our DLE tools to compute  competitive equilibrium
 * prices without knowing the allocation of consumption to individual households
 * households' individual wealth levels
 * households' consumption levels
-* 
+
 Thus, this lecture builds on tools and Python code described in  {doc}`hs_recursive_models`, {doc}`growth_in_dles`, and {doc}`irfs_in_hall_model`.
 
  
 
 
-In a little more detail, when conditions for Gorman aggregation of preferences are satisfied, we can compute a competitive equilibrium of  heterogeneous-household economy in two steps: solve a representative-agent linear-quadratic planning problem for aggregates, then recover household allocations via a sharing-formula that makes each  household's consumption a household-specific constant share of aggregate consumption.
+In a little more detail, when conditions for Gorman aggregation of preferences are satisfied, we can compute a competitive equilibrium of a heterogeneous-household economy in two steps: solve a representative-agent linear-quadratic planning problem for aggregates, then recover household allocations via a sharing-formula that makes each  household's consumption a household-specific constant share of aggregate consumption.
 
 * a household's share parameter will depend on the implicit Pareto weight implied by the initial distribution of endowment.
 
@@ -452,7 +452,7 @@ Under the Gorman/LQ restrictions, we can compute equilibrium prices and aggregat
 
 * these equations will not be sufficient to determine the allocation of aggregate consumption among individual households. 
 
-Posing a social planning problem for a representative problem is thus a   device for computing the correct *aggregate* allocation along with correct  competitive equilibrium prices.
+Posing a social planning problem for a representative agent is thus a device for computing the correct *aggregate* allocation along with correct competitive equilibrium prices.
 
 The social planner in our representative agent economy maximizes
 
@@ -1912,8 +1912,8 @@ fig, axes = plt.subplots(2, 1, figsize=(14, 8))
 # Top panel: Aggregate endowment
 axes[0].plot(time_idx, d_agg[:T_plot], linewidth=2.5, color='C0', 
         label='Aggregate endowment $d_t$')
-axes[0].set_ylabel('Endowment')
 axes[0].set_title('Aggregate Endowment')
+axes[0].set_ylabel('endowment')
 axes[0].legend()
 
 # Also plot the mean across households
@@ -1921,9 +1921,9 @@ d_mean = d_households[:, :T_plot].mean(axis=0)
 axes[1].plot(time_idx, d_mean, linewidth=2.5, color='black', linestyle='--',
             label=f'Mean across {d_households.shape[0]} households', alpha=0.8)
 
-axes[1].set_xlabel('Time (after burn-in)')
-axes[1].set_ylabel('Endowment')
 axes[1].set_title(f'Average of Individual Household Endowments')
+axes[1].set_xlabel('time (after burn-in)')
+axes[1].set_ylabel('endowment')
 axes[1].legend(loc='upper right', ncol=2)
 
 plt.tight_layout()
@@ -1935,8 +1935,7 @@ Indeed, the average of individual household endowments tracks the aggregate endo
 
 ## Redistributing by adjusting  Pareto weights
 
-This section analyzes Pareto-efficient tax-and-transfer schemes by starting with   competitive equilibrium allocations and  using a specific 
-a set of nonnegative Pareto weights that sum to one.
+This section analyzes Pareto-efficient tax-and-transfer schemes by starting with competitive equilibrium allocations and using a specific set of nonnegative Pareto weights that sum to one.
 
 ```{note}
 There are various tax-and-transfer   schemes that would deliver such efficient redistributions, but in terms of what interests us in this example, they are all equivalent. 
