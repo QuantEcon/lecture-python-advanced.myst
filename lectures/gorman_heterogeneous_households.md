@@ -1254,7 +1254,8 @@ Using the `LQ` class, we solve the LQ problem and simulate paths for the full st
 Finally, we call `compute_household_paths` to get household allocations and limited-markets portfolios along the simulated path
 
 ```{code-cell} ipython3
-def solve_model(info, tech, pref, U_b_list, U_d_list, γ_1, Λ, z0, ts_length=2000):
+def solve_model(info, tech, pref, U_b_list, U_d_list, γ_1, Λ, 
+                            z0, ts_length=2000, seed=1):
     """
     Solve the representative-agent DLE problem and compute household paths.
     """
@@ -1269,7 +1270,8 @@ def solve_model(info, tech, pref, U_b_list, U_d_list, γ_1, Λ, z0, ts_length=20
     # Solve LQ problem and simulate paths
     lq = LQ(econ.Q, econ.R, econ.A, econ.B,
             econ.C, N=econ.W, beta=econ.beta)
-    x_path, _, _ = lq.compute_sequence(x0_full, ts_length=ts_length)
+    x_path, _, _ = lq.compute_sequence(x0_full, 
+                        ts_length=ts_length, random_state=seed)
 
     paths = compute_household_paths(
         econ=econ,
@@ -1372,7 +1374,8 @@ ts_length = 2_000
 # Solve LQ problem and simulate paths
 lq = LQ(econ.Q, econ.R, econ.A, econ.B,
         econ.C, N=econ.W, beta=econ.beta)
-x_path, _, _ = lq.compute_sequence(x0, ts_length=ts_length)
+x_path, _, _ = lq.compute_sequence(x0,
+                ts_length=ts_length, random_state=1)
 
 paths = compute_household_paths(
     econ=econ,
@@ -1395,7 +1398,7 @@ mystnb:
     name: fig-gorman-consumption
 ---
 T_plot = 250
-t0 = 200
+t0 = 200 
 
 fig, ax = plt.subplots()
 ax.plot(paths["c"][0, t0:t0+T_plot], lw=2, label="aggregate")
