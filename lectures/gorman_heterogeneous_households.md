@@ -26,9 +26,9 @@ kernelspec:
 # Gorman Aggregation 
 
 {cite:t}`gorman1953community` described a class of preferences with the useful  property that there exists a 'representative household' 
-in the sense that competitive equilibrium allocations can be computed by following recursive procedure:
+in the sense that competitive equilibrium allocations can be computed by following a recursive procedure:
 
-* take the heterogenous  preferences of a diverse collection of households and from them synthesize the preferences of a single hypothetical 'representative household'
+* take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single hypothetical 'representative household'
 * collect the endowments of all households and give them to the representative household
 * construct a competitive equilibrium allocation and price system for the representative agent economy
 * at the  competitive equilibrium price system, compute the wealth -- i.e., the present value -- of each household's initial endowment 
@@ -56,7 +56,7 @@ to the linear-quadratic class of environments assumed in their book.
 
 The first step in implementing the above recursive algorithm will be to form a representative agent economy and then apply our DLE tools to compute its competitive equilibrium.
 
-Thus, this lecture builds on tools and Python code described in  {doc}`hs_recursive_models`, {doc}`growth_in_dles`, and {doc}`irfs_in_hall_model`
+Thus, this lecture builds on tools and Python code described in  {doc}`hs_recursive_models`, {doc}`growth_in_dles`, and {doc}`irfs_in_hall_model`.
 
  
 
@@ -88,7 +88,7 @@ When conditions for Gorman aggregation of preferences are satisfied, we can comp
 
 The key is that the Gorman-aggregation  conditions ensure all households have parallel Engel curves.
 
-That feature is what lets us determine the aggregate allocations and price sytem before we compute the distribution of the aggregate allocation among individual households.  
+That feature is what lets us determine the aggregate allocations and price system before we compute the distribution of the aggregate allocation among individual households.  
 
 This eliminates the usual  feature that  the utility possibility frontier shifts with endowment changes, making it impossible to rank allocations without specifying distributional weights.
 
@@ -110,7 +110,7 @@ With the help of this powerful result, we proceed in two steps:
 2. Compute household-specific policies and the Gorman sharing rule.
 
 
-For the  special  Section 12.6  {cite:t}`HansenSargent2013` case in which preference shocks are inactive, we can also
+For the special case in Section 12.6 of {cite:t}`HansenSargent2013`, where preference shocks are inactive, we can also
 
 3. Implement the  Arrow-Debreu allocation using only a mutual fund (aggregate stock) and a one-period bond.
 
@@ -563,7 +563,7 @@ This representation does not involve prices directly.
 
 #### Inverse canonical representation
 
-Given $\rho_{0t}$ from the aggregate solution, we can solve {eq}`eq:foc_services` for $s_{jt}$, then use the {cite:t}`HansenSargent2013` chapter 9  inverse canonical representation to compute $c_{jt}$ and $h_{jt}$:
+Given $\rho_{0t}$ from the aggregate solution, we can solve {eq}`eq:foc_services` for $s_{jt}$, then use the inverse canonical representation from Chapter 9 of {cite:t}`HansenSargent2013` to compute $c_{jt}$ and $h_{jt}$:
 
 $$
 \begin{aligned}
@@ -624,7 +624,7 @@ $$
 \ell_{jt} = \mu_j \, g_t,
 $$ (eq:labor_allocation)
 
-where $g_t = \sum_j \ell_{jt}$ is aggregate the aggregate intermediate good.
+where $g_t = \sum_j \ell_{jt}$ is the aggregate intermediate good.
 
 #### Risk sharing
 
@@ -706,7 +706,7 @@ $$
 
 The numerator is household $j$'s wealth -- i.e., initial capital plus present value of endowments minus the cost of the deviation consumption stream. 
 
-The denominator is the net cost of consuming one unit of aggregate consumption, i.e., the value of consumption value minus the value of the intermediate good supplied.
+The denominator is the net cost of consuming one unit of aggregate consumption, i.e., the value of consumption minus the value of the intermediate good supplied.
 
 Finally, the code constructs selection matrices $S_{ci}, S_{hi}, S_{si}$ that map the augmented state $X_t = [h_{j,t-1}^\top, x_t^\top]^\top$ into household $j$'s allocations:
 
@@ -913,9 +913,9 @@ def heter(
 
 
 
-This section studies a   special  Section 12.6  {cite:t}`HansenSargent2013` case in which the Arrow-Debreu allocation can be implemented by opening competitive markets  only in  a mutual fund and a one-period bond.
+This section studies the special Section 12.6  {cite:t}`HansenSargent2013` case in which the Arrow-Debreu allocation can be implemented by opening competitive markets  only in  a mutual fund and a one-period bond.
 
-   * so in our setting, we don't literally require that markets in  a complete set of contingent claims be present.
+   * So in our setting, we don't literally require that markets in  a complete set of contingent claims be present.
 
 To match the implementation result in Chapter 12.6 of {cite:t}`HansenSargent2013`, we specialize to the one-good, constant-return case
 
@@ -1493,7 +1493,7 @@ $$
 b_{jt} = \bar{b} + \xi_{j,t}, \quad j = 1, \ldots, J,
 $$
 
-where the $\xi_{j,t}$ processes  can be shut silenced by setting their innovation loadings to zero.
+where the $\xi_{j,t}$ processes  can be silenced by setting their innovation loadings to zero.
 
 To complete the specification, we let the idiosyncratic states follow AR(1) laws of motion
 (all innovations are components of the i.i.d. vector $w_{t+1}$ in $z_{t+1} = A_{22} z_t + C_2 w_{t+1}$):
@@ -1828,7 +1828,7 @@ n_k = np.atleast_2d(econ.thetak).shape[0]
 n_endo = n_h + n_k  # endogenous state dimension
 ```
 
-With the state space representation, we can compute impulse responses to show how shocks propagate through the economy. 
+With the state-space representation, we can compute impulse responses to show how shocks propagate through the economy. 
 
 To trace the impulse response to shock $j$, we set `shock_idx=j` which selects column $j$ of the loading matrix $C$. 
 
@@ -1892,7 +1892,7 @@ The positive endowment shock increases resources temporarily, but Hall-style pre
 
 This causes capital to rise as $d_{a,t}$ falls — this is permanent income logic at work.
 
-Next, we examine if the household consumption and endowment paths generated by the simulation obey the Gorman sharing rule
+Next, we examine whether the household consumption and endowment paths generated by the simulation obey the Gorman sharing rule
 
 ```{code-cell} ipython3
 c_j_t0 = paths["c_j"][..., t0:]
@@ -1939,11 +1939,11 @@ Indeed, the average of individual household endowments tracks the aggregate endo
 
 ## Redistributing by adjusting  Pareto weights
 
-This section analyzes Pareto-efficient tax-and-transfer schemes by simply taking  competitive equilibrium allocations and then use 
+This section analyzes Pareto-efficient tax-and-transfer schemes by simply taking  competitive equilibrium allocations and then using
 a set of nonnegative Pareto weights that sum to one.
 
 ```{note}
-There are various   schemes that would deliver such efficient efficient redistributions, but in terms of what interests us in this example,
+There are various   schemes that would deliver such efficient redistributions, but in terms of what interests us in this example,
 they are all equivalent. 
 ```
 
