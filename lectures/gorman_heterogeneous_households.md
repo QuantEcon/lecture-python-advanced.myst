@@ -76,7 +76,7 @@ We make the following imports
 import numpy as np
 from scipy.linalg import solve_discrete_are
 from quantecon import DLE
-from quantecon._lqcontrol import LQ
+from quantecon import LQ
 import matplotlib.pyplot as plt
 ```
 
@@ -400,6 +400,7 @@ Here $\mathbb{E}_0$ is expectation conditional on time-zero information $\mathca
 The prices are:
 - $p_{0t}$: the time-0 Arrow-Debreu price vector for date-$t$ consumption goods (across states), so $p_{0t} \cdot c_{jt}$ is the time-0 value of date-$t$ consumption
 - $w_{0t}$: the time-0 value of date-$t$ labor
+- $\alpha_{0t}$: the time-0 price vector for date-$t$ endowments (dividends)
 - $v_0$: the time-0 value of initial capital
 
 These prices are determined in equilibrium.
@@ -485,7 +486,7 @@ These shadow prices correspond to competitive equilibrium prices.
 (sharing_rules)=
 ### Consumption sharing rules
 
-This section presents  Gorman consumption sharing rules.
+This section presents the Gorman consumption sharing rules.
 
 Our preference specification is an infinite-dimensional generalization of the static Gorman setup described in {ref}`static_gorman`, where goods are indexed by both dates and states of the world.
 
@@ -635,7 +636,7 @@ For a fixed Lagrange multiplier $\mu_{0j}^w$ on the household's budget constrain
 
 One could compute individual allocations by iterating to find the multiplier $\mu_{0j}^w$ that satisfies the budget constraint.
 
-But there is a more elegant approach that uses our  Gorman allocation rules.
+But there is a more elegant approach that uses the Gorman allocation rules.
 
 ### Computing household allocations
 
@@ -908,7 +909,7 @@ def heter(
 
 
 
-This section studies the special Section 12.6  {cite:t}`HansenSargent2013` case in which the Arrow-Debreu allocation can be implemented by opening competitive markets  only in  a mutual fund and a one-period bond.
+This section studies the special case from Section 12.6 of {cite:t}`HansenSargent2013` in which the Arrow-Debreu allocation can be implemented by opening competitive markets only in a mutual fund and a one-period bond.
 
    * So in our setting, we don't literally require that markets in  a complete set of contingent claims be present.
 
@@ -1286,19 +1287,19 @@ $$
 We set $b^i_t = 15$ for $i = 1, 2$, so the aggregate preference shock is $b_t = \sum_i b^i_t = 30$. The endowment processes are
 
 $$
-d^1_t = 4 + 0.2\, w^1_t, \qquad
+d^1_t = 4 + 0.2\, \varepsilon^1_t, \qquad
 d^2_t = 3 + \tilde{d}^2_t,
 $$
 
-where $w^1_t$ is Gaussian white noise with variance $(0.2)^2$, and $\tilde{d}^2_t$ follows
+where $\varepsilon^1_t$ is standard Gaussian noise (so the idiosyncratic component has standard deviation $0.2$), and $\tilde{d}^2_t$ follows
 
 $$
-\tilde{d}^2_t = 1.2\, \tilde{d}^2_{t-1} - 0.22\, \tilde{d}^2_{t-2} + 0.25\, w^2_t,
+\tilde{d}^2_t = 1.2\, \tilde{d}^2_{t-1} - 0.22\, \tilde{d}^2_{t-2} + 0.25\, \varepsilon^2_t,
 $$
 
-with $w^2_t$ Gaussian white noise with variance $(0.25)^2$.
+with $\varepsilon^2_t$ also standard Gaussian noise (so the innovation has standard deviation $0.25$).
 
-Here $w^1_t$ and $w^2_t$ are components of the exogenous innovation vector driving $z_t$ and should not be confused with the wage-price sequence $w_{0t}$ in the household budget constraint.
+Here $\varepsilon^1_t$ and $\varepsilon^2_t$ are components of the exogenous innovation vector $w_{t+1}$ driving $z_t$ and should not be confused with the wage-price sequence $w_{0t}$ in the household budget constraint.
 
 ```{code-cell} ipython3
 # Technology: c + i = γ_1 * k_{t-1} + d, with β = 1/(γ_1 + δ_k)
@@ -1850,7 +1851,7 @@ idx_da = n_h + n_k + 1
 T_irf = 50
 shock_size = 1.0
 irf_x, irf_y = compute_irf(A0, C, G, shock_idx=0, T=T_irf, shock_size=shock_size)
-idx_k = 4
+idx_k = 4  # index of capital in stacked observable vector G @ x
 
 
 da_irf = irf_x[idx_da, :]
