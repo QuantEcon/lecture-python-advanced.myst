@@ -9,9 +9,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>8. Markov Jump Linear Quadratic Dynamic Programming &#8212; Advanced Quantitative Economics with Python</title>
-    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
     
         <script>
             MathJax = {
@@ -70,7 +77,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=9a92145369e9a304bdc7848b31c103894a5801ea" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=22b71a9b445b7b2b6a277c0a48ea72bf6e7c90d9" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
@@ -95,7 +102,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=06ebc90d5139b434c2742937a4ef3b185cb93e2f"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=65b86b9423025043228643fcfb616ce846cb91c1"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -191,7 +198,7 @@
                                 
                             </p>
 
-                            <p class="powered">Powered by <a href="https://jupyterbook.org/en/stable/">Jupyter Book</a></p>
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
 
                         </nav>
 
@@ -211,10 +218,9 @@
 
                         <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
 
-                        <p class="qe-page__header-subheading">Markov Jump Linear Quadratic Dynamic Programming</p>
-
                     </div>
-                    <!-- length 2, since its a string and empty dict has length 2 - {} -->
+
+                    <!-- Authors section -->
                         <p class="qe-page__header-authors" font-size="18">
                             
                                 
@@ -227,6 +233,28 @@
                             
                         </p>
 
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Dec 27, 2025
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commits/main/lectures/markov_jump_lq.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/93c6040" class="changelog-hash">93c6040</a>
+                                
+                                <span class="changelog-author">dependabot[bot]</span>
+                                <span class="changelog-time">1 hour ago</span>
+                                <span class="changelog-message">⬆️ Bump sphinx-exercise from 1.0.1 to 1.2.1 (#296)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
 
                 </div> <!-- .page__header -->
 
@@ -257,9 +285,7 @@
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.10.1)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.61.0)
+Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.61.0)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.1.3)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.3)
 Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (1.15.3)
@@ -1055,14 +1081,12 @@ levels change as <span class="math notranslate nohighlight">\(\lambda\)</span> c
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+asymmetric Π case:
 </pre></div>
 </div>
 <img alt="_images/b1b1de5cd317196fce00c31aa9bb5bbe7717b5a0c5c8ae2eeb0ddfb3de2e09df.png" src="_images/b1b1de5cd317196fce00c31aa9bb5bbe7717b5a0c5c8ae2eeb0ddfb3de2e09df.png" />
 <img alt="_images/71b92814e42b73edb4ab1fa887b6099f670111280026af3a384b6e780d8bd961.png" src="_images/71b92814e42b73edb4ab1fa887b6099f670111280026af3a384b6e780d8bd961.png" />
 <img alt="_images/cd60028d91a4264b6ea8f3ce9c59916ac90af014ce5a7245df6d8b5fba51d9b0.png" src="_images/cd60028d91a4264b6ea8f3ce9c59916ac90af014ce5a7245df6d8b5fba51d9b0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
-</pre></div>
-</div>
 <img alt="_images/58deb265e3b04e1fae65dcaae6abae74c5771d54549b3a27a7f57140c84aa853.png" src="_images/58deb265e3b04e1fae65dcaae6abae74c5771d54549b3a27a7f57140c84aa853.png" />
 <img alt="_images/307752e1dd2cc65d36aa6f4ea4c1fafdc2727b55c7920e352b0af036430bcf07.png" src="_images/307752e1dd2cc65d36aa6f4ea4c1fafdc2727b55c7920e352b0af036430bcf07.png" />
 </div>
@@ -1080,14 +1104,12 @@ f_{2,1} = 0.5, f_{2,2} = 1
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+asymmetric Π case:
 </pre></div>
 </div>
 <img alt="_images/4f47bc4f10a135594dfe0f40a57167ead26c9b3398b52c4a399da147a5d0c3bf.png" src="_images/4f47bc4f10a135594dfe0f40a57167ead26c9b3398b52c4a399da147a5d0c3bf.png" />
 <img alt="_images/cf73aa95d5fbedb35b4b01b6dc0084bbabe25da434020fb169235cb2514e6005.png" src="_images/cf73aa95d5fbedb35b4b01b6dc0084bbabe25da434020fb169235cb2514e6005.png" />
 <img alt="_images/14abfc46f086d0cf17a101d4e4c15db3b1b860592c62d7558a55d6745e5291a0.png" src="_images/14abfc46f086d0cf17a101d4e4c15db3b1b860592c62d7558a55d6745e5291a0.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
-</pre></div>
-</div>
 <img alt="_images/8ae87a9fa04c3673799ccfe2ef5404abca305425b84c2218d9dacc883ca216bc.png" src="_images/8ae87a9fa04c3673799ccfe2ef5404abca305425b84c2218d9dacc883ca216bc.png" />
 <img alt="_images/d90d818aafa36badc845c2a37446e6e1061f42a356e1ba30c5b420999dcd373c.png" src="_images/d90d818aafa36badc845c2a37446e6e1061f42a356e1ba30c5b420999dcd373c.png" />
 </div>
@@ -1214,14 +1236,12 @@ w_{t+1}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+asymmetric Π case:
 </pre></div>
 </div>
 <img alt="_images/1eb4ecf609ecf18ff0e4e1d5d84bbc5d24020b7cee79b8b3935f5cc336dece89.png" src="_images/1eb4ecf609ecf18ff0e4e1d5d84bbc5d24020b7cee79b8b3935f5cc336dece89.png" />
 <img alt="_images/7b4d3715631528d2fc4604a65652f160f357fc822367fa472f15bf270be5e36d.png" src="_images/7b4d3715631528d2fc4604a65652f160f357fc822367fa472f15bf270be5e36d.png" />
 <img alt="_images/5322966769ee976beb81553589495be8b4c0bc406ab9dcb71fc4dd5cc96b078e.png" src="_images/5322966769ee976beb81553589495be8b4c0bc406ab9dcb71fc4dd5cc96b078e.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
-</pre></div>
-</div>
 <img alt="_images/929d6665fc98b34b8a1757806268867bba2223171cb0872ddd32aa895bda3706.png" src="_images/929d6665fc98b34b8a1757806268867bba2223171cb0872ddd32aa895bda3706.png" />
 <img alt="_images/a46fdf2a0bab5a6c76c211c236b4e7218b48edc6656a20d89dd387430e1b4552.png" src="_images/a46fdf2a0bab5a6c76c211c236b4e7218b48edc6656a20d89dd387430e1b4552.png" />
 <img alt="_images/0214e037c61047d38b61df2afd69ebf633d720a537bf80b7ac11ad616ae0a59a.png" src="_images/0214e037c61047d38b61df2afd69ebf633d720a537bf80b7ac11ad616ae0a59a.png" />
@@ -1236,14 +1256,12 @@ w_{t+1}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+asymmetric Π case:
 </pre></div>
 </div>
 <img alt="_images/b1b1de5cd317196fce00c31aa9bb5bbe7717b5a0c5c8ae2eeb0ddfb3de2e09df.png" src="_images/b1b1de5cd317196fce00c31aa9bb5bbe7717b5a0c5c8ae2eeb0ddfb3de2e09df.png" />
 <img alt="_images/3a591ac4ba38f66053acd87604e37e8f39751a4d5c5ef61a3714e3601dd87ba4.png" src="_images/3a591ac4ba38f66053acd87604e37e8f39751a4d5c5ef61a3714e3601dd87ba4.png" />
 <img alt="_images/8f8e8efa99091de80a48ee41337abd93f74c1cc44abf05a50220f02a14660b18.png" src="_images/8f8e8efa99091de80a48ee41337abd93f74c1cc44abf05a50220f02a14660b18.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
-</pre></div>
-</div>
 <img alt="_images/58deb265e3b04e1fae65dcaae6abae74c5771d54549b3a27a7f57140c84aa853.png" src="_images/58deb265e3b04e1fae65dcaae6abae74c5771d54549b3a27a7f57140c84aa853.png" />
 <img alt="_images/4ae5ea10d92709eb98b250aa7914773487f136118bd6fcf72ab307ac23e6ce90.png" src="_images/4ae5ea10d92709eb98b250aa7914773487f136118bd6fcf72ab307ac23e6ce90.png" />
 <img alt="_images/c1f1f477e2a8cbcfab0cd10e1c8fa8d435ddb30122187a12026413754ef4bff4.png" src="_images/c1f1f477e2a8cbcfab0cd10e1c8fa8d435ddb30122187a12026413754ef4bff4.png" />
@@ -1258,14 +1276,12 @@ w_{t+1}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+asymmetric Π case:
 </pre></div>
 </div>
 <img alt="_images/4f47bc4f10a135594dfe0f40a57167ead26c9b3398b52c4a399da147a5d0c3bf.png" src="_images/4f47bc4f10a135594dfe0f40a57167ead26c9b3398b52c4a399da147a5d0c3bf.png" />
 <img alt="_images/6914f7d7c4e95303e2534512a4264701f7992c65bcc8de33b9cd3f7330e7a28e.png" src="_images/6914f7d7c4e95303e2534512a4264701f7992c65bcc8de33b9cd3f7330e7a28e.png" />
 <img alt="_images/4518279bb7181022678cba4bb17d70995bb1a0c391c990d6af09952094c05390.png" src="_images/4518279bb7181022678cba4bb17d70995bb1a0c391c990d6af09952094c05390.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
-</pre></div>
-</div>
 <img alt="_images/8ae87a9fa04c3673799ccfe2ef5404abca305425b84c2218d9dacc883ca216bc.png" src="_images/8ae87a9fa04c3673799ccfe2ef5404abca305425b84c2218d9dacc883ca216bc.png" />
 <img alt="_images/d0854cf87d94ac003e6808e186c595d57d596e1175ac620c66e304e10ea0bfba.png" src="_images/d0854cf87d94ac003e6808e186c595d57d596e1175ac620c66e304e10ea0bfba.png" />
 <img alt="_images/1885fc4117642f54bada581947c78ae1b634ab7bc9aea7c610f93bfb63e2cbe1.png" src="_images/1885fc4117642f54bada581947c78ae1b634ab7bc9aea7c610f93bfb63e2cbe1.png" />
@@ -1280,14 +1296,12 @@ w_{t+1}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+asymmetric Π case:
 </pre></div>
 </div>
 <img alt="_images/b1b1de5cd317196fce00c31aa9bb5bbe7717b5a0c5c8ae2eeb0ddfb3de2e09df.png" src="_images/b1b1de5cd317196fce00c31aa9bb5bbe7717b5a0c5c8ae2eeb0ddfb3de2e09df.png" />
 <img alt="_images/f42484bef96e90adf9b6ab4493a8877001454bb1bfb99ff96171a5086da7effb.png" src="_images/f42484bef96e90adf9b6ab4493a8877001454bb1bfb99ff96171a5086da7effb.png" />
 <img alt="_images/8f8e8efa99091de80a48ee41337abd93f74c1cc44abf05a50220f02a14660b18.png" src="_images/8f8e8efa99091de80a48ee41337abd93f74c1cc44abf05a50220f02a14660b18.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
-</pre></div>
-</div>
 <img alt="_images/58deb265e3b04e1fae65dcaae6abae74c5771d54549b3a27a7f57140c84aa853.png" src="_images/58deb265e3b04e1fae65dcaae6abae74c5771d54549b3a27a7f57140c84aa853.png" />
 <img alt="_images/4fe5aa7af097168fe144d82893af1e749ab42d00e0d94223a2c1b67a870df2ef.png" src="_images/4fe5aa7af097168fe144d82893af1e749ab42d00e0d94223a2c1b67a870df2ef.png" />
 <img alt="_images/c1f1f477e2a8cbcfab0cd10e1c8fa8d435ddb30122187a12026413754ef4bff4.png" src="_images/c1f1f477e2a8cbcfab0cd10e1c8fa8d435ddb30122187a12026413754ef4bff4.png" />
@@ -1302,14 +1316,12 @@ w_{t+1}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+asymmetric Π case:
 </pre></div>
 </div>
 <img alt="_images/b1b1de5cd317196fce00c31aa9bb5bbe7717b5a0c5c8ae2eeb0ddfb3de2e09df.png" src="_images/b1b1de5cd317196fce00c31aa9bb5bbe7717b5a0c5c8ae2eeb0ddfb3de2e09df.png" />
 <img alt="_images/83f566a50edf7081bc0ddb05438a11051b898ac1f434c7faa2024e276dd26412.png" src="_images/83f566a50edf7081bc0ddb05438a11051b898ac1f434c7faa2024e276dd26412.png" />
 <img alt="_images/855b15323c5191f33fdc92b73f8e815a7d6043cab1b06d0ef425a240b8828ad4.png" src="_images/855b15323c5191f33fdc92b73f8e815a7d6043cab1b06d0ef425a240b8828ad4.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
-</pre></div>
-</div>
 <img alt="_images/58deb265e3b04e1fae65dcaae6abae74c5771d54549b3a27a7f57140c84aa853.png" src="_images/58deb265e3b04e1fae65dcaae6abae74c5771d54549b3a27a7f57140c84aa853.png" />
 <img alt="_images/714302113e4a4c14a08f2be6a9dce1157e48044c431c7e5270f5fc3a5ee101f9.png" src="_images/714302113e4a4c14a08f2be6a9dce1157e48044c431c7e5270f5fc3a5ee101f9.png" />
 <img alt="_images/2a14e15bdc59c1c8df9a856ee574ab25ff6f2d123b39445de3b2bb4650ec5995.png" src="_images/2a14e15bdc59c1c8df9a856ee574ab25ff6f2d123b39445de3b2bb4650ec5995.png" />
@@ -1324,14 +1336,12 @@ w_{t+1}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>symmetric Π case:
+asymmetric Π case:
 </pre></div>
 </div>
 <img alt="_images/b1b1de5cd317196fce00c31aa9bb5bbe7717b5a0c5c8ae2eeb0ddfb3de2e09df.png" src="_images/b1b1de5cd317196fce00c31aa9bb5bbe7717b5a0c5c8ae2eeb0ddfb3de2e09df.png" />
 <img alt="_images/7d6f643e6c178ab953c9f7259bbdecba681bc31567789cb905aa8c6951185e07.png" src="_images/7d6f643e6c178ab953c9f7259bbdecba681bc31567789cb905aa8c6951185e07.png" />
 <img alt="_images/8f8e8efa99091de80a48ee41337abd93f74c1cc44abf05a50220f02a14660b18.png" src="_images/8f8e8efa99091de80a48ee41337abd93f74c1cc44abf05a50220f02a14660b18.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>asymmetric Π case:
-</pre></div>
-</div>
 <img alt="_images/58deb265e3b04e1fae65dcaae6abae74c5771d54549b3a27a7f57140c84aa853.png" src="_images/58deb265e3b04e1fae65dcaae6abae74c5771d54549b3a27a7f57140c84aa853.png" />
 <img alt="_images/d4bdb65a8266e76a9448727c9fce6fb7072fea25dc13cac1e73ef6c0ed228582.png" src="_images/d4bdb65a8266e76a9448727c9fce6fb7072fea25dc13cac1e73ef6c0ed228582.png" />
 <img alt="_images/c1f1f477e2a8cbcfab0cd10e1c8fa8d435ddb30122187a12026413754ef4bff4.png" src="_images/c1f1f477e2a8cbcfab0cd10e1c8fa8d435ddb30122187a12026413754ef4bff4.png" />
