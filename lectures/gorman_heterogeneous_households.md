@@ -1395,10 +1395,12 @@ mystnb:
     name: fig-gorman-consumption
 ---
 T_plot = 250
+t0 = 200
+
 fig, ax = plt.subplots()
-ax.plot(paths["c"][0, 5:T_plot], lw=2, label="aggregate")
-ax.plot(paths["c_j"][0, 5:T_plot], lw=2, label="household 1")
-ax.plot(paths["c_j"][1, 5:T_plot], lw=2, label="household 2")
+ax.plot(paths["c"][0, t0:t0+T_plot], lw=2, label="aggregate")
+ax.plot(paths["c_j"][0, t0:t0+T_plot], lw=2, label="household 1")
+ax.plot(paths["c_j"][1, t0:t0+T_plot], lw=2, label="household 2")
 ax.set_xlabel("time")
 ax.set_ylabel("consumption")
 ax.legend()
@@ -1415,9 +1417,9 @@ mystnb:
     name: fig-gorman-bond-adjustment
 ---
 fig, ax = plt.subplots()
-ax.plot(paths["k_hat"][0, 5:T_plot], lw=2, label="household 1")
-ax.plot(paths["k_hat"][1, 5:T_plot], lw=2, label="household 2")
-ax.plot(paths["k_hat"][:, 5:T_plot].sum(axis=0), lw=2, label="sum")
+ax.plot(paths["k_hat"][0, t0:t0+T_plot], lw=2, label="household 1")
+ax.plot(paths["k_hat"][1, t0:t0+T_plot], lw=2, label="household 2")
+ax.plot(paths["k_hat"][:, t0:t0+T_plot].sum(axis=0), lw=2, label="sum")
 ax.axhline(0.0, color="k", lw=1, alpha=0.5)
 ax.set_xlabel("time")
 ax.set_ylabel("bond position")
@@ -1706,8 +1708,6 @@ n_absorb = 50
 b_bar = 5.0
 γs_pref = np.zeros(N)
 ρ_pref = 0.0
-
-t0 = 200
 
 A22, C2, Ub, Ud, Ub_list, Ud_list, x0 = build_gorman_extended(
     n=N,
