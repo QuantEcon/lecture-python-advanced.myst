@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>26. Etymology of Entropy &#8212; Advanced Quantitative Economics with Python</title>
+    <title>27. Etymology of Entropy &#8212; Advanced Quantitative Economics with Python</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -131,8 +131,8 @@
     <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="27. Robustness" href="robustness.html" />
-    <link rel="prev" title="25. Risk and Model Uncertainty" href="five_preferences.html" />
+    <link rel="next" title="28. Robustness" href="robustness.html" />
+    <link rel="prev" title="26. Risk and Model Uncertainty" href="five_preferences.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -181,25 +181,25 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-theory">26.1. Information theory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-measure-of-unpredictability">26.2. A measure of unpredictability</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">26.2.1. Example</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">26.2.2. Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-theory">27.1. Information theory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-measure-of-unpredictability">27.2. A measure of unpredictability</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">27.2.1. Example</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">27.2.2. Example</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-properties-of-entropy">26.3. Mathematical properties of entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-entropy">26.4. Conditional entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-as-maximum-conditional-entropy">26.5. Independence as maximum conditional entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamics">26.6. Thermodynamics</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-divergence">26.7. Statistical divergence</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-distributions">26.8. Continuous distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy-and-gaussian-distributions">26.9. Relative entropy and Gaussian distributions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#von-neumann-entropy">26.10. Von Neumann entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backus-chernov-zin-entropy">26.11. Backus-Chernov-Zin entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wiener-kolmogorov-prediction-error-formula-as-entropy">26.12. Wiener-Kolmogorov prediction error formula as entropy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-processes">26.13. Multivariate processes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-domain-robust-control">26.14. Frequency domain robust control</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy-for-a-continuous-random-variable">26.15. Relative entropy for a continuous random variable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-properties-of-entropy">27.3. Mathematical properties of entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-entropy">27.4. Conditional entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#independence-as-maximum-conditional-entropy">27.5. Independence as maximum conditional entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#thermodynamics">27.6. Thermodynamics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#statistical-divergence">27.7. Statistical divergence</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#continuous-distributions">27.8. Continuous distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy-and-gaussian-distributions">27.9. Relative entropy and Gaussian distributions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#von-neumann-entropy">27.10. Von Neumann entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backus-chernov-zin-entropy">27.11. Backus-Chernov-Zin entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wiener-kolmogorov-prediction-error-formula-as-entropy">27.12. Wiener-Kolmogorov prediction error formula as entropy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivariate-processes">27.13. Multivariate processes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-domain-robust-control">27.14. Frequency domain robust control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relative-entropy-for-a-continuous-random-variable">27.15. Relative entropy for a continuous random variable</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -296,11 +296,11 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="etymology-of-entropy">
-<h1><span class="section-number">26. </span>Etymology of Entropy<a class="headerlink" href="#etymology-of-entropy" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">27. </span>Etymology of Entropy<a class="headerlink" href="#etymology-of-entropy" title="Link to this heading">#</a></h1>
 <p>This lecture describes and compares several notions of entropy.</p>
 <p>Among the senses of entropy, we’ll encounter these</p>
 <ul class="simple">
-<li><p>A measure of <strong>uncertainty</strong> of a random variable advanced by Claude Shannon <span id="id1">[<a class="reference internal" href="zreferences.html#id6" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">Shannon and Weaver, 1949</a>]</span></p></li>
+<li><p>A measure of <strong>uncertainty</strong> of a random variable advanced by Claude Shannon <span id="id1">[<a class="reference internal" href="zreferences.html#id9" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">Shannon and Weaver, 1949</a>]</span></p></li>
 <li><p>A key object governing thermodynamics</p></li>
 <li><p>Kullback and Leibler’s measure of the statistical divergence between two probability distributions</p></li>
 <li><p>A measure of the volatility of stochastic discount factors that appear in asset pricing theory</p></li>
@@ -311,14 +311,14 @@
 <a class="reference external" href="https://python-advanced.quantecon.org/five_preferences.html">Risk and Model Uncertainty</a> and in this lecture
 <a class="reference external" href="https://python-advanced.quantecon.org/robustness.html">Robustness</a>.</p>
 <section id="information-theory">
-<h2><span class="section-number">26.1. </span>Information theory<a class="headerlink" href="#information-theory" title="Link to this heading">#</a></h2>
-<p>In information theory <span id="id2">[<a class="reference internal" href="zreferences.html#id6" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">Shannon and Weaver, 1949</a>]</span>,  entropy is a measure of the unpredictability of a random variable.</p>
+<h2><span class="section-number">27.1. </span>Information theory<a class="headerlink" href="#information-theory" title="Link to this heading">#</a></h2>
+<p>In information theory <span id="id2">[<a class="reference internal" href="zreferences.html#id9" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">Shannon and Weaver, 1949</a>]</span>,  entropy is a measure of the unpredictability of a random variable.</p>
 <p>To illustrate
 things, let <span class="math notranslate nohighlight">\(X\)</span> be a discrete random variable taking values <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span>
 with probabilities <span class="math notranslate nohighlight">\(p_i = \textrm{Prob}(X = x_i) \geq 0, \sum_i p_i =1\)</span>.</p>
-<p>Claude Shannon’s <span id="id3">[<a class="reference internal" href="zreferences.html#id6" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">Shannon and Weaver, 1949</a>]</span> definition  of entropy is</p>
+<p>Claude Shannon’s <span id="id3">[<a class="reference internal" href="zreferences.html#id9" title="Claude E. Shannon and Warren Weaver. The Mathematical Theory of Communication. University of Illinois Press, Urbana, 1949.">Shannon and Weaver, 1949</a>]</span> definition  of entropy is</p>
 <div class="math notranslate nohighlight" id="equation-eq-shannon1">
-<span class="eqno">(26.1)<a class="headerlink" href="#equation-eq-shannon1" title="Link to this equation">#</a></span>\[ 
+<span class="eqno">(27.1)<a class="headerlink" href="#equation-eq-shannon1" title="Link to this equation">#</a></span>\[ 
 H(p) = \sum_i p_i \log_b (p_i^{-1}) = - \sum_i p_i \log_b (p_i) .
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\log_b\)</span> denotes the log function with base <span class="math notranslate nohighlight">\(b\)</span>.</p>
@@ -327,14 +327,14 @@ H(p) = \sum_i p_i \log_b (p_i^{-1}) = - \sum_i p_i \log_b (p_i) .
 \[
 \lim_{p\downarrow 0} p \log p = \lim_{p \downarrow 0} \frac{\log p}{p^{-1}} = \lim_{p \downarrow 0}p = 0, 
 \]</div>
-<p>we set <span class="math notranslate nohighlight">\(p \log p = 0\)</span> in equation <a class="reference internal" href="#equation-eq-shannon1">(26.1)</a>.</p>
+<p>we set <span class="math notranslate nohighlight">\(p \log p = 0\)</span> in equation <a class="reference internal" href="#equation-eq-shannon1">(27.1)</a>.</p>
 <p>Typical bases for the logarithm are <span class="math notranslate nohighlight">\(2\)</span>,  <span class="math notranslate nohighlight">\(e\)</span>, and <span class="math notranslate nohighlight">\(10\)</span>.</p>
 <p>In the information theory literature, logarithms of base <span class="math notranslate nohighlight">\(2\)</span>, <span class="math notranslate nohighlight">\(e\)</span>, and <span class="math notranslate nohighlight">\(10\)</span> are associated with units of information
 called bits, nats, and dits, respectively.</p>
 <p>Shannon typically used base <span class="math notranslate nohighlight">\(2\)</span>.</p>
 </section>
 <section id="a-measure-of-unpredictability">
-<h2><span class="section-number">26.2. </span>A measure of unpredictability<a class="headerlink" href="#a-measure-of-unpredictability" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.2. </span>A measure of unpredictability<a class="headerlink" href="#a-measure-of-unpredictability" title="Link to this heading">#</a></h2>
 <p>For a discrete random variable <span class="math notranslate nohighlight">\(X\)</span> with probability density <span class="math notranslate nohighlight">\(p = \{p_i\}_{i=1}^n\)</span>,   the <strong>surprisal</strong>
 for state <span class="math notranslate nohighlight">\(i\)</span> is  <span class="math notranslate nohighlight">\( s_i = \log\left(\frac{1}{p_i}\right) \)</span>.</p>
 <p>The quantity <span class="math notranslate nohighlight">\( \log\left(\frac{1}{p_i}\right) \)</span> is called the <strong>surprisal</strong> because it is inversely related to the likelihood that state
@@ -345,7 +345,7 @@ for state <span class="math notranslate nohighlight">\(i\)</span> is  <span clas
 H(p) = \sum_i p_i s_i = \sum_i p_i \log\left(\frac{1}{p_i} \right) = -  \sum_i p_i \log\left(p_i \right).
 \]</div>
 <section id="example">
-<h3><span class="section-number">26.2.1. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">27.2.1. </span>Example<a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
 <p>Take a possibly unfair coin, so <span class="math notranslate nohighlight">\(X = \{0,1\}\)</span> with <span class="math notranslate nohighlight">\(p = {\rm Prob}(X=1) = p \in [0,1]\)</span>.</p>
 <p>Then</p>
 <div class="math notranslate nohighlight">
@@ -360,17 +360,17 @@ H'(p) = \log(1-p) - \log p = 0
 <p>at <span class="math notranslate nohighlight">\(p=.5\)</span> and <span class="math notranslate nohighlight">\(H''(p) = -\frac{1}{1-p} -\frac{1}{p} &lt; 0\)</span> for <span class="math notranslate nohighlight">\(p\in (0,1)\)</span>.</p>
 <p>So <span class="math notranslate nohighlight">\(p=.5\)</span> maximizes entropy, while entropy is minimized at <span class="math notranslate nohighlight">\(p=0\)</span> and <span class="math notranslate nohighlight">\(p=1\)</span>.</p>
 <p>Thus, among all coins,  a fair coin is the most unpredictable.</p>
-<p>See <a class="reference internal" href="#fig1"><span class="std std-numref">Fig. 26.1</span></a></p>
+<p>See <a class="reference internal" href="#fig1"><span class="std std-numref">Fig. 27.1</span></a></p>
 <figure class="align-default" id="fig1">
 <a class="reference internal image-reference" href="_images/MyGraph5.png"><img alt="_images/MyGraph5.png" src="_images/MyGraph5.png" style="height: 350px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 26.1 </span><span class="caption-text">Entropy as a function of <span class="math notranslate nohighlight">\(\hat \pi_1\)</span> when <span class="math notranslate nohighlight">\(\pi_1 = .5\)</span>.</span><a class="headerlink" href="#fig1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 27.1 </span><span class="caption-text">Entropy as a function of <span class="math notranslate nohighlight">\(\hat \pi_1\)</span> when <span class="math notranslate nohighlight">\(\pi_1 = .5\)</span>.</span><a class="headerlink" href="#fig1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="id4">
-<h3><span class="section-number">26.2.2. </span>Example<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">27.2.2. </span>Example<a class="headerlink" href="#id4" title="Link to this heading">#</a></h3>
 <p>Take an <span class="math notranslate nohighlight">\(n\)</span>-sided possibly unfair die with  a probability distribution <span class="math notranslate nohighlight">\(\{p_i\}_{i=1}^n\)</span>.
 The die is fair if <span class="math notranslate nohighlight">\(p_i = \frac{1}{n} \forall i\)</span>.</p>
 <p>Among all dies, a fair die  maximizes entropy.</p>
@@ -383,7 +383,7 @@ if <span class="math notranslate nohighlight">\(n=2\)</span>, <span class="math 
 </section>
 </section>
 <section id="mathematical-properties-of-entropy">
-<h2><span class="section-number">26.3. </span>Mathematical properties of entropy<a class="headerlink" href="#mathematical-properties-of-entropy" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.3. </span>Mathematical properties of entropy<a class="headerlink" href="#mathematical-properties-of-entropy" title="Link to this heading">#</a></h2>
 <p>For a discrete random variable with probability vector <span class="math notranslate nohighlight">\(p\)</span>, entropy <span class="math notranslate nohighlight">\(H(p)\)</span> is
 a function that satisfies</p>
 <ul class="simple">
@@ -396,19 +396,19 @@ a function that satisfies</p>
 </ul>
 </section>
 <section id="conditional-entropy">
-<h2><span class="section-number">26.4. </span>Conditional entropy<a class="headerlink" href="#conditional-entropy" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.4. </span>Conditional entropy<a class="headerlink" href="#conditional-entropy" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\((X,Y)\)</span> be a bivariate discrete random vector with  outcomes <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> and <span class="math notranslate nohighlight">\(y_1, \ldots, y_m\)</span>, respectively,
 occurring with probability density <span class="math notranslate nohighlight">\(p(x_i, y_i)\)</span>.</p>
 <p>Conditional entropy <span class="math notranslate nohighlight">\(H(X| Y)\)</span> is
 defined as</p>
 <div class="math notranslate nohighlight" id="equation-eq-shannon2">
-<span class="eqno">(26.2)<a class="headerlink" href="#equation-eq-shannon2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(27.2)<a class="headerlink" href="#equation-eq-shannon2" title="Link to this equation">#</a></span>\[
 H(X | Y) = \sum_{i,j} p(x_i,y_j) \log \frac{p(y_j)}{p(x_i,y_j)}.
 \]</div>
 <p>Here <span class="math notranslate nohighlight">\(\frac{p(y_j)}{p(x_i,y_j)}\)</span>, the reciprocal of the conditional probability of <span class="math notranslate nohighlight">\(x_i\)</span> given <span class="math notranslate nohighlight">\(y_j\)</span>, can be defined as the <strong>conditional surprisal</strong>.</p>
 </section>
 <section id="independence-as-maximum-conditional-entropy">
-<h2><span class="section-number">26.5. </span>Independence as maximum conditional entropy<a class="headerlink" href="#independence-as-maximum-conditional-entropy" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.5. </span>Independence as maximum conditional entropy<a class="headerlink" href="#independence-as-maximum-conditional-entropy" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(m=n\)</span> and <span class="math notranslate nohighlight">\([x_1, \ldots, x_n ] = [y_1, \ldots, y_n]\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\sum_j p(x_i,y_j) = \sum_j p(x_j, y_i) \)</span> for all <span class="math notranslate nohighlight">\(i\)</span>,
 so that the marginal distributions of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are identical.</p>
@@ -416,7 +416,7 @@ so that the marginal distributions of <span class="math notranslate nohighlight"
 are not necessarily independent.</p>
 <p>Consider the following problem:
 choose a joint distribution  <span class="math notranslate nohighlight">\(p(x_i,y_j)\)</span> to maximize  conditional entropy
-<a class="reference internal" href="#equation-eq-shannon2">(26.2)</a> subject to the restriction that  <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are identically distributed.</p>
+<a class="reference internal" href="#equation-eq-shannon2">(27.2)</a> subject to the restriction that  <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> are identically distributed.</p>
 <p>The conditional-entropy-maximizing  <span class="math notranslate nohighlight">\(p(x_i,y_j)\)</span> sets</p>
 <div class="math notranslate nohighlight">
 \[
@@ -427,27 +427,27 @@ the conditional entropy maximizing joint distribution makes <span class="math no
 independent.</p>
 </section>
 <section id="thermodynamics">
-<h2><span class="section-number">26.6. </span>Thermodynamics<a class="headerlink" href="#thermodynamics" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.6. </span>Thermodynamics<a class="headerlink" href="#thermodynamics" title="Link to this heading">#</a></h2>
 <p>Josiah Willard Gibbs (see <a class="reference external" href="https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs">https://en.wikipedia.org/wiki/Josiah_Willard_Gibbs</a>) defined entropy as</p>
 <div class="math notranslate nohighlight" id="equation-eq-gibbs">
-<span class="eqno">(26.3)<a class="headerlink" href="#equation-eq-gibbs" title="Link to this equation">#</a></span>\[ 
+<span class="eqno">(27.3)<a class="headerlink" href="#equation-eq-gibbs" title="Link to this equation">#</a></span>\[ 
  S = - k_B \sum_i p_i  \log p_i
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(p_i\)</span> is the probability of a micro state and <span class="math notranslate nohighlight">\(k_B\)</span> is Boltzmann’s constant.</p>
 <ul class="simple">
 <li><p>The Boltzmann constant <span class="math notranslate nohighlight">\(k_b\)</span> relates energy at the micro  particle level with the temperature observed at the macro level. It equals what is called a gas constant  divided by an Avogadro constant.</p></li>
 </ul>
-<p>The second law of thermodynamics states that the entropy of a closed physical system increases until <span class="math notranslate nohighlight">\(S\)</span> defined in <a class="reference internal" href="#equation-eq-gibbs">(26.3)</a> attains a maximum.</p>
+<p>The second law of thermodynamics states that the entropy of a closed physical system increases until <span class="math notranslate nohighlight">\(S\)</span> defined in <a class="reference internal" href="#equation-eq-gibbs">(27.3)</a> attains a maximum.</p>
 </section>
 <section id="statistical-divergence">
-<h2><span class="section-number">26.7. </span>Statistical divergence<a class="headerlink" href="#statistical-divergence" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.7. </span>Statistical divergence<a class="headerlink" href="#statistical-divergence" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(X\)</span> be a discrete state space <span class="math notranslate nohighlight">\(x_1, \ldots, x_n\)</span> and let <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> be  two discrete probability
 distributions on <span class="math notranslate nohighlight">\(X\)</span>.</p>
 <p>Assume that <span class="math notranslate nohighlight">\(\frac{p_i}{q_t} \in (0,\infty)\)</span> for all <span class="math notranslate nohighlight">\(i\)</span> for which <span class="math notranslate nohighlight">\(p_i &gt;0\)</span>.</p>
 <p>Then the Kullback-Leibler statistical divergence, also called <strong>relative entropy</strong>,
 is defined as</p>
 <div class="math notranslate nohighlight" id="equation-eq-shanno3">
-<span class="eqno">(26.4)<a class="headerlink" href="#equation-eq-shanno3" title="Link to this equation">#</a></span>\[
+<span class="eqno">(27.4)<a class="headerlink" href="#equation-eq-shanno3" title="Link to this equation">#</a></span>\[
 D(p|q) = \sum_i p_i \log \left(\frac{p_i}{q_i}\right) = \sum_i q_i \left( \frac{p_i}{q_i}\right) \log\left( \frac{p_i}{q_i}\right) .
 \]</div>
 <p>Evidently,</p>
@@ -463,7 +463,7 @@ D(p|q) &amp; = - \sum_i p_i \log q_i + \sum_i p_i \log p_i \cr
 D(p|q) \geq 0\)</span> and that <span class="math notranslate nohighlight">\(D(p|q) = 0\)</span> implies that <span class="math notranslate nohighlight">\(p_i = q_i\)</span> when <span class="math notranslate nohighlight">\(q_i &gt;0\)</span>.</p>
 </section>
 <section id="continuous-distributions">
-<h2><span class="section-number">26.8. </span>Continuous distributions<a class="headerlink" href="#continuous-distributions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.8. </span>Continuous distributions<a class="headerlink" href="#continuous-distributions" title="Link to this heading">#</a></h2>
 <p>For a continuous random variable, Kullback-Leibler divergence between two densities <span class="math notranslate nohighlight">\(p\)</span> and <span class="math notranslate nohighlight">\(q\)</span> is defined as</p>
 <div class="math notranslate nohighlight">
 \[ 
@@ -471,7 +471,7 @@ D(p|q) = \int p(x) \log \left(\frac{p(x)}{q(x)} \right) d \, x .
 \]</div>
 </section>
 <section id="relative-entropy-and-gaussian-distributions">
-<h2><span class="section-number">26.9. </span>Relative entropy and Gaussian distributions<a class="headerlink" href="#relative-entropy-and-gaussian-distributions" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.9. </span>Relative entropy and Gaussian distributions<a class="headerlink" href="#relative-entropy-and-gaussian-distributions" title="Link to this heading">#</a></h2>
 <p>We want to compute relative entropy for two continuous densities <span class="math notranslate nohighlight">\(\phi\)</span> and <span class="math notranslate nohighlight">\(\hat \phi\)</span> when
 <span class="math notranslate nohighlight">\(\phi\)</span> is <span class="math notranslate nohighlight">\({\cal N}(0,I)\)</span> and  <span class="math notranslate nohighlight">\({\hat \phi}\)</span> is <span class="math notranslate nohighlight">\({\cal N}(w, \Sigma)\)</span>, where the covariance matrix <span class="math notranslate nohighlight">\(\Sigma\)</span> is nonsingular.</p>
 <p>We seek a formula for</p>
@@ -481,7 +481,7 @@ D(p|q) = \int p(x) \log \left(\frac{p(x)}{q(x)} \right) d \, x .
 \]</div>
 <p><strong>Claim</strong></p>
 <div class="math notranslate nohighlight" id="equation-eq-relentropy101">
-<span class="eqno">(26.5)<a class="headerlink" href="#equation-eq-relentropy101" title="Link to this equation">#</a></span>\[
+<span class="eqno">(27.5)<a class="headerlink" href="#equation-eq-relentropy101" title="Link to this equation">#</a></span>\[
 \textrm{ent} = %\int (\log {\hat \phi} - \log \phi ){\hat \phi} d \varepsilon=
 -{1 \over 2} \log
 \det \Sigma + {1 \over 2}w'w + {1 \over 2}\mathrm{trace} (\Sigma - I)
@@ -490,7 +490,7 @@ D(p|q) = \int p(x) \log \left(\frac{p(x)}{q(x)} \right) d \, x .
 <p><strong>Proof</strong></p>
 <p>The log likelihood ratio is</p>
 <div class="math notranslate nohighlight" id="equation-footnote2">
-<span class="eqno">(26.6)<a class="headerlink" href="#equation-footnote2" title="Link to this equation">#</a></span>\[ 
+<span class="eqno">(27.6)<a class="headerlink" href="#equation-footnote2" title="Link to this equation">#</a></span>\[ 
 \log {\hat \phi}(\varepsilon) - \log \phi(\varepsilon) =
 {1 \over 2} \left[ - (\varepsilon - w)' \Sigma^{-1} (\varepsilon - w)
     +  \varepsilon' \varepsilon - \log \det
@@ -516,27 +516,27 @@ w) {\hat \phi}(\varepsilon) d\varepsilon = - {1 \over 2}\mathrm{trace}(I).
 \]</div>
 <p>Combining terms gives</p>
 <div class="math notranslate nohighlight" id="equation-eq-relentropy">
-<span class="eqno">(26.7)<a class="headerlink" href="#equation-eq-relentropy" title="Link to this equation">#</a></span>\[
+<span class="eqno">(27.7)<a class="headerlink" href="#equation-eq-relentropy" title="Link to this equation">#</a></span>\[
 \textrm{ent} = \int (\log {\hat \phi} - \log \phi ){\hat \phi} d \varepsilon= -{1 \over 2} \log
 \det \Sigma + {1 \over 2}w'w + {1 \over 2}\mathrm{trace} (\Sigma - I)
 .
 \]</div>
-<p>which agrees with equation <a class="reference internal" href="#equation-eq-relentropy101">(26.5)</a>.
+<p>which agrees with equation <a class="reference internal" href="#equation-eq-relentropy101">(27.5)</a>.
 Notice the separate  appearances of the mean distortion <span class="math notranslate nohighlight">\(w\)</span> and the covariance distortion
-<span class="math notranslate nohighlight">\(\Sigma - I\)</span> in equation <a class="reference internal" href="#equation-eq-relentropy">(26.7)</a>.</p>
+<span class="math notranslate nohighlight">\(\Sigma - I\)</span> in equation <a class="reference internal" href="#equation-eq-relentropy">(27.7)</a>.</p>
 <p><strong>Extension</strong></p>
 <p>Let  <span class="math notranslate nohighlight">\(N_0 = {\mathcal N}(\mu_0,\Sigma_0)\)</span> and <span class="math notranslate nohighlight">\(N_1={\mathcal N}(\mu_1, \Sigma_1)\)</span> be two multivariate Gaussian
 distributions.</p>
 <p>Then</p>
 <div class="math notranslate nohighlight" id="equation-eq-shannon5">
-<span class="eqno">(26.8)<a class="headerlink" href="#equation-eq-shannon5" title="Link to this equation">#</a></span>\[
+<span class="eqno">(27.8)<a class="headerlink" href="#equation-eq-shannon5" title="Link to this equation">#</a></span>\[
 D(N_0|N_1) = \frac{1}{2} \left(\mathrm {trace} (\Sigma_1^{-1} \Sigma_0)
 + (\mu_1 -\mu_0)' \Sigma_1^{-1} (\mu_1 - \mu_0) - \log\left( \frac{ \mathrm {det }\Sigma_0 }{\mathrm {det}\Sigma_1}\right)
    - k \right).
 \]</div>
 </section>
 <section id="von-neumann-entropy">
-<h2><span class="section-number">26.10. </span>Von Neumann entropy<a class="headerlink" href="#von-neumann-entropy" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.10. </span>Von Neumann entropy<a class="headerlink" href="#von-neumann-entropy" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> be two positive-definite symmetric matrices.</p>
 <p>A measure of the divergence between two <span class="math notranslate nohighlight">\(P\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> is</p>
 <div class="math notranslate nohighlight">
@@ -552,18 +552,18 @@ S = - \textrm{trace} (P \ln P)
 \]</div>
 </section>
 <section id="backus-chernov-zin-entropy">
-<h2><span class="section-number">26.11. </span>Backus-Chernov-Zin entropy<a class="headerlink" href="#backus-chernov-zin-entropy" title="Link to this heading">#</a></h2>
-<p>After flipping signs, <span id="id5">[<a class="reference internal" href="zreferences.html#id7" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">Backus <em>et al.</em>, 2014</a>]</span>  use Kullback-Leibler relative entropy as a measure of volatility of stochastic discount factors that they
+<h2><span class="section-number">27.11. </span>Backus-Chernov-Zin entropy<a class="headerlink" href="#backus-chernov-zin-entropy" title="Link to this heading">#</a></h2>
+<p>After flipping signs, <span id="id5">[<a class="reference internal" href="zreferences.html#id10" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">Backus <em>et al.</em>, 2014</a>]</span>  use Kullback-Leibler relative entropy as a measure of volatility of stochastic discount factors that they
 assert is useful for characterizing features of both the data and various theoretical models of stochastic discount factors.</p>
 <p>Where <span class="math notranslate nohighlight">\(p_{t+1}\)</span> is the physical or true measure, <span class="math notranslate nohighlight">\(p_{t+1}^*\)</span> is the risk-neutral measure, and <span class="math notranslate nohighlight">\(E_t\)</span> denotes conditional
-expectation under the <span class="math notranslate nohighlight">\(p_{t+1}\)</span> measure, <span id="id6">[<a class="reference internal" href="zreferences.html#id7" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">Backus <em>et al.</em>, 2014</a>]</span> define entropy as</p>
+expectation under the <span class="math notranslate nohighlight">\(p_{t+1}\)</span> measure, <span id="id6">[<a class="reference internal" href="zreferences.html#id10" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">Backus <em>et al.</em>, 2014</a>]</span> define entropy as</p>
 <div class="math notranslate nohighlight" id="equation-eq-bcz1">
-<span class="eqno">(26.9)<a class="headerlink" href="#equation-eq-bcz1" title="Link to this equation">#</a></span>\[
+<span class="eqno">(27.9)<a class="headerlink" href="#equation-eq-bcz1" title="Link to this equation">#</a></span>\[
 L_t (p_{t+1}^*/p_{t+1}) = - E_t \log( p_{t+1}^*/p_{t+1}).
 \]</div>
-<p>Evidently, by virtue of the minus sign in equation <a class="reference internal" href="#equation-eq-bcz1">(26.9)</a>,</p>
+<p>Evidently, by virtue of the minus sign in equation <a class="reference internal" href="#equation-eq-bcz1">(27.9)</a>,</p>
 <div class="math notranslate nohighlight" id="equation-eq-bcz2">
-<span class="eqno">(26.10)<a class="headerlink" href="#equation-eq-bcz2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(27.10)<a class="headerlink" href="#equation-eq-bcz2" title="Link to this equation">#</a></span>\[
 L_t (p_{t+1}^*/p_{t+1})  = D_{KL,t}( p_{t+1}^*|p_{t+1}),
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(D_{KL,t}\)</span> denotes conditional relative entropy.</p>
@@ -574,7 +574,7 @@ Then</p>
 \[
 E_t (m_{t+1} r_{t+1}) = 1 
 \]</div>
-<p><span id="id7">[<a class="reference internal" href="zreferences.html#id7" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">Backus <em>et al.</em>, 2014</a>]</span> note that a stochastic discount factor satisfies</p>
+<p><span id="id7">[<a class="reference internal" href="zreferences.html#id10" title="David Backus, Mikhail Chernov, and Stanley Zin. Sources of Entropy in Representative Agent Models. Journal of Finance, 69(1):51-99, February 2014. URL: https://ideas.repec.org/a/bla/jfinan/v69y2014i1p51-99.html, doi:.">Backus <em>et al.</em>, 2014</a>]</span> note that a stochastic discount factor satisfies</p>
 <div class="math notranslate nohighlight">
 \[ 
 m_{t+1} = q_t^1 p_{t+1}^*/p_{t+1} .
@@ -584,10 +584,10 @@ m_{t+1} = q_t^1 p_{t+1}^*/p_{t+1} .
 \[
 E L_t (m_{t+1}) \geq E (\log r_{t+1} - \log r_{t+1}^1 )
 \]</div>
-<p>which they propose as a complement to a Hansen-Jagannathan <span id="id8">[<a class="reference internal" href="zreferences.html#id23" title="Lars Peter Hansen and Ravi Jagannathan. Implications of Security Market Data for Models of Dynamic Economies. Journal of Political Economy, 99(2):225-262, April 1991. URL: https://ideas.repec.org/a/ucp/jpolec/v99y1991i2p225-62.html, doi:10.1086/261749.">Hansen and Jagannathan, 1991</a>]</span> bound.</p>
+<p>which they propose as a complement to a Hansen-Jagannathan <span id="id8">[<a class="reference internal" href="zreferences.html#id26" title="Lars Peter Hansen and Ravi Jagannathan. Implications of Security Market Data for Models of Dynamic Economies. Journal of Political Economy, 99(2):225-262, April 1991. URL: https://ideas.repec.org/a/ucp/jpolec/v99y1991i2p225-62.html, doi:10.1086/261749.">Hansen and Jagannathan, 1991</a>]</span> bound.</p>
 </section>
 <section id="wiener-kolmogorov-prediction-error-formula-as-entropy">
-<h2><span class="section-number">26.12. </span>Wiener-Kolmogorov prediction error formula as entropy<a class="headerlink" href="#wiener-kolmogorov-prediction-error-formula-as-entropy" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.12. </span>Wiener-Kolmogorov prediction error formula as entropy<a class="headerlink" href="#wiener-kolmogorov-prediction-error-formula-as-entropy" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(\{x_t\}_{t=-\infty}^\infty\)</span> be a covariance stationary stochastic process with
 mean zero and spectral density <span class="math notranslate nohighlight">\(S_x(\omega)\)</span>.</p>
 <p>The variance of <span class="math notranslate nohighlight">\(x\)</span> is</p>
@@ -595,9 +595,9 @@ mean zero and spectral density <span class="math notranslate nohighlight">\(S_x(
 \[
 \sigma_x^2 =\left( \frac{1}{2\pi}\right) \int_{-\pi}^\pi  S_x (\omega) d \omega .
 \]</div>
-<p>As described  in chapter XIV of  <span id="id9">[<a class="reference internal" href="zreferences.html#id200" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, the Wiener-Kolmogorov formula for the one-period ahead prediction error is</p>
+<p>As described  in chapter XIV of  <span id="id9">[<a class="reference internal" href="zreferences.html#id203" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, the Wiener-Kolmogorov formula for the one-period ahead prediction error is</p>
 <div class="math notranslate nohighlight" id="equation-eq-shannon6">
-<span class="eqno">(26.11)<a class="headerlink" href="#equation-eq-shannon6" title="Link to this equation">#</a></span>\[
+<span class="eqno">(27.11)<a class="headerlink" href="#equation-eq-shannon6" title="Link to this equation">#</a></span>\[
 \sigma_\epsilon^2 = \exp\left[\left( \frac{1}{2\pi}\right) \int_{-\pi}^\pi \log S_x (\omega) d \omega \right].
 \]</div>
 <p>Occasionally the logarithm of  the one-step-ahead prediction error <span class="math notranslate nohighlight">\(\sigma_\epsilon^2\)</span>
@@ -617,7 +617,7 @@ all univariate covariance stationary processes with variance <span class="math n
 analysis described above.</p>
 </section>
 <section id="multivariate-processes">
-<h2><span class="section-number">26.13. </span>Multivariate processes<a class="headerlink" href="#multivariate-processes" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.13. </span>Multivariate processes<a class="headerlink" href="#multivariate-processes" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(y_t\)</span> be an <span class="math notranslate nohighlight">\(n \times 1\)</span> covariance stationary stochastic process with mean <span class="math notranslate nohighlight">\(0\)</span> with
 matrix covariogram <span class="math notranslate nohighlight">\(C_y(j) = E y_t y_{t-j}' \)</span> and spectral density matrix</p>
 <div class="math notranslate nohighlight">
@@ -635,33 +635,33 @@ vector of one-step-ahead errors in predicting <span class="math notranslate nohi
 covariance matrix <span class="math notranslate nohighlight">\(E \epsilon_t \epsilon_t' = I\)</span>.</p>
 <p>Linear-least-squares predictors have one-step-ahead prediction error <span class="math notranslate nohighlight">\(D(0)  D(0)'\)</span> that satisfies</p>
 <div class="math notranslate nohighlight" id="equation-eq-shannon22">
-<span class="eqno">(26.12)<a class="headerlink" href="#equation-eq-shannon22" title="Link to this equation">#</a></span>\[
+<span class="eqno">(27.12)<a class="headerlink" href="#equation-eq-shannon22" title="Link to this equation">#</a></span>\[
 \log \det [D(0) D(0)'] = \left(\frac{1}{2 \pi} \right) \int_{-\pi}^\pi \log \det [S_y(\omega)] d \omega.
 \]</div>
 <p>Being a  measure of the unpredictability of an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector covariance stationary  stochastic process,
-the left side of  <a class="reference internal" href="#equation-eq-shannon22">(26.12)</a>  is sometimes called entropy.</p>
+the left side of  <a class="reference internal" href="#equation-eq-shannon22">(27.12)</a>  is sometimes called entropy.</p>
 </section>
 <section id="frequency-domain-robust-control">
-<h2><span class="section-number">26.14. </span>Frequency domain robust control<a class="headerlink" href="#frequency-domain-robust-control" title="Link to this heading">#</a></h2>
-<p>Chapter 8 of <span id="id10">[<a class="reference internal" href="zreferences.html#id108" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton University Press, 2008.">Hansen and Sargent, 2008</a>]</span>  adapts work in the control theory literature to define a
+<h2><span class="section-number">27.14. </span>Frequency domain robust control<a class="headerlink" href="#frequency-domain-robust-control" title="Link to this heading">#</a></h2>
+<p>Chapter 8 of <span id="id10">[<a class="reference internal" href="zreferences.html#id111" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton University Press, 2008.">Hansen and Sargent, 2008</a>]</span>  adapts work in the control theory literature to define a
 <strong>frequency domain entropy</strong> criterion for  robust control as</p>
 <div class="math notranslate nohighlight" id="equation-eq-shannon21">
-<span class="eqno">(26.13)<a class="headerlink" href="#equation-eq-shannon21" title="Link to this equation">#</a></span>\[
+<span class="eqno">(27.13)<a class="headerlink" href="#equation-eq-shannon21" title="Link to this equation">#</a></span>\[
 \int_\Gamma \log \det [ \theta I - G_F(\zeta)' G_F(\zeta) ] d \lambda(\zeta) ,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\theta \in (\underline \theta, +\infty)\)</span> is a positive robustness parameter and <span class="math notranslate nohighlight">\(G_F(\zeta)\)</span> is a <span class="math notranslate nohighlight">\(\zeta\)</span>-transform of the
 objective function.</p>
-<p>Hansen and Sargent <span id="id11">[<a class="reference internal" href="zreferences.html#id108" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton University Press, 2008.">Hansen and Sargent, 2008</a>]</span> show that criterion <a class="reference internal" href="#equation-eq-shannon21">(26.13)</a>  can be represented as</p>
+<p>Hansen and Sargent <span id="id11">[<a class="reference internal" href="zreferences.html#id111" title="Lars Peter Hansen and Thomas J Sargent. Robustness. Princeton University Press, 2008.">Hansen and Sargent, 2008</a>]</span> show that criterion <a class="reference internal" href="#equation-eq-shannon21">(27.13)</a>  can be represented as</p>
 <div class="math notranslate nohighlight" id="equation-eq-shannon220">
-<span class="eqno">(26.14)<a class="headerlink" href="#equation-eq-shannon220" title="Link to this equation">#</a></span>\[ 
+<span class="eqno">(27.14)<a class="headerlink" href="#equation-eq-shannon220" title="Link to this equation">#</a></span>\[ 
 \log \det [ D(0)' D(0)] = \int_\Gamma \log \det [ \theta I - G_F(\zeta)' G_F(\zeta) ] d \lambda(\zeta) ,
 \]</div>
 <p>for an appropriate covariance stationary stochastic process derived from <span class="math notranslate nohighlight">\(\theta, G_F(\zeta)\)</span>.</p>
 <p>This explains the
-moniker <strong>maximum entropy</strong> robust control for decision rules <span class="math notranslate nohighlight">\(F\)</span> designed to maximize  criterion <a class="reference internal" href="#equation-eq-shannon21">(26.13)</a>.</p>
+moniker <strong>maximum entropy</strong> robust control for decision rules <span class="math notranslate nohighlight">\(F\)</span> designed to maximize  criterion <a class="reference internal" href="#equation-eq-shannon21">(27.13)</a>.</p>
 </section>
 <section id="relative-entropy-for-a-continuous-random-variable">
-<h2><span class="section-number">26.15. </span>Relative entropy for a continuous random variable<a class="headerlink" href="#relative-entropy-for-a-continuous-random-variable" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">27.15. </span>Relative entropy for a continuous random variable<a class="headerlink" href="#relative-entropy-for-a-continuous-random-variable" title="Link to this heading">#</a></h2>
 <p>Let <span class="math notranslate nohighlight">\(x\)</span> be  a continuous random variable with density <span class="math notranslate nohighlight">\(\phi(x)\)</span>, and let <span class="math notranslate nohighlight">\(g(x) \)</span> be a nonnegative random variable satisfying <span class="math notranslate nohighlight">\(\int g(x) \phi(x) dx =1\)</span>.</p>
 <p>The relative entropy of the distorted density <span class="math notranslate nohighlight">\(\hat \phi(x) = g(x) \phi(x)\)</span>  is defined
 as</p>
@@ -669,25 +669,25 @@ as</p>
 \[
 \textrm{ent}(g) = \int g(x) \log g(x) \phi(x) d x .
 \]</div>
-<p><a class="reference internal" href="#figure-example2"><span class="std std-numref">Fig. 26.2</span></a> plots the functions <span class="math notranslate nohighlight">\(g \log g\)</span> and <span class="math notranslate nohighlight">\(g -1\)</span>
+<p><a class="reference internal" href="#figure-example2"><span class="std std-numref">Fig. 27.2</span></a> plots the functions <span class="math notranslate nohighlight">\(g \log g\)</span> and <span class="math notranslate nohighlight">\(g -1\)</span>
 over the interval <span class="math notranslate nohighlight">\(g \geq 0\)</span>.</p>
-<p>That relative entropy <span class="math notranslate nohighlight">\(\textrm{ent}(g) \geq 0\)</span> can be established by noting (a) that  <span class="math notranslate nohighlight">\(g \log g \geq g-1\)</span> (see  <a class="reference internal" href="#figure-example2"><span class="std std-numref">Fig. 26.2</span></a>)
+<p>That relative entropy <span class="math notranslate nohighlight">\(\textrm{ent}(g) \geq 0\)</span> can be established by noting (a) that  <span class="math notranslate nohighlight">\(g \log g \geq g-1\)</span> (see  <a class="reference internal" href="#figure-example2"><span class="std std-numref">Fig. 27.2</span></a>)
 and (b) that under <span class="math notranslate nohighlight">\(\phi\)</span>, <span class="math notranslate nohighlight">\(E g =1\)</span>.</p>
-<p><a class="reference internal" href="#figure-example3"><span class="std std-numref">Fig. 26.3</span></a> and <a class="reference internal" href="#figure-example4"><span class="std std-numref">Fig. 26.4</span></a> display aspects of relative entropy visually for a continuous random variable <span class="math notranslate nohighlight">\(x\)</span> for
+<p><a class="reference internal" href="#figure-example3"><span class="std std-numref">Fig. 27.3</span></a> and <a class="reference internal" href="#figure-example4"><span class="std std-numref">Fig. 27.4</span></a> display aspects of relative entropy visually for a continuous random variable <span class="math notranslate nohighlight">\(x\)</span> for
 two densities with likelihood ratio <span class="math notranslate nohighlight">\(g \geq 0\)</span>.</p>
-<p>Where the numerator density is <span class="math notranslate nohighlight">\({\mathcal N}(0,1)\)</span>, for two denominator  Gaussian densities <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</span> and <span class="math notranslate nohighlight">\({\mathcal N}(0,.95)\)</span>, respectively, <a class="reference internal" href="#figure-example3"><span class="std std-numref">Fig. 26.3</span></a> and <a class="reference internal" href="#figure-example4"><span class="std std-numref">Fig. 26.4</span></a>  display the functions  <span class="math notranslate nohighlight">\(g \log g\)</span> and <span class="math notranslate nohighlight">\(g -1\)</span> as functions of <span class="math notranslate nohighlight">\(x\)</span>.</p>
+<p>Where the numerator density is <span class="math notranslate nohighlight">\({\mathcal N}(0,1)\)</span>, for two denominator  Gaussian densities <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</span> and <span class="math notranslate nohighlight">\({\mathcal N}(0,.95)\)</span>, respectively, <a class="reference internal" href="#figure-example3"><span class="std std-numref">Fig. 27.3</span></a> and <a class="reference internal" href="#figure-example4"><span class="std std-numref">Fig. 27.4</span></a>  display the functions  <span class="math notranslate nohighlight">\(g \log g\)</span> and <span class="math notranslate nohighlight">\(g -1\)</span> as functions of <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <figure class="align-default" id="figure-example2">
 <a class="reference internal image-reference" href="_images/entropy_glogg.png"><img alt="_images/entropy_glogg.png" src="_images/entropy_glogg.png" style="height: 350px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 26.2 </span><span class="caption-text">The function <span class="math notranslate nohighlight">\(g \log g\)</span> for <span class="math notranslate nohighlight">\(g \geq 0\)</span>. For a random variable <span class="math notranslate nohighlight">\(g\)</span> with <span class="math notranslate nohighlight">\(E g =1\)</span>, <span class="math notranslate nohighlight">\(E g \log g \geq 0\)</span>.</span><a class="headerlink" href="#figure-example2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 27.2 </span><span class="caption-text">The function <span class="math notranslate nohighlight">\(g \log g\)</span> for <span class="math notranslate nohighlight">\(g \geq 0\)</span>. For a random variable <span class="math notranslate nohighlight">\(g\)</span> with <span class="math notranslate nohighlight">\(E g =1\)</span>, <span class="math notranslate nohighlight">\(E g \log g \geq 0\)</span>.</span><a class="headerlink" href="#figure-example2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="figure-example3">
 <a class="reference internal image-reference" href="_images/entropy_1_over_15.jpg"><img alt="_images/entropy_1_over_15.jpg" src="_images/entropy_1_over_15.jpg" style="height: 350px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 26.3 </span><span class="caption-text">Graphs of <span class="math notranslate nohighlight">\(g \log g\)</span> and <span class="math notranslate nohighlight">\(g-1\)</span> where  <span class="math notranslate nohighlight">\(g\)</span> is the ratio of the density of a <span class="math notranslate nohighlight">\({\mathcal N}(0,1)\)</span> random variable to the density of a <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</span> random variable.
+<p><span class="caption-number">Fig. 27.3 </span><span class="caption-text">Graphs of <span class="math notranslate nohighlight">\(g \log g\)</span> and <span class="math notranslate nohighlight">\(g-1\)</span> where  <span class="math notranslate nohighlight">\(g\)</span> is the ratio of the density of a <span class="math notranslate nohighlight">\({\mathcal N}(0,1)\)</span> random variable to the density of a <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</span> random variable.
 Under the <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</span> density, <span class="math notranslate nohighlight">\(E g =1\)</span>.</span><a class="headerlink" href="#figure-example3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -695,7 +695,7 @@ Under the <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</sp
 <a class="reference internal image-reference" href="_images/entropy_1_over_95.png"><img alt="_images/entropy_1_over_95.png" src="_images/entropy_1_over_95.png" style="height: 350px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 26.4 </span><span class="caption-text"><span class="math notranslate nohighlight">\(g \log g\)</span> and <span class="math notranslate nohighlight">\(g-1\)</span> where  <span class="math notranslate nohighlight">\(g\)</span> is the ratio of the density of a <span class="math notranslate nohighlight">\({\mathcal N}(0,1)\)</span> random variable to the density of a <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</span> random variable.
+<p><span class="caption-number">Fig. 27.4 </span><span class="caption-text"><span class="math notranslate nohighlight">\(g \log g\)</span> and <span class="math notranslate nohighlight">\(g-1\)</span> where  <span class="math notranslate nohighlight">\(g\)</span> is the ratio of the density of a <span class="math notranslate nohighlight">\({\mathcal N}(0,1)\)</span> random variable to the density of a <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</span> random variable.
 Under the <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</span> density, <span class="math notranslate nohighlight">\(E g =1\)</span>.</span><a class="headerlink" href="#figure-example4" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -886,18 +886,23 @@ Under the <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</sp
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="gorman_heterogeneous_households.html">
+   22. Gorman Aggregation
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   22. Rosen Schooling Model
+   23. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   23. Cattle Cycles
+   24. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   24. Shock Non Invertibility
+   25. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -909,22 +914,22 @@ Under the <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</sp
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   25. Risk and Model Uncertainty
+   26. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   26. Etymology of Entropy
+   27. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   27. Robustness
+   28. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   28. Robust Markov Perfect Equilibrium
+   29. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -936,32 +941,32 @@ Under the <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</sp
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   29. Covariance Stationary Processes
+   30. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   30. Estimation of Spectra
+   31. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   31. Additive and Multiplicative Functionals
+   32. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   32. Classical Control with Linear Algebra
+   33. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   33. Classical Prediction and Filtering With Linear Algebra
+   34. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   34. Knowing the Forecasts of Others
+   35. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -973,27 +978,27 @@ Under the <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</sp
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   35. Asset Pricing II: The Lucas Asset Pricing Model
+   36. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   36. Elementary Asset Pricing Theory
+   37. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   37. Two Modifications of Mean-Variance Portfolio Theory
+   38. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   38. Irrelevance of Capital Structures with Complete Markets
+   39. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   39. Equilibrium Capital Structures with Incomplete Markets
+   40. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1005,57 +1010,57 @@ Under the <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</sp
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   40. Optimal Unemployment Insurance
+   41. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   41. Stackelberg Plans
+   42. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   42. Machine Learning a Ramsey Plan
+   43. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   43. Time Inconsistency of Ramsey Plans
+   44. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   44. Sustainable Plans for a Calvo Model
+   45. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   45. Optimal Taxation with State-Contingent Debt
+   46. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   46. Optimal Taxation without State-Contingent Debt
+   47. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   47. Fluctuating Interest Rates Deliver Fiscal Insurance
+   48. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   48. Fiscal Risk and Government Debt
+   49. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   49. Competitive Equilibria of a Model of Chang
+   50. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   50. Credible Government Policies in a Model of Chang
+   51. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1067,17 +1072,17 @@ Under the <span class="math notranslate nohighlight">\({\mathcal N}(0,1.5)\)</sp
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   51. Troubleshooting
+   52. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   52. References
+   53. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   53. Execution Statistics
+   54. Execution Statistics
   </a>
  </li>
 </ul>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>23. Cattle Cycles &#8212; Advanced Quantitative Economics with Python</title>
+    <title>24. Cattle Cycles &#8212; Advanced Quantitative Economics with Python</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -131,8 +131,8 @@
     <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="24. Shock Non Invertibility" href="hs_invertibility_example.html" />
-    <link rel="prev" title="22. Rosen Schooling Model" href="rosen_schooling_model.html" />
+    <link rel="next" title="25. Shock Non Invertibility" href="hs_invertibility_example.html" />
+    <link rel="prev" title="23. Rosen Schooling Model" href="rosen_schooling_model.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -181,11 +181,11 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model">23.1. The model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-into-hs2013-framework">23.2. Mapping into HS2013 framework</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preferences">23.2.1. Preferences</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#technology">23.2.2. Technology</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information">23.2.3. Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model">24.1. The model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mapping-into-hs2013-framework">24.2. Mapping into HS2013 framework</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preferences">24.2.1. Preferences</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#technology">24.2.2. Technology</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information">24.2.3. Information</a></li>
 </ul>
 </li>
 </ul>
@@ -351,9 +351,9 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="index-0">
-<span id="id1"></span><h1><span class="section-number">23. </span>Cattle Cycles<a class="headerlink" href="#index-0" title="Link to this heading">#</a></h1>
+<span id="id1"></span><h1><span class="section-number">24. </span>Cattle Cycles<a class="headerlink" href="#index-0" title="Link to this heading">#</a></h1>
 <p>This is another member of a suite of lectures that use the quantecon DLE class to instantiate models within the
-<span id="id2">[<a class="reference internal" href="zreferences.html#id74" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
+<span id="id2">[<a class="reference internal" href="zreferences.html#id77" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
 <p>In addition to what’s in Anaconda, this lecture uses the quantecon library.</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -368,16 +368,16 @@
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.10.1)
-Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.61.0)
-Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.1.3)
-Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.3)
-Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (1.15.3)
-Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (1.13.3)
-Requirement already satisfied: llvmlite&lt;0.45,&gt;=0.44.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.44.0)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (3.3.2)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (3.7)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2.3.0)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2025.4.26)
+Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
+Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
+Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
+Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (1.16.3)
+Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (1.14.0)
+Requirement already satisfied: llvmlite&lt;0.46,&gt;=0.45.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.45.1)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (3.4.4)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (3.11)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2.5.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2025.11.12)
 Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from sympy-&gt;quantecon) (1.3.0)
 </pre></div>
 </div>
@@ -385,7 +385,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </details>
 </div>
 <p>This lecture uses the DLE class to construct instances of  the “Cattle Cycles” model
-of Rosen, Murphy and Scheinkman (1994) <span id="id3">[<a class="reference internal" href="zreferences.html#id73" title="Sherwin Rosen, Kevin M Murphy, and Jose A Scheinkman. Cattle cycles. Journal of Political Economy, 102(3):468–492, 1994.">Rosen <em>et al.</em>, 1994</a>]</span>.</p>
+of Rosen, Murphy and Scheinkman (1994) <span id="id3">[<a class="reference internal" href="zreferences.html#id76" title="Sherwin Rosen, Kevin M Murphy, and Jose A Scheinkman. Cattle cycles. Journal of Political Economy, 102(3):468–492, 1994.">Rosen <em>et al.</em>, 1994</a>]</span>.</p>
 <p>That paper constructs a rational expectations equilibrium model to
 understand sources of recurrent cycles in US cattle stocks and prices.</p>
 <p>We make the following imports:</p>
@@ -401,7 +401,7 @@ understand sources of recurrent cycles in US cattle stocks and prices.</p>
 </div>
 </div>
 <section id="the-model">
-<h2><span class="section-number">23.1. </span>The model<a class="headerlink" href="#the-model" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">24.1. </span>The model<a class="headerlink" href="#the-model" title="Link to this heading">#</a></h2>
 <p>The model features a static linear demand curve and a “time-to-grow”
 structure for cattle.</p>
 <p>Let <span class="math notranslate nohighlight">\(p_t\)</span> be the price of slaughtered beef, <span class="math notranslate nohighlight">\(m_t\)</span> the cost
@@ -446,9 +446,9 @@ where <span class="math notranslate nohighlight">\(\tilde d_t\)</span> is a stoc
 representing a demand shifter.</p>
 </section>
 <section id="mapping-into-hs2013-framework">
-<h2><span class="section-number">23.2. </span>Mapping into HS2013 framework<a class="headerlink" href="#mapping-into-hs2013-framework" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">24.2. </span>Mapping into HS2013 framework<a class="headerlink" href="#mapping-into-hs2013-framework" title="Link to this heading">#</a></h2>
 <section id="preferences">
-<h3><span class="section-number">23.2.1. </span>Preferences<a class="headerlink" href="#preferences" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">24.2.1. </span>Preferences<a class="headerlink" href="#preferences" title="Link to this heading">#</a></h3>
 <p>We set
 <span class="math notranslate nohighlight">\(\Lambda = 0, \Delta_h = 0, \Theta_h = 0, \Pi = \alpha_1^{-\frac{1}{2}}\)</span>
 and <span class="math notranslate nohighlight">\(b_t = \Pi \tilde d_t + \Pi \alpha_0\)</span>.</p>
@@ -456,7 +456,7 @@ and <span class="math notranslate nohighlight">\(b_t = \Pi \tilde d_t + \Pi \alp
 demand curve of the “Cattle Cycles” model.</p>
 </section>
 <section id="technology">
-<h3><span class="section-number">23.2.2. </span>Technology<a class="headerlink" href="#technology" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">24.2.2. </span>Technology<a class="headerlink" href="#technology" title="Link to this heading">#</a></h3>
 <p>To capture the law of motion for cattle, we set</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -498,7 +498,7 @@ demand curve of the “Cattle Cycles” model.</p>
 \end{split}\]</div>
 </section>
 <section id="information">
-<h3><span class="section-number">23.2.3. </span>Information<a class="headerlink" href="#information" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">24.2.3. </span>Information<a class="headerlink" href="#information" title="Link to this heading">#</a></h3>
 <p>We set</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -539,7 +539,7 @@ A_{22} =
 </div>
 </div>
 </div>
-<p>We set parameters to those used by <span id="id4">[<a class="reference internal" href="zreferences.html#id73" title="Sherwin Rosen, Kevin M Murphy, and Jose A Scheinkman. Cattle cycles. Journal of Political Economy, 102(3):468–492, 1994.">Rosen <em>et al.</em>, 1994</a>]</span></p>
+<p>We set parameters to those used by <span id="id4">[<a class="reference internal" href="zreferences.html#id76" title="Sherwin Rosen, Kevin M Murphy, and Jose A Scheinkman. Cattle cycles. Journal of Political Economy, 102(3):468–492, 1994.">Rosen <em>et al.</em>, 1994</a>]</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">β</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.909</span><span class="p">]])</span>
@@ -674,7 +674,7 @@ baseline case of <span class="math notranslate nohighlight">\(\rho_3 = 0.6\)</sp
 </div>
 </div>
 </div>
-<p><span id="id5">[<a class="reference internal" href="zreferences.html#id73" title="Sherwin Rosen, Kevin M Murphy, and Jose A Scheinkman. Cattle cycles. Journal of Political Economy, 102(3):468–492, 1994.">Rosen <em>et al.</em>, 1994</a>]</span> use the model to understand the
+<p><span id="id5">[<a class="reference internal" href="zreferences.html#id76" title="Sherwin Rosen, Kevin M Murphy, and Jose A Scheinkman. Cattle cycles. Journal of Political Economy, 102(3):468–492, 1994.">Rosen <em>et al.</em>, 1994</a>]</span> use the model to understand the
 sources of recurrent cycles in total cattle stocks.</p>
 <p>Plotting <span class="math notranslate nohighlight">\(y_t\)</span> for a simulation of their model shows its ability
 to generate cycles in quantities</p>
@@ -691,10 +691,10 @@ to generate cycles in quantities</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6a50cfc9a7fdfc1bd6aa3167965a7e952d5902fd99291f35b988aa9fd05387ee.png" src="_images/6a50cfc9a7fdfc1bd6aa3167965a7e952d5902fd99291f35b988aa9fd05387ee.png" />
+<img alt="_images/9a1c3b01f6171fe6ec149f75586803619c21a9a08cb120b698acec3493c171aa.png" src="_images/9a1c3b01f6171fe6ec149f75586803619c21a9a08cb120b698acec3493c171aa.png" />
 </div>
 </div>
-<p>In their Figure 3, <span id="id6">[<a class="reference internal" href="zreferences.html#id73" title="Sherwin Rosen, Kevin M Murphy, and Jose A Scheinkman. Cattle cycles. Journal of Political Economy, 102(3):468–492, 1994.">Rosen <em>et al.</em>, 1994</a>]</span> plot the impulse response functions
+<p>In their Figure 3, <span id="id6">[<a class="reference internal" href="zreferences.html#id76" title="Sherwin Rosen, Kevin M Murphy, and Jose A Scheinkman. Cattle cycles. Journal of Political Economy, 102(3):468–492, 1994.">Rosen <em>et al.</em>, 1994</a>]</span> plot the impulse response functions
 of consumption and the breeding stock of cattle to the demand shock,
 <span class="math notranslate nohighlight">\(\tilde d_t\)</span>, under the three different values of <span class="math notranslate nohighlight">\(\rho_3\)</span>.</p>
 <p>We replicate their Figure 3 below</p>
@@ -723,7 +723,7 @@ of consumption and the breeding stock of cattle to the demand shock,
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/83afc6f115116c41ea407f50ca2db7665e57ff85e7f7734b729e3552e6e72a54.png" src="_images/83afc6f115116c41ea407f50ca2db7665e57ff85e7f7734b729e3552e6e72a54.png" />
+<img alt="_images/bdf9c6e545a6476da31058f9bd0c249904d9dfd4721152ef1ca133bd69c178ea.png" src="_images/bdf9c6e545a6476da31058f9bd0c249904d9dfd4721152ef1ca133bd69c178ea.png" />
 </div>
 </div>
 <p>The above figures show how consumption patterns differ markedly,
@@ -735,7 +735,7 @@ rises immediately but is later reduced to build stocks up again.</p></li>
 immediately, in order to build up stocks to satisfy the permanent
 rise in future demand.</p></li>
 </ul>
-<p>In Figure 4 of their paper, <span id="id7">[<a class="reference internal" href="zreferences.html#id73" title="Sherwin Rosen, Kevin M Murphy, and Jose A Scheinkman. Cattle cycles. Journal of Political Economy, 102(3):468–492, 1994.">Rosen <em>et al.</em>, 1994</a>]</span> plot the response to a demand shock
+<p>In Figure 4 of their paper, <span id="id7">[<a class="reference internal" href="zreferences.html#id76" title="Sherwin Rosen, Kevin M Murphy, and Jose A Scheinkman. Cattle cycles. Journal of Political Economy, 102(3):468–492, 1994.">Rosen <em>et al.</em>, 1994</a>]</span> plot the response to a demand shock
 of the breeding stock <em>and</em> the total stock, for <span class="math notranslate nohighlight">\(\rho_3 = 0\)</span> and
 <span class="math notranslate nohighlight">\(\rho_3 = 0.6\)</span>.</p>
 <p>We replicate their Figure 4 below</p>
@@ -757,7 +757,7 @@ of the breeding stock <em>and</em> the total stock, for <span class="math notran
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c92f9f4fa2cafed81eae278bcb1c92c13a2cfb4a8ad2ae278736459fa630408d.png" src="_images/c92f9f4fa2cafed81eae278bcb1c92c13a2cfb4a8ad2ae278736459fa630408d.png" />
+<img alt="_images/6c56736a2051297765fa45b9a7b53fc2d54283a807120043165274fbd733abd8.png" src="_images/6c56736a2051297765fa45b9a7b53fc2d54283a807120043165274fbd733abd8.png" />
 </div>
 </div>
 <p>The fact that <span class="math notranslate nohighlight">\(y_t\)</span> is a weighted moving average of <span class="math notranslate nohighlight">\(x_t\)</span>
@@ -952,18 +952,23 @@ lecture.</p>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="gorman_heterogeneous_households.html">
+   22. Gorman Aggregation
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   22. Rosen Schooling Model
+   23. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   23. Cattle Cycles
+   24. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   24. Shock Non Invertibility
+   25. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -975,22 +980,22 @@ lecture.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   25. Risk and Model Uncertainty
+   26. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   26. Etymology of Entropy
+   27. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   27. Robustness
+   28. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   28. Robust Markov Perfect Equilibrium
+   29. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1002,32 +1007,32 @@ lecture.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   29. Covariance Stationary Processes
+   30. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   30. Estimation of Spectra
+   31. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   31. Additive and Multiplicative Functionals
+   32. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   32. Classical Control with Linear Algebra
+   33. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   33. Classical Prediction and Filtering With Linear Algebra
+   34. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   34. Knowing the Forecasts of Others
+   35. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -1039,27 +1044,27 @@ lecture.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   35. Asset Pricing II: The Lucas Asset Pricing Model
+   36. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   36. Elementary Asset Pricing Theory
+   37. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   37. Two Modifications of Mean-Variance Portfolio Theory
+   38. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   38. Irrelevance of Capital Structures with Complete Markets
+   39. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   39. Equilibrium Capital Structures with Incomplete Markets
+   40. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1071,57 +1076,57 @@ lecture.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   40. Optimal Unemployment Insurance
+   41. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   41. Stackelberg Plans
+   42. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   42. Machine Learning a Ramsey Plan
+   43. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   43. Time Inconsistency of Ramsey Plans
+   44. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   44. Sustainable Plans for a Calvo Model
+   45. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   45. Optimal Taxation with State-Contingent Debt
+   46. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   46. Optimal Taxation without State-Contingent Debt
+   47. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   47. Fluctuating Interest Rates Deliver Fiscal Insurance
+   48. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   48. Fiscal Risk and Government Debt
+   49. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   49. Competitive Equilibria of a Model of Chang
+   50. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   50. Credible Government Policies in a Model of Chang
+   51. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1133,17 +1138,17 @@ lecture.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   51. Troubleshooting
+   52. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   52. References
+   53. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   53. Execution Statistics
+   54. Execution Statistics
   </a>
  </li>
 </ul>

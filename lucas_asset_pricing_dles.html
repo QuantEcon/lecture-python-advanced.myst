@@ -321,7 +321,7 @@
 </div><section class="tex2jax_ignore mathjax_ignore" id="lucas-asset-pricing-using-dle">
 <span id="index-0"></span><h1><span class="section-number">19. </span>Lucas Asset Pricing Using DLE<a class="headerlink" href="#lucas-asset-pricing-using-dle" title="Link to this heading">#</a></h1>
 <p>This is one of a suite of lectures that use the quantecon DLE class to instantiate models within the
-<span id="id1">[<a class="reference internal" href="zreferences.html#id74" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
+<span id="id1">[<a class="reference internal" href="zreferences.html#id77" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> class of models described in detail in <a class="reference internal" href="hs_recursive_models.html"><span class="doc">Recursive Models of Dynamic Linear Economies</span></a>.</p>
 <p>In addition to what’s in Anaconda, this lecture uses the quantecon library</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -336,16 +336,16 @@
 </summary>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.10.1)
-Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.61.0)
-Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.1.3)
-Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.3)
-Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (1.15.3)
-Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (1.13.3)
-Requirement already satisfied: llvmlite&lt;0.45,&gt;=0.44.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.44.0)
-Requirement already satisfied: charset-normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (3.3.2)
-Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (3.7)
-Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2.3.0)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2025.4.26)
+Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
+Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
+Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
+Requirement already satisfied: scipy&gt;=1.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (1.16.3)
+Requirement already satisfied: sympy in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (1.14.0)
+Requirement already satisfied: llvmlite&lt;0.46,&gt;=0.45.0dev0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from numba&gt;=0.49.0-&gt;quantecon) (0.45.1)
+Requirement already satisfied: charset_normalizer&lt;4,&gt;=2 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (3.4.4)
+Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (3.11)
+Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2.5.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2025.11.12)
 Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from sympy-&gt;quantecon) (1.3.0)
 </pre></div>
 </div>
@@ -370,7 +370,7 @@ DLE class.</p>
 </div>
 </div>
 </div>
-<p>We use a linear-quadratic version of an economy that Lucas (1978) <span id="id2">[<a class="reference internal" href="zreferences.html#id177" title="Robert E Lucas, Jr. Asset prices in an exchange economy. Econometrica: Journal of the Econometric Society, 46(6):1429–1445, 1978.">Lucas, 1978</a>]</span> used
+<p>We use a linear-quadratic version of an economy that Lucas (1978) <span id="id2">[<a class="reference internal" href="zreferences.html#id180" title="Robert E Lucas, Jr. Asset prices in an exchange economy. Econometrica: Journal of the Econometric Society, 46(6):1429–1445, 1978.">Lucas, 1978</a>]</span> used
 to develop an equilibrium theory of asset prices:</p>
 <p><strong>Preferences</strong></p>
 <div class="math notranslate nohighlight">
@@ -446,7 +446,7 @@ x_0 =
 \]</div>
 <section id="asset-pricing-equations">
 <h2><span class="section-number">19.1. </span>Asset pricing equations<a class="headerlink" href="#asset-pricing-equations" title="Link to this heading">#</a></h2>
-<p><span id="id3">[<a class="reference internal" href="zreferences.html#id74" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> show that the time t value of a permanent claim to a stream
+<p><span id="id3">[<a class="reference internal" href="zreferences.html#id77" title="Lars Peter Hansen and Thomas J. Sargent. Recursive Linear Models of Dynamic Economics. Princeton University Press, Princeton, New Jersey, 2013.">Hansen and Sargent, 2013</a>]</span> show that the time t value of a permanent claim to a stream
 <span class="math notranslate nohighlight">\(y_s = U_ax_s \, , s \geq t\)</span> is:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -531,7 +531,7 @@ perpetual claim on the endowment process <span class="math notranslate nohighlig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f15129fa701c91d0742b309e0f8cf66815ce2ac8e3b33f77592c6983aae9f53b.png" src="_images/f15129fa701c91d0742b309e0f8cf66815ce2ac8e3b33f77592c6983aae9f53b.png" />
+<img alt="_images/2bcb53766bce80ab115bcedf773df3c441621627c80cb0bbc7bf53e1fcb6bfa2.png" src="_images/2bcb53766bce80ab115bcedf773df3c441621627c80cb0bbc7bf53e1fcb6bfa2.png" />
 </div>
 </div>
 <p>The next plot displays the realized gross rate of return on this “Lucas
@@ -547,7 +547,7 @@ tree” as well as on a risk-free one-period bond:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1776635d7f67c9d8f11fc11d98a9e40e41a5e296c44ce4bdcaa858f9af53fd9c.png" src="_images/1776635d7f67c9d8f11fc11d98a9e40e41a5e296c44ce4bdcaa858f9af53fd9c.png" />
+<img alt="_images/7827ac2dd2d75ef3d895d68a3a89bc3c0188fc814fe85fc0d4e2a45242134173.png" src="_images/7827ac2dd2d75ef3d895d68a3a89bc3c0188fc814fe85fc0d4e2a45242134173.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -557,8 +557,8 @@ tree” as well as on a risk-free one-period bond:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.46299177],
-       [-0.46299177,  1.        ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.42263194],
+       [-0.42263194,  1.        ]])
 </pre></div>
 </div>
 </div>
@@ -579,7 +579,7 @@ one-period and five-period risk-free bonds:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c6a21778ea8e178ccc4ae60fa64b7eaf2482f563f0b92b32c9fd708e4ad31643.png" src="_images/c6a21778ea8e178ccc4ae60fa64b7eaf2482f563f0b92b32c9fd708e4ad31643.png" />
+<img alt="_images/aad075f154f3fa75c017a9912f8fc0561af7a88309c3cbe7eaf734ed662c79bc.png" src="_images/aad075f154f3fa75c017a9912f8fc0561af7a88309c3cbe7eaf734ed662c79bc.png" />
 </div>
 </div>
 <p>From the above plot, we can see the tendency of the term structure to
@@ -614,7 +614,7 @@ the endowment process is reduced to 0.4:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f0f011f3e980a7dfe0f7245c1c35415b878e3467145f51c6f7d0344bff9cc871.png" src="_images/f0f011f3e980a7dfe0f7245c1c35415b878e3467145f51c6f7d0344bff9cc871.png" />
+<img alt="_images/dd883e5adbb1215af703f5f9daf7cae5aa0a870e9991863b0babbd0dff767bc6.png" src="_images/dd883e5adbb1215af703f5f9daf7cae5aa0a870e9991863b0babbd0dff767bc6.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -624,8 +624,8 @@ the endowment process is reduced to 0.4:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.64887041],
-       [-0.64887041,  1.        ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.61571187],
+       [-0.61571187,  1.        ]])
 </pre></div>
 </div>
 </div>
@@ -644,7 +644,7 @@ five-period risk-free bonds:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/73a46970d6239c1d186f852fb65db04058b42ef648ad1b54cb2844490ece920c.png" src="_images/73a46970d6239c1d186f852fb65db04058b42ef648ad1b54cb2844490ece920c.png" />
+<img alt="_images/50cba75198a1803fe6f03681cadc942ccbd0c1d4a9393b32c0f62302b9b00e22.png" src="_images/50cba75198a1803fe6f03681cadc942ccbd0c1d4a9393b32c0f62302b9b00e22.png" />
 </div>
 </div>
 <p>We can see the tendency of the term structure to slope up when rates are
@@ -837,18 +837,23 @@ first instance of our economy.</p>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="gorman_heterogeneous_households.html">
+   22. Gorman Aggregation
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   22. Rosen Schooling Model
+   23. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   23. Cattle Cycles
+   24. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   24. Shock Non Invertibility
+   25. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -860,22 +865,22 @@ first instance of our economy.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   25. Risk and Model Uncertainty
+   26. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   26. Etymology of Entropy
+   27. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   27. Robustness
+   28. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   28. Robust Markov Perfect Equilibrium
+   29. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -887,32 +892,32 @@ first instance of our economy.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   29. Covariance Stationary Processes
+   30. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   30. Estimation of Spectra
+   31. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   31. Additive and Multiplicative Functionals
+   32. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   32. Classical Control with Linear Algebra
+   33. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   33. Classical Prediction and Filtering With Linear Algebra
+   34. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   34. Knowing the Forecasts of Others
+   35. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -924,27 +929,27 @@ first instance of our economy.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   35. Asset Pricing II: The Lucas Asset Pricing Model
+   36. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   36. Elementary Asset Pricing Theory
+   37. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   37. Two Modifications of Mean-Variance Portfolio Theory
+   38. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   38. Irrelevance of Capital Structures with Complete Markets
+   39. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   39. Equilibrium Capital Structures with Incomplete Markets
+   40. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -956,57 +961,57 @@ first instance of our economy.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   40. Optimal Unemployment Insurance
+   41. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   41. Stackelberg Plans
+   42. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   42. Machine Learning a Ramsey Plan
+   43. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   43. Time Inconsistency of Ramsey Plans
+   44. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   44. Sustainable Plans for a Calvo Model
+   45. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   45. Optimal Taxation with State-Contingent Debt
+   46. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   46. Optimal Taxation without State-Contingent Debt
+   47. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   47. Fluctuating Interest Rates Deliver Fiscal Insurance
+   48. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   48. Fiscal Risk and Government Debt
+   49. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   49. Competitive Equilibria of a Model of Chang
+   50. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   50. Credible Government Policies in a Model of Chang
+   51. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -1018,17 +1023,17 @@ first instance of our economy.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   51. Troubleshooting
+   52. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   52. References
+   53. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   53. Execution Statistics
+   54. Execution Statistics
   </a>
  </li>
 </ul>

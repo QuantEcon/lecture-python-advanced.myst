@@ -376,15 +376,15 @@
 <p>The output of such a theory is a <strong>coupling</strong> of the two probability measures, i.e., a joint probabilty
 measure having those two  marginal probability measures.</p>
 <p>This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodo Wang,
-and Zhenyuan Zhang  <span id="id1">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> used optimal transport theory to formulate and compute  an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.</p>
+and Zhenyuan Zhang  <span id="id1">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> used optimal transport theory to formulate and compute  an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.</p>
 <p>Production technologies allow firms to   reshape costs of mismatch so that they become concave.</p>
-<p>It is then possible that in  equilibrium there is neither <strong>positive assortive</strong> nor <strong>negative assorting</strong>  matching, an outcome that   <span id="id2">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> call <strong>composite assortive</strong> matching.</p>
+<p>It is then possible that in  equilibrium there is neither <strong>positive assortive</strong> nor <strong>negative assorting</strong>  matching, an outcome that   <span id="id2">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> call <strong>composite assortive</strong> matching.</p>
 <p>For example, with composite matching in  an equilibrium model with workers of different types,  ex ante   identical <em>workers</em> can sort into different <em>occupations</em>, some positively and some negatively.</p>
-<p><span id="id3">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> show how composite matching  can generate distinct non-trivial frequency  distributions  of labor earnings  within and across occupations.</p>
-<p>This lecture describes the <span id="id4">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model and  presents  Python code for computing equilibria.</p>
-<p>The lecture then  applies the code to the <span id="id5">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model of labor markets.</p>
+<p><span id="id3">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> show how composite matching  can generate distinct non-trivial frequency  distributions  of labor earnings  within and across occupations.</p>
+<p>This lecture describes the <span id="id4">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model and  presents  Python code for computing equilibria.</p>
+<p>The lecture then  applies the code to the <span id="id5">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model of labor markets.</p>
 <p>As with an <a class="reference external" href="https://python.quantecon.org/opt_transport.html">earlier QuantEcon lecture on optimal transport</a>, a key tool will be <a class="reference external" href="https://intro.quantecon.org/lp_intro.html">linear programming</a>.</p>
-<p>As we’ll see, <span id="id6">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> also deploy dynamic programming in creative ways at important points in
+<p>As we’ll see, <span id="id6">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> also deploy dynamic programming in creative ways at important points in
 their analysis.  So as you read this lecture, please watch  for Bellman equations that might remind
 you of ideas  encountered in this  <a class="reference external" href="https://python.quantecon.org/mccall_model.html">earlier QuantEcon lecture</a> and this <a class="reference external" href="https://dp.quantecon.org">QuantEcon book</a>.</p>
 </section>
@@ -584,7 +584,7 @@ Thus, $f(x) =\frac{n_x}{N} \mathbb{1}\{n_x > 0\} $ and $g(y) =\frac{m_y}{N} \mat
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5a35df64ca7ff585a74115d55a1a458da103efda46abd89dd8b757b6acff2d48.png" src="_images/5a35df64ca7ff585a74115d55a1a458da103efda46abd89dd8b757b6acff2d48.png" />
+<img alt="_images/305e3f029cbaf454e06ea81d3fcb8928c769607c6829c684bd163fa2668954e9.png" src="_images/305e3f029cbaf454e06ea81d3fcb8928c769607c6829c684bd163fa2668954e9.png" />
 </div>
 </div>
 </section>
@@ -752,7 +752,7 @@ Residual types in Y: 16
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b5fe98847e1a9a2f99c1164ff9c55a4274d1e792545ff4a75694bcbea93f8f4c.png" src="_images/b5fe98847e1a9a2f99c1164ff9c55a4274d1e792545ff4a75694bcbea93f8f4c.png" />
+<img alt="_images/c42e48c1ffbc3f8ebf75ab085df77d3c94fa6167ef098106aba52c3504e55338.png" src="_images/c42e48c1ffbc3f8ebf75ab085df77d3c94fa6167ef098106aba52c3504e55338.png" />
 </div>
 </div>
 <p>To prepare the way for the second property,  represent both types  on the real line and draw    semicirles that  join <span class="math notranslate nohighlight">\((x,y)\)</span> for all pairs <span class="math notranslate nohighlight">\((x,y) \in X \times Y\)</span> that are matched in a solution.</p>
@@ -878,7 +878,7 @@ H(z) := F(z) - G(z), \text{ for } z \in \mathbb{R}.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e99cd5ce796e2d9450ae3996a444f1b0bc08da11eccad1b8a3b0f0b1a32413b8.png" src="_images/e99cd5ce796e2d9450ae3996a444f1b0bc08da11eccad1b8a3b0f0b1a32413b8.png" />
+<img alt="_images/74398d7ce3ef4eb2a9221a651bc8d7383b777872140ad27a13a20653bc0790a3.png" src="_images/74398d7ce3ef4eb2a9221a651bc8d7383b777872140ad27a13a20653bc0790a3.png" />
 </div>
 </div>
 <p>The layering property extends to the general discrete setting.</p>
@@ -998,7 +998,7 @@ H(z) \leq h_{\ell -1} &lt; h_{\ell } \leq H(z-),
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7ebe71dbefd537592a99fdea495d4e441460c4b6551b488d659ccabfcb4d1d03.png" src="_images/7ebe71dbefd537592a99fdea495d4e441460c4b6551b488d659ccabfcb4d1d03.png" />
+<img alt="_images/5192aaf158b9036964cc30d9ea65b003a89fc1c02bdd09cc5383e166131d0f36.png" src="_images/5192aaf158b9036964cc30d9ea65b003a89fc1c02bdd09cc5383e166131d0f36.png" />
 </div>
 </div>
 </section>
@@ -1062,7 +1062,7 @@ z_1 &lt; z_2\dots &lt; z_{N_\ell-1} &lt; z_{N_\ell},
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a6759864c449eab377371907ac81aa530c6877727ce77f60faeb3cdc99684bfd.png" src="_images/a6759864c449eab377371907ac81aa530c6877727ce77f60faeb3cdc99684bfd.png" />
+<img alt="_images/4eae883ad8c58c0215c8607b1e63906d2b317a270e80d410654f9a58f028f2a4.png" src="_images/4eae883ad8c58c0215c8607b1e63906d2b317a270e80d410654f9a58f028f2a4.png" />
 </div>
 </div>
 <p>Given the structure of a layer and the <em>no intersecting pairs</em> property, the optimal matching and value of the layer can be found recursively.</p>
@@ -1268,13 +1268,13 @@ Value of the layer (scaled by the mass = 1): 24.764959193288938
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f29f18032aa48d246a682cc229faecb1a69275bc841d5b06dff0dd1bb6714c75.png" src="_images/f29f18032aa48d246a682cc229faecb1a69275bc841d5b06dff0dd1bb6714c75.png" />
+<img alt="_images/8fd60cfbfd7ef8a71d26282c3198bec7cce1a7430212ab15eed3976dce7c32d2.png" src="_images/8fd60cfbfd7ef8a71d26282c3198bec7cce1a7430212ab15eed3976dce7c32d2.png" />
 </div>
 </div>
 <section id="solving-a-layer-in-a-smarter-way">
 <h4><span class="section-number">16.3.2.1. </span>Solving a layer in a smarter way<a class="headerlink" href="#solving-a-layer-in-a-smarter-way" title="Link to this heading">#</a></h4>
 <p>We  now present two key results in the context of OT with concave type costs.</p>
-<p>We refer <span id="id7">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> and <span id="id8">[<a class="reference internal" href="zreferences.html#id4" title="Julie Delon, Julien Salomon, and Andrei Sobolevski. Minimum-weight perfect matching for non-intrinsic distances on the line. arXiv preprint arXiv:1102.1558, 2011.">Delon <em>et al.</em>, 2011</a>]</span> for proofs.</p>
+<p>We refer <span id="id7">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> and <span id="id8">[<a class="reference internal" href="zreferences.html#id7" title="Julie Delon, Julien Salomon, and Andrei Sobolevski. Minimum-weight perfect matching for non-intrinsic distances on the line. arXiv preprint arXiv:1102.1558, 2011.">Delon <em>et al.</em>, 2011</a>]</span> for proofs.</p>
 <p>Consider the problem faced within a layer, i.e., types from <span class="math notranslate nohighlight">\(Y \sqcup X\)</span></p>
 <div class="math notranslate nohighlight">
 \[ 
@@ -1461,7 +1461,7 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f29f18032aa48d246a682cc229faecb1a69275bc841d5b06dff0dd1bb6714c75.png" src="_images/f29f18032aa48d246a682cc229faecb1a69275bc841d5b06dff0dd1bb6714c75.png" />
+<img alt="_images/8fd60cfbfd7ef8a71d26282c3198bec7cce1a7430212ab15eed3976dce7c32d2.png" src="_images/8fd60cfbfd7ef8a71d26282c3198bec7cce1a7430212ab15eed3976dce7c32d2.png" />
 </div>
 </div>
 </section>
@@ -1649,8 +1649,8 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/8bbd7fd53b2f5d48448ec5c3713bcb312d2a57c9236abddf6a07f22dc64159d7.png" src="_images/8bbd7fd53b2f5d48448ec5c3713bcb312d2a57c9236abddf6a07f22dc64159d7.png" />
-<img alt="_images/cce57ca2988772eefbd15b39e25df60f3429e82c7b8721729a43ba073f679dd9.png" src="_images/cce57ca2988772eefbd15b39e25df60f3429e82c7b8721729a43ba073f679dd9.png" />
+<img alt="_images/892e32a0cba5f0e81e403a5ca1236653560091c71b33dd70fa7a46f2feb1c3f1.png" src="_images/892e32a0cba5f0e81e403a5ca1236653560091c71b33dd70fa7a46f2feb1c3f1.png" />
+<img alt="_images/b5ebe228557eebde6beca4ce2c22dd893803c2b4243ca19143203fee047bdd22.png" src="_images/b5ebe228557eebde6beca4ce2c22dd893803c2b4243ca19143203fee047bdd22.png" />
 </div>
 </div>
 <section id="verify-with-linear-programming">
@@ -1771,8 +1771,8 @@ Value (DSS): 143.45490363125705
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a4753a0b07dbd4656b6a9bbcc7bd7f25835ad2126f6b95c55e58c1b577af4685.png" src="_images/a4753a0b07dbd4656b6a9bbcc7bd7f25835ad2126f6b95c55e58c1b577af4685.png" />
-<img alt="_images/dbd91ddaa3ee4d6af8f5e5947f04de34ae590a0f3a668b646a6698a21b129b6a.png" src="_images/dbd91ddaa3ee4d6af8f5e5947f04de34ae590a0f3a668b646a6698a21b129b6a.png" />
+<img alt="_images/67015e3e942128a24a4d731f14735fcfbe10e3034c07a433a2e163a720e25047.png" src="_images/67015e3e942128a24a4d731f14735fcfbe10e3034c07a433a2e163a720e25047.png" />
+<img alt="_images/84fecb582e586547c4112293d37587cc28c4a7fc93abc76fa39968a3f6b651ed.png" src="_images/84fecb582e586547c4112293d37587cc28c4a7fc93abc76fa39968a3f6b651ed.png" />
 </div>
 </div>
 <p>To explore the coincidental resemblence to a NAM outcome,  let’s  shift left type <span class="math notranslate nohighlight">\(\textcolor{red}{y_0} \)</span> while  keeping it in between <span class="math notranslate nohighlight">\(\textcolor{blue}{x_0}\)</span> and <span class="math notranslate nohighlight">\(\textcolor{blue}{x_1}\)</span>.</p>
@@ -1808,9 +1808,9 @@ Value (DSS): 143.45490363125705
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bd2e963eeb989ed4963c55d0b39c8b5607c664ac27e16fa3052a10f23dc3ec83.png" src="_images/bd2e963eeb989ed4963c55d0b39c8b5607c664ac27e16fa3052a10f23dc3ec83.png" />
-<img alt="_images/e32b19a2a977a26effbe925874f1e4744d591370c05c7e102e6db6d2df0b1534.png" src="_images/e32b19a2a977a26effbe925874f1e4744d591370c05c7e102e6db6d2df0b1534.png" />
-<img alt="_images/f36d92e267202512c9af2c668e78952037bf4972e0ba3a9c43ead67218fb1eb2.png" src="_images/f36d92e267202512c9af2c668e78952037bf4972e0ba3a9c43ead67218fb1eb2.png" />
+<img alt="_images/6af1e5ac7b422832c984daaf216b8b1cd01475debbbc367a6e08cabe49c78525.png" src="_images/6af1e5ac7b422832c984daaf216b8b1cd01475debbbc367a6e08cabe49c78525.png" />
+<img alt="_images/ffc92c1e02f807da48c2792321394fe980e4c1e37fb36ad3ae93809a0f1365dd.png" src="_images/ffc92c1e02f807da48c2792321394fe980e4c1e37fb36ad3ae93809a0f1365dd.png" />
+<img alt="_images/60ab40bd835b24c76270fd1e5828bd9422c3e4e8fdec8d85c1a5b7ffd9fb36ee.png" src="_images/60ab40bd835b24c76270fd1e5828bd9422c3e4e8fdec8d85c1a5b7ffd9fb36ee.png" />
 </div>
 </div>
 <p>Finally, notice that the  <strong>Monge problem</strong>  cost function <span class="math notranslate nohighlight">\(|x-y|\)</span>  equals the limit of the  composite sorting cost <span class="math notranslate nohighlight">\(|x-y|^{1/\zeta}\)</span> as <span class="math notranslate nohighlight">\(\zeta \downarrow 1\)</span> and also  the limit of <span class="math notranslate nohighlight">\(|x-y|^p\)</span> as <span class="math notranslate nohighlight">\(p \downarrow 1.\)</span></p>
@@ -1860,8 +1860,8 @@ Monge cost of PAM:
 10.530287849572636
 </pre></div>
 </div>
-<img alt="_images/211fd61fa90a4e1f7d3f2a185d87231ebce37ebe5d1760e09947d5e4e2de873c.png" src="_images/211fd61fa90a4e1f7d3f2a185d87231ebce37ebe5d1760e09947d5e4e2de873c.png" />
-<img alt="_images/fdafd26cd36b4b7b26259f55d484fc7c31053c1d3c62a5019b90dcf46614176c.png" src="_images/fdafd26cd36b4b7b26259f55d484fc7c31053c1d3c62a5019b90dcf46614176c.png" />
+<img alt="_images/408e46f05fbde45d88945db6398ce96fb2ca0144d5568abe2a813836f936344d.png" src="_images/408e46f05fbde45d88945db6398ce96fb2ca0144d5568abe2a813836f936344d.png" />
+<img alt="_images/6846c608ff01fcf02c7b1321da9afa8db9f27e4336e9700f4401aecf93e01f7d.png" src="_images/6846c608ff01fcf02c7b1321da9afa8db9f27e4336e9700f4401aecf93e01f7d.png" />
 </div>
 </div>
 </section>
@@ -1912,15 +1912,15 @@ Monge cost of PAM:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7e08249bfb33c97bd8ee8f23cdb59c9065491551f5e642295511f5e96ab0645c.png" src="_images/7e08249bfb33c97bd8ee8f23cdb59c9065491551f5e642295511f5e96ab0645c.png" />
-<img alt="_images/8dfb291593ec4e3f1fb922de9eecae702986632387704ed275fc8cf381bdf4cd.png" src="_images/8dfb291593ec4e3f1fb922de9eecae702986632387704ed275fc8cf381bdf4cd.png" />
-<img alt="_images/54eece7d1ffd750cda1232071599a589c717fa22369886c26c6ef9ec34b3f541.png" src="_images/54eece7d1ffd750cda1232071599a589c717fa22369886c26c6ef9ec34b3f541.png" />
+<img alt="_images/6b4949fa0cff6ca2989434e1a6a65a4fd065200d87ff78114111a29322b3bc3a.png" src="_images/6b4949fa0cff6ca2989434e1a6a65a4fd065200d87ff78114111a29322b3bc3a.png" />
+<img alt="_images/56c871b92d45d29ee49a0c86c43b7d678267cd94a2d211eef26b8e0e75438241.png" src="_images/56c871b92d45d29ee49a0c86c43b7d678267cd94a2d211eef26b8e0e75438241.png" />
+<img alt="_images/5fb92a6b9d12f9983a6a0f054e849077a961a9a6dfac7d376f74c9d7f589c58e.png" src="_images/5fb92a6b9d12f9983a6a0f054e849077a961a9a6dfac7d376f74c9d7f589c58e.png" />
 </div>
 </div>
 </section>
 <section id="example-3">
 <h3><span class="section-number">16.5.3. </span>Example 3<a class="headerlink" href="#example-3" title="Link to this heading">#</a></h3>
-<p><span id="id9">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> provide the following  example.</p>
+<p><span id="id9">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> provide the following  example.</p>
 <p>There are four agents per side and three types per side (so the problem is not unitary, as opposed to the examples above).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1937,7 +1937,7 @@ Monge cost of PAM:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/dcc33b0ce1307b8d7ea665739a9a2ce07d8bc259ed95be59030d071005163005.png" src="_images/dcc33b0ce1307b8d7ea665739a9a2ce07d8bc259ed95be59030d071005163005.png" />
+<img alt="_images/bb5dd5eb1ca6ca9f2313c29072c6effc16d8a197c1a59dfb75f678a5e2c94c0c.png" src="_images/bb5dd5eb1ca6ca9f2313c29072c6effc16d8a197c1a59dfb75f678a5e2c94c0c.png" />
 </div>
 </div>
 <p>In the case of positive assortative matching (PAM), the two agents with lowest value <span class="math notranslate nohighlight">\(\textcolor{blue}{x_0} \)</span> are matched with the lowest valued agents on the other side <span class="math notranslate nohighlight">\(\textcolor{red}{y_0},\textcolor{red}{y_1}.\)</span></p>
@@ -1961,9 +1961,9 @@ Monge cost of PAM:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2fb07c9c0ff2fd18e3b284a3dcb6f0d89994ca6e1304b259a343fd4481d77af8.png" src="_images/2fb07c9c0ff2fd18e3b284a3dcb6f0d89994ca6e1304b259a343fd4481d77af8.png" />
-<img alt="_images/2254928d7d0d91a248dc820d760b25730e438181a05bc44d6c09df8aeb883eb3.png" src="_images/2254928d7d0d91a248dc820d760b25730e438181a05bc44d6c09df8aeb883eb3.png" />
-<img alt="_images/c30ddd76d4841c02f93a7403860a5990db2844dea83c0f302818dbb605b1fa75.png" src="_images/c30ddd76d4841c02f93a7403860a5990db2844dea83c0f302818dbb605b1fa75.png" />
+<img alt="_images/145cb081128201c3d6f7aaf78c60b5f43d779e1bca358123ead48f6deab5c46f.png" src="_images/145cb081128201c3d6f7aaf78c60b5f43d779e1bca358123ead48f6deab5c46f.png" />
+<img alt="_images/7423f93479734b0a554fde08c2056d498f700e31a4aa679fc6a154894dbeb0c0.png" src="_images/7423f93479734b0a554fde08c2056d498f700e31a4aa679fc6a154894dbeb0c0.png" />
+<img alt="_images/314c9939ad9215531f7680b1824368ecedb94b759455cefadf90297567fe4bb4.png" src="_images/314c9939ad9215531f7680b1824368ecedb94b759455cefadf90297567fe4bb4.png" />
 </div>
 </div>
 </section>
@@ -2011,7 +2011,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <p>The values are related by <span class="math notranslate nohighlight">\(W_P =  \sum_{x \in X}n_x \alpha_x +  \sum_{y \in Y}m_y \gamma_y - V_P.\)</span></p>
 <p>The dual solutions of <span class="math notranslate nohighlight">\(V_D\)</span> and <span class="math notranslate nohighlight">\(W_D\)</span> are related by <span class="math notranslate nohighlight">\(u_x = \alpha_x - \phi_x\)</span> and <span class="math notranslate nohighlight">\(v_y = \gamma_y - \psi_y.\)</span></p>
 <p>The dual solution <span class="math notranslate nohighlight">\((u,v)\)</span> of <span class="math notranslate nohighlight">\(W_D\)</span> can be interpreted as equilibrium utilities of the agents, which include the individual specific amenities and equilibrium shadow costs.</p>
-<p><span id="id10">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.</p>
+<p><span id="id10">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.</p>
 <p>Let’s generate an instance and compute the optimal matching.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2037,7 +2037,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/73dbf1a82a51754832e542c718f3cc36443f26873831ae11031fbd0260f8c0a0.png" src="_images/73dbf1a82a51754832e542c718f3cc36443f26873831ae11031fbd0260f8c0a0.png" />
+<img alt="_images/ec1088b9b87729f80ed865e9d73bbbc3c52c77e55a619bc8da83ad9289407a73.png" src="_images/ec1088b9b87729f80ed865e9d73bbbc3c52c77e55a619bc8da83ad9289407a73.png" />
 </div>
 </div>
 <p>Having computed the optimal matching, we say that a pair <span class="math notranslate nohighlight">\((x_0,y_0)\)</span> is a <em>subpair</em> of a matched pair <span class="math notranslate nohighlight">\((x,y)\)</span> if <span class="math notranslate nohighlight">\(x_0,y_0\)</span> are in the open interval between <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> and the pair <span class="math notranslate nohighlight">\((x_0,y_0)\)</span> is not nested.</p>
@@ -2129,12 +2129,12 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
   (np.int64(0), np.int64(2))],
  (np.int64(7), np.int64(0)): [],
  (np.int64(6), np.int64(4)): [],
+ &#39;artificial_pair&#39;: [(np.int64(5), np.int64(5)), (np.int64(2), np.int64(6))],
  (np.int64(0), np.int64(2)): [],
  (np.int64(2), np.int64(6)): [],
  (np.int64(1), np.int64(3)): [],
  (np.int64(4), np.int64(7)): [(np.int64(6), np.int64(4)),
-  (np.int64(3), np.int64(1))],
- &#39;artificial_pair&#39;: [(np.int64(5), np.int64(5)), (np.int64(2), np.int64(6))]}
+  (np.int64(3), np.int64(1))]}
 </pre></div>
 </div>
 </div>
@@ -2252,7 +2252,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f19c832b0f80d6385d8ce2bb1fc2a7f099c64132320484a40bfdf84d0b2a2503.png" src="_images/f19c832b0f80d6385d8ce2bb1fc2a7f099c64132320484a40bfdf84d0b2a2503.png" />
+<img alt="_images/2011c5fce5a565368a07946041af9925e085bcf4eaabd6348641f318ffe45eea.png" src="_images/2011c5fce5a565368a07946041af9925e085bcf4eaabd6348641f318ffe45eea.png" />
 </div>
 </div>
 <p>We proceed to describe and implement the algorithm to compute the dual solution.</p>
@@ -2513,7 +2513,7 @@ Value of primal solution:  9.03369035213102
 <h2><span class="section-number">16.7. </span>Application<a class="headerlink" href="#application" title="Link to this heading">#</a></h2>
 <section id="data">
 <h3><span class="section-number">16.7.1. </span>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
-<p>We now replicate the empirical analysis carried out by <span id="id11">[<a class="reference internal" href="zreferences.html#id3" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>.</p>
+<p>We now replicate the empirical analysis carried out by <span id="id11">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>.</p>
 <p>The dataset is obtained from the American Community Survey and contains individual level data on income, age and occupation.</p>
 <p>The occupation of each individual consists of a Standard Occupational Classification (SOC) code.</p>
 <p>There are 497 codes in total.</p>
@@ -2564,7 +2564,7 @@ Value of primal solution:  9.03369035213102
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="id12">
-<img alt="_images/c53b80f0978cbb8769498f84f445bec8f3adc62894f55d40d5b1a05db88f9b7a.png" src="_images/c53b80f0978cbb8769498f84f445bec8f3adc62894f55d40d5b1a05db88f9b7a.png" />
+<img alt="_images/19b2f0cd105e6c3cb52fa6bd93a5753067e0bce590d19859ab7118333d3428af.png" src="_images/19b2f0cd105e6c3cb52fa6bd93a5753067e0bce590d19859ab7118333d3428af.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data. The size of the marker is proportional to the number of individuals in the occupation.</span><a class="headerlink" href="#id12" title="Link to this image">#</a></p>
 </figcaption>
@@ -2603,7 +2603,7 @@ Value of primal solution:  9.03369035213102
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="id13">
-<img alt="_images/a14fec8cae2e2663183979a78143312b9066dfa9d415dfbf0192627399e73490.png" src="_images/a14fec8cae2e2663183979a78143312b9066dfa9d415dfbf0192627399e73490.png" />
+<img alt="_images/1905f36af92e2dcce47d74d4468aabe9490ea41479d01874fc7663b3cecf7280.png" src="_images/1905f36af92e2dcce47d74d4468aabe9490ea41479d01874fc7663b3cecf7280.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data.</span><a class="headerlink" href="#id13" title="Link to this image">#</a></p>
 </figcaption>
@@ -2726,7 +2726,7 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/58cbd89446827805ef533c1832228eb6386c53dec0b1c21780a8ceb31d9d914f.png" src="_images/58cbd89446827805ef533c1832228eb6386c53dec0b1c21780a8ceb31d9d914f.png" />
+<img alt="_images/5a4fa241ce30d32cfff94ee053a4e13c291447a6b93e4f7906b59fe603f356c5.png" src="_images/5a4fa241ce30d32cfff94ee053a4e13c291447a6b93e4f7906b59fe603f356c5.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2738,7 +2738,7 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/d12722d2942cfb221a11195988cf58f6aae67ad3a130bc54ebf2f43927565cf3.png" src="_images/d12722d2942cfb221a11195988cf58f6aae67ad3a130bc54ebf2f43927565cf3.png" />
+<img alt="_images/d489fbabde6b335701673ddf061951aaef03413fe57b90663935b08bbbae8a11.png" src="_images/d489fbabde6b335701673ddf061951aaef03413fe57b90663935b08bbbae8a11.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2752,7 +2752,7 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0f834a8561c70712d96759af9223f35f68e6d395f3b992988dab74b96c8acd87.png" src="_images/0f834a8561c70712d96759af9223f35f68e6d395f3b992988dab74b96c8acd87.png" />
+<img alt="_images/307e856382b4adcce4a64f4ad1a78f0f8e9bd0ee197e892b845a8490f0082e52.png" src="_images/307e856382b4adcce4a64f4ad1a78f0f8e9bd0ee197e892b845a8490f0082e52.png" />
 </div>
 </div>
 <p>From the optimal matching we compute and visualize the hierarchies.</p>
@@ -2788,10 +2788,10 @@ Value of primal solution:  9.03369035213102
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/51da80287e81833724df61e53245a55b286ca32736fee80d69db6623cf08e2ed.png" src="_images/51da80287e81833724df61e53245a55b286ca32736fee80d69db6623cf08e2ed.png" />
+<img alt="_images/45b371826806af62cb27c3436122fc9d39e207d865036b5c182e19c7b7844439.png" src="_images/45b371826806af62cb27c3436122fc9d39e207d865036b5c182e19c7b7844439.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Dual feasibility violation: 4.322138159526534e-08
 Value of dual solution:  825.8167029184152
-Value of primal solution:  825.8167029184157
+Value of primal solution:  825.8167029184153
 </pre></div>
 </div>
 </div>
@@ -2841,7 +2841,7 @@ Value of primal solution:  825.8167029184157
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/18ee5ca24581e2a04f953122e50355a81cb515a66474b26bfd2cac6aa6b9d0f2.png" src="_images/18ee5ca24581e2a04f953122e50355a81cb515a66474b26bfd2cac6aa6b9d0f2.png" />
+<img alt="_images/ebb98f583b6429a9429f07c4ac1cdaab44427e022022701ddf376e63f3c03bb4.png" src="_images/ebb98f583b6429a9429f07c4ac1cdaab44427e022022701ddf376e63f3c03bb4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2851,7 +2851,7 @@ Value of primal solution:  825.8167029184157
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/ff27bc6b33d89a1d8cc11756232ef7aca26104553959c71383fdcbb855305642.png" src="_images/ff27bc6b33d89a1d8cc11756232ef7aca26104553959c71383fdcbb855305642.png" />
+<img alt="_images/3eb66f2eca9da7abe6120a377ece8704c8922a75671183f3f2a81a1046703675.png" src="_images/3eb66f2eca9da7abe6120a377ece8704c8922a75671183f3f2a81a1046703675.png" />
 </div>
 </div>
 </section>
@@ -3042,18 +3042,23 @@ Value of primal solution:  825.8167029184157
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="gorman_heterogeneous_households.html">
+   22. Gorman Aggregation
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   22. Rosen Schooling Model
+   23. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   23. Cattle Cycles
+   24. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   24. Shock Non Invertibility
+   25. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -3065,22 +3070,22 @@ Value of primal solution:  825.8167029184157
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   25. Risk and Model Uncertainty
+   26. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   26. Etymology of Entropy
+   27. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   27. Robustness
+   28. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   28. Robust Markov Perfect Equilibrium
+   29. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -3092,32 +3097,32 @@ Value of primal solution:  825.8167029184157
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   29. Covariance Stationary Processes
+   30. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   30. Estimation of Spectra
+   31. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   31. Additive and Multiplicative Functionals
+   32. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   32. Classical Control with Linear Algebra
+   33. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   33. Classical Prediction and Filtering With Linear Algebra
+   34. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   34. Knowing the Forecasts of Others
+   35. Knowing the Forecasts of Others
   </a>
  </li>
 </ul>
@@ -3129,27 +3134,27 @@ Value of primal solution:  825.8167029184157
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   35. Asset Pricing II: The Lucas Asset Pricing Model
+   36. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   36. Elementary Asset Pricing Theory
+   37. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   37. Two Modifications of Mean-Variance Portfolio Theory
+   38. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   38. Irrelevance of Capital Structures with Complete Markets
+   39. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   39. Equilibrium Capital Structures with Incomplete Markets
+   40. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -3161,57 +3166,57 @@ Value of primal solution:  825.8167029184157
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   40. Optimal Unemployment Insurance
+   41. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   41. Stackelberg Plans
+   42. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   42. Machine Learning a Ramsey Plan
+   43. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   43. Time Inconsistency of Ramsey Plans
+   44. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   44. Sustainable Plans for a Calvo Model
+   45. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   45. Optimal Taxation with State-Contingent Debt
+   46. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   46. Optimal Taxation without State-Contingent Debt
+   47. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   47. Fluctuating Interest Rates Deliver Fiscal Insurance
+   48. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   48. Fiscal Risk and Government Debt
+   49. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   49. Competitive Equilibria of a Model of Chang
+   50. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   50. Credible Government Policies in a Model of Chang
+   51. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -3223,17 +3228,17 @@ Value of primal solution:  825.8167029184157
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   51. Troubleshooting
+   52. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   52. References
+   53. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   53. Execution Statistics
+   54. Execution Statistics
   </a>
  </li>
 </ul>
