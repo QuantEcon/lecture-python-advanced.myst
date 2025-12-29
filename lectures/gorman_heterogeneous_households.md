@@ -1634,11 +1634,12 @@ def build_gorman_extended(
     Ud = sum(Ud_per_house)
 
     # Ub_per_house: bliss loading
-    # b_{jt} = b_bar + xi_{j,t}
+    # b_{jt} = b_bar_j + xi_{j,t}
+    b_bars = np.asarray(b_bar).reshape(-1)
     Ub_per_house = []
     for j in range(n):
         row = np.zeros((1, nz))
-        row[0, 0] = b_bar                    # constant bliss
+        row[0, 0] = b_bars[j]                # constant bliss (household-specific)
         row[0, 3 + n_idio + j] = 1.0         # loading on xi_j
         Ub_per_house.append(row)
 
@@ -1704,11 +1705,14 @@ n_absorb = 50
 # Poorer households face larger, more persistent idiosyncratic shocks
 σ_idio_min, σ_idio_max = 0.2, 5.0
 σs = σ_idio_min + (σ_idio_max - σ_idio_min) * (poorness ** 2.0)
-ρ_idio_min, ρ_idio_max = 0.0, 0.98
+ρ_idio_min, ρ_idio_max = 0.0, 0.94
 ρ_idio = ρ_idio_min + (ρ_idio_max - ρ_idio_min) * (poorness[n_absorb:] ** 1.0)
 
+# Bliss points scale with endowment so high-α households want more consumption
+b_bar_base = 5.0
+b_bars = b_bar_base * (αs / αs.mean())
+
 # Preference shocks are muted
-b_bar = 5.0
 γs_pref = np.zeros(N)
 ρ_pref = 0.0
 
@@ -1716,7 +1720,7 @@ A22, C2, Ub, Ud, Ub_list, Ud_list, x0 = build_gorman_extended(
     n=N,
     rho1=ρ1, rho2=ρ2, sigma_a=σ_a,
     alphas=αs, phis=φs, sigmas=σs,
-    b_bar=b_bar, gammas=γs_pref,
+    b_bar=b_bars, gammas=γs_pref,
     rho_idio=ρ_idio, rho_pref=ρ_pref,
     n_absorb=n_absorb,
 )
@@ -2069,13 +2073,21 @@ Once we have the redistributed Pareto weights, we can compute the new household 
 The function below computes household consumption and income under given Pareto weights
 
 ```{code-cell} ipython3
-def allocation_from_weights(paths, econ, U_b_list, weights, γ_1, Λ, h0i=None):
+def allocation_from_weights(paths, econ, U_b_list, weights, γ_1, Λ, h0i=None,
+                            weights_for_chi=None):
     """
-    Compute household consumption and income under given Pareto weights.
+    Compute household consumption and income under given Pareto weights 
+    while holding preference deviations fixed.
     """
 
     weights = np.asarray(weights).reshape(-1)
     N = len(weights)
+
+    # Use original weights for χ if not specified
+    if weights_for_chi is None:
+        weights_for_chi = weights
+    else:
+        weights_for_chi = np.asarray(weights_for_chi).reshape(-1)
 
     # Extract aggregate paths
     x_path = paths["x_path"]
@@ -2111,7 +2123,8 @@ def allocation_from_weights(paths, econ, U_b_list, weights, γ_1, Λ, h0i=None):
     for j in range(N):
         U_bj = np.asarray(U_b_list[j], dtype=float)
         b_agg = econ.Sb @ x_path
-        b_tilde = U_bj @ z_path - weights[j] * b_agg
+        # Use weights_for_chi for preference deviation
+        b_tilde = U_bj @ z_path - weights_for_chi[j] * b_agg
 
         η = np.zeros((n_h, T + 1))
         η[:, 0] = np.asarray(h0i).reshape(-1)
@@ -2165,8 +2178,12 @@ h0i_alloc = np.array([[0.0]])
 
 pre = allocation_from_weights(paths, econ, 
                 Ub_list, μ_values, γ_1, Λ, h0i_alloc)
-post = allocation_from_weights(paths, econ, 
-                Ub_list, λ_star, γ_1, Λ, h0i_alloc)
+
+# For post-redistribution, use λ* for consumption shares but μ for χ
+# (preferences don't change with taxation, only the proportional share)
+post = allocation_from_weights(paths, econ,
+                Ub_list, λ_star, γ_1, Λ, h0i_alloc,
+                weights_for_chi=μ_values)
 
 c_pre = pre["c"][:, t0:]
 y_pre = pre["y_net"][:, t0:]
