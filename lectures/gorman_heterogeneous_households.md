@@ -29,14 +29,14 @@ kernelspec:
 
 {cite:t}`gorman1953community` described a class of models with preferences having the useful property that there exists a "representative household" in the sense that competitive equilibrium allocations can be computed in the following way:
 
-* take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single hypothetical "representative household"
-* collect the endowments of all households and give them to the representative household
+* take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single "representative household"
+* assign the endowments of all households to the representative household
 * construct a competitive equilibrium allocation and price system for the representative agent economy
 * at the  competitive equilibrium price system, compute the wealth -- i.e., the present value -- of each household's initial endowment 
 * find a consumption plan for each household that maximizes its utility functional subject to the wealth that you computed in the previous step
 
 
-This procedure allows us to compute the competitive equilibrium price system  for our heterogeneous household economy *prior* to computing the
+This procedure allows us to compute the competitive equilibrium price system  for the heterogeneous household economy *prior* to computing the
 competitive equilibrium allocation.  
 
 That substantially simplifies calculating a competitive equilibrium.
@@ -46,7 +46,7 @@ In general, computing a competitive equilibrium requires solving for the price s
 ```
 
 
-Chapter 12 of {cite:t}`HansenSargent2013` described how to adapt  the preference specifications of {cite:t}`gorman1953community`
+Chapter 12 of {cite:t}`HansenSargent2013` described how to adapt preference specifications of {cite:t}`gorman1953community`
 to a linear-quadratic class of environments.
 
 
@@ -300,7 +300,7 @@ This is exactly the form we will see in {eq}`eq:sharing_rule` below, except that
 
 In the dynamic setting, we set the utility index $u^j$ equal to household $j$'s time-zero marginal utility of wealth $\mu_{0j}^w$, the Lagrange multiplier on the intertemporal budget constraint.
 
-The ratio $\mu_{0j}^w / \mu_{0a}^w$ (where $\mu_{0a}^w = \sum_j \mu_{0j}^w$) then serves as the time-invariant Gorman weight that determines household $j$'s share of aggregate consumption in excess of baseline.
+The ratio $\mu_{0j}^w / \mu_{0a}^w$ (where $\mu_{0a}^w = \sum_j \mu_{0j}^w$) then serves as the time-invariant Pareto weight that determines household $j$'s share of aggregate consumption in excess of baseline.
 
 
 
@@ -518,7 +518,7 @@ $$
 
 so that $\sum_j \mu_j = 1$. 
 
-This is household $j$'s **Gorman weight**.
+This is household $j$'s **Pareto weight**.
 
 The allocation rule for consumption has the form
 
@@ -660,9 +660,9 @@ When preferences include durables or habits ($\Lambda \neq 0$), the deviation co
 
 The code solves this as a linear-quadratic control problem using a scaling trick: multiplying the transition matrices by $\sqrt{\beta}$ converts the discounted problem into an undiscounted one that can be solved with a standard discrete algebraic Riccati equation.
 
-#### Step 2: compute each Gorman weight
+#### Step 2: compute each Pareto weight
 
-We compute the Gorman weight $\mu_j$ using household $j$'s budget constraint.
+We compute the Pareto weight $\mu_j$ from household $j$'s budget constraint.
 
 We compute five present values:
 
@@ -758,7 +758,7 @@ def heter(
     tol=1e-15,
 ):
     """
-    Compute household i selection matrices, the Gorman weight μ_i,
+    Compute household i selection matrices, the Pareto weight μ_i,
     and valuation objects.
     """
     # Dimensions
@@ -857,7 +857,7 @@ def heter(
         np.asarray(Δ_k).T @ M_k +
         np.asarray(Γ).T @ M_d) @ x0).squeeze())
 
-    ## Compute the Gorman weight
+    ## Compute the Pareto weight
     μ = float(((W_k + W_d - W_c2) / (W_c1 - W_g)).squeeze())
 
     # Household selection matrices on augmented state X_t = [h^i_{t-1}, x_t]
@@ -1145,7 +1145,7 @@ def compute_household_paths(
     k_hat = np.zeros((N, T))
     a_total = np.zeros((N, T))
 
-    # For each household, compute Gorman weight and paths
+    # For each household, compute Pareto weight and paths
     for j in range(N):
         U_bj = np.asarray(U_b_list[j], dtype=float)
         U_dj = np.asarray(U_d_list[j], dtype=float)
@@ -1221,7 +1221,7 @@ def compute_household_paths(
     μ_sum = np.sum(μ)
     if abs(μ_sum - 1.0) > 1e-6:
         import warnings
-        warnings.warn(f"Gorman weights μ sum to {μ_sum:.6f}, not 1.0. "
+        warnings.warn(f"Pareto weights μ sum to {μ_sum:.6f}, not 1.0. "
                       "This may indicate calibration issues.")
 
     return {
@@ -1957,7 +1957,7 @@ There are various tax-and-transfer   schemes that would deliver such efficient r
 
 ### Redistribution via Pareto weights
 
-The sharing rule {eq}`eq:sharing_rule` can be written as $c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t)$, where $\mu_j$ is household $j$'s Gorman weight.
+The sharing rule {eq}`eq:sharing_rule` can be written as $c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t)$, where $\mu_j$ is household $j$'s Pareto weight.
 
 Define the Pareto weight $\lambda_j := \mu_j$, with $\sum_{j=1}^J \lambda_j = 1$.
 
