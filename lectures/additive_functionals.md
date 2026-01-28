@@ -1020,7 +1020,7 @@ $$
 \mathrm{Kurt}(\widetilde M_t) = e^{4a_t} + 2e^{3a_t} + 3e^{2a_t} - 3.
 $$
 
-(Here, [excess kurtosis](https://en.wikipedia.org/wiki/Kurtosis) is obtained by subtracting 3)
+(Here, [excess kurtosis](https://en.wikipedia.org/wiki/Kurtosis) is obtained by subtracting 3 from kurtosis)
 
 These formulas show that everything depends on $a_t = t(H \cdot H)$.
 
@@ -1048,7 +1048,7 @@ def log10_var_skew_kurt(H, t):
     return np.log10(var), np.log10(skew), np.log10(kurt)
 ```
 
-Let's illustrate the growth of raw moments on a log scale for $H = 2.0$
+Let's illustrate the growth of $k$th-order raw moments on a log scale for $H = 2.0$
 
 ```{code-cell} ipython3
 H_example = 2.0
