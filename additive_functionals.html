@@ -200,11 +200,12 @@
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#more-about-the-multiplicative-martingale">32.5. More about the multiplicative martingale</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-multiplicative-martingale-again">32.5.1. Simulating a multiplicative martingale again</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-paths">32.5.2. Sample paths</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#moments-skewness-and-kurtosis">32.5.1. Moments, skewness, and kurtosis</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-a-multiplicative-martingale-again">32.5.2. Simulating a multiplicative martingale again</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiplicative-martingale-as-likelihood-ratio-process">32.5.3. Multiplicative martingale as likelihood ratio process</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">32.6. Exercises</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -252,7 +253,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Aug 31, 2025
+                            Last changed: Jan 28, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -263,10 +264,19 @@
                             
                             <li class="changelog-entry">
                                 
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/98e52928" class="changelog-hash">98e52928</a>
+                                
+                                <span class="changelog-author">Humphrey Yang</span>
+                                <span class="changelog-time">1 hour ago</span>
+                                <span class="changelog-message">[additive_functionals] Add more discussions on the peculiar property (#306)</span>
+                            </li>
+                            
+                            <li class="changelog-entry">
+                                
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">3 months ago</span>
+                                <span class="changelog-time">4 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -284,7 +294,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/0ad4aeb2" class="changelog-hash">0ad4aeb2</a>
                                 
                                 <span class="changelog-author">Smit Lunagariya</span>
-                                <span class="changelog-time">1 year ago</span>
+                                <span class="changelog-time">2 years ago</span>
                                 <span class="changelog-message">Remove unused imports (#142)</span>
                             </li>
                             
@@ -329,7 +339,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/90c1f23f" class="changelog-hash">90c1f23f</a>
                                 
                                 <span class="changelog-author">thomassargent30</span>
-                                <span class="changelog-time">3 years ago</span>
+                                <span class="changelog-time">4 years ago</span>
                                 <span class="changelog-message">Tom's Jan 27 corrections to additive functionals lecture</span>
                             </li>
                             
@@ -338,17 +348,8 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/d8916fe3" class="changelog-hash">d8916fe3</a>
                                 
                                 <span class="changelog-author">thomassargent30</span>
-                                <span class="changelog-time">3 years ago</span>
-                                <span class="changelog-message">Tom's edits Jan 26 of multiplicative functional lecture</span>
-                            </li>
-                            
-                            <li class="changelog-entry">
-                                
-                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/7d072c7d" class="changelog-hash">7d072c7d</a>
-                                
-                                <span class="changelog-author">mmcky</span>
                                 <span class="changelog-time">4 years ago</span>
-                                <span class="changelog-message">Fix scroll_output and collapse-20 tags for file imports (#72)</span>
+                                <span class="changelog-message">Tom's edits Jan 26 of multiplicative functional lecture</span>
                             </li>
                             
                         </ul>
@@ -382,7 +383,8 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.10.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting quantecon
+  Downloading quantecon-0.10.1-py3-none-any.whl.metadata (5.3 kB)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -394,6 +396,9 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/env
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2.5.0)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2025.11.12)
 Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from sympy-&gt;quantecon) (1.3.0)
+Downloading quantecon-0.10.1-py3-none-any.whl (325 kB)
+Installing collected packages: quantecon
+Successfully installed quantecon-0.10.1
 </pre></div>
 </div>
 </div>
@@ -565,9 +570,21 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class transforms an additive (multiplicative)</span>
 <span class="sd">    functional into a QuantEcon linear state space system.</span>
+<span class="sd">    Handles both matrix and scalar inputs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">F</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ν</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Handle scalar inputs by converting to arrays</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scalar_case</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">scalar_case</span><span class="p">:</span>
+            <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+            <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+            <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">F</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ν</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">isscalar</span><span class="p">(</span><span class="n">ν</span><span class="p">):</span>
+                <span class="n">ν</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ν</span><span class="p">)</span>
+
         <span class="c1"># Unpack required elements</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">nx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">nk</span> <span class="o">=</span> <span class="n">B</span><span class="o">.</span><span class="n">shape</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span>
@@ -915,12 +932,14 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
                                                 <span class="n">sbounds_mult</span><span class="p">[</span><span class="n">LI</span><span class="p">:</span><span class="n">UI</span><span class="p">,:],</span>
                                                 <span class="mi">1</span><span class="p">,</span>
                                                 <span class="n">show_trend</span><span class="o">=</span><span class="n">show_trend</span><span class="p">))</span>
-        <span class="n">mult_figs</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Multiplicative decomposition of </span><span class="se">\</span>
-<span class="s1">                                    $y_</span><span class="si">{</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">mult_figs</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Multiplicative decomposition of $y_</span><span class="si">{</span><span class="n">ii</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">mult_figs</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">plot_martingale_paths</span><span class="p">(</span><span class="n">amf</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">mpath</span><span class="p">,</span> <span class="n">mbounds</span><span class="p">,</span> <span class="n">horline</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">show_trend</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_martingale_paths</span><span class="p">(</span><span class="n">amf</span><span class="p">,</span> <span class="n">T</span><span class="p">,</span> <span class="n">mpath</span><span class="p">,</span> <span class="n">mbounds</span><span class="p">,</span> 
+            <span class="n">horline</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">show_trend</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
     <span class="c1"># Allocate space</span>
     <span class="n">trange</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
 
@@ -1033,7 +1052,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1a1a6ac3564de4a8eed2759201d35be45342c0b5bd54be5c3f351f1045bd95b4.png" src="_images/1a1a6ac3564de4a8eed2759201d35be45342c0b5bd54be5c3f351f1045bd95b4.png" />
+<img alt="_images/9f0ff6a17f663405f070fc0581068eeb76605b7a1f094e59fb9a4674c2da59d9.png" src="_images/9f0ff6a17f663405f070fc0581068eeb76605b7a1f094e59fb9a4674c2da59d9.png" />
 </div>
 </div>
 <p>Notice the irregular but persistent growth in <span class="math notranslate nohighlight">\(y_t\)</span>.</p>
@@ -1177,7 +1196,7 @@ you will generate (modulo randomness) the plot</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a94d2369d7564638ed48fcc5622b8aae53b6dd5013cf9eee1402453b9f7b4df1.png" src="_images/a94d2369d7564638ed48fcc5622b8aae53b6dd5013cf9eee1402453b9f7b4df1.png" />
+<img alt="_images/eb82cf798748f1fb629bd2136b73674f0fe07f555874d1769af6f2cdc627e377.png" src="_images/eb82cf798748f1fb629bd2136b73674f0fe07f555874d1769af6f2cdc627e377.png" />
 </div>
 </div>
 <p>When we plot multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plot the population 95% probability coverage sets computed using the LinearStateSpace class.</p>
@@ -1228,7 +1247,7 @@ obtain the graph in the next cell.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f9b2341f8599a132564795f73810fba9affbe485be798c52aa85a63219848ca5.png" src="_images/f9b2341f8599a132564795f73810fba9affbe485be798c52aa85a63219848ca5.png" />
+<img alt="_images/c7ba1790ebe8199743a5c6d0722c9b0d08bb2c9b27d933328fa58aa0d3195706.png" src="_images/c7ba1790ebe8199743a5c6d0722c9b0d08bb2c9b27d933328fa58aa0d3195706.png" />
 </div>
 </div>
 <p>As before, when we plotted multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plotted population 95% confidence bands computed using the LinearStateSpace class.</p>
@@ -1281,127 +1300,127 @@ more detail.</p>
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(H =  [F + D(I-A)^{-1} B]\)</span>.</p>
 <p>It follows that <span class="math notranslate nohighlight">\(\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2}, t H \cdot H )\)</span> and that consequently <span class="math notranslate nohighlight">\({\widetilde M}_t\)</span> is log normal.</p>
-<section id="simulating-a-multiplicative-martingale-again">
-<h3><span class="section-number">32.5.1. </span>Simulating a multiplicative martingale again<a class="headerlink" href="#simulating-a-multiplicative-martingale-again" title="Link to this heading">#</a></h3>
-<p>Next, we want a program to simulate the likelihood ratio process <span class="math notranslate nohighlight">\(\{ \tilde{M}_t \}_{t=0}^\infty\)</span>.</p>
-<p>In particular, we want to simulate 5000 sample paths of length <span class="math notranslate nohighlight">\(T\)</span> for the case in which <span class="math notranslate nohighlight">\(x\)</span> is a scalar and
-<span class="math notranslate nohighlight">\([A, B, D, F] = [0.8, 0.001, 1.0, 0.01]\)</span> and <span class="math notranslate nohighlight">\(\nu = 0.005\)</span>.</p>
-<p>After accomplishing this, we want to display and study histograms of <span class="math notranslate nohighlight">\(\tilde{M}_T^i\)</span> for various values of  <span class="math notranslate nohighlight">\(T\)</span>.</p>
-<p>Here is code that accomplishes these tasks.</p>
-</section>
-<section id="sample-paths">
-<h3><span class="section-number">32.5.2. </span>Sample paths<a class="headerlink" href="#sample-paths" title="Link to this heading">#</a></h3>
-<p>Let’s write a program to simulate sample paths of <span class="math notranslate nohighlight">\(\{ x_t, y_{t} \}_{t=0}^{\infty}\)</span>.</p>
-<p>We’ll do this by formulating the additive functional as a linear state space model and putting the <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py">LinearStateSpace</a> class to work.</p>
+<section id="moments-skewness-and-kurtosis">
+<span id="mult-mart-moment"></span><h3><span class="section-number">32.5.1. </span>Moments, skewness, and kurtosis<a class="headerlink" href="#moments-skewness-and-kurtosis" title="Link to this heading">#</a></h3>
+<p>Because <span class="math notranslate nohighlight">\(\log \widetilde M_t\)</span> is Gaussian, the moments of <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> have simple closed forms.</p>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+a_t := t (H \cdot H) = \mathrm{Var}(\log \widetilde M_t).
+\]</div>
+<p>Then for any <span class="math notranslate nohighlight">\(k \geq 1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+E\left[\widetilde M_t^k\right] = \exp\left(\frac{1}{2} k(k-1) a_t\right).
+\]</div>
+<p>In particular, <span class="math notranslate nohighlight">\(E[\widetilde M_t]=1\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>, while higher-order moments grow rapidly in <span class="math notranslate nohighlight">\(t\)</span> whenever <span class="math notranslate nohighlight">\(H \neq 0\)</span>.</p>
+<p>Standard summary statistics can be written in terms of <span class="math notranslate nohighlight">\(a_t\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Var}(\widetilde M_t) = e^{a_t} - 1,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Skew}(\widetilde M_t) = (e^{a_t} + 2)\sqrt{e^{a_t}-1},
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{Kurt}(\widetilde M_t) = e^{4a_t} + 2e^{3a_t} + 3e^{2a_t} - 3.
+\]</div>
+<p>(Here, <a class="reference external" href="https://en.wikipedia.org/wiki/Kurtosis">excess kurtosis</a> is obtained by subtracting 3 from kurtosis)</p>
+<p>These formulas show that everything depends on <span class="math notranslate nohighlight">\(a_t = t(H \cdot H)\)</span>.</p>
+<p>To illustrate these formulas, let’s plot the growth of a few moments and summary statistics over time.</p>
+<p>The following functions compute <span class="math notranslate nohighlight">\(\log_{10} E[\widetilde M_t^k]\)</span> and <span class="math notranslate nohighlight">\(\log_{10} \mathrm{Var}(\widetilde M_t)\)</span>, <span class="math notranslate nohighlight">\(\log_{10} \mathrm{Skew}(\widetilde M_t)\)</span>, and <span class="math notranslate nohighlight">\(\log_{10} \mathrm{Kurt}(\widetilde M_t)\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">AMF_LSS_VAR</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class is written to transform a scalar additive functional</span>
-<span class="sd">    into a linear state space system.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">F</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">ν</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
-        <span class="c1"># Unpack required elements</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ν</span> <span class="o">=</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">ν</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">squared_norm</span><span class="p">(</span><span class="n">H</span><span class="p">):</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">H</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">H</span> <span class="o">@</span> <span class="n">H</span>
 
-        <span class="c1"># Create space for additive decomposition</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">add_decomp</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">mult_decomp</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log10_raw_moment</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">squared_norm</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
+    <span class="n">moment</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">a</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">moment</span><span class="p">)</span>
 
-        <span class="c1"># Construct BIG state space representation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lss</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">construct_ss</span><span class="p">()</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log10_var_skew_kurt</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">squared_norm</span><span class="p">(</span><span class="n">H</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">construct_ss</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This creates the state space representation that can be passed</span>
-<span class="sd">        into the quantecon LSS class.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># Pull out useful info</span>
-        <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">ν</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ν</span>
-        <span class="n">nx</span><span class="p">,</span> <span class="n">nk</span><span class="p">,</span> <span class="n">nm</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_decomp</span><span class="p">:</span>
-            <span class="n">ν</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_decomp</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">ν</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">additive_decomp</span><span class="p">()</span>
+    <span class="n">var</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="n">skew</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+    <span class="n">kurt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">3</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span>
 
-        <span class="c1"># Build A matrix for LSS</span>
-        <span class="c1"># Order of states is: [1, t, xt, yt, mt]</span>
-        <span class="n">A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>       <span class="c1"># Transition for 1</span>
-        <span class="n">A2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>       <span class="c1"># Transition for t</span>
-        <span class="n">A3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>       <span class="c1"># Transition for x_{t+1}</span>
-        <span class="n">A4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">ν</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>       <span class="c1"># Transition for y_{t+1}</span>
-        <span class="n">A5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>       <span class="c1"># Transition for m_{t+1}</span>
-        <span class="n">Abar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">A1</span><span class="p">,</span> <span class="n">A2</span><span class="p">,</span> <span class="n">A3</span><span class="p">,</span> <span class="n">A4</span><span class="p">,</span> <span class="n">A5</span><span class="p">])</span>
-
-        <span class="c1"># Build B matrix for LSS</span>
-        <span class="n">Bbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">F</span><span class="p">,</span> <span class="n">H</span><span class="p">])</span>
-
-        <span class="c1"># Build G matrix for LSS</span>
-        <span class="c1"># Order of observation is: [xt, yt, mt, st, tt]</span>
-        <span class="n">G1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>            <span class="c1"># Selector for x_{t}</span>
-        <span class="n">G2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>            <span class="c1"># Selector for y_{t}</span>
-        <span class="n">G3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>            <span class="c1"># Selector for martingale</span>
-        <span class="n">G4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">g</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>           <span class="c1"># Selector for stationary</span>
-        <span class="n">G5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">ν</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>            <span class="c1"># Selector for trend</span>
-        <span class="n">Gbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">G1</span><span class="p">,</span> <span class="n">G2</span><span class="p">,</span> <span class="n">G3</span><span class="p">,</span> <span class="n">G4</span><span class="p">,</span> <span class="n">G5</span><span class="p">])</span>
-
-        <span class="c1"># Build H matrix for LSS</span>
-        <span class="n">Hbar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
-
-        <span class="c1"># Build LSS type</span>
-        <span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
-        <span class="n">S0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-        <span class="n">lss</span> <span class="o">=</span> <span class="n">qe</span><span class="o">.</span><span class="n">LinearStateSpace</span><span class="p">(</span><span class="n">Abar</span><span class="p">,</span> <span class="n">Bbar</span><span class="p">,</span> <span class="n">Gbar</span><span class="p">,</span> <span class="n">Hbar</span><span class="p">,</span>
-                                      <span class="n">mu_0</span><span class="o">=</span><span class="n">x0</span><span class="p">,</span> <span class="n">Sigma_0</span><span class="o">=</span><span class="n">S0</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">lss</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">additive_decomp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return values for the martingale decomposition (Proposition 4.3.3.)</span>
-<span class="sd">           - ν     : unconditional mean difference in Y</span>
-<span class="sd">           - H     : coefficient for the (linear) martingale component (kappa_a)</span>
-<span class="sd">           - g     : coefficient for the stationary component g(x)</span>
-<span class="sd">           - Y_0   : it should be the function of X_0 (for now set it to 0.0)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">A_res</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">)</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">*</span> <span class="n">A_res</span>
-        <span class="n">H</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span> <span class="o">*</span> <span class="n">A_res</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ν</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">g</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">multiplicative_decomp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Return values for the multiplicative decomposition (Example 5.4.4.)</span>
-<span class="sd">            - ν_tilde  : eigenvalue</span>
-<span class="sd">            - H        : vector for the Jensen term</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ν</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">additive_decomp</span><span class="p">()</span>
-        <span class="n">ν_tilde</span> <span class="o">=</span> <span class="n">ν</span> <span class="o">+</span> <span class="p">(</span><span class="mf">.5</span><span class="p">)</span> <span class="o">*</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span>
-
-        <span class="k">return</span> <span class="n">ν_tilde</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">g</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">loglikelihood_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">A</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">D</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span>
-        <span class="n">T</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">size</span>
-        <span class="n">FF</span> <span class="o">=</span> <span class="n">F</span><span class="o">**</span><span class="mi">2</span>
-        <span class="n">FFinv</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">FF</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">y</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">D</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">obs</span> <span class="o">=</span> <span class="n">temp</span> <span class="o">*</span> <span class="n">FFinv</span> <span class="o">*</span> <span class="n">temp</span>
-        <span class="n">obssum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
-        <span class="n">scalar</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">FF</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">obssum</span> <span class="o">+</span> <span class="n">scalar</span><span class="p">)</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">loglikelihood</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="n">llh</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loglikelihood_path</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">llh</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">var</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">skew</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">kurt</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>The heavy lifting is done inside the <code class="docutils literal notranslate"><span class="pre">AMF_LSS_VAR</span></code> class.</p>
+<p>Let’s illustrate the growth of <span class="math notranslate nohighlight">\(k\)</span>th-order raw moments on a log scale for <span class="math notranslate nohighlight">\(H = 2.0\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H_example</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">t_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="n">ks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ks</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span>
+            <span class="p">[</span><span class="n">log10_raw_moment</span><span class="p">(</span><span class="n">H_example</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_grid</span><span class="p">],</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log_</span><span class="si">{10}</span><span class="s2"> E[\widetilde M_t^k]$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9911eec13a75d480c0c1aba2e1098bfc9498022f86c07c9ec589247d320c1842.png" src="_images/9911eec13a75d480c0c1aba2e1098bfc9498022f86c07c9ec589247d320c1842.png" />
+</div>
+</div>
+<p>Next we plot the growth of variance, skewness, and kurtosis</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">log10_var</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">log10_skew</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">log10_kurt</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_grid</span><span class="p">:</span>
+    <span class="n">lv</span><span class="p">,</span> <span class="n">ls</span><span class="p">,</span> <span class="n">lk</span> <span class="o">=</span> <span class="n">log10_var_skew_kurt</span><span class="p">(</span><span class="n">H_example</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">log10_var</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lv</span><span class="p">)</span>
+    <span class="n">log10_skew</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+    <span class="n">log10_kurt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lk</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="n">log10_var</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> 
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\log_</span><span class="si">{10}</span><span class="s2">\,\mathrm</span><span class="si">{Var}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="n">log10_skew</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> 
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\log_</span><span class="si">{10}</span><span class="s2">\,\mathrm</span><span class="si">{Skew}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="n">log10_kurt</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> 
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\log_</span><span class="si">{10}</span><span class="s2">\,\mathrm</span><span class="si">{Kurt}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8875fe47f5a9887b1af9b8703af817aa6c23ed55595a04389e7f43c27bf0e261.png" src="_images/8875fe47f5a9887b1af9b8703af817aa6c23ed55595a04389e7f43c27bf0e261.png" />
+</div>
+</div>
+<p>These plots help explain the <em>peculiar property</em> of the multiplicative martingale.</p>
+<p>The rapid growth of variance, skewness, and kurtosis reveals that the distribution of <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> becomes increasingly right-skewed over time while <span class="math notranslate nohighlight">\(E[\widetilde M_t] = 1\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>This means that most probability density concentrates near zero, while a long right tail preserves the unit mean.</p>
+</section>
+<section id="simulating-a-multiplicative-martingale-again">
+<h3><span class="section-number">32.5.2. </span>Simulating a multiplicative martingale again<a class="headerlink" href="#simulating-a-multiplicative-martingale-again" title="Link to this heading">#</a></h3>
+<p>Next, we want a program to simulate the likelihood ratio process <span class="math notranslate nohighlight">\(\{ \tilde{M}_t \}_{t=0}^\infty\)</span>.</p>
+<p>In particular, we want to simulate 5000 sample paths of length <span class="math notranslate nohighlight">\(T\)</span> for the case in which <span class="math notranslate nohighlight">\(x\)</span> is a scalar and
+<span class="math notranslate nohighlight">\([A, B, D, F] = [0.8, 0.001, 1.0, 0.01]\)</span> and <span class="math notranslate nohighlight">\(\nu = 0.005\)</span>.</p>
+<p>After accomplishing this, we want to display and study histograms of <span class="math notranslate nohighlight">\(\tilde{M}_T^i\)</span> for various values of  <span class="math notranslate nohighlight">\(T\)</span>.</p>
+<p>Let’s first write a program to simulate sample paths of <span class="math notranslate nohighlight">\(\{ x_t, y_{t} \}_{t=0}^{\infty}\)</span>.</p>
+<p>We’ll do this by formulating the additive functional as a linear state space model and putting the <a class="reference external" href="https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py">LinearStateSpace</a> class to work via our <code class="docutils literal notranslate"><span class="pre">AMF_LSS_VAR</span></code> class <a class="reference internal" href="#amf-lss"><span class="std std-ref">defined above</span></a>.</p>
 <p>The following code adds some simple functions that make it straightforward to generate sample paths from an instance of <code class="docutils literal notranslate"><span class="pre">AMF_LSS_VAR</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1519,7 +1538,7 @@ keyword argument <code class="docutils literal notranslate"><span class="pre">sc
 
     <span class="c1"># Pull out the multiplicative decomposition</span>
     <span class="n">νtilde</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">amf</span><span class="o">.</span><span class="n">multiplicative_decomp</span><span class="p">()</span>
-    <span class="n">H2</span> <span class="o">=</span> <span class="n">H</span><span class="o">*</span><span class="n">H</span>
+    <span class="n">H2</span> <span class="o">=</span> <span class="p">(</span><span class="n">H</span> <span class="o">@</span> <span class="n">H</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> 
 
     <span class="c1"># The distribution</span>
     <span class="n">mdist</span> <span class="o">=</span> <span class="n">lognorm</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">H2</span><span class="p">),</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">*</span><span class="n">H2</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
@@ -1533,7 +1552,7 @@ keyword argument <code class="docutils literal notranslate"><span class="pre">sc
 
     <span class="c1"># Pull out the multiplicative decomposition</span>
     <span class="n">νtilde</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">amf</span><span class="o">.</span><span class="n">multiplicative_decomp</span><span class="p">()</span>
-    <span class="n">H2</span> <span class="o">=</span> <span class="n">H</span><span class="o">*</span><span class="n">H</span>
+    <span class="n">H2</span> <span class="o">=</span> <span class="p">(</span><span class="n">H</span> <span class="o">@</span> <span class="n">H</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> 
 
     <span class="c1"># The distribution</span>
     <span class="n">lmdist</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="o">*</span><span class="n">H2</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t</span><span class="o">*</span><span class="n">H2</span><span class="p">))</span>
@@ -1567,7 +1586,7 @@ keyword argument <code class="docutils literal notranslate"><span class="pre">sc
 <img alt="_images/2c2bc03e40e2a4c05bfc89f7557eb72ef061f85b7f34c5d5361da4becec6df92.png" src="_images/2c2bc03e40e2a4c05bfc89f7557eb72ef061f85b7f34c5d5361da4becec6df92.png" />
 </div>
 </div>
-<p>These probability density functions help us understand mechanics underlying the  <strong>peculiar property</strong> of our multiplicative martingale</p>
+<p>These probability density functions again help us understand mechanics underlying the  <strong>peculiar property</strong> of our multiplicative martingale</p>
 <ul class="simple">
 <li><p>As <span class="math notranslate nohighlight">\(T\)</span> grows, most of the probability mass shifts leftward toward zero.</p></li>
 <li><p>For example, note that most  mass is near <span class="math notranslate nohighlight">\(1\)</span> for <span class="math notranslate nohighlight">\(T =10\)</span> or <span class="math notranslate nohighlight">\(T = 100\)</span> but
@@ -1585,6 +1604,182 @@ and <strong>likelihood ratio processes</strong>.</p>
 <p>Likelihood ratio processes exhibit the peculiar property that naturally also appears
 <a class="reference external" href="https://python.quantecon.org/likelihood_ratio_process.html">here</a>.</p>
 </section>
+</section>
+<section id="exercises">
+<h2><span class="section-number">32.6. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="addfunc_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 32.1 </span></p>
+<section id="exercise-content">
+<p>Fix <span class="math notranslate nohighlight">\(H = 0.5\)</span> and consider the log-normal martingale <span class="math notranslate nohighlight">\(\widetilde M_t\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Using the formula for <span class="math notranslate nohighlight">\(E[\widetilde M_t^k]\)</span>, plot <span class="math notranslate nohighlight">\(\log_{10} E[\widetilde M_t^k]\)</span> against <span class="math notranslate nohighlight">\(t\)</span> for <span class="math notranslate nohighlight">\(k = 1,2,3,4\)</span> and <span class="math notranslate nohighlight">\(t = 1,\ldots,8\)</span>.</p></li>
+<li><p>Verify from your plot (and the formula) that <span class="math notranslate nohighlight">\(\log_{10} E[\widetilde M_t^k]\)</span> is linear in <span class="math notranslate nohighlight">\(t\)</span>, and compute its slope as a function of <span class="math notranslate nohighlight">\(k\)</span> and <span class="math notranslate nohighlight">\(H\)</span>.</p></li>
+</ol>
+</section>
+</div>
+<div class="solution dropdown admonition" id="additive_functionals-solution-1">
+
+<p class="admonition-title">Solution</p>
+<section id="solution-content">
+<p>Here is one solution using the <code class="docutils literal notranslate"><span class="pre">log10_raw_moment</span></code> function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">ks</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ks</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span>
+    <span class="p">[</span><span class="n">log10_raw_moment</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_grid</span><span class="p">],</span>
+    <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;$k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\log_</span><span class="si">{10}</span><span class="s2"> E[\widetilde M_t^k]$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">H2</span> <span class="o">=</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ks</span><span class="p">:</span>
+    <span class="n">slope</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="p">(</span><span class="n">k</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">H2</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">: slope = </span><span class="si">{</span><span class="n">slope</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/72608e94f558e19948e01a8f8ce9d30e57f696813be5f2ca1962b90ac90d9c2a.png" src="_images/72608e94f558e19948e01a8f8ce9d30e57f696813be5f2ca1962b90ac90d9c2a.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>k=1: slope = 0.0000
+k=2: slope = 0.1086
+k=3: slope = 0.3257
+k=4: slope = 0.6514
+</pre></div>
+</div>
+</div>
+</div>
+<p>When <span class="math notranslate nohighlight">\(k=1\)</span>, the slope is zero, reflecting <span class="math notranslate nohighlight">\(E[\widetilde M_t]=1\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
+</section>
+</div>
+<div class="exercise admonition" id="addfunc_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 32.2 </span></p>
+<section id="exercise-content">
+<p>For the same martingale <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> (take <span class="math notranslate nohighlight">\(H=0.5\)</span> as in the previous exercise),</p>
+<ol class="arabic simple">
+<li><p>Plot <span class="math notranslate nohighlight">\(\log_{10}\mathrm{Var}(\widetilde M_t)\)</span>, <span class="math notranslate nohighlight">\(\log_{10}\mathrm{Skew}(\widetilde M_t)\)</span>, and <span class="math notranslate nohighlight">\(\log_{10}\mathrm{Kurt}(\widetilde M_t)\)</span> for <span class="math notranslate nohighlight">\(t = 1,\ldots,8\)</span>.</p></li>
+<li><p>Plot <span class="math notranslate nohighlight">\(\log_{10}(\mathrm{Var}(\widetilde M_t)+1)\)</span> and explain why it is exactly linear in <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+</ol>
+</section>
+</div>
+<div class="solution dropdown admonition" id="additive_functionals-solution-3">
+
+<p class="admonition-title">Solution</p>
+<section id="solution-content">
+<p>Here is one solution using the <code class="docutils literal notranslate"><span class="pre">log10_var_skew_kurt</span></code> function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">log10_var</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">log10_skew</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">log10_kurt</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">log10_var_plus_1</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_grid</span><span class="p">:</span>
+    <span class="n">lv</span><span class="p">,</span> <span class="n">ls</span><span class="p">,</span> <span class="n">lk</span> <span class="o">=</span> <span class="n">log10_var_skew_kurt</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+    <span class="n">log10_var</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lv</span><span class="p">)</span>
+    <span class="n">log10_skew</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ls</span><span class="p">)</span>
+    <span class="n">log10_kurt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lk</span><span class="p">)</span>
+    <span class="n">log10_var_plus_1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">H</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="n">log10_var</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\log_</span><span class="si">{10}</span><span class="s2">\,\mathrm</span><span class="si">{Var}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="n">log10_skew</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\log_</span><span class="si">{10}</span><span class="s2">\,\mathrm</span><span class="si">{Skew}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="n">log10_kurt</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\log_</span><span class="si">{10}</span><span class="s2">\,\mathrm</span><span class="si">{Kurt}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="n">log10_var_plus_1</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\log_</span><span class="si">{10}</span><span class="s2">(\mathrm</span><span class="si">{Var}</span><span class="s2">+1)$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/64fc8e98eb2632b7fc0a576e7f7a70ab8c3b35055e27f8aa480b5056037fc769.png" src="_images/64fc8e98eb2632b7fc0a576e7f7a70ab8c3b35055e27f8aa480b5056037fc769.png" />
+</div>
+</div>
+<p>Since <span class="math notranslate nohighlight">\(\mathrm{Var}(\widetilde M_t) + 1 = e^{a_t}\)</span> and <span class="math notranslate nohighlight">\(a_t = t(H \cdot H)\)</span>, we have
+<span class="math notranslate nohighlight">\(\log_{10}(\mathrm{Var}(\widetilde M_t)+1) = a_t \log_{10}(e)\)</span>, which is linear in <span class="math notranslate nohighlight">\(t\)</span>.</p>
+</section>
+</div>
+<div class="exercise admonition" id="addfunc_ex3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 32.3 </span></p>
+<section id="exercise-content">
+<p>The formulas in <a class="reference internal" href="#mult-mart-moment"><span class="std std-ref">Moments, skewness, and kurtosis</span></a> depend on <span class="math notranslate nohighlight">\(H\)</span> only through <span class="math notranslate nohighlight">\(H \cdot H\)</span>.</p>
+<ol class="arabic simple">
+<li><p>Choose two different vectors <span class="math notranslate nohighlight">\(H_1\)</span> and <span class="math notranslate nohighlight">\(H_2\)</span> with the same value of <span class="math notranslate nohighlight">\(H \cdot H\)</span> (for example, <span class="math notranslate nohighlight">\(H_1 = 1\)</span> and <span class="math notranslate nohighlight">\(H_2=(0.6,0.8)\)</span>).</p></li>
+</ol>
+<p>Show that <span class="math notranslate nohighlight">\(\log_{10} E[\widetilde M_t^k]\)</span> agrees for all <span class="math notranslate nohighlight">\(t\)</span> and <span class="math notranslate nohighlight">\(k\)</span>.</p>
+<ol class="arabic simple" start="2">
+<li><p>Compare your results to a larger value, such as <span class="math notranslate nohighlight">\(H_3=(1,2,1.5)\)</span>, and comment on how quickly the higher-order moments grow.</p></li>
+</ol>
+</section>
+</div>
+<div class="solution dropdown admonition" id="additive_functionals-solution-5">
+
+<p class="admonition-title">Solution</p>
+<section id="solution-content">
+<p>Here is one solution using the <code class="docutils literal notranslate"><span class="pre">squared_norm</span></code> and <code class="docutils literal notranslate"><span class="pre">log10_raw_moment</span></code> functions</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H1</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">H2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
+<span class="n">H3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;H1.H1 =&quot;</span><span class="p">,</span> <span class="n">squared_norm</span><span class="p">(</span><span class="n">H1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;H2.H2 =&quot;</span><span class="p">,</span> <span class="n">squared_norm</span><span class="p">(</span><span class="n">H2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;H3.H3 =&quot;</span><span class="p">,</span> <span class="n">squared_norm</span><span class="p">(</span><span class="n">H3</span><span class="p">))</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="mi">4</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="p">[</span><span class="n">log10_raw_moment</span><span class="p">(</span><span class="n">H1</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_grid</span><span class="p">],</span>
+                        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$H_1=1$&quot;</span><span class="p">,</span>
+                        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="p">[</span><span class="n">log10_raw_moment</span><span class="p">(</span><span class="n">H2</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_grid</span><span class="p">],</span>
+                        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$H_2=(0.6,0.8)$&quot;</span><span class="p">,</span>
+                        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t_grid</span><span class="p">,</span> <span class="p">[</span><span class="n">log10_raw_moment</span><span class="p">(</span><span class="n">H3</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">t_grid</span><span class="p">],</span>
+                        <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$H_3=(1,2,1.5)$&quot;</span><span class="p">,</span>
+                        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">rf</span><span class="s2">&quot;$\log_</span><span class="se">{{</span><span class="s2">10</span><span class="se">}}</span><span class="s2"> E[\widetilde M_t^</span><span class="se">{{</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="se">}}</span><span class="s2">]$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>H1.H1 = 1.0
+H2.H2 = 1.0
+H3.H3 = 7.25
+</pre></div>
+</div>
+<img alt="_images/6b43212245275149f850cb7f3452a01e83ebf67b3aadce63a0ec129798ba772f.png" src="_images/6b43212245275149f850cb7f3452a01e83ebf67b3aadce63a0ec129798ba772f.png" />
+</div>
+</div>
+<p>The curves for <span class="math notranslate nohighlight">\(H_1\)</span> and <span class="math notranslate nohighlight">\(H_2\)</span> coincide because they have the same squared norm <span class="math notranslate nohighlight">\(H \cdot H\)</span>.</p>
+<p>This exercise shows that only the squared norm <span class="math notranslate nohighlight">\(H \cdot H\)</span> and <span class="math notranslate nohighlight">\(t\)</span> matters for the moments of <span class="math notranslate nohighlight">\(\widetilde M_t\)</span>.</p>
+</section>
+</div>
 </section>
 </section>
 

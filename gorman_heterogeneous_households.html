@@ -203,7 +203,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#household-allocations">22.3. Household allocations</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-household-allocations">22.3.1. Computing household allocations</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-compute-deviation-consumption">22.3.1.1. Step 1: compute deviation consumption</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-compute-each-gorman-weight">22.3.1.2. Step 2: compute each Gorman weight</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-compute-each-pareto-weight">22.3.1.2. Step 2: compute each Pareto weight</a></li>
 </ul>
 </li>
 </ul>
@@ -274,7 +274,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Dec 27, 2025
+                            Last changed: Jan 28, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -285,10 +285,28 @@
                             
                             <li class="changelog-entry">
                                 
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/dd1c4199" class="changelog-hash">dd1c4199</a>
+                                
+                                <span class="changelog-author">Humphrey Yang</span>
+                                <span class="changelog-time">8 hours ago</span>
+                                <span class="changelog-message">[gorman_heterogeneous_households] Update parameters to match the parameters used in paper (#303)</span>
+                            </li>
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/742f60ac" class="changelog-hash">742f60ac</a>
+                                
+                                <span class="changelog-author">thomassargent30</span>
+                                <span class="changelog-time">1 week ago</span>
+                                <span class="changelog-message">Tom's Jan 19 edits of Gorman lecture</span>
+                            </li>
+                            
+                            <li class="changelog-entry">
+                                
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/885ed679" class="changelog-hash">885ed679</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-time">1 month ago</span>
                                 <span class="changelog-message">[gorman_heterogeneous_households] New lecture on Gorman aggregation (#299)</span>
                             </li>
                             
@@ -314,20 +332,20 @@
 <h2><span class="section-number">22.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p><span id="id1">Gorman [<a class="reference internal" href="zreferences.html#id3" title="William M. Gorman. Community preference fields. Econometrica: Journal of the Econometric Society, 21(1):63–80, 1953.">1953</a>]</span> described a class of models with preferences having the useful property that there exists a “representative household” in the sense that competitive equilibrium allocations can be computed in the following way:</p>
 <ul class="simple">
-<li><p>take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single hypothetical “representative household”</p></li>
-<li><p>collect the endowments of all households and give them to the representative household</p></li>
+<li><p>take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single “representative household”</p></li>
+<li><p>assign the endowments of all households to the representative household</p></li>
 <li><p>construct a competitive equilibrium allocation and price system for the representative agent economy</p></li>
 <li><p>at the  competitive equilibrium price system, compute the wealth – i.e., the present value – of each household’s initial endowment</p></li>
 <li><p>find a consumption plan for each household that maximizes its utility functional subject to the wealth that you computed in the previous step</p></li>
 </ul>
-<p>This procedure allows us to compute the competitive equilibrium price system  for our heterogeneous household economy <em>prior</em> to computing the
+<p>This procedure allows us to compute the competitive equilibrium price system  for the heterogeneous household economy <em>prior</em> to computing the
 competitive equilibrium allocation.</p>
 <p>That substantially simplifies calculating a competitive equilibrium.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In general, computing a competitive equilibrium requires solving for the price system and the allocation simultaneously, not recursively.</p>
 </div>
-<p>Chapter 12 of <span id="id2">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id162" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> described how to adapt  the preference specifications of <span id="id3">Gorman [<a class="reference internal" href="zreferences.html#id3" title="William M. Gorman. Community preference fields. Econometrica: Journal of the Econometric Society, 21(1):63–80, 1953.">1953</a>]</span>
+<p>Chapter 12 of <span id="id2">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id162" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> described how to adapt preference specifications of <span id="id3">Gorman [<a class="reference internal" href="zreferences.html#id3" title="William M. Gorman. Community preference fields. Econometrica: Journal of the Econometric Society, 21(1):63–80, 1953.">1953</a>]</span>
 to a linear-quadratic class of environments.</p>
 <p>This lecture uses  the <code class="docutils literal notranslate"><span class="pre">quantecon.DLE</span></code> class to study economies that satisfy necessary conditions for Gorman
 aggregation of preferences.</p>
@@ -536,7 +554,7 @@ c^j - \chi^j = \frac{u^j}{u^a}\,(c^a - \chi^a),
 <p>Hence the fraction of total utility assigned to consumer <span class="math notranslate nohighlight">\(j\)</span> determines his fraction of the vector <span class="math notranslate nohighlight">\((c^a - \chi^a)\)</span>.</p>
 <p>This is exactly the form we will see in <a class="reference internal" href="#equation-eq-sharing-rule">(22.11)</a> below, except that goods are indexed by both dates and states in subscripts.</p>
 <p>In the dynamic setting, we set the utility index <span class="math notranslate nohighlight">\(u^j\)</span> equal to household <span class="math notranslate nohighlight">\(j\)</span>’s time-zero marginal utility of wealth <span class="math notranslate nohighlight">\(\mu_{0j}^w\)</span>, the Lagrange multiplier on the intertemporal budget constraint.</p>
-<p>The ratio <span class="math notranslate nohighlight">\(\mu_{0j}^w / \mu_{0a}^w\)</span> (where <span class="math notranslate nohighlight">\(\mu_{0a}^w = \sum_j \mu_{0j}^w\)</span>) then serves as the time-invariant Gorman weight that determines household <span class="math notranslate nohighlight">\(j\)</span>’s share of aggregate consumption in excess of baseline.</p>
+<p>The ratio <span class="math notranslate nohighlight">\(\mu_{0j}^w / \mu_{0a}^w\)</span> (where <span class="math notranslate nohighlight">\(\mu_{0a}^w = \sum_j \mu_{0j}^w\)</span>) then serves as the time-invariant Pareto weight that determines household <span class="math notranslate nohighlight">\(j\)</span>’s share of aggregate consumption in excess of baseline.</p>
 </section>
 </section>
 <section id="dynamic-stochastic-economy">
@@ -704,7 +722,7 @@ M_q x_t \quad \text{for } q \in \{c, k, h, s\}.
 \mu_j := \frac{\mu_{0j}^w}{\mu_{0a}^w},
 \]</div>
 <p>so that <span class="math notranslate nohighlight">\(\sum_j \mu_j = 1\)</span>.</p>
-<p>This is household <span class="math notranslate nohighlight">\(j\)</span>’s <strong>Gorman weight</strong>.</p>
+<p>This is household <span class="math notranslate nohighlight">\(j\)</span>’s <strong>Pareto weight</strong>.</p>
 <p>The allocation rule for consumption has the form</p>
 <div class="math notranslate nohighlight" id="equation-eq-sharing-rule-baseline">
 <span class="eqno">(22.10)<a class="headerlink" href="#equation-eq-sharing-rule-baseline" title="Link to this equation">#</a></span>\[
@@ -813,9 +831,9 @@ c_{jt} = \mu_j c_t + \tilde{\chi}_{jt},
 <p>When preferences include durables or habits (<span class="math notranslate nohighlight">\(\Lambda \neq 0\)</span>), the deviation consumption depends on the lagged deviation state <span class="math notranslate nohighlight">\(\tilde{\eta}_{j,t-1}\)</span>.</p>
 <p>The code solves this as a linear-quadratic control problem using a scaling trick: multiplying the transition matrices by <span class="math notranslate nohighlight">\(\sqrt{\beta}\)</span> converts the discounted problem into an undiscounted one that can be solved with a standard discrete algebraic Riccati equation.</p>
 </section>
-<section id="step-2-compute-each-gorman-weight">
-<h4><span class="section-number">22.3.1.2. </span>Step 2: compute each Gorman weight<a class="headerlink" href="#step-2-compute-each-gorman-weight" title="Link to this heading">#</a></h4>
-<p>We compute the Gorman weight <span class="math notranslate nohighlight">\(\mu_j\)</span> using household <span class="math notranslate nohighlight">\(j\)</span>’s budget constraint.</p>
+<section id="step-2-compute-each-pareto-weight">
+<h4><span class="section-number">22.3.1.2. </span>Step 2: compute each Pareto weight<a class="headerlink" href="#step-2-compute-each-pareto-weight" title="Link to this heading">#</a></h4>
+<p>We compute the Pareto weight <span class="math notranslate nohighlight">\(\mu_j\)</span> from household <span class="math notranslate nohighlight">\(j\)</span>’s budget constraint.</p>
 <p>We compute five present values:</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(W_d\)</span>: present value of household <span class="math notranslate nohighlight">\(j\)</span>’s endowment stream <span class="math notranslate nohighlight">\(\{d_{jt}\}\)</span></p></li>
@@ -901,7 +919,7 @@ c_{jt} = S_{ci} X_t, \quad h_{jt} = S_{hi} X_t, \quad s_{jt} = S_{si} X_t.
     <span class="n">tol</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Compute household i selection matrices, the Gorman weight μ_i,</span>
+<span class="sd">    Compute household i selection matrices, the Pareto weight μ_i,</span>
 <span class="sd">    and valuation objects.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Dimensions</span>
@@ -1000,7 +1018,7 @@ c_{jt} = S_{ci} X_t, \quad h_{jt} = S_{hi} X_t, \quad s_{jt} = S_{si} X_t.
         <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Δ_k</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">M_k</span> <span class="o">+</span>
         <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Γ</span><span class="p">)</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">M_d</span><span class="p">)</span> <span class="o">@</span> <span class="n">x0</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
 
-    <span class="c1">## Compute the Gorman weight</span>
+    <span class="c1">## Compute the Pareto weight</span>
     <span class="n">μ</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(((</span><span class="n">W_k</span> <span class="o">+</span> <span class="n">W_d</span> <span class="o">-</span> <span class="n">W_c2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">W_c1</span> <span class="o">-</span> <span class="n">W_g</span><span class="p">))</span><span class="o">.</span><span class="n">squeeze</span><span class="p">())</span>
 
     <span class="c1"># Household selection matrices on augmented state X_t = [h^i_{t-1}, x_t]</span>
@@ -1247,7 +1265,7 @@ R^{-T} \hat{k}_{jT} = \hat{k}_{j0} - \sum_{t=1}^T R^{-t} \tilde{\chi}_{jt}
     <span class="n">k_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
     <span class="n">a_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">T</span><span class="p">))</span>
 
-    <span class="c1"># For each household, compute Gorman weight and paths</span>
+    <span class="c1"># For each household, compute Pareto weight and paths</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
         <span class="n">U_bj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">U_b_list</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">U_dj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">U_d_list</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
@@ -1305,7 +1323,7 @@ R^{-T} \hat{k}_{jT} = \hat{k}_{j0} - \sum_{t=1}^T R^{-t} \tilde{\chi}_{jt}
         <span class="c1"># Original endowment claim (before trading)</span>
         <span class="n">d_j</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">U_dj</span> <span class="o">@</span> <span class="n">z_path</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
 
-        <span class="c1"># Dividend income under limited markets: μ_j × aggregate endowment</span>
+        <span class="c1"># Dividend income under limited markets: μ_j aggregate endowment</span>
         <span class="n">d_share</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">μ</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">squeeze</span><span class="p">()</span>
 
         <span class="c1"># Capital share in mutual fund</span>
@@ -1319,11 +1337,11 @@ R^{-T} \hat{k}_{jT} = \hat{k}_{j0} - \sum_{t=1}^T R^{-t} \tilde{\chi}_{jt}
 
         <span class="n">a_total</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">k_share</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">k_hat</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
 
-    <span class="c1"># Validate that Gorman weights sum to 1 (required for sharing rule consistency)</span>
+    <span class="c1"># Validate that Gorman weights sum to 1</span>
     <span class="n">μ_sum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">μ</span><span class="p">)</span>
     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">μ_sum</span> <span class="o">-</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-6</span><span class="p">:</span>
         <span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
-        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Gorman weights μ sum to </span><span class="si">{</span><span class="n">μ_sum</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">, not 1.0. &quot;</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pareto weights μ sum to </span><span class="si">{</span><span class="n">μ_sum</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">, not 1.0. &quot;</span>
                       <span class="s2">&quot;This may indicate calibration issues.&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">{</span>
@@ -1673,7 +1691,8 @@ Setting <span class="math notranslate nohighlight">\(\rho^{d}_j = 0\)</span> (or
         <span class="n">n_absorb</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">10</span><span class="p">)</span>
     <span class="n">n_absorb</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_absorb</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n_absorb</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">n_absorb</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;n_absorb must be in [1, n-1], got </span><span class="si">{</span><span class="n">n_absorb</span><span class="si">}</span><span class="s2"> with n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;n_absorb must be in [1, n-1], got </span><span class="si">{</span><span class="n">n_absorb</span><span class="si">}</span><span class="s2"> with n=</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="c1"># Dimensions</span>
     <span class="n">n_idio</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">n_absorb</span>       <span class="c1"># eta_{n_absorb+1}, ..., eta_n</span>
@@ -1738,12 +1757,17 @@ Setting <span class="math notranslate nohighlight">\(\rho^{d}_j = 0\)</span> (or
     <span class="n">Ud</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Ud_per_house</span><span class="p">)</span>
 
     <span class="c1"># Ub_per_house: bliss loading</span>
-    <span class="c1"># b_{jt} = b_bar + xi_{j,t}</span>
+    <span class="c1"># b_{jt} = b_bars[j] + xi_{j,t}</span>
+    <span class="c1"># b_bar can be scalar (same for all) or array (household-specific)</span>
+    <span class="n">b_bars</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">b_bar</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">b_bars</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">b_bars</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">b_bars</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
     <span class="n">Ub_per_house</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="n">row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="n">nz</span><span class="p">))</span>
-        <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">b_bar</span>                    <span class="c1"># constant bliss</span>
-        <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">n_idio</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>         <span class="c1"># loading on xi_j</span>
+        <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">b_bars</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>         <span class="c1"># household-specific bliss</span>
+        <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">n_idio</span> <span class="o">+</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># loading on xi_j (zeroed if gammas=0)</span>
         <span class="n">Ub_per_house</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
     <span class="n">Ub</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Ub_per_house</span><span class="p">)</span>
@@ -1812,11 +1836,13 @@ Setting <span class="math notranslate nohighlight">\(\rho^{d}_j = 0\)</span> (or
 <span class="c1"># Poorer households face larger, more persistent idiosyncratic shocks</span>
 <span class="n">σ_idio_min</span><span class="p">,</span> <span class="n">σ_idio_max</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">5.0</span>
 <span class="n">σs</span> <span class="o">=</span> <span class="n">σ_idio_min</span> <span class="o">+</span> <span class="p">(</span><span class="n">σ_idio_max</span> <span class="o">-</span> <span class="n">σ_idio_min</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">poorness</span> <span class="o">**</span> <span class="mf">2.0</span><span class="p">)</span>
-<span class="n">ρ_idio_min</span><span class="p">,</span> <span class="n">ρ_idio_max</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.98</span>
+<span class="n">ρ_idio_min</span><span class="p">,</span> <span class="n">ρ_idio_max</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.94</span>
 <span class="n">ρ_idio</span> <span class="o">=</span> <span class="n">ρ_idio_min</span> <span class="o">+</span> <span class="p">(</span><span class="n">ρ_idio_max</span> <span class="o">-</span> <span class="n">ρ_idio_min</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">poorness</span><span class="p">[</span><span class="n">n_absorb</span><span class="p">:]</span> <span class="o">**</span> <span class="mf">1.0</span><span class="p">)</span>
 
 <span class="c1"># Preference shocks are muted</span>
-<span class="n">b_bar</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="c1"># Bliss points scale with endowment so high-α households want more consumption</span>
+<span class="n">b_bar_base</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="n">b_bars</span> <span class="o">=</span> <span class="n">b_bar_base</span> <span class="o">*</span> <span class="p">(</span><span class="n">αs</span> <span class="o">/</span> <span class="n">αs</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>  <span class="c1"># household-specific bliss points</span>
 <span class="n">γs_pref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
 <span class="n">ρ_pref</span> <span class="o">=</span> <span class="mf">0.0</span>
 
@@ -1824,7 +1850,7 @@ Setting <span class="math notranslate nohighlight">\(\rho^{d}_j = 0\)</span> (or
     <span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span>
     <span class="n">rho1</span><span class="o">=</span><span class="n">ρ1</span><span class="p">,</span> <span class="n">rho2</span><span class="o">=</span><span class="n">ρ2</span><span class="p">,</span> <span class="n">sigma_a</span><span class="o">=</span><span class="n">σ_a</span><span class="p">,</span>
     <span class="n">alphas</span><span class="o">=</span><span class="n">αs</span><span class="p">,</span> <span class="n">phis</span><span class="o">=</span><span class="n">φs</span><span class="p">,</span> <span class="n">sigmas</span><span class="o">=</span><span class="n">σs</span><span class="p">,</span>
-    <span class="n">b_bar</span><span class="o">=</span><span class="n">b_bar</span><span class="p">,</span> <span class="n">gammas</span><span class="o">=</span><span class="n">γs_pref</span><span class="p">,</span>
+    <span class="n">b_bar</span><span class="o">=</span><span class="n">b_bars</span><span class="p">,</span> <span class="n">gammas</span><span class="o">=</span><span class="n">γs_pref</span><span class="p">,</span>
     <span class="n">rho_idio</span><span class="o">=</span><span class="n">ρ_idio</span><span class="p">,</span> <span class="n">rho_pref</span><span class="o">=</span><span class="n">ρ_pref</span><span class="p">,</span>
     <span class="n">n_absorb</span><span class="o">=</span><span class="n">n_absorb</span><span class="p">,</span>
 <span class="p">)</span>
@@ -1894,7 +1920,7 @@ Endowments: α in [3.01, 4.97]
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/65e777cdbae99306772518b0be272016a91693dfcc6d4405965494b42522ee8b.png" src="_images/65e777cdbae99306772518b0be272016a91693dfcc6d4405965494b42522ee8b.png" />
+<img alt="_images/479f95ae717682d61c26c0989792e7c27edbe43833339e204d35d5b23ee7d107.png" src="_images/479f95ae717682d61c26c0989792e7c27edbe43833339e204d35d5b23ee7d107.png" />
 </div>
 </div>
 </section>
@@ -2080,7 +2106,7 @@ y_t = G x_t.
 </div>
 <section id="redistribution-via-pareto-weights">
 <h3><span class="section-number">22.8.1. </span>Redistribution via Pareto weights<a class="headerlink" href="#redistribution-via-pareto-weights" title="Link to this heading">#</a></h3>
-<p>The sharing rule <a class="reference internal" href="#equation-eq-sharing-rule">(22.11)</a> can be written as <span class="math notranslate nohighlight">\(c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t)\)</span>, where <span class="math notranslate nohighlight">\(\mu_j\)</span> is household <span class="math notranslate nohighlight">\(j\)</span>’s Gorman weight.</p>
+<p>The sharing rule <a class="reference internal" href="#equation-eq-sharing-rule">(22.11)</a> can be written as <span class="math notranslate nohighlight">\(c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t)\)</span>, where <span class="math notranslate nohighlight">\(\mu_j\)</span> is household <span class="math notranslate nohighlight">\(j\)</span>’s Pareto weight.</p>
 <p>Define the Pareto weight <span class="math notranslate nohighlight">\(\lambda_j := \mu_j\)</span>, with <span class="math notranslate nohighlight">\(\sum_{j=1}^J \lambda_j = 1\)</span>.</p>
 <p>Consider redistributing consumption by choosing new weights <span class="math notranslate nohighlight">\(\{\lambda_j^*\}\)</span> satisfying <span class="math notranslate nohighlight">\(\lambda_j^* \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum_j \lambda_j^* = 1\)</span>.</p>
 <p>The new allocation <span class="math notranslate nohighlight">\(c_{jt} - \chi_{jt} = \lambda_j^* (c_t - \chi_t)\)</span> preserves aggregate dynamics <span class="math notranslate nohighlight">\((c_t, k_t)\)</span> while reallocating consumption across households.</p>
@@ -2190,20 +2216,28 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/698ba450b3637eb16a5233f17dd0c170b5e8b6204cd0f26e80653a2ee63259bd.png" src="_images/698ba450b3637eb16a5233f17dd0c170b5e8b6204cd0f26e80653a2ee63259bd.png" />
+<img alt="_images/bd10b6f8a26a63ee6ff6b32f3d0862b08e6ee3cc991d4c5fc11362a46105a9ec.png" src="_images/bd10b6f8a26a63ee6ff6b32f3d0862b08e6ee3cc991d4c5fc11362a46105a9ec.png" />
 </div>
 </div>
 <p>Once we have the redistributed Pareto weights, we can compute the new household consumption and income paths.</p>
 <p>The function below computes household consumption and income under given Pareto weights</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">allocation_from_weights</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">econ</span><span class="p">,</span> <span class="n">U_b_list</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">γ_1</span><span class="p">,</span> <span class="n">Λ</span><span class="p">,</span> <span class="n">h0i</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">allocation_from_weights</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">econ</span><span class="p">,</span> 
+                            <span class="n">U_b_list</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">γ_1</span><span class="p">,</span> <span class="n">Λ</span><span class="p">,</span> <span class="n">h0i</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                            <span class="n">original_weights</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute household consumption and income under given Pareto weights.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">)</span>
+
+    <span class="c1"># For χ computation, use original weights if provided</span>
+    <span class="k">if</span> <span class="n">original_weights</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">weights_for_chi</span> <span class="o">=</span> <span class="n">weights</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">weights_for_chi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">original_weights</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># Extract aggregate paths</span>
     <span class="n">x_path</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="s2">&quot;x_path&quot;</span><span class="p">]</span>
@@ -2239,7 +2273,8 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
     <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
         <span class="n">U_bj</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">U_b_list</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
         <span class="n">b_agg</span> <span class="o">=</span> <span class="n">econ</span><span class="o">.</span><span class="n">Sb</span> <span class="o">@</span> <span class="n">x_path</span>
-        <span class="n">b_tilde</span> <span class="o">=</span> <span class="n">U_bj</span> <span class="o">@</span> <span class="n">z_path</span> <span class="o">-</span> <span class="n">weights</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">b_agg</span>
+        <span class="c1"># Use weights_for_chi for b_tilde: keeps χ fixed during redistribution</span>
+        <span class="n">b_tilde</span> <span class="o">=</span> <span class="n">U_bj</span> <span class="o">@</span> <span class="n">z_path</span> <span class="o">-</span> <span class="n">weights_for_chi</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">b_agg</span>
 
         <span class="n">η</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_h</span><span class="p">,</span> <span class="n">T</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
         <span class="n">η</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">h0i</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
@@ -2294,10 +2329,14 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 
 <span class="n">h0i_alloc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">]])</span>
 
-<span class="n">pre</span> <span class="o">=</span> <span class="n">allocation_from_weights</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">econ</span><span class="p">,</span> 
+<span class="n">pre</span> <span class="o">=</span> <span class="n">allocation_from_weights</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">econ</span><span class="p">,</span>
                 <span class="n">Ub_list</span><span class="p">,</span> <span class="n">μ_values</span><span class="p">,</span> <span class="n">γ_1</span><span class="p">,</span> <span class="n">Λ</span><span class="p">,</span> <span class="n">h0i_alloc</span><span class="p">)</span>
-<span class="n">post</span> <span class="o">=</span> <span class="n">allocation_from_weights</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">econ</span><span class="p">,</span> 
-                <span class="n">Ub_list</span><span class="p">,</span> <span class="n">λ_star</span><span class="p">,</span> <span class="n">γ_1</span><span class="p">,</span> <span class="n">Λ</span><span class="p">,</span> <span class="n">h0i_alloc</span><span class="p">)</span>
+
+<span class="c1"># For post-redistribution: use λ_star for proportional share, but keep χ fixed</span>
+<span class="c1"># that is to say preferences don&#39;t change with taxes</span>
+<span class="n">post</span> <span class="o">=</span> <span class="n">allocation_from_weights</span><span class="p">(</span><span class="n">paths</span><span class="p">,</span> <span class="n">econ</span><span class="p">,</span>
+                <span class="n">Ub_list</span><span class="p">,</span> <span class="n">λ_star</span><span class="p">,</span> <span class="n">γ_1</span><span class="p">,</span> <span class="n">Λ</span><span class="p">,</span> <span class="n">h0i_alloc</span><span class="p">,</span>
+                <span class="n">original_weights</span><span class="o">=</span><span class="n">μ_values</span><span class="p">)</span>
 
 <span class="n">c_pre</span> <span class="o">=</span> <span class="n">pre</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">][:,</span> <span class="n">t0</span><span class="p">:]</span>
 <span class="n">y_pre</span> <span class="o">=</span> <span class="n">pre</span><span class="p">[</span><span class="s2">&quot;y_net&quot;</span><span class="p">][:,</span> <span class="n">t0</span><span class="p">:]</span>
@@ -2315,28 +2354,36 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <span class="n">c_pre_pct</span> <span class="o">=</span> <span class="n">_pct</span><span class="p">(</span><span class="n">c_pre</span><span class="p">[:,</span> <span class="p">:</span><span class="n">T_ts</span><span class="p">])</span>
 <span class="n">c_post_pct</span> <span class="o">=</span> <span class="n">_pct</span><span class="p">(</span><span class="n">c_post</span><span class="p">[:,</span> <span class="p">:</span><span class="n">T_ts</span><span class="p">])</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span>  <span class="mi">6</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_pre_pct</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;p90&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_pre_pct</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;p50&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_pre_pct</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;p10&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;pre-tax income $y^</span><span class="si">{pre}</span><span class="s2">$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$y^</span><span class="si">{pre}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_post_pct</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;p90&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_post_pct</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;p50&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">y_post_pct</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;p10&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;post-tax income $y^</span><span class="si">{post}</span><span class="s2">$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$y^</span><span class="si">{post}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c_post_pct</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;p90&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c_post_pct</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;p50&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">c_post_pct</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;p10&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;time&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;consumption $c^</span><span class="si">{post}</span><span class="s2">$&quot;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;$t$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$c^</span><span class="si">{post}</span><span class="s2">$&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="n">handles</span><span class="p">,</span>
+    <span class="n">labels</span><span class="p">,</span>
+    <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper center&quot;</span><span class="p">,</span>
+    <span class="n">ncol</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">),</span>
+<span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -2344,7 +2391,7 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c8c461e296e73254817427ff5fbf160355645e780cfd12f0482ea3fd1056cc86.png" src="_images/c8c461e296e73254817427ff5fbf160355645e780cfd12f0482ea3fd1056cc86.png" />
+<img alt="_images/593f0648e9b73ae8381d56e924b9872267edc5863f885f3826f2f6671bd9be5d.png" src="_images/593f0648e9b73ae8381d56e924b9872267edc5863f885f3826f2f6671bd9be5d.png" />
 </div>
 </div>
 <p>The figures reveal a striking  reduction in income and consumption inequality after redistribution.</p>

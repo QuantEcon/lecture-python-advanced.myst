@@ -29,14 +29,14 @@ kernelspec:
 
 {cite:t}`gorman1953community` described a class of models with preferences having the useful property that there exists a "representative household" in the sense that competitive equilibrium allocations can be computed in the following way:
 
-* take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single hypothetical "representative household"
-* collect the endowments of all households and give them to the representative household
+* take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single "representative household"
+* assign the endowments of all households to the representative household
 * construct a competitive equilibrium allocation and price system for the representative agent economy
 * at the  competitive equilibrium price system, compute the wealth -- i.e., the present value -- of each household's initial endowment 
 * find a consumption plan for each household that maximizes its utility functional subject to the wealth that you computed in the previous step
 
 
-This procedure allows us to compute the competitive equilibrium price system  for our heterogeneous household economy *prior* to computing the
+This procedure allows us to compute the competitive equilibrium price system  for the heterogeneous household economy *prior* to computing the
 competitive equilibrium allocation.  
 
 That substantially simplifies calculating a competitive equilibrium.
@@ -46,7 +46,7 @@ In general, computing a competitive equilibrium requires solving for the price s
 ```
 
 
-Chapter 12 of {cite:t}`HansenSargent2013` described how to adapt  the preference specifications of {cite:t}`gorman1953community`
+Chapter 12 of {cite:t}`HansenSargent2013` described how to adapt preference specifications of {cite:t}`gorman1953community`
 to a linear-quadratic class of environments.
 
 
@@ -300,7 +300,7 @@ This is exactly the form we will see in {eq}`eq:sharing_rule` below, except that
 
 In the dynamic setting, we set the utility index $u^j$ equal to household $j$'s time-zero marginal utility of wealth $\mu_{0j}^w$, the Lagrange multiplier on the intertemporal budget constraint.
 
-The ratio $\mu_{0j}^w / \mu_{0a}^w$ (where $\mu_{0a}^w = \sum_j \mu_{0j}^w$) then serves as the time-invariant Gorman weight that determines household $j$'s share of aggregate consumption in excess of baseline.
+The ratio $\mu_{0j}^w / \mu_{0a}^w$ (where $\mu_{0a}^w = \sum_j \mu_{0j}^w$) then serves as the time-invariant Pareto weight that determines household $j$'s share of aggregate consumption in excess of baseline.
 
 
 
@@ -518,7 +518,7 @@ $$
 
 so that $\sum_j \mu_j = 1$. 
 
-This is household $j$'s **Gorman weight**.
+This is household $j$'s **Pareto weight**.
 
 The allocation rule for consumption has the form
 
@@ -660,9 +660,9 @@ When preferences include durables or habits ($\Lambda \neq 0$), the deviation co
 
 The code solves this as a linear-quadratic control problem using a scaling trick: multiplying the transition matrices by $\sqrt{\beta}$ converts the discounted problem into an undiscounted one that can be solved with a standard discrete algebraic Riccati equation.
 
-#### Step 2: compute each Gorman weight
+#### Step 2: compute each Pareto weight
 
-We compute the Gorman weight $\mu_j$ using household $j$'s budget constraint.
+We compute the Pareto weight $\mu_j$ from household $j$'s budget constraint.
 
 We compute five present values:
 
@@ -758,7 +758,7 @@ def heter(
     tol=1e-15,
 ):
     """
-    Compute household i selection matrices, the Gorman weight μ_i,
+    Compute household i selection matrices, the Pareto weight μ_i,
     and valuation objects.
     """
     # Dimensions
@@ -857,7 +857,7 @@ def heter(
         np.asarray(Δ_k).T @ M_k +
         np.asarray(Γ).T @ M_d) @ x0).squeeze())
 
-    ## Compute the Gorman weight
+    ## Compute the Pareto weight
     μ = float(((W_k + W_d - W_c2) / (W_c1 - W_g)).squeeze())
 
     # Household selection matrices on augmented state X_t = [h^i_{t-1}, x_t]
@@ -1145,7 +1145,7 @@ def compute_household_paths(
     k_hat = np.zeros((N, T))
     a_total = np.zeros((N, T))
 
-    # For each household, compute Gorman weight and paths
+    # For each household, compute Pareto weight and paths
     for j in range(N):
         U_bj = np.asarray(U_b_list[j], dtype=float)
         U_dj = np.asarray(U_d_list[j], dtype=float)
@@ -1203,7 +1203,7 @@ def compute_household_paths(
         # Original endowment claim (before trading)
         d_j[j] = (U_dj @ z_path)[0, :]
 
-        # Dividend income under limited markets: μ_j × aggregate endowment
+        # Dividend income under limited markets: μ_j aggregate endowment
         d_share[j] = (μ[j] * d[0]).squeeze()
 
         # Capital share in mutual fund
@@ -1217,11 +1217,11 @@ def compute_household_paths(
 
         a_total[j] = k_share[j] + k_hat[j]
 
-    # Validate that Gorman weights sum to 1 (required for sharing rule consistency)
+    # Validate that Gorman weights sum to 1
     μ_sum = np.sum(μ)
     if abs(μ_sum - 1.0) > 1e-6:
         import warnings
-        warnings.warn(f"Gorman weights μ sum to {μ_sum:.6f}, not 1.0. "
+        warnings.warn(f"Pareto weights μ sum to {μ_sum:.6f}, not 1.0. "
                       "This may indicate calibration issues.")
 
     return {
@@ -1569,7 +1569,8 @@ def build_gorman_extended(
         n_absorb = max(1, n // 10)
     n_absorb = int(n_absorb)
     if n_absorb < 1 or n_absorb >= n:
-        raise ValueError(f"n_absorb must be in [1, n-1], got {n_absorb} with n={n}")
+        raise ValueError(
+            f"n_absorb must be in [1, n-1], got {n_absorb} with n={n}")
 
     # Dimensions
     n_idio = n - n_absorb       # eta_{n_absorb+1}, ..., eta_n
@@ -1634,12 +1635,17 @@ def build_gorman_extended(
     Ud = sum(Ud_per_house)
 
     # Ub_per_house: bliss loading
-    # b_{jt} = b_bar + xi_{j,t}
+    # b_{jt} = b_bars[j] + xi_{j,t}
+    # b_bar can be scalar (same for all) or array (household-specific)
+    b_bars = np.atleast_1d(b_bar)
+    if b_bars.size == 1:
+        b_bars = np.full(n, float(b_bars[0]))
+
     Ub_per_house = []
     for j in range(n):
         row = np.zeros((1, nz))
-        row[0, 0] = b_bar                    # constant bliss
-        row[0, 3 + n_idio + j] = 1.0         # loading on xi_j
+        row[0, 0] = b_bars[j]         # household-specific bliss
+        row[0, 3 + n_idio + j] = 1.0  # loading on xi_j (zeroed if gammas=0)
         Ub_per_house.append(row)
 
     Ub = sum(Ub_per_house)
@@ -1649,6 +1655,8 @@ def build_gorman_extended(
     x0[0, 0] = 1.0  # constant = 1
 
     return A22, C2, Ub, Ud, Ub_per_house, Ud_per_house, x0
+
+
 ```
 
 ### 100-household  economy
@@ -1704,11 +1712,13 @@ n_absorb = 50
 # Poorer households face larger, more persistent idiosyncratic shocks
 σ_idio_min, σ_idio_max = 0.2, 5.0
 σs = σ_idio_min + (σ_idio_max - σ_idio_min) * (poorness ** 2.0)
-ρ_idio_min, ρ_idio_max = 0.0, 0.98
+ρ_idio_min, ρ_idio_max = 0.0, 0.94
 ρ_idio = ρ_idio_min + (ρ_idio_max - ρ_idio_min) * (poorness[n_absorb:] ** 1.0)
 
 # Preference shocks are muted
-b_bar = 5.0
+# Bliss points scale with endowment so high-α households want more consumption
+b_bar_base = 5.0
+b_bars = b_bar_base * (αs / αs.mean())  # household-specific bliss points
 γs_pref = np.zeros(N)
 ρ_pref = 0.0
 
@@ -1716,12 +1726,13 @@ A22, C2, Ub, Ud, Ub_list, Ud_list, x0 = build_gorman_extended(
     n=N,
     rho1=ρ1, rho2=ρ2, sigma_a=σ_a,
     alphas=αs, phis=φs, sigmas=σs,
-    b_bar=b_bar, gammas=γs_pref,
+    b_bar=b_bars, gammas=γs_pref,
     rho_idio=ρ_idio, rho_pref=ρ_pref,
     n_absorb=n_absorb,
 )
 
 print(f"sum(φs) = {np.sum(φs):.6f} (should be 1.0)")
+
 ```
 
 ```{code-cell} ipython3
@@ -1946,7 +1957,7 @@ There are various tax-and-transfer   schemes that would deliver such efficient r
 
 ### Redistribution via Pareto weights
 
-The sharing rule {eq}`eq:sharing_rule` can be written as $c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t)$, where $\mu_j$ is household $j$'s Gorman weight.
+The sharing rule {eq}`eq:sharing_rule` can be written as $c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t)$, where $\mu_j$ is household $j$'s Pareto weight.
 
 Define the Pareto weight $\lambda_j := \mu_j$, with $\sum_{j=1}^J \lambda_j = 1$.
 
@@ -2069,13 +2080,21 @@ Once we have the redistributed Pareto weights, we can compute the new household 
 The function below computes household consumption and income under given Pareto weights
 
 ```{code-cell} ipython3
-def allocation_from_weights(paths, econ, U_b_list, weights, γ_1, Λ, h0i=None):
+def allocation_from_weights(paths, econ, 
+                            U_b_list, weights, γ_1, Λ, h0i=None,
+                            original_weights=None):
     """
     Compute household consumption and income under given Pareto weights.
     """
 
     weights = np.asarray(weights).reshape(-1)
     N = len(weights)
+
+    # For χ computation, use original weights if provided
+    if original_weights is None:
+        weights_for_chi = weights
+    else:
+        weights_for_chi = np.asarray(original_weights).reshape(-1)
 
     # Extract aggregate paths
     x_path = paths["x_path"]
@@ -2111,7 +2130,8 @@ def allocation_from_weights(paths, econ, U_b_list, weights, γ_1, Λ, h0i=None):
     for j in range(N):
         U_bj = np.asarray(U_b_list[j], dtype=float)
         b_agg = econ.Sb @ x_path
-        b_tilde = U_bj @ z_path - weights[j] * b_agg
+        # Use weights_for_chi for b_tilde: keeps χ fixed during redistribution
+        b_tilde = U_bj @ z_path - weights_for_chi[j] * b_agg
 
         η = np.zeros((n_h, T + 1))
         η[:, 0] = np.asarray(h0i).reshape(-1)
@@ -2163,10 +2183,14 @@ idx_sorted = np.argsort(-μ_values)
 
 h0i_alloc = np.array([[0.0]])
 
-pre = allocation_from_weights(paths, econ, 
+pre = allocation_from_weights(paths, econ,
                 Ub_list, μ_values, γ_1, Λ, h0i_alloc)
-post = allocation_from_weights(paths, econ, 
-                Ub_list, λ_star, γ_1, Λ, h0i_alloc)
+
+# For post-redistribution: use λ_star for proportional share, but keep χ fixed
+# that is to say preferences don't change with taxes
+post = allocation_from_weights(paths, econ,
+                Ub_list, λ_star, γ_1, Λ, h0i_alloc,
+                original_weights=μ_values)
 
 c_pre = pre["c"][:, t0:]
 y_pre = pre["y_net"][:, t0:]
@@ -2184,31 +2208,40 @@ y_post_pct = _pct(y_post[:, :T_ts])
 c_pre_pct = _pct(c_pre[:, :T_ts])
 c_post_pct = _pct(c_post[:, :T_ts])
 
-fig, ax = plt.subplots(1, 3, figsize=(14, 4), sharey=True)
+fig, ax = plt.subplots(1, 3, figsize=(14,  6), sharey=True)
 
 ax[0].plot(t, y_pre_pct[0], label="p90", lw=2)
 ax[0].plot(t, y_pre_pct[1], label="p50", lw=2)
 ax[0].plot(t, y_pre_pct[2], label="p10", lw=2)
-ax[0].set_xlabel("time")
-ax[0].set_ylabel(r"pre-tax income $y^{pre}$")
-ax[0].legend()
+ax[0].set_xlabel("$t$", fontsize=20)
+ax[0].set_ylabel(r"$y^{pre}$", fontsize=20)
 
 ax[1].plot(t, y_post_pct[0], label="p90", lw=2)
 ax[1].plot(t, y_post_pct[1], label="p50", lw=2)
 ax[1].plot(t, y_post_pct[2], label="p10", lw=2)
-ax[1].set_xlabel("time")
-ax[1].set_ylabel(r"post-tax income $y^{post}$")
-ax[1].legend()
+ax[1].set_xlabel("$t$")
+ax[1].set_ylabel(r"$y^{post}$", fontsize=20)
 
 ax[2].plot(t, c_post_pct[0], label="p90", lw=2)
 ax[2].plot(t, c_post_pct[1], label="p50", lw=2)
 ax[2].plot(t, c_post_pct[2], label="p10", lw=2)
-ax[2].set_xlabel("time")
-ax[2].set_ylabel(r"consumption $c^{post}$")
-ax[2].legend()
+ax[2].set_xlabel("$t$")
+ax[2].set_ylabel(r"$c^{post}$", fontsize=20)
+
+handles, labels = ax[0].get_legend_handles_labels()
+
+fig.legend(
+    handles,
+    labels,
+    loc="upper center",
+    ncol=3,
+    frameon=False,
+    bbox_to_anchor=(0.5, 1.1),
+)
 
 plt.tight_layout()
 plt.show()
+
 ```
 
 The figures reveal a striking  reduction in income and consumption inequality after redistribution.
