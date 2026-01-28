@@ -122,7 +122,7 @@ def T_θ_factory(θ, π):
 
 def compute_change_measure(u, c, θ, π):
     """
-    Compute the channge of measure given a utility function `u`, a consumption vector `c`,
+    Compute the change of measure given a utility function `u`, a consumption vector `c`,
     a penalty parameter `θ` and a baseline probability vector `π` 
     
     """
@@ -325,10 +325,10 @@ We describe five types of preferences over plans.
 * Ex post Bayesian expected utility preferences
 
 
-Expected utility, risk-sensitive, and ex post Bayesian prefernces are  each cast in terms of a unique probability distribution, so they can express risk-aversion, but not model ambiguity aversion. 
+Expected utility, risk-sensitive, and ex post Bayesian preferences are  each cast in terms of a unique probability distribution, so they can express risk-aversion, but not model ambiguity aversion. 
 
 
-Multiplier and constraint prefernces both  express aversion to
+Multiplier and constraint preferences both  express aversion to
 concerns about model misppecification, i.e., model uncertainty;  both are cast  in terms of a set or sets  of probability distributions. 
 
 * The set of distributions expresses the decision maker's ambiguity about the probability model.
@@ -368,7 +368,7 @@ $$
 \sum_{i=1}^I \pi_i m_i = 1 .
 $$ (tom4)
 
-In {eq}`tom3`,  $\eta \geq 0$ defines an  entropy ball of probability distributions $\hat \pi = m \pi$  that surround a baseline distribution $\pi$.
+In {eq}`tom3`,  $\eta \geq 0$ determines an  entropy ball of probability distributions $\hat \pi = m \pi$  that surround a baseline distribution $\pi$.
 
 As noted earlier,     $\sum_{i=1}^I m_i\pi_i  u(c_i)$ is the expected value of $u(c)$ under a twisted probability distribution $\{\hat \pi_i\}_{i=1}^I = \{m_i \pi_i\}_{i=1}^I$.
 
@@ -565,7 +565,7 @@ Under expected utility, i.e., $\theta =+\infty$, ${\sf T}u(c)$ is linear in $\pi
 
 The two  panels in the next  figure below  can help us to visualize the extra adjustment for risk that the risk-sensitive operator entails.  
 
-This will help us understand  how the $\mathbf{T}$ transformation works by envisioning  what function is being averaged. 
+This will help us understand  how the $\sf{T}$ transformation works by envisioning  what function is being averaged. 
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -859,7 +859,7 @@ aversion.
 
 Constraint preferences express **concern about misspecification** or **ambiguity** for short with a positive
 $\eta$ that circumscribes an entropy ball around an approximating
-probability distribution $\pi$, and *aversion aversion to model misspecification* through
+probability distribution $\pi$, and *aversion to model misspecification* through
 minimization with respect to a likelihood ratio $m$.
 
 Multiplier preferences express misspecification concerns with a parameter $\theta<+\infty$ that
@@ -1066,7 +1066,7 @@ u_inv = lambda x: np.exp(x)  # Inverse of the utility function
 η = 0.12
 
 
-# Conustruct grid for c_1
+# Constuct grid for c_1
 c_1_grid_nb = 102
 c_1_grid = np.linspace(0.5, 2., num=c_1_grid_nb)
 
@@ -1173,7 +1173,7 @@ $$
 
 **Tangent indifference curves off 45 degree line**
 
-For a given $\eta$ and a given allocatin $(c_1, c_2)$ off the 45 degree line, by solving
+For a given $\eta$ and a given allocation $(c_1, c_2)$ off the 45 degree line, by solving
 equations {eq}`tom7` and {eq}`tom20`, we can find $\tilde \theta (\eta, c)$
 and $\tilde \eta(\theta,c)$ that make indifference curves for 
 multiplier and constraint preferences be tangent to one another.

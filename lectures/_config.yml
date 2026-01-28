@@ -39,6 +39,7 @@ sphinx:
                        'https://doi.org/10.1086/262078',
                        'https://keras.io/',
                        'https://data.oecd.org/']
+    nb_merge_streams: true
     nb_mime_priority_overrides: [
        # HTML
        ['html', 'application/vnd.jupyter.widget-view+json', 10],
@@ -85,6 +86,7 @@ sphinx:
       header_organisation: QuantEcon
       repository_url: https://github.com/QuantEcon/lecture-python-advanced.myst
       nb_repository_url: https://github.com/QuantEcon/lecture-python-advanced.notebooks
+      path_to_docs: lectures
       twitter: quantecon
       twitter_logo_url: https://assets.quantecon.org/img/qe-twitter-logo.png
       og_logo_url: https://assets.quantecon.org/img/qe-og-logo.png
@@ -116,6 +118,8 @@ sphinx:
           "gG": "\\mathcal{G}"
           "hH": "\\mathcal{H}"
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+    # sphinx-exercise
+    exercise_style: "solution_follow_exercise"
     rediraffe_redirects:
       index_toc.md: intro.md
     tojupyter_static_file_path: ["source/_static", "_static"]

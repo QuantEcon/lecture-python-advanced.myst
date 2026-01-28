@@ -1020,7 +1020,7 @@ fig.update_layout(title=r'Impulse Response Function',
                    yaxis_title=r'$k^{i}_{t}$')
 fig1 = fig
 # Export to PNG file
-Image(fig1.to_image(format="png"))
+Image(fig1.to_image(format="png", engine="kaleido"))
 # fig1.show() will provide interactive plot when running
 # notebook locally
 ```

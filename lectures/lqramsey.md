@@ -510,7 +510,7 @@ Define
 ```{math}
 :label: lq_rfr
 
-R^{-1}_{t} := \mathbb E_t \beta^j p^t_{t+1}
+R^{-1}_{t} := \mathbb E_t \beta p^t_{t+1}
 ```
 
 $R_{t}$ is the gross $1$-period risk-free rate for loans
@@ -527,7 +527,7 @@ $$
 and the cumulation of $\pi_t$
 
 $$
-\Pi_t := \sum_{s=0}^t \pi_t
+\Pi_t := \sum_{s=0}^t \pi_s
 $$
 
 The term $\pi_{t+1}$ is the difference between two quantities:
@@ -693,7 +693,7 @@ def compute_paths(T, econ):
         ns = P.shape[0]
         F = scipy.linalg.inv(eye(ns) - β * P)
         a0 = 0.5 * (F @ (x_vals.T @ Sm.T)**2)[0]
-        H = ((Sb - Sd + Sg) @ x_vals) * ((Sg - Ss) @ x_vals)
+        H = ((Sb - Sd + Sg) @ x_vals) * ((Sg + Ss) @ x_vals)
         b0 = 0.5 * (F @ H.T)[0]
         a0, b0 = float(a0[0]), float(b0[0])
     else:
