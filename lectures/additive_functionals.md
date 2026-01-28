@@ -1093,6 +1093,13 @@ plt.legend()
 plt.show()
 ```
 
+These plots help explain the *peculiar property* of the multiplicative martingale.
+
+The rapid growth of variance, skewness, and kurtosis reveals that the distribution of $\widetilde M_t$ becomes increasingly right-skewed over time while $E[\widetilde M_t] = 1$ for all $t$. 
+
+This means that most probability density concentrates near zero, while a long right tail preserves the unit mean. 
+
+
 ### Simulating a multiplicative martingale again
 
 Next, we want a program to simulate the likelihood ratio process $\{ \tilde{M}_t \}_{t=0}^\infty$.
@@ -1102,11 +1109,7 @@ $[A, B, D, F] = [0.8, 0.001, 1.0, 0.01]$ and $\nu = 0.005$.
 
 After accomplishing this, we want to display and study histograms of $\tilde{M}_T^i$ for various values of  $T$.
 
-Here is code that accomplishes these tasks.
-
-### Sample paths
-
-Let's write a program to simulate sample paths of $\{ x_t, y_{t} \}_{t=0}^{\infty}$.
+Let's first write a program to simulate sample paths of $\{ x_t, y_{t} \}_{t=0}^{\infty}$.
 
 We'll do this by formulating the additive functional as a linear state space model and putting the [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) class to work via our `AMF_LSS_VAR` class {ref}`defined above <amf_lss>`.
 
@@ -1261,7 +1264,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-These probability density functions help us understand mechanics underlying the  **peculiar property** of our multiplicative martingale
+These probability density functions again help us understand mechanics underlying the  **peculiar property** of our multiplicative martingale
 
 * As $T$ grows, most of the probability mass shifts leftward toward zero.
 * For example, note that most  mass is near $1$ for $T =10$ or $T = 100$ but
