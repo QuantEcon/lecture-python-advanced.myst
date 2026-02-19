@@ -4,11 +4,11 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.11.0
+    jupytext_version: 1.17.1
 kernelspec:
-  display_name: Python 3
-  language: python
   name: python3
+  display_name: Python 3 (ipykernel)
+  language: python
 ---
 
 # Risk and Model Uncertainty
@@ -52,42 +52,27 @@ Watch for the presence of a kink at the $45$ degree line for the constraint pref
 
 We begin with some that we'll use to create some graphs.
 
-
-
 ```{code-cell} ipython3
 # Package imports
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-from matplotlib import rc, cm
-from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import rc
 from scipy import optimize, stats
 from scipy.io import loadmat
 from matplotlib.collections import LineCollection
-from matplotlib.colors import ListedColormap, BoundaryNorm
 from numba import njit
 ```
 
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-# Plotting parameters
-%config InlineBackend.figure_format='retina'
-
 plt.rc('text', usetex=True)
-
-label_size = 20
-label_tick_size = 18
-title_size = 24
-legend_size = 16
-text_size = 18
-
-mpl.rcParams['axes.labelsize'] = label_size 
-mpl.rcParams['ytick.labelsize'] = label_tick_size 
-mpl.rcParams['xtick.labelsize'] = label_tick_size 
-mpl.rcParams['axes.titlesize'] = title_size
-mpl.rcParams['legend.fontsize'] = legend_size
-mpl.rcParams['font.size'] = text_size
+plt.rc('font', size=18)
+plt.rc('axes', labelsize=20, titlesize=24)
+plt.rc('xtick', labelsize=18)
+plt.rc('ytick', labelsize=18)
+plt.rc('legend', fontsize=16)
 ```
 
 ```{code-cell} ipython3
@@ -108,12 +93,11 @@ def ent(π, π_hat):
 def T_θ_factory(θ, π):
     """
     Return an operator `T_θ` for a given penalty parameter `θ` and probability distribution vector `π`.
-    
     """
+
     def T_θ(u):  
         """
         Risk-sensitivity operator of Jacobson (1973) and Whittle (1981) taking a function `u` as argument.
-        
         """
         return lambda c: -θ * np.log(π @ np.exp(-u(c) / θ))
     
@@ -123,20 +107,21 @@ def T_θ_factory(θ, π):
 def compute_change_measure(u, c, θ, π):
     """
     Compute the change of measure given a utility function `u`, a consumption vector `c`,
-    a penalty parameter `θ` and a baseline probability vector `π` 
-    
+    a penalty parameter `θ` and a baseline probability vector `π`
     """
-    
-    m_unnormalized = np.exp(-u(c) / θ)
-    m =  m_unnormalized / (π @ m_unnormalized)
+
+    log_m = -u(c) / θ
+    log_m -= np.max(log_m)  # log-sum-exp trick for numerical stability
+    m_unnormalized = np.exp(log_m)
+    m = m_unnormalized / (π @ m_unnormalized)
     return m
 
 
 def utility_function_factory(α):
     """
     Return a CRRA utility function parametrized by `α` 
-    
     """
+
     if α == 1.:
         return lambda c: np.log(c)
     else: 
@@ -203,8 +188,6 @@ When $\pi_1 \in (0,1)$, entropy is finite for both $\hat \pi_1 = 0$  and $\hat \
  
 However, when $\pi_1=0$ or $\pi_1=1$, entropy  is infinite.
 
-
-
 ```{code-cell} ipython3
 :tags: [hide-input]
 
@@ -236,11 +219,9 @@ for i in range(π_hat_0_vals.size):  # Loop over all possible values for `π_hat
 tags: [hide-input]
 mystnb:
   figure:
-    caption: |
-      Figure 1
+    caption: 'Figure 1'
     name: figure1
 ---
-
 plt.figure(figsize=(5, 3))
 plt.plot(π_hat_0_vals, ent_vals, color='blue');
 plt.ylabel(r'entropy ($\pi_{1}=%.2f$)' % π[0] );
@@ -248,11 +229,11 @@ plt.xlabel(r'$\hat{\pi}_1$');
 plt.show()
 ```
 
+The heat maps in the next figure vary both $\hat{\pi}_1$ and $\pi_1$.
 
+The left panel plots entropy, which equals zero along the diagonal $\hat{\pi}_1 = \pi_1$ and grows as $\hat{\pi}$ diverges from $\pi$.
 
-The heat maps in  the next two  figures vary both $\hat{\pi}_1$ and $\pi_1$.
-
-The following figure plots  entropy.  
+The right panel plots the logarithm of entropy
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -263,12 +244,12 @@ The following figure plots  entropy.
 # Initialize matrix of entropy values
 ent_vals_mat = np.empty((π_0_vals.size, π_hat_0_vals.size))
 
-for i in range(π_0_vals.size):  # Loop over all possible values for `π_0` 
+for i in range(π_0_vals.size):  # Loop over `π_0` 
     # Update `π` values
     π[0] = π_0_vals[i]
     π[1] = 1 - π_0_vals[i]
     
-    for j in range(π_hat_0_vals.size):  # Loop over all possible values for `π_hat_0` 
+    for j in range(π_hat_0_vals.size):  # Loop over `π_hat_0` 
         # Update `π_hat` values
         π_hat[0] = π_hat_0_vals[j]
         π_hat[1] = 1 - π_hat_0_vals[j]
@@ -281,36 +262,54 @@ for i in range(π_0_vals.size):  # Loop over all possible values for `π_0`
 :tags: [hide-input]
 
 x, y = np.meshgrid(π_0_vals, π_hat_0_vals)
-plt.figure(figsize=(10, 8))
-plt.pcolormesh(x, y, ent_vals_mat.T, cmap='seismic', shading='gouraud')
-plt.colorbar();
-plt.ylabel(r'$\hat{\pi}_1$');
-plt.xlabel(r'$\pi_1$');
-plt.title('Entropy Heat Map');
-plt.show()
-```
+ent_data = ent_vals_mat.T
+with np.errstate(divide='ignore'):
+    log_ent_data = np.log(ent_data)
 
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 7))
 
-The next figure plots  the logarithm of entropy.
+# Left panel: Entropy
+n_levels = 30
+levels_ent = np.linspace(0, np.max(ent_data), n_levels)
 
-```{code-cell} ipython3
-:tags: [hide-input]
+cf1 = ax1.contourf(x, y, ent_data, levels=levels_ent,
+                    cmap='YlOrRd', extend='max')
+cs1 = ax1.contour(x, y, ent_data,
+                   levels=[0.1, 0.25, 0.5, 1.0, 2.0, 4.0],
+                   colors='k', linewidths=0.7, alpha=0.6)
+ax1.clabel(cs1, inline=True, fontsize=12, fmt='%.2g')
+ax1.plot([π_0_vals[0], π_0_vals[-1]], [π_0_vals[0], π_0_vals[-1]],
+         ls='--', color='black', linewidth=1.5, alpha=0.8,
+         label=r'$\hat{\pi}_1 = \pi_1$')
+ax1.set_aspect('equal')
+ax1.set_xlabel(r'$\pi_1$')
+ax1.set_ylabel(r'$\hat{\pi}_1$')
+ax1.set_title('Entropy')
+ax1.legend(loc='upper left', fontsize=14)
+fig.colorbar(cf1, ax=ax1, shrink=0.8)
 
-# Check the point (0.01, 0.9)
-π = np.array([0.01, 0.99])
-π_hat = np.array([0.9, 0.1])
-ent(π, π_hat)
-```
+# Right panel: Log Entropy
+finite_vals = log_ent_data[np.isfinite(log_ent_data)]
+vmax = np.nanmax(np.abs(finite_vals))
+levels_log = np.linspace(-vmax, vmax, n_levels)
 
-```{code-cell} ipython3
-:tags: [hide-input]
+cf2 = ax2.contourf(x, y, log_ent_data, levels=levels_log,
+                    cmap='RdBu_r', extend='both')
+cs2 = ax2.contour(x, y, log_ent_data,
+                   levels=[-4, -2, -1, 0, 1, 2],
+                   colors='k', linewidths=0.7, alpha=0.6)
+ax2.clabel(cs2, inline=True, fontsize=12, fmt='%d')
+ax2.plot([π_0_vals[0], π_0_vals[-1]], [π_0_vals[0], π_0_vals[-1]],
+         ls='--', color='black', linewidth=1.5, alpha=0.8,
+         label=r'$\hat{\pi}_1 = \pi_1$')
+ax2.set_aspect('equal')
+ax2.set_xlabel(r'$\pi_1$')
+ax2.set_ylabel(r'$\hat{\pi}_1$')
+ax2.set_title('Log Entropy')
+ax2.legend(loc='upper left', fontsize=14)
+fig.colorbar(cf2, ax=ax2, shrink=0.8)
 
-plt.figure(figsize=(10, 8))
-plt.pcolormesh(x, y, np.log(ent_vals_mat.T), shading='gouraud', cmap='seismic')
-plt.colorbar()
-plt.ylabel(r'$\hat{\pi}_1$');
-plt.xlabel(r'$\pi_1$');
-plt.title('Log Entropy Heat Map');
+plt.tight_layout()
 plt.show()
 ```
 
@@ -565,7 +564,7 @@ Under expected utility, i.e., $\theta =+\infty$, ${\sf T}u(c)$ is linear in $\pi
 
 The two  panels in the next  figure below  can help us to visualize the extra adjustment for risk that the risk-sensitive operator entails.  
 
-This will help us understand  how the $\sf{T}$ transformation works by envisioning  what function is being averaged. 
+This will help us understand  how the $\sf{T}$ transformation works by envisioning  what function is being averaged.
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -730,7 +729,6 @@ $\hat \Pi_1$ of $\hat \pi_1$'s that constrains the adversary who chooses $\hat \
 entropy curve lies below the horizontal dotted line at an entropy level of $\eta = .25$. 
 
 Unless $u(c_1) = u(c_2)$, the $\hat \pi_1$ that minimizes $\hat E u(c)$ is at the boundary of the set $\hat \Pi_1$.
-
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -938,8 +936,7 @@ utility, multiplier, and constraint preferences.
 
 
 The following figure shows indifference curves going through a
-point along the 45 degree line. 
-
+point along the 45 degree line.
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -1184,7 +1181,6 @@ line, namely, $(c(1),c(2)) = (3,1)$, at which $\eta$ and $\theta$ are
 adjusted to render the indifference curves for constraint and multiplier
 preferences tangent.
 
-
 ```{code-cell} ipython3
 :tags: [hide-input]
 
@@ -1230,6 +1226,7 @@ for i in range(c_1_grid.size):
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 f, (ax1, ax2) = plt.subplots(1, 2, figsize=(16, 8), sharex=True)
 
 ax1.plot(c_1_grid, c_1_grid, '--', color='black')
@@ -1478,57 +1475,6 @@ $[0, 2]$.
 While the iso-entropy lines are identical in the two figures, these 'expansion paths' differ because the utility functions differ,
 meaning that for a given $\theta$ and $(c_1, c_2, c_3)$ triple, the worst-case probabilities $\hat \pi_i(\theta) =  \pi_i \frac{\exp(-u(c_i)/\theta )} {E\exp(-u(c)/\theta )}$ differ as we vary $\theta$, causing the associated entropies to differ.
 
-
-**Color bars:** 
-
-* First color bar: variation in $\theta$  
-* Second color bar: variation in utility levels  
-* Third color bar: variation in entropy levels
-
-
-```{code-cell} ipython3
-:tags: [hide-input]
-
-# Plotting functions
-def make_segments(x, y):
-    '''
-    Create list of line segments from x and y coordinates, in the correct format for LineCollection:
-    an array of the form   numlines x (points per line) x 2 (x and y) array
-    '''
-
-    points = np.array([x, y]).T.reshape(-1, 1, 2)
-    segments = np.concatenate([points[:-1], points[1:]], axis=1)
-    
-    return segments
-
-
-def colorline(x, y, z=None, cmap=plt.get_cmap('copper'), norm=plt.Normalize(0.0, 1.0), linewidth=3, alpha=1.0):
-    '''
-    Plot a colored line with coordinates x and y
-    Optionally specify colors in the array z
-    Optionally specify a colormap, a norm function and a line width
-    '''
-    
-    # Default colors equally spaced on [0,1]:
-    if z is None:
-        z = np.linspace(0.0, 1.0, len(x))
-           
-    # Special case if a single number:
-    if not hasattr(z, "__iter__"):  # to check for numerical input -- this is a hack
-        z = np.array([z])
-        
-    z = np.asarray(z)
-    
-    segments = make_segments(x, y)
-    lc = LineCollection(segments, array=z, cmap=cmap, linewidth=linewidth, alpha=alpha)
-    
-    ax = plt.gca()
-    ax.add_collection(lc)
-    plt.colorbar(lc)
-    
-    return lc
-```
-
 ```{code-cell} ipython3
 :tags: [hide-input]
 
@@ -1544,13 +1490,12 @@ def contour_plot(α, π_vals_nb=200, levels_nb=20, min_π_val=1e-8):
     """
     Create a contour plot containing iso-utility and iso-entropy curves given utility
     function parameter `α`.
-    
     """
-    
+
     # Create utility function
     u = utility_function_factory(α)
 
-    # Initialize arrays 
+    # Initialize arrays
     π_hat = np.empty(3)
     EU_levels = np.empty((π_vals_nb, π_vals_nb))
     ent_levels = np.empty_like(EU_levels)
@@ -1565,37 +1510,63 @@ def contour_plot(α, π_vals_nb=200, levels_nb=20, min_π_val=1e-8):
     # Loop over all (π_hat_1,  π_hat_2) pairs
     for i, π_hat_1 in enumerate(π_hat_1_vals):
         for j, π_hat_2 in enumerate(π_hat_2_vals):
-            # Update π_hat vector with current values
             π_hat[0] = π_hat_1
             π_hat[1] = π_hat_2
             π_hat[2] = 1 - π_hat[0] - π_hat[1]
 
-            # Compute and store expected utility and entropy level if π_hat is a valid probability vector
             if 0. <= π_hat[2] <= 1:
                 EU_levels[j, i] = np.sum(π_hat * u_c_bundle)
                 ent_levels[j, i] = ent(π_base, π_hat)
-            else: 
+            else:
                 EU_levels[j, i] = np.nan
                 ent_levels[j, i] = np.nan
-                
-    # Create grid of θ values
+
+    # Compute distorted probability distributions for each θ
     θ_vals = np.linspace(1e-4, 2., num=50)
     π_hat_coord = np.empty((π_base.size, θ_vals.size))
-    
-    # For each θ, compute distorted probability distribution
-    for i in range(θ_vals.size):  
+
+    for i in range(θ_vals.size):
         m = compute_change_measure(u, c_bundle, θ_vals[i], π_base)
         π_hat_coord[:, i] = π_base * m
-    
+
     # Create contour plot
-    plt.figure(figsize=(14, 6))
-    plt.contour(π_hat_1_vals, π_hat_2_vals, EU_levels, levels=levels_nb, cmap='spring')
-    plt.colorbar()
-    plt.contour(π_hat_1_vals, π_hat_2_vals, ent_levels, levels=levels_nb, cmap='winter')
-    plt.colorbar()
-    colorline(π_hat_coord[0, :], π_hat_coord[1, :], z=θ_vals)
-    plt.xlabel(r'$\hat{\pi}_{1}$')
-    plt.ylabel(r'$\hat{\pi}_{2}$')
+    fig, ax = plt.subplots(figsize=(10, 8))
+
+    # Entropy as filled contours (background layer)
+    cf_ent = ax.contourf(π_hat_1_vals, π_hat_2_vals, ent_levels,
+                         levels=levels_nb, cmap='YlOrRd', alpha=0.6)
+    ax.contour(π_hat_1_vals, π_hat_2_vals, ent_levels,
+               levels=levels_nb, colors='orangered',
+               linewidths=0.5, alpha=0.4)
+
+    # Iso-utility as line contours (foreground layer)
+    cs_eu = ax.contour(π_hat_1_vals, π_hat_2_vals, EU_levels,
+                       levels=levels_nb, cmap='winter',
+                       linewidths=1.2, alpha=0.8)
+    ax.clabel(cs_eu, inline=True, fontsize=10, fmt='%.2g')
+
+    # Expansion path as colored line
+    points = np.array(
+        [π_hat_coord[0, :], π_hat_coord[1, :]]).T.reshape(-1, 1, 2)
+    segments = np.concatenate([points[:-1], points[1:]], axis=1)
+    lc = LineCollection(segments, array=θ_vals, cmap='copper', linewidth=3)
+    ax.add_collection(lc)
+
+    # Mark baseline probability
+    ax.plot(π_base[0], π_base[1], 'o', color='black', markersize=8,
+            zorder=5, label=r'$\pi = ({}, {})$'.format(π_1, π_2))
+
+    # Colorbars with labels
+    fig.colorbar(cf_ent, ax=ax, label='Entropy', shrink=0.8, pad=0.02)
+    fig.colorbar(lc, ax=ax, label=r'$\theta$', shrink=0.8, pad=0.02)
+
+    ax.set_xlabel(r'$\hat{\pi}_{1}$')
+    ax.set_ylabel(r'$\hat{\pi}_{2}$')
+    ax.set_title(
+        r'Iso-utility (blue) and iso-entropy (red), $\alpha = {}$'.format(α))
+    ax.legend(loc='upper right', fontsize=14)
+    plt.tight_layout()
+    plt.show()
 ```
 
 ```{code-cell} ipython3
@@ -1605,7 +1576,6 @@ def contour_plot(α, π_vals_nb=200, levels_nb=20, min_π_val=1e-8):
 
 contour_plot(α)
 ```
-
 
 ```{code-cell} ipython3
 :tags: [hide-input]
@@ -1670,7 +1640,6 @@ The following figure reports  best-case and worst-case expected utilities.
 
 We calculate the lines in this figure  numerically by solving optimization problems with respect to the change of measure.
 
-
 ```{code-cell} ipython3
 :tags: [hide-input]
 
@@ -1733,6 +1702,7 @@ def max_obj_wrapper(m_0_and_1, η):
 
 ```{code-cell} ipython3
 :tags: [hide-input]
+
 method = 'Nelder-Mead'
 m_0_and_1 = np.ones(2)  # Initial guess
 
@@ -1871,9 +1841,6 @@ that {cite}`BHS_2009` show imply high measured market prices of risk even when a
 representative consumer has the unit coefficient of relative risk
 aversion associated with a logarithmic one-period utility function.
 
-
-
-
 ```{code-cell} ipython3
 :tags: [hide-input]
 
@@ -1923,12 +1890,6 @@ ax2.set_ylim(0, 90.)
 lns = [lns1[2][0]]+lns2+lns3
 labs = [l.get_label() for l in lns]
 ax.legend(lns, labs, loc=0);
-```
-
-```{code-cell} ipython3
-:tags: [hide-input]
-
-rc('text',usetex=True)
 ```
 
 The density for the approximating model is
