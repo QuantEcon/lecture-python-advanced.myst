@@ -253,7 +253,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Dec 21, 2025
+                            Last changed: Feb 19, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -264,10 +264,19 @@
                             
                             <li class="changelog-entry">
                                 
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/08e3389d" class="changelog-hash">08e3389d</a>
+                                
+                                <span class="changelog-author">Humphrey Yang</span>
+                                <span class="changelog-time">13 minutes ago</span>
+                                <span class="changelog-message">[five_preferences] Update Heatmap Figures for Better Visualization</span>
+                            </li>
+                            
+                            <li class="changelog-entry">
+                                
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/18b02bb4" class="changelog-hash">18b02bb4</a>
                                 
                                 <span class="changelog-author">thomassargent30</span>
-                                <span class="changelog-time">1 month ago</span>
+                                <span class="changelog-time">2 months ago</span>
                                 <span class="changelog-message">Tom's Dec 21 edits of lecture 25</span>
                             </li>
                             
@@ -276,7 +285,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">4 months ago</span>
+                                <span class="changelog-time">5 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -285,7 +294,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e7e8d05f" class="changelog-hash">e7e8d05f</a>
                                 
                                 <span class="changelog-author">suda-yuga</span>
-                                <span class="changelog-time">5 months ago</span>
+                                <span class="changelog-time">6 months ago</span>
                                 <span class="changelog-message">Replace np.sum(a * b) with a @ b (#212)</span>
                             </li>
                             
@@ -371,12 +380,10 @@ probability distribution to a decision maker.</p>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mpl</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rc</span><span class="p">,</span> <span class="n">cm</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.mplot3d</span><span class="w"> </span><span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">rc</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">optimize</span><span class="p">,</span> <span class="n">stats</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">loadmat</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">LineCollection</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">ListedColormap</span><span class="p">,</span> <span class="n">BoundaryNorm</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">numba</span><span class="w"> </span><span class="kn">import</span> <span class="n">njit</span>
 </pre></div>
 </div>
@@ -389,23 +396,12 @@ probability distribution to a decision maker.</p>
 <p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting parameters</span>
-<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format=&#39;retina&#39;
-
-<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="n">label_size</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">label_tick_size</span> <span class="o">=</span> <span class="mi">18</span>
-<span class="n">title_size</span> <span class="o">=</span> <span class="mi">24</span>
-<span class="n">legend_size</span> <span class="o">=</span> <span class="mi">16</span>
-<span class="n">text_size</span> <span class="o">=</span> <span class="mi">18</span>
-
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_size</span> 
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;ytick.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_tick_size</span> 
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;xtick.labelsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">label_tick_size</span> 
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.titlesize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">title_size</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;legend.fontsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">legend_size</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">text_size</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">titlesize</span><span class="o">=</span><span class="mi">24</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;legend&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -433,12 +429,11 @@ probability distribution to a decision maker.</p>
 <span class="k">def</span><span class="w"> </span><span class="nf">T_θ_factory</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return an operator `T_θ` for a given penalty parameter `θ` and probability distribution vector `π`.</span>
-<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">def</span><span class="w"> </span><span class="nf">T_θ</span><span class="p">(</span><span class="n">u</span><span class="p">):</span>  
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Risk-sensitivity operator of Jacobson (1973) and Whittle (1981) taking a function `u` as argument.</span>
-<span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="o">-</span><span class="n">θ</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">π</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">u</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="n">θ</span><span class="p">))</span>
     
@@ -448,20 +443,21 @@ probability distribution to a decision maker.</p>
 <span class="k">def</span><span class="w"> </span><span class="nf">compute_change_measure</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">π</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the change of measure given a utility function `u`, a consumption vector `c`,</span>
-<span class="sd">    a penalty parameter `θ` and a baseline probability vector `π` </span>
-<span class="sd">    </span>
+<span class="sd">    a penalty parameter `θ` and a baseline probability vector `π`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
-    <span class="n">m_unnormalized</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">u</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="n">θ</span><span class="p">)</span>
-    <span class="n">m</span> <span class="o">=</span>  <span class="n">m_unnormalized</span> <span class="o">/</span> <span class="p">(</span><span class="n">π</span> <span class="o">@</span> <span class="n">m_unnormalized</span><span class="p">)</span>
+
+    <span class="n">log_m</span> <span class="o">=</span> <span class="o">-</span><span class="n">u</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="n">θ</span>
+    <span class="n">log_m</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">log_m</span><span class="p">)</span>  <span class="c1"># log-sum-exp trick for numerical stability</span>
+    <span class="n">m_unnormalized</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_m</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">m_unnormalized</span> <span class="o">/</span> <span class="p">(</span><span class="n">π</span> <span class="o">@</span> <span class="n">m_unnormalized</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">m</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">utility_function_factory</span><span class="p">(</span><span class="n">α</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return a CRRA utility function parametrized by `α` </span>
-<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">if</span> <span class="n">α</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span>
         <span class="k">return</span> <span class="k">lambda</span> <span class="n">c</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span> 
@@ -570,16 +566,16 @@ E m \log m  = \hat E \log m .
 </details>
 <div class="cell_output docutils container">
 <figure class="align-default" id="figure1">
-<a class="reference internal image-reference" href="_images/e0033f4bede933244406869b981afcb10ef3f5b46aa670a8d0728abe089bd234.png"><img alt="_images/e0033f4bede933244406869b981afcb10ef3f5b46aa670a8d0728abe089bd234.png" src="_images/e0033f4bede933244406869b981afcb10ef3f5b46aa670a8d0728abe089bd234.png" style="width: 486px; height: 313px;" />
-</a>
+<img alt="_images/9e7700e8202f31a63341fd1dffac8a2b6c8d247e13034666b17e196b48978469.png" src="_images/9e7700e8202f31a63341fd1dffac8a2b6c8d247e13034666b17e196b48978469.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 26.1 </span><span class="caption-text">Figure 1</span><a class="headerlink" href="#figure1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p>The heat maps in  the next two  figures vary both <span class="math notranslate nohighlight">\(\hat{\pi}_1\)</span> and <span class="math notranslate nohighlight">\(\pi_1\)</span>.</p>
-<p>The following figure plots  entropy.</p>
+<p>The heat maps in the next figure vary both <span class="math notranslate nohighlight">\(\hat{\pi}_1\)</span> and <span class="math notranslate nohighlight">\(\pi_1\)</span>.</p>
+<p>The left panel plots entropy, which equals zero along the diagonal <span class="math notranslate nohighlight">\(\hat{\pi}_1 = \pi_1\)</span> and grows as <span class="math notranslate nohighlight">\(\hat{\pi}\)</span> diverges from <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>The right panel plots the logarithm of entropy</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -593,12 +589,12 @@ E m \log m  = \hat E \log m .
 <span class="c1"># Initialize matrix of entropy values</span>
 <span class="n">ent_vals_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">π_0_vals</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">π_hat_0_vals</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
 
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">π_0_vals</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>  <span class="c1"># Loop over all possible values for `π_0` </span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">π_0_vals</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>  <span class="c1"># Loop over `π_0` </span>
     <span class="c1"># Update `π` values</span>
     <span class="n">π</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">π_0_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="n">π</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">π_0_vals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
     
-    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">π_hat_0_vals</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>  <span class="c1"># Loop over all possible values for `π_hat_0` </span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">π_hat_0_vals</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>  <span class="c1"># Loop over `π_hat_0` </span>
         <span class="c1"># Update `π_hat` values</span>
         <span class="n">π_hat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">π_hat_0_vals</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
         <span class="n">π_hat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">π_hat_0_vals</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
@@ -618,69 +614,61 @@ E m \log m  = \hat E \log m .
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">π_0_vals</span><span class="p">,</span> <span class="n">π_hat_0_vals</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ent_vals_mat</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;seismic&#39;</span><span class="p">,</span> <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;gouraud&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\hat{\pi}_1$&#39;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\pi_1$&#39;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Entropy Heat Map&#39;</span><span class="p">);</span>
+<span class="n">ent_data</span> <span class="o">=</span> <span class="n">ent_vals_mat</span><span class="o">.</span><span class="n">T</span>
+<span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">divide</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">):</span>
+    <span class="n">log_ent_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ent_data</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="c1"># Left panel: Entropy</span>
+<span class="n">n_levels</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">levels_ent</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">ent_data</span><span class="p">),</span> <span class="n">n_levels</span><span class="p">)</span>
+
+<span class="n">cf1</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ent_data</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels_ent</span><span class="p">,</span>
+                    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">)</span>
+<span class="n">cs1</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">ent_data</span><span class="p">,</span>
+                   <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">],</span>
+                   <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">cs1</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.2g</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">π_0_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">π_0_vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">π_0_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">π_0_vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat{\pi}_1 = \pi_1$&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\pi_1$&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\hat{\pi}_1$&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Entropy&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cf1</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="c1"># Right panel: Log Entropy</span>
+<span class="n">finite_vals</span> <span class="o">=</span> <span class="n">log_ent_data</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">log_ent_data</span><span class="p">)]</span>
+<span class="n">vmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">finite_vals</span><span class="p">))</span>
+<span class="n">levels_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">vmax</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">n_levels</span><span class="p">)</span>
+
+<span class="n">cf2</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">log_ent_data</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels_log</span><span class="p">,</span>
+                    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">)</span>
+<span class="n">cs2</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">log_ent_data</span><span class="p">,</span>
+                   <span class="n">levels</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                   <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">cs2</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">π_0_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">π_0_vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="p">[</span><span class="n">π_0_vals</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">π_0_vals</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span>
+         <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span>
+         <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\hat{\pi}_1 = \pi_1$&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_aspect</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\pi_1$&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\hat{\pi}_1$&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Log Entropy&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cf2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/6d0b0e9b72c713a40dbeefd87c036ce6cd47eb12107aba4a73b25d184f84d9fa.png"><img alt="_images/6d0b0e9b72c713a40dbeefd87c036ce6cd47eb12107aba4a73b25d184f84d9fa.png" src="_images/6d0b0e9b72c713a40dbeefd87c036ce6cd47eb12107aba4a73b25d184f84d9fa.png" style="width: 800px; height: 729px;" />
-</a>
-</div>
-</div>
-<p>The next figure plots  the logarithm of entropy.</p>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the point (0.01, 0.9)</span>
-<span class="n">π</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">])</span>
-<span class="n">π_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>
-<span class="n">ent</span><span class="p">(</span><span class="n">π</span><span class="p">,</span> <span class="n">π_hat</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.8205752275831846
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">ent_vals_mat</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">shading</span><span class="o">=</span><span class="s1">&#39;gouraud&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;seismic&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\hat{\pi}_1$&#39;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\pi_1$&#39;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Log Entropy Heat Map&#39;</span><span class="p">);</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_8319/3759713737.py:2: RuntimeWarning: divide by zero encountered in log
-  plt.pcolormesh(x, y, np.log(ent_vals_mat.T), shading=&#39;gouraud&#39;, cmap=&#39;seismic&#39;)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/9f2fe8b70481b1db5088c11fb311a91a3fd88cd6f8a1322337cc4d5cfaecd52b.png"><img alt="_images/9f2fe8b70481b1db5088c11fb311a91a3fd88cd6f8a1322337cc4d5cfaecd52b.png" src="_images/9f2fe8b70481b1db5088c11fb311a91a3fd88cd6f8a1322337cc4d5cfaecd52b.png" style="width: 819px; height: 729px;" />
-</a>
+<img alt="_images/919904c1b3db3bf06a494064292806e9d2f14e9dea32f7ad331f8707cfe5c80e.png" src="_images/919904c1b3db3bf06a494064292806e9d2f14e9dea32f7ad331f8707cfe5c80e.png" />
 </div>
 </div>
 </section>
@@ -900,8 +888,7 @@ solve</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/e09c2af8f2333af78fc85f979ed45036ee10bba7ea0f5b628d35d92865614f4a.png"><img alt="_images/e09c2af8f2333af78fc85f979ed45036ee10bba7ea0f5b628d35d92865614f4a.png" src="_images/e09c2af8f2333af78fc85f979ed45036ee10bba7ea0f5b628d35d92865614f4a.png" style="width: 867px; height: 698px;" />
-</a>
+<img alt="_images/5f00b27b499f5712b995223c8291cd4cd79385ba11b7024f3593304a2c3e8d02.png" src="_images/5f00b27b499f5712b995223c8291cd4cd79385ba11b7024f3593304a2c3e8d02.png" />
 </div>
 </div>
 <p>For large values of <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\({\sf T} u(c)\)</span> is approximately linear in the probability <span class="math notranslate nohighlight">\(\pi_1\)</span>, but for lower values of <span class="math notranslate nohighlight">\(\theta\)</span>, <span class="math notranslate nohighlight">\({\sf T} u(c)\)</span> has considerable    curvature as a function of <span class="math notranslate nohighlight">\(\pi_1\)</span>.</p>
@@ -997,8 +984,7 @@ solve</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/ff57f7a39afd1306e231547dbf1caeff0a7964d5a3eb256fc9583408c2949d8b.png"><img alt="_images/ff57f7a39afd1306e231547dbf1caeff0a7964d5a3eb256fc9583408c2949d8b.png" src="_images/ff57f7a39afd1306e231547dbf1caeff0a7964d5a3eb256fc9583408c2949d8b.png" style="width: 1318px; height: 575px;" />
-</a>
+<img alt="_images/2f8480aeb15855331c463123d4207ec1e73e8828a5aa5d5ea58fc386c3874748.png" src="_images/2f8480aeb15855331c463123d4207ec1e73e8828a5aa5d5ea58fc386c3874748.png" />
 </div>
 </div>
 <p>The panel on the right portrays how the transformation <span class="math notranslate nohighlight">\(\exp\left(\frac{-u\left(c\right)}{\theta}\right)\)</span> sends <span class="math notranslate nohighlight">\(u\left(c\right)\)</span> to a new function by  (i)  flipping the  sign,  and (ii) increasing curvature in proportion to <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
@@ -1120,8 +1106,7 @@ entropy curve lies below the horizontal dotted line at an entropy level of <span
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/29f14ca591a6b433c27eb39af9e57b42884cbe62d129f2c129992cfb1075ca1e.png"><img alt="_images/29f14ca591a6b433c27eb39af9e57b42884cbe62d129f2c129992cfb1075ca1e.png" src="_images/29f14ca591a6b433c27eb39af9e57b42884cbe62d129f2c129992cfb1075ca1e.png" style="width: 989px; height: 698px;" />
-</a>
+<img alt="_images/8f38c4b9bda196ca8ee075d2849606ab224d2213b220f6704690c1159a2e3dae.png" src="_images/8f38c4b9bda196ca8ee075d2849606ab224d2213b220f6704690c1159a2e3dae.png" />
 </div>
 </div>
 <p>The next  figure shows the function <span class="math notranslate nohighlight">\(\sum_{i=1}^I \pi_i m_i [  u(c_i) + \theta \log m_i ]\)</span> that is to be
@@ -1196,8 +1181,7 @@ minimized in the multiplier problem.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/5ee03c299c637b6aabae4ddcfd5260380486db85899c5cbbb1b2a9473ec26859.png"><img alt="_images/5ee03c299c637b6aabae4ddcfd5260380486db85899c5cbbb1b2a9473ec26859.png" src="_images/5ee03c299c637b6aabae4ddcfd5260380486db85899c5cbbb1b2a9473ec26859.png" style="width: 989px; height: 698px;" />
-</a>
+<img alt="_images/caa06559b1cb9b3547cf252778b292504020b59262f7ff5b8a6224666b790618.png" src="_images/caa06559b1cb9b3547cf252778b292504020b59262f7ff5b8a6224666b790618.png" />
 </div>
 </div>
 <p>Evidently, from this figure and also from formula <a class="reference internal" href="#equation-tom12">(26.12)</a>, lower values of <span class="math notranslate nohighlight">\(\theta\)</span> lead to lower,
@@ -1491,8 +1475,7 @@ point along the 45 degree line.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/88b0e5af075b99120d26fceb4a263b4cf0774ecdc2a683dc6418ea5b0a4d562b.png"><img alt="_images/88b0e5af075b99120d26fceb4a263b4cf0774ecdc2a683dc6418ea5b0a4d562b.png" src="_images/88b0e5af075b99120d26fceb4a263b4cf0774ecdc2a683dc6418ea5b0a4d562b.png" style="width: 1350px; height: 706px;" />
-</a>
+<img alt="_images/461bcfe298e257a4d0f66d9e19b348047532cb86ba428061d57d31dd8a879c54.png" src="_images/461bcfe298e257a4d0f66d9e19b348047532cb86ba428061d57d31dd8a879c54.png" />
 </div>
 </div>
 <p><strong>Kink at 45 degree line</strong></p>
@@ -1622,8 +1605,7 @@ preferences tangent.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/95058a10296f8d3968cd88134a4f82135f4efcf673db878c5c0c801b22052d46.png"><img alt="_images/95058a10296f8d3968cd88134a4f82135f4efcf673db878c5c0c801b22052d46.png" src="_images/95058a10296f8d3968cd88134a4f82135f4efcf673db878c5c0c801b22052d46.png" style="width: 1344px; height: 706px;" />
-</a>
+<img alt="_images/65fc38404ef5364311c6410b2f95814c5b1f87b504d5a8a10b3e309f09078857.png" src="_images/65fc38404ef5364311c6410b2f95814c5b1f87b504d5a8a10b3e309f09078857.png" />
 </div>
 </div>
 <p>Note that all three lines of the left graph intersect at (1, 3). While the intersection at (3, 1) is hard-coded, the intersection at (1,3) arises from the computation,  which confirms that the code seems to be
@@ -1730,8 +1712,7 @@ degree line), and <em>ex post</em> Bayesian (dotted lines) preferences.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/13ab5af71f42d88fb26b93a753d55dea0bed1261beb99ac0202b6d7d26b036f6.png"><img alt="_images/13ab5af71f42d88fb26b93a753d55dea0bed1261beb99ac0202b6d7d26b036f6.png" src="_images/13ab5af71f42d88fb26b93a753d55dea0bed1261beb99ac0202b6d7d26b036f6.png" style="width: 879px; height: 706px;" />
-</a>
+<img alt="_images/266955be07979e46ed22fe0b9e430ef3cc9ea4a154db358ee2eebba190e82108.png" src="_images/266955be07979e46ed22fe0b9e430ef3cc9ea4a154db358ee2eebba190e82108.png" />
 </div>
 </div>
 <p>Because budget constraints are linear, asset prices are identical under
@@ -1822,8 +1803,7 @@ equivalent point <span class="math notranslate nohighlight">\((c^*, c^*)\)</span
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/2620f0c04b226f8db2458f78bcca6b0361bbc69ddc499f4d0d74a71a8752fc24.png"><img alt="_images/2620f0c04b226f8db2458f78bcca6b0361bbc69ddc499f4d0d74a71a8752fc24.png" src="_images/2620f0c04b226f8db2458f78bcca6b0361bbc69ddc499f4d0d74a71a8752fc24.png" style="width: 724px; height: 706px;" />
-</a>
+<img alt="_images/a822cc1eb67cb042a0306c26fa1615faae076e3089f96b7602dcf1f4badd4f18.png" src="_images/a822cc1eb67cb042a0306c26fa1615faae076e3089f96b7602dcf1f4badd4f18.png" />
 </div>
 </div>
 <p>The figure indicates that the certainty equivalent
@@ -1860,62 +1840,6 @@ curves that is traced out as one varies <span class="math notranslate nohighligh
 <span class="math notranslate nohighlight">\([0, 2]\)</span>.</p>
 <p>While the iso-entropy lines are identical in the two figures, these ‘expansion paths’ differ because the utility functions differ,
 meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\((c_1, c_2, c_3)\)</span> triple, the worst-case probabilities <span class="math notranslate nohighlight">\(\hat \pi_i(\theta) =  \pi_i \frac{\exp(-u(c_i)/\theta )} {E\exp(-u(c)/\theta )}\)</span> differ as we vary <span class="math notranslate nohighlight">\(\theta\)</span>, causing the associated entropies to differ.</p>
-<p><strong>Color bars:</strong></p>
-<ul class="simple">
-<li><p>First color bar: variation in <span class="math notranslate nohighlight">\(\theta\)</span></p></li>
-<li><p>Second color bar: variation in utility levels</p></li>
-<li><p>Third color bar: variation in entropy levels</p></li>
-</ul>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plotting functions</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">make_segments</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Create list of line segments from x and y coordinates, in the correct format for LineCollection:</span>
-<span class="sd">    an array of the form   numlines x (points per line) x 2 (x and y) array</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="n">segments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">points</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">:]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">segments</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">colorline</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="s1">&#39;copper&#39;</span><span class="p">),</span> <span class="n">norm</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">Normalize</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">),</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    Plot a colored line with coordinates x and y</span>
-<span class="sd">    Optionally specify colors in the array z</span>
-<span class="sd">    Optionally specify a colormap, a norm function and a line width</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-    
-    <span class="c1"># Default colors equally spaced on [0,1]:</span>
-    <span class="k">if</span> <span class="n">z</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
-           
-    <span class="c1"># Special case if a single number:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="s2">&quot;__iter__&quot;</span><span class="p">):</span>  <span class="c1"># to check for numerical input -- this is a hack</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">z</span><span class="p">])</span>
-        
-    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
-    
-    <span class="n">segments</span> <span class="o">=</span> <span class="n">make_segments</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-    <span class="n">lc</span> <span class="o">=</span> <span class="n">LineCollection</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">array</span><span class="o">=</span><span class="n">z</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
-    
-    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">lc</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">lc</span><span class="p">)</span>
-    
-    <span class="k">return</span> <span class="n">lc</span>
-</pre></div>
-</div>
-</div>
-</details>
-</div>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1935,13 +1859,12 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a contour plot containing iso-utility and iso-entropy curves given utility</span>
 <span class="sd">    function parameter `α`.</span>
-<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
     <span class="c1"># Create utility function</span>
     <span class="n">u</span> <span class="o">=</span> <span class="n">utility_function_factory</span><span class="p">(</span><span class="n">α</span><span class="p">)</span>
 
-    <span class="c1"># Initialize arrays </span>
+    <span class="c1"># Initialize arrays</span>
     <span class="n">π_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">EU_levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">π_vals_nb</span><span class="p">,</span> <span class="n">π_vals_nb</span><span class="p">))</span>
     <span class="n">ent_levels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">EU_levels</span><span class="p">)</span>
@@ -1956,37 +1879,63 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
     <span class="c1"># Loop over all (π_hat_1,  π_hat_2) pairs</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">π_hat_1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">π_hat_1_vals</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">π_hat_2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">π_hat_2_vals</span><span class="p">):</span>
-            <span class="c1"># Update π_hat vector with current values</span>
             <span class="n">π_hat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">π_hat_1</span>
             <span class="n">π_hat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">π_hat_2</span>
             <span class="n">π_hat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">π_hat</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">π_hat</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
-            <span class="c1"># Compute and store expected utility and entropy level if π_hat is a valid probability vector</span>
             <span class="k">if</span> <span class="mf">0.</span> <span class="o">&lt;=</span> <span class="n">π_hat</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">EU_levels</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">π_hat</span> <span class="o">*</span> <span class="n">u_c_bundle</span><span class="p">)</span>
                 <span class="n">ent_levels</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ent</span><span class="p">(</span><span class="n">π_base</span><span class="p">,</span> <span class="n">π_hat</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span> 
+            <span class="k">else</span><span class="p">:</span>
                 <span class="n">EU_levels</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
                 <span class="n">ent_levels</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-                
-    <span class="c1"># Create grid of θ values</span>
+
+    <span class="c1"># Compute distorted probability distributions for each θ</span>
     <span class="n">θ_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e-4</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
     <span class="n">π_hat_coord</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">π_base</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">θ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">))</span>
-    
-    <span class="c1"># For each θ, compute distorted probability distribution</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">θ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>  
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">θ_vals</span><span class="o">.</span><span class="n">size</span><span class="p">):</span>
         <span class="n">m</span> <span class="o">=</span> <span class="n">compute_change_measure</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">c_bundle</span><span class="p">,</span> <span class="n">θ_vals</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">π_base</span><span class="p">)</span>
         <span class="n">π_hat_coord</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">π_base</span> <span class="o">*</span> <span class="n">m</span>
-    
+
     <span class="c1"># Create contour plot</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">π_hat_1_vals</span><span class="p">,</span> <span class="n">π_hat_2_vals</span><span class="p">,</span> <span class="n">EU_levels</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels_nb</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;spring&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">π_hat_1_vals</span><span class="p">,</span> <span class="n">π_hat_2_vals</span><span class="p">,</span> <span class="n">ent_levels</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels_nb</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;winter&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
-    <span class="n">colorline</span><span class="p">(</span><span class="n">π_hat_coord</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">π_hat_coord</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:],</span> <span class="n">z</span><span class="o">=</span><span class="n">θ_vals</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\hat{\pi}_</span><span class="si">{1}</span><span class="s1">$&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\hat{\pi}_</span><span class="si">{2}</span><span class="s1">$&#39;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+
+    <span class="c1"># Entropy as filled contours (background layer)</span>
+    <span class="n">cf_ent</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">π_hat_1_vals</span><span class="p">,</span> <span class="n">π_hat_2_vals</span><span class="p">,</span> <span class="n">ent_levels</span><span class="p">,</span>
+                         <span class="n">levels</span><span class="o">=</span><span class="n">levels_nb</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">π_hat_1_vals</span><span class="p">,</span> <span class="n">π_hat_2_vals</span><span class="p">,</span> <span class="n">ent_levels</span><span class="p">,</span>
+               <span class="n">levels</span><span class="o">=</span><span class="n">levels_nb</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="s1">&#39;orangered&#39;</span><span class="p">,</span>
+               <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+    <span class="c1"># Iso-utility as line contours (foreground layer)</span>
+    <span class="n">cs_eu</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">π_hat_1_vals</span><span class="p">,</span> <span class="n">π_hat_2_vals</span><span class="p">,</span> <span class="n">EU_levels</span><span class="p">,</span>
+                       <span class="n">levels</span><span class="o">=</span><span class="n">levels_nb</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;winter&#39;</span><span class="p">,</span>
+                       <span class="n">linewidths</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">clabel</span><span class="p">(</span><span class="n">cs_eu</span><span class="p">,</span> <span class="n">inline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.2g</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Expansion path as colored line</span>
+    <span class="n">points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">π_hat_coord</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:],</span> <span class="n">π_hat_coord</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]])</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="n">segments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">points</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="mi">1</span><span class="p">:]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">lc</span> <span class="o">=</span> <span class="n">LineCollection</span><span class="p">(</span><span class="n">segments</span><span class="p">,</span> <span class="n">array</span><span class="o">=</span><span class="n">θ_vals</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;copper&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_collection</span><span class="p">(</span><span class="n">lc</span><span class="p">)</span>
+
+    <span class="c1"># Mark baseline probability</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">π_base</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">π_base</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span>
+            <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\pi = (</span><span class="si">{}</span><span class="s1">, </span><span class="si">{}</span><span class="s1">)$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">π_1</span><span class="p">,</span> <span class="n">π_2</span><span class="p">))</span>
+
+    <span class="c1"># Colorbars with labels</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cf_ent</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Entropy&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">lc</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\theta$&#39;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\hat{\pi}_</span><span class="si">{1}</span><span class="s1">$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\hat{\pi}_</span><span class="si">{2}</span><span class="s1">$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+        <span class="sa">r</span><span class="s1">&#39;Iso-utility (blue) and iso-entropy (red), $\alpha = </span><span class="si">{}</span><span class="s1">$&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">α</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -2007,12 +1956,7 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_8319/2351647651.py:36: RuntimeWarning: invalid value encountered in divide
-  m =  m_unnormalized / (π @ m_unnormalized)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/1fb4b493a0643403d7e015c3b29c5c457ae85efa68b07a08d24740d5d8a7df1a.png"><img alt="_images/1fb4b493a0643403d7e015c3b29c5c457ae85efa68b07a08d24740d5d8a7df1a.png" src="_images/1fb4b493a0643403d7e015c3b29c5c457ae85efa68b07a08d24740d5d8a7df1a.png" style="width: 1074px; height: 552px;" />
-</a>
+<img alt="_images/e34b3f1f4ec52fa986ae18174fb87951015e4ea915db34ab8bd6fb02e22c54ec.png" src="_images/e34b3f1f4ec52fa986ae18174fb87951015e4ea915db34ab8bd6fb02e22c54ec.png" />
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
@@ -2030,14 +1974,7 @@ meaning that for a given <span class="math notranslate nohighlight">\(\theta\)</
 </div>
 </details>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_8319/2351647651.py:35: RuntimeWarning: overflow encountered in exp
-  m_unnormalized = np.exp(-u(c) / θ)
-/tmp/ipykernel_8319/2351647651.py:36: RuntimeWarning: invalid value encountered in divide
-  m =  m_unnormalized / (π @ m_unnormalized)
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="_images/1a483b65133af6a5efcf55f6f0228a0224a3b078a9ad32bc03a7329bb620b2ee.png"><img alt="_images/1a483b65133af6a5efcf55f6f0228a0224a3b078a9ad32bc03a7329bb620b2ee.png" src="_images/1a483b65133af6a5efcf55f6f0228a0224a3b078a9ad32bc03a7329bb620b2ee.png" style="width: 1104px; height: 552px;" />
-</a>
+<img alt="_images/4d290a95d8ad516660e7e6bd0fe95e009b9bd5cd02b805d91c8612f172d203c4.png" src="_images/4d290a95d8ad516660e7e6bd0fe95e009b9bd5cd02b805d91c8612f172d203c4.png" />
 </div>
 </div>
 </section>
@@ -2213,8 +2150,7 @@ entropy <span class="math notranslate nohighlight">\(\sum_{i=1}^I \pi_i m_i \log
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/c2d704bdd7d29c37ea26b003824836c12adb7c32e9c7d67cab6087c7e9113921.png"><img alt="_images/c2d704bdd7d29c37ea26b003824836c12adb7c32e9c7d67cab6087c7e9113921.png" src="_images/c2d704bdd7d29c37ea26b003824836c12adb7c32e9c7d67cab6087c7e9113921.png" style="width: 754px; height: 544px;" />
-</a>
+<img alt="_images/771f2e2457aa0aec294de328589f322a39555def8c10cee91a8bcf95c24989d9.png" src="_images/771f2e2457aa0aec294de328589f322a39555def8c10cee91a8bcf95c24989d9.png" />
 </div>
 </div>
 <p>In this figure, expected utility is on the co-ordinate axis
@@ -2363,22 +2299,8 @@ aversion associated with a logarithmic one-period utility function.</p>
 </div>
 </details>
 <div class="cell_output docutils container">
-<a class="reference internal image-reference" href="_images/cc0e9c63a3c53b503b9fc13c6f8ddd5a497cad593e08f569189a45dd1bd4d708.png"><img alt="_images/cc0e9c63a3c53b503b9fc13c6f8ddd5a497cad593e08f569189a45dd1bd4d708.png" src="_images/cc0e9c63a3c53b503b9fc13c6f8ddd5a497cad593e08f569189a45dd1bd4d708.png" style="width: 860px; height: 676px;" />
-</a>
+<img alt="_images/ff812692336a196741f9df41d0afaceff3c2ce1972e3be2f3b6ec799c64854ff.png" src="_images/ff812692336a196741f9df41d0afaceff3c2ce1972e3be2f3b6ec799c64854ff.png" />
 </div>
-</div>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span><span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</details>
 </div>
 <p>The density for the approximating model is
 <span class="math notranslate nohighlight">\(\log c_{t+1} - \log c_t = \mu + \sigma_c \epsilon_{t+1}\)</span> where
