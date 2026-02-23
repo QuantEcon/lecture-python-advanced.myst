@@ -243,7 +243,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Aug 31, 2025
+                            Last changed: Feb 23, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -251,6 +251,15 @@
                     <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
                         <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commits/main/lectures/calvo_abreu.md">full history</a>)</h4>
                         <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/8c84d8da" class="changelog-hash">8c84d8da</a>
+                                
+                                <span class="changelog-author">Humphrey Yang</span>
+                                <span class="changelog-time">9 minutes ago</span>
+                                <span class="changelog-message">[amss] Update Tom's edits to AMSS and Calvo Lectures (#312)</span>
+                            </li>
                             
                             <li class="changelog-entry">
                                 
@@ -360,15 +369,8 @@ function at <span class="math notranslate nohighlight">\(t+1\)</span> gives:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old2-new">
 <span class="eqno">(45.2)<a class="headerlink" href="#equation-eq-old2-new" title="Link to this equation">#</a></span>\[\theta_t = \frac{\alpha}{1+\alpha} \theta_{t+1} + \frac{1}{1+\alpha} \mu_t\]</div>
 <p>Because <span class="math notranslate nohighlight">\(\alpha &gt; 0\)</span>,  <span class="math notranslate nohighlight">\(0 &lt; \frac{\alpha}{1+\alpha} &lt; 1\)</span>.</p>
-<p><strong>Definition:</strong> For  scalar <span class="math notranslate nohighlight">\(b_t\)</span>, let <span class="math notranslate nohighlight">\(L^2\)</span> be the space of sequences
-<span class="math notranslate nohighlight">\(\{b_t\}_{t=0}^\infty\)</span> satisfying</p>
-<div class="math notranslate nohighlight">
-\[
-\sum_{t=0}^\infty  b_t^2 &lt; +\infty
-\]</div>
-<p>We say that a sequence that belongs to <span class="math notranslate nohighlight">\(L^2\)</span>   is <strong>square summable</strong>.</p>
-<p>When we assume that the sequence <span class="math notranslate nohighlight">\(\vec \mu = \{\mu_t\}_{t=0}^\infty\)</span> is square summable and we require that the sequence <span class="math notranslate nohighlight">\(\vec \theta = \{\theta_t\}_{t=0}^\infty\)</span> is square summable,
-the linear difference equation <a class="reference internal" href="#equation-eq-old2-new">(45.2)</a> can be solved forward to get:</p>
+<p>We assume that the sequence <span class="math notranslate nohighlight">\(\vec \mu = \{\mu_t\}_{t=0}^\infty\)</span> is bounded.</p>
+<p>Consequently, the linear difference equation <a class="reference internal" href="#equation-eq-old2-new">(45.2)</a> can be solved forward to get:</p>
 <div class="math notranslate nohighlight" id="equation-eq-old3-new">
 <span class="eqno">(45.3)<a class="headerlink" href="#equation-eq-old3-new" title="Link to this equation">#</a></span>\[\theta_t = \frac{1}{1+\alpha} \sum_{j=0}^\infty \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j}\]</div>
 <p><strong>Insight:</strong> In the spirit of Chang <span id="id11">[<a class="reference internal" href="zreferences.html#id221" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">Chang, 1998</a>]</span>,  equations <a class="reference internal" href="#equation-eq-old1-new">(45.1)</a> and <a class="reference internal" href="#equation-eq-old3-new">(45.3)</a> show that <span class="math notranslate nohighlight">\(\theta_t\)</span> intermediates

@@ -262,7 +262,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Aug 31, 2025
+                            Last changed: Feb 23, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -270,6 +270,15 @@
                     <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
                         <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commits/main/lectures/opt_tax_recur.md">full history</a>)</h4>
                         <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/8c84d8da" class="changelog-hash">8c84d8da</a>
+                                
+                                <span class="changelog-author">Humphrey Yang</span>
+                                <span class="changelog-time">9 minutes ago</span>
+                                <span class="changelog-message">[amss] Update Tom's edits to AMSS and Calvo Lectures (#312)</span>
+                            </li>
                             
                             <li class="changelog-entry">
                                 
@@ -352,15 +361,6 @@
                                 <span class="changelog-message">Update sources from lecture-python-advanced (ce9441dad2ec187b4c93cfca6225aa68818dd033) using sphinx-tomyst + adjustment</span>
                             </li>
                             
-                            <li class="changelog-entry">
-                                
-                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/9bc53b9c" class="changelog-hash">9bc53b9c</a>
-                                
-                                <span class="changelog-author">Shu Hu</span>
-                                <span class="changelog-time">4 years ago</span>
-                                <span class="changelog-message">[39_opt_tax_recur] Adjust Figure Sizes (#36)</span>
-                            </li>
-                            
                         </ul>
                     </div>
 
@@ -411,30 +411,35 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </div>
 <section id="overview">
 <h2><span class="section-number">46.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>This lecture describes a celebrated model of optimal fiscal policy by Robert E.
+<p>This lecture describes special case of a celebrated model of optimal fiscal policy by Robert E.
 Lucas, Jr., and Nancy Stokey  <span id="id1">[<a class="reference internal" href="zreferences.html#id182" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span>.</p>
-<p>The model revisits classic issues about how to pay for a war.</p>
+<p>We use our special case of their  model to  revisit classic issues about how to pay for a war.</p>
 <p>Here a <em>war</em> means a more  or less temporary surge in an exogenous government expenditure process.</p>
 <p>The model features</p>
 <ul class="simple">
-<li><p>a government that must finance an exogenous stream of government expenditures with  either</p>
+<li><p>a linear production function mapping labor into a single good</p></li>
+<li><p>a representative household that likes both consumption and leisure</p></li>
+<li><p>an exogenous history-contingent sequence  of government expenditures that a goverment must finance with revenues from a sequence of history-dependent flat rate taxes</p></li>
+<li><p>an exogenous initial  debt  the government must also finance</p></li>
+<li><p>a Ramsey planner who at time <span class="math notranslate nohighlight">\(t=0\)</span> chooses a  history contingent plan for flat rate taxes  at all <span class="math notranslate nohighlight">\(t \geq 0\)</span></p></li>
+<li><p>a sequence of continuation  governments that at each <span class="math notranslate nohighlight">\(t \geq 1\)</span> must pay off the one-period state-contingent debt that a time <span class="math notranslate nohighlight">\(t-1\)</span> government has issued</p>
 <ul>
-<li><p>a flat rate tax on labor, or</p></li>
-<li><p>purchases and sales from a full array of Arrow state-contingent securities</p></li>
+<li><p>each time <span class="math notranslate nohighlight">\(t \geq 1\)</span> government is free to reset the time <span class="math notranslate nohighlight">\(t\)</span> flat tax rate</p></li>
+<li><p>each time <span class="math notranslate nohighlight">\(t \geq 1\)</span> government  can also borrow or lend by selling or buying<br />
+one-period-ahead <a class="reference external" href="https://en.wikipedia.org/wiki/Arrow_security">Arrow securities</a></p></li>
 </ul>
 </li>
-<li><p>a representative household that values consumption and leisure</p></li>
-<li><p>a linear production function mapping labor into a single good</p></li>
-<li><p>a Ramsey planner who at time <span class="math notranslate nohighlight">\(t=0\)</span> chooses a plan for taxes and
-trades of <a class="reference external" href="https://en.wikipedia.org/wiki/Arrow_security">Arrow securities</a> for all <span class="math notranslate nohighlight">\(t \geq 0\)</span></p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Important parts of <span id="id2">[<a class="reference internal" href="zreferences.html#id182" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> are about how the government should finance a stochastic sequence of debt service payments that at time <span class="math notranslate nohighlight">\(0\)</span> the government has inherited from the past. Lucas and Stokey’s government must honor this stream of random payments, either by paying promised coupons when they become due at a particular date, state pair or else by issuing new debt, i.e., by somehow rolling it over. We study the special case of Lucas and Stokey’s model that assumes that at time <span class="math notranslate nohighlight">\(0\)</span> the government  owes only  <span class="math notranslate nohighlight">\(b_0(s_0)\)</span> units of the time <span class="math notranslate nohighlight">\(0\)</span>, state <span class="math notranslate nohighlight">\(s_0\)</span> consumption good.</p>
+</div>
 <p>After first presenting the model in a space of sequences, we shall represent it
 recursively in terms of two Bellman equations formulated along lines that we
 encountered in <a class="reference internal" href="dyn_stack.html"><span class="doc">Dynamic Stackelberg models</span></a>.</p>
 <p>As in <a class="reference internal" href="dyn_stack.html"><span class="doc">Dynamic Stackelberg models</span></a>, to apply dynamic programming
-we shall define the state vector artfully.</p>
-<p>In particular, we shall include forward-looking variables that summarize  optimal
-responses of private agents to a Ramsey plan.</p>
+we shall define a state vector artfully.</p>
+<p>In particular, we shall include as  components of the state some forward-looking variables that summarize  optimal responses of private agents to a Ramsey tax plan.</p>
 <p>See <a class="reference internal" href="lqramsey.html"><span class="doc">Optimal taxation</span></a> for analysis within a linear-quadratic setting.</p>
 <p>Let’s start with some standard imports:</p>
 <div class="cell docutils container">
@@ -586,7 +591,10 @@ conditional on history <span class="math notranslate nohighlight">\(s^t\)</span>
 <div class="math notranslate nohighlight" id="equation-ls102">
 <span class="eqno">(46.10)<a class="headerlink" href="#equation-ls102" title="Link to this equation">#</a></span>\[q_t^0(s^t) = \beta^{t} \pi_{t}(s^{t})
                             {u_c(s^{t})  \over u_c(s^0)}\]</div>
-<p>(The stochastic process <span class="math notranslate nohighlight">\(\{q_t^0(s^t)\}\)</span> is an instance of what finance economists call a <em>stochastic discount factor</em> process.)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The stochastic process <span class="math notranslate nohighlight">\(\{\beta^{t}{u_c(s^{t})  \over u_c(s^0)}\}\)</span> is an instance of what finance economists call a <em>stochastic discount factor</em> process. The random variable <span class="math notranslate nohighlight">\(\beta^{t+1}{u_c(s^{t+1})  \over u_c(s^t)}\)</span> is the time <span class="math notranslate nohighlight">\(t+1\)</span> multiplicative increment to the stochastic discount factor process.</p>
+</div>
 <p>Using the first-order conditions <a class="reference internal" href="#equation-lsa-taxr">(46.8)</a> and <a class="reference internal" href="#equation-ls101">(46.9)</a> to eliminate
 taxes and prices from <a class="reference internal" href="#equation-ts-bcpv2">(46.7)</a>, we derive the <em>implementability condition</em></p>
 <div class="math notranslate nohighlight" id="equation-tss-cham1">
@@ -617,7 +625,7 @@ u_\ell(s^t) n_t(s^t) \right]\]</div>
 \Bigr\} - \Phi u_c(0) b_0\]</div>
 <p>where  <span class="math notranslate nohighlight">\(\{\theta_t(s^t); \forall s^t\}_{t\geq0}\)</span> is a sequence of Lagrange
 multipliers on the feasible conditions <a class="reference internal" href="#equation-tss-techr-opt-tax">(46.2)</a>.</p>
-<p>Given an initial government debt <span class="math notranslate nohighlight">\(b_0\)</span>,  we want to maximize <span class="math notranslate nohighlight">\(J\)</span>
+<p>Given an initial government debt  payment <span class="math notranslate nohighlight">\(b_0\)</span> due at time <span class="math notranslate nohighlight">\(0\)</span>,  we want to maximize <span class="math notranslate nohighlight">\(J\)</span>
 with respect to <span class="math notranslate nohighlight">\(\{c_t(s^t), n_t(s^t); \forall s^t \}_{t\geq0}\)</span>   and to minimize with respect
 to <span class="math notranslate nohighlight">\(\Phi\)</span> and with respect to <span class="math notranslate nohighlight">\(\{\theta(s^t); \forall s^t \}_{t\geq0}\)</span>.</p>
 <p>The first-order conditions for the Ramsey problem for periods <span class="math notranslate nohighlight">\(t \geq 1\)</span> and <span class="math notranslate nohighlight">\(t=0\)</span>, respectively, are</p>
@@ -838,8 +846,8 @@ continuation of a time <span class="math notranslate nohighlight">\(0\)</span>, 
 <section id="specification-with-crra-utility">
 <h3><span class="section-number">46.2.9. </span>Specification with CRRA utility<a class="headerlink" href="#specification-with-crra-utility" title="Link to this heading">#</a></h3>
 <p>In our calculations below and in a <a class="reference internal" href="amss.html"><span class="doc">subsequent lecture</span></a> based on an <em>extension</em> of the Lucas-Stokey model
-by  Aiyagari, Marcet, Sargent, and Seppälä (2002) <span id="id2">[<a class="reference internal" href="zreferences.html#id136" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span>, we shall modify the one-period utility function assumed above.</p>
-<p>(We adopted the preceding utility specification because it was the one used in  the original Lucas-Stokey paper <span id="id3">[<a class="reference internal" href="zreferences.html#id182" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span>. We shall soon  revert to that specification in a subsequent section.)</p>
+by  Aiyagari, Marcet, Sargent, and Seppälä (2002) <span id="id3">[<a class="reference internal" href="zreferences.html#id136" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span>, we shall modify the one-period utility function assumed above.</p>
+<p>(We adopted the preceding utility specification because it was the one used in  the original Lucas-Stokey paper <span id="id4">[<a class="reference internal" href="zreferences.html#id182" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span>. We shall soon  revert to that specification in a subsequent section.)</p>
 <p>We will  modify their specification by instead assuming that the  representative agent has  utility function</p>
 <div class="math notranslate nohighlight">
 \[
@@ -874,8 +882,8 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
 <div class="math notranslate nohighlight" id="equation-ts-barg11">
 <span class="eqno">(46.28)<a class="headerlink" href="#equation-ts-barg11" title="Link to this equation">#</a></span>\[(1+\Phi) [u_c(c_0) + u_n(c_0+g_0)] + \Phi[c_0 u_{cc}(c_0) + (c_0+g_0) u_{nn}(c_0+g_0)] - \Phi u_{cc}(c_0) b_0 = 0\]</div>
 <p>In equation <a class="reference internal" href="#equation-ts-barg10">(46.27)</a>, it is understood that <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are each functions of the Markov state <span class="math notranslate nohighlight">\(s\)</span>.</p>
-<p>In addition, the time <span class="math notranslate nohighlight">\(t=0\)</span> budget constraint is satisfied at <span class="math notranslate nohighlight">\(c_0\)</span> and initial government debt
-<span class="math notranslate nohighlight">\(b_0\)</span>:</p>
+<p>In addition, the time <span class="math notranslate nohighlight">\(t=0\)</span> budget constraint is satisfied at <span class="math notranslate nohighlight">\(c_0\)</span> and initial  government debt
+<span class="math notranslate nohighlight">\(b_0\)</span> due at time <span class="math notranslate nohighlight">\(0\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-opt-tax-eqn-10">
 <span class="eqno">(46.29)<a class="headerlink" href="#equation-opt-tax-eqn-10" title="Link to this equation">#</a></span>\[b_0 + g_0 = \tau_0 (c_0 + g_0) + \beta  \sum_{s=1}^S \Pi(s | s_0) \frac{u_c(s)}{u_{c,0}} b_1(s)\]</div>
 <p>where <span class="math notranslate nohighlight">\(\tau_0\)</span> is the time <span class="math notranslate nohighlight">\(t=0\)</span> tax rate.</p>
@@ -1113,7 +1121,7 @@ at times <span class="math notranslate nohighlight">\(t = 1, 2, \ldots\)</span>.
 different objective function and faces different constraints and state variables than does the
 Ramsey planner at time <span class="math notranslate nohighlight">\(t =0\)</span>.</p>
 <p>A key step in representing a Ramsey plan recursively is
-to regard the marginal utility scaled government debts
+to regard the marginal utility scaled one-period government debts
 <span class="math notranslate nohighlight">\(x_t(s^t) = u_c(s^t) b_t(s_t|s^{t-1})\)</span> as predetermined quantities
 that continuation Ramsey planners at times <span class="math notranslate nohighlight">\(t \geq 1\)</span> are
 obligated to attain.</p>
@@ -2007,7 +2015,7 @@ identical allocations.</p>
 <section id="further-comments">
 <h3><span class="section-number">46.4.6. </span>Further comments<a class="headerlink" href="#further-comments" title="Link to this heading">#</a></h3>
 <p>A <a class="reference internal" href="amss.html"><span class="doc">related lecture</span></a> describes an extension of the Lucas-Stokey model
-by  Aiyagari, Marcet, Sargent, and Seppälä (2002) <span id="id4">[<a class="reference internal" href="zreferences.html#id136" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span>.</p>
+by  Aiyagari, Marcet, Sargent, and Seppälä (2002) <span id="id5">[<a class="reference internal" href="zreferences.html#id136" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span>.</p>
 <p>In the AMSS economy, only a risk-free bond is traded.</p>
 <p>That lecture compares the recursive representation of the Lucas-Stokey model
 presented in this lecture with  one for an AMSS economy.</p>
