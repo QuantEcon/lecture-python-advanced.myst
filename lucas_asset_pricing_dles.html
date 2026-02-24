@@ -77,8 +77,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=22b71a9b445b7b2b6a277c0a48ea72bf6e7c90d9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=65b86b9423025043228643fcfb616ce846cb91c1"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -159,7 +159,20 @@
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+    }
+  } catch(e) {}
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -171,6 +184,11 @@
 
                 <div class="qe-page__toc">
 
+                    
+                    
+                    
+
+                    
                     <div class="inner">
 
                         
@@ -200,10 +218,14 @@
                         <div class="qe-page__toc-footer">
                             
                             
+                            
                             <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                         </div>
 
                     </div>
+
+                    
 
                 </div>
 
@@ -335,7 +357,7 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.10.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.0)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -531,7 +553,7 @@ perpetual claim on the endowment process <span class="math notranslate nohighlig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/692b75e629c47174ad5612e129588255b9bc13e7f45ba0184a16b1aee2a8a975.png" src="_images/692b75e629c47174ad5612e129588255b9bc13e7f45ba0184a16b1aee2a8a975.png" />
+<img alt="_images/7a292afd30655077aaaac54b416063d31c25bd0e924e5ab43bb8c68eb9e12af6.png" src="_images/7a292afd30655077aaaac54b416063d31c25bd0e924e5ab43bb8c68eb9e12af6.png" />
 </div>
 </div>
 <p>The next plot displays the realized gross rate of return on this “Lucas
@@ -547,7 +569,7 @@ tree” as well as on a risk-free one-period bond:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/91ed4bb16905bca1f40188a65fff4cdb7464b07d9d89fdef79d806f8f9894d3c.png" src="_images/91ed4bb16905bca1f40188a65fff4cdb7464b07d9d89fdef79d806f8f9894d3c.png" />
+<img alt="_images/a6420d156274d59dbfbf4f678dc76924871731e837e3c6974174a62c8298b690.png" src="_images/a6420d156274d59dbfbf4f678dc76924871731e837e3c6974174a62c8298b690.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -557,8 +579,8 @@ tree” as well as on a risk-free one-period bond:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.40792259],
-       [-0.40792259,  1.        ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.45310122],
+       [-0.45310122,  1.        ]])
 </pre></div>
 </div>
 </div>
@@ -579,7 +601,7 @@ one-period and five-period risk-free bonds:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/499b88aedce316bd57f04250b6168f51c34d59943c9801b3267003f2ad621a2d.png" src="_images/499b88aedce316bd57f04250b6168f51c34d59943c9801b3267003f2ad621a2d.png" />
+<img alt="_images/3ebf0088757b038e620ee96574144d7e7f16668fb41060487db21777426981d9.png" src="_images/3ebf0088757b038e620ee96574144d7e7f16668fb41060487db21777426981d9.png" />
 </div>
 </div>
 <p>From the above plot, we can see the tendency of the term structure to
@@ -614,7 +636,7 @@ the endowment process is reduced to 0.4:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/cb38d5c2b99aa53dfb46b27a7620b110c0feddbfd3abc047f0dab229dd97de8e.png" src="_images/cb38d5c2b99aa53dfb46b27a7620b110c0feddbfd3abc047f0dab229dd97de8e.png" />
+<img alt="_images/96e71a4bbe487e257d0a6b6a2769331b1c7308db462b960cbc80530f31397ff7.png" src="_images/96e71a4bbe487e257d0a6b6a2769331b1c7308db462b960cbc80530f31397ff7.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -624,8 +646,8 @@ the endowment process is reduced to 0.4:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.       , -0.6455407],
-       [-0.6455407,  1.       ]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.        , -0.70078518],
+       [-0.70078518,  1.        ]])
 </pre></div>
 </div>
 </div>
@@ -644,7 +666,7 @@ five-period risk-free bonds:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/80631043fd748e3a1996808d62b68987afce5155d83c431245245f3c0250ec3d.png" src="_images/80631043fd748e3a1996808d62b68987afce5155d83c431245245f3c0250ec3d.png" />
+<img alt="_images/8739f25d08dc7eae63a56f118ccf181d53ab17124c61e8546503b51b9253c38d.png" src="_images/8739f25d08dc7eae63a56f118ccf181d53ab17124c61e8546503b51b9253c38d.png" />
 </div>
 </div>
 <p>We can see the tendency of the term structure to slope up when rates are

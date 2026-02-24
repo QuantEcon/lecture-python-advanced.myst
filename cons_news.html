@@ -77,8 +77,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=22b71a9b445b7b2b6a277c0a48ea72bf6e7c90d9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=65b86b9423025043228643fcfb616ce846cb91c1"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -159,7 +159,20 @@
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+    }
+  } catch(e) {}
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -171,6 +184,11 @@
 
                 <div class="qe-page__toc">
 
+                    
+                    
+                    
+
+                    
                     <div class="inner">
 
                         
@@ -213,10 +231,14 @@
                         <div class="qe-page__toc-footer">
                             
                             
+                            
                             <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                         </div>
 
                     </div>
+
+                    
 
                 </div>
 
@@ -373,7 +395,7 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.10.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.0)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -1073,7 +1095,7 @@ form <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, we can simp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f5cf25ffcb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8ce897b60&gt;
 </pre></div>
 </div>
 <img alt="_images/76b33f8ac4ba58add8b0be4f4fa38f121540f4d405bef1f85c211b228fab058f.png" src="_images/76b33f8ac4ba58add8b0be4f4fa38f121540f4d405bef1f85c211b228fab058f.png" />
@@ -1110,7 +1132,7 @@ permanently <strong>decreases</strong> by <span class="math notranslate nohighli
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f5cf24a8a50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8ce740910&gt;
 </pre></div>
 </div>
 <img alt="_images/03527f6c6d75474a2f96b82fcb097c9c324dde8b49a641f57af4b8031975446b.png" src="_images/03527f6c6d75474a2f96b82fcb097c9c324dde8b49a641f57af4b8031975446b.png" />
@@ -1149,10 +1171,10 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f5cf1c639d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8cdef3890&gt;
 </pre></div>
 </div>
-<img alt="_images/04fad032e1a096e378a52bf1e1fe8ac2cd8fa50e807f737fb48fb78681ac453d.png" src="_images/04fad032e1a096e378a52bf1e1fe8ac2cd8fa50e807f737fb48fb78681ac453d.png" />
+<img alt="_images/cc6abc2859ece652226380a84a9fac5a95222aa798f276f9f1f05934ffe08508.png" src="_images/cc6abc2859ece652226380a84a9fac5a95222aa798f276f9f1f05934ffe08508.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1167,10 +1189,10 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f5cf1cb3ed0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8cdf53d90&gt;
 </pre></div>
 </div>
-<img alt="_images/2d470a45baf91699d77a201a9fac8e051352cd64effc6e50ff5ca15fb9cec543.png" src="_images/2d470a45baf91699d77a201a9fac8e051352cd64effc6e50ff5ca15fb9cec543.png" />
+<img alt="_images/ebae8d61a9c1a6baf714c2f28d4579c5f0a5a4fadd9477d197e5e3df12df22a6.png" src="_images/ebae8d61a9c1a6baf714c2f28d4579c5f0a5a4fadd9477d197e5e3df12df22a6.png" />
 </div>
 </div>
 </section>

@@ -77,8 +77,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=22b71a9b445b7b2b6a277c0a48ea72bf6e7c90d9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=65b86b9423025043228643fcfb616ce846cb91c1"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -159,7 +159,20 @@
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+    }
+  } catch(e) {}
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -171,6 +184,11 @@
 
                 <div class="qe-page__toc">
 
+                    
+                    
+                    
+
+                    
                     <div class="inner">
 
                         
@@ -211,10 +229,14 @@
                         <div class="qe-page__toc-footer">
                             
                             
+                            
                             <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                         </div>
 
                     </div>
+
+                    
 
                 </div>
 
@@ -335,7 +357,7 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.10.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.0)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -512,7 +534,7 @@ A_j := \sum_{t=0}^{n-1} a_t \exp \left\{ i 2 \pi \frac{tj}{n} \right\},
   return np.asarray(x, float)
 </pre></div>
 </div>
-<img alt="_images/46056dbfb52113ac05912dd14b88d3b740cf6346e0bce45493ea303145a10aff.png" src="_images/46056dbfb52113ac05912dd14b88d3b740cf6346e0bce45493ea303145a10aff.png" />
+<img alt="_images/540667cdf9343d085b7dae215f9d27a33355831d83d50d8c0f6b5a1dd3c42435.png" src="_images/540667cdf9343d085b7dae215f9d27a33355831d83d50d8c0f6b5a1dd3c42435.png" />
 </div>
 </div>
 <p>This estimate looks rather disappointing, but the data size is only 40, so
@@ -709,7 +731,7 @@ of being closer to the true spectral density.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bac8e9c380faab62e7f52632e8cb5fbc3fdecee1a9d74414b692248450258e43.png" src="_images/bac8e9c380faab62e7f52632e8cb5fbc3fdecee1a9d74414b692248450258e43.png" />
+<img alt="_images/f9bd9cdc4c9216ec45edc93917b891b21d144a360c5c30b0781cd80638572dbc.png" src="_images/f9bd9cdc4c9216ec45edc93917b891b21d144a360c5c30b0781cd80638572dbc.png" />
 </div>
 </div>
 </section>
@@ -758,7 +780,7 @@ and 150 observations in each time series.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/423266af1c8fddfc7f77fd2acd4126a9eb80dcae92e272ae2c09bd5b3182c03c.png" src="_images/423266af1c8fddfc7f77fd2acd4126a9eb80dcae92e272ae2c09bd5b3182c03c.png" />
+<img alt="_images/d2694e76051d282ff05722b5c61dea0dc3078db4580b3032e30d0fad7b7c5459.png" src="_images/d2694e76051d282ff05722b5c61dea0dc3078db4580b3032e30d0fad7b7c5459.png" />
 </div>
 </div>
 </section>

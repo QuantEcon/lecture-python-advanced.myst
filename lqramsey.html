@@ -77,8 +77,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=22b71a9b445b7b2b6a277c0a48ea72bf6e7c90d9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=65b86b9423025043228643fcfb616ce846cb91c1"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -159,7 +159,20 @@
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+    }
+  } catch(e) {}
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -171,6 +184,11 @@
 
                 <div class="qe-page__toc">
 
+                    
+                    
+                    
+
+                    
                     <div class="inner">
 
                         
@@ -227,10 +245,14 @@
                         <div class="qe-page__toc-footer">
                             
                             
+                            
                             <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                         </div>
 
                     </div>
+
+                    
 
                 </div>
 
@@ -369,7 +391,7 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.10.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.0)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -1112,7 +1134,7 @@ g_{t+1} - \mu_g = \rho (g_t - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4bfe9f11f56d8e576bc0ecbe73bbe92a1198ab5ad484ce926fa854d857eb26dc.png" src="_images/4bfe9f11f56d8e576bc0ecbe73bbe92a1198ab5ad484ce926fa854d857eb26dc.png" />
+<img alt="_images/cb9411a5534d2f853d14c26052a18e2960d97f9be1ef3defec0e4d50c3416e22.png" src="_images/cb9411a5534d2f853d14c26052a18e2960d97f9be1ef3defec0e4d50c3416e22.png" />
 </div>
 </div>
 <p>The legends on the figures indicate the variables being tracked.</p>
@@ -1125,7 +1147,7 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e74375f3867ea4c93e3e1cfa5ece55e5f91abef9e10afbdffe7a6e102c5b6148.png" src="_images/e74375f3867ea4c93e3e1cfa5ece55e5f91abef9e10afbdffe7a6e102c5b6148.png" />
+<img alt="_images/0b424bd60a935f3ab9c9b210c4958f428e985c7a8ec3dcdcdce3ec36f78d24b3.png" src="_images/0b424bd60a935f3ab9c9b210c4958f428e985c7a8ec3dcdcdce3ec36f78d24b3.png" />
 </div>
 </div>
 <p>See the original <a href=_static/lecture_specific/lqramsey/firenze.pdf download>manuscript</a> for comments and interpretation.</p>
@@ -1164,7 +1186,7 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/45801bfcc3c67c475be2b003f7dcf178327987e29d5e4891be3b3ed57d763bdb.png" src="_images/45801bfcc3c67c475be2b003f7dcf178327987e29d5e4891be3b3ed57d763bdb.png" />
+<img alt="_images/c0be9ac1b2e153399131d097f5fcd75525f96dd97203d5365473c7a2ac6da932.png" src="_images/c0be9ac1b2e153399131d097f5fcd75525f96dd97203d5365473c7a2ac6da932.png" />
 </div>
 </div>
 <p>The call <code class="docutils literal notranslate"><span class="pre">gen_fig_2(path)</span></code> generates</p>
@@ -1175,7 +1197,7 @@ much less variable than government expenditure.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/739fa4d0f0b6c0954f98f8b8e4e9a46227d62af2a301d912f51c74a262d8ee66.png" src="_images/739fa4d0f0b6c0954f98f8b8e4e9a46227d62af2a301d912f51c74a262d8ee66.png" />
+<img alt="_images/4c4a46570ce2cc08411d1e994235922699764f8b0f673cebfd94c149501384a0.png" src="_images/4c4a46570ce2cc08411d1e994235922699764f8b0f673cebfd94c149501384a0.png" />
 </div>
 </div>
 <p>See the original <a href=_static/lecture_specific/lqramsey/firenze.pdf download>manuscript</a> for comments and interpretation.</p>
@@ -1229,7 +1251,7 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/a30c3a162836054e99832d1079e625ded2437c8829c5f6ae5f6633dab8cba3c6.png" src="_images/a30c3a162836054e99832d1079e625ded2437c8829c5f6ae5f6633dab8cba3c6.png" />
+<img alt="_images/bb8af189f8258a28dfbf49a185b74cc71d4d2b01eec3133b9e5d03c35e4ace62.png" src="_images/bb8af189f8258a28dfbf49a185b74cc71d4d2b01eec3133b9e5d03c35e4ace62.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1239,7 +1261,7 @@ g_{t+1} - \mu_g = \rho (g_{t-3} - \mu_g) + C_g w_{g, t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bd5ed14725028b83e38900122ac3c65ec43f2966f7e5c870b7c87e8cf65c0cc2.png" src="_images/bd5ed14725028b83e38900122ac3c65ec43f2966f7e5c870b7c87e8cf65c0cc2.png" />
+<img alt="_images/66181a212e20f1fb03eddff18c2421ef772b67219b2d6775c4a4a87f8add4ed4.png" src="_images/66181a212e20f1fb03eddff18c2421ef772b67219b2d6775c4a4a87f8add4ed4.png" />
 </div>
 </div>
 </section>

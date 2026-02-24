@@ -77,8 +77,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=22b71a9b445b7b2b6a277c0a48ea72bf6e7c90d9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=65b86b9423025043228643fcfb616ce846cb91c1"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -159,7 +159,20 @@
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+    }
+  } catch(e) {}
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -171,6 +184,11 @@
 
                 <div class="qe-page__toc">
 
+                    
+                    
+                    
+
+                    
                     <div class="inner">
 
                         
@@ -208,10 +226,14 @@
                         <div class="qe-page__toc-footer">
                             
                             
+                            
                             <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                         </div>
 
                     </div>
+
+                    
 
                 </div>
 
@@ -352,7 +374,7 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.10.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.0)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -686,7 +708,7 @@ consumption and investment</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3b192179cd25bc9e192b8b59f05c43f1fb048381a870539e059d0e93c511cdcc.png" src="_images/3b192179cd25bc9e192b8b59f05c43f1fb048381a870539e059d0e93c511cdcc.png" />
+<img alt="_images/c9c04deb103fac5fc075ff7e33133c4b6bff1fa9b5f8fc8f72e81b1eb0e4ca65.png" src="_images/c9c04deb103fac5fc075ff7e33133c4b6bff1fa9b5f8fc8f72e81b1eb0e4ca65.png" />
 </div>
 </div>
 <p>Inspection of the plot shows that the sample paths of consumption and
@@ -804,7 +826,7 @@ consumption and investment</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5a8161962fa41cc17af60aca6b808c5e894ea157ba809d045a586744f076adf3.png" src="_images/5a8161962fa41cc17af60aca6b808c5e894ea157ba809d045a586744f076adf3.png" />
+<img alt="_images/5888edfda075b18389b16fe87959f88bbee0dbeb9dd5fdea0722d4249b9bbcc2.png" src="_images/5888edfda075b18389b16fe87959f88bbee0dbeb9dd5fdea0722d4249b9bbcc2.png" />
 </div>
 </div>
 <p>Simulating our new economy shows that consumption grows quickly in the
@@ -900,7 +922,7 @@ define the new value of <span class="math notranslate nohighlight">\(\lambda\)</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/0cb6381ab5b3b90e0a86d69e78a7cce1e781b94c66869db600ae8cb18621fc84.png" src="_images/0cb6381ab5b3b90e0a86d69e78a7cce1e781b94c66869db600ae8cb18621fc84.png" />
+<img alt="_images/147026938a2ec02428e72443dd2860e05dd755706d7654c8475c3d8723daa84b.png" src="_images/147026938a2ec02428e72443dd2860e05dd755706d7654c8475c3d8723daa84b.png" />
 </div>
 </div>
 <p>Thus, adding habit persistence to the Hall model of Example 1 is enough
@@ -945,7 +967,7 @@ consider the following experiments.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/96ce52981efaf2f3330d730044820382a50b8ce9568d9f3345bf725ec48f1214.png" src="_images/96ce52981efaf2f3330d730044820382a50b8ce9568d9f3345bf725ec48f1214.png" />
+<img alt="_images/5285b41547e0dba6b7f76f483f8cbc59f0d7eb09e34d7e33f1e362c1ba5a4700.png" src="_images/5285b41547e0dba6b7f76f483f8cbc59f0d7eb09e34d7e33f1e362c1ba5a4700.png" />
 </div>
 </div>
 <p>We no longer achieve sustained growth if <span class="math notranslate nohighlight">\(\lambda\)</span> is raised from -1 to -0.7.</p>
@@ -984,7 +1006,7 @@ eigenvalues is now less than 1.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1c27c85dbc3a23eb7776557cee43bd22e0e341645ae7e4f42fdb5d322bbc41a7.png" src="_images/1c27c85dbc3a23eb7776557cee43bd22e0e341645ae7e4f42fdb5d322bbc41a7.png" />
+<img alt="_images/71835d006448378b420ef2ff5055ed92e52fa2ea8fe30f41c714b2f5805f2a71.png" src="_images/71835d006448378b420ef2ff5055ed92e52fa2ea8fe30f41c714b2f5805f2a71.png" />
 </div>
 </div>
 <p>Growth also fails if we lower <span class="math notranslate nohighlight">\(\beta\)</span>, since we now have

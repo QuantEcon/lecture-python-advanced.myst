@@ -77,8 +77,8 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=22b71a9b445b7b2b6a277c0a48ea72bf6e7c90d9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=65b86b9423025043228643fcfb616ce846cb91c1"></script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -159,7 +159,20 @@
   </head>
 <body>
 
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+    }
+  } catch(e) {}
+})();
+</script>
+
 <!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
 
     <span id="top"></span>
 
@@ -171,6 +184,11 @@
 
                 <div class="qe-page__toc">
 
+                    
+                    
+                    
+
+                    
                     <div class="inner">
 
                         
@@ -203,10 +221,14 @@
                         <div class="qe-page__toc-footer">
                             
                             
+                            
                             <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                         </div>
 
                     </div>
+
+                    
 
                 </div>
 
@@ -479,7 +501,7 @@ issues risk-free debt of different maturities.</p>
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.10.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.0)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -708,7 +730,7 @@ Barro model many  times and averaging over simulated paths:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/07835e8d25dd98c920efe87064681bb6f686fd3c9bbff5abccc786c291715aeb.png" src="_images/07835e8d25dd98c920efe87064681bb6f686fd3c9bbff5abccc786c291715aeb.png" />
+<img alt="_images/1b4bd3858fafab4368be643f496cfc47a433e0b1527ae6aed7cccf8e2ac9e5dd.png" src="_images/1b4bd3858fafab4368be643f496cfc47a433e0b1527ae6aed7cccf8e2ac9e5dd.png" />
 </div>
 </div>
 <p>We can see a similar, but a smoother pattern, if we plot government debt
@@ -726,7 +748,7 @@ over time.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/f10a68efc62eec72518e75402c250566b7511bd23ddff9fcab59c8e825749759.png" src="_images/f10a68efc62eec72518e75402c250566b7511bd23ddff9fcab59c8e825749759.png" />
+<img alt="_images/61ee83e956647e060c10d4508c66b433daf69e8b36b2bdc2aa38961f57cb48b4.png" src="_images/61ee83e956647e060c10d4508c66b433daf69e8b36b2bdc2aa38961f57cb48b4.png" />
 </div>
 </div>
 </section>
@@ -847,7 +869,7 @@ recurrently surges.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/817ddab5861d5a8f80ef6371cab1c642af3f2e4724ff5f62dc05ddc5e68a8262.png" src="_images/817ddab5861d5a8f80ef6371cab1c642af3f2e4724ff5f62dc05ddc5e68a8262.png" />
+<img alt="_images/8fdc024e2353134c789997aa5167ef4c550f510d95a5453dad3f9170cbb1e30c.png" src="_images/8fdc024e2353134c789997aa5167ef4c550f510d95a5453dad3f9170cbb1e30c.png" />
 </div>
 </div>
 </section>
