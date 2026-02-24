@@ -103,17 +103,10 @@ or
 
 Because $\alpha > 0$,  $0 < \frac{\alpha}{1+\alpha} < 1$.
 
-**Definition:** For  scalar $b_t$, let $L^2$ be the space of sequences
-$\{b_t\}_{t=0}^\infty$ satisfying
 
-$$
-\sum_{t=0}^\infty  b_t^2 < +\infty
-$$
+We assume that the sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ is bounded.
 
-We say that a sequence that belongs to $L^2$   is **square summable**.
-
-When we assume that the sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ is square summable and we require that the sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$ is square summable,
-the linear difference equation {eq}`eq_old2_new` can be solved forward to get:
+Consequently, the linear difference equation {eq}`eq_old2_new` can be solved forward to get:
 
 ```{math}
 :label: eq_old3_new

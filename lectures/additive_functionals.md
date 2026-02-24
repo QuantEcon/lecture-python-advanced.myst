@@ -244,9 +244,21 @@ class AMF_LSS_VAR:
     """
     This class transforms an additive (multiplicative)
     functional into a QuantEcon linear state space system.
+    Handles both matrix and scalar inputs.
     """
 
     def __init__(self, A, B, D, F=None, ν=None):
+        # Handle scalar inputs by converting to arrays
+        self.scalar_case = np.isscalar(A)
+        if self.scalar_case:
+            A = np.atleast_2d(A)
+            B = np.atleast_2d(B)
+            D = np.atleast_1d(D)
+            if F is not None:
+                F = np.atleast_2d(F)
+            if ν is not None and np.isscalar(ν):
+                ν = float(ν)
+
         # Unpack required elements
         self.nx, self.nk = B.shape
         self.A, self.B = A, B
@@ -594,12 +606,14 @@ def plot_multiplicative(amf, T, npaths=25, show_trend=True):
                                                 sbounds_mult[LI:UI,:],
                                                 1,
                                                 show_trend=show_trend))
-        mult_figs[ii].suptitle(f'Multiplicative decomposition of \
-                                    $y_{ii+1}$', fontsize=14)
+        mult_figs[ii].suptitle(
+            f'Multiplicative decomposition of $y_{ii+1}$', fontsize=14)
 
     return mult_figs
 
-def plot_martingale_paths(amf, T, mpath, mbounds, horline=1, show_trend=False):
+def plot_martingale_paths(amf, T, mpath, mbounds, 
+            horline=1, show_trend=False):
+
     # Allocate space
     trange = np.arange(T)
 
@@ -973,6 +987,119 @@ where $H =  [F + D(I-A)^{-1} B]$.
 
 It follows that $\log {\widetilde M}_t \sim {\mathcal N} ( -\frac{t H \cdot H}{2}, t H \cdot H )$ and that consequently ${\widetilde M}_t$ is log normal.
 
+(mult_mart_moment)=
+### Moments, skewness, and kurtosis
+
+Because $\log \widetilde M_t$ is Gaussian, the moments of $\widetilde M_t$ have simple closed forms.
+
+Let
+
+$$
+a_t := t (H \cdot H) = \mathrm{Var}(\log \widetilde M_t).
+$$
+
+Then for any $k \geq 1$,
+
+$$
+E\left[\widetilde M_t^k\right] = \exp\left(\frac{1}{2} k(k-1) a_t\right).
+$$
+
+In particular, $E[\widetilde M_t]=1$ for all $t$, while higher-order moments grow rapidly in $t$ whenever $H \neq 0$.
+
+Standard summary statistics can be written in terms of $a_t$ as
+
+$$
+\mathrm{Var}(\widetilde M_t) = e^{a_t} - 1,
+$$
+
+$$
+\mathrm{Skew}(\widetilde M_t) = (e^{a_t} + 2)\sqrt{e^{a_t}-1},
+$$
+
+$$
+\mathrm{Kurt}(\widetilde M_t) = e^{4a_t} + 2e^{3a_t} + 3e^{2a_t} - 3.
+$$
+
+(Here, [excess kurtosis](https://en.wikipedia.org/wiki/Kurtosis) is obtained by subtracting 3 from kurtosis)
+
+These formulas show that everything depends on $a_t = t(H \cdot H)$.
+
+To illustrate these formulas, let's plot the growth of a few moments and summary statistics over time.
+
+The following functions compute $\log_{10} E[\widetilde M_t^k]$ and $\log_{10} \mathrm{Var}(\widetilde M_t)$, $\log_{10} \mathrm{Skew}(\widetilde M_t)$, and $\log_{10} \mathrm{Kurt}(\widetilde M_t)$
+
+```{code-cell} ipython3
+def squared_norm(H):
+    H = np.atleast_1d(H).astype(float)
+    return H @ H
+
+def log10_raw_moment(H, t, k):
+    a = t * squared_norm(H)
+    moment = np.exp(0.5 * k * (k - 1) * a)
+    return np.log10(moment)
+
+def log10_var_skew_kurt(H, t):
+    a = t * squared_norm(H)
+
+    var = np.exp(a) - 1
+    skew = (np.exp(a) + 2) * np.sqrt(var)
+    kurt = np.exp(4*a) + 2*np.exp(3*a) + 3*np.exp(2*a) - 3
+
+    return np.log10(var), np.log10(skew), np.log10(kurt)
+```
+
+Let's illustrate the growth of $k$th-order raw moments on a log scale for $H = 2.0$
+
+```{code-cell} ipython3
+H_example = 2.0
+t_grid = np.arange(1, 9)
+ks = [1, 2, 3, 4]
+
+fig, ax = plt.subplots(figsize=(9, 5))
+for k in ks:
+    ax.plot(t_grid,
+            [log10_raw_moment(H_example, t, k) for t in t_grid],
+            marker="o",
+            label=f"$k={k}$")
+
+ax.set_xlabel("$t$")
+ax.set_ylabel(r"$\log_{10} E[\widetilde M_t^k]$")
+plt.legend()
+plt.show()
+```
+
+Next we plot the growth of variance, skewness, and kurtosis
+
+```{code-cell} ipython3
+log10_var = []
+log10_skew = []
+log10_kurt = []
+
+for t in t_grid:
+    lv, ls, lk = log10_var_skew_kurt(H_example, t)
+    log10_var.append(lv)
+    log10_skew.append(ls)
+    log10_kurt.append(lk)
+
+fig, ax = plt.subplots(figsize=(9, 5))
+ax.plot(t_grid, log10_var, marker="o", 
+                label=r"$\log_{10}\,\mathrm{Var}$")
+ax.plot(t_grid, log10_skew, marker="o", 
+                label=r"$\log_{10}\,\mathrm{Skew}$")
+ax.plot(t_grid, log10_kurt, marker="o", 
+                label=r"$\log_{10}\,\mathrm{Kurt}$")
+ax.set_xlabel("$t$")
+plt.legend()
+plt.show()
+```
+
+These plots help explain the *peculiar property* of the multiplicative martingale.
+
+The rapid growth of variance, skewness, and kurtosis reveals that the distribution of $\widetilde M_t$ becomes increasingly right-skewed over time while $E[\widetilde M_t] = 1$ for all $t$. 
+
+This means that most probability density concentrates near zero, while a long right tail preserves the unit mean. 
+
+
 ### Simulating a multiplicative martingale again
 
 Next, we want a program to simulate the likelihood ratio process $\{ \tilde{M}_t \}_{t=0}^\infty$.
@@ -982,120 +1109,9 @@ $[A, B, D, F] = [0.8, 0.001, 1.0, 0.01]$ and $\nu = 0.005$.
 
 After accomplishing this, we want to display and study histograms of $\tilde{M}_T^i$ for various values of  $T$.
 
-Here is code that accomplishes these tasks.
+Let's first write a program to simulate sample paths of $\{ x_t, y_{t} \}_{t=0}^{\infty}$.
 
-### Sample paths
-
-Let's write a program to simulate sample paths of $\{ x_t, y_{t} \}_{t=0}^{\infty}$.
-
-We'll do this by formulating the additive functional as a linear state space model and putting the [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) class to work.
-
-```{code-cell} ipython3
-class AMF_LSS_VAR:
-    """
-    This class is written to transform a scalar additive functional
-    into a linear state space system.
-    """
-    def __init__(self, A, B, D, F=0.0, ν=0.0):
-        # Unpack required elements
-        self.A, self.B, self.D, self.F, self.ν = A, B, D, F, ν
-
-        # Create space for additive decomposition
-        self.add_decomp = None
-        self.mult_decomp = None
-
-        # Construct BIG state space representation
-        self.lss = self.construct_ss()
-
-    def construct_ss(self):
-        """
-        This creates the state space representation that can be passed
-        into the quantecon LSS class.
-        """
-        # Pull out useful info
-        A, B, D, F, ν = self.A, self.B, self.D, self.F, self.ν
-        nx, nk, nm = 1, 1, 1
-        if self.add_decomp:
-            ν, H, g = self.add_decomp
-        else:
-            ν, H, g = self.additive_decomp()
-
-        # Build A matrix for LSS
-        # Order of states is: [1, t, xt, yt, mt]
-        A1 = np.hstack([1, 0, 0, 0, 0])       # Transition for 1
-        A2 = np.hstack([1, 1, 0, 0, 0])       # Transition for t
-        A3 = np.hstack([0, 0, A, 0, 0])       # Transition for x_{t+1}
-        A4 = np.hstack([ν, 0, D, 1, 0])       # Transition for y_{t+1}
-        A5 = np.hstack([0, 0, 0, 0, 1])       # Transition for m_{t+1}
-        Abar = np.vstack([A1, A2, A3, A4, A5])
-
-        # Build B matrix for LSS
-        Bbar = np.vstack([0, 0, B, F, H])
-
-        # Build G matrix for LSS
-        # Order of observation is: [xt, yt, mt, st, tt]
-        G1 = np.hstack([0, 0, 1, 0, 0])            # Selector for x_{t}
-        G2 = np.hstack([0, 0, 0, 1, 0])            # Selector for y_{t}
-        G3 = np.hstack([0, 0, 0, 0, 1])            # Selector for martingale
-        G4 = np.hstack([0, 0, -g, 0, 0])           # Selector for stationary
-        G5 = np.hstack([0, ν, 0, 0, 0])            # Selector for trend
-        Gbar = np.vstack([G1, G2, G3, G4, G5])
-
-        # Build H matrix for LSS
-        Hbar = np.zeros((1, 1))
-
-        # Build LSS type
-        x0 = np.hstack([1, 0, 0, 0, 0])
-        S0 = np.zeros((5, 5))
-        lss = qe.LinearStateSpace(Abar, Bbar, Gbar, Hbar,
-                                      mu_0=x0, Sigma_0=S0)
-
-        return lss
-
-    def additive_decomp(self):
-        """
-        Return values for the martingale decomposition (Proposition 4.3.3.)
-           - ν     : unconditional mean difference in Y
-           - H     : coefficient for the (linear) martingale component (kappa_a)
-           - g     : coefficient for the stationary component g(x)
-           - Y_0   : it should be the function of X_0 (for now set it to 0.0)
-        """
-        A_res = 1 / (1 - self.A)
-        g = self.D * A_res
-        H = self.F + self.D * A_res * self.B
-
-        return self.ν, H, g
-
-    def multiplicative_decomp(self):
-        """
-        Return values for the multiplicative decomposition (Example 5.4.4.)
-            - ν_tilde  : eigenvalue
-            - H        : vector for the Jensen term
-        """
-        ν, H, g = self.additive_decomp()
-        ν_tilde = ν + (.5) * H**2
-
-        return ν_tilde, H, g
-
-    def loglikelihood_path(self, x, y):
-        A, B, D, F = self.A, self.B, self.D, self.F
-        T = y.T.size
-        FF = F**2
-        FFinv = 1 / FF
-        temp = y[1:] - y[:-1] - D * x[:-1]
-        obs = temp * FFinv * temp
-        obssum = np.cumsum(obs)
-        scalar = (np.log(FF) + np.log(2 * np.pi)) * np.arange(1, T)
-
-        return (-0.5) * (obssum + scalar)
-
-    def loglikelihood(self, x, y):
-        llh = self.loglikelihood_path(x, y)
-
-        return llh[-1]
-```
-
-The heavy lifting is done inside the `AMF_LSS_VAR` class.
+We'll do this by formulating the additive functional as a linear state space model and putting the [LinearStateSpace](https://github.com/QuantEcon/QuantEcon.py/blob/master/quantecon/lss.py) class to work via our `AMF_LSS_VAR` class {ref}`defined above <amf_lss>`.
 
 The following code adds some simple functions that make it straightforward to generate sample paths from an instance of `AMF_LSS_VAR`.
 
@@ -1205,7 +1221,7 @@ def Mtilde_t_density(amf, t, xmin=1e-8, xmax=5.0, npts=5000):
 
     # Pull out the multiplicative decomposition
     νtilde, H, g = amf.multiplicative_decomp()
-    H2 = H*H
+    H2 = (H @ H.T).item() 
 
     # The distribution
     mdist = lognorm(np.sqrt(t*H2), scale=np.exp(-t*H2/2))
@@ -1219,7 +1235,7 @@ def logMtilde_t_density(amf, t, xmin=-15.0, xmax=15.0, npts=5000):
 
     # Pull out the multiplicative decomposition
     νtilde, H, g = amf.multiplicative_decomp()
-    H2 = H*H
+    H2 = (H @ H.T).item() 
 
     # The distribution
     lmdist = norm(-t*H2/2, np.sqrt(t*H2))
@@ -1248,7 +1264,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-These probability density functions help us understand mechanics underlying the  **peculiar property** of our multiplicative martingale
+These probability density functions again help us understand mechanics underlying the  **peculiar property** of our multiplicative martingale
 
 * As $T$ grows, most of the probability mass shifts leftward toward zero.
 * For example, note that most  mass is near $1$ for $T =10$ or $T = 100$ but
@@ -1266,3 +1282,164 @@ A **likelihood ratio process** is  a  multiplicative  martingale with mean unity
 
 Likelihood ratio processes exhibit the peculiar property that naturally also appears
 [here](https://python.quantecon.org/likelihood_ratio_process.html).
+
+## Exercises
+
+```{exercise-start}
+:label: addfunc_ex1
+```
+
+Fix $H = 0.5$ and consider the log-normal martingale $\widetilde M_t$.
+
+1. Using the formula for $E[\widetilde M_t^k]$, plot $\log_{10} E[\widetilde M_t^k]$ against $t$ for $k = 1,2,3,4$ and $t = 1,\ldots,8$.
+
+2. Verify from your plot (and the formula) that $\log_{10} E[\widetilde M_t^k]$ is linear in $t$, and compute its slope as a function of $k$ and $H$.
+
+```{exercise-end}
+```
+
+```{solution-start} addfunc_ex1
+:class: dropdown
+```
+
+Here is one solution using the `log10_raw_moment` function 
+
+```{code-cell} ipython3
+H = 0.5
+ks = [1, 2, 3, 4]
+
+fig, ax = plt.subplots(figsize=(9, 5))
+for k in ks:
+    ax.plot(t_grid,
+    [log10_raw_moment(H, t, k) for t in t_grid],
+    marker="o", label=f"$k={k}$")
+ax.legend()
+ax.set_xlabel("$t$")
+ax.set_ylabel(r"$\log_{10} E[\widetilde M_t^k]$")
+plt.show()
+
+H2 = H**2
+for k in ks:
+    slope = np.log10(np.exp(0.5 * k * (k - 1) * H2))
+    print(f"k={k}: slope = {slope:.4f}")
+```
+
+When $k=1$, the slope is zero, reflecting $E[\widetilde M_t]=1$ for all $t$.
+
+```{solution-end}
+```
+
+```{exercise-start}
+:label: addfunc_ex2
+```
+
+For the same martingale $\widetilde M_t$ (take $H=0.5$ as in the previous exercise),
+
+1. Plot $\log_{10}\mathrm{Var}(\widetilde M_t)$, $\log_{10}\mathrm{Skew}(\widetilde M_t)$, and $\log_{10}\mathrm{Kurt}(\widetilde M_t)$ for $t = 1,\ldots,8$.
+   
+2. Plot $\log_{10}(\mathrm{Var}(\widetilde M_t)+1)$ and explain why it is exactly linear in $t$.
+
+```{exercise-end}
+```
+
+```{solution-start} addfunc_ex2
+:class: dropdown
+```
+
+Here is one solution using the `log10_var_skew_kurt` function 
+
+```{code-cell} ipython3
+H = 0.5
+
+log10_var = []
+log10_skew = []
+log10_kurt = []
+log10_var_plus_1 = []
+
+for t in t_grid:
+    lv, ls, lk = log10_var_skew_kurt(H, t)
+    log10_var.append(lv)
+    log10_skew.append(ls)
+    log10_kurt.append(lk)
+    log10_var_plus_1.append(np.log10(np.exp(t * H**2)))
+
+fig, ax = plt.subplots(1, 2, figsize=(12, 4))
+
+ax[0].plot(t_grid, log10_var, marker="o",
+                label=r"$\log_{10}\,\mathrm{Var}$")
+ax[0].plot(t_grid, log10_skew, marker="o",
+                label=r"$\log_{10}\,\mathrm{Skew}$")
+ax[0].plot(t_grid, log10_kurt, marker="o",
+                label=r"$\log_{10}\,\mathrm{Kurt}$")
+ax[0].set_xlabel("$t$")
+ax[0].legend()
+
+ax[1].plot(t_grid, log10_var_plus_1, marker="o",
+                label=r"$\log_{10}(\mathrm{Var}+1)$")
+ax[1].set_xlabel("$t$")
+ax[1].legend()
+
+plt.tight_layout()
+plt.show()
+```
+
+Since $\mathrm{Var}(\widetilde M_t) + 1 = e^{a_t}$ and $a_t = t(H \cdot H)$, we have
+$\log_{10}(\mathrm{Var}(\widetilde M_t)+1) = a_t \log_{10}(e)$, which is linear in $t$.
+
+```{solution-end}
+```
+
+```{exercise-start}
+:label: addfunc_ex3
+```
+
+The formulas in {ref}`mult_mart_moment` depend on $H$ only through $H \cdot H$.
+
+1. Choose two different vectors $H_1$ and $H_2$ with the same value of $H \cdot H$ (for example, $H_1 = 1$ and $H_2=(0.6,0.8)$). 
+
+Show that $\log_{10} E[\widetilde M_t^k]$ agrees for all $t$ and $k$.
+
+2. Compare your results to a larger value, such as $H_3=(1,2,1.5)$, and comment on how quickly the higher-order moments grow.
+
+```{exercise-end}
+```
+
+```{solution-start} addfunc_ex3
+:class: dropdown
+```
+
+Here is one solution using the `squared_norm` and `log10_raw_moment` functions 
+
+```{code-cell} ipython3
+H1 = 1.0
+H2 = np.array([0.6, 0.8])
+H3 = np.array([1.0, 2.0, 1.5])
+
+print("H1.H1 =", squared_norm(H1))
+print("H2.H2 =", squared_norm(H2))
+print("H3.H3 =", squared_norm(H3))
+
+k = 4
+
+fig, ax = plt.subplots(figsize=(9, 5))
+ax.plot(t_grid, [log10_raw_moment(H1, t, k) for t in t_grid],
+                        marker="o", label=r"$H_1=1$",
+                        alpha=0.7, markersize=9)
+ax.plot(t_grid, [log10_raw_moment(H2, t, k) for t in t_grid],
+                        marker="v", label=r"$H_2=(0.6,0.8)$",
+                        alpha=0.7)
+ax.plot(t_grid, [log10_raw_moment(H3, t, k) for t in t_grid],
+                        marker="o", label=r"$H_3=(1,2,1.5)$",
+                        alpha=0.7)
+ax.set_xlabel("$t$")
+ax.set_ylabel(rf"$\log_{{10}} E[\widetilde M_t^{{{k}}}]$")
+ax.legend()
+plt.show()
+```
+
+The curves for $H_1$ and $H_2$ coincide because they have the same squared norm $H \cdot H$.
+
+This exercise shows that only the squared norm $H \cdot H$ and $t$ matters for the moments of $\widetilde M_t$.
+
+```{solution-end}
+```

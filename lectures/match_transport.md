@@ -15,19 +15,19 @@ kernelspec:
 
 ## Overview 
 
-Optimal transport theory studies how a marginal probabilty measure  can  be related to another marginal probability measure in an ideal way.
+Optimal transport theory studies how a marginal probability measure  can  be related to another marginal probability measure in an ideal way.
 
 * here ideal means to minimize some  cost criterion. 
 
-The output of such a theory is a **coupling** of the two probability measures, i.e., a joint probabilty
+The output of such a theory is a **coupling** of the two probability measures, i.e., a joint probability
 measure having those two  marginal probability measures.  
 
-This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodo Wang,
+This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodu Wang,
 and Zhenyuan Zhang  {cite}`boerma2023composite` used optimal transport theory to formulate and compute  an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.  
 
 Production technologies allow firms to   reshape costs of mismatch so that they become concave.   
 
-It is then possible that in  equilibrium there is neither **positive assortive** nor **negative assorting**  matching, an outcome that   {cite}`boerma2023composite` call **composite assortive** matching.
+It is then possible that in  equilibrium there is neither **positive assortative** nor **negative assortative**  matching, an outcome that   {cite}`boerma2023composite` call **composite assortative** matching.
 
 For example, with composite matching in  an equilibrium model with workers of different types,  ex ante   identical *workers* can sort into different *occupations*, some positively and some negatively.  
 
@@ -665,7 +665,7 @@ def find_layers(self):
                 (H_z[None, 1:] <= layers_height[:-1, None]) 
                  * (layers_height[1:, None] <= H_z[None, :-1]))
     
-    # each layer is reshaped as a list of indices correponding to types
+    # each layer is reshaped as a list of indices corresponding to types
     layers = [self.type_z[layers_01[ell]] 
                 for ell in range(len(layers_height)-1)]
 
@@ -1194,7 +1194,7 @@ We then return the full matching, the off-diagonal matching, and the off-diagona
 
 ```{code-cell} ipython3
 def solve_primal_pb(self):
-    # Compute on-diagonal matching, create new instance with resitual types
+    # Compute on-diagonal matching, create new instance with residual types
     off_diagoff_diagonal, match_tuple = self.generate_offD_onD_matching()
     nonzero_id_x, nonzero_id_y, matching_diag = match_tuple
     
@@ -1440,7 +1440,7 @@ There are  two feasible matchings, one corresponding  to PAM, the other to  NAM.
 
 Evidently, 
 
-  * PAM corresponds to the matching with two medium side displacement because the correponding cost is strictly convex and increasing in the the displacement. 
+  * PAM corresponds to the matching with two medium side displacement because the correponding cost is strictly convex and increasing in the displacement. 
   
   * NAM corresponds to the matching with a small displacement and a large displacement because the gain is strictly convex and increasing in the displacement.
 
@@ -1485,7 +1485,7 @@ To explore the coincidental resemblence to a NAM outcome,  let's  shift left typ
 
 PAM and NAM are invariant to any such shift. 
 
-However, for a large enough shift, composite sorting now coindices with PAM.
+However, for a large enough shift, composite sorting now coincides with PAM.
 
 ```{code-cell} ipython3
 N = 2
@@ -2138,7 +2138,7 @@ if len(exam_assign_OD.n_x) * len(exam_assign_OD.m_y) < 1000:
 
 +++ {"user_expressions": []}
 
-Having computed the dual variables of the off-diagonal types, we compute the dual variables for perfecly matched pairs by setting 
+Having computed the dual variables of the off-diagonal types, we compute the dual variables for perfectly matched pairs by setting 
 
 $$
 \begin{aligned}
@@ -2402,7 +2402,7 @@ ConcaveCostOT.plot_marginals_pdf = plot_marginals_pdf
 
 +++ {"user_expressions": []}
 
-We plot the hystograms and the measure of underqualification for the worker types and job types. We then compute the primal solution and plot the matching.
+We plot the histograms and the measure of underqualification for the worker types and job types. We then compute the primal solution and plot the matching.
 
 ```{code-cell} ipython3
 # Plot pdf

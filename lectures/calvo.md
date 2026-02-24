@@ -138,17 +138,11 @@ or
 
 Because $\alpha > 0$,  $0 < \frac{\alpha}{1+\alpha} < 1$.
 
-**Definition:** For scalar $b_t$, let $L^2$ be the space of sequences
-$\{b_t\}_{t=0}^\infty$ satisfying
 
-$$
-\sum_{t=0}^\infty  b_t^2 < +\infty
-$$
+We assume that the sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ is bounded.
 
-We say that a sequence that belongs to $L^2$   is **square summable**.
 
-When we assume that the sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ is square summable and we require that the sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$ is square summable,
-the linear difference equation {eq}`eq_old2` can be solved forward to get:
+Consequently the  linear difference equation {eq}`eq_old2` can be solved forward to get:
 
 ```{math}
 :label: eq_old3
@@ -203,10 +197,9 @@ as it ordinarily would be in the state-space model described in our lecture on  
 We use  form {eq}`eq_old4` because we want to apply an approach described in  our lecture on {doc}`Stackelberg plans <dyn_stack>`.
 
 Notice that $\frac{1+\alpha}{\alpha} > 1$ is an eigenvalue of transition matrix $A$ that threatens to destabilize the state-space system. 
+ 
 
-Indeed, for arbitrary, $\vec \mu = \{\mu_t\}_{t=0}^\infty$ sequences, $\vec \theta = \{\theta_t\}_{t=0}^\infty$ will not be  square summable. 
-
-But the  government  planner will design   a decision rule for $\mu_t$ that  stabilizes  the system and renders $\vec \theta$ square summable. 
+But the  government  planner will design   a decision rule for $\mu_t$ that  stabilizes  the system and renders $\vec \theta$ bounded. 
 
 The  government  values  a representative household's utility of real balances at time $t$ according to the utility function
 
