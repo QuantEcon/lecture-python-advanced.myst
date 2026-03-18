@@ -32,7 +32,7 @@ This lecture presents the analysis in {cite}`sargent1976econometric`, which
 examines the statistical properties of competing estimators of Cagan's {cite}`Cagan` portfolio
 balance schedule during hyperinflations.
 
-The debate involves three estimators:
+The topic involves three estimators:
 
 - **Cagan's estimator** — {cite}`Cagan` regresses real balances on past inflation rates, and is
   consistent only if the price level (or portfolio disturbance) is exogenous.
@@ -48,7 +48,13 @@ projection of one covariance-stationary process onto current and past values
 of another. 
 
 ```{note}
- See footnote 17 of {cite}`sargent2025macroeconomics` for an explanation of information projection in macroeconomics. See  chapter XI of {cite}`Sargent1987` for a discussion of the Wiener–Kolmogorov formula and its applications in macroeconomics.
+ See footnote 17 of {cite}`sargent2025macroeconomics` for an explanation of information projection in macroeconomics. 
+ Let $\{f_\theta(x)\}_{\theta \in \Theta}$ and $\{g_\delta(x)\}_{\delta \in \Delta}$ be two collections (manifolds) of probability distributions for outcomes $x \in X$.  When model $g_{\delta_o}(x)$ governs the data, a population  maximum likelihood estimator $\theta_o$ of parameter vector $\theta \in \Theta$ of misspecified statistical model $f_\theta(x)$  minimizes the Kullback-Leibler divergence
+$ {KL}(g_{\delta_o}, f_{\theta}) = \int \log \left(\frac{g_{\delta_o}(x) }{f_\theta(x)}\right) g_{\delta_o}(x) dx  = - H(g_{\delta_o})  - E _{g_{\delta_o}} \log f_\theta(x) ,$ where $H(g_{\delta_o}) =  \int \log \left(\frac{1}{ g_{\delta_o}(x)}\right) g_{\delta_o}(x) dx$ is the  Shannon information of  nature's probability distribution $g_{\delta_o}(x)$ and   $E _{g_{\delta_o}}$ denotes mathematical expectation under   $g_{\delta_o}(x)$.   The information projection $f_{\theta_o}(x)$ of $g_{\delta_o}(x)$ onto $\{f_\theta(x)\}_{\theta \in \Theta}$ is distribution  $f_{\theta_o}(x)$ in manifold $\{f_\theta(x)\}_{\theta \in \Theta}$  that maximum likelihood selects when nature's model $g_{\delta_o}$ generates the data, i.e., $\theta_o = \operatorname{argmax}_{\theta \in \Theta} E _{g_{\delta_o}} \log f_\theta(x) . $   
+ ```
+
+ ```{note}
+ See  chapter XI of {cite}`Sargent1987` for a discussion of the Wiener–Kolmogorov formula and its applications in macroeconomics.
 ```
 
 This delivers the *population regression* that OLS converges to,
@@ -92,7 +98,9 @@ $$
 m_t - p_t = \alpha(1-\lambda) \sum_{i=0}^{\infty} \lambda^i (p_{t-i} - p_{t-i-1}) + u_t^*
 $$ (eq:cagan_regression)
 
-Cagan estimated this by nonlinear least squares. This is **consistent** if and
+Cagan estimated this by nonlinear least squares. 
+
+This estimator is **consistent** if and
 only if $u_t^*$ is orthogonal to current and past $(p_t - p_{t-1})$, i.e.,
 
 $$
@@ -107,7 +115,9 @@ E[m_s u_t] = 0, \qquad \text{for all } s, t.
 $$ (eq:exogeneity_cond)
 
 {cite}`jacobs1974estimating` noted that if $m_t$ is exogenous {eq}`eq:exogeneity_cond`, then {eq}`eq:orthogonality_cond` generally
-*fails*. When money does not respond to disturbances $u_t$, the price level
+*fails*.
+
+When money does not respond to disturbances $u_t$, the price level
 must absorb them — creating a correlation between $p_t$ and $u_t$ that
 invalidates Cagan's orthogonality condition.
 
@@ -116,7 +126,9 @@ invalidates Cagan's orthogonality condition.
 ## Jacobs' Estimator
 
 When money is exogenous, the correct approach is to *invert* {eq}`eq:cagan_regression` and solve
-for $m$ as a function of $p$'s and $u$'s. Solving gives:
+for $m$ as a function of $p$'s and $u$'s. 
+
+Solving gives:
 
 $$
 m_t - p_t = \frac{\alpha(1-\lambda)}{1 + \alpha(1-\lambda)} \sum_{i=0}^{\infty} \delta^i (m_{t-i} - m_{t-i-1}) + u_t'
@@ -129,9 +141,13 @@ $$
 $$
 
 and the disturbance $u_t'$ is orthogonal to all current and lagged $m$'s (under
-the exogeneity hypothesis). Jacobs estimated {eq}`eq:jacobs_eqn` by nonlinear least squares,
+the exogeneity hypothesis). 
+
+Jacobs estimated {eq}`eq:jacobs_eqn` by nonlinear least squares,
 obtaining very different estimates of $\alpha$, $\lambda$, and $\delta$ from
-Cagan's. In particular, for five of the six hyperinflations he studied, Jacobs
+Cagan's. 
+
+In particular, for five of the six hyperinflations he studied, Jacobs
 found $\delta \approx 1$ — borderline explosive.
 
 This is economically significant because $\delta < 1$ is required for the
@@ -150,7 +166,7 @@ prices to money creation, invalidating Jacobs' identifying assumption.
 
 ## Rational Expectations and the Money–Price Process
 
-{cite}`sargent1973rational` showed that Cagan's model is compatible with rational
+{cite}`sargent1973rational` and {cite}`Sargent77hyper` showed that Cagan's model is compatible with rational
 expectations when the inflation–money creation process is governed by:
 
 $$
@@ -165,9 +181,11 @@ where $\eta_t = u_t - u_{t-1}$ and $v_t$ are each serially independent with
 mean zero and variances $\sigma_u^2$ and $\sigma_v^2$ respectively, and
 $E[\varepsilon_s \eta_t] = \sigma_{e\eta} \cdot \mathbf{1}_{s=t}$.
 
-Under {eq}`eq:money_supply_process`–{eq}`eq:process_definitions`, the first differences of inflation ($x_t$) and money creation
+Under {eq}`eq:money_supply_process`–{eq}`eq:process_definitions`,  first differences of inflation ($x_t$) and money creation
 ($M_t$) are correlated first-order moving average processes, driven by two
-serially uncorrelated shocks $\eta_t$ and $v_t$. We can write the reduced form
+serially uncorrelated shocks $\eta_t$ and $v_t$.
+
+We can write the reduced form
 as a bivariate MA(1):
 
 $$
@@ -179,7 +197,7 @@ x_t = C_\eta \, \eta_t + D_\eta \, \eta_{t-1} + C_v \, v_t
 $$ (eq:ma_x)
 
 where the coefficients $A_\eta, B_\eta, A_v, C_\eta, D_\eta, C_v$ are functions
-of the structural parameters $\alpha$, $\lambda$, derived in Sargent (1976).
+of the structural parameters $\alpha$, $\lambda$, derived in {cite}`sargent1973rational` and {cite}`Sargent77hyper`.
 
 The key property of the MA(1) process for $M_t$ is that its covariance
 generating function $C(z) = c(1)z^{-1} + c(0) + c(1)z$ has
@@ -189,7 +207,7 @@ c(0) = (A_\eta^2 + B_\eta^2)\sigma_\eta^2 + A_v^2 \sigma_v^2, \qquad
 c(1) = A_\eta B_\eta \sigma_\eta^2
 $$
 
-By the AM–GM inequality, $c(0) \geq 2|c(1)|$ is guaranteed, so the spectral
+By the Cauchy-Schwarz inequality, $c(0) \geq 2|c(1)|$ is guaranteed, so the spectral
 density of $M_t$ is non-negative everywhere — a requirement for a valid
 covariance-stationary process.
 
@@ -237,7 +255,7 @@ def structural_to_ma1(alpha, lam, sigma_eta2=1.0, sigma_v2=0.5):
 
     Parameters
     ----------
-    alpha      : demand elasticity (< 0)
+    alpha      : demand semi-elasticity (< 0)
     lam        : adaptive expectations parameter (0 < lam < 1)
     sigma_eta2 : variance of eta_t = u_t - u_{t-1}
     sigma_v2   : variance of money supply innovation v_t
@@ -284,8 +302,8 @@ def structural_to_ma1(alpha, lam, sigma_eta2=1.0, sigma_v2=0.5):
 
 ## Information Projection via the Wiener–Kolmogorov Formula
 
-This section describes **the central methodological contribution** of
-{cite}`sargent1976econometric`: the use of **information projection** — the
+This section describes how
+{cite}`sargent1976econometric` used  **information projection** — in particular, the
 Wiener–Kolmogorov prediction formula — to compute the population regression of
 one process on the current and past values of another.
 
@@ -691,7 +709,7 @@ for lam in lam_vals:
 ax.axhline(1.0, color='k', lw=1.5, ls='--',
            label=r"Jacobs' population $y_1=1$")
 ax.axhline(0.0, color='gray', lw=0.5, ls=':')
-ax.set_xlabel(r'$\alpha$ (demand elasticity)')
+ax.set_xlabel(r'$\alpha$ (demand semi-elasticity)')
 ax.set_ylabel(r'Stability parameter $\delta$')
 ax.set_ylim(-0.5, 1.5)
 ax.set_title("True $\\delta$ vs. Jacobs' population estimate")
@@ -880,7 +898,7 @@ The main results of {cite}`Sargent1976exogeneity` are:
    inflation ("real bills" feedback).
 
 2. **The rational expectations version** of Cagan's adaptive expectations model
-   (see Sargent–Wallace {cite}`sargent1973rational`) implies that money is *not* exogenous — inflation
+   (see  {cite}`sargent1973rational` and {cite}`Sargent77hyper`) implies that money is *not* exogenous — inflation
    Granger-causes money creation with no reverse causality.
 
 3. **Information projection** (the Wiener–Kolmogorov formula) lets us compute the
