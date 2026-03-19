@@ -431,7 +431,9 @@ He interpreted $y_0 = \alpha (1 - \lambda) / [1 + \alpha (1 - \lambda)]$ and $y_
 
 When the rational expectations model is correct, the unconstrained population regression has the form {eq}`eq:H_formula`, so Jacobs' parameterization is a binding restriction.
 
-Since $m_t$ is integrated, the spectral density $S_m(\omega)$ is unbounded at $\omega = 0$.
+Let $S_m(\omega)$ denote the spectral density of $m_t$.
+
+Since $m_t$ is integrated, $S_m(\omega)$ is unbounded at $\omega = 0$.
 
 The approximation criterion is therefore dominated by behavior at $\omega = 0$.
 
@@ -706,9 +708,16 @@ $$
   - \frac{h_0 + h_1 e^{-i \omega}}{1 - h_2 e^{-i \omega}} \right|^2 S_m(\omega)\, d\omega
 $$ (eq:approx_criterion)
 
-Because $S_m(\omega) \propto S_M(\omega) / |1 - e^{-i \omega}|^4 \to \infty$ as $\omega \to 0$, the criterion is dominated by behavior near $\omega = 0$.
+Because $S_m(\omega) = c(e^{-i\omega}) / |1 - e^{-i \omega}|^4 \to \infty$ as $\omega \to 0$, the criterion is dominated by behavior near $\omega = 0$.
 
-The left panel below plots the unweighted squared filter error $|F_{\text{Jacobs}} - F_{\text{true}}|^2$ for several candidate values of $y_1$.
+Write the two frequency-response functions inside the integrand as
+
+$$
+H_J(e^{-i\omega}) = \frac{y_0 (1 - e^{-i\omega})}{1 - y_1 e^{-i\omega}}, \qquad
+H(e^{-i\omega}) = \frac{h_0 + h_1 e^{-i\omega}}{1 - h_2 e^{-i\omega}}.
+$$
+
+The left panel below plots the unweighted squared error $|H_J - H|^2$ for several candidate values of $y_1$.
 
 Only $y_1 = 1$ makes the error vanish at $\omega = 0$, partially cancelling the $|1 - e^{-i\omega}|^{-4}$ divergence of $S_m(\omega)$.
 
@@ -731,9 +740,9 @@ def filter_error(y1, ω, h0, h1, h2):
     """Return the squared filter approximation error at frequency ω."""
     z = np.exp(-1j * ω)
     y0 = (h0 + h1) / (1.0 - h2)
-    F_jacobs = y0 * (1 - z) / (1 - y1 * z)
-    F_true = (h0 + h1 * z) / (1 - h2 * z)
-    return np.abs(F_jacobs - F_true)**2
+    H_J = y0 * (1 - z) / (1 - y1 * z)
+    H = (h0 + h1 * z) / (1 - h2 * z)
+    return np.abs(H_J - H)**2
 
 y1_candidates = [0.6, 0.8, 0.9, 1.0, 1.1, 1.2]
 
@@ -750,7 +759,7 @@ for y1_value in y1_candidates:
     axes[1].semilogy(ω_grid, integrand, lw=2, label=rf'$y_1 = {y1_value}$')
 
 axes[0].set_xlabel(r'frequency $\omega$')
-axes[0].set_ylabel(r'unweighted $|F_{\mathrm{Jacobs}} - F_{\mathrm{true}}|^2$')
+axes[0].set_ylabel(r'$|H_J - H|^2$')
 axes[0].legend(ncol=2, fontsize=8)
 axes[0].set_xlim(0, np.pi)
 
@@ -773,7 +782,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-Only $y_1 = 1$ makes the filter error vanish at $\omega = 0$ (left panel), which partially offsets the divergence of $S_m(\omega)$ and produces the slowest-diverging integrand (right panel).
+Only $y_1 = 1$ makes $|H_J - H|^2$ vanish at $\omega = 0$ (left panel), which partially offsets the divergence of $S_m(\omega)$ and produces the slowest-diverging integrand (right panel).
 
 ## Summary
 
