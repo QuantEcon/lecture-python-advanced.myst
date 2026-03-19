@@ -10,7 +10,15 @@ kernelspec:
 ---
 
 (sargent_jacobs_1976_v2)=
-# Hyperinflation and Information Projection 
+```{raw} html
+<div id="qe-notebook-header" align="right" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div>
+```
+
+# Hyperinflation and Information Projection
 
 ```{index} single: Hyperinflation; Cagan model
 ```
@@ -19,72 +27,56 @@ kernelspec:
 :depth: 2
 ```
 
-```{code-cell} ipython3
----
-tags: [hide-output]
----
-!pip install numpy scipy matplotlib
-```
-
 ## Overview
 
-This lecture presents the analysis in {cite}`sargent1976econometric`, which
-examines the statistical properties of competing estimators of Cagan's {cite}`Cagan` portfolio
-balance schedule during hyperinflations.
+This lecture presents the analysis in {cite}`sargent1976econometric`, which examines the statistical properties of competing estimators of Cagan's portfolio-balance equation {cite}`Cagan` during hyperinflations.
 
 The topic involves three estimators:
 
-- **Cagan's estimator** — {cite}`Cagan` regresses real balances on past inflation rates, and is
-  consistent only if the price level (or portfolio disturbance) is exogenous.
-- **Jacobs' estimator** — {cite}`jacobs1974estimating` inverts the equation and regresses real balances on past
-  money growth rates, and is consistent only if **money** is exogenous.
-- **Sargent's critique** — uses a rational expectations model to show that if
-  money is *not* exogenous, Jacobs' estimator is biased, and predicts a
-  specific population value for Jacobs' "stability parameter."
+- **Cagan's estimator** — {cite:t}`Cagan` regresses real balances on past inflation rates, and is consistent when its orthogonality condition holds.
+- **Jacobs' estimator** — {cite:t}`jacobs1975difficulty` inverts the equation and regresses real balances on past money growth rates, and is consistent only if money is exogenous.
+- **Sargent's critique** — uses a rational expectations model to show that Jacobs' estimator is biased when money is not exogenous, and predicts its population limit {cite}`sargent1976econometric`.
 
-The key computational technique is **information projection** via the
-Wiener–Kolmogorov formula, which computes the optimal linear least-squares
-projection of one covariance-stationary process onto current and past values
-of another. 
+The key computational technique is **information projection** via the Wiener–Kolmogorov formula, which computes the optimal linear least-squares projection of one covariance-stationary process onto current and past values of another.
 
 ```{note}
- See footnote 17 of {cite}`sargent2025macroeconomics` for an explanation of information projection in macroeconomics. 
- Let $\{f_\theta(x)\}_{\theta \in \Theta}$ and $\{g_\delta(x)\}_{\delta \in \Delta}$ be two collections (manifolds) of probability distributions for outcomes $x \in X$.  When model $g_{\delta_o}(x)$ governs the data, a population  maximum likelihood estimator $\theta_o$ of parameter vector $\theta \in \Theta$ of misspecified statistical model $f_\theta(x)$  minimizes the Kullback-Leibler divergence
-$ {KL}(g_{\delta_o}, f_{\theta}) = \int \log \left(\frac{g_{\delta_o}(x) }{f_\theta(x)}\right) g_{\delta_o}(x) dx  = - H(g_{\delta_o})  - E _{g_{\delta_o}} \log f_\theta(x) ,$ where $H(g_{\delta_o}) =  \int \log \left(\frac{1}{ g_{\delta_o}(x)}\right) g_{\delta_o}(x) dx$ is the  Shannon information of  nature's probability distribution $g_{\delta_o}(x)$ and   $E _{g_{\delta_o}}$ denotes mathematical expectation under   $g_{\delta_o}(x)$.   The information projection $f_{\theta_o}(x)$ of $g_{\delta_o}(x)$ onto $\{f_\theta(x)\}_{\theta \in \Theta}$ is distribution  $f_{\theta_o}(x)$ in manifold $\{f_\theta(x)\}_{\theta \in \Theta}$  that maximum likelihood selects when nature's model $g_{\delta_o}$ generates the data, i.e., $\theta_o = \operatorname{argmax}_{\theta \in \Theta} E _{g_{\delta_o}} \log f_\theta(x) . $   
- ```
+See footnote 17 of {cite:t}`sargent2025macroeconomics` for an explanation of information projection in macroeconomics.
 
- ```{note}
- See  chapter XI of {cite}`Sargent1987` for a discussion of the Wiener–Kolmogorov formula and its applications in macroeconomics.
+For background on Kullback-Leibler divergence, see {doc}`intermediate:divergence_measures` and {doc}`intermediate:likelihood_bayes`.
+
+If nature generates data from $g_{\delta_0}(x)$ and we fit the misspecified family $\{f_\theta(x)\}_{\theta \in \Theta}$, the population maximum likelihood estimator solves $\theta_0 = \operatorname{argmax}_{\theta \in \Theta} E_{g_{\delta_0}} \log f_\theta(x)$.
+
+Equivalently, $f_{\theta_0}(x)$ is the element of $\{f_\theta(x)\}_{\theta \in \Theta}$ closest to $g_{\delta_0}(x)$ in Kullback-Leibler divergence.
 ```
 
-This delivers the *population regression* that OLS converges to,
-regardless of whether the regression is correctly specified.
+```{note}
+See chapter XI of {cite:t}`Sargent1987` for a discussion of the Wiener–Kolmogorov formula and its applications in macroeconomics, and {doc}`intermediate:linear_models` for related linear prediction theory.
+```
+
+This delivers the *population regression* that OLS converges to, regardless of whether the regression is correctly specified.
 
 We begin with imports:
 
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import fsolve
 ```
 
----
+## Cagan's hyperinflation model
 
-## Cagan's Hyperinflation Model
+For background on the Cagan model, see the introductory lectures {doc}`intro:cagan_ree` and {doc}`intro:cagan_adaptive`.
 
-Cagan's {cite}`Cagan` model of portfolio balance during hyperinflation has
-two equations.
+Cagan's {cite}`Cagan` model of portfolio balance during hyperinflation has two equations.
 
-**Portfolio balance:**
+The first is a portfolio-balance equation:
 
 $$
 m_t - p_t = \alpha \pi_t + u_t, \qquad \alpha < 0
 $$ (eq:portfolio_balance)
 
-where $m_t$ is the log money supply, $p_t$ is the log price level, $\pi_t$ is
-the expected rate of inflation, and $u_t$ is a disturbance.
+Here $m_t$ is the log money supply, $p_t$ is the log price level, $\pi_t$ is expected inflation, and $u_t$ is a disturbance.
 
-**Adaptive expectations:**
+The second is an adaptive expectations equation:
 
 $$
 \pi_t = \frac{1-\lambda}{1 - \lambda L} (p_t - p_{t-1}), \qquad 0 < \lambda < 1
@@ -92,49 +84,49 @@ $$ (eq:adaptive_exp)
 
 where $L$ is the lag operator, $L^k x_t = x_{t-k}$.
 
-Substituting {eq}`eq:adaptive_exp` into {eq}`eq:portfolio_balance` yields Cagan's estimable equation:
+Substituting {eq}`eq:adaptive_exp` into {eq}`eq:portfolio_balance` yields Cagan's regression equation:
 
 $$
 m_t - p_t = \alpha(1-\lambda) \sum_{i=0}^{\infty} \lambda^i (p_{t-i} - p_{t-i-1}) + u_t^*
 $$ (eq:cagan_regression)
 
-Cagan estimated this by nonlinear least squares. 
+Cagan estimated this equation by nonlinear least squares.
 
-This estimator is **consistent** if and
-only if $u_t^*$ is orthogonal to current and past $(p_t - p_{t-1})$, i.e.,
+The estimator is *consistent* if and only if $u_t^*$ is orthogonal to current and past $(p_t - p_{t-1})$, i.e.,
 
 $$
 E[u_t^* (p_{t-j} - p_{t-j-1})] = 0, \qquad \text{for all } j \geq 0.
 $$ (eq:orthogonality_cond)
 
-**A sufficient condition** for {eq}`eq:orthogonality_cond` is that money $m_t$ is *strictly exogenous* in
-the portfolio balance equation:
+A sufficient condition for {eq}`eq:orthogonality_cond` is that the price level is exogenous.
+
+In that case, money accommodates portfolio disturbances and leaves $\Delta p_t$ unaffected by $u_t$.
+
+{cite:t}`jacobs1975difficulty` noted that if money is exogenous instead, in the sense that
 
 $$
-E[m_s u_t] = 0, \qquad \text{for all } s, t.
+E[m_s u_t] = 0, \qquad \text{for all } s, t,
 $$ (eq:exogeneity_cond)
 
-{cite}`jacobs1974estimating` noted that if $m_t$ is exogenous {eq}`eq:exogeneity_cond`, then {eq}`eq:orthogonality_cond` generally
+then {eq}`eq:orthogonality_cond` generally
 *fails*.
 
 When money does not respond to disturbances $u_t$, the price level
 must absorb them — creating a correlation between $p_t$ and $u_t$ that
 invalidates Cagan's orthogonality condition.
 
----
+## Jacobs' estimator
 
-## Jacobs' Estimator
+When money is exogenous, Jacobs' argument is to *invert* {eq}`eq:cagan_regression` and solve
+for a relationship in which money is the regressor.
 
-When money is exogenous, the correct approach is to *invert* {eq}`eq:cagan_regression` and solve
-for $m$ as a function of $p$'s and $u$'s. 
-
-Solving gives:
+Solving {eq}`eq:cagan_regression` for $p$ as a function of current and lagged $m$'s and $u$'s, and then rearranging, gives:
 
 $$
 m_t - p_t = \frac{\alpha(1-\lambda)}{1 + \alpha(1-\lambda)} \sum_{i=0}^{\infty} \delta^i (m_{t-i} - m_{t-i-1}) + u_t'
 $$ (eq:jacobs_eqn)
 
-where the **stability parameter** is
+The **stability parameter** is
 
 $$
 \delta = \frac{\lambda + \alpha(1-\lambda)}{1 + \alpha(1-\lambda)},
@@ -143,175 +135,137 @@ $$
 and the disturbance $u_t'$ is orthogonal to all current and lagged $m$'s (under
 the exogeneity hypothesis). 
 
-Jacobs estimated {eq}`eq:jacobs_eqn` by nonlinear least squares,
-obtaining very different estimates of $\alpha$, $\lambda$, and $\delta$ from
-Cagan's. 
+Jacobs estimated {eq}`eq:jacobs_eqn` by nonlinear least squares and obtained very different estimates of $\alpha$, $\lambda$, and $\delta$ from Cagan's.
 
-In particular, for five of the six hyperinflations he studied, Jacobs
-found $\delta \approx 1$ — borderline explosive.
+For five of the six hyperinflations in his sample, Jacobs found $\delta \approx 1$, which is close to the explosive boundary.
 
 This is economically significant because $\delta < 1$ is required for the
 hyperinflations to be driven purely by monetary growth rather than self-sustaining
 explosive dynamics.
 
 ```{note}
-Sargent and Wallace's {cite}`sargent1973rational` econometric exogeneity tests
-found strong evidence *against* the hypothesis that $m$ is exogenous with
-respect to $p$ in the hyperinflation data. A "real bills" regime (where the
-monetary authority accommodates inflation) necessarily creates feedback from
-prices to money creation, invalidating Jacobs' identifying assumption.
+The econometric exogeneity tests in {cite:t}`sargent1973rational` found strong evidence *against* the hypothesis that $m$ is exogenous with respect to $p$ in the hyperinflation data.
+
+A "real bills" regime, in which the monetary authority accommodates inflation, necessarily creates feedback from prices to money creation and invalidates Jacobs' identifying assumption.
 ```
 
----
+## Rational expectations and the money–price process
 
-## Rational Expectations and the Money–Price Process
+To evaluate Jacobs' estimator under a failure of money exogeneity, {cite:t}`sargent1976econometric` assumes that Cagan's adaptive expectations scheme is equivalent to rational expectations.
 
-{cite}`sargent1973rational` and {cite}`Sargent77hyper` showed that Cagan's model is compatible with rational
-expectations when the inflation–money creation process is governed by:
+The inflation-money creation process is then governed by
 
 $$
-M_t = \phi(1-\lambda)(x_t - v_t) + (1-L)\varepsilon_t
+x_t = \phi (1-\lambda L)(\varepsilon_t - \eta_t)
+$$ (eq:inflation_process)
+
+$$
+M_t = \phi(1-\lambda)(\varepsilon_t - \eta_t) + (1-L)\varepsilon_t
 $$ (eq:money_supply_process)
 
+where
+
 $$
-x_t = (1-L)^2 p_t, \qquad M_t = (1-L)^2 m_t, \qquad \phi = \frac{1}{1+\alpha(1-\lambda)}
+x_t = (1-L)^2 p_t, \qquad M_t = (1-L)^2 m_t, \qquad \phi = \frac{1}{\lambda + \alpha(1 - \lambda)},
 $$ (eq:process_definitions)
 
-where $\eta_t = u_t - u_{t-1}$ and $v_t$ are each serially independent with
-mean zero and variances $\sigma_u^2$ and $\sigma_v^2$ respectively, and
-$E[\varepsilon_s \eta_t] = \sigma_{e\eta} \cdot \mathbf{1}_{s=t}$.
-
-Under {eq}`eq:money_supply_process`–{eq}`eq:process_definitions`,  first differences of inflation ($x_t$) and money creation
-($M_t$) are correlated first-order moving average processes, driven by two
-serially uncorrelated shocks $\eta_t$ and $v_t$.
-
-We can write the reduced form
-as a bivariate MA(1):
+and
 
 $$
-M_t = A_\eta \, \eta_t + B_\eta \, \eta_{t-1} + A_v \, v_t
-$$ (eq:ma_M)
-
-$$
-x_t = C_\eta \, \eta_t + D_\eta \, \eta_{t-1} + C_v \, v_t
-$$ (eq:ma_x)
-
-where the coefficients $A_\eta, B_\eta, A_v, C_\eta, D_\eta, C_v$ are functions
-of the structural parameters $\alpha$, $\lambda$, derived in {cite}`sargent1973rational` and {cite}`Sargent77hyper`.
-
-The key property of the MA(1) process for $M_t$ is that its covariance
-generating function $C(z) = c(1)z^{-1} + c(0) + c(1)z$ has
-
-$$
-c(0) = (A_\eta^2 + B_\eta^2)\sigma_\eta^2 + A_v^2 \sigma_v^2, \qquad
-c(1) = A_\eta B_\eta \sigma_\eta^2
+\eta_t = u_t - u_{t-1}.
 $$
 
-By the Cauchy-Schwarz inequality, $c(0) \geq 2|c(1)|$ is guaranteed, so the spectral
-density of $M_t$ is non-negative everywhere — a requirement for a valid
-covariance-stationary process.
+Here $\eta_t$ and $\varepsilon_t$ are serially independent random variables with means zero and finite variances
+$E[\eta_t^2] = \sigma_\eta^2$ and $E[\varepsilon_t^2] = \sigma_\varepsilon^2$.
 
-The cross-covariance generating function is $\Gamma(z) = \gamma(1)z^{-1} + \gamma(0) + \gamma(1)z$ with
+We also allow a contemporaneous covariance
 
 $$
-\gamma(0) = (A_\eta C_\eta + B_\eta D_\eta)\sigma_\eta^2 + A_v C_v \sigma_v^2, \qquad
-\gamma(1) = A_\eta D_\eta \sigma_\eta^2.
+E[\varepsilon_t \eta_t] = \sigma_{\varepsilon\eta},
+$$
+
+while $E[\varepsilon_{t-1}\eta_t] = E[\varepsilon_t \eta_{t-1}] = 0$.
+
+Under {eq}`eq:inflation_process` and {eq}`eq:money_supply_process`, the first difference of inflation, $x_t$, and the first difference of percentage money creation, $M_t$, are stationary, correlated MA(1) processes.
+
+The covariogram of $M$ is
+
+$$
+c(\tau) = E[M_t M_{t-\tau}].
+$$
+
+To keep the notation compact, set
+
+$$
+A = \phi(1-\lambda) + 1, \qquad B = \phi(1-\lambda).
+$$
+
+Then it is straightforward to calculate
+
+$$
+c(0) = (A^2 + 1)\sigma_\varepsilon^2 + B^2 \sigma_\eta^2 - 2AB \sigma_{\varepsilon\eta},
+$$
+
+$$
+c(1) = c(-1) = -A \sigma_\varepsilon^2,
+$$
+
+$$
+c(\tau) = 0, \qquad |\tau| > 1.
+$$
+
+The cross-covariogram of $x$ and $M$ is
+
+$$
+r(\tau) = E[x_t M_{t-\tau}].
+$$
+
+Again, a direct calculation gives
+
+$$
+r(0) = \phi(A + \lambda)\sigma_\varepsilon^2 + \phi B \sigma_\eta^2
+       - \phi(A + B + \lambda)\sigma_{\varepsilon\eta},
+$$
+
+$$
+r(1) = -\phi \lambda A \sigma_\varepsilon^2 - \phi \lambda B \sigma_\eta^2
+       + \phi \lambda (A + B)\sigma_{\varepsilon\eta},
+$$
+
+$$
+r(-1) = -\phi(\sigma_\varepsilon^2 - \sigma_{\varepsilon\eta}),
+$$
+
+$$
+r(\tau) = 0, \qquad |\tau| > 1.
 $$
 
 ```{code-cell} ipython3
-def bivariate_ma1_covariances(m0, m1, x0, x1):
-    """
-    Compute the autocovariances c(tau) and cross-covariances gamma(tau)
-    for a bivariate MA(1) process driven by a single unit-variance white
-    noise theta_t:
+def structural_to_ma1(α, λ, σ_η2=1.0, σ_ε2=0.5, σ_εη=0.0):
+    """Return c(0), c(1), r(-1), r(0), and r(1) for the MA(1) reduced form."""
+    denom = λ + α * (1.0 - λ)
+    if np.isclose(denom, 0.0):
+        raise ValueError("λ + α(1 - λ) must be nonzero.")
 
-        M_t = m0 * theta_t + m1 * theta_{t-1}
-        x_t = x0 * theta_t + x1 * theta_{t-1}
+    φ = 1.0 / denom
+    A = φ * (1.0 - λ) + 1.0
+    B = φ * (1.0 - λ)
 
-    Returns c(0), c(1), gamma(0), gamma(1).
-    These always satisfy c(0) >= 2|c(1)| (by AM-GM), so the spectral
-    density of M is always non-negative.
-    """
-    c0 = m0**2 + m1**2          # var(M_t)
-    c1 = m0 * m1                # cov(M_t, M_{t-1})
-    g0 = m0*x0 + m1*x1         # cov(M_t, x_t)   [contemporaneous]
-    g1 = m0*x1                  # cov(M_t, x_{t-1}) = cov(x_t, M_{t+1})
-    return c0, c1, g0, g1
+    c0 = (A**2 + 1.0) * σ_ε2 + B**2 * σ_η2 - 2.0 * A * B * σ_εη
+    c1 = -A * σ_ε2
 
+    r_m1 = -φ * (σ_ε2 - σ_εη)
+    r0 = φ * (A + λ) * σ_ε2 + φ * B * σ_η2 - φ * (A + B + λ) * σ_εη
+    r1 = -φ * λ * A * σ_ε2 - φ * λ * B * σ_η2 + φ * λ * (A + B) * σ_εη
 
-def structural_to_ma1(alpha, lam, sigma_eta2=1.0, sigma_v2=0.5):
-    """
-    Map Cagan structural parameters to MA(1) coefficients.
-
-    Under the rational expectations version of Cagan's model
-    (Sargent-Wallace 1973), both M_t = (1-L)^2 m_t and
-    x_t = (1-L)^2 p_t follow correlated MA(1) processes driven
-    by two shocks:
-      eta_t  ~ i.i.d.(0, sigma_eta2)  [portfolio demand shock]
-      v_t    ~ i.i.d.(0, sigma_v2)    [money supply innovation]
-
-    The reduced-form MA(1) coefficients are derived from the
-    rational expectations equilibrium (Sargent 1976).
-
-    Parameters
-    ----------
-    alpha      : demand semi-elasticity (< 0)
-    lam        : adaptive expectations parameter (0 < lam < 1)
-    sigma_eta2 : variance of eta_t = u_t - u_{t-1}
-    sigma_v2   : variance of money supply innovation v_t
-    """
-    phi = 1.0 / (1.0 + alpha * (1.0 - lam))
-    delta = (lam + alpha*(1-lam)) / (1 + alpha*(1-lam))
-
-    # MA(1) for M_t = (1-L)^2 m_t:
-    #  From money supply equation: M_t = -phi*(1-lam)*v_t + v_{t} 
-    #  (the v innovations affect M directly; eta innovations affect
-    #   M through the equilibrium pricing equation)
-    #  Using the Sargent-Wallace reduced form:
-    #     M shock coefficient at lag 0: (phi*(1-lam)+1) from eta; sqrt(sigma_v2) from v
-    #     M shock coefficient at lag 1: -delta from eta component
-    s_eta = np.sqrt(sigma_eta2)
-    s_v   = np.sqrt(sigma_v2)
-
-    # MA(1) coefficients for M and x in terms of two uncorrelated shocks
-    # We represent the bivariate process as a sum of two MA(1) processes:
-    #   From eta shock:  M^eta_t = A_eta * eta_t + B_eta * eta_{t-1}
-    #   From v shock:    M^v_t   = A_v   * v_t
-    # Then c(0) = (A_eta^2 + B_eta^2)*sigma_eta2 + A_v^2 * sigma_v2
-    #      c(1) = A_eta * B_eta * sigma_eta2
-
-    A_eta = (phi*(1-lam) + 1)       # coefficient on eta_t in M_t
-    B_eta = -delta * phi*(1-lam)    # coefficient on eta_{t-1} in M_t  (approx)
-    A_v   = 1.0                     # coefficient on v_t in M_t (direct)
-
-    # For x_t = (1-L)^2 p_t:
-    C_eta = phi                     # coefficient on eta_t in x_t
-    D_eta = -delta * phi            # coefficient on eta_{t-1} in x_t (approx)
-    C_v   = -phi*(1-lam)            # coefficient on v_t in x_t (price responds to v)
-
-    # Compute covariances with two uncorrelated shocks
-    c0 = (A_eta**2 + B_eta**2)*sigma_eta2 + A_v**2 * sigma_v2
-    c1 = A_eta * B_eta * sigma_eta2      # zero contribution from v (no v_{t-1})
-    g0 = (A_eta*C_eta + B_eta*D_eta)*sigma_eta2 + A_v*C_v*sigma_v2
-    g1 = A_eta * D_eta * sigma_eta2      # cross at lag 1: M_t, x_{t+1}
-
-    return c0, c1, g0, g1
+    return c0, c1, r_m1, r0, r1
 ```
 
----
+## Information projection via the Wiener–Kolmogorov formula
 
-## Information Projection via the Wiener–Kolmogorov Formula
+We now use the Wiener–Kolmogorov formula to compute the population regression of one process on the current and past values of another.
 
-This section describes how
-{cite}`sargent1976econometric` used  **information projection** — in particular, the
-Wiener–Kolmogorov prediction formula — to compute the population regression of
-one process on the current and past values of another.
-
-### What is Information Projection?
-
-Given two jointly covariance-stationary processes $\{x_t\}$ and $\{M_t\}$, the
-**information projection** of $x_t$ onto the space spanned by
-$\{M_t, M_{t-1}, M_{t-2}, \ldots\}$ is the linear combination
+Given jointly covariance-stationary processes $\{x_t\}$ and $\{M_t\}$, the one-sided projection of $x_t$ onto $\{M_t, M_{t-1}, M_{t-2}, \ldots\}$ is the linear combination
 
 $$
 \hat{x}_t = \Theta(L) M_t = \sum_{j=0}^{\infty} \theta_j M_{t-j}
@@ -319,419 +273,332 @@ $$
 
 that minimizes the mean-squared prediction error $E[(x_t - \hat{x}_t)^2]$.
 
-The sequence $\{\theta_j\}$ — equivalently its z-transform
-$\Theta(z) = \sum_{j=0}^{\infty} \theta_j z^j$ — is called the **one-sided
-projection filter**. It satisfies the **Wiener–Hopf equation**:
+The sequence $\{\theta_j\}$, equivalently its generating function $\Theta(z) = \sum_{j=0}^{\infty} \theta_j z^j$, is the lag-generating function of the population regression.
+
+The filter satisfies the Wiener–Hopf equation:
 
 $$
-\sum_{k=0}^{\infty} \theta_k c(j-k) = \gamma(j), \qquad j = 0, 1, 2, \ldots
+\sum_{k=0}^{\infty} \theta_k c(j-k) = r(j), \qquad j = 0, 1, 2, \ldots
 $$
 
-or in terms of generating functions, the projection
-**lag-generating function** is:
+The covariance generating function of $M$ is
 
 $$
-\Theta(z) = \frac{1}{C_+(z)} \left[\frac{\Gamma(z)}{C_+(z^{-1})}\right]_+
+c(z) = \sum_{\tau=-1}^{1} c(\tau) z^\tau
 $$
 
-where:
-- $C(z) = \sum_\tau c(\tau) z^\tau$ is the **covariance-generating function** of
-  $\{M_t\}$,
-- $\Gamma(z) = \sum_\tau \gamma(\tau) z^\tau$ is the **cross-covariance generating
-  function**,
-- $C(z) = C_+(z) C_+(z^{-1})$ is the **spectral factorization** of $C(z)$ with
-  $C_+(z) = b_0(1 + bz)$, $|b| < 1$ (fundamental/minimum-phase factor), and
-- $[\cdot]_+$ means *retain only non-negative powers of $z$*.
-
-### Why Information Projection Matters Here
-
-Sargent uses information projection in two ways:
-
-1. **Computing the unconstrained population regression** of $x_t$ (or $M_t - x_t$)
-   on current and past $M_t$'s. This gives the *true* distributed-lag relationship
-   implied by the rational expectations model — an MA(1) structure with
-   lag-generating function $\Theta(z)$.
-
-2. **Evaluating the constrained regression** that Jacobs actually estimated
-   ({eq}`eq:jacobs_constrained`). Since Jacobs' parameterization imposes a specific rational-lag
-   structure, least squares onto that parameterization minimizes an
-   **approximation criterion** — a weighted integral of the squared difference
-   between the true and constrained filters, weighted by the spectral density
-   of $M$.
-
-The non-stationarity of the money supply (its spectrum is unbounded at $\omega=0$)
-means that the approximation criterion is dominated by behavior near the zero
-frequency. 
-
-This forces Jacobs' estimated stability parameter $\hat{\delta}$ to
-converge to **unity** in population — regardless of the true structural
-parameters.
-
-### Spectral Factorization
-
-Since $M_t$ is an MA(1), its covariance-generating function is:
+and the cross-covariance generating function is
 
 $$
-C(z) = c(-1)z^{-1} + c(0) + c(1)z = b_0^2(1 + bz)(1 + bz^{-1})
+r(z) = \sum_{\tau=-1}^{1} r(\tau) z^\tau.
 $$
 
-Expanding and matching powers gives $b_0^2 = c(0) - c(1)^2/c(0)$,
-$b_0 b_1 = c(1)$, $b = b_1/b_0$. 
+Since $M_t$ is an MA(1), we can factor
 
-The **fundamental (minimum-phase)** root
-satisfies $|b| < 1$.
+$$
+c(z) = c(1)z^{-1} + c(0) + c(1)z = (b_0 + b_1 z)(b_0 + b_1 z^{-1})
+$$
+
+or, equivalently,
+
+$$
+c(z) = b_0^2(1 + bz)(1 + bz^{-1}), \qquad b = \frac{b_1}{b_0}.
+$$
+
+Under the fundamental factorization, $|b| < 1$.
+
+The Wiener–Kolmogorov formula then gives
+
+$$
+\Theta(z) = \frac{1}{b_0^2(1+bz)} \left[\frac{r(-1)z^{-1} + r(0) + r(1)z}{1 + bz^{-1}}\right]_+
+$$
+
+where $[\cdot]_+$ means *ignore all negative powers of $z$*.
+
+We use the projection in two ways:
+
+1. Compute the unconstrained population regression of $x_t$ on current and past values of $M_t$, then convert it into the corresponding regression for $M_t - x_t$.
+2. Study the constrained regression in {eq}`eq:jacobs_constrained`, which minimizes a weighted approximation criterion.
+
+The non-stationarity of the money supply, whose spectrum is unbounded at $\omega = 0$, means that the approximation criterion is dominated by behavior near the zero frequency.
+
+This forces Jacobs' estimated stability parameter $\hat{\delta}$ to converge to 1 in population.
+
+Matching coefficients gives $b_0 b_1 = c(1)$ and $b_0^2 + b_1^2 = c(0)$, so $b$ solves
+
+$$
+b + \frac{1}{b} = \frac{c(0)}{c(1)}.
+$$
 
 ```{code-cell} ipython3
 def spectral_factor(c0, c1):
-    """
-    Factor c(z) = c(1)z^{-1} + c(0) + c(1)z = b0^2 (1 + b*z)(1 + b*z^{-1})
-    choosing the fundamental (|b| < 1) solution.
+    """Return the fundamental spectral factor of an MA(1) spectrum."""
+    if c0 <= 0:
+        raise ValueError("c(0) must be positive.")
 
-    Returns b0, b such that b0^2*(1+b)*(1+b) = c(0)+2*c(1) [check at z=1].
-    """
-    # b0*b1 = c(1),  b0^2 + b1^2 = c(0)
-    # Let b = b1/b0 => b0^2*(1 + b^2) = c(0), b0^2 * b = c(1)
-    # So b satisfies: b + 1/b = c(0)/c(1)  (if c(1) != 0)
     if abs(c1) < 1e-14:
-        # MA(1) with no serial correlation: white noise
-        b0 = np.sqrt(c0)
-        b = 0.0
-        return b0, b
+        return np.sqrt(c0), 0.0
 
-    ratio = c0 / c1  # = b + 1/b
-    # Solve b^2 - ratio*b + 1 = 0
+    ratio = c0 / c1
     disc = ratio**2 - 4.0
     if disc < 0:
         raise ValueError("Spectral density not non-negative definite.")
+
     roots = [(ratio + np.sqrt(disc)) / 2.0, (ratio - np.sqrt(disc)) / 2.0]
-    # Choose |b| < 1 (fundamental factorization)
     b = min(roots, key=abs)
-    b0_sq = c1 / b          # b0^2 * b = c(1)
-    b0 = np.sqrt(abs(b0_sq))
-    return b0, b
+    b0_sq = c1 / b
+
+    return np.sqrt(abs(b0_sq)), b
 ```
 
-### The Wiener–Kolmogorov Projection Formula
-
-For an MA(1) process $M_t$ with $C(z) = b_0^2(1 + bz)(1 + bz^{-1})$,
-the cross-covariance generating function is:
+Since $|b| < 1$, we can expand
 
 $$
-\Gamma(z) = \gamma(-1)z^{-1} + \gamma(0) + \gamma(1)z.
+\frac{1}{1 + b z^{-1}} = \sum_{j=0}^{\infty} (-b)^j z^{-j}
 $$
 
-The Wiener–Kolmogorov formula gives:
+and ignore all negative powers of $z$.
+The $r(-1)z^{-1}$ term therefore drops out, leaving
 
 $$
-\Theta(z) = \frac{1}{b_0^2(1+bz)} \left[ \frac{\Gamma(z)}{1 + bz^{-1}} \right]_+
+\left[ \frac{r(-1)z^{-1} + r(0) + r(1)z}{1+bz^{-1}} \right]_+ = (r(0) - r(1)b) + r(1)z
 $$
 
-Since $|b| < 1$, we can expand $\frac{1}{1+bz^{-1}} = \sum_{j=0}^\infty (-b)^j z^j$
-and retain only non-negative powers of $z$:
+Therefore,
 
 $$
-\left[ \frac{\Gamma(z)}{1+bz^{-1}} \right]_+ = (\gamma(0) - \gamma(1)b) + \gamma(1)z
-$$
-
-Therefore:
-
-$$
-\Theta(z) = \frac{(\gamma(0) - \gamma(1)b) + \gamma(1)z}{b_0^2(1 + bz)}
+\Theta(z) = \frac{(r(0) - r(1)b) + r(1)z}{b_0^2(1 + bz)}
 $$ (eq:theta_formula)
 
-This is the distributed **lag-generating function of the population regression** of $x_t$
-on $\{M_t, M_{t-1}, \ldots\}$.
+This is the population regression of $x_t$ on current and past values of $M_t$.
 
 ```{code-cell} ipython3
-def wiener_kolmogorov_projection(c0, c1, g0, g1):
-    """
-    Compute the one-sided projection filter Theta(z) for the regression of
-    x_t on current and past M_t's, using the Wiener-Kolmogorov formula.
-
-    The covariance generating function of M is MA(1):
-        C(z) = c(1)*z^{-1} + c(0) + c(1)*z
-
-    The cross-covariance generating function is also MA(1):
-        Gamma(z) = g(1)*z^{-1} + g(0) + g(1)*z   [here gamma(-1) = gamma(1)]
-
-    Returns
-    -------
-    theta0, theta1 : coefficients of Theta(z) = [theta0 + theta1*z] / (b0^2*(1+b*z))
-    b0, b          : spectral factor parameters
-    """
+def wiener_kolmogorov_projection(c0, c1, r0, r1):
+    """Return the projection filter coefficients."""
     b0, b = spectral_factor(c0, c1)
     b0_sq = b0**2
 
-    # [Gamma(z) / (1 + b*z^{-1})]_+ = A + B*z  where (using gamma(-1)=gamma(1))
-    # A = gamma(0) - gamma(1)*b
-    # B = gamma(1)
-    A = g0 - g1 * b
-    B = g1
+    A = r0 - r1 * b
+    B = r1
 
-    # Theta(z) = (A + B*z) / (b0^2 * (1 + b*z))
-    # In summary: theta_numerator = [A, B], denominator scale = b0^2*(1+b*z)
     return A, B, b0, b
 ```
 
-### The Population Regression of $M_t - x_t$ on $M_t$
+To study Jacobs' regression, we need the projection of $M_t - x_t$ on current and past values of $M_t$.
 
-Since we want the regression of $m_t - p_t$ on current and past $(1-L)m_t$,
-we need the regression of $M_t - x_t$ on current and past $M_t$. 
-
-The distributed lag-generating function is:
+The corresponding lag-generating function is:
 
 $$
 H(z) = 1 - \Theta(z)
 $$
 
-Sargent shows this simplifies to:
+This simplifies to
 
 $$
-H(z) = \frac{h_0 + h_1 z}{1 + h_2 z}
+H(z) = \frac{h_0 + h_1 z}{1 - h_2 z}
 $$ (eq:H_formula)
 
-with
+The coefficients are:
 
 $$
 h_0 = 1 - \frac{A}{b_0^2}, \qquad
-h_1 = \frac{b h_0 - B/b_0^2}{1}, \qquad
-h_2 = b.
+h_1 = b - \frac{B}{b_0^2}, \qquad
+h_2 = -b.
 $$
 
 ```{code-cell} ipython3
-def compute_h_coefficients(c0, c1, g0, g1):
-    """
-    Compute h0, h1, h2 for the population regression
-        M_t - x_t = H(L) M_t + residual
-    where H(z) = (h0 + h1*z) / (1 + h2*z).
-    """
-    A, B, b0, b = wiener_kolmogorov_projection(c0, c1, g0, g1)
+def compute_h_coefficients(c0, c1, r0, r1):
+    """Return the coefficients in the filter H(z)."""
+    A, B, b0, b = wiener_kolmogorov_projection(c0, c1, r0, r1)
     b0_sq = b0**2
 
-    # Theta(z) = (A + B*z) / (b0_sq * (1 + b*z))
-    # H(z) = 1 - Theta(z) = [b0_sq*(1+b*z) - (A + B*z)] / [b0_sq*(1+b*z)]
-    # Numerator: (b0_sq - A) + (b0_sq*b - B)*z
-    # Denominator: b0_sq * (1 + b*z)
-
-    # Normalise so denominator leading coeff = 1 (divide by b0_sq):
     h0 = (b0_sq - A) / b0_sq
     h1 = (b0_sq * b - B) / b0_sq
-    h2 = b
+    h2 = -b
 
     return h0, h1, h2
 ```
 
----
+## Jacobs' constrained parameterization and the approximation criterion
 
-## Jacobs' Constrained Parameterization and the Approximation Criterion
-
-Jacobs estimated the **constrained** version of the population regression:
+Jacobs estimated the constrained version of the population regression:
 
 $$
 m_t - p_t = \frac{y_0}{1 - y_1 L}(1-L)m_t + \text{residual} .
 $$ (eq:jacobs_constrained)
 
-He interpreted  $y_0 = \alpha(1-\lambda)/[1+\alpha(1-\lambda)]$ and
-$y_1 = \delta$ (the stability parameter).
+He interpreted $y_0 = \alpha (1 - \lambda) / [1 + \alpha (1 - \lambda)]$ and $y_1 = \delta$.
 
-When the rational expectations model is correct, the *unconstrained* population
-regression has the form {eq}`eq:H_formula`, which is a general MA(1)/(MA(1)) ratio.
+When the rational expectations model is correct, the unconstrained population regression has the form {eq}`eq:H_formula`, so Jacobs' parameterization is a binding restriction.
 
-Jacobs' parameterization {eq}`eq:jacobs_constrained` imposes the restriction that the numerator is a scalar
-($h_1 = 0$) — a **binding restriction**.
+Since $m_t$ is integrated, the spectral density $S_m(\omega)$ is unbounded at $\omega = 0$.
 
-Since the money supply is **non-stationary** ($m_t$ is integrated), its
-spectral density $S_m(\omega)$ is unbounded at $\omega = 0$. 
+The approximation criterion is therefore dominated by behavior at $\omega = 0$.
 
-The
-approximation criterion (the weighted $L^2$ distance between the true filter and
-Jacobs' constrained filter, weighted by $S_m$) is dominated by behavior at
-$\omega = 0$.
-
-Sargent shows that minimizing the criterion at $\omega = 0$ forces:
+Note that the least-squares estimators minimize the *rate at which the criterion diverges* near $\omega = 0$, which gives
 
 $$
-\boxed{y_1 = 1, \qquad y_0 = \frac{h_0}{1 - h_2}}
+y_1 = 1, \qquad y_0 = \frac{h_0 + h_1}{1 - h_2}
 $$ (eq:jacobs_result)
 
-**The stability parameter $\delta$, estimated by Jacobs' procedure, converges to
-unity in population — for any admissible values of the structural parameters
-$\alpha$, $\lambda$, and the shock variances.**
+Thus the stability parameter estimated by Jacobs' procedure converges to unity in population for all admissible values of $\alpha$, $\lambda$, and the shock moments.
 
-This provides a complete explanation for Jacobs' empirical finding that
-$\hat{\delta} \approx 1$ in five of the six hyperinflations.
+This provides a complete explanation for Jacobs' empirical finding that $\hat{\delta} \approx 1$ in five of the six hyperinflations.
 
 ```{code-cell} ipython3
-def jacobs_population_params(alpha, lam, sigma_eta2=1.0, sigma_v2=0.5):
-    """
-    Compute the population values of Jacobs' regression parameters (y0, y1)
-    under the rational expectations model.
-
-    Returns
-    -------
-    y0        : estimated y0 (population OLS limit)
-    y1        : estimated y1 / delta — Sargent shows y1 = 1 always
-    h0, h1, h2: true unconstrained regression coefficients
-    """
-    c0, c1, g0, g1 = structural_to_ma1(alpha, lam, sigma_eta2, sigma_v2)
-    h0, h1, h2 = compute_h_coefficients(c0, c1, g0, g1)
-
-    # Approximation criterion dominated by omega=0 => y1 = 1, y0 = h0/(1-h2)
+def jacobs_population_params(α, λ, σ_η2=1.0, σ_ε2=0.5, σ_εη=0.0):
+    """Return Jacobs' population coefficients and the unrestricted filter."""
+    c0, c1, _, r0, r1 = structural_to_ma1(α, λ, σ_η2, σ_ε2, σ_εη)
+    h0, h1, h2 = compute_h_coefficients(c0, c1, r0, r1)
     y1 = 1.0
-    y0 = h0 / (1.0 - h2)
+    y0 = (h0 + h1) / (1.0 - h2)
+
     return y0, y1, h0, h1, h2
 ```
 
----
+We sweep over a grid of admissible structural parameters and confirm that $y_1 = 1$ in every case.
 
-## Numerical Illustration
-
-### Confirming $y_1 = 1$ Over a Range of Parameters
-
-We sweep over a grid of structural parameters and confirm that $y_1 = 1$ in
-every case.
+Unless otherwise stated, we set $\sigma_\eta^2 = 1$, $\sigma_\varepsilon^2 = 0.5$, and $\sigma_{\varepsilon\eta} = 0$ in the calculations below.
 
 ```{code-cell} ipython3
-alphas  = np.linspace(-2.0, -0.1, 10)
-lambdas = np.linspace(0.1,  0.9,  10)
+α_vals = np.linspace(-0.9, -0.05, 18)
+λ_vals = np.linspace(0.2, 0.9, 15)
 
-results = []
-for a in alphas:
-    for l in lambdas:
-        y0, y1, h0, h1, h2 = jacobs_population_params(a, l)
-        results.append({'alpha': a, 'lambda': l,
-                        'y0': y0, 'y1': y1,
-                        'h0': h0, 'h1': h1, 'h2': h2})
+y1_vals = []
+for λ in λ_vals:
+    for α in α_vals:
+        try:
+            _, y1, _, _, _ = jacobs_population_params(α, λ)
+        except ValueError:
+            continue
+        y1_vals.append(y1)
 
-y1_vals = [r['y1'] for r in results]
-print(f"Parameter combinations tested: {len(results)}")
+print(f"Parameter combinations tested: {len(y1_vals)}")
 print(f"Range of y1 across all combinations: "
       f"[{min(y1_vals):.8f}, {max(y1_vals):.8f}]")
 print(f"Max deviation from 1: {max(abs(v - 1) for v in y1_vals):.2e}")
 ```
 
-### Visualising Population Regression Coefficients
+The true regression $H(z) = (h_0 + h_1 z) / (1 - h_2 z)$ has three free parameters.
 
-The true (unconstrained) regression $H(z) = (h_0 + h_1 z)/(1 + h_2 z)$ has
-three free parameters. The figure below shows how $h_0$, $h_1$, and $h_2$ vary
-with $\alpha$ for fixed $\lambda$.
+The figure below shows how $h_0$, $h_1$, and $h_2$ vary with $\alpha$ for fixed $\lambda$.
+
+Here we restrict attention to the branch where $\lambda + \alpha(1-\lambda) > 0$, so $\phi$ is well defined.
 
 ```{code-cell} ipython3
-alpha_grid = np.linspace(-2.0, -0.05, 200)
-lam = 0.5
+---
+mystnb:
+  figure:
+    caption: Regression coefficients
+    name: fig-regression-coefficients
+---
+α_grid = np.linspace(-0.95, -0.05, 200)
+λ = 0.5
 
-h0s, h1s, h2s = [], [], []
-for a in alpha_grid:
-    c0, c1, g0, g1 = structural_to_ma1(a, lam)
-    h0, h1, h2 = compute_h_coefficients(c0, c1, g0, g1)
-    h0s.append(h0); h1s.append(h1); h2s.append(h2)
+h0_vals, h1_vals, h2_vals = [], [], []
+for α in α_grid:
+    c0, c1, _, r0, r1 = structural_to_ma1(α, λ)
+    h0, h1, h2 = compute_h_coefficients(c0, c1, r0, r1)
+    h0_vals.append(h0)
+    h1_vals.append(h1)
+    h2_vals.append(h2)
 
 fig, axes = plt.subplots(1, 3, figsize=(12, 4))
-labels = [r'$h_0$', r'$h_1$', r'$h_2$  (= $b$)']
-data   = [h0s, h1s, h2s]
-for ax, d, lbl in zip(axes, data, labels):
-    ax.plot(alpha_grid, d)
+labels = [r'$h_0$', r'$h_1$', r'$h_2$  (= $-b$)']
+data = [h0_vals, h1_vals, h2_vals]
+for ax, values, label in zip(axes, data, labels):
+    ax.plot(α_grid, values, lw=2)
     ax.axhline(0, color='k', lw=0.7, ls='--')
     ax.set_xlabel(r'$\alpha$')
-    ax.set_title(lbl)
-    ax.set_xlim(alpha_grid[0], alpha_grid[-1])
-plt.suptitle(r'True regression coefficients $h_0, h_1, h_2$ vs. $\alpha$  '
-             r'($\lambda=0.5$)', y=1.02)
+    ax.set_ylabel(label)
+    ax.set_xlim(α_grid[0], α_grid[-1])
+
 plt.tight_layout()
 plt.show()
 ```
 
-### Spectral Density of $M_t$
+The source of the finding $y_1 \to 1$ lies in the shape of $S_m(\omega)$.
 
-The source of the finding  $y_1 \to 1$ lies in the shape of $S_m(\omega)$.
+As $\omega \to 0$, the spectral density of the level $m_t$ diverges because $m_t$ is a unit-root process.
 
- As $\omega \to 0$, the spectral density of the *level* $m_t$ diverges because $m_t$
-is a unit-root (integrated) process. 
-
-The approximation criterion is thus
-extremely sensitive to the fit at $\omega = 0$.
+The approximation criterion is therefore extremely sensitive to fit at $\omega = 0$.
 
 ```{code-cell} ipython3
-def spectral_density_M(c0, c1, omega):
-    """
-    Spectral density of M_t = (1-L)^2 m_t evaluated at frequency omega.
-    C(z) = c(-1)*z^{-1} + c(0) + c(1)*z, evaluated at z = e^{-i*omega}.
-    """
-    return c1 * np.exp(1j*omega) + c0 + c1 * np.exp(-1j*omega)
+---
+mystnb:
+  figure:
+    caption: Money spectrum
+    name: fig-spectral-density-money
+---
+def spectral_density_M(c0, c1, ω):
+    """Return the spectrum of M_t at frequency ω."""
+    return c1 * np.exp(1j * ω) + c0 + c1 * np.exp(-1j * ω)
 
-def spectral_density_m(c0, c1, omega, eps=0.0):
-    """
-    Approximate spectral density of m_t (level), obtained by 'integrating twice':
-        S_m(omega) = S_M(omega) / |1 - e^{-i*omega}|^4
-    We add a small epsilon to avoid the singularity at omega=0.
-    """
-    denom = np.abs(1.0 - np.exp(-1j*(omega + eps)))**4
-    return np.real(spectral_density_M(c0, c1, omega + eps)) / denom
+def spectral_density_m(c0, c1, ω, eps=0.0):
+    """Return the spectrum of m_t."""
+    denom = np.abs(1.0 - np.exp(-1j * (ω + eps)))**4
 
-alpha, lam = -0.5, 0.5
-c0, c1, g0, g1 = structural_to_ma1(alpha, lam)
+    return np.real(spectral_density_M(c0, c1, ω + eps)) / denom
 
-omega_grid = np.linspace(0.01, np.pi, 500)
-Sm = [spectral_density_m(c0, c1, w) for w in omega_grid]
+α, λ = -0.5, 0.5
+c0, c1, _, r0, r1 = structural_to_ma1(α, λ)
 
-fig, ax = plt.subplots(figsize=(8, 4))
-ax.semilogy(omega_grid, Sm)
-ax.set_xlabel(r'Frequency $\omega$')
-ax.set_ylabel(r'$S_m(\omega)$  (log scale)')
-ax.set_title(r'Spectral density of log money supply $m_t$  '
-             r'($\alpha=-0.5,\; \lambda=0.5$)')
+ω_grid = np.linspace(0.01, np.pi, 500)
+S_m = [spectral_density_m(c0, c1, ω) for ω in ω_grid]
+
+fig, ax = plt.subplots()
+ax.semilogy(ω_grid, S_m, lw=2)
+ax.set_xlabel(r'frequency $\omega$')
+ax.set_ylabel(r'$S_m(\omega)$ (log scale)')
 ax.axvline(0, color='r', ls='--', lw=0.8, label=r'$\omega=0$ (singularity)')
 ax.legend()
 plt.tight_layout()
 plt.show()
 ```
 
-### Jacobs' Bias as a Function of  True $\delta$
-
-The structural stability parameter is
+The structural stability parameter that Jacobs wanted to estimate is
 
 $$
 \delta_{\text{true}} = \frac{\lambda + \alpha(1-\lambda)}{1 + \alpha(1-\lambda)}.
 $$
 
-The figure below contrasts the *true* $\delta$ against Jacobs' estimated
-population value $y_1 = 1$.
+The figure below contrasts the true $\delta$ with Jacobs' population value $y_1 = 1$.
 
 ```{code-cell} ipython3
-lam_vals = [0.3, 0.5, 0.7]
-alpha_grid = np.linspace(-3.0, -0.01, 500)
+---
+mystnb:
+  figure:
+    caption: True and projected $\delta$
+    name: fig-jacobs-bias
+---
+λ_vals = [0.3, 0.5, 0.7]
 
-fig, ax = plt.subplots(figsize=(8, 5))
-for lam in lam_vals:
-    delta_true = (lam + alpha_grid*(1-lam)) / (1 + alpha_grid*(1-lam))
-    ax.plot(alpha_grid, delta_true, label=rf'$\lambda={lam}$')
+fig, ax = plt.subplots()
+for λ in λ_vals:
+    α_grid = np.linspace(-λ / (1.0 - λ) + 0.02, -0.01, 500)
+    δ_true = (λ + α_grid * (1.0 - λ)) / (1.0 + α_grid * (1.0 - λ))
+    ax.plot(α_grid, δ_true, lw=2, label=rf'$\lambda={λ}$')
 
 ax.axhline(1.0, color='k', lw=1.5, ls='--',
            label=r"Jacobs' population $y_1=1$")
 ax.axhline(0.0, color='gray', lw=0.5, ls=':')
 ax.set_xlabel(r'$\alpha$ (demand semi-elasticity)')
-ax.set_ylabel(r'Stability parameter $\delta$')
+ax.set_ylabel(r'stability parameter $\delta$')
 ax.set_ylim(-0.5, 1.5)
-ax.set_title("True $\\delta$ vs. Jacobs' population estimate")
 ax.legend()
 plt.tight_layout()
 plt.show()
 ```
 
-The dashed line at $y_1 = 1$ shows that Jacobs' estimator is **always** biased
-toward unity.
+The dashed line at $y_1 = 1$ lies above the true value of $\delta$ throughout the range shown.
 
-The bias is large whenever the true $\delta$ is far from 1 (i.e.,
-for large $|\alpha|$).
+The gap widens as $\alpha$ moves toward the boundary $\lambda + \alpha(1-\lambda) = 0$ from the right.
 
----
+## Jacobs' hyperinflation estimates
 
-## Jacobs' Hyperinflation Estimates
+The table below reproduces the estimates from {cite}`jacobs1975difficulty` as reported in {cite:t}`sargent1976econometric`.
 
-The table below reproduces the estimates from {cite}`jacobs1974estimating` as reported in
-{cite}`sargent1976econometric`:
-
-| Country   | $k$ (Jacobs) | $\hat{\delta} = c - k$ |
+| Country   | $k$ (Jacobs) | $\hat{\delta}$ |
 |-----------|:-----------:|:-------------------:|
 | Austria   | 0.143       | 0.87                |
 | Germany   | −0.131      | 1.14                |
@@ -740,66 +607,70 @@ The table below reproduces the estimates from {cite}`jacobs1974estimating` as re
 | Poland    | 0.139       | 0.87                |
 | Russia    | 0.857       | 0.43                |
 
-Five of the six estimates cluster around unity. Russia is the exception. Sargent's
-theory predicts $\hat{\delta} \to 1$ for all countries, matching five of the six.
+Five of the six estimates cluster around unity.
+
+Russia is the exception.
+
+The theory predicts $\hat{\delta} \to 1$ for all countries, matching five of the six.
 
 ```{code-cell} ipython3
-countries   = ['Austria', 'Germany', 'Greece', 'Hungary', 'Poland', 'Russia']
-delta_hat   = [0.87, 1.14, 1.30, 1.22, 0.87, 0.43]
-pop_value   = [1.0] * len(countries)
+---
+mystnb:
+  figure:
+    caption: Jacobs estimates
+    name: fig-jacobs-estimates
+---
+countries = ['Austria', 'Germany', 'Greece', 'Hungary', 'Poland', 'Russia']
+δ_hat = [0.87, 1.14, 1.30, 1.22, 0.87, 0.43]
+pop_value = [1.0] * len(countries)
 
 x = np.arange(len(countries))
 width = 0.35
 
-fig, ax = plt.subplots(figsize=(9, 5))
-bars = ax.bar(x - width/2, delta_hat, width, label=r"Jacobs' $\hat{\delta}$",
-              color='steelblue', edgecolor='k')
-ax.bar(x + width/2, pop_value, width, label='Sargent theory: $y_1=1$',
+fig, ax = plt.subplots()
+ax.bar(x - width / 2, δ_hat, width, label=r"Jacobs' $\hat{\delta}$",
+       color='steelblue', edgecolor='k')
+ax.bar(x + width / 2, pop_value, width, label='Theory: $y_1 = 1$',
        color='tomato', edgecolor='k', alpha=0.7)
 ax.axhline(1.0, color='k', lw=0.8, ls='--')
 ax.set_xticks(x)
 ax.set_xticklabels(countries)
-ax.set_ylabel(r'Stability parameter $\hat\delta$')
-ax.set_title("Jacobs' estimates vs. predicted population value")
+ax.set_ylabel(r'stability parameter $\hat\delta$')
 ax.legend()
 plt.tight_layout()
 plt.show()
 ```
 
----
+## Information projection: a closer look
 
-## Information Projection: A Closer Look
+The Wiener–Kolmogorov formula is best understood as an orthogonal projection in the Hilbert space $L^2$ of square-integrable random variables.
 
-The Wiener–Kolmogorov formula is best understood as an **orthogonal projection**
-in the Hilbert space $L^2$ of square-integrable random variables with inner
-product $\langle X, Y \rangle = E[XY]$.
+For MA($q$) covariance structure, the formula reduces to a simple recursion.
 
-For MA($q$) covariance structure, the formula reduces to a **finite-horizon
-recursion**. Here we illustrate the projection by computing the impulse response
-of the optimal filter $\Theta(L) = \sum_{j=0}^{\infty} \theta_j L^j$:
+For the filter in {eq}`eq:theta_formula`, coefficient matching implies the recursion:
 
 $$
-\theta_j = A \cdot (-b)^j / b_0^2 \quad (j \geq 1), \qquad \theta_0 = A/b_0^2
+\theta_0 = \frac{A}{b_0^2}, \qquad
+\theta_1 = \frac{B}{b_0^2} - b \theta_0, \qquad
+\theta_j = -b \theta_{j-1} \quad \text{for } j \geq 2
 $$
 
-where $A = \gamma(0) - \gamma(1) b$ from the spectral factor formula.
+where $A = r(0) - r(1) b$ and $B = r(1)$.
+
+The figure below shows the corresponding impulse response.
 
 ```{code-cell} ipython3
-def projection_impulse_response(c0, c1, g0, g1, n_lags=20):
-    """
-    Compute the first n_lags coefficients of Theta(L), the projection of x_t
-    on {M_t, M_{t-1}, ...}.
-    """
-    A, B, b0, b = wiener_kolmogorov_projection(c0, c1, g0, g1)
+---
+mystnb:
+  figure:
+    caption: Projection filter response
+    name: fig-projection-impulse-response
+---
+def projection_impulse_response(c0, c1, r0, r1, n_lags=20):
+    """Return the first n_lags coefficients of Θ(L)."""
+    A, B, b0, b = wiener_kolmogorov_projection(c0, c1, r0, r1)
     b0_sq = b0**2
 
-    # Theta(z) = (A + B*z) / (b0^2 * (1+b*z))
-    # Let's do long division: theta_j = coeff of z^j in Theta(z).
-    # Write (A + B*z) = b0^2*(1+b*z) * sum_{j>=0} theta_j z^j
-    # Matching coefficients:
-    #   j=0: A = b0^2 * theta_0             => theta_0 = A/b0^2
-    #   j=1: B = b0^2*(theta_1 + b*theta_0) => theta_1 = B/b0^2 - b*theta_0
-    #   j>=2: 0 = b0^2*(theta_j + b*theta_{j-1}) => theta_j = -b*theta_{j-1}
     thetas = np.zeros(n_lags)
     thetas[0] = A / b0_sq
     if n_lags > 1:
@@ -809,113 +680,115 @@ def projection_impulse_response(c0, c1, g0, g1, n_lags=20):
     return thetas
 
 
-alpha, lam = -0.5, 0.5
-c0, c1, g0, g1 = structural_to_ma1(alpha, lam)
-thetas = projection_impulse_response(c0, c1, g0, g1, n_lags=15)
+α, λ = -0.5, 0.5
+c0, c1, _, r0, r1 = structural_to_ma1(α, λ)
+thetas = projection_impulse_response(c0, c1, r0, r1, n_lags=15)
 
-fig, ax = plt.subplots(figsize=(8, 4))
+fig, ax = plt.subplots()
 ax.stem(range(len(thetas)), thetas, basefmt='k-')
-ax.set_xlabel('Lag $j$')
+ax.set_xlabel('lag $j$')
 ax.set_ylabel(r'$\theta_j$')
-ax.set_title(r'Impulse response of $\Theta(L)$: projection of $x_t$ on past $M_t$'
-             '\n' + rf'($\alpha={alpha},\;\lambda={lam}$)')
 ax.axhline(0, color='k', lw=0.5)
 plt.tight_layout()
 plt.show()
 ```
 
-Because $|b| < 1$, the impulse response decays geometrically. The projection
-assigns exponentially declining weights to lagged money growth rates when
-forecasting the acceleration of inflation.
+Because $|b| < 1$, the impulse response decays geometrically.
 
----
+The projection assigns exponentially declining weights to lagged money growth rates when forecasting the acceleration of inflation.
 
-## The Approximation Criterion in Detail
+## The approximation criterion in detail
 
-When Jacobs estimates his constrained parameterization {eq}`eq:jacobs_constrained` by OLS, he is
-implicitly minimizing
+When Jacobs estimates {eq}`eq:jacobs_constrained` by OLS, least squares minimizes
 
 $$
-\int_{-\pi}^{\pi} \left| \frac{y_0(1-e^{-i\omega})}{1 - y_1 e^{-i\omega}}
-  - \frac{h_0 + h_1 e^{-i\omega}}{1 - h_2 e^{-i\omega}} \right|^2 S_m(\omega)\, d\omega
+\int_{-\pi}^{\pi} \left| \frac{y_0 (1 - e^{-i \omega})}{1 - y_1 e^{-i \omega}}
+  - \frac{h_0 + h_1 e^{-i \omega}}{1 - h_2 e^{-i \omega}} \right|^2 S_m(\omega)\, d\omega
 $$ (eq:approx_criterion)
 
-where $S_m(\omega) \propto S_M(\omega)/|1-e^{-i\omega}|^4 \to \infty$ as
-$\omega \to 0$.
+Because $S_m(\omega) \propto S_M(\omega) / |1 - e^{-i \omega}|^4 \to \infty$ as $\omega \to 0$, the criterion is dominated by behavior near $\omega = 0$.
 
-The code below visualises the integrand for several candidate values of $y_1$
-and confirms that $y_1 = 1$ uniquely minimises the dominant contribution at
-$\omega = 0$.
+The left panel below plots the unweighted squared filter error $|F_{\text{Jacobs}} - F_{\text{true}}|^2$ for several candidate values of $y_1$.
+
+Only $y_1 = 1$ makes the error vanish at $\omega = 0$, partially cancelling the $|1 - e^{-i\omega}|^{-4}$ divergence of $S_m(\omega)$.
+
+The right panel shows the full integrand (error times $S_m$): all curves diverge, but $y_1 = 1$ diverges at rate $\omega^{-2}$ while all others diverge at the faster rate $\omega^{-4}$.
 
 ```{code-cell} ipython3
-alpha, lam = -0.5, 0.5
-c0, c1, g0, g1 = structural_to_ma1(alpha, lam)
-h0, h1, h2 = compute_h_coefficients(c0, c1, g0, g1)
+---
+mystnb:
+  figure:
+    caption: Approximation criterion
+    name: fig-approximation-criterion
+---
+α, λ = -0.5, 0.5
+c0, c1, _, r0, r1 = structural_to_ma1(α, λ)
+h0, h1, h2 = compute_h_coefficients(c0, c1, r0, r1)
 
-# Use the optimal y0 for each y1 candidate
-omega_grid = np.linspace(1e-3, np.pi, 2000)
+ω_grid = np.linspace(1e-3, np.pi, 2000)
 
-def integrand(y1, omega, h0, h1, h2, c0, c1, eps=0.0):
-    z = np.exp(-1j * omega)
-    # Jacobs' filter at omega
-    y0 = h0 / (1 - h2)   # optimal y0 (minimises at omega=0 for each y1)
+def filter_error(y1, ω, h0, h1, h2):
+    """Return the squared filter approximation error at frequency ω."""
+    z = np.exp(-1j * ω)
+    y0 = (h0 + h1) / (1.0 - h2)
     F_jacobs = y0 * (1 - z) / (1 - y1 * z)
-    # True filter at omega
-    F_true   = (h0 + h1 * z) / (1 - h2 * z)
-    # Weighting by S_m(omega) ~ 1/|1-e^{-iw}|^4
-    Sm_weight = 1.0 / np.abs(1 - np.exp(-1j * omega))**4
-    return np.abs(F_jacobs - F_true)**2 * Sm_weight
+    F_true = (h0 + h1 * z) / (1 - h2 * z)
+    return np.abs(F_jacobs - F_true)**2
 
 y1_candidates = [0.6, 0.8, 0.9, 1.0, 1.1, 1.2]
-fig, ax = plt.subplots(figsize=(9, 5))
-for y1_cand in y1_candidates:
-    ig = [integrand(y1_cand, w, h0, h1, h2, c0, c1) for w in omega_grid]
-    ax.semilogy(omega_grid, ig, label=rf'$y_1={y1_cand}$')
 
-ax.set_xlabel(r'Frequency $\omega$')
-ax.set_ylabel('Integrand (log scale)')
-ax.set_title('Approximation criterion integrand for various $y_1$\n'
-             r'($\alpha=-0.5,\;\lambda=0.5$)')
-ax.legend(ncol=2, fontsize=9)
-ax.set_xlim(0, np.pi)
+fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
+
+# Store data for the inset
+err_data = {}
+for y1_value in y1_candidates:
+    err = [filter_error(y1_value, ω, h0, h1, h2) for ω in ω_grid]
+    wt = [spectral_density_m(c0, c1, ω) for ω in ω_grid]
+    integrand = [e * w for e, w in zip(err, wt)]
+    err_data[y1_value] = err
+    axes[0].semilogy(ω_grid, err, lw=2, label=rf'$y_1 = {y1_value}$')
+    axes[1].semilogy(ω_grid, integrand, lw=2, label=rf'$y_1 = {y1_value}$')
+
+axes[0].set_xlabel(r'frequency $\omega$')
+axes[0].set_ylabel(r'$|F_{\mathrm{Jacobs}} - F_{\mathrm{true}}|^2$')
+axes[0].set_title('Unweighted filter error')
+axes[0].legend(ncol=2, fontsize=8)
+axes[0].set_xlim(0, np.pi)
+
+# Inset: zoom near ω = 0 (right-bottom, slightly outside)
+ax_inset = axes[0].inset_axes([0.55, -0.05, 0.50, 0.50])
+ω_zoom = ω_grid[ω_grid < 0.15]
+for y1_value in y1_candidates:
+    err_zoom = err_data[y1_value][:len(ω_zoom)]
+    ax_inset.semilogy(ω_zoom, err_zoom, lw=2)
+ax_inset.set_xlim(0, 0.15)
+ax_inset.set_title(r'near $\omega = 0$', fontsize=8)
+ax_inset.tick_params(labelsize=7)
+axes[0].indicate_inset_zoom(ax_inset, edgecolor='black')
+
+axes[1].set_xlabel(r'frequency $\omega$')
+axes[1].set_ylabel('integrand (log scale)')
+axes[1].set_title(r'Integrand (error $\times\, S_m$)')
+axes[1].legend(ncol=2, fontsize=8)
+axes[1].set_xlim(0, np.pi)
+
 plt.tight_layout()
 plt.show()
 ```
 
-The figure shows that only $y_1 = 1$ keeps the integrand bounded near
-$\omega = 0$. All other values of $y_1$ produce a divergent integrand at zero
-frequency, making the integral infinite.
-
----
+Only $y_1 = 1$ makes the filter error vanish at $\omega = 0$ (left panel), which partially offsets the divergence of $S_m(\omega)$ and produces the slowest-diverging integrand (right panel).
 
 ## Summary
 
-The main results of {cite}`Sargent1976exogeneity` are:
+The main results are:
 
-1. **Cagan's estimator** is consistent if prices are exogenous but money is
-   endogenous; **Jacobs' estimator** is consistent if money is exogenous but
-   prices are endogenous. Neither is consistent in general when money accommodates
-   inflation ("real bills" feedback).
-
-2. **The rational expectations version** of Cagan's adaptive expectations model
-   (see  {cite}`sargent1973rational` and {cite}`Sargent77hyper`) implies that money is *not* exogenous — inflation
-   Granger-causes money creation with no reverse causality.
-
-3. **Information projection** (the Wiener–Kolmogorov formula) lets us compute the
-   *population regression* that OLS converges to under any joint stochastic
-   process for $(m_t, p_t)$. This is the right tool for understanding the
-   probability limits of misspecified estimators.
-
-4. **The key result**: Under the rational expectations model, the population value
-   of Jacobs' stability parameter $\delta$ is identically **1** for all
-   admissible structural parameters — because the spectral density of money is
-   unbounded at zero frequency, and the approximation criterion is dominated by
-   behavior at $\omega = 0$.
-
-5. This prediction accords with Jacobs' empirical finding that $\hat\delta \approx 1$
-   in five of the six hyperinflations.
-
----
+- Cagan's estimator is consistent when its orthogonality condition holds; a sufficient condition is exogeneity of prices.
+- Jacobs' inverted regression is the appropriate regression equation when money is exogenous with respect to portfolio-balance disturbances.
+- In general, at best one, and usually neither, of the Cagan and Jacobs equations is consistently estimated by least squares when exogeneity fails.
+- The rational expectations version of Cagan's model implies that money is not exogenous {cite}`sargent1973rational,Sargent77hyper`.
+- Information projection, via the Wiener–Kolmogorov formula, gives the population regression to which OLS converges under misspecification.
+- Under the rational expectations model, Jacobs' stability parameter has population value 1 because the approximation criterion is dominated by behavior at $\omega = 0$.
+- This prediction accords with Jacobs' empirical finding that $\hat{\delta} \approx 1$ in five of the six hyperinflations.
 
 ## Exercises
 
@@ -923,11 +796,9 @@ The main results of {cite}`Sargent1976exogeneity` are:
 :label: sj76_ex1
 ```
 
-Using the `structural_to_ma1` function, compute the covariograms $c(\tau)$ and
-$\gamma(\tau)$ for $\alpha = -0.5$, $\lambda = 0.7$, $\sigma_\eta^2 = 1$,
-$\sigma_v^2 = 1$. Verify numerically that the spectral
-density $C(e^{-i\omega}) = c(-1)e^{i\omega} + c(0) + c(1)e^{-i\omega}$ is
-non-negative for all $\omega$.
+Using `structural_to_ma1`, compute the covariogram $c(\tau)$ and the cross-covariogram $r(\tau)$ for $\alpha = -0.5$, $\lambda = 0.7$, $\sigma_\eta^2 = 1$, $\sigma_\varepsilon^2 = 0.5$, and $\sigma_{\varepsilon\eta} = 0$.
+
+Verify numerically that $C(e^{-i \omega}) = c(-1) e^{i \omega} + c(0) + c(1) e^{-i \omega}$ is nonnegative for all $\omega$.
 
 ```{exercise-end}
 ```
@@ -937,14 +808,14 @@ non-negative for all $\omega$.
 ```
 
 ```{code-cell} ipython3
-alpha, lam = -0.5, 0.7
+α, λ = -0.5, 0.7
 
-c0, c1, g0, g1 = structural_to_ma1(alpha, lam, sigma_eta2=1.0, sigma_v2=1.0)
+c0, c1, r_m1, r0, r1 = structural_to_ma1(α, λ, σ_η2=1.0, σ_ε2=0.5, σ_εη=0.0)
 print(f"c(0) = {c0:.4f},  c(1) = {c1:.4f}")
-print(f"gamma(0) = {g0:.4f},  gamma(1) = {g1:.4f}")
+print(f"r(-1) = {r_m1:.4f},  r(0) = {r0:.4f},  r(1) = {r1:.4f}")
 
-omega_check = np.linspace(0, np.pi, 1000)
-Cw = c1 * np.exp(1j*omega_check) + c0 + c1 * np.exp(-1j*omega_check)
+ω_check = np.linspace(0, np.pi, 1000)
+Cw = c1 * np.exp(1j * ω_check) + c0 + c1 * np.exp(-1j * ω_check)
 print(f"\nMin spectral density C(e^{{-iw}}): {np.min(np.real(Cw)):.6f}")
 print("Non-negative:", np.all(np.real(Cw) >= -1e-10))
 ```
@@ -952,24 +823,128 @@ print("Non-negative:", np.all(np.real(Cw) >= -1e-10))
 ```{solution-end}
 ```
 
-```{exercise}
+````{exercise-start}
 :label: sj76_ex2
+````
 
-Modify the `jacobs_population_params` function to also return the **true**
+Modify the `jacobs_population_params` function to also return the *true*
 structural stability parameter $\delta = (\lambda + \alpha(1-\lambda))/(1+\alpha(1-\lambda))$,
 and plot the bias $y_1 - \delta_{\text{true}}$ as a function of $\alpha$ for
-three values of $\lambda \in \{0.3, 0.5, 0.7\}$. Comment on how the bias depends
-on $\alpha$.
+three values of $\lambda \in \{0.3, 0.5, 0.7\}$.
+
+Comment on how the bias depends on $\alpha$.
+
+````{exercise-end}
+````
+
+```{solution-start} sj76_ex2
+:class: dropdown
 ```
 
-```{exercise}
-:label: sj76_ex3
+```{code-cell} ipython3
+def jacobs_population_params_ex2(α, λ, σ_η2=1.0, σ_ε2=0.5, σ_εη=0.0):
+    """Return Jacobs' coefficients and the true value of δ."""
+    c0, c1, _, r0, r1 = structural_to_ma1(α, λ, σ_η2, σ_ε2, σ_εη)
+    h0, h1, h2 = compute_h_coefficients(c0, c1, r0, r1)
+    y1 = 1.0
+    y0 = (h0 + h1) / (1.0 - h2)
+    δ_true = (λ + α * (1.0 - λ)) / (1.0 + α * (1.0 - λ))
 
-For the Germany hyperinflation Jacobs found $\hat\delta \approx 1.14$. Using the
-rational expectations model, can you find parameter values $(\alpha, \lambda,
-\sigma_u^2, \sigma_v^2, \sigma_{eu})$ consistent with $y_1 = 1$ and
-$y_0 \approx -0.13/(1+0.13)$? What does this imply about the magnitude of
-$\alpha$?
+    return y0, y1, h0, h1, h2, δ_true
 ```
 
+```{code-cell} ipython3
 ---
+mystnb:
+  figure:
+    caption: Jacobs estimator bias
+    name: fig-jacobs-bias-exercise
+---
+λ_vals = [0.3, 0.5, 0.7]
+
+fig, ax = plt.subplots()
+for λ in λ_vals:
+    α_grid = np.linspace(-λ / (1.0 - λ) + 0.02, -0.01, 500)
+    bias = []
+    for α in α_grid:
+        _, y1, _, _, _, δ_true = jacobs_population_params_ex2(α, λ)
+        bias.append(y1 - δ_true)
+    ax.plot(α_grid, bias, lw=2, label=rf'$\lambda={λ}$')
+
+ax.axhline(0, color='k', lw=0.5, ls='--')
+ax.set_xlabel(r'$\alpha$')
+ax.set_ylabel(r'bias $y_1 - \delta_{\mathrm{true}}$')
+ax.legend()
+plt.tight_layout()
+plt.show()
+```
+
+On the range shown, the bias $y_1 - \delta_{\text{true}} = 1 - \delta_{\text{true}}$ is positive.
+
+It becomes larger as $\alpha$ approaches the boundary $\lambda + \alpha(1-\lambda) = 0$ from the right, because $\delta_{\text{true}}$ then falls farther below 1.
+
+```{solution-end}
+```
+
+````{exercise-start}
+:label: sj76_ex3
+````
+
+For the Germany hyperinflation, Jacobs found $\hat{\delta} \approx 1.14$.
+
+Fix $\lambda = 0.5$, $\sigma_\eta^2 = 1$, and stay on the branch with $\lambda + \alpha(1-\lambda) > 0$.
+
+Search over admissible values of $\alpha$, $\sigma_\varepsilon^2$, and $\sigma_{\varepsilon\eta}$ to make $y_0$ as close as possible to $-0.13 / (1 + 0.13)$.
+
+What does this suggest about the sign of $\sigma_{\varepsilon\eta}$ and the magnitude of $\alpha$?
+
+````{exercise-end}
+````
+
+```{solution-start} sj76_ex3
+:class: dropdown
+```
+
+```{code-cell} ipython3
+y0_target = -0.13 / (1 + 0.13)
+print(f"Target y0: {y0_target:.4f}")
+
+λ = 0.5
+σ_η2 = 1.0
+
+best = None
+
+for α in np.linspace(-0.95, -0.01, 80):
+    for σ_ε2 in np.linspace(0.05, 1.0, 80):
+        σ_εη_vals = np.linspace(-np.sqrt(σ_η2 * σ_ε2), np.sqrt(σ_η2 * σ_ε2), 81)
+        for σ_εη in σ_εη_vals:
+            try:
+                y0, y1, h0, h1, h2 = jacobs_population_params(
+                    α, λ, σ_η2=σ_η2, σ_ε2=σ_ε2, σ_εη=σ_εη
+                )
+            except ValueError:
+                continue
+
+            err = abs(y0 - y0_target)
+            candidate = (err, α, σ_ε2, σ_εη, y0, y1)
+            if best is None or candidate[0] < best[0]:
+                best = candidate
+
+err, α_best, σ_ε2_best, σ_εη_best, y0_best, y1_best = best
+δ_true = (λ + α_best * (1.0 - λ)) / (1.0 + α_best * (1.0 - λ))
+
+print(f"α = {α_best:.4f}")
+print(f"σ_ε^2 = {σ_ε2_best:.4f}")
+print(f"σ_εη = {σ_εη_best:.4f}")
+print(f"y0 = {y0_best:.4f} (target: {y0_target:.4f})")
+print(f"y1 = {y1_best:.4f}")
+print(f"True δ = {δ_true:.4f}")
+print(f"Absolute error = {err:.2e}")
+```
+
+One admissible fit uses a positive value of $\sigma_{\varepsilon\eta}$.
+
+It also points to a relatively small negative value of $\alpha$ rather than a very large one in absolute value.
+
+```{solution-end}
+```
