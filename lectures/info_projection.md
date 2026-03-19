@@ -133,7 +133,7 @@ $$
 $$
 
 and the disturbance $u_t'$ is orthogonal to all current and lagged $m$'s (under
-the exogeneity hypothesis). 
+the exogeneity hypothesis).
 
 Jacobs estimated {eq}`eq:jacobs_eqn` by nonlinear least squares and obtained very different estimates of $\alpha$, $\lambda$, and $\delta$ from Cagan's.
 
@@ -750,8 +750,7 @@ for y1_value in y1_candidates:
     axes[1].semilogy(ω_grid, integrand, lw=2, label=rf'$y_1 = {y1_value}$')
 
 axes[0].set_xlabel(r'frequency $\omega$')
-axes[0].set_ylabel(r'$|F_{\mathrm{Jacobs}} - F_{\mathrm{true}}|^2$')
-axes[0].set_title('Unweighted filter error')
+axes[0].set_ylabel(r'unweighted $|F_{\mathrm{Jacobs}} - F_{\mathrm{true}}|^2$')
 axes[0].legend(ncol=2, fontsize=8)
 axes[0].set_xlim(0, np.pi)
 
@@ -762,13 +761,11 @@ for y1_value in y1_candidates:
     err_zoom = err_data[y1_value][:len(ω_zoom)]
     ax_inset.semilogy(ω_zoom, err_zoom, lw=2)
 ax_inset.set_xlim(0, 0.15)
-ax_inset.set_title(r'near $\omega = 0$', fontsize=8)
 ax_inset.tick_params(labelsize=7)
 axes[0].indicate_inset_zoom(ax_inset, edgecolor='black')
 
 axes[1].set_xlabel(r'frequency $\omega$')
-axes[1].set_ylabel('integrand (log scale)')
-axes[1].set_title(r'Integrand (error $\times\, S_m$)')
+axes[1].set_ylabel(r'integrand (error $\times\, S_m$)')
 axes[1].legend(ncol=2, fontsize=8)
 axes[1].set_xlim(0, np.pi)
 
