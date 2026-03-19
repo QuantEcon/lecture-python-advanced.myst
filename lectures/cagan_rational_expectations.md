@@ -85,7 +85,9 @@ causality**, and **vector time series methods** following
 
 
 ```{note}
-From a technical point of view this paper is an exercise in applying **vector
+This lecture can be viewed as a bivariate version of the ''reverse engineering'' exercise of 
+{cite:t}`Muth1960` that we described in {doc}`this lecture <muth_kalman>`.
+From a technical point of view this lecture is an exercise in applying **vector
 time series models**.  The model is interesting because it illustrates the
 difference between Granger causality and simple notions of one series *leading*
 another. It also illustrates a difference between Granger causality and the separate notion of **invariance
@@ -128,7 +130,7 @@ where $L$ is the lag operator, $L^k x_t = x_{t-k}$, and $0 < \lambda < 1$.
 Let $x_t \equiv p_t - p_{t-1}$ be the inflation rate and $\mu_t \equiv m_t - m_{t-1}$
 be the percentage rate of money creation.
 
-### Rational expectations version0
+### Rational expectations  
 
 
 Cagan's model of hyperinflation builds on a demand schedule for real balances
@@ -395,9 +397,7 @@ $$
   as required.
 
 
-### Rational expectations
-
-Under rational expectations we require
+In summary, under rational expectations we require
 
 $$
 \pi_t = E_t x_{t+1}
@@ -1408,7 +1408,7 @@ successfully recovers the adaptive expectations parameter.
 When $\sigma_{\delta\varepsilon} = 0$ (shocks to money demand and money supply
 are uncorrelated), an **instrumental variable (IV) estimator** is available.
 
-From the vector autoregressive representation {eq}`eq:varma_levels`, the
+From the vector autoregressive representation {eq}`eq27`, the
 innovations satisfy
 
 $$
@@ -1526,7 +1526,7 @@ confirming consistency of the first-stage estimator.
 
 ### The overparameterized system
 
-Representation {eq}`eq:arima_x`–{eq}`eq:mu_eq_x_plus_innovations` is a special
+Representation {eq}`eq27` is a special
 case of the general vector ARMA(1,1):
 
 $$
@@ -1541,7 +1541,7 @@ $$ (eq:general_varma)
 
 where $C$ and $B$ are general $2\times 2$ matrices.
 
-In the restricted model {eq}`eq:arima_x`, **seven linear restrictions** have been
+In the restricted model {eq}`eq27`, **seven linear restrictions** have been
 imposed on the eight parameters $(c_{11}, c_{12}, c_{21}, c_{22}, b_{11}, b_{12},
 b_{21}, b_{22})$ of the general system {eq}`eq:general_varma` so that the
 systematic part involves only the single parameter $\lambda$.
@@ -1567,7 +1567,7 @@ $$
 $$ (eq:lr_stat)
 
 where $q$ is the number of restrictions relaxed.  High values lead to rejection
-of the restricted model {eq}`eq:arima_x`.
+of the restricted model {eq}`eq27`.
 
 ### Empirical results
 
