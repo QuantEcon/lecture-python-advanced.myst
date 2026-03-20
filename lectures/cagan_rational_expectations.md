@@ -116,7 +116,7 @@ m_t - p_t = \alpha \pi_t + u_t, \qquad \alpha < 0
 $$ (eq:portfolio_balance_re)
 
 where $m_t$ is the log money supply, $p_t$ is the log price level, $\pi_t$ is
-the expected rate of inflation (the public's psychological expectation of
+the expected rate of inflation (the public's subjective expectation of
 $p_{t+1} - p_t$), and $u_t$ is a mean-zero random disturbance.
 
 Cagan assumed $\pi_t$ obeys the adaptive expectations scheme
@@ -144,8 +144,13 @@ m_t - p_t = \alpha \pi_t + u_t, \qquad \alpha < 0,
 where $m$ is the log of the money supply (which is always equal to the log of
 money demand); $p$ is the log of the price level; $\pi_t$ is the expected rate
 of inflation, i.e., the public's psychological expectation of $p_{t+1} - p_t$;
-and $u_t$ is a random variable with mean zero.  A constant term has been omitted
+and $u_t$ is a random variable with mean zero. 
+
+
+```{note}
+A constant term has been omitted
 from {eq}`eq1`, though one would be included in empirical work.
+```
 
 Cagan assumed that $\pi_t$ was formed via the adaptive expectations scheme
 
@@ -186,11 +191,17 @@ have[^deriv]
 ```
 
 where $\mu_t = m_t - m_{t-1}$ is the percentage rate of increase of the money
-supply.  Equation {eq}`eq4` characterises the (systematic part of the)
+supply.  
+
+Equation {eq}`eq4` characterises the (systematic part of the)
 stochastic process for inflation as a function of the (systematic part of the)
-stochastic process for money creation.  The model asserts that {eq}`eq4` is
+stochastic process for money creation. 
+
+The model asserts that {eq}`eq4` is
 invariant with respect to interventions in the form of changes in the stochastic
-process governing money creation.  In this sense, since changes in the stochastic
+process governing money creation.  
+
+In this sense, since changes in the stochastic
 process for money creation are supposed to produce predictable changes in the
 stochastic process for inflation, money "causes" inflation.
 
@@ -216,8 +227,9 @@ E_t\mu_{t+j} - E_t(u_{t+j} - u_{t+j-1}) = \frac{1-\lambda}{1-\lambda L}\, x_t.
 
 For an arbitrary $\mu$ process there exists a disturbance process $u_t$
 satisfying the above restriction, one in which $E_t(u_{t+j} - u_{t+j-1})$ is a
-complicated function of lagged $x$'s and lagged $\mu$'s.  The most fruitful
-conditions to impose, however, are the following two that are *sufficient*
+complicated function of lagged $x$'s and lagged $\mu$'s.  
+
+The most fruitful conditions to impose, however, are the following two that are *sufficient*
 (though clearly not necessary) to satisfy {eq}`eq5`.  The first condition is
 
 ```{math}
@@ -228,7 +240,9 @@ u_t = u_{t-1} + \eta_t,
 where $\eta_t$ is a serially uncorrelated random term with mean zero and variance
 $\sigma_\eta^2$; we assume that
 $E[\eta_t \mid u_{t-1}, \mu_{t-2}, \ldots, x_{t-1}, x_{t-2}, \ldots] = 0$.
-According to {eq}`eq6`, $u$ follows a random walk.  Equation {eq}`eq6` implies
+According to {eq}`eq6`, $u$ follows a random walk.  
+
+Equation {eq}`eq6` implies
 that
 
 ```{math}
@@ -249,7 +263,9 @@ E_t\mu_{t+j} = E_t\mu_{t+1} \quad \text{for } j > 1,
 ```
 
 so that a constant rate of money creation is expected to occur over the entire
-future.  Assuming {eq}`eq6` and {eq}`eq7` then implies that the appropriate
+future. 
+
+Assuming {eq}`eq6` and {eq}`eq7` then implies that the appropriate
 version of {eq}`eq5` is
 
 ```{math}
@@ -281,23 +297,33 @@ E(\varepsilon_t \mid x_{t-1}, x_{t-2}, \ldots, \mu_{t-1}, \mu_{t-2}, \ldots) = 0
 ```
 
 According to {eq}`eq9`, the rate of money creation equals the expected rate of
-inflation plus a random term.  Equation {eq}`eq9`, which has been arrived at in a
+inflation plus a random term. 
+
+Equation {eq}`eq9`, which has been arrived at in a
 purely mechanical fashion by pursuing the implications of the assumption that
 Cagan's adaptive expectations scheme is rational, is nevertheless of interest as
-an hypothesis about the government's behaviour.  For example, if the government
+an hypothesis about the government's behaviour. 
+
+For example, if the government
 is creating money to finance a large part of a roughly fixed rate of real
 government purchases, then there is a presumption that inflation and expected
 inflation will feed back into money creation, an implication with which {eq}`eq9`
-is consistent.  Thus, when $\pi_t$ increases, causing $m_t - p_t$ to fall and
+is consistent.  
+
+Thus, when $\pi_t$ increases, causing $m_t - p_t$ to fall and
 thereby causing $p_t$ to rise with a fixed $m_t$, money depreciates in value,
 prompting the creators of money to increase the rate of printing money in order
-to maintain their command over the flow of real resources (see Sargent and
-Wallace [8]).  Alternatively, equation {eq}`eq9` is compatible with a "real
+to maintain their command over the flow of real resources (see {cite:t}`SargentWallace73`).  
+
+Alternatively, equation {eq}`eq9` is compatible with a "real
 bills" regime in which the monetary authority sets out to supply whatever money
 the public demands at some fixed nominal interest rate or some fixed real money
-supply.  Equation {eq}`eq9` looks like a rule in which the monetary authority is
-attempting to peg the (rate of growth of the) real money supply.  During the
-German hyperinflation, German monetary officials in effect repeatedly acknowledged
+supply.  
+
+Equation {eq}`eq9` looks like a rule in which the monetary authority is
+attempting to peg the (rate of growth of the) real money supply.  
+
+During the German hyperinflation, German monetary officials in effect repeatedly acknowledged
 that they were operating under a real-bills regime, acknowledgements made in
 efforts to argue that their actions were not causing the inflation but were merely
 responses to it.
@@ -319,6 +345,8 @@ inflation and money creation form a bivariate stochastic process given by
 
 Equation {eq}`eq10` was obtained by first differencing {eq}`eq1` and then
 substituting for $\pi_t$ from {eq}`eq2` and for $u_t - u_{t-1}$ from {eq}`eq6`.
+
+
 The process {eq}`eq10`–{eq}`eq9b` can be rewritten as
 
 ```{math}
@@ -335,15 +363,17 @@ The process {eq}`eq10`–{eq}`eq9b` can be rewritten as
 ```
 
 Equations {eq}`eq11` and {eq}`eq12` can be derived directly from {eq}`eq10` and
-{eq}`eq9b`; alternatively, see Sargent and Wallace [8] for a somewhat different
+{eq}`eq9b`; alternatively, see {cite:t}`SargentWallace73` for a somewhat different
 but equivalent way of deriving {eq}`eq11` and {eq}`eq12`.
 
 We assume that the information available consists (at least) of
-observations of current and past $p$'s and current and past $x$'s.  Thus
+observations of current and past $p$'s and current and past $x$'s.  
+
+Thus, 
 $E_t x_{t+1} \equiv E[x_{t+1} \mid \mu_t, \mu_{t-1}, \ldots, x_t, x_{t-1}, \ldots]$.
+
 Similarly, for $z_t$ any arbitrary random variable,
-$E_t z_{t+1}$ denotes
-$E[z_{t+1} \mid \mu_t, \mu_{t-1}, \ldots, x_t, x_{t-1}, \ldots]$.
+$E_t z_{t+1}$ denotes $E[z_{t+1} \mid \mu_t, \mu_{t-1}, \ldots, x_t, x_{t-1}, \ldots]$.
 
 Substituting {eq}`eq3` into {eq}`eq1`, first differencing, and
 shifting the time subscripts forward one period gives
@@ -368,7 +398,7 @@ $$
 \!\left(\dfrac{-\alpha}{1-\alpha}\right)^{j-1}
 $$
 
-equals $1$ (geometric series with
+equals $1$ (a consequence of a geometric series with
 ratio $-\alpha/(1-\alpha)$ that  satisfies $|-\alpha/(1-\alpha)| < 1$ when
 $\alpha \in (-1, 0)$), yielding $E_t\mu_{t+1}$ on the right-hand side of {eq}`eq8`.
 
@@ -394,7 +424,7 @@ E_t\mu_{t+1}
   = \dfrac{1-\lambda}{1-\lambda L}\,x_t, 
 $$ 
   
-  as required.
+as required.
 
 
 In summary, under rational expectations we require
@@ -515,7 +545,9 @@ creation $(1-L)\mu_t$ are **correlated MA(1) processes**.
 ```{note}
 The statistical model {eq}`eq:bivariate_x`–{eq}`eq:bivariate_mu` was constructed
 to guarantee $E_{t-1} x_t = \frac{1-\lambda}{1-\lambda L} x_{t-1}$, which is the
-condition that $\mu$ does **not** Granger-cause $x$.  That is, once lagged $x$'s
+condition that $\mu$ does **not** Granger-cause $x$.  
+
+Thus, once lagged $x$'s
 are taken into account, lagged $\mu$'s do not help predict current $x$.
 ```
 
@@ -955,12 +987,11 @@ On the contrary, according to
 the other.  
  
   * The phase of their cross-spectrum equals zero at all frequencies.
-* 
+
 Evidence that $x$ leads $\mu$ would not be consistent with the model being studied
 here.
 
-[^sims]: Sims [9] proved the equivalence of Granger causality with econometric
-exogeneity.
+[^sims]: {cite}`sims1972money` proved the equivalence of Granger causality (see {cite}`granger1969causality`) with econometric exogeneity.
 
 The vector autoregressive, moving average process {eq}`eq27` is in a form that can
 be estimated by the maximum likelihood estimator described by {cite:t}`wilson1973estimation`
@@ -1522,7 +1553,7 @@ plt.show()
 The sampling distribution of $\hat\lambda$ is centered near the true value,
 confirming consistency of the first-stage estimator.
 
-## Testing the Model
+## Testing the Rational Expectations Version of Cagan's Model
 
 ### The overparameterized system
 

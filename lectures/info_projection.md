@@ -529,7 +529,7 @@ The approximation criterion is therefore extremely sensitive to fit at $\omega =
 ---
 mystnb:
   figure:
-    caption: Money spectrum
+    caption: Spectrum or money creation rate
     name: fig-spectral-density-money
 ---
 def spectral_density_M(c0, c1, ω):
