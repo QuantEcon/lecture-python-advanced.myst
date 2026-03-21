@@ -33,17 +33,17 @@ This lecture presents the analysis in {cite}`Sargent77hyper`, which proposes
 methods for estimating the demand schedule for money that {cite:t}`Cagan` used
 in his famous study of hyperinflation.
 
-{cite:t}`SargentWallace73` pointed out that under assumptions making Cagan's
-adaptive expectations scheme equivalent to rational expectations, Cagan's
+{cite:t}`sargent1973rational` pointed out that under assumptions making Cagan's
+adaptive expectations equivalent to rational expectations, Cagan's
 estimator of $\alpha$ — the slope of log real balances with respect to expected
 inflation — is not statistically consistent.
 
-This inconsistency matters because of a **paradox** that emerged when Cagan used
+This inconsistency matters because of a paradox that emerged when Cagan used
 his estimates of $\alpha$ to calculate the sustained rates of inflation that would
 maximize the flow of real resources that money creators could command by printing
-money.  
+money.
 
-That "optimal" rate is $-1/\alpha$.  
+That "optimal" rate is $-1/\alpha$.
 
 For each of the seven hyperinflations
 in his sample, the reciprocal of Cagan's estimate of $-\alpha$ turned out to be
@@ -51,7 +51,7 @@ less — and often very much less — than the actual average rate of inflation,
 suggesting that the creators of money expanded the money supply at rates far
 exceeding the revenue-maximizing rate.
 
-A natural explanation is that this paradox is a **statistical artifact** — a
+A natural explanation is that this paradox is a statistical artifact — a
 consequence of biased estimates of $\alpha$.
 
 Table 1 reproduces the relevant data from Cagan.
@@ -66,32 +66,41 @@ Table 1 reproduces the relevant data from Cagan.
 | Poland     | .435        | 54                  | 81                 |
 | Russia     | .327        | 39                  | 57                 |
 
-Column (1): $-1/\alpha$ (continuously compounded), the rate per month that maximizes
-the revenue of the money creator.  Column (2): $(e^{1/\alpha}-1)\times 100$
-(neglects compounding).  Column (3): average actual rate of inflation per month.
+- Column (1): $-1/\alpha$ (continuously compounded), the rate per month that maximizes
+the revenue of the money creator. 
+
+- Column (2): $(e^{1/\alpha}-1)\times 100$
+(neglects compounding). 
+
+- Column (3): average actual rate of inflation per month.
 
 The paper pursues three goals:
 
-1. **Characterize the asymptotic bias** in Cagan's ordinary-least-squares estimator
+1. *Characterize the asymptotic bias* in Cagan's ordinary-least-squares estimator
    under the rational expectations version of his model.
-2. **Derive a consistent estimator** — a full-information maximum likelihood
-   estimator — for the bivariate rational-expectations model.
-3. **Test the model** by overfitting a more general vector autoregressive,
+2. *Derive a consistent estimator*, a full-information maximum likelihood
+   estimator,  for the bivariate rational-expectations model.
+3. *Test the model* by overfitting a more general vector autoregressive,
    moving-average representation and computing likelihood-ratio statistics.
 
-Our  key  tools are **bivariate Wold representations**, **Granger
-causality**, and **vector time series methods** following
-{cite}`granger1969causality`, {cite}`sims1972money`, {cite}`wilson1973estimation` and  {cite}`anderson2011statistical`.
+Our key tools are bivariate Wold representations, Granger causality, and vector
+time series methods following
+{cite:t}`granger1969causality`, {cite:t}`sims1972money`, {cite:t}`wilson1973estimation` and {cite:t}`anderson2011statistical`.
 
 
 ```{note}
-This lecture can be viewed as a bivariate version of the ''reverse engineering'' exercise of 
-{cite:t}`Muth1960` that we described in {doc}`this lecture <muth_kalman>`.
-From a technical point of view this lecture is an exercise in applying **vector
-time series models**.  The model is interesting because it illustrates the
+This lecture can be viewed as a bivariate version of the "reverse engineering" exercise of
+{cite:t}`Muth1960` that we described in {doc}`muth_kalman`.
+
+From a technical point of view this lecture is an exercise in applying vector
+time series models.
+
+The model is interesting because it illustrates the
 difference between Granger causality and simple notions of one series *leading*
-another. It also illustrates a difference between Granger causality and the separate notion of **invariance
-with respect to an intervention**.
+another.
+
+It also illustrates a difference between Granger causality and the separate notion of
+*invariance with respect to an intervention*.
 ```
 
 We begin with imports:
@@ -99,39 +108,13 @@ We begin with imports:
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import minimize_scalar, minimize
+from scipy.optimize import minimize_scalar
 ```
 
-## Cagan's Model under Rational Expectations
+## Cagan's model under rational expectations
 
 For background on the Cagan model see {doc}`intro:cagan_ree` and
 {doc}`intro:cagan_adaptive`.
-
-### Portfolio balance and adaptive expectations
-
-Cagan's {cite}`Cagan` model builds on a demand schedule for real balances:
-
-$$
-m_t - p_t = \alpha \pi_t + u_t, \qquad \alpha < 0
-$$ (eq:portfolio_balance_re)
-
-where $m_t$ is the log money supply, $p_t$ is the log price level, $\pi_t$ is
-the expected rate of inflation (the public's subjective expectation of
-$p_{t+1} - p_t$), and $u_t$ is a mean-zero random disturbance.
-
-Cagan assumed $\pi_t$ obeys the adaptive expectations scheme
-
-$$
-\pi_t = \frac{1-\lambda}{1-\lambda L}(p_t - p_{t-1})
-$$ (eq:adaptive_re)
-
-where $L$ is the lag operator, $L^k x_t = x_{t-k}$, and $0 < \lambda < 1$.
-
-Let $x_t \equiv p_t - p_{t-1}$ be the inflation rate and $\mu_t \equiv m_t - m_{t-1}$
-be the percentage rate of money creation.
-
-### Rational expectations  
-
 
 Cagan's model of hyperinflation builds on a demand schedule for real balances
 of the form
@@ -143,22 +126,19 @@ m_t - p_t = \alpha \pi_t + u_t, \qquad \alpha < 0,
 
 where $m$ is the log of the money supply (which is always equal to the log of
 money demand); $p$ is the log of the price level; $\pi_t$ is the expected rate
-of inflation, i.e., the public's psychological expectation of $p_{t+1} - p_t$;
-and $u_t$ is a random variable with mean zero. 
+of inflation, i.e., the public's subjective expectation of $p_{t+1} - p_t$;
+and $u_t$ is a random variable with mean zero.
+
+Let $x_t \equiv p_t - p_{t-1}$ be the inflation rate and
+$\mu_t \equiv m_t - m_{t-1}$ be the percentage rate of money creation.
 
 
 ```{note}
-A constant term has been omitted
-from {eq}`eq1`, though one would be included in empirical work.
+A constant term has been omitted from {eq}`eq1`, though one would be included
+in empirical work.
 ```
 
 Cagan assumed that $\pi_t$ was formed via the adaptive expectations scheme
-
-```{math}
-\pi_t = \frac{1-\lambda}{1-\lambda L}(p_t - p_{t-1}),
-```
-
-or
 
 ```{math}
 :label: eq2
@@ -176,7 +156,9 @@ Under rational expectations we require that
 ```
 
 where $E_t x_{t+1}$ is the mathematical expectation of $x_{t+1}$ conditional on
-information available as of time $t$.[^info]  Using {eq}`eq3` and recursions on
+information available as of time $t$.[^info] 
+
+Using {eq}`eq3` and recursions on
 {eq}`eq1`, it is straightforward to show that under rational expectations we must
 have[^deriv]
 
@@ -191,15 +173,13 @@ have[^deriv]
 ```
 
 where $\mu_t = m_t - m_{t-1}$ is the percentage rate of increase of the money
-supply.  
+supply.
 
-Equation {eq}`eq4` characterises the (systematic part of the)
-stochastic process for inflation as a function of the (systematic part of the)
-stochastic process for money creation. 
+Equation {eq}`eq4` characterizes the stochastic process for inflation as a
+function of the stochastic process for money creation.
 
-The model asserts that {eq}`eq4` is
-invariant with respect to interventions in the form of changes in the stochastic
-process governing money creation.  
+The model asserts that {eq}`eq4` is invariant with respect to interventions in
+the form of changes in the stochastic process governing money creation.
 
 In this sense, since changes in the stochastic
 process for money creation are supposed to produce predictable changes in the
@@ -227,10 +207,13 @@ E_t\mu_{t+j} - E_t(u_{t+j} - u_{t+j-1}) = \frac{1-\lambda}{1-\lambda L}\, x_t.
 
 For an arbitrary $\mu$ process there exists a disturbance process $u_t$
 satisfying the above restriction, one in which $E_t(u_{t+j} - u_{t+j-1})$ is a
-complicated function of lagged $x$'s and lagged $\mu$'s.  
+complicated function of lagged $x$'s and lagged $\mu$'s.
 
-The most fruitful conditions to impose, however, are the following two that are *sufficient*
-(though clearly not necessary) to satisfy {eq}`eq5`.  The first condition is
+The paper therefore studies two sufficient conditions.
+
+### Two sufficient conditions
+
+The first sufficient condition is
 
 ```{math}
 :label: eq6
@@ -240,41 +223,32 @@ u_t = u_{t-1} + \eta_t,
 where $\eta_t$ is a serially uncorrelated random term with mean zero and variance
 $\sigma_\eta^2$; we assume that
 $E[\eta_t \mid u_{t-1}, \mu_{t-2}, \ldots, x_{t-1}, x_{t-2}, \ldots] = 0$.
-According to {eq}`eq6`, $u$ follows a random walk.  
 
-Equation {eq}`eq6` implies
-that
+Under {eq}`eq6`, $u_t$ follows a random walk, so
 
 ```{math}
 E_t u_{t+j} = u_t, \qquad j \geq 0,
 ```
 
-which implies that
+and hence
 
 ```{math}
 E_t u_{t+j} - E_t u_{t+j-1} = 0 \quad \text{for all } j \geq 1.
 ```
 
-The second of the pair of sufficient conditions for {eq}`eq5` is
+The second sufficient condition is
 
 ```{math}
 :label: eq7
 E_t\mu_{t+j} = E_t\mu_{t+1} \quad \text{for } j > 1,
 ```
 
-so that a constant rate of money creation is expected to occur over the entire
-future. 
+so a constant rate of money creation is expected over the future.
 
-Assuming {eq}`eq6` and {eq}`eq7` then implies that the appropriate
-version of {eq}`eq5` is
+Under {eq}`eq6` and {eq}`eq7`, the geometric sum in {eq}`eq5` equals $1$
+because $\lvert -\alpha / (1-\alpha) \rvert < 1$ whenever $\alpha < 0$.
 
-```{math}
-\left(\frac{1-\lambda}{1-\lambda L}\right) x_t
-= E_t\mu_{t+1}\cdot\frac{1}{1-\alpha}
-  \sum_{j=1}^{\infty}\left(\frac{-\alpha}{1-\alpha}\right)^{\!j-1},
-```
-
-or
+Hence {eq}`eq5` reduces to
 
 ```{math}
 :label: eq8
@@ -297,41 +271,26 @@ E(\varepsilon_t \mid x_{t-1}, x_{t-2}, \ldots, \mu_{t-1}, \mu_{t-2}, \ldots) = 0
 ```
 
 According to {eq}`eq9`, the rate of money creation equals the expected rate of
-inflation plus a random term. 
+inflation plus a random term.
 
-Equation {eq}`eq9`, which has been arrived at in a
-purely mechanical fashion by pursuing the implications of the assumption that
-Cagan's adaptive expectations scheme is rational, is nevertheless of interest as
-an hypothesis about the government's behaviour. 
+Equation {eq}`eq9` is compatible with a government that finances a substantial
+share of roughly fixed real expenditures by printing money.
 
-For example, if the government
-is creating money to finance a large part of a roughly fixed rate of real
-government purchases, then there is a presumption that inflation and expected
-inflation will feed back into money creation, an implication with which {eq}`eq9`
-is consistent.  
+Equation {eq}`eq9` is also compatible with a real-bills regime in which the
+monetary authority supplies whatever money the public demands at a fixed nominal
+interest rate or a fixed real money supply.
 
-Thus, when $\pi_t$ increases, causing $m_t - p_t$ to fall and
-thereby causing $p_t$ to rise with a fixed $m_t$, money depreciates in value,
-prompting the creators of money to increase the rate of printing money in order
-to maintain their command over the flow of real resources (see {cite:t}`SargentWallace73`).  
+During the German hyperinflation, officials repeatedly described policy in just
+such real-bills terms, insisting that money creation was responding to inflation
+rather than causing it.
 
-Alternatively, equation {eq}`eq9` is compatible with a "real
-bills" regime in which the monetary authority sets out to supply whatever money
-the public demands at some fixed nominal interest rate or some fixed real money
-supply.  
-
-Equation {eq}`eq9` looks like a rule in which the monetary authority is
-attempting to peg the (rate of growth of the) real money supply.  
-
-During the German hyperinflation, German monetary officials in effect repeatedly acknowledged
-that they were operating under a real-bills regime, acknowledgements made in
-efforts to argue that their actions were not causing the inflation but were merely
-responses to it.
+### The bivariate process for inflation and money creation
 
 The foregoing establishes that if equations {eq}`eq6` and {eq}`eq9` obtain,
 Cagan's adaptive expectations scheme is compatible with rational expectations and
-with the portfolio balance condition that he assumed.  Under these assumptions,
-inflation and money creation form a bivariate stochastic process given by
+with the portfolio balance condition that he assumed.
+
+Under these assumptions, inflation and money creation form the bivariate system
 
 ```{math}
 :label: eq10
@@ -345,7 +304,6 @@ inflation and money creation form a bivariate stochastic process given by
 
 Equation {eq}`eq10` was obtained by first differencing {eq}`eq1` and then
 substituting for $\pi_t$ from {eq}`eq2` and for $u_t - u_{t-1}$ from {eq}`eq6`.
-
 
 The process {eq}`eq10`–{eq}`eq9b` can be rewritten as
 
@@ -363,300 +321,76 @@ The process {eq}`eq10`–{eq}`eq9b` can be rewritten as
 ```
 
 Equations {eq}`eq11` and {eq}`eq12` can be derived directly from {eq}`eq10` and
-{eq}`eq9b`; alternatively, see {cite:t}`SargentWallace73` for a somewhat different
+{eq}`eq9b`; alternatively, see {cite:t}`sargent1973rational` for a somewhat different
 but equivalent way of deriving {eq}`eq11` and {eq}`eq12`.
 
-We assume that the information available consists (at least) of
-observations of current and past $p$'s and current and past $x$'s.  
-
-Thus, 
-$E_t x_{t+1} \equiv E[x_{t+1} \mid \mu_t, \mu_{t-1}, \ldots, x_t, x_{t-1}, \ldots]$.
-
-Similarly, for $z_t$ any arbitrary random variable,
-$E_t z_{t+1}$ denotes $E[z_{t+1} \mid \mu_t, \mu_{t-1}, \ldots, x_t, x_{t-1}, \ldots]$.
-
-Substituting {eq}`eq3` into {eq}`eq1`, first differencing, and
-shifting the time subscripts forward one period gives
-
-$$ \mu_{t+1} - x_{t+1} = \alpha E_{t+1} x_{t+2} - \alpha x_{t+1} + (u_{t+1} - u_t). $$
-
-Taking expectations conditional on information available at $t$ gives
-
-$$
-E_t x_{t+1} = \dfrac{1}{1-\alpha}\, E_t\mu_{t+1}
-  - \dfrac{\alpha}{1-\alpha}\, E_t x_{t+2}
-  - (E_t u_{t+1} - E_t u_t). 
-$$
-
-Recursion on this difference equation shows that equation {eq}`eq4` is indeed a
-solution.
-
-The sum 
-
-$$
-\dfrac{1}{1-\alpha}\displaystyle\sum_{j=1}^{\infty}
-\!\left(\dfrac{-\alpha}{1-\alpha}\right)^{j-1}
-$$
-
-equals $1$ (a consequence of a geometric series with
-ratio $-\alpha/(1-\alpha)$ that  satisfies $|-\alpha/(1-\alpha)| < 1$ when
-$\alpha \in (-1, 0)$), yielding $E_t\mu_{t+1}$ on the right-hand side of {eq}`eq8`.
-
-To see that process {eq}`eq9` satisfies {eq}`eq8`, write {eq}`eq9`
-as
-
-$$ \mu_{t+1} = (1-\lambda)\,x_{t+1}
-  + \dfrac{(1-\lambda)\lambda}{1-\lambda L}\,x_t + \varepsilon_{t+1}
-$$
-
-Taking expectations conditional on information available at $t$:
-
-$$ 
-E_t\mu_{t+1} = (1-\lambda)\,E_t x_{t+1}
-  + \dfrac{(1-\lambda)\lambda}{1-\lambda L}\,x_t 
-$$
-  
-But $E_t x_{t+1} = \dfrac{1-\lambda}{1-\lambda L}\,x_t$, so
-
-$$ 
-E_t\mu_{t+1}
-  = \bigl((1-\lambda) + \lambda\bigr)\!\left(\dfrac{1-\lambda}{1-\lambda L}\right) x_t
-  = \dfrac{1-\lambda}{1-\lambda L}\,x_t, 
-$$ 
-  
-as required.
-
-
-In summary, under rational expectations we require
-
-$$
-\pi_t = E_t x_{t+1}
-$$ (eq:rational_expectations)
-
-where $E_t x_{t+1}$ is the mathematical expectation of $x_{t+1}$ conditional on
-information available at time $t$.
-
-Using {eq}`eq:rational_expectations` and recursions on {eq}`eq:portfolio_balance_re`,
-it is straightforward to show that under rational expectations
-
-$$
-\pi_t = E_t x_{t+1} = -\frac{1}{\alpha}
-       \sum_{j=0}^{\infty} \left(\frac{-1}{\alpha}\right)^{j-1}
-       \bigl(E_t \mu_{t+j} - E_t \mu_{t+j-1}\bigr) -
-       \sum_{j \geq 1} \left(\frac{-1}{\alpha}\right)^{j-1}
-       (E_t u_{t+j} - E_t u_{t+j-1})
-$$ (eq:rational_pi_general)
-
-Equation {eq}`eq:rational_pi_general` characterizes the stochastic process for
-inflation as a function of the stochastic process for money creation. 
-
-The model asserts that {eq}`eq:rational_pi_general` is **invariant** with respect to
-interventions in the form of changes in the money supply process.
-
-For Cagan's adaptive scheme {eq}`eq:adaptive_re` to be equivalent to rational
-expectations {eq}`eq:rational_expectations` requires
-
-$$
-\frac{1-\lambda}{1-\lambda L} x_t =
-  E_t x_{t+1} - \sum_{j \geq 1}
-  \left(\frac{-1}{\alpha}\right)^{j-1}
-  (E_t u_{t+j} - E_t u_{t+j-1}).
-$$ (eq:equivalence_condition)
-
-### Two sufficient conditions
-
-Necessary and sufficient conditions for {eq}`eq:equivalence_condition` to hold
-for all $\alpha$ and all $t$ are subtle. 
-
-A tractable pair of **sufficient**
-conditions is:
-
-**Condition 1.** The portfolio disturbance $u_t$ follows a random walk:
-
-$$
-u_t = u_{t-1} + \varepsilon_t
-$$ (eq:random_walk_u)
-
-where $\varepsilon_t$ is serially uncorrelated with
-$E[\varepsilon_t | u_{t-1}, u_{t-2}, \ldots, x_t, x_{t-1}, \ldots] = 0$.
-This implies $E_t u_{t+j} = u_t$ for $j \geq 0$, so that
-$E_t u_{t+j} - E_t u_{t+j-1} = 0$ for all $j \geq 1$.
-
-**Condition 2.** A constant rate of money creation is expected one period
-ahead after the current one:
-
-$$
-E_t \mu_{t+j} = E_t \mu_{t+1}, \qquad j \geq 1.
-$$ (eq:constant_mu_condition)
-
-Under these two conditions, the appropriate rational-expectations formula reduces to:
-
-$$
-\pi_t = E_t x_{t+1} = \frac{1-\lambda}{1-\lambda L} x_t
-$$ (eq:rational_equals_adaptive)
-
-A process that satisfies {eq}`eq:rational_equals_adaptive` is
-
-$$
-\mu_t = \frac{1-\lambda}{1-\lambda L} x_t + \delta_t
-$$ (eq:money_supply_rule)
-
-where $\delta_t$ is a serially uncorrelated random variable satisfying
-$E[\delta_t | x_{t-1}, x_{t-2}, \ldots, \mu_{t-1}, \mu_{t-2}, \ldots] = 0$.
-
-Equation {eq}`eq:money_supply_rule` is the **money supply rule** implied by the
-model. 
-
-It says the rate of money creation equals expected inflation plus a random
-term. 
-
-This is consistent with a "real bills" regime in which the monetary
-authority accommodates inflation, or with a government creating money to finance a
-roughly fixed level of real purchases.
-
-### The bivariate process for inflation and money creation
-
-If {eq}`eq:random_walk_u` and {eq}`eq:money_supply_rule` hold, equations (10)
-and (9) of the paper give the following bivariate system:
-
-$$
-\mu_t - x_t = \alpha(1-\lambda L) x_t + u_t - u_{t-1}
-$$ (eq:system_eq10)
-
-$$
-\mu_t = \frac{1-\lambda}{1-\lambda L} x_t + \delta_t.
-$$ (eq:system_eq9)
-
-These can be rewritten as a **bivariate first-difference MA(1)** process:
-
-$$
-(1-L)x_t = (\lambda + \alpha(1-\lambda))^{-1}(1-\lambda L)(\delta_t - \varepsilon_t)
-$$ (eq:bivariate_x)
-
-$$
-(1-L)\mu_t = (\lambda + \alpha(1-\lambda))^{-1}(1-\lambda)(\delta_t - \varepsilon_t)
-             - \delta_{t-1} + \delta_t.
-$$ (eq:bivariate_mu)
-
-Equations {eq}`eq:bivariate_x`–{eq}`eq:bivariate_mu` show that the first
-difference of inflation $(1-L)x_t$ and the first difference of percentage money
-creation $(1-L)\mu_t$ are **correlated MA(1) processes**.
-
 ```{note}
-The statistical model {eq}`eq:bivariate_x`–{eq}`eq:bivariate_mu` was constructed
-to guarantee $E_{t-1} x_t = \frac{1-\lambda}{1-\lambda L} x_{t-1}$, which is the
-condition that $\mu$ does **not** Granger-cause $x$.  
+By construction, the model implies
+$E_{t-1}x_t = \frac{1-\lambda}{1-\lambda L} x_{t-1}$, so lagged money growth
+does not help predict current inflation once lagged inflation is known.
 
-Thus, once lagged $x$'s
-are taken into account, lagged $\mu$'s do not help predict current $x$.
+This Granger-causal pattern comes from the particular money-supply rule in
+{eq}`eq9`, not from an invariant feature of the economy across monetary regimes.
 ```
 
-```{code-cell} ipython3
-def bivariate_ma1_moments(α, λ, σ_δ2=1.0, σ_ε2=0.5, σ_δε=0.0):
-    """
-    Compute the autocovariances of (1-L)x and (1-L)μ under the
-    bivariate rational-expectations model of Sargent (1977).
 
-    Parameters
-    ----------
-    α  : float  (< 0)  demand semi-elasticity
-    λ  : float  (0 < λ < 1)  adaptive expectations parameter
-    σ_δ2 : variance of money-supply shock δ_t
-    σ_ε2 : variance of portfolio shock ε_t
-    σ_δε : covariance of δ_t and ε_t
-
-    Returns
-    -------
-    cxx : dict with keys 0, 1  — autocovariances of Δx
-    cμμ : dict with keys 0, 1  — autocovariances of Δμ
-    cxμ : dict with keys -1, 0, 1  — cross-covariances E[Δx_t Δμ_{t-τ}]
-    """
-    denom = λ + α * (1.0 - λ)
-    if np.isclose(denom, 0.0):
-        raise ValueError("λ + α(1-λ) must be nonzero.")
-    φ = 1.0 / denom
-
-    # Coefficients for Δx_t = φ(1 - λL)(δ_t - ε_t)
-    # Δμ_t = φ(1-λ)(δ_t - ε_t) + (1-L)δ_t  =>  Δμ_t = [φ(1-λ)+1]δ_t - φ(1-λ)ε_t - δ_{t-1}
-
-    A = φ * (1.0 - λ) + 1.0   # coefficient on δ_t in Δμ
-    B = φ * (1.0 - λ)         # coefficient on ε_t (with minus sign) in Δμ
-
-    # Δx: moving-average coefficients in (δ_t - ε_t): φ at lag 0, -φλ at lag 1
-    # Autocovariances of Δx
-    cx0 = φ**2 * (1 + λ**2) * (σ_δ2 - 2*σ_δε + σ_ε2)
-    cx1 = -φ**2 * λ * (σ_δ2 - 2*σ_δε + σ_ε2)
-
-    # Autocovariances of Δμ
-    cμ0 = (A**2 + 1.0)*σ_δ2 + B**2*σ_ε2 - 2.0*A*B*σ_δε
-    cμ1 = -A * σ_δ2
-
-    # Cross-covariances r(τ) = E[Δx_t  Δμ_{t-τ}]
-    rxμ_0   = φ*(A + λ)*σ_δ2 + φ*B*σ_ε2 - φ*(A + B + λ)*σ_δε
-    rxμ_1   = -φ*λ*A*σ_δ2 - φ*λ*B*σ_ε2 + φ*λ*(A + B)*σ_δε
-    rxμ_m1  = -φ*(σ_δ2 - σ_δε)
-
-    cxx = {0: cx0, 1: cx1}
-    cμμ = {0: cμ0, 1: cμ1}
-    cxμ = {-1: rxμ_m1, 0: rxμ_0, 1: rxμ_1}
-    return cxx, cμμ, cxμ
-```
-
-## Bias in Cagan's Estimator
+## Bias in Cagan's estimator
 
 ### Bivariate Wold representation
 
 A convenient way to evaluate the asymptotic bias in Cagan's estimator is to obtain
 a bivariate Wold representation for $(\Delta x_t, \Delta \mu_t)$.
 
-Decompose $\delta_t$ as
+Let $\phi \equiv (\lambda + \alpha(1-\lambda))^{-1}$.
+
+Decompose the money-supply shock as
 
 $$
-\delta_t = \rho(\delta_t - \varepsilon_t) + v_t
-$$ (eq:decompose_delta)
+\varepsilon_t = \rho(\varepsilon_t - \eta_t) + v_t
+$$ (eq:decompose_epsilon)
 
-where $\rho$ is the regression coefficient of $\delta_t$ on $(\delta_t - \varepsilon_t)$:
+where $\rho$ is the regression coefficient of $\varepsilon_t$ on
+$(\varepsilon_t - \eta_t)$:
 
 $$
-\rho = \frac{E[\delta_t(\delta_t - \varepsilon_t)]}{E[(\delta_t - \varepsilon_t)^2]}
-     = \frac{\sigma_\delta^2 - \sigma_{\delta\varepsilon}}
-            {\sigma_\delta^2 - 2\sigma_{\delta\varepsilon} + \sigma_\varepsilon^2}
+\rho = \frac{E[\varepsilon_t(\varepsilon_t - \eta_t)]}
+            {E[(\varepsilon_t - \eta_t)^2]}
+     = \frac{\sigma_\varepsilon^2 - \sigma_{\varepsilon\eta}}
+            {\sigma_\varepsilon^2 - 2\sigma_{\varepsilon\eta} + \sigma_\eta^2}
 $$ (eq:rho)
 
-and $v_t$ is orthogonal to $(\delta_t - \varepsilon_t)$ by construction.
+and $v_t$ is orthogonal to $(\varepsilon_t - \eta_t)$ by construction.
 
-Substituting {eq}`eq:decompose_delta` into {eq}`eq:bivariate_mu` and using
-{eq}`eq:bivariate_x` gives the **triangular bivariate Wold representation**:
+Substituting {eq}`eq:decompose_epsilon` into {eq}`eq12` and using {eq}`eq11`
+gives the triangular bivariate Wold representation
 
 $$
-(1-L)x_t = \phi(1-\lambda L)(\delta_t - \varepsilon_t)
+(1-L)x_t = \phi(1-\lambda L)(\varepsilon_t - \eta_t)
 $$ (eq:wold_x)
 
 $$
-(1-L)\mu_t = [\phi(1-\lambda) + \rho(1-L)](\delta_t - \varepsilon_t) + (1-L)v_t
+(1-L)\mu_t = [\phi(1-\lambda) + \rho(1-L)](\varepsilon_t - \eta_t) + (1-L)v_t
 $$ (eq:wold_mu)
 
-with fundamental noises $(\delta_t - \varepsilon_t)$ and $v_t$.
+with fundamental noises $(\varepsilon_t - \eta_t)$ and $v_t$.
 
-The triangular structure confirms that $\Delta x$ is **econometrically exogenous**
-with respect to $\Delta\mu$, and that $\Delta x$ Granger-causes $\Delta\mu$ but not
-vice versa.
+The triangular structure confirms that $\Delta x$ is econometrically exogenous
+with respect to $\Delta\mu$, and that $\Delta x$ Granger-causes $\Delta\mu$ but
+not vice versa.
 
 ### The population regression (Cagan's estimator)
 
-Because $x$ is exogenous with respect to $\mu - x$, one can obtain the one-sided
-projection of $\mu_t$ on current and past $x_t$'s.
-
-Substituting {eq}`eq:wold_x` into {eq}`eq:wold_mu` and integrating (operating
-with $(1-L)^{-1}$), the projection of $\mu_t - x_t$ against $\{x_t, x_{t-1}, \ldots\}$
-is
+Substituting {eq}`eq:wold_x` into {eq}`eq:wold_mu` and applying the summation
+operator $(1-L)^{-1}$ gives the population regression that Cagan estimated:
 
 $$
-\mu_t - x_t = \left[\rho\alpha + \frac{\rho(1-\lambda)}{1-\lambda L}\right] x_t + \tilde{u}_t
+(m_t - p_t)
+= \left[\rho\alpha - (1-\rho)\frac{\lambda}{1-\lambda}\right]
+  \frac{1-\lambda}{1-\lambda L}\, x_t + \bar{u}_t
 $$ (eq:cagan_pop_regression)
 
-where $\tilde{u}_t = \tilde{u}_{t-1} + v_t$ follows a random walk orthogonal to
-the $x$ process.
+where $\bar{u}_t = \bar{u}_{t-1} + v_t$ follows a random walk orthogonal to the
+$x$ process.
 
 Now Cagan regarded this population projection as giving estimates of the
 structural equation
@@ -668,51 +402,51 @@ $$ (eq:structural_cagan)
 Comparing {eq}`eq:cagan_pop_regression` with the corresponding structural form
 shows that:
 
-- Cagan's estimator of **$\lambda$ is consistent**.
-- Cagan's estimator of **$\alpha$ is not consistent** in general, and obeys
+- Cagan's estimator of $\lambda$ is *consistent*.
+- Cagan's estimator of $\alpha$ is *not consistent* in general, and obeys
 
 $$
-\operatorname{plim} \hat\alpha = \rho\alpha + (1-\rho)\frac{\rho}{\phi}
+\operatorname{plim}\hat\alpha
+= \rho\alpha - (1-\rho)\frac{\lambda}{1-\lambda}
 $$ (eq:plim_alpha)
 
-where $\phi = (\lambda + \alpha(1-\lambda))^{-1}$.
+If $\rho = 0$ and hence there are no money-supply shocks, then
+$\operatorname{plim}\hat\alpha = -\lambda / (1-\lambda)$, which is the value
+derived by {cite:t}`sargent1973rational`.
 
-If $\rho = 0$ (which holds when $\sigma_\varepsilon = 0$, i.e., no portfolio
-shocks), then $\operatorname{plim} \hat\alpha = 0$.
-
-If $\varepsilon_t = 0$ for all $t$ (no noise in portfolio balance), then $\rho = 1$
-and $\operatorname{plim} \hat\alpha = \alpha$, so Cagan's estimator is consistent
-in this special case.
+If $\eta_t = 0$ for all $t$, so there is no noise in the portfolio-balance
+equation, then $\rho = 1$ and $\operatorname{plim}\hat\alpha = \alpha$.
 
 ```{note}
 It is noteworthy that the residuals in {eq}`eq:cagan_pop_regression` follow a
-random walk.  
+random walk.
 
-{cite:t}`Cagan` and  {cite:t}`barro1970inflation` both reported highly serially correlated residuals
+{cite:t}`Cagan` and {cite:t}`barro1970inflation` both reported highly serially correlated residuals
 and very low Durbin–Watson statistics, which is consistent with this prediction.
 ```
 
+The following functions implement $\rho$ from {eq}`eq:rho` and the probability limit of Cagan's estimator from {eq}`eq:plim_alpha`.
+
 ```{code-cell} ipython3
-def rho_from_moments(σ_δ2, σ_ε2, σ_δε):
+def rho_from_moments(σ_ε2, σ_η2, σ_εη):
     """
-    Compute ρ = Cov(δ, δ-ε) / Var(δ-ε), the coefficient in the
-    decomposition δ_t = ρ(δ_t - ε_t) + v_t.
+    Compute ρ = Cov(ε, ε-η) / Var(ε-η).
     """
-    var_diff = σ_δ2 - 2.0 * σ_δε + σ_ε2
+    var_diff = σ_ε2 - 2.0 * σ_εη + σ_η2
     if np.isclose(var_diff, 0.0):
-        return 1.0
-    return (σ_δ2 - σ_δε) / var_diff
+        raise ValueError("Var(ε_t - η_t) must be positive.")
+    return (σ_ε2 - σ_εη) / var_diff
 
 
-def plim_alpha_cagan(α, λ, σ_δ2=1.0, σ_ε2=0.5, σ_δε=0.0):
+def plim_alpha_cagan(α, λ, σ_ε2=1.0, σ_η2=0.5, σ_εη=0.0):
     """
     Asymptotic limit (population value) of Cagan's OLS estimator of α.
     """
-    denom = λ + α * (1.0 - λ)
-    φ = 1.0 / denom
-    ρ = rho_from_moments(σ_δ2, σ_ε2, σ_δε)
-    return ρ * α + (1.0 - ρ) * ρ / φ
+    ρ = rho_from_moments(σ_ε2, σ_η2, σ_εη)
+    return ρ * α - (1.0 - ρ) * λ / (1.0 - λ)
 ```
+
+We plot the probability limit of Cagan's estimator against the true $\alpha$ to visualize the bias.
 
 ```{code-cell} ipython3
 ---
@@ -721,52 +455,57 @@ mystnb:
     caption: Bias of Cagan's OLS estimator of $\alpha$
     name: fig-cagan-bias
 ---
-α_grid = np.linspace(-0.9, -0.05, 300)
+α_grid = np.linspace(-8.0, -0.1, 400)
 λ = 0.5
-σ_δ2, σ_ε2, σ_δε = 1.0, 0.5, 0.0
+σ_ε2, σ_η2, σ_εη = 1.0, 0.5, 0.0
 
-ρ = rho_from_moments(σ_δ2, σ_ε2, σ_δε)
-plims = [plim_alpha_cagan(a, λ, σ_δ2, σ_ε2, σ_δε) for a in α_grid]
+valid = ~np.isclose(λ + α_grid * (1.0 - λ), 0.0)
+α_plot = α_grid[valid]
+plims = [plim_alpha_cagan(a, λ, σ_ε2, σ_η2, σ_εη) for a in α_plot]
+ws_limit = -λ / (1.0 - λ)
 
 fig, ax = plt.subplots()
-ax.plot(α_grid, α_grid, 'k--', lw=1.5, label='No bias (45° line)')
-ax.plot(α_grid, plims, lw=2, label=rf'$\operatorname{{plim}}\hat\alpha$, $\lambda={λ}$')
+ax.plot(α_plot, α_plot, 'k--', lw=1.5, label='No bias (45° line)')
+label = rf'$\operatorname{{plim}}\hat\alpha$, $\lambda={λ}$'
+ax.plot(α_plot, plims, lw=2, label=label)
+ax.axhline(ws_limit, color='r', ls=':', lw=1.5,
+           label=rf'$-\lambda/(1-\lambda) = {ws_limit:.1f}$')
 ax.set_xlabel(r'True $\alpha$')
 ax.set_ylabel(r'$\operatorname{plim}\hat\alpha$')
 ax.legend()
-ax.set_title("Asymptotic bias of Cagan's OLS estimator")
 plt.tight_layout()
 plt.show()
 ```
 
-The figure confirms that Cagan's estimator is biased toward zero whenever
-$\rho < 1$, i.e., whenever there are both monetary shocks and portfolio shocks.
+The probability limit is a weighted average of the true $\alpha$ and the
+Wallace-Sargent value $-\lambda / (1-\lambda)$.
 
-The bias disappears only in the special case $\sigma_\varepsilon^2 = 0$.
-
-
-## Consistent Estimator
+When the true $\alpha$ is more negative than $-\lambda / (1-\lambda)$, the bias
+pulls Cagan's estimator toward zero.
 
 
-Equations (11) and (12) form a bivariate first-order moving average process in
-$(1-L)\mu_t$ and $(1-L)x_t$.  
+## Consistent estimator
+
+
+Equations {eq}`eq11` and {eq}`eq12` form a bivariate first-order moving average process in
+$(1-L)\mu_t$ and $(1-L)x_t$.
 
 Assuming that the white noises $\varepsilon_t$ and
 $\eta_t$ are jointly normally distributed, the likelihood function of a sample of
-length $T$ observations, $t = 1, \ldots, T$, generated by (11)–(12) can be written
-down. 
+length $T$ observations, $t = 1, \ldots, T$, generated by {eq}`eq11`–{eq}`eq12` can be written
+down.
 
 To apply the method of maximum likelihood, it is most convenient to write
 the model in its vector autoregressive form.
 
-First note that from (9) we can write
+First note that from {eq}`eq9b` we can write
 
 ```{math}
 :label: eq23
 \varepsilon_t = \mu_t - \frac{1-\lambda}{1-\lambda L}\, x_t .
 ```
 
-Next from (11) we have
+Next from {eq}`eq11` we have
 
 ```{math}
 :label: eq24
@@ -899,11 +638,11 @@ explicitly and rearranging the above equation gives
 ```
 
 Equation {eq}`eq27` is a vector first-order autoregression, first-order moving
-average process. 
+average process.
 
 The random variables $a_{1t}$, $a_{2t}$ are the innovations in
 the $x$ and $\mu$ processes, respectively — the one-period-ahead forecasting errors
-for $x_t$ and $\mu_t$.  
+for $x_t$ and $\mu_t$.
 
 The $a$'s are related to the $\varepsilon$'s and $\eta$'s
 appearing in the structural equations of the model by
@@ -968,36 +707,41 @@ E_{t-1}\mu_t = E_{t-1}x_t .
 
 The triangular character of representation {eq}`eq27` demonstrates that $\mu$ does
 not "cause" in Granger's sense (i.e., help predict, once lagged own values are taken
-into account) the variable $x$. 
+into account) the variable $x$.
 
-Thus, $x$ is econometrically exogenous with
-respect to $\mu$.[^sims] 
+Thus, $x$ is econometrically exogenous with respect to $\mu$.[^sims]
 
 On the other hand, $x_t$ does cause the variable $\mu_t$.
+
 Even stronger, the model implies that
 $E_{t-1}\mu_t = E_{t-1}x_t = \left(\tfrac{1-\lambda}{1-\lambda L}\right)x_{t-1}$,
 so that lagged $\mu$'s don't help predict $\mu$ once lagged $x$'s are taken into
-account.  
+account.
 
 That $x$ causes $\mu$ in Granger's sense is not to be confused with $x$'s
-"leading" $\mu$ in any National Bureau sense. 
+"leading" $\mu$ in any National Bureau sense.
 
 On the contrary, according to
 {eq}`eq30`, $x_t$ and $\mu_t$ are "in phase" with one another, neither one leading
-the other.  
- 
-  * The phase of their cross-spectrum equals zero at all frequencies.
+the other.
+
+Their cross-spectrum has zero phase at all frequencies.
 
 Evidence that $x$ leads $\mu$ would not be consistent with the model being studied
 here.
 
+[^info]: The information set includes current and past values of $p_t$ and $x_t$, as in Sargent's footnote 3.
+
+[^deriv]: Substitute {eq}`eq3` into {eq}`eq1`, first-difference, take conditional expectations, and solve the forward difference equation using $\lvert \alpha / (1-\alpha) \rvert < 1$.
+
+[^footprocess]: This is not the only process satisfying {eq}`eq8`, but it is a convenient and economically interpretable one.
+
 [^sims]: {cite}`sims1972money` proved the equivalence of Granger causality (see {cite}`granger1969causality`) with econometric exogeneity.
 
 The vector autoregressive, moving average process {eq}`eq27` is in a form that can
-be estimated by the maximum likelihood estimator described by {cite:t}`wilson1973estimation`
+be estimated by the maximum likelihood estimator described by {cite:t}`wilson1973estimation`.
 
- It is
-essential that the matrices multiplying current
+It is essential that the matrices multiplying current
 $\begin{bmatrix}a_{1t}\\a_{2t}\end{bmatrix}$ and current
 $\begin{bmatrix}x_t\\\mu_t\end{bmatrix}$ both be identity matrices in order to
 apply the method, so that each $a_i$ process can be interpreted as the residual from
@@ -1028,9 +772,11 @@ L(\lambda,\,\sigma_{11},\,\sigma_{12},\,\sigma_{22}\mid\mu_t,\,x_t)
 
 Given initial values for $(a_{10}, a_{20})$ — equivalently for $(\varepsilon_0,
 \eta_0)$ — and given a value of $\lambda$, equation {eq}`eq26` or {eq}`eq27` can be
-used to solve for $a_t$, $t = 1, \ldots, T$.  (We take $a_{10} = a_{20} = 0$.)
+used to solve for $a_t$, $t = 1, \ldots, T$.
 
-{cite}`wilson1973estimation` notes that maximizing {eq}`eq32` is equivalent to minimizing with respect to
+(We take $a_{10} = a_{20} = 0$.)
+
+{cite:t}`wilson1973estimation` notes that maximizing {eq}`eq32` is equivalent to minimizing with respect to
 $\lambda$ the determinant of the estimated covariance matrix of the $a_t$'s,
 
 ```{math}
@@ -1039,7 +785,7 @@ $\lambda$ the determinant of the estimated covariance matrix of the $a_t$'s,
 ```
 
 where the $\hat{a}_t$'s are determined by solving {eq}`eq27` recursively and so
-depend on $\lambda$. 
+depend on $\lambda$.
 
 The covariance matrix of the $a$'s is estimated as
 
@@ -1047,27 +793,27 @@ The covariance matrix of the $a$'s is estimated as
 \hat{D}_a = T^{-1}\sum_{t=1}^{T} \hat{a}_t \hat{a}_t'
 ```
 
-evaluated at the value of $\lambda$ that minimizes {eq}`eq33`. 
+evaluated at the value of $\lambda$ that minimizes {eq}`eq33`.
 
 The resulting
 estimates are known to be statistically consistent (see {cite}`wilson1973estimation`).
 
 Notice that $\alpha$ does not appear explicitly in the likelihood function, but only
 indirectly by way of the elements of $D_a$, namely $\sigma_{11}$, $\sigma_{12}$, and
-$\sigma_{22}$.  
+$\sigma_{22}$.
 
 That this must be so can be seen by inspecting representation
-{eq}`eq27`, in which $\lambda$ appears explicitly but $\alpha$ does not.  
+{eq}`eq27`, in which $\lambda$ appears explicitly but $\alpha$ does not.
 
 On the
 basis of the *four* parameters $\lambda$, $\sigma_{11}$, $\sigma_{12}$, and
 $\sigma_{22}$ that are identified by {eq}`eq27` — i.e., that characterize the
 likelihood function {eq}`eq32` — we can think of attempting to estimate the *five*
 parameters of the model: $\alpha$, $\lambda$, $\sigma_\varepsilon^2$,
-$\sigma_\eta^2$, and $\sigma_{\varepsilon\eta}$. 
+$\sigma_\eta^2$, and $\sigma_{\varepsilon\eta}$.
 
 Not surprisingly, some of the
-parameters are underidentified.  
+parameters are underidentified.
 
 In particular, while $\lambda$ and
 $\sigma_\varepsilon^2$ are identified, $\alpha$, $\sigma_\eta^2$, and
@@ -1125,11 +871,11 @@ These equations imply
 
 Do there exist offsetting changes in $\alpha$ and $\sigma_{\varepsilon\eta}$ that
 leave both {eq}`eq37` and {eq}`eq38` satisfied with $\sigma_{11}$, $\sigma_{22}$,
-and $\sigma_{12}$ unchanged?  
+and $\sigma_{12}$ unchanged?
 
 That is, holding $\lambda$ and $\sigma_\varepsilon^2$
 constant, can we change $\alpha$ and $\sigma_{\varepsilon\eta}$ in offsetting ways
-that leave $\sigma_{11}$, $\sigma_{12}$, and $\sigma_{22}$ constant? 
+that leave $\sigma_{11}$, $\sigma_{12}$, and $\sigma_{22}$ constant?
 
 The answer is
 yes, as can be seen by differentiating {eq}`eq37` and {eq}`eq38` and setting
@@ -1155,17 +901,17 @@ $d\sigma_{12} = d\sigma_{11} = d\sigma_{22} = d\lambda = d\sigma_\varepsilon^2 =
 
 Dividing {eq}`eq40` by $2(1-\lambda)$ gives {eq}`eq39`, which proves that if
 $d\alpha$ and $d\sigma_{\varepsilon\eta}$ obey {eq}`eq39`, both {eq}`eq37` and
-{eq}`eq38` will remain satisfied.  
+{eq}`eq38` will remain satisfied.
 
 Thus there exist offsetting changes in $\alpha$
 and $\sigma_{\varepsilon\eta}$ that leave the identifiable parameters $\sigma_{11}$,
-$\sigma_{12}$, and $\sigma_{22}$ unaltered.  
+$\sigma_{12}$, and $\sigma_{22}$ unaltered.
 
 It follows that $\sigma_{\varepsilon\eta}$
-and $\alpha$ are not separately identifiable.  
+and $\alpha$ are not separately identifiable.
 
 It is evident from {eq}`eq27` or
-{eq}`eq32` that $\lambda$ is identified.  
+{eq}`eq32` that $\lambda$ is identified.
 
 To see that $\sigma_\varepsilon^2$ is
 identifiable, simply recall that $\varepsilon_t$ obeys the feedback rule
@@ -1179,9 +925,11 @@ $\sigma_\varepsilon^2$ is identifiable as the variance of the residual in the ab
 equation.
 
 To proceed to extract estimates of $\alpha$ it is necessary to impose a value of
-$\sigma_{\varepsilon\eta}$.  We impose the condition $\sigma_{\varepsilon\eta} = 0$,
+$\sigma_{\varepsilon\eta}$.
+
+We impose the condition $\sigma_{\varepsilon\eta} = 0$,
 so that shocks to the money supply rule and shocks to portfolio balance are
-uncorrelated. 
+uncorrelated.
 
 It is straightforward to calculate
 
@@ -1238,7 +986,7 @@ Let this estimator of $\alpha$ be
 \hat{\alpha} = g(\lambda,\,\sigma_{11},\,\sigma_{12},\,\sigma_{22}) = g(\theta) .
 ```
 
-Let $\Sigma_\theta$ be the estimated asymptotic covariance matrix of $\theta$.  
+Let $\Sigma_\theta$ be the estimated asymptotic covariance matrix of $\theta$.
 
 Then the asymptotic variance of $\hat{\alpha}$ will be estimated as
 
@@ -1251,7 +999,7 @@ Then the asymptotic variance of $\hat{\alpha}$ will be estimated as
 
 where $(\partial g/\partial\theta)_\theta$ is the $(1\times 4)$ vector of partial
 derivatives of $g$ with respect to $\theta$ evaluated at the maximum likelihood
-estimates $\hat{\theta}$.  
+estimates $\hat{\theta}$.
 
 The asymptotic covariance matrix of
 $(\lambda,\sigma_{11},\sigma_{12},\sigma_{22})$ is given by
@@ -1277,8 +1025,9 @@ T\sigma_\lambda^2
 and where $\log L$ is the natural logarithm of the likelihood function {eq}`eq32`.
 
 Notice that the maximum likelihood estimate of $\lambda$ is asymptotically
-orthogonal to the estimates $\sigma_{11}$, $\sigma_{12}$, $\sigma_{22}$.  The
-preceding formula for $\Sigma_\theta$ can be derived by applying results of {cite}`wilson1973estimation` and {cite:t}`anderson2011statistical` [pp. 159–161].
+orthogonal to the estimates $\sigma_{11}$, $\sigma_{12}$, $\sigma_{22}$.
+
+The preceding formula for $\Sigma_\theta$ can be derived by applying results of {cite}`wilson1973estimation` and {cite:t}`anderson2011statistical` [pp. 159–161].
 
 In the computations summarized below, the
 components $\sigma_{11}$, $\sigma_{12}$, and $\sigma_{22}$ were estimated by
@@ -1290,7 +1039,7 @@ components $\sigma_{11}$, $\sigma_{12}$, and $\sigma_{22}$ were estimated by
 = T^{-1}\sum_{t=1}^{T} \hat{a}_t \hat{a}_t' ,
 ```
 
-the maximum likelihood estimator. 
+the maximum likelihood estimator.
 
 The term
 $\left(-\partial^2\log L/\partial\lambda^2\right)_\theta$
@@ -1318,9 +1067,9 @@ $$
 a_{2t} = \mu_t - x_t + a_{1t}
 $$ (eq:a2_recursion)
 
-A crucial feature of this representation is that **$\alpha$ does not appear in
-{eq}`eq:a1_recursion`–{eq}`eq:a2_recursion`**: the only structural parameter
-needed to extract innovations is $\lambda$. 
+A crucial feature of this representation is that $\alpha$ does not appear in
+either {eq}`eq:a1_recursion` or {eq}`eq:a2_recursion`, so the only structural
+parameter needed to extract innovations is $\lambda$.
 
 Maximizing the likelihood {eq}`eq32`
 is therefore equivalent to choosing $\lambda$ to minimize
@@ -1331,34 +1080,40 @@ $$ (eq:mle_criterion)
 
 where the innovations depend on $\lambda$ through {eq}`eq:a1_recursion`.
 
+The following function simulates the bivariate process {eq}`eq11`–{eq}`eq12` by drawing shocks $(\varepsilon_t, \eta_t)$ and constructing $\Delta x_t$ and $\Delta\mu_t$ from their MA(1) representations.
+
 ```{code-cell} ipython3
-def simulate_bivariate(α, λ, T=200, σ_δ2=1.0, σ_ε2=0.5, σ_δε=0.0, seed=42):
+def simulate_bivariate(α, λ, T=200, σ_ε2=1.0,
+                       σ_η2=0.5, σ_εη=0.0, seed=42):
     """
     Simulate the bivariate rational-expectations model and return
     arrays x (inflation) and μ (money growth).
     """
     rng = np.random.default_rng(seed)
 
-    # Structural shocks
-    cov = np.array([[σ_δ2, σ_δε], [σ_δε, σ_ε2]])
+    cov = np.array([[σ_ε2, σ_εη], [σ_εη, σ_η2]])
     shocks = rng.multivariate_normal([0.0, 0.0], cov, size=T)
-    δ, ε = shocks[:, 0], shocks[:, 1]
+    ε, η = shocks[:, 0], shocks[:, 1]
 
-    φ = 1.0 / (λ + α * (1.0 - λ))
+    denom = λ + α * (1.0 - λ)
+    if np.isclose(denom, 0.0):
+        raise ValueError("λ + α(1-λ) must be nonzero.")
+    φ = 1.0 / denom
 
-    # Build Δx and Δμ from MA(1) representation
-    Δx  = np.zeros(T)
-    Δμ  = np.zeros(T)
+    Δx = np.zeros(T)
+    Δμ = np.zeros(T)
     for t in range(T):
-        d_prev = δ[t-1] if t > 0 else 0.0
         e_prev = ε[t-1] if t > 0 else 0.0
-        Δx[t] = φ * (δ[t] - ε[t]) - φ * λ * (d_prev - e_prev)
-        Δμ[t] = (φ*(1-λ) + 1)*δ[t] - φ*(1-λ)*ε[t] - d_prev
+        η_prev = η[t-1] if t > 0 else 0.0
+        Δx[t] = φ * (ε[t] - η[t]) - φ * λ * (e_prev - η_prev)
+        Δμ[t] = (φ * (1.0 - λ) + 1.0) * ε[t] - φ * (1.0 - λ) * η[t] - e_prev
 
     x = np.cumsum(Δx)
     μ = np.cumsum(Δμ)
     return x, μ
 ```
+
+Next we implement the innovation recursions {eq}`eq:a1_recursion`–{eq}`eq:a2_recursion` to recover $(a_{1t}, a_{2t})$ from observed data.
 
 ```{code-cell} ipython3
 def compute_innovations(x, μ, λ):
@@ -1389,19 +1144,36 @@ def compute_innovations(x, μ, λ):
     return a1, a2
 ```
 
+With the innovations in hand, we can evaluate the MLE criterion {eq}`eq:mle_criterion` and minimize it over $\lambda$.
+
 ```{code-cell} ipython3
 def mle_criterion(λ_val, x, μ):
     """
     Evaluate the MLE criterion det(D_a(λ)) for a given λ.
 
     Because α does not enter the innovation extraction, the determinant
-    of the innovation covariance matrix depends only on λ.  Minimising
+    of the innovation second-moment matrix depends only on λ. Minimizing
     this over λ gives the Wilson (1973) maximum likelihood estimate.
     """
     a1, a2 = compute_innovations(x, μ, λ_val)
-    Da = np.cov(np.vstack([a1, a2]))
+    A = np.vstack([a1, a2])
+    Da = A @ A.T / len(x)
     return np.linalg.det(Da)
+
+
+def estimate_lambda_mle(x, μ, bounds=(0.01, 0.99)):
+    """
+    Compute the Wilson-Sargent MLE of λ by minimizing eq. (33).
+    """
+    result = minimize_scalar(
+        lambda λ_val: mle_criterion(λ_val, x, μ),
+        bounds=bounds,
+        method='bounded'
+    )
+    return result.x
 ```
+
+We simulate a sample from the model and plot the MLE criterion as a function of $\lambda$ to verify that it is minimized near the true value.
 
 ```{code-cell} ipython3
 ---
@@ -1410,22 +1182,26 @@ mystnb:
     caption: MLE criterion as a function of $\lambda$
     name: fig-mle-criterion
 ---
-# Simulate data from the true model
+# Simulated sample
 α_true, λ_true = -2.0, 0.6
 x_sim, μ_sim = simulate_bivariate(α_true, λ_true, T=300)
+λ_hat = estimate_lambda_mle(x_sim, μ_sim)
 
 λ_grid = np.linspace(0.1, 0.95, 80)
-crit = [mle_criterion(lv, x_sim, μ_sim) for lv in λ_grid]  # α not needed here
+# α unused
+crit = [mle_criterion(lv, x_sim, μ_sim)
+        for lv in λ_grid]
 
 fig, ax = plt.subplots()
 ax.plot(λ_grid, crit, lw=2)
 ax.axvline(λ_true, color='r', ls='--', label=rf'True $\lambda = {λ_true}$')
 ax.set_xlabel(r'$\lambda$')
 ax.set_ylabel('det$(D_a(\lambda))$')
-ax.set_title('MLE criterion')
 ax.legend()
 plt.tight_layout()
 plt.show()
+
+print(f"Estimated λ from this sample: {λ_hat:.3f}")
 ```
 
 The MLE criterion attains its minimum near the true value $\lambda = 0.6$,
@@ -1434,10 +1210,11 @@ successfully recovers the adaptive expectations parameter.
 
 
 
-## An Alternative Instrumental Variable Estimator
+## An alternative instrumental variable estimator
 
-When $\sigma_{\delta\varepsilon} = 0$ (shocks to money demand and money supply
-are uncorrelated), an **instrumental variable (IV) estimator** is available.
+When $\sigma_{\varepsilon\eta} = 0$ (money-supply shocks and portfolio-balance
+shocks are uncorrelated), Sargent shows that an instrumental variable estimator
+is available.
 
 From the vector autoregressive representation {eq}`eq27`, the
 innovations satisfy
@@ -1450,46 +1227,34 @@ $$
 a_{1t} = x_t - E_{t-1}x_t.
 $$ (eq:a1_as_forecast_error)
 
-Moreover,
+On the restriction $\sigma_{\varepsilon\eta} = 0$, these one-step-ahead forecast
+errors can be used to construct an instrument from the estimated innovations in
+inflation.
 
-$$
-(a_{2t} - a_{1t})(a_{1t} - \lambda a_{1,t-1}) = 0
-$$ (eq:iv_orthogonality)
+The paper's two-step procedure is:
 
-This suggests the following two-step procedure:
-
-**Step 1.** Estimate the univariate MA(1) for $(1-L)x_t$:
+1. Estimate the univariate MA(1) for $(1-L)x_t$:
 
 $$
 (1-L)x_t = (1-\lambda L)a_{1t}
 $$
 
-by maximum likelihood.  This yields a consistent estimate of $\lambda$ and the
+by maximum likelihood.
+
+This yields a consistent estimate of $\lambda$ and the
 residuals $\hat a_{1t}$.
 
-**Step 2.** Form the instrument $\hat\xi_t = \hat a_{1t} - \lambda \hat a_{1,t-1}$,
-which is correlated with the regressors in Cagan's equation but orthogonal to
-the disturbance $u_t$ when $\sigma_{\delta\varepsilon} = 0$.
+2. Use those fitted innovations to form an instrument for expected inflation,
+   and then estimate Cagan's money-demand equation by nonlinear least squares.
 
-Then estimate $\alpha$ from
+This procedure yields consistent estimates of $\alpha$ and $\lambda$ when
+$\sigma_{\varepsilon\eta} = 0$.
 
-$$
-\hat\alpha =
-\frac{\sum_t (\mu_t - E_{t-1}\mu_t - (\mu_{t-1} - E_{t-2}\mu_{t-1}))
-              \cdot \hat\xi_t}
-     {\sum_t \hat\xi_t^2 / \hat\alpha_{\text{first stage}}}
-$$ (eq:iv_estimator)
+For this lecture, we illustrate the first stage.
 
-by applying nonlinear least squares to the second-stage regression
-
-$$
-m_t - p_t = \frac{\alpha(1-\hat\lambda)}{1-\hat\lambda L}
-             \sum_{i=0}^{\infty} \hat\lambda^i \hat\xi_{t-i}
-             + \text{residual}.
-$$ (eq:second_stage_iv)
-
-This procedure yields consistent estimates of $\alpha$ and $\lambda$ on the
-assumption that $\sigma_{\delta\varepsilon} = 0$.
+It is the step that identifies $\lambda$ and constructs the estimated
+inflation innovations that the paper then turns into an instrument for the
+second-stage nonlinear regression.
 
 ```{code-cell} ipython3
 def univariate_ma1_mle(Δx):
@@ -1504,7 +1269,7 @@ def univariate_ma1_mle(Δx):
         a[0] = Δx[0]
         for t in range(1, T):
             a[t] = Δx[t] + lam * a[t-1]
-        return np.var(a)
+        return np.mean(a**2)
 
     result = minimize_scalar(criterion, bounds=(0.01, 0.99), method='bounded')
     λ_hat = result.x
@@ -1517,22 +1282,24 @@ def univariate_ma1_mle(Δx):
     return λ_hat, a_hat
 ```
 
+We run a Monte Carlo experiment to examine the sampling distribution of the first-stage estimator $\hat\lambda$.
+
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: IV estimator — sampling distribution of $\hat\lambda$ and $\hat\alpha$
+    caption: First-stage sampling distribution of $\hat\lambda$
     name: fig-iv-distribution
 ---
 α_true, λ_true = -2.0, 0.6
 n_sims = 300
 λ_hats = []
-σ_δ2, σ_ε2, σ_δε = 1.0, 0.5, 0.0
+σ_ε2, σ_η2, σ_εη = 1.0, 0.5, 0.0
 
 for seed in range(n_sims):
     x_s, μ_s = simulate_bivariate(α_true, λ_true, T=150,
-                                   σ_δ2=σ_δ2, σ_ε2=σ_ε2,
-                                   σ_δε=σ_δε, seed=seed)
+                                   σ_ε2=σ_ε2, σ_η2=σ_η2,
+                                   σ_εη=σ_εη, seed=seed)
     Δx_s = np.diff(x_s)
     λ_h, _ = univariate_ma1_mle(Δx_s)
     λ_hats.append(λ_h)
@@ -1544,7 +1311,7 @@ ax.axvline(λ_true, color='r', lw=2, ls='--',
 ax.axvline(np.mean(λ_hats), color='b', lw=2, ls=':',
            label=rf'Mean $\hat\lambda={np.mean(λ_hats):.3f}$')
 ax.set_xlabel(r'$\hat\lambda$')
-ax.set_ylabel('Frequency')
+ax.set_ylabel('frequency')
 ax.legend()
 plt.tight_layout()
 plt.show()
@@ -1553,7 +1320,7 @@ plt.show()
 The sampling distribution of $\hat\lambda$ is centered near the true value,
 confirming consistency of the first-stage estimator.
 
-## Testing the Rational Expectations Version of Cagan's Model
+## Testing the rational expectations version of Cagan's model
 
 ### The overparameterized system
 
@@ -1572,13 +1339,15 @@ $$ (eq:general_varma)
 
 where $C$ and $B$ are general $2\times 2$ matrices.
 
-In the restricted model {eq}`eq27`, **seven linear restrictions** have been
+In the restricted model {eq}`eq27`, *seven linear restrictions* have been
 imposed on the eight parameters $(c_{11}, c_{12}, c_{21}, c_{22}, b_{11}, b_{12},
 b_{21}, b_{22})$ of the general system {eq}`eq:general_varma` so that the
 systematic part involves only the single parameter $\lambda$.
 
 The six overparameterizations used to test the model relax various subsets of these
-restrictions.  The parameterizations are:
+restrictions.
+
+The parameterizations are:
 
 | # | $C$ | $B$ | Free parameters |
 |---|-----|-----|-----------------|
@@ -1597,13 +1366,15 @@ $$
 \;\overset{d}{\longrightarrow}\; \chi^2(q)
 $$ (eq:lr_stat)
 
-where $q$ is the number of restrictions relaxed.  High values lead to rejection
+where $q$ is the number of restrictions relaxed.
+
+High values lead to rejection
 of the restricted model {eq}`eq27`.
 
 ### Empirical results
 
 Table 2 reports the maximum likelihood estimates for Cagan's data under
-$\sigma_{\delta\varepsilon} = 0$:
+$\sigma_{\varepsilon\eta} = 0$:
 
 | Country | $\hat\lambda$ | $\hat\alpha$ | $\hat\sigma_{11}$ | $\hat\sigma_{12}$ | $\hat\sigma_{22}$ |
 |---------|:---:|:---:|:---:|:---:|:---:|
@@ -1616,6 +1387,28 @@ $\sigma_{\delta\varepsilon} = 0$:
 
 Standard errors in parentheses.
 
+The paper also reports a parallel table for Barro's high-inflation data.
+
+We keep the focus here on Cagan's sample because it is the source of the
+original paradox in Table 1.
+
+The striking feature is how loose the estimates of $\alpha$ become.
+
+For Germany, Austria, and Russia the standard error is of the same order as the
+point estimate, while Hungary I is the only case in which $\alpha$ is estimated
+with much precision.
+
+Hungary I is the standout case.
+
+With $\hat\alpha = -1.84$, the implied revenue-maximizing inflation rate
+$-1/\hat\alpha$ is about 54 percent per month, close to the observed 46 percent.
+
+In Sargent's reading, this is the one hyperinflation in which the maximum
+likelihood estimate substantially weakens Cagan's paradox.
+
+For the other countries, the point estimates do not eliminate the paradox, but
+two-standard-error bands still include values of $\alpha$ that would.
+
 Table 3 reports the chi-square statistics for Cagan's data:
 
 | Country | Para. 1 $\chi^2(4)$ | 2 $\chi^2(1)$ | 3 $\chi^2(1)$ | 4 $\chi^2(2)$ | 5 $\chi^2(2)$ | 6 $\chi^2(2)$ |
@@ -1627,8 +1420,10 @@ Table 3 reports the chi-square statistics for Cagan's data:
 | Poland | 0.19 | 0.04 | 0.22 | 0.31 | 0.56 | 0.53 |
 | Austria | 2.77 | 4.97* | 0.63 | 4.97* | 10.05** | 7.13** |
 
-Critical values: $\chi^2(1)_{.05} = 3.84$, $\chi^2(2)_{.05} = 5.99$, $\chi^2(4)_{.05} = 9.49$.  
-\* Significant at .05.  \*\* Significant at .01.
+Critical values: $\chi^2(1)_{.05} = 3.84$, $\chi^2(2)_{.05} = 5.99$, $\chi^2(4)_{.05} = 9.49$.
+\* Significant at .05. \*\* Significant at .01.
+
+The following figures visualize the estimates from Table 2 and the chi-square statistics from Table 3.
 
 ```{code-cell} ipython3
 ---
@@ -1646,7 +1441,6 @@ fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
 axes[0].bar(countries, λ_ml, edgecolor='k', color='steelblue', alpha=0.8)
 axes[0].set_ylabel(r'$\hat\lambda$')
-axes[0].set_title(r'MLE estimates of $\lambda$')
 axes[0].tick_params(axis='x', rotation=30)
 
 axes[1].errorbar(range(len(countries)), α_ml, yerr=[2*s for s in α_se],
@@ -1655,7 +1449,6 @@ axes[1].axhline(0, color='k', lw=0.7, ls='--')
 axes[1].set_xticks(range(len(countries)))
 axes[1].set_xticklabels(countries, rotation=30)
 axes[1].set_ylabel(r'$\hat\alpha$ (±2 s.e.)')
-axes[1].set_title(r'MLE estimates of $\alpha$')
 
 plt.tight_layout()
 plt.show()
@@ -1691,20 +1484,18 @@ for idx, (ax, country, row) in enumerate(
     if idx == 0:
         ax.legend(fontsize=8)
 
-plt.suptitle("Overfitting chi-square statistics (Cagan's data)", y=1.01)
 plt.tight_layout()
 plt.show()
 ```
 
 ### Main findings
 
-- For **Germany**, **Greece**, and **Poland** the model is not rejected at the
-  .95 level by any of the six parameterizations.
-- For **Hungary I** and **Austria** the model is rejected by several
-  parameterizations.
-- For **Russia** there is rejection under parameterization 5.
+- Germany, Greece, and Poland are not rejected at the .95 level by any of the
+  six parameterizations.
+- Hungary I and Austria are rejected by several parameterizations.
+- Russia is rejected under parameterization 5.
 
-It is remarkable that a representation with only a **single free parameter**
+It is remarkable that a representation with only a *single free parameter*
 ($\lambda$) in its systematic part survives overfitting tests for three of the
 six hyperinflations.
 
@@ -1713,33 +1504,89 @@ six hyperinflations.
 The main results of this paper are:
 
 1. Under the conditions that make Cagan's adaptive expectations scheme
-   equivalent to rational expectations, **Cagan's OLS estimator of $\alpha$ is
-   inconsistent** because inflation and money creation are determined
+   equivalent to rational expectations, Cagan's OLS estimator of $\alpha$ is
+   *inconsistent* because inflation and money creation are determined
    simultaneously.
 
-2. A **bivariate Wold representation** with a triangular structure shows that
+2. A bivariate Wold representation with a triangular structure shows that
    inflation Granger-causes money creation, but not vice versa — consistent with
    empirical findings that feedback runs from inflation to money creation.
 
-3. The **structural parameter $\alpha$ is not identifiable** from the likelihood
-   function alone.  Identification requires an additional restriction, namely
-   $\sigma_{\delta\varepsilon} = 0$ (uncorrelated money-demand and money-supply
-   shocks).  The resulting estimates of $\alpha$ carry very large standard errors.
+3. The structural parameter $\alpha$ is *not identifiable* from the likelihood
+   function alone.
+
+   Identification requires an additional restriction, namely
+   $\sigma_{\varepsilon\eta} = 0$ (uncorrelated portfolio-balance and money-supply
+   shocks).
+
+   The resulting estimates of $\alpha$ carry very large standard errors.
 
 4. The large standard errors mean that confidence intervals of two standard errors
    on each side of the point estimates include values of $\alpha$ that would imply
    money creators were maximizing seignorage revenue — potentially explaining the
    paradox noted by Cagan.
 
-5. **Likelihood-ratio overfitting tests** do not decisively reject the one-parameter
+5. Likelihood-ratio overfitting tests do not decisively reject the one-parameter
    rational-expectations model for Germany, Greece, and Poland.
 
-6. The results suggest that **the demand for money in hyperinflation may not have
-   been as well isolated as previously thought**, and that the slope of the
+6. The results suggest that the demand for money in hyperinflation may *not* have
+   been as well isolated as previously thought, and that the slope of the
    portfolio balance schedule is difficult or impossible to estimate precisely
    under the money supply regimes that prevailed during the hyperinflations.
 
 ## Exercises
+
+The function below computes the autocovariances of $(1-L)x$ and $(1-L)\mu$ and their cross-covariances.
+
+We will use these moments to evaluate the bias in Cagan's estimator and to construct a consistent estimator.
+
+```{code-cell} ipython3
+def bivariate_ma1_moments(α, λ, σ_ε2=1.0, σ_η2=0.5, σ_εη=0.0):
+    """
+    Compute the autocovariances of (1-L)x and (1-L)μ under the
+    bivariate rational-expectations model of Sargent (1977).
+
+    Parameters:
+
+    α  : float  (< 0)  demand semi-elasticity
+    λ  : float  (0 < λ < 1)  adaptive expectations parameter
+    σ_ε2 : variance of money-supply shock ε_t
+    σ_η2 : variance of portfolio shock η_t
+    σ_εη : covariance of ε_t and η_t
+
+    Returns:
+
+    cxx : dict with keys 0, 1  — autocovariances of Δx
+    cμμ : dict with keys 0, 1  — autocovariances of Δμ
+    cxμ : dict with keys -1, 0, 1  — cross-covariances E[Δx_t Δμ_{t-τ}]
+    """
+    denom = λ + α * (1.0 - λ)
+    if np.isclose(denom, 0.0):
+        raise ValueError("λ + α(1-λ) must be nonzero.")
+    φ = 1.0 / denom
+
+    # MA(1) forms for Δx_t and Δμ_t
+    # Δμ_t = [φ(1-λ)+1]ε_t - φ(1-λ)η_t - ε_{t-1}
+
+    A = φ * (1.0 - λ) + 1.0
+    B = φ * (1.0 - λ)
+    var_diff = σ_ε2 - 2.0 * σ_εη + σ_η2
+
+    cxx0 = φ**2 * (1 + λ**2) * var_diff
+    cxx1 = -φ**2 * λ * var_diff
+
+    cμμ0 = (A**2 + 1.0) * σ_ε2 + B**2 * σ_η2 - 2.0 * A * B * σ_εη
+    cμμ1 = -A * σ_ε2 + B * σ_εη
+
+    cxμ0 = φ * ((A + λ) * σ_ε2 + B * σ_η2 - (A + B + λ) * σ_εη)
+    cxμ1 = -φ * λ * (A * σ_ε2 + B * σ_η2 - (A + B) * σ_εη)
+    cxμm1 = -φ * (σ_ε2 - σ_εη)
+
+    cxx = {0: cxx0, 1: cxx1}
+    cμμ = {0: cμμ0, 1: cμμ1}
+    cxμ = {-1: cxμm1, 0: cxμ0, 1: cxμ1}
+    return cxx, cμμ, cxμ
+```
 
 ```{exercise-start}
 :label: ier77_ex1
@@ -1747,8 +1594,8 @@ The main results of this paper are:
 
 Using `bivariate_ma1_moments`, compute all nonzero autocovariances of
 $(1-L)x_t$ and $(1-L)\mu_t$ for $\alpha = -2.0$, $\lambda = 0.6$,
-$\sigma_\delta^2 = 1.0$, $\sigma_\varepsilon^2 = 0.5$, and
-$\sigma_{\delta\varepsilon} = 0$.
+$\sigma_\varepsilon^2 = 1.0$, $\sigma_\eta^2 = 0.5$, and
+$\sigma_{\varepsilon\eta} = 0$.
 
 Verify numerically that the spectral density matrix is positive semidefinite
 at several frequencies $\omega \in [0, \pi]$.
@@ -1776,7 +1623,7 @@ print("\nCross-covariances E[Δx_t  Δμ_{t-τ}]:")
 for τ, v in cxμ.items():
     print(f"  c_xμ({τ}) = {v:.6f}")
 
-# Check positive semidefiniteness of the spectral density matrix
+# Check PSD
 ω_grid = np.linspace(0, np.pi, 50)
 min_eig = np.inf
 for ω in ω_grid:
@@ -1802,10 +1649,11 @@ print("Spectral density matrix positive semidefinite:", min_eig >= -1e-10)
 
 Using `plim_alpha_cagan`, plot the asymptotic bias $\operatorname{plim}\hat\alpha - \alpha$
 as a function of $\alpha$ for three values of $\lambda \in \{0.4, 0.6, 0.8\}$,
-setting $\sigma_\delta^2 = 1$, $\sigma_\varepsilon^2 = 0.5$, and
-$\sigma_{\delta\varepsilon} = 0$.
+setting $\sigma_\varepsilon^2 = 1$, $\sigma_\eta^2 = 0.5$, and
+$\sigma_{\varepsilon\eta} = 0$.
 
-How does the bias depend on $\lambda$?
+How does the bias depend on $\lambda$ and on the location of the
+Wallace-Sargent value $-\lambda / (1-\lambda)$?
 
 ````{exercise-end}
 ````
@@ -1823,26 +1671,28 @@ mystnb:
 ---
 α_grid = np.linspace(-5.0, -0.1, 300)
 λ_vals = [0.4, 0.6, 0.8]
-σ_δ2, σ_ε2, σ_δε = 1.0, 0.5, 0.0
+σ_ε2, σ_η2, σ_εη = 1.0, 0.5, 0.0
 
 fig, ax = plt.subplots()
 for λ in λ_vals:
-    bias = [plim_alpha_cagan(a, λ, σ_δ2, σ_ε2, σ_δε) - a for a in α_grid]
-    ax.plot(α_grid, bias, lw=2, label=rf'$\lambda={λ}$')
+    valid = ~np.isclose(λ + α_grid * (1.0 - λ), 0.0)
+    α_plot = α_grid[valid]
+    bias = [plim_alpha_cagan(a, λ, σ_ε2, σ_η2, σ_εη) - a
+            for a in α_plot]
+    ax.plot(α_plot, bias, lw=2, label=rf'$\lambda={λ}$')
 
 ax.axhline(0, color='k', lw=0.7, ls='--')
 ax.set_xlabel(r'True $\alpha$')
 ax.set_ylabel(r'$\operatorname{plim}\hat\alpha - \alpha$')
-ax.set_title("Asymptotic bias of Cagan's estimator")
 ax.legend()
 plt.tight_layout()
 plt.show()
 ```
 
-The bias is always positive (Cagan's estimator overstates $\alpha$ toward zero)
-and grows larger in magnitude as $|\alpha|$ increases.  A higher $\lambda$ reduces
-$\phi$ and thereby reduces the bias slightly, but the qualitative pattern is the
-same across all values of $\lambda$.
+The bias changes sign at the Wallace-Sargent value $-\lambda / (1-\lambda)$.
+
+For $\alpha$ values more negative than that benchmark, the estimator is biased
+toward zero, while for less negative values it is biased away from zero.
 
 ```{solution-end}
 ```
@@ -1856,7 +1706,10 @@ $\lambda$ from 500 simulated samples of length $T = 100$ from the true model
 with $\alpha = -2.0$ and $\lambda = 0.6$.
 
 Compute the mean and standard deviation of $\hat\lambda$ across simulations.
-Compare with a sample of length $T = 500$.  What do you conclude about the
+
+Compare with a sample of length $T = 500$.
+
+What do you conclude about the
 rate of convergence?
 
 ````{exercise-end}

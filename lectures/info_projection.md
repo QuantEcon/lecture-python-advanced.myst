@@ -954,3 +954,79 @@ It also points to a relatively small negative value of $\alpha$ rather than a ve
 
 ```{solution-end}
 ```
+
+````{exercise-start}
+:label: sj76_ex4
+````
+
+Derive the approximation criterion {eq}`eq:approx_criterion` from first principles.
+
+Start from the time-domain OLS objective: Jacobs' regression {eq}`eq:jacobs_constrained` chooses $(y_0, y_1)$ to minimize the population mean squared error
+
+$$
+E\left[\left(m_t - p_t - \frac{y_0(1-L)}{1 - y_1 L} m_t\right)^2\right].
+$$
+
+Use the following steps:
+
+1. Define the residual $e_t = (m_t - p_t) - \frac{y_0(1-L)}{1 - y_1 L} m_t$; by the population projection {eq}`eq:H_formula`, the true regression satisfies $m_t - p_t = H(L) m_t$, so rewrite the residual as a filtered version of $m_t$.
+
+2. Express $E[e_t^2]$ as a frequency-domain integral using Parseval's theorem:
+
+$$
+E[e_t^2] = \frac{1}{2\pi} \int_{-\pi}^{\pi} S_e(\omega)\, d\omega
+$$
+
+where $S_e(\omega)$ is the spectral density of $e_t$.
+
+3. Express the spectral density $S_e(\omega)$ in terms of the transfer functions $H(e^{-i\omega})$, $H_J(e^{-i\omega})$, and the spectral density $S_m(\omega)$ of $m_t$.
+
+4. Show that the result is equation {eq}`eq:approx_criterion`.
+
+````{exercise-end}
+````
+
+```{solution-start} sj76_ex4
+:class: dropdown
+```
+
+**Step 1.** The true population regression is $m_t - p_t = H(L) m_t$, so the residual is
+
+$$
+e_t = H(L) m_t - \frac{y_0(1 - L)}{1 - y_1 L} m_t = \left[ H(L) - H_J(L) \right] m_t
+$$
+
+where $H_J(L) = \frac{y_0(1-L)}{1 - y_1 L}$ is Jacobs' constrained filter.
+
+**Step 2.** Since $e_t$ is a covariance-stationary linear process, Parseval's theorem gives
+
+$$
+E[e_t^2] = \frac{1}{2\pi} \int_{-\pi}^{\pi} S_e(\omega)\, d\omega.
+$$
+
+**Step 3.** Because $e_t = [H(L) - H_J(L)] m_t$, the spectral density of $e_t$ equals the squared modulus of the combined transfer function times the spectral density of $m_t$:
+
+$$
+S_e(\omega) = \left| H(e^{-i\omega}) - H_J(e^{-i\omega}) \right|^2 S_m(\omega).
+$$
+
+**Step 4.** Substituting into the Parseval integral,
+
+$$
+E[e_t^2] = \frac{1}{2\pi} \int_{-\pi}^{\pi}
+  \left| H(e^{-i\omega}) - H_J(e^{-i\omega}) \right|^2 S_m(\omega)\, d\omega.
+$$
+
+Replacing $H(e^{-i\omega})$ and $H_J(e^{-i\omega})$ by their definitions gives
+
+$$
+E[e_t^2] = \frac{1}{2\pi} \int_{-\pi}^{\pi}
+  \left| \frac{h_0 + h_1 e^{-i\omega}}{1 - h_2 e^{-i\omega}}
+       - \frac{y_0(1 - e^{-i\omega})}{1 - y_1 e^{-i\omega}} \right|^2
+  S_m(\omega)\, d\omega
+$$
+
+which (up to the constant $\frac{1}{2\pi}$) is equation {eq}`eq:approx_criterion`. Since OLS minimizes $E[e_t^2]$, the minimizing $(y_0, y_1)$ also minimizes the integral in {eq}`eq:approx_criterion`. $\blacksquare$
+
+```{solution-end}
+```
