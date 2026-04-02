@@ -567,12 +567,6 @@ $$
 The figure below contrasts the true $\delta$ with Jacobs' population value $y_1 = 1$.
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: True and projected $\delta$
-    name: fig-jacobs-bias
----
 λ_vals = [0.3, 0.5, 0.7]
 
 fig, ax = plt.subplots()
@@ -860,12 +854,6 @@ def jacobs_population_params_ex2(α, λ, σ_η2=1.0, σ_ε2=0.5, σ_εη=0.0):
 ```
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: Jacobs estimator bias
-    name: fig-jacobs-bias-exercise
----
 λ_vals = [0.3, 0.5, 0.7]
 
 fig, ax = plt.subplots()
