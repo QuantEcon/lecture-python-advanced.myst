@@ -495,12 +495,23 @@ $$
 |x - y'| + |x' - y| = |x - y| + |x' - y'|
 $$
 
-Letting $\alpha := \frac{|x - y|+|x' - y|}{|x - y'| - |x' - y|} \in (0,1),$ we have $|x - y| = \alpha|x - y'| +(1-\alpha) |x' - y| $ and $|x' - y'| = (1-\alpha)|x - y'| +\alpha |x' - y|. $ 
+Letting $ \alpha := \frac{|x-y'| - |x'-y'|}{|x-y| - |x'-y'|} \in (0,1), $ we have 
 
-Hence, by strict concavity of $h,$
+$$ |x-y'| = \alpha|x - y| +(1-\alpha) |x' - y'| \quad \text{and} \quad |x'-y| = (1-\alpha)|x - y| +\alpha |x' - y'|. $$
+
+Hence, by strict concavity of $ h, $
 
 $$
-h(|x-y|)+ h(|x'-y'|) <\alpha h(|x - y'|) +(1-\alpha) h(|x' - y|) +  (1-\alpha) h(|x - y'|) +\alpha h(|x' - y|) = h(|x-y'|) + h(|x'-y|).
+h(|x-y'|) > \alpha h(|x-y|) + (1-\alpha) h(|x'-y'|)
+$$
+$$
+h(|x'-y|) > (1-\alpha) h(|x-y|) + \alpha h(|x'-y'|).
+$$
+
+Adding the two inequalities:
+
+$$
+h(|x-y'|) + h(|x'-y|) > h(|x-y|) + h(|x'-y'|).
 $$
 
 Therefore, as in the first case, we can strictly improve the cost among $x,y,x',y'$ by uncrossing the pairs.
