@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -102,7 +102,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -165,8 +165,13 @@
   try {
     if (localStorage.setContrast === '1') {
       document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
     }
-  } catch(e) {}
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
 })();
 </script>
 
@@ -189,7 +194,7 @@
                     
 
                     
-                    <div class="inner">
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -242,12 +247,14 @@
                             
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                             
                         </div>
 
                     </div>
 
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
                     
 
                 </div>
@@ -289,7 +296,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/98e52928" class="changelog-hash">98e52928</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">3 weeks ago</span>
+                                <span class="changelog-time">2 months ago</span>
                                 <span class="changelog-message">[additive_functionals] Add more discussions on the peculiar property (#306)</span>
                             </li>
                             
@@ -298,7 +305,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">5 months ago</span>
+                                <span class="changelog-time">7 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -405,7 +412,7 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.1)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -1070,7 +1077,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/7390acc9e0ac2a8dd5f4e684888c67b856be9b6ea8915fec0ab3d3d55d5f6503.png" src="_images/7390acc9e0ac2a8dd5f4e684888c67b856be9b6ea8915fec0ab3d3d55d5f6503.png" />
+<img alt="_images/66438acf30b8de570d96cf3640e5c8e524799c188f8d8d2ce5f2530a6dbae8f1.png" src="_images/66438acf30b8de570d96cf3640e5c8e524799c188f8d8d2ce5f2530a6dbae8f1.png" />
 </div>
 </div>
 <p>Notice the irregular but persistent growth in <span class="math notranslate nohighlight">\(y_t\)</span>.</p>
@@ -1214,7 +1221,7 @@ you will generate (modulo randomness) the plot</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/b425c337c19b135346bfc27c5a481ef03636c28037885fb360f328da8149b8cf.png" src="_images/b425c337c19b135346bfc27c5a481ef03636c28037885fb360f328da8149b8cf.png" />
+<img alt="_images/c2768c786ce8c0f328864e8da491fd0787730721f853ecf7c0ae6c3d430be057.png" src="_images/c2768c786ce8c0f328864e8da491fd0787730721f853ecf7c0ae6c3d430be057.png" />
 </div>
 </div>
 <p>When we plot multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plot the population 95% probability coverage sets computed using the LinearStateSpace class.</p>
@@ -1265,7 +1272,7 @@ obtain the graph in the next cell.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c8568cc7087ccc756a001e71255ad098e8411fd9fd770ebc0e879fe65ce7113d.png" src="_images/c8568cc7087ccc756a001e71255ad098e8411fd9fd770ebc0e879fe65ce7113d.png" />
+<img alt="_images/e8eacc0e8b25e62aaaa42334ff177d2ecf95d633a0d1c3e7e1e71de46b9a3f6c.png" src="_images/e8eacc0e8b25e62aaaa42334ff177d2ecf95d633a0d1c3e7e1e71de46b9a3f6c.png" />
 </div>
 </div>
 <p>As before, when we plotted multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plotted population 95% confidence bands computed using the LinearStateSpace class.</p>

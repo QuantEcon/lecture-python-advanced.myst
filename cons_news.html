@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -102,7 +102,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -165,8 +165,13 @@
   try {
     if (localStorage.setContrast === '1') {
       document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
     }
-  } catch(e) {}
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
 })();
 </script>
 
@@ -189,7 +194,7 @@
                     
 
                     
-                    <div class="inner">
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -232,12 +237,14 @@
                             
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                             
                         </div>
 
                     </div>
 
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
                     
 
                 </div>
@@ -279,7 +286,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">5 months ago</span>
+                                <span class="changelog-time">7 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -395,7 +402,7 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.1)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -1095,7 +1102,7 @@ form <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, we can simp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8ce897b60&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb7b3e77e00&gt;
 </pre></div>
 </div>
 <img alt="_images/76b33f8ac4ba58add8b0be4f4fa38f121540f4d405bef1f85c211b228fab058f.png" src="_images/76b33f8ac4ba58add8b0be4f4fa38f121540f4d405bef1f85c211b228fab058f.png" />
@@ -1132,7 +1139,7 @@ permanently <strong>decreases</strong> by <span class="math notranslate nohighli
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8ce740910&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb7b3d88a50&gt;
 </pre></div>
 </div>
 <img alt="_images/03527f6c6d75474a2f96b82fcb097c9c324dde8b49a641f57af4b8031975446b.png" src="_images/03527f6c6d75474a2f96b82fcb097c9c324dde8b49a641f57af4b8031975446b.png" />
@@ -1171,10 +1178,10 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8cdef3890&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb7b354f9d0&gt;
 </pre></div>
 </div>
-<img alt="_images/cc6abc2859ece652226380a84a9fac5a95222aa798f276f9f1f05934ffe08508.png" src="_images/cc6abc2859ece652226380a84a9fac5a95222aa798f276f9f1f05934ffe08508.png" />
+<img alt="_images/39873de3d9ea7d51ac0d9b37591a6f27467ce58ebed330baa4c8297b82452062.png" src="_images/39873de3d9ea7d51ac0d9b37591a6f27467ce58ebed330baa4c8297b82452062.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1189,10 +1196,10 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa8cdf53d90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb7b35ece10&gt;
 </pre></div>
 </div>
-<img alt="_images/ebae8d61a9c1a6baf714c2f28d4579c5f0a5a4fadd9477d197e5e3df12df22a6.png" src="_images/ebae8d61a9c1a6baf714c2f28d4579c5f0a5a4fadd9477d197e5e3df12df22a6.png" />
+<img alt="_images/001264a9e9d82e9c6e7ea64609a58695cea3bb11e9832af8f1c6dce9146aa7e7.png" src="_images/001264a9e9d82e9c6e7ea64609a58695cea3bb11e9832af8f1c6dce9146aa7e7.png" />
 </div>
 </div>
 </section>

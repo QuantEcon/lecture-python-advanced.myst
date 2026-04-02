@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -102,7 +102,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -165,8 +165,13 @@
   try {
     if (localStorage.setContrast === '1') {
       document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
     }
-  } catch(e) {}
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
 })();
 </script>
 
@@ -189,7 +194,7 @@
                     
 
                     
-                    <div class="inner">
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -248,12 +253,14 @@
                             
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                             
                         </div>
 
                     </div>
 
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
                     
 
                 </div>
@@ -295,7 +302,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">5 months ago</span>
+                                <span class="changelog-time">7 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -411,7 +418,7 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.1)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -1008,13 +1015,13 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
   return math.isfinite(val)
 /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages/matplotlib/cbook.py:1355: ComplexWarning: Casting complex values to real discards the imaginary part
   return np.asarray(x, float)
-/tmp/ipykernel_7477/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+/tmp/ipykernel_7570/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages/matplotlib/transforms.py:984: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/46737dd7b3800d91a35c01ecbc5f2b7a81f3b58cbe760f8c5c332a4aaa43dab3.png" src="_images/46737dd7b3800d91a35c01ecbc5f2b7a81f3b58cbe760f8c5c332a4aaa43dab3.png" />
+<img alt="_images/0e6d90adcb14e7e39ef77fc42982d1e199fe3f1b642a710b068a696d7f883c09.png" src="_images/0e6d90adcb14e7e39ef77fc42982d1e199fe3f1b642a710b068a696d7f883c09.png" />
 </div>
 </div>
 <p>If we look carefully, things look good: the spectrum is the flat line at <span class="math notranslate nohighlight">\(10^0\)</span> at the very top of the spectrum graphs,
@@ -1038,11 +1045,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7477/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7570/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/ac21cced9c71e16c5b0e04183fb2293aff26e933c4740810e0291e5cdbca9a6a.png" src="_images/ac21cced9c71e16c5b0e04183fb2293aff26e933c4740810e0291e5cdbca9a6a.png" />
+<img alt="_images/98212c0b6ea5f6f6d67b84d0fb66a814aeb7da0b743996fa54a50ba9ce4c8c3b.png" src="_images/98212c0b6ea5f6f6d67b84d0fb66a814aeb7da0b743996fa54a50ba9ce4c8c3b.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s second model is <span class="math notranslate nohighlight">\(X_t = .9 X_{t-1} + \epsilon_t\)</span></p>
@@ -1056,11 +1063,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7477/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7570/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/cc2454c9ce9132723c5b4657188093a4e237e8f727be7adf4af5505450aed33f.png" src="_images/cc2454c9ce9132723c5b4657188093a4e237e8f727be7adf4af5505450aed33f.png" />
+<img alt="_images/e5078d2a862684eebdd51acc774f14823cf5426939e90287b09b249258ba20ae.png" src="_images/e5078d2a862684eebdd51acc774f14823cf5426939e90287b09b249258ba20ae.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s third  model is  <span class="math notranslate nohighlight">\(X_t = .8 X_{t-4} + \epsilon_t\)</span></p>
@@ -1074,11 +1081,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7477/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7570/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/6e40ca7a81a41f59c55eb945d0f33354e029098fa39f96a559b3786cc24411d3.png" src="_images/6e40ca7a81a41f59c55eb945d0f33354e029098fa39f96a559b3786cc24411d3.png" />
+<img alt="_images/f6a2a4134f7c6a7bf85601b37ba5f97639c7b751b69ff36028e60e3408c7c562.png" src="_images/f6a2a4134f7c6a7bf85601b37ba5f97639c7b751b69ff36028e60e3408c7c562.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s fourth  model is  <span class="math notranslate nohighlight">\(X_t = .98 X_{t-1}  + \epsilon_t -.7 \epsilon_{t-1}\)</span></p>
@@ -1092,11 +1099,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7477/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7570/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/72a17625c7eec60667c7510709e7f0f64cc4f45aa084281edcf8ef715c84b116.png" src="_images/72a17625c7eec60667c7510709e7f0f64cc4f45aa084281edcf8ef715c84b116.png" />
+<img alt="_images/3cc4fa57b3f6776e04e9476052c3713ad3452f6092a8558e86bd6f777bad11e7.png" src="_images/3cc4fa57b3f6776e04e9476052c3713ad3452f6092a8558e86bd6f777bad11e7.png" />
 </div>
 </div>
 </section>

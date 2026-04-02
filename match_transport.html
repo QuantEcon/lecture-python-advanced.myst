@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -102,7 +102,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -165,8 +165,13 @@
   try {
     if (localStorage.setContrast === '1') {
       document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
     }
-  } catch(e) {}
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
 })();
 </script>
 
@@ -189,7 +194,7 @@
                     
 
                     
-                    <div class="inner">
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -243,12 +248,14 @@
                             
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                             
                         </div>
 
                     </div>
 
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
                     
 
                 </div>
@@ -276,7 +283,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Feb 24, 2026
+                            Last changed: Apr 02, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -287,10 +294,19 @@
                             
                             <li class="changelog-entry">
                                 
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/0f8291cc" class="changelog-hash">0f8291cc</a>
+                                
+                                <span class="changelog-author">Enzo Di Pasquale</span>
+                                <span class="changelog-time">9 minutes ago</span>
+                                <span class="changelog-message">Update mathematical expressions in match_transport.md (#317)</span>
+                            </li>
+                            
+                            <li class="changelog-entry">
+                                
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/21051be8" class="changelog-hash">21051be8</a>
                                 
                                 <span class="changelog-author">Yuga SUDA</span>
-                                <span class="changelog-time">1 hour ago</span>
+                                <span class="changelog-time">1 month ago</span>
                                 <span class="changelog-message">[match_transport.md]  Fix typos (#302)</span>
                             </li>
                             
@@ -299,7 +315,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/d65b66e6" class="changelog-hash">d65b66e6</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">5 months ago</span>
+                                <span class="changelog-time">6 months ago</span>
                                 <span class="changelog-message">MAINT: upgrade anaconda=2025.06 and python=3.13 (#215)</span>
                             </li>
                             
@@ -308,7 +324,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">5 months ago</span>
+                                <span class="changelog-time">7 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -317,7 +333,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/9d7c1a88" class="changelog-hash">9d7c1a88</a>
                                 
                                 <span class="changelog-author">thomassargent30</span>
-                                <span class="changelog-time">10 months ago</span>
+                                <span class="changelog-time">12 months ago</span>
                                 <span class="changelog-message">Tom's April 4 edits of composite matching lecture</span>
                             </li>
                             
@@ -364,15 +380,6 @@
                                 <span class="changelog-author">thomassargent30</span>
                                 <span class="changelog-time">1 year ago</span>
                                 <span class="changelog-message">Tom's Dec 8 tweaks to composite matching lecture</span>
-                            </li>
-                            
-                            <li class="changelog-entry">
-                                
-                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/6fd167c0" class="changelog-hash">6fd167c0</a>
-                                
-                                <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">1 year ago</span>
-                                <span class="changelog-message">remove begin equations</span>
                             </li>
                             
                         </ul>
@@ -807,11 +814,22 @@ x &lt; x' &lt; y' &lt; y
 \[
 |x - y'| + |x' - y| = |x - y| + |x' - y'|
 \]</div>
-<p>Letting <span class="math notranslate nohighlight">\(\alpha := \frac{|x - y|+|x' - y|}{|x - y'| - |x' - y|} \in (0,1),\)</span> we have <span class="math notranslate nohighlight">\(|x - y| = \alpha|x - y'| +(1-\alpha) |x' - y| \)</span> and <span class="math notranslate nohighlight">\(|x' - y'| = (1-\alpha)|x - y'| +\alpha |x' - y|. \)</span></p>
-<p>Hence, by strict concavity of <span class="math notranslate nohighlight">\(h,\)</span></p>
+<p>Letting <span class="math notranslate nohighlight">\( \alpha := \frac{|x-y'| - |x'-y'|}{|x-y| - |x'-y'|} \in (0,1), \)</span> we have</p>
+<div class="math notranslate nohighlight">
+\[ |x-y'| = \alpha|x - y| +(1-\alpha) |x' - y'| \quad \text{and} \quad |x'-y| = (1-\alpha)|x - y| +\alpha |x' - y'|. \]</div>
+<p>Hence, by strict concavity of <span class="math notranslate nohighlight">\( h, \)</span></p>
 <div class="math notranslate nohighlight">
 \[
-h(|x-y|)+ h(|x'-y'|) &lt;\alpha h(|x - y'|) +(1-\alpha) h(|x' - y|) +  (1-\alpha) h(|x - y'|) +\alpha h(|x' - y|) = h(|x-y'|) + h(|x'-y|).
+h(|x-y'|) &gt; \alpha h(|x-y|) + (1-\alpha) h(|x'-y'|)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+h(|x'-y|) &gt; (1-\alpha) h(|x-y|) + \alpha h(|x'-y'|).
+\]</div>
+<p>Adding the two inequalities:</p>
+<div class="math notranslate nohighlight">
+\[
+h(|x-y'|) + h(|x'-y|) &gt; h(|x-y|) + h(|x'-y'|).
 \]</div>
 <p>Therefore, as in the first case, we can strictly improve the cost among <span class="math notranslate nohighlight">\(x,y,x',y'\)</span> by uncrossing the pairs.</p>
 <p>Finally, it remains to argue that in both cases  <em>uncrossing</em> operations do not increase the number of intersections with other matched pairs.</p>
@@ -2147,9 +2165,9 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{(np.int64(5), np.int64(5)): [(np.int64(4), np.int64(7)),
   (np.int64(1), np.int64(3))],
- &#39;artificial_pair&#39;: [(np.int64(5), np.int64(5)), (np.int64(2), np.int64(6))],
  (np.int64(3), np.int64(1)): [(np.int64(7), np.int64(0)),
   (np.int64(0), np.int64(2))],
+ &#39;artificial_pair&#39;: [(np.int64(5), np.int64(5)), (np.int64(2), np.int64(6))],
  (np.int64(7), np.int64(0)): [],
  (np.int64(6), np.int64(4)): [],
  (np.int64(0), np.int64(2)): [],

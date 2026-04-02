@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -102,7 +102,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -165,8 +165,13 @@
   try {
     if (localStorage.setContrast === '1') {
       document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
     }
-  } catch(e) {}
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
 })();
 </script>
 
@@ -189,7 +194,7 @@
                     
 
                     
-                    <div class="inner">
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -227,12 +232,14 @@
                             
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                             
                         </div>
 
                     </div>
 
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
                     
 
                 </div>
@@ -274,7 +281,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/8c84d8da" class="changelog-hash">8c84d8da</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">1 day ago</span>
+                                <span class="changelog-time">1 month ago</span>
                                 <span class="changelog-message">[amss] Update Tom's edits to AMSS and Calvo Lectures (#312)</span>
                             </li>
                             
@@ -283,7 +290,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">5 months ago</span>
+                                <span class="changelog-time">7 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -397,7 +404,7 @@ expectations” scheme.</p>
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.1)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -633,7 +640,7 @@ on the history <span class="math notranslate nohighlight">\(y_{t-1}, y_{t-2}, \l
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/75a8d56d67d5d7d656ec1baf94e31222f6d7d21e156cc13a007ffe1c26f1d35a.png" src="_images/75a8d56d67d5d7d656ec1baf94e31222f6d7d21e156cc13a007ffe1c26f1d35a.png" />
+<img alt="_images/82b6b3b95502775a4a4e553a0484fd673898aa896ad260b1656c31063762a819.png" src="_images/82b6b3b95502775a4a4e553a0484fd673898aa896ad260b1656c31063762a819.png" />
 </div>
 </div>
 <p>Note how <span class="math notranslate nohighlight">\(x_t\)</span> and <span class="math notranslate nohighlight">\(\hat{x_t}\)</span> differ.</p>
@@ -657,7 +664,7 @@ idea about her/his <em>permanent income</em>.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/207fc9dd87ac8e4b15fcbd51e5cbfd8182a19d9f4284bb407572710bf6d8a735.png" src="_images/207fc9dd87ac8e4b15fcbd51e5cbfd8182a19d9f4284bb407572710bf6d8a735.png" />
+<img alt="_images/2ed6d590f6d68b2497c760a1f69ee80bd904269f4dcef28739aed5c17fe360da.png" src="_images/2ed6d590f6d68b2497c760a1f69ee80bd904269f4dcef28739aed5c17fe360da.png" />
 </div>
 </div>
 <p>We see above that <span class="math notranslate nohighlight">\(y\)</span> seems to look like white noise around the
@@ -678,7 +685,7 @@ values of <span class="math notranslate nohighlight">\(x\)</span>.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/897567eb043e435a0f998a91b0ebe55e788cf4303fdc2225ce142a496ac0e399.png" src="_images/897567eb043e435a0f998a91b0ebe55e788cf4303fdc2225ce142a496ac0e399.png" />
+<img alt="_images/d77349ff65e7df0d862b06ef36f7857ea5a2102ff461215833de0409ca52dd28.png" src="_images/d77349ff65e7df0d862b06ef36f7857ea5a2102ff461215833de0409ca52dd28.png" />
 </div>
 </div>
 </section>

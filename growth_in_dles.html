@@ -77,13 +77,13 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=b64b8e0eefe2e4a15043a771a993bad53e77d658" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -102,7 +102,7 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=239405dfbfda750f9038d3ea275d1490a4be841e"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -165,8 +165,13 @@
   try {
     if (localStorage.setContrast === '1') {
       document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
     }
-  } catch(e) {}
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
 })();
 </script>
 
@@ -189,7 +194,7 @@
                     
 
                     
-                    <div class="inner">
+                    <div class="inner sticky" data-autoexpand="true">
 
                         
                         <div class="qe-page__toc-header">
@@ -227,12 +232,14 @@
                             
                             
                             
-                            <p><a href="#top"><strong>Back to top</strong></a></p>
+                            
                             
                         </div>
 
                     </div>
 
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
                     
 
                 </div>
@@ -274,7 +281,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">5 months ago</span>
+                                <span class="changelog-time">7 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -374,7 +381,7 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.1)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -708,7 +715,7 @@ consumption and investment</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c9c04deb103fac5fc075ff7e33133c4b6bff1fa9b5f8fc8f72e81b1eb0e4ca65.png" src="_images/c9c04deb103fac5fc075ff7e33133c4b6bff1fa9b5f8fc8f72e81b1eb0e4ca65.png" />
+<img alt="_images/ea5b5e6ca993bce744dca87f7e60ab8d8b2204c2ab66de547b0765fe5af0a0a2.png" src="_images/ea5b5e6ca993bce744dca87f7e60ab8d8b2204c2ab66de547b0765fe5af0a0a2.png" />
 </div>
 </div>
 <p>Inspection of the plot shows that the sample paths of consumption and
@@ -826,7 +833,7 @@ consumption and investment</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5888edfda075b18389b16fe87959f88bbee0dbeb9dd5fdea0722d4249b9bbcc2.png" src="_images/5888edfda075b18389b16fe87959f88bbee0dbeb9dd5fdea0722d4249b9bbcc2.png" />
+<img alt="_images/bdf29f77978b5f710e749197905a23c00bb88458852f6a9b5b3149a5663f3f42.png" src="_images/bdf29f77978b5f710e749197905a23c00bb88458852f6a9b5b3149a5663f3f42.png" />
 </div>
 </div>
 <p>Simulating our new economy shows that consumption grows quickly in the
@@ -922,7 +929,7 @@ define the new value of <span class="math notranslate nohighlight">\(\lambda\)</
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/147026938a2ec02428e72443dd2860e05dd755706d7654c8475c3d8723daa84b.png" src="_images/147026938a2ec02428e72443dd2860e05dd755706d7654c8475c3d8723daa84b.png" />
+<img alt="_images/ab63b287d2170b0a026177cffe46cb7e461043711f7c5b7272dd6a00a8d7050e.png" src="_images/ab63b287d2170b0a026177cffe46cb7e461043711f7c5b7272dd6a00a8d7050e.png" />
 </div>
 </div>
 <p>Thus, adding habit persistence to the Hall model of Example 1 is enough
@@ -967,7 +974,7 @@ consider the following experiments.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5285b41547e0dba6b7f76f483f8cbc59f0d7eb09e34d7e33f1e362c1ba5a4700.png" src="_images/5285b41547e0dba6b7f76f483f8cbc59f0d7eb09e34d7e33f1e362c1ba5a4700.png" />
+<img alt="_images/8fe419f51f1aef64dff7eb6d4f8c860c09baf52b131a08163862825ca4a52b2b.png" src="_images/8fe419f51f1aef64dff7eb6d4f8c860c09baf52b131a08163862825ca4a52b2b.png" />
 </div>
 </div>
 <p>We no longer achieve sustained growth if <span class="math notranslate nohighlight">\(\lambda\)</span> is raised from -1 to -0.7.</p>
@@ -1006,7 +1013,7 @@ eigenvalues is now less than 1.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/71835d006448378b420ef2ff5055ed92e52fa2ea8fe30f41c714b2f5805f2a71.png" src="_images/71835d006448378b420ef2ff5055ed92e52fa2ea8fe30f41c714b2f5805f2a71.png" />
+<img alt="_images/95919d28ba77a6582a396c6eb95a51d5c01c3fc71811f754e2cda4cba6d84fb8.png" src="_images/95919d28ba77a6582a396c6eb95a51d5c01c3fc71811f754e2cda4cba6d84fb8.png" />
 </div>
 </div>
 <p>Growth also fails if we lower <span class="math notranslate nohighlight">\(\beta\)</span>, since we now have
