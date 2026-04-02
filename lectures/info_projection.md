@@ -564,7 +564,7 @@ $$
 \delta_{\text{true}} = \frac{\lambda + \alpha(1-\lambda)}{1 + \alpha(1-\lambda)}.
 $$
 
-The figure below contrasts the true $\delta$ with Jacobs' population value $y_1 = 1$.
+The figure below contrasts the true $\delta$ with Jacobs' population value $y_1 = 1$
 
 ```{code-cell} ipython3
 λ_vals = [0.3, 0.5, 0.7]
@@ -841,6 +841,8 @@ Comment on how the bias depends on $\alpha$.
 :class: dropdown
 ```
 
+Here is one solution.
+
 ```{code-cell} ipython3
 def jacobs_population_params_ex2(α, λ, σ_η2=1.0, σ_ε2=0.5, σ_εη=0.0):
     """Return Jacobs' coefficients and the true value of δ."""
@@ -852,6 +854,8 @@ def jacobs_population_params_ex2(α, λ, σ_η2=1.0, σ_ε2=0.5, σ_εη=0.0):
 
     return y0, y1, h0, h1, h2, δ_true
 ```
+
+The following figure shows the bias of Jacobs' population stability parameter $y_1$ relative to the true value $\delta_{\text{true}}$
 
 ```{code-cell} ipython3
 λ_vals = [0.3, 0.5, 0.7]

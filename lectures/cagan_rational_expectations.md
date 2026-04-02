@@ -1662,6 +1662,10 @@ Wallace-Sargent value $-\lambda / (1-\lambda)$?
 :class: dropdown
 ```
 
+Here is one solution.
+
+The following code plots the bias of Cagan's estimator as a function of $\alpha$ for three values of $\lambda$
+
 ```{code-cell} ipython3
 α_grid = np.linspace(-5.0, -0.1, 300)
 λ_vals = [0.4, 0.6, 0.8]
