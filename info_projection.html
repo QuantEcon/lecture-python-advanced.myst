@@ -1,0 +1,1880 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>37. Hyperinflation and Information Projection &#8212; Advanced Quantitative Economics with Python</title>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
+            tex: {
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'info_projection';</script>
+    <link rel="canonical" href="https://python-advanced.quantecon.org/info_projection.html" />
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="38. Asset Pricing II: The Lucas Asset Pricing Model" href="lucas_model.html" />
+    <link rel="prev" title="36. Demand for Money during Hyperinflations under Rational Expectations" href="cagan_rational_expectations.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="Hyperinflation and Information Projection"/>
+<meta name="twitter:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="Hyperinflation and Information Projection" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://python-advanced.quantecon.org/info_projection.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
+<!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
+
+    <span id="top"></span>
+
+    <div class="qe-wrapper">
+
+        <div class="qe-main">
+
+            <div class="qe-page" id=info_projection>
+
+                <div class="qe-page__toc">
+
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
+
+                        
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">37.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cagans-hyperinflation-model">37.2. Cagan’s hyperinflation model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobs-estimator">37.3. Jacobs’ estimator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#rational-expectations-and-the-moneyprice-process">37.4. Rational expectations and the money–price process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-projection-via-the-wienerkolmogorov-formula">37.5. Information projection via the Wiener–Kolmogorov formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobs-constrained-parameterization-and-the-approximation-criterion">37.6. Jacobs’ constrained parameterization and the approximation criterion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jacobs-hyperinflation-estimates">37.7. Jacobs’ hyperinflation estimates</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#information-projection-a-closer-look">37.8. Information projection: a closer look</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-approximation-criterion-in-detail">37.9. The approximation criterion in detail</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">37.10. Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">37.11. Exercises</a></li>
+</ul>
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo logo-img" alt="logo"></a>
+                                    
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="qe-page__toc-footer">
+                            
+                            
+                            
+                            
+                            
+                        </div>
+
+                    </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
+
+                </div>
+
+                <div class="qe-page__header">
+
+                    <div class="qe-page__header-copy">
+
+                        <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+
+                    </div>
+
+                    <!-- Authors section -->
+                        <p class="qe-page__header-authors" font-size="18">
+                            
+                                
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>Thomas J. Sargent</span></a>
+                                
+                            
+                                
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>John Stachurski</span></a>
+                                
+                            
+                        </p>
+
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 02, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commits/main/lectures/info_projection.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/61ad5b7d" class="changelog-hash">61ad5b7d</a>
+                                
+                                <span class="changelog-author">Humphrey Yang</span>
+                                <span class="changelog-time">10 minutes ago</span>
+                                <span class="changelog-message">Update information projection lectures (#319)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="qe-page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" align="right" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><section class="tex2jax_ignore mathjax_ignore" id="hyperinflation-and-information-projection">
+<h1><a class="toc-backref" href="#id15" role="doc-backlink"><span class="section-number">37. </span>Hyperinflation and Information Projection</a><a class="headerlink" href="#hyperinflation-and-information-projection" title="Link to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<span id="index-0"></span><p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#hyperinflation-and-information-projection" id="id15">Hyperinflation and Information Projection</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id16">Overview</a></p></li>
+<li><p><a class="reference internal" href="#cagans-hyperinflation-model" id="id17">Cagan’s hyperinflation model</a></p></li>
+<li><p><a class="reference internal" href="#jacobs-estimator" id="id18">Jacobs’ estimator</a></p></li>
+<li><p><a class="reference internal" href="#rational-expectations-and-the-moneyprice-process" id="id19">Rational expectations and the money–price process</a></p></li>
+<li><p><a class="reference internal" href="#information-projection-via-the-wienerkolmogorov-formula" id="id20">Information projection via the Wiener–Kolmogorov formula</a></p></li>
+<li><p><a class="reference internal" href="#jacobs-constrained-parameterization-and-the-approximation-criterion" id="id21">Jacobs’ constrained parameterization and the approximation criterion</a></p></li>
+<li><p><a class="reference internal" href="#jacobs-hyperinflation-estimates" id="id22">Jacobs’ hyperinflation estimates</a></p></li>
+<li><p><a class="reference internal" href="#information-projection-a-closer-look" id="id23">Information projection: a closer look</a></p></li>
+<li><p><a class="reference internal" href="#the-approximation-criterion-in-detail" id="id24">The approximation criterion in detail</a></p></li>
+<li><p><a class="reference internal" href="#summary" id="id25">Summary</a></p></li>
+<li><p><a class="reference internal" href="#exercises" id="id26">Exercises</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink"><span class="section-number">37.1. </span>Overview</a><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>This lecture presents the analysis in <span id="id1">[<a class="reference internal" href="zreferences.html#id9" title="Thomas Sargent. Econometric exogeneity and alternative estimators of portfolio balance schedules for hyperinflations: a note. Journal of Monetary Economics, 2(4):511–521, 1976.">Sargent, 1976</a>]</span>, which examines the statistical properties of competing estimators of Cagan’s portfolio-balance equation <span id="id2">[<a class="reference internal" href="zreferences.html#id94" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span> during hyperinflations.</p>
+<p>The topic involves three estimators:</p>
+<ul class="simple">
+<li><p><strong>Cagan’s estimator</strong> — <span id="id3">Cagan [<a class="reference internal" href="zreferences.html#id94" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">1956</a>]</span> regresses real balances on past inflation rates, and is consistent when its orthogonality condition holds.</p></li>
+<li><p><strong>Jacobs’ estimator</strong> — <span id="id4">Jacobs [<a class="reference internal" href="zreferences.html#id11" title="Rodney L Jacobs. A difficulty with monetarist models of hyperinflation. Economic Inquiry, sep 1975.">1975</a>]</span> inverts the equation and regresses real balances on past money growth rates, and is consistent only if money is exogenous.</p></li>
+<li><p><strong>Sargent’s critique</strong> — uses a rational expectations model to show that Jacobs’ estimator is biased when money is not exogenous, and predicts its population limit <span id="id5">[<a class="reference internal" href="zreferences.html#id9" title="Thomas Sargent. Econometric exogeneity and alternative estimators of portfolio balance schedules for hyperinflations: a note. Journal of Monetary Economics, 2(4):511–521, 1976.">Sargent, 1976</a>]</span>.</p></li>
+</ul>
+<p>The key computational technique is <strong>information projection</strong> via the Wiener–Kolmogorov formula, which computes the optimal linear least-squares projection of one covariance-stationary process onto current and past values of another.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See footnote 17 of <span id="id6">Sargent [<a class="reference internal" href="zreferences.html#id8" title="Thomas J Sargent. Macroeconomics after lucas. Journal of Political Economy, 133(11):3390–3417, 2025.">2025</a>]</span> for an explanation of information projection in macroeconomics.</p>
+<p>For background on Kullback-Leibler divergence, see <a class="reference external" href="https://python.quantecon.org/divergence_measures.html" title="(in Project name not set)"><span>Statistical Divergence Measures</span></a> and <a class="reference external" href="https://python.quantecon.org/likelihood_bayes.html" title="(in Project name not set)"><span>Likelihood Ratio Processes and Bayesian Learning</span></a>.</p>
+<p>If nature generates data from <span class="math notranslate nohighlight">\(g_{\delta_0}(x)\)</span> and we fit the misspecified family <span class="math notranslate nohighlight">\(\{f_\theta(x)\}_{\theta \in \Theta}\)</span>, the population maximum likelihood estimator solves <span class="math notranslate nohighlight">\(\theta_0 = \operatorname{argmax}_{\theta \in \Theta} E_{g_{\delta_0}} \log f_\theta(x)\)</span>.</p>
+<p>Equivalently, <span class="math notranslate nohighlight">\(f_{\theta_0}(x)\)</span> is the element of <span class="math notranslate nohighlight">\(\{f_\theta(x)\}_{\theta \in \Theta}\)</span> closest to <span class="math notranslate nohighlight">\(g_{\delta_0}(x)\)</span> in Kullback-Leibler divergence.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See chapter XI of <span id="id7">Sargent [<a class="reference internal" href="zreferences.html#id213" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">1987</a>]</span> for a discussion of the Wiener–Kolmogorov formula and its applications in macroeconomics, and <a class="reference external" href="https://python.quantecon.org/linear_models.html" title="(in Project name not set)"><span>Linear State Space Models</span></a> for related linear prediction theory.</p>
+</div>
+<p>This delivers the <em>population regression</em> that OLS converges to, regardless of whether the regression is correctly specified.</p>
+<p>We begin with imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cagans-hyperinflation-model">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink"><span class="section-number">37.2. </span>Cagan’s hyperinflation model</a><a class="headerlink" href="#cagans-hyperinflation-model" title="Link to this heading">#</a></h2>
+<p>For background on the Cagan model, see the introductory lectures <a class="reference external" href="https://intro.quantecon.org/cagan_ree.html" title="(in Project name not set)"><span>A Monetarist Theory of Price Levels</span></a> and <a class="reference external" href="https://intro.quantecon.org/cagan_adaptive.html" title="(in Project name not set)"><span>Monetarist Theory of Price Levels with Adaptive Expectations</span></a>.</p>
+<p>Cagan’s <span id="id8">[<a class="reference internal" href="zreferences.html#id94" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">Cagan, 1956</a>]</span> model of portfolio balance during hyperinflation has two equations.</p>
+<p>The first is a portfolio-balance equation:</p>
+<div class="math notranslate nohighlight" id="equation-eq-portfolio-balance">
+<span class="eqno">(37.1)<a class="headerlink" href="#equation-eq-portfolio-balance" title="Link to this equation">#</a></span>\[
+m_t - p_t = \alpha \pi_t + u_t, \qquad \alpha &lt; 0
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(m_t\)</span> is the log money supply, <span class="math notranslate nohighlight">\(p_t\)</span> is the log price level, <span class="math notranslate nohighlight">\(\pi_t\)</span> is expected inflation, and <span class="math notranslate nohighlight">\(u_t\)</span> is a disturbance.</p>
+<p>The second is an adaptive expectations equation:</p>
+<div class="math notranslate nohighlight" id="equation-eq-adaptive-exp">
+<span class="eqno">(37.2)<a class="headerlink" href="#equation-eq-adaptive-exp" title="Link to this equation">#</a></span>\[
+\pi_t = \frac{1-\lambda}{1 - \lambda L} (p_t - p_{t-1}), \qquad 0 &lt; \lambda &lt; 1
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(L\)</span> is the lag operator, <span class="math notranslate nohighlight">\(L^k x_t = x_{t-k}\)</span>.</p>
+<p>Substituting <a class="reference internal" href="#equation-eq-adaptive-exp">(37.2)</a> into <a class="reference internal" href="#equation-eq-portfolio-balance">(37.1)</a> yields Cagan’s regression equation:</p>
+<div class="math notranslate nohighlight" id="equation-eq-cagan-regression">
+<span class="eqno">(37.3)<a class="headerlink" href="#equation-eq-cagan-regression" title="Link to this equation">#</a></span>\[
+m_t - p_t = \alpha(1-\lambda) \sum_{i=0}^{\infty} \lambda^i (p_{t-i} - p_{t-i-1}) + u_t^*
+\]</div>
+<p>Cagan estimated this equation by nonlinear least squares.</p>
+<p>The estimator is <em>consistent</em> if and only if <span class="math notranslate nohighlight">\(u_t^*\)</span> is orthogonal to current and past <span class="math notranslate nohighlight">\((p_t - p_{t-1})\)</span>, i.e.,</p>
+<div class="math notranslate nohighlight" id="equation-eq-orthogonality-cond">
+<span class="eqno">(37.4)<a class="headerlink" href="#equation-eq-orthogonality-cond" title="Link to this equation">#</a></span>\[
+E[u_t^* (p_{t-j} - p_{t-j-1})] = 0, \qquad \text{for all } j \geq 0.
+\]</div>
+<p>A sufficient condition for <a class="reference internal" href="#equation-eq-orthogonality-cond">(37.4)</a> is that the price level is exogenous.</p>
+<p>In that case, money accommodates portfolio disturbances and leaves <span class="math notranslate nohighlight">\(\Delta p_t\)</span> unaffected by <span class="math notranslate nohighlight">\(u_t\)</span>.</p>
+<p><span id="id9">Jacobs [<a class="reference internal" href="zreferences.html#id11" title="Rodney L Jacobs. A difficulty with monetarist models of hyperinflation. Economic Inquiry, sep 1975.">1975</a>]</span> noted that if money is exogenous instead, in the sense that</p>
+<div class="math notranslate nohighlight" id="equation-eq-exogeneity-cond">
+<span class="eqno">(37.5)<a class="headerlink" href="#equation-eq-exogeneity-cond" title="Link to this equation">#</a></span>\[
+E[m_s u_t] = 0, \qquad \text{for all } s, t,
+\]</div>
+<p>then <a class="reference internal" href="#equation-eq-orthogonality-cond">(37.4)</a> generally
+<em>fails</em>.</p>
+<p>When money does not respond to disturbances <span class="math notranslate nohighlight">\(u_t\)</span>, the price level
+must absorb them — creating a correlation between <span class="math notranslate nohighlight">\(p_t\)</span> and <span class="math notranslate nohighlight">\(u_t\)</span> that
+invalidates Cagan’s orthogonality condition.</p>
+</section>
+<section id="jacobs-estimator">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink"><span class="section-number">37.3. </span>Jacobs’ estimator</a><a class="headerlink" href="#jacobs-estimator" title="Link to this heading">#</a></h2>
+<p>When money is exogenous, Jacobs’ argument is to <em>invert</em> <a class="reference internal" href="#equation-eq-cagan-regression">(37.3)</a> and solve
+for a relationship in which money is the regressor.</p>
+<p>Solving <a class="reference internal" href="#equation-eq-cagan-regression">(37.3)</a> for <span class="math notranslate nohighlight">\(p\)</span> as a function of current and lagged <span class="math notranslate nohighlight">\(m\)</span>’s and <span class="math notranslate nohighlight">\(u\)</span>’s, and then rearranging, gives:</p>
+<div class="math notranslate nohighlight" id="equation-eq-jacobs-eqn">
+<span class="eqno">(37.6)<a class="headerlink" href="#equation-eq-jacobs-eqn" title="Link to this equation">#</a></span>\[
+m_t - p_t = \frac{\alpha(1-\lambda)}{1 + \alpha(1-\lambda)} \sum_{i=0}^{\infty} \delta^i (m_{t-i} - m_{t-i-1}) + u_t'
+\]</div>
+<p>The <strong>stability parameter</strong> is</p>
+<div class="math notranslate nohighlight">
+\[
+\delta = \frac{\lambda + \alpha(1-\lambda)}{1 + \alpha(1-\lambda)},
+\]</div>
+<p>and the disturbance <span class="math notranslate nohighlight">\(u_t'\)</span> is orthogonal to all current and lagged <span class="math notranslate nohighlight">\(m\)</span>’s (under
+the exogeneity hypothesis).</p>
+<p>Jacobs estimated <a class="reference internal" href="#equation-eq-jacobs-eqn">(37.6)</a> by nonlinear least squares and obtained very different estimates of <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\lambda\)</span>, and <span class="math notranslate nohighlight">\(\delta\)</span> from Cagan’s.</p>
+<p>For five of the six hyperinflations in his sample, Jacobs found <span class="math notranslate nohighlight">\(\delta \approx 1\)</span>, which is close to the explosive boundary.</p>
+<p>This is economically significant because <span class="math notranslate nohighlight">\(\delta &lt; 1\)</span> is required for the
+hyperinflations to be driven purely by monetary growth rather than self-sustaining
+explosive dynamics.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The econometric exogeneity tests in <span id="id10">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id17" title="Thomas J Sargent and Neil Wallace. Rational expectations and the dynamics of hyperinflation. International economic review, pages 328–350, 1973.">1973</a>]</span> found strong evidence <em>against</em> the hypothesis that <span class="math notranslate nohighlight">\(m\)</span> is exogenous with respect to <span class="math notranslate nohighlight">\(p\)</span> in the hyperinflation data.</p>
+<p>A “real bills” regime, in which the monetary authority accommodates inflation, necessarily creates feedback from prices to money creation and invalidates Jacobs’ identifying assumption.</p>
+</div>
+</section>
+<section id="rational-expectations-and-the-moneyprice-process">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink"><span class="section-number">37.4. </span>Rational expectations and the money–price process</a><a class="headerlink" href="#rational-expectations-and-the-moneyprice-process" title="Link to this heading">#</a></h2>
+<p>To evaluate Jacobs’ estimator under a failure of money exogeneity, <span id="id11">Sargent [<a class="reference internal" href="zreferences.html#id9" title="Thomas Sargent. Econometric exogeneity and alternative estimators of portfolio balance schedules for hyperinflations: a note. Journal of Monetary Economics, 2(4):511–521, 1976.">1976</a>]</span> assumes that Cagan’s adaptive expectations scheme is equivalent to rational expectations.</p>
+<p>The inflation-money creation process is then governed by</p>
+<div class="math notranslate nohighlight" id="equation-eq-inflation-process">
+<span class="eqno">(37.7)<a class="headerlink" href="#equation-eq-inflation-process" title="Link to this equation">#</a></span>\[
+x_t = \phi (1-\lambda L)(\varepsilon_t - \eta_t)
+\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-money-supply-process">
+<span class="eqno">(37.8)<a class="headerlink" href="#equation-eq-money-supply-process" title="Link to this equation">#</a></span>\[
+M_t = \phi(1-\lambda)(\varepsilon_t - \eta_t) + (1-L)\varepsilon_t
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight" id="equation-eq-process-definitions">
+<span class="eqno">(37.9)<a class="headerlink" href="#equation-eq-process-definitions" title="Link to this equation">#</a></span>\[
+x_t = (1-L)^2 p_t, \qquad M_t = (1-L)^2 m_t, \qquad \phi = \frac{1}{\lambda + \alpha(1 - \lambda)},
+\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[
+\eta_t = u_t - u_{t-1}.
+\]</div>
+<p>Here <span class="math notranslate nohighlight">\(\eta_t\)</span> and <span class="math notranslate nohighlight">\(\varepsilon_t\)</span> are serially independent random variables with means zero and finite variances
+<span class="math notranslate nohighlight">\(E[\eta_t^2] = \sigma_\eta^2\)</span> and <span class="math notranslate nohighlight">\(E[\varepsilon_t^2] = \sigma_\varepsilon^2\)</span>.</p>
+<p>We also allow a contemporaneous covariance</p>
+<div class="math notranslate nohighlight">
+\[
+E[\varepsilon_t \eta_t] = \sigma_{\varepsilon\eta},
+\]</div>
+<p>while <span class="math notranslate nohighlight">\(E[\varepsilon_{t-1}\eta_t] = E[\varepsilon_t \eta_{t-1}] = 0\)</span>.</p>
+<p>Under <a class="reference internal" href="#equation-eq-inflation-process">(37.7)</a> and <a class="reference internal" href="#equation-eq-money-supply-process">(37.8)</a>, the first difference of inflation, <span class="math notranslate nohighlight">\(x_t\)</span>, and the first difference of percentage money creation, <span class="math notranslate nohighlight">\(M_t\)</span>, are stationary, correlated MA(1) processes.</p>
+<p>The covariogram of <span class="math notranslate nohighlight">\(M\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+c(\tau) = E[M_t M_{t-\tau}].
+\]</div>
+<p>To keep the notation compact, set</p>
+<div class="math notranslate nohighlight">
+\[
+A = \phi(1-\lambda) + 1, \qquad B = \phi(1-\lambda).
+\]</div>
+<p>Then it is straightforward to calculate</p>
+<div class="math notranslate nohighlight">
+\[
+c(0) = (A^2 + 1)\sigma_\varepsilon^2 + B^2 \sigma_\eta^2 - 2AB \sigma_{\varepsilon\eta},
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+c(1) = c(-1) = -A \sigma_\varepsilon^2,
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+c(\tau) = 0, \qquad |\tau| &gt; 1.
+\]</div>
+<p>The cross-covariogram of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(M\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+r(\tau) = E[x_t M_{t-\tau}].
+\]</div>
+<p>Again, a direct calculation gives</p>
+<div class="math notranslate nohighlight">
+\[
+r(0) = \phi(A + \lambda)\sigma_\varepsilon^2 + \phi B \sigma_\eta^2
+       - \phi(A + B + \lambda)\sigma_{\varepsilon\eta},
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+r(1) = -\phi \lambda A \sigma_\varepsilon^2 - \phi \lambda B \sigma_\eta^2
+       + \phi \lambda (A + B)\sigma_{\varepsilon\eta},
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+r(-1) = -\phi(\sigma_\varepsilon^2 - \sigma_{\varepsilon\eta}),
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+r(\tau) = 0, \qquad |\tau| &gt; 1.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">structural_to_ma1</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">,</span> <span class="n">σ_η2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">σ_ε2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">σ_εη</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return c(0), c(1), r(-1), r(0), and r(1) for the MA(1) reduced form.&quot;&quot;&quot;</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="n">λ</span> <span class="o">+</span> <span class="n">α</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">denom</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;λ + α(1 - λ) must be nonzero.&quot;</span><span class="p">)</span>
+
+    <span class="n">φ</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="n">denom</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">φ</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.0</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">φ</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">)</span>
+
+    <span class="n">c0</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="n">σ_ε2</span> <span class="o">+</span> <span class="n">B</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">σ_η2</span> <span class="o">-</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">B</span> <span class="o">*</span> <span class="n">σ_εη</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="o">-</span><span class="n">A</span> <span class="o">*</span> <span class="n">σ_ε2</span>
+
+    <span class="n">r_m1</span> <span class="o">=</span> <span class="o">-</span><span class="n">φ</span> <span class="o">*</span> <span class="p">(</span><span class="n">σ_ε2</span> <span class="o">-</span> <span class="n">σ_εη</span><span class="p">)</span>
+    <span class="n">r0</span> <span class="o">=</span> <span class="n">φ</span> <span class="o">*</span> <span class="p">(</span><span class="n">A</span> <span class="o">+</span> <span class="n">λ</span><span class="p">)</span> <span class="o">*</span> <span class="n">σ_ε2</span> <span class="o">+</span> <span class="n">φ</span> <span class="o">*</span> <span class="n">B</span> <span class="o">*</span> <span class="n">σ_η2</span> <span class="o">-</span> <span class="n">φ</span> <span class="o">*</span> <span class="p">(</span><span class="n">A</span> <span class="o">+</span> <span class="n">B</span> <span class="o">+</span> <span class="n">λ</span><span class="p">)</span> <span class="o">*</span> <span class="n">σ_εη</span>
+    <span class="n">r1</span> <span class="o">=</span> <span class="o">-</span><span class="n">φ</span> <span class="o">*</span> <span class="n">λ</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">σ_ε2</span> <span class="o">-</span> <span class="n">φ</span> <span class="o">*</span> <span class="n">λ</span> <span class="o">*</span> <span class="n">B</span> <span class="o">*</span> <span class="n">σ_η2</span> <span class="o">+</span> <span class="n">φ</span> <span class="o">*</span> <span class="n">λ</span> <span class="o">*</span> <span class="p">(</span><span class="n">A</span> <span class="o">+</span> <span class="n">B</span><span class="p">)</span> <span class="o">*</span> <span class="n">σ_εη</span>
+
+    <span class="k">return</span> <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r_m1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="information-projection-via-the-wienerkolmogorov-formula">
+<h2><a class="toc-backref" href="#id20" role="doc-backlink"><span class="section-number">37.5. </span>Information projection via the Wiener–Kolmogorov formula</a><a class="headerlink" href="#information-projection-via-the-wienerkolmogorov-formula" title="Link to this heading">#</a></h2>
+<p>We now use the Wiener–Kolmogorov formula to compute the population regression of one process on the current and past values of another.</p>
+<p>Given jointly covariance-stationary processes <span class="math notranslate nohighlight">\(\{x_t\}\)</span> and <span class="math notranslate nohighlight">\(\{M_t\}\)</span>, the one-sided projection of <span class="math notranslate nohighlight">\(x_t\)</span> onto <span class="math notranslate nohighlight">\(\{M_t, M_{t-1}, M_{t-2}, \ldots\}\)</span> is the linear combination</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{x}_t = \Theta(L) M_t = \sum_{j=0}^{\infty} \theta_j M_{t-j}
+\]</div>
+<p>that minimizes the mean-squared prediction error <span class="math notranslate nohighlight">\(E[(x_t - \hat{x}_t)^2]\)</span>.</p>
+<p>The sequence <span class="math notranslate nohighlight">\(\{\theta_j\}\)</span>, equivalently its generating function <span class="math notranslate nohighlight">\(\Theta(z) = \sum_{j=0}^{\infty} \theta_j z^j\)</span>, is the lag-generating function of the population regression.</p>
+<p>The filter satisfies the Wiener–Hopf equation:</p>
+<div class="math notranslate nohighlight">
+\[
+\sum_{k=0}^{\infty} \theta_k c(j-k) = r(j), \qquad j = 0, 1, 2, \ldots
+\]</div>
+<p>The covariance generating function of <span class="math notranslate nohighlight">\(M\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+c(z) = \sum_{\tau=-1}^{1} c(\tau) z^\tau
+\]</div>
+<p>and the cross-covariance generating function is</p>
+<div class="math notranslate nohighlight">
+\[
+r(z) = \sum_{\tau=-1}^{1} r(\tau) z^\tau.
+\]</div>
+<p>Since <span class="math notranslate nohighlight">\(M_t\)</span> is an MA(1), we can factor</p>
+<div class="math notranslate nohighlight">
+\[
+c(z) = c(1)z^{-1} + c(0) + c(1)z = (b_0 + b_1 z)(b_0 + b_1 z^{-1})
+\]</div>
+<p>or, equivalently,</p>
+<div class="math notranslate nohighlight">
+\[
+c(z) = b_0^2(1 + bz)(1 + bz^{-1}), \qquad b = \frac{b_1}{b_0}.
+\]</div>
+<p>Under the fundamental factorization, <span class="math notranslate nohighlight">\(|b| &lt; 1\)</span>.</p>
+<p>The Wiener–Kolmogorov formula then gives</p>
+<div class="math notranslate nohighlight">
+\[
+\Theta(z) = \frac{1}{b_0^2(1+bz)} \left[\frac{r(-1)z^{-1} + r(0) + r(1)z}{1 + bz^{-1}}\right]_+
+\]</div>
+<p>where <span class="math notranslate nohighlight">\([\cdot]_+\)</span> means <em>ignore all negative powers of <span class="math notranslate nohighlight">\(z\)</span></em>.</p>
+<p>We use the projection in two ways:</p>
+<ol class="arabic simple">
+<li><p>Compute the unconstrained population regression of <span class="math notranslate nohighlight">\(x_t\)</span> on current and past values of <span class="math notranslate nohighlight">\(M_t\)</span>, then convert it into the corresponding regression for <span class="math notranslate nohighlight">\(M_t - x_t\)</span>.</p></li>
+<li><p>Study the constrained regression in <a class="reference internal" href="#equation-eq-jacobs-constrained">(37.12)</a>, which minimizes a weighted approximation criterion.</p></li>
+</ol>
+<p>The non-stationarity of the money supply, whose spectrum is unbounded at <span class="math notranslate nohighlight">\(\omega = 0\)</span>, means that the approximation criterion is dominated by behavior near the zero frequency.</p>
+<p>This forces Jacobs’ estimated stability parameter <span class="math notranslate nohighlight">\(\hat{\delta}\)</span> to converge to 1 in population.</p>
+<p>Matching coefficients gives <span class="math notranslate nohighlight">\(b_0 b_1 = c(1)\)</span> and <span class="math notranslate nohighlight">\(b_0^2 + b_1^2 = c(0)\)</span>, so <span class="math notranslate nohighlight">\(b\)</span> solves</p>
+<div class="math notranslate nohighlight">
+\[
+b + \frac{1}{b} = \frac{c(0)}{c(1)}.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">spectral_factor</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the fundamental spectral factor of an MA(1) spectrum.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">c0</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;c(0) must be positive.&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mf">1e-14</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c0</span><span class="p">),</span> <span class="mf">0.0</span>
+
+    <span class="n">ratio</span> <span class="o">=</span> <span class="n">c0</span> <span class="o">/</span> <span class="n">c1</span>
+    <span class="n">disc</span> <span class="o">=</span> <span class="n">ratio</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mf">4.0</span>
+    <span class="k">if</span> <span class="n">disc</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Spectral density not non-negative definite.&quot;</span><span class="p">)</span>
+
+    <span class="n">roots</span> <span class="o">=</span> <span class="p">[(</span><span class="n">ratio</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">disc</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">,</span> <span class="p">(</span><span class="n">ratio</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">disc</span><span class="p">))</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">]</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">roots</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">abs</span><span class="p">)</span>
+    <span class="n">b0_sq</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">/</span> <span class="n">b</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">b0_sq</span><span class="p">)),</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Since <span class="math notranslate nohighlight">\(|b| &lt; 1\)</span>, we can expand</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{1 + b z^{-1}} = \sum_{j=0}^{\infty} (-b)^j z^{-j}
+\]</div>
+<p>and ignore all negative powers of <span class="math notranslate nohighlight">\(z\)</span>.
+The <span class="math notranslate nohighlight">\(r(-1)z^{-1}\)</span> term therefore drops out, leaving</p>
+<div class="math notranslate nohighlight">
+\[
+\left[ \frac{r(-1)z^{-1} + r(0) + r(1)z}{1+bz^{-1}} \right]_+ = (r(0) - r(1)b) + r(1)z
+\]</div>
+<p>Therefore,</p>
+<div class="math notranslate nohighlight" id="equation-eq-theta-formula">
+<span class="eqno">(37.10)<a class="headerlink" href="#equation-eq-theta-formula" title="Link to this equation">#</a></span>\[
+\Theta(z) = \frac{(r(0) - r(1)b) + r(1)z}{b_0^2(1 + bz)}
+\]</div>
+<p>This is the population regression of <span class="math notranslate nohighlight">\(x_t\)</span> on current and past values of <span class="math notranslate nohighlight">\(M_t\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">wiener_kolmogorov_projection</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the projection filter coefficients.&quot;&quot;&quot;</span>
+    <span class="n">b0</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">spectral_factor</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">)</span>
+    <span class="n">b0_sq</span> <span class="o">=</span> <span class="n">b0</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">A</span> <span class="o">=</span> <span class="n">r0</span> <span class="o">-</span> <span class="n">r1</span> <span class="o">*</span> <span class="n">b</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">r1</span>
+
+    <span class="k">return</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To study Jacobs’ regression, we need the projection of <span class="math notranslate nohighlight">\(M_t - x_t\)</span> on current and past values of <span class="math notranslate nohighlight">\(M_t\)</span>.</p>
+<p>The corresponding lag-generating function is:</p>
+<div class="math notranslate nohighlight">
+\[
+H(z) = 1 - \Theta(z)
+\]</div>
+<p>This simplifies to</p>
+<div class="math notranslate nohighlight" id="equation-eq-h-formula">
+<span class="eqno">(37.11)<a class="headerlink" href="#equation-eq-h-formula" title="Link to this equation">#</a></span>\[
+H(z) = \frac{h_0 + h_1 z}{1 - h_2 z}
+\]</div>
+<p>The coefficients are:</p>
+<div class="math notranslate nohighlight">
+\[
+h_0 = 1 - \frac{A}{b_0^2}, \qquad
+h_1 = b - \frac{B}{b_0^2}, \qquad
+h_2 = -b.
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_h_coefficients</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the coefficients in the filter H(z).&quot;&quot;&quot;</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">wiener_kolmogorov_projection</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+    <span class="n">b0_sq</span> <span class="o">=</span> <span class="n">b0</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">h0</span> <span class="o">=</span> <span class="p">(</span><span class="n">b0_sq</span> <span class="o">-</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">b0_sq</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="p">(</span><span class="n">b0_sq</span> <span class="o">*</span> <span class="n">b</span> <span class="o">-</span> <span class="n">B</span><span class="p">)</span> <span class="o">/</span> <span class="n">b0_sq</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span>
+
+    <span class="k">return</span> <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="jacobs-constrained-parameterization-and-the-approximation-criterion">
+<h2><a class="toc-backref" href="#id21" role="doc-backlink"><span class="section-number">37.6. </span>Jacobs’ constrained parameterization and the approximation criterion</a><a class="headerlink" href="#jacobs-constrained-parameterization-and-the-approximation-criterion" title="Link to this heading">#</a></h2>
+<p>Jacobs estimated the constrained version of the population regression:</p>
+<div class="math notranslate nohighlight" id="equation-eq-jacobs-constrained">
+<span class="eqno">(37.12)<a class="headerlink" href="#equation-eq-jacobs-constrained" title="Link to this equation">#</a></span>\[
+m_t - p_t = \frac{y_0}{1 - y_1 L}(1-L)m_t + \text{residual} .
+\]</div>
+<p>He interpreted <span class="math notranslate nohighlight">\(y_0 = \alpha (1 - \lambda) / [1 + \alpha (1 - \lambda)]\)</span> and <span class="math notranslate nohighlight">\(y_1 = \delta\)</span>.</p>
+<p>When the rational expectations model is correct, the unconstrained population regression has the form <a class="reference internal" href="#equation-eq-h-formula">(37.11)</a>, so Jacobs’ parameterization is a binding restriction.</p>
+<p>Let <span class="math notranslate nohighlight">\(S_m(\omega)\)</span> denote the spectral density of <span class="math notranslate nohighlight">\(m_t\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(m_t\)</span> is integrated, <span class="math notranslate nohighlight">\(S_m(\omega)\)</span> is unbounded at <span class="math notranslate nohighlight">\(\omega = 0\)</span>.</p>
+<p>The approximation criterion is therefore dominated by behavior at <span class="math notranslate nohighlight">\(\omega = 0\)</span>.</p>
+<p>Note that the least-squares estimators minimize the <em>rate at which the criterion diverges</em> near <span class="math notranslate nohighlight">\(\omega = 0\)</span>, which gives</p>
+<div class="math notranslate nohighlight" id="equation-eq-jacobs-result">
+<span class="eqno">(37.13)<a class="headerlink" href="#equation-eq-jacobs-result" title="Link to this equation">#</a></span>\[
+y_1 = 1, \qquad y_0 = \frac{h_0 + h_1}{1 - h_2}
+\]</div>
+<p>Thus the stability parameter estimated by Jacobs’ procedure converges to unity in population for all admissible values of <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\lambda\)</span>, and the shock moments.</p>
+<p>This provides a complete explanation for Jacobs’ empirical finding that <span class="math notranslate nohighlight">\(\hat{\delta} \approx 1\)</span> in five of the six hyperinflations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">jacobs_population_params</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">,</span> <span class="n">σ_η2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">σ_ε2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">σ_εη</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return Jacobs&#39; population coefficients and the unrestricted filter.&quot;&quot;&quot;</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">structural_to_ma1</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">,</span> <span class="n">σ_η2</span><span class="p">,</span> <span class="n">σ_ε2</span><span class="p">,</span> <span class="n">σ_εη</span><span class="p">)</span>
+    <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">compute_h_coefficients</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">(</span><span class="n">h0</span> <span class="o">+</span> <span class="n">h1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">h2</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We sweep over a grid of admissible structural parameters and confirm that <span class="math notranslate nohighlight">\(y_1 = 1\)</span> in every case.</p>
+<p>Unless otherwise stated, we set <span class="math notranslate nohighlight">\(\sigma_\eta^2 = 1\)</span>, <span class="math notranslate nohighlight">\(\sigma_\varepsilon^2 = 0.5\)</span>, and <span class="math notranslate nohighlight">\(\sigma_{\varepsilon\eta} = 0\)</span> in the calculations below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">18</span><span class="p">)</span>
+<span class="n">λ_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="n">y1_vals</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">λ</span> <span class="ow">in</span> <span class="n">λ_vals</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">α</span> <span class="ow">in</span> <span class="n">α_vals</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">jacobs_population_params</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">y1_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Parameter combinations tested: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">y1_vals</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Range of y1 across all combinations: &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="nb">min</span><span class="p">(</span><span class="n">y1_vals</span><span class="p">)</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="n">y1_vals</span><span class="p">)</span><span class="si">:</span><span class="s2">.8f</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Max deviation from 1: </span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">y1_vals</span><span class="p">)</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Parameter combinations tested: 269
+Range of y1 across all combinations: [1.00000000, 1.00000000]
+Max deviation from 1: 0.00e+00
+</pre></div>
+</div>
+</div>
+</div>
+<p>The true regression <span class="math notranslate nohighlight">\(H(z) = (h_0 + h_1 z) / (1 - h_2 z)\)</span> has three free parameters.</p>
+<p>The figure below shows how <span class="math notranslate nohighlight">\(h_0\)</span>, <span class="math notranslate nohighlight">\(h_1\)</span>, and <span class="math notranslate nohighlight">\(h_2\)</span> vary with <span class="math notranslate nohighlight">\(\alpha\)</span> for fixed <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
+<p>Here we restrict attention to the branch where <span class="math notranslate nohighlight">\(\lambda + \alpha(1-\lambda) &gt; 0\)</span>, so <span class="math notranslate nohighlight">\(\phi\)</span> is well defined.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.95</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">λ</span> <span class="o">=</span> <span class="mf">0.5</span>
+
+<span class="n">h0_vals</span><span class="p">,</span> <span class="n">h1_vals</span><span class="p">,</span> <span class="n">h2_vals</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">α</span> <span class="ow">in</span> <span class="n">α_grid</span><span class="p">:</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">structural_to_ma1</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span>
+    <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">compute_h_coefficients</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+    <span class="n">h0_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h0</span><span class="p">)</span>
+    <span class="n">h1_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h1</span><span class="p">)</span>
+    <span class="n">h2_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">h2</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="sa">r</span><span class="s1">&#39;$h_0$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$h_1$&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;$h_2$  (= $-b$)&#39;</span><span class="p">]</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">h0_vals</span><span class="p">,</span> <span class="n">h1_vals</span><span class="p">,</span> <span class="n">h2_vals</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">α_grid</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\alpha$&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">α_grid</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">α_grid</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-regression-coefficients">
+<img alt="_images/daacc3ec7a6992e921bebe9aa8e99122c9fea2cd59125a65cce3250d41bb4413.png" src="_images/daacc3ec7a6992e921bebe9aa8e99122c9fea2cd59125a65cce3250d41bb4413.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 37.1 </span><span class="caption-text">Regression coefficients</span><a class="headerlink" href="#fig-regression-coefficients" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The source of the finding <span class="math notranslate nohighlight">\(y_1 \to 1\)</span> lies in the shape of <span class="math notranslate nohighlight">\(S_m(\omega)\)</span>.</p>
+<p>As <span class="math notranslate nohighlight">\(\omega \to 0\)</span>, the spectral density of the level <span class="math notranslate nohighlight">\(m_t\)</span> diverges because <span class="math notranslate nohighlight">\(m_t\)</span> is a unit-root process.</p>
+<p>The approximation criterion is therefore extremely sensitive to fit at <span class="math notranslate nohighlight">\(\omega = 0\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">spectral_density_M</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">ω</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the spectrum of M_t at frequency ω.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">ω</span><span class="p">)</span> <span class="o">+</span> <span class="n">c0</span> <span class="o">+</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">ω</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">spectral_density_m</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">ω</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the spectrum of m_t.&quot;&quot;&quot;</span>
+    <span class="n">denom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="n">ω</span> <span class="o">+</span> <span class="n">eps</span><span class="p">)))</span><span class="o">**</span><span class="mi">4</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">spectral_density_M</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">ω</span> <span class="o">+</span> <span class="n">eps</span><span class="p">))</span> <span class="o">/</span> <span class="n">denom</span>
+
+<span class="n">α</span><span class="p">,</span> <span class="n">λ</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span>
+<span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">structural_to_ma1</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span>
+
+<span class="n">ω_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">S_m</span> <span class="o">=</span> <span class="p">[</span><span class="n">spectral_density_m</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">ω</span><span class="p">)</span> <span class="k">for</span> <span class="n">ω</span> <span class="ow">in</span> <span class="n">ω_grid</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">ω_grid</span><span class="p">,</span> <span class="n">S_m</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;frequency $\omega$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$S_m(\omega)$ (log scale)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\omega=0$ (singularity)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-spectral-density-money">
+<img alt="_images/c622119df096fcaf73f24bc586954910b2b1afe97634a46649793ca3f12c8eee.png" src="_images/c622119df096fcaf73f24bc586954910b2b1afe97634a46649793ca3f12c8eee.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 37.2 </span><span class="caption-text">Spectrum or money creation rate</span><a class="headerlink" href="#fig-spectral-density-money" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The structural stability parameter that Jacobs wanted to estimate is</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_{\text{true}} = \frac{\lambda + \alpha(1-\lambda)}{1 + \alpha(1-\lambda)}.
+\]</div>
+<p>The figure below contrasts the true <span class="math notranslate nohighlight">\(\delta\)</span> with Jacobs’ population value <span class="math notranslate nohighlight">\(y_1 = 1\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">λ</span> <span class="ow">in</span> <span class="n">λ_vals</span><span class="p">:</span>
+    <span class="n">α_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">λ</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+    <span class="n">δ_true</span> <span class="o">=</span> <span class="p">(</span><span class="n">λ</span> <span class="o">+</span> <span class="n">α_grid</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">α_grid</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">α_grid</span><span class="p">,</span> <span class="n">δ_true</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;$\lambda=</span><span class="si">{</span><span class="n">λ</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Jacobs&#39; population $y_1=1$&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\alpha$ (demand semi-elasticity)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;stability parameter $\delta$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5f9bae281fa196c3591b83901c4494c942ce35d8d4c2b19a5b3ee8cdabddc428.png" src="_images/5f9bae281fa196c3591b83901c4494c942ce35d8d4c2b19a5b3ee8cdabddc428.png" />
+</div>
+</div>
+<p>The dashed line at <span class="math notranslate nohighlight">\(y_1 = 1\)</span> lies above the true value of <span class="math notranslate nohighlight">\(\delta\)</span> throughout the range shown.</p>
+<p>The gap widens as <span class="math notranslate nohighlight">\(\alpha\)</span> moves toward the boundary <span class="math notranslate nohighlight">\(\lambda + \alpha(1-\lambda) = 0\)</span> from the right.</p>
+</section>
+<section id="jacobs-hyperinflation-estimates">
+<h2><a class="toc-backref" href="#id22" role="doc-backlink"><span class="section-number">37.7. </span>Jacobs’ hyperinflation estimates</a><a class="headerlink" href="#jacobs-hyperinflation-estimates" title="Link to this heading">#</a></h2>
+<p>The table below reproduces the estimates from <span id="id12">[<a class="reference internal" href="zreferences.html#id11" title="Rodney L Jacobs. A difficulty with monetarist models of hyperinflation. Economic Inquiry, sep 1975.">Jacobs, 1975</a>]</span> as reported in <span id="id13">Sargent [<a class="reference internal" href="zreferences.html#id9" title="Thomas Sargent. Econometric exogeneity and alternative estimators of portfolio balance schedules for hyperinflations: a note. Journal of Monetary Economics, 2(4):511–521, 1976.">1976</a>]</span>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Country</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(k\)</span> (Jacobs)</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(\hat{\delta}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Austria</p></td>
+<td class="text-center"><p>0.143</p></td>
+<td class="text-center"><p>0.87</p></td>
+</tr>
+<tr class="row-odd"><td><p>Germany</p></td>
+<td class="text-center"><p>−0.131</p></td>
+<td class="text-center"><p>1.14</p></td>
+</tr>
+<tr class="row-even"><td><p>Greece</p></td>
+<td class="text-center"><p>−0.262</p></td>
+<td class="text-center"><p>1.30</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hungary</p></td>
+<td class="text-center"><p>−0.199</p></td>
+<td class="text-center"><p>1.22</p></td>
+</tr>
+<tr class="row-even"><td><p>Poland</p></td>
+<td class="text-center"><p>0.139</p></td>
+<td class="text-center"><p>0.87</p></td>
+</tr>
+<tr class="row-odd"><td><p>Russia</p></td>
+<td class="text-center"><p>0.857</p></td>
+<td class="text-center"><p>0.43</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Five of the six estimates cluster around unity.</p>
+<p>Russia is the exception.</p>
+<p>The theory predicts <span class="math notranslate nohighlight">\(\hat{\delta} \to 1\)</span> for all countries, matching five of the six.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">countries</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Austria&#39;</span><span class="p">,</span> <span class="s1">&#39;Germany&#39;</span><span class="p">,</span> <span class="s1">&#39;Greece&#39;</span><span class="p">,</span> <span class="s1">&#39;Hungary&#39;</span><span class="p">,</span> <span class="s1">&#39;Poland&#39;</span><span class="p">,</span> <span class="s1">&#39;Russia&#39;</span><span class="p">]</span>
+<span class="n">δ_hat</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.87</span><span class="p">,</span> <span class="mf">1.14</span><span class="p">,</span> <span class="mf">1.30</span><span class="p">,</span> <span class="mf">1.22</span><span class="p">,</span> <span class="mf">0.87</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">]</span>
+<span class="n">pop_value</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">))</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">0.35</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">δ_hat</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;Jacobs&#39; $\hat{\delta}$&quot;</span><span class="p">,</span>
+       <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">pop_value</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Theory: $y_1 = 1$&#39;</span><span class="p">,</span>
+       <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;stability parameter $\hat\delta$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-jacobs-estimates">
+<img alt="_images/b2c26bf445b945fe8976c09c4af38515ff447e20e414c5d4086bfeecc7f78585.png" src="_images/b2c26bf445b945fe8976c09c4af38515ff447e20e414c5d4086bfeecc7f78585.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 37.3 </span><span class="caption-text">Jacobs estimates</span><a class="headerlink" href="#fig-jacobs-estimates" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="information-projection-a-closer-look">
+<h2><a class="toc-backref" href="#id23" role="doc-backlink"><span class="section-number">37.8. </span>Information projection: a closer look</a><a class="headerlink" href="#information-projection-a-closer-look" title="Link to this heading">#</a></h2>
+<p>The Wiener–Kolmogorov formula is best understood as an orthogonal projection in the Hilbert space <span class="math notranslate nohighlight">\(L^2\)</span> of square-integrable random variables.</p>
+<p>For MA(<span class="math notranslate nohighlight">\(q\)</span>) covariance structure, the formula reduces to a simple recursion.</p>
+<p>For the filter in <a class="reference internal" href="#equation-eq-theta-formula">(37.10)</a>, coefficient matching implies the recursion:</p>
+<div class="math notranslate nohighlight">
+\[
+\theta_0 = \frac{A}{b_0^2}, \qquad
+\theta_1 = \frac{B}{b_0^2} - b \theta_0, \qquad
+\theta_j = -b \theta_{j-1} \quad \text{for } j \geq 2
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(A = r(0) - r(1) b\)</span> and <span class="math notranslate nohighlight">\(B = r(1)\)</span>.</p>
+<p>The figure below shows the corresponding impulse response.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">projection_impulse_response</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">n_lags</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the first n_lags coefficients of Θ(L).&quot;&quot;&quot;</span>
+    <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">b0</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">wiener_kolmogorov_projection</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+    <span class="n">b0_sq</span> <span class="o">=</span> <span class="n">b0</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">thetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n_lags</span><span class="p">)</span>
+    <span class="n">thetas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">A</span> <span class="o">/</span> <span class="n">b0_sq</span>
+    <span class="k">if</span> <span class="n">n_lags</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">thetas</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">B</span> <span class="o">/</span> <span class="n">b0_sq</span> <span class="o">-</span> <span class="n">b</span> <span class="o">*</span> <span class="n">thetas</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_lags</span><span class="p">):</span>
+        <span class="n">thetas</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">*</span> <span class="n">thetas</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">thetas</span>
+
+
+<span class="n">α</span><span class="p">,</span> <span class="n">λ</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span>
+<span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">structural_to_ma1</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span>
+<span class="n">thetas</span> <span class="o">=</span> <span class="n">projection_impulse_response</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">n_lags</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">thetas</span><span class="p">)),</span> <span class="n">thetas</span><span class="p">,</span> <span class="n">basefmt</span><span class="o">=</span><span class="s1">&#39;k-&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;lag $j$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta_j$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-projection-impulse-response">
+<img alt="_images/292dceb1bf3e3f21dad2bf53307919e05a40a311782cfc9d2b95bb8991c440d3.png" src="_images/292dceb1bf3e3f21dad2bf53307919e05a40a311782cfc9d2b95bb8991c440d3.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 37.4 </span><span class="caption-text">Projection filter response</span><a class="headerlink" href="#fig-projection-impulse-response" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Because <span class="math notranslate nohighlight">\(|b| &lt; 1\)</span>, the impulse response decays geometrically.</p>
+<p>The projection assigns exponentially declining weights to lagged money growth rates when forecasting the acceleration of inflation.</p>
+</section>
+<section id="the-approximation-criterion-in-detail">
+<h2><a class="toc-backref" href="#id24" role="doc-backlink"><span class="section-number">37.9. </span>The approximation criterion in detail</a><a class="headerlink" href="#the-approximation-criterion-in-detail" title="Link to this heading">#</a></h2>
+<p>When Jacobs estimates <a class="reference internal" href="#equation-eq-jacobs-constrained">(37.12)</a> by OLS, least squares minimizes</p>
+<div class="math notranslate nohighlight" id="equation-eq-approx-criterion">
+<span class="eqno">(37.14)<a class="headerlink" href="#equation-eq-approx-criterion" title="Link to this equation">#</a></span>\[
+\int_{-\pi}^{\pi} \left| \frac{y_0 (1 - e^{-i \omega})}{1 - y_1 e^{-i \omega}}
+  - \frac{h_0 + h_1 e^{-i \omega}}{1 - h_2 e^{-i \omega}} \right|^2 S_m(\omega)\, d\omega
+\]</div>
+<p>Because <span class="math notranslate nohighlight">\(S_m(\omega) = c(e^{-i\omega}) / |1 - e^{-i \omega}|^4 \to \infty\)</span> as <span class="math notranslate nohighlight">\(\omega \to 0\)</span>, the criterion is dominated by behavior near <span class="math notranslate nohighlight">\(\omega = 0\)</span>.</p>
+<p>Write the two frequency-response functions inside the integrand as</p>
+<div class="math notranslate nohighlight">
+\[
+H_J(e^{-i\omega}) = \frac{y_0 (1 - e^{-i\omega})}{1 - y_1 e^{-i\omega}}, \qquad
+H(e^{-i\omega}) = \frac{h_0 + h_1 e^{-i\omega}}{1 - h_2 e^{-i\omega}}.
+\]</div>
+<p>The left panel below plots the unweighted squared error <span class="math notranslate nohighlight">\(|H_J - H|^2\)</span> for several candidate values of <span class="math notranslate nohighlight">\(y_1\)</span>.</p>
+<p>Only <span class="math notranslate nohighlight">\(y_1 = 1\)</span> makes the error vanish at <span class="math notranslate nohighlight">\(\omega = 0\)</span>, partially cancelling the <span class="math notranslate nohighlight">\(|1 - e^{-i\omega}|^{-4}\)</span> divergence of <span class="math notranslate nohighlight">\(S_m(\omega)\)</span>.</p>
+<p>The right panel shows the full integrand (error times <span class="math notranslate nohighlight">\(S_m\)</span>): all curves diverge, but <span class="math notranslate nohighlight">\(y_1 = 1\)</span> diverges at rate <span class="math notranslate nohighlight">\(\omega^{-2}\)</span> while all others diverge at the faster rate <span class="math notranslate nohighlight">\(\omega^{-4}\)</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span>
+<span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">structural_to_ma1</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span>
+<span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">compute_h_coefficients</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+
+<span class="n">ω_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1e-3</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">filter_error</span><span class="p">(</span><span class="n">y1</span><span class="p">,</span> <span class="n">ω</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the squared filter approximation error at frequency ω.&quot;&quot;&quot;</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">ω</span><span class="p">)</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">(</span><span class="n">h0</span> <span class="o">+</span> <span class="n">h1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">h2</span><span class="p">)</span>
+    <span class="n">H_J</span> <span class="o">=</span> <span class="n">y0</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y1</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="p">(</span><span class="n">h0</span> <span class="o">+</span> <span class="n">h1</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">h2</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">H_J</span> <span class="o">-</span> <span class="n">H</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+
+<span class="n">y1_candidates</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+
+<span class="c1"># Store data for the inset</span>
+<span class="n">err_data</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">y1_value</span> <span class="ow">in</span> <span class="n">y1_candidates</span><span class="p">:</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="p">[</span><span class="n">filter_error</span><span class="p">(</span><span class="n">y1_value</span><span class="p">,</span> <span class="n">ω</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span><span class="p">)</span> <span class="k">for</span> <span class="n">ω</span> <span class="ow">in</span> <span class="n">ω_grid</span><span class="p">]</span>
+    <span class="n">wt</span> <span class="o">=</span> <span class="p">[</span><span class="n">spectral_density_m</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">ω</span><span class="p">)</span> <span class="k">for</span> <span class="n">ω</span> <span class="ow">in</span> <span class="n">ω_grid</span><span class="p">]</span>
+    <span class="n">integrand</span> <span class="o">=</span> <span class="p">[</span><span class="n">e</span> <span class="o">*</span> <span class="n">w</span> <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">wt</span><span class="p">)]</span>
+    <span class="n">err_data</span><span class="p">[</span><span class="n">y1_value</span><span class="p">]</span> <span class="o">=</span> <span class="n">err</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">ω_grid</span><span class="p">,</span> <span class="n">err</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;$y_1 = </span><span class="si">{</span><span class="n">y1_value</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">ω_grid</span><span class="p">,</span> <span class="n">integrand</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;$y_1 = </span><span class="si">{</span><span class="n">y1_value</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;frequency $\omega$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$|H_J - H|^2$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+<span class="c1"># Inset: zoom near ω = 0 (right-bottom, slightly outside)</span>
+<span class="n">ax_inset</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">inset_axes</span><span class="p">([</span><span class="mf">0.55</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">,</span> <span class="mf">0.50</span><span class="p">])</span>
+<span class="n">ω_zoom</span> <span class="o">=</span> <span class="n">ω_grid</span><span class="p">[</span><span class="n">ω_grid</span> <span class="o">&lt;</span> <span class="mf">0.15</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">y1_value</span> <span class="ow">in</span> <span class="n">y1_candidates</span><span class="p">:</span>
+    <span class="n">err_zoom</span> <span class="o">=</span> <span class="n">err_data</span><span class="p">[</span><span class="n">y1_value</span><span class="p">][:</span><span class="nb">len</span><span class="p">(</span><span class="n">ω_zoom</span><span class="p">)]</span>
+    <span class="n">ax_inset</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">ω_zoom</span><span class="p">,</span> <span class="n">err_zoom</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ax_inset</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">)</span>
+<span class="n">ax_inset</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labelsize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">indicate_inset_zoom</span><span class="p">(</span><span class="n">ax_inset</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;frequency $\omega$&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;integrand (error $\times\, S_m$)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-approximation-criterion">
+<img alt="_images/7ffecc2aec2694eb61ccf3ebf16ff450f5351cc8d535d5ecbd8f1509f83e0f38.png" src="_images/7ffecc2aec2694eb61ccf3ebf16ff450f5351cc8d535d5ecbd8f1509f83e0f38.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 37.5 </span><span class="caption-text">Approximation criterion</span><a class="headerlink" href="#fig-approximation-criterion" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>Only <span class="math notranslate nohighlight">\(y_1 = 1\)</span> makes <span class="math notranslate nohighlight">\(|H_J - H|^2\)</span> vanish at <span class="math notranslate nohighlight">\(\omega = 0\)</span> (left panel), which partially offsets the divergence of <span class="math notranslate nohighlight">\(S_m(\omega)\)</span> and produces the slowest-diverging integrand (right panel).</p>
+</section>
+<section id="summary">
+<h2><a class="toc-backref" href="#id25" role="doc-backlink"><span class="section-number">37.10. </span>Summary</a><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>The main results are:</p>
+<ul class="simple">
+<li><p>Cagan’s estimator is consistent when its orthogonality condition holds; a sufficient condition is exogeneity of prices.</p></li>
+<li><p>Jacobs’ inverted regression is the appropriate regression equation when money is exogenous with respect to portfolio-balance disturbances.</p></li>
+<li><p>In general, at best one, and usually neither, of the Cagan and Jacobs equations is consistently estimated by least squares when exogeneity fails.</p></li>
+<li><p>The rational expectations version of Cagan’s model implies that money is not exogenous <span id="id14">[<a class="reference internal" href="zreferences.html#id95" title="Thomas J Sargent. The Demand for Money During Hyperinflations under Rational Expectations: I. International Economic Review, 18(1):59-82, February 1977.">Sargent, 1977</a>, <a class="reference internal" href="zreferences.html#id17" title="Thomas J Sargent and Neil Wallace. Rational expectations and the dynamics of hyperinflation. International economic review, pages 328–350, 1973.">Sargent and Wallace, 1973</a>]</span>.</p></li>
+<li><p>Information projection, via the Wiener–Kolmogorov formula, gives the population regression to which OLS converges under misspecification.</p></li>
+<li><p>Under the rational expectations model, Jacobs’ stability parameter has population value 1 because the approximation criterion is dominated by behavior at <span class="math notranslate nohighlight">\(\omega = 0\)</span>.</p></li>
+<li><p>This prediction accords with Jacobs’ empirical finding that <span class="math notranslate nohighlight">\(\hat{\delta} \approx 1\)</span> in five of the six hyperinflations.</p></li>
+</ul>
+</section>
+<section id="exercises">
+<h2><a class="toc-backref" href="#id26" role="doc-backlink"><span class="section-number">37.11. </span>Exercises</a><a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="sj76_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 37.1 </span></p>
+<section id="exercise-content">
+<p>Using <code class="docutils literal notranslate"><span class="pre">structural_to_ma1</span></code>, compute the covariogram <span class="math notranslate nohighlight">\(c(\tau)\)</span> and the cross-covariogram <span class="math notranslate nohighlight">\(r(\tau)\)</span> for <span class="math notranslate nohighlight">\(\alpha = -0.5\)</span>, <span class="math notranslate nohighlight">\(\lambda = 0.7\)</span>, <span class="math notranslate nohighlight">\(\sigma_\eta^2 = 1\)</span>, <span class="math notranslate nohighlight">\(\sigma_\varepsilon^2 = 0.5\)</span>, and <span class="math notranslate nohighlight">\(\sigma_{\varepsilon\eta} = 0\)</span>.</p>
+<p>Verify numerically that <span class="math notranslate nohighlight">\(C(e^{-i \omega}) = c(-1) e^{i \omega} + c(0) + c(1) e^{-i \omega}\)</span> is nonnegative for all <span class="math notranslate nohighlight">\(\omega\)</span>.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="info_projection-solution-1">
+
+<p class="admonition-title">Solution</p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span>
+
+<span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r_m1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">structural_to_ma1</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">,</span> <span class="n">σ_η2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">σ_ε2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">σ_εη</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;c(0) = </span><span class="si">{</span><span class="n">c0</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">,  c(1) = </span><span class="si">{</span><span class="n">c1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;r(-1) = </span><span class="si">{</span><span class="n">r_m1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">,  r(0) = </span><span class="si">{</span><span class="n">r0</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">,  r(1) = </span><span class="si">{</span><span class="n">r1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">ω_check</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">Cw</span> <span class="o">=</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">ω_check</span><span class="p">)</span> <span class="o">+</span> <span class="n">c0</span> <span class="o">+</span> <span class="n">c1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">ω_check</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Min spectral density C(e^</span><span class="se">{{</span><span class="s2">-iw</span><span class="se">}}</span><span class="s2">): </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">Cw</span><span class="p">))</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Non-negative:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">Cw</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mf">1e-10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c(0) = 1.9917,  c(1) = -0.7727
+r(-1) = -0.9091,  r(0) = 3.0331,  r(1) = -1.6777
+
+Min spectral density C(e^{-iw}): 0.446281
+Non-negative: True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<div class="exercise admonition" id="sj76_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 37.2 </span></p>
+<section id="exercise-content">
+<p>Modify the <code class="docutils literal notranslate"><span class="pre">jacobs_population_params</span></code> function to also return the <em>true</em>
+structural stability parameter <span class="math notranslate nohighlight">\(\delta = (\lambda + \alpha(1-\lambda))/(1+\alpha(1-\lambda))\)</span>,
+and plot the bias <span class="math notranslate nohighlight">\(y_1 - \delta_{\text{true}}\)</span> as a function of <span class="math notranslate nohighlight">\(\alpha\)</span> for
+three values of <span class="math notranslate nohighlight">\(\lambda \in \{0.3, 0.5, 0.7\}\)</span>.</p>
+<p>Comment on how the bias depends on <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="info_projection-solution-3">
+
+<p class="admonition-title">Solution</p>
+<section id="solution-content">
+<p>Here is one solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">jacobs_population_params_ex2</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">,</span> <span class="n">σ_η2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">σ_ε2</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">σ_εη</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return Jacobs&#39; coefficients and the true value of δ.&quot;&quot;&quot;</span>
+    <span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">structural_to_ma1</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">,</span> <span class="n">σ_η2</span><span class="p">,</span> <span class="n">σ_ε2</span><span class="p">,</span> <span class="n">σ_εη</span><span class="p">)</span>
+    <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">compute_h_coefficients</span><span class="p">(</span><span class="n">c0</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">r1</span><span class="p">)</span>
+    <span class="n">y1</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="n">y0</span> <span class="o">=</span> <span class="p">(</span><span class="n">h0</span> <span class="o">+</span> <span class="n">h1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">h2</span><span class="p">)</span>
+    <span class="n">δ_true</span> <span class="o">=</span> <span class="p">(</span><span class="n">λ</span> <span class="o">+</span> <span class="n">α</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">α</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span><span class="p">,</span> <span class="n">δ_true</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The following figure shows the bias of Jacobs’ population stability parameter <span class="math notranslate nohighlight">\(y_1\)</span> relative to the true value <span class="math notranslate nohighlight">\(\delta_{\text{true}}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">λ_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">λ</span> <span class="ow">in</span> <span class="n">λ_vals</span><span class="p">:</span>
+    <span class="n">α_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">λ</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.02</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+    <span class="n">bias</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">α</span> <span class="ow">in</span> <span class="n">α_grid</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">δ_true</span> <span class="o">=</span> <span class="n">jacobs_population_params_ex2</span><span class="p">(</span><span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">)</span>
+        <span class="n">bias</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y1</span> <span class="o">-</span> <span class="n">δ_true</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">α_grid</span><span class="p">,</span> <span class="n">bias</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">rf</span><span class="s1">&#39;$\lambda=</span><span class="si">{</span><span class="n">λ</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\alpha$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;bias $y_1 - \delta_{\mathrm</span><span class="si">{true}</span><span class="s1">}$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/9df9fc79d3e800090fb66c397d5c841ed267c84cd255edb1ef1923fa12c44f23.png" src="_images/9df9fc79d3e800090fb66c397d5c841ed267c84cd255edb1ef1923fa12c44f23.png" />
+</div>
+</div>
+<p>On the range shown, the bias <span class="math notranslate nohighlight">\(y_1 - \delta_{\text{true}} = 1 - \delta_{\text{true}}\)</span> is positive.</p>
+<p>It becomes larger as <span class="math notranslate nohighlight">\(\alpha\)</span> approaches the boundary <span class="math notranslate nohighlight">\(\lambda + \alpha(1-\lambda) = 0\)</span> from the right, because <span class="math notranslate nohighlight">\(\delta_{\text{true}}\)</span> then falls farther below 1.</p>
+</section>
+</div>
+<div class="exercise admonition" id="sj76_ex3">
+
+<p class="admonition-title"><span class="caption-number">Exercise 37.3 </span></p>
+<section id="exercise-content">
+<p>For the Germany hyperinflation, Jacobs found <span class="math notranslate nohighlight">\(\hat{\delta} \approx 1.14\)</span>.</p>
+<p>Fix <span class="math notranslate nohighlight">\(\lambda = 0.5\)</span>, <span class="math notranslate nohighlight">\(\sigma_\eta^2 = 1\)</span>, and stay on the branch with <span class="math notranslate nohighlight">\(\lambda + \alpha(1-\lambda) &gt; 0\)</span>.</p>
+<p>Search over admissible values of <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\sigma_\varepsilon^2\)</span>, and <span class="math notranslate nohighlight">\(\sigma_{\varepsilon\eta}\)</span> to make <span class="math notranslate nohighlight">\(y_0\)</span> as close as possible to <span class="math notranslate nohighlight">\(-0.13 / (1 + 0.13)\)</span>.</p>
+<p>What does this suggest about the sign of <span class="math notranslate nohighlight">\(\sigma_{\varepsilon\eta}\)</span> and the magnitude of <span class="math notranslate nohighlight">\(\alpha\)</span>?</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="info_projection-solution-5">
+
+<p class="admonition-title">Solution</p>
+<section id="solution-content">
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y0_target</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.13</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mf">0.13</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Target y0: </span><span class="si">{</span><span class="n">y0_target</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">λ</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">σ_η2</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">best</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">for</span> <span class="n">α</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.95</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">80</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">σ_ε2</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">80</span><span class="p">):</span>
+        <span class="n">σ_εη_vals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">σ_η2</span> <span class="o">*</span> <span class="n">σ_ε2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">σ_η2</span> <span class="o">*</span> <span class="n">σ_ε2</span><span class="p">),</span> <span class="mi">81</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">σ_εη</span> <span class="ow">in</span> <span class="n">σ_εη_vals</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">h0</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">h2</span> <span class="o">=</span> <span class="n">jacobs_population_params</span><span class="p">(</span>
+                    <span class="n">α</span><span class="p">,</span> <span class="n">λ</span><span class="p">,</span> <span class="n">σ_η2</span><span class="o">=</span><span class="n">σ_η2</span><span class="p">,</span> <span class="n">σ_ε2</span><span class="o">=</span><span class="n">σ_ε2</span><span class="p">,</span> <span class="n">σ_εη</span><span class="o">=</span><span class="n">σ_εη</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">err</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">y0</span> <span class="o">-</span> <span class="n">y0_target</span><span class="p">)</span>
+            <span class="n">candidate</span> <span class="o">=</span> <span class="p">(</span><span class="n">err</span><span class="p">,</span> <span class="n">α</span><span class="p">,</span> <span class="n">σ_ε2</span><span class="p">,</span> <span class="n">σ_εη</span><span class="p">,</span> <span class="n">y0</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">best</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">candidate</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">best</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">best</span> <span class="o">=</span> <span class="n">candidate</span>
+
+<span class="n">err</span><span class="p">,</span> <span class="n">α_best</span><span class="p">,</span> <span class="n">σ_ε2_best</span><span class="p">,</span> <span class="n">σ_εη_best</span><span class="p">,</span> <span class="n">y0_best</span><span class="p">,</span> <span class="n">y1_best</span> <span class="o">=</span> <span class="n">best</span>
+<span class="n">δ_true</span> <span class="o">=</span> <span class="p">(</span><span class="n">λ</span> <span class="o">+</span> <span class="n">α_best</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">α_best</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;α = </span><span class="si">{</span><span class="n">α_best</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;σ_ε^2 = </span><span class="si">{</span><span class="n">σ_ε2_best</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;σ_εη = </span><span class="si">{</span><span class="n">σ_εη_best</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y0 = </span><span class="si">{</span><span class="n">y0_best</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (target: </span><span class="si">{</span><span class="n">y0_target</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;y1 = </span><span class="si">{</span><span class="n">y1_best</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;True δ = </span><span class="si">{</span><span class="n">δ_true</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Absolute error = </span><span class="si">{</span><span class="n">err</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Target y0: -0.1150
+α = -0.2599
+σ_ε^2 = 0.9880
+σ_εη = 0.4721
+y0 = -0.1150 (target: -0.1150)
+y1 = 1.0000
+True δ = 0.4253
+Absolute error = 2.35e-05
+</pre></div>
+</div>
+</div>
+</div>
+<p>One admissible fit uses a positive value of <span class="math notranslate nohighlight">\(\sigma_{\varepsilon\eta}\)</span>.</p>
+<p>It also points to a relatively small negative value of <span class="math notranslate nohighlight">\(\alpha\)</span> rather than a very large one in absolute value.</p>
+</section>
+</div>
+<div class="exercise admonition" id="sj76_ex4">
+
+<p class="admonition-title"><span class="caption-number">Exercise 37.4 </span></p>
+<section id="exercise-content">
+<p>Derive the approximation criterion <a class="reference internal" href="#equation-eq-approx-criterion">(37.14)</a> from first principles.</p>
+<p>Start from the time-domain OLS objective: Jacobs’ regression <a class="reference internal" href="#equation-eq-jacobs-constrained">(37.12)</a> chooses <span class="math notranslate nohighlight">\((y_0, y_1)\)</span> to minimize the population mean squared error</p>
+<div class="math notranslate nohighlight">
+\[
+E\left[\left(m_t - p_t - \frac{y_0(1-L)}{1 - y_1 L} m_t\right)^2\right].
+\]</div>
+<p>Use the following steps:</p>
+<ol class="arabic simple">
+<li><p>Define the residual <span class="math notranslate nohighlight">\(e_t = (m_t - p_t) - \frac{y_0(1-L)}{1 - y_1 L} m_t\)</span>; by the population projection <a class="reference internal" href="#equation-eq-h-formula">(37.11)</a>, the true regression satisfies <span class="math notranslate nohighlight">\(m_t - p_t = H(L) m_t\)</span>, so rewrite the residual as a filtered version of <span class="math notranslate nohighlight">\(m_t\)</span>.</p></li>
+<li><p>Express <span class="math notranslate nohighlight">\(E[e_t^2]\)</span> as a frequency-domain integral using Parseval’s theorem:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+E[e_t^2] = \frac{1}{2\pi} \int_{-\pi}^{\pi} S_e(\omega)\, d\omega
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(S_e(\omega)\)</span> is the spectral density of <span class="math notranslate nohighlight">\(e_t\)</span>.</p>
+<ol class="arabic simple" start="3">
+<li><p>Express the spectral density <span class="math notranslate nohighlight">\(S_e(\omega)\)</span> in terms of the transfer functions <span class="math notranslate nohighlight">\(H(e^{-i\omega})\)</span>, <span class="math notranslate nohighlight">\(H_J(e^{-i\omega})\)</span>, and the spectral density <span class="math notranslate nohighlight">\(S_m(\omega)\)</span> of <span class="math notranslate nohighlight">\(m_t\)</span>.</p></li>
+<li><p>Show that the result is equation <a class="reference internal" href="#equation-eq-approx-criterion">(37.14)</a>.</p></li>
+</ol>
+</section>
+</div>
+<div class="solution dropdown admonition" id="info_projection-solution-7">
+
+<p class="admonition-title">Solution</p>
+<section id="solution-content">
+<p><strong>Step 1.</strong> The true population regression is <span class="math notranslate nohighlight">\(m_t - p_t = H(L) m_t\)</span>, so the residual is</p>
+<div class="math notranslate nohighlight">
+\[
+e_t = H(L) m_t - \frac{y_0(1 - L)}{1 - y_1 L} m_t = \left[ H(L) - H_J(L) \right] m_t
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(H_J(L) = \frac{y_0(1-L)}{1 - y_1 L}\)</span> is Jacobs’ constrained filter.</p>
+<p><strong>Step 2.</strong> Since <span class="math notranslate nohighlight">\(e_t\)</span> is a covariance-stationary linear process, Parseval’s theorem gives</p>
+<div class="math notranslate nohighlight">
+\[
+E[e_t^2] = \frac{1}{2\pi} \int_{-\pi}^{\pi} S_e(\omega)\, d\omega.
+\]</div>
+<p><strong>Step 3.</strong> Because <span class="math notranslate nohighlight">\(e_t = [H(L) - H_J(L)] m_t\)</span>, the spectral density of <span class="math notranslate nohighlight">\(e_t\)</span> equals the squared modulus of the combined transfer function times the spectral density of <span class="math notranslate nohighlight">\(m_t\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+S_e(\omega) = \left| H(e^{-i\omega}) - H_J(e^{-i\omega}) \right|^2 S_m(\omega).
+\]</div>
+<p><strong>Step 4.</strong> Substituting into the Parseval integral,</p>
+<div class="math notranslate nohighlight">
+\[
+E[e_t^2] = \frac{1}{2\pi} \int_{-\pi}^{\pi}
+  \left| H(e^{-i\omega}) - H_J(e^{-i\omega}) \right|^2 S_m(\omega)\, d\omega.
+\]</div>
+<p>Replacing <span class="math notranslate nohighlight">\(H(e^{-i\omega})\)</span> and <span class="math notranslate nohighlight">\(H_J(e^{-i\omega})\)</span> by their definitions gives</p>
+<div class="math notranslate nohighlight">
+\[
+E[e_t^2] = \frac{1}{2\pi} \int_{-\pi}^{\pi}
+  \left| \frac{h_0 + h_1 e^{-i\omega}}{1 - h_2 e^{-i\omega}}
+       - \frac{y_0(1 - e^{-i\omega})}{1 - y_1 e^{-i\omega}} \right|^2
+  S_m(\omega)\, d\omega
+\]</div>
+<p>which (up to the constant <span class="math notranslate nohighlight">\(\frac{1}{2\pi}\)</span>) is equation <a class="reference internal" href="#equation-eq-approx-criterion">(37.14)</a>. Since OLS minimizes <span class="math notranslate nohighlight">\(E[e_t^2]\)</span>, the minimizing <span class="math notranslate nohighlight">\((y_0, y_1)\)</span> also minimizes the integral in <a class="reference internal" href="#equation-eq-approx-criterion">(37.14)</a>. <span class="math notranslate nohighlight">\(\blacksquare\)</span></p>
+</section>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="qe-page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+
+            
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="qe-sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
+                    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tools and Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="orth_proj.html">
+   1. Orthogonal Projections and Their Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stationary_densities.html">
+   2. Continuous State Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="muth_kalman.html">
+   3. Reverse Engineering a la Muth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discrete_dp.html">
+   4. Discrete State Dynamic Programming
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  LQ Control
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_news.html">
+   5. Information and Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing.html">
+   6. Consumption Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing_tax.html">
+   7. Tax Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_jump_lq.html">
+   8. Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_1.html">
+   9. How to Pay for a War: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_2.html">
+   10. How to Pay for a War: Part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_3.html">
+   11. How to Pay for a War: Part 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lqramsey.html">
+   12. Optimal Taxation in an LQ Economy
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Multiple Agent Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arellano.html">
+   13. Default Risk and Income Fluctuations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="matsuyama.html">
+   14. Globalization and Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coase.html">
+   15. Coase’s Theory of the Firm
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="match_transport.html">
+   16. Composite Sorting
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dynamic Linear Economies
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_recursive_models.html">
+   17. Recursive Models of Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="growth_in_dles.html">
+   18. Growth in Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_asset_pricing_dles.html">
+   19. Lucas Asset Pricing Using DLE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="irfs_in_hall_model.html">
+   20. IRFs in Hall Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="permanent_income_dles.html">
+   21. Permanent Income Model using the DLE Class
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gorman_heterogeneous_households.html">
+   22. Gorman Aggregation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rosen_schooling_model.html">
+   23. Rosen Schooling Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cattle_cycles.html">
+   24. Cattle Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_invertibility_example.html">
+   25. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Risk, Model Uncertainty, and Robustness
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="five_preferences.html">
+   26. Risk and Model Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="entropy.html">
+   27. Etymology of Entropy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   28. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   29. Robust Markov Perfect Equilibrium
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Time Series Models
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arma.html">
+   30. Covariance Stationary Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="estspec.html">
+   31. Estimation of Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additive_functionals.html">
+   32. Additive and Multiplicative Functionals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lu_tricks.html">
+   33. Classical Control with Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classical_filtering.html">
+   34. Classical Prediction and Filtering With Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="knowing_forecasts_of_others.html">
+   35. Knowing the Forecasts of Others
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_rational_expectations.html">
+   36. Demand for Money during Hyperinflations under Rational Expectations
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   37. Hyperinflation and Information Projection
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Asset Pricing and Finance
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_model.html">
+   38. Asset Pricing II: The Lucas Asset Pricing Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="asset_pricing_lph.html">
+   39. Elementary Asset Pricing Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="black_litterman.html">
+   40. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_complete_mkts.html">
+   41. Irrelevance of Capital Structures with Complete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_incomplete_mkts.html">
+   42. Equilibrium Capital Structures with Incomplete Markets
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dynamic Programming Squared
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="un_insure.html">
+   43. Optimal Unemployment Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dyn_stack.html">
+   44. Stackelberg Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo_machine_learn.html">
+   45. Machine Learning a Ramsey Plan
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo.html">
+   46. Time Inconsistency of Ramsey Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo_abreu.html">
+   47. Sustainable Plans for a Calvo Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opt_tax_recur.html">
+   48. Optimal Taxation with State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss.html">
+   49. Optimal Taxation without State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss2.html">
+   50. Fluctuating Interest Rates Deliver Fiscal Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss3.html">
+   51. Fiscal Risk and Government Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_ramsey.html">
+   52. Competitive Equilibria of a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_credible.html">
+   53. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   54. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   55. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   56. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="qe-sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="qe-toolbar">
+
+            <div class="qe-toolbar__inner">
+
+                <ul class="qe-toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                </ul>
+
+                <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/info_projection.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
+                        <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
+                    <!--
+                    # Enable if looking for link to specific document hosted on GitHub
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/info_projection.md" download><i data-feather="github"></i></a></li>
+                    -->
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="/_pdf/quantecon-python-advanced.pdf" download><p>Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title"> Notebook Launcher </p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input">
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/main/info_projection.ipynb">Colab</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" data-repourl="https://github.com/QuantEcon/lecture-python-advanced.notebooks" data-urlpath="tree/lecture-python-advanced.notebooks/info_projection.ipynb" data-branch=main>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            </ul>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/main/info_projection.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <script>
+                // QuantEcon Notebook Launcher
+                const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
+                // Highlight the server type if previous selection exists
+                if (typeof localStorage.launcherType !== 'undefined') {
+                  for (var i = 0; i < launcherTypeElements.length; i++) {
+                    launcherTypeElements[i].classList.remove('active');
+                    if ( launcherTypeElements[i].classList.contains(localStorage.launcherType) ) {
+                      launcherTypeElements[i].classList.add('active');
+                    }
+                  }
+                }
+                // Highlight server type on click and set local storage value
+                for (var i = 0; i < launcherTypeElements.length; i++) {
+                  launcherTypeElements[i].addEventListener('click', function() {
+                    for (var j = 0; j < launcherTypeElements.length; j++) {
+                      launcherTypeElements[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    if ( this.classList.contains('launcher-private') ) {
+                      localStorage.launcherType = 'launcher-private';
+                    } else if ( this.classList.contains('launcher-public') ) {
+                      localStorage.launcherType = 'launcher-public';
+                    }
+                    setLaunchServer();
+                  })
+                }
+                const launcherPublic = document.getElementById('launcher-public-input');
+                const launcherPrivate = document.getElementById('launcher-private-input');
+                const pageName = "info_projection";
+                const repoURL = "https://github.com/QuantEcon/lecture-python-advanced.notebooks";
+                const urlPath = "tree/lecture-python-advanced.notebooks/info_projection.ipynb";
+                const branch = "main"
+                const launchNotebookLink = document.getElementById('advancedLaunchButton');
+
+                // Highlight public server option if previous selection exists
+                if (typeof localStorage.launcherPublic !== 'undefined') {
+                  launcherPublic.value = localStorage.launcherPublic;
+                }
+                // Update local storage upon public server selection
+                launcherPublic.addEventListener('change', (event) => {
+                  setLaunchServer();
+                });
+                // Populate private server input if previous entry exists
+                if (typeof localStorage.launcherPrivate !== 'undefined') {
+                  launcherPrivate.value = localStorage.launcherPrivate;
+                }
+                // Update local storage when a private server is entered
+                launcherPrivate.addEventListener('input', (event) => {
+                  setLaunchServer();
+                });
+
+                // Function to update the "Launch Notebook" link href
+                function setLaunchServer() {
+                  launchNotebookLink.removeAttribute("style")
+                  if ( localStorage.launcherType == 'launcher-private' ) {
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    launcherPrivateValue = launcherPrivate.value
+                    if (!launcherPrivateValue) {
+                        launchNotebookLink.removeAttribute("href")
+                        launchNotebookLink.style.background = "grey"
+                        return
+                    }
+                    localStorage.launcherPrivate = launcherPrivateValue;
+                    privateServer = localStorage.launcherPrivate.replace(/\/$/, "")
+                    if (!privateServer.includes("http")) {
+                        privateServer = "http://" + privateServer
+                    }
+                    launchNotebookLinkURL = privateServer + repoPrefix;
+                  } else if ( localStorage.launcherType == 'launcher-public' ) {
+                    launcherPublicValue = launcherPublic.options[launcherPublic.selectedIndex].value;
+                    localStorage.launcherPublic = launcherPublicValue;
+                    launchNotebookLinkURL = localStorage.launcherPublic;
+                  }
+                  if (launchNotebookLinkURL) launchNotebookLink.href = launchNotebookLinkURL;
+                }
+                // Check if user has previously selected a server
+                if ( (typeof localStorage.launcherPrivate !== 'undefined') || (typeof localStorage.launcherPublic !== 'undefined') ) {
+                  setLaunchServer();
+                }
+                </script>
+
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

@@ -297,7 +297,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/0f8291cc" class="changelog-hash">0f8291cc</a>
                                 
                                 <span class="changelog-author">Enzo Di Pasquale</span>
-                                <span class="changelog-time">9 minutes ago</span>
+                                <span class="changelog-time">8 hours ago</span>
                                 <span class="changelog-message">Update mathematical expressions in match_transport.md (#317)</span>
                             </li>
                             
@@ -405,15 +405,15 @@
 <p>The output of such a theory is a <strong>coupling</strong> of the two probability measures, i.e., a joint probability
 measure having those two  marginal probability measures.</p>
 <p>This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodu Wang,
-and Zhenyuan Zhang  <span id="id1">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> used optimal transport theory to formulate and compute  an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.</p>
+and Zhenyuan Zhang  <span id="id1">[<a class="reference internal" href="zreferences.html#id15" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> used optimal transport theory to formulate and compute  an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.</p>
 <p>Production technologies allow firms to   reshape costs of mismatch so that they become concave.</p>
-<p>It is then possible that in  equilibrium there is neither <strong>positive assortative</strong> nor <strong>negative assortative</strong>  matching, an outcome that   <span id="id2">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> call <strong>composite assortative</strong> matching.</p>
+<p>It is then possible that in  equilibrium there is neither <strong>positive assortative</strong> nor <strong>negative assortative</strong>  matching, an outcome that   <span id="id2">[<a class="reference internal" href="zreferences.html#id15" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> call <strong>composite assortative</strong> matching.</p>
 <p>For example, with composite matching in  an equilibrium model with workers of different types,  ex ante   identical <em>workers</em> can sort into different <em>occupations</em>, some positively and some negatively.</p>
-<p><span id="id3">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> show how composite matching  can generate distinct non-trivial frequency  distributions  of labor earnings  within and across occupations.</p>
-<p>This lecture describes the <span id="id4">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model and  presents  Python code for computing equilibria.</p>
-<p>The lecture then  applies the code to the <span id="id5">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model of labor markets.</p>
+<p><span id="id3">[<a class="reference internal" href="zreferences.html#id15" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> show how composite matching  can generate distinct non-trivial frequency  distributions  of labor earnings  within and across occupations.</p>
+<p>This lecture describes the <span id="id4">[<a class="reference internal" href="zreferences.html#id15" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model and  presents  Python code for computing equilibria.</p>
+<p>The lecture then  applies the code to the <span id="id5">[<a class="reference internal" href="zreferences.html#id15" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model of labor markets.</p>
 <p>As with an <a class="reference external" href="https://python.quantecon.org/opt_transport.html">earlier QuantEcon lecture on optimal transport</a>, a key tool will be <a class="reference external" href="https://intro.quantecon.org/lp_intro.html">linear programming</a>.</p>
-<p>As we’ll see, <span id="id6">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> also deploy dynamic programming in creative ways at important points in
+<p>As we’ll see, <span id="id6">[<a class="reference internal" href="zreferences.html#id15" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> also deploy dynamic programming in creative ways at important points in
 their analysis.  So as you read this lecture, please watch  for Bellman equations that might remind
 you of ideas  encountered in this  <a class="reference external" href="https://python.quantecon.org/mccall_model.html">earlier QuantEcon lecture</a> and this <a class="reference external" href="https://dp.quantecon.org">QuantEcon book</a>.</p>
 </section>
@@ -1314,7 +1314,7 @@ Value of the layer (scaled by the mass = 1): 24.764959193288938
 <section id="solving-a-layer-in-a-smarter-way">
 <h4><span class="section-number">16.3.2.1. </span>Solving a layer in a smarter way<a class="headerlink" href="#solving-a-layer-in-a-smarter-way" title="Link to this heading">#</a></h4>
 <p>We  now present two key results in the context of OT with concave type costs.</p>
-<p>We refer <span id="id7">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> and <span id="id8">[<a class="reference internal" href="zreferences.html#id7" title="Julie Delon, Julien Salomon, and Andrei Sobolevski. Minimum-weight perfect matching for non-intrinsic distances on the line. arXiv preprint arXiv:1102.1558, 2011.">Delon <em>et al.</em>, 2011</a>]</span> for proofs.</p>
+<p>We refer <span id="id7">[<a class="reference internal" href="zreferences.html#id15" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> and <span id="id8">[<a class="reference internal" href="zreferences.html#id16" title="Julie Delon, Julien Salomon, and Andrei Sobolevski. Minimum-weight perfect matching for non-intrinsic distances on the line. arXiv preprint arXiv:1102.1558, 2011.">Delon <em>et al.</em>, 2011</a>]</span> for proofs.</p>
 <p>Consider the problem faced within a layer, i.e., types from <span class="math notranslate nohighlight">\(Y \sqcup X\)</span></p>
 <div class="math notranslate nohighlight">
 \[ 
@@ -1960,7 +1960,7 @@ Monge cost of PAM:
 </section>
 <section id="example-3">
 <h3><span class="section-number">16.5.3. </span>Example 3<a class="headerlink" href="#example-3" title="Link to this heading">#</a></h3>
-<p><span id="id9">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> provide the following  example.</p>
+<p><span id="id9">[<a class="reference internal" href="zreferences.html#id15" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> provide the following  example.</p>
 <p>There are four agents per side and three types per side (so the problem is not unitary, as opposed to the examples above).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2051,7 +2051,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <p>The values are related by <span class="math notranslate nohighlight">\(W_P =  \sum_{x \in X}n_x \alpha_x +  \sum_{y \in Y}m_y \gamma_y - V_P.\)</span></p>
 <p>The dual solutions of <span class="math notranslate nohighlight">\(V_D\)</span> and <span class="math notranslate nohighlight">\(W_D\)</span> are related by <span class="math notranslate nohighlight">\(u_x = \alpha_x - \phi_x\)</span> and <span class="math notranslate nohighlight">\(v_y = \gamma_y - \psi_y.\)</span></p>
 <p>The dual solution <span class="math notranslate nohighlight">\((u,v)\)</span> of <span class="math notranslate nohighlight">\(W_D\)</span> can be interpreted as equilibrium utilities of the agents, which include the individual specific amenities and equilibrium shadow costs.</p>
-<p><span id="id10">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.</p>
+<p><span id="id10">[<a class="reference internal" href="zreferences.html#id15" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.</p>
 <p>Let’s generate an instance and compute the optimal matching.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2553,7 +2553,7 @@ Value of primal solution:  9.03369035213102
 <h2><span class="section-number">16.7. </span>Application<a class="headerlink" href="#application" title="Link to this heading">#</a></h2>
 <section id="data">
 <h3><span class="section-number">16.7.1. </span>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
-<p>We now replicate the empirical analysis carried out by <span id="id11">[<a class="reference internal" href="zreferences.html#id6" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>.</p>
+<p>We now replicate the empirical analysis carried out by <span id="id11">[<a class="reference internal" href="zreferences.html#id15" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>.</p>
 <p>The dataset is obtained from the American Community Survey and contains individual level data on income, age and occupation.</p>
 <p>The occupation of each individual consists of a Standard Occupational Classification (SOC) code.</p>
 <p>There are 497 codes in total.</p>
@@ -3165,6 +3165,16 @@ Value of primal solution:  825.8167029184153
    35. Knowing the Forecasts of Others
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_rational_expectations.html">
+   36. Demand for Money during Hyperinflations under Rational Expectations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="info_projection.html">
+   37. Hyperinflation and Information Projection
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -3174,27 +3184,27 @@ Value of primal solution:  825.8167029184153
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   36. Asset Pricing II: The Lucas Asset Pricing Model
+   38. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   37. Elementary Asset Pricing Theory
+   39. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   38. Two Modifications of Mean-Variance Portfolio Theory
+   40. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   39. Irrelevance of Capital Structures with Complete Markets
+   41. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   40. Equilibrium Capital Structures with Incomplete Markets
+   42. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -3206,57 +3216,57 @@ Value of primal solution:  825.8167029184153
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   41. Optimal Unemployment Insurance
+   43. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   42. Stackelberg Plans
+   44. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   43. Machine Learning a Ramsey Plan
+   45. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   44. Time Inconsistency of Ramsey Plans
+   46. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   45. Sustainable Plans for a Calvo Model
+   47. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   46. Optimal Taxation with State-Contingent Debt
+   48. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   47. Optimal Taxation without State-Contingent Debt
+   49. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   48. Fluctuating Interest Rates Deliver Fiscal Insurance
+   50. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   49. Fiscal Risk and Government Debt
+   51. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   50. Competitive Equilibria of a Model of Chang
+   52. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   51. Credible Government Policies in a Model of Chang
+   53. Credible Government Policies in a Model of Chang
   </a>
  </li>
 </ul>
@@ -3268,17 +3278,17 @@ Value of primal solution:  825.8167029184153
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   52. Troubleshooting
+   54. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   53. References
+   55. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   54. Execution Statistics
+   56. Execution Statistics
   </a>
  </li>
 </ul>
