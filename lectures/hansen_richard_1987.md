@@ -643,8 +643,10 @@ where the last equality uses the Law of Iterated Expectations.
 
 ### Connection to Hansen-Singleton GMM
 
-The pseudo-pricing function underlies the {cite}`Hansen_Singleton_1982`
-econometric approach. If a model specifies $p^*$ as a function of observable
+The pseudo-pricing function underlies the {cite}`hansen1982generalized`
+econometric approach. 
+
+If a model specifies $p^*$ as a function of observable
 data (e.g., a parametric function of consumption growth), then the pricing
 restriction
 
@@ -744,7 +746,9 @@ $$
 $$
 
 Any model of $p^*$ must generate enough SDF volatility to rationalize the
-observed Sharpe ratios in asset markets. The equity premium puzzle arises
+observed Sharpe ratios in asset markets. 
+
+The equity premium puzzle arises
 because the volatility of consumption growth — which drives $p^*$ in
 representative-agent models — is far too low to meet this bound.
 
