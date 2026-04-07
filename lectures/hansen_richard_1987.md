@@ -31,7 +31,7 @@ kernelspec:
 
 ## Overview
 
-{cite:t}`HansenRichard1987` investigates testable implications of equilibrium asset pricing models.
+{cite:t}`HansenRichard1987` investigate testable implications of equilibrium asset pricing models.
 
 This lecture builds on the mean-variance frontier and stochastic discount factor framework
 developed in {doc}`asset_pricing_lph`.
@@ -276,7 +276,7 @@ $$
 \|p\|_{\mathcal{G}} = \left[\langle p \mid p \rangle_{\mathcal{G}}\right]^{1/2}.
 $$
 
-Both the inner product and the norm take values in $I$$. 
+Both the inner product and the norm take values in $I$.
 
 They are
 *random variables*, not scalars.
@@ -464,7 +464,7 @@ print(f"Individual asset E[r^2]:  {[f'{np.mean(returns[:,i]**2):.4f}' for i in r
 
 ## Implications for omitting conditioning information
 
-Now we analuze the effect of omitting conditioning information when studying
+Now we analyze the effect of omitting conditioning information when studying
 the mean-variance implications of asset pricing models.
 
 ### Returns, zero-price payoffs, and the decomposition of $R$
@@ -720,14 +720,13 @@ mu_port, std_port, front_mu, front_std, mu_unc, cov_unc = \
 mystnb:
   figure:
     caption: >
-      A conditionally efficient portfolio (star) lies to the right of the
-      unconditional mean-variance frontier (curve). This illustrates the
-      central result of Section 3: conditioning information matters.
+      A conditionally efficient portfolio (star) lies to the left of the
+      constant-weight frontier built from the three primitive assets (curve).
     name: fig-hr-cond-vs-uncond
 ---
 fig, ax = plt.subplots(figsize=(8, 5))
 ax.plot(front_std, front_mu, lw=2,
-        label='Unconditional MV frontier', color='steelblue')
+        label='Primitive-asset constant-weight frontier', color='steelblue')
 ax.scatter(np.sqrt(np.diag(cov_unc)), mu_unc, color='red',
            zorder=5, s=60, label='Individual assets')
 ax.scatter(std_port, mu_port, color='orange', zorder=6, s=150,
@@ -822,7 +821,7 @@ We illustrate this by running CAPM regressions $r_i = \alpha + \beta \, r_{\text
 
 The first uses a portfolio on the *unconditional* mean-variance frontier, constructed with constant weights from the unconditional moments.
 
-By {prf:ref}`hr87_cor31`, this is a valid reference for an unconditional single-beta representation, so we should see $\alpha \approx 0$.
+By {prf:ref}`hr87_cor31`, this is a valid reference for an unconditional single-beta representation, so the regression intercepts should be consistent with the zero-beta return $\alpha$ implied by the corollary.
 
 The second uses a conditionally efficient portfolio whose weights switch across regimes.
 
@@ -882,7 +881,9 @@ for i in range(n_assets_capm):
     print(f"{i+1:<8} {alphas_frontier[i]:>18.6f} {alphas_dynamic[i]:>18.6f}")
 ```
 
-The constant-weight frontier portfolio produces $\alpha \approx 0$ for every asset, confirming that the unconditional single-beta representation holds as predicted by {prf:ref}`hr87_cor31`.
+The constant-weight frontier portfolio produces intercepts close to a common value for every asset, confirming that the unconditional single-beta representation holds as predicted by {prf:ref}`hr87_cor31`.
+
+In general, {prf:ref}`hr87_cor31` guarantees a real zero-beta return $\alpha$, but that $\alpha$ need not be zero — it equals zero only under an extra normalization or for a specially chosen reference portfolio.
 
 The conditionally efficient portfolio, whose weights switch between regimes, produces non-zero alphas despite being on the conditional frontier in each state.
 
@@ -914,10 +915,18 @@ It behaves like a pricing
 function where the conditioning information set is the trivial sigma-algebra
 (containing only $\Omega$ and $\emptyset$).
 
+For $\pi^*$ to be well defined on $P^*$, the benchmark payoff $p^*$ must itself have a finite unconditional second moment, i.e., $p^* \in P^*$.
+
+This is the content of Assumption 4.1 in {cite:t}`HansenRichard1987`.
+
+Whether it holds can depend on the choice of numeraire.
+
 ````{prf:theorem} Pseudo-pricing function
 :label: hr87_thm41
 
-$(P^*, \pi^*)$ satisfies all the assumptions
+Suppose $p^* \in P^*$ (equivalently, $E(p^{*2}) < \infty$).
+
+Then $(P^*, \pi^*)$ satisfies all the assumptions
 imposed on $(P, \pi)$, with the trivial sigma-algebra replacing $\mathcal{G}$.
 ````
 
@@ -931,13 +940,13 @@ $$
 where the third equality uses the Law of Iterated Expectations and the last
 is the unconditional inner product.
 
-As a consequence, two pricing functions $\pi$ and $\pi^+$ (possibly
-derived from different economic models) that imply the same pseudo-pricing
-function $\pi^*$ will be *indistinguishable* using unconditional moment
-restrictions alone.
+Hansen and Richard show that if two pricing functions $\pi$ and $\pi^+$ agree on the **full payoff space** $P^*$, then their benchmark payoffs coincide almost surely.
 
-This is a precise statement of how conditioning down from $\pi$ to $\pi^*$
-can lose information.
+Thus conditioning down from $\pi$ to $\pi^*$ does *not* inherently lose discriminatory power.
+
+The loss of information arises instead when an econometrician tests moment restrictions using only a *subset* of the payoffs in $P^*$.
+
+Two distinct pricing functions may imply the same $\pi^*$ on that subset even though they differ on $P^*$ as a whole.
 
 ### Connection to Hansen-Singleton GMM
 
@@ -1063,8 +1072,12 @@ The main contributions of {cite:t}`HansenRichard1987` are:
 
 5. **Pseudo-pricing function**: $\pi^*(p) = E[\pi(p)] = E(p \, p^*)$ maps
    payoffs to real numbers and connects directly to {cite:t}`hansen1982generalized`
-   GMM estimation. Conditioning down to $\pi^*$ can lose information, and two
-   distinct pricing functions may imply the same $\pi^*$.
+   GMM estimation.
+   On the full payoff space $P^*$, two pricing functions that imply the same
+   $\pi^*$ must share the same benchmark payoff $p^*$.
+
+      - The loss of discriminatory power comes from testing only a *subset* of
+   payoffs, not from conditioning down per se.
 
 ## Exercises
 
