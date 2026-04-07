@@ -28,73 +28,95 @@ kernelspec:
 
 ## Overview
 
-This lecture studies a model of fiscal and monetary policy interactions developed by
-{cite}`DovisAccountingMFrevised`. 
+This lecture studies a model of fiscal and monetary policy interactions developed by {cite}`DovisAccountingMFrevised`.
 
 The model provides a framework for  revisiting some long-standing questions about **fiscal dominance** versus **monetary dominance** in a framework that allows for **partial commitment** to an inflation target.
 
 
 ```{note}
-For an early discussion of "partial commitment" in the context of fiscal and monetary policy, see the concluding section of {cite}`LucasStokey1982`,  the original working paper version of {cite}`LucasStokey1983`. In Quantecon's view, the referees and editors of the *Journal of Monetary Economics* version made a mistake by insisting that Lucas and Stokey rewrite the concluding section of their paper.
+For an early discussion of "partial commitment" in the context of fiscal and monetary policy, see the concluding section of {cite}`LucasStokey1982`,  the original working paper version of {cite}`LucasStokey1983`. 
+
+In Quantecon's view, the referees and editors of the *Journal of Monetary Economics* version made a mistake by insisting that Lucas and Stokey rewrite the concluding section of their paper.
 ```
 
 ```{note}
-{cite}`SargentWallace1981` contrasted these two types of "dominance"  as different ways of  coordinating
-monetary and fiscal policy.  They thought about them  at the beginning of the Reagan administration, when the 1970s surge in US inflation had not yet been tamed by the monetary-fiscal policies presided over by Paul Volcker. Sargent and Wallace's title, "Some Unpleasant Monetarist Arithmetic," expressed the idea that in the face of a persistent net-of-interest government deficit, efforts to reduce inflation through tight monetary policy work only temporarily, if at all. That is   because they lead to higher  government debt and thus greater gross-of-interest government deficits that must be financed  in the future.
+{cite}`SargentWallace1981` contrasted "fiscal dominance" and "monetary dominance"  as different ways of  coordinating
+monetary and fiscal policy.  
+
+They thought about them  at the beginning of the Reagan administration, when the 1970s surge in US inflation had not yet been tamed by the monetary-fiscal policies presided over by Paul Volcker. 
+
+Sargent and Wallace's title, "Some Unpleasant Monetarist Arithmetic," expressed the idea that in the face of a persistent net-of-interest government deficit, efforts to reduce inflation through tight monetary policy work only temporarily, if at all. 
+
+That is   because they lead to higher  government debt and thus greater gross-of-interest government deficits that must be financed  in the future.
 ```
 
-{cite}`DovisAccountingMFrevised` provides a framework for understanding how
-the **credibility** of a government's inflation-targeting mandate shapes equilibrium outcomes for inflation, public debt, and primary surpluses.
+A benevolent but unable-to-commit government has incentives to delegate monetary policy to a central bank with a narrow inflation-targeting mandate, but ex-post may choose to abrogate the mandate to generate seigniorage revenues.
 
-The paper posits  that there are two ways that a disinflation can occur:
+The decision to abrogate depends on two state variables: the level of fiscal fundamentals (outstanding public debt and the marginal utility of government spending) and a stochastic institutional cost that captures the legal, reputational, and political hurdles associated with overriding the mandate.
+
+Joint movements in these states lead the economy to transit endogenously between two regimes: a **monetary-dominant** regime, where the inflation target is honored, and a **fiscal-dominant** regime, where it is not.
+
+The model nests the Ramsey allocation (obtained when the cost of deviation is prohibitively large) and the Markov equilibrium (obtained when that cost is zero).
+
+The paper distinguishes two ways that a disinflation can occur:
 
 - **Fundamental disinflation**: a reduction in fiscal needs ($\theta$) leads inflation and debt to
   decline together.
-- **Institutional disinflation**: an increase in the credibility of the inflation mandate ($\xi$)   leads inflation to fall while debt *rises*.
+- **Institutional disinflation**: an increase in the credibility of the inflation mandate ($\xi$) leads inflation to fall while debt *rises*.
 
 The contrasting comovement of debt and inflation in these types of disinflations
 allows the authors to create a statistical model that lets them classify observed disinflations into episodes that were driven by fiscal fundamentals or by institutional changes. 
 
-
-
-The paper applies these ideas to Colombia, Chile, and the United States, using a
+The paper applies these ideas to Colombia and Chile, using a
 **particle filter** to recover the sequences of fiscal and institutional shocks that are consistent with the observed joint paths of inflation and debt-to-GDP ratios.
 
 In this lecture, we will:
 
-1. Set up the model environment — a {cite}`SargentWallace1981` economy with a household, firms, and a government
+1. Set up the model environment in a {cite:t}`SargentWallace1981` economy with a household and a government
 2. Describe implementable fiscal and monetary outcomes
 3. Characterize two polar benchmarks: the **Ramsey** outcome (full commitment) and the
    **Markov** outcome (no commitment)
-4. Formulate the full model with endogenous regime switching governed by
+4. Formulate a partial-commitment model with endogenous regime switching governed by
    a stochastic cost $\xi$ of deviating from the mandate
 5. Write Python code to solve the model numerically
-6. Simulate equilibrium paths and impulse response functions
-7. Implement a particle filter to estimate the model on data
+6. Simulate the two types of disinflation (fundamental and institutional)
+7. Implement an illustrative particle filter on synthetic data
+8. Summarize the paper's case studies of Colombia and Chile
 
-Let's start by importing some Python tools.
+We use JAX to vectorize the key computations and accelerate value function iteration and particle filtering.
 
-```{code-cell} ipython3
-import matplotlib.pyplot as plt
-import numpy as np
-from numba import njit, prange
-from scipy.optimize import brentq, minimize_scalar
-from scipy.interpolate import interp1d
-from scipy.special import logsumexp
-import matplotlib.gridspec as gridspec
+```{admonition} GPU
+:class: warning
 
-plt.rcParams['figure.figsize'] = (10, 6)
-plt.rcParams['font.size'] = 12
+This lecture was built using a machine with JAX installed and access to a GPU.
+
+To run this lecture on [Google Colab](https://colab.research.google.com/), click on the "rocket" icon at the top of the page, select "Colab", and set the runtime environment to include a GPU.
+
+To run this lecture on your own machine, you need to install [Google JAX](https://github.com/google/jax).
 ```
 
-## The Economy
+```{code-cell} ipython3
+import jax
+import jax.numpy as jnp
+from jax import jit, vmap, lax
+from collections import namedtuple
+from functools import partial
+from scipy.stats import norm
+import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
+import numpy as np
+
+jax.config.update("jax_enable_x64", True)
+```
+
+## The economy
 
 ### Environment
 
 Consider an economy that blends elements of {cite}`AMSS_2002` and {cite}`Calvo1978`
 (see also {cite}`LucasStokey1983` and {cite}`ChariKehoe1999`).
 
-Time is discrete, indexed by $t = 0, 1, \ldots$. 
+Time is discrete, indexed by $t = 0, 1, \ldots$.
 
 The exogenous state is $s_t \in \mathcal{S}$, following
 a Markov process with transition $\Pr(s_{t+1}|s_t)$.
@@ -117,35 +139,37 @@ Here
 - $l$ is labor supply
 - $m$ is real money balances
 - $g$ is public consumption
+- $\nu(l)$ is a strictly increasing and convex labor disutility function
+- $v(m)$ and $u(g)$ are strictly increasing and concave
 - $\theta(s)$ is a preference shock to the marginal utility of government spending
 - $\beta$ is the household discount factor
 
-The resource constraint is $c(s^t) + g(s^t) \le l(s^t)$.
+The linear production technology is operated by competitive firms, and the resource constraint is $c(s^t) + g(s^t) \leq l(s^t)$.
 
-The government finances spending $g$ using a labor income tax $\tau$, by issuing real
-uncontingent debt $b$, and by printing money $M$.
+The government finances spending $g$ with linear taxes on labor income, by issuing real uncontingent debt $b$, and by printing money injected into the economy via open market operations.
 
-The government is benevolent but may have a discount factor $\hat\beta \le \beta$.
+The government is benevolent but may have a different discount factor $\hat\beta \leq \beta$.
 
-### Implementable Allocations
+### Implementable allocations
 
-Following {cite}`Aiyagari1989` and {cite}`AMSS_2002` (see also QuantEcon lectures {doc}`amss`, {doc}`amss2`, and {doc}`amss3`), define the **real primary surplus** as
-
-$$
-\Delta(s^t) \equiv \tau(s^t) l(s^t) - g(s^t) - T(s^t).
-$$
-
-It is possible  then to derive a static **indirect utility function over surpluses**:
+Following the insight in {cite:t}`Aiyagari1989` and {cite:t}`AMSS_2002` (see also QuantEcon lectures {doc}`amss`, {doc}`amss2`, and {doc}`amss3`), we define the **real primary surplus** as
 
 $$
-U(\Delta, s) = \max_{c,l,g} \; c - \nu(l) + \theta(s)\, u(g)
+\Delta(s^t) \equiv \tau(s^t) l(s^t) - g(s^t).
 $$
 
-where the maximization is
-subject to the resource constraint and a static implementability constraint
-$(1 - \nu'(l))\, l - g \ge \Delta$.
+We can then define the static **indirect utility function over surpluses** as
 
-This function $U(\Delta, s)$ is **decreasing and concave** in $\Delta$ for all $s$.
+$$
+U(\Delta, s) = \max_{c,\,l,\,g} \; c - \nu(l) + \theta(s)\, u(g)
+$$
+
+subject to the resource constraint $c + g \leq l$ and the static implementability constraint
+$(1 - \nu'(l))\, l - g \geq \Delta$.
+
+This function is well-defined for all surplus values below the maximal surplus implied by the static Laffer curve, $\Delta \leq \bar\Delta \equiv \max_l (1 - \nu'(l))\,l$.
+
+The indirect utility function $U(\Delta, s)$ is *decreasing and concave* in $\Delta$ for all $s$, and the marginal disutility of primary surplus is increasing and is affected by the fundamental shocks.
 
 Let $\phi \equiv M_{t-1}/P_t$ denote real money balances (price of money in terms of goods) and define
 
@@ -153,7 +177,7 @@ $$
 H(\phi) \equiv \phi + v'(\phi)\, \phi.
 $$
 
-The **money demand** or **portfolio balance**  condition becomes
+The **money demand** or **portfolio balance** condition becomes
 
 $$
 \mu\, \phi = \beta \sum_{s'} \Pr(s'|s)\, H(\phi'),
@@ -172,63 +196,50 @@ $$
 V_0 = \sum_t \sum_{s^t} \hat\beta^t \Pr(s^t|s_0) \left[ U(\Delta(s^t), s_t) + v(\phi(s^t)) \right].
 $$
 
+We now define the model primitives as Python functions.
+
+The labor disutility is $\nu(l) = \chi\, l^{1+\psi}/(1+\psi)$.
+
+Money utility is $v(\phi) = \kappa\phi - \eta_m\phi^2$.
+
+Government spending utility is $u(g) = g^{1-\sigma}/(1-\sigma)$.
+
+The function $H(\phi) = \phi\,(1 + v'(\phi))$ appears in the money demand condition, and $h(\phi) = v'(\phi)\,\phi$ captures seigniorage.
+
 ```{code-cell} ipython3
-# ============================================================
-# Model Primitives
-# ============================================================
+def ν(l, χ, ψ):
+    return χ * l**(1.0 + ψ) / (1.0 + ψ)
 
-@njit
-def nu(l, chi, psi):
-    """Labor disutility: ν(l) = χ l^{1+ψ} / (1+ψ)."""
-    return chi * l**(1.0 + psi) / (1.0 + psi)
+def ν_prime(l, χ, ψ):
+    return χ * l**ψ
 
-@njit
-def nu_prime(l, chi, psi):
-    """ν'(l) = χ l^ψ."""
-    return chi * l**psi
+def v_money(φ, κ, η_m):
+    return κ * φ - η_m * φ**2
 
-@njit
-def v_money(phi, kappa, eta_m):
-    """Utility from real money balances: v(φ) = κφ - η φ²."""
-    return kappa * phi - eta_m * phi**2
+def v_money_prime(φ, κ, η_m):
+    return κ - 2.0 * η_m * φ
 
-@njit
-def v_money_prime(phi, kappa, eta_m):
-    """v'(φ) = κ - 2η φ."""
-    return kappa - 2.0 * eta_m * phi
+def u_gov(g, σ):
+    return jnp.where(jnp.abs(σ - 1.0) < 1e-10,
+                     jnp.log(g),
+                     g**(1.0 - σ) / (1.0 - σ))
 
-@njit
-def u_gov(g, sigma):
-    """Government spending utility: u(g) = g^{1-σ}/(1-σ)."""
-    if abs(sigma - 1.0) < 1e-10:
-        return np.log(g)
-    return g**(1.0 - sigma) / (1.0 - sigma)
+def u_gov_prime(g, σ):
+    return g**(-σ)
 
-@njit
-def u_gov_prime(g, sigma):
-    """u'(g) = g^{-σ}."""
-    return g**(-sigma)
+def H_func(φ, κ, η_m):
+    return φ * (1.0 + v_money_prime(φ, κ, η_m))
 
-@njit
-def H_func(phi, kappa, eta_m):
-    """H(φ) = φ + v'(φ) φ = φ(1 + v'(φ))."""
-    return phi * (1.0 + v_money_prime(phi, kappa, eta_m))
+def H_func_prime(φ, κ, η_m):
+    return 1.0 + κ - 4.0 * η_m * φ
 
-@njit
-def H_func_prime(phi, kappa, eta_m):
-    """H'(φ) = 1 + v'(φ) + v''(φ) φ = 1 + κ - 4ηφ."""
-    # v'(φ) = κ - 2ηφ, v''(φ) = -2η
-    return 1.0 + kappa - 4.0 * eta_m * phi
-
-@njit
-def h_func(phi, kappa, eta_m):
-    """Seigniorage: h(φ) = v'(φ) φ."""
-    return v_money_prime(phi, kappa, eta_m) * phi
+def h_func(φ, κ, η_m):
+    return v_money_prime(φ, κ, η_m) * φ
 ```
 
-## Policy Determination
+## Policy determination
 
-### The Credibility Problem
+### The credibility problem
 
 An important innovation of {cite}`DovisAccountingMFrevised` is to model policy determination under
 **partial commitment** in the following sense.
@@ -239,27 +250,21 @@ promised value for real balances $\phi'$) for  next period.
 But a next-period government
 can choose to **honor** or **abrogate** the mandate.
 
-The cost of abrogating is a random variable $\xi(s)$ that the authors intend to  capture either some or all of the following consequences of abrogation:
+The cost of abrogating is a random variable $\xi$ that captures the legal, reputational, and political hurdles associated with overriding the mandate:
 
 - reputational losses (see {cite}`AtkesonKehoe2001`, {cite}`DovisKirpalani2021`)
-- coordination failures that trigger worse equilibria
-- institutional constraints (see {cite}`Lohmann1992`)
-- political costs
+- coordination failures that lead to inferior equilibria
+- institutional constraints and political costs faced by policymakers
 
-The authors use this specification  to **nest** both the Ramsey outcome (high $\xi$,
-so the mandate is always honored) and the Markov outcome ($\xi = 0$, so the mandate is
-always abrogated)
+This specification *nests* both the Ramsey outcome (when $\xi$ is always large enough so that the mandate is always honored) and the Markov outcome (when $\xi = 0$ so the mandate is always abrogated).
 
-This approach is related to the loose commitment framework
-of {cite}`DebortoliNunes2010`, but differs because here the regime is **endogenous**.
+The approach is related to the loose commitment framework of {cite}`DebortoliNunes2010`, but differs in that the regime is *endogenous*.
 
-### Recursive Formulation
+### Recursive formulation
 
-The state is $x = (b, \phi, s)$ where $b$ is inherited real debt, $\phi$ is the promised
-real balances, and $s = (\theta, \xi)$ is the exogenous state.
+The state is $x = (b, \phi, s)$ where $b$ is inherited real debt, $\phi$ is the promised real balances, and $s = (\theta, \xi)$ is the exogenous state.
 
-This recursive formulation builds on {cite}`Abreu1988`, {cite}`ChariKehoe1990`, and
-{cite}`Chang1998`.
+This recursive formulation builds on {cite}`Abreu1988`, {cite}`ChariKehoe1990`, and {cite}`Chang1998`.
 
 ```{note}
 For descriptions of these frameworks, see other lectures in this suite of QuantEcon lecture notes, including  {doc}`Ramsey plans, time inconsistency, sustainable plans <calvo>`,{doc}`competitive equilibria in the Chang model <chang_ramsey>`, and {doc}`sustainable plans in the Chang model <chang_credible>`.
@@ -270,16 +275,13 @@ The economy can be in one of two regimes:
 - **Monetary dominance** (MD, $\eta = 1$): the government honors the inflation target.
 - **Fiscal dominance** (FD, $\eta = 0$): the government ignores the target and chooses $\phi$ to   maximize short-run welfare.
 
-The transition between these regimes is related to the fiscal theory of the price level
-literature ({cite}`Leeper1991`, {cite}`Bianchi2013`, {cite}`Cochrane2023`),
-but differs in that the switches are **endogenous** and that the policies in each regime are
-also endogenous (not governed by exogenous rules).
+The transition between these regimes is related to the influential work of {cite}`Leeper1991`, {cite}`Bianchi2013`, and {cite}`BianchiIlut2017`, but differs on two fronts: first, the switches from one regime to the other are **endogenous**, and second, the policy chosen in each regime is also endogenous rather than governed by exogenous monetary and fiscal rules.
 
 The **regime indicator** is
 
 $$
 \eta(b', \phi', s') = \begin{cases}
-1 & \text{if } V^{md}(b', \phi', s') \ge V^{fd}(b', s') - \xi(s') \\
+1 & \text{if } V^{md}(b', \phi', s') \geq V^{fd}(b', s') - \xi(s') \\
 0 & \text{otherwise}
 \end{cases}
 $$
@@ -291,18 +293,16 @@ V^{md}(b, \phi, s) = \max_{\Delta, b', \mu, \phi'} U(\Delta, \theta) + v(\phi) +
   \hat\beta \sum_{s'} \Pr(s'|s)\, V(b', \phi', s')
 $$
 
-where maximization is
-subject to the budget constraint $\Delta = b + \phi - \beta b' - \mu\phi$ and the money demand
-condition $\mu\phi = J(b', \phi', s)$.
+where maximization is subject to the budget constraint $\Delta = b + \phi - \beta b' - \mu\phi$ and the money demand condition $\mu\phi = J(b', \phi', s)$.
 
-**Fiscal dominance** — the government's problem is augmented by the addition of  current $\phi$ to its choice set, so that the government solves:
+**Fiscal dominance** — the government's problem adds current $\phi$ to its choice set:
 
 $$
 V^{fd}(b, s) = \max_{\phi, \Delta, b', \mu, \phi'} U(\Delta, \theta) + v(\phi) +
   \hat\beta \sum_{s'} \Pr(s'|s)\, V(b', \phi', s')
 $$
 
-where the static first-order necessary condition with respect to $\phi$  is $-U'(\Delta, \theta) = v'(\phi^{fd})$.
+where the static first-order necessary condition with respect to $\phi$ is $-U'(\Delta, \theta) = v'(\phi^{fd})$.
 
 The **expected marginal value of real balances** is
 
@@ -313,82 +313,47 @@ J(b', \phi', s) = \beta \sum_{s'} \Pr(s'|s) \left[
 \right].
 $$
 
+We collect all model parameters into a named tuple, calibrated to an average of Colombia and Chile 1960–2017 following Table 1 of {cite:t}`DovisAccountingMFrevised`.
+
 ```{code-cell} ipython3
-# ============================================================
-# Parameter Container
-# ============================================================
-
-class DovisParams:
-    """
-    Container for model parameters.
-
-    Two calibrations are available:
-      - 'LA': Latin American average 1960–2017
-      - 'US': United States 1914–2017
-    """
-
-    def __init__(self, calibration='LA'):
-
-        # Common across calibrations
-        self.psi = 1.0        # inverse Frisch elasticity
-        self.sigma = 2.0      # inverse EIS for gov't spending
-
-        if calibration == 'LA':
-            self.beta = 0.95
-            self.beta_hat = 0.92
-            self.chi = 0.015
-            self.kappa = 0.68
-            self.eta_m = 0.07
-            self.theta_bar = 130.0
-            self.rho_theta = 0.9
-            self.sigma_theta = np.sqrt(60.0)
-            self.rho_xi = 0.998
-            self.sigma_xi = 0.112
-            self.lam = 0.2       # Gumbel parameter λ
-        elif calibration == 'US':
-            self.beta = 0.95
-            self.beta_hat = 0.91
-            self.chi = 0.021
-            self.kappa = 0.70
-            self.eta_m = 0.06
-            self.theta_bar = 2.0
-            self.rho_theta = 0.9
-            self.sigma_theta = np.sqrt(20.0)
-            self.rho_xi = 0.99
-            self.sigma_xi = 0.3
-            self.lam = 0.5
-        else:
-            raise ValueError("calibration must be 'LA' or 'US'")
-
-        # Derived
-        self.phi_star = self.kappa / (2.0 * self.eta_m)  # money satiation
-        self.euler_mascheroni = 0.5772156649
-
-        # Grid parameters
-        self.n_B = 80          # grid points for total liabilities B
-        self.n_phi = 40        # grid points for promised φ'
-        self.n_theta = 5       # number of θ states
-        self.n_xi = 7          # number of ξ₁ states
-        self.B_max = 50.0      # upper bound for B
-        self.b_max = 30.0      # upper bound for real debt
-
-    def __repr__(self):
-        return f"DovisParams(β={self.beta}, β̂={self.beta_hat}, calibration)"
+DovisParams = namedtuple('DovisParams', [
+    'β', 'β_hat', 'χ', 'κ', 'η_m', 'ψ', 'σ',
+    'θ_bar', 'ρ_θ', 'σ_θ', 'ρ_ξ', 'σ_ξ', 'λ',
+    'φ_star', 'n_B', 'n_φ', 'n_θ', 'n_ξ', 'B_max'
+])
 
 
-params_la = DovisParams('LA')
-params_us = DovisParams('US')
-print(f"LA calibration: β={params_la.beta}, β̂={params_la.beta_hat}, "
-      f"φ*={params_la.phi_star:.2f}")
-print(f"US calibration: β={params_us.beta}, β̂={params_us.beta_hat}, "
-      f"φ*={params_us.phi_star:.2f}")
+def create_params():
+    """Create a DovisParams named tuple."""
+    ψ, σ = 1.0, 2.0
+    β, β_hat = 0.95, 0.92
+    χ, κ, η_m = 0.015, 0.70, 0.06
+    θ_bar = 130.0
+    # Table 1 reports *unconditional* variances; convert to
+    # innovation std devs for Tauchen: σ_ε = √(σ²_y (1 − ρ²))
+    ρ_θ = 0.8
+    σ_θ = float(np.sqrt(15.0 * (1.0 - 0.8**2)))
+    ρ_ξ = 0.99
+    σ_ξ = float(np.sqrt(0.05 * (1.0 - 0.99**2)))
+    λ = 20.0
+
+    φ_star = κ / (2.0 * η_m)
+
+    return DovisParams(
+        β=β, β_hat=β_hat, χ=χ, κ=κ, η_m=η_m, ψ=ψ, σ=σ,
+        θ_bar=θ_bar, ρ_θ=ρ_θ, σ_θ=σ_θ, ρ_ξ=ρ_ξ, σ_ξ=σ_ξ, λ=λ,
+        φ_star=φ_star, n_B=80, n_φ=40, n_θ=5, n_ξ=7, B_max=50.0
+    )
+
+
+params_la = create_params()
 ```
 
-## Two Benchmark Outcomes
+## Two benchmark outcomes
 
-Before studying the full model, we analyze two polar benchmarks.
+Before turning to the full model, it is useful to analyze two polar benchmarks.
 
-### The Ramsey Outcome (Full Commitment)
+### The Ramsey outcome (full commitment)
 
 Under full commitment ($\xi$ always large enough so that $\eta = 1$), the government solves
 
@@ -399,22 +364,37 @@ $$
 
 subject to $\Delta = b + \phi - \beta b' - \beta \sum_{s'} \Pr(s'|s) H(\phi'(s'))$.
 
+```{note}
+The choice of $\phi'(s')$ here is allowed to be *state-contingent* — the Ramsey planner can promise different real balances in different future states.
+
+The partial-commitment model studied below instead restricts the promise to a single $\phi'$ that does not vary with $s'$.
+
+We present the Ramsey problem in its more general form as a benchmark; the restriction to a non-contingent promise is what makes abrogation tempting and gives rise to the credibility problem.
+```
+
+Under the Ramsey outcome, there is a trade-off between following the Friedman rule and making real debt state contingent.
+
+If the volatility of the marginal value of government expenditures is sufficiently small, the benefits of making the real debt state contingent are small relative to the cost of anticipated inflation and it is optimal to set $\phi(s') = \phi^*$ for all $s'$ next period.
+
 Key properties:
 
-- For the quadratic specification $v(\phi) = \kappa\phi - \eta_m\phi^2$ used in this lecture, the optimal $\phi' = \phi^* = \kappa/(2\eta_m)$ for all $t \ge 1$ — a version of the **Friedman rule**.
-- The **inflation rate is constant** and independent of fiscal fundamentals:
-  $1 + \pi^R = \beta H(\phi^*) / \phi^*$.
+- For the quadratic specification $v(\phi) = \kappa\phi - \eta_m\phi^2$, the satiation point is $\phi^* = \kappa/(2\eta_m)$.
+- Under the conditions of Proposition 3 of the paper, the Ramsey outcome has a fixed inflation level
+  $1 + \pi^R = \beta H(\phi^*) / \phi^*$ that does not depend on fiscal fundamentals — the level of debt and $\theta$.
 - Surpluses and real debt follow the Euler equation
   $-U'(\Delta, s) = \frac{\hat\beta}{\beta} \sum_{s'} \Pr(s'|s) [-U'(\Delta', s')]$.
 
-One can implement the Ramsey outcome by **delegating** monetary policy to an independent
-central bank with a fixed inflation target $\pi^R$, as in {cite}`Aiyagari2002`.
+One way to implement the Ramsey outcome is to delegate monetary policy to an independent central bank with a mandate to target an inflation rate of $\pi_R$, while fiscal policy is determined by the treasury, which solves a problem similar to that in the real economy studied by {cite}`AMSS_2002`, taking as given a constant flow of seigniorage revenues (which may be negative).
 
-### The Markov Outcome (No Commitment)
+### The Markov outcome (no commitment)
 
-When $\xi(s) = 0$ for all $s$, it is always optimal to abrogate the mandate ($\eta = 0$). 
+We now turn to the polar opposite case in which the government has no way to commit to inflation and consider a Markov equilibrium outcome.
 
-The government solves
+This is a special case of our environment with $\xi(s) = 0$ for all $s$ in which case the fiscal dominant regime is always optimal.
+
+Consequently, we can drop $\phi'$ as a choice since it has no effect on the value.
+
+The problem reduces to
 
 $$
 V^M(b, s) = \max_{\phi, \Delta, b'} U(\Delta, \theta) + v(\phi) +
@@ -425,161 +405,116 @@ subject to $\Delta = b + \phi - \beta b' - \beta \sum_{s'} \Pr(s'|s) H(\phi^M(b'
 
 Key properties of the Markov outcome:
 
-- Inflation **responds strongly** to fiscal pressures
-- Debt capacity is **sharply limited**
-- There is an **incentive effect**: debt issuance is distorted downward relative to Ramsey
-  because the term $\sum_{s'} \Pr(s'|s) H'(\phi^M(b', s')) \frac{\partial \phi^M}{\partial b'} < 0$
-  acts as an implicit tax on debt issuance
-- In the deterministic case with $\beta = \hat\beta$: real debt converges to zero (Appendix C of the paper)
+- The static optimality condition $-U'(\Delta, \theta) = v'(\phi^{fd})$ equates the marginal benefit of real balances to the marginal cost of the primary surplus, so the model predicts a higher price level (lower real balances) when the marginal cost of the surplus is high.
+- Inflation *responds strongly* to fiscal pressures — it is high on average, volatile, and closely related to fiscal considerations.
+- Debt capacity is *sharply limited* — the term $\frac{\partial J(b', \phi', s)}{\partial b'}/\beta$ is negative and effectively acts as a tax on debt issuance, leading to lower debt levels relative to the Ramsey outcome.
+- In the deterministic case with $\beta = \hat\beta$: real debt converges to zero while the Ramsey outcome sustains positive debt levels (Appendix B of the paper).
 
-The full model **interpolates** between these two extremes depending on the cost $\xi_t$.
+The full model *interpolates* between these two extremes depending on the cost $\xi_t$.
+
+We compute the indirect utility $U(\Delta, \theta)$ from the static problem
+
+$$
+\max_{l,\,g}\; l - g - \nu(l) + \theta\,u(g) \quad \text{s.t.}\quad (1 - \nu'(l))\,l - g \geq \Delta.
+$$
+
+With $\nu(l) = \chi\,l^{1+\psi}/(1+\psi)$, the Laffer curve gives tax revenue $T(l) = (1 - \chi\,l^\psi)\,l$.
+
+The first-order conditions are $\theta\,u'(g) = 1 + \lambda$ and $(1 - \nu'(l))(1+\lambda) = \lambda\,\nu''(l)\,l$, where $\lambda$ is the multiplier on the surplus constraint.
+
+We bisect on $\lambda \geq 0$ to find the optimal $(l, g)$ for given $(\Delta, \theta)$.
+
+By the envelope theorem, $U'(\Delta) = -\lambda$.
+
+The following code implements this procedure, returning both $U(\Delta, \theta)$ and $U'(\Delta, \theta)$.
 
 ```{code-cell} ipython3
-# ============================================================
-# Indirect Utility over Primary Surpluses
-# ============================================================
-# U(Δ, θ) via the static problem:
-#   max_{T,g} W(T) + θ u(g) - g  subject to  T - g ≥ Δ
-#
-# With ν(l) = χ l^{1+ψ}/(1+ψ), the Laffer curve gives
-# tax revenue T = (1 - χ l^ψ) l
-#
-# We solve this numerically for given (Δ, θ).
+@jit
+def indirect_utility(Δ, θ, χ, ψ, σ):
+    """Compute U(Δ, θ) and U'(Δ, θ) by bisection on λ."""
+    g_star = θ**(1.0 / σ)
+    l_star = (1.0 / χ)**(1.0 / ψ)
 
-@njit
-def indirect_utility(Delta, theta, chi, psi, sigma):
-    """
-    Compute U(Δ, θ) and its derivative U'(Δ, θ)
-    numerically for the specification
-       ν(l) = χ l^{1+ψ}/(1+ψ), u(g) = g^{1-σ}/(1-σ).
-    """
-    # For simplicity, we solve for optimal g and l by using
-    # the FOCs: θ u'(g) = 1 + λ and (1 - ν'(l)) = λ (implicit in T)
-    # where λ = U'(Δ)
-    # Here we use a grid search / bisection approach.
+    l_peak = (1.0 / ((1.0 + ψ) * χ))**(1.0 / ψ)
+    T_max = (1.0 - χ * l_peak**ψ) * l_peak
 
-    # If Δ is very negative (large deficit), no distortion needed
-    # Find g*(θ): θ g^{-σ} = 1 => g* = θ^{1/σ}
-    g_star = theta**(1.0 / sigma)
-
-    if Delta <= -g_star:
-        # Unconstrained optimum: no taxes needed
-        U_val = g_star - nu(g_star, chi, psi) + theta * u_gov(g_star, sigma)
-        U_prime = 0.0
-        return U_val, U_prime
-
-    # The maximum surplus from Laffer curve
-    # T_max = max_l (1 - χ l^ψ)l
-    # FOC: 1 - (1+ψ) χ l^ψ = 0 => l* = (1/((1+ψ)χ))^{1/ψ}
-    l_peak = (1.0 / ((1.0 + psi) * chi))**(1.0 / psi)
-    T_max = (1.0 - chi * l_peak**psi) * l_peak
-    Delta_max = T_max  # max surplus when g = 0
-
-    if Delta >= Delta_max * 0.99:
-        return -1e10, -1e10  # infeasible
-
-    # Bisect on multiplier λ ≥ 0
-    # Given λ: T(λ) from Laffer curve, g(λ) from θ g^{-σ} = 1 + λ
-    # Then surplus = T(λ) - g(λ) should equal Δ
-
-    # Direct numerical approach: given Δ, θ, find optimal (l, g)
-    # Lagrangian: max_{l,g} l - ν(l) + θu(g) - g + λ((1-ν'(l))l - g - Δ)
-    # FOC(l): 1 - ν'(l) + λ((-ν''(l))l + (1-ν'(l))) = 0
-    #       => (1 - ν'(l))(1 + λ) - λ ν''(l) l = 0
-    # FOC(g): θu'(g) - 1 - λ = 0 => g = (θ/(1+λ))^{1/σ}
-    # Constraint: (1-ν'(l))l - g = Δ
-
-    # Bisect on λ ∈ [0, λ_max]
-    lam_lo = 0.0
-    lam_hi = 1000.0
-
-    for _ in range(100):
-        lam_mid = 0.5 * (lam_lo + lam_hi)
-        # From FOC(g):
-        g_val = (theta / (1.0 + lam_mid))**(1.0 / sigma)
-        # From FOC(l): (1+λ)(1 - χ l^ψ) = λ ψ χ l^ψ
-        # => 1 - χ l^ψ + λ - λ χ l^ψ = λ ψ χ l^ψ
-        # => 1 + λ = χ l^ψ (1 + λ + λ ψ) = χ l^ψ (1 + λ(1+ψ))
-        # => l^ψ = (1 + λ) / (χ (1 + λ(1+ψ)))
-        denom = chi * (1.0 + lam_mid * (1.0 + psi))
-        if denom <= 0:
-            lam_hi = lam_mid
-            continue
-        l_psi = (1.0 + lam_mid) / denom
-        if l_psi <= 0:
-            lam_hi = lam_mid
-            continue
-        l_val = l_psi**(1.0 / psi)
-        T_val = (1.0 - chi * l_val**psi) * l_val
+    def bisect_body(_, bounds):
+        λ_lo, λ_hi = bounds
+        λ_mid = 0.5 * (λ_lo + λ_hi)
+        g_val = (θ / (1.0 + λ_mid))**(1.0 / σ)
+        denom = jnp.maximum(χ * (1.0 + λ_mid * (1.0 + ψ)), 1e-15)
+        l_ψ = jnp.maximum((1.0 + λ_mid) / denom, 1e-15)
+        l_val = l_ψ**(1.0 / ψ)
+        T_val = (1.0 - χ * l_val**ψ) * l_val
         surplus = T_val - g_val
-        if surplus > Delta:
-            lam_hi = lam_mid
-        else:
-            lam_lo = lam_mid
+        new_lo = jnp.where(surplus <= Δ, λ_mid, λ_lo)
+        new_hi = jnp.where(surplus > Δ, λ_mid, λ_hi)
+        return (new_lo, new_hi)
 
-    lam_opt = 0.5 * (lam_lo + lam_hi)
-    g_opt = (theta / (1.0 + lam_opt))**(1.0 / sigma)
-    l_psi_opt = (1.0 + lam_opt) / (chi * (1.0 + lam_opt * (1.0 + psi)))
-    l_opt = l_psi_opt**(1.0 / psi)
+    λ_lo, λ_hi = lax.fori_loop(0, 100, bisect_body, (0.0, 1000.0))
+    λ_opt = 0.5 * (λ_lo + λ_hi)
+    g_opt = (θ / (1.0 + λ_opt))**(1.0 / σ)
+    denom_opt = jnp.maximum(χ * (1.0 + λ_opt * (1.0 + ψ)), 1e-15)
+    l_opt = jnp.maximum((1.0 + λ_opt) / denom_opt, 1e-15)**(1.0 / ψ)
 
-    U_val = l_opt - nu(l_opt, chi, psi) + theta * u_gov(g_opt, sigma)
-    # By envelope theorem, U'(Δ) = -λ
-    U_prime = -lam_opt
+    U_bisect = l_opt - g_opt - ν(l_opt, χ, ψ) + θ * u_gov(g_opt, σ)
+    U_uncon = l_star - ν(l_star, χ, ψ) - g_star + θ * u_gov(g_star, σ)
 
+    unconstrained = Δ <= -g_star
+    infeasible = Δ >= T_max * 0.99
+
+    U_val = jnp.where(unconstrained, U_uncon,
+                      jnp.where(infeasible, -1e10, U_bisect))
+    U_prime = jnp.where(unconstrained, 0.0,
+                        jnp.where(infeasible, -1e10, -λ_opt))
     return U_val, U_prime
 ```
 
-```{code-cell} ipython3
-# ============================================================
-# Verify properties of indirect utility
-# ============================================================
+Let's plot $U(\Delta, \theta)$ and $U'(\Delta, \theta)$ for a range of $\Delta$ values and three different $\theta$ values
 
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Indirect utility and surplus costs
+    name: fig-indirect-utility
+---
 p = params_la
-Delta_grid = np.linspace(-5.0, 3.0, 200)
-theta_vals = [80.0, 130.0, 200.0]
+Δ_grid = jnp.linspace(-5.0, 3.0, 200)
+θ_vals = [80.0, 130.0, 200.0]
+
+iu_vec = vmap(indirect_utility, in_axes=(0, None, None, None, None))
 
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
-for theta_val in theta_vals:
-    U_vals = np.zeros_like(Delta_grid)
-    U_primes = np.zeros_like(Delta_grid)
-    for i, d in enumerate(Delta_grid):
-        U_vals[i], U_primes[i] = indirect_utility(
-            d, theta_val, p.chi, p.psi, p.sigma)
+for θ_val in θ_vals:
+    U_vals, U_primes = iu_vec(Δ_grid, θ_val, p.χ, p.ψ, p.σ)
 
     mask = U_vals > -1e9
-    axes[0].plot(Delta_grid[mask], U_vals[mask],
-                 label=f'θ = {theta_val:.0f}')
-    axes[1].plot(Delta_grid[mask], U_primes[mask],
-                 label=f'θ = {theta_val:.0f}')
+    axes[0].plot(Δ_grid[mask], U_vals[mask], lw=2,
+                 label=f'θ = {θ_val:.0f}')
+    axes[1].plot(Δ_grid[mask], U_primes[mask], lw=2,
+                 label=f'θ = {θ_val:.0f}')
 
-axes[0].set_xlabel('Primary surplus Δ')
+axes[0].set_xlabel('primary surplus Δ')
 axes[0].set_ylabel('U(Δ, θ)')
-axes[0].set_title('Indirect utility over surpluses')
 axes[0].legend()
-axes[0].grid(alpha=0.3)
 
-axes[1].set_xlabel('Primary surplus Δ')
+axes[1].set_xlabel('primary surplus Δ')
 axes[1].set_ylabel("U'(Δ, θ)")
-axes[1].set_title("Marginal cost of surpluses")
 axes[1].legend()
-axes[1].grid(alpha=0.3)
 
 plt.tight_layout()
 plt.show()
 ```
 
-The left panel confirms that $U(\Delta, \theta)$ is **decreasing and concave** in $\Delta$: higher
-surpluses are costly because they require more distortionary taxation. 
+The left panel confirms that $U(\Delta, \theta)$ is *decreasing and concave* in $\Delta$: higher surpluses are costly because they require more distortionary taxation.
 
-The right panel shows
-the marginal cost of surpluses $U'(\Delta, \theta) < 0$, which becomes more negative as $\Delta$
-approaches the peak of the Laffer curve.
+The right panel shows the marginal cost of surpluses $U'(\Delta, \theta) < 0$, which becomes more negative as $\Delta$ approaches the peak of the Laffer curve.
 
-Higher $\theta$ shifts the curves because greater social value of government spending makes
-running a surplus even more costly.
+Higher $\theta$ shifts the curves because greater social value of government spending makes running a surplus even more costly.
 
-## The Full Model with Gumbel Shocks
+## The full model with Gumbel shocks
 
 Following the paper's computational approach, the cost $\xi$ is decomposed as
 
@@ -587,8 +522,7 @@ $$
 \xi_t = \xi_{1,t} + \xi^{fd}_t - \xi^{md}_t,
 $$
 
-where $\xi_{1,t}$ is a persistent AR(1) component (discretized via the {cite}`Tauchen1986` method) and $\xi^{fd}_t$,
-$\xi^{md}_t$ are i.i.d. **Gumbel** shocks with mean zero.
+where $\xi_{1,t}$ is a persistent AR(1) component (discretized via the {cite:t}`Tauchen1986` method) and $\xi^{fd}_t$, $\xi^{md}_t$ are i.i.d. **Gumbel** shocks with mean zero.
 
 The Gumbel specification delivers a **logit** formula for the probability of monetary dominance:
 
@@ -608,83 +542,56 @@ $$
 
 This makes the value function differentiable and the numerical solution well behaved.
 
-```{code-cell} ipython3
-# ============================================================
-# Discretize exogenous states using Tauchen method
-# ============================================================
+We discretize the AR(1) processes for $\theta$ and $\xi_1$ using the {cite:t}`Tauchen1986` method, then build grids for total liabilities $B$ and promised real balances $\phi'$.
 
-def tauchen(rho, sigma, n, m=3):
-    """
-    Tauchen method for discretizing AR(1) process
-       y' = rho * y + sigma * eps,  eps ~ N(0,1)
-    Returns grid y and transition matrix P.
-    """
-    sigma_y = sigma / np.sqrt(1.0 - rho**2)
-    y_max = m * sigma_y
+```{code-cell} ipython3
+def tauchen(ρ, σ, n, m=3):
+    """Discretize AR(1) process via Tauchen's method."""
+    σ_y = σ / np.sqrt(1.0 - ρ**2)
+    y_max = m * σ_y
     y = np.linspace(-y_max, y_max, n)
     d = y[1] - y[0] if n > 1 else 1.0
 
     P = np.zeros((n, n))
-    from scipy.stats import norm
     for i in range(n):
         for j in range(n):
             if j == 0:
-                P[i, j] = norm.cdf((y[0] + d/2 - rho * y[i]) / sigma)
+                P[i, j] = norm.cdf((y[0] + d/2 - ρ * y[i]) / σ)
             elif j == n - 1:
                 P[i, j] = 1.0 - norm.cdf(
-                    (y[n-1] - d/2 - rho * y[i]) / sigma)
+                    (y[n-1] - d/2 - ρ * y[i]) / σ)
             else:
-                P[i, j] = (norm.cdf((y[j] + d/2 - rho * y[i]) / sigma) -
-                            norm.cdf((y[j] - d/2 - rho * y[i]) / sigma))
+                P[i, j] = (norm.cdf((y[j] + d/2 - ρ * y[i]) / σ) -
+                            norm.cdf((y[j] - d/2 - ρ * y[i]) / σ))
     return y, P
 
 
 def build_grids(par):
     """Build state-space grids and transition matrices."""
+    θ_dev, P_θ = tauchen(par.ρ_θ, par.σ_θ, par.n_θ)
+    θ_grid = par.θ_bar + θ_dev
 
-    # θ grid (centered at θ_bar)
-    theta_dev, P_theta = tauchen(
-        par.rho_theta, par.sigma_theta, par.n_theta)
-    theta_grid = par.theta_bar + theta_dev
+    ξ_dev, P_ξ = tauchen(par.ρ_ξ, par.σ_ξ, par.n_ξ)
+    ξ_grid = ξ_dev
 
-    # ξ₁ grid (only weakly positive values)
-    xi_dev, P_xi = tauchen(
-        par.rho_xi, par.sigma_xi, par.n_xi)
-    xi_grid = np.maximum(xi_dev, 0.0)  # truncate to non-negative
-
-    # B grid (total real liabilities)
     B_grid = np.linspace(0.01, par.B_max, par.n_B)
-
-    # φ' grid (promised real balances)
-    phi_grid = np.linspace(0.01, par.phi_star * 0.99, par.n_phi)
+    φ_grid = np.linspace(0.01, par.φ_star * 0.99, par.n_φ)
 
     return {
-        'theta_grid': theta_grid,
-        'P_theta': P_theta,
-        'xi_grid': xi_grid,
-        'P_xi': P_xi,
-        'B_grid': B_grid,
-        'phi_grid': phi_grid
+        'θ_grid': θ_grid, 'P_θ': P_θ,
+        'ξ_grid': ξ_grid, 'P_ξ': P_ξ,
+        'B_grid': B_grid, 'φ_grid': φ_grid
     }
 
 
 grids = build_grids(params_la)
-
-print("θ grid:", np.round(grids['theta_grid'], 1))
-print("ξ₁ grid:", np.round(grids['xi_grid'], 3))
-print(f"B grid: [{grids['B_grid'][0]:.2f}, ..., {grids['B_grid'][-1]:.2f}]"
-      f" ({len(grids['B_grid'])} points)")
-print(f"φ' grid: [{grids['phi_grid'][0]:.2f}, ..., "
-      f"{grids['phi_grid'][-1]:.2f}]"
-      f" ({len(grids['phi_grid'])} points)")
 ```
 
-## Computational Algorithm
+## Computational algorithm
 
-The paper reduces the problem to a single endogenous state variable $B = b + \phi$
-(total real government liabilities). 
+Because the budget constraint depends on $b$ and $\phi$ only through their sum, the problem can be written in terms of a single endogenous state variable $B = b + \phi$ (total real government liabilities).
 
-The value function $W(B, s_1)$ satisfies
+The value function $W(B, s_1)$ then satisfies
 
 $$
 W(B, s_1) = \max_{\Delta, b', \phi'} U(\Delta, \theta) +
@@ -709,496 +616,563 @@ The algorithm is:
    - Compute the Bellman update $W_{n+1}$ from the value function equation above
 3. **Iterate** until $\|W_{n+1} - W_n\| < \varepsilon$
 
+We now set up a simplified version of the model with deterministic $\theta$, multiple $\xi_1$ states, and the quadratic money-utility specification.
+
+The static FOC $v'(\phi^{fd}) + U'(\Delta, \theta) = 0$ is a useful benchmark for how fiscal dominance trades off inflation and surplus costs.
+
+The following function computes that static benchmark by bisection, approximating the surplus as $\Delta \approx B - \phi$.
+
 ```{code-cell} ipython3
-# ============================================================
-# Simplified model for illustration:
-# Deterministic θ, two ξ₁ states, and quadratic v(φ)
-# ============================================================
+@jit
+def φ_fd_solve(B, θ, χ, ψ, σ, κ, η_m):
+    """Solve for φ^fd from the static FOC v'(φ) = -U'(Δ, θ)."""
+    φ_hi_init = κ / (2.0 * η_m) * 0.99
 
-@njit
-def phi_fd_solve(B, theta, chi, psi, sigma, kappa, eta_m):
-    """
-    Solve for φ^{fd} given total liabilities B = b + φ.
-    Under fiscal dominance: -U'(Δ, θ) = v'(φ^{fd})
-    and Δ = B - β b' - ... (simplified for static case).
+    def bisect_body(_, bounds):
+        φ_lo, φ_hi = bounds
+        φ_mid = 0.5 * (φ_lo + φ_hi)
+        vp = v_money_prime(φ_mid, κ, η_m)
+        Δ_approx = jnp.clip(B - φ_mid, -12.0, 8.0)
+        _, U_p = indirect_utility(Δ_approx, θ, χ, ψ, σ)
+        residual = vp + U_p
+        new_lo = jnp.where(residual > 0, φ_mid, φ_lo)
+        new_hi = jnp.where(residual <= 0, φ_mid, φ_hi)
+        return (new_lo, new_hi)
 
-    For illustrative purposes, we find φ^{fd} from the static FOC.
-    """
-    # The static FOC: v'(φ) = -U'(Δ, θ)
-    # where Δ depends on φ since Δ = B - ... 
-    # In the static case with no debt dynamics: Δ ≈ B - φ + φ = B roughly
-    # More precisely, in FD regime the government picks φ to solve
-    #   v'(φ) + U'(Δ, θ) = 0
-    # We'll use bisection, holding surplus as a function
-
-    phi_lo = 0.01
-    phi_hi = kappa / (2.0 * eta_m) * 0.99  # below satiation
-
-    for _ in range(60):
-        phi_mid = 0.5 * (phi_lo + phi_hi)
-        vp = v_money_prime(phi_mid, kappa, eta_m)
-        # Surplus under FD: approximate as Δ ≈ some function of B
-        # For illustration, use Δ = B - phi_mid (ignoring dynamics)
-        Delta_approx = max(min(B - phi_mid, 3.0), -5.0)
-        _, U_p = indirect_utility(Delta_approx, theta, chi, psi, sigma)
-
-        residual = vp + U_p  # should be zero at optimum
-        if residual > 0:
-            phi_lo = phi_mid  # v' too large or |U'| too small
-        else:
-            phi_hi = phi_mid
-
-    return 0.5 * (phi_lo + phi_hi)
+    φ_lo, φ_hi = lax.fori_loop(0, 60, bisect_body, (0.01, φ_hi_init))
+    return 0.5 * (φ_lo + φ_hi)
 ```
 
+Appendix C of the paper instead defines fiscal dominance recursively by
+
+$$
+V^{fd}(b', \xi') = \max_{\phi} \left[ W(b' + \phi, \xi') + v(\phi) \right].
+$$
+
+Accordingly, the Bellman solver below recovers $\phi^{fd}$ by a grid search over $\phi$ using the continuation value $W$.
+
+It also linearly interpolates $W(B, \xi)$ over the liabilities grid rather than snapping to the nearest grid point.
+
+This avoids the step-function artifacts that otherwise produce flat or jagged policy plots.
+
+The inner expectation over $\xi'$ is a matrix multiply against $P_\xi$ via `jnp.einsum`, the search over $(b', \phi')$ is a vectorized `argmax`, and the VFI loop uses `lax.scan`.
+
 ```{code-cell} ipython3
-# ============================================================
-# Illustrative: solve a simplified two-state model
-# ============================================================
+def interp_B_values(B_points, B_grid, values):
+    """Linearly interpolate values(B, ξ) over B for each ξ state."""
+    flat = jnp.ravel(B_points)
+    interp_cols = vmap(
+        lambda col: jnp.interp(flat, B_grid, col),
+        in_axes=1, out_axes=0)(values)
+    return jnp.moveaxis(
+        interp_cols.reshape(values.shape[1], *B_points.shape), 0, -1)
 
-@njit
-def solve_simplified_model(
-    beta, beta_hat, chi, psi, sigma_g, kappa, eta_m,
-    theta, xi_grid, P_xi, B_grid, phi_grid, lam,
-    max_iter=300, tol=1e-5
-):
-    """
-    Solve the simplified model with one θ value and
-    multiple ξ₁ states using value function iteration.
 
-    Returns W(B, ξ₁) and policy functions.
-    """
-    n_B = len(B_grid)
-    n_xi = len(xi_grid)
-    n_phi = len(phi_grid)
+def fd_from_continuation(W, B_grid, b_prime_grid, φ_grid, κ, η_m):
+    """Recover V^fd and φ^fd from max_φ [W(b' + φ, ξ) + v(φ)]."""
 
-    # Initialize value function
-    W = np.zeros((n_B, n_xi))
-    for i_B in range(n_B):
-        for i_xi in range(n_xi):
-            B = B_grid[i_B]
-            Delta = 0.0  # rough initial guess
-            Uval, _ = indirect_utility(Delta, theta, chi, psi, sigma_g)
-            W[i_B, i_xi] = Uval / (1.0 - beta_hat)
+    # Candidate total liabilities B = b' + φ for each (b', φ) pair
+    B_choices = b_prime_grid[:, None] + φ_grid[None, :]
 
-    W_new = np.zeros_like(W)
+    # Interpolate W at each candidate B
+    W_choices = interp_B_values(B_choices, B_grid, W)
 
-    # Policy storage
-    pol_b = np.zeros((n_B, n_xi))
-    pol_phi = np.zeros((n_B, n_xi))
-    pol_Delta = np.zeros((n_B, n_xi))
+    # Add money utility to get total value for each φ choice
+    V_choices = W_choices + v_money(φ_grid, κ, η_m)[None, :, None]
 
-    for iteration in range(max_iter):
-        for i_B in range(n_B):
-            B = B_grid[i_B]
-            for i_xi in range(n_xi):
-                xi1 = xi_grid[i_xi]
+    # Pick the φ that maximizes value for each (b', ξ)
+    best_idx = jnp.argmax(V_choices, axis=1)
+    idx = best_idx[:, None, :]
 
-                best_val = -1e15
-                best_ib = 0
-                best_iphi = 0
+    φ_choices = jnp.broadcast_to(φ_grid[None, :, None], V_choices.shape)
+    φ_fd = jnp.take_along_axis(φ_choices, idx, axis=1).squeeze(1)
+    V_fd = jnp.take_along_axis(V_choices, idx, axis=1).squeeze(1)
+    H_fd = H_func(φ_fd, κ, η_m)
 
-                for i_bp in range(n_B):
-                    b_prime = B_grid[i_bp] * 0.5  # b' in [0, B_max/2]
+    return B_choices, W_choices, V_choices, V_fd, φ_fd, H_fd
 
-                    for i_phi in range(n_phi):
-                        phi_prime = phi_grid[i_phi]
 
-                        # Compute expected J and continuation
-                        J_val = 0.0
-                        EV = 0.0
-                        for j_xi in range(n_xi):
-                            p_xi = P_xi[i_xi, j_xi]
-                            xi1_next = xi_grid[j_xi]
+@partial(jit, static_argnums=(14,))
+def solve_model(β, β_hat, χ, ψ, σ, κ, η_m, θ,
+                ξ_grid, P_ξ, B_grid, φ_grid, λ,
+                U_interp, n_iter):
+    """Vectorized value function iteration."""
+    Δ_fine, U_fine = U_interp
+    n_B = B_grid.shape[0]
+    n_φ = φ_grid.shape[0]
+    n_ξ = ξ_grid.shape[0]
 
-                            B_md = b_prime + phi_prime
-                            # Interpolate W at B_md
-                            # Simple: find nearest grid point
-                            i_B_md = 0
-                            for k in range(n_B - 1):
-                                if B_grid[k+1] > B_md:
-                                    break
-                                i_B_md = k + 1
-                            i_B_md = min(i_B_md, n_B - 1)
-                            W_md = W[i_B_md, j_xi]
-                            V_md = W_md + v_money(phi_prime, kappa, eta_m)
+    # Debt choices are a fraction of the B grid
+    b_prime_grid = B_grid * 0.5
+    n_bp = n_B
 
-                            # φ^fd
-                            phi_fd = phi_fd_solve(
-                                b_prime + phi_prime, theta,
-                                chi, psi, sigma_g, kappa, eta_m)
-                            B_fd = b_prime + phi_fd
-                            i_B_fd = 0
-                            for k in range(n_B - 1):
-                                if B_grid[k+1] > B_fd:
-                                    break
-                                i_B_fd = k + 1
-                            i_B_fd = min(i_B_fd, n_B - 1)
-                            W_fd = W[i_B_fd, j_xi]
-                            V_fd = W_fd + v_money(phi_fd, kappa, eta_m)
+    # Precompute money utility and H on the φ grid
+    v_φ = v_money(φ_grid, κ, η_m)
+    H_φ = H_func(φ_grid, κ, η_m)
 
-                            # Logit probability of MD
-                            diff = lam * (V_md - V_fd + xi1_next)
-                            if diff > 500.0:
-                                eta_bar = 1.0
-                            elif diff < -500.0:
-                                eta_bar = 0.0
-                            else:
-                                eta_bar = 1.0 / (1.0 + np.exp(-diff))
+    # Initialize W with the perpetuity value of zero-surplus utility
+    U0, _ = indirect_utility(0.0, θ, χ, ψ, σ)
+    W0 = jnp.full((n_B, n_ξ), U0 / (1.0 - β_hat))
 
-                            # Expected H
-                            H_phi = H_func(phi_prime, kappa, eta_m)
-                            H_fd = H_func(phi_fd, kappa, eta_m)
-                            J_val += p_xi * (
-                                eta_bar * H_phi +
-                                (1.0 - eta_bar) * H_fd)
+    def bellman_step(W, _):
+        # Recover V^fd and φ^fd from continuation value
+        B_md, W_md, V_md, V_fd, φ_fd_arr, H_fd_arr = fd_from_continuation(
+            W, B_grid, b_prime_grid, φ_grid, κ, η_m)
 
-                            # Log-sum-exp for Ω
-                            if lam > 0:
-                                a = lam * V_md
-                                b_val = lam * (V_fd - xi1_next)
-                                max_ab = max(a, b_val)
-                                Omega = (max_ab + np.log(
-                                    np.exp(a - max_ab) +
-                                    np.exp(b_val - max_ab))) / lam
-                            else:
-                                Omega = max(V_md, V_fd - xi1_next)
+        # Logit regime probability η̄ (monetary dominance)
+        η_bar = jax.nn.sigmoid(
+            λ * (V_md - V_fd[:, None, :] + ξ_grid[None, None, :]))
 
-                            EV += p_xi * Omega
+        # Expected H combining MD and FD, then J (money demand)
+        H_comb = (η_bar * H_φ[None, :, None]
+                  + (1 - η_bar) * H_fd_arr[:, None, :])
+        J = β * jnp.einsum('abj,kj->abk', H_comb, P_ξ)
 
-                        J_val *= beta
+        # Log-sum-exp continuation value Ω and its expectation
+        log_md = λ * V_md
+        log_fd = λ * (V_fd[:, None, :] - ξ_grid[None, None, :])
+        Ω = jnp.logaddexp(log_md, log_fd) / λ
+        EV = jnp.einsum('abj,kj->abk', Ω, P_ξ)
 
-                        # Surplus
-                        Delta = B - beta * b_prime - J_val
-                        if Delta > 4.0 or Delta < -6.0:
-                            continue
+        # Implied surplus from the budget constraint
+        Δ = (B_grid[None, None, :, None]
+             - β * b_prime_grid[:, None, None, None]
+             - J[:, :, None, :])
 
-                        Uval, _ = indirect_utility(
-                            Delta, theta, chi, psi, sigma_g)
-                        if Uval < -1e9:
-                            continue
+        # Evaluate indirect utility, penalizing infeasible surpluses
+        U_all = jnp.interp(Δ.ravel(), Δ_fine, U_fine).reshape(Δ.shape)
+        feasible = (Δ > -12.0) & (Δ < 8.0)
+        U_all = jnp.where(feasible, U_all, -1e15)
 
-                        val = Uval + beta_hat * EV
+        # Maximize over (b', φ') pairs
+        val = U_all + β_hat * EV[:, :, None, :]
+        val_flat = val.reshape(n_bp * n_φ, n_B, n_ξ)
+        W_new = jnp.max(val_flat, axis=0)
+        return W_new, None
 
-                        if val > best_val:
-                            best_val = val
-                            best_ib = i_bp
-                            best_iphi = i_phi
-                            pol_Delta[i_B, i_xi] = Delta
+    W, _ = lax.scan(bellman_step, W0, None, length=n_iter)
 
-                W_new[i_B, i_xi] = best_val
-                pol_b[i_B, i_xi] = B_grid[best_ib] * 0.5
-                pol_phi[i_B, i_xi] = phi_grid[best_iphi]
+    # Extract policy functions from the converged W
 
-        # Check convergence
-        diff = np.max(np.abs(W_new - W))
-        W[:, :] = W_new[:, :]
+    # Recover V^fd and φ^fd from continuation value
+    B_md, W_md, V_md, V_fd, φ_fd_arr, H_fd_arr = fd_from_continuation(
+        W, B_grid, b_prime_grid, φ_grid, κ, η_m)
 
-        if diff < tol:
-            break
+    # Logit regime probability η̄
+    η_bar = jax.nn.sigmoid(
+        λ * (V_md - V_fd[:, None, :] + ξ_grid[None, None, :]))
 
-    return W, pol_b, pol_phi, pol_Delta
+    # Expected H and money demand J
+    H_comb = (η_bar * H_φ[None, :, None]
+              + (1 - η_bar) * H_fd_arr[:, None, :])
+    J = β * jnp.einsum('abj,kj->abk', H_comb, P_ξ)
+
+    # Log-sum-exp continuation value and expectation
+    log_md = λ * V_md
+    log_fd = λ * (V_fd[:, None, :] - ξ_grid[None, None, :])
+    Ω = jnp.logaddexp(log_md, log_fd) / λ
+    EV = jnp.einsum('abj,kj->abk', Ω, P_ξ)
+
+    # Expected regime indicator and FD real balances
+    η_current = jnp.einsum('abj,kj->abk', η_bar, P_ξ)
+    φ_fd_current = jnp.einsum('aj,kj->ak', φ_fd_arr, P_ξ)
+
+    # Implied surplus from budget constraint
+    Δ = (B_grid[None, None, :, None]
+         - β * b_prime_grid[:, None, None, None]
+         - J[:, :, None, :])
+
+    # Indirect utility at each candidate surplus
+    U_all = jnp.interp(Δ.ravel(), Δ_fine, U_fine).reshape(Δ.shape)
+    U_all = jnp.where((Δ > -12.0) & (Δ < 8.0), U_all, -1e15)
+
+    # Total value and optimal (b', φ') for each (B, ξ)
+    val = U_all + β_hat * EV[:, :, None, :]
+    val_flat = val.reshape(n_bp * n_φ, n_B, n_ξ)
+    best_idx = jnp.argmax(val_flat, axis=0)
+
+    # Extract policies at the optimum
+    pol_b = b_prime_grid[best_idx // n_φ]
+    pol_φ_out = φ_grid[best_idx % n_φ]
+
+    Δ_flat = Δ.reshape(n_bp * n_φ, n_B, n_ξ)
+    pol_Δ = jnp.take_along_axis(Δ_flat, best_idx[None], axis=0).squeeze(0)
+
+    η_flat = η_current.reshape(n_bp * n_φ, n_ξ)
+    pol_η = jnp.take_along_axis(η_flat, best_idx, axis=0)
+
+    J_flat = J.reshape(n_bp * n_φ, n_ξ)
+    pol_J = jnp.take_along_axis(J_flat, best_idx, axis=0)
+
+    φ_fd_flat = jnp.repeat(
+        φ_fd_current[:, None, :], n_φ, axis=1
+    ).reshape(n_bp * n_φ, n_ξ)
+    pol_φ_fd = jnp.take_along_axis(φ_fd_flat, best_idx, axis=0)
+
+    return W, pol_b, pol_φ_out, pol_Δ, pol_η, pol_J, pol_φ_fd
+
+
+def solve_policy_cache(θ_nodes, p, ξ_grid, P_ξ, B_grid, φ_grid, λ,
+                       Δ_fine, n_iter=100):
+    """Solve the model for several θ values and store policy arrays."""
+    out = {k: [] for k in ['W', 'b', 'φ', 'Δ', 'η', 'J', 'φ_fd']}
+    θ_nodes = np.asarray(θ_nodes, dtype=float)
+
+    for θ_val in θ_nodes:
+        U_fine, _ = vmap(
+            lambda d: indirect_utility(d, θ_val, p.χ, p.ψ, p.σ))(Δ_fine)
+        U_interp = (Δ_fine, U_fine)
+
+        results = solve_model(
+            p.β, p.β_hat, p.χ, p.ψ, p.σ,
+            p.κ, p.η_m, θ_val,
+            ξ_grid, P_ξ, B_grid, φ_grid, λ,
+            U_interp, n_iter
+        )
+
+        names = ['W', 'b', 'φ', 'Δ', 'η', 'J', 'φ_fd']
+        for name, arr in zip(names, results):
+            out[name].append(np.asarray(arr))
+
+    return {
+        'θ_nodes': θ_nodes,
+        'ξ_grid': np.asarray(ξ_grid),
+        'B_grid': np.asarray(B_grid),
+        **{k: np.stack(v) for k, v in out.items()}
+    }
 ```
 
-```{code-cell} ipython3
-# ============================================================
-# Solve a coarse version for illustration
-# ============================================================
+The first call triggers JIT compilation, which takes a moment.
 
-# Use a coarse grid for speed in this lecture
+```{code-cell} ipython3
 p = params_la
-n_B_coarse = 30
-n_phi_coarse = 15
-n_xi_coarse = 3
+n_B_coarse = 120
+n_φ_coarse = 120
+n_ξ_coarse = 9
 
-B_grid = np.linspace(0.5, 20.0, n_B_coarse)
-phi_grid = np.linspace(0.5, p.phi_star * 0.95, n_phi_coarse)
-xi_dev, P_xi = tauchen(p.rho_xi, p.sigma_xi, n_xi_coarse, m=2)
-xi_grid = np.maximum(xi_dev + 0.3, 0.01)  # shift to positive
+B_grid = jnp.linspace(0.1, 25.0, n_B_coarse)
+φ_grid = jnp.linspace(0.5, p.φ_star * 0.99, n_φ_coarse)
+ξ_dev, P_ξ = tauchen(p.ρ_ξ, p.σ_ξ, n_ξ_coarse, m=3)
+ξ_grid = jnp.array(np.maximum(ξ_dev, 0.0))
+P_ξ = jnp.array(P_ξ)
 
-print("Solving simplified model (coarse grid)...")
-W, pol_b, pol_phi, pol_Delta = solve_simplified_model(
-    p.beta, p.beta_hat, p.chi, p.psi, p.sigma,
-    p.kappa, p.eta_m,
-    p.theta_bar, xi_grid, P_xi,
-    B_grid, phi_grid, p.lam,
-    max_iter=100, tol=1e-4
+Δ_fine = jnp.linspace(-12.0, 8.0, 800)
+U_fine, _ = vmap(lambda d: indirect_utility(d, p.θ_bar, p.χ, p.ψ, p.σ))(Δ_fine)
+U_interp = (Δ_fine, U_fine)
+
+W, pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd = solve_model(
+    p.β, p.β_hat, p.χ, p.ψ, p.σ,
+    p.κ, p.η_m, p.θ_bar,
+    ξ_grid, P_ξ, B_grid, φ_grid, p.λ,
+    U_interp, 200
 )
-print("Done.")
 ```
 
 ```{code-cell} ipython3
-# ============================================================
-# Plot value function and policy functions
-# ============================================================
-
+---
+mystnb:
+  figure:
+    caption: Value and policy functions
+    name: fig-value-policy
+---
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 
-xi_labels = [f'ξ₁ = {xi_grid[j]:.2f}' for j in range(n_xi_coarse)]
+ξ_plot_idx = [0, n_ξ_coarse // 2, n_ξ_coarse - 1]
+ξ_labels = [f'ξ_1 = {ξ_grid[j]:.2f}' for j in ξ_plot_idx]
 colors = ['tab:blue', 'tab:orange', 'tab:green']
 
-for j in range(n_xi_coarse):
-    axes[0, 0].plot(B_grid, W[:, j], label=xi_labels[j],
-                    color=colors[j])
-    axes[0, 1].plot(B_grid, pol_b[:, j], label=xi_labels[j],
-                    color=colors[j])
-    axes[1, 0].plot(B_grid, pol_phi[:, j], label=xi_labels[j],
-                    color=colors[j])
-    axes[1, 1].plot(B_grid, pol_Delta[:, j], label=xi_labels[j],
-                    color=colors[j])
+for k, j in enumerate(ξ_plot_idx):
+    feasible = np.asarray(W[:, j]) > -1e12
 
-axes[0, 0].set_title('Value function W(B, ξ₁)')
+    axes[0, 0].plot(B_grid[feasible], 
+                    W[:, j][feasible], lw=2, label=ξ_labels[k],
+                    color=colors[k])
+    axes[0, 1].plot(B_grid[feasible], 
+                    pol_b[:, j][feasible], lw=2, label=ξ_labels[k],
+                    color=colors[k])
+    axes[1, 0].plot(B_grid[feasible], 
+                    pol_φ[:, j][feasible], lw=2, label=ξ_labels[k],
+                    color=colors[k])
+    axes[1, 1].plot(B_grid[feasible], 
+                    pol_Δ[:, j][feasible], lw=2, label=ξ_labels[k],
+                    color=colors[k])
+
 axes[0, 0].set_xlabel('B (total liabilities)')
+axes[0, 0].set_ylabel('W(B, ξ_1)')
 axes[0, 0].legend()
-axes[0, 0].grid(alpha=0.3)
 
-axes[0, 1].set_title("Debt policy b'(B, ξ₁)")
 axes[0, 1].set_xlabel('B')
+axes[0, 1].set_ylabel("b'(B, ξ_1)")
 axes[0, 1].legend()
-axes[0, 1].grid(alpha=0.3)
 
-axes[1, 0].set_title("Inflation target φ'(B, ξ₁)")
 axes[1, 0].set_xlabel('B')
+axes[1, 0].set_ylabel("φ'(B, ξ_1)")
 axes[1, 0].legend()
-axes[1, 0].grid(alpha=0.3)
 
-axes[1, 1].set_title('Primary surplus Δ(B, ξ₁)')
 axes[1, 1].set_xlabel('B')
+axes[1, 1].set_ylabel('Δ(B, ξ_1)')
 axes[1, 1].legend()
-axes[1, 1].grid(alpha=0.3)
 
-plt.suptitle('Model Solution: Value and Policy Functions', fontsize=14)
 plt.tight_layout()
 plt.show()
 ```
 
-## Two Types of Disinflation
+## Two types of disinflation
 
-A central result of the paper is that the comovement of debt and inflation differs
-depending on the **source** of disinflation.
+A central result of the model is that inflation can decline for two distinct reasons, each with different implications for the dynamics of public debt.
 
-### Fundamental Disinflation ($\theta$ falls, $\xi$ constant low)
+We refer to a reduction in the marginal value of government spending $\theta$ as **fundamental disinflation** and to an increase in the (expected) cost of deviating from the promised inflation $\xi$ as **institutional disinflation**.
 
-When $\theta$ decreases while $\xi$ stays low (FD regime throughout):
+### Fundamental disinflation ($\theta$ falls, $\xi$ fixed)
 
-- Real money balances $\phi^{fd}$ **rise** (lower inflation) because the static FOC
-  $-U'(\Delta, \theta) = v'(\phi^{fd})$ shifts
-- Debt **falls** because the government has weaker incentives to borrow
-- Result: **positive correlation** between inflation and debt
+Consider a path in which the realization of $\xi_t$ is low enough so that it is always optimal to be in the fiscal dominant regime.
 
-### Institutional Disinflation ($\xi$ rises, $\theta$ constant)
+Along this path, the value of real money balances (and inflation) is determined by the static condition $-U'(\Delta, \theta) = v'(\phi^{fd})$ and is therefore closely tied to fiscal considerations, as in a Markov equilibrium.
 
-When $\xi$ rises, triggering a switch from FD to MD:
+When $\theta$ falls from $\theta_H$ to $\theta_L$, the reduction in $\theta$ shifts the policy function $\phi^{fd}(b, \theta)$ upward: for any level of real debt, the government finds it optimal to choose a higher value for real balances, reflecting the lower marginal value of relaxing its budget constraint when government spending is less valuable.
 
-- Real balances jump to the promised $\phi'$ (lower inflation)
-- The incentive wedge on debt issuance **shrinks**,
-  and seigniorage revenues fall, so debt **rises**
-- Result: **negative correlation** between inflation and debt
+The optimal policy for debt issuance shifts downward because the government now has stronger precautionary saving motives and therefore chooses to reduce its debt issuance.
 
-These differing comovements are the key identification device.
+As a result, a decline in $\theta$ while keeping $\xi$ at a low level leads to an increase in real money balances (lower inflation) and a decrease in real debt — a **positive correlation** between inflation and debt.
+
+### Institutional disinflation ($\xi$ rises, $\theta$ constant)
+
+Now consider the effects of an increase in the cost of deviating from the promised inflation target.
+
+When $\xi$ rises from $\xi_L$ to $\xi_H$ (high enough to make it optimal to switch to the monetary dominant regime), the realized $\phi$ now equals the promised value of real balances, which is higher than the statically optimal level $\phi^{fd}$.
+
+Critically, if the process for $\xi$ is persistent, an increase in current $\xi$ implies an increase in the expected value for $\xi'$, so the government now has lower incentives to reduce the amount of debt it issues because the wedge in the Euler equation is smaller in absolute value.
+
+As the government shifts to the monetary-dominant regime, the present value of seigniorage revenues falls, and the government must finance the inherited real liabilities with a higher present value of surpluses — since the government is impatient, these higher surpluses are back-loaded, also resulting in an increase in the level of debt issued.
+
+Thus inflation and debt move in **opposite** directions — the signature of institutional disinflation.
+
+We now illustrate the two types of disinflation by simulating impulse responses.
+
+Both experiments treat the shock as an **MIT shock**: the change is permanent and unanticipated, so the agent does not anticipate the shock before it occurs.
+
+Under fiscal dominance, current real balances $\phi_t$ come from the static FOC $v'(\phi) = -U'(\Delta, \theta)$.
+Debt evolves as $b' = (\hat\beta/\beta)\,b$ (Appendix B of the paper).
+The surplus is recovered from the budget constraint $\Delta = b + \phi - \beta b' - \beta H(\phi')$.
+Realized inflation follows from $1 + \pi_t = \beta\,H(\phi_t)/\phi_t$.
+
+For the institutional disinflation, we use the solved VFI policy functions to capture regime-switching dynamics.
 
 ```{code-cell} ipython3
-# ============================================================
-# Illustrate two types of disinflation with impulse responses
-# ============================================================
-
-def simulate_path(b0, phi0, theta_path, xi_path, par,
-                  T=40, seed=42):
-    """
-    Simulate a path of the model given sequences of
-    θ and ξ₁ shocks.
-
-    This uses a simplified version: at each t, we solve for
-    the government's choices given inherited (b, φ).
-    """
-    np.random.seed(seed)
-
-    b_path = np.zeros(T)
-    phi_path = np.zeros(T)
-    Delta_path = np.zeros(T)
-    inflation_path = np.zeros(T)
-    regime_path = np.zeros(T)
-
-    b_path[0] = b0
-    phi_path[0] = phi0
-
-    for t in range(T - 1):
-        b = b_path[t]
-        phi_t = phi_path[t]
-        theta = theta_path[t]
-        xi1 = xi_path[t]
-        B = b + phi_t
-
-        # Fiscal dominance value of φ
-        phi_fd = phi_fd_solve(
-            B, theta, par.chi, par.psi, par.sigma,
-            par.kappa, par.eta_m)
-
-        # Simplified: compare V_md vs V_fd
-        Delta_md = B - phi_t  # simplified surplus under MD
-        U_md, _ = indirect_utility(
-            min(Delta_md, 3.0), theta, par.chi, par.psi, par.sigma)
-        V_md = U_md + v_money(phi_t, par.kappa, par.eta_m)
-
-        Delta_fd = B - phi_fd
-        U_fd, _ = indirect_utility(
-            min(Delta_fd, 3.0), theta, par.chi, par.psi, par.sigma)
-        V_fd = U_fd + v_money(phi_fd, par.kappa, par.eta_m)
-
-        # Regime decision (logit)
-        diff = par.lam * (V_md - V_fd + xi1)
-        if diff > 500:
-            eta = 1.0
-        elif diff < -500:
-            eta = 0.0
+def solve_φ_fd_continuous(b, θ, p):
+    """Solve the FD static FOC v'(φ) = -U'(Δ,θ) with continuous bisection."""
+    φ_lo, φ_hi = 0.1, p.φ_star * 0.999
+    for _ in range(100):
+        φ_mid = 0.5 * (φ_lo + φ_hi)
+        Δ_mid = b + φ_mid - p.β * float(H_func(φ_mid, p.κ, p.η_m))
+        _, U_p = indirect_utility(Δ_mid, θ, p.χ, p.ψ, p.σ)
+        if float(v_money_prime(φ_mid, p.κ, p.η_m)) > float(-U_p):
+            φ_lo = φ_mid
         else:
-            eta = 1.0 / (1.0 + np.exp(-diff))
+            φ_hi = φ_mid
+    return 0.5 * (φ_lo + φ_hi)
 
-        regime_path[t] = eta
 
-        # Actual φ realized this period
-        gumbel_md = np.random.gumbel(-0.5772/par.lam, 1.0/par.lam)
-        gumbel_fd = np.random.gumbel(-0.5772/par.lam, 1.0/par.lam)
-        realized_md = V_md + gumbel_md > V_fd - xi1 + gumbel_fd
-        phi_realized = phi_t if realized_md else phi_fd
+def simulate_fd_mit(b0, θ_pre, θ_post, p, T, t_shock):
+    """Simulate FD dynamics with an unanticipated permanent θ shock.
 
-        # Inflation
-        H_val = H_func(phi_realized, par.kappa, par.eta_m)
-        mu = par.beta * H_val / phi_path[max(t-1, 0)] if t > 0 else 1.0
-        if phi_realized > 0:
-            inflation_path[t] = (mu * phi_path[max(t-1, 0)] /
-                                 phi_realized - 1.0)
+    Pre-shock the agent expects θ_pre forever.
+    At t_shock, θ permanently drops to θ_post.
+    """
+    out = {k: np.zeros(T) for k in
+           ['b', 'φ', 'φ_prime', 'Δ', 'π', 'η']}
+    b = float(b0)
+
+    for t in range(T):
+        θ_t = θ_pre if t < t_shock else θ_post
+        θ_expect = θ_t 
+
+        # Current φ from the FD static FOC
+        φ_t = solve_φ_fd_continuous(max(b, 0.001), θ_t, p)
+
+        # Debt evolves
+        b_next = max((p.β_hat / p.β) * b, 0.001)
+
+        # Next-period φ from the expected FOC
+        φ_next = solve_φ_fd_continuous(
+            max(b_next, 0.001), θ_expect, p)
+        H_next = float(H_func(φ_next, p.κ, p.η_m))
+
+        # Surplus from the budget constraint
+        Δ_t = b + φ_t - p.β * b_next - p.β * H_next
+
+        # Realized inflation: 1 + π = β H(φ) / φ
+        H_t = float(H_func(φ_t, p.κ, p.η_m))
+        π_t = (p.β * H_t / max(φ_t, 1e-6) - 1.0) * 100.0
+
+        out['b'][t] = b
+        out['φ'][t] = φ_t
+        out['φ_prime'][t] = φ_next
+        out['Δ'][t] = Δ_t
+        out['π'][t] = π_t
+        out['η'][t] = 0.0  # always FD
+
+        b = b_next
+
+    return out
+
+
+θ_high = 200.0
+θ_irf = np.array([p.θ_bar, θ_high])
+cache = solve_policy_cache(
+    θ_irf, p, ξ_grid, P_ξ, B_grid, φ_grid, p.λ, Δ_fine, n_iter=200
+)
+
+
+def simulate_irf_inst(b0, ξ_idx_path, cache, p):
+    """Simulate institutional disinflation using VFI policies.
+
+    θ stays at θ_bar throughout; ξ jumps from low to high,
+    causing a regime shift from FD to MD.
+    """
+    T = len(ξ_idx_path)
+    θ_n = cache['θ_nodes']
+    B_g = cache['B_grid']
+    θ_t = p.θ_bar
+
+    out = {k: np.zeros(T) for k in
+           ['b', 'φ', 'φ_prime', 'Δ', 'π', 'η']}
+    b = float(b0)
+    φ_promise = None
+
+    for t in range(T):
+        ξi = int(ξ_idx_path[t])
+
+        # Realized φ: honor the promise under MD, use static FOC under FD
+        if (φ_promise is not None and t > 0
+                and out['η'][t - 1] > 0.5):
+            φ_t = φ_promise                             # MD regime
         else:
-            inflation_path[t] = 0.0
+            φ_t = solve_φ_fd_continuous(b, θ_t, p)      # FD regime
 
-        # Surplus
-        Delta_path[t] = B - phi_realized
+        # Total liabilities B = b + φ
+        B = np.clip(b + φ_t, B_g[0], B_g[-1])
 
-        # Simple debt dynamics (illustrative)
-        # b' = (B - Δ - J) / β approximately
-        b_path[t+1] = max(0.1, b * 0.95 + 0.05 * b0 +
-                          (1.0 - eta) * (-0.5) +
-                          eta * 0.3)
+        # Look up policy functions from the VFI cache at (B, ξ)
+        idx = 0  # θ_bar is the first node
+        b_prime = float(np.interp(B, B_g, cache['b'][idx, :, ξi]))
+        φ_prime = float(np.interp(B, B_g, cache['φ'][idx, :, ξi]))
+        Δ_t = float(np.interp(B, B_g, cache['Δ'][idx, :, ξi]))
+        η_t = float(np.interp(B, B_g, cache['η'][idx, :, ξi]))
 
-        # Promised φ for next period
-        phi_path[t+1] = phi_realized * 0.98 + 0.02 * par.phi_star * 0.8
+        # Realized inflation: 1 + π = β H(φ) / φ
+        H_t = float(H_func(φ_t, p.κ, p.η_m))
+        π_t = (p.β * H_t / max(φ_t, 1e-6) - 1.0) * 100.0
 
-    return {
-        'b': b_path, 'phi': phi_path, 'Delta': Delta_path,
-        'inflation': inflation_path, 'regime': regime_path
-    }
+        # Store results
+        out['b'][t] = b
+        out['φ'][t] = φ_t
+        out['φ_prime'][t] = φ_prime
+        out['Δ'][t] = Δ_t
+        out['π'][t] = π_t
+        out['η'][t] = η_t
+
+        b = b_prime
+        φ_promise = φ_prime
+
+    return out
 
 
-# Construct paths
-T = 40
-t_shock = 20
-
-# Fundamental disinflation: θ drops at t_shock
-theta_fund = np.ones(T) * 180.0
-theta_fund[t_shock:] = 90.0
-xi_fund = np.ones(T) * 0.01  # always low ξ
-
-# Institutional disinflation: ξ rises at t_shock
-theta_inst = np.ones(T) * 180.0  # θ constant
-xi_inst = np.ones(T) * 0.01
-xi_inst[t_shock:] = 0.8  # high ξ after shock
-
+T, t_shock = 60, 10
 p = params_la
-path_fund = simulate_path(5.0, 3.0, theta_fund, xi_fund, p, T)
-path_inst = simulate_path(5.0, 3.0, theta_inst, xi_inst, p, T)
+
+# Fundamental: start near FD steady state (b to 0 under FD)
+irf_fund = simulate_fd_mit(0.3, θ_high, p.θ_bar, p, T, t_shock)
+
+# Institutional: start near FD steady state, ξ jumps
+ξ_inst = np.where(
+    np.arange(T) < t_shock, 0, n_ξ_coarse - 1).astype(int)
+irf_inst = simulate_irf_inst(0.3, ξ_inst, cache, p)
+
+time = np.arange(T) - t_shock
+
+θ_fund = np.where(np.arange(T) < t_shock, θ_high, p.θ_bar)
+θ_inst = np.full(T, p.θ_bar)
 ```
 
 ```{code-cell} ipython3
-# ============================================================
-# Plot impulse responses
-# ============================================================
+def plot_irf(irf, θ_path, ξ_path, time, title):
+    """Plot a 4×2 IRF figure matching the paper's layout."""
+    fig, axes = plt.subplots(4, 2, figsize=(12, 14))
+    fig.suptitle(title, fontsize=14, y=1.01)
+    kw = dict(lw=2, color='tab:blue')
+    vkw = dict(color='k', ls=':', alpha=0.4)
 
-fig = plt.figure(figsize=(14, 12))
-gs = gridspec.GridSpec(3, 2, hspace=0.35, wspace=0.3)
+    axes[0, 0].plot(time, θ_path, **kw)
+    axes[0, 0].set_title(r'$\theta$'); axes[0, 0].axvline(0, **vkw)
+    axes[0, 1].plot(time, ξ_path, **kw)
+    axes[0, 1].set_title(r'$\xi$'); axes[0, 1].axvline(0, **vkw)
+    axes[1, 0].plot(time, irf['η'], **kw)
+    axes[1, 0].set_ylim(-0.05, 1.05)
+    axes[1, 0].set_title('Regime (0 = FD)'); axes[1, 0].axvline(0, **vkw)
+    axes[1, 1].plot(time, irf['b'], **kw)
+    axes[1, 1].set_title('Debt'); axes[1, 1].axvline(0, **vkw)
+    axes[2, 0].plot(time, irf['Δ'], **kw)
+    axes[2, 0].set_title('Surplus'); axes[2, 0].axvline(0, **vkw)
+    axes[2, 1].plot(time, irf['π'], **kw)
+    axes[2, 1].set_title('Inflation Rate (%)'); axes[2, 1].axvline(0, **vkw)
+    axes[3, 0].plot(time, irf['φ'], **kw)
+    axes[3, 0].set_title(r'Current $\phi$')
+    axes[3, 0].set_xlabel('time'); axes[3, 0].axvline(0, **vkw)
+    axes[3, 1].plot(time, irf['φ_prime'], **kw)
+    axes[3, 1].set_title(r"Promised $\phi'$")
+    axes[3, 1].set_xlabel('time'); axes[3, 1].axvline(0, **vkw)
+    plt.tight_layout()
+    return fig
+```
 
-time = np.arange(T) - t_shock  # center at shock time
-
-# θ path
-ax = fig.add_subplot(gs[0, 0])
-ax.plot(time, theta_fund, 'r--', label='Fundamental disinflation')
-ax.plot(time, theta_inst, 'b-', label='Institutional disinflation')
-ax.set_title('θ path')
-ax.set_ylabel('θ')
-ax.axvline(0, color='k', ls=':', alpha=0.5)
-ax.legend(fontsize=9)
-ax.grid(alpha=0.3)
-
-# ξ path
-ax = fig.add_subplot(gs[0, 1])
-ax.plot(time, xi_fund, 'r--', label='Fundamental')
-ax.plot(time, xi_inst, 'b-', label='Institutional')
-ax.set_title('ξ path')
-ax.set_ylabel('ξ₁')
-ax.axvline(0, color='k', ls=':', alpha=0.5)
-ax.legend(fontsize=9)
-ax.grid(alpha=0.3)
-
-# Regime
-ax = fig.add_subplot(gs[1, 0])
-ax.plot(time, path_fund['regime'], 'r--', label='Fundamental')
-ax.plot(time, path_inst['regime'], 'b-', label='Institutional')
-ax.set_title('Pr(Monetary Dominance)')
-ax.set_ylabel('η̄')
-ax.axvline(0, color='k', ls=':', alpha=0.5)
-ax.set_ylim(-0.1, 1.1)
-ax.legend(fontsize=9)
-ax.grid(alpha=0.3)
-
-# Debt
-ax = fig.add_subplot(gs[1, 1])
-ax.plot(time, path_fund['b'], 'r--', label='Fundamental')
-ax.plot(time, path_inst['b'], 'b-', label='Institutional')
-ax.set_title('Real Debt')
-ax.set_ylabel('b')
-ax.axvline(0, color='k', ls=':', alpha=0.5)
-ax.legend(fontsize=9)
-ax.grid(alpha=0.3)
-
-# Inflation proxy (using φ inversely)
-ax = fig.add_subplot(gs[2, 0])
-ax.plot(time, 1.0 / path_fund['phi'], 'r--', label='Fundamental')
-ax.plot(time, 1.0 / path_inst['phi'], 'b-', label='Institutional')
-ax.set_title('Inflation proxy (1/φ)')
-ax.set_ylabel('1/φ')
-ax.set_xlabel('Time (years from shock)')
-ax.axvline(0, color='k', ls=':', alpha=0.5)
-ax.legend(fontsize=9)
-ax.grid(alpha=0.3)
-
-# Surplus
-ax = fig.add_subplot(gs[2, 1])
-ax.plot(time, path_fund['Delta'], 'r--', label='Fundamental')
-ax.plot(time, path_inst['Delta'], 'b-', label='Institutional')
-ax.set_title('Primary surplus Δ')
-ax.set_ylabel('Δ')
-ax.set_xlabel('Time (years from shock)')
-ax.axvline(0, color='k', ls=':', alpha=0.5)
-ax.legend(fontsize=9)
-ax.grid(alpha=0.3)
-
-plt.suptitle('Two Types of Disinflation: Impulse Responses',
-             fontsize=14, y=1.01)
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Fundamental disinflation
+    name: fig-fundamental
+---
+fig = plot_irf(irf_fund, θ_fund, np.zeros(T), time,
+               'Fundamental disinflation')
 plt.show()
 ```
 
-The key takeaway from the impulse responses:
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Institutional disinflation
+    name: fig-institutional
+---
+fig = plot_irf(irf_inst, θ_inst, np.asarray(ξ_grid)[ξ_inst], time,
+               'Institutional disinflation')
+plt.show()
+```
 
-- **Fundamental disinflation** (red dashed): when $\theta$ drops, both inflation and debt
-  decline. The government has less need for revenue and voluntarily reduces borrowing.
-- **Institutional disinflation** (blue solid): when $\xi$ rises, the economy switches to
-  monetary dominance. Inflation falls, but debt *rises* because the incentive wedge on
-  debt issuance shrinks and seigniorage revenues fall.
+**Fundamental disinflation** ({numref}`fig-fundamental`): a permanent drop in $\theta$ from 200 to $\bar\theta = 130$ reduces fiscal pressure.
 
-This contrasting comovement allows the econometrician to identify which force is driving observed disinflation episodes.
+The regime stays in FD throughout ($\eta \approx 0$).
 
-## The Particle Filter
+Following the shock, the debt-to-GDP ratio declines, while the inflation rate initially drops sharply in the period when $\theta$ falls, reflecting the lower marginal cost of generating primary surpluses.
 
-The model defines a **nonlinear state-space system**:
+Inflation then continues to decline gradually, tracking the falling path of debt, which further reduces the marginal cost of surpluses.
+
+Inflation and debt move *together* downward — the signature of fundamental disinflation.
+
+**Institutional disinflation** ({numref}`fig-institutional`): a permanent rise in $\xi$ switches the regime from FD ($\eta \approx 0$) to MD ($\eta \approx 1$).
+
+The inflation rate instead initially jumps downward at $t_0$ as real balances move toward the promised value $\phi' \approx \phi^*$.
+
+The path of real government debt is increasing because the switch to the monetary-dominant regime allows for greater debt issuances and seigniorage revenues fall, requiring the government to finance inherited liabilities with higher (back-loaded) surpluses.
+
+Inflation and debt move in *opposite* directions — the signature of institutional disinflation.
+
+## The particle filter
+
+The empirical strategy centers on a **nonlinear state-space system** estimated with a bootstrap particle filter.
+
+To keep the lecture computationally light, we illustrate the filtering algorithm on a reduced-form nonlinear state-space system:
 
 $$
 y_t = f(S_t) + \varepsilon_t^y, \qquad
@@ -1207,15 +1181,15 @@ $$
 
 where
 
-- $y_t = (\pi_t, b_t/l_t)$ are observables (inflation and debt-to-GDP)
+- $y_t = (\pi_t, 100 b_t)$ are observables (inflation and debt in percent of GDP)
 - $S_t = (b_t, \phi_t, \theta_t, \xi_t)$ is the state vector
 - $\varepsilon_t^y \sim \mathcal{N}(0, \Sigma)$ are measurement errors
 
-Because the state transition and observation equations are **nonlinear**, the Kalman filter is not applicable. 
+Because the state transition and observation equations are *nonlinear*, the Kalman filter is not applicable.
 
-Instead, the authors use a **bootstrap particle filter**
-(sequential Monte Carlo), which approximates the filtering distribution
-$p(S_t | y_{1:t})$ with a set of weighted particles.
+A **bootstrap particle filter** (sequential Monte Carlo) approximates the filtering distribution $p(S_t | y_{1:t})$ with a set of weighted particles.
+
+We mirror that approach here, but with simplified transition and observation equations.
 
 ### Algorithm
 
@@ -1237,195 +1211,120 @@ $p(S_t | y_{1:t})$ with a set of weighted particles.
 
 3. **Output**: The filtered state estimate is the weighted average of particles
 
+The JAX implementation below vectorizes over particles with `vmap` and loops over time with `lax.scan`.
+
+Propagation and weighting are fully parallel across particles.
+
+Resampling uses `jnp.searchsorted` on the cumulative weight array.
+
 ```{code-cell} ipython3
-# ============================================================
-# Bootstrap Particle Filter
-# ============================================================
+@partial(jit, static_argnums=(2,))
+def particle_filter(y_data, key, N_particles,
+                    b_init, φ_init, θ_bar, ξ_init,
+                    ρ_θ, σ_θ, ρ_ξ, σ_ξ,
+                    κ, η_m, λ, σ_π, σ_b):
+    """Bootstrap particle filter returning filtered paths and log-likelihood."""
 
-@njit
-def measurement_loglik(y_obs, y_pred, sigma_pi, sigma_b):
-    """
-    Log-likelihood of observation y_obs given predicted y_pred.
-    y = (inflation, debt_to_GDP)
-    """
-    resid_pi = y_obs[0] - y_pred[0]
-    resid_b = y_obs[1] - y_pred[1]
-    ll = (-0.5 * (resid_pi / sigma_pi)**2
-          - 0.5 * (resid_b / sigma_b)**2
-          - np.log(sigma_pi) - np.log(sigma_b)
-          - np.log(2.0 * np.pi))
-    return ll
+    φ_star = κ / (2.0 * η_m)
 
+    # Particles: [b, φ, θ, ξ_1, φ_old]
+    key, *ks = jax.random.split(key, 5)
+    φ_init_particles = φ_init + 0.2 * jax.random.normal(ks[1], (N_particles,))
+    particles = jnp.column_stack([
+        b_init + 0.02 * jax.random.normal(ks[0], (N_particles,)),
+        φ_init_particles,
+        θ_bar + σ_θ * jax.random.normal(ks[2], (N_particles,)),
+        ξ_init + 0.1 * jax.random.normal(ks[3], (N_particles,)),
+        φ_init_particles
+    ])
 
-@njit
-def transition_state(b, phi, theta, xi1,
-                     rho_theta, sigma_theta, theta_bar,
-                     rho_xi, sigma_xi):
-    """
-    Propagate the state one period forward.
-    Returns (b', φ', θ', ξ₁').
+    def propagate_one(particle, pk):
+        b, φ, θ, ξ1, _ = particle
+        k1, k2 = jax.random.split(pk)
 
-    This is a simplified transition for illustration.
-    """
-    # θ transition: AR(1) around mean
-    eps_theta = np.random.randn() * sigma_theta
-    theta_new = theta_bar + rho_theta * (theta - theta_bar) + eps_theta
-    theta_new = max(theta_new, 1.0)
+        θ_new = jnp.maximum(
+            θ_bar + ρ_θ * (θ - θ_bar) + σ_θ * jax.random.normal(k1), 1.0)
+        ξ_new = ρ_ξ * ξ1 + σ_ξ * jax.random.normal(k2)
 
-    # ξ₁ transition: AR(1), non-negative
-    eps_xi = np.random.randn() * sigma_xi
-    xi1_new = rho_xi * xi1 + eps_xi
-    xi1_new = max(xi1_new, 0.0)
+        # Regime probability: calibrate V_gap so low ξ to FD, high ξ to MD
+        V_gap = -0.15
+        η = jax.nn.sigmoid(10.0 * λ * (V_gap + ξ1))
 
-    # Simplified state transition for (b, φ)
-    # In practice, one would use the policy functions from the full model
-    # Here we use a reduced-form approximation
-    b_new = b * 0.95 + 0.5 * (1.0 - np.exp(-xi1)) + 0.02 * (theta - theta_bar) / theta_bar
-    b_new = max(b_new, 0.01)
+        # φ dynamics from the static FOC
+        φ_fd = jnp.clip(6.0 - 0.025 * θ, 1.0, φ_star * 0.95)
+        φ_md = φ_star * 0.92
+        φ_target = η * φ_md + (1 - η) * φ_fd
+        φ_new = jnp.clip(0.5 * φ + 0.5 * φ_target, 0.5, φ_star * 0.99)
 
-    phi_new = phi * 0.9 + 0.1 * (3.0 + xi1) - 0.01 * theta / theta_bar
-    phi_new = max(phi_new, 0.1)
+        # Debt dynamics: FD to low debt, MD to higher debt
+        b_fd_ss = jnp.clip(0.18 - 0.0005 * (θ - θ_bar), 0.10, 0.25)
+        b_md_ss = jnp.clip(b_fd_ss + 0.25, 0.25, 0.50)
+        b_target = η * b_md_ss + (1 - η) * b_fd_ss
+        b_new = jnp.maximum(0.01, 0.90 * b + 0.10 * b_target)
 
-    return b_new, phi_new, theta_new, xi1_new
+        return jnp.array([b_new, φ_new, θ_new, ξ_new, φ])
 
+    def observe_one(particle):
+        """Map state to observables: π = β H(φ)/φ − 1, debt/GDP."""
+        b, φ, θ, ξ1, φ_old = particle
+        β = 0.95
+        H_val = H_func(φ, κ, η_m)
+        inflation = (β * H_val / jnp.maximum(φ, 0.1) - 1.0) * 100.0
+        debt_to_gdp = b * 100.0
+        return jnp.array([inflation, debt_to_gdp])
 
-@njit
-def observe_state(b, phi, theta, xi1, kappa, eta_m, lam):
-    """
-    Map state to observables: (inflation, debt_to_GDP).
-    Simplified observation equation.
-    """
-    # Approximate inflation from φ
-    H_val = H_func(phi, kappa, eta_m)
-    inflation = max(0.95 * H_val / phi - 1.0, -0.1) * 100  # in percent
+    σ_vec = jnp.array([σ_π, σ_b])
 
-    # Debt-to-GDP: b / l where l ≈ 1 (normalized)
-    debt_to_gdp = b * 100.0  # in percent
+    def pf_step(carry, inputs):
+        particles, log_lik = carry
+        y_t, step_key = inputs
+        k_prop, k_resamp = jax.random.split(step_key)
 
-    return np.array([inflation, debt_to_gdp])
+        # Propagate each particle forward one period
+        prop_keys = jax.random.split(k_prop, N_particles)
+        particles = vmap(propagate_one)(particles, prop_keys)
 
+        # Map particles to observables and compute log-likelihood weights
+        y_preds = vmap(observe_one)(particles)
+        resid = y_t[None, :] - y_preds
+        log_w = (-0.5 * jnp.sum((resid / σ_vec)**2, axis=1)
+                 - jnp.sum(jnp.log(σ_vec)) - jnp.log(2 * jnp.pi))
 
-@njit
-def particle_filter(y_data, N_particles,
-                    b_init, phi_init, theta_bar, xi_init,
-                    rho_theta, sigma_theta,
-                    rho_xi, sigma_xi,
-                    kappa, eta_m, lam,
-                    sigma_pi, sigma_b):
-    """
-    Bootstrap particle filter for the Dovis et al. model.
+        # Normalize weights (log-sum-exp trick for numerical stability)
+        max_lw = jnp.max(log_w)
+        w_unnorm = jnp.exp(log_w - max_lw)
+        sum_w = jnp.sum(w_unnorm)
+        weights = w_unnorm / sum_w
 
-    Parameters
-    ----------
-    y_data : (T, 2) array of observables [inflation%, debt_to_GDP%]
-    N_particles : number of particles
-    Other params : model parameters
+        # Accumulate log-likelihood
+        log_lik += max_lw + jnp.log(sum_w) - jnp.log(N_particles)
 
-    Returns
-    -------
-    theta_filtered : (T,) filtered θ path
-    xi_filtered : (T,) filtered ξ₁ path
-    b_filtered : (T,) filtered debt path
-    phi_filtered : (T,) filtered φ path
-    log_lik : scalar, log marginal likelihood
-    """
-    T = y_data.shape[0]
+        # Weighted average gives the filtered state estimate
+        filtered = jnp.sum(weights[:, None] * particles, axis=0)
 
-    # Storage for filtered means
-    theta_filtered = np.zeros(T)
-    xi_filtered = np.zeros(T)
-    b_filtered = np.zeros(T)
-    phi_filtered = np.zeros(T)
-    log_lik = 0.0
+        # Resampling
+        cumsum = jnp.cumsum(weights)
+        u = jax.random.uniform(k_resamp) / N_particles
+        targets = u + jnp.arange(N_particles) / N_particles
+        indices = jnp.clip(jnp.searchsorted(cumsum, targets),
+                           0, N_particles - 1)
+        particles = particles[indices]
 
-    # Initialize particles
-    b_particles = np.full(N_particles, b_init)
-    phi_particles = np.full(N_particles, phi_init)
-    theta_particles = np.full(N_particles, theta_bar)
-    xi_particles = np.full(N_particles, xi_init)
+        return (particles, log_lik), filtered
 
-    # Add some initial dispersion
-    for i in range(N_particles):
-        b_particles[i] += np.random.randn() * 0.01
-        phi_particles[i] += np.random.randn() * 0.1
-        theta_particles[i] += np.random.randn() * sigma_theta
-        xi_particles[i] = max(xi_init + np.random.randn() * sigma_xi, 0.0)
+    step_keys = jax.random.split(key, y_data.shape[0])
+    (_, total_ll), filtered_all = lax.scan(
+        pf_step, (particles, 0.0), (y_data, step_keys))
 
-    weights = np.ones(N_particles) / N_particles
-
-    for t in range(T):
-        # --- Propagate ---
-        for i in range(N_particles):
-            (b_particles[i], phi_particles[i],
-             theta_particles[i], xi_particles[i]) = transition_state(
-                b_particles[i], phi_particles[i],
-                theta_particles[i], xi_particles[i],
-                rho_theta, sigma_theta, theta_bar,
-                rho_xi, sigma_xi)
-
-        # --- Weight ---
-        log_weights = np.zeros(N_particles)
-        for i in range(N_particles):
-            y_pred = observe_state(
-                b_particles[i], phi_particles[i],
-                theta_particles[i], xi_particles[i],
-                kappa, eta_m, lam)
-            log_weights[i] = measurement_loglik(
-                y_data[t], y_pred, sigma_pi, sigma_b)
-
-        # Normalize in log space for numerical stability
-        max_lw = np.max(log_weights)
-        weights_unnorm = np.exp(log_weights - max_lw)
-        sum_w = np.sum(weights_unnorm)
-        weights = weights_unnorm / sum_w
-
-        # Marginal likelihood contribution
-        log_lik += max_lw + np.log(sum_w) - np.log(N_particles)
-
-        # --- Filtered means ---
-        theta_filtered[t] = np.sum(weights * theta_particles)
-        xi_filtered[t] = np.sum(weights * xi_particles)
-        b_filtered[t] = np.sum(weights * b_particles)
-        phi_filtered[t] = np.sum(weights * phi_particles)
-
-        # --- Resample (systematic resampling) ---
-        cumsum = np.cumsum(weights)
-        u = np.random.rand() / N_particles
-        indices = np.zeros(N_particles, dtype=np.int64)
-        j = 0
-        for i in range(N_particles):
-            target = u + i / N_particles
-            while j < N_particles - 1 and cumsum[j] < target:
-                j += 1
-            indices[i] = j
-
-        b_new = np.zeros(N_particles)
-        phi_new = np.zeros(N_particles)
-        theta_new = np.zeros(N_particles)
-        xi_new = np.zeros(N_particles)
-        for i in range(N_particles):
-            b_new[i] = b_particles[indices[i]]
-            phi_new[i] = phi_particles[indices[i]]
-            theta_new[i] = theta_particles[indices[i]]
-            xi_new[i] = xi_particles[indices[i]]
-        b_particles[:] = b_new
-        phi_particles[:] = phi_new
-        theta_particles[:] = theta_new
-        xi_particles[:] = xi_new
-
-    return theta_filtered, xi_filtered, b_filtered, phi_filtered, log_lik
+    return (filtered_all[:, 2], filtered_all[:, 3],
+            filtered_all[:, 0], filtered_all[:, 1], total_ll)
 ```
 
+We demonstrate the particle filter on synthetic data that mimics an institutional disinflation: inflation declines from roughly 30% to 5% while debt rises from 20% to 45% of GDP.
+
 ```{code-cell} ipython3
-# ============================================================
-# Demonstrate the particle filter on synthetic data
-# ============================================================
-
-np.random.seed(123)
+np.random.seed(0)
 T_sim = 60
-
-# Generate synthetic data mimicking an institutional disinflation
-# Inflation declines from ~30% to ~5%, debt rises from ~20% to ~45%
 t_reform = 25
 
 inflation_data = np.concatenate([
@@ -1439,184 +1338,141 @@ debt_data = np.concatenate([
     40 + 3 * np.random.randn(T_sim - t_reform - 10)
 ])
 
-y_data = np.column_stack([inflation_data, debt_data])
+y_data = jnp.column_stack([inflation_data, debt_data])
 
-# Run particle filter
 p = params_la
-theta_filt, xi_filt, b_filt, phi_filt, ll = particle_filter(
-    y_data, N_particles=2000,
-    b_init=0.2, phi_init=3.0,
-    theta_bar=p.theta_bar, xi_init=0.05,
-    rho_theta=p.rho_theta, sigma_theta=p.sigma_theta,
-    rho_xi=p.rho_xi, sigma_xi=p.sigma_xi,
-    kappa=p.kappa, eta_m=p.eta_m, lam=p.lam,
-    sigma_pi=3.0, sigma_b=2.0
-)
+pf_key = jax.random.PRNGKey(123)
 
-print(f"Log marginal likelihood: {ll:.2f}")
+θ_filt, ξ_filt, b_filt, φ_filt, ll = particle_filter(
+    y_data, pf_key, 5000,
+    b_init=0.22, φ_init=2.5,
+    θ_bar=p.θ_bar, ξ_init=-0.3,
+    ρ_θ=p.ρ_θ, σ_θ=p.σ_θ,
+    ρ_ξ=p.ρ_ξ, σ_ξ=p.σ_ξ,
+    κ=p.κ, η_m=p.η_m, λ=p.λ,
+    σ_π=2.0, σ_b=2.0
+)
 ```
 
 ```{code-cell} ipython3
-# ============================================================
-# Plot particle filter results
-# ============================================================
-
+---
+mystnb:
+  figure:
+    caption: Particle filter on synthetic data
+    name: fig-particle-filter
+---
 years = 1960 + np.arange(T_sim)
 
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 
-# Recovered θ
-axes[0, 0].plot(years, theta_filt, 'b-', lw=1.5)
-axes[0, 0].set_title('Recovered θ shocks')
+axes[0, 0].plot(years, θ_filt, 'b-', lw=2)
 axes[0, 0].set_ylabel('θ')
 axes[0, 0].axvline(1960 + t_reform, color='gray', ls='--', alpha=0.5,
-                    label='Reform date')
+                    label='reform date')
 axes[0, 0].legend()
-axes[0, 0].grid(alpha=0.3)
 
-# Recovered ξ
-axes[0, 1].plot(years, xi_filt, 'b-', lw=1.5)
-axes[0, 1].set_title('Recovered ξ₁ shocks (credibility)')
-axes[0, 1].set_ylabel('ξ₁')
+axes[0, 1].plot(years, ξ_filt, 'b-', lw=2)
+axes[0, 1].set_ylabel('ξ_1')
 axes[0, 1].axvline(1960 + t_reform, color='gray', ls='--', alpha=0.5)
-axes[0, 1].grid(alpha=0.3)
 
-# Inflation: data vs model
-axes[1, 0].plot(years, inflation_data, 'k-', lw=1.5, label='Data')
-y_model_pi = observe_state(
-    b_filt[0], phi_filt[0], theta_filt[0], xi_filt[0],
-    p.kappa, p.eta_m, p.lam)[0] * np.ones(T_sim)  # simplified
-for t in range(T_sim):
-    y_model_pi[t] = observe_state(
-        b_filt[t], phi_filt[t], theta_filt[t], xi_filt[t],
-        p.kappa, p.eta_m, p.lam)[0]
-axes[1, 0].plot(years, y_model_pi, 'b--', lw=1.5, label='Model')
-axes[1, 0].set_title('Inflation: Data vs Model')
-axes[1, 0].set_ylabel('Inflation (%)')
-axes[1, 0].set_xlabel('Year')
+axes[1, 0].plot(years, inflation_data, 'k-', lw=2, label='data')
+H_filt = H_func(φ_filt, p.κ, p.η_m)
+y_model_π = (p.β * H_filt / jnp.maximum(φ_filt, 0.1) - 1.0) * 100
+axes[1, 0].plot(years, y_model_π, 'b--', lw=2, label='model')
+axes[1, 0].set_ylabel('inflation (%)')
+axes[1, 0].set_xlabel('year')
 axes[1, 0].legend()
-axes[1, 0].grid(alpha=0.3)
 
-# Debt: data vs model
-axes[1, 1].plot(years, debt_data, 'k-', lw=1.5, label='Data')
-axes[1, 1].plot(years, b_filt * 100, 'b--', lw=1.5, label='Model')
-axes[1, 1].set_title('Debt/GDP: Data vs Model')
-axes[1, 1].set_ylabel('Debt/GDP (%)')
-axes[1, 1].set_xlabel('Year')
+axes[1, 1].plot(years, debt_data, 'k-', lw=2, label='data')
+axes[1, 1].plot(years, b_filt * 100, 'b--', lw=2, label='model')
+axes[1, 1].set_ylabel('debt/GDP (%)')
+axes[1, 1].set_xlabel('year')
 axes[1, 1].legend()
-axes[1, 1].grid(alpha=0.3)
 
-plt.suptitle('Particle Filter: Recovering Structural Shocks\n'
-             '(Synthetic data mimicking institutional disinflation)',
-             fontsize=14)
 plt.tight_layout()
 plt.show()
 ```
 
-## Case Studies
+## Case studies
 
-The paper applies the model to three countries:
+{cite:t}`DovisAccountingMFrevised` apply the model to two prominent disinflation episodes in Latin America.
+
+We do not reproduce those estimates here, but the points below summarize the main empirical findings.
 
 ### Colombia (1980–2017)
 
-Colombia's 1991 constitutional reform granted independence to the central bank
-({cite}`PerezReynaOsorio2017`). 
+In 1991 Colombia instituted a new constitution that granted substantial independence to its central bank, Banco de la República, explicitly mandating price stability as its primary objective and significantly insulating monetary policy from political influence ({cite}`PerezReynaOsorio2017`).
 
-The particle filter identifies:
-- An increase in credibility ($\xi$) starting in **1997**, not 1992
-- Rising debt and falling inflation are the hallmark of **institutional disinflation**
-- A counterfactual with $\xi = 0$ shows debt would have declined, matching the
-  fundamental disinflation signature
+In 2001 Colombia adopted an explicit inflation targeting regime with a long-term inflation goal of 3%.
+
+Prior to the 1991 reform, the central bank lacked autonomy, often making monetary policy susceptible to government pressures, and as a result Colombia suffered from persistent high inflation despite the relatively low level of debt.
+
+The particle filter identifies an increase in the cost of deviating from the inflation target ($\xi$) starting in **1997**, not 1992 — the first year after the reform.
+
+This may be driven by the fact that it took time for the government to convince private agents that the new institutional arrangement was credible and not just a cosmetic adjustment.
+
+The model accounts for the reduction in inflation in the 1990s with an increase in the cost of deviating from the inflation target in 1997, resulting in a persistent shift to a monetary-dominant regime from 1997 onward.
+
+The observed increase in the debt-to-GDP ratio from 1994 to 2002 is driven by the switch to a monetary-dominant regime that allows for greater debt issuances and by higher-than-average realizations of $\theta_t$.
+
+A counterfactual with $\xi_t = 0$ throughout shows that, without a credible constitutional reform, debt would have similarly increased driven by the high realizations of $\theta_t$, but inflation would have remained constant or even risen during the latter half of the decade.
+
+This result underscores the crucial role credible institutional reforms played in simultaneously achieving higher debt levels and declining inflation in Colombia during this period.
 
 ### Chile (1990–2017)
 
-Chile's reforms in the late 1980s combined fiscal consolidation with central bank autonomy
-({cite}`CaputoSaravia2018`):
-- The early 1990s disinflation could be explained by either channel
-- From the mid-1990s, when debt stabilized while inflation continued falling,
-  **credibility gains** were necessary to explain the data
+Beginning in the late 1980s, Chile enacted a variety of fiscal and monetary reforms ({cite}`CaputoSaravia2018`).
 
-### United States (1960–2007)
+It tightened public finances and, for roughly three decades, consistently posted budget surpluses.
 
-- The Great Inflation of the 1970s reflects a **collapse in credibility** amid political
-  pressure on the Fed ({cite}`Blinder2022`)
-- The Volcker disinflation marks a **gradual restoration of credibility** in the early 1980s ({cite}`silber2012volcker`)
-- Rising debt alongside stable low inflation from the mid-1980s onward is the signature   of institutional disinflation (see also {cite}`KehoeNicolini2022` and {cite}`Sargent1982`
-  for narrative analyses of these episodes)
+On the monetary front, a 1989 constitutional law granted the Central Bank of Chile full autonomy and the country moved to an explicit inflation regime targeting soon after.
 
-```{code-cell} ipython3
-# ============================================================
-# Illustrate the identification logic with a scatter plot
-# ============================================================
+In contrast to Colombia, both inflation and the debt-to-GDP ratio declined over this period.
 
-fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+During the first half of the 1990s, the drop in inflation can be replicated either by a fall in fiscal needs or by a rise in the penalty for deviating from the inflation target — each channel on its own is sufficient to match the joint movements in inflation and debt.
 
-# Fundamental disinflation: Δπ < 0, Δb < 0
-n_pts = 80
-np.random.seed(42)
-d_pi_fund = -np.abs(np.random.randn(n_pts) * 5)
-d_b_fund = d_pi_fund * 0.4 + np.random.randn(n_pts) * 2
+The distinction between them becomes critical in the second half of the decade: inflation keeps falling while debt-to-GDP merely flattens out.
 
-axes[0].scatter(d_pi_fund, d_b_fund, alpha=0.6, c='tab:red',
-                label='θ↓ (fundamental)')
-axes[0].axhline(0, color='k', ls='-', lw=0.5)
-axes[0].axvline(0, color='k', ls='-', lw=0.5)
-axes[0].set_xlabel('Change in inflation (Δπ)')
-axes[0].set_ylabel('Change in debt/GDP (Δb)')
-axes[0].set_title('Fundamental Disinflation')
-axes[0].annotate('Both decline\ntogether',
-                 xy=(-6, -3), fontsize=11,
-                 bbox=dict(boxstyle='round', fc='lightyellow'))
-axes[0].grid(alpha=0.3)
+Replicating this pattern requires credibility shocks — an isolated increase in fiscal needs would stabilize the debt ratio but, counterfactually, would drive inflation back up.
 
-# Institutional disinflation: Δπ < 0, Δb > 0
-d_pi_inst = -np.abs(np.random.randn(n_pts) * 5)
-d_b_inst = -d_pi_inst * 0.35 + np.random.randn(n_pts) * 2
-
-axes[1].scatter(d_pi_inst, d_b_inst, alpha=0.6, c='tab:blue',
-                label='ξ↑ (institutional)')
-axes[1].axhline(0, color='k', ls='-', lw=0.5)
-axes[1].axvline(0, color='k', ls='-', lw=0.5)
-axes[1].set_xlabel('Change in inflation (Δπ)')
-axes[1].set_ylabel('Change in debt/GDP (Δb)')
-axes[1].set_title('Institutional Disinflation')
-axes[1].annotate('Inflation falls,\ndebt rises',
-                 xy=(-6, 3), fontsize=11,
-                 bbox=dict(boxstyle='round', fc='lightyellow'))
-axes[1].grid(alpha=0.3)
-
-plt.suptitle('Identification Logic: Comovement of Debt and Inflation',
-             fontsize=13)
-plt.tight_layout()
-plt.show()
-```
+The contrasting experiences of Colombia and Chile illuminate the two disinflation channels implied by the model: in Colombia the data can only be reconciled with a credibility gain (positive $\xi_t$ shocks), whereas in Chile the early-1990s disinflation could be matched either way, yet the continued decline in inflation once debt-to-GDP leveled off required additional credibility gains.
 
 ## Key Mechanisms: A Summary
 
-The model revolves around three interconnected mechanisms:
+The model revolves around three interconnected mechanisms.
 
-**1. Endogenous regime switching.** The government's decision to honor or abrogate the
-inflation mandate depends on the state $(b, \phi, \theta, \xi)$. The regime is not imposed
-exogenously but emerges from optimization by a government that weighs the benefit of
-fiscal flexibility against a stochastic institutional cost.
+*1. Endogenous regime switching.*
 
-**2. Incentive effects.** When commitment is imperfect, the current government
-strategically limits borrowing and chooses a less ambitious inflation target to reduce
-future governments' temptation to abrogate. This creates:
+Whether the government honors or abrogates its inflation mandate depends on the state $(b, \phi, \theta, \xi)$.
 
-- A **downward wedge** in debt issuance (Euler equation distortion)
-- An **upward bias** in the inflation target relative to the Friedman rule
+The regime emerges from optimization — the government weighs the benefit of fiscal flexibility against a stochastic institutional cost — rather than from an exogenous rule.
+
+Moreover, movements in inflation are the direct consequence of deliberate policy choices as in {cite}`SargentWallace1981`, and not the result of an equilibrium selection mechanism.
+
+*2. Incentive effects on debt and inflation targets.*
+
+Under imperfect commitment, the current government strategically limits borrowing and chooses a less ambitious inflation target to reduce future governments' temptation to abrogate.
+
+These incentive effects create a *downward wedge* in debt issuance relative to the Ramsey Euler equation and an *upward bias* in the inflation target relative to the Friedman rule.
 
 Both distortions vanish as $\xi \to \infty$ (Ramsey) and are maximal at $\xi = 0$ (Markov).
-See {cite}`Sargent2024` for a broader discussion of the credibility problem.
 
-**3. Two disinflation sources.** Cross-equation restrictions between inflation and debt dynamics
-provide the identification lever:
+The incentive to limit indebtedness becomes stronger as the probability of switching to the fiscal dominant regime increases.
+
+See {cite:t}`Ljungqvist2012`, chapter 23, for a broader discussion of the credibility problem.
+
+*3. Two disinflation sources with distinct debt dynamics.*
+
+Fundamental disinflations generate a positive correlation between inflation and the level of government debt, whereas institutional disinflations produce a negative correlation between the two.
+
+This contrasting behavior allows the authors to use the dynamics of debt and inflation to identify the contribution of institutional changes to inflation dynamics.
 
 | |  $\Delta\pi$ |   $\Delta b$   | Mechanism |
 |---|:---:|:---:|---|
-| Fundamental ($\theta \downarrow$) | $\downarrow$ | $\downarrow$ | Lower spending needs → less borrowing, less inflation |
-| Institutional ($\xi \uparrow$) | $\downarrow$ | $\uparrow$ | Credible mandate → lower inflation, relaxed incentive wedge → more borrowing |
+| Fundamental ($\theta \downarrow$) | $\downarrow$ | $\downarrow$ | Lower spending needs $\to$ less borrowing, less inflation |
+| Institutional ($\xi \uparrow$) | $\downarrow$ | $\uparrow$ | Credible mandate $\to$ lower inflation, relaxed incentive wedge $\to$ more borrowing |
+
+The credibility of the monetary regime is a necessary condition for supporting high levels of public debt with low levels of inflation.
 
 ## Exercises
 
@@ -1624,11 +1480,15 @@ provide the identification lever:
 :label: dovis_ex1
 ```
 
-**Exercise 1:** Markov equilibrium
+For the middle $\xi_1$ state on the coarse grid, compute
 
-Solve for the **Markov equilibrium** (set $\xi = 0$) of the simplified model. Verify
-that steady-state debt converges to zero as stated in Appendix C of the paper.
-Plot the convergence of debt from an initial value $b_0 = 5$.
+$$
+\phi^{fd}(b') = \arg\max_{\phi} \left[ W(b' + \phi, \xi_1) + v(\phi) \right]
+$$
+
+using the solved value function.
+
+Plot $\phi^{fd}(b')$ and the associated fiscal-dominance value $V^{fd}(b', \xi_1)$.
 
 ```{exercise-end}
 ```
@@ -1638,39 +1498,31 @@ Plot the convergence of debt from an initial value $b_0 = 5$.
 ```
 
 ```{code-cell} ipython3
-# Markov equilibrium: ξ = 0 means FD always chosen
-T_markov = 80
-b_markov = np.zeros(T_markov)
-phi_markov = np.zeros(T_markov)
-b_markov[0] = 5.0
-phi_markov[0] = 3.0
-
+---
+mystnb:
+  figure:
+    caption: Fiscal-dominance policy from continuation values
+    name: fig-fd-policy
+---
 p = params_la
-for t in range(T_markov - 1):
-    B = b_markov[t] + phi_markov[t]
-    phi_fd = phi_fd_solve(B, p.theta_bar, p.chi, p.psi, p.sigma,
-                          p.kappa, p.eta_m)
-    phi_markov[t] = phi_fd
+b_prime_grid = B_grid * 0.5
+ξ_mid = n_ξ_coarse // 2
 
-    # Under Markov: b_{t+1} < b_t (incentive effect drives debt down)
-    # Simplified dynamics
-    Delta = B - phi_fd
-    b_markov[t+1] = max(0.0, b_markov[t] * 0.92 - 0.1)
-    phi_markov[t+1] = phi_fd
+_, _, _, V_fd_mid, φ_fd_mid, _ = fd_from_continuation(
+    W[:, ξ_mid:ξ_mid + 1], B_grid, b_prime_grid, φ_grid, p.κ, p.η_m)
+
+φ_fd_mid = np.asarray(φ_fd_mid[:, 0])
+V_fd_mid = np.asarray(V_fd_mid[:, 0])
+feasible_fd = V_fd_mid > -1e12
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
-axes[0].plot(b_markov, 'b-', lw=2)
-axes[0].axhline(0, color='k', ls='--', alpha=0.5)
-axes[0].set_xlabel('Time')
-axes[0].set_ylabel('Real debt b')
-axes[0].set_title('Markov equilibrium: debt → 0')
-axes[0].grid(alpha=0.3)
+axes[0].plot(b_prime_grid[feasible_fd], φ_fd_mid[feasible_fd], 'b-', lw=2)
+axes[0].set_xlabel("next-period debt $b'$")
+axes[0].set_ylabel(r"$\phi^{fd}(b', \xi_1)$")
 
-axes[1].plot(phi_markov, 'r-', lw=2)
-axes[1].set_xlabel('Time')
-axes[1].set_ylabel('Real balances φ')
-axes[1].set_title('Markov equilibrium: φ convergence')
-axes[1].grid(alpha=0.3)
+axes[1].plot(b_prime_grid[feasible_fd], V_fd_mid[feasible_fd], 'r-', lw=2)
+axes[1].set_xlabel("next-period debt $b'$")
+axes[1].set_ylabel(r"$V^{fd}(b', \xi_1)$")
 
 plt.tight_layout()
 plt.show()
@@ -1683,11 +1535,9 @@ plt.show()
 :label: dovis_ex2
 ```
 
-**Exercise 2:** Particle filter sensitivity
+Run the particle filter on the synthetic data with different numbers of particles ($N = 500, 2000, 10000$).
 
-Run the particle filter on the synthetic data with different numbers of particles
-($N = 500, 1000, 5000$). Plot the recovered $\xi$ path for each and assess
-convergence.
+Plot the recovered $\xi$ path for each and assess convergence.
 
 ```{exercise-end}
 ```
@@ -1697,39 +1547,42 @@ convergence.
 ```
 
 ```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Particle filter sensitivity
+    name: fig-pf-sensitivity
+---
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
-for N_part, color in zip([500, 1000, 5000],
-                         ['tab:orange', 'tab:blue', 'tab:green']):
-    theta_f, xi_f, b_f, phi_f, ll = particle_filter(
-        y_data, N_particles=N_part,
-        b_init=0.2, phi_init=3.0,
-        theta_bar=p.theta_bar, xi_init=0.05,
-        rho_theta=p.rho_theta, sigma_theta=p.sigma_theta,
-        rho_xi=p.rho_xi, sigma_xi=p.sigma_xi,
-        kappa=p.kappa, eta_m=p.eta_m, lam=p.lam,
-        sigma_pi=3.0, sigma_b=2.0
+for i, (N_part, color) in enumerate(zip(
+        [500, 2000, 10000], ['tab:orange', 'tab:blue', 'tab:green'])):
+    pf_k = jax.random.PRNGKey(100 + i)
+    θ_f, ξ_f, b_f, φ_f, ll = particle_filter(
+        y_data, pf_k, N_part,
+        b_init=0.20, φ_init=3.0,
+        θ_bar=p.θ_bar, ξ_init=-0.3,
+        ρ_θ=p.ρ_θ, σ_θ=p.σ_θ,
+        ρ_ξ=p.ρ_ξ, σ_ξ=p.σ_ξ,
+        κ=p.κ, η_m=p.η_m, λ=p.λ,
+        σ_π=2.5, σ_b=3.0
     )
 
-    axes[0].plot(years, xi_f, color=color, lw=1.2,
+    axes[0].plot(years, ξ_f, color=color, lw=2,
                  label=f'N={N_part} (LL={ll:.1f})')
-    axes[1].plot(years, theta_f, color=color, lw=1.2,
+    axes[1].plot(years, θ_f, color=color, lw=2,
                  label=f'N={N_part}')
 
-axes[0].set_title('Recovered ξ₁ (credibility)')
-axes[0].set_xlabel('Year')
+axes[0].set_ylabel('ξ_1')
+axes[0].set_xlabel('year')
 axes[0].legend()
-axes[0].grid(alpha=0.3)
 axes[0].axvline(1960 + t_reform, color='gray', ls='--', alpha=0.5)
 
-axes[1].set_title('Recovered θ shocks')
-axes[1].set_xlabel('Year')
+axes[1].set_ylabel('θ')
+axes[1].set_xlabel('year')
 axes[1].legend()
-axes[1].grid(alpha=0.3)
 axes[1].axvline(1960 + t_reform, color='gray', ls='--', alpha=0.5)
 
-plt.suptitle('Particle Filter: Sensitivity to Number of Particles',
-             fontsize=13)
 plt.tight_layout()
 plt.show()
 ```
