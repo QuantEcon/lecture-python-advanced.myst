@@ -1731,6 +1731,10 @@ The dual solution $(u,v)$ of $W_D$ can be interpreted as equilibrium utilities o
 
 {cite}`boerma2023composite` propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.
 
+Their approach relies on *Complementary Slackness*: given a primal solution $\mu$, $(\phi , \psi) $ is a dual solution if and only if for all $x \in X$ and $y \in Y$
+* $\phi_x + \psi_y \leq c_{xy}$ (dual feasibility)
+* $\phi_x + \psi_y = c_{xy}$ if $\mu_{xy}>0$ (complementary slackness).
+
 Let's generate an instance and compute the optimal matching.
 
 ```{code-cell} ipython3
