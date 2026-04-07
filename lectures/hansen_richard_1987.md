@@ -12,7 +12,7 @@ kernelspec:
 ---
 
 (hansen_richard_1987)=
-```{raw} jupyter
+```{raw} html
 <div id="qe-notebook-header" align="right" style="text-align:right;">
         <a href="https://quantecon.org/" title="quantecon.org">
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
@@ -20,7 +20,10 @@ kernelspec:
 </div>
 ```
 
-# Conditioning Information in Asset Pricing
+```{index} single: python
+```
+
+# The Role of Conditioning Information in Asset Pricing
 
 ```{contents} Contents
 :depth: 2
@@ -28,251 +31,410 @@ kernelspec:
 
 ## Overview
 
-This lecture is based on {cite}`HansenRichard1987`, a paper by Lars Peter Hansen
-and Scott F. Richard published in *Econometrica* in 1987.
+{cite:t}`HansenRichard1987` investigates testable implications of equilibrium asset pricing models.
 
-The paper addresses a fundamental question in empirical finance: when a
-theoretical asset pricing model tells us about *conditional* moments — moments
-formed using the information traders possess at the time they make their portfolio
-decisions — what does that imply about the *unconditional* moments that an
-econometrician can estimate from time series data?
+This lecture builds on the mean-variance frontier and stochastic discount factor framework
+developed in {doc}`asset_pricing_lph`.
 
-The main contributions of the paper are:
+In a competitive equilibrium model, prices are determined by a **pricing function**
+that maps uncertain future payoffs into current prices.
 
-- A conditional analogue of the Riesz Representation Theorem that shows every
-  asset pricing function can be represented via an inner product with a unique
-  **stochastic discount factor** (SDF), also called the **pricing kernel** or
-  **benchmark payoff** $p^*$.
+Alternative models of asset prices — built from different assumptions about
+preferences, endowments, and technology — imply alternative pricing functions.
 
-- A complete characterization of the **conditional mean-variance frontier** using
-  two fund separation, and a parallel characterization of the
-  **unconditional mean-variance frontier**.
+Two models that imply the same pricing function are **observationally
+indistinguishable** using payoff and price data alone.
 
-- A demonstration that omitting conditioning information can cause a return that
-  is on the *conditional* mean-variance frontier to fall **off** the
-  *unconditional* frontier. This has direct consequences for empirical tests of
-  the CAPM.
+So models of asset prices can be indexed by
+their implied pricing functions.
 
-- An **information extension** (pseudo-pricing function) that converts the
-  conditional pricing function into one that maps payoffs to real numbers,
-  connecting the theory to {cite}`Hansen_Singleton_1982`'s generalized method
-  of moments (GMM) approach.
+A key challenge for empirical work is the role of **conditioning information**.
 
-Among the things we will learn are:
+Theoretical models have traders forming portfolios contingent on
+information available at the time of trading.
 
-- How to build a conditional Hilbert space of payoffs and how a pricing function
-  is a conditional linear functional on that space.
+But empirical tests typically
+use *unconditional* moments — time-series averages of payoffs and prices —
+that do not depend on this conditioning information.
 
-- Why the SDF $p^*$ has a minimum conditional second moment among all returns.
+Hansen and Richard develop the theory needed to navigate between these two
+levels. The paper proceeds in two steps:
 
-- How the conditional and unconditional mean-variance frontiers are related.
+1. **Derive pricing functions** from the primitive assumptions of
+   value-additivity and continuity, and show that each pricing function can
+   be represented using a unique **stochastic discount factor** (SDF) $p^*$
+   via an inner product on a conditional Hilbert space.
 
-- A simulation that shows a conditionally efficient return can be unconditionally
-  inefficient.
+2. **Deduce testable restrictions** that these pricing functions imply for
+   population moments of payoffs and prices — moments that an econometrician
+   can estimate from time-series data.
 
-- How the Hansen-Jagannathan bound arises as a consequence of this framework.
+The main results are:
 
-Let's start by importing some Python tools.
+- A **conditional Riesz Representation Theorem** showing $\pi(p) = E(p \, p^* \mid \mathcal{G})$
+  for a unique benchmark payoff $p^*$.
+
+- A **conditional two-fund theorem** characterizing the mean-variance frontier
+  conditioned on $\mathcal{G}$.
+
+- A precise characterization of the **unconditional mean-variance frontier**,
+  and a demonstration that omitting conditioning information can cause a return
+  that is on the conditional frontier to fall *off* the unconditional frontier.
+
+- A **single-beta representation** (conditional CAPM), and conditions under
+  which it does and does not survive aggregation to unconditional moments.
+
+- A **pseudo-pricing function** $\pi^*(p) = E[\pi(p)]$ that maps payoffs to
+  real numbers and connects directly to the GMM approach of
+  {cite:t}`hansen1982generalized`.
+
+We make the following imports.
 
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
-from scipy.linalg import cholesky
+from scipy import stats
 import pandas as pd
 
 np.random.seed(42)
 ```
 
-## Setting and Notation
+## Data generation
 
-### Probability space and stationarity
+Hansen and Richard begin by describing a class of data-generation processes to
+which their theoretical analysis applies.
 
-Hansen and Richard work in a probability space $(\Omega, \mathcal{F}, \Pr)$
-and assume the data are generated by a **measure-preserving, ergodic
-transformation** $S : \Omega \to \Omega$.
+This section connects their abstract
+framework to the kind of data an econometrician can observe.
 
-If $x(\omega)$ is a vector of observations at time zero, then
+### The probability space and stationarity
 
-$$
-x_t(\omega) = x[S^t(\omega)]
-$$
+Let $(\Omega, \mathcal{F}, \Pr)$ be a probability space.
 
-defines a strictly stationary and ergodic stochastic process. Ergodicity ensures
-that time-series averages converge almost surely to population means, so an
-econometrician can learn about moments by taking sample averages.
+A **measure-preserving, ergodic transformation** $S : \Omega \to \Omega$
+governs the deterministic evolution of the state of the world over time.
 
-Traders at date $t$ observe information $\mathcal{G}_t$, which is the
-sigma-algebra generated by lagging the date-zero information set $\mathcal{G}$
-through $S$. We write $I_t$ for the set of random variables measurable with
-respect to $\mathcal{G}_t$, and $I$ for those measurable with respect to
-$\mathcal{G}$.
+If $\omega$ is the state at time zero, then $S^t(\omega)$ is the state at
+time $t$.
 
-### Payoffs, prices, and the pricing function
+A vector of observables $x(\omega)$ maps $\Omega$ into $\mathbb{R}^k$.
 
-A **payoff** is a random variable $p \in P$, where $P$ is the set of payoffs
-available to traders. The pricing function
+The
+time-$t$ observation vector is
 
 $$
-\pi : P \to I
+x_t(\omega) = x[S^t(\omega)],
 $$
 
-maps each payoff into its price, which is itself a random variable in the
-information set $I$ (prices are observable at the date trades are made).
+which defines a **strictly stationary** stochastic process $\{x_t : t = 1, 2, \ldots\}$.
 
-Two economically important restrictions on $\pi$ are:
-
-1. **Value-additivity**: for any $p_1, p_2 \in P$ and any $\omega_1, \omega_2 \in I$,
-
-$$
-\pi(\omega_1 p_1 + \omega_2 p_2) = \omega_1 \pi(p_1) + \omega_2 \pi(p_2).
-$$
-
-2. **Conditional continuity**: if a sequence of payoffs converges conditionally
-   to zero then their prices converge in probability to zero.
-
-These two properties are the conditional analogue of the assumptions used by
-{cite}`Harrison_Kreps_JET_79` and {cite}`Chamberlain_Rothschild`.
-
-## The Conditional Hilbert Space of Payoffs
-
-### Conditional inner product and norm
-
-Let $P^+ = \{p \in I_1 : E(p^2 \mid \mathcal{G}) < \infty\}$ be the set of
-payoffs with finite conditional second moment.
-
-Hansen and Richard define a **conditional inner product** for any
-$p_1, p_2 \in P^+$ by
+```{note}
+A process $\{x_t\}$ is **strictly stationary** if its joint distribution is invariant
+to time shifts: for any times $t_1, \ldots, t_k$ and any shift $h$,
 
 $$
-(p_1 \mid p_2)_{\mathcal{G}} = E(p_1 p_2 \mid \mathcal{G}),
+(x_{t_1}, \ldots, x_{t_k}) \stackrel{d}{=} (x_{t_1+h}, \ldots, x_{t_k+h}).
+$$
+
+This is stronger than *weak* (covariance) stationarity, which only requires
+time-invariant first and second moments. 
+
+Here strict stationarity follows from
+$S$ being measure-preserving: since $x_t = x[S^t(\omega)]$, shifting time by $h$
+is the same as applying $S^h$, which preserves the probability measure.
+```
+
+Because $S$ is ergodic, *time-series averages converge almost surely to
+population means*:
+
+$$
+\frac{1}{T} \sum_{t=1}^{T} x_t \xrightarrow{a.s.} E(x) \quad \text{as } T \to \infty,
+$$
+
+as long as $x$ has a finite first moment.
+
+This lets an econometrician learn about unconditional moments by computing
+sample averages from observed time series.
+
+### Information and payoffs
+
+At each date $t$, traders observe information captured by the sigma-algebra
+
+$$
+\mathcal{G}_t = \{A_t : A_t = S^{-t}(A) \text{ for some } A \in \mathcal{G}\},
+\quad t = 1, 2, \ldots
+$$
+
+where $\mathcal{G}$ is the information at time zero.
+
+We write $I_t$ for the set
+of random variables measurable with respect to $\mathcal{G}_t$, and $I$ for
+those measurable with respect to $\mathcal{G}$.
+
+A **one-period security** purchased at time $t$ has a payoff at time $t+1$.
+
+Let $p$ denote a random variable in $I_1$ used to define a sequence of payoffs
+
+$$
+p_{t+1}(\omega) = p[S^t(\omega)].
+$$
+
+The **pricing function** $\pi$ maps payoffs into prices.
+
+The time-zero price of $p$ is $\pi(p)$, a random variable in $I$.
+
+Since both the payoff sequence $\{p_{t+1}\}$ and the price sequence
+$\{\pi_t(p_{t+1})\}$ are strictly stationary, their moments can be
+estimated by time-series averages.
+
+## Pricing functions and Hilbert space machinery
+
+### Properties of pricing functions
+
+Hansen and Richard assume the pricing function $\pi$ maps a set of payoffs
+$P$ into prices in $I$.
+
+Four assumptions are imposed:
+
+````{prf:assumption} Conditionally complete payoff space
+:label: hr87_assumption_21
+
+The set of payoffs $P$ is a **conditionally complete linear subspace** of
+$P^+ = \{p \in I_1 : E(p^2 \mid \mathcal{G}) < \infty\}$.
+````
+
+This assumption has two parts. 
+
+*Linear subspace* means that $P$ is closed
+under conditional linear combinations: traders can form portfolios with
+information-contingent weights and the resulting payoffs remain in $P$.
+
+
+*Conditionally complete* means that limits of conditionally Cauchy sequences
+also belong to $P$, which is needed to make $P$ a conditional Hilbert space.
+
+````{prf:assumption} Value-additivity
+:label: hr87_value_additivity
+
+For any payoffs $p_1, p_2 \in P$ and any $w_1, w_2 \in I$,
+
+$$
+\pi(w_1 p_1 + w_2 p_2) = w_1 \pi(p_1) + w_2 \pi(p_2).
+$$
+````
+
+This says that the price of a portfolio is the portfolio of the prices.
+
+The
+portfolio weights $w_1, w_2$ are allowed to be random variables measurable
+with respect to $\mathcal{G}$, reflecting the fact that traders choose
+portfolio weights based on current information.
+
+````{prf:assumption} Conditional continuity
+:label: hr87_cond_continuity
+
+If a sequence of payoffs
+$\{p_j\}$ converges conditionally to zero, then their prices converge in
+probability to zero.
+````
+
+````{prf:assumption} Existence of returns
+:label: hr87_assumption_24
+
+The set of returns $R = \{p \in P : \pi(p) = 1\}$ is nonempty.
+````
+
+This guarantees that there exist payoffs with unit price, i.e., assets that
+can be purchased for one unit of the numeraire today.
+
+{prf:ref}`hr87_value_additivity` and {prf:ref}`hr87_cond_continuity` together
+make $\pi$ a **conditional continuous linear functional** on $P$.
+
+### The conditional Hilbert space
+
+To apply the theory of linear functionals, Hansen and Richard build a
+**conditional Hilbert space** of payoffs.
+
+Let
+
+$$
+P^+ = \{p \in I_1 : E(p^2 \mid \mathcal{G}) < \infty\}
+$$
+
+be the set of payoffs with finite conditional second moment.
+
+Define a **conditional inner product** for $p_1, p_2 \in P^+$:
+
+$$
+\langle p_1 \mid p_2 \rangle_{\mathcal{G}} = E(p_1 p_2 \mid \mathcal{G}),
 $$
 
 and the associated **conditional norm**
 
 $$
-\|p\|_{\mathcal{G}} = \left[(p \mid p)_{\mathcal{G}}\right]^{1/2}.
+\|p\|_{\mathcal{G}} = \left[\langle p \mid p \rangle_{\mathcal{G}}\right]^{1/2}.
 $$
 
-These objects take values in $I$ (they are random variables), not scalars.
-Convergence is defined using convergence in probability of these random
-variables.
+Both the inner product and the norm take values in $I$$. 
 
-**Definition (Conditional Cauchy sequence)**: $\{p_j\}$ is *conditionally Cauchy*
-if for any $\varepsilon > 0$,
+They are
+*random variables*, not scalars.
+
+This is the key difference from a standard
+$L^2$ Hilbert space.
+
+Convergence is defined using convergence in probability of these
+random variables:
+
+````{prf:definition} Conditional convergence
+:label: hr87_cond_convergence
+
+$\{p_j\}$ converges conditionally to $p_0$ if
+$\lim_{j \to \infty} \Pr\{\|p_j - p_0\|_{\mathcal{G}} > \varepsilon\} = 0$ for all $\varepsilon > 0$.
+````
+
+````{prf:definition} Conditionally Cauchy
+:label: hr87_cond_cauchy
+
+$\{p_j\}$ is conditionally Cauchy if
+$\lim_{j,k \to \infty} \Pr\{\|p_j - p_k\|_{\mathcal{G}} > \varepsilon\} = 0$ for all $\varepsilon > 0$.
+````
+
+A key technical result (proved in the Appendix of the paper) is that $P^+$ is
+*conditionally complete*: every conditional Cauchy sequence converges
+conditionally to an element of $P^+$.
+
+This is the conditional analogue of the Riesz-Fischer theorem.
+
+This is exactly the property required of $P$ by
+{prf:ref}`hr87_assumption_21`.
+
+## The Riesz representation: the stochastic discount factor
+
+The conditional completeness and the conditional continuity of $\pi$ together
+deliver the central representation theorem of the paper.
+
+````{prf:theorem} Conditional Riesz Representation
+:label: hr87_cond_riesz
+
+Suppose {prf:ref}`hr87_assumption_21` -- {prf:ref}`hr87_assumption_24`
+are satisfied. Then there exists a *unique* payoff $p^* \in P$ such that
 
 $$
-\lim_{j,k \to \infty} \Pr\!\left\{\|p_j - p_k\|_{\mathcal{G}} > \varepsilon\right\} = 0.
-$$
-
-A key technical result in the paper is that $P^+$ is **conditionally complete**
-(the conditional analogue of the Riesz–Fischer theorem).
-
-### Conditional Projection Theorem
-
-A central mathematical tool is the **Conditional Projection Theorem**: for any
-conditionally complete linear subspace $H \subseteq P^+$ and any $p \in P^+$,
-there exists a unique $h_0 \in H$ such that
-
-$$
-\|p - h_0\|_{\mathcal{G}} \leq \|p - h\|_{\mathcal{G}} \quad \text{for all } h \in H.
-$$
-
-The minimizer $h_0$ is characterized by the **conditional orthogonality**
-condition: $p - h_0$ is conditionally orthogonal to every element of $H$,
-
-$$
-(p - h_0 \mid h)_{\mathcal{G}} = 0 \quad \text{for all } h \in H.
-$$
-
-This is the conditional counterpart to the standard projection theorem in
-$L^2$.
-
-## The Riesz Representation: The Stochastic Discount Factor
-
-The central representation theorem of the paper is:
-
-**Theorem (Conditional Riesz Representation)**: Suppose $P$ is a conditionally
-complete linear subspace of $P^+$ and $\pi$ satisfies the two conditions above
-(value-additivity and conditional continuity). Then there exists a **unique**
-payoff $p^* \in P$ such that
-
-$$
-\pi(p) = (p \mid p^*)_{\mathcal{G}} = E(p \, p^* \mid \mathcal{G}) \quad \text{for all } p \in P.
+\pi(p) = \langle p \mid p^* \rangle_{\mathcal{G}} = E(p \, p^* \mid \mathcal{G})
+\quad \text{for all } p \in P.
 $$
 
 Moreover, $\Pr\{\|p^*\|_{\mathcal{G}} > 0\} = 1$.
+````
+
+The payoff $p^*$ is the **stochastic discount factor** (SDF), also called the
+**benchmark payoff**.
+
+Recall that the pricing function $\pi$ was introduced above as an abstract
+mapping from payoffs to prices, subject only to value-additivity
+({prf:ref}`hr87_value_additivity`) and continuity ({prf:ref}`hr87_cond_continuity`).
+
+The theorem says that *any* such $\pi$ can be represented concretely as
+$\pi(p) = E(p \, p^* \mid \mathcal{G})$ for a unique $p^*$.
 
 The payoff $p^*$ is called the **stochastic discount factor** (SDF) or
-**benchmark payoff**. Different equilibrium models of asset prices correspond
+**benchmark payoff**. 
+
+Different equilibrium models of asset prices correspond
 to different choices of $p^*$.
 
 ### No-arbitrage and positivity of $p^*$
 
-When the pricing function has **no arbitrage opportunities** — meaning that
-nonnegative payoffs that are positive with positive probability receive positive
-prices — then $p^*$ is strictly positive with probability one:
+````{prf:definition} No-arbitrage
+:label: hr87_no_arb
+
+A pricing function $\pi$ has **no arbitrage opportunities** on $P$ if for any
+nonnegative payoff $p \geq 0$ with $\Pr\{p > 0\} > 0$,
+
+$$
+\Pr\{\pi(p) \leq 0\} \cap \{p > 0\}\} = 0.
+$$
+
+This is the conditional counterpart to the no-arbitrage assumption used by
+{cite:t}`Ross_78`.
+````
+
+Since the price $\pi(p)$ is a random variable (it depends on $\mathcal{G}$),
+this says that in no state of the world can the price be non-positive while
+the payoff is strictly positive.
+
+When $\pi$ has no arbitrage opportunities and $P = P^+$, then $p^*$ is
+*strictly positive* with probability one:
 
 $$
 \Pr\{p^* > 0\} = 1.
 $$
 
-In this case, $p^*$ can be interpreted as a **stochastic intertemporal marginal
-rate of substitution**: it converts future payoffs denominated in consumption
-goods into today's prices.
+In this case $p^*$ can be interpreted as the **intertemporal marginal rate
+of substitution** of the numeraire good — it converts future payoffs
+into today's prices.
 
 ### The benchmark return $r^*$
 
-Because $\pi(p^*)$ is positive with probability one, we can define the
-**benchmark return**
+Since $\pi(p^*) = \langle p^* \mid p^* \rangle_{\mathcal{G}} = E(p^{*2} \mid \mathcal{G})$
+is positive with probability one, we can define the **benchmark return**
 
 $$
 r^* = \frac{p^*}{\pi(p^*)}.
 $$
 
-This return is in $R = \{p \in P : \pi(p) = 1\}$, the set of all unit-price
-payoffs (returns). A key property is that $r^*$ has the **minimum conditional
-second moment** among all returns:
+This return belongs to $R = \{p \in P : \pi(p) = 1\}$, the set of all
+unit-price payoffs (returns).
+
+````{prf:lemma} Minimum second moment
+:label: hr87_lemma31
+
+$r^*$ has the *minimum conditional second moment* among all returns:
 
 $$
-(r^* \mid r^*)_{\mathcal{G}} \leq (r \mid r)_{\mathcal{G}} \quad \text{for all } r \in R.
+\langle r^* \mid r^* \rangle_{\mathcal{G}} \leq \langle r \mid r \rangle_{\mathcal{G}}
+\quad \text{for all } r \in R.
 $$
 
-Taking unconditional expectations and applying the Law of Iterated Expectations,
+By the Law of Iterated Expectations,
 
 $$
 E(r^{*2}) \leq E(r^2) \quad \text{for all } r \in R.
 $$
 
+This extends to unconditional second moments: $r^*$ has the minimum
+unconditional second moment as well.
+````
+
+Let's illustrate {prf:ref}`hr87_lemma31` with a numerical example.
+
+We draw a lognormal $p^*$ and generate five asset payoffs that depend linearly on $p^*$ plus idiosyncratic noise.
+
+Prices are computed as $\pi(p_i) = E(p_i \cdot p^*)$, and returns are $r_i = p_i / \pi(p_i)$.
+
+We first verify the pricing equation $E(r_i \cdot p^*) = 1$ holds up to sampling error.
+
+We then search over portfolio weights (constrained to sum to one) to minimize the unconditional second moment $E(r^2)$.
+
+By {prf:ref}`hr87_lemma31`, this portfolio approximates $r^*$, so its $E(r^2)$ should be lower than that of any individual asset.
+
 ```{code-cell} ipython3
-def simulate_sdf_and_returns(T=5000, n_assets=5, seed=42):
-    """
-    Simulate a simple economy with a stochastic discount factor and asset returns.
-
-    We model p* = exp(m) / E[exp(m)] where m ~ N(-sigma^2/2, sigma^2),
-    so that E[p*] = 1. Asset payoffs are correlated with p*.
-    """
+def simulate_sdf_and_returns(T=10000, n_assets=5, seed=42):
+    """Simulate lognormal SDF and multiple asset returns."""
     rng = np.random.default_rng(seed)
-    sigma_m = 0.15          # SDF volatility
-    mu_m = -0.5 * sigma_m**2  # ensures E[p*] = 1
+    σ_m = 0.15
+    mu_m = -0.5 * σ_m**2
 
-    # Draw the SDF shock
-    epsilon_m = rng.standard_normal(T)
-    log_pstar = mu_m + sigma_m * epsilon_m
-    pstar = np.exp(log_pstar)
+    pstar = np.exp(mu_m + σ_m * rng.standard_normal(T))
 
-    # Generate asset payoffs correlated with the SDF
-    # payoff_i = a_i + b_i * pstar + noise_i
-    betas = rng.uniform(-2, 2, n_assets)
-    alphas = rng.uniform(1, 3, n_assets)
+    # Asset payoffs: p_i = α_i + β_i * p* + noise
+    βs = rng.uniform(-2, 2, n_assets)
+    αs = rng.uniform(1, 3, n_assets)
+    payoffs = αs + np.outer(pstar, βs) + 0.3 * rng.standard_normal((T, n_assets))
 
-    noise = rng.standard_normal((T, n_assets)) * 0.3
-    payoffs = alphas + np.outer(pstar, betas) + noise
-
-    # Prices = E[payoff * pstar | G]; for simplicity use unconditional mean
     prices = np.mean(payoffs * pstar[:, None], axis=0)
-
-    # Returns = payoff / price
     returns = payoffs / prices
 
     return pstar, returns, prices
@@ -280,46 +442,113 @@ def simulate_sdf_and_returns(T=5000, n_assets=5, seed=42):
 
 pstar, returns, prices = simulate_sdf_and_returns()
 
-# Verify the pricing relation: E[r * p*] should ≈ 1 for all returns
 pricing_errors = np.mean(returns * pstar[:, None], axis=0) - 1.0
-print("Pricing errors (should be ≈ 0):")
+print("Pricing errors E[r*p* - 1] (should be approx 0):")
 for i, err in enumerate(pricing_errors):
     print(f"  Asset {i+1}: {err:.6f}")
+
+n = returns.shape[1]
+
+def objective(w):
+    r_p = returns @ w
+    return np.mean(r_p**2)
+
+result = minimize(objective, np.ones(n)/n, method='SLSQP',
+                  constraints=[{'type': 'eq', 'fun': lambda w: w.sum() - 1}],
+                  bounds=[(-2, 2)] * n)
+r_star_approx = returns @ result.x
+
+print(f"\nMinimum E[r^2] portfolio: {np.mean(r_star_approx**2):.6f}")
+print(f"Individual asset E[r^2]:  {[f'{np.mean(returns[:,i]**2):.4f}' for i in range(n)]}")
 ```
 
-## The Conditional Mean-Variance Frontier
+## Implications for omitting conditioning information
 
-### Two-fund separation
+Now we analuze the effect of omitting conditioning information when studying
+the mean-variance implications of asset pricing models.
 
-Hansen and Richard show that the set of returns can be decomposed as
+### Returns, zero-price payoffs, and the decomposition of $R$
 
-$$
-R = \{r : r = r^* + \omega z^* + n, \quad \omega \in I, \; n \in N\},
-$$
-
-where $z^*$ is a uniquely determined element of
+Define two key level sets of $\pi$:
 
 $$
-Z = \{p \in P : \pi(p) = 0\}
+R = \{p \in P : \pi(p) = 1\}, \quad Z = \{p \in P : \pi(p) = 0\}.
 $$
 
-satisfying $(z \mid z^*)_{\mathcal{G}} = E(z \mid \mathcal{G})$ for all
-$z \in Z$, and $N = \{z \in Z : E(z \mid \mathcal{G}) = 0\}$ is the subspace
-of zero-mean, zero-price payoffs.
+$R$ is the set of all **returns** (unit-price payoffs) and $Z$ is the set of
+**zero-price payoffs** (excess returns, hedging payoffs, etc.).
 
-The key property of $z^*$ is given by
+Since $\pi$ is a conditional linear functional, the zero payoff is in $Z$, and
+{prf:ref}`hr87_assumption_24` guarantees that $R$ is nonempty.
+
+Using $r^*$ as a benchmark, any return $r \in R$ can be decomposed as
 
 $$
-E(z^{*2} \mid \mathcal{G}) = E(z^* \mid \mathcal{G}) \quad (\text{with probability one}),
+r = r^* + z \quad \text{for some } z \in Z,
 $$
 
-which limits $E(z^* \mid \mathcal{G})$ to be strictly between 0 and 1 whenever
-markets are not risk-neutral.
+since $\pi(r) = \pi(r^*) + \pi(z) = 1 + 0 = 1$.
 
-### Solving for the frontier (conditional)
+Because $r^*$ has minimum conditional second moment ({prf:ref}`hr87_lemma31`),
+it is conditionally orthogonal to all of $Z$:
+$\langle r^* \mid z \rangle_{\mathcal{G}} = 0$ for all $z \in Z$.
 
-Given a target conditional mean $w \in I$, the return that minimizes the
-conditional second moment is
+This gives a conditionally orthogonal decomposition of $R$.
+
+### The role of $z^*$
+
+The set $Z$ itself can be decomposed.
+
+There is a unique payoff $z^* \in Z$ that
+satisfies
+
+$$
+\langle z \mid z^* \rangle_{\mathcal{G}} = E(z \mid \mathcal{G}) \quad \text{for all } z \in Z.
+$$
+
+This $z^*$ plays the role of the "conditional mean direction" in $Z$.
+
+Its conditional second moment equals its conditional mean:
+
+$$
+E(z^{*2} \mid \mathcal{G}) = E(z^* \mid \mathcal{G}),
+$$
+
+which implies $0 < E(z^* \mid \mathcal{G}) \leq 1$ whenever markets are not
+risk-neutral.
+
+Using $z^*$, the set $Z$ decomposes as
+
+$$
+Z = \{z : z = w z^* + n \text{ for some } w \in I, \; n \in N\},
+$$
+
+where $N = \{z \in Z : E(z \mid \mathcal{G}) = 0\}$.
+
+Combining this with the $R = r^* + Z$ decomposition gives the full
+representation of all returns:
+
+$$
+R = \{r : r = r^* + w z^* + n \text{ for some } w \in I, \; n \in N\}.
+$$
+
+### The conditional mean-variance frontier
+
+Recall from {doc}`asset_pricing_lph` that the unconditional mean-variance frontier
+can be derived from $E(mR) = 1$ via the Cauchy-Schwarz inequality.
+
+Here we develop the conditional counterpart using the $r^*$, $z^*$ decomposition.
+
+With this decomposition in hand, the conditional mean-variance problem becomes
+straightforward.
+
+````{prf:lemma} Conditional two-fund theorem
+:label: hr87_lemma33
+
+Minimize $\langle r \mid r \rangle_{\mathcal{G}}$ for $r \in R$
+subject to $E(r \mid \mathcal{G}) = w$ for some target $w \in I$.
+
+The solution is
 
 $$
 r_w = r^* + w^* z^*,
@@ -331,91 +560,43 @@ $$
 w^* = \frac{w - E(r^* \mid \mathcal{G})}{E(z^* \mid \mathcal{G})}.
 $$
 
-This is the **conditional mean-variance frontier**: each conditionally efficient
-return is a linear combination (with *random* coefficients) of $r^*$ and $z^*$.
-This is a **conditional two-fund theorem**.
+Every conditionally efficient
+return is a conditional linear combination of $r^*$ and $z^*$, with the
+weight $w^*$ being a *random variable* that depends on the conditioning
+information $\mathcal{G}$.
+````
 
-```{code-cell} ipython3
-def conditional_mv_frontier(mean_returns, cov_matrix):
-    """
-    Compute the unconditional mean-variance frontier for a set of assets.
+### The unconditional mean-variance frontier
 
-    Parameters
-    ----------
-    mean_returns : array of shape (n,)
-    cov_matrix   : array of shape (n, n)
-
-    Returns
-    -------
-    frontier_means : array of target mean values
-    frontier_vols  : array of corresponding minimum standard deviations
-    """
-    n = len(mean_returns)
-    ones = np.ones(n)
-
-    inv_cov = np.linalg.inv(cov_matrix)
-    A = mean_returns @ inv_cov @ mean_returns
-    B = mean_returns @ inv_cov @ ones
-    C = ones @ inv_cov @ ones
-    D = A * C - B**2
-
-    # Parametric frontier: min_w = (C*mu^2 - 2*B*mu + A) / D
-    frontier_means = np.linspace(mean_returns.min() - 0.05,
-                                 mean_returns.max() + 0.05, 300)
-    frontier_vars = (C * frontier_means**2 - 2 * B * frontier_means + A) / D
-    frontier_vols = np.sqrt(np.maximum(frontier_vars, 0))
-    return frontier_means, frontier_vols
-
-
-# Compute sample moments from our simulated returns
-mu = returns.mean(axis=0)
-Sigma = np.cov(returns.T)
-
-frontier_means, frontier_vols = conditional_mv_frontier(mu, Sigma)
-
-fig, ax = plt.subplots(figsize=(8, 5))
-ax.plot(frontier_vols, frontier_means, lw=2, label='Unconditional MV frontier')
-ax.scatter(np.sqrt(np.diag(Sigma)), mu, color='red', zorder=5, label='Individual assets')
-ax.set_xlabel('Standard deviation of return')
-ax.set_ylabel('Expected return')
-ax.set_title('Unconditional Mean-Variance Frontier')
-ax.legend()
-plt.tight_layout()
-plt.show()
-```
-
-## The Unconditional Mean-Variance Frontier
-
-### Restricting to finite unconditional second moments
-
-To connect to data, Hansen and Richard restrict attention to
+To connect to data, restrict attention to payoffs with finite unconditional
+second moments:
 
 $$
 P^* = \{p \in P : E(p^2) < \infty\},
 $$
 
-with the **unconditional** inner product $(p_1 \mid p_2) = E(p_1 p_2)$.
+with the *unconditional* inner product $\langle p_1 \mid p_2 \rangle = E(p_1 p_2)$.
 
-Define
+Define the unconditional counterparts:
 
 $$
 R^* = R \cap P^*, \quad Z^* = Z \cap P^*, \quad N^* = \{z \in Z^* : E(z) = 0\}.
 $$
 
-By the Law of Iterated Expectations, applying the unconditional expectation to
-$(z \mid z^*)_{\mathcal{G}} = E(z \mid \mathcal{G})$ gives
+By the Law of Iterated Expectations, $z^*$ continues to represent the mean
+direction unconditionally:
 
 $$
-(z \mid z^*) = E(z) \quad \text{for all } z \in Z^*.
+\langle z \mid z^* \rangle = E(z) \quad \text{for all } z \in Z^*.
 $$
 
-Therefore $z^*$ also plays the role of the "mean" direction in the
-unconditional Hilbert space $Z^*$.
+````{prf:lemma} Unconditional two-fund theorem
+:label: hr87_lemma34
 
-### The unconditional frontier
+Minimize $\langle r \mid r \rangle = E(r^2)$ for $r \in R^*$
+subject to $E(r) = c$ for some constant $c$.
 
-The return that minimizes the unconditional second moment subject to
-$E(r) = c$ is
+The solution is
 
 $$
 r_c = r^* + c^* z^*,
@@ -427,417 +608,468 @@ $$
 c^* = \frac{c - E(r^*)}{E(z^*)}.
 $$
 
-Crucially, $c^*$ is a **constant**, whereas the analogous coefficient $w^*$
-for the conditional frontier is a random variable. This means that a
-conditionally frontier return $r_w = r^* + w^* z^*$ is on the unconditional
-frontier **only when** $w^*$ is constant with probability one.
+The key difference: $c^*$ is a *constant*, while $w^*$ in the conditional
+problem is a random variable.
+````
 
 ### Conditional efficiency does not imply unconditional efficiency
 
-This is the central empirical message of Section 3. A portfolio manager who
-dynamically rebalances based on conditioning information $\mathcal{G}$ may
-appear to be on the conditional frontier, but will be off the unconditional
-frontier when observed using time-series data that average away the conditioning
-information.
+This is the central empirical message of the paper.
 
-The risk-free return illustrates this clearly. When a risk-free return exists
-in $R$, it is given by
+A conditionally efficient return $r_w = r^* + w^* z^*$ is on the
+unconditional frontier *only when* $w^*$ is constant with probability one.
 
-$$
-r_f = \frac{(r^* \mid r^*)_{\mathcal{G}}}{(r^* \mid 1)_{\mathcal{G}}}.
-$$
+When $w^*$ varies with the state of the world — which is the typical case
+when traders use conditioning information — the return will be off the
+unconditional frontier.
 
-Because $r_f$ is (in general) a random variable, it lies on the *conditional*
-frontier only at a *state-dependent* target mean — and **off** the
-*unconditional* frontier unless $r_f$ happens to be non-random.
+This has direct implications:
+
+- The *CAPM* (Sharpe-Lintner-Mossin) implies that the market portfolio is a
+  conditional reference return. But the market return need not be a reference
+  return for unconditional single-beta tests.
+
+- *Breeden's* consumption CAPM implies the return on aggregate consumption is
+  a conditional reference return. Again, it need not serve as an unconditional
+  reference.
+
+- Portfolio managers whose returns appear to be conditionally efficient may
+  look *inefficient* when evaluated with unconditional data.
+
+The following simulation illustrates this phenomenon.
 
 ```{code-cell} ipython3
-def simulate_conditional_efficiency(T=10000, seed=0):
-    """
-    Simulate a scenario in which a portfolio is conditionally mean-variance
-    efficient but unconditionally inefficient.
+def compute_mv_frontier(mean_returns, cov_matrix):
+    """Compute the analytical mean-variance frontier."""
+    n = len(mean_returns)
+    ones = np.ones(n)
+    inv_cov = np.linalg.inv(cov_matrix)
 
-    We model two states of the world (high/low conditioning variable z_t).
-    In each state, the optimal portfolio weights are different. The resulting
-    portfolio is conditionally efficient but may be off the unconditional frontier.
-    """
+    A = mean_returns @ inv_cov @ mean_returns
+    B = mean_returns @ inv_cov @ ones
+    C = ones @ inv_cov @ ones
+    D = A * C - B**2
+
+    frontier_means = np.linspace(mean_returns.min() - 0.05,
+                                 mean_returns.max() + 0.05, 300)
+    frontier_vars = (C * frontier_means**2 - 2*B*frontier_means + A) / D
+    frontier_vols = np.sqrt(np.maximum(frontier_vars, 0))
+    return frontier_means, frontier_vols
+
+
+def mv_weights(mu_vec, Sigma, target_mu):
+    """Minimum-variance portfolio weights for a given target mean."""
+    n = len(mu_vec)
+    inv_cov = np.linalg.inv(Sigma)
+    ones = np.ones(n)
+    A = mu_vec @ inv_cov @ mu_vec
+    B = mu_vec @ inv_cov @ ones
+    C = ones @ inv_cov @ ones
+    D = A * C - B**2
+    g = (A * (inv_cov @ ones) - B * (inv_cov @ mu_vec)) / D
+    h = (C * (inv_cov @ mu_vec) - B * (inv_cov @ ones)) / D
+    return g + target_mu * h
+```
+
+```{code-cell} ipython3
+def simulate_conditional_vs_unconditional(T=50000, seed=0):
+    """Show that a conditionally efficient portfolio can be unconditionally inefficient."""
     rng = np.random.default_rng(seed)
     n_assets = 3
 
-    # Two regimes driven by a conditioning variable
-    state = rng.integers(0, 2, T)   # 0 = low, 1 = high
+    state = rng.integers(0, 2, T)
 
-    # Conditional means in each state
+    # Two regimes with different conditional means, common covariance
     mu_low  = np.array([0.05, 0.10, 0.08])
     mu_high = np.array([0.12, 0.07, 0.09])
 
-    # Common covariance matrix
-    sigma = np.array([0.15, 0.20, 0.18])
+    σ = np.array([0.15, 0.20, 0.18])
     corr = np.array([[1.0,  0.3,  0.5],
                      [0.3,  1.0,  0.2],
                      [0.5,  0.2,  1.0]])
-    cov = np.diag(sigma) @ corr @ np.diag(sigma)
+    cov = np.diag(σ) @ corr @ np.diag(σ)
 
-    # Draw asset returns
     rets_low  = rng.multivariate_normal(mu_low,  cov, T)
     rets_high = rng.multivariate_normal(mu_high, cov, T)
     returns   = np.where(state[:, None] == 0, rets_low, rets_high)
 
-    # Conditionally efficient portfolio weights (min variance for given mean)
-    def mv_weights(mu_vec, Sigma, target_mu):
-        n = len(mu_vec)
-        inv_cov = np.linalg.inv(Sigma)
-        ones = np.ones(n)
-        A = mu_vec @ inv_cov @ mu_vec
-        B = mu_vec @ inv_cov @ ones
-        C = ones @ inv_cov @ ones
-        D = A * C - B**2
-        g = (A * (inv_cov @ ones) - B * (inv_cov @ mu_vec)) / D
-        h = (C * (inv_cov @ mu_vec) - B * (inv_cov @ ones)) / D
-        return g + target_mu * h
-
-    # Choose the same target mean in each state (say 0.09)
+    # Conditionally efficient weights for target mean = 0.09
     target = 0.09
     w_low  = mv_weights(mu_low,  cov, target)
     w_high = mv_weights(mu_high, cov, target)
 
-    # Conditionally efficient portfolio return
+    # Dynamic portfolio switches weights by state
     port_rets = np.where(state == 0,
-                         rets_low  @ w_low,
+                         rets_low @ w_low,
                          rets_high @ w_high)
 
-    # Unconditional portfolio statistics
-    mu_port   = port_rets.mean()
-    std_port  = port_rets.std()
-
-    # Compare with the unconditional MV frontier
     mu_unc = returns.mean(axis=0)
     cov_unc = np.cov(returns.T)
-    front_mu, front_std = conditional_mv_frontier(mu_unc, cov_unc)
+    front_mu, front_std = compute_mv_frontier(mu_unc, cov_unc)
 
-    return mu_port, std_port, front_mu, front_std, mu_unc, cov_unc
+    return (port_rets.mean(), port_rets.std(),
+            front_mu, front_std, mu_unc, cov_unc)
 
 
 mu_port, std_port, front_mu, front_std, mu_unc, cov_unc = \
-    simulate_conditional_efficiency()
+    simulate_conditional_vs_unconditional()
+```
 
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: >
+      A conditionally efficient portfolio (star) lies to the right of the
+      unconditional mean-variance frontier (curve). This illustrates the
+      central result of Section 3: conditioning information matters.
+    name: fig-hr-cond-vs-uncond
+---
 fig, ax = plt.subplots(figsize=(8, 5))
-ax.plot(front_std, front_mu, lw=2, label='Unconditional MV frontier', color='steelblue')
-ax.scatter(np.sqrt(np.diag(cov_unc)), mu_unc, color='red', zorder=5,
-           label='Individual assets', s=60)
-ax.scatter(std_port, mu_port, color='orange', zorder=6, s=120, marker='*',
-           label='Conditionally efficient portfolio')
-ax.set_xlabel('Standard deviation of return')
-ax.set_ylabel('Expected return')
-ax.set_title('A Conditionally Efficient Portfolio is Off the Unconditional Frontier')
+ax.plot(front_std, front_mu, lw=2,
+        label='Unconditional MV frontier', color='steelblue')
+ax.scatter(np.sqrt(np.diag(cov_unc)), mu_unc, color='red',
+           zorder=5, s=60, label='Individual assets')
+ax.scatter(std_port, mu_port, color='orange', zorder=6, s=150,
+           marker='*', label='Conditionally efficient portfolio')
+ax.set_xlabel('standard deviation of return')
+ax.set_ylabel('expected return')
 ax.legend()
 plt.tight_layout()
 plt.show()
-
-print(f"Conditionally efficient portfolio:")
-print(f"  Unconditional mean:  {mu_port:.4f}")
-print(f"  Unconditional std:   {std_port:.4f}")
 ```
 
-## The Single-Beta Representation
+### The risk-free return
 
-### Conditional CAPM and Roll's critique
+Let's consider another example.
 
-A return $r_p \in R$ is called a **reference return for a conditional
-single-beta representation** if $\Pr\{\mathrm{Var}(r_p \mid \mathcal{G}) = 0\} = 0$
-and, for all $r \in R$,
-
-$$
-E(r \mid \mathcal{G}) - \alpha = \frac{\mathrm{Cov}(r, r_p \mid \mathcal{G})}
-{\mathrm{Var}(r_p \mid \mathcal{G})} \left[E(r_p \mid \mathcal{G}) - \alpha\right],
-$$
-
-where $\alpha \in I$ is a random variable (the conditional zero-beta return).
-
-**Lemma 3.5** of the paper (the conditional analogue of Roll's {cite}`Roll1977`
-Corollary 6) states: $r_p$ is a reference return for a conditional single-beta
-representation if and only if
+When $P$ contains a unit payoff and $\pi$ has no arbitrage opportunities, there
+is a risk-free return
 
 $$
-r_p = r^* + w^* z^*,
+r^f = \frac{1}{\langle p^* \mid 1 \rangle_{\mathcal{G}}}
+    = \frac{\langle r^* \mid r^* \rangle_{\mathcal{G}}}{\langle r^* \mid 1 \rangle_{\mathcal{G}}}.
 $$
 
-for some $w^* \in I$ that is not almost surely equal to
+In the decomposition $R = \{r^* + wz^* + n\}$, the risk-free return is
+$r^f = r^* + r^f z^*$.
+
+Because $r^f$ is in general a *random variable* (it depends on $\mathcal{G}$),
+it lies on the *conditional* frontier but will be *off* the unconditional
+frontier unless $r^f$ is constant.
+
+
+## The single-beta representation
+
+### Conditional CAPM
+
+A return $r_\beta \in R$ is a reference return for a conditional single-beta
+representation conditioned on $\mathcal{G}$ if
+$\Pr\{\mathrm{Var}(r_\beta \mid \mathcal{G}) = 0\} = 0$ and for all $r \in R$,
 
 $$
-\frac{E(r^* \mid \mathcal{G})}{1 - E(z^* \mid \mathcal{G})}.
+E(r \mid \mathcal{G}) - \alpha = \frac{\mathrm{Cov}(r_\beta, r \mid \mathcal{G})}
+{\mathrm{Var}(r_\beta \mid \mathcal{G})} \left[E(r_\beta \mid \mathcal{G}) - \alpha\right],
 $$
 
-The **unconditional** version (Corollary 3.1) says: $r_p$ is a reference return
-for an *unconditional* single-beta representation if and only if
+where $\alpha \in I$ is the conditional zero-beta return.
+
+This is the conditional analogue of the CAPM security market line.
+
+````{prf:lemma} Conditional Roll's theorem
+:label: hr87_lemma35
+
+$r_\beta$ is a reference return
+for a conditional single-beta representation if and only if
+$r_\beta = r^* + w^* z^*$ for some $w^* \in I$ satisfying
 
 $$
-r_p = r^* + c^* z^*
+\Pr\left\{w^* = \frac{E(r^* \mid \mathcal{G})}{1 - E(z^* \mid \mathcal{G})}\right\} = 0.
 $$
+````
 
-for a **constant** $c^*$ not equal to $E(r^*)/(1 - E(z^*))$.
+### Unconditional single-beta representation
 
-This result has sharp empirical implications. Even if the CAPM holds
-conditionally (so the aggregate wealth portfolio is a conditional reference
-return), it need not hold unconditionally. Empirical tests based on
-unconditional moments of returns — which is the standard practice — are
-therefore testing a weaker and different hypothesis.
+The unconditional expected-return-beta representation was derived in
+{doc}`asset_pricing_lph`. 
+
+The key question here is: when does the *conditional*
+single-beta representation survive aggregation to unconditional moments?
+
+````{prf:corollary} Unconditional single-beta representation
+:label: hr87_cor31
+
+$r_\beta$ is a reference return for an *unconditional*
+single-beta representation if and only if $r_\beta = r^* + c^* z^*$ for a
+*constant* $c^*$ satisfying
+
+$$
+c^* \neq \frac{E(r^*)}{1 - E(z^*)}.
+$$
+````
+
+This result has sharp empirical implications:
+
+- Even if the CAPM holds *conditionally* (e.g., the market portfolio is on
+  the conditional frontier), the standard unconditional regression test —
+  regressing asset returns on market returns and testing $\alpha = 0$ — is
+  testing a *different* hypothesis.
+
+- The unconditional single-beta representation holds only for returns built
+  with *constant* portfolio weights.
+
+We illustrate this by running CAPM regressions $r_i = \alpha + \beta \, r_{\text{ref}} + \varepsilon$ using two different reference returns.
+
+The first uses a portfolio on the *unconditional* mean-variance frontier, constructed with constant weights from the unconditional moments.
+
+By {prf:ref}`hr87_cor31`, this is a valid reference for an unconditional single-beta representation, so we should see $\alpha \approx 0$.
+
+The second uses a conditionally efficient portfolio whose weights switch across regimes.
+
+This portfolio is on the *conditional* frontier in each state, but its state-dependent weights violate the constant-weight requirement of {prf:ref}`hr87_cor31`, so the unconditional single-beta representation need not hold.
 
 ```{code-cell} ipython3
-def test_capm_beta(returns, market_return):
-    """
-    Estimate unconditional single-beta CAPM regressions for each asset.
-
-    Returns the alpha (intercept), beta, and a test of alpha = 0.
-    """
-    from scipy import stats
-
+def capm_regression(returns, ref_return):
+    """Run unconditional CAPM regressions: r_i = alpha + beta * r_ref + eps."""
     n_assets = returns.shape[1]
-    results = []
+    alphas = np.empty(n_assets)
     for i in range(n_assets):
-        slope, intercept, r_val, p_val, stderr = stats.linregress(
-            market_return, returns[:, i])
-        results.append({'asset': i + 1, 'alpha': intercept,
-                        'beta': slope, 'p_alpha': p_val})
-    return pd.DataFrame(results)
+        slope, intercept, _, _, _ = stats.linregress(ref_return, returns[:, i])
+        alphas[i] = intercept
+    return alphas
 
 
-# Use the first simulated asset as a stand-in for the "market" return
-pstar_sim, returns_sim, _ = simulate_sdf_and_returns(T=5000)
-market_return = returns_sim[:, 0]
-other_returns = returns_sim[:, 1:]
+# Simulate a two-regime economy
+rng = np.random.default_rng(42)
+T_capm = 50000
+n_assets_capm = 4
+state = rng.integers(0, 2, T_capm)
 
-capm_results = test_capm_beta(other_returns, market_return)
-print("Unconditional CAPM regressions")
-print("(alpha ≠ 0 indicates failure of the unconditional single-beta model)")
-print(capm_results.to_string(index=False, float_format=lambda x: f"{x:.4f}"))
+mu_low  = np.array([0.02, 0.12, 0.04, 0.14])
+mu_high = np.array([0.14, 0.02, 0.12, 0.01])
+
+cov_capm = np.array([[0.01, 0.002, 0.004, 0.001],
+                      [0.002, 0.01, 0.002, 0.001],
+                      [0.004, 0.002, 0.01, 0.001],
+                      [0.001, 0.001, 0.001, 0.01]])
+
+rets_low  = rng.multivariate_normal(mu_low,  cov_capm, T_capm)
+rets_high = rng.multivariate_normal(mu_high, cov_capm, T_capm)
+returns_capm = np.where(state[:, None] == 0, rets_low, rets_high)
+
+# Case 1: unconditional frontier portfolio (constant weights)
+# Use the unconditional mean and covariance to find frontier weights
+mu_unc = returns_capm.mean(axis=0)
+cov_unc = np.cov(returns_capm.T)
+w_frontier = np.linalg.solve(cov_unc, mu_unc)
+w_frontier /= w_frontier.sum()
+r_frontier = returns_capm @ w_frontier
+
+# Case 2: conditionally efficient portfolio (state-dependent weights)
+w_low  = np.linalg.solve(cov_capm, mu_low)
+w_low  /= w_low.sum()
+w_high = np.linalg.solve(cov_capm, mu_high)
+w_high /= w_high.sum()
+r_dynamic = np.where(state == 0,
+                      rets_low @ w_low,
+                      rets_high @ w_high)
+
+alphas_frontier = capm_regression(returns_capm, r_frontier)
+alphas_dynamic  = capm_regression(returns_capm, r_dynamic)
+
+print(f"{'Asset':<8} {'Frontier (const)':>18} {'Cond. eff. (dyn)':>18}")
+for i in range(n_assets_capm):
+    print(f"{i+1:<8} {alphas_frontier[i]:>18.6f} {alphas_dynamic[i]:>18.6f}")
 ```
 
-## The Pseudo-Pricing Function and GMM
+The constant-weight frontier portfolio produces $\alpha \approx 0$ for every asset, confirming that the unconditional single-beta representation holds as predicted by {prf:ref}`hr87_cor31`.
 
-### Constructing the pseudo-pricing function
+The conditionally efficient portfolio, whose weights switch between regimes, produces non-zero alphas despite being on the conditional frontier in each state.
 
-In Section 4, Hansen and Richard suggest a method for deducing restrictions
-expressible purely in terms of **unconditional moments**.
+This is exactly the gap that {cite:t}`HansenRichard1987` warns about: a return that is conditionally efficient need not serve as a valid reference for unconditional single-beta tests.
 
-For payoffs in $P^*$ (finite unconditional second moments), define the
-**pseudo-pricing function**
+## The pseudo-pricing function and connection to GMM
+
+### Constructing $\pi^*$
+
+Everything we have derived so far is *conditional* on $\mathcal{G}$: the
+pricing function $\pi(p) = E(p \, p^* \mid \mathcal{G})$ maps payoffs into
+random variables, not numbers.
+
+An econometrician, however, works with time-series data and computes
+sample averages, which estimate *unconditional* moments.
+
+The question is: how do we go from the conditional theory to restrictions that
+can be tested with unconditional data?
+
+Hansen and Richard's solution is to define the **pseudo-pricing function**
 
 $$
 \pi^*(p) = E[\pi(p)] \quad \text{for all } p \in P^*.
 $$
 
-This function maps payoffs to real numbers (rather than random variables), so
-it behaves like a pricing function where the conditioning information set is
-trivial.
+This function maps payoffs to *real numbers*.
 
-**Theorem 4.1** proves that $(P^*, \pi^*)$ satisfies all the assumptions
-imposed on $(P, \pi)$ (with the trivial sigma-algebra replacing $\mathcal{G}$).
-In particular, $p^*$ continues to represent $\pi^*$:
+It behaves like a pricing
+function where the conditioning information set is the trivial sigma-algebra
+(containing only $\Omega$ and $\emptyset$).
+
+````{prf:theorem} Pseudo-pricing function
+:label: hr87_thm41
+
+$(P^*, \pi^*)$ satisfies all the assumptions
+imposed on $(P, \pi)$, with the trivial sigma-algebra replacing $\mathcal{G}$.
+````
+
+Crucially, the same $p^*$ represents both $\pi$ and $\pi^*$:
 
 $$
-\pi^*(p) = E[\pi(p)] = E\!\left[E(p p^* \mid \mathcal{G})\right] = E(p p^*),
+\pi^*(p) = E[\pi(p)] = E\!\left[E(p \, p^* \mid \mathcal{G})\right] = E(p \, p^*)
+= \langle p \mid p^* \rangle,
 $$
 
-where the last equality uses the Law of Iterated Expectations.
+where the third equality uses the Law of Iterated Expectations and the last
+is the unconditional inner product.
+
+As a consequence, two pricing functions $\pi$ and $\pi^+$ (possibly
+derived from different economic models) that imply the same pseudo-pricing
+function $\pi^*$ will be *indistinguishable* using unconditional moment
+restrictions alone.
+
+This is a precise statement of how conditioning down from $\pi$ to $\pi^*$
+can lose information.
 
 ### Connection to Hansen-Singleton GMM
 
-The pseudo-pricing function underlies the {cite}`hansen1982generalized`
-econometric approach. 
+The pseudo-pricing function underlies the {cite:t}`hansen1982generalized`
+econometric approach.
 
-If a model specifies $p^*$ as a function of observable
-data (e.g., a parametric function of consumption growth), then the pricing
-restriction
+If a model specifies $p^*$ as a function of observable data — e.g., a
+parametric function of consumption growth $p^* = p^*(\Delta c_{t+1}, \theta)$
+— then the pricing restriction
 
 $$
 E(p \, p^*) = \pi^*(p) = E[\pi(p)]
 $$
 
-holds for every asset payoff $p$ in $P^*$.
+holds for every payoff $p \in P^*$.
 
-An econometrician forms **moment conditions** by multiplying this equation
-by instruments $z_t \in I$ (observable random variables in the information set)
-to get
+An econometrician exploits this by forming **moment conditions**.
+
+Multiplying
+by instruments $z_t \in I$ (variables in the traders' information set) gives
 
 $$
-E\!\left[p_{t+1} \, p^*(p_{t+1}, \theta) \cdot z_t\right] = E[\pi(p_{t+1}) \cdot z_t],
+E\!\left[p_{t+1} \, p^*(\Delta c_{t+1}, \theta) \cdot z_t\right]
+= E\!\left[\pi(p_{t+1}) \cdot z_t\right].
 $$
 
-and estimates the preference parameter vector $\theta$ by GMM.
+The parameter vector $\theta$ is then estimated by GMM.
 
-The choice of instruments $z_t$ determines how much of the conditioning
-information is exploited. More instruments increase efficiency but also
-increase the computational burden.
+The **choice of instruments** determines how much conditioning information is
+exploited — more instruments increase efficiency but also increase the
+dimensionality of the GMM problem.
+
+Notice that the payoffs used in this procedure can themselves be conditional
+linear combinations of primitive payoffs, as long as the conditioning weights
+are measurable with respect to $\mathcal{G}$.
+
+This gives the analyst
+flexibility in constructing the moment conditions, and corresponds to the
+instrumental variables used in the Hansen-Singleton analysis.
+
+We now put this to work by testing a specific model of $p^*$.
+
+We construct a CRRA stochastic discount factor $p^* = e^{-\delta - \gamma \Delta c}$ with $\gamma = 2$ and simulated consumption growth, then check the Euler equation $E(r \cdot p^*) = 1$ against returns generated by a *different* SDF.
+
+The test computes the sample average of $r \cdot p^* - 1$ for each asset, along with its standard error and t-statistic.
+
+If the model is correct, these averages should be near zero.
+
+We also test the instrumented moment conditions $E[(r \cdot p^* - 1) \cdot z] = 0$ using lagged consumption growth as an instrument, which exploits additional conditioning information.
 
 ```{code-cell} ipython3
-def gmm_pricing_test(pstar_hat, returns, instruments=None, T=None):
-    """
-    Compute sample GMM moment conditions E[r * pstar - 1] and
-    E[r * pstar * z - z] for a set of instruments z.
-
-    Parameters
-    ----------
-    pstar_hat   : array (T,)   — model-implied SDF
-    returns     : array (T, n) — asset returns
-    instruments : array (T, k) — conditioning instruments (optional)
-    """
-    T_data = len(pstar_hat)
+def gmm_euler_equation_test(pstar_hat, returns, instruments=None):
+    """Test Euler equation restrictions E[r*p* - 1] = 0, optionally with instruments."""
+    T = len(pstar_hat)
     n_assets = returns.shape[1]
 
-    # Basic moment conditions: E[r_i * p* - 1] = 0
-    basic_moments = returns * pstar_hat[:, None] - 1.0
-    mean_basic = basic_moments.mean(axis=0)
-    std_basic  = basic_moments.std(axis=0) / np.sqrt(T_data)
+    moments = returns * pstar_hat[:, None] - 1.0
+    mean_m = moments.mean(axis=0)
+    se_m = moments.std(axis=0) / np.sqrt(T)
 
-    print("Basic GMM moment conditions  E[r_i * p* - 1] = 0")
-    print(f"{'Asset':<8} {'Mean':>10} {'Std err':>10}")
+    print("Euler equation tests: E[r*p* - 1] = 0")
+    print(f"{'Asset':<8} {'Mean':>10} {'Std err':>10} {'t-stat':>10}")
     for i in range(n_assets):
-        print(f"{i+1:<8} {mean_basic[i]:>10.5f} {std_basic[i]:>10.5f}")
+        t = mean_m[i] / se_m[i]
+        print(f"{i+1:<8} {mean_m[i]:>10.5f} {se_m[i]:>10.5f} {t:>10.2f}")
 
     if instruments is not None:
-        print("\nInstrumented moment conditions  E[r_i * p* * z - z] = 0")
+        print("\nInstrumented moments: E[(r*p* - 1)*z] = 0")
         k = instruments.shape[1]
         for j in range(k):
             z = instruments[:, j]
-            inst_moments = returns * pstar_hat[:, None] * z[:, None] - z[:, None]
-            print(f"  Instrument {j+1}: mean = {inst_moments.mean(axis=0)}")
+            inst_m = moments * z[:, None]
+            mean_inst = inst_m.mean(axis=0)
+            se_inst = inst_m.std(axis=0) / np.sqrt(T)
+            print(f"  Instrument {j+1}:")
+            for i in range(n_assets):
+                t = mean_inst[i] / se_inst[i]
+                print(f"    Asset {i+1}: mean={mean_inst[i]:.5f}, "
+                      f"se={se_inst[i]:.5f}, t={t:.2f}")
 
 
-# Simulate a parametric SDF: p* = exp(-delta - gamma * c_growth)
-T = 5000
+T = 10000
 rng = np.random.default_rng(7)
-delta = 0.02          # time preference
-gamma = 2.0           # risk aversion
-c_growth = rng.normal(0.02, 0.03, T)    # consumption growth
-pstar_model = np.exp(-delta - gamma * c_growth)
-pstar_model /= pstar_model.mean()       # normalize
+δ, γ = 0.02, 2.0
+c_growth = rng.normal(0.02, 0.03, T)
+pstar_model = np.exp(-δ - γ * c_growth)
+pstar_model /= pstar_model.mean()
 
 _, returns_data, _ = simulate_sdf_and_returns(T=T)
 
-# Use lagged consumption growth as an instrument
 instruments = c_growth[:-1].reshape(-1, 1)
-gmm_pricing_test(pstar_model[1:], returns_data[1:], instruments)
+gmm_euler_equation_test(pstar_model[1:], returns_data[1:], instruments)
 ```
 
-## The Hansen-Jagannathan Bound
+The large t-statistics reject the Euler equations for every asset, both with and without instruments.
 
-A celebrated implication of this framework, developed further by
-{cite}`Hansen_Jagannathan_1991`, is that the **Sharpe ratio** of any excess
-return places a lower bound on the **volatility of the SDF**.
+This is by construction: the returns were generated by `simulate_sdf_and_returns`, which uses a lognormal SDF with $\sigma_m = 0.15$, while the CRRA model being tested has $\gamma = 2$ and $\sigma_c = 0.03$, implying far less SDF volatility.
 
-From the pricing equation $E(r p^*) = 1$ for every return $r$:
+The two SDFs do not match, so the moment conditions $E(r \cdot p^* - 1) = 0$ fail.
 
-$$
-E(r) E(p^*) + \mathrm{Cov}(r, p^*) = 1.
-$$
-
-For an excess return $r^e = r - r_f$ (where $r_f = 1/E(p^*)$ is the risk-free
-rate):
-
-$$
-E(r^e) = -\mathrm{Cov}(r^e, p^*) \leq \|\mathrm{Std}(r^e)\| \cdot \|\mathrm{Std}(p^*)\|,
-$$
-
-giving the **Hansen-Jagannathan bound**:
-
-$$
-\frac{E(r^e)}{\mathrm{Std}(r^e)} \leq \frac{\mathrm{Std}(p^*)}{E(p^*)}.
-$$
-
-Any model of $p^*$ must generate enough SDF volatility to rationalize the
-observed Sharpe ratios in asset markets. 
-
-The equity premium puzzle arises
-because the volatility of consumption growth — which drives $p^*$ in
-representative-agent models — is far too low to meet this bound.
-
-```{code-cell} ipython3
-def hj_bound_plot(excess_returns, rf=0.02, label='Simulated'):
-    """
-    Compute and display the Hansen-Jagannathan bound implied by a set of
-    excess returns.
-
-    The HJ bound says:  Std(p*) / E(p*) >= max Sharpe ratio.
-    """
-    sharpe_ratios = excess_returns.mean(axis=0) / excess_returns.std(axis=0)
-    max_sharpe = sharpe_ratios.max()
-
-    # The bound: Std(m) / E(m) >= max Sharpe
-    # With risk-free rate r_f and E(m) = 1 / (1 + r_f):
-    E_m = 1.0 / (1.0 + rf)
-    min_std_m = max_sharpe * E_m
-
-    print(f"Dataset: {label}")
-    print(f"  Risk-free rate used:      {rf:.4f}")
-    print(f"  Maximum Sharpe ratio:     {max_sharpe:.4f}")
-    print(f"  HJ bound on Std(p*):      {min_std_m:.4f}  (= max_sharpe * E(p*))")
-    return max_sharpe, min_std_m
-
-
-T = 5000
-rng = np.random.default_rng(99)
-excess_returns = rng.multivariate_normal(
-    mean=np.array([0.06, 0.04, 0.07, 0.05]),
-    cov=np.array([[0.04, 0.01, 0.02, 0.01],
-                  [0.01, 0.03, 0.01, 0.01],
-                  [0.02, 0.01, 0.05, 0.02],
-                  [0.01, 0.01, 0.02, 0.03]]),
-    size=T
-)
-
-max_sharpe, hj_bound = hj_bound_plot(excess_returns)
-
-# Put result in a figure
-gammas  = np.linspace(0.5, 10, 100)
-# Std(p*) for a log-normal SDF: exp(-delta - gamma * c_growth)
-c_std = 0.035   # typical annual consumption growth volatility
-std_m_cacrra = np.sqrt(np.exp(gammas**2 * c_std**2) - 1)
-
-fig, ax = plt.subplots(figsize=(8, 5))
-ax.plot(gammas, std_m_cacrra, lw=2, label=r'$\mathrm{Std}(p^*)$ — CRRA model')
-ax.axhline(hj_bound, color='red', linestyle='--', lw=2,
-           label=f'HJ bound = {hj_bound:.3f}')
-ax.set_xlabel('Relative risk aversion $\\gamma$')
-ax.set_ylabel('$\\mathrm{Std}(p^*)$')
-ax.set_title('Hansen-Jagannathan Bound and the Equity Premium Puzzle')
-ax.legend()
-plt.tight_layout()
-plt.show()
-
-print(f"\nWith c_std = {c_std}, a CRRA model needs gamma ≈ "
-      f"{np.interp(hj_bound, std_m_cacrra, gammas):.1f} to meet the HJ bound.")
-```
+This illustrates how GMM tests can detect misspecification: when the proposed $p^*$ is not the true pricing kernel, the Euler equation restrictions are violated and the data reject the model.
 
 ## Summary
 
-The main contributions of {cite}`HansenRichard1987` are:
+The main contributions of {cite:t}`HansenRichard1987` are:
 
 1. **Conditional Riesz Representation**: Every admissible pricing function can
-   be written as $\pi(p) = E(p p^* \mid \mathcal{G})$ for a unique SDF $p^*$.
+   be written as $\pi(p) = E(p \, p^* \mid \mathcal{G})$ for a unique SDF $p^*$.
+   Different models of asset prices are indexed by their $p^*$.
 
 2. **Conditional mean-variance frontier**: The frontier is spanned by $r^*$
-   and $z^*$, giving a conditional two-fund theorem.
+   and $z^*$, giving a conditional two-fund theorem with *random* weights.
 
-3. **Gap between conditional and unconditional frontiers**: A return can be
-   on the conditional frontier without being on the unconditional frontier.
-   Empirical tests based on unconditional moments cannot, in general, detect
-   conditional mean-variance efficiency.
+3. **Conditional vs unconditional frontiers**: A return can be on the
+   conditional frontier without being on the unconditional frontier. The
+   unconditional frontier uses constant weights $c^*$; the conditional
+   frontier uses random weights $w^*$. The gap matters for empirical tests.
 
-4. **Pseudo-pricing function**: The function $\pi^*(p) = E[\pi(p)] = E(p p^*)$
-   maps payoffs to real numbers and connects directly to {cite}`Hansen_Singleton_1982`
-   GMM estimation.
+4. **Single-beta representation**: The conditional CAPM extends Roll's
+   characterization to conditioning information. The unconditional version
+   holds only for returns with constant portfolio weights — so testing the
+   CAPM with unconditional regressions tests a weaker hypothesis.
 
-5. **Single-beta representation**: The conditional CAPM (Roll's characterization)
-   extends to conditioning information, but the unconditional version holds only
-   for portfolios built with *constant* (non-random) portfolio weights.
+5. **Pseudo-pricing function**: $\pi^*(p) = E[\pi(p)] = E(p \, p^*)$ maps
+   payoffs to real numbers and connects directly to {cite:t}`hansen1982generalized`
+   GMM estimation. Conditioning down to $\pi^*$ can lose information, and two
+   distinct pricing functions may imply the same $\pi^*$.
 
 ## Exercises
 
 ```{exercise}
 :label: hr87_ex1
-
-**The Minimum Second-Moment Return**
 
 The benchmark return $r^*$ minimizes the unconditional second moment
 $E(r^2)$ over the set $R^*$ of returns with finite unconditional second moments.
@@ -865,7 +1097,7 @@ Any return $r \in R$ can be written as $r = r^* + z$ for some $z \in Z^*$
 (where $Z^* = Z \cap P^*$).
 
 Since $r^*$ is conditionally orthogonal to $Z$ — meaning
-$(r^* \mid z)_{\mathcal{G}} = E(r^* z \mid \mathcal{G}) = 0$ for all $z \in Z$
+$\langle r^* \mid z \rangle_{\mathcal{G}} = E(r^* z \mid \mathcal{G}) = 0$ for all $z \in Z$
 — taking unconditional expectations gives $E(r^* z) = 0$.
 
 Therefore,
@@ -881,261 +1113,30 @@ with equality if and only if $z = 0$, i.e., $r = r^*$.
 
 ```{code-cell} ipython3
 def find_min_second_moment_return(returns):
-    """
-    Find the portfolio on the minimum-second-moment frontier (the analogue
-    of r* in a finite asset economy) by minimizing E[r_p^2] = Var(r_p) + E(r_p)^2.
-
-    Subject to: weights sum to 1 (the portfolio is a unit-price return).
-    """
+    """Find the portfolio minimizing E[r^2] -- the empirical analogue of r*."""
     n = returns.shape[1]
-    mu = returns.mean(axis=0)
-    Sigma = np.cov(returns.T)
 
     def objective(w):
-        r_p = returns @ w
-        return np.mean(r_p**2)   # second moment
+        return np.mean((returns @ w)**2)
 
-    constraints = [{'type': 'eq', 'fun': lambda w: w.sum() - 1}]
-    bounds = [(-2, 2)] * n
-    w0 = np.ones(n) / n
-
-    result = minimize(objective, w0, method='SLSQP',
-                      constraints=constraints, bounds=bounds)
-    w_star = result.x
-    r_star = returns @ w_star
+    result = minimize(objective, np.ones(n)/n, method='SLSQP',
+                      constraints=[{'type': 'eq', 'fun': lambda w: w.sum() - 1}],
+                      bounds=[(-2, 2)] * n)
+    r_star = returns @ result.x
 
     print(f"Minimum second-moment portfolio:")
     print(f"  E[r*^2] = {np.mean(r_star**2):.6f}")
     print(f"\nSecond moments of individual assets:")
     for i in range(n):
         e2 = np.mean(returns[:, i]**2)
-        print(f"  Asset {i+1}: E[r^2] = {e2:.6f}  (>= {np.mean(r_star**2):.6f}: "
-              f"{'✓' if e2 >= np.mean(r_star**2) - 1e-10 else '✗'})")
-    return w_star
+        check = "yes" if e2 >= np.mean(r_star**2) - 1e-10 else "no"
+        print(f"  Asset {i+1}: E[r^2] = {e2:.6f}  "
+              f"(>= E[r*^2]: {check})")
+    return result.x
 
 
-pstar_sim, returns_sim, _ = simulate_sdf_and_returns(T=5000)
+pstar_sim, returns_sim, _ = simulate_sdf_and_returns(T=10000)
 w_star = find_min_second_moment_return(returns_sim)
-```
-
-```{solution-end}
-```
-
-```{exercise}
-:label: hr87_ex2
-
-**Conditional vs Unconditional Frontiers**
-
-This exercise illustrates the main empirical lesson of Section 3: a portfolio
-that is conditionally mean-variance efficient can be off the unconditional
-frontier.
-
-Consider two regimes (state $s \in \{0, 1\}$, each equally likely). In state 0
-assets have mean returns $\mu_0 = (0.05, 0.12)^\top$ and in state 1 they have
-mean returns $\mu_1 = (0.10, 0.06)^\top$. Both states share the same covariance
-matrix
-
-$$
-\Sigma = \begin{pmatrix} 0.04 & 0.01 \\ 0.01 & 0.09 \end{pmatrix}.
-$$
-
-(a) Compute the minimum-variance portfolio in each state separately (i.e., the
-    conditionally efficient portfolios for a target mean of 0.08).
-
-(b) Compute the unconditional mean-variance frontier (using the unconditional
-    mean and covariance of returns, averaging across the two states).
-
-(c) Plot both frontiers on the same graph and mark the two state-conditional
-    efficient portfolios. Are they on the unconditional frontier?
-```
-
-```{solution-start} hr87_ex2
-:class: dropdown
-```
-
-```{code-cell} ipython3
-import matplotlib.pyplot as plt
-import numpy as np
-
-# Setup
-Sigma = np.array([[0.04, 0.01],
-                  [0.01, 0.09]])
-mu0 = np.array([0.05, 0.12])
-mu1 = np.array([0.10, 0.06])
-target_mean = 0.08
-T_large = 50000
-rng = np.random.default_rng(123)
-
-# Draw returns from each regime with equal probability
-state = rng.integers(0, 2, T_large)
-eps = rng.multivariate_normal([0, 0], Sigma, T_large)
-rets0 = mu0 + eps
-rets1 = mu1 + eps
-returns_all = np.where(state[:, None] == 0, rets0, rets1)
-
-# Conditionally efficient weights (min variance, target mean)
-def mv_weights_2asset(mu, Sigma, target):
-    inv_S = np.linalg.inv(Sigma)
-    ones  = np.ones(2)
-    A = mu @ inv_S @ mu
-    B = mu @ inv_S @ ones
-    C = ones @ inv_S @ ones
-    D = A * C - B**2
-    g = (A * (inv_S @ ones) - B * (inv_S @ mu)) / D
-    h = (C * (inv_S @ mu)  - B * (inv_S @ ones)) / D
-    return g + target * h
-
-w0 = mv_weights_2asset(mu0, Sigma, target_mean)
-w1 = mv_weights_2asset(mu1, Sigma, target_mean)
-
-# State-specific portfolio returns
-port0 = rets0 @ w0
-port1 = rets1 @ w1
-port_dyn = np.where(state == 0, rets0 @ w0, rets1 @ w1)
-
-# Unconditional moments
-mu_unc = returns_all.mean(axis=0)
-Sigma_unc = np.cov(returns_all.T)
-
-front_mu_unc, front_std_unc = conditional_mv_frontier(mu_unc, Sigma_unc)
-
-# Plot
-fig, ax = plt.subplots(figsize=(8, 5))
-ax.plot(front_std_unc, front_mu_unc, lw=2, label='Unconditional frontier', color='steelblue')
-ax.scatter(np.sqrt(np.diag(Sigma_unc)), mu_unc, color='red', zorder=5,
-           s=80, label='Unconditional asset means')
-
-for label, port, color in [('Conditional portfolio (state 0)', port0, 'orange'),
-                             ('Conditional portfolio (state 1)', port1, 'green'),
-                             ('Dynamic portfolio', port_dyn, 'purple')]:
-    ax.scatter(port.std(), port.mean(), s=120, marker='*', zorder=6,
-               color=color, label=label)
-
-ax.set_xlabel('Standard deviation')
-ax.set_ylabel('Expected return')
-ax.set_title('Conditional vs Unconditional Mean-Variance Frontier')
-ax.legend(fontsize=8)
-plt.tight_layout()
-plt.show()
-
-print(f"Dynamic portfolio: mean={port_dyn.mean():.4f}, std={port_dyn.std():.4f}")
-```
-
-(c) The dynamic portfolio that uses conditioning information (switching weights
-between the two state-optimal portfolios) achieves the target mean of
-approximately {glue:}`target_mean_dyn` but lies **to the right** of the
-unconditional frontier. This confirms Lemma 3.4: a conditionally efficient
-portfolio is not generally on the unconditional frontier.
-
-```{solution-end}
-```
-
-```{exercise}
-:label: hr87_ex3
-
-**The Hansen-Jagannathan Bound with Real Data Moments**
-
-Suppose you observe the following unconditional moments for U.S. equity data
-(annual, roughly 1950–2020):
-
-- Equity excess return: $E(r^e) = 0.06$, $\mathrm{Std}(r^e) = 0.20$
-- Risk-free rate: $r_f = 0.01$, so $E(p^*) = 1/(1 + r_f)$
-
-(a) Compute the maximum unconditional Sharpe ratio and the Hansen-Jagannathan
-    lower bound on $\mathrm{Std}(p^*)$.
-
-(b) For a CRRA representative consumer with relative risk aversion $\gamma$ and
-    annual consumption growth that is lognormal with mean $\mu_c = 0.02$ and
-    standard deviation $\sigma_c = 0.035$, show that
-
-$$
-p^* = e^{-\delta - \gamma (\mu_c + \sigma_c \varepsilon)}, \quad
-\varepsilon \sim N(0,1),
-$$
-
-implies $\mathrm{Std}(p^*) / E(p^*) \approx \gamma \sigma_c$ for small
-$\sigma_c$. Find the value of $\gamma$ needed to meet the HJ bound.
-
-(c) Plot $\mathrm{Std}(p^*)/E(p^*)$ against $\gamma$ for $\gamma \in [0.5, 50]$
-    (using the exact lognormal formula), and mark the HJ bound with a horizontal
-    line.
-```
-
-```{solution-start} hr87_ex3
-:class: dropdown
-```
-
-**(a)** The maximum Sharpe ratio is
-
-$$
-\mathrm{SR}_{\max} = \frac{E(r^e)}{\mathrm{Std}(r^e)} = \frac{0.06}{0.20} = 0.30.
-$$
-
-With $r_f = 0.01$, $E(p^*) = 1/1.01 \approx 0.990$, so the HJ bound is
-
-$$
-\mathrm{Std}(p^*) \geq \mathrm{SR}_{\max} \times E(p^*) = 0.30 \times 0.990 = 0.297.
-$$
-
-```{code-cell} ipython3
-# (a)
-E_re   = 0.06
-Std_re = 0.20
-rf     = 0.01
-SR_max = E_re / Std_re
-E_pstar = 1.0 / (1.0 + rf)
-HJ_bound = SR_max * E_pstar
-print(f"Maximum Sharpe ratio:        {SR_max:.4f}")
-print(f"E(p*):                       {E_pstar:.4f}")
-print(f"HJ lower bound on Std(p*):   {HJ_bound:.4f}")
-```
-
-**(b)** For a CRRA consumer, $p^* = e^{-\delta - \gamma c}$ where
-$c \sim N(\mu_c, \sigma_c^2)$. Then $p^*$ is lognormal:
-
-$$
-E(p^*) = e^{-\delta - \gamma \mu_c + \gamma^2 \sigma_c^2 / 2},
-\quad
-\mathrm{Var}(p^*) = E(p^*)^2 \left(e^{\gamma^2 \sigma_c^2} - 1\right).
-$$
-
-Therefore,
-
-$$
-\frac{\mathrm{Std}(p^*)}{E(p^*)} = \sqrt{e^{\gamma^2 \sigma_c^2} - 1}
-\approx \gamma \sigma_c \quad \text{for small } \sigma_c.
-$$
-
-```{code-cell} ipython3
-# (b) and (c)
-mu_c    = 0.02
-sigma_c = 0.035
-gammas  = np.linspace(0.5, 50, 500)
-cv_pstar = np.sqrt(np.exp(gammas**2 * sigma_c**2) - 1)  # Std/E ratio
-
-# Approximate: gamma * sigma_c
-approx = gammas * sigma_c
-
-# Required gamma (exact)
-gamma_needed = np.interp(HJ_bound, cv_pstar, gammas)
-
-fig, ax = plt.subplots(figsize=(8, 5))
-ax.plot(gammas, cv_pstar,  lw=2, label=r'Exact: $\sqrt{e^{\gamma^2\sigma_c^2}-1}$')
-ax.plot(gammas, approx, lw=1.5, linestyle='--', label=r'Approx: $\gamma \sigma_c$')
-ax.axhline(HJ_bound, color='red', linestyle=':', lw=2,
-           label=f'HJ bound = {HJ_bound:.3f}')
-ax.axvline(gamma_needed, color='orange', linestyle=':', lw=1.5,
-           label=f'Required $\\gamma \\approx {gamma_needed:.1f}$')
-ax.set_xlabel('Relative risk aversion $\\gamma$')
-ax.set_ylabel('$\\mathrm{Std}(p^*)\\ /\\ E(p^*)$')
-ax.set_title('CRRA Model: Volatility of SDF vs HJ Bound\n'
-             '(Equity Premium Puzzle)')
-ax.legend()
-plt.tight_layout()
-plt.show()
-
-print(f"\nRequired risk aversion to meet HJ bound: gamma ≈ {gamma_needed:.1f}")
-print(f"This is the core of the equity premium puzzle (Mehra-Prescott 1985).")
 ```
 
 ```{solution-end}
