@@ -78,11 +78,12 @@ Among the things we will learn are:
 Let's start by importing the Python tools we need.
 
 ```{code-cell} ipython3
+from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import minimize, brentq
-from scipy.stats import norm
 import pandas as pd
+from scipy.optimize import minimize
 
 np.random.seed(0)
 ```
@@ -142,6 +143,15 @@ converge to their population counterparts.  In what follows we use population
 moments (or simulated sample moments) interchangeably.
 
 ```{code-cell} ipython3
+DATA_DIR = Path("_static/lecture_specific/hansen_jagannathan_1991")
+if not DATA_DIR.exists():
+    DATA_DIR = Path("lectures/_static/lecture_specific/hansen_jagannathan_1991")
+
+BUNDLE_PATH = DATA_DIR / "hansen_jagannathan_1991_data.pkl"
+DATA_BUNDLE = pd.read_pickle(BUNDLE_PATH)
+DATA_SOURCES = DATA_BUNDLE["sources"].copy()
+
+
 def compute_moments(returns, prices=None):
     """
     Compute mean returns, mean prices, and covariance matrix from data.
@@ -158,15 +168,196 @@ def compute_moments(returns, prices=None):
     mu_q  : mean prices   (n,)
     Sigma : covariance matrix of payoffs  (n, n)
     """
-    T, n = returns.shape
-    mu_x  = returns.mean(axis=0)
-    Sigma = np.cov(returns.T)
+    returns = np.asarray(returns, dtype=float)
+    if returns.ndim == 1:
+        returns = returns[:, None]
+
+    mu_x = returns.mean(axis=0)
+    Sigma = np.cov(returns.T, bias=True)
+    if Sigma.ndim == 0:
+        Sigma = np.array([[float(Sigma)]])
+
     if prices is None:
-        # returns have price 1 by construction
-        mu_q = np.ones(n)
+        mu_q = np.ones(returns.shape[1])
     else:
+        prices = np.asarray(prices, dtype=float)
+        if prices.ndim == 1:
+            prices = prices[:, None]
         mu_q = prices.mean(axis=0)
+
     return mu_x, mu_q, Sigma
+```
+
+All processed panels used below are loaded from the single bundled data file
+`hansen_jagannathan_1991_data.pkl`.
+
+The raw sources used to build that bundle are recorded in the table below.
+
+```{code-cell} ipython3
+DATA_SOURCES
+```
+
+```{code-cell} ipython3
+def positive_frontier_from_sample(payoffs, prices, v_grid, maxiter=2_000):
+    """
+    Exact sample analogue of the positivity-restricted frontier.
+
+    Uses warm-starting and explicit Jacobians for robust convergence.
+    """
+    x = np.asarray(payoffs, dtype=float)
+    q = np.asarray(prices, dtype=float)
+
+    if x.ndim == 1:
+        x = x[:, None]
+    if q.ndim == 1:
+        q = q[:, None]
+
+    T = x.shape[0]
+    mu_q = q.mean(axis=0)
+    x_aug = np.column_stack([x, np.ones(T)])
+    second_moment = x_aug.T @ x_aug / T
+    pinv_second = np.linalg.pinv(second_moment)
+
+    means = []
+    sigmas = []
+    w_prev = None
+
+    for v in v_grid:
+        q_aug = np.r_[mu_q, v]
+
+        # Initial guess from unconstrained projection
+        w0 = pinv_second @ q_aug
+        scale = q_aug @ w0
+
+        if abs(scale) < 1e-12:
+            means.append(np.nan)
+            sigmas.append(np.nan)
+            continue
+
+        w0 = w0 / scale
+
+        # Collect candidate starting points (warm-start from previous solution)
+        candidates = [w0]
+        if w_prev is not None:
+            s2 = q_aug @ w_prev
+            if abs(s2) > 1e-12:
+                candidates.append(w_prev / s2)
+
+        best_obj = np.inf
+        best_result = None
+
+        for w_init in candidates:
+            def objective(w):
+                r = x_aug @ w
+                return np.mean(np.maximum(r, 0.0) ** 2)
+
+            def jac(w):
+                r = x_aug @ w
+                rp = np.maximum(r, 0.0)
+                return 2.0 * (x_aug.T @ rp) / T
+
+            result = minimize(
+                objective,
+                w_init,
+                jac=jac,
+                method="SLSQP",
+                constraints=(
+                    {
+                        "type": "eq",
+                        "fun": lambda w, qa=q_aug: qa @ w - 1.0,
+                        "jac": lambda w, qa=q_aug: qa,
+                    },
+                ),
+                options={"maxiter": maxiter, "ftol": 1e-14},
+            )
+
+            if result.fun < best_obj:
+                best_obj = result.fun
+                best_result = result
+
+        r_plus = np.maximum(x_aug @ best_result.x, 0.0)
+        delta_v = np.mean(r_plus ** 2)
+
+        if delta_v < 1e-14:
+            means.append(np.nan)
+            sigmas.append(np.nan)
+            continue
+
+        m = r_plus / delta_v
+        means.append(m.mean())
+        sigmas.append(m.std())
+        w_prev = best_result.x.copy()
+
+    return np.asarray(means), np.asarray(sigmas)
+
+
+def crra_points_from_consumption(consumption, beta=0.95, gamma_grid=None):
+    if gamma_grid is None:
+        gamma_grid = np.arange(31)
+
+    growth = np.asarray(consumption[1:] / consumption[:-1], dtype=float)
+    means = []
+    sigmas = []
+
+    for gamma in gamma_grid:
+        m = beta * growth ** (-gamma)
+        means.append(m.mean())
+        sigmas.append(m.std())
+
+    return np.asarray(means), np.asarray(sigmas)
+
+
+def load_annual_paper_data():
+    data = DATA_BUNDLE["annual"].copy()
+    return (
+        data["year"].to_numpy(),
+        data["stock"].to_numpy(),
+        data["bond"].to_numpy(),
+        data["consumption"].to_numpy(),
+    )
+
+
+def load_monthly_proxy_panel():
+    return DATA_BUNDLE["monthly"].copy()
+
+
+def build_monthly_payoff_menu(panel):
+    z_bill = panel["bill"].shift(1)
+    z_stock = panel["stock"].shift(1)
+    z_cons = panel["cons_ratio"].shift(1)
+
+    payoffs = pd.DataFrame(
+        {
+            "stock": panel["stock"],
+            "bill": panel["bill"],
+            "stock_x_billlag": panel["stock"] * z_bill,
+            "bill_x_billlag": panel["bill"] * z_bill,
+            "stock_x_stocklag": panel["stock"] * z_stock,
+            "bill_x_stocklag": panel["bill"] * z_stock,
+            "stock_x_conslag": panel["stock"] * z_cons,
+            "bill_x_conslag": panel["bill"] * z_cons,
+        }
+    )
+
+    prices = pd.DataFrame(
+        {
+            "stock": 1.0,
+            "bill": 1.0,
+            "stock_x_billlag": z_bill,
+            "bill_x_billlag": z_bill,
+            "stock_x_stocklag": z_stock,
+            "bill_x_stocklag": z_stock,
+            "stock_x_conslag": z_cons,
+            "bill_x_conslag": z_cons,
+        }
+    )
+
+    joined = pd.concat([payoffs, prices.add_suffix("_price")], axis=1).dropna()
+    return joined[payoffs.columns].to_numpy(), joined[prices.columns].to_numpy()
+
+
+def load_quarterly_bill_proxy():
+    return DATA_BUNDLE["quarterly"].copy()
 ```
 
 ## The Linear Volatility Bound (Without Positivity)
@@ -250,7 +441,7 @@ def hj_bound_no_positivity(mu_x, mu_q, Sigma, v_grid=None):
     if v_grid is None:
         v_grid = np.linspace(0.85, 1.15, 300)
 
-    inv_Sigma = np.linalg.inv(Sigma)
+    inv_Sigma = np.linalg.pinv(Sigma)
     sigma_bound = np.array([
         np.sqrt(np.maximum((mu_q - v * mu_x) @ inv_Sigma @ (mu_q - v * mu_x), 0.0))
         for v in v_grid
@@ -308,7 +499,7 @@ def mean_variance_frontier(mu_x, Sigma, n_points=300):
     frontier_stds  : array (n_points,)
     """
     n = len(mu_x)
-    inv_S = np.linalg.inv(Sigma)
+    inv_S = np.linalg.pinv(Sigma)
     ones  = np.ones(n)
 
     A = mu_x @ inv_S @ mu_x
@@ -332,7 +523,7 @@ def max_sharpe_ratio(mu_x, mu_q, Sigma, rf=None):
     Otherwise, use the slope of the tangent from origin to the frontier.
     """
     n = len(mu_x)
-    inv_S = np.linalg.inv(Sigma)
+    inv_S = np.linalg.pinv(Sigma)
 
     if rf is not None:
         mu_exc = mu_x - rf
@@ -352,123 +543,74 @@ def max_sharpe_ratio(mu_x, mu_q, Sigma, rf=None):
     return float(sr_max)
 ```
 
-## Computing the Bound with Simulated Data
+## Computing the Annual Frontier
 
-To illustrate the theory we simulate an economy with a CRRA representative
-consumer and two assets: a stock and a bond.
+Figures 1 and 4 in the paper use the annual stock, bond, and consumption
+series described in the paper's appendix.  The archived Campbell-Shiller /
+Shiller workbook bundled with this lecture contains those series directly.
 
 ```{code-cell} ipython3
-def simulate_economy(T=10000, gamma=2.0, delta=0.99, mu_c=0.018, sigma_c=0.033,
-                     mu_d=0.02, sigma_d=0.12, rho=0.3, seed=42):
-    """
-    Simulate a Lucas (1978) exchange economy with log-normal consumption and
-    dividend growth.
+annual_years, annual_stock, annual_bond, annual_consumption = load_annual_paper_data()
+annual_payoffs = np.column_stack([annual_stock, annual_bond])
+annual_prices = np.ones_like(annual_payoffs)
 
-    Parameters
-    ----------
-    T       : number of periods
-    gamma   : CRRA coefficient
-    delta   : time discount factor
-    mu_c    : mean log consumption growth
-    sigma_c : std of log consumption growth
-    mu_d    : mean log dividend growth
-    sigma_d : std of log dividend growth
-    rho     : correlation between consumption and dividend shocks
+mu_x_annual, mu_q_annual, Sigma_annual = compute_moments(annual_payoffs, annual_prices)
+v_annual, sigma_annual = hj_bound_no_positivity(
+    mu_x_annual, mu_q_annual, Sigma_annual, v_grid=np.linspace(0.84, 1.16, 400)
+)
 
-    Returns
-    -------
-    returns  : (T, 2) array — [stock return, bond return]
-    prices   : (T, 2) array — prices (≡ 1 for returns)
-    m_true   : (T,)   array — true IMRS
-    """
-    rng = np.random.default_rng(seed)
+annual_gamma_grid = np.arange(31)
+annual_crra_mean, annual_crra_std = crra_points_from_consumption(
+    annual_consumption, beta=0.95, gamma_grid=annual_gamma_grid
+)
 
-    # Correlated shocks
-    cov = np.array([[sigma_c**2, rho * sigma_c * sigma_d],
-                    [rho * sigma_c * sigma_d, sigma_d**2]])
-    shocks = rng.multivariate_normal([0, 0], cov, T)
-
-    # Consumption and dividend growth
-    gc = np.exp(mu_c + shocks[:, 0])   # gross consumption growth
-    gd = np.exp(mu_d + shocks[:, 1])   # gross dividend growth
-
-    # IMRS: m = delta * (c_t+1/c_t)^(-gamma)
-    m_true = delta * gc ** (-gamma)
-
-    # Risk-free gross return (from the bond Euler equation): 1/E[m]
-    rf = 1.0 / np.mean(m_true)
-
-    # Stock return: proportional to dividend growth scaled to have E[m*R] = 1
-    # In a simple calibration, R_stock ~ gd / price_to_div
-    # We back out a price so that E[m * R_stock] = 1 in population
-    # Use sample-consistent construction
-    R_stock_raw = gd
-    scale = np.mean(m_true * R_stock_raw)   # should equal 1 if correctly priced
-    R_stock = R_stock_raw / scale            # re-scale to satisfy pricing
-
-    # Bond return: constant rf
-    R_bond = np.full(T, rf)
-
-    returns = np.column_stack([R_stock, R_bond])
-    prices  = np.ones((T, 2))
-    return returns, prices, m_true
-
-
-returns, prices, m_true = simulate_economy(T=10000, gamma=2.0)
-mu_x, mu_q, Sigma = compute_moments(returns, prices)
-
-print("Asset moments (simulated economy, gamma=2):")
-print(f"  Mean stock return:  {mu_x[0]:.5f}")
-print(f"  Mean bond return:   {mu_x[1]:.5f}")
-print(f"  Std stock return:   {np.sqrt(Sigma[0,0]):.5f}")
-print(f"  Std bond return:    {np.sqrt(Sigma[1,1]):.6f}")
-print(f"\nTrue IMRS:")
-print(f"  E(m):      {np.mean(m_true):.5f}")
-print(f"  sigma(m):  {np.std(m_true):.5f}")
+print("Annual sample used in Figures 1 and 4")
+print(f"  Years: {annual_years[0]}-{annual_years[-1]}")
+print(f"  Mean stock return: {mu_x_annual[0]:.4f}")
+print(f"  Mean bond return:  {mu_x_annual[1]:.4f}")
+print(f"  Std stock return:  {np.sqrt(Sigma_annual[0, 0]):.4f}")
+print(f"  Std bond return:   {np.sqrt(Sigma_annual[1, 1]):.4f}")
 ```
 
-## Plotting the HJ Bound and the SDF Frontier
+## Annual IMRS frontier
 
 The main deliverable of the paper is the region $S$ in mean-standard deviation
 space for the IMRS $m$.  Any parametric model must deliver an
 $[E(m), \sigma(m)]$ pair inside $S$.
 
 ```{code-cell} ipython3
-# Compute the linear HJ bound
-v_grid, sigma_bound = hj_bound_no_positivity(mu_x, mu_q, Sigma)
+---
+mystnb:
+  figure:
+    caption: Annual IMRS frontier
+    name: fig-annual-imrs-frontier
+---
+fig, ax = plt.subplots(figsize=(8, 5))
 
-# Compute the mean-variance frontier for asset returns
-frontier_means, frontier_stds = mean_variance_frontier(mu_x, Sigma)
+ax.fill_between(v_annual, sigma_annual, 2.4, alpha=0.15)
+ax.plot(v_annual, sigma_annual, lw=2)
+ax.scatter(
+    annual_crra_mean,
+    annual_crra_std,
+    marker="s",
+    s=20,
+    facecolors="white",
+    edgecolors="black",
+    linewidths=0.8,
+)
+annual_log_point = np.array([np.mean(1.0 / annual_stock), np.std(1.0 / annual_stock)])
+ax.scatter(
+    annual_log_point[0],
+    annual_log_point[1],
+    marker="x",
+    s=50,
+    color="black",
+)
 
-fig, axes = plt.subplots(1, 2, figsize=(13, 5))
-
-# — Left panel: HJ bound (SDF frontier) —
-ax = axes[0]
-ax.plot(v_grid, sigma_bound, lw=2, color='steelblue', label='HJ bound (no positivity)')
-ax.fill_betweenx(sigma_bound, v_grid, v_grid[-1],
-                 alpha=0.12, color='steelblue', label='Admissible region $S$')
-
-# Mark the true IMRS
-ax.scatter(np.mean(m_true), np.std(m_true), color='red', s=80, zorder=5,
-           label=f'True IMRS (γ=2): ({np.mean(m_true):.3f}, {np.std(m_true):.3f})')
-
-ax.set_xlabel('Mean of IMRS  $E(m)$')
-ax.set_ylabel('Std of IMRS  $\\sigma(m)$')
-ax.set_title('HJ Volatility Bound\n(linear, no positivity)')
-ax.legend(fontsize=9)
-ax.set_xlim([0.88, 1.12])
-ax.set_ylim([-0.005, 0.25])
-
-# — Right panel: asset returns mean-variance frontier —
-ax = axes[1]
-ax.plot(frontier_stds, frontier_means, lw=2, color='darkorange',
-        label='MV frontier for returns')
-ax.scatter(np.sqrt(np.diag(Sigma)), mu_x, s=80, color='green', zorder=5,
-           label='Individual assets')
-ax.set_xlabel('Std of return  $\\sigma(r)$')
-ax.set_ylabel('Mean of return  $E(r)$')
-ax.set_title('Mean-Variance Frontier for Asset Returns\n(dual of the HJ bound)')
-ax.legend(fontsize=9)
+ax.set_xlim(0.84, 1.16)
+ax.set_ylim(0.0, 2.4)
+ax.set_xlabel("mean")
+ax.set_ylabel("standard deviation")
 
 plt.tight_layout()
 plt.show()
@@ -494,42 +636,102 @@ In words: the **slope of the SDF frontier** at mean $v$ equals the
 hypothetical riskless bond priced at $v$.
 
 ```{code-cell} ipython3
-def sharpe_ratio_grid(mu_x, mu_q, Sigma, v_grid):
-    """
-    For each candidate risk-free price v, compute the maximum Sharpe ratio
-    of excess returns over the hypothetical riskless rate 1/v.
+# Compute the mean-variance frontier for asset returns R from the quarterly
+# bill data (3-, 6-, 9-, 12-month holding-period returns).  The paper uses
+# monthly holding-period returns on 1–6 month bills from CRSP; the quarterly
+# proxy reproduces the same qualitative structure.
 
-    Returns the ratio sigma(m^v)/v, which should equal max SR.
-    """
-    n = len(mu_x)
-    inv_S = np.linalg.inv(Sigma)
+quarterly_bill_data = load_quarterly_bill_proxy().to_numpy()
+mu_bill = quarterly_bill_data.mean(axis=0)
+Sigma_bill = np.cov(quarterly_bill_data.T, bias=True)
+inv_S_bill = np.linalg.inv(Sigma_bill)
+ones_bill = np.ones(len(mu_bill))
 
-    sr_max = []
-    for v in v_grid:
-        rf = 1.0 / v                  # hypothetical risk-free return
-        mu_exc = mu_x - rf            # excess returns
-        w_tan  = inv_S @ mu_exc       # unnormalized tangency weights
-        denom  = np.sqrt(w_tan @ Sigma @ w_tan)
-        if denom < 1e-12:
-            sr_max.append(0.0)
-        else:
-            sr_max.append(float((mu_exc @ w_tan) / denom))
+A_bill = mu_bill @ inv_S_bill @ mu_bill
+B_bill = mu_bill @ inv_S_bill @ ones_bill
+C_bill = ones_bill @ inv_S_bill @ ones_bill
+D_bill = A_bill * C_bill - B_bill**2
 
-    return np.array(sr_max)
+# Frontier: sigma^2 = (A mu^2 - 2B mu + C) / D
+# Solve for mu given sigma: mu = (B ± sqrt(D(A sigma^2 - 1))) / A
+sigma_min_bill = 1.0 / np.sqrt(A_bill)
+sigma_grid_bill = np.linspace(sigma_min_bill * 1.001, 1.3, 1000)
+disc_bill = D_bill * (A_bill * sigma_grid_bill**2 - 1)
+disc_bill = np.maximum(disc_bill, 0)
+mu_upper_bill = (B_bill + np.sqrt(disc_bill)) / A_bill
+mu_lower_bill = (B_bill - np.sqrt(disc_bill)) / A_bill
 
+# Minimum second-moment payoff r*
+mu_star_bill = B_bill / (A_bill + D_bill)
+sigma_star_bill = np.sqrt(
+    max((A_bill * mu_star_bill**2 - 2 * B_bill * mu_star_bill + C_bill) / D_bill, 0)
+)
+r_star_norm = np.sqrt(sigma_star_bill**2 + mu_star_bill**2)
+```
 
-v_grid, sigma_bound = hj_bound_no_positivity(mu_x, mu_q, Sigma)
-sr_ratios = sharpe_ratio_grid(mu_x, mu_q, Sigma, v_grid)
-# HJ bound / v should equal max SR
-hj_ratio  = sigma_bound / v_grid
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Minimum second-moment payoff in $R$
+    name: fig-min-second-moment-payoff
+---
+theta_circle = np.linspace(0, np.pi / 2, 400)
+sigma_circle = r_star_norm * np.cos(theta_circle)
+mu_circle = r_star_norm * np.sin(theta_circle)
 
-fig, ax = plt.subplots(figsize=(8, 4))
-ax.plot(v_grid, hj_ratio,  lw=2, label=r'$\sigma(m^v)/v$  (HJ bound / mean)')
-ax.plot(v_grid, sr_ratios, lw=2, linestyle='--', label='Max Sharpe ratio at $r_f = 1/v$')
-ax.set_xlabel('$E(m) = v$')
-ax.set_ylabel('Ratio')
-ax.set_title('Duality: HJ Bound/Mean = Maximum Sharpe Ratio')
-ax.legend()
+sigma_combined = np.concatenate([sigma_grid_bill[::-1], sigma_grid_bill])
+mu_combined = np.concatenate([mu_lower_bill[::-1], mu_upper_bill])
+
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.plot(sigma_combined, mu_combined, lw=2)
+ax.plot(sigma_circle, mu_circle, lw=2)
+ax.scatter([sigma_star_bill], [mu_star_bill], s=30, zorder=5)
+ax.set_xlim(0.0, 1.3)
+ax.set_ylim(0.0, 1.0)
+ax.set_xlabel("standard deviation")
+ax.set_ylabel("mean")
+plt.tight_layout()
+plt.show()
+```
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Mean-standard-deviation frontiers for $R$ and $R_v$
+    name: fig-frontiers-r-rv
+---
+sigma_zoom = np.linspace(sigma_min_bill * 1.001, 0.04, 500)
+disc_zoom = D_bill * (A_bill * sigma_zoom**2 - 1)
+disc_zoom = np.maximum(disc_zoom, 0)
+mu_up_zoom = (B_bill + np.sqrt(disc_zoom)) / A_bill
+mu_lo_zoom = (B_bill - np.sqrt(disc_zoom)) / A_bill
+
+sigma_comb_zoom = np.concatenate([sigma_zoom[::-1], sigma_zoom])
+mu_comb_zoom = np.concatenate([mu_lo_zoom[::-1], mu_up_zoom])
+
+# Augmented R_v: tangent from (0, 1/v) to the frontier
+mu_vertex_bill = B_bill / C_bill
+v_fig3 = 1.0 / (mu_vertex_bill + 0.006)
+rf_fig3 = 1.0 / v_fig3
+
+valid_sigma = sigma_zoom > 1e-10
+slopes_up = np.abs(mu_up_zoom[valid_sigma] - rf_fig3) / sigma_zoom[valid_sigma]
+slopes_lo = np.abs(mu_lo_zoom[valid_sigma] - rf_fig3) / sigma_zoom[valid_sigma]
+max_slope = max(np.max(slopes_up), np.max(slopes_lo))
+
+sigma_line = np.linspace(0, 0.04, 200)
+
+fig, ax = plt.subplots(figsize=(8, 5))
+ax.plot(sigma_comb_zoom, mu_comb_zoom, lw=2, label=r"$R$")
+rv_line = ax.plot(sigma_line, rf_fig3 + max_slope * sigma_line, lw=2, label=r"$R_v$")
+ax.plot(sigma_line, rf_fig3 - max_slope * sigma_line, lw=2, color=rv_line[0].get_color())
+ax.set_xlim(0.0, 0.04)
+ax.set_ylim(0.98, 1.02)
+ax.set_xlabel("standard deviation")
+ax.set_ylabel("mean")
+ax.legend(frameon=False, fontsize=9)
 plt.tight_layout()
 plt.show()
 ```
@@ -560,110 +762,47 @@ The positive bound $\sigma(\tilde{m}^v)$ satisfies:
 - $S^+$ is **convex**.
 
 Computing $\sigma(\tilde{m}^v)$ requires knowing the distribution of
-$x_a^\top \alpha^v$, not just its first two moments.  Under normality (which
-we use below as an approximation), we can compute it analytically.
+$x_a^\top \alpha^v$, not just its first two moments.  For the annual and
+quarterly figures below, we use the exact sample analogue of the truncation
+problem and solve it numerically over a grid of candidate means.
 
 ```{code-cell} ipython3
-def phi(z):
-    """Standard normal CDF."""
-    return norm.cdf(z)
-
-def phi_pdf(z):
-    """Standard normal PDF."""
-    return norm.pdf(z)
-
-
-def hj_bound_with_positivity(mu_x, mu_q, Sigma, v_grid=None):
-    """
-    Compute the Hansen-Jagannathan volatility bound WITH the positivity
-    restriction, assuming m^v = x_a' alpha^v is approximately normal.
-
-    For a normal random variable Y ~ N(mu_Y, sigma_Y^2):
-        E[max(Y,0)] = mu_Y * Phi(mu_Y/sigma_Y) + sigma_Y * phi(mu_Y/sigma_Y)
-        E[max(Y,0)^2] = (mu_Y^2 + sigma_Y^2) * Phi(mu_Y/sigma_Y)
-                       + mu_Y * sigma_Y * phi(mu_Y/sigma_Y)
-    where Phi = standard normal CDF, phi = standard normal PDF.
-
-    Parameters
-    ----------
-    mu_x   : mean payoffs  (n,)
-    mu_q   : mean prices   (n,)
-    Sigma  : covariance matrix of payoffs  (n, n)
-    v_grid : array of candidate means for m
-
-    Returns
-    -------
-    v_plus  : array of E[tilde_m^v] values (may differ from v_grid)
-    s_plus  : array of sigma[tilde_m^v] values
-    """
-    if v_grid is None:
-        v_grid = np.linspace(0.85, 1.15, 300)
-
-    n = len(mu_x)
-    inv_S = np.linalg.inv(Sigma)
-
-    means_out  = []
-    sigmas_out = []
-
-    for v in v_grid:
-        # Augmented system
-        mu_xa = np.append(mu_x, 1.0)
-        mu_qa = np.append(mu_q, v)
-
-        # Second moment matrix of x_a (use E[x_a x_a'] = Sigma_a + mu_xa mu_xa')
-        Sigma_a = np.zeros((n+1, n+1))
-        Sigma_a[:n, :n] = Sigma
-        # x_a = (x', 1)', so Cov(x_a) has zero last row/col (unit payoff has zero var)
-        Exa_xa = Sigma_a + np.outer(mu_xa, mu_xa)
-
-        try:
-            alpha = np.linalg.solve(Exa_xa, mu_qa)
-        except np.linalg.LinAlgError:
-            continue
-
-        # m^v = x_a . alpha is approximately normal with:
-        mu_mv    = float(mu_xa @ alpha)          # = v by construction
-        var_mv   = float(alpha @ Sigma_a @ alpha)
-        sigma_mv = np.sqrt(max(var_mv, 0.0))
-
-        if sigma_mv < 1e-12:
-            means_out.append(mu_mv)
-            sigmas_out.append(0.0)
-            continue
-
-        z = mu_mv / sigma_mv
-        # E[max(m^v, 0)]
-        mean_plus  = mu_mv * phi(z) + sigma_mv * phi_pdf(z)
-        # E[max(m^v, 0)^2]
-        e2_plus    = (mu_mv**2 + sigma_mv**2) * phi(z) + mu_mv * sigma_mv * phi_pdf(z)
-        sigma_plus = np.sqrt(max(e2_plus - mean_plus**2, 0.0))
-
-        means_out.append(mean_plus)
-        sigmas_out.append(sigma_plus)
-
-    return np.array(means_out), np.array(sigmas_out)
-
-
-v_plus, s_plus = hj_bound_with_positivity(mu_x, mu_q, Sigma)
-v_lin,  s_lin  = hj_bound_no_positivity(mu_x, mu_q, Sigma)
+---
+mystnb:
+  figure:
+    caption: IMRS frontier with and without positivity
+    name: fig-imrs-positivity
+---
+annual_pos_mean, annual_pos_std = positive_frontier_from_sample(
+    annual_payoffs,
+    annual_prices,
+    v_annual,
+)
 
 fig, ax = plt.subplots(figsize=(8, 5))
-ax.plot(v_lin,  s_lin,  lw=2, linestyle='--', color='steelblue',
-        label='Linear bound (no positivity)')
-ax.plot(v_plus, s_plus, lw=2, color='navy',
-        label='Positive bound (with positivity)')
-ax.fill_between(v_plus, s_plus, s_plus.max() * 1.2,
-                alpha=0.15, color='navy', label='Admissible region $S^+$')
+ax.fill_between(v_annual, sigma_annual, 2.4, alpha=0.1)
+ax.plot(v_annual, sigma_annual, "--", lw=2, label="without positivity")
 
-ax.scatter(np.mean(m_true), np.std(m_true), color='red', s=100, zorder=6,
-           label=f'True IMRS (γ=2)')
+valid_annual = np.isfinite(annual_pos_std)
+order = np.argsort(annual_pos_mean[valid_annual])
+ax.fill_between(
+    annual_pos_mean[valid_annual][order],
+    annual_pos_std[valid_annual][order],
+    2.4,
+    alpha=0.2,
+)
+ax.plot(
+    annual_pos_mean[valid_annual][order],
+    annual_pos_std[valid_annual][order],
+    lw=2,
+    label="with positivity",
+)
 
-ax.set_xlabel('Mean of IMRS  $E(m)$')
-ax.set_ylabel('Std of IMRS  $\\sigma(m)$')
-ax.set_title('HJ Bound: With and Without Positivity')
-ax.set_xlim([0.88, 1.12])
-ax.set_ylim([-0.005, 0.25])
-ax.legend(fontsize=9)
+ax.set_xlim(0.84, 1.16)
+ax.set_ylim(0.0, 2.4)
+ax.set_xlabel("mean")
+ax.set_ylabel("standard deviation")
+ax.legend(frameon=False, fontsize=9, loc="lower right")
 plt.tight_layout()
 plt.show()
 ```
@@ -702,71 +841,13 @@ With U.S. annual data, $\text{SR}_{\max} \approx 0.37$ and $\sigma_c \approx
 higher than the values of 1–5 that are typically considered plausible.
 
 ```{code-cell} ipython3
-def crra_imrs_moments(gamma, delta=0.99, mu_c=0.018, sigma_c=0.033):
-    """
-    Compute E(m) and sigma(m) for a CRRA representative consumer with
-    log-normal consumption growth.
-    """
-    # m = delta * exp(-gamma * log(c_{t+1}/c_t))
-    # log(c_{t+1}/c_t) ~ N(mu_c, sigma_c^2)
-    E_m     = delta * np.exp(-gamma * mu_c + 0.5 * gamma**2 * sigma_c**2)
-    Var_m   = (delta**2 * np.exp(-2*gamma*mu_c + 2*gamma**2*sigma_c**2)
-               - E_m**2)
-    sigma_m = np.sqrt(max(Var_m, 0))
-    return E_m, sigma_m
-
-
-# HJ bound using calibrated U.S. annual data (Campbell-Shiller 1891-1985)
-# We use two assets: S&P 500 and short bond
-# Calibrated moments from the paper (approximately)
-mu_sp500  = 1.0698   # mean annual gross stock return
-mu_bond   = 1.0100   # mean annual gross bond return
-std_sp500 = 0.167    # std of annual stock return
-std_bond  = 0.057    # std of annual bond return
-rho_sb    = -0.02    # correlation stock-bond
-
-Sigma_cal = np.array([
-    [std_sp500**2, rho_sb * std_sp500 * std_bond],
-    [rho_sb * std_sp500 * std_bond, std_bond**2]
-])
-mu_x_cal  = np.array([mu_sp500, mu_bond])
-mu_q_cal  = np.ones(2)   # unit-price returns
-
-v_lin_cal, s_lin_cal = hj_bound_no_positivity(mu_x_cal, mu_q_cal, Sigma_cal,
-                                               v_grid=np.linspace(0.88, 1.12, 300))
-
-# CRRA model points for different gamma values
-gammas = [0, 1, 2, 5, 10, 20, 30]
-crra_pts = [crra_imrs_moments(g) for g in gammas]
-
-fig, ax = plt.subplots(figsize=(9, 6))
-ax.plot(v_lin_cal, s_lin_cal, lw=2, color='steelblue',
-        label='HJ bound (U.S. annual data, calibrated)')
-ax.fill_betweenx(np.linspace(0, 0.6, 300),
-                 0.88, 1.12, alpha=0.06, color='steelblue')
-
-colors = plt.cm.plasma(np.linspace(0.1, 0.9, len(gammas)))
-for (E_m, s_m), g, c in zip(crra_pts, gammas, colors):
-    ax.scatter(E_m, s_m, color=c, s=90, zorder=5)
-    ax.annotate(f'γ={g}', (E_m, s_m), textcoords='offset points',
-                xytext=(6, 3), fontsize=8, color=c)
-
-ax.set_xlabel('$E(m)$', fontsize=12)
-ax.set_ylabel('$\\sigma(m)$', fontsize=12)
-ax.set_title('HJ Bound and the Equity Premium Puzzle\n'
-             'CRRA model: most γ values are in the inadmissible region', fontsize=11)
-ax.set_xlim([0.88, 1.12])
-ax.set_ylim([-0.01, 0.55])
-ax.legend(fontsize=10)
-plt.tight_layout()
-plt.show()
-
-print("CRRA model moments vs. HJ bound:")
-print(f"{'gamma':>6}  {'E(m)':>8}  {'sigma(m)':>10}  {'sigma/E':>8}  {'above bound':>12}")
-for (E_m, s_m), g in zip(crra_pts, gammas):
-    bound_val = float(np.interp(E_m, v_lin_cal, s_lin_cal))
+print("CRRA points from Figure 1")
+print(f"{'gamma':>6}  {'E(m)':>8}  {'sigma(m)':>10}  {'above bound':>12}")
+for g, E_m, s_m in zip(annual_gamma_grid, annual_crra_mean, annual_crra_std):
+    bound_val = float(np.interp(E_m, v_annual, sigma_annual))
     flag = '✓ inside' if s_m >= bound_val else '✗ outside'
-    print(f"{g:>6}  {E_m:>8.4f}  {s_m:>10.4f}  {s_m/E_m:>8.4f}  {flag:>12}")
+    if g in {0, 1, 2, 5, 10, 20, 30}:
+        print(f"{g:>6}  {E_m:>8.4f}  {s_m:>10.4f}  {flag:>12}")
 ```
 
 ## Time-Nonseparable Preferences
@@ -793,142 +874,201 @@ The paper shows (Figure 5) that habit persistence ($\theta < 0$) dramatically
 increases $\sigma(m)$ for given $\gamma$, while local durability ($\theta > 0$)
 barely reduces it.
 
+The exact Gallant-Tauchen state process used in the paper is not bundled with
+the lecture sources, so the code below combines a local monthly payoff proxy
+with the same simple nonseparable preference calibration used to reproduce the
+paper's qualitative separation of boxes, circles, and triangles.
+
 ```{code-cell} ipython3
-def simulate_nonseparable_imrs(T=20000, gamma=-5, theta=0.0, delta=1.0,
-                                mu_c=0.002, sigma_c=0.0055, seed=1):
-    """
-    Simulate the IMRS for a time-nonseparable consumer with service flow
-    s_t = c_t + theta * c_{t-1}  (monthly calibration).
+monthly_panel = load_monthly_proxy_panel()
+monthly_payoffs, monthly_prices = build_monthly_payoff_menu(monthly_panel)
 
-    Uses a simple AR(1) approximation for log consumption growth.
-    """
+v_monthly = np.linspace(0.975, 1.0, 100)
+mu_x_monthly, mu_q_monthly, Sigma_monthly = compute_moments(monthly_payoffs, monthly_prices)
+v_m_nopositivity, sigma_m_nopositivity = hj_bound_no_positivity(
+    mu_x_monthly, mu_q_monthly, Sigma_monthly, v_grid=v_monthly
+)
+
+
+def simulate_nonseparable_imrs(
+    T=20_000,
+    gamma=-5,
+    theta=0.0,
+    delta=1.0,
+    mu_c=0.0045,
+    sigma_c=0.0055,
+    seed=1,
+):
     rng = np.random.default_rng(seed)
-    gc = np.exp(mu_c + sigma_c * rng.standard_normal(T + 2))  # gross c growth
+    growth = np.exp(mu_c + sigma_c * rng.standard_normal(T + 2))
 
-    # Build levels: c_t+1 = c_t * gc_t+1,  start at 1
     c = np.ones(T + 2)
     for t in range(T + 1):
-        c[t+1] = c[t] * gc[t+1]
+        c[t + 1] = c[t] * growth[t + 1]
 
-    # Service flow
-    s = c[1:] + theta * c[:-1]   # length T+1
-
-    # Marginal utility of consumption good:
-    # mu_t = (s_t)^gamma + theta * delta * E[(s_{t+1})^gamma | I_t]
-    # For simplicity, approximate E[(s_{t+1})^gamma | It] ≈ (s_{t+1})^gamma
-    # (true for a deterministic approximation or in simulation)
-    s_gamma = s ** gamma           # length T+1
-
-    # IMRS: ratio of scaled marginal utilities at t+1 and t
-    mu_num   = s_gamma[1:]   + theta * delta * s_gamma[2:] if T + 2 > len(s_gamma) \
-               else s_gamma[1:T+1] + theta * delta * np.append(s_gamma[2:T+1], s_gamma[-1])
-    mu_denom = s_gamma[:T]  + theta * delta * s_gamma[1:T+1]
+    s = c[1:] + theta * c[:-1]
+    s_gamma = s ** gamma
+    mu_num = s_gamma[1:T + 1] + theta * delta * np.append(s_gamma[2:T + 1], s_gamma[-1])
+    mu_denom = s_gamma[:T] + theta * delta * s_gamma[1:T + 1]
 
     m = delta * mu_num / mu_denom
-    return m[~np.isnan(m) & (np.abs(m) < 1e6)]
+    return m[np.isfinite(m) & (np.abs(m) < 1e6)]
+```
 
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: IMRS frontier using monthly data
+    name: fig-imrs-monthly
+---
+fig, ax = plt.subplots(figsize=(8, 5))
 
-fig, ax = plt.subplots(figsize=(9, 5))
+ax.fill_between(v_m_nopositivity, sigma_m_nopositivity, 0.4, alpha=0.15)
+ax.plot(v_m_nopositivity, sigma_m_nopositivity, lw=2)
 
-# Use calibrated annual HJ bound
-ax.plot(v_lin_cal, s_lin_cal, lw=2.5, color='steelblue',
-        label='HJ bound (annual data)')
-
-for theta, marker, color, label in [
-    (0.0,  'o', 'black',  'θ=0 (time-separable)'),
-    (0.5,  's', 'green',  'θ=+0.5 (durability)'),
-    (-0.5, '^', 'crimson','θ=−0.5 (habit)'),
+for theta, marker, label in [
+    (0.0, "s", r"$\theta = 0$"),
+    (0.5, "o", r"$\theta = 0.5$"),
+    (-0.5, "^", r"$\theta = -0.5$"),
 ]:
     pts = []
-    for g in [0, -1, -2, -5, -8, -10, -14]:
-        m_sim = simulate_nonseparable_imrs(gamma=g, theta=theta)
-        if len(m_sim) < 100:
-            continue
-        Em = float(np.mean(m_sim))
-        sm = float(np.std(m_sim))
-        if 0.88 <= Em <= 1.12 and sm < 0.55:
-            pts.append((Em, sm))
-    if pts:
-        pts = np.array(pts)
-        ax.plot(pts[:, 0], pts[:, 1], marker=marker, color=color,
-                lw=1.2, ms=6, label=label)
+    for gamma in range(0, -15, -1):
+        m_sim = simulate_nonseparable_imrs(gamma=gamma, theta=theta, seed=abs(gamma) + 5)
+        pts.append((m_sim.mean(), m_sim.std()))
+    pts = np.asarray(pts)
+    ax.scatter(
+        pts[:, 0],
+        pts[:, 1],
+        marker=marker,
+        s=18,
+        facecolors="white",
+        edgecolors="black",
+        linewidths=0.8,
+        label=label,
+    )
 
-ax.set_xlabel('$E(m)$', fontsize=12)
-ax.set_ylabel('$\\sigma(m)$', fontsize=12)
-ax.set_title('Nonseparable Preferences and the HJ Bound\n'
-             '(monthly calibration, varying γ and θ)', fontsize=11)
-ax.set_xlim([0.88, 1.12])
-ax.set_ylim([-0.01, 0.55])
-ax.legend(fontsize=9)
+monthly_log_point = np.array([np.mean(1.0 / monthly_panel["stock"]), np.std(1.0 / monthly_panel["stock"])])
+ax.scatter(monthly_log_point[0], monthly_log_point[1], marker="x", s=50, color="black")
+
+ax.set_xlim(0.975, 1.2)
+ax.set_ylim(0.0, 0.4)
+ax.set_xlabel("mean")
+ax.set_ylabel("standard deviation")
+ax.legend(frameon=False, fontsize=9, loc="upper left")
 plt.tight_layout()
 plt.show()
 ```
 
-## How Many Assets Does the Bound Need?
+## Treasury Bill Data and Monetary Models
 
-One practical question the paper addresses (Section III.C) via the duality
-result is: should we use all available assets to compute the bound, or can we
-reduce dimensionality using **factor analysis**?
-
-The answer:
-- If asset pricing can be approximated by a **factor model** — payoffs have a
-  factor structure and the pricing relation holds exactly for the factors —
-  then the bound computed from the factors equals that from the full portfolio
-  space.
-- If factor pricing holds only approximately, information is lost by dimension
-  reduction and the bound weakens.
-
-We illustrate this below by comparing bounds computed from 2 assets vs. 8
-instruments as in the paper (scaled returns using lagged instruments).
+Figure 6 in the paper uses monthly prices on 3-, 6-, 9-, and 12-month
+discount bonds to construct real **quarterly** holding-period returns.  The
+original CRSP bill file is not distributed with the lecture, so we build a local
+proxy from FRED Treasury yields and the same real-consumption deflator used
+above.
 
 ```{code-cell} ipython3
-def add_instruments(returns, n_lags=2):
-    """
-    Expand the payoff space by scaling original returns by lagged values,
-    mimicking the 8-asset construction in the paper.
+quarterly_payoffs = load_quarterly_bill_proxy().to_numpy()
+quarterly_prices = np.ones_like(quarterly_payoffs)
 
-    Returns array of shape (T - n_lags, k) where k = n_assets * (1 + n_lags).
-    """
-    T, n = returns.shape
-    payoff_list = [returns[n_lags:]]
-    for lag in range(1, n_lags + 1):
-        for j in range(n):
-            payoff_list.append(
-                (returns[n_lags:, j] * returns[n_lags - lag : T - lag, j])[:, None]
-            )
-    return np.hstack(payoff_list)
+mu_x_quarterly, mu_q_quarterly, Sigma_quarterly = compute_moments(
+    quarterly_payoffs, quarterly_prices
+)
+v_quarterly, sigma_quarterly = hj_bound_no_positivity(
+    mu_x_quarterly,
+    mu_q_quarterly,
+    Sigma_quarterly,
+    v_grid=np.linspace(0.985, 1.005, 200),
+)
+quarterly_pos_mean, quarterly_pos_std = positive_frontier_from_sample(
+    quarterly_payoffs,
+    quarterly_prices,
+    v_quarterly,
+)
+```
 
-
-# Simulate 2-asset economy
-returns2, prices2, m_true2 = simulate_economy(T=10000, gamma=10.0, seed=99)
-
-# Compute moments for 2 assets and 6 instruments (= 8-asset version)
-returns8 = add_instruments(returns2, n_lags=3)
-mu_q8    = np.hstack([np.ones(2), returns2[2:, 0], returns2[2:, 0],
-                       returns2[3:, 1], returns2[3:, 1],
-                       returns2[1:(len(returns8)+1), 0],
-                       returns2[2:(len(returns8)+2), 1]])[:returns8.shape[1]]
-
-mu_x2_, mu_q2_, Sigma2_ = compute_moments(returns2, prices2)
-mu_x8_, mu_q8_, Sigma8_ = compute_moments(returns8)
-
-v2, s2 = hj_bound_no_positivity(mu_x2_, mu_q2_, Sigma2_)
-v8, s8 = hj_bound_no_positivity(mu_x8_, mu_q8_, Sigma8_)
-
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: IMRS frontier using quarterly returns
+    name: fig-imrs-quarterly
+---
 fig, ax = plt.subplots(figsize=(8, 5))
-ax.plot(v2, s2, lw=2, label='2 assets (no instruments)', color='steelblue')
-ax.plot(v8, s8, lw=2, linestyle='--', label='8 assets (with instruments)',
-        color='darkorange')
-ax.scatter(np.mean(m_true2), np.std(m_true2), color='red', s=100, zorder=5,
-           label='True IMRS (γ=10)')
-ax.set_xlabel('$E(m)$')
-ax.set_ylabel('$\\sigma(m)$')
-ax.set_title('More Assets = Tighter Bound\n(instruments expand the SDF frontier)')
-ax.set_xlim([0.88, 1.12])
-ax.set_ylim([-0.01, 0.6])
-ax.legend()
+ax.fill_between(v_quarterly, sigma_quarterly, 2.0, alpha=0.1)
+ax.plot(v_quarterly, sigma_quarterly, "--", lw=2, label="without positivity")
+
+valid_quarterly = np.isfinite(quarterly_pos_std)
+order = np.argsort(quarterly_pos_mean[valid_quarterly])
+ax.fill_between(
+    quarterly_pos_mean[valid_quarterly][order],
+    quarterly_pos_std[valid_quarterly][order],
+    2.0,
+    alpha=0.2,
+)
+ax.plot(
+    quarterly_pos_mean[valid_quarterly][order],
+    quarterly_pos_std[valid_quarterly][order],
+    lw=2,
+    label="with positivity",
+)
+
+ax.set_xlim(0.985, 1.005)
+ax.set_ylim(0.0, 2.0)
+ax.set_xlabel("mean")
+ax.set_ylabel("standard deviation")
+ax.legend(frameon=False, fontsize=9, loc="lower right")
 plt.tight_layout()
 plt.show()
+```
+
+## Simulation Helper for the Exercises
+
+The exercises below still use a small simulated exchange economy to verify the
+projection and variance-decomposition logic algebraically.
+
+```{code-cell} ipython3
+def simulate_economy(
+    T=10_000,
+    gamma=2.0,
+    delta=0.99,
+    mu_c=0.018,
+    sigma_c=0.033,
+    mu_d=0.02,
+    sigma_d=0.12,
+    rho=0.3,
+    seed=42,
+):
+    rng = np.random.default_rng(seed)
+
+    cov = np.array(
+        [
+            [sigma_c**2, rho * sigma_c * sigma_d],
+            [rho * sigma_c * sigma_d, sigma_d**2],
+        ]
+    )
+    shocks = rng.multivariate_normal([0.0, 0.0], cov, T)
+
+    gc = np.exp(mu_c + shocks[:, 0])
+    gd = np.exp(mu_d + shocks[:, 1])
+    m_true = delta * gc ** (-gamma)
+
+    rf = 1.0 / np.mean(m_true)
+    stock_raw = gd
+    stock = stock_raw / np.mean(m_true * stock_raw)
+    bond = np.full(T, rf)
+
+    returns = np.column_stack([stock, bond])
+    prices = np.ones((T, 2))
+    return returns, prices, m_true
+
+
+def crra_imrs_moments(gamma, delta=0.99, mu_c=0.018, sigma_c=0.033):
+    E_m = delta * np.exp(-gamma * mu_c + 0.5 * gamma**2 * sigma_c**2)
+    var_m = delta**2 * np.exp(-2.0 * gamma * mu_c + 2.0 * gamma**2 * sigma_c**2) - E_m**2
+    sigma_m = np.sqrt(max(var_m, 0.0))
+    return E_m, sigma_m
 ```
 
 ## Exercises
@@ -1070,7 +1210,7 @@ gammas_plot = [1, 2, 5, 10, 20]
 crra_moments = [(g, *crra_imrs_moments(g, delta=0.95)) for g in gammas_plot]
 
 fig, ax = plt.subplots(figsize=(9, 6))
-ax.plot(v_hist, s_hist, lw=2.5, color='steelblue', label='HJ bound (historical)')
+ax.plot(v_hist, s_hist, lw=2, color='steelblue', label='HJ bound (historical)')
 ax.fill_betweenx(np.linspace(0, 0.6, 400), v_hist.min(), v_hist.max(),
                  alpha=0.07, color='steelblue')
 
@@ -1080,10 +1220,8 @@ for (g, E_m, s_m), c in zip(crra_moments, cmap):
     ax.annotate(f'γ={g}', (E_m, s_m), xytext=(8, 3),
                 textcoords='offset points', fontsize=9, color=c)
 
-ax.set_xlabel('$E(m)$', fontsize=12)
-ax.set_ylabel('$\\sigma(m)$', fontsize=12)
-ax.set_title('HJ Bound vs. CRRA Model\n'
-             'Annual U.S. data · δ=0.95 · varying γ', fontsize=11)
+ax.set_xlabel('$E(m)$')
+ax.set_ylabel('$\\sigma(m)$')
 ax.set_xlim([0.90, 1.10])
 ax.set_ylim([-0.01, 0.55])
 ax.legend(fontsize=10)
@@ -1188,7 +1326,6 @@ ax.scatter(np.mean(m_true5k), np.std(m_true5k), color='black', s=100, zorder=5,
            label='True IMRS (γ=8)')
 ax.set_xlabel('$E(m)$')
 ax.set_ylabel('$\\sigma(m)$')
-ax.set_title('Tighter HJ Bounds with More Assets/Instruments')
 ax.set_xlim([0.90, 1.10])
 ax.set_ylim([-0.01, 0.55])
 ax.legend(fontsize=9)
