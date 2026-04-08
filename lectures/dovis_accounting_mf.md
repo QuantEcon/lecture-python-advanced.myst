@@ -1507,13 +1507,9 @@ Plot $\phi^{fd}(b')$ and the associated fiscal-dominance value $V^{fd}(b', \xi_1
 :class: dropdown
 ```
 
+The following code plots the fiscal-dominance policy $\phi^{fd}(b')$ and the associated value $V^{fd}(b', \xi_1)$ from continuation values.
+
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: Fiscal-dominance policy from continuation values
-    name: fig-fd-policy
----
 p = params_la
 b_prime_grid = B_grid * 0.5
 ξ_mid = n_ξ_coarse // 2
@@ -1556,13 +1552,9 @@ Plot the recovered $\xi$ path for each and assess convergence.
 :class: dropdown
 ```
 
+The following code runs the particle filter with different numbers of particles and plots the recovered paths to assess convergence.
+
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: Particle filter sensitivity
-    name: fig-pf-sensitivity
----
 fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 
 for i, (N_part, color) in enumerate(zip(
