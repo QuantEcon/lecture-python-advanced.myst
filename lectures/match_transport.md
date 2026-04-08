@@ -68,8 +68,8 @@ Given a **cost function** $c \colon X \times Y \rightarrow \mathbb{R}$, the (dis
 $$
     \begin{aligned}
         \min_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy} \\
-        \text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
-        & \sum_{y \in Y} \mu_{xy} = m_y 
+        \text{s.t. }& \sum_{y \in Y} \mu_{xy} = n_x \\
+        & \sum_{x \in X} \mu_{xy} = m_y 
     \end{aligned}
 $$
 
