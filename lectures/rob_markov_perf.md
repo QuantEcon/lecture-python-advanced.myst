@@ -568,12 +568,13 @@ def nnash_robust(A, C, B1, B2, R1, R2, Q1, Q2, S1, S2, W1, W2, M1, M2,
     k_1 = B1.shape[1]
     k_2 = B2.shape[1]
 
+    rng = np.random.default_rng(0)
     v1 = np.eye(k_1)
     v2 = np.eye(k_2)
     P1 = np.eye(n) * 1e-5
     P2 = np.eye(n) * 1e-5
-    F1 = np.random.randn(k_1, n)
-    F2 = np.random.randn(k_2, n)
+    F1 = rng.standard_normal((k_1, n))
+    F2 = rng.standard_normal((k_2, n))
 
 
     for it in range(max_iter):

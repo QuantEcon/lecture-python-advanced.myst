@@ -194,6 +194,16 @@ Setting $y_{t+1} = 1$ (a risk-free bond) in {eq}`bhs_pricing_eq` yields the reci
 
 ### Hansen--Jagannathan bounds
 
+```{note}
+The derivation here uses the Cauchy-Schwarz inequality, which yields the bound
+directly from the pricing equation for excess returns.
+
+{doc}`hansen_jagannathan_1991` derives the same
+bound by projecting $m$ onto the space of traded payoffs, which additionally
+yields the duality with the mean-variance frontier and the tighter
+positivity-restricted bound.
+```
+
 Let $R_{t+1}^e$ denote the gross return on a risky asset (e.g., the market portfolio) and $R_{t+1}^f$ the gross return on a one-period risk-free bond.
 
 The **excess return** is

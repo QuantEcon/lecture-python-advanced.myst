@@ -1685,7 +1685,7 @@ We use the same technology and preference parameters.
 We set household-specific parameters below and impose $\sum_j \phi_j = 1$.
 
 ```{code-cell} ipython3
-np.random.seed(42)
+rng = np.random.default_rng(42)
 N = 100
 
 # Aggregate endowment process parameters
@@ -1695,8 +1695,8 @@ N = 100
 
 
 # Mean endowments α_j and aggregate exposure φ_j
-αs = np.random.uniform(3.0, 5.0, N)
-φs_raw = np.random.uniform(0.5, 1.5, N)
+αs = rng.uniform(3.0, 5.0, N)
+φs_raw = rng.uniform(0.5, 1.5, N)
 φs = φs_raw / np.sum(φs_raw)  # normalize so Σ φ_j = 1
 
 # Rank households by mean endowment to assign idiosyncratic risk

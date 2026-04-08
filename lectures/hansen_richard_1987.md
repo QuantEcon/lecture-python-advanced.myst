@@ -97,7 +97,6 @@ from scipy.optimize import minimize
 from scipy import stats
 import pandas as pd
 
-np.random.seed(42)
 ```
 
 ## Data generation

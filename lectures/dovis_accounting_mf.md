@@ -1323,19 +1323,19 @@ def particle_filter(y_data, key, N_particles,
 We demonstrate the particle filter on synthetic data that mimics an institutional disinflation: inflation declines from roughly 30% to 5% while debt rises from 20% to 45% of GDP.
 
 ```{code-cell} ipython3
-np.random.seed(0)
+rng = np.random.default_rng(0)
 T_sim = 60
 t_reform = 25
 
 inflation_data = np.concatenate([
-    25 + 5 * np.random.randn(t_reform),
-    np.linspace(25, 5, 10) + 2 * np.random.randn(10),
-    5 + 2 * np.random.randn(T_sim - t_reform - 10)
+    25 + 5 * rng.standard_normal(t_reform),
+    np.linspace(25, 5, 10) + 2 * rng.standard_normal(10),
+    5 + 2 * rng.standard_normal(T_sim - t_reform - 10)
 ])
 debt_data = np.concatenate([
-    20 + 2 * np.random.randn(t_reform),
-    np.linspace(20, 40, 10) + 3 * np.random.randn(10),
-    40 + 3 * np.random.randn(T_sim - t_reform - 10)
+    20 + 2 * rng.standard_normal(t_reform),
+    np.linspace(20, 40, 10) + 3 * rng.standard_normal(10),
+    40 + 3 * rng.standard_normal(T_sim - t_reform - 10)
 ])
 
 y_data = jnp.column_stack([inflation_data, debt_data])
