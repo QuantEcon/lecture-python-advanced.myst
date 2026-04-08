@@ -150,6 +150,7 @@ def crra_points_from_consumption(consumption, β=0.95, γ_grid=None):
     growth = np.asarray(consumption[1:] / consumption[:-1], dtype=float)
     means = []
     sigmas = []
+    
 
     for γ in γ_grid:
         m = β * growth ** γ

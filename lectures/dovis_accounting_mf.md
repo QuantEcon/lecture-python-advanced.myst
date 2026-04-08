@@ -47,6 +47,7 @@ They thought about them  at the beginning of the Reagan administration, when the
 
 Sargent and Wallace's title, "Some Unpleasant Monetarist Arithmetic," expressed the idea that in the face of a persistent net-of-interest government deficit, efforts to reduce inflation through tight monetary policy work only temporarily, if at all. 
 
+
 That is   because they lead to higher  government debt and thus greater gross-of-interest government deficits that must be financed  in the future.
 ```
 
@@ -102,6 +103,7 @@ In addition to what's in Anaconda, this lecture will need the following librarie
 tags: [hide-output]
 ---
 !pip install jax
+
 ```
 
 
