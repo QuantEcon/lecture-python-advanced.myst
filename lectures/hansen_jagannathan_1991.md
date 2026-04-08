@@ -111,12 +111,12 @@ $$
 **Restriction 2** (Positivity):
 
 $$
-m > 0.
+m \geq 0.
 $$
 
 Restriction 1 must hold in any model consistent with consumer optimality.
 
-Restriction 2 rules out arbitrage opportunities: {doc}`hansen_richard_1987` show that no-arbitrage implies $m > 0$ with probability one.
+Restriction 2 rules out arbitrage opportunities: {doc}`hansen_richard_1987` show that no-arbitrage implies $m > 0$ with probability one, so in particular $m \geq 0$.
 
 Together, they imply that
 $[E(m), \sigma(m)]$ must lie in a certain admissible region in the
@@ -131,10 +131,10 @@ If the period utility function is $U(c) = c^{1+\gamma}/(1+\gamma)$ for
 $\gamma < 0$, then
 
 $$
-m = \delta \left(\frac{c_{t+1}}{c_t}\right)^{\gamma},
+m = \beta \left(\frac{c_{t+1}}{c_t}\right)^{\gamma},
 $$
 
-where $\delta$ is a subjective discount factor and $-\gamma > 0$ is the
+where $\beta$ is a subjective discount factor and $-\gamma > 0$ is the
 coefficient of relative risk aversion.
 
 Later we evaluate this model by computing $[E(m), \sigma(m)]$ from consumption
@@ -480,7 +480,7 @@ def mean_variance_frontier(μ_x, Σ, n_points=300):
     c_min = B / C
     c_grid = np.linspace(c_min - 0.10, c_min + 0.15, n_points)
 
-    var_c = (A * c_grid**2 - 2 * B * c_grid + C) / D
+    var_c = (C * c_grid**2 - 2 * B * c_grid + A) / D
     std_c = np.sqrt(np.maximum(var_c, 0))
     return c_grid, std_c
 
@@ -624,7 +624,7 @@ def load_quarterly_bill():
 quarterly_bill_data = load_quarterly_bill().to_numpy()
 μ_bill = quarterly_bill_data.mean(axis=0)
 Σ_bill = np.cov(quarterly_bill_data.T, bias=True)
-Σ_inv_bill = np.linalg.inv(Σ_bill)
+Σ_inv_bill = np.linalg.pinv(Σ_bill)
 ones_bill = np.ones(len(μ_bill))
 
 A_bill = μ_bill @ Σ_inv_bill @ μ_bill
@@ -632,19 +632,19 @@ B_bill = μ_bill @ Σ_inv_bill @ ones_bill
 C_bill = ones_bill @ Σ_inv_bill @ ones_bill
 D_bill = A_bill * C_bill - B_bill**2
 
-# Frontier: σ^2 = (A*μ^2 - 2B*μ + C) / D => μ = (B +/- sqrt(D*(A*σ^2 - 1))) / A
-σ_min_bill = 1.0 / np.sqrt(A_bill)
+# Frontier: σ^2 = (C*μ^2 - 2B*μ + A) / D => μ = (B +/- sqrt(D*(C*σ^2 - 1))) / C
+σ_min_bill = 1.0 / np.sqrt(C_bill)
 σ_grid_bill = np.linspace(σ_min_bill * 1.001, 1.3, 1000)
-disc_bill = D_bill * (A_bill * σ_grid_bill**2 - 1)
+disc_bill = D_bill * (C_bill * σ_grid_bill**2 - 1)
 disc_bill = np.maximum(disc_bill, 0)
-μ_upper_bill = (B_bill + np.sqrt(disc_bill)) / A_bill
-μ_lower_bill = (B_bill - np.sqrt(disc_bill)) / A_bill
+μ_upper_bill = (B_bill + np.sqrt(disc_bill)) / C_bill
+μ_lower_bill = (B_bill - np.sqrt(disc_bill)) / C_bill
 
 # Minimum second-moment payoff r*
-μ_star_bill = B_bill / (A_bill + D_bill)
+μ_star_bill = B_bill / (C_bill + D_bill)
 σ_star_bill = np.sqrt(
     max(
-    (A_bill * μ_star_bill**2 - 2 * B_bill * μ_star_bill + C_bill) / D_bill, 0)
+    (C_bill * μ_star_bill**2 - 2 * B_bill * μ_star_bill + A_bill) / D_bill, 0)
 )
 r_star_norm = np.sqrt(σ_star_bill**2 + μ_star_bill**2)
 ```
@@ -697,10 +697,10 @@ mystnb:
     name: fig-frontiers-r-rv
 ---
 σ_zoom = np.linspace(σ_min_bill * 1.001, 0.04, 500)
-disc_zoom = D_bill * (A_bill * σ_zoom**2 - 1)
+disc_zoom = D_bill * (C_bill * σ_zoom**2 - 1)
 disc_zoom = np.maximum(disc_zoom, 0)
-μ_up_zoom = (B_bill + np.sqrt(disc_zoom)) / A_bill
-μ_lo_zoom = (B_bill - np.sqrt(disc_zoom)) / A_bill
+μ_up_zoom = (B_bill + np.sqrt(disc_zoom)) / C_bill
+μ_lo_zoom = (B_bill - np.sqrt(disc_zoom)) / C_bill
 
 σ_comb_zoom = np.concatenate([σ_zoom[::-1], σ_zoom])
 μ_comb_zoom = np.concatenate([μ_lo_zoom[::-1], μ_up_zoom])
@@ -742,14 +742,16 @@ Hansen and Jagannathan show that the minimum variance **nonnegative** $m$
 satisfying Restriction 1 is of the form
 
 $$
-\tilde{m}^v = \left(x_a^\top \alpha^v\right)^+ = \max\!\left\{x_a^\top \alpha^v,\ 0\right\},
+\tilde{m}^v = \left(x_a^\top \tilde{\alpha}^v\right)^+ = \max\!\left\{x_a^\top \tilde{\alpha}^v,\ 0\right\},
 $$
 
 which is the payoff on a **European call (or put) option** on a portfolio of
 the assets.
 
-The option truncates the negative part of $m^v$, reducing its variance while
-preserving the pricing restrictions.
+Note that $\tilde{\alpha}^v$ is *not* the same coefficient vector as
+$\alpha^v$ from the unconstrained problem: the positivity constraint changes
+the optimal portfolio weights, and the positive part is then applied to the
+result.
 
 The positive bound $\sigma(\tilde{m}^v)$ satisfies:
 
@@ -758,7 +760,7 @@ The positive bound $\sigma(\tilde{m}^v)$ satisfies:
 - $S^+$ is **convex**.
 
 Computing $\sigma(\tilde{m}^v)$ requires knowing the distribution of
-$x_a^\top \alpha^v$, not just its first two moments.
+$x_a^\top \tilde{\alpha}^v$, not just its first two moments.
 
 For the figures below, we use the exact sample analogue of the truncation
 problem and solve it numerically over a grid of candidate means.
@@ -909,17 +911,17 @@ The HJ bound provides a nonparametric restatement of the equity premium puzzle.
 For the bound to be met, the IMRS of the representative agent must be far more
 volatile than consumption growth alone can generate under standard preferences.
 
-For a CRRA consumer with risk aversion $\gamma$ ,
+For a CRRA consumer with risk aversion $-\gamma$ (recall $\gamma < 0$),
 
 $$
-m = \delta \left(\frac{c_{t+1}}{c_t}\right)^{\gamma}.
+m = \beta \left(\frac{c_{t+1}}{c_t}\right)^{\gamma}.
 $$
 
 If consumption growth is lognormal with mean $\mu_c$ and standard deviation
 $\sigma_c$, then
 
 $$
-E(m) = \delta \exp\!\left(\gamma \mu_c + \tfrac{1}{2} \gamma^2 \sigma_c^2\right),
+E(m) = \beta \exp\!\left(\gamma \mu_c + \tfrac{1}{2} \gamma^2 \sigma_c^2\right),
 \quad
 \frac{\sigma(m)}{E(m)} = \sqrt{\exp\!\left(\gamma^2 \sigma_c^2\right) - 1}
 \approx |\gamma| \sigma_c.
@@ -942,9 +944,15 @@ The table below reports $E(m)$ and $\sigma(m)$ for selected values of $\gamma$
 and indicates whether the implied IMRS lies inside the admissible region.
 
 ```{code-cell} ipython3
+# Use the positivity-restricted frontier for the bound
+valid_pos = np.isfinite(annual_pos_std)
+pos_order = np.argsort(annual_pos_mean[valid_pos])
+pos_mean_sorted = annual_pos_mean[valid_pos][pos_order]
+pos_std_sorted = annual_pos_std[valid_pos][pos_order]
+
 rows = []
 for g, E_m, s_m in zip(annual_γ_grid, annual_crra_mean, annual_crra_std):
-    bound_val = float(np.interp(E_m, v_annual, σ_annual))
+    bound_val = float(np.interp(E_m, pos_mean_sorted, pos_std_sorted))
     if g in {0, -1, -2, -5, -10, -15, -20, -25, -30}:
         rows.append({'γ': g, 'E(m)': round(E_m, 4),
                      'σ(m)': round(s_m, 4),
@@ -972,8 +980,8 @@ The IMRS becomes more complex because it depends on current and future
 marginal utilities:
 
 $$
-m = \delta \frac{(s_{t+1})^\gamma + \theta \delta E[(s_{t+2})^\gamma \mid I_{t+1}]}
-               {(s_t)^\gamma + \theta \delta E[(s_{t+1})^\gamma \mid I_t]}.
+m = \beta \frac{(s_{t+1})^\gamma + \theta \beta E[(s_{t+2})^\gamma \mid I_{t+1}]}
+               {(s_t)^\gamma + \theta \beta E[(s_{t+1})^\gamma \mid I_t]}.
 $$
 
 The paper shows (Figure 5) that habit persistence ($\theta < 0$) dramatically
@@ -984,8 +992,7 @@ Local durability ($\theta > 0$) barely reduces it.
 The paper's Figure 5 uses a consumption process estimated by Gallant and
 Tauchen, which is not bundled with this lecture.
 
-Instead, we use monthly U.S. stock and bill returns as payoffs, augmented by
-lagged instruments to tighten the bound.
+Instead, we use monthly U.S. stock and bill returns as the two base payoffs.
 
 We then simulate the nonseparable IMRS for three values of $\theta$ (0, 0.5,
 $-0.5$) across a range of $\gamma < 0$ values, and plot the resulting
