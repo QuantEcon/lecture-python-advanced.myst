@@ -131,10 +131,11 @@ If the period utility function is $U(c) = c^{1+\gamma}/(1+\gamma)$ for
 $\gamma < 0$, then
 
 $$
-m = \delta \left(\frac{c_{t+1}}{c_t}\right)^{-\gamma},
+m = \delta \left(\frac{c_{t+1}}{c_t}\right)^{\gamma},
 $$
 
-where $\delta$ is a subjective discount factor.
+where $\delta$ is a subjective discount factor and $-\gamma > 0$ is the
+coefficient of relative risk aversion.
 
 Later we evaluate this model by computing $[E(m), \sigma(m)]$ from consumption
 data for various values of $\gamma$ and checking whether the implied pairs lie
@@ -142,16 +143,16 @@ inside the admissible region.
 
 ```{code-cell} ipython3
 def crra_points_from_consumption(consumption, β=0.95, γ_grid=None):
-    """Mean and std of IMRS m = β(c_{t+1}/c_t)^{-γ} for each γ."""
+    """Mean and std of IMRS m = β(c_{t+1}/c_t)^γ for each γ < 0."""
     if γ_grid is None:
-        γ_grid = np.arange(31)
+        γ_grid = -np.arange(31)
 
     growth = np.asarray(consumption[1:] / consumption[:-1], dtype=float)
     means = []
     sigmas = []
 
     for γ in γ_grid:
-        m = β * growth ** (-γ)
+        m = β * growth ** γ
         means.append(m.mean())
         sigmas.append(m.std())
 
@@ -519,7 +520,7 @@ v_annual, σ_annual = hj_bound_no_positivity(
     μ_x_annual, μ_q_annual, Σ_annual, v_grid=np.linspace(0.84, 1.16, 400)
 )
 
-annual_γ_grid = np.arange(31)
+annual_γ_grid = -np.arange(31)
 annual_crra_mean, annual_crra_std = crra_points_from_consumption(
     annual_consumption, β=0.95, γ_grid=annual_γ_grid
 )
@@ -575,12 +576,10 @@ The shaded region is the admissible set $S$: any valid IMRS must have a
 $[E(m), \sigma(m)]$ pair inside it.  
 
 The squares show the IMRS implied by
-CRRA preferences $m = \beta (c_{t+1}/c_t)^{-\gamma}$ for $\gamma = 0, 1,
-\ldots, 30$ with $\beta = 0.95$.  
+CRRA preferences $m = \beta (c_{t+1}/c_t)^{\gamma}$ for $\gamma = 0, -1,
+\ldots, -30$ with $\beta = 0.95$.  
 
-Only at high values of $|\gamma|$ do thesquares enter the admissible region.  
-
-The cross marks the reciprocal of the
+Only at high values of $|\gamma|$ do the
 squares enter the admissible region.  
 
 The cross marks the reciprocal of the
@@ -910,30 +909,31 @@ The HJ bound provides a nonparametric restatement of the equity premium puzzle.
 For the bound to be met, the IMRS of the representative agent must be far more
 volatile than consumption growth alone can generate under standard preferences.
 
-For a CRRA consumer with risk aversion $\gamma$,
+For a CRRA consumer with risk aversion $\gamma$ ,
 
 $$
-m = \delta \left(\frac{c_{t+1}}{c_t}\right)^{-\gamma}.
+m = \delta \left(\frac{c_{t+1}}{c_t}\right)^{\gamma}.
 $$
 
 If consumption growth is lognormal with mean $\mu_c$ and standard deviation
 $\sigma_c$, then
 
 $$
-E(m) = \delta \exp\!\left(-\gamma \mu_c + \tfrac{1}{2} \gamma^2 \sigma_c^2\right),
+E(m) = \delta \exp\!\left(\gamma \mu_c + \tfrac{1}{2} \gamma^2 \sigma_c^2\right),
 \quad
 \frac{\sigma(m)}{E(m)} = \sqrt{\exp\!\left(\gamma^2 \sigma_c^2\right) - 1}
-\approx \gamma \sigma_c.
+\approx |\gamma| \sigma_c.
 $$
 
 To meet the HJ bound $\sigma(m)/E(m) \geq \text{SR}_{\max}$, we need
 
 $$
-\gamma \sigma_c \gtrsim \text{SR}_{\max}.
+|\gamma| \sigma_c \gtrsim \text{SR}_{\max}.
 $$
 
 With U.S. annual data, $\text{SR}_{\max} \approx 0.37$ and $\sigma_c \approx
-0.033$, so the required risk aversion is roughly $\gamma \approx 11$.
+0.033$, so the required risk aversion is roughly $|\gamma| \approx 11$
+(i.e. $\gamma \approx -11$).
 
 This is far higher than the values of 1--5 that are typically considered
 plausible.
@@ -945,7 +945,7 @@ and indicates whether the implied IMRS lies inside the admissible region.
 rows = []
 for g, E_m, s_m in zip(annual_γ_grid, annual_crra_mean, annual_crra_std):
     bound_val = float(np.interp(E_m, v_annual, σ_annual))
-    if g in {0, 1, 2, 5, 10, 15, 20, 25, 30}:
+    if g in {0, -1, -2, -5, -10, -15, -20, -25, -30}:
         rows.append({'γ': g, 'E(m)': round(E_m, 4),
                      'σ(m)': round(s_m, 4),
                      'Bound': round(bound_val, 4),
@@ -988,7 +988,7 @@ Instead, we use monthly U.S. stock and bill returns as payoffs, augmented by
 lagged instruments to tighten the bound.
 
 We then simulate the nonseparable IMRS for three values of $\theta$ (0, 0.5,
-$-0.5$) across a range of $\gamma$ values, and plot the resulting
+$-0.5$) across a range of $\gamma < 0$ values, and plot the resulting
 $[E(m), \sigma(m)]$ pairs against the HJ frontier.
 
 ```{code-cell} ipython3
