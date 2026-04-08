@@ -95,6 +95,16 @@ To run this lecture on [Google Colab](https://colab.research.google.com/), click
 To run this lecture on your own machine, you need to install [Google JAX](https://github.com/google/jax).
 ```
 
+In addition to what's in Anaconda, this lecture will need the following libraries:
+
+```{code-cell} ipython
+---
+tags: [hide-output]
+---
+!pip install jax
+```
+
+
 ```{code-cell} ipython3
 import jax
 import jax.numpy as jnp
