@@ -76,7 +76,7 @@ from scipy.optimize import minimize
 import json
 ```
 
-## The Asset Pricing Framework
+## The asset pricing framework
 
 ### General model
 
@@ -254,7 +254,7 @@ def load_annual_paper_data():
     )
 ```
 
-## The Linear Volatility Bound (Without Positivity)
+## The linear volatility bound (without positivity)
 
 ### Constructing $m^*$
 
@@ -505,7 +505,7 @@ def max_sharpe_ratio(μ_x, μ_q, Σ, rf=None):
     return float(sr_max)
 ```
 
-## Computing the Annual Frontier
+## Computing the annual frontier
 
 We now compute the HJ bound from annual US stock and bond returns
 (1891--1985).
@@ -585,7 +585,7 @@ squares enter the admissible region.
 The cross marks the reciprocal of the
 stock return, $1/r_{\text{stock}}$, as a simple benchmark.
 
-## The Duality Theorem
+## The duality theorem
 
 The preceding figure illustrates the duality between the two frontiers --
 the SDF frontier and the asset return mean-variance frontier -- that Hansen
@@ -730,7 +730,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-## Tightening the Bound: Imposing Positivity of $m$
+## Tightening the bound: imposing positivity of $m$
 
 ### Option-based construction
 
@@ -904,7 +904,7 @@ Requiring positivity eliminates a portion of the admissible region near the
 extremes of $E(m)$, where the linear frontier $m^v$ would need to take
 negative values with high probability.
 
-## The Equity Premium Puzzle Revisited
+## The equity premium puzzle revisited
 
 The HJ bound provides a nonparametric restatement of the equity premium puzzle.
 
@@ -940,7 +940,7 @@ With U.S. annual data, $\text{SR}_{\max} \approx 0.37$ and $\sigma_c \approx
 This is far higher than the values of 1--5 that are typically considered
 plausible.
 
-The table below reports $E(m)$ and $\sigma(m)$ for selected values of $\gamma$
+The table reports $E(m)$ and $\sigma(m)$ for selected values of $\gamma$ for **positivity-restricted** frontier 
 and indicates whether the implied IMRS lies inside the admissible region.
 
 ```{code-cell} ipython3
@@ -962,7 +962,7 @@ for g, E_m, s_m in zip(annual_γ_grid, annual_crra_mean, annual_crra_std):
 pd.DataFrame(rows).set_index('γ')
 ```
 
-## Time-Nonseparable Preferences
+## Time-nonseparable preferences
 
 Section V of the paper examines whether relaxing time separability can help
 close the gap to the HJ bound.
@@ -1014,9 +1014,9 @@ v_m_nopositivity, σ_m_nopositivity = hj_bound_no_positivity(
 
 def simulate_nonseparable_imrs(
     T=20_000,
-    gamma=-5,
-    theta=0.0,
-    delta=1.0,
+    γ=-5,
+    θ=0.0,
+    δ=1.0,
     μ_c=0.0045,
     σ_c=0.0055,
     seed=1,
@@ -1028,14 +1028,21 @@ def simulate_nonseparable_imrs(
     for t in range(T + 1):
         c[t + 1] = c[t] * growth[t + 1]
 
-    s = c[1:] + theta * c[:-1]
-    s = np.maximum(s, 1e-30)  # avoid 0**gamma when gamma < 0
-    s_gamma = s ** gamma
-    num = s_gamma[1:T + 1] + theta * delta * np.append(s_gamma[2:T + 1], s_gamma[-1])
-    denom = s_gamma[:T] + theta * delta * s_gamma[1:T + 1]
+    s = c[1:] + θ * c[:-1]
+    s = np.maximum(s, 1e-30)  # avoid 0**γ when γ < 0
+    s_γ = s ** γ
+
+    # Precompute κ via Monte Carlo.
+    g_mc = np.exp(μ_c + σ_c * rng.standard_normal(500_000))
+    κ = np.mean(np.maximum(g_mc + θ, 1e-30) ** γ)
+
+    c_γ = np.maximum(c, 1e-30) ** γ
+
+    num = s_γ[1:T+1] + θ * δ * c_γ[2:T+2] * κ
+    denom = s_γ[0:T] + θ * δ * c_γ[1:T+1] * κ
 
     with np.errstate(divide='ignore', invalid='ignore'):
-        m = delta * num / denom
+        m = δ * num / denom
     return m[np.isfinite(m) & (np.abs(m) < 1e6)]
 ```
 
@@ -1051,14 +1058,14 @@ fig, ax = plt.subplots(figsize=(8, 5))
 ax.fill_between(v_m_nopositivity, σ_m_nopositivity, 0.4, alpha=0.15)
 ax.plot(v_m_nopositivity, σ_m_nopositivity, lw=2)
 
-for theta, marker, label in [
+for θ, marker, label in [
     (0.0, "s", r"$\theta = 0$"),
     (0.5, "o", r"$\theta = 0.5$"),
     (-0.5, "^", r"$\theta = -0.5$"),
 ]:
     pts = []
-    for gamma in range(0, -15, -1):
-        m_sim = simulate_nonseparable_imrs(gamma=gamma, theta=theta, seed=abs(gamma) + 5)
+    for γ in range(0, -15, -1):
+        m_sim = simulate_nonseparable_imrs(γ=γ, θ=θ, seed=abs(γ) + 5)
         pts.append((m_sim.mean(), m_sim.std()))
     pts = np.asarray(pts)
     ax.scatter(
@@ -1104,7 +1111,7 @@ The qualitative pattern matches: habit persistence ($\theta < 0$) helps enter
 the admissible region at moderate $|\gamma|$.
 ```
 
-## Treasury Bill Data and Monetary Models
+## Treasury bill data and monetary models
 
 Figure 6 in the paper uses monthly prices on 3-, 6-, 9-, and 12-month
 discount bonds to construct real quarterly holding-period returns.
