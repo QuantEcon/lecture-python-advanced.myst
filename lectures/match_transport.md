@@ -495,12 +495,23 @@ $$
 |x - y'| + |x' - y| = |x - y| + |x' - y'|
 $$
 
-Letting $\alpha := \frac{|x - y| - |x - y'|}{|x - y| - |x' - y'|} \in (0,1),$ we have $|x - y'| = \alpha|x' - y'| +(1-\alpha) |x - y|$ and $|x' - y| = (1-\alpha)|x' - y'| +\alpha |x - y|. $ 
+Letting $ \alpha := \frac{|x-y'| - |x'-y'|}{|x-y| - |x'-y'|} \in (0,1), $ we have 
 
-Hence, by strict concavity of $h,$
+$$ |x-y'| = \alpha|x - y| +(1-\alpha) |x' - y'| \quad \text{and} \quad |x'-y| = (1-\alpha)|x - y| +\alpha |x' - y'|. $$
+
+Hence, by strict concavity of $ h, $
 
 $$
-h(|x-y'|)+ h(|x'-y|) > \alpha h(|x' - y'|) +(1-\alpha) h(|x - y|) +  (1-\alpha) h(|x' - y'|) +\alpha h(|x - y|) = h(|x'-y'|) + h(|x-y|).
+h(|x-y'|) > \alpha h(|x-y|) + (1-\alpha) h(|x'-y'|)
+$$
+$$
+h(|x'-y|) > (1-\alpha) h(|x-y|) + \alpha h(|x'-y'|).
+$$
+
+Adding the two inequalities:
+
+$$
+h(|x-y'|) + h(|x'-y|) > h(|x-y|) + h(|x'-y'|).
 $$
 
 Therefore, as in the first case, we can strictly improve the cost among $x,y,x',y'$ by uncrossing the pairs.
@@ -1719,6 +1730,10 @@ The dual solutions of $V_D$ and $W_D$ are related by $u_x = \alpha_x - \phi_x$ a
 The dual solution $(u,v)$ of $W_D$ can be interpreted as equilibrium utilities of the agents, which include the individual specific amenities and equilibrium shadow costs.
 
 {cite}`boerma2023composite` propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.
+
+Their approach relies on *Complementary Slackness*: given a primal solution $\mu$, $(\phi , \psi) $ is a dual solution if and only if for all $x \in X$ and $y \in Y$
+* $\phi_x + \psi_y \leq c_{xy}$ (dual feasibility),
+* $\phi_x + \psi_y = c_{xy}$ if $\mu_{xy}>0$ (complementary slackness).
 
 Let's generate an instance and compute the optimal matching.
 
