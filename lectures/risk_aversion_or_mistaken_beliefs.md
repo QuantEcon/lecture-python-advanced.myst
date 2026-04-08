@@ -808,7 +808,7 @@ An agent who is like a good econometrician:
 
 Robust control theory formalises this idea by having the agent optimally distort probability assessments toward a worst-case scenario, producing belief distortions that look like the "mistakes" identified by PSS but that arise from a coherent response to model uncertainty rather than from ignorance.  
 
-(See {doc}`Robustness <rob>` for the decision-theoretic foundations of multiplier and constraint preferences.)
+(See {doc}`Robustness <robustness>` for the decision-theoretic foundations of multiplier and constraint preferences.)
 
 ### Hansen's dubious agent
 
@@ -1832,5 +1832,5 @@ This lecture connects to several others in the series:
 - {doc}`Likelihood Ratio Processes <intermediate:likelihood_ratio_process>` develops the mathematical properties of likelihood ratios, the central device organising this lecture, including their martingale structure and statistical applications.
 - {doc}`Divergence Measures <intermediate:divergence_measures>` covers Kullback-Leibler divergence and relative entropy in detail, providing the information-theoretic foundations for the entropy constraints used in the robust control sections.
 - {doc}`Affine Models of Asset Prices <intermediate:affine_risk_prices>` extends the linear Gaussian state-space framework to affine and exponential-quadratic stochastic discount factors, developing risk-neutral pricing formulas closely related to those derived here.
-- {doc}`Robustness <rob>` introduces the multiplier and constraint preferences that formalise fear of model misspecification, providing the decision-theoretic foundations for the Hansen and Szőke worst-case analysis developed here.
+- {doc}`Robustness <robustness>` introduces the multiplier and constraint preferences that formalise fear of model misspecification, providing the decision-theoretic foundations for the Hansen and Szőke worst-case analysis developed here.
 - {doc}`The Hansen-Jagannathan Bound <hansen_jagannathan_1991>` derives bounds on the stochastic discount factor from asset return data, offering an empirical discipline on the likelihood ratios and risk prices studied in this lecture.

@@ -507,7 +507,7 @@ We compare four preference specifications over consumption plans $C^\infty \in \
 For origins of the names **multiplier** and **constraint** preferences, see {cite:t}`HansenSargent2001`.
 
 The risk-sensitive preference specification used here comes from {cite:t}`hansen1995discounted`, which adjusts specifications used earlier by
-{cite:t}`jacobson1973optimal`, {cite:t}`Whittle_1981`, and {cite:t}`Whittle_1990` to accommodate discounting in a way that preserves time-invariant optimal decision rules.
+{cite:t}`Jacobson_73`, {cite:t}`Whittle_1981`, and {cite:t}`Whittle_1990` to accommodate discounting in a way that preserves time-invariant optimal decision rules.
 ```
 
 *Type I agent (Kreps--Porteus--Epstein--Zin--Tallarini)* with
