@@ -1249,7 +1249,7 @@ mystnb:
     name: fig-bhs-3
 ---
 
-# Empirical Sharpe ratio — the minimum of the HJ bound curve
+# Empirical Sharpe ratio -- the minimum of the HJ bound curve
 sharpe = (r_e_mean - r_f_mean) / r_excess_std
 
 def sharpe_gap(p, model):
@@ -1927,7 +1927,7 @@ P, Σ = np.meshgrid(p_grid, σ_grid)
 
 W_abs = -2 * norm.ppf(P) / np.sqrt(T)
 
-# RW: total type II = βσ²γ / [2(1-β)] 
+# RW: total type II = β*σ^2*γ / [2(1-β)]
 Γ_rw = 1 + W_abs / Σ
 comp_rw = 100 * (np.exp(β * Σ**2 * Γ_rw / (2 * (1 - β))) - 1)
 
@@ -2009,10 +2009,10 @@ def _read_fred_series(series_id, start_date, end_date):
 
 
 # Fetch nominal PCE components, deflator, and population from FRED
-nom_nd = _read_fred_series("PCND", start_date, end_date)        # quarterly, 1947–
-nom_sv = _read_fred_series("PCESV", start_date, end_date)       # quarterly, 1947–
-defl = _read_fred_series("DPCERD3Q086SBEA", start_date, end_date)  # quarterly, 1947–
-pop_m = _read_fred_series("CNP16OV", start_date, end_date)      # monthly, 1948–
+nom_nd = _read_fred_series("PCND", start_date, end_date)        # quarterly, 1947-
+nom_sv = _read_fred_series("PCESV", start_date, end_date)       # quarterly, 1947-
+defl = _read_fred_series("DPCERD3Q086SBEA", start_date, end_date)  # quarterly, 1947-
+pop_m = _read_fred_series("CNP16OV", start_date, end_date)      # monthly, 1948-
 
 # Step 1: add nominal nondurables + services
 nom_total = nom_nd + nom_sv
@@ -2024,7 +2024,7 @@ real_total = nom_total / (defl / 100.0)
 pop_q = pop_m.resample("QS").mean()
 real_pc = (real_total / pop_q).dropna()
 
-# Restrict to sample period 1948Q1–2006Q4
+# Restrict to sample period 1948Q1-2006Q4
 real_pc = real_pc.loc["1948-01-01":"2006-12-31"].dropna()
 
 if real_pc.empty:
@@ -2038,7 +2038,7 @@ years_data = (
     + (real_pc.index.month - 1) / 12.0).to_numpy(dtype=float)
 
 print(f"Fetched {len(log_c_data)} quarterly observations from FRED")
-print(f"Sample: {years_data[0]:.1f} – {years_data[-1] + 0.25:.1f}")
+print(f"Sample: {years_data[0]:.1f} - {years_data[-1] + 0.25:.1f}")
 print(f"Observations: {len(log_c_data)}")
 ```
 

@@ -806,7 +806,9 @@ An agent who is like a good econometrician:
 - fears that one of those other models actually prevails, and
 - seeks "good enough" decisions under *all* such alternative models, i.e. **robustness**.
 
-Robust control theory formalises this idea by having the agent optimally distort probability assessments toward a worst-case scenario, producing belief distortions that look like the "mistakes" identified by PSS but that arise from a coherent response to model uncertainty rather than from ignorance.
+Robust control theory formalises this idea by having the agent optimally distort probability assessments toward a worst-case scenario, producing belief distortions that look like the "mistakes" identified by PSS but that arise from a coherent response to model uncertainty rather than from ignorance.  
+
+(See {doc}`Robustness <rob>` for the decision-theoretic foundations of multiplier and constraint preferences.)
 
 ### Hansen's dubious agent
 
@@ -910,7 +912,7 @@ $$
 E \left[m_{t+1}\log m_{t+1}  \middle|  x_t, c_t\right] = \frac{1}{2} w_t^\top w_t
 $$
 
-This means that conditional entropy equals half the squared norm of the distortion vector — it measures how far the distorted mean $-w_t$ is from the baseline mean of zero.
+This means that conditional entropy equals half the squared norm of the distortion vector -- it measures how far the distorted mean $-w_t$ is from the baseline mean of zero.
 
 Substituting this expression into {eq}`eq_hansen_seq` and performing a change of measure (replacing $E[\cdot]$ with $E^w[\cdot]$ under the distorted model) yields a reformulated problem in which nature directly chooses the mean shift $w_t$ rather than a likelihood ratio:
 
@@ -1665,7 +1667,8 @@ Several recognised patterns characterise the U.S. term structure:
 - Consequently, the slope of the yield curve helps *predict* recessions and economic activity.
 - Long and short yields are *almost equally volatile* (the Shiller "volatility puzzle").
 - To solve the Shiller puzzle, risk prices (or something observationally equivalent)
-  must *depend on volatile state variables*.
+  must *depend on volatile state variables*.  
+  - {doc}`The Hansen-Jagannathan Bound <hansen_jagannathan_1991>` provides a nonparametric way to quantify the required volatility of the stochastic discount factor.
 
 The following table summarises how various models perform:
 
@@ -1726,7 +1729,7 @@ As {cite:t}`szoke2022estimating` puts it:
 
 > An appealing feature of robust control theory is that it lets us deviate from
 > rational expectations, but still preserves a set of powerful cross-equation
-> restrictions on decision makers' beliefs. … Consequently, estimation can proceed
+> restrictions on decision makers' beliefs. ... Consequently, estimation can proceed
 > essentially as with rational expectations econometrics. The main difference is
 > that now restrictions through which we interpret the data emanate from the
 > decision maker's best response to a worst-case model instead of to the
@@ -1829,3 +1832,5 @@ This lecture connects to several others in the series:
 - {doc}`Likelihood Ratio Processes <intermediate:likelihood_ratio_process>` develops the mathematical properties of likelihood ratios, the central device organising this lecture, including their martingale structure and statistical applications.
 - {doc}`Divergence Measures <intermediate:divergence_measures>` covers Kullback-Leibler divergence and relative entropy in detail, providing the information-theoretic foundations for the entropy constraints used in the robust control sections.
 - {doc}`Affine Models of Asset Prices <intermediate:affine_risk_prices>` extends the linear Gaussian state-space framework to affine and exponential-quadratic stochastic discount factors, developing risk-neutral pricing formulas closely related to those derived here.
+- {doc}`Robustness <rob>` introduces the multiplier and constraint preferences that formalise fear of model misspecification, providing the decision-theoretic foundations for the Hansen and Szőke worst-case analysis developed here.
+- {doc}`The Hansen-Jagannathan Bound <hansen_jagannathan_1991>` derives bounds on the stochastic discount factor from asset return data, offering an empirical discipline on the likelihood ratios and risk prices studied in this lecture.

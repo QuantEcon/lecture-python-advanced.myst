@@ -35,8 +35,8 @@ in his famous study of hyperinflation.
 
 {cite:t}`sargent1973rational` pointed out that under assumptions making Cagan's
 adaptive expectations equivalent to rational expectations, Cagan's
-estimator of $\alpha$ — the slope of log real balances with respect to expected
-inflation — is not statistically consistent.
+estimator of $\alpha$ -- the slope of log real balances with respect to expected
+inflation -- is not statistically consistent.
 
 This inconsistency matters because of a paradox that emerged when Cagan used
 his estimates of $\alpha$ to calculate the sustained rates of inflation that would
@@ -47,11 +47,11 @@ That "optimal" rate is $-1/\alpha$.
 
 For each of the seven hyperinflations
 in his sample, the reciprocal of Cagan's estimate of $-\alpha$ turned out to be
-less — and often very much less — than the actual average rate of inflation,
+less -- and often very much less -- than the actual average rate of inflation,
 suggesting that the creators of money expanded the money supply at rates far
 exceeding the revenue-maximizing rate.
 
-A natural explanation is that this paradox is a statistical artifact — a
+A natural explanation is that this paradox is a statistical artifact -- a
 consequence of biased estimates of $\alpha$.
 
 Table 1 reproduces the relevant data from Cagan.
@@ -465,7 +465,7 @@ plims = [plim_alpha_cagan(a, λ, σ_ε2, σ_η2, σ_εη) for a in α_plot]
 ws_limit = -λ / (1.0 - λ)
 
 fig, ax = plt.subplots()
-ax.plot(α_plot, α_plot, 'k--', lw=1.5, label='No bias (45° line)')
+ax.plot(α_plot, α_plot, 'k--', lw=1.5, label=r'No bias (45$\degree$ line)')
 label = rf'$\operatorname{{plim}}\hat\alpha$, $\lambda={λ}$'
 ax.plot(α_plot, plims, lw=2, label=label)
 ax.axhline(ws_limit, color='r', ls=':', lw=1.5,
@@ -641,7 +641,7 @@ Equation {eq}`eq27` is a vector first-order autoregression, first-order moving
 average process.
 
 The random variables $a_{1t}$, $a_{2t}$ are the innovations in
-the $x$ and $\mu$ processes, respectively — the one-period-ahead forecasting errors
+the $x$ and $\mu$ processes, respectively -- the one-period-ahead forecasting errors
 for $x_t$ and $\mu_t$.
 
 The $a$'s are related to the $\varepsilon$'s and $\eta$'s
@@ -770,8 +770,8 @@ L(\lambda,\,\sigma_{11},\,\sigma_{12},\,\sigma_{22}\mid\mu_t,\,x_t)
   \exp\!\left(-\tfrac{1}{2}\sum_{t=1}^{T} a_t' D_a^{-1} a_t\right).
 ```
 
-Given initial values for $(a_{10}, a_{20})$ — equivalently for $(\varepsilon_0,
-\eta_0)$ — and given a value of $\lambda$, equation {eq}`eq26` or {eq}`eq27` can be
+Given initial values for $(a_{10}, a_{20})$ -- equivalently for $(\varepsilon_0,
+\eta_0)$ -- and given a value of $\lambda$, equation {eq}`eq26` or {eq}`eq27` can be
 used to solve for $a_t$, $t = 1, \ldots, T$.
 
 (We take $a_{10} = a_{20} = 0$.)
@@ -807,8 +807,8 @@ That this must be so can be seen by inspecting representation
 
 On the
 basis of the *four* parameters $\lambda$, $\sigma_{11}$, $\sigma_{12}$, and
-$\sigma_{22}$ that are identified by {eq}`eq27` — i.e., that characterize the
-likelihood function {eq}`eq32` — we can think of attempting to estimate the *five*
+$\sigma_{22}$ that are identified by {eq}`eq27` -- i.e., that characterize the
+likelihood function {eq}`eq32` -- we can think of attempting to estimate the *five*
 parameters of the model: $\alpha$, $\lambda$, $\sigma_\varepsilon^2$,
 $\sigma_\eta^2$, and $\sigma_{\varepsilon\eta}$.
 
@@ -1124,7 +1124,7 @@ def compute_innovations(x, μ, λ):
         a_{1t} = Δx_t + λ a_{1,t-1}
         a_{2t} = μ_t - x_t + a_{1t}
 
-    Only λ is required — α does not enter the innovation extraction.
+    Only λ is required -- α does not enter the innovation extraction.
 
     Returns arrays a1 and a2 of length T.
     """
@@ -1378,12 +1378,12 @@ $\sigma_{\varepsilon\eta} = 0$:
 
 | Country | $\hat\lambda$ | $\hat\alpha$ | $\hat\sigma_{11}$ | $\hat\sigma_{12}$ | $\hat\sigma_{22}$ |
 |---------|:---:|:---:|:---:|:---:|:---:|
-| Germany (Oct '20–Jul '23) | .677 (.053) | −5.97 (4.62) | .0625 | .0158 | .0091 |
-| Austria (Feb '21–Aug '22) | .754 (.059) | −0.31 (1.57) | .0385 | .0148 | .0085 |
-| Greece (Feb '43–Aug '44) | .459 (.088) | −4.09 (2.97) | .0675 | .0245 | .0279 |
-| Hungary I (Aug '22–Feb '24) | .418 (.067) | −1.84 (0.40) | .0362 | .0089 | .0060 |
-| Russia (Feb '22–Jan '24) | .626 (.073) | −9.75 (10.74)| .0524 | .0138 | .0205 |
-| Poland (May '22–Nov '23) | .536 (.072) | −2.53 (0.86) | .0566 | .0149 | .0089 |
+| Germany (Oct '20-Jul '23) | .677 (.053) | -5.97 (4.62) | .0625 | .0158 | .0091 |
+| Austria (Feb '21-Aug '22) | .754 (.059) | -0.31 (1.57) | .0385 | .0148 | .0085 |
+| Greece (Feb '43-Aug '44) | .459 (.088) | -4.09 (2.97) | .0675 | .0245 | .0279 |
+| Hungary I (Aug '22-Feb '24) | .418 (.067) | -1.84 (0.40) | .0362 | .0089 | .0060 |
+| Russia (Feb '22-Jan '24) | .626 (.073) | -9.75 (10.74)| .0524 | .0138 | .0205 |
+| Poland (May '22-Nov '23) | .536 (.072) | -2.53 (0.86) | .0566 | .0149 | .0089 |
 
 Standard errors in parentheses.
 
@@ -1448,7 +1448,7 @@ axes[1].errorbar(range(len(countries)), α_ml, yerr=[2*s for s in α_se],
 axes[1].axhline(0, color='k', lw=0.7, ls='--')
 axes[1].set_xticks(range(len(countries)))
 axes[1].set_xticklabels(countries, rotation=30)
-axes[1].set_ylabel(r'$\hat\alpha$ (±2 s.e.)')
+axes[1].set_ylabel(r'$\hat\alpha$ ($\pm$2 s.e.)')
 
 plt.tight_layout()
 plt.show()
@@ -1509,7 +1509,7 @@ The main results of this paper are:
    simultaneously.
 
 2. A bivariate Wold representation with a triangular structure shows that
-   inflation Granger-causes money creation, but not vice versa — consistent with
+   inflation Granger-causes money creation, but not vice versa -- consistent with
    empirical findings that feedback runs from inflation to money creation.
 
 3. The structural parameter $\alpha$ is *not identifiable* from the likelihood
@@ -1523,7 +1523,7 @@ The main results of this paper are:
 
 4. The large standard errors mean that confidence intervals of two standard errors
    on each side of the point estimates include values of $\alpha$ that would imply
-   money creators were maximizing seignorage revenue — potentially explaining the
+   money creators were maximizing seignorage revenue -- potentially explaining the
    paradox noted by Cagan.
 
 5. Likelihood-ratio overfitting tests do not decisively reject the one-parameter
@@ -1556,9 +1556,9 @@ def bivariate_ma1_moments(α, λ, σ_ε2=1.0, σ_η2=0.5, σ_εη=0.0):
 
     Returns:
 
-    cxx : dict with keys 0, 1  — autocovariances of Δx
-    cμμ : dict with keys 0, 1  — autocovariances of Δμ
-    cxμ : dict with keys -1, 0, 1  — cross-covariances E[Δx_t Δμ_{t-τ}]
+    cxx : dict with keys 0, 1  -- autocovariances of Δx
+    cμμ : dict with keys 0, 1  -- autocovariances of Δμ
+    cxμ : dict with keys -1, 0, 1  -- cross-covariances E[Δx_t Δμ_{t-τ}]
     """
     denom = λ + α * (1.0 - λ)
     if np.isclose(denom, 0.0):
@@ -1728,8 +1728,8 @@ for T in [100, 500]:
         Δx_s = np.diff(x_s)
         λ_h, _ = univariate_ma1_mle(Δx_s)
         λ_hats.append(λ_h)
-    print(f"T={T:4d}: mean λ̂ = {np.mean(λ_hats):.4f}, "
-          f"std(λ̂) = {np.std(λ_hats):.4f}")
+    print(f"T={T:4d}: mean λ_hat = {np.mean(λ_hats):.4f}, "
+          f"std(λ_hat) = {np.std(λ_hats):.4f}")
 ```
 
 The standard deviation shrinks roughly as $1/\sqrt{T}$, consistent with

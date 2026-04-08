@@ -769,7 +769,7 @@ where $F_1$ and $F_2$ are the firms' robust decision rules within the robust mar
   laws that are distorted relative to the baseline model.
 
 After simulating $x_t$ under the baseline transition dynamics and robust decision rules $F_i, i = 1, 2$, we
-extract and plot industry output $q_t=q_{1t}+q_{2t}$ and price $p_t = a_0 − a_1 q_t$.
+extract and plot industry output $q_t=q_{1t}+q_{2t}$ and price $p_t = a_0 - a_1 q_t$.
 
 Here we set the robustness and volatility matrix parameters as follows:
 

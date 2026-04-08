@@ -286,7 +286,7 @@ $$
 \end{cases}
 $$
 
-**Monetary dominance** — the government solves:
+**Monetary dominance** -- the government solves:
 
 $$
 V^{md}(b, \phi, s) = \max_{\Delta, b', \mu, \phi'} U(\Delta, \theta) + v(\phi) +
@@ -295,7 +295,7 @@ $$
 
 where maximization is subject to the budget constraint $\Delta = b + \phi - \beta b' - \mu\phi$ and the money demand condition $\mu\phi = J(b', \phi', s)$.
 
-**Fiscal dominance** — the government's problem adds current $\phi$ to its choice set:
+**Fiscal dominance** -- the government's problem adds current $\phi$ to its choice set:
 
 $$
 V^{fd}(b, s) = \max_{\phi, \Delta, b', \mu, \phi'} U(\Delta, \theta) + v(\phi) +
@@ -330,7 +330,7 @@ def create_params():
     χ, κ, η_m = 0.015, 0.70, 0.06
     θ_bar = 130.0
     # Table 1 reports *unconditional* variances; convert to
-    # innovation std devs for Tauchen: σ_ε = √(σ²_y (1 − ρ²))
+    # innovation std devs for Tauchen: σ_ε = sqrt(σ^2_y * (1 - ρ^2))
     ρ_θ = 0.8
     σ_θ = float(np.sqrt(15.0 * (1.0 - 0.8**2)))
     ρ_ξ = 0.99
@@ -365,7 +365,7 @@ $$
 subject to $\Delta = b + \phi - \beta b' - \beta \sum_{s'} \Pr(s'|s) H(\phi'(s'))$.
 
 ```{note}
-The choice of $\phi'(s')$ here is allowed to be *state-contingent* — the Ramsey planner can promise different real balances in different future states.
+The choice of $\phi'(s')$ here is allowed to be *state-contingent* -- the Ramsey planner can promise different real balances in different future states.
 
 The partial-commitment model studied below instead restricts the promise to a single $\phi'$ that does not vary with $s'$.
 
@@ -380,7 +380,7 @@ Key properties:
 
 - For the quadratic specification $v(\phi) = \kappa\phi - \eta_m\phi^2$, the satiation point is $\phi^* = \kappa/(2\eta_m)$.
 - Under the conditions of Proposition 3 of the paper, the Ramsey outcome has a fixed inflation level
-  $1 + \pi^R = \beta H(\phi^*) / \phi^*$ that does not depend on fiscal fundamentals — the level of debt and $\theta$.
+  $1 + \pi^R = \beta H(\phi^*) / \phi^*$ that does not depend on fiscal fundamentals -- the level of debt and $\theta$.
 - Surpluses and real debt follow the Euler equation
   $-U'(\Delta, s) = \frac{\hat\beta}{\beta} \sum_{s'} \Pr(s'|s) [-U'(\Delta', s')]$.
 
@@ -406,8 +406,8 @@ subject to $\Delta = b + \phi - \beta b' - \beta \sum_{s'} \Pr(s'|s) H(\phi^M(b'
 Key properties of the Markov outcome:
 
 - The static optimality condition $-U'(\Delta, \theta) = v'(\phi^{fd})$ equates the marginal benefit of real balances to the marginal cost of the primary surplus, so the model predicts a higher price level (lower real balances) when the marginal cost of the surplus is high.
-- Inflation *responds strongly* to fiscal pressures — it is high on average, volatile, and closely related to fiscal considerations.
-- Debt capacity is *sharply limited* — the term $\frac{\partial J(b', \phi', s)}{\partial b'}/\beta$ is negative and effectively acts as a tax on debt issuance, leading to lower debt levels relative to the Ramsey outcome.
+- Inflation *responds strongly* to fiscal pressures -- it is high on average, volatile, and closely related to fiscal considerations.
+- Debt capacity is *sharply limited* -- the term $\frac{\partial J(b', \phi', s)}{\partial b'}/\beta$ is negative and effectively acts as a tax on debt issuance, leading to lower debt levels relative to the Ramsey outcome.
 - In the deterministic case with $\beta = \hat\beta$: real debt converges to zero while the Ramsey outcome sustains positive debt levels (Appendix B of the paper).
 
 The full model *interpolates* between these two extremes depending on the cost $\xi_t$.
@@ -719,7 +719,7 @@ def solve_model(β, β_hat, χ, ψ, σ, κ, η_m, θ,
         B_md, W_md, V_md, V_fd, φ_fd_arr, H_fd_arr = fd_from_continuation(
             W, B_grid, b_prime_grid, φ_grid, κ, η_m)
 
-        # Logit regime probability η̄ (monetary dominance)
+        # Logit regime probability η_bar (monetary dominance)
         η_bar = jax.nn.sigmoid(
             λ * (V_md - V_fd[:, None, :] + ξ_grid[None, None, :]))
 
@@ -758,7 +758,7 @@ def solve_model(β, β_hat, χ, ψ, σ, κ, η_m, θ,
     B_md, W_md, V_md, V_fd, φ_fd_arr, H_fd_arr = fd_from_continuation(
         W, B_grid, b_prime_grid, φ_grid, κ, η_m)
 
-    # Logit regime probability η̄
+    # Logit regime probability η_bar
     η_bar = jax.nn.sigmoid(
         λ * (V_md - V_fd[:, None, :] + ξ_grid[None, None, :]))
 
@@ -933,7 +933,7 @@ When $\theta$ falls from $\theta_H$ to $\theta_L$, the reduction in $\theta$ shi
 
 The optimal policy for debt issuance shifts downward because the government now has stronger precautionary saving motives and therefore chooses to reduce its debt issuance.
 
-As a result, a decline in $\theta$ while keeping $\xi$ at a low level leads to an increase in real money balances (lower inflation) and a decrease in real debt — a **positive correlation** between inflation and debt.
+As a result, a decline in $\theta$ while keeping $\xi$ at a low level leads to an increase in real money balances (lower inflation) and a decrease in real debt -- a **positive correlation** between inflation and debt.
 
 ### Institutional disinflation ($\xi$ rises, $\theta$ constant)
 
@@ -943,9 +943,9 @@ When $\xi$ rises from $\xi_L$ to $\xi_H$ (high enough to make it optimal to swit
 
 Critically, if the process for $\xi$ is persistent, an increase in current $\xi$ implies an increase in the expected value for $\xi'$, so the government now has lower incentives to reduce the amount of debt it issues because the wedge in the Euler equation is smaller in absolute value.
 
-As the government shifts to the monetary-dominant regime, the present value of seigniorage revenues falls, and the government must finance the inherited real liabilities with a higher present value of surpluses — since the government is impatient, these higher surpluses are back-loaded, also resulting in an increase in the level of debt issued.
+As the government shifts to the monetary-dominant regime, the present value of seigniorage revenues falls, and the government must finance the inherited real liabilities with a higher present value of surpluses -- since the government is impatient, these higher surpluses are back-loaded, also resulting in an increase in the level of debt issued.
 
-Thus inflation and debt move in **opposite** directions — the signature of institutional disinflation.
+Thus inflation and debt move in **opposite** directions -- the signature of institutional disinflation.
 
 We now illustrate the two types of disinflation by simulating impulse responses.
 
@@ -1097,7 +1097,7 @@ time = np.arange(T) - t_shock
 
 ```{code-cell} ipython3
 def plot_irf(irf, θ_path, ξ_path, time, title):
-    """Plot a 4×2 IRF figure matching the paper's layout."""
+    """Plot a 4x2 IRF figure matching the paper's layout."""
     fig, axes = plt.subplots(4, 2, figsize=(12, 14))
     fig.suptitle(title, fontsize=14, y=1.01)
     kw = dict(lw=2, color='tab:blue')
@@ -1158,7 +1158,7 @@ Following the shock, the debt-to-GDP ratio declines, while the inflation rate in
 
 Inflation then continues to decline gradually, tracking the falling path of debt, which further reduces the marginal cost of surpluses.
 
-Inflation and debt move *together* downward — the signature of fundamental disinflation.
+Inflation and debt move *together* downward -- the signature of fundamental disinflation.
 
 **Institutional disinflation** ({numref}`fig-institutional`): a permanent rise in $\xi$ switches the regime from FD ($\eta \approx 0$) to MD ($\eta \approx 1$).
 
@@ -1166,7 +1166,7 @@ The inflation rate instead initially jumps downward at $t_0$ as real balances mo
 
 The path of real government debt is increasing because the switch to the monetary-dominant regime allows for greater debt issuances and seigniorage revenues fall, requiring the government to finance inherited liabilities with higher (back-loaded) surpluses.
 
-Inflation and debt move in *opposite* directions — the signature of institutional disinflation.
+Inflation and debt move in *opposite* directions -- the signature of institutional disinflation.
 
 ## The particle filter
 
@@ -1265,7 +1265,7 @@ def particle_filter(y_data, key, N_particles,
         return jnp.array([b_new, φ_new, θ_new, ξ_new, φ])
 
     def observe_one(particle):
-        """Map state to observables: π = β H(φ)/φ − 1, debt/GDP."""
+        """Map state to observables: π = β*H(φ)/φ - 1, debt/GDP."""
         b, φ, θ, ξ1, φ_old = particle
         β = 0.95
         H_val = H_func(φ, κ, η_m)
@@ -1407,7 +1407,7 @@ In 2001 Colombia adopted an explicit inflation targeting regime with a long-term
 
 Prior to the 1991 reform, the central bank lacked autonomy, often making monetary policy susceptible to government pressures, and as a result Colombia suffered from persistent high inflation despite the relatively low level of debt.
 
-The particle filter identifies an increase in the cost of deviating from the inflation target ($\xi$) starting in **1997**, not 1992 — the first year after the reform.
+The particle filter identifies an increase in the cost of deviating from the inflation target ($\xi$) starting in **1997**, not 1992 -- the first year after the reform.
 
 This may be driven by the fact that it took time for the government to convince private agents that the new institutional arrangement was credible and not just a cosmetic adjustment.
 
@@ -1429,11 +1429,11 @@ On the monetary front, a 1989 constitutional law granted the Central Bank of Chi
 
 In contrast to Colombia, both inflation and the debt-to-GDP ratio declined over this period.
 
-During the first half of the 1990s, the drop in inflation can be replicated either by a fall in fiscal needs or by a rise in the penalty for deviating from the inflation target — each channel on its own is sufficient to match the joint movements in inflation and debt.
+During the first half of the 1990s, the drop in inflation can be replicated either by a fall in fiscal needs or by a rise in the penalty for deviating from the inflation target -- each channel on its own is sufficient to match the joint movements in inflation and debt.
 
 The distinction between them becomes critical in the second half of the decade: inflation keeps falling while debt-to-GDP merely flattens out.
 
-Replicating this pattern requires credibility shocks — an isolated increase in fiscal needs would stabilize the debt ratio but, counterfactually, would drive inflation back up.
+Replicating this pattern requires credibility shocks -- an isolated increase in fiscal needs would stabilize the debt ratio but, counterfactually, would drive inflation back up.
 
 The contrasting experiences of Colombia and Chile illuminate the two disinflation channels implied by the model: in Colombia the data can only be reconciled with a credibility gain (positive $\xi_t$ shocks), whereas in Chile the early-1990s disinflation could be matched either way, yet the continued decline in inflation once debt-to-GDP leveled off required additional credibility gains.
 
@@ -1445,7 +1445,7 @@ The model revolves around three interconnected mechanisms.
 
 Whether the government honors or abrogates its inflation mandate depends on the state $(b, \phi, \theta, \xi)$.
 
-The regime emerges from optimization — the government weighs the benefit of fiscal flexibility against a stochastic institutional cost — rather than from an exogenous rule.
+The regime emerges from optimization -- the government weighs the benefit of fiscal flexibility against a stochastic institutional cost -- rather than from an exogenous rule.
 
 Moreover, movements in inflation are the direct consequence of deliberate policy choices as in {cite}`SargentWallace1981`, and not the result of an equilibrium selection mechanism.
 

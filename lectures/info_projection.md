@@ -33,9 +33,9 @@ This lecture presents the analysis in {cite}`sargent1976econometric`, which exam
 
 The topic involves three estimators:
 
-- **Cagan's estimator** — {cite:t}`Cagan` regresses real balances on past inflation rates, and is consistent when its orthogonality condition holds.
-- **Jacobs' estimator** — {cite:t}`jacobs1975difficulty` inverts the equation and regresses real balances on past money growth rates, and is consistent only if money is exogenous.
-- **Sargent's critique** — uses a rational expectations model to show that Jacobs' estimator is biased when money is not exogenous, and predicts its population limit {cite}`sargent1976econometric`.
+- **Cagan's estimator** -- {cite:t}`Cagan` regresses real balances on past inflation rates, and is consistent when its orthogonality condition holds.
+- **Jacobs' estimator** -- {cite:t}`jacobs1975difficulty` inverts the equation and regresses real balances on past money growth rates, and is consistent only if money is exogenous.
+- **Sargent's critique** -- uses a rational expectations model to show that Jacobs' estimator is biased when money is not exogenous, and predicts its population limit {cite}`sargent1976econometric`.
 
 The key computational technique is **information projection** via the Wiener–Kolmogorov formula, which computes the optimal linear least-squares projection of one covariance-stationary process onto current and past values of another.
 
@@ -112,7 +112,7 @@ then {eq}`eq:orthogonality_cond` generally
 *fails*.
 
 When money does not respond to disturbances $u_t$, the price level
-must absorb them — creating a correlation between $p_t$ and $u_t$ that
+must absorb them -- creating a correlation between $p_t$ and $u_t$ that
 invalidates Cagan's orthogonality condition.
 
 ## Jacobs' estimator
@@ -597,9 +597,9 @@ The table below reproduces the estimates from {cite}`jacobs1975difficulty` as re
 | Country   | $k$ (Jacobs) | $\hat{\delta}$ |
 |-----------|:-----------:|:-------------------:|
 | Austria   | 0.143       | 0.87                |
-| Germany   | −0.131      | 1.14                |
-| Greece    | −0.262      | 1.30                |
-| Hungary   | −0.199      | 1.22                |
+| Germany   | -0.131      | 1.14                |
+| Greece    | -0.262      | 1.30                |
+| Hungary   | -0.199      | 1.22                |
 | Poland    | 0.139       | 0.87                |
 | Russia    | 0.857       | 0.43                |
 

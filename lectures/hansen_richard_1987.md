@@ -39,8 +39,8 @@ developed in {doc}`asset_pricing_lph`.
 In a competitive equilibrium model, prices are determined by a **pricing function**
 that maps uncertain future payoffs into current prices.
 
-Alternative models of asset prices — built from different assumptions about
-preferences, endowments, and technology — imply alternative pricing functions.
+Alternative models of asset prices -- built from different assumptions about
+preferences, endowments, and technology -- imply alternative pricing functions.
 
 Two models that imply the same pricing function are **observationally
 indistinguishable** using payoff and price data alone.
@@ -54,7 +54,7 @@ Theoretical models have traders forming portfolios contingent on
 information available at the time of trading.
 
 But empirical tests typically
-use *unconditional* moments — time-series averages of payoffs and prices —
+use *unconditional* moments -- time-series averages of payoffs and prices --
 that do not depend on this conditioning information.
 
 Hansen and Richard develop the theory needed to navigate between these two
@@ -66,7 +66,7 @@ levels. The paper proceeds in two steps:
    via an inner product on a conditional Hilbert space.
 
 2. **Deduce testable restrictions** that these pricing functions imply for
-   population moments of payoffs and prices — moments that an econometrician
+   population moments of payoffs and prices -- moments that an econometrician
    can estimate from time-series data.
 
 The main results are:
@@ -373,7 +373,7 @@ $$
 $$
 
 In this case $p^*$ can be interpreted as the **intertemporal marginal rate
-of substitution** of the numeraire good — it converts future payoffs
+of substitution** of the numeraire good -- it converts future payoffs
 into today's prices.
 
 ### The benchmark return $r^*$
@@ -619,8 +619,8 @@ This is the central empirical message of the paper.
 A conditionally efficient return $r_w = r^* + w^* z^*$ is on the
 unconditional frontier *only when* $w^*$ is constant with probability one.
 
-When $w^*$ varies with the state of the world — which is the typical case
-when traders use conditioning information — the return will be off the
+When $w^*$ varies with the state of the world -- which is the typical case
+when traders use conditioning information -- the return will be off the
 unconditional frontier.
 
 This has direct implications:
@@ -810,8 +810,8 @@ $$
 This result has sharp empirical implications:
 
 - Even if the CAPM holds *conditionally* (e.g., the market portfolio is on
-  the conditional frontier), the standard unconditional regression test —
-  regressing asset returns on market returns and testing $\alpha = 0$ — is
+  the conditional frontier), the standard unconditional regression test --
+  regressing asset returns on market returns and testing $\alpha = 0$ -- is
   testing a *different* hypothesis.
 
 - The unconditional single-beta representation holds only for returns built
@@ -883,7 +883,7 @@ for i in range(n_assets_capm):
 
 The constant-weight frontier portfolio produces intercepts close to a common value for every asset, confirming that the unconditional single-beta representation holds as predicted by {prf:ref}`hr87_cor31`.
 
-In general, {prf:ref}`hr87_cor31` guarantees a real zero-beta return $\alpha$, but that $\alpha$ need not be zero — it equals zero only under an extra normalization or for a specially chosen reference portfolio.
+In general, {prf:ref}`hr87_cor31` guarantees a real zero-beta return $\alpha$, but that $\alpha$ need not be zero -- it equals zero only under an extra normalization or for a specially chosen reference portfolio.
 
 The conditionally efficient portfolio, whose weights switch between regimes, produces non-zero alphas despite being on the conditional frontier in each state.
 
@@ -953,9 +953,9 @@ Two distinct pricing functions may imply the same $\pi^*$ on that subset even th
 The pseudo-pricing function underlies the {cite:t}`hansen1982generalized`
 econometric approach.
 
-If a model specifies $p^*$ as a function of observable data — e.g., a
+If a model specifies $p^*$ as a function of observable data -- e.g., a
 parametric function of consumption growth $p^* = p^*(\Delta c_{t+1}, \theta)$
-— then the pricing restriction
+-- then the pricing restriction
 
 $$
 E(p \, p^*) = \pi^*(p) = E[\pi(p)]
@@ -976,7 +976,7 @@ $$
 The parameter vector $\theta$ is then estimated by GMM.
 
 The **choice of instruments** determines how much conditioning information is
-exploited — more instruments increase efficiency but also increase the
+exploited -- more instruments increase efficiency but also increase the
 dimensionality of the GMM problem.
 
 Notice that the payoffs used in this procedure can themselves be conditional
@@ -1067,7 +1067,7 @@ The main contributions of {cite:t}`HansenRichard1987` are:
 
 4. **Single-beta representation**: The conditional CAPM extends Roll's
    characterization to conditioning information. The unconditional version
-   holds only for returns with constant portfolio weights — so testing the
+   holds only for returns with constant portfolio weights -- so testing the
    CAPM with unconditional regressions tests a weaker hypothesis.
 
 5. **Pseudo-pricing function**: $\pi^*(p) = E[\pi(p)] = E(p \, p^*)$ maps
@@ -1109,9 +1109,9 @@ $$
 Any return $r \in R$ can be written as $r = r^* + z$ for some $z \in Z^*$
 (where $Z^* = Z \cap P^*$).
 
-Since $r^*$ is conditionally orthogonal to $Z$ — meaning
+Since $r^*$ is conditionally orthogonal to $Z$ -- meaning
 $\langle r^* \mid z \rangle_{\mathcal{G}} = E(r^* z \mid \mathcal{G}) = 0$ for all $z \in Z$
-— taking unconditional expectations gives $E(r^* z) = 0$.
+-- taking unconditional expectations gives $E(r^* z) = 0$.
 
 Therefore,
 
