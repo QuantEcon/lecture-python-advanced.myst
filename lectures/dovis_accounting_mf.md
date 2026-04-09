@@ -114,8 +114,8 @@ from jax import jit, vmap, lax
 from collections import namedtuple
 from functools import partial
 from scipy.stats import norm
-from scipy.optimize import brentq, fsolve
-from scipy.interpolate import PchipInterpolator
+from scipy.optimize import brentq, fsolve, minimize_scalar, minimize
+from scipy.interpolate import PchipInterpolator, UnivariateSpline
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import numpy as np
@@ -359,7 +359,7 @@ def create_params():
         β=β, β_hat=β_hat, χ=χ, κ=κ, η_m=η_m, ψ=ψ, σ=σ,
         θ_bar=θ_bar, ρ_θ=ρ_θ, σ_θ=σ_θ,
         α_l=α_l, α_ξ=α_ξ, ξ_bar=ξ_bar, λ=λ,
-        φ_star=φ_star, n_B=80, n_φ=40, n_θ=5, n_ξ=7, B_max=50.0
+        φ_star=φ_star, n_B=300, n_φ=300, n_θ=5, n_ξ=7, B_max=50.0
     )
 
 
@@ -497,7 +497,7 @@ mystnb:
     name: fig-indirect-utility
 ---
 p = params_la
-Δ_grid = jnp.linspace(-5.0, 3.0, 200)
+Δ_grid = jnp.linspace(-5.0, 3.0, 300)
 θ_vals = [80.0, 130.0, 200.0]
 
 iu_vec = vmap(indirect_utility, in_axes=(0, None, None, None, None))
@@ -679,7 +679,7 @@ def φ_fd_solve(B, θ, χ, ψ, σ, κ, η_m):
         φ_lo, φ_hi = bounds
         φ_mid = 0.5 * (φ_lo + φ_hi)
         vp = v_money_prime(φ_mid, κ, η_m)
-        Δ_approx = jnp.clip(B - φ_mid, -12.0, 8.0)
+        Δ_approx = jnp.clip(B - φ_mid, -50.0, 20.0)
         _, U_p = indirect_utility(Δ_approx, θ, χ, ψ, σ)
         residual = vp + U_p
         new_lo = jnp.where(residual > 0, φ_mid, φ_lo)
@@ -703,6 +703,8 @@ It also linearly interpolates $W(B, \xi)$ over the liabilities grid rather than 
 This avoids the step-function artifacts that otherwise produce flat or jagged policy plots.
 
 The inner expectation over $\xi'$ is a matrix multiply against $P_\xi$ via `jnp.einsum`, the search over $(b', \phi')$ is a vectorized `argmax`, and the VFI loop uses `lax.scan`.
+
+After convergence, a separate **continuous policy extraction** step (`extract_policies_continuous`) recovers smooth policies by solving the Bellman right-hand side with bounded continuous optimizers (scalar `minimize_scalar` for $\phi^{fd}$ and two-variable L-BFGS-B for the main $(b', \phi')$ choice), both evaluated against `UnivariateSpline`-interpolated continuation values.  The smoothing spline removes grid-scale curvature noise that the discrete VFI introduces into $W$; without it, even continuous optimizers would inherit oscillations in $W''$ and produce noisy policies.  Together, the smoothing and continuous controls eliminate the staircase artifacts that otherwise propagate through the simulation as oscillations in $\eta$, inflation, and debt.
 
 ```{code-cell} ipython3
 def interp_B_values(B_points, B_grid, values):
@@ -730,10 +732,36 @@ def fd_from_continuation(W, B_grid, b_prime_grid, φ_grid, κ, η_m):
     # Pick the φ that maximizes value for each (b', ξ)
     best_idx = jnp.argmax(V_choices, axis=1)
     idx = best_idx[:, None, :]
+    n_φ = φ_grid.shape[0]
 
-    φ_choices = jnp.broadcast_to(φ_grid[None, :, None], V_choices.shape)
-    φ_fd = jnp.take_along_axis(φ_choices, idx, axis=1).squeeze(1)
-    V_fd = jnp.take_along_axis(V_choices, idx, axis=1).squeeze(1)
+    # --- Parabolic sub-grid refinement along φ axis ---
+    # The discrete argmax snaps φ^fd to grid points.  A local
+    # quadratic fit gives sub-cell accuracy, eliminating the
+    # staircase in φ^fd(b') that otherwise propagates through
+    # the simulation as oscillations in η_prob, inflation, etc.
+    idx_lo = jnp.clip(best_idx - 1, 0, n_φ - 1)[:, None, :]
+    idx_hi = jnp.clip(best_idx + 1, 0, n_φ - 1)[:, None, :]
+
+    v_lo = jnp.take_along_axis(V_choices, idx_lo, axis=1).squeeze(1)
+    v_0  = jnp.take_along_axis(V_choices, idx, axis=1).squeeze(1)
+    v_hi = jnp.take_along_axis(V_choices, idx_hi, axis=1).squeeze(1)
+
+    denom = v_lo - 2.0 * v_0 + v_hi
+    offset = jnp.where(denom < -1e-20,
+                       jnp.clip(0.5 * (v_lo - v_hi) / denom, -0.5, 0.5),
+                       0.0)
+
+    dφ = φ_grid[1] - φ_grid[0]
+    φ_fd_raw = jnp.take_along_axis(
+        jnp.broadcast_to(φ_grid[None, :, None], V_choices.shape),
+        idx, axis=1).squeeze(1)
+    φ_fd = jnp.clip(φ_fd_raw + offset * dφ, φ_grid[0], φ_grid[-1])
+
+    # Parabolic peak value (better estimate than the grid-point max)
+    V_fd = v_0 - (v_lo - v_hi)**2 / jnp.where(
+        denom < -1e-20, 8.0 * denom, -8.0)
+    V_fd = jnp.where(denom < -1e-20, V_fd, v_0)
+
     H_fd = H_func(φ_fd, κ, η_m)
 
     return B_choices, W_choices, V_choices, V_fd, φ_fd, H_fd
@@ -789,7 +817,7 @@ def solve_model(β, β_hat, χ, ψ, σ, κ, η_m, θ,
 
         # Evaluate indirect utility, penalizing infeasible surpluses
         U_all = jnp.interp(Δ.ravel(), Δ_fine, U_fine).reshape(Δ.shape)
-        feasible = (Δ > -12.0) & (Δ < 8.0)
+        feasible = (Δ > -50.0) & (Δ < 20.0)
         U_all = jnp.where(feasible, U_all, -1e15)
 
         # Maximize over (b', φ') pairs
@@ -832,14 +860,14 @@ def solve_model(β, β_hat, χ, ψ, σ, κ, η_m, θ,
 
     # Indirect utility at each candidate surplus
     U_all = jnp.interp(Δ.ravel(), Δ_fine, U_fine).reshape(Δ.shape)
-    U_all = jnp.where((Δ > -12.0) & (Δ < 8.0), U_all, -1e15)
+    U_all = jnp.where((Δ > -50.0) & (Δ < 20.0), U_all, -1e15)
 
     # Total value and optimal (b', φ') for each (B, ξ)
     val = U_all + β_hat * EV[:, :, None, :]
     val_flat = val.reshape(n_bp * n_φ, n_B, n_ξ)
     best_idx = jnp.argmax(val_flat, axis=0)
 
-    # Extract policies at the optimum
+    # Extract policies at the coarse-grid optimum
     pol_b = b_prime_grid[best_idx // n_φ]
     pol_φ_out = φ_grid[best_idx % n_φ]
 
@@ -860,27 +888,231 @@ def solve_model(β, β_hat, χ, ψ, σ, κ, η_m, θ,
     return W, pol_b, pol_φ_out, pol_Δ, pol_η, pol_J, pol_φ_fd
 
 
+def _W_smoothing_splines(W_np, B_np, s_factor=0.05):
+    """Build smoothing splines for W(B, ξ).
+
+    The discrete VFI leaves grid-scale noise in W that, while invisible
+    in level plots, creates visible oscillations in W'' and therefore in
+    policies extracted via continuous optimization.  A
+    ``UnivariateSpline`` with ``s = s_factor * n`` removes these
+    artifacts while preserving the global shape of W.
+    """
+    splines = []
+    for j in range(W_np.shape[1]):
+        col = W_np[:, j]
+        mask = col > -1e10
+        if mask.sum() < 5:
+            splines.append(PchipInterpolator(B_np, col))
+            continue
+        B_feas, W_feas = B_np[mask], col[mask]
+        splines.append(
+            UnivariateSpline(B_feas, W_feas,
+                             s=s_factor * len(B_feas), k=4))
+    return splines
+
+
+def extract_policies_continuous(W, B_grid, ξ_grid, P_ξ,
+                                pol_b_init, pol_φ_init,
+                                β, β_hat, κ, η_m, λ,
+                                Δ_fine, U_fine, φ_bounds,
+                                s_factor=0.05, opt_maxiter=80):
+    """Extract smooth policies from converged *W* via continuous optimization.
+
+    Instead of searching over a discrete :math:`(b', \\phi')` lattice,
+    this function uses
+
+    (a) bounded scalar optimization (``minimize_scalar``) for
+        :math:`\\phi^{fd}(b', \\xi')`, and
+    (b) two-variable L-BFGS-B (``scipy.optimize.minimize``) for the
+        main :math:`(b', \\phi')` choice at each state,
+
+    both evaluated against smoothing-spline-interpolated continuation
+    values.  The smoothing removes grid-scale curvature noise from the
+    discrete VFI while preserving the global shape of *W*.
+    """
+    W_np = np.asarray(W)
+    B_np = np.asarray(B_grid)
+    ξ_np = np.asarray(ξ_grid)
+    P_np = np.asarray(P_ξ)
+    Δ_np = np.asarray(Δ_fine)
+    U_np = np.asarray(U_fine)
+    b_init = np.asarray(pol_b_init)
+    φ_init = np.asarray(pol_φ_init)
+
+    n_B = len(B_np)
+    n_ξ = len(ξ_np)
+    φ_lo, φ_hi = φ_bounds
+    B_lo, B_hi = float(B_np[0]), float(B_np[-1])
+    b_bar = max(B_hi - φ_hi, B_lo)
+    bp_grid = np.linspace(B_lo, b_bar, n_B)
+
+    # Smoothing splines for W(B, ξ) and PCHIP for U(Δ)
+    W_spl = _W_smoothing_splines(W_np, B_np, s_factor=s_factor)
+    U_spl = PchipInterpolator(Δ_np, U_np)
+
+    # ---- Step 1: continuous φ^fd(b', ξ') via bounded scalar optimization ----
+    V_fd_arr = np.empty((n_B, n_ξ))
+    φ_fd_arr = np.empty((n_B, n_ξ))
+
+    for j in range(n_ξ):
+        Wj = W_spl[j]
+        for i, bp in enumerate(bp_grid):
+            lo = max(φ_lo, B_lo - bp)
+            hi = min(φ_hi, B_hi - bp)
+            if lo >= hi - 1e-12:
+                φ_opt = lo
+            else:
+                res = minimize_scalar(
+                    lambda φ: -(float(Wj(bp + φ)) + κ * φ - η_m * φ**2),
+                    bounds=(lo, hi), method='bounded',
+                    options={'xatol': 1e-10})
+                φ_opt = res.x
+            φ_fd_arr[i, j] = φ_opt
+            V_fd_arr[i, j] = (float(Wj(np.clip(bp + φ_opt, B_lo, B_hi)))
+                              + κ * φ_opt - η_m * φ_opt**2)
+
+    H_fd_arr = φ_fd_arr * (1.0 + κ - 2.0 * η_m * φ_fd_arr)
+
+    # Splines for FD objects over the b' grid
+    V_fd_spl = [PchipInterpolator(bp_grid, V_fd_arr[:, j])
+                for j in range(n_ξ)]
+    φ_fd_spl = [PchipInterpolator(bp_grid, φ_fd_arr[:, j])
+                for j in range(n_ξ)]
+    H_fd_spl = [PchipInterpolator(bp_grid, H_fd_arr[:, j])
+                for j in range(n_ξ)]
+
+    # ---- Step 2: continuous (b', φ') via L-BFGS-B for each state (B, ξ) ----
+    pol_b  = np.empty((n_B, n_ξ))
+    pol_φ  = np.empty((n_B, n_ξ))
+    pol_Δ  = np.empty((n_B, n_ξ))
+    pol_η  = np.empty((n_B, n_ξ))
+    pol_J  = np.empty((n_B, n_ξ))
+    pol_φ_fd = np.empty((n_B, n_ξ))
+
+    bp_lo_b = float(bp_grid[0])
+    bp_hi_b = float(bp_grid[-1])
+
+    for k in range(n_ξ):
+        P_row = P_np[k]
+        for i in range(n_B):
+            B_state = float(B_np[i])
+
+            def objective(x):
+                bp, φp = x
+                B_next = bp + φp
+                if B_next < B_lo or B_next > B_hi:
+                    return 1e15
+                bp_c = np.clip(bp, bp_lo_b, bp_hi_b)
+
+                V_md = np.array([float(W_spl[j](B_next))
+                                 for j in range(n_ξ)])
+                V_md += κ * φp - η_m * φp**2
+
+                V_fd = np.array([float(V_fd_spl[j](bp_c))
+                                 for j in range(n_ξ)])
+                H_fd = np.array([float(H_fd_spl[j](bp_c))
+                                 for j in range(n_ξ)])
+
+                H_φp = φp * (1.0 + κ - 2.0 * η_m * φp)
+                z = λ * (V_md - V_fd + ξ_np)
+                η_bar = 1.0 / (1.0 + np.exp(-np.clip(z, -500, 500)))
+
+                H_comb = η_bar * H_φp + (1.0 - η_bar) * H_fd
+                J_val = β * P_row @ H_comb
+
+                Ω = np.logaddexp(λ * V_md, λ * (V_fd - ξ_np)) / λ
+                EV = P_row @ Ω
+
+                Δ_val = B_state - β * bp - J_val
+                if Δ_val < Δ_np[0] or Δ_val > Δ_np[-1]:
+                    return 1e15
+                return -(float(U_spl(Δ_val)) + β_hat * EV)
+
+            # Start from the coarse-grid solution
+            x0 = [np.clip(float(b_init[i, k]), bp_lo_b, bp_hi_b),
+                   np.clip(float(φ_init[i, k]), φ_lo, φ_hi)]
+
+            res = minimize(objective, x0, method='L-BFGS-B',
+                           bounds=[(bp_lo_b, bp_hi_b), (φ_lo, φ_hi)],
+                           options={'maxiter': opt_maxiter, 'ftol': 1e-12})
+
+            bp_opt, φp_opt = res.x
+            pol_b[i, k] = bp_opt
+            pol_φ[i, k] = φp_opt
+
+            # Recompute derived quantities at the optimum
+            bp_c = np.clip(bp_opt, bp_lo_b, bp_hi_b)
+            B_next = np.clip(bp_opt + φp_opt, B_lo, B_hi)
+            V_md = np.array([float(W_spl[j](B_next))
+                             for j in range(n_ξ)])
+            V_md += κ * φp_opt - η_m * φp_opt**2
+            V_fd = np.array([float(V_fd_spl[j](bp_c))
+                             for j in range(n_ξ)])
+            H_fd = np.array([float(H_fd_spl[j](bp_c))
+                             for j in range(n_ξ)])
+            φ_fd_v = np.array([float(φ_fd_spl[j](bp_c))
+                               for j in range(n_ξ)])
+
+            H_φp = φp_opt * (1.0 + κ - 2.0 * η_m * φp_opt)
+            z = λ * (V_md - V_fd + ξ_np)
+            η_bar = 1.0 / (1.0 + np.exp(-np.clip(z, -500, 500)))
+
+            H_comb = η_bar * H_φp + (1.0 - η_bar) * H_fd
+            J_val = β * P_row @ H_comb
+            Δ_val = B_state - β * bp_opt - J_val
+
+            pol_Δ[i, k] = Δ_val
+            pol_η[i, k] = P_row @ η_bar
+            pol_J[i, k] = J_val
+            pol_φ_fd[i, k] = P_row @ φ_fd_v
+
+    return pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd
+
+
 def solve_policy_cache(θ_nodes, p, ξ_grid, P_ξ, B_grid, φ_grid, λ,
-                       Δ_fine, n_iter=100):
+                       Δ_fine, n_iter=100, φ_bounds=None,
+                       s_factor=0.05, opt_maxiter=80, verbose=False):
     """Solve the model for several θ values and store policy arrays."""
     out = {k: [] for k in ['W', 'b', 'φ', 'Δ', 'η', 'J', 'φ_fd']}
     θ_nodes = np.asarray(θ_nodes, dtype=float)
+    if φ_bounds is None:
+        φ_bounds = (float(φ_grid[0]), float(φ_grid[-1]))
 
     for θ_val in θ_nodes:
-        U_fine, _ = vmap(
-            lambda d: indirect_utility(d, θ_val, p.χ, p.ψ, p.σ))(Δ_fine)
-        U_interp = (Δ_fine, U_fine)
+        if verbose:
+            print(f'  θ = {θ_val:.1f}: VFI …', end=' ', flush=True)
 
-        results = solve_model(
+        U_fine_arr, _ = vmap(
+            lambda d: indirect_utility(d, θ_val, p.χ, p.ψ, p.σ))(Δ_fine)
+        U_interp = (Δ_fine, U_fine_arr)
+
+        W, pol_b_c, pol_φ_c, pol_Δ_c, pol_η, pol_J, pol_φ_fd = solve_model(
             p.β, p.β_hat, p.χ, p.ψ, p.σ,
             p.κ, p.η_m, θ_val,
             ξ_grid, P_ξ, B_grid, φ_grid, λ,
             U_interp, n_iter
         )
 
+        if verbose:
+            print('continuous extraction …', end=' ', flush=True)
+
+        # Extract smooth policies via continuous optimization
+        pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd = \
+            extract_policies_continuous(
+                W, B_grid, ξ_grid, P_ξ,
+                pol_b_c, pol_φ_c,
+                p.β, p.β_hat, p.κ, p.η_m, λ,
+                Δ_fine, U_fine_arr, φ_bounds,
+                s_factor=s_factor, opt_maxiter=opt_maxiter
+            )
+
         names = ['W', 'b', 'φ', 'Δ', 'η', 'J', 'φ_fd']
+        results = [W, pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd]
         for name, arr in zip(names, results):
             out[name].append(np.asarray(arr))
+
+        if verbose:
+            print('done.')
 
     result = {
         'θ_nodes': θ_nodes,
@@ -893,20 +1125,24 @@ def solve_policy_cache(θ_nodes, p, ξ_grid, P_ξ, B_grid, φ_grid, λ,
 ```
 
 The first call triggers JIT compilation, which takes a moment.
+The continuous policy extraction step then refines the discrete-grid
+solution by solving bounded optimization problems against spline
+interpolants.
 
 ```{code-cell} ipython3
 p = params_la
-n_B_coarse = 120
-n_φ_coarse = 120
+n_B_coarse = 140
+n_φ_coarse = 80
 n_ξ_coarse = 9
 
+φ_bounds = (0.5, float(p.φ_star * 0.99))
 B_grid = jnp.linspace(0.1, p.B_max, n_B_coarse)
-φ_grid = jnp.linspace(0.5, p.φ_star * 0.99, n_φ_coarse)
+φ_grid = jnp.linspace(φ_bounds[0], φ_bounds[1], n_φ_coarse)
 ξ_grid_np, P_ξ_np = build_ξ_grid(n_ξ_coarse, p.α_l, p.α_ξ, p.ξ_bar)
 ξ_grid = jnp.array(ξ_grid_np)
 P_ξ = jnp.array(P_ξ_np)
 
-Δ_fine = jnp.linspace(-12.0, 8.0, 800)
+Δ_fine = jnp.linspace(-55.0, 20.0, 3000)
 U_fine, _ = vmap(lambda d: indirect_utility(d, p.θ_bar, p.χ, p.ψ, p.σ))(Δ_fine)
 U_interp = (Δ_fine, U_fine)
 
@@ -916,6 +1152,15 @@ W, pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd = solve_model(
     ξ_grid, P_ξ, B_grid, φ_grid, p.λ,
     U_interp, 200
 )
+
+# Extract smooth policies via continuous optimization
+pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd = \
+    extract_policies_continuous(
+        W, B_grid, ξ_grid, P_ξ,
+        pol_b, pol_φ,
+        p.β, p.β_hat, p.κ, p.η_m, p.λ,
+        Δ_fine, U_fine, φ_bounds
+    )
 ```
 
 ```{code-cell} ipython3
@@ -1030,23 +1275,49 @@ def solve_φ_fd_continuous(b, θ, p):
     return 0.5 * (φ_lo + φ_hi)
 
 
-def build_current_fd_cache(cache, φ_grid, p):
-    """Current-state FD objects implied by W(B, ξ)."""
-    B_g = jnp.array(cache['B_grid'])
-    b_bar = jnp.maximum(B_g[-1] - φ_grid[-1], B_g[0])
-    b_g = jnp.linspace(B_g[0], b_bar, B_g.shape[0])
+def build_current_fd_cache(cache, φ_bounds, p, s_factor=0.05):
+    """Current-state FD objects implied by W(B, ξ), solved continuously."""
+    B_np = np.asarray(cache['B_grid'])
+    φ_lo, φ_hi = φ_bounds
+    B_lo, B_hi = float(B_np[0]), float(B_np[-1])
+    b_bar = max(B_hi - φ_hi, B_lo)
+    n_B = len(B_np)
+    b_g = np.linspace(B_lo, b_bar, n_B)
+    n_ξ = len(cache['ξ_grid'])
     out_V, out_φ = [], []
 
     for θi in range(len(cache['θ_nodes'])):
-        W_θ = jnp.array(cache['W'][θi])
-        _, _, _, V_fd_cur, φ_fd_cur, _ = fd_from_continuation(
-            W_θ, B_g, b_g, φ_grid, p.κ, p.η_m
-        )
-        out_V.append(np.asarray(V_fd_cur))
-        out_φ.append(np.asarray(φ_fd_cur))
+        W_np_θ = np.asarray(cache['W'][θi])
+        W_spl = _W_smoothing_splines(W_np_θ, B_np,
+                                     s_factor=s_factor)
+
+        V_fd_cur = np.empty((n_B, n_ξ))
+        φ_fd_cur = np.empty((n_B, n_ξ))
+
+        for j in range(n_ξ):
+            Wj = W_spl[j]
+            for i, b in enumerate(b_g):
+                lo = max(φ_lo, B_lo - b)
+                hi = min(φ_hi, B_hi - b)
+                if lo >= hi - 1e-12:
+                    φ_opt = lo
+                else:
+                    res = minimize_scalar(
+                        lambda φ: -(float(Wj(b + φ))
+                                    + p.κ * φ - p.η_m * φ**2),
+                        bounds=(lo, hi), method='bounded',
+                        options={'xatol': 1e-10})
+                    φ_opt = res.x
+                φ_fd_cur[i, j] = φ_opt
+                V_fd_cur[i, j] = (
+                    float(Wj(np.clip(b + φ_opt, B_lo, B_hi)))
+                    + p.κ * φ_opt - p.η_m * φ_opt**2)
+
+        out_V.append(V_fd_cur)
+        out_φ.append(φ_fd_cur)
 
     return {
-        'b_grid': np.asarray(b_g),
+        'b_grid': b_g,
         'V_fd': np.stack(out_V),
         'φ_fd': np.stack(out_φ)
     }
@@ -1354,12 +1625,27 @@ def simulate_institutional_irf(
     return out
 
 
-θ_high = 200.0
-θ_irf = np.array([p.θ_bar, θ_high])
+# The two IRFs require different θ ranges to match the paper's
+# illustrative dynamics (Figures 3 and 4).
+#
+# Fundamental disinflation: θ drops from θ_H to θ_L while ξ stays
+# low (FD throughout).  At low θ, the FD steady state has high
+# debt-to-GDP (≈70-75%), and a drop in θ produces a gradual
+# decline in both debt and inflation (positive correlation).
+#
+# Institutional disinflation: θ stays constant at a moderate level
+# while ξ jumps from 0 to a positive value (the economy switches
+# from FD to MD).  At θ ≈ θ_bar the FD steady state has moderate
+# debt (≈15-35%) and high inflation, and the ξ jump produces
+# rising debt with falling inflation (negative correlation).
+θ_fund_L, θ_fund_H = 12.0, 22.0
+θ_inst_val = p.θ_bar  # 130
+θ_irf = np.array([θ_fund_L, θ_fund_H, θ_inst_val])
 cache = solve_policy_cache(
-    θ_irf, p, ξ_grid, P_ξ, B_grid, φ_grid, p.λ, Δ_fine, n_iter=200
+    θ_irf, p, ξ_grid, P_ξ, B_grid, φ_grid, p.λ, Δ_fine,
+    n_iter=200, φ_bounds=φ_bounds, verbose=True
 )
-current_fd_cache = build_current_fd_cache(cache, φ_grid, p)
+current_fd_cache = build_current_fd_cache(cache, φ_bounds, p)
 sim_interp_cache = build_sim_interp_cache(cache, current_fd_cache)
 
 
@@ -1367,19 +1653,22 @@ sim_interp_cache = build_sim_interp_cache(cache, current_fd_cache)
 T, t_shock = 60, 10
 p = params_la
 
-# θ_irf = [θ_bar, θ_high], so index 0 = θ_bar, index 1 = θ_high
+# θ_irf = [θ_fund_L, θ_fund_H, θ_inst_val]
+#   index 0 → θ=12  (fundamental post-shock)
+#   index 1 → θ=22  (fundamental pre-shock)
+#   index 2 → θ=130 (institutional, constant)
 ξ_pre, ξ_post = 0, n_ξ_coarse // 2
 
-# Fundamental disinflation: initialize from converged FD steady state
+# Fundamental disinflation: FD steady state at θ_H (idx 1), ξ=0
 b0_fund, φ0_fund = find_fd_steady_state(1, 0, cache, sim_interp_cache, p)
 θ_fund_idx = np.where(np.arange(T) < t_shock, 1, 0).astype(int)
 irf_fund = simulate_fundamental_irf(
     b0_fund, φ0_fund, θ_fund_idx, 0, cache, sim_interp_cache, p, t_shock
 )
 
-# Institutional disinflation: initialize from converged FD steady state
-b0_inst, φ0_inst = find_fd_steady_state(0, ξ_pre, cache, sim_interp_cache, p)
-θ_inst_idx = np.zeros(T, dtype=int)
+# Institutional disinflation: FD steady state at θ_inst (idx 2), ξ=0
+b0_inst, φ0_inst = find_fd_steady_state(2, ξ_pre, cache, sim_interp_cache, p)
+θ_inst_idx = np.full(T, 2, dtype=int)
 ξ_inst_idx = np.where(
     np.arange(T) < t_shock, ξ_pre, ξ_post).astype(int)
 irf_inst = simulate_institutional_irf(
@@ -1391,8 +1680,8 @@ print(f"Fundamental initial state: b0 = {b0_fund:.4f}, φ0' = {φ0_fund:.4f}")
 print(f"Institutional initial state: b0 = {b0_inst:.4f}, φ0' = {φ0_inst:.4f}")
 
 time = np.arange(T) - t_shock
-θ_fund = np.where(np.arange(T) < t_shock, θ_high, p.θ_bar)
-θ_inst = np.full(T, p.θ_bar)
+θ_fund = np.where(np.arange(T) < t_shock, θ_fund_H, θ_fund_L)
+θ_inst = np.full(T, θ_inst_val)
 ξ_inst = np.asarray(ξ_grid)[ξ_inst_idx]
 ```
 
@@ -1443,7 +1732,7 @@ fig = plot_irf(irf_fund, θ_fund, np.zeros(T), time,
 plt.show()
 ```
 
-**Fundamental disinflation** ({numref}`fig-fundamental`): a permanent drop in $\theta$ from 200 to $\bar\theta = 130$ reduces fiscal pressure.
+**Fundamental disinflation** ({numref}`fig-fundamental`): a permanent drop in $\theta$ from $\theta_H$ to $\theta_L$ reduces fiscal pressure.
 
 The realized regime remains fiscal dominant throughout (solid line), while the target-honoring probability (dashed line) stays well below the institutional case.
 
