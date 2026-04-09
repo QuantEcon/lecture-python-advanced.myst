@@ -111,11 +111,9 @@ tags: [hide-output]
 import jax
 import jax.numpy as jnp
 from jax import jit, vmap, lax
-from collections import namedtuple
+from typing import NamedTuple
 from functools import partial
 from scipy.stats import norm
-from scipy.optimize import brentq, fsolve, minimize_scalar, minimize
-from scipy.interpolate import PchipInterpolator, UnivariateSpline
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import numpy as np
@@ -301,6 +299,15 @@ $$
 \end{cases}
 $$
 
+The inflation target summarized by a promised $\phi$ is satisfied if and only if
+
+$$
+\xi \geq \xi^* = V^{fd}(b, s) - V^{md}(b, \phi, s)
+  = \max_{\phi_{fd}} V^{md}(b, \phi_{fd}, s) - V^{md}(b, \phi, s).
+$$
+
+Deviating from the target allows the government to attain the maximum utility possible net of the cost $\xi$. A cost $\xi$ greater than the cutoff $\xi^*$ is required for the target to be sustained. More ambitious inflation targets (closer to the Ramsey value $\phi^*$) are harder to achieve because the cutoff $\xi^*$ is larger. The target is also easier to achieve when the marginal utility of government expenditure $\theta$ is lower, because positive surpluses are less valuable. {numref}`fig-credibility-targets` below illustrates this logic.
+
 **Monetary dominance** -- the government solves:
 
 $$
@@ -331,11 +338,22 @@ $$
 We collect all model parameters into a named tuple, calibrated to an average of Colombia and Chile 1960–2017 following Table 1 of {cite:t}`DovisAccountingMFrevised`.
 
 ```{code-cell} ipython3
-DovisParams = namedtuple('DovisParams', [
-    'β', 'β_hat', 'χ', 'κ', 'η_m', 'ψ', 'σ',
-    'θ_bar', 'ρ_θ', 'σ_θ', 'α_l', 'α_ξ', 'ξ_bar', 'λ',
-    'φ_star', 'n_B', 'n_φ', 'n_θ', 'n_ξ', 'B_max'
-])
+class DovisParams(NamedTuple):
+    β: float              # Household discount factor
+    β_hat: float          # Government discount factor
+    χ: float              # Labor disutility parameter
+    κ: float              # Money-demand parameter
+    η_m: float            # Money-demand parameter
+    ψ: float              # Inverse Frisch elasticity
+    σ: float              # Inverse EIS for gov't expenditures
+    θ_bar: float          # Mean θ
+    ρ_θ: float            # Persistence of θ
+    σ_θ: float            # Innovation std dev of θ
+    α_l: float            # Prob of ξ₁ resetting to 0
+    α_ξ: float            # Persistence of ξ₁
+    ξ_bar: float          # Upper bound of ξ₁
+    λ: float              # Gumbel scale parameter
+    φ_star: float         # Satiation point κ/(2η_m)
 
 
 def create_params():
@@ -352,14 +370,13 @@ def create_params():
     α_ξ = 0.99
     ξ_bar = 0.5
     λ = 20.0
-
     φ_star = κ / (2.0 * η_m)
 
     return DovisParams(
         β=β, β_hat=β_hat, χ=χ, κ=κ, η_m=η_m, ψ=ψ, σ=σ,
         θ_bar=θ_bar, ρ_θ=ρ_θ, σ_θ=σ_θ,
         α_l=α_l, α_ξ=α_ξ, ξ_bar=ξ_bar, λ=λ,
-        φ_star=φ_star, n_B=300, n_φ=300, n_θ=5, n_ξ=7, B_max=50.0
+        φ_star=φ_star
     )
 
 
@@ -531,6 +548,152 @@ The right panel shows the marginal cost of surpluses $U'(\Delta, \theta) < 0$, w
 
 Higher $\theta$ shifts the curves because greater social value of government spending makes running a surplus even more costly.
 
+### Credibility of inflation targets
+
+We can now illustrate the credibility condition from the recursive formulation.
+For a given level of inherited debt $b$ and optimal continuation choices, the value of entering the period with real balances $\phi$ is approximately
+
+$$
+V^{md}(\phi;\, b,\, \theta) \;\approx\; U(\phi + D,\, \theta) \;+\; v(\phi),
+$$
+
+where $D = b - \beta b' - \text{seigniorage}$ collects the non-$\phi$ terms in the surplus $\Delta$. This is hump-shaped in $\phi$: low $\phi$ sacrifices money utility while high $\phi$ forces a large, costly surplus.
+
+Under fiscal dominance the government picks $\phi^{fd}$ to maximize this expression, so $V^{fd} = \max_\phi V^{md}(\phi)$.
+The cutoff cost $\xi^* = V^{fd} - V^{md}(\phi')$ is the temptation to deviate from the promised $\phi'$.
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: "Credibility of inflation targets"
+    name: fig-credibility-targets
+---
+p = params_la
+iu_vec = vmap(indirect_utility, in_axes=(0, None, None, None, None))
+
+# φ grid — from near zero up to just below φ* = κ/(2η_m)
+phi_max = p.κ / (2.0 * p.η_m) * 0.99
+phi_grid = jnp.linspace(0.05, phi_max, 500)
+
+# Surplus: Δ = φ + D where D = b − βb' − seigniorage
+# (higher φ ⟹ larger surplus ⟹ more costly)
+D = 1.0
+Delta_grid = phi_grid + D
+
+# Two θ values: baseline (high fiscal pressure) and low θ_L
+θ_high = 150.0
+θ_low  = 100.0
+
+U_high, _ = iu_vec(Delta_grid, θ_high, p.χ, p.ψ, p.σ)
+U_low, _  = iu_vec(Delta_grid, θ_low,  p.χ, p.ψ, p.σ)
+v_phi = v_money(phi_grid, p.κ, p.η_m)
+
+V_blue_raw = np.array(U_high + v_phi)   # baseline θ (high)
+V_red_raw  = np.array(U_low  + v_phi)   # θ_L (low)
+phi_np = np.array(phi_grid)
+
+mask_b = V_blue_raw > -1e5
+mask_r = V_red_raw  > -1e5
+
+# Shift curves so peaks are at comparable heights
+# (the absolute level difference is driven by θ·u(g), not the φ tradeoff)
+V_blue = V_blue_raw - V_blue_raw[mask_b].min()
+V_red  = V_red_raw  - V_red_raw[mask_r].min()
+V_blue += V_red.max() - V_blue.max()   # align peaks
+
+# Find peaks (φ^fd for each θ)
+idx_peak_b = np.argmax(V_blue[mask_b])
+idx_peak_r = np.argmax(V_red[mask_r])
+phi_fd_b = phi_np[mask_b][idx_peak_b]
+phi_fd_r = phi_np[mask_r][idx_peak_r]
+V_peak_b = V_blue[mask_b][idx_peak_b]
+V_peak_r = V_red[mask_r][idx_peak_r]
+
+# Promise point φ' — to the right of both peaks
+phi_prime = 0.5 * (phi_fd_r + phi_max)
+phi_star  = phi_prime + 0.4
+
+# Values at the promise
+V_at_b = float(np.interp(phi_prime, phi_np[mask_b], V_blue[mask_b]))
+V_at_r = float(np.interp(phi_prime, phi_np[mask_r], V_red[mask_r]))
+
+# ---- Plot ----
+fig, ax = plt.subplots(figsize=(8, 6))
+ax.plot(phi_np[mask_b], V_blue[mask_b], 'b-', lw=2.5)
+ax.plot(phi_np[mask_r], V_red[mask_r],  'r-', lw=2.5)
+
+# Vertical dashed lines
+for xv in [phi_fd_b, phi_fd_r, phi_prime, phi_star]:
+    ax.axvline(xv, ls='--', color='gray', alpha=0.35, lw=0.7)
+
+# Horizontal dashed lines at peak levels
+ax.hlines(V_peak_b, phi_fd_b, phi_prime,
+          ls='--', color='blue', alpha=0.35, lw=0.7)
+ax.hlines(V_peak_r, phi_fd_r, phi_prime,
+          ls='--', color='red', alpha=0.35, lw=0.7)
+
+# Horizontal dashed lines at promise levels
+ax.hlines(V_at_b, phi_fd_b, phi_prime,
+          ls='--', color='blue', alpha=0.25, lw=0.7)
+ax.hlines(V_at_r, phi_fd_r, phi_prime,
+          ls='--', color='red', alpha=0.25, lw=0.7)
+
+# ξ* double arrows — both measured at φ'
+# Blue ξ* (large gap): arrow just LEFT of φ', label further left
+x_xi_b = phi_fd_b
+ax.annotate('', xy=(x_xi_b, V_peak_b),
+            xytext=(x_xi_b, V_at_b),
+            arrowprops=dict(arrowstyle='<->', color='blue', lw=1.5))
+ax.text(x_xi_b - 0.25, 0.5 * (V_peak_b + V_at_b),
+        r'$\xi^*$', fontsize=14, color='blue',
+        ha='right', va='center')
+
+# Red ξ̂* (small gap): arrow just RIGHT of φ', label further right
+x_xi_r = phi_fd_r
+ax.annotate('', xy=(x_xi_r, V_peak_r),
+            xytext=(x_xi_r, V_at_r),
+            arrowprops=dict(arrowstyle='<->', color='red', lw=1.5))
+ax.text(x_xi_r + 0.25, 0.5 * (V_peak_r + V_at_r),
+        r'$\hat{\xi}^*$', fontsize=14, color='red',
+        ha='left', va='center')
+
+# Curve labels — place in the right half where curves separate
+x_lab_r = phi_prime + 0.9
+x_lab_b = phi_np[mask_b][-1] * 0.92
+ax.text(x_lab_r,
+        float(np.interp(x_lab_r, phi_np[mask_r], V_red[mask_r])),
+        r'$V_{md}(\phi,\,\theta_L)$', fontsize=13, color='red',
+        va='bottom', ha='left')
+ax.text(x_lab_b,
+        float(np.interp(x_lab_b, phi_np[mask_b], V_blue[mask_b])),
+        r'$V_{md}(\phi)$', fontsize=13, color='blue',
+        va='top', ha='left')
+
+# x-axis labels
+trans = ax.get_xaxis_transform()
+for xv, lab in [(phi_fd_b, r'$\phi_{fd}$'),
+                (phi_fd_r, r'$\hat\phi_{fd}$'),
+                (phi_prime, r"$\phi'$"),
+                (phi_star, r'$\phi^*$')]:
+    ax.text(xv, -0.06, lab, transform=trans,
+            fontsize=12, ha='center', va='top', clip_on=False)
+
+ax.set_ylabel(r'$V$', fontsize=14)
+ax.set_xlabel(r'$\phi$', fontsize=14)
+ax.tick_params(labelbottom=False, labelleft=False)
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+plt.tight_layout()
+plt.show()
+```
+
+The blue curve plots $V^{md}(\phi) = U(\phi + D,\, \theta) + v(\phi)$ for baseline fiscal pressure $\theta$, and the red curve for a lower value $\theta_L$. 
+
+Each curve peaks at the corresponding $\phi^{fd}$, the level of real balances chosen under fiscal dominance. The gap $\xi^*$ between the peak (the fiscal-dominance value $V^{fd}$) and the value at the promised $\phi'$ is the minimum institutional cost needed to sustain the inflation target. 
+
+With lower fiscal pressure (red), the gap shrinks: the target becomes easier to sustain.
+
 ## The full model with Gumbel shocks
 
 Following the paper's computational approach, the cost $\xi$ is decomposed as
@@ -569,30 +732,9 @@ $$
 
 This makes the value function differentiable and the numerical solution well behaved.
 
-We discretize $\theta$ via the {cite:t}`Tauchen1986` method and $\xi_1$ via the paper's Markov chain on $[0, \bar\xi]$, then build grids for total liabilities $B$ and promised real balances $\phi'$.
+We discretize $\xi_1$ via the paper's Markov chain on $[0, \bar\xi]$, then build grids for total liabilities $B$, debt $b'$, and promised real balances $\phi'$.
 
 ```{code-cell} ipython3
-def tauchen(ρ, σ, n, m=3):
-    """Discretize AR(1) process via Tauchen's method."""
-    σ_y = σ / np.sqrt(1.0 - ρ**2)
-    y_max = m * σ_y
-    y = np.linspace(-y_max, y_max, n)
-    d = y[1] - y[0] if n > 1 else 1.0
-
-    P = np.zeros((n, n))
-    for i in range(n):
-        for j in range(n):
-            if j == 0:
-                P[i, j] = norm.cdf((y[0] + d/2 - ρ * y[i]) / σ)
-            elif j == n - 1:
-                P[i, j] = 1.0 - norm.cdf(
-                    (y[n-1] - d/2 - ρ * y[i]) / σ)
-            else:
-                P[i, j] = (norm.cdf((y[j] + d/2 - ρ * y[i]) / σ) -
-                            norm.cdf((y[j] - d/2 - ρ * y[i]) / σ))
-    return y, P
-
-
 def build_ξ_grid(n_ξ, α_l, α_ξ, ξ_bar):
     """Build ξ_1 grid on [0, ξ_bar] and transition matrix.
 
@@ -608,31 +750,11 @@ def build_ξ_grid(n_ξ, α_l, α_ξ, ξ_bar):
     for i in range(n_ξ):
         P_ξ[i, i] += α_ξ      # stay at current value
     return ξ_grid, P_ξ
-
-
-def build_grids(par):
-    """Build state-space grids and transition matrices."""
-    θ_dev, P_θ = tauchen(par.ρ_θ, par.σ_θ, par.n_θ)
-    θ_grid = par.θ_bar + θ_dev
-
-    ξ_grid, P_ξ = build_ξ_grid(par.n_ξ, par.α_l, par.α_ξ, par.ξ_bar)
-
-    B_grid = np.linspace(0.01, par.B_max, par.n_B)
-    φ_grid = np.linspace(0.01, par.φ_star * 0.99, par.n_φ)
-
-    return {
-        'θ_grid': θ_grid, 'P_θ': P_θ,
-        'ξ_grid': ξ_grid, 'P_ξ': P_ξ,
-        'B_grid': B_grid, 'φ_grid': φ_grid
-    }
-
-
-grids = build_grids(params_la)
 ```
 
 ## Computational algorithm
 
-Because the budget constraint depends on $b$ and $\phi$ only through their sum, the problem can be written in terms of a single endogenous state variable $B = b + \phi$ (total real government liabilities).
+Because the budget constraint depends on $b$ and $\phi$ only through their sum, the problem can be written in terms of a single endogenous state variable $B = b + \phi$ (total real government liabilities), as described in Appendix C of {cite:t}`DovisAccountingMFrevised`.
 
 We define a **reduced continuation value** $W(B, s_1)$ that strips the current-period money utility $v(\phi)$ out of the recursive problem.  
 
@@ -665,502 +787,228 @@ The algorithm is:
 
 We now set up a simplified version of the model with deterministic $\theta$, multiple $\xi_1$ states, and the quadratic money-utility specification.
 
-The static FOC $v'(\phi^{fd}) + U'(\Delta, \theta) = 0$ is a useful benchmark for how fiscal dominance trades off inflation and surplus costs.
-
-The following function computes that static benchmark by bisection, approximating the surplus as $\Delta \approx B - \phi$.
-
-```{code-cell} ipython3
-@jit
-def φ_fd_solve(B, θ, χ, ψ, σ, κ, η_m):
-    """Solve for φ^fd from the static FOC v'(φ) = -U'(Δ, θ)."""
-    φ_hi_init = κ / (2.0 * η_m) * 0.99
-
-    def bisect_body(_, bounds):
-        φ_lo, φ_hi = bounds
-        φ_mid = 0.5 * (φ_lo + φ_hi)
-        vp = v_money_prime(φ_mid, κ, η_m)
-        Δ_approx = jnp.clip(B - φ_mid, -50.0, 20.0)
-        _, U_p = indirect_utility(Δ_approx, θ, χ, ψ, σ)
-        residual = vp + U_p
-        new_lo = jnp.where(residual > 0, φ_mid, φ_lo)
-        new_hi = jnp.where(residual <= 0, φ_mid, φ_hi)
-        return (new_lo, new_hi)
-
-    φ_lo, φ_hi = lax.fori_loop(0, 60, bisect_body, (0.01, φ_hi_init))
-    return 0.5 * (φ_lo + φ_hi)
-```
-
-Appendix C of the paper instead defines fiscal dominance recursively by
+Appendix C of the paper defines fiscal dominance recursively by
 
 $$
 V^{fd}(b', \xi') = \max_{\phi} \left[ W(b' + \phi, \xi') + v(\phi) \right].
 $$
 
-Accordingly, the Bellman solver below recovers $\phi^{fd}$ by a grid search over $\phi$ using the continuation value $W$.
-
-It also linearly interpolates $W(B, \xi)$ over the liabilities grid rather than snapping to the nearest grid point.
-
-This avoids the step-function artifacts that otherwise produce flat or jagged policy plots.
+The Bellman solver below recovers $\phi^{fd}$ by a grid search over $\phi$ using the continuation value $W$, and linearly interpolates $W(B, \xi)$ over the liabilities grid via `jnp.interp`.
 
 The inner expectation over $\xi'$ is a matrix multiply against $P_\xi$ via `jnp.einsum`, the search over $(b', \phi')$ is a vectorized `argmax`, and the VFI loop uses `lax.scan`.
 
-After convergence, a separate **continuous policy extraction** step (`extract_policies_continuous`) recovers smooth policies by solving the Bellman right-hand side with bounded continuous optimizers (scalar `minimize_scalar` for $\phi^{fd}$ and two-variable L-BFGS-B for the main $(b', \phi')$ choice), both evaluated against `UnivariateSpline`-interpolated continuation values.  The smoothing spline removes grid-scale curvature noise that the discrete VFI introduces into $W$; without it, even continuous optimizers would inherit oscillations in $W''$ and produce noisy policies.  Together, the smoothing and continuous controls eliminate the staircase artifacts that otherwise propagate through the simulation as oscillations in $\eta$, inflation, and debt.
+The discrete grid causes the `argmax` to oscillate between adjacent grid points, preventing exact convergence. To produce smooth policy functions we average the last 50 VFI iterates, which cancels the oscillation while preserving the correct level of the value function.
+
+We pack the grids, transition matrix, and precomputed indirect utility into a `DovisModel` named tuple.
 
 ```{code-cell} ipython3
-def interp_B_values(B_points, B_grid, values):
-    """Linearly interpolate values(B, ξ) over B for each ξ state."""
-    flat = jnp.ravel(B_points)
-    interp_cols = vmap(
-        lambda col: jnp.interp(flat, B_grid, col),
-        in_axes=1, out_axes=0)(values)
-    return jnp.moveaxis(
-        interp_cols.reshape(values.shape[1], *B_points.shape), 0, -1)
+class DovisModel(NamedTuple):
+    """All grids and precomputed objects needed by the Bellman operator."""
+    β: float
+    β_hat: float
+    κ: float
+    η_m: float
+    λ: float
+    φ_star: float
+    B_grid: jnp.ndarray     # (n_B,)
+    b_grid: jnp.ndarray     # (n_b,)
+    φ_grid: jnp.ndarray     # (n_φ,)
+    ξ_grid: jnp.ndarray     # (n_ξ,)
+    P_ξ: jnp.ndarray        # (n_ξ, n_ξ)
+    Δ_fine: jnp.ndarray     # fine surplus grid
+    U_fine: jnp.ndarray     # U(Δ, θ) on fine grid
 
 
-def fd_from_continuation(W, B_grid, b_prime_grid, φ_grid, κ, η_m):
-    """Recover V^fd and φ^fd from max_φ [W(b' + φ, ξ) + v(φ)]."""
+def create_dovis_model(p, θ=None,
+                       n_B=200, n_b=200, n_φ=150, n_ξ=9,
+                       B_max=50.0):
+    """Create a DovisModel from DovisParams *p*."""
+    if θ is None:
+        θ = p.θ_bar
+    φ_lo, φ_hi = 0.5, p.φ_star * 0.99
+    B_grid = jnp.linspace(0.1, B_max, n_B)
+    b_bar = max(B_max - φ_hi, 0.1)
+    b_grid = jnp.linspace(0.1, b_bar, n_b)
+    φ_grid = jnp.linspace(φ_lo, φ_hi, n_φ)
+    ξ_np, P_ξ_np = build_ξ_grid(n_ξ, p.α_l, p.α_ξ, p.ξ_bar)
+    Δ_fine = jnp.linspace(-55.0, 20.0, 3000)
+    U_fine, _ = vmap(lambda d: indirect_utility(d, θ, p.χ, p.ψ, p.σ))(Δ_fine)
+    return DovisModel(
+        β=p.β, β_hat=p.β_hat, κ=p.κ, η_m=p.η_m,
+        λ=p.λ, φ_star=p.φ_star,
+        B_grid=B_grid, b_grid=b_grid, φ_grid=φ_grid,
+        ξ_grid=jnp.array(ξ_np), P_ξ=jnp.array(P_ξ_np),
+        Δ_fine=Δ_fine, U_fine=U_fine
+    )
+```
 
-    # Candidate total liabilities B = b' + φ for each (b', φ) pair
-    B_choices = b_prime_grid[:, None] + φ_grid[None, :]
+We now define the **Bellman operator** `T(W, model)`.
 
-    # Interpolate W at each candidate B
-    W_choices = interp_B_values(B_choices, B_grid, W)
+Given the current guess $W$, it:
 
-    # Add money utility to get total value for each φ choice
-    V_choices = W_choices + v_money(φ_grid, κ, η_m)[None, :, None]
+1. Computes $V^{fd}(b', \xi')$ and $\phi^{fd}(b', \xi')$ by maximizing $W(b'+\phi, \xi') + v(\phi)$ over the $\phi$ grid.
+2. Computes $V^{md}(b', \phi', \xi') = W(b'+\phi', \xi') + v(\phi')$.
+3. Evaluates the logit regime probability $\bar\eta$ and log-sum-exp continuation $\Omega$.
+4. Takes expectations over $\xi_1'$ to get $EV$ and money-demand $J$.
+5. For each state $(B, \xi_1)$, evaluates the budget constraint $\Delta = B - \beta b' - J$ and the indirect utility $U(\Delta)$ at every candidate $(b', \phi')$ pair, then takes the `argmax`.
 
-    # Pick the φ that maximizes value for each (b', ξ)
-    best_idx = jnp.argmax(V_choices, axis=1)
-    idx = best_idx[:, None, :]
-    n_φ = φ_grid.shape[0]
+```{code-cell} ipython3
+def compute_continuation(W, model):
+    """Compute continuation-value objects from W.
 
-    # --- Parabolic sub-grid refinement along φ axis ---
-    # The discrete argmax snaps φ^fd to grid points.  A local
-    # quadratic fit gives sub-cell accuracy, eliminating the
-    # staircase in φ^fd(b') that otherwise propagates through
-    # the simulation as oscillations in η_prob, inflation, etc.
-    idx_lo = jnp.clip(best_idx - 1, 0, n_φ - 1)[:, None, :]
-    idx_hi = jnp.clip(best_idx + 1, 0, n_φ - 1)[:, None, :]
+    Returns EV, J (both shape (n_b, n_φ, n_ξ)), and
+    V_fd, H_fd (both shape (n_b, n_ξ)).
+    """
+    β, κ, η_m, lam = model.β, model.κ, model.η_m, model.λ
+    B_grid, b_grid, φ_grid, ξ_grid, P_ξ = (
+        model.B_grid, model.b_grid, model.φ_grid,
+        model.ξ_grid, model.P_ξ)
+    n_b, n_φ = len(b_grid), len(φ_grid)
 
-    v_lo = jnp.take_along_axis(V_choices, idx_lo, axis=1).squeeze(1)
-    v_0  = jnp.take_along_axis(V_choices, idx, axis=1).squeeze(1)
-    v_hi = jnp.take_along_axis(V_choices, idx_hi, axis=1).squeeze(1)
+    # B_candidate[i, k] = b'[i] + φ[k]
+    B_cand = b_grid[:, None] + φ_grid[None, :]   # (n_b, n_φ)
 
-    denom = v_lo - 2.0 * v_0 + v_hi
-    offset = jnp.where(denom < -1e-20,
-                       jnp.clip(0.5 * (v_lo - v_hi) / denom, -0.5, 0.5),
-                       0.0)
+    # Interpolate W at all candidate B values for each ξ' column
+    def interp_col(W_col):
+        return jnp.interp(B_cand.ravel(), B_grid, W_col).reshape(n_b, n_φ)
+    W_at = vmap(interp_col, in_axes=1, out_axes=2)(W)  # (n_b, n_φ, n_ξ)
 
-    dφ = φ_grid[1] - φ_grid[0]
-    φ_fd_raw = jnp.take_along_axis(
-        jnp.broadcast_to(φ_grid[None, :, None], V_choices.shape),
-        idx, axis=1).squeeze(1)
-    φ_fd = jnp.clip(φ_fd_raw + offset * dφ, φ_grid[0], φ_grid[-1])
+    v_φ = v_money(φ_grid, κ, η_m)          # (n_φ,)
+    total = W_at + v_φ[None, :, None]       # (n_b, n_φ, n_ξ)
 
-    # Parabolic peak value (better estimate than the grid-point max)
-    V_fd = v_0 - (v_lo - v_hi)**2 / jnp.where(
-        denom < -1e-20, 8.0 * denom, -8.0)
-    V_fd = jnp.where(denom < -1e-20, V_fd, v_0)
-
+    # V^fd = max_φ total,  V^md = total (for each φ')
+    V_fd = jnp.max(total, axis=1)           # (n_b, n_ξ)
+    φ_fd = φ_grid[jnp.argmax(total, axis=1)]
     H_fd = H_func(φ_fd, κ, η_m)
+    V_md = total                             # (n_b, n_φ, n_ξ)
 
-    return B_choices, W_choices, V_choices, V_fd, φ_fd, H_fd
+    # Logit η̄ and log-sum-exp Ω
+    z = lam * (V_md - V_fd[:, None, :] + ξ_grid[None, None, :])
+    η_bar = jax.nn.sigmoid(z)
+    Ω = jnp.logaddexp(
+        lam * V_md,
+        lam * (V_fd[:, None, :] - ξ_grid[None, None, :])
+    ) / lam
 
-
-@partial(jit, static_argnums=(14,))
-def solve_model(β, β_hat, χ, ψ, σ, κ, η_m, θ,
-                ξ_grid, P_ξ, B_grid, φ_grid, λ,
-                U_interp, n_iter):
-    """Vectorized value function iteration."""
-    Δ_fine, U_fine = U_interp
-    n_B = B_grid.shape[0]
-    n_φ = φ_grid.shape[0]
-    n_ξ = ξ_grid.shape[0]
-
-    # Debt choices span [0, b_bar] where B_bar = b_bar + φ_star
-    b_bar = jnp.maximum(B_grid[-1] - φ_grid[-1], B_grid[0])
-    b_prime_grid = jnp.linspace(B_grid[0], b_bar, n_B)
-    n_bp = n_B
-
-    # Precompute money utility and H on the φ grid
-    v_φ = v_money(φ_grid, κ, η_m)
+    # Expectations over ξ₁'
+    EV = jnp.einsum('abj,kj->abk', Ω, P_ξ)
     H_φ = H_func(φ_grid, κ, η_m)
-
-    # Initialize W with the perpetuity value of zero-surplus utility
-    U0, _ = indirect_utility(0.0, θ, χ, ψ, σ)
-    W0 = jnp.full((n_B, n_ξ), U0 / (1.0 - β_hat))
-
-    def bellman_step(W, _):
-        # Recover V^fd and φ^fd from continuation value
-        B_md, W_md, V_md, V_fd, φ_fd_arr, H_fd_arr = fd_from_continuation(
-            W, B_grid, b_prime_grid, φ_grid, κ, η_m)
-
-        # Logit regime probability η_bar (monetary dominance)
-        η_bar = jax.nn.sigmoid(
-            λ * (V_md - V_fd[:, None, :] + ξ_grid[None, None, :]))
-
-        # Expected H combining MD and FD, then J (money demand)
-        H_comb = (η_bar * H_φ[None, :, None]
-                  + (1 - η_bar) * H_fd_arr[:, None, :])
-        J = β * jnp.einsum('abj,kj->abk', H_comb, P_ξ)
-
-        # Log-sum-exp continuation value Ω and its expectation
-        log_md = λ * V_md
-        log_fd = λ * (V_fd[:, None, :] - ξ_grid[None, None, :])
-        Ω = jnp.logaddexp(log_md, log_fd) / λ
-        EV = jnp.einsum('abj,kj->abk', Ω, P_ξ)
-
-        # Implied surplus from the budget constraint
-        Δ = (B_grid[None, None, :, None]
-             - β * b_prime_grid[:, None, None, None]
-             - J[:, :, None, :])
-
-        # Evaluate indirect utility, penalizing infeasible surpluses
-        U_all = jnp.interp(Δ.ravel(), Δ_fine, U_fine).reshape(Δ.shape)
-        feasible = (Δ > -50.0) & (Δ < 20.0)
-        U_all = jnp.where(feasible, U_all, -1e15)
-
-        # Maximize over (b', φ') pairs
-        val = U_all + β_hat * EV[:, :, None, :]
-        val_flat = val.reshape(n_bp * n_φ, n_B, n_ξ)
-        W_new = jnp.max(val_flat, axis=0)
-        return W_new, None
-
-    W, _ = lax.scan(bellman_step, W0, None, length=n_iter)
-
-    # Extract policy functions from the converged W
-
-    # Recover V^fd and φ^fd from continuation value
-    B_md, W_md, V_md, V_fd, φ_fd_arr, H_fd_arr = fd_from_continuation(
-        W, B_grid, b_prime_grid, φ_grid, κ, η_m)
-
-    # Logit regime probability η_bar
-    η_bar = jax.nn.sigmoid(
-        λ * (V_md - V_fd[:, None, :] + ξ_grid[None, None, :]))
-
-    # Expected H and money demand J
-    H_comb = (η_bar * H_φ[None, :, None]
-              + (1 - η_bar) * H_fd_arr[:, None, :])
+    H_comb = η_bar * H_φ[None, :, None] + (1.0 - η_bar) * H_fd[:, None, :]
     J = β * jnp.einsum('abj,kj->abk', H_comb, P_ξ)
 
-    # Log-sum-exp continuation value and expectation
-    log_md = λ * V_md
-    log_fd = λ * (V_fd[:, None, :] - ξ_grid[None, None, :])
-    Ω = jnp.logaddexp(log_md, log_fd) / λ
-    EV = jnp.einsum('abj,kj->abk', Ω, P_ξ)
+    return EV, J, V_fd, H_fd
 
-    # Expected regime indicator and FD real balances
-    η_current = jnp.einsum('abj,kj->abk', η_bar, P_ξ)
-    φ_fd_current = jnp.einsum('aj,kj->ak', φ_fd_arr, P_ξ)
 
-    # Implied surplus from budget constraint
+def T(W, model):
+    """Bellman operator."""
+    β, β_hat = model.β, model.β_hat
+    B_grid, b_grid = model.B_grid, model.b_grid
+    Δ_fine, U_fine = model.Δ_fine, model.U_fine
+    n_B, n_b, n_φ, n_ξ = (
+        len(B_grid), len(b_grid),
+        len(model.φ_grid), len(model.ξ_grid))
+
+    EV, J, _, _ = compute_continuation(W, model)
+
+    # Budget constraint: Δ[b', φ', B, ξ₁]
     Δ = (B_grid[None, None, :, None]
-         - β * b_prime_grid[:, None, None, None]
+         - β * b_grid[:, None, None, None]
          - J[:, :, None, :])
 
-    # Indirect utility at each candidate surplus
     U_all = jnp.interp(Δ.ravel(), Δ_fine, U_fine).reshape(Δ.shape)
-    U_all = jnp.where((Δ > -50.0) & (Δ < 20.0), U_all, -1e15)
+    feasible = (Δ > Δ_fine[0]) & (Δ < Δ_fine[-1])
+    U_all = jnp.where(feasible, U_all, -1e15)
 
-    # Total value and optimal (b', φ') for each (B, ξ)
     val = U_all + β_hat * EV[:, :, None, :]
-    val_flat = val.reshape(n_bp * n_φ, n_B, n_ξ)
-    best_idx = jnp.argmax(val_flat, axis=0)
-
-    # Extract policies at the coarse-grid optimum
-    pol_b = b_prime_grid[best_idx // n_φ]
-    pol_φ_out = φ_grid[best_idx % n_φ]
-
-    Δ_flat = Δ.reshape(n_bp * n_φ, n_B, n_ξ)
-    pol_Δ = jnp.take_along_axis(Δ_flat, best_idx[None], axis=0).squeeze(0)
-
-    η_flat = η_current.reshape(n_bp * n_φ, n_ξ)
-    pol_η = jnp.take_along_axis(η_flat, best_idx, axis=0)
-
-    J_flat = J.reshape(n_bp * n_φ, n_ξ)
-    pol_J = jnp.take_along_axis(J_flat, best_idx, axis=0)
-
-    φ_fd_flat = jnp.repeat(
-        φ_fd_current[:, None, :], n_φ, axis=1
-    ).reshape(n_bp * n_φ, n_ξ)
-    pol_φ_fd = jnp.take_along_axis(φ_fd_flat, best_idx, axis=0)
-
-    return W, pol_b, pol_φ_out, pol_Δ, pol_η, pol_J, pol_φ_fd
+    return jnp.max(val.reshape(n_b * n_φ, n_B, n_ξ), axis=0)
 
 
-def _W_smoothing_splines(W_np, B_np, s_factor=0.05):
-    """Build smoothing splines for W(B, ξ).
+def get_greedy(W, model):
+    """Greedy policy: flat index into (b', φ') grid."""
+    β, β_hat = model.β, model.β_hat
+    B_grid, b_grid = model.B_grid, model.b_grid
+    Δ_fine, U_fine = model.Δ_fine, model.U_fine
+    n_B, n_b, n_φ, n_ξ = (
+        len(B_grid), len(b_grid),
+        len(model.φ_grid), len(model.ξ_grid))
 
-    The discrete VFI leaves grid-scale noise in W that, while invisible
-    in level plots, creates visible oscillations in W'' and therefore in
-    policies extracted via continuous optimization.  A
-    ``UnivariateSpline`` with ``s = s_factor * n`` removes these
-    artifacts while preserving the global shape of W.
-    """
-    splines = []
-    for j in range(W_np.shape[1]):
-        col = W_np[:, j]
-        mask = col > -1e10
-        if mask.sum() < 5:
-            splines.append(PchipInterpolator(B_np, col))
-            continue
-        B_feas, W_feas = B_np[mask], col[mask]
-        splines.append(
-            UnivariateSpline(B_feas, W_feas,
-                             s=s_factor * len(B_feas), k=4))
-    return splines
+    EV, J, _, _ = compute_continuation(W, model)
 
+    Δ = (B_grid[None, None, :, None]
+         - β * b_grid[:, None, None, None]
+         - J[:, :, None, :])
+    U_all = jnp.interp(Δ.ravel(), Δ_fine, U_fine).reshape(Δ.shape)
+    feasible = (Δ > Δ_fine[0]) & (Δ < Δ_fine[-1])
+    U_all = jnp.where(feasible, U_all, -1e15)
 
-def extract_policies_continuous(W, B_grid, ξ_grid, P_ξ,
-                                pol_b_init, pol_φ_init,
-                                β, β_hat, κ, η_m, λ,
-                                Δ_fine, U_fine, φ_bounds,
-                                s_factor=0.05, opt_maxiter=80):
-    """Extract smooth policies from converged *W* via continuous optimization.
+    val = U_all + β_hat * EV[:, :, None, :]
+    return jnp.argmax(val.reshape(n_b * n_φ, n_B, n_ξ), axis=0)
+```
 
-    Instead of searching over a discrete :math:`(b', \\phi')` lattice,
-    this function uses
+### Solving the model
 
-    (a) bounded scalar optimization (``minimize_scalar``) for
-        :math:`\\phi^{fd}(b', \\xi')`, and
-    (b) two-variable L-BFGS-B (``scipy.optimize.minimize``) for the
-        main :math:`(b', \\phi')` choice at each state,
+We solve via value function iteration using `lax.scan`.
+After a burn-in phase the Bellman operator has settled near the fixed point;
+we then collect 50 additional iterates and average them to cancel discrete-grid oscillation.
 
-    both evaluated against smoothing-spline-interpolated continuation
-    values.  The smoothing removes grid-scale curvature noise from the
-    discrete VFI while preserving the global shape of *W*.
-    """
-    W_np = np.asarray(W)
-    B_np = np.asarray(B_grid)
-    ξ_np = np.asarray(ξ_grid)
-    P_np = np.asarray(P_ξ)
-    Δ_np = np.asarray(Δ_fine)
-    U_np = np.asarray(U_fine)
-    b_init = np.asarray(pol_b_init)
-    φ_init = np.asarray(pol_φ_init)
+```{code-cell} ipython3
+def solve_dovis(model, p, n_iter=300, n_avg=50, verbose=True):
+    """Solve via VFI, averaging the last n_avg iterates."""
+    n_B = model.B_grid.shape[0]
+    n_ξ = model.ξ_grid.shape[0]
+    U0, _ = indirect_utility(0.0, p.θ_bar, p.χ, p.ψ, p.σ)
+    W_init = jnp.full((n_B, n_ξ), U0 / (1.0 - model.β_hat))
+    n_burn = n_iter - n_avg
 
-    n_B = len(B_np)
-    n_ξ = len(ξ_np)
-    φ_lo, φ_hi = φ_bounds
-    B_lo, B_hi = float(B_np[0]), float(B_np[-1])
-    b_bar = max(B_hi - φ_hi, B_lo)
-    bp_grid = np.linspace(B_lo, b_bar, n_B)
+    @jit
+    def run_vfi(W_init):
+        def burn_step(W, _):
+            return T(W, model), None
+        W_burned, _ = lax.scan(burn_step, W_init, None, length=n_burn)
+        def avg_step(W, _):
+            W_new = T(W, model)
+            return W_new, W_new
+        _, W_stack = lax.scan(avg_step, W_burned, None, length=n_avg)
+        return jnp.mean(W_stack, axis=0)
 
-    # Smoothing splines for W(B, ξ) and PCHIP for U(Δ)
-    W_spl = _W_smoothing_splines(W_np, B_np, s_factor=s_factor)
-    U_spl = PchipInterpolator(Δ_np, U_np)
-
-    # ---- Step 1: continuous φ^fd(b', ξ') via bounded scalar optimization ----
-    V_fd_arr = np.empty((n_B, n_ξ))
-    φ_fd_arr = np.empty((n_B, n_ξ))
-
-    for j in range(n_ξ):
-        Wj = W_spl[j]
-        for i, bp in enumerate(bp_grid):
-            lo = max(φ_lo, B_lo - bp)
-            hi = min(φ_hi, B_hi - bp)
-            if lo >= hi - 1e-12:
-                φ_opt = lo
-            else:
-                res = minimize_scalar(
-                    lambda φ: -(float(Wj(bp + φ)) + κ * φ - η_m * φ**2),
-                    bounds=(lo, hi), method='bounded',
-                    options={'xatol': 1e-10})
-                φ_opt = res.x
-            φ_fd_arr[i, j] = φ_opt
-            V_fd_arr[i, j] = (float(Wj(np.clip(bp + φ_opt, B_lo, B_hi)))
-                              + κ * φ_opt - η_m * φ_opt**2)
-
-    H_fd_arr = φ_fd_arr * (1.0 + κ - 2.0 * η_m * φ_fd_arr)
-
-    # Splines for FD objects over the b' grid
-    V_fd_spl = [PchipInterpolator(bp_grid, V_fd_arr[:, j])
-                for j in range(n_ξ)]
-    φ_fd_spl = [PchipInterpolator(bp_grid, φ_fd_arr[:, j])
-                for j in range(n_ξ)]
-    H_fd_spl = [PchipInterpolator(bp_grid, H_fd_arr[:, j])
-                for j in range(n_ξ)]
-
-    # ---- Step 2: continuous (b', φ') via L-BFGS-B for each state (B, ξ) ----
-    pol_b  = np.empty((n_B, n_ξ))
-    pol_φ  = np.empty((n_B, n_ξ))
-    pol_Δ  = np.empty((n_B, n_ξ))
-    pol_η  = np.empty((n_B, n_ξ))
-    pol_J  = np.empty((n_B, n_ξ))
-    pol_φ_fd = np.empty((n_B, n_ξ))
-
-    bp_lo_b = float(bp_grid[0])
-    bp_hi_b = float(bp_grid[-1])
-
-    for k in range(n_ξ):
-        P_row = P_np[k]
-        for i in range(n_B):
-            B_state = float(B_np[i])
-
-            def objective(x):
-                bp, φp = x
-                B_next = bp + φp
-                if B_next < B_lo or B_next > B_hi:
-                    return 1e15
-                bp_c = np.clip(bp, bp_lo_b, bp_hi_b)
-
-                V_md = np.array([float(W_spl[j](B_next))
-                                 for j in range(n_ξ)])
-                V_md += κ * φp - η_m * φp**2
-
-                V_fd = np.array([float(V_fd_spl[j](bp_c))
-                                 for j in range(n_ξ)])
-                H_fd = np.array([float(H_fd_spl[j](bp_c))
-                                 for j in range(n_ξ)])
-
-                H_φp = φp * (1.0 + κ - 2.0 * η_m * φp)
-                z = λ * (V_md - V_fd + ξ_np)
-                η_bar = 1.0 / (1.0 + np.exp(-np.clip(z, -500, 500)))
-
-                H_comb = η_bar * H_φp + (1.0 - η_bar) * H_fd
-                J_val = β * P_row @ H_comb
-
-                Ω = np.logaddexp(λ * V_md, λ * (V_fd - ξ_np)) / λ
-                EV = P_row @ Ω
-
-                Δ_val = B_state - β * bp - J_val
-                if Δ_val < Δ_np[0] or Δ_val > Δ_np[-1]:
-                    return 1e15
-                return -(float(U_spl(Δ_val)) + β_hat * EV)
-
-            # Start from the coarse-grid solution
-            x0 = [np.clip(float(b_init[i, k]), bp_lo_b, bp_hi_b),
-                   np.clip(float(φ_init[i, k]), φ_lo, φ_hi)]
-
-            res = minimize(objective, x0, method='L-BFGS-B',
-                           bounds=[(bp_lo_b, bp_hi_b), (φ_lo, φ_hi)],
-                           options={'maxiter': opt_maxiter, 'ftol': 1e-12})
-
-            bp_opt, φp_opt = res.x
-            pol_b[i, k] = bp_opt
-            pol_φ[i, k] = φp_opt
-
-            # Recompute derived quantities at the optimum
-            bp_c = np.clip(bp_opt, bp_lo_b, bp_hi_b)
-            B_next = np.clip(bp_opt + φp_opt, B_lo, B_hi)
-            V_md = np.array([float(W_spl[j](B_next))
-                             for j in range(n_ξ)])
-            V_md += κ * φp_opt - η_m * φp_opt**2
-            V_fd = np.array([float(V_fd_spl[j](bp_c))
-                             for j in range(n_ξ)])
-            H_fd = np.array([float(H_fd_spl[j](bp_c))
-                             for j in range(n_ξ)])
-            φ_fd_v = np.array([float(φ_fd_spl[j](bp_c))
-                               for j in range(n_ξ)])
-
-            H_φp = φp_opt * (1.0 + κ - 2.0 * η_m * φp_opt)
-            z = λ * (V_md - V_fd + ξ_np)
-            η_bar = 1.0 / (1.0 + np.exp(-np.clip(z, -500, 500)))
-
-            H_comb = η_bar * H_φp + (1.0 - η_bar) * H_fd
-            J_val = β * P_row @ H_comb
-            Δ_val = B_state - β * bp_opt - J_val
-
-            pol_Δ[i, k] = Δ_val
-            pol_η[i, k] = P_row @ η_bar
-            pol_J[i, k] = J_val
-            pol_φ_fd[i, k] = P_row @ φ_fd_v
-
-    return pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd
+    if verbose:
+        print(f"Starting VFI ({n_burn} burn-in + {n_avg} averaging)...")
+    from time import time
+    t0 = time()
+    W = run_vfi(W_init)
+    W.block_until_ready()
+    W_check = jit(T)(W, model)
+    W_check.block_until_ready()
+    err = float(jnp.max(jnp.abs(W_check - W)))
+    if verbose:
+        print(f"  Done in {time()-t0:.1f}s, Bellman residual = {err:.4f}")
+    return W
 
 
-def solve_policy_cache(θ_nodes, p, ξ_grid, P_ξ, B_grid, φ_grid, λ,
-                       Δ_fine, n_iter=100, φ_bounds=None,
-                       s_factor=0.05, opt_maxiter=80, verbose=False):
-    """Solve the model for several θ values and store policy arrays."""
-    out = {k: [] for k in ['W', 'b', 'φ', 'Δ', 'η', 'J', 'φ_fd']}
-    θ_nodes = np.asarray(θ_nodes, dtype=float)
-    if φ_bounds is None:
-        φ_bounds = (float(φ_grid[0]), float(φ_grid[-1]))
-
-    for θ_val in θ_nodes:
-        if verbose:
-            print(f'  θ = {θ_val:.1f}: VFI …', end=' ', flush=True)
-
-        U_fine_arr, _ = vmap(
-            lambda d: indirect_utility(d, θ_val, p.χ, p.ψ, p.σ))(Δ_fine)
-        U_interp = (Δ_fine, U_fine_arr)
-
-        W, pol_b_c, pol_φ_c, pol_Δ_c, pol_η, pol_J, pol_φ_fd = solve_model(
-            p.β, p.β_hat, p.χ, p.ψ, p.σ,
-            p.κ, p.η_m, θ_val,
-            ξ_grid, P_ξ, B_grid, φ_grid, λ,
-            U_interp, n_iter
-        )
-
-        if verbose:
-            print('continuous extraction …', end=' ', flush=True)
-
-        # Extract smooth policies via continuous optimization
-        pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd = \
-            extract_policies_continuous(
-                W, B_grid, ξ_grid, P_ξ,
-                pol_b_c, pol_φ_c,
-                p.β, p.β_hat, p.κ, p.η_m, λ,
-                Δ_fine, U_fine_arr, φ_bounds,
-                s_factor=s_factor, opt_maxiter=opt_maxiter
-            )
-
-        names = ['W', 'b', 'φ', 'Δ', 'η', 'J', 'φ_fd']
-        results = [W, pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd]
-        for name, arr in zip(names, results):
-            out[name].append(np.asarray(arr))
-
-        if verbose:
-            print('done.')
-
-    result = {
-        'θ_nodes': θ_nodes,
-        'ξ_grid': np.asarray(ξ_grid),
-        'B_grid': np.asarray(B_grid),
-        **{k: np.stack(v) for k, v in out.items()}
-    }
-
-    return result
+def extract_policies(W, model):
+    """Extract (b', φ', Δ) from converged W."""
+    n_φ = len(model.φ_grid)
+    σ = jit(get_greedy)(W, model)
+    pol_b = model.b_grid[σ // n_φ]
+    pol_φ = model.φ_grid[σ % n_φ]
+    EV, J, _, _ = compute_continuation(W, model)
+    n_b = len(model.b_grid)
+    J_flat = J.reshape(n_b * n_φ, len(model.ξ_grid))
+    J_σ = jnp.take_along_axis(J_flat, σ, axis=0)
+    pol_Δ = model.B_grid[:, None] - model.β * pol_b - J_σ
+    return pol_b, pol_φ, pol_Δ
 ```
 
 The first call triggers JIT compilation, which takes a moment.
-The continuous policy extraction step then refines the discrete-grid
-solution by solving bounded optimization problems against spline
-interpolants.
 
 ```{code-cell} ipython3
 p = params_la
-n_B_coarse = 140
-n_φ_coarse = 80
-n_ξ_coarse = 9
-
-φ_bounds = (0.5, float(p.φ_star * 0.99))
-B_grid = jnp.linspace(0.1, p.B_max, n_B_coarse)
-φ_grid = jnp.linspace(φ_bounds[0], φ_bounds[1], n_φ_coarse)
-ξ_grid_np, P_ξ_np = build_ξ_grid(n_ξ_coarse, p.α_l, p.α_ξ, p.ξ_bar)
-ξ_grid = jnp.array(ξ_grid_np)
-P_ξ = jnp.array(P_ξ_np)
-
-Δ_fine = jnp.linspace(-55.0, 20.0, 3000)
-U_fine, _ = vmap(lambda d: indirect_utility(d, p.θ_bar, p.χ, p.ψ, p.σ))(Δ_fine)
-U_interp = (Δ_fine, U_fine)
-
-W, pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd = solve_model(
-    p.β, p.β_hat, p.χ, p.ψ, p.σ,
-    p.κ, p.η_m, p.θ_bar,
-    ξ_grid, P_ξ, B_grid, φ_grid, p.λ,
-    U_interp, 200
-)
-
-# Extract smooth policies via continuous optimization
-pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd = \
-    extract_policies_continuous(
-        W, B_grid, ξ_grid, P_ξ,
-        pol_b, pol_φ,
-        p.β, p.β_hat, p.κ, p.η_m, p.λ,
-        Δ_fine, U_fine, φ_bounds
-    )
+model = create_dovis_model(p)
+W = solve_dovis(model, p)
+pol_b, pol_φ, pol_Δ = extract_policies(W, model)
+B_grid = model.B_grid
+ξ_grid = model.ξ_grid
+n_ξ_coarse = len(ξ_grid)
 ```
 
 ```{code-cell} ipython3
@@ -1179,16 +1027,16 @@ colors = ['tab:blue', 'tab:orange', 'tab:green']
 for k, j in enumerate(ξ_plot_idx):
     feasible = np.asarray(W[:, j]) > -1e12
 
-    axes[0, 0].plot(B_grid[feasible], 
+    axes[0, 0].plot(B_grid[feasible],
                     W[:, j][feasible], lw=2, label=ξ_labels[k],
                     color=colors[k])
-    axes[0, 1].plot(B_grid[feasible], 
+    axes[0, 1].plot(B_grid[feasible],
                     pol_b[:, j][feasible], lw=2, label=ξ_labels[k],
                     color=colors[k])
-    axes[1, 0].plot(B_grid[feasible], 
+    axes[1, 0].plot(B_grid[feasible],
                     pol_φ[:, j][feasible], lw=2, label=ξ_labels[k],
                     color=colors[k])
-    axes[1, 1].plot(B_grid[feasible], 
+    axes[1, 1].plot(B_grid[feasible],
                     pol_Δ[:, j][feasible], lw=2, label=ξ_labels[k],
                     color=colors[k])
 
@@ -1261,168 +1109,124 @@ rather than from a static approximation, and then feed the resulting realized li
 For the **institutional disinflation**, we evaluate the current target-honoring probability using the inherited promise $\phi_t$ and the current continuation values, then let the realized regime switch endogenously once the promise becomes sufficiently credible.
 
 ```{code-cell} ipython3
-def solve_φ_fd_continuous(b, θ, p):
-    """Solve the FD static FOC v'(φ) = -U'(Δ,θ) with continuous bisection."""
-    φ_lo, φ_hi = 0.1, p.φ_star * 0.999
-    for _ in range(100):
-        φ_mid = 0.5 * (φ_lo + φ_hi)
-        Δ_mid = b + φ_mid - p.β * float(H_func(φ_mid, p.κ, p.η_m))
-        _, U_p = indirect_utility(Δ_mid, θ, p.χ, p.ψ, p.σ)
-        if float(v_money_prime(φ_mid, p.κ, p.η_m)) > float(-U_p):
-            φ_lo = φ_mid
-        else: 
-            φ_hi = φ_mid
-    return 0.5 * (φ_lo + φ_hi)
+def solve_policy_cache(θ_nodes, p, n_iter=300, n_avg=50,
+                       n_B=200, n_b=200, n_φ=150, n_ξ=9,
+                       B_max=50.0, verbose=False):
+    """Solve the model for several θ values and store policy arrays."""
+    results = {'θ_nodes': np.asarray(θ_nodes, dtype=float)}
+
+    W_list, b_list, φ_list, Δ_list = [], [], [], []
+    for θ_val in θ_nodes:
+        if verbose:
+            print(f'  θ = {θ_val:.1f} ...', end=' ', flush=True)
+        m = create_dovis_model(p, θ=θ_val,
+                               n_B=n_B, n_b=n_b, n_φ=n_φ,
+                               n_ξ=n_ξ, B_max=B_max)
+        W = solve_dovis(m, p, n_iter=n_iter, n_avg=n_avg, verbose=False)
+        pol_b, pol_φ, pol_Δ = extract_policies(W, m)
+        W_list.append(np.asarray(W))
+        b_list.append(np.asarray(pol_b))
+        φ_list.append(np.asarray(pol_φ))
+        Δ_list.append(np.asarray(pol_Δ))
+        if verbose:
+            print('done.')
+
+    results['W'] = np.stack(W_list)      # (n_θ, n_B, n_ξ)
+    results['b'] = np.stack(b_list)      # (n_θ, n_B, n_ξ)
+    results['φ'] = np.stack(φ_list)
+    results['Δ'] = np.stack(Δ_list)
+
+    # Store grids from the last model (all share the same grids)
+    results['B_grid'] = np.asarray(m.B_grid)
+    results['ξ_grid'] = np.asarray(m.ξ_grid)
+    results['b_grid'] = np.asarray(m.b_grid)
+    results['φ_grid'] = np.asarray(m.φ_grid)
+
+    # Compute V^fd and φ^fd for each (θ, b', ξ')
+    V_fd_list, φ_fd_list = [], []
+    B_g = results['B_grid']
+    b_g = results['b_grid']
+    φ_g = results['φ_grid']
+    for θi in range(len(θ_nodes)):
+        W_θ = results['W'][θi]   # (n_B, n_ξ)
+        n_ξ_val = W_θ.shape[1]
+        V_fd = np.empty((len(b_g), n_ξ_val))
+        φ_fd = np.empty((len(b_g), n_ξ_val))
+        for j in range(n_ξ_val):
+            for i, bp in enumerate(b_g):
+                B_cand = bp + φ_g
+                W_interp = np.interp(B_cand, B_g, W_θ[:, j])
+                v_vals = p.κ * φ_g - p.η_m * φ_g**2
+                total = W_interp + v_vals
+                best = np.argmax(total)
+                V_fd[i, j] = total[best]
+                φ_fd[i, j] = float(φ_g[best])
+        V_fd_list.append(V_fd)
+        φ_fd_list.append(φ_fd)
+
+    results['V_fd'] = np.stack(V_fd_list)  # (n_θ, n_b, n_ξ)
+    results['φ_fd'] = np.stack(φ_fd_list)
+    return results
 
 
-def build_current_fd_cache(cache, φ_bounds, p, s_factor=0.05):
-    """Current-state FD objects implied by W(B, ξ), solved continuously."""
-    B_np = np.asarray(cache['B_grid'])
-    φ_lo, φ_hi = φ_bounds
-    B_lo, B_hi = float(B_np[0]), float(B_np[-1])
-    b_bar = max(B_hi - φ_hi, B_lo)
-    n_B = len(B_np)
-    b_g = np.linspace(B_lo, b_bar, n_B)
-    n_ξ = len(cache['ξ_grid'])
-    out_V, out_φ = [], []
-
-    for θi in range(len(cache['θ_nodes'])):
-        W_np_θ = np.asarray(cache['W'][θi])
-        W_spl = _W_smoothing_splines(W_np_θ, B_np,
-                                     s_factor=s_factor)
-
-        V_fd_cur = np.empty((n_B, n_ξ))
-        φ_fd_cur = np.empty((n_B, n_ξ))
-
-        for j in range(n_ξ):
-            Wj = W_spl[j]
-            for i, b in enumerate(b_g):
-                lo = max(φ_lo, B_lo - b)
-                hi = min(φ_hi, B_hi - b)
-                if lo >= hi - 1e-12:
-                    φ_opt = lo
-                else:
-                    res = minimize_scalar(
-                        lambda φ: -(float(Wj(b + φ))
-                                    + p.κ * φ - p.η_m * φ**2),
-                        bounds=(lo, hi), method='bounded',
-                        options={'xatol': 1e-10})
-                    φ_opt = res.x
-                φ_fd_cur[i, j] = φ_opt
-                V_fd_cur[i, j] = (
-                    float(Wj(np.clip(b + φ_opt, B_lo, B_hi)))
-                    + p.κ * φ_opt - p.η_m * φ_opt**2)
-
-        out_V.append(V_fd_cur)
-        out_φ.append(φ_fd_cur)
-
-    return {
-        'b_grid': b_g,
-        'V_fd': np.stack(out_V),
-        'φ_fd': np.stack(out_φ)
-    }
-
-
-def build_sim_interp_cache(cache, current_fd_cache):
-    """Build monotone cubic interpolants used only in IRF simulation."""
-    B_g = np.asarray(cache['B_grid'])
-    b_g = np.asarray(current_fd_cache['b_grid'])
-    n_θ = len(cache['θ_nodes'])
-    n_ξ = len(cache['ξ_grid'])
-
-    out = {
-        'B_grid': B_g,
-        'b_grid': b_g,
-        'W': np.empty((n_θ, n_ξ), dtype=object),
-        'b': np.empty((n_θ, n_ξ), dtype=object),
-        'φ': np.empty((n_θ, n_ξ), dtype=object),
-        'Δ': np.empty((n_θ, n_ξ), dtype=object),
-        'V_fd': np.empty((n_θ, n_ξ), dtype=object),
-        'φ_fd': np.empty((n_θ, n_ξ), dtype=object)
-    }
-
-    for θi in range(n_θ):
-        for ξi in range(n_ξ):
-            out['W'][θi, ξi] = PchipInterpolator(
-                B_g, cache['W'][θi, :, ξi], extrapolate=False)
-            out['b'][θi, ξi] = PchipInterpolator(
-                B_g, cache['b'][θi, :, ξi], extrapolate=False)
-            out['φ'][θi, ξi] = PchipInterpolator(
-                B_g, cache['φ'][θi, :, ξi], extrapolate=False)
-            out['Δ'][θi, ξi] = PchipInterpolator(
-                B_g, cache['Δ'][θi, :, ξi], extrapolate=False)
-            out['V_fd'][θi, ξi] = PchipInterpolator(
-                b_g, current_fd_cache['V_fd'][θi, :, ξi], extrapolate=False)
-            out['φ_fd'][θi, ξi] = PchipInterpolator(
-                b_g, current_fd_cache['φ_fd'][θi, :, ξi], extrapolate=False)
-
-    return out
-
-
-def eval_interp_1d(interp, x, grid):
-    """Evaluate a 1D interpolant after clipping to the grid support."""
+def interp_1d(x, grid, values):
+    """Linear interpolation with clipping."""
     x = float(np.clip(x, grid[0], grid[-1]))
-    return float(interp(x))
+    return float(np.interp(x, grid, values))
 
 
-def interp_current_fd(sim_interp_cache, θi, ξi, b):
-    """Interpolate current-state FD value and policy at inherited debt b."""
-    b_grid = sim_interp_cache['b_grid']
-    φ_fd = eval_interp_1d(sim_interp_cache['φ_fd'][θi, ξi], b, b_grid)
-    V_fd = eval_interp_1d(sim_interp_cache['V_fd'][θi, ξi], b, b_grid)
-    return φ_fd, V_fd
-
-
-def current_eta_prob(b, φ_promise, θi, ξi, cache, sim_interp_cache, p):
+def current_eta_prob(b, φ_promise, θi, ξi, cache, p):
     """Probability that today's inherited target is honored."""
     B_g = cache['B_grid']
     ξ_val = cache['ξ_grid'][ξi]
 
     B_md = float(np.clip(b + φ_promise, B_g[0], B_g[-1]))
-    V_md = eval_interp_1d(sim_interp_cache['W'][θi, ξi], B_md, B_g)
+    V_md = interp_1d(B_md, B_g, cache['W'][θi, :, ξi])
     V_md += float(v_money(φ_promise, p.κ, p.η_m))
 
-    _, V_fd = interp_current_fd(sim_interp_cache, θi, ξi, b)
+    b_g = cache['b_grid']
+    V_fd = interp_1d(b, b_g, cache['V_fd'][θi, :, ξi])
+
     z = p.λ * (V_md - V_fd + ξ_val)
     η_prob = 1.0 / (1.0 + np.exp(-z))
     return η_prob, V_md, V_fd
 
 
-def find_fd_steady_state(θ_idx, ξ_idx, cache, sim_interp_cache, p):
+def interp_fd(cache, θi, ξi, b):
+    """Interpolate FD value and policy at inherited debt b."""
+    b_g = cache['b_grid']
+    φ_fd = interp_1d(b, b_g, cache['φ_fd'][θi, :, ξi])
+    V_fd = interp_1d(b, b_g, cache['V_fd'][θi, :, ξi])
+    return φ_fd, V_fd
+
+
+def find_fd_steady_state(θ_idx, ξ_idx, cache, p):
     """Steady state for a path that remains in fiscal dominance."""
     B_g = cache['B_grid']
-
-    def residual(x):
-        b, φ_pr = x
-        φ_fd, _ = interp_current_fd(sim_interp_cache, θ_idx, ξ_idx, b)
+    b = 5.0
+    φ_pr = p.φ_star * 0.6
+    for _ in range(500):
+        φ_fd, _ = interp_fd(cache, θ_idx, ξ_idx, b)
         B = float(np.clip(b + φ_fd, B_g[0], B_g[-1]))
-        b_next = eval_interp_1d(sim_interp_cache['b'][θ_idx, ξ_idx], B, B_g)
-        φ_next = eval_interp_1d(sim_interp_cache['φ'][θ_idx, ξ_idx], B, B_g)
-        return [b_next - b, φ_next - φ_pr]
-
-    sol, _, _, _ = fsolve(
-        residual, [5.0, p.φ_star * 0.6], full_output=True)
-    return float(sol[0]), float(sol[1])
-
-
-def initialize_fd_state(b0, θi, ξi, cache, sim_interp_cache):
-    """Choose a promise consistent with a selected FD initial debt state."""
-    B_g = cache['B_grid']
-    φ_fd0, _ = interp_current_fd(sim_interp_cache, θi, ξi, b0)
-    B0 = float(np.clip(b0 + φ_fd0, B_g[0], B_g[-1]))
-    φ_promise0 = eval_interp_1d(sim_interp_cache['φ'][θi, ξi], B0, B_g)
-    return float(b0), φ_promise0
+        b_next = interp_1d(B, B_g, cache['b'][θ_idx, :, ξ_idx])
+        φ_next = interp_1d(B, B_g, cache['φ'][θ_idx, :, ξ_idx])
+        if abs(b_next - b) + abs(φ_next - φ_pr) < 1e-8:
+            break
+        b = 0.5 * b + 0.5 * b_next
+        φ_pr = 0.5 * φ_pr + 0.5 * φ_next
+    return b, φ_pr
 
 
 def static_allocation(Δ, θ, χ, ψ, σ):
     """Recover equilibrium labor l and government spending g from surplus Δ."""
     g_star = θ ** (1.0 / σ)
-    l_star = (1.0 / χ) ** (1.0 / ψ)
     l_peak = (1.0 / ((1.0 + ψ) * χ)) ** (1.0 / ψ)
     T_max = (1.0 - χ * l_peak ** ψ) * l_peak
 
     if Δ <= -g_star:
-        return l_star, g_star, 0.0
+        return (1.0 / χ) ** (1.0 / ψ), g_star, 0.0
+    if Δ >= 0.999 * T_max:
+        return l_peak, 1e-8, 1000.0
 
     lo, hi = 0.0, 1000.0
     for _ in range(100):
@@ -1430,27 +1234,20 @@ def static_allocation(Δ, θ, χ, ψ, σ):
         g_val = (θ / (1.0 + mid)) ** (1.0 / σ)
         denom = max(χ * (1.0 + mid * (1.0 + ψ)), 1e-15)
         l_val = max((1.0 + mid) / denom, 1e-15) ** (1.0 / ψ)
-        T_val = (1.0 - χ * l_val ** ψ) * l_val
-        if T_val - g_val <= Δ:
+        if (1.0 - χ * l_val ** ψ) * l_val - g_val <= Δ:
             lo = mid
         else:
             hi = mid
-
     lam = 0.5 * (lo + hi)
     g_opt = (θ / (1.0 + lam)) ** (1.0 / σ)
     denom = max(χ * (1.0 + lam * (1.0 + ψ)), 1e-15)
     l_opt = max((1.0 + lam) / denom, 1e-15) ** (1.0 / ψ)
-
-    if Δ >= 0.999 * T_max:
-        return l_peak, 1e-8, lam
-
     return l_opt, g_opt, lam
 
 
 def simulate_fundamental_irf(
-        b0, φ_promise0, θ_idx_path, ξ_idx, cache,
-        sim_interp_cache, p, t_shock):
-    """Simulate a fundamental disinflation with realized FD throughout."""
+        b0, φ_promise0, θ_idx_path, ξ_idx, cache, p, t_shock):
+    """Simulate a fundamental disinflation (FD throughout)."""
     T = len(θ_idx_path)
     B_g = cache['B_grid']
     θ_nodes = cache['θ_nodes']
@@ -1460,86 +1257,51 @@ def simulate_fundamental_irf(
            ['b', 'φ', 'φ_prime', 'Δ', 'π', 'η', 'η_prob', 'regime',
             'debt_gdp', 'surplus_gdp']}
 
-    # Keep the pre-shock segment flat, as in the paper's IRFs.
     θi_pre = int(θ_idx_path[0])
-    η_pre, _, _ = current_eta_prob(
-        b0, φ_promise0, θi_pre, ξi, cache, sim_interp_cache, p)
-    φ_pre, _ = interp_current_fd(sim_interp_cache, θi_pre, ξi, b0)
+    η_pre, _, _ = current_eta_prob(b0, φ_promise0, θi_pre, ξi, cache, p)
+    φ_pre, _ = interp_fd(cache, θi_pre, ξi, b0)
     B_pre = float(np.clip(b0 + φ_pre, B_g[0], B_g[-1]))
-    b_next_pre = eval_interp_1d(
-        sim_interp_cache['b'][θi_pre, ξi], B_pre, B_g)
-    φ_next_pre = eval_interp_1d(
-        sim_interp_cache['φ'][θi_pre, ξi], B_pre, B_g)
-    Δ_pre = eval_interp_1d(
-        sim_interp_cache['Δ'][θi_pre, ξi], B_pre, B_g)
-
-    # Lagged money-demand composite: J = B - Δ - β b'
+    b_next_pre = interp_1d(B_pre, B_g, cache['b'][θi_pre, :, ξi])
+    φ_next_pre = interp_1d(B_pre, B_g, cache['φ'][θi_pre, :, ξi])
+    Δ_pre = interp_1d(B_pre, B_g, cache['Δ'][θi_pre, :, ξi])
     J_prev = B_pre - Δ_pre - p.β * b_next_pre
     π_pre = (J_prev / max(φ_pre, 1e-12) - 1.0) * 100.0
+    l_pre, _, _ = static_allocation(Δ_pre, float(θ_nodes[θi_pre]), p.χ, p.ψ, p.σ)
 
-    l_pre, _, _ = static_allocation(
-        Δ_pre, float(θ_nodes[θi_pre]), p.χ, p.ψ, p.σ)
-    debt_pre = 100.0 * b0 / max(l_pre, 1e-12)
-    surplus_pre = 100.0 * Δ_pre / max(l_pre, 1e-12)
+    for k, v in [('b', b0), ('φ', φ_pre), ('φ_prime', φ_promise0),
+                 ('Δ', Δ_pre), ('π', π_pre), ('η', η_pre),
+                 ('η_prob', η_pre), ('regime', 0.0),
+                 ('debt_gdp', 100*b0/max(l_pre,1e-12)),
+                 ('surplus_gdp', 100*Δ_pre/max(l_pre,1e-12))]:
+        out[k][:t_shock] = v
 
-    out['b'][:t_shock] = b0
-    out['φ'][:t_shock] = φ_pre
-    out['φ_prime'][:t_shock] = φ_promise0
-    out['Δ'][:t_shock] = Δ_pre
-    out['π'][:t_shock] = π_pre
-    out['η'][:t_shock] = η_pre
-    out['η_prob'][:t_shock] = η_pre
-    out['regime'][:t_shock] = 0.0
-    out['debt_gdp'][:t_shock] = debt_pre
-    out['surplus_gdp'][:t_shock] = surplus_pre
-
-    b = float(b0)
-    φ_promise = float(φ_promise0)
-
+    b, φ_promise = float(b0), float(φ_promise0)
     for t in range(t_shock, T):
         θi = int(θ_idx_path[t])
-        η_prob, _, _ = current_eta_prob(
-            b, φ_promise, θi, ξi, cache, sim_interp_cache, p)
-
-        # Along the fundamental path the realized regime stays in FD.
-        φ_t, _ = interp_current_fd(sim_interp_cache, θi, ξi, b)
+        η_prob, _, _ = current_eta_prob(b, φ_promise, θi, ξi, cache, p)
+        φ_t, _ = interp_fd(cache, θi, ξi, b)
         B = float(np.clip(b + φ_t, B_g[0], B_g[-1]))
-
-        # Inflation from lagged money-demand composite
         π_t = (J_prev / max(φ_t, 1e-12) - 1.0) * 100.0
+        b_prime = interp_1d(B, B_g, cache['b'][θi, :, ξi])
+        φ_prime = interp_1d(B, B_g, cache['φ'][θi, :, ξi])
+        Δ_t = interp_1d(B, B_g, cache['Δ'][θi, :, ξi])
+        l_t, _, _ = static_allocation(Δ_t, float(θ_nodes[θi]), p.χ, p.ψ, p.σ)
 
-        b_prime = eval_interp_1d(sim_interp_cache['b'][θi, ξi], B, B_g)
-        φ_prime = eval_interp_1d(sim_interp_cache['φ'][θi, ξi], B, B_g)
-        Δ_t = eval_interp_1d(sim_interp_cache['Δ'][θi, ξi], B, B_g)
+        out['b'][t] = b; out['φ'][t] = φ_t
+        out['φ_prime'][t] = φ_prime; out['Δ'][t] = Δ_t
+        out['π'][t] = π_t; out['η'][t] = 0.0
+        out['η_prob'][t] = η_prob; out['regime'][t] = 0.0
+        out['debt_gdp'][t] = 100*b/max(l_t,1e-12)
+        out['surplus_gdp'][t] = 100*Δ_t/max(l_t,1e-12)
 
-        l_t, _, _ = static_allocation(
-            Δ_t, float(θ_nodes[θi]), p.χ, p.ψ, p.σ)
-        debt_gdp_t = 100.0 * b / max(l_t, 1e-12)
-        surplus_gdp_t = 100.0 * Δ_t / max(l_t, 1e-12)
-
-        out['b'][t] = b
-        out['φ'][t] = φ_t
-        out['φ_prime'][t] = φ_prime
-        out['Δ'][t] = Δ_t
-        out['π'][t] = π_t
-        out['η'][t] = 0.0
-        out['η_prob'][t] = η_prob
-        out['regime'][t] = 0.0
-        out['debt_gdp'][t] = debt_gdp_t
-        out['surplus_gdp'][t] = surplus_gdp_t
-
-        # Update lagged J for next period
         J_prev = B - Δ_t - p.β * b_prime
-        b = float(b_prime)
-        φ_promise = float(φ_prime)
-
+        b, φ_promise = float(b_prime), float(φ_prime)
     return out
 
 
 def simulate_institutional_irf(
-        b0, φ_promise0, θ_idx_path, ξ_idx_path, cache,
-        sim_interp_cache, p, t_shock):
-    """Simulate an institutional disinflation using current-state values."""
+        b0, φ_promise0, θ_idx_path, ξ_idx_path, cache, p, t_shock):
+    """Simulate an institutional disinflation (endogenous regime switch)."""
     T = len(ξ_idx_path)
     B_g = cache['B_grid']
     θ_nodes = cache['θ_nodes']
@@ -1548,132 +1310,75 @@ def simulate_institutional_irf(
            ['b', 'φ', 'φ_prime', 'Δ', 'π', 'η', 'η_prob', 'regime',
             'debt_gdp', 'surplus_gdp']}
 
-    θi_pre = int(θ_idx_path[0])
-    ξi_pre = int(ξ_idx_path[0])
-    η_pre, _, _ = current_eta_prob(
-        b0, φ_promise0, θi_pre, ξi_pre, cache, sim_interp_cache, p)
-    φ_pre, _ = interp_current_fd(sim_interp_cache, θi_pre, ξi_pre, b0)
+    θi_pre, ξi_pre = int(θ_idx_path[0]), int(ξ_idx_path[0])
+    η_pre, _, _ = current_eta_prob(b0, φ_promise0, θi_pre, ξi_pre, cache, p)
+    φ_pre, _ = interp_fd(cache, θi_pre, ξi_pre, b0)
     B_pre = float(np.clip(b0 + φ_pre, B_g[0], B_g[-1]))
-    b_next_pre = eval_interp_1d(
-        sim_interp_cache['b'][θi_pre, ξi_pre], B_pre, B_g)
-    Δ_pre = eval_interp_1d(
-        sim_interp_cache['Δ'][θi_pre, ξi_pre], B_pre, B_g)
-
-    # Lagged money-demand composite
+    b_next_pre = interp_1d(B_pre, B_g, cache['b'][θi_pre, :, ξi_pre])
+    Δ_pre = interp_1d(B_pre, B_g, cache['Δ'][θi_pre, :, ξi_pre])
     J_prev = B_pre - Δ_pre - p.β * b_next_pre
     π_pre = (J_prev / max(φ_pre, 1e-12) - 1.0) * 100.0
+    l_pre, _, _ = static_allocation(Δ_pre, float(θ_nodes[θi_pre]), p.χ, p.ψ, p.σ)
 
-    l_pre, _, _ = static_allocation(
-        Δ_pre, float(θ_nodes[θi_pre]), p.χ, p.ψ, p.σ)
-    debt_pre = 100.0 * b0 / max(l_pre, 1e-12)
-    surplus_pre = 100.0 * Δ_pre / max(l_pre, 1e-12)
+    for k, v in [('b', b0), ('φ', φ_pre), ('φ_prime', φ_promise0),
+                 ('Δ', Δ_pre), ('π', π_pre), ('η', η_pre),
+                 ('η_prob', η_pre), ('regime', 0.0),
+                 ('debt_gdp', 100*b0/max(l_pre,1e-12)),
+                 ('surplus_gdp', 100*Δ_pre/max(l_pre,1e-12))]:
+        out[k][:t_shock] = v
 
-    out['b'][:t_shock] = b0
-    out['φ'][:t_shock] = φ_pre
-    out['φ_prime'][:t_shock] = φ_promise0
-    out['Δ'][:t_shock] = Δ_pre
-    out['π'][:t_shock] = π_pre
-    out['η'][:t_shock] = η_pre
-    out['η_prob'][:t_shock] = η_pre
-    out['regime'][:t_shock] = 0.0
-    out['debt_gdp'][:t_shock] = debt_pre
-    out['surplus_gdp'][:t_shock] = surplus_pre
-
-    b = float(b0)
-    φ_promise = float(φ_promise0)
-
+    b, φ_promise = float(b0), float(φ_promise0)
     for t in range(t_shock, T):
-        θi = int(θ_idx_path[t])
-        ξi = int(ξ_idx_path[t])
-
-        η_t, _, _ = current_eta_prob(
-            b, φ_promise, θi, ξi, cache, sim_interp_cache, p)
+        θi, ξi = int(θ_idx_path[t]), int(ξ_idx_path[t])
+        η_t, _, _ = current_eta_prob(b, φ_promise, θi, ξi, cache, p)
         regime_t = float(η_t >= 0.5)
-        φ_fd_t, _ = interp_current_fd(sim_interp_cache, θi, ξi, b)
-
+        φ_fd_t, _ = interp_fd(cache, θi, ξi, b)
         φ_t = float(φ_promise if regime_t else φ_fd_t)
         B = float(np.clip(b + φ_t, B_g[0], B_g[-1]))
-
-        # Inflation from lagged money-demand composite
         π_t = (J_prev / max(φ_t, 1e-12) - 1.0) * 100.0
+        b_prime = interp_1d(B, B_g, cache['b'][θi, :, ξi])
+        φ_prime = interp_1d(B, B_g, cache['φ'][θi, :, ξi])
+        Δ_t = interp_1d(B, B_g, cache['Δ'][θi, :, ξi])
+        l_t, _, _ = static_allocation(Δ_t, float(θ_nodes[θi]), p.χ, p.ψ, p.σ)
 
-        b_prime = eval_interp_1d(sim_interp_cache['b'][θi, ξi], B, B_g)
-        φ_prime = eval_interp_1d(sim_interp_cache['φ'][θi, ξi], B, B_g)
-        Δ_t = eval_interp_1d(sim_interp_cache['Δ'][θi, ξi], B, B_g)
+        out['b'][t] = b; out['φ'][t] = φ_t
+        out['φ_prime'][t] = φ_prime; out['Δ'][t] = Δ_t
+        out['π'][t] = π_t; out['η'][t] = η_t
+        out['η_prob'][t] = η_t; out['regime'][t] = regime_t
+        out['debt_gdp'][t] = 100*b/max(l_t,1e-12)
+        out['surplus_gdp'][t] = 100*Δ_t/max(l_t,1e-12)
 
-        l_t, _, _ = static_allocation(
-            Δ_t, float(θ_nodes[θi]), p.χ, p.ψ, p.σ)
-        debt_gdp_t = 100.0 * b / max(l_t, 1e-12)
-        surplus_gdp_t = 100.0 * Δ_t / max(l_t, 1e-12)
-
-        out['b'][t] = b
-        out['φ'][t] = φ_t
-        out['φ_prime'][t] = φ_prime
-        out['Δ'][t] = Δ_t
-        out['π'][t] = π_t
-        out['η'][t] = η_t
-        out['η_prob'][t] = η_t
-        out['regime'][t] = regime_t
-        out['debt_gdp'][t] = debt_gdp_t
-        out['surplus_gdp'][t] = surplus_gdp_t
-
-        # Update lagged J for next period
         J_prev = B - Δ_t - p.β * b_prime
-        b = float(b_prime)
-        φ_promise = float(φ_prime)
-
+        b, φ_promise = float(b_prime), float(φ_prime)
     return out
+```
 
+We solve the model for three values of $\theta$ needed by the two IRF experiments, then run the simulations.
 
-# The two IRFs require different θ ranges to match the paper's
-# illustrative dynamics (Figures 3 and 4).
-#
-# Fundamental disinflation: θ drops from θ_H to θ_L while ξ stays
-# low (FD throughout).  At low θ, the FD steady state has high
-# debt-to-GDP (≈70-75%), and a drop in θ produces a gradual
-# decline in both debt and inflation (positive correlation).
-#
-# Institutional disinflation: θ stays constant at a moderate level
-# while ξ jumps from 0 to a positive value (the economy switches
-# from FD to MD).  At θ ≈ θ_bar the FD steady state has moderate
-# debt (≈15-35%) and high inflation, and the ξ jump produces
-# rising debt with falling inflation (negative correlation).
+```{code-cell} ipython3
 θ_fund_L, θ_fund_H = 12.0, 22.0
 θ_inst_val = p.θ_bar  # 130
 θ_irf = np.array([θ_fund_L, θ_fund_H, θ_inst_val])
-cache = solve_policy_cache(
-    θ_irf, p, ξ_grid, P_ξ, B_grid, φ_grid, p.λ, Δ_fine,
-    n_iter=200, φ_bounds=φ_bounds, verbose=True
-)
-current_fd_cache = build_current_fd_cache(cache, φ_bounds, p)
-sim_interp_cache = build_sim_interp_cache(cache, current_fd_cache)
 
-
+cache = solve_policy_cache(θ_irf, p, verbose=True)
 
 T, t_shock = 60, 10
-p = params_la
-
-# θ_irf = [θ_fund_L, θ_fund_H, θ_inst_val]
-#   index 0 → θ=12  (fundamental post-shock)
-#   index 1 → θ=22  (fundamental pre-shock)
-#   index 2 → θ=130 (institutional, constant)
 ξ_pre, ξ_post = 0, n_ξ_coarse // 2
 
 # Fundamental disinflation: FD steady state at θ_H (idx 1), ξ=0
-b0_fund, φ0_fund = find_fd_steady_state(1, 0, cache, sim_interp_cache, p)
+b0_fund, φ0_fund = find_fd_steady_state(1, 0, cache, p)
 θ_fund_idx = np.where(np.arange(T) < t_shock, 1, 0).astype(int)
 irf_fund = simulate_fundamental_irf(
-    b0_fund, φ0_fund, θ_fund_idx, 0, cache, sim_interp_cache, p, t_shock
+    b0_fund, φ0_fund, θ_fund_idx, 0, cache, p, t_shock
 )
 
 # Institutional disinflation: FD steady state at θ_inst (idx 2), ξ=0
-b0_inst, φ0_inst = find_fd_steady_state(2, ξ_pre, cache, sim_interp_cache, p)
+b0_inst, φ0_inst = find_fd_steady_state(2, ξ_pre, cache, p)
 θ_inst_idx = np.full(T, 2, dtype=int)
 ξ_inst_idx = np.where(
     np.arange(T) < t_shock, ξ_pre, ξ_post).astype(int)
 irf_inst = simulate_institutional_irf(
-    b0_inst, φ0_inst, θ_inst_idx, ξ_inst_idx, cache,
-    sim_interp_cache, p, t_shock
+    b0_inst, φ0_inst, θ_inst_idx, ξ_inst_idx, cache, p, t_shock
 )
 
 print(f"Fundamental initial state: b0 = {b0_fund:.4f}, φ0' = {φ0_fund:.4f}")
@@ -1682,13 +1387,14 @@ print(f"Institutional initial state: b0 = {b0_inst:.4f}, φ0' = {φ0_inst:.4f}")
 time = np.arange(T) - t_shock
 θ_fund = np.where(np.arange(T) < t_shock, θ_fund_H, θ_fund_L)
 θ_inst = np.full(T, θ_inst_val)
-ξ_inst = np.asarray(ξ_grid)[ξ_inst_idx]
+ξ_inst = np.asarray(cache['ξ_grid'])[ξ_inst_idx]
 ```
+
 
 ```{code-cell} ipython3
 def plot_irf(irf, θ_path, ξ_path, time, title):
-    """Plot a 4x2 IRF figure matching the paper's layout."""
-    fig, axes = plt.subplots(4, 2, figsize=(12, 14))
+    """Plot IRF figure."""
+    fig, axes = plt.subplots(3, 2, figsize=(12, 12))
     fig.suptitle(title, fontsize=14, y=1.01)
     kw = dict(lw=2, color='tab:blue')
     vkw = dict(color='k', ls=':', alpha=0.4)
@@ -1704,18 +1410,15 @@ def plot_irf(irf, θ_path, ξ_path, time, title):
     axes[1, 0].set_title('Regime (0 = FD) and Pr target met (dashed)')
     axes[1, 0].legend()
     axes[1, 0].axvline(0, **vkw)
-    axes[1, 1].plot(time, irf['debt_gdp'], **kw)
-    axes[1, 1].set_title('Debt to GDP (%)'); axes[1, 1].axvline(0, **vkw)
-    axes[2, 0].plot(time, irf['surplus_gdp'], **kw)
-    axes[2, 0].set_title('Surplus to GDP (%)'); axes[2, 0].axvline(0, **vkw)
-    axes[2, 1].plot(time, irf['π'], **kw)
-    axes[2, 1].set_title('Inflation Rate (%)'); axes[2, 1].axvline(0, **vkw)
-    axes[3, 0].plot(time, irf['φ'], **kw)
-    axes[3, 0].set_title(r'Current $\phi$')
-    axes[3, 0].set_xlabel('time'); axes[3, 0].axvline(0, **vkw)
-    axes[3, 1].plot(time, irf['φ_prime'], **kw)
-    axes[3, 1].set_title(r"Promised $\phi'$")
-    axes[3, 1].set_xlabel('time'); axes[3, 1].axvline(0, **vkw)
+    axes[1, 1].plot(time, irf['π'], **kw)
+    axes[1, 1].set_title('Inflation Rate (%)'); axes[2, 1].axvline(0, **vkw)
+    axes[1, 1].axvline(0, **vkw)
+    axes[2, 0].plot(time, irf['φ'], **kw)
+    axes[2, 0].set_title(r'Current $\phi$')
+    axes[2, 0].set_xlabel('time'); axes[2, 0].axvline(0, **vkw)
+    axes[2, 1].plot(time, irf['φ_prime'], **kw)
+    axes[2, 1].set_title(r"Promised $\phi'$")
+    axes[2, 1].set_xlabel('time'); axes[2, 1].axvline(0, **vkw)
     plt.tight_layout()
     return fig
 ```
@@ -2103,24 +1806,21 @@ Plot $\phi^{fd}(b')$ and the associated fiscal-dominance value $V^{fd}(b', \xi_1
 The following code plots the fiscal-dominance policy $\phi^{fd}(b')$ and the associated value $V^{fd}(b', \xi_1)$ from continuation values.
 
 ```{code-cell} ipython3
-p = params_la
-b_bar = float(B_grid[-1] - φ_grid[-1])
-b_prime_grid = np.linspace(float(B_grid[0]), b_bar, len(B_grid))
+# Use the cache from the institutional disinflation (θ = θ_bar)
+θi_inst = 2   # index for θ_bar in cache
 ξ_mid = n_ξ_coarse // 2
+b_g = cache['b_grid']
 
-_, _, _, V_fd_mid, φ_fd_mid, _ = fd_from_continuation(
-    W[:, ξ_mid:ξ_mid + 1], B_grid, b_prime_grid, φ_grid, p.κ, p.η_m)
-
-φ_fd_mid = np.asarray(φ_fd_mid[:, 0])
-V_fd_mid = np.asarray(V_fd_mid[:, 0])
+φ_fd_mid = cache['φ_fd'][θi_inst, :, ξ_mid]
+V_fd_mid = cache['V_fd'][θi_inst, :, ξ_mid]
 feasible_fd = V_fd_mid > -1e12
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
-axes[0].plot(b_prime_grid[feasible_fd], φ_fd_mid[feasible_fd], 'b-', lw=2)
+axes[0].plot(b_g[feasible_fd], φ_fd_mid[feasible_fd], 'b-', lw=2)
 axes[0].set_xlabel("next-period debt $b'$")
 axes[0].set_ylabel(r"$\phi^{fd}(b', \xi_1)$")
 
-axes[1].plot(b_prime_grid[feasible_fd], V_fd_mid[feasible_fd], 'r-', lw=2)
+axes[1].plot(b_g[feasible_fd], V_fd_mid[feasible_fd], 'r-', lw=2)
 axes[1].set_xlabel("next-period debt $b'$")
 axes[1].set_ylabel(r"$V^{fd}(b', \xi_1)$")
 
