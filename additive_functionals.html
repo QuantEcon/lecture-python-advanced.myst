@@ -412,7 +412,7 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.2)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -435,7 +435,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <p>For example, outputs, prices, and dividends typically display  irregular but persistent growth.</p>
 <p>Asymptotic stationarity and ergodicity are key assumptions needed to make it possible to learn by applying statistical methods.</p>
 <p>But  there are good ways to model time series that have persistent growth that still enable statistical learning based on a law of large numbers for an asymptotically stationary and ergodic process.</p>
-<p>Thus, <span id="id1">[<a class="reference internal" href="zreferences.html#id256" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span>  described  two classes of time series models that accommodate growth.</p>
+<p>Thus, <span id="id1">[<a class="reference internal" href="zreferences.html#id262" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span>  described  two classes of time series models that accommodate growth.</p>
 <p>They are</p>
 <ol class="arabic simple">
 <li><p><strong>additive functionals</strong> that display random “arithmetic growth”</p></li>
@@ -452,7 +452,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 <li><p>a <strong>martingale</strong></p></li>
 </ol>
 <p>We describe how to construct,  simulate,  and interpret these components.</p>
-<p>More details about  these concepts and algorithms  can be found in Hansen  <span id="id2">[<a class="reference internal" href="zreferences.html#id256" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span> and Hansen and Sargent <span id="id3">[<a class="reference internal" href="zreferences.html#id257" title="Lars Peter Hansen and Thomas J. Sargent. Risk, uncertainty, and value. University of Chicago and NYU manuscript, 2024.">Hansen and Sargent, 2024</a>]</span>.</p>
+<p>More details about  these concepts and algorithms  can be found in Hansen  <span id="id2">[<a class="reference internal" href="zreferences.html#id262" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span> and Hansen and Sargent <span id="id3">[<a class="reference internal" href="zreferences.html#id263" title="Lars Peter Hansen and Thomas J. Sargent. Risk, uncertainty, and value. University of Chicago and NYU manuscript, 2024.">Hansen and Sargent, 2024</a>]</span>.</p>
 <p>Let’s start with some imports:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -468,7 +468,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </section>
 <section id="a-particular-additive-functional">
 <h2><span class="section-number">32.2. </span>A particular additive functional<a class="headerlink" href="#a-particular-additive-functional" title="Link to this heading">#</a></h2>
-<p><span id="id4">[<a class="reference internal" href="zreferences.html#id256" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span> describes a general class of additive functionals.</p>
+<p><span id="id4">[<a class="reference internal" href="zreferences.html#id262" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span> describes a general class of additive functionals.</p>
 <p>This lecture focuses on a subclass of these: a scalar process <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^\infty\)</span> whose increments are driven by a Gaussian vector autoregression.</p>
 <p>Our special additive functional displays interesting time series behavior while also being easy to construct, simulate, and analyze
 by using linear state-space tools.</p>
@@ -587,7 +587,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 <section id="simulation">
 <h3><span class="section-number">32.3.1. </span>Simulation<a class="headerlink" href="#simulation" title="Link to this heading">#</a></h3>
 <p>When simulating we embed our variables into a bigger system.</p>
-<p>This system also constructs the components of the decompositions of <span class="math notranslate nohighlight">\(y_t\)</span> and of <span class="math notranslate nohighlight">\(\exp(y_t)\)</span> proposed by Hansen <span id="id5">[<a class="reference internal" href="zreferences.html#id256" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span>.</p>
+<p>This system also constructs the components of the decompositions of <span class="math notranslate nohighlight">\(y_t\)</span> and of <span class="math notranslate nohighlight">\(\exp(y_t)\)</span> proposed by Hansen <span id="id5">[<a class="reference internal" href="zreferences.html#id262" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span>.</p>
 <p>All of these objects are computed using the code below</p>
 <div class="cell docutils container" id="amf-lss">
 <div class="cell_input docutils container">
@@ -1077,7 +1077,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/66438acf30b8de570d96cf3640e5c8e524799c188f8d8d2ce5f2530a6dbae8f1.png" src="_images/66438acf30b8de570d96cf3640e5c8e524799c188f8d8d2ce5f2530a6dbae8f1.png" />
+<img alt="_images/3a029b6bcdacc1a83b13393a82d946cc4b786c6c570f2cb13effeee3e432470f.png" src="_images/3a029b6bcdacc1a83b13393a82d946cc4b786c6c570f2cb13effeee3e432470f.png" />
 </div>
 </div>
 <p>Notice the irregular but persistent growth in <span class="math notranslate nohighlight">\(y_t\)</span>.</p>
@@ -1085,7 +1085,7 @@ y_{t+1} - y_t =  \nu + \tilde x_t + \sigma z_{t+1}
 </section>
 <section id="decomposition">
 <h3><span class="section-number">32.3.2. </span>Decomposition<a class="headerlink" href="#decomposition" title="Link to this heading">#</a></h3>
-<p>Hansen and Sargent <span id="id6">[<a class="reference internal" href="zreferences.html#id257" title="Lars Peter Hansen and Thomas J. Sargent. Risk, uncertainty, and value. University of Chicago and NYU manuscript, 2024.">Hansen and Sargent, 2024</a>]</span> describe how to construct a decomposition of
+<p>Hansen and Sargent <span id="id6">[<a class="reference internal" href="zreferences.html#id263" title="Lars Peter Hansen and Thomas J. Sargent. Risk, uncertainty, and value. University of Chicago and NYU manuscript, 2024.">Hansen and Sargent, 2024</a>]</span> describe how to construct a decomposition of
 an additive functional into four parts:</p>
 <ul class="simple">
 <li><p>a constant inherited from initial values <span class="math notranslate nohighlight">\(x_0\)</span> and <span class="math notranslate nohighlight">\(y_0\)</span></p></li>
@@ -1103,7 +1103,7 @@ functionals defined by <a class="reference internal" href="#equation-old1-additi
   g &amp; := D (I - A)^{-1}
 \end{aligned}
 \end{split}\]</div>
-<p>Then the Hansen <span id="id7">[<a class="reference internal" href="zreferences.html#id256" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span>, <span id="id8">[<a class="reference internal" href="zreferences.html#id257" title="Lars Peter Hansen and Thomas J. Sargent. Risk, uncertainty, and value. University of Chicago and NYU manuscript, 2024.">Hansen and Sargent, 2024</a>]</span> decomposition is</p>
+<p>Then the Hansen <span id="id7">[<a class="reference internal" href="zreferences.html#id262" title="Lars Peter Hansen. Dynamic Valuation Decomposition Within Stochastic Economies. Econometrica, 80(3):911-967, May 2012. URL: https://ideas.repec.org/a/ecm/emetrp/v80y2012i3p911-967.html, doi:10.3982/ECTA8070.">Hansen, 2012</a>]</span>, <span id="id8">[<a class="reference internal" href="zreferences.html#id263" title="Lars Peter Hansen and Thomas J. Sargent. Risk, uncertainty, and value. University of Chicago and NYU manuscript, 2024.">Hansen and Sargent, 2024</a>]</span> decomposition is</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -1221,7 +1221,7 @@ you will generate (modulo randomness) the plot</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c2768c786ce8c0f328864e8da491fd0787730721f853ecf7c0ae6c3d430be057.png" src="_images/c2768c786ce8c0f328864e8da491fd0787730721f853ecf7c0ae6c3d430be057.png" />
+<img alt="_images/30c882a979605646902fe0a0e8179b7ef1e1125729782a61b12acaf7b03e8885.png" src="_images/30c882a979605646902fe0a0e8179b7ef1e1125729782a61b12acaf7b03e8885.png" />
 </div>
 </div>
 <p>When we plot multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plot the population 95% probability coverage sets computed using the LinearStateSpace class.</p>
@@ -1272,7 +1272,7 @@ obtain the graph in the next cell.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/e8eacc0e8b25e62aaaa42334ff177d2ecf95d633a0d1c3e7e1e71de46b9a3f6c.png" src="_images/e8eacc0e8b25e62aaaa42334ff177d2ecf95d633a0d1c3e7e1e71de46b9a3f6c.png" />
+<img alt="_images/847b1f0459020358ef9c3f0bc2ddd869794b20cf297bc5632c5f9c9d7e5232bc.png" src="_images/847b1f0459020358ef9c3f0bc2ddd869794b20cf297bc5632c5f9c9d7e5232bc.png" />
 </div>
 </div>
 <p>As before, when we plotted multiple realizations of a component in the 2nd, 3rd, and 4th panels, we also plotted population 95% confidence bands computed using the LinearStateSpace class.</p>
@@ -1285,7 +1285,7 @@ for a limited horizon <span class="math notranslate nohighlight">\(T\)</span>.</
 </section>
 <section id="peculiar-large-sample-property">
 <h3><span class="section-number">32.4.2. </span>Peculiar large sample property<a class="headerlink" href="#peculiar-large-sample-property" title="Link to this heading">#</a></h3>
-<p>Hansen and Sargent <span id="id9">[<a class="reference internal" href="zreferences.html#id257" title="Lars Peter Hansen and Thomas J. Sargent. Risk, uncertainty, and value. University of Chicago and NYU manuscript, 2024.">Hansen and Sargent, 2024</a>]</span> (ch. 8) describe the following two properties of the  martingale component
+<p>Hansen and Sargent <span id="id9">[<a class="reference internal" href="zreferences.html#id263" title="Lars Peter Hansen and Thomas J. Sargent. Risk, uncertainty, and value. University of Chicago and NYU manuscript, 2024.">Hansen and Sargent, 2024</a>]</span> (ch. 8) describe the following two properties of the  martingale component
 <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> of the multiplicative decomposition</p>
 <ul class="simple">
 <li><p>while <span class="math notranslate nohighlight">\(E_0 \widetilde M_t = 1\)</span> for all <span class="math notranslate nohighlight">\(t \geq 0\)</span>,
@@ -1295,7 +1295,7 @@ zero almost surely</p></li>
 </ul>
 <p>The first property follows from the fact that <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> is a multiplicative martingale with initial condition
 <span class="math notranslate nohighlight">\(\widetilde M_0 = 1\)</span>.</p>
-<p>The second is a <strong>peculiar property</strong> noted and proved by Hansen and Sargent <span id="id10">[<a class="reference internal" href="zreferences.html#id257" title="Lars Peter Hansen and Thomas J. Sargent. Risk, uncertainty, and value. University of Chicago and NYU manuscript, 2024.">Hansen and Sargent, 2024</a>]</span>.</p>
+<p>The second is a <strong>peculiar property</strong> noted and proved by Hansen and Sargent <span id="id10">[<a class="reference internal" href="zreferences.html#id263" title="Lars Peter Hansen and Thomas J. Sargent. Risk, uncertainty, and value. University of Chicago and NYU manuscript, 2024.">Hansen and Sargent, 2024</a>]</span>.</p>
 <p>The following simulation of many paths of <span class="math notranslate nohighlight">\(\widetilde M_t\)</span> illustrates both properties</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2103,18 +2103,38 @@ H3.H3 = 7.25
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="hansen_richard_1987.html">
+   40. The Role of Conditioning Information in Asset Pricing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hansen_jagannathan_1991.html">
+   41. The Hansen-Jagannathan Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   40. Two Modifications of Mean-Variance Portfolio Theory
+   42. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="doubts_or_variability.html">
+   43. Doubts or Variability?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
+   44. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   41. Irrelevance of Capital Structures with Complete Markets
+   45. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   42. Equilibrium Capital Structures with Incomplete Markets
+   46. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -2126,57 +2146,62 @@ H3.H3 = 7.25
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   43. Optimal Unemployment Insurance
+   47. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   44. Stackelberg Plans
+   48. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   45. Machine Learning a Ramsey Plan
+   49. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   46. Time Inconsistency of Ramsey Plans
+   50. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   47. Sustainable Plans for a Calvo Model
+   51. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   48. Optimal Taxation with State-Contingent Debt
+   52. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   49. Optimal Taxation without State-Contingent Debt
+   53. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   50. Fluctuating Interest Rates Deliver Fiscal Insurance
+   54. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   51. Fiscal Risk and Government Debt
+   55. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   52. Competitive Equilibria of a Model of Chang
+   56. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   53. Credible Government Policies in a Model of Chang
+   57. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dovis_accounting_mf.html">
+   58. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -2188,17 +2213,17 @@ H3.H3 = 7.25
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   54. Troubleshooting
+   59. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   55. References
+   60. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   56. Execution Statistics
+   61. Execution Statistics
   </a>
  </li>
 </ul>

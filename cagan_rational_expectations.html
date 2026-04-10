@@ -281,7 +281,7 @@
 
                     <!-- Last modified / Changelog dropdown -->
                         <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
-                            Last changed: Apr 02, 2026
+                            Last changed: Apr 10, 2026
                             <span class="changelog-icon">▼</span>
                         </button>
 
@@ -292,10 +292,19 @@
                             
                             <li class="changelog-entry">
                                 
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/95d83cdc" class="changelog-hash">95d83cdc</a>
+                                
+                                <span class="changelog-author">Humphrey Yang</span>
+                                <span class="changelog-time">15 minutes ago</span>
+                                <span class="changelog-message">Tom's new lecture on the Bocola-Dovis and others paper (#320)</span>
+                            </li>
+                            
+                            <li class="changelog-entry">
+                                
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/61ad5b7d" class="changelog-hash">61ad5b7d</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">10 minutes ago</span>
+                                <span class="changelog-time">1 week ago</span>
                                 <span class="changelog-message">Update information projection lectures (#319)</span>
                             </li>
                             
@@ -336,13 +345,13 @@
 </nav>
 <section id="overview">
 <h2><a class="toc-backref" href="#id25" role="doc-backlink"><span class="section-number">36.1. </span>Overview</a><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>This lecture presents the analysis in <span id="id1">[<a class="reference internal" href="zreferences.html#id95" title="Thomas J Sargent. The Demand for Money During Hyperinflations under Rational Expectations: I. International Economic Review, 18(1):59-82, February 1977.">Sargent, 1977</a>]</span>, which proposes
-methods for estimating the demand schedule for money that <span id="id2">Cagan [<a class="reference internal" href="zreferences.html#id94" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">1956</a>]</span> used
+<p>This lecture presents the analysis in <span id="id1">[<a class="reference internal" href="zreferences.html#id99" title="Thomas J Sargent. The Demand for Money During Hyperinflations under Rational Expectations: I. International Economic Review, 18(1):59-82, February 1977.">Sargent, 1977</a>]</span>, which proposes
+methods for estimating the demand schedule for money that <span id="id2">Cagan [<a class="reference internal" href="zreferences.html#id98" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">1956</a>]</span> used
 in his famous study of hyperinflation.</p>
-<p><span id="id3">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id17" title="Thomas J Sargent and Neil Wallace. Rational expectations and the dynamics of hyperinflation. International economic review, pages 328–350, 1973.">1973</a>]</span> pointed out that under assumptions making Cagan’s
+<p><span id="id3">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id20" title="Thomas J Sargent and Neil Wallace. Rational expectations and the dynamics of hyperinflation. International economic review, pages 328–350, 1973.">1973</a>]</span> pointed out that under assumptions making Cagan’s
 adaptive expectations equivalent to rational expectations, Cagan’s
-estimator of <span class="math notranslate nohighlight">\(\alpha\)</span> — the slope of log real balances with respect to expected
-inflation — is not statistically consistent.</p>
+estimator of <span class="math notranslate nohighlight">\(\alpha\)</span> – the slope of log real balances with respect to expected
+inflation – is not statistically consistent.</p>
 <p>This inconsistency matters because of a paradox that emerged when Cagan used
 his estimates of <span class="math notranslate nohighlight">\(\alpha\)</span> to calculate the sustained rates of inflation that would
 maximize the flow of real resources that money creators could command by printing
@@ -350,10 +359,10 @@ money.</p>
 <p>That “optimal” rate is <span class="math notranslate nohighlight">\(-1/\alpha\)</span>.</p>
 <p>For each of the seven hyperinflations
 in his sample, the reciprocal of Cagan’s estimate of <span class="math notranslate nohighlight">\(-\alpha\)</span> turned out to be
-less — and often very much less — than the actual average rate of inflation,
+less – and often very much less – than the actual average rate of inflation,
 suggesting that the creators of money expanded the money supply at rates far
 exceeding the revenue-maximizing rate.</p>
-<p>A natural explanation is that this paradox is a statistical artifact — a
+<p>A natural explanation is that this paradox is a statistical artifact – a
 consequence of biased estimates of <span class="math notranslate nohighlight">\(\alpha\)</span>.</p>
 <p>Table 1 reproduces the relevant data from Cagan.</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -421,11 +430,11 @@ moving-average representation and computing likelihood-ratio statistics.</p></li
 </ol>
 <p>Our key tools are bivariate Wold representations, Granger causality, and vector
 time series methods following
-<span id="id4">Granger [<a class="reference internal" href="zreferences.html#id6" title="Clive WJ Granger. Investigating causal relations by econometric models and cross-spectral methods. Econometrica: journal of the Econometric Society, pages 424–438, 1969.">1969</a>]</span>, <span id="id5">Sims [<a class="reference internal" href="zreferences.html#id7" title="Christopher A Sims. Money, income, and causality. The American economic review, 62(4):540–552, 1972.">1972</a>]</span>, <span id="id6">Wilson [<a class="reference internal" href="zreferences.html#id3" title="G Tunnicliffe Wilson. The estimation of parameters in multivariate time series models. Journal of the Royal Statistical Society Series B: Statistical Methodology, 35(1):76–85, 1973.">1973</a>]</span> and <span id="id7">Anderson [<a class="reference internal" href="zreferences.html#id5" title="Theodore W Anderson. The statistical analysis of time series. John Wiley &amp; Sons, 1958.">1958</a>]</span>.</p>
+<span id="id4">Granger [<a class="reference internal" href="zreferences.html#id9" title="Clive WJ Granger. Investigating causal relations by econometric models and cross-spectral methods. Econometrica: journal of the Econometric Society, pages 424–438, 1969.">1969</a>]</span>, <span id="id5">Sims [<a class="reference internal" href="zreferences.html#id10" title="Christopher A Sims. Money, income, and causality. The American economic review, 62(4):540–552, 1972.">1972</a>]</span>, <span id="id6">Wilson [<a class="reference internal" href="zreferences.html#id6" title="G Tunnicliffe Wilson. The estimation of parameters in multivariate time series models. Journal of the Royal Statistical Society Series B: Statistical Methodology, 35(1):76–85, 1973.">1973</a>]</span> and <span id="id7">Anderson [<a class="reference internal" href="zreferences.html#id8" title="Theodore W Anderson. The statistical analysis of time series. John Wiley &amp; Sons, 1958.">1958</a>]</span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This lecture can be viewed as a bivariate version of the “reverse engineering” exercise of
-<span id="id8">Muth [<a class="reference internal" href="zreferences.html#id126" title="John F Muth. Optimal properties of exponentially weighted forecasts. Journal of the american statistical association, 55(290):299–306, 1960.">1960</a>]</span> that we described in <a class="reference internal" href="muth_kalman.html"><span class="doc">Reverse Engineering a la Muth</span></a>.</p>
+<span id="id8">Muth [<a class="reference internal" href="zreferences.html#id130" title="John F Muth. Optimal properties of exponentially weighted forecasts. Journal of the american statistical association, 55(290):299–306, 1960.">1960</a>]</span> that we described in <a class="reference internal" href="muth_kalman.html"><span class="doc">Reverse Engineering a la Muth</span></a>.</p>
 <p>From a technical point of view this lecture is an exercise in applying vector
 time series models.</p>
 <p>The model is interesting because it illustrates the
@@ -573,7 +582,7 @@ substituting for <span class="math notranslate nohighlight">\(\pi_t\)</span> fro
 = \bigl[\bigl(\lambda + \alpha(1-\lambda)\bigr)^{-1}(1-\lambda)(\varepsilon_t - \eta_t)
    - \varepsilon_{t-1} + \varepsilon_t\bigr].\]</div>
 <p>Equations <a class="reference internal" href="#equation-eq11">(36.12)</a> and <a class="reference internal" href="#equation-eq12">(36.13)</a> can be derived directly from <a class="reference internal" href="#equation-eq10">(36.10)</a> and
-<a class="reference internal" href="#equation-eq9b">(36.11)</a>; alternatively, see <span id="id12">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id17" title="Thomas J Sargent and Neil Wallace. Rational expectations and the dynamics of hyperinflation. International economic review, pages 328–350, 1973.">1973</a>]</span> for a somewhat different
+<a class="reference internal" href="#equation-eq9b">(36.11)</a>; alternatively, see <span id="id12">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id20" title="Thomas J Sargent and Neil Wallace. Rational expectations and the dynamics of hyperinflation. International economic review, pages 328–350, 1973.">1973</a>]</span> for a somewhat different
 but equivalent way of deriving <a class="reference internal" href="#equation-eq11">(36.12)</a> and <a class="reference internal" href="#equation-eq12">(36.13)</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -653,14 +662,14 @@ shows that:</p>
 \]</div>
 <p>If <span class="math notranslate nohighlight">\(\rho = 0\)</span> and hence there are no money-supply shocks, then
 <span class="math notranslate nohighlight">\(\operatorname{plim}\hat\alpha = -\lambda / (1-\lambda)\)</span>, which is the value
-derived by <span id="id13">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id17" title="Thomas J Sargent and Neil Wallace. Rational expectations and the dynamics of hyperinflation. International economic review, pages 328–350, 1973.">1973</a>]</span>.</p>
+derived by <span id="id13">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id20" title="Thomas J Sargent and Neil Wallace. Rational expectations and the dynamics of hyperinflation. International economic review, pages 328–350, 1973.">1973</a>]</span>.</p>
 <p>If <span class="math notranslate nohighlight">\(\eta_t = 0\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>, so there is no noise in the portfolio-balance
 equation, then <span class="math notranslate nohighlight">\(\rho = 1\)</span> and <span class="math notranslate nohighlight">\(\operatorname{plim}\hat\alpha = \alpha\)</span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>It is noteworthy that the residuals in <a class="reference internal" href="#equation-eq-cagan-pop-regression">(36.18)</a> follow a
 random walk.</p>
-<p><span id="id14">Cagan [<a class="reference internal" href="zreferences.html#id94" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">1956</a>]</span> and <span id="id15">Barro [<a class="reference internal" href="zreferences.html#id4" title="Robert J Barro. Inflation, the payments period, and the demand for money. Journal of Political Economy, 78(6):1228–1263, 1970.">1970</a>]</span> both reported highly serially correlated residuals
+<p><span id="id14">Cagan [<a class="reference internal" href="zreferences.html#id98" title="Philip Cagan. The monetary dynamics of hyperinflation. In Milton Friedman, editor, Studies in the Quantity Theory of Money, pages 25–117. University of Chicago Press, Chicago, 1956.">1956</a>]</span> and <span id="id15">Barro [<a class="reference internal" href="zreferences.html#id7" title="Robert J Barro. Inflation, the payments period, and the demand for money. Journal of Political Economy, 78(6):1228–1263, 1970.">1970</a>]</span> both reported highly serially correlated residuals
 and very low Durbin–Watson statistics, which is consistent with this prediction.</p>
 </div>
 <p>The following functions implement <span class="math notranslate nohighlight">\(\rho\)</span> from <a class="reference internal" href="#equation-eq-rho">(36.15)</a> and the probability limit of Cagan’s estimator from <a class="reference internal" href="#equation-eq-plim-alpha">(36.20)</a>.</p>
@@ -699,7 +708,7 @@ and very low Durbin–Watson statistics, which is consistent with this predictio
 <span class="n">ws_limit</span> <span class="o">=</span> <span class="o">-</span><span class="n">λ</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">)</span>
 
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">α_plot</span><span class="p">,</span> <span class="n">α_plot</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;No bias (45° line)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">α_plot</span><span class="p">,</span> <span class="n">α_plot</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;No bias (45$\degree$ line)&#39;</span><span class="p">)</span>
 <span class="n">label</span> <span class="o">=</span> <span class="sa">rf</span><span class="s1">&#39;$\operatorname</span><span class="se">{{</span><span class="s1">plim</span><span class="se">}}</span><span class="s1">\hat\alpha$, $\lambda=</span><span class="si">{</span><span class="n">λ</span><span class="si">}</span><span class="s1">$&#39;</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">α_plot</span><span class="p">,</span> <span class="n">plims</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">ws_limit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
@@ -714,7 +723,7 @@ and very low Durbin–Watson statistics, which is consistent with this predictio
 </div>
 <div class="cell_output docutils container">
 <figure class="align-default" id="fig-cagan-bias">
-<img alt="_images/ab09ef802a71fbe708d8b4f6bd4ee674a0cb9c88a4e72b6697d54e286a5718c0.png" src="_images/ab09ef802a71fbe708d8b4f6bd4ee674a0cb9c88a4e72b6697d54e286a5718c0.png" />
+<img alt="_images/71092fa4235458060881eb020730ab269c80c8fa628e93b256c025d15d97efe2.png" src="_images/71092fa4235458060881eb020730ab269c80c8fa628e93b256c025d15d97efe2.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 36.1 </span><span class="caption-text">Bias of Cagan’s OLS estimator of <span class="math notranslate nohighlight">\(\alpha\)</span></span><a class="headerlink" href="#fig-cagan-bias" title="Link to this image">#</a></p>
 </figcaption>
@@ -838,7 +847,7 @@ explicitly and rearranging the above equation gives</p>
 <p>Equation <a class="reference internal" href="#equation-eq27">(36.25)</a> is a vector first-order autoregression, first-order moving
 average process.</p>
 <p>The random variables <span class="math notranslate nohighlight">\(a_{1t}\)</span>, <span class="math notranslate nohighlight">\(a_{2t}\)</span> are the innovations in
-the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> processes, respectively — the one-period-ahead forecasting errors
+the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> processes, respectively – the one-period-ahead forecasting errors
 for <span class="math notranslate nohighlight">\(x_t\)</span> and <span class="math notranslate nohighlight">\(\mu_t\)</span>.</p>
 <p>The <span class="math notranslate nohighlight">\(a\)</span>’s are related to the <span class="math notranslate nohighlight">\(\varepsilon\)</span>’s and <span class="math notranslate nohighlight">\(\eta\)</span>’s
 appearing in the structural equations of the model by</p>
@@ -891,7 +900,7 @@ the other.</p>
 <p>Evidence that <span class="math notranslate nohighlight">\(x\)</span> leads <span class="math notranslate nohighlight">\(\mu\)</span> would not be consistent with the model being studied
 here.</p>
 <p>The vector autoregressive, moving average process <a class="reference internal" href="#equation-eq27">(36.25)</a> is in a form that can
-be estimated by the maximum likelihood estimator described by <span id="id17">Wilson [<a class="reference internal" href="zreferences.html#id3" title="G Tunnicliffe Wilson. The estimation of parameters in multivariate time series models. Journal of the Royal Statistical Society Series B: Statistical Methodology, 35(1):76–85, 1973.">1973</a>]</span>.</p>
+be estimated by the maximum likelihood estimator described by <span id="id17">Wilson [<a class="reference internal" href="zreferences.html#id6" title="G Tunnicliffe Wilson. The estimation of parameters in multivariate time series models. Journal of the Royal Statistical Society Series B: Statistical Methodology, 35(1):76–85, 1973.">1973</a>]</span>.</p>
 <p>It is essential that the matrices multiplying current
 <span class="math notranslate nohighlight">\(\begin{bmatrix}a_{1t}\\a_{2t}\end{bmatrix}\)</span> and current
 <span class="math notranslate nohighlight">\(\begin{bmatrix}x_t\\\mu_t\end{bmatrix}\)</span> both be identity matrices in order to
@@ -910,11 +919,11 @@ a vector autoregression either for <span class="math notranslate nohighlight">\(
 <span class="eqno">(36.30)<a class="headerlink" href="#equation-eq32" title="Link to this equation">#</a></span>\[L(\lambda,\,\sigma_{11},\,\sigma_{12},\,\sigma_{22}\mid\mu_t,\,x_t)
 = (2\pi)^{-T}\,|D_a|^{-T/2}
   \exp\!\left(-\tfrac{1}{2}\sum_{t=1}^{T} a_t' D_a^{-1} a_t\right).\]</div>
-<p>Given initial values for <span class="math notranslate nohighlight">\((a_{10}, a_{20})\)</span> — equivalently for <span class="math notranslate nohighlight">\((\varepsilon_0,
-\eta_0)\)</span> — and given a value of <span class="math notranslate nohighlight">\(\lambda\)</span>, equation <a class="reference internal" href="#equation-eq26">(36.24)</a> or <a class="reference internal" href="#equation-eq27">(36.25)</a> can be
+<p>Given initial values for <span class="math notranslate nohighlight">\((a_{10}, a_{20})\)</span> – equivalently for <span class="math notranslate nohighlight">\((\varepsilon_0,
+\eta_0)\)</span> – and given a value of <span class="math notranslate nohighlight">\(\lambda\)</span>, equation <a class="reference internal" href="#equation-eq26">(36.24)</a> or <a class="reference internal" href="#equation-eq27">(36.25)</a> can be
 used to solve for <span class="math notranslate nohighlight">\(a_t\)</span>, <span class="math notranslate nohighlight">\(t = 1, \ldots, T\)</span>.</p>
 <p>(We take <span class="math notranslate nohighlight">\(a_{10} = a_{20} = 0\)</span>.)</p>
-<p><span id="id18">Wilson [<a class="reference internal" href="zreferences.html#id3" title="G Tunnicliffe Wilson. The estimation of parameters in multivariate time series models. Journal of the Royal Statistical Society Series B: Statistical Methodology, 35(1):76–85, 1973.">1973</a>]</span> notes that maximizing <a class="reference internal" href="#equation-eq32">(36.30)</a> is equivalent to minimizing with respect to
+<p><span id="id18">Wilson [<a class="reference internal" href="zreferences.html#id6" title="G Tunnicliffe Wilson. The estimation of parameters in multivariate time series models. Journal of the Royal Statistical Society Series B: Statistical Methodology, 35(1):76–85, 1973.">1973</a>]</span> notes that maximizing <a class="reference internal" href="#equation-eq32">(36.30)</a> is equivalent to minimizing with respect to
 <span class="math notranslate nohighlight">\(\lambda\)</span> the determinant of the estimated covariance matrix of the <span class="math notranslate nohighlight">\(a_t\)</span>’s,</p>
 <div class="math notranslate nohighlight" id="equation-eq33">
 <span class="eqno">(36.31)<a class="headerlink" href="#equation-eq33" title="Link to this equation">#</a></span>\[|\hat{D}_a| \equiv \left|T^{-1}\sum_{t=1}^{T} \hat{a}_t \hat{a}_t'\right| ,\]</div>
@@ -925,7 +934,7 @@ depend on <span class="math notranslate nohighlight">\(\lambda\)</span>.</p>
 \[\hat{D}_a = T^{-1}\sum_{t=1}^{T} \hat{a}_t \hat{a}_t'\]</div>
 <p>evaluated at the value of <span class="math notranslate nohighlight">\(\lambda\)</span> that minimizes <a class="reference internal" href="#equation-eq33">(36.31)</a>.</p>
 <p>The resulting
-estimates are known to be statistically consistent (see <span id="id19">[<a class="reference internal" href="zreferences.html#id3" title="G Tunnicliffe Wilson. The estimation of parameters in multivariate time series models. Journal of the Royal Statistical Society Series B: Statistical Methodology, 35(1):76–85, 1973.">Wilson, 1973</a>]</span>).</p>
+estimates are known to be statistically consistent (see <span id="id19">[<a class="reference internal" href="zreferences.html#id6" title="G Tunnicliffe Wilson. The estimation of parameters in multivariate time series models. Journal of the Royal Statistical Society Series B: Statistical Methodology, 35(1):76–85, 1973.">Wilson, 1973</a>]</span>).</p>
 <p>Notice that <span class="math notranslate nohighlight">\(\alpha\)</span> does not appear explicitly in the likelihood function, but only
 indirectly by way of the elements of <span class="math notranslate nohighlight">\(D_a\)</span>, namely <span class="math notranslate nohighlight">\(\sigma_{11}\)</span>, <span class="math notranslate nohighlight">\(\sigma_{12}\)</span>, and
 <span class="math notranslate nohighlight">\(\sigma_{22}\)</span>.</p>
@@ -933,8 +942,8 @@ indirectly by way of the elements of <span class="math notranslate nohighlight">
 <a class="reference internal" href="#equation-eq27">(36.25)</a>, in which <span class="math notranslate nohighlight">\(\lambda\)</span> appears explicitly but <span class="math notranslate nohighlight">\(\alpha\)</span> does not.</p>
 <p>On the
 basis of the <em>four</em> parameters <span class="math notranslate nohighlight">\(\lambda\)</span>, <span class="math notranslate nohighlight">\(\sigma_{11}\)</span>, <span class="math notranslate nohighlight">\(\sigma_{12}\)</span>, and
-<span class="math notranslate nohighlight">\(\sigma_{22}\)</span> that are identified by <a class="reference internal" href="#equation-eq27">(36.25)</a> — i.e., that characterize the
-likelihood function <a class="reference internal" href="#equation-eq32">(36.30)</a> — we can think of attempting to estimate the <em>five</em>
+<span class="math notranslate nohighlight">\(\sigma_{22}\)</span> that are identified by <a class="reference internal" href="#equation-eq27">(36.25)</a> – i.e., that characterize the
+likelihood function <a class="reference internal" href="#equation-eq32">(36.30)</a> – we can think of attempting to estimate the <em>five</em>
 parameters of the model: <span class="math notranslate nohighlight">\(\alpha\)</span>, <span class="math notranslate nohighlight">\(\lambda\)</span>, <span class="math notranslate nohighlight">\(\sigma_\varepsilon^2\)</span>,
 <span class="math notranslate nohighlight">\(\sigma_\eta^2\)</span>, and <span class="math notranslate nohighlight">\(\sigma_{\varepsilon\eta}\)</span>.</p>
 <p>Not surprisingly, some of the
@@ -1085,7 +1094,7 @@ estimates <span class="math notranslate nohighlight">\(\hat{\theta}\)</span>.</p
 <p>and where <span class="math notranslate nohighlight">\(\log L\)</span> is the natural logarithm of the likelihood function <a class="reference internal" href="#equation-eq32">(36.30)</a>.</p>
 <p>Notice that the maximum likelihood estimate of <span class="math notranslate nohighlight">\(\lambda\)</span> is asymptotically
 orthogonal to the estimates <span class="math notranslate nohighlight">\(\sigma_{11}\)</span>, <span class="math notranslate nohighlight">\(\sigma_{12}\)</span>, <span class="math notranslate nohighlight">\(\sigma_{22}\)</span>.</p>
-<p>The preceding formula for <span class="math notranslate nohighlight">\(\Sigma_\theta\)</span> can be derived by applying results of <span id="id20">[<a class="reference internal" href="zreferences.html#id3" title="G Tunnicliffe Wilson. The estimation of parameters in multivariate time series models. Journal of the Royal Statistical Society Series B: Statistical Methodology, 35(1):76–85, 1973.">Wilson, 1973</a>]</span> and <span id="id21">Anderson [<a class="reference internal" href="zreferences.html#id5" title="Theodore W Anderson. The statistical analysis of time series. John Wiley &amp; Sons, 1958.">1958</a>]</span> [pp. 159–161].</p>
+<p>The preceding formula for <span class="math notranslate nohighlight">\(\Sigma_\theta\)</span> can be derived by applying results of <span id="id20">[<a class="reference internal" href="zreferences.html#id6" title="G Tunnicliffe Wilson. The estimation of parameters in multivariate time series models. Journal of the Royal Statistical Society Series B: Statistical Methodology, 35(1):76–85, 1973.">Wilson, 1973</a>]</span> and <span id="id21">Anderson [<a class="reference internal" href="zreferences.html#id8" title="Theodore W Anderson. The statistical analysis of time series. John Wiley &amp; Sons, 1958.">1958</a>]</span> [pp. 159–161].</p>
 <p>In the computations summarized below, the
 components <span class="math notranslate nohighlight">\(\sigma_{11}\)</span>, <span class="math notranslate nohighlight">\(\sigma_{12}\)</span>, and <span class="math notranslate nohighlight">\(\sigma_{22}\)</span> were estimated by</p>
 <div class="math notranslate nohighlight">
@@ -1171,7 +1180,7 @@ is therefore equivalent to choosing <span class="math notranslate nohighlight">\
 <span class="sd">        a_{1t} = Δx_t + λ a_{1,t-1}</span>
 <span class="sd">        a_{2t} = μ_t - x_t + a_{1t}</span>
 
-<span class="sd">    Only λ is required — α does not enter the innovation extraction.</span>
+<span class="sd">    Only λ is required -- α does not enter the innovation extraction.</span>
 
 <span class="sd">    Returns arrays a1 and a2 of length T.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1469,44 +1478,44 @@ of the restricted model <a class="reference internal" href="#equation-eq27">(36.
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Germany (Oct ‘20–Jul ‘23)</p></td>
+<tr class="row-even"><td><p>Germany (Oct ‘20-Jul ‘23)</p></td>
 <td class="text-center"><p>.677 (.053)</p></td>
-<td class="text-center"><p>−5.97 (4.62)</p></td>
+<td class="text-center"><p>-5.97 (4.62)</p></td>
 <td class="text-center"><p>.0625</p></td>
 <td class="text-center"><p>.0158</p></td>
 <td class="text-center"><p>.0091</p></td>
 </tr>
-<tr class="row-odd"><td><p>Austria (Feb ‘21–Aug ‘22)</p></td>
+<tr class="row-odd"><td><p>Austria (Feb ‘21-Aug ‘22)</p></td>
 <td class="text-center"><p>.754 (.059)</p></td>
-<td class="text-center"><p>−0.31 (1.57)</p></td>
+<td class="text-center"><p>-0.31 (1.57)</p></td>
 <td class="text-center"><p>.0385</p></td>
 <td class="text-center"><p>.0148</p></td>
 <td class="text-center"><p>.0085</p></td>
 </tr>
-<tr class="row-even"><td><p>Greece (Feb ‘43–Aug ‘44)</p></td>
+<tr class="row-even"><td><p>Greece (Feb ‘43-Aug ‘44)</p></td>
 <td class="text-center"><p>.459 (.088)</p></td>
-<td class="text-center"><p>−4.09 (2.97)</p></td>
+<td class="text-center"><p>-4.09 (2.97)</p></td>
 <td class="text-center"><p>.0675</p></td>
 <td class="text-center"><p>.0245</p></td>
 <td class="text-center"><p>.0279</p></td>
 </tr>
-<tr class="row-odd"><td><p>Hungary I (Aug ‘22–Feb ‘24)</p></td>
+<tr class="row-odd"><td><p>Hungary I (Aug ‘22-Feb ‘24)</p></td>
 <td class="text-center"><p>.418 (.067)</p></td>
-<td class="text-center"><p>−1.84 (0.40)</p></td>
+<td class="text-center"><p>-1.84 (0.40)</p></td>
 <td class="text-center"><p>.0362</p></td>
 <td class="text-center"><p>.0089</p></td>
 <td class="text-center"><p>.0060</p></td>
 </tr>
-<tr class="row-even"><td><p>Russia (Feb ‘22–Jan ‘24)</p></td>
+<tr class="row-even"><td><p>Russia (Feb ‘22-Jan ‘24)</p></td>
 <td class="text-center"><p>.626 (.073)</p></td>
-<td class="text-center"><p>−9.75 (10.74)</p></td>
+<td class="text-center"><p>-9.75 (10.74)</p></td>
 <td class="text-center"><p>.0524</p></td>
 <td class="text-center"><p>.0138</p></td>
 <td class="text-center"><p>.0205</p></td>
 </tr>
-<tr class="row-odd"><td><p>Poland (May ‘22–Nov ‘23)</p></td>
+<tr class="row-odd"><td><p>Poland (May ‘22-Nov ‘23)</p></td>
 <td class="text-center"><p>.536 (.072)</p></td>
-<td class="text-center"><p>−2.53 (0.86)</p></td>
+<td class="text-center"><p>-2.53 (0.86)</p></td>
 <td class="text-center"><p>.0566</p></td>
 <td class="text-center"><p>.0149</p></td>
 <td class="text-center"><p>.0089</p></td>
@@ -1614,7 +1623,7 @@ two-standard-error bands still include values of <span class="math notranslate n
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">countries</span><span class="p">)))</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">countries</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\hat\alpha$ (±2 s.e.)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\hat\alpha$ ($\pm$2 s.e.)&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1692,7 +1701,7 @@ equivalent to rational expectations, Cagan’s OLS estimator of <span class="mat
 <em>inconsistent</em> because inflation and money creation are determined
 simultaneously.</p></li>
 <li><p>A bivariate Wold representation with a triangular structure shows that
-inflation Granger-causes money creation, but not vice versa — consistent with
+inflation Granger-causes money creation, but not vice versa – consistent with
 empirical findings that feedback runs from inflation to money creation.</p></li>
 <li><p>The structural parameter <span class="math notranslate nohighlight">\(\alpha\)</span> is <em>not identifiable</em> from the likelihood
 function alone.</p>
@@ -1703,7 +1712,7 @@ shocks).</p>
 </li>
 <li><p>The large standard errors mean that confidence intervals of two standard errors
 on each side of the point estimates include values of <span class="math notranslate nohighlight">\(\alpha\)</span> that would imply
-money creators were maximizing seignorage revenue — potentially explaining the
+money creators were maximizing seignorage revenue – potentially explaining the
 paradox noted by Cagan.</p></li>
 <li><p>Likelihood-ratio overfitting tests do not decisively reject the one-parameter
 rational-expectations model for Germany, Greece, and Poland.</p></li>
@@ -1734,9 +1743,9 @@ under the money supply regimes that prevailed during the hyperinflations.</p></l
 
 <span class="sd">    Returns:</span>
 
-<span class="sd">    cxx : dict with keys 0, 1  — autocovariances of Δx</span>
-<span class="sd">    cμμ : dict with keys 0, 1  — autocovariances of Δμ</span>
-<span class="sd">    cxμ : dict with keys -1, 0, 1  — cross-covariances E[Δx_t Δμ_{t-τ}]</span>
+<span class="sd">    cxx : dict with keys 0, 1  -- autocovariances of Δx</span>
+<span class="sd">    cμμ : dict with keys 0, 1  -- autocovariances of Δμ</span>
+<span class="sd">    cxμ : dict with keys -1, 0, 1  -- cross-covariances E[Δx_t Δμ_{t-τ}]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">denom</span> <span class="o">=</span> <span class="n">λ</span> <span class="o">+</span> <span class="n">α</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">λ</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">denom</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">):</span>
@@ -1920,14 +1929,14 @@ rate of convergence?</p>
         <span class="n">Δx_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x_s</span><span class="p">)</span>
         <span class="n">λ_h</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">univariate_ma1_mle</span><span class="p">(</span><span class="n">Δx_s</span><span class="p">)</span>
         <span class="n">λ_hats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">λ_h</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T=</span><span class="si">{</span><span class="n">T</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2">: mean λ̂ = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">λ_hats</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
-          <span class="sa">f</span><span class="s2">&quot;std(λ̂) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">λ_hats</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;T=</span><span class="si">{</span><span class="n">T</span><span class="si">:</span><span class="s2">4d</span><span class="si">}</span><span class="s2">: mean λ_hat = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">λ_hats</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;std(λ_hat) = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">λ_hats</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T= 100: mean λ̂ = 0.6011, std(λ̂) = 0.0829
-T= 500: mean λ̂ = 0.6041, std(λ̂) = 0.0357
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>T= 100: mean λ_hat = 0.6011, std(λ_hat) = 0.0829
+T= 500: mean λ_hat = 0.6041, std(λ_hat) = 0.0357
 </pre></div>
 </div>
 </div>
@@ -1952,7 +1961,7 @@ T= 500: mean λ̂ = 0.6041, std(λ̂) = 0.0357
 </aside>
 <aside class="footnote brackets" id="sims" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">4</a><span class="fn-bracket">]</span></span>
-<p><span id="id22">[<a class="reference internal" href="zreferences.html#id7" title="Christopher A Sims. Money, income, and causality. The American economic review, 62(4):540–552, 1972.">Sims, 1972</a>]</span> proved the equivalence of Granger causality (see <span id="id23">[<a class="reference internal" href="zreferences.html#id6" title="Clive WJ Granger. Investigating causal relations by econometric models and cross-spectral methods. Econometrica: journal of the Econometric Society, pages 424–438, 1969.">Granger, 1969</a>]</span>) with econometric exogeneity.</p>
+<p><span id="id22">[<a class="reference internal" href="zreferences.html#id10" title="Christopher A Sims. Money, income, and causality. The American economic review, 62(4):540–552, 1972.">Sims, 1972</a>]</span> proved the equivalence of Granger causality (see <span id="id23">[<a class="reference internal" href="zreferences.html#id9" title="Clive WJ Granger. Investigating causal relations by econometric models and cross-spectral methods. Econometrica: journal of the Econometric Society, pages 424–438, 1969.">Granger, 1969</a>]</span>) with econometric exogeneity.</p>
 </aside>
 </aside>
 </section>
@@ -2253,18 +2262,38 @@ T= 500: mean λ̂ = 0.6041, std(λ̂) = 0.0357
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="hansen_richard_1987.html">
+   40. The Role of Conditioning Information in Asset Pricing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hansen_jagannathan_1991.html">
+   41. The Hansen-Jagannathan Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   40. Two Modifications of Mean-Variance Portfolio Theory
+   42. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="doubts_or_variability.html">
+   43. Doubts or Variability?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
+   44. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   41. Irrelevance of Capital Structures with Complete Markets
+   45. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   42. Equilibrium Capital Structures with Incomplete Markets
+   46. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -2276,57 +2305,62 @@ T= 500: mean λ̂ = 0.6041, std(λ̂) = 0.0357
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   43. Optimal Unemployment Insurance
+   47. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   44. Stackelberg Plans
+   48. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   45. Machine Learning a Ramsey Plan
+   49. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   46. Time Inconsistency of Ramsey Plans
+   50. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   47. Sustainable Plans for a Calvo Model
+   51. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   48. Optimal Taxation with State-Contingent Debt
+   52. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   49. Optimal Taxation without State-Contingent Debt
+   53. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   50. Fluctuating Interest Rates Deliver Fiscal Insurance
+   54. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   51. Fiscal Risk and Government Debt
+   55. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   52. Competitive Equilibria of a Model of Chang
+   56. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   53. Credible Government Policies in a Model of Chang
+   57. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dovis_accounting_mf.html">
+   58. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -2338,17 +2372,17 @@ T= 500: mean λ̂ = 0.6041, std(λ̂) = 0.0357
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   54. Troubleshooting
+   59. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   55. References
+   60. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   56. Execution Statistics
+   61. Execution Statistics
   </a>
  </li>
 </ul>

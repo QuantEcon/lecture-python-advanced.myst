@@ -68,8 +68,8 @@ Given a **cost function** $c \colon X \times Y \rightarrow \mathbb{R}$, the (dis
 $$
     \begin{aligned}
         \min_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy} \\
-        \text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
-        & \sum_{y \in Y} \mu_{xy} = m_y 
+        \text{s.t. }& \sum_{y \in Y} \mu_{xy} = n_x \\
+        & \sum_{x \in X} \mu_{xy} = m_y 
     \end{aligned}
 $$
 
@@ -110,8 +110,8 @@ Hence, our problem is
 $$
 \begin{aligned}
 \min_{\mu \in \mathbb{Z}_+^{X \times Y}}& \sum_{(x,y) \in X \times Y} \mu_{xy}|x-y|^{1/\zeta} \\
-\text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
-& \sum_{y \in Y} \mu_{xy} = m_y 
+\text{s.t. }& \sum_{y \in Y} \mu_{xy} = n_x \\
+& \sum_{x \in X} \mu_{xy} = m_y 
 \end{aligned}
 $$
 
@@ -1677,8 +1677,8 @@ Let's recall the formulation
 $$
 \begin{aligned}
 V_P = \min_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy} \\
-\text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
-& \sum_{y \in Y} \mu_{xy} = m_y 
+\text{s.t. }& \sum_{y \in Y} \mu_{xy} = n_x \\
+& \sum_{x \in X} \mu_{xy} = m_y 
 \end{aligned}
 $$
 
@@ -1706,8 +1706,8 @@ Then we  can formulate the following problem and its dual
 $$
  \begin{aligned}
 W_P = \max_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
-\text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
-& \sum_{y \in Y} \mu_{xy} = m_y 
+\text{s.t. }& \sum_{y \in Y} \mu_{xy} = n_x \\
+& \sum_{x \in X} \mu_{xy} = m_y 
 \end{aligned}
 $$
 
@@ -1730,6 +1730,10 @@ The dual solutions of $V_D$ and $W_D$ are related by $u_x = \alpha_x - \phi_x$ a
 The dual solution $(u,v)$ of $W_D$ can be interpreted as equilibrium utilities of the agents, which include the individual specific amenities and equilibrium shadow costs.
 
 {cite}`boerma2023composite` propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.
+
+Their approach relies on *Complementary Slackness*: given a primal solution $\mu$, $(\phi , \psi) $ is a dual solution if and only if for all $x \in X$ and $y \in Y$
+* $\phi_x + \psi_y \leq c_{xy}$ (dual feasibility),
+* $\phi_x + \psi_y = c_{xy}$ if $\mu_{xy}>0$ (complementary slackness).
 
 Let's generate an instance and compute the optimal matching.
 
@@ -1952,7 +1956,7 @@ exam_assign_OD.plot_hierarchies(subpairs)
 
 We proceed to describe and implement the algorithm to compute the dual solution. 
 
-As already mentioned, the algorithm starts from the matched pairs $(x_0,y_0)$ with no subpairs and assigns the (temporary) values $\psi_{x_0} = c_{x_0 y_0}$ and $\psi_{y_0} = 0,$ i.e. the $x$ type sustains the whole cost of matching. 
+As already mentioned, the algorithm starts from the matched pairs $(x_0,y_0)$ with no subpairs and assigns the (temporary) values $\phi_{x_0} = c_{x_0 y_0}$ and $\psi_{y_0} = 0,$ i.e. the $x$ type sustains the whole cost of matching. 
 
 
 
@@ -1972,7 +1976,7 @@ $$
 \leq \min (c_{x_0 y_j} + c_{x_i y_0} - c_{x_0 y_0} , c_{x_i y_j}) -  c_{x_j y_j} , \quad \text{for all } 1 \leq i < j \leq p.
 $$
 
-Then for all $i \in [p]$ compute the adjustment $ \Delta_i = \sum_{k = i+1}^p \beta_k + \phi_{x_p} - \phi_{x_1}$ and modify the dual variables 
+Then for all $i \in [p]$ compute the adjustment $ \Delta_i = \sum_{k = i+1}^p \beta_k + \phi_{x_p} - \phi_{x_i}$ and modify the dual variables 
 
 $$
 \begin{aligned}

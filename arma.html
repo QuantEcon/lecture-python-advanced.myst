@@ -418,7 +418,7 @@
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.1)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.2)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -469,11 +469,11 @@ autocovariance function of a covariance stationary process.</p>
 <p>For supplementary reading, see</p>
 <p><a href=/_static/lecture_specific/arma/time_series_book.pdf download></a></p>
 <ul class="simple">
-<li><p><span id="id1">[<a class="reference internal" href="zreferences.html#id189" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">Ljungqvist and Sargent, 2018</a>]</span>, chapter 2</p></li>
-<li><p><span id="id2">[<a class="reference internal" href="zreferences.html#id213" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, chapter 11</p></li>
+<li><p><span id="id1">[<a class="reference internal" href="zreferences.html#id193" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">Ljungqvist and Sargent, 2018</a>]</span>, chapter 2</p></li>
+<li><p><span id="id2">[<a class="reference internal" href="zreferences.html#id218" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, chapter 11</p></li>
 <li><p>John Cochrane’s notes on time series analysis, chapter 8</p></li>
-<li><p><span id="id3">[<a class="reference internal" href="zreferences.html#id224" title="A N Shiriaev. Probability. Graduate texts in mathematics. Springer. Springer, 2nd edition, 1995.">Shiriaev, 1995</a>]</span>, chapter 6</p></li>
-<li><p><span id="id4">[<a class="reference internal" href="zreferences.html#id159" title="J. D. Cryer and K-S. Chan. Time Series Analysis. Springer, 2nd edition edition, 2008.">Cryer and Chan, 2008</a>]</span>, all</p></li>
+<li><p><span id="id3">[<a class="reference internal" href="zreferences.html#id229" title="A N Shiriaev. Probability. Graduate texts in mathematics. Springer. Springer, 2nd edition, 1995.">Shiriaev, 1995</a>]</span>, chapter 6</p></li>
+<li><p><span id="id4">[<a class="reference internal" href="zreferences.html#id163" title="J. D. Cryer and K-S. Chan. Time Series Analysis. Springer, 2nd edition edition, 2008.">Cryer and Chan, 2008</a>]</span>, all</p></li>
 </ul>
 <p>Let’s start with some imports:</p>
 <div class="cell docutils container">
@@ -553,7 +553,7 @@ X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j} + \eta_t
 <li><p><span class="math notranslate nohighlight">\(\psi_0 \epsilon_t\)</span> is the one-step ahead prediction error in forecasting <span class="math notranslate nohighlight">\(X_t\)</span> as a linear least-squares function of the infinite history <span class="math notranslate nohighlight">\(X_{t-1}, X_{t-2}, \ldots\)</span></p></li>
 <li><p><span class="math notranslate nohighlight">\(\eta_t\)</span> can be expressed as a linear function of <span class="math notranslate nohighlight">\(X_{t-1}, X_{t-2},\ldots\)</span> and is perfectly predictable over arbitrarily long horizons</p></li>
 </ul>
-<p>For the method of constructing a Wold representation, intuition, and further discussion, see <span id="id9">[<a class="reference internal" href="zreferences.html#id213" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, p. 286.</p>
+<p>For the method of constructing a Wold representation, intuition, and further discussion, see <span id="id9">[<a class="reference internal" href="zreferences.html#id218" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, p. 286.</p>
 </section>
 <section id="ar-and-ma">
 <h3><span class="section-number">30.2.5. </span>AR and MA<a class="headerlink" href="#ar-and-ma" title="Link to this heading">#</a></h3>
@@ -644,7 +644,7 @@ average process</em>, or ARMA(<span class="math notranslate nohighlight">\(p,q\)
 <p>This condition is sufficient to guarantee that the ARMA(<span class="math notranslate nohighlight">\(p,q\)</span>) process is covariance stationary.</p>
 <p>In fact, it implies that the process falls within the class of general linear processes <a class="reference internal" href="#generalized-lps"><span class="std std-ref">described above</span></a>.</p>
 <p>That is, given an ARMA(<span class="math notranslate nohighlight">\(p,q\)</span>) process <span class="math notranslate nohighlight">\(\{ X_t \}\)</span> satisfying the unit circle condition, there exists a square summable sequence <span class="math notranslate nohighlight">\(\{\psi_t\}\)</span> with <span class="math notranslate nohighlight">\(X_t = \sum_{j=0}^{\infty} \psi_j \epsilon_{t-j}\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p>The sequence <span class="math notranslate nohighlight">\(\{\psi_t\}\)</span> can be obtained by a recursive procedure outlined on page 79 of <span id="id11">[<a class="reference internal" href="zreferences.html#id159" title="J. D. Cryer and K-S. Chan. Time Series Analysis. Springer, 2nd edition edition, 2008.">Cryer and Chan, 2008</a>]</span>.</p>
+<p>The sequence <span class="math notranslate nohighlight">\(\{\psi_t\}\)</span> can be obtained by a recursive procedure outlined on page 79 of <span id="id11">[<a class="reference internal" href="zreferences.html#id163" title="J. D. Cryer and K-S. Chan. Time Series Analysis. Springer, 2nd edition edition, 2008.">Cryer and Chan, 2008</a>]</span>.</p>
 <p>The function <span class="math notranslate nohighlight">\(t \mapsto \psi_t\)</span> is often called the <em>impulse response function</em>.</p>
 </section>
 </section>
@@ -713,7 +713,7 @@ all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the p
 <div class="math notranslate nohighlight" id="equation-ma1-sd-ed">
 <span class="eqno">(30.10)<a class="headerlink" href="#equation-ma1-sd-ed" title="Link to this equation">#</a></span>\[f(\omega)
 = \sigma^2 ( 1 + 2 \theta \cos(\omega) + \theta^2 )\]</div>
-<p>With a bit more effort, it’s possible to show (see, e.g., p. 261 of <span id="id14">[<a class="reference internal" href="zreferences.html#id213" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>) that the spectral density of the AR(1) process <span class="math notranslate nohighlight">\(X_t = \phi X_{t-1} + \epsilon_t\)</span> is</p>
+<p>With a bit more effort, it’s possible to show (see, e.g., p. 261 of <span id="id14">[<a class="reference internal" href="zreferences.html#id218" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>) that the spectral density of the AR(1) process <span class="math notranslate nohighlight">\(X_t = \phi X_{t-1} + \epsilon_t\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-ar1-sd-ed">
 <span class="eqno">(30.11)<a class="headerlink" href="#equation-ar1-sd-ed" title="Link to this equation">#</a></span>\[f(\omega)
 = \frac{\sigma^2}{ 1 - 2 \phi \cos(\omega) + \phi^2 }\]</div>
@@ -726,7 +726,7 @@ all of <span class="math notranslate nohighlight">\(\mathbb R\)</span> — the p
 <li><p>the polynomials <span class="math notranslate nohighlight">\(\phi(\cdot)\)</span> and <span class="math notranslate nohighlight">\(\theta(\cdot)\)</span> are as defined in <a class="reference internal" href="#equation-arma-poly">(30.7)</a>.</p></li>
 </ul>
 <p>The derivation of <a class="reference internal" href="#equation-arma-sd">(30.12)</a> uses the fact that convolutions become products under Fourier transformations.</p>
-<p>The proof is elegant and can be found in many places — see, for example, <span id="id15">[<a class="reference internal" href="zreferences.html#id213" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, chapter 11, section 4.</p>
+<p>The proof is elegant and can be found in many places — see, for example, <span id="id15">[<a class="reference internal" href="zreferences.html#id218" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, chapter 11, section 4.</p>
 <p>It’s a nice exercise to verify that <a class="reference internal" href="#equation-ma1-sd-ed">(30.10)</a> and <a class="reference internal" href="#equation-ar1-sd-ed">(30.11)</a> are indeed special cases of <a class="reference internal" href="#equation-arma-sd">(30.12)</a>.</p>
 </section>
 <section id="interpreting-the-spectral-density">
@@ -875,7 +875,7 @@ both positive and negative terms, and hence the sum of these terms is much small
 </section>
 <section id="mathematical-theory">
 <h3><span class="section-number">30.3.7. </span>Mathematical theory<a class="headerlink" href="#mathematical-theory" title="Link to this heading">#</a></h3>
-<p id="index-20">This section is loosely based on <span id="id16">[<a class="reference internal" href="zreferences.html#id213" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, p. 249-253, and included for those who</p>
+<p id="index-20">This section is loosely based on <span id="id16">[<a class="reference internal" href="zreferences.html#id218" title="Thomas J Sargent. Macroeconomic Theory. Academic Press, New York, 2nd edition, 1987.">Sargent, 1987</a>]</span>, p. 249-253, and included for those who</p>
 <ul class="simple">
 <li><p>would like a bit more insight into spectral densities</p></li>
 <li><p>and have at least some background in <a class="reference external" href="https://en.wikipedia.org/wiki/Hilbert_space">Hilbert space</a> theory</p></li>
@@ -940,7 +940,7 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
 </ol>
 <section id="application">
 <h3><span class="section-number">30.4.1. </span>Application<a class="headerlink" href="#application" title="Link to this heading">#</a></h3>
-<p>Let’s use this code to replicate the plots on pages 68–69 of <span id="id17">[<a class="reference internal" href="zreferences.html#id189" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">Ljungqvist and Sargent, 2018</a>]</span>.</p>
+<p>Let’s use this code to replicate the plots on pages 68–69 of <span id="id17">[<a class="reference internal" href="zreferences.html#id193" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">Ljungqvist and Sargent, 2018</a>]</span>.</p>
 <p>Here are some functions to generate the plots</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1015,13 +1015,13 @@ in particular, <span class="math notranslate nohighlight">\(\gamma(k) = \langle 
   return math.isfinite(val)
 /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages/matplotlib/cbook.py:1355: ComplexWarning: Casting complex values to real discards the imaginary part
   return np.asarray(x, float)
-/tmp/ipykernel_7570/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+/tmp/ipykernel_7586/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages/matplotlib/transforms.py:984: ComplexWarning: Casting complex values to real discards the imaginary part
   self._points[:, 1] = interval
 </pre></div>
 </div>
-<img alt="_images/0e6d90adcb14e7e39ef77fc42982d1e199fe3f1b642a710b068a696d7f883c09.png" src="_images/0e6d90adcb14e7e39ef77fc42982d1e199fe3f1b642a710b068a696d7f883c09.png" />
+<img alt="_images/8d97755e9a95289618bc98f1ed03162da28f19a24a59b8de18cd0e38182cc603.png" src="_images/8d97755e9a95289618bc98f1ed03162da28f19a24a59b8de18cd0e38182cc603.png" />
 </div>
 </div>
 <p>If we look carefully, things look good: the spectrum is the flat line at <span class="math notranslate nohighlight">\(10^0\)</span> at the very top of the spectrum graphs,
@@ -1033,7 +1033,7 @@ which is at it should be.</p>
 <li><p>it is actually challenging to visualize a time series realization of white noise – a sequence of surprises – but this too looks pretty good.</p></li>
 </ul>
 <p>To get some more examples, as our laboratory
-we’ll replicate quartets of graphs that <span id="id18">[<a class="reference internal" href="zreferences.html#id189" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">Ljungqvist and Sargent, 2018</a>]</span> use to teach “how to read spectral densities”.</p>
+we’ll replicate quartets of graphs that <span id="id18">[<a class="reference internal" href="zreferences.html#id193" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">Ljungqvist and Sargent, 2018</a>]</span> use to teach “how to read spectral densities”.</p>
 <p>Ljunqvist and Sargent’s first  model is  <span class="math notranslate nohighlight">\(X_t = 1.3 X_{t-1} - .7 X_{t-2} + \epsilon_t\)</span></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1045,11 +1045,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7570/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7586/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/98212c0b6ea5f6f6d67b84d0fb66a814aeb7da0b743996fa54a50ba9ce4c8c3b.png" src="_images/98212c0b6ea5f6f6d67b84d0fb66a814aeb7da0b743996fa54a50ba9ce4c8c3b.png" />
+<img alt="_images/b4f1d16a402099c03d6e4128990400d2f9533a112c2cf9330dde03d87121d6c4.png" src="_images/b4f1d16a402099c03d6e4128990400d2f9533a112c2cf9330dde03d87121d6c4.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s second model is <span class="math notranslate nohighlight">\(X_t = .9 X_{t-1} + \epsilon_t\)</span></p>
@@ -1063,11 +1063,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7570/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7586/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/e5078d2a862684eebdd51acc774f14823cf5426939e90287b09b249258ba20ae.png" src="_images/e5078d2a862684eebdd51acc774f14823cf5426939e90287b09b249258ba20ae.png" />
+<img alt="_images/c60f7b3e440654bb8e9214ec2e5ff66f041b7742f6861415bf3ce9d7b22aa864.png" src="_images/c60f7b3e440654bb8e9214ec2e5ff66f041b7742f6861415bf3ce9d7b22aa864.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s third  model is  <span class="math notranslate nohighlight">\(X_t = .8 X_{t-4} + \epsilon_t\)</span></p>
@@ -1081,11 +1081,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7570/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7586/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/f6a2a4134f7c6a7bf85601b37ba5f97639c7b751b69ff36028e60e3408c7c562.png" src="_images/f6a2a4134f7c6a7bf85601b37ba5f97639c7b751b69ff36028e60e3408c7c562.png" />
+<img alt="_images/e7bcecd73f0d52bd79f2ea0b5441c335470dc44d4d0a5a80d8c651da0d4abf80.png" src="_images/e7bcecd73f0d52bd79f2ea0b5441c335470dc44d4d0a5a80d8c651da0d4abf80.png" />
 </div>
 </div>
 <p>Ljungqvist and Sargent’s fourth  model is  <span class="math notranslate nohighlight">\(X_t = .98 X_{t-1}  + \epsilon_t -.7 \epsilon_{t-1}\)</span></p>
@@ -1099,11 +1099,11 @@ we’ll replicate quartets of graphs that <span id="id18">[<a class="reference i
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7570/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7586/4271821819.py:15: UserWarning: Attempt to set non-positive ylim on a log-scaled axis will be ignored.
   ax.set(xlim=(0, np.pi), ylim=(0, np.max(spect)),
 </pre></div>
 </div>
-<img alt="_images/3cc4fa57b3f6776e04e9476052c3713ad3452f6092a8558e86bd6f777bad11e7.png" src="_images/3cc4fa57b3f6776e04e9476052c3713ad3452f6092a8558e86bd6f777bad11e7.png" />
+<img alt="_images/2659e71a64cb2d9c4c0c6f2b26e3a66f2b358164abcaf638953ab79b124cfc59.png" src="_images/2659e71a64cb2d9c4c0c6f2b26e3a66f2b358164abcaf638953ab79b124cfc59.png" />
 </div>
 </div>
 </section>
@@ -1476,18 +1476,38 @@ a_k
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="hansen_richard_1987.html">
+   40. The Role of Conditioning Information in Asset Pricing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hansen_jagannathan_1991.html">
+   41. The Hansen-Jagannathan Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   40. Two Modifications of Mean-Variance Portfolio Theory
+   42. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="doubts_or_variability.html">
+   43. Doubts or Variability?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
+   44. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   41. Irrelevance of Capital Structures with Complete Markets
+   45. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   42. Equilibrium Capital Structures with Incomplete Markets
+   46. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1499,57 +1519,62 @@ a_k
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   43. Optimal Unemployment Insurance
+   47. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   44. Stackelberg Plans
+   48. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   45. Machine Learning a Ramsey Plan
+   49. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   46. Time Inconsistency of Ramsey Plans
+   50. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   47. Sustainable Plans for a Calvo Model
+   51. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   48. Optimal Taxation with State-Contingent Debt
+   52. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   49. Optimal Taxation without State-Contingent Debt
+   53. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   50. Fluctuating Interest Rates Deliver Fiscal Insurance
+   54. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   51. Fiscal Risk and Government Debt
+   55. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   52. Competitive Equilibria of a Model of Chang
+   56. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   53. Credible Government Policies in a Model of Chang
+   57. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dovis_accounting_mf.html">
+   58. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -1561,17 +1586,17 @@ a_k
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   54. Troubleshooting
+   59. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   55. References
+   60. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   56. Execution Statistics
+   61. Execution Statistics
   </a>
  </li>
 </ul>

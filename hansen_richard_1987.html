@@ -1,0 +1,1973 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>40. The Role of Conditioning Information in Asset Pricing &#8212; Advanced Quantitative Economics with Python</title>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
+            tex: {
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'hansen_richard_1987';</script>
+    <link rel="canonical" href="https://python-advanced.quantecon.org/hansen_richard_1987.html" />
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="41. The Hansen-Jagannathan Bound" href="hansen_jagannathan_1991.html" />
+    <link rel="prev" title="39. Elementary Asset Pricing Theory" href="asset_pricing_lph.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="The Role of Conditioning Information in Asset Pricing"/>
+<meta name="twitter:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="The Role of Conditioning Information in Asset Pricing" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://python-advanced.quantecon.org/hansen_richard_1987.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+  </head>
+<body>
+
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
+<!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
+
+    <span id="top"></span>
+
+    <div class="qe-wrapper">
+
+        <div class="qe-main">
+
+            <div class="qe-page" id=hansen_richard_1987>
+
+                <div class="qe-page__toc">
+
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
+
+                        
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">40.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generation">40.2. Data generation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-probability-space-and-stationarity">40.2.1. The probability space and stationarity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-and-payoffs">40.2.2. Information and payoffs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pricing-functions-and-hilbert-space-machinery">40.3. Pricing functions and Hilbert space machinery</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties-of-pricing-functions">40.3.1. Properties of pricing functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-conditional-hilbert-space">40.3.2. The conditional Hilbert space</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-riesz-representation-the-stochastic-discount-factor">40.4. The Riesz representation: the stochastic discount factor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#no-arbitrage-and-positivity-of-p">40.4.1. No-arbitrage and positivity of <span class="math notranslate nohighlight">\(p^*\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-benchmark-return-r">40.4.2. The benchmark return <span class="math notranslate nohighlight">\(r^*\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implications-for-omitting-conditioning-information">40.5. Implications for omitting conditioning information</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#returns-zero-price-payoffs-and-the-decomposition-of-r">40.5.1. Returns, zero-price payoffs, and the decomposition of <span class="math notranslate nohighlight">\(R\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-role-of-z">40.5.2. The role of <span class="math notranslate nohighlight">\(z^*\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-conditional-mean-variance-frontier">40.5.3. The conditional mean-variance frontier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-unconditional-mean-variance-frontier">40.5.4. The unconditional mean-variance frontier</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-efficiency-does-not-imply-unconditional-efficiency">40.5.5. Conditional efficiency does not imply unconditional efficiency</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-risk-free-return">40.5.6. The risk-free return</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-single-beta-representation">40.6. The single-beta representation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conditional-capm">40.6.1. Conditional CAPM</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unconditional-single-beta-representation">40.6.2. Unconditional single-beta representation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-pseudo-pricing-function-and-connection-to-gmm">40.7. The pseudo-pricing function and connection to GMM</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-pi">40.7.1. Constructing <span class="math notranslate nohighlight">\(\pi^*\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connection-to-hansen-singleton-gmm">40.7.2. Connection to Hansen-Singleton GMM</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">40.8. Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">40.9. Exercises</a></li>
+</ul>
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo logo-img" alt="logo"></a>
+                                    
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="qe-page__toc-footer">
+                            
+                            
+                            
+                            
+                            
+                        </div>
+
+                    </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
+
+                </div>
+
+                <div class="qe-page__header">
+
+                    <div class="qe-page__header-copy">
+
+                        <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+
+                    </div>
+
+                    <!-- Authors section -->
+                        <p class="qe-page__header-authors" font-size="18">
+                            
+                                
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>Thomas J. Sargent</span></a>
+                                
+                            
+                                
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>John Stachurski</span></a>
+                                
+                            
+                        </p>
+
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Apr 10, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commits/main/lectures/hansen_richard_1987.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/95d83cdc" class="changelog-hash">95d83cdc</a>
+                                
+                                <span class="changelog-author">Humphrey Yang</span>
+                                <span class="changelog-time">15 minutes ago</span>
+                                <span class="changelog-message">Tom's new lecture on the Bocola-Dovis and others paper (#320)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="qe-page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" align="right" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><section class="tex2jax_ignore mathjax_ignore" id="the-role-of-conditioning-information-in-asset-pricing">
+<span id="index-0"></span><h1><a class="toc-backref" href="#id9" role="doc-backlink"><span class="section-number">40. </span>The Role of Conditioning Information in Asset Pricing</a><a class="headerlink" href="#the-role-of-conditioning-information-in-asset-pricing" title="Link to this heading">#</a></h1>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#the-role-of-conditioning-information-in-asset-pricing" id="id9">The Role of Conditioning Information in Asset Pricing</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id10">Overview</a></p></li>
+<li><p><a class="reference internal" href="#data-generation" id="id11">Data generation</a></p></li>
+<li><p><a class="reference internal" href="#pricing-functions-and-hilbert-space-machinery" id="id12">Pricing functions and Hilbert space machinery</a></p></li>
+<li><p><a class="reference internal" href="#the-riesz-representation-the-stochastic-discount-factor" id="id13">The Riesz representation: the stochastic discount factor</a></p></li>
+<li><p><a class="reference internal" href="#implications-for-omitting-conditioning-information" id="id14">Implications for omitting conditioning information</a></p></li>
+<li><p><a class="reference internal" href="#the-single-beta-representation" id="id15">The single-beta representation</a></p></li>
+<li><p><a class="reference internal" href="#the-pseudo-pricing-function-and-connection-to-gmm" id="id16">The pseudo-pricing function and connection to GMM</a></p></li>
+<li><p><a class="reference internal" href="#summary" id="id17">Summary</a></p></li>
+<li><p><a class="reference internal" href="#exercises" id="id18">Exercises</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">40.1. </span>Overview</a><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p><span id="id1">Hansen and Richard [<a class="reference internal" href="zreferences.html#id135" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">1987</a>]</span> investigate testable implications of equilibrium asset pricing models.</p>
+<p>This lecture builds on the mean-variance frontier and stochastic discount factor framework
+developed in <a class="reference internal" href="asset_pricing_lph.html"><span class="doc">Elementary Asset Pricing Theory</span></a>.</p>
+<p>In a competitive equilibrium model, prices are determined by a <strong>pricing function</strong>
+that maps uncertain future payoffs into current prices.</p>
+<p>Alternative models of asset prices – built from different assumptions about
+preferences, endowments, and technology – imply alternative pricing functions.</p>
+<p>Two models that imply the same pricing function are <strong>observationally
+indistinguishable</strong> using payoff and price data alone.</p>
+<p>So models of asset prices can be indexed by
+their implied pricing functions.</p>
+<p>A key challenge for empirical work is the role of <strong>conditioning information</strong>.</p>
+<p>Theoretical models have traders forming portfolios contingent on
+information available at the time of trading.</p>
+<p>But empirical tests typically
+use <em>unconditional</em> moments – time-series averages of payoffs and prices –
+that do not depend on this conditioning information.</p>
+<p>Hansen and Richard develop the theory needed to navigate between these two
+levels. The paper proceeds in two steps:</p>
+<ol class="arabic simple">
+<li><p><strong>Derive pricing functions</strong> from the primitive assumptions of
+value-additivity and continuity, and show that each pricing function can
+be represented using a unique <strong>stochastic discount factor</strong> (SDF) <span class="math notranslate nohighlight">\(p^*\)</span>
+via an inner product on a conditional Hilbert space.</p></li>
+<li><p><strong>Deduce testable restrictions</strong> that these pricing functions imply for
+population moments of payoffs and prices – moments that an econometrician
+can estimate from time-series data.</p></li>
+</ol>
+<p>The main results are:</p>
+<ul class="simple">
+<li><p>A <strong>conditional Riesz Representation Theorem</strong> showing <span class="math notranslate nohighlight">\(\pi(p) = E(p \, p^* \mid \mathcal{G})\)</span>
+for a unique benchmark payoff <span class="math notranslate nohighlight">\(p^*\)</span>.</p></li>
+<li><p>A <strong>conditional two-fund theorem</strong> characterizing the mean-variance frontier
+conditioned on <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>.</p></li>
+<li><p>A precise characterization of the <strong>unconditional mean-variance frontier</strong>,
+and a demonstration that omitting conditioning information can cause a return
+that is on the conditional frontier to fall <em>off</em> the unconditional frontier.</p></li>
+<li><p>A <strong>single-beta representation</strong> (conditional CAPM), and conditions under
+which it does and does not survive aggregation to unconditional moments.</p></li>
+<li><p>A <strong>pseudo-pricing function</strong> <span class="math notranslate nohighlight">\(\pi^*(p) = E[\pi(p)]\)</span> that maps payoffs to
+real numbers and connects directly to the GMM approach of
+<span id="id2">Hansen and Singleton [<a class="reference internal" href="zreferences.html#id46" title="Lars Peter Hansen and Kenneth J Singleton. Generalized instrumental variables estimation of nonlinear rational expectations models. Econometrica: Journal of the Econometric Society, pages 1269–1286, 1982.">1982</a>]</span>.</p></li>
+</ul>
+<p>We make the following imports.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.optimize</span><span class="w"> </span><span class="kn">import</span> <span class="n">minimize</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="data-generation">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink"><span class="section-number">40.2. </span>Data generation</a><a class="headerlink" href="#data-generation" title="Link to this heading">#</a></h2>
+<p>Hansen and Richard begin by describing a class of data-generation processes to
+which their theoretical analysis applies.</p>
+<p>This section connects their abstract
+framework to the kind of data an econometrician can observe.</p>
+<section id="the-probability-space-and-stationarity">
+<h3><span class="section-number">40.2.1. </span>The probability space and stationarity<a class="headerlink" href="#the-probability-space-and-stationarity" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\((\Omega, \mathcal{F}, \Pr)\)</span> be a probability space.</p>
+<p>A <strong>measure-preserving, ergodic transformation</strong> <span class="math notranslate nohighlight">\(S : \Omega \to \Omega\)</span>
+governs the deterministic evolution of the state of the world over time.</p>
+<p>If <span class="math notranslate nohighlight">\(\omega\)</span> is the state at time zero, then <span class="math notranslate nohighlight">\(S^t(\omega)\)</span> is the state at
+time <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>A vector of observables <span class="math notranslate nohighlight">\(x(\omega)\)</span> maps <span class="math notranslate nohighlight">\(\Omega\)</span> into <span class="math notranslate nohighlight">\(\mathbb{R}^k\)</span>.</p>
+<p>The
+time-<span class="math notranslate nohighlight">\(t\)</span> observation vector is</p>
+<div class="math notranslate nohighlight">
+\[
+x_t(\omega) = x[S^t(\omega)],
+\]</div>
+<p>which defines a <strong>strictly stationary</strong> stochastic process <span class="math notranslate nohighlight">\(\{x_t : t = 1, 2, \ldots\}\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A process <span class="math notranslate nohighlight">\(\{x_t\}\)</span> is <strong>strictly stationary</strong> if its joint distribution is invariant
+to time shifts: for any times <span class="math notranslate nohighlight">\(t_1, \ldots, t_k\)</span> and any shift <span class="math notranslate nohighlight">\(h\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+(x_{t_1}, \ldots, x_{t_k}) \stackrel{d}{=} (x_{t_1+h}, \ldots, x_{t_k+h}).
+\]</div>
+<p>This is stronger than <em>weak</em> (covariance) stationarity, which only requires
+time-invariant first and second moments.</p>
+<p>Here strict stationarity follows from
+<span class="math notranslate nohighlight">\(S\)</span> being measure-preserving: since <span class="math notranslate nohighlight">\(x_t = x[S^t(\omega)]\)</span>, shifting time by <span class="math notranslate nohighlight">\(h\)</span>
+is the same as applying <span class="math notranslate nohighlight">\(S^h\)</span>, which preserves the probability measure.</p>
+</div>
+<p>Because <span class="math notranslate nohighlight">\(S\)</span> is ergodic, <em>time-series averages converge almost surely to
+population means</em>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{T} \sum_{t=1}^{T} x_t \xrightarrow{a.s.} E(x) \quad \text{as } T \to \infty,
+\]</div>
+<p>as long as <span class="math notranslate nohighlight">\(x\)</span> has a finite first moment.</p>
+<p>This lets an econometrician learn about unconditional moments by computing
+sample averages from observed time series.</p>
+</section>
+<section id="information-and-payoffs">
+<h3><span class="section-number">40.2.2. </span>Information and payoffs<a class="headerlink" href="#information-and-payoffs" title="Link to this heading">#</a></h3>
+<p>At each date <span class="math notranslate nohighlight">\(t\)</span>, traders observe information captured by the sigma-algebra</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{G}_t = \{A_t : A_t = S^{-t}(A) \text{ for some } A \in \mathcal{G}\},
+\quad t = 1, 2, \ldots
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathcal{G}\)</span> is the information at time zero.</p>
+<p>We write <span class="math notranslate nohighlight">\(I_t\)</span> for the set
+of random variables measurable with respect to <span class="math notranslate nohighlight">\(\mathcal{G}_t\)</span>, and <span class="math notranslate nohighlight">\(I\)</span> for
+those measurable with respect to <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>.</p>
+<p>A <strong>one-period security</strong> purchased at time <span class="math notranslate nohighlight">\(t\)</span> has a payoff at time <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(p\)</span> denote a random variable in <span class="math notranslate nohighlight">\(I_1\)</span> used to define a sequence of payoffs</p>
+<div class="math notranslate nohighlight">
+\[
+p_{t+1}(\omega) = p[S^t(\omega)].
+\]</div>
+<p>The <strong>pricing function</strong> <span class="math notranslate nohighlight">\(\pi\)</span> maps payoffs into prices.</p>
+<p>The time-zero price of <span class="math notranslate nohighlight">\(p\)</span> is <span class="math notranslate nohighlight">\(\pi(p)\)</span>, a random variable in <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p>Since both the payoff sequence <span class="math notranslate nohighlight">\(\{p_{t+1}\}\)</span> and the price sequence
+<span class="math notranslate nohighlight">\(\{\pi_t(p_{t+1})\}\)</span> are strictly stationary, their moments can be
+estimated by time-series averages.</p>
+</section>
+</section>
+<section id="pricing-functions-and-hilbert-space-machinery">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink"><span class="section-number">40.3. </span>Pricing functions and Hilbert space machinery</a><a class="headerlink" href="#pricing-functions-and-hilbert-space-machinery" title="Link to this heading">#</a></h2>
+<section id="properties-of-pricing-functions">
+<h3><span class="section-number">40.3.1. </span>Properties of pricing functions<a class="headerlink" href="#properties-of-pricing-functions" title="Link to this heading">#</a></h3>
+<p>Hansen and Richard assume the pricing function <span class="math notranslate nohighlight">\(\pi\)</span> maps a set of payoffs
+<span class="math notranslate nohighlight">\(P\)</span> into prices in <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p>Four assumptions are imposed:</p>
+<div class="proof assumption admonition" id="hr87_assumption_21">
+<p class="admonition-title"><span class="caption-number">Assumption 40.1 </span> (Conditionally complete payoff space)</p>
+<section class="assumption-content" id="proof-content">
+<p>The set of payoffs <span class="math notranslate nohighlight">\(P\)</span> is a <strong>conditionally complete linear subspace</strong> of
+<span class="math notranslate nohighlight">\(P^+ = \{p \in I_1 : E(p^2 \mid \mathcal{G}) &lt; \infty\}\)</span>.</p>
+</section>
+</div><p>This assumption has two parts.</p>
+<p><em>Linear subspace</em> means that <span class="math notranslate nohighlight">\(P\)</span> is closed
+under conditional linear combinations: traders can form portfolios with
+information-contingent weights and the resulting payoffs remain in <span class="math notranslate nohighlight">\(P\)</span>.</p>
+<p><em>Conditionally complete</em> means that limits of conditionally Cauchy sequences
+also belong to <span class="math notranslate nohighlight">\(P\)</span>, which is needed to make <span class="math notranslate nohighlight">\(P\)</span> a conditional Hilbert space.</p>
+<div class="proof assumption admonition" id="hr87_value_additivity">
+<p class="admonition-title"><span class="caption-number">Assumption 40.2 </span> (Value-additivity)</p>
+<section class="assumption-content" id="proof-content">
+<p>For any payoffs <span class="math notranslate nohighlight">\(p_1, p_2 \in P\)</span> and any <span class="math notranslate nohighlight">\(w_1, w_2 \in I\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\pi(w_1 p_1 + w_2 p_2) = w_1 \pi(p_1) + w_2 \pi(p_2).
+\]</div>
+</section>
+</div><p>This says that the price of a portfolio is the portfolio of the prices.</p>
+<p>The
+portfolio weights <span class="math notranslate nohighlight">\(w_1, w_2\)</span> are allowed to be random variables measurable
+with respect to <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>, reflecting the fact that traders choose
+portfolio weights based on current information.</p>
+<div class="proof assumption admonition" id="hr87_cond_continuity">
+<p class="admonition-title"><span class="caption-number">Assumption 40.3 </span> (Conditional continuity)</p>
+<section class="assumption-content" id="proof-content">
+<p>If a sequence of payoffs
+<span class="math notranslate nohighlight">\(\{p_j\}\)</span> converges conditionally to zero, then their prices converge in
+probability to zero.</p>
+</section>
+</div><div class="proof assumption admonition" id="hr87_assumption_24">
+<p class="admonition-title"><span class="caption-number">Assumption 40.4 </span> (Existence of returns)</p>
+<section class="assumption-content" id="proof-content">
+<p>The set of returns <span class="math notranslate nohighlight">\(R = \{p \in P : \pi(p) = 1\}\)</span> is nonempty.</p>
+</section>
+</div><p>This guarantees that there exist payoffs with unit price, i.e., assets that
+can be purchased for one unit of the numeraire today.</p>
+<p><a class="reference internal" href="#hr87_value_additivity">Assumption 40.2</a> and <a class="reference internal" href="#hr87_cond_continuity">Assumption 40.3</a> together
+make <span class="math notranslate nohighlight">\(\pi\)</span> a <strong>conditional continuous linear functional</strong> on <span class="math notranslate nohighlight">\(P\)</span>.</p>
+</section>
+<section id="the-conditional-hilbert-space">
+<h3><span class="section-number">40.3.2. </span>The conditional Hilbert space<a class="headerlink" href="#the-conditional-hilbert-space" title="Link to this heading">#</a></h3>
+<p>To apply the theory of linear functionals, Hansen and Richard build a
+<strong>conditional Hilbert space</strong> of payoffs.</p>
+<p>Let</p>
+<div class="math notranslate nohighlight">
+\[
+P^+ = \{p \in I_1 : E(p^2 \mid \mathcal{G}) &lt; \infty\}
+\]</div>
+<p>be the set of payoffs with finite conditional second moment.</p>
+<p>Define a <strong>conditional inner product</strong> for <span class="math notranslate nohighlight">\(p_1, p_2 \in P^+\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle p_1 \mid p_2 \rangle_{\mathcal{G}} = E(p_1 p_2 \mid \mathcal{G}),
+\]</div>
+<p>and the associated <strong>conditional norm</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\|p\|_{\mathcal{G}} = \left[\langle p \mid p \rangle_{\mathcal{G}}\right]^{1/2}.
+\]</div>
+<p>Both the inner product and the norm take values in <span class="math notranslate nohighlight">\(I\)</span>.</p>
+<p>They are
+<em>random variables</em>, not scalars.</p>
+<p>This is the key difference from a standard
+<span class="math notranslate nohighlight">\(L^2\)</span> Hilbert space.</p>
+<p>Convergence is defined using convergence in probability of these
+random variables:</p>
+<div class="proof definition admonition" id="hr87_cond_convergence">
+<p class="admonition-title"><span class="caption-number">Definition 40.1 </span> (Conditional convergence)</p>
+<section class="definition-content" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\{p_j\}\)</span> converges conditionally to <span class="math notranslate nohighlight">\(p_0\)</span> if
+<span class="math notranslate nohighlight">\(\lim_{j \to \infty} \Pr\{\|p_j - p_0\|_{\mathcal{G}} &gt; \varepsilon\} = 0\)</span> for all <span class="math notranslate nohighlight">\(\varepsilon &gt; 0\)</span>.</p>
+</section>
+</div><div class="proof definition admonition" id="hr87_cond_cauchy">
+<p class="admonition-title"><span class="caption-number">Definition 40.2 </span> (Conditionally Cauchy)</p>
+<section class="definition-content" id="proof-content">
+<p><span class="math notranslate nohighlight">\(\{p_j\}\)</span> is conditionally Cauchy if
+<span class="math notranslate nohighlight">\(\lim_{j,k \to \infty} \Pr\{\|p_j - p_k\|_{\mathcal{G}} &gt; \varepsilon\} = 0\)</span> for all <span class="math notranslate nohighlight">\(\varepsilon &gt; 0\)</span>.</p>
+</section>
+</div><p>A key technical result (proved in the Appendix of the paper) is that <span class="math notranslate nohighlight">\(P^+\)</span> is
+<em>conditionally complete</em>: every conditional Cauchy sequence converges
+conditionally to an element of <span class="math notranslate nohighlight">\(P^+\)</span>.</p>
+<p>This is the conditional analogue of the Riesz-Fischer theorem.</p>
+<p>This is exactly the property required of <span class="math notranslate nohighlight">\(P\)</span> by
+<a class="reference internal" href="#hr87_assumption_21">Assumption 40.1</a>.</p>
+</section>
+</section>
+<section id="the-riesz-representation-the-stochastic-discount-factor">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink"><span class="section-number">40.4. </span>The Riesz representation: the stochastic discount factor</a><a class="headerlink" href="#the-riesz-representation-the-stochastic-discount-factor" title="Link to this heading">#</a></h2>
+<p>The conditional completeness and the conditional continuity of <span class="math notranslate nohighlight">\(\pi\)</span> together
+deliver the central representation theorem of the paper.</p>
+<div class="proof theorem admonition" id="hr87_cond_riesz">
+<p class="admonition-title"><span class="caption-number">Theorem 40.1 </span> (Conditional Riesz Representation)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <a class="reference internal" href="#hr87_assumption_21">Assumption 40.1</a> – <a class="reference internal" href="#hr87_assumption_24">Assumption 40.4</a>
+are satisfied. Then there exists a <em>unique</em> payoff <span class="math notranslate nohighlight">\(p^* \in P\)</span> such that</p>
+<div class="math notranslate nohighlight">
+\[
+\pi(p) = \langle p \mid p^* \rangle_{\mathcal{G}} = E(p \, p^* \mid \mathcal{G})
+\quad \text{for all } p \in P.
+\]</div>
+<p>Moreover, <span class="math notranslate nohighlight">\(\Pr\{\|p^*\|_{\mathcal{G}} &gt; 0\} = 1\)</span>.</p>
+</section>
+</div><p>The payoff <span class="math notranslate nohighlight">\(p^*\)</span> is the <strong>stochastic discount factor</strong> (SDF), also called the
+<strong>benchmark payoff</strong>.</p>
+<p>Recall that the pricing function <span class="math notranslate nohighlight">\(\pi\)</span> was introduced above as an abstract
+mapping from payoffs to prices, subject only to value-additivity
+(<a class="reference internal" href="#hr87_value_additivity">Assumption 40.2</a>) and continuity (<a class="reference internal" href="#hr87_cond_continuity">Assumption 40.3</a>).</p>
+<p>The theorem says that <em>any</em> such <span class="math notranslate nohighlight">\(\pi\)</span> can be represented concretely as
+<span class="math notranslate nohighlight">\(\pi(p) = E(p \, p^* \mid \mathcal{G})\)</span> for a unique <span class="math notranslate nohighlight">\(p^*\)</span>.</p>
+<p>The payoff <span class="math notranslate nohighlight">\(p^*\)</span> is called the <strong>stochastic discount factor</strong> (SDF) or
+<strong>benchmark payoff</strong>.</p>
+<p>Different equilibrium models of asset prices correspond
+to different choices of <span class="math notranslate nohighlight">\(p^*\)</span>.</p>
+<section id="no-arbitrage-and-positivity-of-p">
+<h3><span class="section-number">40.4.1. </span>No-arbitrage and positivity of <span class="math notranslate nohighlight">\(p^*\)</span><a class="headerlink" href="#no-arbitrage-and-positivity-of-p" title="Link to this heading">#</a></h3>
+<div class="proof definition admonition" id="hr87_no_arb">
+<p class="admonition-title"><span class="caption-number">Definition 40.3 </span> (No-arbitrage)</p>
+<section class="definition-content" id="proof-content">
+<p>A pricing function <span class="math notranslate nohighlight">\(\pi\)</span> has <strong>no arbitrage opportunities</strong> on <span class="math notranslate nohighlight">\(P\)</span> if for any
+nonnegative payoff <span class="math notranslate nohighlight">\(p \geq 0\)</span> with <span class="math notranslate nohighlight">\(\Pr\{p &gt; 0\} &gt; 0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr\{\pi(p) \leq 0\} \cap \{p &gt; 0\}\} = 0.
+\]</div>
+<p>This is the conditional counterpart to the no-arbitrage assumption used by
+<span id="id3">Ross [<a class="reference internal" href="zreferences.html#id34" title="Stephen A Ross. A Simple Approach to the Valuation of Risky Streams. The Journal of Business, 51(3):453-475, July 1978. URL: https://ideas.repec.org/a/ucp/jnlbus/v51y1978i3p453-75.html.">1978</a>]</span>.</p>
+</section>
+</div><p>Since the price <span class="math notranslate nohighlight">\(\pi(p)\)</span> is a random variable (it depends on <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>),
+this says that in no state of the world can the price be non-positive while
+the payoff is strictly positive.</p>
+<p>When <span class="math notranslate nohighlight">\(\pi\)</span> has no arbitrage opportunities and <span class="math notranslate nohighlight">\(P = P^+\)</span>, then <span class="math notranslate nohighlight">\(p^*\)</span> is
+<em>strictly positive</em> with probability one:</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr\{p^* &gt; 0\} = 1.
+\]</div>
+<p>In this case <span class="math notranslate nohighlight">\(p^*\)</span> can be interpreted as the <strong>intertemporal marginal rate
+of substitution</strong> of the numeraire good – it converts future payoffs
+into today’s prices.</p>
+</section>
+<section id="the-benchmark-return-r">
+<h3><span class="section-number">40.4.2. </span>The benchmark return <span class="math notranslate nohighlight">\(r^*\)</span><a class="headerlink" href="#the-benchmark-return-r" title="Link to this heading">#</a></h3>
+<p>Since <span class="math notranslate nohighlight">\(\pi(p^*) = \langle p^* \mid p^* \rangle_{\mathcal{G}} = E(p^{*2} \mid \mathcal{G})\)</span>
+is positive with probability one, we can define the <strong>benchmark return</strong></p>
+<div class="math notranslate nohighlight">
+\[
+r^* = \frac{p^*}{\pi(p^*)}.
+\]</div>
+<p>This return belongs to <span class="math notranslate nohighlight">\(R = \{p \in P : \pi(p) = 1\}\)</span>, the set of all
+unit-price payoffs (returns).</p>
+<div class="proof lemma admonition" id="hr87_lemma31">
+<p class="admonition-title"><span class="caption-number">Lemma 40.1 </span> (Minimum second moment)</p>
+<section class="lemma-content" id="proof-content">
+<p><span class="math notranslate nohighlight">\(r^*\)</span> has the <em>minimum conditional second moment</em> among all returns:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle r^* \mid r^* \rangle_{\mathcal{G}} \leq \langle r \mid r \rangle_{\mathcal{G}}
+\quad \text{for all } r \in R.
+\]</div>
+<p>By the Law of Iterated Expectations,</p>
+<div class="math notranslate nohighlight">
+\[
+E(r^{*2}) \leq E(r^2) \quad \text{for all } r \in R.
+\]</div>
+<p>This extends to unconditional second moments: <span class="math notranslate nohighlight">\(r^*\)</span> has the minimum
+unconditional second moment as well.</p>
+</section>
+</div><p>Let’s illustrate <a class="reference internal" href="#hr87_lemma31">Lemma 40.1</a> with a numerical example.</p>
+<p>We draw a lognormal <span class="math notranslate nohighlight">\(p^*\)</span> and generate five asset payoffs that depend linearly on <span class="math notranslate nohighlight">\(p^*\)</span> plus idiosyncratic noise.</p>
+<p>Prices are computed as <span class="math notranslate nohighlight">\(\pi(p_i) = E(p_i \cdot p^*)\)</span>, and returns are <span class="math notranslate nohighlight">\(r_i = p_i / \pi(p_i)\)</span>.</p>
+<p>We first verify the pricing equation <span class="math notranslate nohighlight">\(E(r_i \cdot p^*) = 1\)</span> holds up to sampling error.</p>
+<p>We then search over portfolio weights (constrained to sum to one) to minimize the unconditional second moment <span class="math notranslate nohighlight">\(E(r^2)\)</span>.</p>
+<p>By <a class="reference internal" href="#hr87_lemma31">Lemma 40.1</a>, this portfolio approximates <span class="math notranslate nohighlight">\(r^*\)</span>, so its <span class="math notranslate nohighlight">\(E(r^2)\)</span> should be lower than that of any individual asset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_sdf_and_returns</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">n_assets</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulate lognormal SDF and multiple asset returns.&quot;&quot;&quot;</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">σ_m</span> <span class="o">=</span> <span class="mf">0.15</span>
+    <span class="n">mu_m</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">σ_m</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">pstar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">mu_m</span> <span class="o">+</span> <span class="n">σ_m</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">(</span><span class="n">T</span><span class="p">))</span>
+
+    <span class="c1"># Asset payoffs: p_i = α_i + β_i * p* + noise</span>
+    <span class="n">βs</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_assets</span><span class="p">)</span>
+    <span class="n">αs</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n_assets</span><span class="p">)</span>
+    <span class="n">payoffs</span> <span class="o">=</span> <span class="n">αs</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">pstar</span><span class="p">,</span> <span class="n">βs</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="n">rng</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="n">T</span><span class="p">,</span> <span class="n">n_assets</span><span class="p">))</span>
+
+    <span class="n">prices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">payoffs</span> <span class="o">*</span> <span class="n">pstar</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">returns</span> <span class="o">=</span> <span class="n">payoffs</span> <span class="o">/</span> <span class="n">prices</span>
+
+    <span class="k">return</span> <span class="n">pstar</span><span class="p">,</span> <span class="n">returns</span><span class="p">,</span> <span class="n">prices</span>
+
+
+<span class="n">pstar</span><span class="p">,</span> <span class="n">returns</span><span class="p">,</span> <span class="n">prices</span> <span class="o">=</span> <span class="n">simulate_sdf_and_returns</span><span class="p">()</span>
+
+<span class="n">pricing_errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">returns</span> <span class="o">*</span> <span class="n">pstar</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1.0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pricing errors E[r*p* - 1] (should be approx 0):&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">err</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pricing_errors</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Asset </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">err</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">objective</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+    <span class="n">r_p</span> <span class="o">=</span> <span class="n">returns</span> <span class="o">@</span> <span class="n">w</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r_p</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>
+                  <span class="n">constraints</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}],</span>
+                  <span class="n">bounds</span><span class="o">=</span><span class="p">[(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">r_star_approx</span> <span class="o">=</span> <span class="n">returns</span> <span class="o">@</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Minimum E[r^2] portfolio: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r_star_approx</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Individual asset E[r^2]:  </span><span class="si">{</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">returns</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Pricing errors E[r*p* - 1] (should be approx 0):
+  Asset 1: -0.000000
+  Asset 2: 0.000000
+  Asset 3: -0.000000
+  Asset 4: 0.000000
+  Asset 5: -0.000000
+
+Minimum E[r^2] portfolio: 0.990862
+Individual asset E[r^2]:  [&#39;0.9991&#39;, &#39;1.4329&#39;, &#39;1.0013&#39;, &#39;6.8601&#39;, &#39;1.1054&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="implications-for-omitting-conditioning-information">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink"><span class="section-number">40.5. </span>Implications for omitting conditioning information</a><a class="headerlink" href="#implications-for-omitting-conditioning-information" title="Link to this heading">#</a></h2>
+<p>Now we analyze the effect of omitting conditioning information when studying
+the mean-variance implications of asset pricing models.</p>
+<section id="returns-zero-price-payoffs-and-the-decomposition-of-r">
+<h3><span class="section-number">40.5.1. </span>Returns, zero-price payoffs, and the decomposition of <span class="math notranslate nohighlight">\(R\)</span><a class="headerlink" href="#returns-zero-price-payoffs-and-the-decomposition-of-r" title="Link to this heading">#</a></h3>
+<p>Define two key level sets of <span class="math notranslate nohighlight">\(\pi\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+R = \{p \in P : \pi(p) = 1\}, \quad Z = \{p \in P : \pi(p) = 0\}.
+\]</div>
+<p><span class="math notranslate nohighlight">\(R\)</span> is the set of all <strong>returns</strong> (unit-price payoffs) and <span class="math notranslate nohighlight">\(Z\)</span> is the set of
+<strong>zero-price payoffs</strong> (excess returns, hedging payoffs, etc.).</p>
+<p>Since <span class="math notranslate nohighlight">\(\pi\)</span> is a conditional linear functional, the zero payoff is in <span class="math notranslate nohighlight">\(Z\)</span>, and
+<a class="reference internal" href="#hr87_assumption_24">Assumption 40.4</a> guarantees that <span class="math notranslate nohighlight">\(R\)</span> is nonempty.</p>
+<p>Using <span class="math notranslate nohighlight">\(r^*\)</span> as a benchmark, any return <span class="math notranslate nohighlight">\(r \in R\)</span> can be decomposed as</p>
+<div class="math notranslate nohighlight">
+\[
+r = r^* + z \quad \text{for some } z \in Z,
+\]</div>
+<p>since <span class="math notranslate nohighlight">\(\pi(r) = \pi(r^*) + \pi(z) = 1 + 0 = 1\)</span>.</p>
+<p>Because <span class="math notranslate nohighlight">\(r^*\)</span> has minimum conditional second moment (<a class="reference internal" href="#hr87_lemma31">Lemma 40.1</a>),
+it is conditionally orthogonal to all of <span class="math notranslate nohighlight">\(Z\)</span>:
+<span class="math notranslate nohighlight">\(\langle r^* \mid z \rangle_{\mathcal{G}} = 0\)</span> for all <span class="math notranslate nohighlight">\(z \in Z\)</span>.</p>
+<p>This gives a conditionally orthogonal decomposition of <span class="math notranslate nohighlight">\(R\)</span>.</p>
+</section>
+<section id="the-role-of-z">
+<h3><span class="section-number">40.5.2. </span>The role of <span class="math notranslate nohighlight">\(z^*\)</span><a class="headerlink" href="#the-role-of-z" title="Link to this heading">#</a></h3>
+<p>The set <span class="math notranslate nohighlight">\(Z\)</span> itself can be decomposed.</p>
+<p>There is a unique payoff <span class="math notranslate nohighlight">\(z^* \in Z\)</span> that
+satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+\langle z \mid z^* \rangle_{\mathcal{G}} = E(z \mid \mathcal{G}) \quad \text{for all } z \in Z.
+\]</div>
+<p>This <span class="math notranslate nohighlight">\(z^*\)</span> plays the role of the “conditional mean direction” in <span class="math notranslate nohighlight">\(Z\)</span>.</p>
+<p>Its conditional second moment equals its conditional mean:</p>
+<div class="math notranslate nohighlight">
+\[
+E(z^{*2} \mid \mathcal{G}) = E(z^* \mid \mathcal{G}),
+\]</div>
+<p>which implies <span class="math notranslate nohighlight">\(0 &lt; E(z^* \mid \mathcal{G}) \leq 1\)</span> whenever markets are not
+risk-neutral.</p>
+<p>Using <span class="math notranslate nohighlight">\(z^*\)</span>, the set <span class="math notranslate nohighlight">\(Z\)</span> decomposes as</p>
+<div class="math notranslate nohighlight">
+\[
+Z = \{z : z = w z^* + n \text{ for some } w \in I, \; n \in N\},
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(N = \{z \in Z : E(z \mid \mathcal{G}) = 0\}\)</span>.</p>
+<p>Combining this with the <span class="math notranslate nohighlight">\(R = r^* + Z\)</span> decomposition gives the full
+representation of all returns:</p>
+<div class="math notranslate nohighlight">
+\[
+R = \{r : r = r^* + w z^* + n \text{ for some } w \in I, \; n \in N\}.
+\]</div>
+</section>
+<section id="the-conditional-mean-variance-frontier">
+<h3><span class="section-number">40.5.3. </span>The conditional mean-variance frontier<a class="headerlink" href="#the-conditional-mean-variance-frontier" title="Link to this heading">#</a></h3>
+<p>Recall from <a class="reference internal" href="asset_pricing_lph.html"><span class="doc">Elementary Asset Pricing Theory</span></a> that the unconditional mean-variance frontier
+can be derived from <span class="math notranslate nohighlight">\(E(mR) = 1\)</span> via the Cauchy-Schwarz inequality.</p>
+<p>Here we develop the conditional counterpart using the <span class="math notranslate nohighlight">\(r^*\)</span>, <span class="math notranslate nohighlight">\(z^*\)</span> decomposition.</p>
+<p>With this decomposition in hand, the conditional mean-variance problem becomes
+straightforward.</p>
+<div class="proof lemma admonition" id="hr87_lemma33">
+<p class="admonition-title"><span class="caption-number">Lemma 40.2 </span> (Conditional two-fund theorem)</p>
+<section class="lemma-content" id="proof-content">
+<p>Minimize <span class="math notranslate nohighlight">\(\langle r \mid r \rangle_{\mathcal{G}}\)</span> for <span class="math notranslate nohighlight">\(r \in R\)</span>
+subject to <span class="math notranslate nohighlight">\(E(r \mid \mathcal{G}) = w\)</span> for some target <span class="math notranslate nohighlight">\(w \in I\)</span>.</p>
+<p>The solution is</p>
+<div class="math notranslate nohighlight">
+\[
+r_w = r^* + w^* z^*,
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+w^* = \frac{w - E(r^* \mid \mathcal{G})}{E(z^* \mid \mathcal{G})}.
+\]</div>
+<p>Every conditionally efficient
+return is a conditional linear combination of <span class="math notranslate nohighlight">\(r^*\)</span> and <span class="math notranslate nohighlight">\(z^*\)</span>, with the
+weight <span class="math notranslate nohighlight">\(w^*\)</span> being a <em>random variable</em> that depends on the conditioning
+information <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>.</p>
+</section>
+</div></section>
+<section id="the-unconditional-mean-variance-frontier">
+<h3><span class="section-number">40.5.4. </span>The unconditional mean-variance frontier<a class="headerlink" href="#the-unconditional-mean-variance-frontier" title="Link to this heading">#</a></h3>
+<p>To connect to data, restrict attention to payoffs with finite unconditional
+second moments:</p>
+<div class="math notranslate nohighlight">
+\[
+P^* = \{p \in P : E(p^2) &lt; \infty\},
+\]</div>
+<p>with the <em>unconditional</em> inner product <span class="math notranslate nohighlight">\(\langle p_1 \mid p_2 \rangle = E(p_1 p_2)\)</span>.</p>
+<p>Define the unconditional counterparts:</p>
+<div class="math notranslate nohighlight">
+\[
+R^* = R \cap P^*, \quad Z^* = Z \cap P^*, \quad N^* = \{z \in Z^* : E(z) = 0\}.
+\]</div>
+<p>By the Law of Iterated Expectations, <span class="math notranslate nohighlight">\(z^*\)</span> continues to represent the mean
+direction unconditionally:</p>
+<div class="math notranslate nohighlight">
+\[
+\langle z \mid z^* \rangle = E(z) \quad \text{for all } z \in Z^*.
+\]</div>
+<div class="proof lemma admonition" id="hr87_lemma34">
+<p class="admonition-title"><span class="caption-number">Lemma 40.3 </span> (Unconditional two-fund theorem)</p>
+<section class="lemma-content" id="proof-content">
+<p>Minimize <span class="math notranslate nohighlight">\(\langle r \mid r \rangle = E(r^2)\)</span> for <span class="math notranslate nohighlight">\(r \in R^*\)</span>
+subject to <span class="math notranslate nohighlight">\(E(r) = c\)</span> for some constant <span class="math notranslate nohighlight">\(c\)</span>.</p>
+<p>The solution is</p>
+<div class="math notranslate nohighlight">
+\[
+r_c = r^* + c^* z^*,
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+c^* = \frac{c - E(r^*)}{E(z^*)}.
+\]</div>
+<p>The key difference: <span class="math notranslate nohighlight">\(c^*\)</span> is a <em>constant</em>, while <span class="math notranslate nohighlight">\(w^*\)</span> in the conditional
+problem is a random variable.</p>
+</section>
+</div></section>
+<section id="conditional-efficiency-does-not-imply-unconditional-efficiency">
+<h3><span class="section-number">40.5.5. </span>Conditional efficiency does not imply unconditional efficiency<a class="headerlink" href="#conditional-efficiency-does-not-imply-unconditional-efficiency" title="Link to this heading">#</a></h3>
+<p>This is the central empirical message of the paper.</p>
+<p>A conditionally efficient return <span class="math notranslate nohighlight">\(r_w = r^* + w^* z^*\)</span> is on the
+unconditional frontier <em>only when</em> <span class="math notranslate nohighlight">\(w^*\)</span> is constant with probability one.</p>
+<p>When <span class="math notranslate nohighlight">\(w^*\)</span> varies with the state of the world – which is the typical case
+when traders use conditioning information – the return will be off the
+unconditional frontier.</p>
+<p>This has direct implications:</p>
+<ul class="simple">
+<li><p>The <em>CAPM</em> (Sharpe-Lintner-Mossin) implies that the market portfolio is a
+conditional reference return. But the market return need not be a reference
+return for unconditional single-beta tests.</p></li>
+<li><p><em>Breeden’s</em> consumption CAPM implies the return on aggregate consumption is
+a conditional reference return. Again, it need not serve as an unconditional
+reference.</p></li>
+<li><p>Portfolio managers whose returns appear to be conditionally efficient may
+look <em>inefficient</em> when evaluated with unconditional data.</p></li>
+</ul>
+<p>The following simulation illustrates this phenomenon.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">compute_mv_frontier</span><span class="p">(</span><span class="n">mean_returns</span><span class="p">,</span> <span class="n">cov_matrix</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the analytical mean-variance frontier.&quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mean_returns</span><span class="p">)</span>
+    <span class="n">ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">inv_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">cov_matrix</span><span class="p">)</span>
+
+    <span class="n">A</span> <span class="o">=</span> <span class="n">mean_returns</span> <span class="o">@</span> <span class="n">inv_cov</span> <span class="o">@</span> <span class="n">mean_returns</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">mean_returns</span> <span class="o">@</span> <span class="n">inv_cov</span> <span class="o">@</span> <span class="n">ones</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">ones</span> <span class="o">@</span> <span class="n">inv_cov</span> <span class="o">@</span> <span class="n">ones</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">C</span> <span class="o">-</span> <span class="n">B</span><span class="o">**</span><span class="mi">2</span>
+
+    <span class="n">frontier_means</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">mean_returns</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">-</span> <span class="mf">0.05</span><span class="p">,</span>
+                                 <span class="n">mean_returns</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+    <span class="n">frontier_vars</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span> <span class="o">*</span> <span class="n">frontier_means</span><span class="o">**</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span><span class="o">*</span><span class="n">B</span><span class="o">*</span><span class="n">frontier_means</span> <span class="o">+</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">D</span>
+    <span class="n">frontier_vols</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">frontier_vars</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">frontier_means</span><span class="p">,</span> <span class="n">frontier_vols</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">mv_weights</span><span class="p">(</span><span class="n">mu_vec</span><span class="p">,</span> <span class="n">Sigma</span><span class="p">,</span> <span class="n">target_mu</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Minimum-variance portfolio weights for a given target mean.&quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mu_vec</span><span class="p">)</span>
+    <span class="n">inv_cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">Sigma</span><span class="p">)</span>
+    <span class="n">ones</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="n">mu_vec</span> <span class="o">@</span> <span class="n">inv_cov</span> <span class="o">@</span> <span class="n">mu_vec</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="n">mu_vec</span> <span class="o">@</span> <span class="n">inv_cov</span> <span class="o">@</span> <span class="n">ones</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">ones</span> <span class="o">@</span> <span class="n">inv_cov</span> <span class="o">@</span> <span class="n">ones</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">A</span> <span class="o">*</span> <span class="n">C</span> <span class="o">-</span> <span class="n">B</span><span class="o">**</span><span class="mi">2</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="p">(</span><span class="n">A</span> <span class="o">*</span> <span class="p">(</span><span class="n">inv_cov</span> <span class="o">@</span> <span class="n">ones</span><span class="p">)</span> <span class="o">-</span> <span class="n">B</span> <span class="o">*</span> <span class="p">(</span><span class="n">inv_cov</span> <span class="o">@</span> <span class="n">mu_vec</span><span class="p">))</span> <span class="o">/</span> <span class="n">D</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span> <span class="o">*</span> <span class="p">(</span><span class="n">inv_cov</span> <span class="o">@</span> <span class="n">mu_vec</span><span class="p">)</span> <span class="o">-</span> <span class="n">B</span> <span class="o">*</span> <span class="p">(</span><span class="n">inv_cov</span> <span class="o">@</span> <span class="n">ones</span><span class="p">))</span> <span class="o">/</span> <span class="n">D</span>
+    <span class="k">return</span> <span class="n">g</span> <span class="o">+</span> <span class="n">target_mu</span> <span class="o">*</span> <span class="n">h</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">simulate_conditional_vs_unconditional</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show that a conditionally efficient portfolio can be unconditionally inefficient.&quot;&quot;&quot;</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">n_assets</span> <span class="o">=</span> <span class="mi">3</span>
+
+    <span class="n">state</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+
+    <span class="c1"># Two regimes with different conditional means, common covariance</span>
+    <span class="n">mu_low</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.08</span><span class="p">])</span>
+    <span class="n">mu_high</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">,</span> <span class="mf">0.09</span><span class="p">])</span>
+
+    <span class="n">σ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">])</span>
+    <span class="n">corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span>  <span class="mf">0.3</span><span class="p">,</span>  <span class="mf">0.5</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span>  <span class="mf">1.0</span><span class="p">,</span>  <span class="mf">0.2</span><span class="p">],</span>
+                     <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span>  <span class="mf">0.2</span><span class="p">,</span>  <span class="mf">1.0</span><span class="p">]])</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span> <span class="o">@</span> <span class="n">corr</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">σ</span><span class="p">)</span>
+
+    <span class="n">rets_low</span>  <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mu_low</span><span class="p">,</span>  <span class="n">cov</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">rets_high</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mu_high</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+    <span class="n">returns</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">state</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rets_low</span><span class="p">,</span> <span class="n">rets_high</span><span class="p">)</span>
+
+    <span class="c1"># Conditionally efficient weights for target mean = 0.09</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="mf">0.09</span>
+    <span class="n">w_low</span>  <span class="o">=</span> <span class="n">mv_weights</span><span class="p">(</span><span class="n">mu_low</span><span class="p">,</span>  <span class="n">cov</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+    <span class="n">w_high</span> <span class="o">=</span> <span class="n">mv_weights</span><span class="p">(</span><span class="n">mu_high</span><span class="p">,</span> <span class="n">cov</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+    <span class="c1"># Dynamic portfolio switches weights by state</span>
+    <span class="n">port_rets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+                         <span class="n">rets_low</span> <span class="o">@</span> <span class="n">w_low</span><span class="p">,</span>
+                         <span class="n">rets_high</span> <span class="o">@</span> <span class="n">w_high</span><span class="p">)</span>
+
+    <span class="n">mu_unc</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">cov_unc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">returns</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="n">front_mu</span><span class="p">,</span> <span class="n">front_std</span> <span class="o">=</span> <span class="n">compute_mv_frontier</span><span class="p">(</span><span class="n">mu_unc</span><span class="p">,</span> <span class="n">cov_unc</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">port_rets</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">port_rets</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span>
+            <span class="n">front_mu</span><span class="p">,</span> <span class="n">front_std</span><span class="p">,</span> <span class="n">mu_unc</span><span class="p">,</span> <span class="n">cov_unc</span><span class="p">)</span>
+
+
+<span class="n">mu_port</span><span class="p">,</span> <span class="n">std_port</span><span class="p">,</span> <span class="n">front_mu</span><span class="p">,</span> <span class="n">front_std</span><span class="p">,</span> <span class="n">mu_unc</span><span class="p">,</span> <span class="n">cov_unc</span> <span class="o">=</span> \
+    <span class="n">simulate_conditional_vs_unconditional</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">front_std</span><span class="p">,</span> <span class="n">front_mu</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Primitive-asset constant-weight frontier&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">cov_unc</span><span class="p">)),</span> <span class="n">mu_unc</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span>
+           <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Individual assets&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">std_port</span><span class="p">,</span> <span class="n">mu_port</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Conditionally efficient portfolio&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;standard deviation of return&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;expected return&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-hr-cond-vs-uncond">
+<img alt="_images/ae3bc15a83bcfacd84a85d04247fce0eaadb4babb777ddde891a73e8704df3d3.png" src="_images/ae3bc15a83bcfacd84a85d04247fce0eaadb4babb777ddde891a73e8704df3d3.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 40.1 </span><span class="caption-text">A conditionally efficient portfolio (star) lies to the left of the constant-weight frontier built from the three primitive assets (curve).</span><a class="headerlink" href="#fig-hr-cond-vs-uncond" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="the-risk-free-return">
+<h3><span class="section-number">40.5.6. </span>The risk-free return<a class="headerlink" href="#the-risk-free-return" title="Link to this heading">#</a></h3>
+<p>Let’s consider another example.</p>
+<p>When <span class="math notranslate nohighlight">\(P\)</span> contains a unit payoff and <span class="math notranslate nohighlight">\(\pi\)</span> has no arbitrage opportunities, there
+is a risk-free return</p>
+<div class="math notranslate nohighlight">
+\[
+r^f = \frac{1}{\langle p^* \mid 1 \rangle_{\mathcal{G}}}
+    = \frac{\langle r^* \mid r^* \rangle_{\mathcal{G}}}{\langle r^* \mid 1 \rangle_{\mathcal{G}}}.
+\]</div>
+<p>In the decomposition <span class="math notranslate nohighlight">\(R = \{r^* + wz^* + n\}\)</span>, the risk-free return is
+<span class="math notranslate nohighlight">\(r^f = r^* + r^f z^*\)</span>.</p>
+<p>Because <span class="math notranslate nohighlight">\(r^f\)</span> is in general a <em>random variable</em> (it depends on <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>),
+it lies on the <em>conditional</em> frontier but will be <em>off</em> the unconditional
+frontier unless <span class="math notranslate nohighlight">\(r^f\)</span> is constant.</p>
+</section>
+</section>
+<section id="the-single-beta-representation">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink"><span class="section-number">40.6. </span>The single-beta representation</a><a class="headerlink" href="#the-single-beta-representation" title="Link to this heading">#</a></h2>
+<section id="conditional-capm">
+<h3><span class="section-number">40.6.1. </span>Conditional CAPM<a class="headerlink" href="#conditional-capm" title="Link to this heading">#</a></h3>
+<p>A return <span class="math notranslate nohighlight">\(r_\beta \in R\)</span> is a reference return for a conditional single-beta
+representation conditioned on <span class="math notranslate nohighlight">\(\mathcal{G}\)</span> if
+<span class="math notranslate nohighlight">\(\Pr\{\mathrm{Var}(r_\beta \mid \mathcal{G}) = 0\} = 0\)</span> and for all <span class="math notranslate nohighlight">\(r \in R\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+E(r \mid \mathcal{G}) - \alpha = \frac{\mathrm{Cov}(r_\beta, r \mid \mathcal{G})}
+{\mathrm{Var}(r_\beta \mid \mathcal{G})} \left[E(r_\beta \mid \mathcal{G}) - \alpha\right],
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\alpha \in I\)</span> is the conditional zero-beta return.</p>
+<p>This is the conditional analogue of the CAPM security market line.</p>
+<div class="proof lemma admonition" id="hr87_lemma35">
+<p class="admonition-title"><span class="caption-number">Lemma 40.4 </span> (Conditional Roll’s theorem)</p>
+<section class="lemma-content" id="proof-content">
+<p><span class="math notranslate nohighlight">\(r_\beta\)</span> is a reference return
+for a conditional single-beta representation if and only if
+<span class="math notranslate nohighlight">\(r_\beta = r^* + w^* z^*\)</span> for some <span class="math notranslate nohighlight">\(w^* \in I\)</span> satisfying</p>
+<div class="math notranslate nohighlight">
+\[
+\Pr\left\{w^* = \frac{E(r^* \mid \mathcal{G})}{1 - E(z^* \mid \mathcal{G})}\right\} = 0.
+\]</div>
+</section>
+</div></section>
+<section id="unconditional-single-beta-representation">
+<h3><span class="section-number">40.6.2. </span>Unconditional single-beta representation<a class="headerlink" href="#unconditional-single-beta-representation" title="Link to this heading">#</a></h3>
+<p>The unconditional expected-return-beta representation was derived in
+<a class="reference internal" href="asset_pricing_lph.html"><span class="doc">Elementary Asset Pricing Theory</span></a>.</p>
+<p>The key question here is: when does the <em>conditional</em>
+single-beta representation survive aggregation to unconditional moments?</p>
+<div class="proof corollary admonition" id="hr87_cor31">
+<p class="admonition-title"><span class="caption-number">Corollary 40.1 </span> (Unconditional single-beta representation)</p>
+<section class="corollary-content" id="proof-content">
+<p><span class="math notranslate nohighlight">\(r_\beta\)</span> is a reference return for an <em>unconditional</em>
+single-beta representation if and only if <span class="math notranslate nohighlight">\(r_\beta = r^* + c^* z^*\)</span> for a
+<em>constant</em> <span class="math notranslate nohighlight">\(c^*\)</span> satisfying</p>
+<div class="math notranslate nohighlight">
+\[
+c^* \neq \frac{E(r^*)}{1 - E(z^*)}.
+\]</div>
+</section>
+</div><p>This result has sharp empirical implications:</p>
+<ul class="simple">
+<li><p>Even if the CAPM holds <em>conditionally</em> (e.g., the market portfolio is on
+the conditional frontier), the standard unconditional regression test –
+regressing asset returns on market returns and testing <span class="math notranslate nohighlight">\(\alpha = 0\)</span> – is
+testing a <em>different</em> hypothesis.</p></li>
+<li><p>The unconditional single-beta representation holds only for returns built
+with <em>constant</em> portfolio weights.</p></li>
+</ul>
+<p>We illustrate this by running CAPM regressions <span class="math notranslate nohighlight">\(r_i = \alpha + \beta \, r_{\text{ref}} + \varepsilon\)</span> using two different reference returns.</p>
+<p>The first uses a portfolio on the <em>unconditional</em> mean-variance frontier, constructed with constant weights from the unconditional moments.</p>
+<p>By <a class="reference internal" href="#hr87_cor31">Corollary 40.1</a>, this is a valid reference for an unconditional single-beta representation, so the regression intercepts should be consistent with the zero-beta return <span class="math notranslate nohighlight">\(\alpha\)</span> implied by the corollary.</p>
+<p>The second uses a conditionally efficient portfolio whose weights switch across regimes.</p>
+<p>This portfolio is on the <em>conditional</em> frontier in each state, but its state-dependent weights violate the constant-weight requirement of <a class="reference internal" href="#hr87_cor31">Corollary 40.1</a>, so the unconditional single-beta representation need not hold.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">capm_regression</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">ref_return</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run unconditional CAPM regressions: r_i = alpha + beta * r_ref + eps.&quot;&quot;&quot;</span>
+    <span class="n">n_assets</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">alphas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">n_assets</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_assets</span><span class="p">):</span>
+        <span class="n">slope</span><span class="p">,</span> <span class="n">intercept</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">stats</span><span class="o">.</span><span class="n">linregress</span><span class="p">(</span><span class="n">ref_return</span><span class="p">,</span> <span class="n">returns</span><span class="p">[:,</span> <span class="n">i</span><span class="p">])</span>
+        <span class="n">alphas</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">intercept</span>
+    <span class="k">return</span> <span class="n">alphas</span>
+
+
+<span class="c1"># Simulate a two-regime economy</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">T_capm</span> <span class="o">=</span> <span class="mi">50000</span>
+<span class="n">n_assets_capm</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">T_capm</span><span class="p">)</span>
+
+<span class="n">mu_low</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.14</span><span class="p">])</span>
+<span class="n">mu_high</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.14</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">])</span>
+
+<span class="n">cov_capm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.002</span><span class="p">,</span> <span class="mf">0.004</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">],</span>
+                      <span class="p">[</span><span class="mf">0.002</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.002</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">],</span>
+                      <span class="p">[</span><span class="mf">0.004</span><span class="p">,</span> <span class="mf">0.002</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">],</span>
+                      <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">]])</span>
+
+<span class="n">rets_low</span>  <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mu_low</span><span class="p">,</span>  <span class="n">cov_capm</span><span class="p">,</span> <span class="n">T_capm</span><span class="p">)</span>
+<span class="n">rets_high</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">(</span><span class="n">mu_high</span><span class="p">,</span> <span class="n">cov_capm</span><span class="p">,</span> <span class="n">T_capm</span><span class="p">)</span>
+<span class="n">returns_capm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">state</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rets_low</span><span class="p">,</span> <span class="n">rets_high</span><span class="p">)</span>
+
+<span class="c1"># Case 1: unconditional frontier portfolio (constant weights)</span>
+<span class="c1"># Use the unconditional mean and covariance to find frontier weights</span>
+<span class="n">mu_unc</span> <span class="o">=</span> <span class="n">returns_capm</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">cov_unc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">returns_capm</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">w_frontier</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">cov_unc</span><span class="p">,</span> <span class="n">mu_unc</span><span class="p">)</span>
+<span class="n">w_frontier</span> <span class="o">/=</span> <span class="n">w_frontier</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">r_frontier</span> <span class="o">=</span> <span class="n">returns_capm</span> <span class="o">@</span> <span class="n">w_frontier</span>
+
+<span class="c1"># Case 2: conditionally efficient portfolio (state-dependent weights)</span>
+<span class="n">w_low</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">cov_capm</span><span class="p">,</span> <span class="n">mu_low</span><span class="p">)</span>
+<span class="n">w_low</span>  <span class="o">/=</span> <span class="n">w_low</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">w_high</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">solve</span><span class="p">(</span><span class="n">cov_capm</span><span class="p">,</span> <span class="n">mu_high</span><span class="p">)</span>
+<span class="n">w_high</span> <span class="o">/=</span> <span class="n">w_high</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">r_dynamic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">state</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+                      <span class="n">rets_low</span> <span class="o">@</span> <span class="n">w_low</span><span class="p">,</span>
+                      <span class="n">rets_high</span> <span class="o">@</span> <span class="n">w_high</span><span class="p">)</span>
+
+<span class="n">alphas_frontier</span> <span class="o">=</span> <span class="n">capm_regression</span><span class="p">(</span><span class="n">returns_capm</span><span class="p">,</span> <span class="n">r_frontier</span><span class="p">)</span>
+<span class="n">alphas_dynamic</span>  <span class="o">=</span> <span class="n">capm_regression</span><span class="p">(</span><span class="n">returns_capm</span><span class="p">,</span> <span class="n">r_dynamic</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Asset&#39;</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Frontier (const)&#39;</span><span class="si">:</span><span class="s2">&gt;18</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Cond. eff. (dyn)&#39;</span><span class="si">:</span><span class="s2">&gt;18</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_assets_capm</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">alphas_frontier</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;18.6f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">alphas_dynamic</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;18.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Asset      Frontier (const)   Cond. eff. (dyn)
+1                  0.000000          -0.016680
+2                 -0.000000           0.015022
+3                 -0.000000          -0.009735
+4                 -0.000000           0.018852
+</pre></div>
+</div>
+</div>
+</div>
+<p>The constant-weight frontier portfolio produces intercepts close to a common value for every asset, confirming that the unconditional single-beta representation holds as predicted by <a class="reference internal" href="#hr87_cor31">Corollary 40.1</a>.</p>
+<p>In general, <a class="reference internal" href="#hr87_cor31">Corollary 40.1</a> guarantees a real zero-beta return <span class="math notranslate nohighlight">\(\alpha\)</span>, but that <span class="math notranslate nohighlight">\(\alpha\)</span> need not be zero – it equals zero only under an extra normalization or for a specially chosen reference portfolio.</p>
+<p>The conditionally efficient portfolio, whose weights switch between regimes, produces non-zero alphas despite being on the conditional frontier in each state.</p>
+<p>This is exactly the gap that <span id="id4">Hansen and Richard [<a class="reference internal" href="zreferences.html#id135" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">1987</a>]</span> warns about: a return that is conditionally efficient need not serve as a valid reference for unconditional single-beta tests.</p>
+</section>
+</section>
+<section id="the-pseudo-pricing-function-and-connection-to-gmm">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink"><span class="section-number">40.7. </span>The pseudo-pricing function and connection to GMM</a><a class="headerlink" href="#the-pseudo-pricing-function-and-connection-to-gmm" title="Link to this heading">#</a></h2>
+<section id="constructing-pi">
+<h3><span class="section-number">40.7.1. </span>Constructing <span class="math notranslate nohighlight">\(\pi^*\)</span><a class="headerlink" href="#constructing-pi" title="Link to this heading">#</a></h3>
+<p>Everything we have derived so far is <em>conditional</em> on <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>: the
+pricing function <span class="math notranslate nohighlight">\(\pi(p) = E(p \, p^* \mid \mathcal{G})\)</span> maps payoffs into
+random variables, not numbers.</p>
+<p>An econometrician, however, works with time-series data and computes
+sample averages, which estimate <em>unconditional</em> moments.</p>
+<p>The question is: how do we go from the conditional theory to restrictions that
+can be tested with unconditional data?</p>
+<p>Hansen and Richard’s solution is to define the <strong>pseudo-pricing function</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\pi^*(p) = E[\pi(p)] \quad \text{for all } p \in P^*.
+\]</div>
+<p>This function maps payoffs to <em>real numbers</em>.</p>
+<p>It behaves like a pricing
+function where the conditioning information set is the trivial sigma-algebra
+(containing only <span class="math notranslate nohighlight">\(\Omega\)</span> and <span class="math notranslate nohighlight">\(\emptyset\)</span>).</p>
+<p>For <span class="math notranslate nohighlight">\(\pi^*\)</span> to be well defined on <span class="math notranslate nohighlight">\(P^*\)</span>, the benchmark payoff <span class="math notranslate nohighlight">\(p^*\)</span> must itself have a finite unconditional second moment, i.e., <span class="math notranslate nohighlight">\(p^* \in P^*\)</span>.</p>
+<p>This is the content of Assumption 4.1 in <span id="id5">Hansen and Richard [<a class="reference internal" href="zreferences.html#id135" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">1987</a>]</span>.</p>
+<p>Whether it holds can depend on the choice of numeraire.</p>
+<div class="proof theorem admonition" id="hr87_thm41">
+<p class="admonition-title"><span class="caption-number">Theorem 40.2 </span> (Pseudo-pricing function)</p>
+<section class="theorem-content" id="proof-content">
+<p>Suppose <span class="math notranslate nohighlight">\(p^* \in P^*\)</span> (equivalently, <span class="math notranslate nohighlight">\(E(p^{*2}) &lt; \infty\)</span>).</p>
+<p>Then <span class="math notranslate nohighlight">\((P^*, \pi^*)\)</span> satisfies all the assumptions
+imposed on <span class="math notranslate nohighlight">\((P, \pi)\)</span>, with the trivial sigma-algebra replacing <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>.</p>
+</section>
+</div><p>Crucially, the same <span class="math notranslate nohighlight">\(p^*\)</span> represents both <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(\pi^*\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+\pi^*(p) = E[\pi(p)] = E\!\left[E(p \, p^* \mid \mathcal{G})\right] = E(p \, p^*)
+= \langle p \mid p^* \rangle,
+\]</div>
+<p>where the third equality uses the Law of Iterated Expectations and the last
+is the unconditional inner product.</p>
+<p>Hansen and Richard show that if two pricing functions <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(\pi^+\)</span> agree on the <strong>full payoff space</strong> <span class="math notranslate nohighlight">\(P^*\)</span>, then their benchmark payoffs coincide almost surely.</p>
+<p>Thus conditioning down from <span class="math notranslate nohighlight">\(\pi\)</span> to <span class="math notranslate nohighlight">\(\pi^*\)</span> does <em>not</em> inherently lose discriminatory power.</p>
+<p>The loss of information arises instead when an econometrician tests moment restrictions using only a <em>subset</em> of the payoffs in <span class="math notranslate nohighlight">\(P^*\)</span>.</p>
+<p>Two distinct pricing functions may imply the same <span class="math notranslate nohighlight">\(\pi^*\)</span> on that subset even though they differ on <span class="math notranslate nohighlight">\(P^*\)</span> as a whole.</p>
+</section>
+<section id="connection-to-hansen-singleton-gmm">
+<h3><span class="section-number">40.7.2. </span>Connection to Hansen-Singleton GMM<a class="headerlink" href="#connection-to-hansen-singleton-gmm" title="Link to this heading">#</a></h3>
+<p>The pseudo-pricing function underlies the <span id="id6">Hansen and Singleton [<a class="reference internal" href="zreferences.html#id46" title="Lars Peter Hansen and Kenneth J Singleton. Generalized instrumental variables estimation of nonlinear rational expectations models. Econometrica: Journal of the Econometric Society, pages 1269–1286, 1982.">1982</a>]</span>
+econometric approach.</p>
+<p>If a model specifies <span class="math notranslate nohighlight">\(p^*\)</span> as a function of observable data – e.g., a
+parametric function of consumption growth <span class="math notranslate nohighlight">\(p^* = p^*(\Delta c_{t+1}, \theta)\)</span>
+– then the pricing restriction</p>
+<div class="math notranslate nohighlight">
+\[
+E(p \, p^*) = \pi^*(p) = E[\pi(p)]
+\]</div>
+<p>holds for every payoff <span class="math notranslate nohighlight">\(p \in P^*\)</span>.</p>
+<p>An econometrician exploits this by forming <strong>moment conditions</strong>.</p>
+<p>Multiplying
+by instruments <span class="math notranslate nohighlight">\(z_t \in I\)</span> (variables in the traders’ information set) gives</p>
+<div class="math notranslate nohighlight">
+\[
+E\!\left[p_{t+1} \, p^*(\Delta c_{t+1}, \theta) \cdot z_t\right]
+= E\!\left[\pi(p_{t+1}) \cdot z_t\right].
+\]</div>
+<p>The parameter vector <span class="math notranslate nohighlight">\(\theta\)</span> is then estimated by GMM.</p>
+<p>The <strong>choice of instruments</strong> determines how much conditioning information is
+exploited – more instruments increase efficiency but also increase the
+dimensionality of the GMM problem.</p>
+<p>Notice that the payoffs used in this procedure can themselves be conditional
+linear combinations of primitive payoffs, as long as the conditioning weights
+are measurable with respect to <span class="math notranslate nohighlight">\(\mathcal{G}\)</span>.</p>
+<p>This gives the analyst
+flexibility in constructing the moment conditions, and corresponds to the
+instrumental variables used in the Hansen-Singleton analysis.</p>
+<p>We now put this to work by testing a specific model of <span class="math notranslate nohighlight">\(p^*\)</span>.</p>
+<p>We construct a CRRA stochastic discount factor <span class="math notranslate nohighlight">\(p^* = e^{-\delta - \gamma \Delta c}\)</span> with <span class="math notranslate nohighlight">\(\gamma = 2\)</span> and simulated consumption growth, then check the Euler equation <span class="math notranslate nohighlight">\(E(r \cdot p^*) = 1\)</span> against returns generated by a <em>different</em> SDF.</p>
+<p>The test computes the sample average of <span class="math notranslate nohighlight">\(r \cdot p^* - 1\)</span> for each asset, along with its standard error and t-statistic.</p>
+<p>If the model is correct, these averages should be near zero.</p>
+<p>We also test the instrumented moment conditions <span class="math notranslate nohighlight">\(E[(r \cdot p^* - 1) \cdot z] = 0\)</span> using lagged consumption growth as an instrument, which exploits additional conditioning information.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gmm_euler_equation_test</span><span class="p">(</span><span class="n">pstar_hat</span><span class="p">,</span> <span class="n">returns</span><span class="p">,</span> <span class="n">instruments</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Test Euler equation restrictions E[r*p* - 1] = 0, optionally with instruments.&quot;&quot;&quot;</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pstar_hat</span><span class="p">)</span>
+    <span class="n">n_assets</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">moments</span> <span class="o">=</span> <span class="n">returns</span> <span class="o">*</span> <span class="n">pstar_hat</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">-</span> <span class="mf">1.0</span>
+    <span class="n">mean_m</span> <span class="o">=</span> <span class="n">moments</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">se_m</span> <span class="o">=</span> <span class="n">moments</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Euler equation tests: E[r*p* - 1] = 0&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Asset&#39;</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Mean&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Std err&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;t-stat&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_assets</span><span class="p">):</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">mean_m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">se_m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">:</span><span class="s2">&lt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">mean_m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10.5f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">se_m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10.5f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">&gt;10.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">instruments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Instrumented moments: E[(r*p* - 1)*z] = 0&quot;</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">instruments</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">instruments</span><span class="p">[:,</span> <span class="n">j</span><span class="p">]</span>
+            <span class="n">inst_m</span> <span class="o">=</span> <span class="n">moments</span> <span class="o">*</span> <span class="n">z</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+            <span class="n">mean_inst</span> <span class="o">=</span> <span class="n">inst_m</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">se_inst</span> <span class="o">=</span> <span class="n">inst_m</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Instrument </span><span class="si">{</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_assets</span><span class="p">):</span>
+                <span class="n">t</span> <span class="o">=</span> <span class="n">mean_inst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">se_inst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Asset </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: mean=</span><span class="si">{</span><span class="n">mean_inst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, &quot;</span>
+                      <span class="sa">f</span><span class="s2">&quot;se=</span><span class="si">{</span><span class="n">se_inst</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, t=</span><span class="si">{</span><span class="n">t</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="n">T</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">δ</span><span class="p">,</span> <span class="n">γ</span> <span class="o">=</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">2.0</span>
+<span class="n">c_growth</span> <span class="o">=</span> <span class="n">rng</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.03</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<span class="n">pstar_model</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">δ</span> <span class="o">-</span> <span class="n">γ</span> <span class="o">*</span> <span class="n">c_growth</span><span class="p">)</span>
+<span class="n">pstar_model</span> <span class="o">/=</span> <span class="n">pstar_model</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+
+<span class="n">_</span><span class="p">,</span> <span class="n">returns_data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">simulate_sdf_and_returns</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+
+<span class="n">instruments</span> <span class="o">=</span> <span class="n">c_growth</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">gmm_euler_equation_test</span><span class="p">(</span><span class="n">pstar_model</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">returns_data</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">instruments</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Euler equation tests: E[r*p* - 1] = 0
+Asset          Mean    Std err     t-stat
+1          -0.00752    0.00134      -5.61
+2           0.04184    0.00593       7.06
+3          -0.01126    0.00166      -6.78
+4           0.19126    0.02334       8.19
+5           0.01307    0.00286       4.57
+
+Instrumented moments: E[(r*p* - 1)*z] = 0
+  Instrument 1:
+    Asset 1: mean=-0.00021, se=0.00005, t=-4.37
+    Asset 2: mean=0.00106, se=0.00021, t=5.02
+    Asset 3: mean=-0.00023, se=0.00006, t=-3.88
+    Asset 4: mean=0.00482, se=0.00084, t=5.72
+    Asset 5: mean=0.00024, se=0.00010, t=2.26
+</pre></div>
+</div>
+</div>
+</div>
+<p>The large t-statistics reject the Euler equations for every asset, both with and without instruments.</p>
+<p>This is by construction: the returns were generated by <code class="docutils literal notranslate"><span class="pre">simulate_sdf_and_returns</span></code>, which uses a lognormal SDF with <span class="math notranslate nohighlight">\(\sigma_m = 0.15\)</span>, while the CRRA model being tested has <span class="math notranslate nohighlight">\(\gamma = 2\)</span> and <span class="math notranslate nohighlight">\(\sigma_c = 0.03\)</span>, implying far less SDF volatility.</p>
+<p>The two SDFs do not match, so the moment conditions <span class="math notranslate nohighlight">\(E(r \cdot p^* - 1) = 0\)</span> fail.</p>
+<p>This illustrates how GMM tests can detect misspecification: when the proposed <span class="math notranslate nohighlight">\(p^*\)</span> is not the true pricing kernel, the Euler equation restrictions are violated and the data reject the model.</p>
+</section>
+</section>
+<section id="summary">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink"><span class="section-number">40.8. </span>Summary</a><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<p>The main contributions of <span id="id7">Hansen and Richard [<a class="reference internal" href="zreferences.html#id135" title="Lars Peter Hansen and Scott F Richard. The Role of Conditioning Information in Deducing Testable. Econometrica, 55(3):587-613, May 1987.">1987</a>]</span> are:</p>
+<ol class="arabic simple">
+<li><p><strong>Conditional Riesz Representation</strong>: Every admissible pricing function can
+be written as <span class="math notranslate nohighlight">\(\pi(p) = E(p \, p^* \mid \mathcal{G})\)</span> for a unique SDF <span class="math notranslate nohighlight">\(p^*\)</span>.
+Different models of asset prices are indexed by their <span class="math notranslate nohighlight">\(p^*\)</span>.</p></li>
+<li><p><strong>Conditional mean-variance frontier</strong>: The frontier is spanned by <span class="math notranslate nohighlight">\(r^*\)</span>
+and <span class="math notranslate nohighlight">\(z^*\)</span>, giving a conditional two-fund theorem with <em>random</em> weights.</p></li>
+<li><p><strong>Conditional vs unconditional frontiers</strong>: A return can be on the
+conditional frontier without being on the unconditional frontier. The
+unconditional frontier uses constant weights <span class="math notranslate nohighlight">\(c^*\)</span>; the conditional
+frontier uses random weights <span class="math notranslate nohighlight">\(w^*\)</span>. The gap matters for empirical tests.</p></li>
+<li><p><strong>Single-beta representation</strong>: The conditional CAPM extends Roll’s
+characterization to conditioning information. The unconditional version
+holds only for returns with constant portfolio weights – so testing the
+CAPM with unconditional regressions tests a weaker hypothesis.</p></li>
+<li><p><strong>Pseudo-pricing function</strong>: <span class="math notranslate nohighlight">\(\pi^*(p) = E[\pi(p)] = E(p \, p^*)\)</span> maps
+payoffs to real numbers and connects directly to <span id="id8">Hansen and Singleton [<a class="reference internal" href="zreferences.html#id46" title="Lars Peter Hansen and Kenneth J Singleton. Generalized instrumental variables estimation of nonlinear rational expectations models. Econometrica: Journal of the Econometric Society, pages 1269–1286, 1982.">1982</a>]</span>
+GMM estimation.
+On the full payoff space <span class="math notranslate nohighlight">\(P^*\)</span>, two pricing functions that imply the same
+<span class="math notranslate nohighlight">\(\pi^*\)</span> must share the same benchmark payoff <span class="math notranslate nohighlight">\(p^*\)</span>.</p>
+<ul class="simple">
+<li><p>The loss of discriminatory power comes from testing only a <em>subset</em> of
+payoffs, not from conditioning down per se.</p></li>
+</ul>
+</li>
+</ol>
+</section>
+<section id="exercises">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink"><span class="section-number">40.9. </span>Exercises</a><a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="hr87_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 40.1 </span></p>
+<section id="exercise-content">
+<p>The benchmark return <span class="math notranslate nohighlight">\(r^*\)</span> minimizes the unconditional second moment
+<span class="math notranslate nohighlight">\(E(r^2)\)</span> over the set <span class="math notranslate nohighlight">\(R^*\)</span> of returns with finite unconditional second moments.</p>
+<p>(a) Starting from the decomposition <span class="math notranslate nohighlight">\(r = r^* + z\)</span> for some <span class="math notranslate nohighlight">\(z \in Z\)</span>, and
+using the fact that <span class="math notranslate nohighlight">\(r^*\)</span> is conditionally orthogonal to <span class="math notranslate nohighlight">\(Z\)</span>, show that</p>
+<div class="math notranslate nohighlight">
+\[
+E(r^2) = E(r^{*2}) + E(z^2) \geq E(r^{*2}).
+\]</div>
+<p>(b) Write a Python function that, given a vector of asset returns and an
+estimate of the SDF <span class="math notranslate nohighlight">\(p^*\)</span>, computes the return closest to <span class="math notranslate nohighlight">\(r^*\)</span> (the one
+with minimum sample second moment), and verifies numerically that it has
+a smaller second moment than all other returns in <span class="math notranslate nohighlight">\(R^*\)</span>.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="hansen_richard_1987-solution-15">
+
+<p class="admonition-title">Solution</p>
+<section id="solution-content">
+<p><strong>(a) Analytical proof</strong></p>
+<p>Any return <span class="math notranslate nohighlight">\(r \in R\)</span> can be written as <span class="math notranslate nohighlight">\(r = r^* + z\)</span> for some <span class="math notranslate nohighlight">\(z \in Z^*\)</span>
+(where <span class="math notranslate nohighlight">\(Z^* = Z \cap P^*\)</span>).</p>
+<p>Since <span class="math notranslate nohighlight">\(r^*\)</span> is conditionally orthogonal to <span class="math notranslate nohighlight">\(Z\)</span> – meaning
+<span class="math notranslate nohighlight">\(\langle r^* \mid z \rangle_{\mathcal{G}} = E(r^* z \mid \mathcal{G}) = 0\)</span> for all <span class="math notranslate nohighlight">\(z \in Z\)</span>
+– taking unconditional expectations gives <span class="math notranslate nohighlight">\(E(r^* z) = 0\)</span>.</p>
+<p>Therefore,</p>
+<div class="math notranslate nohighlight">
+\[
+E(r^2) = E[(r^* + z)^2] = E(r^{*2}) + 2 E(r^* z) + E(z^2)
+        = E(r^{*2}) + E(z^2) \geq E(r^{*2}),
+\]</div>
+<p>with equality if and only if <span class="math notranslate nohighlight">\(z = 0\)</span>, i.e., <span class="math notranslate nohighlight">\(r = r^*\)</span>.</p>
+<p><strong>(b) Numerical verification</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">find_min_second_moment_return</span><span class="p">(</span><span class="n">returns</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the portfolio minimizing E[r^2] -- the empirical analogue of r*.&quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="n">returns</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">objective</span><span class="p">(</span><span class="n">w</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">returns</span> <span class="o">@</span> <span class="n">w</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">objective</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">/</span><span class="n">n</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span>
+                      <span class="n">constraints</span><span class="o">=</span><span class="p">[{</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">w</span><span class="p">:</span> <span class="n">w</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">}],</span>
+                      <span class="n">bounds</span><span class="o">=</span><span class="p">[(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)]</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">r_star</span> <span class="o">=</span> <span class="n">returns</span> <span class="o">@</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Minimum second-moment portfolio:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  E[r*^2] = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r_star</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Second moments of individual assets:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">e2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">returns</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">check</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="k">if</span> <span class="n">e2</span> <span class="o">&gt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">r_star</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">-</span> <span class="mf">1e-10</span> <span class="k">else</span> <span class="s2">&quot;no&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Asset </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">: E[r^2] = </span><span class="si">{</span><span class="n">e2</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2">  &quot;</span>
+              <span class="sa">f</span><span class="s2">&quot;(&gt;= E[r*^2]: </span><span class="si">{</span><span class="n">check</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span><span class="o">.</span><span class="n">x</span>
+
+
+<span class="n">pstar_sim</span><span class="p">,</span> <span class="n">returns_sim</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">simulate_sdf_and_returns</span><span class="p">(</span><span class="n">T</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">w_star</span> <span class="o">=</span> <span class="n">find_min_second_moment_return</span><span class="p">(</span><span class="n">returns_sim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Minimum second-moment portfolio:
+  E[r*^2] = 0.990862
+
+Second moments of individual assets:
+  Asset 1: E[r^2] = 0.999055  (&gt;= E[r*^2]: yes)
+  Asset 2: E[r^2] = 1.432891  (&gt;= E[r*^2]: yes)
+  Asset 3: E[r^2] = 1.001285  (&gt;= E[r*^2]: yes)
+  Asset 4: E[r^2] = 6.860072  (&gt;= E[r*^2]: yes)
+  Asset 5: E[r^2] = 1.105364  (&gt;= E[r*^2]: yes)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="qe-page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+
+            
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="qe-sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
+                    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tools and Techniques
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="orth_proj.html">
+   1. Orthogonal Projections and Their Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stationary_densities.html">
+   2. Continuous State Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="muth_kalman.html">
+   3. Reverse Engineering a la Muth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discrete_dp.html">
+   4. Discrete State Dynamic Programming
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  LQ Control
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_news.html">
+   5. Information and Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing.html">
+   6. Consumption Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing_tax.html">
+   7. Tax Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_jump_lq.html">
+   8. Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_1.html">
+   9. How to Pay for a War: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_2.html">
+   10. How to Pay for a War: Part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_3.html">
+   11. How to Pay for a War: Part 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lqramsey.html">
+   12. Optimal Taxation in an LQ Economy
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Multiple Agent Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arellano.html">
+   13. Default Risk and Income Fluctuations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="matsuyama.html">
+   14. Globalization and Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coase.html">
+   15. Coase’s Theory of the Firm
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="match_transport.html">
+   16. Composite Sorting
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dynamic Linear Economies
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_recursive_models.html">
+   17. Recursive Models of Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="growth_in_dles.html">
+   18. Growth in Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_asset_pricing_dles.html">
+   19. Lucas Asset Pricing Using DLE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="irfs_in_hall_model.html">
+   20. IRFs in Hall Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="permanent_income_dles.html">
+   21. Permanent Income Model using the DLE Class
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gorman_heterogeneous_households.html">
+   22. Gorman Aggregation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rosen_schooling_model.html">
+   23. Rosen Schooling Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cattle_cycles.html">
+   24. Cattle Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_invertibility_example.html">
+   25. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Risk, Model Uncertainty, and Robustness
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="five_preferences.html">
+   26. Risk and Model Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="entropy.html">
+   27. Etymology of Entropy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   28. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   29. Robust Markov Perfect Equilibrium
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Time Series Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arma.html">
+   30. Covariance Stationary Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="estspec.html">
+   31. Estimation of Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additive_functionals.html">
+   32. Additive and Multiplicative Functionals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lu_tricks.html">
+   33. Classical Control with Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classical_filtering.html">
+   34. Classical Prediction and Filtering With Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="knowing_forecasts_of_others.html">
+   35. Knowing the Forecasts of Others
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_rational_expectations.html">
+   36. Demand for Money during Hyperinflations under Rational Expectations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="info_projection.html">
+   37. Hyperinflation and Information Projection
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Asset Pricing and Finance
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_model.html">
+   38. Asset Pricing II: The Lucas Asset Pricing Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="asset_pricing_lph.html">
+   39. Elementary Asset Pricing Theory
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   40. The Role of Conditioning Information in Asset Pricing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hansen_jagannathan_1991.html">
+   41. The Hansen-Jagannathan Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="black_litterman.html">
+   42. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="doubts_or_variability.html">
+   43. Doubts or Variability?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
+   44. Risk Aversion or Mistaken Beliefs?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_complete_mkts.html">
+   45. Irrelevance of Capital Structures with Complete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_incomplete_mkts.html">
+   46. Equilibrium Capital Structures with Incomplete Markets
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dynamic Programming Squared
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="un_insure.html">
+   47. Optimal Unemployment Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dyn_stack.html">
+   48. Stackelberg Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo_machine_learn.html">
+   49. Machine Learning a Ramsey Plan
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo.html">
+   50. Time Inconsistency of Ramsey Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo_abreu.html">
+   51. Sustainable Plans for a Calvo Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opt_tax_recur.html">
+   52. Optimal Taxation with State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss.html">
+   53. Optimal Taxation without State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss2.html">
+   54. Fluctuating Interest Rates Deliver Fiscal Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss3.html">
+   55. Fiscal Risk and Government Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_ramsey.html">
+   56. Competitive Equilibria of a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_credible.html">
+   57. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dovis_accounting_mf.html">
+   58. Accounting for Monetary and Fiscal Policy
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   59. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   60. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   61. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="qe-sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="qe-toolbar">
+
+            <div class="qe-toolbar__inner">
+
+                <ul class="qe-toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                </ul>
+
+                <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/hansen_richard_1987.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
+                        <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
+                    <!--
+                    # Enable if looking for link to specific document hosted on GitHub
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/hansen_richard_1987.md" download><i data-feather="github"></i></a></li>
+                    -->
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst" download><i data-feather="github"></i></a></li>
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="/_pdf/quantecon-python-advanced.pdf" download><p>Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title"> Notebook Launcher </p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input">
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/main/hansen_richard_1987.ipynb">Colab</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" data-repourl="https://github.com/QuantEcon/lecture-python-advanced.notebooks" data-urlpath="tree/lecture-python-advanced.notebooks/hansen_richard_1987.ipynb" data-branch=main>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            </ul>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/main/hansen_richard_1987.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <script>
+                // QuantEcon Notebook Launcher
+                const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
+                // Highlight the server type if previous selection exists
+                if (typeof localStorage.launcherType !== 'undefined') {
+                  for (var i = 0; i < launcherTypeElements.length; i++) {
+                    launcherTypeElements[i].classList.remove('active');
+                    if ( launcherTypeElements[i].classList.contains(localStorage.launcherType) ) {
+                      launcherTypeElements[i].classList.add('active');
+                    }
+                  }
+                }
+                // Highlight server type on click and set local storage value
+                for (var i = 0; i < launcherTypeElements.length; i++) {
+                  launcherTypeElements[i].addEventListener('click', function() {
+                    for (var j = 0; j < launcherTypeElements.length; j++) {
+                      launcherTypeElements[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    if ( this.classList.contains('launcher-private') ) {
+                      localStorage.launcherType = 'launcher-private';
+                    } else if ( this.classList.contains('launcher-public') ) {
+                      localStorage.launcherType = 'launcher-public';
+                    }
+                    setLaunchServer();
+                  })
+                }
+                const launcherPublic = document.getElementById('launcher-public-input');
+                const launcherPrivate = document.getElementById('launcher-private-input');
+                const pageName = "hansen_richard_1987";
+                const repoURL = "https://github.com/QuantEcon/lecture-python-advanced.notebooks";
+                const urlPath = "tree/lecture-python-advanced.notebooks/hansen_richard_1987.ipynb";
+                const branch = "main"
+                const launchNotebookLink = document.getElementById('advancedLaunchButton');
+
+                // Highlight public server option if previous selection exists
+                if (typeof localStorage.launcherPublic !== 'undefined') {
+                  launcherPublic.value = localStorage.launcherPublic;
+                }
+                // Update local storage upon public server selection
+                launcherPublic.addEventListener('change', (event) => {
+                  setLaunchServer();
+                });
+                // Populate private server input if previous entry exists
+                if (typeof localStorage.launcherPrivate !== 'undefined') {
+                  launcherPrivate.value = localStorage.launcherPrivate;
+                }
+                // Update local storage when a private server is entered
+                launcherPrivate.addEventListener('input', (event) => {
+                  setLaunchServer();
+                });
+
+                // Function to update the "Launch Notebook" link href
+                function setLaunchServer() {
+                  launchNotebookLink.removeAttribute("style")
+                  if ( localStorage.launcherType == 'launcher-private' ) {
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    launcherPrivateValue = launcherPrivate.value
+                    if (!launcherPrivateValue) {
+                        launchNotebookLink.removeAttribute("href")
+                        launchNotebookLink.style.background = "grey"
+                        return
+                    }
+                    localStorage.launcherPrivate = launcherPrivateValue;
+                    privateServer = localStorage.launcherPrivate.replace(/\/$/, "")
+                    if (!privateServer.includes("http")) {
+                        privateServer = "http://" + privateServer
+                    }
+                    launchNotebookLinkURL = privateServer + repoPrefix;
+                  } else if ( localStorage.launcherType == 'launcher-public' ) {
+                    launcherPublicValue = launcherPublic.options[launcherPublic.selectedIndex].value;
+                    localStorage.launcherPublic = launcherPublicValue;
+                    launchNotebookLinkURL = localStorage.launcherPublic;
+                  }
+                  if (launchNotebookLinkURL) launchNotebookLink.href = launchNotebookLinkURL;
+                }
+                // Check if user has previously selected a server
+                if ( (typeof localStorage.launcherPrivate !== 'undefined') || (typeof localStorage.launcherPublic !== 'undefined') ) {
+                  setLaunchServer();
+                }
+                </script>
+
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>
