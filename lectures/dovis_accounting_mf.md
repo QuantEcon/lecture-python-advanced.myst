@@ -113,6 +113,8 @@ import jax.numpy as jnp
 from jax import jit, lax, vmap
 import numpy as np
 import matplotlib.pyplot as plt
+
+jax.config.update("jax_enable_x64", True)
 ```
 
 ## The economy
@@ -421,6 +423,11 @@ By the envelope theorem, $U'(\Delta) = -\lambda$.
 The following code implements this procedure, returning both $U(\Delta, \theta)$ and $U'(\Delta, \theta) = -\lambda$.
 
 ```{code-cell} ipython3
+# Large negative value used to mark infeasible allocations
+PENALTY = -1e12
+```
+
+```{code-cell} ipython3
 @jit
 def indirect_utility(Δ, θ, χ, ψ, σ):
     """
@@ -431,7 +438,11 @@ def indirect_utility(Δ, θ, χ, ψ, σ):
     l_peak = (1.0 / ((1.0 + ψ) * χ)) ** (1.0 / ψ)
     T_max = (1.0 - χ * l_peak**ψ) * l_peak
 
-    def bisect_body(_, bounds):
+    def bisect_cond(bounds):
+        lo, hi = bounds
+        return (hi - lo) > 1e-4
+
+    def bisect_body(bounds):
         lo, hi = bounds
         mid = 0.5 * (lo + hi)
         g = (θ / (1.0 + mid)) ** (1.0 / σ)
@@ -443,7 +454,8 @@ def indirect_utility(Δ, θ, χ, ψ, σ):
             jnp.where(surplus > Δ, mid, hi),
         )
 
-    lo, hi = lax.fori_loop(0, 100, bisect_body, (0.0, 1000.0))
+    # λ in [0, 1000] covers from unconstrained to peak of Laffer curve
+    lo, hi = lax.while_loop(bisect_cond, bisect_body, (0.0, 1000.0))
     λ_opt = 0.5 * (lo + hi)
     g_opt = (θ / (1.0 + λ_opt)) ** (1.0 / σ)
     denom = jnp.maximum(χ * (1.0 + λ_opt * (1.0 + ψ)), 1e-15)
@@ -467,9 +479,9 @@ def indirect_utility(Δ, θ, χ, ψ, σ):
     infeasible = Δ >= 0.99 * T_max
 
     U_val = jnp.where(unconstrained, U_unconstrained,
-                      jnp.where(infeasible, -1e12, U_constrained))
+                      jnp.where(infeasible, PENALTY, U_constrained))
     U_prime = jnp.where(unconstrained, 0.0,
-                        jnp.where(infeasible, -1e12, -λ_opt))
+                        jnp.where(infeasible, PENALTY, -λ_opt))
     return U_val, U_prime
 ```
 
@@ -492,7 +504,7 @@ fig, axes = plt.subplots(1, 2, figsize=(14, 5))
 for θ_val in θ_vals:
     U_vals, U_primes = iu_vec(Δ_grid, θ_val, χ, ψ, σ)
 
-    mask = U_vals > -1e9
+    mask = U_vals > PENALTY
     axes[0].plot(Δ_grid[mask], U_vals[mask], lw=2,
                  label=f'θ = {θ_val:.0f}')
     axes[1].plot(Δ_grid[mask], U_primes[mask], lw=2,
@@ -536,18 +548,17 @@ The cutoff cost $\xi^* = V^{fd} - V^{md}(\phi')$ is the temptation to deviate fr
 
 ```{code-cell} ipython3
 ---
+tags: [hide-input]
 mystnb:
   figure:
     caption: Credibility of inflation targets
     name: fig-credibility-targets
 ---
-iu_vec = vmap(indirect_utility, in_axes=(0, None, None, None, None))
-
-# φ grid — from near zero up to just below φ* = κ/(2η_m)
+# φ grid from near zero up to just below φ* = κ/(2η_m)
 phi_max = φ_star * 0.99
 phi_grid = jnp.linspace(0.05, phi_max, 500)
 
-# Surplus: Δ = φ + D where D = b − βb' − seigniorage
+# Surplus: Δ = φ + D where D = b - βb' - seigniorage
 D = 1.0
 Delta_grid = phi_grid + D
 
@@ -563,8 +574,8 @@ V_blue_raw = np.array(U_high + v_phi)   # baseline θ (high)
 V_red_raw  = np.array(U_low  + v_phi)   # θ_L (low)
 phi_np = np.array(phi_grid)
 
-mask_b = V_blue_raw > -1e5
-mask_r = V_red_raw  > -1e5
+mask_b = V_blue_raw > PENALTY
+mask_r = V_red_raw  > PENALTY
 
 # Shift curves so peaks are at comparable heights
 V_blue = V_blue_raw - V_blue_raw[mask_b].min()
@@ -616,7 +627,7 @@ ax.text(x_xi_b - 0.25, 0.5 * (V_peak_b + V_at_b),
         r'$\xi^*$', fontsize=14, color='C0',
         ha='right', va='center')
 
-# orange ξ̂*
+# orange ξ_hat*
 x_xi_r = phi_fd_r
 ax.annotate('', xy=(x_xi_r, V_peak_r),
             xytext=(x_xi_r, V_at_r),
@@ -744,7 +755,7 @@ $-U'(\Delta, \theta) = v'(\phi^{fd})$ under fiscal dominance.
 
 The algorithm is:
 
-1. *Initialize* with a guess $W_0(B, s_1)$ (e.g., the Ramsey value)
+1. *Initialize* with a guess $W_0(B, s_1)$
 2. For iteration $n$:
    - Compute $\phi^{fd}$ and $\bar\eta$ from the logit formula and the fiscal-dominance FOC
    - Compute the Bellman update $W_{n+1}$ from the value function equation above
@@ -762,7 +773,7 @@ The function `fd_from_continuation` recovers $\phi^{fd}$ by searching over a $\p
 
 Linear interpolation via `jnp.interp` evaluates $W(B, \xi)$ at off-grid points.
 
-The expectation over $\xi'$ is a matrix multiply against $P_\xi$ via `jnp.einsum`, the search over $(b', \phi')$ is a vectorized `argmax`, and the VFI loop uses `lax.scan`.
+The expectation over $\xi'$ is a matrix multiply against $P_\xi$ via `jnp.einsum`, the search over $(b', \phi')$ is a vectorized `argmax`, and the VFI loop uses `lax.while_loop`.
 
 All parameters, grids, the transition matrix, and a precomputed table of $U(\Delta)$ values are stored in a `DovisModel` named tuple.
 
@@ -785,6 +796,7 @@ class DovisModel(NamedTuple):
     P_ξ: jnp.ndarray
     Δ_fine: jnp.ndarray
     U_fine: jnp.ndarray
+    H_φ: jnp.ndarray
 
 
 def create_model(
@@ -807,29 +819,38 @@ def create_model(
     B_max=20.0,
 ):
     """
-    Create the reduced-form model used in the lecture.
+    Create the reduced-form model.
 
-    The lecture keeps θ fixed inside one model instance and studies
-    fundamental disinflation by comparing solutions across θ values.
+    θ is fixed inside each model instance; fundamental disinflation
+    is studied by comparing solutions across θ values.
     """
+
+    # Satiation point for real balances
     φ_star = κ / (2.0 * η_m)
+
+    # Stay below satiation
     φ_lo, φ_hi = 0.5, 0.99 * φ_star
 
     B_grid = jnp.linspace(0.1, B_max, n_B)
+
+    # Max debt consistent with B_max and φ_hi
     b_bar = max(B_max - float(φ_hi), 0.1)
     b_prime_grid = jnp.linspace(0.1, b_bar, n_B)
     φ_grid = jnp.linspace(φ_lo, φ_hi, n_φ)
 
     ξ_grid, P_ξ = build_ξ_grid(n_ξ, α_l, α, ξ_bar)
 
+    # Wide range covering the full Laffer curve
     Δ_fine = jnp.linspace(-50.0, 20.0, 2500)
     U_fine, _ = vmap(lambda d: indirect_utility(d, θ, χ, ψ, σ))(Δ_fine)
+    H_φ = H_func(φ_grid, κ, η_m)
 
     return DovisModel(
         β=β, β_hat=β_hat, χ=χ, ψ=ψ, σ=σ, κ=κ, η_m=η_m,
         θ=θ, λ=λ, φ_star=φ_star,
         B_grid=B_grid, b_prime_grid=b_prime_grid, φ_grid=φ_grid,
         ξ_grid=ξ_grid, P_ξ=P_ξ, Δ_fine=Δ_fine, U_fine=U_fine,
+        H_φ=H_φ,
     )
 ```
 
@@ -906,20 +927,13 @@ def fd_from_continuation(W, B_grid, b_prime_grid, φ_grid, κ, η_m):
     return V_choices, V_fd, φ_fd, H_fd
 
 
-def compute_continuation(W, model):
-    """
-    Compute continuation objects implied by a candidate value function.
-
-    Uses quadratic refinement when recovering φ^fd from the value function.
-
-    Returns: EV, J, V_fd, H_fd, V_md, η_bar, φ_fd
-    """
+def _continuation_on_grid(W, model, bp_grid, φ_grid, H_φ):
+    """Compute continuation objects on a  (b', φ') grid."""
     V_md, V_fd, φ_fd, H_fd = fd_from_continuation(
-        W, model.B_grid, model.b_prime_grid, model.φ_grid,
+        W, model.B_grid, bp_grid, φ_grid,
         model.κ, model.η_m,
     )
 
-    H_φ = H_func(model.φ_grid, model.κ, model.η_m)
     η_bar = jax.nn.sigmoid(
         model.λ * (V_md - V_fd[:, None, :] + model.ξ_grid[None, None, :])
     )
@@ -939,6 +953,13 @@ def compute_continuation(W, model):
     return EV, J, V_fd, H_fd, V_md, η_bar, φ_fd
 
 
+def compute_continuation(W, model):
+    """Compute continuation objects on the model's coarse grid."""
+    return _continuation_on_grid(
+        W, model, model.b_prime_grid, model.φ_grid, model.H_φ
+    )
+
+
 def bellman_rhs(W, model):
     EV, J, _, _, _, _, _ = compute_continuation(W, model)
 
@@ -949,7 +970,8 @@ def bellman_rhs(W, model):
     )
 
     U_all = jnp.interp(Δ.ravel(), model.Δ_fine, model.U_fine).reshape(Δ.shape)
-    U_all = jnp.where((Δ > -50.0) & (Δ < 20.0), U_all, -1e15)
+    in_range = (Δ > model.Δ_fine[0]) & (Δ < model.Δ_fine[-1])
+    U_all = jnp.where(in_range, U_all, PENALTY)
 
     val = U_all + model.β_hat * EV[:, :, None, :]
     n_bp = model.b_prime_grid.shape[0]
@@ -963,36 +985,57 @@ def T(W, model):
 
 ### Solving the model
 
-`solve_model` runs value function iteration via `lax.scan`, applying the Bellman operator `T` for a fixed number of iterations.
+`solve_model` runs value function iteration using `lax.while_loop`, applying a **dampened** Bellman operator $W_{n+1} = \omega\, T(W_n) + (1 - \omega)\, W_n$ with $\omega = 0.01$, terminating when the sup-norm update error falls below `tol` or after `max_iter` iterations.
 
 `extract_policies` then re-evaluates the Bellman RHS on a choice grid that is 3$\times$ denser in both $b'$ and $\phi'$.
 
 ```{code-cell} ipython3
-def solve_model(model, n_iter=200, verbose=True):
-    """
-    Solve by VFI using lax.scan.
+def solve_model(model, tol=1e-4, max_iter=10_000, damp=0.01,
+                log_period=10, verbose=True):
+    """Solve by dampened VFI: W_{n+1} = damp * T(W_n) + (1 - damp) * W_n.
+
+    Returns (W, error_log).
     """
     U0, _ = indirect_utility(0.0, model.θ, model.χ, model.ψ, model.σ)
     W_init = jnp.full(
         (len(model.B_grid), len(model.ξ_grid)),
         U0 / (1.0 - model.β_hat),
     )
+    log_size = max_iter // log_period + 1
 
     @jit
     def run_vfi(W0):
-        def step(W, _):
-            return T(W, model), None
-        W, _ = lax.scan(step, W0, None, length=n_iter)
-        return W
+        err_log = jnp.full(log_size, jnp.nan)
 
-    W = run_vfi(W_init)
+        def cond(state):
+            W, err, i, _ = state
+            return (err > tol) & (i < max_iter)
+
+        def body(state):
+            W, _, i, err_log = state
+            W_new = damp * T(W, model) + (1.0 - damp) * W
+            err = jnp.max(jnp.abs(W_new - W))
+            log_idx = i // log_period
+            err_log = err_log.at[log_idx].set(err)
+            return W_new, err, i + 1, err_log
+
+        W, err, n, err_log = lax.while_loop(
+            cond, body, (W0, jnp.inf, 0, err_log)
+        )
+        return W, err, n, err_log
+
+    W, err, n_iters, err_log = run_vfi(W_init)
     W.block_until_ready()
 
     if verbose:
         bellman_error = float(jnp.max(jnp.abs(T(W, model) - W)))
-        print(f"Bellman error: {bellman_error:0.2e}")
+        if bellman_error < tol:
+            print(f"Converged in {int(n_iters)} iterations "
+                  f"(Bellman error: {bellman_error:0.2e})")
+        else:
+            print(f"Did not converge (Bellman error: {bellman_error:0.2e})")
 
-    return W
+    return W, np.asarray(err_log)
 
 
 @partial(jit, static_argnums=(2, 3))
@@ -1006,26 +1049,14 @@ def extract_policies(W, model, refine_b=3, refine_φ=3):
 
     n_bp = n_B * refine_b
     n_φ = n_φ_coarse * refine_φ
-    bp_grid = jnp.linspace(model.b_prime_grid[0], model.b_prime_grid[-1], n_bp)
+    bp_grid = jnp.linspace(
+        model.b_prime_grid[0], model.b_prime_grid[-1], n_bp)
     φ_grid = jnp.linspace(model.φ_grid[0], model.φ_grid[-1], n_φ)
 
-    H_φ = H_func(φ_grid, model.κ, model.η_m)
-    V_md, V_fd, φ_fd, H_fd = fd_from_continuation(
-        W, model.B_grid, bp_grid, φ_grid, model.κ, model.η_m,
+    H_φ_dense = H_func(φ_grid, model.κ, model.η_m)
+    EV, J, V_fd, H_fd, V_md, η_bar, φ_fd = _continuation_on_grid(
+        W, model, bp_grid, φ_grid, H_φ_dense,
     )
-
-    η_bar = jax.nn.sigmoid(
-        model.λ * (V_md - V_fd[:, None, :] + model.ξ_grid[None, None, :])
-    )
-
-    H_comb = η_bar * H_φ[None, :, None] + (1.0 - η_bar) * H_fd[:, None, :]
-    J = model.β * jnp.einsum("abj,kj->abk", H_comb, model.P_ξ)
-
-    Ω = jnp.logaddexp(
-        model.λ * V_md,
-        model.λ * (V_fd[:, None, :] - model.ξ_grid[None, None, :]),
-    ) / model.λ
-    EV = jnp.einsum("abj,kj->abk", Ω, model.P_ξ)
 
     Δ = (
         model.B_grid[None, None, :, None]
@@ -1033,8 +1064,10 @@ def extract_policies(W, model, refine_b=3, refine_φ=3):
         - J[:, :, None, :]
     )
 
-    U_all = jnp.interp(Δ.ravel(), model.Δ_fine, model.U_fine).reshape(Δ.shape)
-    U_all = jnp.where((Δ > -50.0) & (Δ < 20.0), U_all, -1e15)
+    U_all = jnp.interp(
+        Δ.ravel(), model.Δ_fine, model.U_fine).reshape(Δ.shape)
+    in_range = (Δ > model.Δ_fine[0]) & (Δ < model.Δ_fine[-1])
+    U_all = jnp.where(in_range, U_all, PENALTY)
 
     val = U_all + model.β_hat * EV[:, :, None, :]
     val_flat = val.reshape(n_bp * n_φ, n_B, n_ξ)
@@ -1044,7 +1077,8 @@ def extract_policies(W, model, refine_b=3, refine_φ=3):
     pol_φ = φ_grid[best_idx % n_φ]
 
     Δ_flat = Δ.reshape(n_bp * n_φ, n_B, n_ξ)
-    pol_Δ = jnp.take_along_axis(Δ_flat, best_idx[None], axis=0).squeeze(0)
+    pol_Δ = jnp.take_along_axis(
+        Δ_flat, best_idx[None], axis=0).squeeze(0)
 
     η_current = jnp.einsum("abj,kj->abk", η_bar, model.P_ξ)
     η_flat = η_current.reshape(n_bp * n_φ, n_ξ)
@@ -1062,90 +1096,35 @@ def extract_policies(W, model, refine_b=3, refine_φ=3):
     return pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd
 ```
 
-The first call triggers JIT compilation, which takes a moment.
-
-```{code-cell} ipython3
-model = create_model()
-W = solve_model(model)
-pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd = extract_policies(W, model)
-B_grid = model.B_grid
-ξ_grid = model.ξ_grid
-n_ξ = len(ξ_grid)
-```
-
-```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: Value and policy functions
-    name: fig-value-policy
----
-fig, axes = plt.subplots(2, 2, figsize=(14, 10))
-
-ξ_plot_idx = [0, n_ξ // 2, n_ξ - 1]
-ξ_labels = [f'ξ_1 = {ξ_grid[j]:.2f}' for j in ξ_plot_idx]
-colors = ['tab:blue', 'tab:orange', 'tab:green']
-
-for k, j in enumerate(ξ_plot_idx):
-    feasible = np.asarray(W[:, j]) > -1e12
-
-    axes[0, 0].plot(B_grid[feasible],
-                    W[:, j][feasible], lw=2, label=ξ_labels[k],
-                    color=colors[k])
-    axes[0, 1].plot(B_grid[feasible],
-                    pol_b[:, j][feasible], lw=2, label=ξ_labels[k],
-                    color=colors[k])
-    axes[1, 0].plot(B_grid[feasible],
-                    pol_φ[:, j][feasible], lw=2, label=ξ_labels[k],
-                    color=colors[k])
-    axes[1, 1].plot(B_grid[feasible],
-                    pol_Δ[:, j][feasible], lw=2, label=ξ_labels[k],
-                    color=colors[k])
-
-axes[0, 0].set_xlabel('B (total liabilities)')
-axes[0, 0].set_ylabel('W(B, ξ_1)')
-axes[0, 0].legend()
-
-axes[0, 1].set_xlabel('B')
-axes[0, 1].set_ylabel("b'(B, ξ_1)")
-axes[0, 1].legend()
-
-axes[1, 0].set_xlabel('B')
-axes[1, 0].set_ylabel("φ'(B, ξ_1)")
-axes[1, 0].legend()
-
-axes[1, 1].set_xlabel('B')
-axes[1, 1].set_ylabel('Δ(B, ξ_1)')
-axes[1, 1].legend()
-
-plt.tight_layout()
-plt.show()
-```
-
-### Simulation infrastructure
-
-For the impulse-response experiments, `solve_policy_cache` solves the model at multiple $\theta$ values and stores the resulting value and policy arrays.
+`solve_policy_cache` solves the model at multiple $\theta$ values and stores the resulting value and policy arrays.
 
 `build_current_fd_cache` computes the fiscal-dominance value and $\phi^{fd}$ as functions of inherited debt.
 
-`build_sim_cache` collects all arrays into one dict; the simulation functions then use `np.interp` to evaluate policies at arbitrary state values.
+`build_sim_cache` collects all arrays into one dictionary; the simulation functions then use `np.interp` to evaluate policies at state values.
 
 ```{code-cell} ipython3
-def solve_policy_cache(θ_nodes, base_model, n_iter=200):
-    """
-    Solve the model for several θ values and store policy arrays.
-    """
+def solve_policy_cache(θ_nodes, base_model, **solve_kw):
+    """Solve for several θ values; returns (cache_dict, err_log)."""
     out = {k: [] for k in ["W", "b", "φ", "Δ", "η", "J", "φ_fd"]}
     θ_nodes = np.asarray(θ_nodes, dtype=float)
+    first_err_log = None
 
-    for θ_val in θ_nodes:
+    # Batch-compute U_fine for all θ values at once
+    U_fine_all = vmap(
+        lambda θ_val: vmap(
+            lambda d: indirect_utility(
+                d, θ_val, base_model.χ, base_model.ψ, base_model.σ)
+        )(base_model.Δ_fine)[0]
+    )(jnp.asarray(θ_nodes))
+
+    for i, θ_val in enumerate(θ_nodes):
         m = base_model._replace(
             θ=float(θ_val),
-            U_fine=vmap(lambda d: indirect_utility(
-                d, θ_val, base_model.χ, base_model.ψ, base_model.σ
-            ))(base_model.Δ_fine)[0],
+            U_fine=U_fine_all[i],
         )
-        W = solve_model(m, n_iter=n_iter, verbose=False)
+        W, err_log = solve_model(m, verbose=False, **solve_kw)
+        if first_err_log is None:
+            first_err_log = err_log
         pol_b, pol_φ, pol_Δ, pol_η, pol_J, pol_φ_fd = extract_policies(W, m)
 
         for name, arr in zip(
@@ -1160,13 +1139,11 @@ def solve_policy_cache(θ_nodes, base_model, n_iter=200):
         "B_grid": np.asarray(base_model.B_grid),
         "φ_grid": np.asarray(base_model.φ_grid),
         **{k: np.stack(v) for k, v in out.items()},
-    }
+    }, first_err_log
 
 
 def build_current_fd_cache(cache, base_model):
-    """
-    Current-state fiscal-dominant objects implied by W(B, ξ).
-    """
+    """Compute V^fd and φ^fd as functions of inherited debt."""
     B_g = jnp.array(cache["B_grid"])
     φ_grid = jnp.array(cache["φ_grid"])
     b_bar = jnp.maximum(B_g[-1] - φ_grid[-1], B_g[0])
@@ -1189,10 +1166,7 @@ def build_current_fd_cache(cache, base_model):
 
 
 def build_sim_cache(cache, current_fd_cache):
-    """
-    Collect arrays needed for IRF simulation into a single dict.
-    Simulation functions use np.interp for lookups.
-    """
+    """Collect arrays needed for IRF simulation."""
     return {
         "B_grid": np.asarray(cache["B_grid"]),
         "b_grid": np.asarray(current_fd_cache["b_grid"]),
@@ -1204,6 +1178,47 @@ def build_sim_cache(cache, current_fd_cache):
         "φ_fd": current_fd_cache["φ_fd"],
     }
 ```
+
+We solve the model for both $\theta$ values ($\theta = 130$ baseline and $\theta_H = 200$ for the fundamental disinflation) in a single pass, which triggers JIT compilation on the first call.
+
+```{code-cell} ipython3
+model = create_model()
+θ_high = 200.0
+θ_all = np.array([model.θ, θ_high])
+
+cache, err_log = solve_policy_cache(θ_all, model)
+current_fd_cache = build_current_fd_cache(cache, model)
+sim_cache = build_sim_cache(cache, current_fd_cache)
+
+# Extract baseline (θ = 130) results for plotting
+W = jnp.array(cache["W"][0])
+pol_b = jnp.array(cache["b"][0])
+pol_φ = jnp.array(cache["φ"][0])
+pol_Δ = jnp.array(cache["Δ"][0])
+B_grid = model.B_grid
+ξ_grid = model.ξ_grid
+n_ξ = len(ξ_grid)
+n_ξ_coarse = n_ξ
+```
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: VFI convergence
+    name: fig-vfi-convergence
+---
+valid = ~np.isnan(err_log)
+iters = np.arange(len(err_log))[valid] * 10
+fig, ax = plt.subplots(figsize=(8, 4))
+ax.semilogy(iters, err_log[valid], lw=2)
+ax.set_xlabel('iteration')
+ax.set_ylabel('sup-norm error')
+plt.tight_layout()
+plt.show()
+```
+
+The simulation functions below use `np.interp` to evaluate policies at arbitrary state values, compute regime probabilities from the logit formula, and recover equilibrium allocations from the surplus.
 
 ```{code-cell} ipython3
 def _interp(grid, values, x):
@@ -1228,7 +1243,7 @@ def current_eta_prob(b, φ_promise, θi, ξi, cache, sim_cache, p):
     V_md = _interp(B_g, sim_cache["W"][θi, :, ξi], B_md)
     V_md += float(v_money(φ_promise, p.κ, p.η_m))
     _, V_fd = interp_current_fd(sim_cache, θi, ξi, b)
-    z = p.λ * (V_md - V_fd + ξ_val)
+    z = float(np.clip(p.λ * (V_md - V_fd + ξ_val), -500.0, 500.0))
     η_prob = 1.0 / (1.0 + np.exp(-z))
     return η_prob, V_md, V_fd
 
@@ -1252,8 +1267,14 @@ def static_allocation(Δ, θ, χ, ψ, σ):
     if Δ <= -g_star:
         return l_star, g_star, 0.0
 
+    if Δ >= 0.999 * T_max:
+        return l_peak, 1e-8, 0.0
+
+    # Bisect on λ in [0, 1000] with convergence + iteration guard
     lo, hi = 0.0, 1000.0
-    for _ in range(100):
+    for _ in range(200):
+        if (hi - lo) <= 1e-10:
+            break
         mid = 0.5 * (lo + hi)
         g_val = (θ / (1.0 + mid)) ** (1.0 / σ)
         denom = max(χ * (1.0 + mid * (1.0 + ψ)), 1e-15)
@@ -1269,11 +1290,10 @@ def static_allocation(Δ, θ, χ, ψ, σ):
     denom = max(χ * (1.0 + lam * (1.0 + ψ)), 1e-15)
     l_opt = max((1.0 + lam) / denom, 1e-15) ** (1.0 / ψ)
 
-    if Δ >= 0.999 * T_max:
-        return l_peak, 1e-8, lam
-
     return l_opt, g_opt, lam
 ```
+
+The next two functions below simulate impulse responses for the fundamental and institutional disinflation experiments, stepping forward in time using the cached policy functions.
 
 ```{code-cell} ipython3
 def simulate_fundamental_irf(
@@ -1286,9 +1306,7 @@ def simulate_fundamental_irf(
     p,
     t_shock,
 ):
-    """
-    Simulate a fundamental disinflation with realized FD throughout.
-    """
+    """Simulate a fundamental disinflation (FD throughout)."""
     T = len(θ_idx_path)
     B_g = cache["B_grid"]
     θ_nodes = cache["θ_nodes"]
@@ -1410,9 +1428,7 @@ def simulate_institutional_irf(
     p,
     t_shock,
 ):
-    """
-    Simulate an institutional disinflation with endogenous regime switching.
-    """
+    """Simulate an institutional disinflation (endogenous regime switching)."""
     T = len(ξ_idx_path)
     B_g = cache["B_grid"]
     θ_nodes = cache["θ_nodes"]
@@ -1570,7 +1586,7 @@ We solve for both $\theta$ values using `solve_policy_cache`, build lookup array
 ```{code-cell} ipython3
 def plot_irf(irf, θ_path, ξ_path, time, title):
     """
-    Plot the 4x2 IRF figure used in the lecture.
+    Plot the 4x2 IRF figure.
     """
     fig, axes = plt.subplots(4, 2, figsize=(12, 14))
     fig.suptitle(title, fontsize=14, y=1.01)
@@ -1626,15 +1642,7 @@ def plot_irf(irf, θ_path, ξ_path, time, title):
 ```
 
 ```{code-cell} ipython3
-# Solve the model for two θ values
-p = create_model()   # base model (θ = 130 by default)
-θ_high = 200.0
-θ_irf = np.array([p.θ, θ_high])
-
-cache = solve_policy_cache(θ_irf, p, n_iter=200)
-current_fd_cache = build_current_fd_cache(cache, p)
-sim_cache = build_sim_cache(cache, current_fd_cache)
-n_ξ_coarse = len(cache["ξ_grid"])
+p = model  # alias used by the simulation functions
 ```
 
 ```{code-cell} ipython3
@@ -1772,7 +1780,7 @@ Resampling uses `jnp.searchsorted` on the cumulative weight array.
 def particle_filter(y_data, key, N_particles,
                     b_init, φ_init, θ_bar, ξ_init,
                     ρ_θ, σ_θ, α_l, α_ξ, ξ_bar,
-                    κ, η_m, λ, σ_π, σ_b):
+                    β, κ, η_m, λ, σ_π, σ_b):
     """Bootstrap particle filter returning filtered paths and log-likelihood."""
 
     φ_star = κ / (2.0 * η_m)
@@ -1824,9 +1832,8 @@ def particle_filter(y_data, key, N_particles,
     def observe_one(particle):
         """Map state to observables: π = β*H(φ)/φ - 1, debt/GDP."""
         b, φ, θ, ξ1, φ_old = particle
-        β = 0.95
         H_val = H_func(φ, κ, η_m)
-        inflation = (β * H_val / jnp.maximum(φ, 0.1) - 1.0) * 100.0
+        inflation = (β * H_val / jnp.maximum(φ, 1e-8) - 1.0) * 100.0
         debt_to_gdp = b * 100.0
         return jnp.array([inflation, debt_to_gdp])
 
@@ -1914,7 +1921,7 @@ pf_key = jax.random.PRNGKey(123)
     θ_bar=θ_bar_pf, ξ_init=0.1,
     ρ_θ=ρ_θ, σ_θ=σ_θ,
     α_l=α_l_pf, α_ξ=α_ξ_pf, ξ_bar=ξ_bar_pf,
-    κ=κ, η_m=η_m, λ=λ_gumbel,
+    β=β, κ=κ, η_m=η_m, λ=λ_gumbel,
     σ_π=2.0, σ_b=2.0
 )
 ```
@@ -1930,26 +1937,26 @@ years = 1960 + np.arange(T_sim)
 
 fig, axes = plt.subplots(2, 2, figsize=(14, 10))
 
-axes[0, 0].plot(years, θ_filt, 'b-', lw=2)
+axes[0, 0].plot(years, θ_filt, lw=2)
 axes[0, 0].set_ylabel('θ')
 axes[0, 0].axvline(1960 + t_reform, color='gray', ls='--', alpha=0.5,
                     label='reform date')
 axes[0, 0].legend()
 
-axes[0, 1].plot(years, ξ_filt, 'b-', lw=2)
+axes[0, 1].plot(years, ξ_filt, lw=2)
 axes[0, 1].set_ylabel('ξ_1')
 axes[0, 1].axvline(1960 + t_reform, color='gray', ls='--', alpha=0.5)
 
-axes[1, 0].plot(years, inflation_data, 'k-', lw=2, label='data')
+axes[1, 0].plot(years, inflation_data, lw=2, label='data')
 H_filt = H_func(φ_filt, κ, η_m)
-y_model_π = (β * H_filt / jnp.maximum(φ_filt, 0.1) - 1.0) * 100
-axes[1, 0].plot(years, y_model_π, 'b--', lw=2, label='model')
+y_model_π = (β * H_filt / jnp.maximum(φ_filt, 1e-8) - 1.0) * 100
+axes[1, 0].plot(years, y_model_π, '--', lw=2, label='model')
 axes[1, 0].set_ylabel('inflation (%)')
 axes[1, 0].set_xlabel('year')
 axes[1, 0].legend()
 
-axes[1, 1].plot(years, debt_data, 'k-', lw=2, label='data')
-axes[1, 1].plot(years, b_filt * 100, 'b--', lw=2, label='model')
+axes[1, 1].plot(years, debt_data, lw=2, label='data')
+axes[1, 1].plot(years, b_filt * 100, '--', lw=2, label='model')
 axes[1, 1].set_ylabel('debt/GDP (%)')
 axes[1, 1].set_xlabel('year')
 axes[1, 1].legend()
@@ -2078,7 +2085,7 @@ V_md_ex, V_fd_vals, φ_fd_vals, _ = fd_from_continuation(
 φ_fd_mid = np.asarray(φ_fd_vals[:, ξ_mid])
 V_fd_mid = np.asarray(V_fd_vals[:, ξ_mid])
 b_np = np.asarray(b_g)
-feasible_fd = V_fd_mid > -1e12
+feasible_fd = V_fd_mid > PENALTY
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 axes[0].plot(b_np[feasible_fd], φ_fd_mid[feasible_fd], 'b-', lw=2)
@@ -2125,7 +2132,7 @@ for i, (N_part, color) in enumerate(zip(
         θ_bar=θ_bar_pf, ξ_init=0.1,
         ρ_θ=ρ_θ, σ_θ=σ_θ,
         α_l=α_l_pf, α_ξ=α_ξ_pf, ξ_bar=ξ_bar_pf,
-        κ=κ, η_m=η_m, λ=λ_gumbel,
+        β=β, κ=κ, η_m=η_m, λ=λ_gumbel,
         σ_π=2.5, σ_b=3.0
     )
 
