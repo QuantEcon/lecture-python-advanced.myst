@@ -568,12 +568,13 @@ def nnash_robust(A, C, B1, B2, R1, R2, Q1, Q2, S1, S2, W1, W2, M1, M2,
     k_1 = B1.shape[1]
     k_2 = B2.shape[1]
 
+    rng = np.random.default_rng(0)
     v1 = np.eye(k_1)
     v2 = np.eye(k_2)
     P1 = np.eye(n) * 1e-5
     P2 = np.eye(n) * 1e-5
-    F1 = np.random.randn(k_1, n)
-    F2 = np.random.randn(k_2, n)
+    F1 = rng.standard_normal((k_1, n))
+    F2 = rng.standard_normal((k_2, n))
 
 
     for it in range(max_iter):
@@ -769,7 +770,7 @@ where $F_1$ and $F_2$ are the firms' robust decision rules within the robust mar
   laws that are distorted relative to the baseline model.
 
 After simulating $x_t$ under the baseline transition dynamics and robust decision rules $F_i, i = 1, 2$, we
-extract and plot industry output $q_t=q_{1t}+q_{2t}$ and price $p_t = a_0 − a_1 q_t$.
+extract and plot industry output $q_t=q_{1t}+q_{2t}$ and price $p_t = a_0 - a_1 q_t$.
 
 Here we set the robustness and volatility matrix parameters as follows:
 
