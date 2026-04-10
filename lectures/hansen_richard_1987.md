@@ -96,8 +96,6 @@ import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 from scipy import stats
 import pandas as pd
-
-
 ```
 
 ## Data generation

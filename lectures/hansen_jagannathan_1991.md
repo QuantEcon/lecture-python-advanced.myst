@@ -73,7 +73,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from scipy.optimize import minimize
-import json
 ```
 
 ## The asset pricing framework
@@ -181,8 +180,9 @@ interchangeably.
 import json, urllib.request
 
 DATA_URL = (
-    "_static/lecture_specific/hansen_jagannathan_1991/"
-    "hansen_jagannathan_1991_data.json"
+    "https://raw.githubusercontent.com/QuantEcon/lecture-python-advanced.myst/"
+    "refs/heads/main/lectures/_static/lecture_specific/"
+    "hansen_jagannathan_1991/hansen_jagannathan_1991_data.json"
 )
 
 
