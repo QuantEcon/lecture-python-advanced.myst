@@ -1600,6 +1600,8 @@ The shifts are small relative to the unit variance because the stochastic state 
 
 Before comparing models, it helps to see the empirical regularities that any successful theory must explain.
 
+The data are from [FRED](https://fred.stlouisfed.org): GS1, GS5, GS10 (nominal Treasury yields), DFII5, DFII10 (real Treasury yields), and USREC (recession indicators).
+
 ```{code-cell} ipython3
 ---
 tags: [hide-input]
@@ -1609,7 +1611,7 @@ mystnb:
     name: fig-us-yields
 ---
 data = pd.read_csv(
-    'https://raw.githubusercontent.com/QuantEcon/lecture-python.myst/refs/heads/'
+    'https://raw.githubusercontent.com/QuantEcon/lecture-python-advanced.myst/refs/heads/'
     'main/lectures/_static/lecture_specific/risk_aversion_or_mistaken_beliefs/fred_data.csv',
     parse_dates=['DATE'], index_col='DATE'
 )

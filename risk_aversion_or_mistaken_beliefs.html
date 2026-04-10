@@ -317,10 +317,19 @@
                             
                             <li class="changelog-entry">
                                 
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/81c147d4" class="changelog-hash">81c147d4</a>
+                                
+                                <span class="changelog-author">Humphrey Yang</span>
+                                <span class="changelog-time">1 hour ago</span>
+                                <span class="changelog-message">[risk_aversion_or_mistaken_beliefs, hansen_jagannathan_1991] Update Dataset Source to Github URL (#325)</span>
+                            </li>
+                            
+                            <li class="changelog-entry">
+                                
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/95d83cdc" class="changelog-hash">95d83cdc</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">15 minutes ago</span>
+                                <span class="changelog-time">2 hours ago</span>
                                 <span class="changelog-message">Tom's new lecture on the Bocola-Dovis and others paper (#320)</span>
                             </li>
                             
@@ -1848,6 +1857,7 @@ P = -\tfrac{\theta}{2} \Xi + \tfrac{\theta}{2} W^\top W + \beta (A-CW)^\top P(A-
 <section id="empirical-challenges-and-model-performances">
 <h2><span class="section-number">44.10. </span>Empirical challenges and model performances<a class="headerlink" href="#empirical-challenges-and-model-performances" title="Link to this heading">#</a></h2>
 <p>Before comparing models, it helps to see the empirical regularities that any successful theory must explain.</p>
+<p>The data are from <a class="reference external" href="https://fred.stlouisfed.org">FRED</a>: GS1, GS5, GS10 (nominal Treasury yields), DFII5, DFII10 (real Treasury yields), and USREC (recession indicators).</p>
 <div class="cell tag_hide-input docutils container">
 <details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
@@ -1856,7 +1866,7 @@ P = -\tfrac{\theta}{2} \Xi + \tfrac{\theta}{2} W^\top W + \beta (A-CW)^\top P(A-
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
-    <span class="s1">&#39;https://raw.githubusercontent.com/QuantEcon/lecture-python.myst/refs/heads/&#39;</span>
+    <span class="s1">&#39;https://raw.githubusercontent.com/QuantEcon/lecture-python-advanced.myst/refs/heads/&#39;</span>
     <span class="s1">&#39;main/lectures/_static/lecture_specific/risk_aversion_or_mistaken_beliefs/fred_data.csv&#39;</span><span class="p">,</span>
     <span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;DATE&#39;</span><span class="p">],</span> <span class="n">index_col</span><span class="o">=</span><span class="s1">&#39;DATE&#39;</span>
 <span class="p">)</span>
