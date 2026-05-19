@@ -14,37 +14,44 @@ kernelspec:
 
 ## Overview
 
-This lecture implements the model of repeated moral hazard studied by
+This lecture computes the information-constrained optima studied by
 {cite}`Phelan_Townsend_91`.
 
-Phelan and Townsend built on the recursive formulation of
-{cite}`Spear_Srivastava_87`.
+Their paper studies a continuum-agent economy with unobserved effort.
 
-Phelan and Townsend then  used **lotteries** and **linear
-programming** to compute optimal long-term incentive contracts.
+The planner chooses lotteries over individual histories, subject to
+promise-keeping and incentive-compatibility constraints, and maximizes
+discounted social surplus.
 
-The lecture proceeds as follows.
+The key recursive idea comes from {cite}`Spear_Srivastava_87`: an
+agent's promised continuation utility is a sufficient state variable.
 
-*  We describe the Spear-Srivastava (1987) recursive formulation of
-   the principal-agent problem.
-*  We describe how Phelan and Townsend (1991) used lotteries to turn
-   the Bellman equation into a **linear program** (LP).
-*  We solve the **static** (one-period) version of the model and
+Phelan and Townsend combine that idea with lotteries, finite grids, and
+linear programming to compute full-information, static
+unobserved-action, and repeated unobserved-action allocations.
+
+We proceed as follows.
+
+*  We review the promised-utility recursion of
+   {cite}`Spear_Srivastava_87`.
+*  We formulate the Phelan-Townsend lottery problem and its finite-grid
+   linear-programming approximation.
+*  We solve the *static* version of the economy and
    replicate Figures 1--4 of {cite}`Phelan_Townsend_91`.
-*  We solve the **repeated** (multi-period) version and replicate
+*  We solve the *repeated* economy and replicate
    Figures 5--12 of {cite}`Phelan_Townsend_91`.
 
 
 ## Spear and Srivastava (1987)
 
-{cite}`Spear_Srivastava_87` presented a recursive formulation of an
-infinitely repeated, discounted principal-agent problem.
+{cite}`Spear_Srivastava_87` showed how to write an infinitely repeated,
+discounted principal-agent problem recursively.
 
 *  A **principal** owns a technology that produces output $q_t$ at
    time $t$ according to a conditional distribution $F(q_t | a_t)$
    that depends on the **effort** $a_t$ chosen by an **agent**.
-*  The principal does **not** observe $a_t$.
-*  The principal **does** observe $q_t$ at the end of period $t$ and
+*  The principal does *not* observe $a_t$.
+*  The principal *does* observe $q_t$ at the end of period $t$ and
    remembers the full history $\{q_s\}_{s=0}^t$.
 *  The principal is risk-neutral and has access to a loan market with
    gross risk-free interest rate $\beta^{-1}$.
@@ -52,21 +59,20 @@ infinitely repeated, discounted principal-agent problem.
    by $E_0 \sum_{t=0}^\infty \beta^t u(c_t, a_t)$, where $u$ is
    increasing in $c$ and decreasing in $a$.
 
-A **contract** $\sigma$ is a sequence of functions whose $t$-th
-component $\sigma_t$ maps the history $q^{t-1} = (q_{t-1}, \ldots,
-q_0)$ into a recommended effort $a_t$ and a promised consumption
-$c_t$.
+A **contract** recommends effort before output is realized and then
+assigns consumption and continuation promises as functions of observed
+output histories.
 
 The principal designs the contract to maximize expected discounted
 surplus $E_0 \sum_{t=0}^\infty \beta^t \{q_t - c_t\}$.
 
-**Recursive representation.**
 Let $w$ denote the discounted expected continuation utility that the
 principal has promised to the agent at the start of a period.
 
-Spear and Srivastava showed that the state $w$ encodes all
-payoff-relevant history and that the principal's problem reduces to
-choosing functions $a(w)$, $c(w,q)$, and $\tilde{w}(w,q)$ subject to
+The promised utility $w$ summarizes payoff-relevant history.  Given
+$w$, the principal chooses a recommended action $a(w)$, an
+output-contingent consumption rule $c(w,q)$, and an output-contingent
+next-period promise $\tilde w(w,q)$ subject to
 
 $$
 w = \int \bigl\{ u[c(w,q),\, a(w)] + \beta\,\tilde{w}(w,q)
@@ -107,37 +113,45 @@ incentive-compatibility constraint {eq}`eq:eq2`.
 ## Phelan and Townsend (1991): Lotteries and Linear Programming
 
 A technical difficulty in problems like {eq}`eq:eq3` is that
-incentive constraints can make the constraint set non-convex.
+incentive constraints can make deterministic contract problems
+non-convex.
 
-{cite}`Phelan_Townsend_91` circumvented this problem by allowing the
-principal to use **lotteries** -- randomizations over actions,
-outputs, consumptions, and continuation values -- and restricting all
-four variables to finite discrete grids.
+{cite}`Phelan_Townsend_91` instead formulate the planning problem in
+terms of **lotteries** over actions, outputs, consumptions, and
+continuation utilities.
 
-This convexification turns the Bellman equation {eq}`eq:eq3` into a
-**linear program**.
+At the aggregate level these probabilities
+are also population fractions, so individual randomization creates no
+aggregate uncertainty in their continuum-agent economy.
 
-**Setup.** Let $P(q | a)$ be a family of discrete conditional
+For computation, all relevant sets are restricted to finite grids.
+
+On
+those grids the Bellman step is a **linear program**.
+
+*Setup.* Let $P(q | a)$ be a family of discrete conditional
 probability distributions over finite sets $Q$ (outputs) and $A$
-(actions). 
+(actions).
 
-Let $C$ and $W$ be finite grids for consumption and
-continuation values.
+Let $C$ and $W'$ be finite grids for current consumption and next-period
+promised utility.
 
-The principal chooses a joint probability $\Pi(a, q, c, w')$ subject
-to:
+For each current promise $w$, the planner chooses a joint probability
+$\Pi^w(a, q, c, w')$ subject to:
 
 $$
-\sum_{C \times W'} \Pi(\bar a, \bar q, c, w') =
+\sum_{c \in C}\sum_{w' \in W'} \Pi^w(\bar a, \bar q, c, w') =
 P(\bar q \mid \bar a)\,
-\sum_{Q \times C \times W'} \Pi(\bar a, q, c, w'),
+\sum_{q \in Q}\sum_{c \in C}\sum_{w' \in W'}
+    \Pi^w(\bar a, q, c, w'),
 \quad \forall\, \bar a,\, \bar q
 $$ (eq:town1a)
 
 $$
-\Pi(a, q, c, w') \geq 0,
+\Pi^w(a, q, c, w') \geq 0,
 \qquad
-\sum_{A \times Q \times C \times W'} \Pi(a, q, c, w') = 1.
+\sum_{a \in A}\sum_{q \in Q}\sum_{c \in C}\sum_{w' \in W'}
+    \Pi^w(a, q, c, w') = 1.
 $$ (eq:town1b)
 
 Equation {eq}`eq:town1a` says that conditional on action $\bar a$,
@@ -150,7 +164,7 @@ The **promise-keeping** constraint is
 
 $$
 w = \sum_{A \times Q \times C \times W'}
-\bigl\{u(c, a) + \beta w'\bigr\}\,\Pi(a, q, c, w').
+\bigl\{u(c, a) + \beta w'\bigr\}\,\Pi^w(a, q, c, w').
 $$ (eq:eq1prime)
 
 The **incentive-compatibility** constraint, for each pair
@@ -158,23 +172,23 @@ $(a, \hat a)$, is
 
 $$
 \sum_{Q \times C \times W'} \bigl\{u(c,a) + \beta w'\bigr\}\,
-\Pi(a, q, c, w')
+\Pi^w(a, q, c, w')
 \;\geq\;
 \sum_{Q \times C \times W'} \bigl\{u(c,\hat a) + \beta w'\bigr\}\,
-\frac{P(q\mid\hat a)}{P(q\mid a)}\,\Pi(a, q, c, w').
+\frac{P(q\mid\hat a)}{P(q\mid a)}\,\Pi^w(a, q, c, w').
 $$ (eq:eq2prime)
 
 The ratio $P(q\mid\hat a)/P(q\mid a)$ is the likelihood ratio that
 updates the probability of outcome $q$ when the agent deviates from
 the recommended action $a$ to $\hat a$.
 
-**Bellman operator as a linear program.** The principal's value
+*Bellman operator as a linear program.* The principal's value
 function satisfies
 
 $$
 v(w) = \max_{\Pi}\
 \sum_{A \times Q \times C \times W'}
-\bigl\{(q - c) + \beta\, v(w')\bigr\}\,\Pi(a, q, c, w'),
+\bigl\{(q - c) + \beta\, v(w')\bigr\}\,\Pi^w(a, q, c, w'),
 $$ (eq:bell2)
 
 where the maximization is over probabilities $\Pi$ satisfying
@@ -182,15 +196,18 @@ where the maximization is over probabilities $\Pi$ satisfying
 {eq}`eq:eq2prime`.
 
 This is a **linear program**: the objective and all constraints are
-linear in the decision variables $\Pi$.
+linear in the decision variables $\Pi^w$.
 
 Because $v(w')$ on the right side of {eq}`eq:bell2` is treated as a
-**fixed** vector from the previous iteration, the Bellman operator
+*fixed* vector from the previous iteration, the Bellman operator
 itself is a linear program.
 
-Phelan and Townsend iterated on this Bellman operator to convergence.
+Phelan and Townsend solve one LP for each grid point $w \in W$ and
+iterate on the surplus function.
 
-At each iteration, an LP is solved for each grid point $w \in W$.
+Their Theorem 4 gives the
+contraction result that justifies this iteration for the
+infinite-horizon problem.
 
 
 ## Implementation
@@ -209,15 +226,18 @@ from warnings import filterwarnings
 
 ## The Static Economy
 
-This section replicates sections II and III of {cite}`Phelan_Townsend_91`,
-which solve the **one-period** version of the model under full information
-and private information (unobserved actions).
+This section replicates Sections II and III of
+{cite}`Phelan_Townsend_91`.
+
+Section II studies the full-information benchmark.
+
+Section III adds
+unobserved actions and the resulting incentive constraints.
 
 ### Setting
 
-The **full information problem** (FIP) maximises the principal's
-expected surplus subject only to probability constraints and the
-promise-keeping constraint:
+The **full-information problem** (FIP) maximizes expected surplus
+subject only to feasibility and promise keeping:
 
 $$
 \max_{\Pi^w}\; \sum_{A \times Q \times C} (q - c)\,\Pi^w(a, q, c)
@@ -240,8 +260,10 @@ $$
 \end{aligned}
 $$
 
-The **unobserved-action problem** adds an incentive-compatibility
-constraint:
+The **unobserved-action problem** adds incentive compatibility.  For
+each recommended action $a$ and each possible deviation $\hat a$, the
+utility from obeying must be at least as large as the utility from
+deviating while preserving the same output-contingent consumption rule:
 
 $$
 \text{C4:}\quad
@@ -249,12 +271,13 @@ $$
 \;\geq\;
 \sum_{Q \times C} U(\hat a, c)\,
 \frac{P(q\mid\hat a)}{P(q\mid a)}\,\Pi^w(a,q,c),
-\quad \forall\, a,\, \hat a.
+\quad \forall\, a,\, \hat a \in A.
 $$
 
 ### Parameterisation
 
-Following {cite}`Phelan_Townsend_91`, we use
+Following {cite}`Phelan_Townsend_91`, we use the period utility
+function
 
 $$
 U(a, c) = 2\sqrt{c} + 2\sqrt{1-a}
@@ -276,6 +299,12 @@ and conditional output probabilities
 |  0.2    |   0.6    |   0.4    |
 |  0.4    |   0.4    |   0.6    |
 |  0.6    |   0.25   |   0.75   |
+
+These are the parameter values used to construct Figures 1--8 in the
+paper.
+
+The static grid of promised utility values below spans the
+interval $[1,5]$, matching the horizontal scale in Figures 1--4.
 
 ```{code-cell} ipython3
 def u(a, c):
@@ -332,7 +361,7 @@ def solve_static_problem(W=None,
     s_W: 1-D array
         The optimal values of surplus for each w in w_vec.
     Pi: 4-D array
-        The probility of (a, q, c) given w.
+        The probability of (a, q, c) given w.
     '''
     
     # Define parameter
@@ -397,9 +426,11 @@ def solve_static_problem(W=None,
 ### Figures 1-4
 
 ```{note}
-Figures 3 and 4 require a simplex-based solver to reproduce
-the vertices reported in {cite}`Phelan_Townsend_91`.  We use
-`cp.HIGHS`, which is available on Apple Silicon.
+Phelan and Townsend report solutions computed with standard revised
+simplex methods.  We use HiGHS through CVXPY.  At degenerate utility
+grid points, a different LP solver can select a different optimal
+lottery, so some consumption schedules can differ slightly even when
+the surplus function is unchanged.
 ``` 
 
 ```{code-cell} ipython3
@@ -504,12 +535,24 @@ plt.show()
 
 ## The Repeated Economy
 
-We now extend the model to multiple periods.
+We now move from the one-period economy to the finite- and
+infinite-horizon economies studied in Section IV of
+{cite}`Phelan_Townsend_91`.
+
+The planner maximizes discounted social surplus.
+
+As in the paper, this
+can be interpreted as allowing society to borrow and lend at the constant
+gross interest rate $\beta^{-1}$, so that discounted surplus is the
+right feasibility criterion.
 
 ### Formulation
 
-The repeated problem replaces the static LP {eq}`eq:bell2` with a
-Bellman equation.  The principal's value function $s(w)$ satisfies
+The recursive repeated problem chooses today's action, output,
+consumption, and next-period promised utility.
+
+The surplus function
+$s(w)$ satisfies
 
 $$
 s(w) = \max_{\Pi^w}\;
@@ -552,15 +595,20 @@ Constraints C5--C8 are the dynamic analogues of C1--C4.
   
 * Constraint C8 is incentive compatibility.
 
-We iterate the Bellman operator to convergence.
+For a finite horizon, the one-period surplus function is used to solve
+the two-period problem, the two-period surplus function is used to solve
+the three-period problem, and so on.
+
+For the infinite horizon, we
+iterate on the Bellman operator until the surplus function is stable.
 
 At each iteration, a separate LP is solved for each grid point
 $w \in W$.
 
 ### The Two-Step Factored Algorithm
 
-Solving the four-dimensional LP at each step of value function
-iteration is computationally demanding.
+Solving the full LP over $(a,q,c,w')$ at each grid point is
+computationally demanding.
 
 Section VI of {cite}`Phelan_Townsend_91` proposes a factored
 algorithm that splits each period into two sub-steps, exploiting the
@@ -570,10 +618,14 @@ $$
 U(a, c) = 2\sqrt{1-a} + 2\sqrt{c}.
 $$
 
-**Step 1** (action and output, before consumption is decided).
+*Step 1* (action and output, before consumption is assigned).
 
 Let $w^m$ be the **intermediate** promised utility after the output
 is observed but before consumption is allocated.
+
+Thus $w^m$ includes
+the utility from current consumption and the discounted next-period
+promise, but not the current effort utility.
 
 Solve
 
@@ -603,7 +655,7 @@ $$
 \end{aligned}
 $$
 
-**Step 2** (consumption allocation).
+*Step 2* (consumption allocation).
 Given $w^m$, solve
 
 $$
@@ -620,15 +672,17 @@ $$
 \end{aligned}
 $$
 
-Step 2 is solved first (for all $w^m \in W^m$) to obtain $s^m(w^m)$.
+Step 2 is solved first computationally, for all $w^m \in W^m$, to
+obtain $s^m(w^m)$.
 
-Then Step 1 is solved using $s^m$ as input.
+Step 1 then uses this intermediate surplus function
+as input.
 
 This factored algorithm significantly reduces computation time because
 each sub-LP is smaller than the original joint LP.
 
 The two-step formulation is an approximation when $W^m$ is
-discretised: as the number of grid points $N_m$ grows, it converges
+discretized: as the number of grid points $N_m$ grows, it converges
 to the exact solution.
 
 ### Functions
@@ -673,16 +727,16 @@ def solve_repeated_problem_2(W=None,
     problem_type: str, "full information" or "unobserved-actions"
         The problem type, i.e. the full information problem or the unobserved-action problem.
     β: float, optional
-        The discouted factor. The value is 0.8 by default.
+        The discount factor. The value is 0.8 by default.
         
     Returns
     -------
     s_W: 1-D array
         The optimal values of surplus for each w in w_vec.
     Pi_W_s1: 4-D array
-        The probility of (a, q, w_m) given w.
+        The probability of (a, q, w_m) given w.
     Pi_W_m_s2: 3-D array
-        The probility of (c, w_prime) given w_m.
+        The probability of (c, w_prime) given w_m.
     '''
     
     n_A, n_Q, n_C, n_W = len(A), len(Q), len(C), len(W) 
@@ -714,7 +768,7 @@ def solve_repeated_problem_2(W=None,
     # Create the problem of step 2
     problem_s2 = cp.Problem(obj_s2, C5_s2 + C7_s2)
     
-    # Solve the probelm of step 2
+    # Solve the problem of step 2
     s_W_m = np.zeros(n_W_m)
     Pi_W_m_s2 = np.zeros((n_W_m, n_C, n_W_prime))
     for w_m, w_m_ind in zip(W_m, W_m_ind):
@@ -784,7 +838,7 @@ def solve_repeated_problem_2(W=None,
 ```
 
 ```{code-cell} ipython3
-# Define the function that solve the infinite-period or finite-period economy
+# Define the function that solves the infinite-period or finite-period economy
 def solve_multi_period_economy_2(A=None,
                                  Q=None,
                                  C=None,
@@ -816,7 +870,7 @@ def solve_multi_period_economy_2(A=None,
         The number of periods. If T is None, the algorithm solves the infinite-period economy. If T is some
         integer, the algorithm solves the T-period economy. By default, T is None.
     β: float, optional
-        The discouted factor in (0,1). The value is 0.8 by default.
+        The discount factor in (0,1). The value is 0.8 by default.
     N: int, optional
         The length of discretized parameter space W.
     N_m: int, optional
@@ -833,13 +887,13 @@ def solve_multi_period_economy_2(A=None,
     s_W: 1-D array
         The optimal values of convergent surplus for each w in w_vec.
     Pi_W_s1: 4-D array
-        The probility of (a, q, w_m) given w.
+        The probability of (a, q, w_m) given w.
     Pi_W_m_s2: 3-D array
-        The probility of (c, w_prime) given w_m.
+        The probability of (c, w_prime) given w_m.
     '''
     
     if β >= 1 or β <= 0:
-        raise ValueError('β should lie in [0,1]')
+        raise ValueError('β must lie in (0, 1)')
         
     # Define the function u[a,c]
     def u(a, c):
@@ -943,9 +997,10 @@ Bellman iteration, which causes memory to accumulate when many
 iterations are needed -- a serious issue for $\beta$ close to 1.
 
 The function `solve_multi_period_economy_vfi` fixes this by building
-the two sub-problems **once** with CVXPY `Parameter` objects for the
+the two sub-problems *once* with CVXPY `Parameter` objects for the
 components that change between iterations ($\Phi^{s2}$ and $\Phi^{s1}$).
-It also applies **Anderson acceleration** with a history of $m$
+
+It also applies *Anderson acceleration* with a history of $m$
 recent iterates to speed up convergence, and accepts a `max_iter`
 cap to prevent infinite loops.
 
@@ -1144,7 +1199,7 @@ def solve_multi_period_economy_vfi(A=None,
 We use the same parameters as for the static economy, plus a
 discount factor $\beta = 0.8$ and grids of $N = N_m = 100$ points.
 
-**Initial values.**
+*Initial values.*
 We initialise the value function iteration with the one-period
 (static) solution, scaled to discounted-sum units.
 
@@ -1169,7 +1224,7 @@ out_time = time()
 print("Time(s):", round(out_time - in_time, 3))
 ```
 
-**Finite-period economy ($T = 3$).**
+*Finite-period economy ($T = 3$).*
 
 ```{code-cell} ipython3
 in_time = time()
@@ -1197,14 +1252,11 @@ plt.title("Figure\n Optimized surplus function", y=-0.2)
 plt.show()
 ```
 
-**Infinite-period economy.**
+*Infinite-period economy.*
 
 ```{code-cell} ipython3
-{
-    "tags": [
-        "hide-output"
-    ]
-}
+:tags: [hide-output]
+
 in_time = time()
 s_W, Pi_W_s1, Pi_W_m_s2 = solve_multi_period_economy_2(
     A, Q, C, P, "unobserved-actions",
@@ -1287,6 +1339,17 @@ plt.text(5.4, -4.0, "T = 1 Unobserved Action", size=12)
 plt.show()
 ```
 
+Figure 5 compares three surplus functions.
+
+The full-information frontier is highest.
+
+The infinite-horizon unobserved-action frontier is
+below it because incentive constraints are added, but it lies above the
+frontier obtained by repeating the one-period unobserved-action contract.
+
+The difference between the two unobserved-action curves is the gain from
+history dependence.
+
 #### Figure 6
 
 ```{code-cell} ipython3
@@ -1312,6 +1375,13 @@ plt.text(14, 0.60, "T = infinity Unobserved Action (top)", size=10)
 plt.text(14, 0.55, "T = 1 Unobserved Action (bottom)", size=10)
 plt.show()
 ```
+
+History dependence also raises effort relative to repeated one-period
+contracts.
+
+Near the lower utility bound, incentive compatibility forces
+low effort, but away from that bound continuation promises help provide
+incentives without relying only on current consumption.
 
 #### Figure 7
 
@@ -1380,6 +1450,13 @@ plt.annotate(r"$\}$",fontsize=35, xy=(10.5, 0), xytext=(9.5, -0.3))
 plt.show()
 ```
 
+Figure 7 shows how dynamic contracts smooth current consumption relative
+to the static unobserved-action economy.
+
+Output still affects rewards,
+but a large part of the reward and punishment is shifted into future
+promised utility.
+
 #### Figure 8
 
 ```{code-cell} ipython3
@@ -1441,12 +1518,27 @@ plt.annotate(r"$\}$",fontsize=25, xy=(10.1, 10.1), xytext=(12.5, 8.5))
 plt.show()
 ```
 
+Figure 8 displays the expected next-period promise conditional on
+current $w$, recommended action $a$, and realized output $q$.
+
+High
+output generally raises continuation utility and low output lowers it.
+
+At the endpoints of the feasible promise set, the transition stays on the
+45-degree line because only the corresponding extreme plan can deliver
+that endpoint.
+
 For figures 9--12, {cite}`Phelan_Townsend_91` used $\beta = 0.95$.
+
+They report that Figures 5--8 are easier to read at $\beta = 0.8$, while
+the simulated individual paths and distributions in Figures 9--12 are
+more informative at the higher discount factor.
 
 We now use `solve_multi_period_economy_vfi` -- which builds the CVXPY
 problems once and applies Anderson acceleration -- to solve the
 infinite-horizon economy at $\beta = 0.95$ with a grid of $N = N_m = 50$
 points.
+
 Starting from the static solution rescaled to discounted-sum units, the
 iteration converges to tolerance $10^{-4}$.
 
@@ -1571,6 +1663,13 @@ for i in range(4):
         W_new, C, s_W_new, 80, Pi_new, Ew_beta, seed=(12345 + i))
 ```
 
+The simulations start from the grid point at which surplus is closest to
+zero.
+
+This corresponds to the ex ante symmetric, or "fair", allocation
+in the paper: it is the highest common promised utility that can be
+assigned while keeping discounted social surplus nonnegative.
+
 #### Figure 9
 
 ```{code-cell} ipython3
@@ -1656,7 +1755,8 @@ plt.show()
 
 ### Economics
 
-**Moral hazard and the cost of private information.**
+*Moral hazard and the cost of private information.*
+
 When the principal cannot observe the agent's effort, the optimal contract
 must balance two competing objectives: *insurance* (smoothing the agent's
 consumption across output realizations) and *incentives* (rewarding high
@@ -1664,48 +1764,56 @@ output to make effort attractive).
 
 The unobserved-action surplus function in Figure 1 lies everywhere below
 the full-information frontier, and the gap between them measures the
-deadweight loss that private information imposes.
+surplus cost of unobserved effort.
 
-**Dynamic contracts and promised utility.**
+*Dynamic contracts and promised utility.*
+
 The recursive formulation of {cite}`Spear_Srivastava_87` compresses all
 payoff-relevant history into a single scalar state: the discounted
 expected continuation utility $w$ that the principal has promised the
 agent.
 
-By tracking $w$ rather than the full history of outputs, the problem
-becomes tractable.
+By tracking $w$ rather than the full history of outputs, the dynamic
+contracting problem becomes tractable.
 
 Figures 7--8 show that under the optimal infinite-horizon contract the
 principal rewards high output by granting the agent a higher continuation
-utility and punishes low output by lowering it -- a dynamic incentive
-device that induces effort without relying on large contemporaneous
-consumption differences alone.
+utility and punishes low output by lowering it.
 
-**Immiseration.**
-Figures 9--12 illustrate a celebrated result of the repeated moral-hazard
-literature: over time the distribution of the agent's continuation utility
-drifts toward the lower boundary of the feasible set.
+Continuation promises
+therefore substitute partly for large contemporaneous consumption
+spreads.
 
-Agents with persistently low output accumulate a history of downward
-utility adjustments, eventually receiving near-zero consumption.
+*Diversity over time.*
 
-This *immiseration* result emerges from a trade-off between incentive
-provision and long-run insurance.
+Figures 9--12 illustrate the paper's central computational message:
+starting from a common initial promise, dynamic incentives generate
+non-trivial individual histories and cross-sectional dispersion in
+consumption and promised utility.
+
+With the finite grids used here, the endpoints of the promise set are
+absorbing.
+
+The simulations should therefore be read as finite-grid
+illustrations of how history dependence spreads the distribution over
+time, not as a separate theorem about the limiting distribution.
 
 ### Technical Tricks
 
-**Lotteries and convexification.**
+*Lotteries and convexification.*
+
 Incentive constraints can render the set of feasible contracts non-convex,
 making standard optimization techniques unreliable.
 
-{cite}`Phelan_Townsend_91` circumvent this by allowing the principal to
+{cite}`Phelan_Townsend_91` circumvented this by allowing the planner to
 choose a joint *lottery* $\Pi(a, q, c, w')$ over actions, outputs,
 consumptions, and continuation values.
 
 Because any mixture of feasible lotteries is itself feasible, the
 constraint set becomes convex, and global optima are well-defined.
 
-**Linear programming.**
+*Linear programming.*
+
 With finite grids, the convexified Bellman equation is a linear program:
 the objective $(q - c + \beta v(w'))$ and every constraint are linear in
 $\Pi$.
@@ -1715,16 +1823,19 @@ function iteration reduces to solving one LP per grid point per
 iteration -- a task handled efficiently by modern LP solvers such as
 HiGHS.
 
-**Dynamic programming.**
+*Dynamic programming.*
+
 The promised-utility state variable $w$ makes the problem recursive.
+
 At each iteration the Bellman operator maps a surplus function $v$ to an
 updated surplus function $Tv$; repeated application converges to the
 infinite-horizon fixed point.
 
-Initializing from the scaled static solution substantially reduces the
-number of iterations required.
+The implementation initializes the iteration from the scaled static
+solution, which is a useful numerical starting point.
 
-**Two-step factored algorithm.**
+*Two-step factored algorithm.*
+
 The additive separability $U(a,c) = 2\sqrt{1-a} + 2\sqrt{c}$ allows the
 four-dimensional LP to be split into two smaller sub-problems.
 
@@ -1736,25 +1847,22 @@ Because each sub-LP has far fewer decision variables than the full joint
 LP, computation is substantially faster and the approach scales to finer
 grids.
 
-**Dynamic programming squared.**
-This lecture is an instance of what Lars Ljungqvist and Thomas Sargent call
-**dynamic programming squared** in their textbook
+*Dynamic programming squared.*
+
+This lecture is closely related to what Lars Ljungqvist and Thomas
+Sargent call *dynamic programming squared* in
 {cite}`Ljungqvist2012`.
 
-The phrase refers to problems in which a value or value function from
-one Bellman equation appears as a key argument inside a second Bellman
-equation.
+The phrase refers to recursive problems in which one continuation object
+is carried as a state variable inside another recursive problem.
 
 Here the surplus function $s(w)$ -- the solution to the principal's
 outer dynamic program -- has the agent's continuation utility $w$ as its
-state variable, and $w$ itself is determined by an *inner* promise-keeping
-constraint that enforces the agent's Bellman equation.
-
-Two Bellman equations are therefore nested: the principal's value
-function $v(w)$ and the agent's promised-utility evolution
-$w' = \tilde w(w, q)$ are solved simultaneously.
+state variable, while feasible movements in $w$ are governed by
+promise-keeping and incentive constraints.
 
 The same architecture reappears throughout this lecture series.
+
 In {doc}`Stackelberg plans <dyn_stack>` the Stackelberg leader's
 value function takes the followers' competitive-equilibrium value
 function as an argument.
@@ -1773,8 +1881,7 @@ as an argument, with $\theta$ governed by its own Bellman equation.
 In {doc}`Unemployment Insurance <un_insure>` the planner's
 contract-design problem embeds the worker's continuation utility
 as the state variable in an outer surplus-maximization program,
-producing the same nested structure that drives immiseration in
-the present lecture.
+producing a closely related nested recursive structure.
 
 In all of these settings, the inner dynamic program defines a
 state variable -- a promised utility, a marginal value, or a
@@ -1824,6 +1931,7 @@ Agency costs are highest near intermediate levels of promised utility
 because at those values the principal most values inducing high effort
 (output is valuable) while the agent still requires meaningful
 consumption-state variation to be incentivized.
+
 At low $w$ the agent is near subsistence and effort is low anyway;
 at high $w$ the agent is nearly fully insured and the marginal incentive
 cost of each additional unit of effort is small.
@@ -1895,9 +2003,11 @@ plt.show()
 With $P_{flat}$ output carries less statistical information about effort:
 the likelihood ratio $P(q \mid \hat{a}) / P(q \mid a)$ is closer to 1
 for all deviations $\hat{a} \neq a$.
+
 The incentive-compatibility constraint {eq}`eq:eq2prime` therefore becomes
 harder to satisfy: large consumption rewards for high output must be
 offered to deter deviations, crowding out insurance.
+
 As a result the principal extracts less surplus and induces less effort
 than under the baseline $P$ -- the surplus function shifts down and
 expected effort falls.
