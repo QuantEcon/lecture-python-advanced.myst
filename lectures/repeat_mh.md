@@ -3,19 +3,18 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
-    format_version: 0.13
-    jupytext_version: 1.14.4
 kernelspec:
-  display_name: Python (quantecon)
+  display_name: Python 3
   language: python
-  name: quantecon
+  name: python3
 ---
+
 # Repeated Moral Hazard
 
 ## Overview
 
 This lecture computes the information-constrained optima studied by
-{cite}`Phelan_Townsend_91`.
+{cite:t}`Phelan_Townsend_91`.
 
 Their paper studies a continuum-agent economy with unobserved effort.
 
@@ -23,7 +22,7 @@ The planner chooses lotteries over individual histories, subject to
 promise-keeping and incentive-compatibility constraints, and maximizes
 discounted social surplus.
 
-The key recursive idea comes from {cite}`Spear_Srivastava_87`: an
+The key recursive idea comes from {cite:t}`Spear_Srivastava_87`: an
 agent's promised continuation utility is a sufficient state variable.
 
 Phelan and Townsend combine that idea with lotteries, finite grids, and
@@ -42,7 +41,7 @@ We proceed as follows.
    Figures 5--12 of {cite}`Phelan_Townsend_91`.
 
 
-## Spear and Srivastava (1987)
+## Promised-utility Recursion
 
 {cite}`Spear_Srivastava_87` showed how to write an infinitely repeated,
 discounted principal-agent problem recursively.
