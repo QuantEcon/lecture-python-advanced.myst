@@ -3,10 +3,12 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.19.1
 kernelspec:
-  display_name: Python 3
-  language: python
   name: python3
+  display_name: Python 3 (ipykernel)
+  language: python
 ---
 
 # Repeated Moral Hazard
@@ -32,18 +34,18 @@ unobserved-action, and repeated unobserved-action allocations.
 We proceed as follows.
 
 *  We review the promised-utility recursion of
-   {cite}`Spear_Srivastava_87`.
+   {cite:t}`Spear_Srivastava_87`.
 *  We formulate the Phelan-Townsend lottery problem and its finite-grid
    linear-programming approximation.
 *  We solve the *static* version of the economy and
-   replicate Figures 1--4 of {cite}`Phelan_Townsend_91`.
+   replicate Figures 1--4 of {cite:t}`Phelan_Townsend_91`.
 *  We solve the *repeated* economy and replicate
-   Figures 5--12 of {cite}`Phelan_Townsend_91`.
+   Figures 5--12 of {cite:t}`Phelan_Townsend_91`.
 
 
 ## Promised-utility Recursion
 
-{cite}`Spear_Srivastava_87` showed how to write an infinitely repeated,
+{cite:t}`Spear_Srivastava_87` showed how to write an infinitely repeated,
 discounted principal-agent problem recursively.
 
 *  A **principal** owns a technology that produces output $q_t$ at
@@ -68,7 +70,9 @@ surplus $E_0 \sum_{t=0}^\infty \beta^t \{q_t - c_t\}$.
 Let $w$ denote the discounted expected continuation utility that the
 principal has promised to the agent at the start of a period.
 
-The promised utility $w$ summarizes payoff-relevant history.  Given
+The promised utility $w$ summarizes payoff-relevant history.  
+
+Given
 $w$, the principal chooses a recommended action $a(w)$, an
 output-contingent consumption rule $c(w,q)$, and an output-contingent
 next-period promise $\tilde w(w,q)$ subject to
@@ -208,8 +212,13 @@ Their Theorem 4 gives the
 contraction result that justifies this iteration for the
 infinite-horizon problem.
 
-
 ## Implementation
+
+In addition to what's in Anaconda, this lecture will need the following libraries:
+
+```{code-cell} ipython3
+!pip install cvxpy
+```
 
 We import some Python packages.
 
@@ -221,7 +230,6 @@ import gc
 import matplotlib.pyplot as plt
 from warnings import filterwarnings
 ```
-
 
 ## The Static Economy
 
@@ -430,7 +438,7 @@ simplex methods.  We use HiGHS through CVXPY.  At degenerate utility
 grid points, a different LP solver can select a different optimal
 lottery, so some consumption schedules can differ slightly even when
 the surplus function is unchanged.
-``` 
+```
 
 ```{code-cell} ipython3
 W_static = np.linspace(1, 5, 100)
@@ -530,7 +538,6 @@ plt.ylim([0.0, 2.25])
 plt.title("Figure 4\n Full Information Consumption", y=-0.2)
 plt.show()
 ```
-
 
 ## The Repeated Economy
 
@@ -1277,7 +1284,6 @@ plt.title("Figure\n Optimized surplus function", y=-0.2)
 plt.text(15, 6.5, "Infinity Unobserved Action", size=12)
 plt.show()
 ```
-
 
 ### Recovering $\Pi^w(a, q, c, w')$
 
