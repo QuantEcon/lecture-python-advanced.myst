@@ -38,8 +38,10 @@ key empirical regularities of emerging market economies**: high and volatile
 interest rate spreads, limited consumption risk-sharing, and crisis-like
 dynamics in which capital inflows suddenly stop.
 
-The key mechanism: moral hazard severely restricts *state contingency* in
-repayment schedules.  In the language of {cite}`Atkeson1991`, the optimal
+The key mechanism is that  moral hazard severely restricts *state contingency* in
+repayment schedules.  
+
+In the language of {cite}`Atkeson1991`, the optimal
 contract is nearly *non-contingent* on output — a theoretical justification for
 why simple debt contracts dominate in practice.
 
@@ -54,6 +56,7 @@ for the borrower and $\beta_c$ for the lender).
 ### Technology and Preferences
 
 The environment is a small open economy with an infinitely-lived borrower.
+
 The borrower starts each period with net worth $n$ (output net of debt
 repayment), borrows $b$ from a short-lived risk-neutral lender, invests $I$,
 and consumes
@@ -71,6 +74,7 @@ $$
 
 where $\lambda : \mathbb{R}_+ \to [0,1]$ is strictly increasing and strictly
 concave, so higher investment stochastically dominates lower investment.
+
 Tsyrennikov restricts to two output states and sets
 
 $$
@@ -80,6 +84,7 @@ $$
 
 so $g_{0,1}=1,\;g_{0,2}=0,\;g_{1,1}=0,\;g_{1,2}=1$ and
 $\Delta g_j \equiv g_{1j} - g_{0j} = (-1, 1)$.
+
 The functional form $\lambda(I) = \min(I^\nu, 1)$ with $\nu \in (0,1)$
 is strictly concave and gives an interior optimum.
 
@@ -125,7 +130,10 @@ Note that the continuation values depend only on $Y_1$ and $Y_2$, not on $n$.
 
 ### The Recursive Contract
 
-The state variable is net worth $n$.  The value function satisfies the Bellman
+The state variable is net worth $n$.
+
+
+The value function satisfies the Bellman
 equation
 
 $$
@@ -145,10 +153,14 @@ $$
 -\theta\,u'(c) + \beta\,\lambda'(I)\,\sum_j \Delta g_j\,V(Y_j-d_j) \geq 0
 $$
 
-does **not** alter the solution.  The key step is showing that at any feasible
+does **not** alter the solution.
+
+The key step is showing that at any feasible
 contract, $\sum_j \Delta g_j\,V(Y_j-d_j) \geq 0$, which ensures the
 borrower's objective is strictly concave in $I$ and the FOC holds with
-equality.  This result (analogous to {cite}`Rogerson1985`) validates the
+equality.
+
+This result (analogous to {cite}`Rogerson1985`) validates the
 relaxed formulation used in the numerical solution.
 
 With the FOA, the optimality condition for investments is
@@ -158,7 +170,9 @@ $$
 \tag{FOA}
 $$
 
-where $n_j' = Y_j - d_j$ is next period's net worth after state $j$.  A
+where $n_j' = Y_j - d_j$ is next period's net worth after state $j$.
+
+A
 higher spread $V(n_2') - V(n_1')$ — more reward in the high state —
 supports a higher investment level.
 
@@ -175,8 +189,12 @@ where $\mu \geq 0$ is the multiplier on the FOA constraint and $\phi \geq 0$
 on the lender endowment $b \leq M$.
 
 Because $\Delta g_1 = -1 < 0$, the factor for the low state is less than one:
-$V'(n_1') > V'(n)$.  By concavity of $V$, the borrower's net worth falls in
-the low state.  This is the **immiseration** property: moral hazard forces
+$V'(n_1') > V'(n)$.
+
+By concavity of $V$, the borrower's net worth falls in
+the low state.
+
+This is the **immiseration** property: moral hazard forces
 the borrower to bear more risk than would be optimal with full information
 (cf.\ {cite}`ThomasWorrall1990`, {cite}`AtkesonLucas1992`).
 
@@ -187,6 +205,8 @@ R(n) \;=\; \frac{u'(c(n))}{\beta\,\sum_j g(Y_j\mid I(n))\,u'(c(n_j'(n)))},
 $$
 
 where $c(n_j'(n))$ is next period's consumption if state $j$ is realised.
+
+
 This rate is counter-cyclical: when $n$ is low, past incentive provision has
 depressed the continuation values, raising the marginal utility spread and
 increasing $R$.
@@ -505,9 +525,12 @@ print("→ Moral hazard justifies why simple non-contingent debt is optimal")
 ```
 
 A key finding of {cite}`Tsyrennikov2013` emerges immediately: the risk-sharing
-index is close to **zero** throughout the state space.  Moral hazard requires
+index is close to **zero** throughout the state space.
+
+Moral hazard requires
 spreading continuation values to incentivise investment, but this is achieved
 by differentiating *net worth* $n_j'$, not repayment $d_j = Y_j - n_j'$.
+
 The near-equality $d_1 \approx d_2$ means repayment is essentially
 **non-contingent on output** — the model rationalises why emerging market
 borrowers use plain debt instruments rather than GDP-linked securities.
@@ -704,9 +727,12 @@ Fig. 4:
 ### MH Versus Limited Enforcement
 
 A crucial result of {cite}`Tsyrennikov2013` is that **limited enforcement adds
-little** to the model's performance relative to moral hazard alone.  The
-intuition: under LE (no moral hazard), optimal repayments are *highly state
-contingent* (RSI ≈ 0.8), providing near-full insurance.  The borrower's net
+little** to the model's performance relative to moral hazard alone.
+
+Under LE (no moral hazard), optimal repayments are *highly state
+contingent* (RSI ≈ 0.8), providing near-full insurance.
+
+The borrower's net
 worth drifts *upward* under LE (unlike MH where it drifts downward), so
 interest rate spreads are transitory rather than persistent.
 
@@ -749,16 +775,22 @@ plt.show()
 
 Under moral hazard, $\mathbb{E}[n'] < n$: net worth drifts down and the
 borrower spends substantial time near the borrowing limit, generating
-persistent interest rate spreads.  Under limited enforcement,
+persistent interest rate spreads.
+
+Under limited enforcement,
 $\mathbb{E}[n'] \geq (\beta/\beta_c)\,n$: net worth drifts toward a stationary
 level and the borrower eventually escapes financial stress.
 
 ## Empirical Test
 
-{cite}`Tsyrennikov2013` proposes a simple test to distinguish moral hazard from
-limited enforcement.  After a low past output realisation ($y_{t-1} = Y_1$),
+{cite}`Tsyrennikov2013` proposes a  test to distinguish moral hazard from
+limited enforcement.
+
+After a low past output realisation ($y_{t-1} = Y_1$),
 the MH contract lowers net worth sharply, reducing future consumption
-smoothing.  This prediction is:
+smoothing.  
+
+This prediction is:
 
 $$
 \text{MH economy}: \quad
@@ -766,7 +798,9 @@ $$
 $$
 
 while the LE economy gives the opposite ordering (insurance is better after
-low realisations).  Using Argentine quarterly data (1993–2005), the observed
+low realisations).
+
+Using Argentine quarterly data (1993–2005), the observed
 correlations are 0.98 (after low output) vs. 0.91 (after high output) —
 **consistent with moral hazard**.
 
@@ -913,8 +947,3 @@ print(" Moral hazard forces this near-equality, making debt non-contingent.")
 ```
 ````
 
-## References
-
-```{bibliography}
-:filter: docname in docnames
-```
