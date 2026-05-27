@@ -11,14 +11,15 @@ kernelspec:
   language: python
 ---
 
-# Repeated Moral Hazard
+# Repeated moral hazard
 
 ## Overview
 
-This lecture computes the information-constrained optima studied by
-{cite:t}`Phelan_Townsend_91`.
+This lecture computes information-constrained optima in the
+Phelan-Townsend repeated moral-hazard environment
+{cite}`Phelan_Townsend_91`.
 
-Their paper studies a continuum-agent economy with unobserved effort.
+The environment is a continuum-agent economy with unobserved effort.
 
 The planner chooses lotteries over individual histories, subject to
 promise-keeping and incentive-compatibility constraints, and maximizes
@@ -31,19 +32,20 @@ Phelan and Townsend combine that idea with lotteries, finite grids, and
 linear programming to compute full-information, static
 unobserved-action, and repeated unobserved-action allocations.
 
-We proceed as follows.
+The lecture proceeds from the recursive formulation to the computational
+implementation.
 
 *  We review the promised-utility recursion of
    {cite:t}`Spear_Srivastava_87`.
 *  We formulate the Phelan-Townsend lottery problem and its finite-grid
    linear-programming approximation.
-*  We solve the *static* version of the economy and
-   replicate Figures 1--4 of {cite:t}`Phelan_Townsend_91`.
-*  We solve the *repeated* economy and replicate
-   Figures 5--12 of {cite:t}`Phelan_Townsend_91`.
+*  We use the static economy to isolate the surplus cost of hidden
+   effort and the role of output-contingent consumption.
+*  We use the repeated economy to show how continuation promises become
+   an additional incentive instrument and generate dispersion over time.
 
 
-## Promised-utility Recursion
+## Promised-utility recursion
 
 {cite:t}`Spear_Srivastava_87` showed how to write an infinitely repeated,
 discounted principal-agent problem recursively.
@@ -99,9 +101,10 @@ Equation {eq}`eq:eq2` is the **incentive-compatibility** constraint:
 the agent must prefer the recommended action $a(w)$ over any
 deviation $\hat a$.
 
-The principal's value function $v(w)$ -- the maximum expected
-discounted surplus attainable when the agent has been promised $w$ --
-satisfies the Bellman equation
+The principal's value function $v(w)$ is the maximum expected
+discounted surplus attainable when the agent has been promised $w$.
+
+It satisfies the Bellman equation
 
 $$
 v(w) = \max_{a,\,c,\,\tilde{w}}\
@@ -113,28 +116,84 @@ subject to the promise-keeping constraint {eq}`eq:eq1` and the
 incentive-compatibility constraint {eq}`eq:eq2`.
 
 
-## Phelan and Townsend (1991): Lotteries and Linear Programming
+## Lotteries and linear programming
 
 A technical difficulty in problems like {eq}`eq:eq3` is that
 incentive constraints can make deterministic contract problems
 non-convex.
 
-{cite}`Phelan_Townsend_91` instead formulate the planning problem in
+```{prf:example} A non-convex deterministic contract set
+:label: repeat_mh_nonconvex_example
+:class: dropdown
+
+Consider a one-period version of the problem with two outputs,
+$q_H$ and $q_L$, and two actions, high effort $H$ and low effort $L$.
+Suppose that
+
+$$
+P(q_H \mid H)=3/4,
+\qquad
+P(q_H \mid L)=1/4,
+$$
+
+and that the agent's utility is
+
+$$
+u(c,H)=\sqrt c - 1/2,
+\qquad
+u(c,L)=\sqrt c.
+$$
+
+A deterministic contract that recommends high effort pays $c_H$ after
+$q_H$ and $c_L$ after $q_L$.
+Incentive compatibility requires
+
+$$
+\frac34 \sqrt{c_H}+\frac14\sqrt{c_L}-\frac12
+\geq
+\frac14 \sqrt{c_H}+\frac34\sqrt{c_L},
+$$
+
+or
+
+$$
+\sqrt{c_H}-\sqrt{c_L}\geq 1.
+$$
+
+The two contracts $(c_H,c_L)=(1,0)$ and $(c_H,c_L)=(9,4)$ both satisfy
+this constraint.
+But their midpoint, $(c_H,c_L)=(5,2)$, violates it because
+
+$$
+\sqrt 5-\sqrt 2 \approx 0.82 < 1.
+$$
+
+Thus the set of deterministic contracts satisfying incentive
+compatibility is not convex.
+```
+
+The Phelan-Townsend approach formulates the planning problem in
 terms of **lotteries** over actions, outputs, consumptions, and
 continuation utilities.
 
 At the aggregate level these probabilities
 are also population fractions, so individual randomization creates no
-aggregate uncertainty in their continuum-agent economy.
+aggregate uncertainty in a continuum-agent economy.
 
-For computation, all relevant sets are restricted to finite grids.
+For computation, we "grid" the relevant sets of
+possible utilities, allowing only finitely many points.
 
-On
-those grids the Bellman step is a **linear program**.
+With finite sets, or finite approximations to sets, $A$, $Q$, and $C$,
+the planner's problem becomes a finite-dimensional optimization problem
+with linear constraints.
 
-*Setup.* Let $P(q | a)$ be a family of discrete conditional
-probability distributions over finite sets $Q$ (outputs) and $A$
-(actions).
+Each stage of the computation therefore amounts to solving a finite
+**linear programming** problem.
+
+We begin with the finite objects in the planning problem.
+
+Let $P(q | a)$ be a family of discrete conditional probability
+distributions over finite sets $Q$ (outputs) and $A$ (actions).
 
 Let $C$ and $W'$ be finite grids for current consumption and next-period
 promised utility.
@@ -185,8 +244,8 @@ The ratio $P(q\mid\hat a)/P(q\mid a)$ is the likelihood ratio that
 updates the probability of outcome $q$ when the agent deviates from
 the recommended action $a$ to $\hat a$.
 
-*Bellman operator as a linear program.* The principal's value
-function satisfies
+The corresponding Bellman operator is also a linear program.
+The principal's value function satisfies
 
 $$
 v(w) = \max_{\Pi}\
@@ -205,8 +264,8 @@ Because $v(w')$ on the right side of {eq}`eq:bell2` is treated as a
 *fixed* vector from the previous iteration, the Bellman operator
 itself is a linear program.
 
-Phelan and Townsend solve one LP for each grid point $w \in W$ and
-iterate on the surplus function.
+The algorithm solves one LP for each grid point $w \in W$ and iterates
+on the surplus function.
 
 Their Theorem 4 gives the
 contraction result that justifies this iteration for the
@@ -217,6 +276,8 @@ infinite-horizon problem.
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 ```{code-cell} ipython3
+:tags: [hide-output]
+
 !pip install cvxpy
 ```
 
@@ -228,18 +289,20 @@ import cvxpy as cp
 from time import time
 import gc
 import matplotlib.pyplot as plt
-from warnings import filterwarnings
 ```
 
-## The Static Economy
+## The static economy
 
-This section replicates Sections II and III of
-{cite}`Phelan_Townsend_91`.
+A one-period economy is the cleanest place to isolate the
+informational friction.
 
-Section II studies the full-information benchmark.
+This isolates the static informational friction before the dynamic
+promised-utility channel is introduced.
 
-Section III adds
-unobserved actions and the resulting incentive constraints.
+We first compute the full-information benchmark, where effort can be
+controlled directly.
+
+We then make effort private information and add incentive compatibility.
 
 ### Setting
 
@@ -283,8 +346,7 @@ $$
 
 ### Parameterisation
 
-Following {cite}`Phelan_Townsend_91`, we use the period utility
-function
+The baseline utility specification is
 
 $$
 U(a, c) = 2\sqrt{c} + 2\sqrt{1-a}
@@ -307,11 +369,12 @@ and conditional output probabilities
 |  0.4    |   0.4    |   0.6    |
 |  0.6    |   0.25   |   0.75   |
 
-These are the parameter values used to construct Figures 1--8 in the
-paper.
+These parameter values define the baseline numerical economy for the
+static comparisons and the first dynamic calculations.
 
 The static grid of promised utility values below spans the
-interval $[1,5]$, matching the horizontal scale in Figures 1--4.
+interval $[1,5]$, covering the promise range emphasized in the
+one-period analysis.
 
 ```{code-cell} ipython3
 def u(a, c):
@@ -326,229 +389,242 @@ P = np.array([[0.9, 0.1],
               [0.25, 0.75]])
 ```
 
-### Solving the Static Problem
+### Solving the static problem
 
-The function `solve_static_problem` solves both the FIP and the
-unobserved-action problem for an array of promised utility values $w$.
+The function `solve_static_problem` solves one LP for each promised
+utility value $w$.
 
-It implements constraints C1--C3 for the full information case and
-adds C4 for the unobserved-action case.
+The code keeps the notation close to the mathematical problem:
+`π[a_i][q_i, c_i]` is the lottery probability
+$\Pi^w(a_i,q_i,c_i)$, `Φ[q_i, c_i]` is output net of consumption,
+and `U[a_i, c_i]` is period utility.
+
+For the full-information problem we impose C1--C3.
+
+For the unobserved-action problem we add C4.
 
 ```{code-cell} ipython3
-# Define the function that solves the static problem
-def solve_static_problem(W=None,
-                         u=None,
-                         A=None,
-                         Q=None,
-                         C=None,
-                         P=None,
-                         problem_type=None):
-    '''
-    Function: Solve the static problem
-    
-    Parameters
-    ----------
-    W: 1-D array
-        The expected utility.
-    u: function
-        The utility function in terms of actions and consumptions.
-    A: 1-D array
-        The finite set of possible actions.
-    Q: 1-D array
-        The finite set of possible outputs.
-    C: 1-D array
-        The finite set of possible consumptions.
-    P: 2-D array
-        The probability matrix of outputs given an action.
-    problem_type: str, "full information" or "unobserved-actions"
-        The problem type, i.e. the full information problem or the unobserved-action problem.
-        
+def solve_static_problem(W, u, A, Q, C, P, problem_type):
+    """
+    Solve the static Phelan-Townsend LP on a grid of promises W.
+
     Returns
     -------
-    s_W: 1-D array
-        The optimal values of surplus for each w in w_vec.
-    Pi: 4-D array
-        The probability of (a, q, c) given w.
-    '''
-    
-    # Define parameter
-    n_A, n_Q, n_C = len(A), len(Q), len(C)
-    A_ind, Q_ind, C_ind = range(n_A), range(n_Q), range(n_C)
-    
-    Phi = np.array([[q-c for c in C] for q in Q])
+    s_W : ndarray
+        Optimal surplus at each w in W.
+    π_W : ndarray
+        Lottery probabilities π_W[w_i, a_i, q_i, c_i].
+    """
+    n_a, n_q, n_c = len(A), len(Q), len(C)
+    A_i, Q_i = range(n_a), range(n_q)
+
+    Φ = np.array([[q - c for c in C] for q in Q])
     U = np.array([[u(a, c) for c in C] for a in A])
-    
+
     w = cp.Parameter()
-        
-    # Define variable Pi_x
-    Pi_list = list(np.zeros(n_A))
-    
-    for a_ind in A_ind:
-        Pi_list[a_ind] = cp.Variable((n_Q, n_C))
+    π = [cp.Variable((n_q, n_c), nonneg=True) for _ in A_i]
 
-    # Define objective function
-    obj_expr = cp.sum([cp.sum(cp.multiply(Pi_list[a_ind], Phi))
-                       for a_ind in A_ind])
-    obj = cp.Maximize(obj_expr)
-    
-    # Define constraints
-    C1 = [cp.sum([cp.sum([cp.sum(cp.multiply(Pi_list[a_ind][q_ind, :],
-                                             U[a_ind, :])) for a_ind in A_ind]) 
-                  for q_ind in Q_ind]) == w]
-    C2 = [(cp.sum(Pi_list[a_ind], axis=1)[q_ind] == P[a_ind, q_ind] * cp.sum(Pi_list[a_ind])) 
-          for a_ind in A_ind for q_ind in Q_ind]
-    C3 = [cp.sum([cp.sum(Pi_list[a_ind]) for a_ind in A_ind]) == 1] + \
-            [(Pi_list[a_ind] >= 0) for a_ind in A_ind]
-        
-    problem_type = problem_type.lower()
-    if problem_type == "full information":
-        constraints = C1 + C2 + C3
-    else:
-        C4 = [(cp.sum([cp.sum(cp.multiply(Pi_list[a_ind][q_ind, :], U[a_ind, :]))
-                       for q_ind in Q_ind]) >= 
-               cp.sum([cp.sum(cp.multiply(Pi_list[a_ind][q_ind, :],
-                                          U[a_ind_hat, :])) * P[a_ind_hat, q_ind]/P[a_ind, q_ind] 
-                       for q_ind in Q_ind])) 
-              for a_ind in A_ind for a_ind_hat in A_ind]
-        constraints = C1 + C2 + C3 + C4
+    surplus = cp.sum([
+        cp.sum(cp.multiply(Φ, π[a_i]))
+        for a_i in A_i
+    ])
 
-    # Create the problem
-    problem = cp.Problem(obj, constraints)
-    
-    # Initialize output variables
-    s_W = np.zeros(len(W))
-    Pi = np.zeros((len(W), len(A), len(Q), len(C)))
-    
-    # Solve the problem
-    for i in range(len(W)):
-        w.value = W[i]
+    promise = [
+        cp.sum([
+            cp.sum(cp.multiply(U[a_i], π[a_i][q_i, :]))
+            for a_i in A_i
+            for q_i in Q_i
+        ]) == w
+    ]
+
+    output_law = [
+        cp.sum(π[a_i][q_i, :]) == P[a_i, q_i] * cp.sum(π[a_i])
+        for a_i in A_i
+        for q_i in Q_i
+    ]
+
+    probability = [cp.sum([cp.sum(π[a_i]) for a_i in A_i]) == 1]
+
+    constraints = promise + output_law + probability
+
+    if problem_type.lower() != "full information":
+        incentives = []
+        for a_i in A_i:
+            for a_hat_i in A_i:
+                obey = cp.sum([
+                    cp.sum(cp.multiply(U[a_i], π[a_i][q_i, :]))
+                    for q_i in Q_i
+                ])
+                deviate = cp.sum([
+                    cp.sum(cp.multiply(U[a_hat_i], π[a_i][q_i, :]))
+                    * P[a_hat_i, q_i] / P[a_i, q_i]
+                    for q_i in Q_i
+                ])
+                incentives.append(obey >= deviate)
+        constraints += incentives
+
+    problem = cp.Problem(cp.Maximize(surplus), constraints)
+
+    s_W = np.full(len(W), np.nan)
+    π_W = np.full((len(W), n_a, n_q, n_c), np.nan)
+    for w_i, w_value in enumerate(W):
+        w.value = w_value
         problem.solve(solver=cp.HIGHS)
-        s_W[i] = obj_expr.value
-        for a_ind in A_ind:
-            Pi[i, a_ind, :, :] = Pi_list[a_ind].value
-    
-    return s_W, Pi
+        if problem.status in (cp.OPTIMAL, cp.OPTIMAL_INACCURATE):
+            s_W[w_i] = surplus.value
+            for a_i in A_i:
+                π_W[w_i, a_i] = π[a_i].value
+
+    return s_W, π_W
 ```
 
-### Figures 1-4
+### Static allocations
 
 ```{note}
-Phelan and Townsend report solutions computed with standard revised
-simplex methods.  We use HiGHS through CVXPY.  At degenerate utility
-grid points, a different LP solver can select a different optimal
-lottery, so some consumption schedules can differ slightly even when
-the surplus function is unchanged.
+The original calculations used standard revised simplex methods.
+
+We use HiGHS through CVXPY.
+
+At degenerate utility grid points, different LP solvers can select
+different optimal lotteries.
+
+Some consumption schedules can therefore differ slightly even when the
+surplus function is unchanged.
 ```
 
 ```{code-cell} ipython3
 W_static = np.linspace(1, 5, 100)
-filterwarnings("ignore")
 
-s_W_full, Pi_full = solve_static_problem(W_static, u, A, Q, C, P,
+s_W_full, π_full = solve_static_problem(W_static, u, A, Q, C, P,
                                           "full information")
-s_W_unobs, Pi_unobs = solve_static_problem(W_static, u, A, Q, C, P,
+s_W_unobs, π_unobs = solve_static_problem(W_static, u, A, Q, C, P,
                                             "unobserved-actions")
 ```
 
+The arrays returned by `solve_static_problem` have a direct economic
+interpretation.
+
+`s_W_full` and `s_W_unobs` are the optimized surplus frontiers.
+
+`π_full` and `π_unobs` store the optimal lotteries over
+$(a,q,c)$ at each promised utility.
+
+Grid points outside a problem's feasible promise set are recorded as
+`nan`, so Matplotlib leaves those parts of the graph blank.
+
 ```{code-cell} ipython3
-# Figure 1 – Surplus functions
+def expected_consumption_static(π_W, C):
+    π0 = np.nan_to_num(π_W, nan=0.0)
+    mass = π0.sum(axis=-1)
+    numerator = np.einsum('c,waqc->waq', C, π0)
+    Ec = np.full(mass.shape, np.nan)
+    np.divide(numerator, mass, out=Ec, where=mass > 1e-10)
+    return Ec
+```
+
+```{code-cell} ipython3
 plt.figure(figsize=(6.5, 6.5))
-plt.plot(W_static, s_W_full)
-plt.plot(W_static, s_W_unobs)
+plt.plot(W_static, s_W_full, label="Full information")
+plt.plot(W_static, s_W_unobs, label="Hidden effort")
 plt.hlines(0, 1.0, 5.0, linestyle="dashed")
 plt.xlabel("w")
 plt.ylabel("s(w)")
 plt.xlim([1.0, 5.0])
 plt.ylim([-1.5, 2.0])
-plt.title("Figure 1\n Optimized surplus function", y=-0.2)
-plt.text(2.5, 1.6, "Full Information", size=15)
-plt.text(1.5, 0.8, "Unobserved Action", size=15)
+plt.title("Surplus frontiers", y=-0.2)
+plt.legend()
 plt.show()
 ```
 
+The full-information frontier is higher because the planner can choose
+effort directly.
+
+The unobserved-action frontier lies below it because effort must be
+induced with state-contingent rewards.
+
+The gap is the agency cost of private effort.
+
 ```{code-cell} ipython3
-# Figure 2 – Expected effort
-Ea_full  = np.einsum('a,waqc->w', A, Pi_full)
-Ea_unobs = np.einsum('a,waqc->w', A, Pi_unobs)
+Ea_full  = np.einsum('a,waqc->w', A, π_full)
+Ea_unobs = np.einsum('a,waqc->w', A, π_unobs)
 
 plt.figure(figsize=(6.5, 6.5))
-plt.plot(W_static, Ea_full)
-plt.plot(W_static, Ea_unobs)
+plt.plot(W_static, Ea_full, label="Full information")
+plt.plot(W_static, Ea_unobs, label="Hidden effort")
 plt.xlabel("w")
 plt.ylabel("E{a(w)}")
 plt.xlim([1.0, 5.0])
 plt.ylim([0.0, 0.8])
-plt.title("Figure 2\n Actions", y=-0.2)
-plt.text(2.3, 0.65, "Full Information", size=15)
-plt.text(2.6, 0.15, "Unobserved Action", size=15)
+plt.title("Expected effort", y=-0.2)
+plt.legend()
 plt.show()
 ```
+
+Here the code integrates the action grid against the lottery
+probabilities, producing $E\{a(w)\}$.
+
+Under full information, effort is chosen to maximize surplus at each
+promise.
+
+With unobserved action, expected effort is lower where incentives are
+costly to provide.
 
 ```{code-cell} ipython3
-# Figure 3 – Unobserved-action consumption schedule
-Pi_sum_unobs = Pi_unobs.sum(axis=-1)  # shape (W, A, Q)
-Ec_unobs = (np.einsum('c,waqc->waq', C, Pi_unobs)
-            / np.where(Pi_sum_unobs > 1e-12, Pi_sum_unobs, 1.0))
+Ec_unobs = expected_consumption_static(π_unobs, C)
 
-l, m = len(A), len(Q)
-X, Y = range(l), range(m)
-
-plt.figure(figsize=(6.5, 6.5))
-for x in X:
-    for y in Y:
-        plt.plot(W_static, Ec_unobs[:, x, y])
-plt.xlabel("w")
-plt.ylabel("E(c) given a, q, w")
-plt.xlim([1.0, 5.0])
-plt.ylim([0.0, 2.25])
-plt.title("Figure 3\n Unobserved Action Consumption", y=-0.3)
-plt.annotate("a=.4, q=2", xy=(2.5, 0.5), xytext=(1.3, 0.7),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.2, q=2", xy=(3.7, 1.5), xytext=(2.2, 1.65),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=0, q=(1,2)", xy=(4.8, 2.05), xytext=(3.0, 2.15),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.2,\nq=2", xy=(2.0, 0.15), xytext=(1.3, 0.24),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.4, q=1", xy=(3.0, 0.10), xytext=(3.6, 0.2),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.2,\nq=1", xy=(4.0, 0.9), xytext=(4.3, 0.75),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=0, q=(1,2)\na=.2, q=1", xy=(2.1, 0),
-             xytext=(1.8, -0.3), arrowprops={"arrowstyle":"-"})
-plt.annotate(r"$\{$", fontsize=25, xy=(2.1, 0), xytext=(1.6, -0.3))
-plt.annotate(r"$\}$", fontsize=25, xy=(2.1, 0), xytext=(2.5, -0.3))
+fig, axes = plt.subplots(1, len(Q), figsize=(11, 4), sharey=True)
+for q_i, ax in enumerate(axes):
+    for a_i, a in enumerate(A):
+        ax.plot(W_static, Ec_unobs[:, a_i, q_i], label=f"a={a:g}")
+    ax.set_title(f"q={Q[q_i]:g}")
+    ax.set_xlabel("w")
+    ax.set_xlim([1.0, 5.0])
+    ax.set_ylim([0.0, 2.25])
+axes[0].set_ylabel("E(c | w, a, q)")
+axes[-1].legend(title="Action", loc="lower right")
+fig.suptitle("Consumption when effort is hidden")
+fig.tight_layout()
 plt.show()
 ```
+
+This cell conditions on the recommended action and realized output, then
+computes expected consumption.
+
+The unobserved-action schedule uses current consumption as an incentive
+device: high-output histories tend to receive higher consumption, while
+low-output histories receive less.
 
 ```{code-cell} ipython3
-# Figure 4 – Full-information consumption schedule
-Pi_sum_full = Pi_full.sum(axis=-1)  # shape (W, A, Q)
-Ec_full = (np.einsum('c,waqc->waq', C, Pi_full)
-           / np.where(Pi_sum_full > 1e-12, Pi_sum_full, 1.0))
+Ec_full = expected_consumption_static(π_full, C)
 
-plt.figure(figsize=(6.5, 6.5))
-for x in X:
-    for y in Y:
-        plt.plot(W_static, Ec_full[:, x, y])
-plt.xlabel("w")
-plt.ylabel("E{c(w)}")
-plt.xlim([1.0, 5.0])
-plt.ylim([0.0, 2.25])
-plt.title("Figure 4\n Full Information Consumption", y=-0.2)
+fig, axes = plt.subplots(1, len(Q), figsize=(11, 4), sharey=True)
+for q_i, ax in enumerate(axes):
+    for a_i, a in enumerate(A):
+        ax.plot(W_static, Ec_full[:, a_i, q_i], label=f"a={a:g}")
+    ax.set_title(f"q={Q[q_i]:g}")
+    ax.set_xlabel("w")
+    ax.set_xlim([1.0, 5.0])
+    ax.set_ylim([0.0, 2.25])
+axes[0].set_ylabel("E(c | w, a, q)")
+axes[-1].legend(title="Action", loc="lower right")
+fig.suptitle("Consumption under full information")
+fig.tight_layout()
 plt.show()
 ```
 
-## The Repeated Economy
+With full information, output does not need to carry incentive rewards.
 
-We now move from the one-period economy to the finite- and
-infinite-horizon economies studied in Section IV of
-{cite}`Phelan_Townsend_91`.
+Consumption therefore depends primarily on the promise $w$ rather than
+on output.
+
+## The repeated economy
+
+We now move from the one-period economy to finite- and infinite-horizon
+contracts.
 
 The planner maximizes discounted social surplus.
 
-As in the paper, this
-can be interpreted as allowing society to borrow and lend at the constant
+This can be interpreted as allowing society to borrow and lend at the constant
 gross interest rate $\beta^{-1}$, so that discounted surplus is the
 right feasibility criterion.
 
@@ -611,20 +687,23 @@ iterate on the Bellman operator until the surplus function is stable.
 At each iteration, a separate LP is solved for each grid point
 $w \in W$.
 
-### The Two-Step Factored Algorithm
+### The two-step factored algorithm
 
 Solving the full LP over $(a,q,c,w')$ at each grid point is
 computationally demanding.
 
-Section VI of {cite}`Phelan_Townsend_91` proposes a factored
-algorithm that splits each period into two sub-steps, exploiting the
-additive separability of the utility function
+We use a factored algorithm that splits each period into two sub-steps.
+
+The split exploits the additive separability of the utility function
 
 $$
 U(a, c) = 2\sqrt{1-a} + 2\sqrt{c}.
 $$
 
-*Step 1* (action and output, before consumption is assigned).
+#### Step 1: action and output
+
+Before consumption is assigned, the planner chooses the action, output,
+and intermediate promised utility.
 
 Let $w^m$ be the **intermediate** promised utility after the output
 is observed but before consumption is allocated.
@@ -661,7 +740,8 @@ $$
 \end{aligned}
 $$
 
-*Step 2* (consumption allocation).
+#### Step 2: consumption allocation
+
 Given $w^m$, solve
 
 $$
@@ -693,14 +773,19 @@ to the exact solution.
 
 ### Functions
 
-The function `solve_repeated_problem_2` implements one Bellman
-iteration using the two-step algorithm.
+The function `solve_repeated_problem_2` implements one Bellman step using
+the two-step algorithm.
 
-The function `solve_multi_period_economy_2` iterates to convergence
-(or for a fixed number of periods $T$).
+The variables in the code follow the two sub-problems above.
+
+`π_w_m` is the lottery over $(c,w')$ conditional on $w^m$, while
+`π_w` is the lottery over $(a,q,w^m)$ conditional on $w$.
+
+The function `solve_multi_period_economy_2` then repeats this Bellman
+step to convergence, or works backward for a fixed number of periods
+$T$.
 
 ```{code-cell} ipython3
-# Define the function that solves the dynamic problem at one iteration
 def solve_repeated_problem_2(W=None,
                              W_m=None,
                              A=None,
@@ -712,8 +797,8 @@ def solve_repeated_problem_2(W=None,
                              problem_type=None,
                              β=0.8):
     '''
-    Function: Solve the dynamic problem at one iteration
-    
+    One Bellman update using the two-step algorithm.
+
     Parameters
     ----------
     W: 1-D array
@@ -739,9 +824,9 @@ def solve_repeated_problem_2(W=None,
     -------
     s_W: 1-D array
         The optimal values of surplus for each w in w_vec.
-    Pi_W_s1: 4-D array
+    π_W_s1: 4-D array
         The probability of (a, q, w_m) given w.
-    Pi_W_m_s2: 3-D array
+    π_W_m_s2: 3-D array
         The probability of (c, w_prime) given w_m.
     '''
     
@@ -750,42 +835,34 @@ def solve_repeated_problem_2(W=None,
     A_ind, Q_ind, C_ind = range(n_A), range(n_Q), range(n_C)
     W_ind, W_m_ind, W_prime_ind = range(n_W), range(n_W_m), range(n_W_prime)
     
-    # Problem of step 2
-    
-    # Define parameters
+    # Step 2
     Phi_s2 = np.array([[β * s_w_prime - c for s_w_prime in s_W_prime] for c in C])
     U_disc_s2 = np.array([[2 * c**0.5 + β * w_prime
                            for w_prime in W_prime] for c in C])
     
     w_m_para = cp.Parameter()
-    
-    
-    # Define variables
-    Pi_w_m = cp.Variable((n_C, n_W_prime))
+    π_w_m = cp.Variable((n_C, n_W_prime))
 
-    # Define the objective function
-    obj_expr_s2 = cp.sum(cp.multiply(Phi_s2, Pi_w_m))
+    obj_expr_s2 = cp.sum(cp.multiply(Phi_s2, π_w_m))
     obj_s2 = cp.Maximize(obj_expr_s2)
     
-    # Define constraints
-    C5_s2 = [cp.sum(cp.multiply(U_disc_s2, Pi_w_m)) == w_m_para]
-    C7_s2 = [cp.sum(Pi_w_m) == 1] + [Pi_w_m >= 0]
+    C5_s2 = [cp.sum(cp.multiply(U_disc_s2, π_w_m)) == w_m_para]
+    C7_s2 = [cp.sum(π_w_m) == 1] + [π_w_m >= 0]
     
-    # Create the problem of step 2
     problem_s2 = cp.Problem(obj_s2, C5_s2 + C7_s2)
     
-    # Solve the problem of step 2
     s_W_m = np.zeros(n_W_m)
-    Pi_W_m_s2 = np.zeros((n_W_m, n_C, n_W_prime))
+    π_W_m_s2 = np.zeros((n_W_m, n_C, n_W_prime))
     for w_m, w_m_ind in zip(W_m, W_m_ind):
         w_m_para.value = w_m
         problem_s2.solve(solver = cp.HIGHS)
+        if problem_s2.status not in (cp.OPTIMAL, cp.OPTIMAL_INACCURATE):
+            raise RuntimeError(f"Step 2 LP failed at w_m={w_m}: "
+                               f"{problem_s2.status}")
         s_W_m[w_m_ind] = obj_expr_s2.value
-        Pi_W_m_s2[w_m_ind, :, :] = Pi_w_m.value
+        π_W_m_s2[w_m_ind, :, :] = π_w_m.value
     
-    # Problem of step 1
-    
-    # Define parameters
+    # Step 1
     Phi_s1 = np.array([[(q+s_w_m) for s_w_m in s_W_m] for q in Q])
     U_disc_s1 = np.array([[[2 * (1 - a)**0.5 + w_m
                             for w_m in W_m] for q in Q] for a in A])
@@ -796,55 +873,52 @@ def solve_repeated_problem_2(W=None,
                               for a_hat_ind in A_ind])
     
     w_para = cp.Parameter()
-    
-    # Define variables
-    Pi_w_list = list(np.zeros(n_A))
+
+    π_w = list(np.zeros(n_A))
     for a_ind in A_ind:
-        Pi_w_list[a_ind] = cp.Variable((n_Q, n_W_m))
+        π_w[a_ind] = cp.Variable((n_Q, n_W_m))
     
-    # Define the objective function
-    obj_expr_s1 = cp.sum([cp.sum(cp.multiply(Phi_s1, Pi_w_list[a_ind]))
+    obj_expr_s1 = cp.sum([cp.sum(cp.multiply(Phi_s1, π_w[a_ind]))
                           for a_ind in A_ind])
     obj_s1 = cp.Maximize(obj_expr_s1)
-                                       
-    # Define constraints
+
     C5_s1 = [cp.sum([cp.sum(cp.multiply(U_disc_s1[a_ind, :, :],
-                                        Pi_w_list[a_ind]))
+                                        π_w[a_ind]))
                      for a_ind in A_ind]) == w_para]
-    C6_s1 = [(cp.sum(Pi_w_list[a_ind][q_ind, :]) == P[a_ind, q_ind] *\
-              cp.sum(Pi_w_list[a_ind])) 
+    C6_s1 = [(cp.sum(π_w[a_ind][q_ind, :]) == P[a_ind, q_ind] *\
+              cp.sum(π_w[a_ind]))
              for q_ind in Q_ind for a_ind in A_ind]
-    C7_s1 = [cp.sum([cp.sum(Pi_w_list[a_ind]) for a_ind in A_ind]) == 1]
-    C7_s1 = C7_s1 + [(Pi_w_list[a_ind] >= 0) for a_ind in A_ind]
-    
+    C7_s1 = [cp.sum([cp.sum(π_w[a_ind]) for a_ind in A_ind]) == 1]
+    C7_s1 = C7_s1 + [(π_w[a_ind] >= 0) for a_ind in A_ind]
+
     problem_type = problem_type.lower()
     if problem_type == "full information":
         constraints_s1 = C5_s1 + C6_s1 + C7_s1
     else:
         C8_s1 = [(cp.sum(cp.multiply(U_disc_s1[a_ind, :, :],
-                                     Pi_w_list[a_ind])) >= 
+                                     π_w[a_ind])) >=
                  cp.sum(cp.multiply(U_disc_hat_s1[a_hat_ind, a_ind, :, :],
-                                    Pi_w_list[a_ind]))) 
-                 for a_ind in A_ind for a_hat_ind in A_ind] 
+                                    π_w[a_ind])))
+                 for a_ind in A_ind for a_hat_ind in A_ind]
         constraints_s1 = C5_s1 + C6_s1 + C7_s1 + C8_s1
-    
-    # Create the problem of step 1
+
     problem_s1 = cp.Problem(obj_s1, constraints_s1)
-    
-    # Solve the problem of step 1
+
     s_W = np.zeros(n_W)
-    Pi_W_s1 = np.zeros((n_W, n_A, n_Q, n_W_m))
+    π_W_s1 = np.zeros((n_W, n_A, n_Q, n_W_m))
     for w, w_ind in zip(W, W_ind):
         w_para.value = w
         problem_s1.solve(solver = cp.HIGHS)
+        if problem_s1.status not in (cp.OPTIMAL, cp.OPTIMAL_INACCURATE):
+            raise RuntimeError(f"Step 1 LP failed at w={w}: "
+                               f"{problem_s1.status}")
         s_W[w_ind] = obj_expr_s1.value
         for a_ind in A_ind:
-            Pi_W_s1[w_ind, a_ind, :, :] = Pi_w_list[a_ind].value                
-    return s_W, Pi_W_s1, Pi_W_m_s2
+            π_W_s1[w_ind, a_ind, :, :] = π_w[a_ind].value
+    return s_W, π_W_s1, π_W_m_s2
 ```
 
 ```{code-cell} ipython3
-# Define the function that solves the infinite-period or finite-period economy
 def solve_multi_period_economy_2(A=None,
                                  Q=None,
                                  C=None,
@@ -858,7 +932,7 @@ def solve_multi_period_economy_2(A=None,
                                  tol=1e-8,
                                  verbose=False):
     '''
-    Function: Solve the multi-period problem, either infinite-period or finite-period
+    Solve the finite- or infinite-horizon economy.
     
     Parameters
     ----------
@@ -892,21 +966,19 @@ def solve_multi_period_economy_2(A=None,
     -------
     s_W: 1-D array
         The optimal values of convergent surplus for each w in w_vec.
-    Pi_W_s1: 4-D array
+    π_W_s1: 4-D array
         The probability of (a, q, w_m) given w.
-    Pi_W_m_s2: 3-D array
+    π_W_m_s2: 3-D array
         The probability of (c, w_prime) given w_m.
     '''
     
     if β >= 1 or β <= 0:
         raise ValueError('β must lie in (0, 1)')
         
-    # Define the function u[a,c]
     def u(a, c):
         return c**0.5/0.5 + (1-a)**0.5/0.5
         
     if T is None:
-        # Discretize the parameter space W and W_m
         problem_type = problem_type.lower()
         if problem_type == "full information":
             w_l = u(A.max(), C.min())/(1 - β)
@@ -920,20 +992,18 @@ def solve_multi_period_economy_2(A=None,
         W_m_u = β * w_u + 2 * C.max()**0.5
         W_m = np.linspace(W_m_l, W_m_u, N_m)
 
-        # Assign initial value for s_W
         if s_W_0 is not None:
             s_W_prime = s_W_0
         else:
             s_W_prime = np.zeros(N)
 
-        # Iterate
         optimal = False
         iteration = 1
         while not optimal:
             if verbose:
                 print('Iteration %i in process' % iteration)
             start_time = time()
-            s_W, Pi_W_s1, Pi_W_m_s2 = solve_repeated_problem_2(W=W, W_m=W_m,
+            s_W, π_W_s1, π_W_m_s2 = solve_repeated_problem_2(W=W, W_m=W_m,
                                                                A=A, Q=Q,
                                                                C=C, W_prime=W,
                                                                s_W_prime=s_W_prime,
@@ -944,7 +1014,7 @@ def solve_multi_period_economy_2(A=None,
             if verbose:
                 print('Iteration %i finished in:' % iteration,
                       round(end_time - start_time, 3), 's')
-                print('---------')
+                print('---')
             
             if np.max(np.abs(s_W - s_W_prime)) <= tol:
                 optimal = True
@@ -954,7 +1024,6 @@ def solve_multi_period_economy_2(A=None,
             iteration += 1
     
     if T is not None:
-        # Discretize the parameter space W
         W_mat = np.zeros((T, N))
         
         problem_type = problem_type.lower()
@@ -968,11 +1037,10 @@ def solve_multi_period_economy_2(A=None,
                           np.linspace(w_l, w_u, N).reshape(1, N), 
                           axis=0)
         
-        # Solve the 1-period economy
         if verbose:
             print('Solving the 1-period economy')
-            print('-------')
-        s_W, Pi = solve_static_problem(W=W_mat[0, :], u=u,
+            print('---')
+        s_W, π = solve_static_problem(W=W_mat[0, :], u=u,
                                        A=A, Q=Q, C=C, P=P,
                                        problem_type=problem_type)
 
@@ -980,12 +1048,12 @@ def solve_multi_period_economy_2(A=None,
             for t in range(2, T+1):
                 if verbose:
                     print('Solving the %i-period economy' % t)
-                    print('-------')
+                    print('---')
                 s_W_prime = np.copy(s_W)
                 W_m_l = β*W_mat[t-2,:].min() + 2*C.min()**0.5
                 W_m_u = β*W_mat[t-2,:].max() + 2*C.max()**0.5
                 W_m = np.linspace(W_m_l, W_m_u, N_m)
-                s_W, Pi_W_s1, Pi_W_m_s2 = solve_repeated_problem_2(W=W_mat[t-1,:],
+                s_W, π_W_s1, π_W_m_s2 = solve_repeated_problem_2(W=W_mat[t-1,:],
                                                                    W_m=W_m, A=A,
                                                                    Q=Q, C=C, 
                                                                    W_prime=W_mat[t-2,:],
@@ -993,14 +1061,16 @@ def solve_multi_period_economy_2(A=None,
                                                                    P=P, 
                                                                    problem_type=problem_type,
                                                                    β=β)
-    return s_W, Pi_W_s1, Pi_W_m_s2
+    return s_W, π_W_s1, π_W_m_s2
 ```
 
-### Improved Solver: Pre-built Problems with Anderson Acceleration
+### Improved solver: pre-built problems with Anderson acceleration
 
 The original solver rebuilds all CVXPY problem objects on every
 Bellman iteration, which causes memory to accumulate when many
-iterations are needed -- a serious issue for $\beta$ close to 1.
+iterations are needed.
+
+This is a serious issue for $\beta$ close to 1.
 
 The function `solve_multi_period_economy_vfi` fixes this by building
 the two sub-problems *once* with CVXPY `Parameter` objects for the
@@ -1028,8 +1098,8 @@ def solve_multi_period_economy_vfi(A=None,
     Infinite-horizon VFI using the two-step factored algorithm.
 
     Improvements over solve_multi_period_economy_2:
-      * CVXPY problems are built once with Parameter objects --
-        no memory leak across iterations.
+      * CVXPY problems are built once with Parameter objects,
+        so there is no memory leak across iterations.
       * Anderson acceleration (window m_anderson) reduces
         the number of Bellman iterations needed.
       * max_iter cap prevents unbounded runtime.
@@ -1037,8 +1107,8 @@ def solve_multi_period_economy_vfi(A=None,
     Returns
     -------
     s_W       : 1-D array, converged surplus function on W
-    Pi_W_s1   : 4-D array, Pi(a, q, w_m | w)
-    Pi_W_m_s2 : 3-D array, Pi(c, w' | w_m)
+    π_W_s1   : 4-D array, π(a, q, w_m | w)
+    π_W_m_s2 : 3-D array, π(c, w' | w_m)
     W         : 1-D array, the utility grid used
     """
     if β >= 1 or β <= 0:
@@ -1062,96 +1132,89 @@ def solve_multi_period_economy_vfi(A=None,
     n_A, n_Q, n_C = len(A), len(Q), len(C)
     A_ind, Q_ind  = range(n_A), range(n_Q)
 
-    # Fixed arrays (depend only on grids and P, not on s_W)
+    # Terms that do not change across iterations.
     U_disc_s2 = np.array([[2 * c**0.5 + β * wp
-                            for wp in W] for c in C])         # (n_C, N)
+                            for wp in W] for c in C])
     U_disc_s1 = np.array([[[2 * (1 - a)**0.5 + wm
                              for wm in W_m] for q in Q]
-                           for a in A])                        # (n_A, n_Q, N_m)
+                           for a in A])
     U_disc_hat_s1 = np.array([[[[
         (2 * (1 - A[ah])**0.5 + W_m[wmi]) * P[ah, qi] / P[ai, qi]
         for wmi in range(N_m)] for qi in Q_ind]
-        for ai in A_ind] for ah in A_ind])                     # (n_A, n_A, n_Q, N_m)
+        for ai in A_ind] for ah in A_ind])
 
-    # ----------------------------------------------------------
-    # Step-2 CVXPY problem  (built once)
-    # ----------------------------------------------------------
-    Phi_s2_param = cp.Parameter((n_C, N))   # updated each outer iteration
+    # Step 2 problem.
+    Phi_s2_param = cp.Parameter((n_C, N))
     w_m_para     = cp.Parameter()
-    Pi_w_m       = cp.Variable((n_C, N))
+    π_w_m        = cp.Variable((n_C, N))
 
-    obj_expr_s2  = cp.sum(cp.multiply(Phi_s2_param, Pi_w_m))
-    C5_s2 = [cp.sum(cp.multiply(U_disc_s2, Pi_w_m)) == w_m_para]
-    C7_s2 = [cp.sum(Pi_w_m) == 1, Pi_w_m >= 0]
+    obj_expr_s2  = cp.sum(cp.multiply(Phi_s2_param, π_w_m))
+    C5_s2 = [cp.sum(cp.multiply(U_disc_s2, π_w_m)) == w_m_para]
+    C7_s2 = [cp.sum(π_w_m) == 1, π_w_m >= 0]
     problem_s2   = cp.Problem(cp.Maximize(obj_expr_s2), C5_s2 + C7_s2)
 
-    # ----------------------------------------------------------
-    # Step-1 CVXPY problem  (built once)
-    # ----------------------------------------------------------
-    Phi_s1_param = cp.Parameter((n_Q, N_m))  # updated after step 2
+    # Step 1 problem.
+    Phi_s1_param = cp.Parameter((n_Q, N_m))
     w_para       = cp.Parameter()
-    Pi_w_list    = [cp.Variable((n_Q, N_m)) for _ in A_ind]
+    π_w          = [cp.Variable((n_Q, N_m)) for _ in A_ind]
 
-    obj_expr_s1  = cp.sum([cp.sum(cp.multiply(Phi_s1_param, Pi_w_list[ai]))
+    obj_expr_s1  = cp.sum([cp.sum(cp.multiply(Phi_s1_param, π_w[ai]))
                             for ai in A_ind])
-    C5_s1 = [cp.sum([cp.sum(cp.multiply(U_disc_s1[ai], Pi_w_list[ai]))
+    C5_s1 = [cp.sum([cp.sum(cp.multiply(U_disc_s1[ai], π_w[ai]))
                      for ai in A_ind]) == w_para]
-    C6_s1 = [(cp.sum(Pi_w_list[ai][qi, :]) ==
-               P[ai, qi] * cp.sum(Pi_w_list[ai]))
+    C6_s1 = [(cp.sum(π_w[ai][qi, :]) ==
+               P[ai, qi] * cp.sum(π_w[ai]))
               for qi in Q_ind for ai in A_ind]
-    C7_s1 = ([cp.sum([cp.sum(Pi_w_list[ai]) for ai in A_ind]) == 1] +
-              [Pi_w_list[ai] >= 0 for ai in A_ind])
+    C7_s1 = ([cp.sum([cp.sum(π_w[ai]) for ai in A_ind]) == 1] +
+              [π_w[ai] >= 0 for ai in A_ind])
 
     if problem_type == "full information":
         constraints_s1 = C5_s1 + C6_s1 + C7_s1
     else:
-        C8_s1 = [(cp.sum(cp.multiply(U_disc_s1[ai], Pi_w_list[ai])) >=
-                  cp.sum(cp.multiply(U_disc_hat_s1[ah, ai], Pi_w_list[ai])))
+        C8_s1 = [(cp.sum(cp.multiply(U_disc_s1[ai], π_w[ai])) >=
+                  cp.sum(cp.multiply(U_disc_hat_s1[ah, ai], π_w[ai])))
                  for ai in A_ind for ah in A_ind]
         constraints_s1 = C5_s1 + C6_s1 + C7_s1 + C8_s1
 
     problem_s1 = cp.Problem(cp.Maximize(obj_expr_s1), constraints_s1)
 
-    # ----------------------------------------------------------
-    # Initialise
-    # ----------------------------------------------------------
     s_W_prime = (np.array(s_W_0, dtype=float)
                  if s_W_0 is not None else np.zeros(N))
 
     hist_x, hist_fx = [], []
     err = np.inf
 
-    # ----------------------------------------------------------
-    # Main iteration loop
-    # ----------------------------------------------------------
     for iteration in range(1, max_iter + 1):
         t0 = time()
 
-        # --- Step 2: solve for s_W_m ---
+        # Step 2.
         Phi_s2_param.value = np.array([[β * sv - c
                                          for sv in s_W_prime] for c in C])
         s_W_m     = np.zeros(N_m)
-        Pi_W_m_s2 = np.zeros((N_m, n_C, N))
+        π_W_m_s2 = np.zeros((N_m, n_C, N))
         for i, wm in enumerate(W_m):
             w_m_para.value = wm
             problem_s2.solve(solver=cp.HIGHS, warm_start=True)
-            if obj_expr_s2.value is not None:
-                s_W_m[i]       = obj_expr_s2.value
-                Pi_W_m_s2[i]   = Pi_w_m.value
+            if problem_s2.status not in (cp.OPTIMAL, cp.OPTIMAL_INACCURATE):
+                raise RuntimeError(f"Step 2 LP failed at w_m={wm}: "
+                                   f"{problem_s2.status}")
+            s_W_m[i]       = obj_expr_s2.value
+            π_W_m_s2[i]    = π_w_m.value
 
-        # --- Step 1: solve for s_W ---
+        # Step 1.
         Phi_s1_param.value = np.array([[(q + swm)
                                          for swm in s_W_m] for q in Q])
         s_W     = np.zeros(N)
-        Pi_W_s1 = np.zeros((N, n_A, n_Q, N_m))
+        π_W_s1 = np.zeros((N, n_A, n_Q, N_m))
         for i, w in enumerate(W):
             w_para.value = w
             problem_s1.solve(solver=cp.HIGHS, warm_start=True)
-            if obj_expr_s1.value is not None:
-                s_W[i] = obj_expr_s1.value
-                for ai in A_ind:
-                    if Pi_w_list[ai].value is not None:
-                        Pi_W_s1[i, ai] = Pi_w_list[ai].value
+            if problem_s1.status not in (cp.OPTIMAL, cp.OPTIMAL_INACCURATE):
+                raise RuntimeError(f"Step 1 LP failed at w={w}: "
+                                   f"{problem_s1.status}")
+            s_W[i] = obj_expr_s1.value
+            for ai in A_ind:
+                π_W_s1[i, ai] = π_w[ai].value
 
         t1 = time()
         err = np.max(np.abs(s_W - s_W_prime))
@@ -1163,7 +1226,7 @@ def solve_multi_period_economy_vfi(A=None,
                 print(f"Converged in {iteration} iterations.")
             break
 
-        # --- Anderson acceleration ---
+        # Anderson acceleration.
         hist_x.append(s_W_prime.copy())
         hist_fx.append(s_W.copy())
         mk = min(len(hist_x), m_anderson)
@@ -1197,15 +1260,16 @@ def solve_multi_period_economy_vfi(A=None,
         print(f"Warning: did not converge after {max_iter} iterations. "
               f"Final max|ΔsW| = {err:.2e}")
 
-    return s_W, Pi_W_s1, Pi_W_m_s2, W
+    return s_W, π_W_s1, π_W_m_s2, W
 ```
 
-### Numerical Results
+### Dynamic allocations
 
 We use the same parameters as for the static economy, plus a
 discount factor $\beta = 0.8$ and grids of $N = N_m = 100$ points.
 
-*Initial values.*
+#### Initial values
+
 We initialise the value function iteration with the one-period
 (static) solution, scaled to discounted-sum units.
 
@@ -1223,18 +1287,18 @@ W_m_u = β * W_u + 2 * C.max()**0.5
 W_m   = np.linspace(W_m_l, W_m_u, N_m)
 
 in_time = time()
-s_W_0, Pi_0 = solve_static_problem(W * (1 - β), u,
+s_W_0, π_0 = solve_static_problem(W * (1 - β), u,
                                     A, Q, C, P,
                                     "unobserved-actions")
 out_time = time()
 print("Time(s):", round(out_time - in_time, 3))
 ```
 
-*Finite-period economy ($T = 3$).*
+#### Finite-period economy
 
 ```{code-cell} ipython3
 in_time = time()
-s_W_T, Pi_W_s1_T, Pi_W_m_s2_T = solve_multi_period_economy_2(
+s_W_T, π_W_s1_T, π_W_m_s2_T = solve_multi_period_economy_2(
     A, Q, C, P, "unobserved-actions",
     T=3, N=N, N_m=N_m)
 out_time = time()
@@ -1252,19 +1316,26 @@ W_mat = np.cumsum(
 W_T = W_mat[2, :]
 
 plt.figure(figsize=(6.5, 6.5))
-plt.plot(W_T, s_W_T, "k-.")
-plt.text(8, 3, "3-Period Unobserved Action", size=12)
-plt.title("Figure\n Optimized surplus function", y=-0.2)
+plt.plot(W_T, s_W_T, "k-.", label="Three-period hidden effort")
+plt.title("Finite-horizon surplus frontier", y=-0.2)
+plt.legend()
 plt.show()
 ```
 
-*Infinite-period economy.*
+This finite-horizon computation is a useful check on the recursion.
+
+The three-period surplus function already has the shape of the
+infinite-horizon frontier, but it is still affected by the approaching
+terminal date because continuation promises have value for only a few
+periods.
+
+#### Infinite-period economy
 
 ```{code-cell} ipython3
 :tags: [hide-output]
 
 in_time = time()
-s_W, Pi_W_s1, Pi_W_m_s2 = solve_multi_period_economy_2(
+s_W, π_W_s1, π_W_m_s2 = solve_multi_period_economy_2(
     A, Q, C, P, "unobserved-actions",
     N=N, N_m=N_m,
     s_W_0=s_W_0 / (1 - β),
@@ -1275,15 +1346,22 @@ print("Time(s):", round(out_time - in_time, 3))
 
 ```{code-cell} ipython3
 plt.figure(figsize=(6.5, 6.5))
-plt.plot(W, s_W, "k-.")
+plt.plot(W, s_W, "k-.", label="Infinite-horizon hidden effort")
 plt.xlim([5.0, 25.0])
 plt.ylim([-7.5, 10.0])
 plt.xlabel("w")
 plt.ylabel("s(w)")
-plt.title("Figure\n Optimized surplus function", y=-0.2)
-plt.text(15, 6.5, "Infinity Unobserved Action", size=12)
+plt.title("Infinite-horizon surplus frontier", y=-0.2)
+plt.legend()
 plt.show()
 ```
+
+The infinite-horizon solution removes the terminal-date effect.
+
+At each promised utility, the surplus function is the fixed point of the
+Bellman operator: the current lottery and the continuation promise are
+jointly chosen so that tomorrow's promise is priced by the same surplus
+function plotted here.
 
 ### Recovering $\Pi^w(a, q, c, w')$
 
@@ -1299,28 +1377,21 @@ $$
 $$
 
 ```{code-cell} ipython3
-n_A, n_Q, n_C, n_W, n_W_prime = 4, 2, 81, N, N
-A_ind, Q_ind, C_ind = range(n_A), range(n_Q), range(n_C)
-W_ind, W_prime_ind  = range(n_W), range(n_W_prime)
-
-Pi = np.array([[[[[
-    Pi_W_s1[w_ind, a_ind, q_ind, :] @
-    Pi_W_m_s2[:, c_ind, w_prime_ind]
-    for w_prime_ind in W_prime_ind]
-    for c_ind in C_ind]
-    for q_ind in Q_ind]
-    for a_ind in A_ind]
-    for w_ind in W_ind])
+π = np.einsum("waqm,mcx->waqcx", π_W_s1, π_W_m_s2)
 ```
 
-#### Figure 5
+The `einsum` line is just the law of total probability.
+
+It sums over the intermediate promise $w^m$ and reconstructs the full
+lottery over $(a,q,c,w')$.
+
+#### Surplus and history dependence
 
 ```{code-cell} ipython3
-# Solve the static full information
 W_full = np.linspace(5, 25, N)
 
 in_time = time()
-s_W_1, Pi_1 = solve_static_problem(W_full*(1-β), u, A,
+s_W_1, π_1 = solve_static_problem(W_full*(1-β), u, A,
                                    Q, C, P, "full information")
 out_time = time()
 
@@ -1329,55 +1400,47 @@ print("Time(s):", round(out_time - in_time, 3))
 
 ```{code-cell} ipython3
 plt.figure(figsize=(6.5, 6.5))
-plt.plot(W, s_W, "k-.")
-plt.plot(W, s_W_0/(1 - β), "yellow")
-plt.plot(W_full, s_W_1/(1 - β), "red")
+plt.plot(W_full, s_W_1/(1 - β), label="Full information")
+plt.plot(W, s_W, "k-.", label="Repeated hidden effort")
+plt.plot(W, s_W_0/(1 - β), label="Static hidden effort")
 plt.xlim([5.0, 25.0])
 plt.ylim([-7.5, 10.0])
 plt.hlines(0, 5.0, 25.0, linestyle="dashed")
 plt.xlabel("w")
 plt.ylabel("s(w)")
-plt.title("Figure 5\n Optimized surplus function", y=-0.2)
-plt.text(5.4, -2.0, "Full Information (top)", size=12)
-plt.text(5.4, -3.0, "T = infinity Unobserved Action (middle)", size=12)
-plt.text(5.4, -4.0, "T = 1 Unobserved Action", size=12)
+plt.title("History dependence and surplus", y=-0.2)
+plt.legend()
 plt.show()
 ```
 
-Figure 5 compares three surplus functions.
+This comparison separates two forces.
 
-The full-information frontier is highest.
+The full-information frontier is highest because effort can be controlled
+directly.
 
-The infinite-horizon unobserved-action frontier is
-below it because incentive constraints are added, but it lies above the
-frontier obtained by repeating the one-period unobserved-action contract.
+The infinite-horizon hidden-effort frontier is below it because
+incentive constraints remain, but it lies above the frontier obtained by
+repeating the one-period hidden-effort contract.
 
 The difference between the two unobserved-action curves is the gain from
 history dependence.
 
-#### Figure 6
+#### Effort and history dependence
 
 ```{code-cell} ipython3
-# Calculate expected efforts
-# T=1 Unobserved Action
 X, Y = list(range(len(A))), list(range(len(Q)))
-Z, N = list(range(len(C))), list(range(len(W)))
-Ea_1 = np.array([np.sum([A[x]*Pi_0[i,x,:,:] for x in X]) for i in N])
+Ea_1 = np.einsum('a,waqc->w', A, π_0)
+Ea_inf = np.einsum('a,waqcx->w', A, π)
 
-# T=infinity unobserved Action
-Ea_inf = np.array([np.sum([A[x]*Pi[i,x,:,:,:] for x in X]) for i in N])
-
-# Plot expected efforts
 plt.figure(figsize=(6.5, 6.5))
-plt.plot(W, Ea_1)
-plt.plot(W, Ea_inf)
+plt.plot(W, Ea_inf, label="Repeated hidden effort")
+plt.plot(W, Ea_1, label="Static hidden effort")
 plt.xlabel("w")
 plt.ylabel("E{a(w)}")
 plt.xlim([5.0, 25.0])
 plt.ylim([0.0, 0.8])
-plt.title("Figure 6\n Actions", y=-0.2)
-plt.text(14, 0.60, "T = infinity Unobserved Action (top)", size=10)
-plt.text(14, 0.55, "T = 1 Unobserved Action (bottom)", size=10)
+plt.title("Effort with and without history dependence", y=-0.2)
+plt.legend()
 plt.show()
 ```
 
@@ -1388,142 +1451,99 @@ Near the lower utility bound, incentive compatibility forces
 low effort, but away from that bound continuation promises help provide
 incentives without relying only on current consumption.
 
-#### Figure 7
+#### Current consumption
+
+The full lottery $\pi(w,a,q,c,w')$ is high-dimensional.
+
+To read it, we summarize it by conditional means.
+
+The next helper computes $E[c \mid w,a,q]$, first summing over
+continuation promises and then normalizing by the probability of the
+conditioning event.
 
 ```{code-cell} ipython3
-def ex_con(Pi, A, Q, C, W, type="infinity"):
-    X, Y = list(range(len(A))), list(range(len(Q)))
-    Z, N = list(range(len(C))), list(range(len(W)))
-    Ec = np.zeros((len(N), len(X), len(Y)))
-    for i in N:
-        for x in X:
-            for y in Y:
-                if type == "infinity":
-                    total_prob = np.sum(Pi[i,x,y,:,:])
-                    if total_prob <= 1e-9:
-                        Ec[i,x,y] = float("-inf")
-                    else:
-                        Ec[i,x,y] = np.sum([np.sum(C[z] * Pi[i, x, y, z, :])
-                                            for z in Z])/total_prob
-                elif type == "one":
-                    total_prob = np.sum(Pi[i,x,y,:])
-                    if total_prob <= 1e-9:
-                        Ec[i,x,y] = float("-inf")
-                    else:
-                        Ec[i,x,y] = np.sum([C[z] * Pi[i, x, y, :]
-                                            for z in Z])/total_prob                   
-    return Ec
+def expected_consumption(π, C):
+    """
+    E[c | w, a, q] from either π(w,a,q,c) or π(w,a,q,c,w').
+    """
+    if π.ndim == 4:
+        mass = π.sum(axis=3)
+        total = np.einsum("c,waqc->waq", C, π)
+    else:
+        mass = π.sum(axis=(3, 4))
+        total = np.einsum("c,waqcx->waq", C, π)
+
+    return np.divide(total, mass,
+                     out=np.full_like(total, np.nan, dtype=float),
+                     where=mass > 1e-12)
 ```
 
 ```{code-cell} ipython3
-Ec_inf = ex_con(Pi, A, Q, C, W)
+Ec_inf = expected_consumption(π, C)
 
-# Plot expected consumption
-plt.figure(figsize=(10.5, 10.5))
-for x in X:
-    for y in Y:
-        plt.plot(W, Ec_inf[:, x, y])
-plt.xlabel("w")
-plt.ylabel("E(c) given a, q, w")
-plt.xlim([5.0, 25.0])
-plt.ylim([0.0, 2.25])
-plt.title("Figure 7\n Unobserved Action Consumption", y=-0.3)
-plt.annotate("a=.4, q=2", xy=(13.5, 0.5), xytext=(10.5, 0.7),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.2, q=2", xy=(20.0, 1.3), xytext=(15.5, 1.65),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=0, q=(1,2)", xy=(24, 2.15), xytext=(15.0, 2.15),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.2, q=2", xy=(10.1, 0.01), xytext=(7.5, 0.03),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.4, q=2", xy=(10.5, 0.10), xytext=(7.5, 0.15),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.6, q=2", xy=(11.5, 0.25), xytext=(8.5, 0.30),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.6, q=1", xy=(12.5, 0.05), xytext=(14.5, 0.10),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.4, q=1", xy=(15.0, 0.35), xytext=(18, 0.2),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.2, q=1", xy=(20.0, 1.1), xytext=(21.5, 0.75),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("", xy=(10.0, 0), xytext=(11.5, -0.1),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=0, q=(1,2)\na={.2,.4}, q=1", fontsize=15, xy=(10.5, 0),
-             xytext=(5.5, -0.3))
-plt.annotate(r"$\{$",fontsize=35, xy=(10.5, 0), xytext=(4.5, -0.3))
-plt.annotate(r"$\}$",fontsize=35, xy=(10.5, 0), xytext=(9.5, -0.3))
+fig, axes = plt.subplots(1, len(Q), figsize=(11, 4), sharey=True)
+for q_i, ax in enumerate(axes):
+    for a_i, a in enumerate(A):
+        ax.plot(W, Ec_inf[:, a_i, q_i], label=f"a={a:g}")
+    ax.set_title(f"q={Q[q_i]:g}")
+    ax.set_xlabel("w")
+    ax.set_xlim([5.0, 25.0])
+    ax.set_ylim([0.0, 2.25])
+axes[0].set_ylabel("E(c | w, a, q)")
+axes[-1].legend(title="Action", loc="lower right")
+fig.suptitle("Current consumption in the repeated contract")
+fig.tight_layout()
 plt.show()
 ```
 
-Figure 7 shows how dynamic contracts smooth current consumption relative
-to the static unobserved-action economy.
+The repeated contract smooths current consumption relative to the static
+hidden-effort economy.
 
 Output still affects rewards,
 but a large part of the reward and punishment is shifted into future
 promised utility.
 
-#### Figure 8
+#### Continuation promises
+
+The parallel statistic for the dynamic margin is
+$E[w' \mid w,a,q]$.
+
+This is the object that reveals how the contract uses future utility as a
+reward or punishment.
 
 ```{code-cell} ipython3
-def ex_ut(Pi, A, Q, C, W):
-    X, Y = list(range(len(A))), list(range(len(Q)))
-    Z, N = list(range(len(C))), list(range(len(W)))
-    Ew = np.zeros((len(N),len(X),len(Y)))
-    for i in N:
-        for x in X:
-            for y in Y:
-                total_prob = np.sum(Pi[i, x, y, :, :])
-                if total_prob <= 1e-9:
-                    Ew[i,x,y] = float("-inf")
-                else:
-                    Ew[i,x,y] = np.sum([np.sum(W[w] * Pi[i, x, y, :, w])
-                                        for w in N])/total_prob
-    return Ew
+def expected_promise(π, W):
+    """
+    E[w' | w, a, q] from π(w,a,q,c,w').
+    """
+    mass = π.sum(axis=(3, 4))
+    total = np.einsum("x,waqcx->waq", W, π)
+    return np.divide(total, mass,
+                     out=np.full_like(total, np.nan, dtype=float),
+                     where=mass > 1e-12)
 ```
 
 ```{code-cell} ipython3
-Ew_inf = ex_ut(Pi, A, Q, C, W)
+Ew_inf = expected_promise(π, W)
 
 
-# Plot expected consumption
-plt.figure(figsize=(7.5, 7.5))
-marker = [["o","v"],[">","<"],["x","1"],["2","3"]]
-for x in X:
-    for y in Y:
-        plt.plot(W, Ew_inf[:,x,y],marker=marker[x][y])
-plt.plot(W,W,"k-.")
-plt.xlabel("w")
-plt.ylabel("E(w') given a, q, w")
-plt.xlim([10.0, 25.0])
-plt.ylim([10.0, 25.0])
-plt.title("Figure 8\n Future Utility", y=-0.2)
-plt.annotate("a=.4, q=2", xy=(14.0, 15.0), xytext=(10.5, 17.0),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.2, q=2", xy=(19.5, 20.0), xytext=(15.0, 23.0),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=0, q=(1,2)", xy=(24.5, 24.5), xytext=(18.0, 24.5),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.2, q=2", xy=(10.0, 10.7), xytext=(7.5, 10.7),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.4, q=2", xy=(10.3, 11.2), xytext=(7.5, 11.2),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.6, q=2", xy=(11.5, 12.2), xytext=(10.1, 14.0),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.6, q=1", xy=(11.7, 10.7), xytext=(13.5, 10.7),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.4, q=1", xy=(15.0, 14.0), xytext=(16.5, 12.5),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=.2, q=1", xy=(20.0, 19.5), xytext=(21.0, 18.0),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("", xy=(10.1, 10.1), xytext=(12.0, 9.2),
-             arrowprops={"arrowstyle":"-"})
-plt.annotate("a=0, q=(1,2)\na={.2,.4}, q=1", xy=(10.1, 10.1), xytext=(9.5, 8.5))
-plt.annotate(r"$\{$",fontsize=25, xy=(10.1, 10.1), xytext=(8.5, 8.5))
-plt.annotate(r"$\}$",fontsize=25, xy=(10.1, 10.1), xytext=(12.5, 8.5))
+fig, axes = plt.subplots(1, len(Q), figsize=(11, 4), sharey=True)
+for q_i, ax in enumerate(axes):
+    for a_i, a in enumerate(A):
+        ax.plot(W, Ew_inf[:, a_i, q_i], label=f"a={a:g}")
+    ax.plot(W, W, "k-.", label="45-degree line")
+    ax.set_title(f"q={Q[q_i]:g}")
+    ax.set_xlabel("w")
+    ax.set_xlim([10.0, 25.0])
+    ax.set_ylim([10.0, 25.0])
+axes[0].set_ylabel("E(w' | w, a, q)")
+axes[-1].legend(title="Action", loc="lower right")
+fig.suptitle("Continuation promises")
+fig.tight_layout()
 plt.show()
 ```
 
-Figure 8 displays the expected next-period promise conditional on
+This plot displays the expected next-period promise conditional on
 current $w$, recommended action $a$, and realized output $q$.
 
 High
@@ -1533,14 +1553,14 @@ At the endpoints of the feasible promise set, the transition stays on the
 45-degree line because only the corresponding extreme plan can deliver
 that endpoint.
 
-For figures 9--12, {cite}`Phelan_Townsend_91` used $\beta = 0.95$.
+For the simulations, we use a higher discount factor, $\beta = 0.95$.
 
-They report that Figures 5--8 are easier to read at $\beta = 0.8$, while
-the simulated individual paths and distributions in Figures 9--12 are
-more informative at the higher discount factor.
+The higher discount factor makes promised utility a stronger incentive
+instrument and makes the evolution of individual histories easier to
+see.
 
-We now use `solve_multi_period_economy_vfi` -- which builds the CVXPY
-problems once and applies Anderson acceleration -- to solve the
+We now use `solve_multi_period_economy_vfi`, which builds the CVXPY
+problems once and applies Anderson acceleration, to solve the
 infinite-horizon economy at $\beta = 0.95$ with a grid of $N = N_m = 50$
 points.
 
@@ -1552,7 +1572,6 @@ iteration converges to tolerance $10^{-4}$.
 N_95  = 50
 N_m95 = 50
 
-# Initial value: static solution rescaled to infinite-horizon units
 w_l_95 = u(A.min(), C.min()) / (1 - β_95)
 w_u_95 = u(A.min(), C.max()) / (1 - β_95)
 W_95   = np.linspace(w_l_95, w_u_95, N_95)
@@ -1561,7 +1580,7 @@ s_W_0_95, _ = solve_static_problem(W_95 * (1 - β_95), u, A, Q, C, P,
                                     "unobserved-actions")
 
 in_time = time()
-s_W_new, Pi_W_s1_new, Pi_W_m_s2_new, W_new = solve_multi_period_economy_vfi(
+s_W_new, π_W_s1_new, π_W_m_s2_new, W_new = solve_multi_period_economy_vfi(
     A, Q, C, P, "unobserved-actions",
     β=β_95, N=N_95, N_m=N_m95,
     s_W_0=s_W_0_95 / (1 - β_95),
@@ -1572,113 +1591,71 @@ print("Time(s):", round(out_time - in_time, 3))
 ```
 
 ```{code-cell} ipython3
-# Recover full joint distribution Pi(a, q, c, w' | w)
-N_new = len(W_new)
-A_ind_new  = range(n_A)
-Q_ind_new  = range(n_Q)
-C_ind_new  = range(n_C)
-W_ind_new  = range(N_new)
-Wp_ind_new = range(N_new)
-
-Pi_new = np.array([[[[[
-    Pi_W_s1_new[wi, ai, qi, :] @ Pi_W_m_s2_new[:, ci, wpi]
-    for wpi in Wp_ind_new]
-    for ci  in C_ind_new]
-    for qi  in Q_ind_new]
-    for ai  in A_ind_new]
-    for wi  in W_ind_new])
+π_new = np.einsum("waqm,mcx->waqcx", π_W_s1_new, π_W_m_s2_new)
 ```
 
-```{code-cell} ipython3
-Ew_beta = ex_ut(Pi_new, A, Q, C, W_new)
-```
+For the simulation, a state is a current promise grid point.
+
+Given that state, the code draws an action, then output, then a pair
+$(c,w')$ from the joint lottery.
+
+The next period's state is the realized $w'$.
 
 ```{code-cell} ipython3
-def simulation(W, C, s_W, T, Pi, Ew, seed=12345):
-    # initial w such that s(w)=0
-    w_index = np.argwhere(np.abs(s_W) == np.min(np.abs(s_W)))[0][0]
-    w0 = W[w_index]
-    date = np.arange(T)
+def draw_from(probabilities, rng):
+    probabilities = np.maximum(np.asarray(probabilities, dtype=float), 0.0)
+    total = probabilities.sum()
+    if total <= 1e-12:
+        return rng.integers(len(probabilities))
+    probabilities = probabilities / total
+    return min(np.searchsorted(np.cumsum(probabilities), rng.random()),
+               len(probabilities) - 1)
+
+
+def simulation(W, C, s_W, T, π, seed=12345):
+    w_index = np.nanargmin(np.abs(s_W))
+    rng = np.random.default_rng(seed)
     
-    # set seed for random number
-    np.random.seed(seed)
-    randn = np.random.rand(T, 8)
-    
-    w_index1, w_index2 = w_index, w_index
-    w_series = w0*np.ones(T+1)
-    c_series = np.zeros(T)
-    Pi_c = list(np.zeros(T))
-    Pi_w = list(np.zeros(T))
+    w_series = np.empty(T + 1)
+    c_series = np.empty(T)
+    w_series[0] = W[w_index]
     
     for i in range(T):
+        joint = np.maximum(π[w_index], 0.0)
         
-        w_index_temp1 = w_index1
+        a_index = draw_from(joint.sum(axis=(1, 2, 3)), rng)
+        q_index = draw_from(joint[a_index].sum(axis=(1, 2)), rng)
         
-        Pi_temp_a = Pi[w_index_temp1, :, :, :, :].sum(
-                                            axis=1).sum(
-                                            axis=1).sum(
-                                            axis=1)
-        Pi_temp_a_cum = np.cumsum(Pi_temp_a / np.sum(Pi_temp_a))
-        a_index = np.sum(randn[i, 0] >= Pi_temp_a_cum)
-        Pi_temp_q = Pi[w_index_temp1, a_index, :, :, :].sum(
-                                            axis=1).sum(
-                                            axis=1)
-        Pi_temp_q_cum = np.cumsum(Pi_temp_q / np.sum(Pi_temp_q))
-        q_index = np.sum(randn[i, 1] >= Pi_temp_q_cum)
+        cw_prob = joint[a_index, q_index]
+        cw_index = draw_from(cw_prob.ravel(), rng)
+        c_index, w_next_index = np.unravel_index(cw_index, cw_prob.shape)
         
-        Pi_temp_w = Pi[w_index_temp1, a_index, q_index, :, :].sum(
-                                                            axis=0)
-        Pi_temp_w_cum = np.cumsum(Pi_temp_w/np.sum(Pi_temp_w))
-        w_index1 = np.sum(randn[i, 2] >= Pi_temp_w_cum)
-        
-        # simulation for consumption as well as its distribution
-        Pi_c[i] = Pi[w_index_temp1, a_index, q_index, :, w_index1]
-        Pi_c[i] /= np.sum(Pi_c[i])
-        Pi_temp_c_cum = np.cumsum(Pi_c[i])
-        c_index = np.sum(randn[i, 3] >= Pi_temp_c_cum)
         c_series[i] = C[c_index]
-        
-        # simulation for expected utility
-        w_series[i+1] = Ew[w_index_temp1, a_index, q_index]
-        
-        # simulation for distribution over future utility
-        Pi_temp_a = Pi[w_index2, :, :, :, :].sum(axis=1).sum(
-                                                axis=1).sum(axis=1)
-        Pi_temp_a_cum = np.cumsum(Pi_temp_a / np.sum(Pi_temp_a))
-        a_index = np.sum(randn[i, 4] >= Pi_temp_a_cum)
-        Pi_temp_q = Pi[w_index2, a_index, :, :, :].sum(
-                                                axis=1).sum(axis=1)
-        Pi_temp_q_cum = np.cumsum(Pi_temp_q / np.sum(Pi_temp_q))
-        q_index = np.sum(randn[i, 5] >= Pi_temp_q_cum)
-        Pi_temp_c = Pi[w_index2, a_index, q_index, :, :].sum(axis=1)
-        Pi_temp_c_cum = np.cumsum(Pi_temp_c/np.sum(Pi_temp_c))
-        c_index = np.sum(randn[i, 6] >= Pi_temp_c_cum)
-        Pi_w[i] = Pi[w_index2, a_index, q_index, c_index, :]
-        Pi_w[i] /= np.sum(Pi_w[i])
-        w_index2 = np.sum(randn[i,7] >= np.cumsum(Pi_w[i]))
+        w_index = w_next_index
+        w_series[i + 1] = W[w_index]
     
-    return c_series, w_series, Pi_w, Pi_c
+    return c_series, w_series
 ```
 
 ```{code-cell} ipython3
 c_series = np.zeros((80, 4))
 w_series = np.zeros((81, 4))
 for i in range(4):
-    c_series[:, i], w_series[:, i], _, _ = simulation(
-        W_new, C, s_W_new, 80, Pi_new, Ew_beta, seed=(12345 + i))
+    c_series[:, i], w_series[:, i] = simulation(
+        W_new, C, s_W_new, 80, π_new, seed=(12345 + i))
 ```
 
 The simulations start from the grid point at which surplus is closest to
 zero.
 
-This corresponds to the ex ante symmetric, or "fair", allocation
-in the paper: it is the highest common promised utility that can be
-assigned while keeping discounted social surplus nonnegative.
+This corresponds to the ex ante symmetric, or "fair", allocation.
 
-#### Figure 9
+It is the highest common promised utility that can be assigned while
+keeping discounted social surplus nonnegative.
+
+#### Simulated consumption histories
 
 ```{code-cell} ipython3
-# Plot consumption simulation
 date_c = np.arange(80) + 1
 plt.figure(figsize=(6.5, 6.5))
 plt.plot(date_c, c_series[:, 0])
@@ -1689,14 +1666,20 @@ plt.xlabel("date")
 plt.ylabel("consumption")
 plt.xlim([0, 80])
 plt.ylim([0.00, 2.25])
-plt.title("Figure 9\n Individual Consumptions ($\\beta=0.95$)", y=-0.2)
+plt.title("Individual consumption histories ($\\beta=0.95$)", y=-0.2)
 plt.show()
 ```
 
-#### Figure 10
+The four consumption paths differ even though all agents begin with the
+same promised utility.
+
+Different output histories move agents to different continuation
+promises, so the contract gradually creates heterogeneous consumption
+histories.
+
+#### Simulated promised utilities
 
 ```{code-cell} ipython3
-# Plot expected utility simulation
 date_w = np.arange(81)
 plt.figure(figsize=(6.5, 6.5))
 plt.plot(date_w, w_series[:, 0])
@@ -1705,18 +1688,56 @@ plt.plot(date_w, w_series[:, 2])
 plt.plot(date_w, w_series[:, 3])
 plt.xlabel("date")
 plt.ylabel("expected utility")
-plt.title("Figure 10\n Individual Utilities ($\\beta=0.95$)", y=-0.2)
+plt.ylim([40.0, 100.0])
+plt.title("Individual promised utilities ($\\beta=0.95$)", y=-0.2)
 plt.show()
 ```
 
+The promised-utility paths show the state variable moving directly.
+
+High-output histories tend to move the agent upward, while low-output
+histories move the agent downward.
+
+This is the dynamic incentive mechanism in the model.
+
 ```{code-cell} ipython3
-%time _, _, Pi_w, Pi_c = simulation(W_new, C, s_W_new, 80, Pi_new, Ew_beta)
+def population_distributions(W, C, s_W, T, π):
+    w_index = np.nanargmin(np.abs(s_W))
+    μ = np.zeros(len(W))
+    μ[w_index] = 1.0
+
+    π_pos = np.maximum(π, 0.0)
+    row_sums = π_pos.sum(axis=(1, 2, 3, 4), keepdims=True)
+    π_pos = np.divide(π_pos, row_sums,
+                       out=np.zeros_like(π_pos),
+                       where=row_sums > 1e-12)
+
+    π_c = np.zeros((T, len(C)))
+    π_w = np.zeros((T, len(W)))
+
+    for t in range(T):
+        joint = np.tensordot(μ, π_pos, axes=(0, 0))
+        π_c[t] = joint.sum(axis=(0, 1, 3))
+        μ = joint.sum(axis=(0, 1, 2))
+        μ = μ / μ.sum()
+        π_w[t] = μ
+
+    return π_c, π_w
+
+
+π_c, π_w = population_distributions(W_new, C, s_W_new, 80, π_new)
 ```
 
-#### Figure 11
+The distribution calculation above keeps the whole population rather
+than drawing individual sample paths.
+
+Starting from a point mass over $w$, it applies the optimal lottery each
+period and records the implied marginal distributions of consumption and
+promised utility.
+
+#### Cross-sectional consumption distributions
 
 ```{code-cell} ipython3
-# Plotting distribution for consumption
 %matplotlib inline
 
 date_mat_c = np.reshape(np.arange(80) + 1, (80, 1)) * \
@@ -1725,20 +1746,28 @@ c_mat = np.ones((80, 1)) @ np.reshape(C, (1, len(C)))
 
 fig = plt.figure(figsize=(8, 5))
 ax = fig.add_subplot(projection='3d')
-plt.title("Figure 11 \n Consumptions over time ($\\beta=0.95$)", y=-0.3)
+plt.title("Consumption distribution over time ($\\beta=0.95$)", y=-0.3)
 plt.xlabel('date')
 plt.ylabel('consumption')
 ax.set_zlabel('percentage')
 
-surf = ax.plot_surface(date_mat_c, c_mat, np.array(Pi_c),
-                       cmap='viridis')
+ax.set_zlim(0.0, 1.0)
+ax.view_init(elev=25, azim=-65)
+wire = ax.plot_wireframe(date_mat_c, c_mat, π_c,
+                         rstride=1, cstride=2,
+                         color="black", linewidth=0.35)
 plt.show()
 ```
 
-#### Figure 12
+The consumption distribution spreads out over time because histories
+receive different rewards and punishments.
+
+On the finite grid, some mass eventually reaches the edges of the
+feasible promise set.
+
+#### Cross-sectional promise distributions
 
 ```{code-cell} ipython3
-# Plotting distribution for future utilities
 %matplotlib inline
 date_mat_w = np.reshape(np.arange(80) + 1, (80, 1)) * \
                 np.ones((1, len(W_new)))
@@ -1746,32 +1775,41 @@ W_mat_12 = np.ones((80, 1)) @ np.reshape(W_new, (1, len(W_new)))
 
 fig = plt.figure(figsize=(8, 5))
 ax = fig.add_subplot(projection='3d')
-plt.title("Figure 12 \n Utilities over time ($\\beta=0.95$)", y=-0.3)
+plt.title("Promise distribution over time ($\\beta=0.95$)", y=-0.3)
 plt.xlabel('date')
 plt.ylabel('w')
 ax.set_zlabel('percentage')
 
-surf = ax.plot_surface(date_mat_w, W_mat_12, np.array(Pi_w),
-                       cmap='viridis')
+ax.set_zlim(0.0, 1.0)
+ax.view_init(elev=25, azim=-65)
+wire = ax.plot_wireframe(date_mat_w, W_mat_12, π_w,
+                         rstride=1, cstride=2,
+                         color="black", linewidth=0.35)
 plt.show()
 ```
 
-## Concluding Remarks
+The promise distribution is the deeper state-space picture behind the
+consumption distribution.
+
+It shows how repeated incentives convert a common initial promise into a
+distribution of continuation utilities.
+
+## Concluding remarks
 
 ### Economics
 
-*Moral hazard and the cost of private information.*
+#### Moral hazard and the cost of private information
 
 When the principal cannot observe the agent's effort, the optimal contract
 must balance two competing objectives: *insurance* (smoothing the agent's
 consumption across output realizations) and *incentives* (rewarding high
 output to make effort attractive).
 
-The unobserved-action surplus function in Figure 1 lies everywhere below
-the full-information frontier, and the gap between them measures the
-surplus cost of unobserved effort.
+The hidden-effort surplus frontier lies below the full-information
+frontier, and the gap between them measures the surplus cost of
+unobserved effort.
 
-*Dynamic contracts and promised utility.*
+#### Dynamic contracts and promised utility
 
 The recursive formulation of {cite}`Spear_Srivastava_87` compresses all
 payoff-relevant history into a single scalar state: the discounted
@@ -1781,17 +1819,17 @@ agent.
 By tracking $w$ rather than the full history of outputs, the dynamic
 contracting problem becomes tractable.
 
-Figures 7--8 show that under the optimal infinite-horizon contract the
-principal rewards high output by granting the agent a higher continuation
-utility and punishes low output by lowering it.
+In the optimal infinite-horizon contract, the principal rewards high
+output by granting the agent a higher continuation utility and punishes
+low output by lowering it.
 
 Continuation promises
 therefore substitute partly for large contemporaneous consumption
 spreads.
 
-*Diversity over time.*
+#### Diversity over time
 
-Figures 9--12 illustrate the paper's central computational message:
+The simulations illustrate the central computational message:
 starting from a common initial promise, dynamic incentives generate
 non-trivial individual histories and cross-sectional dispersion in
 consumption and promised utility.
@@ -1803,9 +1841,9 @@ The simulations should therefore be read as finite-grid
 illustrations of how history dependence spreads the distribution over
 time, not as a separate theorem about the limiting distribution.
 
-### Technical Tricks
+### Technical tricks
 
-*Lotteries and convexification.*
+#### Lotteries and convexification
 
 Incentive constraints can render the set of feasible contracts non-convex,
 making standard optimization techniques unreliable.
@@ -1817,7 +1855,7 @@ consumptions, and continuation values.
 Because any mixture of feasible lotteries is itself feasible, the
 constraint set becomes convex, and global optima are well-defined.
 
-*Linear programming.*
+#### Linear programming
 
 With finite grids, the convexified Bellman equation is a linear program:
 the objective $(q - c + \beta v(w'))$ and every constraint are linear in
@@ -1825,10 +1863,10 @@ $\Pi$.
 
 Treating $v(w')$ as a fixed vector from the previous iteration, value
 function iteration reduces to solving one LP per grid point per
-iteration -- a task handled efficiently by modern LP solvers such as
+iteration, a task handled efficiently by modern LP solvers such as
 HiGHS.
 
-*Dynamic programming.*
+#### Dynamic programming
 
 The promised-utility state variable $w$ makes the problem recursive.
 
@@ -1839,20 +1877,20 @@ infinite-horizon fixed point.
 The implementation initializes the iteration from the scaled static
 solution, which is a useful numerical starting point.
 
-*Two-step factored algorithm.*
+#### Two-step factored algorithm
 
 The additive separability $U(a,c) = 2\sqrt{1-a} + 2\sqrt{c}$ allows the
 four-dimensional LP to be split into two smaller sub-problems.
 
-*Step 2* allocates consumption given an intermediate promised utility
-$w^m$; *Step 1* assigns actions, outputs, and intermediate continuation
+Step 2 allocates consumption given an intermediate promised utility
+$w^m$; Step 1 assigns actions, outputs, and intermediate continuation
 utilities given $w$.
 
 Because each sub-LP has far fewer decision variables than the full joint
 LP, computation is substantially faster and the approach scales to finer
 grids.
 
-*Dynamic programming squared.*
+#### Dynamic programming squared
 
 This lecture is closely related to what Lars Ljungqvist and Thomas
 Sargent call *dynamic programming squared* in
@@ -1861,8 +1899,8 @@ Sargent call *dynamic programming squared* in
 The phrase refers to recursive problems in which one continuation object
 is carried as a state variable inside another recursive problem.
 
-Here the surplus function $s(w)$ -- the solution to the principal's
-outer dynamic program -- has the agent's continuation utility $w$ as its
+Here the surplus function $s(w)$, the solution to the principal's
+outer dynamic program, has the agent's continuation utility $w$ as its
 state variable, while feasible movements in $w$ are governed by
 promise-keeping and incentive constraints.
 
@@ -1874,8 +1912,8 @@ function as an argument.
 
 In {doc}`Optimal Taxation with State-Contingent Debt <opt_tax_recur>`,
 a Ramsey planner's outer Bellman equation uses the household's
-marginal utility of wealth $x$ -- itself defined by an inner
-implementability constraint -- as its state variable.
+marginal utility of wealth $x$, itself defined by an inner
+implementability constraint, as its state variable.
 
 In the {doc}`Calvo model <calvo>` and the two Chang lectures
 ({doc}`Ramsey plans <chang_ramsey>` and
@@ -1889,8 +1927,8 @@ as the state variable in an outer surplus-maximization program,
 producing a closely related nested recursive structure.
 
 In all of these settings, the inner dynamic program defines a
-state variable -- a promised utility, a marginal value, or a
-continuation value -- that restricts what the outer dynamic
+state variable (a promised utility, a marginal value, or a
+continuation value) that restricts what the outer dynamic
 program can promise or deliver. 
 
 
@@ -1926,11 +1964,12 @@ plt.xlabel("w")
 plt.ylabel(r"$\delta(w) = s^{FI}(w) - s^{UA}(w)$")
 plt.xlim([1.0, 5.0])
 plt.ylim(bottom=0.0)
-plt.title("Agency Cost in the Static Model", y=-0.2)
+plt.title("Agency cost in the static model", y=-0.2)
 plt.show()
 
-w_hat = W_static[np.argmax(delta_W)]
-print(f"Largest agency cost at w = {w_hat:.3f},  δ = {delta_W.max():.4f}")
+max_i = np.nanargmax(delta_W)
+w_hat = W_static[max_i]
+print(f"Largest agency cost at w = {w_hat:.3f},  δ = {delta_W[max_i]:.4f}")
 ```
 
 Agency costs are highest near intermediate levels of promised utility
@@ -1981,9 +2020,9 @@ P_flat = np.array([[0.70, 0.30],
                    [0.45, 0.55],
                    [0.30, 0.70]])
 
-s_W_flat, Pi_flat = solve_static_problem(W_static, u, A, Q, C, P_flat,
+s_W_flat, π_flat = solve_static_problem(W_static, u, A, Q, C, P_flat,
                                           "unobserved-actions")
-Ea_flat = np.einsum('a,waqc->w', A, Pi_flat)
+Ea_flat = np.einsum('a,waqc->w', A, π_flat)
 
 fig, axes = plt.subplots(1, 2, figsize=(13, 6))
 
@@ -1993,7 +2032,7 @@ axes[0].hlines(0, 1.0, 5.0, linestyle="dashed")
 axes[0].set_xlabel("w")
 axes[0].set_ylabel("s(w)")
 axes[0].set_xlim([1.0, 5.0])
-axes[0].set_title("Surplus Function", y=-0.2)
+axes[0].set_title("Surplus function", y=-0.2)
 axes[0].legend()
 
 axes[1].plot(W_static, Ea_unobs, label="Baseline $P$")
@@ -2002,7 +2041,7 @@ axes[1].set_xlabel("w")
 axes[1].set_ylabel(r"$E\{a(w)\}$")
 axes[1].set_xlim([1.0, 5.0])
 axes[1].set_ylim([0.0, 0.8])
-axes[1].set_title("Expected Effort", y=-0.2)
+axes[1].set_title("Expected effort", y=-0.2)
 axes[1].legend()
 
 plt.tight_layout()
@@ -2018,7 +2057,7 @@ harder to satisfy: large consumption rewards for high output must be
 offered to deter deviations, crowding out insurance.
 
 As a result the principal extracts less surplus and induces less effort
-than under the baseline $P$ -- the surplus function shifts down and
+than under the baseline $P$: the surplus function shifts down and
 expected effort falls.
 
 ```{solution-end}
