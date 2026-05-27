@@ -9,7 +9,6 @@ kernelspec:
   name: python3
 ---
 
-(atkeson_1991)=
 ```{raw} html
 <div id="qe-notebook-header" align="right" style="text-align:right;">
         <a href="https://quantecon.org/" title="quantecon.org">
@@ -18,7 +17,8 @@ kernelspec:
 </div>
 ```
 
-# Lending with Moral Hazard and Risk of Repudiation
+(atkeson_1991)=
+# International Lending with Moral Hazard and Risk of Repudiation
 
 ## Overview
 
@@ -577,7 +577,7 @@ axes[1].plot(Q_grid, net_out_L, lw=2,        label=r'After $Y_L$ (low output)')
 axes[1].plot(Q_grid, net_out_H, lw=2, ls='--', label=r'After $Y_H$ (high output)')
 axes[1].axhline(0, color='k', lw=0.8, ls=':')
 axes[1].set_xlabel(r'State $Q$')
-axes[1].set_ylabel(r'Net outflow  $d(Y') - b'(Q')$')
+axes[1].set_ylabel(r"Net outflow $d(Y') - b'(Q')$")
 axes[1].set_title('Capital Flows in the Optimal Contract')
 axes[1].legend()
 
@@ -688,8 +688,9 @@ parameters fixed).
    no-repudiation constraint binds after low output?
 ````
 
-````{dropdown} Solution to Exercise 1
+```{solution-start} atkeson_1991_ex1
 :class: dropdown
+```
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots(figsize=(8, 5))
@@ -728,7 +729,9 @@ contract more highly, which relaxes the no-repudiation constraint: the
 no-repudiation floor $Q^*_L$ falls and the capital outflow after low output is
 less severe.  Impatient borrowers more readily prefer autarky, tightening the
 constraint and worsening debt-crisis dynamics.
-````
+
+```{solution-end}
+```
 
 ````{admonition} Exercise 2
 :class: exercise
@@ -746,8 +749,9 @@ weaker signal of investment.
    pattern.
 ````
 
-````{dropdown} Solution to Exercise 2
+```{solution-start} atkeson_1991_ex2
 :class: dropdown
+```
 
 ```{code-cell} ipython3
 g_h_base, g_l_base = g_h.copy(), g_l.copy()
@@ -792,7 +796,9 @@ about past investment.  The moral hazard problem is milder, incentive
 constraints are easier to satisfy, and the no-repudiation constraint binds less
 tightly.  Capital outflows after bad output realisations are smaller in
 magnitude.
-````
+
+```{solution-end}
+```
 
 ````{admonition} Exercise 3
 :class: exercise
@@ -814,8 +820,9 @@ $\varepsilon > 0$.
 `pareto_bellman`.
 ````
 
-````{dropdown} Solution to Exercise 3
+```{solution-start} atkeson_1991_ex3
 :class: dropdown
+```
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots(figsize=(8, 5))
@@ -913,5 +920,6 @@ borrower's outside option but makes lenders less willing to extend credit
 (smaller loans at higher cost), leaving the borrower worse off in equilibrium.
 This illustrates the {cite}`BulowRogoff1989b` result that debt forgiveness
 need not benefit the borrowing country.
-````
 
+```{solution-end}
+```

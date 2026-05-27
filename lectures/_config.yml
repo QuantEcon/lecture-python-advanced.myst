@@ -33,6 +33,13 @@ latex:
 sphinx:
   extra_extensions: [sphinx_multitoc_numbering, sphinxext.rediraffe, sphinx_tojupyter, sphinx_exercise, sphinx_togglebutton, sphinx_proof, sphinx.ext.intersphinx]
   config:
+    exclude_patterns:
+      - _build
+      - _build/**
+      - .DS_Store
+      - "**.ipynb_checkpoints"
+      - lecture-python-programming.myst
+      - lecture-python-programming.myst/**
     intersphinx_mapping:
       intro:
         - "https://intro.quantecon.org/"

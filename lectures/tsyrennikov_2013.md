@@ -9,7 +9,6 @@ kernelspec:
   name: python3
 ---
 
-(tsyrennikov_2013)=
 ```{raw} html
 <div id="qe-notebook-header" align="right" style="text-align:right;">
         <a href="https://quantecon.org/" title="quantecon.org">
@@ -18,6 +17,7 @@ kernelspec:
 </div>
 ```
 
+(tsyrennikov_2013)=
 # Capital Flows Under Moral Hazard
 
 ## Overview
@@ -821,8 +821,9 @@ the severity of the output loss upon default.
    at $\delta \to 0$ it is vacuous.
 ````
 
-````{dropdown} Solution to Exercise 1
+```{solution-start} tsyrennikov_2013_ex1
 :class: dropdown
+```
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots(figsize=(8, 5))
@@ -855,7 +856,9 @@ state-contingent repayment.  Paradoxically, this may *reduce* the interest
 rate spread by forcing the lender to offer more consumption insurance to keep
 the borrower from defaulting.  At $\delta \to 0$ the enforcement constraint is
 vacuous and the model collapses to pure moral hazard.
-````
+
+```{solution-end}
+```
 
 ````{admonition} Exercise 2
 :class: exercise
@@ -874,8 +877,9 @@ hazard (immiseration).  When $\beta < \beta_c$ there is an additional
 front-loading incentive that the lender can exploit.
 ````
 
-````{dropdown} Solution to Exercise 2
+```{solution-start} tsyrennikov_2013_ex2
 :class: dropdown
+```
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots(figsize=(8, 5))
@@ -906,7 +910,9 @@ immiseration, while impatience accelerates it further.  A small wedge
 (as calibrated by Tsyrennikov) is significant: it is *equivalent to
 increasing the borrower's discount rate by 2% per annum* (even though
 the assumed difference in quarterly rates is only 0.010).
-````
+
+```{solution-end}
+```
 
 ````{admonition} Exercise 3
 :class: exercise
@@ -927,8 +933,9 @@ $u'(c_1') / u'(c_2')$ depends on the IC multiplier $\mu$.  A larger $\mu$
 spreads continuation values but *not necessarily* repayments.
 ````
 
-````{dropdown} Solution to Exercise 3
+```{solution-start} tsyrennikov_2013_ex3
 :class: dropdown
+```
 
 ```{code-cell} ipython3
 # RSI for the baseline MH model
@@ -945,5 +952,6 @@ print(" n2' > n1', i.e. spreading *net worth*, not repayments.")
 print(" Since d_j = Y_j - n_j', if n2' - n1' = Y2 - Y1 then d1 = d2 (RSI=0).")
 print(" Moral hazard forces this near-equality, making debt non-contingent.")
 ```
-````
 
+```{solution-end}
+```

@@ -1913,8 +1913,9 @@ $$
    promised utility.
 ````
 
-````{dropdown} Solution to Exercise 1
+```{solution-start} repeat_mh_ex1
 :class: dropdown
+```
 
 ```{code-cell} ipython3
 delta_W = s_W_full - s_W_unobs
@@ -1940,7 +1941,9 @@ consumption-state variation to be incentivized.
 At low $w$ the agent is near subsistence and effort is low anyway;
 at high $w$ the agent is nearly fully insured and the marginal incentive
 cost of each additional unit of effort is small.
-````
+
+```{solution-end}
+```
 
 ````{admonition} Exercise 2
 :class: exercise
@@ -1968,8 +1971,9 @@ in which output is less informative about effort than in the baseline $P$.
 3. Explain the economic intuition for any differences you find.
 ````
 
-````{dropdown} Solution to Exercise 2
+```{solution-start} repeat_mh_ex2
 :class: dropdown
+```
 
 ```{code-cell} ipython3
 P_flat = np.array([[0.70, 0.30],
@@ -2016,4 +2020,6 @@ offered to deter deviations, crowding out insurance.
 As a result the principal extracts less surplus and induces less effort
 than under the baseline $P$ -- the surplus function shifts down and
 expected effort falls.
-````
+
+```{solution-end}
+```
