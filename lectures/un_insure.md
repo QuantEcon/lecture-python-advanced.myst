@@ -606,7 +606,7 @@ def r_error(self,r):
     β = self.β
     Ve = self.Ve
 
-    Vu_star = sp.optimize.fsolve(Vu_error_Λ,15000,args = (r))
+    Vu_star = sp.optimize.fsolve(Vu_error_Λ,15000,args = (r))[0]
     a_star = invp_prime(1/(β*(Ve-Vu_star)),r) # Assuming a>0
     return    p(a_star,r) - 0.1
 ```
