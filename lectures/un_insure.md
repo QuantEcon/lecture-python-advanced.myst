@@ -512,16 +512,16 @@ We first create a class to set up a particular parametrization.
 class params_instance:
 
     def __init__(self,
-                r,
-                β = 0.999,
-                σ = 0.500,
-                w = 100,
-                n_grid = 50):
+                 r,
+                 β=0.999,
+                 σ=0.500,
+                 w=100,
+                 n_grid=50):
 
-        self.β,self.σ,self.w,self.r = β,σ,w,r
+        self.β, self.σ, self.w, self.r = β, σ, w, r
         self.n_grid = n_grid
-        uw = self.w**(1-self.σ)/(1-self.σ)  #Utility from consuming all wage
-        self.Ve = uw/(1-β)
+        uw = self.w**(1 - self.σ) / (1 - self.σ)  # Utility from consuming all wage
+        self.Ve = uw / (1 - β)
 ```
 
 ### Parameter values
@@ -538,21 +538,25 @@ First, we create some helper functions.
 
 ```{code-cell} ipython3
 # The probability of finding a job given search effort, a and parameter r.
-def p(a,r):
-    return 1-np.exp(-r*a)
+def p(a, r):
+    return 1 - np.exp(-r * a)
 
-def invp_prime(x,r):
-    return -np.log(x/r)/r
 
-def p_prime(a,r):
-    return r*np.exp(-r*a)
+def invp_prime(x, r):
+    return -np.log(x / r) / r
 
-# The utiliy function
-def u(self,c):
-    return (c**(1-self.σ))/(1-self.σ)
 
-def u_inv(self,x):
-    return ((1-self.σ)*x)**(1/(1-self.σ))
+def p_prime(a, r):
+    return r * np.exp(-r * a)
+
+
+# The utility function
+def u(self, c):
+    return (c**(1 - self.σ)) / (1 - self.σ)
+
+
+def u_inv(self, x):
+    return ((1 - self.σ) * x)**(1 / (1 - self.σ))
 ```
 
 Recall that under  autarky the value for an unemployed worker
@@ -585,12 +589,12 @@ We'll  soon use this as an input to computing $V^u$.
 ```{code-cell} ipython3
 # The error in the Bellman equation that requires equality at
 # the optimal choices.
-def Vu_error(self,Vu,r):
-    β= self.β
+def Vu_error(self, Vu, r):
+    β = self.β
     Ve = self.Ve
 
-    a = invp_prime(1/(β*(Ve-Vu)),r)
-    error = u(self,0) -a + β*(p(a,r)*Ve + (1-p(a,r))*Vu) - Vu
+    a = max(0, invp_prime(1 / (β * (Ve - Vu)), r))
+    error = u(self, 0) - a + β * (p(a, r) * Ve + (1 - p(a, r)) * Vu) - Vu
     return error
 ```
 
@@ -602,22 +606,22 @@ We'll use this to compute   a calibrated $r^*$.
 
 ```{code-cell} ipython3
 # The error of our p(a^*) relative to our calibration target
-def r_error(self,r):
+def r_error(self, r):
     β = self.β
     Ve = self.Ve
 
-    Vu_star = sp.optimize.fsolve(Vu_error_Λ,15000,args = (r))[0]
-    a_star = invp_prime(1/(β*(Ve-Vu_star)),r) # Assuming a>0
-    return    p(a_star,r) - 0.1
+    Vu_star = sp.optimize.fsolve(Vu_error_Λ, 15000, args=(r,))[0]
+    a_star = invp_prime(1 / (β * (Ve - Vu_star)), r)  # Assuming a > 0
+    return p(a_star, r) - 0.1
 ```
 
 Now, let us create an instance of the model with our parametrization
 
 ```{code-cell} ipython3
-params = params_instance(r = 1e-2)
+params = params_instance(r=1e-2)
 # Create some lambda functions useful for fsolve function
-Vu_error_Λ =  lambda Vu,r: Vu_error(params,Vu,r)
-r_error_Λ =  lambda r: r_error(params,r)
+Vu_error_Λ = lambda Vu, r: Vu_error(params, Vu, r)
+r_error_Λ = lambda r: r_error(params, r)
 ```
 
 We want to compute an  $r$ that is consistent with the hazard rate 0.1 in autarky.
@@ -625,13 +629,13 @@ We want to compute an  $r$ that is consistent with the hazard rate 0.1 in autark
 To do so, we will use a bisection strategy.
 
 ```{code-cell} ipython3
-r_calibrated = sp.optimize.brentq(r_error_Λ,1e-10,1-1e-10)
+r_calibrated = sp.optimize.brentq(r_error_Λ, 1e-10, 1 - 1e-10)
 print(f"Parameter to match 0.1 hazard rate: r = {r_calibrated}")
 
-Vu_aut = sp.optimize.fsolve(Vu_error_Λ,15000,args = (r_calibrated))[0]
-a_aut = invp_prime(1/(params.β*(params.Ve-Vu_aut)),r_calibrated)
+Vu_aut = sp.optimize.fsolve(Vu_error_Λ, 15000, args=(r_calibrated,))[0]
+a_aut = invp_prime(1 / (params.β * (params.Ve - Vu_aut)), r_calibrated)
 
-print(f"Check p at r: {p(a_aut,r_calibrated)}")
+print(f"Check p at r: {p(a_aut, r_calibrated)}")
 ```
 
 Now that we have calibrated our the parameter $r$, we can continue with solving the  model with private information.
@@ -664,25 +668,25 @@ We can substitute these equations for $c$ and $a$ and obtain the functional equa
 
 
 ```{code-cell} ipython3
-def calc_c(self,Vu,V,a):
+def calc_c(self, Vu, V, a):
     '''
     Calculates the optimal consumption choice coming from the constraint of the insurer's problem
     (which is also a Bellman equation)
     '''
-    β,Ve,r = self.β,self.Ve,self.r
+    β, Ve, r = self.β, self.Ve, self.r
 
-    c = u_inv(self,V + a - β*(p(a,r)*Ve + (1-p(a,r))*Vu))
+    c = u_inv(self, V + a - β * (p(a, r) * Ve + (1 - p(a, r)) * Vu))
     return c
 
-def calc_a(self,Vu):
+
+def calc_a(self, Vu):
     '''
     Calculates the optimal effort choice coming from the worker's effort optimality condition.
     '''
+    r, β, Ve = self.r, self.β, self.Ve
 
-    r,β,Ve = self.r,self.β,self.Ve
-
-    a_temp = np.log(r*β*(Ve - Vu))/r
-    a = max(0,a_temp)
+    a_temp = np.log(r * β * (Ve - Vu)) / r
+    a = max(0, a_temp)
     return a
 ```
 
@@ -704,12 +708,11 @@ The function `iterate_C` below executes step 3 in the above algorithm.
 
 ```{code-cell} ipython3
 # Operator iterate_C that calculates the next iteration of the cost function.
-def iterate_C(self,C_old,Vu_grid):
-
+def iterate_C(self, C_old, Vu_grid):
     '''
     We solve the model by minimising the value function across a grid of possible promised values.
     '''
-    β,r,n_grid = self.β,self.r,self.n_grid
+    β, r, n_grid = self.β, self.r, self.n_grid
 
     C_new = np.zeros(n_grid)
     cons_star = np.zeros(n_grid)
@@ -725,50 +728,51 @@ def iterate_C(self,C_old,Vu_grid):
         a_Vi_temp = np.zeros(n_grid)
 
         for Vu_i in range(n_grid):
-            a_i = calc_a(self,Vu_grid[Vu_i])
-            c_i = calc_c(self,Vu_grid[Vu_i],Vu_grid[V_i],a_i)
+            a_i = calc_a(self, Vu_grid[Vu_i])
+            c_i = calc_c(self, Vu_grid[Vu_i], Vu_grid[V_i], a_i)
 
-            C_Vi_temp[Vu_i] = c_i + β*(1-p(a_i,r))*C_old[Vu_i]
+            C_Vi_temp[Vu_i] = c_i + β * (1 - p(a_i, r)) * C_old[Vu_i]
             cons_Vi_temp[Vu_i] = c_i
             a_Vi_temp[Vu_i] = a_i
 
         # Interpolate across the grid to get better approximation of the minimum
-        C_Vi_temp_interp = sp.interpolate.interp1d(Vu_grid,C_Vi_temp, kind = 'cubic')
-        cons_Vi_temp_interp = sp.interpolate.interp1d(Vu_grid,cons_Vi_temp, kind = 'cubic')
-        a_Vi_temp_interp = sp.interpolate.interp1d(Vu_grid,a_Vi_temp, kind = 'cubic')
+        C_Vi_temp_interp = sp.interpolate.interp1d(Vu_grid, C_Vi_temp, kind='cubic')
+        cons_Vi_temp_interp = sp.interpolate.interp1d(Vu_grid, cons_Vi_temp, kind='cubic')
+        a_Vi_temp_interp = sp.interpolate.interp1d(Vu_grid, a_Vi_temp, kind='cubic')
 
-        res = sp.optimize.minimize_scalar(C_Vi_temp_interp,method='bounded',bounds = (Vu_min,Vu_max))
+        res = sp.optimize.minimize_scalar(C_Vi_temp_interp, method='bounded',
+                                          bounds=(Vu_min, Vu_max))
         V_star[V_i] = res.x
         C_new[V_i] = res.fun
 
-        # Save the associated consumpton and search policy functions as well
+        # Save the associated consumption and search policy functions as well
         cons_star[V_i] = cons_Vi_temp_interp(V_star[V_i])
         a_star[V_i] = a_Vi_temp_interp(V_star[V_i])
 
-    return C_new,V_star,cons_star,a_star
+    return C_new, V_star, cons_star, a_star
 ```
 
 The following code executes steps 4 and 5 in the Algorithm  until convergence to a function $C^*(V)$.
 
 ```{code-cell} ipython3
-def solve_incomplete_info_model(self,Vu_grid,Vu_aut,tol = 1e-6,max_iter = 10000):
+def solve_incomplete_info_model(self, Vu_grid, Vu_aut, tol=1e-6, max_iter=10000):
     iter = 0
     error = 1
 
-    C_init = np.ones(self.n_grid)*0
+    C_init = np.ones(self.n_grid) * 0
     C_old = np.copy(C_init)
 
-    while iter<max_iter and error >tol:
-        C_new,V_new,cons_star,a_star = iterate_C(self,C_old,Vu_grid)
+    while iter < max_iter and error > tol:
+        C_new, V_new, cons_star, a_star = iterate_C(self, C_old, Vu_grid)
         error = np.max(np.abs(C_new - C_old))
 
-        #Only print the iterations every 50 steps
-        if iter % 50 ==0:
+        # Only print the iterations every 50 steps
+        if iter % 50 == 0:
             print(f"Iteration: {iter}, error:{error}")
         C_old = np.copy(C_new)
-        iter+=1
+        iter += 1
 
-    return C_new,V_new,cons_star,a_star
+    return C_new, V_new, cons_star, a_star
 ```
 
 ## Outcomes
@@ -778,22 +782,23 @@ def solve_incomplete_info_model(self,Vu_grid,Vu_aut,tol = 1e-6,max_iter = 10000)
 Using the above functions, we create another instance of the parameters with our calibrated parameter $r$.
 
 ```{code-cell} ipython3
-##? Create another instance with the correct r now
-params = params_instance(r = r_calibrated)
+# Create another instance with the correct r now
+params = params_instance(r=r_calibrated)
 
-#Set up grid
+# Set up grid
 Vu_min = Vu_aut
-Vu_max = params.Ve - 1/(params.β*p_prime(0,params.r))
-Vu_grid = np.linspace(Vu_min,Vu_max,params.n_grid)
+Vu_max = params.Ve - 1 / (params.β * p_prime(0, params.r))
+Vu_grid = np.linspace(Vu_min, Vu_max, params.n_grid)
 
-#Solve model
-C_star,V_star,cons_star,a_star = solve_incomplete_info_model(params,Vu_grid,Vu_aut,tol = 1e-6,max_iter = 10000) #,cons_star,a_star
+# Solve model
+C_star, V_star, cons_star, a_star = solve_incomplete_info_model(
+    params, Vu_grid, Vu_aut, tol=1e-6, max_iter=10000)
 
 # Since we have the policy functions in grid form, we will interpolate them to be able to
 # evaluate any promised value
-cons_star_interp = sp.interpolate.interp1d(Vu_grid,cons_star)
-a_star_interp = sp.interpolate.interp1d(Vu_grid,a_star)
-V_star_interp = sp.interpolate.interp1d(Vu_grid,V_star)
+cons_star_interp = sp.interpolate.interp1d(Vu_grid, cons_star)
+a_star_interp = sp.interpolate.interp1d(Vu_grid, a_star)
+V_star_interp = sp.interpolate.interp1d(Vu_grid, V_star)
 ```
 
 ### Replacement ratios and continuation values
@@ -809,47 +814,50 @@ We accomplish this by using the optimal policy functions `V_star`, `cons_star` a
 ```{code-cell} ipython3
 # Replacement ratio and effort as a function of unemployment duration
 T_max = 52
-Vu_t = np.empty((T_max,3))
-cons_t = np.empty((T_max-1,3))
-a_t = np.empty((T_max-1,3))
+Vu_t = np.empty((T_max, 3))
+cons_t = np.empty((T_max - 1, 3))
+a_t = np.empty((T_max - 1, 3))
 
 # Calculate the replacement ratios depending on different initial
 # promised values
-Vu_0_hold = np.array([Vu_aut,16942,17000])
+Vu_0_hold = np.array([Vu_aut, 16942, 17000])
 ```
 
 ```{code-cell} ipython3
-for i,Vu_0, in enumerate(Vu_0_hold):
-    Vu_t[0,i] = Vu_0
-    for t in range(1,T_max):
-        cons_t[t-1,i] = cons_star_interp(Vu_t[t-1,i])
-        a_t[t-1,i] = a_star_interp(Vu_t[t-1,i])
-        Vu_t[t,i] = V_star_interp(Vu_t[t-1,i])
+for i, Vu_0 in enumerate(Vu_0_hold):
+    Vu_t[0, i] = Vu_0
+    for t in range(1, T_max):
+        cons_t[t - 1, i] = cons_star_interp(Vu_t[t - 1, i])
+        a_t[t - 1, i] = a_star_interp(Vu_t[t - 1, i])
+        Vu_t[t, i] = V_star_interp(Vu_t[t - 1, i])
 ```
 
 ```{code-cell} ipython3
 fontSize = 10
-plt.rc('font', size=fontSize)          # controls default text sizes
-plt.rc('axes', titlesize=fontSize)     # fontsize of the axes title
-plt.rc('axes', labelsize=fontSize)    # fontsize of the x and y labels
-plt.rc('xtick', labelsize=fontSize)    # fontsize of the tick labels
-plt.rc('ytick', labelsize=fontSize)    # fontsize of the tick labels
-plt.rc('legend', fontsize=fontSize)    # legend fontsize
+plt.rc('font', size=fontSize)        # controls default text sizes
+plt.rc('axes', titlesize=fontSize)   # fontsize of the axes title
+plt.rc('axes', labelsize=fontSize)   # fontsize of the x and y labels
+plt.rc('xtick', labelsize=fontSize)  # fontsize of the tick labels
+plt.rc('ytick', labelsize=fontSize)  # fontsize of the tick labels
+plt.rc('legend', fontsize=fontSize)  # legend fontsize
 
-f1 = plt.figure(figsize = (8,8))
-plt.subplot(2,1,1)
-plt.plot(range(T_max-1),cons_t[:,0]/params.w,label = '$V^u_0$ = 16759 (aut)',color = 'red')
-plt.plot(range(T_max-1),cons_t[:,1]/params.w,label = '$V^u_0$ = 16942',color = 'blue')
-plt.plot(range(T_max-1),cons_t[:,2]/params.w,label = '$V^u_0$ = 17000',color = 'green')
+f1 = plt.figure(figsize=(8, 8))
+plt.subplot(2, 1, 1)
+plt.plot(range(T_max - 1), cons_t[:, 0] / params.w,
+         label='$V^u_0$ = 16759 (aut)', color='red')
+plt.plot(range(T_max - 1), cons_t[:, 1] / params.w,
+         label='$V^u_0$ = 16942', color='blue')
+plt.plot(range(T_max - 1), cons_t[:, 2] / params.w,
+         label='$V^u_0$ = 17000', color='green')
 plt.ylabel("Replacement ratio (c/w)")
 plt.legend()
 plt.title("Optimal replacement ratio")
 
-plt.subplot(2,1,2)
-plt.plot(range(T_max-1),a_t[:,0],color = 'red')
-plt.plot(range(T_max-1),a_t[:,1],color = 'blue')
-plt.plot(range(T_max-1),a_t[:,2],color = 'green')
-plt.ylim(0,320)
+plt.subplot(2, 1, 2)
+plt.plot(range(T_max - 1), a_t[:, 0], color='red')
+plt.plot(range(T_max - 1), a_t[:, 1], color='blue')
+plt.plot(range(T_max - 1), a_t[:, 2], color='green')
+plt.ylim(0, 320)
 plt.ylabel("Optimal search effort (a)")
 plt.xlabel("Duration of unemployment")
 plt.title("Optimal search effort")
