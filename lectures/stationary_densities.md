@@ -42,7 +42,7 @@ Most stochastic dynamic models studied by economists either fit directly into th
 
 In this lecture, our focus will be on continuous Markov models that
 
-* evolve in discrete-time
+* evolve in discrete time
 * are often nonlinear
 
 The fact that we accommodate nonlinear models here is significant, because
@@ -274,7 +274,7 @@ p(x, y)
 where $\phi$ is the density of $A_{t+1}$.
 
 (Regarding the state space $S$ for this model, a natural choice is $(0, \infty)$ --- in which case
-$\sigma(x) = s f(x)$ is strictly positive for all $s$ as required)
+$\sigma(x) = s f(x)$ is strictly positive for all $x$ as required)
 
 ### Distribution dynamics
 
@@ -322,7 +322,7 @@ defined by
 (\psi P)(y) = \int p(x,y) \psi(x) dx
 ```
 
-This operator is usually called the *Markov operator* corresponding to $p$
+This operator is usually called the *Markov operator* corresponding to $p$.
 
 ```{note}
 Unlike most operators, we write $P$ to the right of its argument,
@@ -465,7 +465,7 @@ The following code is an example of usage for the stochastic growth model {ref}`
 # == Define parameters == #
 s = 0.2
 δ = 0.1
-a_σ = 0.4                    # A = exp(B) where B ~ N(0, a_σ)
+a_σ = 0.4                    # A = exp(B) where B ~ N(0, a_σ**2)
 α = 0.4                      # We set f(k) = k**α
 ψ_0 = beta(5, 5, scale=0.5)  # Initial distribution
 ϕ = lognorm(a_σ)
@@ -480,7 +480,7 @@ def p(x, y):
     return ϕ.pdf((y - (1 - δ) * x) / d) / d
 
 n = 10000    # Number of observations at each date t
-T = 30       # Compute density of k_t at 1,...,T+1
+T = 30       # Compute density of k_t at 1,...,T
 
 # == Generate matrix s.t. t-th column is n observations of k_t == #
 k = np.empty((n, T))
@@ -832,6 +832,7 @@ def p(x, y):
 
 Z = ϕ.rvs(n)
 X = np.empty(n)
+X[0] = 0
 for t in range(n-1):
     X[t+1] = θ * np.abs(X[t]) + d * Z[t]
 ψ_est = LAE(p, X)
@@ -882,7 +883,7 @@ Here's one program that does the job
 # == Define parameters == #
 s = 0.2
 δ = 0.1
-a_σ = 0.4                                # A = exp(B) where B ~ N(0, a_σ)
+a_σ = 0.4                                # A = exp(B) where B ~ N(0, a_σ**2)
 α = 0.4                                  # f(k) = k**α
 
 ϕ = lognorm(a_σ)
@@ -941,7 +942,7 @@ $$
 \{ X_1, \ldots, X_n \} \sim LN(0, 1), \;\;
 \{ Y_1, \ldots, Y_n \} \sim N(2, 1), \;\;
 \text{ and } \;
-\{ Z_1, \ldots, Z_n \} \sim N(4, 1), \;
+\{ Z_1, \ldots, Z_n \} \sim N(4, 1)
 $$
 
 Here is the code and figure:
@@ -1018,7 +1019,7 @@ X = np.empty((k, n))
 for j in range(J):
 
     axes[j].set_ylim(-4, 8)
-    axes[j].set_title(f'time series from t = {initial_conditions[j]}')
+    axes[j].set_title(f'time series from $X_0 = {initial_conditions[j]}$')
 
     Z = np.random.randn(k, n)
     X[:, 0] = initial_conditions[j]
