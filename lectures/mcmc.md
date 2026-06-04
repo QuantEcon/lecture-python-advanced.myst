@@ -23,6 +23,33 @@ kernelspec:
 ```{index} single: Markov Chains; Monte Carlo
 ```
 
+This lecture provides a fast-paced introduction to the theory of Markov chain
+Monte Carlo (MCMC).
+
+MCMC is a general method for sampling from a potentially intractable and
+high-dimensional distribution.
+
+The basic idea is to set up a Markov chain such that, asymptotically, the
+distribution of each draw is approximately equal to the target distribution.
+
+Markov chain Monte Carlo lies at the heart of modern Bayesian analysis, and this
+is our motivation for studying MCMC.
+
+In the case of Bayesian analysis, the target distribution is the posterior.
+
+In this lecture we focus on the Metropolis-Hastings algorithm, which is perhaps the most
+important foundational algorithm for MCMC in Bayesian environments.
+
+We first state the theory and then run some illustrations using Google JAX.
+
+The lecture also serves as preparation for working with modern MCMC libraries such as [NumPyro](https://num.pyro.ai/) and [BlackJAX](https://blackjax-devs.github.io/blackjax/), which we will use in later lectures: the implementation below is, in essence, what happens under the hood when such libraries run.
+
+Note that this lecture is intentionally high level.
+
+We freely use advanced probability theory.
+
+The target audience is students with strong math backgrounds and researchers.
+
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 ```{code-cell} ipython3
@@ -62,13 +89,11 @@ p(y) = \int_\Theta p(y \mid \theta) \, p(\theta) \, d\theta
 
 is the marginal likelihood.
 
-Throughout, $\pi$ denotes the posterior density {eq}`mcmc_bayes`, taken with respect to Lebesgue measure on $\Theta$.
-
-The vector $y$ is held fixed throughout the following discussion.
+In line with {eq}`mcmc_bayes`, we usually use $\pi$ to refer to the posterior density, and the data vector $y$ is held fixed.
 
 When the prior and likelihood are conjugate, the integral in {eq}`mcmc_marginal` is available in closed form and the posterior is known analytically.
 
-Outside the conjugate family, however, $p(y)$ is typically intractable.
+Outside the conjugate family, the integral and $\pi$ are typically intractable.
 
 We can nonetheless evaluate the **unnormalized posterior**
 
@@ -77,9 +102,9 @@ $$
 = p(y) \, \pi(\theta)
 $$
 
-pointwise for any $\theta$, since that requires only an evaluation of the likelihood and the prior.
+pointwise for any $\theta$.
 
-Metropolis-Hastings exploits exactly this: it constructs a Markov chain $(\theta_t)_{t \geq 0}$ whose stationary distribution is $\pi$ using only pointwise evaluations of $\tilde p(\theta \mid y)$.
+Metropolis-Hastings exploits this: it constructs a Markov chain $(\theta_t)_{t \geq 0}$ whose stationary distribution is $\pi$ using only pointwise evaluations of $\tilde p(\theta \mid y)$.
 
 In addition to having $\pi$ as the stationary distribution, the chain will also have the following ergodic property: for $\pi$-almost every choice of $\theta_0$,
 
@@ -94,15 +119,16 @@ This means that, by varying $f$, we can compute various features of the distribu
 
 In the Bayesian setting, we use this convergence to estimate posterior means, variances, and quantiles from the sampled path: with $f(\theta) = \theta$ we recover the posterior mean, with $f = \mathbf 1_A$ the posterior probability of $A$, and so on.
 
-The construction proceeds in two stages.
+The rest of the lecture flows as follows.
 
-We first develop, in the abstract, the machinery of Markov transition kernels, detailed balance, and stationarity (see {ref}`mcmc_kernels`).
+First we define Markov transition kernels, detailed balance, and stationarity (see {ref}`mcmc_kernels`).
 
-We then exhibit a specific kernel --- the Metropolis-Hastings kernel --- and verify that it has $\pi$ as its stationary distribution (see {ref}`mcmc_mh`).
+Then we introduce the Metropolis-Hastings kernel and verify that it has
+$\pi$ as its stationary distribution (see {ref}`mcmc_mh`).
 
-Next, we explain, informally, why the resulting chain actually delivers samples from $\pi$ (see {ref}`mcmc_mh_ergodicity`).
+Next we explain why the resulting chain delivers samples from $\pi$ (see {ref}`mcmc_mh_ergodicity`).
 
-Finally, we implement the algorithm in JAX and study its behavior in a sequence of numerical experiments (see {ref}`mcmc_numerics`).
+Finally, we implement the algorithm in JAX and study its behavior in a sequence of experiments (see {ref}`mcmc_numerics`).
 
 (mcmc_kernels)=
 ## Markov kernels
@@ -126,34 +152,35 @@ A **Markov** (or **stochastic**) **kernel** on $(\Theta, \mathcal B)$ is a map $
 1. for each fixed $A \in \mathcal B$, the map $\theta \mapsto N(\theta, A)$ is $\mathcal B$-measurable.
 ```
 
-We read $N(\theta, A)$ as the probability that the chain, currently at $\theta$, moves into the set $A$ at the next step:
+The interpretation is that $N(\theta, A)$ gives the probability that the chain, currently at $\theta$, moves into the set $A$ at the next step:
 
 $$
 N(\theta, A) = \mathbb P \{ \theta_{t+1} \in A \mid \theta_t = \theta \}
 $$
 
-Many kernels are described not by their action on sets but by a **conditional density** --- a function of the next state given the current one.
+Some kernels can be represented by conditional densities:
 
 ````{prf:definition} Conditional density
 :label: mcmc_def_density
 
-A Markov kernel $N$ **admits a density representation** if there exists a conditional density $n$ such that, for every $\theta \in \Theta$ and every $A \in \mathcal B$,
+A Markov kernel $N$ is said to **admit a density representation** if there exists a conditional density $n$ such that, for every $\theta \in \Theta$ and every $A \in \mathcal B$,
 
 ```{math}
-N(\theta, A) = \int_A n(\theta' \mid \theta) \, \mu(d\theta')
+N(\theta, A) = \int_A n(\theta' \mid \theta) \, d\theta'
 ```
 ````
 
-The statement that $n$ is a conditional density means that $n$ is measurable and nonnegative on $\Theta \times \Theta$ with $\int n(\theta' \mid \theta) \, \mu(d\theta') = 1$ for all $\theta \in \Theta$.
+Here
 
-Not every kernel of interest admits a density representation.
+* The statement that $n$ is a conditional density means that $n$ is measurable and nonnegative on $\Theta \times \Theta$, and that $n(\cdot \mid \theta)$ integrates to one for all $\theta \in \Theta$.
+* The symbol $d\theta'$ means integration with respect to Lebesgue measure;
+  sometimes we write this as $\mu(d\theta')$.
 
-Indeed, the Metropolis-Hastings kernel constructed below assigns positive probability to remaining at the current state, and so places an atom on the measure-zero diagonal $\{\theta' = \theta\}$.
 
 ````{prf:definition} Stationary distribution
 :label: mcmc_def_stationary
 
-A probability measure $\pi$ on $(\Theta, \mathcal B)$ is **stationary** for the kernel $N$ if
+A probability measure $\pi$ on $(\Theta, \mathcal B)$ is called **stationary** for the kernel $N$ if
 
 ```{math}
 :label: mcmc_stationary
@@ -308,20 +335,19 @@ If, in addition, $N$ is aperiodic, then, for $\pi$-almost every initial $\theta 
 \to 0
 \quad \text{as } t \to \infty
 ```
-
-that is, the distribution of $\theta_t$ converges to $\pi$ in total variation.
 ````
 
-This theorem is an analogue of the classical law of large numbers, but for the dependent, non-IID draws produced by a Markov chain.
+The first part of the theorem is an analogue of the classical law of large numbers, but for the dependent, non-IID draws produced by a Markov chain.
 
-Note the division of labor between the hypotheses: irreducibility alone delivers the time-average convergence {eq}`mcmc_ergodic`, while aperiodicity supplies the distributional convergence {eq}`mcmc_tvconv`, which justifies treating $\theta_t$ as an approximate draw from $\pi$ when $t$ is large.
+The second part states that, when aperiodicity is added, the distribution of
+$\theta_t$ converges to $\pi$ in total variation.
 
 Proofs of the two parts can be found in chapters 17 and 13, respectively, of {cite}`MeynTweedie2009`.
 
 (mcmc_mh)=
 ## The Metropolis-Hastings kernel
 
-We now build a kernel that satisfies detailed balance with respect to the posterior $\pi$, which you will recall is equal to $p(\cdot \mid y)$.
+We now build a kernel that satisfies detailed balance with respect to the posterior $\pi = p(\cdot \mid y)$.
 
 This and {prf:ref}`mcmc_thm_stat` then imply that $\pi$ is stationary for the kernel, suggesting a means of sampling from $\pi$.
 
@@ -334,7 +360,7 @@ Throughout we impose the following assumption on the proposal.
 ````{prf:definition} Symmetric proposal
 :label: mcmc_def_symm
 
-A proposal kernel $q(\cdot \mid \theta)$, given by a conditional density, is **symmetric** if
+A proposal kernel $q(\cdot \mid \theta)$, given by a conditional density, is called **symmetric** if
 
 ```{math}
 :label: mcmc_symm
@@ -374,7 +400,7 @@ The last equality holds because $\pi = \tilde p(\cdot \mid y) / p(y)$, so the co
 
 Thus $\alpha$ is computable from the likelihood and prior alone.
 
-If $\pi(\theta) = 0$ (equivalently, $\tilde p(\theta \mid y) = 0$), the ratio in {eq}`mcmc_alpha` is not defined, and we adopt the convention $\alpha(\theta, \theta') := 1$.
+If $\pi(\theta) = 0$, the ratio in {eq}`mcmc_alpha` is not defined, and we adopt the convention $\alpha(\theta, \theta') := 1$.
 
 ### The algorithm
 
@@ -433,7 +459,7 @@ The total holding probability is
 :label: mcmc_reject
 
 r(\theta) = 1 - \int_\Theta q(\theta' \mid \theta) \,
-                  \alpha(\theta, \theta') \, \mu(d\theta')
+                  \alpha(\theta, \theta') \, d\theta'
 ```
 
 Collecting the two cases, the Metropolis-Hastings kernel is the mixed kernel
@@ -466,7 +492,7 @@ Let $P$ be the Metropolis-Hastings kernel, so that
 
 ```{math}
 P(\theta, d\theta')
-= \tau(\theta' \mid \theta) \, \mu(d\theta')
+= \tau(\theta' \mid \theta) \, d\theta'
 + r(\theta) \, \delta_\theta(d\theta')
 ```
 
@@ -567,7 +593,9 @@ If $(\theta_t)_{t \geq 0}$ is generated by the Metropolis-Hastings algorithm, th
 
 Stationarity of $\pi$ is already supplied by {prf:ref}`mcmc_thm_mhstat`, so, in view of {prf:ref}`mcmc_thm_ergodic`, it remains only to show that $P$ is $\pi$-irreducible and aperiodic.
 
-Adopting the hypotheses of {prf:ref}`mcmc_thm_mherg` throughout the rest of this section, we discuss informally why these two properties hold.
+Adopting the hypotheses of {prf:ref}`mcmc_thm_mherg` throughout the rest of this section, we discuss why these two properties hold.
+
+The discussion is slightly informal but the proof is largely complete.
 
 ### Why the chain is $\pi$-irreducible
 
@@ -580,7 +608,7 @@ Discarding the holding term in {eq}`mcmc_fullkernel`, which only adds mass, we h
 
 P(\theta, A)
 \geq \int_A q(\theta' \mid \theta) \, \alpha(\theta, \theta') \,
-     \mu(d\theta')
+     d\theta'
 ```
 
 Now fix $\theta$ and a target set $A$ with $\pi(A) > 0$.
@@ -680,7 +708,9 @@ $$
 
 For the prior we take $\theta \sim N(\mu_0, \sigma_0^2)$.
 
-This prior is conjugate: the posterior is again normal, with
+It is well known that, under these assumptions, the prior is conjugate.
+
+In particular, the posterior is again normal, with
 
 ```{math}
 :label: mcmc_conjugate
@@ -697,7 +727,7 @@ where $\bar y$ is the sample mean.
 
 The posterior mean $\mu_n$ is a precision-weighted average of the prior mean and the sample mean.
 
-Here is a simulated data set, generated with a true parameter value that sits well away from the prior mean.
+Here is a simulated data set when the true but unknown value of $\theta$ is set to 3.0.
 
 ```{code-cell} ipython3
 σ_y = 1.0      # observation noise (known)
@@ -709,12 +739,17 @@ key, key_data = jax.random.split(key)
 y = θ_true + σ_y * jax.random.normal(key_data, (n,))
 ```
 
-The prior is centered at zero and fairly tight, so it will be in mild conflict with the data.
+The prior is centered at zero and fairly tight.
 
 ```{code-cell} ipython3
 μ_0 = 0.0      # prior mean
 σ_0 = 0.5      # prior standard deviation
+```
 
+Let's have a look at the parameters in the posterior $\pi$, calculated from the
+formulas in {eq}`mcmc_conjugate`.
+
+```{code-cell} ipython3
 # Conjugate posterior parameters, from the formulas above
 τ_n = 1 / σ_0**2 + n / σ_y**2     # posterior precision
 σ_n = jnp.sqrt(1 / τ_n)
@@ -729,7 +764,7 @@ The posterior mean lies between the prior mean and the sample mean, pulled towar
 
 ### A sampler in JAX
 
-The sampler needs only the log of the unnormalized posterior $\log \tilde p(\theta \mid y)$, exactly as promised by {eq}`mcmc_alpha`.
+The sampler needs only the log of the unnormalized posterior $\log \tilde p(\theta \mid y)$, as promised by {eq}`mcmc_alpha`.
 
 We write a small factory that assembles it from a log prior and the data.
 
@@ -774,23 +809,52 @@ def mh_chain(key, log_post, θ_init, σ_prop, num_steps):
     return path, accepts
 ```
 
-Let's run a long chain, discarding an initial stretch as burn-in so that the remaining draws are approximately stationary.
+The function `mh_chain` mirrors {prf:ref}`mcmc_algo_mh` line by line, and on a CPU it is perfectly serviceable.
+
+On an accelerator such as a GPU, however, it is a poor fit: a Markov chain is inherently sequential, so each step involves only a handful of scalar operations and the hardware sits almost entirely idle.
+
+The JAX-idiomatic remedy is not to rewrite the algorithm but to transform it: `jax.vmap` converts our single-chain sampler into one that runs thousands of independent chains in parallel, which is exactly the kind of workload accelerators are built for.
 
 ```{code-cell} ipython3
-T = 100_000
-burn_in = 1_000
+def mh_ensemble(key, log_post, θ_init, σ_prop, num_chains, num_steps):
+    "Run num_chains independent MH chains in parallel."
+    keys = jax.random.split(key, num_chains)
+    return jax.vmap(
+        mh_chain, in_axes=(0, None, None, None, None)
+    )(keys, log_post, θ_init, σ_prop, num_steps)
+```
+
+Running many parallel chains is also how modern probabilistic programming libraries, such as [NumPyro](https://num.pyro.ai/) and [BlackJAX](https://blackjax-devs.github.io/blackjax/), organize their MCMC computations.
+
+When you ask such a library for a posterior sample, code very much like `mh_chain` wrapped in `vmap` is what runs under the hood (albeit with more sophisticated transition kernels).
+
+We will meet these libraries in later lectures; one aim of the present lecture is to build their foundations from first principles.
+
+We initialize every chain at the same point and discard an initial stretch of each --- the **burn-in** --- so that the draws we keep are approximately stationary.
+
+(The total variation convergence {eq}`mcmc_tvconv` is exactly what justifies this practice: after enough steps, the distribution of $\theta_t$ is close to $\pi$ regardless of the initial condition.)
+
+The burn-in is now paid once per chain rather than once in total, but since the chains run in parallel this costs essentially no wall-clock time.
+
+Pooling the post-burn-in draws from all chains then gives us millions of approximate posterior draws.
+
+```{code-cell} ipython3
+num_chains = 4_096   # independent chains
+T = 1_500            # steps per chain
+burn_in = 500        # discarded from the start of each chain
 
 key, key_mh = jax.random.split(key)
-path, accepts = mh_chain(key_mh, log_post_gauss,
-                         0.0, 0.5, T + burn_in)
-draws = path[burn_in:]
+paths, accepts = mh_ensemble(key_mh, log_post_gauss,
+                             0.0, 0.5, num_chains, T)
+draws = paths[:, burn_in:].ravel()
 
-print(f"acceptance rate = {accepts.mean():.3f}")
+print(f"total draws kept = {draws.size:,}")
+print(f"acceptance rate  = {accepts.mean():.3f}")
 ```
 
 ### Checking the numerics
 
-If the sampler is correct, the draws should look like a sample from the exact posterior {eq}`mcmc_conjugate`.
+If the sampler is correct, the pooled draws should look like a sample from the exact posterior {eq}`mcmc_conjugate`.
 
 ```{code-cell} ipython3
 ---
@@ -832,6 +896,8 @@ Each conclusion can be visualized separately.
 
 The ergodic property {eq}`mcmc_ergodic` with $f(\theta) = \theta$ says that the running mean of a single trajectory converges to the posterior mean.
 
+Since the theorem concerns time averages along one path, we take a single trajectory --- one row of the ensemble.
+
 Note that no burn-in is needed for this statement --- the theorem applies to the whole trajectory.
 
 ```{code-cell} ipython3
@@ -841,7 +907,8 @@ mystnb:
     caption: Running mean of a single trajectory
     name: fig-mcmc-running-mean
 ---
-running_mean = jnp.cumsum(path) / jnp.arange(1, len(path) + 1)
+θ_path = paths[0]    # a single trajectory
+running_mean = jnp.cumsum(θ_path) / jnp.arange(1, len(θ_path) + 1)
 
 fig, ax = plt.subplots()
 ax.plot(running_mean, lw=2, label='running mean of the chain')
@@ -857,21 +924,16 @@ plt.show()
 
 The total variation convergence {eq}`mcmc_tvconv` concerns the distribution of $\theta_t$ at a fixed date $t$, rather than a time average.
 
-To see it we need many independent copies of the chain.
+To see it we need many independent copies of the chain --- exactly what `mh_ensemble` provides.
 
-This is where JAX shines: `jax.vmap` runs thousands of chains in parallel, all started from the same deliberately terrible initial condition.
+This time all chains are started from the same deliberately terrible initial condition, and no draws are discarded, because the transient *is* the object of interest.
 
 ```{code-cell} ipython3
-num_chains = 10_000
-T_short = 500
 θ_init_bad = -10.0    # far from the posterior mass
 
 key, key_ens = jax.random.split(key)
-chain_keys = jax.random.split(key_ens, num_chains)
-
-ens_paths, _ = jax.vmap(
-    mh_chain, in_axes=(0, None, None, None, None)
-)(chain_keys, log_post_gauss, θ_init_bad, 0.5, T_short)
+ens_paths, _ = mh_ensemble(key_ens, log_post_gauss,
+                           θ_init_bad, 0.5, 10_000, 100)
 
 ens_paths.shape
 ```
@@ -888,8 +950,8 @@ mystnb:
     name: fig-mcmc-ensemble
 ---
 fig, ax = plt.subplots()
-dates = (10, 50, 100, 200, 499)
-greys = [str(g) for g in np.linspace(0.7, 0.0, len(dates))]
+dates = (1, 5, 15, 25, 40, 80)
+greys = [str(g) for g in np.linspace(0.75, 0.0, len(dates))]
 grid = np.linspace(-12, 6, 400)
 
 for t, g in zip(dates, greys):
@@ -905,7 +967,7 @@ plt.show()
 
 The distribution of $\theta_t$ travels from a point mass at $-10$ to the posterior, exactly as {eq}`mcmc_tvconv` predicts.
 
-Readers of [](stationary_densities) will recognize this picture: it is the same density-sequence convergence displayed there for the stochastic growth model.
+Readers of [](stationary_densities) will recognize this picture: it is analogous to the density sequence displayed there for the stochastic growth model.
 
 (mcmc_nonconjugate)=
 ## Losing conjugacy
@@ -914,11 +976,6 @@ The pointwise-evaluation property of Metropolis-Hastings means we can swap in *a
 
 We exploit this to study how the posterior responds when the prior changes.
 
-One caution: {prf:ref}`mcmc_thm_mherg` requires $\pi(\theta) > 0$ for all $\theta \in \mathbb R$, so the new prior must have full support.
-
-(A uniform prior on an interval, for example, would violate this hypothesis.)
-
-The priors below --- Student-t and Gaussian mixture --- are both strictly positive on $\mathbb R$.
 
 ### Ground truth by quadrature
 
@@ -956,17 +1013,18 @@ log_post_t = make_log_post(log_prior_t, y, σ_y)
 
 Recall that the prior is centered at $0$ while the data are centered near $3$ --- the prior and the data disagree.
 
-Under the Gaussian prior, the posterior mean {eq}`mcmc_conjugate` is *always* the same precision-weighted compromise, no matter how stark the conflict.
+We will see that this heavy-tailed prior produces a rather different
+posterior (compared to the Gaussian prior).
 
-A heavy-tailed prior behaves differently: because the t density flattens out in its tails, it exerts almost no pull on a likelihood centered far away, and the data win the argument.
+In essence, the fact that the t density flattens out in its tails means that it exerts less pull on a likelihood centered far away, so the data is more influential.
 
 Let's check this by sampling.
 
 ```{code-cell} ipython3
 key, key_t = jax.random.split(key)
-path_t, accepts_t = mh_chain(key_t, log_post_t,
-                             0.0, 0.5, T + burn_in)
-draws_t = path_t[burn_in:]
+paths_t, accepts_t = mh_ensemble(key_t, log_post_t,
+                                 0.0, 0.5, num_chains, T)
+draws_t = paths_t[:, burn_in:].ravel()
 
 print(f"acceptance rate = {accepts_t.mean():.3f}")
 ```
@@ -1001,7 +1059,7 @@ Second, the Gaussian-prior posterior compromises, settling noticeably below the 
 
 Third, the t-prior posterior concedes to the data, concentrating essentially on the sample mean.
 
-This is the classic robustness property of heavy-tailed priors: they represent beliefs that are held firmly near the center but weakly in the tails, so they yield gracefully under prior-data conflict.
+This is a classic property of heavy-tailed priors: they represent beliefs that are held firmly near the center but weakly in the tails, so they tend to yield under prior-data conflict.
 
 ### A bimodal prior
 
@@ -1026,7 +1084,7 @@ def log_prior_mix(θ):
     return logsumexp(log_comps) - jnp.log(2)
 ```
 
-To keep both regimes in play we use a deliberately small and ambiguous data set: two observations with sample mean zero, equidistant from the two prior modes.
+To keep both regimes in play we use a deliberately small data set: two observations with sample mean zero.
 
 ```{code-cell} ipython3
 y_mix = jnp.array([0.5, -0.5])
@@ -1035,11 +1093,13 @@ log_post_mix = make_log_post(log_prior_mix, y_mix, σ_y)
 
 When sampling from a bimodal target, the chain must hop between modes through a low-probability valley, so we use a larger proposal standard deviation to make those jumps feasible.
 
+Parallel chains help here too: even if an individual chain crosses between modes only occasionally, the ensemble as a whole populates both modes.
+
 ```{code-cell} ipython3
 key, key_mix = jax.random.split(key)
-path_mix, accepts_mix = mh_chain(key_mix, log_post_mix,
-                                 0.0, 2.0, T + burn_in)
-draws_mix = path_mix[burn_in:]
+paths_mix, accepts_mix = mh_ensemble(key_mix, log_post_mix,
+                                     0.0, 2.0, num_chains, T)
+draws_mix = paths_mix[:, burn_in:].ravel()
 
 print(f"acceptance rate = {accepts_mix.mean():.3f}")
 ```
@@ -1064,9 +1124,9 @@ ax.legend()
 plt.show()
 ```
 
-The posterior inherits the prior's two-regime structure, and every feature of the figure maps back to the inputs.
+We see that the posterior inherits the prior's two-regime structure.
 
-The posterior remains bimodal because two ambiguous observations cannot decide between the regimes.
+The posterior remains bimodal because two observations cannot decide between the regimes.
 
 Each mode moves inward, from $\pm 2$ toward the sample mean at zero, because within each regime the data pull the plausible values of $\theta$ toward the evidence.
 
@@ -1104,8 +1164,8 @@ key_ex = jax.random.key(42)
 for ax, σ_prop in zip(axes, σ_props):
     key_ex, key_run = jax.random.split(key_ex)
     path_ex, accepts_ex = mh_chain(key_run, log_post_gauss,
-                                   0.0, σ_prop, T + burn_in)
-    ax.plot(np.asarray(path_ex[:2000]), lw=2, alpha=0.8)
+                                   0.0, σ_prop, 2_000)
+    ax.plot(np.asarray(path_ex), lw=2, alpha=0.8)
     ax.set_title(f'$\\sigma = {σ_prop}$, '
                  f'acceptance rate = {accepts_ex.mean():.3f}')
     ax.set_xlabel(r'$t$')
