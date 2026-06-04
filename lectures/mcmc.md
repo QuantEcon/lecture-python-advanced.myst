@@ -23,6 +23,22 @@ kernelspec:
 ```{index} single: Markov Chains; Monte Carlo
 ```
 
+In addition to what's in Anaconda, this lecture will need the following libraries:
+
+```{code-cell} ipython3
+:tags: [hide-output]
+
+!pip install jax
+```
+
+```{admonition} JAX
+:class: note
+
+This lecture uses [Google JAX](https://github.com/jax-ml/jax) for its numerical examples.
+
+The examples are small enough to run quickly on a CPU, so the default `pip install jax` is sufficient and no GPU is required.
+```
+
 ## Overview
 
 Let $\theta \in \Theta \subseteq \mathbb R$ be an unknown parameter and let $y = (y_1, \ldots, y_n) \in \mathbb R^n$ be observed data.
@@ -84,7 +100,9 @@ We first develop, in the abstract, the machinery of Markov transition kernels, d
 
 We then exhibit a specific kernel --- the Metropolis-Hastings kernel --- and verify that it has $\pi$ as its stationary distribution (see {ref}`mcmc_mh`).
 
-Finally, we explain, informally, why the resulting chain actually delivers samples from $\pi$ (see {ref}`mcmc_mh_ergodicity`).
+Next, we explain, informally, why the resulting chain actually delivers samples from $\pi$ (see {ref}`mcmc_mh_ergodicity`).
+
+Finally, we implement the algorithm in JAX and study its behavior in a sequence of numerical experiments (see {ref}`mcmc_numerics`).
 
 (mcmc_kernels)=
 ## Markov kernels
@@ -628,3 +646,526 @@ As $\theta$ was arbitrary, the chain can remain in place at *every* state, which
 By {prf:ref}`mcmc_thm_ergodic`, time averages along the simulated path converge almost surely to posterior expectations, and the distribution of $\theta_t$ converges to the posterior in total variation.
 
 This is exactly what justifies using the output $\{\theta_t\}_{t=1}^T$ as a sample from the posterior.
+
+(mcmc_numerics)=
+## A numerical example
+
+We now implement the Metropolis-Hastings algorithm and watch the theory at work.
+
+Our strategy is to start with a fully conjugate model, where the posterior is known in closed form, so that every number the sampler produces can be checked.
+
+Once the numerics are validated, we will change the prior, lose conjugacy, and study how the posterior responds.
+
+Let's begin with some imports:
+
+```{code-cell} ipython3
+import numpy as np
+import jax
+import jax.numpy as jnp
+from jax.scipy import stats as jstats
+from jax.scipy.special import logsumexp
+from scipy.stats import gaussian_kde
+import matplotlib.pyplot as plt
+from functools import partial
+```
+
+### The model and data
+
+The data are IID draws from a normal distribution with unknown mean $\theta$ and known standard deviation $\sigma_y$:
+
+$$
+y_i \mid \theta \sim N(\theta, \sigma_y^2),
+\qquad i = 1, \ldots, n
+$$
+
+For the prior we take $\theta \sim N(\mu_0, \sigma_0^2)$.
+
+This prior is conjugate: the posterior is again normal, with
+
+```{math}
+:label: mcmc_conjugate
+
+\pi = N(\mu_n, \sigma_n^2),
+\qquad
+\frac{1}{\sigma_n^2} = \frac{1}{\sigma_0^2} + \frac{n}{\sigma_y^2},
+\qquad
+\mu_n = \sigma_n^2
+  \left( \frac{\mu_0}{\sigma_0^2} + \frac{n \bar y}{\sigma_y^2} \right)
+```
+
+where $\bar y$ is the sample mean.
+
+The posterior mean $\mu_n$ is a precision-weighted average of the prior mean and the sample mean.
+
+Here is a simulated data set, generated with a true parameter value that sits well away from the prior mean.
+
+```{code-cell} ipython3
+σ_y = 1.0      # observation noise (known)
+n = 20         # sample size
+θ_true = 3.0   # true parameter generating the data
+
+key = jax.random.key(11)
+key, key_data = jax.random.split(key)
+y = θ_true + σ_y * jax.random.normal(key_data, (n,))
+```
+
+The prior is centered at zero and fairly tight, so it will be in mild conflict with the data.
+
+```{code-cell} ipython3
+μ_0 = 0.0      # prior mean
+σ_0 = 0.5      # prior standard deviation
+
+# Conjugate posterior parameters, from the formulas above
+τ_n = 1 / σ_0**2 + n / σ_y**2     # posterior precision
+σ_n = jnp.sqrt(1 / τ_n)
+μ_n = (μ_0 / σ_0**2 + y.sum() / σ_y**2) / τ_n
+
+print(f"sample mean         = {y.mean():.4f}")
+print(f"posterior mean μ_n  = {μ_n:.4f}")
+print(f"posterior std  σ_n  = {σ_n:.4f}")
+```
+
+The posterior mean lies between the prior mean and the sample mean, pulled toward the latter by the data.
+
+### A sampler in JAX
+
+The sampler needs only the log of the unnormalized posterior $\log \tilde p(\theta \mid y)$, exactly as promised by {eq}`mcmc_alpha`.
+
+We write a small factory that assembles it from a log prior and the data.
+
+```{code-cell} ipython3
+def make_log_post(log_prior, y, σ_y):
+    "Build the log unnormalized posterior from a log prior and data."
+    def log_post(θ):
+        log_likelihood = jnp.sum(jstats.norm.logpdf(y, θ, σ_y))
+        return log_likelihood + log_prior(θ)
+    return log_post
+
+
+def log_prior_gauss(θ):
+    return jstats.norm.logpdf(θ, μ_0, σ_0)
+
+log_post_gauss = make_log_post(log_prior_gauss, y, σ_y)
+```
+
+Next we implement {prf:ref}`mcmc_algo_mh` with the Gaussian random walk proposal of {prf:ref}`mcmc_eg_rw`.
+
+The update is written as a function of the current state and a PRNG key, and the chain is generated by `jax.lax.scan`.
+
+Following the remark after {prf:ref}`mcmc_algo_mh`, we work with the log acceptance ratio.
+
+```{code-cell} ipython3
+@partial(jax.jit, static_argnames=('log_post', 'num_steps'))
+def mh_chain(key, log_post, θ_init, σ_prop, num_steps):
+    """
+    Generate a Metropolis-Hastings chain of length num_steps using a
+    Gaussian random walk proposal with standard deviation σ_prop.
+    """
+    def step(θ, key):
+        key_prop, key_accept = jax.random.split(key)
+        θ_new = θ + σ_prop * jax.random.normal(key_prop)
+        log_α = jnp.minimum(0.0, log_post(θ_new) - log_post(θ))
+        accept = jnp.log(jax.random.uniform(key_accept)) <= log_α
+        θ_next = jnp.where(accept, θ_new, θ)
+        return θ_next, (θ_next, accept)
+
+    keys = jax.random.split(key, num_steps)
+    _, (path, accepts) = jax.lax.scan(step, θ_init, keys)
+    return path, accepts
+```
+
+Let's run a long chain, discarding an initial stretch as burn-in so that the remaining draws are approximately stationary.
+
+```{code-cell} ipython3
+T = 100_000
+burn_in = 1_000
+
+key, key_mh = jax.random.split(key)
+path, accepts = mh_chain(key_mh, log_post_gauss,
+                         0.0, 0.5, T + burn_in)
+draws = path[burn_in:]
+
+print(f"acceptance rate = {accepts.mean():.3f}")
+```
+
+### Checking the numerics
+
+If the sampler is correct, the draws should look like a sample from the exact posterior {eq}`mcmc_conjugate`.
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: MCMC draws and the exact posterior
+    name: fig-mcmc-conjugate
+---
+fig, ax = plt.subplots()
+grid = jnp.linspace(μ_n - 5 * σ_n, μ_n + 5 * σ_n, 200)
+ax.hist(np.asarray(draws), bins=60, density=True, alpha=0.4,
+        label='MCMC draws')
+ax.plot(grid, jstats.norm.pdf(grid, μ_n, σ_n), lw=2,
+        label='exact posterior')
+ax.set_xlabel(r'$\theta$')
+ax.legend()
+plt.show()
+```
+
+The histogram sits on top of the exact density.
+
+The posterior moments agree to a few decimal places.
+
+```{code-cell} ipython3
+print(f"posterior mean: exact = {μ_n:.4f}, MCMC = {draws.mean():.4f}")
+print(f"posterior std:  exact = {σ_n:.4f}, MCMC = {draws.std():.4f}")
+```
+
+We conclude that the sampler is doing its job.
+
+(mcmc_ergodicity_action)=
+## Ergodicity in action
+
+Recall the division of labor in {prf:ref}`mcmc_thm_ergodic`: irreducibility delivers the convergence of time averages {eq}`mcmc_ergodic`, while aperiodicity delivers convergence of the distribution of $\theta_t$ to $\pi$ {eq}`mcmc_tvconv`.
+
+Each conclusion can be visualized separately.
+
+### Time averages
+
+The ergodic property {eq}`mcmc_ergodic` with $f(\theta) = \theta$ says that the running mean of a single trajectory converges to the posterior mean.
+
+Note that no burn-in is needed for this statement --- the theorem applies to the whole trajectory.
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Running mean of a single trajectory
+    name: fig-mcmc-running-mean
+---
+running_mean = jnp.cumsum(path) / jnp.arange(1, len(path) + 1)
+
+fig, ax = plt.subplots()
+ax.plot(running_mean, lw=2, label='running mean of the chain')
+ax.axhline(μ_n, color='k', lw=2, linestyle='--',
+           label=r'exact posterior mean $\mu_n$')
+ax.set_xscale('log')   # the transient is over quickly
+ax.set_xlabel(r'$t$')
+ax.legend()
+plt.show()
+```
+
+### Distributional convergence
+
+The total variation convergence {eq}`mcmc_tvconv` concerns the distribution of $\theta_t$ at a fixed date $t$, rather than a time average.
+
+To see it we need many independent copies of the chain.
+
+This is where JAX shines: `jax.vmap` runs thousands of chains in parallel, all started from the same deliberately terrible initial condition.
+
+```{code-cell} ipython3
+num_chains = 10_000
+T_short = 500
+θ_init_bad = -10.0    # far from the posterior mass
+
+key, key_ens = jax.random.split(key)
+chain_keys = jax.random.split(key_ens, num_chains)
+
+ens_paths, _ = jax.vmap(
+    mh_chain, in_axes=(0, None, None, None, None)
+)(chain_keys, log_post_gauss, θ_init_bad, 0.5, T_short)
+
+ens_paths.shape
+```
+
+At each date $t$, the cross-section $\{\theta_t^i\}_{i=1}^{10000}$ is a sample from the distribution of $\theta_t$.
+
+We plot kernel density estimates of these cross-sections at a sequence of dates.
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Cross-section distributions marching toward the posterior
+    name: fig-mcmc-ensemble
+---
+fig, ax = plt.subplots()
+dates = (10, 50, 100, 200, 499)
+greys = [str(g) for g in np.linspace(0.7, 0.0, len(dates))]
+grid = np.linspace(-12, 6, 400)
+
+for t, g in zip(dates, greys):
+    kde = gaussian_kde(np.asarray(ens_paths[:, t]))
+    ax.plot(grid, kde(grid), color=g, lw=2, label=f'$t = {t}$')
+
+ax.plot(grid, jstats.norm.pdf(grid, μ_n, σ_n), 'b--', lw=2,
+        label='posterior')
+ax.set_xlabel(r'$\theta$')
+ax.legend()
+plt.show()
+```
+
+The distribution of $\theta_t$ travels from a point mass at $-10$ to the posterior, exactly as {eq}`mcmc_tvconv` predicts.
+
+Readers of [](stationary_densities) will recognize this picture: it is the same density-sequence convergence displayed there for the stochastic growth model.
+
+(mcmc_nonconjugate)=
+## Losing conjugacy
+
+The pointwise-evaluation property of Metropolis-Hastings means we can swap in *any* prior with a computable density --- no new sampler is required.
+
+We exploit this to study how the posterior responds when the prior changes.
+
+One caution: {prf:ref}`mcmc_thm_mherg` requires $\pi(\theta) > 0$ for all $\theta \in \mathbb R$, so the new prior must have full support.
+
+(A uniform prior on an interval, for example, would violate this hypothesis.)
+
+The priors below --- Student-t and Gaussian mixture --- are both strictly positive on $\mathbb R$.
+
+### Ground truth by quadrature
+
+In one dimension we do not have to take the sampler's word for anything: the normalizing constant $p(y)$ is a one-dimensional integral, which we can compute by quadrature on a grid.
+
+```{code-cell} ipython3
+def posterior_on_grid(log_post, grid):
+    "Normalize the unnormalized posterior on a grid by quadrature."
+    log_vals = jax.vmap(log_post)(grid)
+    vals = jnp.exp(log_vals - log_vals.max())
+    return vals / jnp.trapezoid(vals, grid)
+```
+
+As a sanity check, quadrature recovers the conjugate posterior:
+
+```{code-cell} ipython3
+grid = jnp.linspace(-2, 6, 800)
+quad = posterior_on_grid(log_post_gauss, grid)
+exact = jstats.norm.pdf(grid, μ_n, σ_n)
+print(f"max abs error = {jnp.max(jnp.abs(quad - exact)):.2e}")
+```
+
+### A Student-t prior
+
+Our first experiment replaces the Gaussian prior with a Student-t prior that has the *same location and scale* but heavy tails.
+
+```{code-cell} ipython3
+ν = 3    # degrees of freedom
+
+def log_prior_t(θ):
+    return jstats.t.logpdf(θ, ν, loc=μ_0, scale=σ_0)
+
+log_post_t = make_log_post(log_prior_t, y, σ_y)
+```
+
+Recall that the prior is centered at $0$ while the data are centered near $3$ --- the prior and the data disagree.
+
+Under the Gaussian prior, the posterior mean {eq}`mcmc_conjugate` is *always* the same precision-weighted compromise, no matter how stark the conflict.
+
+A heavy-tailed prior behaves differently: because the t density flattens out in its tails, it exerts almost no pull on a likelihood centered far away, and the data win the argument.
+
+Let's check this by sampling.
+
+```{code-cell} ipython3
+key, key_t = jax.random.split(key)
+path_t, accepts_t = mh_chain(key_t, log_post_t,
+                             0.0, 0.5, T + burn_in)
+draws_t = path_t[burn_in:]
+
+print(f"acceptance rate = {accepts_t.mean():.3f}")
+```
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Posteriors under Gaussian and Student-t priors
+    name: fig-mcmc-t-prior
+---
+fig, ax = plt.subplots()
+grid = jnp.linspace(-1, 5, 400)
+ax.hist(np.asarray(draws_t), bins=60, density=True, alpha=0.4,
+        label='MCMC draws, t prior')
+ax.plot(grid, posterior_on_grid(log_post_t, grid), lw=2,
+        label='posterior, t prior')
+ax.plot(grid, jstats.norm.pdf(grid, μ_n, σ_n), lw=2,
+        label='posterior, Gaussian prior')
+ax.axvline(y.mean(), color='k', lw=2, linestyle='--', alpha=0.6,
+           label='sample mean')
+ax.set_xlabel(r'$\theta$')
+ax.legend()
+plt.show()
+```
+
+The figure shows three things.
+
+First, the MCMC histogram again matches the quadrature ground truth, so the sampler remains accurate outside the conjugate family.
+
+Second, the Gaussian-prior posterior compromises, settling noticeably below the sample mean.
+
+Third, the t-prior posterior concedes to the data, concentrating essentially on the sample mean.
+
+This is the classic robustness property of heavy-tailed priors: they represent beliefs that are held firmly near the center but weakly in the tails, so they yield gracefully under prior-data conflict.
+
+### A bimodal prior
+
+Our second experiment gives the prior an entirely different *shape*: a two-component Gaussian mixture
+
+$$
+p(\theta)
+= \tfrac{1}{2} \, \phi_{\sigma_m}(\theta + 2)
++ \tfrac{1}{2} \, \phi_{\sigma_m}(\theta - 2)
+$$
+
+where $\phi_{\sigma_m}$ is the $N(0, \sigma_m^2)$ density.
+
+This prior says: $\theta$ lies in one of two regimes, near $-2$ or near $+2$, and we do not know which.
+
+```{code-cell} ipython3
+μ_mix = jnp.array([-2.0, 2.0])   # component centers
+σ_mix = 0.5                      # component standard deviation
+
+def log_prior_mix(θ):
+    log_comps = jstats.norm.logpdf(θ, μ_mix, σ_mix)
+    return logsumexp(log_comps) - jnp.log(2)
+```
+
+To keep both regimes in play we use a deliberately small and ambiguous data set: two observations with sample mean zero, equidistant from the two prior modes.
+
+```{code-cell} ipython3
+y_mix = jnp.array([0.5, -0.5])
+log_post_mix = make_log_post(log_prior_mix, y_mix, σ_y)
+```
+
+When sampling from a bimodal target, the chain must hop between modes through a low-probability valley, so we use a larger proposal standard deviation to make those jumps feasible.
+
+```{code-cell} ipython3
+key, key_mix = jax.random.split(key)
+path_mix, accepts_mix = mh_chain(key_mix, log_post_mix,
+                                 0.0, 2.0, T + burn_in)
+draws_mix = path_mix[burn_in:]
+
+print(f"acceptance rate = {accepts_mix.mean():.3f}")
+```
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Posterior under a bimodal mixture prior
+    name: fig-mcmc-mixture
+---
+fig, ax = plt.subplots()
+grid = jnp.linspace(-4.5, 4.5, 500)
+prior_pdf = jnp.exp(jax.vmap(log_prior_mix)(grid))
+ax.hist(np.asarray(draws_mix), bins=80, density=True, alpha=0.4,
+        label='MCMC draws')
+ax.plot(grid, posterior_on_grid(log_post_mix, grid), lw=2,
+        label='posterior')
+ax.plot(grid, prior_pdf, lw=2, linestyle='--', label='prior')
+ax.set_xlabel(r'$\theta$')
+ax.legend()
+plt.show()
+```
+
+The posterior inherits the prior's two-regime structure, and every feature of the figure maps back to the inputs.
+
+The posterior remains bimodal because two ambiguous observations cannot decide between the regimes.
+
+Each mode moves inward, from $\pm 2$ toward the sample mean at zero, because within each regime the data pull the plausible values of $\theta$ toward the evidence.
+
+The two modes carry equal weight because the data set is symmetric between them --- tilt the data and the mode weights tilt too, a case explored in {ref}`mcmc_ex2` below.
+
+## Exercises
+
+```{exercise-start}
+:label: mcmc_ex1
+```
+
+The proposal standard deviation $\sigma$ is the one tuning parameter of the random walk sampler, and it matters.
+
+Re-run the conjugate example with $\sigma \in \{0.01, 0.5, 50\}$, keeping everything else unchanged.
+
+For each value, plot the first 2,000 elements of the chain (a *trace plot*) and report the acceptance rate.
+
+Explain the pattern you find: why do both very small and very large values of $\sigma$ produce poor samplers?
+
+```{exercise-end}
+```
+
+```{solution-start} mcmc_ex1
+:class: dropdown
+```
+
+Here is one solution.
+
+```{code-cell} ipython3
+σ_props = (0.01, 0.5, 50.0)
+
+fig, axes = plt.subplots(len(σ_props), 1, figsize=(10, 9))
+key_ex = jax.random.key(42)
+
+for ax, σ_prop in zip(axes, σ_props):
+    key_ex, key_run = jax.random.split(key_ex)
+    path_ex, accepts_ex = mh_chain(key_run, log_post_gauss,
+                                   0.0, σ_prop, T + burn_in)
+    ax.plot(np.asarray(path_ex[:2000]), lw=2, alpha=0.8)
+    ax.set_title(f'$\\sigma = {σ_prop}$, '
+                 f'acceptance rate = {accepts_ex.mean():.3f}')
+    ax.set_xlabel(r'$t$')
+
+fig.tight_layout()
+plt.show()
+```
+
+When $\sigma$ is very small, nearly every proposal is accepted, but each step is tiny, so the chain explores the posterior extremely slowly and the draws are highly autocorrelated.
+
+When $\sigma$ is very large, proposals usually land far out in the tails where $\tilde p$ is negligible, so they are nearly always rejected and the chain stays frozen for long stretches.
+
+Both extremes deliver valid but very inefficient samplers; intermediate values, with acceptance rates roughly in the 20--50% range, explore the posterior much faster.
+
+```{solution-end}
+```
+
+```{exercise-start}
+:label: mcmc_ex2
+```
+
+Return to the bimodal mixture prior and suppose the data actually come from the positive regime: draw $n$ observations from $N(1, 1)$.
+
+Compute the posterior by quadrature for $n \in \{2, 8, 32\}$, using the first $n$ elements of a single simulated data set so that the samples are nested.
+
+Plot the three posteriors together with the prior, and interpret what you see.
+
+```{exercise-end}
+```
+
+```{solution-start} mcmc_ex2
+:class: dropdown
+```
+
+Here is one solution.
+
+```{code-cell} ipython3
+key_ex2 = jax.random.key(8)
+y_all = 1.0 + σ_y * jax.random.normal(key_ex2, (32,))
+
+fig, ax = plt.subplots()
+grid = jnp.linspace(-4.5, 4.5, 500)
+ax.plot(grid, jnp.exp(jax.vmap(log_prior_mix)(grid)),
+        lw=2, linestyle='--', label='prior')
+
+for n_obs in (2, 8, 32):
+    log_post_n = make_log_post(log_prior_mix, y_all[:n_obs], σ_y)
+    ax.plot(grid, posterior_on_grid(log_post_n, grid), lw=2,
+            label=f'posterior, $n = {n_obs}$')
+
+ax.set_xlabel(r'$\theta$')
+ax.legend()
+plt.show()
+```
+
+With only a couple of observations, both regimes remain plausible, although the positive regime already carries more weight.
+
+As $n$ grows, the likelihood sharpens around the sample mean, the negative regime's posterior weight collapses toward zero, and the surviving mode tightens around the truth.
+
+The prior's two-regime structure is a belief that the data can and do resolve: in the limit, the posterior concentrates on the regime that generated the data.
+
+```{solution-end}
+```
