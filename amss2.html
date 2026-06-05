@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>54. Fluctuating Interest Rates Deliver Fiscal Insurance &#8212; Advanced Quantitative Economics with Python</title>
+    <title>55. Fluctuating Interest Rates Deliver Fiscal Insurance &#8212; Advanced Quantitative Economics with Python</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -77,7 +77,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=ff5dcadef89fd2097ea5e28ddaad7eb5985f09c4" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -131,8 +131,8 @@
     <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="55. Fiscal Risk and Government Debt" href="amss3.html" />
-    <link rel="prev" title="53. Optimal Taxation without State-Contingent Debt" href="amss.html" />
+    <link rel="next" title="56. Fiscal Risk and Government Debt" href="amss3.html" />
+    <link rel="prev" title="54. Optimal Taxation without State-Contingent Debt" href="amss.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -155,6 +155,9 @@
 <meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
 <meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
 <meta name="theme-color" content="#ffffff" />
+
+
+
 
   </head>
 <body>
@@ -204,25 +207,25 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">54.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forces-at-work">54.2. Forces at work</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-flow-of-lecture">54.3. Logical flow of lecture</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equations-from-lucas-stokey-1983-model">54.3.1. Equations from Lucas-Stokey (1983) model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specification-with-crra-utility">54.3.2. Specification with CRRA utility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">55.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forces-at-work">55.2. Forces at work</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-flow-of-lecture">55.3. Logical flow of lecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#equations-from-lucas-stokey-1983-model">55.3.1. Equations from Lucas-Stokey (1983) model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specification-with-crra-utility">55.3.2. Specification with CRRA utility</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-economy">54.4. Example economy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-engineering-strategy">54.5. Reverse engineering strategy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-for-reverse-engineering">54.6. Code for reverse engineering</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-simulation-for-reverse-engineered-initial-debt">54.7. Short simulation for reverse-engineered: initial debt</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-simulation">54.8. Long simulation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remarks-about-long-simulation">54.8.1. Remarks about long simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-economy">55.4. Example economy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reverse-engineering-strategy">55.5. Reverse engineering strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code-for-reverse-engineering">55.6. Code for reverse engineering</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#short-simulation-for-reverse-engineered-initial-debt">55.7. Short simulation for reverse-engineered: initial debt</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-simulation">55.8. Long simulation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#remarks-about-long-simulation">55.8.1. Remarks about long simulation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#begs-approximations-of-limiting-debt-and-convergence-rate">54.9. BEGS approximations of limiting debt and convergence rate</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#asymptotic-mean">54.9.1. Asymptotic mean</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rate-of-convergence">54.9.2. Rate of convergence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formulas-and-code-details">54.9.3. Formulas and code details</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#begs-approximations-of-limiting-debt-and-convergence-rate">55.9. BEGS approximations of limiting debt and convergence rate</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#asymptotic-mean">55.9.1. Asymptotic mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rate-of-convergence">55.9.2. Rate of convergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formulas-and-code-details">55.9.3. Formulas and code details</a></li>
 </ul>
 </li>
 </ul>
@@ -292,7 +295,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/8c84d8da" class="changelog-hash">8c84d8da</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">1 month ago</span>
+                                <span class="changelog-time">3 months ago</span>
                                 <span class="changelog-message">[amss] Update Tom's edits to AMSS and Calvo Lectures (#312)</span>
                             </li>
                             
@@ -301,7 +304,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">7 months ago</span>
+                                <span class="changelog-time">9 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -346,7 +349,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/48204872" class="changelog-hash">48204872</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">ENH: Enable Execution, GitHub Actions, update config.yml (#4)</span>
                             </li>
                             
@@ -355,7 +358,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/f6dcddbe" class="changelog-hash">f6dcddbe</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">migrate latest sources from lecture-python-advanced (f82c31f1d31652f89065a51bd684cd6b81451bea)</span>
                             </li>
                             
@@ -364,7 +367,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e829ce22" class="changelog-hash">e829ce22</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">migrate files from lecture-python-advanced (69382af5ab66348c1a9a822aadb476a096700bfe)</span>
                             </li>
                             
@@ -373,7 +376,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/3a67d951" class="changelog-hash">3a67d951</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">Revert "migrate new sources from lecture-python using sphinx-tomyst (f772bb0)"</span>
                             </li>
                             
@@ -394,13 +397,13 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="fluctuating-interest-rates-deliver-fiscal-insurance">
-<h1><span class="section-number">54. </span>Fluctuating Interest Rates Deliver Fiscal Insurance<a class="headerlink" href="#fluctuating-interest-rates-deliver-fiscal-insurance" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">55. </span>Fluctuating Interest Rates Deliver Fiscal Insurance<a class="headerlink" href="#fluctuating-interest-rates-deliver-fiscal-insurance" title="Link to this heading">#</a></h1>
 <section id="overview">
-<h2><span class="section-number">54.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">55.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This lecture studies  how optimal policies for levying a flat-rate tax on labor income  depend
 on whether a government can buy and sell a complete set of one-period-ahead Arrow securities or whether it is instead able to buy or sell  only one-period risk-free debt.</p>
-<p>A Ramsey allocation and Ramsey policy in the AMSS <span id="id1">[<a class="reference internal" href="zreferences.html#id150" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span> model described in <a class="reference internal" href="amss.html"><span class="doc">optimal taxation without state-contingent debt</span></a> generally differs
-from a Ramsey allocation and Ramsey policy in the  Lucas-Stokey <span id="id2">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> model described in <a class="reference internal" href="opt_tax_recur.html"><span class="doc">optimal taxation with state-contingent debt</span></a>.</p>
+<p>A Ramsey allocation and Ramsey policy in the AMSS <span class="bibtex-citation" id="id1">[<a class="reference internal" href="zreferences.html#id150" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span> model described in <a class="reference internal" href="amss.html"><span class="doc">optimal taxation without state-contingent debt</span></a> generally differs
+from a Ramsey allocation and Ramsey policy in the  Lucas-Stokey <span class="bibtex-citation" id="id2">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> model described in <a class="reference internal" href="opt_tax_recur.html"><span class="doc">optimal taxation with state-contingent debt</span></a>.</p>
 <p>This is because the implementability restriction that a competitive equilibrium with a distorting tax  imposes on  allocations in the Lucas-Stokey model is just one among a set of
 implementability conditions imposed in  the AMSS model.</p>
 <p>These additional constraints require that time <span class="math notranslate nohighlight">\(t\)</span> components of a Ramsey allocation
@@ -408,7 +411,7 @@ for the AMSS model be <strong>measurable</strong> with respect to time <span cla
 <p>The  measurability constraints imposed by the AMSS model are inherited from the   restriction that  only one-period risk-free bonds
 can be traded.</p>
 <p>Differences between the  Ramsey allocations in the two models   indicate that at least some of the <strong>implementability constraints</strong> of the AMSS model of
-<a class="reference internal" href="amss.html"><span class="doc">optimal taxation without state-contingent debt</span></a> are violated at the Ramsey allocation of a corresponding  <span id="id3">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> model with state-contingent debt.</p>
+<a class="reference internal" href="amss.html"><span class="doc">optimal taxation without state-contingent debt</span></a> are violated at the Ramsey allocation of a corresponding  <span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> model with state-contingent debt.</p>
 <p>Another way to say this is that differences between the Ramsey allocations of the two models indicate that some of the <strong>measurability constraints</strong> imposed by the
 AMSS model are violated at the  Ramsey allocation of the Lucas-Stokey model.</p>
 <p>Nonzero Lagrange multipliers on those constraints make the Ramsey allocation for the AMSS model differ from the Ramsey allocation for the Lucas-Stokey model.</p>
@@ -419,10 +422,10 @@ AMSS model are violated at the  Ramsey allocation of the Lucas-Stokey model.</p>
 <ul>
 <li><p>bind for many periods, but <span class="math notranslate nohighlight">\(\ldots\)</span>.</p></li>
 <li><p>eventually, they stop binding evermore, so that <span class="math notranslate nohighlight">\(\ldots\)</span></p></li>
-<li><p>in the tail of the Ramsey plan, the Lagrange multipliers <span class="math notranslate nohighlight">\(\gamma_t(s^t)\)</span> on the AMSS implementability constraints <a class="reference internal" href="amss.html#equation-ts-gov-wo4">(53.8)</a>  are zero.</p></li>
+<li><p>in the tail of the Ramsey plan, the Lagrange multipliers <span class="math notranslate nohighlight">\(\gamma_t(s^t)\)</span> on the AMSS implementability constraints <a class="reference internal" href="amss.html#equation-ts-gov-wo4">(54.8)</a>  are zero.</p></li>
 </ul>
 </li>
-<li><p>After the implementability constraints <a class="reference internal" href="amss.html#equation-ts-gov-wo4">(53.8)</a> no longer bind in the tail of the AMSS Ramsey plan</p>
+<li><p>After the implementability constraints <a class="reference internal" href="amss.html#equation-ts-gov-wo4">(54.8)</a> no longer bind in the tail of the AMSS Ramsey plan</p>
 <ul>
 <li><p>history dependence of the AMSS state variable <span class="math notranslate nohighlight">\(x_t\)</span> vanishes and  <span class="math notranslate nohighlight">\(x_t\)</span> becomes a time-invariant function of the Markov state <span class="math notranslate nohighlight">\(s_t\)</span>.</p></li>
 <li><p>the par value of government debt becomes <strong>constant over time</strong> so that <span class="math notranslate nohighlight">\(b_{t+1}(s^t) = \bar b\)</span> for <span class="math notranslate nohighlight">\(t \geq T\)</span> for a sufficiently large <span class="math notranslate nohighlight">\(T\)</span>.</p></li>
@@ -440,7 +443,7 @@ but <span class="math notranslate nohighlight">\(\ldots\)</span>.</p></li>
 <li><p>the state variable <span class="math notranslate nohighlight">\(x\)</span> in a recursive representation of a Ramsey plan is a time-invariant function of the Markov state for <span class="math notranslate nohighlight">\(t \geq 0\)</span>.</p></li>
 </ul>
 </li>
-<li><p>In this special case, the Ramsey allocation in the AMSS model agrees with that in a Lucas-Stokey <span id="id4">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> complete markets model in which
+<li><p>In this special case, the Ramsey allocation in the AMSS model agrees with that in a Lucas-Stokey <span class="bibtex-citation" id="id4">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> complete markets model in which
 the same amount of state-contingent debt falls due in all states tomorrow</p>
 <ul>
 <li><p>it is a situation in which  the Ramsey planner loses nothing from not being  able to  trade state-contingent debt and being restricted to exchange only risk-free debt  debt.</p></li>
@@ -491,8 +494,8 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </div>
 </section>
 <section id="forces-at-work">
-<h2><span class="section-number">54.2. </span>Forces at work<a class="headerlink" href="#forces-at-work" title="Link to this heading">#</a></h2>
-<p>The forces  driving asymptotic  outcomes here are examples of dynamics present in a more general class of incomplete markets models analyzed in <span id="id5">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> (BEGS).</p>
+<h2><span class="section-number">55.2. </span>Forces at work<a class="headerlink" href="#forces-at-work" title="Link to this heading">#</a></h2>
+<p>The forces  driving asymptotic  outcomes here are examples of dynamics present in a more general class of incomplete markets models analyzed in <span class="bibtex-citation" id="id5">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> (BEGS).</p>
 <p>BEGS provide conditions under which government debt under a Ramsey plan converges to an invariant distribution.</p>
 <p>BEGS  construct approximations to that asymptotically invariant  distribution  of government debt under a  Ramsey plan.</p>
 <p>BEGS also compute an approximation to a Ramsey plan’s rate of convergence  to that limiting invariant distribution.</p>
@@ -510,7 +513,7 @@ shutting down the stochastic component of debt dynamics.</p></li>
 </ul>
 </section>
 <section id="logical-flow-of-lecture">
-<h2><span class="section-number">54.3. </span>Logical flow of lecture<a class="headerlink" href="#logical-flow-of-lecture" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">55.3. </span>Logical flow of lecture<a class="headerlink" href="#logical-flow-of-lecture" title="Link to this heading">#</a></h2>
 <p>We present ideas  in the following order</p>
 <ul class="simple">
 <li><p>We describe a two-state  AMSS economy and generate a long simulation starting from a positive  initial government debt.</p></li>
@@ -527,14 +530,14 @@ to <span class="math notranslate nohighlight">\(\bar b\)</span> immediately.</p>
 <li><p>We compute the BEGS approximations to check how accurately they describe the dynamics of the long-simulation.</p></li>
 </ul>
 <section id="equations-from-lucas-stokey-1983-model">
-<h3><span class="section-number">54.3.1. </span>Equations from Lucas-Stokey (1983) model<a class="headerlink" href="#equations-from-lucas-stokey-1983-model" title="Link to this heading">#</a></h3>
-<p>Although we are studying an AMSS <span id="id6">[<a class="reference internal" href="zreferences.html#id150" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span> economy,  a Lucas-Stokey <span id="id7">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> economy plays
+<h3><span class="section-number">55.3.1. </span>Equations from Lucas-Stokey (1983) model<a class="headerlink" href="#equations-from-lucas-stokey-1983-model" title="Link to this heading">#</a></h3>
+<p>Although we are studying an AMSS <span class="bibtex-citation" id="id6">[<a class="reference internal" href="zreferences.html#id150" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span> economy,  a Lucas-Stokey <span class="bibtex-citation" id="id7">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> economy plays
 an important  role in the reverse-engineering calculation to be described below.</p>
 <p>For that reason, it is helpful  to have key equations underlying a Ramsey plan for the Lucas-Stokey economy readily available.</p>
 <p>Recall first-order conditions for a Ramsey allocation for the Lucas-Stokey economy.</p>
 <p>For <span class="math notranslate nohighlight">\(t \geq 1\)</span>, these take the form</p>
 <div class="math notranslate nohighlight" id="equation-ts-barg10a">
-<span class="eqno">(54.1)<a class="headerlink" href="#equation-ts-barg10a" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(55.1)<a class="headerlink" href="#equation-ts-barg10a" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
   (1+\Phi) &amp;u_c(c,1-c-g) + \Phi \bigl[c u_{cc}(c,1-c-g) -
     (c+g) u_{\ell c}(c,1-c-g) \bigr]
     \\
@@ -544,7 +547,7 @@ an important  role in the reverse-engineering calculation to be described below.
 <p>There is one such equation for each value of the Markov state <span class="math notranslate nohighlight">\(s_t\)</span>.</p>
 <p>Given an initial Markov state, the time <span class="math notranslate nohighlight">\(t=0\)</span> quantities <span class="math notranslate nohighlight">\(c_0\)</span> and <span class="math notranslate nohighlight">\(b_0\)</span> satisfy</p>
 <div class="math notranslate nohighlight" id="equation-ts-barg11b">
-<span class="eqno">(54.2)<a class="headerlink" href="#equation-ts-barg11b" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
+<span class="eqno">(55.2)<a class="headerlink" href="#equation-ts-barg11b" title="Link to this equation">#</a></span>\[\begin{split}\begin{aligned}
       (1+\Phi) &amp;u_c(c,1-c-g) + \Phi \bigl[c u_{cc}(c,1-c-g) -
         (c+g) u_{\ell c}(c,1-c-g) \bigr]
         \\
@@ -554,10 +557,10 @@ an important  role in the reverse-engineering calculation to be described below.
 <p>In addition, the time <span class="math notranslate nohighlight">\(t=0\)</span> budget constraint is satisfied at <span class="math notranslate nohighlight">\(c_0\)</span> and initial government debt
 <span class="math notranslate nohighlight">\(b_0\)</span></p>
 <div class="math notranslate nohighlight" id="equation-eqn-amss2-10">
-<span class="eqno">(54.3)<a class="headerlink" href="#equation-eqn-amss2-10" title="Link to this equation">#</a></span>\[b_0 + g_0 = \tau_0 (c_0 + g_0) + \frac{\bar b}{R_0}\]</div>
+<span class="eqno">(55.3)<a class="headerlink" href="#equation-eqn-amss2-10" title="Link to this equation">#</a></span>\[b_0 + g_0 = \tau_0 (c_0 + g_0) + \frac{\bar b}{R_0}\]</div>
 <p>where <span class="math notranslate nohighlight">\(R_0\)</span> is the gross interest rate for the Markov state <span class="math notranslate nohighlight">\(s_0\)</span> that is assumed to prevail at time <span class="math notranslate nohighlight">\(t =0\)</span>
 and <span class="math notranslate nohighlight">\(\tau_0\)</span> is the time <span class="math notranslate nohighlight">\(t=0\)</span> tax rate.</p>
-<p>In equation <a class="reference internal" href="#equation-eqn-amss2-10">(54.3)</a>, it is understood that</p>
+<p>In equation <a class="reference internal" href="#equation-eqn-amss2-10">(55.3)</a>, it is understood that</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -569,7 +572,7 @@ R_0^{-1} =  \beta  \sum_{s=1}^S \Pi(s | s_0) \frac{u_c(s)}{u_{c,0}}
 case of a CRRA utility specification that we shall use in our example economies.</p>
 </section>
 <section id="specification-with-crra-utility">
-<h3><span class="section-number">54.3.2. </span>Specification with CRRA utility<a class="headerlink" href="#specification-with-crra-utility" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">55.3.2. </span>Specification with CRRA utility<a class="headerlink" href="#specification-with-crra-utility" title="Link to this heading">#</a></h3>
 <p>As in lectures <a class="reference internal" href="amss.html"><span class="doc">optimal taxation without state-contingent debt</span></a> and <a class="reference internal" href="opt_tax_recur.html"><span class="doc">optimal taxation with state-contingent debt</span></a>,
 we assume that the representative agent has utility function</p>
 <div class="math notranslate nohighlight">
@@ -593,14 +596,14 @@ u_{c,c}(c,\ell)&amp; \sim u_{c,c}(c,n) \\
 u_{c,\ell} (c,\ell) &amp;\sim 0
 \end{aligned}
 \end{split}\]</div>
-<p>With these understandings, equations <a class="reference internal" href="#equation-ts-barg10a">(54.1)</a> and <a class="reference internal" href="#equation-ts-barg11b">(54.2)</a> simplify in the case of the CRRA utility function.</p>
+<p>With these understandings, equations <a class="reference internal" href="#equation-ts-barg10a">(55.1)</a> and <a class="reference internal" href="#equation-ts-barg11b">(55.2)</a> simplify in the case of the CRRA utility function.</p>
 <p>They become</p>
 <div class="math notranslate nohighlight" id="equation-amss2-ts-barg10">
-<span class="eqno">(54.4)<a class="headerlink" href="#equation-amss2-ts-barg10" title="Link to this equation">#</a></span>\[(1+\Phi) [u_c(c) + u_n(c+g)] + \Phi[c u_{cc}(c) + (c+g) u_{nn}(c+g)] = 0\]</div>
+<span class="eqno">(55.4)<a class="headerlink" href="#equation-amss2-ts-barg10" title="Link to this equation">#</a></span>\[(1+\Phi) [u_c(c) + u_n(c+g)] + \Phi[c u_{cc}(c) + (c+g) u_{nn}(c+g)] = 0\]</div>
 <p>and</p>
 <div class="math notranslate nohighlight" id="equation-amss2-ts-barg11">
-<span class="eqno">(54.5)<a class="headerlink" href="#equation-amss2-ts-barg11" title="Link to this equation">#</a></span>\[(1+\Phi) [u_c(c_0) + u_n(c_0+g_0)] + \Phi[c_0 u_{cc}(c_0) + (c_0+g_0) u_{nn}(c_0+g_0)] - \Phi u_{cc}(c_0) b_0 = 0\]</div>
-<p>In equation <a class="reference internal" href="#equation-amss2-ts-barg10">(54.4)</a>, it is understood that <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are each functions of the Markov state <span class="math notranslate nohighlight">\(s\)</span>.</p>
+<span class="eqno">(55.5)<a class="headerlink" href="#equation-amss2-ts-barg11" title="Link to this equation">#</a></span>\[(1+\Phi) [u_c(c_0) + u_n(c_0+g_0)] + \Phi[c_0 u_{cc}(c_0) + (c_0+g_0) u_{nn}(c_0+g_0)] - \Phi u_{cc}(c_0) b_0 = 0\]</div>
+<p>In equation <a class="reference internal" href="#equation-amss2-ts-barg10">(55.4)</a>, it is understood that <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are each functions of the Markov state <span class="math notranslate nohighlight">\(s\)</span>.</p>
 <p>The CRRA utility function is represented in the following class.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -649,7 +652,7 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
 </section>
 </section>
 <section id="example-economy">
-<h2><span class="section-number">54.4. </span>Example economy<a class="headerlink" href="#example-economy" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">55.4. </span>Example economy<a class="headerlink" href="#example-economy" title="Link to this heading">#</a></h2>
 <p>We set the following parameter values.</p>
 <p>The Markov state <span class="math notranslate nohighlight">\(s_t\)</span> takes two values, namely,  <span class="math notranslate nohighlight">\(0,1\)</span>.</p>
 <p>The initial Markov state is <span class="math notranslate nohighlight">\(0\)</span>.</p>
@@ -1212,33 +1215,33 @@ u_{c,\ell} (c,\ell) &amp;\sim 0
 </div>
 </section>
 <section id="reverse-engineering-strategy">
-<h2><span class="section-number">54.5. </span>Reverse engineering strategy<a class="headerlink" href="#reverse-engineering-strategy" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">55.5. </span>Reverse engineering strategy<a class="headerlink" href="#reverse-engineering-strategy" title="Link to this heading">#</a></h2>
 <p>We can reverse engineer a value <span class="math notranslate nohighlight">\(b_0\)</span> of initial debt due   that renders the AMSS measurability constraints not binding from time <span class="math notranslate nohighlight">\(t =0\)</span> onward.</p>
 <p>We accomplish this by recognizing that if the AMSS measurability constraints never bind, then the AMSS allocation and Ramsey plan is equivalent
 with that for a Lucas-Stokey economy in which for each period <span class="math notranslate nohighlight">\(t \geq 0\)</span>, the government promises to pay the <strong>same</strong> state-contingent
 amount  <span class="math notranslate nohighlight">\(\bar b\)</span> in each state tomorrow.</p>
-<p>This insight tells us to find a <span class="math notranslate nohighlight">\(b_0\)</span> and other fundamentals for the Lucas-Stokey <span id="id8">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> model that make the Ramsey planner
+<p>This insight tells us to find a <span class="math notranslate nohighlight">\(b_0\)</span> and other fundamentals for the Lucas-Stokey <span class="bibtex-citation" id="id8">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> model that make the Ramsey planner
 want to borrow the same value <span class="math notranslate nohighlight">\(\bar b\)</span> next period for all states and all dates.</p>
-<p>We accomplish this by using various equations for the Lucas-Stokey <span id="id9">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> model
+<p>We accomplish this by using various equations for the Lucas-Stokey <span class="bibtex-citation" id="id9">[<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">Lucas and Stokey, 1983</a>]</span> model
 presented in <a class="reference internal" href="opt_tax_recur.html"><span class="doc">optimal taxation with state-contingent debt</span></a>.</p>
 <p>We use the following steps.</p>
 <p><strong>Step 1:</strong>  Pick an initial <span class="math notranslate nohighlight">\(\Phi\)</span>.</p>
-<p><strong>Step 2:</strong> Given that <span class="math notranslate nohighlight">\(\Phi\)</span>, jointly solve two versions of equation <a class="reference internal" href="#equation-amss2-ts-barg10">(54.4)</a> for <span class="math notranslate nohighlight">\(c(s), s=1, 2\)</span> associated with the two values
+<p><strong>Step 2:</strong> Given that <span class="math notranslate nohighlight">\(\Phi\)</span>, jointly solve two versions of equation <a class="reference internal" href="#equation-amss2-ts-barg10">(55.4)</a> for <span class="math notranslate nohighlight">\(c(s), s=1, 2\)</span> associated with the two values
 for <span class="math notranslate nohighlight">\(g(s), s=1,2\)</span>.</p>
 <p><strong>Step 3:</strong>  Solve the following equation for <span class="math notranslate nohighlight">\(\vec x\)</span></p>
 <div class="math notranslate nohighlight" id="equation-lsa-xsola">
-<span class="eqno">(54.6)<a class="headerlink" href="#equation-lsa-xsola" title="Link to this equation">#</a></span>\[\vec x= (I - \beta \Pi )^{-1} [ \vec u_c (\vec n-\vec g) - \vec u_l \vec n]\]</div>
+<span class="eqno">(55.6)<a class="headerlink" href="#equation-lsa-xsola" title="Link to this equation">#</a></span>\[\vec x= (I - \beta \Pi )^{-1} [ \vec u_c (\vec n-\vec g) - \vec u_l \vec n]\]</div>
 <p><strong>Step 4:</strong> After solving for <span class="math notranslate nohighlight">\(\vec x\)</span>, we can find <span class="math notranslate nohighlight">\(b(s_t|s^{t-1})\)</span> in Markov
 state <span class="math notranslate nohighlight">\(s_t=s\)</span> from <span class="math notranslate nohighlight">\(b(s) = {\frac{x(s)}{u_c(s)}}\)</span> or the matrix equation</p>
 <div class="math notranslate nohighlight" id="equation-amss2-lsa-bsol">
-<span class="eqno">(54.7)<a class="headerlink" href="#equation-amss2-lsa-bsol" title="Link to this equation">#</a></span>\[\vec b = {\frac{ \vec x }{\vec u_c}}\]</div>
+<span class="eqno">(55.7)<a class="headerlink" href="#equation-amss2-lsa-bsol" title="Link to this equation">#</a></span>\[\vec b = {\frac{ \vec x }{\vec u_c}}\]</div>
 <p><strong>Step 5:</strong> Compute <span class="math notranslate nohighlight">\(J(\Phi) = (b(1) - b(2))^2\)</span>.</p>
 <p><strong>Step 6:</strong> Put steps 2 through 6 in a function minimizer and find a <span class="math notranslate nohighlight">\(\Phi\)</span> that minimizes <span class="math notranslate nohighlight">\(J(\Phi)\)</span>.</p>
 <p><strong>Step 7:</strong> At the value of <span class="math notranslate nohighlight">\(\Phi\)</span> and the value of <span class="math notranslate nohighlight">\(\bar b\)</span> that emerged from step 6, solve equations
-<a class="reference internal" href="#equation-amss2-ts-barg11">(54.5)</a> and <a class="reference internal" href="#equation-eqn-amss2-10">(54.3)</a> jointly for <span class="math notranslate nohighlight">\(c_0, b_0\)</span>.</p>
+<a class="reference internal" href="#equation-amss2-ts-barg11">(55.5)</a> and <a class="reference internal" href="#equation-eqn-amss2-10">(55.3)</a> jointly for <span class="math notranslate nohighlight">\(c_0, b_0\)</span>.</p>
 </section>
 <section id="code-for-reverse-engineering">
-<h2><span class="section-number">54.6. </span>Code for reverse engineering<a class="headerlink" href="#code-for-reverse-engineering" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">55.6. </span>Code for reverse engineering<a class="headerlink" href="#code-for-reverse-engineering" title="Link to this heading">#</a></h2>
 <p>Here is code to do the calculations for us.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1347,7 +1350,7 @@ set up a function that returns two simultaneous equations.</p>
 <p>Thus, we have reverse engineered an initial <span class="math notranslate nohighlight">\(b0 = -1.038698407551764\)</span> that ought to render the AMSS measurability constraints slack.</p>
 </section>
 <section id="short-simulation-for-reverse-engineered-initial-debt">
-<h2><span class="section-number">54.7. </span>Short simulation for reverse-engineered: initial debt<a class="headerlink" href="#short-simulation-for-reverse-engineered-initial-debt" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">55.7. </span>Short simulation for reverse-engineered: initial debt<a class="headerlink" href="#short-simulation-for-reverse-engineered-initial-debt" title="Link to this heading">#</a></h2>
 <p>The following graph shows simulations of outcomes for both a Lucas-Stokey economy and for an AMSS economy starting from initial government
 debt equal to <span class="math notranslate nohighlight">\(b_0 = -1.038698407551764\)</span>.</p>
 <p>These graphs report outcomes for both the Lucas-Stokey economy with complete markets and the AMSS economy with one-period risk-free debt only.</p>
@@ -1395,173 +1398,173 @@ debt equal to <span class="math notranslate nohighlight">\(b_0 = -1.038698407551
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.04094445433233041
-0.0016732111461315012
-0.0014846748479195263
-0.0013137721368915087
-0.0011814037130864455
-0.0010559653361074965
-0.0009446661650213699
-0.0008463807316727379
-0.0007560453790069662
-0.0006756001034387708
-0.0006041528456133748
-0.0005396004518909814
-0.00048207169097974124
-0.00043082732103144015
-0.00038481851384354995
-0.00034383521771144367
-0.0003072436934420259
-0.0002745009146306071
-0.000245317733006886
-0.00021923324290334278
-0.00019593539321249037
-0.0001751430347815892
-0.0001565593984542904
-0.00013996737087847117
-0.000125144577893583
-0.00011190070822495153
-0.0001000702001121511
-8.949728532978107e-05
-8.004975325413312e-05
-7.160585255617296e-05
-6.405840578483561e-05
-5.731160529943133e-05
-5.1279701271048746e-05
-4.588651750714488e-05
-4.1063904820051474e-05
-3.675096996375595e-05
-3.289357334289943e-05
-2.9443322589975283e-05
-2.6356778413549218e-05
-2.3595476933627096e-05
-2.112486755063294e-05
-1.89142922743319e-05
-1.693598956570358e-05
-1.5165570500151916e-05
-1.3581075211814493e-05
-1.2162766109910658e-05
-1.0893227553425258e-05
-9.756678116415926e-06
-8.739234339145969e-06
-7.82832058344982e-06
-7.012602844265165e-06
-6.282198778419405e-06
-5.628118937798783e-06
-5.042427594896525e-06
-4.51780031785405e-06
-4.048011450899489e-06
-3.6271819793133316e-06
-3.250227996421488e-06
-2.9125552281806748e-06
-2.610063191882551e-06
-2.3390964240368323e-06
-2.0963001019931953e-06
-1.878785635996655e-06
-1.683889657525072e-06
-1.5092762894632342e-06
-1.3527904847971673e-06
-1.212586983747762e-06
-1.0869367733200667e-06
-9.74329346510009e-07
-8.734258724878369e-07
-7.829794118303954e-07
-7.019280449522387e-07
-6.292786793934243e-07
-5.641636496068325e-07
-5.058008243639485e-07
-4.5348429308333604e-07
-4.0659063056486806e-07
-3.645531673213723e-07
-3.268700375667969e-07
-2.930882312469538e-07
-2.6280347851649895e-07
-2.3565296999800783e-07
-2.1131171140660646e-07
-1.894885406149964e-07
-1.6992247520753224e-07
-1.5237966781322138e-07
-1.3665055383026423e-07
-1.2254729722059272e-07
-1.0990157758588992e-07
-9.856251343412507e-08
-8.839489238009276e-08
-7.92774962466089e-08
-7.110167931537943e-08
-6.37701004784457e-08
-5.719540922783429e-08
-5.1299412626327065e-08
-4.601190062100285e-08
-4.1270214997213186e-08
-3.701786490243495e-08
-3.3204173119400884e-08
-2.9783796989799955e-08
-2.6716146588734028e-08
-2.396478737506845e-08
-2.1497076497471332e-08
-1.928373094987776e-08
-1.729850560060672e-08
-1.551785505280052e-08
-1.39206850380883e-08
-1.2488060694730188e-08
-1.1203016548739616e-08
-1.00503310290677e-08
-9.016356615162622e-09
-8.088854678396481e-09
-7.256851533293482e-09
-6.510502312000609e-09
-5.840981437998673e-09
-5.240371013539584e-09
-4.701573198572642e-09
-4.21821911260245e-09
-3.7845989464244316e-09
-3.3955887706558673e-09
-3.0465976848962353e-09
-2.733502623403173e-09
-2.4526094123616308e-09
-2.2006030483389677e-09
-1.974509972498987e-09
-1.771663474140319e-09
-1.5896704850434147e-09
-1.4263841109193857e-09
-1.2799008497959113e-09
-1.1484275954833813e-09
-1.0305453705999257e-09
-9.247183693998579e-10
-8.298181206307923e-10
-7.446408752402984e-10
-6.682285366035443e-10
-5.996602123467801e-10
-5.381320122765016e-10
-4.829238427079765e-10
-4.3338063048384335e-10
-3.8892501414889525e-10
-3.4902987538349783e-10
-3.1323033477119265e-10
-2.811041065579606e-10
-2.522739325764219e-10
-2.2640288825051294e-10
-2.0318569001112597e-10
-1.823500861099162e-10
-1.6365181492039446e-10
-1.4687286642115805e-10
-1.3181418042488635e-10
-1.1829999287079427e-10
-1.0617209871882488e-10
-9.528811343278077e-11
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.04094445433233213
+0.0016732111461362947
+0.001484674847923989
+0.001313772136888066
+0.0011814037130879868
+0.0010559653361840902
+0.0009446661651279629
+0.0008463807317018907
+0.0007560453790110056
+0.0006756001034857392
+0.0006041528462157751
+0.0005396004516357152
+0.00048207169060222356
+0.0004308273209347179
+0.00038481851397944894
+0.00034383521769835475
+0.00030724369336317754
+0.0002745009147775594
+0.00024531773291536197
+0.00021923324294856396
+0.00019593539321771956
+0.0001751430346833996
+0.00015655939852516522
+0.00013996737080449896
+0.0001251445778854467
+0.00011190070822166562
+0.00010007020009863601
+8.949728533047894e-05
+8.004975324650822e-05
+7.16058523245167e-05
+6.405840594366712e-05
+5.731160546469999e-05
+5.127970117896372e-05
+4.588651747454011e-05
+4.1063904887349706e-05
+3.675096993739361e-05
+3.2893573340472644e-05
+2.944332261842533e-05
+2.6356778295763557e-05
+2.3595476888522145e-05
+2.112486760198149e-05
+1.8914292417456066e-05
+1.6935989638223366e-05
+1.5165570443943627e-05
+1.3581075141551328e-05
+1.2162766085101419e-05
+1.0893227548220645e-05
+9.756678019603257e-06
+8.739234284318854e-06
+7.828320707677007e-06
+7.0126028645651605e-06
+6.2821987851862345e-06
+5.6281189412690545e-06
+5.042427646428449e-06
+4.5178003907280054e-06
+4.048011462178213e-06
+3.6271820317139597e-06
+3.250227985143995e-06
+2.912555232692563e-06
+2.6100631498932533e-06
+2.339096442776541e-06
+2.0963001278469634e-06
+1.878785615696035e-06
+1.6838896755707774e-06
+1.509276287901928e-06
+1.3527904650168693e-06
+1.212586997976145e-06
+1.086936719704369e-06
+9.743293307203357e-07
+8.734258360498756e-07
+7.829793766069654e-07
+7.019280208337048e-07
+6.292786495488567e-07
+5.641636272233793e-07
+5.058008011128946e-07
+4.534842736495985e-07
+4.0659061303978545e-07
+3.6455315170494917e-07
+3.268700238590371e-07
+2.930882197948917e-07
+2.6280346949365317e-07
+2.3565296201625506e-07
+2.113117056805581e-07
+1.8948853575652765e-07
+1.699224715636753e-07
+1.5237966607804027e-07
+1.3665055330969617e-07
+1.2254729739409032e-07
+1.0990157827993725e-07
+9.856251516926996e-08
+8.83948939417235e-08
+7.927749902285316e-08
+7.11016827856893e-08
+6.377010342820905e-08
+5.719541217759891e-08
+5.1299416964221076e-08
+4.6011904264833815e-08
+4.1270218995787995e-08
+3.701786872715973e-08
+3.3204177291830357e-08
+2.9783800640675776e-08
+2.671615023961095e-08
+2.396479050439139e-08
+2.1497079974498435e-08
+1.928373373149898e-08
+1.729850751297027e-08
+1.551785800827463e-08
+1.3920687472007923e-08
+1.2488062085540223e-08
+1.1203018808808405e-08
+1.0050332419878458e-08
+9.016358179825359e-09
+8.088856069207809e-09
+7.256851880994958e-09
+6.510502311998918e-09
+5.840980742590419e-09
+5.240370318131479e-09
+4.701571981609612e-09
+4.2182180694912225e-09
+3.7845970340548705e-09
+3.3955877275448364e-09
+3.046596294081912e-09
+2.7335012325889256e-09
+2.452608890805901e-09
+2.2006027006349935e-09
+1.974509450943382e-09
+1.7716638218432218e-09
+1.5896715281531335e-09
+1.4263891526180597e-09
+1.2798881586220642e-09
+1.1484442852455076e-09
+1.0305265946168865e-09
+9.246816866924813e-10
+8.297904782113964e-10
+7.445909798042062e-10
+6.681981125570171e-10
+5.996238773426774e-10
+5.381088900010638e-10
+4.829047190214853e-10
+4.3336863471678545e-10
+3.8891927704281265e-10
+3.490295276799294e-10
+3.132345072116747e-10
+2.811110606255594e-10
+2.522841898262186e-10
+2.2641453631387718e-10
+2.0319820733297542e-10
+1.82363820393637e-10
+1.6366607075921026e-10
+1.4688694840829218e-10
+1.3182774085694956e-10
+1.1831355330286673e-10
+1.0618531144751769e-10
+9.530010919962327e-11
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7390/108196118.py:24: RuntimeWarning: divide by zero encountered in reciprocal
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7190/108196118.py:24: RuntimeWarning: divide by zero encountered in reciprocal
   U = (c**(1 - σ) - 1) / (1 - σ)
-/tmp/ipykernel_7390/108196118.py:29: RuntimeWarning: divide by zero encountered in power
+/tmp/ipykernel_7190/108196118.py:29: RuntimeWarning: divide by zero encountered in power
   return c**(-self.σ)
-/tmp/ipykernel_7390/1565228915.py:249: RuntimeWarning: invalid value encountered in divide
+/tmp/ipykernel_7190/1565228915.py:249: RuntimeWarning: invalid value encountered in divide
   x * u_c / Eu_c - u_c * (c - T) - Un(c, n) * n - β * xprime,
-/tmp/ipykernel_7390/1565228915.py:249: RuntimeWarning: invalid value encountered in multiply
+/tmp/ipykernel_7190/1565228915.py:249: RuntimeWarning: invalid value encountered in multiply
   x * u_c / Eu_c - u_c * (c - T) - Un(c, n) * n - β * xprime,
 </pre></div>
 </div>
-<img alt="_images/ca789f9510159d17de873c0d2fb72858aaf3579b0f4c9ee3f52c4d141b94b5f7.png" src="_images/ca789f9510159d17de873c0d2fb72858aaf3579b0f4c9ee3f52c4d141b94b5f7.png" />
+<img alt="_images/092004feb03ebd6b8fff5bdbd3ed5992a69bc506e0c39b5043a27632d37a64fe.png" src="_images/092004feb03ebd6b8fff5bdbd3ed5992a69bc506e0c39b5043a27632d37a64fe.png" />
 </div>
 </div>
 <p>The Ramsey allocations and Ramsey outcomes are <strong>identical</strong> for the Lucas-Stokey and AMSS economies.</p>
@@ -1570,7 +1573,7 @@ debt equal to <span class="math notranslate nohighlight">\(b_0 = -1.038698407551
 <p>However, output and labor supply are both nontrivial time-invariant functions of the Markov state.</p>
 </section>
 <section id="long-simulation">
-<h2><span class="section-number">54.8. </span>Long simulation<a class="headerlink" href="#long-simulation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">55.8. </span>Long simulation<a class="headerlink" href="#long-simulation" title="Link to this heading">#</a></h2>
 <p>The following graph shows the par value of government debt and the flat-rate tax on labor income  for a long simulation for our sample economy.</p>
 <p>For the <strong>same</strong> realization of a government expenditure path, the graph reports outcomes for two economies</p>
 <ul class="simple">
@@ -1616,11 +1619,11 @@ debt equal to <span class="math notranslate nohighlight">\(b_0 = -1.038698407551
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/51a3d0bde5a3fe3a1ac3ed6cb5e0b32edee35dbaf2b4c3bd36519e08a8b51876.png" src="_images/51a3d0bde5a3fe3a1ac3ed6cb5e0b32edee35dbaf2b4c3bd36519e08a8b51876.png" />
+<img alt="_images/38a87bc51d00e7dd4c12459908d9e8c9adb4a20e6718c434872ece539634b670.png" src="_images/38a87bc51d00e7dd4c12459908d9e8c9adb4a20e6718c434872ece539634b670.png" />
 </div>
 </div>
 <section id="remarks-about-long-simulation">
-<h3><span class="section-number">54.8.1. </span>Remarks about long simulation<a class="headerlink" href="#remarks-about-long-simulation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">55.8.1. </span>Remarks about long simulation<a class="headerlink" href="#remarks-about-long-simulation" title="Link to this heading">#</a></h3>
 <p>As remarked above, after <span class="math notranslate nohighlight">\(b_{t+1}(s^t)\)</span> has converged to a constant, the measurability constraints in the AMSS model cease to bind</p>
 <ul class="simple">
 <li><p>the associated Lagrange multipliers on those implementability constraints converge to zero</p></li>
@@ -1634,9 +1637,9 @@ constant level of government debt <span class="math notranslate nohighlight">\(b
 </section>
 </section>
 <section id="begs-approximations-of-limiting-debt-and-convergence-rate">
-<h2><span class="section-number">54.9. </span>BEGS approximations of limiting debt and convergence rate<a class="headerlink" href="#begs-approximations-of-limiting-debt-and-convergence-rate" title="Link to this heading">#</a></h2>
-<p>It is useful to link the outcome of our reverse engineering exercise to limiting approximations constructed by BEGS <span id="id10">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
-<p>BEGS <span id="id11">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> used a slightly different notation to represent a generalization of the AMSS model.</p>
+<h2><span class="section-number">55.9. </span>BEGS approximations of limiting debt and convergence rate<a class="headerlink" href="#begs-approximations-of-limiting-debt-and-convergence-rate" title="Link to this heading">#</a></h2>
+<p>It is useful to link the outcome of our reverse engineering exercise to limiting approximations constructed by BEGS <span class="bibtex-citation" id="id10">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
+<p>BEGS <span class="bibtex-citation" id="id11">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> used a slightly different notation to represent a generalization of the AMSS model.</p>
 <p>We’ll introduce a version of their notation so that readers can quickly relate notation that appears in their key formulas to the notation
 that we have used.</p>
 <p>BEGS work with objects <span class="math notranslate nohighlight">\(B_t, {\mathcal B}_t, {\mathcal R}_t, {\mathcal X}_t\)</span> that are related to our notation by</p>
@@ -1650,47 +1653,47 @@ b_t(s^{t-1}) &amp; = {\mathcal R}_{t-1} B_{t-1} \\
 {\mathcal X}_t &amp; = u_{c,t} [g_t - \tau_t n_t]
 \end{aligned}
 \end{split}\]</div>
-<p>In terms of their notation, equation (44) of <span id="id12">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> expresses the time <span class="math notranslate nohighlight">\(t\)</span> state <span class="math notranslate nohighlight">\(s\)</span> government budget constraint as</p>
+<p>In terms of their notation, equation (44) of <span class="bibtex-citation" id="id12">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> expresses the time <span class="math notranslate nohighlight">\(t\)</span> state <span class="math notranslate nohighlight">\(s\)</span> government budget constraint as</p>
 <div class="math notranslate nohighlight" id="equation-eq-fiscal-risk">
-<span class="eqno">(54.8)<a class="headerlink" href="#equation-eq-fiscal-risk" title="Link to this equation">#</a></span>\[{\mathcal B}(s) = {\mathcal R}_\tau(s, s_{-}) {\mathcal B}_{-} + {\mathcal X}_{\tau(s)} (s)\]</div>
+<span class="eqno">(55.8)<a class="headerlink" href="#equation-eq-fiscal-risk" title="Link to this equation">#</a></span>\[{\mathcal B}(s) = {\mathcal R}_\tau(s, s_{-}) {\mathcal B}_{-} + {\mathcal X}_{\tau(s)} (s)\]</div>
 <p>where the dependence on <span class="math notranslate nohighlight">\(\tau\)</span> is to remind us that these objects depend on the tax rate and <span class="math notranslate nohighlight">\(s_{-}\)</span> is last period’s Markov state.</p>
-<p>BEGS interpret random variations in the right side of <a class="reference internal" href="#equation-eq-fiscal-risk">(54.8)</a> as a measure of <strong>fiscal risk</strong> composed of</p>
+<p>BEGS interpret random variations in the right side of <a class="reference internal" href="#equation-eq-fiscal-risk">(55.8)</a> as a measure of <strong>fiscal risk</strong> composed of</p>
 <ul class="simple">
 <li><p>interest-rate-driven fluctuations in time <span class="math notranslate nohighlight">\(t\)</span> effective payments due on the government portfolio, namely,
 <span class="math notranslate nohighlight">\({\mathcal R}_\tau(s, s_{-}) {\mathcal B}_{-}\)</span>,  and</p></li>
 <li><p>fluctuations in the effective government deficit <span class="math notranslate nohighlight">\({\mathcal X}_t\)</span></p></li>
 </ul>
 <section id="asymptotic-mean">
-<h3><span class="section-number">54.9.1. </span>Asymptotic mean<a class="headerlink" href="#asymptotic-mean" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">55.9.1. </span>Asymptotic mean<a class="headerlink" href="#asymptotic-mean" title="Link to this heading">#</a></h3>
 <p>BEGS give conditions under which the ergodic mean of <span class="math notranslate nohighlight">\({\mathcal B}_t\)</span> is</p>
 <div class="math notranslate nohighlight" id="equation-prelim-formula">
-<span class="eqno">(54.9)<a class="headerlink" href="#equation-prelim-formula" title="Link to this equation">#</a></span>\[{\mathcal B}^* = - \frac{\rm cov^{\infty}(\mathcal R, \mathcal X)}{\rm var^{\infty}(\mathcal R)}\]</div>
+<span class="eqno">(55.9)<a class="headerlink" href="#equation-prelim-formula" title="Link to this equation">#</a></span>\[{\mathcal B}^* = - \frac{\rm cov^{\infty}(\mathcal R, \mathcal X)}{\rm var^{\infty}(\mathcal R)}\]</div>
 <p>where the superscript <span class="math notranslate nohighlight">\(\infty\)</span> denotes a moment taken with respect to an ergodic distribution.</p>
-<p>Formula <a class="reference internal" href="#equation-prelim-formula">(54.9)</a> presents <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> as a regression coefficient of <span class="math notranslate nohighlight">\({\mathcal X}_t\)</span> on <span class="math notranslate nohighlight">\({\mathcal R}_t\)</span> in the ergodic
+<p>Formula <a class="reference internal" href="#equation-prelim-formula">(55.9)</a> presents <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> as a regression coefficient of <span class="math notranslate nohighlight">\({\mathcal X}_t\)</span> on <span class="math notranslate nohighlight">\({\mathcal R}_t\)</span> in the ergodic
 distribution.</p>
 <p>This regression coefficient emerges as the minimizer for a variance-minimization problem:</p>
 <div class="math notranslate nohighlight" id="equation-eq-criterion-fiscal">
-<span class="eqno">(54.10)<a class="headerlink" href="#equation-eq-criterion-fiscal" title="Link to this equation">#</a></span>\[{\mathcal B}^* = {\rm argmin}_{\mathcal B}  {\rm var} ({\mathcal R} {\mathcal B} + {\mathcal X})\]</div>
-<p>The minimand in criterion <a class="reference internal" href="#equation-eq-criterion-fiscal">(54.10)</a> is the  measure of fiscal risk associated with a given tax-debt policy that appears on the right side
-of equation <a class="reference internal" href="#equation-eq-fiscal-risk">(54.8)</a>.</p>
-<p>Expressing formula <a class="reference internal" href="#equation-prelim-formula">(54.9)</a> in terms of  our notation tells us that <span class="math notranslate nohighlight">\(\bar b\)</span> should approximately equal</p>
+<span class="eqno">(55.10)<a class="headerlink" href="#equation-eq-criterion-fiscal" title="Link to this equation">#</a></span>\[{\mathcal B}^* = {\rm argmin}_{\mathcal B}  {\rm var} ({\mathcal R} {\mathcal B} + {\mathcal X})\]</div>
+<p>The minimand in criterion <a class="reference internal" href="#equation-eq-criterion-fiscal">(55.10)</a> is the  measure of fiscal risk associated with a given tax-debt policy that appears on the right side
+of equation <a class="reference internal" href="#equation-eq-fiscal-risk">(55.8)</a>.</p>
+<p>Expressing formula <a class="reference internal" href="#equation-prelim-formula">(55.9)</a> in terms of  our notation tells us that <span class="math notranslate nohighlight">\(\bar b\)</span> should approximately equal</p>
 <div class="math notranslate nohighlight" id="equation-key-formula">
-<span class="eqno">(54.11)<a class="headerlink" href="#equation-key-formula" title="Link to this equation">#</a></span>\[\hat b = \frac{\mathcal B^*}{\beta E_t u_{c,t+1}}\]</div>
+<span class="eqno">(55.11)<a class="headerlink" href="#equation-key-formula" title="Link to this equation">#</a></span>\[\hat b = \frac{\mathcal B^*}{\beta E_t u_{c,t+1}}\]</div>
 </section>
 <section id="rate-of-convergence">
-<h3><span class="section-number">54.9.2. </span>Rate of convergence<a class="headerlink" href="#rate-of-convergence" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">55.9.2. </span>Rate of convergence<a class="headerlink" href="#rate-of-convergence" title="Link to this heading">#</a></h3>
 <p>BEGS also derive the following  approximation to the rate of convergence to <span class="math notranslate nohighlight">\({\mathcal B}^{*}\)</span> from an arbitrary initial condition.</p>
 <div class="math notranslate nohighlight" id="equation-rate-of-convergence">
-<span class="eqno">(54.12)<a class="headerlink" href="#equation-rate-of-convergence" title="Link to this equation">#</a></span>\[\frac{ E_t  ( {\mathcal B}_{t+1} - {\mathcal B}^{*} )} { ( {\mathcal B}_{t} - {\mathcal B}^{*} )} \approx \frac{1}{1 + \beta^2 {\rm var} ({\mathcal R} )}\]</div>
-<p>(See the equation above equation (47) in <span id="id13">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>)</p>
+<span class="eqno">(55.12)<a class="headerlink" href="#equation-rate-of-convergence" title="Link to this equation">#</a></span>\[\frac{ E_t  ( {\mathcal B}_{t+1} - {\mathcal B}^{*} )} { ( {\mathcal B}_{t} - {\mathcal B}^{*} )} \approx \frac{1}{1 + \beta^2 {\rm var} ({\mathcal R} )}\]</div>
+<p>(See the equation above equation (47) in <span class="bibtex-citation" id="id13">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>)</p>
 </section>
 <section id="formulas-and-code-details">
-<h3><span class="section-number">54.9.3. </span>Formulas and code details<a class="headerlink" href="#formulas-and-code-details" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">55.9.3. </span>Formulas and code details<a class="headerlink" href="#formulas-and-code-details" title="Link to this heading">#</a></h3>
 <p>For our example, we describe some code that we use to compute the steady state mean and the rate of convergence to it.</p>
 <p>The  values of <span class="math notranslate nohighlight">\(\pi(s)\)</span> are 0.5, 0.5.</p>
 <p>We can then construct <span class="math notranslate nohighlight">\({\mathcal X}(s), {\mathcal R}(s), u_c(s)\)</span> for our two states using  the definitions above.</p>
 <p>We can then construct <span class="math notranslate nohighlight">\(\beta E_{t-1} u_c = \beta \sum_s u_c(s) \pi(s)\)</span>, <span class="math notranslate nohighlight">\({\rm cov}({\mathcal R}(s), \mathcal{X}(s))\)</span> and
-<span class="math notranslate nohighlight">\({\rm var}({\mathcal R}(s))\)</span> to be plugged into formula <a class="reference internal" href="#equation-key-formula">(54.11)</a>.</p>
+<span class="math notranslate nohighlight">\({\rm var}({\mathcal R}(s))\)</span> to be plugged into formula <a class="reference internal" href="#equation-key-formula">(55.11)</a>.</p>
 <p>We also want to  compute <span class="math notranslate nohighlight">\({\rm var}({\mathcal X})\)</span>.</p>
 <p>To compute the variances and covariance, we use the following standard formulas.</p>
 <p>Temporarily let <span class="math notranslate nohighlight">\(x(s), s =1,2\)</span> be an arbitrary random variables.</p>
@@ -1703,11 +1706,11 @@ of equation <a class="reference internal" href="#equation-eq-fiscal-risk">(54.8)
 {\rm cov}(x,y)  &amp; = \left(\sum_s x(s) y(s) \pi(s) \right) - \mu_x \mu_y
 \end{aligned}
 \end{split}\]</div>
-<p>After we compute these moments, we  compute the BEGS approximation to the asymptotic mean <span class="math notranslate nohighlight">\(\hat b\)</span> in formula <a class="reference internal" href="#equation-key-formula">(54.11)</a>.</p>
-<p>After that, we move on to compute <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> in formula <a class="reference internal" href="#equation-prelim-formula">(54.9)</a>.</p>
-<p>We’ll also evaluate  the BEGS criterion <a class="reference internal" href="#equation-eq-fiscal-risk">(54.8)</a> at the limiting value <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span></p>
+<p>After we compute these moments, we  compute the BEGS approximation to the asymptotic mean <span class="math notranslate nohighlight">\(\hat b\)</span> in formula <a class="reference internal" href="#equation-key-formula">(55.11)</a>.</p>
+<p>After that, we move on to compute <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> in formula <a class="reference internal" href="#equation-prelim-formula">(55.9)</a>.</p>
+<p>We’ll also evaluate  the BEGS criterion <a class="reference internal" href="#equation-eq-fiscal-risk">(55.8)</a> at the limiting value <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span></p>
 <div class="math notranslate nohighlight" id="equation-eqn-jcriterion">
-<span class="eqno">(54.13)<a class="headerlink" href="#equation-eqn-jcriterion" title="Link to this equation">#</a></span>\[J ( {\mathcal B}^*)=  {\rm var}(\mathcal{R}) \left( {\mathcal B}^* \right)^2 + 2 {\mathcal B}^* {\rm cov}(\mathcal{R},\mathcal{X}) + {\rm var}(\mathcal X)\]</div>
+<span class="eqno">(55.13)<a class="headerlink" href="#equation-eqn-jcriterion" title="Link to this equation">#</a></span>\[J ( {\mathcal B}^*)=  {\rm var}(\mathcal{R}) \left( {\mathcal B}^* \right)^2 + 2 {\mathcal B}^* {\rm cov}(\mathcal{R},\mathcal{X}) + {\rm var}(\mathcal X)\]</div>
 <p>Here are some functions that we’ll use to compute key objects that we want</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1813,8 +1816,8 @@ of equation <a class="reference internal" href="#equation-eq-fiscal-risk">(54.8)
 </div>
 </div>
 <p>This is <em>machine zero</em>, a verification that <span class="math notranslate nohighlight">\(\hat b\)</span> succeeds in minimizing the nonnegative fiscal cost criterion <span class="math notranslate nohighlight">\(J ( {\mathcal B}^*)\)</span> defined in
-BEGS and in equation <a class="reference internal" href="#equation-eqn-jcriterion">(54.13)</a> above.</p>
-<p>Let’s push our luck and compute the mean reversion speed in the formula above equation (47) in <span id="id14">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
+BEGS and in equation <a class="reference internal" href="#equation-eqn-jcriterion">(55.13)</a> above.</p>
+<p>Let’s push our luck and compute the mean reversion speed in the formula above equation (47) in <span class="bibtex-citation" id="id14">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">den2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">β</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">variance</span><span class="p">(</span><span class="n">R</span><span class="p">)</span>
@@ -1918,13 +1921,18 @@ our long simulation above.</p>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="mcmc.html">
+   3. Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="muth_kalman.html">
-   3. Reverse Engineering a la Muth
+   4. Reverse Engineering a la Muth
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="discrete_dp.html">
-   4. Discrete State Dynamic Programming
+   5. Discrete State Dynamic Programming
   </a>
  </li>
 </ul>
@@ -1936,42 +1944,42 @@ our long simulation above.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="cons_news.html">
-   5. Information and Consumption Smoothing
+   6. Information and Consumption Smoothing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing.html">
-   6. Consumption Smoothing with Complete and Incomplete Markets
+   7. Consumption Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing_tax.html">
-   7. Tax Smoothing with Complete and Incomplete Markets
+   8. Tax Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   8. Markov Jump Linear Quadratic Dynamic Programming
+   9. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   9. How to Pay for a War: Part 1
+   10. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   10. How to Pay for a War: Part 2
+   11. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   11. How to Pay for a War: Part 3
+   12. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   12. Optimal Taxation in an LQ Economy
+   13. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -1983,22 +1991,22 @@ our long simulation above.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   13. Default Risk and Income Fluctuations
+   14. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   14. Globalization and Cycles
+   15. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   15. Coase’s Theory of the Firm
+   16. Coase’s Theory of the Firm
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="match_transport.html">
-   16. Composite Sorting
+   17. Composite Sorting
   </a>
  </li>
 </ul>
@@ -2010,47 +2018,47 @@ our long simulation above.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   17. Recursive Models of Dynamic Linear Economies
+   18. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   18. Growth in Dynamic Linear Economies
+   19. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   19. Lucas Asset Pricing Using DLE
+   20. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   20. IRFs in Hall Models
+   21. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   21. Permanent Income Model using the DLE Class
+   22. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="gorman_heterogeneous_households.html">
-   22. Gorman Aggregation
+   23. Gorman Aggregation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   24. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   25. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   26. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -2062,22 +2070,22 @@ our long simulation above.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   26. Risk and Model Uncertainty
+   27. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   27. Etymology of Entropy
+   28. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   28. Robustness
+   29. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   29. Robust Markov Perfect Equilibrium
+   30. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -2089,42 +2097,42 @@ our long simulation above.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   30. Covariance Stationary Processes
+   31. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   31. Estimation of Spectra
+   32. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   32. Additive and Multiplicative Functionals
+   33. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   33. Classical Control with Linear Algebra
+   34. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   34. Classical Prediction and Filtering With Linear Algebra
+   35. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   35. Knowing the Forecasts of Others
+   36. Knowing the Forecasts of Others
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_rational_expectations.html">
-   36. Demand for Money during Hyperinflations under Rational Expectations
+   37. Demand for Money during Hyperinflations under Rational Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="info_projection.html">
-   37. Hyperinflation and Information Projection
+   38. Hyperinflation and Information Projection
   </a>
  </li>
 </ul>
@@ -2136,47 +2144,47 @@ our long simulation above.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   38. Asset Pricing II: The Lucas Asset Pricing Model
+   39. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   39. Elementary Asset Pricing Theory
+   40. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_richard_1987.html">
-   40. The Role of Conditioning Information in Asset Pricing
+   41. The Role of Conditioning Information in Asset Pricing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_jagannathan_1991.html">
-   41. The Hansen-Jagannathan Bound
+   42. The Hansen-Jagannathan Bound
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   42. Two Modifications of Mean-Variance Portfolio Theory
+   43. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="doubts_or_variability.html">
-   43. Doubts or Variability?
+   44. Doubts or Variability?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
-   44. Risk Aversion or Mistaken Beliefs?
+   45. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   45. Irrelevance of Capital Structures with Complete Markets
+   46. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   46. Equilibrium Capital Structures with Incomplete Markets
+   47. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -2188,62 +2196,62 @@ our long simulation above.</p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   47. Optimal Unemployment Insurance
+   48. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   48. Stackelberg Plans
+   49. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   49. Machine Learning a Ramsey Plan
+   50. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   50. Time Inconsistency of Ramsey Plans
+   51. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   51. Sustainable Plans for a Calvo Model
+   52. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   52. Optimal Taxation with State-Contingent Debt
+   53. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   53. Optimal Taxation without State-Contingent Debt
+   54. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   54. Fluctuating Interest Rates Deliver Fiscal Insurance
+   55. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   55. Fiscal Risk and Government Debt
+   56. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   56. Competitive Equilibria of a Model of Chang
+   57. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   57. Credible Government Policies in a Model of Chang
+   58. Credible Government Policies in a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dovis_accounting_mf.html">
-   58. Accounting for Monetary and Fiscal Policy
+   59. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -2255,17 +2263,17 @@ our long simulation above.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   59. Troubleshooting
+   60. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   60. References
+   61. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   61. Execution Statistics
+   62. Execution Statistics
   </a>
  </li>
 </ul>
@@ -2309,6 +2317,8 @@ our long simulation above.</p>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/amss2.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst" download><i data-feather="github"></i></a></li>
+                    
+                    
                 </ul>
 
             </div>

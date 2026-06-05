@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>16. Composite Sorting &#8212; Advanced Quantitative Economics with Python</title>
+    <title>17. Composite Sorting &#8212; Advanced Quantitative Economics with Python</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -77,7 +77,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=ff5dcadef89fd2097ea5e28ddaad7eb5985f09c4" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -131,8 +131,8 @@
     <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="17. Recursive Models of Dynamic Linear Economies" href="hs_recursive_models.html" />
-    <link rel="prev" title="15. Coase’s Theory of the Firm" href="coase.html" />
+    <link rel="next" title="18. Recursive Models of Dynamic Linear Economies" href="hs_recursive_models.html" />
+    <link rel="prev" title="16. Coase’s Theory of the Firm" href="coase.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -155,6 +155,9 @@
 <meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
 <meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
 <meta name="theme-color" content="#ffffff" />
+
+
+
 
   </head>
 <body>
@@ -204,30 +207,30 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">16.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">16.2. Setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characterization-of-primal-solution">16.3. Characterization of primal solution</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-properties-of-an-optimal-solution">16.3.1. Three properties of an optimal solution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-a-layer">16.3.2. Solving a layer</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-a-layer-in-a-smarter-way">16.3.2.1. Solving a layer in a smarter way</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">17.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">17.2. Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#characterization-of-primal-solution">17.3. Characterization of primal solution</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#three-properties-of-an-optimal-solution">17.3.1. Three properties of an optimal solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-a-layer">17.3.2. Solving a layer</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-a-layer-in-a-smarter-way">17.3.2.1. Solving a layer in a smarter way</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-primal-problem">16.4. Solving primal problem</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-with-linear-programming">16.4.1. Verify with linear programming</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-primal-problem">17.4. Solving primal problem</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#verify-with-linear-programming">17.4.1. Verify with linear programming</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">16.5. Examples</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">16.5.1. Example 1</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">16.5.2. Example 2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">16.5.3. Example 3</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#examples">17.5. Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-1">17.5.1. Example 1</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-2">17.5.2. Example 2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-3">17.5.3. Example 3</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dual-solution">16.6. Dual solution</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application">16.7. Application</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">16.7.1. Data</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">16.7.2. Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dual-solution">17.6. Dual solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application">17.7. Application</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data">17.7.1. Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">17.7.2. Model</a></li>
 </ul>
 </li>
 </ul>
@@ -297,7 +300,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/31a8313d" class="changelog-hash">31a8313d</a>
                                 
                                 <span class="changelog-author">Yuga SUDA</span>
-                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-time">1 month ago</span>
                                 <span class="changelog-message">[match_transport] Fix notation typos in OT constraints and dual update (#304)</span>
                             </li>
                             
@@ -306,7 +309,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/ee04ae95" class="changelog-hash">ee04ae95</a>
                                 
                                 <span class="changelog-author">Enzo Di Pasquale</span>
-                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-time">1 month ago</span>
                                 <span class="changelog-message">Add complementary slackness condition to the dual solution introduction (#324)</span>
                             </li>
                             
@@ -315,7 +318,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/8e303fa6" class="changelog-hash">8e303fa6</a>
                                 
                                 <span class="changelog-author">Enzo Di Pasquale</span>
-                                <span class="changelog-time">2 days ago</span>
+                                <span class="changelog-time">1 month ago</span>
                                 <span class="changelog-message">Fix constraints order in match transport problem (#323)</span>
                             </li>
                             
@@ -324,7 +327,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/0f8291cc" class="changelog-hash">0f8291cc</a>
                                 
                                 <span class="changelog-author">Enzo Di Pasquale</span>
-                                <span class="changelog-time">1 week ago</span>
+                                <span class="changelog-time">2 months ago</span>
                                 <span class="changelog-message">Update mathematical expressions in match_transport.md (#317)</span>
                             </li>
                             
@@ -333,7 +336,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/21051be8" class="changelog-hash">21051be8</a>
                                 
                                 <span class="changelog-author">Yuga SUDA</span>
-                                <span class="changelog-time">1 month ago</span>
+                                <span class="changelog-time">3 months ago</span>
                                 <span class="changelog-message">[match_transport.md]  Fix typos (#302)</span>
                             </li>
                             
@@ -342,7 +345,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/d65b66e6" class="changelog-hash">d65b66e6</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">6 months ago</span>
+                                <span class="changelog-time">8 months ago</span>
                                 <span class="changelog-message">MAINT: upgrade anaconda=2025.06 and python=3.13 (#215)</span>
                             </li>
                             
@@ -351,7 +354,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">7 months ago</span>
+                                <span class="changelog-time">9 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -395,9 +398,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="composite-sorting">
-<h1><span class="section-number">16. </span>Composite Sorting<a class="headerlink" href="#composite-sorting" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">17. </span>Composite Sorting<a class="headerlink" href="#composite-sorting" title="Link to this heading">#</a></h1>
 <section id="overview">
-<h2><span class="section-number">16.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>Optimal transport theory studies how a marginal probability measure  can  be related to another marginal probability measure in an ideal way.</p>
 <ul class="simple">
 <li><p>here ideal means to minimize some  cost criterion.</p></li>
@@ -405,20 +408,20 @@
 <p>The output of such a theory is a <strong>coupling</strong> of the two probability measures, i.e., a joint probability
 measure having those two  marginal probability measures.</p>
 <p>This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodu Wang,
-and Zhenyuan Zhang  <span id="id1">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> used optimal transport theory to formulate and compute  an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.</p>
+and Zhenyuan Zhang  <span class="bibtex-citation" id="id1">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> used optimal transport theory to formulate and compute  an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.</p>
 <p>Production technologies allow firms to   reshape costs of mismatch so that they become concave.</p>
-<p>It is then possible that in  equilibrium there is neither <strong>positive assortative</strong> nor <strong>negative assortative</strong>  matching, an outcome that   <span id="id2">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> call <strong>composite assortative</strong> matching.</p>
+<p>It is then possible that in  equilibrium there is neither <strong>positive assortative</strong> nor <strong>negative assortative</strong>  matching, an outcome that   <span class="bibtex-citation" id="id2">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> call <strong>composite assortative</strong> matching.</p>
 <p>For example, with composite matching in  an equilibrium model with workers of different types,  ex ante   identical <em>workers</em> can sort into different <em>occupations</em>, some positively and some negatively.</p>
-<p><span id="id3">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> show how composite matching  can generate distinct non-trivial frequency  distributions  of labor earnings  within and across occupations.</p>
-<p>This lecture describes the <span id="id4">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model and  presents  Python code for computing equilibria.</p>
-<p>The lecture then  applies the code to the <span id="id5">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model of labor markets.</p>
+<p><span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> show how composite matching  can generate distinct non-trivial frequency  distributions  of labor earnings  within and across occupations.</p>
+<p>This lecture describes the <span class="bibtex-citation" id="id4">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model and  presents  Python code for computing equilibria.</p>
+<p>The lecture then  applies the code to the <span class="bibtex-citation" id="id5">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> model of labor markets.</p>
 <p>As with an <a class="reference external" href="https://python.quantecon.org/opt_transport.html">earlier QuantEcon lecture on optimal transport</a>, a key tool will be <a class="reference external" href="https://intro.quantecon.org/lp_intro.html">linear programming</a>.</p>
-<p>As we’ll see, <span id="id6">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> also deploy dynamic programming in creative ways at important points in
+<p>As we’ll see, <span class="bibtex-citation" id="id6">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> also deploy dynamic programming in creative ways at important points in
 their analysis.  So as you read this lecture, please watch  for Bellman equations that might remind
 you of ideas  encountered in this  <a class="reference external" href="https://python.quantecon.org/mccall_model.html">earlier QuantEcon lecture</a> and this <a class="reference external" href="https://dp.quantecon.org">QuantEcon book</a>.</p>
 </section>
 <section id="setup">
-<h2><span class="section-number">16.2. </span>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.2. </span>Setup<a class="headerlink" href="#setup" title="Link to this heading">#</a></h2>
 <p><span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are finite sets that represent two distinct types of people to be matched.</p>
 <p>For each <span class="math notranslate nohighlight">\(x \in X,\)</span> let a positive integer <span class="math notranslate nohighlight">\(n_x\)</span> be the number  of agents of type <span class="math notranslate nohighlight">\(x\)</span>.</p>
 <p>Similarly, let a positive integer <span class="math notranslate nohighlight">\(m_y\)</span> be the agents of agents of type <span class="math notranslate nohighlight">\(y \in Y\)</span>.</p>
@@ -618,9 +621,9 @@ Thus, $f(x) =\frac{n_x}{N} \mathbb{1}\{n_x > 0\} $ and $g(y) =\frac{m_y}{N} \mat
 </div>
 </section>
 <section id="characterization-of-primal-solution">
-<h2><span class="section-number">16.3. </span>Characterization of primal solution<a class="headerlink" href="#characterization-of-primal-solution" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.3. </span>Characterization of primal solution<a class="headerlink" href="#characterization-of-primal-solution" title="Link to this heading">#</a></h2>
 <section id="three-properties-of-an-optimal-solution">
-<h3><span class="section-number">16.3.1. </span>Three properties of an optimal solution<a class="headerlink" href="#three-properties-of-an-optimal-solution" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.3.1. </span>Three properties of an optimal solution<a class="headerlink" href="#three-properties-of-an-optimal-solution" title="Link to this heading">#</a></h3>
 <p>We now indicate important properties that  are satisfied by an optimal solution.</p>
 <ol class="arabic simple">
 <li><p>Maximal number of perfect pairs</p></li>
@@ -1043,7 +1046,7 @@ H(z) \leq h_{\ell -1} &lt; h_{\ell } \leq H(z-),
 </div>
 </section>
 <section id="solving-a-layer">
-<h3><span class="section-number">16.3.2. </span>Solving a layer<a class="headerlink" href="#solving-a-layer" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.3.2. </span>Solving a layer<a class="headerlink" href="#solving-a-layer" title="Link to this heading">#</a></h3>
 <p>Recall that layer <span class="math notranslate nohighlight">\(L_\ell\)</span> consists of a list of distinct types from <span class="math notranslate nohighlight">\(Y \sqcup X\)</span></p>
 <div class="math notranslate nohighlight">
 \[
@@ -1113,11 +1116,11 @@ z_1 &lt; z_2\dots &lt; z_{N_\ell-1} &lt; z_{N_\ell},
 <p>Suppose that we computed the value <span class="math notranslate nohighlight">\(V_{ij}\)</span> for all <span class="math notranslate nohighlight">\(i,j \in [N_\ell]\)</span> with <span class="math notranslate nohighlight">\(i-j \in \{1,3,\dots,t-2\}\)</span> for some odd natural number <span class="math notranslate nohighlight">\(t\)</span>.</p>
 <p>Then for <span class="math notranslate nohighlight">\(i,j \in [N_\ell]\)</span> with <span class="math notranslate nohighlight">\(i-j= t\)</span></p>
 <div class="math notranslate nohighlight" id="equation-eq-bellman101">
-<span class="eqno">(16.1)<a class="headerlink" href="#equation-eq-bellman101" title="Link to this equation">#</a></span>\[
+<span class="eqno">(17.1)<a class="headerlink" href="#equation-eq-bellman101" title="Link to this equation">#</a></span>\[
 V_{ij} = \min_{k \in \{i+1,i+3,\dots,j\}} \left\{ c_{ik} + V_{i+1,k-1} + V_{k+1,j}\right\}
 \]</div>
 <p>with the RHS depending only on previously computed values.</p>
-<p>We set the boundary conditions at <span class="math notranslate nohighlight">\(t=-1\)</span>: <span class="math notranslate nohighlight">\(V_{i+1,i} = 0\)</span> for each <span class="math notranslate nohighlight">\(i \in [N_\ell],\)</span> so that we can apply the same Bellman equation <a class="reference internal" href="#equation-eq-bellman101">(16.1)</a> at <span class="math notranslate nohighlight">\(t =1.\)</span></p>
+<p>We set the boundary conditions at <span class="math notranslate nohighlight">\(t=-1\)</span>: <span class="math notranslate nohighlight">\(V_{i+1,i} = 0\)</span> for each <span class="math notranslate nohighlight">\(i \in [N_\ell],\)</span> so that we can apply the same Bellman equation <a class="reference internal" href="#equation-eq-bellman101">(17.1)</a> at <span class="math notranslate nohighlight">\(t =1.\)</span></p>
 <p>The following method takes as input the layer types indices and computes the value function as a matrix <span class="math notranslate nohighlight">\([V_{ij}]_{ i \in [N_\ell+1], j \in [N_\ell ]}\)</span>.</p>
 <p>In order to  distinguish  entries that  are relevant for our computations from those that  are never accessed, we initialize this matrix as full of  NaN values.</p>
 <div class="cell docutils container">
@@ -1190,7 +1193,7 @@ Section of the Value function of the layer:
 </div>
 </div>
 <p><strong>Policy evaluation</strong></p>
-<p>Having computed the value function, we can proceed to compute the optimal matching as the <em>policy</em> that attains the value function that solves the  Bellman equation  <a class="reference internal" href="#equation-eq-bellman101">(16.1)</a>.</p>
+<p>Having computed the value function, we can proceed to compute the optimal matching as the <em>policy</em> that attains the value function that solves the  Bellman equation  <a class="reference internal" href="#equation-eq-bellman101">(17.1)</a>.</p>
 <p>We start from agent <span class="math notranslate nohighlight">\(1\)</span> and match it with the <span class="math notranslate nohighlight">\(k\)</span> that achieves the minimum in the equation associated with <span class="math notranslate nohighlight">\(V_{1,2N_\ell}.\)</span></p>
 <p>Then we store  segments <span class="math notranslate nohighlight">\([2,k-1]\)</span> and <span class="math notranslate nohighlight">\([k+1,2N_\ell]\)</span> (if not empty).</p>
 <p>In general, given a segment <span class="math notranslate nohighlight">\([i,j],\)</span> we match <span class="math notranslate nohighlight">\(i\)</span> with <span class="math notranslate nohighlight">\(k\)</span> that achieves the minimum in the equation associated with  <span class="math notranslate nohighlight">\(V_{ij}\)</span> and store the segments <span class="math notranslate nohighlight">\([i,k-1]\)</span> and <span class="math notranslate nohighlight">\([k+1,j]\)</span> (if not empty).</p>
@@ -1312,9 +1315,9 @@ Value of the layer (scaled by the mass = 1): 24.764959193288938
 </div>
 </div>
 <section id="solving-a-layer-in-a-smarter-way">
-<h4><span class="section-number">16.3.2.1. </span>Solving a layer in a smarter way<a class="headerlink" href="#solving-a-layer-in-a-smarter-way" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">17.3.2.1. </span>Solving a layer in a smarter way<a class="headerlink" href="#solving-a-layer-in-a-smarter-way" title="Link to this heading">#</a></h4>
 <p>We  now present two key results in the context of OT with concave type costs.</p>
-<p>We refer <span id="id7">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> and <span id="id8">[<a class="reference internal" href="zreferences.html#id19" title="Julie Delon, Julien Salomon, and Andrei Sobolevski. Minimum-weight perfect matching for non-intrinsic distances on the line. arXiv preprint arXiv:1102.1558, 2011.">Delon <em>et al.</em>, 2011</a>]</span> for proofs.</p>
+<p>We refer <span class="bibtex-citation" id="id7">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> and <span class="bibtex-citation" id="id8">[<a class="reference internal" href="zreferences.html#id19" title="Julie Delon, Julien Salomon, and Andrei Sobolevski. Minimum-weight perfect matching for non-intrinsic distances on the line. arXiv preprint arXiv:1102.1558, 2011.">Delon <em>et al.</em>, 2011</a>]</span> for proofs.</p>
 <p>Consider the problem faced within a layer, i.e., types from <span class="math notranslate nohighlight">\(Y \sqcup X\)</span></p>
 <div class="math notranslate nohighlight">
 \[ 
@@ -1325,7 +1328,7 @@ z_1 &lt; z_2\dots &lt; z_{N_\ell-1} &lt; z_{N_\ell}, \quad N_\ell \in 2 \mathbb{
 <p>Visually, the arc joining <span class="math notranslate nohighlight">\((i',j')\)</span> surmounts the arc joining <span class="math notranslate nohighlight">\((i,j).\)</span></p>
 <p><strong>Theorem (DSS)</strong> Given an optimal matching on <span class="math notranslate nohighlight">\([1,k],\)</span> if <span class="math notranslate nohighlight">\((i,j)\)</span> is hidden in this matching, then the pair <span class="math notranslate nohighlight">\((i,j)\)</span> belongs to every optimal matching on <span class="math notranslate nohighlight">\([1, 2 N_\ell]\)</span> and is hidden in this matching too.</p>
 <p>As a consequence, there exists a more efficient way to compute the value function within a layer.</p>
-<p>It can be shown that the solving the following second-order difference  equations delivers the same result as the Bellman equations <a class="reference internal" href="#equation-eq-bellman101">(16.1)</a> presented above:</p>
+<p>It can be shown that the solving the following second-order difference  equations delivers the same result as the Bellman equations <a class="reference internal" href="#equation-eq-bellman101">(17.1)</a> presented above:</p>
 <div class="math notranslate nohighlight">
 \[ 
 V_{ij} = \min \{ c_{ij} + V_{i+1,j-1}, V_{i+2,j} + V_{i,j-2} - V_{i+2,j-2}\}
@@ -1508,7 +1511,7 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 </section>
 </section>
 <section id="solving-primal-problem">
-<h2><span class="section-number">16.4. </span>Solving primal problem<a class="headerlink" href="#solving-primal-problem" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.4. </span>Solving primal problem<a class="headerlink" href="#solving-primal-problem" title="Link to this heading">#</a></h2>
 <p>The following method assembles  our components in order to solve the primal problem.</p>
 <p>First, if matches are perfect pairs, we store the on-diagonal matching and create an off-diagonal instance with the residual marginals.</p>
 <p>Then we compute the set of layers of the residual distributions.</p>
@@ -1694,7 +1697,7 @@ Difference with previous Bellman equations:       4.440892098500626e-14
 </div>
 </div>
 <section id="verify-with-linear-programming">
-<h3><span class="section-number">16.4.1. </span>Verify with linear programming<a class="headerlink" href="#verify-with-linear-programming" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.4.1. </span>Verify with linear programming<a class="headerlink" href="#verify-with-linear-programming" title="Link to this heading">#</a></h3>
 <p>Let’s verify some of the proceeding findings using linear programming.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1742,9 +1745,9 @@ Value (DSS): 143.45490363125705
 </section>
 </section>
 <section id="examples">
-<h2><span class="section-number">16.5. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.5. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading">#</a></h2>
 <section id="example-1">
-<h3><span class="section-number">16.5.1. </span>Example 1<a class="headerlink" href="#example-1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.5.1. </span>Example 1<a class="headerlink" href="#example-1" title="Link to this heading">#</a></h3>
 <p>We study optimal transport problems on the real line with cost <span class="math notranslate nohighlight">\(c(x,y)= h(|x-y|)\)</span> for a strictly concave and increasing function <span class="math notranslate nohighlight">\(h: \mathbb{R}_+ \rightarrow \mathbb{R}_+.\)</span></p>
 <p>The outcome  is called <em>composite sorting</em>.</p>
 <p>Here, we  will focus on <span class="math notranslate nohighlight">\(c(x,y)=|x-y|^{\frac{1}{\zeta}}\)</span> for <span class="math notranslate nohighlight">\(\zeta&gt;1\)</span></p>
@@ -1906,7 +1909,7 @@ Monge cost of PAM:
 </div>
 </section>
 <section id="example-2">
-<h3><span class="section-number">16.5.2. </span>Example 2<a class="headerlink" href="#example-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.5.2. </span>Example 2<a class="headerlink" href="#example-2" title="Link to this heading">#</a></h3>
 <p>The following example has five agents per side.</p>
 <p>The composite sorting assignment differs from both PAM and NAM.</p>
 <p>Composite sorting features a hierarchical structure, with each hierarchy positively sorted.</p>
@@ -1959,8 +1962,8 @@ Monge cost of PAM:
 </div>
 </section>
 <section id="example-3">
-<h3><span class="section-number">16.5.3. </span>Example 3<a class="headerlink" href="#example-3" title="Link to this heading">#</a></h3>
-<p><span id="id9">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> provide the following  example.</p>
+<h3><span class="section-number">17.5.3. </span>Example 3<a class="headerlink" href="#example-3" title="Link to this heading">#</a></h3>
+<p><span class="bibtex-citation" id="id9">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> provide the following  example.</p>
 <p>There are four agents per side and three types per side (so the problem is not unitary, as opposed to the examples above).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2009,7 +2012,7 @@ Monge cost of PAM:
 </section>
 </section>
 <section id="dual-solution">
-<h2><span class="section-number">16.6. </span>Dual solution<a class="headerlink" href="#dual-solution" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.6. </span>Dual solution<a class="headerlink" href="#dual-solution" title="Link to this heading">#</a></h2>
 <p>Let’s recall the formulation</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -2051,7 +2054,7 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 <p>The values are related by <span class="math notranslate nohighlight">\(W_P =  \sum_{x \in X}n_x \alpha_x +  \sum_{y \in Y}m_y \gamma_y - V_P.\)</span></p>
 <p>The dual solutions of <span class="math notranslate nohighlight">\(V_D\)</span> and <span class="math notranslate nohighlight">\(W_D\)</span> are related by <span class="math notranslate nohighlight">\(u_x = \alpha_x - \phi_x\)</span> and <span class="math notranslate nohighlight">\(v_y = \gamma_y - \psi_y.\)</span></p>
 <p>The dual solution <span class="math notranslate nohighlight">\((u,v)\)</span> of <span class="math notranslate nohighlight">\(W_D\)</span> can be interpreted as equilibrium utilities of the agents, which include the individual specific amenities and equilibrium shadow costs.</p>
-<p><span id="id10">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.</p>
+<p><span class="bibtex-citation" id="id10">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span> propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.</p>
 <p>Their approach relies on <em>Complementary Slackness</em>: given a primal solution <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\((\phi , \psi) \)</span> is a dual solution if and only if for all <span class="math notranslate nohighlight">\(x \in X\)</span> and <span class="math notranslate nohighlight">\(y \in Y\)</span></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\phi_x + \psi_y \leq c_{xy}\)</span> (dual feasibility),</p></li>
@@ -2168,9 +2171,9 @@ W_P = \max_{\mu \geq 0}&amp; \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{(np.int64(5), np.int64(5)): [(np.int64(4), np.int64(7)),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;artificial_pair&#39;: [(np.int64(5), np.int64(5)), (np.int64(2), np.int64(6))],
+ (np.int64(5), np.int64(5)): [(np.int64(4), np.int64(7)),
   (np.int64(1), np.int64(3))],
- &#39;artificial_pair&#39;: [(np.int64(5), np.int64(5)), (np.int64(2), np.int64(6))],
  (np.int64(3), np.int64(1)): [(np.int64(7), np.int64(0)),
   (np.int64(0), np.int64(2))],
  (np.int64(7), np.int64(0)): [],
@@ -2555,10 +2558,10 @@ Value of primal solution:  9.03369035213102
 </div>
 </section>
 <section id="application">
-<h2><span class="section-number">16.7. </span>Application<a class="headerlink" href="#application" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">17.7. </span>Application<a class="headerlink" href="#application" title="Link to this heading">#</a></h2>
 <section id="data">
-<h3><span class="section-number">16.7.1. </span>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
-<p>We now replicate the empirical analysis carried out by <span id="id11">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>.</p>
+<h3><span class="section-number">17.7.1. </span>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h3>
+<p>We now replicate the empirical analysis carried out by <span class="bibtex-citation" id="id11">[<a class="reference internal" href="zreferences.html#id18" title="Job Boerma, Aleh Tsyvinski, Ruodu Wang, and Zhenyuan Zhang. Composite sorting. Technical Report, University of Wisconsin, 2024.">Boerma <em>et al.</em>, 2024</a>]</span>.</p>
 <p>The dataset is obtained from the American Community Survey and contains individual level data on income, age and occupation.</p>
 <p>The occupation of each individual consists of a Standard Occupational Classification (SOC) code.</p>
 <p>There are 497 codes in total.</p>
@@ -2611,7 +2614,7 @@ Value of primal solution:  9.03369035213102
 <figure class="align-default" id="id12">
 <img alt="_images/19b2f0cd105e6c3cb52fa6bd93a5753067e0bce590d19859ab7118333d3428af.png" src="_images/19b2f0cd105e6c3cb52fa6bd93a5753067e0bce590d19859ab7118333d3428af.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 16.1 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data. The size of the marker is proportional to the number of individuals in the occupation.</span><a class="headerlink" href="#id12" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 17.1 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data. The size of the marker is proportional to the number of individuals in the occupation.</span><a class="headerlink" href="#id12" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -2650,14 +2653,14 @@ Value of primal solution:  9.03369035213102
 <figure class="align-default" id="id13">
 <img alt="_images/1905f36af92e2dcce47d74d4468aabe9490ea41479d01874fc7663b3cecf7280.png" src="_images/1905f36af92e2dcce47d74d4468aabe9490ea41479d01874fc7663b3cecf7280.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 16.2 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data.</span><a class="headerlink" href="#id13" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 17.2 </span><span class="caption-text">Average wage for each Standard Occupational Classification (SOC) code. The codes are sorted by average wage on the horizontal axis. In red, a polynomial of degree 5 is fitted to the data.</span><a class="headerlink" href="#id13" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
 <section id="model">
-<h3><span class="section-number">16.7.2. </span>Model<a class="headerlink" href="#model" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">17.7.2. </span>Model<a class="headerlink" href="#model" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parameters_1980</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Params_Jobs&#39;</span><span class="p">,</span> <span class="p">[</span>
@@ -2971,13 +2974,18 @@ Value of primal solution:  825.8167029184153
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="mcmc.html">
+   3. Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="muth_kalman.html">
-   3. Reverse Engineering a la Muth
+   4. Reverse Engineering a la Muth
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="discrete_dp.html">
-   4. Discrete State Dynamic Programming
+   5. Discrete State Dynamic Programming
   </a>
  </li>
 </ul>
@@ -2989,42 +2997,42 @@ Value of primal solution:  825.8167029184153
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="cons_news.html">
-   5. Information and Consumption Smoothing
+   6. Information and Consumption Smoothing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing.html">
-   6. Consumption Smoothing with Complete and Incomplete Markets
+   7. Consumption Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing_tax.html">
-   7. Tax Smoothing with Complete and Incomplete Markets
+   8. Tax Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   8. Markov Jump Linear Quadratic Dynamic Programming
+   9. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   9. How to Pay for a War: Part 1
+   10. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   10. How to Pay for a War: Part 2
+   11. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   11. How to Pay for a War: Part 3
+   12. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   12. Optimal Taxation in an LQ Economy
+   13. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -3036,22 +3044,22 @@ Value of primal solution:  825.8167029184153
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   13. Default Risk and Income Fluctuations
+   14. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   14. Globalization and Cycles
+   15. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   15. Coase’s Theory of the Firm
+   16. Coase’s Theory of the Firm
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   16. Composite Sorting
+   17. Composite Sorting
   </a>
  </li>
 </ul>
@@ -3063,47 +3071,47 @@ Value of primal solution:  825.8167029184153
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   17. Recursive Models of Dynamic Linear Economies
+   18. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   18. Growth in Dynamic Linear Economies
+   19. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   19. Lucas Asset Pricing Using DLE
+   20. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   20. IRFs in Hall Models
+   21. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   21. Permanent Income Model using the DLE Class
+   22. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="gorman_heterogeneous_households.html">
-   22. Gorman Aggregation
+   23. Gorman Aggregation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   24. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   25. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   26. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -3115,22 +3123,22 @@ Value of primal solution:  825.8167029184153
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   26. Risk and Model Uncertainty
+   27. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   27. Etymology of Entropy
+   28. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   28. Robustness
+   29. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   29. Robust Markov Perfect Equilibrium
+   30. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -3142,42 +3150,42 @@ Value of primal solution:  825.8167029184153
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   30. Covariance Stationary Processes
+   31. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   31. Estimation of Spectra
+   32. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   32. Additive and Multiplicative Functionals
+   33. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   33. Classical Control with Linear Algebra
+   34. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   34. Classical Prediction and Filtering With Linear Algebra
+   35. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   35. Knowing the Forecasts of Others
+   36. Knowing the Forecasts of Others
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_rational_expectations.html">
-   36. Demand for Money during Hyperinflations under Rational Expectations
+   37. Demand for Money during Hyperinflations under Rational Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="info_projection.html">
-   37. Hyperinflation and Information Projection
+   38. Hyperinflation and Information Projection
   </a>
  </li>
 </ul>
@@ -3189,47 +3197,47 @@ Value of primal solution:  825.8167029184153
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   38. Asset Pricing II: The Lucas Asset Pricing Model
+   39. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   39. Elementary Asset Pricing Theory
+   40. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_richard_1987.html">
-   40. The Role of Conditioning Information in Asset Pricing
+   41. The Role of Conditioning Information in Asset Pricing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_jagannathan_1991.html">
-   41. The Hansen-Jagannathan Bound
+   42. The Hansen-Jagannathan Bound
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   42. Two Modifications of Mean-Variance Portfolio Theory
+   43. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="doubts_or_variability.html">
-   43. Doubts or Variability?
+   44. Doubts or Variability?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
-   44. Risk Aversion or Mistaken Beliefs?
+   45. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   45. Irrelevance of Capital Structures with Complete Markets
+   46. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   46. Equilibrium Capital Structures with Incomplete Markets
+   47. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -3241,62 +3249,62 @@ Value of primal solution:  825.8167029184153
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   47. Optimal Unemployment Insurance
+   48. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   48. Stackelberg Plans
+   49. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   49. Machine Learning a Ramsey Plan
+   50. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   50. Time Inconsistency of Ramsey Plans
+   51. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   51. Sustainable Plans for a Calvo Model
+   52. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   52. Optimal Taxation with State-Contingent Debt
+   53. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   53. Optimal Taxation without State-Contingent Debt
+   54. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   54. Fluctuating Interest Rates Deliver Fiscal Insurance
+   55. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   55. Fiscal Risk and Government Debt
+   56. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   56. Competitive Equilibria of a Model of Chang
+   57. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   57. Credible Government Policies in a Model of Chang
+   58. Credible Government Policies in a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dovis_accounting_mf.html">
-   58. Accounting for Monetary and Fiscal Policy
+   59. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -3308,17 +3316,17 @@ Value of primal solution:  825.8167029184153
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   59. Troubleshooting
+   60. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   60. References
+   61. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   61. Execution Statistics
+   62. Execution Statistics
   </a>
  </li>
 </ul>
@@ -3362,6 +3370,8 @@ Value of primal solution:  825.8167029184153
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/match_transport.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst" download><i data-feather="github"></i></a></li>
+                    
+                    
                 </ul>
 
             </div>

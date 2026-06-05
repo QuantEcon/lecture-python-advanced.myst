@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>22. Gorman Aggregation &#8212; Advanced Quantitative Economics with Python</title>
+    <title>23. Gorman Aggregation &#8212; Advanced Quantitative Economics with Python</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -77,7 +77,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=ff5dcadef89fd2097ea5e28ddaad7eb5985f09c4" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -131,8 +131,8 @@
     <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="23. Rosen Schooling Model" href="rosen_schooling_model.html" />
-    <link rel="prev" title="21. Permanent Income Model using the DLE Class" href="permanent_income_dles.html" />
+    <link rel="next" title="24. Rosen Schooling Model" href="rosen_schooling_model.html" />
+    <link rel="prev" title="22. Permanent Income Model using the DLE Class" href="permanent_income_dles.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -155,6 +155,9 @@
 <meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
 <meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
 <meta name="theme-color" content="#ffffff" />
+
+
+
 
   </head>
 <body>
@@ -204,50 +207,50 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">22.1. Overview</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gorman-aggregation-in-a-static-economy">22.1.1. Gorman aggregation in a static economy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">23.1. Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gorman-aggregation-in-a-static-economy">23.1.1. Gorman aggregation in a static economy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-stochastic-economy">22.2. Dynamic, Stochastic Economy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exogenous-state">22.2.1. Exogenous state</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#technologies">22.2.2. Technologies</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-individual-household-problem">22.2.3. The individual household problem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-representative-agent-problem">22.2.4. The representative agent problem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consumption-sharing-rules">22.2.5. Consumption sharing rules</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#household-services-allocation-rule">22.2.5.1. Household services allocation rule</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-canonical-representation">22.2.5.2. Inverse canonical representation</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-details">22.2.5.3. Computational details</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#labor-allocation-rule">22.2.5.4. Labor allocation rule</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-sharing">22.2.5.5. Risk sharing</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#household-allocations">22.3. Household allocations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-household-allocations">22.3.1. Computing household allocations</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-compute-deviation-consumption">22.3.1.1. Step 1: compute deviation consumption</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-compute-each-pareto-weight">22.3.1.2. Step 2: compute each Pareto weight</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dynamic-stochastic-economy">23.2. Dynamic, Stochastic Economy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exogenous-state">23.2.1. Exogenous state</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#technologies">23.2.2. Technologies</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-individual-household-problem">23.2.3. The individual household problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-representative-agent-problem">23.2.4. The representative agent problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consumption-sharing-rules">23.2.5. Consumption sharing rules</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#household-services-allocation-rule">23.2.5.1. Household services allocation rule</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-canonical-representation">23.2.5.2. Inverse canonical representation</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-details">23.2.5.3. Computational details</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#labor-allocation-rule">23.2.5.4. Labor allocation rule</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#risk-sharing">23.2.5.5. Risk sharing</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limited-markets">22.4. Limited markets</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-trading-arrangement">22.4.1. The trading arrangement</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-bond-position">22.4.2. Initial bond position</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#household-allocations">23.3. Household allocations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-household-allocations">23.3.1. Computing household allocations</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-compute-deviation-consumption">23.3.1.1. Step 1: compute deviation consumption</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-compute-each-pareto-weight">23.3.1.2. Step 2: compute each Pareto weight</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-two-household-economy">22.5. Example: two-household economy</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-many-household-gorman-economies">22.6. Example: many-household Gorman economies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specification">22.6.1. Specification</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#household-economy">22.6.2. 100-household  economy</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-representation">22.7. State-space representation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closed-loop-state-space-system">22.7.1. Closed-loop state-space system</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limited-markets">23.4. Limited markets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-trading-arrangement">23.4.1. The trading arrangement</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-bond-position">23.4.2. Initial bond position</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redistributing-by-adjusting-pareto-weights">22.8. Redistributing by adjusting  Pareto weights</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redistribution-via-pareto-weights">22.8.1. Redistribution via Pareto weights</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-two-household-economy">23.5. Example: two-household economy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-many-household-gorman-economies">23.6. Example: many-household Gorman economies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#specification">23.6.1. Specification</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#household-economy">23.6.2. 100-household  economy</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-representation">23.7. State-space representation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#closed-loop-state-space-system">23.7.1. Closed-loop state-space system</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redistributing-by-adjusting-pareto-weights">23.8. Redistributing by adjusting  Pareto weights</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#redistribution-via-pareto-weights">23.8.1. Redistribution via Pareto weights</a></li>
 </ul>
 </li>
 </ul>
@@ -317,7 +320,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/95d83cdc" class="changelog-hash">95d83cdc</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">2 hours ago</span>
+                                <span class="changelog-time">1 month ago</span>
                                 <span class="changelog-message">Tom's new lecture on the Bocola-Dovis and others paper (#320)</span>
                             </li>
                             
@@ -326,7 +329,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/dd1c4199" class="changelog-hash">dd1c4199</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">2 months ago</span>
+                                <span class="changelog-time">4 months ago</span>
                                 <span class="changelog-message">[gorman_heterogeneous_households] Update parameters to match the parameters used in paper (#303)</span>
                             </li>
                             
@@ -335,7 +338,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/742f60ac" class="changelog-hash">742f60ac</a>
                                 
                                 <span class="changelog-author">thomassargent30</span>
-                                <span class="changelog-time">2 months ago</span>
+                                <span class="changelog-time">4 months ago</span>
                                 <span class="changelog-message">Tom's Jan 19 edits of Gorman lecture</span>
                             </li>
                             
@@ -344,7 +347,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/885ed679" class="changelog-hash">885ed679</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">3 months ago</span>
+                                <span class="changelog-time">5 months ago</span>
                                 <span class="changelog-message">[gorman_heterogeneous_households] New lecture on Gorman aggregation (#299)</span>
                             </li>
                             
@@ -365,10 +368,10 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="gorman-aggregation">
-<span id="index-0"></span><h1><span class="section-number">22. </span>Gorman Aggregation<a class="headerlink" href="#gorman-aggregation" title="Link to this heading">#</a></h1>
+<span id="index-0"></span><h1><span class="section-number">23. </span>Gorman Aggregation<a class="headerlink" href="#gorman-aggregation" title="Link to this heading">#</a></h1>
 <section id="overview">
-<h2><span class="section-number">22.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p><span id="id1">Gorman [<a class="reference internal" href="zreferences.html#id15" title="William M. Gorman. Community preference fields. Econometrica: Journal of the Econometric Society, 21(1):63–80, 1953.">1953</a>]</span> described a class of models with preferences having the useful property that there exists a “representative household” in the sense that competitive equilibrium allocations can be computed in the following way:</p>
+<h2><span class="section-number">23.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p><span class="bibtex-citation" id="id1">Gorman [<a class="reference internal" href="zreferences.html#id15" title="William M. Gorman. Community preference fields. Econometrica: Journal of the Econometric Society, 21(1):63–80, 1953.">1953</a>]</span> described a class of models with preferences having the useful property that there exists a “representative household” in the sense that competitive equilibrium allocations can be computed in the following way:</p>
 <ul class="simple">
 <li><p>take the heterogeneous  preferences of a diverse collection of households and from them synthesize the preferences of a single “representative household”</p></li>
 <li><p>assign the endowments of all households to the representative household</p></li>
@@ -383,7 +386,7 @@ competitive equilibrium allocation.</p>
 <p class="admonition-title">Note</p>
 <p>In general, computing a competitive equilibrium requires solving for the price system and the allocation simultaneously, not recursively.</p>
 </div>
-<p>Chapter 12 of <span id="id2">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> described how to adapt preference specifications of <span id="id3">Gorman [<a class="reference internal" href="zreferences.html#id15" title="William M. Gorman. Community preference fields. Econometrica: Journal of the Econometric Society, 21(1):63–80, 1953.">1953</a>]</span>
+<p>Chapter 12 of <span class="bibtex-citation" id="id2">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> described how to adapt preference specifications of <span class="bibtex-citation" id="id3">Gorman [<a class="reference internal" href="zreferences.html#id15" title="William M. Gorman. Community preference fields. Econometrica: Journal of the Econometric Society, 21(1):63–80, 1953.">1953</a>]</span>
 to a linear-quadratic class of environments.</p>
 <p>This lecture uses  the <code class="docutils literal notranslate"><span class="pre">quantecon.DLE</span></code> class to study economies that satisfy necessary conditions for Gorman
 aggregation of preferences.</p>
@@ -405,7 +408,7 @@ aggregation of preferences.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Computing a competitive equilibrium typically entails solving a fixed point problem.</p>
-<p><span id="id4">Negishi [<a class="reference internal" href="zreferences.html#id16" title="Takashi Negishi. Welfare economics and existence of an equilibrium for a competitive economy. Metroeconomica, 12(2-3):92–97, 1960.">1960</a>]</span> described a social welfare function that is maximized, subject to resource and technological constraints, by a competitive equilibrium allocation.</p>
+<p><span class="bibtex-citation" id="id4">Negishi [<a class="reference internal" href="zreferences.html#id16" title="Takashi Negishi. Welfare economics and existence of an equilibrium for a competitive economy. Metroeconomica, 12(2-3):92–97, 1960.">1960</a>]</span> described a social welfare function that is maximized, subject to resource and technological constraints, by a competitive equilibrium allocation.</p>
 <p>For Negishi, that social welfare function is a “linear combination of the individual utility functions of households, with the weights in the combination in inverse proportion to the marginal utilities of income.”</p>
 <p>Because Negishi’s weights depend on the allocation through the marginal utilities of income, computing a competitive equilibrium via constrained maximization of a Negishi-style welfare function requires finding a fixed point in the weights.</p>
 <p>When they apply, the beauty of Gorman’s aggregation conditions is that time series aggregates and market prices can be computed <em>without</em> resorting to Negishi’s fixed point approach.</p>
@@ -415,7 +418,7 @@ aggregation of preferences.</p>
 <li><p>Solve the planner’s problem and compute selection matrices that map the aggregate state into allocations and prices.</p></li>
 <li><p>Compute household-specific policies and the Gorman sharing rule.</p></li>
 </ol>
-<p>For a special case described  in Section 12.6 of <span id="id5">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>, where preference shocks are inactive, we can also</p>
+<p>For a special case described  in Section 12.6 of <span class="bibtex-citation" id="id5">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>, where preference shocks are inactive, we can also</p>
 <ol class="arabic simple" start="3">
 <li><p>Implement the  Arrow-Debreu allocation by allowing households to trade  a risk-free one-period bond and a single mutual fund that owns all of the economy’s physical capital.</p></li>
 </ol>
@@ -434,8 +437,7 @@ aggregation of preferences.</p>
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting quantecon
-  Downloading quantecon-0.11.2-py3-none-any.whl.metadata (5.3 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: quantecon in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.11.2)
 Requirement already satisfied: numba&gt;=0.49.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (0.62.1)
 Requirement already satisfied: numpy&gt;=1.17.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.3.5)
 Requirement already satisfied: requests in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from quantecon) (2.32.5)
@@ -447,9 +449,6 @@ Requirement already satisfied: idna&lt;4,&gt;=2.5 in /home/runner/miniconda3/env
 Requirement already satisfied: urllib3&lt;3,&gt;=1.21.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2.5.0)
 Requirement already satisfied: certifi&gt;=2017.4.17 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from requests-&gt;quantecon) (2025.11.12)
 Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from sympy-&gt;quantecon) (1.3.0)
-Downloading quantecon-0.11.2-py3-none-any.whl (330 kB)
-Installing collected packages: quantecon
-Successfully installed quantecon-0.11.2
 </pre></div>
 </div>
 </div>
@@ -468,7 +467,7 @@ Successfully installed quantecon-0.11.2
 </div>
 </div>
 <section id="gorman-aggregation-in-a-static-economy">
-<span id="static-gorman"></span><h3><span class="section-number">22.1.1. </span>Gorman aggregation in a static economy<a class="headerlink" href="#gorman-aggregation-in-a-static-economy" title="Link to this heading">#</a></h3>
+<span id="static-gorman"></span><h3><span class="section-number">23.1.1. </span>Gorman aggregation in a static economy<a class="headerlink" href="#gorman-aggregation-in-a-static-economy" title="Link to this heading">#</a></h3>
 <p>To indicate  where our competitive equilibrium  sharing rule originates, we start with a static economy with <span class="math notranslate nohighlight">\(n\)</span> goods, price vector <span class="math notranslate nohighlight">\(p\)</span>, and households <span class="math notranslate nohighlight">\(j = 1, \ldots, J\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(c^a\)</span> denote the aggregate amount of consumption to be allocated among households.</p>
 <p>Associated with <span class="math notranslate nohighlight">\(c^a\)</span> is an Edgeworth box and a set of Pareto optimal allocations.</p>
@@ -518,12 +517,12 @@ Successfully installed quantecon-0.11.2
 <figure class="align-default" id="fig-gorman-utility-frontier-crossing">
 <img alt="_images/ade75b1fbbe46c7b912b45b07a9deb6e2f6b756e260c51b5b851394754203a55.png" src="_images/ade75b1fbbe46c7b912b45b07a9deb6e2f6b756e260c51b5b851394754203a55.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 22.1 </span><span class="caption-text">utility possibility frontiers cross when aggregation fails</span><a class="headerlink" href="#fig-gorman-utility-frontier-crossing" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 23.1 </span><span class="caption-text">utility possibility frontiers cross when aggregation fails</span><a class="headerlink" href="#fig-gorman-utility-frontier-crossing" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p><span id="id6">Gorman [<a class="reference internal" href="zreferences.html#id15" title="William M. Gorman. Community preference fields. Econometrica: Journal of the Econometric Society, 21(1):63–80, 1953.">1953</a>]</span> described restrictions on preferences under which it <em>is</em> possible to obtain a community preference ordering.</p>
+<p><span class="bibtex-citation" id="id6">Gorman [<a class="reference internal" href="zreferences.html#id15" title="William M. Gorman. Community preference fields. Econometrica: Journal of the Econometric Society, 21(1):63–80, 1953.">1953</a>]</span> described restrictions on preferences under which it <em>is</em> possible to obtain a community preference ordering.</p>
 <p>Whenever Gorman’s conditions are satisfied, there occur substantial simplifications in solving multiple-consumer optimal resource allocation problems: in intertemporal contexts, it becomes possible first to determine the optimal allocation of aggregate resources over time, and then allocate aggregate consumption among consumers by assigning utility levels to each person.</p>
 <p>There is flexibility in the choice of monotonic transformations that we can use to represent utility levels.</p>
 <p>We restrict the utility index to be either nonnegative or nonpositive.</p>
@@ -546,7 +545,7 @@ c^a = \psi_a(p) + u^a \psi_c(p),
 \]</div>
 <p>where</p>
 <div class="math notranslate nohighlight" id="equation-eq-agg-demand">
-<span class="eqno">(22.1)<a class="headerlink" href="#equation-eq-agg-demand" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.1)<a class="headerlink" href="#equation-eq-agg-demand" title="Link to this equation">#</a></span>\[
 u^a = \sum_{j=1}^J u^j \quad \text{and} \quad \psi_a(p) = \sum_{j=1}^J \psi_j(p).
 \]</div>
 <p>In this case, optimal resource allocation in a heterogeneous consumer economy simplifies as follows.</p>
@@ -554,7 +553,7 @@ u^a = \sum_{j=1}^J u^j \quad \text{and} \quad \psi_a(p) = \sum_{j=1}^J \psi_j(p)
 <p>This preference ordering can be combined with a specification of the technology for producing consumption goods to determine the optimal allocation of aggregate consumption.</p>
 <p>The mapping <span class="math notranslate nohighlight">\(c^a = \psi_a(p) + u^a \psi_c(p)\)</span> can be inverted to obtain a gradient vector <span class="math notranslate nohighlight">\(p\)</span> that is independent of how utilities are allocated across consumers.</p>
 <p>Since <span class="math notranslate nohighlight">\(\psi_c\)</span> and <span class="math notranslate nohighlight">\(\psi_a\)</span> are homogeneous of degree zero, gradients are determined only up to a scalar multiple.</p>
-<p>Armed with <span class="math notranslate nohighlight">\(p\)</span>, we can then allocate utility among <span class="math notranslate nohighlight">\(J\)</span> consumers while respecting the adding-up constraint <a class="reference internal" href="#equation-eq-agg-demand">(22.1)</a>.</p>
+<p>Armed with <span class="math notranslate nohighlight">\(p\)</span>, we can then allocate utility among <span class="math notranslate nohighlight">\(J\)</span> consumers while respecting the adding-up constraint <a class="reference internal" href="#equation-eq-agg-demand">(23.1)</a>.</p>
 <p>The allocation of aggregate consumption across goods and the associated gradient are determined independently of how aggregate utility is divided among consumers.</p>
 <p>A decentralized version of this analysis proceeds as follows.</p>
 <p>Let <span class="math notranslate nohighlight">\(W^j\)</span> denote the wealth of consumer <span class="math notranslate nohighlight">\(j\)</span> and <span class="math notranslate nohighlight">\(W^a\)</span> denote aggregate wealth.
@@ -575,7 +574,7 @@ c^j = \psi_j(p) - \frac{p \cdot \psi_j(p)}{p \cdot \psi_c(p)} \psi_c(p) + W^j \f
 \]</div>
 <p>Notice that the coefficient on <span class="math notranslate nohighlight">\(W^j\)</span> is the same for all <span class="math notranslate nohighlight">\(j\)</span> since <span class="math notranslate nohighlight">\(\psi_c(p)/(p \cdot \psi_c(p))\)</span> is a function only of the price vector <span class="math notranslate nohighlight">\(p\)</span>.</p>
 <p>The individual allocations can be determined from the Engel curves by substituting for <span class="math notranslate nohighlight">\(p\)</span> the gradient vector obtained from the representative agent’s optimal allocation problem.</p>
-<p>In the quadratic specifications used in this lecture (and in <span id="id7">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>), the baseline components are degenerate in the sense that <span class="math notranslate nohighlight">\(\psi_j(p) = \chi^j\)</span> is independent of <span class="math notranslate nohighlight">\(p\)</span>, where <span class="math notranslate nohighlight">\(\chi^j\)</span> is a consumer-specific bliss point represented by a vector with the same dimension as <span class="math notranslate nohighlight">\(c^j\)</span>.</p>
+<p>In the quadratic specifications used in this lecture (and in <span class="bibtex-citation" id="id7">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>), the baseline components are degenerate in the sense that <span class="math notranslate nohighlight">\(\psi_j(p) = \chi^j\)</span> is independent of <span class="math notranslate nohighlight">\(p\)</span>, where <span class="math notranslate nohighlight">\(\chi^j\)</span> is a consumer-specific bliss point represented by a vector with the same dimension as <span class="math notranslate nohighlight">\(c^j\)</span>.</p>
 <p>In that case, the demand functions simplify to</p>
 <div class="math notranslate nohighlight">
 \[
@@ -594,22 +593,22 @@ c^j - \chi^j = \frac{u^j}{u^a}\,(c^a - \chi^a),
 \]</div>
 <p>so that there is a common scale factor <span class="math notranslate nohighlight">\((u^j/u^a)\)</span> across all goods for person <span class="math notranslate nohighlight">\(j\)</span>.</p>
 <p>Hence the fraction of total utility assigned to consumer <span class="math notranslate nohighlight">\(j\)</span> determines his fraction of the vector <span class="math notranslate nohighlight">\((c^a - \chi^a)\)</span>.</p>
-<p>This is exactly the form we will see in <a class="reference internal" href="#equation-eq-sharing-rule">(22.11)</a> below, except that goods are indexed by both dates and states in subscripts.</p>
+<p>This is exactly the form we will see in <a class="reference internal" href="#equation-eq-sharing-rule">(23.11)</a> below, except that goods are indexed by both dates and states in subscripts.</p>
 <p>In the dynamic setting, we set the utility index <span class="math notranslate nohighlight">\(u^j\)</span> equal to household <span class="math notranslate nohighlight">\(j\)</span>’s time-zero marginal utility of wealth <span class="math notranslate nohighlight">\(\mu_{0j}^w\)</span>, the Lagrange multiplier on the intertemporal budget constraint.</p>
 <p>The ratio <span class="math notranslate nohighlight">\(\mu_{0j}^w / \mu_{0a}^w\)</span> (where <span class="math notranslate nohighlight">\(\mu_{0a}^w = \sum_j \mu_{0j}^w\)</span>) then serves as the time-invariant Pareto weight that determines household <span class="math notranslate nohighlight">\(j\)</span>’s share of aggregate consumption in excess of baseline.</p>
 </section>
 </section>
 <section id="dynamic-stochastic-economy">
-<h2><span class="section-number">22.2. </span>Dynamic, Stochastic Economy<a class="headerlink" href="#dynamic-stochastic-economy" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">23.2. </span>Dynamic, Stochastic Economy<a class="headerlink" href="#dynamic-stochastic-economy" title="Link to this heading">#</a></h2>
 <p>We now introduce our basic setup for our dynamic heterogeneous-household economy.</p>
 <p>Time is discrete, <span class="math notranslate nohighlight">\(t = 0,1,2,\dots\)</span>.</p>
 <p>All households share a common discount factor <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span>.</p>
 <p>Households are indexed by <span class="math notranslate nohighlight">\(j = 1, \ldots, J\)</span>, where <span class="math notranslate nohighlight">\(J\)</span> denotes the total number of households in the economy.</p>
 <section id="exogenous-state">
-<h3><span class="section-number">22.2.1. </span>Exogenous state<a class="headerlink" href="#exogenous-state" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">23.2.1. </span>Exogenous state<a class="headerlink" href="#exogenous-state" title="Link to this heading">#</a></h3>
 <p>The exogenous state <span class="math notranslate nohighlight">\(z_t\)</span> follows a first-order vector autoregression</p>
 <div class="math notranslate nohighlight" id="equation-eq-exogenous-var">
-<span class="eqno">(22.2)<a class="headerlink" href="#equation-eq-exogenous-var" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.2)<a class="headerlink" href="#equation-eq-exogenous-var" title="Link to this equation">#</a></span>\[
 z_{t+1} = A_{22} z_t + C_2 w_{t+1},
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(A_{22}\)</span> governs persistence and <span class="math notranslate nohighlight">\(C_2\)</span> maps i.i.d. shocks <span class="math notranslate nohighlight">\(w_{t+1}\)</span> into the state.</p>
@@ -633,16 +632,16 @@ household preferences (bliss points) and endowments.</p>
 <p>This structure allows us to model both aggregate and idiosyncratic shocks within a unified framework at a later stage.</p>
 </section>
 <section id="technologies">
-<h3><span class="section-number">22.2.2. </span>Technologies<a class="headerlink" href="#technologies" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">23.2.2. </span>Technologies<a class="headerlink" href="#technologies" title="Link to this heading">#</a></h3>
 <p>The economy’s resource constraint is</p>
 <div class="math notranslate nohighlight" id="equation-eq-resource-constraint">
-<span class="eqno">(22.3)<a class="headerlink" href="#equation-eq-resource-constraint" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.3)<a class="headerlink" href="#equation-eq-resource-constraint" title="Link to this equation">#</a></span>\[
 \Phi_c c_t + \Phi_g g_t + \Phi_i i_t = \Gamma k_{t-1} + d_t, \quad
 k_t = \Delta_k k_{t-1} + \Theta_k i_t,
 \]</div>
 <p>and</p>
 <div class="math notranslate nohighlight" id="equation-eq-household-service-tech">
-<span class="eqno">(22.4)<a class="headerlink" href="#equation-eq-household-service-tech" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.4)<a class="headerlink" href="#equation-eq-household-service-tech" title="Link to this equation">#</a></span>\[
 h_t = \Delta_h h_{t-1} + \Theta_h c_t, \quad
 s_t = \Lambda h_{t-1} + \Pi_h c_t, \quad
 b_t = U_b z_t, \quad
@@ -653,20 +652,20 @@ d_t = U_d z_t.
 <span class="math notranslate nohighlight">\(c_t\)</span> is aggregate consumption, <span class="math notranslate nohighlight">\(i_t\)</span> is investment, <span class="math notranslate nohighlight">\(k_t\)</span> is the aggregate physical capital stock, <span class="math notranslate nohighlight">\(d_t\)</span> is the aggregate endowment (or dividend) stream, and <span class="math notranslate nohighlight">\(g_t\)</span> is the aggregate “intermediate good” (interpreted as total labor supply in this lecture).</p>
 <p>The matrices <span class="math notranslate nohighlight">\(\Phi_c, \Phi_g, \Phi_i\)</span> and <span class="math notranslate nohighlight">\(\Gamma\)</span> allow for multiple goods and a general linear mapping from stocks and endowments into resources.</p>
 <p>In the one-good case used in the limited-markets section, these reduce to scalars and the resource constraint becomes <span class="math notranslate nohighlight">\(c_t + i_t = \gamma_1 k_{t-1} + d_t\)</span>.</p>
-<p>We write <span class="math notranslate nohighlight">\(\Pi_h\)</span> for the household service-technology matrix <span class="math notranslate nohighlight">\(\Pi\)</span> in <span id="id8">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>.</p>
+<p>We write <span class="math notranslate nohighlight">\(\Pi_h\)</span> for the household service-technology matrix <span class="math notranslate nohighlight">\(\Pi\)</span> in <span class="bibtex-citation" id="id8">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>.</p>
 </section>
 <section id="the-individual-household-problem">
-<h3><span class="section-number">22.2.3. </span>The individual household problem<a class="headerlink" href="#the-individual-household-problem" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">23.2.3. </span>The individual household problem<a class="headerlink" href="#the-individual-household-problem" title="Link to this heading">#</a></h3>
 <p>Recall that we operate in an economy with <span class="math notranslate nohighlight">\(J\)</span> households indexed by <span class="math notranslate nohighlight">\(j = 1, 2, \ldots, J\)</span>.</p>
 <p>Households differ in preferences and endowments but share a common information set.</p>
 <p>Household <span class="math notranslate nohighlight">\(j\)</span> maximizes</p>
 <div class="math notranslate nohighlight" id="equation-eq-hh-objective">
-<span class="eqno">(22.5)<a class="headerlink" href="#equation-eq-hh-objective" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.5)<a class="headerlink" href="#equation-eq-hh-objective" title="Link to this equation">#</a></span>\[
 -\frac{1}{2} \mathbb{E}_0 \sum_{t=0}^\infty \beta^t \left[(s_{jt} - b_{jt})^\top (s_{jt} - b_{jt}) + \ell_{jt}^\top \ell_{jt}\right]
 \]</div>
 <p>subject to the household service technology</p>
 <div class="math notranslate nohighlight" id="equation-eq-hh-service-tech">
-<span class="eqno">(22.6)<a class="headerlink" href="#equation-eq-hh-service-tech" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(23.6)<a class="headerlink" href="#equation-eq-hh-service-tech" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{aligned}
 s_{jt} &amp;= \Lambda h_{j,t-1} + \Pi_h c_{jt}, \\
 h_{jt} &amp;= \Delta_h h_{j,t-1} + \Theta_h c_{jt},
@@ -674,7 +673,7 @@ h_{jt} &amp;= \Delta_h h_{j,t-1} + \Theta_h c_{jt},
 \end{split}\]</div>
 <p>and the intertemporal budget constraint</p>
 <div class="math notranslate nohighlight" id="equation-eq-hh-budget">
-<span class="eqno">(22.7)<a class="headerlink" href="#equation-eq-hh-budget" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.7)<a class="headerlink" href="#equation-eq-hh-budget" title="Link to this equation">#</a></span>\[
 \mathbb{E}_0 \sum_{t=0}^\infty \beta^t p_{0t} \cdot c_{jt}
 = \mathbb{E}_0 \sum_{t=0}^\infty \beta^t (w_{0t} \ell_{jt} + \alpha_{0t} \cdot d_{jt}) + v_0 \cdot k_{j,-1},
 \]</div>
@@ -703,10 +702,10 @@ h_{jt} &amp;= \Delta_h h_{j,t-1} + \Theta_h c_{jt},
 <p>This will allow us to solve for aggregate allocations and prices without knowing the distribution of wealth across households,  as we shall see in <a class="reference internal" href="#sharing-rules"><span class="std std-ref">Consumption sharing rules</span></a>.</p>
 </section>
 <section id="the-representative-agent-problem">
-<h3><span class="section-number">22.2.4. </span>The representative agent problem<a class="headerlink" href="#the-representative-agent-problem" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">23.2.4. </span>The representative agent problem<a class="headerlink" href="#the-representative-agent-problem" title="Link to this heading">#</a></h3>
 <p>We construct aggregates by summing across households:</p>
 <div class="math notranslate nohighlight" id="equation-eq-agg-preference-aggregates">
-<span class="eqno">(22.8)<a class="headerlink" href="#equation-eq-agg-preference-aggregates" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.8)<a class="headerlink" href="#equation-eq-agg-preference-aggregates" title="Link to this equation">#</a></span>\[
 h_{-1} = \sum_j h_{j,-1}, \quad
 k_{-1} = \sum_j k_{j,-1}, \quad
 U_b = \sum_j U_b^j, \quad
@@ -720,11 +719,11 @@ U_d = \sum_j U_d^j.
 <p>Posing a social planning problem for a representative agent is thus a device for computing the correct <em>aggregate</em> allocation along with correct competitive equilibrium prices.</p>
 <p>The social planner in our representative agent economy maximizes</p>
 <div class="math notranslate nohighlight" id="equation-eq-planner-objective">
-<span class="eqno">(22.9)<a class="headerlink" href="#equation-eq-planner-objective" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.9)<a class="headerlink" href="#equation-eq-planner-objective" title="Link to this equation">#</a></span>\[
 -\frac{1}{2} \mathbb{E}_0 \sum_{t=0}^\infty \beta^t
 \left[(s_t - b_t)^\top(s_t - b_t) + g_t^\top g_t\right]
 \]</div>
-<p>subject to the technology constraints <a class="reference internal" href="#equation-eq-resource-constraint">(22.3)</a> and <a class="reference internal" href="#equation-eq-household-service-tech">(22.4)</a>, and the exogenous state process <a class="reference internal" href="#equation-eq-exogenous-var">(22.2)</a>.</p>
+<p>subject to the technology constraints <a class="reference internal" href="#equation-eq-resource-constraint">(23.3)</a> and <a class="reference internal" href="#equation-eq-household-service-tech">(23.4)</a>, and the exogenous state process <a class="reference internal" href="#equation-eq-exogenous-var">(23.2)</a>.</p>
 <p>The variable <span class="math notranslate nohighlight">\(g_t\)</span> is the aggregate intermediate good.</p>
 <p>With quadratic labor costs and linear budget terms, household <span class="math notranslate nohighlight">\(j\)</span>’s intratemporal first-order condition implies <span class="math notranslate nohighlight">\(\ell_{jt} = \mu^w_{0j} w_{0t}\)</span>, where <span class="math notranslate nohighlight">\(\mu^w_{0j}\)</span> is household <span class="math notranslate nohighlight">\(j\)</span>’s time-zero marginal utility of wealth.</p>
 <p>Aggregating gives <span class="math notranslate nohighlight">\(g_t := \sum_j \ell_{jt} = \mu^w_{0a} w_{0t}\)</span>, where <span class="math notranslate nohighlight">\(\mu^w_{0a}=\sum_j \mu^w_{0j}\)</span>.</p>
@@ -748,7 +747,7 @@ M_q x_t \quad \text{for } q \in \{c, k, h, s\}.
 <p>These shadow prices correspond to competitive equilibrium prices.</p>
 </section>
 <section id="consumption-sharing-rules">
-<span id="sharing-rules"></span><h3><span class="section-number">22.2.5. </span>Consumption sharing rules<a class="headerlink" href="#consumption-sharing-rules" title="Link to this heading">#</a></h3>
+<span id="sharing-rules"></span><h3><span class="section-number">23.2.5. </span>Consumption sharing rules<a class="headerlink" href="#consumption-sharing-rules" title="Link to this heading">#</a></h3>
 <p>This section presents the Gorman consumption sharing rules.</p>
 <p>Our preference specification is an infinite-dimensional generalization of the static Gorman setup described in <a class="reference internal" href="#static-gorman"><span class="std std-ref">Gorman aggregation in a static economy</span></a>, where goods are indexed by both dates and states of the world.</p>
 <p>Let <span class="math notranslate nohighlight">\(\mu_{0j}^w\)</span> denote household <span class="math notranslate nohighlight">\(j\)</span>’s <em>time-zero marginal utility of wealth</em>, the Lagrange multiplier on its intertemporal budget constraint.</p>
@@ -767,12 +766,12 @@ M_q x_t \quad \text{for } q \in \{c, k, h, s\}.
 <p>This is household <span class="math notranslate nohighlight">\(j\)</span>’s <strong>Pareto weight</strong>.</p>
 <p>The allocation rule for consumption has the form</p>
 <div class="math notranslate nohighlight" id="equation-eq-sharing-rule-baseline">
-<span class="eqno">(22.10)<a class="headerlink" href="#equation-eq-sharing-rule-baseline" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.10)<a class="headerlink" href="#equation-eq-sharing-rule-baseline" title="Link to this equation">#</a></span>\[
 c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t),
 \]</div>
 <p>or equivalently,</p>
 <div class="math notranslate nohighlight" id="equation-eq-sharing-rule">
-<span class="eqno">(22.11)<a class="headerlink" href="#equation-eq-sharing-rule" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.11)<a class="headerlink" href="#equation-eq-sharing-rule" title="Link to this equation">#</a></span>\[
 c_{jt} = \mu_j c_t + \tilde{\chi}_{jt}, \qquad \tilde{\chi}_{jt} := \chi_{jt} - \mu_j \chi_t.
 \]</div>
 <p>Here <span class="math notranslate nohighlight">\(\mu_j c_t\)</span> is household <span class="math notranslate nohighlight">\(j\)</span>’s proportional share of aggregate consumption and <span class="math notranslate nohighlight">\(\tilde{\chi}_{jt}\)</span> is the <em>deviation</em> from this proportional share.</p>
@@ -782,26 +781,26 @@ c_{jt} = \mu_j c_t + \tilde{\chi}_{jt}, \qquad \tilde{\chi}_{jt} := \chi_{jt} - 
 <p>The beauty of this representation is that the weight <span class="math notranslate nohighlight">\(\mu_j\)</span> is time-invariant.</p>
 <p>Nonseparabilities in preferences (over time or across goods) affect only the construction of the baseline process <span class="math notranslate nohighlight">\(\{\chi_{jt}\}\)</span> and the calculation of the weight <span class="math notranslate nohighlight">\(\mu_j\)</span> implied by the distribution of wealth.</p>
 <section id="household-services-allocation-rule">
-<h4><span class="section-number">22.2.5.1. </span>Household services allocation rule<a class="headerlink" href="#household-services-allocation-rule" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">23.2.5.1. </span>Household services allocation rule<a class="headerlink" href="#household-services-allocation-rule" title="Link to this heading">#</a></h4>
 <p>First-order necessary conditions for consumption services imply</p>
 <div class="math notranslate nohighlight" id="equation-eq-foc-services">
-<span class="eqno">(22.12)<a class="headerlink" href="#equation-eq-foc-services" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.12)<a class="headerlink" href="#equation-eq-foc-services" title="Link to this equation">#</a></span>\[
 s_{jt} - b_{jt} = \mu_{0j}^w \rho_{0t},
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\rho_{0t}\)</span> is the time-0 shadow price for date-<span class="math notranslate nohighlight">\(t\)</span> services from the aggregate problem.</p>
 <p>Since the aggregate first-order condition is <span class="math notranslate nohighlight">\(s_t - b_t = \mu_{0a}^w \rho_{0t}\)</span>, we can eliminate <span class="math notranslate nohighlight">\(\rho_{0t}\)</span> to obtain:</p>
 <div class="math notranslate nohighlight" id="equation-eq-service-allocation">
-<span class="eqno">(22.13)<a class="headerlink" href="#equation-eq-service-allocation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.13)<a class="headerlink" href="#equation-eq-service-allocation" title="Link to this equation">#</a></span>\[
 s_{jt} - b_{jt} = \mu_j (s_t - b_t),
 \]</div>
 <p>or equivalently <span class="math notranslate nohighlight">\(\tilde{s}_{jt} = \tilde{b}_{jt}\)</span>, where <span class="math notranslate nohighlight">\(\tilde{y}_{jt} := y_{jt} - \mu_j y_t\)</span> for any variable <span class="math notranslate nohighlight">\(y\)</span>.</p>
 <p>This representation does not involve prices directly.</p>
 </section>
 <section id="inverse-canonical-representation">
-<h4><span class="section-number">22.2.5.2. </span>Inverse canonical representation<a class="headerlink" href="#inverse-canonical-representation" title="Link to this heading">#</a></h4>
-<p>Given <span class="math notranslate nohighlight">\(\rho_{0t}\)</span> from the aggregate solution, we can solve <a class="reference internal" href="#equation-eq-foc-services">(22.12)</a> for <span class="math notranslate nohighlight">\(s_{jt}\)</span>, then use the inverse canonical representation from Chapter 9 of <span id="id9">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> to compute <span class="math notranslate nohighlight">\(c_{jt}\)</span> and <span class="math notranslate nohighlight">\(h_{jt}\)</span>:</p>
+<h4><span class="section-number">23.2.5.2. </span>Inverse canonical representation<a class="headerlink" href="#inverse-canonical-representation" title="Link to this heading">#</a></h4>
+<p>Given <span class="math notranslate nohighlight">\(\rho_{0t}\)</span> from the aggregate solution, we can solve <a class="reference internal" href="#equation-eq-foc-services">(23.12)</a> for <span class="math notranslate nohighlight">\(s_{jt}\)</span>, then use the inverse canonical representation from Chapter 9 of <span class="bibtex-citation" id="id9">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> to compute <span class="math notranslate nohighlight">\(c_{jt}\)</span> and <span class="math notranslate nohighlight">\(h_{jt}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-inverse-canonical-full">
-<span class="eqno">(22.14)<a class="headerlink" href="#equation-eq-inverse-canonical-full" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(23.14)<a class="headerlink" href="#equation-eq-inverse-canonical-full" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{aligned}
 c_{jt} &amp;= -\Pi_h^{-1} \Lambda h_{j,t-1} + \Pi_h^{-1} s_{jt}, \\
 h_{jt} &amp;= (\Delta_h - \Theta_h \Pi_h^{-1} \Lambda) h_{j,t-1} + \Theta_h \Pi_h^{-1} s_{jt},
@@ -811,12 +810,12 @@ h_{jt} &amp;= (\Delta_h - \Theta_h \Pi_h^{-1} \Lambda) h_{j,t-1} + \Theta_h \Pi_
 <p>This recursion requires a canonical household technology with square, invertible <span class="math notranslate nohighlight">\(\Pi_h\)</span>.</p>
 </section>
 <section id="computational-details">
-<h4><span class="section-number">22.2.5.3. </span>Computational details<a class="headerlink" href="#computational-details" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">23.2.5.3. </span>Computational details<a class="headerlink" href="#computational-details" title="Link to this heading">#</a></h4>
 <p>Define deviation processes <span class="math notranslate nohighlight">\(\tilde{y}_{jt} := y_{jt} - \mu_j y_t\)</span> for any variable <span class="math notranslate nohighlight">\(y\)</span>.</p>
 <p>In particular, the deviation durable stock is <span class="math notranslate nohighlight">\(\tilde{h}_{jt} := h_{jt} - \mu_j h_t\)</span>.</p>
-<p>The deviation form of the inverse canonical representation <a class="reference internal" href="#equation-eq-inverse-canonical-full">(22.14)</a> is</p>
+<p>The deviation form of the inverse canonical representation <a class="reference internal" href="#equation-eq-inverse-canonical-full">(23.14)</a> is</p>
 <div class="math notranslate nohighlight" id="equation-eq-inverse-canonical-dev">
-<span class="eqno">(22.15)<a class="headerlink" href="#equation-eq-inverse-canonical-dev" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(23.15)<a class="headerlink" href="#equation-eq-inverse-canonical-dev" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{aligned}
 \tilde{c}_{jt} &amp;= -\Pi_h^{-1} \Lambda \tilde{h}_{j,t-1} + \Pi_h^{-1} \tilde{s}_{jt}, \\
 \tilde{h}_{jt} &amp;= (\Delta_h - \Theta_h \Pi_h^{-1} \Lambda) \tilde{h}_{j,t-1} + \Theta_h \Pi_h^{-1} \tilde{s}_{jt},
@@ -826,55 +825,55 @@ h_{jt} &amp;= (\Delta_h - \Theta_h \Pi_h^{-1} \Lambda) h_{j,t-1} + \Theta_h \Pi_
 <p>Associated with <span class="math notranslate nohighlight">\(\tilde{s}_{jt}\)</span> is a synthetic consumption process <span class="math notranslate nohighlight">\(\tilde{\chi}_{jt}\)</span> that makes <span class="math notranslate nohighlight">\(\tilde{c}_{jt} = \tilde{\chi}_{jt}\)</span> be the optimal sharing rule.</p>
 <p>To construct <span class="math notranslate nohighlight">\(\tilde{\chi}_{jt}\)</span>, we substitute <span class="math notranslate nohighlight">\(\tilde{s}_{jt} = \tilde{b}_{jt}\)</span> into the inverse canonical representation:</p>
 <div class="math notranslate nohighlight" id="equation-eq-inverse-canonical">
-<span class="eqno">(22.16)<a class="headerlink" href="#equation-eq-inverse-canonical" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(23.16)<a class="headerlink" href="#equation-eq-inverse-canonical" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{aligned}
 \tilde{\chi}_{jt} &amp;= -\Pi_h^{-1} \Lambda \tilde{\eta}_{j,t-1} + \Pi_h^{-1} \tilde{b}_{jt}, \\
 \tilde{\eta}_{jt} &amp;= (\Delta_h - \Theta_h \Pi_h^{-1} \Lambda) \tilde{\eta}_{j,t-1} + \Theta_h \Pi_h^{-1} \tilde{b}_{jt},
 \end{aligned}
 \end{split}\]</div>
 <p>with <span class="math notranslate nohighlight">\(\tilde{\eta}_{j,-1} = \tilde{h}_{j,-1}\)</span>.</p>
-<p>Since <span class="math notranslate nohighlight">\(\tilde{s}_{jt} = \tilde{b}_{jt}\)</span> and <span class="math notranslate nohighlight">\(\tilde{\eta}_{j,-1} = \tilde{h}_{j,-1}\)</span>, it follows from <a class="reference internal" href="#equation-eq-inverse-canonical-dev">(22.15)</a> and <a class="reference internal" href="#equation-eq-inverse-canonical">(22.16)</a> that <span class="math notranslate nohighlight">\(\tilde{c}_{jt} = \tilde{\chi}_{jt}\)</span>.</p>
+<p>Since <span class="math notranslate nohighlight">\(\tilde{s}_{jt} = \tilde{b}_{jt}\)</span> and <span class="math notranslate nohighlight">\(\tilde{\eta}_{j,-1} = \tilde{h}_{j,-1}\)</span>, it follows from <a class="reference internal" href="#equation-eq-inverse-canonical-dev">(23.15)</a> and <a class="reference internal" href="#equation-eq-inverse-canonical">(23.16)</a> that <span class="math notranslate nohighlight">\(\tilde{c}_{jt} = \tilde{\chi}_{jt}\)</span>.</p>
 <p>Since the allocation rule for consumption can be expressed as</p>
 <div class="math notranslate nohighlight" id="equation-eq-cjt-recursion">
-<span class="eqno">(22.17)<a class="headerlink" href="#equation-eq-cjt-recursion" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.17)<a class="headerlink" href="#equation-eq-cjt-recursion" title="Link to this equation">#</a></span>\[
 c_{jt} = \mu_j c_t + \tilde{\chi}_{jt},
 \]</div>
 <p>we can append the recursion for <span class="math notranslate nohighlight">\(c_t\)</span> from the aggregate problem to obtain a recursion generating <span class="math notranslate nohighlight">\(c_{jt}\)</span>.</p>
 </section>
 <section id="labor-allocation-rule">
-<h4><span class="section-number">22.2.5.4. </span>Labor allocation rule<a class="headerlink" href="#labor-allocation-rule" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">23.2.5.4. </span>Labor allocation rule<a class="headerlink" href="#labor-allocation-rule" title="Link to this heading">#</a></h4>
 <p>Once the aggregate allocation and prices are obtained from the representative problem, individual labor allocations follow from the ratio of individual to aggregate marginal utilities of wealth:</p>
 <div class="math notranslate nohighlight" id="equation-eq-labor-allocation">
-<span class="eqno">(22.18)<a class="headerlink" href="#equation-eq-labor-allocation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.18)<a class="headerlink" href="#equation-eq-labor-allocation" title="Link to this equation">#</a></span>\[
 \ell_{jt} = \frac{\mu_{0j}^w}{\mu_{0a}^w} \, g_t \equiv \mu_j \, g_t,
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(g_t\)</span> is the aggregate intermediate good determined by the representative agent’s first-order condition.</p>
 <p>This step recovers household labor supplies consistent with the competitive equilibrium.</p>
 </section>
 <section id="risk-sharing">
-<h4><span class="section-number">22.2.5.5. </span>Risk sharing<a class="headerlink" href="#risk-sharing" title="Link to this heading">#</a></h4>
-<p>Because the coefficient <span class="math notranslate nohighlight">\(\mu_j\)</span> is invariant over time and across goods, allocation rule <a class="reference internal" href="#equation-eq-sharing-rule-baseline">(22.10)</a> implies a form of risk pooling in the deviation process <span class="math notranslate nohighlight">\(\{c_{jt} - \chi_{jt}\}\)</span>.</p>
+<h4><span class="section-number">23.2.5.5. </span>Risk sharing<a class="headerlink" href="#risk-sharing" title="Link to this heading">#</a></h4>
+<p>Because the coefficient <span class="math notranslate nohighlight">\(\mu_j\)</span> is invariant over time and across goods, allocation rule <a class="reference internal" href="#equation-eq-sharing-rule-baseline">(23.10)</a> implies a form of risk pooling in the deviation process <span class="math notranslate nohighlight">\(\{c_{jt} - \chi_{jt}\}\)</span>.</p>
 <p>In the special case where the preference shock processes <span class="math notranslate nohighlight">\(\{b_{jt}\}\)</span> are deterministic (in the sense that they reside in the information set <span class="math notranslate nohighlight">\(\mathcal{J}_0\)</span>), individual consumption goods will be perfectly correlated with their aggregate counterparts.</p>
 </section>
 </section>
 </section>
 <section id="household-allocations">
-<h2><span class="section-number">22.3. </span>Household allocations<a class="headerlink" href="#household-allocations" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">23.3. </span>Household allocations<a class="headerlink" href="#household-allocations" title="Link to this heading">#</a></h2>
 <p>A direct way to compute allocations to individuals would be to solve the problem each household faces in competitive equilibrium at equilibrium prices.</p>
 <p>For a fixed Lagrange multiplier <span class="math notranslate nohighlight">\(\mu_{0j}^w\)</span> on the household’s budget constraint, the household’s problem can be expressed as an optimal linear regulator with a state vector augmented to reflect aggregate state variables determining scaled Arrow-Debreu prices.</p>
 <p>One could compute individual allocations by iterating to find the multiplier <span class="math notranslate nohighlight">\(\mu_{0j}^w\)</span> that satisfies the budget constraint.</p>
 <p>But there is a more elegant approach that uses the Gorman allocation rules.</p>
 <section id="computing-household-allocations">
-<h3><span class="section-number">22.3.1. </span>Computing household allocations<a class="headerlink" href="#computing-household-allocations" title="Link to this heading">#</a></h3>
-<p>We apply our consumption sharing rules <a class="reference internal" href="#equation-eq-sharing-rule">(22.11)</a> and <a class="reference internal" href="#equation-eq-sharing-rule-baseline">(22.10)</a>  in two steps.</p>
+<h3><span class="section-number">23.3.1. </span>Computing household allocations<a class="headerlink" href="#computing-household-allocations" title="Link to this heading">#</a></h3>
+<p>We apply our consumption sharing rules <a class="reference internal" href="#equation-eq-sharing-rule">(23.11)</a> and <a class="reference internal" href="#equation-eq-sharing-rule-baseline">(23.10)</a>  in two steps.</p>
 <section id="step-1-compute-deviation-consumption">
-<h4><span class="section-number">22.3.1.1. </span>Step 1: compute deviation consumption<a class="headerlink" href="#step-1-compute-deviation-consumption" title="Link to this heading">#</a></h4>
-<p>Using the inverse canonical representation <a class="reference internal" href="#equation-eq-inverse-canonical">(22.16)</a>, we compute the deviation consumption process <span class="math notranslate nohighlight">\(\{\tilde{\chi}_{jt}\}\)</span> from household <span class="math notranslate nohighlight">\(j\)</span>’s deviation bliss points <span class="math notranslate nohighlight">\(\{\tilde{b}_{jt}\}\)</span> and initial deviation state <span class="math notranslate nohighlight">\(\tilde{\eta}_{j,-1} = h_{j,-1} - \mu_j h_{-1}\)</span>.</p>
+<h4><span class="section-number">23.3.1.1. </span>Step 1: compute deviation consumption<a class="headerlink" href="#step-1-compute-deviation-consumption" title="Link to this heading">#</a></h4>
+<p>Using the inverse canonical representation <a class="reference internal" href="#equation-eq-inverse-canonical">(23.16)</a>, we compute the deviation consumption process <span class="math notranslate nohighlight">\(\{\tilde{\chi}_{jt}\}\)</span> from household <span class="math notranslate nohighlight">\(j\)</span>’s deviation bliss points <span class="math notranslate nohighlight">\(\{\tilde{b}_{jt}\}\)</span> and initial deviation state <span class="math notranslate nohighlight">\(\tilde{\eta}_{j,-1} = h_{j,-1} - \mu_j h_{-1}\)</span>.</p>
 <p>When preferences include durables or habits (<span class="math notranslate nohighlight">\(\Lambda \neq 0\)</span>), the deviation consumption depends on the lagged deviation state <span class="math notranslate nohighlight">\(\tilde{\eta}_{j,t-1}\)</span>.</p>
 <p>The code solves this as a linear-quadratic control problem using a scaling trick: multiplying the transition matrices by <span class="math notranslate nohighlight">\(\sqrt{\beta}\)</span> converts the discounted problem into an undiscounted one that can be solved with a standard discrete algebraic Riccati equation.</p>
 </section>
 <section id="step-2-compute-each-pareto-weight">
-<h4><span class="section-number">22.3.1.2. </span>Step 2: compute each Pareto weight<a class="headerlink" href="#step-2-compute-each-pareto-weight" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">23.3.1.2. </span>Step 2: compute each Pareto weight<a class="headerlink" href="#step-2-compute-each-pareto-weight" title="Link to this heading">#</a></h4>
 <p>We compute the Pareto weight <span class="math notranslate nohighlight">\(\mu_j\)</span> from household <span class="math notranslate nohighlight">\(j\)</span>’s budget constraint.</p>
 <p>We compute five present values:</p>
 <ul class="simple">
@@ -896,7 +895,7 @@ W_g   &amp;= \mathbb{E}_0 \sum_{t=0}^\infty \beta^t \, w_{0t} \, g_t.
 \end{aligned}
 \end{split}\]</div>
 <p>We compute each present value by  using <code class="docutils literal notranslate"><span class="pre">doublej2</span></code>  to sum infinite series.</p>
-<p>The budget constraint <a class="reference internal" href="#equation-eq-hh-budget">(22.7)</a> requires that the present value of consumption equals wealth:</p>
+<p>The budget constraint <a class="reference internal" href="#equation-eq-hh-budget">(23.7)</a> requires that the present value of consumption equals wealth:</p>
 <div class="math notranslate nohighlight">
 \[
 \underbrace{\mathbb{E}_0 \sum_{t=0}^\infty \beta^t p_{0t} \cdot c_{jt}}_{\text{consumption expenditure}} = \underbrace{v_0 \cdot k_{j,-1}}_{W_k} + \underbrace{\mathbb{E}_0 \sum_{t=0}^\infty \beta^t \alpha_{0t} \cdot d_{jt}}_{W_d} + \underbrace{\mathbb{E}_0 \sum_{t=0}^\infty \beta^t w_{0t} \ell_{jt}}_{\text{labor income}}.
@@ -1122,12 +1121,12 @@ c_{jt} = S_{ci} X_t, \quad h_{jt} = S_{hi} X_t, \quad s_{jt} = S_{si} X_t.
 </section>
 </section>
 <section id="limited-markets">
-<h2><span class="section-number">22.4. </span>Limited markets<a class="headerlink" href="#limited-markets" title="Link to this heading">#</a></h2>
-<p>This section studies a special case from Section 12.6 of <span id="id10">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> in which the Arrow-Debreu allocation can be implemented by opening competitive markets only in a mutual fund and a one-period bond.</p>
+<h2><span class="section-number">23.4. </span>Limited markets<a class="headerlink" href="#limited-markets" title="Link to this heading">#</a></h2>
+<p>This section studies a special case from Section 12.6 of <span class="bibtex-citation" id="id10">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> in which the Arrow-Debreu allocation can be implemented by opening competitive markets only in a mutual fund and a one-period bond.</p>
 <ul class="simple">
 <li><p>So in our setting, we don’t literally require that markets in  a complete set of contingent claims be present.</p></li>
 </ul>
-<p>To match the implementation result in Chapter 12.6 of <span id="id11">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>, we specialize to the one-good, constant-return case</p>
+<p>To match the implementation result in Chapter 12.6 of <span class="bibtex-citation" id="id11">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>, we specialize to the one-good, constant-return case</p>
 <div class="math notranslate nohighlight">
 \[
 c_t + i_t = \gamma_1 k_{t-1} + d_t, \qquad
@@ -1135,9 +1134,9 @@ k_t = \delta_k k_{t-1} + i_t, \qquad
 \beta = \frac{1}{\gamma_1 + \delta_k}.
 \]</div>
 <p>In this case, the one-period riskless gross return is constant, <span class="math notranslate nohighlight">\(R = \gamma_1 + \delta_k = 1/\beta\)</span>.</p>
-<p>We also impose the Chapter 12.6 <span id="id12">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> measurability restriction that the deviation baseline <span class="math notranslate nohighlight">\(\{\tilde{\chi}_{jt}\}\)</span> is <span class="math notranslate nohighlight">\(\mathcal{J}_0\)</span>-measurable (for example, the preference-shock processes <span class="math notranslate nohighlight">\(\{b_{jt}\}\)</span> are deterministic).</p>
+<p>We also impose the Chapter 12.6 <span class="bibtex-citation" id="id12">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> measurability restriction that the deviation baseline <span class="math notranslate nohighlight">\(\{\tilde{\chi}_{jt}\}\)</span> is <span class="math notranslate nohighlight">\(\mathcal{J}_0\)</span>-measurable (for example, the preference-shock processes <span class="math notranslate nohighlight">\(\{b_{jt}\}\)</span> are deterministic).</p>
 <section id="the-trading-arrangement">
-<h3><span class="section-number">22.4.1. </span>The trading arrangement<a class="headerlink" href="#the-trading-arrangement" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">23.4.1. </span>The trading arrangement<a class="headerlink" href="#the-trading-arrangement" title="Link to this heading">#</a></h3>
 <p>Consider again an economy where each household <span class="math notranslate nohighlight">\(j\)</span> initially owns claims to its own endowment stream <span class="math notranslate nohighlight">\(\{d_{jt}\}\)</span>.</p>
 <p>Instead of trading in a complete set of Arrow-Debreu markets, we open:</p>
 <ol class="arabic simple">
@@ -1202,16 +1201,16 @@ R \hat{k}_{j,t-1} = \tilde{\chi}_{jt} + \hat{k}_{jt}
 \]</div>
 <p>Rearranging gives the bond recursion:</p>
 <div class="math notranslate nohighlight" id="equation-eq-bond-recursion">
-<span class="eqno">(22.19)<a class="headerlink" href="#equation-eq-bond-recursion" title="Link to this equation">#</a></span>\[
+<span class="eqno">(23.19)<a class="headerlink" href="#equation-eq-bond-recursion" title="Link to this equation">#</a></span>\[
 \hat{k}_{jt} = R \hat{k}_{j,t-1} - \tilde{\chi}_{jt}.
 \]</div>
-<p>Equation <a class="reference internal" href="#equation-eq-bond-recursion">(22.19)</a> says that the bond position grows at rate <span class="math notranslate nohighlight">\(R\)</span> but is drawn down by the deviation consumption <span class="math notranslate nohighlight">\(\tilde{\chi}_{jt}\)</span>.</p>
+<p>Equation <a class="reference internal" href="#equation-eq-bond-recursion">(23.19)</a> says that the bond position grows at rate <span class="math notranslate nohighlight">\(R\)</span> but is drawn down by the deviation consumption <span class="math notranslate nohighlight">\(\tilde{\chi}_{jt}\)</span>.</p>
 <p>When <span class="math notranslate nohighlight">\(\tilde{\chi}_{jt} &gt; 0\)</span> (i.e., household <span class="math notranslate nohighlight">\(j\)</span> consumes more than its share), it finances this by running down its bond holdings.</p>
 <p>The household’s total asset position is hence <span class="math notranslate nohighlight">\(a_{jt} = \mu_j k_t + \hat{k}_{jt}\)</span>.</p>
 </section>
 <section id="initial-bond-position">
-<h3><span class="section-number">22.4.2. </span>Initial bond position<a class="headerlink" href="#initial-bond-position" title="Link to this heading">#</a></h3>
-<p>To find <span class="math notranslate nohighlight">\(\hat{k}_{j0}\)</span>, we solve the recursion <a class="reference internal" href="#equation-eq-bond-recursion">(22.19)</a> forward.</p>
+<h3><span class="section-number">23.4.2. </span>Initial bond position<a class="headerlink" href="#initial-bond-position" title="Link to this heading">#</a></h3>
+<p>To find <span class="math notranslate nohighlight">\(\hat{k}_{j0}\)</span>, we solve the recursion <a class="reference internal" href="#equation-eq-bond-recursion">(23.19)</a> forward.</p>
 <p>Iterating forward from <span class="math notranslate nohighlight">\(\hat{k}_{jt} = R \hat{k}_{j,t-1} - \tilde{\chi}_{jt}\)</span>, we get:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1242,7 +1241,7 @@ R^{-T} \hat{k}_{jT} = \hat{k}_{j0} - \sum_{t=1}^T R^{-t} \tilde{\chi}_{jt}
 <p>Under the measurability restriction (<span class="math notranslate nohighlight">\(\tilde{\chi}_{jt} \in \mathcal{J}_0\)</span>), this sum is known at date zero and can be used to set the initial bond position.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This construction embodies a multiperiod counterpart to an aggregation result for security markets derived by <span id="id13">Rubinstein [<a class="reference internal" href="zreferences.html#id17" title="Mark Rubinstein. An aggregation theorem for securities markets. Journal of Financial Economics, 1(3):225–244, 1974.">1974</a>]</span>.</p>
+<p>This construction embodies a multiperiod counterpart to an aggregation result for security markets derived by <span class="bibtex-citation" id="id13">Rubinstein [<a class="reference internal" href="zreferences.html#id17" title="Mark Rubinstein. An aggregation theorem for securities markets. Journal of Financial Economics, 1(3):225–244, 1974.">1974</a>]</span>.</p>
 <p>In a two-period model, Rubinstein provided sufficient conditions on preferences of households and asset market payoffs that  implement a complete-markets  Arrow-Debreu contingent claims allocation with incomplete security markets.</p>
 <p>In Rubinstein’s implementation, all households hold the same portfolio of risky assets.</p>
 <p>In our construction, households also hold the same portfolio of risky assets, and portfolio weights do not vary over time.</p>
@@ -1448,8 +1447,8 @@ into one function.</p>
 </section>
 </section>
 <section id="example-two-household-economy">
-<span id="gorman-twohh"></span><h2><span class="section-number">22.5. </span>Example: two-household economy<a class="headerlink" href="#example-two-household-economy" title="Link to this heading">#</a></h2>
-<p>We now reproduce a two-household example from Chapter 12.6 of <span id="id14">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>.</p>
+<span id="gorman-twohh"></span><h2><span class="section-number">23.5. </span>Example: two-household economy<a class="headerlink" href="#example-two-household-economy" title="Link to this heading">#</a></h2>
+<p>We now reproduce a two-household example from Chapter 12.6 of <span class="bibtex-citation" id="id14">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>.</p>
 <p>There are two households, each with preferences</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1569,7 +1568,7 @@ d^2_t = 3 + \tilde{d}^2_t,
 <figure class="align-default" id="fig-gorman-consumption">
 <img alt="_images/72ad67ab6f20eed152c2a3ee1123126f4d6ae16a8e0a03bafc7b45349e2f4a7b.png" src="_images/72ad67ab6f20eed152c2a3ee1123126f4d6ae16a8e0a03bafc7b45349e2f4a7b.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 22.2 </span><span class="caption-text">consumption paths</span><a class="headerlink" href="#fig-gorman-consumption" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 23.2 </span><span class="caption-text">consumption paths</span><a class="headerlink" href="#fig-gorman-consumption" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1593,7 +1592,7 @@ d^2_t = 3 + \tilde{d}^2_t,
 <figure class="align-default" id="fig-gorman-bond-adjustment">
 <img alt="_images/4d132570f0a1ad32e095b058ee3ce99c447f864623a5d8a17da7b0c43017c8ed.png" src="_images/4d132570f0a1ad32e095b058ee3ce99c447f864623a5d8a17da7b0c43017c8ed.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 22.3 </span><span class="caption-text">bond position adjustments</span><a class="headerlink" href="#fig-gorman-bond-adjustment" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 23.3 </span><span class="caption-text">bond position adjustments</span><a class="headerlink" href="#fig-gorman-bond-adjustment" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1613,10 +1612,10 @@ d^2_t = 3 + \tilde{d}^2_t,
 </div>
 </section>
 <section id="example-many-household-gorman-economies">
-<h2><span class="section-number">22.6. </span>Example: many-household Gorman economies<a class="headerlink" href="#example-many-household-gorman-economies" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">23.6. </span>Example: many-household Gorman economies<a class="headerlink" href="#example-many-household-gorman-economies" title="Link to this heading">#</a></h2>
 <p>We now extend the two-household example to an economy with many households.</p>
 <section id="specification">
-<h3><span class="section-number">22.6.1. </span>Specification<a class="headerlink" href="#specification" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">23.6.1. </span>Specification<a class="headerlink" href="#specification" title="Link to this heading">#</a></h3>
 <p>The exogenous state vector is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1823,7 +1822,7 @@ Setting <span class="math notranslate nohighlight">\(\rho^{d}_j = 0\)</span> (or
 </div>
 </section>
 <section id="household-economy">
-<h3><span class="section-number">22.6.2. </span>100-household  economy<a class="headerlink" href="#household-economy" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">23.6.2. </span>100-household  economy<a class="headerlink" href="#household-economy" title="Link to this heading">#</a></h3>
 <p>We now instantiate a 100-household version of the preceding economy.</p>
 <p>We use the same technology and preference parameters.</p>
 <div class="cell docutils container">
@@ -1966,10 +1965,10 @@ Endowments: α in [3.01, 4.95]
 </section>
 </section>
 <section id="state-space-representation">
-<h2><span class="section-number">22.7. </span>State-space representation<a class="headerlink" href="#state-space-representation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">23.7. </span>State-space representation<a class="headerlink" href="#state-space-representation" title="Link to this heading">#</a></h2>
 <section id="closed-loop-state-space-system">
-<h3><span class="section-number">22.7.1. </span>Closed-loop state-space system<a class="headerlink" href="#closed-loop-state-space-system" title="Link to this heading">#</a></h3>
-<p>We can use our DLE tools first to solve the representative-household social planning problem and represent equilibrium quantities as a linear closed-loop  state-space system that takes the usual Chapter 5 <span id="id15">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> form</p>
+<h3><span class="section-number">23.7.1. </span>Closed-loop state-space system<a class="headerlink" href="#closed-loop-state-space-system" title="Link to this heading">#</a></h3>
+<p>We can use our DLE tools first to solve the representative-household social planning problem and represent equilibrium quantities as a linear closed-loop  state-space system that takes the usual Chapter 5 <span class="bibtex-citation" id="id15">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> form</p>
 <div class="math notranslate nohighlight">
 \[
 x_{t+1} = A_0 x_t + C w_{t+1},
@@ -2138,15 +2137,15 @@ y_t = G x_t.
 </section>
 </section>
 <section id="redistributing-by-adjusting-pareto-weights">
-<h2><span class="section-number">22.8. </span>Redistributing by adjusting  Pareto weights<a class="headerlink" href="#redistributing-by-adjusting-pareto-weights" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">23.8. </span>Redistributing by adjusting  Pareto weights<a class="headerlink" href="#redistributing-by-adjusting-pareto-weights" title="Link to this heading">#</a></h2>
 <p>This section analyzes Pareto-efficient tax-and-transfer schemes by starting with competitive equilibrium allocations and using a specific set of nonnegative Pareto weights that sum to one.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>There are various tax-and-transfer   schemes that would deliver such efficient redistributions, but in terms of what interests us in this example, they are all equivalent.</p>
 </div>
 <section id="redistribution-via-pareto-weights">
-<h3><span class="section-number">22.8.1. </span>Redistribution via Pareto weights<a class="headerlink" href="#redistribution-via-pareto-weights" title="Link to this heading">#</a></h3>
-<p>The sharing rule <a class="reference internal" href="#equation-eq-sharing-rule">(22.11)</a> can be written as <span class="math notranslate nohighlight">\(c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t)\)</span>, where <span class="math notranslate nohighlight">\(\mu_j\)</span> is household <span class="math notranslate nohighlight">\(j\)</span>’s Pareto weight.</p>
+<h3><span class="section-number">23.8.1. </span>Redistribution via Pareto weights<a class="headerlink" href="#redistribution-via-pareto-weights" title="Link to this heading">#</a></h3>
+<p>The sharing rule <a class="reference internal" href="#equation-eq-sharing-rule">(23.11)</a> can be written as <span class="math notranslate nohighlight">\(c_{jt} - \chi_{jt} = \mu_j (c_t - \chi_t)\)</span>, where <span class="math notranslate nohighlight">\(\mu_j\)</span> is household <span class="math notranslate nohighlight">\(j\)</span>’s Pareto weight.</p>
 <p>Define the Pareto weight <span class="math notranslate nohighlight">\(\lambda_j := \mu_j\)</span>, with <span class="math notranslate nohighlight">\(\sum_{j=1}^J \lambda_j = 1\)</span>.</p>
 <p>Consider redistributing consumption by choosing new weights <span class="math notranslate nohighlight">\(\{\lambda_j^*\}\)</span> satisfying <span class="math notranslate nohighlight">\(\lambda_j^* \geq 0\)</span> and <span class="math notranslate nohighlight">\(\sum_j \lambda_j^* = 1\)</span>.</p>
 <p>The new allocation <span class="math notranslate nohighlight">\(c_{jt} - \chi_{jt} = \lambda_j^* (c_t - \chi_t)\)</span> preserves aggregate dynamics <span class="math notranslate nohighlight">\((c_t, k_t)\)</span> while reallocating consumption across households.</p>
@@ -2509,13 +2508,18 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="mcmc.html">
+   3. Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="muth_kalman.html">
-   3. Reverse Engineering a la Muth
+   4. Reverse Engineering a la Muth
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="discrete_dp.html">
-   4. Discrete State Dynamic Programming
+   5. Discrete State Dynamic Programming
   </a>
  </li>
 </ul>
@@ -2527,42 +2531,42 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="cons_news.html">
-   5. Information and Consumption Smoothing
+   6. Information and Consumption Smoothing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing.html">
-   6. Consumption Smoothing with Complete and Incomplete Markets
+   7. Consumption Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing_tax.html">
-   7. Tax Smoothing with Complete and Incomplete Markets
+   8. Tax Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   8. Markov Jump Linear Quadratic Dynamic Programming
+   9. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   9. How to Pay for a War: Part 1
+   10. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   10. How to Pay for a War: Part 2
+   11. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   11. How to Pay for a War: Part 3
+   12. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   12. Optimal Taxation in an LQ Economy
+   13. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -2574,22 +2578,22 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   13. Default Risk and Income Fluctuations
+   14. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   14. Globalization and Cycles
+   15. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   15. Coase’s Theory of the Firm
+   16. Coase’s Theory of the Firm
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="match_transport.html">
-   16. Composite Sorting
+   17. Composite Sorting
   </a>
  </li>
 </ul>
@@ -2601,47 +2605,47 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   17. Recursive Models of Dynamic Linear Economies
+   18. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   18. Growth in Dynamic Linear Economies
+   19. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   19. Lucas Asset Pricing Using DLE
+   20. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   20. IRFs in Hall Models
+   21. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   21. Permanent Income Model using the DLE Class
+   22. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   22. Gorman Aggregation
+   23. Gorman Aggregation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   24. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   25. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   26. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -2653,22 +2657,22 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   26. Risk and Model Uncertainty
+   27. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   27. Etymology of Entropy
+   28. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   28. Robustness
+   29. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   29. Robust Markov Perfect Equilibrium
+   30. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -2680,42 +2684,42 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   30. Covariance Stationary Processes
+   31. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   31. Estimation of Spectra
+   32. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   32. Additive and Multiplicative Functionals
+   33. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   33. Classical Control with Linear Algebra
+   34. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   34. Classical Prediction and Filtering With Linear Algebra
+   35. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   35. Knowing the Forecasts of Others
+   36. Knowing the Forecasts of Others
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_rational_expectations.html">
-   36. Demand for Money during Hyperinflations under Rational Expectations
+   37. Demand for Money during Hyperinflations under Rational Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="info_projection.html">
-   37. Hyperinflation and Information Projection
+   38. Hyperinflation and Information Projection
   </a>
  </li>
 </ul>
@@ -2727,47 +2731,47 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   38. Asset Pricing II: The Lucas Asset Pricing Model
+   39. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   39. Elementary Asset Pricing Theory
+   40. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_richard_1987.html">
-   40. The Role of Conditioning Information in Asset Pricing
+   41. The Role of Conditioning Information in Asset Pricing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_jagannathan_1991.html">
-   41. The Hansen-Jagannathan Bound
+   42. The Hansen-Jagannathan Bound
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   42. Two Modifications of Mean-Variance Portfolio Theory
+   43. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="doubts_or_variability.html">
-   43. Doubts or Variability?
+   44. Doubts or Variability?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
-   44. Risk Aversion or Mistaken Beliefs?
+   45. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   45. Irrelevance of Capital Structures with Complete Markets
+   46. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   46. Equilibrium Capital Structures with Incomplete Markets
+   47. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -2779,62 +2783,62 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   47. Optimal Unemployment Insurance
+   48. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   48. Stackelberg Plans
+   49. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   49. Machine Learning a Ramsey Plan
+   50. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   50. Time Inconsistency of Ramsey Plans
+   51. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   51. Sustainable Plans for a Calvo Model
+   52. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   52. Optimal Taxation with State-Contingent Debt
+   53. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   53. Optimal Taxation without State-Contingent Debt
+   54. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   54. Fluctuating Interest Rates Deliver Fiscal Insurance
+   55. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   55. Fiscal Risk and Government Debt
+   56. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   56. Competitive Equilibria of a Model of Chang
+   57. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   57. Credible Government Policies in a Model of Chang
+   58. Credible Government Policies in a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dovis_accounting_mf.html">
-   58. Accounting for Monetary and Fiscal Policy
+   59. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -2846,17 +2850,17 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   59. Troubleshooting
+   60. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   60. References
+   61. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   61. Execution Statistics
+   62. Execution Statistics
   </a>
  </li>
 </ul>
@@ -2900,6 +2904,8 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/gorman_heterogeneous_households.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst" download><i data-feather="github"></i></a></li>
+                    
+                    
                 </ul>
 
             </div>

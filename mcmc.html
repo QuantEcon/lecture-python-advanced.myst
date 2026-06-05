@@ -1,0 +1,2012 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Markov Chain Monte Carlo &#8212; Advanced Quantitative Economics with Python</title>
+    
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    
+    <script src="https://unpkg.com/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/tippy.js@6.3.1/dist/tippy-bundle.umd.js" integrity="sha384-bq5PNg/ZcfW7KMvFSmhjqCQJ/VFnec+6sZkctn/4ZLeubkn7U58Le4zFFSn3dhUu" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" integrity="sha384-qEqAs1VsN9WH2myXDbiP2wGGIttL9bMRZBKCl54ZnzpDlVqbYANP9vMaoT/wvQcf" crossorigin="anonymous"></script>
+    
+        <script>
+            MathJax = {
+            loader: {load: ['[tex]/boldsymbol', '[tex]/textmacros']},
+            tex: {
+                packages: {'[+]': ['boldsymbol', 'textmacros']},
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                processEscapes: true,
+                macros: {
+                    "argmax" : "arg\\,max",
+                    "argmin" : "arg\\,min",
+                    "col"    : "col",
+                    "Span"   :  "span",
+                    "epsilon": "\\varepsilon",
+                    "EE": "\\mathbb{E}",
+                    "PP": "\\mathbb{P}",
+                    "RR": "\\mathbb{R}",
+                    "NN": "\\mathbb{N}",
+                    "ZZ": "\\mathbb{Z}",
+                    "aA": "\\mathcal{A}",
+                    "bB": "\\mathcal{B}",
+                    "cC": "\\mathcal{C}",
+                    "dD": "\\mathcal{D}",
+                    "eE": "\\mathcal{E}",
+                    "fF": "\\mathcal{F}",
+                    "gG": "\\mathcal{G}",
+                    "hH": "\\mathcal{H}",
+                }
+            },
+            svg: {
+                fontCache: 'global',
+                scale: 0.92,
+                displayAlign: "center",
+            },
+            };
+        </script>
+    
+    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=ff5dcadef89fd2097ea5e28ddaad7eb5985f09c4" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
+    <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
+    <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KZLV7PM9LL"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KZLV7PM9LL');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"argmax": "arg\\,max", "argmin": "arg\\,min", "col": "col", "Span": "span", "epsilon": "\\varepsilon", "EE": "\\mathbb{E}", "PP": "\\mathbb{P}", "RR": "\\mathbb{R}", "NN": "\\mathbb{N}", "ZZ": "\\mathbb{Z}", "aA": "\\mathcal{A}", "bB": "\\mathcal{B}", "cC": "\\mathcal{C}", "dD": "\\mathcal{D}", "eE": "\\mathcal{E}", "fF": "\\mathcal{F}", "gG": "\\mathcal{G}", "hH": "\\mathcal{H}"}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'mcmc';</script>
+    <link rel="canonical" href="https://python-advanced.quantecon.org/mcmc.html" />
+    <link rel="icon" href="_static/lectures-favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Reverse Engineering a la Muth" href="muth_kalman.html" />
+    <link rel="prev" title="2. Continuous State Markov Chains" href="stationary_densities.html" />
+
+<!-- Normal Meta Tags -->
+<meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
+<meta name="keywords" content="Python, QuantEcon, Quantitative Economics, Economics, Sloan, Alfred P. Sloan Foundation, Tom J. Sargent, John Stachurski" />
+<meta name="description" content=This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski. />
+
+<!-- Twitter tags -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@quantecon" />
+<meta name="twitter:title" content="Markov Chain Monte Carlo"/>
+<meta name="twitter:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski.">
+<meta name="twitter:creator" content="@quantecon">
+<meta name="twitter:image" content="https://assets.quantecon.org/img/qe-twitter-logo.png">
+
+<!-- Opengraph tags -->
+<meta property="og:title" content="Markov Chain Monte Carlo" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://python-advanced.quantecon.org/mcmc.html" />
+<meta property="og:image" content="https://assets.quantecon.org/img/qe-og-logo.png" />
+<meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
+<meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
+<meta name="theme-color" content="#ffffff" />
+
+
+
+
+  </head>
+<body>
+
+<!-- Prevent flash of light theme when dark mode is saved -->
+<script>
+(function() {
+  try {
+    if (localStorage.setContrast === '1') {
+      document.body.classList.add('dark-theme');
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+</script>
+
+<!-- Override QuantEcon theme colors -->
+
+<!-- Color scheme: applies scheme-specific body class -->
+
+    <span id="top"></span>
+
+    <div class="qe-wrapper">
+
+        <div class="qe-main">
+
+            <div class="qe-page" id=mcmc>
+
+                <div class="qe-page__toc">
+
+                    
+                    
+                    
+
+                    
+                    <div class="inner sticky" data-autoexpand="true">
+
+                        
+                        <div class="qe-page__toc-header">
+                            On this page
+                        </div>
+
+
+                        <nav id="bd-toc-nav" class="qe-page__toc-nav">
+                            <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">3.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-kernels">3.2. Markov kernels</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#kernels-and-conditional-distributions">3.2.1. Kernels and conditional distributions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detailed-balance">3.2.2. Detailed balance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ergodicity">3.2.3. Ergodicity</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-metropolis-hastings-kernel">3.3. The Metropolis-Hastings kernel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-proposal">3.3.1. The proposal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-acceptance-rule">3.3.2. The acceptance rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-algorithm">3.3.3. The algorithm</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-transition-kernel">3.3.4. The transition kernel</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#stationarity-of-the-posterior">3.3.5. Stationarity of the posterior</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ergodicity-of-the-metropolis-hastings-kernel">3.4. Ergodicity of the Metropolis-Hastings kernel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ergodicity-of-the-chain">3.4.1. Ergodicity of the chain</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-chain-is-pi-irreducible">3.4.2. Why the chain is <span class="math notranslate nohighlight">\(\pi\)</span>-irreducible</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-chain-is-aperiodic">3.4.3. Why the chain is aperiodic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">3.4.4. Summary</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-numerical-example">3.5. A numerical example</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-model-and-data">3.5.1. The model and data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-sampler-in-jax">3.5.2. A sampler in JAX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#checking-the-numerics">3.5.3. Checking the numerics</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ergodicity-in-action">3.6. Ergodicity in action</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#time-averages">3.6.1. Time averages</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distributional-convergence">3.6.2. Distributional convergence</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#losing-conjugacy">3.7. Losing conjugacy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ground-truth-by-quadrature">3.7.1. Ground truth by quadrature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-student-t-prior">3.7.2. A Student-t prior</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-bimodal-prior">3.7.3. A bimodal prior</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">3.8. Exercises</a></li>
+</ul>
+                            <p class="logo">
+                                
+                                    
+                                    <a href=https://quantecon.org><img src="_static/qe-logo-large.png" class="logo logo-img" alt="logo"></a>
+                                    
+                                    
+                                
+                            </p>
+
+                            <p class="powered">Powered by <a href="https://jupyterbook.org/v1/">Jupyter Book</a></p>
+
+                        </nav>
+
+                        <div class="qe-page__toc-footer">
+                            
+                            
+                            
+                            
+                            
+                        </div>
+
+                    </div>
+
+                    
+                    <a href="#top" class="back-to-top-btn" title="Back to top">↑ Top</a>
+                    
+
+                </div>
+
+                <div class="qe-page__header">
+
+                    <div class="qe-page__header-copy">
+
+                        <p class="qe-page__header-heading"><a href="intro.html">Advanced Quantitative Economics with Python</a></p>
+
+                    </div>
+
+                    <!-- Authors section -->
+                        <p class="qe-page__header-authors" font-size="18">
+                            
+                                
+                                    <a href="http://www.tomsargent.com/" target="_blank"><span>Thomas J. Sargent</span></a>
+                                
+                            
+                                
+                                    and <a href="https://johnstachurski.net/" target="_blank"><span>John Stachurski</span></a>
+                                
+                            
+                        </p>
+
+                    <!-- Last modified / Changelog dropdown -->
+                        <button class="qe-page__header-changed" id="changelog-toggle" aria-expanded="false">
+                            Last changed: Jun 05, 2026
+                            <span class="changelog-icon">▼</span>
+                        </button>
+
+                    <!-- Changelog dropdown content -->
+                    <div class="qe-page__header-changelog" id="changelog-content" aria-hidden="true">
+                        <h4>Changelog (<a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commits/main/lectures/mcmc.md">full history</a>)</h4>
+                        <ul class="changelog-list">
+                            
+                            <li class="changelog-entry">
+                                
+                                <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/f2447abb" class="changelog-hash">f2447abb</a>
+                                
+                                <span class="changelog-author">John Stachurski</span>
+                                <span class="changelog-time">1 hour ago</span>
+                                <span class="changelog-message">NEW: Markov Chain Monte Carlo lecture (#332)</span>
+                            </li>
+                            
+                        </ul>
+                    </div>
+
+                </div> <!-- .page__header -->
+
+
+
+                
+                <main class="qe-page__content" role="main">
+                    
+                    <div>
+                        
+  <div id="qe-notebook-header" align="right" style="text-align:right;">
+        <a href="https://quantecon.org/" title="quantecon.org">
+                <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
+        </a>
+</div><section class="tex2jax_ignore mathjax_ignore" id="markov-chain-monte-carlo">
+<h1><span class="section-number">3. </span>Markov Chain Monte Carlo<a class="headerlink" href="#markov-chain-monte-carlo" title="Link to this heading">#</a></h1>
+<p id="index-0">This lecture provides a fast-paced introduction to the theory of Markov chain
+Monte Carlo (MCMC).</p>
+<p>MCMC is a general method for sampling from a potentially intractable and
+high-dimensional distribution.</p>
+<p>The basic idea is to set up a Markov chain such that, asymptotically, the
+distribution of each draw is approximately equal to the target distribution.</p>
+<p>Markov chain Monte Carlo lies at the heart of modern Bayesian analysis, and this
+is our motivation for studying MCMC.</p>
+<p>In the case of Bayesian analysis, the target distribution is the posterior.</p>
+<p>In this lecture we focus on the Metropolis-Hastings algorithm, which is perhaps the most
+important foundational algorithm for MCMC in Bayesian environments.</p>
+<p>We first state the theory and then run some illustrations using Google JAX.</p>
+<p>The lecture also serves as preparation for working with modern MCMC libraries such as <a class="reference external" href="https://num.pyro.ai/">NumPyro</a> and <a class="reference external" href="https://blackjax-devs.github.io/blackjax/">BlackJAX</a>, which we will use in later lectures: the implementation below is, in essence, what happens under the hood when such libraries run.</p>
+<p>Note that this lecture is intentionally high level.</p>
+<p>We freely use advanced probability theory.</p>
+<p>The target audience is students with strong math backgrounds and researchers.</p>
+<p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
+<div class="cell tag_hide-output docutils container">
+<div class="cell_input above-output-prompt docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>jax
+</pre></div>
+</div>
+</div>
+<details class="admonition hide below-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell output</p>
+<p class="expanded admonition-title">Hide code cell output</p>
+</summary>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting jax
+  Downloading jax-0.10.1-py3-none-any.whl.metadata (13 kB)
+Collecting jaxlib&lt;=0.10.1,&gt;=0.10.1 (from jax)
+  Downloading jaxlib-0.10.1-cp313-cp313-manylinux_2_27_x86_64.whl.metadata (1.3 kB)
+Collecting ml_dtypes&gt;=0.5.0 (from jax)
+  Downloading ml_dtypes-0.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.9 kB)
+Requirement already satisfied: numpy&gt;=2.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from jax) (2.3.5)
+Collecting opt_einsum (from jax)
+  Downloading opt_einsum-3.4.0-py3-none-any.whl.metadata (6.3 kB)
+Requirement already satisfied: scipy&gt;=1.14 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from jax) (1.16.3)
+Downloading jax-0.10.1-py3-none-any.whl (3.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.2/3.2 MB</span> <span class=" -Color -Color-Red">157.3 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+?25hDownloading jaxlib-0.10.1-cp313-cp313-manylinux_2_27_x86_64.whl (85.8 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/85.8 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">85.7/85.8 MB</span> <span class=" -Color -Color-Red">508.6 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">85.8/85.8 MB</span> <span class=" -Color -Color-Red">366.6 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+?25hDownloading ml_dtypes-0.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (5.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">5.0/5.0 MB</span> <span class=" -Color -Color-Red">334.7 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+?25h
+Downloading opt_einsum-3.4.0-py3-none-any.whl (71 kB)
+Installing collected packages: opt_einsum, ml_dtypes, jaxlib, jax
+?25l
+   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
+   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
+   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
+   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
+   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
+   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
+   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
+   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
+   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
+   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
+   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4/4</span> [jax]
+Successfully installed jax-0.10.1 jaxlib-0.10.1 ml_dtypes-0.5.4 opt_einsum-3.4.0
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="note admonition">
+<p class="admonition-title">JAX</p>
+<p>This lecture uses <a class="reference external" href="https://github.com/jax-ml/jax">Google JAX</a> for its numerical examples.</p>
+<p>The examples are small enough to run quickly on a CPU, so the default <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">jax</span></code> is sufficient and no GPU is required.</p>
+</div>
+<section id="overview">
+<h2><span class="section-number">3.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(\theta \in \Theta \subseteq \mathbb R\)</span> be an unknown parameter and let <span class="math notranslate nohighlight">\(y = (y_1, \ldots, y_n) \in \mathbb R^n\)</span> be observed data.</p>
+<p>Bayesian inference centers on the <strong>posterior distribution</strong></p>
+<div class="math notranslate nohighlight" id="equation-mcmc-bayes">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-mcmc-bayes" title="Link to this equation">#</a></span>\[\pi(\theta) := p(\theta \mid y)
+= \frac{p(y \mid \theta) \, p(\theta)}{p(y)}\]</div>
+<p>where <span class="math notranslate nohighlight">\(p(y \mid \theta)\)</span> is the likelihood, <span class="math notranslate nohighlight">\(p(\theta)\)</span> is the prior, and</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-marginal">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-mcmc-marginal" title="Link to this equation">#</a></span>\[p(y) = \int_\Theta p(y \mid \theta) \, p(\theta) \, d\theta\]</div>
+<p>is the marginal likelihood.</p>
+<p>In line with <a class="reference internal" href="#equation-mcmc-bayes">(3.1)</a>, we usually use <span class="math notranslate nohighlight">\(\pi\)</span> to refer to the posterior density, and the data vector <span class="math notranslate nohighlight">\(y\)</span> is held fixed.</p>
+<p>When the prior and likelihood are conjugate, the integral in <a class="reference internal" href="#equation-mcmc-marginal">(3.2)</a> is available in closed form and the posterior is known analytically.</p>
+<p>Outside the conjugate family, the integral and <span class="math notranslate nohighlight">\(\pi\)</span> are typically intractable.</p>
+<p>We can nonetheless evaluate the <strong>unnormalized posterior</strong></p>
+<div class="math notranslate nohighlight">
+\[
+\tilde p(\theta \mid y) := p(y \mid \theta) \, p(\theta)
+= p(y) \, \pi(\theta)
+\]</div>
+<p>pointwise for any <span class="math notranslate nohighlight">\(\theta\)</span>.</p>
+<p>Metropolis-Hastings exploits this: it constructs a Markov chain <span class="math notranslate nohighlight">\((\theta_t)_{t \geq 0}\)</span> whose stationary distribution is <span class="math notranslate nohighlight">\(\pi\)</span> using only pointwise evaluations of <span class="math notranslate nohighlight">\(\tilde p(\theta \mid y)\)</span>.</p>
+<p>In addition to having <span class="math notranslate nohighlight">\(\pi\)</span> as the stationary distribution, the chain will also have the following ergodic property: for <span class="math notranslate nohighlight">\(\pi\)</span>-almost every choice of <span class="math notranslate nohighlight">\(\theta_0\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{T} \sum_{t=1}^{T} f(\theta_t)
+\to \int_\Theta f(\theta) \, \pi(d\theta)
+\]</div>
+<p>with probability one as <span class="math notranslate nohighlight">\(T \to \infty\)</span> for a large class of functions <span class="math notranslate nohighlight">\(f\)</span>.</p>
+<p>This means that, by varying <span class="math notranslate nohighlight">\(f\)</span>, we can compute various features of the distribution <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>In the Bayesian setting, we use this convergence to estimate posterior means, variances, and quantiles from the sampled path: with <span class="math notranslate nohighlight">\(f(\theta) = \theta\)</span> we recover the posterior mean, with <span class="math notranslate nohighlight">\(f = \mathbf 1_A\)</span> the posterior probability of <span class="math notranslate nohighlight">\(A\)</span>, and so on.</p>
+<p>The rest of the lecture flows as follows.</p>
+<p>First we define Markov transition kernels, detailed balance, and stationarity (see <a class="reference internal" href="#mcmc-kernels"><span class="std std-ref">Markov kernels</span></a>).</p>
+<p>Then we introduce the Metropolis-Hastings kernel and verify that it has
+<span class="math notranslate nohighlight">\(\pi\)</span> as its stationary distribution (see <a class="reference internal" href="#mcmc-mh"><span class="std std-ref">The Metropolis-Hastings kernel</span></a>).</p>
+<p>Next we explain why the resulting chain delivers samples from <span class="math notranslate nohighlight">\(\pi\)</span> (see <a class="reference internal" href="#mcmc-mh-ergodicity"><span class="std std-ref">Ergodicity of the Metropolis-Hastings kernel</span></a>).</p>
+<p>Finally, we implement the algorithm in JAX and study its behavior in a sequence of experiments (see <a class="reference internal" href="#mcmc-numerics"><span class="std std-ref">A numerical example</span></a>).</p>
+</section>
+<section id="markov-kernels">
+<span id="mcmc-kernels"></span><h2><span class="section-number">3.2. </span>Markov kernels<a class="headerlink" href="#markov-kernels" title="Link to this heading">#</a></h2>
+<p>In this section we review some foundational aspects of Markov dynamics.</p>
+<p>We met closely related ideas in <a class="reference internal" href="stationary_densities.html"><span class="doc std std-doc">Continuous State Markov Chains</span></a>, which studies Markov chains whose transition probabilities admit density representations; here we work with general kernels.</p>
+<section id="kernels-and-conditional-distributions">
+<h3><span class="section-number">3.2.1. </span>Kernels and conditional distributions<a class="headerlink" href="#kernels-and-conditional-distributions" title="Link to this heading">#</a></h3>
+<p>Let <span class="math notranslate nohighlight">\(\Theta \subseteq \mathbb R\)</span> be Borel, let <span class="math notranslate nohighlight">\(\mathcal B\)</span> denote the Borel <span class="math notranslate nohighlight">\(\sigma\)</span>-algebra on <span class="math notranslate nohighlight">\(\Theta\)</span>, and let <span class="math notranslate nohighlight">\(\mu\)</span> denote Lebesgue measure on <span class="math notranslate nohighlight">\((\Theta, \mathcal B)\)</span>, which we use throughout as the reference measure.</p>
+<p>The dynamics of a Markov chain are encoded in a transition kernel.</p>
+<div class="proof definition admonition" id="mcmc_def_kernel">
+<p class="admonition-title"><span class="caption-number">Definition 3.1 </span> (Markov kernel)</p>
+<section class="definition-content" id="proof-content">
+<p>A <strong>Markov</strong> (or <strong>stochastic</strong>) <strong>kernel</strong> on <span class="math notranslate nohighlight">\((\Theta, \mathcal B)\)</span> is a map <span class="math notranslate nohighlight">\(N \colon \Theta \times \mathcal B \to [0, 1]\)</span> such that</p>
+<ol class="arabic simple">
+<li><p>for each fixed <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span>, the map <span class="math notranslate nohighlight">\(A \mapsto N(\theta, A)\)</span> is a probability measure on <span class="math notranslate nohighlight">\((\Theta, \mathcal B)\)</span>; and</p></li>
+<li><p>for each fixed <span class="math notranslate nohighlight">\(A \in \mathcal B\)</span>, the map <span class="math notranslate nohighlight">\(\theta \mapsto N(\theta, A)\)</span> is <span class="math notranslate nohighlight">\(\mathcal B\)</span>-measurable.</p></li>
+</ol>
+</section>
+</div><p>The interpretation is that <span class="math notranslate nohighlight">\(N(\theta, A)\)</span> gives the probability that the chain, currently at <span class="math notranslate nohighlight">\(\theta\)</span>, moves into the set <span class="math notranslate nohighlight">\(A\)</span> at the next step:</p>
+<div class="math notranslate nohighlight">
+\[
+N(\theta, A) = \mathbb P \{ \theta_{t+1} \in A \mid \theta_t = \theta \}
+\]</div>
+<p>Some kernels can be represented by conditional densities:</p>
+<div class="proof definition admonition" id="mcmc_def_density">
+<p class="admonition-title"><span class="caption-number">Definition 3.2 </span> (Conditional density)</p>
+<section class="definition-content" id="proof-content">
+<p>A Markov kernel <span class="math notranslate nohighlight">\(N\)</span> is said to <strong>admit a density representation</strong> if there exists a conditional density <span class="math notranslate nohighlight">\(n\)</span> such that, for every <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span> and every <span class="math notranslate nohighlight">\(A \in \mathcal B\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[N(\theta, A) = \int_A n(\theta' \mid \theta) \, d\theta'\]</div>
+</section>
+</div><p>Here</p>
+<ul class="simple">
+<li><p>The statement that <span class="math notranslate nohighlight">\(n\)</span> is a conditional density means that <span class="math notranslate nohighlight">\(n\)</span> is measurable and nonnegative on <span class="math notranslate nohighlight">\(\Theta \times \Theta\)</span>, and that <span class="math notranslate nohighlight">\(n(\cdot \mid \theta)\)</span> integrates to one for all <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span>.</p></li>
+<li><p>The symbol <span class="math notranslate nohighlight">\(d\theta'\)</span> means integration with respect to Lebesgue measure;
+sometimes we write this as <span class="math notranslate nohighlight">\(\mu(d\theta')\)</span>.</p></li>
+</ul>
+<div class="proof definition admonition" id="mcmc_def_stationary">
+<p class="admonition-title"><span class="caption-number">Definition 3.3 </span> (Stationary distribution)</p>
+<section class="definition-content" id="proof-content">
+<p>A probability measure <span class="math notranslate nohighlight">\(\pi\)</span> on <span class="math notranslate nohighlight">\((\Theta, \mathcal B)\)</span> is called <strong>stationary</strong> for the kernel <span class="math notranslate nohighlight">\(N\)</span> if</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-stationary">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-mcmc-stationary" title="Link to this equation">#</a></span>\[(\pi N)(A) := \int_\Theta N(\theta, A) \, \pi(d\theta)
+= \pi(A)
+\qquad \text{for all } A \in \mathcal B\]</div>
+</section>
+</div><p>If <span class="math notranslate nohighlight">\(\theta_t \sim \pi\)</span> and the chain evolves according to <span class="math notranslate nohighlight">\(N\)</span>, then <a class="reference internal" href="#equation-mcmc-stationary">(3.3)</a> says <span class="math notranslate nohighlight">\(\theta_{t+1} \sim \pi\)</span> as well: once the chain reaches <span class="math notranslate nohighlight">\(\pi\)</span>, it stays in <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>Our goal is to construct a kernel for which the posterior <a class="reference internal" href="#equation-mcmc-bayes">(3.1)</a> is stationary.</p>
+</section>
+<section id="detailed-balance">
+<h3><span class="section-number">3.2.2. </span>Detailed balance<a class="headerlink" href="#detailed-balance" title="Link to this heading">#</a></h3>
+<p>The following sufficient condition for stationarity will be useful in what follows.</p>
+<div class="proof definition admonition" id="mcmc_def_db">
+<p class="admonition-title"><span class="caption-number">Definition 3.4 </span> (Detailed balance)</p>
+<section class="definition-content" id="proof-content">
+<p>A Markov kernel <span class="math notranslate nohighlight">\(N\)</span> is said to be <strong>reversible</strong> with respect to a probability measure <span class="math notranslate nohighlight">\(\pi\)</span>, or to <strong>satisfy detailed balance</strong> with respect to <span class="math notranslate nohighlight">\(\pi\)</span>, if the bivariate measure</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-joint">
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-mcmc-joint" title="Link to this equation">#</a></span>\[\Lambda(d\theta, d\theta') := \pi(d\theta) \, N(\theta, d\theta')\]</div>
+<p>on <span class="math notranslate nohighlight">\((\Theta \times \Theta, \, \mathcal B \otimes \mathcal B)\)</span> is symmetric under interchange of its coordinates; that is, if</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-db-measure">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-mcmc-db-measure" title="Link to this equation">#</a></span>\[\int_{\Theta \times \Theta} g(\theta, \theta') \, \Lambda(d\theta, d\theta')
+=
+\int_{\Theta \times \Theta} g(\theta', \theta) \, \Lambda(d\theta, d\theta')\]</div>
+<p>for every bounded measurable <span class="math notranslate nohighlight">\(g \colon \Theta \times \Theta \to \mathbb R\)</span>.</p>
+</section>
+</div><p>The measure <span class="math notranslate nohighlight">\(\Lambda\)</span> is the joint law of a consecutive pair <span class="math notranslate nohighlight">\((\theta_t, \theta_{t+1})\)</span> when <span class="math notranslate nohighlight">\(\theta_t \sim \pi\)</span>.</p>
+<p>Symmetry of <span class="math notranslate nohighlight">\(\Lambda\)</span> says this pair is exchangeable: the chain looks the same run forwards as backwards in time.</p>
+<p>When <span class="math notranslate nohighlight">\(N\)</span> admits a density representation with conditional density <span class="math notranslate nohighlight">\(n(\cdot \mid \theta)\)</span>, and <span class="math notranslate nohighlight">\(\pi\)</span> has density <span class="math notranslate nohighlight">\(\pi(\theta)\)</span> with respect to <span class="math notranslate nohighlight">\(\mu\)</span>, condition <a class="reference internal" href="#equation-mcmc-db-measure">(3.5)</a> reduces to the familiar pointwise <strong>detailed balance equation</strong></p>
+<div class="math notranslate nohighlight" id="equation-mcmc-db-density">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-mcmc-db-density" title="Link to this equation">#</a></span>\[\pi(\theta) \, n(\theta' \mid \theta)
+=
+\pi(\theta') \, n(\theta \mid \theta')
+\qquad \text{for } \mu \otimes \mu \text{-almost every } (\theta, \theta')\]</div>
+<p>Indeed, under domination both sides of <a class="reference internal" href="#equation-mcmc-db-measure">(3.5)</a> are integrals against the densities <span class="math notranslate nohighlight">\(\pi(\theta) \, n(\theta' \mid \theta)\)</span> and <span class="math notranslate nohighlight">\(\pi(\theta') \, n(\theta \mid \theta')\)</span> respectively, and these agree for all test functions <span class="math notranslate nohighlight">\(g\)</span> whenever <a class="reference internal" href="#equation-mcmc-db-density">(3.6)</a> holds.</p>
+<p>For us the significance of detailed balance lies in the following result.</p>
+<div class="proof theorem admonition" id="mcmc_thm_stat">
+<p class="admonition-title"><span class="caption-number">Theorem 3.1 </span> (Detailed balance implies stationarity)</p>
+<section class="theorem-content" id="proof-content">
+<p>If a Markov kernel <span class="math notranslate nohighlight">\(N\)</span> satisfies detailed balance with respect to a probability measure <span class="math notranslate nohighlight">\(\pi\)</span>, then <span class="math notranslate nohighlight">\(\pi\)</span> is stationary for <span class="math notranslate nohighlight">\(N\)</span>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(N\)</span> satisfy detailed balance with respect to a probability measure <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>Fix <span class="math notranslate nohighlight">\(A \in \mathcal B\)</span> and consider the bounded measurable test function <span class="math notranslate nohighlight">\(g(\theta, \theta') = \mathbf 1_A(\theta')\)</span>.</p>
+<p>From the definitions we have</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-stat-step1">
+<span class="eqno">(3.7)<a class="headerlink" href="#equation-mcmc-stat-step1" title="Link to this equation">#</a></span>\[(\pi N)(A)
+= \int_\Theta \int_\Theta \mathbf 1_A(\theta') \, N(\theta, d\theta') \, \pi(d\theta)
+= \int_{\Theta \times \Theta} \mathbf 1_A(\theta') \, \Lambda(d\theta, d\theta')\]</div>
+<p>By detailed balance <a class="reference internal" href="#equation-mcmc-db-measure">(3.5)</a> we may swap the coordinates in the integrand, obtaining</p>
+<div class="math notranslate nohighlight">
+\[\int_{\Theta \times \Theta} \mathbf 1_A(\theta') \, \Lambda(d\theta, d\theta')
+=
+\int_{\Theta \times \Theta} \mathbf 1_A(\theta) \, \Lambda(d\theta, d\theta')\]</div>
+<p>Now <span class="math notranslate nohighlight">\(\mathbf 1_A(\theta)\)</span> does not depend on <span class="math notranslate nohighlight">\(\theta'\)</span>, so integrating out the second coordinate and using the fact that <span class="math notranslate nohighlight">\(N(\theta, \cdot)\)</span> is a probability measure gives</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-stat-step3">
+<span class="eqno">(3.8)<a class="headerlink" href="#equation-mcmc-stat-step3" title="Link to this equation">#</a></span>\[\int_{\Theta \times \Theta} \mathbf 1_A(\theta) \, \Lambda(d\theta, d\theta')
+= \int_\Theta \mathbf 1_A(\theta)
+  \int_\Theta N(\theta, d\theta')
+  \, \pi(d\theta)
+= \pi(A)\]</div>
+<p>Chaining <a class="reference internal" href="#equation-mcmc-stat-step1">(3.7)</a>–<a class="reference internal" href="#equation-mcmc-stat-step3">(3.8)</a> yields <span class="math notranslate nohighlight">\((\pi N)(A) = \pi(A)\)</span>.</p>
+<p>As <span class="math notranslate nohighlight">\(A \in \mathcal B\)</span> was arbitrary, this proves that <span class="math notranslate nohighlight">\(\pi\)</span> is stationary for <span class="math notranslate nohighlight">\(N\)</span>.</p>
+</div>
+</section>
+<section id="ergodicity">
+<span id="mcmc-ergo"></span><h3><span class="section-number">3.2.3. </span>Ergodicity<a class="headerlink" href="#ergodicity" title="Link to this heading">#</a></h3>
+<p>We will use a classical ergodicity result described in this section.</p>
+<p>Let <span class="math notranslate nohighlight">\(\pi\)</span> be a probability measure on <span class="math notranslate nohighlight">\(\Theta\)</span>.</p>
+<p>A kernel <span class="math notranslate nohighlight">\(N\)</span> on <span class="math notranslate nohighlight">\(\Theta\)</span> is called <strong><span class="math notranslate nohighlight">\(\pi\)</span>-irreducible</strong> if, for every Borel set <span class="math notranslate nohighlight">\(A \subset \Theta\)</span> with <span class="math notranslate nohighlight">\(\pi(A) &gt; 0\)</span> and every <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span>, there is some <span class="math notranslate nohighlight">\(t \geq 1\)</span> with <span class="math notranslate nohighlight">\(N^t(\theta, A) &gt; 0\)</span>: every region of positive <span class="math notranslate nohighlight">\(\pi\)</span>-mass is eventually reachable from anywhere.</p>
+<p>Here <span class="math notranslate nohighlight">\(N^t\)</span> denotes the <span class="math notranslate nohighlight">\(t\)</span>-step kernel, defined inductively by <span class="math notranslate nohighlight">\(N^1 = N\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[
+N^{t+1}(\theta, A) = \int_\Theta N^t(\theta', A) \, N(\theta, d\theta')
+\]</div>
+<p>A kernel is called <strong>periodic</strong> if the state space splits into <span class="math notranslate nohighlight">\(d \geq 2\)</span> disjoint classes that the chain visits in a fixed cyclic rotation, and <strong>aperiodic</strong> if no such split exists.</p>
+<p>We can now state the following famous result.</p>
+<div class="proof theorem admonition" id="mcmc_thm_ergodic">
+<p class="admonition-title"><span class="caption-number">Theorem 3.2 </span> (Ergodic theorem for Markov chains)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\((\theta_t)_{t \geq 0}\)</span> evolve under a kernel <span class="math notranslate nohighlight">\(N\)</span> that is <span class="math notranslate nohighlight">\(\pi\)</span>-irreducible with stationary distribution <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>Then <span class="math notranslate nohighlight">\(\pi\)</span> is the unique stationary distribution of <span class="math notranslate nohighlight">\(N\)</span>, and, for every <span class="math notranslate nohighlight">\(\pi\)</span>-integrable <span class="math notranslate nohighlight">\(f \colon \Theta \to \mathbb R\)</span> and <span class="math notranslate nohighlight">\(\pi\)</span>-almost every initial <span class="math notranslate nohighlight">\(\theta_0\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-ergodic">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-mcmc-ergodic" title="Link to this equation">#</a></span>\[\frac{1}{T} \sum_{t=1}^{T} f(\theta_t)
+\to
+\mathbb E_\pi [ f(\theta) ]
+= \int_\Theta f(\theta) \, \pi(d\theta)
+\quad \text{as } T \to \infty
+\qquad \text{almost surely}\]</div>
+<p>If, in addition, <span class="math notranslate nohighlight">\(N\)</span> is aperiodic, then, for <span class="math notranslate nohighlight">\(\pi\)</span>-almost every initial <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-tvconv">
+<span class="eqno">(3.10)<a class="headerlink" href="#equation-mcmc-tvconv" title="Link to this equation">#</a></span>\[\sup_{A \in \mathcal B} \,
+\big| N^t(\theta, A) - \pi(A) \big|
+\to 0
+\quad \text{as } t \to \infty\]</div>
+</section>
+</div><p>The first part of the theorem is an analogue of the classical law of large numbers, but for the dependent, non-IID draws produced by a Markov chain.</p>
+<p>The second part states that, when aperiodicity is added, the distribution of
+<span class="math notranslate nohighlight">\(\theta_t\)</span> converges to <span class="math notranslate nohighlight">\(\pi\)</span> in total variation.</p>
+<p>Proofs of the two parts can be found in chapters 17 and 13, respectively, of <span class="bibtex-citation" id="id1">[<a class="reference internal" href="zreferences.html#id204" title="S P Meyn and R L Tweedie. Markov Chains and Stochastic Stability. Cambridge University Press, 2009.">Meyn and Tweedie, 2009</a>]</span>.</p>
+</section>
+</section>
+<section id="the-metropolis-hastings-kernel">
+<span id="mcmc-mh"></span><h2><span class="section-number">3.3. </span>The Metropolis-Hastings kernel<a class="headerlink" href="#the-metropolis-hastings-kernel" title="Link to this heading">#</a></h2>
+<p>We now build a kernel that satisfies detailed balance with respect to the posterior <span class="math notranslate nohighlight">\(\pi = p(\cdot \mid y)\)</span>.</p>
+<p>This and <a class="reference internal" href="#mcmc_thm_stat">Theorem 3.1</a> then imply that <span class="math notranslate nohighlight">\(\pi\)</span> is stationary for the kernel, suggesting a means of sampling from <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<section id="the-proposal">
+<h3><span class="section-number">3.3.1. </span>The proposal<a class="headerlink" href="#the-proposal" title="Link to this heading">#</a></h3>
+<p>The chain moves in two stages: a candidate state is drawn from a <strong>proposal kernel</strong>, and is then accepted or rejected.</p>
+<p>Throughout we impose the following assumption on the proposal.</p>
+<div class="proof definition admonition" id="mcmc_def_symm">
+<p class="admonition-title"><span class="caption-number">Definition 3.5 </span> (Symmetric proposal)</p>
+<section class="definition-content" id="proof-content">
+<p>A proposal kernel <span class="math notranslate nohighlight">\(q(\cdot \mid \theta)\)</span>, given by a conditional density, is called <strong>symmetric</strong> if</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-symm">
+<span class="eqno">(3.11)<a class="headerlink" href="#equation-mcmc-symm" title="Link to this equation">#</a></span>\[q(\theta' \mid \theta) = q(\theta \mid \theta')
+\qquad \text{for all } \theta, \theta' \in \Theta\]</div>
+</section>
+</div><div class="proof example admonition" id="mcmc_eg_rw">
+<p class="admonition-title"><span class="caption-number">Example 3.1 </span> (Gaussian random walk)</p>
+<section class="example-content" id="proof-content">
+<p>Take <span class="math notranslate nohighlight">\(\Theta = \mathbb R\)</span>.</p>
+<p>The canonical example satisfying <a class="reference internal" href="#equation-mcmc-symm">(3.11)</a> is the Gaussian random walk, where the update step is <span class="math notranslate nohighlight">\(\theta' = \theta + \varepsilon\)</span>, with <span class="math notranslate nohighlight">\(\varepsilon\)</span> drawn, independently at each update, from a normal distribution with mean zero and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.</p>
+<p>Its density <span class="math notranslate nohighlight">\(q(\theta' \mid \theta) = \sigma^{-1} \phi((\theta' - \theta)/\sigma)\)</span>, with <span class="math notranslate nohighlight">\(\phi\)</span> the standard normal density, depends on <span class="math notranslate nohighlight">\(\theta, \theta'\)</span> only through <span class="math notranslate nohighlight">\(|\theta' - \theta|\)</span> and so is symmetric.</p>
+</section>
+</div></section>
+<section id="the-acceptance-rule">
+<h3><span class="section-number">3.3.2. </span>The acceptance rule<a class="headerlink" href="#the-acceptance-rule" title="Link to this heading">#</a></h3>
+<p>Given the current state <span class="math notranslate nohighlight">\(\theta\)</span> and a candidate <span class="math notranslate nohighlight">\(\theta'\)</span>, the candidate is accepted with probability</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-alpha">
+<span class="eqno">(3.12)<a class="headerlink" href="#equation-mcmc-alpha" title="Link to this equation">#</a></span>\[\alpha(\theta, \theta')
+= \min\left(1, \,
+  \frac{\pi(\theta')}{\pi(\theta)}
+  \right)
+= \min\left(1, \,
+  \frac{\tilde p(\theta' \mid y)}{\tilde p(\theta \mid y)}
+  \right)\]</div>
+<p>The last equality holds because <span class="math notranslate nohighlight">\(\pi = \tilde p(\cdot \mid y) / p(y)\)</span>, so the constant <span class="math notranslate nohighlight">\(p(y)\)</span> cancels from the ratio.</p>
+<p>Thus <span class="math notranslate nohighlight">\(\alpha\)</span> is computable from the likelihood and prior alone.</p>
+<p>If <span class="math notranslate nohighlight">\(\pi(\theta) = 0\)</span>, the ratio in <a class="reference internal" href="#equation-mcmc-alpha">(3.12)</a> is not defined, and we adopt the convention <span class="math notranslate nohighlight">\(\alpha(\theta, \theta') := 1\)</span>.</p>
+</section>
+<section id="the-algorithm">
+<h3><span class="section-number">3.3.3. </span>The algorithm<a class="headerlink" href="#the-algorithm" title="Link to this heading">#</a></h3>
+<p>With <span class="math notranslate nohighlight">\(\alpha\)</span> and <span class="math notranslate nohighlight">\(q\)</span> in hand we can state the Metropolis-Hastings algorithm for sampling from the posterior.</p>
+<p>The symmetric-proposal version we state, shown in <a class="reference internal" href="#mcmc_algo_mh">Algorithm 3.1</a>, corresponds to the original Metropolis algorithm.</p>
+<div class="proof algorithm admonition" id="mcmc_algo_mh">
+<p class="admonition-title"><span class="caption-number">Algorithm 3.1 </span> (Metropolis-Hastings)</p>
+<section class="algorithm-content" id="proof-content">
+<p><strong>Inputs</strong> initial state <span class="math notranslate nohighlight">\(\theta_0 \in \Theta\)</span> with <span class="math notranslate nohighlight">\(\pi(\theta_0) &gt; 0\)</span>; proposal density <span class="math notranslate nohighlight">\(q\)</span>; sample size <span class="math notranslate nohighlight">\(T\)</span></p>
+<p><strong>Output</strong> the draws <span class="math notranslate nohighlight">\(\{\theta_t\}_{t=1}^T\)</span></p>
+<p>For <span class="math notranslate nohighlight">\(t = 1, 2, \ldots, T\)</span>:</p>
+<ol class="arabic simple">
+<li><p>propose <span class="math notranslate nohighlight">\(\theta' \sim q(\cdot \mid \theta_{t-1})\)</span></p></li>
+<li><p>draw <span class="math notranslate nohighlight">\(u \sim \mathrm{Uniform}(0, 1)\)</span></p></li>
+<li><p>if <span class="math notranslate nohighlight">\(u \leq \alpha(\theta_{t-1}, \theta')\)</span>, set <span class="math notranslate nohighlight">\(\theta_t = \theta'\)</span>; otherwise set <span class="math notranslate nohighlight">\(\theta_t = \theta_{t-1}\)</span></p></li>
+</ol>
+</section>
+</div><p>In practice, when testing <span class="math notranslate nohighlight">\(u \leq \alpha(\theta_{t-1}, \theta')\)</span> in <a class="reference internal" href="#mcmc_algo_mh">Algorithm 3.1</a>, we usually compute the log acceptance ratio</p>
+<div class="math notranslate nohighlight">
+\[
+\log \alpha(\theta_{t-1}, \theta')
+= \min\big(0, \,
+  \log \tilde p(\theta' \mid y)
+  - \log \tilde p(\theta_{t-1} \mid y)\big)
+\]</div>
+<p>and test <span class="math notranslate nohighlight">\(\log u \leq \log \alpha(\theta_{t-1}, \theta')\)</span>.</p>
+</section>
+<section id="the-transition-kernel">
+<h3><span class="section-number">3.3.4. </span>The transition kernel<a class="headerlink" href="#the-transition-kernel" title="Link to this heading">#</a></h3>
+<p>We now construct the Markov kernel induced by <a class="reference internal" href="#mcmc_algo_mh">Algorithm 3.1</a>.</p>
+<p>A move to a new state <span class="math notranslate nohighlight">\(\theta' \neq \theta\)</span> requires both that <span class="math notranslate nohighlight">\(\theta'\)</span> is proposed, with density <span class="math notranslate nohighlight">\(q(\theta' \mid \theta)\)</span>, and that it is accepted, with probability <span class="math notranslate nohighlight">\(\alpha(\theta, \theta')\)</span>.</p>
+<p>Since the proposal draw and the accept/reject draw are independent, the resulting density of landing near <span class="math notranslate nohighlight">\(\theta' \neq \theta\)</span> is</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-taumove">
+<span class="eqno">(3.13)<a class="headerlink" href="#equation-mcmc-taumove" title="Link to this equation">#</a></span>\[\tau(\theta' \mid \theta)
+= q(\theta' \mid \theta) \, \alpha(\theta, \theta'),
+\qquad \theta' \neq \theta\]</div>
+<p>Alternatively, the chain stays at <span class="math notranslate nohighlight">\(\theta\)</span>, which happens whenever the proposed candidate is rejected.</p>
+<p>(For a continuous proposal the event <span class="math notranslate nohighlight">\(\theta' = \theta\)</span> has probability zero, so staying is due to rejection alone.)</p>
+<p>The total holding probability is</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-reject">
+<span class="eqno">(3.14)<a class="headerlink" href="#equation-mcmc-reject" title="Link to this equation">#</a></span>\[r(\theta) = 1 - \int_\Theta q(\theta' \mid \theta) \,
+                  \alpha(\theta, \theta') \, d\theta'\]</div>
+<p>Collecting the two cases, the Metropolis-Hastings kernel is the mixed kernel</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-fullkernel">
+<span class="eqno">(3.15)<a class="headerlink" href="#equation-mcmc-fullkernel" title="Link to this equation">#</a></span>\[P(\theta, d\theta')
+= \underbrace{q(\theta' \mid \theta) \, \alpha(\theta, \theta') \,
+  \mu(d\theta')}_{\text{accepted move}}
++ \underbrace{r(\theta) \, \delta_\theta(d\theta')}_{\text{rejection}}\]</div>
+<p>with absolutely continuous part <span class="math notranslate nohighlight">\(\tau(\cdot \mid \theta)\)</span>.</p>
+<p>By construction the accepted-move mass <span class="math notranslate nohighlight">\(\int_\Theta q \, \alpha \, d\mu\)</span> and the holding mass <span class="math notranslate nohighlight">\(r(\theta)\)</span> sum to one, so <span class="math notranslate nohighlight">\(P(\theta, \cdot)\)</span> is a probability measure and <span class="math notranslate nohighlight">\(P\)</span> is a genuine Markov kernel.</p>
+</section>
+<section id="stationarity-of-the-posterior">
+<h3><span class="section-number">3.3.5. </span>Stationarity of the posterior<a class="headerlink" href="#stationarity-of-the-posterior" title="Link to this heading">#</a></h3>
+<p>In this section we show that <span class="math notranslate nohighlight">\(\pi\)</span> is stationary for the Metropolis-Hastings kernel <span class="math notranslate nohighlight">\(P\)</span>.</p>
+<div class="proof theorem admonition" id="mcmc_thm_mhstat">
+<p class="admonition-title"><span class="caption-number">Theorem 3.3 </span> (Stationarity of Metropolis-Hastings)</p>
+<section class="theorem-content" id="proof-content">
+<p>If the proposal density <span class="math notranslate nohighlight">\(q\)</span> satisfies the symmetry condition <a class="reference internal" href="#equation-mcmc-symm">(3.11)</a>, then, for each given <span class="math notranslate nohighlight">\(y \in \mathbb R^n\)</span>, the posterior <span class="math notranslate nohighlight">\(\pi = p(\cdot \mid y)\)</span> is stationary for the Metropolis-Hastings kernel <a class="reference internal" href="#equation-mcmc-fullkernel">(3.15)</a>.</p>
+</section>
+</div><div class="proof admonition" id="proof">
+<p>Proof. Let <span class="math notranslate nohighlight">\(P\)</span> be the Metropolis-Hastings kernel, so that</p>
+<div class="math notranslate nohighlight">
+\[P(\theta, d\theta')
+= \tau(\theta' \mid \theta) \, d\theta'
++ r(\theta) \, \delta_\theta(d\theta')\]</div>
+<p>In view of <a class="reference internal" href="#mcmc_thm_stat">Theorem 3.1</a>, it suffices to show that <span class="math notranslate nohighlight">\(P\)</span> satisfies detailed balance <a class="reference internal" href="#equation-mcmc-db-measure">(3.5)</a> with respect to the posterior <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>To see that this is so, observe that the joint measure <a class="reference internal" href="#equation-mcmc-joint">(3.4)</a> splits as</p>
+<div class="math notranslate nohighlight">
+\[\Lambda(d\theta, d\theta')
+= \underbrace{\pi(\theta) \, \tau(\theta' \mid \theta) \,
+  \mu(d\theta) \, \mu(d\theta')}_{=: \, \Lambda_{\mathrm{ac}}}
++ \underbrace{\pi(\theta) \, r(\theta) \,
+  \mu(d\theta) \, \delta_\theta(d\theta')}_{=: \, \Lambda_{\mathrm{diag}}}\]</div>
+<p>We show each part is symmetric under the swap <span class="math notranslate nohighlight">\((\theta, \theta') \mapsto (\theta', \theta)\)</span>.</p>
+<p><strong>The diagonal part.</strong></p>
+<p><span class="math notranslate nohighlight">\(\Lambda_{\mathrm{diag}}\)</span> is concentrated on the diagonal <span class="math notranslate nohighlight">\(D = \{(\theta, \theta') : \theta' = \theta\}\)</span>, which the swap <span class="math notranslate nohighlight">\((\theta, \theta') \mapsto (\theta', \theta)\)</span> maps onto itself.</p>
+<p>For any bounded measurable <span class="math notranslate nohighlight">\(g\)</span>, the integrand satisfies <span class="math notranslate nohighlight">\(g(\theta, \theta') = g(\theta', \theta)\)</span> everywhere on <span class="math notranslate nohighlight">\(D\)</span>, since <span class="math notranslate nohighlight">\(\theta = \theta'\)</span> there.</p>
+<p>As <span class="math notranslate nohighlight">\(\Lambda_{\mathrm{diag}}\)</span> charges only <span class="math notranslate nohighlight">\(D\)</span>, it follows that <span class="math notranslate nohighlight">\(\int g \, d\Lambda_{\mathrm{diag}} = \int g(\theta', \theta) \, \Lambda_{\mathrm{diag}}(d\theta, d\theta')\)</span>.</p>
+<p>Hence <span class="math notranslate nohighlight">\(\Lambda_{\mathrm{diag}}\)</span> is symmetric.</p>
+<p><strong>The absolutely continuous part.</strong></p>
+<p>It suffices to show that the density of <span class="math notranslate nohighlight">\(\Lambda_{\mathrm{ac}}\)</span> with respect to <span class="math notranslate nohighlight">\(\mu \otimes \mu\)</span> is symmetric — equivalently, that it obeys the detailed balance equation <a class="reference internal" href="#equation-mcmc-db-density">(3.6)</a>:</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-db-to-show">
+<span class="eqno">(3.16)<a class="headerlink" href="#equation-mcmc-db-to-show" title="Link to this equation">#</a></span>\[\pi(\theta) \, \tau(\theta' \mid \theta)
+=
+\pi(\theta') \, \tau(\theta \mid \theta')
+\qquad \text{for all } \theta \neq \theta'\]</div>
+<p>Substituting <a class="reference internal" href="#equation-mcmc-taumove">(3.13)</a> and noting that, by the proposal symmetry <a class="reference internal" href="#equation-mcmc-symm">(3.11)</a>, the factors <span class="math notranslate nohighlight">\(q(\theta' \mid \theta)\)</span> and <span class="math notranslate nohighlight">\(q(\theta \mid \theta')\)</span> on the two sides of <a class="reference internal" href="#equation-mcmc-db-to-show">(3.16)</a> are equal, it suffices to establish</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-db-reduced">
+<span class="eqno">(3.17)<a class="headerlink" href="#equation-mcmc-db-reduced" title="Link to this equation">#</a></span>\[\pi(\theta) \, \alpha(\theta, \theta')
+=
+\pi(\theta') \, \alpha(\theta', \theta)\]</div>
+<p>We verify <a class="reference internal" href="#equation-mcmc-db-reduced">(3.17)</a> by showing both sides equal <span class="math notranslate nohighlight">\(\min(\pi(\theta), \pi(\theta'))\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\(\pi(\theta) &gt; 0\)</span>, then</p>
+<div class="math notranslate nohighlight">
+\[\pi(\theta) \, \alpha(\theta, \theta')
+= \pi(\theta) \, \min\left(1, \frac{\pi(\theta')}{\pi(\theta)}\right)
+= \min\big(\pi(\theta), \, \pi(\theta')\big)\]</div>
+<p>while if <span class="math notranslate nohighlight">\(\pi(\theta) = 0\)</span>, then <span class="math notranslate nohighlight">\(\alpha(\theta, \theta') = 1\)</span> by convention, so that <span class="math notranslate nohighlight">\(\pi(\theta) \, \alpha(\theta, \theta') = 0 = \min\big(\pi(\theta), \pi(\theta')\big)\)</span> once more.</p>
+<p>In either case <span class="math notranslate nohighlight">\(\pi(\theta) \, \alpha(\theta, \theta') = \min\big(\pi(\theta), \pi(\theta')\big)\)</span>, and the right-hand side is symmetric in <span class="math notranslate nohighlight">\((\theta, \theta')\)</span>.</p>
+<p>Applying the same identity with the roles of <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(\theta'\)</span> exchanged gives <span class="math notranslate nohighlight">\(\pi(\theta') \, \alpha(\theta', \theta) = \min\big(\pi(\theta'), \pi(\theta)\big)\)</span>, which is the same quantity.</p>
+<p>This establishes <a class="reference internal" href="#equation-mcmc-db-reduced">(3.17)</a>, hence <a class="reference internal" href="#equation-mcmc-db-to-show">(3.16)</a>, hence the symmetry of <span class="math notranslate nohighlight">\(\Lambda_{\mathrm{ac}}\)</span>.</p>
+<p>Both parts of <span class="math notranslate nohighlight">\(\Lambda\)</span> are symmetric, so <span class="math notranslate nohighlight">\(\Lambda\)</span> is symmetric and detailed balance <a class="reference internal" href="#equation-mcmc-db-measure">(3.5)</a> holds.</p>
+<p>Hence <span class="math notranslate nohighlight">\(\pi\)</span> is stationary, as claimed.</p>
+</div>
+</section>
+</section>
+<section id="ergodicity-of-the-metropolis-hastings-kernel">
+<span id="mcmc-mh-ergodicity"></span><h2><span class="section-number">3.4. </span>Ergodicity of the Metropolis-Hastings kernel<a class="headerlink" href="#ergodicity-of-the-metropolis-hastings-kernel" title="Link to this heading">#</a></h2>
+<p>Stationarity guarantees that if <span class="math notranslate nohighlight">\(\theta_0 \sim \pi\)</span> then <span class="math notranslate nohighlight">\(\theta_t \sim \pi\)</span> for all <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<p>For Monte Carlo to be useful we need more: starting from an arbitrary <span class="math notranslate nohighlight">\(\theta_0\)</span>, the time average of a function along a single trajectory should converge to its expectation under <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
+<p>This is the ergodicity property discussed in <a class="reference internal" href="#mcmc-ergo"><span class="std std-ref">Ergodicity</span></a>.</p>
+<p>Here we investigate ergodicity in the setting of the Metropolis-Hastings algorithm.</p>
+<section id="ergodicity-of-the-chain">
+<h3><span class="section-number">3.4.1. </span>Ergodicity of the chain<a class="headerlink" href="#ergodicity-of-the-chain" title="Link to this heading">#</a></h3>
+<p>Here is the key result.</p>
+<p>(The argument can be extended to more general situations, but the present hypotheses keep the discussion simple.)</p>
+<div class="proof theorem admonition" id="mcmc_thm_mherg">
+<p class="admonition-title"><span class="caption-number">Theorem 3.4 </span> (Ergodicity of Metropolis-Hastings)</p>
+<section class="theorem-content" id="proof-content">
+<p>Let <span class="math notranslate nohighlight">\(\Theta = \mathbb R\)</span>, let <span class="math notranslate nohighlight">\(q\)</span> be the Gaussian random walk proposal of <a class="reference internal" href="#mcmc_eg_rw">Example 3.1</a>, and suppose that <span class="math notranslate nohighlight">\(\pi(\theta) &gt; 0\)</span> for all <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span>.</p>
+<p>If <span class="math notranslate nohighlight">\((\theta_t)_{t \geq 0}\)</span> is generated by the Metropolis-Hastings algorithm, then the kernel <span class="math notranslate nohighlight">\(P\)</span> is <span class="math notranslate nohighlight">\(\pi\)</span>-irreducible and aperiodic, and the conclusions of <a class="reference internal" href="#mcmc_thm_ergodic">Theorem 3.2</a> hold.</p>
+</section>
+</div><p>Stationarity of <span class="math notranslate nohighlight">\(\pi\)</span> is already supplied by <a class="reference internal" href="#mcmc_thm_mhstat">Theorem 3.3</a>, so, in view of <a class="reference internal" href="#mcmc_thm_ergodic">Theorem 3.2</a>, it remains only to show that <span class="math notranslate nohighlight">\(P\)</span> is <span class="math notranslate nohighlight">\(\pi\)</span>-irreducible and aperiodic.</p>
+<p>Adopting the hypotheses of <a class="reference internal" href="#mcmc_thm_mherg">Theorem 3.4</a> throughout the rest of this section, we discuss why these two properties hold.</p>
+<p>The discussion is slightly informal but the proof is largely complete.</p>
+</section>
+<section id="why-the-chain-is-pi-irreducible">
+<h3><span class="section-number">3.4.2. </span>Why the chain is <span class="math notranslate nohighlight">\(\pi\)</span>-irreducible<a class="headerlink" href="#why-the-chain-is-pi-irreducible" title="Link to this heading">#</a></h3>
+<p>For the random walk sampler this holds in a single step.</p>
+<p>Discarding the holding term in <a class="reference internal" href="#equation-mcmc-fullkernel">(3.15)</a>, which only adds mass, we have, for any <span class="math notranslate nohighlight">\(A \in \mathcal B\)</span>,</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-irred">
+<span class="eqno">(3.18)<a class="headerlink" href="#equation-mcmc-irred" title="Link to this equation">#</a></span>\[P(\theta, A)
+\geq \int_A q(\theta' \mid \theta) \, \alpha(\theta, \theta') \,
+     d\theta'\]</div>
+<p>Now fix <span class="math notranslate nohighlight">\(\theta\)</span> and a target set <span class="math notranslate nohighlight">\(A\)</span> with <span class="math notranslate nohighlight">\(\pi(A) &gt; 0\)</span>.</p>
+<p>The set <span class="math notranslate nohighlight">\(A\)</span> has positive Lebesgue measure because <span class="math notranslate nohighlight">\(\pi(A) &gt; 0\)</span>.</p>
+<p>On this set the integrand in <a class="reference internal" href="#equation-mcmc-irred">(3.18)</a> is strictly positive: the Gaussian density satisfies <span class="math notranslate nohighlight">\(q(\theta' \mid \theta) &gt; 0\)</span> everywhere, and <span class="math notranslate nohighlight">\(\alpha(\theta, \theta') = \min\big(1, \pi(\theta')/\pi(\theta)\big) &gt; 0\)</span> because <span class="math notranslate nohighlight">\(\pi(\theta') &gt; 0\)</span>.</p>
+<p>An integral of a strictly positive function over a set of positive measure is strictly positive, so <span class="math notranslate nohighlight">\(P(\theta, A) &gt; 0\)</span>.</p>
+<p>Hence every positive-mass set is reached with positive probability in one step, and the chain is <span class="math notranslate nohighlight">\(\pi\)</span>-irreducible.</p>
+</section>
+<section id="why-the-chain-is-aperiodic">
+<h3><span class="section-number">3.4.3. </span>Why the chain is aperiodic<a class="headerlink" href="#why-the-chain-is-aperiodic" title="Link to this heading">#</a></h3>
+<p>A clean sufficient condition for aperiodicity (defined in <a class="reference internal" href="#mcmc-ergo"><span class="std std-ref">Ergodicity</span></a>) is that the chain can <em>remain in place</em>: if <span class="math notranslate nohighlight">\(P(\theta, \{\theta\}) &gt; 0\)</span> on a set of positive <span class="math notranslate nohighlight">\(\pi\)</span>-measure, then, combined with irreducibility, the chain is aperiodic, because a state that can be revisited at two consecutive times cannot belong to a nontrivial cycle.</p>
+<p>The Metropolis-Hastings kernel has exactly this feature through its rejection mechanism.</p>
+<p>Fix <span class="math notranslate nohighlight">\(\theta \in \Theta\)</span> and consider the set</p>
+<div class="math notranslate nohighlight">
+\[
+L(\theta) := \{\theta' \in \Theta : \pi(\theta') &lt; \pi(\theta)\}
+\]</div>
+<p>of candidates that are accepted with probability strictly less than one: on <span class="math notranslate nohighlight">\(L(\theta)\)</span> we have <span class="math notranslate nohighlight">\(\alpha(\theta, \theta') = \pi(\theta')/\pi(\theta) &lt; 1\)</span>.</p>
+<p>We claim that <span class="math notranslate nohighlight">\(L(\theta)\)</span> has positive Lebesgue measure.</p>
+<p>To see this, observe that <span class="math notranslate nohighlight">\(\pi(\theta') \geq \pi(\theta)\)</span> for every <span class="math notranslate nohighlight">\(\theta'\)</span> in the complement <span class="math notranslate nohighlight">\(L(\theta)^c\)</span>, so integrating <span class="math notranslate nohighlight">\(\pi\)</span> over <span class="math notranslate nohighlight">\(L(\theta)^c\)</span> yields</p>
+<div class="math notranslate nohighlight">
+\[
+1
+= \int_\Theta \pi \, d\mu
+\geq \int_{L(\theta)^c} \pi \, d\mu
+\geq \pi(\theta) \, \mu\big(L(\theta)^c\big)
+\]</div>
+<p>whence <span class="math notranslate nohighlight">\(\mu(L(\theta)^c) \leq 1/\pi(\theta) &lt; \infty\)</span>.</p>
+<p>Thus <span class="math notranslate nohighlight">\(L(\theta)\)</span>, being the complement in <span class="math notranslate nohighlight">\(\mathbb R\)</span> of a set of finite Lebesgue measure, has infinite — in particular, positive — Lebesgue measure.</p>
+<p>Moreover, <span class="math notranslate nohighlight">\(\alpha(\theta, \theta') = 1\)</span> on <span class="math notranslate nohighlight">\(L(\theta)^c\)</span>, since <span class="math notranslate nohighlight">\(\pi(\theta') \geq \pi(\theta)\)</span> there.</p>
+<p>Splitting the integral in <a class="reference internal" href="#equation-mcmc-reject">(3.14)</a> over <span class="math notranslate nohighlight">\(L(\theta)\)</span> and <span class="math notranslate nohighlight">\(L(\theta)^c\)</span> now gives</p>
+<div class="math notranslate nohighlight">
+\[
+\int_\Theta q \, \alpha \, d\mu
+= \int_{L(\theta)} q \, \alpha \, d\mu + \int_{L(\theta)^c} q \, d\mu
+&lt; \int_{L(\theta)} q \, d\mu + \int_{L(\theta)^c} q \, d\mu
+= 1
+\]</div>
+<p>where the strict inequality holds because <span class="math notranslate nohighlight">\(\alpha &lt; 1\)</span> and <span class="math notranslate nohighlight">\(q(\cdot \mid \theta) &gt; 0\)</span> on <span class="math notranslate nohighlight">\(L(\theta)\)</span>, a set of positive <span class="math notranslate nohighlight">\(\mu\)</span>-measure.</p>
+<p>By <a class="reference internal" href="#equation-mcmc-reject">(3.14)</a> this means <span class="math notranslate nohighlight">\(r(\theta) &gt; 0\)</span>, and hence, by <a class="reference internal" href="#equation-mcmc-fullkernel">(3.15)</a>, <span class="math notranslate nohighlight">\(P(\theta, \{\theta\}) \geq r(\theta) &gt; 0\)</span>.</p>
+<p>As <span class="math notranslate nohighlight">\(\theta\)</span> was arbitrary, the chain can remain in place at <em>every</em> state, which rules out any nontrivial period.</p>
+</section>
+<section id="summary">
+<h3><span class="section-number">3.4.4. </span>Summary<a class="headerlink" href="#summary" title="Link to this heading">#</a></h3>
+<p><a class="reference internal" href="#mcmc_thm_mhstat">Theorem 3.3</a> provides the stationary distribution, and the two arguments above supply <span class="math notranslate nohighlight">\(\pi\)</span>-irreducibility and aperiodicity.</p>
+<p>By <a class="reference internal" href="#mcmc_thm_ergodic">Theorem 3.2</a>, time averages along the simulated path converge almost surely to posterior expectations, and the distribution of <span class="math notranslate nohighlight">\(\theta_t\)</span> converges to the posterior in total variation.</p>
+<p>This is exactly what justifies using the output <span class="math notranslate nohighlight">\(\{\theta_t\}_{t=1}^T\)</span> as a sample from the posterior.</p>
+</section>
+</section>
+<section id="a-numerical-example">
+<span id="mcmc-numerics"></span><h2><span class="section-number">3.5. </span>A numerical example<a class="headerlink" href="#a-numerical-example" title="Link to this heading">#</a></h2>
+<p>We now implement the Metropolis-Hastings algorithm and watch the theory at work.</p>
+<p>Our strategy is to start with a fully conjugate model, where the posterior is known in closed form, so that every number the sampler produces can be checked.</p>
+<p>Once the numerics are validated, we will change the prior, lose conjugacy, and study how the posterior responds.</p>
+<p>Let’s begin with some imports:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax.scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span> <span class="k">as</span> <span class="n">jstats</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">jax.scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">logsumexp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">gaussian_kde</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="the-model-and-data">
+<h3><span class="section-number">3.5.1. </span>The model and data<a class="headerlink" href="#the-model-and-data" title="Link to this heading">#</a></h3>
+<p>The data are IID draws from a normal distribution with unknown mean <span class="math notranslate nohighlight">\(\theta\)</span> and known standard deviation <span class="math notranslate nohighlight">\(\sigma_y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+y_i \mid \theta \sim N(\theta, \sigma_y^2),
+\qquad i = 1, \ldots, n
+\]</div>
+<p>For the prior we take <span class="math notranslate nohighlight">\(\theta \sim N(\mu_0, \sigma_0^2)\)</span>.</p>
+<p>It is well known that, under these assumptions, the prior is conjugate.</p>
+<p>In particular, the posterior is again normal, with</p>
+<div class="math notranslate nohighlight" id="equation-mcmc-conjugate">
+<span class="eqno">(3.19)<a class="headerlink" href="#equation-mcmc-conjugate" title="Link to this equation">#</a></span>\[\pi = N(\mu_n, \sigma_n^2),
+\qquad
+\frac{1}{\sigma_n^2} = \frac{1}{\sigma_0^2} + \frac{n}{\sigma_y^2},
+\qquad
+\mu_n = \sigma_n^2
+  \left( \frac{\mu_0}{\sigma_0^2} + \frac{n \bar y}{\sigma_y^2} \right)\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bar y\)</span> is the sample mean.</p>
+<p>The posterior mean <span class="math notranslate nohighlight">\(\mu_n\)</span> is a precision-weighted average of the prior mean and the sample mean.</p>
+<p>Here is a simulated data set when the true but unknown value of <span class="math notranslate nohighlight">\(\theta\)</span> is set to 3.0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">σ_y</span> <span class="o">=</span> <span class="mf">1.0</span>      <span class="c1"># observation noise (known)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">20</span>         <span class="c1"># sample size</span>
+<span class="n">θ_true</span> <span class="o">=</span> <span class="mf">3.0</span>   <span class="c1"># true parameter generating the data</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">key</span><span class="p">,</span> <span class="n">key_data</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">θ_true</span> <span class="o">+</span> <span class="n">σ_y</span> <span class="o">*</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key_data</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The prior is centered at zero and fairly tight.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_0</span> <span class="o">=</span> <span class="mf">0.0</span>      <span class="c1"># prior mean</span>
+<span class="n">σ_0</span> <span class="o">=</span> <span class="mf">0.5</span>      <span class="c1"># prior standard deviation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s have a look at the parameters in the posterior <span class="math notranslate nohighlight">\(\pi\)</span>, calculated from the
+formulas in <a class="reference internal" href="#equation-mcmc-conjugate">(3.19)</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Conjugate posterior parameters, from the formulas above</span>
+<span class="n">τ_n</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">σ_0</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">n</span> <span class="o">/</span> <span class="n">σ_y</span><span class="o">**</span><span class="mi">2</span>     <span class="c1"># posterior precision</span>
+<span class="n">σ_n</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">τ_n</span><span class="p">)</span>
+<span class="n">μ_n</span> <span class="o">=</span> <span class="p">(</span><span class="n">μ_0</span> <span class="o">/</span> <span class="n">σ_0</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">σ_y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">τ_n</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sample mean         = </span><span class="si">{</span><span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;posterior mean μ_n  = </span><span class="si">{</span><span class="n">μ_n</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;posterior std  σ_n  = </span><span class="si">{</span><span class="n">σ_n</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sample mean         = 3.0187
+posterior mean μ_n  = 2.5156
+posterior std  σ_n  = 0.2041
+</pre></div>
+</div>
+</div>
+</div>
+<p>The posterior mean lies between the prior mean and the sample mean, pulled toward the latter by the data.</p>
+</section>
+<section id="a-sampler-in-jax">
+<h3><span class="section-number">3.5.2. </span>A sampler in JAX<a class="headerlink" href="#a-sampler-in-jax" title="Link to this heading">#</a></h3>
+<p>The sampler needs only the log of the unnormalized posterior <span class="math notranslate nohighlight">\(\log \tilde p(\theta \mid y)\)</span>, as promised by <a class="reference internal" href="#equation-mcmc-alpha">(3.12)</a>.</p>
+<p>We write a small factory that assembles it from a log prior and the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">make_log_post</span><span class="p">(</span><span class="n">log_prior</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">σ_y</span><span class="p">):</span>
+    <span class="s2">&quot;Build the log unnormalized posterior from a log prior and data.&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">log_post</span><span class="p">(</span><span class="n">θ</span><span class="p">):</span>
+        <span class="n">log_likelihood</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">jstats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">θ</span><span class="p">,</span> <span class="n">σ_y</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">log_likelihood</span> <span class="o">+</span> <span class="n">log_prior</span><span class="p">(</span><span class="n">θ</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">log_post</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">log_prior_gauss</span><span class="p">(</span><span class="n">θ</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jstats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">μ_0</span><span class="p">,</span> <span class="n">σ_0</span><span class="p">)</span>
+
+<span class="n">log_post_gauss</span> <span class="o">=</span> <span class="n">make_log_post</span><span class="p">(</span><span class="n">log_prior_gauss</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">σ_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next we implement <a class="reference internal" href="#mcmc_algo_mh">Algorithm 3.1</a> with the Gaussian random walk proposal of <a class="reference internal" href="#mcmc_eg_rw">Example 3.1</a>.</p>
+<p>The update is written as a function of the current state and a PRNG key, and the chain is generated by <code class="docutils literal notranslate"><span class="pre">jax.lax.scan</span></code>.</p>
+<p>Following the remark after <a class="reference internal" href="#mcmc_algo_mh">Algorithm 3.1</a>, we work with the log acceptance ratio.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nd">@partial</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">jit</span><span class="p">,</span> <span class="n">static_argnames</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;log_post&#39;</span><span class="p">,</span> <span class="s1">&#39;num_steps&#39;</span><span class="p">))</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mh_chain</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">log_post</span><span class="p">,</span> <span class="n">θ_init</span><span class="p">,</span> <span class="n">σ_prop</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a Metropolis-Hastings chain of length num_steps using a</span>
+<span class="sd">    Gaussian random walk proposal with standard deviation σ_prop.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">step</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="n">key_prop</span><span class="p">,</span> <span class="n">key_accept</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">θ_new</span> <span class="o">=</span> <span class="n">θ</span> <span class="o">+</span> <span class="n">σ_prop</span> <span class="o">*</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key_prop</span><span class="p">)</span>
+        <span class="n">log_α</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">log_post</span><span class="p">(</span><span class="n">θ_new</span><span class="p">)</span> <span class="o">-</span> <span class="n">log_post</span><span class="p">(</span><span class="n">θ</span><span class="p">))</span>
+        <span class="n">accept</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="n">key_accept</span><span class="p">))</span> <span class="o">&lt;=</span> <span class="n">log_α</span>
+        <span class="n">θ_next</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">accept</span><span class="p">,</span> <span class="n">θ_new</span><span class="p">,</span> <span class="n">θ</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">θ_next</span><span class="p">,</span> <span class="p">(</span><span class="n">θ_next</span><span class="p">,</span> <span class="n">accept</span><span class="p">)</span>
+
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)</span>
+    <span class="n">_</span><span class="p">,</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">accepts</span><span class="p">)</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">lax</span><span class="o">.</span><span class="n">scan</span><span class="p">(</span><span class="n">step</span><span class="p">,</span> <span class="n">θ_init</span><span class="p">,</span> <span class="n">keys</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">path</span><span class="p">,</span> <span class="n">accepts</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The function <code class="docutils literal notranslate"><span class="pre">mh_chain</span></code> mirrors <a class="reference internal" href="#mcmc_algo_mh">Algorithm 3.1</a> line by line, and on a CPU it is perfectly serviceable.</p>
+<p>On an accelerator such as a GPU, however, it is a poor fit: a Markov chain is inherently sequential, so each step involves only a handful of scalar operations and the hardware sits almost entirely idle.</p>
+<p>The JAX-idiomatic remedy is not to rewrite the algorithm but to transform it: <code class="docutils literal notranslate"><span class="pre">jax.vmap</span></code> converts our single-chain sampler into one that runs thousands of independent chains in parallel, which is exactly the kind of workload accelerators are built for.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">mh_ensemble</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">log_post</span><span class="p">,</span> <span class="n">θ_init</span><span class="p">,</span> <span class="n">σ_prop</span><span class="p">,</span> <span class="n">num_chains</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">):</span>
+    <span class="s2">&quot;Run num_chains independent MH chains in parallel.&quot;</span>
+    <span class="n">keys</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">num_chains</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span>
+        <span class="n">mh_chain</span><span class="p">,</span> <span class="n">in_axes</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="p">)(</span><span class="n">keys</span><span class="p">,</span> <span class="n">log_post</span><span class="p">,</span> <span class="n">θ_init</span><span class="p">,</span> <span class="n">σ_prop</span><span class="p">,</span> <span class="n">num_steps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Running many parallel chains is also how modern probabilistic programming libraries, such as <a class="reference external" href="https://num.pyro.ai/">NumPyro</a> and <a class="reference external" href="https://blackjax-devs.github.io/blackjax/">BlackJAX</a>, organize their MCMC computations.</p>
+<p>When you ask such a library for a posterior sample, code very much like <code class="docutils literal notranslate"><span class="pre">mh_chain</span></code> wrapped in <code class="docutils literal notranslate"><span class="pre">vmap</span></code> is what runs under the hood (albeit with more sophisticated transition kernels).</p>
+<p>We will meet these libraries in later lectures; one aim of the present lecture is to build their foundations from first principles.</p>
+<p>We initialize every chain at the same point and discard an initial stretch of each — the <strong>burn-in</strong> — so that the draws we keep are approximately stationary.</p>
+<p>(The total variation convergence <a class="reference internal" href="#equation-mcmc-tvconv">(3.10)</a> is exactly what justifies this practice: after enough steps, the distribution of <span class="math notranslate nohighlight">\(\theta_t\)</span> is close to <span class="math notranslate nohighlight">\(\pi\)</span> regardless of the initial condition.)</p>
+<p>The burn-in is now paid once per chain rather than once in total, but since the chains run in parallel this costs essentially no wall-clock time.</p>
+<p>Pooling the post-burn-in draws from all chains then gives us millions of approximate posterior draws.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">num_chains</span> <span class="o">=</span> <span class="mi">4_096</span>   <span class="c1"># independent chains</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1_500</span>            <span class="c1"># steps per chain</span>
+<span class="n">burn_in</span> <span class="o">=</span> <span class="mi">500</span>        <span class="c1"># discarded from the start of each chain</span>
+
+<span class="n">key</span><span class="p">,</span> <span class="n">key_mh</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="n">paths</span><span class="p">,</span> <span class="n">accepts</span> <span class="o">=</span> <span class="n">mh_ensemble</span><span class="p">(</span><span class="n">key_mh</span><span class="p">,</span> <span class="n">log_post_gauss</span><span class="p">,</span>
+                             <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">num_chains</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<span class="n">draws</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[:,</span> <span class="n">burn_in</span><span class="p">:]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;total draws kept = </span><span class="si">{</span><span class="n">draws</span><span class="o">.</span><span class="n">size</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;acceptance rate  = </span><span class="si">{</span><span class="n">accepts</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>total draws kept = 4,096,000
+acceptance rate  = 0.437
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="checking-the-numerics">
+<h3><span class="section-number">3.5.3. </span>Checking the numerics<a class="headerlink" href="#checking-the-numerics" title="Link to this heading">#</a></h3>
+<p>If the sampler is correct, the pooled draws should look like a sample from the exact posterior <a class="reference internal" href="#equation-mcmc-conjugate">(3.19)</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">μ_n</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">σ_n</span><span class="p">,</span> <span class="n">μ_n</span> <span class="o">+</span> <span class="mi">5</span> <span class="o">*</span> <span class="n">σ_n</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">draws</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MCMC draws&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">jstats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">μ_n</span><span class="p">,</span> <span class="n">σ_n</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;exact posterior&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-mcmc-conjugate">
+<img alt="_images/36dd84340c945f3b20b0aecf354bf1251ce4a9e0c0e4a11e7bf6b59b3d90b111.png" src="_images/36dd84340c945f3b20b0aecf354bf1251ce4a9e0c0e4a11e7bf6b59b3d90b111.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">MCMC draws and the exact posterior</span><a class="headerlink" href="#fig-mcmc-conjugate" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The histogram sits on top of the exact density.</p>
+<p>The posterior moments agree to a few decimal places.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;posterior mean: exact = </span><span class="si">{</span><span class="n">μ_n</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, MCMC = </span><span class="si">{</span><span class="n">draws</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;posterior std:  exact = </span><span class="si">{</span><span class="n">σ_n</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">, MCMC = </span><span class="si">{</span><span class="n">draws</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>posterior mean: exact = 2.5156, MCMC = 2.5155
+posterior std:  exact = 0.2041, MCMC = 0.2042
+</pre></div>
+</div>
+</div>
+</div>
+<p>We conclude that the sampler is doing its job.</p>
+</section>
+</section>
+<section id="ergodicity-in-action">
+<span id="mcmc-ergodicity-action"></span><h2><span class="section-number">3.6. </span>Ergodicity in action<a class="headerlink" href="#ergodicity-in-action" title="Link to this heading">#</a></h2>
+<p>Recall the division of labor in <a class="reference internal" href="#mcmc_thm_ergodic">Theorem 3.2</a>: irreducibility delivers the convergence of time averages <a class="reference internal" href="#equation-mcmc-ergodic">(3.9)</a>, while aperiodicity delivers convergence of the distribution of <span class="math notranslate nohighlight">\(\theta_t\)</span> to <span class="math notranslate nohighlight">\(\pi\)</span> <a class="reference internal" href="#equation-mcmc-tvconv">(3.10)</a>.</p>
+<p>Each conclusion can be visualized separately.</p>
+<section id="time-averages">
+<h3><span class="section-number">3.6.1. </span>Time averages<a class="headerlink" href="#time-averages" title="Link to this heading">#</a></h3>
+<p>The ergodic property <a class="reference internal" href="#equation-mcmc-ergodic">(3.9)</a> with <span class="math notranslate nohighlight">\(f(\theta) = \theta\)</span> says that the running mean of a single trajectory converges to the posterior mean.</p>
+<p>Since the theorem concerns time averages along one path, we take a single trajectory — one row of the ensemble.</p>
+<p>Note that no burn-in is needed for this statement — the theorem applies to the whole trajectory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">θ_path</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>    <span class="c1"># a single trajectory</span>
+<span class="n">running_mean</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">θ_path</span><span class="p">)</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">θ_path</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">running_mean</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;running mean of the chain&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">μ_n</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;exact posterior mean $\mu_n$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>   <span class="c1"># the transient is over quickly</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-mcmc-running-mean">
+<img alt="_images/9ddfbe0ddbe999d490d5be345a55df6a0df2fbc87e66f6170492b5cfa23b624e.png" src="_images/9ddfbe0ddbe999d490d5be345a55df6a0df2fbc87e66f6170492b5cfa23b624e.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.2 </span><span class="caption-text">Running mean of a single trajectory</span><a class="headerlink" href="#fig-mcmc-running-mean" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+</section>
+<section id="distributional-convergence">
+<h3><span class="section-number">3.6.2. </span>Distributional convergence<a class="headerlink" href="#distributional-convergence" title="Link to this heading">#</a></h3>
+<p>The total variation convergence <a class="reference internal" href="#equation-mcmc-tvconv">(3.10)</a> concerns the distribution of <span class="math notranslate nohighlight">\(\theta_t\)</span> at a fixed date <span class="math notranslate nohighlight">\(t\)</span>, rather than a time average.</p>
+<p>To see it we need many independent copies of the chain — exactly what <code class="docutils literal notranslate"><span class="pre">mh_ensemble</span></code> provides.</p>
+<p>This time all chains are started from the same deliberately terrible initial condition, and no draws are discarded, because the transient <em>is</em> the object of interest.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">θ_init_bad</span> <span class="o">=</span> <span class="o">-</span><span class="mf">10.0</span>    <span class="c1"># far from the posterior mass</span>
+
+<span class="n">key</span><span class="p">,</span> <span class="n">key_ens</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="n">ens_paths</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">mh_ensemble</span><span class="p">(</span><span class="n">key_ens</span><span class="p">,</span> <span class="n">log_post_gauss</span><span class="p">,</span>
+                           <span class="n">θ_init_bad</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">10_000</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">ens_paths</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10000, 100)
+</pre></div>
+</div>
+</div>
+</div>
+<p>At each date <span class="math notranslate nohighlight">\(t\)</span>, the cross-section <span class="math notranslate nohighlight">\(\{\theta_t^i\}_{i=1}^{10000}\)</span> is a sample from the distribution of <span class="math notranslate nohighlight">\(\theta_t\)</span>.</p>
+<p>We plot kernel density estimates of these cross-sections at a sequence of dates.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">dates</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">greys</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.75</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dates</span><span class="p">))]</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">t</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">greys</span><span class="p">):</span>
+    <span class="n">kde</span> <span class="o">=</span> <span class="n">gaussian_kde</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">ens_paths</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">kde</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">g</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;$t = </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">jstats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">μ_n</span><span class="p">,</span> <span class="n">σ_n</span><span class="p">),</span> <span class="s1">&#39;b--&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;posterior&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-mcmc-ensemble">
+<img alt="_images/2a88155b0058097c257c86c5d25db264e2f09a7d505ebd733a3f9ccbd35bcd22.png" src="_images/2a88155b0058097c257c86c5d25db264e2f09a7d505ebd733a3f9ccbd35bcd22.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.3 </span><span class="caption-text">Cross-section distributions marching toward the posterior</span><a class="headerlink" href="#fig-mcmc-ensemble" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The distribution of <span class="math notranslate nohighlight">\(\theta_t\)</span> travels from a point mass at <span class="math notranslate nohighlight">\(-10\)</span> to the posterior, exactly as <a class="reference internal" href="#equation-mcmc-tvconv">(3.10)</a> predicts.</p>
+<p>Readers of <a class="reference internal" href="stationary_densities.html"><span class="doc std std-doc">Continuous State Markov Chains</span></a> will recognize this picture: it is analogous to the density sequence displayed there for the stochastic growth model.</p>
+</section>
+</section>
+<section id="losing-conjugacy">
+<span id="mcmc-nonconjugate"></span><h2><span class="section-number">3.7. </span>Losing conjugacy<a class="headerlink" href="#losing-conjugacy" title="Link to this heading">#</a></h2>
+<p>The pointwise-evaluation property of Metropolis-Hastings means we can swap in <em>any</em> prior with a computable density — no new sampler is required.</p>
+<p>We exploit this to study how the posterior responds when the prior changes.</p>
+<section id="ground-truth-by-quadrature">
+<h3><span class="section-number">3.7.1. </span>Ground truth by quadrature<a class="headerlink" href="#ground-truth-by-quadrature" title="Link to this heading">#</a></h3>
+<p>In one dimension we do not have to take the sampler’s word for anything: the normalizing constant <span class="math notranslate nohighlight">\(p(y)\)</span> is a one-dimensional integral, which we can compute by quadrature on a grid.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">posterior_on_grid</span><span class="p">(</span><span class="n">log_post</span><span class="p">,</span> <span class="n">grid</span><span class="p">):</span>
+    <span class="s2">&quot;Normalize the unnormalized posterior on a grid by quadrature.&quot;</span>
+    <span class="n">log_vals</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">log_post</span><span class="p">)(</span><span class="n">grid</span><span class="p">)</span>
+    <span class="n">vals</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_vals</span> <span class="o">-</span> <span class="n">log_vals</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">vals</span> <span class="o">/</span> <span class="n">jnp</span><span class="o">.</span><span class="n">trapezoid</span><span class="p">(</span><span class="n">vals</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As a sanity check, quadrature recovers the conjugate posterior:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">grid</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span>
+<span class="n">quad</span> <span class="o">=</span> <span class="n">posterior_on_grid</span><span class="p">(</span><span class="n">log_post_gauss</span><span class="p">,</span> <span class="n">grid</span><span class="p">)</span>
+<span class="n">exact</span> <span class="o">=</span> <span class="n">jstats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">μ_n</span><span class="p">,</span> <span class="n">σ_n</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;max abs error = </span><span class="si">{</span><span class="n">jnp</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">quad</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">exact</span><span class="p">))</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>max abs error = 1.18e-05
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="a-student-t-prior">
+<h3><span class="section-number">3.7.2. </span>A Student-t prior<a class="headerlink" href="#a-student-t-prior" title="Link to this heading">#</a></h3>
+<p>Our first experiment replaces the Gaussian prior with a Student-t prior that has the <em>same location and scale</em> but heavy tails.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ν</span> <span class="o">=</span> <span class="mi">3</span>    <span class="c1"># degrees of freedom</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">log_prior_t</span><span class="p">(</span><span class="n">θ</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">jstats</span><span class="o">.</span><span class="n">t</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">ν</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">μ_0</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">σ_0</span><span class="p">)</span>
+
+<span class="n">log_post_t</span> <span class="o">=</span> <span class="n">make_log_post</span><span class="p">(</span><span class="n">log_prior_t</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">σ_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Recall that the prior is centered at <span class="math notranslate nohighlight">\(0\)</span> while the data are centered near <span class="math notranslate nohighlight">\(3\)</span> — the prior and the data disagree.</p>
+<p>We will see that this heavy-tailed prior produces a rather different
+posterior (compared to the Gaussian prior).</p>
+<p>In essence, the fact that the t density flattens out in its tails means that it exerts less pull on a likelihood centered far away, so the data is more influential.</p>
+<p>Let’s check this by sampling.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">key</span><span class="p">,</span> <span class="n">key_t</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="n">paths_t</span><span class="p">,</span> <span class="n">accepts_t</span> <span class="o">=</span> <span class="n">mh_ensemble</span><span class="p">(</span><span class="n">key_t</span><span class="p">,</span> <span class="n">log_post_t</span><span class="p">,</span>
+                                 <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">num_chains</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<span class="n">draws_t</span> <span class="o">=</span> <span class="n">paths_t</span><span class="p">[:,</span> <span class="n">burn_in</span><span class="p">:]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;acceptance rate = </span><span class="si">{</span><span class="n">accepts_t</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>acceptance rate = 0.468
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">draws_t</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MCMC draws, t prior&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">posterior_on_grid</span><span class="p">(</span><span class="n">log_post_t</span><span class="p">,</span> <span class="n">grid</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;posterior, t prior&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">jstats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">μ_n</span><span class="p">,</span> <span class="n">σ_n</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;posterior, Gaussian prior&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
+           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;sample mean&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-mcmc-t-prior">
+<img alt="_images/eb749e623c0e5faab8d978b860a694ea21e02958979c124fb09cf114181e026d.png" src="_images/eb749e623c0e5faab8d978b860a694ea21e02958979c124fb09cf114181e026d.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.4 </span><span class="caption-text">Posteriors under Gaussian and Student-t priors</span><a class="headerlink" href="#fig-mcmc-t-prior" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>The figure shows three things.</p>
+<p>First, the MCMC histogram again matches the quadrature ground truth, so the sampler remains accurate outside the conjugate family.</p>
+<p>Second, the Gaussian-prior posterior compromises, settling noticeably below the sample mean.</p>
+<p>Third, the t-prior posterior concedes to the data, concentrating essentially on the sample mean.</p>
+<p>This is a classic property of heavy-tailed priors: they represent beliefs that are held firmly near the center but weakly in the tails, so they tend to yield under prior-data conflict.</p>
+</section>
+<section id="a-bimodal-prior">
+<h3><span class="section-number">3.7.3. </span>A bimodal prior<a class="headerlink" href="#a-bimodal-prior" title="Link to this heading">#</a></h3>
+<p>Our second experiment gives the prior an entirely different <em>shape</em>: a two-component Gaussian mixture</p>
+<div class="math notranslate nohighlight">
+\[
+p(\theta)
+= \tfrac{1}{2} \, \phi_{\sigma_m}(\theta + 2)
++ \tfrac{1}{2} \, \phi_{\sigma_m}(\theta - 2)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\phi_{\sigma_m}\)</span> is the <span class="math notranslate nohighlight">\(N(0, \sigma_m^2)\)</span> density.</p>
+<p>This prior says: <span class="math notranslate nohighlight">\(\theta\)</span> lies in one of two regimes, near <span class="math notranslate nohighlight">\(-2\)</span> or near <span class="math notranslate nohighlight">\(+2\)</span>, and we do not know which.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">μ_mix</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">])</span>   <span class="c1"># component centers</span>
+<span class="n">σ_mix</span> <span class="o">=</span> <span class="mf">0.5</span>                      <span class="c1"># component standard deviation</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">log_prior_mix</span><span class="p">(</span><span class="n">θ</span><span class="p">):</span>
+    <span class="n">log_comps</span> <span class="o">=</span> <span class="n">jstats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">θ</span><span class="p">,</span> <span class="n">μ_mix</span><span class="p">,</span> <span class="n">σ_mix</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">logsumexp</span><span class="p">(</span><span class="n">log_comps</span><span class="p">)</span> <span class="o">-</span> <span class="n">jnp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To keep both regimes in play we use a deliberately small data set: two observations with sample mean zero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_mix</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">])</span>
+<span class="n">log_post_mix</span> <span class="o">=</span> <span class="n">make_log_post</span><span class="p">(</span><span class="n">log_prior_mix</span><span class="p">,</span> <span class="n">y_mix</span><span class="p">,</span> <span class="n">σ_y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>When sampling from a bimodal target, the chain must hop between modes through a low-probability valley, so we use a larger proposal standard deviation to make those jumps feasible.</p>
+<p>Parallel chains help here too: even if an individual chain crosses between modes only occasionally, the ensemble as a whole populates both modes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">key</span><span class="p">,</span> <span class="n">key_mix</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+<span class="n">paths_mix</span><span class="p">,</span> <span class="n">accepts_mix</span> <span class="o">=</span> <span class="n">mh_ensemble</span><span class="p">(</span><span class="n">key_mix</span><span class="p">,</span> <span class="n">log_post_mix</span><span class="p">,</span>
+                                     <span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">num_chains</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<span class="n">draws_mix</span> <span class="o">=</span> <span class="n">paths_mix</span><span class="p">[:,</span> <span class="n">burn_in</span><span class="p">:]</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;acceptance rate = </span><span class="si">{</span><span class="n">accepts_mix</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>acceptance rate = 0.358
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">prior_pdf</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">log_prior_mix</span><span class="p">)(</span><span class="n">grid</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">draws_mix</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">80</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MCMC draws&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">posterior_on_grid</span><span class="p">(</span><span class="n">log_post_mix</span><span class="p">,</span> <span class="n">grid</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;posterior&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">prior_pdf</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;prior&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<figure class="align-default" id="fig-mcmc-mixture">
+<img alt="_images/eedd63dab1e698e257fa924bff290031df6d2df7cba53cdb405a6cecf7536a49.png" src="_images/eedd63dab1e698e257fa924bff290031df6d2df7cba53cdb405a6cecf7536a49.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3.5 </span><span class="caption-text">Posterior under a bimodal mixture prior</span><a class="headerlink" href="#fig-mcmc-mixture" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</div>
+</div>
+<p>We see that the posterior inherits the prior’s two-regime structure.</p>
+<p>The posterior remains bimodal because two observations cannot decide between the regimes.</p>
+<p>Each mode moves inward, from <span class="math notranslate nohighlight">\(\pm 2\)</span> toward the sample mean at zero, because within each regime the data pull the plausible values of <span class="math notranslate nohighlight">\(\theta\)</span> toward the evidence.</p>
+<p>The two modes carry equal weight because the data set is symmetric between them — tilt the data and the mode weights tilt too, a case explored in <a class="reference internal" href="#mcmc_ex2"><span class="std std-numref">Exercise 3.2</span></a> below.</p>
+</section>
+</section>
+<section id="exercises">
+<h2><span class="section-number">3.8. </span>Exercises<a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<div class="exercise admonition" id="mcmc_ex1">
+
+<p class="admonition-title"><span class="caption-number">Exercise 3.1 </span></p>
+<section id="exercise-content">
+<p>The proposal standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> is the one tuning parameter of the random walk sampler, and it matters.</p>
+<p>Re-run the conjugate example with <span class="math notranslate nohighlight">\(\sigma \in \{0.01, 0.5, 50\}\)</span>, keeping everything else unchanged.</p>
+<p>For each value, plot the first 2,000 elements of the chain (a <em>trace plot</em>) and report the acceptance rate.</p>
+<p>Explain the pattern you find: why do both very small and very large values of <span class="math notranslate nohighlight">\(\sigma\)</span> produce poor samplers?</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="mcmc-solution-12">
+
+<p class="admonition-title">Solution</p>
+<section id="solution-content">
+<p>Here is one solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">σ_props</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">σ_props</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">key_ex</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">σ_prop</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">σ_props</span><span class="p">):</span>
+    <span class="n">key_ex</span><span class="p">,</span> <span class="n">key_run</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">key_ex</span><span class="p">)</span>
+    <span class="n">path_ex</span><span class="p">,</span> <span class="n">accepts_ex</span> <span class="o">=</span> <span class="n">mh_chain</span><span class="p">(</span><span class="n">key_run</span><span class="p">,</span> <span class="n">log_post_gauss</span><span class="p">,</span>
+                                   <span class="mf">0.0</span><span class="p">,</span> <span class="n">σ_prop</span><span class="p">,</span> <span class="mi">2_000</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">path_ex</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">sigma = </span><span class="si">{</span><span class="n">σ_prop</span><span class="si">}</span><span class="s1">$, &#39;</span>
+                 <span class="sa">f</span><span class="s1">&#39;acceptance rate = </span><span class="si">{</span><span class="n">accepts_ex</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/dc6984b9f770b2c64b9d0b7d0e3cee01c5afad3490f677054b4ca43205103c1f.png" src="_images/dc6984b9f770b2c64b9d0b7d0e3cee01c5afad3490f677054b4ca43205103c1f.png" />
+</div>
+</div>
+<p>When <span class="math notranslate nohighlight">\(\sigma\)</span> is very small, nearly every proposal is accepted, but each step is tiny, so the chain explores the posterior extremely slowly and the draws are highly autocorrelated.</p>
+<p>When <span class="math notranslate nohighlight">\(\sigma\)</span> is very large, proposals usually land far out in the tails where <span class="math notranslate nohighlight">\(\tilde p\)</span> is negligible, so they are nearly always rejected and the chain stays frozen for long stretches.</p>
+<p>Both extremes deliver valid but very inefficient samplers; intermediate values, with acceptance rates roughly in the 20–50% range, explore the posterior much faster.</p>
+</section>
+</div>
+<div class="exercise admonition" id="mcmc_ex2">
+
+<p class="admonition-title"><span class="caption-number">Exercise 3.2 </span></p>
+<section id="exercise-content">
+<p>Return to the bimodal mixture prior and suppose the data actually come from the positive regime: draw <span class="math notranslate nohighlight">\(n\)</span> observations from <span class="math notranslate nohighlight">\(N(1, 1)\)</span>.</p>
+<p>Compute the posterior by quadrature for <span class="math notranslate nohighlight">\(n \in \{2, 8, 32\}\)</span>, using the first <span class="math notranslate nohighlight">\(n\)</span> elements of a single simulated data set so that the samples are nested.</p>
+<p>Plot the three posteriors together with the prior, and interpret what you see.</p>
+</section>
+</div>
+<div class="solution dropdown admonition" id="mcmc-solution-14">
+
+<p class="admonition-title">Solution</p>
+<section id="solution-content">
+<p>Here is one solution.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">key_ex2</span> <span class="o">=</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">key</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">y_all</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">+</span> <span class="n">σ_y</span> <span class="o">*</span> <span class="n">jax</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">key_ex2</span><span class="p">,</span> <span class="p">(</span><span class="mi">32</span><span class="p">,))</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">grid</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">jnp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">jax</span><span class="o">.</span><span class="n">vmap</span><span class="p">(</span><span class="n">log_prior_mix</span><span class="p">)(</span><span class="n">grid</span><span class="p">)),</span>
+        <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;prior&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n_obs</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">32</span><span class="p">):</span>
+    <span class="n">log_post_n</span> <span class="o">=</span> <span class="n">make_log_post</span><span class="p">(</span><span class="n">log_prior_mix</span><span class="p">,</span> <span class="n">y_all</span><span class="p">[:</span><span class="n">n_obs</span><span class="p">],</span> <span class="n">σ_y</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">grid</span><span class="p">,</span> <span class="n">posterior_on_grid</span><span class="p">(</span><span class="n">log_post_n</span><span class="p">,</span> <span class="n">grid</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;posterior, $n = </span><span class="si">{</span><span class="n">n_obs</span><span class="si">}</span><span class="s1">$&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\theta$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/213f014d6aa15efd788a25d76e987a4e9234217e8d40d005ffd9f19bd48ee46b.png" src="_images/213f014d6aa15efd788a25d76e987a4e9234217e8d40d005ffd9f19bd48ee46b.png" />
+</div>
+</div>
+<p>With only a couple of observations, both regimes remain plausible, although the positive regime already carries more weight.</p>
+<p>As <span class="math notranslate nohighlight">\(n\)</span> grows, the likelihood sharpens around the sample mean, the negative regime’s posterior weight collapses toward zero, and the surviving mode tightens around the truth.</p>
+<p>The prior’s two-regime structure is a belief that the data can and do resolve: in the limit, the posterior concentrates on the regime that generated the data.</p>
+</section>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                    </div>
+                    
+                </main> <!-- .page__content -->
+                
+
+
+                <footer class="qe-page__footer">
+
+                    <p><a href="https://creativecommons.org/licenses/by-sa/4.0/"><img src="https://licensebuttons.net/l/by-sa/4.0/80x15.png"></a></p>
+
+                    <p>Creative Commons License &ndash; This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International.</p>
+
+                    <p>A theme by <a href="https://quantecon.org">QuantEcon</a></p>
+
+                </footer> <!-- .page__footer -->
+
+            </div> <!-- .page -->
+
+            
+
+            
+            <div class="qe-sidebar bd-sidebar inactive" id="site-navigation">
+
+                <div class="qe-sidebar__header">
+
+
+                    Contents
+
+                </div>
+
+                <nav class="qe-sidebar__nav" id="qe-sidebar-nav" aria-label="Main navigation">
+                    <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tools and Techniques
+ </span>
+</p>
+<ul class="current nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="orth_proj.html">
+   1. Orthogonal Projections and Their Applications
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="stationary_densities.html">
+   2. Continuous State Markov Chains
+  </a>
+ </li>
+ <li class="toctree-l1 current active active">
+  <a class="current reference internal" href="#">
+   3. Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="muth_kalman.html">
+   4. Reverse Engineering a la Muth
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="discrete_dp.html">
+   5. Discrete State Dynamic Programming
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  LQ Control
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="cons_news.html">
+   6. Information and Consumption Smoothing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing.html">
+   7. Consumption Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="smoothing_tax.html">
+   8. Tax Smoothing with Complete and Incomplete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="markov_jump_lq.html">
+   9. Markov Jump Linear Quadratic Dynamic Programming
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_1.html">
+   10. How to Pay for a War: Part 1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_2.html">
+   11. How to Pay for a War: Part 2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tax_smoothing_3.html">
+   12. How to Pay for a War: Part 3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lqramsey.html">
+   13. Optimal Taxation in an LQ Economy
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Multiple Agent Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arellano.html">
+   14. Default Risk and Income Fluctuations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="matsuyama.html">
+   15. Globalization and Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="coase.html">
+   16. Coase’s Theory of the Firm
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="match_transport.html">
+   17. Composite Sorting
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dynamic Linear Economies
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_recursive_models.html">
+   18. Recursive Models of Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="growth_in_dles.html">
+   19. Growth in Dynamic Linear Economies
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_asset_pricing_dles.html">
+   20. Lucas Asset Pricing Using DLE
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="irfs_in_hall_model.html">
+   21. IRFs in Hall Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="permanent_income_dles.html">
+   22. Permanent Income Model using the DLE Class
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="gorman_heterogeneous_households.html">
+   23. Gorman Aggregation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rosen_schooling_model.html">
+   24. Rosen Schooling Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cattle_cycles.html">
+   25. Cattle Cycles
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hs_invertibility_example.html">
+   26. Shock Non Invertibility
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Risk, Model Uncertainty, and Robustness
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="five_preferences.html">
+   27. Risk and Model Uncertainty
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="entropy.html">
+   28. Etymology of Entropy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="robustness.html">
+   29. Robustness
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="rob_markov_perf.html">
+   30. Robust Markov Perfect Equilibrium
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Time Series Models
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="arma.html">
+   31. Covariance Stationary Processes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="estspec.html">
+   32. Estimation of Spectra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="additive_functionals.html">
+   33. Additive and Multiplicative Functionals
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="lu_tricks.html">
+   34. Classical Control with Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="classical_filtering.html">
+   35. Classical Prediction and Filtering With Linear Algebra
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="knowing_forecasts_of_others.html">
+   36. Knowing the Forecasts of Others
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="cagan_rational_expectations.html">
+   37. Demand for Money during Hyperinflations under Rational Expectations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="info_projection.html">
+   38. Hyperinflation and Information Projection
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Asset Pricing and Finance
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="lucas_model.html">
+   39. Asset Pricing II: The Lucas Asset Pricing Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="asset_pricing_lph.html">
+   40. Elementary Asset Pricing Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hansen_richard_1987.html">
+   41. The Role of Conditioning Information in Asset Pricing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="hansen_jagannathan_1991.html">
+   42. The Hansen-Jagannathan Bound
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="black_litterman.html">
+   43. Two Modifications of Mean-Variance Portfolio Theory
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="doubts_or_variability.html">
+   44. Doubts or Variability?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
+   45. Risk Aversion or Mistaken Beliefs?
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_complete_mkts.html">
+   46. Irrelevance of Capital Structures with Complete Markets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BCG_incomplete_mkts.html">
+   47. Equilibrium Capital Structures with Incomplete Markets
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Dynamic Programming Squared
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="un_insure.html">
+   48. Optimal Unemployment Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dyn_stack.html">
+   49. Stackelberg Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo_machine_learn.html">
+   50. Machine Learning a Ramsey Plan
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo.html">
+   51. Time Inconsistency of Ramsey Plans
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="calvo_abreu.html">
+   52. Sustainable Plans for a Calvo Model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="opt_tax_recur.html">
+   53. Optimal Taxation with State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss.html">
+   54. Optimal Taxation without State-Contingent Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss2.html">
+   55. Fluctuating Interest Rates Deliver Fiscal Insurance
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="amss3.html">
+   56. Fiscal Risk and Government Debt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_ramsey.html">
+   57. Competitive Equilibria of a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="chang_credible.html">
+   58. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="dovis_accounting_mf.html">
+   59. Accounting for Monetary and Fiscal Policy
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Other
+ </span>
+</p>
+<ul class="nav bd-sidenav nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="troubleshooting.html">
+   60. Troubleshooting
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="zreferences.html">
+   61. References
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="status.html">
+   62. Execution Statistics
+  </a>
+ </li>
+</ul>
+
+                </nav>
+
+                <div class="qe-sidebar__footer">
+
+                </div>
+
+            </div> <!-- .sidebar -->
+            
+        </div> <!-- .main -->
+
+        <div class="qe-toolbar">
+
+            <div class="qe-toolbar__inner">
+
+                <ul class="qe-toolbar__main">
+                    <li data-tippy-content="Table of Contents" class="btn__sidebar"><i data-feather="menu"></i></li>
+                    <li data-tippy-content="Home"><a href="intro.html"><i data-feather="home"></i></a></li>
+                    <li class="btn__qelogo"><a href="https://quantecon.org" title=""><span class="show-for-sr">QuantEcon</span></a></li>
+                </ul>
+
+                <ul class="qe-toolbar__links">
+                    <li class="btn__search">
+                        <form action="search.html" method="get">
+                            <input type="search" class="form-control" name="q" id="search-input" placeholder="Search..." aria-label="Search..." autocomplete="off" accesskey="k">
+                            <i data-feather="search" id="search-icon"></i>
+                        </form>
+                    </li>
+                    <li data-tippy-content="Fullscreen" class="btn__fullscreen"><i data-feather="maximize"></i></li>
+                    <li data-tippy-content="Increase font size" class="btn__plus"><i data-feather="plus-circle"></i></li>
+                    <li data-tippy-content="Decrease font size" class="btn__minus"><i data-feather="minus-circle"></i></li>
+                    <li data-tippy-content="Change contrast" class="btn__contrast"><i data-feather="sunset"></i></li>
+                    <li data-tippy-content="Download Notebook"><a href="/_notebooks/mcmc.ipynb" download><i data-feather="download-cloud"></i></a></li>
+                    <li class="settings-button" id="settingsButton"><div data-tippy-content="Launch Notebook"><i data-feather="play-circle"></i></div></li>
+                        <li class="download-pdf" id="downloadButton"><i data-feather="file"></i></li>
+                    <!--
+                    # Enable if looking for link to specific document hosted on GitHub
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/mcmc.md" download><i data-feather="github"></i></a></li>
+                    -->
+                    <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst" download><i data-feather="github"></i></a></li>
+                    
+                    
+                </ul>
+
+            </div>
+
+        </div> <!-- .toolbar -->
+        <div id="downloadPDFModal" style="display: none;">
+            <ul class="pdf-options" style="display: block;">
+                <li class="download-pdf-book" onClick="window.print()">
+                    <p>Lecture (PDF)</p>
+                </li>
+                <li class="download-pdf-file">
+                    <a href="/_pdf/quantecon-python-advanced.pdf" download><p>Book (PDF)</p></a>
+                </li>
+            </ul>
+        </div>
+        <div id="settingsModal" style="display: none;">
+            <p class="modal-title"> Notebook Launcher </p>
+            <div class="modal-desc">
+            <p>
+                Choose public or private cloud service for "Launch" button.
+            </p>
+            </div>
+            <p class="modal-subtitle">Select a server</p>
+            <ul class="modal-servers">
+            <li class="active launcher-public">
+                <span class="label">Public</span>
+                <select id="launcher-public-input">
+                
+                    <option value="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/main/mcmc.ipynb">Colab</option>
+                
+                </select>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            <li class="launcher-private">
+                <span class="label">Private</span>
+                <input type="text" id="launcher-private-input" data-repourl="https://github.com/QuantEcon/lecture-python-advanced.notebooks" data-urlpath="tree/lecture-python-advanced.notebooks/mcmc.ipynb" data-branch=main>
+                <i class="fas fa-check-circle"></i>
+            </li>
+            </ul>
+            <p class="launch"><a href="https://colab.research.google.com/github/QuantEcon/lecture-python-advanced.notebooks/blob/main/mcmc.ipynb" id="advancedLaunchButton" target="_blank">Launch Notebook</a></p>
+            <script>
+                // QuantEcon Notebook Launcher
+                const launcherTypeElements = document.querySelectorAll('#settingsModal .modal-servers li');
+                // Highlight the server type if previous selection exists
+                if (typeof localStorage.launcherType !== 'undefined') {
+                  for (var i = 0; i < launcherTypeElements.length; i++) {
+                    launcherTypeElements[i].classList.remove('active');
+                    if ( launcherTypeElements[i].classList.contains(localStorage.launcherType) ) {
+                      launcherTypeElements[i].classList.add('active');
+                    }
+                  }
+                }
+                // Highlight server type on click and set local storage value
+                for (var i = 0; i < launcherTypeElements.length; i++) {
+                  launcherTypeElements[i].addEventListener('click', function() {
+                    for (var j = 0; j < launcherTypeElements.length; j++) {
+                      launcherTypeElements[j].classList.remove('active');
+                    }
+                    this.classList.add('active');
+                    if ( this.classList.contains('launcher-private') ) {
+                      localStorage.launcherType = 'launcher-private';
+                    } else if ( this.classList.contains('launcher-public') ) {
+                      localStorage.launcherType = 'launcher-public';
+                    }
+                    setLaunchServer();
+                  })
+                }
+                const launcherPublic = document.getElementById('launcher-public-input');
+                const launcherPrivate = document.getElementById('launcher-private-input');
+                const pageName = "mcmc";
+                const repoURL = "https://github.com/QuantEcon/lecture-python-advanced.notebooks";
+                const urlPath = "tree/lecture-python-advanced.notebooks/mcmc.ipynb";
+                const branch = "main"
+                const launchNotebookLink = document.getElementById('advancedLaunchButton');
+
+                // Highlight public server option if previous selection exists
+                if (typeof localStorage.launcherPublic !== 'undefined') {
+                  launcherPublic.value = localStorage.launcherPublic;
+                }
+                // Update local storage upon public server selection
+                launcherPublic.addEventListener('change', (event) => {
+                  setLaunchServer();
+                });
+                // Populate private server input if previous entry exists
+                if (typeof localStorage.launcherPrivate !== 'undefined') {
+                  launcherPrivate.value = localStorage.launcherPrivate;
+                }
+                // Update local storage when a private server is entered
+                launcherPrivate.addEventListener('input', (event) => {
+                  setLaunchServer();
+                });
+
+                // Function to update the "Launch Notebook" link href
+                function setLaunchServer() {
+                  launchNotebookLink.removeAttribute("style")
+                  if ( localStorage.launcherType == 'launcher-private' ) {
+                    let repoPrefix = "/user-redirect/git-pull?repo=" + repoURL + "&branch=" + branch + "&urlpath=" + urlPath;
+                    launcherPrivateValue = launcherPrivate.value
+                    if (!launcherPrivateValue) {
+                        launchNotebookLink.removeAttribute("href")
+                        launchNotebookLink.style.background = "grey"
+                        return
+                    }
+                    localStorage.launcherPrivate = launcherPrivateValue;
+                    privateServer = localStorage.launcherPrivate.replace(/\/$/, "")
+                    if (!privateServer.includes("http")) {
+                        privateServer = "http://" + privateServer
+                    }
+                    launchNotebookLinkURL = privateServer + repoPrefix;
+                  } else if ( localStorage.launcherType == 'launcher-public' ) {
+                    launcherPublicValue = launcherPublic.options[launcherPublic.selectedIndex].value;
+                    localStorage.launcherPublic = launcherPublicValue;
+                    launchNotebookLinkURL = localStorage.launcherPublic;
+                  }
+                  if (launchNotebookLinkURL) launchNotebookLink.href = launchNotebookLinkURL;
+                }
+                // Check if user has previously selected a server
+                if ( (typeof localStorage.launcherPrivate !== 'undefined') || (typeof localStorage.launcherPublic !== 'undefined') ) {
+                  setLaunchServer();
+                }
+                </script>
+
+        </div>
+
+    </div> <!-- .wrapper-->
+  </body>
+</html>

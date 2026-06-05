@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>5. Information and Consumption Smoothing &#8212; Advanced Quantitative Economics with Python</title>
+    <title>6. Information and Consumption Smoothing &#8212; Advanced Quantitative Economics with Python</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -77,7 +77,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=ff5dcadef89fd2097ea5e28ddaad7eb5985f09c4" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -131,8 +131,8 @@
     <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="6. Consumption Smoothing with Complete and Incomplete Markets" href="smoothing.html" />
-    <link rel="prev" title="4. Discrete State Dynamic Programming" href="discrete_dp.html" />
+    <link rel="next" title="7. Consumption Smoothing with Complete and Incomplete Markets" href="smoothing.html" />
+    <link rel="prev" title="5. Discrete State Dynamic Programming" href="discrete_dp.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -155,6 +155,9 @@
 <meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
 <meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
 <meta name="theme-color" content="#ffffff" />
+
+
+
 
   </head>
 <body>
@@ -204,21 +207,21 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">5.1. Overview</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#same-non-financial-incomes-different-information">5.1.1. Same non-financial incomes, different information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">6.1. Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#same-non-financial-incomes-different-information">6.1.1. Same non-financial incomes, different information</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-representations-of-one-nonfinancial-income-process">5.2. Two representations of one nonfinancial income process</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-of-kalman-filter">5.3. Application of Kalman filter</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#news-shocks-and-less-informative-shocks">5.4. News shocks and less informative shocks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-of-epsilon-t-shock-in-terms-of-future-y-t">5.5. Representation of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> shock in terms of future <span class="math notranslate nohighlight">\(y_t\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-in-terms-of-a-t-shocks">5.6. Representation in terms of <span class="math notranslate nohighlight">\(a_t\)</span> shocks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permanent-income-consumption-smoothing-model">5.7. Permanent income consumption-smoothing model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-representations">5.8. State space representations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computations">5.9. Computations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-income-process-and-two-associated-shock-processes">5.10. Simulating income process and two associated shock processes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-innovations-in-another-way">5.11. Calculating innovations in another way</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-invertibility-issue">5.12. Another invertibility issue</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-representations-of-one-nonfinancial-income-process">6.2. Two representations of one nonfinancial income process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#application-of-kalman-filter">6.3. Application of Kalman filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#news-shocks-and-less-informative-shocks">6.4. News shocks and less informative shocks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-of-epsilon-t-shock-in-terms-of-future-y-t">6.5. Representation of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> shock in terms of future <span class="math notranslate nohighlight">\(y_t\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-in-terms-of-a-t-shocks">6.6. Representation in terms of <span class="math notranslate nohighlight">\(a_t\)</span> shocks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#permanent-income-consumption-smoothing-model">6.7. Permanent income consumption-smoothing model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#state-space-representations">6.8. State space representations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computations">6.9. Computations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simulating-income-process-and-two-associated-shock-processes">6.10. Simulating income process and two associated shock processes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculating-innovations-in-another-way">6.11. Calculating innovations in another way</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#another-invertibility-issue">6.12. Another invertibility issue</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -286,7 +289,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">7 months ago</span>
+                                <span class="changelog-time">9 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -304,7 +307,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/40df298d" class="changelog-hash">40df298d</a>
                                 
                                 <span class="changelog-author">thomassargent30</span>
-                                <span class="changelog-time">3 years ago</span>
+                                <span class="changelog-time">4 years ago</span>
                                 <span class="changelog-message">Tom's edits of two advanced lectures, June 5</span>
                             </li>
                             
@@ -313,7 +316,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/3e3aa497" class="changelog-hash">3e3aa497</a>
                                 
                                 <span class="changelog-author">thomassargent30</span>
-                                <span class="changelog-time">3 years ago</span>
+                                <span class="changelog-time">4 years ago</span>
                                 <span class="changelog-message">Tom's May 31 edits of two advanced lectures</span>
                             </li>
                             
@@ -322,7 +325,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/4d387e75" class="changelog-hash">4d387e75</a>
                                 
                                 <span class="changelog-author">thomassargent30</span>
-                                <span class="changelog-time">3 years ago</span>
+                                <span class="changelog-time">4 years ago</span>
                                 <span class="changelog-message">Tom's edits of consum and info lecture</span>
                             </li>
                             
@@ -340,7 +343,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e829ce22" class="changelog-hash">e829ce22</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">migrate files from lecture-python-advanced (69382af5ab66348c1a9a822aadb476a096700bfe)</span>
                             </li>
                             
@@ -349,7 +352,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/3a67d951" class="changelog-hash">3a67d951</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">Revert "migrate new sources from lecture-python using sphinx-tomyst (f772bb0)"</span>
                             </li>
                             
@@ -358,7 +361,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/1b59fbe6" class="changelog-hash">1b59fbe6</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">migrate new sources from lecture-python using sphinx-tomyst (f772bb0)</span>
                             </li>
                             
@@ -388,7 +391,7 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="information-and-consumption-smoothing">
-<h1><span class="section-number">5. </span>Information and Consumption Smoothing<a class="headerlink" href="#information-and-consumption-smoothing" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">6. </span>Information and Consumption Smoothing<a class="headerlink" href="#information-and-consumption-smoothing" title="Link to this heading">#</a></h1>
 <p>In addition to what’s in Anaconda, this lecture employs the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input above-output-prompt docutils container">
@@ -420,7 +423,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </details>
 </div>
 <section id="overview">
-<h2><span class="section-number">5.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>In the linear-quadratic
 permanent income of consumption smoothing model described in this
 <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">quantecon lecture</a>,
@@ -432,13 +435,13 @@ a scalar parameter <span class="math notranslate nohighlight">\(\beta \in (0,1)\
 <p>That <span class="math notranslate nohighlight">\(\beta\)</span> plays these two roles is essential in delivering the outcome that, <strong>regardless</strong>
 of the stochastic process that describes his
 non-financial income, the consumer chooses
-to make consumption follow a random walk  (see <span id="id1">[<a class="reference internal" href="zreferences.html#id172" title="Robert E Hall. Stochastic Implications of the Life Cycle-Permanent Income Hypothesis: Theory and Evidence. Journal of Political Economy, 86(6):971–987, 1978.">Hall, 1978</a>]</span>).</p>
+to make consumption follow a random walk  (see <span class="bibtex-citation" id="id1">[<a class="reference internal" href="zreferences.html#id172" title="Robert E Hall. Stochastic Implications of the Life Cycle-Permanent Income Hypothesis: Theory and Evidence. Journal of Political Economy, 86(6):971–987, 1978.">Hall, 1978</a>]</span>).</p>
 <p>In this lecture, we assign a third role to <span class="math notranslate nohighlight">\(\beta\)</span>:</p>
 <ul class="simple">
 <li><p>it describes  a <strong>first-order moving average</strong> process for the growth in non-financial income</p></li>
 </ul>
 <section id="same-non-financial-incomes-different-information">
-<h3><span class="section-number">5.1.1. </span>Same non-financial incomes, different information<a class="headerlink" href="#same-non-financial-incomes-different-information" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">6.1.1. </span>Same non-financial incomes, different information<a class="headerlink" href="#same-non-financial-incomes-different-information" title="Link to this heading">#</a></h3>
 <p>We study two consumers who have exactly the same
 nonfinancial income process and who both conform to the linear-quadratic
 permanent income of consumption smoothing model described
@@ -480,12 +483,12 @@ the tax cut</p></li>
 generating function along lines described in <a class="reference internal" href="classical_filtering.html"><span class="doc">this lecture</span></a></p></li>
 </ul>
 <p>This lecture can be regarded as an introduction to   <strong>invertibility</strong> issues that take center stage in
-the analysis of <strong>fiscal foresight</strong> by Eric Leeper, Todd Walker, and Susan Yang <span id="id2">[<a class="reference internal" href="zreferences.html#id53" title="Eric M. Leeper, Todd B. Walker, and Shu‐Chun Susan Yang. Fiscal foresight and information flows. Econometrica, 81(3):1115-1145, May 2013.">Leeper <em>et al.</em>, 2013</a>]</span>, as well
-as in chapter 4  of <span id="id3">[<a class="reference internal" href="zreferences.html#id78" title="Thomas Sargent, Lars Peter Hansen, and Will Roberts. Observable implications of present value budget balance. In Rational Expectations Econometrics. Westview Press, 1991.">Sargent <em>et al.</em>, 1991</a>]</span>.</p>
+the analysis of <strong>fiscal foresight</strong> by Eric Leeper, Todd Walker, and Susan Yang <span class="bibtex-citation" id="id2">[<a class="reference internal" href="zreferences.html#id53" title="Eric M. Leeper, Todd B. Walker, and Shu‐Chun Susan Yang. Fiscal foresight and information flows. Econometrica, 81(3):1115-1145, May 2013.">Leeper <em>et al.</em>, 2013</a>]</span>, as well
+as in chapter 4  of <span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id78" title="Thomas Sargent, Lars Peter Hansen, and Will Roberts. Observable implications of present value budget balance. In Rational Expectations Econometrics. Westview Press, 1991.">Sargent <em>et al.</em>, 1991</a>]</span>.</p>
 </section>
 </section>
 <section id="two-representations-of-one-nonfinancial-income-process">
-<h2><span class="section-number">5.2. </span>Two representations of one nonfinancial income process<a class="headerlink" href="#two-representations-of-one-nonfinancial-income-process" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.2. </span>Two representations of one nonfinancial income process<a class="headerlink" href="#two-representations-of-one-nonfinancial-income-process" title="Link to this heading">#</a></h2>
 <p>We study consequences of endowing a
 consumer with one of two alternative representations for the change
 in the consumer’s nonfinancial income <span class="math notranslate nohighlight">\(y_{t+1} - y_t\)</span>.</p>
@@ -498,7 +501,7 @@ in the consumer’s nonfinancial income <span class="math notranslate nohighligh
 </ul>
 <p>The first representation, which we shall sometimes refer to as the <strong>more informative representation</strong>, is</p>
 <div class="math notranslate nohighlight" id="equation-eqn-1">
-<span class="eqno">(5.1)<a class="headerlink" href="#equation-eqn-1" title="Link to this equation">#</a></span>\[
+<span class="eqno">(6.1)<a class="headerlink" href="#equation-eqn-1" title="Link to this equation">#</a></span>\[
 y_{t+1} - y_t  =  \epsilon_{t+1} - \beta^{-1}  \epsilon_t  
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\{\epsilon_t\}\)</span> is an i.i.d. normally distributed scalar
@@ -508,12 +511,12 @@ process with means of zero and contemporaneous variances
 <span class="math notranslate nohighlight">\(t\)</span> knows both <span class="math notranslate nohighlight">\(y_t\)</span> and the  shock
 <span class="math notranslate nohighlight">\(\epsilon_t\)</span> and can use both of them to forecast future
 <span class="math notranslate nohighlight">\(y_{t+j}\)</span>’s.</p>
-<p>As we’ll see below, representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> has the peculiar property that a positive shock
+<p>As we’ll see below, representation <a class="reference internal" href="#equation-eqn-1">(6.1)</a> has the peculiar property that a positive shock
 <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> leaves the discounted present value of the consumer’s financial income at time <span class="math notranslate nohighlight">\(t+1\)</span>
 unaltered.</p>
 <p>The second representation of the <strong>same</strong> <span class="math notranslate nohighlight">\(\{y_t\}\)</span> process is</p>
 <div class="math notranslate nohighlight" id="equation-eqn-2">
-<span class="eqno">(5.2)<a class="headerlink" href="#equation-eqn-2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(6.2)<a class="headerlink" href="#equation-eqn-2" title="Link to this equation">#</a></span>\[
 y_{t+1} - y_t =  a_{t+1} - \beta  a_t 
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\{a_t\}\)</span> is another i.i.d. normally distributed scalar
@@ -525,10 +528,10 @@ process, with means of zero and now variances <span class="math notranslate nohi
 \]</div>
 <p>so that the variance of the innovation exceeds the variance of the
 original shock by a multiplicative factor <span class="math notranslate nohighlight">\(\beta^{-2}\)</span>.</p>
-<p>Representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> is the <strong>innovations representation</strong> of equation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> associated with
+<p>Representation <a class="reference internal" href="#equation-eqn-2">(6.2)</a> is the <strong>innovations representation</strong> of equation <a class="reference internal" href="#equation-eqn-1">(6.1)</a> associated with
 Kalman filtering theory.</p>
-<p>To see how this works, note that equating representations <a class="reference internal" href="#equation-eqn-1">(5.1)</a>
-and <a class="reference internal" href="#equation-eqn-2">(5.2)</a> for <span class="math notranslate nohighlight">\(y_{t+1} - y_t\)</span> implies
+<p>To see how this works, note that equating representations <a class="reference internal" href="#equation-eqn-1">(6.1)</a>
+and <a class="reference internal" href="#equation-eqn-2">(6.2)</a> for <span class="math notranslate nohighlight">\(y_{t+1} - y_t\)</span> implies
 <span class="math notranslate nohighlight">\(\epsilon_{t+1} - \beta^{-1} \epsilon_t = a_{t+1} - \beta a_t\)</span>,
 which in turn implies</p>
 <div class="math notranslate nohighlight">
@@ -538,7 +541,7 @@ a_{t+1} = \beta a_t + \epsilon_{t+1} - \beta^{-1} \epsilon_t .
 <p>Solving this difference equation backwards for <span class="math notranslate nohighlight">\(a_{t+1}\)</span> gives,
 after a few lines of algebra,</p>
 <div class="math notranslate nohighlight" id="equation-eqn-3">
-<span class="eqno">(5.3)<a class="headerlink" href="#equation-eqn-3" title="Link to this equation">#</a></span>\[a_{t+1} = \epsilon_{t+1} + (\beta - \beta^{-1}) \sum_{j=0}^\infty \beta^j \epsilon_{t-j} \quad\]</div>
+<span class="eqno">(6.3)<a class="headerlink" href="#equation-eqn-3" title="Link to this equation">#</a></span>\[a_{t+1} = \epsilon_{t+1} + (\beta - \beta^{-1}) \sum_{j=0}^\infty \beta^j \epsilon_{t-j} \quad\]</div>
 <p>which we can also write as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -575,15 +578,15 @@ process with variance</p>
 </ul>
 <p>Alternatively, if you are uncomfortable with covariance generating
 functions, note that we can directly calculate <span class="math notranslate nohighlight">\(\sigma_a^2\)</span> from
-formula <a class="reference internal" href="#equation-eqn-3">(5.3)</a> according to</p>
+formula <a class="reference internal" href="#equation-eqn-3">(6.3)</a> according to</p>
 <div class="math notranslate nohighlight">
 \[
 \sigma_a^2 = \sigma_\epsilon^2 + [ 1 + (\beta - \beta^{-1})^2 \sum_{j=0}^\infty \beta^{2j} ] = \beta^{-1} \sigma_\epsilon^2 .
 \]</div>
 </section>
 <section id="application-of-kalman-filter">
-<h2><span class="section-number">5.3. </span>Application of Kalman filter<a class="headerlink" href="#application-of-kalman-filter" title="Link to this heading">#</a></h2>
-<p>We can also use the the <strong>Kalman filter</strong> to  obtain representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> from representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a>.</p>
+<h2><span class="section-number">6.3. </span>Application of Kalman filter<a class="headerlink" href="#application-of-kalman-filter" title="Link to this heading">#</a></h2>
+<p>We can also use the the <strong>Kalman filter</strong> to  obtain representation <a class="reference internal" href="#equation-eqn-2">(6.2)</a> from representation <a class="reference internal" href="#equation-eqn-1">(6.1)</a>.</p>
 <p>Thus, from equations associated with the <strong>Kalman filter</strong>, it can be
 verified that the steady-state Kalman gain <span class="math notranslate nohighlight">\(K = \beta^2\)</span> and the
 steady state conditional covariance</p>
@@ -616,16 +619,16 @@ and <span class="math notranslate nohighlight">\(\Sigma = (1-\beta^2) \sigma_\ep
 described in <a class="reference internal" href="classical_filtering.html"><span class="doc">this lecture</span></a>.</p>
 </section>
 <section id="news-shocks-and-less-informative-shocks">
-<h2><span class="section-number">5.4. </span>News shocks and less informative shocks<a class="headerlink" href="#news-shocks-and-less-informative-shocks" title="Link to this heading">#</a></h2>
-<p>Representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> is cast in terms of a <strong>news shock</strong>
+<h2><span class="section-number">6.4. </span>News shocks and less informative shocks<a class="headerlink" href="#news-shocks-and-less-informative-shocks" title="Link to this heading">#</a></h2>
+<p>Representation <a class="reference internal" href="#equation-eqn-1">(6.1)</a> is cast in terms of a <strong>news shock</strong>
 <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> that represents a shock to nonfinancial income
 coming from taxes, transfers, and other random sources of income changes
 known to a well-informed person who perhaps has  all sorts of information about
 the income process.</p>
-<p>Representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> for the <strong>same</strong> income process is driven by shocks
+<p>Representation <a class="reference internal" href="#equation-eqn-2">(6.2)</a> for the <strong>same</strong> income process is driven by shocks
 <span class="math notranslate nohighlight">\(a_t\)</span> that contain less information than the news shock
 <span class="math notranslate nohighlight">\(\epsilon_t\)</span>.</p>
-<p>Representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> is called the <strong>innovations</strong> representation for the
+<p>Representation <a class="reference internal" href="#equation-eqn-2">(6.2)</a> is called the <strong>innovations</strong> representation for the
 <span class="math notranslate nohighlight">\(\{y_t - y_{t-1}\}\)</span> process.</p>
 <p>It is cast in terms of what time series statisticians call the
 <strong>innovation</strong> or <strong>fundamental</strong> shock that emerges from applying the
@@ -638,14 +641,14 @@ nonfinancial income.</p>
 <p>The shock <span class="math notranslate nohighlight">\(\epsilon_t\)</span> is <strong>not fundamental</strong> because it  has more
 information about the future of the <span class="math notranslate nohighlight">\(\{y_t - y_{t-1}\}\)</span> process
 than is contained in <span class="math notranslate nohighlight">\(a_t\)</span>.</p>
-<p>Representation <a class="reference internal" href="#equation-eqn-3">(5.3)</a> reveals the important fact that the <strong>original
+<p>Representation <a class="reference internal" href="#equation-eqn-3">(6.3)</a> reveals the important fact that the <strong>original
 shock</strong> <span class="math notranslate nohighlight">\(\epsilon_t\)</span> contains more information about future
 <span class="math notranslate nohighlight">\(y\)</span>’s than is contained in the semi-infinite history
 <span class="math notranslate nohighlight">\(y^t = [y_t, y_{t-1}, \ldots ]\)</span>.</p>
-<p>Staring at representation <a class="reference internal" href="#equation-eqn-3">(5.3)</a> for <span class="math notranslate nohighlight">\(a_{t+1}\)</span> shows that it consists
+<p>Staring at representation <a class="reference internal" href="#equation-eqn-3">(6.3)</a> for <span class="math notranslate nohighlight">\(a_{t+1}\)</span> shows that it consists
 both of <strong>new news</strong> <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> as well as a long moving
 average <span class="math notranslate nohighlight">\((\beta - \beta^{-1})\sum_{j=0}^\infty \beta^j\epsilon_{t-j}\)</span> of <strong>old news</strong>.</p>
-<p>The <strong>more information</strong> representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> asserts that a shock
+<p>The <strong>more information</strong> representation <a class="reference internal" href="#equation-eqn-1">(6.1)</a> asserts that a shock
 <span class="math notranslate nohighlight">\(\epsilon_{t}\)</span> results in an impulse response to nonfinancial
 income of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> times the sequence</p>
 <div class="math notranslate nohighlight">
@@ -678,7 +681,7 @@ enough to pay the interest on the bond.</p></li>
 <p>The <strong>present value</strong> of the impulse response or moving average
 coefficients equals <span class="math notranslate nohighlight">\(d_\epsilon(L) = \frac{0}{1 -\beta } =0\)</span>, a fact that we’ll see again
 below.</p>
-<p>Representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, i.e., the innovations representation, asserts that a
+<p>Representation <a class="reference internal" href="#equation-eqn-2">(6.2)</a>, i.e., the innovations representation, asserts that a
 shock <span class="math notranslate nohighlight">\(a_{t}\)</span> results in an impulse response to nonfinancial
 income of <span class="math notranslate nohighlight">\(a_t\)</span> times</p>
 <div class="math notranslate nohighlight">
@@ -689,13 +692,13 @@ income of <span class="math notranslate nohighlight">\(a_t\)</span> times</p>
 <span class="math notranslate nohighlight">\(t\)</span> can be expected to be followed by an <strong>increase</strong> in <span class="math notranslate nohighlight">\(y_{t+j}\)</span>
 of <span class="math notranslate nohighlight">\(a_t\)</span> times <span class="math notranslate nohighlight">\(1 - \beta &gt; 0\)</span> in all future periods <span class="math notranslate nohighlight">\(j=1, 2, \ldots\)</span>.</p>
 <p>The present value of the impulse response or moving average coefficients
-for representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> is
+for representation <a class="reference internal" href="#equation-eqn-2">(6.2)</a> is
 <span class="math notranslate nohighlight">\(d_a(\beta) = \frac{1 -\beta^2}{1 -\beta } = (1 + \beta)\)</span>, another
 fact that will be important below.</p>
 </section>
 <section id="representation-of-epsilon-t-shock-in-terms-of-future-y-t">
-<h2><span class="section-number">5.5. </span>Representation of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> shock in terms of future <span class="math notranslate nohighlight">\(y_t\)</span><a class="headerlink" href="#representation-of-epsilon-t-shock-in-terms-of-future-y-t" title="Link to this heading">#</a></h2>
-<p>Notice that reprentation <a class="reference internal" href="#equation-eqn-1">(5.1)</a>, namely, <span class="math notranslate nohighlight">\(y_{t+1} - y_t = -\beta^{-1} \epsilon_t + \epsilon_{t+1}\)</span>
+<h2><span class="section-number">6.5. </span>Representation of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> shock in terms of future <span class="math notranslate nohighlight">\(y_t\)</span><a class="headerlink" href="#representation-of-epsilon-t-shock-in-terms-of-future-y-t" title="Link to this heading">#</a></h2>
+<p>Notice that reprentation <a class="reference internal" href="#equation-eqn-1">(6.1)</a>, namely, <span class="math notranslate nohighlight">\(y_{t+1} - y_t = -\beta^{-1} \epsilon_t + \epsilon_{t+1}\)</span>
 implies the linear difference equation</p>
 <div class="math notranslate nohighlight">
 \[
@@ -717,8 +720,8 @@ E [ y_t | y^t_+] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t+j+ 1}
 <p>Thus, <span class="math notranslate nohighlight">\(\epsilon_t\)</span>  <strong>exactly</strong> reveals the gap between <span class="math notranslate nohighlight">\(y_t\)</span> and <span class="math notranslate nohighlight">\(E [ y_t | y^t_+]\)</span>.</p>
 </section>
 <section id="representation-in-terms-of-a-t-shocks">
-<h2><span class="section-number">5.6. </span>Representation in terms of <span class="math notranslate nohighlight">\(a_t\)</span> shocks<a class="headerlink" href="#representation-in-terms-of-a-t-shocks" title="Link to this heading">#</a></h2>
-<p>Next notice that representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, namely, <span class="math notranslate nohighlight">\(y_{t+1} - y_t = -
+<h2><span class="section-number">6.6. </span>Representation in terms of <span class="math notranslate nohighlight">\(a_t\)</span> shocks<a class="headerlink" href="#representation-in-terms-of-a-t-shocks" title="Link to this heading">#</a></h2>
+<p>Next notice that representation <a class="reference internal" href="#equation-eqn-2">(6.2)</a>, namely, <span class="math notranslate nohighlight">\(y_{t+1} - y_t = -
 \beta a_t + a_{t+1}\)</span> implies the linear difference
 equation</p>
 <div class="math notranslate nohighlight">
@@ -738,13 +741,13 @@ E [ y_{t+1} | y^t ] = (1-\beta) \sum_{j=0}^\infty \beta^j y_{t-j}
 \]</div>
 </section>
 <section id="permanent-income-consumption-smoothing-model">
-<h2><span class="section-number">5.7. </span>Permanent income consumption-smoothing model<a class="headerlink" href="#permanent-income-consumption-smoothing-model" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.7. </span>Permanent income consumption-smoothing model<a class="headerlink" href="#permanent-income-consumption-smoothing-model" title="Link to this heading">#</a></h2>
 <p>When we computed optimal consumption-saving policies for our  two
-representations <a class="reference internal" href="#equation-eqn-1">(5.1)</a> and <a class="reference internal" href="#equation-eqn-2">(5.2)</a> by using formulas obtained with the difference equation
+representations <a class="reference internal" href="#equation-eqn-1">(6.1)</a> and <a class="reference internal" href="#equation-eqn-2">(6.2)</a> by using formulas obtained with the difference equation
 approach described in  <a class="reference external" href="https://python-intro.quantecon.org/perm_income_cons.html">quantecon lecture</a>,
 we obtained:</p>
 <p><strong>for a consumer having the information assumed in the news
-representation</strong> <a class="reference internal" href="#equation-eqn-1">(5.1)</a>:</p>
+representation</strong> <a class="reference internal" href="#equation-eqn-1">(6.1)</a>:</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -753,7 +756,7 @@ b_{t+1} - b_t &amp;  = - \beta^{-1} \epsilon_t
 \end{aligned}
 \]</div>
 <p><strong>for a consumer having the more limited information associated with the
-innovations representation</strong> <a class="reference internal" href="#equation-eqn-2">(5.2)</a>:</p>
+innovations representation</strong> <a class="reference internal" href="#equation-eqn-2">(6.2)</a>:</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{aligned}
@@ -765,14 +768,14 @@ b_{t+1} - b_t &amp; = - \beta a_t
 programming.</p>
 <p>Evidently, although they receive
 exactly the same histories of nonfinancial incomethe two consumers behave differently.</p>
-<p>The better informed consumer who has the  information sets  associated with representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a>
+<p>The better informed consumer who has the  information sets  associated with representation <a class="reference internal" href="#equation-eqn-1">(6.1)</a>
 responds to each shock <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> by leaving his consumption
 unaltered and <strong>saving</strong> all of <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> in anticipation of the
 permanently increased taxes that he will bear in order to service the  permanent interest payments on the risk-free
 bonds  that the government has
 presumably issued to pay for the one-time  addition
 <span class="math notranslate nohighlight">\(\epsilon_{t+1}\)</span> to his time <span class="math notranslate nohighlight">\(t+1\)</span> nonfinancial income.</p>
-<p>The less well informed consumer who has  information sets  associated with representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a>
+<p>The less well informed consumer who has  information sets  associated with representation <a class="reference internal" href="#equation-eqn-2">(6.2)</a>
 responds to a shock <span class="math notranslate nohighlight">\(a_{t+1}\)</span> by increasing his consumption by
 what he perceives to be the <strong>permanent</strong> part of the increase in
 consumption and by increasing his <strong>saving</strong> by what he perceives to be
@@ -781,11 +784,11 @@ the temporary part.</p>
 Ricardian equivalence experiment.</p>
 </section>
 <section id="state-space-representations">
-<h2><span class="section-number">5.8. </span>State space representations<a class="headerlink" href="#state-space-representations" title="Link to this heading">#</a></h2>
-<p>We now cast our  representations <a class="reference internal" href="#equation-eqn-1">(5.1)</a> and <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, respectively,  in terms of the following two state
+<h2><span class="section-number">6.8. </span>State space representations<a class="headerlink" href="#state-space-representations" title="Link to this heading">#</a></h2>
+<p>We now cast our  representations <a class="reference internal" href="#equation-eqn-1">(6.1)</a> and <a class="reference internal" href="#equation-eqn-2">(6.2)</a>, respectively,  in terms of the following two state
 space systems:</p>
 <div class="math notranslate nohighlight" id="equation-eqstsp1">
-<span class="eqno">(5.4)<a class="headerlink" href="#equation-eqstsp1" title="Link to this equation">#</a></span>\[
+<span class="eqno">(6.4)<a class="headerlink" href="#equation-eqstsp1" title="Link to this equation">#</a></span>\[
 \begin{aligned}  \begin{bmatrix} y_{t+1} \cr \epsilon_{t+1} \end{bmatrix}  &amp;=
       \begin{bmatrix} 1 &amp; - \beta^{-1} \cr 0 &amp; 0 \end{bmatrix} \begin{bmatrix} y_t \cr \epsilon_t \end{bmatrix}
        + \begin{bmatrix} \sigma_\epsilon \cr \sigma_\epsilon \end{bmatrix}
@@ -794,7 +797,7 @@ y_t &amp; =  \begin{bmatrix} 1 &amp; 0 \end{bmatrix} \begin{bmatrix} y_t \cr \ep
 \]</div>
 <p>and</p>
 <div class="math notranslate nohighlight" id="equation-eqstsp2">
-<span class="eqno">(5.5)<a class="headerlink" href="#equation-eqstsp2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(6.5)<a class="headerlink" href="#equation-eqstsp2" title="Link to this equation">#</a></span>\[
 \begin{aligned}  \begin{bmatrix} y_{t+1} \cr a_{t+1} \end{bmatrix}  &amp;=
       \begin{bmatrix} 1 &amp; - \beta \cr 0 &amp; 0 \end{bmatrix} \begin{bmatrix} y_t \cr a_t \end{bmatrix}
        + \begin{bmatrix} \sigma_a \cr \sigma_a \end{bmatrix}
@@ -809,9 +812,9 @@ Equation Approach” in thid <a class="reference external" href="https://python-
 <p>All the code that we shall use below is presented in that lecture.</p>
 </section>
 <section id="computations">
-<h2><span class="section-number">5.9. </span>Computations<a class="headerlink" href="#computations" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.9. </span>Computations<a class="headerlink" href="#computations" title="Link to this heading">#</a></h2>
 <p>We shall use Python to form  two state-space
-representations <a class="reference internal" href="#equation-eqstsp1">(5.4)</a> and <a class="reference internal" href="#equation-eqstsp2">(5.5)</a>.</p>
+representations <a class="reference internal" href="#equation-eqstsp1">(6.4)</a> and <a class="reference internal" href="#equation-eqstsp2">(6.5)</a>.</p>
 <p>We set the following parameter values
 <span class="math notranslate nohighlight">\(\sigma_\epsilon = 1, \sigma_a = \beta^{-1} \sigma_\epsilon = \beta^{-1}\)</span>
 where <span class="math notranslate nohighlight">\(\beta\)</span> is the <strong>same</strong> value as the discount factor in the
@@ -966,7 +969,7 @@ c_{t}\end{array}\right]+\underset{\equiv C_{2}}{\underbrace{\left[\begin{array}{
 </div>
 </div>
 <p>Evidently, optimal consumption and debt decision rules for the consumer
-having news representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> are</p>
+having news representation <a class="reference internal" href="#equation-eqn-1">(6.1)</a> are</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -1004,7 +1007,7 @@ b_{t+1}^{*} &amp;=\beta^{-1}c_{t}^{*}+\beta^{-1}b_{t}-\beta^{-1}y_{t} \\
 </div>
 </div>
 <p>For a consumer having access only to the information associated with the
-innovations representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, the optimal decision rules are</p>
+innovations representation <a class="reference internal" href="#equation-eqn-2">(6.2)</a>, the optimal decision rules are</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -1016,7 +1019,7 @@ b_{t+1}^{*} &amp;= \beta^{-1}c_{t}^{*}+\beta^{-1}b_{t}-\beta^{-1}y_{t} \\
 \end{split}\]</div>
 <p>Now we construct two Linear State Space models that emerge from using
 optimal policies of the form <span class="math notranslate nohighlight">\(u_t =- F x_t\)</span>.</p>
-<p>Take the more informative original  representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a> as an example:</p>
+<p>Take the more informative original  representation <a class="reference internal" href="#equation-eqn-1">(6.1)</a> as an example:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \left[\begin{array}{c}
@@ -1044,7 +1047,7 @@ b_{t}
 \end{array}\right]
 \end{split}\]</div>
 <p>To have the Linear State Space model be of an innovations representation
-form <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, we can simply replace the corresponding matrices.</p>
+form <a class="reference internal" href="#equation-eqn-2">(6.2)</a>, we can simply replace the corresponding matrices.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Construct two Linear State Space models</span>
@@ -1102,14 +1105,14 @@ form <a class="reference internal" href="#equation-eqn-2">(5.2)</a>, we can simp
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f3f5d4abe00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbc5c79bb60&gt;
 </pre></div>
 </div>
 <img alt="_images/76b33f8ac4ba58add8b0be4f4fa38f121540f4d405bef1f85c211b228fab058f.png" src="_images/76b33f8ac4ba58add8b0be4f4fa38f121540f4d405bef1f85c211b228fab058f.png" />
 </div>
 </div>
 <p>The above two impulse response functions show that when the consumer has
-the information assumed in the more informative representation <a class="reference internal" href="#equation-eqn-1">(5.1)</a>, his response to
+the information assumed in the more informative representation <a class="reference internal" href="#equation-eqn-1">(6.1)</a>, his response to
 receiving a positive shock of <span class="math notranslate nohighlight">\(\epsilon_t\)</span> is to leave his
 consumption unchanged and to save the entire amount of his extra income
 and then forever roll over the extra bonds that he holds.</p>
@@ -1139,7 +1142,7 @@ permanently <strong>decreases</strong> by <span class="math notranslate nohighli
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f3f5d354b90&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbc5c648b90&gt;
 </pre></div>
 </div>
 <img alt="_images/03527f6c6d75474a2f96b82fcb097c9c324dde8b49a641f57af4b8031975446b.png" src="_images/03527f6c6d75474a2f96b82fcb097c9c324dde8b49a641f57af4b8031975446b.png" />
@@ -1147,7 +1150,7 @@ permanently <strong>decreases</strong> by <span class="math notranslate nohighli
 </div>
 <p>The above impulse responses show that when the consumer has only the
 information that is assumed to be available under the innovations
-representation <a class="reference internal" href="#equation-eqn-2">(5.2)</a> for <span class="math notranslate nohighlight">\(\{y_t - y_{t-1} \}\)</span>, he responds to a positive
+representation <a class="reference internal" href="#equation-eqn-2">(6.2)</a> for <span class="math notranslate nohighlight">\(\{y_t - y_{t-1} \}\)</span>, he responds to a positive
 <span class="math notranslate nohighlight">\(a_t\)</span> by <strong>permanently</strong> increasing his consumption.</p>
 <p>He accomplishes this by consuming a fraction <span class="math notranslate nohighlight">\((1 - \beta^2)\)</span> of
 the increment <span class="math notranslate nohighlight">\(a_t\)</span> to his nonfinancial income and saving the rest, thereby
@@ -1178,10 +1181,10 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f3f5caf3b10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbc57d27b10&gt;
 </pre></div>
 </div>
-<img alt="_images/cfd769881271ff1e96905346eaf1406086ef78b7cde9f43a8f1f6e44756a9be6.png" src="_images/cfd769881271ff1e96905346eaf1406086ef78b7cde9f43a8f1f6e44756a9be6.png" />
+<img alt="_images/d5e7681caad1b6734b2a3599c1d3a80912b7dee0ef0a0cf58a6e8bb0e4a38e27.png" src="_images/d5e7681caad1b6734b2a3599c1d3a80912b7dee0ef0a0cf58a6e8bb0e4a38e27.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1196,15 +1199,15 @@ of consumers while always presenting both types with the same
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f3f5cb6b4d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fbc57dd07d0&gt;
 </pre></div>
 </div>
-<img alt="_images/cd906d5aacee894a02c58fbc66363ecc4c0b29d337103d49659887b4bde6bb3a.png" src="_images/cd906d5aacee894a02c58fbc66363ecc4c0b29d337103d49659887b4bde6bb3a.png" />
+<img alt="_images/51f6fdfd8b8c035952dc05ae29d8fbdcd111576a74295296e70e0cfac0632d25.png" src="_images/51f6fdfd8b8c035952dc05ae29d8fbdcd111576a74295296e70e0cfac0632d25.png" />
 </div>
 </div>
 </section>
 <section id="simulating-income-process-and-two-associated-shock-processes">
-<h2><span class="section-number">5.10. </span>Simulating income process and two associated shock processes<a class="headerlink" href="#simulating-income-process-and-two-associated-shock-processes" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.10. </span>Simulating income process and two associated shock processes<a class="headerlink" href="#simulating-income-process-and-two-associated-shock-processes" title="Link to this heading">#</a></h2>
 <p>We now  form a <strong>single</strong> <span class="math notranslate nohighlight">\(\{y_t\}_{t=0}^T\)</span> realization
 that we will use to simulate decisions associated
 with our two types of consumer.</p>
@@ -1239,8 +1242,8 @@ two consumers having <strong>identical</strong> incomes at each date but at each
 having <strong>different</strong> information about their future incomes.</p>
 </section>
 <section id="calculating-innovations-in-another-way">
-<h2><span class="section-number">5.11. </span>Calculating innovations in another way<a class="headerlink" href="#calculating-innovations-in-another-way" title="Link to this heading">#</a></h2>
-<p>Here we use formula <a class="reference internal" href="#equation-eqn-3">(5.3)</a> above to compute <span class="math notranslate nohighlight">\(a_{t+1}\)</span> as a function
+<h2><span class="section-number">6.11. </span>Calculating innovations in another way<a class="headerlink" href="#calculating-innovations-in-another-way" title="Link to this heading">#</a></h2>
+<p>Here we use formula <a class="reference internal" href="#equation-eqn-3">(6.3)</a> above to compute <span class="math notranslate nohighlight">\(a_{t+1}\)</span> as a function
 of the history
 <span class="math notranslate nohighlight">\(\epsilon_{t+1}, \epsilon_t, \epsilon_{t-1}, \ldots\)</span></p>
 <p>Thus, we compute</p>
@@ -1259,11 +1262,11 @@ a_{t+1} &amp;=\beta a_{t}+\epsilon_{t+1}-\beta^{-1}\epsilon_{t} \\
 computed earlier.</p>
 </section>
 <section id="another-invertibility-issue">
-<h2><span class="section-number">5.12. </span>Another invertibility issue<a class="headerlink" href="#another-invertibility-issue" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">6.12. </span>Another invertibility issue<a class="headerlink" href="#another-invertibility-issue" title="Link to this heading">#</a></h2>
 <p>This <a class="reference internal" href="hs_invertibility_example.html"><span class="doc">quantecon lecture</span></a> contains another example of a shock-invertibility issue that is endemic
 to the LQ permanent income or consumption smoothing model.</p>
 <p>The technical issue discussed there is ultimately the source of the shock-invertibility issues discussed by
-Eric Leeper, Todd Walker, and Susan Yang <span id="id4">[<a class="reference internal" href="zreferences.html#id53" title="Eric M. Leeper, Todd B. Walker, and Shu‐Chun Susan Yang. Fiscal foresight and information flows. Econometrica, 81(3):1115-1145, May 2013.">Leeper <em>et al.</em>, 2013</a>]</span> in their  analysis of <strong>fiscal foresight</strong>.</p>
+Eric Leeper, Todd Walker, and Susan Yang <span class="bibtex-citation" id="id4">[<a class="reference internal" href="zreferences.html#id53" title="Eric M. Leeper, Todd B. Walker, and Shu‐Chun Susan Yang. Fiscal foresight and information flows. Econometrica, 81(3):1115-1145, May 2013.">Leeper <em>et al.</em>, 2013</a>]</span> in their  analysis of <strong>fiscal foresight</strong>.</p>
 </section>
 </section>
 
@@ -1335,13 +1338,18 @@ Eric Leeper, Todd Walker, and Susan Yang <span id="id4">[<a class="reference int
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="mcmc.html">
+   3. Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="muth_kalman.html">
-   3. Reverse Engineering a la Muth
+   4. Reverse Engineering a la Muth
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="discrete_dp.html">
-   4. Discrete State Dynamic Programming
+   5. Discrete State Dynamic Programming
   </a>
  </li>
 </ul>
@@ -1353,42 +1361,42 @@ Eric Leeper, Todd Walker, and Susan Yang <span id="id4">[<a class="reference int
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   5. Information and Consumption Smoothing
+   6. Information and Consumption Smoothing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing.html">
-   6. Consumption Smoothing with Complete and Incomplete Markets
+   7. Consumption Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing_tax.html">
-   7. Tax Smoothing with Complete and Incomplete Markets
+   8. Tax Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   8. Markov Jump Linear Quadratic Dynamic Programming
+   9. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   9. How to Pay for a War: Part 1
+   10. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   10. How to Pay for a War: Part 2
+   11. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   11. How to Pay for a War: Part 3
+   12. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   12. Optimal Taxation in an LQ Economy
+   13. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -1400,22 +1408,22 @@ Eric Leeper, Todd Walker, and Susan Yang <span id="id4">[<a class="reference int
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   13. Default Risk and Income Fluctuations
+   14. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   14. Globalization and Cycles
+   15. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   15. Coase’s Theory of the Firm
+   16. Coase’s Theory of the Firm
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="match_transport.html">
-   16. Composite Sorting
+   17. Composite Sorting
   </a>
  </li>
 </ul>
@@ -1427,47 +1435,47 @@ Eric Leeper, Todd Walker, and Susan Yang <span id="id4">[<a class="reference int
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   17. Recursive Models of Dynamic Linear Economies
+   18. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   18. Growth in Dynamic Linear Economies
+   19. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   19. Lucas Asset Pricing Using DLE
+   20. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   20. IRFs in Hall Models
+   21. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   21. Permanent Income Model using the DLE Class
+   22. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="gorman_heterogeneous_households.html">
-   22. Gorman Aggregation
+   23. Gorman Aggregation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   24. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   25. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   26. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -1479,22 +1487,22 @@ Eric Leeper, Todd Walker, and Susan Yang <span id="id4">[<a class="reference int
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   26. Risk and Model Uncertainty
+   27. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   27. Etymology of Entropy
+   28. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   28. Robustness
+   29. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   29. Robust Markov Perfect Equilibrium
+   30. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1506,42 +1514,42 @@ Eric Leeper, Todd Walker, and Susan Yang <span id="id4">[<a class="reference int
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   30. Covariance Stationary Processes
+   31. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   31. Estimation of Spectra
+   32. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   32. Additive and Multiplicative Functionals
+   33. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   33. Classical Control with Linear Algebra
+   34. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   34. Classical Prediction and Filtering With Linear Algebra
+   35. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   35. Knowing the Forecasts of Others
+   36. Knowing the Forecasts of Others
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_rational_expectations.html">
-   36. Demand for Money during Hyperinflations under Rational Expectations
+   37. Demand for Money during Hyperinflations under Rational Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="info_projection.html">
-   37. Hyperinflation and Information Projection
+   38. Hyperinflation and Information Projection
   </a>
  </li>
 </ul>
@@ -1553,47 +1561,47 @@ Eric Leeper, Todd Walker, and Susan Yang <span id="id4">[<a class="reference int
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   38. Asset Pricing II: The Lucas Asset Pricing Model
+   39. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   39. Elementary Asset Pricing Theory
+   40. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_richard_1987.html">
-   40. The Role of Conditioning Information in Asset Pricing
+   41. The Role of Conditioning Information in Asset Pricing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_jagannathan_1991.html">
-   41. The Hansen-Jagannathan Bound
+   42. The Hansen-Jagannathan Bound
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   42. Two Modifications of Mean-Variance Portfolio Theory
+   43. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="doubts_or_variability.html">
-   43. Doubts or Variability?
+   44. Doubts or Variability?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
-   44. Risk Aversion or Mistaken Beliefs?
+   45. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   45. Irrelevance of Capital Structures with Complete Markets
+   46. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   46. Equilibrium Capital Structures with Incomplete Markets
+   47. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1605,62 +1613,62 @@ Eric Leeper, Todd Walker, and Susan Yang <span id="id4">[<a class="reference int
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   47. Optimal Unemployment Insurance
+   48. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   48. Stackelberg Plans
+   49. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   49. Machine Learning a Ramsey Plan
+   50. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   50. Time Inconsistency of Ramsey Plans
+   51. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   51. Sustainable Plans for a Calvo Model
+   52. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   52. Optimal Taxation with State-Contingent Debt
+   53. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   53. Optimal Taxation without State-Contingent Debt
+   54. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   54. Fluctuating Interest Rates Deliver Fiscal Insurance
+   55. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   55. Fiscal Risk and Government Debt
+   56. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   56. Competitive Equilibria of a Model of Chang
+   57. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   57. Credible Government Policies in a Model of Chang
+   58. Credible Government Policies in a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dovis_accounting_mf.html">
-   58. Accounting for Monetary and Fiscal Policy
+   59. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -1672,17 +1680,17 @@ Eric Leeper, Todd Walker, and Susan Yang <span id="id4">[<a class="reference int
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   59. Troubleshooting
+   60. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   60. References
+   61. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   61. Execution Statistics
+   62. Execution Statistics
   </a>
  </li>
 </ul>
@@ -1726,6 +1734,8 @@ Eric Leeper, Todd Walker, and Susan Yang <span id="id4">[<a class="reference int
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/cons_news.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst" download><i data-feather="github"></i></a></li>
+                    
+                    
                 </ul>
 
             </div>

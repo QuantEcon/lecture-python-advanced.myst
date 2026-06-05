@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>55. Fiscal Risk and Government Debt &#8212; Advanced Quantitative Economics with Python</title>
+    <title>56. Fiscal Risk and Government Debt &#8212; Advanced Quantitative Economics with Python</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -77,7 +77,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=ff5dcadef89fd2097ea5e28ddaad7eb5985f09c4" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -131,8 +131,8 @@
     <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="56. Competitive Equilibria of a Model of Chang" href="chang_ramsey.html" />
-    <link rel="prev" title="54. Fluctuating Interest Rates Deliver Fiscal Insurance" href="amss2.html" />
+    <link rel="next" title="57. Competitive Equilibria of a Model of Chang" href="chang_ramsey.html" />
+    <link rel="prev" title="55. Fluctuating Interest Rates Deliver Fiscal Insurance" href="amss2.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -155,6 +155,9 @@
 <meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
 <meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
 <meta name="theme-color" content="#ffffff" />
+
+
+
 
   </head>
 <body>
@@ -204,29 +207,29 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">55.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-economy">55.2. The economy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-and-second-moments">55.2.1. First and second moments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">56.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-economy">56.2. The economy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#first-and-second-moments">56.2.1. First and second moments</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-simulation">55.3. Long simulation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asymptotic-mean-and-rate-of-convergence">55.4. Asymptotic mean and rate of convergence</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#asymptotic-mean">55.4.1. Asymptotic mean</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rate-of-convergence">55.4.2. Rate of convergence</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-advanced-topic">55.4.3. More advanced topic</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chicken-and-egg">55.4.4. Chicken and egg</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approximating-the-ergodic-mean">55.4.5. Approximating the ergodic mean</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step">55.4.6. Step by step</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution">55.4.7. Execution</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1">55.4.7.1. Step 1</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2">55.4.7.2. Step 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#long-simulation">56.3. Long simulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asymptotic-mean-and-rate-of-convergence">56.4. Asymptotic mean and rate of convergence</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#asymptotic-mean">56.4.1. Asymptotic mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rate-of-convergence">56.4.2. Rate of convergence</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#more-advanced-topic">56.4.3. More advanced topic</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chicken-and-egg">56.4.4. Chicken and egg</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approximating-the-ergodic-mean">56.4.5. Approximating the ergodic mean</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step">56.4.6. Step by step</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execution">56.4.7. Execution</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1">56.4.7.1. Step 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2">56.4.7.2. Step 2</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-about-code">55.4.8. Note about code</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-code">55.4.9. Running the code</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3">55.4.9.1. Step 3</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4">55.4.9.2. Step 4</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6">55.4.9.3. Step 6</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#note-about-code">56.4.8. Note about code</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#running-the-code">56.4.9. Running the code</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3">56.4.9.1. Step 3</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4">56.4.9.2. Step 4</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#step-6">56.4.9.3. Step 6</a></li>
 </ul>
 </li>
 </ul>
@@ -298,7 +301,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/8c84d8da" class="changelog-hash">8c84d8da</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">1 month ago</span>
+                                <span class="changelog-time">3 months ago</span>
                                 <span class="changelog-message">[amss] Update Tom's edits to AMSS and Calvo Lectures (#312)</span>
                             </li>
                             
@@ -307,7 +310,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">7 months ago</span>
+                                <span class="changelog-time">9 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -352,7 +355,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/48204872" class="changelog-hash">48204872</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">ENH: Enable Execution, GitHub Actions, update config.yml (#4)</span>
                             </li>
                             
@@ -361,7 +364,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/f6dcddbe" class="changelog-hash">f6dcddbe</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">migrate latest sources from lecture-python-advanced (f82c31f1d31652f89065a51bd684cd6b81451bea)</span>
                             </li>
                             
@@ -370,7 +373,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/3a67d951" class="changelog-hash">3a67d951</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">Revert "migrate new sources from lecture-python using sphinx-tomyst (f772bb0)"</span>
                             </li>
                             
@@ -379,7 +382,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/1b59fbe6" class="changelog-hash">1b59fbe6</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">migrate new sources from lecture-python using sphinx-tomyst (f772bb0)</span>
                             </li>
                             
@@ -400,11 +403,11 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="fiscal-risk-and-government-debt">
-<h1><span class="section-number">55. </span>Fiscal Risk and Government Debt<a class="headerlink" href="#fiscal-risk-and-government-debt" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">56. </span>Fiscal Risk and Government Debt<a class="headerlink" href="#fiscal-risk-and-government-debt" title="Link to this heading">#</a></h1>
 <section id="overview">
-<h2><span class="section-number">55.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">56.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This lecture studies government debt in an AMSS
-economy <span id="id1">[<a class="reference internal" href="zreferences.html#id150" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span> of the type described in <a class="reference internal" href="amss.html"><span class="doc">Optimal Taxation without State-Contingent Debt</span></a>.</p>
+economy <span class="bibtex-citation" id="id1">[<a class="reference internal" href="zreferences.html#id150" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span> of the type described in <a class="reference internal" href="amss.html"><span class="doc">Optimal Taxation without State-Contingent Debt</span></a>.</p>
 <p>We study the behavior of government debt  as time <span class="math notranslate nohighlight">\(t \rightarrow + \infty\)</span>.</p>
 <p>We use these techniques</p>
 <ul class="simple">
@@ -415,8 +418,8 @@ a fiscal-risk minimization  problem</p></li>
 <li><p>an approximation  to the <strong>rate of convergence</strong> to an ergodic distribution of government debt</p></li>
 </ul>
 <p>We apply tools that are applicable to  more general incomplete markets economies that are presented on pages 648 - 650 in section III.D
-of <span id="id2">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> (BEGS).</p>
-<p>We study an AMSS economy <span id="id3">[<a class="reference internal" href="zreferences.html#id150" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span>  with  three Markov states driving government expenditures.</p>
+of <span class="bibtex-citation" id="id2">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> (BEGS).</p>
+<p>We study an AMSS economy <span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id150" title="S Rao Aiyagari, Albert Marcet, Thomas J Sargent, and Juha Seppälä. Optimal taxation without state-contingent debt. Journal of Political Economy, 110(6):1220–1254, 2002.">Aiyagari <em>et al.</em>, 2002</a>]</span>  with  three Markov states driving government expenditures.</p>
 <ul class="simple">
 <li><p>In a <a class="reference internal" href="amss2.html"><span class="doc">previous lecture</span></a>, we showed that with only two Markov states, it is possible that  endogenous
 interest rate fluctuations eventually can support complete markets allocations and Ramsey outcomes.</p></li>
@@ -425,14 +428,14 @@ interest rate fluctuations eventually can support complete markets allocations a
 </ul>
 <p>The lack of full spanning means that the ergodic distribution of the par value of government debt is nontrivial, in contrast to the situation
 in <a class="reference internal" href="amss2.html"><span class="doc">Fiscal Insurance via Fluctuating Interest Rates</span></a>  in which the ergodic distribution of the par value of government debt is concentrated on one point.</p>
-<p>Nevertheless,   <span id="id4">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> (BEGS) establish that, for general settings that include ours, the Ramsey
+<p>Nevertheless,   <span class="bibtex-citation" id="id4">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> (BEGS) establish that, for general settings that include ours, the Ramsey
 planner steers government assets to a level that comes
 <strong>as close as possible</strong> to providing full spanning in a precise a sense defined by
 BEGS that we describe below.</p>
 <p>We use code constructed in <a class="reference internal" href="amss2.html"><span class="doc">Fluctuating Interest Rates Deliver Fiscal Insurance</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>Warning:</strong> Key equations in  <span id="id5">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> section III.D carry  typos  that we correct below.</p>
+<p><strong>Warning:</strong> Key equations in  <span class="bibtex-citation" id="id5">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> section III.D carry  typos  that we correct below.</p>
 </div>
 <p>In addition to what’s in Anaconda, this lecture will need the following libraries:</p>
 <div class="cell tag_hide-output docutils container">
@@ -475,7 +478,7 @@ Requirement already satisfied: mpmath&lt;1.4,&gt;=1.1.0 in /home/runner/minicond
 </div>
 </section>
 <section id="the-economy">
-<h2><span class="section-number">55.2. </span>The economy<a class="headerlink" href="#the-economy" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">56.2. </span>The economy<a class="headerlink" href="#the-economy" title="Link to this heading">#</a></h2>
 <p>As in <a class="reference internal" href="amss.html"><span class="doc">Optimal Taxation without State-Contingent Debt</span></a> and <a class="reference internal" href="opt_tax_recur.html"><span class="doc">Optimal Taxation with State-Contingent Debt</span></a>,
 we assume that the  representative agent has  utility function</p>
 <div class="math notranslate nohighlight">
@@ -548,7 +551,7 @@ in Markov state <span class="math notranslate nohighlight">\(2\)</span>.</p>
 </div>
 </div>
 <section id="first-and-second-moments">
-<h3><span class="section-number">55.2.1. </span>First and second moments<a class="headerlink" href="#first-and-second-moments" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">56.2.1. </span>First and second moments<a class="headerlink" href="#first-and-second-moments" title="Link to this heading">#</a></h3>
 <p>We’ll want  first and second moments of some key random variables below.</p>
 <p>The following code computes these moments; the code is recycled from <a class="reference internal" href="amss2.html"><span class="doc">Fluctuating Interest Rates Deliver Fiscal Insurance</span></a>.</p>
 <div class="cell docutils container">
@@ -572,7 +575,7 @@ in Markov state <span class="math notranslate nohighlight">\(2\)</span>.</p>
 </section>
 </section>
 <section id="long-simulation">
-<h2><span class="section-number">55.3. </span>Long simulation<a class="headerlink" href="#long-simulation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">56.3. </span>Long simulation<a class="headerlink" href="#long-simulation" title="Link to this heading">#</a></h2>
 <p>To generate a long simulation we use the following code.</p>
 <p>We begin by showing the code that we used in earlier lectures on the AMSS model.</p>
 <p>Here it is</p>
@@ -1159,172 +1162,172 @@ government debt equal to <span class="math notranslate nohighlight">\(-.5\)</spa
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.03826635338766031
-0.0015144378246633975
-0.0013387575050011703
-0.0011833202400606977
-0.001060030711610078
-0.0009506620324953097
-0.0008518776517152647
-0.0007625857030975078
-0.0006819563061650726
-0.0006094002927228304
-0.0005443007356791328
-0.0004859950034335593
-0.0004338395936065102
-0.00038722730865661624
-0.00034559541218057144
-0.000308428706455719
-0.00027525901875919735
-0.0002456631292008832
-0.0002192598853397323
-0.00019570695819278925
-0.0001746975164147933
-0.00015595697132325098
-0.00013923987965164453
-0.00012432704760488168
-0.00011102285955635174
-9.91528320594133e-05
-8.856139177374065e-05
-7.910986485263641e-05
-7.067466534180942e-05
-6.31456673740224e-05
-5.6424746008099005e-05
-5.042447142136743e-05
-4.506694213168145e-05
-4.028274354659365e-05
-3.601001916880858e-05
-3.2193642875745675e-05
-2.8784481580270156e-05
-2.5738738359095524e-05
-2.3017369975256154e-05
-2.058556253714682e-05
-1.8412273759209613e-05
-1.6470096746379876e-05
-1.4734148498408763e-05
-1.3182214370743565e-05
-1.1794654652297077e-05
-1.0553942942397325e-05
-9.44443618081011e-06
-8.452171104937481e-06
-7.564681589746089e-06
-6.7708366540474565e-06
-6.060699119620397e-06
-5.425387626743066e-06
-4.8569775638600665e-06
-4.348382704738655e-06
-3.893276484145665e-06
-3.4860028293382954e-06
-3.1215110752406155e-06
-2.7952840322028845e-06
-2.5032842513727898e-06
-2.2419047521059477e-06
-2.007920927886347e-06
-1.7984472230796523e-06
-1.6109041474834758e-06
-1.4429883241426704e-06
-1.2926354381463588e-06
-1.1580011912732574e-06
-1.037436221051176e-06
-9.294651196623644e-07
-8.327667017053168e-07
-7.461586144266338e-07
-6.685859231377543e-07
-5.991019097450184e-07
-5.368602186571289e-07
-4.811038962079893e-07
-4.3115432217368045e-07
-3.8640501090989056e-07
-3.4631275219828915e-07
-3.1039146994099103e-07
-2.782060656892269e-07
-2.49366543731719e-07
-2.2352416576466108e-07
-2.0036658823839398e-07
-1.7961407488624394e-07
-1.610161397020598e-07
-1.4434846754337054e-07
-1.2941019574658054e-07
-1.1602139588341936e-07
-1.0402094098285637e-07
-9.326449726076072e-08
-8.362278205694752e-08
-7.497999439495835e-08
-6.723238398031929e-08
-6.028699483660221e-08
-5.406058621051203e-08
-4.8478551925311946e-08
-4.3474053512268814e-08
-3.898720299459575e-08
-3.496433801898764e-08
-3.1357372783387415e-08
-2.812321780031549e-08
-2.5223258441212557e-08
-2.2622888704172947e-08
-2.0291095100494236e-08
-1.8200080914720468e-08
-1.6324934860256734e-08
-1.464332680535175e-08
-1.3135241707231364e-08
-1.1782739997991543e-08
-1.056974055504851e-08
-9.48182749371193e-09
-8.506076759969464e-09
-7.630904225104094e-09
-6.845924608538143e-09
-6.141824632108061e-09
-5.510256593395876e-09
-4.943736270340475e-09
-4.435553000071471e-09
-3.979735061358244e-09
-3.570830522522477e-09
-3.204002620548308e-09
-2.874915454744057e-09
-2.579678817524821e-09
-2.3148061976226993e-09
-2.077168444132562e-09
-1.863962307657663e-09
-1.6726706130773501e-09
-1.501039169055409e-09
-1.347042984624459e-09
-1.2088672079043753e-09
-1.0848848104513637e-09
-9.736356663339511e-10
-8.738099703636526e-10
-7.842324311737691e-10
-7.038508034534018e-10
-6.317177564765779e-10
-5.669876197376295e-10
-5.088985614189293e-10
-4.567685591760585e-10
-4.099850171582598e-10
-3.6799980697385356e-10
-3.30318884710216e-10
-2.965013611152784e-10
-2.661503583761118e-10
-2.3890975575222585e-10
-2.1446093520878282e-10
-1.9251642765246126e-10
-1.7282068778100674e-10
-1.5514234559021585e-10
-1.3927374146449217e-10
-1.2503123611669634e-10
-1.1224575742653033e-10
-1.0076946414477397e-10
-9.046877224946113e-11
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.03826635338765805
+0.0015144378246646213
+0.0013387575050005551
+0.001183320240060235
+0.0010600307116149842
+0.0009506620324965376
+0.0008518776517103562
+0.0007625857030981207
+0.0006819563061644592
+0.0006094002927246723
+0.000544300735683588
+0.00048599500344186097
+0.00043383959359175587
+0.00038722730865846193
+0.00034559541218118743
+0.0003084287064560275
+0.0002752590187599679
+0.0002456631291981115
+0.00021925988533896205
+0.00019570695819417602
+0.00017469751641710537
+0.00015595697131508135
+0.00013923987965981527
+0.0001243270476028775
+0.000111022859555735
+9.915283206188114e-05
+8.856139177389518e-05
+7.910986485741885e-05
+7.067466533656458e-05
+6.314566737494829e-05
+5.6424746008407806e-05
+5.0424471419824574e-05
+4.5066942130909994e-05
+4.028274354443323e-05
+3.601001916927154e-05
+3.219364287651734e-05
+2.878448109827448e-05
+2.5738738817941433e-05
+2.301736974543472e-05
+2.058556276048516e-05
+1.8412273625385424e-05
+1.647009710922133e-05
+1.4734148316519437e-05
+1.3182214477774174e-05
+1.1794654617959527e-05
+1.0553942967144757e-05
+9.444436171065272e-06
+8.45217111839416e-06
+7.564681592684837e-06
+6.770836646468004e-06
+6.06069914050222e-06
+5.425387641592539e-06
+4.856977551794837e-06
+4.348382694838883e-06
+3.893276485228412e-06
+3.486002807991714e-06
+3.121511071528061e-06
+2.7952840759789614e-06
+2.5032842518368702e-06
+2.2419047650996715e-06
+2.0079209195332767e-06
+1.7984472184390483e-06
+1.6109041576928908e-06
+1.4429883272364606e-06
+1.2926354404667128e-06
+1.158001195449877e-06
+1.037436223835603e-06
+9.29465129871861e-07
+8.32766064231798e-07
+7.461585776101659e-07
+6.685866190844424e-07
+5.991017366476262e-07
+5.368606486938385e-07
+4.811037042383894e-07
+4.311543368692518e-07
+3.864049980706999e-07
+3.463127407512913e-07
+3.1039146081432833e-07
+2.782060573360044e-07
+2.493665378535275e-07
+2.2352416174274364e-07
+2.0036659427132175e-07
+1.796140303355363e-07
+1.6101611881891214e-07
+1.4434845485878936e-07
+1.294101903324298e-07
+1.1602140330854637e-07
+1.0402095846284336e-07
+9.326450716093373e-08
+8.362279118367109e-08
+7.497999547779389e-08
+6.723237794740599e-08
+6.028699700226813e-08
+5.406058976838973e-08
+4.8478556720711414e-08
+4.347405815297821e-08
+3.898720809937592e-08
+3.496434265969722e-08
+3.1357377269406795e-08
+2.8123221822264156e-08
+2.5223261844400204e-08
+2.262289195267028e-08
+2.029109757554022e-08
+1.8200083080385833e-08
+1.6324936716541472e-08
+1.4643328042875322e-08
+1.3135242790064553e-08
+1.1782741235514893e-08
+1.056974101912041e-08
+9.481827803093455e-09
+8.506077069350894e-09
+7.630904998556262e-09
+6.845924144468031e-09
+6.141824168037869e-09
+5.510256284015891e-09
+4.943736270340987e-09
+4.435552845101199e-09
+3.979734906388014e-09
+3.5708292827632703e-09
+3.204002775517863e-09
+2.8749148348643445e-09
+2.5796781976451324e-09
+2.314805887682755e-09
+2.0771684441323618e-09
+1.8639629275369294e-09
+1.6726716978662228e-09
+1.5010407187538879e-09
+1.3470445343229568e-09
+1.2088696874220652e-09
+1.0848871349992079e-09
+9.736387657311246e-10
+8.738127598211142e-10
+7.842361504504221e-10
+7.038535929108868e-10
+6.317217856929795e-10
+5.669911840444504e-10
+5.089022806956216e-10
+4.5677212348289417e-10
+4.099887364349653e-10
+3.680029063711092e-10
+3.3032229404720363e-10
+2.9650477045226995e-10
+2.66152992863787e-10
+2.389123902399036e-10
+2.1446372466632687e-10
+1.9251890717027918e-10
+1.728228573590981e-10
+1.551443601984444e-10
+1.3927606601245015e-10
+1.2503247587560616e-10
+1.1224808197449018e-10
+1.0077116881327777e-10
+9.047016697823706e-11
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7450/108196118.py:24: RuntimeWarning: divide by zero encountered in reciprocal
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_7240/108196118.py:24: RuntimeWarning: divide by zero encountered in reciprocal
   U = (c**(1 - σ) - 1) / (1 - σ)
-/tmp/ipykernel_7450/108196118.py:29: RuntimeWarning: divide by zero encountered in power
+/tmp/ipykernel_7240/108196118.py:29: RuntimeWarning: divide by zero encountered in power
   return c**(-self.σ)
-/tmp/ipykernel_7450/1565228915.py:249: RuntimeWarning: invalid value encountered in divide
+/tmp/ipykernel_7240/1565228915.py:249: RuntimeWarning: invalid value encountered in divide
   x * u_c / Eu_c - u_c * (c - T) - Un(c, n) * n - β * xprime,
-/tmp/ipykernel_7450/1565228915.py:249: RuntimeWarning: invalid value encountered in multiply
+/tmp/ipykernel_7240/1565228915.py:249: RuntimeWarning: invalid value encountered in multiply
   x * u_c / Eu_c - u_c * (c - T) - Un(c, n) * n - β * xprime,
 </pre></div>
 </div>
-<img alt="_images/b07ffedae8ff3e0c2598141b32df45a84487b2f0bc5c0619611951cc1666b322.png" src="_images/b07ffedae8ff3e0c2598141b32df45a84487b2f0bc5c0619611951cc1666b322.png" />
+<img alt="_images/906ba8f6da871e6da50d85672b2ca1efee909fe296d063eb04aac68c3d4b10d2.png" src="_images/906ba8f6da871e6da50d85672b2ca1efee909fe296d063eb04aac68c3d4b10d2.png" />
 </div>
 </div>
 <figure class="align-default">
@@ -1332,7 +1335,7 @@ government debt equal to <span class="math notranslate nohighlight">\(-.5\)</spa
 </figure>
 <p>The long simulation apparently  indicates eventual convergence to an ergodic distribution.</p>
 <p>It takes about 1000 periods to reach the ergodic distribution – an outcome that is forecast by
-approximations to rates of convergence that appear in BEGS <span id="id6">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> and that we discuss in <a class="reference internal" href="amss2.html"><span class="doc">Fluctuating Interest Rates Deliver Fiscal Insurance</span></a>.</p>
+approximations to rates of convergence that appear in BEGS <span class="bibtex-citation" id="id6">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> and that we discuss in <a class="reference internal" href="amss2.html"><span class="doc">Fluctuating Interest Rates Deliver Fiscal Insurance</span></a>.</p>
 <p>Let’s discard the first 2000 observations of the simulation and construct the histogram of
 the par value of government debt.</p>
 <p>We obtain the following graph for the histogram of the last 100,000 observations on the par value of government debt.</p>
@@ -1341,7 +1344,7 @@ the par value of government debt.</p>
 </figure>
 <p>The  black vertical line denotes the sample mean for the last 100,000 observations included in the histogram; the  green vertical line denotes the
 value of <span class="math notranslate nohighlight">\(\frac{ {\mathcal B}^*}{E u_c}\)</span>, associated with a sample from our approximation to
-the ergodic distribution where <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> is a regression coefficient to be described below;  the red vertical line denotes an approximation by <span id="id7">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> to the mean of the ergodic
+the ergodic distribution where <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> is a regression coefficient to be described below;  the red vertical line denotes an approximation by <span class="bibtex-citation" id="id7">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> to the mean of the ergodic
 distribution that can be computed <strong>before</strong>  the ergodic distribution has been approximated, as described below.</p>
 <p>Before moving on to discuss the histogram and the vertical lines approximating the ergodic  mean of government debt in more detail, the following graphs show
 government debt and taxes early in the simulation, for periods 1-100 and 101 to 200
@@ -1370,7 +1373,7 @@ respectively.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3422312b3135c84b86cf9e54b7a5a38f572fa6504645e719fcf1ce1f6722522f.png" src="_images/3422312b3135c84b86cf9e54b7a5a38f572fa6504645e719fcf1ce1f6722522f.png" />
+<img alt="_images/0f703fcf21ad12530f279b35bb36819e250c541efdaf4c235a6dc6d44bada0c2.png" src="_images/0f703fcf21ad12530f279b35bb36819e250c541efdaf4c235a6dc6d44bada0c2.png" />
 </div>
 </div>
 <figure class="align-default">
@@ -1385,17 +1388,17 @@ these early observations</p>
 </ul>
 </section>
 <section id="asymptotic-mean-and-rate-of-convergence">
-<h2><span class="section-number">55.4. </span>Asymptotic mean and rate of convergence<a class="headerlink" href="#asymptotic-mean-and-rate-of-convergence" title="Link to this heading">#</a></h2>
-<p>We apply the results of BEGS <span id="id8">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> to interpret</p>
+<h2><span class="section-number">56.4. </span>Asymptotic mean and rate of convergence<a class="headerlink" href="#asymptotic-mean-and-rate-of-convergence" title="Link to this heading">#</a></h2>
+<p>We apply the results of BEGS <span class="bibtex-citation" id="id8">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> to interpret</p>
 <ul class="simple">
 <li><p>the mean of the ergodic distribution of government debt</p></li>
 <li><p>the rate of convergence  to the ergodic distribution from an arbitrary initial government debt</p></li>
 </ul>
 <p>We begin by computing  objects required by the theory of section III.i
-of BEGS <span id="id9">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
-<p>As in <a class="reference internal" href="amss2.html"><span class="doc">Fiscal Insurance via Fluctuating Interest Rates</span></a>, we recall  that  BEGS <span id="id10">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> used a particular
+of BEGS <span class="bibtex-citation" id="id9">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
+<p>As in <a class="reference internal" href="amss2.html"><span class="doc">Fiscal Insurance via Fluctuating Interest Rates</span></a>, we recall  that  BEGS <span class="bibtex-citation" id="id10">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> used a particular
 notation to represent what we can regard as their  generalization of an AMSS model.</p>
-<p>We introduce some of the  <span id="id11">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> notation so that readers can quickly relate notation that appears in key BEGS formulas to the notation
+<p>We introduce some of the  <span class="bibtex-citation" id="id11">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> notation so that readers can quickly relate notation that appears in key BEGS formulas to the notation
 that we have used in previous lectures <a class="reference internal" href="amss.html"><span class="doc">here</span></a> and <a class="reference internal" href="amss2.html"><span class="doc">here</span></a>.</p>
 <p>BEGS work with objects <span class="math notranslate nohighlight">\(B_t, {\mathcal B}_t, {\mathcal R}_t, {\mathcal X}_t\)</span> that are related to  notation that we used in
 earlier lectures by</p>
@@ -1409,59 +1412,59 @@ b_t(s^{t-1}) &amp; = {\mathcal R}_{t-1} B_{t-1} \\
 {\mathcal X}_t &amp; = u_{c,t} [g_t - \tau_t n_t]
 \end{aligned}
 \end{split}\]</div>
-<p>BEGS <span id="id12">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> call <span class="math notranslate nohighlight">\({\mathcal X}_t\)</span> the <strong>effective</strong> government deficit and <span class="math notranslate nohighlight">\({\mathcal B}_t\)</span> the <strong>effective</strong> government debt.</p>
-<p>Equation (44) of <span id="id13">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> expresses the time <span class="math notranslate nohighlight">\(t\)</span> state <span class="math notranslate nohighlight">\(s\)</span> government budget constraint as</p>
+<p>BEGS <span class="bibtex-citation" id="id12">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> call <span class="math notranslate nohighlight">\({\mathcal X}_t\)</span> the <strong>effective</strong> government deficit and <span class="math notranslate nohighlight">\({\mathcal B}_t\)</span> the <strong>effective</strong> government debt.</p>
+<p>Equation (44) of <span class="bibtex-citation" id="id13">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> expresses the time <span class="math notranslate nohighlight">\(t\)</span> state <span class="math notranslate nohighlight">\(s\)</span> government budget constraint as</p>
 <div class="math notranslate nohighlight" id="equation-eq-fiscal-risk-1">
-<span class="eqno">(55.1)<a class="headerlink" href="#equation-eq-fiscal-risk-1" title="Link to this equation">#</a></span>\[{\mathcal B}(s) = {\mathcal R}_\tau(s, s_{-}) {\mathcal B}_{-} + {\mathcal X}_{\tau} (s)\]</div>
+<span class="eqno">(56.1)<a class="headerlink" href="#equation-eq-fiscal-risk-1" title="Link to this equation">#</a></span>\[{\mathcal B}(s) = {\mathcal R}_\tau(s, s_{-}) {\mathcal B}_{-} + {\mathcal X}_{\tau} (s)\]</div>
 <p>where the dependence on <span class="math notranslate nohighlight">\(\tau\)</span> is meant to remind us that these objects depend on the tax rate;  <span class="math notranslate nohighlight">\(s_{-}\)</span> is last period’s Markov state.</p>
-<p>BEGS interpret random variations in the right side of <a class="reference internal" href="#equation-eq-fiscal-risk-1">(55.1)</a>  as <strong>fiscal risks</strong> generated by</p>
+<p>BEGS interpret random variations in the right side of <a class="reference internal" href="#equation-eq-fiscal-risk-1">(56.1)</a>  as <strong>fiscal risks</strong> generated by</p>
 <ul class="simple">
 <li><p>interest-rate-driven fluctuations in time <span class="math notranslate nohighlight">\(t\)</span> effective payments due on the government portfolio, namely,
 <span class="math notranslate nohighlight">\({\mathcal R}_\tau(s, s_{-}) {\mathcal B}_{-}\)</span>,  and</p></li>
 <li><p>fluctuations in the effective government deficit <span class="math notranslate nohighlight">\({\mathcal X}_t\)</span></p></li>
 </ul>
 <section id="asymptotic-mean">
-<h3><span class="section-number">55.4.1. </span>Asymptotic mean<a class="headerlink" href="#asymptotic-mean" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">56.4.1. </span>Asymptotic mean<a class="headerlink" href="#asymptotic-mean" title="Link to this heading">#</a></h3>
 <p>BEGS give conditions under which the ergodic mean of <span class="math notranslate nohighlight">\({\mathcal B}_t\)</span> is approximated by</p>
 <div class="math notranslate nohighlight" id="equation-prelim-formula-1">
-<span class="eqno">(55.2)<a class="headerlink" href="#equation-prelim-formula-1" title="Link to this equation">#</a></span>\[{\mathcal B}^* = - \frac{\rm cov^{\infty}({\mathcal R}_t, {\mathcal X_t})}{\rm var^{\infty}({\mathcal R}_t)}\]</div>
+<span class="eqno">(56.2)<a class="headerlink" href="#equation-prelim-formula-1" title="Link to this equation">#</a></span>\[{\mathcal B}^* = - \frac{\rm cov^{\infty}({\mathcal R}_t, {\mathcal X_t})}{\rm var^{\infty}({\mathcal R}_t)}\]</div>
 <p>where the superscript <span class="math notranslate nohighlight">\(\infty\)</span> denotes a moment taken with respect to an ergodic distribution.</p>
-<p>Formula <a class="reference internal" href="#equation-prelim-formula-1">(55.2)</a> represents <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> as a regression coefficient of <span class="math notranslate nohighlight">\({\mathcal X}_t\)</span> on <span class="math notranslate nohighlight">\({\mathcal R}_t\)</span> in the ergodic
+<p>Formula <a class="reference internal" href="#equation-prelim-formula-1">(56.2)</a> represents <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> as a regression coefficient of <span class="math notranslate nohighlight">\({\mathcal X}_t\)</span> on <span class="math notranslate nohighlight">\({\mathcal R}_t\)</span> in the ergodic
 distribution.</p>
 <p>Regression coefficient <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> solves  a variance-minimization problem:</p>
 <div class="math notranslate nohighlight" id="equation-eq-criterion-fiscal-1">
-<span class="eqno">(55.3)<a class="headerlink" href="#equation-eq-criterion-fiscal-1" title="Link to this equation">#</a></span>\[{\mathcal B}^* = {\rm argmin}_{\mathcal B}  {\rm var}^\infty ({\mathcal R} {\mathcal B} + {\mathcal X})\]</div>
-<p>The minimand in criterion <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(55.3)</a>  measures  <strong>fiscal risk</strong> associated with a given tax-debt policy that appears on the right side
-of equation <a class="reference internal" href="#equation-eq-fiscal-risk-1">(55.1)</a>.</p>
-<p>Expressing formula <a class="reference internal" href="#equation-prelim-formula-1">(55.2)</a> in terms of  our notation tells us that the ergodic mean of the par value <span class="math notranslate nohighlight">\(b\)</span> of government debt in the
+<span class="eqno">(56.3)<a class="headerlink" href="#equation-eq-criterion-fiscal-1" title="Link to this equation">#</a></span>\[{\mathcal B}^* = {\rm argmin}_{\mathcal B}  {\rm var}^\infty ({\mathcal R} {\mathcal B} + {\mathcal X})\]</div>
+<p>The minimand in criterion <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(56.3)</a>  measures  <strong>fiscal risk</strong> associated with a given tax-debt policy that appears on the right side
+of equation <a class="reference internal" href="#equation-eq-fiscal-risk-1">(56.1)</a>.</p>
+<p>Expressing formula <a class="reference internal" href="#equation-prelim-formula-1">(56.2)</a> in terms of  our notation tells us that the ergodic mean of the par value <span class="math notranslate nohighlight">\(b\)</span> of government debt in the
 AMSS model should be approximately</p>
 <div class="math notranslate nohighlight" id="equation-key-formula-1">
-<span class="eqno">(55.4)<a class="headerlink" href="#equation-key-formula-1" title="Link to this equation">#</a></span>\[\hat b = \frac{\mathcal B^*}{\beta E( E_t u_{c,t+1})} = \frac{\mathcal B^*}{\beta E( u_{c,t+1} )}\]</div>
+<span class="eqno">(56.4)<a class="headerlink" href="#equation-key-formula-1" title="Link to this equation">#</a></span>\[\hat b = \frac{\mathcal B^*}{\beta E( E_t u_{c,t+1})} = \frac{\mathcal B^*}{\beta E( u_{c,t+1} )}\]</div>
 <p>where mathematical expectations are taken with respect to the ergodic distribution.</p>
 </section>
 <section id="rate-of-convergence">
-<h3><span class="section-number">55.4.2. </span>Rate of convergence<a class="headerlink" href="#rate-of-convergence" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">56.4.2. </span>Rate of convergence<a class="headerlink" href="#rate-of-convergence" title="Link to this heading">#</a></h3>
 <p>BEGS also derive the following  approximation to the rate of convergence to <span class="math notranslate nohighlight">\({\mathcal B}^{*}\)</span> from an arbitrary initial condition.</p>
 <blockquote>
 <div><div class="math notranslate nohighlight" id="equation-rate-of-convergence-1">
-<span class="eqno">(55.5)<a class="headerlink" href="#equation-rate-of-convergence-1" title="Link to this equation">#</a></span>\[\frac{ E_t  ( {\mathcal B}_{t+1} - {\mathcal B}^{*} )} { ( {\mathcal B}_{t} - {\mathcal B}^{*} )} \approx \frac{1}{1 + \beta^2 {\rm var}^\infty ({\mathcal R} )}\]</div>
+<span class="eqno">(56.5)<a class="headerlink" href="#equation-rate-of-convergence-1" title="Link to this equation">#</a></span>\[\frac{ E_t  ( {\mathcal B}_{t+1} - {\mathcal B}^{*} )} { ( {\mathcal B}_{t} - {\mathcal B}^{*} )} \approx \frac{1}{1 + \beta^2 {\rm var}^\infty ({\mathcal R} )}\]</div>
 </div></blockquote>
-<p>(See the equation above equation (47) in BEGS <span id="id14">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>)</p>
+<p>(See the equation above equation (47) in BEGS <span class="bibtex-citation" id="id14">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>)</p>
 </section>
 <section id="more-advanced-topic">
-<h3><span class="section-number">55.4.3. </span>More advanced topic<a class="headerlink" href="#more-advanced-topic" title="Link to this heading">#</a></h3>
-<p>The remainder of this lecture is about  technical material based on  formulas from BEGS <span id="id15">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
-<p>The topic involves interpreting  and extending formula <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(55.3)</a> for the ergodic mean <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span>.</p>
+<h3><span class="section-number">56.4.3. </span>More advanced topic<a class="headerlink" href="#more-advanced-topic" title="Link to this heading">#</a></h3>
+<p>The remainder of this lecture is about  technical material based on  formulas from BEGS <span class="bibtex-citation" id="id15">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span>.</p>
+<p>The topic involves interpreting  and extending formula <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(56.3)</a> for the ergodic mean <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span>.</p>
 </section>
 <section id="chicken-and-egg">
-<h3><span class="section-number">55.4.4. </span>Chicken and egg<a class="headerlink" href="#chicken-and-egg" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">56.4.4. </span>Chicken and egg<a class="headerlink" href="#chicken-and-egg" title="Link to this heading">#</a></h3>
 <p>Notice how attributes of the ergodic distribution for <span class="math notranslate nohighlight">\({\mathcal B}_t\)</span>  appear
-on the right side of  formula <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(55.3)</a> for approximating  the ergodic mean via <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span>.</p>
-<p>Therefor,  formula  <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(55.3)</a> is not useful for estimating  the mean of the ergodic <strong>in advance</strong> of actually approximating the ergodic distribution.</p>
+on the right side of  formula <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(56.3)</a> for approximating  the ergodic mean via <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span>.</p>
+<p>Therefor,  formula  <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(56.3)</a> is not useful for estimating  the mean of the ergodic <strong>in advance</strong> of actually approximating the ergodic distribution.</p>
 <ul class="simple">
-<li><p>we need to know the  ergodic distribution to compute the right side of formula <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(55.3)</a></p></li>
+<li><p>we need to know the  ergodic distribution to compute the right side of formula <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(56.3)</a></p></li>
 </ul>
-<p>So the primary use of equation <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(55.3)</a> is how  it  <strong>confirms</strong> that
+<p>So the primary use of equation <a class="reference internal" href="#equation-eq-criterion-fiscal-1">(56.3)</a> is how  it  <strong>confirms</strong> that
 the ergodic distribution solves a <strong>fiscal-risk minimization problem</strong>.</p>
 <p>As an example, notice how we used the formula for the mean of <span class="math notranslate nohighlight">\({\mathcal B}\)</span> in the ergodic distribution of the special AMSS economy in
 <a class="reference internal" href="amss2.html"><span class="doc">Fiscal Insurance via Fluctuating Interest Rates</span></a></p>
@@ -1471,21 +1474,21 @@ the ergodic distribution solves a <strong>fiscal-risk minimization problem</stro
 </ul>
 </section>
 <section id="approximating-the-ergodic-mean">
-<h3><span class="section-number">55.4.5. </span>Approximating the ergodic mean<a class="headerlink" href="#approximating-the-ergodic-mean" title="Link to this heading">#</a></h3>
-<p>BEGS also <span id="id16">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> propose  an approximation to  <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> that can be computed <strong>without</strong> first approximating  the
+<h3><span class="section-number">56.4.5. </span>Approximating the ergodic mean<a class="headerlink" href="#approximating-the-ergodic-mean" title="Link to this heading">#</a></h3>
+<p>BEGS also <span class="bibtex-citation" id="id16">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> propose  an approximation to  <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span> that can be computed <strong>without</strong> first approximating  the
 ergodic distribution.</p>
 <p>To  construct the BEGS  approximation to <span class="math notranslate nohighlight">\({\mathcal B}^*\)</span>, we just follow steps set forth on pages 648 - 650 of section III.D of
-<span id="id17">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span></p>
+<span class="bibtex-citation" id="id17">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span></p>
 <ul class="simple">
 <li><p>notation in BEGS might be confusing at first sight, so
 it is important to stare and digest before computing</p></li>
-<li><p>there are also some sign errors in the <span id="id18">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> text that we’ll want
+<li><p>there are also some sign errors in the <span class="bibtex-citation" id="id18">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> text that we’ll want
 to correct here</p></li>
 </ul>
-<p>Here is a step-by-step description of the BEGS <span id="id19">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> approximation procedure.</p>
+<p>Here is a step-by-step description of the BEGS <span class="bibtex-citation" id="id19">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> approximation procedure.</p>
 </section>
 <section id="step-by-step">
-<h3><span class="section-number">55.4.6. </span>Step by step<a class="headerlink" href="#step-by-step" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">56.4.6. </span>Step by step<a class="headerlink" href="#step-by-step" title="Link to this heading">#</a></h3>
 <p><strong>Step 1:</strong> For a given <span class="math notranslate nohighlight">\(\tau\)</span> we  compute a vector of
 values <span class="math notranslate nohighlight">\(c_\tau(s), s= 1, 2, \ldots, S\)</span> that satisfy</p>
 <div class="math notranslate nohighlight">
@@ -1497,7 +1500,7 @@ values <span class="math notranslate nohighlight">\(c_\tau(s), s= 1, 2, \ldots, 
 <p><span class="math notranslate nohighlight">\(S=3\)</span> in our case, but we’ll write code for a general integer
 <span class="math notranslate nohighlight">\(S\)</span>.</p>
 <p><strong>Typo alert:</strong> Please note that there is a sign error in equation (42)
-of BEGS <span id="id20">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> – it should be a <strong>minus</strong> rather than a <strong>plus</strong> in the middle.</p>
+of BEGS <span class="bibtex-citation" id="id20">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> – it should be a <strong>minus</strong> rather than a <strong>plus</strong> in the middle.</p>
 <ul class="simple">
 <li><p>We have made the appropriate correction in the above equation.</p></li>
 </ul>
@@ -1524,7 +1527,7 @@ the <strong>effective return</strong> on risk-free debt and they call
 \]</div>
 <p>This equation says that at a constant discount factor <span class="math notranslate nohighlight">\(\beta\)</span>,  equivalent government debt <span class="math notranslate nohighlight">\({\mathcal B}\)</span> equals the
 present value of the mean effective government <strong>surplus</strong>.</p>
-<p><strong>Another typo alert</strong>: there is a sign error in equation (46) of BEGS <span id="id21">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> –the left
+<p><strong>Another typo alert</strong>: there is a sign error in equation (46) of BEGS <span class="bibtex-citation" id="id21">[<a class="reference internal" href="zreferences.html#id250" title="Anmol Bhandari, David Evans, Mikhail Golosov, and Thomas J. Sargent. Fiscal Policy and Debt Management with Incomplete Markets. The Quarterly Journal of Economics, 132(2):617-663, 2017.">Bhandari <em>et al.</em>, 2017</a>]</span> –the left
 side should be multiplied by <span class="math notranslate nohighlight">\(-1\)</span>.</p>
 <ul class="simple">
 <li><p>We have made this correction in the above equation.</p></li>
@@ -1593,10 +1596,10 @@ this formula very accurately describes a <strong>constant</strong> par value of 
 </ul>
 </section>
 <section id="execution">
-<h3><span class="section-number">55.4.7. </span>Execution<a class="headerlink" href="#execution" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">56.4.7. </span>Execution<a class="headerlink" href="#execution" title="Link to this heading">#</a></h3>
 <p>Now let’s move on to compute things step by step.</p>
 <section id="step-1">
-<h4><span class="section-number">55.4.7.1. </span>Step 1<a class="headerlink" href="#step-1" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">56.4.7.1. </span>Step 1<a class="headerlink" href="#step-1" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">u</span> <span class="o">=</span> <span class="n">CRRAutility</span><span class="p">(</span><span class="n">π</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">3</span><span class="p">),</span>
@@ -1647,7 +1650,7 @@ this formula very accurately describes a <strong>constant</strong> par value of 
 </div>
 </section>
 <section id="step-2">
-<h4><span class="section-number">55.4.7.2. </span>Step 2<a class="headerlink" href="#step-2" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">56.4.7.2. </span>Step 2<a class="headerlink" href="#step-2" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="n">u</span><span class="o">.</span><span class="n">G</span>   <span class="c1"># Compute labor supply</span>
@@ -1658,7 +1661,7 @@ this formula very accurately describes a <strong>constant</strong> par value of 
 </section>
 </section>
 <section id="note-about-code">
-<h3><span class="section-number">55.4.8. </span>Note about code<a class="headerlink" href="#note-about-code" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">56.4.8. </span>Note about code<a class="headerlink" href="#note-about-code" title="Link to this heading">#</a></h3>
 <p>Remember that in our code <span class="math notranslate nohighlight">\(\pi\)</span> is a <span class="math notranslate nohighlight">\(3 \times 3\)</span> transition
 matrix.</p>
 <p>But because we are studying an IID case, <span class="math notranslate nohighlight">\(\pi\)</span> has identical
@@ -1667,7 +1670,7 @@ rows and we need only  to compute objects for one row of <span class="math notra
 off the first row of <span class="math notranslate nohighlight">\(\pi\)</span>.</p>
 </section>
 <section id="running-the-code">
-<h3><span class="section-number">55.4.9. </span>Running the code<a class="headerlink" href="#running-the-code" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">56.4.9. </span>Running the code<a class="headerlink" href="#running-the-code" title="Link to this heading">#</a></h3>
 <p>Let’s take the code out for a spin.</p>
 <p>First, let’s compute <span class="math notranslate nohighlight">\({\mathcal R}\)</span> and <span class="math notranslate nohighlight">\({\mathcal X}\)</span>
 according to our formulas</p>
@@ -1785,7 +1788,7 @@ the first row of <span class="math notranslate nohighlight">\(\pi\)</span></p>
 </div>
 </div>
 <section id="step-3">
-<h4><span class="section-number">55.4.9.1. </span>Step 3<a class="headerlink" href="#step-3" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">56.4.9.1. </span>Step 3<a class="headerlink" href="#step-3" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">solve_τ</span><span class="p">(</span><span class="n">τ</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
@@ -1819,7 +1822,7 @@ a function of B.</p>
 algorithm.</p>
 </section>
 <section id="step-4">
-<h4><span class="section-number">55.4.9.2. </span>Step 4<a class="headerlink" href="#step-4" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">56.4.9.2. </span>Step 4<a class="headerlink" href="#step-4" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">min_J</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
@@ -1845,7 +1848,7 @@ algorithm.</p>
 </div>
 </section>
 <section id="step-6">
-<h4><span class="section-number">55.4.9.3. </span>Step 6<a class="headerlink" href="#step-6" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">56.4.9.3. </span>Step 6<a class="headerlink" href="#step-6" title="Link to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">B_star</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">min_J</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">s</span><span class="p">))</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -1854,7 +1857,7 @@ algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-1.199481418980341)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-1.1994803701620935)
 </pre></div>
 </div>
 </div>
@@ -1883,7 +1886,7 @@ algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-1.057764570315258)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(-1.0577636454132417)
 </pre></div>
 </div>
 </div>
@@ -1896,7 +1899,7 @@ algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.0957293188931236)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.09572940939005273)
 </pre></div>
 </div>
 </div>
@@ -1910,7 +1913,7 @@ algorithm.</p>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(array([0.99983979, 1.10746593, 1.22602761]),
- array([0.00202703, 0.12464733, 0.27315278]))
+ array([0.00202692, 0.12464721, 0.27315265]))
 </pre></div>
 </div>
 </div>
@@ -1923,7 +1926,7 @@ algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9931353427124076)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>np.float64(0.9931353423760987)
 </pre></div>
 </div>
 </div>
@@ -1935,7 +1938,7 @@ algorithm.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.92643816, 0.88027113, 0.83662631])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.92643814, 0.8802711 , 0.83662629])
 </pre></div>
 </div>
 </div>
@@ -2013,13 +2016,18 @@ algorithm.</p>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="mcmc.html">
+   3. Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="muth_kalman.html">
-   3. Reverse Engineering a la Muth
+   4. Reverse Engineering a la Muth
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="discrete_dp.html">
-   4. Discrete State Dynamic Programming
+   5. Discrete State Dynamic Programming
   </a>
  </li>
 </ul>
@@ -2031,42 +2039,42 @@ algorithm.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="cons_news.html">
-   5. Information and Consumption Smoothing
+   6. Information and Consumption Smoothing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing.html">
-   6. Consumption Smoothing with Complete and Incomplete Markets
+   7. Consumption Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing_tax.html">
-   7. Tax Smoothing with Complete and Incomplete Markets
+   8. Tax Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   8. Markov Jump Linear Quadratic Dynamic Programming
+   9. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   9. How to Pay for a War: Part 1
+   10. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   10. How to Pay for a War: Part 2
+   11. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   11. How to Pay for a War: Part 3
+   12. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   12. Optimal Taxation in an LQ Economy
+   13. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -2078,22 +2086,22 @@ algorithm.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   13. Default Risk and Income Fluctuations
+   14. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   14. Globalization and Cycles
+   15. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   15. Coase’s Theory of the Firm
+   16. Coase’s Theory of the Firm
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="match_transport.html">
-   16. Composite Sorting
+   17. Composite Sorting
   </a>
  </li>
 </ul>
@@ -2105,47 +2113,47 @@ algorithm.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   17. Recursive Models of Dynamic Linear Economies
+   18. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   18. Growth in Dynamic Linear Economies
+   19. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   19. Lucas Asset Pricing Using DLE
+   20. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   20. IRFs in Hall Models
+   21. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   21. Permanent Income Model using the DLE Class
+   22. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="gorman_heterogeneous_households.html">
-   22. Gorman Aggregation
+   23. Gorman Aggregation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   24. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   25. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   26. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -2157,22 +2165,22 @@ algorithm.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   26. Risk and Model Uncertainty
+   27. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   27. Etymology of Entropy
+   28. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   28. Robustness
+   29. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   29. Robust Markov Perfect Equilibrium
+   30. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -2184,42 +2192,42 @@ algorithm.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   30. Covariance Stationary Processes
+   31. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   31. Estimation of Spectra
+   32. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   32. Additive and Multiplicative Functionals
+   33. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   33. Classical Control with Linear Algebra
+   34. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   34. Classical Prediction and Filtering With Linear Algebra
+   35. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   35. Knowing the Forecasts of Others
+   36. Knowing the Forecasts of Others
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_rational_expectations.html">
-   36. Demand for Money during Hyperinflations under Rational Expectations
+   37. Demand for Money during Hyperinflations under Rational Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="info_projection.html">
-   37. Hyperinflation and Information Projection
+   38. Hyperinflation and Information Projection
   </a>
  </li>
 </ul>
@@ -2231,47 +2239,47 @@ algorithm.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   38. Asset Pricing II: The Lucas Asset Pricing Model
+   39. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   39. Elementary Asset Pricing Theory
+   40. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_richard_1987.html">
-   40. The Role of Conditioning Information in Asset Pricing
+   41. The Role of Conditioning Information in Asset Pricing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_jagannathan_1991.html">
-   41. The Hansen-Jagannathan Bound
+   42. The Hansen-Jagannathan Bound
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   42. Two Modifications of Mean-Variance Portfolio Theory
+   43. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="doubts_or_variability.html">
-   43. Doubts or Variability?
+   44. Doubts or Variability?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
-   44. Risk Aversion or Mistaken Beliefs?
+   45. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   45. Irrelevance of Capital Structures with Complete Markets
+   46. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   46. Equilibrium Capital Structures with Incomplete Markets
+   47. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -2283,62 +2291,62 @@ algorithm.</p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   47. Optimal Unemployment Insurance
+   48. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   48. Stackelberg Plans
+   49. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   49. Machine Learning a Ramsey Plan
+   50. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   50. Time Inconsistency of Ramsey Plans
+   51. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   51. Sustainable Plans for a Calvo Model
+   52. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   52. Optimal Taxation with State-Contingent Debt
+   53. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   53. Optimal Taxation without State-Contingent Debt
+   54. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   54. Fluctuating Interest Rates Deliver Fiscal Insurance
+   55. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   55. Fiscal Risk and Government Debt
+   56. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   56. Competitive Equilibria of a Model of Chang
+   57. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   57. Credible Government Policies in a Model of Chang
+   58. Credible Government Policies in a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dovis_accounting_mf.html">
-   58. Accounting for Monetary and Fiscal Policy
+   59. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -2350,17 +2358,17 @@ algorithm.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   59. Troubleshooting
+   60. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   60. References
+   61. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   61. Execution Statistics
+   62. Execution Statistics
   </a>
  </li>
 </ul>
@@ -2404,6 +2412,8 @@ algorithm.</p>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/amss3.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst" download><i data-feather="github"></i></a></li>
+                    
+                    
                 </ul>
 
             </div>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>42. Two Modifications of Mean-Variance Portfolio Theory &#8212; Advanced Quantitative Economics with Python</title>
+    <title>43. Two Modifications of Mean-Variance Portfolio Theory &#8212; Advanced Quantitative Economics with Python</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -77,7 +77,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=ff5dcadef89fd2097ea5e28ddaad7eb5985f09c4" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -131,8 +131,8 @@
     <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="43. Doubts or Variability?" href="doubts_or_variability.html" />
-    <link rel="prev" title="41. The Hansen-Jagannathan Bound" href="hansen_jagannathan_1991.html" />
+    <link rel="next" title="44. Doubts or Variability?" href="doubts_or_variability.html" />
+    <link rel="prev" title="42. The Hansen-Jagannathan Bound" href="hansen_jagannathan_1991.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -155,6 +155,9 @@
 <meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
 <meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
 <meta name="theme-color" content="#ffffff" />
+
+
+
 
   </head>
 <body>
@@ -204,21 +207,21 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">42.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-variance-portfolio-choice">42.2. Mean-variance portfolio choice</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-mean-and-variance">42.3. Estimating mean and variance</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#black-litterman-starting-point">42.4. Black-Litterman starting point</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#details">42.5. Details</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-views">42.6. Adding views</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-interpretation">42.7. Bayesian interpretation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curve-decolletage">42.8. Curve decolletage</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#black-litterman-recommendation-as-regularization">42.9. Black-Litterman recommendation as regularization</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-robust-control-operator">42.10. A robust control operator</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-robust-mean-variance-portfolio-model">42.11. A robust mean-variance portfolio model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix">42.12. Appendix</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-case-iid-sample">42.13. Special case – IID sample</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependence-and-sampling-frequency">42.14. Dependence and sampling frequency</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-and-the-mean-estimator">42.15. Frequency and the mean estimator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">43.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-variance-portfolio-choice">43.2. Mean-variance portfolio choice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimating-mean-and-variance">43.3. Estimating mean and variance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#black-litterman-starting-point">43.4. Black-Litterman starting point</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#details">43.5. Details</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adding-views">43.6. Adding views</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-interpretation">43.7. Bayesian interpretation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#curve-decolletage">43.8. Curve decolletage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#black-litterman-recommendation-as-regularization">43.9. Black-Litterman recommendation as regularization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-robust-control-operator">43.10. A robust control operator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#a-robust-mean-variance-portfolio-model">43.11. A robust mean-variance portfolio model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#appendix">43.12. Appendix</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-case-iid-sample">43.13. Special case – IID sample</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dependence-and-sampling-frequency">43.14. Dependence and sampling frequency</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#frequency-and-the-mean-estimator">43.15. Frequency and the mean estimator</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -286,7 +289,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/e2f75c7f" class="changelog-hash">e2f75c7f</a>
                                 
                                 <span class="changelog-author">Longye Tian</span>
-                                <span class="changelog-time">7 months ago</span>
+                                <span class="changelog-time">9 months ago</span>
                                 <span class="changelog-message">[styleguide] adjust lecture titles to match the QuantEcon style guide rules around capitalisations.  (#240)</span>
                             </li>
                             
@@ -349,7 +352,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/561c67cb" class="changelog-hash">561c67cb</a>
                                 
                                 <span class="changelog-author">mmcky</span>
-                                <span class="changelog-time">4 years ago</span>
+                                <span class="changelog-time">5 years ago</span>
                                 <span class="changelog-message">fix blockquote syntax when using displaymath (#29)</span>
                             </li>
                             
@@ -388,15 +391,15 @@
                 <img style="width:250px;display:inline;" width="250px" src="https://assets.quantecon.org/img/qe-menubar-logo.svg" alt="QuantEcon">
         </a>
 </div><section class="tex2jax_ignore mathjax_ignore" id="two-modifications-of-mean-variance-portfolio-theory">
-<span id="index-0"></span><h1><span class="section-number">42. </span>Two Modifications of Mean-Variance Portfolio Theory<a class="headerlink" href="#two-modifications-of-mean-variance-portfolio-theory" title="Link to this heading">#</a></h1>
+<span id="index-0"></span><h1><span class="section-number">43. </span>Two Modifications of Mean-Variance Portfolio Theory<a class="headerlink" href="#two-modifications-of-mean-variance-portfolio-theory" title="Link to this heading">#</a></h1>
 <section id="overview">
-<h2><span class="section-number">42.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This lecture describes extensions to the classical mean-variance portfolio theory summarized in our lecture <a class="reference external" href="https://python-advanced.quantecon.org/asset_pricing_lph.html">Elementary Asset Pricing Theory</a>.</p>
 <p>The classic theory described there assumes that a decision maker completely trusts the statistical model that he posits to govern the joint distribution of returns on a list of available assets.</p>
 <p>Both extensions described here put distrust of that statistical model into the mind of the decision maker.</p>
-<p>One is a model of Black and Litterman <span id="id1">[<a class="reference internal" href="zreferences.html#id88" title="Fischer Black and Robert Litterman. Global portfolio optimization. Financial analysts journal, 48(5):28–43, 1992.">Black and Litterman, 1992</a>]</span> that imputes to the decision maker distrust of historically estimated mean returns but still complete trust of estimated covariances of returns.</p>
+<p>One is a model of Black and Litterman <span class="bibtex-citation" id="id1">[<a class="reference internal" href="zreferences.html#id88" title="Fischer Black and Robert Litterman. Global portfolio optimization. Financial analysts journal, 48(5):28–43, 1992.">Black and Litterman, 1992</a>]</span> that imputes to the decision maker distrust of historically estimated mean returns but still complete trust of estimated covariances of returns.</p>
 <p>The second model also imputes to the decision maker doubts about his  statistical model, but now by saying that, because of that distrust,  the decision maker uses a version of  robust control theory described in this lecture <a class="reference external" href="https://python-advanced.quantecon.org/robustness.html">Robustness</a>.</p>
-<p>The famous <strong>Black-Litterman</strong> (1992) <span id="id2">[<a class="reference internal" href="zreferences.html#id88" title="Fischer Black and Robert Litterman. Global portfolio optimization. Financial analysts journal, 48(5):28–43, 1992.">Black and Litterman, 1992</a>]</span> portfolio choice model was motivated by the finding that with high frequency or
+<p>The famous <strong>Black-Litterman</strong> (1992) <span class="bibtex-citation" id="id2">[<a class="reference internal" href="zreferences.html#id88" title="Fischer Black and Robert Litterman. Global portfolio optimization. Financial analysts journal, 48(5):28–43, 1992.">Black and Litterman, 1992</a>]</span> portfolio choice model was motivated by the finding that with high frequency or
 moderately high  frequency data, means are more difficult to estimate than
 variances.</p>
 <p>A model of <strong>robust portfolio choice</strong> that we’ll describe below also begins
@@ -440,7 +443,7 @@ adjust investors’ subjective beliefs about mean returns in order to render mor
 </div>
 </section>
 <section id="mean-variance-portfolio-choice">
-<h2><span class="section-number">42.2. </span>Mean-variance portfolio choice<a class="headerlink" href="#mean-variance-portfolio-choice" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.2. </span>Mean-variance portfolio choice<a class="headerlink" href="#mean-variance-portfolio-choice" title="Link to this heading">#</a></h2>
 <p>A risk-free security earns one-period net return <span class="math notranslate nohighlight">\(r_f\)</span>.</p>
 <p>An <span class="math notranslate nohighlight">\(n \times 1\)</span> vector of risky securities earns
 an <span class="math notranslate nohighlight">\(n \times 1\)</span> vector <span class="math notranslate nohighlight">\(\vec r - r_f {\bf 1}\)</span> of <em>excess
@@ -468,20 +471,20 @@ w' (\vec r - r_f {\bf 1}) \sim {\mathcal N}(w' \mu, w' \Sigma w )
 <p>The <strong>mean-variance portfolio choice problem</strong> is to choose <span class="math notranslate nohighlight">\(w\)</span> to
 maximize</p>
 <div class="math notranslate nohighlight" id="equation-choice-problem">
-<span class="eqno">(42.1)<a class="headerlink" href="#equation-choice-problem" title="Link to this equation">#</a></span>\[U(\mu,\Sigma;w) = w'\mu - \frac{\delta}{2} w' \Sigma w\]</div>
+<span class="eqno">(43.1)<a class="headerlink" href="#equation-choice-problem" title="Link to this equation">#</a></span>\[U(\mu,\Sigma;w) = w'\mu - \frac{\delta}{2} w' \Sigma w\]</div>
 <p>where <span class="math notranslate nohighlight">\(\delta &gt; 0\)</span> is a risk-aversion parameter. The first-order
-condition for maximizing <a class="reference internal" href="#equation-choice-problem">(42.1)</a> with respect to the vector <span class="math notranslate nohighlight">\(w\)</span> is</p>
+condition for maximizing <a class="reference internal" href="#equation-choice-problem">(43.1)</a> with respect to the vector <span class="math notranslate nohighlight">\(w\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[
 \mu = \delta \Sigma w
 \]</div>
 <p>which implies the following design of a risky portfolio:</p>
 <div class="math notranslate nohighlight" id="equation-risky-portfolio">
-<span class="eqno">(42.2)<a class="headerlink" href="#equation-risky-portfolio" title="Link to this equation">#</a></span>\[w = (\delta \Sigma)^{-1} \mu\]</div>
+<span class="eqno">(43.2)<a class="headerlink" href="#equation-risky-portfolio" title="Link to this equation">#</a></span>\[w = (\delta \Sigma)^{-1} \mu\]</div>
 </section>
 <section id="estimating-mean-and-variance">
-<h2><span class="section-number">42.3. </span>Estimating mean and variance<a class="headerlink" href="#estimating-mean-and-variance" title="Link to this heading">#</a></h2>
-<p>The key inputs into the portfolio choice model <a class="reference internal" href="#equation-risky-portfolio">(42.2)</a> are</p>
+<h2><span class="section-number">43.3. </span>Estimating mean and variance<a class="headerlink" href="#estimating-mean-and-variance" title="Link to this heading">#</a></h2>
+<p>The key inputs into the portfolio choice model <a class="reference internal" href="#equation-risky-portfolio">(43.2)</a> are</p>
 <ul class="simple">
 <li><p>estimates of the parameters <span class="math notranslate nohighlight">\(\mu, \Sigma\)</span> of the random excess
 return vector<span class="math notranslate nohighlight">\((\vec r - r_f {\bf 1})\)</span></p></li>
@@ -493,11 +496,11 @@ excess returns and estimating <span class="math notranslate nohighlight">\(\Sigm
 matrix.</p>
 </section>
 <section id="black-litterman-starting-point">
-<h2><span class="section-number">42.4. </span>Black-Litterman starting point<a class="headerlink" href="#black-litterman-starting-point" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.4. </span>Black-Litterman starting point<a class="headerlink" href="#black-litterman-starting-point" title="Link to this heading">#</a></h2>
 <p>When estimates of <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\Sigma\)</span> from historical
 sample means and covariances have been combined with <strong>plausible</strong> values
 of the risk-aversion parameter <span class="math notranslate nohighlight">\(\delta\)</span> to compute an
-optimal portfolio from formula <a class="reference internal" href="#equation-risky-portfolio">(42.2)</a>, a typical outcome has been
+optimal portfolio from formula <a class="reference internal" href="#equation-risky-portfolio">(43.2)</a>, a typical outcome has been
 <span class="math notranslate nohighlight">\(w\)</span>’s with <strong>extreme long and short positions</strong>.</p>
 <p>A common reaction to these outcomes is that they are so implausible that a portfolio
 manager cannot recommend them to a customer.</p>
@@ -555,7 +558,7 @@ manager cannot recommend them to a customer.</p>
 </div>
 <p>Black and Litterman’s responded to this situation in the following way:</p>
 <ul class="simple">
-<li><p>They continue to accept <a class="reference internal" href="#equation-risky-portfolio">(42.2)</a> as a good model for choosing an optimal
+<li><p>They continue to accept <a class="reference internal" href="#equation-risky-portfolio">(43.2)</a> as a good model for choosing an optimal
 portfolio <span class="math notranslate nohighlight">\(w\)</span>.</p></li>
 <li><p>They want to continue to allow the customer to express his or her
 risk tolerance by setting <span class="math notranslate nohighlight">\(\delta\)</span>.</p></li>
@@ -567,7 +570,7 @@ what most people actually do.</p></li>
 <p>In particular, given <span class="math notranslate nohighlight">\(\Sigma\)</span> and a plausible value
 of <span class="math notranslate nohighlight">\(\delta\)</span>, Black and Litterman reverse engineered a vector
 <span class="math notranslate nohighlight">\(\mu_{BL}\)</span> of mean excess returns that makes the <span class="math notranslate nohighlight">\(w\)</span>
-implied by formula <a class="reference internal" href="#equation-risky-portfolio">(42.2)</a> equal the <strong>actual</strong> market portfolio
+implied by formula <a class="reference internal" href="#equation-risky-portfolio">(43.2)</a> equal the <strong>actual</strong> market portfolio
 <span class="math notranslate nohighlight">\(w_m\)</span>, so that</p>
 <div class="math notranslate nohighlight">
 \[
@@ -575,7 +578,7 @@ w_m = (\delta \Sigma)^{-1} \mu_{BL}
 \]</div>
 </section>
 <section id="details">
-<h2><span class="section-number">42.5. </span>Details<a class="headerlink" href="#details" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.5. </span>Details<a class="headerlink" href="#details" title="Link to this heading">#</a></h2>
 <p>Let’s define</p>
 <div class="math notranslate nohighlight">
 \[
@@ -597,8 +600,8 @@ w_m' \mu \equiv ( r_m - r_f)
 <p>as the <strong>Sharpe-ratio</strong> on the market portfolio <span class="math notranslate nohighlight">\(w_m\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\delta_m\)</span> be the value of the risk aversion parameter that
 induces an investor to hold the market portfolio in light of the optimal
-portfolio choice rule <a class="reference internal" href="#equation-risky-portfolio">(42.2)</a>.</p>
-<p>Evidently, portfolio rule <a class="reference internal" href="#equation-risky-portfolio">(42.2)</a> then implies that
+portfolio choice rule <a class="reference internal" href="#equation-risky-portfolio">(43.2)</a>.</p>
+<p>Evidently, portfolio rule <a class="reference internal" href="#equation-risky-portfolio">(43.2)</a> then implies that
 <span class="math notranslate nohighlight">\(r_m - r_f = \delta_m \sigma^2\)</span> or</p>
 <div class="math notranslate nohighlight">
 \[
@@ -619,7 +622,7 @@ estimates or <span class="math notranslate nohighlight">\(w_m\)</span> and <span
 <p>The second key Black-Litterman step is then to use this value of
 <span class="math notranslate nohighlight">\(\delta\)</span> together with the maximum likelihood estimate of
 <span class="math notranslate nohighlight">\(\Sigma\)</span> to deduce a <span class="math notranslate nohighlight">\(\mu_{\bf BL}\)</span> that verifies
-portfolio rule <a class="reference internal" href="#equation-risky-portfolio">(42.2)</a> at the market portfolio <span class="math notranslate nohighlight">\(w = w_m\)</span></p>
+portfolio rule <a class="reference internal" href="#equation-risky-portfolio">(43.2)</a> at the market portfolio <span class="math notranslate nohighlight">\(w = w_m\)</span></p>
 <div class="math notranslate nohighlight">
 \[
 \mu_m = \delta_m \Sigma w_m
@@ -664,20 +667,20 @@ market portfolio.</p>
 </div>
 </section>
 <section id="adding-views">
-<h2><span class="section-number">42.6. </span>Adding views<a class="headerlink" href="#adding-views" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.6. </span>Adding views<a class="headerlink" href="#adding-views" title="Link to this heading">#</a></h2>
 <p>Black and Litterman start with a baseline customer who asserts that he
 or she shares the <strong>market’s views</strong>, which means that he or she
 believes that excess returns are governed by</p>
 <div class="math notranslate nohighlight" id="equation-excess-returns">
-<span class="eqno">(42.3)<a class="headerlink" href="#equation-excess-returns" title="Link to this equation">#</a></span>\[\vec r - r_f {\bf 1} \sim {\mathcal N}( \mu_{BL}, \Sigma)\]</div>
+<span class="eqno">(43.3)<a class="headerlink" href="#equation-excess-returns" title="Link to this equation">#</a></span>\[\vec r - r_f {\bf 1} \sim {\mathcal N}( \mu_{BL}, \Sigma)\]</div>
 <p>Black and Litterman would advise that customer to hold the market
 portfolio of risky securities.</p>
 <p>Black and Litterman then imagine a consumer who would like to express a
 view that differs from the market’s.</p>
 <p>The consumer wants appropriately to
-mix his view with the market’s before using <a class="reference internal" href="#equation-risky-portfolio">(42.2)</a> to choose a portfolio.</p>
+mix his view with the market’s before using <a class="reference internal" href="#equation-risky-portfolio">(43.2)</a> to choose a portfolio.</p>
 <p>Suppose that the customer’s view is expressed by a hunch that rather
-than <a class="reference internal" href="#equation-excess-returns">(42.3)</a>, excess returns are governed by</p>
+than <a class="reference internal" href="#equation-excess-returns">(43.3)</a>, excess returns are governed by</p>
 <div class="math notranslate nohighlight">
 \[
 \vec r - r_f {\bf 1} \sim {\mathcal N}( \hat \mu, \tau \Sigma)
@@ -688,9 +691,9 @@ view <span class="math notranslate nohighlight">\(\mu_{\bf BL}\)</span>.</p>
 <p>Black and Litterman would then use a formula like the following one to
 mix the views <span class="math notranslate nohighlight">\(\hat \mu\)</span> and <span class="math notranslate nohighlight">\(\mu_{\bf BL}\)</span></p>
 <div class="math notranslate nohighlight" id="equation-mix-views">
-<span class="eqno">(42.4)<a class="headerlink" href="#equation-mix-views" title="Link to this equation">#</a></span>\[\tilde \mu = (\Sigma^{-1} + (\tau \Sigma)^{-1})^{-1} (\Sigma^{-1} \mu_{BL}  + (\tau \Sigma)^{-1} \hat \mu)\]</div>
+<span class="eqno">(43.4)<a class="headerlink" href="#equation-mix-views" title="Link to this equation">#</a></span>\[\tilde \mu = (\Sigma^{-1} + (\tau \Sigma)^{-1})^{-1} (\Sigma^{-1} \mu_{BL}  + (\tau \Sigma)^{-1} \hat \mu)\]</div>
 <p>Black and Litterman would then advise the customer to hold the portfolio
-associated with these views implied by rule <a class="reference internal" href="#equation-risky-portfolio">(42.2)</a>:</p>
+associated with these views implied by rule <a class="reference internal" href="#equation-risky-portfolio">(43.2)</a>:</p>
 <div class="math notranslate nohighlight">
 \[
 \tilde w = (\delta \Sigma)^{-1} \tilde \mu
@@ -770,7 +773,7 @@ customer’s portfolio will involve big short-long positions.</p>
 </div>
 </section>
 <section id="bayesian-interpretation">
-<h2><span class="section-number">42.7. </span>Bayesian interpretation<a class="headerlink" href="#bayesian-interpretation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.7. </span>Bayesian interpretation<a class="headerlink" href="#bayesian-interpretation" title="Link to this heading">#</a></h2>
 <p>Consider the following Bayesian interpretation of the Black-Litterman
 recommendation.</p>
 <p>The prior belief over the mean excess returns is consistent with the
@@ -807,7 +810,7 @@ update of the prior over the mean excess returns in light of the
 realized average excess returns on the market.</p>
 </section>
 <section id="curve-decolletage">
-<h2><span class="section-number">42.8. </span>Curve decolletage<a class="headerlink" href="#curve-decolletage" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.8. </span>Curve decolletage<a class="headerlink" href="#curve-decolletage" title="Link to this heading">#</a></h2>
 <p>Consider two independent “competing” views on the excess market returns</p>
 <div class="math notranslate nohighlight">
 \[
@@ -835,10 +838,10 @@ Z\sim \mathcal{N}(\mu, \Sigma)
 <p>and so the points where the density takes the same value can be
 described by the ellipse</p>
 <div class="math notranslate nohighlight" id="equation-ellipse">
-<span class="eqno">(42.5)<a class="headerlink" href="#equation-ellipse" title="Link to this equation">#</a></span>\[\bar z \cdot \bar z =  (z - \mu)'\Sigma^{-1}(z - \mu) = \bar d\]</div>
+<span class="eqno">(43.5)<a class="headerlink" href="#equation-ellipse" title="Link to this equation">#</a></span>\[\bar z \cdot \bar z =  (z - \mu)'\Sigma^{-1}(z - \mu) = \bar d\]</div>
 <p>where <span class="math notranslate nohighlight">\(\bar d\in\mathbb{R}_+\)</span> denotes the (transformation) of a
 particular density value.</p>
-<p>The curves defined by equation <a class="reference internal" href="#equation-ellipse">(42.5)</a> can be
+<p>The curves defined by equation <a class="reference internal" href="#equation-ellipse">(43.5)</a> can be
 labeled as iso-likelihood ellipses</p>
 <blockquote>
 <div><p><strong>Remark:</strong> More generally there is a class of density functions
@@ -850,7 +853,7 @@ that possesses this feature, i.e.</p>
   \text{ has the form } \quad f(z) = c g(z\cdot z)
   \]</div>
 <p>This property is called <strong>spherical symmetry</strong> (see p 81. in Leamer
-(1978) <span id="id3">[<a class="reference internal" href="zreferences.html#id87" title="Edward E Leamer. Specification searches: Ad hoc inference with nonexperimental data. Volume 53. John Wiley &amp; Sons Incorporated, 1978.">Leamer, 1978</a>]</span>).</p>
+(1978) <span class="bibtex-citation" id="id3">[<a class="reference internal" href="zreferences.html#id87" title="Edward E Leamer. Specification searches: Ad hoc inference with nonexperimental data. Volume 53. John Wiley &amp; Sons Incorporated, 1978.">Leamer, 1978</a>]</span>).</p>
 </div></blockquote>
 <p>In our specific example, we can use the pair
 <span class="math notranslate nohighlight">\((\bar d_1, \bar d_2)\)</span> as being two “likelihood” values for which
@@ -873,8 +876,8 @@ the other view.</p>
 <p>The pairs <span class="math notranslate nohighlight">\((\bar d_1, \bar d_2)\)</span> for which there
 is such a point outlines a curve in the excess return space. This curve
 is reminiscent of the Pareto curve in an Edgeworth-box setting.</p>
-<p>Dickey (1975) <span id="id4">[<a class="reference internal" href="zreferences.html#id80" title="J Dickey. Bayesian alternatives to the f-test and least-squares estimate in the normal linear model. In S.E. Fienberg and A. Zellner, editors, Studies in Bayesian econometrics and statistics, pages 515-554. North-Holland, Amsterdam, 1975.">Dickey, 1975</a>]</span> calls it a <em>curve decolletage</em>.</p>
-<p>Leamer (1978) <span id="id5">[<a class="reference internal" href="zreferences.html#id87" title="Edward E Leamer. Specification searches: Ad hoc inference with nonexperimental data. Volume 53. John Wiley &amp; Sons Incorporated, 1978.">Leamer, 1978</a>]</span> calls it an <em>information contract curve</em> and
+<p>Dickey (1975) <span class="bibtex-citation" id="id4">[<a class="reference internal" href="zreferences.html#id80" title="J Dickey. Bayesian alternatives to the f-test and least-squares estimate in the normal linear model. In S.E. Fienberg and A. Zellner, editors, Studies in Bayesian econometrics and statistics, pages 515-554. North-Holland, Amsterdam, 1975.">Dickey, 1975</a>]</span> calls it a <em>curve decolletage</em>.</p>
+<p>Leamer (1978) <span class="bibtex-citation" id="id5">[<a class="reference internal" href="zreferences.html#id87" title="Edward E Leamer. Specification searches: Ad hoc inference with nonexperimental data. Volume 53. John Wiley &amp; Sons Incorporated, 1978.">Leamer, 1978</a>]</span> calls it an <em>information contract curve</em> and
 describes it by the following program: maximize the likelihood of one
 view, say the Black-Litterman recommendation while keeping the
 likelihood of the other view at least at a prespecified constant
@@ -895,8 +898,8 @@ first-order condition is</p>
 <p>which defines the <em>information contract curve</em> between
 <span class="math notranslate nohighlight">\(\mu_{BL}\)</span> and <span class="math notranslate nohighlight">\(\hat \mu\)</span></p>
 <div class="math notranslate nohighlight" id="equation-info-curve">
-<span class="eqno">(42.6)<a class="headerlink" href="#equation-info-curve" title="Link to this equation">#</a></span>\[\vec r_e = (\Sigma^{-1} + \lambda (\tau \Sigma)^{-1})^{-1} (\Sigma^{-1} \mu_{BL} + \lambda (\tau \Sigma)^{-1}\hat \mu )\]</div>
-<p>Note that if <span class="math notranslate nohighlight">\(\lambda = 1\)</span>, <a class="reference internal" href="#equation-info-curve">(42.6)</a> is equivalent with <a class="reference internal" href="#equation-mix-views">(42.4)</a> and it
+<span class="eqno">(43.6)<a class="headerlink" href="#equation-info-curve" title="Link to this equation">#</a></span>\[\vec r_e = (\Sigma^{-1} + \lambda (\tau \Sigma)^{-1})^{-1} (\Sigma^{-1} \mu_{BL} + \lambda (\tau \Sigma)^{-1}\hat \mu )\]</div>
+<p>Note that if <span class="math notranslate nohighlight">\(\lambda = 1\)</span>, <a class="reference internal" href="#equation-info-curve">(43.6)</a> is equivalent with <a class="reference internal" href="#equation-mix-views">(43.4)</a> and it
 identifies one point on the information contract curve.</p>
 <p>Furthermore, because <span class="math notranslate nohighlight">\(\lambda\)</span> is a function of the minimum likelihood
 <span class="math notranslate nohighlight">\(\bar d_2\)</span> on the RHS of the constraint, by varying
@@ -1044,7 +1047,7 @@ and <span class="math notranslate nohighlight">\(\mu_{BL}\)</span> are bending</
 </div>
 </section>
 <section id="black-litterman-recommendation-as-regularization">
-<h2><span class="section-number">42.9. </span>Black-Litterman recommendation as regularization<a class="headerlink" href="#black-litterman-recommendation-as-regularization" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.9. </span>Black-Litterman recommendation as regularization<a class="headerlink" href="#black-litterman-recommendation-as-regularization" title="Link to this heading">#</a></h2>
 <p>First, consider the OLS regression</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1123,7 +1126,7 @@ term at the cost of introducing a “small” bias.</p>
 of <span class="math notranslate nohighlight">\(\tilde \beta\)</span>.</p>
 <p>Now, we can give a regularization interpretation of the Black-Litterman
 portfolio recommendation.</p>
-<p>To this end, first  simplify the equation <a class="reference internal" href="#equation-mix-views">(42.4)</a> that characterizes the Black-Litterman recommendation</p>
+<p>To this end, first  simplify the equation <a class="reference internal" href="#equation-mix-views">(43.4)</a> that characterizes the Black-Litterman recommendation</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -1168,7 +1171,7 @@ compromise between the conservative market portfolio and the more
 extreme portfolio that is implied by estimated “personal” views.</p>
 </section>
 <section id="a-robust-control-operator">
-<h2><span class="section-number">42.10. </span>A robust control operator<a class="headerlink" href="#a-robust-control-operator" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.10. </span>A robust control operator<a class="headerlink" href="#a-robust-control-operator" title="Link to this heading">#</a></h2>
 <p>The Black-Litterman approach is partly inspired by the econometric
 insight that it is easier to estimate covariances of excess returns than
 the means.</p>
@@ -1177,7 +1180,7 @@ investors’ perception of mean excess returns while not tampering with
 the covariance matrix of excess returns.</p>
 <p>The robust control theory is another approach that also hinges on
 adjusting mean excess returns but not covariances.</p>
-<p>Associated with a robust control problem is what Hansen and Sargent <span id="id6">[<a class="reference internal" href="zreferences.html#id79" title="Lars Peter Hansen and Thomas J. Sargent. Robust control and model uncertainty. American Economic Review, 91(2):60-66, 2001.">Hansen and Sargent, 2001</a>]</span>, <span id="id7">[<a class="reference internal" href="zreferences.html#id177" title="L P Hansen and T J Sargent. Robustness. Princeton University Press, 2008.">Hansen and Sargent, 2008</a>]</span> call
+<p>Associated with a robust control problem is what Hansen and Sargent <span class="bibtex-citation" id="id6">[<a class="reference internal" href="zreferences.html#id79" title="Lars Peter Hansen and Thomas J. Sargent. Robust control and model uncertainty. American Economic Review, 91(2):60-66, 2001.">Hansen and Sargent, 2001</a>]</span>, <span class="bibtex-citation" id="id7">[<a class="reference internal" href="zreferences.html#id177" title="L P Hansen and T J Sargent. Robustness. Princeton University Press, 2008.">Hansen and Sargent, 2008</a>]</span> call
 a <span class="math notranslate nohighlight">\({\sf T}\)</span> operator.</p>
 <p>Let’s define the <span class="math notranslate nohighlight">\({\sf T}\)</span> operator as it applies to the problem
 at hand.</p>
@@ -1274,8 +1277,8 @@ of <span class="math notranslate nohighlight">\(\epsilon\)</span>).</p>
 \]</div>
 </section>
 <section id="a-robust-mean-variance-portfolio-model">
-<h2><span class="section-number">42.11. </span>A robust mean-variance portfolio model<a class="headerlink" href="#a-robust-mean-variance-portfolio-model" title="Link to this heading">#</a></h2>
-<p>According to criterion <a class="reference internal" href="#equation-choice-problem">(42.1)</a>, the mean-variance portfolio choice problem
+<h2><span class="section-number">43.11. </span>A robust mean-variance portfolio model<a class="headerlink" href="#a-robust-mean-variance-portfolio-model" title="Link to this heading">#</a></h2>
+<p>According to criterion <a class="reference internal" href="#equation-choice-problem">(43.1)</a>, the mean-variance portfolio choice problem
 chooses <span class="math notranslate nohighlight">\(w\)</span> to maximize</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1312,8 +1315,8 @@ to choose a portfolio <span class="math notranslate nohighlight">\(w\)</span> th
 \]</div>
 <p>or</p>
 <div class="math notranslate nohighlight" id="equation-robust-mean-variance">
-<span class="eqno">(42.7)<a class="headerlink" href="#equation-robust-mean-variance" title="Link to this equation">#</a></span>\[w' (\mu - \theta^{-1} \Sigma w ) - \frac{\delta}{2} w' \Sigma w\]</div>
-<p>The minimizer of <a class="reference internal" href="#equation-robust-mean-variance">(42.7)</a> is</p>
+<span class="eqno">(43.7)<a class="headerlink" href="#equation-robust-mean-variance" title="Link to this equation">#</a></span>\[w' (\mu - \theta^{-1} \Sigma w ) - \frac{\delta}{2} w' \Sigma w\]</div>
+<p>The minimizer of <a class="reference internal" href="#equation-robust-mean-variance">(43.7)</a> is</p>
 <div class="math notranslate nohighlight">
 \[
 w_{\rm rob} = \frac{1}{\delta + \gamma } \Sigma^{-1} \mu
@@ -1325,7 +1328,7 @@ portfolio weights toward zero in the same way that an increase in risk
 aversion does.</p>
 </section>
 <section id="appendix">
-<h2><span class="section-number">42.12. </span>Appendix<a class="headerlink" href="#appendix" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.12. </span>Appendix<a class="headerlink" href="#appendix" title="Link to this heading">#</a></h2>
 <p>We want to illustrate the “folk theorem” that with high or moderate
 frequency data, it is more difficult to estimate means than variances.</p>
 <p>In order to operationalize this statement, we take two analog
@@ -1382,7 +1385,7 @@ variances”.</p>
 precision of the mean estimate than for our variance estimate.</p>
 </section>
 <section id="special-case-iid-sample">
-<h2><span class="section-number">42.13. </span>Special case – IID sample<a class="headerlink" href="#special-case-iid-sample" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.13. </span>Special case – IID sample<a class="headerlink" href="#special-case-iid-sample" title="Link to this heading">#</a></h2>
 <p>We start our analysis with the benchmark case of IID data.</p>
 <p>Consider a
 sample of size <span class="math notranslate nohighlight">\(N\)</span> generated by the following IID process,</p>
@@ -1413,7 +1416,7 @@ of convergence:</p>
 changes as increasing sampling frequency puts dependence into the data.</p>
 </section>
 <section id="dependence-and-sampling-frequency">
-<h2><span class="section-number">42.14. </span>Dependence and sampling frequency<a class="headerlink" href="#dependence-and-sampling-frequency" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.14. </span>Dependence and sampling frequency<a class="headerlink" href="#dependence-and-sampling-frequency" title="Link to this heading">#</a></h2>
 <p>To investigate how sampling frequency affects relative rates of
 convergence, we assume that the data are generated by a mean-reverting
 continuous time process of the form</p>
@@ -1493,7 +1496,7 @@ observations is related to the sampling frequency</p>
 </div>
 </section>
 <section id="frequency-and-the-mean-estimator">
-<h2><span class="section-number">42.15. </span>Frequency and the mean estimator<a class="headerlink" href="#frequency-and-the-mean-estimator" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">43.15. </span>Frequency and the mean estimator<a class="headerlink" href="#frequency-and-the-mean-estimator" title="Link to this heading">#</a></h2>
 <p>Consider again the AR(1) process generated by discrete sampling with
 frequency <span class="math notranslate nohighlight">\(h\)</span>. Assume that we have a sample of size <span class="math notranslate nohighlight">\(N\)</span> and
 we would like to estimate the unconditional mean – in our case the true
@@ -1620,7 +1623,7 @@ compute in closed form.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5e044323e81c9b0867b9910bf6c24808f33f583135fc5e2d1c73c007deb203fb.png" src="_images/5e044323e81c9b0867b9910bf6c24808f33f583135fc5e2d1c73c007deb203fb.png" />
+<img alt="_images/00de8d0a606e054ca18c4eb2c6a21c748f74a75bcccbc92a3715dc9cf47e4dc9.png" src="_images/00de8d0a606e054ca18c4eb2c6a21c748f74a75bcccbc92a3715dc9cf47e4dc9.png" />
 </div>
 </div>
 <p>The above figure illustrates the relationship between the asymptotic
@@ -1706,13 +1709,18 @@ estimator.</p></li>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="mcmc.html">
+   3. Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="muth_kalman.html">
-   3. Reverse Engineering a la Muth
+   4. Reverse Engineering a la Muth
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="discrete_dp.html">
-   4. Discrete State Dynamic Programming
+   5. Discrete State Dynamic Programming
   </a>
  </li>
 </ul>
@@ -1724,42 +1732,42 @@ estimator.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="cons_news.html">
-   5. Information and Consumption Smoothing
+   6. Information and Consumption Smoothing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing.html">
-   6. Consumption Smoothing with Complete and Incomplete Markets
+   7. Consumption Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing_tax.html">
-   7. Tax Smoothing with Complete and Incomplete Markets
+   8. Tax Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   8. Markov Jump Linear Quadratic Dynamic Programming
+   9. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   9. How to Pay for a War: Part 1
+   10. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   10. How to Pay for a War: Part 2
+   11. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   11. How to Pay for a War: Part 3
+   12. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   12. Optimal Taxation in an LQ Economy
+   13. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -1771,22 +1779,22 @@ estimator.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   13. Default Risk and Income Fluctuations
+   14. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   14. Globalization and Cycles
+   15. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   15. Coase’s Theory of the Firm
+   16. Coase’s Theory of the Firm
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="match_transport.html">
-   16. Composite Sorting
+   17. Composite Sorting
   </a>
  </li>
 </ul>
@@ -1798,47 +1806,47 @@ estimator.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   17. Recursive Models of Dynamic Linear Economies
+   18. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   18. Growth in Dynamic Linear Economies
+   19. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   19. Lucas Asset Pricing Using DLE
+   20. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   20. IRFs in Hall Models
+   21. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   21. Permanent Income Model using the DLE Class
+   22. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="gorman_heterogeneous_households.html">
-   22. Gorman Aggregation
+   23. Gorman Aggregation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   24. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   25. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   26. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -1850,22 +1858,22 @@ estimator.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   26. Risk and Model Uncertainty
+   27. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   27. Etymology of Entropy
+   28. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   28. Robustness
+   29. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   29. Robust Markov Perfect Equilibrium
+   30. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1877,42 +1885,42 @@ estimator.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   30. Covariance Stationary Processes
+   31. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   31. Estimation of Spectra
+   32. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   32. Additive and Multiplicative Functionals
+   33. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   33. Classical Control with Linear Algebra
+   34. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   34. Classical Prediction and Filtering With Linear Algebra
+   35. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   35. Knowing the Forecasts of Others
+   36. Knowing the Forecasts of Others
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_rational_expectations.html">
-   36. Demand for Money during Hyperinflations under Rational Expectations
+   37. Demand for Money during Hyperinflations under Rational Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="info_projection.html">
-   37. Hyperinflation and Information Projection
+   38. Hyperinflation and Information Projection
   </a>
  </li>
 </ul>
@@ -1924,47 +1932,47 @@ estimator.</p></li>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   38. Asset Pricing II: The Lucas Asset Pricing Model
+   39. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   39. Elementary Asset Pricing Theory
+   40. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_richard_1987.html">
-   40. The Role of Conditioning Information in Asset Pricing
+   41. The Role of Conditioning Information in Asset Pricing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_jagannathan_1991.html">
-   41. The Hansen-Jagannathan Bound
+   42. The Hansen-Jagannathan Bound
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   42. Two Modifications of Mean-Variance Portfolio Theory
+   43. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="doubts_or_variability.html">
-   43. Doubts or Variability?
+   44. Doubts or Variability?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
-   44. Risk Aversion or Mistaken Beliefs?
+   45. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   45. Irrelevance of Capital Structures with Complete Markets
+   46. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   46. Equilibrium Capital Structures with Incomplete Markets
+   47. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1976,62 +1984,62 @@ estimator.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   47. Optimal Unemployment Insurance
+   48. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   48. Stackelberg Plans
+   49. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   49. Machine Learning a Ramsey Plan
+   50. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   50. Time Inconsistency of Ramsey Plans
+   51. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   51. Sustainable Plans for a Calvo Model
+   52. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   52. Optimal Taxation with State-Contingent Debt
+   53. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   53. Optimal Taxation without State-Contingent Debt
+   54. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   54. Fluctuating Interest Rates Deliver Fiscal Insurance
+   55. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   55. Fiscal Risk and Government Debt
+   56. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   56. Competitive Equilibria of a Model of Chang
+   57. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   57. Credible Government Policies in a Model of Chang
+   58. Credible Government Policies in a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dovis_accounting_mf.html">
-   58. Accounting for Monetary and Fiscal Policy
+   59. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -2043,17 +2051,17 @@ estimator.</p></li>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   59. Troubleshooting
+   60. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   60. References
+   61. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   61. Execution Statistics
+   62. Execution Statistics
   </a>
  </li>
 </ul>
@@ -2097,6 +2105,8 @@ estimator.</p></li>
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/black_litterman.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst" download><i data-feather="github"></i></a></li>
+                    
+                    
                 </ul>
 
             </div>

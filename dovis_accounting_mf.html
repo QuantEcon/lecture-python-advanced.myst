@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>58. Accounting for Monetary and Fiscal Policy &#8212; Advanced Quantitative Economics with Python</title>
+    <title>59. Accounting for Monetary and Fiscal Policy &#8212; Advanced Quantitative Economics with Python</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -77,7 +77,7 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=300d9cef76b95d0252c8ff6263fc63de943d6f3a" type="text/css" />
+    <link rel="stylesheet" href="_static/styles/quantecon-book-theme.css?digest=ff5dcadef89fd2097ea5e28ddaad7eb5985f09c4" type="text/css" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
@@ -101,8 +101,8 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=1ae7504c"></script>
-    <script src="_static/scripts/quantecon-book-theme.js?digest=af25365e6360aeca6ba8101dda3f432eb6b6fa9c"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/scripts/quantecon-book-theme.js?digest=9980b4379844dc0b911d69b62b295f34ede88fac"></script>
     <script src="_static/scripts/jquery.js?v=5d32c60e"></script>
     <script src="_static/scripts/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
@@ -131,8 +131,8 @@
     <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="59. Troubleshooting" href="troubleshooting.html" />
-    <link rel="prev" title="57. Credible Government Policies in a Model of Chang" href="chang_credible.html" />
+    <link rel="next" title="60. Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="58. Credible Government Policies in a Model of Chang" href="chang_credible.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -155,6 +155,9 @@
 <meta property="og:description" content="This website presents a set of lectures on advanced quantitative economic modeling, designed and written by Thomas J. Sargent and John Stachurski." />
 <meta property="og:site_name" content="Advanced Quantitative Economics with Python" />
 <meta name="theme-color" content="#ffffff" />
+
+
+
 
   </head>
 <body>
@@ -204,44 +207,44 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">58.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-economy">58.2. The economy</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">58.2.1. Environment</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementable-allocations">58.2.2. Implementable allocations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">59.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-economy">59.2. The economy</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#environment">59.2.1. Environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementable-allocations">59.2.2. Implementable allocations</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#policy-determination">58.3. Policy determination</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-credibility-problem">58.3.1. The credibility problem</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-formulation">58.3.2. Recursive formulation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#policy-determination">59.3. Policy determination</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-credibility-problem">59.3.1. The credibility problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-formulation">59.3.2. Recursive formulation</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-benchmark-outcomes">58.4. Two benchmark outcomes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ramsey-outcome-full-commitment">58.4.1. The Ramsey outcome (full commitment)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-markov-outcome-no-commitment">58.4.2. The Markov outcome (no commitment)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#credibility-of-inflation-targets">58.4.3. Credibility of inflation targets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-benchmark-outcomes">59.4. Two benchmark outcomes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-ramsey-outcome-full-commitment">59.4.1. The Ramsey outcome (full commitment)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-markov-outcome-no-commitment">59.4.2. The Markov outcome (no commitment)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#credibility-of-inflation-targets">59.4.3. Credibility of inflation targets</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-full-model-with-gumbel-shocks">58.5. The full model with Gumbel shocks</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-algorithm">58.6. Computational algorithm</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-the-model">58.6.1. Solving the model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-full-model-with-gumbel-shocks">59.5. The full model with Gumbel shocks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-algorithm">59.6. Computational algorithm</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-the-model">59.6.1. Solving the model</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-types-of-disinflation">58.7. Two types of disinflation</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-disinflation-theta-falls-xi-fixed">58.7.1. Fundamental disinflation (<span class="math notranslate nohighlight">\(\theta\)</span> falls, <span class="math notranslate nohighlight">\(\xi\)</span> fixed)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#institutional-disinflation-xi-rises-theta-constant">58.7.2. Institutional disinflation (<span class="math notranslate nohighlight">\(\xi\)</span> rises, <span class="math notranslate nohighlight">\(\theta\)</span> constant)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#two-types-of-disinflation">59.7. Two types of disinflation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fundamental-disinflation-theta-falls-xi-fixed">59.7.1. Fundamental disinflation (<span class="math notranslate nohighlight">\(\theta\)</span> falls, <span class="math notranslate nohighlight">\(\xi\)</span> fixed)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#institutional-disinflation-xi-rises-theta-constant">59.7.2. Institutional disinflation (<span class="math notranslate nohighlight">\(\xi\)</span> rises, <span class="math notranslate nohighlight">\(\theta\)</span> constant)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-particle-filter">58.8. The particle filter</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">58.8.1. Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-particle-filter">59.8. The particle filter</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">59.8.1. Algorithm</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-studies">58.9. Case studies</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colombia-19802017">58.9.1. Colombia (1980–2017)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chile-19902017">58.9.2. Chile (1990–2017)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#case-studies">59.9. Case studies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#colombia-19802017">59.9.1. Colombia (1980–2017)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chile-19902017">59.9.2. Chile (1990–2017)</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-mechanisms-a-summary">58.10. Key Mechanisms: A Summary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">58.11. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-mechanisms-a-summary">59.10. Key Mechanisms: A Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">59.11. Exercises</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -309,7 +312,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/95d83cdc" class="changelog-hash">95d83cdc</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">2 hours ago</span>
+                                <span class="changelog-time">1 month ago</span>
                                 <span class="changelog-message">Tom's new lecture on the Bocola-Dovis and others paper (#320)</span>
                             </li>
                             
@@ -326,7 +329,7 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="accounting-for-monetary-and-fiscal-policy">
-<h1><a class="toc-backref" href="#id29" role="doc-backlink"><span class="section-number">58. </span>Accounting for Monetary and Fiscal Policy</a><a class="headerlink" href="#accounting-for-monetary-and-fiscal-policy" title="Link to this heading">#</a></h1>
+<h1><a class="toc-backref" href="#id29" role="doc-backlink"><span class="section-number">59. </span>Accounting for Monetary and Fiscal Policy</a><a class="headerlink" href="#accounting-for-monetary-and-fiscal-policy" title="Link to this heading">#</a></h1>
 <nav class="contents" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
@@ -354,17 +357,17 @@
 <p>To run this lecture on your own machine, you need to install <a class="reference external" href="https://github.com/google/jax">Google JAX</a>.</p>
 </div>
 <section id="overview">
-<h2><a class="toc-backref" href="#id30" role="doc-backlink"><span class="section-number">58.1. </span>Overview</a><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>This lecture studies a model of fiscal and monetary policy interactions developed by <span id="id1">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span>.</p>
+<h2><a class="toc-backref" href="#id30" role="doc-backlink"><span class="section-number">59.1. </span>Overview</a><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>This lecture studies a model of fiscal and monetary policy interactions developed by <span class="bibtex-citation" id="id1">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span>.</p>
 <p>The model provides a framework for  revisiting some long-standing questions about <strong>fiscal dominance</strong> versus <strong>monetary dominance</strong> in a framework that allows for <strong>partial commitment</strong> to an inflation target.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For an early discussion of “partial commitment” in the context of fiscal and monetary policy, see the concluding section of <span id="id2">Lucas and Stokey [<a class="reference internal" href="zreferences.html#id196" title="Jr. Lucas, Robert E. and Nancy L. Stokey. Optimal fiscal and monetary policy in an economy without capital. Discussion Paper 532, Northwestern University, Center for Mathematical Studies in Economics and Management Science, 1982.">1982</a>]</span>,  the original working paper version of <span id="id3">Lucas and Stokey [<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">1983</a>]</span>.</p>
+<p>For an early discussion of “partial commitment” in the context of fiscal and monetary policy, see the concluding section of <span class="bibtex-citation" id="id2">Lucas and Stokey [<a class="reference internal" href="zreferences.html#id196" title="Jr. Lucas, Robert E. and Nancy L. Stokey. Optimal fiscal and monetary policy in an economy without capital. Discussion Paper 532, Northwestern University, Center for Mathematical Studies in Economics and Management Science, 1982.">1982</a>]</span>,  the original working paper version of <span class="bibtex-citation" id="id3">Lucas and Stokey [<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">1983</a>]</span>.</p>
 <p>In Quantecon’s view, the referees and editors of the <em>Journal of Monetary Economics</em> version made a mistake by insisting that Lucas and Stokey rewrite the concluding section of their paper.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><span id="id4">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id5" title="Thomas J. Sargent and Neil Wallace. Some unpleasant monetarist arithmetic. Federal Reserve Bank of Minneapolis Quarterly Review, 5(3):1–17, 1981.">1981</a>]</span> contrasted “fiscal dominance” and “monetary dominance”  as different ways of  coordinating
+<p><span class="bibtex-citation" id="id4">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id5" title="Thomas J. Sargent and Neil Wallace. Some unpleasant monetarist arithmetic. Federal Reserve Bank of Minneapolis Quarterly Review, 5(3):1–17, 1981.">1981</a>]</span> contrasted “fiscal dominance” and “monetary dominance”  as different ways of  coordinating
 monetary and fiscal policy.</p>
 <p>They thought about them  at the beginning of the Reagan administration, when the 1970s surge in US inflation had not yet been tamed by the monetary-fiscal policies presided over by Paul Volcker.</p>
 <p>Sargent and Wallace’s title, “Some Unpleasant Monetarist Arithmetic,” expressed the idea that in the face of a persistent net-of-interest government deficit, efforts to reduce inflation through tight monetary policy work only temporarily, if at all.</p>
@@ -386,7 +389,7 @@ allows the authors to create a statistical model that lets them classify observe
 <strong>particle filter</strong> to recover the sequences of fiscal and institutional shocks that are consistent with the observed joint paths of inflation and debt-to-GDP ratios.</p>
 <p>This lecture will:</p>
 <ol class="arabic simple">
-<li><p>Set up the model environment in a <span id="id5">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id5" title="Thomas J. Sargent and Neil Wallace. Some unpleasant monetarist arithmetic. Federal Reserve Bank of Minneapolis Quarterly Review, 5(3):1–17, 1981.">1981</a>]</span> economy with a household and a government</p></li>
+<li><p>Set up the model environment in a <span class="bibtex-citation" id="id5">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id5" title="Thomas J. Sargent and Neil Wallace. Some unpleasant monetarist arithmetic. Federal Reserve Bank of Minneapolis Quarterly Review, 5(3):1–17, 1981.">1981</a>]</span> economy with a household and a government</p></li>
 <li><p>Describe implementable fiscal and monetary outcomes</p></li>
 <li><p>Characterize two setups: the <strong>Ramsey</strong> outcome (full commitment) and the
 <strong>Markov</strong> outcome (no commitment)</p></li>
@@ -411,51 +414,12 @@ a stochastic cost <span class="math notranslate nohighlight">\(\xi\)</span> of d
 <p class="expanded admonition-title">Hide code cell output</p>
 </summary>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting jax
-  Downloading jax-0.9.2-py3-none-any.whl.metadata (13 kB)
-Collecting jaxlib&lt;=0.9.2,&gt;=0.9.2 (from jax)
-  Downloading jaxlib-0.9.2-cp313-cp313-manylinux_2_27_x86_64.whl.metadata (1.3 kB)
-Collecting ml_dtypes&gt;=0.5.0 (from jax)
-  Downloading ml_dtypes-0.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.9 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: jax in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (0.10.1)
+Requirement already satisfied: jaxlib&lt;=0.10.1,&gt;=0.10.1 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from jax) (0.10.1)
+Requirement already satisfied: ml_dtypes&gt;=0.5.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from jax) (0.5.4)
 Requirement already satisfied: numpy&gt;=2.0 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from jax) (2.3.5)
-Collecting opt_einsum (from jax)
-  Downloading opt_einsum-3.4.0-py3-none-any.whl.metadata (6.3 kB)
-Requirement already satisfied: scipy&gt;=1.13 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from jax) (1.16.3)
-Downloading jax-0.9.2-py3-none-any.whl (3.1 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/3.1 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">3.1/3.1 MB</span> <span class=" -Color -Color-Red">68.0 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25hDownloading jaxlib-0.9.2-cp313-cp313-manylinux_2_27_x86_64.whl (83.3 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/83.3 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━ <span class=" -Color -Color-Green">79.2/83.3 MB</span> <span class=" -Color -Color-Red">395.4 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">83.3/83.3 MB</span> <span class=" -Color -Color-Red">282.0 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25hDownloading ml_dtypes-0.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (5.0 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/5.0 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">5.0/5.0 MB</span> <span class=" -Color -Color-Red">256.4 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25hDownloading opt_einsum-3.4.0-py3-none-any.whl (71 kB)
-Installing collected packages: opt_einsum, ml_dtypes, jaxlib, jax
-?25l
-   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
-   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
-   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
-   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
-   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
-   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
-   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
-   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
-   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
-   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
-   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">2/4</span> [jaxlib]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━ <span class=" -Color -Color-Green">3/4</span> [jax]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4/4</span> [jax]
-Successfully installed jax-0.9.2 jaxlib-0.9.2 ml_dtypes-0.5.4 opt_einsum-3.4.0
+Requirement already satisfied: opt_einsum in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from jax) (3.4.0)
+Requirement already satisfied: scipy&gt;=1.14 in /home/runner/miniconda3/envs/quantecon/lib/python3.13/site-packages (from jax) (1.16.3)
 </pre></div>
 </div>
 </div>
@@ -479,11 +443,11 @@ Successfully installed jax-0.9.2 jaxlib-0.9.2 ml_dtypes-0.5.4 opt_einsum-3.4.0
 </div>
 </section>
 <section id="the-economy">
-<h2><a class="toc-backref" href="#id31" role="doc-backlink"><span class="section-number">58.2. </span>The economy</a><a class="headerlink" href="#the-economy" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id31" role="doc-backlink"><span class="section-number">59.2. </span>The economy</a><a class="headerlink" href="#the-economy" title="Link to this heading">#</a></h2>
 <section id="environment">
-<h3><span class="section-number">58.2.1. </span>Environment<a class="headerlink" href="#environment" title="Link to this heading">#</a></h3>
-<p>Consider an economy that blends elements of <span id="id6">Aiyagari <em>et al.</em> [<a class="reference internal" href="zreferences.html#id149" title="S. Rao Aiyagari, Albert Marcet, Thomas J. Sargent, and Juha Seppala. Optimal Taxation without State-Contingent Debt. Journal of Political Economy, 110(6):1220-1254, December 2002.">2002</a>]</span> and <span id="id7">Calvo [<a class="reference internal" href="zreferences.html#id159" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">1978</a>]</span>
-(see also <span id="id8">Lucas and Stokey [<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">1983</a>]</span> and <span id="id9">Chari and Kehoe [<a class="reference internal" href="zreferences.html#id4" title="V. V. Chari and Patrick J. Kehoe. Optimal fiscal and monetary policy. Handbook of Macroeconomics, 1:1671–1745, 1999.">1999</a>]</span>).</p>
+<h3><span class="section-number">59.2.1. </span>Environment<a class="headerlink" href="#environment" title="Link to this heading">#</a></h3>
+<p>Consider an economy that blends elements of <span class="bibtex-citation" id="id6">Aiyagari <em>et al.</em> [<a class="reference internal" href="zreferences.html#id149" title="S. Rao Aiyagari, Albert Marcet, Thomas J. Sargent, and Juha Seppala. Optimal Taxation without State-Contingent Debt. Journal of Political Economy, 110(6):1220-1254, December 2002.">2002</a>]</span> and <span class="bibtex-citation" id="id7">Calvo [<a class="reference internal" href="zreferences.html#id159" title="Guillermo A. Calvo. On the time consistency of optimal policy in a monetary economy. Econometrica, 46(6):1411-1428, 1978.">1978</a>]</span>
+(see also <span class="bibtex-citation" id="id8">Lucas and Stokey [<a class="reference internal" href="zreferences.html#id197" title="Robert E Lucas, Jr. and Nancy L Stokey. Optimal Fiscal and Monetary Policy in an Economy without Capital. Journal of monetary Economics, 12(3):55–93, 1983.">1983</a>]</span> and <span class="bibtex-citation" id="id9">Chari and Kehoe [<a class="reference internal" href="zreferences.html#id4" title="V. V. Chari and Patrick J. Kehoe. Optimal fiscal and monetary policy. Handbook of Macroeconomics, 1:1671–1745, 1999.">1999</a>]</span>).</p>
 <p>Time is discrete, indexed by <span class="math notranslate nohighlight">\(t = 0, 1, \ldots\)</span>.</p>
 <p>The exogenous state is <span class="math notranslate nohighlight">\(s_t \in \mathcal{S}\)</span>, following
 a Markov process with transition <span class="math notranslate nohighlight">\(\Pr(s_{t+1}|s_t)\)</span>.</p>
@@ -513,8 +477,8 @@ U(c, l, m, g, s) = c - \nu(l) + v(m) + \theta(s)\, u(g).
 <p>The government is benevolent but may have a different discount factor <span class="math notranslate nohighlight">\(\hat\beta \leq \beta\)</span>.</p>
 </section>
 <section id="implementable-allocations">
-<h3><span class="section-number">58.2.2. </span>Implementable allocations<a class="headerlink" href="#implementable-allocations" title="Link to this heading">#</a></h3>
-<p>Following the insight in <span id="id10">Aiyagari [<a class="reference internal" href="zreferences.html#id3" title="S. Rao Aiyagari. How should taxes be set? Quarterly Review, Federal Reserve Bank of Minneapolis, 13:22–32, 1989.">1989</a>]</span> and <span id="id11">Aiyagari <em>et al.</em> [<a class="reference internal" href="zreferences.html#id149" title="S. Rao Aiyagari, Albert Marcet, Thomas J. Sargent, and Juha Seppala. Optimal Taxation without State-Contingent Debt. Journal of Political Economy, 110(6):1220-1254, December 2002.">2002</a>]</span> (see also QuantEcon lectures <a class="reference internal" href="amss.html"><span class="doc">Optimal Taxation without State-Contingent Debt</span></a>, <a class="reference internal" href="amss2.html"><span class="doc">Fluctuating Interest Rates Deliver Fiscal Insurance</span></a>, and <a class="reference internal" href="amss3.html"><span class="doc">Fiscal Risk and Government Debt</span></a>), we define the <strong>real primary surplus</strong> as</p>
+<h3><span class="section-number">59.2.2. </span>Implementable allocations<a class="headerlink" href="#implementable-allocations" title="Link to this heading">#</a></h3>
+<p>Following the insight in <span class="bibtex-citation" id="id10">Aiyagari [<a class="reference internal" href="zreferences.html#id3" title="S. Rao Aiyagari. How should taxes be set? Quarterly Review, Federal Reserve Bank of Minneapolis, 13:22–32, 1989.">1989</a>]</span> and <span class="bibtex-citation" id="id11">Aiyagari <em>et al.</em> [<a class="reference internal" href="zreferences.html#id149" title="S. Rao Aiyagari, Albert Marcet, Thomas J. Sargent, and Juha Seppala. Optimal Taxation without State-Contingent Debt. Journal of Political Economy, 110(6):1220-1254, December 2002.">2002</a>]</span> (see also QuantEcon lectures <a class="reference internal" href="amss.html"><span class="doc">Optimal Taxation without State-Contingent Debt</span></a>, <a class="reference internal" href="amss2.html"><span class="doc">Fluctuating Interest Rates Deliver Fiscal Insurance</span></a>, and <a class="reference internal" href="amss3.html"><span class="doc">Fiscal Risk and Government Debt</span></a>), we define the <strong>real primary surplus</strong> as</p>
 <div class="math notranslate nohighlight">
 \[
 \Delta(s^t) \equiv \tau(s^t) l(s^t) - g(s^t).
@@ -578,10 +542,10 @@ V_0 = \sum_t \sum_{s^t} \hat\beta^t \Pr(s^t|s_0) \left[ U(\Delta(s^t), s_t) + v(
 </section>
 </section>
 <section id="policy-determination">
-<h2><a class="toc-backref" href="#id32" role="doc-backlink"><span class="section-number">58.3. </span>Policy determination</a><a class="headerlink" href="#policy-determination" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id32" role="doc-backlink"><span class="section-number">59.3. </span>Policy determination</a><a class="headerlink" href="#policy-determination" title="Link to this heading">#</a></h2>
 <section id="the-credibility-problem">
-<h3><span class="section-number">58.3.1. </span>The credibility problem<a class="headerlink" href="#the-credibility-problem" title="Link to this heading">#</a></h3>
-<p>An important innovation of <span id="id12">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span> is to model policy determination under
+<h3><span class="section-number">59.3.1. </span>The credibility problem<a class="headerlink" href="#the-credibility-problem" title="Link to this heading">#</a></h3>
+<p>An important innovation of <span class="bibtex-citation" id="id12">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span> is to model policy determination under
 <strong>partial commitment</strong> in the following sense.</p>
 <p>The government promises an inflation target <span class="math notranslate nohighlight">\(\pi^*\)</span> (equivalently, a
 promised value for real balances <span class="math notranslate nohighlight">\(\phi'\)</span>) for  next period.</p>
@@ -589,19 +553,19 @@ promised value for real balances <span class="math notranslate nohighlight">\(\p
 can choose to <strong>honor</strong> or <strong>abrogate</strong> the mandate.</p>
 <p>The cost of abrogating is modeled as a random variable <span class="math notranslate nohighlight">\(\xi\)</span> that stands in for the various frictions that make overriding a mandate difficult:</p>
 <ul class="simple">
-<li><p>reputational losses (see <span id="id13">Dovis and Kirpalani [<a class="reference internal" href="zreferences.html#id266" title="Alessandro Dovis and Rishabh Kirpalani. Rules without commitment: reputation and incentives. Review of Economic Studies, 88(6):2833–2856, 2021.">2021</a>]</span>)</p></li>
+<li><p>reputational losses (see <span class="bibtex-citation" id="id13">Dovis and Kirpalani [<a class="reference internal" href="zreferences.html#id266" title="Alessandro Dovis and Rishabh Kirpalani. Rules without commitment: reputation and incentives. Review of Economic Studies, 88(6):2833–2856, 2021.">2021</a>]</span>)</p></li>
 <li><p>coordination failures that lead to inferior equilibria</p></li>
 <li><p>institutional constraints and political costs</p></li>
 </ul>
 <p>When <span class="math notranslate nohighlight">\(\xi\)</span> is always large enough, the mandate is never broken and the Ramsey outcome obtains.</p>
 <p>When <span class="math notranslate nohighlight">\(\xi = 0\)</span>, the mandate is always broken and a Markov equilibrium results.</p>
 <p>The full model nests both extremes.</p>
-<p>Unlike the loose commitment framework of <span id="id14">Debortoli and Nunes [<a class="reference internal" href="zreferences.html#id269" title="Davide Debortoli and Ricardo Nunes. Fiscal policy under loose commitment. Journal of Economic Theory, 145(3):1005–1032, 2010.">2010</a>]</span>, where the probability of re-optimization is exogenous, here the regime switch is <em>endogenous</em>: the government decides whether to honor or abrogate based on the realized cost.</p>
+<p>Unlike the loose commitment framework of <span class="bibtex-citation" id="id14">Debortoli and Nunes [<a class="reference internal" href="zreferences.html#id269" title="Davide Debortoli and Ricardo Nunes. Fiscal policy under loose commitment. Journal of Economic Theory, 145(3):1005–1032, 2010.">2010</a>]</span>, where the probability of re-optimization is exogenous, here the regime switch is <em>endogenous</em>: the government decides whether to honor or abrogate based on the realized cost.</p>
 </section>
 <section id="recursive-formulation">
-<h3><span class="section-number">58.3.2. </span>Recursive formulation<a class="headerlink" href="#recursive-formulation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">59.3.2. </span>Recursive formulation<a class="headerlink" href="#recursive-formulation" title="Link to this heading">#</a></h3>
 <p>The state is <span class="math notranslate nohighlight">\(x = (b, \phi, s)\)</span> where <span class="math notranslate nohighlight">\(b\)</span> is inherited real debt, <span class="math notranslate nohighlight">\(\phi\)</span> is the promised real balances, and <span class="math notranslate nohighlight">\(s = (\theta, \xi)\)</span> is the exogenous state.</p>
-<p>This recursive formulation builds on <span id="id15">Abreu [<a class="reference internal" href="zreferences.html#id270" title="Dilip Abreu. On the theory of infinitely repeated games with discounting. Econometrica, 56(2):383–396, 1988.">1988</a>]</span>, <span id="id16">Chari and Kehoe [<a class="reference internal" href="zreferences.html#id271" title="V. V. Chari and Patrick J. Kehoe. Sustainable plans. Journal of Political Economy, 98(4):783–802, 1990.">1990</a>]</span>, and <span id="id17">Chang [<a class="reference internal" href="zreferences.html#id272" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">1998</a>]</span>.</p>
+<p>This recursive formulation builds on <span class="bibtex-citation" id="id15">Abreu [<a class="reference internal" href="zreferences.html#id270" title="Dilip Abreu. On the theory of infinitely repeated games with discounting. Econometrica, 56(2):383–396, 1988.">1988</a>]</span>, <span class="bibtex-citation" id="id16">Chari and Kehoe [<a class="reference internal" href="zreferences.html#id271" title="V. V. Chari and Patrick J. Kehoe. Sustainable plans. Journal of Political Economy, 98(4):783–802, 1990.">1990</a>]</span>, and <span class="bibtex-citation" id="id17">Chang [<a class="reference internal" href="zreferences.html#id272" title="Roberto Chang. Credible monetary policy in an infinite horizon model: recursive approaches. Journal of Economic Theory, 81(2):431–461, 1998.">1998</a>]</span>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>For descriptions of these frameworks, see other lectures in this suite of QuantEcon lecture notes, including  <a class="reference internal" href="calvo.html"><span class="doc">Ramsey plans, time inconsistency, sustainable plans</span></a>,<a class="reference internal" href="chang_ramsey.html"><span class="doc">competitive equilibria in the Chang model</span></a>, and <a class="reference internal" href="chang_credible.html"><span class="doc">sustainable plans in the Chang model</span></a>.</p>
@@ -611,7 +575,7 @@ can choose to <strong>honor</strong> or <strong>abrogate</strong> the mandate.</
 <li><p><strong>Monetary dominance</strong> (MD, <span class="math notranslate nohighlight">\(\eta = 1\)</span>): the government honors the inflation target.</p></li>
 <li><p><strong>Fiscal dominance</strong> (FD, <span class="math notranslate nohighlight">\(\eta = 0\)</span>): the government ignores the target and chooses <span class="math notranslate nohighlight">\(\phi\)</span> to   maximize short-run welfare.</p></li>
 </ul>
-<p>The idea of regime switching between monetary and fiscal dominance builds on <span id="id18">Leeper [<a class="reference internal" href="zreferences.html#id273" title="Eric M. Leeper. Equilibria under `active' and `passive' monetary and fiscal policies. Journal of Monetary Economics, 27(1):129–147, 1991.">1991</a>]</span>, <span id="id19">Bianchi [<a class="reference internal" href="zreferences.html#id274" title="Francesco Bianchi. Regime switches, agents' beliefs, and post-world war II U.S. macroeconomic dynamics. Review of Economic Studies, 80(2):463–490, 2013.">2013</a>]</span>, and <span id="id20">Bianchi and Ilut [<a class="reference internal" href="zreferences.html#id275" title="Francesco Bianchi and Cosmin Ilut. Monetary/fiscal policy mix and agents' beliefs. Review of Economic Dynamics, 26:113–139, 2017.">2017</a>]</span>.</p>
+<p>The idea of regime switching between monetary and fiscal dominance builds on <span class="bibtex-citation" id="id18">Leeper [<a class="reference internal" href="zreferences.html#id273" title="Eric M. Leeper. Equilibria under `active' and `passive' monetary and fiscal policies. Journal of Monetary Economics, 27(1):129–147, 1991.">1991</a>]</span>, <span class="bibtex-citation" id="id19">Bianchi [<a class="reference internal" href="zreferences.html#id274" title="Francesco Bianchi. Regime switches, agents' beliefs, and post-world war II U.S. macroeconomic dynamics. Review of Economic Studies, 80(2):463–490, 2013.">2013</a>]</span>, and <span class="bibtex-citation" id="id20">Bianchi and Ilut [<a class="reference internal" href="zreferences.html#id275" title="Francesco Bianchi and Cosmin Ilut. Monetary/fiscal policy mix and agents' beliefs. Review of Economic Dynamics, 26:113–139, 2017.">2017</a>]</span>.</p>
 <p>The present model differs in two important ways: the switches are <strong>endogenous</strong> (they emerge from the government’s optimization rather than from an exogenous Markov chain), and the policy chosen within each regime is also endogenous (not governed by fixed monetary and fiscal rules).</p>
 <p>The <strong>regime indicator</strong> is</p>
 <div class="math notranslate nohighlight">
@@ -631,7 +595,7 @@ can choose to <strong>honor</strong> or <strong>abrogate</strong> the mandate.</
 <p>A cost <span class="math notranslate nohighlight">\(\xi\)</span> greater than the cutoff <span class="math notranslate nohighlight">\(\xi^*\)</span> is required for the target to be sustained.</p>
 <p>More ambitious inflation targets (closer to the Ramsey value <span class="math notranslate nohighlight">\(\phi^*\)</span>) are harder to achieve because the cutoff <span class="math notranslate nohighlight">\(\xi^*\)</span> is larger.</p>
 <p>The target is also easier to achieve when the marginal utility of government expenditure <span class="math notranslate nohighlight">\(\theta\)</span> is lower, because positive surpluses are less valuable.</p>
-<p><a class="reference internal" href="#fig-credibility-targets"><span class="std std-numref">Fig. 58.2</span></a> below illustrates this logic.</p>
+<p><a class="reference internal" href="#fig-credibility-targets"><span class="std std-numref">Fig. 59.2</span></a> below illustrates this logic.</p>
 <p><strong>Monetary dominance</strong> – the government solves:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -654,7 +618,7 @@ J(b', \phi', s) = \beta \sum_{s'} \Pr(s'|s) \left[
   (1 - \eta(b', \phi', s'))\, H\!\left(\phi^{fd}(b', s')\right)
 \right].
 \]</div>
-<p>The default parameter values below are calibrated to an average of Colombia and Chile 1960–2017, following Table 1 of <span id="id21">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span>.</p>
+<p>The default parameter values below are calibrated to an average of Colombia and Chile 1960–2017, following Table 1 of <span class="bibtex-citation" id="id21">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span>.</p>
 <p>In our implementation, the preference parameter <span class="math notranslate nohighlight">\(\theta\)</span> is held fixed inside each model instance; we study fundamental disinflation by comparing solutions across different <span class="math notranslate nohighlight">\(\theta\)</span> values.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -671,10 +635,10 @@ J(b', \phi', s) = \beta \sum_{s'} \Pr(s'|s) \left[
 </section>
 </section>
 <section id="two-benchmark-outcomes">
-<h2><a class="toc-backref" href="#id33" role="doc-backlink"><span class="section-number">58.4. </span>Two benchmark outcomes</a><a class="headerlink" href="#two-benchmark-outcomes" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id33" role="doc-backlink"><span class="section-number">59.4. </span>Two benchmark outcomes</a><a class="headerlink" href="#two-benchmark-outcomes" title="Link to this heading">#</a></h2>
 <p>Before turning to the full model, it is useful to analyze two polar benchmarks.</p>
 <section id="the-ramsey-outcome-full-commitment">
-<h3><span class="section-number">58.4.1. </span>The Ramsey outcome (full commitment)<a class="headerlink" href="#the-ramsey-outcome-full-commitment" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">59.4.1. </span>The Ramsey outcome (full commitment)<a class="headerlink" href="#the-ramsey-outcome-full-commitment" title="Link to this heading">#</a></h3>
 <p>Under full commitment (<span class="math notranslate nohighlight">\(\xi\)</span> always large enough so that <span class="math notranslate nohighlight">\(\eta = 1\)</span>), the government solves</p>
 <div class="math notranslate nohighlight">
 \[
@@ -700,8 +664,8 @@ V^R(b, \phi, s) = \max_{\Delta, b', \phi'(s')} U(\Delta, s) + v(\phi) +
 </ul>
 </section>
 <section id="the-markov-outcome-no-commitment">
-<h3><span class="section-number">58.4.2. </span>The Markov outcome (no commitment)<a class="headerlink" href="#the-markov-outcome-no-commitment" title="Link to this heading">#</a></h3>
-<p>The polar opposite case in <span id="id22">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span> is one in which the government has no ability to commit to inflation, so that a Markov equilibrium obtains.</p>
+<h3><span class="section-number">59.4.2. </span>The Markov outcome (no commitment)<a class="headerlink" href="#the-markov-outcome-no-commitment" title="Link to this heading">#</a></h3>
+<p>The polar opposite case in <span class="bibtex-citation" id="id22">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span> is one in which the government has no ability to commit to inflation, so that a Markov equilibrium obtains.</p>
 <p>Setting <span class="math notranslate nohighlight">\(\xi(s) = 0\)</span> for all <span class="math notranslate nohighlight">\(s\)</span> makes the fiscal-dominant regime always optimal.</p>
 <p>Because the promise <span class="math notranslate nohighlight">\(\phi'\)</span> is never honored, it drops out of the problem.</p>
 <p>The problem reduces to</p>
@@ -834,7 +798,7 @@ V^M(b, s) = \max_{\phi, \Delta, b'} U(\Delta, \theta) + v(\phi) +
 <figure class="align-default" id="fig-indirect-utility">
 <img alt="_images/efe36513c274b7cbc6f0f886970baedf83257e3394e9f66bcfffd49f19dea785.png" src="_images/efe36513c274b7cbc6f0f886970baedf83257e3394e9f66bcfffd49f19dea785.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 58.1 </span><span class="caption-text">Indirect utility and surplus costs</span><a class="headerlink" href="#fig-indirect-utility" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 59.1 </span><span class="caption-text">Indirect utility and surplus costs</span><a class="headerlink" href="#fig-indirect-utility" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -844,7 +808,7 @@ V^M(b, s) = \max_{\phi, \Delta, b'} U(\Delta, \theta) + v(\phi) +
 <p>Higher <span class="math notranslate nohighlight">\(\theta\)</span> shifts the curves because greater social value of government spending makes running a surplus even more costly.</p>
 </section>
 <section id="credibility-of-inflation-targets">
-<h3><span class="section-number">58.4.3. </span>Credibility of inflation targets<a class="headerlink" href="#credibility-of-inflation-targets" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">59.4.3. </span>Credibility of inflation targets<a class="headerlink" href="#credibility-of-inflation-targets" title="Link to this heading">#</a></h3>
 <p>We can now illustrate the credibility condition from the recursive formulation.</p>
 <p>For a given level of inherited debt <span class="math notranslate nohighlight">\(b\)</span> and optimal continuation choices, the value of entering the period with real balances <span class="math notranslate nohighlight">\(\phi\)</span> is approximately</p>
 <div class="math notranslate nohighlight">
@@ -980,7 +944,7 @@ V^{md}(\phi;\, b,\, \theta) \;\approx\; U(\phi + D,\, \theta) \;+\; v(\phi),
 <figure class="align-default" id="fig-credibility-targets">
 <img alt="_images/593fd3fad87fc3c5995caffe72680c6b27ca478c02f96eda958457203ceefb26.png" src="_images/593fd3fad87fc3c5995caffe72680c6b27ca478c02f96eda958457203ceefb26.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 58.2 </span><span class="caption-text">Credibility of inflation targets</span><a class="headerlink" href="#fig-credibility-targets" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 59.2 </span><span class="caption-text">Credibility of inflation targets</span><a class="headerlink" href="#fig-credibility-targets" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -992,7 +956,7 @@ V^{md}(\phi;\, b,\, \theta) \;\approx\; U(\phi + D,\, \theta) \;+\; v(\phi),
 </section>
 </section>
 <section id="the-full-model-with-gumbel-shocks">
-<h2><a class="toc-backref" href="#id34" role="doc-backlink"><span class="section-number">58.5. </span>The full model with Gumbel shocks</a><a class="headerlink" href="#the-full-model-with-gumbel-shocks" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id34" role="doc-backlink"><span class="section-number">59.5. </span>The full model with Gumbel shocks</a><a class="headerlink" href="#the-full-model-with-gumbel-shocks" title="Link to this heading">#</a></h2>
 <p>Following the paper’s computational approach, the cost <span class="math notranslate nohighlight">\(\xi\)</span> is decomposed as</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1042,8 +1006,8 @@ V^{md}(\phi;\, b,\, \theta) \;\approx\; U(\phi + D,\, \theta) \;+\; v(\phi),
 </div>
 </section>
 <section id="computational-algorithm">
-<h2><a class="toc-backref" href="#id35" role="doc-backlink"><span class="section-number">58.6. </span>Computational algorithm</a><a class="headerlink" href="#computational-algorithm" title="Link to this heading">#</a></h2>
-<p>Because the budget constraint depends on <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> only through their sum, the problem can be written in terms of a single endogenous state variable <span class="math notranslate nohighlight">\(B = b + \phi\)</span> (total real government liabilities), as described in Appendix C of <span id="id23">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span>.</p>
+<h2><a class="toc-backref" href="#id35" role="doc-backlink"><span class="section-number">59.6. </span>Computational algorithm</a><a class="headerlink" href="#computational-algorithm" title="Link to this heading">#</a></h2>
+<p>Because the budget constraint depends on <span class="math notranslate nohighlight">\(b\)</span> and <span class="math notranslate nohighlight">\(\phi\)</span> only through their sum, the problem can be written in terms of a single endogenous state variable <span class="math notranslate nohighlight">\(B = b + \phi\)</span> (total real government liabilities), as described in Appendix C of <span class="bibtex-citation" id="id23">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span>.</p>
 <p>We define a <strong>reduced continuation value</strong> <span class="math notranslate nohighlight">\(W(B, s_1)\)</span> that strips the current-period money utility <span class="math notranslate nohighlight">\(v(\phi)\)</span> out of the recursive problem.</p>
 <p>The full value of entering a period with state <span class="math notranslate nohighlight">\((b, \phi, s_1)\)</span> is recovered as <span class="math notranslate nohighlight">\(v(\phi) + W(b + \phi, s_1)\)</span> under monetary dominance, and the fiscal-dominance value is <span class="math notranslate nohighlight">\(V^{fd}(b', s_1') = \max_{\phi}\left[W(b' + \phi, s_1') + v(\phi)\right]\)</span>.</p>
 <p>The function <span class="math notranslate nohighlight">\(W(B, s_1)\)</span> satisfies</p>
@@ -1289,7 +1253,7 @@ V^{fd}(b', \xi') = \max_{\phi} \left[ W(b' + \phi, \xi') + v(\phi) \right].
 </div>
 </div>
 <section id="solving-the-model">
-<h3><span class="section-number">58.6.1. </span>Solving the model<a class="headerlink" href="#solving-the-model" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">59.6.1. </span>Solving the model<a class="headerlink" href="#solving-the-model" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">solve_model</span></code> runs value function iteration using <code class="docutils literal notranslate"><span class="pre">lax.while_loop</span></code>, applying a <strong>dampened</strong> Bellman operator <span class="math notranslate nohighlight">\(W_{n+1} = \omega\, T(W_n) + (1 - \omega)\, W_n\)</span> with <span class="math notranslate nohighlight">\(\omega = 0.01\)</span>, terminating when the sup-norm update error falls below <code class="docutils literal notranslate"><span class="pre">tol</span></code> or after <code class="docutils literal notranslate"><span class="pre">max_iter</span></code> iterations.</p>
 <p><code class="docutils literal notranslate"><span class="pre">extract_policies</span></code> then re-evaluates the Bellman RHS on a choice grid that is 3<span class="math notranslate nohighlight">\(\times\)</span> denser in both <span class="math notranslate nohighlight">\(b'\)</span> and <span class="math notranslate nohighlight">\(\phi'\)</span>.</p>
 <div class="cell docutils container">
@@ -1526,7 +1490,7 @@ V^{fd}(b', \xi') = \max_{\phi} \left[ W(b' + \phi, \xi') + v(\phi) \right].
 <figure class="align-default" id="fig-vfi-convergence">
 <img alt="_images/b15156caac715077845cb84f3ea07798760efa89ff4442f5efa8ad84a4cb3aa6.png" src="_images/b15156caac715077845cb84f3ea07798760efa89ff4442f5efa8ad84a4cb3aa6.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 58.3 </span><span class="caption-text">VFI convergence</span><a class="headerlink" href="#fig-vfi-convergence" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 59.3 </span><span class="caption-text">VFI convergence</span><a class="headerlink" href="#fig-vfi-convergence" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1863,11 +1827,11 @@ V^{fd}(b', \xi') = \max_{\phi} \left[ W(b' + \phi, \xi') + v(\phi) \right].
 </section>
 </section>
 <section id="two-types-of-disinflation">
-<h2><a class="toc-backref" href="#id36" role="doc-backlink"><span class="section-number">58.7. </span>Two types of disinflation</a><a class="headerlink" href="#two-types-of-disinflation" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id36" role="doc-backlink"><span class="section-number">59.7. </span>Two types of disinflation</a><a class="headerlink" href="#two-types-of-disinflation" title="Link to this heading">#</a></h2>
 <p>A central result of the model is that inflation can decline for two distinct reasons, each with different implications for the dynamics of public debt.</p>
 <p>Following the paper’s terminology, a reduction in the marginal value of government spending <span class="math notranslate nohighlight">\(\theta\)</span> is called a <strong>fundamental disinflation</strong>, while an increase in the (expected) cost of deviating from the promised inflation <span class="math notranslate nohighlight">\(\xi\)</span> is called an <strong>institutional disinflation</strong>.</p>
 <section id="fundamental-disinflation-theta-falls-xi-fixed">
-<h3><span class="section-number">58.7.1. </span>Fundamental disinflation (<span class="math notranslate nohighlight">\(\theta\)</span> falls, <span class="math notranslate nohighlight">\(\xi\)</span> fixed)<a class="headerlink" href="#fundamental-disinflation-theta-falls-xi-fixed" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">59.7.1. </span>Fundamental disinflation (<span class="math notranslate nohighlight">\(\theta\)</span> falls, <span class="math notranslate nohighlight">\(\xi\)</span> fixed)<a class="headerlink" href="#fundamental-disinflation-theta-falls-xi-fixed" title="Link to this heading">#</a></h3>
 <p>Consider a path in which the realization of <span class="math notranslate nohighlight">\(\xi_t\)</span> is low enough so that it is always optimal to be in the fiscal dominant regime.</p>
 <p>Along this path, the value of real money balances (and inflation) is determined by the static condition <span class="math notranslate nohighlight">\(-U'(\Delta, \theta) = v'(\phi^{fd})\)</span> and is therefore closely tied to fiscal considerations, as in a Markov equilibrium.</p>
 <p>When <span class="math notranslate nohighlight">\(\theta\)</span> falls from <span class="math notranslate nohighlight">\(\theta_H\)</span> to <span class="math notranslate nohighlight">\(\theta_L\)</span>, the reduction in <span class="math notranslate nohighlight">\(\theta\)</span> shifts the policy function <span class="math notranslate nohighlight">\(\phi^{fd}(b, \theta)\)</span> upward: for any level of real debt, the government finds it optimal to choose a higher value for real balances, reflecting the lower marginal value of relaxing its budget constraint when government spending is less valuable.</p>
@@ -1875,7 +1839,7 @@ V^{fd}(b', \xi') = \max_{\phi} \left[ W(b' + \phi, \xi') + v(\phi) \right].
 <p>As a result, a decline in <span class="math notranslate nohighlight">\(\theta\)</span> while keeping <span class="math notranslate nohighlight">\(\xi\)</span> at a low level leads to an increase in real money balances (lower inflation) and a decrease in real debt – a <strong>positive correlation</strong> between inflation and debt.</p>
 </section>
 <section id="institutional-disinflation-xi-rises-theta-constant">
-<h3><span class="section-number">58.7.2. </span>Institutional disinflation (<span class="math notranslate nohighlight">\(\xi\)</span> rises, <span class="math notranslate nohighlight">\(\theta\)</span> constant)<a class="headerlink" href="#institutional-disinflation-xi-rises-theta-constant" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">59.7.2. </span>Institutional disinflation (<span class="math notranslate nohighlight">\(\xi\)</span> rises, <span class="math notranslate nohighlight">\(\theta\)</span> constant)<a class="headerlink" href="#institutional-disinflation-xi-rises-theta-constant" title="Link to this heading">#</a></h3>
 <p>Now consider the effects of an increase in the cost of deviating from the promised inflation target.</p>
 <p>When <span class="math notranslate nohighlight">\(\xi\)</span> rises from <span class="math notranslate nohighlight">\(\xi_L\)</span> to <span class="math notranslate nohighlight">\(\xi_H\)</span> (high enough to make it optimal to switch to the monetary dominant regime), the realized <span class="math notranslate nohighlight">\(\phi\)</span> now equals the promised value of real balances, which is higher than the statically optimal level <span class="math notranslate nohighlight">\(\phi^{fd}\)</span>.</p>
 <p>Critically, if the process for <span class="math notranslate nohighlight">\(\xi\)</span> is persistent, an increase in current <span class="math notranslate nohighlight">\(\xi\)</span> implies an increase in the expected value for <span class="math notranslate nohighlight">\(\xi'\)</span>, so the government now has lower incentives to reduce the amount of debt it issues because the wedge in the Euler equation is smaller in absolute value.</p>
@@ -2016,12 +1980,12 @@ V^{fd}(b', \xi') = \max_{\phi} \left[ W(b' + \phi, \xi') + v(\phi) \right].
 <figure class="align-default" id="fig-fundamental">
 <img alt="_images/7e5a1e02f2dc75413b104c70dd7d03a73a834900e1caa92f6c4e4652439a2a42.png" src="_images/7e5a1e02f2dc75413b104c70dd7d03a73a834900e1caa92f6c4e4652439a2a42.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 58.4 </span><span class="caption-text">Fundamental disinflation</span><a class="headerlink" href="#fig-fundamental" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 59.4 </span><span class="caption-text">Fundamental disinflation</span><a class="headerlink" href="#fig-fundamental" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p><strong>Fundamental disinflation</strong> (<a class="reference internal" href="#fig-fundamental"><span class="std std-numref">Fig. 58.4</span></a>): a permanent drop in <span class="math notranslate nohighlight">\(\theta\)</span> from <span class="math notranslate nohighlight">\(\theta_H\)</span> to <span class="math notranslate nohighlight">\(\theta_L\)</span> reduces fiscal pressure.</p>
+<p><strong>Fundamental disinflation</strong> (<a class="reference internal" href="#fig-fundamental"><span class="std std-numref">Fig. 59.4</span></a>): a permanent drop in <span class="math notranslate nohighlight">\(\theta\)</span> from <span class="math notranslate nohighlight">\(\theta_H\)</span> to <span class="math notranslate nohighlight">\(\theta_L\)</span> reduces fiscal pressure.</p>
 <p>Following the shock, both debt and inflation decline together – the signature of fundamental disinflation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2037,17 +2001,17 @@ V^{fd}(b', \xi') = \max_{\phi} \left[ W(b' + \phi, \xi') + v(\phi) \right].
 <figure class="align-default" id="fig-institutional">
 <img alt="_images/cdd5fd19edc6165c9dd6ec732d36e5e31e99725c97c2652e9a9609a6eaeefd6c.png" src="_images/cdd5fd19edc6165c9dd6ec732d36e5e31e99725c97c2652e9a9609a6eaeefd6c.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 58.5 </span><span class="caption-text">Institutional disinflation</span><a class="headerlink" href="#fig-institutional" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 59.5 </span><span class="caption-text">Institutional disinflation</span><a class="headerlink" href="#fig-institutional" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
-<p><strong>Institutional disinflation</strong> (<a class="reference internal" href="#fig-institutional"><span class="std std-numref">Fig. 58.5</span></a>): a permanent rise in <span class="math notranslate nohighlight">\(\xi\)</span> pushes the economy from fiscal dominance toward monetary dominance.</p>
+<p><strong>Institutional disinflation</strong> (<a class="reference internal" href="#fig-institutional"><span class="std std-numref">Fig. 59.5</span></a>): a permanent rise in <span class="math notranslate nohighlight">\(\xi\)</span> pushes the economy from fiscal dominance toward monetary dominance.</p>
 <p>Following the shock, inflation drops while debt rises – the signature of institutional disinflation.</p>
 </section>
 </section>
 <section id="the-particle-filter">
-<h2><a class="toc-backref" href="#id37" role="doc-backlink"><span class="section-number">58.8. </span>The particle filter</a><a class="headerlink" href="#the-particle-filter" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id37" role="doc-backlink"><span class="section-number">59.8. </span>The particle filter</a><a class="headerlink" href="#the-particle-filter" title="Link to this heading">#</a></h2>
 <p>The empirical strategy centers on a <strong>nonlinear state-space system</strong> estimated with a bootstrap particle filter.</p>
 <p>To keep the lecture computationally light, we illustrate the filtering algorithm on a reduced-form nonlinear state-space system:</p>
 <div class="math notranslate nohighlight">
@@ -2065,7 +2029,7 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <p>A <strong>bootstrap particle filter</strong> (sequential Monte Carlo) approximates the filtering distribution <span class="math notranslate nohighlight">\(p(S_t | y_{1:t})\)</span> with a set of weighted particles.</p>
 <p>We mirror that approach here, but with simplified transition and observation equations.</p>
 <section id="algorithm">
-<h3><span class="section-number">58.8.1. </span>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">59.8.1. </span>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">#</a></h3>
 <ol class="arabic">
 <li><p><em>Initialize</em>: Draw <span class="math notranslate nohighlight">\(N\)</span> particles <span class="math notranslate nohighlight">\(\{S_0^{(i)}\}_{i=1}^N\)</span> from the prior</p></li>
 <li><p><em>For</em> <span class="math notranslate nohighlight">\(t = 1, \ldots, T\)</span>:</p>
@@ -2279,7 +2243,7 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <figure class="align-default" id="fig-particle-filter">
 <img alt="_images/12211810115c89e0eefcf47cc4ad5a03fea13625494536060a6eb1086952d0eb.png" src="_images/12211810115c89e0eefcf47cc4ad5a03fea13625494536060a6eb1086952d0eb.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 58.6 </span><span class="caption-text">Particle filter on synthetic data</span><a class="headerlink" href="#fig-particle-filter" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 59.6 </span><span class="caption-text">Particle filter on synthetic data</span><a class="headerlink" href="#fig-particle-filter" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -2287,12 +2251,12 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 </section>
 </section>
 <section id="case-studies">
-<h2><a class="toc-backref" href="#id38" role="doc-backlink"><span class="section-number">58.9. </span>Case studies</a><a class="headerlink" href="#case-studies" title="Link to this heading">#</a></h2>
-<p><span id="id24">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span> apply the model to two prominent disinflation episodes in Latin America.</p>
+<h2><a class="toc-backref" href="#id38" role="doc-backlink"><span class="section-number">59.9. </span>Case studies</a><a class="headerlink" href="#case-studies" title="Link to this heading">#</a></h2>
+<p><span class="bibtex-citation" id="id24">Bocola <em>et al.</em> [<a class="reference internal" href="zreferences.html#id265" title="Luigi Bocola, Gaston Chaumont, Alessandro Dovis, and Rishabh Kirpalani. Accounting for credibility: fiscal-monetary interactions and the credibility of central bank mandates. Draft, last revision: February 2026, 2026.">2026</a>]</span> apply the model to two prominent disinflation episodes in Latin America.</p>
 <p>The full estimation is not reproduced here, but the main empirical findings are summarized below.</p>
 <section id="colombia-19802017">
-<h3><span class="section-number">58.9.1. </span>Colombia (1980–2017)<a class="headerlink" href="#colombia-19802017" title="Link to this heading">#</a></h3>
-<p>In 1991 Colombia instituted a new constitution that granted substantial independence to its central bank, Banco de la República, explicitly mandating price stability as its primary objective and significantly insulating monetary policy from political influence (<span id="id25">[<a class="reference internal" href="zreferences.html#id281" title="David Pérez-Reyna and Daniel Osorio-Rodríguez. The history of Colombia. In Timothy J. Kehoe and Juan Pablo Nicolini, editors, A Monetary and Fiscal History of Latin America, 1960–2017. University of Minnesota Press, 2022.">Pérez-Reyna and Osorio-Rodríguez, 2022</a>]</span>).</p>
+<h3><span class="section-number">59.9.1. </span>Colombia (1980–2017)<a class="headerlink" href="#colombia-19802017" title="Link to this heading">#</a></h3>
+<p>In 1991 Colombia instituted a new constitution that granted substantial independence to its central bank, Banco de la República, explicitly mandating price stability as its primary objective and significantly insulating monetary policy from political influence (<span class="bibtex-citation" id="id25">[<a class="reference internal" href="zreferences.html#id281" title="David Pérez-Reyna and Daniel Osorio-Rodríguez. The history of Colombia. In Timothy J. Kehoe and Juan Pablo Nicolini, editors, A Monetary and Fiscal History of Latin America, 1960–2017. University of Minnesota Press, 2022.">Pérez-Reyna and Osorio-Rodríguez, 2022</a>]</span>).</p>
 <p>In 2001 Colombia adopted an explicit inflation targeting regime with a long-term inflation goal of 3%.</p>
 <p>Prior to the 1991 reform, the central bank lacked autonomy, often making monetary policy susceptible to government pressures, and as a result Colombia suffered from persistent high inflation despite the relatively low level of debt.</p>
 <p>The particle filter identifies an increase in the cost of deviating from the inflation target (<span class="math notranslate nohighlight">\(\xi\)</span>) starting in <strong>1997</strong>, not 1992 – the first year after the reform.</p>
@@ -2303,8 +2267,8 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <p>This result underscores the crucial role credible institutional reforms played in simultaneously achieving higher debt levels and declining inflation in Colombia during this period.</p>
 </section>
 <section id="chile-19902017">
-<h3><span class="section-number">58.9.2. </span>Chile (1990–2017)<a class="headerlink" href="#chile-19902017" title="Link to this heading">#</a></h3>
-<p>Beginning in the late 1980s, Chile enacted a variety of fiscal and monetary reforms (<span id="id26">[<a class="reference internal" href="zreferences.html#id282" title="Rodrigo Caputo and Diego Saravia. The history of Chile. In Timothy J. Kehoe and Juan Pablo Nicolini, editors, A Monetary and Fiscal History of Latin America, 1960–2017. University of Minnesota Press, 2022.">Caputo and Saravia, 2022</a>]</span>).</p>
+<h3><span class="section-number">59.9.2. </span>Chile (1990–2017)<a class="headerlink" href="#chile-19902017" title="Link to this heading">#</a></h3>
+<p>Beginning in the late 1980s, Chile enacted a variety of fiscal and monetary reforms (<span class="bibtex-citation" id="id26">[<a class="reference internal" href="zreferences.html#id282" title="Rodrigo Caputo and Diego Saravia. The history of Chile. In Timothy J. Kehoe and Juan Pablo Nicolini, editors, A Monetary and Fiscal History of Latin America, 1960–2017. University of Minnesota Press, 2022.">Caputo and Saravia, 2022</a>]</span>).</p>
 <p>It tightened public finances and, for roughly three decades, consistently posted budget surpluses.</p>
 <p>On the monetary front, a 1989 constitutional law granted the Central Bank of Chile full autonomy and the country moved to an explicit inflation regime targeting soon after.</p>
 <p>In contrast to Colombia, both inflation and the debt-to-GDP ratio declined over this period.</p>
@@ -2315,18 +2279,18 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 </section>
 </section>
 <section id="key-mechanisms-a-summary">
-<h2><a class="toc-backref" href="#id39" role="doc-backlink"><span class="section-number">58.10. </span>Key Mechanisms: A Summary</a><a class="headerlink" href="#key-mechanisms-a-summary" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id39" role="doc-backlink"><span class="section-number">59.10. </span>Key Mechanisms: A Summary</a><a class="headerlink" href="#key-mechanisms-a-summary" title="Link to this heading">#</a></h2>
 <p>The model revolves around three interconnected mechanisms.</p>
 <p><em>1. Endogenous regime switching.</em></p>
 <p>Whether the government honors or abrogates its inflation mandate depends on the state <span class="math notranslate nohighlight">\((b, \phi, \theta, \xi)\)</span>.</p>
 <p>The regime emerges from optimization – the government weighs the benefit of fiscal flexibility against a stochastic institutional cost – rather than from an exogenous rule.</p>
-<p>Inflation moves because the government actively chooses to change its monetary policy, in the spirit of <span id="id27">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id5" title="Thomas J. Sargent and Neil Wallace. Some unpleasant monetarist arithmetic. Federal Reserve Bank of Minneapolis Quarterly Review, 5(3):1–17, 1981.">1981</a>]</span>, rather than because agents coordinate on a different equilibrium.</p>
+<p>Inflation moves because the government actively chooses to change its monetary policy, in the spirit of <span class="bibtex-citation" id="id27">Sargent and Wallace [<a class="reference internal" href="zreferences.html#id5" title="Thomas J. Sargent and Neil Wallace. Some unpleasant monetarist arithmetic. Federal Reserve Bank of Minneapolis Quarterly Review, 5(3):1–17, 1981.">1981</a>]</span>, rather than because agents coordinate on a different equilibrium.</p>
 <p><em>2. Incentive effects on debt and inflation targets.</em></p>
 <p>Under imperfect commitment, the current government strategically limits borrowing and chooses a less ambitious inflation target to reduce future governments’ temptation to abrogate.</p>
 <p>These incentive effects create a <em>downward wedge</em> in debt issuance relative to the Ramsey Euler equation and an <em>upward bias</em> in the inflation target relative to the Friedman rule.</p>
 <p>Both distortions vanish as <span class="math notranslate nohighlight">\(\xi \to \infty\)</span> (Ramsey) and are maximal at <span class="math notranslate nohighlight">\(\xi = 0\)</span> (Markov).</p>
 <p>The incentive to limit indebtedness becomes stronger as the probability of switching to the fiscal dominant regime increases.</p>
-<p>See <span id="id28">Ljungqvist and Sargent [<a class="reference internal" href="zreferences.html#id193" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">2018</a>]</span>, chapter 23, for a broader discussion of the credibility problem.</p>
+<p>See <span class="bibtex-citation" id="id28">Ljungqvist and Sargent [<a class="reference internal" href="zreferences.html#id193" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">2018</a>]</span>, chapter 23, for a broader discussion of the credibility problem.</p>
 <p><em>3. Two disinflation sources with distinct debt dynamics.</em></p>
 <p>Fundamental disinflations generate a positive correlation between inflation and the level of government debt, whereas institutional disinflations produce a negative correlation between the two.</p>
 <p>This contrasting behavior allows the authors to use the dynamics of debt and inflation to identify the contribution of institutional changes to inflation dynamics.</p>
@@ -2355,10 +2319,10 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <p>A key takeaway is that credible monetary institutions are a prerequisite for sustaining high public debt at low inflation.</p>
 </section>
 <section id="exercises">
-<h2><a class="toc-backref" href="#id40" role="doc-backlink"><span class="section-number">58.11. </span>Exercises</a><a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id40" role="doc-backlink"><span class="section-number">59.11. </span>Exercises</a><a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <div class="exercise admonition" id="dovis_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 58.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 59.1 </span></p>
 <section id="exercise-content">
 <p>For the middle <span class="math notranslate nohighlight">\(\xi_1\)</span> state on the coarse grid, compute</p>
 <div class="math notranslate nohighlight">
@@ -2406,14 +2370,14 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/45cdd5dd3e59cf15e972e434a732e560b924835a8d5c64153e42673271da135d.png" src="_images/45cdd5dd3e59cf15e972e434a732e560b924835a8d5c64153e42673271da135d.png" />
+<img alt="_images/cc9cea38f49986e0a67442af22ec2d3bdda196c55151d502aea114769ae6e348.png" src="_images/cc9cea38f49986e0a67442af22ec2d3bdda196c55151d502aea114769ae6e348.png" />
 </div>
 </div>
 </section>
 </div>
 <div class="exercise admonition" id="dovis_ex2">
 
-<p class="admonition-title"><span class="caption-number">Exercise 58.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 59.2 </span></p>
 <section id="exercise-content">
 <p>Run the particle filter on the synthetic data with different numbers of particles (<span class="math notranslate nohighlight">\(N = 500, 2000, 10000\)</span>).</p>
 <p>Plot the recovered <span class="math notranslate nohighlight">\(\xi\)</span> path for each and assess convergence.</p>
@@ -2538,13 +2502,18 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="mcmc.html">
+   3. Markov Chain Monte Carlo
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="muth_kalman.html">
-   3. Reverse Engineering a la Muth
+   4. Reverse Engineering a la Muth
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="discrete_dp.html">
-   4. Discrete State Dynamic Programming
+   5. Discrete State Dynamic Programming
   </a>
  </li>
 </ul>
@@ -2556,42 +2525,42 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="cons_news.html">
-   5. Information and Consumption Smoothing
+   6. Information and Consumption Smoothing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing.html">
-   6. Consumption Smoothing with Complete and Incomplete Markets
+   7. Consumption Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="smoothing_tax.html">
-   7. Tax Smoothing with Complete and Incomplete Markets
+   8. Tax Smoothing with Complete and Incomplete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="markov_jump_lq.html">
-   8. Markov Jump Linear Quadratic Dynamic Programming
+   9. Markov Jump Linear Quadratic Dynamic Programming
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_1.html">
-   9. How to Pay for a War: Part 1
+   10. How to Pay for a War: Part 1
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_2.html">
-   10. How to Pay for a War: Part 2
+   11. How to Pay for a War: Part 2
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="tax_smoothing_3.html">
-   11. How to Pay for a War: Part 3
+   12. How to Pay for a War: Part 3
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lqramsey.html">
-   12. Optimal Taxation in an LQ Economy
+   13. Optimal Taxation in an LQ Economy
   </a>
  </li>
 </ul>
@@ -2603,22 +2572,22 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arellano.html">
-   13. Default Risk and Income Fluctuations
+   14. Default Risk and Income Fluctuations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="matsuyama.html">
-   14. Globalization and Cycles
+   15. Globalization and Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="coase.html">
-   15. Coase’s Theory of the Firm
+   16. Coase’s Theory of the Firm
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="match_transport.html">
-   16. Composite Sorting
+   17. Composite Sorting
   </a>
  </li>
 </ul>
@@ -2630,47 +2599,47 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="hs_recursive_models.html">
-   17. Recursive Models of Dynamic Linear Economies
+   18. Recursive Models of Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="growth_in_dles.html">
-   18. Growth in Dynamic Linear Economies
+   19. Growth in Dynamic Linear Economies
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_asset_pricing_dles.html">
-   19. Lucas Asset Pricing Using DLE
+   20. Lucas Asset Pricing Using DLE
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="irfs_in_hall_model.html">
-   20. IRFs in Hall Models
+   21. IRFs in Hall Models
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="permanent_income_dles.html">
-   21. Permanent Income Model using the DLE Class
+   22. Permanent Income Model using the DLE Class
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="gorman_heterogeneous_households.html">
-   22. Gorman Aggregation
+   23. Gorman Aggregation
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rosen_schooling_model.html">
-   23. Rosen Schooling Model
+   24. Rosen Schooling Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cattle_cycles.html">
-   24. Cattle Cycles
+   25. Cattle Cycles
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hs_invertibility_example.html">
-   25. Shock Non Invertibility
+   26. Shock Non Invertibility
   </a>
  </li>
 </ul>
@@ -2682,22 +2651,22 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="five_preferences.html">
-   26. Risk and Model Uncertainty
+   27. Risk and Model Uncertainty
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="entropy.html">
-   27. Etymology of Entropy
+   28. Etymology of Entropy
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="robustness.html">
-   28. Robustness
+   29. Robustness
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   29. Robust Markov Perfect Equilibrium
+   30. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -2709,42 +2678,42 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   30. Covariance Stationary Processes
+   31. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   31. Estimation of Spectra
+   32. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   32. Additive and Multiplicative Functionals
+   33. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   33. Classical Control with Linear Algebra
+   34. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   34. Classical Prediction and Filtering With Linear Algebra
+   35. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   35. Knowing the Forecasts of Others
+   36. Knowing the Forecasts of Others
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_rational_expectations.html">
-   36. Demand for Money during Hyperinflations under Rational Expectations
+   37. Demand for Money during Hyperinflations under Rational Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="info_projection.html">
-   37. Hyperinflation and Information Projection
+   38. Hyperinflation and Information Projection
   </a>
  </li>
 </ul>
@@ -2756,47 +2725,47 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   38. Asset Pricing II: The Lucas Asset Pricing Model
+   39. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   39. Elementary Asset Pricing Theory
+   40. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_richard_1987.html">
-   40. The Role of Conditioning Information in Asset Pricing
+   41. The Role of Conditioning Information in Asset Pricing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_jagannathan_1991.html">
-   41. The Hansen-Jagannathan Bound
+   42. The Hansen-Jagannathan Bound
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   42. Two Modifications of Mean-Variance Portfolio Theory
+   43. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="doubts_or_variability.html">
-   43. Doubts or Variability?
+   44. Doubts or Variability?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
-   44. Risk Aversion or Mistaken Beliefs?
+   45. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   45. Irrelevance of Capital Structures with Complete Markets
+   46. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   46. Equilibrium Capital Structures with Incomplete Markets
+   47. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -2808,62 +2777,62 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   47. Optimal Unemployment Insurance
+   48. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   48. Stackelberg Plans
+   49. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   49. Machine Learning a Ramsey Plan
+   50. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   50. Time Inconsistency of Ramsey Plans
+   51. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   51. Sustainable Plans for a Calvo Model
+   52. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   52. Optimal Taxation with State-Contingent Debt
+   53. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   53. Optimal Taxation without State-Contingent Debt
+   54. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   54. Fluctuating Interest Rates Deliver Fiscal Insurance
+   55. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   55. Fiscal Risk and Government Debt
+   56. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   56. Competitive Equilibria of a Model of Chang
+   57. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   57. Credible Government Policies in a Model of Chang
+   58. Credible Government Policies in a Model of Chang
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   58. Accounting for Monetary and Fiscal Policy
+   59. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -2875,17 +2844,17 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   59. Troubleshooting
+   60. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   60. References
+   61. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   61. Execution Statistics
+   62. Execution Statistics
   </a>
  </li>
 </ul>
@@ -2929,6 +2898,8 @@ S_{t+1} = k(S_t, \varepsilon_{t+1})
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst/blob/main/lectures/dovis_accounting_mf.md" download><i data-feather="github"></i></a></li>
                     -->
                     <li data-tippy-content="View Source"><a target="_blank" href="https://github.com/QuantEcon/lecture-python-advanced.myst" download><i data-feather="github"></i></a></li>
+                    
+                    
                 </ul>
 
             </div>
