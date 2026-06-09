@@ -51,7 +51,7 @@ implementation:
 discounted principal-agent problem recursively.
 
 *  A **principal** owns a technology that produces output $q_t$ at
-   time $t$ according to a conditional distribution $F(q_t | a_t)$
+   time $t$ according to a conditional distribution $F(q_t \mid a_t)$
    that depends on the **effort** $a_t$ chosen by an **agent**.
 *  The principal does *not* observe $a_t$.
 *  The principal *does* observe $q_t$ at the end of period $t$ and
@@ -193,7 +193,7 @@ Each stage of the computation therefore amounts to solving a finite
 
 We begin with the finite objects in the planning problem.
 
-Let $P(q | a)$ be a family of discrete conditional probability
+Let $P(q \mid a)$ be a family of discrete conditional probability
 distributions over finite sets $Q$ (outputs) and $A$ (actions).
 
 Let $C$ and $W'$ be finite grids for current consumption and next-period
