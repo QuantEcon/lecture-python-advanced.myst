@@ -18,28 +18,21 @@ This lecture studies {cite:t}`Atkeson1991`, which examines the *constrained
 optimal pattern of capital flows* between an international lender and a
 sovereign borrower subject to two frictions:
 
-1. **Moral hazard** — lenders cannot observe whether the borrower invests or
+1. **Moral hazard**: lenders cannot observe whether the borrower invests or
    simply consumes loan proceeds.
-2. **Risk of repudiation** — as a sovereign, the borrower can unilaterally
+2. **Risk of repudiation**: as a sovereign, the borrower can unilaterally
    renounce its debt at any time.
 
-A central result is that, under an optimal contract, a "sudden stop" or
-"debt crisis" emerges in which a borrowing country must *export capital*
-after suffering an adverse output shock.
+A central result is that, under the informativeness and interiority
+conditions stated below, an optimal contract can require the borrowing
+country to *export capital* after the lowest output realizations.
 
-Outflows of capital after bad output realizations are the
-mechanism that incentivizes investment.
+These low-output outflows are part of the mechanism that incentivizes
+investment.
 
-The model extends recursive techniques from {cite}`APS1986`, {cite}`APS1990`,
-and {cite}`Spear_Srivastava_87` to an environment with a *physical state
+The model extends recursive techniques from {cite:t}`APS1986`, {cite:t}`APS1990`,
+and {cite:t}`Spear_Srivastava_87` to an environment with a *physical state
 variable* that changes across periods.
-
-```{note}
-Atkeson (1991) uses $\delta$ for the discount factor.
-
-We follow the
-QuantEcon convention and write $\beta$ throughout.
-```
 
 ## The environment
 
@@ -54,20 +47,39 @@ Given investment $I_t$, next period's output
 $Y_{t+1}$ is drawn from the conditional distribution
 
 $$
-g(Y';\,I) \;=\; \lambda(I)\,g_0(Y') + \bigl[1 - \lambda(I)\bigr]\,g_1(Y'),
+g(Y';\,I) = \lambda(I)\,g_0(Y') + \bigl[1 - \lambda(I)\bigr]\,g_1(Y'),
 $$
 
-where $Y' \in \mathcal{Y} = \{Y_1, \ldots, Y_N\}$ with $Y_N \geq \cdots \geq
-Y_1 > 0$.
+```{prf:assumption} Technology and Output Signals
+:label: atkeson_assumption_technology
 
-The weight $\lambda : [0,I_{\max}] \to [0,1]$ is strictly
-increasing, so higher investment shifts the distribution toward higher outputs.
+The output support is finite and ordered,
+$\mathcal{Y} = \{Y_1,\ldots,Y_N\}$, with
+$0 < Y_1 < \cdots < Y_N$.
 
-The ratio $g_0(Y_i')/g_1(Y_i')$ is assumed to be **monotone increasing in
-$i$** (monotone likelihood ratio property).
+For every investment level $I$, output has strictly positive probabilities:
+$g(Y_i;I)>0$ for all $i$.
 
-This means low output is a
-relatively strong signal that the borrower invested little.
+Investment affects output only through the probability vector
+$g(\cdot;I)$.
+
+The distribution has the mixture form
+$g(Y_i;I)=\lambda(I)g_0(Y_i)+[1-\lambda(I)]g_1(Y_i)$, where $g_0$ and $g_1$
+are probability distributions on $\mathcal{Y}$ and
+$\lambda : [0,I_{\max}] \to [0,1]$ is strictly increasing and concave,
+
+$$
+\lambda'(I)>0, \qquad \lambda''(I)\le 0.
+$$
+
+The ratio $g_0(Y_i)/g_1(Y_i)$ is increasing in $i$.
+```
+
+The last condition is a monotone likelihood-ratio condition.
+
+Since higher investment raises $\lambda(I)$, high output is relatively good
+news about investment, while low output is relatively strong evidence that
+the borrower invested little.
 
 ### Agents and preferences
 
@@ -75,11 +87,44 @@ relatively strong signal that the borrower invested little.
 discounted utility
 
 $$
-U^B(\sigma) \;=\; (1 - \beta)\,\mathbb{E}_0^{\sigma}
+v^B(\sigma) = (1 - \beta)\,\mathbb{E}_0^{\sigma}
     \sum_{t=0}^{\infty} \beta^t \, u(c_t),
 $$
 
-where $u$ is strictly concave with $u'(0) = +\infty$.
+```{prf:assumption} Preferences and Autarky
+:label: atkeson_assumption_preferences
+
+The borrower has discount factor $\beta \in (0,1)$ and period utility
+$u(c)$ that is increasing, strictly concave, bounded above, and satisfies
+$u'(0)=+\infty$.
+
+Lenders are short-lived and risk neutral.
+
+The borrower's autarky value is high enough to rule out equilibrium states
+with arbitrarily low current consumption:
+
+$$
+(1-\beta)u(0) + \beta \bar u < v^B_{\text{aut}}(Y_1),
+$$
+
+where $\bar u$ is an upper bound for period utility.
+```
+
+The last inequality is Atkeson's lower-bound condition.
+
+It ensures that very low current consumption cannot be compensated by even
+the best possible future utility, so the relevant state space can be bounded
+away from such outcomes.
+
+Here $\sigma$ denotes an **allocation**, a complete state-contingent plan for
+consumption, investment, and the associated loans and repayments, written out
+in full in feasibility condition {eq}`eq:atkeson_feasibility`.
+
+$\mathbb{E}_0^{\sigma}$ is the expectation over output histories that this plan
+induces, evaluated at date $0$.
+
+The factor $(1 - \beta)$ normalises lifetime utility to per-period units, so
+$v^B$ is comparable to a one-period payoff.
 
 **Lenders** are a sequence of short-lived, risk-neutral agents, one born each
 period.
@@ -88,21 +133,41 @@ The lender born at $t$ extends loan $b_t$ when young and collects
 state-contingent repayment $d_{t+1}(Y_{t+1})$ when old.
 
 A lender's
-participation (zero-profit) constraint is
+participation constraint is
 
 $$
--b_t + \beta \sum_{Y'} d_{t+1}(Y')\,g(Y';\,I_t) \;\geq\; 0.
-$$
+-b_t + \beta \sum_{Y'} d_{t+1}(Y')\,g(Y';\,I_t) \geq 0.
+$$ (eq:atkeson_lender_ir)
+
+```{prf:assumption} Lender Commitment and Deposit Seizure
+:label: atkeson_assumption_lenders
+
+Young lenders can commit to honor the contract when they are old, including
+states in which the repayment $d_{t+1}(Y_{t+1})$ is negative and the borrower
+is withdrawing deposits.
+
+If a borrower repudiates a loan, the old lender whose loan was repudiated
+can seize the borrower's later deposits with future lenders until the loss is
+compensated.
+```
+
+These assumptions prevent the borrower from defaulting on one lender and
+then using deposits with future lenders to smooth consumption.
+
+They are what make exclusion into autarky a credible punishment after
+repudiation in this environment.
 
 ### State variable and feasibility
 
 Define
 
 $$
-Q_t \;\equiv\; Y_t - d_t(Y_t)
+Q_t := Y_t - d_t(Y_t)
 $$
 
-as **output net of repayment** — the resources available to the borrower
+as **output net of repayment**.
+
+It is the resources available to the borrower
 after settling the old lender's claim.
 
 An allocation
@@ -110,9 +175,9 @@ $\sigma = \{c_t(Q^t),\,I_t(Q^t),\,b_t(Q^t),\,d_{t+1}(Y_{t+1};Q^t)\}$
 is **feasible** if for all $t$ and histories:
 
 $$
-c_t + I_t - b_t \;\leq\; Q_t, \quad c_t,\, I_t \geq 0,
-    \quad b_t,\; -d_{t+1}(Y') \leq M,
-$$
+c_t + I_t - b_t \leq Q_t, \quad c_t,\, I_t \geq 0,
+    \quad b_t, -d_{t+1}(Y') \leq M,
+$$ (eq:atkeson_feasibility)
 
 where $M$ is the lender's endowment per period.
 
@@ -121,125 +186,371 @@ where $M$ is the lender's endowment per period.
 The value the borrower can attain without credit access satisfies
 
 $$
-U^B_{\text{aut}}(Z) \;=\; \max_{I \in [0, Z]}
-    \Bigl[(1-\beta)\,u(Z - I) + \beta \sum_{Y'} U^B_{\text{aut}}(Y')\,g(Y';\,I)\Bigr].
+v^B_{\text{aut}}(Z) = \max_{0 \le I \le \min\{Z,\, I_{\max}\}}
+    \Bigl[
+        (1-\beta)\,u(Z - I)
+        + \beta \sum_{Y'} v^B_{\text{aut}}(Y')\,g(Y';\,I)
+    \Bigr].
 $$
 
 ## Two impediments to contracting
 
 ### Moral hazard
 
-Because lenders can observe only $Y_t$, not the borrower's investment $I_t$,
-any feasible allocation must be **incentive compatible**: the borrower prefers
-the prescribed $(c_t, I_t)$ to any alternative consumption-investment plan
-given the loan and repayment schedule.
+The contract can condition on observable histories, but not directly on
+the borrower's investment.
+
+An allocation is a full history-contingent plan
+
+$$
+\sigma = \{c_t(Q^t),\, I_t(Q^t),\, b_t(Q^t),\,
+          d_{t+1}(Y_{t+1}; Q^t)\}_{t \geq 0}.
+$$
+
+The loan and repayment schedules, $b$ and $d$, are contract terms.
+
+The borrower privately chooses consumption and investment.
+
+Hence incentive compatibility must rule out deviations in the whole
+future consumption-investment plan, not just in current investment.
+
+The allocation $\sigma$ is **incentive compatible** if, after every
+history $Q^t$, the borrower cannot improve by choosing another feasible
+consumption-investment plan while keeping the same $b$ and $d$:
+
+$$
+\begin{aligned}
+v^B(\sigma \mid Q^t)
+&\geq
+v^B(\tilde \sigma \mid Q^t),
+\\
+&\text{for all feasible }
+\tilde \sigma = \{\tilde c,\, \tilde I,\, b,\, d\}.
+\end{aligned}
+$$ (eq:atkeson_ic)
+
+The lender observes output histories and can make future loans and
+repayments depend on those histories.
+
+The lender cannot make them depend directly on hidden investment.
+
+This mirrors the terminology in {doc}`Repeated Moral Hazard <repeat_mh>`,
+where incentive compatibility means that the agent prefers the recommended
+hidden action to a deviation.
+
 
 ### Risk of repudiation
 
-If the borrower repudiates its debt after $Y_{t+1}$ is realized, future
-lenders refuse credit and the borrower is confined to autarky.
+The borrower is sovereign and can refuse to repay.
 
-An allocation is **immune from repudiation** if, for every output realization $Y_{t+1}$,
+Suppose that after history $Q^t$, output $Y_{t+1}$ is realized and the
+contract calls for repayment $d_{t+1}(Y_{t+1}; Q^t)$.
+
+If the borrower repays, next period's state is
 
 $$
-U^B\bigl(\sigma\,\big|\,_{Q^t;\,Y_{t+1}}\bigr)
-    \;\geq\; U^B_{\text{aut}}(Y_{t+1}).
+Q_{t+1}
+= Y_{t+1} - d_{t+1}(Y_{t+1}; Q^t).
 $$
 
-The continuation value of the contract — evaluated at the post-repayment state
-$Q_{t+1} = Y_{t+1} - d_{t+1}(Y_{t+1})$ — must weakly exceed what the
-borrower would obtain by repudiating and retaining all of $Y_{t+1}$.
+If the borrower repudiates instead, it keeps the whole output
+$Y_{t+1}$ but is excluded from future borrowing.
+
+The relevant outside option is therefore autarky starting with
+$Y_{t+1}$.
+
+This distinction matters because $Q_{t+1}$ is the state *after*
+repayment, while default lets the borrower keep the resources that would
+have been repaid.
+
+An allocation is **immune from repudiation** if
+
+$$
+v^B\bigl(\sigma \mid Q^t, Y_{t+1}\bigr)
+\geq
+v^B_{\text{aut}}(Y_{t+1})
+$$ (eq:atkeson_no_repudiation)
+
+for all $t$, histories $Q^t$, and output realizations $Y_{t+1}$.
+
+The left side is the value of continuing with the contract after repayment.
+
+The right side is the punishment value after default.
 
 ## The constrained Pareto problem
 
-An allocation is **constrained Pareto optimal** if it maximises the borrower's
-payoff $U^B(\sigma)$ subject to:
+The planner chooses among allocations that satisfy five restrictions:
 
-1. Feasibility
-2. Individual rationality (lenders earn at least zero)
-3. Immunity from repudiation
-4. Incentive compatibility
+1. Feasibility {eq}`eq:atkeson_feasibility`
+2. Borrower individual rationality:
+   $v^B(\sigma \mid Q^t) \geq v^B_{\text{aut}}(Q_t)$
+3. Lender participation {eq}`eq:atkeson_lender_ir`
+4. Immunity from repudiation {eq}`eq:atkeson_no_repudiation`
+5. Incentive compatibility {eq}`eq:atkeson_ic`
+
+An allocation is **constrained Pareto optimal** if it maximizes the
+borrower's initial payoff $v^B(\sigma)$ over this constrained set.
+
+Borrower individual rationality is part of the general feasible set.
+
+When the recursive problem maximizes the borrower's payoff on the Pareto
+frontier, however, this constraint is nonbinding and can be dropped from
+that maximization.
+
+The lender's expected payoff from its loan contract must be nonnegative.
+
+These restrictions are continuation restrictions.
+
+After every possible history, the continuation allocation must again be
+feasible, satisfy individual rationality and lender participation, be immune
+from repudiation, and be incentive compatible.
 
 ## Recursive formulation
 
 ### Self-generation and factorization
 
-Let $V(Q)$ be the set of payoffs the borrower can achieve from allocations
-satisfying constraints (1)–(4) when the state is $Q$.
+Let $\mathcal V(Q)$ be the set of payoffs the borrower can achieve from
+allocations satisfying feasibility {eq}`eq:atkeson_feasibility`,
+borrower individual rationality, lender participation
+{eq}`eq:atkeson_lender_ir`, no-repudiation
+{eq}`eq:atkeson_no_repudiation`, and incentive compatibility
+{eq}`eq:atkeson_ic` when the state is $Q$.
 
-Atkeson adapts the
-**self-generation** and **factorization** results of {cite:t}`APS1990` to this
-setting with a physical state variable.
+The recursive formulation extends the **self-generation** and
+**factorization** arguments of {cite:t}`APS1990` to a setting with a
+physical state variable.
 
-Define a pair $(A, U)$ of current
-controls and a continuation value function to be *admissible with respect to*
-$W$ at $Q$ if it satisfies one-period versions of constraints (1)–(4) and
-$U(Q') \in W(Q')$ for all $Q'$.
+Let $A := (c, I, b, d')$ collect the current controls: consumption,
+investment, the current loan, and the next-period repayment schedule.
 
-Let $B(W)(Q)$ be the set of payoffs
+A pair $(A, v)$ of current controls and a continuation value function is
+*admissible with respect to* $W$ at $Q$ if it satisfies one-period
+versions of these same restrictions and $v(Q') \in W(Q')$ for all $Q'$.
+
+Let $\mathcal B(W)(Q)$ be the set of payoffs
 generated by admissible pairs.
 
-Then:
+The operator $\mathcal B$ asks a simple question.
 
-- **Proposition 1 (Self-generation):** If $W$ is self-generating
-  ($W(Q) \subseteq B(W)(Q)$ for all $Q$), then $B(W)(Q) \subseteq V(Q)$.
-- **Proposition 2 (Factorization):** $V(Q) \subseteq B(V)(Q)$ for all $Q$.
+Suppose future continuation payoffs must lie in the candidate set $W$.
 
-These propositions imply $V = B(V)$, characterising the utility possibility
-correspondence as the fixed point of $B$.
+Which current payoffs can we generate today while respecting feasibility,
+individual rationality, lender participation, no-repudiation, and incentive
+compatibility?
+
+Those payoffs form $\mathcal B(W)(Q)$.
+
+A set $W$ is **self-generating** if every payoff in $W$ can be generated
+again by using current controls and continuation payoffs that remain in
+$W$.
+
+Thus a self-generating set can reproduce itself recursively.
+
+**Factorization** goes in the other direction.
+
+It says that any payoff from a valid full contract can be split into two
+parts: current controls today and a continuation payoff after each
+possible next state.
+
+Because the continuation contract must also be valid, those continuation
+payoffs lie in $\mathcal V$.
+
+Two propositions characterize the utility possibility correspondence.
+
+```{prf:proposition} Self-generation
+:label: atkeson_self_generation
+
+If $W$ is self-generating, with
+$W(Q) \subseteq \mathcal B(W)(Q)$ for all $Q$, then
+$\mathcal B(W)(Q) \subseteq \mathcal V(Q)$ for all $Q$.
+```
+
+```{prf:proposition} Factorization
+:label: atkeson_factorization
+
+$\mathcal V(Q) \subseteq \mathcal B(\mathcal V)(Q)$ for all $Q$.
+```
+
+Together, {prf:ref}`atkeson_self_generation` and
+{prf:ref}`atkeson_factorization` imply
+$\mathcal V = \mathcal B(\mathcal V)$, characterising the utility
+possibility correspondence as the fixed point of $\mathcal B$.
 
 ### Program P*
 
-**Proposition 5** ({cite}`Atkeson1991`): The value function $\bar V(Q)$ of the
-constrained Pareto optimal contract satisfies the functional equation
+The correspondence $\mathcal V$ describes all feasible continuation
+payoffs.
+
+The constrained Pareto problem selects the upper envelope of that
+correspondence: for each state $Q$, it asks for the highest borrower
+payoff that can be delivered while respecting the contracting
+restrictions.
+
+Call this frontier $\bar v(Q)$.
+
+```{prf:assumption} Continuity of the Frontier
+:label: atkeson_assumption_continuity
+
+The constrained-optimal value function $\bar v(Q)$ is continuous in the
+state variable $Q$ on the relevant bounded state space.
+```
+
+Under {prf:ref}`atkeson_assumption_continuity`, Program P* is the Bellman
+equation for the frontier.
+
+The continuity condition is a substantive qualification: the functional
+equation below is the recursive characterization once this regularity is in
+place.
+
+```{prf:proposition} Program P*
+:label: atkeson_program_p_star
+
+Under {prf:ref}`atkeson_assumption_continuity`, $\bar v(Q)$ satisfies the
+functional equation
 
 $$
-\bar{V}(Q) \;=\; \max_{c,\,I,\,b,\,d'(\cdot)}
-    \;(1-\beta)\,u(c) + \beta \sum_{Y'} \bar{V}\!\bigl(Y' - d'(Y')\bigr)\,g(Y';\,I)
-$$
+\bar v(Q) = \max_{c,\,I,\,b,\,d'(\cdot)}
+    (1-\beta)\,u(c) + \beta \sum_{Y'} \bar v \bigl(Y' - d'(Y')\bigr)\,g(Y';\,I)
+$$ (eq:atkeson_program_p_star)
 
-subject to feasibility, lender participation, no-repudiation, and incentive
-compatibility.
+subject to feasibility {eq}`eq:atkeson_feasibility`, lender
+participation {eq}`eq:atkeson_lender_ir`, no-repudiation
+{eq}`eq:atkeson_no_repudiation`, and incentive compatibility
+{eq}`eq:atkeson_ic`.
+
+Borrower individual rationality is omitted here because it is nonbinding
+when the frontier maximizes the borrower's payoff.
 
 Moreover, the optimal *continuation* value function equals
-$\bar{V}$ itself.
+$\bar v$ itself.
+```
 
 This mirrors Bellman's principle: the *continuation of the optimal contract
 is itself optimal* at the updated state.
 
-### Capital outflows after low output
+Bellman's principle of optimality says that an optimal plan remains
+optimal from any future state it reaches.
 
-The first-order condition of the Lagrangian for Program P* with respect to the
-continuation value $U_d(Y_i')$ reveals that the no-repudiation Lagrange
-multiplier $\mu_3(Y_i') > 0$ whenever
+Here that means the contract chosen today does not need a separate
+continuation rule after tomorrow's output is realized.
 
-$$
-1 + \mu_4 \,\frac{g_1(Y_i';\,I)}{g(Y_i';\,I)} < 0.
-$$
+Once the new state $Q' = Y' - d'(Y')$ is reached, the continuation
+contract is again described by the same value function $\bar v(Q')$.
 
-The ratio $g_1(Y_i';I)/g(Y_i';I)$ measures the likelihood that output $Y_i'$
-signals *low* investment.
+### Capital outflows after the lowest outputs
 
-By the monotone likelihood ratio property, this
-ratio is largest for the *lowest output states*.
+To see where the repayment result comes from, first write the one-period
+problem with continuation values as choice variables.
 
-When $\mu_3(Y_i') > 0$,
-the no-repudiation constraint binds: $\bar{V}(Y_i' - d'(Y_i')) =
-U^B_{\text{aut}}(Y_i')$.
+This first-order argument is not unconditional.
 
-Repayment $d'(Y_i')$ is then at its maximum and the
-new loan available at the continuation state is limited, producing a net
-**capital outflow**:
+```{prf:assumption} First-Order Approach
+:label: atkeson_assumption_first_order
+
+At the constrained optimum, the expected value of repayments to lenders is
+nondecreasing in investment:
 
 $$
-\underbrace{d'(Y_i')}_{\text{repayment to old lender}}
-    \;>\; \underbrace{b'\!\bigl(Q'\bigr)}_{\text{new loan from young lender}}.
+\sum_{Y'} d'(Y')\,[g_0(Y')-g_1(Y')] \ge 0.
 $$
+
+This is the weak form of Atkeson's repayment-monotonicity condition; a strict
+inequality is the stronger version that rules out degenerate cases.
+
+The constrained-optimal investment choice is interior:
+$I^* \in (0,I_{\max})$.
+```
+
+Together with {prf:ref}`atkeson_assumption_technology`,
+{prf:ref}`atkeson_assumption_first_order` justifies replacing the
+incentive-compatibility condition by the relaxed first-order inequality used
+in the Lagrangian.
+
+Let $v_j$ be the continuation value promised after output $Y_j'$.
+
+$$
+Q_j' = Y_j' - d_j,
+$$
+
+where $d_j$ is the repayment due after output $Y_j'$.
+
+Let $g_j(I) = g(Y_j'; I)$ and
+$g_{I,j} = \partial g(Y_j'; I) / \partial I$.
+
+A Lagrangian for the relaxed one-period problem has the form
+
+$$
+\begin{aligned}
+\mathcal L
+=& (1-\beta)u(c) + \beta\sum_j v_j g_j(I) \\
+&+ \lambda_f (Q + b - c - I) \\
+&+ \lambda_\ell \left[\beta\sum_j d_j g_j(I) - b\right] \\
+&+ \beta\sum_j \mu_j g_j(I)
+   \left[v_j - v^B_{\text{aut}}(Y_j')\right] \\
+&+ \eta
+   \left[-(1-\beta)u'(Q+b-I)
+         + \beta\sum_j v_j g_{I,j}\right] \\
+&+ \beta\sum_j \xi_j g_j(I)
+   \left[\bar v(Y_j' - d_j) - v_j\right].
+\end{aligned}
+$$ (eq:atkeson_relaxed_lagrangian)
+
+Here $\lambda_f$ is the feasibility multiplier, $\lambda_\ell$ is the
+lender-participation multiplier, $\mu_j$ is the no-repudiation multiplier
+after output $Y_j'$, $\eta$ is the multiplier on the relaxed
+investment-incentive condition, and $\xi_j$ enforces consistency between
+$v_j$ and the frontier value $\bar v(Q_j')$.
+
+In the paper's numbered notation, $\mu_3(Y_j')$ corresponds to $\mu_j$,
+and $\mu_4$ corresponds to $\eta$.
+
+The numbers are just labels for constraints in the Lagrangian
+{eq}`eq:atkeson_relaxed_lagrangian`.
+
+The first-order condition with respect to $v_j$ is, up to the common
+positive scale factor $\beta g_j(I)$,
+
+$$
+1 + \mu_j - \xi_j
+    + \eta\frac{g_{I,j}}{g_j(I)} = 0.
+$$ (eq:atkeson_vj_foc)
+
+Atkeson's argument applies when the relaxed investment-incentive constraint is
+active, so $\eta > 0$.
+
+Hence a sufficiently negative value of $g_{I,j}/g_j(I)$ forces $\mu_j > 0$.
+
+Thus the likelihood term $g_{I,j}/g_j(I)$ determines which output states
+put the most pressure on the no-repudiation constraint.
+
+For low outputs, higher investment makes the realization less likely, so
+$g_{I,j}/g_j(I)$ is negative.
+
+By the monotone likelihood ratio property, this log-likelihood derivative
+is most negative for the lowest output states.
+
+When {eq}`eq:atkeson_vj_foc` requires $\mu_j > 0$, complementary slackness
+implies that the no-repudiation constraint binds:
+
+$$
+\bar v(Y_j' - d_j) = v^B_{\text{aut}}(Y_j').
+$$
+
+Repayment $d_j$ is then at its maximum and the new loan available at the
+continuation state is limited.
+
+Thus the borrower has a **capital outflow**:
+
+$$
+\underbrace{d_j}_{\text{repayment to old lender}}
+    \geq \underbrace{b' \bigl(Q_j'\bigr)}_{\text{new loan from young lender}}.
+$$
+
+Strict capital outflow requires the inequality to be strict.
 
 ## Computation
 
-We illustrate these results with a binary-investment, two-output version of
-the model.
+We now compute a grid approximation to Program P*.
 
 In addition to what's in Anaconda, this lecture will need the following library:
 
@@ -249,7 +560,7 @@ In addition to what's in Anaconda, this lecture will need the following library:
 !pip install jax
 ```
 
-### Setup
+We will use the following imports:
 
 ```{code-cell} ipython3
 import numpy as np
@@ -260,60 +571,123 @@ config.update("jax_enable_x64", True)
 import jax
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
+```
 
+### Setup
+
+Let's start by defining the model primitives and the state grid.
+
+The probabilities satisfy the monotone likelihood ratio property:
+$g_{\ell}(Y_L)/g_h(Y_L) > 1 > g_{\ell}(Y_H)/g_h(Y_H)$.
+
+Thus $Y_L$ is evidence of low investment, while $Y_H$ is evidence of high
+investment.
+
+```{code-cell} ipython3
 # Model parameters
 class Model(NamedTuple):
-    β:   float       # discount factor
-    I_h: float       # resource cost of high investment
-    Y_L: float       # low output state
-    Y_H: float       # high output state
-    M:   float       # lender endowment (b, −d ≤ M)
-    g_h: np.ndarray  # g_h[j] = Pr(Y[j] | invest I_h)
-    g_l: np.ndarray  # g_l[j] = Pr(Y[j] | invest 0)
+    β: float       # discount factor
+    I_max: float   # upper bound on investment
+    Y: np.ndarray  # output states
+    M: float       # lender endowment (b, -d <= M)
+    g_high: np.ndarray  # distribution at I_max
+    g_low: np.ndarray   # distribution at I = 0
+    κ: float       # curvature in the investment-probability map
 
 
-def create_model(β=0.9, I_h=0.2, Y_L=0.5, Y_H=1.0, M=10.0,
-                 g_h=(0.25, 0.75), g_l=(0.75, 0.25)):
+def create_model(β=0.92,
+                 I_max=0.6,
+                 Y=(0.8, 1.2),
+                 M=0.3,
+                 g_high=(0.05, 0.95),
+                 g_low=(0.95, 0.05),
+                 κ=3.0):
     """Build a model instance, validating the parameters."""
+
     if not 0 < β < 1:
         raise ValueError("β must lie in (0, 1)")
-    if Y_L >= Y_H:
-        raise ValueError("require Y_L < Y_H")
-    g_h, g_l = np.asarray(g_h), np.asarray(g_l)
-    if not (np.isclose(g_h.sum(), 1.0) and np.isclose(g_l.sum(), 1.0)):
-        raise ValueError("g_h and g_l must each sum to 1")
-    return Model(β=β, I_h=I_h, Y_L=Y_L, Y_H=Y_H, M=M, g_h=g_h, g_l=g_l)
+    Y = np.asarray(Y, dtype=float)
+
+    if np.any(np.diff(Y) <= 0):
+        raise ValueError("output states must be strictly increasing")
+
+    g_high, g_low = np.asarray(g_high), np.asarray(g_low)
+
+    if not (np.isclose(g_high.sum(), 1.0)
+            and np.isclose(g_low.sum(), 1.0)):
+        raise ValueError("probability vectors must sum to 1")
+
+    return Model(β=β, I_max=I_max, Y=Y, M=M,
+                 g_high=g_high, g_low=g_low, κ=κ)
 
 
 model = create_model()
-β, I_h, Y_L, Y_H, M = model.β, model.I_h, model.Y_L, model.Y_H, model.M
-g_h, g_l = model.g_h, model.g_l
-Y = np.array([Y_L, Y_H])
+β, I_max, Y, M, κ = model.β, model.I_max, model.Y, model.M, model.κ
+g_high, g_low = model.g_high, model.g_low
+Y_L, Y_H = Y
 
-# Monotone likelihood ratio: g_l[0]/g_h[0] = 3 > 1 > g_l[1]/g_h[1] = 1/3
-# → Y_L strongly signals low investment; Y_H signals high investment
-Δg = g_h - g_l                  # [−0.5,  0.5]
-
-# State grid: Q = Y − d (resources after repaying old debt)
-N_Q   = 200
-Q_MIN = 0.02
+# State grid: Q = Y - d (resources after repaying old debt)
+N_Q = 70
+N_I = 19
+Q_MIN = 0.002
 Q_MAX = 1.8
 Q_grid = np.linspace(Q_MIN, Q_MAX, N_Q)
 Q_grid_j = jnp.asarray(Q_grid)
+I_grid = np.linspace(0.0, I_max, N_I)
+I_grid_j = jnp.asarray(I_grid)
+Y_j = jnp.asarray(Y)
 
 Qp_L_mesh, Qp_H_mesh = np.meshgrid(Q_grid, Q_grid, indexing='ij')
-Qp_L_flat = jnp.asarray(Qp_L_mesh.ravel())
-Qp_H_flat = jnp.asarray(Qp_H_mesh.ravel())
+Qp_flat = jnp.asarray(np.column_stack((Qp_L_mesh.ravel(),
+                                       Qp_H_mesh.ravel())))
+n_pair = Qp_flat.shape[0]
 
 # Utility
 def u(c):
     return np.log(np.maximum(c, 1e-12))
 
+
 def u_jax(c):
     return jnp.log(jnp.maximum(c, 1e-12))
 
-print(f"Likelihood ratios g_l / g_h : {g_l / g_h}")
-print(f"Y_L signals low investment with ratio {g_l[0]/g_h[0]:.1f}x")
+
+def lambda_weight(I):
+    x = np.clip(I / I_max, 0.0, 1.0)
+    return (1 - np.exp(-κ * x)) / (1 - np.exp(-κ))
+
+
+def lambda_weight_jax(I):
+    x = jnp.clip(I / I_max, 0.0, 1.0)
+    return (1 - jnp.exp(-κ * x)) / (1 - jnp.exp(-κ))
+
+
+def g_of_I(I, g_high_val=None, g_low_val=None):
+    if g_high_val is None:
+        g_high_val = g_high
+    if g_low_val is None:
+        g_low_val = g_low
+    λ = lambda_weight(I)
+    return λ[..., None] * g_high_val + (1 - λ[..., None]) * g_low_val
+
+
+def g_of_I_jax(I, g_high_val, g_low_val):
+    λ = lambda_weight_jax(I)
+    return λ[..., None] * g_high_val + (1 - λ[..., None]) * g_low_val
+
+
+print(f"Likelihood ratios g_low / g_high : {g_low / g_high}")
+print(f"Y_L signals low investment with ratio {g_low[0]/g_high[0]:.1f}x")
+```
+
+```{note}
+The computation uses log utility, $u(c)=\log(c)$, as a numerical
+illustration.
+
+This relaxes the bounded-above primitive utility assumption used in the
+existence argument of {prf:ref}`atkeson_assumption_preferences`.
+
+On the finite grid, with finite resource bounds, the objective nonetheless
+remains bounded.
 ```
 
 ### Autarky value function
@@ -324,10 +698,10 @@ Starting each period with
 resources $Q$, the borrower solves
 
 $$
-U_{\text{aut}}(Q) =
-    \max_{I \in \{0,\,I_h\}}
+v_{\text{aut}}(Q) =
+    \max_{0 \leq I \leq \min\{Q,I_{\max}\}}
     \Bigl[(1-\beta)\,u(Q - I) + \beta
-    \bigl[g(I)_L\,U_{\text{aut}}(Y_L) + g(I)_H\,U_{\text{aut}}(Y_H)\bigr]\Bigr].
+    \sum_j g(Y_j;I)v_{\text{aut}}(Y_j)\Bigr].
 $$
 
 Note that the continuation values depend only on $Y_L$ and $Y_H$, not on the
@@ -335,157 +709,196 @@ current $Q$, because next period's state is simply the realised output.
 
 ```{code-cell} ipython3
 @jax.jit
-def autarky_step_jax(V, β_val, g_h_val, g_l_val):
-    """One vectorised Bellman step for the binary-investment autarky problem."""
-    EV_h = jnp.dot(g_h_val, jnp.interp(jnp.asarray(Y), Q_grid_j, V))
-    EV_l = jnp.dot(g_l_val, jnp.interp(jnp.asarray(Y), Q_grid_j, V))
-    val_h = jnp.where(
-        Q_grid_j > I_h + 1e-10,
-        (1 - β_val) * u_jax(Q_grid_j - I_h) + β_val * EV_h,
-        -jnp.inf
-    )
-    val_l = (1 - β_val) * u_jax(Q_grid_j) + β_val * EV_l
-    return jnp.maximum(val_h, val_l)
+def autarky_operator_jax(V, β_val, g_high_val, g_low_val):
+    """One vectorised Bellman step for the autarky problem."""
+    V_Y = jnp.interp(Y_j, Q_grid_j, V)
+    g_I = g_of_I_jax(I_grid_j, g_high_val, g_low_val)
+    EV_I = g_I @ V_Y
+    c = Q_grid_j[:, None] - I_grid_j[None, :]
+    val = (1 - β_val) * u_jax(c) + β_val * EV_I[None, :]
+    val = jnp.where(c >= 1e-10, val, -jnp.inf)
+    idx = jnp.argmax(val, axis=1)
+    return jnp.max(val, axis=1), I_grid_j[idx]
 
 
-def autarky_vfi(β_val=None, g_h_val=None, g_l_val=None, tol=1e-8, max_iter=3000):
-    """Value function iteration for the autarky problem (binary investment)."""
+def autarky_vfi(β_val=None,
+                g_high_val=None,
+                g_low_val=None,
+                tol=1e-8,
+                max_iter=3000,
+                verbose=True):
+    """Value function iteration for the autarky problem."""
     if β_val is None:
         β_val = β
-    if g_h_val is None:
-        g_h_val = g_h
-    if g_l_val is None:
-        g_l_val = g_l
+    if g_high_val is None:
+        g_high_val = g_high
+    if g_low_val is None:
+        g_low_val = g_low
 
     V = jnp.zeros(N_Q)
-    g_h_j = jnp.asarray(g_h_val)
-    g_l_j = jnp.asarray(g_l_val)
+    g_high_j = jnp.asarray(g_high_val)
+    g_low_j = jnp.asarray(g_low_val)
     for it in range(max_iter):
-        V_new = autarky_step_jax(V, β_val, g_h_j, g_l_j)
-        diff  = float(jnp.max(jnp.abs(V_new - V)))
-        V     = V_new
+        V_new, policy_I = autarky_operator_jax(V, β_val,
+                                               g_high_j, g_low_j)
+        diff = float(jnp.max(jnp.abs(V_new - V)))
+        V = V_new
         if diff < tol:
-            print(f"Autarky VFI converged in {it+1} iterations (diff={diff:.2e})")
+            if verbose:
+                print(
+                    f"Autarky VFI converged in {it+1} iterations "
+                    f"(diff={diff:.2e})"
+                )
             break
 
-    return np.asarray(V)
+    return np.asarray(V), np.asarray(policy_I)
 
-V_aut = autarky_vfi()
+V_aut, I_aut = autarky_vfi()
 ```
 
-### Constrained Pareto optimal contract
+### Program P*
 
 We solve Program P* iteratively.
 
-At each state $Q$, the planner chooses
-continuation states $(Q'_L, Q'_H)$ — equivalently, state-contingent
-repayments $d_j = Y_j - Q'_j$ — to maximise the borrower's payoff.
+At each state $Q$, the planner chooses current investment $I$ and
+continuation states $(Q'_L,Q'_H)$, equivalently repayments
+$d_j = Y_j - Q'_j$.
 
-Taking lender participation *binding* (Proposition 5 implies this is without
-loss of generality), the loan is determined by
+With lender participation imposed as binding, the loan is determined by
 
 $$
-b^* \;=\; \beta\bigl[g_{h,L}(Y_L - Q'_L) + g_{h,H}(Y_H - Q'_H)\bigr],
+b^*(Q,I,Q')
+    = \beta \sum_j (Y_j - Q'_j)g(Y_j;I),
 $$
 
-and current consumption is $c^* = Q + b^* - I_h$.
+and current consumption is $c^* = Q + b^* - I$.
 
-The optimisation reduces
-to a two-dimensional problem in $(Q'_L, Q'_H)$:
+We impose lender participation as binding in the displayed calibration.
+
+This is valid here because the implied loan remains below $M$, and the code
+discards any candidate whose zero-profit loan would exceed $M$.
+
+If instead $M$ binds, $b$ must be treated as a separate constrained choice, or
+set to $\min\{M,\,\beta\sum_j d_j g(Y_j;I)\}$ for each candidate.
+
+On the two-output grid, the search is over $I$ and $(Q'_L,Q'_H)$:
 
 $$
 \max_{Q'_L,\,Q'_H}
-    (1-\beta)\,u(c^*) + \beta\bigl[V(Q'_L)\,g_{h,L} + V(Q'_H)\,g_{h,H}\bigr]
+    \max_I \left\{(1-\beta)\,u(c^*) +
+    \beta\sum_j v(Q'_j)g(Y_j;I)\right\}
 $$
 
 subject to:
 
-- **(NR)** $V(Q'_j) \geq U_{\text{aut}}(Y_j)$, i.e. $Q'_j \geq Q^*_j$
-- **(IC)** $\beta\,\Delta g \cdot V(Q') \geq (1-\beta)\,[u(c^*+I_h) - u(c^*)]$
+- **(NR)** $v(Q'_j) \geq v_{\text{aut}}(Y_j)$, i.e. $Q'_j \geq Q^*_j$
+- **(IC)** $I$ solves the borrower's hidden investment problem
 - **(F)** $c^* \geq 0$
 
-where $\Delta g_j = g_{h,j} - g_{l,j}$ and $Q^*_j = V^{-1}(U_{\text{aut}}(Y_j))$.
+The code enforces IC by checking every alternative investment on `I_grid`.
 
 ```{code-cell} ipython3
 def find_Qmin(V_arr, v_thresh):
-    """Return min Q on grid with V(Q) >= v_thresh (no-repudiation lower bound)."""
+    """Return min Q on grid with value above the no-repudiation bound."""
+
     if v_thresh <= V_arr[0]:
         return float(Q_MIN)
     if v_thresh >= V_arr[-1]:
         return float(Q_MAX)
+
     # Use searchsorted on a monotone version of V
-    V_mono = np.maximum.accumulate(V_arr)   # enforce monotone for inversion
-    idx    = np.searchsorted(V_mono, v_thresh)
-    idx    = np.clip(idx, 1, N_Q - 1)
-    denom  = V_mono[idx] - V_mono[idx-1]
+    V_mono = np.maximum.accumulate(V_arr)  # enforce monotone for inversion
+    idx = np.searchsorted(V_mono, v_thresh)
+    idx = np.clip(idx, 1, N_Q - 1)
+    denom = V_mono[idx] - V_mono[idx-1]
+
     if abs(denom) < 1e-14:
         return float(Q_grid[idx-1])
+
     t = (v_thresh - V_mono[idx-1]) / denom
     return float(Q_grid[idx-1] + t * (Q_grid[idx] - Q_grid[idx-1]))
 
 
 @jax.jit
-def pareto_bellman_step_jax(V, V_aut_arr, β_val, g_h_val, g_l_val, Qp_min):
+def program_p_bellman_step_jax(V, V_aut_arr, I_aut_arr,
+                               β_val, g_high_val, g_low_val, Qp_min):
     """
-    One vectorised application of the constrained Pareto Bellman operator.
-
-    The optimizer is a deterministic grid maximisation over all pairs
-    (Q'_L, Q'_H).  JAX evaluates all states and all pairs in one compiled pass,
-    avoiding thousands of small SLSQP solves while preserving the NR, IC and
-    feasibility restrictions.
+    One grid Bellman step for Program P*.
     """
-    Δg_val = g_h_val - g_l_val
+    g_I = g_of_I_jax(I_grid_j, g_high_val, g_low_val)
+    V_pair = jnp.column_stack((
+        jnp.interp(Qp_flat[:, 0], Q_grid_j, V),
+        jnp.interp(Qp_flat[:, 1], Q_grid_j, V)
+    ))
 
-    V_L = jnp.interp(Qp_L_flat, Q_grid_j, V)
-    V_H = jnp.interp(Qp_H_flat, Q_grid_j, V)
-
-    b_pair = β_val * (
-        g_h_val[0] * (Y_L - Qp_L_flat)
-        + g_h_val[1] * (Y_H - Qp_H_flat)
+    d_pair = Y_j[None, :] - Qp_flat
+    pair_ok = (
+        (Qp_flat[:, 0] >= Qp_min[0])
+        & (Qp_flat[:, 1] >= Qp_min[1])
+        & jnp.all(-d_pair <= M, axis=1)
     )
-    EV_pair = g_h_val[0] * V_L + g_h_val[1] * V_H
-    IC_lhs = β_val * (Δg_val[0] * V_L + Δg_val[1] * V_H)
-    NR_mask = (Qp_L_flat >= Qp_min[0]) & (Qp_H_flat >= Qp_min[1])
 
-    c = Q_grid_j[:, None] + b_pair[None, :] - I_h
-    IC_rhs = (1 - β_val) * (u_jax(c + I_h) - u_jax(c))
-    feasible = NR_mask[None, :] & (c >= 1e-10) & (IC_lhs[None, :] >= IC_rhs)
+    b = β_val * jnp.einsum("iy,py->ip", g_I, d_pair)
+    EV = jnp.einsum("iy,py->ip", g_I, V_pair)
+    candidate_ok = pair_ok[None, :] & (b <= M)
 
-    obj = (1 - β_val) * u_jax(c) + β_val * EV_pair[None, :]
+    resources = Q_grid_j[:, None, None] + b[None, :, :]
+    c = resources - I_grid_j[None, :, None]
+    obj = (1 - β_val) * u_jax(c) + β_val * EV[None, :, :]
+
+    dev_best = jnp.full(obj.shape, -jnp.inf)
+    for i_alt in range(N_I):
+        I_alt = I_grid_j[i_alt]
+        EV_alt = jnp.einsum("y,py->p", g_I[i_alt], V_pair)
+        c_alt = resources - I_alt
+        dev = ((1 - β_val) * u_jax(c_alt)
+               + β_val * EV_alt[None, None, :])
+        dev = jnp.where(c_alt >= 1e-10, dev, -jnp.inf)
+        dev_best = jnp.maximum(dev_best, dev)
+
+    feasible = (
+        candidate_ok[None, :, :]
+        & (c >= 1e-10)
+        & (obj >= dev_best - 1e-8)
+    )
     obj = jnp.where(feasible, obj, -jnp.inf)
 
-    idx = jnp.argmax(obj, axis=1)
-    best_val = jnp.max(obj, axis=1)
+    flat = obj.reshape((N_Q, -1))
+    idx = jnp.argmax(flat, axis=1)
+    best_val = jnp.max(flat, axis=1)
     has_feasible = jnp.isfinite(best_val)
 
-    fallback = V_aut_arr
-    default_L = jnp.clip(jnp.maximum(Y_L, Qp_min[0]), Q_MIN, Q_MAX)
-    default_H = jnp.clip(jnp.maximum(Y_H, Qp_min[1]), Q_MIN, Q_MAX)
-    use_fallback = (~has_feasible) | (best_val <= fallback)
+    I_flat = jnp.repeat(I_grid_j, n_pair)
+    b_flat = b.reshape(-1)
+    Qp_L_flat = jnp.tile(Qp_flat[:, 0], N_I)
+    Qp_H_flat = jnp.tile(Qp_flat[:, 1], N_I)
 
-    pol_L = jnp.where(use_fallback, default_L, Qp_L_flat[idx])
-    pol_H = jnp.where(use_fallback, default_H, Qp_H_flat[idx])
-    V_new = jnp.where(use_fallback, fallback, best_val)
-    pol_b = β_val * (g_h_val[0] * (Y_L - pol_L)
-                     + g_h_val[1] * (Y_H - pol_H))
-    pol_Qp = jnp.column_stack((pol_L, pol_H))
+    use_autarky = (~has_feasible) | (best_val < V_aut_arr)
+    V_new = jnp.where(use_autarky, V_aut_arr, best_val)
+    pol_I = jnp.where(use_autarky, I_aut_arr, I_flat[idx])
+    pol_b = jnp.where(use_autarky, 0.0, b_flat[idx])
+    pol_Qp = jnp.column_stack((
+        jnp.where(use_autarky, Y_j[0], Qp_L_flat[idx]),
+        jnp.where(use_autarky, Y_j[1], Qp_H_flat[idx])
+    ))
 
-    return V_new, pol_b, pol_Qp
+    return V_new, pol_I, pol_b, pol_Qp
 
 
-def pareto_bellman(V, V_aut_arr, β_val=None, g_h_val=None, g_l_val=None,
-                   ε=0.0):
+def program_p_bellman(V, V_aut_arr, I_aut_arr,
+                      β_val=None,
+                      g_high_val=None,
+                      g_low_val=None,
+                      ε=0.0):
     """
-    One application of the constrained Pareto Bellman operator.
-    Returns updated V, optimal loan policy pol_b, and continuation
-    states pol_Qp[:,0] (after Y_L) and pol_Qp[:,1] (after Y_H).
+    One Bellman step for Program P*.
     """
     if β_val is None:
         β_val = β
-    if g_h_val is None:
-        g_h_val = g_h
-    if g_l_val is None:
-        g_l_val = g_l
+    if g_high_val is None:
+        g_high_val = g_high
+    if g_low_val is None:
+        g_low_val = g_low
 
     Vaut_f = interp1d(Q_grid, V_aut_arr, fill_value='extrapolate',
                       bounds_error=False)
@@ -493,59 +906,77 @@ def pareto_bellman(V, V_aut_arr, β_val=None, g_h_val=None, g_l_val=None,
     Qp_min = np.array([find_Qmin(V, v) for v in Vaut_Y])
     Qp_min = np.clip(Qp_min, Q_MIN, Q_MAX - 1e-4)
 
-    V_new, pol_b, pol_Qp = pareto_bellman_step_jax(
-        jnp.asarray(V), jnp.asarray(V_aut_arr), β_val,
-        jnp.asarray(g_h_val), jnp.asarray(g_l_val), jnp.asarray(Qp_min)
+    V_new, pol_I, pol_b, pol_Qp = program_p_bellman_step_jax(
+        jnp.asarray(V), jnp.asarray(V_aut_arr), jnp.asarray(I_aut_arr),
+        β_val, jnp.asarray(g_high_val), jnp.asarray(g_low_val),
+        jnp.asarray(Qp_min)
     )
 
-    return np.asarray(V_new), np.asarray(pol_b), np.asarray(pol_Qp)
+    return (np.asarray(V_new), np.asarray(pol_I),
+            np.asarray(pol_b), np.asarray(pol_Qp))
 
 
-def pareto_vfi(V_aut_arr, β_val=None, g_h_val=None, g_l_val=None,
-               ε=0.0, tol=1e-3, max_iter=60, relaxation=0.2):
-    """Value function iteration for Program P*."""
+def program_p_vfi(V_aut_arr,
+                  I_aut_arr,
+                  β_val=None,
+                  g_high_val=None,
+                  g_low_val=None,
+                  ε=0.0,
+                  tol=2e-4,
+                  max_iter=1000,
+                  relaxation=0.25,
+                  verbose=True):
+    """Value iteration for Program P*."""
     if β_val is None:
         β_val = β
-    if g_h_val is None:
-        g_h_val = g_h
-    if g_l_val is None:
-        g_l_val = g_l
+    if g_high_val is None:
+        g_high_val = g_high
+    if g_low_val is None:
+        g_low_val = g_low
 
     V = V_aut_arr.copy()
 
     for it in range(max_iter):
-        V_raw, pol_b, pol_Qp = pareto_bellman(
-            V, V_aut_arr, β_val=β_val, g_h_val=g_h_val, g_l_val=g_l_val,
-            ε=ε)
+        V_raw, pol_I, pol_b, pol_Qp = program_p_bellman(
+            V, V_aut_arr, I_aut_arr, β_val=β_val,
+            g_high_val=g_high_val, g_low_val=g_low_val, ε=ε)
         V_new = (1 - relaxation) * V + relaxation * V_raw
         diff = np.max(np.abs(V_new - V))
-        V    = V_new
-        print(f"  iter {it+1:3d},  max|ΔV| = {diff:.5f}")
+        V = V_new
+        if verbose and (it == 0 or (it + 1) % 10 == 0):
+            print(f"  iter {it+1:3d},  max|ΔV| = {diff:.5f}")
         if diff < tol:
-            print(f"Pareto VFI converged in {it+1} iterations.")
+            if verbose:
+                print(f"Program P* VFI converged in {it+1} iterations.")
             break
+    else:
+        if verbose:
+            print(f"Stopped after {max_iter} iterations "
+                  f"(max|ΔV| = {diff:.2e}).")
 
-    return V, pol_b, pol_Qp
+    return V, pol_I, pol_b, pol_Qp
 
 
-print("Running constrained Pareto VFI …")
-V_pareto, pol_b, pol_Qp = pareto_vfi(V_aut)
+print("Running Program P* VFI ...")
+V_pareto, pol_I, pol_b, pol_Qp = program_p_vfi(V_aut, I_aut)
 ```
 
 ### Value functions
+
+Let's start by plotting the autarky value and the Program P* value.
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: autarky and optimal contract values
+    caption: autarky and Program P* values
     name: fig-atk-value
 ---
 fig, ax = plt.subplots()
 
-ax.plot(Q_grid, V_aut,    lw=2,       label=r'Autarky  $U_{\rm aut}(Q)$')
+ax.plot(Q_grid, V_aut, lw=2, label=r'Autarky  $v_{\rm aut}(Q)$')
 ax.plot(Q_grid, V_pareto, lw=2, ls='--',
-        label=r'Optimal contract  $\bar{V}(Q)$')
+        label=r'Program P* value  $\bar v(Q)$')
 
 ax.set_xlabel(r'state $Q$ (output net of repayment)')
 ax.set_ylabel('normalised utility')
@@ -554,11 +985,73 @@ plt.tight_layout()
 plt.show()
 ```
 
-The optimal contract weakly dominates autarky, and strictly improves on it
-over the active borrowing region, because access to credit allows the borrower
-to share risk with lenders and smooth consumption across output realisations.
+The Program P* value dominates autarky in the plotted region.
 
-### Optimal continuation states and the no-repudiation constraint
+Access to credit lets the borrower smooth
+consumption across output realizations while preserving incentives for
+investment.
+
+The vertical distance between the two curves is the value of the lending
+relationship, net of the incentive and repudiation constraints.
+
+The gain is not the complete-markets gain from perfect insurance.
+
+It is the value that remains once the contract must both induce hidden
+investment and keep the borrower from preferring repudiation after each
+output realization.
+
+### Investment
+
+The next figure reports the investment chosen by the contract and the
+autarky investment policy.
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: investment policy
+    name: fig-atk-investment
+---
+fig, ax = plt.subplots()
+
+ax.plot(Q_grid, I_aut, lw=2, label='Autarky')
+ax.plot(Q_grid, pol_I, lw=2, ls='--', label='Program P*')
+ax.set_xlabel(r'state $Q$')
+ax.set_ylabel(r'investment $I(Q)$')
+ax.legend()
+plt.tight_layout()
+plt.show()
+```
+
+This figure compares investment in autarky with investment under the
+optimal lending contract.
+
+Both policies are step functions because investment is chosen from the finite
+grid `I_grid`.
+
+Under autarky, the borrower uses only its own current resources, so
+investment rises with $Q$ once enough resources are available.
+
+Under Program P*, investment is disciplined by the contract.
+
+At low and middle states the lending relationship can support positive
+investment earlier than autarky because loans relax the current resource
+constraint.
+
+At higher states, however, the Program P* investment schedule is flatter and
+lower than autarky in this calibration.
+
+The reason is not that resources are scarce, but that investment must be
+incentive compatible: the continuation-value spread across low and high
+output has to make the chosen investment privately optimal for the borrower.
+
+When raising investment would require too much output-contingent punishment
+or reward, the optimal contract chooses a lower investment level.
+
+### Continuation states and the no-repudiation constraint
+
+Let's now look at the continuation states $Q'_L$ and $Q'_H$ after
+low and high output, respectively.
 
 ```{code-cell} ipython3
 ---
@@ -569,11 +1062,12 @@ mystnb:
 ---
 # Compute no-repudiation floors
 Vaut_at_Y = np.array([float(interp1d(Q_grid, V_aut,
-                fill_value='extrapolate', bounds_error=False)(yj)) for yj in Y])
-Qp_min_L  = find_Qmin(V_pareto, Vaut_at_Y[0])
-Qp_min_H  = find_Qmin(V_pareto, Vaut_at_Y[1])
+                fill_value='extrapolate', 
+                bounds_error=False)(yj)) for yj in Y])
+Qp_min_L = find_Qmin(V_pareto, Vaut_at_Y[0])
+Qp_min_H = find_Qmin(V_pareto, Vaut_at_Y[1])
 
-fig, axes = plt.subplots(1, 2)
+fig, axes = plt.subplots(1, 2, figsize=(8, 4), sharex=True, sharey=True)
 
 # Left: Q'_L (continuation state after low output)
 axes[0].plot(Q_grid, pol_Qp[:, 0], lw=2, label=r"$Q'_L = Y_L - d_L$")
@@ -581,7 +1075,6 @@ axes[0].axhline(Qp_min_L, ls='--', color='C3',
                 label=fr"NR floor $Q^*_L \approx {Qp_min_L:.3f}$")
 axes[0].set_xlabel(r'state $Q$')
 axes[0].set_ylabel(r"$Q'_L$")
-axes[0].legend()
 
 # Right: Q'_H (continuation state after high output)
 axes[1].plot(Q_grid, pol_Qp[:, 1], lw=2, color='C1',
@@ -590,73 +1083,191 @@ axes[1].axhline(Qp_min_H, ls='--', color='C3',
                 label=fr"NR floor $Q^*_H \approx {Qp_min_H:.3f}$")
 axes[1].set_xlabel(r'state $Q$')
 axes[1].set_ylabel(r"$Q'_H$")
-axes[1].legend()
+
+for ax in axes:
+    ax.set_xlim(Q_MIN, Q_MAX)
+    ax.set_ylim(Q_MIN, Q_MAX)
+    ax.set_aspect('equal', adjustable='box')
+    ax.legend()
 
 plt.tight_layout()
 plt.show()
 ```
 
-After a *low-output* realisation, the continuation state $Q'_L$ is pinned
-at the no-repudiation floor $Q^*_L$.
+The dashed horizontal lines are no-repudiation floors.
 
-This means the repayment $d_L = Y_L - Q'_L$ is as large as the
+A continuation state cannot fall below its floor, because otherwise the
+borrower would prefer repudiation.
+
+In this calibration, the low-output continuation state $Q'_L$ is pinned
+at the floor only for low current states.
+
+Over that region, repayment $d_L = Y_L - Q'_L$ is as large as the
 repudiation constraint allows.
 
-After a *high-output* realisation, $Q'_H > Q^*_H$: the constraint is
-slack and the borrower retains more resources, rewarding the high
-investment that produced good output.
+For higher current states, the no-repudiation constraint is slack and
+$Q'_L$ rises with $Q$.
 
-### Optimal loan and net capital flows
+The high-output continuation state $Q'_H$ is generally higher than
+$Q'_L$, rewarding the high investment that makes high output more likely.
+
+The two panels should be read as punishment and reward schedules.
+
+After low output, the borrower is sent to a lower continuation state, which
+reduces future utility and helps deter low investment.
+
+After high output, the borrower is sent to a higher continuation state,
+which rewards the outcome that is more likely when investment is high.
+
+The horizontal dashed lines mark the smallest continuation states compatible
+with no repudiation.
+
+When a policy curve touches one of these lines, the contract is using the
+maximum feasible punishment at that output realization.
+
+### Loan and net capital flows
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: loan and net capital flows
+    caption: low-output loan and net capital flows
     name: fig-atk-loan-flows
 ---
-# Repayments at the two output states as functions of current state Q
-d_L_policy = Y_L - pol_Qp[:, 0]   # d_L(Q) = Y_L − Q'_L(Q)
-d_H_policy = Y_H - pol_Qp[:, 1]   # d_H(Q) = Y_H − Q'_H(Q)
+# Repayment and next loan at the low-output continuation state
+d_L_policy = Y_L - pol_Qp[:, 0]  # d_L(Q) = Y_L - Q'_L(Q)
 
-fig, axes = plt.subplots(1, 2)
+pol_b_fn = interp1d(Q_grid, pol_b, 
+            fill_value='extrapolate', bounds_error=False)
+b_next_L = pol_b_fn(pol_Qp[:, 0])
 
-axes[0].plot(Q_grid, pol_b,       lw=2, label='Loan $b^*(Q)$')
-axes[0].plot(Q_grid, d_L_policy,  lw=2, ls='--', label=r'Repayment $d_L$')
-axes[0].plot(Q_grid, d_H_policy,  lw=2, ls=':',  label=r'Repayment $d_H$')
+net_out_L = d_L_policy - b_next_L
+low_outflow = net_out_L > 0
+
+fig, axes = plt.subplots(1, 2, figsize=(8, 4))
+
+axes[0].plot(Q_grid, d_L_policy, lw=2, label=r'Repayment $d_L(Q)$')
+axes[0].plot(Q_grid, b_next_L, lw=2, ls='--',
+             label=r"New loan $b^*(Q'_L)$")
+axes[0].fill_between(Q_grid, d_L_policy, b_next_L,
+                     where=low_outflow, interpolate=True,
+                     color='C3', alpha=0.16, label='capital outflow')
 axes[0].axhline(0, color='k', lw=0.6, ls=':')
+axes[0].set_title('After low output')
 axes[0].set_xlabel(r'state $Q$')
+axes[0].set_ylabel('level')
 axes[0].legend()
 
-# Net capital outflow at continuation state
-pol_b_fn   = interp1d(Q_grid, pol_b, fill_value='extrapolate', bounds_error=False)
-net_out_L  = d_L_policy - pol_b_fn(pol_Qp[:, 0])
-net_out_H  = d_H_policy - pol_b_fn(pol_Qp[:, 1])
-
-axes[1].plot(Q_grid, net_out_L, lw=2,        label=r'After $Y_L$ (low output)')
-axes[1].plot(Q_grid, net_out_H, lw=2, ls='--', label=r'After $Y_H$ (high output)')
+axes[1].plot(Q_grid, net_out_L, 
+             lw=2, label=r"$d_L(Q) - b^*(Q'_L)$")
+axes[1].fill_between(Q_grid, 0, net_out_L,
+                     where=low_outflow, interpolate=True,
+                     color='C3', alpha=0.16)
 axes[1].axhline(0, color='k', lw=0.8, ls=':')
+axes[1].set_title('Low-output net flow')
 axes[1].set_xlabel(r'state $Q$')
-axes[1].set_ylabel(r"net outflow $d(Y') - b'(Q')$")
+axes[1].set_ylabel(r"net outflow after $Y_L$")
 axes[1].legend()
 
 plt.tight_layout()
 plt.show()
 ```
 
-Positive values in the right panel are net capital outflows.
+This figure isolates the low-output branch of the contract.
 
-In this coarse
-two-output calibration, the low-output continuation state is tightened sharply,
-but new borrowing at that continuation state is still large enough that
-$d_L - b'(Q'_L)$ is non-positive.
+Start from current state $Q$.
 
-Thus the computation should be read as a
-small numerical illustration of the incentive mechanism, rather than a
-calibration that delivers literal positive outflows after every low-output
-realisation.
+If next period's output is low, $Y_L$, the contract sends the borrower to
+the continuation state
+
+$$
+Q'_L(Q) = Y_L - d_L(Q).
+$$
+
+The old lender receives the repayment $d_L(Q)$.
+
+At that new state, the next young lender offers the loan
+$b^*(Q'_L(Q))$.
+
+The low-output net capital outflow is therefore
+
+$$
+d_L(Q) - b^*(Q'_L(Q)).
+$$
+
+The left panel plots the two pieces of this difference.
+
+The right panel plots the difference itself.
+
+Values above zero are capital outflows: the borrower repays more to the old
+lender than it receives as a new loan.
+
+Values below zero are capital inflows: new borrowing more than offsets the
+repayment.
+
+The shaded region marks the states in which
+
+$$
+d_L(Q) > b^*(Q'_L(Q)).
+$$
+
+In that region, repayment after bad news about investment is not fully offset
+by new borrowing, so the borrower exports capital.
+
+This is the numerical analogue of Atkeson's capital-outflow condition
+$d_j \geq b'(Q'_j)$ for the lowest output realization.
+
+Outside the shaded region, low output is still punished through a lower
+continuation state, but that punishment does not show up as a literal net
+capital outflow because the next loan is larger than the repayment.
 
 ### Simulation
+
+We now simulate one history generated by the computed contract.
+
+This is an on-contract path.
+
+The borrower follows the recommended investment policy, so next output is
+drawn from $g(Y';I_t)$.
+
+The simulation does not draw deviations or defaults.
+
+It asks what histories look like when the contract is obeyed.
+
+At the start of a period, the state is $Q_t$, output net of the old
+repayment.
+
+The policy functions choose current investment $I_t = I(Q_t)$, current loan
+$b_t = b(Q_t)$, and current consumption
+
+$$
+c_t = Q_t + b_t - I_t.
+$$
+
+Then output $Y_{t+1}$ is drawn.
+
+If output state $j$ occurs, the policy function sends the borrower to
+
+$$
+Q_{t+1} = Q'_j(Q_t).
+$$
+
+The repayment due to the old lender is therefore
+
+$$
+d_{t+1}(Y_j) = Y_j - Q'_j(Q_t).
+$$
+
+The net capital outflow reported below is
+
+$$
+d_{t+1}(Y_j) - b(Q_{t+1}).
+$$
+
+It is repayment to the old lender minus the new loan received at the
+continuation state.
+
+Positive values are capital outflows.
 
 ```{code-cell} ipython3
 ---
@@ -665,85 +1276,187 @@ mystnb:
     caption: simulated contract paths
     name: fig-atk-simulation
 ---
-def simulate_contract(V_pareto, pol_b, pol_Qp, T=150, seed=0):
+def simulate_contract(pol_I, pol_b, pol_Qp, T=150, seed=0):
     """
-    Simulate the constrained optimal contract.
-    At each period the borrower invests I_h and output is drawn from g_h.
-    Returns time series for Q, Y, consumption c, loan b, repayment d,
-    and net capital outflow.
+    Simulate one on-contract history.
+
+    The borrower follows the computed investment and loan policies.
     """
     rng = np.random.default_rng(seed)
 
+    I_fn = interp1d(Q_grid, pol_I, fill_value='extrapolate',
+                    bounds_error=False)
     Qp_fn = [interp1d(Q_grid, pol_Qp[:, j],
                       fill_value='extrapolate', bounds_error=False)
              for j in range(2)]
-    b_fn  = interp1d(Q_grid, pol_b, fill_value='extrapolate', bounds_error=False)
+    b_fn = interp1d(Q_grid, pol_b, fill_value='extrapolate',
+                    bounds_error=False)
 
-    Q = float(np.median(Q_grid))   # start at median state
+    Q = float(np.median(Q_grid))  # start at median state
 
-    out = {'Q': [], 'Y': [], 'c': [], 'b': [], 'd': [], 'net_out': []}
+    out = {'Q': [], 'Y': [], 'I': [], 'c': [], 'b': [], 'b_next': [],
+           'd': [], 'net_out': []}
 
     for _ in range(T):
-        b  = float(b_fn(Q))
-        c  = Q + b - I_h
-        c  = max(c, 1e-10)
+        I = float(I_fn(Q))
+        b = float(b_fn(Q))
+        c = Q + b - I
+        c = max(c, 1e-10)
 
-        j  = int(rng.choice(2, p=g_h))    # draw next output index
+        probs = np.asarray(g_of_I(np.array(I))).ravel()
+        j = int(rng.choice(2, p=probs))
         Yp = Y[j]
-        Qp = float(Qp_fn[j](Q))           # next state
+        Qp = float(Qp_fn[j](Q))  # next state
 
-        d       = Yp - Qp                  # repayment at start of next period
-        b_next  = float(b_fn(Qp))
-        net_out = d - b_next               # net capital outflow at next period
+        d = Yp - Qp  # repayment after output is realized
+        b_next = float(b_fn(Qp))
+        net_out = d - b_next  # repayment minus new borrowing
 
-        out['Q'].append(Q); out['Y'].append(Yp); out['c'].append(c)
-        out['b'].append(b); out['d'].append(d);  out['net_out'].append(net_out)
+        out['Q'].append(Q)
+        out['Y'].append(Yp)
+        out['I'].append(I)
+        out['c'].append(c)
+        out['b'].append(b)
+        out['b_next'].append(b_next)
+        out['d'].append(d)
+        out['net_out'].append(net_out)
 
         Q = Qp
 
     return {k: np.array(v) for k, v in out.items()}
 
 
-sim = simulate_contract(V_pareto, pol_b, pol_Qp, T=150)
-t   = np.arange(len(sim['Q']))
+sim = simulate_contract(pol_I, pol_b, pol_Qp, T=150)
+t = np.arange(len(sim['Q']))
 
-fig, axes = plt.subplots(3, 1, sharex=True)
+fig, axes = plt.subplots(4, 1, figsize=(10, 8), sharex=True)
 
 axes[0].plot(t, sim['Y'], alpha=0.6, label='Output $Y_{t+1}$')
-axes[0].plot(t, sim['c'], lw=1.8,    label='Consumption $c_t$')
+axes[0].plot(t, sim['c'], lw=1.8, label='Consumption $c_t$')
 axes[0].set_ylabel('level')
 axes[0].legend(ncol=2, loc='upper right')
 
-axes[1].plot(t, sim['d'], lw=1.8,          label='Repayment $d_t$')
-axes[1].plot(t, sim['b'], lw=1.8, ls='--', label='New loan $b_t$')
+axes[1].plot(t, sim['I'], lw=1.8, color='C2', label='Investment $I_t$')
 axes[1].axhline(0, color='k', lw=0.5)
-axes[1].set_ylabel('level')
-axes[1].legend(ncol=2)
+axes[1].set_ylabel('investment')
+axes[1].legend()
+
+axes[2].plot(t, sim['d'], lw=1.8, label='Repayment $d_{t+1}$')
+axes[2].plot(t, sim['b_next'], lw=1.8, ls='--',
+             label=r'New loan $b(Q_{t+1})$')
+axes[2].axhline(0, color='k', lw=0.5)
+axes[2].set_ylabel('level')
+axes[2].legend(ncol=2)
 
 colors = ['#d73027' if x > 0 else '#4575b4' for x in sim['net_out']]
-axes[2].bar(t, sim['net_out'], color=colors, label='Net capital outflow')
-axes[2].axhline(0, color='k', lw=0.6)
-axes[2].set_xlabel('period $t$')
-axes[2].set_ylabel('net outflow')
-axes[2].legend()
+axes[3].bar(t, sim['net_out'], color=colors, label='Net capital outflow')
+axes[3].axhline(0, color='k', lw=0.6)
+axes[3].set_xlabel('period $t$')
+axes[3].set_ylabel('net outflow')
+axes[3].legend()
 
-plt.tight_layout()
+fig.tight_layout(h_pad=1.0)
 plt.show()
 
-# Tabulate statistics
-outflow_frac = np.mean(sim['net_out'] > 0)
-print(f"\nFraction of periods with capital outflow:  {outflow_frac:.2%}")
-print(f"Fraction of low-output periods:            "
-      f"{np.mean(sim['Y'] == Y_L):.2%}")
+# Atkeson's capital export operates in the constrained region, where the
+# no-repudiation floor binds after low output (the shaded low-Q region above).
+Q_star = float(Q_grid[net_out_L > 0].max())
+
+# A longer simulation gives stable ergodic frequencies.
+sim_long = simulate_contract(pol_I, pol_b, pol_Qp, T=20_000)
+low = sim_long['Y'] == Y_L
+constrained = sim_long['Q'] <= Q_star
+
+print(f"\nTime in the constrained region (Q <= {Q_star:.2f}): "
+      f"{np.mean(constrained):.1%}")
+print(f"Low-output capital outflow frequency, constrained:   "
+      f"{np.mean(sim_long['net_out'][low & constrained] > 0):.1%}")
+print(f"Low-output capital outflow frequency, unconstrained: "
+      f"{np.mean(sim_long['net_out'][low & ~constrained] > 0):.1%}")
 ```
 
-Positive bars are net capital outflows.
+This simulated history illustrates how the contract smooths resources while
+still using output-contingent continuation promises.
 
-With the baseline two-state
-calibration above, the main visible effect of low output is a tighter
-continuation state and lower subsequent borrowing; literal positive outflows
-require a calibration in which the low-state repudiation constraint binds more
-strongly.
+Output jumps between the two possible realizations, $Y_L = 0.8$ and
+$Y_H = 1.2$, but consumption moves much less sharply.
+
+Most of the time consumption stays near the middle of the output range rather
+than matching output one for one.
+
+Investment is also nearly flat.
+
+Along this path it is usually close to $0.10$, with only a few grid-sized
+adjustments when the continuation state becomes especially favorable or
+especially tight.
+
+The third panel shows the two terms used to construct the net-flow bars.
+
+Repayment $d_{t+1}$ and the next-state loan $b(Q_{t+1})$ move almost
+together.
+
+Both are often negative in this calibration, so the contract is frequently
+using deposits or withdrawals rather than ordinary positive borrowing.
+
+The net capital flow is the difference between the repayment due after output
+is realized and the loan available at the next state,
+
+$$
+d_{t+1} - b(Q_{t+1}).
+$$
+
+Red bars are periods in which this difference is positive, so on net the
+borrower sends resources to the lending sector and capital flows out.
+
+Blue bars are periods in which it is negative, so on net the borrower receives
+resources and capital flows in.
+
+The contract's capital flows split into two regimes.
+
+In the constrained region, where the borrower is poor and the no-repudiation
+floor binds, low output forces repayment to exceed new lending and capital
+flows out.
+
+This is Atkeson's result, the shaded low-$Q$ region of the loan-flow figure
+above.
+
+Along the path, low output exports capital about 60% of the time the borrower
+is in this region, against essentially never outside it.
+
+In the unconstrained region, where the borrower is richer and the floor is
+slack, the pattern is buffer-stock saving instead.
+
+There the borrower deposits after high output, a capital outflow, and draws
+those deposits down after low output, a capital inflow.
+
+The borrower spends about a fifth of its time in the constrained region,
+because good output builds a buffer that lifts it out.
+
+## Summary
+
+The central friction in this lecture is moral hazard.
+
+The borrower privately chooses investment, while lenders observe only output.
+
+Low output is therefore bad news for two reasons.
+
+It lowers current resources and it is also evidence that the borrower may have
+chosen low investment.
+
+Atkeson's optimal contract responds by making continuation values depend on
+output.
+
+High output is rewarded with a better continuation state.
+
+Low output is punished with a tighter continuation state, subject to the
+borrower's option to repudiate and live in autarky.
+
+This is the same logic as in {doc}`Repeated Moral Hazard <repeat_mh>`:
+hidden actions are disciplined by future promised utility.
+
+Atkeson's contribution is to judiciously combine that incentive logic with sovereign
+default risk and a physical state variable, so continuation promises must also
+respect the no-repudiation constraint.
 
 ## Exercises
 
@@ -751,12 +1464,12 @@ strongly.
 :label: atkeson_1991_ex1
 ```
 
-**Patience and the severity of debt crises.**
+*Patience and the severity of debt crises.*
 
 Redo the analysis with $\beta = 0.8$ and $\beta = 0.95$ (keep all other
 parameters fixed).
 
-1. For each value of $\beta$, compute the autarky and optimal contract value
+1. For each value of $\beta$, compute the autarky and Program P* value
    functions.
 2. Compute the no-repudiation lower bounds $Q^*_L$ and $Q^*_H$.
 3. Plot $Q'_L(Q)$ for the three values of $\beta$ on a single figure.
@@ -769,6 +1482,8 @@ parameters fixed).
 :class: dropdown
 ```
 
+Here is one solution:
+
 ```{code-cell} ipython3
 ---
 mystnb:
@@ -778,17 +1493,22 @@ mystnb:
 ---
 fig, ax = plt.subplots()
 
-for β_val, ls, color in [(0.8, '-', 'C0'), (0.9, '--', 'C1'), (0.95, ':', 'C2')]:
-    V_a   = autarky_vfi(β_val=β_val)
-    V_p, _, pQp = pareto_vfi(V_a, β_val=β_val)
+for β_val, ls, color, tag in [
+    (0.8, '-', 'C0', ''),
+    (β, '--', 'C1', ' baseline'),
+    (0.95, ':', 'C2', '')]:
+    V_a, I_a = autarky_vfi(β_val=β_val, verbose=False)
+    V_p, _, _, pQp = program_p_vfi(
+        V_a, I_a, β_val=β_val, verbose=False)
 
     Vaut_fn_tmp = interp1d(Q_grid, V_a, fill_value='extrapolate',
                            bounds_error=False)
-    Vaut_Y_tmp  = np.array([float(Vaut_fn_tmp(yj)) for yj in Y])
-    Qmin_L_tmp  = find_Qmin(V_p, Vaut_Y_tmp[0])
+    Vaut_Y_tmp = np.array([float(Vaut_fn_tmp(yj)) for yj in Y])
+    Qmin_L_tmp = find_Qmin(V_p, Vaut_Y_tmp[0])
 
     ax.plot(Q_grid, pQp[:, 0], ls=ls, color=color,
-            label=fr'$\beta = {β_val}$  (NR floor $\approx {Qmin_L_tmp:.3f}$)')
+            label=fr'$\beta = {β_val}${tag}  '
+                  fr'(NR floor $\approx {Qmin_L_tmp:.3f}$)')
 
 ax.set_xlabel(r'state $Q$')
 ax.set_ylabel(r"$Q'_L$  (continuation state after low output)")
@@ -797,13 +1517,36 @@ plt.tight_layout()
 plt.show()
 ```
 
-More patient borrowers ($\beta$ closer to 1) value the continuation of the
-contract more highly, which relaxes the no-repudiation constraint: the
-no-repudiation floor $Q^*_L$ falls and the capital outflow after low output is
-less severe.
+The figure shows how the continuation state after low output changes with
+the borrower's patience.
 
-Impatient borrowers more readily prefer autarky, tightening the
-constraint and worsening debt-crisis dynamics.
+For low current states, each curve is almost flat at its no-repudiation
+floor.
+
+That floor falls as $\beta$ rises.
+
+Thus, in this calibration, a more patient borrower can be assigned a lower
+continuation state after low output without choosing repudiation.
+
+Since
+
+$$
+d_L(Q) = Y_L - Q'_L(Q),
+$$
+
+a lower $Q'_L$ means a larger repayment after low output.
+
+Patience therefore lets the contract use a harsher low-output punishment.
+
+As current resources $Q$ rise, the low-output no-repudiation floor stops
+binding.
+
+The curves then increase with $Q$: after a borrower enters the period with
+more resources, the contract can promise a better continuation state even
+after low output.
+
+At high values of $Q$, the schedules become close to one another and flatten
+near the upper part of the grid.
 
 ```{solution-end}
 ```
@@ -812,15 +1555,15 @@ constraint and worsening debt-crisis dynamics.
 :label: atkeson_1991_ex2
 ```
 
-**Signal quality and capital flows.**
+*Signal quality and capital flows.*
 
 Replace the output distribution with the more symmetric values
-$g_h = (0.40, 0.60)$ and $g_l = (0.60, 0.40)$, so that output is a
+$g_h = (0.40, 0.60)$ and $g_\ell = (0.60, 0.40)$, so that output is a
 weaker signal of investment.
 
-1. Recompute the autarky and optimal contract value functions.
-2. Plot the net capital outflow curves $d(Y_j) - b'(Q'_j)$ as a function
-   of $Q$ for both the baseline and the weak-signal specification.
+1. Recompute the autarky and Program P* value functions.
+2. Plot the low-output net capital outflow curve $d(Y_L) - b'(Q'_L)$ as a
+   function of $Q$ for both the baseline and the weak-signal specification.
 3. Explain intuitively why weaker signal quality changes the capital flow
    pattern.
 ```{exercise-end}
@@ -830,6 +1573,8 @@ weaker signal of investment.
 :class: dropdown
 ```
 
+Here is one solution:
+
 ```{code-cell} ipython3
 ---
 mystnb:
@@ -838,25 +1583,32 @@ mystnb:
     name: fig-atk-signal
 ---
 # Weak-signal specification
-g_h_ws = np.array([0.40, 0.60])
-g_l_ws = np.array([0.60, 0.40])
+g_high_ws = np.array([0.40, 0.60])
+g_low_ws = np.array([0.60, 0.40])
 
-print("Weak-signal likelihood ratios g_l/g_h:", g_l_ws / g_h_ws)
+print("Weak-signal likelihood ratios g_low/g_high:",
+      g_low_ws / g_high_ws)
 
-V_aut_ws = autarky_vfi(g_h_val=g_h_ws, g_l_val=g_l_ws)
-V_par_ws, pb_ws, pQp_ws = pareto_vfi(
-    V_aut_ws, g_h_val=g_h_ws, g_l_val=g_l_ws)
+V_aut_ws, I_aut_ws = autarky_vfi(g_high_val=g_high_ws,
+                                 g_low_val=g_low_ws,
+                                 verbose=False)
+V_par_ws, _, pb_ws, pQp_ws = program_p_vfi(
+    V_aut_ws, I_aut_ws, g_high_val=g_high_ws,
+    g_low_val=g_low_ws, verbose=False)
 
-pb_fn_ws = interp1d(Q_grid, pb_ws, fill_value='extrapolate', bounds_error=False)
+pb_fn_ws = interp1d(Q_grid, pb_ws, 
+                fill_value='extrapolate', bounds_error=False)
 net_L_ws = (Y_L - pQp_ws[:, 0]) - pb_fn_ws(pQp_ws[:, 0])
-net_H_ws = (Y_H - pQp_ws[:, 1]) - pb_fn_ws(pQp_ws[:, 1])
 
-pb_fn_bl = interp1d(Q_grid, pol_b, fill_value='extrapolate', bounds_error=False)
+pb_fn_bl = interp1d(Q_grid, pol_b, 
+                fill_value='extrapolate', bounds_error=False)
 net_L_bl = (Y_L - pol_Qp[:, 0]) - pb_fn_bl(pol_Qp[:, 0])
 
 fig, ax = plt.subplots()
-ax.plot(Q_grid, net_L_bl, lw=2,          label=r'After $Y_L$, baseline (strong signal)')
-ax.plot(Q_grid, net_L_ws, lw=2, ls='--', label=r'After $Y_L$, weak signal')
+ax.plot(Q_grid, net_L_bl, 
+                lw=2, label=r'After $Y_L$, baseline (strong signal)')
+ax.plot(Q_grid, net_L_ws, 
+                lw=2, ls='--', label=r'After $Y_L$, weak signal')
 ax.axhline(0, color='k', lw=0.8, ls=':')
 ax.set_xlabel(r'state $Q$')
 ax.set_ylabel('net capital outflow')
@@ -865,77 +1617,18 @@ plt.tight_layout()
 plt.show()
 ```
 
-With a weaker signal ($g_l/g_h$ closer to 1), low output is less informative
-about past investment.
+The main lesson is that signal quality matters for the capital-flow
+mechanism.
 
-The moral hazard problem is milder, incentive
-constraints are easier to satisfy, and the no-repudiation constraint binds less
-tightly.
+When low output is a strong signal of low investment, the contract can use
+the low-output state aggressively as a punishment, producing a small region
+of net capital outflows.
 
-The net-flow response after bad output realisations is smaller in
-magnitude.
+When the signal is weaker, low output is less informative, so the same
+punishment is less useful for incentives.
 
-```{solution-end}
-```
-
-```{exercise-start}
-:label: atkeson_1991_ex3
-```
-
-**Debt forgiveness and welfare.**
-
-A debt relief programme can be modelled as an exogenous upward shift in the
-no-repudiation threshold: suppose the borrower's outside option improves to
-$\tilde{U}_{\text{aut}}(Y_j) = U_{\text{aut}}(Y_j) + \varepsilon$ for a small
-$\varepsilon > 0$.
-
-1. For $\varepsilon \in \{0, 0.05, 0.10\}$, compute the constrained optimal
-   value function under the tightened repudiation constraint.
-2. Plot $\bar{V}(Q)$ for each $\varepsilon$.
-3. Discuss: when is debt forgiveness welfare improving for the borrower?
-   What is the cost to lenders?
-
-*Hint:* implement the shift by adding $\varepsilon$ to `Vaut_Y` inside
-`pareto_bellman`.
-```{exercise-end}
-```
-
-```{solution-start} atkeson_1991_ex3
-:class: dropdown
-```
-
-```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: value functions under debt forgiveness
-    name: fig-atk-forgiveness
----
-fig, ax = plt.subplots()
-
-for ε, ls, color in [(0.0, '-', 'C0'), (0.05, '--', 'C1'), (0.10, ':', 'C2')]:
-    V_ε, _, _ = pareto_vfi(V_aut, ε=ε, max_iter=50)
-
-    ax.plot(Q_grid, V_ε, ls=ls, color=color,
-            label=fr'$\varepsilon = {ε}$')
-
-ax.plot(Q_grid, V_aut, lw=1, color='k', ls=':', label='Autarky')
-ax.set_xlabel(r'state $Q$')
-ax.set_ylabel(r'$\bar{V}(Q)$')
-ax.legend()
-plt.tight_layout()
-plt.show()
-```
-
-Tightening the no-repudiation threshold ($\varepsilon > 0$) shrinks the set of
-feasible contracts, reducing $\bar{V}(Q)$.
-
-Debt forgiveness improves the
-borrower's outside option but makes lenders less willing to extend credit
-(smaller loans at higher cost), leaving the borrower worse off in equilibrium.
-
-This illustrates the {cite:t}`BulowRogoff1989b` result that debt forgiveness
-need not benefit the borrowing country.
+In this calibration, the visible low-output outflow region largely disappears:
+after low output, new borrowing usually offsets repayment.
 
 ```{solution-end}
 ```
