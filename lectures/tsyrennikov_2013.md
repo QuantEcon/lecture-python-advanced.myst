@@ -41,7 +41,7 @@ The mechanism is that moral hazard severely restricts the amount of
 
 As a result, the optimal repayment is nearly *non-contingent* on output.
 
-This justifies why non-contingent debt is an optimal way to finance an emerging
+This explains why non-contingent debt is an optimal way to finance an emerging
 economy.
 
 Moral hazard also gives the model a strong internal propagation mechanism: even
@@ -53,11 +53,11 @@ Tsyrennikov is also explicit about the model's main weakness.
 The mechanism improves the behavior of consumption, output and spreads, but it
 does not fully match the observed current-account dynamics.
 
-### The mechanism without figures
+### The mechanism in brief
 
-A compact way to read the model is as follows.
+The borrower can use foreign funds for either current consumption or
+investment.
 
-The borrower can use foreign funds for either current consumption or investment.
 Investment is costly today, but it raises the probability of high output
 tomorrow.
 
@@ -131,8 +131,7 @@ reverse.
 For comparison, Canada displays much smoother consumption and much weaker
 spread-output comovement.
 
-The following reduced version of the paper's data table highlights the contrast.
-
+The following table, condensed from the paper, highlights the contrast.
 
 Here and in the moments table below, $E(\cdot)$ is a mean, $\sigma(\cdot)$ a
 standard deviation, and $\rho(\cdot,\cdot)$ a correlation, while $\rho(y)$ is the
@@ -164,7 +163,7 @@ or weak institutions.
 
 ### Technology and preferences
 
-The environment is a small open economy with an infinitely-lived borrower.
+The environment is a small open economy with an infinitely lived borrower.
 
 The borrower starts each period with net worth $n$ (output net of debt
 repayment), borrows $b$ from a short-lived risk-neutral lender, invests $I$,
@@ -203,9 +202,12 @@ distribution under higher investment first-order stochastically dominates that
 under lower investment, with diminishing returns.
 
 ```{note}
-This is the same mixture technology, and uses the same labelling, as in
+This is the same mixture technology, and uses the same labeling, as in
 {doc}`atkeson_1991`: the weight $\lambda(I)$ multiplies the favorable
 distribution $g_0$, so more investment makes high output more likely.
+
+{cite:t}`Tsyrennikov2013` swaps the labels: there the weight $\lambda(I)$
+multiplies $g_1$, which is the favorable distribution in the paper's notation.
 ```
 
 Tsyrennikov restricts to two output states, so the favorable distribution puts
@@ -247,8 +249,9 @@ so they lend at the international gross risk-free rate $1/\beta_c$.
 Each lender lives for two periods with endowment $M$, so the loan cannot exceed
 it: $b \leq M$.
 
-The assumption $\beta \leq \beta_c$ reflects that the government of an emerging
-economy may be more impatient than a typical international lender.
+The assumption $\beta \leq \beta_c$ captures the idea that the government of an
+emerging economy may have a shorter planning horizon than a typical
+international lender.
 
 A contract between the two parties specifies the loan $b$ and the repayment
 $d_j$ that the borrower makes after each output state $Y_j$.
@@ -264,8 +267,10 @@ The incentive-compatibility (IC) constraint {eq}`eq:tsyrennikov_ic` requires
 that the borrower finds the recommended investment $I$ privately optimal.
 
 **Limited enforcement**: the borrower can default, suffering a one-time
-output penalty: if default occurs when output is $Y_j$, the borrower retains
-only $\delta Y_j$ (with $\delta \in (0,1)$) and then lives in autarky.
+output penalty.
+
+If default occurs when output is $Y_j$, the borrower retains only
+$\delta Y_j$, with $\delta \in (0,1)$, and then lives in autarky forever.
 
 Let $v_{\text{aut}}^{\delta}(Y_j)$ denote the value after default in state
 $j$:
@@ -280,9 +285,11 @@ v_{\text{aut}}^{\delta}(Y_j)
     \right\}.
 $$ (eq:tsyrennikov_default_value)
 
-Here $v_{\text{aut}}$ is the borrower's no-credit autarky value, defined in the
-next subsection; the superscript $\delta$ marks the one-period output loss
-incurred on entering autarky.
+Here $v_{\text{aut}}$ is the borrower's autarky value, defined in the next
+subsection.
+
+The superscript $\delta$ marks the one-time output loss incurred on entering
+autarky.
 
 The enforcement constraint requires
 
@@ -323,7 +330,7 @@ $$
 Net worth converges to a constant, so consumption and investment are eventually
 constant, and the risk-sharing index defined below equals one.
 
-This benchmark implies uninhibited risk-sharing and a strongly procyclical
+This benchmark implies full risk sharing and a strongly procyclical
 current account --- the opposite of what the data show.
 
 It also shows what moral hazard limits: the ability to make repayments
@@ -333,8 +340,9 @@ strongly state contingent without weakening investment incentives.
 
 The state variable is net worth $n$.
 
-The optimal long-term contract can be represented recursively with this
-single state is established in {cite:t}`Atkeson1991`, and we take it as given.
+{cite:t}`Atkeson1991` establishes that the optimal long-term contract can be
+represented recursively with this single state, and we take this result as
+given.
 
 Let
 
@@ -353,8 +361,9 @@ $$ (eq:tsyrennikov_bellman)
 
 subject to the following constraints.
 
-A feasibility constraint combines the budget constraint {eq}`eq:tsyrennikov_budget`, with
-nonnegative consumption $c = n + b - \theta I \geq 0$ and investment $I \geq 0$.
+Feasibility requires the budget constraint {eq}`eq:tsyrennikov_budget` with
+nonnegative consumption $c = n + b - \theta I \geq 0$ and nonnegative
+investment $I \geq 0$.
 
 Lender participation requires the loan not to exceed the discounted expected
 value of repayments,
@@ -369,8 +378,8 @@ $b \leq M$.
 The contract must also satisfy incentive compatibility {eq}`eq:tsyrennikov_ic`
 and the enforcement constraint {eq}`eq:tsyrennikov_enforcement`.
 
-The incentive constraint says that the borrower chooses the recommended
-investment from the feasible set:
+The incentive constraint says that the recommended investment must be the
+borrower's own best choice from the feasible set:
 
 $$
 I \in \arg\max_{0 \leq \hat I \leq n+b}
@@ -464,7 +473,8 @@ condition, so {eq}`eq:tsyrennikov_ic` and {eq}`eq:tsyrennikov_relaxed_ic` --- th
 latter holding with equality at an interior optimum --- select the same
 investment.
 
-Next, we need to show that *every optimal contract has $S \geq 0$, so the first-order condition is sufficient at the optimum.*
+Next, we show that *every optimal contract can be replaced by an equivalent one
+with $S \geq 0$.*
 
 Suppose an optimal contract had $S < 0$, that is $v(n_2') < v(n_1')$.
 
@@ -609,9 +619,9 @@ the equation pushes $v'(n_1')$ above $v'(n)$.
 
 By concavity of $v$, the borrower's net worth then falls in the low state.
 
-This is the **immiseration** property: moral hazard forces the borrower to bear
-more risk than would be optimal with full information
-(see, e.g., {cite:t}`ThomasWorrall1990`, {cite:t}`AtkesonLucas1992`).
+This is the **immiseration** property: incentive provision drags the borrower's
+net worth down over time, a force also present in the private-information
+economies of {cite:t}`ThomasWorrall1990` and {cite:t}`AtkesonLucas1992`.
 
 To isolate this force, set $\beta = \beta_c$, $\phi = 0$ and $\xi_j = 0$.
 
@@ -635,8 +645,8 @@ $v'(n) = \mathbb{E}\,v'(n_j') + \sum_j g(Y_j\mid I)\,\xi_j v'(n_j')
 \geq \mathbb{E}\,v'(n_j')$, since $\xi_j \geq 0$, which implies upward drift in
 continuation net worth under concavity.
 
-The optimal contract can be reinterpreted as a government-borrower that, instead
-of signing a contract, faces an **implied interest rate** schedule $R(n)$ on each
+The optimal contract can be decentralized: instead of signing a contract, the
+government-borrower faces an **implied interest rate** schedule $R(n)$ on each
 unit borrowed:
 
 $$
@@ -652,8 +662,8 @@ increasing $R$.
 
 ## Computation
 
-We now implement a lightweight numerical illustration using the parameterisation
-from {cite:t}`Tsyrennikov2013`.
+We now implement a lightweight numerical illustration using the
+parameterization from {cite:t}`Tsyrennikov2013`.
 
 The code solves three economies:
 
@@ -686,12 +696,9 @@ amount and the endowment $M$.
 For MH+LE and LE, borrowing is limited endogenously by the borrower's default
 value.
 
-The resulting policy functions are intended to show the economic mechanism and
-to move the lecture figures closer to Figures 3 and 4 of
-{cite:t}`Tsyrennikov2013`.
-
-They should not be read as a full replication of the paper's numerical
-algorithm.
+The resulting policy functions illustrate the economic mechanism and
+approximate Figures 3 and 4 of {cite:t}`Tsyrennikov2013`, but they are not a
+full replication of the paper's numerical algorithm.
 
 The paper solves the Bellman equation iteratively, approximates the value
 function by a cubic spline on $[0.2, 1.2]$ with 100 nodes, and stops when the
@@ -702,8 +709,8 @@ borrowing limits with a damped rule that gives one-half weight to the previous
 limit and one-half weight to the new limit implied by the current value
 function.
 
-The lecture code below uses the same recursive economic problem, but a more
-transparent two-stage approximation.
+The code below solves the same recursive problem with a simpler two-stage
+approximation.
 
 First, it computes the fixed point quickly with JAX, Howard policy iteration,
 linear interpolation of the value function, and a finite mesh of continuation
@@ -722,11 +729,8 @@ $$
     = 1 - \frac{n_2'-n_1'}{Y_2-Y_1}.
 $$
 
-This makes the near-zero moral-hazard risk-sharing result numerically
-representable even when the coarse mesh used in the fixed-point step is modest.
-
-The plotted curves should therefore be read as polished numerical
-approximations to the same contract problem, not as a separate economic model.
+This makes the near-zero risk-sharing index under moral hazard representable
+even though the fixed-point step uses a coarse mesh.
 
 To reach a fixed point quickly, all three economies are solved by
 **Howard policy iteration** (also called modified policy iteration).
@@ -769,6 +773,11 @@ from scipy.optimize import minimize
 
 We store the parameters in a `NamedTuple`, with defaults calibrated to Argentina
 as in {cite:t}`Tsyrennikov2013`.
+
+In the paper's calibration, $\beta_c$ matches a world interest rate of 4%,
+$\ln Y_j = \pm 0.054$ matches output volatility, $\theta$ normalizes mean
+output to one, and $\delta$ and $M$ match average debt-to-output ratios of
+0.420 and 0.410 in the full and MH-only models.
 
 ```{code-cell} ipython3
 class Model(NamedTuple):
@@ -1009,8 +1018,8 @@ b = \beta_c\,\mathbb E[d_j]
 b = M.
 $$
 
-The first is lender participation binding; the second is the lender endowment
-constraint binding.
+In the first regime lender participation binds; in the second the lender
+endowment constraint binds.
 
 For MH+LE, we set the exogenous cap to a very large value and rely on the
 endogenous borrowing limits instead.
@@ -1864,20 +1873,17 @@ state non-contingent repayment: the maximal risk-sharing index is below 0.01.
 In the limited-enforcement economy, by contrast, the same index is about 0.80
 on average, so the contract offers a significant amount of insurance.
 
-The polished computation should be read against that benchmark.
+Our computed schedules show the same pattern: under moral hazard the repayment
+schedule $\{d_1(n), d_2(n)\}$ is nearly state non-contingent on the relevant
+range of net worth, while under limited enforcement it is much more state
+contingent.
 
-The diagnostic to watch is not the exact maximum at grid endpoints or at
-near-certain investment corners, but whether the repayment schedule
-$\{d_1(n), d_2(n)\}$ is nearly state non-contingent on the economically relevant
-support under moral hazard and much more state contingent under limited
-enforcement.
+Small irregularities near the grid endpoints are numerical artifacts.
 
-Any remaining endpoint irregularities should be interpreted as numerical
-approximation artifacts rather than features of the contract in the paper.
-
-This is the paper's central policy result: under moral hazard nearly all the
-risk is assumed by the risk-averse borrower, and insurance comes mainly through
-access to borrowing rather than through state-contingent repayment.
+This is the paper's central result about the optimal contract: under moral
+hazard nearly all the risk is assumed by the risk-averse borrower, and
+insurance comes mainly through access to borrowing rather than through
+state-contingent repayment.
 
 ### Policy functions
 
@@ -1988,6 +1994,9 @@ $E[Y_j-d_j(n)]$.
 The MH schedule lies below the LE schedule at high net worth, so net worth
 drifts down faster in the MH economy.
 
+In the paper this slope difference is only 0.005, yet it is equivalent to
+raising the borrower's discount rate by 2% per annum.
+
 At low net worth, expected future net worth can decrease with current net worth
 because the endogenous improvement in the output distribution raises the
 probability of the large repayment.
@@ -2003,6 +2012,8 @@ the larger amount of insurance provided by the contract.
 The LE investment schedule is also higher and less volatile: investment is
 observable, so the creditor can dictate more investment than the borrower would
 choose under moral hazard.
+
+For this reason the LE economy's internal propagation mechanism is weak.
 
 Panel E plots capital outflows, denoted $ca_j(n)$ in the paper.
 
@@ -2110,7 +2121,7 @@ for name, crisis in crises.items():
           f"{low_path_prob:.4f}")
 ```
 
-The simulation should be read in the same way as Figure 4 in the paper.
+The simulation parallels Figure 4 of the paper.
 
 Starting from zero debt, a path of low-output realizations makes the MH economy
 steadily accumulate obligations.
@@ -2119,52 +2130,57 @@ Debt/output and the current account move before the interest rate does.
 
 When the borrower nearly exhausts borrowing capacity, the interest rate jumps.
 
-Thus the interest rate is a **late warning** about the economy's health, unlike
-debt and the current account.
+Thus the interest rate gives a **late warning** about the economy's health,
+unlike debt and the current account.
 
-Panel C shows the current account first increasing gradually, meaning that
-capital inflows gradually shrink, and then moving sharply when borrowing
-capacity is nearly exhausted.
+The bottom-left panel shows the current account first increasing gradually,
+meaning that capital inflows gradually shrink, and then moving sharply when
+borrowing capacity is nearly exhausted.
 
-Panel D shows the probability of the high-output outcome.
+The bottom-right panel shows the probability of the high-output outcome.
 
 As the borrower's net worth deteriorates, investment falls and
 $\lambda(I)$ falls, making the low-output path more likely than it would be in
 the frictionless or LE economies.
+
+In the paper's calibration, the crisis path is 7.55 times more likely in the
+MH economy than in a frictionless economy, while in the LE economy it is about
+as likely as in the frictionless economy (a factor of 1.01).
 
 The paper reports the MH+LE economy as visually close to the MH economy, so the
 main comparison is between MH and LE.
 
 ### MH versus limited enforcement
 
-A crucial result of {cite:t}`Tsyrennikov2013` is that limited enforcement,
-alone or together with moral hazard, has nearly no effect on the model's
-performance relative to moral hazard alone.
+A crucial result of {cite:t}`Tsyrennikov2013` is that limited enforcement
+contributes almost nothing: on its own it leaves the model close to the
+frictionless benchmark, and added to moral hazard it barely changes the MH
+results.
 
 The reason is visible in the Euler equations.
 
 Moral hazard and limited enforcement push the dynamics in opposite directions.
 
 Moral hazard requires the creditor to spread the continuation value of the
-borrower across future states, which unloads risk onto the borrower and produces
+borrower across future states, which shifts risk onto the borrower and produces
 immiseration.
 
 Limited enforcement without moral hazard pushes expected net worth upward until
-the enforcement constraints become non-operative.
+the enforcement constraints no longer bind.
 
 When both frictions are present, limited enforcement can **turn off** moral
 hazard near the borrowing limits: the borrowing limits already spread
 continuation values enough to provide incentives, so the incentive multiplier
-collapses.
+collapses to zero.
 
 ## Quantitative comparison
 
 The paper's simulation results show why the moral-hazard mechanism matters.
 
-The table below reports a reduced version of the model moments.
+The table below condenses the paper's table of simulated model moments.
 
-The MH+LE economy is very close to the MH economy in the paper's simulations,
-so the reduced table reports the MH column as the relevant moral-hazard
+Because the MH+LE economy is very close to the MH economy in the paper's
+simulations, the table reports only the MH column as the moral-hazard
 benchmark.
 
 | moment | data | MH, i.i.d. | LE, i.i.d. | MH, persistent | LE, persistent |
@@ -2193,7 +2209,7 @@ $$
 \Pr(Y_2 \mid I, Y_2) = p + \lambda(I)(1-p),
 $$
 
-using $p=0.50$ in the recalibration.
+with $p = 0.50$, recalibrating $\theta = 0.102$ and $\nu = 0.90$.
 
 This persistent component improves the fit for consumption and output.
 
@@ -2202,27 +2218,30 @@ The current-account problem remains.
 In the data, the trade balance is strongly countercyclical, while the model's
 trade balance is still procyclical in the reported simulations.
 
-Tsyrennikov argues that stochastic growth or multiperiod capital would likely
-be needed to address this shortcoming.
+Because invested goods last only one period, the model behaves much like an
+exchange economy, and Tsyrennikov shows that no exchange-economy model can
+match the observed consumption and current-account moments at the same time.
+
+He argues that stochastic growth or multiperiod capital would likely be needed
+to address this shortcoming.
 
 ## Empirical test
 
 {cite:t}`Tsyrennikov2013` proposes a test to distinguish moral hazard from
 limited enforcement.
 
-After a low past output realization ($y_{t-1} = Y_1$),
-the MH contract lowers net worth sharply, reducing future consumption
-smoothing.
+After a low past output realization ($y_{t-1} = Y_1$), the MH contract lowers
+net worth sharply, leaving less room for consumption smoothing.
 
-This prediction is:
+The prediction is
 
 $$
 \text{MH economy}: \quad
     \rho(c_t, y_t \mid y_{t-1} = Y_1) \;>\; \rho(c_t, y_t \mid y_{t-1} = Y_2),
 $$
 
-while the LE economy gives the opposite ordering (insurance is better after
-low realizations).
+while the LE economy implies the opposite ordering, because insurance is
+better after low realizations.
 
 Using Argentine quarterly data (1993--2005), the observed
 correlations are 0.98 (after low output) vs. 0.91 (after high output) ---
@@ -2259,9 +2278,9 @@ fraction of output retained after default.
 2. For each $\delta$, compare the two enforcement thresholds.
 3. Discuss: how does a milder default penalty, corresponding to a larger
    $\delta$, affect the tightness of the enforcement constraint and, via the
-   Euler equation, the interest rate spread? At $\delta = 1$ the LE constraint
-   becomes $v(n_j') \geq v_{\text{aut}}^{1}(Y_j)$; at $\delta \to 0$ it is
-   weak.
+   Euler equation, the interest rate spread? At $\delta = 1$ default carries no
+   output penalty, so the enforcement constraint is tightest; as
+   $\delta \to 0$ the penalty is harsh and the constraint rarely binds.
 ```{exercise-end}
 ```
 
@@ -2270,12 +2289,6 @@ fraction of output retained after default.
 ```
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: autarky value and enforcement thresholds
-    name: fig-tsy-default-penalty
----
 fig, ax = plt.subplots()
 
 def default_values_for_delta(δ_val, v_aut_arr, β_val=None):
@@ -2314,6 +2327,7 @@ for δ_val, color in [(0.50, 'C0'), (0.795, 'C1'), (0.95, 'C2')]:
 
 ax.set_xlabel('net worth $n$')
 ax.set_ylabel(r'$v_{\rm aut}(n)$')
+ax.set_title('autarky value and enforcement thresholds')
 ax.legend(fontsize=9)
 plt.tight_layout()
 plt.show()
@@ -2321,7 +2335,7 @@ plt.show()
 
 A larger $\delta$ means a milder default penalty.
 
-It raises the enforcement thresholds, tightens the participation constraints,
+It raises the enforcement thresholds, tightens the enforcement constraints,
 and reduces the scope for state-contingent repayment.
 
 In the full model, this can make limited enforcement bind before the
@@ -2330,8 +2344,8 @@ moral-hazard constraint does.
 Near the borrowing limit, limited enforcement can already force enough
 continuation-value dispersion to reduce the incentive multiplier.
 
-At $\delta \to 0$ the enforcement constraint is
-weak and the model approaches pure moral hazard.
+As $\delta \to 0$ the enforcement constraint rarely binds and the model
+approaches pure moral hazard.
 
 ```{solution-end}
 ```
@@ -2360,12 +2374,6 @@ front-loading incentive that the lender can exploit.
 ```
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: continuation net worth across discount factors
-    name: fig-tsy-discount-wedge
----
 fig, ax = plt.subplots()
 
 for β_val, ls, color in [
@@ -2385,6 +2393,7 @@ for β_val, ls, color in [
 ax.plot(n_grid, n_grid, lw=1, ls=':', color='k', label='45° line')
 ax.set_xlabel('net worth $n$')
 ax.set_ylabel("$E[n']$")
+ax.set_title('continuation net worth across discount factors')
 ax.legend()
 plt.tight_layout()
 plt.show()
@@ -2393,12 +2402,13 @@ plt.show()
 The larger the discount wedge $\beta_c - \beta$, the faster net worth drifts
 toward the borrowing limit.
 
-When $\beta = \beta_c$ moral hazard alone drives
-immiseration, while impatience accelerates it further.
+When $\beta = \beta_c$, moral hazard alone drives the downward drift; a
+positive wedge adds a front-loading motive that accelerates it.
 
-A small wedge, as calibrated by Tsyrennikov, is significant: it is equivalent
-to increasing the borrower's discount rate by 2% per annum, even though the
-assumed difference in quarterly rates is only 0.010.
+Tsyrennikov notes that even small differences in discounting significantly
+speed up convergence to the stationary distribution of net worth, which is why
+the calibration keeps the wedge small ($\beta = 0.980$ against
+$\beta_c = 0.990$).
 
 ```{solution-end}
 ```

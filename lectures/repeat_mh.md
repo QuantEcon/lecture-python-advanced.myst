@@ -15,9 +15,8 @@ kernelspec:
 
 ## Overview
 
-This lecture computes information-constrained optima in the
-Phelan-Townsend repeated moral-hazard environment
-{cite}`Phelan_Townsend_91`.
+This lecture computes information-constrained optima in the repeated
+moral-hazard environment of {cite:t}`Phelan_Townsend_91`.
 
 The environment is a continuum-agent economy with unobserved effort.
 
@@ -28,8 +27,8 @@ discounted social surplus.
 The key recursive idea comes from {cite:t}`Spear_Srivastava_87`: an
 agent's promised continuation utility is a sufficient state variable.
 
-Phelan and Townsend combine that idea with lotteries, finite grids, and
-linear programming to compute full-information, static
+{cite:t}`Phelan_Townsend_91` combine that idea with lotteries, finite grids,
+and linear programming to compute full-information, static
 unobserved-action, and repeated unobserved-action allocations.
 
 The lecture proceeds from the recursive formulation to the computational
@@ -342,7 +341,7 @@ $$
 \quad \forall\, a,\, \hat a \in A.
 $$
 
-### Parameterisation
+### Parameterization
 
 The baseline utility specification is
 
@@ -1103,7 +1102,7 @@ def solve_multi_period_economy(A=None,
 We use the same parameters as for the static economy, plus a
 discount factor $\beta = 0.8$ and grids of $N = N_m = 100$ points.
 
-We initialise the value function iteration with the one-period
+We initialize the value function iteration with the one-period
 (static) solution, scaled to discounted-sum units.
 
 ```{code-cell} ipython3
@@ -1769,12 +1768,6 @@ $$
 ```
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: agency cost function
-    name: fig-rmh-agency-cost
----
 δ_W = s_W_full - s_W_unobs
 
 plt.figure()
@@ -1783,6 +1776,7 @@ plt.xlabel("w")
 plt.ylabel(r"$\delta(w) = s^{FI}(w) - s^{UA}(w)$")
 plt.xlim([1.0, 5.0])
 plt.ylim(bottom=0.0)
+plt.title("agency cost function")
 plt.show()
 
 max_i = np.nanargmax(δ_W)
@@ -1836,12 +1830,6 @@ in which output is less informative about effort than in the baseline $P$.
 ```
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: surplus and effort under flatter probabilities
-    name: fig-rmh-flat-p
----
 P_flat = np.array([[0.70, 0.30],
                    [0.55, 0.45],
                    [0.45, 0.55],
@@ -1869,6 +1857,7 @@ axes[1].set_xlim([1.0, 5.0])
 axes[1].set_ylim([0.0, 0.8])
 axes[1].legend()
 
+fig.suptitle("surplus and effort under flatter probabilities")
 plt.tight_layout()
 plt.show()
 ```

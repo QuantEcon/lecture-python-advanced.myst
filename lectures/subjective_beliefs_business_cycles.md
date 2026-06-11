@@ -19,14 +19,14 @@ kernelspec:
 
 ## Overview
 
-This lecture presents key ideas from {cite}`bhandari2025survey`, who study
-whether household survey data on macroeconomic expectations can discipline
-business cycle models.
+This lecture studies whether household survey data on macroeconomic
+expectations can discipline business cycle models, following
+{cite:t}`bhandari2025survey`.
 
-Their central finding is that household forecasts of unemployment and inflation
+A central finding is that household forecasts of unemployment and inflation
 exhibit **systematic upward biases** relative to rational forecasts.
 
-These biases -- which the authors call *belief wedges* -- are:
+These biases, called *belief wedges*, are:
 
 * **Persistent and countercyclical**: they are larger during recessions.
 * **Positively correlated**: optimism/pessimism about unemployment and inflation
@@ -34,17 +34,17 @@ These biases -- which the authors call *belief wedges* -- are:
 * **One-factor in structure**: a single latent state accounts for most
   variation across wedges.
 
-The paper represents this evidence through the lens of
+We interpret this evidence using
 **robust preferences** ({cite:t}`HansenSargent2001`; {cite:t}`HansenSargent2008`).
 
-The robust preference serves as a model of pessimism and optimism:
+Robust preferences model pessimism and optimism:
 agents act as if they overweight states that deliver low continuation values
 (pessimism) and underweight those that deliver high continuation values
 (optimism).
 
 When calibrated to the Michigan Survey of
 Consumers (1982Q1-2019Q4), this mechanism yields a time-varying *belief shock*
-that substantially reduces the well-known **unemployment volatility puzzle** ---
+that substantially reduces the **unemployment volatility puzzle** ---
 the fact that standard New Keynesian models with only technology and monetary
 policy shocks generate far too little unemployment volatility.
 
@@ -52,7 +52,7 @@ In this lecture, we will cover:
 
 * How to define and measure belief wedges from household survey data.
 * How robust preferences generate time-varying subjective beliefs.
-* How belief distortions propagate through a linearised DSGE model.
+* How belief distortions propagate through a linearized DSGE model.
 * Why a calibrated belief shock helps resolve the unemployment volatility
   puzzle.
 
@@ -61,8 +61,8 @@ The lecture is self-contained in the following sense.
 All empirical moments, calibration values, and model objects used in the code
 are reported below, so no external data files are needed.
 
-We use the paper for motivation and for several benchmark numbers, but the
-computations in this lecture are generated from the equations and parameter
+Benchmark numbers from {cite:t}`bhandari2025survey` are quoted for comparison,
+but every computation below is generated from the equations and parameter
 values stated here.
 
 Some notation and units will be used throughout:
@@ -110,8 +110,8 @@ data-generating forecast.
 For unemployment and inflation, this sign convention corresponds to an upward
 forecast bias.
 
-The empirical objects in {cite}`bhandari2025survey` are mostly one-year-ahead,
-or four-quarter, wedges:
+The empirical objects below are mostly one-year-ahead, or four-quarter,
+wedges:
 
 $$
 
@@ -136,9 +136,9 @@ Thus the lecture uses one object in two related ways: empirically, a belief
 wedge is a survey forecast minus a statistical benchmark forecast; in the
 model, it is a subjective expectation minus an objective expectation.
 
-The raw Michigan unemployment question is categorical, so Bhandari et al.
+The raw Michigan unemployment question is categorical, so {cite:t}`bhandari2025survey`
 convert it into a quantitative forecast using the Carlson--Parkin procedure as
-adapted by {cite}`MankiwReisWolfers2003`.
+adapted by {cite:t}`MankiwReisWolfers2003`.
 
 We do not need those raw survey responses below.
 
@@ -147,7 +147,7 @@ moments listed next.
 
 ### Empirical facts
 
-Using data from 1982Q1 to 2019Q4, the authors document:
+Using data from 1982Q1 to 2019Q4, {cite:t}`bhandari2025survey` document:
 
 | Statistic | Unemployment wedge | Inflation wedge |
 |---|---|---|
@@ -345,14 +345,14 @@ keeps the distortion from being too extreme.
 
 The scalar $\theta_t$ controls the direction and strength of the belief tilt.
 
-The minimisation problem above corresponds to $\theta_t > 0$: larger
+The minimization problem above corresponds to $\theta_t > 0$: larger
 $\theta_t$ means more pessimism.
 
-The paper also allows optimism ($\theta_t < 0$), in which case the analogous
-inner problem is a maximisation that tilts probability toward
+Optimism corresponds to $\theta_t < 0$, in which case the inner problem
+becomes a maximization that tilts probability toward
 high-continuation-value states.
 
-The inner minimisation has a closed-form solution:
+The inner minimization has a closed-form solution:
 
 $$
 
@@ -488,7 +488,7 @@ class BeliefModel(NamedTuple):
     μ_θ: float    # mean of the belief-shock parameter θ
     ρ_θ: float    # AR(1) persistence of θ
     σ_θ: float    # volatility of the θ innovation
-    Vx: float     # slope of the linearised continuation value
+    Vx: float     # slope of the linearized continuation value
 
 
 def create_belief_model(β=0.994, ρ_x=0.85, σ_x=0.005,
@@ -603,7 +603,7 @@ believes bad shocks are more likely than they actually are.
 
 ### The perturbation method
 
-For quantitative analysis, {cite}`bhandari2025survey` extend the standard
+For quantitative analysis, {cite:t}`bhandari2025survey` extend the standard
 first-order perturbation method to accommodate time-varying belief distortions.
 
 Let the state vector be $x_t \in \mathbb{R}^n$ with **objective** law of
@@ -619,7 +619,7 @@ $$
 Write the local scalar belief factor as
 $\vartheta_t = \bar\theta(\bar{x} + x_{1t})$.
 
-Under the optimal belief distortion the shocks are re-centred:
+Under the optimal belief distortion the shocks are re-centered:
 
 $$
 
@@ -633,8 +633,7 @@ and $\bar{x}$ is the non-stochastic steady state.
 This perturbation preserves nontrivial first-order effects of belief
 distortions.
 
-The resulting **belief wedge** for any variable $z$ with model-consistent
-expected value $\bar{z}' x$ is
+The resulting **belief wedge** for any variable $z_t = \bar{z}' x_t$ is
 
 $$
 
@@ -665,12 +664,12 @@ An important consequence of the formula for $\Delta_t^{(1)}(z)$ is that the
 *time variation* in all belief wedges is driven by the **single scalar** belief
 factor $\vartheta_t$.
 
-The cross-sectional loadings $\bar{z}'(\psi_w\psi_w')V_x'$ are
+The cross-sectional loadings $-\bar{z}'(\psi_w\psi_w')V_x'$ are
 fixed by the model's structural parameters.
 
 This theoretical prediction
 matches the empirical finding that one principal component explains 78.6%
-of the joint variation in household forecast errors.
+of the joint variation in the unemployment and inflation wedges.
 
 ```{code-cell} ipython3
 ---
@@ -730,8 +729,8 @@ an almost exact positive relation.
 
 ### Model description
 
-{cite}`bhandari2025survey` embed the belief-distortion mechanism in a
-New Keynesian model with a **search-and-matching** labour market
+Following {cite:t}`bhandari2025survey`, we embed the belief-distortion
+mechanism in a New Keynesian model with a **search-and-matching** labor market
 ({cite}`Shimer2005`; {cite}`ChristianoEichenbaumTrabandt2016`).
 
 The key
@@ -744,7 +743,7 @@ Employed members earn the wage, unemployed members receive a benefit flow $D$,
 and the household applies robust preferences (indexed by $\theta_t$) when
 forming subjective forecasts.
 
-**Firms** --- Labour-market firms post vacancies and match with searching workers,
+**Firms** --- Labor-market firms post vacancies and match with searching workers,
 while monopolistic intermediate-goods producers reset prices subject to Calvo
 frictions (parameter $\chi_p$), generating a New Keynesian Phillips curve.
 
@@ -770,6 +769,7 @@ The model is calibrated to quarterly U.S. data, 1982Q1–2019Q4.
 | Price stickiness | $\chi_p$ | 0.75 | Calvo parameter |
 | Wage rigidity | $\chi_w$ | 0.925 | Partial adjustment |
 | Steady-state markup | $\lambda$ | 1.2 | |
+| Policy-rule intercept | $\bar\pi$ | 0.01 | Inflation target |
 | Policy-rule smoothing | $\rho_r$ | 0.84 | |
 | Taylor-rule inflation loading | $r_\pi$ | 1.60 | |
 | Taylor-rule output loading | $r_y$ | 0.028 | |
@@ -788,9 +788,10 @@ The model is calibrated to quarterly U.S. data, 1982Q1–2019Q4.
 
 ### A self-contained linear surrogate
 
-The paper solves a structural New Keynesian model.
+Solving the full structural model requires the series expansion method
+described in the appendix.
 
-For computation in this lecture, we use a small reduced-form vector
+For computation in the main text, we use a small reduced-form vector
 autoregression that is calibrated to reproduce the main benchmark moments in
 the moment table reported below and the qualitative shape of the
 belief-shock impulse responses:
@@ -959,10 +960,10 @@ nk = create_nk_model()
 The table below collects the empirical moments and model moments most relevant
 for this lecture.
 
-All values are percentages or percentage points; inflation is annualised and
+All values are percentages or percentage points; inflation is annualized and
 output is detrended.
 
-| Moment | Data | Paper benchmark | No $\theta_t$ | Only $\theta_t$ |
+| Moment | Data | Benchmark | No $\theta_t$ | Only $\theta_t$ |
 |---|---:|---:|---:|---:|
 | Mean inflation wedge | 1.22 | 0.90 | 0.00 | 0.00 |
 | Mean unemployment wedge | 0.52 | 0.55 | 0.00 | 0.00 |
@@ -1074,15 +1075,15 @@ The second row plots the belief shock itself and the two implied survey wedges.
 The impulse responses show that a belief shock:
 
 * Raises unemployment persistently.
-* Raises inflation on impact, with the response gradually decaying back to zero
-  in this reduced-form representation.
+* Raises inflation temporarily, with the response gradually decaying back to
+  zero in this reduced-form representation.
 * Lowers output, so the shock looks like a pessimistic recessionary force.
 * Generates belief wedges for both unemployment and inflation that closely
   mirror the dynamics of $\theta_t$ itself --- consistent with the one-factor
   structure.
 
 The structural model contains one additional object that the surrogate does not
-plot: impulse responses under the **subjective** measure.
+capture: impulse responses under the **subjective** measure.
 
 After a positive $\theta_t$ innovation, pessimistic agents behave as if future
 TFP shocks are worse, monetary policy shocks are tighter, and future
@@ -1114,7 +1115,7 @@ std_no_θ = unconditional_stds(nk, include_θ_shock=False)
 
 labels_vol = ['Unemployment', 'Inflation', 'Output']
 idx = [I_U, I_PI, I_Y]
-scale = [100, 400, 100]    # convert to pp (unemployment, annualised inflation, %)
+scale = [100, 400, 100]    # convert to pp (unemployment, annualized inflation, %)
 
 std_full_scaled = [std_full[i] * scale[j] for j, i in enumerate(idx)]
 std_no_θ_scaled = [std_no_θ[i] * scale[j] for j, i in enumerate(idx)]
@@ -1220,11 +1221,10 @@ pedagogical representation.
 
 ### Role of firms' beliefs
 
-In the benchmark model of {cite}`bhandari2025survey`, **firms** as well as
+In the benchmark model, **firms** as well as
 households hold subjective beliefs.
 
-The paper studies how the results change when firms instead have rational
-beliefs.
+What changes when firms instead have rational beliefs?
 
 The key channel is through the price-setting equation.
 
@@ -1237,7 +1237,7 @@ recalibrating $\theta_t$ so that the mean and volatility of the unemployment
 wedge remain comparable.
 
 If firms have rational beliefs, they see the household pessimism shock mainly
-as contractionary demand.
+as a contraction in demand.
 
 Inflation falls on impact, and the inflation wedge is too small.
 
@@ -1250,7 +1250,7 @@ households, put extra subjective probability on high-marginal-cost states.
 
 ### Two diagnostic variants
 
-The paper uses diagnostic variants to show how survey wedges restrict the
+Two diagnostic variants show how survey wedges restrict the
 model.
 
 **No TFP shocks** --- Without supply-side uncertainty, pessimistic agents worry
@@ -1283,7 +1283,7 @@ The table below summarizes the two restrictions.
 | Volatility of unemployment | 1.39 | 0.87 | 1.24 |
 
 These variants show why the benchmark needs both supply-side uncertainty and
-firms' subjective beliefs to match the joint behaviour of inflation and
+firms' subjective beliefs to match the joint behavior of inflation and
 unemployment forecasts.
 
 ### Countercyclicality of wedges
@@ -1350,16 +1350,14 @@ predicted by the model and documented in the survey data.
 
 ### Further empirical checks
 
-{cite}`bhandari2025survey` also verify the mechanism with reduced-form
-evidence.
+Reduced-form evidence provides additional support for the mechanism.
 
-They estimate local projections of macroeconomic variables and survey forecasts
-on innovations to the first principal component of the belief wedges.
+In local projections of macroeconomic variables and survey forecasts on
+innovations to the first principal component of the belief wedges, a positive
+innovation predicts higher unemployment, higher belief wedges, and an
+inflation response that is briefly positive before turning mildly negative.
 
-A positive innovation predicts higher unemployment, higher belief wedges, and
-an inflation response that is briefly positive before turning mildly negative.
-
-They also run forecast-error regressions of the form
+A second check comes from forecast-error regressions of the form
 
 $$
 
@@ -1374,17 +1372,16 @@ Under full-information rational expectations these errors should be mean zero
 and unforecastable.
 
 The survey data and the calibrated model both generate predictable forecast
-errors, providing another check on the subjective-belief mechanism.
+errors, consistent with the subjective-belief mechanism.
 
 ## Extensions
 
-The paper explores several important extensions:
+Several extensions of the benchmark model are worth noting:
 
 **Heterogeneous beliefs** --- A natural question is whether households and
 firms should hold the same subjective beliefs.
 
-The paper shows that
-allowing firms to be *rational* while households are pessimistic changes
+Allowing firms to be *rational* while households are pessimistic changes
 the inflation dynamics substantially.
 
 This separation is identified from
@@ -1408,7 +1405,7 @@ worse than in the benchmark with an orthogonal belief shock.
 When wages are flexible, unemployment volatility falls to $0.77$ and
 unemployment-wedge volatility falls to $0.13$.
 
-This is the Shimer-style labour-market amplification problem in another form:
+This is the Shimer-style labor-market amplification problem in another form:
 without sluggish wages, belief shocks and TFP shocks move match values too
 little.
 
@@ -1429,15 +1426,15 @@ pessimism and the belief wedges increase without any exogenous shock to
 $\theta_t$.
 
 The supporting empirical idea is that belief wedges comove with the
-{cite}`Schmidt2016` index of idiosyncratic labour-income skewness, which
+{cite}`Schmidt2016` index of idiosyncratic labor-income skewness, which
 proxies for the risk of large losses such as job loss.
 
 ## Appendix: the series expansion method
 
 This appendix gives the computational and theoretical details underlying the
-linearisation presented in the main lecture.
+linearization presented in the main lecture.
 
-The formulas follow {cite}`bhandari2025survey`, but the notation needed for the
+The formulas follow {cite:t}`bhandari2025survey`, but the notation needed for the
 calculations below is introduced here.
 
 ### Multi-period belief wedges
@@ -1458,21 +1455,23 @@ x_{t+1} = \psi_q + \psi_x x_t + \psi_w w_{t+1},
 
 $$
 
-the $\tau$-period-ahead expectation under the data-generating measure
-satisfies the recursion
+the $\tau$-period-ahead expectation of the state deviation under the
+data-generating measure is
 
 $$
 
-G_x^{(\tau)} = \psi_x G_x^{(\tau-1)} + \psi_x,
+E_t[x_{1,t+\tau}] = G_x^{(\tau)} x_{1t} + G_0^{(\tau)},
 \qquad
-G_x^{(0)} = 0,
+G_x^{(\tau)} = \psi_x G_x^{(\tau-1)},
+\quad
+G_0^{(\tau)} = \psi_x G_0^{(\tau-1)} + \psi_q,
 
 $$
 
-so that $E_t[x_{t+\tau} - x_t] = G_x^{(\tau)} x_{1t} + G_0^{(\tau)}$.
+with initial conditions $G_x^{(0)} = I$ and $G_0^{(0)} = 0$.
 
 Under the **subjective** measure, the mean of $w_{t+1}$ is shifted to
-$\nu_t = H + HF x_{1t}$.
+$\nu_t = \bar H + HF x_{1t}$.
 
 For the stationary model the relevant identifications are
 
@@ -1486,23 +1485,31 @@ H = -(V_x \psi_w)',
 
 $$
 
-The subjective expectation then obeys a modified recursion
+The shift is equivalent to replacing the transition matrices by their
+subjective counterparts
 
 $$
 
-\tilde G_x^{(\tau)} = \psi_x \tilde G_x^{(\tau-1)} + \psi_x
-  + \bigl(\psi_w + \tilde G_x^{(\tau-1)}\psi_w\bigr) HF,
+\tilde\psi_x = \psi_x + \psi_w H F,
+\qquad
+\tilde\psi_q = \psi_q + \psi_w \bar H,
 
 $$
 
-and the $\tau$-period belief wedge is
+so the subjective loadings $\tilde G_x^{(\tau)}$ and $\tilde G_0^{(\tau)}$
+satisfy the same recursions with $\tilde\psi_x$ and $\tilde\psi_q$ in place
+of $\psi_x$ and $\psi_q$.
+
+The $\tau$-period belief wedge is then
 
 $$
 
 \Delta_t^{(\tau)} = \bigl(\tilde G_x^{(\tau)} - G_x^{(\tau)}\bigr) x_{1t}
-  + \tilde G_0^{(\tau)} - G_0^{(\tau)}.
+  + \tilde G_0^{(\tau)} - G_0^{(\tau)},
 
 $$
+
+which reduces to the one-period wedge formula at $\tau = 1$.
 
 The code below implements these recursions and shows how belief wedges grow
 with the forecast horizon.
@@ -1521,8 +1528,11 @@ def compute_tau_wedge_loadings(ψ_x, ψ_w, H, H_bar, F, τ_max=20):
     wedge_slope : array (tau_max,)   x1t loading of wedge    (Gx_tilde - Gx)
     """
     n = ψ_x.shape[0]
-    Gx = np.zeros((n, n))
-    Gx_tild = np.zeros((n, n))
+    ψ_x_tild = ψ_x + ψ_w @ (H @ F)        # subjective transition matrix
+    ψ_q_tild = (ψ_w @ H_bar).ravel()      # subjective intercept
+
+    Gx = np.eye(n)
+    Gx_tild = np.eye(n)
     G0 = np.zeros(n)
     G0_tild = np.zeros(n)
 
@@ -1530,16 +1540,10 @@ def compute_tau_wedge_loadings(ψ_x, ψ_w, H, H_bar, F, τ_max=20):
     wedge_slope = np.zeros((τ_max, n))
 
     for τ in range(1, τ_max + 1):
-        new_Gx = (Gx + np.eye(n)) @ ψ_x
-        new_G0 = G0 + (Gx + np.eye(n)) @ ψ_w @ np.zeros(ψ_w.shape[1])
-
-        new_Gx_tild = ((Gx_tild + np.eye(n)) @ ψ_x
-                       + (Gx_tild + np.eye(n)) @ ψ_w @ (H @ F))
-        new_G0_tild = (G0_tild
-                       + ((Gx_tild + np.eye(n)) @ ψ_w @ H_bar).ravel())
-
-        Gx, G0 = new_Gx, new_G0
-        Gx_tild, G0_tild = new_Gx_tild, new_G0_tild
+        Gx = ψ_x @ Gx
+        Gx_tild = ψ_x_tild @ Gx_tild
+        G0 = ψ_x @ G0                     # ψ_q = 0 under the objective measure
+        G0_tild = ψ_x_tild @ G0_tild + ψ_q_tild
 
         wedge_slope[τ - 1] = (Gx_tild - Gx)[0]
         wedge_const[τ - 1] = float((G0_tild - G0)[0])
@@ -1565,14 +1569,16 @@ H_bar_sc = -model.μ_θ * x_bar_sc * np.array([[model.Vx * model.σ_x]])
 τ_max = 20
 wc, ws = compute_tau_wedge_loadings(ψ_x_sc, ψ_w_sc, H_sc, H_bar_sc, F_sc, τ_max)
 
-# Evaluate at a one-standard-deviation belief shock.
+# State deviation that raises the belief factor by one
+# unconditional standard deviation of the belief shock.
 θ_std = model.σ_θ / np.sqrt(1 - model.ρ_θ**2)
+x_dev = θ_std / model.μ_θ
 
 fig, ax = plt.subplots()
 τ_grid = np.arange(1, τ_max + 1)
 ax.plot(τ_grid, wc * 100,
         color='steelblue', linewidth=2, label='Wedge at mean ($x_{1t}=0$)')
-ax.plot(τ_grid, (wc + ws[:, 0] * θ_std) * 100,
+ax.plot(τ_grid, (wc + ws[:, 0] * x_dev) * 100,
         color='firebrick', linewidth=2, linestyle='--',
         label='Wedge at $+1\\,\\sigma_\\theta$ deviation')
 ax.axhline(0, color='grey', linewidth=0.7, linestyle=':')
@@ -1595,7 +1601,7 @@ affect not only the next shock but also the expected path of future states.
 
 ### The series expansion
 
-{cite}`bhandari2025survey` solve the full general-equilibrium model
+{cite:t}`bhandari2025survey` solve the full general-equilibrium model
 using a **series expansion** (perturbation) method
 ({cite}`BorovickaHansen2014`).
 
@@ -1636,7 +1642,7 @@ $$
 
 To preserve a nontrivial role for beliefs at first order, the penalty
 parameter is **jointly scaled** with $\mathsf{q}$: the effective
-penalisation in the perturbed recursion is
+penalization in the perturbed recursion is
 $\mathsf{q}/[\bar\theta(\bar x + x_{1t})]$,
 which shrinks together with shock volatility.
 
@@ -2104,7 +2110,8 @@ Using the reduced-form NK model built by `create_nk_model`:
 (a) Compute the fraction of unemployment variance explained by each of the
     three shocks.
 (b) Show that the belief shock is the dominant driver of unemployment
-    fluctuations, while TFP is the dominant driver of output fluctuations.
+    fluctuations, while TFP shocks matter much more for inflation and
+    output than they do for unemployment.
 ```{exercise-end}
 ```
 
@@ -2136,14 +2143,17 @@ for i, label in zip([I_U, I_PI, I_Y], var_labels):
     print(f"{label:<16}", *[f"{s:>19.1f}%" for s in shares])
 ```
 
-The belief shock accounts for the majority of unemployment variance in this
-calibrated surrogate.
+The belief shock accounts for the large majority of unemployment variance in
+this calibrated surrogate.
 
-Technology shocks drive most of the output variance
-(through their high persistence and direct effect on productivity).
+Technology shocks drive most of the inflation variance, and output variance
+is split roughly evenly between the belief and TFP shocks.
 
-Monetary
-policy shocks play a smaller role for both variables.
+Monetary policy shocks play a negligible role for all three variables.
+
+This pattern matches the variance decomposition of the structural model, in
+which the belief shock dominates unemployment while technology shocks account
+for most of the variation in inflation.
 
 ```{solution-end}
 ```

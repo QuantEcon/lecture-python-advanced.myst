@@ -49,8 +49,8 @@ $\mathcal{Y} = \{Y_1,\ldots,Y_N\}$ with $0 < Y_1 < \cdots < Y_N$.
 The technology is built from two fixed probability distributions on
 $\mathcal{Y}$, which we call $g_0$ and $g_1$.
 
-We think of $g_1$ as the distribution of output when the borrower's effort is
-least productive and $g_0$ as the distribution when it is most productive.
+We think of $g_1$ as the output distribution when investment is lowest and
+$g_0$ as the output distribution when investment is highest.
 
 Accordingly $g_0$ places relatively more weight on high outputs than $g_1$
 does.
@@ -89,7 +89,7 @@ the borrower invested little.
 
 ### Agents and preferences
 
-**The borrower** is an infinitely-lived, risk-averse agent with normalised
+**The borrower** is an infinitely-lived, risk-averse agent with normalized
 discounted utility
 
 $$
@@ -129,7 +129,7 @@ in full in feasibility condition {eq}`eq:atkeson_feasibility`.
 $\mathbb{E}_0^{\sigma}$ is the expectation over output histories that this plan
 induces, evaluated at date $0$.
 
-The factor $(1 - \beta)$ normalises lifetime utility to per-period units, so
+The factor $(1 - \beta)$ normalizes lifetime utility to per-period units, so
 $v$ is comparable to a one-period payoff.
 
 **Lenders** are a sequence of short-lived, risk-neutral agents, one born each
@@ -379,7 +379,7 @@ $\mathcal V(Q) \subseteq \mathcal B(\mathcal V)(Q)$ for all $Q$.
 
 Together, {prf:ref}`atkeson_self_generation` and
 {prf:ref}`atkeson_factorization` imply
-$\mathcal V = \mathcal B(\mathcal V)$, characterising the utility
+$\mathcal V = \mathcal B(\mathcal V)$, characterizing the utility
 possibility correspondence as the fixed point of $\mathcal B$.
 
 ### Program P*
@@ -508,11 +508,8 @@ after output $Y_j'$, $\eta$ is the multiplier on the relaxed
 investment-incentive condition, and $\xi_j$ enforces consistency between
 $v_j$ and the frontier value $\bar v(Q_j')$.
 
-In the paper's numbered notation, $\mu_3(Y_j')$ corresponds to $\mu_j$,
-and $\mu_4$ corresponds to $\eta$.
-
-The numbers are just labels for constraints in the Lagrangian
-{eq}`eq:atkeson_relaxed_lagrangian`.
+In the numbered notation of {cite:t}`Atkeson1991`, $\mu_3(Y_j')$ corresponds
+to $\mu_j$ and $\mu_4$ corresponds to $\eta$.
 
 The first-order condition with respect to $v_j$ is, up to the common
 positive scale factor $\beta g_j(I)$,
@@ -717,12 +714,12 @@ v_{\text{aut}}(Q) =
 $$
 
 Note that the continuation values depend only on $Y_L$ and $Y_H$, not on the
-current $Q$, because next period's state is simply the realised output.
+current $Q$, because next period's state is simply the realized output.
 
 ```{code-cell} ipython3
 @jax.jit
 def autarky_operator_jax(V, β_val, g_high_val, g_low_val):
-    """One vectorised Bellman step for the autarky problem."""
+    """One vectorized Bellman step for the autarky problem."""
     V_Y = jnp.interp(Y_j, Q_grid_j, V)
     g_I = g_of_I_jax(I_grid_j, g_high_val, g_low_val)
     EV_I = g_I @ V_Y
@@ -991,7 +988,7 @@ ax.plot(Q_grid, V_pareto, lw=2, ls='--',
         label=r'Program P* value  $\bar v(Q)$')
 
 ax.set_xlabel(r'state $Q$ (output net of repayment)')
-ax.set_ylabel('normalised utility')
+ax.set_ylabel('normalized utility')
 ax.legend()
 plt.tight_layout()
 plt.show()
@@ -1497,12 +1494,6 @@ parameters fixed).
 Here is one solution:
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: continuation state across patience levels
-    name: fig-atk-patience
----
 fig, ax = plt.subplots()
 
 for β_val, ls, color, tag in [
@@ -1524,6 +1515,7 @@ for β_val, ls, color, tag in [
 
 ax.set_xlabel(r'state $Q$')
 ax.set_ylabel(r"$Q'_L$  (continuation state after low output)")
+ax.set_title('continuation state across patience levels')
 ax.legend()
 plt.tight_layout()
 plt.show()
@@ -1588,12 +1580,6 @@ weaker signal of investment.
 Here is one solution:
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: net outflow under weak signal
-    name: fig-atk-signal
----
 # Weak-signal specification
 g_high_ws = np.array([0.40, 0.60])
 g_low_ws = np.array([0.60, 0.40])
@@ -1624,6 +1610,7 @@ ax.plot(Q_grid, net_L_ws,
 ax.axhline(0, color='k', lw=0.8, ls=':')
 ax.set_xlabel(r'state $Q$')
 ax.set_ylabel('net capital outflow')
+ax.set_title('net outflow under weak signal')
 ax.legend()
 plt.tight_layout()
 plt.show()
