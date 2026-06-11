@@ -1900,13 +1900,25 @@ mystnb:
     caption: policy functions in the MH, MH+LE and LE economies
     name: fig-tsy-policy-functions
 ---
-fig, axes = plt.subplots(3, 2, figsize=(12, 10), sharex=True)
+fig, axes = plt.subplots(3, 2, figsize=(10, 15), sharex=True)
 ax = axes.ravel()
 
-for a in ax:
+paper_ylims = [(0.0, 0.6), (0.4, 1.1),
+               (0.05, 0.5), (0.0, 0.6),
+               (-0.15, 0.2), (0.0, 1.1)]
+paper_yticks = [np.arange(0.0, 0.61, 0.1), np.arange(0.4, 1.01, 0.1),
+                np.arange(0.05, 0.51, 0.05), np.arange(0.0, 0.61, 0.1),
+                np.arange(-0.15, 0.21, 0.05), np.arange(0.0, 1.01, 0.2)]
+paper_xticks = np.arange(0.4, 1.01, 0.1)
+
+for a, ylim, yticks in zip(ax, paper_ylims, paper_yticks):
+    a.set_box_aspect(1)
     a.axvline(n_low_mh, color='0.25', lw=1, ls='--')
     a.axvline(n_low_le, color='0.55', lw=1, ls=':')
-    a.set_xlim(0.38, 1.02)
+    a.set_xlim(0.4, 1.0)
+    a.set_xticks(paper_xticks)
+    a.set_ylim(*ylim)
+    a.set_yticks(yticks)
 
 ax[0].plot(plot_grid, policy_curve(policies['MH'], 'λ'), lw=2, label='MH')
 ax[0].plot(plot_grid, policy_curve(policies['MH+LE'], 'λ'),
