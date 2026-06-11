@@ -43,39 +43,45 @@ Time is discrete, $t = 0, 1, 2, \ldots$.
 In each period the borrower chooses
 investment $I_t \geq 0$.
 
-Given investment $I_t$, next period's output
-$Y_{t+1}$ is drawn from the conditional distribution
+Output next period takes values in a finite, ordered set
+$\mathcal{Y} = \{Y_1,\ldots,Y_N\}$ with $0 < Y_1 < \cdots < Y_N$.
+
+The technology is built from two fixed probability distributions on
+$\mathcal{Y}$, which we call $g_0$ and $g_1$.
+
+We think of $g_1$ as the distribution of output when the borrower's effort is
+least productive and $g_0$ as the distribution when it is most productive.
+
+Accordingly $g_0$ places relatively more weight on high outputs than $g_1$
+does.
+
+Investment does not reshape these two distributions; it only changes how likely
+output is to be drawn from one rather than the other.
+
+With probability $\lambda(I)$ output is drawn from the favorable distribution
+$g_0$, and with probability $1 - \lambda(I)$ it is drawn from $g_1$, so given
+investment $I_t$ next period's output $Y_{t+1}$ has the mixture distribution
 
 $$
-g(Y';\,I) = \lambda(I)\,g_0(Y') + \bigl[1 - \lambda(I)\bigr]\,g_1(Y'),
+g(Y';\,I) = \lambda(I)\,g_0(Y') + \bigl[1 - \lambda(I)\bigr]\,g_1(Y').
 $$
 
-```{prf:assumption} Technology and Output Signals
-:label: atkeson_assumption_technology
-
-The output support is finite and ordered,
-$\mathcal{Y} = \{Y_1,\ldots,Y_N\}$, with
-$0 < Y_1 < \cdots < Y_N$.
-
-For every investment level $I$, output has strictly positive probabilities:
-$g(Y_i;I)>0$ for all $i$.
-
-Investment affects output only through the probability vector
-$g(\cdot;I)$.
-
-The distribution has the mixture form
-$g(Y_i;I)=\lambda(I)g_0(Y_i)+[1-\lambda(I)]g_1(Y_i)$, where $g_0$ and $g_1$
-are probability distributions on $\mathcal{Y}$ and
-$\lambda : [0,I_{\max}] \to [0,1]$ is strictly increasing and concave,
+The weight $\lambda : [0,I_{\max}] \to [0,1]$ is strictly increasing and
+concave,
 
 $$
-\lambda'(I)>0, \qquad \lambda''(I)\le 0.
+\lambda'(I)>0, \qquad \lambda''(I)\leq 0,
 $$
 
-The ratio $g_0(Y_i)/g_1(Y_i)$ is increasing in $i$.
-```
+so more investment always raises the chance of the favorable distribution, but
+with diminishing returns.
 
-The last condition is a monotone likelihood-ratio condition.
+Every output level keeps strictly positive probability at every investment
+level, $g(Y_i;I)>0$ for all $i$, so no single realization ever fully reveals how
+much the borrower invested.
+
+Finally, the likelihood ratio $g_0(Y_i)/g_1(Y_i)$ is increasing in $i$, the
+monotone likelihood-ratio condition.
 
 Since higher investment raises $\lambda(I)$, high output is relatively good
 news about investment, while low output is relatively strong evidence that
@@ -87,7 +93,7 @@ the borrower invested little.
 discounted utility
 
 $$
-v^B(\sigma) = (1 - \beta)\,\mathbb{E}_0^{\sigma}
+v(\sigma) = (1 - \beta)\,\mathbb{E}_0^{\sigma}
     \sum_{t=0}^{\infty} \beta^t \, u(c_t),
 $$
 
@@ -104,7 +110,7 @@ The borrower's autarky value is high enough to rule out equilibrium states
 with arbitrarily low current consumption:
 
 $$
-(1-\beta)u(0) + \beta \bar u < v^B_{\text{aut}}(Y_1),
+(1-\beta)u(0) + \beta \bar u < v_{\text{aut}}(Y_1),
 $$
 
 where $\bar u$ is an upper bound for period utility.
@@ -124,7 +130,7 @@ $\mathbb{E}_0^{\sigma}$ is the expectation over output histories that this plan
 induces, evaluated at date $0$.
 
 The factor $(1 - \beta)$ normalises lifetime utility to per-period units, so
-$v^B$ is comparable to a one-period payoff.
+$v$ is comparable to a one-period payoff.
 
 **Lenders** are a sequence of short-lived, risk-neutral agents, one born each
 period.
@@ -186,10 +192,10 @@ where $M$ is the lender's endowment per period.
 The value the borrower can attain without credit access satisfies
 
 $$
-v^B_{\text{aut}}(Z) = \max_{0 \le I \le \min\{Z,\, I_{\max}\}}
+v_{\text{aut}}(Z) = \max_{0 \leq I \leq \min\{Z,\, I_{\max}\}}
     \Bigl[
         (1-\beta)\,u(Z - I)
-        + \beta \sum_{Y'} v^B_{\text{aut}}(Y')\,g(Y';\,I)
+        + \beta \sum_{Y'} v_{\text{aut}}(Y')\,g(Y';\,I)
     \Bigr].
 $$
 
@@ -220,9 +226,9 @@ consumption-investment plan while keeping the same $b$ and $d$:
 
 $$
 \begin{aligned}
-v^B(\sigma \mid Q^t)
+v(\sigma \mid Q^t)
 &\geq
-v^B(\tilde \sigma \mid Q^t),
+v(\tilde \sigma \mid Q^t),
 \\
 &\text{for all feasible }
 \tilde \sigma = \{\tilde c,\, \tilde I,\, b,\, d\}.
@@ -266,9 +272,9 @@ have been repaid.
 An allocation is **immune from repudiation** if
 
 $$
-v^B\bigl(\sigma \mid Q^t, Y_{t+1}\bigr)
+v\bigl(\sigma \mid Q^t, Y_{t+1}\bigr)
 \geq
-v^B_{\text{aut}}(Y_{t+1})
+v_{\text{aut}}(Y_{t+1})
 $$ (eq:atkeson_no_repudiation)
 
 for all $t$, histories $Q^t$, and output realizations $Y_{t+1}$.
@@ -283,13 +289,13 @@ The planner chooses among allocations that satisfy five restrictions:
 
 1. Feasibility {eq}`eq:atkeson_feasibility`
 2. Borrower individual rationality:
-   $v^B(\sigma \mid Q^t) \geq v^B_{\text{aut}}(Q_t)$
+   $v(\sigma \mid Q^t) \geq v_{\text{aut}}(Q_t)$
 3. Lender participation {eq}`eq:atkeson_lender_ir`
 4. Immunity from repudiation {eq}`eq:atkeson_no_repudiation`
 5. Incentive compatibility {eq}`eq:atkeson_ic`
 
 An allocation is **constrained Pareto optimal** if it maximizes the
-borrower's initial payoff $v^B(\sigma)$ over this constrained set.
+borrower's initial payoff $v(\sigma)$ over this constrained set.
 
 Borrower individual rationality is part of the general feasible set.
 
@@ -451,7 +457,7 @@ At the constrained optimum, the expected value of repayments to lenders is
 nondecreasing in investment:
 
 $$
-\sum_{Y'} d'(Y')\,[g_0(Y')-g_1(Y')] \ge 0.
+\sum_{Y'} d'(Y')\,[g_0(Y')-g_1(Y')] \geq 0.
 $$
 
 This is the weak form of Atkeson's repayment-monotonicity condition; a strict
@@ -461,7 +467,8 @@ The constrained-optimal investment choice is interior:
 $I^* \in (0,I_{\max})$.
 ```
 
-Together with {prf:ref}`atkeson_assumption_technology`,
+Together with the concavity of $\lambda$ and the monotone likelihood-ratio
+condition introduced above,
 {prf:ref}`atkeson_assumption_first_order` justifies replacing the
 incentive-compatibility condition by the relaxed first-order inequality used
 in the Lagrangian.
@@ -486,7 +493,7 @@ $$
 &+ \lambda_f (Q + b - c - I) \\
 &+ \lambda_\ell \left[\beta\sum_j d_j g_j(I) - b\right] \\
 &+ \beta\sum_j \mu_j g_j(I)
-   \left[v_j - v^B_{\text{aut}}(Y_j')\right] \\
+   \left[v_j - v_{\text{aut}}(Y_j')\right] \\
 &+ \eta
    \left[-(1-\beta)u'(Q+b-I)
          + \beta\sum_j v_j g_{I,j}\right] \\
@@ -533,7 +540,7 @@ When {eq}`eq:atkeson_vj_foc` requires $\mu_j > 0$, complementary slackness
 implies that the no-repudiation constraint binds:
 
 $$
-\bar v(Y_j' - d_j) = v^B_{\text{aut}}(Y_j').
+\bar v(Y_j' - d_j) = v_{\text{aut}}(Y_j').
 $$
 
 Repayment $d_j$ is then at its maximum and the new loan available at the
@@ -543,7 +550,7 @@ Thus the borrower has a **capital outflow**:
 
 $$
 \underbrace{d_j}_{\text{repayment to old lender}}
-    \geq \underbrace{b' \bigl(Q_j'\bigr)}_{\text{new loan from young lender}}.
+    \geq \underbrace{b^* \bigl(Q_j'\bigr)}_{\text{new loan from young lender}}.
 $$
 
 Strict capital outflow requires the inequality to be strict.
@@ -577,8 +584,13 @@ import matplotlib.pyplot as plt
 
 Let's start by defining the model primitives and the state grid.
 
-The probabilities satisfy the monotone likelihood ratio property:
-$g_{\ell}(Y_L)/g_h(Y_L) > 1 > g_{\ell}(Y_H)/g_h(Y_H)$.
+In the code the favorable distribution $g_0$ is `g_high`, the output
+distribution when investment is at its maximum, and the unfavorable
+distribution $g_1$ is `g_low`, the distribution when investment is zero.
+
+With only two outputs, the monotone likelihood-ratio property
+$g_0(Y_i)/g_1(Y_i)$ increasing in $i$ reduces to
+$g_0(Y_H)/g_1(Y_H) > 1 > g_0(Y_L)/g_1(Y_L)$.
 
 Thus $Y_L$ is evidence of low investment, while $Y_H$ is evidence of high
 investment.
@@ -1215,7 +1227,7 @@ In that region, repayment after bad news about investment is not fully offset
 by new borrowing, so the borrower exports capital.
 
 This is the numerical analogue of Atkeson's capital-outflow condition
-$d_j \geq b'(Q'_j)$ for the lowest output realization.
+$d_j \geq b^*(Q'_j)$ for the lowest output realization.
 
 Outside the shaded region, low output is still punished through a lower
 continuation state, but that punishment does not show up as a literal net
@@ -1558,11 +1570,11 @@ near the upper part of the grid.
 *Signal quality and capital flows.*
 
 Replace the output distribution with the more symmetric values
-$g_h = (0.40, 0.60)$ and $g_\ell = (0.60, 0.40)$, so that output is a
+$g_0 = (0.40, 0.60)$ and $g_1 = (0.60, 0.40)$, so that output is a
 weaker signal of investment.
 
 1. Recompute the autarky and Program P* value functions.
-2. Plot the low-output net capital outflow curve $d(Y_L) - b'(Q'_L)$ as a
+2. Plot the low-output net capital outflow curve $d(Y_L) - b^*(Q'_L)$ as a
    function of $Q$ for both the baseline and the weak-signal specification.
 3. Explain intuitively why weaker signal quality changes the capital flow
    pattern.
