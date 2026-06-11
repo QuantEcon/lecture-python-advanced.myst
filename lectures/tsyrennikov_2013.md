@@ -3,10 +3,12 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.19.1
 kernelspec:
-  display_name: Python 3
-  language: python
   name: python3
+  display_name: Python 3 (ipykernel)
+  language: python
 ---
 
 (tsyrennikov_2013)=
@@ -14,36 +16,89 @@ kernelspec:
 
 ## Overview
 
-This lecture studies {cite:t}`Tsyrennikov2013`, which extends {cite:t}`Atkeson1991`
-(see the companion lecture {doc}`atkeson_1991`) in two directions:
+This lecture studies {cite:t}`Tsyrennikov2013`, which revisits the
+infinite-horizon moral-hazard and limited-enforcement model of
+{cite:t}`Atkeson1991` (see {doc}`atkeson_1991`) and makes two main
+contributions:
 
-1. **Continuous investment** — the borrower chooses a continuous investment
-   level rather than a binary one, and the paper proves that the
-   **first-order approach** (FOA) to the incentive-compatibility constraint is
-   valid. This brings the model much closer to empirically relevant calibrations.
-2. **Calibration and quantitative analysis** — the model is calibrated to
-   Argentina's business cycle data and compared against a limited-enforcement
-   (Eaton–Gersowitz-style) model.
+1. **First-order approach**: it proves ({prf:ref}`tsyrennikov_foa_lemma`) that
+   the borrower's incentive-compatibility constraint can be replaced by its
+   first-order condition, which makes the optimal contract with continuous
+   investment tractable to compute.
+2. **Calibration and quantitative analysis**: it calibrates the model to
+   Argentina's business cycle and compares moral hazard against a pure
+   limited-enforcement benchmark.  Unlike standard sovereign-default models,
+   contracts here are allowed to be fully state contingent.
 
-The central finding is that *moral hazard, not limited enforcement, drives the
-key empirical regularities of emerging market economies*: high and volatile
-interest rate spreads, limited consumption risk-sharing, and crisis-like
-dynamics in which capital inflows suddenly stop.
+The central finding is that *moral hazard, not limited enforcement, does most
+of the work* in matching several key features of emerging market economies:
+high, volatile and countercyclical interest rate spreads, limited consumption
+risk-sharing, and crisis-like dynamics in which capital inflows halt and
+interest rates spike.
 
-The key mechanism is that moral hazard severely restricts *state contingency* in
-repayment schedules.  
+The mechanism is that moral hazard severely restricts the amount of
+*state contingency* that repayment schedules can provide.
 
-In the language of {cite}`Atkeson1991`, the optimal
-contract is nearly *non-contingent* on output — a theoretical justification for
-why simple debt contracts dominate in practice.
+As a result, the optimal repayment is nearly *non-contingent* on output.
 
-```{note}
-This lecture uses the same notation as the {doc}`atkeson_1991` lecture,
-writing $\beta$ for the borrower's discount factor (Tsyrennikov writes $\beta$
-for the borrower and $\beta_c$ for the lender).
-```
+This justifies why non-contingent debt is an optimal way to finance an emerging
+economy.
 
-## The model
+Moral hazard also gives the model a strong internal propagation mechanism: even
+i.i.d. output shocks generate persistent movements in output through
+investment.
+
+Tsyrennikov is also explicit about the model's main weakness.
+
+The mechanism improves the behavior of consumption, output and spreads, but it
+does not fully match the observed current-account dynamics.
+
+## Empirical motivation
+
+The paper starts from three facts about Argentina, viewed as a representative
+emerging market economy over 1993--2005.
+
+First, consumption is almost perfectly correlated with output and is at least as
+volatile as output.
+
+Second, interest rate spreads are high, volatile and countercyclical.
+
+Third, after a sequence of bad output realizations, capital inflows stop or
+reverse.
+
+For comparison, Canada displays much smoother consumption and much weaker
+spread-output comovement.
+
+The following reduced version of the paper's data table highlights the contrast.
+
+
+Here and in the moments table below, $E(\cdot)$ is a mean, $\sigma(\cdot)$ a
+standard deviation, and $\rho(\cdot,\cdot)$ a correlation, while $\rho(y)$ is the
+first-order autocorrelation of output.
+
+The variables are consumption $c$, output $y$, the trade balance $tb$, and the
+interest-rate spread $r$ over the world risk-free rate, in annualized percentage
+points.
+
+| country and period | $\sigma(c)/\sigma(y)$ | $\rho(c,y)$ | $E(r)$ | $\sigma(r)$ | $\rho(r,y)$ | $\rho(tb,y)$ |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Canada, 1993:Q1--2001:Q4 | 0.55 | 0.62 | 1.51 | 0.33 | 0.23 | 0.27 |
+| Argentina, 1993:Q1--2001:Q4 | 1.11 | 0.97 | 8.18 | 4.73 | -0.58 | -0.81 |
+| Argentina, 1993:Q1--2005:Q4 | 1.15 | 0.99 | 7.86 | 4.78 | -0.68 | -0.82 |
+
+So $\sigma(c)/\sigma(y)$ is consumption volatility relative to output,
+$\rho(c,y)$ is consumption-output comovement, and a negative $\rho(r,y)$ or
+$\rho(tb,y)$ means the spread or trade balance is countercyclical.
+
+The moral-hazard interpretation is that foreign creditors cannot fully observe
+the use of borrowed funds.
+
+This is plausible when national accounts are noisy, when governments can blur
+the line between consumption and investment, or when the level of investment is
+observable but its effective quality is distorted by misallocation, corruption
+or weak institutions.
+
+## The environment
 
 ### Technology and preferences
 
@@ -54,160 +109,575 @@ repayment), borrows $b$ from a short-lived risk-neutral lender, invests $I$,
 and consumes
 
 $$
-c \;=\; n + b - \theta I, \quad \theta > 0.
+c = n + b - \theta I, \qquad \theta > 0.
+$$ (eq:tsyrennikov_budget)
+
+Given investment $I$, next period's output is random and takes one of two
+ordered values $Y_1 < Y_2$.
+
+Following {cite:t}`Atkeson1991`, output is drawn from a mixture of two fixed
+distributions $g_0$ and $g_1$, where $g_{kj}$ denotes the probability that
+distribution $g_k$ assigns to output state $Y_j$.
+
+Here $g_0$ is the *favorable* distribution: it places more weight on high output
+than $g_1$ does, so $g_0$ first-order stochastically dominates $g_1$.
+
+Investment controls the mixing weight $\lambda(I) \in [0,1]$, the probability
+that output is drawn from the favorable distribution $g_0$:
+
+$$
+g(Y_j \mid I) = \lambda(I)\,g_{0j}
+    + \bigl(1 - \lambda(I)\bigr)\,g_{1j}, \qquad j = 1, 2,
+$$ (eq:tsyrennikov_output_law)
+
+so $g(Y_j \mid I)$ is the probability of output state $Y_j$ given investment
+$I$.
+
+The weight $\lambda : \mathbb{R}_+ \to [0,1]$ is strictly increasing and strictly
+concave.
+
+Higher investment therefore raises the weight on $g_0$, so the output
+distribution under higher investment first-order stochastically dominates that
+under lower investment, with diminishing returns.
+
+```{note}
+This is the same mixture technology, and uses the same labelling, as in
+{doc}`atkeson_1991`: the weight $\lambda(I)$ multiplies the favorable
+distribution $g_0$, so more investment makes high output more likely.
+```
+
+Tsyrennikov restricts to two output states, so the favorable distribution puts
+all its mass on high output and the unfavorable one on low output:
+
+$$
+g_0 = (g_{0,1},\,g_{0,2}) = (0,\,1), \qquad
+g_1 = (g_{1,1},\,g_{1,2}) = (1,\,0).
 $$
 
-Given investment $I$, next period's output $Y'$ is drawn from
+The output probabilities then reduce to
 
 $$
-g(Y_j \mid I) \;=\; \bigl(1 - \lambda(I)\bigr)\,g_{0j}
-    + \lambda(I)\,g_{1j}, \qquad j = 1, 2,
-$$
+\Pr(Y_1 \mid I) = 1 - \lambda(I), \qquad
+\Pr(Y_2 \mid I) = \lambda(I).
+$$ (eq:tsyrennikov_two_state_output)
 
-where $\lambda : \mathbb{R}_+ \to [0,1]$ is strictly increasing and strictly
-concave, so higher investment stochastically dominates lower investment.
+It is convenient to record how investment moves the output distribution.
 
-Tsyrennikov restricts to two output states and sets
+Let $\Delta g_j \equiv g_{0j} - g_{1j}$, so that
+$\partial g(Y_j \mid I)/\partial I = \lambda'(I)\,\Delta g_j$.
 
-$$
-\text{Pr}(Y_1 \mid I) = 1 - \lambda(I), \qquad
-\text{Pr}(Y_2 \mid I) = \lambda(I), \qquad Y_1 < Y_2,
-$$
+In the two-state model $\Delta g = (-1,\,1)$: a marginal increase in investment
+shifts probability away from low output and toward high output.
 
-so $g_{0,1}=1,\;g_{0,2}=0,\;g_{1,1}=0,\;g_{1,2}=1$ and
-$\Delta g_j \equiv g_{1j} - g_{0j} = (-1, 1)$.
-
-The functional form $\lambda(I) = \min(I^\nu, 1)$ with $\nu \in (0,1)$
-is strictly concave and gives an interior optimum.
+The functional form $\lambda(I) = \min(I^\nu, 1)$ with $\nu \in (0,1)$ is
+strictly concave and gives an interior optimum.
 
 The borrower's preferences are CRRA:
 
 $$
-U^B = \mathbb{E}_0 \sum_{t=0}^\infty \beta^t \, u(c_t),
+U = \mathbb{E}_0 \sum_{t=0}^\infty \beta^t \, u(c_t),
     \quad u(c) = \frac{c^{1-\gamma}}{1-\gamma}, \quad \gamma > 1.
-$$
+$$ (eq:tsyrennikov_preferences)
 
-Lenders discount at rate $\beta_c \geq \beta$ (the international risk-free
-rate) and have endowment $M$ each period, so $b \leq M$.
+Lenders are risk-neutral and discount the future at factor $\beta_c \geq \beta$,
+so they lend at the international gross risk-free rate $1/\beta_c$.
+
+Each lender lives for two periods with endowment $M$, so the loan cannot exceed
+it: $b \leq M$.
+
+The assumption $\beta \leq \beta_c$ reflects that the government of an emerging
+economy may be more impatient than a typical international lender.
+
+A contract between the two parties specifies the loan $b$ and the repayment
+$d_j$ that the borrower makes after each output state $Y_j$.
 
 ### Two frictions
 
-**Moral hazard (MH)**: lenders observe output but not investment.
+There are two frictions that limit the contract's ability to smooth consumption and investment across states.
 
-The incentive-compatibility (IC) constraint requires that the borrower finds the
-contracted investment $I$ to be in their own best interest.
+**Moral hazard**: lenders observe output but neither investment nor
+consumption.
 
-**Limited enforcement (LE)**: the borrower can default, suffering a one-time
+The incentive-compatibility (IC) constraint {eq}`eq:tsyrennikov_ic` requires
+that the borrower finds the recommended investment $I$ privately optimal.
+
+**Limited enforcement**: the borrower can default, suffering a one-time
 output penalty: if default occurs when output is $Y_j$, the borrower retains
 only $\delta Y_j$ (with $\delta \in (0,1)$) and then lives in autarky.
 
-The participation constraint requires
+Let $v_{\text{aut}}^{\delta}(Y_j)$ denote the value after default in state
+$j$:
 
 $$
-V(Y_j - d_j) \;\geq\; V_{\text{aut}}(\delta\,Y_j), \quad \forall j,
-$$
+v_{\text{aut}}^{\delta}(Y_j)
+    =
+    \max_{0 \leq I \leq Y_j}
+    \left\{
+        u(\delta Y_j - \theta I)
+        + \beta \sum_k g(Y_k \mid I) v_{\text{aut}}(Y_k)
+    \right\}.
+$$ (eq:tsyrennikov_default_value)
 
-where $V$ is the contract value function and $V_{\text{aut}}$ is the autarky
-value function.
+Here $v_{\text{aut}}$ is the borrower's no-credit autarky value, defined in the
+next subsection; the superscript $\delta$ marks the one-period output loss
+incurred on entering autarky.
+
+The enforcement constraint requires
+
+$$
+v(Y_j - d_j) \geq v_{\text{aut}}^{\delta}(Y_j), \qquad j = 1,2,
+$$ (eq:tsyrennikov_enforcement)
+
+where $v$ is the contract value function.
+
+A larger $\delta$ means a milder default penalty and hence a better outside
+option after default.
 
 ### The autarky value function
 
 Without access to credit ($b = 0$), the borrower solves
 
 $$
-V_{\text{aut}}(n) = \max_{I \in [0,\,n/\theta]}
-    \Bigl[u(n - \theta I) + \beta\,\bigl[(1-\lambda(I))\,V_{\text{aut}}(Y_1)
-    + \lambda(I)\,V_{\text{aut}}(Y_2)\bigr]\Bigr].
-$$
+v_{\text{aut}}(n) =
+    \max_{0 \leq I \leq n}
+    \Bigl[u(n - \theta I) + \beta\,\bigl[(1-\lambda(I))\,v_{\text{aut}}(Y_1)
+    + \lambda(I)\,v_{\text{aut}}(Y_2)\bigr]\Bigr].
+$$ (eq:tsyrennikov_autarky)
 
 Note that the continuation values depend only on $Y_1$ and $Y_2$, not on $n$.
+
+### The frictionless benchmark
+
+If investment is contractible and contracts are fully enforceable, the borrower
+can trade a full set of Arrow securities with the risk-neutral lender.
+
+The optimal repayment schedule then delivers state-independent continuation net
+worth:
+
+$$
+Y_j - d_j = n' \qquad \text{for all } j.
+$$
+
+Net worth converges to a constant, so consumption and investment are eventually
+constant, and the risk-sharing index defined below equals one.
+
+This benchmark implies uninhibited risk-sharing and a strongly procyclical
+current account --- the opposite of what the data show.
+
+It also shows what moral hazard limits: the ability to make repayments
+strongly state contingent without weakening investment incentives.
 
 ### The recursive contract
 
 The state variable is net worth $n$.
 
+The optimal long-term contract can be represented recursively with this
+single state is established in {cite:t}`Atkeson1991`, and we take it as given.
 
-The value function satisfies the Bellman
-equation
+Let
 
 $$
-V(n) = \max_{b,\,d,\,I}
-    \Bigl[u(n+b-\theta I) + \beta\,\sum_j g(Y_j\mid I)\,V(Y_j - d_j)\Bigr]
+n_j' := Y_j - d_j
 $$
 
-subject to feasibility, lender participation ($b \leq \beta_c \sum_j
-g_j(I)\,d_j$), incentive compatibility, and enforcement constraints.
+be next period's net worth after output $Y_j$ and repayment $d_j$.
+
+The contract value satisfies the Bellman equation
+
+$$
+v(n) = \max_{b,\,d,\,I}
+    \Bigl[u(n+b-\theta I) + \beta\,\sum_j g(Y_j\mid I)\,v(Y_j - d_j)\Bigr]
+$$ (eq:tsyrennikov_bellman)
+
+subject to the following constraints.
+
+A feasibility constraint combines the budget constraint {eq}`eq:tsyrennikov_budget`, with
+nonnegative consumption $c = n + b - \theta I \geq 0$ and investment $I \geq 0$.
+
+Lender participation requires the loan not to exceed the discounted expected
+value of repayments,
+
+$$
+b \leq \beta_c \sum_j g(Y_j \mid I)\,d_j,
+$$ (eq:tsyrennikov_lender_ir)
+
+while the lender endowment constraint caps the loan at the lender's resources,
+$b \leq M$.
+
+The contract must also satisfy incentive compatibility {eq}`eq:tsyrennikov_ic`
+and the enforcement constraint {eq}`eq:tsyrennikov_enforcement`.
+
+The incentive constraint says that the borrower chooses the recommended
+investment from the feasible set:
+
+$$
+I \in \arg\max_{0 \leq \hat I \leq n+b}
+    \left\{
+        u(n+b-\theta \hat I)
+        + \beta \sum_j g(Y_j\mid \hat I) v(Y_j-d_j)
+    \right\}.
+$$ (eq:tsyrennikov_ic)
+
+Since $v$ is strictly increasing, limited enforcement can also be written as an
+endogenous borrowing limit:
+
+$$
+d_j \leq \bar d_j
+    := Y_j - v^{-1}\!\left(v_{\text{aut}}^{\delta}(Y_j)\right).
+$$ (eq:tsyrennikov_borrowing_limit)
 
 ## The first-order approach
 
-A key contribution of {cite:t}`Tsyrennikov2013` is **Lemma 1**, which shows that
-replacing the full IC constraint with the first-order condition
+The incentive constraint {eq}`eq:tsyrennikov_ic` is awkward to impose directly,
+because it requires re-solving the borrower's investment problem inside the
+contracting problem.
+
+Following {cite:t}`Rogerson1985`, {cite:t}`Tsyrennikov2013` replaces it with the
+borrower's first-order condition
 
 $$
--\theta\,u'(c) + \beta\,\lambda'(I)\,\sum_j \Delta g_j\,V(Y_j-d_j) \geq 0
+-\theta\,u'(c) + \beta\,\lambda'(I)\,\sum_j \Delta g_j\,v(Y_j-d_j) \geq 0,
+$$ (eq:tsyrennikov_relaxed_ic)
+
+which holds with equality whenever investment is interior.
+
+```{prf:lemma} Validity of the first-order approach
+:label: tsyrennikov_foa_lemma
+
+Replacing the incentive constraint {eq}`eq:tsyrennikov_ic` with the relaxed
+first-order condition {eq}`eq:tsyrennikov_relaxed_ic` does not change the
+solution of the contract problem {eq}`eq:tsyrennikov_bellman`.
+```
+
+This is Lemma 1 of {cite:t}`Tsyrennikov2013`.
+
+```{prf:proof}
+Fix a contract $(b, d_1, d_2)$, write $n_j' = Y_j - d_j$ and
+$c(\hat I) = n + b - \theta\hat I$, and let
+
+$$
+S \;:=\; \sum_j \Delta g_j\, v(n_j') \;=\; v(n_2') - v(n_1')
 $$
 
-does *not* alter the solution.
+be the continuation-value spread.
 
-The key step is showing that at any feasible
-contract, $\sum_j \Delta g_j\,V(Y_j-d_j) \geq 0$, which ensures the
-borrower's objective is strictly concave in $I$ and the FOC holds with
-equality.
-
-This result (analogous to {cite}`Rogerson1985`) validates the
-relaxed formulation used in the numerical solution.
-
-With the FOA, the optimality condition for investments is
+Using $g(Y_j\mid\hat I) = \lambda(\hat I)\,g_{0j} + (1-\lambda(\hat I))\,g_{1j}$,
+a borrower who is offered this contract and invests $\hat I$ obtains
 
 $$
-\theta\,u'(c) \;=\; \beta\,\lambda'(I)\,\bigl[V(n_2') - V(n_1')\bigr],
-$$ (foa)
+\begin{aligned}
+W(\hat I)
+&:= u(c(\hat I)) + \beta \sum_j g(Y_j\mid\hat I)\, v(n_j') \\
+&\;= u(c(\hat I)) + \beta\bigl[v(n_1') + \lambda(\hat I)\, S\bigr],
+\end{aligned}
+$$
+
+with first two derivatives
+
+$$
+W'(\hat I) = -\theta\, u'(c(\hat I)) + \beta\,\lambda'(\hat I)\, S,
+\qquad
+W''(\hat I) = \theta^2\, u''(c(\hat I)) + \beta\,\lambda''(\hat I)\, S .
+$$
+
+The incentive constraint {eq}`eq:tsyrennikov_ic` is
+$I \in \arg\max_{\hat I \in [0,\, n+b]} W(\hat I)$, while the relaxed condition
+{eq}`eq:tsyrennikov_relaxed_ic` is $W'(I) \geq 0$.
+
+First, we show that *a nonnegative spread makes the first-order condition sufficient.*
+
+Suppose $S \geq 0$.
+
+Since $u'' < 0$ and $\lambda'' < 0$, we have $\theta^2 u''(c) < 0$ and
+$\beta\,\lambda''(\hat I)\, S \leq 0$, so $W''(\hat I) < 0$ for every $\hat I$.
+
+Hence $W$ is strictly concave on $[0,\, n+b]$ and has a unique maximizer.
+
+The Inada condition $u'(0) = +\infty$ rules out the upper corner
+$\hat I = (n+b)/\theta$, where $c = 0$, so the maximizer is either interior, with
+$W'(I) = 0$, or the lower corner $I = 0$.
+
+In either case the borrower's choice is characterized by its first-order
+condition, so {eq}`eq:tsyrennikov_ic` and {eq}`eq:tsyrennikov_relaxed_ic` --- the
+latter holding with equality at an interior optimum --- select the same
+investment.
+
+Next, we need to show that *every optimal contract has $S \geq 0$, so the first-order condition is sufficient at the optimum.*
+
+Suppose an optimal contract had $S < 0$, that is $v(n_2') < v(n_1')$.
+
+Then for every $\hat I \in (0,\, n+b]$ both terms of $W'(\hat I)$ are negative,
+because $u' > 0$, $\lambda' > 0$ and $S < 0$, so $W$ is strictly decreasing and
+the borrower invests $I = 0$.
+
+At $I = 0$ we have $\lambda(0) = 0$, so output equals $Y_1$ with probability one
+and the borrower's payoff $u(n+b) + \beta\, v(n_1')$ is independent of $n_2'$.
+
+Now raise the high-output continuation to $\tilde n_2' = n_1'$ --- equivalently set
+$\tilde d_2 = Y_2 - n_1'$ --- leaving $b$, $d_1$ and the recommended $I = 0$
+unchanged.
+
+This contract is still feasible: lender participation
+{eq}`eq:tsyrennikov_lender_ir` weights $d_2$ by $g(Y_2\mid 0) = 0$ and is
+unaffected, while the state-$2$ enforcement constraint
+{eq}`eq:tsyrennikov_enforcement` is relaxed because
+$v(\tilde n_2') = v(n_1') > v(n_2')$.
+
+It delivers the same borrower payoff but now has spread
+$\tilde S = v(n_1') - v(n_1') = 0 \geq 0$.
+
+This gives one direction: an optimal contract can always be taken to have
+$S \geq 0$, and then the argument above makes its first-order condition coincide
+with incentive compatibility, so the original optimum is feasible for the
+relaxed problem.
+
+For the other direction, the relaxed constraint
+$W'(I) = -\theta u'(c) + \beta\lambda'(I)\, S \geq 0$ can hold only when $S > 0$,
+because $u' > 0$ and $\lambda' > 0$.
+
+So the relaxed problem only ever considers contracts with $S \geq 0$, where its
+first-order condition is genuine incentive compatibility.
+
+The relaxed problem therefore neither loses the original optimum nor admits a
+contract that is not incentive compatible, which proves the lemma.
+```
+
+The subtle part of the argument is why the planner may freely raise $n_2'$.
+
+The figure below illustrates the two facts it rests on.
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: why a negative spread lets the planner move the high-output continuation
+    name: fig-tsy-foa-proof
+---
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Illustrative numbers for the borrower's investment problem
+β_, θ_, ν_, γ_ = 0.98, 0.105, 0.95, 2.0
+nb = 1.0      # current resources n + b
+v1 = -1.0     # continuation value v(n_1') after low output
+
+def prob_high(I):              # λ(I) = Pr(Y_2 | I)
+    return np.minimum(I ** ν_, 1.0)
+
+def W(I, S):                   # borrower's payoff from investing I given spread S
+    c = nb - θ_ * I
+    return c ** (1 - γ_) / (1 - γ_) + β_ * (v1 + prob_high(I) * S)
+
+I_vals = np.linspace(0.0, 0.8, 400)
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+
+# Left: borrower's payoff under the original (S<0) and modified (S=0) contract
+for S, lab, col in [(-0.5, r'original, $S<0$', 'C3'),
+                    (0.0,  r'modified, $S=0$', 'C0')]:
+    axes[0].plot(I_vals, W(I_vals, S), color=col, lw=2, label=lab)
+axes[0].plot(0.0, W(0.0, 0.0), 'ko', ms=7)
+axes[0].annotate('both invest $\\hat I=0$:\nsame realized payoff',
+                 xy=(0.0, W(0.0, 0.0)), xytext=(0.22, W(0.0, 0.0) - 0.12),
+                 arrowprops=dict(arrowstyle='->'))
+axes[0].set_xlabel(r'investment $\hat I$')
+axes[0].set_ylabel(r'borrower payoff $W(\hat I)$')
+axes[0].set_title('a negative spread makes the borrower invest nothing')
+axes[0].legend()
+
+# Right: probability of the high state as a function of investment
+axes[1].plot(I_vals, prob_high(I_vals), 'C0', lw=2)
+axes[1].plot(0.0, 0.0, 'ko', ms=7)
+axes[1].annotate("$\\hat I=0$: high state never occurs,\nso $n_2'$ is off-path",
+                 xy=(0.0, 0.0), xytext=(0.16, 0.5),
+                 arrowprops=dict(arrowstyle='->'))
+axes[1].set_xlabel(r'investment $\hat I$')
+axes[1].set_ylabel(r'$\lambda(\hat I)=\Pr(Y_2|\hat I)$')
+axes[1].set_title(r'the high state has zero probability at $\hat I=0$')
+
+plt.tight_layout()
+plt.show()
+```
+
+The left panel plots the borrower's payoff $W(\hat I)$ from investing $\hat I$,
+under the original contract (red, $S < 0$) and the modified one (blue, $S = 0$).
+
+Both are decreasing, so under either contract the borrower invests $\hat I = 0$
+and obtains the same realized payoff: the two contracts are identical on the path
+that actually occurs.
+
+The right panel says why the modification is costless --- at $\hat I = 0$ the
+high-output state has probability $\lambda(0) = 0$, so it is never reached.
+
+The continuation value $n_2'$ attached to that state is therefore pure off-path
+bookkeeping, and the planner can slide it up to $n_1'$ --- raising the spread to
+$S = 0$ --- without changing anything the borrower or the lender ever
+experiences.
+
+At an interior optimum {eq}`eq:tsyrennikov_relaxed_ic` holds with equality,
+giving the first-order condition used in the computation,
+
+$$
+\theta\,u'(c)
+= \beta\,\lambda'(I)\,\bigl[v(n_2') - v(n_1')\bigr],
+$$ (eq:tsyrennikov_foa)
 
 where $n_j' = Y_j - d_j$ is next period's net worth after state $j$.
 
-A
-higher spread $V(n_2') - V(n_1')$ — more reward in the high state —
-supports a higher investment level.
+A larger continuation-value spread $v(n_2') - v(n_1')$ means a larger reward
+after high output and supports a higher investment level.
 
 ## The Euler equation and implied interest rate
 
-The Euler equation (Appendix A of {cite:t}`Tsyrennikov2013`) for the MH model is
+To characterize the optimal contract, attach multipliers to the constraints of
+problem {eq}`eq:tsyrennikov_bellman`.
+
+Let $\kappa \geq 0$ be the multiplier on lender participation
+{eq}`eq:tsyrennikov_lender_ir`, $\phi \geq 0$ the multiplier on the endowment
+limit $b \leq M$, $\mu \geq 0$ the multiplier on the relaxed incentive
+constraint {eq}`eq:tsyrennikov_relaxed_ic`, and $\xi_j \geq 0$ the multiplier on
+each enforcement constraint {eq}`eq:tsyrennikov_enforcement`.
+
+The Lagrangian is
 
 $$
-V'(n) \;=\; V'(n_j')\!\left[1 + \mu\,
-    \frac{\lambda'(I)\,\Delta g_j}{g(Y_j\mid I)}\right] + \phi,
+\begin{aligned}
+\mathcal{L} =\ & u(n+b-\theta I) + \beta \sum_j g(Y_j\mid I)\,v(Y_j-d_j)
+    + \kappa\Bigl(\beta_c \sum_j g(Y_j\mid I)\,d_j - b\Bigr) + \phi\,(M-b) \\
+    &+ \mu\Bigl(-\theta u'(n+b-\theta I)
+        + \beta\lambda'(I)\sum_j \Delta g_j\,v(Y_j-d_j)\Bigr)
+    + \beta \sum_j g(Y_j\mid I)\,\xi_j\bigl(v(Y_j-d_j)
+        - v_{\text{aut}}^{\delta}(Y_j)\bigr).
+\end{aligned}
+$$ (eq:tsyrennikov_lagrangian)
+
+The envelope theorem gives $v'(n) = u'(c) - \mu\theta u''(c)$
+({ref}`Exercise 3 <tsyrennikov_2013_ex3>`).
+
+The first-order condition for $b$ then yields
+
+$$
+v'(n) = \kappa + \phi,
 $$
 
-where $\mu \geq 0$ is the multiplier on the FOA constraint and $\phi \geq 0$
-on the lender endowment $b \leq M$.
+and the first-order condition for each $d_j$ yields
 
-Because $\Delta g_1 = -1 < 0$, the factor for the low state is less than one:
-$V'(n_1') > V'(n)$.
+$$
+\kappa = \frac{\beta}{\beta_c}\,v'(n_j')
+    \left[(1+\xi_j) + \mu\,\frac{\lambda'(I)\,\Delta g_j}{g(Y_j\mid I)}\right].
+$$
 
-By concavity of $V$, the borrower's net worth falls in
-the low state.
+Combining the two delivers the **Euler equation**
 
-This is the **immiseration** property: moral hazard forces
-the borrower to bear more risk than would be optimal with full information
-(cf.\ {cite}`ThomasWorrall1990`, {cite}`AtkesonLucas1992`).
+$$
+v'(n) = \frac{\beta}{\beta_c}\,v'(n_j')
+    \left[(1+\xi_j) + \mu\,\frac{\lambda'(I)\,\Delta g_j}{g(Y_j\mid I)}\right]
+    + \phi.
+$$ (eq:tsyrennikov_euler)
 
-The borrower faces an **implied interest rate**
+As a useful special case, in the pure moral-hazard economy the enforcement
+multipliers vanish ($\xi_j = 0$), leaving
+
+$$
+v'(n) = \frac{\beta}{\beta_c}\,v'(n_j')
+    \left[1 + \mu\,\frac{\lambda'(I)\,\Delta g_j}{g(Y_j\mid I)}\right] + \phi.
+$$
+
+In the calibration $\beta/\beta_c \approx 0.99$, so the leading factor is just
+below one, which on its own makes net worth drift down slowly.
+
+Because $\Delta g_1 = -1 < 0$, the low-output likelihood term is negative.
+
+When the endowment constraint is slack ($\phi = 0$) and the bracket is positive,
+the equation pushes $v'(n_1')$ above $v'(n)$.
+
+By concavity of $v$, the borrower's net worth then falls in the low state.
+
+This is the **immiseration** property: moral hazard forces the borrower to bear
+more risk than would be optimal with full information
+(see, e.g., {cite:t}`ThomasWorrall1990`, {cite:t}`AtkesonLucas1992`).
+
+To isolate this force, set $\beta = \beta_c$, $\phi = 0$ and $\xi_j = 0$.
+
+Multiplying the Euler equation by $g(Y_j\mid I)$ and summing over $j$ gives
+
+$$
+v'(n) = \mathbb{E}\,v'(n_j') + \mu\,\lambda'(I)\sum_j \Delta g_j\,v'(n_j')
+    \;\leq\; \mathbb{E}\,v'(n_j'),
+$$
+
+because the last term is nonpositive: $\Delta g$ shifts probability toward high
+output, where continuation net worth is higher and $v'$ is lower.
+
+So $v'(n)$ is a submartingale and, by concavity, expected net worth drifts
+downward.
+
+Limited enforcement without moral hazard reverses the sign.
+
+Setting $\mu = 0$ (again with $\beta = \beta_c$ and $\phi = 0$) leaves
+$v'(n) = \mathbb{E}\,v'(n_j') + \sum_j g(Y_j\mid I)\,\xi_j v'(n_j')
+\geq \mathbb{E}\,v'(n_j')$, since $\xi_j \geq 0$, which implies upward drift in
+continuation net worth under concavity.
+
+The optimal contract can be reinterpreted as a government-borrower that, instead
+of signing a contract, faces an **implied interest rate** schedule $R(n)$ on each
+unit borrowed:
 
 $$
 R(n) \;=\; \frac{u'(c(n))}{\beta\,\sum_j g(Y_j\mid I(n))\,u'(c(n_j'(n)))},
 $$
 
-where $c(n_j'(n))$ is next period's consumption if state $j$ is realised.
+where $c(n_j'(n))$ is next period's consumption if state $j$ is realized.
 
 
-This rate is counter-cyclical: when $n$ is low, past incentive provision has
+This rate is countercyclical: when $n$ is low, past incentive provision has
 depressed the continuation values, raising the marginal utility spread and
 increasing $R$.
 
 ## Computation
 
-We now implement these ideas numerically using the parameterisation from
+We now implement a lightweight numerical illustration using the parameterisation
+from {cite:t}`Tsyrennikov2013`.
+
+The code solves three economies:
+
+1. **MH**: moral hazard only, with the lender endowment constraint $b \leq M$.
+2. **MH+LE**: moral hazard and limited enforcement, without the exogenous
+   lender endowment constraint.
+3. **LE**: limited enforcement only, again without the exogenous lender
+   endowment constraint.
+
+In the two limited-enforcement economies, the value constraint
+{eq}`eq:tsyrennikov_enforcement` is imposed through the endogenous borrowing
+limit {eq}`eq:tsyrennikov_borrowing_limit`.
+
+### Algorithm
+
+The state is current net worth $n$.
+
+For each $n$, the code searches over continuation net worths
+$(n_1', n_2')$.
+
+In the moral-hazard economies, the first-order approach determines the
+recommended investment for each candidate continuation pair.
+
+In the LE economy, investment is contractible, so the planner chooses it
+directly from its first-order condition.
+
+For the pure MH economy, the loan is the smaller of the lender-participation
+amount and the endowment $M$.
+
+For MH+LE and LE, borrowing is limited endogenously by the borrower's default
+value.
+
+The resulting policy functions are intended to show the economic mechanism and
+to move the lecture figures closer to Figures 3 and 4 of
 {cite:t}`Tsyrennikov2013`.
+
+They should still not be read as a full replication of the paper's numerical
+algorithm, which uses cubic splines and tighter convergence tolerances.
+
+### Parameters
 
 In addition to what's in Anaconda, this lecture will need the following library:
 
@@ -217,29 +687,34 @@ In addition to what's in Anaconda, this lecture will need the following library:
 !pip install jax
 ```
 
-### Parameters
+The computation uses JAX to vectorize the Bellman updates.
+
+We will use the following imports:
 
 ```{code-cell} ipython3
 import numpy as np
 from typing import NamedTuple
-from scipy.interpolate import interp1d
 from jax import config
 config.update("jax_enable_x64", True)
 import jax
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
+```
 
-# Model parameters
+We store the parameters in a `NamedTuple`, with defaults calibrated to Argentina
+as in {cite:t}`Tsyrennikov2013`.
+
+```{code-cell} ipython3
 class Model(NamedTuple):
-    β:   float    # borrower discount factor
-    β_c: float    # lender (world) discount factor
-    γ:   float    # CRRA coefficient
-    θ:   float    # investment resource cost (θ in budget n+b = c+θI)
-    ν:   float    # λ(I) = I^ν  (probability of high output)
-    δ:   float    # borrower keeps fraction δ of output on default
-    M:   float    # lender endowment
-    Y1:  float    # low output state
-    Y2:  float    # high output state
+    β: float       # borrower discount factor
+    β_c: float     # lender discount factor
+    γ: float       # CRRA coefficient
+    θ: float       # resource cost of investment
+    ν: float       # curvature in λ(I) = I^ν
+    δ: float       # fraction of output retained after default
+    M: float       # lender endowment
+    Y1: float      # low output state
+    Y2: float      # high output state
 
 
 def create_model(β=0.980, β_c=0.990, γ=2.0, θ=0.105, ν=0.950,
@@ -265,255 +740,649 @@ model = create_model()
                                  model.ν, model.δ, model.M, model.Y1, model.Y2)
 Y = np.array([Y1, Y2])
 
+print(f"Output states:  Y1 = {Y1:.4f},  Y2 = {Y2:.4f}")
+print(f"β = {β},  β_c = {β_c},  γ = {γ},  θ = {θ},  ν = {ν}")
+```
 
-# Investment technology: λ(I) = I^ν (probability of high output)
+Next we define the model primitives.
+
+The probability of high output is $\lambda(I) = \min(I^\nu, 1)$, period utility
+`u` is CRRA, and `u_prime` is its derivative $u'(c) = c^{-\gamma}$.
+
+We write each with `jnp`, so the same function runs inside the JIT-compiled
+Bellman updates and on the plain arrays used in the plotting and simulation
+code.
+
+```{code-cell} ipython3
 def λ(I):
-    return np.minimum(I**ν, 1.0)
-
-def λ_jax(I):
+    """Probability of high output, λ(I) = min{I^ν, 1}."""
     return jnp.minimum(I**ν, 1.0)
 
-def dλ(I):
-    """λ'(I) = ν * I^{ν−1}  (for I > 0)."""
-    return ν * I**(ν - 1.0)
 
-# Utility
 def u(c):
-    c = np.maximum(c, 1e-12)
-    return c**(1.0 - γ) / (1.0 - γ)
-
-def u_jax(c):
+    """CRRA period utility."""
     c = jnp.maximum(c, 1e-12)
     return c**(1.0 - γ) / (1.0 - γ)
 
+
 def u_prime(c):
-    return np.maximum(c, 1e-12)**(-γ)
-
-def u_prime_jax(c):
+    """Marginal utility u'(c) = c^{-γ}."""
     return jnp.maximum(c, 1e-12)**(-γ)
+```
 
+Finally we build the grids.
+
+`n_grid` discretizes net worth, `I_search_grid` is the investment grid used by
+the autarky step, and the mesh `(n1p_candidates, n2p_candidates)` holds the
+candidate continuation pairs $(n_1', n_2')$ searched by the moral-hazard step.
+
+```{code-cell} ipython3
 # Net-worth grid
-N_n    = 150
-n_lo   = 0.08
-n_hi   = 1.30
+N_n = 100
+n_lo = 0.20
+n_hi = 1.20
 n_grid = np.linspace(n_lo, n_hi, N_n)
 n_grid_j = jnp.asarray(n_grid)
 
-# Search grids used by Bellman operators below.
-N_I_search = 500
+# Investment search grid used by the autarky Bellman step
+N_I_search = 350
 I_search_grid = np.linspace(0.0, 1.0, N_I_search)
 I_search_grid_j = jnp.asarray(I_search_grid)
 
-N_policy = 90
-n1p_candidates = np.linspace(max(δ * Y1, n_lo),
+# Mesh of candidate continuation pairs (n_1', n_2') for the MH step
+N_policy = 70
+n1p_candidates = np.linspace(n_lo,
                              min(Y1 * 1.1, n_hi - 1e-4),
                              N_policy)
-n2p_candidates = np.linspace(max(δ * Y2, n_lo),
+n2p_candidates = np.linspace(n_lo,
                              min(Y2 * 1.05, n_hi - 1e-4),
                              N_policy)
 n1p_mesh, n2p_mesh = np.meshgrid(n1p_candidates, n2p_candidates,
                                  indexing='ij')
 n1p_flat_j = jnp.asarray(n1p_mesh.ravel())
 n2p_flat_j = jnp.asarray(n2p_mesh.ravel())
-
-print(f"Output states:  Y1 = {Y1:.4f},  Y2 = {Y2:.4f}")
-print(f"β = {β},  β_c = {β_c},  γ = {γ},  θ = {θ},  ν = {ν}")
 ```
+
+The grid sizes above are deliberately modest so the lecture can execute quickly.
+
+For a closer replication of the paper's spline computation, increase `N_n`,
+`N_policy`, `N_I_search`, and the `CONTRACT_MAX_ITER` value used by the
+contract solvers below.
 
 ### Autarky value function
 
+We solve the autarky problem {eq}`eq:tsyrennikov_autarky` by value function
+iteration.
+
+The Bellman step is vectorized: it evaluates every net-worth state against the
+whole investment search grid at once and keeps the best investment.
+
+Because the borrower has no credit in autarky, next period's net worth is just
+the realized output, so the continuation values are simply $v(Y_1)$ and
+$v(Y_2)$.
+
 ```{code-cell} ipython3
 @jax.jit
-def autarky_step_jax(V, β_val):
-    """One vectorised Bellman step for the autarky problem."""
-    EV1 = jnp.interp(Y1, n_grid_j, V)
-    EV2 = jnp.interp(Y2, n_grid_j, V)
+def autarky_step_jax(v, β_val):
+    """One vectorized Bellman step for the autarky problem."""
+    # Continuation values: next-period net worth is the realized output
+    Ev1 = jnp.interp(Y1, n_grid_j, v)
+    Ev2 = jnp.interp(Y2, n_grid_j, v)
 
+    # Evaluate every (net worth, investment) pair on the search grid
     I = I_search_grid_j[None, :]
     c = n_grid_j[:, None] - θ * I
-    l = λ_jax(I)
-    obj = u_jax(c) + β_val * ((1.0 - l) * EV1 + l * EV2)
-    obj = jnp.where(c > 1e-10, obj, -jnp.inf)
+    l = λ(I)
+    obj = u(c) + β_val * ((1.0 - l) * Ev1 + l * Ev2)
+
+    # Investment cannot exceed net worth and consumption must be positive
+    feasible = (I <= n_grid_j[:, None]) & (c > 1e-10)
+    obj = jnp.where(feasible, obj, -jnp.inf)
 
     idx = jnp.argmax(obj, axis=1)
     return jnp.max(obj, axis=1), I_search_grid_j[idx]
 
 
-def autarky_policy(V_arr, β_val=None):
+def autarky_policy(v_arr, β_val=None):
     """Return the autarky value update and investment policy on n_grid."""
     if β_val is None:
         β_val = β
-    V_new, I_pol = autarky_step_jax(jnp.asarray(V_arr), β_val)
-    return np.asarray(V_new), np.asarray(I_pol)
-
-
-def autarky_bellman_at_n(n, Vf, β_val=None):
-    """
-    Solve the autarky Bellman at state n given current iterate Vf.
-    Returns (V_new, I_opt).
-    Uses the fact that continuation values only depend on Y1, Y2.
-    """
-    if β_val is None:
-        β_val = β
-    EV1 = float(Vf(Y1))
-    EV2 = float(Vf(Y2))
-
-    I_max = min(max(n / θ - 1e-8, 0.0), 1.0)
-    I = I_search_grid[I_search_grid <= I_max]
-    if I.size == 0:
-        I = np.array([0.0])
-
-    c = n - θ * I
-    obj = u(c) + β_val * ((1.0 - λ(I)) * EV1 + λ(I) * EV2)
-    idx = np.argmax(obj)
-    return float(obj[idx]), float(I[idx])
-
-
-def autarky_vfi(β_val=None, tol=1e-8, max_iter=3000):
-    if β_val is None:
-        β_val = β
-
-    V = jnp.zeros(N_n)
-    for it in range(max_iter):
-        V_new, _ = autarky_step_jax(V, β_val)
-        diff     = float(jnp.max(jnp.abs(V_new - V)))
-        V        = V_new
-        if diff < tol:
-            print(f"Autarky VFI converged in {it+1} iterations (diff = {diff:.2e})")
-            break
-
-    return np.asarray(V)
-
-
-V_aut = autarky_vfi()
+    v_new, I_pol = autarky_step_jax(jnp.asarray(v_arr), β_val)
+    return np.asarray(v_new), np.asarray(I_pol)
 ```
 
-### Moral hazard model
-
-For each state $n$, we optimise over continuation states
-$(n_1', n_2')$ where $n_j' = Y_j - d_j$.  For every candidate
-$(n_1', n_2')$:
-
-1. Compute $\Delta V = V(n_2') - V(n_1')$.
-2. With lender participation binding, the loan is
-   $b^* = \beta_c\bigl[(1-\lambda(I))(Y_1-n_1') + \lambda(I)(Y_2-n_2')\bigr]$.
-3. Substitute into the FOA equation and solve for $I^*$:
-
-$$
-\theta\,\bigl[A + \lambda(I^*)\,\Delta B - \theta I^*\bigr]^{-\gamma}
-    \;=\; \beta\,\lambda'(I^*)\,\Delta V,
-$$
-
-where $A \equiv n + \beta_c (Y_1-n_1')$ and
-$\Delta B \equiv \beta_c\bigl[(Y_2-n_2') - (Y_1-n_1')\bigr]$.
-
-This reduces the optimisation to two dimensions.
+We iterate the step to convergence.
 
 ```{code-cell} ipython3
+def autarky_vfi(β_val=None, tol=1e-8, max_iter=3000, verbose=False):
+    """Value function iteration for the autarky problem."""
+    if β_val is None:
+        β_val = β
+
+    v = jnp.zeros(N_n)
+    for it in range(max_iter):
+        v_new, _ = autarky_step_jax(v, β_val)
+        diff = float(jnp.max(jnp.abs(v_new - v)))
+        v = v_new
+        if diff < tol:
+            if verbose:
+                print(
+                    f"Autarky VFI converged in {it+1} iterations "
+                    f"(diff = {diff:.2e})"
+                )
+            break
+
+    return np.asarray(v)
+
+
+v_aut = autarky_vfi(verbose=True)
+```
+
+### Default values and borrowing limits
+
+Limited enforcement is imposed by updating the minimum continuation net worth
+that keeps the borrower from defaulting.
+
+If $V$ is the current contract value and
+$v_{\text{aut}}^\delta(Y_j)$ is the value of defaulting in state $j$, the
+borrowing-limit form of the enforcement constraint is
+
+$$
+n_j' \geq V^{-1}\!\left(v_{\text{aut}}^\delta(Y_j)\right).
+$$
+
+The code below computes the two default values and updates these two lower
+boundaries during value function iteration.
+
+```{code-cell} ipython3
+_, I_aut = autarky_policy(v_aut)
+
+
+def default_values(v_aut_arr, β_val=None):
+    """Values after default, including the one-period output loss δ."""
+    if β_val is None:
+        β_val = β
+
+    Ev1 = np.interp(Y1, n_grid, v_aut_arr)
+    Ev2 = np.interp(Y2, n_grid, v_aut_arr)
+    vals = []
+    for Yj in Y:
+        I = I_search_grid
+        c = δ * Yj - θ * I
+        l = np.minimum(I**ν, 1.0)
+        c_safe = np.maximum(c, 1e-12)
+        util = c_safe**(1.0 - γ) / (1.0 - γ)
+        obj = util + β_val * ((1 - l) * Ev1 + l * Ev2)
+        feasible = (I <= Yj) & (c > 1e-10)
+        vals.append(float(np.max(np.where(feasible, obj, -np.inf))))
+    return np.asarray(vals)
+
+
+def inverse_value(v_arr, target):
+    """Approximate V^{-1}(target) on the net-worth grid."""
+    v_mono = np.maximum.accumulate(v_arr)
+    return float(np.interp(target, v_mono, n_grid,
+                           left=n_grid[0], right=n_grid[-1]))
+
+
+def borrowing_limit_nbars(v_arr, v_default):
+    """Minimum feasible continuation net worths implied by enforcement."""
+    return np.asarray([inverse_value(v_arr, val) for val in v_default])
+
+
+v_aut_delta = default_values(v_aut)
+print("Default values:", np.round(v_aut_delta, 4))
+```
+
+### Contracting models
+
+For moral hazard, we use the first-order approach.
+
+The pure MH economy evaluates two loan regimes for each candidate
+continuation pair:
+
+$$
+b = \beta_c\,\mathbb E[d_j]
+\quad\text{and}\quad
+b = M.
+$$
+
+The first is lender participation binding; the second is the lender endowment
+constraint binding.
+
+For MH+LE, we set the exogenous cap to a very large value and rely on the
+endogenous borrowing limits instead.
+
+For LE, investment is observable, so the planner chooses it directly.
+
+```{code-cell} ipython3
+BIG_LOAN_CAP = 1e6
+CONTRACT_TOL = 1e-5
+CONTRACT_MAX_ITER = 10_000
+
+
+def contract_initial_upper(β_val, loan_upper):
+    """High initial value; starting too low can converge back to autarky."""
+    c_upper = n_hi + loan_upper
+    return np.full(N_n, float(u(c_upper)) / (1.0 - β_val))
+
+
 @jax.jit
-def mh_bellman_step_jax(V, V_aut_arr, β_val, β_c_val):
-    """
-    One vectorised Bellman step for the moral-hazard model.
+def mh_bellman_step_jax(v, v_aut_arr, I_aut_arr, nbar1, nbar2,
+                        loan_cap, β_val, β_c_val):
+    """One Bellman step for MH, with optional LE bounds and loan cap."""
+    v1 = jnp.interp(n1p_flat_j, n_grid_j, v)
+    v2 = jnp.interp(n2p_flat_j, n_grid_j, v)
+    Δv = v2 - v1
 
-    For each candidate pair (n_1', n_2'), the FOA for I is solved by a
-    compiled bisection.  The Bellman maximisation is then a batch grid search
-    over continuation states.
-    """
-    V1 = jnp.interp(n1p_flat_j, n_grid_j, V)
-    V2 = jnp.interp(n2p_flat_j, n_grid_j, V)
-    ΔV = V2 - V1
+    d1 = Y1 - n1p_flat_j
+    d2 = Y2 - n2p_flat_j
+    enforce_feasible = ((n1p_flat_j[None, :] >= nbar1 - 1e-10)
+                        & (n2p_flat_j[None, :] >= nbar2 - 1e-10))
+    shape_ref = n_grid_j[:, None] + 0.0 * n1p_flat_j[None, :]
+    I_hi_base = jnp.ones_like(shape_ref) * (1.0 - 1e-6)
 
-    A = n_grid_j[:, None] + β_c_val * (Y1 - n1p_flat_j)[None, :]
-    ΔB = β_c_val * ((Y2 - n2p_flat_j) - (Y1 - n1p_flat_j))
+    def lender_value(I):
+        l = λ(I)
+        return β_c_val * ((1 - l) * d1[None, :] + l * d2[None, :])
+
+    def solve_mh_root(c_of_I):
+        I_hi = I_hi_base
+
+        def shrink_hi(_, I_hi_val):
+            return jnp.where(c_of_I(I_hi_val) < 1e-8,
+                             0.9 * I_hi_val, I_hi_val)
+
+        I_hi = jax.lax.fori_loop(0, 35, shrink_hi, I_hi)
+        I_lo = jnp.full_like(I_hi, 1e-7)
+
+        def foa(I):
+            λ_prime = ν * jnp.maximum(I, 1e-12)**(ν - 1.0)
+            return θ * u_prime(c_of_I(I)) - β_val * λ_prime * Δv[None, :]
+
+        foa_lo = foa(I_lo)
+        foa_hi = foa(I_hi)
+        valid = ((Δv[None, :] > 1e-10) & (I_hi > 1e-6)
+                 & (foa_lo < 0.0) & (foa_hi > 0.0)
+                 & (c_of_I(I_hi) > 1e-8))
+
+        def bisect_body(_, state):
+            lo, hi = state
+            mid = 0.5 * (lo + hi)
+            f_mid = foa(mid)
+            hi = jnp.where(f_mid > 0.0, mid, hi)
+            lo = jnp.where(f_mid > 0.0, lo, mid)
+            return lo, hi
+
+        I_lo, I_hi = jax.lax.fori_loop(0, 35, bisect_body, (I_lo, I_hi))
+        return 0.5 * (I_lo + I_hi), valid
+
+    # Regime 1: lender participation binds.
+    def c_lp(I):
+        return n_grid_j[:, None] + lender_value(I) - θ * I
+
+    I_lp, valid_lp = solve_mh_root(c_lp)
+    b_lp = lender_value(I_lp)
+
+    # Regime 2: the exogenous loan cap binds.  This regime is inactive when
+    # loan_cap is set to BIG_LOAN_CAP.
+    def c_cap(I):
+        return n_grid_j[:, None] + loan_cap - θ * I
+
+    I_cap, valid_cap = solve_mh_root(c_cap)
+    b_cap = jnp.full_like(I_cap, loan_cap)
+
+    def evaluate(I_star, b, valid):
+        c = n_grid_j[:, None] + b - θ * I_star
+        l = λ(I_star)
+        Ev = (1 - l) * v1[None, :] + l * v2[None, :]
+        obj = u(c) + β_val * Ev
+        ic_feasible = I_star <= n_grid_j[:, None] + b + 1e-6
+        feasible = (valid & enforce_feasible & ic_feasible
+                    & (c > 1e-10) & (b >= -1e-8))
+        return jnp.where(feasible, obj, -jnp.inf)
+
+    obj_lp = evaluate(I_lp, b_lp, valid_lp & (b_lp <= loan_cap + 1e-7))
+    cap_has_resources = lender_value(I_cap) >= loan_cap - 1e-7
+    obj_cap = evaluate(I_cap, b_cap, valid_cap & cap_has_resources)
+
+    use_cap = obj_cap > obj_lp
+    obj = jnp.where(use_cap, obj_cap, obj_lp)
+    I_all = jnp.where(use_cap, I_cap, I_lp)
+    b_all = jnp.where(use_cap, b_cap, b_lp)
+
+    idx = jnp.argmax(obj, axis=1)
+    best_val = jnp.max(obj, axis=1)
+    has_feasible = jnp.isfinite(best_val)
+    use_fallback = (~has_feasible) | (best_val <= v_aut_arr)
+
+    pol_n1p = jnp.where(use_fallback, Y1, n1p_flat_j[idx])
+    pol_n2p = jnp.where(use_fallback, Y2, n2p_flat_j[idx])
+    pol_I = jnp.where(use_fallback, I_aut_arr,
+                      jnp.take_along_axis(I_all, idx[:, None], axis=1)[:, 0])
+    pol_b = jnp.where(use_fallback, 0.0,
+                      jnp.take_along_axis(b_all, idx[:, None], axis=1)[:, 0])
+    v_new = jnp.where(use_fallback, v_aut_arr, best_val)
+
+    return v_new, pol_n1p, pol_n2p, pol_I, pol_b
+
+
+@jax.jit
+def le_bellman_step_jax(v, v_aut_arr, I_aut_arr, nbar1, nbar2,
+                        β_val, β_c_val):
+    """One Bellman step for the limited-enforcement-only economy."""
+    v1 = jnp.interp(n1p_flat_j, n_grid_j, v)
+    v2 = jnp.interp(n2p_flat_j, n_grid_j, v)
+    Δv = v2 - v1
+
+    d1 = Y1 - n1p_flat_j
+    d2 = Y2 - n2p_flat_j
+    Δd = d2 - d1
+    A = n_grid_j[:, None] + β_c_val * d1[None, :]
+    ΔB = β_c_val * Δd
+    enforce_feasible = ((n1p_flat_j[None, :] >= nbar1 - 1e-10)
+                        & (n2p_flat_j[None, :] >= nbar2 - 1e-10))
 
     def c_of_I(I):
         return A + (I**ν) * ΔB[None, :] - θ * I
 
-    I_hi = jnp.minimum(A / θ * 0.999, 1.0 - 1e-6)
-    I_hi = jnp.maximum(I_hi, 1e-6)
+    shape_ref = n_grid_j[:, None] + 0.0 * n1p_flat_j[None, :]
+    I_hi = jnp.ones_like(shape_ref) * (1.0 - 1e-6)
 
     def shrink_hi(_, I_hi_val):
-        return jnp.where(c_of_I(I_hi_val) < 1e-8, 0.9 * I_hi_val, I_hi_val)
+        return jnp.where(c_of_I(I_hi_val) < 1e-8,
+                         0.9 * I_hi_val, I_hi_val)
 
-    I_hi = jax.lax.fori_loop(0, 40, shrink_hi, I_hi)
+    I_hi = jax.lax.fori_loop(0, 35, shrink_hi, I_hi)
     I_lo = jnp.full_like(I_hi, 1e-7)
 
-    def foa(I):
-        return (θ * u_prime_jax(c_of_I(I))
-                - β_val * ν * jnp.maximum(I, 1e-12)**(ν - 1.0)
-                * ΔV[None, :])
+    def marginal(I):
+        λ_prime = ν * jnp.maximum(I, 1e-12)**(ν - 1.0)
+        current_gain = u_prime(c_of_I(I)) * (λ_prime * ΔB[None, :] - θ)
+        continuation_gain = β_val * λ_prime * Δv[None, :]
+        return current_gain + continuation_gain
 
-    foa_lo = foa(I_lo)
-    foa_hi = foa(I_hi)
-    valid = ((ΔV[None, :] > 1e-10) & (I_hi > 1e-6)
-             & (foa_lo < 0.0) & (foa_hi > 0.0))
+    f_lo = marginal(I_lo)
+    f_hi = marginal(I_hi)
+    has_root = (f_lo > 0.0) & (f_hi < 0.0)
 
     def bisect_body(_, state):
         lo, hi = state
         mid = 0.5 * (lo + hi)
-        f_mid = foa(mid)
-        hi = jnp.where(f_mid > 0.0, mid, hi)
-        lo = jnp.where(f_mid > 0.0, lo, mid)
+        f_mid = marginal(mid)
+        lo = jnp.where(f_mid > 0.0, mid, lo)
+        hi = jnp.where(f_mid > 0.0, hi, mid)
         return lo, hi
 
-    I_lo, I_hi = jax.lax.fori_loop(0, 45, bisect_body, (I_lo, I_hi))
-    I_star = 0.5 * (I_lo + I_hi)
-    c = c_of_I(I_star)
-    l = λ_jax(I_star)
-    b = β_c_val * ((1 - l) * (Y1 - n1p_flat_j)[None, :]
-                   + l * (Y2 - n2p_flat_j)[None, :])
-    EV = (1 - l) * V1[None, :] + l * V2[None, :]
-    obj = u_jax(c) + β_val * EV
+    I_lo_b, I_hi_b = jax.lax.fori_loop(0, 35, bisect_body, (I_lo, I_hi))
+    I_root = 0.5 * (I_lo_b + I_hi_b)
+    I_star = jnp.where(f_lo <= 0.0, 0.0,
+                       jnp.where(f_hi >= 0.0, I_hi, I_root))
 
-    feasible = valid & (c > 1e-10) & (b <= M + 1e-6)
+    l = λ(I_star)
+    b = β_c_val * ((1 - l) * d1[None, :] + l * d2[None, :])
+    c = n_grid_j[:, None] + b - θ * I_star
+    Ev = (1 - l) * v1[None, :] + l * v2[None, :]
+    obj = u(c) + β_val * Ev
+    feasible = (enforce_feasible & (c > 1e-10) & (b >= -1e-8)
+                & ((has_root | (f_lo <= 0.0) | (f_hi >= 0.0))))
     obj = jnp.where(feasible, obj, -jnp.inf)
 
     idx = jnp.argmax(obj, axis=1)
     best_val = jnp.max(obj, axis=1)
     has_feasible = jnp.isfinite(best_val)
-    use_fallback = (~has_feasible) | (best_val <= V_aut_arr)
+    use_fallback = (~has_feasible) | (best_val <= v_aut_arr)
 
     pol_n1p = jnp.where(use_fallback, Y1, n1p_flat_j[idx])
     pol_n2p = jnp.where(use_fallback, Y2, n2p_flat_j[idx])
-    pol_I = jnp.where(use_fallback, 0.0,
+    pol_I = jnp.where(use_fallback, I_aut_arr,
                       jnp.take_along_axis(I_star, idx[:, None], axis=1)[:, 0])
     pol_b = jnp.where(use_fallback, 0.0,
                       jnp.take_along_axis(b, idx[:, None], axis=1)[:, 0])
-    V_new = jnp.where(use_fallback, V_aut_arr, best_val)
+    v_new = jnp.where(use_fallback, v_aut_arr, best_val)
 
-    return V_new, pol_n1p, pol_n2p, pol_I, pol_b
+    return v_new, pol_n1p, pol_n2p, pol_I, pol_b
 
 
-def mh_vfi(V_aut, β_val=None, β_c_val=None, tol=1e-3, max_iter=60,
-           relaxation=0.5):
-    """Value function iteration for the moral hazard model."""
+def update_nbars(v_arr, nbars, v_default, relaxation=0.5):
+    """Damped update of endogenous borrowing limits."""
+    target = borrowing_limit_nbars(v_arr, v_default)
+    target = np.clip(target, n_lo, n_hi)
+    return (1 - relaxation) * nbars + relaxation * target
+
+
+def mh_vfi(v_aut, β_val=None, β_c_val=None, tol=CONTRACT_TOL,
+           max_iter=CONTRACT_MAX_ITER,
+           relaxation=0.6, limited_enforcement=False, loan_cap=M,
+           verbose=False, return_limits=False):
+    """Value function iteration for MH and MH+LE."""
     if β_val is None:
         β_val = β
     if β_c_val is None:
         β_c_val = β_c
 
-    V = V_aut.copy()
+    _, I_aut_arr = autarky_policy(v_aut, β_val=β_val)
+    v_default = default_values(v_aut, β_val=β_val)
+    nbars = np.array([n_lo, n_lo])
+    loan_upper = loan_cap if loan_cap < BIG_LOAN_CAP / 2 else Y2 - n_lo
+    v = contract_initial_upper(β_val, loan_upper)
+    label = 'MH+LE' if limited_enforcement else 'MH'
+
     for it in range(max_iter):
-        V_raw, pol_n1p, pol_n2p, pol_I, pol_b = mh_bellman_step_jax(
-            jnp.asarray(V), jnp.asarray(V_aut), β_val, β_c_val)
-        V_raw = np.asarray(V_raw)
-        V_new = (1 - relaxation) * V + relaxation * V_raw
-        diff = np.max(np.abs(V_new - V))
-        V    = V_new
-        print(f"  iter {it+1:3d},  max|ΔV| = {diff:.5f}")
+        v_raw, pol_n1p, pol_n2p, pol_I, pol_b = mh_bellman_step_jax(
+            jnp.asarray(v), jnp.asarray(v_aut), jnp.asarray(I_aut_arr),
+            nbars[0], nbars[1], loan_cap, β_val, β_c_val)
+        v_raw = np.asarray(v_raw)
+        v_new = (1 - relaxation) * v + relaxation * v_raw
+        limit_diff = 0.0
+        if limited_enforcement:
+            nbars_new = update_nbars(v_new, nbars, v_default)
+            limit_diff = np.max(np.abs(nbars_new - nbars))
+            nbars = nbars_new
+        diff = max(np.max(np.abs(v_new - v)), limit_diff)
+        v = v_new
+        if verbose and ((it + 1) % 20 == 0 or diff < tol):
+            print(f"  iter {it+1:3d},  diff = {diff:.5f}, "
+                  f"nbars = {nbars}")
         if diff < tol:
-            print(f"MH VFI converged in {it+1} iterations.")
             break
 
+    if verbose:
+        status = 'converged' if diff < tol else 'stopped'
+        print(
+            f"{label} VFI {status} after {it + 1} iterations: "
+            f"diff = {diff:.3e}, nbars = {np.round(nbars, 4)}"
+        )
+
     _, pol_n1p, pol_n2p, pol_I, pol_b = mh_bellman_step_jax(
-        jnp.asarray(V), jnp.asarray(V_aut), β_val, β_c_val)
+        jnp.asarray(v), jnp.asarray(v_aut), jnp.asarray(I_aut_arr),
+        nbars[0], nbars[1], loan_cap, β_val, β_c_val)
 
-    return (V, np.asarray(pol_n1p), np.asarray(pol_n2p),
-            np.asarray(pol_I), np.asarray(pol_b))
+    result = (v, np.asarray(pol_n1p), np.asarray(pol_n2p),
+              np.asarray(pol_I), np.asarray(pol_b))
+    if return_limits:
+        return result + (nbars,)
+    return result
 
 
-print("Running moral hazard VFI…")
-V_mh, pol_n1p, pol_n2p, pol_I, pol_b = mh_vfi(V_aut)
+def le_vfi(v_aut, β_val=None, β_c_val=None, tol=CONTRACT_TOL,
+           max_iter=CONTRACT_MAX_ITER,
+           relaxation=0.6, verbose=False, return_limits=False):
+    """Value function iteration for the LE-only economy."""
+    if β_val is None:
+        β_val = β
+    if β_c_val is None:
+        β_c_val = β_c
+
+    _, I_aut_arr = autarky_policy(v_aut, β_val=β_val)
+    v_default = default_values(v_aut, β_val=β_val)
+    nbars = np.array([n_lo, n_lo])
+    v = contract_initial_upper(β_val, Y2 - n_lo)
+
+    for it in range(max_iter):
+        v_raw, pol_n1p, pol_n2p, pol_I, pol_b = le_bellman_step_jax(
+            jnp.asarray(v), jnp.asarray(v_aut), jnp.asarray(I_aut_arr),
+            nbars[0], nbars[1], β_val, β_c_val)
+        v_raw = np.asarray(v_raw)
+        v_new = (1 - relaxation) * v + relaxation * v_raw
+        nbars_new = update_nbars(v_new, nbars, v_default)
+        limit_diff = np.max(np.abs(nbars_new - nbars))
+        nbars = nbars_new
+        diff = max(np.max(np.abs(v_new - v)), limit_diff)
+        v = v_new
+        if verbose and ((it + 1) % 20 == 0 or diff < tol):
+            print(f"  iter {it+1:3d},  diff = {diff:.5f}, "
+                  f"nbars = {nbars}")
+        if diff < tol:
+            break
+
+    if verbose:
+        status = 'converged' if diff < tol else 'stopped'
+        print(
+            f"LE VFI {status} after {it + 1} iterations: "
+            f"diff = {diff:.3e}, nbars = {np.round(nbars, 4)}"
+        )
+
+    _, pol_n1p, pol_n2p, pol_I, pol_b = le_bellman_step_jax(
+        jnp.asarray(v), jnp.asarray(v_aut), jnp.asarray(I_aut_arr),
+        nbars[0], nbars[1], β_val, β_c_val)
+
+    result = (v, np.asarray(pol_n1p), np.asarray(pol_n2p),
+              np.asarray(pol_I), np.asarray(pol_b))
+    if return_limits:
+        return result + (nbars,)
+    return result
+
+
+v_mh, pol_n1p, pol_n2p, pol_I, pol_b = mh_vfi(v_aut, verbose=True)
+
+(v_mhle, pol_n1p_mhle, pol_n2p_mhle, pol_I_mhle, pol_b_mhle,
+ nbars_mhle) = mh_vfi(v_aut, limited_enforcement=True,
+                      loan_cap=BIG_LOAN_CAP, verbose=True,
+                      return_limits=True)
+
+(v_le, pol_n1p_le, pol_n2p_le, pol_I_le, pol_b_le,
+ nbars_le) = le_vfi(v_aut, verbose=True, return_limits=True)
+```
+
+### Policy diagnostics
+
+The helper functions below convert policies into repayments, risk-sharing
+indices, capital-outflow schedules and implied interest rates.
+
+```{code-cell} ipython3
+def λ_np(I):
+    """NumPy version of λ for plotting and simulation."""
+    return np.minimum(np.asarray(I)**ν, 1.0)
+
+
+def make_policy(name, n1p, n2p, I, b, v, nbars=None):
+    """Collect a regime's policy arrays and derived schedules."""
+    d1 = Y1 - n1p
+    d2 = Y2 - n2p
+    l = λ_np(I)
+    return {
+        'name': name,
+        'n1p': n1p,
+        'n2p': n2p,
+        'I': I,
+        'b': b,
+        'v': v,
+        'nbars': nbars,
+        'd1': d1,
+        'd2': d2,
+        'λ': l,
+        'Enp': (1 - l) * n1p + l * n2p,
+        'RSI': (d2 - d1) / (Y2 - Y1),
+        'ca1': Y1 - n_grid - b,
+        'ca2': Y2 - n_grid - b
+    }
+
+
+policies = {
+    'MH': make_policy('MH', pol_n1p, pol_n2p, pol_I, pol_b, v_mh),
+    'MH+LE': make_policy('MH+LE', pol_n1p_mhle, pol_n2p_mhle,
+                         pol_I_mhle, pol_b_mhle, v_mhle, nbars_mhle),
+    'LE': make_policy('LE', pol_n1p_le, pol_n2p_le,
+                      pol_I_le, pol_b_le, v_le, nbars_le)
+}
+
+
+def policy_at(policy, key, n):
+    """Interpolate a policy at net worth n, clipping to the grid support."""
+    n_clip = np.clip(n, n_grid[0], n_grid[-1])
+    return float(np.interp(n_clip, n_grid, policy[key]))
+
+
+def next_period_c(policy, n_next):
+    """Consumption at the start of next period given continuation net worth."""
+    b_next = policy_at(policy, 'b', n_next)
+    I_next = policy_at(policy, 'I', n_next)
+    return n_next + b_next - θ * I_next
+
+
+def implied_R(policy, n):
+    """Implied one-period gross interest rate at net worth n."""
+    b = policy_at(policy, 'b', n)
+    I = policy_at(policy, 'I', n)
+    n1p = policy_at(policy, 'n1p', n)
+    n2p = policy_at(policy, 'n2p', n)
+    c = n + b - θ * I
+    l = λ_np(I)
+    c1p = next_period_c(policy, n1p)
+    c2p = next_period_c(policy, n2p)
+    denom = β * ((1 - l) * float(u_prime(c1p))
+                 + l * float(u_prime(c2p)))
+    return float(u_prime(c)) / denom if denom > 1e-10 else np.nan
+
+
+def implied_R_schedule(policy):
+    return np.asarray([implied_R(policy, n) for n in n_grid])
+
+
+def repeated_low_limit(policy, T=100):
+    """Approximate the lowest net worth reached after repeated low outputs."""
+    n = Y1
+    path = [n]
+    for _ in range(T):
+        n = policy_at(policy, 'n1p', n)
+        path.append(n)
+    return float(np.min(path[-20:]))
+
+
+n_low_mh = repeated_low_limit(policies['MH'])
+n_low_le = repeated_low_limit(policies['LE'])
+print(f"Approximate low-state limit, MH: {n_low_mh:.4f}")
+print(f"Approximate low-state limit, LE: {n_low_le:.4f}")
+
+
+def print_policy_diagnostics(policies):
+    """Print compact diagnostics for the computed policy functions."""
+    print("\nPolicy diagnostics:")
+    for name, policy in policies.items():
+        active = policy['λ'] > 0.01
+        rsi_active = policy['RSI'][active]
+        n1_floor = np.sum(np.isclose(policy['n1p'], n_lo))
+        n2_floor = np.sum(np.isclose(policy['n2p'], n_lo))
+        nbars = policy['nbars']
+        nbars_text = "none" if nbars is None else np.array2string(
+            np.round(nbars, 4))
+        print(
+            f"{name:5s}: "
+            f"λ=[{np.nanmin(policy['λ']):.3f}, {np.nanmax(policy['λ']):.3f}], "
+            f"b=[{np.nanmin(policy['b']):.3f}, {np.nanmax(policy['b']):.3f}], "
+            f"RSI_active_mean={np.nanmean(rsi_active):.4f}, "
+            f"RSI_active_max={np.nanmax(rsi_active):.4f}, "
+            f"n1'=[{np.nanmin(policy['n1p']):.3f}, "
+            f"{np.nanmax(policy['n1p']):.3f}], "
+            f"n2'=[{np.nanmin(policy['n2p']):.3f}, "
+            f"{np.nanmax(policy['n2p']):.3f}], "
+            f"floor_hits=({n1_floor}, {n2_floor}), "
+            f"nbars={nbars_text}"
+        )
+
+
+print_policy_diagnostics(policies)
 ```
 
 ### Value functions and insurance
@@ -525,163 +1394,184 @@ mystnb:
     caption: value functions and risk-sharing index
     name: fig-tsy-value-rsi
 ---
-fig, axes = plt.subplots(1, 2)
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
-# Left: value functions
-axes[0].plot(n_grid, V_aut, lw=2, label='Autarky')
-axes[0].plot(n_grid, V_mh,  lw=2, ls='--', label='Moral hazard')
+axes[0].plot(n_grid, v_aut, lw=2, color='0.45', label='Autarky')
+for name, style in [('MH', '-'), ('MH+LE', '--'), ('LE', ':')]:
+    axes[0].plot(n_grid, policies[name]['v'], lw=2, ls=style, label=name)
 axes[0].set_xlabel('net worth $n$')
 axes[0].set_ylabel('value')
 axes[0].legend()
 
-# Right: Risk-sharing index  RSI = (d_2 - d_1) / (Y_2 - Y_1)
-# d_j = Y_j - n_j',  so RSI = (n_1' - n_2') / (Y_2 - Y_1) + 1
-# ... actually RSI = (d_2 - d_1)/(Y_2-Y_1) = ((Y2-n2p)-(Y1-n1p))/(Y2-Y1)
-d1_mh  = Y1 - pol_n1p
-d2_mh  = Y2 - pol_n2p
-RSI_mh = (d2_mh - d1_mh) / (Y2 - Y1)
-active_mh = λ(pol_I) > 0.01
-RSI_mh_plot = np.where(active_mh, RSI_mh, np.nan)
-
-axes[1].plot(n_grid, RSI_mh_plot, lw=2, color='C1')
-axes[1].axhline(1.0, ls=':', color='k',  lw=1, label='Full insurance (RSI=1)')
-axes[1].axhline(0.0, ls='--', color='k', lw=1, label='Non-contingent debt (RSI=0)')
+for name, style in [('MH', '-'), ('MH+LE', '--'), ('LE', ':')]:
+    active = policies[name]['λ'] > 0.01
+    rsi_plot = np.where(active, policies[name]['RSI'], np.nan)
+    axes[1].plot(n_grid, rsi_plot, lw=2, ls=style, label=name)
+axes[1].axhline(1.0, ls=':', color='k', lw=1,
+                label='Full insurance')
+axes[1].axhline(0.0, ls='--', color='k', lw=1,
+                label='Non-contingent debt')
 axes[1].set_xlabel('net worth $n$')
 axes[1].set_ylabel('risk-sharing index')
-axes[1].set_ylim(-0.1, 1.2)
+axes[1].set_ylim(-0.15, 1.15)
 axes[1].legend()
 
 plt.tight_layout()
 plt.show()
 
-print(f"\nMean RSI (active-investment states): {np.nanmean(RSI_mh_plot):.4f}")
-print("→ Repayment is nearly state non-contingent (RSI ≈ 0)")
-print("→ Moral hazard justifies why simple non-contingent debt is optimal")
+for name in ['MH', 'MH+LE', 'LE']:
+    active = policies[name]['λ'] > 0.01
+    rsi_active = policies[name]['RSI'][active]
+    print(f"{name:5s}: mean RSI = {np.mean(rsi_active): .4f}, "
+          f"max RSI = {np.max(rsi_active): .4f}")
 ```
 
-A key finding of {cite:t}`Tsyrennikov2013` emerges immediately: the risk-sharing
-index is close to *zero* on the active-investment region.
+In {cite:t}`Tsyrennikov2013`, the moral-hazard economy has essentially
+state non-contingent repayment: the maximal risk-sharing index is below 0.01.
 
-Moral hazard requires
-spreading continuation values to incentivise investment, but this is achieved
-by differentiating *net worth* $n_j'$, not repayment $d_j = Y_j - n_j'$.
+In the limited-enforcement economy, by contrast, the same index is about 0.80
+on average, so the contract offers a significant amount of insurance.
 
-The near-equality $d_1 \approx d_2$ means repayment is essentially
-*non-contingent on output* — the model rationalises why emerging market
-borrowers use plain debt instruments rather than GDP-linked securities.
+The compact grid computation should be read against that benchmark.
 
-### Optimal investment
+The diagnostic to watch is not the exact maximum at grid endpoints, but whether
+the repayment schedule $\{d_1(n), d_2(n)\}$ is nearly state non-contingent under
+moral hazard and much more state contingent under limited enforcement.
+
+This is the paper's central policy result: under moral hazard nearly all the
+risk is assumed by the risk-averse borrower, and insurance comes mainly through
+access to borrowing rather than through state-contingent repayment.
+
+### Policy functions
+
+The next figure follows the structure and terminology of Figure 3 in
+{cite:t}`Tsyrennikov2013`.
+
+Panel F multiplies the MH and MH+LE risk-sharing indices by 10, as in the
+paper, so their near-zero variation is visible on the same scale as LE.
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: optimal investment and continuation net worth
-    name: fig-tsy-investment
+    caption: policy functions in the MH, MH+LE and LE economies
+    name: fig-tsy-policy-functions
 ---
-fig, axes = plt.subplots(1, 2)
+fig, axes = plt.subplots(3, 2, figsize=(12, 10), sharex=True)
+ax = axes.ravel()
 
-# Compute autarky optimal investment
-_, I_aut = autarky_policy(V_aut)
+for a in ax:
+    a.axvline(n_low_mh, color='0.25', lw=1, ls='--')
+    a.axvline(n_low_le, color='0.55', lw=1, ls=':')
+    a.set_xlim(0.38, 1.02)
 
-axes[0].plot(n_grid, λ(I_aut), lw=2,        label='Autarky')
-axes[0].plot(n_grid, λ(pol_I), lw=2, ls='--', label='Moral hazard')
-axes[0].set_xlabel('net worth $n$')
-axes[0].set_ylabel(r'$\lambda(I) = \Pr(Y_2 \mid I)$')
-axes[0].legend()
+ax[0].plot(n_grid, policies['MH']['λ'], lw=2, label='MH')
+ax[0].plot(n_grid, policies['MH+LE']['λ'], lw=2, ls='--', label='MH+LE')
+ax[0].plot(n_grid, policies['LE']['λ'], lw=2, ls=':', label='LE')
+ax[0].set_ylabel(r'$\lambda(I)$')
+ax[0].set_title('A. investment')
+ax[0].legend(fontsize=9)
 
-axes[1].plot(n_grid, pol_n1p, lw=2,
-             label=r"$n_1' = Y_1 - d_1$  (after low output)")
-axes[1].plot(n_grid, pol_n2p, lw=2, ls='--',
-             label=r"$n_2' = Y_2 - d_2$  (after high output)")
-axes[1].plot(n_grid, n_grid,  lw=1, ls=':',  color='k', label='45° line')
-axes[1].set_xlabel('net worth $n$')
-axes[1].set_ylabel("continuation net worth $n_j'$")
-axes[1].legend(fontsize=10)
+for name, style in [('MH', '-'), ('MH+LE', '--'), ('LE', ':')]:
+    ax[1].plot(n_grid, policies[name]['Enp'], lw=2, ls=style, label=name)
+ax[1].plot(n_grid, n_grid, color='k', lw=1, ls=':', label='45-degree')
+ax[1].set_ylabel(r"$E[n']$")
+ax[1].set_title('B. expected future net worth')
+ax[1].legend(fontsize=9)
+
+ax[2].plot(n_grid, policies['MH']['b'], lw=2, label=r'$b_{MH}$')
+ax[2].plot(n_grid, policies['MH']['d1'], lw=2, ls='--', label=r'$d_{1,MH}$')
+ax[2].plot(n_grid, policies['MH']['d2'], lw=2, ls=':', label=r'$d_{2,MH}$')
+ax[2].set_ylabel('loan and repayment')
+ax[2].set_title('C. MH contract')
+ax[2].legend(fontsize=9)
+
+ax[3].plot(n_grid, policies['LE']['b'], lw=2, label=r'$b_{LE}$')
+ax[3].plot(n_grid, policies['LE']['d1'], lw=2, ls='--', label=r'$d_{1,LE}$')
+ax[3].plot(n_grid, policies['LE']['d2'], lw=2, ls=':', label=r'$d_{2,LE}$')
+ax[3].set_ylabel('loan and repayment')
+ax[3].set_title('D. LE contract')
+ax[3].legend(fontsize=9)
+
+ax[4].plot(n_grid, policies['MH']['ca1'], lw=2, label=r'$ca_{1,MH}$')
+ax[4].plot(n_grid, policies['MH']['ca2'], lw=2, ls='--', label=r'$ca_{2,MH}$')
+ax[4].plot(n_grid, policies['LE']['ca1'], lw=2, ls=':', label=r'$ca_{1,LE}$')
+ax[4].plot(n_grid, policies['LE']['ca2'], lw=2, ls='-.', label=r'$ca_{2,LE}$')
+ax[4].axhline(0, color='k', lw=0.8)
+ax[4].set_xlabel('net worth $n$')
+ax[4].set_ylabel('capital outflows')
+ax[4].set_title('E. capital outflows')
+ax[4].legend(fontsize=8)
+
+ax[5].plot(n_grid, 10 * policies['MH']['RSI'], lw=2, label=r'$10\times$ MH')
+ax[5].plot(n_grid, 10 * policies['MH+LE']['RSI'], lw=2, ls='--',
+           label=r'$10\times$ MH+LE')
+ax[5].plot(n_grid, policies['LE']['RSI'], lw=2, ls=':', label='LE')
+ax[5].axhline(0, color='k', lw=0.8)
+ax[5].set_xlabel('net worth $n$')
+ax[5].set_ylabel('risk-sharing index')
+ax[5].set_title('F. risk sharing')
+ax[5].legend(fontsize=9)
 
 plt.tight_layout()
 plt.show()
 ```
 
-Investment under moral hazard is *lower* than in autarky at high net worth
-levels and more sensitive to $n$ at low levels.
+Panel A plots the optimal weight on the high-output outcome,
+$\lambda(I(n))$.
 
-After a low output
-realisation, net worth drops sharply ($n_1' \ll n$), depressing future
-investment and perpetuating the crisis — the model's **internal propagation
-mechanism**.
+In the MH economy, investment is sensitive to the financial position of the
+borrower at low levels of net worth.
 
-### Implied interest rate
+This positive-slope part of the investment policy is the paper's internal
+propagation mechanism: after a low-output realization, net worth declines,
+investment declines, and probability weight shifts toward the low-output
+outcome.
 
-```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: implied interest rate and spread
-    name: fig-tsy-interest-rate
----
-# Compute implied interest rate R(n)
-# R(n) = u'(c(n)) / [β * Σ_j g_j(I(n)) * u'(c'(n_j'(n)))]
-# where c'(n_j') = n_j' + b*(n_j') - θ I*(n_j')  (next period's consumption)
+Panel B plots expected future net worth,
+$E[Y_j-d_j(n)]$.
 
-pol_b_fn  = interp1d(n_grid, pol_b, fill_value='extrapolate', bounds_error=False)
-pol_I_fn  = interp1d(n_grid, pol_I, fill_value='extrapolate', bounds_error=False)
-pol_n1p_fn = interp1d(n_grid, pol_n1p, fill_value='extrapolate', bounds_error=False)
-pol_n2p_fn = interp1d(n_grid, pol_n2p, fill_value='extrapolate', bounds_error=False)
+The MH schedule lies below the LE schedule at high net worth, so net worth
+drifts down faster in the MH economy.
 
-def next_period_c(np_val):
-    """Consumption at the start of next period given continuation n'."""
-    b_next  = float(pol_b_fn(np_val))
-    I_next  = float(pol_I_fn(np_val))
-    return np_val + b_next - θ * I_next
+At low net worth, expected future net worth can decrease with current net worth
+because the endogenous improvement in the output distribution raises the
+probability of the large repayment.
 
-R_n = np.empty(N_n)
-for k, n in enumerate(n_grid):
-    b   = pol_b[k]
-    I   = pol_I[k]
-    c   = n + b - θ * I
-    l   = λ(I)
-    n1p = pol_n1p[k]
-    n2p = pol_n2p[k]
-    c1p = next_period_c(n1p)
-    c2p = next_period_c(n2p)
-    denom = β * ((1-l)*u_prime(c1p) + l*u_prime(c2p))
-    R_n[k] = u_prime(c) / denom if denom > 1e-10 else np.nan
+Panels C and D plot the optimal loan and repayment schedules.
 
-# Annualised spread over world rate
-R_world = 1.0 / β_c                 # gross world rate
-spread_ann = (R_n**4 - R_world**4)  # approximate annualised spread
+In the MH economy, $b(n)$, $d_1(n)$ and $d_2(n)$ are close to one another: the
+contract is close to state non-contingent debt.
 
-fig, axes = plt.subplots(1, 2)
+In the LE economy, repayment varies much more across output states, reflecting
+the larger amount of insurance provided by the contract.
 
-axes[0].plot(n_grid, R_n, lw=2)
-axes[0].axhline(R_world, ls='--', color='k', lw=1,
-                label=f'World rate $1/\\beta_c = {R_world:.3f}$')
-axes[0].set_xlabel('net worth $n$')
-axes[0].set_ylabel('implied gross interest rate $R(n)$')
-axes[0].legend()
+The LE investment schedule is also higher and less volatile: investment is
+observable, so the creditor can dictate more investment than the borrower would
+choose under moral hazard.
 
-axes[1].plot(n_grid, np.clip(spread_ann * 100, -1, 50), lw=2)
-axes[1].axhline(0, ls='--', color='k', lw=0.8)
-axes[1].set_xlabel('net worth $n$')
-axes[1].set_ylabel('annualised spread over world rate (%)')
+Panel E plots capital outflows, denoted $ca_j(n)$ in the paper.
 
-plt.tight_layout()
-plt.show()
-```
+Current output matters because it determines the repayment due on the previous
+contract.
 
-The interest rate spread rises sharply at low net worth levels, consistent with
-the Argentine data.
+At high net worth, the insurance effect dominates, so capital outflows are more
+positively related to output.
 
-The mechanism is the **MH Euler equation**: when $n$ is
-low, the borrower's continuation value is depressed and the spread in marginal
-utilities across future states increases $R(n)$.
+At low net worth, the incentive effect becomes stronger: a low-output realization
+must reduce the borrower's net worth, which can increase capital outflows.
+
+Panel F is the risk-sharing index.
+
+In the paper, this panel is the visual counterpart to the state
+non-contingency result: RSI is close to zero in the MH economy and much larger
+in the LE economy.
 
 ### Crisis dynamics
 
-{cite:t}`Tsyrennikov2013` shows that a string of low output realisations
+{cite:t}`Tsyrennikov2013` shows that a string of low output realizations
 generates gradual debt accumulation followed by a sudden stop in which capital
-inflows cease and interest rates spike — a pattern consistent with the
+inflows cease and interest rates spike --- a pattern consistent with the
 Argentina 2001 experience.
 
 ```{code-cell} ipython3
@@ -691,159 +1581,184 @@ mystnb:
     caption: simulated crisis dynamics
     name: fig-tsy-crisis
 ---
-def simulate_crisis(T_crisis=8):
+def simulate_crisis(policy, T_crisis=8):
     """
-    Simulate crisis path: T_crisis periods of low output (Y_1) starting
-    from zero debt (n_0 = Y2, high initial net worth).
+    Simulate T_crisis periods of low output Y1, starting with zero debt.
     """
-    n = Y2   # start with high net worth
+    n = Y1
     records = {'n': [n], 'debt_over_Y': [], 'R': [], 'ca_over_Y': [],
                'λ': []}
 
-    for t in range(T_crisis):
-        b   = float(pol_b_fn(n))
-        I   = float(pol_I_fn(n))
-        n1p = float(pol_n1p_fn(n))
-        n2p = float(pol_n2p_fn(n))
+    for _ in range(T_crisis):
+        b = policy_at(policy, 'b', n)
+        I = policy_at(policy, 'I', n)
+        n1p = policy_at(policy, 'n1p', n)
 
-        c   = n + b - θ * I
-        l   = λ(I)
-        c1p = next_period_c(n1p)
-        c2p = next_period_c(n2p)
-        denom = β * ((1-l)*u_prime(c1p) + l*u_prime(c2p))
-        R = u_prime(c) / denom if denom > 1e-10 else np.nan
-
-        # Debt = promised repayment − principal rolled over
-        # Approximate debt/output = b / Y1 (loan at current period)
-        debt_Y = b / Y1
-
-        # Current account = d_t − b_t  (repayment received − new loan given)
-        # At t=0, d_0 = 0 (no old contract); approximate d_t = Y1 - n
-        d_approx = Y1 - n
-        ca = d_approx - b
+        debt_Y = (Y1 - n) / Y1
+        ca = Y1 - n - b
+        R = implied_R(policy, n)
 
         records['debt_over_Y'].append(debt_Y)
         records['R'].append(R)
         records['ca_over_Y'].append(ca / Y1)
-        records['λ'].append(l)
+        records['λ'].append(λ_np(I))
 
-        n = n1p   # low output path
+        n = n1p
+        records['n'].append(n)
 
-    records['n'] += [float(pol_n1p_fn(records['n'][-1]))]
     return records
 
 
-crisis = simulate_crisis(T_crisis=8)
-t_ax   = np.arange(len(crisis['R']))
+crises = {name: simulate_crisis(policy, T_crisis=8)
+          for name, policy in policies.items()}
+t_ax = np.arange(8)
+styles = {'MH': ('o-', 'C0'), 'MH+LE': ('s--', 'C1'), 'LE': ('^:', 'C2')}
 
-fig, axes = plt.subplots(2, 2, sharex=True)
+fig, axes = plt.subplots(2, 2, figsize=(12, 8), sharex=True)
 
-axes[0,0].plot(t_ax, crisis['debt_over_Y'], 'o-', lw=2)
-axes[0,0].set_ylabel('debt / output')
+for name, crisis in crises.items():
+    marker, color = styles[name]
+    axes[0, 0].plot(t_ax, crisis['debt_over_Y'], marker,
+                    lw=2, color=color, label=name)
+axes[0, 0].set_ylabel('debt / output')
+axes[0, 0].legend(fontsize=9)
 
-axes[0,1].plot(t_ax, np.array(crisis['R'])**4 * 100, 's-', lw=2, color='C1')
-axes[0,1].axhline((1/β_c)**4 * 100, ls='--', color='k', lw=0.8,
-                  label='World rate')
-axes[0,1].set_ylabel('annualised gross rate (%)')
-axes[0,1].legend(fontsize=9)
+for name, crisis in crises.items():
+    marker, color = styles[name]
+    axes[0, 1].plot(t_ax, np.asarray(crisis['R'])**4, marker,
+                    lw=2, color=color, label=name)
+axes[0, 1].axhline((1 / β_c)**4, ls='--', color='k', lw=0.8,
+                   label='World rate')
+axes[0, 1].set_ylabel('annualized gross rate')
+axes[0, 1].legend(fontsize=9)
 
-axes[1,0].plot(t_ax, crisis['ca_over_Y'], '^-', lw=2, color='C2')
-axes[1,0].axhline(0, ls='--', color='k', lw=0.8)
-axes[1,0].set_xlabel('quarter')
-axes[1,0].set_ylabel('current account / output')
+for name, crisis in crises.items():
+    marker, color = styles[name]
+    axes[1, 0].plot(t_ax, crisis['ca_over_Y'], marker,
+                    lw=2, color=color, label=name)
+axes[1, 0].axhline(0, ls='--', color='k', lw=0.8)
+axes[1, 0].set_xlabel('quarter')
+axes[1, 0].set_ylabel('current account / output')
 
-axes[1,1].plot(t_ax, crisis['λ'], 'D-', lw=2, color='C3')
-axes[1,1].set_xlabel('quarter')
-axes[1,1].set_ylabel(r'$\lambda(I) = \Pr(Y_2 \mid I)$')
+for name, crisis in crises.items():
+    marker, color = styles[name]
+    axes[1, 1].plot(t_ax, crisis['λ'], marker,
+                    lw=2, color=color, label=name)
+axes[1, 1].set_xlabel('quarter')
+axes[1, 1].set_ylabel(r'$\lambda(I) = \Pr(Y_2 \mid I)$')
 
 plt.tight_layout()
 plt.show()
+
+for name, crisis in crises.items():
+    low_path_prob = np.prod(1 - np.asarray(crisis['λ']))
+    print(f"{name:5s}: probability of this low-output path = "
+          f"{low_path_prob:.4f}")
 ```
 
-The simulation reproduces the stylised crisis pattern of {cite:t}`Tsyrennikov2013`,
-Fig. 4:
+The simulation should be read in the same way as Figure 4 in the paper.
 
-- **Panel A**: Debt steadily accumulates as the borrower is pushed toward the
-  borrowing limit by repeated low output.
-- **Panel B**: Interest rates remain near the world rate initially but spike
-  sharply once the borrower approaches the borrowing limit — the
-  **late-warning** property.
-- **Panel C**: The current account first worsens gradually (capital inflows
-  shrink) and then abruptly turns around as the borrowing limit is reached.
-- **Panel D**: Investment collapses as net worth falls, further reducing the
-  probability of high future output — the **internal propagation mechanism**.
+Starting from zero debt, a path of low-output realizations makes the MH economy
+steadily accumulate obligations.
+
+Debt/output and the current account move before the interest rate does.
+
+When the borrower nearly exhausts borrowing capacity, the interest rate jumps.
+
+Thus the interest rate is a **late warning** about the economy's health, unlike
+debt and the current account.
+
+Panel C shows the current account first increasing gradually, meaning that
+capital inflows gradually shrink, and then moving sharply when borrowing
+capacity is nearly exhausted.
+
+Panel D shows the probability of the high-output outcome.
+
+As the borrower's net worth deteriorates, investment falls and
+$\lambda(I)$ falls, making the low-output path more likely than it would be in
+the frictionless or LE economies.
+
+The paper reports the MH+LE economy as visually close to the MH economy, so the
+main comparison is between MH and LE.
 
 ### MH versus limited enforcement
 
-A crucial result of {cite:t}`Tsyrennikov2013` is that *limited enforcement adds
-little* to the model's performance relative to moral hazard alone.
+A crucial result of {cite:t}`Tsyrennikov2013` is that limited enforcement,
+alone or together with moral hazard, has nearly no effect on the model's
+performance relative to moral hazard alone.
 
-Under LE (no moral hazard), optimal repayments are *highly state
-contingent* (RSI ≈ 0.8), providing near-full insurance.
+The reason is visible in the Euler equations.
 
-The borrower's net
-worth drifts *upward* under LE (unlike MH where it drifts downward), so
-interest rate spreads are transitory rather than persistent.
+Moral hazard and limited enforcement push the dynamics in opposite directions.
 
-The following code illustrates the key theoretical distinction by computing
-the Euler equation implications under each friction separately.
+Moral hazard requires the creditor to spread the continuation value of the
+borrower across future states, which unloads risk onto the borrower and produces
+immiseration.
 
-```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: expected continuation net worth
-    name: fig-tsy-mh-le
----
-# Illustrate the Euler equation implications theoretically
-fig, ax = plt.subplots()
+Limited enforcement without moral hazard pushes expected net worth upward until
+the enforcement constraints become non-operative.
 
-# Under MH (μ > 0, γ_j = 0):
-#   V'(n) = V'(n_j') [1 + μ λ'(I) Δg_j / g_j(I)]  + φ
-# → low-state factor < 1: V'(n1') > V'(n) → n1' < n (net worth falls)
-# → high-state factor > 1: V'(n2') < V'(n) → n2' > n (net worth rises)
-#
-# Under LE (μ = 0, γ_j > 0):
-#   V'(n) = V'(n_j') [1 + γ_j] + φ ≥ V'(n_j')
-# → V'(n_j') ≤ V'(n) → n_j' ≥ n  (net worth drifts upward)
+When both frictions are present, limited enforcement can **turn off** moral
+hazard near the borrowing limits: the borrowing limits already spread
+continuation values enough to provide incentives, so the incentive multiplier
+collapses.
 
-# Stylised illustration using the computed MH policy
-Vf_mh = interp1d(n_grid, V_mh, fill_value='extrapolate', bounds_error=False)
+## Quantitative comparison
 
-expected_np_mh = (1 - λ(pol_I)) * pol_n1p + λ(pol_I) * pol_n2p
+The paper's simulation results show why the moral-hazard mechanism matters.
 
-ax.plot(n_grid, expected_np_mh, lw=2,        label='MH: E[n\']')
-ax.plot(n_grid, n_grid,         lw=1, ls=':', color='k', label='45° line')
+The table below reports a reduced version of the model moments.
 
-# Under LE (approximate): net worth is a supermartingale, E[n'] ≥ n * β/β_c
-expected_np_le = n_grid * (β / β_c)
-ax.plot(n_grid, expected_np_le, lw=2, ls='--', color='C2',
-        label=r'LE: E[n\'] $\approx$ $(\beta/\beta_c)\,n$ (drifts up)')
+The MH+LE economy is very close to the MH economy in the paper's simulations,
+so the reduced table reports the MH column as the relevant moral-hazard
+benchmark.
 
-ax.set_xlabel('current net worth $n$')
-ax.set_ylabel("expected continuation net worth $E[n']$")
-ax.legend(fontsize=10)
-plt.tight_layout()
-plt.show()
-```
+| moment | data | MH, i.i.d. | LE, i.i.d. | MH, persistent | LE, persistent |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| $E(r)$ | 8.18 | 3.84 | 4.27 | 3.26 | 4.01 |
+| $\sigma(r)$ | 4.73 | 5.20 | 2.51 | 4.73 | 1.96 |
+| $\sigma(c)/\sigma(y)$ | 1.11 | 0.72 | 0.24 | 0.84 | 0.40 |
+| $\rho(c,y)$ | 0.97 | 0.82 | 0.62 | 0.96 | 0.67 |
+| $\rho(r,y)$ | -0.58 | -0.68 | -0.81 | -0.74 | -0.42 |
+| $\rho(tb,y)$ | -0.81 | 0.69 | 0.98 | 0.62 | 0.92 |
+| $\rho(y)$ | 0.94 | 0.28 | 0.07 | 0.75 | 0.63 |
 
-Under moral hazard, $\mathbb{E}[n']$ is pulled below $n$ in the
-high-net-worth active contracting region: net worth drifts down and the
-borrower spends substantial time near the borrowing limit, generating
-persistent interest rate spreads.
+Moral hazard raises consumption-output comovement and generates volatile,
+countercyclical spreads.
 
-Under limited enforcement,
-$\mathbb{E}[n'] \geq (\beta/\beta_c)\,n$: net worth drifts toward a stationary
-level and the borrower eventually escapes financial stress.
+It also creates endogenous output persistence even when the exogenous shocks
+are i.i.d.
+
+The persistent-shocks extension strengthens this result.
+
+The paper replaces the i.i.d. transition law with
+
+$$
+\Pr(Y_2 \mid I, Y_1) = \lambda(I)(1-p),
+\qquad
+\Pr(Y_2 \mid I, Y_2) = p + \lambda(I)(1-p),
+$$
+
+using $p=0.50$ in the recalibration.
+
+This persistent component improves the fit for consumption and output.
+
+The current-account problem remains.
+
+In the data, the trade balance is strongly countercyclical, while the model's
+trade balance is still procyclical in the reported simulations.
+
+Tsyrennikov argues that stochastic growth or multiperiod capital would likely
+be needed to address this shortcoming.
 
 ## Empirical test
 
 {cite:t}`Tsyrennikov2013` proposes a test to distinguish moral hazard from
 limited enforcement.
 
-After a low past output realisation ($y_{t-1} = Y_1$),
+After a low past output realization ($y_{t-1} = Y_1$),
 the MH contract lowers net worth sharply, reducing future consumption
-smoothing.  
+smoothing.
 
 This prediction is:
 
@@ -853,11 +1768,27 @@ $$
 $$
 
 while the LE economy gives the opposite ordering (insurance is better after
-low realisations).
+low realizations).
 
-Using Argentine quarterly data (1993–2005), the observed
-correlations are 0.98 (after low output) vs. 0.91 (after high output) —
+Using Argentine quarterly data (1993--2005), the observed
+correlations are 0.98 (after low output) vs. 0.91 (after high output) ---
 *consistent with moral hazard*.
+
+The paper reports the following comparison for the persistent-shocks economy:
+
+| statistic | data | LE | MH |
+| --- | ---: | ---: | ---: |
+| $\rho(c_t,y_t \mid y_{t-1}=Y_1)$ | 0.98 | 0.61 | 0.97 |
+| $\rho(c_t,y_t \mid y_{t-1}=Y_2)$ | 0.91 | 0.99 | 0.96 |
+
+The limited-enforcement model predicts stronger consumption-output correlation
+after high past output.
+
+The data show the opposite ordering, which is closer to the moral-hazard
+prediction.
+
+This test relies on the maintained assumption that state-contingent contracting
+is feasible.
 
 ## Exercises
 
@@ -865,16 +1796,18 @@ correlations are 0.98 (after low output) vs. 0.91 (after high output) —
 :label: tsyrennikov_2013_ex1
 ```
 
-**Effect of default penalty.**  The parameter $\delta \in (0,1)$ controls
-the severity of the output loss upon default.
+**Effect of the default penalty.** The parameter $\delta \in (0,1)$ is the
+fraction of output retained after default.
 
-1. Compute $V_{\text{aut}}$ for $\delta \in \{0.5,\, 0.795,\, 0.95\}$.
-2. For each $\delta$, evaluate the enforcement threshold
-   $V_{\text{aut}}(\delta Y_1)$ and $V_{\text{aut}}(\delta Y_2)$.
-3. Discuss: how does a harsher default penalty affect the tightness of the
-   enforcement constraint and (via the Euler equation) the interest rate
-   spread?  At $\delta = 1$ the LE constraint becomes
-   $V(n_j') \geq V_{\text{aut}}(Y_j)$; at $\delta \to 0$ it is vacuous.
+1. Using $v_{\text{aut}}$, compute
+   $v_{\text{aut}}^{\delta}(Y_j)$ for
+   $\delta \in \{0.5,\, 0.795,\, 0.95\}$ and $j=1,2$.
+2. For each $\delta$, compare the two enforcement thresholds.
+3. Discuss: how does a milder default penalty, corresponding to a larger
+   $\delta$, affect the tightness of the enforcement constraint and, via the
+   Euler equation, the interest rate spread? At $\delta = 1$ the LE constraint
+   becomes $v(n_j') \geq v_{\text{aut}}^{1}(Y_j)$; at $\delta \to 0$ it is
+   weak.
 ```{exercise-end}
 ```
 
@@ -891,37 +1824,60 @@ mystnb:
 ---
 fig, ax = plt.subplots()
 
-Vaut_f_global = interp1d(n_grid, V_aut, fill_value='extrapolate', bounds_error=False)
+def default_values_for_delta(δ_val, v_aut_arr, β_val=None):
+    """Compute v_aut^δ(Y_j), j=1,2, from the paper's default problem."""
+    if β_val is None:
+        β_val = β
 
-for δ_val, ls, color in [(0.50, ':', 'C0'), (0.795, '--', 'C1'), (0.95, '-', 'C2')]:
-    thresh1 = float(Vaut_f_global(δ_val * Y1))
-    thresh2 = float(Vaut_f_global(δ_val * Y2))
-    # Net worth lower bound from enforcement: n_j' >= V^{-1}(thresh_j)
-    # For illustration plot the thresholds
-    print(f"δ={δ_val:.3f}: V_aut(δ·Y1)={thresh1:.3f},  V_aut(δ·Y2)={thresh2:.3f}")
+    Ev1 = np.interp(Y1, n_grid, v_aut_arr)
+    Ev2 = np.interp(Y2, n_grid, v_aut_arr)
+    out = []
 
-ax.plot(n_grid, V_aut, lw=2)
-for δ_val, label in [(0.50, 'δ=0.50'), (0.795, 'δ=0.795'), (0.95, 'δ=0.95')]:
-    t1 = float(Vaut_f_global(δ_val * Y1))
-    t2 = float(Vaut_f_global(δ_val * Y2))
-    ax.axhline(t1, ls=':', lw=1.5, label=f'{label}: V_aut(δ·Y1)')
+    for Yj in (Y1, Y2):
+        I = I_search_grid[I_search_grid <= min(Yj, 1.0)]
+        c = δ_val * Yj - θ * I
+        l = λ(I)
+        obj = u(c) + β_val * ((1.0 - l) * Ev1 + l * Ev2)
+        obj = np.where(c > 1e-10, obj, -np.inf)
+        out.append(float(np.max(obj)))
 
-ax.set_xlabel('net worth $n$');  ax.set_ylabel('$V_{\\rm aut}(n)$')
+    return out
+
+for δ_val in (0.50, 0.795, 0.95):
+    thresh1, thresh2 = default_values_for_delta(δ_val, v_aut)
+    print(
+        f"δ={δ_val:.3f}: v_aut^δ(Y1)={thresh1:.3f}, "
+        f"v_aut^δ(Y2)={thresh2:.3f}"
+    )
+
+ax.plot(n_grid, v_aut, lw=2)
+for δ_val, color in [(0.50, 'C0'), (0.795, 'C1'), (0.95, 'C2')]:
+    t1, t2 = default_values_for_delta(δ_val, v_aut)
+    ax.axhline(t1, ls=':', color=color, lw=1.5,
+               label=fr'$\delta={δ_val}$: $v_{{\rm aut}}^\delta(Y_1)$')
+    ax.axhline(t2, ls='--', color=color, lw=1.0,
+               label=fr'$\delta={δ_val}$: $v_{{\rm aut}}^\delta(Y_2)$')
+
+ax.set_xlabel('net worth $n$')
+ax.set_ylabel(r'$v_{\rm aut}(n)$')
 ax.legend(fontsize=9)
 plt.tight_layout()
 plt.show()
 ```
 
-A harsher default penalty (larger $\delta$) raises the enforcement thresholds,
-tightening the participation constraints and reducing the scope for
-state-contingent repayment.
+A larger $\delta$ means a milder default penalty.
 
-Paradoxically, this may *reduce* the interest
-rate spread by forcing the lender to offer more consumption insurance to keep
-the borrower from defaulting.
+It raises the enforcement thresholds, tightens the participation constraints,
+and reduces the scope for state-contingent repayment.
+
+In the full model, this can make limited enforcement bind before the
+moral-hazard constraint does.
+
+Near the borrowing limit, limited enforcement can already force enough
+continuation-value dispersion to reduce the incentive multiplier.
 
 At $\delta \to 0$ the enforcement constraint is
-vacuous and the model collapses to pure moral hazard.
+weak and the model approaches pure moral hazard.
 
 ```{solution-end}
 ```
@@ -932,7 +1888,7 @@ vacuous and the model collapses to pure moral hazard.
 
 **Discounting wedge and impatience.**
 
-1. Re-solve the MH model for $\beta = \beta_c = 0.990$ (equal discounting —
+1. Re-solve the MH model for $\beta = \beta_c = 0.990$ (equal discounting ---
    no impatience wedge) and for $\beta = 0.950$ (larger wedge).
 2. For each case, plot the expected continuation net worth
    $\mathbb{E}[n'] = (1-\lambda(I^*))n_1' + \lambda(I^*)n_2'$ against $n$.
@@ -940,7 +1896,7 @@ vacuous and the model collapses to pure moral hazard.
    hazard in determining the stationary distribution of net worth?
 
 *Hint*: When $\beta = \beta_c$ the only force pushing net worth down is moral
-hazard (immiseration).  When $\beta < \beta_c$ there is an additional
+hazard (immiseration). When $\beta < \beta_c$ there is an additional
 front-loading incentive that the lender can exploit.
 ```{exercise-end}
 ```
@@ -958,10 +1914,14 @@ mystnb:
 ---
 fig, ax = plt.subplots()
 
-for β_val, ls, color in [(0.990, '-', 'C0'), (0.980, '--', 'C1'), (0.950, ':', 'C2')]:
-    V_a_tmp = autarky_vfi(β_val=β_val)
-    V_mh_tmp, pol_n1p_tmp, pol_n2p_tmp, pol_I_tmp, _ = mh_vfi(
-        V_a_tmp, β_val=β_val, max_iter=80)
+for β_val, ls, color in [
+    (0.990, '-', 'C0'),
+    (0.980, '--', 'C1'),
+    (0.950, ':', 'C2')
+]:
+    v_a_tmp = autarky_vfi(β_val=β_val)
+    v_mh_tmp, pol_n1p_tmp, pol_n2p_tmp, pol_I_tmp, _ = mh_vfi(
+        v_a_tmp, β_val=β_val)
 
     E_np = ((1 - λ(pol_I_tmp)) * pol_n1p_tmp
             + λ(pol_I_tmp) * pol_n2p_tmp)
@@ -982,10 +1942,9 @@ toward the borrowing limit.
 When $\beta = \beta_c$ moral hazard alone drives
 immiseration, while impatience accelerates it further.
 
-A small wedge
-(as calibrated by Tsyrennikov) is significant: it is *equivalent to
-increasing the borrower's discount rate by 2% per annum* (even though
-the assumed difference in quarterly rates is only 0.010).
+A small wedge, as calibrated by Tsyrennikov, is significant: it is equivalent
+to increasing the borrower's discount rate by 2% per annum, even though the
+assumed difference in quarterly rates is only 0.010.
 
 ```{solution-end}
 ```
@@ -994,22 +1953,19 @@ the assumed difference in quarterly rates is only 0.010).
 :label: tsyrennikov_2013_ex3
 ```
 
-**Non-contingency of optimal debt.**
+**The envelope condition.** In deriving the Euler equation
+{eq}`eq:tsyrennikov_euler` we used the envelope result
 
-The *risk-sharing index* $\text{RSI}(n) = (d_2(n) - d_1(n)) / (Y_2 - Y_1)$
-measures how state-contingent the repayment schedule is.
+$$
+v'(n) = u'(c) - \mu\,\theta\, u''(c),
+\qquad c = n + b - \theta I .
+$$
 
-RSI = 1 is full
-insurance; RSI = 0 is non-contingent debt.
+Derive it from the Lagrangian {eq}`eq:tsyrennikov_lagrangian`.
 
-1. Compute RSI for the MH model you have already solved.
-2. Now set $\beta = \beta_c$ (equal discounting) and recompute. Does
-   removing the impatience wedge change the near-zero RSI result?
-3. Explain *theoretically* why moral hazard drives RSI toward zero.
-
-*Hint*: From the Euler equation, the spread in marginal utilities
-$u'(c_1') / u'(c_2')$ depends on the IC multiplier $\mu$.  A larger $\mu$
-spreads continuation values but *not necessarily* repayments.
+*Hint*: By the envelope theorem, differentiate $\mathcal{L}$ with respect to the
+state $n$, holding the controls $(b, d, I)$ and the multipliers fixed. Identify
+which terms of $\mathcal{L}$ actually depend on $n$.
 ```{exercise-end}
 ```
 
@@ -1017,23 +1973,24 @@ spreads continuation values but *not necessarily* repayments.
 :class: dropdown
 ```
 
-```{code-cell} ipython3
-# RSI for the baseline MH model
-d1_mh = Y1 - pol_n1p
-d2_mh = Y2 - pol_n2p
-RSI   = (d2_mh - d1_mh) / (Y2 - Y1)
-active_RSI = RSI[λ(pol_I) > 0.01]
+The state $n$ enters the Lagrangian {eq}`eq:tsyrennikov_lagrangian` only through
+current consumption $c = n + b - \theta I$, and only in two terms: the period
+utility $u(n+b-\theta I)$ and the incentive term $-\mu\theta\,u'(n+b-\theta I)$.
 
-print(f"Baseline MH:  mean RSI = {np.mean(active_RSI):.4f},  "
-      f"max RSI = {np.max(active_RSI):.4f}")
-print()
-print("Theoretical explanation:")
-print(" Under moral hazard the planner must spread V(n2') - V(n1') to")
-print(" incentivise investment via the FOA.  This is achieved by setting")
-print(" n2' > n1', i.e. spreading *net worth*, not repayments.")
-print(" Since d_j = Y_j - n_j', if n2' - n1' = Y2 - Y1 then d1 = d2 (RSI=0).")
-print(" Moral hazard forces this near-equality, making debt non-contingent.")
-```
+By the envelope theorem we differentiate with respect to $n$ holding the controls
+and multipliers fixed.
+
+Since $\partial c/\partial n = 1$,
+
+$$
+v'(n) = \frac{\partial \mathcal{L}}{\partial n}
+      = u'(c)\cdot 1 + \mu\bigl(-\theta\, u''(c)\cdot 1\bigr)
+      = u'(c) - \mu\,\theta\, u''(c).
+$$
+
+Every other term depends only on the controls $(b, d, I)$ and on the
+continuation values $v(Y_j - d_j)$, none of which involve the current state $n$,
+so each contributes zero to $\partial \mathcal{L}/\partial n$.
 
 ```{solution-end}
 ```
