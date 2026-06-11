@@ -53,6 +53,68 @@ Tsyrennikov is also explicit about the model's main weakness.
 The mechanism improves the behavior of consumption, output and spreads, but it
 does not fully match the observed current-account dynamics.
 
+### The mechanism without figures
+
+A compact way to read the model is as follows.
+
+The borrower can use foreign funds for either current consumption or investment.
+Investment is costly today, but it raises the probability of high output
+tomorrow.
+
+If investment were observable and contracts were fully enforceable, the lender
+could insure the borrower almost completely.
+
+The contract would make the borrower's continuation net worth nearly the same
+after low and high output, smoothing consumption across states.
+
+Moral hazard prevents this.
+
+When investment is hidden, full insurance gives the borrower too little reason
+to invest.
+
+To make investment privately attractive, the contract must reward high output
+with a higher continuation value than low output:
+
+$$
+v(n_2') > v(n_1').
+$$
+
+This continuation-value spread is the borrower's incentive to invest.
+
+It also means that the risk-averse borrower must bear output risk.
+
+The optimal contract therefore cannot use much state-contingent repayment to
+smooth consumption.
+
+It ends up looking close to non-contingent debt: repayments vary little across
+output states, and insurance comes mainly from access to borrowing rather than
+from repayments that adjust strongly to output.
+
+The same force creates persistence.
+
+After a low-output realization, the borrower's net worth falls.
+
+Lower net worth reduces investment, lower investment lowers the probability of
+high output, and the economy becomes more likely to remain weak.
+
+Thus even i.i.d. output shocks generate persistent output dynamics through the
+investment channel.
+
+When net worth is low, the borrower is also closer to its borrowing limit and
+continuation values are more distorted by incentive provision.
+
+This raises the implied interest rate, making spreads high, volatile and
+countercyclical.
+
+Limited enforcement works differently.
+
+It restricts repayments because the borrower must prefer repayment to default,
+but by itself it can still allow substantial state-contingent insurance.
+
+Tsyrennikov's main quantitative result is that moral hazard, rather than
+limited enforcement, is the friction that makes the optimal contract resemble
+non-contingent debt and that generates the crisis-like dynamics.
+
 ## Empirical motivation
 
 The paper starts from three facts about Argentina, viewed as a representative
@@ -444,7 +506,50 @@ contract that is not incentive compatible, which proves the lemma.
 
 The subtle part of the argument is why the planner may freely raise $n_2'$.
 
-The figure below illustrates the two facts it rests on.
+Here is the same point without using a figure.
+
+If $S < 0$, then the high-output continuation value is lower than the low-output
+continuation value:
+
+$$
+v(n_2') < v(n_1').
+$$
+
+But investment raises the probability of the high-output state.
+
+So with $S < 0$, investment has two private costs for the borrower.
+
+It lowers current consumption, because $c = n + b - \theta I$, and it also
+raises the probability of receiving the worse continuation value.
+
+The borrower therefore has no reason to invest and chooses $I=0$.
+
+At $I=0$, the two-state technology gives $\lambda(0)=0$, so the high-output
+state occurs with probability zero.
+
+This means that the promised high-output continuation $n_2'$ is off the
+equilibrium path.
+
+Changing it does not affect current consumption, the borrower's payoff along the
+realized path, or the lender's participation constraint, because the repayment
+$d_2$ receives zero probability weight.
+
+Raising $n_2'$ also relaxes the high-state enforcement constraint, since the
+borrower is promised more value in that state.
+
+Thus the planner can raise $n_2'$ up to $n_1'$ without changing the allocation
+that actually occurs.
+
+After this change the spread is $S=0$ instead of $S<0$.
+
+Hence any candidate optimum with a negative spread can be replaced by an
+equivalent candidate with a nonnegative spread.
+
+That is why the relaxed problem can focus on $S \geq 0$, where the borrower's
+payoff is concave in investment and the first-order condition is sufficient for
+incentive compatibility.
+
+The figure below is only an optional visual check of this logic.
 
 ```{code-cell} ipython3
 ---
@@ -674,8 +779,55 @@ The resulting policy functions are intended to show the economic mechanism and
 to move the lecture figures closer to Figures 3 and 4 of
 {cite:t}`Tsyrennikov2013`.
 
-They should still not be read as a full replication of the paper's numerical
-algorithm, which uses cubic splines and tighter convergence tolerances.
+They should not be read as a full replication of the paper's numerical
+algorithm.
+
+The paper solves the Bellman equation iteratively, approximates the value
+function by a cubic spline on $[0.2, 1.2]$ with 100 nodes, and stops when the
+sup-norm change in the value function is below $10^{-5}$.
+
+For the limited-enforcement economies, Appendix B updates the endogenous
+borrowing limits with a damped rule that gives one-half weight to the previous
+limit and one-half weight to the new limit implied by the current value
+function.
+
+The lecture code below uses the same recursive economic problem, but a more
+transparent two-stage approximation.
+
+First, it computes the fixed point quickly with JAX, Howard policy iteration,
+linear interpolation of the value function, and a finite mesh of continuation
+net worth pairs $(n_1', n_2')$.
+
+Second, it polishes the resulting policy functions by re-optimizing each
+state's contract locally with SciPy, using a cubic spline approximation to the
+converged value function.
+
+The polishing step parameterizes the continuation pair by the low-state
+continuation $n_1'$ and the risk-sharing index
+
+$$
+\operatorname{RSI}
+    = \frac{d_2-d_1}{Y_2-Y_1}
+    = 1 - \frac{n_2'-n_1'}{Y_2-Y_1}.
+$$
+
+This makes the near-zero moral-hazard risk-sharing result numerically
+representable even when the coarse mesh used in the fixed-point step is modest.
+
+The plotted curves should therefore be read as polished numerical
+approximations to the same contract problem, not as a separate economic model.
+
+To reach a fixed point quickly, all three economies are solved by
+**Howard policy iteration** (also called modified policy iteration).
+
+Each outer iteration takes one greedy Bellman step, which re-optimizes the
+contract, and then holds that contract fixed while iterating the value a fixed
+number of times.
+
+Because the Bellman update is linear in the continuation values once the
+contract is fixed, these evaluation sweeps are cheap, and the method converges
+in a few dozen outer steps rather than the many hundreds that plain value
+function iteration would need at this discount factor.
 
 ### Parameters
 
@@ -687,7 +839,8 @@ In addition to what's in Anaconda, this lecture will need the following library:
 !pip install jax
 ```
 
-The computation uses JAX to vectorize the Bellman updates.
+The computation uses JAX to vectorize the Bellman updates and SciPy for the
+cubic splines and local policy-polishing problems.
 
 We will use the following imports:
 
@@ -699,6 +852,8 @@ config.update("jax_enable_x64", True)
 import jax
 import jax.numpy as jnp
 import matplotlib.pyplot as plt
+from scipy.interpolate import CubicSpline
+from scipy.optimize import minimize
 ```
 
 We store the parameters in a `NamedTuple`, with defaults calibrated to Argentina
@@ -790,24 +945,24 @@ I_search_grid = np.linspace(0.0, 1.0, N_I_search)
 I_search_grid_j = jnp.asarray(I_search_grid)
 
 # Mesh of candidate continuation pairs (n_1', n_2') for the MH step
-N_policy = 70
-n1p_candidates = np.linspace(n_lo,
-                             min(Y1 * 1.1, n_hi - 1e-4),
-                             N_policy)
-n2p_candidates = np.linspace(n_lo,
-                             min(Y2 * 1.05, n_hi - 1e-4),
-                             N_policy)
+N_policy = 90
+n1p_candidates = np.linspace(n_lo, n_hi, N_policy)
+n2p_candidates = np.linspace(n_lo, n_hi, N_policy)
 n1p_mesh, n2p_mesh = np.meshgrid(n1p_candidates, n2p_candidates,
                                  indexing='ij')
 n1p_flat_j = jnp.asarray(n1p_mesh.ravel())
 n2p_flat_j = jnp.asarray(n2p_mesh.ravel())
 ```
 
-The grid sizes above are deliberately modest so the lecture can execute quickly.
+The net-worth grid matches the paper's 100 nodes on $[0.2, 1.2]$.
 
-For a closer replication of the paper's spline computation, increase `N_n`,
-`N_policy`, `N_I_search`, and the `CONTRACT_MAX_ITER` value used by the
-contract solvers below.
+The policy mesh is deliberately modest so the lecture can execute quickly, and
+it spans the full value-function domain to avoid artificial upper-bound
+corners.
+
+For a more accurate but slower run, increase `N_policy` and `N_I_search`,
+lower `POLISH_TOL`, and tighten the `CONTRACT_TOL` used by the contract solvers
+below.
 
 ### Autarky value function
 
@@ -955,10 +1110,18 @@ endogenous borrowing limits instead.
 
 For LE, investment is observable, so the planner chooses it directly.
 
+Each Bellman step returns both the improved value and the greedy contract, and a
+shared routine `policy_eval_jax` then performs the Howard policy-evaluation
+sweeps that hold that contract fixed.
+
+In the two limited-enforcement economies, the endogenous borrowing limits are
+refreshed once per outer iteration with a damped update.
+
 ```{code-cell} ipython3
 BIG_LOAN_CAP = 1e6
-CONTRACT_TOL = 1e-5
-CONTRACT_MAX_ITER = 10_000
+CONTRACT_TOL = 1e-6
+CONTRACT_MAX_ITER = 1_000
+HOWARD_EVAL_STEPS = 80
 
 
 def contract_initial_upper(β_val, loan_upper):
@@ -1064,7 +1227,7 @@ def mh_bellman_step_jax(v, v_aut_arr, I_aut_arr, nbar1, nbar2,
                       jnp.take_along_axis(b_all, idx[:, None], axis=1)[:, 0])
     v_new = jnp.where(use_fallback, v_aut_arr, best_val)
 
-    return v_new, pol_n1p, pol_n2p, pol_I, pol_b
+    return v_new, pol_n1p, pol_n2p, pol_I, pol_b, use_fallback
 
 
 @jax.jit
@@ -1141,7 +1304,29 @@ def le_bellman_step_jax(v, v_aut_arr, I_aut_arr, nbar1, nbar2,
                       jnp.take_along_axis(b, idx[:, None], axis=1)[:, 0])
     v_new = jnp.where(use_fallback, v_aut_arr, best_val)
 
-    return v_new, pol_n1p, pol_n2p, pol_I, pol_b
+    return v_new, pol_n1p, pol_n2p, pol_I, pol_b, use_fallback
+
+
+@jax.jit
+def policy_eval_jax(v, v_aut_arr, pol_n1p, pol_n2p, pol_I, pol_b,
+                    use_fallback, β_val):
+    """Howard policy evaluation: iterate the value under a fixed policy.
+
+    Once the greedy contract (b, n_1', n_2', I) is fixed, the Bellman update
+    is linear in the continuation values, so the period return R = u(c) and
+    the high-output weight λ(I) can be precomputed and the cheap evaluation
+    sweep applied many times before re-optimizing.
+    """
+    R = u(n_grid_j + pol_b - θ * pol_I)
+    l = λ(pol_I)
+
+    def eval_step(_, v):
+        v1 = jnp.interp(pol_n1p, n_grid_j, v)
+        v2 = jnp.interp(pol_n2p, n_grid_j, v)
+        v_pol = R + β_val * ((1.0 - l) * v1 + l * v2)
+        return jnp.where(use_fallback, v_aut_arr, v_pol)
+
+    return jax.lax.fori_loop(0, HOWARD_EVAL_STEPS, eval_step, v)
 
 
 def update_nbars(v_arr, nbars, v_default, relaxation=0.5):
@@ -1153,49 +1338,59 @@ def update_nbars(v_arr, nbars, v_default, relaxation=0.5):
 
 def mh_vfi(v_aut, β_val=None, β_c_val=None, tol=CONTRACT_TOL,
            max_iter=CONTRACT_MAX_ITER,
-           relaxation=0.6, limited_enforcement=False, loan_cap=M,
+           limited_enforcement=False, loan_cap=M,
            verbose=False, return_limits=False):
-    """Value function iteration for MH and MH+LE."""
+    """Howard policy iteration for MH and MH+LE."""
     if β_val is None:
         β_val = β
     if β_c_val is None:
         β_c_val = β_c
 
     _, I_aut_arr = autarky_policy(v_aut, β_val=β_val)
+    I_aut_j = jnp.asarray(I_aut_arr)
+    v_aut_j = jnp.asarray(v_aut)
     v_default = default_values(v_aut, β_val=β_val)
     nbars = np.array([n_lo, n_lo])
     loan_upper = loan_cap if loan_cap < BIG_LOAN_CAP / 2 else Y2 - n_lo
-    v = contract_initial_upper(β_val, loan_upper)
+    v = jnp.asarray(contract_initial_upper(β_val, loan_upper))
     label = 'MH+LE' if limited_enforcement else 'MH'
 
     for it in range(max_iter):
-        v_raw, pol_n1p, pol_n2p, pol_I, pol_b = mh_bellman_step_jax(
-            jnp.asarray(v), jnp.asarray(v_aut), jnp.asarray(I_aut_arr),
-            nbars[0], nbars[1], loan_cap, β_val, β_c_val)
-        v_raw = np.asarray(v_raw)
-        v_new = (1 - relaxation) * v + relaxation * v_raw
+        # Policy improvement: one greedy Bellman step.
+        (v_greedy, pol_n1p, pol_n2p, pol_I, pol_b,
+         use_fb) = mh_bellman_step_jax(
+            v, v_aut_j, I_aut_j, nbars[0], nbars[1],
+            loan_cap, β_val, β_c_val)
+        # Policy evaluation: iterate the value under the fixed policy.
+        v_new = policy_eval_jax(v_greedy, v_aut_j, pol_n1p, pol_n2p,
+                                pol_I, pol_b, use_fb, β_val)
         limit_diff = 0.0
         if limited_enforcement:
-            nbars_new = update_nbars(v_new, nbars, v_default)
+            nbars_new = update_nbars(np.asarray(v_new), nbars, v_default)
             limit_diff = np.max(np.abs(nbars_new - nbars))
             nbars = nbars_new
-        diff = max(np.max(np.abs(v_new - v)), limit_diff)
+        diff = max(float(jnp.max(jnp.abs(v_new - v))), limit_diff)
         v = v_new
-        if verbose and ((it + 1) % 20 == 0 or diff < tol):
-            print(f"  iter {it+1:3d},  diff = {diff:.5f}, "
+        if verbose and ((it + 1) % 5 == 0 or diff < tol):
+            print(f"  iter {it+1:3d},  diff = {diff:.2e}, "
                   f"nbars = {nbars}")
         if diff < tol:
             break
 
+    v = np.asarray(v)
+    if diff >= tol:
+        raise RuntimeError(
+            f"{label} HPI failed to converge after {max_iter} iterations "
+            f"(diff = {diff:.3e})"
+        )
     if verbose:
-        status = 'converged' if diff < tol else 'stopped'
         print(
-            f"{label} VFI {status} after {it + 1} iterations: "
+            f"{label} HPI converged after {it + 1} iterations: "
             f"diff = {diff:.3e}, nbars = {np.round(nbars, 4)}"
         )
 
-    _, pol_n1p, pol_n2p, pol_I, pol_b = mh_bellman_step_jax(
-        jnp.asarray(v), jnp.asarray(v_aut), jnp.asarray(I_aut_arr),
+    _, pol_n1p, pol_n2p, pol_I, pol_b, _ = mh_bellman_step_jax(
+        jnp.asarray(v), v_aut_j, I_aut_j,
         nbars[0], nbars[1], loan_cap, β_val, β_c_val)
 
     result = (v, np.asarray(pol_n1p), np.asarray(pol_n2p),
@@ -1207,44 +1402,53 @@ def mh_vfi(v_aut, β_val=None, β_c_val=None, tol=CONTRACT_TOL,
 
 def le_vfi(v_aut, β_val=None, β_c_val=None, tol=CONTRACT_TOL,
            max_iter=CONTRACT_MAX_ITER,
-           relaxation=0.6, verbose=False, return_limits=False):
-    """Value function iteration for the LE-only economy."""
+           verbose=False, return_limits=False):
+    """Howard policy iteration for the LE-only economy."""
     if β_val is None:
         β_val = β
     if β_c_val is None:
         β_c_val = β_c
 
     _, I_aut_arr = autarky_policy(v_aut, β_val=β_val)
+    I_aut_j = jnp.asarray(I_aut_arr)
+    v_aut_j = jnp.asarray(v_aut)
     v_default = default_values(v_aut, β_val=β_val)
     nbars = np.array([n_lo, n_lo])
-    v = contract_initial_upper(β_val, Y2 - n_lo)
+    v = jnp.asarray(contract_initial_upper(β_val, Y2 - n_lo))
 
     for it in range(max_iter):
-        v_raw, pol_n1p, pol_n2p, pol_I, pol_b = le_bellman_step_jax(
-            jnp.asarray(v), jnp.asarray(v_aut), jnp.asarray(I_aut_arr),
-            nbars[0], nbars[1], β_val, β_c_val)
-        v_raw = np.asarray(v_raw)
-        v_new = (1 - relaxation) * v + relaxation * v_raw
-        nbars_new = update_nbars(v_new, nbars, v_default)
+        # Policy improvement: one greedy Bellman step.
+        (v_greedy, pol_n1p, pol_n2p, pol_I, pol_b,
+         use_fb) = le_bellman_step_jax(
+            v, v_aut_j, I_aut_j, nbars[0], nbars[1], β_val, β_c_val)
+        # Policy evaluation: iterate the value under the fixed policy.
+        v_new = policy_eval_jax(v_greedy, v_aut_j, pol_n1p, pol_n2p,
+                                pol_I, pol_b, use_fb, β_val)
+        nbars_new = update_nbars(np.asarray(v_new), nbars, v_default)
         limit_diff = np.max(np.abs(nbars_new - nbars))
         nbars = nbars_new
-        diff = max(np.max(np.abs(v_new - v)), limit_diff)
+        diff = max(float(jnp.max(jnp.abs(v_new - v))), limit_diff)
         v = v_new
-        if verbose and ((it + 1) % 20 == 0 or diff < tol):
-            print(f"  iter {it+1:3d},  diff = {diff:.5f}, "
+        if verbose and ((it + 1) % 5 == 0 or diff < tol):
+            print(f"  iter {it+1:3d},  diff = {diff:.2e}, "
                   f"nbars = {nbars}")
         if diff < tol:
             break
 
+    v = np.asarray(v)
+    if diff >= tol:
+        raise RuntimeError(
+            f"LE HPI failed to converge after {max_iter} iterations "
+            f"(diff = {diff:.3e})"
+        )
     if verbose:
-        status = 'converged' if diff < tol else 'stopped'
         print(
-            f"LE VFI {status} after {it + 1} iterations: "
+            f"LE HPI converged after {it + 1} iterations: "
             f"diff = {diff:.3e}, nbars = {np.round(nbars, 4)}"
         )
 
-    _, pol_n1p, pol_n2p, pol_I, pol_b = le_bellman_step_jax(
-        jnp.asarray(v), jnp.asarray(v_aut), jnp.asarray(I_aut_arr),
+    _, pol_n1p, pol_n2p, pol_I, pol_b, _ = le_bellman_step_jax(
+        jnp.asarray(v), v_aut_j, I_aut_j,
         nbars[0], nbars[1], β_val, β_c_val)
 
     result = (v, np.asarray(pol_n1p), np.asarray(pol_n2p),
@@ -1270,10 +1474,283 @@ v_mh, pol_n1p, pol_n2p, pol_I, pol_b = mh_vfi(v_aut, verbose=True)
 The helper functions below convert policies into repayments, risk-sharing
 indices, capital-outflow schedules and implied interest rates.
 
+Before constructing the figures, the raw finite-mesh policies are polished by
+continuous local optimization.
+
+This step is controlled by `POLISH_POLICIES` and can be turned off when exact
+grid policies are desired.
+
 ```{code-cell} ipython3
 def λ_np(I):
     """NumPy version of λ for plotting and simulation."""
     return np.minimum(np.asarray(I)**ν, 1.0)
+
+
+def λ_prime_np(I):
+    """Derivative of λ(I)=I^ν on the interior."""
+    return ν * np.maximum(np.asarray(I), 1e-12)**(ν - 1.0)
+
+
+def u_np(c):
+    """NumPy CRRA utility."""
+    c = np.maximum(np.asarray(c), 1e-12)
+    return c**(1.0 - γ) / (1.0 - γ)
+
+
+def u_prime_np(c):
+    """NumPy marginal utility."""
+    return np.maximum(np.asarray(c), 1e-12)**(-γ)
+
+
+POLISH_POLICIES = True
+POLISH_TOL = 1e-9
+PLOT_GRID = np.linspace(n_lo, n_hi, 400)
+RSI_BOUNDS = (-0.25, 1.00)
+Y_gap = Y2 - Y1
+
+
+def continuation_from_rsi(n1p, rsi):
+    """Recover n_2' from n_1' and the risk-sharing index."""
+    return n1p + (1.0 - rsi) * Y_gap
+
+
+def rsi_from_continuations(n1p, n2p):
+    """Risk-sharing index implied by continuation net worths."""
+    return 1.0 - (n2p - n1p) / Y_gap
+
+
+def value_spline(v_arr):
+    """Cubic spline approximation to a converged value function."""
+    return CubicSpline(n_grid, np.asarray(v_arr), bc_type='natural')
+
+
+def eval_v(vs, n):
+    """Evaluate a value spline on the supported domain."""
+    return float(vs(np.clip(n, n_lo, n_hi)))
+
+
+def bisect_mh_investment(f, lo=1e-7, hi=1.0 - 1e-7, max_iter=70):
+    """Solve the scalar MH first-order condition robustly."""
+    flo = f(lo)
+    fhi = f(hi)
+    if not np.isfinite(flo) or not np.isfinite(fhi):
+        return None
+    if flo >= 0.0:
+        return lo
+    if fhi <= 0.0:
+        return hi
+
+    for _ in range(max_iter):
+        mid = 0.5 * (lo + hi)
+        fmid = f(mid)
+        if not np.isfinite(fmid):
+            hi = mid
+        elif fmid > 0.0:
+            hi = mid
+        else:
+            lo = mid
+    return 0.5 * (lo + hi)
+
+
+def mh_contract_value(n, n1p, rsi, vs, nbar1, nbar2,
+                      loan_cap, β_val=β, β_c_val=β_c):
+    """Best MH contract value for a candidate (n_1', RSI)."""
+    n2p = continuation_from_rsi(n1p, rsi)
+    if not (nbar1 <= n1p <= n_hi and nbar2 <= n2p <= n_hi):
+        return None
+
+    v1 = eval_v(vs, n1p)
+    v2 = eval_v(vs, n2p)
+    Δv = v2 - v1
+    if Δv <= 1e-10:
+        return None
+
+    d1 = Y1 - n1p
+    d2 = Y2 - n2p
+
+    def lender_value(I):
+        l = λ_np(I)
+        return β_c_val * ((1.0 - l) * d1 + l * d2)
+
+    candidates = []
+
+    def add_candidate(b_fun, participation_check):
+        def foc(I):
+            c = n + b_fun(I) - θ * I
+            if c <= 1e-10:
+                return np.inf
+            return θ * u_prime_np(c) - β_val * λ_prime_np(I) * Δv
+
+        I_star = bisect_mh_investment(foc)
+        if I_star is None:
+            return
+        b_star = b_fun(I_star)
+        c_star = n + b_star - θ * I_star
+        if c_star <= 1e-10 or b_star < -1e-8:
+            return
+        if not participation_check(I_star, b_star):
+            return
+        l_star = λ_np(I_star)
+        val = u_np(c_star) + β_val * ((1.0 - l_star) * v1 + l_star * v2)
+        candidates.append((float(val), n1p, n2p, float(I_star), float(b_star)))
+
+    add_candidate(
+        lender_value,
+        lambda I, b: b <= loan_cap + 1e-8
+    )
+
+    if loan_cap < BIG_LOAN_CAP / 2:
+        add_candidate(
+            lambda I: loan_cap,
+            lambda I, b: lender_value(I) >= b - 1e-8
+        )
+
+    if not candidates:
+        return None
+    return max(candidates, key=lambda x: x[0])
+
+
+def le_contract_value(n, n1p, rsi, I, vs, nbar1, nbar2,
+                      β_val=β, β_c_val=β_c):
+    """LE contract value for a candidate (n_1', RSI, I)."""
+    n2p = continuation_from_rsi(n1p, rsi)
+    if not (nbar1 <= n1p <= n_hi and nbar2 <= n2p <= n_hi):
+        return None
+
+    d1 = Y1 - n1p
+    d2 = Y2 - n2p
+    l = λ_np(I)
+    b = β_c_val * ((1.0 - l) * d1 + l * d2)
+    c = n + b - θ * I
+    if c <= 1e-10 or b < -1e-8:
+        return None
+
+    v1 = eval_v(vs, n1p)
+    v2 = eval_v(vs, n2p)
+    val = u_np(c) + β_val * ((1.0 - l) * v1 + l * v2)
+    return float(val), n1p, n2p, float(I), float(b)
+
+
+def polish_mh_state(n, raw_n1p, raw_n2p, vs, nbar1, nbar2, loan_cap):
+    """Local continuous re-optimization of one MH policy point."""
+    raw_rsi = rsi_from_continuations(raw_n1p, raw_n2p)
+    starts = [
+        (raw_n1p, raw_rsi),
+        (raw_n1p, 0.0),
+        (raw_n1p, 0.005),
+        (max(nbar1, raw_n1p - 0.03), 0.0),
+        (min(n_hi, raw_n1p + 0.03), 0.0)
+    ]
+
+    def objective(x):
+        out = mh_contract_value(n, x[0], x[1], vs, nbar1, nbar2, loan_cap)
+        return 1e8 if out is None else -out[0]
+
+    best = None
+    for start in starts:
+        x0 = np.array([np.clip(start[0], nbar1, n_hi),
+                       np.clip(start[1], *RSI_BOUNDS)])
+        out0 = mh_contract_value(n, x0[0], x0[1], vs, nbar1, nbar2, loan_cap)
+        if out0 is not None and (best is None or out0[0] > best[0]):
+            best = out0
+        res = minimize(objective, x0, method='Nelder-Mead',
+                       options={'xatol': POLISH_TOL, 'fatol': POLISH_TOL,
+                                'maxiter': 500})
+        x = np.array([np.clip(res.x[0], nbar1, n_hi),
+                      np.clip(res.x[1], *RSI_BOUNDS)])
+        out = mh_contract_value(n, x[0], x[1], vs, nbar1, nbar2, loan_cap)
+        if out is not None and (best is None or out[0] > best[0]):
+            best = out
+
+    return best
+
+
+def polish_le_state(n, raw_n1p, raw_n2p, raw_I, vs, nbar1, nbar2):
+    """Local continuous re-optimization of one LE policy point."""
+    raw_rsi = rsi_from_continuations(raw_n1p, raw_n2p)
+    starts = [
+        (raw_n1p, raw_rsi, raw_I),
+        (raw_n1p, 0.80, raw_I),
+        (raw_n1p, 1.00, raw_I),
+        (max(nbar1, raw_n1p - 0.03), 0.80, raw_I),
+        (min(n_hi, raw_n1p + 0.03), 0.80, raw_I)
+    ]
+
+    def objective(x):
+        out = le_contract_value(n, x[0], x[1], x[2], vs, nbar1, nbar2)
+        return 1e8 if out is None else -out[0]
+
+    best = None
+    for start in starts:
+        x0 = np.array([np.clip(start[0], nbar1, n_hi),
+                       np.clip(start[1], *RSI_BOUNDS),
+                       np.clip(start[2], 0.0, 1.0 - 1e-7)])
+        out0 = le_contract_value(n, x0[0], x0[1], x0[2], vs, nbar1, nbar2)
+        if out0 is not None and (best is None or out0[0] > best[0]):
+            best = out0
+        res = minimize(objective, x0, method='Nelder-Mead',
+                       options={'xatol': POLISH_TOL, 'fatol': POLISH_TOL,
+                                'maxiter': 700})
+        x = np.array([np.clip(res.x[0], nbar1, n_hi),
+                      np.clip(res.x[1], *RSI_BOUNDS),
+                      np.clip(res.x[2], 0.0, 1.0 - 1e-7)])
+        out = le_contract_value(n, x[0], x[1], x[2], vs, nbar1, nbar2)
+        if out is not None and (best is None or out[0] > best[0]):
+            best = out
+
+    return best
+
+
+def polish_mh_policy(v_arr, n1p_arr, n2p_arr, I_arr, b_arr,
+                     nbars=None, loan_cap=M):
+    """Polish all MH or MH+LE policy points with continuous local search."""
+    vs = value_spline(v_arr)
+    nbar1, nbar2 = (n_lo, n_lo) if nbars is None else nbars
+    out_v, out_n1p, out_n2p, out_I, out_b = [], [], [], [], []
+    failures = 0
+
+    for n, n1_raw, n2_raw, I_raw, b_raw, v_raw in zip(
+            n_grid, n1p_arr, n2p_arr, I_arr, b_arr, v_arr):
+        best = polish_mh_state(n, n1_raw, n2_raw, vs,
+                               nbar1, nbar2, loan_cap)
+        if best is None:
+            failures += 1
+            best = (v_raw, n1_raw, n2_raw, I_raw, b_raw)
+        val, n1p, n2p, I, b = best
+        out_v.append(val)
+        out_n1p.append(n1p)
+        out_n2p.append(n2p)
+        out_I.append(I)
+        out_b.append(b)
+
+    if failures:
+        print(f"MH polish fallback points: {failures}")
+    return map(np.asarray, (out_v, out_n1p, out_n2p, out_I, out_b))
+
+
+def polish_le_policy(v_arr, n1p_arr, n2p_arr, I_arr, b_arr, nbars):
+    """Polish all LE policy points with continuous local search."""
+    vs = value_spline(v_arr)
+    nbar1, nbar2 = nbars
+    out_v, out_n1p, out_n2p, out_I, out_b = [], [], [], [], []
+    failures = 0
+
+    for n, n1_raw, n2_raw, I_raw, b_raw, v_raw in zip(
+            n_grid, n1p_arr, n2p_arr, I_arr, b_arr, v_arr):
+        best = polish_le_state(n, n1_raw, n2_raw, I_raw, vs, nbar1, nbar2)
+        if best is None:
+            failures += 1
+            best = (v_raw, n1_raw, n2_raw, I_raw, b_raw)
+        val, n1p, n2p, I, b = best
+        out_v.append(val)
+        out_n1p.append(n1p)
+        out_n2p.append(n2p)
+        out_I.append(I)
+        out_b.append(b)
+
+    if failures:
+        print(f"LE polish fallback points: {failures}")
+    return map(np.asarray, (out_v, out_n1p, out_n2p, out_I, out_b))
 
 
 def make_policy(name, n1p, n2p, I, b, v, nbars=None):
@@ -1281,7 +1758,7 @@ def make_policy(name, n1p, n2p, I, b, v, nbars=None):
     d1 = Y1 - n1p
     d2 = Y2 - n2p
     l = λ_np(I)
-    return {
+    policy = {
         'name': name,
         'n1p': n1p,
         'n2p': n2p,
@@ -1297,6 +1774,24 @@ def make_policy(name, n1p, n2p, I, b, v, nbars=None):
         'ca1': Y1 - n_grid - b,
         'ca2': Y2 - n_grid - b
     }
+    spline_keys = ['n1p', 'n2p', 'I', 'b', 'v', 'd1', 'd2', 'λ',
+                   'Enp', 'RSI', 'ca1', 'ca2']
+    policy['splines'] = {
+        key: CubicSpline(n_grid, policy[key], bc_type='natural')
+        for key in spline_keys
+    }
+    return policy
+
+
+if POLISH_POLICIES:
+    v_mh, pol_n1p, pol_n2p, pol_I, pol_b = polish_mh_policy(
+        v_mh, pol_n1p, pol_n2p, pol_I, pol_b, loan_cap=M)
+    v_mhle, pol_n1p_mhle, pol_n2p_mhle, pol_I_mhle, pol_b_mhle = (
+        polish_mh_policy(v_mhle, pol_n1p_mhle, pol_n2p_mhle,
+                         pol_I_mhle, pol_b_mhle, nbars_mhle,
+                         loan_cap=BIG_LOAN_CAP))
+    v_le, pol_n1p_le, pol_n2p_le, pol_I_le, pol_b_le = polish_le_policy(
+        v_le, pol_n1p_le, pol_n2p_le, pol_I_le, pol_b_le, nbars_le)
 
 
 policies = {
@@ -1309,9 +1804,14 @@ policies = {
 
 
 def policy_at(policy, key, n):
-    """Interpolate a policy at net worth n, clipping to the grid support."""
+    """Cubic-spline interpolation of a policy at net worth n."""
     n_clip = np.clip(n, n_grid[0], n_grid[-1])
-    return float(np.interp(n_clip, n_grid, policy[key]))
+    return float(policy['splines'][key](n_clip))
+
+
+def policy_curve(policy, key):
+    """Evaluate a policy on the dense grid used in the figures."""
+    return policy['splines'][key](PLOT_GRID)
 
 
 def next_period_c(policy, n_next):
@@ -1351,9 +1851,13 @@ def repeated_low_limit(policy, T=100):
 
 
 n_low_mh = repeated_low_limit(policies['MH'])
+n_low_mhle = repeated_low_limit(policies['MH+LE'])
 n_low_le = repeated_low_limit(policies['LE'])
 print(f"Approximate low-state limit, MH: {n_low_mh:.4f}")
+print(f"Approximate low-state limit, MH+LE: {n_low_mhle:.4f}")
 print(f"Approximate low-state limit, LE: {n_low_le:.4f}")
+
+low_limits = {'MH': n_low_mh, 'MH+LE': n_low_mhle, 'LE': n_low_le}
 
 
 def print_policy_diagnostics(policies):
@@ -1362,17 +1866,24 @@ def print_policy_diagnostics(policies):
     for name, policy in policies.items():
         active = policy['λ'] > 0.01
         rsi_active = policy['RSI'][active]
+        support_lo = max(0.38, low_limits[name] - 1e-8)
+        support = ((n_grid >= support_lo) & (n_grid <= 1.02)
+                   & (policy['λ'] > 0.01) & (policy['λ'] < 0.99))
+        rsi_support = policy['RSI'][support]
         n1_floor = np.sum(np.isclose(policy['n1p'], n_lo))
         n2_floor = np.sum(np.isclose(policy['n2p'], n_lo))
         nbars = policy['nbars']
         nbars_text = "none" if nbars is None else np.array2string(
             np.round(nbars, 4))
+        support_max_abs = (np.nan if rsi_support.size == 0
+                           else np.nanmax(np.abs(rsi_support)))
         print(
             f"{name:5s}: "
             f"λ=[{np.nanmin(policy['λ']):.3f}, {np.nanmax(policy['λ']):.3f}], "
             f"b=[{np.nanmin(policy['b']):.3f}, {np.nanmax(policy['b']):.3f}], "
             f"RSI_active_mean={np.nanmean(rsi_active):.4f}, "
             f"RSI_active_max={np.nanmax(rsi_active):.4f}, "
+            f"RSI_support_max_abs={support_max_abs:.4f}, "
             f"n1'=[{np.nanmin(policy['n1p']):.3f}, "
             f"{np.nanmax(policy['n1p']):.3f}], "
             f"n2'=[{np.nanmin(policy['n2p']):.3f}, "
@@ -1396,17 +1907,20 @@ mystnb:
 ---
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
-axes[0].plot(n_grid, v_aut, lw=2, color='0.45', label='Autarky')
+axes[0].plot(PLOT_GRID, CubicSpline(n_grid, v_aut, bc_type='natural')(PLOT_GRID),
+             lw=2, color='0.45', label='Autarky')
 for name, style in [('MH', '-'), ('MH+LE', '--'), ('LE', ':')]:
-    axes[0].plot(n_grid, policies[name]['v'], lw=2, ls=style, label=name)
+    axes[0].plot(PLOT_GRID, policy_curve(policies[name], 'v'),
+                 lw=2, ls=style, label=name)
 axes[0].set_xlabel('net worth $n$')
 axes[0].set_ylabel('value')
 axes[0].legend()
 
 for name, style in [('MH', '-'), ('MH+LE', '--'), ('LE', ':')]:
-    active = policies[name]['λ'] > 0.01
-    rsi_plot = np.where(active, policies[name]['RSI'], np.nan)
-    axes[1].plot(n_grid, rsi_plot, lw=2, ls=style, label=name)
+    λ_plot = policy_curve(policies[name], 'λ')
+    rsi_plot = np.where(λ_plot > 0.01,
+                        policy_curve(policies[name], 'RSI'), np.nan)
+    axes[1].plot(PLOT_GRID, rsi_plot, lw=2, ls=style, label=name)
 axes[1].axhline(1.0, ls=':', color='k', lw=1,
                 label='Full insurance')
 axes[1].axhline(0.0, ls='--', color='k', lw=1,
@@ -1422,8 +1936,12 @@ plt.show()
 for name in ['MH', 'MH+LE', 'LE']:
     active = policies[name]['λ'] > 0.01
     rsi_active = policies[name]['RSI'][active]
+    support_lo = max(0.38, low_limits[name] - 1e-8)
+    support = ((n_grid >= support_lo) & (n_grid <= 1.02)
+               & (policies[name]['λ'] > 0.01) & (policies[name]['λ'] < 0.99))
+    rsi_support = policies[name]['RSI'][support]
     print(f"{name:5s}: mean RSI = {np.mean(rsi_active): .4f}, "
-          f"max RSI = {np.max(rsi_active): .4f}")
+          f"max RSI on support = {np.max(np.abs(rsi_support)): .4f}")
 ```
 
 In {cite:t}`Tsyrennikov2013`, the moral-hazard economy has essentially
@@ -1432,11 +1950,16 @@ state non-contingent repayment: the maximal risk-sharing index is below 0.01.
 In the limited-enforcement economy, by contrast, the same index is about 0.80
 on average, so the contract offers a significant amount of insurance.
 
-The compact grid computation should be read against that benchmark.
+The polished computation should be read against that benchmark.
 
-The diagnostic to watch is not the exact maximum at grid endpoints, but whether
-the repayment schedule $\{d_1(n), d_2(n)\}$ is nearly state non-contingent under
-moral hazard and much more state contingent under limited enforcement.
+The diagnostic to watch is not the exact maximum at grid endpoints or at
+near-certain investment corners, but whether the repayment schedule
+$\{d_1(n), d_2(n)\}$ is nearly state non-contingent on the economically relevant
+support under moral hazard and much more state contingent under limited
+enforcement.
+
+Any remaining endpoint irregularities should be interpreted as numerical
+approximation artifacts rather than features of the contract in the paper.
 
 This is the paper's central policy result: under moral hazard nearly all the
 risk is assumed by the risk-averse borrower, and insurance comes mainly through
@@ -1465,48 +1988,65 @@ for a in ax:
     a.axvline(n_low_le, color='0.55', lw=1, ls=':')
     a.set_xlim(0.38, 1.02)
 
-ax[0].plot(n_grid, policies['MH']['λ'], lw=2, label='MH')
-ax[0].plot(n_grid, policies['MH+LE']['λ'], lw=2, ls='--', label='MH+LE')
-ax[0].plot(n_grid, policies['LE']['λ'], lw=2, ls=':', label='LE')
+ax[0].plot(PLOT_GRID, policy_curve(policies['MH'], 'λ'), lw=2, label='MH')
+ax[0].plot(PLOT_GRID, policy_curve(policies['MH+LE'], 'λ'),
+           lw=2, ls='--', label='MH+LE')
+ax[0].plot(PLOT_GRID, policy_curve(policies['LE'], 'λ'),
+           lw=2, ls=':', label='LE')
 ax[0].set_ylabel(r'$\lambda(I)$')
 ax[0].set_title('A. investment')
 ax[0].legend(fontsize=9)
 
 for name, style in [('MH', '-'), ('MH+LE', '--'), ('LE', ':')]:
-    ax[1].plot(n_grid, policies[name]['Enp'], lw=2, ls=style, label=name)
-ax[1].plot(n_grid, n_grid, color='k', lw=1, ls=':', label='45-degree')
+    ax[1].plot(PLOT_GRID, policy_curve(policies[name], 'Enp'),
+               lw=2, ls=style, label=name)
+ax[1].plot(PLOT_GRID, PLOT_GRID, color='k', lw=1, ls=':',
+           label='45-degree')
 ax[1].set_ylabel(r"$E[n']$")
 ax[1].set_title('B. expected future net worth')
 ax[1].legend(fontsize=9)
 
-ax[2].plot(n_grid, policies['MH']['b'], lw=2, label=r'$b_{MH}$')
-ax[2].plot(n_grid, policies['MH']['d1'], lw=2, ls='--', label=r'$d_{1,MH}$')
-ax[2].plot(n_grid, policies['MH']['d2'], lw=2, ls=':', label=r'$d_{2,MH}$')
+ax[2].plot(PLOT_GRID, policy_curve(policies['MH'], 'b'),
+           lw=2, label=r'$b_{MH}$')
+ax[2].plot(PLOT_GRID, policy_curve(policies['MH'], 'd1'),
+           lw=2, ls='--', label=r'$d_{1,MH}$')
+ax[2].plot(PLOT_GRID, policy_curve(policies['MH'], 'd2'),
+           lw=2, ls=':', label=r'$d_{2,MH}$')
 ax[2].set_ylabel('loan and repayment')
 ax[2].set_title('C. MH contract')
 ax[2].legend(fontsize=9)
 
-ax[3].plot(n_grid, policies['LE']['b'], lw=2, label=r'$b_{LE}$')
-ax[3].plot(n_grid, policies['LE']['d1'], lw=2, ls='--', label=r'$d_{1,LE}$')
-ax[3].plot(n_grid, policies['LE']['d2'], lw=2, ls=':', label=r'$d_{2,LE}$')
+ax[3].plot(PLOT_GRID, policy_curve(policies['LE'], 'b'),
+           lw=2, label=r'$b_{LE}$')
+ax[3].plot(PLOT_GRID, policy_curve(policies['LE'], 'd1'),
+           lw=2, ls='--', label=r'$d_{1,LE}$')
+ax[3].plot(PLOT_GRID, policy_curve(policies['LE'], 'd2'),
+           lw=2, ls=':', label=r'$d_{2,LE}$')
 ax[3].set_ylabel('loan and repayment')
 ax[3].set_title('D. LE contract')
 ax[3].legend(fontsize=9)
 
-ax[4].plot(n_grid, policies['MH']['ca1'], lw=2, label=r'$ca_{1,MH}$')
-ax[4].plot(n_grid, policies['MH']['ca2'], lw=2, ls='--', label=r'$ca_{2,MH}$')
-ax[4].plot(n_grid, policies['LE']['ca1'], lw=2, ls=':', label=r'$ca_{1,LE}$')
-ax[4].plot(n_grid, policies['LE']['ca2'], lw=2, ls='-.', label=r'$ca_{2,LE}$')
+ax[4].plot(PLOT_GRID, policy_curve(policies['MH'], 'ca1'),
+           lw=2, label=r'$ca_{1,MH}$')
+ax[4].plot(PLOT_GRID, policy_curve(policies['MH'], 'ca2'),
+           lw=2, ls='--', label=r'$ca_{2,MH}$')
+ax[4].plot(PLOT_GRID, policy_curve(policies['LE'], 'ca1'),
+           lw=2, ls=':', label=r'$ca_{1,LE}$')
+ax[4].plot(PLOT_GRID, policy_curve(policies['LE'], 'ca2'),
+           lw=2, ls='-.', label=r'$ca_{2,LE}$')
 ax[4].axhline(0, color='k', lw=0.8)
 ax[4].set_xlabel('net worth $n$')
 ax[4].set_ylabel('capital outflows')
 ax[4].set_title('E. capital outflows')
 ax[4].legend(fontsize=8)
 
-ax[5].plot(n_grid, 10 * policies['MH']['RSI'], lw=2, label=r'$10\times$ MH')
-ax[5].plot(n_grid, 10 * policies['MH+LE']['RSI'], lw=2, ls='--',
+ax[5].plot(PLOT_GRID, 10 * policy_curve(policies['MH'], 'RSI'),
+           lw=2, label=r'$10\times$ MH')
+ax[5].plot(PLOT_GRID, 10 * policy_curve(policies['MH+LE'], 'RSI'),
+           lw=2, ls='--',
            label=r'$10\times$ MH+LE')
-ax[5].plot(n_grid, policies['LE']['RSI'], lw=2, ls=':', label='LE')
+ax[5].plot(PLOT_GRID, policy_curve(policies['LE'], 'RSI'),
+           lw=2, ls=':', label='LE')
 ax[5].axhline(0, color='k', lw=0.8)
 ax[5].set_xlabel('net worth $n$')
 ax[5].set_ylabel('risk-sharing index')
