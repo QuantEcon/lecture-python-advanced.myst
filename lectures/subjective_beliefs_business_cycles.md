@@ -137,11 +137,14 @@ Consumer Expectations (SCE).
 This evidence supports the interpretation that the wedges reflect a common
 pessimism/optimism component rather than two unrelated forecast mistakes.
 
-The following code simulates a stylized one-factor wedge process.
+The following code simulates a stylized wedge process with the same sample
+length, mean wedges, standard deviations, and first-principal-component share
+reported in the paper.
 
-It matches the mean loadings implied by the calibration but abstracts from
-measurement error and other idiosyncratic components, so the simulated wedges
-are perfectly correlated.
+The point is not to recreate the raw Michigan series.
+
+Instead, the simulation separates the common pessimism factor from residual
+survey noise, so the wedges are strongly related but not perfectly collinear.
 
 ```{code-cell} ipython3
 # Parameters from Table 1
@@ -149,9 +152,14 @@ are perfectly correlated.
 ρ_θ = 0.714  # AR(1) persistence of θ
 σ_θ = 4.3    # innovation volatility
 
-# Wedge loadings match the empirical means.
+# Wedge loadings used later in the model illustrations.
 c_u = 0.52 / μ_θ
 c_π = 1.22 / μ_θ
+
+# Empirical wedge moments from Section 2 and Table 2.
+mean_u, mean_π = 0.52, 1.22
+std_u, std_π = 0.57, 0.97
+pc1_share_target = 0.786
 
 T = 152   # 38 years * 4 quarters
 
@@ -164,8 +172,36 @@ for t in range(1, T):
             + ρ_θ * θ[t-1]
             + σ_θ * rng.standard_normal())
 
-wedge_u = c_u * θ
-wedge_π = c_π * θ
+def standardize(x):
+    """Return a de-meaned series with unit standard deviation."""
+    return (x - np.mean(x)) / np.std(x)
+
+
+def orthogonal_noise(rng, *basis, T=T):
+    """Generate standardized noise orthogonal to the supplied basis series."""
+    e = standardize(rng.standard_normal(T))
+    for b in basis:
+        e = e - (e @ b) / (b @ b) * b
+    return standardize(e)
+
+
+# For two standardized variables, PC1 share = (1 + corr) / 2.
+corr_target = 2 * pc1_share_target - 1
+common_weight = np.sqrt(corr_target)
+noise_weight = np.sqrt(1 - corr_target)
+
+common_factor = standardize(θ)
+noise_u = orthogonal_noise(rng, common_factor)
+noise_π = orthogonal_noise(rng, common_factor, noise_u)
+
+wedge_u = mean_u + std_u * (common_weight * common_factor
+                            + noise_weight * noise_u)
+wedge_π = mean_π + std_π * (common_weight * common_factor
+                            + noise_weight * noise_π)
+
+wedge_std = np.column_stack([standardize(wedge_u), standardize(wedge_π)])
+eigvals = np.linalg.eigvalsh(np.cov(wedge_std, rowvar=False))
+pc1_share = eigvals[-1] / eigvals.sum()
 
 # Quarterly dates, 1982Q1-2019Q4
 quarters = [datetime.date(1982 + (q // 4), 3 * (q % 4) + 1, 1)
@@ -217,7 +253,8 @@ plt.colorbar(sc, ax=ax, label='quarter (dark = recent)')
 ax.set_xlabel('unemployment wedge (pp)')
 ax.set_ylabel('inflation wedge (pp)')
 corr = np.corrcoef(wedge_u, wedge_π)[0, 1]
-ax.text(0.05, 0.93, f'correlation = {corr:.2f}',
+ax.text(0.05, 0.90,
+        f'correlation = {corr:.2f}\nPC1 share = {pc1_share:.3f}',
         transform=ax.transAxes, fontsize=11)
 plt.tight_layout()
 plt.show()
@@ -226,19 +263,20 @@ plt.show()
 The first figure plots the simulated unemployment wedge in the top panel and
 the simulated inflation wedge in the bottom panel.
 
-The dashed horizontal lines show the sample means.
+The dashed horizontal lines show the sample means, which match the values in
+the paper.
 
-Both wedges rise and fall together because each is a fixed loading on the same
-belief shock $\theta_t$.
+Both wedges have a common cyclical component driven by $\theta_t$, but they also
+contain residual components that stand in for survey noise and other
+idiosyncratic variation.
 
 The scatter plot makes this one-factor structure even clearer.
 
 Each point is one quarter, with the horizontal coordinate equal to the
 unemployment wedge and the vertical coordinate equal to the inflation wedge.
 
-The points lie on an upward-sloping line because high-pessimism quarters have
-large wedges for both variables, while low-pessimism quarters have small wedges
-for both variables.
+The points form an upward-sloping cloud rather than a line because the first
+principal component accounts for most, but not all, of the variation.
 
 This is the one-factor structure that motivates the
 theoretical framework.
@@ -712,13 +750,14 @@ The model is calibrated to quarterly U.S. data, 1982Q1–2019Q4.
 | Vacancy posting cost | $\kappa_v$ | 0.09 | |
 | Unemployment benefit flow | $D$ | 0.57 | |
 
-### Pedagogical reduced-form representation
+### A paper-calibrated linear surrogate
 
 The paper solves a structural New Keynesian model.
 
 For computation in this lecture, we use a small reduced-form vector
-autoregression that preserves the main qualitative channels and keeps the code
-transparent:
+autoregression that is calibrated to reproduce the main benchmark moments in
+Table 2 and the qualitative shape of the belief-shock impulse responses in
+Figure 7:
 
 $$
 
@@ -732,8 +771,21 @@ $\epsilon_{t+1} \sim N(0, I_3)$ contains the three structural shocks.
 
 The coefficient matrices $A$ and $B$ are not the paper's structural solution.
 
-They are chosen to give Figure 7-style impulse responses and Table 2-scale
-unconditional volatilities.
+The full paper obtains them from equilibrium conditions: households and firms
+distort probabilities according to continuation values, and those distorted
+beliefs feed back into consumption, price setting, vacancy posting, and wages.
+
+Here we compress those equilibrium channels into a few linear loadings.
+
+The loadings are chosen so that the Lyapunov moments for unemployment,
+inflation, and output match the benchmark and no-belief-shock columns of
+Table 2.
+
+This surrogate is useful for transparent computations, but it should not be
+used to analyse the diagnostic variants such as "only $\theta_t$", no TFP
+shocks, or rational firms.
+
+For those variants, we report the paper's structural results directly below.
 
 We index the five state variables with named constants, so that later code can
 refer to, say, the belief shock as `I_THETA` rather than a bare number.
@@ -749,6 +801,12 @@ loadings $B$ from the exogenous-process parameters in Table 1.
 The belief shock $\theta_t$ and TFP $a_t$ follow AR(1) processes; the
 endogenous variables inherit their own persistence and load on $\theta_t$,
 $a_t$, and the monetary policy shock.
+
+In the structural model, the effects of $\theta_t$ arise because pessimism
+changes the subjective distribution of the fundamental shocks.
+
+In the surrogate, these effects are summarized by the coefficients
+$\phi_{u\theta}$, $\phi_{\pi\theta}$, and $\phi_{y\theta}$.
 
 ```{code-cell} ipython3
 class NKModel(NamedTuple):
@@ -858,6 +916,42 @@ nk = create_nk_model()
 
 ## Quantitative results
 
+### Benchmark fit in the paper
+
+The key quantitative comparison is Table 2 of {cite}`bhandari2025survey`.
+
+The rows below reproduce the moments most relevant for this lecture.
+
+All values are percentages or percentage points; inflation is annualised and
+output is detrended.
+
+| Moment | Data | Paper benchmark | No $\theta_t$ | Only $\theta_t$ |
+|---|---:|---:|---:|---:|
+| Mean inflation wedge | 1.22 | 0.90 | 0.00 | 0.00 |
+| Mean unemployment wedge | 0.52 | 0.55 | 0.00 | 0.00 |
+| Volatility of inflation wedge | 0.97 | 0.73 | 0.00 | 0.00 |
+| Volatility of unemployment wedge | 0.57 | 0.45 | 0.00 | 0.00 |
+| Volatility of inflation | 1.37 | 1.16 | 0.99 | 0.00 |
+| Volatility of output | 2.00 | 2.22 | 1.55 | 0.00 |
+| Volatility of unemployment | 1.70 | 1.39 | 0.55 | 0.00 |
+| Corr. inflation wedge, output | −0.30 | −0.67 | 0.00 | 0.00 |
+| Corr. unemployment wedge, output | −0.49 | −0.67 | 0.00 | 0.00 |
+
+Two lessons are important.
+
+First, shutting down the belief shock returns the familiar unemployment
+volatility puzzle: unemployment volatility falls from 1.39 in the benchmark to
+0.55, far below the data value of 1.70.
+
+Second, the "only $\theta_t$" column is zero in the structural model.
+
+If TFP and monetary policy uncertainty are absent, there is no payoff-relevant
+uncertainty for pessimistic agents to distort, so time variation in
+$\theta_t$ alone does not move the economy.
+
+This is why the full paper emphasizes the interaction between belief shocks and
+fundamental shocks, especially TFP shocks.
+
 ### Impulse responses to the belief shock
 
 A positive innovation to $\theta_t$ makes households more pessimistic.
@@ -874,6 +968,16 @@ mechanism works this way:
    force and sometimes raising inflation briefly on impact.
 4. The belief wedges jump on impact, then decay with the persistence
    $\rho_\theta = 0.714$.
+
+In the paper's Figure 7, a one-standard-deviation belief shock raises
+unemployment by about one percentage point and lowers output by about one
+percent.
+
+Inflation rises briefly and then falls, leaving a roughly zero cumulative
+10-quarter response.
+
+The reduced-form impulse responses below are calibrated to reproduce these
+signs and the Table 2 volatility scale.
 
 ```{code-cell} ipython3
 ---
@@ -928,15 +1032,24 @@ The impulse responses show that a belief shock:
   mirror the dynamics of $\theta_t$ itself --- consistent with the one-factor
   structure.
 
+The structural model contains one additional object that the surrogate does not
+plot: impulse responses under the **subjective** measure.
+
+After a positive $\theta_t$ innovation, pessimistic agents behave as if future
+TFP shocks are worse, monetary policy shocks are tighter, and future
+pessimism is more persistent than under the data-generating measure.
+
+That subjective correlation structure is what makes both unemployment and
+inflation forecasts biased upward.
+
 ### The unemployment volatility puzzle
 
 A long-standing challenge for New Keynesian models is that standard TFP and
 monetary policy shocks generate far too little unemployment volatility
 ({cite}`Shimer2005`).
 
-With only TFP and monetary policy shocks, the model
-produces unemployment volatility of roughly 0.55%, compared to about 1.70%
-in the data.
+In the paper's no-belief-shock economy, TFP and monetary policy shocks produce
+unemployment volatility of only 0.55, compared to 1.70 in the data.
 
 Adding the belief shock substantially closes the gap:
 
@@ -957,16 +1070,16 @@ scale = [100, 400, 100]    # convert to pp (unemployment, annualised inflation, 
 std_full_scaled = [std_full[i] * scale[j] for j, i in enumerate(idx)]
 std_no_θ_scaled = [std_no_θ[i] * scale[j] for j, i in enumerate(idx)]
 
-# Reference values from Table 2 of the paper
+# Data values from Table 2 of the paper
 data_std = [1.70, 1.37, 2.00]    # unemployment, inflation, output
 
 x = np.arange(len(labels_vol))
 width = 0.25
 
 fig, ax = plt.subplots()
-ax.bar(x - width, std_no_θ_scaled, width, label='Model (no belief shock)',
+ax.bar(x - width, std_no_θ_scaled, width, label='No $\\theta_t$',
        color='steelblue', alpha=0.7)
-ax.bar(x, std_full_scaled, width, label='Model (with belief shock)',
+ax.bar(x, std_full_scaled, width, label='Benchmark',
        color='firebrick', alpha=0.7)
 ax.bar(x + width, data_std, width, label='Data',
        color='grey', alpha=0.7)
@@ -979,14 +1092,16 @@ plt.tight_layout()
 plt.show()
 ```
 
-The bar chart compares three standard deviations: the model without belief
-shocks, the model with belief shocks, and the data.
+The bar chart compares three standard deviations: the paper's no-belief-shock
+economy, the benchmark economy, and the data.
 
 The main message is visible in the unemployment bars.
 
 Without the belief shock, unemployment volatility is far below its empirical
-counterpart, but adding the calibrated belief shock brings the model much
-closer to the data.
+counterpart.
+
+Adding the calibrated belief shock raises unemployment volatility from about
+0.55 to about 1.39, moving the model much closer to the data value 1.70.
 
 The paper is also clear about a limitation of the benchmark model.
 
@@ -1056,41 +1171,71 @@ pedagogical representation.
 
 ### Role of firms' beliefs
 
-{cite}`bhandari2025survey` also study a variant in which **firms** hold
-subjective beliefs.
+In the benchmark model of {cite}`bhandari2025survey`, **firms** as well as
+households hold subjective beliefs.
+
+The paper studies how the results change when firms instead have rational
+beliefs.
 
 The key channel is through the price-setting equation.
 
 Price-setting firms that share the household's pessimism put extra probability
 weight on states with lower productivity and higher marginal costs.
 
-If firms instead have rational beliefs, they see the household pessimism shock
-mainly as contractionary demand, inflation falls, and the inflation wedge is too
-small.
+The rational-firms experiment turns off belief distortions in firms'
+forward-looking equations while keeping household beliefs subjective and
+recalibrating $\theta_t$ so that the mean and volatility of the unemployment
+wedge remain comparable.
+
+If firms have rational beliefs, they see the household pessimism shock mainly
+as contractionary demand.
+
+Inflation falls on impact, and the inflation wedge is too small.
 
 Firm beliefs therefore strengthen the comovement between the unemployment
 wedge and the inflation wedge, which is needed to match the data.
 
-The sign of the inflation response to a belief shock is therefore a
-diagnostic: positive responses to pessimistic shocks require firms (not just
-households) to hold subjective beliefs.
+The sign and size of the inflation response to a belief shock are therefore
+diagnostic: the survey evidence is hard to match unless firms, not only
+households, put extra subjective probability on high-marginal-cost states.
 
 ### Two diagnostic variants
 
-The paper uses two variants to show how survey wedges restrict the model.
+The paper uses diagnostic variants to show how survey wedges restrict the
+model.
 
 **No TFP shocks** --- Without supply-side uncertainty, pessimistic agents worry
 mainly about demand-type shocks, so the model predicts a negative average
 inflation wedge and negative comovement between inflation and unemployment
 wedges, both of which are counterfactual.
 
+In Table 2, the no-TFP variant has a mean inflation wedge of $-0.32$ and
+inflation-wedge volatility of only $0.26$, even after the belief-shock process
+is recalibrated to keep the unemployment wedge close to the benchmark.
+
 **Rational firms** --- If households are pessimistic but firms have rational
 beliefs, unemployment still responds strongly to a belief shock.
 
 Inflation, however, falls on impact and the inflation wedge is much too small.
 
-This variant shows why firms' subjective beliefs matter for matching the joint
-behaviour of inflation and unemployment forecasts.
+In Table 2, the rational-firms variant keeps the unemployment wedge close to
+the benchmark, with mean $0.55$ and volatility $0.45$, but the inflation wedge
+falls to mean $0.34$ and volatility $0.29$, compared with $0.90$ and $0.73$ in
+the benchmark.
+
+The table below summarizes the two restrictions.
+
+| Moment | Benchmark | No TFP shocks | Rational firms |
+|---|---:|---:|---:|
+| Mean inflation wedge | 0.90 | −0.32 | 0.34 |
+| Mean unemployment wedge | 0.55 | 0.54 | 0.55 |
+| Volatility of inflation wedge | 0.73 | 0.26 | 0.29 |
+| Volatility of unemployment wedge | 0.45 | 0.43 | 0.45 |
+| Volatility of unemployment | 1.39 | 0.87 | 1.24 |
+
+These variants show why the benchmark needs both supply-side uncertainty and
+firms' subjective beliefs to match the joint behaviour of inflation and
+unemployment forecasts.
 
 ### Countercyclicality of wedges
 
@@ -1195,6 +1340,29 @@ the inflation dynamics substantially.
 
 This separation is identified from
 the relative sizes of the unemployment and inflation wedges.
+
+**Pessimism induced by TFP** --- The benchmark treats $\theta_t$ as an
+exogenous AR(1) process.
+
+The paper also studies a specification in which negative TFP shocks raise
+pessimism.
+
+This variant matches many unconditional moments: Table 2 reports an inflation
+wedge mean of $0.85$, an unemployment wedge mean of $0.56$, and unemployment
+volatility of $1.49$.
+
+Its weakness is dynamic: TFP shocks generate responses that are too large, and
+the fit to the historical paths of unemployment and subjective forecasts is
+worse than in the benchmark with an orthogonal belief shock.
+
+**Wage rigidity** --- Wage rigidity is important for amplification.
+
+When wages are flexible, unemployment volatility falls to $0.77$ and the
+unemployment-wedge volatility falls to $0.13$ in Table 2.
+
+This is the Shimer-style labour-market amplification problem in another form:
+without sluggish wages, belief shocks and TFP shocks move match values too
+little.
 
 **Beyond the first-order homoskedastic case** --- The approximation is designed
 to keep subjective-belief effects alive in a linear solution.
@@ -1822,12 +1990,6 @@ Explain the economic intuition.
 ```
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: persistence and belief-wedge volatility
-    name: fig-sbbc-persistence-volatility
----
 ρ_vals = np.linspace(0.3, 0.95, 30)
 wedge_stds = []
 
@@ -1839,6 +2001,7 @@ for ρ in ρ_vals:
 
 fig, ax = plt.subplots()
 ax.plot(ρ_vals, np.array(wedge_stds) * 100, color='steelblue', linewidth=2)
+ax.set_title('Persistence and belief-wedge volatility')
 ax.set_xlabel('persistence $\\rho_\\theta$')
 ax.set_ylabel('standard deviation of belief wedge (pp)')
 plt.tight_layout()
@@ -1940,12 +2103,6 @@ the rational-expectations value function.
 ```
 
 ```{code-cell} ipython3
----
-mystnb:
-  figure:
-    caption: value sensitivity and steady-state wedge
-    name: fig-sbbc-pessimism-riccati
----
 μ_grid = np.linspace(0, 15, 100)
 Vx_vals = []
 wedge_ss = []
@@ -1958,6 +2115,7 @@ for μ in μ_grid:
     wedge_ss.append(belief_wedge(m_temp, μ) * 100)   # in pp
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+fig.suptitle('Value sensitivity and steady-state wedge')
 
 axes[0].plot(μ_grid, Vx_vals, color='steelblue', linewidth=2)
 axes[0].axhline(Vx_re, color='grey', linestyle='--',
@@ -1970,7 +2128,7 @@ axes[1].plot(μ_grid, np.array(wedge_ss), color='firebrick', linewidth=2)
 axes[1].set_xlabel('mean pessimism $\\mu_\\theta$')
 axes[1].set_ylabel('steady-state wedge (pp)')
 
-plt.tight_layout()
+plt.tight_layout(rect=[0, 0, 1, 0.94])
 plt.show()
 ```
 
