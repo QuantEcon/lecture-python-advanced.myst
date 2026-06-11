@@ -205,9 +205,6 @@ under lower investment, with diminishing returns.
 This is the same mixture technology, and uses the same labeling, as in
 {doc}`atkeson_1991`: the weight $\lambda(I)$ multiplies the favorable
 distribution $g_0$, so more investment makes high output more likely.
-
-{cite:t}`Tsyrennikov2013` swaps the labels: there the weight $\lambda(I)$
-multiplies $g_1$, which is the favorable distribution in the paper's notation.
 ```
 
 Tsyrennikov restricts to two output states, so the favorable distribution puts
@@ -733,16 +730,11 @@ This makes the near-zero risk-sharing index under moral hazard representable
 even though the fixed-point step uses a coarse mesh.
 
 To reach a fixed point quickly, all three economies are solved by
-**Howard policy iteration** (also called modified policy iteration).
+**Howard policy iteration**.
 
 Each outer iteration takes one greedy Bellman step, which re-optimizes the
 contract, and then holds that contract fixed while iterating the value a fixed
 number of times.
-
-Because the Bellman update is linear in the continuation values once the
-contract is fixed, these evaluation sweeps are cheap, and the method converges
-in a few dozen outer steps rather than the many hundreds that plain value
-function iteration would need at this discount factor.
 
 ### Parameters
 
@@ -824,10 +816,6 @@ Next we define the model primitives.
 The probability of high output is $\lambda(I) = \min(I^\nu, 1)$, period utility
 `u` is CRRA, and `u_prime` is its derivative $u'(c) = c^{-\gamma}$.
 
-We write each with `jnp`, so the same function runs inside the JIT-compiled
-Bellman updates and on the plain arrays used in the plotting and simulation
-code.
-
 ```{code-cell} ipython3
 def λ(I):
     """Probability of high output, λ(I) = min{I^ν, 1}."""
@@ -894,7 +882,7 @@ $v(Y_2)$.
 
 ```{code-cell} ipython3
 @jax.jit
-def autarky_step_jax(v, β_val):
+def autarky_step(v, β_val):
     """One vectorized Bellman step for the autarky problem."""
     # Continuation values: next-period net worth is the realized output
     Ev1 = jnp.interp(Y1, n_grid_j, v)
@@ -918,7 +906,7 @@ def autarky_policy(v_arr, β_val=None):
     """Return the autarky value update and investment policy on n_grid."""
     if β_val is None:
         β_val = β
-    v_new, I_pol = autarky_step_jax(jnp.asarray(v_arr), β_val)
+    v_new, I_pol = autarky_step(jnp.asarray(v_arr), β_val)
     return np.asarray(v_new), np.asarray(I_pol)
 ```
 
@@ -932,7 +920,7 @@ def autarky_vfi(β_val=None, tol=1e-8, max_iter=3000, verbose=False):
 
     v = jnp.zeros(n_grid_size)
     for it in range(max_iter):
-        v_new, _ = autarky_step_jax(v, β_val)
+        v_new, _ = autarky_step(v, β_val)
         diff = float(jnp.max(jnp.abs(v_new - v)))
         v = v_new
         if diff < tol:
@@ -1027,7 +1015,7 @@ endogenous borrowing limits instead.
 For LE, investment is observable, so the planner chooses it directly.
 
 Each Bellman step returns both the improved value and the greedy contract, and a
-shared routine `policy_eval_jax` then performs the Howard policy-evaluation
+shared routine `policy_eval` then performs the Howard policy-evaluation
 sweeps that hold that contract fixed.
 
 In the two limited-enforcement economies, the endogenous borrowing limits are
@@ -1047,7 +1035,7 @@ def contract_initial_upper(β_val, loan_upper):
 
 
 @jax.jit
-def mh_bellman_step_jax(v, v_aut_arr, I_aut_arr, nbar1, nbar2,
+def mh_bellman_step(v, v_aut_arr, I_aut_arr, nbar1, nbar2,
                         loan_cap, β_val, β_c_val):
     """One Bellman step for MH, with optional LE bounds and loan cap."""
     v1 = jnp.interp(n1p_flat_j, n_grid_j, v)
@@ -1147,7 +1135,7 @@ def mh_bellman_step_jax(v, v_aut_arr, I_aut_arr, nbar1, nbar2,
 
 
 @jax.jit
-def le_bellman_step_jax(v, v_aut_arr, I_aut_arr, nbar1, nbar2,
+def le_bellman_step(v, v_aut_arr, I_aut_arr, nbar1, nbar2,
                         β_val, β_c_val):
     """One Bellman step for the limited-enforcement-only economy."""
     v1 = jnp.interp(n1p_flat_j, n_grid_j, v)
@@ -1224,14 +1212,9 @@ def le_bellman_step_jax(v, v_aut_arr, I_aut_arr, nbar1, nbar2,
 
 
 @jax.jit
-def policy_eval_jax(v, v_aut_arr, pol_n1p, pol_n2p, pol_I, pol_b,
+def policy_eval(v, v_aut_arr, pol_n1p, pol_n2p, pol_I, pol_b,
                     use_fallback, β_val):
     """Howard policy evaluation: iterate the value under a fixed policy.
-
-    Once the greedy contract (b, n_1', n_2', I) is fixed, the Bellman update
-    is linear in the continuation values, so the period return R = u(c) and
-    the high-output weight λ(I) can be precomputed and the cheap evaluation
-    sweep applied many times before re-optimizing.
     """
     R = u(n_grid_j + pol_b - θ * pol_I)
     l = λ(pol_I)
@@ -1274,11 +1257,11 @@ def mh_vfi(v_aut, β_val=None, β_c_val=None, tol=contract_tol,
     for it in range(max_iter):
         # Policy improvement: one greedy Bellman step.
         (v_greedy, pol_n1p, pol_n2p, pol_I, pol_b,
-         use_fb) = mh_bellman_step_jax(
+         use_fb) = mh_bellman_step(
             v, v_aut_j, I_aut_j, nbars[0], nbars[1],
             loan_cap, β_val, β_c_val)
         # Policy evaluation: iterate the value under the fixed policy.
-        v_new = policy_eval_jax(v_greedy, v_aut_j, pol_n1p, pol_n2p,
+        v_new = policy_eval(v_greedy, v_aut_j, pol_n1p, pol_n2p,
                                 pol_I, pol_b, use_fb, β_val)
         limit_diff = 0.0
         if limited_enforcement:
@@ -1305,7 +1288,7 @@ def mh_vfi(v_aut, β_val=None, β_c_val=None, tol=contract_tol,
             f"diff = {diff:.3e}, nbars = {np.round(nbars, 4)}"
         )
 
-    _, pol_n1p, pol_n2p, pol_I, pol_b, _ = mh_bellman_step_jax(
+    _, pol_n1p, pol_n2p, pol_I, pol_b, _ = mh_bellman_step(
         jnp.asarray(v), v_aut_j, I_aut_j,
         nbars[0], nbars[1], loan_cap, β_val, β_c_val)
 
@@ -1333,12 +1316,13 @@ def le_vfi(v_aut, β_val=None, β_c_val=None, tol=contract_tol,
     v = jnp.asarray(contract_initial_upper(β_val, Y2 - n_lo))
 
     for it in range(max_iter):
-        # Policy improvement: one greedy Bellman step.
+        # Policy improvement: one greedy Bellman step
         (v_greedy, pol_n1p, pol_n2p, pol_I, pol_b,
-         use_fb) = le_bellman_step_jax(
+         use_fb) = le_bellman_step(
             v, v_aut_j, I_aut_j, nbars[0], nbars[1], β_val, β_c_val)
-        # Policy evaluation: iterate the value under the fixed policy.
-        v_new = policy_eval_jax(v_greedy, v_aut_j, pol_n1p, pol_n2p,
+
+        # Policy evaluation: iterate the value under the fixed policy
+        v_new = policy_eval(v_greedy, v_aut_j, pol_n1p, pol_n2p,
                                 pol_I, pol_b, use_fb, β_val)
         nbars_new = update_nbars(np.asarray(v_new), nbars, v_default)
         limit_diff = np.max(np.abs(nbars_new - nbars))
@@ -1363,7 +1347,7 @@ def le_vfi(v_aut, β_val=None, β_c_val=None, tol=contract_tol,
             f"diff = {diff:.3e}, nbars = {np.round(nbars, 4)}"
         )
 
-    _, pol_n1p, pol_n2p, pol_I, pol_b, _ = le_bellman_step_jax(
+    _, pol_n1p, pol_n2p, pol_I, pol_b, _ = le_bellman_step(
         jnp.asarray(v), v_aut_j, I_aut_j,
         nbars[0], nbars[1], β_val, β_c_val)
 
@@ -1781,45 +1765,11 @@ print(f"Approximate low-state limit, MH+LE: {n_low_mhle:.4f}")
 print(f"Approximate low-state limit, LE: {n_low_le:.4f}")
 
 low_limits = {'MH': n_low_mh, 'MH+LE': n_low_mhle, 'LE': n_low_le}
-
-
-def print_policy_diagnostics(policies):
-    """Print compact diagnostics for the computed policy functions."""
-    print("\nPolicy diagnostics:")
-    for name, policy in policies.items():
-        active = policy['λ'] > 0.01
-        rsi_active = policy['RSI'][active]
-        support_lo = max(0.38, low_limits[name] - 1e-8)
-        support = ((n_grid >= support_lo) & (n_grid <= 1.02)
-                   & (policy['λ'] > 0.01) & (policy['λ'] < 0.99))
-        rsi_support = policy['RSI'][support]
-        n1_floor = np.sum(np.isclose(policy['n1p'], n_lo))
-        n2_floor = np.sum(np.isclose(policy['n2p'], n_lo))
-        nbars = policy['nbars']
-        nbars_text = "none" if nbars is None else np.array2string(
-            np.round(nbars, 4))
-        support_max_abs = (np.nan if rsi_support.size == 0
-                           else np.nanmax(np.abs(rsi_support)))
-        print(
-            f"{name:5s}: "
-            f"λ=[{np.nanmin(policy['λ']):.3f}, {np.nanmax(policy['λ']):.3f}], "
-            f"b=[{np.nanmin(policy['b']):.3f}, {np.nanmax(policy['b']):.3f}], "
-            f"RSI_active_mean={np.nanmean(rsi_active):.4f}, "
-            f"RSI_active_max={np.nanmax(rsi_active):.4f}, "
-            f"RSI_support_max_abs={support_max_abs:.4f}, "
-            f"n1'=[{np.nanmin(policy['n1p']):.3f}, "
-            f"{np.nanmax(policy['n1p']):.3f}], "
-            f"n2'=[{np.nanmin(policy['n2p']):.3f}, "
-            f"{np.nanmax(policy['n2p']):.3f}], "
-            f"floor_hits=({n1_floor}, {n2_floor}), "
-            f"nbars={nbars_text}"
-        )
-
-
-print_policy_diagnostics(policies)
 ```
 
 ### Value functions and insurance
+
+Now let's plot the value functions and risk-sharing indices.
 
 ```{code-cell} ipython3
 ---
@@ -1878,7 +1828,8 @@ schedule $\{d_1(n), d_2(n)\}$ is nearly state non-contingent on the relevant
 range of net worth, while under limited enforcement it is much more state
 contingent.
 
-Small irregularities near the grid endpoints are numerical artifacts.
+Small irregularities near the low net worth and high net worth are mainly 
+numerical effects of the finite grid and the local optimization.
 
 This is the paper's central result about the optimal contract: under moral
 hazard nearly all the risk is assumed by the risk-averse borrower, and
@@ -2040,7 +1991,7 @@ must reduce the borrower's net worth, which can increase capital outflows.
 
 Panel F is the risk-sharing index.
 
-In the paper, this panel is the visual counterpart to the state
+This panel is the visual counterpart to the state
 non-contingency result: RSI is close to zero in the MH economy and much larger
 in the LE economy.
 
@@ -2155,13 +2106,6 @@ As the borrower's net worth deteriorates, investment falls and
 $\lambda(I)$ falls, making the low-output path more likely than it would be in
 the frictionless or LE economies.
 
-In the paper's calibration, the crisis path is 7.55 times more likely in the
-MH economy than in a frictionless economy, while in the LE economy it is about
-as likely as in the frictionless economy (a factor of 1.01).
-
-The paper reports the MH+LE economy as visually close to the MH economy, so the
-main comparison is between MH and LE.
-
 ### MH versus limited enforcement
 
 A crucial result of {cite:t}`Tsyrennikov2013` is that limited enforcement
@@ -2185,95 +2129,8 @@ hazard near the borrowing limits: the borrowing limits already spread
 continuation values enough to provide incentives, so the incentive multiplier
 collapses to zero.
 
-## Quantitative comparison
-
-The paper's simulation results show why the moral-hazard mechanism matters.
-
-The table below condenses the paper's table of simulated model moments.
-
-Because the MH+LE economy is very close to the MH economy in the paper's
-simulations, the table reports only the MH column as the moral-hazard
-benchmark.
-
-| moment | data | MH, i.i.d. | LE, i.i.d. | MH, persistent | LE, persistent |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| $E(r)$ | 8.18 | 3.84 | 4.27 | 3.26 | 4.01 |
-| $\sigma(r)$ | 4.73 | 5.20 | 2.51 | 4.73 | 1.96 |
-| $\sigma(c)/\sigma(y)$ | 1.11 | 0.72 | 0.24 | 0.84 | 0.40 |
-| $\rho(c,y)$ | 0.97 | 0.82 | 0.62 | 0.96 | 0.67 |
-| $\rho(r,y)$ | -0.58 | -0.68 | -0.81 | -0.74 | -0.42 |
-| $\rho(tb,y)$ | -0.81 | 0.69 | 0.98 | 0.62 | 0.92 |
-| $\rho(y)$ | 0.94 | 0.28 | 0.07 | 0.75 | 0.63 |
-
-Moral hazard raises consumption-output comovement and generates volatile,
-countercyclical spreads.
-
-It also creates endogenous output persistence even when the exogenous shocks
-are i.i.d.
-
-The persistent-shocks extension strengthens this result.
-
-The paper replaces the i.i.d. transition law with
-
-$$
-\Pr(Y_2 \mid I, Y_1) = \lambda(I)(1-p),
-\qquad
-\Pr(Y_2 \mid I, Y_2) = p + \lambda(I)(1-p),
-$$
-
-with $p = 0.50$, recalibrating $\theta = 0.102$ and $\nu = 0.90$.
-
-This persistent component improves the fit for consumption and output.
-
-The current-account problem remains.
-
-In the data, the trade balance is strongly countercyclical, while the model's
-trade balance is still procyclical in the reported simulations.
-
-Because invested goods last only one period, the model behaves much like an
-exchange economy, and Tsyrennikov shows that no exchange-economy model can
-match the observed consumption and current-account moments at the same time.
-
-He argues that stochastic growth or multiperiod capital would likely be needed
-to address this shortcoming.
-
-## Empirical test
-
-{cite:t}`Tsyrennikov2013` proposes a test to distinguish moral hazard from
-limited enforcement.
-
-After a low past output realization ($y_{t-1} = Y_1$), the MH contract lowers
-net worth sharply, leaving less room for consumption smoothing.
-
-The prediction is
-
-$$
-\text{MH economy}: \quad
-    \rho(c_t, y_t \mid y_{t-1} = Y_1) \;>\; \rho(c_t, y_t \mid y_{t-1} = Y_2),
-$$
-
-while the LE economy implies the opposite ordering, because insurance is
-better after low realizations.
-
-Using Argentine quarterly data (1993--2005), the observed
-correlations are 0.98 (after low output) vs. 0.91 (after high output) ---
-*consistent with moral hazard*.
-
-The paper reports the following comparison for the persistent-shocks economy:
-
-| statistic | data | LE | MH |
-| --- | ---: | ---: | ---: |
-| $\rho(c_t,y_t \mid y_{t-1}=Y_1)$ | 0.98 | 0.61 | 0.97 |
-| $\rho(c_t,y_t \mid y_{t-1}=Y_2)$ | 0.91 | 0.99 | 0.96 |
-
-The limited-enforcement model predicts stronger consumption-output correlation
-after high past output.
-
-The data show the opposite ordering, which is closer to the moral-hazard
-prediction.
-
-This test relies on the maintained assumption that state-contingent contracting
-is feasible.
+These are visible in the figures we showed above: the MH and MH+LE policies are very close to each other, while the LE policy is quite different, while 
+LE is closer to the frictionless benchmark.
 
 ## Exercises
 
@@ -2281,7 +2138,7 @@ is feasible.
 :label: tsyrennikov_2013_ex1
 ```
 
-**Effect of the default penalty.** The parameter $\delta \in (0,1)$ is the
+*Effect of the default penalty.* The parameter $\delta \in (0,1)$ is the
 fraction of output retained after default.
 
 1. Using $v_{\text{aut}}$, compute
@@ -2299,6 +2156,8 @@ fraction of output retained after default.
 ```{solution-start} tsyrennikov_2013_ex1
 :class: dropdown
 ```
+
+Here is one solution:
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -2366,7 +2225,7 @@ approaches pure moral hazard.
 :label: tsyrennikov_2013_ex2
 ```
 
-**Discounting wedge and impatience.**
+*Discounting wedge and impatience.*
 
 1. Re-solve the MH model for $\beta = \beta_c = 0.990$ (equal discounting ---
    no impatience wedge) and for $\beta = 0.950$ (larger wedge).
@@ -2384,6 +2243,8 @@ front-loading incentive that the lender can exploit.
 ```{solution-start} tsyrennikov_2013_ex2
 :class: dropdown
 ```
+
+Here is one solution:
 
 ```{code-cell} ipython3
 fig, ax = plt.subplots()
@@ -2429,7 +2290,7 @@ $\beta_c = 0.990$).
 :label: tsyrennikov_2013_ex3
 ```
 
-**The envelope condition.** In deriving the Euler equation
+*The envelope condition.* In deriving the Euler equation
 {eq}`eq:tsyrennikov_euler` we used the envelope result
 
 $$
@@ -2448,6 +2309,8 @@ which terms of $\mathcal{L}$ actually depend on $n$.
 ```{solution-start} tsyrennikov_2013_ex3
 :class: dropdown
 ```
+
+Here is one solution:
 
 The state $n$ enters the Lagrangian {eq}`eq:tsyrennikov_lagrangian` only through
 current consumption $c = n + b - \theta I$, and only in two terms: the period
