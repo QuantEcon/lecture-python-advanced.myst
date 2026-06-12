@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>42. The Hansen-Jagannathan Bound &#8212; Advanced Quantitative Economics with Python</title>
+    <title>43. The Hansen-Jagannathan Bound &#8212; Advanced Quantitative Economics with Python</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -83,7 +83,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=3a5ece24" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -131,8 +131,8 @@
     <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="43. Two Modifications of Mean-Variance Portfolio Theory" href="black_litterman.html" />
-    <link rel="prev" title="41. The Role of Conditioning Information in Asset Pricing" href="hansen_richard_1987.html" />
+    <link rel="next" title="44. Two Modifications of Mean-Variance Portfolio Theory" href="black_litterman.html" />
+    <link rel="prev" title="42. The Role of Conditioning Information in Asset Pricing" href="hansen_richard_1987.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -207,30 +207,30 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">42.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-asset-pricing-framework">42.2. The asset pricing framework</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-model">42.2.1. General model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-crra-benchmark">42.2.2. The CRRA benchmark</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-moments-and-population-moments">42.2.3. Sample moments and population moments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">43.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-asset-pricing-framework">43.2. The asset pricing framework</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#general-model">43.2.1. General model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-crra-benchmark">43.2.2. The CRRA benchmark</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-moments-and-population-moments">43.2.3. Sample moments and population moments</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-linear-volatility-bound-without-positivity">42.3. The linear volatility bound (without positivity)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-m">42.3.1. Constructing <span class="math notranslate nohighlight">\(m^*\)</span></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-there-is-a-riskless-asset">42.3.2. When there is a riskless asset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-there-is-no-riskless-asset">42.3.3. When there is no riskless asset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duality-with-the-mean-variance-frontier-for-returns">42.3.4. Duality with the mean-variance frontier for returns</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-linear-volatility-bound-without-positivity">43.3. The linear volatility bound (without positivity)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#constructing-m">43.3.1. Constructing <span class="math notranslate nohighlight">\(m^*\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-there-is-a-riskless-asset">43.3.2. When there is a riskless asset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#when-there-is-no-riskless-asset">43.3.3. When there is no riskless asset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#duality-with-the-mean-variance-frontier-for-returns">43.3.4. Duality with the mean-variance frontier for returns</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-annual-frontier">42.4. Computing the annual frontier</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-duality-theorem">42.5. The duality theorem</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tightening-the-bound-imposing-positivity-of-m">42.6. Tightening the bound: imposing positivity of <span class="math notranslate nohighlight">\(m\)</span></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-based-construction">42.6.1. Option-based construction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computing-the-annual-frontier">43.4. Computing the annual frontier</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-duality-theorem">43.5. The duality theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tightening-the-bound-imposing-positivity-of-m">43.6. Tightening the bound: imposing positivity of <span class="math notranslate nohighlight">\(m\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#option-based-construction">43.6.1. Option-based construction</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-equity-premium-puzzle-revisited">42.7. The equity premium puzzle revisited</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-nonseparable-preferences">42.8. Time-nonseparable preferences</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#treasury-bill-data-and-monetary-models">42.9. Treasury bill data and monetary models</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">42.10. Exercises</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-equity-premium-puzzle-revisited">43.7. The equity premium puzzle revisited</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#time-nonseparable-preferences">43.8. Time-nonseparable preferences</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#treasury-bill-data-and-monetary-models">43.9. Treasury bill data and monetary models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">43.10. Exercises</a></li>
 </ul>
                             <p class="logo">
                                 
@@ -298,7 +298,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/81c147d4" class="changelog-hash">81c147d4</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">1 month ago</span>
+                                <span class="changelog-time">2 months ago</span>
                                 <span class="changelog-message">[risk_aversion_or_mistaken_beliefs, hansen_jagannathan_1991] Update Dataset Source to Github URL (#325)</span>
                             </li>
                             
@@ -307,7 +307,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/95d83cdc" class="changelog-hash">95d83cdc</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">1 month ago</span>
+                                <span class="changelog-time">2 months ago</span>
                                 <span class="changelog-message">Tom's new lecture on the Bocola-Dovis and others paper (#320)</span>
                             </li>
                             
@@ -324,7 +324,7 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="the-hansen-jagannathan-bound">
-<h1><a class="toc-backref" href="#id3" role="doc-backlink"><span class="section-number">42. </span>The Hansen-Jagannathan Bound</a><a class="headerlink" href="#the-hansen-jagannathan-bound" title="Link to this heading">#</a></h1>
+<h1><a class="toc-backref" href="#id3" role="doc-backlink"><span class="section-number">43. </span>The Hansen-Jagannathan Bound</a><a class="headerlink" href="#the-hansen-jagannathan-bound" title="Link to this heading">#</a></h1>
 <nav class="contents" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
@@ -345,7 +345,7 @@
 </ul>
 </nav>
 <section id="overview">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink"><span class="section-number">42.1. </span>Overview</a><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink"><span class="section-number">43.1. </span>Overview</a><a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This lecture is based on <span class="bibtex-citation" id="id1">Hansen and Jagannathan [<a class="reference internal" href="zreferences.html#id39" title="Lars Peter Hansen and Ravi Jagannathan. Implications of Security Market Data for Models of Dynamic Economies. Journal of Political Economy, 99(2):225-262, April 1991. URL: https://ideas.repec.org/a/ucp/jpolec/v99y1991i2p225-62.html, doi:10.1086/261749.">1991</a>]</span>.</p>
 <p>In a rich class of models of dynamic economies, the equilibrium price of a
 future payoff on any traded security can be represented as the expectation of
@@ -369,7 +369,7 @@ arbitrage), which introduces option-like truncations of portfolio payoffs.</p></
 <p>The resulting admissible region in <span class="math notranslate nohighlight">\([E(m),\, \sigma(m)]\)</span> space is a diagnostic:
 any candidate model must place <span class="math notranslate nohighlight">\(m\)</span> inside this region.</p>
 <p>Applied to U.S. stock and bond data, the bounds provide an alternative
-characterization of the <strong>equity premium puzzle</strong> (<span class="bibtex-citation" id="id2">[<a class="reference internal" href="zreferences.html#id203" title="Rajnish Mehra and Edward C Prescott. The equity premium: A puzzle. Journal of Monetary Economics, 15(2):145–161, 1985.">Mehra and Prescott, 1985</a>]</span>):
+characterization of the <strong>equity premium puzzle</strong> (<span class="bibtex-citation" id="id2">[<a class="reference internal" href="zreferences.html#id223" title="Rajnish Mehra and Edward C Prescott. The equity premium: A puzzle. Journal of Monetary Economics, 15(2):145–161, 1985.">Mehra and Prescott, 1985</a>]</span>):
 a representative consumer with standard CRRA preferences needs implausibly
 high risk aversion to generate enough IMRS volatility to match the data.</p>
 <p>In this lecture we derive these bounds, implement them in Python, and
@@ -389,9 +389,9 @@ replicate the key results of the paper.</p>
 </div>
 </section>
 <section id="the-asset-pricing-framework">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink"><span class="section-number">42.2. </span>The asset pricing framework</a><a class="headerlink" href="#the-asset-pricing-framework" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink"><span class="section-number">43.2. </span>The asset pricing framework</a><a class="headerlink" href="#the-asset-pricing-framework" title="Link to this heading">#</a></h2>
 <section id="general-model">
-<h3><span class="section-number">42.2.1. </span>General model<a class="headerlink" href="#general-model" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">43.2.1. </span>General model<a class="headerlink" href="#general-model" title="Link to this heading">#</a></h3>
 <p>Consider an economy in which multiple consumers (possibly with heterogeneous
 preferences and information sets) trade a vector <span class="math notranslate nohighlight">\(x\)</span> of <span class="math notranslate nohighlight">\(n\)</span> asset payoffs at
 date <span class="math notranslate nohighlight">\(T\)</span>.</p>
@@ -426,7 +426,7 @@ m \geq 0.
 mean-standard deviation plane.</p>
 </section>
 <section id="the-crra-benchmark">
-<h3><span class="section-number">42.2.2. </span>The CRRA benchmark<a class="headerlink" href="#the-crra-benchmark" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">43.2.2. </span>The CRRA benchmark<a class="headerlink" href="#the-crra-benchmark" title="Link to this heading">#</a></h3>
 <p>A natural benchmark is the IMRS of a representative consumer with CRRA
 preferences.</p>
 <p>If the period utility function is <span class="math notranslate nohighlight">\(U(c) = c^{1+\gamma}/(1+\gamma)\)</span> for
@@ -464,7 +464,7 @@ inside the admissible region.</p>
 </div>
 </section>
 <section id="sample-moments-and-population-moments">
-<h3><span class="section-number">42.2.3. </span>Sample moments and population moments<a class="headerlink" href="#sample-moments-and-population-moments" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">43.2.3. </span>Sample moments and population moments<a class="headerlink" href="#sample-moments-and-population-moments" title="Link to this heading">#</a></h3>
 <p>Under ergodicity, the time-series averages</p>
 <div class="math notranslate nohighlight">
 \[
@@ -568,9 +568,9 @@ constructed from FRED yields (TB3MS, TB6MS, GS1) deflated by CPIAUCSL.</p></li>
 </section>
 </section>
 <section id="the-linear-volatility-bound-without-positivity">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink"><span class="section-number">42.3. </span>The linear volatility bound (without positivity)</a><a class="headerlink" href="#the-linear-volatility-bound-without-positivity" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink"><span class="section-number">43.3. </span>The linear volatility bound (without positivity)</a><a class="headerlink" href="#the-linear-volatility-bound-without-positivity" title="Link to this heading">#</a></h2>
 <section id="constructing-m">
-<h3><span class="section-number">42.3.1. </span>Constructing <span class="math notranslate nohighlight">\(m^*\)</span><a class="headerlink" href="#constructing-m" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">43.3.1. </span>Constructing <span class="math notranslate nohighlight">\(m^*\)</span><a class="headerlink" href="#constructing-m" title="Link to this heading">#</a></h3>
 <p>Suppose we only impose Restriction 1.</p>
 <p>Among all random variables <span class="math notranslate nohighlight">\(m\)</span> satisfying <span class="math notranslate nohighlight">\(Eq = E(xm)\)</span>, what is the minimum
 variance?</p>
@@ -607,7 +607,7 @@ the <strong>variance decomposition</strong>:</p>
 <p>The inequality holds because <span class="math notranslate nohighlight">\(\sigma^2(m - m^*) \geq 0\)</span>.</p>
 </section>
 <section id="when-there-is-a-riskless-asset">
-<h3><span class="section-number">42.3.2. </span>When there is a riskless asset<a class="headerlink" href="#when-there-is-a-riskless-asset" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">43.3.2. </span>When there is a riskless asset<a class="headerlink" href="#when-there-is-a-riskless-asset" title="Link to this heading">#</a></h3>
 <p>If <span class="math notranslate nohighlight">\(x\)</span> includes a riskless bond – a security that costs <span class="math notranslate nohighlight">\(q = 1\)</span> today and
 pays <span class="math notranslate nohighlight">\(x = r_f\)</span> with certainty – then Restriction 1 applied to this payoff
 gives <span class="math notranslate nohighlight">\(1 = E(r_f \cdot m) = r_f \cdot Em\)</span>, so <span class="math notranslate nohighlight">\(Em = 1/r_f\)</span>.</p>
@@ -619,7 +619,7 @@ yields a single bound:</p>
 \]</div>
 </section>
 <section id="when-there-is-no-riskless-asset">
-<h3><span class="section-number">42.3.3. </span>When there is no riskless asset<a class="headerlink" href="#when-there-is-no-riskless-asset" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">43.3.3. </span>When there is no riskless asset<a class="headerlink" href="#when-there-is-no-riskless-asset" title="Link to this heading">#</a></h3>
 <p>The variance decomposition requires <span class="math notranslate nohighlight">\(Em = Em^*\)</span> (otherwise the cross-terms do
 not cancel).</p>
 <p>When <span class="math notranslate nohighlight">\(x\)</span> does not include a unit payoff, the pricing restriction <span class="math notranslate nohighlight">\(Eq = E(xm)\)</span>
@@ -667,7 +667,7 @@ matrix of payoffs.</p>
 </div>
 </section>
 <section id="duality-with-the-mean-variance-frontier-for-returns">
-<h3><span class="section-number">42.3.4. </span>Duality with the mean-variance frontier for returns<a class="headerlink" href="#duality-with-the-mean-variance-frontier-for-returns" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">43.3.4. </span>Duality with the mean-variance frontier for returns<a class="headerlink" href="#duality-with-the-mean-variance-frontier-for-returns" title="Link to this heading">#</a></h3>
 <p>Now we derive the relation between the mean-standard deviation frontier for
 <span class="math notranslate nohighlight">\(m\)</span> and the mean-variance frontier for asset returns.</p>
 <p>Let <span class="math notranslate nohighlight">\(\pi(p) = E(mp)\)</span> denote the expected-price functional that maps each
@@ -783,7 +783,7 @@ maximum Sharpe ratio.</p>
 </section>
 </section>
 <section id="computing-the-annual-frontier">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink"><span class="section-number">42.4. </span>Computing the annual frontier</a><a class="headerlink" href="#computing-the-annual-frontier" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink"><span class="section-number">43.4. </span>Computing the annual frontier</a><a class="headerlink" href="#computing-the-annual-frontier" title="Link to this heading">#</a></h2>
 <p>We now compute the HJ bound from annual US stock and bond returns
 (1891–1985).</p>
 <div class="cell docutils container">
@@ -847,7 +847,7 @@ maximum Sharpe ratio.</p>
 <figure class="align-default" id="fig-annual-imrs-frontier">
 <img alt="_images/0c6a19cdd6db4edcbf7be339bc5d2093e3f631e7d49cee272c32229053a64dfd.png" src="_images/0c6a19cdd6db4edcbf7be339bc5d2093e3f631e7d49cee272c32229053a64dfd.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 42.1 </span><span class="caption-text">Annual IMRS frontier</span><a class="headerlink" href="#fig-annual-imrs-frontier" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 43.1 </span><span class="caption-text">Annual IMRS frontier</span><a class="headerlink" href="#fig-annual-imrs-frontier" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -863,12 +863,12 @@ squares enter the admissible region.</p>
 stock return, <span class="math notranslate nohighlight">\(1/r_{\text{stock}}\)</span>, as a simple benchmark.</p>
 </section>
 <section id="the-duality-theorem">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink"><span class="section-number">42.5. </span>The duality theorem</a><a class="headerlink" href="#the-duality-theorem" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink"><span class="section-number">43.5. </span>The duality theorem</a><a class="headerlink" href="#the-duality-theorem" title="Link to this heading">#</a></h2>
 <p>The preceding figure illustrates the duality between the two frontiers –
 the SDF frontier and the asset return mean-variance frontier – that Hansen
 and Jagannathan establish formally.</p>
 <div class="proof theorem admonition" id="hj_duality_theorem">
-<p class="admonition-title"><span class="caption-number">Theorem 42.1 </span> (Duality (Section III.C))</p>
+<p class="admonition-title"><span class="caption-number">Theorem 43.1 </span> (Duality (Section III.C))</p>
 <section class="theorem-content" id="proof-content">
 <p>For any <span class="math notranslate nohighlight">\(v\)</span>, let <span class="math notranslate nohighlight">\(R_v\)</span> denote the set of returns augmented by a hypothetical
 riskless bond priced at <span class="math notranslate nohighlight">\(v\)</span>, and let <span class="math notranslate nohighlight">\(r_v^*\)</span> denote the minimum second-moment
@@ -952,7 +952,7 @@ together with a quarter-circle of radius <span class="math notranslate nohighlig
 <figure class="align-default" id="fig-min-second-moment-payoff">
 <img alt="_images/6f470fe17a0f95feadb2a5bbc53b490e24dd374d97f113e6b282ba6b8aa62573.png" src="_images/6f470fe17a0f95feadb2a5bbc53b490e24dd374d97f113e6b282ba6b8aa62573.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 42.2 </span><span class="caption-text">Minimum second-moment payoff in <span class="math notranslate nohighlight">\(R\)</span></span><a class="headerlink" href="#fig-min-second-moment-payoff" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 43.2 </span><span class="caption-text">Minimum second-moment payoff in <span class="math notranslate nohighlight">\(R\)</span></span><a class="headerlink" href="#fig-min-second-moment-payoff" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -961,7 +961,7 @@ together with a quarter-circle of radius <span class="math notranslate nohighlig
 which includes a hypothetical riskless bond priced at <span class="math notranslate nohighlight">\(v\)</span>.</p>
 <p>The lines through <span class="math notranslate nohighlight">\((0, 1/v)\)</span> tangent to the <span class="math notranslate nohighlight">\(R\)</span> frontier trace the boundary
 of <span class="math notranslate nohighlight">\(R_v\)</span>.</p>
-<p>By <a class="reference internal" href="#hj_duality_theorem">Theorem 42.1</a>, the slope of these tangent lines equals
+<p>By <a class="reference internal" href="#hj_duality_theorem">Theorem 43.1</a>, the slope of these tangent lines equals
 <span class="math notranslate nohighlight">\(\sigma(m^v)/v\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1004,16 +1004,16 @@ of <span class="math notranslate nohighlight">\(R_v\)</span>.</p>
 <figure class="align-default" id="fig-frontiers-r-rv">
 <img alt="_images/588bc781e295f4b6ee8ee162b7bc53823a2d96c6626971cffdfdd78f698d40cc.png" src="_images/588bc781e295f4b6ee8ee162b7bc53823a2d96c6626971cffdfdd78f698d40cc.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 42.3 </span><span class="caption-text">Mean-standard-deviation frontiers for <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(R_v\)</span></span><a class="headerlink" href="#fig-frontiers-r-rv" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 43.3 </span><span class="caption-text">Mean-standard-deviation frontiers for <span class="math notranslate nohighlight">\(R\)</span> and <span class="math notranslate nohighlight">\(R_v\)</span></span><a class="headerlink" href="#fig-frontiers-r-rv" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
 <section id="tightening-the-bound-imposing-positivity-of-m">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink"><span class="section-number">42.6. </span>Tightening the bound: imposing positivity of <span class="math notranslate nohighlight">\(m\)</span></a><a class="headerlink" href="#tightening-the-bound-imposing-positivity-of-m" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink"><span class="section-number">43.6. </span>Tightening the bound: imposing positivity of <span class="math notranslate nohighlight">\(m\)</span></a><a class="headerlink" href="#tightening-the-bound-imposing-positivity-of-m" title="Link to this heading">#</a></h2>
 <section id="option-based-construction">
-<h3><span class="section-number">42.6.1. </span>Option-based construction<a class="headerlink" href="#option-based-construction" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">43.6.1. </span>Option-based construction<a class="headerlink" href="#option-based-construction" title="Link to this heading">#</a></h3>
 <p>When we also impose Restriction 2 (<span class="math notranslate nohighlight">\(m \geq 0\)</span>), the bound can be tightened
 because many of the frontier <span class="math notranslate nohighlight">\(m^v\)</span>’s that solve the linear problem may be
 negative with positive probability.</p>
@@ -1171,7 +1171,7 @@ problem and solve it numerically over a grid of candidate means.</p>
 <figure class="align-default" id="fig-imrs-positivity">
 <img alt="_images/c2984bfb3f377140bf73cd6217dc8926c6d72db31752952ea52cc6f8ab77e3b8.png" src="_images/c2984bfb3f377140bf73cd6217dc8926c6d72db31752952ea52cc6f8ab77e3b8.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 42.4 </span><span class="caption-text">IMRS frontier with and without positivity</span><a class="headerlink" href="#fig-imrs-positivity" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 43.4 </span><span class="caption-text">IMRS frontier with and without positivity</span><a class="headerlink" href="#fig-imrs-positivity" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1185,7 +1185,7 @@ negative values with high probability.</p>
 </section>
 </section>
 <section id="the-equity-premium-puzzle-revisited">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">42.7. </span>The equity premium puzzle revisited</a><a class="headerlink" href="#the-equity-premium-puzzle-revisited" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">43.7. </span>The equity premium puzzle revisited</a><a class="headerlink" href="#the-equity-premium-puzzle-revisited" title="Link to this heading">#</a></h2>
 <p>The HJ bound provides a nonparametric restatement of the equity premium puzzle.</p>
 <p>For the bound to be met, the IMRS of the representative agent must be far more
 volatile than consumption growth alone can generate under standard preferences.</p>
@@ -1338,7 +1338,7 @@ and indicates whether the implied IMRS lies inside the admissible region.</p>
 </div>
 </section>
 <section id="time-nonseparable-preferences">
-<h2><a class="toc-backref" href="#id11" role="doc-backlink"><span class="section-number">42.8. </span>Time-nonseparable preferences</a><a class="headerlink" href="#time-nonseparable-preferences" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink"><span class="section-number">43.8. </span>Time-nonseparable preferences</a><a class="headerlink" href="#time-nonseparable-preferences" title="Link to this heading">#</a></h2>
 <p>Section V of the paper examines whether relaxing time separability can help
 close the gap to the HJ bound.</p>
 <p>Consider the nonseparable service flow</p>
@@ -1460,7 +1460,7 @@ Tauchen, which is not bundled with this lecture.</p>
 <figure class="align-default" id="fig-imrs-monthly">
 <img alt="_images/0befe0accb52bb18e216c7c3478b9b39c3f3970e3a0ffbc0ea8aa07e2e80cecc.png" src="_images/0befe0accb52bb18e216c7c3478b9b39c3f3970e3a0ffbc0ea8aa07e2e80cecc.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 42.5 </span><span class="caption-text">IMRS frontier using monthly data</span><a class="headerlink" href="#fig-imrs-monthly" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 43.5 </span><span class="caption-text">IMRS frontier using monthly data</span><a class="headerlink" href="#fig-imrs-monthly" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
@@ -1482,7 +1482,7 @@ the admissible region at moderate <span class="math notranslate nohighlight">\(|
 </div>
 </section>
 <section id="treasury-bill-data-and-monetary-models">
-<h2><a class="toc-backref" href="#id12" role="doc-backlink"><span class="section-number">42.9. </span>Treasury bill data and monetary models</a><a class="headerlink" href="#treasury-bill-data-and-monetary-models" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id12" role="doc-backlink"><span class="section-number">43.9. </span>Treasury bill data and monetary models</a><a class="headerlink" href="#treasury-bill-data-and-monetary-models" title="Link to this heading">#</a></h2>
 <p>Figure 6 in the paper uses monthly prices on 3-, 6-, 9-, and 12-month
 discount bonds to construct real quarterly holding-period returns.</p>
 <p>We build a proxy from FRED Treasury yields and the same real-consumption
@@ -1556,14 +1556,14 @@ bounds near <span class="math notranslate nohighlight">\(Em \approx 1\)</span> a
 <figure class="align-default" id="fig-imrs-quarterly">
 <img alt="_images/61e93f2f36bbe05768aebc7ec6dde7baa3b8620762e7ce005cdefd5924ec9a09.png" src="_images/61e93f2f36bbe05768aebc7ec6dde7baa3b8620762e7ce005cdefd5924ec9a09.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 42.6 </span><span class="caption-text">IMRS frontier using quarterly returns</span><a class="headerlink" href="#fig-imrs-quarterly" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 43.6 </span><span class="caption-text">IMRS frontier using quarterly returns</span><a class="headerlink" href="#fig-imrs-quarterly" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </div>
 </section>
 <section id="exercises">
-<h2><a class="toc-backref" href="#id13" role="doc-backlink"><span class="section-number">42.10. </span>Exercises</a><a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id13" role="doc-backlink"><span class="section-number">43.10. </span>Exercises</a><a class="headerlink" href="#exercises" title="Link to this heading">#</a></h2>
 <p>The exercises below use a small simulated exchange economy to verify the
 projection and variance-decomposition logic algebraically.</p>
 <p>We provide the code here for you to use in your solution.</p>
@@ -1615,7 +1615,7 @@ projection and variance-decomposition logic algebraically.</p>
 </div>
 <div class="exercise admonition" id="hj91_ex1">
 
-<p class="admonition-title"><span class="caption-number">Exercise 42.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Exercise 43.1 </span></p>
 <section id="exercise-content">
 <p>Using <code class="docutils literal notranslate"><span class="pre">simulate_economy</span></code> with <span class="math notranslate nohighlight">\(\gamma = 5\)</span>:</p>
 <p>(a) Construct <span class="math notranslate nohighlight">\(m^* = x^\top \alpha^*\)</span> with
@@ -1737,7 +1737,7 @@ restriction <span class="math notranslate nohighlight">\(E(x m^*) = \mu_q\)</spa
     </tr>
     <tr>
       <th>E[(m - m*) m*]</th>
-      <td>3.395222e-14</td>
+      <td>3.393428e-14</td>
     </tr>
   </tbody>
 </table>
@@ -1984,8 +1984,13 @@ decomposition <span class="math notranslate nohighlight">\(\sigma^2(m) = \sigma^
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="subjective_beliefs_business_cycles.html">
+   30. Survey Data and Subjective Beliefs in Business Cycle Models
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   30. Robust Markov Perfect Equilibrium
+   31. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1997,42 +2002,42 @@ decomposition <span class="math notranslate nohighlight">\(\sigma^2(m) = \sigma^
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   31. Covariance Stationary Processes
+   32. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   32. Estimation of Spectra
+   33. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   33. Additive and Multiplicative Functionals
+   34. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   34. Classical Control with Linear Algebra
+   35. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   35. Classical Prediction and Filtering With Linear Algebra
+   36. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   36. Knowing the Forecasts of Others
+   37. Knowing the Forecasts of Others
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_rational_expectations.html">
-   37. Demand for Money during Hyperinflations under Rational Expectations
+   38. Demand for Money during Hyperinflations under Rational Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="info_projection.html">
-   38. Hyperinflation and Information Projection
+   39. Hyperinflation and Information Projection
   </a>
  </li>
 </ul>
@@ -2044,47 +2049,47 @@ decomposition <span class="math notranslate nohighlight">\(\sigma^2(m) = \sigma^
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   39. Asset Pricing II: The Lucas Asset Pricing Model
+   40. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   40. Elementary Asset Pricing Theory
+   41. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_richard_1987.html">
-   41. The Role of Conditioning Information in Asset Pricing
+   42. The Role of Conditioning Information in Asset Pricing
   </a>
  </li>
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   42. The Hansen-Jagannathan Bound
+   43. The Hansen-Jagannathan Bound
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   43. Two Modifications of Mean-Variance Portfolio Theory
+   44. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="doubts_or_variability.html">
-   44. Doubts or Variability?
+   45. Doubts or Variability?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
-   45. Risk Aversion or Mistaken Beliefs?
+   46. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   46. Irrelevance of Capital Structures with Complete Markets
+   47. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   47. Equilibrium Capital Structures with Incomplete Markets
+   48. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -2096,62 +2101,77 @@ decomposition <span class="math notranslate nohighlight">\(\sigma^2(m) = \sigma^
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   48. Optimal Unemployment Insurance
+   49. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   49. Stackelberg Plans
+   50. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   50. Machine Learning a Ramsey Plan
+   51. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   51. Time Inconsistency of Ramsey Plans
+   52. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   52. Sustainable Plans for a Calvo Model
+   53. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   53. Optimal Taxation with State-Contingent Debt
+   54. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   54. Optimal Taxation without State-Contingent Debt
+   55. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   55. Fluctuating Interest Rates Deliver Fiscal Insurance
+   56. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   56. Fiscal Risk and Government Debt
+   57. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   57. Competitive Equilibria of a Model of Chang
+   58. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   58. Credible Government Policies in a Model of Chang
+   59. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="repeat_mh.html">
+   60. Repeated Moral Hazard
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="atkeson_1991.html">
+   61. International Lending with Moral Hazard and Risk of Repudiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tsyrennikov_2013.html">
+   62. Capital Flows Under Moral Hazard
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dovis_accounting_mf.html">
-   59. Accounting for Monetary and Fiscal Policy
+   63. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -2163,17 +2183,17 @@ decomposition <span class="math notranslate nohighlight">\(\sigma^2(m) = \sigma^
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   60. Troubleshooting
+   64. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   61. References
+   65. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   62. Execution Statistics
+   66. Execution Statistics
   </a>
  </li>
 </ul>

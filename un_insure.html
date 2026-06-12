@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>48. Optimal Unemployment Insurance &#8212; Advanced Quantitative Economics with Python</title>
+    <title>49. Optimal Unemployment Insurance &#8212; Advanced Quantitative Economics with Python</title>
     
     <link rel="preconnect" href="https://unpkg.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -83,7 +83,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=3a5ece24" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -131,8 +131,8 @@
     <link rel="icon" href="_static/lectures-favicon.ico"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="49. Stackelberg Plans" href="dyn_stack.html" />
-    <link rel="prev" title="47. Equilibrium Capital Structures with Incomplete Markets" href="BCG_incomplete_mkts.html" />
+    <link rel="next" title="50. Stackelberg Plans" href="dyn_stack.html" />
+    <link rel="prev" title="48. Equilibrium Capital Structures with Incomplete Markets" href="BCG_incomplete_mkts.html" />
 
 <!-- Normal Meta Tags -->
 <meta name="author" context="Thomas J. Sargent &amp; John Stachurski" />
@@ -207,24 +207,24 @@
 
                         <nav id="bd-toc-nav" class="qe-page__toc-nav">
                             <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">48.1. Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shavell-and-weisss-model">48.2. Shavell and Weiss’s model</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autarky">48.2.1. Autarky</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-information">48.2.2. Full information</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#incentive-problem">48.2.3. Incentive problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">49.1. Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shavell-and-weisss-model">49.2. Shavell and Weiss’s model</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#autarky">49.2.1. Autarky</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#full-information">49.2.2. Full information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#incentive-problem">49.2.3. Incentive problem</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-information">48.3. Private information</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-details">48.3.1. Computational details</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-computations">48.3.2. Python computations</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-values">48.3.3. Parameter values</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-under-private-information">48.3.4. Computation under private information</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">48.3.5. Algorithm</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#private-information">49.3. Private information</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computational-details">49.3.1. Computational details</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#python-computations">49.3.2. Python computations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameter-values">49.3.3. Parameter values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-under-private-information">49.3.4. Computation under private information</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algorithm">49.3.5. Algorithm</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outcomes">48.4. Outcomes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replacement-ratios-and-continuation-values">48.4.1. Replacement ratios and continuation values</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretations">48.4.2. Interpretations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#outcomes">49.4. Outcomes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#replacement-ratios-and-continuation-values">49.4.1. Replacement ratios and continuation values</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretations">49.4.2. Interpretations</a></li>
 </ul>
 </li>
 </ul>
@@ -294,7 +294,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/6320d714" class="changelog-hash">6320d714</a>
                                 
                                 <span class="changelog-author">Matt McKay</span>
-                                <span class="changelog-time">1 week ago</span>
+                                <span class="changelog-time">2 weeks ago</span>
                                 <span class="changelog-message">FIX: index fsolve result in un_insure r_error so brentq gets a scalar (#327)</span>
                             </li>
                             
@@ -365,9 +365,9 @@
                     <div>
                         
   <section class="tex2jax_ignore mathjax_ignore" id="optimal-unemployment-insurance">
-<h1><span class="section-number">48. </span>Optimal Unemployment Insurance<a class="headerlink" href="#optimal-unemployment-insurance" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">49. </span>Optimal Unemployment Insurance<a class="headerlink" href="#optimal-unemployment-insurance" title="Link to this heading">#</a></h1>
 <section id="overview">
-<h2><span class="section-number">48.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">49.1. </span>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p>This lecture describes a model of optimal unemployment
 insurance created by  Shavell and Weiss (1979) <span class="bibtex-citation" id="id1">[<a class="reference internal" href="zreferences.html#id25" title="Steven Shavell and Laurence Weiss. The optimal payment of unemployment insurance benefits over time. Journal of political Economy, 87(6):1347-1362, 1979.">Shavell and Weiss, 1979</a>]</span>.</p>
 <p>We  use recursive techniques of
@@ -377,12 +377,12 @@ Weiss’s model.</p>
 <p>Hopenhayn and Nicolini’s model is a generalization of Shavell and Weiss’s along dimensions that we’ll soon describe.</p>
 </section>
 <section id="shavell-and-weisss-model">
-<h2><span class="section-number">48.2. </span>Shavell and Weiss’s model<a class="headerlink" href="#shavell-and-weisss-model" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">49.2. </span>Shavell and Weiss’s model<a class="headerlink" href="#shavell-and-weisss-model" title="Link to this heading">#</a></h2>
 <p>An unemployed worker orders stochastic processes of
 consumption and  search effort <span class="math notranslate nohighlight">\(\{c_t , a_t\}_{t=0}^\infty\)</span>
 according to</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo1">
-<span class="eqno">(48.1)<a class="headerlink" href="#equation-eq-hugo1" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.1)<a class="headerlink" href="#equation-eq-hugo1" title="Link to this equation">#</a></span>\[
 E \sum_{t=0}^\infty \beta^t \left[ u(c_t) - a_t \right]
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(\beta \in (0,1)\)</span> and <span class="math notranslate nohighlight">\(u(c)\)</span> is strictly increasing, twice differentiable,
@@ -426,7 +426,7 @@ a permanent per-period history-dependent tax on a previously
 unemployed but presently employed worker.</p></li>
 </ul>
 <section id="autarky">
-<h3><span class="section-number">48.2.1. </span>Autarky<a class="headerlink" href="#autarky" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">49.2.1. </span>Autarky<a class="headerlink" href="#autarky" title="Link to this heading">#</a></h3>
 <p>As a benchmark, we first study the fate of an unemployed worker
 who has no access to unemployment insurance.</p>
 <p>Because employment
@@ -437,7 +437,7 @@ state.</p>
 be <span class="math notranslate nohighlight">\(u(c)-a = u(w)\)</span> forever.</p>
 <p>Therefore,</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo2">
-<span class="eqno">(48.2)<a class="headerlink" href="#equation-eq-hugo2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.2)<a class="headerlink" href="#equation-eq-hugo2" title="Link to this equation">#</a></span>\[
 V^e = {u(w) \over (1-\beta)}  .
 \]</div>
 <p>Now let <span class="math notranslate nohighlight">\(V^u\)</span> be the expected discounted present value of utility for an
@@ -445,38 +445,38 @@ unemployed worker who chooses  consumption, effort  pair <span class="math notra
 optimally.</p>
 <p>Value <span class="math notranslate nohighlight">\(V^u\)</span> satisfies the Bellman equation</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo3">
-<span class="eqno">(48.3)<a class="headerlink" href="#equation-eq-hugo3" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.3)<a class="headerlink" href="#equation-eq-hugo3" title="Link to this equation">#</a></span>\[
 V^u = \max_{a \geq 0} \biggl\{ u(0) - a + \beta \left[
    p(a) V^e + (1-p(a)) V^u \right] \biggr\} .
 \]</div>
 <p>The first-order condition for a maximum is</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo4">
-<span class="eqno">(48.4)<a class="headerlink" href="#equation-eq-hugo4" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.4)<a class="headerlink" href="#equation-eq-hugo4" title="Link to this equation">#</a></span>\[
 \beta p'(a) \left[V^e - V^u \right] \leq 1 ,
 \]</div>
 <p>with equality if <span class="math notranslate nohighlight">\(a&gt;0\)</span>.</p>
 <p>Since there is no state variable in this
 infinite horizon problem, there is a time-invariant optimal
 search intensity <span class="math notranslate nohighlight">\(a\)</span> and an associated value of being unemployed <span class="math notranslate nohighlight">\(V^u\)</span>.</p>
-<p>Let <span class="math notranslate nohighlight">\(V_{\rm aut} = V^u\)</span> solve Bellman equation <a class="reference internal" href="#equation-eq-hugo3">(48.3)</a>.</p>
-<p>Equations <a class="reference internal" href="#equation-eq-hugo3">(48.3)</a>
-and <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a>
+<p>Let <span class="math notranslate nohighlight">\(V_{\rm aut} = V^u\)</span> solve Bellman equation <a class="reference internal" href="#equation-eq-hugo3">(49.3)</a>.</p>
+<p>Equations <a class="reference internal" href="#equation-eq-hugo3">(49.3)</a>
+and <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a>
 form the basis for
 an iterative algorithm for computing <span class="math notranslate nohighlight">\(V^u = V_{\rm aut}\)</span>.</p>
 <ul class="simple">
 <li><p>Let <span class="math notranslate nohighlight">\(V^u_j\)</span> be
 the estimate of <span class="math notranslate nohighlight">\(V_{\rm aut}\)</span> at the <span class="math notranslate nohighlight">\(j\)</span>th iteration.</p></li>
 <li><p>Use this value
-in equation <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a>  and solve
+in equation <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a>  and solve
 for an estimate of effort  <span class="math notranslate nohighlight">\(a_j\)</span>.</p></li>
 <li><p>Use this value in a version of equation
-<a class="reference internal" href="#equation-eq-hugo3">(48.3)</a> with <span class="math notranslate nohighlight">\(V^u_j\)</span> on the right side
+<a class="reference internal" href="#equation-eq-hugo3">(49.3)</a> with <span class="math notranslate nohighlight">\(V^u_j\)</span> on the right side
 to compute <span class="math notranslate nohighlight">\(V^u_{j+1}\)</span>.</p></li>
 <li><p>Iterate to convergence.</p></li>
 </ul>
 </section>
 <section id="full-information">
-<h3><span class="section-number">48.2.2. </span>Full information<a class="headerlink" href="#full-information" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">49.2.2. </span>Full information<a class="headerlink" href="#full-information" title="Link to this heading">#</a></h3>
 <p>Another benchmark model helps set the stage for the model with private information that we ultimately want to study.</p>
 <p>We temporarily assume that an unemployment insurance agency has full information about the unemployed worker.</p>
 <p>We assume that the  insurance agency can control both the consumption and the search effort of an unemployed worker.</p>
@@ -499,31 +499,31 @@ and does not find a job this period.</p>
 <p>The planner sets <span class="math notranslate nohighlight">\((c, a, V^u)\)</span> as functions of <span class="math notranslate nohighlight">\(V\)</span> and to
 satisfy the following  Bellman equation for associated cost function <span class="math notranslate nohighlight">\(C(V)\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo5">
-<span class="eqno">(48.5)<a class="headerlink" href="#equation-eq-hugo5" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.5)<a class="headerlink" href="#equation-eq-hugo5" title="Link to this equation">#</a></span>\[
 C(V) = \min_{c, a, V^u} \biggl\{ c  + \beta [1 - p(a)] C(V^u) \biggr\} ,
 \]</div>
 <p>where  minimization is subject to the promise-keeping constraint</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo6">
-<span class="eqno">(48.6)<a class="headerlink" href="#equation-eq-hugo6" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.6)<a class="headerlink" href="#equation-eq-hugo6" title="Link to this equation">#</a></span>\[
 V \leq u(c) - a + \beta
 \left\{ p(a) V^e + [1-p(a)] V^u \right\}.
 \]</div>
-<p>Here <span class="math notranslate nohighlight">\(V^e\)</span> is given by equation <a class="reference internal" href="#equation-eq-hugo2">(48.2)</a>, which reflects the
+<p>Here <span class="math notranslate nohighlight">\(V^e\)</span> is given by equation <a class="reference internal" href="#equation-eq-hugo2">(49.2)</a>, which reflects the
 assumption that once the worker is employed, he is beyond the
 reach of the unemployment insurance agency.</p>
-<p>The right side of  Bellman equation <a class="reference internal" href="#equation-eq-hugo5">(48.5)</a> is attained by
+<p>The right side of  Bellman equation <a class="reference internal" href="#equation-eq-hugo5">(49.5)</a> is attained by
 policy functions <span class="math notranslate nohighlight">\(c=c(V), a=a(V)\)</span>, and <span class="math notranslate nohighlight">\(V^u=V^u(V)\)</span>.</p>
 <p>The promise-keeping constraint,
-equation  <a class="reference internal" href="#equation-eq-hugo6">(48.6)</a>,
+equation  <a class="reference internal" href="#equation-eq-hugo6">(49.6)</a>,
 asserts that the 3-tuple <span class="math notranslate nohighlight">\((c, a, V^u)\)</span> attains
 at least <span class="math notranslate nohighlight">\(V\)</span>.</p>
 <p>Let <span class="math notranslate nohighlight">\(\theta\)</span> be a Lagrange multiplier
-on constraint <a class="reference internal" href="#equation-eq-hugo6">(48.6)</a>.</p>
+on constraint <a class="reference internal" href="#equation-eq-hugo6">(49.6)</a>.</p>
 <p>At an interior solution,  first-order
 conditions with
 respect to <span class="math notranslate nohighlight">\(c, a\)</span>, and <span class="math notranslate nohighlight">\(V^u\)</span>, respectively, are</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo7">
-<span class="eqno">(48.7)<a class="headerlink" href="#equation-eq-hugo7" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.7)<a class="headerlink" href="#equation-eq-hugo7" title="Link to this equation">#</a></span>\[
 \begin{aligned} \theta &amp; = {1 \over u'(c)}\,,   \cr
              C(V^u) &amp; = \theta \left[ {1 \over \beta p'(a)} -
                            (V^e - V^u) \right]\,,    \cr
@@ -531,15 +531,15 @@ respect to <span class="math notranslate nohighlight">\(c, a\)</span>, and <span
 \end{aligned}
 \]</div>
 <p>The envelope condition   <span class="math notranslate nohighlight">\(C'(V) = \theta\)</span> and the third equation
-of <a class="reference internal" href="#equation-eq-hugo7">(48.7)</a>  imply that <span class="math notranslate nohighlight">\(C'(V^u) =C'(V)\)</span>.</p>
+of <a class="reference internal" href="#equation-eq-hugo7">(49.7)</a>  imply that <span class="math notranslate nohighlight">\(C'(V^u) =C'(V)\)</span>.</p>
 <p>Strict convexity of <span class="math notranslate nohighlight">\(C\)</span> then
 implies that <span class="math notranslate nohighlight">\(V^u =V\)</span>.</p>
 <p>Applied repeatedly over time,
 <span class="math notranslate nohighlight">\(V^u=V\)</span> makes
 the continuation value remain constant during the entire
 spell of unemployment.</p>
-<p>The first equation of <a class="reference internal" href="#equation-eq-hugo7">(48.7)</a>
-determines <span class="math notranslate nohighlight">\(c\)</span>, and the second equation of <a class="reference internal" href="#equation-eq-hugo7">(48.7)</a>  determines
+<p>The first equation of <a class="reference internal" href="#equation-eq-hugo7">(49.7)</a>
+determines <span class="math notranslate nohighlight">\(c\)</span>, and the second equation of <a class="reference internal" href="#equation-eq-hugo7">(49.7)</a>  determines
 <span class="math notranslate nohighlight">\(a\)</span>, both as functions of promised value <span class="math notranslate nohighlight">\(V\)</span>.</p>
 <p>That <span class="math notranslate nohighlight">\(V^u = V\)</span> then
 implies that <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> are held constant during the unemployment
@@ -550,7 +550,7 @@ during the unemployment spell.</p>
 employment and unemployment unless <span class="math notranslate nohighlight">\(V=V^e\)</span>.</p>
 </section>
 <section id="incentive-problem">
-<h3><span class="section-number">48.2.3. </span>Incentive problem<a class="headerlink" href="#incentive-problem" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">49.2.3. </span>Incentive problem<a class="headerlink" href="#incentive-problem" title="Link to this heading">#</a></h3>
 <p>The preceding efficient insurance scheme assumes  that the insurance agency
 controls both <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span>.</p>
 <p>The insurance agency cannot simply  provide <span class="math notranslate nohighlight">\(c\)</span> and then allow the worker to choose <span class="math notranslate nohighlight">\(a\)</span>.</p>
@@ -563,23 +563,23 @@ effort <span class="math notranslate nohighlight">\(a\)</span>.</p>
 search effort is <strong>higher</strong> than what the worker would choose
 if he were to be guaranteed consumption level <span class="math notranslate nohighlight">\(c\)</span> while he
 remains unemployed.</p>
-<p>This follows from the first two equations of <a class="reference internal" href="#equation-eq-hugo7">(48.7)</a> and the
+<p>This follows from the first two equations of <a class="reference internal" href="#equation-eq-hugo7">(49.7)</a> and the
 fact that the insurance scheme is costly, <span class="math notranslate nohighlight">\(C(V^u)&gt;0\)</span>, which imply
 <span class="math notranslate nohighlight">\([ \beta p'(a) ]^{-1} &gt; (V^e - V^u)\)</span>.</p>
 <p>Now look at the worker’s
-first-order condition <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a>  under autarky.</p>
+first-order condition <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a>  under autarky.</p>
 <p>It implies that if search effort <span class="math notranslate nohighlight">\(a&gt;0\)</span>, then
 <span class="math notranslate nohighlight">\([\beta p'(a)]^{-1} = [V^e - V^u]\)</span>, which is inconsistent
 with the  inequality
 <span class="math notranslate nohighlight">\([ \beta p'(a) ]^{-1} &gt; (V^e - V^u)\)</span> that prevails when <span class="math notranslate nohighlight">\(a &gt;0\)</span> when the agency controls
 both <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(c\)</span>.</p>
 <p>If he were free to choose <span class="math notranslate nohighlight">\(a\)</span>, the worker would therefore want to
-fulfill <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a>, either at equality so long as <span class="math notranslate nohighlight">\(a &gt;0\)</span>, or by setting
+fulfill <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a>, either at equality so long as <span class="math notranslate nohighlight">\(a &gt;0\)</span>, or by setting
 <span class="math notranslate nohighlight">\(a=0\)</span> otherwise.</p>
 <p>Starting from the  <span class="math notranslate nohighlight">\(a\)</span> associated with
 the full-information social insurance scheme in which the agency controls both <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span>,
 the worker  would establish the desired equality
-in <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a> by <em>lowering</em> <span class="math notranslate nohighlight">\(a\)</span>, thereby decreasing
+in <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a> by <em>lowering</em> <span class="math notranslate nohighlight">\(a\)</span>, thereby decreasing
 the term <span class="math notranslate nohighlight">\([ \beta p'(a) ]^{-1}\)</span> (which also lowers <span class="math notranslate nohighlight">\((V^e - V^u)\)</span>
 when the value of being
 unemployed <span class="math notranslate nohighlight">\(V^u\)</span> increases).</p>
@@ -596,25 +596,25 @@ worker’s consumption <em>and</em> his search effort.</p>
 </section>
 </section>
 <section id="private-information">
-<h2><span class="section-number">48.3. </span>Private information<a class="headerlink" href="#private-information" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">49.3. </span>Private information<a class="headerlink" href="#private-information" title="Link to this heading">#</a></h2>
 <p>Following  <span class="bibtex-citation" id="id5">[<a class="reference internal" href="zreferences.html#id25" title="Steven Shavell and Laurence Weiss. The optimal payment of unemployment insurance benefits over time. Journal of political Economy, 87(6):1347-1362, 1979.">Shavell and Weiss, 1979</a>]</span> and
 <span class="bibtex-citation" id="id6">[<a class="reference internal" href="zreferences.html#id24" title="Hugo A Hopenhayn and Juan Pablo Nicolini. Optimal Unemployment Insurance. Journal of Political Economy, 105(2):412-438, April 1997. URL: https://ideas.repec.org/a/ucp/jpolec/v105y1997i2p412-38.html, doi:10.1086/262078.">Hopenhayn and Nicolini, 1997</a>]</span>, now assume that  the unemployment insurance agency cannot
 observe or control <span class="math notranslate nohighlight">\(a\)</span>, though it can observe and control <span class="math notranslate nohighlight">\(c\)</span>.</p>
-<p>The worker is free to choose <span class="math notranslate nohighlight">\(a\)</span>, which puts expression <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a>, the worker’s first-order condition under autarky,
+<p>The worker is free to choose <span class="math notranslate nohighlight">\(a\)</span>, which puts expression <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a>, the worker’s first-order condition under autarky,
 back in the picture.</p>
 <ul class="simple">
 <li><p>We are assuming that the worker’s
 best response to the unemployment insurance arrangement is
-completely characterized by the first-order condition <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a>,
+completely characterized by the first-order condition <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a>,
 an instance of the so-called first-order approach to incentive problems.</p></li>
 </ul>
 <p>Given a contract, the individual will choose search effort according to
-first-order condition <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a>.</p>
+first-order condition <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a>.</p>
 <p>This fact motivates the insurance agency
 to design an unemployment insurance contract that respects this restriction.</p>
 <p>Thus, the  contract design problem is now to minimize the right side of equation
-<a class="reference internal" href="#equation-eq-hugo5">(48.5)</a> subject to expression <a class="reference internal" href="#equation-eq-hugo6">(48.6)</a> and the incentive constraint <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a>.</p>
-<p>Since the restrictions <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a> and <a class="reference internal" href="#equation-eq-hugo6">(48.6)</a> are not linear
+<a class="reference internal" href="#equation-eq-hugo5">(49.5)</a> subject to expression <a class="reference internal" href="#equation-eq-hugo6">(49.6)</a> and the incentive constraint <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a>.</p>
+<p>Since the restrictions <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a> and <a class="reference internal" href="#equation-eq-hugo6">(49.6)</a> are not linear
 and generally do not define a convex set, it becomes challenging
 to provide conditions under which the solution to the dynamic
 programming problem results in a convex function <span class="math notranslate nohighlight">\(C(V)\)</span>.</p>
@@ -626,9 +626,9 @@ lotteries, because convexity of the constraint set is a sufficient
 but not necessary condition for convexity of the cost function.</p></li>
 <li><p>In order to characterize the optimal solution, we follow Hopenhayn and Nicolini (1997) <span class="bibtex-citation" id="id7">[<a class="reference internal" href="zreferences.html#id24" title="Hugo A Hopenhayn and Juan Pablo Nicolini. Optimal Unemployment Insurance. Journal of Political Economy, 105(2):412-438, April 1997. URL: https://ideas.repec.org/a/ucp/jpolec/v105y1997i2p412-38.html, doi:10.1086/262078.">Hopenhayn and Nicolini, 1997</a>]</span> by hopefully proceeding under the   assumption that <span class="math notranslate nohighlight">\(C(V)\)</span> is strictly convex.</p></li>
 </ul>
-<p>Let <span class="math notranslate nohighlight">\(\eta\)</span> be the multiplier on constraint <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a>, while
-<span class="math notranslate nohighlight">\(\theta\)</span> continues to denote the multiplier on constraint <a class="reference internal" href="#equation-eq-hugo6">(48.6)</a>.</p>
-<p>But now we replace the weak inequality in <a class="reference internal" href="#equation-eq-hugo6">(48.6)</a> by an equality.</p>
+<p>Let <span class="math notranslate nohighlight">\(\eta\)</span> be the multiplier on constraint <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a>, while
+<span class="math notranslate nohighlight">\(\theta\)</span> continues to denote the multiplier on constraint <a class="reference internal" href="#equation-eq-hugo6">(49.6)</a>.</p>
+<p>But now we replace the weak inequality in <a class="reference internal" href="#equation-eq-hugo6">(49.6)</a> by an equality.</p>
 <ul class="simple">
 <li><p>We do this because the unemployment insurance agency cannot award a higher utility than
 <span class="math notranslate nohighlight">\(V\)</span> because that might violate an incentive-compatibility constraint
@@ -637,7 +637,7 @@ for exerting the proper search effort in earlier periods.</p></li>
 <p>At an interior solution,  first-order conditions with
 respect to <span class="math notranslate nohighlight">\(c, a\)</span>, and <span class="math notranslate nohighlight">\(V^u\)</span>, respectively, are</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo8">
-<span class="eqno">(48.8)<a class="headerlink" href="#equation-eq-hugo8" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.8)<a class="headerlink" href="#equation-eq-hugo8" title="Link to this equation">#</a></span>\[
 \begin{aligned} \theta &amp; = {1 \over u'(c)}\,,   \cr
  C(V^u)  &amp; = \theta \left[ {1 \over \beta p'(a)} - (V^e - V^u) \right]
             \,-\, \eta {p''(a) \over p'(a)} (V^e - V^u)                  \cr
@@ -645,37 +645,37 @@ respect to <span class="math notranslate nohighlight">\(c, a\)</span>, and <span
  C'(V^u) &amp; = \theta \,-\, \eta {p'(a) \over 1-p(a)}\, ,
 \end{aligned}
 \]</div>
-<p>where the second equality in the second equation in <a class="reference internal" href="#equation-eq-hugo8">(48.8)</a>  follows from strict equality
-of the incentive constraint <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a> when <span class="math notranslate nohighlight">\(a&gt;0\)</span>.</p>
+<p>where the second equality in the second equation in <a class="reference internal" href="#equation-eq-hugo8">(49.8)</a>  follows from strict equality
+of the incentive constraint <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a> when <span class="math notranslate nohighlight">\(a&gt;0\)</span>.</p>
 <p>As long as the
 insurance scheme is associated with costs, so that <span class="math notranslate nohighlight">\(C(V^u)&gt;0\)</span>, the first-order
-condition in the second equation of <a class="reference internal" href="#equation-eq-hugo8">(48.8)</a> implies that the multiplier <span class="math notranslate nohighlight">\(\eta\)</span> is strictly
+condition in the second equation of <a class="reference internal" href="#equation-eq-hugo8">(49.8)</a> implies that the multiplier <span class="math notranslate nohighlight">\(\eta\)</span> is strictly
 positive.</p>
-<p>The first-order condition in the second equation of the third equality in <a class="reference internal" href="#equation-eq-hugo8">(48.8)</a>  and the
+<p>The first-order condition in the second equation of the third equality in <a class="reference internal" href="#equation-eq-hugo8">(49.8)</a>  and the
 envelope condition <span class="math notranslate nohighlight">\(C'(V) = \theta\)</span> together allow us to conclude that
 <span class="math notranslate nohighlight">\(C'(V^u) &lt; C'(V)\)</span>.</p>
 <p>Convexity of <span class="math notranslate nohighlight">\(C\)</span> then implies that <span class="math notranslate nohighlight">\(V^u &lt; V\)</span>.</p>
-<p>After we have also used  the first equation of <a class="reference internal" href="#equation-eq-hugo8">(48.8)</a>, it follows that
+<p>After we have also used  the first equation of <a class="reference internal" href="#equation-eq-hugo8">(49.8)</a>, it follows that
 in order to provide  the proper incentives, the consumption
 of the unemployed worker must decrease as the duration of the unemployment
 spell lengthens.</p>
-<p>It also follows from <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a> at equality that
+<p>It also follows from <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a> at equality that
 search effort <span class="math notranslate nohighlight">\(a\)</span> rises as <span class="math notranslate nohighlight">\(V^u\)</span> falls, i.e., it rises with the duration
 of unemployment.</p>
 <p>The  of benefits on the duration of unemployment is  designed to provide the worker an
 incentive to search.</p>
-<p>To understand this, from  the third equation of <a class="reference internal" href="#equation-eq-hugo8">(48.8)</a>, notice how
+<p>To understand this, from  the third equation of <a class="reference internal" href="#equation-eq-hugo8">(49.8)</a>, notice how
 the conclusion that consumption falls with the duration of
 unemployment depends on the assumption that more search effort
 raises the prospect of finding a job, i.e., that <span class="math notranslate nohighlight">\(p'(a) &gt; 0\)</span>.</p>
 <p>If
-<span class="math notranslate nohighlight">\(p'(a) =0\)</span>, then  the third equation of <a class="reference internal" href="#equation-eq-hugo8">(48.8)</a> and the strict convexity of <span class="math notranslate nohighlight">\(C\)</span> imply that
+<span class="math notranslate nohighlight">\(p'(a) =0\)</span>, then  the third equation of <a class="reference internal" href="#equation-eq-hugo8">(49.8)</a> and the strict convexity of <span class="math notranslate nohighlight">\(C\)</span> imply that
 <span class="math notranslate nohighlight">\(V^u =V\)</span>.</p>
 <p>Thus, when <span class="math notranslate nohighlight">\(p'(a) =0\)</span>, there is no reason for the
 planner to make consumption fall with the duration of
 unemployment.</p>
 <section id="computational-details">
-<h3><span class="section-number">48.3.1. </span>Computational details<a class="headerlink" href="#computational-details" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">49.3.1. </span>Computational details<a class="headerlink" href="#computational-details" title="Link to this heading">#</a></h3>
 <p>It is useful to note that there
 are natural lower and upper bounds to the set
 of continuation values <span class="math notranslate nohighlight">\(V^u\)</span>.</p>
@@ -683,7 +683,7 @@ of continuation values <span class="math notranslate nohighlight">\(V^u\)</span>
 the expected lifetime utility in autarky,
 <span class="math notranslate nohighlight">\(V_{\rm aut}\)</span>.</p>
 <p>To compute an upper bound,
-represent condition <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a> as</p>
+represent condition <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a> as</p>
 <div class="math notranslate nohighlight">
 \[
 V^u \geq V^e  - [\beta  p'(a)]^{-1},
@@ -702,40 +702,40 @@ for <span class="math notranslate nohighlight">\(V^u\)</span>.</p>
 we suggest using the constraints to eliminate <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> as choice
 variables, thereby reducing the Bellman equation to
 a minimization over the one choice variable <span class="math notranslate nohighlight">\(V^u\)</span>.</p>
-<p>First express the promise-keeping constraint <a class="reference internal" href="#equation-eq-hugo6">(48.6)</a>  at equality as</p>
+<p>First express the promise-keeping constraint <a class="reference internal" href="#equation-eq-hugo6">(49.6)</a>  at equality as</p>
 <div class="math notranslate nohighlight">
 \[
 u(c) = V + a - \beta \{p(a) V^e +[1-p(a)] V^u \}
 \]</div>
 <p>so that  consumption is</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo21">
-<span class="eqno">(48.9)<a class="headerlink" href="#equation-eq-hugo21" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.9)<a class="headerlink" href="#equation-eq-hugo21" title="Link to this equation">#</a></span>\[
 c = u^{-1}\left(
      V+a -\beta [p(a)V^e + (1-p(a))V^u] \right).
 \]</div>
-<p>Similarly, solving the inequality <a class="reference internal" href="#equation-eq-hugo4">(48.4)</a>  for <span class="math notranslate nohighlight">\(a\)</span>  leads to</p>
+<p>Similarly, solving the inequality <a class="reference internal" href="#equation-eq-hugo4">(49.4)</a>  for <span class="math notranslate nohighlight">\(a\)</span>  leads to</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo22a">
-<span class="eqno">(48.10)<a class="headerlink" href="#equation-eq-hugo22a" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.10)<a class="headerlink" href="#equation-eq-hugo22a" title="Link to this equation">#</a></span>\[
 a = \max\left\{0, p'^{-1} \left({ 1 \over \beta (V^e - V^u)  } \right) \right\}.
 \]</div>
-<p>When we specialize <a class="reference internal" href="#equation-eq-hugo22a">(48.10)</a> to the   functional
+<p>When we specialize <a class="reference internal" href="#equation-eq-hugo22a">(49.10)</a> to the   functional
 form for <span class="math notranslate nohighlight">\(p(a)\)</span> used by Hopenhayn and Nicolini, we obtain</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo22">
-<span class="eqno">(48.11)<a class="headerlink" href="#equation-eq-hugo22" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.11)<a class="headerlink" href="#equation-eq-hugo22" title="Link to this equation">#</a></span>\[
 a = \max\left\{0, {\log[r \beta (V^e - V^u)] \over r } \right\}.
 \]</div>
-<p>Formulas <a class="reference internal" href="#equation-eq-hugo21">(48.9)</a>  and <a class="reference internal" href="#equation-eq-hugo22">(48.11)</a>  express <span class="math notranslate nohighlight">\((c,a)\)</span> as functions
+<p>Formulas <a class="reference internal" href="#equation-eq-hugo21">(49.9)</a>  and <a class="reference internal" href="#equation-eq-hugo22">(49.11)</a>  express <span class="math notranslate nohighlight">\((c,a)\)</span> as functions
 of <span class="math notranslate nohighlight">\(V\)</span> and  the continuation value <span class="math notranslate nohighlight">\(V^u\)</span>.</p>
 <p>Using these functions
 allows us to write the Bellman equation in <span class="math notranslate nohighlight">\(C(V)\)</span> as</p>
 <div class="math notranslate nohighlight" id="equation-eq-hugo23">
-<span class="eqno">(48.12)<a class="headerlink" href="#equation-eq-hugo23" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.12)<a class="headerlink" href="#equation-eq-hugo23" title="Link to this equation">#</a></span>\[
 C(V)  = \min_{V^u} \left\{ c + \beta [1 - p(a)] C(V^u) \right\}
 \]</div>
-<p>where <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> are given by equations <a class="reference internal" href="#equation-eq-hugo21">(48.9)</a>  and <a class="reference internal" href="#equation-eq-hugo22">(48.11)</a>.</p>
+<p>where <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> are given by equations <a class="reference internal" href="#equation-eq-hugo21">(49.9)</a>  and <a class="reference internal" href="#equation-eq-hugo22">(49.11)</a>.</p>
 </section>
 <section id="python-computations">
-<h3><span class="section-number">48.3.2. </span>Python computations<a class="headerlink" href="#python-computations" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">49.3.2. </span>Python computations<a class="headerlink" href="#python-computations" title="Link to this heading">#</a></h3>
 <p>We’ll approximate the planner’s optimal cost function  with cubic splines.</p>
 <p>To do this, we’ll load some useful modules</p>
 <div class="cell docutils container">
@@ -769,7 +769,7 @@ C(V)  = \min_{V^u} \left\{ c + \beta [1 - p(a)] C(V^u) \right\}
 </div>
 </section>
 <section id="parameter-values">
-<h3><span class="section-number">48.3.3. </span>Parameter values<a class="headerlink" href="#parameter-values" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">49.3.3. </span>Parameter values<a class="headerlink" href="#parameter-values" title="Link to this heading">#</a></h3>
 <p>For  the other parameters appearing in  the above Python code, we’ll calibrate parameter <span class="math notranslate nohighlight">\(r\)</span>
 that pins down the function <span class="math notranslate nohighlight">\(p(a) = 1 - \exp(- r a)\)</span> to match an observerd hazard rate –  the probability that an unemployed worker finds a job each  –  in US data.</p>
 <p>In particular, we seek an <span class="math notranslate nohighlight">\(r\)</span> so that in  autarky <code class="docutils literal notranslate"><span class="pre">p(a(r))</span> <span class="pre">=</span> <span class="pre">0.1</span></code>, where <code class="docutils literal notranslate"><span class="pre">a</span></code> is the optimal search effort.</p>
@@ -803,20 +803,20 @@ that pins down the function <span class="math notranslate nohighlight">\(p(a) = 
 <p>Recall that under  autarky the value for an unemployed worker
 satisfies  the Bellman equation</p>
 <div class="math notranslate nohighlight" id="equation-eq-yad1">
-<span class="eqno">(48.13)<a class="headerlink" href="#equation-eq-yad1" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.13)<a class="headerlink" href="#equation-eq-yad1" title="Link to this equation">#</a></span>\[
 V^u = \max_{a} \{u(0) - a + \beta\left[p_{r}(a)V^e + (1-p_{r}(a))V^u\right]\}
 \]</div>
 <p>At the optimal choice of <span class="math notranslate nohighlight">\(a\)</span>, we have first-order necessary condition:</p>
 <div class="math notranslate nohighlight" id="equation-eq-yad2">
-<span class="eqno">(48.14)<a class="headerlink" href="#equation-eq-yad2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.14)<a class="headerlink" href="#equation-eq-yad2" title="Link to this equation">#</a></span>\[
 \beta p_{r}'(a)[V^e - V^u] \leq 1
 \]</div>
 <p>with equality when a &gt;0.</p>
 <p>Given a value of parameter  <span class="math notranslate nohighlight">\(\bar{r}\)</span>, we can solve the autarky problem as follows:</p>
 <ol class="arabic simple">
 <li><p>Guess <span class="math notranslate nohighlight">\(V^u \in \mathbb{R}^{+}\)</span></p></li>
-<li><p>Given <span class="math notranslate nohighlight">\(V^u\)</span>, use the FOC <a class="reference internal" href="#equation-eq-yad2">(48.14)</a> to calculate the implied optimal search effort <span class="math notranslate nohighlight">\(a\)</span></p></li>
-<li><p>Evaluate the difference between the LHS and RHS of the Bellman equation <a class="reference internal" href="#equation-eq-yad1">(48.13)</a></p></li>
+<li><p>Given <span class="math notranslate nohighlight">\(V^u\)</span>, use the FOC <a class="reference internal" href="#equation-eq-yad2">(49.14)</a> to calculate the implied optimal search effort <span class="math notranslate nohighlight">\(a\)</span></p></li>
+<li><p>Evaluate the difference between the LHS and RHS of the Bellman equation <a class="reference internal" href="#equation-eq-yad1">(49.13)</a></p></li>
 <li><p>Update guess for <span class="math notranslate nohighlight">\(V^u\)</span> accordingly, then return  to 2) and repeat until the Bellman equation is satisfied.</p></li>
 </ol>
 <p>For a given <span class="math notranslate nohighlight">\(r\)</span> and guess <span class="math notranslate nohighlight">\(V^u\)</span>,
@@ -889,20 +889,20 @@ Check p at r: 0.10000000000502518
 <p>Now that we have calibrated our the parameter <span class="math notranslate nohighlight">\(r\)</span>, we can continue with solving the  model with private information.</p>
 </section>
 <section id="computation-under-private-information">
-<h3><span class="section-number">48.3.4. </span>Computation under private information<a class="headerlink" href="#computation-under-private-information" title="Link to this heading">#</a></h3>
-<p>Our approach to solving the full model follows ideas of  Judd (1998) <span class="bibtex-citation" id="id8">[<a class="reference internal" href="zreferences.html#id186" title="K L Judd. Numerical Methods in Economics. Scientific and Engineering. MIT Press, 1998.">Judd, 1998</a>]</span>, who uses a polynomial to approximate the value function and a numerical optimizer to perform the optimization at each iteration.</p>
+<h3><span class="section-number">49.3.4. </span>Computation under private information<a class="headerlink" href="#computation-under-private-information" title="Link to this heading">#</a></h3>
+<p>Our approach to solving the full model follows ideas of  Judd (1998) <span class="bibtex-citation" id="id8">[<a class="reference internal" href="zreferences.html#id206" title="K L Judd. Numerical Methods in Economics. Scientific and Engineering. MIT Press, 1998.">Judd, 1998</a>]</span>, who uses a polynomial to approximate the value function and a numerical optimizer to perform the optimization at each iteration.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>For further details of the Judd (1998) <span class="bibtex-citation" id="id9">[<a class="reference internal" href="zreferences.html#id186" title="K L Judd. Numerical Methods in Economics. Scientific and Engineering. MIT Press, 1998.">Judd, 1998</a>]</span> method, see <span class="bibtex-citation" id="id10">[<a class="reference internal" href="zreferences.html#id193" title="L Ljungqvist and T J Sargent. Recursive Macroeconomic Theory. MIT Press, 4 edition, 2018.">Ljungqvist and Sargent, 2018</a>]</span>, Section 5.7.</p>
+<p>For further details of the Judd (1998) <span class="bibtex-citation" id="id9">[<a class="reference internal" href="zreferences.html#id206" title="K L Judd. Numerical Methods in Economics. Scientific and Engineering. MIT Press, 1998.">Judd, 1998</a>]</span> method, see <span class="bibtex-citation" id="id10">[<a class="reference internal" href="zreferences.html#id213" title="Lars Ljungqvist and Thomas J. Sargent. Recursive Macroeconomic Theory. The MIT Press, 4 edition, 2018. ISBN 9780262038669.">Ljungqvist and Sargent, 2018</a>]</span>, Section 5.7.</p>
 </div>
 <p>We will use cubic splines to interpolate across a pre-set grid of points to approximate the value function.</p>
 <p>Our strategy involves finding a function <span class="math notranslate nohighlight">\(C(V)\)</span> – the expected cost of giving the worker value <span class="math notranslate nohighlight">\(V\)</span> – that satisfies the Bellman equation:</p>
 <div class="math notranslate nohighlight" id="equation-eq-yad3">
-<span class="eqno">(48.15)<a class="headerlink" href="#equation-eq-yad3" title="Link to this equation">#</a></span>\[
+<span class="eqno">(49.15)<a class="headerlink" href="#equation-eq-yad3" title="Link to this equation">#</a></span>\[
 C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 \]</div>
-<p>Notice that in equations <a class="reference internal" href="#equation-eq-hugo21">(48.9)</a> and <a class="reference internal" href="#equation-eq-hugo22">(48.11)</a>, we have analytical solutions of <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> in terms of  promised value <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(V^u\)</span> (and other parameters).</p>
-<p>We can substitute these equations for <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> and obtain the functional equation <a class="reference internal" href="#equation-eq-hugo23">(48.12)</a>.</p>
+<p>Notice that in equations <a class="reference internal" href="#equation-eq-hugo21">(49.9)</a> and <a class="reference internal" href="#equation-eq-hugo22">(49.11)</a>, we have analytical solutions of <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> in terms of  promised value <span class="math notranslate nohighlight">\(V\)</span> and <span class="math notranslate nohighlight">\(V^u\)</span> (and other parameters).</p>
+<p>We can substitute these equations for <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> and obtain the functional equation <a class="reference internal" href="#equation-eq-hugo23">(49.12)</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">calc_c</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Vu</span><span class="p">,</span> <span class="n">V</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
@@ -929,16 +929,16 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 </div>
 </div>
 </div>
-<p>With these analytical solutions for optimal <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> in hand, we can reduce the minimization to  <a class="reference internal" href="#equation-eq-hugo23">(48.12)</a>  in the single variable
+<p>With these analytical solutions for optimal <span class="math notranslate nohighlight">\(c\)</span> and <span class="math notranslate nohighlight">\(a\)</span> in hand, we can reduce the minimization to  <a class="reference internal" href="#equation-eq-hugo23">(49.12)</a>  in the single variable
 <span class="math notranslate nohighlight">\(V^u\)</span>.</p>
 <p>With this in hand, we have our algorithm.</p>
 </section>
 <section id="algorithm">
-<h3><span class="section-number">48.3.5. </span>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">49.3.5. </span>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Fix a set of grid points <span class="math notranslate nohighlight">\(grid_V\)</span> for <span class="math notranslate nohighlight">\(V\)</span>   and <span class="math notranslate nohighlight">\(Vu_{grid}\)</span> for <span class="math notranslate nohighlight">\(V^u\)</span></p></li>
 <li><p>Guess a function <span class="math notranslate nohighlight">\(C_0(V)\)</span> that is evaluated at a grid <span class="math notranslate nohighlight">\(grid_V\)</span>.</p></li>
-<li><p>For each point in <span class="math notranslate nohighlight">\(grid_V\)</span> find the <span class="math notranslate nohighlight">\(V^u\)</span> that minimizes the expression on  right side  of <a class="reference internal" href="#equation-eq-hugo23">(48.12)</a>. We find the minimum by evaluating the right side of <a class="reference internal" href="#equation-eq-hugo23">(48.12)</a> at each point in <span class="math notranslate nohighlight">\(Vu_{grid}\)</span>  and then finding the minimum using cubic splines.</p></li>
+<li><p>For each point in <span class="math notranslate nohighlight">\(grid_V\)</span> find the <span class="math notranslate nohighlight">\(V^u\)</span> that minimizes the expression on  right side  of <a class="reference internal" href="#equation-eq-hugo23">(49.12)</a>. We find the minimum by evaluating the right side of <a class="reference internal" href="#equation-eq-hugo23">(49.12)</a> at each point in <span class="math notranslate nohighlight">\(Vu_{grid}\)</span>  and then finding the minimum using cubic splines.</p></li>
 <li><p>Evaluating the minimum across all points in <span class="math notranslate nohighlight">\(grid_V\)</span> gives you another function <span class="math notranslate nohighlight">\(C_1(V)\)</span>.</p></li>
 <li><p>If <span class="math notranslate nohighlight">\(C_0(V)\)</span> and <span class="math notranslate nohighlight">\(C_1(V)\)</span> are sufficiently different, then repeat steps 3-4 again. Otherwise, we are done.</p></li>
 <li><p>Thus, the iterations are <span class="math notranslate nohighlight">\(C_{j+1}(V) = \min_{c,a, V^u} \{c - \beta [1 - p(a) ] C_j(V)\} \)</span>.</p></li>
@@ -1021,7 +1021,7 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 </section>
 </section>
 <section id="outcomes">
-<h2><span class="section-number">48.4. </span>Outcomes<a class="headerlink" href="#outcomes" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">49.4. </span>Outcomes<a class="headerlink" href="#outcomes" title="Link to this heading">#</a></h2>
 <p>Using the above functions, we create another instance of the parameters with our calibrated parameter <span class="math notranslate nohighlight">\(r\)</span>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1047,16 +1047,16 @@ C(V) = \min_{c,a,V^u} \{c + \beta\left[1-p(a)\right]C(V^u)\}
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Iteration: 0, error:72.95964855134666
-Iteration: 50, error:12.222761760314825
-Iteration: 100, error:0.12875960360861427
-Iteration: 150, error:0.0009402349696756573
-Iteration: 200, error:6.115463747846661e-06
+Iteration: 50, error:12.222761760316644
+Iteration: 100, error:0.12875960360770478
+Iteration: 150, error:0.0009402349701304047
+Iteration: 200, error:6.1154623836046085e-06
 </pre></div>
 </div>
 </div>
 </div>
 <section id="replacement-ratios-and-continuation-values">
-<h3><span class="section-number">48.4.1. </span>Replacement ratios and continuation values<a class="headerlink" href="#replacement-ratios-and-continuation-values" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">49.4.1. </span>Replacement ratios and continuation values<a class="headerlink" href="#replacement-ratios-and-continuation-values" title="Link to this heading">#</a></h3>
 <p>Let’s graph the  replacement ratio (<span class="math notranslate nohighlight">\(c/w\)</span>) and  search effort <span class="math notranslate nohighlight">\(a\)</span> as  functions of the duration of unemployment.</p>
 <p>We’ll do this for three levels of <span class="math notranslate nohighlight">\(V_0\)</span>, the lowest being the autarky value <span class="math notranslate nohighlight">\(V_{\rm aut}\)</span>.</p>
 <p>We accomplish this by using the optimal policy functions <code class="docutils literal notranslate"><span class="pre">V_star</span></code>, <code class="docutils literal notranslate"><span class="pre">cons_star</span></code> and <code class="docutils literal notranslate"><span class="pre">a_star</span></code> computed above as well the following  iterative procedure:</p>
@@ -1129,7 +1129,7 @@ Iteration: 200, error:6.115463747846661e-06
 <p>But for <span class="math notranslate nohighlight">\(V^u &gt; V_{\rm aut}\)</span>, the planner makes the replacement ratio  decline and search effort increase  with the duration of unemployment.</p>
 </section>
 <section id="interpretations">
-<h3><span class="section-number">48.4.2. </span>Interpretations<a class="headerlink" href="#interpretations" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">49.4.2. </span>Interpretations<a class="headerlink" href="#interpretations" title="Link to this heading">#</a></h3>
 <p>The  downward slope of the replacement ratio when <span class="math notranslate nohighlight">\(V^u &gt; V_{\rm aut}\)</span> is a consequence of the
 planner’s limited information about the worker’s search effort.</p>
 <p>By providing the worker with a duration-dependent schedule of replacement ratios, the planner induces the worker in effect to reveal
@@ -1400,8 +1400,13 @@ proper incentives.</p>
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="subjective_beliefs_business_cycles.html">
+   30. Survey Data and Subjective Beliefs in Business Cycle Models
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   30. Robust Markov Perfect Equilibrium
+   31. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -1413,42 +1418,42 @@ proper incentives.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   31. Covariance Stationary Processes
+   32. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   32. Estimation of Spectra
+   33. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   33. Additive and Multiplicative Functionals
+   34. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   34. Classical Control with Linear Algebra
+   35. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   35. Classical Prediction and Filtering With Linear Algebra
+   36. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   36. Knowing the Forecasts of Others
+   37. Knowing the Forecasts of Others
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_rational_expectations.html">
-   37. Demand for Money during Hyperinflations under Rational Expectations
+   38. Demand for Money during Hyperinflations under Rational Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="info_projection.html">
-   38. Hyperinflation and Information Projection
+   39. Hyperinflation and Information Projection
   </a>
  </li>
 </ul>
@@ -1460,47 +1465,47 @@ proper incentives.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   39. Asset Pricing II: The Lucas Asset Pricing Model
+   40. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   40. Elementary Asset Pricing Theory
+   41. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_richard_1987.html">
-   41. The Role of Conditioning Information in Asset Pricing
+   42. The Role of Conditioning Information in Asset Pricing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_jagannathan_1991.html">
-   42. The Hansen-Jagannathan Bound
+   43. The Hansen-Jagannathan Bound
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   43. Two Modifications of Mean-Variance Portfolio Theory
+   44. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="doubts_or_variability.html">
-   44. Doubts or Variability?
+   45. Doubts or Variability?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
-   45. Risk Aversion or Mistaken Beliefs?
+   46. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   46. Irrelevance of Capital Structures with Complete Markets
+   47. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   47. Equilibrium Capital Structures with Incomplete Markets
+   48. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -1512,62 +1517,77 @@ proper incentives.</p>
 <ul class="current nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1 current active active">
   <a class="current reference internal" href="#">
-   48. Optimal Unemployment Insurance
+   49. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   49. Stackelberg Plans
+   50. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   50. Machine Learning a Ramsey Plan
+   51. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   51. Time Inconsistency of Ramsey Plans
+   52. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   52. Sustainable Plans for a Calvo Model
+   53. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   53. Optimal Taxation with State-Contingent Debt
+   54. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   54. Optimal Taxation without State-Contingent Debt
+   55. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   55. Fluctuating Interest Rates Deliver Fiscal Insurance
+   56. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   56. Fiscal Risk and Government Debt
+   57. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   57. Competitive Equilibria of a Model of Chang
+   58. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   58. Credible Government Policies in a Model of Chang
+   59. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="repeat_mh.html">
+   60. Repeated Moral Hazard
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="atkeson_1991.html">
+   61. International Lending with Moral Hazard and Risk of Repudiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tsyrennikov_2013.html">
+   62. Capital Flows Under Moral Hazard
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dovis_accounting_mf.html">
-   59. Accounting for Monetary and Fiscal Policy
+   63. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -1579,17 +1599,17 @@ proper incentives.</p>
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   60. Troubleshooting
+   64. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   61. References
+   65. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   62. Execution Statistics
+   66. Execution Statistics
   </a>
  </li>
 </ul>

@@ -83,7 +83,7 @@
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/exercise.css?v=982b99e0" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=3a5ece24" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
@@ -320,7 +320,7 @@
                                 <a href="https://github.com/QuantEcon/lecture-python-advanced.myst/commit/95d83cdc" class="changelog-hash">95d83cdc</a>
                                 
                                 <span class="changelog-author">Humphrey Yang</span>
-                                <span class="changelog-time">1 month ago</span>
+                                <span class="changelog-time">2 months ago</span>
                                 <span class="changelog-message">Tom's new lecture on the Bocola-Dovis and others paper (#320)</span>
                             </li>
                             
@@ -386,7 +386,7 @@ competitive equilibrium allocation.</p>
 <p class="admonition-title">Note</p>
 <p>In general, computing a competitive equilibrium requires solving for the price system and the allocation simultaneously, not recursively.</p>
 </div>
-<p>Chapter 12 of <span class="bibtex-citation" id="id2">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> described how to adapt preference specifications of <span class="bibtex-citation" id="id3">Gorman [<a class="reference internal" href="zreferences.html#id15" title="William M. Gorman. Community preference fields. Econometrica: Journal of the Econometric Society, 21(1):63–80, 1953.">1953</a>]</span>
+<p>Chapter 12 of <span class="bibtex-citation" id="id2">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id196" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> described how to adapt preference specifications of <span class="bibtex-citation" id="id3">Gorman [<a class="reference internal" href="zreferences.html#id15" title="William M. Gorman. Community preference fields. Econometrica: Journal of the Econometric Society, 21(1):63–80, 1953.">1953</a>]</span>
 to a linear-quadratic class of environments.</p>
 <p>This lecture uses  the <code class="docutils literal notranslate"><span class="pre">quantecon.DLE</span></code> class to study economies that satisfy necessary conditions for Gorman
 aggregation of preferences.</p>
@@ -418,7 +418,7 @@ aggregation of preferences.</p>
 <li><p>Solve the planner’s problem and compute selection matrices that map the aggregate state into allocations and prices.</p></li>
 <li><p>Compute household-specific policies and the Gorman sharing rule.</p></li>
 </ol>
-<p>For a special case described  in Section 12.6 of <span class="bibtex-citation" id="id5">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>, where preference shocks are inactive, we can also</p>
+<p>For a special case described  in Section 12.6 of <span class="bibtex-citation" id="id5">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id196" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>, where preference shocks are inactive, we can also</p>
 <ol class="arabic simple" start="3">
 <li><p>Implement the  Arrow-Debreu allocation by allowing households to trade  a risk-free one-period bond and a single mutual fund that owns all of the economy’s physical capital.</p></li>
 </ol>
@@ -574,7 +574,7 @@ c^j = \psi_j(p) - \frac{p \cdot \psi_j(p)}{p \cdot \psi_c(p)} \psi_c(p) + W^j \f
 \]</div>
 <p>Notice that the coefficient on <span class="math notranslate nohighlight">\(W^j\)</span> is the same for all <span class="math notranslate nohighlight">\(j\)</span> since <span class="math notranslate nohighlight">\(\psi_c(p)/(p \cdot \psi_c(p))\)</span> is a function only of the price vector <span class="math notranslate nohighlight">\(p\)</span>.</p>
 <p>The individual allocations can be determined from the Engel curves by substituting for <span class="math notranslate nohighlight">\(p\)</span> the gradient vector obtained from the representative agent’s optimal allocation problem.</p>
-<p>In the quadratic specifications used in this lecture (and in <span class="bibtex-citation" id="id7">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>), the baseline components are degenerate in the sense that <span class="math notranslate nohighlight">\(\psi_j(p) = \chi^j\)</span> is independent of <span class="math notranslate nohighlight">\(p\)</span>, where <span class="math notranslate nohighlight">\(\chi^j\)</span> is a consumer-specific bliss point represented by a vector with the same dimension as <span class="math notranslate nohighlight">\(c^j\)</span>.</p>
+<p>In the quadratic specifications used in this lecture (and in <span class="bibtex-citation" id="id7">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id196" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>), the baseline components are degenerate in the sense that <span class="math notranslate nohighlight">\(\psi_j(p) = \chi^j\)</span> is independent of <span class="math notranslate nohighlight">\(p\)</span>, where <span class="math notranslate nohighlight">\(\chi^j\)</span> is a consumer-specific bliss point represented by a vector with the same dimension as <span class="math notranslate nohighlight">\(c^j\)</span>.</p>
 <p>In that case, the demand functions simplify to</p>
 <div class="math notranslate nohighlight">
 \[
@@ -652,7 +652,7 @@ d_t = U_d z_t.
 <span class="math notranslate nohighlight">\(c_t\)</span> is aggregate consumption, <span class="math notranslate nohighlight">\(i_t\)</span> is investment, <span class="math notranslate nohighlight">\(k_t\)</span> is the aggregate physical capital stock, <span class="math notranslate nohighlight">\(d_t\)</span> is the aggregate endowment (or dividend) stream, and <span class="math notranslate nohighlight">\(g_t\)</span> is the aggregate “intermediate good” (interpreted as total labor supply in this lecture).</p>
 <p>The matrices <span class="math notranslate nohighlight">\(\Phi_c, \Phi_g, \Phi_i\)</span> and <span class="math notranslate nohighlight">\(\Gamma\)</span> allow for multiple goods and a general linear mapping from stocks and endowments into resources.</p>
 <p>In the one-good case used in the limited-markets section, these reduce to scalars and the resource constraint becomes <span class="math notranslate nohighlight">\(c_t + i_t = \gamma_1 k_{t-1} + d_t\)</span>.</p>
-<p>We write <span class="math notranslate nohighlight">\(\Pi_h\)</span> for the household service-technology matrix <span class="math notranslate nohighlight">\(\Pi\)</span> in <span class="bibtex-citation" id="id8">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>.</p>
+<p>We write <span class="math notranslate nohighlight">\(\Pi_h\)</span> for the household service-technology matrix <span class="math notranslate nohighlight">\(\Pi\)</span> in <span class="bibtex-citation" id="id8">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id196" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>.</p>
 </section>
 <section id="the-individual-household-problem">
 <h3><span class="section-number">23.2.3. </span>The individual household problem<a class="headerlink" href="#the-individual-household-problem" title="Link to this heading">#</a></h3>
@@ -798,7 +798,7 @@ s_{jt} - b_{jt} = \mu_j (s_t - b_t),
 </section>
 <section id="inverse-canonical-representation">
 <h4><span class="section-number">23.2.5.2. </span>Inverse canonical representation<a class="headerlink" href="#inverse-canonical-representation" title="Link to this heading">#</a></h4>
-<p>Given <span class="math notranslate nohighlight">\(\rho_{0t}\)</span> from the aggregate solution, we can solve <a class="reference internal" href="#equation-eq-foc-services">(23.12)</a> for <span class="math notranslate nohighlight">\(s_{jt}\)</span>, then use the inverse canonical representation from Chapter 9 of <span class="bibtex-citation" id="id9">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> to compute <span class="math notranslate nohighlight">\(c_{jt}\)</span> and <span class="math notranslate nohighlight">\(h_{jt}\)</span>:</p>
+<p>Given <span class="math notranslate nohighlight">\(\rho_{0t}\)</span> from the aggregate solution, we can solve <a class="reference internal" href="#equation-eq-foc-services">(23.12)</a> for <span class="math notranslate nohighlight">\(s_{jt}\)</span>, then use the inverse canonical representation from Chapter 9 of <span class="bibtex-citation" id="id9">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id196" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> to compute <span class="math notranslate nohighlight">\(c_{jt}\)</span> and <span class="math notranslate nohighlight">\(h_{jt}\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-eq-inverse-canonical-full">
 <span class="eqno">(23.14)<a class="headerlink" href="#equation-eq-inverse-canonical-full" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{aligned}
@@ -1122,11 +1122,11 @@ c_{jt} = S_{ci} X_t, \quad h_{jt} = S_{hi} X_t, \quad s_{jt} = S_{si} X_t.
 </section>
 <section id="limited-markets">
 <h2><span class="section-number">23.4. </span>Limited markets<a class="headerlink" href="#limited-markets" title="Link to this heading">#</a></h2>
-<p>This section studies a special case from Section 12.6 of <span class="bibtex-citation" id="id10">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> in which the Arrow-Debreu allocation can be implemented by opening competitive markets only in a mutual fund and a one-period bond.</p>
+<p>This section studies a special case from Section 12.6 of <span class="bibtex-citation" id="id10">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id196" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> in which the Arrow-Debreu allocation can be implemented by opening competitive markets only in a mutual fund and a one-period bond.</p>
 <ul class="simple">
 <li><p>So in our setting, we don’t literally require that markets in  a complete set of contingent claims be present.</p></li>
 </ul>
-<p>To match the implementation result in Chapter 12.6 of <span class="bibtex-citation" id="id11">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>, we specialize to the one-good, constant-return case</p>
+<p>To match the implementation result in Chapter 12.6 of <span class="bibtex-citation" id="id11">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id196" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>, we specialize to the one-good, constant-return case</p>
 <div class="math notranslate nohighlight">
 \[
 c_t + i_t = \gamma_1 k_{t-1} + d_t, \qquad
@@ -1134,7 +1134,7 @@ k_t = \delta_k k_{t-1} + i_t, \qquad
 \beta = \frac{1}{\gamma_1 + \delta_k}.
 \]</div>
 <p>In this case, the one-period riskless gross return is constant, <span class="math notranslate nohighlight">\(R = \gamma_1 + \delta_k = 1/\beta\)</span>.</p>
-<p>We also impose the Chapter 12.6 <span class="bibtex-citation" id="id12">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> measurability restriction that the deviation baseline <span class="math notranslate nohighlight">\(\{\tilde{\chi}_{jt}\}\)</span> is <span class="math notranslate nohighlight">\(\mathcal{J}_0\)</span>-measurable (for example, the preference-shock processes <span class="math notranslate nohighlight">\(\{b_{jt}\}\)</span> are deterministic).</p>
+<p>We also impose the Chapter 12.6 <span class="bibtex-citation" id="id12">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id196" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> measurability restriction that the deviation baseline <span class="math notranslate nohighlight">\(\{\tilde{\chi}_{jt}\}\)</span> is <span class="math notranslate nohighlight">\(\mathcal{J}_0\)</span>-measurable (for example, the preference-shock processes <span class="math notranslate nohighlight">\(\{b_{jt}\}\)</span> are deterministic).</p>
 <section id="the-trading-arrangement">
 <h3><span class="section-number">23.4.1. </span>The trading arrangement<a class="headerlink" href="#the-trading-arrangement" title="Link to this heading">#</a></h3>
 <p>Consider again an economy where each household <span class="math notranslate nohighlight">\(j\)</span> initially owns claims to its own endowment stream <span class="math notranslate nohighlight">\(\{d_{jt}\}\)</span>.</p>
@@ -1448,7 +1448,7 @@ into one function.</p>
 </section>
 <section id="example-two-household-economy">
 <span id="gorman-twohh"></span><h2><span class="section-number">23.5. </span>Example: two-household economy<a class="headerlink" href="#example-two-household-economy" title="Link to this heading">#</a></h2>
-<p>We now reproduce a two-household example from Chapter 12.6 of <span class="bibtex-citation" id="id14">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>.</p>
+<p>We now reproduce a two-household example from Chapter 12.6 of <span class="bibtex-citation" id="id14">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id196" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span>.</p>
 <p>There are two households, each with preferences</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1968,7 +1968,7 @@ Endowments: α in [3.01, 4.95]
 <h2><span class="section-number">23.7. </span>State-space representation<a class="headerlink" href="#state-space-representation" title="Link to this heading">#</a></h2>
 <section id="closed-loop-state-space-system">
 <h3><span class="section-number">23.7.1. </span>Closed-loop state-space system<a class="headerlink" href="#closed-loop-state-space-system" title="Link to this heading">#</a></h3>
-<p>We can use our DLE tools first to solve the representative-household social planning problem and represent equilibrium quantities as a linear closed-loop  state-space system that takes the usual Chapter 5 <span class="bibtex-citation" id="id15">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id176" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> form</p>
+<p>We can use our DLE tools first to solve the representative-household social planning problem and represent equilibrium quantities as a linear closed-loop  state-space system that takes the usual Chapter 5 <span class="bibtex-citation" id="id15">Hansen and Sargent [<a class="reference internal" href="zreferences.html#id196" title="L P Hansen and T J Sargent. Recursive Models of Dynamic Linear Economies. The Gorman Lectures in Economics. Princeton University Press, 2013.">2013</a>]</span> form</p>
 <div class="math notranslate nohighlight">
 \[
 x_{t+1} = A_0 x_t + C w_{t+1},
@@ -2671,8 +2671,13 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
   </a>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="subjective_beliefs_business_cycles.html">
+   30. Survey Data and Subjective Beliefs in Business Cycle Models
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="rob_markov_perf.html">
-   30. Robust Markov Perfect Equilibrium
+   31. Robust Markov Perfect Equilibrium
   </a>
  </li>
 </ul>
@@ -2684,42 +2689,42 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="arma.html">
-   31. Covariance Stationary Processes
+   32. Covariance Stationary Processes
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="estspec.html">
-   32. Estimation of Spectra
+   33. Estimation of Spectra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="additive_functionals.html">
-   33. Additive and Multiplicative Functionals
+   34. Additive and Multiplicative Functionals
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="lu_tricks.html">
-   34. Classical Control with Linear Algebra
+   35. Classical Control with Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="classical_filtering.html">
-   35. Classical Prediction and Filtering With Linear Algebra
+   36. Classical Prediction and Filtering With Linear Algebra
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="knowing_forecasts_of_others.html">
-   36. Knowing the Forecasts of Others
+   37. Knowing the Forecasts of Others
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="cagan_rational_expectations.html">
-   37. Demand for Money during Hyperinflations under Rational Expectations
+   38. Demand for Money during Hyperinflations under Rational Expectations
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="info_projection.html">
-   38. Hyperinflation and Information Projection
+   39. Hyperinflation and Information Projection
   </a>
  </li>
 </ul>
@@ -2731,47 +2736,47 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="lucas_model.html">
-   39. Asset Pricing II: The Lucas Asset Pricing Model
+   40. Asset Pricing II: The Lucas Asset Pricing Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="asset_pricing_lph.html">
-   40. Elementary Asset Pricing Theory
+   41. Elementary Asset Pricing Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_richard_1987.html">
-   41. The Role of Conditioning Information in Asset Pricing
+   42. The Role of Conditioning Information in Asset Pricing
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="hansen_jagannathan_1991.html">
-   42. The Hansen-Jagannathan Bound
+   43. The Hansen-Jagannathan Bound
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="black_litterman.html">
-   43. Two Modifications of Mean-Variance Portfolio Theory
+   44. Two Modifications of Mean-Variance Portfolio Theory
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="doubts_or_variability.html">
-   44. Doubts or Variability?
+   45. Doubts or Variability?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="risk_aversion_or_mistaken_beliefs.html">
-   45. Risk Aversion or Mistaken Beliefs?
+   46. Risk Aversion or Mistaken Beliefs?
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_complete_mkts.html">
-   46. Irrelevance of Capital Structures with Complete Markets
+   47. Irrelevance of Capital Structures with Complete Markets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="BCG_incomplete_mkts.html">
-   47. Equilibrium Capital Structures with Incomplete Markets
+   48. Equilibrium Capital Structures with Incomplete Markets
   </a>
  </li>
 </ul>
@@ -2783,62 +2788,77 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="un_insure.html">
-   48. Optimal Unemployment Insurance
+   49. Optimal Unemployment Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dyn_stack.html">
-   49. Stackelberg Plans
+   50. Stackelberg Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_machine_learn.html">
-   50. Machine Learning a Ramsey Plan
+   51. Machine Learning a Ramsey Plan
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo.html">
-   51. Time Inconsistency of Ramsey Plans
+   52. Time Inconsistency of Ramsey Plans
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="calvo_abreu.html">
-   52. Sustainable Plans for a Calvo Model
+   53. Sustainable Plans for a Calvo Model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="opt_tax_recur.html">
-   53. Optimal Taxation with State-Contingent Debt
+   54. Optimal Taxation with State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss.html">
-   54. Optimal Taxation without State-Contingent Debt
+   55. Optimal Taxation without State-Contingent Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss2.html">
-   55. Fluctuating Interest Rates Deliver Fiscal Insurance
+   56. Fluctuating Interest Rates Deliver Fiscal Insurance
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="amss3.html">
-   56. Fiscal Risk and Government Debt
+   57. Fiscal Risk and Government Debt
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_ramsey.html">
-   57. Competitive Equilibria of a Model of Chang
+   58. Competitive Equilibria of a Model of Chang
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="chang_credible.html">
-   58. Credible Government Policies in a Model of Chang
+   59. Credible Government Policies in a Model of Chang
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="repeat_mh.html">
+   60. Repeated Moral Hazard
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="atkeson_1991.html">
+   61. International Lending with Moral Hazard and Risk of Repudiation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tsyrennikov_2013.html">
+   62. Capital Flows Under Moral Hazard
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="dovis_accounting_mf.html">
-   59. Accounting for Monetary and Fiscal Policy
+   63. Accounting for Monetary and Fiscal Policy
   </a>
  </li>
 </ul>
@@ -2850,17 +2870,17 @@ g(j; J) = 2\left|f(j; J) - \frac{1}{2}\right|, \qquad
 <ul class="nav bd-sidenav nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="troubleshooting.html">
-   60. Troubleshooting
+   64. Troubleshooting
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="zreferences.html">
-   61. References
+   65. References
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="status.html">
-   62. Execution Statistics
+   66. Execution Statistics
   </a>
  </li>
 </ul>
