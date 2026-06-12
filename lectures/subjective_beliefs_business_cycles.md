@@ -384,13 +384,17 @@ The points form an upward-sloping cloud rather than a line: a common
 pessimism factor drives both wedges, while survey noise and other
 idiosyncratic variation keep them from being collinear.
 
-(The principal-component share is computed from the raw wedges, so it
-reflects both their correlation and the larger variance of the inflation
-wedge.)
+The reported PC1 share of 0.809 is computed from the raw covariance matrix of
+the two replicated wedges, so it reflects both their correlation and the
+larger variance of the inflation wedge.
+
+{cite:t}`bhandari2025survey` report 78.6% under their preferred
+normalization; depending on the normalization, the first component explains
+roughly 79--81% of the joint variation.
 
 ### Empirical facts
 
-The figures above shows three key empirical facts about the belief wedges:
+The figures above show three key empirical facts about the belief wedges:
 
 - Both wedges are **positive on average**: households expect higher unemployment
 and higher inflation than the rational forecast.
@@ -416,18 +420,43 @@ pessimism/optimism component rather than two unrelated forecast mistakes.
 These moments are the calibration targets for the belief shock $\theta_t$,
 the pessimism parameter formalized in the next section.
 
+The code below also defines two *wedge loadings*, $c_u$ and $c_\pi$, that the
+model illustrations later in the lecture use to map $\theta_t$ into wedges.
+
+In the full model these loadings are endogenous equilibrium objects,
+covariances between shocks and continuation values, but here we set them
+directly so that the implied wedges equal the empirical means of 0.52 and
+1.22 pp at $\theta_t = \mu_\theta$.
+
 ```{code-cell} ipython3
 # Belief-shock calibration from the paper
 μ_θ = 5.64   # mean of belief-shock parameter θ
 ρ_θ = 0.714  # AR(1) persistence: autocorrelation of the wedges' first PC
 σ_θ = 4.3    # innovation volatility
 
-# Wedge loadings used later in the model illustrations.
+# Wedge loadings used later in the model illustrations
+# In the full model these are equilibrium objects
 c_u = 0.52 / μ_θ
 c_π = 1.22 / μ_θ
 ```
 
 ## A model of pessimism
+
+Before turning to the theory, the table below collects the notation used in
+the rest of the lecture.
+
+| Symbol | Meaning |
+|---|---|
+| $x_t$ | state (a vector in general; log consumption in the scalar example) |
+| $\bar x$ | steady state of the state; $x_{1t}$ is the first-order deviation from $\bar x$ |
+| $w_{t+1}$ | standard normal innovation under the data-generating measure |
+| $m_{t+1}$ | likelihood ratio that distorts the data-generating measure |
+| $\theta_t$ | belief factor: $\theta_t > 0$ is pessimism, $\theta_t < 0$ is optimism |
+| $\bar\theta$ | loading of the belief factor on the state, $\theta_t = \bar\theta x_t$ |
+| $\mu_\theta$, $\rho_\theta$, $\sigma_\theta$ | mean ($\mu_\theta = \bar\theta \bar x$), persistence, and innovation volatility of $\theta_t$ |
+| $v_t$, $v_x$, $v_q$ | continuation value, its slope in the state, and its constant term |
+| $\nu_t$ | subjective mean shift of the innovation $w_{t+1}$ |
+| $\Delta_t^{(\tau)}(z)$ | $\tau$-period belief wedge for variable $z$ |
 
 ### Robust preferences
 
@@ -507,7 +536,9 @@ $$
 
 which replaces the expected continuation value with a soft minimum: as
 $\theta_t \to 0$ it reduces to $u(x_t) + \beta E_t[v_{t+1}]$, and as
-$\theta_t \to \infty$ it approaches the worst case over states.
+$\theta_t \to \infty$ it approaches the worst case over states in a bounded
+or finite-state setting (with unbounded Gaussian shocks the soft minimum
+instead falls without bound).
 
 In the robust-control literature, this distortion expresses fear of model
 misspecification.
@@ -580,11 +611,20 @@ The calculation has four steps:
 1. guess an affine continuation value;
 2. evaluate the risk-sensitive recursion in closed form;
 3. derive the optimal belief distortion and the wedge it implies;
-4. solve for the value-function slope.
+4. solve for the value-function slope, first with a fixed $\theta$ and then
+   with a state-dependent $\theta_t$.
+
+Steps 1--3 treat the current value of $\theta_t$ as given; they go through
+unchanged whatever that value is.
 
 With linear dynamics, Gaussian shocks, and linear utility, the continuation
 value is affine in the state, so we guess $v_t = v_x x_t + v_q$ and verify
 the guess by substitution.
+
+(The affine guess with constant coefficients is exact when $\theta$ is
+constant; when $\theta_t$ varies over time, it is the first-order
+approximation of {cite:t}`bhandari2025survey`, whose perturbation method the
+appendix describes.)
 
 The slope $v_x = \partial v_t / \partial x_t$ measures how much the agent
 values an extra unit of the state.
@@ -650,12 +690,49 @@ consumption.
 For a variable that enters the value function with a negative sign, such as
 unemployment, the same pessimism generates a *positive* wedge.
 
-To pin down the stationary slope used in the code, evaluate the
-recursion at the mean pessimism level $\mu_\theta$.
+It remains to pin down the slope $v_x$ (Step 4), and here the distinction
+between a fixed and a state-dependent pessimism parameter matters.
 
-Substituting the closed-form recursion back into
-$v_t = u(x_t) - \frac{\beta}{\mu_\theta}
-\log E_t[\exp(-\mu_\theta v_{t+1})]$ and matching coefficients on $x_t$
+*Case 1: fixed $\theta$.*
+
+Suppose first that $\theta_t = \theta$ is a constant.
+
+Substituting the closed-form recursion back into the Bellman equation gives
+
+$$
+v_x x_t + v_q
+= (1 - \beta)\, x_t
++ \beta\left(v_x \rho_x x_t + v_q - \frac{\theta}{2}\, v_x^2 \sigma_x^2\right).
+$$
+
+The variance penalty $-\frac{\theta}{2} v_x^2 \sigma_x^2$ does not involve
+$x_t$, so matching coefficients on $x_t$ gives the rational-expectations
+slope $v_x = u_x / (1 - \beta\rho_x)$ with $u_x = 1 - \beta$, while the
+penalty only lowers the constant $v_q$.
+
+With constant pessimism, the agent tilts beliefs, but the marginal value of
+the state is unchanged.
+
+*Case 2: state-dependent $\theta_t$.*
+
+Now suppose, as in {cite:t}`bhandari2025survey`, that pessimism moves with
+the state,
+
+$$
+\theta_t = \bar\theta(\bar x + x_t),
+$$
+
+where $\bar x$ is the steady state and $x_t$ the deviation from it; we
+normalize $\bar x = 1$, so that the steady-state pessimism level is
+$\mu_\theta = \bar\theta \bar x = \bar\theta$.
+
+The variance penalty is now proportional to the state,
+
+$$
+-\frac{\beta}{2}\,\bar\theta(\bar x + x_t)\, v_x^2 \sigma_x^2,
+$$
+
+so it contributes to the coefficient on $x_t$, and matching coefficients
 yields the **Riccati equation**
 
 $$
@@ -663,11 +740,18 @@ v_x = u_x + \beta \rho_x v_x - \frac{\beta}{2}\,\mu_\theta\, \sigma_x^2 v_x^2,
 \qquad u_x = 1 - \beta.
 $$
 
-The quadratic term is the price of pessimism: it lowers the marginal value of
-the state relative to the rational-expectations value
+The quadratic term is the price of state-dependent pessimism: it lowers the
+marginal value of the state relative to the rational-expectations value
 $v_x^{RE} = u_x / (1 - \beta\rho_x)$.
 
+If $\theta_t$ were fixed, the same variance penalty would affect only the
+constant term, as in Case 1; the Riccati term in the slope exists precisely
+because pessimism varies with the state.
+
 We now turn this illustration into code, building it up from small pieces.
+
+Because the quantitative model uses the state-dependent specification, the
+code implements Case 2.
 
 The first ingredient is the slope $v_x$ of the continuation value.
 
@@ -746,6 +830,12 @@ def belief_wedge(model, θ):
 
 A last helper simulates the AR(1) belief shock $\theta_t$.
 
+This is a third specification of pessimism, distinct from the fixed $\theta$
+of Case 1 and the state-dependent $\theta_t$ of Case 2: the quantitative
+model treats $\theta_t$ as an exogenous AR(1) process calibrated to the
+survey wedges, and the appendix shows how it fits into the perturbation
+solution.
+
 ```{code-cell} ipython3
 def simulate_θ(model, T=200, seed=42):
     """Simulate the AR(1) belief shock θ_t."""
@@ -767,17 +857,40 @@ drift and wedge.
 model = create_belief_model()
 
 vx_re = (1 - model.β) / (1 - model.β * model.ρ_x)
-print(f"RE value of v_x:       {vx_re:.4f}")
-print(f"Robust value of v_x:   {model.vx:.4f}")
-print(f"Belief drift at θ_bar:   {belief_drift(model, model.μ_θ) * 100:.4f} pp")
-print(f"Belief wedge at θ_bar:   {belief_wedge(model, model.μ_θ) * 100:.4f} pp")
+print(f"RE value of v_x:      {vx_re:.8f}")
+print(f"Robust value of v_x:  {model.vx:.8f}")
+print(f"Belief drift at θ_bar:  ν = {belief_drift(model, model.μ_θ):.5f} "
+      "(standard deviations of w)")
+print(f"Belief wedge at θ_bar:  Δ = {belief_wedge(model, model.μ_θ) * 100:.5f} "
+      "(% of consumption)")
 ```
+
+Both the drift and the wedge are tiny at this calibration: log consumption
+has a small innovation standard deviation, so the exposure $v_x \sigma_x$ of
+the continuation value to the shock is small, and the entropy penalty allows
+only a small tilt.
+
+In the full model, the corresponding exposures of continuation values to
+shocks are much larger, and they generate the percentage-point wedges seen in
+the surveys.
+
+The next figure illustrates the tilt.
+
+Because the true drift $\nu_t = -\theta_t v_x \sigma_x \approx -0.001$ is
+invisible on a density plot, the figure instead shifts each curve by the
+**scaled drift** $\nu_t / \sigma_x = -\theta_t v_x$, magnifying the true
+shift by a factor of $1/\sigma_x = 200$.
+
+The plotted curves are therefore *not* the actual subjective densities of
+$w_{t+1}$ at this calibration; they show the direction of the tilt and how it
+grows with $\theta_t$, while the printed output reports the true drifts.
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: objective and subjective shock distributions
+    caption: objective and subjective shock distributions (drift scaled for
+      visibility)
     name: fig-sbbc-shock-distributions
 ---
 θ_vals = [0, model.μ_θ, 2 * model.μ_θ]
@@ -786,19 +899,21 @@ labels = ['θ = 0',
           f'θ = 2θ_bar  (pessimistic)']
 colors = ['black', 'steelblue', 'firebrick']
 
-# Drift in units of σ_x
-ν_tilde = [-θ * model.vx for θ in θ_vals]
+# True drift ν = -θ vx σ_x, and the version scaled by 1/σ_x
+# that the figure plots so that the shift is visible
+ν_true = [belief_drift(model, θ) for θ in θ_vals]
+ν_scaled = [ν / model.σ_x for ν in ν_true]
 
 x_grid = np.linspace(-4, 4, 500)
 
 fig, ax = plt.subplots()
-for μ, label, color in zip(ν_tilde, labels, colors):
-    pdf = (1 / np.sqrt(2 * np.pi)) * np.exp(-0.5 * (x_grid - μ)**2)
-    ax.plot(x_grid, pdf, label=label, color=color, linewidth=2)
+for μ, label, color in zip(ν_scaled, labels, colors):
+    ax.plot(x_grid, norm.pdf(x_grid, loc=μ),
+            label=label, color=color, linewidth=2)
 
 ax.axvline(0, color='grey', linestyle=':', linewidth=0.8)
 ax.set_xlabel(
-    'innovation shift in units of $\\sigma_x$: '
+    'scaled innovation shift: '
     '$\\nu_t / \\sigma_x = -\\theta_t v_x$'
 )
 ax.set_ylabel('density')
@@ -806,9 +921,9 @@ ax.legend()
 plt.tight_layout()
 plt.show()
 
-print("Mean shifts (in units of σ_x):")
-for μ, label in zip(ν_tilde, labels):
-    print(f"  {label:35s}  ν_tilde = {μ:.4f}")
+print("True and scaled subjective drifts:")
+for ν, ν_s, label in zip(ν_true, ν_scaled, labels):
+    print(f"  {label:35s}  ν = {ν:9.5f}   ν/σ_x = {ν_s:.4f}")
 ```
 
 The figure shows how pessimism (higher $\theta_t$) shifts the perceived
@@ -817,10 +932,8 @@ distribution of future shocks to the left.
 The black curve is the objective distribution, centered at zero.
 
 The blue and red curves are subjective distributions for progressively larger
-values of $\theta_t$.
-
-The horizontal axis measures the shift in units of $\sigma_x$, so the leftward
-movement is the normalized subjective drift $\nu_t / \sigma_x$.
+values of $\theta_t$, with the mean shift drawn at the scaled drift
+$\nu_t / \sigma_x$ rather than at the (tiny) true drift $\nu_t$.
 
 An agent with $\theta_t > 0$
 believes bad shocks are more likely than they actually are.
@@ -837,9 +950,9 @@ $$
 x_{t+1} = -\theta_t v_x \sigma_x^2 + \rho_x x_t + \sigma_x \tilde w_{t+1}.
 $$
 
-With $\theta_t = \bar\theta(\bar x + x_t)$, collecting terms shows that
-subjective beliefs change both the intercept and the slope of the perceived
-dynamics:
+With the state-dependent specification of Case 2,
+$\theta_t = \bar\theta(\bar x + x_t)$, collecting terms shows that subjective
+beliefs change both the intercept and the slope of the perceived dynamics:
 
 $$
 \tilde\rho_x = \rho_x - \bar\theta\, v_x \sigma_x^2,
@@ -1056,9 +1169,18 @@ The only free parameters describing beliefs are the three governing the
 $\theta_t$ process, so every additional surveyed variable adds an
 overidentifying restriction on the model.
 
-This theoretical prediction
-matches the empirical finding that one principal component explains 78.6%
-of the joint variation in the unemployment and inflation wedges.
+This theoretical prediction matches the empirical finding that one principal
+component explains about four-fifths of the joint variation in the
+unemployment and inflation wedges.
+
+The code below illustrates the one-factor structure, but with a shortcut: in
+place of the model-implied loadings $-\bar{z}'(\psi_w\psi_w')v_x'$, it uses
+the empirical loadings $c_u$ and $c_\pi$ defined earlier, so the lines pass
+through the empirical mean wedges at $\theta = \mu_\theta$.
+
+In the full model the loadings are endogenous, and the paper's structural
+benchmark implies mean wedges of 0.55 and 0.90 rather than the data values
+0.52 and 1.22.
 
 ```{code-cell} ipython3
 ---
@@ -1069,7 +1191,7 @@ mystnb:
 ---
 θ_grid = np.linspace(0, 20, 200)
 
-# Loadings match the mean empirical wedges.
+# Empirical loadings
 loading_u = c_u   # 0.52 / 5.64 pp per unit of θ (unemployment)
 loading_π = c_π  # 1.22 / 5.64 pp per unit of θ (inflation)
 
@@ -1118,16 +1240,20 @@ In the data the relation is looser because survey responses contain
 measurement error; a hidden-factor model that allows for such error recovers a
 belief factor whose path is close to the first principal component.
 
-## A New Keynesian model with belief distortions
+## A reduced-form emulator of the New Keynesian model
 
 We now use the empirical belief factor to generate impulse responses.
 
 The full model in {cite:t}`bhandari2025survey` is a New Keynesian model with
-search-and-matching frictions. Beliefs matter because consumption decisions,
-vacancy posting, wage bargaining, and price setting are forward-looking.
+households, Calvo price setting, search-and-matching labor frictions, Nash
+wage bargaining, TFP shocks, monetary-policy shocks, and the belief shock,
+all calibrated inside the full equilibrium system.
 
-Rather than solve that full system here, we use a small linear surrogate that
-keeps only the pieces needed for transparent IRFs:
+Beliefs matter there because consumption decisions, vacancy posting, wage
+bargaining, and price setting are forward-looking.
+
+Rather than solve that system here, we use a small linear emulator that keeps
+only the pieces needed for transparent impulse responses:
 
 $$
 
@@ -1139,16 +1265,30 @@ where $s_t = (u_t, \pi_t, y_t, \theta_t, a_t)'$ collects unemployment,
 inflation, output, the belief shock, and TFP, and
 $\epsilon_{t+1} \sim N(0, I_3)$ contains the three structural shocks.
 
+The matrices below are chosen to reproduce selected signs and moments from
+the paper; they are not obtained by solving the structural equilibrium
+conditions.
+
 The belief shock follows the persistence estimated from the survey wedges,
-$\rho_\theta = 0.714$. The two wedge loadings are chosen so that
-$c_u \mu_\theta = 0.52$ and $c_\pi \mu_\theta = 1.22$ at
-$\mu_\theta = 5.64$.
+$\rho_\theta = 0.714$.
+
+The two wedge loadings are chosen so that $c_u \mu_\theta = 0.52$ and
+$c_\pi \mu_\theta = 1.22$ at $\mu_\theta = 5.64$.
 
 The entries that connect $\theta_t$ to $u_t$, $\pi_t$, and $y_t$ should be
-read as reduced-form summaries of the full subjective-expectations channel.
-They are calibrated to give the right signs and a reasonable scale for the
+read as reduced-form summaries of the full subjective-expectations channel,
+calibrated to give the right signs and a reasonable scale for the
 belief-shock IRF: higher pessimism raises unemployment, temporarily raises
 inflation, and lowers output.
+
+One difference from the structural model deserves emphasis.
+
+Unlike the full model, this reduced-form system makes $\theta_t$ move the
+wedges and the macroeconomic variables directly.
+
+In the structural model, $\theta_t$ matters through distorted probabilities
+over payoff-relevant shocks, so the presence and propagation of fundamental
+shocks are part of the mechanism.
 
 We index the five state variables with named constants, so that later code can
 refer to, say, the belief shock as `I_THETA` rather than a bare number.
@@ -1170,7 +1310,7 @@ class NKModel(NamedTuple):
 
 
 def create_nk_model():
-    """Build the pedagogical reduced-form NK model (state and shock matrices)."""
+    """Build the reduced-form NK emulator (state and shock matrices)."""
     # Exogenous-process parameters from bhandari2025survey.
     ρ_θ, σ_θ = 0.714, 4.3
     ρ_a, σ_a = 0.840, 0.00568
@@ -1301,10 +1441,14 @@ A long-standing challenge for New Keynesian models is that standard TFP and
 monetary policy shocks generate far too little unemployment volatility
 ({cite}`Shimer2005`).
 
-In the no-belief-shock economy, TFP and monetary policy shocks produce
-unemployment volatility of only 0.55, compared to 1.70 in the data.
+In the paper's no-belief-shock economy, TFP and monetary policy shocks
+produce unemployment volatility of only 0.55, compared to 1.70 in the data.
 
-Adding the belief shock substantially closes the gap:
+Adding the belief shock substantially closes the gap.
+
+The emulator is calibrated to reproduce this experiment: we compute its
+unconditional standard deviations from the discrete Lyapunov equation, with
+and without the belief shock.
 
 ```{code-cell} ipython3
 def simulate_nk(model, T=200, seed=42):
@@ -1366,8 +1510,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-The bar chart compares three standard deviations: the no-belief-shock economy,
-the benchmark economy, and the data.
+The bar chart compares three standard deviations: the emulator without the
+belief shock, the emulator with it (labeled "Benchmark" after the paper's
+benchmark economy), and the data.
 
 The main message is visible in the unemployment bars.
 
@@ -1462,8 +1607,9 @@ innovation raises unemployment, lowers inflation, and lowers output on impact,
 but the responses fade quickly because the monetary-policy shock is i.i.d.
 
 Unlike the belief-shock figure, these panels do not include belief wedges:
-TFP and monetary-policy shocks do not move $\theta_t$ directly in this
-pedagogical representation.
+TFP and monetary-policy shocks do not move $\theta_t$ in this reduced-form
+illustration, just as in the paper's benchmark, where $\theta_t$ is an
+exogenous AR(1) process orthogonal to the other shocks.
 
 ### Role of firms' beliefs
 
@@ -2109,13 +2255,16 @@ The algorithm therefore decomposes cleanly into two stages:
 This separation is a major practical advantage: existing rational-expectations
 solvers can be used for Stage 1 with only a wrapper for Stage 2.
 
-In the scalar endowment model, Stage 2 is simple because the value function is
-the only forward-looking object.
+In the scalar endowment model, Stage 2 is simple because the value function
+is the only forward-looking object: the state is exogenous, so there is no
+feedback coefficient $\psi_{xf}$ to solve for.
 
-The code below carries out the two computable ingredients: it solves the
-Riccati equation by iteration starting from the rational-expectations value,
-as the paper does, and then reads off the subjective transition coefficients
-from the re-centred shocks.
+The code below is therefore a scalar toy illustration of the value block of
+Stage 2, not an implementation of the full two-stage algorithm.
+
+It solves the Riccati equation by iteration starting from the
+rational-expectations value, as the paper does, and then reads off the
+subjective transition coefficients from the re-centred shocks.
 
 ```{code-cell} ipython3
 # Stage 1: rational-expectations objects of the scalar endowment model
@@ -2311,7 +2460,7 @@ m_ex = create_belief_model(β=β_ex, ρ_x=ρ_x_ex,
 print(f"v_x (with pessimism θ_bar={μ_θ_ex}):   {m_ex.vx:.4f}")
 ```
 
-*Part 2.* Under rational expectations ($\theta = 0$):
+*Part 2.* Under pessimism ($\theta_t > 0$), the consumption wedge is
 
 $$
 \Delta_t^{(1)}(x)
@@ -2436,7 +2585,7 @@ for i, label in zip([I_U, I_PI, I_Y], var_labels):
 ```
 
 The belief shock accounts for the large majority of unemployment variance in
-this calibrated surrogate.
+this calibrated emulator.
 
 Technology shocks drive most of the inflation variance, and output variance
 is split roughly evenly between the belief and TFP shocks.
@@ -2460,7 +2609,7 @@ Solve the Riccati equation (`solve_vx`) for a grid of
 $\mu_\theta$ values from 0 (rational expectations) to 15.
 
 For each value,
-compute the normalized subjective drift $\nu / \sigma_x = -\mu_\theta v_x$
+compute the scaled subjective drift $\nu / \sigma_x = -\mu_\theta v_x$
 and the steady-state belief wedge.
 
 Discuss how the robust value function differs from
@@ -2489,7 +2638,7 @@ fig.suptitle('Subjective drift and steady-state wedge')
 axes[0].plot(μ_grid, drift_norm, color='steelblue', linewidth=2)
 axes[0].axhline(0, color='grey', linestyle='--', linewidth=0.8)
 axes[0].set_xlabel('mean pessimism $\\mu_\\theta$')
-axes[0].set_ylabel('normalized drift $\\nu / \\sigma_x$')
+axes[0].set_ylabel('scaled drift $\\nu / \\sigma_x$')
 
 axes[1].plot(μ_grid, np.array(wedge_ss), color='firebrick', linewidth=2)
 axes[1].set_xlabel('mean pessimism $\\mu_\\theta$')
@@ -2499,18 +2648,41 @@ plt.tight_layout(rect=[0, 0, 1, 0.94])
 plt.show()
 ```
 
-The left panel plots the normalized subjective drift
+The left panel plots the scaled subjective drift
 $\nu / \sigma_x = -\mu_\theta v_x$.
 
 The right panel plots the corresponding steady-state belief wedge.
 
-The normalized drift is the horizontal shift used in the shock-distribution
+The scaled drift is the horizontal shift used in the shock-distribution
 figure above, so it is easier to see than the tiny movement in $v_x$ itself.
 
 The steady-state consumption wedge becomes more negative, approximately
 linearly in magnitude, since
 $\Delta^{(1)} \propto -\mu_\theta v_x \sigma_x^2$ and $v_x$ is approximately
 constant for small $\mu_\theta$.
+
+Finally, consider how the robust value function itself changes with
+$\mu_\theta$.
+
+```{code-cell} ipython3
+vx_0 = create_belief_model(μ_θ=0).vx
+vx_15 = create_belief_model(μ_θ=15).vx
+print(f"v_x at μ_θ = 0:   {vx_0:.8f}")
+print(f"v_x at μ_θ = 15:  {vx_15:.8f}")
+print(f"relative change:  {(vx_15 - vx_0) / vx_0:.2e}")
+```
+
+The slope $v_x$ falls as $\mu_\theta$ rises --- the quadratic term in the
+Riccati equation lowers the marginal value of the state --- but the change is
+on the order of $10^{-5}$ in relative terms, because the quadratic term is
+scaled by $\sigma_x^2$.
+
+The robust value function therefore differs from its rational-expectations
+counterpart mainly through the constant $v_q$, which falls as the variance
+penalty grows.
+
+Because $v_x$ is nearly constant, the drift and the wedge are approximately
+linear in $\mu_\theta$, which is what both panels show.
 
 ```{solution-end}
 ```
