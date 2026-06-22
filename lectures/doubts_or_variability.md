@@ -130,7 +130,6 @@ import datetime as dt
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from pandas_datareader import data as web
 from scipy.stats import norm
 from scipy.optimize import brentq
 ```
@@ -2011,8 +2010,12 @@ end_date = dt.datetime(2007, 1, 1)
 
 
 def _read_fred_series(series_id, start_date, end_date):
-    series = web.DataReader(series_id, "fred", start_date, end_date)[series_id]
-    series = pd.to_numeric(series, errors="coerce").dropna().sort_index()
+    # Download directly from FRED's CSV endpoint. This avoids pandas-datareader,
+    # which is unmaintained and incompatible with pandas 3.0.
+    url = f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}"
+    df = pd.read_csv(url, index_col=0, parse_dates=True)
+    series = pd.to_numeric(df.iloc[:, 0], errors="coerce").dropna().sort_index()
+    series = series.loc[start_date:end_date]
     if series.empty:
         raise ValueError(f"FRED series '{series_id}' returned no data in sample window")
     return series
