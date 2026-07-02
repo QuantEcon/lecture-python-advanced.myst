@@ -21,35 +21,42 @@ kernelspec:
 ```{index} single: python
 ```
 
-# A Single Market and the Interpretation of Vector Autoregressions
+# Dynamic Supply and Demand Curves
 
 ## Overview
 
-This lecture is another member of the suite of lectures that use the quantecon `DLE` class and its
+This is part  of a suite of lectures that use the quantecon `DLE` class and its
 underlying `LQ` machinery to study models within the {cite}`HS2013` class described in
 {doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
 
-It is a companion to {doc}`hs_invertibility_example`.
+We use the machinery to construct dynamic supply and demand curves for a market for a single good.  
+
+
+Our model is version of the discrete-time example of Lars Peter Hansen and Thomas J. Sargent's
+"Two difficulties in interpreting vector autoregressions" {cite}`HanSar1991diff`.
+
+
+In this lecture, we shall
+
+* set up a market in which a representative supplier and a representative demander each solve a
+  linear-quadratic dynamic optimization problem,
+* derive **dynamic supply and demand curves** by factoring each agent's Euler equation into 
+  stable roots and  unstable root, then solving stable roots backwards and unstable roots forwards
+* by using an instance of the
+  "Big $X$, little $x$" device used throughout modern macroeconomics, recast each side of the market as a price-taking **optimal linear regulator**, 
+
+
+This lecture also revisits the issue discussed in {doc}`hs_invertibility_example`.
 
 That lecture studied a **shock-invertibility** problem inside a permanent income model.
 
 This lecture studies the same problem inside a **single competitive market** for a good whose price
 and quantity are both observed.
 
-The market comes from the discrete-time example of Lars Peter Hansen and Thomas J. Sargent's
-"Two difficulties in interpreting vector autoregressions" {cite}`HanSar1991diff`.
+In this context, we shall 
 
-Along the way we will
-
-* set up a market in which a representative supplier and a representative demander each solve a
-  linear-quadratic dynamic optimization problem,
-* explain why a vector autoregression fit to the market's price and quantity data can give a
-  distorted picture of the shocks that actually move the agents — the difficulty that Christopher
-  Sims's {cite}`Sims1980` **innovation accounting** runs into,
-* derive **dynamic supply and demand curves** by factoring each agent's Euler equation into a
-  stable root and an unstable root, and
-* recast each side of the market as a price-taking **optimal linear regulator**, an instance of the
-  "Big $X$, little $x$" device used throughout modern macroeconomics.
+* explain why a vector autoregression fit to the market's price and quantity data can give a   distorted picture of the shocks that actually move the agents — the difficulty encountered by Christopher
+  Sims's {cite}`Sims1980` **innovation accounting** 
 
 In addition to what's in Anaconda, this lecture uses the quantecon library.
 
