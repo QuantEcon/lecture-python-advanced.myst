@@ -25,38 +25,42 @@ kernelspec:
 
 ## Overview
 
-This is part  of a suite of lectures that use the quantecon `DLE` class and its
-underlying `LQ` machinery to study models within the {cite}`HS2013` class described in
-{doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>`.
+This lecture constructs **dynamic supply and demand curves** for a market for a single good.
 
-We use the machinery to construct dynamic supply and demand curves for a market for a single good.  
+It belongs to a suite of lectures that study the class of models described in
+{doc}`Recursive Models of Dynamic Linear Economies <hs_recursive_models>` and {cite}`HS2013`.
 
+Unlike other lectures in that suite, this one does not use the quantecon `DLE` class; instead it
+maps the market directly into the quantecon `LQ` class and its associated linear state-space
+machinery.
 
-Our model is version of the discrete-time example of Lars Peter Hansen and Thomas J. Sargent's
+The model is a version of a discrete-time example in Lars Peter Hansen and Thomas J. Sargent's
 "Two difficulties in interpreting vector autoregressions" {cite}`HanSar1991diff`.
-
 
 In this lecture, we shall
 
 * set up a market in which a representative supplier and a representative demander each solve a
   linear-quadratic dynamic optimization problem,
-* derive **dynamic supply and demand curves** by factoring each agent's Euler equation into 
-  stable roots and  unstable root, then solving stable roots backwards and unstable roots forwards
-* by using an instance of the
-  "Big $X$, little $x$" device used throughout modern macroeconomics, recast each side of the market as a price-taking **optimal linear regulator**, 
+* derive dynamic supply and demand curves by factoring each agent's Euler equation into stable and
+  unstable roots, then solving stable roots backwards and unstable roots forwards,
+* recast the optimization problem faced by each side of the market within a rational expectations
+  equilibrium as an **optimal linear regulator**, using an instance of the "Big $X$, little $x$"
+  device used throughout modern macroeconomics, and
+* explain why a vector autoregression fit to a history of equilibrium prices and quantities can give
+  a distorted picture of the shocks that drive suppliers' and demanders' information sets — a
+  difficulty that afflicts Christopher Sims's {cite}`Sims1980` **innovation accounting** more
+  generally.
 
+Along the way we obtain representations of dynamic supply and demand curves both **outside** and
+**inside** a rational expectations equilibrium.
 
-This lecture also revisits the issue discussed in {doc}`hs_invertibility_example`.
+In studying the vector autoregression difficulty, this lecture also revisits an issue discussed in
+{doc}`hs_invertibility_example`.
 
 That lecture studied a **shock-invertibility** problem inside a permanent income model.
 
-This lecture studies the same problem inside a **single competitive market** for a good whose price
-and quantity are both observed.
-
-In this context, we shall 
-
-* explain why a vector autoregression fit to the market's price and quantity data can give a   distorted picture of the shocks that actually move the agents — the difficulty encountered by Christopher
-  Sims's {cite}`Sims1980` **innovation accounting** 
+This lecture studies the same problem inside a model of a **single competitive market** for a good
+whose price and quantity are both observed.
 
 In addition to what's in Anaconda, this lecture uses the quantecon library.
 
@@ -76,66 +80,10 @@ import matplotlib.pyplot as plt
 from quantecon import LQ
 ```
 
-## The vector autoregression and its innovations
 
-Let $z_t$ be an $n \times 1$ covariance stationary process — for us it will be the pair of quantity
-and price in a single market.
+## The setting
 
-By Wold's theorem (see {doc}`Classical Control with Linear Algebra <lu_tricks>`), $z_t$ has a
-**vector autoregression**
-
-```{math}
-:label: sdvar-var
-z_t = \sum_{j=1}^{\infty} A_j\, z_{t-j} + a_t ,
-```
-
-where the residual $a_t$ is a vector white noise, orthogonal to $z_{t-j}$ for all $j \geq 1$, with
-covariance $E a_t a_t^T = V$.
-
-Because $a_t$ lies in the space spanned by current and lagged $z$'s, it is **fundamental** for
-$z_t$: the history of $z$'s reveals it.
-
-Eliminating the lagged $z$'s gives the **Wold moving-average representation**
-
-```{math}
-:label: sdvar-wold
-z_t = \sum_{j=0}^{\infty} C_j\, a_{t-j}, \qquad C_0 = I ,
-```
-
-and this representation induces the decomposition of the $j$-step-ahead prediction-error covariance
-
-```{math}
-:label: sdvar-vd
-E\big(z_t - \hat E_{t-j} z_t\big)\big(z_t - \hat E_{t-j} z_t\big)^T = \sum_{k=0}^{j-1} C_k\, V\, C_k^T
-```
-
-that underlies Sims's {cite}`Sims1980` **innovation accounting** — the variance decompositions and
-impulse responses that a researcher reads off an estimated autoregression.
-
-Now suppose the equilibrium of an economic model has its own moving-average representation in terms
-of the shocks that hit the agents' information sets,
-
-```{math}
-:label: sdvar-struct
-z_t = \sum_{j=0}^{\infty} D_j\, \epsilon_{t-j},
-```
-
-where $\epsilon_t$ is the white noise that is fundamental **for the agents**.
-
-The interpretive question is whether the autoregression's innovations $a_t$ equal the agents'
-shocks $\epsilon_t$, and whether the response coefficients $C_j$ equal the economic responses $D_j$.
-
-If they do, innovation accounting reads off the economics directly.
-
-This lecture exhibits a single market in which they do **not**: the white noise that a vector
-autoregression recovers from data on price and quantity is *not* the white noise that is
-fundamental for the supplier and the demander.
-
-We will see exactly *why*, and we will see the quantitative signature of the discrepancy.
-
-## A single market
-
-The econometrician observes only the $2 \times 1$ vector $y_t = (q_t, p_t)$ of quantity and price.
+There is a competitive market for a single good produced in quantity $q_t$ and sold at price $p_t$.
 
 A representative supplier and a representative demander each solve a linear-quadratic dynamic
 problem, taking the market price $\{p_t\}$ as an exogenous stochastic process.
@@ -492,10 +440,11 @@ print("equilibrium feedback on q_{t-1..t-4} :", np.round(-F[0, :4], 4))
 print("largest closed-loop eigenvalue       :", np.round(np.max(np.abs(np.linalg.eigvals(A_F))), 4))
 ```
 
-The equilibrium is stationary — the largest closed-loop eigenvalue is well inside the unit circle.
+Equilibrium outcomes are asymptotically stationary — the largest closed-loop eigenvalue is well
+inside the unit circle.
 
-The structural moving-average representation {eq}`sdvar-struct` of $z_t = (q_t, p_t)$ in the agents'
-shocks $\epsilon_t = (w_{st}, w_{dt})$ is $z_t = G_z (I - A_F L)^{-1} C\, \epsilon_t$.
+The equilibrium law of motion implies a moving-average representation of $z_t = (q_t, p_t)$ in the
+agents' shocks $\epsilon_t = (w_{st}, w_{dt})$, namely $z_t = G_z (I - A_F L)^{-1} C\, \epsilon_t$.
 
 Its impulse responses are the **response to the agents' structural shocks**.
 
@@ -535,138 +484,30 @@ A **supply** surprise sends quantity and price off in opposite directions.
 In both cases quantity moves *slowly* — the hallmark of the sluggish adjustment that $g_s = 10$
 builds in.
 
-## Why a vector autoregression misreads this market
 
-The shocks $\epsilon_t = (w_{st}, w_{dt})$ are fundamental for the agents' information set.
-
-The question is whether they are also fundamental for the *econometrician's* data $z_t = (q_t, p_t)$.
-
-They are fundamental for $z_t$ if and only if the moving average $z_t = G_z (I-A_F L)^{-1} C\,
-\epsilon_t$ has no zeros inside the unit circle.
-
-For this market they do lie inside, and $\epsilon_t$ is **not** fundamental for $z_t$.
-
-A vector autoregression fit to $(q_t, p_t)$ therefore does not recover $\epsilon_t$.
-
-Instead it recovers a *different* white noise $\epsilon_t^*$ — the Wold innovation — that is a
-one-sided distributed lag of current and past $\epsilon_t$'s,
-
-```{math}
-:label: sdvar-blaschke
-\epsilon_t^* = G(L)^T \epsilon_t ,
-```
-
-obtained by "flipping" the inside-the-unit-circle zeros to the outside (a *Blaschke* factorization).
-
-The Wold innovation mixes the agents' current surprise with **old news**.
-
-We recover the Wold representation by passing the equilibrium through the **Kalman filter**, exactly
-as in {doc}`hs_invertibility_example`.
-
-The innovations representation delivered by the filter is the Wold representation, and the filter
-that maps $\epsilon_t \mapsto \epsilon_t^*$ is the *whitener*.
-
-```{code-cell} python3
-# innovations (Wold) representation via the Kalman filter
-G_meas = 1e-8 * np.eye(2)                              # negligible measurement error
-lss = qe.LinearStateSpace(A_F, C @ scale, G_z, G_meas)
-kalman = qe.Kalman(lss)
-
-Σ_struct = (G_z @ C @ scale) @ (G_z @ C @ scale).T     # contemporaneous cov of structural innovation
-Σ_wold = kalman.stationary_innovation_covar()          # contemporaneous cov of Wold innovation
-
-print("contemporaneous covariance of the structural innovation R0 ε_t:")
-print(np.round(Σ_struct, 4))
-print("\ncontemporaneous covariance of the Wold innovation R0* ε_t*:")
-print(np.round(Σ_wold, 4))
-print("\ndifference (Wold − structural), a positive semidefinite matrix:")
-print(np.round(Σ_wold - Σ_struct, 5))
-```
-
-The contemporaneous covariance of the Wold innovation *exceeds* that of the agents' structural
-innovation.
-
-This is the covariance inequality
-
-```{math}
-:label: sdvar-covineq
-E\big(R_0^*\epsilon_t^*\big)\big(R_0^*\epsilon_t^*\big)^T \;\succeq\; E\big(R_0\,\epsilon_t\big)\big(R_0\,\epsilon_t\big)^T .
-```
-
-The innovation the econometrician sees carries *more* contemporaneous variance than the agents'
-surprise, because it has folded in shocks that the agents already knew.
-
-We can compare the impulse responses directly.
-
-The Wold representation's impulse responses come from the Kalman filter's stationary moving-average
-coefficients; the whitener's impulse responses show how the recovered innovation $\epsilon_t^*$
-responds to the agents' structural shock $\epsilon_t$.
-
-```{code-cell} python3
-T = 25
-whitener = kalman.whitener_lss()
-ma_coefs = kalman.stationary_coefficients(T, 'ma')     # Wold MA coefficients
-σ_wold = np.sqrt(np.diag(Σ_wold))
-
-# response of (q, p) to the Wold innovations ε*_t (scaled to their std devs)
-wold_irf = np.array([mc @ np.diag(σ_wold) for mc in ma_coefs])
-
-# response of the recovered innovations ε*_t to the structural shocks ε_t
-whit_irf = whitener.impulse_response(T)[1]
-
-fig, axes = plt.subplots(1, 2, figsize=(12, 4))
-axes[0].plot(wold_irf[:, 0, 0], label="quantity innov.")
-axes[0].plot(wold_irf[:, 1, 0], label="price innov.")
-axes[0].set_title("response of $(q,p)$ to the first Wold innovation")
-axes[0].axhline(0, color="k", lw=0.5); axes[0].set_xlabel("periods"); axes[0].legend()
-
-axes[1].plot([c[0, 0] for c in whit_irf], label="via supply shock $w_{st}$")
-axes[1].plot([c[0, 1] for c in whit_irf], label="via demand shock $w_{dt}$")
-axes[1].set_title("response of the recovered innovation $\\epsilon^*_t$")
-axes[1].axhline(0, color="k", lw=0.5); axes[1].set_xlabel("periods"); axes[1].legend()
-plt.tight_layout()
-plt.show()
-```
-
-The right panel is the heart of the matter.
-
-The supply shock $w_{st}$ enters the recovered innovations only as a **distributed lag**: because
-quantity adjusts sluggishly, a supply surprise is revealed to the econometrician gradually, through
-the path of $(q_t, p_t)$, rather than all at once.
-
-The demand shock $w_{dt}$, by contrast, hits almost contemporaneously.
-
-An econometrician who interpreted the autoregression's innovations as the agents' shocks would
-therefore misattribute both the timing and the sources of the market's response.
-
-```{admonition} The moral for innovation accounting
-:class: tip
-
-A vector autoregression always recovers *some* fundamental white noise $\epsilon^*_t$ for the
-observed $z_t$, and Sims's innovation accounting always produces a tidy variance decomposition.
-
-But the fundamental noise for the data need not be the fundamental noise for the agents.
-
-When it is not — as in this market, where quantity adjusts sluggishly and so reveals supply
-surprises only with a lag — the impulse responses and variance decompositions describe the data's
-own internal forecasting structure, not the economy's response to the surprises that actually move
-agents.
-
-Reading economic meaning into them requires the restrictions of a model, not just the
-autoregression.
-```
-
-## Each side of the market as a price-taking regulator
+## Each side of the market as a price-taking optimal linear regulator
 
 The dynamic supply and demand curves {eq}`sdvar-supplycurve`–{eq}`sdvar-demandcurve` are the
-first-order conditions of two *distinct* optimization problems, and in the rational expectations
-equilibrium **both agents are price takers**.
+first-order conditions of two *distinct* optimization problems.
 
-We now cast each problem as a discounted optimal linear regulator in which the agent faces the
-equilibrium price as an *exogenous* stochastic process.
+They describe supplies and demands for arbitrary price processes, not just equilibrium ones.
 
-This is an instance of the "Big $X$, little $x$" device: append the exogenous aggregate law of
-motion to the agent's own state and solve an ordinary linear regulator, exactly as in
+We now turn to distinct decision rules for suppliers and demanders **within** a rational
+expectations equilibrium.
+
+Such decision rules are appropriate only when the price process is the equilibrium one.
+
+In the rational expectations equilibrium **both agents are price takers**.
+
+We now cast each problem as a discounted optimal linear regulator in which each agent, whether
+supplier or demander, faces the equilibrium price process.
+
+That means that for that agent the price process is **exogenous**, meaning unaffected by its own
+choices — which is exactly what it means for the agent to be a **price taker**.
+
+We accomplish our mission by using an instance of the "Big $X$, little $x$" device: we append the
+exogenous aggregate law of motion to the agent's own state and solve an ordinary linear regulator,
+exactly as in
 [Section 50.7.1 of the QuantEcon dynamic Stackelberg lecture](https://python-advanced.quantecon.org/dyn_stack.html).
 
 Write the equilibrium in state-space form
@@ -759,7 +600,7 @@ What closes the model is the requirement that the aggregate the agents respond t
 the aggregate their choices produce: the market clears, and the price process that both agents
 forecast is the very process their market-clearing quantities generate.
 
-We can verify this fixed point.
+We must verify this fixed point property.
 
 Facing the equilibrium price process, the supplier's best-response quantity rule should coincide
 with the equilibrium quantity rule the planner computed.
@@ -782,7 +623,7 @@ consistent with it — the "Big $X$, little $x$" fixed point.
 
 ### Open-loop versus closed-loop decision rules
 
-The construction has produced two distinct pairs of decision rules.
+We have constructed two distinct pairs of decision rules.
 
 The dynamic supply and demand curves {eq}`sdvar-supplycurve`–{eq}`sdvar-demandcurve` give each
 agent's optimal quantity as a function of its own past quantities and of its forecasts
@@ -817,6 +658,186 @@ And because the equilibrium price path is itself driven by *both* disturbances, 
 make each side's quantity depend on both shock processes: today's suppliers and today's demanders
 both react to supply *and* demand shocks, through their common effect on the prospective path of
 prices.
+
+
+
+## Vector autoregressions and innovation accounting
+
+Let $z_t$ be an $n \times 1$ covariance stationary process — for us it will be the pair of quantity
+and price in a single market.
+
+By Wold's theorem (see {doc}`Classical Control with Linear Algebra <lu_tricks>`), $z_t$ has a
+**vector autoregression**
+
+```{math}
+:label: sdvar-var
+z_t = \sum_{j=1}^{\infty} A_j\, z_{t-j} + a_t ,
+```
+
+where the residual $a_t$ is a vector white noise, orthogonal to $z_{t-j}$ for all $j \geq 1$, with
+covariance $E a_t a_t^T = V$.
+
+Because $a_t$ lies in the space spanned by current and lagged $z$'s, it is **fundamental** for
+$z_t$: the history of $z$'s reveals it.
+
+Eliminating the lagged $z$'s gives the **Wold moving-average representation**
+
+```{math}
+:label: sdvar-wold
+z_t = \sum_{j=0}^{\infty} C_j\, a_{t-j}, \qquad C_0 = I ,
+```
+
+and this representation induces the decomposition of the $j$-step-ahead prediction-error covariance
+
+```{math}
+:label: sdvar-vd
+E\big(z_t - \hat E_{t-j} z_t\big)\big(z_t - \hat E_{t-j} z_t\big)^T = \sum_{k=0}^{j-1} C_k\, V\, C_k^T
+```
+
+that underlies Sims's {cite}`Sims1980` **innovation accounting** — the variance decompositions and
+impulse responses that a researcher reads off an estimated autoregression.
+
+Now suppose the equilibrium of an economic model has its own moving-average representation in terms
+of the shocks that hit the agents' information sets,
+
+```{math}
+:label: sdvar-struct
+z_t = \sum_{j=0}^{\infty} D_j\, \epsilon_{t-j},
+```
+
+where $\epsilon_t$ is the white noise that is fundamental **for the agents**.
+
+The interpretive question is whether the autoregression's innovations $a_t$ equal the agents'
+shocks $\epsilon_t$, and whether the response coefficients $C_j$ equal the economic responses $D_j$.
+
+If they do, innovation accounting reads off the economics directly.
+
+This lecture exhibits a single market in which they do **not**: the white noise that a vector
+autoregression recovers from data on price and quantity is *not* the white noise that is
+fundamental for the supplier and the demander.
+
+We will see exactly *why*, and we will see the quantitative signature of the discrepancy.
+
+## Why a vector autoregression misreads this market
+
+We assume that at time $t$ an econometrician observes only the $2 \times 1$ vector
+$y_t = (q_t, p_t)$ of quantity and price.
+
+The shocks $\epsilon_t = (w_{st}, w_{dt})$ are fundamental for the agents' information set.
+
+The question is whether they are also fundamental for the *econometrician's* data $z_t = (q_t, p_t)$.
+
+They are fundamental for $z_t$ if and only if the moving average $z_t = G_z (I-A_F L)^{-1} C\,
+\epsilon_t$ has no zeros inside the unit circle.
+
+In our model, some of the zeros do lie inside, so $\epsilon_t$ is **not** fundamental for $z_t$.
+
+A vector autoregression fit to $(q_t, p_t)$ therefore does not recover $\epsilon_t$.
+
+Instead it recovers a *different* white noise $\epsilon_t^*$ — the Wold innovation — that is a
+one-sided distributed lag of current and past $\epsilon_t$'s,
+
+```{math}
+:label: sdvar-blaschke
+\epsilon_t^* = G(L)^T \epsilon_t ,
+```
+
+obtained by "flipping" the inside-the-unit-circle zeros to the outside (a *Blaschke* factorization).
+
+The Wold innovation mixes the agents' current surprise with **old news**.
+
+We recover the Wold representation by passing the equilibrium through the **Kalman filter**, exactly
+as in {doc}`hs_invertibility_example`.
+
+The innovations representation delivered by the filter is the Wold representation, and the filter
+that maps $\epsilon_t \mapsto \epsilon_t^*$ is the *whitener*.
+
+```{code-cell} python3
+# innovations (Wold) representation via the Kalman filter
+G_meas = 1e-8 * np.eye(2)                              # negligible measurement error
+lss = qe.LinearStateSpace(A_F, C @ scale, G_z, G_meas)
+kalman = qe.Kalman(lss)
+
+Σ_struct = (G_z @ C @ scale) @ (G_z @ C @ scale).T     # contemporaneous cov of structural innovation
+Σ_wold = kalman.stationary_innovation_covar()          # contemporaneous cov of Wold innovation
+
+print("contemporaneous covariance of the structural innovation R0 ε_t:")
+print(np.round(Σ_struct, 4))
+print("\ncontemporaneous covariance of the Wold innovation R0* ε_t*:")
+print(np.round(Σ_wold, 4))
+print("\ndifference (Wold − structural), a positive semidefinite matrix:")
+print(np.round(Σ_wold - Σ_struct, 5))
+```
+
+The contemporaneous covariance of the Wold innovation *exceeds* that of the agents' structural
+innovation.
+
+This is the covariance inequality
+
+```{math}
+:label: sdvar-covineq
+E\big(R_0^*\epsilon_t^*\big)\big(R_0^*\epsilon_t^*\big)^T \;\succeq\; E\big(R_0\,\epsilon_t\big)\big(R_0\,\epsilon_t\big)^T .
+```
+
+The econometrician's innovation $\epsilon_t^*$ has a *larger* contemporaneous variance than the
+agents' surprise $\epsilon_t$ because it has folded in past shocks $\epsilon_{t-j}$ that the agents
+already know.
+
+We can compare the impulse responses directly.
+
+The Wold representation's impulse responses come from the Kalman filter's stationary moving-average
+coefficients; the whitener's impulse responses show how the recovered innovation $\epsilon_t^*$
+responds to the agents' structural shock $\epsilon_t$.
+
+```{code-cell} python3
+T = 25
+whitener = kalman.whitener_lss()
+ma_coefs = kalman.stationary_coefficients(T, 'ma')     # Wold MA coefficients
+σ_wold = np.sqrt(np.diag(Σ_wold))
+
+# response of (q, p) to the Wold innovations ε*_t (scaled to their std devs)
+wold_irf = np.array([mc @ np.diag(σ_wold) for mc in ma_coefs])
+
+# response of the recovered innovations ε*_t to the structural shocks ε_t
+whit_irf = whitener.impulse_response(T)[1]
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+axes[0].plot(wold_irf[:, 0, 0], label="quantity innov.")
+axes[0].plot(wold_irf[:, 1, 0], label="price innov.")
+axes[0].set_title("response of $(q,p)$ to the first Wold innovation")
+axes[0].axhline(0, color="k", lw=0.5); axes[0].set_xlabel("periods"); axes[0].legend()
+
+axes[1].plot([c[0, 0] for c in whit_irf], label="via supply shock $w_{st}$")
+axes[1].plot([c[0, 1] for c in whit_irf], label="via demand shock $w_{dt}$")
+axes[1].set_title("response of the recovered innovation $\\epsilon^*_t$")
+axes[1].axhline(0, color="k", lw=0.5); axes[1].set_xlabel("periods"); axes[1].legend()
+plt.tight_layout()
+plt.show()
+```
+
+The right panel is the heart of the matter.
+
+The supply shock $w_{st}$ enters the recovered innovations only as a **distributed lag**: because
+quantity adjusts sluggishly, a supply surprise is revealed to the econometrician gradually, through
+the path of $(q_t, p_t)$, rather than all at once.
+
+The demand shock $w_{dt}$, by contrast, hits almost contemporaneously.
+
+An econometrician who interpreted the autoregression's innovations as the agents' shocks would
+therefore misattribute both the timing and the sources of the market's response.
+
+```{admonition} The moral for innovation accounting
+:class: tip
+
+A vector autoregression always recovers *some* fundamental white noise $\epsilon^*_t$ for the
+observed $z_t$, and Sims's innovation accounting always produces a tidy variance decomposition.
+
+But the fundamental noise for the *data* need not be the fundamental noise for the *agents*.
+
+When the two differ — as in this market, where quantity adjusts sluggishly and so reveals supply
+surprises only with a lag — the impulse responses and variance decompositions describe the data's
+own forecasting structure, not the economy's response to the surprises that actually move agents.
+```
 
 ## Exercises
 
