@@ -20,14 +20,6 @@ kernelspec:
 
 # Fiscal Risk and Government Debt
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
-
-```{code-cell} ipython
----
-tags: [hide-output]
----
-!pip install --upgrade quantecon
-```
 
 ## Overview
 
@@ -64,7 +56,19 @@ BEGS that we describe below.
 
 We use code constructed in {doc}`Fluctuating Interest Rates Deliver Fiscal Insurance <amss2>`.
 
+```{note}
 **Warning:** Key equations in  {cite}`BEGS1` section III.D carry  typos  that we correct below.
+```
+
+
+In addition to what's in Anaconda, this lecture will need the following libraries:
+
+```{code-cell} ipython
+---
+tags: [hide-output]
+---
+!pip install --upgrade quantecon
+```
 
 Let's start with some imports:
 

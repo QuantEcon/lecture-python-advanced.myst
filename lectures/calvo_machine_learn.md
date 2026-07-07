@@ -139,21 +139,11 @@ or
 
 Because $\alpha > 0$,  $0 < \frac{\alpha}{1+\alpha} < 1$.
 
-```{prf:definition}
-:label: square-summable
 
-For  scalar $b_t$, let $L^2$ be the space of sequences
-$\{b_t\}_{t=0}^\infty$ that satisfy 
+We assume that the sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ is bounded.
 
-$$
-\sum_{t=0}^\infty  b_t^2 < +\infty
-$$
-
-We say that a sequence that belongs to $L^2$ is **square summable**.
-```
-
-When we assume that the sequence $\vec \mu = \{\mu_t\}_{t=0}^\infty$ is square summable and also require that the sequence $\vec \theta = \{\theta_t\}_{t=0}^\infty$ is square summable,
-the linear difference equation {eq}`eq_grad_old2` can be solved forward to get:
+ 
+Then the linear difference equation {eq}`eq_grad_old2` can be solved forward to get:
 
 ```{math}
 :label: eq_grad_old3

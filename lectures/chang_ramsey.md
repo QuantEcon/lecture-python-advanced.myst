@@ -3,10 +3,12 @@ jupytext:
   text_representation:
     extension: .md
     format_name: myst
+    format_version: 0.13
+    jupytext_version: 1.19.1
 kernelspec:
-  display_name: Python 3
-  language: python
   name: python3
+  display_name: Python 3 (ipykernel)
+  language: python
 ---
 
 (chang_ramsey)=
@@ -22,10 +24,9 @@ kernelspec:
 
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
-```{code-cell} ipython
----
-tags: [hide-output]
----
+```{code-cell} ipython3
+:tags: [hide-output]
+
 !pip install polytope cvxopt
 ```
 
@@ -68,7 +69,7 @@ and other lectures.
 
 We'll start with some standard imports:
 
-```{code-cell} ipython
+```{code-cell} ipython3
 import numpy as np
 import polytope
 import matplotlib.pyplot as plt
@@ -918,16 +919,18 @@ $\beta = 0.8$.
 (Here we have set the number of subgradients to 10 in order to speed up the
 code for now - we can increase accuracy by increasing the number of subgradients)
 
-```{code-cell} python3
+```{code-cell} ipython3
 :load: _static/lecture_specific/chang_credible/changecon.py
+
+
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 ch1 = ChangModel(β=0.3, mbar=30, h_min=0.9, h_max=2, n_h=8, n_m=35, N_g=10)
 ch1.solve_sustainable()
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 def plot_competitive(ChangModel):
     """
     Method that only plots competitive equilibrium set
@@ -960,13 +963,13 @@ def plot_competitive(ChangModel):
 plot_competitive(ch1)
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 ch2 = ChangModel(β=0.8, mbar=30, h_min=0.9, h_max=1/0.8,
                  n_h=8, n_m=35, N_g=10)
 ch2.solve_sustainable()
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 plot_competitive(ch2)
 ```
 
@@ -1023,14 +1026,14 @@ From the figures earlier in this lecture,  we know that when $\beta = 0.3$,
 $\Omega = [0.0088,0.0499]$, and when $\beta = 0.8$,
 $\Omega = [0.0395,0.2193]$
 
-```{code-cell} python3
+```{code-cell} ipython3
 ch1 = ChangModel(β=0.3, mbar=30, h_min=0.99, h_max=1/0.3,
                  n_h=8, n_m=35, N_g=50)
 ch2 = ChangModel(β=0.8, mbar=30, h_min=0.1, h_max=1/0.8,
                  n_h=20, n_m=50, N_g=50)
 ```
 
-```{code-cell} python3
+```{code-cell} ipython3
 ch1.solve_bellman(θ_min=0.01, θ_max=0.0499, order=30, tol=1e-6)
 ch2.solve_bellman(θ_min=0.045, θ_max=0.15, order=30, tol=1e-6)
 ```
@@ -1040,14 +1043,14 @@ good.
 
 We do this by calculating the residuals between iterates on the value function on a fine grid:
 
-```{code-cell} python3
+```{code-cell} ipython3
 max(abs(ch1.resid_grid)), max(abs(ch2.resid_grid))
 ```
 
 The value functions plotted below trace out the right edges of the sets
 of equilibrium values plotted above
 
-```{code-cell} python3
+```{code-cell} ipython3
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
 for ax, model in zip(axes, (ch1, ch2)):
@@ -1062,7 +1065,7 @@ plt.show()
 The next figure plots the optimal policy functions; values of
 $\theta',m,x,h$ for each value of the state $\theta$:
 
-```{code-cell} python3
+```{code-cell} ipython3
 for model in (ch1, ch2):
 
     fig, axes = plt.subplots(2, 2, figsize=(12, 6), sharex=True)
@@ -1094,7 +1097,7 @@ With the first set of parameter values,  this function does not intersect the
 45-degree line until $\bar \theta$, whereas in the second set of parameter values, it
 intersects in the interior.
 
-```{code-cell} python3
+```{code-cell} ipython3
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 
 for ax, model in zip(axes, (ch1, ch2)):
@@ -1115,7 +1118,7 @@ equilibrium.
 
 These are shown below for both sets of parameters
 
-```{code-cell} python3
+```{code-cell} ipython3
 for model in (ch1, ch2):
 
     fig, axes = plt.subplots(2, 2, figsize=(12, 6))

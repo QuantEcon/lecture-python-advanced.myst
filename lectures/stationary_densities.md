@@ -34,7 +34,7 @@ tags: [hide-output]
 
 ## Overview
 
-In a [previous lecture](https://python-intro.quantecon.org/finite_markov.html), we learned about finite Markov chains, a relatively elementary class of stochastic dynamic models.
+In {doc}`intermediate:finite_markov`, we learned about finite Markov chains, a relatively elementary class of stochastic dynamic models.
 
 The present lecture extends this analysis to continuous (i.e., uncountable) state Markov chains.
 
@@ -42,12 +42,12 @@ Most stochastic dynamic models studied by economists either fit directly into th
 
 In this lecture, our focus will be on continuous Markov models that
 
-* evolve in discrete-time
+* evolve in discrete time
 * are often nonlinear
 
 The fact that we accommodate nonlinear models here is significant, because
 linear stochastic models have their own highly developed toolset, as we'll
-see {doc}`later on <arma>`.
+see later in {doc}`arma`.
 
 The question that interests us most is: Given a particular stochastic dynamic
 model, how will the state of the system evolve over time?
@@ -96,7 +96,7 @@ Once we've built some intuition we'll cover the general case.
 
 ### Definitions and basic properties
 
-In our [lecture on finite Markov chains](https://python-intro.quantecon.org/finite_markov.html), we studied discrete-time Markov chains that evolve on a finite state space $S$.
+In our lecture {doc}`intermediate:finite_markov`, we studied discrete-time Markov chains that evolve on a finite state space $S$.
 
 In this setting, the dynamics of the model are described by a stochastic matrix --- a nonnegative square matrix $P = P[i, j]$ such that each row $P[i, \cdot]$ sums to one.
 
@@ -127,7 +127,7 @@ The family of discrete distributions $P[i, \cdot]$ will be replaced by a family 
 
 Analogous to the finite state case, $p(x, \cdot)$ is to be understood as the distribution (density) of $X_{t+1}$ given $X_t = x$.
 
-More formally, a *stochastic kernel on* $S$ is a function $p \colon S \times S \to \mathbb R$ with the property that
+More formally, a **stochastic kernel on** $S$ is a function $p \colon S \times S \to \mathbb R$ with the property that
 
 1. $p(x, y) \geq 0$ for all $x, y \in S$
 1. $\int p(x, y) dy = 1$ for all $x \in S$
@@ -274,7 +274,7 @@ p(x, y)
 where $\phi$ is the density of $A_{t+1}$.
 
 (Regarding the state space $S$ for this model, a natural choice is $(0, \infty)$ --- in which case
-$\sigma(x) = s f(x)$ is strictly positive for all $s$ as required)
+$\sigma(x) = s f(x)$ is strictly positive for all $x$ as required)
 
 ### Distribution dynamics
 
@@ -322,7 +322,7 @@ defined by
 (\psi P)(y) = \int p(x,y) \psi(x) dx
 ```
 
-This operator is usually called the *Markov operator* corresponding to $p$
+This operator is usually called the **Markov operator** corresponding to $p$.
 
 ```{note}
 Unlike most operators, we write $P$ to the right of its argument,
@@ -368,7 +368,7 @@ $y$.
 
 Another possibility is to discretize the model, but this introduces errors of unknown size.
 
-A nicer alternative in the present setting is to combine simulation with an elegant estimator called the *look-ahead* estimator.
+A nicer alternative in the present setting is to combine simulation with an elegant estimator called the **look-ahead** estimator.
 
 Let's go over the ideas with reference to the growth model {ref}`discussed above <solow_swan>`, the dynamics of which we repeat here for convenience:
 
@@ -412,12 +412,12 @@ where $p$ is the growth model stochastic kernel in {eq}`statd_sssk`.
 
 What is the justification for this slightly surprising estimator?
 
-The idea is that, by the strong [law of large numbers](https://python-intro.quantecon.org/lln_clt.html#lln-ksl),
+The idea is that, by the strong [law of large numbers](https://python.quantecon.org/lln_clt.html#lln-ksl),
 
 $$
 \frac{1}{n} \sum_{i=1}^n p(k_{t-1}^i, y)
 \to
-\mathbb E p(k_{t-1}^i, y)
+\mathbb E \left[ p(k_{t-1}^i, y) \right]
 = \int p(x, y) \psi_{t-1}(x) \, dx
 = \psi_t(y)
 $$
@@ -462,13 +462,20 @@ The following code is an example of usage for the stochastic growth model {ref}`
 
 (stoch_growth)=
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Density of $k_1$ (lighter) to $k_T$ (darker)
+    name: fig-statd-density-sequence
+---
 # == Define parameters == #
 s = 0.2
 δ = 0.1
-a_σ = 0.4                    # A = exp(B) where B ~ N(0, a_σ)
+a_σ = 0.4                    # A = exp(B) where B ~ N(0, a_σ**2)
 α = 0.4                      # We set f(k) = k**α
 ψ_0 = beta(5, 5, scale=0.5)  # Initial distribution
 ϕ = lognorm(a_σ)
+rng = np.random.default_rng(1234)
 
 
 def p(x, y):
@@ -480,12 +487,12 @@ def p(x, y):
     return ϕ.pdf((y - (1 - δ) * x) / d) / d
 
 n = 10000    # Number of observations at each date t
-T = 30       # Compute density of k_t at 1,...,T+1
+T = 30       # Compute density of k_t at 1,...,T
 
 # == Generate matrix s.t. t-th column is n observations of k_t == #
 k = np.empty((n, T))
-A = ϕ.rvs((n, T))
-k[:, 0] = ψ_0.rvs(n)  # Draw first column from initial distribution
+A = ϕ.rvs((n, T), random_state=rng)
+k[:, 0] = ψ_0.rvs(n, random_state=rng)  # Draw first column from initial distribution
 for t in range(T-1):
     k[:, t+1] = s * A[:, t] * k[:, t]**α + (1 - δ) * k[:, t]
 
@@ -500,7 +507,6 @@ greys.reverse()
 for ψ, g in zip(laes, greys):
     ax.plot(ygrid, ψ(ygrid), color=g, lw=2, alpha=0.6)
 ax.set_xlabel('capital')
-ax.set_title(f'Density of $k_1$ (lighter) to $k_T$ (darker) for $T={T}$')
 plt.show()
 ```
 
@@ -531,7 +537,7 @@ We can, however, construct a fairly general theory using distribution functions.
 
 ### Example and definitions
 
-To illustrate the issues, recall that Hopenhayn and Rogerson {cite}`HopenhaynRogerson1993` study a model of firm dynamics where individual firm productivity follows the exogenous process
+To illustrate the issues, recall that {cite:t}`HopenhaynRogerson1993` study a model of firm dynamics where individual firm productivity follows the exogenous process
 
 $$
 X_{t+1} = a + \rho X_t + \xi_{t+1},
@@ -557,7 +563,7 @@ puts positive probability mass on 0 and 1.
 
 Hence it cannot be represented as a density.
 
-What we can do instead is use cumulative distribution functions (cdfs).
+What we can do instead is use cumulative distribution functions (CDFs).
 
 To this end, set
 
@@ -566,7 +572,7 @@ G(x, y) := \mathbb P \{ h(a + \rho x + \xi_{t+1}) \leq y \}
 \qquad (0 \leq x, y \leq 1)
 $$
 
-This family of cdfs $G(x, \cdot)$ plays a role analogous to the stochastic kernel in the density case.
+This family of CDFs $G(x, \cdot)$ plays a role analogous to the stochastic kernel in the density case.
 
 The distribution dynamics in {eq}`statd_fdd` are then replaced by
 
@@ -576,13 +582,13 @@ The distribution dynamics in {eq}`statd_fdd` are then replaced by
 F_{t+1}(y) = \int G(x,y) F_t(dx)
 ```
 
-Here $F_t$ and $F_{t+1}$ are cdfs representing the distribution of the current state and next period state.
+Here $F_t$ and $F_{t+1}$ are CDFs representing the distribution of the current state and next period state.
 
 The intuition behind {eq}`statd_fddc` is essentially the same as for {eq}`statd_fdd`.
 
 ### Computation
 
-If you wish to compute these cdfs, you cannot use the look-ahead estimator as before.
+If you wish to compute these CDFs, you cannot use the look-ahead estimator as before.
 
 Indeed, you should not use any density estimator, since the objects you are
 estimating/computing are not densities.
@@ -591,7 +597,7 @@ One good option is simulation as before, combined with the [empirical distributi
 
 ## Stability
 
-In our [lecture](https://python-intro.quantecon.org/finite_markov.html) on finite Markov chains, we also studied stationarity, stability and ergodicity.
+In our lecture {doc}`intermediate:finite_markov`, we also studied stationarity, stability and ergodicity.
 
 Here we will cover the same topics for the continuous case.
 
@@ -603,7 +609,7 @@ The general case is relatively similar --- references are given below.
 
 Analogous to [the finite case](https://python.quantecon.org/finite_markov.html#stationary-distributions), given a stochastic kernel $p$ and corresponding Markov operator as
 defined in {eq}`def_dmo`, a density $\psi^*$ on $S$ is called
-*stationary* for $P$ if it is a fixed point of the operator $P$.
+**stationary** for $P$ if it is a fixed point of the operator $P$.
 
 In other words,
 
@@ -640,9 +646,9 @@ With additional conditions, we can also get a unique stationary density ($\psi \
 ```
 
 This combination of existence, uniqueness and global convergence in the sense
-of {eq}`statd_dca` is often referred to as *global stability*.
+of {eq}`statd_dca` is often referred to as **global stability**.
 
-Under very similar conditions, we get *ergodicity*, which means that
+Under very similar conditions, we get **ergodicity**, which means that
 
 ```{math}
 :label: statd_lln
@@ -689,6 +695,7 @@ Here is such a figure.
 (statd_egs)=
 ```{figure} /_static/lecture_specific/stationary_densities/solution_statd_ex2.png
 
+Density sequences from four different initial conditions
 ```
 
 All sequences are converging towards the same limit, regardless of their initial condition.
@@ -818,6 +825,7 @@ Try running at `n = 10, 100, 1000, 10000` to get an idea of the speed of converg
 ϕ = norm()
 n = 500
 θ = 0.8
+rng = np.random.default_rng(1234)
 # == Frequently used constants == #
 d = np.sqrt(1 - θ**2)
 δ = θ / d
@@ -830,14 +838,15 @@ def p(x, y):
     "Stochastic kernel for the TAR model."
     return ϕ.pdf((y - θ * np.abs(x)) / d) / d
 
-Z = ϕ.rvs(n)
+Z = ϕ.rvs(n, random_state=rng)
 X = np.empty(n)
+X[0] = 0
 for t in range(n-1):
     X[t+1] = θ * np.abs(X[t]) + d * Z[t]
 ψ_est = LAE(p, X)
 k_est = gaussian_kde(X)
 
-fig, ax = plt.subplots(figsize=(10, 7))
+fig, ax = plt.subplots()
 ys = np.linspace(-3, 3, 200)
 ax.plot(ys, ψ_star(ys), 'b-', lw=2, alpha=0.6, label='true')
 ax.plot(ys, ψ_est(ys), 'g-', lw=2, alpha=0.6, label='look-ahead estimate')
@@ -882,10 +891,11 @@ Here's one program that does the job
 # == Define parameters == #
 s = 0.2
 δ = 0.1
-a_σ = 0.4                                # A = exp(B) where B ~ N(0, a_σ)
+a_σ = 0.4                                # A = exp(B) where B ~ N(0, a_σ**2)
 α = 0.4                                  # f(k) = k**α
 
 ϕ = lognorm(a_σ)
+rng = np.random.default_rng(1234)
 
 def p(x, y):
     "Stochastic kernel, vectorized in x.  Both x and y must be positive."
@@ -906,8 +916,8 @@ for i in range(4):
 
     # == Generate matrix s.t. t-th column is n observations of k_t == #
     k = np.empty((n, T))
-    A = ϕ.rvs((n, T))
-    k[:, 0] = ψ_0.rvs(n)
+    A = ϕ.rvs((n, T), random_state=rng)
+    k[:, 0] = ψ_0.rvs(n, random_state=rng)
     for t in range(T-1):
         k[:, t+1] = s * A[:,t] * k[:, t]**α + (1 - δ) * k[:, t]
 
@@ -938,22 +948,23 @@ To illustrate, let's generate three artificial data sets and compare them with a
 The three data sets we will use are:
 
 $$
-\{ X_1, \ldots, X_n \} \sim LN(0, 1), \;\;
+\{ X_1, \ldots, X_n \} \sim \mathrm{LN}(0, 1), \;\;
 \{ Y_1, \ldots, Y_n \} \sim N(2, 1), \;\;
 \text{ and } \;
-\{ Z_1, \ldots, Z_n \} \sim N(4, 1), \;
+\{ Z_1, \ldots, Z_n \} \sim N(4, 1)
 $$
 
 Here is the code and figure:
 
 ```{code-cell} python3
 n = 500
-x = np.random.randn(n)        # N(0, 1)
-x = np.exp(x)                 # Map x to lognormal
-y = np.random.randn(n) + 2.0  # N(2, 1)
-z = np.random.randn(n) + 4.0  # N(4, 1)
+rng = np.random.default_rng(1234)
+x = rng.standard_normal(n)        # N(0, 1)
+x = np.exp(x)                     # Map x to lognormal
+y = rng.standard_normal(n) + 2.0  # N(2, 1)
+z = rng.standard_normal(n) + 4.0  # N(4, 1)
 
-fig, ax = plt.subplots(figsize=(10, 6.6))
+fig, ax = plt.subplots()
 ax.boxplot([x, y, z])
 ax.set_xticks((1, 2, 3))
 ax.set_ylim(-2, 14)
@@ -1010,6 +1021,7 @@ J = 8
 θ = 0.9
 d = np.sqrt(1 - θ**2)
 δ = θ / d
+rng = np.random.default_rng(1234)
 
 fig, axes = plt.subplots(J, 1, figsize=(10, 4*J))
 initial_conditions = np.linspace(8, 0, J)
@@ -1018,9 +1030,9 @@ X = np.empty((k, n))
 for j in range(J):
 
     axes[j].set_ylim(-4, 8)
-    axes[j].set_title(f'time series from t = {initial_conditions[j]}')
+    axes[j].set_title(f'time series from $X_0 = {initial_conditions[j]:.1f}$')
 
-    Z = np.random.randn(k, n)
+    Z = rng.standard_normal((k, n))
     X[:, 0] = initial_conditions[j]
     for t in range(1, n):
         X[:, t] = θ * np.abs(X[:, t-1]) + d * Z[:, t]

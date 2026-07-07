@@ -231,15 +231,15 @@ class BellmanEquation:
 
             epsilon = 1e-7
             x0 = np.asarray(x, dtype=float)
-            f0 = np.atleast_1d(objf(x0))
-            jac = np.zeros([len(x0), len(f0)])
+            f0 = objf(x0)
+            grad = np.zeros(len(x0))
             dx = np.zeros(len(x0))
             for i in range(len(x0)):
                 dx[i] = epsilon
-                jac[i] = (objf(x0+dx) - f0)/epsilon
+                grad[i] = (objf(x0+dx) - f0)/epsilon
                 dx[i] = 0.0
 
-            return jac.transpose()
+            return grad
 
         def cons(z):
             c, n, xprime, T = z[:S], z[S:2 * S], z[2 * S:3 * S], z[3 * S:]

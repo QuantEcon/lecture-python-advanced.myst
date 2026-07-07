@@ -339,7 +339,7 @@ We define a class that will store parameters, grids and transition
 probabilities.
 
 ```{code-cell} python
-class Arellano_Economy:
+class ArellanoEconomy:
     " Stores data and creates primitives for the Arellano economy. "
 
     def __init__(self,
@@ -496,20 +496,20 @@ def update_values_and_prices(v_c, v_d,      # Current guess of value functions
     return new_v_c, new_v_d
 ```
 
-We can now write a function that will use the `Arellano_Economy` class and the
+We can now write a function that will use the `ArellanoEconomy` class and the
 functions defined above to compute the solution to our model.
 
 We do not need to JIT compile this function since it only consists of outer
 loops (and JIT compiling makes almost zero difference).
 
 In fact, one of the jobs of this function is to take an instance of
-`Arellano_Economy`, which is hard for the JIT compiler to handle, and strip it
+`ArellanoEconomy`, which is hard for the JIT compiler to handle, and strip it
 down to more basic objects, which are then passed out to jitted functions.
 
 ```{code-cell} python
 def solve(model, tol=1e-8, max_iter=10_000):
     """
-    Given an instance of Arellano_Economy, this function computes the optimal
+    Given an instance of ArellanoEconomy, this function computes the optimal
     policy and value functions.
     """
     # Unpack
@@ -551,7 +551,7 @@ def simulate(model, T, v_c, v_d, q, B_star, y_idx=None, B_idx=None):
     """
     Simulates the Arellano 2008 model of sovereign debt
 
-    Here `model` is an instance of `Arellano_Economy` and `T` is the length of
+    Here `model` is an instance of `ArellanoEconomy` and `T` is the length of
     the simulation.  Endogenous objects `v_c`, `v_d`, `q` and `B_star` are
     assumed to come from a solution to `model`.
 
@@ -562,9 +562,9 @@ def simulate(model, T, v_c, v_d, q, B_star, y_idx=None, B_idx=None):
     B_grid, y_grid, P = model.B_grid, model.y_grid, model.P
 
     # Set initial conditions to middle of grids
-    if y_idx == None:
+    if y_idx is None:
         y_idx = np.searchsorted(y_grid, y_grid.mean())
-    if B_idx == None:
+    if B_idx is None:
         B_idx = B0_idx
     in_default = False
 
@@ -616,7 +616,7 @@ Let's start by trying to replicate the results obtained in
 
 In what follows, all results are computed using Arellano's parameter values.
 
-The values can be seen in the `__init__` method of the `Arellano_Economy`
+The values can be seen in the `__init__` method of the `ArellanoEconomy`
 shown above.
 
 For example, `r=0.017` matches the average quarterly rate on a 5 year US treasury over the period 1983--2001.
@@ -686,7 +686,7 @@ Periods of relative stability are followed by sharp spikes in the discount rate 
 
 To the extent that you can, replicate the figures shown above
 
-* Use the parameter values listed as defaults in `Arellano_Economy`.
+* Use the parameter values listed as defaults in `ArellanoEconomy`.
 * The time series will of course vary depending on the shock draws.
 
 ```{exercise-end}
@@ -699,7 +699,7 @@ To the extent that you can, replicate the figures shown above
 Compute the value function, policy and equilibrium prices
 
 ```{code-cell} python
-ae = Arellano_Economy()
+ae = ArellanoEconomy()
 ```
 
 ```{code-cell} python

@@ -15,19 +15,19 @@ kernelspec:
 
 ## Overview 
 
-Optimal transport theory studies how a marginal probabilty measure  can  be related to another marginal probability measure in an ideal way.
+Optimal transport theory studies how a marginal probability measure  can  be related to another marginal probability measure in an ideal way.
 
 * here ideal means to minimize some  cost criterion. 
 
-The output of such a theory is a **coupling** of the two probability measures, i.e., a joint probabilty
+The output of such a theory is a **coupling** of the two probability measures, i.e., a joint probability
 measure having those two  marginal probability measures.  
 
-This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodo Wang,
+This lecture describes how Job Boerma, Aleh Tsyvinski, Ruodu Wang,
 and Zhenyuan Zhang  {cite}`boerma2023composite` used optimal transport theory to formulate and compute  an equilibrium of a model in which wages and allocations of workers across jobs  adjust to match measures of  different types with measures of different types of occupations.  
 
 Production technologies allow firms to   reshape costs of mismatch so that they become concave.   
 
-It is then possible that in  equilibrium there is neither **positive assortive** nor **negative assorting**  matching, an outcome that   {cite}`boerma2023composite` call **composite assortive** matching.
+It is then possible that in  equilibrium there is neither **positive assortative** nor **negative assortative**  matching, an outcome that   {cite}`boerma2023composite` call **composite assortative** matching.
 
 For example, with composite matching in  an equilibrium model with workers of different types,  ex ante   identical *workers* can sort into different *occupations*, some positively and some negatively.  
 
@@ -68,8 +68,8 @@ Given a **cost function** $c \colon X \times Y \rightarrow \mathbb{R}$, the (dis
 $$
     \begin{aligned}
         \min_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy} \\
-        \text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
-        & \sum_{y \in Y} \mu_{xy} = m_y 
+        \text{s.t. }& \sum_{y \in Y} \mu_{xy} = n_x \\
+        & \sum_{x \in X} \mu_{xy} = m_y 
     \end{aligned}
 $$
 
@@ -110,8 +110,8 @@ Hence, our problem is
 $$
 \begin{aligned}
 \min_{\mu \in \mathbb{Z}_+^{X \times Y}}& \sum_{(x,y) \in X \times Y} \mu_{xy}|x-y|^{1/\zeta} \\
-\text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
-& \sum_{y \in Y} \mu_{xy} = m_y 
+\text{s.t. }& \sum_{y \in Y} \mu_{xy} = n_x \\
+& \sum_{x \in X} \mu_{xy} = m_y 
 \end{aligned}
 $$
 
@@ -495,12 +495,23 @@ $$
 |x - y'| + |x' - y| = |x - y| + |x' - y'|
 $$
 
-Letting $\alpha := \frac{|x - y|+|x' - y|}{|x - y'| - |x' - y|} \in (0,1),$ we have $|x - y| = \alpha|x - y'| +(1-\alpha) |x' - y| $ and $|x' - y'| = (1-\alpha)|x - y'| +\alpha |x' - y|. $ 
+Letting $ \alpha := \frac{|x-y'| - |x'-y'|}{|x-y| - |x'-y'|} \in (0,1), $ we have 
 
-Hence, by strict concavity of $h,$
+$$ |x-y'| = \alpha|x - y| +(1-\alpha) |x' - y'| \quad \text{and} \quad |x'-y| = (1-\alpha)|x - y| +\alpha |x' - y'|. $$
+
+Hence, by strict concavity of $ h, $
 
 $$
-h(|x-y|)+ h(|x'-y'|) <\alpha h(|x - y'|) +(1-\alpha) h(|x' - y|) +  (1-\alpha) h(|x - y'|) +\alpha h(|x' - y|) = h(|x-y'|) + h(|x'-y|).
+h(|x-y'|) > \alpha h(|x-y|) + (1-\alpha) h(|x'-y'|)
+$$
+$$
+h(|x'-y|) > (1-\alpha) h(|x-y|) + \alpha h(|x'-y'|).
+$$
+
+Adding the two inequalities:
+
+$$
+h(|x-y'|) + h(|x'-y|) > h(|x-y|) + h(|x'-y'|).
 $$
 
 Therefore, as in the first case, we can strictly improve the cost among $x,y,x',y'$ by uncrossing the pairs.
@@ -665,7 +676,7 @@ def find_layers(self):
                 (H_z[None, 1:] <= layers_height[:-1, None]) 
                  * (layers_height[1:, None] <= H_z[None, :-1]))
     
-    # each layer is reshaped as a list of indices correponding to types
+    # each layer is reshaped as a list of indices corresponding to types
     layers = [self.type_z[layers_01[ell]] 
                 for ell in range(len(layers_height)-1)]
 
@@ -1194,7 +1205,7 @@ We then return the full matching, the off-diagonal matching, and the off-diagona
 
 ```{code-cell} ipython3
 def solve_primal_pb(self):
-    # Compute on-diagonal matching, create new instance with resitual types
+    # Compute on-diagonal matching, create new instance with residual types
     off_diagoff_diagonal, match_tuple = self.generate_offD_onD_matching()
     nonzero_id_x, nonzero_id_y, matching_diag = match_tuple
     
@@ -1440,7 +1451,7 @@ There are  two feasible matchings, one corresponding  to PAM, the other to  NAM.
 
 Evidently, 
 
-  * PAM corresponds to the matching with two medium side displacement because the correponding cost is strictly convex and increasing in the the displacement. 
+  * PAM corresponds to the matching with two medium side displacement because the correponding cost is strictly convex and increasing in the displacement. 
   
   * NAM corresponds to the matching with a small displacement and a large displacement because the gain is strictly convex and increasing in the displacement.
 
@@ -1485,7 +1496,7 @@ To explore the coincidental resemblence to a NAM outcome,  let's  shift left typ
 
 PAM and NAM are invariant to any such shift. 
 
-However, for a large enough shift, composite sorting now coindices with PAM.
+However, for a large enough shift, composite sorting now coincides with PAM.
 
 ```{code-cell} ipython3
 N = 2
@@ -1666,8 +1677,8 @@ Let's recall the formulation
 $$
 \begin{aligned}
 V_P = \min_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}c_{xy} \\
-\text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
-& \sum_{y \in Y} \mu_{xy} = m_y 
+\text{s.t. }& \sum_{y \in Y} \mu_{xy} = n_x \\
+& \sum_{x \in X} \mu_{xy} = m_y 
 \end{aligned}
 $$
 
@@ -1695,8 +1706,8 @@ Then we  can formulate the following problem and its dual
 $$
  \begin{aligned}
 W_P = \max_{\mu \geq 0}& \sum_{(x,y) \in X \times Y} \mu_{xy}y_{xy} \\
-\text{s.t. }& \sum_{x \in X} \mu_{xy} = n_x \\
-& \sum_{y \in Y} \mu_{xy} = m_y 
+\text{s.t. }& \sum_{y \in Y} \mu_{xy} = n_x \\
+& \sum_{x \in X} \mu_{xy} = m_y 
 \end{aligned}
 $$
 
@@ -1719,6 +1730,10 @@ The dual solutions of $V_D$ and $W_D$ are related by $u_x = \alpha_x - \phi_x$ a
 The dual solution $(u,v)$ of $W_D$ can be interpreted as equilibrium utilities of the agents, which include the individual specific amenities and equilibrium shadow costs.
 
 {cite}`boerma2023composite` propose an efficient method to compute the dual variables from the optimal matching (primal solution) in the case of composite sorting.
+
+Their approach relies on *Complementary Slackness*: given a primal solution $\mu$, $(\phi , \psi) $ is a dual solution if and only if for all $x \in X$ and $y \in Y$
+* $\phi_x + \psi_y \leq c_{xy}$ (dual feasibility),
+* $\phi_x + \psi_y = c_{xy}$ if $\mu_{xy}>0$ (complementary slackness).
 
 Let's generate an instance and compute the optimal matching.
 
@@ -1941,7 +1956,7 @@ exam_assign_OD.plot_hierarchies(subpairs)
 
 We proceed to describe and implement the algorithm to compute the dual solution. 
 
-As already mentioned, the algorithm starts from the matched pairs $(x_0,y_0)$ with no subpairs and assigns the (temporary) values $\psi_{x_0} = c_{x_0 y_0}$ and $\psi_{y_0} = 0,$ i.e. the $x$ type sustains the whole cost of matching. 
+As already mentioned, the algorithm starts from the matched pairs $(x_0,y_0)$ with no subpairs and assigns the (temporary) values $\phi_{x_0} = c_{x_0 y_0}$ and $\psi_{y_0} = 0,$ i.e. the $x$ type sustains the whole cost of matching. 
 
 
 
@@ -1961,7 +1976,7 @@ $$
 \leq \min (c_{x_0 y_j} + c_{x_i y_0} - c_{x_0 y_0} , c_{x_i y_j}) -  c_{x_j y_j} , \quad \text{for all } 1 \leq i < j \leq p.
 $$
 
-Then for all $i \in [p]$ compute the adjustment $ \Delta_i = \sum_{k = i+1}^p \beta_k + \phi_{x_p} - \phi_{x_1}$ and modify the dual variables 
+Then for all $i \in [p]$ compute the adjustment $ \Delta_i = \sum_{k = i+1}^p \beta_k + \phi_{x_p} - \phi_{x_i}$ and modify the dual variables 
 
 $$
 \begin{aligned}
@@ -2138,7 +2153,7 @@ if len(exam_assign_OD.n_x) * len(exam_assign_OD.m_y) < 1000:
 
 +++ {"user_expressions": []}
 
-Having computed the dual variables of the off-diagonal types, we compute the dual variables for perfecly matched pairs by setting 
+Having computed the dual variables of the off-diagonal types, we compute the dual variables for perfectly matched pairs by setting 
 
 $$
 \begin{aligned}
@@ -2402,7 +2417,7 @@ ConcaveCostOT.plot_marginals_pdf = plot_marginals_pdf
 
 +++ {"user_expressions": []}
 
-We plot the hystograms and the measure of underqualification for the worker types and job types. We then compute the primal solution and plot the matching.
+We plot the histograms and the measure of underqualification for the worker types and job types. We then compute the primal solution and plot the matching.
 
 ```{code-cell} ipython3
 # Plot pdf

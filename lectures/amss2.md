@@ -20,19 +20,11 @@ kernelspec:
 
 # Fluctuating Interest Rates Deliver Fiscal Insurance
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
-
-```{code-cell} ipython
----
-tags: [hide-output]
----
-!pip install --upgrade quantecon
-```
 
 ## Overview
 
-This lecture extends our investigations of how optimal policies for levying a flat-rate tax on labor income and  issuing government debt depend
-on whether there are complete  markets for debt.
+This lecture studies  how optimal policies for levying a flat-rate tax on labor income  depend
+on whether a government can buy and sell a complete set of one-period-ahead Arrow securities or whether it is instead able to buy or sell  only one-period risk-free debt.  
 
 A Ramsey allocation and Ramsey policy in the AMSS {cite}`aiyagari2002optimal` model described in {doc}`optimal taxation without state-contingent debt <amss>` generally differs
 from a Ramsey allocation and Ramsey policy in the  Lucas-Stokey {cite}`LucasStokey1983` model described in {doc}`optimal taxation with state-contingent debt <opt_tax_recur>`.
@@ -80,6 +72,16 @@ This lecture studies a special  AMSS model in which
 
 In a nutshell, the reason for this striking outcome is that at a particular level of risk-free government **assets**, fluctuations in the one-period risk-free interest
 rate provide the government with complete insurance against stochastically varying government expenditures.
+
+
+In addition to what's in Anaconda, this lecture will need the following libraries:
+
+```{code-cell} ipython
+---
+tags: [hide-output]
+---
+!pip install --upgrade quantecon
+```
 
 Let's start with some imports:
 

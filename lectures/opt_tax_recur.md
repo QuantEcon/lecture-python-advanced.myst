@@ -31,32 +31,38 @@ tags: [hide-output]
 
 ## Overview
 
-This lecture describes a celebrated model of optimal fiscal policy by Robert E.
+This lecture describes special case of a celebrated model of optimal fiscal policy by Robert E.
 Lucas, Jr., and Nancy Stokey  {cite}`LucasStokey1983`.
 
-The model revisits classic issues about how to pay for a war.
+
+We use our special case of their  model to  revisit classic issues about how to pay for a war.
 
 Here a *war* means a more  or less temporary surge in an exogenous government expenditure process.
 
 The model features
 
-* a government that must finance an exogenous stream of government expenditures with  either
-    * a flat rate tax on labor, or
-    * purchases and sales from a full array of Arrow state-contingent securities
-* a representative household that values consumption and leisure
 * a linear production function mapping labor into a single good
-* a Ramsey planner who at time $t=0$ chooses a plan for taxes and
-  trades of [Arrow securities](https://en.wikipedia.org/wiki/Arrow_security) for all $t \geq 0$
+* a representative household that likes both consumption and leisure
+* an exogenous history-contingent sequence  of government expenditures that a goverment must finance with revenues from a sequence of history-dependent flat rate taxes 
+* an exogenous initial  debt  the government must also finance 
+*  a Ramsey planner who at time $t=0$ chooses a  history contingent plan for flat rate taxes  at all $t \geq 0$
+* a sequence of continuation  governments that at each $t \geq 1$ must pay off the one-period state-contingent debt that a time $t-1$ government has issued
+  * each time $t \geq 1$ government is free to reset the time $t$ flat tax rate 
+  * each time $t \geq 1$ government  can also borrow or lend by selling or buying  
+    one-period-ahead [Arrow securities](https://en.wikipedia.org/wiki/Arrow_security)
+
+```{note}
+Important parts of {cite}`LucasStokey1983` are about how the government should finance a stochastic sequence of debt service payments that at time $0$ the government has inherited from the past. Lucas and Stokey's government must honor this stream of random payments, either by paying promised coupons when they become due at a particular date, state pair or else by issuing new debt, i.e., by somehow rolling it over. We study the special case of Lucas and Stokey's model that assumes that at time $0$ the government  owes only  $b_0(s_0)$ units of the time $0$, state $s_0$ consumption good.     
+```
 
 After first presenting the model in a space of sequences, we shall represent it
 recursively in terms of two Bellman equations formulated along lines that we
 encountered in {doc}`Dynamic Stackelberg models <dyn_stack>`.
 
 As in {doc}`Dynamic Stackelberg models <dyn_stack>`, to apply dynamic programming
-we shall define the state vector artfully.
+we shall define a state vector artfully.
 
-In particular, we shall include forward-looking variables that summarize  optimal
-responses of private agents to a Ramsey plan.
+In particular, we shall include as  components of the state some forward-looking variables that summarize  optimal responses of private agents to a Ramsey tax plan.
 
 See {doc}`Optimal taxation <lqramsey>` for analysis within a linear-quadratic setting.
 
@@ -276,7 +282,9 @@ q_t^0(s^t) = \beta^{t} \pi_{t}(s^{t})
                             {u_c(s^{t})  \over u_c(s^0)}
 ```
 
-(The stochastic process $\{q_t^0(s^t)\}$ is an instance of what finance economists call a *stochastic discount factor* process.)
+```{note}
+The stochastic process $\{\beta^{t}{u_c(s^{t})  \over u_c(s^0)}\}$ is an instance of what finance economists call a *stochastic discount factor* process. The random variable $\beta^{t+1}{u_c(s^{t+1})  \over u_c(s^t)}$ is the time $t+1$ multiplicative increment to the stochastic discount factor process.
+```
 
 Using the first-order conditions {eq}`LSA_taxr` and {eq}`LS101` to eliminate
 taxes and prices from {eq}`TS_bcPV2`, we derive the *implementability condition*
@@ -330,7 +338,7 @@ J  = \sum_{t=0}^\infty
 where  $\{\theta_t(s^t); \forall s^t\}_{t\geq0}$ is a sequence of Lagrange
 multipliers on the feasible conditions {eq}`TSs_techr_opt_tax`.
 
-Given an initial government debt $b_0$,  we want to maximize $J$
+Given an initial government debt  payment $b_0$ due at time $0$,  we want to maximize $J$
 with respect to $\{c_t(s^t), n_t(s^t); \forall s^t \}_{t\geq0}$   and to minimize with respect
 to $\Phi$ and with respect to $\{\theta(s^t); \forall s^t \}_{t\geq0}$.
 
@@ -698,8 +706,8 @@ and
 
 In equation {eq}`TS_barg10`, it is understood that $c$ and $g$ are each functions of the Markov state $s$.
 
-In addition, the time $t=0$ budget constraint is satisfied at $c_0$ and initial government debt
-$b_0$:
+In addition, the time $t=0$ budget constraint is satisfied at $c_0$ and initial  government debt
+$b_0$ due at time $0$:
 
 ```{math}
 :label: opt_tax_eqn_10
@@ -747,7 +755,7 @@ different objective function and faces different constraints and state variables
 Ramsey planner at time $t =0$.
 
 A key step in representing a Ramsey plan recursively is
-to regard the marginal utility scaled government debts
+to regard the marginal utility scaled one-period government debts
 $x_t(s^t) = u_c(s^t) b_t(s_t|s^{t-1})$ as predetermined quantities
 that continuation Ramsey planners at times $t \geq 1$ are
 obligated to attain.

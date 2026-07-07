@@ -20,6 +20,28 @@ kernelspec:
 
 # Optimal Taxation without State-Contingent Debt
 
+
+## Overview
+
+In {doc}`another lecture <opt_tax_recur>`, we presented a special case of a model of
+optimal taxation with state-contingent debt due to Robert E. Lucas, Jr.,  and Nancy Stokey  {cite}`LucasStokey1983`.
+
+
+
+In this lecture, we describe how Aiyagari, Marcet, Sargent, and Seppälä {cite}`aiyagari2002optimal`  (hereafter, AMSS) modified that model.
+
+In a nutshell, AMSS studied optimal taxation in a version of Lucas and Stokey's environment  **without** state-contingent debt.
+
+In this lecture, we 
+
+* describe AMSS's assumptions and equilibrium concept
+* describe how to solve the model using a different approach than AMSS did
+* implement the model numerically
+* conduct some policy experiments
+* compare outcomes with those in a corresponding complete-markets model
+
+
+
 In addition to what's in Anaconda, this lecture will need the following libraries:
 
 ```{code-cell} ipython
@@ -29,7 +51,7 @@ tags: [hide-output]
 !pip install --upgrade quantecon
 ```
 
-## Overview
+
 
 Let's start with following imports:
 
@@ -109,28 +131,11 @@ def linear_interp_1d(x_grid, y_values, x_query):
     return linear_interp_1d_scalar(x_min, x_max, x_num, y_values, x_query[0])
 ```
 
-Let's start with following imports:
-
-In {doc}`an earlier lecture <opt_tax_recur>`, we described a model of
-optimal taxation with state-contingent debt due to
-Robert E. Lucas, Jr.,  and Nancy Stokey  {cite}`LucasStokey1983`.
-
-Aiyagari, Marcet, Sargent, and Seppälä {cite}`aiyagari2002optimal`  (hereafter, AMSS)
-studied optimal taxation in a model without state-contingent debt.
-
-In this lecture, we
-
-* describe assumptions and equilibrium concepts
-* solve the model
-* implement the model numerically
-* conduct some policy experiments
-* compare outcomes with those in a corresponding complete-markets model
-
 We begin with an introduction to the model.
 
 ## Competitive equilibrium with distorting taxes
 
-Many but not all features of the economy are identical to those of {doc}`the Lucas-Stokey economy <opt_tax_recur>`.
+Many but not all features of AMSS's economy are identical to those of {doc}`the Lucas-Stokey economy <opt_tax_recur>`.
 
 Let's start with things that are identical.
 
@@ -502,8 +507,11 @@ $$
 where $R_t(s^t)$ is the gross risk-free rate of interest between $t$
 and $t+1$ at history $s^t$ and $T_t(s^t)$ are non-negative transfers.
 
-Throughout this lecture, we shall set transfers to zero (for some issues about the limiting behavior of debt, this is  possibly an important  difference from AMSS {cite}`aiyagari2002optimal`, who restricted transfers
-to be non-negative).
+Throughout this lecture, we shall set transfers to zero.
+
+```{note}
+For some issues about the limiting behavior of debt, this is  possibly an important  difference from AMSS {cite}`aiyagari2002optimal`. AMSS  restricted transfers to be non-negative.
+```
 
 In this case, the household faces a sequence of budget constraints
 
@@ -1050,7 +1058,7 @@ the two policies over 200 periods.
 
 This outcome reflects the presence of a force for **precautionary saving** that the incomplete markets structure imparts to the Ramsey plan.
 
-In {doc}`this subsequent lecture <amss2>` and  {doc}`this subsequent lecture <amss3>`, some ultimate consequences of that force are explored.
+In {doc}`this subsequent lecture <amss2>` and  {doc}`this subsequent lecture <amss3>`,  consequences of that force are explored.
 
 ```{code-cell} python3
 T = 200

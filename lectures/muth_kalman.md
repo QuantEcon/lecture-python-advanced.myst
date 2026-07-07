@@ -23,6 +23,16 @@ kernelspec:
 
 # Reverse Engineering a la Muth
 
+## Overview
+
+This lecture uses the Kalman filter to reformulate John F. Muth’s first
+paper {cite}`Muth1960` about rational expectations.
+
+Muth used *classical* prediction methods to reverse engineer a
+stochastic process that renders optimal Milton Friedman’s {cite}`Friedman1956` “adaptive
+expectations” scheme.
+
+
 In addition to what's in Anaconda, this lecture uses the quantecon library.
 
 ```{code-cell} ipython
@@ -42,13 +52,6 @@ from quantecon import Kalman
 from quantecon import LinearStateSpace
 np.set_printoptions(linewidth=120, precision=4, suppress=True)
 ```
-
-This lecture uses the Kalman filter to reformulate John F. Muth’s first
-paper {cite}`Muth1960` about rational expectations.
-
-Muth used *classical* prediction methods to reverse engineer a
-stochastic process that renders optimal Milton Friedman’s {cite}`Friedman1956` “adaptive
-expectations” scheme.
 
 ## Friedman (1956) and Muth (1960)
 
