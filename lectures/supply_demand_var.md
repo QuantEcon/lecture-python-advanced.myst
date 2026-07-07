@@ -38,17 +38,17 @@ In this lecture, we shall
   equilibrium as an **optimal linear regulator**, using an instance of the "Big $X$, little $x$"
   device used throughout modern macroeconomics, and
 * explain why a vector autoregression fit to a history of equilibrium prices and quantities can give
-  a distorted picture of the shocks that drive suppliers' and demanders' information sets — a
+  a distorted picture of the shocks that drive suppliers' and demanders' information sets --- a
   difficulty that afflicts Christopher Sims's {cite}`Sims1980` **innovation accounting** more
   generally.
 
-Along the way we obtain representations of dynamic supply and demand curves both **outside** and
-**inside** a rational expectations equilibrium.
+Along the way we obtain representations of dynamic supply and demand curves both *outside* and
+*inside* a rational expectations equilibrium.
 
 This lecture also revisits an issue discussed in
 {doc}`hs_invertibility_example`, which described a **shock-invertibility** problem inside a permanent income model.
 
-This lecture studies the same problem in the context of  a model of a **single competitive market** for a good
+This lecture studies the same problem in the context of a model of a *single competitive market* for a good
 whose price and quantity are both observed.
 
 
@@ -81,7 +81,7 @@ There is a competitive market for a single good produced in quantity $q_t$ and s
 A representative supplier and a representative demander each solve a linear-quadratic dynamic
 problem, taking the market price $\{p_t\}$ as an exogenous stochastic process.
 
-**The supplier** chooses $\{q_t\}$ to maximize
+The supplier chooses $\{q_t\}$ to maximize
 
 ```{math}
 :label: sdvar-supplyobj
@@ -91,7 +91,7 @@ E_0\sum_{t=0}^{\infty}\beta^t\Big\{\, p_t q_t - \tfrac{h_s}{2}q_t^2 - \tfrac{g_s
 It earns revenue $p_t q_t$, pays a quadratic cost of *adjusting* output through the term
 $\tfrac{g_s}{2}(q_t - q_{t-1})^2$, and is buffeted by a serially correlated cost shock $s_t$.
 
-**The demander** chooses $\{q_t\}$ to maximize
+The demander chooses $\{q_t\}$ to maximize
 
 ```{math}
 :label: sdvar-demandobj
@@ -148,20 +148,20 @@ $$
 
 Notice that the supplier's adjustment cost $g_s = 10$ is a hundred times the demander's $g_d = 0.1$.
 
-Quantity will therefore adjust **sluggishly** — a feature that turns out to be the source of the
+Quantity will therefore adjust *sluggishly* --- a feature that turns out to be the source of the
 difficulty in interpreting a vector autoregression fit to $(q_t, p_t)$.
 
 ```{code-cell} python3
 h_s = h_d = 1.0
 g_s, g_d = 10.0, 0.1
 β = 1 / 1.05
-a = np.array([1, .8, .6, .4, .2])                      # a(L): coefficients a0..a4
+a = np.array([1, .8, .6, .4, .2])       # a(L): coefficients a0..a4
 
 # MA polynomials for the shocks (coefficients on L^0..L^3)
 B_d = np.convolve(np.convolve([1, .6], [1, .4]), [1, .2])
 B_s = np.convolve(np.convolve([1, -.8], [1, .4]), [1, .2])
 
-σ_s2, σ_d2 = 0.5, 4.0                                   # shock variances
+σ_s2, σ_d2 = 0.5, 4.0                   # shock variances
 ```
 
 ## Dynamic supply and demand curves
@@ -199,12 +199,12 @@ z^2 - \Big[(1+\beta) + \tfrac{h_s}{g_s}\Big]\,z + \beta = 0 .
 Let $\delta_s$ be the smaller root, $|\delta_s| < \sqrt{\beta} < 1$.
 
 ```{code-cell} python3
-# Solve the supplier's characteristic equation z^2 - [(1+β) + h_s/g_s] z + β = 0
+# supplier's characteristic equation: z^2 - [(1+β) + h_s/g_s] z + β = 0
 supply_roots = np.roots([1, -((1 + β) + h_s / g_s), β])
 δ_s = min(supply_roots, key=abs)
 
 print(f"supply roots         : {np.sort(supply_roots)}")
-print(f"δ_s                  : {δ_s:.4f}   (√β = {np.sqrt(β):.4f})")
+print(f"δ_s                  : {δ_s:.4f}   (sqrt(β) = {np.sqrt(β):.4f})")
 print(f"δ_s / β              : {δ_s / β:.4f}")
 ```
 
@@ -218,8 +218,8 @@ The operator factors as
 an unstable **forward** factor $(1-\delta_s L^{-1})$ and a stable **backward** factor
 $(1-\tfrac{\delta_s}{\beta}L)$.
 
-Solving the forward root forward — a geometric sum of expected future variables, exactly as in
-{doc}`lu_tricks` — and reading the backward root as a feedback on the lag of $q$, the supplier's
+Solving the forward root forward --- a geometric sum of expected future variables, exactly as in
+{doc}`lu_tricks` --- and reading the backward root as a feedback on the lag of $q$, the supplier's
 Euler equation becomes the **dynamic supply curve**
 
 ```{math}
@@ -296,8 +296,8 @@ q_t = \sum_{k=1}^{4}\gamma_{d,k}\,q_{t-k}
 
 where the $A_{d,i}$ are the partial-fraction weights of the inverse forward factor.
 
-Now current quantity demanded depends on **four** lags $q_{t-1},\dots,q_{t-4}$ — the durable-services
-technology $a(L)$ spreads adjustment over four periods — and on a sum of geometric feed-forward
+Now current quantity demanded depends on *four* lags $q_{t-1},\dots,q_{t-4}$ --- the durable-services
+technology $a(L)$ spreads adjustment over four periods --- and on a sum of geometric feed-forward
 terms, one per stable root.
 
 The price terms enter with a *negative* sign: higher expected future prices lower current demand.
@@ -324,13 +324,13 @@ Taken at face value, the dynamic supply curve {eq}`sdvar-supplycurve` seems to i
 shocks and the dynamic demand curve {eq}`sdvar-demandcurve` only demand shocks.
 
 But each curve also contains the conditional expectations $E_t\,p_{t+j}$ of *future prices*, and in
-equilibrium the price process is driven by **both** shocks.
+equilibrium the price process is driven by *both* shocks.
 
 A demand surprise that moves expected future prices therefore shifts the dynamic *supply* curve, and
 a supply surprise that moves expected future prices shifts the dynamic *demand* curve.
 
-It is exactly this dependence on forecasts of future prices — absent from static supply and demand
-curves — that couples the two sides of the market and makes the equilibrium dynamics richer than a
+It is exactly this dependence on forecasts of future prices --- absent from static supply and demand
+curves --- that couples the two sides of the market and makes the equilibrium dynamics richer than a
 sequence of momentary intersections.
 
 ## The equilibrium via a market Euler equation
@@ -345,7 +345,7 @@ We impose these requirements directly on the two Euler equations {eq}`sdvar-eule
 {eq}`sdvar-eulerdemand`, combining them into a single **market Euler equation** for quantities and
 solving it by the same factorization we used for the individual curves.
 
-**Step 1 — drop the conditional expectations and solve each Euler equation for $p_t$.**
+**Step 1 --- drop the conditional expectations and solve each Euler equation for $p_t$.**
 
 Temporarily erase the operator $E_t$ from the left side of each Euler equation, and solve each for
 the price:
@@ -364,7 +364,7 @@ p_t = -\,d_t - \phi_d(L)\,q_t ,
 \phi_d(L) = h_d + g_d\, a(\beta L^{-1})\,a(L) .
 ```
 
-**Step 2 — equate the two prices to get a single market Euler equation in $q_t$ alone.**
+**Step 2 --- equate the two prices to get a single market Euler equation in $q_t$ alone.**
 
 Setting {eq}`sdvar-mkt-psupply` equal to {eq}`sdvar-mkt-pdemand` eliminates $p_t$ and leaves
 
@@ -382,7 +382,7 @@ Like $\phi_s$ and $\phi_d$ separately, the market operator $\psi$ is symmetric u
 $L \mapsto \beta L^{-1}$, so the symbol $z^4\psi(z)$ is a degree-eight polynomial whose eight roots
 come in four reciprocal pairs $(\lambda_i,\ \beta/\lambda_i)$.
 
-**Step 3 — factor, solve stable roots backwards and unstable roots forwards.**
+**Step 3 --- factor, solve stable roots backwards and unstable roots forwards.**
 
 Collecting the four stable roots $|\lambda_i| < \sqrt{\beta}$ gives the factorization
 
@@ -393,12 +393,13 @@ Collecting the four stable roots $|\lambda_i| < \sqrt{\beta}$ gives the factoriz
 c(L) = \prod_{i=1}^{4}\Big(1 - \tfrac{\lambda_i}{\beta}\,L\Big) = 1 - \sum_{k=1}^{4}\gamma_k\,L^{k},
 ```
 
-with $\nu > 0$ a normalizing constant, $c(L)$ the stable **backward** factor, and
-$c(\beta L^{-1})$ the **forward** factor.
+with $\nu > 0$ a normalizing constant, $c(L)$ the stable backward factor, and
+$c(\beta L^{-1})$ the forward factor.
 
-Dividing {eq}`sdvar-mkt-euler` by $\nu\, c(\beta L^{-1})$ solves the unstable roots forwards.
+Dividing {eq}`sdvar-mkt-euler` by $\nu
+\, c(\beta L^{-1})$ solves the unstable roots forwards.
 
-**Step 4 — reinstate $E_t$ in front of the continuation shocks.**
+**Step 4 --- reinstate $E_t$ in front of the continuation shocks.**
 
 The forward operator acts on future values of the exogenous shocks, so we now put $E_t$ back in
 front of them, giving the **equilibrium law of motion for quantities**
@@ -421,7 +422,7 @@ E_t\sum_{j=0}^{\infty}\lambda^{\,j}\, x_{t+j} = \frac{L\,B(L) - \lambda\,B(\lamb
 ```
 
 Notice that {eq}`sdvar-mkt-qlaw` has exactly the shape of the individual dynamic supply and demand
-curves — a backward-looking feedback on lagged quantities plus geometric feed-forward sums — but now
+curves --- a backward-looking feedback on lagged quantities plus geometric feed-forward sums --- but now
 with the *combined* operator $\psi$ and the *combined* forcing $-(s_t + d_t)$.
 
 The coefficients $\gamma_k$ are the equilibrium feedback of current quantity on its own four lags.
@@ -430,20 +431,21 @@ We build $\psi$, factor it, and read them off.
 
 ```{code-cell} python3
 # the market operator ψ(z) = φ_s(z) + φ_d(z), times z^4 (a degree-8 polynomial)
-a_z = np.poly1d(a[::-1])                               # a(z)
-a_βz = np.poly1d([a[k] * β**k for k in range(5)])      # z^4 · a(β/z)
-ψ = (g_d * a_z * a_βz).c.copy()                        # the g_d · a(βL⁻¹)a(L) part, highest-first
+a_z = np.poly1d(a[::-1])                             # a(z)
+a_βz = np.poly1d([a[k] * β**k for k in range(5)])    # z^4 * a(β/z)
+ψ = (g_d * a_z * a_βz).c.copy()          # g_d * a(βL^-1)a(L), highest-first
 
-def add_power(coef, k, val):                           # add val · z^k  (coef is degree-8, highest-first)
+# add val * z^k to ψ (a degree-8 coefficient vector, highest power first)
+def add_power(coef, k, val):
     coef[8 - k] += val
 
-add_power(ψ, 4, h_s + h_d)                             # h_s + h_d
-add_power(ψ, 4, g_s * (1 + β))                         # the g_s(1-βL⁻¹)(1-L) part:
-add_power(ψ, 5, -g_s)                                  #   g_s[(1+β) - L - β L⁻¹]
+add_power(ψ, 4, h_s + h_d)               # h_s + h_d
+add_power(ψ, 4, g_s * (1 + β))           # the g_s(1-βL^-1)(1-L) part:
+add_power(ψ, 5, -g_s)                    #   g_s[(1+β) - L - β L^-1]
 add_power(ψ, 3, -g_s * β)
 
 roots = np.roots(ψ)
-λ = roots[np.abs(roots) < np.sqrt(β)]                  # the four stable roots
+λ = roots[np.abs(roots) < np.sqrt(β)]    # the four stable roots
 assert len(λ) == 4
 
 # backward factor c(L) = Π (1 - (λ_i/β) L) = 1 - Σ γ_k L^k
@@ -469,19 +471,22 @@ $p_t = s_t + h_s q_t + g_s[(1+\beta)q_t - q_{t-1} - \beta E_t q_{t+1}]$.
 Along an impulse response there are no further shocks, so $E_t q_{t+1} = q_{t+1}$.
 
 ```{code-cell} python3
-ν = (ψ[0] / np.prod(-λ / β)).real                      # normalizing constant
-A_pf = np.array([1 / np.prod([1 - λ[k] / λ[i] for k in range(4) if k != i])
-                 for i in range(4)])                   # partial-fraction weights
+ν = (ψ[0] / np.prod(-λ / β)).real        # normalizing constant
 
-def hs_predict(B, lam):
-    "Coefficients of E_t Σ_j lam^j x_(t+j) = (L B(L) − lam B(lam)) / (L − lam) applied to w_t."
+# partial-fraction weights
+A_pf = np.array([1 / np.prod([1 - λ[k] / λ[i] for k in range(4) if k != i])
+                 for i in range(4)])
+
+def hs_predict(B, λ):
+    "E_t Σ_j λ^j x_(t+j) = (L B(L) - λ B(λ)) / (L - λ) applied to w_t."
     B = np.asarray(B, dtype=complex)
-    num = np.concatenate(([-lam * np.polyval(B[::-1], lam)], B))   # L B(L) − lam B(lam), lowest-first
-    quo, _ = np.polydiv(num[::-1], [1, -lam])          # exact division by (L − lam)
+    # numerator L B(L) - λ B(λ), lowest power first
+    num = np.concatenate(([-λ * np.polyval(B[::-1], λ)], B))
+    quo, _ = np.polydiv(num[::-1], [1, -λ])   # exact division by (L - λ)
     return quo[::-1].real
 
 def forcing(B):
-    "MA coefficients of the feed-forward term −(1/ν) Σ_i A_i · (H-S operator) acting on w."
+    "MA coefficients of the feed-forward term -(1/ν) Σ_i A_i (H-S) on w."
     M = sum(A_pf[i] * hs_predict(B, λ[i]) for i in range(4))
     return (-M / ν).real
 
@@ -491,24 +496,29 @@ def q_response(M, T=27):
     "Response of q to a unit shock, from q_t = Σ γ_k q_(t-k) + M(L) w."
     q = np.zeros(T)
     for t in range(T):
-        q[t] = sum(γ_mkt[k - 1] * q[t - k] for k in range(1, 5) if t - k >= 0)
+        q[t] = sum(γ_mkt[k - 1] * q[t - k]
+                   for k in range(1, 5) if t - k >= 0)
         if t < len(M):
             q[t] += M[t]
     return q
 
 def p_response(q, s_path, T=25):
-    "Price from the supply relation, using E_t q_(t+1) = q_(t+1) along an impulse response."
-    return np.array([s_path[t] + h_s * q[t]
-                     + g_s * ((1 + β) * q[t] - (q[t - 1] if t else 0.0) - β * q[t + 1])
-                     for t in range(T)])
+    "Price from the supply relation; E_t q_(t+1) = q_(t+1) on an IRF path."
+    p = np.zeros(T)
+    for t in range(T):
+        q_lag = q[t - 1] if t else 0.0
+        p[t] = (s_path[t] + h_s * q[t]
+                + g_s * ((1 + β) * q[t] - q_lag - β * q[t + 1]))
+    return p
 
-scale = np.diag([np.sqrt(σ_s2), np.sqrt(σ_d2)])        # scale shocks to their std devs
+scale = np.diag([np.sqrt(σ_s2), np.sqrt(σ_d2)])   # shock std devs
 
 q_s, q_d = q_response(M_s), q_response(M_d)
 irf_mkt = np.zeros((25, 2, 2))
-irf_mkt[:, 0, 0], irf_mkt[:, 1, 0] = q_s[:25], p_response(q_s, np.concatenate([B_s, np.zeros(25)]))
+s_path = np.concatenate([B_s, np.zeros(25)])
+irf_mkt[:, 0, 0], irf_mkt[:, 1, 0] = q_s[:25], p_response(q_s, s_path)
 irf_mkt[:, 0, 1], irf_mkt[:, 1, 1] = q_d[:25], p_response(q_d, np.zeros(25))
-irf_mkt *= scale.diagonal()                            # scale each shock by its standard deviation
+irf_mkt *= scale.diagonal()      # scale each shock by its std dev
 ```
 
 We plot the equilibrium responses of quantity and price to the two structural shocks.
@@ -526,12 +536,12 @@ plt.tight_layout()
 plt.show()
 ```
 
-A **demand** surprise moves the price sharply on impact with only a small quantity response, because
+A *demand* surprise moves the price sharply on impact with only a small quantity response, because
 the large adjustment cost $g_s$ prevents the supplier from expanding output quickly.
 
-A **supply** surprise sends quantity and price off in opposite directions.
+A *supply* surprise sends quantity and price off in opposite directions.
 
-In both cases quantity moves *slowly* — the hallmark of the sluggish adjustment that $g_s = 10$
+In both cases quantity moves *slowly* --- the hallmark of the sluggish adjustment that $g_s = 10$
 builds in.
 
 
@@ -540,7 +550,7 @@ builds in.
 We now compute the *same* equilibrium a second way, as an optimal linear regulator.
 
 This construction also delivers the state-space representation $X_{t+1} = A_F X_t + C\,w_{t+1}$,
-$z_t = G_z X_t$ that we reuse later — for the price-taking regulators and for the Kalman-filter
+$z_t = G_z X_t$ that we reuse later --- for the price-taking regulators and for the Kalman-filter
 analysis of vector autoregressions.
 
 Because the market objectives are quadratic and the shocks enter linearly, the competitive
@@ -564,7 +574,7 @@ equation {eq}`sdvar-eulersupply`,
 p_t = s_t + \big[h_s + g_s(1-\beta L^{-1})(1-L)\big]q_t .
 ```
 
-We solve the planner's problem as a discounted **optimal linear regulator** with QuantEcon's `LQ`
+We solve the planner's problem as a discounted optimal linear regulator with QuantEcon's `LQ`
 class.
 
 The control is $q_t$ and the state stacks the four lagged quantities $q_{t-1},\dots,q_{t-4}$ (the
@@ -607,7 +617,7 @@ def solve_equilibrium(h_s, h_d, g_s, g_d, β, a, B_s, B_d):
     def q_lag(k):                                      # selector for q_{t-k}
         e = np.zeros(n); e[k - 1] = 1.0; return e
 
-    s_sel = np.zeros(n); s_sel[n_q:n_q + 4] = B_s      # s_t = s_sel · x
+    s_sel = np.zeros(n); s_sel[n_q:n_q + 4] = B_s      # s_t = s_sel @ x
     d_sel = np.zeros(n); d_sel[n_q + 4:] = B_d
     q1 = q_lag(1)
     a_vec = sum(a[k] * q_lag(k) for k in range(1, 5))  # lagged part of a(L)q_t
@@ -615,8 +625,9 @@ def solve_equilibrium(h_s, h_d, g_s, g_d, β, a, B_s, B_d):
     # one-period loss = -(surplus), written as u'Qu + x'Rx + 2 u'Nx
     Q = np.array([[(h_s + h_d) / 2 + g_s / 2 + g_d / 2 * a[0]**2]])
     R = g_d / 2 * np.outer(a_vec, a_vec) + g_s / 2 * np.outer(q1, q1)
-    R += 1e-5 * np.eye(n)                              # tiny ridge for the Riccati solver
-    N = (g_d * a[0] * a_vec / 2 - g_s * q1 / 2 + (s_sel + d_sel) / 2).reshape(1, n)
+    R += 1e-5 * np.eye(n)          # tiny ridge for the Riccati solver
+    N = (g_d * a[0] * a_vec / 2 - g_s * q1 / 2
+         + (s_sel + d_sel) / 2).reshape(1, n)
 
     lq = LQ(Q, R, A, B, C, N=N, beta=β)
     P, F, _ = lq.stationary_values()
@@ -624,20 +635,22 @@ def solve_equilibrium(h_s, h_d, g_s, g_d, β, a, B_s, B_d):
     A_F = A - B @ F
 
     # price p_t = s_t + h_s q_t + g_s[(1+β) q_t - q_{t-1} - β E_t q_{t+1}]
-    F_q = -F                                           # q_t   = F_q · x
-    E_q1 = -F @ A_F                                    # E_t q_{t+1} = E_q1 · x
+    F_q = -F                                           # q_t = F_q @ x
+    E_q1 = -F @ A_F                                    # E_t q_{t+1} = E_q1 @ x
     G_p = (s_sel + h_s * F_q[0] + g_s * (1 + β) * F_q[0]
            - g_s * q1 - g_s * β * E_q1[0]).reshape(1, n)
-    G_z = np.vstack([F_q, G_p])                        # (q_t, p_t) = G_z · x
+    G_z = np.vstack([F_q, G_p])                        # (q_t, p_t) = G_z @ x
     return A_F, C, G_z, F, s_sel, d_sel
 
-A_F, C, G_z, F, s_sel, d_sel = solve_equilibrium(h_s, h_d, g_s, g_d, β, a, B_s, B_d)
+A_F, C, G_z, F, s_sel, d_sel = solve_equilibrium(h_s, h_d, g_s, g_d,
+                                                 β, a, B_s, B_d)
 
+ρ_max = np.max(np.abs(np.linalg.eigvals(A_F)))
 print("equilibrium feedback on q_{t-1..t-4} :", np.round(-F[0, :4], 4))
-print("largest closed-loop eigenvalue       :", np.round(np.max(np.abs(np.linalg.eigvals(A_F))), 4))
+print("largest closed-loop eigenvalue       :", np.round(ρ_max, 4))
 ```
 
-Equilibrium outcomes are asymptotically stationary — the largest closed-loop eigenvalue is well
+Equilibrium outcomes are asymptotically stationary --- the largest closed-loop eigenvalue is well
 inside the unit circle.
 
 The equilibrium law of motion implies a moving-average representation
@@ -667,22 +680,28 @@ def structural_irf(A_F, C, G_z, T=25, scale=None):
 
 irf_struct = structural_irf(A_F, C, G_z, scale=scale)
 
-print("max |regulator feedback − market-Euler γ_k| :", np.max(np.abs(-F[0, :4] - γ_mkt)))
-print("max |regulator IRF − market-Euler IRF|      :", np.max(np.abs(irf_struct - irf_mkt)))
+print("max |regulator feedback - market-Euler γ_k| :",
+      np.max(np.abs(-F[0, :4] - γ_mkt)))
+print("max |regulator IRF - market-Euler IRF|      :",
+      np.max(np.abs(irf_struct - irf_mkt)))
 ```
 
-The feedback coefficients agree — the small residual is the tiny ridge that regularizes the
-regulator's Riccati solve — and the impulse responses agree too.
+The feedback coefficients agree --- the small residual is the tiny ridge that regularizes the
+regulator's Riccati solve --- and the impulse responses agree too.
 
 We overlay the two sets of impulse responses to confirm that they coincide.
 
 ```{code-cell} python3
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 for col, name in enumerate(["supply shock $w_{st}$", "demand shock $w_{dt}$"]):
-    axes[col].plot(irf_struct[:, 0, col], color="C0", label="quantity — regulator")
-    axes[col].plot(irf_struct[:, 1, col], color="C1", label="price — regulator")
-    axes[col].plot(irf_mkt[:, 0, col], "o", color="C0", ms=4, label="quantity — market Euler")
-    axes[col].plot(irf_mkt[:, 1, col], "o", color="C1", ms=4, label="price — market Euler")
+    axes[col].plot(irf_struct[:, 0, col], color="C0",
+                   label="quantity - regulator")
+    axes[col].plot(irf_struct[:, 1, col], color="C1",
+                   label="price - regulator")
+    axes[col].plot(irf_mkt[:, 0, col], "o", color="C0", ms=4,
+                   label="quantity - market Euler")
+    axes[col].plot(irf_mkt[:, 1, col], "o", color="C1", ms=4,
+                   label="price - market Euler")
     axes[col].axhline(0, color="k", lw=0.5)
     axes[col].set_title(f"response to {name}")
     axes[col].set_xlabel("periods")
@@ -693,8 +712,8 @@ plt.show()
 
 The markers from the market-Euler construction land on the lines from the regulator construction.
 
-Two very different routes — a direct factorization of a market Euler equation and an optimal linear
-regulator — arrive at the same equilibrium law of motion for $(q_t, p_t)$.
+Two very different routes --- a direct factorization of a market Euler equation and an optimal linear
+regulator --- arrive at the same equilibrium law of motion for $(q_t, p_t)$.
 
 
 ## Each side of the market as a price-taking optimal linear regulator
@@ -704,23 +723,22 @@ first-order conditions of two *distinct* optimization problems.
 
 They describe supplies and demands for arbitrary price processes, not just equilibrium ones.
 
-We now turn to distinct decision rules for suppliers and demanders **within** a rational
+We now turn to distinct decision rules for suppliers and demanders *within* a rational
 expectations equilibrium.
 
 Such decision rules are appropriate only when the price process is the equilibrium one.
 
-In the rational expectations equilibrium **both agents are price takers**.
+In the rational expectations equilibrium *both agents are price takers*.
 
 We now cast each problem as a discounted optimal linear regulator in which each agent, whether
 supplier or demander, faces the equilibrium price process.
 
 That means that for that agent the price process is **exogenous**, meaning unaffected by its own
-choices — which is exactly what it means for the agent to be a **price taker**.
+choices --- which is exactly what it means for the agent to be a **price taker**.
 
 We accomplish our mission by using an instance of the "Big $X$, little $x$" device: we append the
 exogenous aggregate law of motion to the agent's own state and solve an ordinary linear regulator,
-exactly as in
-[Section 50.7.1 of the QuantEcon dynamic Stackelberg lecture](https://python-advanced.quantecon.org/dyn_stack.html).
+exactly as in {doc}`dyn_stack`.
 
 Write the equilibrium in state-space form
 
@@ -748,7 +766,7 @@ def supplier_regulator(A_F, C, G_z, s_sel, h_s, g_s, β):
     B = np.zeros((n, 1)); B[nX, 0] = 1.0
     Cc = np.zeros((n, 2)); Cc[:nX, :] = C
     own = np.zeros(n); own[nX] = 1.0                   # picks own q_{t-1}
-    p_sel = np.zeros(n); p_sel[:nX] = G_z[1]           # p_t = p_sel · state
+    p_sel = np.zeros(n); p_sel[:nX] = G_z[1]           # p_t = p_sel @ state
     s_selX = np.zeros(n); s_selX[:nX] = s_sel
 
     Q = np.array([[(h_s + g_s) / 2]])
@@ -764,7 +782,7 @@ print(f"stable root of the supply curve  δ_s / β   : {δ_s / β:.4f}")
 ```
 
 The supplier's regulator reproduces the coefficient $\delta_s/\beta$ on its own lag from the dynamic
-supply curve {eq}`sdvar-supplycurve` — the feed-forward part $-F_X X_t$ is exactly the geometric sum
+supply curve {eq}`sdvar-supplycurve` --- the feed-forward part $-F_X X_t$ is exactly the geometric sum
 $\tfrac{\delta_s}{g_s\beta}E_t\sum_j \delta_s^{\,j}(p_{t+j}-s_{t+j})$ written as a linear function of
 the state.
 
@@ -807,17 +825,17 @@ curve {eq}`sdvar-demandcurve`.
 
 Each agent's rule is a best response to the price process $X_t$.
 
-The representative agent takes $X_t$ as given, assuming that  its own choice of little-$x$ choice does not move Big $X$.
+The representative agent takes $X_t$ as given, assuming that its own little-$x$ choice does not move Big $X$.
 
-Nevertheless, in equilibrium  Big $X$ must equal $x$. 
+Nevertheless, in equilibrium Big $X$ must equal $x$.
 
-We can check that the rational expectations  equilibrium satisfies this consistency requirement.
+We can check that the rational expectations equilibrium satisfies this consistency requirement.
 
 The supplier's regulator delivered a best-response rule for $q_t$ as a linear function of its state
 $(X_t, q_{t-1})$.
 
-Evaluating that rule along the equilibrium — where the supplier's own lag $q_{t-1}$ coincides with
-the market's lagged quantity, the first component of $X_t$ — should reproduce the equilibrium
+Evaluating that rule along the equilibrium --- where the supplier's own lag $q_{t-1}$ coincides with
+the market's lagged quantity, the first component of $X_t$ --- should reproduce the equilibrium
 quantity rule $q_t = G_z[0]\, X_t$ computed above.
 
 ```{code-cell} python3
@@ -825,16 +843,16 @@ quantity rule $q_t = G_z[0]\, X_t$ computed above.
 # (the supplier's own lag equals the market's q_{t-1}, i.e. state component 0)
 own_is_q1 = np.zeros(nX); own_is_q1[0] = 1.0
 q_rule_supplier = -F_s[0, :nX] - F_s[0, nX] * own_is_q1
-q_rule_equilibrium = G_z[0]                            # equilibrium q_t = G_z[0] · X_t
+q_rule_equilibrium = G_z[0]        # equilibrium q_t = G_z[0] @ X_t
 
 gap = np.max(np.abs(q_rule_supplier - q_rule_equilibrium))
-print(f"max |supplier best response − equilibrium quantity rule| : {gap:.2e}")
+print(f"max |supplier best response - equilibrium rule| : {gap:.2e}")
 ```
 
 The two rules agree to machine precision.
 
 Feeding the equilibrium price process back into the agent's regulator returns a quantity rule
-consistent with it — the "Big $X$, little $x$" fixed point.
+consistent with it --- the "Big $X$, little $x$" fixed point.
 
 ### Open-loop versus closed-loop decision rules
 
@@ -842,7 +860,7 @@ We have constructed two distinct pairs of decision rules.
 
 The dynamic supply and demand curves {eq}`sdvar-supplycurve`–{eq}`sdvar-demandcurve` give each
 agent's optimal quantity as a function of its own past quantities and of its forecasts
-$E_t\,p_{t+j}$ of an **arbitrary** price process that it takes as given.
+$E_t\,p_{t+j}$ of an *arbitrary* price process that it takes as given.
 
 They are best responses to *whatever* price process the agent happens to face, and they assume
 nothing about how that price is generated.
@@ -855,19 +873,19 @@ The regulator feedback rules $q_t = -F\,\widehat X_t$ are a different pair.
 They are the *same* optimizing behavior with the *equilibrium* price process {eq}`sdvar-bigX`
 substituted in.
 
-These are a **closed-loop** pair — the price each agent responds to is now the very one the
-equilibrium system produces — and they are the decision rules that obtain *inside* the rational
+These are a **closed-loop** pair --- the price each agent responds to is now the very one the
+equilibrium system produces --- and they are the decision rules that obtain *inside* the rational
 expectations equilibrium.
 
 The two coincide only after we set the price process to be the equilibrium one; passing from the
 open-loop curve to the closed-loop rule comes from imposing rational expectations on the
 agents' price forecasts.
 
-Both representative  deliver this important  message:
+Both representations deliver this important message:
 
- * each decision maker's quantity *today* depends not on today's price alone but on the entire prospective **continuation path** of the price, $\{p_{t+j}\}_{j\ge 0}$, forecast from today out into the indefinite future.
+* each decision maker's quantity *today* depends not on today's price alone but on the entire prospective *continuation path* of the price, $\{p_{t+j}\}_{j\ge 0}$, forecast from today out into the indefinite future.
 
-In our model, supply and demand curves are  **forward-looking**.
+In our model, supply and demand curves are *forward-looking*.
 
 And because the equilibrium price path is itself driven by *both* disturbances, both pairs of rules
 make each side's quantity depend on both shock processes: today's suppliers and today's demanders
@@ -878,7 +896,7 @@ prices.
 
 ## Vector autoregressions and innovation accounting
 
-Let $z_t$ be an $n \times 1$ covariance stationary process — for us it will be the pair of quantity
+Let $z_t$ be an $n \times 1$ covariance stationary process --- for us it will be the pair of quantity
 and price in a single market.
 
 By Wold's theorem (see {doc}`Classical Control with Linear Algebra <lu_tricks>`), $z_t$ has a
@@ -909,7 +927,7 @@ and this representation induces the decomposition of the $j$-step-ahead predicti
 E\big(z_t - \hat E_{t-j} z_t\big)\big(z_t - \hat E_{t-j} z_t\big)^T = \sum_{k=0}^{j-1} C_k\, V\, C_k^T
 ```
 
-that underlies Sims's {cite}`Sims1980` **innovation accounting** — the variance decompositions and
+that underlies Sims's {cite}`Sims1980` innovation accounting --- the variance decompositions and
 impulse responses that a researcher reads off an estimated autoregression.
 
 Now suppose the equilibrium of an economic model has its own moving-average representation in terms
@@ -920,14 +938,14 @@ of the shocks that hit the agents' information sets,
 z_t = \sum_{j=0}^{\infty} D_j\, \epsilon_{t-j},
 ```
 
-where $\epsilon_t$ is the white noise that is fundamental **for the agents**.
+where $\epsilon_t$ is the white noise that is fundamental *for the agents*.
 
 The interpretive question is whether the autoregression's innovations $a_t$ equal the agents'
 shocks $\epsilon_t$, and whether the response coefficients $C_j$ equal the economic responses $D_j$.
 
 If they do, innovation accounting reads off the economics directly.
 
-This lecture exhibits a single market in which they do **not**: the white noise that a vector
+This lecture exhibits a single market in which they do *not*: the white noise that a vector
 autoregression recovers from data on price and quantity is *not* the white noise that is
 fundamental for the supplier and the demander.
 
@@ -936,7 +954,7 @@ We will see exactly *why*, and we will see the quantitative signature of the dis
 ## Why a vector autoregression misreads this market
 
 We assume that at time $t$ an econometrician observes only the $2 \times 1$ vector
-$y_t = (q_t, p_t)$ of quantity and price.
+$z_t = (q_t, p_t)$ of quantity and price.
 
 The shocks $\epsilon_t = (w_{st}, w_{dt})$ are fundamental for the agents' information set.
 
@@ -945,11 +963,11 @@ The question is whether they are also fundamental for the *econometrician's* dat
 They are fundamental for $z_t$ if and only if the moving average $z_t = G_z (I-A_F L)^{-1} C\,
 \epsilon_t$ has no zeros inside the unit circle.
 
-In our model, some of the zeros do lie inside, so $\epsilon_t$ is **not** fundamental for $z_t$.
+In our model, some of the zeros do lie inside, so $\epsilon_t$ is *not* fundamental for $z_t$.
 
 A vector autoregression fit to $(q_t, p_t)$ therefore does not recover $\epsilon_t$.
 
-Instead it recovers a *different* white noise $\epsilon_t^*$ — the Wold innovation — that is a
+Instead it recovers a *different* white noise $\epsilon_t^*$ --- the Wold innovation --- that is a
 one-sided distributed lag of current and past $\epsilon_t$'s,
 
 ```{math}
@@ -959,28 +977,29 @@ one-sided distributed lag of current and past $\epsilon_t$'s,
 
 obtained by "flipping" the inside-the-unit-circle zeros to the outside (a *Blaschke* factorization).
 
-The Wold innovation mixes the agents' current surprise with **old news**.
+The Wold innovation mixes the agents' current surprise with *old news*.
 
-We recover the Wold representation by passing the equilibrium through the **Kalman filter**, exactly
+We recover the Wold representation by passing the equilibrium through the Kalman filter, exactly
 as in {doc}`hs_invertibility_example`.
 
 The innovations representation delivered by the filter is the Wold representation, and the filter
-that maps $\epsilon_t \mapsto \epsilon_t^*$ is the *whitener*.
+that maps $\epsilon_t \mapsto \epsilon_t^*$ is the **whitener**.
 
 ```{code-cell} python3
 # innovations (Wold) representation via the Kalman filter
-G_meas = 1e-8 * np.eye(2)                              # negligible measurement error
+G_meas = 1e-8 * np.eye(2)          # negligible measurement error
 lss = qe.LinearStateSpace(A_F, C @ scale, G_z, G_meas)
 kalman = qe.Kalman(lss)
 
-Σ_struct = (G_z @ C @ scale) @ (G_z @ C @ scale).T     # contemporaneous cov of structural innovation
-Σ_wold = kalman.stationary_innovation_covar()          # contemporaneous cov of Wold innovation
+# contemporaneous covariances of the structural and Wold innovations
+Σ_struct = (G_z @ C @ scale) @ (G_z @ C @ scale).T
+Σ_wold = kalman.stationary_innovation_covar()
 
 print("contemporaneous covariance of the structural innovation R0 ε_t:")
 print(np.round(Σ_struct, 4))
 print("\ncontemporaneous covariance of the Wold innovation R0* ε_t*:")
 print(np.round(Σ_wold, 4))
-print("\ndifference (Wold − structural), a positive semidefinite matrix:")
+print("\ndifference (Wold - structural), a positive semidefinite matrix:")
 print(np.round(Σ_wold - Σ_struct, 5))
 ```
 
@@ -1020,19 +1039,23 @@ fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 axes[0].plot(wold_irf[:, 0, 0], label="quantity innov.")
 axes[0].plot(wold_irf[:, 1, 0], label="price innov.")
 axes[0].set_title("response of $(q,p)$ to the first Wold innovation")
-axes[0].axhline(0, color="k", lw=0.5); axes[0].set_xlabel("periods"); axes[0].legend()
+axes[0].axhline(0, color="k", lw=0.5)
+axes[0].set_xlabel("periods")
+axes[0].legend()
 
 axes[1].plot([c[0, 0] for c in whit_irf], label="via supply shock $w_{st}$")
 axes[1].plot([c[0, 1] for c in whit_irf], label="via demand shock $w_{dt}$")
 axes[1].set_title("response of the recovered innovation $\\epsilon^*_t$")
-axes[1].axhline(0, color="k", lw=0.5); axes[1].set_xlabel("periods"); axes[1].legend()
+axes[1].axhline(0, color="k", lw=0.5)
+axes[1].set_xlabel("periods")
+axes[1].legend()
 plt.tight_layout()
 plt.show()
 ```
 
 The right panel is the heart of the matter.
 
-The supply shock $w_{st}$ enters the recovered innovations only as a **distributed lag**: because
+The supply shock $w_{st}$ enters the recovered innovations only as a *distributed lag*: because
 quantity adjusts sluggishly, a supply surprise is revealed to the econometrician gradually, through
 the path of $(q_t, p_t)$, rather than all at once.
 
@@ -1049,35 +1072,34 @@ observed $z_t$, and Sims's innovation accounting always produces a tidy variance
 
 But the fundamental noise for the *data* need not be the fundamental noise for the *agents*.
 
-When the two differ — as in this market, where quantity adjusts sluggishly and so reveals supply
-surprises only with a lag — the impulse responses and variance decompositions describe the data's
+When the two differ --- as in this market, where quantity adjusts sluggishly and so reveals supply
+surprises only with a lag --- the impulse responses and variance decompositions describe the data's
 own forecasting structure, not the economy's response to the surprises that actually move agents.
 ```
 
 ## Summary
 
-This lecture constructed **two** representations of the dynamic supply and demand curves for our
+This lecture constructed *two* representations of the dynamic supply and demand curves for our
 single market.
 
-The first is an **open-loop** pair: the dynamic supply curve {eq}`sdvar-supplycurve` and the dynamic
+The first is an *open-loop* pair: the dynamic supply curve {eq}`sdvar-supplycurve` and the dynamic
 demand curve {eq}`sdvar-demandcurve`.
 
-Each is a best response to an **arbitrary** price process that the agent takes as given, and so
+Each is a best response to an *arbitrary* price process that the agent takes as given, and so
 describes optimal behavior *outside* any particular rational expectations equilibrium.
 
-The second is a **closed-loop** pair: the regulator feedback rules $q_t = -F\,\widehat X_t$ obtained
+The second is a *closed-loop* pair: the regulator feedback rules $q_t = -F\,\widehat X_t$ obtained
 by substituting the *equilibrium* price process {eq}`sdvar-bigX` into the two agents' problems.
 
 These describe optimal behavior *inside* a rational expectations equilibrium, where the price process
 each agent forecasts is the very one that market clearing produces.
 
-A feature common to **both** representations is worth emphasizing.
+A feature common to *both* representations is worth emphasizing.
 
+Supply and demand curves are both driven partly by forecasts $E_t\,p_{t+j}$ of future prices, and in equilibrium the price is driven by shocks that appear in the optimization problems of both suppliers and demanders.
 
-Supply and demand  curved are both driven partly by forecasts $E_t\,p_{t+j}$ of future prices, and in equilibrium the price is driven by  shocks that appear in the optimization problems of both suppliers and demanders.
-
-So innovations to *both* the supplier's and the demander's information sets — $w_{st}$ and $w_{dt}$
-alike — appear in *both* the supply curve and the demand curve.
+So innovations to *both* the supplier's and the demander's information sets --- $w_{st}$ and $w_{dt}$
+alike --- appear in *both* the supply curve and the demand curve.
 
 Today's suppliers and today's demanders each react to supply *and* demand shocks, through their
 common effect on the expected future path of prices.
@@ -1087,12 +1109,12 @@ curves.
 
 Finally, an aside.
 
-We have also used this supply-and-demand setting as an occasion to revisit the **shock-invertibility**
+We have also used this supply-and-demand setting as an occasion to revisit the *shock-invertibility*
 issue studied in {doc}`hs_invertibility_example`.
 
 Because quantity adjusts sluggishly, the white noise that a vector autoregression recovers from a
 history of $(q_t, p_t)$ is *not* the white noise that is fundamental for the suppliers and demanders
-inside the model — a warning against reading Sims's innovation accounting as though its innovations
+inside the model --- a warning against reading Sims's innovation accounting as though its innovations
 were the shocks that agents actually respond to.
 
 ## Exercises
@@ -1102,12 +1124,12 @@ were the shocks that agents actually respond to.
 
 The dynamic supply curve {eq}`sdvar-supplycurve` says that the supplier's feedback on its own lag
 $q_{t-1}$ is $\delta_s/\beta$, a number that depends only on the supplier's own cost parameters
-$(h_s, g_s, \beta)$ — **not** on the price process it faces.
+$(h_s, g_s, \beta)$ --- *not* on the price process it faces.
 
 Confirm this invariance numerically.
 
 Re-solve the supplier's regulator, but replace the equilibrium price process by a *different*
-exogenous price process — for example one in which the price is pure white noise, or one in which it
+exogenous price process --- for example one in which the price is pure white noise, or one in which it
 is far more persistent than in equilibrium.
 
 Show that the feedback on $q_{t-1}$ is unchanged at $\delta_s/\beta$, while the feed-forward
@@ -1124,7 +1146,7 @@ The own-lag coefficient is the stable (backward) root of the supplier's characte
 $\phi_s(L)$, which is a function of $(h_s, g_s, \beta)$ alone.
 
 The forcing process the agent faces affects only the *particular* (forward-looking) part of the
-solution — the geometric sum of expected future prices — not the *homogeneous* part that governs the
+solution --- the geometric sum of expected future prices --- not the *homogeneous* part that governs the
 agent's own internal dynamics.
 
 This is the certainty-equivalent separation of the linear regulator: the feedback on the endogenous
@@ -1134,11 +1156,11 @@ We build a small stand-in price process and feed it to the supplier's regulator.
 
 ```{code-cell} python3
 def make_ar_price(ρ, nX_extra=0):
-    """A scalar AR(1) price process p_t = ρ p_{t-1} + w_t as a state-space block."""
+    "A scalar AR(1) price p_t = ρ p_(t-1) + w_t as a state-space block."
     A = np.array([[ρ]])
     C = np.array([[1.0, 0.0]])          # driven by the first white noise only
     G_p = np.array([[1.0]])             # p_t = state
-    s_sel = np.array([0.0])             # no separate cost shock in this stand-in
+    s_sel = np.array([0.0])             # no cost shock in this stand-in
     G_z = np.vstack([np.zeros(1), G_p])
     return A, C, G_z, s_sel
 
@@ -1169,7 +1191,7 @@ Investigate the role of $g_s$.
 
 Recompute the equilibrium for $g_s \in \{0.1, 1, 10, 50, 100\}$ and, for each, use the whitener to
 measure what *fraction* of the recovered innovation's response to the supply shock $w_{st}$ arrives
-contemporaneously — at lag zero — rather than as a distributed lag over later periods.
+contemporaneously --- at lag zero --- rather than as a distributed lag over later periods.
 
 Predict the direction of the effect before running the code, and explain it.
 ```
@@ -1179,12 +1201,12 @@ Predict the direction of the effect before running the code, and explain it.
 ```
 
 When $g_s$ is small, quantity adjusts almost freely, the supplier reveals its surprise almost at
-once, and the econometrician's innovation coincides with the agents' — the whole response is
+once, and the econometrician's innovation coincides with the agents' --- the whole response is
 concentrated at lag zero and the market is (nearly) invertible.
 
 As $g_s$ grows, adjustment becomes sluggish, the supply surprise is revealed only gradually through
 the path of $(q_t, p_t)$, and a larger share of the response to $w_{st}$ shows up as a distributed
-lag — the recovered innovation folds in more old news.
+lag --- the recovered innovation folds in more old news.
 
 So the fraction at lag zero should *fall* as $g_s$ rises.
 
@@ -1196,7 +1218,8 @@ for g in [0.1, 1.0, 10.0, 50.0, 100.0]:
     A_Fg, Cg, G_zg, *_ = solve_equilibrium(h_s, h_d, g, g_d, β, a, B_s, B_d)
     lss_g = qe.LinearStateSpace(A_Fg, Cg @ scale, G_zg, 1e-8 * np.eye(2))
     whit_g = qe.Kalman(lss_g).whitener_lss()
-    resp = np.array([[c[0, 0], c[1, 0]] for c in whit_g.impulse_response(30)[1]])
+    resp = np.array([[c[0, 0], c[1, 0]]
+                     for c in whit_g.impulse_response(30)[1]])
     frac0 = np.abs(resp[0]) / np.abs(resp).sum(axis=0)
     print(f"{g:>6}   ({frac0[0]:.3f}, {frac0[1]:.3f})")
 ```
@@ -1204,7 +1227,7 @@ for g in [0.1, 1.0, 10.0, 50.0, 100.0]:
 For $g_s \le 1$ the entire response arrives at lag zero: the market is invertible and a vector
 autoregression recovers the agents' supply shock exactly.
 
-As $g_s$ rises the fraction at lag zero falls monotonically toward roughly a quarter — three quarters
+As $g_s$ rises the fraction at lag zero falls monotonically toward roughly a quarter --- three quarters
 of the supply surprise is now revealed only with a lag.
 
 This confirms that sluggish quantity adjustment is what drives a wedge between the shocks a vector
@@ -1218,7 +1241,7 @@ autoregression recovers and the shocks that actually move the agents.
 
 We verified the "Big $X$, little $x$" fixed point for the supplier.
 
-Verify it for the **demander**: show that, facing the equilibrium price process, the demander's
+Verify it for the *demander*: show that, facing the equilibrium price process, the demander's
 best-response quantity rule reproduces the equilibrium quantity rule to machine precision.
 
 The demander carries four own lags $(q_{t-1},\dots,q_{t-4})$; in equilibrium these equal the
@@ -1233,7 +1256,8 @@ We map the demander's four own lags onto the first four components of the equili
 compare its implied quantity rule with the equilibrium rule.
 
 ```{code-cell} python3
-# demander's own lags equal the market's lags: components 0..3 of the equilibrium state
+# demander's own lags equal the market's lags:
+# components 0..3 of the equilibrium state
 own_to_state = np.zeros((4, nX))
 own_to_state[np.arange(4), np.arange(4)] = 1.0
 
@@ -1241,11 +1265,11 @@ q_rule_demander = -F_d[0, :nX] - F_d[0, nX:nX + 4] @ own_to_state
 q_rule_equilibrium = G_z[0]
 
 gap = np.max(np.abs(q_rule_demander - q_rule_equilibrium))
-print(f"max |demander best response − equilibrium quantity rule| : {gap:.2e}")
+print(f"max |demander best response - equilibrium rule| : {gap:.2e}")
 ```
 
 The demander's best response, facing the equilibrium price process, reproduces the equilibrium
-quantity rule up to a tiny residual — the same fixed point that held for the supplier.
+quantity rule up to a tiny residual --- the same fixed point that held for the supplier.
 
 (The residual reflects the small ridge added to the planner's Riccati solve; without it the two
 rules would agree to machine precision.)
