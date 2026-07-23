@@ -31,7 +31,7 @@ tags: [hide-output]
 
 ## Overview
 
-This lecture describes special case of a celebrated model of optimal fiscal policy by Robert E.
+This lecture describes a special case of a celebrated model of optimal fiscal policy by Robert E.
 Lucas, Jr., and Nancy Stokey  {cite}`LucasStokey1983`.
 
 
@@ -43,7 +43,7 @@ The model features
 
 * a linear production function mapping labor into a single good
 * a representative household that likes both consumption and leisure
-* an exogenous history-contingent sequence  of government expenditures that a goverment must finance with revenues from a sequence of history-dependent flat rate taxes 
+* an exogenous history-contingent sequence  of government expenditures that a government must finance with revenues from a sequence of history-dependent flat rate taxes
 * an exogenous initial  debt  the government must also finance 
 *  a Ramsey planner who at time $t=0$ chooses a  history contingent plan for flat rate taxes  at all $t \geq 0$
 * a sequence of continuation  governments that at each $t \geq 1$ must pay off the one-period state-contingent debt that a time $t-1$ government has issued
