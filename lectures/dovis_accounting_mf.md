@@ -40,25 +40,25 @@ To run this lecture on your own machine, you need to install [Google JAX](https:
 
 This lecture studies a model of fiscal and monetary policy interactions developed by {cite:t}`DovisAccountingMFrevised`.
 
-The model provides a framework for  revisiting some long-standing questions about **fiscal dominance** versus **monetary dominance** in a framework that allows for **partial commitment** to an inflation target.
+The model revisits some long-standing questions about **fiscal dominance** versus **monetary dominance** in a framework that allows for **partial commitment** to an inflation target.
 
 
 ```{note}
-For an early discussion of "partial commitment" in the context of fiscal and monetary policy, see the concluding section of {cite:t}`LucasStokey1982`,  the original working paper version of {cite:t}`LucasStokey1983`. 
+For an early discussion of "partial commitment" in the context of fiscal and monetary policy, see the concluding section of {cite:t}`LucasStokey1982`, the original working paper version of {cite:t}`LucasStokey1983`.
 
-In Quantecon's view, the referees and editors of the *Journal of Monetary Economics* version made a mistake by insisting that Lucas and Stokey rewrite the concluding section of their paper.
+In QuantEcon's view, the referees and editors of the *Journal of Monetary Economics* version made a mistake by insisting that Lucas and Stokey rewrite the concluding section of their paper.
 ```
 
 ```{note}
-{cite:t}`SargentWallace1981` contrasted "fiscal dominance" and "monetary dominance"  as different ways of  coordinating
-monetary and fiscal policy.  
+{cite:t}`SargentWallace1981` contrasted "fiscal dominance" and "monetary dominance" as different ways of coordinating
+monetary and fiscal policy.
 
-They thought about them  at the beginning of the Reagan administration, when the 1970s surge in US inflation had not yet been tamed by the monetary-fiscal policies presided over by Paul Volcker. 
+They thought about them at the beginning of the Reagan administration, when the 1970s surge in US inflation had not yet been tamed by the monetary-fiscal policies presided over by Paul Volcker.
 
-Sargent and Wallace's title, "Some Unpleasant Monetarist Arithmetic," expressed the idea that in the face of a persistent net-of-interest government deficit, efforts to reduce inflation through tight monetary policy work only temporarily, if at all. 
+Sargent and Wallace's title, "Some Unpleasant Monetarist Arithmetic," expressed the idea that in the face of a persistent net-of-interest government deficit, efforts to reduce inflation through tight monetary policy work only temporarily, if at all.
 
 
-That is   because they lead to higher  government debt and thus greater gross-of-interest government deficits that must be financed  in the future.
+That is because they lead to higher government debt and thus greater gross-of-interest government deficits that must be financed in the future.
 ```
 
 In the model, a benevolent government that cannot commit finds it attractive to delegate monetary policy to a central bank charged with an inflation target, yet may later override that mandate when it needs seigniorage revenue.
@@ -75,8 +75,10 @@ The paper distinguishes two ways that a disinflation can occur:
   decline together.
 - **Institutional disinflation**: an increase in the credibility of the inflation mandate ($\xi$) leads inflation to fall while debt *rises*.
 
+The simplified model that we solve below reproduces the paper's institutional disinflation, and it reproduces the fall in inflation in a fundamental disinflation, but not the accompanying fall in debt; we return to this caveat when we simulate the two experiments.
+
 The contrasting comovement of debt and inflation in these types of disinflations
-allows the authors to create a statistical model that lets them classify observed disinflations into episodes that were driven by fiscal fundamentals or by institutional changes. 
+allows the authors to create a statistical model that lets them classify observed disinflations into episodes that were driven by fiscal fundamentals or by institutional changes.
 
 The paper applies these ideas to Colombia and Chile, using a
 **particle filter** to recover the sequences of fiscal and institutional shocks that are consistent with the observed joint paths of inflation and debt-to-GDP ratios.
@@ -177,7 +179,7 @@ $(1 - \nu'(l))\, l - g \geq \Delta$.
 
 This function is well-defined for all surplus values below the maximal surplus implied by the static Laffer curve, $\Delta \leq \bar\Delta \equiv \max_l (1 - \nu'(l))\,l$.
 
-The indirect utility function $U(\Delta, s)$ is *decreasing and concave* in $\Delta$ for all $s$, and the marginal disutility of primary surplus is increasing and is affected by the fundamental shocks.
+The indirect utility function $U(\Delta, s)$ is *decreasing and concave* in $\Delta$ for all $s$, and the marginal disutility of the primary surplus is increasing in $\Delta$ and depends on the fundamental shocks.
 
 Let $\phi \equiv M_{t-1}/P_t$ denote real money balances (price of money in terms of goods) and define
 
@@ -241,7 +243,7 @@ An important innovation of {cite:t}`DovisAccountingMFrevised` is to model policy
 **partial commitment** in the following sense.
 
 The government promises an inflation target $\pi^*$ (equivalently, a
-promised value for real balances $\phi'$) for  next period. 
+promised value for real balances $\phi'$) for next period.
 
 But a next-period government
 can choose to **honor** or **abrogate** the mandate.
@@ -273,7 +275,7 @@ For descriptions of these frameworks, see other lectures in this suite of QuantE
 The economy can be in one of two regimes:
 
 - **Monetary dominance** (MD, $\eta = 1$): the government honors the inflation target.
-- **Fiscal dominance** (FD, $\eta = 0$): the government ignores the target and chooses $\phi$ to   maximize short-run welfare.
+- **Fiscal dominance** (FD, $\eta = 0$): the government ignores the target and chooses $\phi$ to maximize short-run welfare.
 
 The idea of regime switching between monetary and fiscal dominance builds on {cite:t}`Leeper1991`, {cite:t}`Bianchi2013`, and {cite:t}`BianchiIlut2017`.
 
@@ -295,13 +297,13 @@ $$
   = \max_{\phi_{fd}} V^{md}(b, \phi_{fd}, s) - V^{md}(b, \phi, s).
 $$
 
-Deviating from the target allows the government to attain the maximum utility possible net of the cost $\xi$. 
+Deviating from the target allows the government to attain the maximum utility possible net of the cost $\xi$.
 
-A cost $\xi$ greater than the cutoff $\xi^*$ is required for the target to be sustained. 
+A cost $\xi$ greater than the cutoff $\xi^*$ is required for the target to be sustained.
 
-More ambitious inflation targets (closer to the Ramsey value $\phi^*$) are harder to achieve because the cutoff $\xi^*$ is larger. 
+More ambitious inflation targets (closer to the Ramsey value $\phi^*$) are harder to achieve because the cutoff $\xi^*$ is larger.
 
-The target is also easier to achieve when the marginal utility of government expenditure $\theta$ is lower, because positive surpluses are less valuable. 
+The target is also easier to achieve when the marginal utility of government expenditure $\theta$ is lower, because the government then attaches less value to the extra revenue that abrogating the target would raise.
 
 {numref}`fig-credibility-targets` below illustrates this logic.
 
@@ -402,7 +404,7 @@ Key properties of the Markov outcome:
 - The static optimality condition $-U'(\Delta, \theta) = v'(\phi^{fd})$ equates the marginal benefit of real balances to the marginal cost of the primary surplus, so the model predicts a higher price level (lower real balances) when the marginal cost of the surplus is high.
 - Inflation *responds strongly* to fiscal pressures -- it is high on average, volatile, and closely related to fiscal considerations.
 - Debt capacity is *sharply limited* -- as shown in the paper, the term $\frac{\partial J(b', \phi', s)}{\partial b'}/\beta$ is negative, effectively acting as a tax on debt issuance and pushing equilibrium debt below the Ramsey level.
-- In the deterministic case with $\beta = \hat\beta$: real debt converges to zero while the Ramsey outcome sustains positive debt levels (Appendix B of the paper).
+- In the deterministic case with $\beta = \hat\beta$: real debt converges to zero while the Ramsey outcome sustains positive debt levels (Appendix C of the paper).
 
 The full model *interpolates* between these two extremes depending on the cost $\xi_t$.
 
@@ -538,7 +540,7 @@ $$
 V^{md}(\phi;\, b,\, \theta) \;\approx\; U(\phi + D,\, \theta) \;+\; v(\phi),
 $$
 
-where $D = b - \beta b' - \text{seigniorage}$ collects the non-$\phi$ terms in the surplus $\Delta$. 
+where $D = b - \beta b' - \text{seigniorage}$ collects the non-$\phi$ terms in the surplus $\Delta$.
 
 This is hump-shaped in $\phi$: low $\phi$ sacrifices money utility while high $\phi$ forces a large, costly surplus.
 
@@ -562,12 +564,13 @@ phi_grid = jnp.linspace(0.05, phi_max, 500)
 D = 1.0
 Delta_grid = phi_grid + D
 
-# Two θ values: baseline (high fiscal pressure) and low θ_L
-θ_high = 150.0
-θ_low  = 100.0
+# Two θ values: baseline (high fiscal pressure) and low θ_L.
+# Named distinctly to avoid clashing with the θ_high used later for the IRFs.
+θ_cred_high = 150.0
+θ_cred_low = 100.0
 
-U_high, _ = iu_vec(Delta_grid, θ_high, χ, ψ, σ)
-U_low, _  = iu_vec(Delta_grid, θ_low,  χ, ψ, σ)
+U_high, _ = iu_vec(Delta_grid, θ_cred_high, χ, ψ, σ)
+U_low, _ = iu_vec(Delta_grid, θ_cred_low, χ, ψ, σ)
 v_phi = v_money(phi_grid, κ, η_m)
 
 V_blue_raw = np.array(U_high + v_phi)   # baseline θ (high)
@@ -666,11 +669,11 @@ plt.tight_layout()
 plt.show()
 ```
 
-The blue curve plots $V^{md}(\phi) = U(\phi + D,\, \theta) + v(\phi)$ for baseline fiscal pressure $\theta$, and the orange curve for a lower value $\theta_L$. 
+The blue curve plots $V^{md}(\phi) = U(\phi + D,\, \theta) + v(\phi)$ for baseline fiscal pressure $\theta$, and the orange curve for a lower value $\theta_L$.
 
-Each curve peaks at the corresponding $\phi^{fd}$, the level of real balances chosen under fiscal dominance. 
+Each curve peaks at the corresponding $\phi^{fd}$, the level of real balances chosen under fiscal dominance.
 
-The gap $\xi^*$ between the peak (the fiscal-dominance value $V^{fd}$) and the value at the promised $\phi'$ is the minimum institutional cost needed to sustain the inflation target. 
+The gap $\xi^*$ between the peak (the fiscal-dominance value $V^{fd}$) and the value at the promised $\phi'$ is the minimum institutional cost needed to sustain the inflation target.
 
 With lower fiscal pressure (orange), the gap shrinks: the target becomes easier to sustain.
 
@@ -732,7 +735,7 @@ def build_ξ_grid(n_ξ, α_l, α, ξ_bar):
 
 Because the budget constraint depends on $b$ and $\phi$ only through their sum, the problem can be written in terms of a single endogenous state variable $B = b + \phi$ (total real government liabilities), as described in Appendix C of {cite:t}`DovisAccountingMFrevised`.
 
-We define a **reduced continuation value** $W(B, s_1)$ that strips the current-period money utility $v(\phi)$ out of the recursive problem.  
+We define a **reduced continuation value** $W(B, s_1)$ that strips the current-period money utility $v(\phi)$ out of the recursive problem.
 
 The full value of entering a period with state $(b, \phi, s_1)$ is recovered as $v(\phi) + W(b + \phi, s_1)$ under monetary dominance, and the fiscal-dominance value is $V^{fd}(b', s_1') = \max_{\phi}\left[W(b' + \phi, s_1') + v(\phi)\right]$.
 
@@ -856,7 +859,7 @@ def create_model(
 
 The code below defines the Bellman operator `T(W, model)` from three building blocks.
 
-`fd_from_continuation` evaluates $W(b'+\phi, \xi') + v(\phi)$ for every $(b', \phi, \xi')$ triple, finds the $\phi$ that maximizes it (with quadratic refinement), and returns $V^{fd}$, $\phi^{fd}$, $H^{fd}$, and the full $V^{md}$ array.
+`fd_from_continuation` evaluates $W(b'+\phi, \xi') + v(\phi)$ for every $(b', \phi, \xi')$ triple, finds the $\phi$ that maximizes it (with quadratic refinement), and returns, in order, the full $V^{md}$ array, $V^{fd}$, $\phi^{fd}$, and $H^{fd}$.
 
 `compute_continuation` calls `fd_from_continuation`, then computes the logit probability $\bar\eta$, the expected continuation $\Omega$ (via log-sum-exp), and the money-demand term $J$ (via `jnp.einsum` against $P_\xi$).
 
@@ -928,7 +931,7 @@ def fd_from_continuation(W, B_grid, b_prime_grid, φ_grid, κ, η_m):
 
 
 def _continuation_on_grid(W, model, bp_grid, φ_grid, H_φ):
-    """Compute continuation objects on a  (b', φ') grid."""
+    """Compute continuation objects on a (b', φ') grid."""
     V_md, V_fd, φ_fd, H_fd = fd_from_continuation(
         W, model.B_grid, bp_grid, φ_grid,
         model.κ, model.η_m,
@@ -985,14 +988,23 @@ def T(W, model):
 
 ### Solving the model
 
-`solve_model` runs value function iteration using `lax.while_loop`, applying a **dampened** Bellman operator $W_{n+1} = \omega\, T(W_n) + (1 - \omega)\, W_n$ with $\omega = 0.01$, terminating when the sup-norm update error falls below `tol` or after `max_iter` iterations.
+`solve_model` runs value function iteration using `lax.while_loop`, applying a **dampened** Bellman operator $W_{n+1} = \omega\, T(W_n) + (1 - \omega)\, W_n$ with $\omega = 0.01$, terminating when the sup-norm Bellman residual $\|T(W_n) - W_n\|_\infty$ falls below `tol` or after `max_iter` iterations.
+
+The heavy damping is not a mere convenience.
+
+Although the continuation value is discounted by $\hat\beta$, the value function also feeds back *within* the period: $W$ determines $\phi^{fd}$ and $\bar\eta$, which determine the money-demand term $J$, which shifts the surplus $\Delta = B - \beta b' - J$ and hence current utility $U(\Delta)$.
+
+This undiscounted channel means that $T$ is not guaranteed to be a contraction, and undamped iteration ($\omega = 1$) fails to converge here; a small $\omega$ restores stability at the cost of many more iterations.
 
 `extract_policies` then re-evaluates the Bellman RHS on a choice grid that is 3$\times$ denser in both $b'$ and $\phi'$.
 
 ```{code-cell} ipython3
-def solve_model(model, tol=1e-4, max_iter=10_000, damp=0.01,
+def solve_model(model, tol=1e-2, max_iter=10_000, damp=0.01,
                 log_period=10, verbose=True):
     """Solve by dampened VFI: W_{n+1} = damp * T(W_n) + (1 - damp) * W_n.
+
+    Convergence is measured by the Bellman residual ||T(W) - W||_∞, which is
+    the quantity the verbose check below reports.
 
     Returns (W, error_log).
     """
@@ -1013,8 +1025,9 @@ def solve_model(model, tol=1e-4, max_iter=10_000, damp=0.01,
 
         def body(state):
             W, _, i, err_log = state
-            W_new = damp * T(W, model) + (1.0 - damp) * W
-            err = jnp.max(jnp.abs(W_new - W))
+            TW = T(W, model)
+            err = jnp.max(jnp.abs(TW - W))          # Bellman residual
+            W_new = damp * TW + (1.0 - damp) * W
             log_idx = i // log_period
             err_log = err_log.at[log_idx].set(err)
             return W_new, err, i + 1, err_log
@@ -1213,7 +1226,7 @@ iters = np.arange(len(err_log))[valid] * 10
 fig, ax = plt.subplots(figsize=(8, 4))
 ax.semilogy(iters, err_log[valid], lw=2)
 ax.set_xlabel('iteration')
-ax.set_ylabel('sup-norm error')
+ax.set_ylabel('sup-norm Bellman residual')
 plt.tight_layout()
 plt.show()
 ```
@@ -1320,7 +1333,6 @@ def simulate_fundamental_irf(
             "φ_prime",
             "Δ",
             "π",
-            "η",
             "η_prob",
             "regime",
             "debt_gdp",
@@ -1361,7 +1373,6 @@ def simulate_fundamental_irf(
     out["φ_prime"][:t_shock] = φ_promise0
     out["Δ"][:t_shock] = Δ_pre
     out["π"][:t_shock] = π_pre
-    out["η"][:t_shock] = η_pre
     out["η_prob"][:t_shock] = η_pre
     out["regime"][:t_shock] = 0.0
     out["debt_gdp"][:t_shock] = debt_pre
@@ -1405,7 +1416,6 @@ def simulate_fundamental_irf(
         out["φ_prime"][t] = φ_prime
         out["Δ"][t] = Δ_t
         out["π"][t] = π_t
-        out["η"][t] = η_prob
         out["η_prob"][t] = η_prob
         out["regime"][t] = 0.0
         out["debt_gdp"][t] = debt_gdp_t
@@ -1441,7 +1451,6 @@ def simulate_institutional_irf(
             "φ_prime",
             "Δ",
             "π",
-            "η",
             "η_prob",
             "regime",
             "debt_gdp",
@@ -1483,7 +1492,6 @@ def simulate_institutional_irf(
     out["φ_prime"][:t_shock] = φ_promise0
     out["Δ"][:t_shock] = Δ_pre
     out["π"][:t_shock] = π_pre
-    out["η"][:t_shock] = η_pre
     out["η_prob"][:t_shock] = η_pre
     out["regime"][:t_shock] = 0.0
     out["debt_gdp"][:t_shock] = debt_pre
@@ -1530,7 +1538,6 @@ def simulate_institutional_irf(
         out["φ_prime"][t] = φ_prime
         out["Δ"][t] = Δ_t
         out["π"][t] = π_t
-        out["η"][t] = η_t
         out["η_prob"][t] = η_t
         out["regime"][t] = regime_t
         out["debt_gdp"][t] = debt_gdp_t
@@ -1551,21 +1558,41 @@ Following the paper's terminology, a reduction in the marginal value of governme
 
 ### Fundamental disinflation ($\theta$ falls, $\xi$ fixed)
 
-Consider a path in which the realization of $\xi_t$ is low enough so that it is always optimal to be in the fiscal dominant regime.
+Consider a path in which the realization of $\xi_t$ is low enough so that it is always optimal to be in the fiscal-dominant regime.
 
 Along this path, the value of real money balances (and inflation) is determined by the static condition $-U'(\Delta, \theta) = v'(\phi^{fd})$ and is therefore closely tied to fiscal considerations, as in a Markov equilibrium.
 
 When $\theta$ falls from $\theta_H$ to $\theta_L$, the reduction in $\theta$ shifts the policy function $\phi^{fd}(b, \theta)$ upward: for any level of real debt, the government finds it optimal to choose a higher value for real balances, reflecting the lower marginal value of relaxing its budget constraint when government spending is less valuable.
 
-The optimal policy for debt issuance shifts downward because the government now has stronger precautionary saving motives and therefore chooses to reduce its debt issuance.
+The optimal policy for debt issuance, by contrast, shifts downward: in the paper's words, the government now has stronger precautionary saving motives and therefore chooses to reduce its debt issuance.
 
 As a result, a decline in $\theta$ while keeping $\xi$ at a low level leads to an increase in real money balances (lower inflation) and a decrease in real debt -- a **positive correlation** between inflation and debt.
+
+```{admonition} A caveat about the simplified model solved in this lecture
+:class: warning
+
+The first of these two comparative statics survives in the simplified model that we solve below, but the second does not.
+
+Lowering $\theta$ does shift $\phi^{fd}(b,\theta)$ upward at every level of debt, so **inflation falls**, exactly as in {cite:t}`DovisAccountingMFrevised`.
+
+But in our implementation the debt-issuance policy shifts *upward* rather than downward, so lower $\theta$ is associated with *higher* debt.
+
+The reason appears to be that our stripped-down version keeps $\theta$ **fixed** inside each model instance, whereas in the paper $\theta$ follows a persistent AR(1) process, and our coarse grids drive equilibrium debt close to the lower end of the debt grid -- roughly $15\%$ of GDP, against the $34.9\%$ that the paper's calibration targets.
+
+Near that boundary the debt-capacity wedge in the government's Euler equation -- the term $\partial J(b',\phi',s)/\partial b'/\beta < 0$ discussed above -- dominates the incentives that generate the paper's result.
+
+Consequently, the declining debt path in {numref}`fig-fundamental` below mostly reflects convergence from a deliberately high initial debt level, not the shift in the debt policy function that the paper describes.
+
+The **institutional** disinflation experiment is unaffected by this caveat: there, both the fall in inflation and the rise in debt emerge from the model as the paper describes.
+
+Readers who want to reproduce the paper's fundamental-disinflation comovement quantitatively should treat $\theta$ as a persistent state variable and enlarge the debt grid, as in Section 6.1 of the paper.
+```
 
 ### Institutional disinflation ($\xi$ rises, $\theta$ constant)
 
 Now consider the effects of an increase in the cost of deviating from the promised inflation target.
 
-When $\xi$ rises from $\xi_L$ to $\xi_H$ (high enough to make it optimal to switch to the monetary dominant regime), the realized $\phi$ now equals the promised value of real balances, which is higher than the statically optimal level $\phi^{fd}$.
+When $\xi$ rises from $\xi_L$ to $\xi_H$ (high enough to make it optimal to switch to the monetary-dominant regime), the realized $\phi$ now equals the promised value of real balances, which is higher than the statically optimal level $\phi^{fd}$.
 
 Critically, if the process for $\xi$ is persistent, an increase in current $\xi$ implies an increase in the expected value for $\xi'$, so the government now has lower incentives to reduce the amount of debt it issues because the wedge in the Euler equation is smaller in absolute value.
 
@@ -1706,7 +1733,11 @@ plt.show()
 
 **Fundamental disinflation** ({numref}`fig-fundamental`): a permanent drop in $\theta$ from $\theta_H$ to $\theta_L$ reduces fiscal pressure.
 
-Following the shock, both debt and inflation decline together -- the signature of fundamental disinflation.
+Following the shock, both debt and inflation decline together -- the comovement that {cite:t}`DovisAccountingMFrevised` associate with fundamental disinflation.
+
+As the caveat above warns, though, only the fall in inflation is driven by the shift in the policy function that the paper describes.
+
+The simulation starts from a level of debt well above the one that the pre-shock model would sustain on its own, so most of the decline in debt is convergence from that initial condition.
 
 ```{code-cell} ipython3
 ---
@@ -1751,23 +1782,28 @@ We mirror that approach here, but with simplified transition and observation equ
 
 ### Algorithm
 
-1. *Initialize*: Draw $N$ particles $\{S_0^{(i)}\}_{i=1}^N$ from the prior
-2. *For* $t = 1, \ldots, T$:
-   
-    *Propagate*: For each particle $i$, draw $\varepsilon_{t}^{(i)}$ and compute
-      $S_t^{(i)} = k(S_{t-1}^{(i)}, \varepsilon_t^{(i)})$
+1. *Initialize*: draw $N$ particles $\{S_0^{(i)}\}_{i=1}^N$ from the prior
 
-   *Weight*: Compute the likelihood of observed $y_t$ given $S_t^{(i)}$:
-      $w_t^{(i)} = p(y_t | S_t^{(i)}) \propto
-      \exp\!\left(-\frac{1}{2}(y_t - f(S_t^{(i)}))^\top \Sigma^{-1}
-      (y_t - f(S_t^{(i)}))\right)$
+2. For $t = 1, \ldots, T$:
 
-   *Normalize* weights: $\tilde w_t^{(i)} = w_t^{(i)} / \sum_j w_t^{(j)}$
+   - *Propagate*: for each particle $i$, draw $\varepsilon_{t}^{(i)}$ and compute
+     $S_t^{(i)} = k(S_{t-1}^{(i)}, \varepsilon_t^{(i)})$
 
-   *Resample*: Draw $N$ particles from $\{S_t^{(i)}\}$ with probabilities
-      $\{\tilde w_t^{(i)}\}$
+   - *Weight*: compute the likelihood of the observed $y_t$ given $S_t^{(i)}$,
+     $w_t^{(i)} = p(y_t | S_t^{(i)}) \propto
+     \exp\!\left(-\frac{1}{2}(y_t - f(S_t^{(i)}))^\top \Sigma^{-1}
+     (y_t - f(S_t^{(i)}))\right)$
 
-3. *Output*: The filtered state estimate is the weighted average of particles
+   - *Normalize* weights: $\tilde w_t^{(i)} = w_t^{(i)} / \sum_j w_t^{(j)}$
+
+   - *Record* the filtered estimate as the weighted average
+     $\sum_i \tilde w_t^{(i)} S_t^{(i)}$
+
+   - *Resample*: draw $N$ particles from $\{S_t^{(i)}\}$ with probabilities
+     $\{\tilde w_t^{(i)}\}$
+
+3. *Output*: the sequence of filtered state estimates, together with the
+   log-likelihood $\sum_t \log\big(N^{-1}\sum_i w_t^{(i)}\big)$
 
 The JAX implementation below vectorizes over particles with `vmap` and loops over time with `lax.scan`.
 
@@ -1785,20 +1821,18 @@ def particle_filter(y_data, key, N_particles,
 
     φ_star = κ / (2.0 * η_m)
 
-    # Particles: [b, φ, θ, ξ_1, φ_old]
+    # Particles: [b, φ, θ, ξ_1]
     key, *ks = jax.random.split(key, 5)
-    φ_init_particles = φ_init + 0.2 * jax.random.normal(ks[1], (N_particles,))
     particles = jnp.column_stack([
         b_init + 0.02 * jax.random.normal(ks[0], (N_particles,)),
-        φ_init_particles,
+        φ_init + 0.2 * jax.random.normal(ks[1], (N_particles,)),
         θ_bar + σ_θ * jax.random.normal(ks[2], (N_particles,)),
         jnp.clip(ξ_init + 0.1 * jax.random.normal(ks[3], (N_particles,)),
                  0.0, ξ_bar),
-        φ_init_particles
     ])
 
     def propagate_one(particle, pk):
-        b, φ, θ, ξ1, _ = particle
+        b, φ, θ, ξ1 = particle
         k1, k2, k3 = jax.random.split(pk, 3)
 
         θ_new = jnp.maximum(
@@ -1827,11 +1861,15 @@ def particle_filter(y_data, key, N_particles,
         b_target = η * b_md_ss + (1 - η) * b_fd_ss
         b_new = jnp.maximum(0.01, 0.90 * b + 0.10 * b_target)
 
-        return jnp.array([b_new, φ_new, θ_new, ξ_new, φ])
+        return jnp.array([b_new, φ_new, θ_new, ξ_new])
 
     def observe_one(particle):
-        """Map state to observables: π = β*H(φ)/φ - 1, debt/GDP."""
-        b, φ, θ, ξ1, φ_old = particle
+        """Map state to observables: π = β*H(φ)/φ - 1, debt/GDP.
+
+        Steady-state money demand μφ = βH(φ) is used, so the previous
+        period's φ is not needed to price inflation.
+        """
+        b, φ, θ, ξ1 = particle
         H_val = H_func(φ, κ, η_m)
         inflation = (β * H_val / jnp.maximum(φ, 1e-8) - 1.0) * 100.0
         debt_to_gdp = b * 100.0
@@ -1977,7 +2015,7 @@ In 1991 Colombia instituted a new constitution that granted substantial independ
 
 In 2001 Colombia adopted an explicit inflation targeting regime with a long-term inflation goal of 3%.
 
-Prior to the 1991 reform, the central bank lacked autonomy, often making monetary policy susceptible to government pressures, and as a result Colombia suffered from persistent high inflation despite the relatively low level of debt.
+Prior to the 1991 reform, the central bank lacked autonomy, often making monetary policy susceptible to government pressures, and as a result Colombia suffered from persistently high inflation despite its relatively low level of debt.
 
 The particle filter identifies an increase in the cost of deviating from the inflation target ($\xi$) starting in **1997**, not 1992 -- the first year after the reform.
 
@@ -1985,7 +2023,7 @@ One possible explanation is that it took several years before the public came to
 
 The model accounts for the reduction in inflation in the 1990s with an increase in the cost of deviating from the inflation target in 1997, resulting in a persistent shift to a monetary-dominant regime from 1997 onward.
 
-The observed increase in the debt-to-GDP ratio from 1994 to 2002 is driven by the switch to a monetary-dominant regime that allows for greater debt issuances and by higher-than-average realizations of $\theta_t$.
+The observed increase in the debt-to-GDP ratio from 1994 to 2002 is driven by the switch to a monetary-dominant regime that allows for greater debt issuance and by higher-than-average realizations of $\theta_t$.
 
 A counterfactual with $\xi_t = 0$ throughout shows that, without a credible constitutional reform, debt would have similarly increased driven by the high realizations of $\theta_t$, but inflation would have remained constant or even risen during the latter half of the decade.
 
@@ -1997,7 +2035,7 @@ Beginning in the late 1980s, Chile enacted a variety of fiscal and monetary refo
 
 It tightened public finances and, for roughly three decades, consistently posted budget surpluses.
 
-On the monetary front, a 1989 constitutional law granted the Central Bank of Chile full autonomy and the country moved to an explicit inflation regime targeting soon after.
+On the monetary front, a 1989 constitutional law granted the Central Bank of Chile full autonomy and the country moved to an explicit inflation-targeting regime soon after.
 
 In contrast to Colombia, both inflation and the debt-to-GDP ratio declined over this period.
 
@@ -2009,7 +2047,7 @@ Replicating this pattern requires credibility shocks -- an isolated increase in 
 
 The contrasting experiences of Colombia and Chile illuminate the two disinflation channels implied by the model: in Colombia the data can only be reconciled with a credibility gain (positive $\xi_t$ shocks), whereas in Chile the early-1990s disinflation could be matched either way, yet the continued decline in inflation once debt-to-GDP leveled off required additional credibility gains.
 
-## Key Mechanisms: A Summary
+## Key mechanisms: a summary
 
 The model revolves around three interconnected mechanisms.
 
@@ -2029,7 +2067,7 @@ These incentive effects create a *downward wedge* in debt issuance relative to t
 
 Both distortions vanish as $\xi \to \infty$ (Ramsey) and are maximal at $\xi = 0$ (Markov).
 
-The incentive to limit indebtedness becomes stronger as the probability of switching to the fiscal dominant regime increases.
+The incentive to limit indebtedness becomes stronger as the probability of switching to the fiscal-dominant regime increases.
 
 See {cite:t}`Ljungqvist2012`, chapter 23, for a broader discussion of the credibility problem.
 
@@ -2043,6 +2081,10 @@ This contrasting behavior allows the authors to use the dynamics of debt and inf
 |---|:---:|:---:|---|
 | Fundamental ($\theta \downarrow$) | $\downarrow$ | $\downarrow$ | Lower spending needs $\to$ less borrowing, less inflation |
 | Institutional ($\xi \uparrow$) | $\downarrow$ | $\uparrow$ | Credible mandate $\to$ lower inflation, relaxed incentive wedge $\to$ more borrowing |
+
+The table reports the comovements implied by {cite:t}`DovisAccountingMFrevised`.
+
+As noted when we simulated the two experiments, the simplified model solved in this lecture delivers the institutional row in full, but only the inflation column of the fundamental row.
 
 A key takeaway is that credible monetary institutions are a prerequisite for sustaining high public debt at low inflation.
 
