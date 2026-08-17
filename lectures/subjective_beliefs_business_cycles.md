@@ -146,10 +146,10 @@ one-year-ahead inflation forecast and the shares of households answering
 the monthly unemployment rate.
 
 ```{code-cell} ipython3
-data_path = '_static/lecture_specific/subjective_beliefs_business_cycles/'
-macro_q = pd.read_csv(data_path + 'bbh_macro_quarterly.csv',
+data_url = 'https://github.com/QuantEcon/data-lectures/raw/main/lectures/'
+macro_q = pd.read_csv(data_url + 'bbh_macro_quarterly.csv',
                       index_col='YYYYQ')
-mich_m = pd.read_csv(data_path + 'bbh_michigan_monthly.csv',
+mich_m = pd.read_csv(data_url + 'bbh_michigan_monthly.csv',
                      index_col='yyyymm')
 ```
 
