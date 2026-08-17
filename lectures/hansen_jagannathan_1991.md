@@ -179,11 +179,7 @@ interchangeably.
 
 import json, urllib.request
 
-DATA_URL = (
-    "https://raw.githubusercontent.com/QuantEcon/lecture-python-advanced.myst/"
-    "refs/heads/main/lectures/_static/lecture_specific/"
-    "hansen_jagannathan_1991/hansen_jagannathan_1991_data.json"
-)
+DATA_URL = "https://github.com/QuantEcon/data-lectures/raw/main/lectures/hansen_jagannathan_1991_data.json"
 
 
 def _load_bundle(url):
