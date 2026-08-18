@@ -54,6 +54,7 @@ We begin with some that we'll use to create some graphs.
 
 ```{code-cell} ipython3
 # Package imports
+import shutil
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -67,7 +68,10 @@ from numba import njit
 ```{code-cell} ipython3
 :tags: [hide-input]
 
-plt.rc('text', usetex=True)
+# Render text with LaTeX only where a latex binary exists (the build has
+# texlive); on latex-less runtimes such as Colab, fall back to mathtext
+# instead of raising at the first rendered figure.
+plt.rc('text', usetex=bool(shutil.which('latex')))
 plt.rc('font', size=18)
 plt.rc('axes', labelsize=20, titlesize=24)
 plt.rc('xtick', labelsize=18)
