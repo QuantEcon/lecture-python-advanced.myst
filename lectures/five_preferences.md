@@ -59,7 +59,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib import rc
 from scipy import optimize, stats
-from scipy.io import loadmat
+import pandas as pd
 from matplotlib.collections import LineCollection
 from numba import njit
 ```
@@ -1845,7 +1845,7 @@ aversion associated with a logarithmic one-period utility function.
 :tags: [hide-input]
 
 # Load data
-data = loadmat('dataBHS.mat')
+data = pd.read_csv('https://github.com/QuantEcon/data-lectures/raw/main/lectures/dataBHS.csv')
 
 # Set parameter values
 μ_c = 0.004952
@@ -1857,7 +1857,7 @@ data = loadmat('dataBHS.mat')
 :tags: [hide-input]
 
 # Compute consumption growth
-c = data['c']
+c = data[['c']].to_numpy()   # keep the (236, 1) column shape of the source arrays
 c_growth = c[1:] - c[:-1]
 
 # Create histogram of consumption growth
