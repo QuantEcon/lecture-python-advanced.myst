@@ -2231,8 +2231,8 @@ Then we sort  occupations by average log-earnings within each occupation.
 The resulting dataset is included in the dataset `acs_data_summary.csv`
 
 ```{code-cell} ipython3
-data_path = '_static/lecture_specific/match_transport/'
-occupation_df = pd.read_csv(data_path + 'acs_data_summary.csv')
+data_url = 'https://github.com/QuantEcon/data-lectures/raw/main/lectures/'
+occupation_df = pd.read_csv(data_url + 'acs_data_summary.csv')
 ```
 
 +++ {"user_expressions": []}
