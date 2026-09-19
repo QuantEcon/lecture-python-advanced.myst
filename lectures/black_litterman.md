@@ -496,7 +496,7 @@ Notice that for particular $\bar d_1$ and $\bar d_2$ values the two ellipses hav
 
 These tangency points, indexed by the pairs $(\bar d_1, \bar d_2)$, characterize points $\vec r_e$ from which there exists no deviation where one can increase the likelihood of one view without decreasing the likelihood of the other view.
 
-The pairs $(\bar d_1, \bar d_2)$ for which there is such a point outlines a curve in the excess return space.
+The pairs $(\bar d_1, \bar d_2)$ for which there is such a point outline a curve in the excess return space.
 
 This curve is reminiscent of the Pareto curve in an Edgeworth-box setting.
 
