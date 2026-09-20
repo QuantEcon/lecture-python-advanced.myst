@@ -250,13 +250,13 @@ Following the Black-Litterman philosophy, our first step will be to back out a v
 - our maximum likelihood estimate of $\sigma$ drawn from our
   estimates of $w_m$ and $\Sigma$
 
-The second key Black-Litterman step is then to use this value of $\delta$ together with the maximum likelihood estimate of $\Sigma$ to deduce a $\mu_{\bf BL}$ that verifies portfolio rule {eq}`risky-portfolio` at the market portfolio $w = w_m$
+The second key Black-Litterman step is then to use this value of $\delta_m$ together with the maximum likelihood estimate of $\Sigma$ to deduce a $\mu_{BL}$ that verifies portfolio rule {eq}`risky-portfolio` at the market portfolio $w = w_m$
 
 $$
-\mu_m = \delta_m \Sigma w_m
+\mu_{BL} = \delta_m \Sigma w_m
 $$
 
-The starting point of the Black-Litterman portfolio choice model is thus a pair $(\delta_m, \mu_m)$ that tells the customer to hold the market portfolio.
+The starting point of the Black-Litterman portfolio choice model is thus a pair $(\delta_m, \mu_{BL})$ that tells the customer to hold the market portfolio.
 
 ```{code-cell} ipython3
 # Observed mean excess market return
@@ -325,7 +325,7 @@ $$
 \tilde w = (\delta \Sigma)^{-1} \tilde \mu
 $$
 
-This portfolio $\tilde w$ will deviate from the portfolio $w_{BL}$ in amounts that depend on the mixing parameter $\tau$.
+This portfolio $\tilde w$ will deviate from the market portfolio $w_m$ in amounts that depend on the mixing parameter $\tau$.
 
 If $\hat \mu$ is the maximum likelihood estimator and $\tau$ is chosen heavily to weight this view, then the customer's portfolio will involve big short-long positions.
 
@@ -1498,7 +1498,7 @@ The Black-Litterman adjustment changes the *direction* of the portfolio, while t
 
 **Means versus variances: a closed form for $B(h)$ and a fixed-span experiment.**
 
-1. For the discretely sampled Ornstein-Uhlenbeck process in the appendix, let $\rho = \exp(-\kappa h)$ and $\gamma(0) = \sigma^2/(2\kappa)$. Starting from $N\,\mathbb V(\bar X_N) \to \gamma(0)\frac{1+\rho}{1-\rho}$ and Bartlett's formula $N\,\mathbb V(S_N) \to 2 \sum_{k=-\infty}^{\infty} \gamma(k)^2 = 2\gamma(0)^2 \frac{1+\rho^2}{1-\rho^2}$, verify the closed form {eq}`B-closed-form` for the asymptotic relative MSE $B(h)$. Plot it against the simulated `rate_h` from the lecture. Where does the simulation depart from the formula, and why?
+1. For the discretely sampled Ornstein-Uhlenbeck process in the appendix, let $\rho = \exp(-\kappa h)$ and $\gamma(0) = \sigma^2/(2\kappa)$. Starting from $N\,\mathbb V(\bar X_N) \to \gamma(0)\frac{1+\rho}{1-\rho}$ and Bartlett's formula $N\,\mathbb V(S_N) \to 2 \sum_{k=-\infty}^{\infty} \gamma_h(k)^2 = 2\gamma(0)^2 \frac{1+\rho^2}{1-\rho^2}$, verify the closed form {eq}`B-closed-form` for the asymptotic relative MSE $B(h)$. Plot it against the simulated `rate_h` from the lecture. Where does the simulation depart from the formula, and why?
 1. The appendix holds the number of observations $N$ fixed as $h$ changes, so a higher frequency also means a shorter calendar span. Instead, hold the span fixed at $20$ years. Let log prices follow a Brownian motion with drift $m = 0.06$ and volatility $s = 0.2$, so that returns over an interval $h$ are i.i.d. $\mathcal N(m h, s^2 h)$. For annual, monthly, weekly and daily sampling, compute by simulation the relative RMSEs of the annualized drift estimator $\hat m = \sum_i r_i / 20$ and of the annualized variance estimator $\hat\sigma^2 = \sum_i (r_i - \bar r)^2/((n-1)h)$.
 ```
 

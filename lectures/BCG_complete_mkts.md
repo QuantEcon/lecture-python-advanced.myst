@@ -298,7 +298,7 @@ $$
 K = \int_0^1 k(\zeta) d \, \zeta
 $$
 
-The assumption that there are continua of our three types of agents plays an important role making each individual agent into a powerless **price taker**:
+The assumption that there are continua of our three types of agents plays an important role in making each individual agent into a powerless **price taker**:
 
 - an individual consumer chooses its own (infinitesimal) part
   $c^i(\omega)$ of $C^i$ taking prices as given
@@ -353,7 +353,7 @@ Later, we’ll allow the firm to issue bonds too, but not now.
 
 Let
 
-- $a^i(\epsilon)$ be consumer $i$ ’s purchases of claims
+- $a^i(\epsilon)$ be consumer $i$’s purchases of claims
   on time $1$ consumption in state $\epsilon$
 - $q(\epsilon)$ be a pricing kernel for one-period Arrow
   securities
@@ -519,7 +519,7 @@ the consumer could afford an arbitrarily high present value of consumption by se
 
 Since resources are finite, there can exist no such arbitrage opportunity in a competitive equilibrium.
 
-Therefore, it must be true that the following no arbitrage condition prevails:
+Therefore, it must be true that the following no-arbitrage condition prevails:
 
 ```{math}
 :label: tildeV20
@@ -575,7 +575,7 @@ $$
 
 because by setting $k=K$ equation {eq}`kK` becomes equivalent with the planner’s first-order condition {eq}`focke` for setting $K$.
 
-To pose a consumer’s problem in a competitive equilibrium, we require not only the above guess for the Arrow securities pricing kernel $q(\epsilon)$ but the value of equity $\tilde V$:
+To pose a consumer’s problem in a competitive equilibrium, we require not only the above guess for the Arrow securities pricing kernel $q(\epsilon)$ but also the value of equity $\tilde V$:
 
 ```{math}
 :label: tildeV2
@@ -1091,7 +1091,7 @@ This exercise verifies the Modigliani-Miller theorem numerically at the equilibr
 
 Note that the method `q(𝜖, k)` of `BCG_complete_markets` returns $\beta u'(C_1(\epsilon))/u'(C_0)$, so the Arrow price density that appears in the formulas for $\tilde V$ and $p(k,b)$ is `q(𝜖, K) * g(𝜖)`.
 
-1. Using the default parameters, compute $K$ and, for $b \in \{0.01, 0.2, 0.5, 0.8, 1.2, 2.0\}$, compute the default threshold $\epsilon^*$, the value of equity $\tilde V$, the bond price $p(K,b)$, the value of debt $p(K,b) b$, and the value of the firm $\tilde V + p(K,b) b$.
+1. Using the default parameters, compute $K$ and, for $b \in \{0.01, 0.2, 0.5, 0.8, 1.2, 2.0\}$, compute the default threshold $\epsilon^*$, the value of equity $\tilde V$, the bond price $p(K,b)$, the value of debt $p(K,b) b$, and the market value of the firm's securities $\tilde V + p(K,b) b$.
 
 2. Holding Arrow prices fixed at $q(\epsilon;K)$, let a firm that has promised to issue $b$ bonds choose $k$ to maximize $-k + \tilde V(k,b) + p(k,b) b$. Show that its optimal $k$ does not depend on $b$.
 
@@ -1147,7 +1147,7 @@ Several things stand out.
 
 As $b$ rises from $0.01$ to $2$, the default threshold $\epsilon^*$ rises from about $-4.35$ to about $0.95$, so default goes from essentially impossible to more likely than not.
 
-The value of equity falls from $0.2335$ to almost zero and the bond price falls from $0.3771$ to $0.1186$, but the value of the firm $\tilde V + p b$ equals $0.237247$ for every $b$.
+The value of equity falls from $0.2335$ to almost zero and the bond price falls from $0.3771$ to $0.1186$, but the market value of the firm's securities $\tilde V + p b$ equals $0.237247$ for every $b$.
 
 That number equals $K + V$ from the lecture's `V` method: $0.14235 + 0.09490$.
 

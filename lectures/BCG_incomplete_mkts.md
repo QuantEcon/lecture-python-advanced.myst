@@ -655,7 +655,6 @@ class BCG_incomplete_markets:
                  Vl = 0,
                  Vh = 0.5,
                  kbot = 0.01,
-                 #ktop = (𝛼*A)**(1/(1-𝛼)),
                  ktop = 0.25,
                  bbot = 0.1,
                  btop = 0.8):
@@ -679,7 +678,6 @@ class BCG_incomplete_markets:
         self.Vl = Vl
         self.Vh = Vh
         self.kbot = kbot
-        #self.kbot = (𝛼*A)**(1/(1-𝛼))
         self.ktop = ktop
         self.bbot = bbot
         self.btop = btop
@@ -1110,6 +1108,8 @@ kss,bss,Vss,qss,pss,c10ss,c11ss,c20ss,c21ss,𝜃1ss = mdl.solve_eq(print_crit=Fa
 ```{code-cell} ipython3
 print(-kss+qss+pss*bss)
 print(Vss)
+print(kss)
+print(bss)
 print(𝜃1ss)
 ```
 
@@ -1413,8 +1413,6 @@ def off_eq_check(mdl,kss,bss,e=0.1):
                     𝜃1a = 𝜃1
                 else:
                     𝜃1b = 𝜃1
-
-                #print(p,q,𝜉1,𝜃1)
 
             if pp1 > pp2:
                 𝜉1a = 𝜉1
@@ -1792,7 +1790,7 @@ Then check whether the computed equilibria stay within the "special case" assume
 :class: dropdown
 ```
 
-The method `solve_eq` prints progress reports, so we wrap it in a helper that suppresses them.
+The method `solve_eq` prints `finished` when it is done, so we wrap it in a helper that suppresses that message but passes on any warning.
 
 ```{code-cell} ipython3
 import io
@@ -1800,10 +1798,14 @@ import contextlib
 from scipy.stats import norm
 
 def solve_quietly(**kwargs):
-    "Solve for an equilibrium without printing progress reports."
+    "Solve for an equilibrium, suppressing the 'finished' message but not warnings."
     model = BCG_incomplete_markets(ktop=0.5, btop=2.5, **kwargs)
-    with contextlib.redirect_stdout(io.StringIO()):
+    buffer = io.StringIO()
+    with contextlib.redirect_stdout(buffer):
         results = model.solve_eq(print_crit=False)
+    for line in buffer.getvalue().splitlines():
+        if line.startswith('Warning'):
+            print(line)
     return model, results
 
 def summarize(model, results):
@@ -1959,8 +1961,7 @@ The lecture's loop over initial endowments overwrote the baseline model, so we s
 from scipy.integrate import quad
 
 mdl = BCG_incomplete_markets()
-with contextlib.redirect_stdout(io.StringIO()):
-    kss, bss, Vss, qss, pss, c10ss, c11ss, c20ss, c21ss, 𝜃1ss = mdl.solve_eq(print_crit=False)
+kss, bss, Vss, qss, pss, c10ss, c11ss, c20ss, c21ss, 𝜃1ss = mdl.solve_eq(print_crit=False)
 
 b_grid = np.linspace(0.1, 0.8, 71)
 Q1, Q2, P1, P2 = np.array([mdl.valuations_by_agent(c10ss, c11ss, c20ss, c21ss, kss, b)
