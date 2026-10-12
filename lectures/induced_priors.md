@@ -48,9 +48,9 @@ In this lecture, we shall
   covariance matrix of its innovations and its impulse responses under two standard recursive
   (Cholesky) orthogonalizations, one that puts $q_t$ first and one that puts $p_t$ first,
 * compare the induced priors over the VAR impulse responses with those over the structural impulse
-  responses, and
+  responses,
 * use the induced prior to construct **sign restrictions motivated by economic theory** in the spirit
-  of Harald Uhlig {cite}`Uhlig2005,Uhlig2017`, and then ask what those sign restrictions can and cannot
+  of {cite:t}`Uhlig2005,Uhlig2017`, and then ask what those sign restrictions can and cannot
   recover from a VAR, and
 * widen the prior, and then change its shape from uniform to log-uniform, to see how the induced
   priors, the region in which the supply shock is fundamental, and the performance of sign restrictions
@@ -78,15 +78,14 @@ We'll make these imports:
 import numpy as np
 import quantecon as qe
 import matplotlib.pyplot as plt
-from quantecon import LQ
 from scipy.linalg import solve_discrete_lyapunov
 ```
 
 ## Background: sign restrictions
 
-Uhlig {cite}`Uhlig2005` proposed an "agnostic" way to identify shocks in a vector autoregression.
+{cite:t}`Uhlig2005` proposed an "agnostic" way to identify shocks in a vector autoregression.
 
-Let $u_t$ be the one-step-ahead prediction error of a VAR, with covariance matrix $V = E u_t u_t^\top$.
+Let $u_t$ be the one-step-ahead prediction error of a VAR, with covariance matrix $V = \mathbb{E}[u_t u_t^\top]$.
 
 A researcher wants to write $u_t = A \epsilon_t$, where $\epsilon_t$ is a vector of mutually
 uncorrelated, unit-variance **structural** shocks, so that $V = A A^\top$.
@@ -111,7 +110,7 @@ $R$ that satisfies the restrictions as admissible.
 Drawing $r$ uniformly from the unit sphere (the **Haar** measure) and discarding draws that violate the
 restrictions gives a sample from a prior that is flat on the admissible set.
 
-In {cite}`Uhlig2017` he illustrates the logic with a static supply-and-demand example in which
+{cite:t}`Uhlig2017` illustrates the logic with a static supply-and-demand example in which
 "supply slopes up, demand slopes down" delivers the sign pattern
 
 $$
@@ -227,14 +226,20 @@ def solve_equilibrium(h_s, h_d, g_s, g_d, β, a, B_s, B_d):
     A = np.zeros((n, n))
     A[1:n_q, 0:n_q - 1] = np.eye(n_q - 1)              # q lags shift
     A[n_q:, n_q:] = A_w
-    B = np.zeros((n, 1)); B[0, 0] = 1.0                # new q_{t-1} = q_t
-    C = np.zeros((n, 2)); C[n_q:, :] = C_w
+    B = np.zeros((n, 1))
+    B[0, 0] = 1.0                                      # new q_{t-1} = q_t
+    C = np.zeros((n, 2))
+    C[n_q:, :] = C_w
 
     def q_lag(k):                                      # selector for q_{t-k}
-        e = np.zeros(n); e[k - 1] = 1.0; return e
+        e = np.zeros(n)
+        e[k - 1] = 1.0
+        return e
 
-    s_sel = np.zeros(n); s_sel[n_q:n_q + 4] = B_s      # s_t = s_sel @ x
-    d_sel = np.zeros(n); d_sel[n_q + 4:] = B_d
+    s_sel = np.zeros(n)
+    s_sel[n_q:n_q + 4] = B_s                           # s_t = s_sel @ x
+    d_sel = np.zeros(n)
+    d_sel[n_q + 4:] = B_d
     q1 = q_lag(1)
     a_vec = sum(a[k] * q_lag(k) for k in range(1, 5))  # lagged part of a(L)q_t
 
@@ -245,7 +250,7 @@ def solve_equilibrium(h_s, h_d, g_s, g_d, β, a, B_s, B_d):
     N = (g_d * a[0] * a_vec / 2 - g_s * q1 / 2
          + (s_sel + d_sel) / 2).reshape(1, n)
 
-    lq = LQ(Q, R, A, B, C, N=N, beta=β)
+    lq = qe.LQ(Q, R, A, B, C, N=N, beta=β)
     P, F, _ = lq.stationary_values()
     F = np.asarray(F).reshape(1, n)
     A_F = A - B @ F
@@ -295,15 +300,15 @@ Monte Carlo is the natural tool:
 2. compute $f(\theta_i)$,
 3. treat $\{f(\theta_i)\}_{i=1}^N$ as a sample from the induced prior.
 
-Geweke {cite}`Geweke2010` calls this **prior predictive analysis**.
+{cite:t}`Geweke2010` calls this **prior predictive analysis**.
 
-Leeper, Traum, and Walker {cite}`LeeperTraumWalker2017` use it to compute the range of
+{cite:t}`LeeperTraumWalker2017` use it to compute the range of
 government-spending multipliers --- ratios of discounted impulse responses --- that alternative DSGE
 specifications can produce before they confront data.
 
 For impulse response functions we summarize the sample by pointwise quantiles, horizon by horizon.
 
-As Uhlig {cite}`Uhlig2017` (his Principle 17) reminds us, a band built this way describes a
+As {cite:t}`Uhlig2017` reminds us (his Principle 17), a band built this way describes a
 collection of *marginal* distributions, one for each horizon; the curve that joins the pointwise
 medians is generally not the impulse response for any single draw $\theta_i$.
 
@@ -311,9 +316,9 @@ For each draw we compute four objects.
 
 * **Structural impulse responses** $D_j = G_z A_F^{\,j} \tilde C$, where $\tilde C = -C\,
   \mathrm{diag}(\sigma_s, \sigma_d)$ loads the sign-flipped, unit-standard-deviation shocks.
-* **Autocovariances** $\Gamma_j = E\, z_{t+j} z_t^\top = G_z A_F^{\,j} \Sigma_X G_z^\top$, where
+* **Autocovariances** $\Gamma_j = \mathbb{E}[z_{t+j} z_t^\top] = G_z A_F^{\,j} \Sigma_X G_z^\top$, where
   $\Sigma_X = A_F \Sigma_X A_F^\top + \tilde C \tilde C^\top$ is the stationary covariance of the state.
-* **The innovation covariance** $V = E\, a_t a_t^\top$ of the population VAR for $z_t$.
+* **The innovation covariance** $V = \mathbb{E}[a_t a_t^\top]$ of the population VAR for $z_t$.
 * **The Wold moving-average coefficients** $C_j$ of the population VAR, with $C_0 = I$.
 
 As in {doc}`supply_demand_var`, the last two come from the stationary Kalman filter, whose innovations
@@ -386,6 +391,7 @@ def fan(ax, paths, color, label, x=None, alpha=0.25):
 
 var_names = ["quantity $q$", "price $p$"]
 shock_names = ["supply shock $\\tilde w_s$", "demand shock $\\tilde w_d$"]
+var_short = ["q", "p"]
 ```
 
 ## Object 1: structural impulse responses
@@ -396,12 +402,18 @@ shocks.
 The dashed black lines are the responses at the true parameter values.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Induced prior over structural impulse responses
+    name: fig-ip-structural-irfs
+---
 fig, axes = plt.subplots(2, 2, figsize=(12, 7))
 for i in range(2):
     for k in range(2):
         ax = axes[i, k]
         fan(ax, D_draws[:, :, i, k], 'C0', 'induced prior: median, 5-95%')
-        ax.plot(truth['D'][:, i, k], 'k--', lw=1.5, label='true parameters')
+        ax.plot(truth['D'][:, i, k], 'k--', lw=2, label='true parameters')
         ax.axhline(0, color='k', lw=0.5)
         ax.set_title(f"response of {var_names[i]} to {shock_names[k]}")
         ax.set_xlabel("periods")
@@ -425,6 +437,12 @@ A uniform prior over a parameter generally induces a *non-uniform* prior over th
 The histograms below show the induced priors over the four impact responses.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Induced prior over impact responses
+    name: fig-ip-impact-hist
+---
 fig, axes = plt.subplots(2, 2, figsize=(12, 6))
 for i in range(2):
     for k in range(2):
@@ -444,7 +462,7 @@ The correlations of the impact responses with the parameter draws tell us.
 for i in range(2):
     for k in range(2):
         x = D_draws[:, 0, i, k]
-        print(f"impact of {shock_names[k][:6]} on {var_names[i][:5]:6s}: "
+        print(f"impact of {shock_names[k][:6]} on {var_short[i]}: "
               f"corr with g_s = {np.corrcoef(g_s_draws, x)[0, 1]:6.3f}, "
               f"corr with g_d = {np.corrcoef(g_d_draws, x)[0, 1]:6.3f}")
 ```
@@ -495,7 +513,7 @@ print("prior probability that the horizon-1 supply responses are positive:")
 print(f"  q: {prob_pos[1, 0, 0]:.3f},   p: {prob_pos[1, 1, 0]:.3f}")
 ```
 
-Leeper, Traum, and Walker {cite}`LeeperTraumWalker2017` report tables of exactly this kind --- for
+{cite:t}`LeeperTraumWalker2017` report tables of exactly this kind --- for
 example, the prior probability that a consumption multiplier is positive, horizon by horizon and model by
 model.
 
@@ -518,6 +536,12 @@ We plot autocorrelations of $q$ and $p$ and the cross-correlation $\mathrm{corr}
 $\Gamma_{-j} = \Gamma_j^\top$ for negative $j$.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Induced prior over correlations
+    name: fig-ip-autocorr
+---
 sd = np.sqrt(np.stack([Γ_draws[:, 0, 0, 0], Γ_draws[:, 0, 1, 1]], axis=1))  # (N, 2)
 ρ_q = Γ_draws[:, :, 0, 0] / sd[:, [0]]**2
 ρ_p = Γ_draws[:, :, 1, 1] / sd[:, [1]]**2
@@ -550,7 +574,7 @@ Quantity and price are strongly positively correlated contemporaneously, and pri
 By Wold's theorem, $z_t$ has a vector autoregression
 
 $$
-z_t = \sum_{j=1}^{\infty} A_j z_{t-j} + a_t, \qquad E a_t a_t^\top = V,
+z_t = \sum_{j=1}^{\infty} A_j z_{t-j} + a_t, \qquad \mathbb{E}[a_t a_t^\top] = V,
 $$
 
 with moving-average representation $z_t = \sum_{j \ge 0} C_j a_{t-j}$, $C_0 = I$.
@@ -558,19 +582,24 @@ with moving-average representation $z_t = \sum_{j \ge 0} C_j a_{t-j}$, $C_0 = I$
 The VAR coefficients $A_j$, the innovation covariance $V$, and the Wold coefficients $C_j$ are all
 functions of the autocovariance function alone.
 
-So the prior over $(g_s, g_d)$ also induces a prior over the reduced-form VAR, an idea that Del Negro
-and Schorfheide {cite}`DelNegroSchorfheide2004` used to construct priors for VARs from equilibrium
+So the prior over $(g_s, g_d)$ also induces a prior over the reduced-form VAR, an idea that
+{cite:t}`DelNegroSchorfheide2004` used to construct priors for VARs from equilibrium
 models.
 
 The VAR has infinitely many lags, but its coefficients decay quickly.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Size of the VAR coefficients
+    name: fig-ip-var-size
+---
 size = np.abs(A_var_draws).max(axis=(2, 3))   # largest |entry| of A_j, lag by lag
-fig, ax = plt.subplots(figsize=(7, 4))
+fig, ax = plt.subplots()
 fan(ax, np.log10(size), 'C0', 'induced prior', x=np.arange(1, T + 1))
 ax.set_xlabel("lag $j$")
 ax.set_ylabel("$\\log_{10} \\max |A_j|$")
-ax.set_title("size of the VAR coefficients")
 plt.tight_layout()
 plt.show()
 ```
@@ -581,6 +610,12 @@ Next we look at the induced prior over the three distinct elements of $V$, expre
 deviations and a correlation.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Induced prior over innovation moments
+    name: fig-ip-innov
+---
 sd_a = np.sqrt(np.stack([V_draws[:, 0, 0], V_draws[:, 1, 1]], axis=1))
 corr_a = V_draws[:, 0, 1] / (sd_a[:, 0] * sd_a[:, 1])
 V_true = truth['V']
@@ -611,7 +646,7 @@ print(f"range of corr(a_q, a_p) over the prior draws: "
 Demand shocks have a much larger variance than supply shocks and move $q$ and $p$ in the same
 direction, so they dominate the one-step-ahead prediction errors.
 
-Uhlig {cite}`Uhlig2017` shows that in a static market a nearly perfect positive price–quantity
+{cite:t}`Uhlig2017` shows that in a static market a nearly perfect positive price–quantity
 correlation is the case in which sign restrictions are most informative; we'll return to that point
 below.
 
@@ -712,12 +747,24 @@ def compare_plot(first):
 First the ordering that puts $q_t$ first.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Cholesky ($q$ first) versus structural responses
+    name: fig-ip-chol-q
+---
 compare_plot('q')
 ```
 
 Then the ordering that puts $p_t$ first.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Cholesky ($p$ first) versus structural responses
+    name: fig-ip-chol-p
+---
 compare_plot('p')
 ```
 
@@ -769,6 +816,12 @@ So we can ask, draw by draw, whether the structural impact vectors --- the colum
 --- are admissible impulse vectors.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Induced prior over $\|L^{-1} d\|$
+    name: fig-ip-impulse-norms
+---
 L_q_draws = np.linalg.cholesky(V_draws)
 norms = np.linalg.norm(np.linalg.solve(L_q_draws, D_draws[:, 0]), axis=1)  # (N, 2)
 
@@ -787,7 +840,7 @@ for k in range(2):
 For the demand shock the norm is one, up to the accuracy of our computations: the demand shock is
 (almost) fundamental for $(q_t, p_t)$, and a suitable rotation of the VAR innovations recovers it.
 
-For the supply shock the norm is about $0.83$ throughout the support of the prior.
+For the supply shock the norm lies between $0.80$ and $0.87$ throughout the support of the prior.
 
 No rotation of the VAR innovations can deliver the structural supply impact vector, because that vector
 is "too short".
@@ -864,10 +917,16 @@ That is good news, not bad: as Uhlig's Principle 7 puts it, when a lot of draws 
 identification is sharp.
 
 We plot the identified sets as the range between the smallest and largest response at each horizon, as in
-Figure 2 of {cite}`Uhlig2005`, and compare them with the true structural responses and the $p$-first
+Figure 2 of {cite:t}`Uhlig2005`, and compare them with the true structural responses and the $p$-first
 Cholesky responses.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Sign-identified sets at the true parameters
+    name: fig-ip-sign-sets
+---
 fig, axes = plt.subplots(2, 2, figsize=(12, 7))
 p_first_pair = {0: 1, 1: 0}   # structural shock -> p-first Cholesky column
 for k in range(2):
@@ -878,7 +937,7 @@ for k in range(2):
             ax.fill_between(range(T), s.min(0), s.max(0), color=color,
                             alpha=0.3, lw=0, label=f"sign-identified set, K = {K}")
         ax.plot(truth['D'][:, i, k], 'k--', lw=2, label='true structural response')
-        ax.plot(chol_true['p'][:, i, p_first_pair[k]], 'C2', lw=1.5,
+        ax.plot(chol_true['p'][:, i, p_first_pair[k]], 'C2', lw=2,
                 label='p-first Cholesky')
         ax.axhline(0, color='k', lw=0.5)
         ax.set_title(f"response of {var_names[i]} to {shock_names[k]}")
@@ -911,8 +970,8 @@ impact response of price only weakly, with a response of exactly zero.
 
 ```{code-cell} python3
 s5 = sets[K_max][:, :, :, 0]
-inside = (s5.min(0) <= truth['D'][:, :, 0] + 1e-12) & \
-         (truth['D'][:, :, 0] <= s5.max(0) + 1e-12)
+inside = ((s5.min(0) <= truth['D'][:, :, 0] + 1e-12)
+          & (truth['D'][:, :, 0] <= s5.max(0) + 1e-12))
 print("is the true supply response inside the K = 5 set?")
 print("horizon:  ", np.arange(8))
 print("quantity: ", inside[:8, 0])
@@ -933,7 +992,7 @@ Sign restrictions are a way to deal with an identification problem *within* the 
 VAR innovations; they offer no protection against the possibility that the shocks of interest are not
 rotations of the VAR innovations at all.
 
-Uhlig {cite}`Uhlig2017` explicitly sets aside "the thorny issue of fundamentalness"; our market shows
+{cite:t}`Uhlig2017` explicitly sets aside "the thorny issue of fundamentalness"; our market shows
 why it deserves attention.
 
 ### Robustness across the prior
@@ -994,6 +1053,12 @@ for name in ['wider', 'widest']:
 The figure overlays the three induced priors over the structural impulse responses.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Induced priors under wider priors
+    name: fig-ip-wide-irfs
+---
 colors = {'baseline': 'C0', 'wider': 'C1', 'widest': 'C3'}
 
 fig, axes = plt.subplots(2, 2, figsize=(12, 7))
@@ -1034,6 +1099,12 @@ To see how the parameters map into responses, we plot the impact responses for e
 widest prior, coloring each point by its value of $g_s$.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Impact responses under the widest prior
+    name: fig-ip-wide-scatter
+---
 D_w, gs_w, gd_w = wide['widest']['D'], wide['widest']['g_s'], wide['widest']['g_d']
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
@@ -1058,15 +1129,20 @@ The same draws let us map where the supply shock can be recovered from a VAR.
 We plot $\|L^{-1} d_s\|$ against $g_s$ and color each point by $g_d$.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Where the supply shock is fundamental
+    name: fig-ip-fundamental
+---
 V_w = wide['widest']['V']
 norms_w = np.linalg.norm(np.linalg.solve(np.linalg.cholesky(V_w), D_w[:, 0]), axis=1)
 
-fig, ax = plt.subplots(figsize=(9, 4.5))
+fig, ax = plt.subplots()
 sc = ax.scatter(gs_w, norms_w[:, 0], c=gd_w, s=6, cmap='viridis')
 ax.axhline(1, color='k', lw=0.5)
 ax.set_xlabel("$g_s$")
 ax.set_ylabel("$\\|L^{-1} d_s\\|$")
-ax.set_title("can a rotation of the VAR innovations deliver the supply impact vector?")
 fig.colorbar(sc, ax=ax, label="$g_d$")
 plt.tight_layout()
 plt.show()
@@ -1112,6 +1188,12 @@ VAR, impose the table above for $K = 5$, and record one of three outcomes:
 * no rotation satisfies the restrictions at all.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Sign-restriction outcomes, uniform prior
+    name: fig-ip-outcomes-uniform
+---
 def classify(C, V, D, table, K=K_max):
     """
     For each economy: 0 if no rotation is admissible, 1 if the identified set
@@ -1131,22 +1213,22 @@ outcome_labels = ["no admissible rotation", "set misses the truth",
                   "set contains the truth"]
 outcome_colors = ['C7', 'C3', 'C2']
 
-def outcome_map(ax, g_s, g_d, outcome, title):
+def outcome_map(ax, g_s, g_d, outcome, title=None):
     for code in range(3):
         m = outcome == code
         ax.scatter(g_s[m], g_d[m], s=8, color=outcome_colors[code],
                    label=f"{outcome_labels[code]} ({m.mean():.0%})")
     ax.set_xlabel("$g_s$")
     ax.set_ylabel("$g_d$")
-    ax.set_title(title)
+    if title is not None:
+        ax.set_title(title)
     ax.legend(loc='upper right', fontsize=9)
 
 C_w = wide['widest']['C']
 outcome = classify(C_w, V_w, D_w, table_w)
 
-fig, ax = plt.subplots(figsize=(9, 5))
-outcome_map(ax, gs_w, gd_w, outcome,
-            "sign restrictions implied by the widest prior, K = 5")
+fig, ax = plt.subplots()
+outcome_map(ax, gs_w, gd_w, outcome)
 plt.tight_layout()
 plt.show()
 ```
@@ -1208,6 +1290,12 @@ We keep the uniform prior on $g_d$ and the same supports, and change only the *s
 $g_s$.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Draws of $g_s$ under two priors
+    name: fig-ip-gs-draws
+---
 (gs_lo, gs_hi), (gd_lo, gd_hi) = priors['widest']
 rng_log = np.random.default_rng(2024)
 gs_log = np.exp(rng_log.uniform(np.log(gs_lo), np.log(gs_hi), N_wide))
@@ -1220,7 +1308,7 @@ wide['log-uniform'] = dict(g_s=gs_log, g_d=gd_log,
 
 gs_ticks = [2, 5, 10, 20, 40]
 
-fig, ax = plt.subplots(figsize=(9, 4))
+fig, ax = plt.subplots()
 bins = np.geomspace(gs_lo, gs_hi, 30)                 # equally spaced in log g_s
 w = np.full(N_wide, 1 / N_wide)
 ax.hist(gs_w, bins=bins, weights=w, alpha=0.5, color='C3', label='uniform')
@@ -1229,7 +1317,6 @@ ax.set_xscale('log')
 ax.set_xticks(gs_ticks, labels=[str(t) for t in gs_ticks])
 ax.set_xlabel("$g_s$ (log scale)")
 ax.set_ylabel("fraction of draws")
-ax.set_title("draws of $g_s$ under the two priors on $[1.5, 40]$")
 ax.legend()
 plt.tight_layout()
 plt.show()
@@ -1245,6 +1332,12 @@ right.
 The induced priors over impulse responses change accordingly.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Uniform versus log-uniform prior on $g_s$
+    name: fig-ip-log-irfs
+---
 D_log = wide['log-uniform']['D']
 spec_colors = {'uniform': 'C3', 'log-uniform': 'C4'}
 
@@ -1288,12 +1381,17 @@ priors, and the map from $(g_s, g_d)$ to the three outcomes is the same.
 What changes is how much prior probability falls in each region.
 
 ```{code-cell} python3
+---
+mystnb:
+  figure:
+    caption: Sign-restriction outcomes, log-uniform prior
+    name: fig-ip-outcomes-log
+---
 V_log, C_log = wide['log-uniform']['V'], wide['log-uniform']['C']
 outcome_log = classify(C_log, V_log, D_log, table_log)
 
-fig, ax = plt.subplots(figsize=(9, 5))
-outcome_map(ax, gs_log, gd_log, outcome_log,
-            "log-uniform prior on $g_s$: sign restrictions, K = 5")
+fig, ax = plt.subplots()
+outcome_map(ax, gs_log, gd_log, outcome_log)
 ax.set_xscale('log')
 ax.set_xticks(gs_ticks, labels=[str(t) for t in gs_ticks])
 ax.set_xlabel("$g_s$ (log scale)")
@@ -1310,7 +1408,7 @@ for name, nrm, out in [('uniform', norms_w, outcome),
           ''.join(f"{np.mean(out == c):25.2f}" for c in range(3)))
 ```
 
-Here $P(\text{fundamental})$ is the prior probability that $\|L^{-1} d_s\| > 0.99$.
+Here `P(fundamental)` is the prior probability $\mathbb{P}\{\|L^{-1} d_s\| > 0.99\}$.
 
 On a logarithmic axis the three regions are laid out evenly, and the green region --- where the
 theory-implied sign restrictions recover the true supply response --- is now the largest.
@@ -1318,7 +1416,7 @@ theory-implied sign restrictions recover the true supply response --- is now the
 The same sign restrictions, derived from the same theory with the same parameter support, succeed with
 prior probability of roughly one quarter under one prior and about 60 percent under the other.
 
-This complements a point that Baumeister and Hamilton {cite}`BaumeisterHamilton2015` make about the
+This complements a point that {cite:t}`BaumeisterHamilton2015` make about the
 Haar prior over rotations: a prior that looks innocuous on one parameterization can be quite informative
 about the objects we care about.
 
@@ -1364,7 +1462,7 @@ rotating VAR innovations: *if you know it, impose it*.
 ```{exercise}
 :label: ip_ex1
 
-Exercise 2 of {doc}`supply_demand_var` showed that the market is (nearly) invertible when $g_s \le 1$:
+{ref}`Exercise 2 <sdvar_ex2>` of {doc}`supply_demand_var` showed that the market is (nearly) invertible when $g_s \le 1$:
 quantity then adjusts quickly and reveals supply surprises at once.
 
 Replace the prior on $g_s$ by $g_s \sim U[0.2, 1]$, keeping $g_d \sim U[0.05, 0.15]$.
@@ -1422,7 +1520,7 @@ fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 for i, ax in enumerate(axes):
     ax.fill_between(range(T), lo[:, i, 0], hi[:, i, 0], color='C3', alpha=0.3,
                     label=f'sign-identified set, K = {K_max}')
-    ax.plot(truth_ex['D'][:, i, 0], 'k--', label='true structural response')
+    ax.plot(truth_ex['D'][:, i, 0], 'k--', lw=2, label='true structural response')
     ax.axhline(0, color='k', lw=0.5)
     ax.set_title(f"response of {var_names[i]} to the supply shock, $g_s = 0.6$")
     ax.set_xlim(0, 12)
@@ -1466,11 +1564,11 @@ for name, shocks in cases.items():
     tab = np.zeros_like(sign_table)
     tab[:, :, shocks] = sign_table[:, :, shocks]
     kept, acc = sign_identified(truth['C'], truth['V'], tab, 0)
-    rng_s = [kept[:, 0, i, k].min() for k in range(2) for i in range(2)], \
-            [kept[:, 0, i, k].max() for k in range(2) for i in range(2)]
+    bounds = ([kept[:, 0, i, k].min() for k in range(2) for i in range(2)],
+              [kept[:, 0, i, k].max() for k in range(2) for i in range(2)])
     print(f"{name:12s} acceptance {acc:.3f}")
-    for (i, k), lo_, hi_ in zip([(0, 0), (1, 0), (0, 1), (1, 1)], *rng_s):
-        print(f"   impact of {shock_names[k][:6]} on {var_names[i][:5]:6s}: "
+    for (i, k), lo_, hi_ in zip([(0, 0), (1, 0), (0, 1), (1, 1)], *bounds):
+        print(f"   impact of {shock_names[k][:6]} on {var_short[i]}: "
               f"[{lo_:7.4f}, {hi_:7.4f}]   truth {truth['D'][0, i, k]:7.4f}")
 ```
 
@@ -1486,7 +1584,7 @@ line, which pins down the demand shock.
 The demand restriction alone has little bite: almost every direction in the positive quadrant is consistent
 with it.
 
-This is the case $\mathrm{corr}(P, Q) \to 1$ in Uhlig's Figure 7.
+This is the case $\mathrm{corr}(P, Q) \to 1$ in Figure 7 of {cite:t}`Uhlig2017`.
 
 ```{solution-end}
 ```
@@ -1564,7 +1662,7 @@ wrong about the supply shock.
 ```{exercise}
 :label: ip_ex4
 
-The widest prior on $g_d$, $U[0.005, 1]$, also spans a factor of 200.
+The widest prior on $g_d$, $U[0.005, 1]$, spans an even wider range, a factor of 200.
 
 Put log-uniform priors on *both* $g_s \in [1.5, 40]$ and $g_d \in [0.005, 1]$.
 
@@ -1612,7 +1710,7 @@ The sign table is unchanged because the support is unchanged.
 
 A log-uniform prior on $g_d$ shifts mass toward *small* values of $g_d$.
 
-The outcome maps show that, for a given $g_s$, the green region extends to larger values of $g_s$ when
+The outcome maps show that the green region extends to larger values of $g_s$ when
 $g_d$ is large: the boundary between the green and red regions slopes upward.
 
 Moving prior mass toward small $g_d$ therefore moves mass out of the green region, and the probability that
