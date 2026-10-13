@@ -995,6 +995,12 @@ rotations of the VAR innovations at all.
 {cite:t}`Uhlig2017` explicitly sets aside "the thorny issue of fundamentalness"; our market shows
 why it deserves attention.
 
+Information from outside the VAR can do what rotations cannot.
+
+{doc}`policy_counterfactuals` shows that a local projection on a noisy measure of the supply shock
+recovers the true supply-shock response, and that a sufficiently aggressive price-stabilizing tax rule
+makes the supply shock fundamental, so that the same sign restrictions then succeed.
+
 ### Robustness across the prior
 
 Is the exclusion of the truth special to $(g_s, g_d) = (10, 0.1)$?

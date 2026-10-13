@@ -881,6 +881,15 @@ The two coincide only after we set the price process to be the equilibrium one; 
 open-loop curve to the closed-loop rule comes from imposing rational expectations on the
 agents' price forecasts.
 
+This distinction is the heart of the Lucas critique.
+
+If a government changed a policy that affects the price process, the closed-loop rules would change,
+while the open-loop curves would not.
+
+{doc}`policy_counterfactuals` adds a tax to this market and shows how, because the open-loop curves are
+invariant to the policy rule, impulse responses to policy shocks suffice to predict the market's behavior
+under a different rule, as McKay and Wolf {cite}`McKayWolf2023` show in general.
+
 Both representations deliver this important message:
 
 * each decision maker's quantity *today* depends not on today's price alone but on the entire prospective *continuation path* of the price, $\{p_{t+j}\}_{j\ge 0}$, forecast from today out into the indefinite future.
