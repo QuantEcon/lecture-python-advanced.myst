@@ -33,38 +33,38 @@ decision rules change appropriately when the policy rule changes.
 {cite:t}`McKayWolf2023` claim that, in a particular class of linear models, an econometrician can
 construct such Lucas-critique-robust counterfactuals *without* writing down the model.
 
-They claim that what the econometrician needs instead are what they call "dynamic causal effects" of **policy shocks** --- surprise
+The econometrician needs instead what they call "dynamic causal effects" of **policy shocks** --- surprise
 deviations from a prevailing policy rule, both contemporaneous and anticipated ("news") --- together
 with the effects of the non-policy shock of interest under the prevailing policy rule.
 
-This lecture puts their result to work in the context of a generalized version of the  market for a single good studied in
+This lecture puts their result to work in the context of a generalized version of the market for a single good studied in
 {doc}`supply_demand_var` and {doc}`induced_priors`.
 
-The market in those lectures  has no policy of the type that concerns McKay and Wolf, so we add one here: a per-unit tax on the good that the government adjusts
+The market in those lectures has no policy of the type that concerns McKay and Wolf; we add one here: a per-unit tax on the good that the government adjusts
 according to a rule that leans against movements in the price.
 
-In this lecture, we shall
+The lecture
 
-* show that the market with a tax fits McKay and Wolf's framework, and that their key assumption is
+* shows that the market with a tax fits McKay and Wolf's framework, and that their key assumption is
   precisely the invariance of the *open-loop* dynamic supply and demand curves of
   {doc}`supply_demand_var`,
-* verify their identification result: impulse responses to tax shocks under one rule deliver the
+* verifies their identification result: impulse responses to tax shocks under one rule deliver the
   economy's exact behavior under another rule,
-* compare it with the older approach of {cite:t}`SimsZha2006`, which imposes the new rule
-  with a sequence of policy *surprises* and so falls foul of the Lucas critique, and examine a version of
+* compares it with the older approach of {cite:t}`SimsZha2006`, which imposes the new rule
+  with a sequence of policy *surprises* and so falls foul of the Lucas critique, and examines a version of
   the defense of that approach by {cite:t}`LeeperZha2003` for "modest" policy interventions,
-* study how well the counterfactual can be approximated with evidence on only a few policy shocks,
-* contrast the uncertainty about a counterfactual that a structural modeler inherits from a prior over
+* studies how well the counterfactual can be approximated with evidence on only a few policy shocks,
+* contrasts the uncertainty about a counterfactual that a structural modeler inherits from a prior over
   parameters, as in {doc}`induced_priors`, with the precision that McKay and Wolf's sufficient statistics
   deliver,
-* use the market to sort procedures into those that require **invertibility** and those that do not, and
-* relate McKay and Wolf's approach to the "dynamic programming squared" response to the Lucas critique,
-  and state what their counterfactuals take for granted.
+* uses the market to sort procedures into those that require invertibility and those that do not, and
+* relates McKay and Wolf's approach to the "dynamic programming squared" response to the Lucas critique,
+  and states what their counterfactuals take for granted.
 
 The invertibility item connects this lecture to the theme of {doc}`supply_demand_var` and {doc}`induced_priors`,
 in which the supply shock is *not* fundamental for prices and quantities.
 
-We shall see that
+In this market,
 
 * external instruments recover the supply-shock impulse response that no rotation of VAR innovations
   can,
@@ -80,13 +80,10 @@ The "dynamic programming squared" lectures of this series, such as {doc}`calvo`,
 {doc}`dyn_stack`, {doc}`opt_tax_recur`, and {doc}`dovis_accounting_mf`, pursue another modern response
 to the Lucas critique.
 
-Both responses start from the private sector's forward-looking Euler equations: the dynamic programming
-squared lectures treat them as implementability constraints on a government that *chooses* policy,
-while McKay and Wolf *measure* the mapping from policy paths to outcomes that they imply and take the
-policy rule, and its credibility, as given.
+{ref}`pc_dp2` compares the two responses and lists what McKay and Wolf's counterfactuals take for granted.
 
-{ref}`pc_dp2` below develops this comparison and lists what McKay and Wolf's counterfactuals take for
-granted.
+{doc}`policy_regimes` pursues a third response: it treats rule changes as realizations of a Markov
+process that private agents know ({ref}`pc_regimes`).
 
 In addition to what's in Anaconda, this lecture uses the quantecon library.
 
@@ -113,7 +110,7 @@ We use the market of {doc}`supply_demand_var` with the same parameter values.
 Its supply side --- competitive firms facing quadratic costs of adjusting output, with each firm taking
 the market price as given --- is a close cousin of the model in
 {doc}`Rational Expectations Equilibrium <intermediate:rational_expectations>`, where the "big $Y$,
-little $y$" device plays the role that "big $X$, little $x$" plays in {doc}`supply_demand_var`.
+little $y$" device corresponds to the "big $X$, little $x$" device of {doc}`supply_demand_var`.
 
 ```{code-cell} python3
 h_s = h_d = 1.0
@@ -414,9 +411,7 @@ the rule: the closed-loop decision rules change with $\phi$.
 
 ### Price stabilization as more flexible supply
 
-There is a simple way to see what the rule does.
-
-When $\tau_t = -\phi p_t$, suppliers receive $p_t - \tau_t = (1 + \phi) p_t$, so the supply Euler equation
+When $\tau_t = -\phi p_t$, suppliers receive $p_t - \tau_t = (1 + \phi) p_t$, and the supply Euler equation
 {eq}`pc-supply` becomes
 
 $$
@@ -435,7 +430,7 @@ To someone who observes only prices and quantities, a price-stabilizing rule is 
 suppliers who are *more flexible* --- with lower costs of producing and of adjusting output --- and who
 face smaller cost shocks.
 
-(Someone who also observes the tax can of course tell the two markets apart.)
+(Someone who also observes the tax can tell the two markets apart.)
 
 We confirm the equivalence numerically.
 
@@ -453,10 +448,10 @@ for φ in [0.5, 2.0]:
 The equivalence explains a feature of the previous figure: under a more aggressive rule, quantity
 responds more strongly to a demand shock, just as it would if suppliers could adjust output more easily.
 
-It is, moreover, a compact statement of the Lucas critique in our market.
+The equivalence also states the Lucas critique compactly in our market.
 
 An econometrician who fit the dynamic supply curve to data generated under the rule, ignoring the tax,
-would estimate the cost parameters $h_s/(1+\phi)$ and $g_s/(1+\phi)$ rather than $h_s$ and $g_s$, and
+would estimate the cost parameters $h_s/(1+\phi)$ and $g_s/(1+\phi)$, not $h_s$ and $g_s$, and
 would mispredict what happens if the rule changes.
 
 Later on, the same equivalence will explain why the policy rule affects whether a VAR can recover the
@@ -502,8 +497,7 @@ plt.show()
 News of a future tax increase lowers quantity well *before* the tax rises: suppliers, who find it costly
 to adjust output, begin cutting it as soon as they learn of the tax.
 
-These anticipation effects are what make the policy *path*, and not just its current value, matter for
-private decisions.
+These anticipation effects make the whole policy *path* matter for private decisions.
 
 ### Proposition 1
 
@@ -527,15 +521,15 @@ The logic is that suppliers and demanders care only about the expected path of t
 A date-0 combination of contemporaneous and news shocks $\tilde\nu$ can produce *any* expected
 tax path, in particular the one that the counterfactual rule would produce.
 
-Because the shocks are all announced at date 0, the new rule holds not just *ex post* along the path but
-also *ex ante*, in agents' expectations from date 0 on.
+Because the shocks are all announced at date 0, the new rule holds both *ex post* along the path and
+*ex ante*, in agents' expectations from date 0 on.
 
 The econometrician needs $x_A(\varepsilon)$ and $\Theta_\nu$ --- objects that can be estimated
 from data generated under the baseline rule --- but not the model's equations, nor even the baseline rule.
 
 ```{code-cell} python3
 def mw_counterfactual(M_inv_base, x_A, φ_new):
-    "McKay-Wolf Proposition 1: enforce τ = -φ_new p with date-0 policy shocks."
+    "McKay–Wolf Proposition 1: enforce τ = -φ_new p with date-0 policy shocks."
     Θ = M_inv_base[:, 2 * T:]
     R_new = rule_block(φ_new)
     ν = np.linalg.solve(R_new @ Θ, -R_new @ x_A)
@@ -585,24 +579,24 @@ x_true = system_inverse(g_s, g_d, φ_new) @ forcing(1)
 x_mw, ν_mw = mw_counterfactual(M_inv_A, x_A, φ_new)
 x_sz, ν_sz = sims_zha(M_inv_A, x_A, φ_new)
 
-print(f"max |McKay-Wolf - truth| = {np.abs(x_mw - x_true).max():.1e}")
-print(f"max |Sims-Zha   - truth| = {np.abs(x_sz - x_true).max():.1e}")
+print(f"max |McKay–Wolf - truth| = {np.abs(x_mw - x_true).max():.1e}")
+print(f"max |Sims–Zha   - truth| = {np.abs(x_sz - x_true).max():.1e}")
 
 fig, axes = plt.subplots(1, 4, figsize=(16, 4))
 for i in range(3):
     ax = axes[i]
     ax.plot(split(x_A)[i][:H_plot], 'k:', lw=2, label=f"baseline rule $\\phi = {φ_A}$")
     ax.plot(split(x_true)[i][:H_plot], 'C0', lw=2, label=f"true, $\\tilde\\phi = {φ_new}$")
-    ax.plot(split(x_mw)[i][:H_plot], 'C0o', ms=4, label="McKay-Wolf")
-    ax.plot(split(x_sz)[i][:H_plot], 'C3--', lw=2, label="Sims-Zha")
+    ax.plot(split(x_mw)[i][:H_plot], 'C0o', ms=4, label="McKay–Wolf")
+    ax.plot(split(x_sz)[i][:H_plot], 'C3--', lw=2, label="Sims–Zha")
     ax.axhline(0, color='k', lw=0.5)
     ax.set_title(f"{names[i]}, demand shock")
     ax.set_xlabel("periods")
 axes[0].legend(fontsize=8)
 axes[3].bar(np.arange(H_plot) - 0.2, ν_mw[:H_plot], width=0.4, color='C0',
-            label="McKay-Wolf: news at date 0 about date $t$")
+            label="McKay–Wolf: news at date 0 about date $t$")
 axes[3].bar(np.arange(H_plot) + 0.2, ν_sz[:H_plot], width=0.4, color='C3',
-            label="Sims-Zha: surprise at date $t$")
+            label="Sims–Zha: surprise at date $t$")
 axes[3].axhline(0, color='k', lw=0.5)
 axes[3].set_title("policy shocks used")
 axes[3].set_xlabel("$t$")
@@ -616,13 +610,11 @@ McKay and Wolf's construction reproduces the true counterfactual to machine prec
 The Sims–Zha construction does not: because suppliers and demanders keep expecting the old rule, they
 plan for less price stabilization than they actually get.
 
-How large is the Sims–Zha error?
-
 Because the error comes from expectations, we expect it to grow with the weight that agents place on the
 future, and the supplier's adjustment cost $g_s$ governs how forward-looking supply is.
 
-The next figure plots, against $g_s$, the error in the counterfactual response to a demand shock when the
-rule moves from $\phi_A = 0.5$ to $\tilde\phi = 2$.
+We compute, for a range of values of $g_s$, the error in the counterfactual response to a demand shock
+when the rule moves from $\phi_A = 0.5$ to $\tilde\phi = 2$.
 
 ```{code-cell} python3
 ---
@@ -693,29 +685,30 @@ for φ_t in φ_tildes:
 
 fig, axes = plt.subplots(1, 2, figsize=(12, 4))
 axes[0].plot(φ_tildes, sizes, 'o-', lw=2, label="policy effect on $q$")
-axes[0].plot(φ_tildes, np.array(ratios) * np.array(sizes), 's-', lw=2, label="Sims-Zha error in $q$")
+axes[0].plot(φ_tildes, np.array(ratios) * np.array(sizes), 's-', lw=2, label="Sims–Zha error in $q$")
 axes[0].set_xlabel("counterfactual rule $\\tilde\\phi$")
 axes[0].set_title("absolute size")
 axes[0].legend()
 axes[1].plot(φ_tildes, ratios, 'o-', lw=2, color='C3')
 axes[1].set_ylim(0, 0.4)
 axes[1].set_xlabel("counterfactual rule $\\tilde\\phi$")
-axes[1].set_title("Sims-Zha error / policy effect")
+axes[1].set_title("Sims–Zha error / policy effect")
 for ax in axes:
     ax.axvline(φ_A, color='k', ls=':', lw=1)
 plt.tight_layout()
 plt.show()
 ```
 
-As the intervention becomes more modest, the Sims–Zha error shrinks --- but only in proportion to the
-effect of the intervention itself.
+As the intervention becomes more modest, the Sims–Zha error shrinks in proportion to the effect of the
+intervention itself.
 
 For interventions near the baseline rule, the Sims–Zha counterfactual misses roughly 30 percent of the
 effect on quantity that it is trying to measure.
 
-A modest intervention makes the *absolute* error small, but not the error relative to the policy effect.
+A modest intervention makes the *absolute* error small and leaves the error relative to the policy effect
+near 30 percent.
 
-The reason is that the expectational channel that Sims–Zha omits is a first-order part of how the
+The expectational channel that Sims–Zha omits is a first-order part of how the
 counterfactual rule works: it does not become negligible relative to the other channels as the rule
 change becomes small.
 
@@ -738,7 +731,7 @@ Suppose the econometrician knows the effects of a contemporaneous shock and of n
 next $n - 1$ periods.
 
 This clean menu is an idealization: identified policy shocks in practice, such as the monetary policy
-shocks of Romer and Romer or Gertler and Karadi that McKay and Wolf use, are *combinations* of surprises
+shocks of {cite:t}`RomerRomer2004` or {cite:t}`GertlerKaradi2015` that McKay and Wolf use, are *combinations* of surprises
 and news about several horizons, each tracing out its own path for the policy instrument.
 
 ```{code-cell} python3
@@ -749,7 +742,7 @@ mystnb:
     name: fig-pc-limited
 ---
 def mw_limited(M_inv_A, x_A, φ_new, n):
-    "Least-squares McKay-Wolf counterfactual using news shocks for horizons 0..n-1."
+    "Least-squares McKay–Wolf counterfactual using news shocks for horizons 0..n-1."
     Ω = M_inv_A[:, 2 * T:2 * T + n]
     R_new = rule_block(φ_new)
     weights, *_ = np.linalg.lstsq(R_new @ Ω, -R_new @ x_A, rcond=None)
@@ -771,7 +764,8 @@ plt.tight_layout()
 plt.show()
 ```
 
-The approximation improves steadily as evidence on more distinct policy shocks becomes available.
+Apart from a small step back at $n = 3$, the error falls quickly as evidence on more distinct policy
+shocks becomes available: with $n = 10$ distinct shocks it is below 0.01 percent.
 
 ## Model uncertainty and sufficient statistics
 
@@ -785,8 +779,8 @@ McKay and Wolf's econometrician needs no prior over $(g_s, g_d)$: given estimate
 and $\Theta_\nu$ from data generated by the true economy, Proposition 1 delivers the true counterfactual
 exactly.
 
-In the language of McKay and Wolf, impulse responses to policy shocks are **sufficient statistics** for
-policy counterfactuals: every model in their class that matches those impulse responses implies the same
+In the language of McKay and Wolf, impulse responses to policy shocks, together with $x_A(\varepsilon)$,
+are **sufficient statistics** for policy counterfactuals: every model in their class that matches those impulse responses implies the same
 counterfactual.
 
 ```{code-cell} python3
@@ -826,7 +820,7 @@ for i, ax in enumerate(axes):
     fan(ax, cf_draws[:, i * T:i * T + H_plot], 'C1',
         f"induced prior, counterfactual rule $\\tilde\\phi = {φ_new}$")
     ax.plot(split(x_mw)[i][:H_plot], 'C0o', ms=4,
-            label="McKay-Wolf, from the true economy's impulse responses")
+            label="McKay–Wolf, from the true economy's impulse responses")
     ax.axhline(0, color='k', lw=0.5)
     ax.set_title(f"{names[i]}, demand shock")
     ax.set_xlabel("periods")
@@ -834,7 +828,7 @@ axes[0].legend(fontsize=8)
 plt.tight_layout()
 plt.show()
 
-print(f"Sims-Zha error / policy effect on q across the prior: "
+print(f"Sims–Zha error / policy effect on q across the prior: "
       f"[{min(sz_ratio_draws):.2f}, {max(sz_ratio_draws):.2f}]")
 ```
 
@@ -850,33 +844,33 @@ the baseline rule pin down the counterfactual without pinning down $(g_s, g_d)$.
 The Sims–Zha error, meanwhile, is a robust feature of the model: across the whole prior, it misses about
 a quarter of the policy effect on quantity.
 
-Of course, a structural modeler who saw the same impulse responses could learn $(g_s, g_d)$ from them, as
-in {ref}`ip_ex3` of {doc}`induced_priors`.
+A structural modeler who saw the same impulse responses could learn $(g_s, g_d)$ from them, as in
+{ref}`ip_ex3` of {doc}`induced_priors`.
 
-McKay and Wolf's point is that the counterfactual does not require that step, and therefore does not
-depend on the details of a particular parametric model of the private sector.
+McKay and Wolf's counterfactual does not require that step and does not depend on the details of a
+particular parametric model of the private sector.
 
 ## Invertibility
 
 So far we have assumed that the econometrician knows the impulse responses to the non-policy shock and to
 the policy shocks.
 
-Where would they come from?
+Estimating them requires identifying assumptions.
 
 In {doc}`supply_demand_var` and {doc}`induced_priors` we saw that, because quantity adjusts sluggishly,
-the supply shock is **not fundamental** for $(q_t, p_t)$: it is not a linear combination of current and
+the supply shock is *not fundamental* for $(q_t, p_t)$: it is not a linear combination of current and
 past prices and quantities.
 
-Consequently, no rotation of the innovations of a vector autoregression for $(q_t, p_t)$ recovers the
+No rotation of the innovations of a vector autoregression for $(q_t, p_t)$ recovers the
 supply shock --- not a Cholesky factorization, and not one selected by sign restrictions.
 
-We now sort procedures into those that need invertibility and those that don't.
+Some procedures need invertibility and others do not.
 
-In McKay and Wolf's applications, the responses to policy shocks come from instruments --- narrative
-measures or high-frequency financial market surprises --- rather than from the innovations of a VAR.
+In McKay and Wolf's applications, the responses to policy shocks come from instruments, such as narrative
+measures or high-frequency financial market surprises.
 
-Policy shocks may then be a small part of the variation in the data, and we abstract from them in what
-follows: we work with the economy under the baseline rule, without policy shocks, so that the
+To focus on the non-policy shocks, we work in what follows with the economy under the baseline rule and
+no policy shocks, so that the
 econometrician observes $(q_t, p_t)$ and $\tau_t = -\phi_A p_t$.
 
 To compute the population VAR we write the moving-average representation, truncated after `H_ma` lags,
@@ -947,15 +941,15 @@ $$
 
 the true response of $z$ at horizon $h$ to the supply shock.
 
-So a **local projection** --- a regression of $z_{t+h}$ on $m_t$ --- recovers the supply-shock impulse
+A **local projection** --- a regression of $z_{t+h}$ on $m_t$ --- recovers the supply-shock impulse
 response up to scale, whether or not the supply shock is fundamental.
 
 {cite:t}`StockWatson2018` and {cite:t}`PlagborgMollerWolf2021`
 develop this external-instrument logic; the latter show that ordering the instrument first in a VAR
 estimates the same impulse responses.
 
-This is how McKay and Wolf themselves estimate the responses to their non-policy shock: they order a
-measured series of investment-specific technology news shocks first in a VAR.
+McKay and Wolf estimate the responses to their non-policy shock this way: they order the series of
+investment-specific technology news shocks of {cite:t}`BenZeevKhan2015` first in a VAR.
 
 We simulate a long sample under the baseline rule and compare three estimates of the response to a supply
 shock, each normalized to raise quantity by one unit on impact.
@@ -1008,7 +1002,7 @@ The local projection recovers the true response, including the sign reversal aft
 Cholesky-identified VAR shock does not.
 
 We used a very long sample because supply shocks account for only a small part of the variation in
-prices, so the local-projection estimates are noisy in samples of realistic length; in population they
+prices; the local-projection estimates are noisy in samples of realistic length, and in population they
 coincide exactly with the true response.
 
 This is the constructive counterpart of the negative results in {doc}`induced_priors`: information from
@@ -1021,15 +1015,15 @@ invertibility plays no role.
 
 Anticipated policy shocks are themselves a standard source of non-invertibility --- see
 {cite:t}`Leeper_Walker_Yang` on fiscal foresight, and {doc}`hs_invertibility_example` for the same
-"news" problem in a permanent income model --- which is another reason why McKay and Wolf rely on
-instrument-identified policy shocks rather than on VAR innovations.
+"news" problem in a permanent income model --- which is another reason why McKay and Wolf identify
+policy shocks with instruments.
 
 ### Invertibility depends on the policy rule
 
 Whether the supply shock is fundamental for $(q_t, p_t)$ is a property of the *equilibrium*
 moving-average representation, and that representation depends on the policy rule.
 
-So the policy rule can change whether a VAR can recover the supply shock.
+A change in the policy rule can change whether a VAR recovers the supply shock.
 
 ```{code-cell} python3
 ---
@@ -1067,13 +1061,18 @@ A rule that destabilizes the price ($\phi < 0$) pushes the economy further from 
 The equivalence that we derived earlier explains the pattern.
 
 Under the rule $\phi$, prices and quantities behave as in a market without a tax whose supplier has
-adjustment cost $g_s / (1 + \phi)$, and whose cost shocks are scaled down by the same factor.
+cost parameters $h_s / (1 + \phi)$ and $g_s / (1 + \phi)$, and whose cost shocks are scaled down by the
+same factor.
 
-Scaling a shock does not change whether it is fundamental, so the rule matters only through the effective
-adjustment cost.
+Scaling a shock does not change whether it is fundamental.
+
+The rule matters only through the effective cost parameters.
 
 In {ref}`sdvar_ex2` of {doc}`supply_demand_var` we saw that the supply shock becomes fundamental when
 suppliers can adjust quickly: price stabilization makes them behave as if they could.
+
+The analogy is approximate, because that exercise lowered $g_s$ with $h_s$ held fixed, while the rule
+lowers both.
 
 ```{code-cell} python3
 for φ in [0.5, 2.0]:
@@ -1091,16 +1090,16 @@ moving-average representation move with the policy rule.
 
 ### Counterfactual second moments through VAR innovations
 
-McKay and Wolf also show how to predict the *unconditional* second moments of the data under a new rule.
+McKay and Wolf also predict the *unconditional* second moments of the data under a new rule.
 
 If the econometrician could identify every structural shock, she could apply Proposition 1 to each one
 and add up the resulting variances and autocovariances.
 
 When the structural shocks cannot all be identified, McKay and Wolf propose applying Proposition 1 to the
-impulse responses of the **Wold innovations** instead, and they note that this is valid only if the
+impulse responses of the *Wold innovations* instead, and they note that this is valid only if the
 structural moving-average representation is invertible.
 
-Our market lets us check this.
+We compare the Wold-innovation route with the true counterfactual autocovariances.
 
 ```{code-cell} python3
 def autocov(X, n_lags=12):
@@ -1139,17 +1138,17 @@ counterfactual autocovariances to machine precision.
 
 When it is not ($g_s = 10$), the route makes an error, but the error is tiny.
 
-Why is the route exact under invertibility and not otherwise?
+Invertibility makes the route exact for the following reason.
 
-Under invertibility, each Wold innovation is a linear combination of the *current* structural shocks, so
+Under invertibility, each Wold innovation is a linear combination of the *current* structural shocks, and
 its impulse response is a linear combination of date-0 structural impulse responses, to which
 {eq}`pc-mw` applies.
 
-Under non-invertibility, a Wold innovation also contains *past* structural shocks, so its impulse response
+Under non-invertibility, a Wold innovation also contains *past* structural shocks, and its impulse response
 includes the continuations of paths that started before date 0.
 
 Proposition 1 treats such a continuation as a fresh date-0 path from the steady state, ignoring that
-agents had already been responding to it, so it maps the continuation incorrectly.
+agents had already been responding to it, and maps the continuation incorrectly.
 
 ```{code-cell} python3
 X_A_struct = np.stack([M_inv_A @ forcing(k) for k in range(2)], axis=1)
@@ -1165,11 +1164,13 @@ def continuation(x, k):
 for k in [1, 2]:
     mapped, _ = mw_counterfactual(M_inv_A, continuation(X_A_struct[:, 1], k), φ_new)
     target = continuation(X_new_struct[:, 1], k)
-    print(f"demand shock, continuation from date {k}: "
-          f"max |mapped - true| = {np.abs(mapped - target)[:T - 10].max():.3f}")
+    rel = [np.abs(split(mapped)[i] - split(target)[i])[:T - 10].max() / np.abs(split(target)[i]).max()
+           for i in range(3)]
+    print(f"demand shock, continuation from date {k}: max |mapped - true| relative to the peak "
+          f"of the true path: q {rel[0]:.2f}, p {rel[1]:.2f}, τ {rel[2]:.2f}")
 ```
 
-These errors are not small: Proposition 1 maps each such continuation badly.
+These errors are large: Proposition 1 misses each continuation by between 9 and 57 percent of its peak.
 
 The overall error in counterfactual second moments is nevertheless tiny because, in our market, the
 weight that the Wold innovations put on past structural shocks is small --- the non-fundamental part of
@@ -1182,8 +1183,54 @@ Several lectures in this series --- the "dynamic programming squared" lectures -
 response to the Lucas critique: they model the government as an optimizing agent and ask which policies
 it would choose and which it could credibly promise.
 
-This section connects McKay and Wolf's framework to those lectures, and uses them to state precisely
-what McKay and Wolf take for granted.
+### Rule-based scenario analysis
+
+McKay and Wolf describe their thought experiment, in which a monetary policy rule links the interest
+rate $i$ to inflation $\pi$:
+
+> Note that this thought experiment supposes that the private sector perfectly understands the change in
+> rule: the new relationship between $i$ and $\pi$ holds for all $t \geq 0$.
+
+Their counterfactual is a scenario.
+
+A government announces a rule at date 0.
+
+Private agents believe it and expect it to hold forever.
+
+The analyst computes outcomes under rational expectations.
+
+Because the economy is linear, a rule is equivalent, shock by shock, to one path of the policy
+instrument.
+
+A rule counterfactual is a family of path scenarios, one for each history of shocks; a peg or a
+zeroing-out counterfactual is a single path.
+
+{cite:t}`Lucas1976` proposed this kind of experiment: compare outcomes under alternative rules, each a
+permanent change that private agents understand.
+
+McKay and Wolf carry out Lucas's experiment with measured impulse responses in place of an estimated
+model of the private sector.
+
+{cite:t}`SargentWallace1976` and {cite:t}`Sims1982` questioned the experiment.
+
+If rules can change, rational agents assign probabilities to changes before they occur, and the
+historical data already reflect those probabilities.
+
+A rule change that agents did not anticipate before date 0 and believe completely after date 0 lies
+outside the stochastic process that generated the data.
+
+The construction requires that the instrument path implementing the new rule lie in the span of paths
+traced out by historical policy shocks.
+
+A rule never followed in the sample can satisfy that requirement, but the date-0 news shocks that
+implement it may be large by historical standards.
+
+If they are, Leeper and Zha's modesty condition fails.
+
+The scenario does not explain why a government would adopt the rule, keep it, or be believed.
+
+The dynamic programming squared lectures address those questions; {doc}`policy_regimes` replaces the
+scenario with a known stochastic process for rule changes.
 
 ### The same constraint, measured or modeled
 
@@ -1193,8 +1240,9 @@ $$
 \theta_t = \frac{1}{1+\alpha} \sum_{j=0}^{\infty} \left(\frac{\alpha}{1+\alpha}\right)^j \mu_{t+j},
 $$
 
-depends on the entire future path of money growth $\{\mu_{t+j}\}$, so that inflation summarizes how
-future policy affects today's real balances.
+depends on the entire future path of money growth $\{\mu_{t+j}\}$.
+
+Inflation summarizes how future policy affects today's real balances.
 
 In {doc}`dyn_stack`, a Stackelberg follower's Euler equations are part of the law of motion that the
 Stackelberg leader faces when it chooses its plan.
@@ -1205,7 +1253,7 @@ constraint that restricts the allocations a Ramsey planner can implement with di
 In each case, private decisions depend on the whole expected path of a policy instrument, and a
 policymaker who chooses that path takes the dependence into account.
 
-Our Euler equations {eq}`pc-supply`–{eq}`pc-demand` play the same role, and McKay and Wolf's key
+Our Euler equations {eq}`pc-supply`–{eq}`pc-demand` are the corresponding constraint, and McKay and Wolf's key
 assumption is that they are the *only* channel through which policy matters.
 
 The matrix $\Theta_\nu$ of responses to contemporaneous and news shocks is then an empirical counterpart
@@ -1222,7 +1270,7 @@ Like the Ramsey and Stackelberg plans of {doc}`calvo`, {doc}`dyn_stack`, and {do
 resulting plan is time inconsistent, and {ref}`pc_ex_tic` reproduces, with McKay–Wolf objects, the
 "reborn Stackelberg leader" calculation of {doc}`dyn_stack`.
 
-{doc}`dyn_stack` and {doc}`opt_tax_recur` show how to implement such a plan recursively by handing each
+{doc}`dyn_stack` and {doc}`opt_tax_recur` implement such a plan recursively by handing each
 continuation planner, as a state variable, the forward-looking variable that its predecessors promised
 --- the follower's decision in {doc}`dyn_stack`, marginal-utility-weighted government debt in
 {doc}`opt_tax_recur`.
@@ -1232,32 +1280,28 @@ at each date --- a "timeless perspective" --- is a device of the same kind.
 
 ### Credible rules and sustainable plans
 
-McKay and Wolf's counterfactual uses a Ramsey timing protocol: the new rule is chosen once and for all at
+McKay and Wolf's counterfactual uses a commitment timing protocol: the new rule is chosen once and for all at
 date 0, believed by everyone, and followed forever.
 
 {doc}`calvo_abreu` studies a different protocol, in which a sequence of policymakers each choose policy
 for one period, and asks which plans are **sustainable** --- which plans each policymaker would want to
-confirm rather than disappoint private expectations.
+confirm.
 
 In the theory of sustainable plans developed by {cite:t}`Abreu`, {cite:t}`chari1990sustainable`, and
 {cite:t}`stokey1989reputation`, a plan is sustained by the private
 sector's expectation that a deviation would trigger a switch to a worse continuation plan.
 
-Two lessons for McKay and Wolf follow.
+The theory supplies a mechanism for credibility that McKay and Wolf's scenario lacks: credibility is an
+equilibrium outcome, and a plan that no continuation threat can support is not credible.
 
-First, McKay and Wolf's counterfactuals tell us what would happen under a rule that is credible; they do
-not tell us whether the rule *is* credible, and a rule that private agents did not fully believe would
-have different effects.
-
-Second, the theory of sustainable plans interprets a deviation from expected policy as an event that
-*changes* private beliefs about future policy.
+The theory also interprets a deviation from expected policy as an event that *changes* private beliefs
+about future policy.
 
 If measured policy shocks are deviations of that kind, then their estimated effects combine the effect of
 the instrument path with a revision of beliefs about the rule, and the premise of Proposition 1 --- that a
 deviation leaves agents' view of the rule unchanged except through the announced path --- fails.
 
-Leeper and Zha's modesty condition, discussed above, is in effect a requirement that deviations not
-trigger such revisions.
+Leeper and Zha's modesty condition requires that deviations not trigger such revisions.
 
 ### Endogenous policy regimes and institutional counterfactuals
 
@@ -1265,10 +1309,10 @@ trigger such revisions.
 {cite:t}`DovisAccountingMFrevised` in which a government that cannot fully commit delegates monetary policy
 to a central bank with an inflation mandate, but may override the mandate when it needs revenue.
 
-Whether it does depends on the fiscal state and on a random cost of overriding the mandate, so the
+Whether it does depends on the fiscal state and on a random cost of overriding the mandate, and the
 economy switches *endogenously* between monetary-dominant and fiscal-dominant regimes.
 
-That model differs from McKay and Wolf's environment in three instructive ways.
+The model departs from McKay and Wolf's environment in three respects.
 
 * Policy is chosen, not given by a rule: the "rule" visible in the data is an equilibrium outcome that
   depends on the state of the economy.
@@ -1281,14 +1325,9 @@ That model differs from McKay and Wolf's environment in three instructive ways.
   this kind are beyond the reach of McKay and Wolf's method and call for a structural model of the
   policymaker.
 
-That lecture also offers a concrete reminder about credibility: its particle filter dates Colombia's gain
-in central-bank credibility to 1997 rather than to the 1991 constitutional reform, suggesting that the
-public took years to believe in the new regime, whereas McKay and Wolf's counterfactuals assume that a new
-rule is believed at once.
-
 ### What the method takes for granted
 
-Collecting these points, McKay and Wolf's counterfactuals are exact under assumptions that the dynamic
+McKay and Wolf's counterfactuals are exact under six assumptions, several of which the dynamic
 programming squared lectures relax.
 
 1. The private sector's behavior is linear and depends on policy only through the expected path of the
@@ -1298,14 +1337,44 @@ programming squared lectures relax.
 4. The policy rule is a primitive chosen by the analyst, not the outcome of choices by a government that
    may be unable to commit.
 5. The question concerns rules, not the institutions that shape how rules are chosen.
-6. The counterfactual rule delivers a unique equilibrium --- a point on which McKay and Wolf are silent,
-   and about which the theory of sustainable plans, with its many credible plans, offers a warning.
+6. The baseline and counterfactual rules each deliver a unique equilibrium, as McKay and Wolf assume; the
+   theory of sustainable plans, with its many credible plans, warns that a policy environment need not
+   pin down one outcome.
 
 Our market satisfies the first assumption, and our computations impose the next three by construction.
+
+For every rule with $\phi > -1$, the equivalence with a market whose suppliers are more flexible
+implies a unique equilibrium, because the equilibrium of that market solves a planning problem with a
+strictly convex objective.
 
 Within these assumptions, McKay and Wolf replace a model of the private sector with measurements; the
 dynamic programming squared lectures, in turn, replace an assumed policy rule with a model of the
 policymaker.
+
+(pc_regimes)=
+## When policy regimes switch
+
+{doc}`policy_regimes` lets the tax rule switch between laissez-faire and price stabilization according to
+a Markov chain that private agents know.
+
+That lecture sets the demander's adjustment cost $g_d$ to zero.
+
+With $g_d = 0$, the market equilibrium solves a Markov jump linear quadratic planning problem
+of the kind studied in {doc}`markov_jump_lq`.
+
+McKay and Wolf's construction recovers outcomes under a permanent rule exactly from data generated by
+switching regimes, whether the expected responses condition on the regime at the date of the shock or
+average over it.
+
+The construction does not deliver outcomes under a reform that agents expect may be reversed, because
+such a rule is not a linear restriction on expected paths.
+
+In the first periods after a shock, a reversible reform has smaller effects than a permanent one: with
+a probability 0.2 of reversal each period, the response of quantity one period after a demand shock is about 7 percent smaller; with
+probability 0.5, about 18 percent smaller.
+
+These numbers measure, in one model, the gap between McKay and Wolf's scenario and a regime change whose
+credibility is summarized by a transition probability.
 
 ## Summary
 
@@ -1320,8 +1389,8 @@ In this market:
   very small adjustment costs, grow with how forward-looking suppliers are.
 * Making the intervention more modest shrinks the Sims–Zha error only in proportion to the policy effect
   itself: near the baseline rule it still misses about 30 percent of the effect on quantity.
-* With evidence on only a few distinct policy shocks, a least-squares approximation improves steadily as
-  evidence on more shocks becomes available.
+* With evidence on only a few distinct policy shocks, a least-squares approximation is accurate once
+  about ten distinct shocks are available.
 * Impulse responses to policy shocks are sufficient statistics for the counterfactual: they deliver it
   exactly, while a structural modeler with a prior over parameters inherits a band of uncertainty.
 * A price-stabilizing tax rule is observationally equivalent to more flexible suppliers, a compact form of
@@ -1334,27 +1403,24 @@ The market also lets us sort procedures by whether they need invertibility.
 | Cholesky or sign-restricted rotations of VAR innovations | yes | miss the supply-shock response |
 | local projection on an external instrument | no | recovers the supply-shock response |
 | McKay–Wolf counterfactual for a given shock (Proposition 1) | no, given the impulse responses | exact |
-| Sims–Zha counterfactual for a given shock | no, given the impulse responses | not robust to the Lucas critique: errors of 5 to 10 percent of the peak response, about 25 percent of the policy effect on $q$ |
+| Sims–Zha counterfactual for a given shock | no, given the impulse responses | not robust to the Lucas critique: for $\tilde\phi = 2$, errors of about 9 percent ($q$) and 7 percent ($p$) of the peak response; 26 percent of the policy effect on $q$ |
 | McKay–Wolf counterfactual second moments via Wold innovations | yes | small error |
 
 Every entry in the table presumes McKay and Wolf's environment: a linear private sector, a credible
 counterfactual rule, and policy shocks that do not change beliefs about the rule ({ref}`pc_dp2`).
 
-Two further lessons emerge.
-
-First, invertibility is not a fixed property of an economy: it depends on the policy rule, so a VAR
+First, invertibility is not a fixed property of an economy: it depends on the policy rule, and a VAR
 identification scheme that works under one regime can fail under another --- in our market because
-price stabilization acts like a reduction in suppliers' adjustment costs.
+price stabilization acts like a proportional reduction in suppliers' production and adjustment costs.
 
 Second, in this market, non-invertibility matters a great deal for some objects --- the impulse response
 to the supply shock --- and very little for others --- counterfactual second moments.
 
-Finally, McKay and Wolf and the dynamic programming squared lectures offer complementary responses to the
-Lucas critique.
+Finally, McKay and Wolf's counterfactual is rule-based scenario analysis: a rule announced at date 0 and
+believed forever.
 
-McKay and Wolf measure the private sector's response to policy paths and take the policy rule, and its
-credibility, as given; the dynamic programming squared lectures model the policymaker, and so can ask
-which rules a government would choose, which it could credibly sustain, and how institutions shape both.
+{doc}`policy_regimes` measures, in one model, how far that scenario lies from a rule change that agents
+expect may be reversed.
 
 ## Exercises
 
@@ -1384,7 +1450,7 @@ by choosing the date-0 policy shocks $\nu$.
 :class: dropdown
 ```
 
-The loss is a weighted sum of squares of $x_A + \Theta_\nu \nu$, so the optimal
+The loss is a weighted sum of squares of $x_A + \Theta_\nu \nu$, and the optimal
 $\nu$ solves a least-squares problem.
 
 ```{code-cell} python3
@@ -1431,16 +1497,16 @@ A policymaker who cares mostly about the price ($\lambda = 0.1$) subsidizes the 
 demand shock raises its price; a larger weight on quantity tempers the subsidy, because the subsidy raises
 quantity.
 
-Two remarks connect this exercise to other ideas.
-
-First, the targeting rule says that the policymaker's forecasts of its targets must be optimal within
+The targeting rule says that the policymaker's forecasts of its targets must be optimal within
 the set of forecasts that policy can implement, which is the idea of
 **forecast targeting** proposed by {cite:t}`Svensson1997`.
 
-Second, the optimal plan is chosen once and for all at date 0, and it works partly through promises about
-*future* taxes that shape suppliers' and demanders' expectations *today*.
+The policymaker chooses the optimal plan once and for all at date 0.
 
-It is a **Ramsey plan** with commitment --- a Stackelberg leader's plan in the language of
+The plan works partly through promises about *future* taxes that shape suppliers' and demanders'
+expectations *today*.
+
+The plan is a Ramsey plan with commitment --- a Stackelberg leader's plan in the language of
 {doc}`dyn_stack` --- and like the plans in {doc}`calvo`, {doc}`dyn_stack`, and {doc}`opt_tax_recur` it is
 time inconsistent, as the next exercise shows.
 
@@ -1498,9 +1564,10 @@ for k, color in [(1, 'C0'), (2, 'C1'), (4, 'C2')]:
     x_k_base = M_k_inv @ rhs_k            # history, then the baseline rule
     Θ_k = M_k_inv[:, 2 * T:][:, k:]       # policy shocks for dates t >= k
     x_reopt = optimal_plan(x_k_base, Θ_k, λ, start=k)
-    gap = max(np.abs(split(x_reopt)[i][k:k + 15] - split(x_plan)[i][k:k + 15]).max()
-              for i in range(3))
-    print(f"k = {k}: max |re-optimized - plan| = {gap:.3f};  continuation loss "
+    gap = [np.abs(split(x_reopt)[i][k:] - split(x_plan)[i][k:]).max() / np.abs(split(x_plan)[i]).max()
+           for i in range(3)]
+    print(f"k = {k}: max |re-optimized - plan| relative to the plan's peak: q {gap[0]:.3f}, "
+          f"p {gap[1]:.3f}, τ {gap[2]:.3f};  continuation loss "
           f"{continuation_loss(x_reopt, k):.4f} vs {continuation_loss(x_plan, k):.4f}")
     for i in range(3):
         axes[i].plot(np.arange(k, H_plot), split(x_reopt)[i][k:H_plot], '--',
@@ -1517,9 +1584,12 @@ plt.show()
 At each date $k$ the re-optimizing policymaker achieves a lower continuation loss by abandoning the
 date-0 plan.
 
-The gains are small --- at $k = 1$ the continuation loss barely changes --- and so are the departures
-from the plan, which are easiest to see in the price; but they are departures that the date-0
-policymaker would not want.
+The gains are small: at $k = 1$ the continuation loss falls from 0.1576 to 0.1575.
+
+The departures from the plan are at most 2 percent of the plan's peak for quantity and the tax, and up
+to 17 percent for the price, at $k = 2$.
+
+The date-0 policymaker would not want those departures.
 
 The date-0 plan promised taxes for dates $t \ge k$ whose purpose was partly to shape expectations at
 dates before $k$; once those dates have passed, the promises no longer serve that purpose, and a
@@ -1527,13 +1597,8 @@ re-optimizing policymaker wants to break them.
 
 This is the time inconsistency that {doc}`calvo` studies in a model of inflation.
 
-{doc}`dyn_stack` and {doc}`opt_tax_recur` show how to implement such a plan recursively: each continuation
-planner inherits, as a state variable, the forward-looking variable that its predecessors promised, and is
-obligated to deliver it.
-
-A re-optimizing policymaker who honored those promises would continue the date-0 plan; McKay and Wolf's
-"timeless perspective", which applies their targeting rule to revisions of forecasts at every date, is a
-device of the same kind.
+A re-optimizing policymaker who honored those promises would continue the date-0 plan, as in the
+recursive implementations discussed in {ref}`pc_dp2`.
 
 ```{solution-end}
 ```
@@ -1596,8 +1661,8 @@ fig, axes = plt.subplots(1, 3, figsize=(14, 4))
 for i in range(3):
     axes[i].plot(split(x_A_s)[i][:H_plot], 'k:', lw=2, label=f"baseline, $\\phi = {φ_A}$")
     axes[i].plot(split(x_true_s)[i][:H_plot], 'C0', lw=2, label="true, no policy")
-    axes[i].plot(split(x_mw_s)[i][:H_plot], 'C0o', ms=4, label="McKay-Wolf")
-    axes[i].plot(split(x_sz_s)[i][:H_plot], 'C3--', lw=2, label="Sims-Zha")
+    axes[i].plot(split(x_mw_s)[i][:H_plot], 'C0o', ms=4, label="McKay–Wolf")
+    axes[i].plot(split(x_sz_s)[i][:H_plot], 'C3--', lw=2, label="Sims–Zha")
     axes[i].axhline(0, color='k', lw=0.5)
     axes[i].set_title(f"{names[i]}, supply shock")
     axes[i].set_xlabel("periods")
@@ -1605,12 +1670,17 @@ axes[0].legend(fontsize=8)
 plt.tight_layout()
 plt.show()
 
-print(f"max |McKay-Wolf - truth| = {np.abs(x_mw_s - x_true_s).max():.1e}")
-print(f"max |Sims-Zha   - truth| = {np.abs(x_sz_s - x_true_s).max():.1e}")
+print(f"max |McKay–Wolf - truth| = {np.abs(x_mw_s - x_true_s).max():.1e}")
+print(f"max |Sims–Zha   - truth| = {np.abs(x_sz_s - x_true_s).max():.1e}")
 ```
 
 Again McKay and Wolf's construction is exact, while the Sims–Zha construction, which keeps agents expecting
 the baseline rule, is not.
+
+The policy effect is small here: removing the baseline rule changes the peak response of quantity by
+about 0.002, against a peak response of 0.033.
+
+The Sims–Zha error is about two-thirds as large as the effect itself.
 
 ```{solution-end}
 ```
@@ -1692,8 +1762,8 @@ identify a set that misses the true response, just as in {doc}`induced_priors`.
 Under the aggressive rule the supply shock is fundamental, the true response is one of the admissible
 rotations, and the identified set contains it.
 
-Notice also that the sign table itself can change with the rule: the theory's sign implications are
-properties of an equilibrium, so they too are subject to the Lucas critique.
+The sign table itself changes with the rule: the theory's sign implications are properties of an
+equilibrium and are subject to the Lucas critique.
 
 ```{solution-end}
 ```
