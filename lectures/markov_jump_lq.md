@@ -240,10 +240,6 @@ The conditional expectation $\bar P_i$ appears inside the inverse.
 
 Averaging the quadratic forms $(\beta B_i' P_j A_i + W_i)' (Q_i + \beta B_i' P_j B_i)^{-1} (\beta B_i' P_j A_i + W_i)$ over $j$ instead gives a different and incorrect recursion, except when next period's Markov state is known with certainty or when $Q_i + \beta B_i' P_j B_i$ and $B_i' P_j A_i$ do not vary with $j$.
 
-At the time of writing, `quantecon.LQMarkov` implements that averaged recursion.
-
-In the examples below, its decision rules differ from those of the correct recursion by at most 2 percent.
-
 ## Applications
 
 We use the following imports.
