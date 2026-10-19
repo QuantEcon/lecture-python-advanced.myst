@@ -864,6 +864,8 @@ where `ma_poly` and `ar_poly` correspond to the polynomials in {eq}`arma_poly` -
 * `ma_poly` is the vector $(1, \theta_1, \theta_2, \ldots, \theta_q)$
 * `ar_poly` is the vector $(1, -\phi_1, -\phi_2, \ldots, - \phi_p)$
 
+Both vectors must have the same length, so the shorter one is padded with trailing zeros: `dimpulse` reads them as polynomials in positive powers of $z$, and an `ar_poly` longer than `ma_poly` would otherwise delay the response by the difference in their lengths.
+
 To this end, we also maintain the arrays `ma_poly` and `ar_poly` as instance data, with their values computed automatically from the values of `phi` and `theta` supplied by the user.
 
 If the user decides to change the value of either `theta` or `phi` ex-post by assignments

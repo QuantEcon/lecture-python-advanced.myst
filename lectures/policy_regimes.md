@@ -196,8 +196,6 @@ The decision rule in regime $i$ is $q_t = -F_i x_t$ with $F_i = (Q_i + \beta B' 
 
 We code the iteration directly.
 
-At the time of writing, `quantecon.LQMarkov` averages over next-period Markov states outside the matrix inverse, which gives a different recursion when $\Pi$ has more than one nonzero element in a row.
-
 ```{code-cell} python3
 def solve_regimes(φs, Π, tol=1e-12, max_iter=20_000):
     "Decision rules F_i for regimes with feedback coefficients φs and transition matrix Π."
