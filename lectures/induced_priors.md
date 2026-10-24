@@ -997,7 +997,7 @@ why it deserves attention.
 
 Information from outside the VAR can do what rotations cannot.
 
-{doc}`policy_counterfactuals` shows that a local projection on a noisy measure of the supply shock
+{doc}`policy_invertibility` shows that a local projection on a noisy measure of the supply shock
 recovers the true supply-shock response, and that a sufficiently aggressive price-stabilizing tax rule
 makes the supply shock fundamental, so that the same sign restrictions then succeed.
 
