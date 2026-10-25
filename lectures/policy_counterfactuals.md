@@ -240,7 +240,8 @@ equilibrium.
 
 {cite:t}`CaravelloMcKayWolf2026` drop that assumption for the counterfactual rule, as
 {doc}`policy_counterfactuals_nk` explains; every rule that we study in this market delivers a unique
-bounded equilibrium, and we check below that our answers do not depend on $T$.
+bounded equilibrium, for a reason given in {ref}`pc_flexible`, and we check below that our answers do not
+depend on $T$.
 
 The term $g_d a(\beta L^{-1}) a(L) q_t$ in {eq}`pc-demand` equals
 $g_d \sum_{i=0}^4 \sum_{k=0}^4 a_i a_k \beta^i q_{t+i-k}$.
@@ -439,6 +440,9 @@ face smaller cost shocks.
 
 The same algebra applies to any rule with $\phi > -1$; for $-1 < \phi < 0$, a rule that destabilizes the
 price, the equivalent suppliers are *less* flexible.
+
+The equivalence also explains why every such rule delivers a unique equilibrium: the equilibrium of the
+untaxed market solves a planning problem with a strictly convex objective ({doc}`supply_demand_var`).
 
 We confirm the equivalence numerically.
 
@@ -1163,11 +1167,12 @@ static-demand model responds more.
 For the announced tax at dates 8 through 12, the misspecified models miss the response of quantity by 37
 and 18 percent, several times their errors for the counterfactual rule.
 
-{cite:t}`CaravelloMcKayWolf2026` find the same pattern for monetary policy.
+{cite:t}`CaravelloMcKayWolf2026` find a related pattern for monetary policy.
 
-Models with and without household heterogeneity, once fitted to the same evidence on short-lived
-interest-rate changes, extrapolate similarly, while models with behavioral frictions in price setting
-extrapolate quite differently to the effects of distant interest-rate changes.
+Behavioral frictions in price setters' expectations, like our behavioral suppliers, change how models
+fitted to the same evidence on short-lived interest-rate changes extrapolate to distant ones, whereas
+household heterogeneity barely does; in their application all these models fit the evidence about equally
+well, while here both misspecified models miss it.
 
 Evidence of another kind can do some of the model's work.
 
@@ -1202,20 +1207,22 @@ McKay and Wolf's sufficient statistics deliver optimal policy as well as the out
 Three exercises at the end of the lecture work this out for a policymaker who, after a demand shock,
 minimizes $\frac12 \sum_t \beta^t (p_t^2 + \lambda q_t^2)$.
 
+This loss is a stand-in for a stabilization mandate, like the inflation and output objectives of McKay and
+Wolf's monetary application, not a measure of welfare.
+
+In this market the untaxed equilibrium maximizes the sum of demanders' and suppliers' objectives
+({doc}`supply_demand_var`), so any tax lowers total surplus, counting the tax revenue, and a planner who
+maximized surplus would set $\tau_t = 0$.
+
 * {ref}`pc_ex1` computes the optimal plan under commitment, McKay and Wolf's Proposition 2, as a
-  least-squares problem in $\Theta_\nu$, and verifies their targeting rule.
-  With $\lambda = 0.1$, the plan subsidizes the good heavily at dates 0 and 1 ($\tau \approx -11.6$ and
-  $-16.8$, against $-0.8$ and $-0.9$ under the baseline rule) and then taxes it at dates 2 and 3
-  ($\tau \approx 6.9$ and $6.0$).
+  least-squares problem in $\Theta_\nu$, and verifies their targeting rule; the plan subsidizes the good
+  heavily while the demand shock raises its price and then taxes it.
 * {ref}`pc_ex_tic` shows that the plan is time inconsistent, as are the Ramsey plans of {doc}`calvo` and
-  {doc}`dyn_stack`, but only slightly: a policymaker who re-optimizes at date 2 sets the date-2 tax at
-  7.2 rather than the planned 6.9, because the plan's restraint on that tax served only to shape
-  expectations before date 2.
+  {doc}`dyn_stack`, but only slightly: a policymaker who re-optimizes later raises taxes that the plan
+  held down only to shape earlier expectations.
 * {ref}`pc_ex_disc` computes optimal policy under *discretion* with the algorithm of
   {cite:t}`HebdenWinkler2026`: each policymaker chooses the current tax, taking as given the rules that
-  its successors will follow.
-  Discretion costs little in this market: with $\lambda = 0.1$ its loss is 0.2456, against 0.2452 under
-  commitment.
+  its successors will follow; discretion raises the loss by less than one percent in this market.
 
 (pc_dp2)=
 ## McKay and Wolf and dynamic programming squared
@@ -1373,11 +1380,8 @@ programming squared lectures relax.
    less, she must approximate or lean on a model ({ref}`pc_measuring`), and estimating those responses
    raises questions of identification and invertibility.
 
-Our market satisfies the first assumption, and our computations impose the next three by construction.
-
-For every rule with $\phi > -1$, the equivalence of {ref}`pc_flexible` with an untaxed market whose
-supplier has cost parameters $h_s/(1+\phi)$ and $g_s/(1+\phi)$ implies a unique equilibrium, because the
-equilibrium of that market solves a planning problem with a strictly convex objective.
+Our market satisfies the first assumption, our computations impose the next three by construction, and
+every rule we study satisfies the sixth ({ref}`pc_flexible`).
 
 Within these assumptions, McKay and Wolf replace a model of the private sector with measurements; the
 dynamic programming squared lectures, in turn, replace an assumed policy rule with a model of the
@@ -1420,11 +1424,9 @@ shocks, although in samples of a few hundred periods the evidence they deliver i
 
 ### Rules with many equilibria
 
-Every rule that we study in this market delivers a unique equilibrium.
-
-{doc}`policy_counterfactuals_nk` turns to a New Keynesian economy, in which an interest-rate peg admits
-many equilibria, and shows how McKay and Wolf's sufficient statistics deliver all of them and how an
-assumption about monetary or fiscal dominance selects one.
+{doc}`policy_counterfactuals_nk` turns to a New Keynesian economy, in which, unlike any rule in our
+market, an interest-rate peg admits many equilibria, and shows how McKay and Wolf's sufficient
+statistics deliver all of them and how an assumption about monetary or fiscal dominance selects one.
 
 ## Summary
 
@@ -1544,9 +1546,9 @@ They are followed by *taxes* of about 6.9 and 6.0 at dates 2 and 3, which bring 
 quickly as the demand shock fades, so that the price falls much less below normal than under the
 baseline rule ($-0.03$ against $-0.25$ at date 3).
 
-A policymaker who chose each date's tax afresh would set nearly the same taxes, as {ref}`pc_ex_disc`
-shows; what commitment adds is a small adjustment of them, made to shape expectations at earlier dates,
-and {ref}`pc_ex_tic` shows that this adjustment is time inconsistent.
+With $\lambda = 0.1$, a policymaker who chose each date's tax afresh would set nearly the same taxes, as
+{ref}`pc_ex_disc` shows; what commitment adds is a small adjustment of them, made to shape expectations
+at earlier dates, and {ref}`pc_ex_tic` shows that this adjustment is time inconsistent.
 
 A loss that also penalized movements in the tax would make these swings smaller; we keep McKay and Wolf's
 loss, which does not.

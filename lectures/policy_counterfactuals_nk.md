@@ -767,11 +767,15 @@ The result is a Markov perfect equilibrium, in the sense of the Markov perfect g
 {doc}`calvo`.
 
 ```{code-cell} python3
-λ = 0.1
-w = np.concatenate([λ * disc, disc, np.zeros(3 * T)])      # the diagonal of W_λ: weights on (y, π, r, p, m)
+def loss_weights(λ):
+    "The diagonal of W_λ: weights on the stacked paths of (y, π, r, p, m)."
+    return np.concatenate([λ * disc, disc, np.zeros(3 * T)])
 
-ν_c, *_ = np.linalg.lstsq(np.sqrt(w)[:, None] * Θ_ν, -np.sqrt(w) * x_A, rcond=None)
-x_comm = x_A + Θ_ν @ ν_c
+def commitment(λ):
+    "Optimal plan under commitment: weighted least squares in the rule shocks."
+    sqrt_w = np.sqrt(loss_weights(λ))
+    ν_c, *_ = np.linalg.lstsq(sqrt_w[:, None] * Θ_ν, -sqrt_w * x_A, rcond=None)
+    return x_A + Θ_ν @ ν_c
 
 def stack_rules(d):
     "Rows d F^k, k = 0, ..., T-1, where F shifts each path forward one period."
@@ -782,17 +786,25 @@ def stack_rules(d):
             D[k, b * T + 1:(b + 1) * T] = D[k - 1, b * T:(b + 1) * T - 1]
     return D
 
-Θ_0, Θ_rest = Θ_ν[:, 0], Θ_ν[:, 1:]
-d = Θ_0 * w
-for it in range(100):
-    D_future = stack_rules(d)[1:]
-    d_new = (Θ_0 - Θ_rest @ np.linalg.solve(D_future @ Θ_rest, D_future @ Θ_0)) * w
-    converged = np.abs(d_new - d).max() < 1e-14
-    d = d_new
-    if converged:
-        break
-D = stack_rules(d)
-x_disc = x_A + Θ_ν @ np.linalg.solve(D @ Θ_ν, -D @ x_A)
+def discretion(λ, tol=1e-14, max_iter=100):
+    "The discretionary path, the Hebden–Winkler rule d, and the number of updates."
+    w_λ = loss_weights(λ)
+    Θ_0, Θ_rest = Θ_ν[:, 0], Θ_ν[:, 1:]
+    d = Θ_0 * w_λ
+    for it in range(max_iter):
+        D_future = stack_rules(d)[1:]
+        d_new = (Θ_0 - Θ_rest @ np.linalg.solve(D_future @ Θ_rest, D_future @ Θ_0)) * w_λ
+        converged = np.abs(d_new - d).max() < tol
+        d = d_new
+        if converged:
+            break
+    D = stack_rules(d)
+    return x_A + Θ_ν @ np.linalg.solve(D @ Θ_ν, -D @ x_A), d, it
+
+λ = 0.1
+w = loss_weights(λ)
+x_comm = commitment(λ)
+x_disc, d, it = discretion(λ)
 
 y_c, π_c, _, p_c, _ = split(x_comm)
 y_d, π_d, _, p_d, _ = split(x_disc)
@@ -810,8 +822,10 @@ The sequence-space calculations reproduce the familiar targeting rules: $\kappa 
 under discretion and $\kappa \pi_t + \lambda (y_t - y_{t-1}) = 0$ under commitment
 {cite}`ClaridaGaliGertler1999,Woodford2003`.
 
-Because the plan starts at date 0 with $y_{-1} = 0$, it is the date-0 Ramsey plan rather than a plan from
-the timeless perspective.
+Because the economy starts in the steady state, with $y_{-1} = 0$, the date-0 Ramsey plan coincides here
+with the plan from the timeless perspective, which imposes the commitment targeting rule from date 0 on;
+a policymaker who re-optimized at a later date $h$ would instead set $\kappa \pi_h + \lambda y_h = 0$,
+ignoring $y_{h-1}$, which is the time inconsistency discussed below.
 
 Summing the commitment targeting rule from date 0 gives $\kappa p_t + \lambda y_t = 0$: optimal policy
 under commitment is *price-level targeting*, and the price level returns to its initial value, while under
@@ -893,9 +907,9 @@ Discretion goes furthest: it keeps output almost at its steady state and lets in
 inflation part is about 2.6 times the Taylor rule's.
 
 The constant money supply and the peg under fiscal dominance, which with $\gamma = 1$ are two members of
-the family of equilibria under the peg, keep inflation close to its Taylor-rule path and produce
-recessions that are shallower but more persistent, with output parts about a third smaller than the
-Taylor rule's.
+the family of equilibria under the peg, keep the inflation part of the loss close to the Taylor rule's
+(8.2 and 8.0 against 9.0) and produce recessions that are shallower but more persistent, with output
+parts about a third smaller than the Taylor rule's.
 
 Credible forward guidance and the monetary-dominance peg do worse than the Taylor rule because they let
 inflation run after a cost-push shock: their inflation parts are three to four times the Taylor rule's.
@@ -904,7 +918,48 @@ The ranking depends on the loss.
 
 The weight on output that a second-order approximation to household welfare implies in this model is
 $\kappa / \varepsilon$, where $\varepsilon$ is the elasticity of substitution among goods
-{cite}`Woodford2003,Gali2015`, far below 0.1, and with it inflation would matter much more.
+{cite}`Woodford2003,Gali2015`.
+
+With $\varepsilon = 6$, as in {cite:t}`Gali2015`, that weight is about 0.003, thirty times smaller than
+0.1, and inflation matters much more.
+
+The next cell ranks the counterfactuals again with that weight, recomputing the optimal policies under
+commitment and discretion for it; the other policies do not depend on the loss.
+
+```{code-cell} python3
+ε = 6                                    # elasticity of substitution among goods
+λ_w = κ / ε
+w_w = loss_weights(λ_w)
+loss_w = lambda x: 0.5 * np.sum(w_w * x**2)
+table_w = [("Taylor rule", loss_w(x_A)),
+           ("peg, monetary dominance", loss_w(x_md)),
+           ("peg, fiscal dominance", loss_w(x_fd)),
+           ("constant money supply", loss_w(x_m)),
+           ("forward guidance, perfect commitment", loss_w(x_peg_H)),
+           ("forward guidance, random exit (expected loss)", expected(loss_w)),
+           ("optimal policy, discretion", loss_w(discretion(λ_w)[0])),
+           ("optimal policy, commitment", loss_w(commitment(λ_w)))]
+print(f"welfare-based weight on output: κ / ε = {λ_w:.4f}")
+for label, total in sorted(table_w, key=lambda row: row[1]):
+    print(f"{label:48s}  {total:6.1f}")
+```
+
+With the welfare-based weight, commitment still does best, with a loss a little more than half the
+Taylor rule's, and the peg under fiscal dominance and the constant money supply come next.
+
+Discretion now does worse than the Taylor rule.
+
+To hold down inflation, a discretionary policymaker can use only current output, and with a flat Phillips
+curve it engineers a recession twice as deep on impact as the Taylor rule's yet is left with a larger
+inflation part of the loss.
+
+The Taylor rule smooths the interest rate, so it keeps the rate high after the shock has faded, and the
+expectation of those high rates holds current inflation down: an inertial rule supplies some of the
+history dependence that commitment would, which is the stabilization bias of discretion seen from the
+other side {cite}`Woodford2003`.
+
+Forward guidance with random exit, third with $\lambda = 0.1$, now falls behind the Taylor rule and
+discretion; credible forward guidance and the peg under monetary dominance remain far behind.
 
 The ranking is for one shock and one loss function, and it says nothing about which of these policies a
 government could commit to.
@@ -1087,7 +1142,7 @@ plt.show()
 
 Under perfect commitment, the impact effect on output rises quickly with the promised duration, from
 $-0.2$ at $H = 2$ to $12.0$ at $H = 10$, and then approaches the effect of the peg that lasts forever under
-monetary dominance, $14.4$, which it nearly reaches by $H = 30$.
+monetary dominance, $14.4$, which it nearly reaches by $H = 30$ (not shown).
 
 The effects level off because the peg replaces the Taylor rule's response to a cost-push shock that dies
 out: once the peg outlasts most of the shock, lengthening it changes little.

@@ -543,12 +543,41 @@ plt.tight_layout()
 plt.show()
 ```
 
-With the baseline shock sizes, the instrument is weak: a supply shock moves prices and quantities so
-little that, in 200 periods, the local projection and the internal-instrument VAR are uninformative, and
-their medians are biased, as estimates with weak instruments typically are.
+The next cell measures the strength of the instrument by the median, across samples, of the first-stage
+$F$ statistic for $m_t$ in a regression of $q_t$ on $m_t$ with the same controls, and computes the
+response of quantity to a quantity innovation, which is what ordinary least squares would estimate.
 
-With $\sigma_s = 4$, the instrument is strong: both are centered on the truth but noisy, while SVAR-IV is
-more precise and centered on its population value, the dashed line, which is the wrong response.
+```{code-cell} python3
+def first_stage_F(z, m, p=12):
+    "F statistic for the instrument in a regression of q_t on m_t and p lags of (m_t, q_t, p_t)."
+    W = np.column_stack([m, z])
+    X = np.column_stack([np.ones(len(z) - p), lagged(W, p), m[p:]])
+    coef, *_ = np.linalg.lstsq(X, z[p:, 0], rcond=None)
+    e = z[p:, 0] - X @ coef
+    s2 = e @ e / (len(e) - X.shape[1])
+    return coef[-1]**2 / (s2 * np.linalg.inv(X.T @ X)[-1, -1])
+
+rng_F = np.random.default_rng(1)
+for σ in [σ_s, 4.0]:
+    D_σ = ma_qp(structural_ma(g_s, g_d, φ_A, σ_s=σ))
+    F_med = np.median([first_stage_F(*simulate_sample(D_σ, n_obs, rng_F)) for _ in range(n_rep)])
+    V_σ, C_σ = wold(D_σ)
+    ols = np.array([C_σ[h] @ V_σ[:, 0] / V_σ[0, 0] for h in range(4)])[:, 0]
+    print(f"σ_s = {σ:.2f}: median first-stage F {F_med:5.1f};  "
+          f"response of q to a quantity innovation, h = 0-3: {np.round(ols, 2)}")
+```
+
+With the baseline shock sizes, the instrument is weak: a supply shock moves prices and quantities so
+little that the median first-stage $F$ statistic is about 1, far below the rule-of-thumb threshold of 10.
+
+In 200 periods, the local projection and the internal-instrument VAR are then uninformative, and their
+medians are pulled toward the least-squares response to a quantity innovation, which demand shocks
+dominate, as estimates with weak instruments typically are; SVAR-IV's median is pulled the same way, away
+from even its population value.
+
+With $\sigma_s = 4$, the instrument is strong, with a median first-stage $F$ of about 20: the local
+projection and the internal-instrument VAR are centered on the truth but noisy, while SVAR-IV is more
+precise and centered on its population value, the dashed line, which is the wrong response.
 
 With few lags, the VAR-based estimators also suffer from truncation: with four lags instead of twelve
 (not shown), SVAR-IV's median strays from even its population value, and the internal-instrument VAR's
@@ -618,10 +647,11 @@ lowers both.
 for φ in [0.5, 2.0]:
     D_rule = ma_qp(structural_ma(g_s, g_d, φ))
     nrm_rule = impulse_norms(D_rule, wold(D_rule)[0])[0]
-    D_flex = ma_qp(structural_ma(g_s / (1 + φ), g_d, 0.0, h_s=h_s / (1 + φ)))
+    D_flex = ma_qp(structural_ma(g_s / (1 + φ), g_d, 0.0, h_s=h_s / (1 + φ), σ_s=σ_s / (1 + φ)))
     nrm_flex = impulse_norms(D_flex, wold(D_flex)[0])[0]
     print(f"φ = {φ}: ||L^-1 d_s|| under the rule {nrm_rule:.4f}, "
-          f"in the flexible-supply market {nrm_flex:.4f}")
+          f"in the flexible-supply market {nrm_flex:.4f};  max |D_rule - D_flex| = "
+          f"{np.abs(D_rule - D_flex).max():.1e}")
 ```
 
 The supply shock fails to be fundamental because the moving average $D(z) = \sum_j D_j z^j$ has a zero
@@ -715,6 +745,8 @@ counterfactual autocovariances to machine precision.
 
 When it is not ($g_s = 10$), the route makes an error, but the error is tiny.
 
+### Why the route errs
+
 Invertibility makes the route exact for the following reason.
 
 Under invertibility, each Wold innovation is a linear combination of the *current* structural shocks, and
@@ -739,6 +771,13 @@ print(f"largest weight on past supply shocks {np.abs(K_w[1:, :, 0]).max():.4f}, 
 
 Only past *supply* shocks enter, because the demand shock is fundamental.
 
+The past supply shocks in the Wold innovations are not negligible relative to the current one.
+
+With a single zero $\lambda$ inside the unit circle, the supply part of the orthonormalized innovation is
+the Blaschke-filtered shock $\lambda \epsilon_{st} - (1 - \lambda^2) \sum_{j \ge 1} \lambda^{j-1}
+\epsilon_{s,t-j}$, so the weights on past shocks decay at the rate $\lambda \approx 0.866$, and together
+they carry $(1 - \lambda^2) / \lambda^2 \approx 1/3$ as much variance as the weight on the current shock.
+
 Proposition 1 treats the continuation of a supply-shock path that started before date 0 as a fresh date-0
 path from the steady state, ignoring that agents had already been responding to it, and so maps it
 incorrectly.
@@ -753,16 +792,23 @@ def continuation(x, k):
         out[b * T:(b + 1) * T - k] = x[b * T + k:(b + 1) * T]
     return out
 
-for k in [1, 2, 3]:
+peak = [np.abs(split(X_new_struct[:, 0])[i]).max() for i in range(2)]
+print("continuation from date k: max |mapped - true| relative to the peak of the true response")
+for k in range(1, 9):
     mapped, _ = mw_counterfactual(M_inv_A, continuation(X_A[:, 0], k), φ_new)
     target = continuation(X_new_struct[:, 0], k)
-    rel = [np.abs(split(mapped)[i] - split(target)[i])[:T - 10].max() / np.abs(split(target)[i]).max()
-           for i in range(2)]
-    print(f"supply shock, continuation from date {k}: max |mapped - true| relative to the peak "
-          f"of the true path: q {rel[0]:.3f}, p {rel[1]:.3f}")
+    rel = [np.abs(split(mapped)[i] - split(target)[i])[:T - 10].max() / peak[i] for i in range(2)]
+    print(f"  k = {k}:  q {rel[0]:.3f},  p {rel[1]:.3f}")
 ```
 
-Proposition 1 misses these continuations by up to 13 percent of their peaks.
+Proposition 1 misses these continuations by up to about 7.5 percent of the peak of the true response;
+the misses are largest near $k = 4$ and fade gradually, to 1 to 2.5 percent by $k = 8$.
+
+The continuation from date 2 is the exception: one period after a supply shock, quantity is almost exactly
+at its steady state under both rules, so that continuation starts from nearly the state that
+Proposition 1 assumes.
+
+The error comes from the state that a continuation inherits.
 
 That is one source of error; there is a second.
 
@@ -783,17 +829,30 @@ So the counterfactual outcomes are not a one-sided moving average of the baselin
 the Wold-innovation route, which builds such a moving average, leaves out the pieces dated before the
 innovation.
 
-The next cell rebuilds the counterfactual autocovariances from these covariances, first from $h \ge 0$
-only, with the true continuations in place of Proposition 1's, and then adding the pieces with $h < 0$.
+Write $\tilde R_h = \sum_{j \ge 0} \tilde D_{h+j} K_j^\top$ for these covariances under the counterfactual
+rule.
+
+Because the two-sided history of the Wold innovations spans the two-sided history of the structural
+shocks, the counterfactual outcomes are $\tilde z_t = \sum_{h = -\infty}^{\infty} \tilde R_h V^{-1} u_{t-h}$,
+and their autocovariances are
+
+$$
+\tilde \Gamma_j = \sum_{h = -\infty}^{\infty} \tilde R_{h+j} V^{-1} \tilde R_h^\top .
+$$
+
+The next cell computes this sum first over $h \ge 0$ only, which uses the true continuations in place of
+Proposition 1's, and then over all $h$.
 
 ```{code-cell} python3
 D_new = np.stack([X_new_struct[b * T:(b + 1) * T] for b in range(3)], axis=1)   # T x 3 x 2
 
-def cov_with_u(h):
-    "Σ_j D̃_(h+j) K_j^T: covariance of the counterfactual (q, p, τ)_(t+h) with u_t."
-    return sum((D_new[h + j] @ K_w[j].T for j in range(H_ma) if 0 <= h + j < T), np.zeros((3, 2)))
+D_base = np.stack([X_A[b * T:(b + 1) * T] for b in range(3)], axis=1)      # T x 3 x 2
 
-R_u = {h: cov_with_u(h) for h in range(-H_ma, T)}
+def cov_with_u(D_paths, h):
+    "Σ_j D_(h+j) K_j^T: covariance of the outcomes (q, p, τ)_(t+h) with the baseline Wold innovation u_t."
+    return sum((D_paths[h + j] @ K_w[j].T for j in range(H_ma) if 0 <= h + j < T), np.zeros((3, 2)))
+
+R_u = {h: cov_with_u(D_new, h) for h in range(-H_ma, T)}
 V_A_inv = np.linalg.inv(V_A)
 
 def autocov_from(hs, n_lags=12):
@@ -809,7 +868,9 @@ for label, Γ_h in [("Wold-innovation route", Γ_route),
     err = np.abs(Γ_h - Γ_new).max() / np.abs(Γ_new).max()
     err_q = (Γ_h[0, 0, 0] - Γ_new[0, 0, 0]) / Γ_new[0, 0, 0]
     print(f"{label:32s}  {err:21.1e}   {err_q:24.1e}")
-print(f"largest piece with h < 0: {max(np.abs(R_u[h]).max() for h in range(-H_ma, 0)):.1e}")
+print(f"largest covariance with h < 0: counterfactual {max(np.abs(R_u[h]).max() for h in range(-H_ma, 0)):.1e}, "
+      f"baseline {max(np.abs(cov_with_u(D_base, h)).max() for h in range(-H_ma, 0)):.1e};  "
+      f"largest with h >= 0: {max(np.abs(R_u[h]).max() for h in range(T)):.1f}")
 ```
 
 The two sources of error matter at different lags.
@@ -818,17 +879,23 @@ With the true continuations in place of Proposition 1's, the error in the varian
 more than four fifths, but the largest error, which is in autocovariances at lags one and two, barely
 changes; adding the pieces dated before the innovation removes the error entirely.
 
-{cite:t}`CaravelloMcKayWolf2026` (Appendix A.6) show in lag-operator notation why, without invertibility,
-the counterfactual responses to Wold innovations need not generate the counterfactual second moments; in
-their notation, the covariances above are, up to the normalization of the innovations, the coefficients
-of $\tilde \Theta(L) P^*(L^{-1})$, and the pieces with $h < 0$ are its negative powers of $L$.
+{cite:t}`CaravelloMcKayWolf2026` (Appendix A.6) discuss the problem in lag-operator notation.
 
-The overall error is nevertheless tiny because supply shocks account for very little of the variance of
+In their notation, the covariances $\tilde R_h$ are, up to the normalization of the innovations, the
+coefficients of $\tilde \Theta(L) P^*(L^{-1})$, and the pieces with $h < 0$ are its negative powers of $L$.
+
+They locate the failure in $P^*(L^{-1}) P(L) \neq I$, which must occur when there are more shocks than
+observables, as in their application to the model of {cite:t}`SmetsWouters2007`.
+
+In our market, with two shocks and two observables, $P^*(L^{-1}) P(L) = I$ (which is what makes the
+two-sided sum above exact), so the failure lies elsewhere: the route's responses are not
+$\tilde \Theta(L) P^*(L^{-1})$, because they mis-map the continuations and leave out the pieces with
+$h < 0$.
+
+### Why the error is small
+
+The overall error is tiny because supply shocks account for very little of the variance of
 prices and quantities.
-
-The past supply shocks in the Wold innovations are not negligible relative to the current one: they
-carry about $(1 - \lambda^2) / \lambda^2 \approx 1/3$ as much variance, where $\lambda \approx 0.866$ is
-the zero computed above.
 
 ```{code-cell} python3
 var_by_shock = (D_A**2).sum(axis=0)               # rows: (q, p); columns: (supply, demand)

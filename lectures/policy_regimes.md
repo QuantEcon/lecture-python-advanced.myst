@@ -414,6 +414,12 @@ As switches become more likely, the decision rules in the two regimes move towar
 
 With switching probability 0.5, the impact responses are 0.33 and 0.52; with permanent regimes, they are 0.25 and 0.57.
 
+The responses do not converge.
+
+With switching probability 0.5, the two rows of $\Pi$ are identical, so next period's regime, and with it the value agents attach to next period's state, does not depend on today's regime: $\bar P_0 = \bar P_1$.
+
+The decision rules $F_0$ and $F_1$ then differ only through the current regime's $Q_i$ and $N_i$, so the whole gap between 0.33 and 0.52 is the effect of the rule in force today.
+
 (pr_levels)=
 ## Two levels of the Lucas critique
 
@@ -548,7 +554,7 @@ The remaining gap to 0.065 reflects a laissez-faire decision rule that anticipat
 
 The impact response of quantity to a demand shock is 0.260 in the laissez-faire regime of the switching economy and 0.252 under permanent laissez-faire, and the squared ratio of the two, about 1.07, matches the ratio of the residual variances, 0.070 / 0.065.
 
-In both regimes, conditioning on the regime lowers the residual variance of quantity by less than 3 percent.
+In both regimes, fitting separate coefficients rather than the pooled ones, on the same observations, lowers the residual variance of quantity by less than 3 percent: from 0.0718 to 0.0699 under laissez-faire and from 0.3249 to 0.3232 under stabilization.
 
 The autoregression's innovation in the price, orthogonalized by ordering the price first, is mostly a demand shock.
 
@@ -611,46 +617,79 @@ The error of the pooled autoregression therefore comes from averaging over regim
 
 In the passage quoted in the overview, {cite:t}`SimsZhaAER2006` conjecture that the public's behavior can be well approximated as linear and time invariant even when policy switches.
 
-Our market does not support the conjecture.
+As a statement about fit, our results bear the conjecture out: the constant-coefficient autoregression fits almost as well as autoregressions that condition on the regime.
+
+As a statement about the private sector's equations, they bear it out only when regimes are drawn afresh each period, or nearly so.
 
 The supply and demand curves are linear and time invariant by construction, but the supply curve contains the expectation $\mathbb{E}_t q_{t+1}$.
 
-A model like Sims and Zha's holds fixed the private sector's equations written in observable variables, after expectations are replaced by forecasts from current and past variables, and those forecasts depend on the regime.
+A model like Sims and Zha's holds fixed the private sector's equations written in observable variables, after expectations are replaced by forecasts from current and past variables.
 
-In regime $i$, the forecast of $q_{t+1}$ implied by the decision rules puts weight $c_i$ on $q_t$ and weight $a_i$ on the current demand innovation $w_{dt}$.
+In regime $i$, the forecast of $q_{t+1}$ puts weight $c_i$ on $q_t$ and weight $a_i$ on the current demand innovation $w_{dt}$; both depend on the regime only through suppliers' forecast of next period's decision rule, $\bar F_i = \sum_k \Pi_{ik} F_k$.
 
 Because demand is static, $d_t = -(p_t + h_d q_t)$, and $d_t = w_{dt}$ plus lagged innovations.
 
 Substituting the forecast into the supply curve and replacing the demand shock with prices and quantities gives
 
 $$
-a_p \, p_t - \tau_t = a_q \, q_t + (\text{lagged variables and the cost shock}),
-\qquad a_q = h_s + g_s (1 + \beta) - \beta g_s (c_i - h_d a_i), \quad a_p = 1 - \beta g_s a_i .
+a_{p,i} \, p_t - \tau_t = a_{q,i} \, q_t + (\text{lagged variables and current and lagged cost innovations}),
 $$
 
+with
+
+$$
+a_{q,i} = h_s + g_s (1 + \beta) - \beta g_s (c_i - h_d a_i), \qquad a_{p,i} = 1 - \beta g_s a_i .
+$$
+
+The weight $a_i$ is negative, because a positive demand shock is a negative $w_{dt}$, so $a_{p,i} > 1$.
+
+We compute these coefficients for the switching chain of this lecture, for the two permanent rules, and for a chain whose regime is drawn afresh each period, with switching probability 0.5.
+
 ```{code-cell} python3
-for i, label in enumerate(["laissez-faire", "stabilization"]):
-    F_bar = Π[i, 0] * F[0] + Π[i, 1] * F[1]     # E_t q_(t+1) = -F_bar (A x_t + B q_t)
-    c_i = -(F_bar @ B)[0, 0]                     # weight on q_t
-    a_i = -(F_bar @ A)[0, i_wd]                  # weight on the demand innovation w_dt
-    a_q = h_s + g_s * (1 + β) - β * g_s * (c_i - h_d * a_i)
-    a_p = 1 - β * g_s * a_i
-    print(f"{label:14s}: supply curve a_p p_t - τ_t = a_q q_t + ...,  a_q = {a_q:.2f},  a_p = {a_p:.2f}")
+def supply_coefficients(F_, Π_):
+    "Coefficients (a_q, a_p) of the supply curve a_p p_t - τ_t = a_q q_t + ... in each regime."
+    out = []
+    for i in range(2):
+        F_bar = Π_[i, 0] * F_[0] + Π_[i, 1] * F_[1]     # E_t q_(t+1) = -F_bar (A x_t + B q_t)
+        c_i = -(F_bar @ B)[0, 0]                         # weight on q_t
+        a_i = -(F_bar @ A)[0, i_wd]                      # weight on the demand innovation w_dt
+        out.append((h_s + g_s * (1 + β) - β * g_s * (c_i - h_d * a_i), 1 - β * g_s * a_i))
+    return out
+
+Π_iid = np.full((2, 2), 0.5)
+cases = [("switching chain of this lecture", F, Π),
+         ("permanent rules", np.stack([F_lf[0], F_st[0]]), np.eye(2)),
+         ("regimes drawn afresh each period", solve_regimes(φs, Π_iid), Π_iid)]
+print(" " * 34 + "laissez-faire       stabilization")
+print(" " * 34 + " a_q     a_p         a_q     a_p")
+for label, F_, Π_ in cases:
+    (q_0, p_0), (q_1, p_1) = supply_coefficients(F_, Π_)
+    print(f"{label:33s} {q_0:6.2f}  {p_0:5.2f}       {q_1:6.2f}  {p_1:5.2f}")
 ```
 
-The coefficient on quantity is nearly the same in the two regimes, but the coefficient on the price is about 60 percent larger under stabilization.
+With regimes as persistent as ours, the coefficient on quantity is nearly the same in the two regimes, but the coefficient on the price, relative to the tax, is about 60 percent larger under stabilization, close to its values under the permanent rules.
 
-Under stabilization, the tax falls when a demand shock raises the price, so quantity responds to the shock more persistently; suppliers, who forecast that response and face adjustment costs, respond more strongly to today's price, which reveals the demand shock.
+Under stabilization, the tax falls when a demand shock raises the price, so quantity responds more strongly to the shock, next period as well as on impact; suppliers, who forecast that response and face adjustment costs, respond more strongly to today's price, which together with quantity reveals the demand shock.
 
 The supply curve written in observables thus switches with the policy regime, as the Lucas critique says it should.
 
-What changes it is the rule in force, not the prospect of switches: the feedback of $q_t$ on $q_{t-1}$ is 0.650 against 0.654 under permanent laissez-faire and 0.548 against 0.546 under permanent stabilization.
+With regimes drawn afresh each period, suppliers' forecast of next period's rule does not depend on today's regime, and the supply curve is the same in both regimes, exactly as Sims and Zha assume, although the decision rules still differ ({numref}`fig-pr-switch-prob`).
 
-The constant-coefficient autoregression for $(q_t, p_t)$ has a further problem: it omits the tax and pools two policy rules, so that, although it fits almost as well as autoregressions that condition on the regime, its impulse response describes behavior in neither regime.
+So, as a statement about the private sector's equations, the conjecture holds exactly only when regimes are drawn afresh each period, and it fails in our market, whose regimes last 20 periods on average.
 
-{cite:t}`SimsZhaAER2006` let the variances of the disturbances switch in every equation and, in some specifications, let the coefficients of the policy equation switch while those of the other equations stay fixed; their best-fitting model lets only the variances switch.
+One caveat concerns normalization.
 
-In this market, a model that held the private sector's equations fixed while only the policy equation switched would be misspecified, because the supply equation's coefficient on the price switches too; a model whose coefficients all switch with an unobserved Markov state, as {cite:t}`Hamilton1989` proposed, would capture the regime-dependent responses that the constant-coefficient autoregression averages away.
+Without shocks to the tax rule, $\tau_t = 0$ under laissez-faire, so the coefficient on $\tau_t$ is not identified there, and adding a multiple of the stabilization rule $\tau_t + 2 p_t = 0$ to the stabilization regime's supply curve and rescaling could make its contemporaneous coefficients match those under laissez-faire.
+
+With an i.i.d. shock in the tax rule, as in Sims and Zha's policy equation, the form above is the only combination of the supply curve and the rule whose disturbance is uncorrelated with that shock, because the forecast of $q_{t+1}$ puts no weight on $\nu_t$; and the forecast's weights on lagged demand innovations, which adding the tax rule cannot change because the rule has no lags, also differ across regimes, by about the same factor as $a_i$.
+
+The constant-coefficient autoregression for $(q_t, p_t)$ has a further problem: it omits the tax and pools two policy rules, so that its impulse response describes behavior in neither regime.
+
+{cite:t}`SimsZhaAER2006` let the variances of the disturbances switch in every equation and, in some specifications, let the coefficients of the policy equation switch while those of the other equations stay fixed; their best-fitting model lets only the variances switch, and versions in which other coefficients also switch fit worse.
+
+In our market, a model that held the private sector's equations fixed while only the policy equation switched would be misspecified, because the supply equation's coefficients on the price, relative to the tax, and on lagged variables switch too; a Markov-switching vector autoregression in the spirit of {cite:t}`Hamilton1989`, with all coefficients switching, would capture the regime-dependent responses that the constant-coefficient autoregression averages away.
+
+That the constant-coefficient autoregression fits almost as well as autoregressions that condition on the regime suggests that, in samples of realistic length, comparisons of fit have little power to detect regime-dependent coefficients in the private sector's equations.
 
 (pr_scenarios)=
 ## Scenarios and regime changes
@@ -1230,9 +1269,11 @@ Decision rules depend on the current regime and on the probabilities of future r
 
 A switch within a known process leaves decision rules unchanged; a change in the process changes them in every regime.
 
-With expectations replaced by regime-conditional forecasts, the supply curve written in prices and quantities depends on the regime, contrary to the conjecture of {cite:t}`SimsZhaAER2006`: its coefficient on the price is about 60 percent larger under stabilization; the prospect of switches, by contrast, changes decision rules very little.
+With regimes as persistent as ours, the supply curve written in prices and quantities depends on the regime, contrary to the conjecture of {cite:t}`SimsZhaAER2006`: its coefficient on the price, relative to the tax, is about 60 percent larger under stabilization.
 
-A constant-coefficient vector autoregression for prices and quantities, which omits the tax and pools two policy rules, nevertheless averages over regimes and has conditionally heteroskedastic innovations.
+The regime enters the supply curve only through suppliers' forecast of next period's rule, so with regimes drawn afresh each period the supply curve would be the same in both regimes, as Sims and Zha assume.
+
+A constant-coefficient vector autoregression for prices and quantities omits the tax, pools two policy rules, and has conditionally heteroskedastic innovations.
 
 It fits almost as well as autoregressions that condition on the regime, but its impulse responses describe behavior in neither regime, although within a single regime the same autoregression approximately identifies the demand shock.
 
