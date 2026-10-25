@@ -1658,7 +1658,7 @@ Different measures can identify different treatments with more than two regimes,
 
 The tree of {ref}`pr_tree` has one branch for each reversal date because a reversal is permanent.
 
-Return to a recurrent chain, $\Pi = \begin{pmatrix} 0.95 & 0.05 \\ e & 1 - e \end{pmatrix}$ with $e = 0.2$, under which laissez-faire can give way to stabilization again, starting in stabilization.
+Consider instead a recurrent chain, $\Pi = \begin{pmatrix} 0.95 & 0.05 \\ e & 1 - e \end{pmatrix}$ with $e = 0.2$, under which laissez-faire can give way to stabilization again, starting in stabilization.
 
 Its tree doubles in size every period, so truncate it: regimes can switch through date $K$, and the regime in place at date $K$ is permanent.
 
@@ -1803,7 +1803,8 @@ For each rule and each shock, compare the error of the least-squares counterfact
 ```
 
 ```{code-cell} python3
-# uses the treatments `slices` from the solution to pr_ex4
+slices = {name: stacked(δ_pop[name][:T_mw]) for name in ["demand", "supply"]}  # as in pr_ex4
+
 print("rule   shock    no adjustment   own treatment   both treatments")
 for φ_t in [1.0, 5.0]:
     R_t = np.hstack([np.zeros((T_mw, T_mw)), φ_t * np.eye(T_mw), np.eye(T_mw)])
