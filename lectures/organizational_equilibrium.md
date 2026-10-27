@@ -879,11 +879,11 @@ def transition(τ, τ_B, H_B, model):
                         * (1 - s_org(τ_next, H_B, model))**(-σ) - lhs)
     return brentq(f, τ_B, τ)                 # the root between τ_B and τ
 
-T_map = lambda τ: transition(τ, τ_B, H_B, model)
+𝒯 = lambda τ: transition(τ, τ_B, H_B, model)
 
-τ_O = [T_map(τ_M)]
+τ_O = [𝒯(τ_M)]
 for t in range(400):
-    τ_O.append(T_map(τ_O[-1]))
+    τ_O.append(𝒯(τ_O[-1]))
 τ_O = np.array(τ_O)
 V_org = action_payoffs(τ_O, model)
 print("organizational tariffs (percent):", np.round(100 * τ_O[:6], 1))
@@ -893,8 +893,8 @@ ratio = ((model.β * G(τ_O[0], model)**(1 - model.σ))**(-1 / model.σ)
          * (1 - s_org(τ_O[0], H_B, model)))
 s_minus = 1 / (1 + ratio)          # saving at date -1 if the path starts one period later
 print(f"gain from sitting out at date 0: H(τ_M, s_-1) - H_B = {H(τ_M, s_minus, model) - H_B:.1e}")
-print(f"slope of the transition map at τ_M: {(T_map(τ_M) - T_map(τ_M - 1e-6)) / 1e-6:.4f}, "
-      f"near τ_B: {(T_map(τ_B + 2e-3) - T_map(τ_B + 1e-3)) / 1e-3:.4f}")
+print(f"slope of the transition map at τ_M: {(𝒯(τ_M) - 𝒯(τ_M - 1e-6)) / 1e-6:.4f}, "
+      f"near τ_B: {(𝒯(τ_B + 2e-3) - 𝒯(τ_B + 1e-3)) / 1e-3:.4f}")
 print(f"tariff after 20 periods {100 * τ_O[20]:.1f} percent, after 100 periods "
       f"{100 * τ_O[100]:.1f} percent")
 ```
@@ -916,7 +916,7 @@ mystnb:
 n_plot = 20
 fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
 grid_τ = np.linspace(τ_B, τ_M, 100)
-axes[0].plot(100 * grid_τ, [100 * T_map(x) for x in grid_τ], 'C3', lw=2,
+axes[0].plot(100 * grid_τ, [100 * 𝒯(x) for x in grid_τ], 'C3', lw=2,
              label=r"$\mathcal{T}(\tau)$")
 axes[0].plot(100 * grid_τ, 100 * grid_τ, 'k', lw=0.8, label="45-degree line")
 axes[0].set_xlabel(r"current tariff $\tau_t$ (percent)")
@@ -965,10 +965,10 @@ mystnb:
 t_shock, τ_shock, n_plot = 10, 0.1, 30
 τ_O_shock = list(τ_O[:t_shock]) + [τ_shock]
 while len(τ_O_shock) < n_plot:
-    τ_O_shock.append(T_map(τ_O_shock[-1]))
+    τ_O_shock.append(𝒯(τ_O_shock[-1]))
 τ_S_shock = np.r_[τ_R[:t_shock], τ_shock, np.full(n_plot - t_shock - 1, τ_M)]
-t_back = np.argmin(np.abs(τ_O - T_map(τ_shock)))
-print(f"tariff after the shock: {100 * T_map(τ_shock):.1f} percent, the undisturbed path's "
+t_back = np.argmin(np.abs(τ_O - 𝒯(τ_shock)))
+print(f"tariff after the shock: {100 * 𝒯(τ_shock):.1f} percent, the undisturbed path's "
       f"tariff at period {t_back}")
 
 fig, ax = plt.subplots()
