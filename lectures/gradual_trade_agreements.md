@@ -942,7 +942,7 @@ for k in [0, 1, 2, 4, 6, 8]:
     binding = "first" if first < second else "second"
     better = (1 - δ) * k > 3 * mb_k.w_G - 2 * mb_k.w_mB - mb_k.w_nB
     print(f"{k:4.0f}   {min_discount_factor(immediate_slack, mb_k):19.3f}  {δ_two:8.3f}"
-          f"  ({binding:<6s})       {min_discount_factor(two_step_slack, mb_same):18.3f}"
+          f"  {'(' + binding + ')':<8s}       {min_discount_factor(two_step_slack, mb_same):18.3f}"
           f"   {str(better):>14s}")
 ```
 
