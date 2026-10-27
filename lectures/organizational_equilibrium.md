@@ -354,7 +354,7 @@ print(f"slope of q at s_M: {abs(slope(s_M)):.4f},  at s_B: {slope(s_B):.4f}")
 ---
 mystnb:
   figure:
-    caption: Saving rates on paths of constant action payoff
+    caption: Saving rates on constant-payoff paths
     name: fig-oe-q
 ---
 grid = np.linspace(s_M - 0.005, s_B + 0.002, 300)
@@ -723,7 +723,7 @@ print("consumption at the Markov tariff relative to free trade: export-sector wo
 ---
 mystnb:
   figure:
-    caption: Worker welfare and the return to capital
+    caption: Worker welfare and capital returns
     name: fig-oe-chi-G
 ---
 τ_grid = np.linspace(0, 0.5, 200)
@@ -959,7 +959,7 @@ $\mathcal{T}(0.1)$, and liberalization resumes from there.
 ---
 mystnb:
   figure:
-    caption: Tariff paths after a temporary protectionist shock
+    caption: Tariffs after a protectionist shock
     name: fig-oe-shock
 ---
 t_shock, τ_shock, n_plot = 10, 0.1, 30

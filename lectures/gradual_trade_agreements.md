@@ -718,10 +718,10 @@ $$
 per period from the next period on, and the agreement is self-enforcing if and only if the maximal
 payments add up to a nonnegative number.
 
-In an *immediate global agreement*, every country pays $k$, so the agreement is self-enforcing if and
+In an **immediate global agreement**, every country pays $k$, so the agreement is self-enforcing if and
 only if $\Phi(G, \delta) \ge (1 - \delta) k$.
 
-A *two-step agreement* forms $B$ at date 0 and adds country 3 at date 1.
+A **two-step agreement** forms $B$ at date 0 and adds country 3 at date 1.
 
 At date 1, countries 1 and 2 are already members, so each can pay up to $\Phi(G, \delta)$ per period from
 date 2 on to subsidize the newcomer, whose maximal payment is $\left[ \Phi(G, \delta) - (1 - \delta) k
@@ -790,7 +790,7 @@ In this example, the global agreement can be reached in two steps for discount f
 immediate global agreement would not be self-enforcing, even though, with commitment, the immediate path
 would yield higher world welfare.
 
-The bilateral agreement is a *building bloc*: for discount factors between the two thresholds, without
+The bilateral agreement is a **building bloc**: for discount factors between the two thresholds, without
 it the global agreement would never be reached.
 
 The advantage comes from the bilateral agreement's extra enforcement power: {ref}`gta_ex3` shows that
