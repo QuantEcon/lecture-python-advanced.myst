@@ -804,7 +804,7 @@ amount.
 ---
 mystnb:
   figure:
-    caption: Two decompositions of the change in worker welfare
+    caption: Decompositions of worker welfare
     name: fig-oe-decomposition
 ---
 τ_wide = np.linspace(0, 1.5, 301)
@@ -838,6 +838,9 @@ print(f"  real wages {0.5 * np.log(ω_1M * ω_2M / (ω_10 * ω_20)):.3f}, "
       f"rebate {0.5 * np.log(ψ_1M * ψ_2M / (ω_1M * ω_2M)):.3f}")
 print(f"  average consumption {np.log((ψ_1M + ψ_2M) / (ψ_10 + ψ_20)):.3f}, "
       f"equality {dispersion[0] - (np.log((ψ_1M + ψ_2M) / 2) - χ_M):.3f}")
+mld = lambda a, b: np.log((a + b) / 2) - np.log(a * b) / 2    # mean log deviation
+print(f"  equality from wage changes {mld(ω_10, ω_20) - mld(ω_1M, ω_2M):.3f}, "
+      f"from the rebate {mld(ω_1M, ω_2M) - mld(ψ_1M, ψ_2M):.3f}")
 print(f"worker welfare peaks at a tariff of {100 * τ_wide[np.argmax(χ_w)]:.0f} percent")
 ```
 
@@ -1118,7 +1121,8 @@ Import-sector workers lose protection and part of their rebate, so for the first
 they consume less than in the Markov equilibrium; after that, faster growth more than makes up for it.
 
 The Ramsey plan protects them fully at date $0$ and then liberalizes quickly, so their consumption falls
-further below its Markov level, by about 0.23 in logs in period 3, and returns to it only in period 5.
+further below its Markov level, by about 0.23 in logs in period 3, is back to it in period 5, and exceeds it
+from period 6 on.
 
 ### Temporary protectionist shocks
 

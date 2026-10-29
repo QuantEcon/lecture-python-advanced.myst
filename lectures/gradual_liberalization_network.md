@@ -37,11 +37,11 @@ capital.
 
 Two ideas make their model tractable.
 
-* *Static separability*: every static quantity is proportional to the world capital stock, so the
+* **Static separability**: every static quantity is proportional to the world capital stock, so the
   dynamic policy problem depends on the static economy only through two functions of the tariff, worker
   welfare $\chi(\tau)$ and the gross return to capital $G(\tau)$, just as in
   {doc}`organizational_equilibrium`.
-* *Exact hat algebra*: $\chi(\tau)$ and $G(\tau)$ can be computed from observed expenditure and
+* **Exact hat algebra**: $\chi(\tau)$ and $G(\tau)$ can be computed from observed expenditure and
   production shares, without estimating technologies, tastes, or the sizes of labor forces
   {cite}`DekleEatonKortum2008`.
 
@@ -251,7 +251,7 @@ and that the real rental rate $r = R / P^K$ depends only on the tariff.
 The policymaker's payoff therefore has the form that it has in {doc}`organizational_equilibrium`,
 
 $$
-U_t = \frac{\log K_t}{1 - \beta} + \sum_{k=0}^\infty \beta^k H(\tau_{t+k}, s_{t+k}), \qquad
+U_t = \frac{\log K_t}{1 - \beta} + \sum_{h=0}^\infty \beta^h H(\tau_{t+h}, s_{t+h}), \qquad
 H(\tau, s) = \chi(\tau) + \frac{\beta}{1 - \beta} \left[ \log s + \log G(\tau) \right] ,
 $$
 
@@ -425,7 +425,7 @@ Here is the baseline seen from home.
 ```{code-cell} ipython3
 wage_bill = model.α_l * model.e[0]
 relative_wage = wage_bill / model.λ / wage_bill.sum()
-print(f"shares of world revenue: " + ", ".join(
+print("shares of world revenue: " + ", ".join(
       f"{c} {x:.2f}" for c, x in zip(countries, model.e.sum(axis=1))))
 print(f"\n{'sector':24s}{'employment':>12s}{'wage':>8s}{'revenue':>10s}{'home goods':>12s}")
 for j, name in enumerate(sectors):
@@ -550,7 +550,7 @@ where the mean log deviation $\mathcal{D}$ is zero only when all workers consume
 ---
 mystnb:
   figure:
-    caption: Two decompositions of the change in worker welfare
+    caption: Decompositions of worker welfare
     name: fig-gln-decomposition
 ---
 f = lambda T: np.log(wages + T[:, None]) @ λ
@@ -578,7 +578,7 @@ for ax in axes:
 plt.tight_layout()
 plt.show()
 
-i_5, i_10 = 10, 20                    # grid indices of 5 and 10 percent
+i_5, i_10 = [np.argmin(np.abs(τ_grid - x)) for x in (0.05, 0.10)]   # grid indices
 print(f"χ(5%) - χ(0) = {χ_grid[i_5] - χ_grid[0]:.3f}; worker welfare peaks at "
       f"{100 * τ_grid[np.argmax(χ_grid)]:.0f} percent")
 ```
@@ -603,7 +603,7 @@ with sectors ordered by their workers' baseline consumption.
 ---
 mystnb:
   figure:
-    caption: Consumption changes by sector when the tariff rises from 5 to 10 percent
+    caption: Consumption changes by sector
     name: fig-gln-sectors
 ---
 change = 100 * (ψ[i_10] / ψ[i_5] - 1)
@@ -618,7 +618,8 @@ plt.tight_layout()
 plt.show()
 ```
 
-The gains fall steeply with baseline consumption, and the two best-paid groups lose.
+The three lowest-paid groups gain, by amounts that fall steeply with baseline consumption, and the two
+best-paid groups lose.
 
 {cite:t}`BassettoHuoRiosRull2026` find the same pattern across quintiles of 30 sectors, with consumption
 rising by 4.3 percent in the lowest quintile and falling by 0.3 percent in the highest.
@@ -672,7 +673,7 @@ print(f"growth at the Markov tariff {100 * (s_const(τ_M, pol) * pol.G(τ_M) - 1
 ---
 mystnb:
   figure:
-    caption: The return to capital and the two stationary objectives
+    caption: Capital returns and tariff objectives
     name: fig-gln-objectives
 ---
 fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
@@ -808,9 +809,9 @@ H_B = H(τ_B, s_const(τ_B, pol), pol)
 V_markov = H(τ_M, s_const(τ_M, pol), pol) / (1 - β)
 V_best = H_B / (1 - β)
 
-N = 80
-res = minimize(lambda τ: -action_payoffs(τ, pol)[0], np.full(N + 1, τ_B),
-               bounds=[(0, 0.6)] * (N + 1), method='L-BFGS-B')
+horizon = 80
+res = minimize(lambda τ: -action_payoffs(τ, pol)[0], np.full(horizon + 1, τ_B),
+               bounds=[(0, 0.6)] * (horizon + 1), method='L-BFGS-B')
 τ_R = res.x
 V_R = action_payoffs(τ_R, pol)
 print("Ramsey tariffs every 5 years (percent):", np.round(100 * τ_R[:35:5], 1))
@@ -863,7 +864,7 @@ print("organizational tariffs (percent) in years 0, 10, 20, 50, 100:",
 ---
 mystnb:
   figure:
-    caption: Tariff transition map and tariff paths in the production network
+    caption: Transition map and tariff paths
     name: fig-gln-paths
 ---
 n_plot = 51
@@ -904,7 +905,7 @@ to 10 percent.
 ---
 mystnb:
   figure:
-    caption: Tariffs after a protectionist shock in year 20
+    caption: Tariffs after a protectionist shock
     name: fig-gln-shock
 ---
 t_shock, τ_shock = 20, 0.10
@@ -1113,7 +1114,7 @@ w_b, T_b, P_b, ρ_b = map(np.array, (w_b, T_b, P_b, ρ_b))
 χ_b = np.log(w_b + T_b[:, None]) @ λ - np.log(P_b)
 pol_b = make_policy(r_0, χ=CubicSpline(τ_grid, χ_b), ρ=CubicSpline(τ_grid, ρ_b))
 
-i_30 = 60
+i_30 = np.argmin(np.abs(τ_grid - 0.30))
 print(f"from 5 to 30 percent: Δχ bilateral {χ_b[i_30] - χ_b[i_5]:.3f}, common "
       f"{χ_grid[i_30] - χ_grid[i_5]:.3f}; Δ log ρ bilateral "
       f"{np.log(ρ_b[i_30] / ρ_b[i_5]):.4f}, common {np.log(ρ[i_30] / ρ[i_5]):.4f}")
