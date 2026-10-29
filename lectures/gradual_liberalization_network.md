@@ -251,7 +251,7 @@ and that the real rental rate $r = R / P^K$ depends only on the tariff.
 The policymaker's payoff therefore has the form that it has in {doc}`organizational_equilibrium`,
 
 $$
-U_t = \frac{\log K_t}{1 - \beta} + \sum_{h=0}^\infty \beta^h H(\tau_{t+h}, s_{t+h}), \qquad
+U_t = \frac{\log K_t}{1 - \beta} + \sum_{k=0}^\infty \beta^k H(\tau_{t+k}, s_{t+k}), \qquad
 H(\tau, s) = \chi(\tau) + \frac{\beta}{1 - \beta} \left[ \log s + \log G(\tau) \right] ,
 $$
 
