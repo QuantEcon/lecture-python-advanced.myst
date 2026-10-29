@@ -79,6 +79,9 @@ This lecture
   equilibrium, including after a temporary protectionist shock, and
 * describes connections to other lectures in this section.
 
+{doc}`gradual_liberalization_network` continues with a multi-country, multi-sector version of the tariff
+model.
+
 We use the following imports.
 
 ```{code-cell} ipython3
@@ -631,6 +634,29 @@ H(\tau, s) = \chi(\tau) + \frac{\beta}{1 - \beta} \left[ \log s + \log G(\tau) \
 Two functions of the tariff alone, worker welfare $\chi(\tau)$ and the gross return $G(\tau)$, summarize
 everything that the static equilibrium contributes to the dynamic policy problem.
 
+The tariff model therefore has the structure of the growth model of {ref}`oe_growth`, with the tariff in
+the role of the saving rate, as the following table shows; we compute the tariff-model objects in its last
+four rows below.
+
+| | growth model | tariff model |
+|---|---|---|
+| action at date $t$ | saving rate $s_t$ | tariff $\tau_t$ |
+| state | capital $k_t$ | capital $k_t$ |
+| action payoff | $V(s_t, s_{t+1}, \ldots)$ | $\sum_{j \ge 0} \beta^j H(\tau_{t+j}, s_{t+j})$ |
+| source of time inconsistency | present bias, $\delta < 1$ | $s_t$ depends on $\tau_{t+1}, \tau_{t+2}, \ldots$ but not on $\tau_t$ |
+| Markov action | $s^M$ | $\tau^M$ |
+| best constant action | $s^B$ | $\tau^B$ |
+| map along constant-payoff paths | $s_{t+1} = q(s_t; V^\ast)$ | $\tau_{t+1} = \mathcal{T}(\tau_t)$ |
+| first organizational action | $q(s^M; V^\ast)$ | $\mathcal{T}(\tau^M)$ |
+
+In the growth model, successive planners disagree because they discount the future differently.
+
+Here they share preferences, but capitalists' saving responds to expected tariffs.
+
+Because the saving rate at date $t$ depends only on later tariffs, the policymaker at date $t$ can protect
+workers without lowering it, while it wants its successors to keep tariffs low so that capitalists save
+more at date $t$.
+
 We use the parameter values of {cite:t}`BassettoHuoRiosRull2024`, with a model period of seven years,
 and set $\sigma = 0.5$, the value used by {cite:t}`BassettoHuoRiosRull2026`.
 
@@ -642,8 +668,8 @@ def create_tariff_model(α=0.33, β=0.7, δ_k=0.65, ε=1.1, A=3.5, σ=0.5):
 
 def static(τ, model):
     """
-    Worker welfare χ(τ), the gross return G(τ), and the consumption of the two
-    groups of workers per unit of capital, ψ_1(τ) and ψ_2(τ).
+    Worker welfare χ(τ), the gross return G(τ), and, per unit of capital, the
+    consumption ψ_i(τ) and real wages ω_i(τ) of the two groups of workers.
     """
     α, β, δ_k, ε, A, σ = model
     ϕ = 1 / (1 + (A / (1 + τ))**(1 / (1 - α)))
@@ -652,11 +678,11 @@ def static(τ, model):
     P = (0.5 * p_1**(1 - ε) + 0.5)**(1 / (1 - ε))
     m_2 = (Y_1 + Y_2) / (1 + (1 + τ)**ε)           # balanced trade
     revenue = τ / (1 + τ) * (m_2 - Y_2)
-    ψ_1 = ((1 - α) * p_1 * Y_1 + revenue / 2) / P
-    ψ_2 = ((1 - α) * Y_2 + revenue / 2) / P
+    ω_1, ω_2 = (1 - α) * p_1 * Y_1 / P, (1 - α) * Y_2 / P
+    ψ_1, ψ_2 = ω_1 + revenue / (2 * P), ω_2 + revenue / (2 * P)
     χ = 0.5 * (np.log(ψ_1) + np.log(ψ_2))
     G = α * ϕ**(α - 1) / P + 1 - δ_k
-    return χ, G, ψ_1, ψ_2
+    return χ, G, ψ_1, ψ_2, ω_1, ω_2
 
 def χ(τ, model):
     return static(τ, model)[0]
@@ -714,7 +740,7 @@ V_markov = H(τ_M, s_const(τ_M, model), model) / (1 - model.β)
 V_best = H_B / (1 - model.β)
 print(f"Markov tariff {100 * τ_M:.1f} percent, best constant tariff {100 * τ_B:.1f} percent")
 
-ψ_free, ψ_markov = static(0.0, model)[2:], static(τ_M, model)[2:]
+ψ_free, ψ_markov = static(0.0, model)[2:4], static(τ_M, model)[2:4]
 print("consumption at the Markov tariff relative to free trade: export-sector workers "
       f"{ψ_markov[0] / ψ_free[0]:.3f}, import-sector workers {ψ_markov[1] / ψ_free[1]:.3f}")
 ```
@@ -751,6 +777,92 @@ It lowers the return to capital throughout.
 
 The Markov policymaker, who ignores how expected tariffs affect saving, chooses a high tariff; the best
 constant tariff is close to free trade.
+
+{cite:t}`BassettoHuoRiosRull2026` decompose the change in worker welfare in two ways, and both are
+instructive here.
+
+The first separates real wages $\omega_i(\tau)$, measured per unit of capital, from the rebate of tariff
+revenue:
+
+$$
+\chi(\tau) = \tfrac12 \sum_i \log \omega_i(\tau) + \tfrac12 \sum_i \log
+\frac{\psi_i(\tau)}{\omega_i(\tau)} .
+$$
+
+The second separates average consumption from its dispersion:
+
+$$
+\chi(\tau) = \log \bar\psi(\tau) - \mathcal{D}(\tau), \qquad
+\bar\psi = \tfrac12 (\psi_1 + \psi_2), \qquad
+\mathcal{D} = \log \bar\psi - \tfrac12 \sum_i \log \psi_i \ge 0 ,
+$$
+
+where the mean log deviation $\mathcal{D}$ is zero only when the two groups of workers consume the same
+amount.
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Two decompositions of the change in worker welfare
+    name: fig-oe-decomposition
+---
+τ_wide = np.linspace(0, 1.5, 301)
+parts = np.array([static(x, model) for x in τ_wide])
+χ_w, ψ_w, ω_w = parts[:, 0], parts[:, 2:4], parts[:, 4:6]
+wage_part = np.log(ω_w).mean(axis=1)
+rebate_part = np.log(ψ_w / ω_w).mean(axis=1)
+mean_part = np.log(ψ_w.mean(axis=1))
+dispersion = mean_part - χ_w
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
+axes[0].plot(100 * τ_wide, wage_part - wage_part[0], lw=2, label="real wages")
+axes[0].plot(100 * τ_wide, rebate_part, lw=2, label="rebate of tariff revenue")
+axes[1].plot(100 * τ_wide, mean_part - mean_part[0], lw=2,
+             label=r"average consumption $\log \bar\psi$")
+axes[1].plot(100 * τ_wide, dispersion[0] - dispersion, lw=2,
+             label=r"equality $\mathcal{D}(0) - \mathcal{D}(\tau)$")
+for ax in axes:
+    ax.plot(100 * τ_wide, χ_w - χ_w[0], 'k--', lw=2, label=r"total $\chi(\tau) - \chi(0)$")
+    ax.axvline(100 * τ_M, color='C3', ls=':', lw=1.5)
+    ax.axhline(0, color='k', lw=0.6)
+    ax.set_xlabel("tariff (percent)")
+    ax.legend()
+plt.tight_layout()
+plt.show()
+
+χ_M, _, ψ_1M, ψ_2M, ω_1M, ω_2M = static(τ_M, model)
+χ_0, _, ψ_10, ψ_20, ω_10, ω_20 = static(0.0, model)
+print(f"at the Markov tariff: χ(τ_M) - χ(0) = {χ_M - χ_0:.3f}")
+print(f"  real wages {0.5 * np.log(ω_1M * ω_2M / (ω_10 * ω_20)):.3f}, "
+      f"rebate {0.5 * np.log(ψ_1M * ψ_2M / (ω_1M * ω_2M)):.3f}")
+print(f"  average consumption {np.log((ψ_1M + ψ_2M) / (ψ_10 + ψ_20)):.3f}, "
+      f"equality {dispersion[0] - (np.log((ψ_1M + ψ_2M) / 2) - χ_M):.3f}")
+print(f"worker welfare peaks at a tariff of {100 * τ_wide[np.argmax(χ_w)]:.0f} percent")
+```
+
+At the Markov tariff, marked by the dotted line, the rebate accounts for most of the rise in worker
+welfare in the first decomposition, and the equality term for nearly all of it in the second.
+
+The tariff appeals to the policymaker mainly because it narrows the gap between the two groups of workers,
+not because it raises their average consumption.
+
+The gap narrows in two ways: protection raises the import-sector wage and lowers the export-sector wage,
+and the equal rebate is worth more, in proportion, to the lower-paid import-sector workers.
+
+The two wage changes nearly offset each other in the average log real wage, which is why the rebate
+dominates the first decomposition, but they account for more of the gain in equality than the rebate
+does.
+
+Worker welfare peaks at a tariff of about 85 percent; beyond it, the tariff's growing cost in efficiency
+outweighs further gains in equality.
+
+In their 30-sector model of the G7, {cite:t}`BassettoHuoRiosRull2026` also find that the gain in worker
+welfare comes almost entirely from equality, but there real wages fall and the equal rebate does the
+narrowing.
+
+{doc}`gradual_liberalization_network` derives a condition on the inequality of consumption across sectors
+under which the Markov and best constant tariffs are positive.
 
 ### Ramsey plan and plans sustained by Markov reversion
 
@@ -822,6 +934,12 @@ The best sustainable plan in the sense of {doc}`calvo_abreu`, which uses the wor
 equilibrium as the punishment, is therefore also the Ramsey plan.
 
 ### Organizational equilibrium tariffs
+
+As in the growth model, computing an organizational equilibrium takes three steps:
+
+1. compute the best constant action and its value $V^\ast$;
+1. find the map that takes each action to the next along paths that deliver $V^\ast$ at every date;
+1. choose the first action from the no-delay condition.
 
 Along an organizational equilibrium, the action payoff is the same at every date.
 
@@ -943,6 +1061,65 @@ that {cite:t}`BassettoHuoRiosRull2024` compare with the decline of the world ave
 The Ramsey plan liberalizes much faster, but only because its first policymaker can commit its
 successors.
 
+### Who pays for gradual liberalization
+
+{cite:t}`BassettoHuoRiosRull2024` also compare the consumption of the two groups of workers across
+equilibria that start from the same capital stock.
+
+A worker in sector $i$ consumes $c_{it} = \psi_i(\tau_t) k_t$, and capital evolves according to
+$k_{t+1} = s_t G(\tau_t) k_t$.
+
+```{code-cell} ipython3
+---
+mystnb:
+  figure:
+    caption: Consumption of export-sector and import-sector workers
+    name: fig-oe-consumption
+---
+def log_consumption(τ, model, n, k_0=1.0):
+    "Log consumption of the two groups of workers in the first n periods of the path τ."
+    s = saving_rates(τ, model)
+    k = [k_0]
+    for t in range(n - 1):
+        k.append(s[t] * G(τ[t], model) * k[-1])
+    ψ = np.array([static(x, model)[2:4] for x in τ[:n]])
+    return np.log(ψ * np.array(k)[:, None])
+
+n_plot = 12
+c_markov = log_consumption(np.full(n_plot, τ_M), model, n_plot)
+gaps = {"organizational equilibrium": log_consumption(τ_O, model, n_plot) - c_markov,
+        "Ramsey plan": log_consumption(τ_R, model, n_plot) - c_markov}
+styles = {"organizational equilibrium": 'C3-o', "Ramsey plan": 'C0--s'}
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
+for name, gap in gaps.items():
+    for i, ax in enumerate(axes):
+        ax.plot(gap[:, i], styles[name], ms=4, lw=2, label=name)
+for ax, title in zip(axes, ["export-sector workers", "import-sector workers"]):
+    ax.axhline(0, color='k', lw=0.8)
+    ax.set_title(title)
+    ax.set_xlabel("period (seven years)")
+    ax.set_ylabel("log consumption minus Markov equilibrium")
+axes[0].legend()
+plt.tight_layout()
+plt.show()
+
+for name, gap in gaps.items():
+    print(f"{name}: import-sector workers consume more than in the Markov equilibrium "
+          f"from period {np.argmax(gap[1:, 1] > 0) + 1} on")
+```
+
+Lower tariffs raise the return to capital and the saving rate, so capital, and with it every worker's
+consumption, grows faster in the organizational equilibrium than in the Markov equilibrium.
+
+Export-sector workers gain from the start, because liberalization also raises their wage.
+
+Import-sector workers lose protection and part of their rebate, so for the first four periods, 28 years,
+they consume less than in the Markov equilibrium; after that, faster growth more than makes up for it.
+
+The Ramsey plan protects them fully at date $0$ and then liberalizes quickly, so their consumption falls
+further below its Markov level, by about 0.23 in logs in period 3, and returns to it only in period 5.
+
 ### Temporary protectionist shocks
 
 The off-path behavior of the two cooperative equilibria differs sharply.
@@ -989,6 +1166,18 @@ change where liberalization ends up.
 In the plan sustained by Markov reversion, a one-period disturbance permanently destroys cooperation, a
 self-inflicted punishment that later policymakers would want to renegotiate.
 
+The table summarizes how the three equilibria differ, following {cite:t}`BassettoHuoRiosRull2026`.
+
+| | Markov equilibrium | best plan sustained by Markov reversion | organizational equilibrium |
+|---|---|---|---|
+| tariff path | $\tau^M$ forever | starts at $\tau^M$, falls fast to free trade | starts at $\mathcal{T}(\tau^M)$, falls gradually toward $\tau^B$ |
+| is date $0$ special? | no | yes, $V_0 > V_t$ | no, $V_t = V^\ast$ |
+| after a temporary shock $\tilde\tau$ | $\tau^M$ | $\tau^M$ forever | resumes from $\mathcal{T}(\tilde\tau)$ |
+| punishment of a deviation | none needed | permanent and self-inflicted | the plan resumes from the deviation |
+
+The comparison shows a trade-off: the plan sustained by Markov reversion liberalizes faster when nothing
+goes wrong, while the organizational equilibrium survives occasional departures from the plan.
+
 ### A quantitative version
 
 {cite:t}`BassettoHuoRiosRull2026` replace the two-sector static block with a model of the G7 economies
@@ -1006,12 +1195,17 @@ They find a Markov tariff of about 12 percent and a best constant tariff of abou
 the tariff raises worker welfare mainly by compressing consumption differences across sectors through the
 equal rebate of tariff revenue.
 
+{doc}`gradual_liberalization_network` builds a small version of their model with illustrative shares,
+solves it by exact hat algebra, and recomputes the tariff paths of this section.
+
 (oe_connections)=
 ## Connections to other lectures
 
 Organizational equilibrium adds a fourth equilibrium concept to the three that several lectures in this
 section study.
 
+* {doc}`gradual_liberalization_network` computes organizational equilibrium tariffs in a production
+  network model like the one that {cite:t}`BassettoHuoRiosRull2026` take to G7 data.
 * {doc}`gradual_trade_agreements` explains gradual liberalization differently, as a feature of efficient
   self-enforcing agreements between countries of different size that are sustained by the threat of a
   permanent trade war {cite}`BondPark2002`, the kind of cooperation whose fragility to a single
