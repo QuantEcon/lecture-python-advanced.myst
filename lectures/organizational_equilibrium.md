@@ -513,7 +513,7 @@ A tariff protects workers in the import-competing sector and raises revenue that
 but it lowers the return to capital, and thereby saving and growth.
 
 A policymaker who cares about workers therefore wants high tariffs now and low tariffs later: low future
-tariffs encourage saving today, while today's tariff cannot affect saving that has already been done.
+tariffs encourage saving today, while today's saving rate does not depend on today's tariff.
 
 ### A two-country economy
 
@@ -712,6 +712,14 @@ $$
 \tau^M = \arg\max_{\tau \ge 0} \; \chi(\tau) + \frac{\beta}{1 - \beta} \log G(\tau) .
 $$
 
+The Markov policymaker does not simply maximize worker welfare $\chi(\tau)$.
+
+A higher tariff lowers the gross return $G(\tau)$ and so leaves capitalists fewer resources, which means
+less capital in the future even at a fixed saving rate; the $\log G(\tau)$ term captures this.
+
+What it leaves out is the effect of tariffs on the *saving rate*: today's saving rate depends only on
+future tariffs, which the Markov policymaker takes as given.
+
 The best constant tariff instead takes into account that a permanently lower tariff raises the saving
 rate $s(\tau)$; substituting $s(\tau)$ into $H$ gives, up to a constant,
 
@@ -719,7 +727,7 @@ $$
 \tau^B = \arg\max_{\tau \ge 0} \; \chi(\tau) + \frac{\beta}{\sigma (1 - \beta)} \log G(\tau) ,
 $$
 
-which puts $1/\sigma$ times as much weight on the return to capital.
+which puts $1/\sigma$ times as much weight on the return to capital, twice as much when $\sigma = 0.5$.
 
 ```{code-cell} ipython3
 def argmax(f, lo=0.0, hi=1.0):
@@ -752,31 +760,50 @@ mystnb:
     caption: Worker welfare and capital returns
     name: fig-oe-chi-G
 ---
-τ_grid = np.linspace(0, 0.5, 200)
+τ_grid = np.linspace(0, 1.0, 300)
+τ_χ = argmax(lambda τ: χ(τ, model), hi=2.0)        # the tariff that maximizes worker welfare
+w_M = model.β / (1 - model.β)                       # weight on log G in the Markov objective
+Δχ = np.array([χ(x, model) - χ(0, model) for x in τ_grid])
+ΔlogG = np.log([G(x, model) / G(0, model) for x in τ_grid])
+
 fig, axes = plt.subplots(1, 2, figsize=(11, 4))
-axes[0].plot(100 * τ_grid, [χ(x, model) - χ(0, model) for x in τ_grid], lw=2)
-axes[0].set_title(r"worker welfare $\chi(\tau) - \chi(0)$")
+axes[0].plot(100 * τ_grid, Δχ, 'C0', lw=2, label=r"worker welfare $\chi$")
+axes[0].plot(100 * τ_grid, Δχ + w_M * ΔlogG, 'C3', lw=2, label="Markov objective")
+axes[0].plot(100 * τ_grid, Δχ + w_M / model.σ * ΔlogG, 'C2', lw=2,
+             label="best constant objective")
+axes[0].set_title("objectives, relative to free trade")
 axes[1].plot(100 * τ_grid, [G(x, model) for x in τ_grid], lw=2)
 axes[1].set_title(r"gross return to capital $G(\tau)$")
+lines = [(τ_B, 'C2', '--', r"$\tau^B$", 0.97), (τ_M, 'C3', ':', r"$\tau^M$", 0.97)]
 for ax in axes:
-    ax.axvline(100 * τ_B, color='C2', ls='--', lw=1, label=r"best constant tariff $\tau^B$")
-    ax.axvline(100 * τ_M, color='C3', ls=':', lw=1.5, label=r"Markov tariff $\tau^M$")
+    extra = [(τ_χ, 'C0', '-.', r"$\arg\max\,\chi$", 0.75)] if ax is axes[0] else []
+    for x, color, ls, name, y in lines + extra:
+        ax.axvline(100 * x, color=color, ls=ls, lw=1.5)
+        ax.text(100 * x + 1, y, name, color=color, va='top', fontsize=11,
+                transform=ax.get_xaxis_transform())
     ax.set_xlabel("tariff (percent)")
 axes[0].legend()
 plt.tight_layout()
 plt.show()
+
+print(f"tariff that maximizes χ: {100 * τ_χ:.0f} percent")
 ```
 
-The tariff raises worker welfare over the whole range shown.
+In the left panel, the vertical lines mark the maximizers of the three objectives.
 
-It raises the consumption of the lower-paid workers in the import-competing sector, through their wage
-and the rebated revenue, by much more in proportion than it lowers the consumption of workers in the
+Worker welfare $\chi$ peaks at a tariff of about 85 percent.
+
+The tariff raises the consumption of the lower-paid workers in the import-competing sector, through their
+wage and the rebated revenue, by much more in proportion than it lowers the consumption of workers in the
 export sector: at the Markov tariff, by 58 percent against 6 percent.
 
 It lowers the return to capital throughout.
 
-The Markov policymaker, who ignores how expected tariffs affect saving, chooses a high tariff; the best
-constant tariff is close to free trade.
+Each objective puts more weight on $\log G(\tau)$ than the one before it, and its maximizer is lower.
+
+The Markov policymaker, who accounts for how the tariff lowers capitalists' resources but ignores how
+expected tariffs affect the *saving rate*, chooses a tariff of about 24 percent; the best constant tariff,
+which accounts for both, is close to free trade.
 
 {cite:t}`BassettoHuoRiosRull2026` decompose the change in worker welfare in two ways, and both are
 instructive here.
@@ -841,7 +868,6 @@ print(f"  average consumption {np.log((ψ_1M + ψ_2M) / (ψ_10 + ψ_20)):.3f}, "
 mld = lambda a, b: np.log((a + b) / 2) - np.log(a * b) / 2    # mean log deviation
 print(f"  equality from wage changes {mld(ω_10, ω_20) - mld(ω_1M, ω_2M):.3f}, "
       f"from the rebate {mld(ω_1M, ω_2M) - mld(ψ_1M, ψ_2M):.3f}")
-print(f"worker welfare peaks at a tariff of {100 * τ_wide[np.argmax(χ_w)]:.0f} percent")
 ```
 
 At the Markov tariff, marked by the dotted line, the rebate accounts for most of the rise in worker
@@ -857,8 +883,8 @@ The two wage changes nearly offset each other in the average log real wage, whic
 dominates the first decomposition, but they account for more of the gain in equality than the rebate
 does.
 
-Worker welfare peaks at a tariff of about 85 percent; beyond it, the tariff's growing cost in efficiency
-outweighs further gains in equality.
+Beyond the peak of worker welfare at about 85 percent, the tariff's growing cost in efficiency outweighs
+further gains in equality.
 
 In their 30-sector model of the G7, {cite:t}`BassettoHuoRiosRull2026` also find that the gain in worker
 welfare comes almost entirely from equality, but there real wages fall and the equal rebate does the
