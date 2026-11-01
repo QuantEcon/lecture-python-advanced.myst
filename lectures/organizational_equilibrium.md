@@ -717,8 +717,8 @@ The Markov policymaker does not simply maximize worker welfare $\chi(\tau)$.
 A higher tariff lowers the gross return $G(\tau)$ and so leaves capitalists fewer resources, which means
 less capital in the future even at a fixed saving rate; the $\log G(\tau)$ term captures this.
 
-What it leaves out is the effect of tariffs on the *saving rate*, which the Markov policymaker takes as
-given.
+What the Markov objective leaves out is the effect of tariffs on the *saving rate*, which the policymaker
+takes as given.
 
 The best constant tariff instead takes into account that a permanently lower tariff raises the saving
 rate $s(\tau)$; substituting $s(\tau)$ into $H$ gives, up to a constant,
@@ -757,7 +757,7 @@ print("consumption at the Markov tariff relative to free trade: export-sector wo
 ---
 mystnb:
   figure:
-    caption: Policy objectives and the return to capital
+    caption: Policy objectives and capital returns
     name: fig-oe-chi-G
 ---
 τ_grid = np.linspace(0, 1.0, 300)
@@ -799,11 +799,13 @@ export sector: at the Markov tariff, by 58 percent against 6 percent.
 
 It lowers the return to capital throughout.
 
-Each objective puts more weight on $\log G(\tau)$ than the one before it, and its maximizer is lower.
+Going from worker welfare to the Markov objective to the best constant objective, the weight on
+$\log G(\tau)$ rises and the maximizer falls.
 
 The Markov policymaker, who accounts for how the tariff lowers capitalists' resources but ignores how
-expected tariffs affect the *saving rate*, chooses a tariff of about 24 percent; the best constant tariff,
-which accounts for both, is close to free trade.
+expected tariffs affect the *saving rate*, chooses a tariff of about 24 percent.
+
+The best constant tariff, which accounts for both, is close to free trade.
 
 {cite:t}`BassettoHuoRiosRull2026` decompose the change in worker welfare in two ways, and both are
 instructive here.
