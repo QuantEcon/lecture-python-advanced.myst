@@ -717,8 +717,8 @@ The Markov policymaker does not simply maximize worker welfare $\chi(\tau)$.
 A higher tariff lowers the gross return $G(\tau)$ and so leaves capitalists fewer resources, which means
 less capital in the future even at a fixed saving rate; the $\log G(\tau)$ term captures this.
 
-What it leaves out is the effect of tariffs on the *saving rate*: today's saving rate depends only on
-future tariffs, which the Markov policymaker takes as given.
+What it leaves out is the effect of tariffs on the *saving rate*, which the Markov policymaker takes as
+given.
 
 The best constant tariff instead takes into account that a permanently lower tariff raises the saving
 rate $s(\tau)$; substituting $s(\tau)$ into $H$ gives, up to a constant,
@@ -757,7 +757,7 @@ print("consumption at the Markov tariff relative to free trade: export-sector wo
 ---
 mystnb:
   figure:
-    caption: Worker welfare and capital returns
+    caption: Policy objectives and the return to capital
     name: fig-oe-chi-G
 ---
 τ_grid = np.linspace(0, 1.0, 300)
