@@ -115,14 +115,6 @@ Along the way, we draw on ideas and techniques from
 - {doc}`Likelihood Ratio Processes <intermediate:likelihood_ratio_process>`, where we develop the likelihood-ratio machinery that reappears here as the worst-case distortion $\hat g$.
 
 
-In addition to what's in Anaconda, this lecture will need the following libraries:
-
-```{code-cell} ipython3
-:tags: [hide-output]
-
-!pip install pandas-datareader
-```
-
 We use the following imports:
 
 ```{code-cell} ipython3
