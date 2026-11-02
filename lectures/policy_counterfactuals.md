@@ -50,7 +50,7 @@ The lecture
   {doc}`supply_demand_var`,
 * verifies their identification result: impulse responses to tax shocks under one rule deliver the
   economy's exact behavior under another rule,
-* compares it with the older approach of {cite:t}`SimsZha2006`, which imposes the new rule
+* compares it with the older approach of {cite:t}`SimsZha2006b`, which imposes the new rule
   with a sequence of policy *surprises* and so falls foul of the Lucas critique, and examines a version of
   the defense of that approach by {cite:t}`LeeperZha2003` for "modest" policy interventions,
 * compares McKay and Wolf's sufficient statistics with the counterfactuals of a structural modeler, who
@@ -547,7 +547,7 @@ def mw_counterfactual(M_inv_base, x_A, φ_new):
 
 ### The Sims–Zha alternative
 
-{cite:t}`SimsZha2006` proposed to enforce a counterfactual rule with a single kind of policy
+{cite:t}`SimsZha2006b` proposed to enforce a counterfactual rule with a single kind of policy
 shock, the contemporaneous surprise $\nu_{0,t}$, choosing a new value at each date so that the rule holds
 period by period.
 
