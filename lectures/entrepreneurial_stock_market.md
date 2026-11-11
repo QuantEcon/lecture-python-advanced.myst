@@ -35,7 +35,7 @@ Two questions arise when we study the role of a stock market in an economy with 
 
 The second question arises because profit maximization cannot be implemented when profits are uncertain and markets for contingent claims are incomplete, as they generally are when the only institution for trading risks is a market for firm shares.
 
-{cite:t}`Diamond1967` showed that a stock market allocates risk and capital efficiently in a second-best sense, under a restriction on technology that Diamond called *stochastic constant returns to scale*.
+{cite:t}`diamond1967` showed that a stock market allocates risk and capital efficiently in a second-best sense, under a restriction on technology that Diamond called *stochastic constant returns to scale*.
 
 That restriction also made stock market value maximization a sensible objective for a firm, one that, as {cite:t}`Leland1974` and {cite:t}`EkernWilson1974` later showed, all shareholders agree on.
 
@@ -815,7 +815,7 @@ With quadratic utility, marginal utility is linear in income, so the approximati
 
 ### Diamond's second-best efficiency
 
-{cite:t}`Diamond1967` proposed judging a stock market economy against the allocations that a planner could achieve with the same institutions.
+{cite:t}`diamond1967` proposed judging a stock market economy against the allocations that a planner could achieve with the same institutions.
 
 Kihlstrom and Laffont adapt Diamond's concept to their economy: the planner can decide who becomes an entrepreneur, how much capital each firm receives, and which shares and safe payments each individual gets, but cannot give anybody a payment that depends on the state other than through shares of firms' output.
 
@@ -1209,7 +1209,7 @@ Both types gain at other shares, including a narrow band around 40 percent: wher
 
 ### Stochastic constant returns to scale
 
-Suppose that $g(K, x) = h(K) \, x$ with $x$ a scalar, which is what {cite:t}`Diamond1967` called stochastic constant returns to scale.
+Suppose that $g(K, x) = h(K) \, x$ with $x$ a scalar, which is what {cite:t}`diamond1967` called stochastic constant returns to scale.
 
 Then output per unit of capital is $x \, h(K) / (1 + K)$, and every investor, whatever its attitude toward risk, maximizes $h(K) / (1 + K)$, so that every firm operates at $K^\ast$.
 
@@ -1251,7 +1251,7 @@ The same three features, fixed costs, risk, and risk aversion, are what make the
 
 ## Related literature
 
-Section 5.9 of {cite:t}`KihlstromLaffont1982` places their model in the literature that followed {cite:t}`Diamond1967`.
+Section 5.9 of {cite:t}`KihlstromLaffont1982` places their model in the literature that followed {cite:t}`diamond1967`.
 
 {cite:t}`Leland1974` showed that shareholders unanimously favor market value maximization when technology has stochastic constant returns to scale, {cite:t}`EkernWilson1974` showed the same under a more general spanning condition, and {cite:t}`Hart1979` showed that unanimity can hold without spanning in economies with many firms.
 
