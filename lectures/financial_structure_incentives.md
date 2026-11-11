@@ -265,7 +265,7 @@ print(f"I* = {I_star(firm):.4f}, V* = {g(I_star(firm), firm) / firm.R:.4f}")
 ---
 mystnb:
   figure:
-    caption: The manager's investment, given funds raised and debt
+    caption: Investment given funds raised and debt
     name: fig-gh-response
 ---
 V_grid = np.linspace(0.01, 0.8, 200)
@@ -350,7 +350,7 @@ In each panel, the curve $g^{-1}(RV)$ is the investment that investors must expe
 ---
 mystnb:
   figure:
-    caption: Bonding equilibria for a given level of debt
+    caption: Bonding equilibria at fixed debt
     name: fig-gh-equilibria
 ---
 def equilibrium_values(D, firm, n=400):
@@ -627,7 +627,7 @@ for name, I, D in rows:
 ---
 mystnb:
   figure:
-    caption: Sustaining debt, bankruptcy, and the manager's expected utility
+    caption: Sustaining debt, bankruptcy, and welfare
     name: fig-gh-choice
 ---
 I_grid = np.linspace(0.005, 0.6, 200)
@@ -663,7 +663,7 @@ Each bonding equilibrium offers the manager perquisites $c = g(I)/R - I$ and a p
 ---
 mystnb:
   figure:
-    caption: Perquisites and the probability of keeping the job
+    caption: Perquisites and job retention
     name: fig-gh-menu
 ---
 I_path = np.linspace(0.002, 0.5, 400)
@@ -711,7 +711,7 @@ The figure shows these pairs for our example and for the variant with $g(I) = I^
 ---
 mystnb:
   figure:
-    caption: Market value and debt in bonding equilibria
+    caption: Market value and debt
     name: fig-gh-value-debt
 ---
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
@@ -783,7 +783,7 @@ So by Proposition 5, a larger $\sigma$ lowers investment.
 
 Proposition 6 gives conditions under which a riskier project also raises the value of equity and lowers the value of debt: the change is a mean-preserving spread, it lowers investment by the criterion of Proposition 5, and it raises the hazard rate at the bankruptcy threshold, holding the threshold fixed.
 
-For a normal distribution, a larger $\sigma$ satisfies the first two conditions, as we just saw, and the third holds exactly when the probability of bankruptcy is below 20 percent, which in our example is when $\sigma$ is below about $0.22$.
+For a normal distribution, a larger $\sigma$ satisfies the first two conditions, as we just saw, and the third holds exactly when the standardized bankruptcy threshold $x / \sigma$ is below about $-0.84$, that is, when the probability of bankruptcy is below about 20 percent, which in our example is when $\sigma$ is below about $0.22$.
 
 {numref}`fig-gh-sigma` shows the comparative statics in our example.
 
@@ -791,7 +791,7 @@ For a normal distribution, a larger $\sigma$ satisfies the first two conditions,
 ---
 mystnb:
   figure:
-    caption: The manager's choices and the riskiness of profits
+    caption: The manager's choices and profit risk
     name: fig-gh-sigma
 ---
 σ_grid = np.linspace(0.01, 0.4, 40)
@@ -983,7 +983,7 @@ The divergence arises because there is a single raider: with perfect competition
 
 When investment does depend on shareholders' returns, society may want to limit dilution too, but never by more than shareholders do (Proposition 6 of {cite:t}`GrossmanHart1980`).
 
-{ref}`gh_ex3` asks you to compute these choices in an example.
+{ref}`gh_ex2` asks you to compute these choices in an example.
 
 ### The takeover threat and debt
 
@@ -1009,7 +1009,7 @@ Since the manager's choice of $I$ no longer depends on $V$, each level of debt s
 
 Without bankruptcy penalties, $I$ would not depend on $D$, and debt could affect neither $V$ nor the probability of a takeover.
 
-{ref}`gh_ex2` asks you to compute this extension.
+{ref}`gh_ex3` asks you to compute this extension.
 
 ## Discussion
 
@@ -1031,7 +1031,7 @@ The bonding theory makes no such prediction without further assumptions, because
 ---
 mystnb:
   figure:
-    caption: Market value and the debt-equity ratio across firms
+    caption: Market value and leverage across firms
     name: fig-gh-cross-section
 ---
 def value_and_leverage(firm):
@@ -1208,7 +1208,7 @@ With $U(c) = c^b$, a lower $b$ makes $U'/U = b/c$ smaller, so the manager values
 ```
 
 ```{exercise}
-:label: gh_ex3
+:label: gh_ex2
 
 Consider the model of dilution of {cite:t}`GrossmanHart1980`.
 
@@ -1231,7 +1231,7 @@ and society's is $w(\phi)$ plus the raider's expected profit, $E[\min(\phi, v - 
 1. Which $\phi$ does society prefer?
 ```
 
-```{solution-start} gh_ex3
+```{solution-start} gh_ex2
 :class: dropdown
 ```
 
@@ -1284,7 +1284,7 @@ In both cases society's return is highest with unlimited dilution, as Propositio
 ```
 
 ```{exercise}
-:label: gh_ex2
+:label: gh_ex3
 
 Consider the takeover extension of Section 4.5 of {cite:t}`GrossmanHart1982`, with the technology, utility function, and normal distribution of the lecture and $K = I^\ast = 1/4$.
 
@@ -1303,7 +1303,7 @@ $$
 1. Determine what the manager does when there is no threat of a takeover, $\mu_\xi \to \infty$, and check your answer numerically.
 ```
 
-```{solution-start} gh_ex2
+```{solution-start} gh_ex3
 :class: dropdown
 ```
 

@@ -986,7 +986,7 @@ Two features of the equilibrium cause the small loss: shares give each type an i
 ---
 mystnb:
   figure:
-    caption: A bold individual's income, stock market and first best
+    caption: The bold type's sharing rule
     name: fig-esm-sharing
 ---
 def bold_utility_gap(w):
@@ -1149,7 +1149,7 @@ Who gains from a stock market depends on the composition of the population.
 ---
 mystnb:
   figure:
-    caption: Opening a stock market, by share of bold individuals
+    caption: Effects of opening a stock market
     name: fig-esm-bold-share
 ---
 bold_shares = np.linspace(0.05, 0.95, 37)
@@ -1241,9 +1241,9 @@ The equilibrium is the long-run competitive equilibrium in which free entry driv
 
 Section 5.8 of {cite:t}`KihlstromLaffont1982` argues that a stock market is needed only when three conditions hold.
 
-* *Set-up costs*: if creating a firm were free, every investor could create a firm of the size it wants and hold all of it, so no shares would need to be traded.
-* *Uncertainty*: without uncertainty, entrepreneurs can buy all of their operating capital and capitalists can sell it, and every individual receives $A + r$ with or without a stock market.
-* *Risk aversion*: if there are enough risk-neutral individuals, and if each of them can set up more than one firm, they can hold all firms, and the risk averse can simply sell their capital.
+* **Set-up costs**: if creating a firm were free, every investor could create a firm of the size it wants and hold all of it, so no shares would need to be traded.
+* **Uncertainty**: without uncertainty, entrepreneurs can buy all of their operating capital and capitalists can sell it, and every individual receives $A + r$ with or without a stock market.
+* **Risk aversion**: if there are enough risk-neutral individuals, and if each of them can set up more than one firm, they can hold all firms, and the risk averse can simply sell their capital.
 
 {cite:t}`Stiglitz1974` and {cite:t}`Newbery1977` had made the first point in models of sharecropping without fixed costs, in which a market for shares of output is unnecessary.
 
@@ -1480,15 +1480,17 @@ print(f"threshold for μ_1: {threshold:.4f}")
 def equilibrium_with_risk_neutral(μ_1, econ):
     "Price of capital when risk-neutral types of measure μ_1 join the cautious."
     r_top = econ.p @ output_per_capital(K_star(econ), econ)
-    # can the risk-neutral investors hold every firm at r_top?  By esm-kstar,
-    # this is the same as μ_1 >= threshold
-    if μ_1 * (econ.A / r_top + 1) >= 1:
-        return r_top
     cautious = econ.utilities[1]
     def excess(r):
         C_2 = solve_investor(r, cautious, econ)[1]
         return μ_1 * (econ.A / r + 1) + (1 - μ_1) * C_2 - 1
-    return brentq(excess, 0.05 * r_top, (1 - 1e-9) * r_top, xtol=1e-12)
+    r_hi = (1 - 1e-9) * r_top
+    # can the risk-neutral investors hold every firm at r_top?  By esm-kstar,
+    # this is the same as μ_1 >= threshold, but testing excess demand directly
+    # is robust to rounding error in the numerically computed K*
+    if excess(r_hi) >= 0:
+        return r_top
+    return brentq(excess, 0.05 * r_top, r_hi, xtol=1e-12)
 
 μ_grid = np.sort(np.append(np.linspace(0.02, 0.5, 25), threshold))
 r_values = [equilibrium_with_risk_neutral(μ_1, econ) for μ_1 in μ_grid]
