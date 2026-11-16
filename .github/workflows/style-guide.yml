@@ -1,19 +1,20 @@
 name: Style Guide Comment Trigger
 on:
-  issues:
-    types: [opened, edited]
   issue_comment:
     types: [created]
 
 jobs:
   check-trigger:
-    if: contains(github.event.comment.body, '@qe-style-checker')
+    if: contains(github.event.comment.body, '@qe-style-checker') && contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association)
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
-      - uses: QuantEcon/action-style-guide@v0.7
+      - uses: QuantEcon/action-style-guide@v0.7.3
         with:
           mode: 'single'
           lectures-path: 'lectures/'
           anthropic-api-key: ${{ secrets.ANTHROPIC_API_KEY }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          comment-body: ${{ github.event.comment.body || github.event.issue.body }}
+          comment-body: ${{ github.event.comment.body }}
