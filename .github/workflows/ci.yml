@@ -86,12 +86,19 @@ jobs:
         run: |
           rm -r _build/.doctrees
           jb build lectures --path-output ./ -nW --keep-going
-      - name: Upload Execution Reports (Download Notebooks)
+      # Notebooks execute in whichever `jb build` runs them first, and each build
+      # writes its execution reports under its own output directory. Since the
+      # PDF build gates (see above), a CellExecutionError stops the job there and
+      # its traceback is only in _build/latex/reports, so upload all three.
+      - name: Upload Execution Reports
         uses: actions/upload-artifact@v7
         if: failure()
         with:
           name: execution-reports
-          path: _build/jupyter/reports
+          path: |
+            _build/latex/reports
+            _build/jupyter/reports
+            _build/html/reports
       - name: Save Build as Artifact
         uses: actions/upload-artifact@v7
         with:
