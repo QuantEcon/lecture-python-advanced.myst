@@ -32,7 +32,7 @@ In addition to what's included in  Anaconda, this lecture uses the quantecon lib
 ---
 tags: [hide-output]
 ---
-!pip install --upgrade quantecon
+!pip install quantecon
 ```
 
 This lecture adds a third solution method for the

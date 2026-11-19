@@ -399,9 +399,9 @@ We use the following imports in this lecture
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-!pip install --upgrade quantecon
-!pip install --upgrade optax
-!pip install --upgrade statsmodels
+!pip install quantecon
+!pip install optax
+!pip install statsmodels
 ```
 
 ```{code-cell} ipython3

@@ -275,7 +275,7 @@ In addition to what's in Anaconda, this lecture will use  the following librarie
 ```{code-cell} ipython3
 :tags: [hide-output]
 
-!pip install --upgrade quantecon
+!pip install quantecon
 ```
 
 We'll start with some imports:

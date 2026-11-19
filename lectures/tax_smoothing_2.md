@@ -69,7 +69,7 @@ In addition to what's in Anaconda, this lecture  deploys the quantecon library:
 ---
 tags: [hide-output]
 ---
-!pip install --upgrade quantecon
+!pip install quantecon
 ```
 
 Let's start with some standard imports:
