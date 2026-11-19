@@ -39,7 +39,7 @@ In addition to what's in Anaconda, this lecture uses the quantecon library.
 ---
 tags: [hide-output]
 ---
-!pip install --upgrade quantecon
+!pip install quantecon
 ```
 
 We'll also need the following imports:
