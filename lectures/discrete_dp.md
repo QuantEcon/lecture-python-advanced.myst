@@ -613,7 +613,7 @@ For larger problems, you might need to write this code more efficiently by vecto
 
 ## Exercises
 
-In the [stochastic optimal growth lecture](https://python-intro.quantecon.org/optgrowth.html) from our introductory lecture series, we solve a benchmark model that has an analytical solution.
+In the [stochastic optimal growth lecture](https://dynamics.quantecon.org/optgrowth.html), we solve a benchmark model that has an analytical solution.
 
 The exercise is to replicate this solution using `DiscreteDP`.
 
@@ -621,7 +621,7 @@ The exercise is to replicate this solution using `DiscreteDP`.
 
 ### Setup
 
-Details of the model can be found in [the lecture on optimal growth](https://python-intro.quantecon.org/optgrowth.html).
+Details of the model can be found in [the lecture on optimal growth](https://dynamics.quantecon.org/optgrowth.html).
 
 We let $f(k) = k^{\alpha}$ with $\alpha = 0.65$, $u(c) =
 \log c$, and $\beta = 0.95$
@@ -907,8 +907,7 @@ plt.show()
 
 #### Dynamics of the capital stock
 
-Finally, let us work on [Exercise
-2](https://python.quantecon.org/optgrowth.html#exercises), where we plot
+Finally, let us plot
 the trajectories of the capital stock for three different discount
 factors, $0.9$, $0.94$, and $0.98$, with initial
 condition $k_0 = 0.1$.
