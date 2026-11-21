@@ -131,7 +131,7 @@ $$
 W(D) = E \, v\big(a_D(s), s\big) .
 $$ (cf-strotz)
 
-{cite:t}`DekelLipman2012` call a representation like {eq}`cf-strotz` a random Strotz representation, because it evaluates a set by the choice that a randomly drawn chooser makes from it.
+{cite:t}`DekelLipman2012` call a representation like {eq}`cf-strotz` a **random Strotz representation**, because it evaluates a set by the choice that a randomly drawn chooser makes from it.
 
 If $u = v$, then {eq}`cf-strotz` is Kreps's representation {eq}`cf-kreps` with $U = v$.
 
@@ -273,7 +273,7 @@ It also plots the optimal cap for both densities.
 ---
 mystnb:
   figure:
-    caption: Expected losses and optimal caps in the delegation problem
+    caption: Losses and caps under delegation
     name: fig-cf-delegation
 ---
 b_grid = np.linspace(0, 1.4, 57)
@@ -285,8 +285,8 @@ loss_cap = [loss_with_cap(optimal_cap(b, uniform_pdf, -1, 1), b, uniform_pdf, -1
 fig, axes = plt.subplots(1, 2, figsize=(11, 4))
 
 ax = axes[0]
-ax.plot(b_grid, b_grid**2 / 2, label='full discretion')
-ax.plot(b_grid, np.full_like(b_grid, var_s / 2), label='best constant action')
+ax.plot(b_grid, b_grid**2 / 2, lw=2, label='full discretion')
+ax.plot(b_grid, np.full_like(b_grid, var_s / 2), lw=2, label='best constant action')
 ax.plot(b_grid, loss_cap, lw=2, label='optimal cap')
 ax.set_xlabel('bias $b$')
 ax.set_ylabel('expected loss')
@@ -294,7 +294,8 @@ ax.legend()
 
 ax = axes[1]
 for name, pdf in (('uniform', uniform_pdf), ('truncated normal', normal_pdf)):
-    ax.plot(b_grid, [optimal_cap(b, pdf, -1, 1) for b in b_grid], label=name)
+    ax.plot(b_grid, [optimal_cap(b, pdf, -1, 1) for b in b_grid], lw=2,
+            label=name)
 ax.set_xlabel('bias $b$')
 ax.set_ylabel(r'optimal cap $\bar a$')
 ax.legend()
@@ -373,9 +374,9 @@ The budget constraints allow self 0 to leave resources unspent, which amounts to
 
 Two allocations serve as benchmarks.
 
-The first-best allocation $(c^{fb}(\theta), k^{fb}(\theta))$ maximizes $\theta U(c) + W(k)$ on $B$; self 0 could achieve it if $\theta$ were public and contractible.
+The **first-best allocation** $(c^{fb}(\theta), k^{fb}(\theta))$ maximizes $\theta U(c) + W(k)$ on $B$; self 0 could achieve it if $\theta$ were public and contractible.
 
-The full-flexibility allocation $(c^f(\theta), k^f(\theta))$ maximizes $\theta U(c) + \beta W(k)$ on $B$; self 1 chooses it when $C = B$.
+The **full-flexibility allocation** $(c^f(\theta), k^f(\theta))$ maximizes $\theta U(c) + \beta W(k)$ on $B$; self 1 chooses it when $C = B$.
 
 ### Bunching at the top
 
@@ -407,7 +408,7 @@ $$ (cf-awa-cutoff)
 
 Equation {eq}`cf-awa-cutoff` is an instance of {eq}`cf-cap`.
 
-The bunched bundle is the bundle that self 1 with shock $\theta_p$ chooses from the budget line, which is the bundle that self 0 would choose for the shock $\theta_p / \beta$.
+When $\theta_p$ is interior, the bunched bundle is the bundle that self 1 with shock $\theta_p$ chooses from the budget line, which is the bundle that self 0 would choose for the shock $\theta_p / \beta$.
 
 Self 0's expected utility from giving one bundle to every type above $\theta_p$ is proportional to $E[\theta \mid \theta \geq \theta_p] U(c) + W(k)$, so {eq}`cf-awa-cutoff` says that the bunched bundle is the bundle that self 0 would choose for those types if all that it knew was that $\theta \geq \theta_p$.
 
@@ -433,6 +434,8 @@ Their Propositions 3 and 4 state:
 :label: cf-awa-theorem
 :nonumber:
 
+Suppose that $\theta_p > \underline \theta$.
+
 The allocation that gives each type $\theta \leq \theta_p$ its full-flexibility bundle $(c^f(\theta), k^f(\theta))$ and each type $\theta > \theta_p$ the bundle $(c^f(\theta_p), k^f(\theta_p))$ is optimal if Assumption A holds.
 
 If Assumption A does not hold, no allocation of this form is optimal for any choice of $\theta_p$.
@@ -441,6 +444,10 @@ If Assumption A does not hold, no allocation of this form is optimal for any cho
 Self 0 implements the optimal allocation by letting self 1 choose any bundle on the budget line that satisfies the **minimum-savings rule** $k \geq k^f(\theta_p)$.
 
 The consumer can impose the rule on itself by putting $k^f(\theta_p)$ into an illiquid asset that pays the same return as a liquid asset but cannot be spent in the first period, a device studied by {cite:t}`Laibson1997`.
+
+If $\theta_p = \underline \theta$, self 0 instead gives every type the best constant plan, the bundle on the budget line that maximizes $E[\theta] U(c) + W(k)$, and the minimum-savings rule requires at least the savings in that bundle.
+
+{ref}`Exercise 1 <cmf_ex1>` works out an example.
 
 Their Proposition 5 states that $\theta_p$ increases with $\beta$ and the minimum level of savings decreases with $\beta$.
 
@@ -508,8 +515,8 @@ mystnb:
 θ_grid = np.linspace(θ_lo, θ_hi, 201)
 
 fig, ax = plt.subplots(figsize=(7, 4))
-ax.plot(θ_grid, consumption(θ_grid, 1), label='first best')
-ax.plot(θ_grid, consumption(θ_grid, β), label='full flexibility')
+ax.plot(θ_grid, consumption(θ_grid, 1), lw=2, label='first best')
+ax.plot(θ_grid, consumption(θ_grid, β), lw=2, label='full flexibility')
 ax.plot(θ_grid, consumption(np.minimum(θ_grid, θ_p), β), lw=2,
         label='minimum savings')
 ax.axvline(θ_p, color='k', ls=':', lw=1)
@@ -535,7 +542,7 @@ $$
 P(C) = E \Big[ \max_{(c, k) \in C} \big\{ \theta U(c) + W(k) + \varphi \big(\theta U(c) + \beta W(k)\big) \big\} - \varphi \max_{(c, k) \in C} \big(\theta U(c) + \beta W(k)\big) \Big] ,
 $$
 
-which they adopt from Krusell, Kuruşçu, and Smith.
+which they adopt from {cite:t}`KrusellKuruscuSmith2010`.
 
 In the notation of {doc}`temptation_self_control`, the commitment utility is $\theta U + W$, the temptation utility is $\varphi (\theta U + \beta W)$, and $\varphi > 0$ measures the cost of self-control.
 
@@ -623,7 +630,7 @@ The chooser's bias comes from the timing: wage setters act before the authority 
 
 The Ramsey policy is not incentive compatible when only the authority observes $\theta$.
 
-If society announced the schedule $\mu^R$ and wage setters believed it, an authority with shock $\theta$ would report $U + \theta$, because $\mu^R(U + \theta) = \mu^*(\theta; 0)$.
+If society announced the schedule $\mu^R$ and wage setters believed it, an authority with shock $\theta$ would report $\min\{U + \theta, \bar \theta\}$, the admissible report closest to $U + \theta$, because $\mu^R(U + \theta) = \mu^*(\theta; 0)$.
 
 ### A recursive mechanism design problem
 
@@ -829,7 +836,7 @@ As $U$ approaches $-\underline \theta = 1$, the cap approaches $0$ and the welfa
 ---
 mystnb:
   figure:
-    caption: Money growth policies and the optimal inflation cap
+    caption: Money growth policies and inflation caps
     name: fig-cf-aak
 ---
 θ_grid = np.linspace(-a, a, 201)
@@ -840,14 +847,13 @@ U = 0.3
 fig, axes = plt.subplots(1, 2, figsize=(11, 4))
 
 ax = axes[0]
-ax.plot(θ_grid, θ_grid / 2, label='Ramsey')
-ax.plot(θ_grid, U + θ_grid / 2, label='static Nash')
-ax.plot(θ_grid, np.zeros_like(θ_grid), label='expected Ramsey')
+ax.plot(θ_grid, θ_grid / 2, lw=2, label='Ramsey')
+ax.plot(θ_grid, U + θ_grid / 2, lw=2, label='static Nash')
+ax.plot(θ_grid, np.zeros_like(θ_grid), lw=2, label='expected Ramsey')
 ax.plot(θ_grid, μ_cap(θ_grid), lw=2, label='inflation cap')
 ax.axvline(θ_star, color='k', ls=':', lw=1)
 ax.set_xlabel(r'shock $\theta$')
 ax.set_ylabel(r'money growth $\mu$')
-ax.set_title(f'$U = {U}$')
 ax.legend()
 
 ax = axes[1]
@@ -858,8 +864,8 @@ for U_val in U_grid:
     μ, _ = aak_policy(U_val, t, aak_pdf, a)
     θ_stars.append(-a if t is None else t)
     caps.append(μ(a))
-ax.plot(U_grid, θ_stars, label=r'cutoff $\theta^*$')
-ax.plot(U_grid, caps, label=r'inflation cap $\bar \pi$')
+ax.plot(U_grid, θ_stars, lw=2, label=r'cutoff $\theta^*$')
+ax.plot(U_grid, caps, lw=2, label=r'inflation cap $\bar \pi$')
 ax.set_xlabel('natural rate $U$')
 ax.legend()
 
@@ -867,7 +873,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-The left panel shows that the capped policy coincides with the static best response for $\theta < \theta^*$; there it lies above the Ramsey policy by $(U + x)/2$.
+The left panel, for $U = 0.3$, shows that the capped policy coincides with the static best response for $\theta < \theta^*$; there it lies above the Ramsey policy by $(U + x)/2$.
 
 The right panel shows the cutoff and the cap falling as $U$ rises and reaching $-a$ and $0$ at $U = a$, where the expected Ramsey policy becomes optimal.
 
@@ -881,7 +887,7 @@ In {doc}`intermediate:phillips_credible_policies`, the same threat sustains the 
 
 Wage setters see inflation above $\bar \pi$, so it is a deviation that triggers the punishment.
 
-Inflation at or below $\bar \pi$ reveals nothing about $\theta$, but no type wants to deviate downward: types below $\theta^*$ already choose their static best responses, and types above $\theta^*$ want inflation higher than $\bar \pi$.
+Wage setters might not detect a deviation below $\bar \pi$, but no type wants to deviate downward: types below $\theta^*$ already choose their static best responses, and types above $\theta^*$ want inflation higher than $\bar \pi$.
 
 Since $R$ is quadratic in $\mu$ with $R_{\mu\mu} = -2$, a type $\theta \geq \theta^*$ gains
 
@@ -913,7 +919,7 @@ for U in (0.1, 0.3, 0.5, 0.7, 0.9):
           f"          {G:.4f}       {G / (G + v_cap - v_N):.3f}")
 ```
 
-Nash reversion sustains the optimal cap only for discount factors between about $0.73$ and $0.97$, far above the $1/3$ that sustains the Ramsey outcome without private information.
+Nash reversion sustains the optimal cap only if $\delta \geq \hat \delta$, and $\hat \delta$ ranges from about $0.73$ when $U = 0.9$ to about $0.97$ when $U = 0.1$, far above the $1/3$ that sustains the Ramsey outcome without private information.
 
 The threshold is high for two reasons.
 
@@ -1209,27 +1215,25 @@ When $\Delta = 0$ and $\nu = 0.3$, the cap is $1 - \nu = 0.7$, as in the delegat
 
 With polarization $\Delta = 1$ and no bias, political risk alone leads society to cap policy at $0.5$.
 
-The next figure plots policy as a function of the shock under the optimal executive mandate and under legislative bargaining with the single outside option $\bar \pi^* = 0$, for $\nu = 0$ and $\Delta = 1$.
+The next figure plots policy as a function of the shock under the optimal executive mandate, in the left panel, and under legislative bargaining with the single outside option $\bar \pi^* = 0$, in the right panel, for $\nu = 0$ and $\Delta = 1$.
 
 ```{code-cell} ipython3
 ---
 mystnb:
   figure:
-    caption: Policies under executive delegation and legislative bargaining
+    caption: Policies under delegation and bargaining
     name: fig-cf-dks-policies
 ---
 Δ, ν = 1.0, 0.0
 lo, hi, _ = best_de(Δ, ν)
 
 fig, axes = plt.subplots(1, 2, figsize=(11, 4), sharey=True)
-for ax, (title, (π_L, π_H)) in zip(
-        axes, (('executive delegation', de_policies(lo, hi, Δ, ν)),
-               ('legislative bargaining, $D = \\{0\\}$', lb_policies([0.0], Δ, ν)))):
+policies = (de_policies(lo, hi, Δ, ν), lb_policies([0.0], Δ, ν))
+for ax, (π_L, π_H) in zip(axes, policies):
     ax.plot(z_grid, z_grid, 'k--', lw=1, label=r"society's preferred $\pi^*(z)$")
-    ax.plot(z_grid, π_L, label='faction $L$ in power')
-    ax.plot(z_grid, π_H, label='faction $H$ in power')
+    ax.plot(z_grid, π_L, lw=2, label='faction $L$ in power')
+    ax.plot(z_grid, π_H, lw=2, label='faction $H$ in power')
     ax.set_xlabel('shock $z$')
-    ax.set_title(title)
 axes[0].set_ylabel(r'policy $\pi$')
 axes[0].legend()
 plt.tight_layout()
@@ -1252,7 +1256,7 @@ The dotted vertical lines mark $\alpha_H \Delta$, the upper end of the small-bia
 ---
 mystnb:
   figure:
-    caption: Society's welfare under executive delegation and legislative bargaining
+    caption: Welfare under delegation and bargaining
     name: fig-cf-dks-welfare
 ---
 Δ = 1.0
@@ -1262,9 +1266,9 @@ W_lb1 = [best_lb(Δ, ν, 1)[1] for ν in ν_grid]
 W_lb2 = [best_lb(Δ, ν, 2)[1] for ν in ν_grid]
 
 fig, ax = plt.subplots(figsize=(8, 4.5))
-ax.plot(ν_grid, W_de, 'o-', label='executive delegation, optimal interval')
-ax.plot(ν_grid, W_lb1, 's-', label='legislative bargaining, one outside option')
-ax.plot(ν_grid, W_lb2, '^-', label='legislative bargaining, two outside options')
+ax.plot(ν_grid, W_de, 'o-', lw=2, label='executive delegation, optimal interval')
+ax.plot(ν_grid, W_lb1, 's-', lw=2, label='legislative bargaining, one outside option')
+ax.plot(ν_grid, W_lb2, '^-', lw=2, label='legislative bargaining, two outside options')
 ax.axhline(society_welfare(z_grid, z_grid), color='k', ls='--', lw=1,
            label=r"society's preferred $\pi^*(z)$")
 ax.axhline(0, color='k', lw=1, label=r'best constant policy $\bar \pi^*$')
@@ -1298,6 +1302,8 @@ R(x, \pi, z, \theta) = -\frac12 \Big[ (U + x - \pi)^2 + (\pi - z - \theta)^2 \Bi
 $$
 
 where $x$ is wage growth, $\pi$ is money growth, and private agents set $x$ equal to expected money growth before $z$ is drawn and before the faction in power acts.
+
+We take $E[z] = 0$.
 
 Society's preferred allocation under commitment is $\pi^*(z) = \bar \theta + z/2$, with $x = \bar \theta$.
 
@@ -1337,12 +1343,14 @@ The lecture {doc}`dovis_accounting_mf` studies a government that delegates monet
 
 The papers studied in this lecture and in {doc}`temptation_self_control` describe three ways in which a set of options can matter to the decision maker who chooses it.
 
-**Through the choice made from it.**
+### Through the choice made from it
+
 In representation {eq}`cf-strotz`, a set matters only through the choice that the chooser makes from it.
 
 The bias $\nu$ of Dovis, Kirpalani, and Sublet is an ingredient of this kind, as is the bias of self 1 in the two-selves model of Amador, Werning, and Angeletos.
 
-**Through options never chosen.**
+### Through options never chosen
+
 In Gul and Pesendorfer's representation, options that the decision maker does not choose lower the value of a set, because they tempt it.
 
 Fix $z$, set $\Delta = 0$, and treat the policymaker as a Gul–Pesendorfer decision maker whose commitment utility is society's $v(\cdot, z)$ and whose temptation utility is $\nu \pi$, with $\nu > 0$.
@@ -1367,7 +1375,8 @@ Gul and Pesendorfer's axiom of set betweenness rules out a strict preference for
 
 {cite:t}`DekelLipman2012` study how far a ranking of sets can distinguish a Gul–Pesendorfer decision maker from a Strotz decision maker whose temptation is random.
 
-**Through other people's expectations.**
+### Through other people's expectations
+
 Kreps's representation assumes that a set matters only through what is later chosen from it.
 
 In the economies of Athey, Atkeson, and Kehoe and of Section 7 of Dovis, Kirpalani, and Sublet, wage setters see the inflation cap or mandate before they act, so the set also moves expected inflation.
@@ -1464,8 +1473,8 @@ def awa_rule(β, θ_lo=0.5, θ_hi=1.5):
 θ_ps, k_mins = zip(*[awa_rule(b) for b in β_grid])
 
 fig, ax = plt.subplots(figsize=(7, 4))
-ax.plot(β_grid, θ_ps, label=r'cutoff $\theta_p$')
-ax.plot(β_grid, k_mins, label=r'minimum savings $k_{\min}$')
+ax.plot(β_grid, θ_ps, lw=2, label=r'cutoff $\theta_p$')
+ax.plot(β_grid, k_mins, lw=2, label=r'minimum savings $k_{\min}$')
 ax.set_xlabel(r'$\beta$')
 ax.legend()
 plt.show()
@@ -1529,10 +1538,10 @@ for name, pdf in (('uniform', aak_pdf), ('truncated normal', normal_θ_pdf)):
         μ, _ = aak_policy(U_val, t, pdf, 1)
         θ_stars.append(-1 if t is None else t)
         caps.append(μ(1.0))
-    axes[0].plot(U_grid, θ_stars, label=name)
-    axes[1].plot(U_grid, caps, label=name)
+    axes[0].plot(U_grid, θ_stars, lw=2, label=name)
+    axes[1].plot(U_grid, caps, lw=2, label=name)
 axes[0].plot(U_grid, np.maximum(2 - np.sqrt(1 + 8 * U_grid), -1), 'k:',
-             label='closed form, uniform')
+             lw=2, label='closed form, uniform')
 axes[0].set_ylabel(r'cutoff $\theta^*$')
 axes[1].set_ylabel(r'inflation cap $\bar \pi$')
 for ax in axes:
@@ -1604,7 +1613,7 @@ for ν in (0.1, 0.25, 0.5, 0.75):
           f"Gul–Pesendorfer {c_gp:.4f} ((1 - √ν)² = {(1 - np.sqrt(ν))**2:.4f})")
 ```
 
-Society's cap and the Gul–Pesendorfer policymaker's cap induce the same choices in every state in which the cap binds.
+For a given cap $c$, the Gul–Pesendorfer policymaker chooses $\min(z + \nu, c)$ in every state, as the policymaker of Dovis, Kirpalani, and Sublet does, so the two optimal caps differ only because society and the Gul–Pesendorfer policymaker value a cap differently.
 
 In states in which the cap does not bind, raising the cap leaves society's welfare unchanged but raises the Gul–Pesendorfer policymaker's cost of self-control, $\nu(c - \pi_D(z))$, because it adds tempting options that the policymaker must resist.
 
@@ -1651,9 +1660,9 @@ for σ_ζ in σ_grid:
                                        bounds=(1, 1000), method='bounded').fun)
 
 fig, ax = plt.subplots(figsize=(7, 4))
-ax.plot(σ_grid, loss_cap, label='optimal inflation cap')
-ax.plot(σ_grid, loss_rogoff, label='best Rogoff banker')
-ax.plot(σ_grid, σ_grid**2 / 4, label="Blinder's authority")
+ax.plot(σ_grid, loss_cap, lw=2, label='optimal inflation cap')
+ax.plot(σ_grid, loss_rogoff, lw=2, label='best Rogoff banker')
+ax.plot(σ_grid, σ_grid**2 / 4, lw=2, label="Blinder's authority")
 ax.axvline(U_star / np.sqrt(3), color='k', ls=':', lw=1)
 ax.set_xlabel(r'$\sigma_\zeta$')
 ax.set_ylabel(r'expected loss minus $U^{*2}/2$')
@@ -1769,8 +1778,10 @@ print(f"optimal cutoff {θ_aak:.3f}, value {capped_value(θ_aak):.4f}; "
 for δ in (0.5, 0.7, 0.8, 0.9, 0.95):
     sustained = (1 - δ) * gains <= δ * (values - v_N) + 1e-12
     i = np.argmax(np.where(sustained, values, -np.inf))
-    print(f"δ = {δ}: best sustained cutoff {cutoffs[i]:.3f}, "
-          f"cap {(a + cutoffs[i]) / 4:.3f}, value {values[i]:.4f}")
+    t = cutoffs[i]
+    x = U - (a - t)**2 / (4 * a)
+    print(f"δ = {δ}: best sustained cutoff {t:.3f}, "
+          f"highest inflation {(U + x + t) / 2:.3f}, value {values[i]:.4f}")
 
 near = cutoffs > 0.9 * a
 print("(v_cap - v_N) / G for cutoffs near a:",

@@ -312,7 +312,7 @@ Gul and Pesendorfer impose eight axioms on a preference $\succsim$ over $\mathca
 
 The axiom of indifference to timing rules out the preference for early or late resolution of uncertainty that {cite:t}`KrepsPorteus1978` allow.
 
-Gul and Pesendorfer call a preference nondegenerate if some decision problem is strictly better than one of its subsets, and they call nondegenerate preferences that satisfy the eight axioms **dynamic self-control preferences**.
+Gul and Pesendorfer call a preference **nondegenerate** if some decision problem is strictly better than one of its subsets, and they call nondegenerate preferences that satisfy the eight axioms **dynamic self-control preferences**.
 
 Their Theorem 1 gives the representation.
 
@@ -776,6 +776,8 @@ Their calculation uses equilibrium prices that omit the self-control term of the
 
 With prices that satisfy {eq}`tsc-euler`, destroying the tempting good lowers welfare in their example for every $\lambda \in (0, 1/2)$, so the example does not establish their claim.[^gp-prices]
 
+[^gp-prices]: In the example, $u(c_1, c_2) = \log c_1 - \lambda c_1 + c_2$, $v(c_1, c_2) = \lambda c_1$, and the endowment is $(\alpha, 1)$ in every period. Gul and Pesendorfer use the prices $p_{t1} = \delta^t$ and $p_{t2} = \alpha \delta^t$, which satisfy the Euler equation of a consumer without temptation. The Euler equation for good 2 with the self-control term, $1/p_{t2} = \delta [1/p_{t+1,2} - \lambda / p_{t+1,1}]$, requires $p_{t+1,1}/p_{t1} = \delta (1 - \lambda \alpha)$. Welfare then satisfies $(1 - \delta) W = \log \alpha + 1 - 2 \lambda \alpha / (1 - \delta + \delta \lambda \alpha)$, whose derivative with respect to $\alpha$ at $\alpha = 1$ has the sign of $(1 - \delta)^2 (1 - 2 \lambda) + \delta^2 \lambda^2 > 0$.
+
 They also show that adding a borrowing constraint that does not bind in equilibrium changes equilibrium prices.
 
 In their example, the constraint limits each consumer's borrowing to its endowment in the next period.
@@ -819,10 +821,6 @@ Savings, in contrast, remain available to consume, so they raise the cost of sel
 Gul and Pesendorfer add that creditworthiness, unlike savings, cannot serve as collateral, so the consumer cannot undo the commitment of a debt contract in the market.
 
 Their Proposition 3 gives a contract with a three-period cycle of borrowing and repayment that a consumer with a kinked commitment utility and linear temptation utility prefers to honor when $\delta$ is close enough to one, the interest rate is at most $(1 - \delta)/\delta$, and its temptation parameter $\lambda$ lies in an interval.
-
-```{note}
-In the example, $u(c_1, c_2) = \log c_1 - \lambda c_1 + c_2$, $v(c_1, c_2) = \lambda c_1$, and the endowment is $(\alpha, 1)$ in every period. Gul and Pesendorfer use the prices $p_{t1} = \delta^t$ and $p_{t2} = \alpha \delta^t$, which satisfy the Euler equation of a consumer without temptation. The Euler equation for good 2 with the self-control term, $1/p_{t2} = \delta [1/p_{t+1,2} - \lambda / p_{t+1,1}]$, requires $p_{t+1,1}/p_{t1} = \delta (1 - \lambda \alpha)$. Welfare then satisfies $(1 - \delta) W = \log \alpha + 1 - 2 \lambda \alpha / (1 - \delta + \delta \lambda \alpha)$, whose derivative with respect to $\alpha$ at $\alpha = 1$ has the sign of $(1 - \delta)^2 (1 - 2 \lambda) + \delta^2 \lambda^2 > 0$.
-```
 
 ## Connections to other lectures
 
