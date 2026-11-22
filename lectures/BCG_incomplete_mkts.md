@@ -1168,7 +1168,7 @@ fig.update_layout(scene_camera=dict(eye=dict(x=1.5, y=-1.5, z=2)))
 fig.update_layout(title='Equilibrium firm valuation for the grid of (k,b)')
 
 # Export to PNG file
-Image(fig.to_image(format="png", engine="kaleido"))
+Image(fig.to_image(format="png"))
 # fig.show() will provide interactive plot when running
 # code locally
 ```
@@ -1485,7 +1485,7 @@ fig.update_layout(scene_camera=dict(eye=dict(x=1.5, y=-1.5, z=2)))
 fig.update_layout(title='Equilibrium firm valuation for the grid of (k,b)')
 
 # Export to PNG file
-Image(fig.to_image(format="png", engine="kaleido"))
+Image(fig.to_image(format="png"))
 # fig.show() will provide interactive plot when running
 # code locally
 ```
@@ -1533,7 +1533,7 @@ fig.update_layout(scene_camera=dict(eye=dict(x=1.5, y=-1.5, z=2)))
 fig.update_layout(title='Equilibrium firm valuation for the grid of (k,b)')
 
 # Export to PNG file
-Image(fig.to_image(format="png", engine="kaleido"))
+Image(fig.to_image(format="png"))
 # fig.show() will provide interactive plot when running
 # code locally
 ```
@@ -1586,7 +1586,7 @@ fig.update_layout(scene_camera=dict(eye=dict(x=1.5, y=-1.5, z=2)))
 fig.update_layout(title='Equilibrium equity valuation for the grid of (k,b)')
 
 # Export to PNG file
-Image(fig.to_image(format="png", engine="kaleido"))
+Image(fig.to_image(format="png"))
 # fig.show() will provide interactive plot when running
 # code locally
 ```
@@ -1615,7 +1615,7 @@ fig.update_layout(scene_camera=dict(eye=dict(x=1.5, y=-1.5, z=2)))
 fig.update_layout(title='Equilibrium bond valuation for the grid of (k,b)')
 
 # Export to PNG file
-Image(fig.to_image(format="png", engine="kaleido"))
+Image(fig.to_image(format="png"))
 # fig.show() will provide interactive plot when running
 # code locally
 ```
