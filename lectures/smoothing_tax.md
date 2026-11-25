@@ -77,7 +77,7 @@ $c_t = T_t$, $y_t = G_t$, and $- b_t = a_t$,  where $T_t$ is total tax
 collections, $\{G_t\}$ is an exogenous government expenditures
 process, and $a_t$ is the government's holdings of one-period risk-free bonds coming maturing at the due at the beginning of time $t$.
 
-For elaborations on this theme, please see [Optimal Savings II: LQ Techniques](https://python-intro.quantecon.org/perm_income_cons.html) and later parts of this lecture.
+For elaborations on this theme, please see {doc}`intermediate:perm_income_cons` and later parts of this lecture.
 
 We'll spend most of this lecture studying acquire finite-state Markov specification,
 but will also  treat the linear state space specification.
