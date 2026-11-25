@@ -84,7 +84,7 @@ import scipy.linalg as la
 
 ### Relationship to other lectures
 
-This lecture can be viewed as a followup to [Optimal Savings II: LQ Techniques](https://python-intro.quantecon.org/perm_income_cons.html)
+This lecture can be viewed as a followup to [Permanent Income II: LQ Techniques](https://python-intro.quantecon.org/perm_income_cons.html)
 
 This lecture is also a prologomenon to a lecture on tax-smoothing {doc}`Tax Smoothing with Complete and Incomplete Markets <smoothing_tax>`
 
