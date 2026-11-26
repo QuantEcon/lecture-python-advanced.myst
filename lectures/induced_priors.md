@@ -999,7 +999,8 @@ Information from outside the VAR can do what rotations cannot.
 
 {doc}`policy_invertibility` shows that a local projection on a noisy measure of the supply shock
 recovers the true supply-shock response, and that a sufficiently aggressive price-stabilizing tax rule
-makes the supply shock fundamental, so that the same sign restrictions then succeed.
+makes the supply shock fundamental, so that sign restrictions re-derived from the theory under that rule
+then succeed.
 
 ### Robustness across the prior
 

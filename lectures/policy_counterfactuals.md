@@ -1039,7 +1039,8 @@ Their proposal is a hybrid: fit a model of the private sector to the evidence on
 impulse-response matching of {cite:t}`ChristianoEichenbaumEvans2005`, and then use the fitted model's
 effects of *all* tax paths in the counterfactual.
 
-Where the evidence speaks, the fitted model agrees with it; elsewhere, the model extrapolates.
+Where the evidence speaks, the fitted model agrees with it as closely as its equations allow; elsewhere,
+the model extrapolates.
 
 Suppose the econometrician has evidence on two policy shocks: a surprise, $\nu_{0,0} = 1$, and a shock
 that announces at date 0 the deviations $\nu_{\ell,0} = 0.6^\ell$ from the rule.
@@ -1368,8 +1369,9 @@ programming squared lectures relax.
    {cite:t}`CaravelloMcKayWolf2026` allow the counterfactual to be a stochastic process of rules, but the
    process itself must be announced at date 0 and believed.
 3. Measured policy shocks change the instrument path without changing beliefs about the rule.
-4. The policy rule is a primitive chosen by the analyst, not the outcome of choices by a government that
-   may be unable to commit.
+4. The policy is a rule chosen by the analyst or, as in {ref}`pc_optimal`, the plan of a government that
+   commits or the Markov perfect choices of governments that cannot; credibility sustained by reputation,
+   as in {doc}`calvo_abreu`, lies outside the method.
 5. The question concerns rules, not the institutions that shape how rules are chosen.
 6. The baseline rule delivers a unique equilibrium; McKay and Wolf also assume that the counterfactual
    rule does, but {cite:t}`CaravelloMcKayWolf2026` show that when it does not, the same sufficient
@@ -1383,9 +1385,9 @@ programming squared lectures relax.
 Our market satisfies the first assumption, our computations impose the next three by construction, and
 every rule we study satisfies the sixth ({ref}`pc_flexible`).
 
-Within these assumptions, McKay and Wolf replace a model of the private sector with measurements; the
-dynamic programming squared lectures, in turn, replace an assumed policy rule with a model of the
-policymaker.
+Within these assumptions, McKay and Wolf replace a model of the private sector with measurements, and
+those measurements suffice for optimal policy with or without commitment; the dynamic programming squared
+lectures, in turn, model the credibility that the method assumes.
 
 (pc_beyond)=
 ## Beyond this lecture

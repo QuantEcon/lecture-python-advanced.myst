@@ -417,8 +417,8 @@ The gaps are smallest when the peg lasts about 90 quarters.
 For shorter pegs, the error from ending the peg after $K$ dates dominates; for longer ones, rounding
 error, which the nearly singular system amplifies along the sunspot direction, takes over.
 
-The lecture uses $K = 120$, at which the gap is still only about $2 \times 10^{-6}$ and the near-null
-direction is easier to see.
+The lecture uses $K = 120$, at which the gap, set by rounding error, is still below $10^{-5}$ and the
+near-null direction is easier to see.
 
 The next figure shows the two selected equilibria, other equilibria under the peg, and the shocks to the
 Taylor rule that implement the two selections.
