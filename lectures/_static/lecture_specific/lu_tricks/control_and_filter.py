@@ -32,7 +32,7 @@ class LQFilter:
         if self.m == self.y_m.shape[0]:
             self.y_m = self.y_m.reshape(self.m, 1)
         else:
-            raise ValueError("y_m must be of length m = {self.m:d}")
+            raise ValueError(f"y_m must be of length m = {self.m:d}")
 
         #---------------------------------------------
         # Define the coefficients of ϕ upfront
