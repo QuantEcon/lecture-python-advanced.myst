@@ -365,8 +365,9 @@ class ArellanoEconomy:
         mc = qe.markov.tauchen(y_grid_size, ρ, η, 0, 3)
         self.y_grid, self.P = np.exp(mc.state_values), mc.P
 
-        # The index at which B_grid is (close to) zero
-        self.B0_idx = np.searchsorted(self.B_grid, 1e-10)
+        # The index of the grid point closest to zero
+        self.B0_idx = np.argmin(np.abs(self.B_grid))
+        self.B_grid[self.B0_idx] = 0
 
         # Output recieved while in default, with same shape as y_grid
         self.def_y = np.minimum(def_y_param * np.mean(self.y_grid), self.y_grid)
